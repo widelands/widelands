@@ -417,14 +417,14 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			if (s->empty()) {
 				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
 				 * number of soldier slots in the building */
-				*s = bformat(ngettext("%1%, soldier (+%2%)", "%1%, soldiers (+%2%)", stationed),
+				*s = bformat(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed),
 				             stationed, (capacity_ - stationed));
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 1);
 			if (s->empty()) {
 				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = bformat(ngettext("%1%, soldier", "%1%, soldiers", stationed), stationed);
+				*s = bformat(ngettext("%1% soldier", "%1% soldiers", stationed), stationed);
 			}
 		}
 	} else {

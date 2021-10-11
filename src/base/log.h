@@ -89,6 +89,11 @@ bool set_logging_dir(const std::string& homedir);
 void set_logging_dir();
 #endif
 
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+
 /** Wrapper functions for boost::format with better exception handling. */
 template <typename T0> void bformat_helper(boost::format& f, const T0& arg0) {
 	f % arg0;

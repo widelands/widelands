@@ -45,6 +45,7 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 		infotext_fmt += "%s";
 		infotext_fmt += i > 1 ? "<br>" : "</p></rt>";
 	}
+	// @CodeCheck allow boost::format
 	boost::format infotext(infotext_fmt + "</p></rt>");
 
 	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
@@ -92,6 +93,7 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	if (!map.get_hint().empty()) {
 		infotext_fmt += "<br>%s";
 	}
+	// @CodeCheck allow boost::format
 	boost::format infotext(infotext_fmt + "</p></rt>");
 
 	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)

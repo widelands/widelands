@@ -261,20 +261,16 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					if (!conflict_fp.empty()) {
 						const Widelands::BuildingDescr* d = get_building_descr(conflict_fp);
 						if (d == nullptr) {
-							conflict_name =
-							   (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
+							conflict_name = bformat(_("%1$s (%2$s)"), conflict_name, conflict_fp);
 						} else {
-							conflict_name =
-							   (boost::format(
-							       /** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
-							       _("%1$s ([%2$s] %3$s)")) %
-							    conflict_name %
-							    game_->descriptions()
-							       .get_tribe_descr(
-							          game_->descriptions().safe_tribe_index(d->get_owning_tribe()))
-							       ->descname() %
-							    d->descname())
-							      .str();
+							conflict_name = bformat(
+							   /** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
+							   _("%1$s ([%2$s] %3$s)"), conflict_name,
+							   game_->descriptions()
+							      .get_tribe_descr(
+							         game_->descriptions().safe_tribe_index(d->get_owning_tribe()))
+							      ->descname(),
+							   d->descname());
 						}
 					}
 					UI::WLMessageBox warning(

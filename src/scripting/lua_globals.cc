@@ -75,6 +75,7 @@ files name.
 */
 static int L_string_bformat(lua_State* L) {
 	try {
+		// @CodeCheck allow boost::format
 		boost::format fmt(luaL_checkstring(L, 1));
 		const int nargs = lua_gettop(L);
 

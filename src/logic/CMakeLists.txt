@@ -5,6 +5,7 @@ wl_library(logic_exceptions
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
 )
 
 wl_library(logic_widelands_geometry

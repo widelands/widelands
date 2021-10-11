@@ -872,7 +872,7 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 		}
 		if (percent_to_use < 1) {
 			throw GameDataError(
-			   "%s: Training sites without predefined proportions add up to < 1%, and "
+			   "%s: Training sites without predefined proportions add up to < 1%%, and "
 			   "will never be built: %d",
 			   name().c_str(), used_percent);
 		}

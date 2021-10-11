@@ -336,10 +336,7 @@ void AddOnsPackager::clicked_new_addon() {
 		if (!err.empty()) {
 			main_menu_.show_messagebox(
 			   _("Invalid Name"),
-			   (boost::format(
-			       _("This name is invalid. Reason: %s\n\nPlease choose a different name.")) %
-			    err)
-			      .str());
+			   bformat(_("This name is invalid. Reason: %s\n\nPlease choose a different name."), err));
 			continue;
 		}
 

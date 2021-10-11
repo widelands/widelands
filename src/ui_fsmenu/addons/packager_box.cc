@@ -61,12 +61,12 @@ std::string check_addon_filename_validity(const std::string& name) {
 
 	size_t pos = name.find_first_not_of(kValidAddOnFilenameChars);
 	if (pos != std::string::npos) {
-		return (boost::format(_("Invalid character ‘%c’")) % name.at(pos)).str();
+		return bformat(_("Invalid character ‘%c’"), name.at(pos));
 	}
 
 	for (const std::string& q : kInvalidAddOnFilenameSequences) {
 		if (name.find(q) != std::string::npos) {
-			return (boost::format(_("Filename may not contain ‘..’")) % q).str();
+			return bformat(_("Filename may not contain ‘%s’"), q);
 		}
 	}
 
@@ -370,12 +370,11 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		if (!g_fs->is_directory(map)) {
 			UI::WLMessageBox mbox(
 			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
-			   (boost::format(_("The map ‘%s’ is not a directory. "
-			                    "Please consider disabling the ‘Compress widelands data files’ option "
-			                    "in the options menu and resaving the map in the editor."
-			                    "\n\nDo you want to add this map anyway?")) %
-			    filename)
-			      .str(),
+			   bformat(_("The map ‘%s’ is not a directory. "
+			             "Please consider disabling the ‘Compress widelands data files’ option "
+			             "in the options menu and resaving the map in the editor."
+			             "\n\nDo you want to add this map anyway?"),
+			           filename),
 			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -400,20 +399,17 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			if (!err.empty()) {
 				main_menu_.show_messagebox(
 				   _("Invalid Name"),
-				   (boost::format(
-				       _("This name is invalid. Reason: %s\n\nPlease choose a different name.")) %
-				    err)
-				      .str());
+				   bformat(
+				      _("This name is invalid. Reason: %s\n\nPlease choose a different name."), err));
 				continue;
 			}
 			for (const std::string& ext :
 			     {kWidelandsMapExtension, kS2MapExtension1, kS2MapExtension2}) {
 				if (name.size() >= ext.size() &&
 				    name.compare(name.size() - ext.size(), ext.size(), ext) == 0) {
-					err = (boost::format(_("Directories may not use the extension ‘%s’.\n\nPlease "
-					                       "choose a different name.")) %
-					       ext)
-					         .str();
+					err = bformat(_("Directories may not use the extension ‘%s’.\n\nPlease "
+					                "choose a different name."),
+					              ext);
 					break;
 				}
 			}

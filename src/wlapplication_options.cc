@@ -865,7 +865,7 @@ std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
 	// because all current uses need it anyway, and extra checks can
 	// be avoided both here and in the users this way
 	for (const std::string& m : mods) {
-		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
+		result = bformat(_("%1$s+%2$s"), m, result);
 	}
 
 	return rt_escape ? richtext_escape(result) : result;

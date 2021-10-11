@@ -116,6 +116,7 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     graphic
     graphic_image_cache
     graphic_minimap_renderer

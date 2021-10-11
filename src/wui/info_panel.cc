@@ -426,6 +426,7 @@ void InfoPanel::update_time_speed_string() {
 		}
 	}
 
+	// @CodeCheck allow boost::format
 	boost::format f;
 	switch (non_empty.size()) {
 	case 0:
@@ -435,10 +436,12 @@ void InfoPanel::update_time_speed_string() {
 		text_time_speed_.set_text(*non_empty.back());
 		return;
 	case 2:
+		// @CodeCheck allow boost::format
 		/** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed) */
 		f = boost::format(_("%1$s · %2$s"));
 		break;
 	case 3:
+		// @CodeCheck allow boost::format
 		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
 		f = boost::format(_("%1$s · %2$s · %3$s"));
 		break;

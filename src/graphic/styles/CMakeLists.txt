@@ -14,6 +14,7 @@ wl_library(graphic_styles
     window_style.h
   DEPENDS
     base_exceptions
+    base_log
     graphic_color
     graphic_surface
 )

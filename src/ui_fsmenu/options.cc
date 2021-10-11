@@ -490,8 +490,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;
 				resolution_dropdown_.add(
 				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-				   (boost::format(_("%1% × %2%")) % this_res.xres % this_res.yres).str(), this_res,
-				   nullptr, selected);
+				   bformat(_("%1% × %2%"), this_res.xres, this_res.yres), this_res, nullptr, selected);
 			}
 		}
 	}
@@ -499,8 +498,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	if (!resolution_dropdown_.has_selection()) {
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-		   (boost::format(_("%1% × %2%")) % current_res.xres % current_res.yres).str(), current_res,
-		   nullptr, true);
+		   bformat(_("%1% × %2%"), current_res.xres, current_res.yres), current_res, nullptr, true);
 	}
 }
 
@@ -656,7 +654,7 @@ void Options::update_language_stats() {
 				} else {
 					message = bformat(
 					   /** TRANSLATORS: %1% = language name, %2% = percentage */
-					   _("The translation into %1% is %2%%, complete."), entry.descname, percent);
+					   _("The translation into %1% is %2%%% complete."), entry.descname, percent);
 				}
 			} catch (...) {
 			}

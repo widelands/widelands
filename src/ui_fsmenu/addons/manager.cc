@@ -929,7 +929,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		remotes_.resize(nr_addons);
 
 		for (int64_t i = 0, counter = 0; i < nr_addons; ++i, ++counter) {
-			progress.step((boost::format(step_message) % (100.0 * counter / nr_orig_entries)).str());
+			progress.step(bformat(step_message, (100.0 * counter / nr_orig_entries)));
 
 			try {
 				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
@@ -963,7 +963,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		remotes_ = {i};
 	}
 
-	progress.step((boost::format(step_message) % 100).str());
+	progress.step(bformat(step_message, 100));
 	rebuild(false);
 }
 

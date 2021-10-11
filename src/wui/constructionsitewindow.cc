@@ -507,7 +507,7 @@ void ConstructionSoldierCapacityBox::change_current(int32_t delta) {
 }
 void ConstructionSoldierCapacityBox::update() {
 	cs_soldier_capacity_display_.set_text(
-	   (boost::format(ngettext("%u soldier", "%u soldiers", current_)) % current_).str());
+	   bformat(ngettext("%u soldier", "%u soldiers", current_), current_));
 	cs_soldier_capacity_decrease_.set_enabled(enabled_ && current_ > min_);
 	cs_soldier_capacity_increase_.set_enabled(enabled_ && current_ < max_);
 }
