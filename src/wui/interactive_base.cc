@@ -1642,7 +1642,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
-		DebugConsole::write(strbformat("No MapObject with serial number %1%" , serial));
+		DebugConsole::write(bformat("No MapObject with serial number %1%" , serial));
 		return;
 	}
 

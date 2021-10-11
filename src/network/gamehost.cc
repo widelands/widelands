@@ -114,17 +114,17 @@ struct HostChatProvider : public ChatProvider {
 			// Help
 			if (cmd == "help") {
 				c.msg = bformat("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s" ,
-				         _("Available host commands are:" ,
+				         _("Available host commands are:" ),
 				         /** TRANSLATORS: Available host command */
-				         _("/help  -  Shows this help" ,
+				         _("/help  -  Shows this help" ),
 				         /** TRANSLATORS: Available host command */
-				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)" ,
+				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)" ),
 				         /** TRANSLATORS: Available host command */
-				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>" ,
+				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>" ),
 				         /** TRANSLATORS: Available host command */
-				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>" ,
+				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>" ),
 				         /** TRANSLATORS: Available host command */
-				         _("/forcePause            -  Force the game to pause." ,
+				         _("/forcePause            -  Force the game to pause." ),
 				         /** TRANSLATORS: Available host command */
 				         _("/endForcedPause        -  Return game to normal speed."))
 				           ;
@@ -1119,7 +1119,7 @@ void GameHost::set_map(const std::string& mapname,
 		SimpleMD5Checksum md5sum;
 		md5sum.data(&complete[0], file_->bytes);
 		md5sum.finish_checksum();
-		file_->md5sum = md5sum.get_checksum();
+		file_->md5sum = md5sum.get_checksum().str();
 	} else {
 		// reset previously offered map / saved game
 		file_.reset(nullptr);
@@ -1238,7 +1238,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	while (!d->settings.savegame && random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
-		uint8_t random = (std::rand() , num_tribes);  // NOLINT
+		uint8_t random = (std::rand() % num_tribes);  // NOLINT
 		actual_tribe = d->settings.tribes.at(random).name;
 		if (player.state != PlayerSettings::State::kComputer ||
 		    d->settings.get_tribeinfo(actual_tribe).suited_for_ai) {
@@ -1881,7 +1881,7 @@ void GameHost::check_hung_clients() {
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
 						std::string seconds =
-						   bformat(ngettext("%li second", "%li seconds", deltanow)) , deltanow)
+						   bformat(ngettext("%li second", "%li seconds", deltanow) , deltanow)
 						      ;
 						send_system_message_code(
 						   "CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, seconds);
@@ -1975,7 +1975,7 @@ void GameHost::update_network_speed() {
 			}
 		}
 
-		d->networkspeed = (speeds.size() , 2) ?
+		d->networkspeed = (speeds.size() % 2) ?
                            speeds.at(speeds.size() / 2) :
                            (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
@@ -2046,8 +2046,8 @@ void GameHost::check_sync_reports() {
 			log_err("[Host]: lost synchronization with client %u at time %i!\n"
 			        "I have:     %s\n"
 			        "Client has: %s\n",
-			        i, d->syncreport_time.get(), d->syncreport.c_str(),
-			        client.syncreport.c_str());
+			        i, d->syncreport_time.get(), d->syncreport.str().c_str(),
+			        client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
 			// Create syncstream excerpt and add faulting player number

@@ -159,9 +159,9 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>" ,
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status") ,
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator") ,
-	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered") ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status")) ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator")) ,
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered")) ,
 	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Unregistered")))
 	      ;
 	clientsonline_table_.add_column(22, "*", t_tip);

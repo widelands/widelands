@@ -70,7 +70,7 @@ void log_i18n_on(const char* type, const char* msg) {
 
 }  // namespace
 
-void (*log_i18n_if_desired_)(const char*, const char*) = log_i18n_off;
+static void (*log_i18n_if_desired_)(const char*, const char*) = log_i18n_off;
 
 void enable_verbose_i18n() {
 	log_i18n_if_desired_ = log_i18n_on;
@@ -91,6 +91,10 @@ char const* translate(const std::string& str) {
 char const* ngettext_wrapper(const char* singular, const char* plural, const int n) {
 	log_i18n_if_desired_("ngettext", singular);
 	return ngettext(singular, plural, n);
+}
+char const* pgettext_wrapper(const char* msgctxt, const char* msgid) {
+	log_i18n_if_desired_("pgettext", msgid);
+	return pgettext_expr(msgctxt, msgid);
 }
 
 /**
@@ -139,7 +143,7 @@ void grab_textdomain(const std::string& domain, const char* ldir) {
 
 	bindtextdomain(dom, ldir);
 	bind_textdomain_codeset(dom, "UTF-8");
-	// log("textdomain %s @ %s\n", dom, ldir);
+	log_i18n_if_desired_("textdomain", (domain + " @ " + ldir).c_str());
 	textdomain(dom);
 	textdomains.push_back(std::make_pair(dom, ldir));
 }

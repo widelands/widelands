@@ -1329,9 +1329,9 @@ int LuaObjective::set_done(lua_State* L) {
 		/** TRANSLATORS: File name for saving objective achieved */
 		/** TRANSLATORS: %1, = map name. %2, = achievement name */
 		std::string filename = _("%1, (%2%)");
-		i18n::Textdomain td("maps");
+		i18n::Textdomain td("maps");  // TODO(Nordfriese): What if the scenario is in an add-on?
 		filename =
-		   bformat(filename) , _(get_egbase(L).map().get_name()) , o.descname().c_str()).str();
+		   bformat(filename , _(get_egbase(L).map().get_name()) , o.descname());
 		get_game(L).save_handler().request_save(filename);
 	}
 	return 0;

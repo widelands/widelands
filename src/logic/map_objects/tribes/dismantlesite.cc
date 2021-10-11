@@ -206,7 +206,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 	if (const size_t nr_dropout_queues = dropout_wares_.size()) {
 		bool first_round = true;
 		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round;
-		     i = (i + 1) , nr_dropout_queues, first_round = false) {
+		     i = (i + 1) % nr_dropout_queues, first_round = false) {
 			WaresQueue& q = *dropout_wares_[i];
 			if (q.get_filled()) {
 				q.set_filled(q.get_filled() - 1);
@@ -215,7 +215,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 				WareInstance& ware = *new WareInstance(q.get_index(), &wd);
 				ware.init(game);
 				worker.start_task_dropoff(game, ware);
-				next_dropout_index_ = (i + 1) , nr_dropout_queues;
+				next_dropout_index_ = (i + 1) % nr_dropout_queues;
 				return true;
 			}
 		}

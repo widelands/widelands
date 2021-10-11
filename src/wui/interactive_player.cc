@@ -456,7 +456,7 @@ void InteractivePlayer::think() {
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
 			msg_icon = "images/wui/menus/message_new.png";
 			msg_tooltip =
-			   bformat(ngettext("%u new message", "%u new messages", nr_new_messages)) ,
+			   bformat(ngettext("%u new message", "%u new messages", nr_new_messages) ,
 			    nr_new_messages)
 			      ;
 		}
@@ -831,12 +831,12 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = boost::lexical_cast<int>(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
-		DebugConsole::write(strbformat("Player #%1, does not exist." , n));
+		DebugConsole::write(bformat("Player #%d does not exist." , n));
 		return;
 	}
 
 	DebugConsole::write(
-	   strbformat("Switching from #%1, to #%2%." , static_cast<int>(player_number_) , n));
+	   bformat("Switching from #%d to #%d." , static_cast<int>(player_number_) , n));
 	player_number_ = n;
 
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {

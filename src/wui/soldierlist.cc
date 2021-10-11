@@ -300,9 +300,9 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	if (fullrows) {
 		dst.fill_rect(Recti(0, 0, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
 	}
-	if (capacity , kMaxColumns) {
+	if (capacity % kMaxColumns) {
 		dst.fill_rect(
-		   Recti(0, icon_height_ * fullrows, icon_width_ * (capacity , kMaxColumns), icon_height_),
+		   Recti(0, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
 		   RGBAColor(0, 0, 0, 0));
 	}
 
@@ -412,7 +412,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
 	           ->render(as_richtext_paragraph(
-	              bformat("%s ")  // We need some extra space to fix bug 724169
+	              bformat("%s "  // We need some extra space to fix bug 724169
 	               , bformat(
 	                     /** TRANSLATORS: Health, Attack, Defense, Evade */
 	                     _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u") ,

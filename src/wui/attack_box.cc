@@ -113,7 +113,7 @@ void AttackBox::think() {
 
 static inline std::string slider_heading(uint32_t num_attackers) {
 	/** TRANSLATORS: Number of soldiers that should attack. Used in Attack box. */
-	return bformat(ngettext("%u soldier", "%u soldiers", num_attackers)) , num_attackers)
+	return bformat(ngettext("%u soldier", "%u soldiers", num_attackers) , num_attackers)
 	   ;
 }
 
@@ -237,7 +237,7 @@ void AttackBox::init() {
 		txt.set_tooltip(
 		   bformat(tooltip_format ,
 		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers") ,
+		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")),
 		    as_listitem(
 		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip) ,
 		    as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
@@ -253,7 +253,7 @@ void AttackBox::init() {
 		txt.set_tooltip(
 		   bformat(tooltip_format ,
 		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to add him to the list of attackers") ,
+		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")),
 		    as_listitem(
 		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) ,
 		    as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),

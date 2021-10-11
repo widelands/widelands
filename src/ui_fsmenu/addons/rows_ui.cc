@@ -359,7 +359,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u") ,
             filesize_string(info->total_file_size) , info->download_count ,
             (info->number_of_votes() ? bformat("%.2f" , info->average_rating()) :
-                                       "–" ,
+                                       "–" ),
             info->user_comments.size() , info->screenshots.size())
               ,
         UI::Align::kRight),
@@ -369,7 +369,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
           24,
           24,
           UI::PanelStyle::kFsMenu,
-          bformat("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>")
+          bformat("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>"
            /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
            , bformat(_("%1$s %2$s") ,
               g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
@@ -408,7 +408,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                       "Category: %5$s\n"
 			                       "%6$s\n") ,
 			       info_->descname() , info_->author() ,
-			       (info_->verified ? _("Verified") : _("NOT VERIFIED") ,
+			       (info_->verified ? _("Verified") : _("NOT VERIFIED")) ,
 			       AddOns::version_to_string(info_->version) ,
 			       AddOns::kAddOnCategories.at(info_->category).descname() , info_->description())
 			         ),
@@ -434,7 +434,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                       "Category: %6$s\n"
 			                       "%7$s") ,
 			       info->descname() , info->author() ,
-			       (info->verified ? _("Verified") : _("NOT VERIFIED") ,
+			       (info->verified ? _("Verified") : _("NOT VERIFIED")),
 			       AddOns::version_to_string(installed_version) ,
 			       AddOns::version_to_string(info->version) ,
 			       AddOns::kAddOnCategories.at(info->category).descname() , info->description())
@@ -487,21 +487,21 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
          "" :
          bformat("%s<br>%s<br>%s<br>%s<br>%s" ,
 	       bformat(
-	           ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size)) ,
+	           ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size) ,
 	        info->total_file_size)
 	           ,
-	       bformat(ngettext("%u download", "%u downloads", info->download_count)) ,
+	       bformat(ngettext("%u download", "%u downloads", info->download_count) ,
 	        info->download_count)
 	           ,
 	       (info->number_of_votes() ? bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                                                          "Average rating: %1$.3f (%2$u votes)",
-	                                                          info->number_of_votes())) ,
+	                                                          info->number_of_votes()) ,
 	                                   info->average_rating() , info->number_of_votes())
 	                                      :
-                                     _("No votes yet") ,
-	       bformat(ngettext("%u comment", "%u comments", info->user_comments.size())) ,
+                                     _("No votes yet")),
+	       bformat(ngettext("%u comment", "%u comments", info->user_comments.size()) ,
 	        info->user_comments.size()) ,
-	       bformat(ngettext("%u screenshot", "%u screenshots", info->screenshots.size())) ,
+	       bformat(ngettext("%u screenshot", "%u screenshots", info->screenshots.size()) ,
 	        info->screenshots.size())
 	          )
 	         );

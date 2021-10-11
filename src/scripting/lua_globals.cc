@@ -82,23 +82,23 @@ static int L_string_bformat(lua_State* L) {
 		for (int i = 2; i <= nargs; ++i) {
 			switch (lua_type(L, i)) {
 			case LUA_TNIL:
-				fmt , "nil";
+				fmt % "nil";
 				break;
 
 			case LUA_TNUMBER:
 				if (lua_isinteger(L, i)) {
-					fmt , luaL_checkint32(L, i);
+					fmt % luaL_checkint32(L, i);
 				} else {
-					fmt , luaL_checknumber(L, i);
+					fmt % luaL_checknumber(L, i);
 				}
 				break;
 
 			case LUA_TBOOLEAN:
-				fmt , luaL_checkboolean(L, i);
+				fmt % luaL_checkboolean(L, i);
 				break;
 
 			case LUA_TSTRING:
-				fmt , luaL_checkstring(L, i);
+				fmt % luaL_checkstring(L, i);
 				break;
 
 			case LUA_TTABLE:
@@ -116,7 +116,7 @@ static int L_string_bformat(lua_State* L) {
 			}
 		}
 
-		lua_pushstring(L, fmt);
+		lua_pushstring(L, fmt.str());
 		return 1;
 	} catch (const boost::io::format_error& err) {
 		report_error(L, "Error in bformat: %s", err.what());

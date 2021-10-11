@@ -1221,7 +1221,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 		   /** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 		    */
-		   bformat(ngettext("%s is missing", "%s are missing", nr_missing_groups)) ,
+		   bformat(ngettext("%s is missing", "%s are missing", nr_missing_groups) ,
 		    i18n::localize_list(group_list, i18n::ConcatenateWith::AND))
 		      ;
 
@@ -1329,7 +1329,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	const std::string result_string =
 	   /** TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 	      wares. */
-	   bformat(ngettext("Produced %s", "Produced %s", count)) , ware_list);
+	   bformat(ngettext("Produced %s", "Produced %s", count) , ware_list);
 	if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 	    ps.descr().out_of_resource_heading().empty()) {
 		ps.set_production_result(result_string);
@@ -1412,7 +1412,7 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 	const std::string result_string =
 	   /** TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 	      workers. */
-	   bformat(ngettext("Recruited %s", "Recruited %s", count)) , unit_string);
+	   bformat(ngettext("Recruited %s", "Recruited %s", count) , unit_string);
 	ps.set_production_result(result_string);
 }
 
@@ -1576,7 +1576,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 		//  second pass through nodes
 		assert(totalchance);
-		int32_t pick = game.logic_rand() , totalchance;
+		int32_t pick = game.logic_rand() % totalchance;
 
 		{
 			MapRegion<Area<FCoords>> mr(
@@ -1618,11 +1618,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (depleted_chance_ <= game.logic_rand() , math::k100PercentAsInt) {
+		if (depleted_chance_ <= game.logic_rand() % math::k100PercentAsInt) {
 
 			// Gain experience
 			if (experience_chance_ > 0 &&
-			    experience_chance_ >= game.logic_rand() , math::k100PercentAsInt) {
+			    experience_chance_ >= game.logic_rand() % math::k100PercentAsInt) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);

@@ -7,7 +7,3 @@ Changes
 Eris:
 - removed luac.c. It defined a main() function which could hide our own main()
   eris was linked in.
-
-Gettext:
-- Renamed the `pgettext` macro to `original_pgettext` to allow encapsulating it in our own `pgettext` macro,
-  and added an optional function pointer to `pgettext_aux` to allow our custom logger to hook into `pgettext`.

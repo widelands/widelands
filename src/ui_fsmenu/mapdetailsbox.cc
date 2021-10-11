@@ -47,14 +47,14 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 	}
 	boost::format infotext(infotext_fmt + "</p></rt>");
 
-	infotext , g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
 	              .as_font_tag(_("Saved Players"));
 
 	for (unsigned i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 
 		if (current_player.state == PlayerSettings::State::kClosed) {
-			infotext , g_style_manager->font_style(UI::FontStyle::kDisabled)
+			infotext % g_style_manager->font_style(UI::FontStyle::kDisabled)
 			              .as_font_tag(bformat(_("Player %u: –") , (i + 1)));
 			continue;
 		}
@@ -74,7 +74,7 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 			name = i18n::localize_list(names, i18n::ConcatenateWith::AMPERSAND);
 		}
 
-		infotext ,
+		infotext %
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(bformat(
 		                       /** TRANSLATORS: "Player 1 (Barbarians): Playername" */
@@ -85,7 +85,7 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 		                      );
 	}
 
-	return infotext;
+	return infotext.str();
 }
 
 static std::string assemble_infotext_for_map(const Widelands::Map& map,
@@ -96,9 +96,9 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	}
 	boost::format infotext(infotext_fmt + "</p></rt>");
 
-	infotext , g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
 	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details"));
-	infotext ,
+	infotext %
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	      .as_font_tag(
 	         bformat(_("Size: %s") ,
@@ -106,18 +106,18 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	             .as_font_tag(
 	                bformat(_("%1$u×%2$u") , map.get_width() , map.get_height())))
 	            );
-	infotext , g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	              .as_font_tag(bformat(_("Players: %s") ,
 	                            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                               .as_font_tag(std::to_string(game_settings.players.size())))
 	                              );
-	infotext , g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	              .as_font_tag(bformat(_("Description: %s") ,
 	                            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                               .as_font_tag(richtext_escape(map.get_description())))
 	                              );
 	if (!map.get_hint().empty()) {
-		infotext ,
+		infotext %
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(bformat(_("Hint: %s") ,
 		                    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -125,7 +125,7 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 		                      );
 	}
 
-	return infotext;
+	return infotext.str();
 }
 
 // MapDetailsBox implementation

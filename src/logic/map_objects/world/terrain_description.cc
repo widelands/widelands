@@ -205,7 +205,7 @@ void TerrainDescription::set_enhancement(const std::string& cat, const std::stri
 }
 
 const Image& TerrainDescription::get_texture(uint32_t gametime) const {
-	return *textures_.at((gametime / frame_length_) , textures_.size());
+	return *textures_.at((gametime / frame_length_) % textures_.size());
 }
 
 void TerrainDescription::add_texture(const Image* texture) {

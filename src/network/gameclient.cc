@@ -748,7 +748,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 	if (!missing_addons.empty() || !wrong_version_addons.empty()) {
 		const size_t nr = missing_addons.size() + wrong_version_addons.size();
 		std::string message = bformat(ngettext("%u add-on mismatch detected:\n",
-		                                              "%u add-on mismatches detected:\n", nr)) ,
+		                                              "%u add-on mismatches detected:\n", nr) ,
 		                       nr)
 		                         ;
 		for (const std::string& name : missing_addons) {
@@ -824,7 +824,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 				SimpleMD5Checksum md5sum;
 				md5sum.data(complete.get(), bytes);
 				md5sum.finish_checksum();
-				std::string localmd5 = md5sum.get_checksum();
+				std::string localmd5 = md5sum.get_checksum().str();
 				if (localmd5 == md5) {
 					// everything is alright we now have the file.
 					return;
@@ -920,7 +920,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 		SimpleMD5Checksum md5sum;
 		md5sum.data(complete.get(), d->file_->bytes);
 		md5sum.finish_checksum();
-		std::string localmd5 = md5sum.get_checksum();
+		std::string localmd5 = md5sum.get_checksum().str();
 		if (localmd5 != d->file_->md5sum) {
 			// Something went wrong! We have to rerequest the file.
 			s.reset();
@@ -1180,7 +1180,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
-		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed , 1000);
+		verb_log_info("[Client] speed: %u.%03u", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
 		d->time.receive(Time(packet.unsigned_32()));

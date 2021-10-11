@@ -1056,7 +1056,7 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 	upgrade.lastattempt = level;
 	upgrade.lastsuccess = false;
 
-	return program_start(game, bformat("%s%i" , upgrade.prefix.c_str() , level).str());
+	return program_start(game, bformat("%s%i" , upgrade.prefix, level));
 }
 
 TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {

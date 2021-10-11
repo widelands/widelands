@@ -239,10 +239,10 @@ SDL_GLContext initialize(
 					   bformat("%s\n%s" ,
 					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
 					       Font support is limited here, so do not use advanced typography **/
-					    _("Widelands won’t work because your graphics driver is too old." ,
+					    _("Widelands won’t work because your graphics driver is too old."),
 					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
 					       Font support is limited here, so do not use advanced typography **/
-					    bformat(_("The %1$s needs to be version %2$u.%3$u or newer.") ,
+					    bformat(_("The %1$s needs to be version %2$u.%3$u or newer."),
 					     descname , required_major_version , required_minor_version)
 					       )
 					      );

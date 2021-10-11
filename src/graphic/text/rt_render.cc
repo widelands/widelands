@@ -1074,7 +1074,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
 	} else {
 		const std::string hash = bformat("rt:img:%s:%s:%i:%i" , filename_ ,
-		                          (use_playercolor_ ? color_.hex_value() : "" , width() , height())
+		                          (use_playercolor_ ? color_.hex_value() : "" ), width() , height())
 		                            ;
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 		if (rendered_image == nullptr) {

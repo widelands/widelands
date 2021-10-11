@@ -50,7 +50,8 @@ namespace {
 
 std::string speed_string(int const speed) {
 	if (speed) {
-		return bformat("%u.%ux" , (speed / 1000) , (speed / 100 , 10));
+		/** TRANSLATORS: This is a game speed value */
+		return bformat(_("%u.%u×") , (speed / 1000) , (speed / 100 % 10));
 	}
 	return _("PAUSE");
 }

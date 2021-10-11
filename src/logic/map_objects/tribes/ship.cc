@@ -493,7 +493,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 
 				if (dir > 0) {
 					unsigned int delta =
-					   std::min(prob[dir], dirs[(dir , 6) + 1] + dirs[1 + ((dir - 1) , 6)]);
+					   std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
 					prob[dir] -= delta;
 				}
 
@@ -505,7 +505,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				return;
 			}
 
-			unsigned int rnd = game.logic_rand() , totalprob;
+			unsigned int rnd = game.logic_rand() % totalprob;
 			Direction dir = 0;
 			while (rnd >= prob[dir]) {
 				rnd -= prob[dir];

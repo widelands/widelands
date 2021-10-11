@@ -254,7 +254,7 @@ void MainMenu::update_template() {
 		images_.push_back("images/logos/wl-ico-128.png");
 	}
 
-	last_image_ = draw_image_ = std::rand() , images_.size();  // NOLINT
+	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
 	last_image_exchange_time_ = 0;
 }
 
@@ -483,7 +483,7 @@ void MainMenu::set_labels() {
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-	   bformat(_("Version %1$s (%2$s)") , build_id().c_str() , build_type().c_str()).str());
+	   bformat(_("Version %1$s (%2$s)") , build_id() , build_type()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
 	   bformat(_("(C) %1%-%2, by the Widelands Development Team · Licensed under "
@@ -690,7 +690,7 @@ void MainMenu::draw(RenderTarget& r) {
 		last_image_ = draw_image_;
 		if (images_.size() > 1) {
 			do {
-				draw_image_ = std::rand() , images_.size();  // NOLINT
+				draw_image_ = std::rand() % images_.size();  // NOLINT
 			} while (draw_image_ == last_image_);
 		}
 		last_image_exchange_time_ = time;

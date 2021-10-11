@@ -84,7 +84,7 @@ void MessagePreview::draw(RenderTarget& r) {
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
-	if (owner_.index_of(this) , 2) {
+	if (owner_.index_of(this) % 2) {
 		r.brighten_rect(Recti(0, 0, get_w(), get_h()), 16);
 	}
 
@@ -416,7 +416,7 @@ void InfoPanel::update_time_speed_string() {
 		std::tm tm = *std::localtime(&t);
 		std::ostringstream oss("");
 		oss << std::put_time(&tm, "%X");
-		realtime = oss;
+		realtime = oss.str();
 	}
 
 	std::vector<std::string*> non_empty;
@@ -447,9 +447,9 @@ void InfoPanel::update_time_speed_string() {
 	}
 
 	for (std::string* s : non_empty) {
-		f , *s;
+		f % *s;
 	}
-	text_time_speed_.set_text(f);
+	text_time_speed_.set_text(f.str());
 }
 
 void InfoPanel::fast_forward_message_queue() {

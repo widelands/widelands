@@ -606,7 +606,7 @@ std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 		amount /= 1000;
 		size++;
 	}
-	return bformat(unit_suffixes[size]) , amount);
+	return bformat(unit_suffixes[size] , amount);
 }
 
 uint32_t WaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {

@@ -627,7 +627,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * DO NOT omit the placeholder in your translation.
 			    */
 			   bformat(ngettext("Restore the selected %d message",
-			                           "Restore the selected %d messages", no_selections)) ,
+			                           "Restore the selected %d messages", no_selections),
 			    no_selections)
 			      ;
 		} else {
@@ -643,7 +643,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * DO NOT omit the placeholder in your translation.
 			    */
 			   bformat(ngettext("Archive the selected %d message",
-			                           "Archive the selected %d messages", no_selections)) ,
+			                           "Archive the selected %d messages", no_selections),
 			    no_selections)
 			      ;
 		} else {

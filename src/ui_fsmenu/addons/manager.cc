@@ -84,7 +84,7 @@ std::string time_string(const std::time_t& time) {
 		// silently ignore
 	}
 	oss << std::put_time(std::localtime(&time), "%c");
-	return oss;
+	return oss.str();
 }
 
 const std::map<unsigned, std::function<AddOnQuality()>> AddOnQuality::kQualities = {  // NOLINT
@@ -387,18 +387,18 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	               "players. By uploading, you agree to publish your creation under the terms of "
 	               "the GNU General Public License (GPL) version 2 (the same license under which "
 	               "Widelands itself is distributed). For more information on the GPL, please refer "
-	               "to ‘About Widelands’ → ‘License’ in the main menu.") ,
+	               "to ‘About Widelands’ → ‘License’ in the main menu.")) ,
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	          .as_font_tag(_(
 	             "It is forbidden to upload add-ons containing harmful or malicious content or "
 	             "spam. By uploading an add-on, you assert that the add-on is of your own creation "
-	             "or you have the add-on’s author(s) permission to submit it in their stead.") ,
+	             "or you have the add-on’s author(s) permission to submit it in their stead.")) ,
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	          .as_font_tag(
 	             _("You are required to have read the add-ons documentation under the link given "
 	               "further above before submitting content. Since the documentation is subject to "
 	               "frequent changes, ensure that you have read it recently and that you followed "
-	               "all guidelines stated there.") ,
+	               "all guidelines stated there.")) ,
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	          .as_font_tag(_("The Widelands Development Team will review your add-on soon after "
 	                         "uploading. In case they have further inquiries, they will contact you "
@@ -615,14 +615,14 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			std::string text =
 			   bformat(ngettext("Are you certain that you want to upgrade this %u add-on?",
 			                           "Are you certain that you want to upgrade these %u add-ons?",
-			                           nr_full_updates)) ,
+			                           nr_full_updates) ,
 			    nr_full_updates)
 			      ;
 			text += '\n';
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
 					text += bformat(_("\n· %1$s (%2$s) by %3$s") , pair.first->descname() ,
-					         (pair.first->verified ? _("verified") : _("NOT VERIFIED") ,
+					         (pair.first->verified ? _("verified") : _("NOT VERIFIED")) ,
 					         pair.first->author())
 					           ;
 				}
@@ -1142,7 +1142,7 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	} else {
 		std::string text =
 		   bformat(ngettext("Upgrade the following %u add-on:",
-		                           "Upgrade the following %u add-ons:", has_upgrades.size())) ,
+		                           "Upgrade the following %u add-ons:", has_upgrades.size()) ,
 		    has_upgrades.size())
 		      ;
 		for (const std::string& name : has_upgrades) {
@@ -1258,7 +1258,7 @@ void AddOnsCtrl::update_dependency_errors() {
 		   bformat("<rt><p>%s</p><p>%s</p></rt>" ,
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		       .as_font_tag(bformat(ngettext(
-		                        "%u Dependency Error", "%u Dependency Errors", nr_warnings)) ,
+		                        "%u Dependency Error", "%u Dependency Errors", nr_warnings) ,
 		                     nr_warnings)
 		                       ) ,
 		    g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list))

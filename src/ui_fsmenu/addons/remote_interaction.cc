@@ -775,7 +775,7 @@ void RemoteInteractionWindow::update_data() {
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() ?
          bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                              "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes())) ,
+	                              "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()) ,
 	       info_->average_rating() , info_->number_of_votes())
 	          :
          _("No votes yet"));
@@ -797,7 +797,7 @@ void RemoteInteractionWindow::update_data() {
 	           .as_font_tag(info_->user_comments.empty() ?
                               _("No comments yet.") :
                               bformat(ngettext(
-	                               "%u comment:", "%u comments:", info_->user_comments.size())) ,
+	                               "%u comment:", "%u comments:", info_->user_comments.size()) ,
 	                            info_->user_comments.size())
 	                              );
 	text += "</p></rt>";
@@ -842,7 +842,7 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	while (delta < 0) {
 		delta += nr_screenshots_;
 	}
-	current_screenshot_ = (current_screenshot_ + delta) , nr_screenshots_;
+	current_screenshot_ = (current_screenshot_ + delta) % nr_screenshots_;
 	assert(current_screenshot_ < static_cast<int32_t>(screenshot_cache_.size()));
 
 	auto it = info_->screenshots.begin();

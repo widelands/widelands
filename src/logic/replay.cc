@@ -75,7 +75,7 @@ public:
 			             "REPLAY: Lost synchronization at time %u\n"
 			             "I have:     %s\n"
 			             "Replay has: %s\n",
-			             duetime().get(), myhash.c_str(), hash_.str().c_str());
+			             duetime().get(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);

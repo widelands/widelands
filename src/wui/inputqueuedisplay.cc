@@ -124,7 +124,7 @@ static inline std::string create_tooltip(const bool increase) {
                     /** TRANSLATORS: Button tooltip in in a building's wares input queue */
                     _("Increase the number of wares you want to be stored here") :
                     /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Decrease the number of wares you want to be stored here") ,
+                    _("Decrease the number of wares you want to be stored here") ),
 	        as_listitem(increase ?
                              /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                                 option explanation */

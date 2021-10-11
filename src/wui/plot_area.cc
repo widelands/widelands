@@ -101,13 +101,13 @@ std::string get_value_with_unit(Units unit, int value) {
 	switch (unit) {
 	case Units::kDayNarrow:
 		/** TRANSLATORS: day(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%d", "%1%d", value)) , value);
+		return bformat(npgettext("unit_narrow", "%1%d", "%1%d", value) , value);
 	case Units::kHourNarrow:
 		/** TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%h", "%1%h", value)) , value);
+		return bformat(npgettext("unit_narrow", "%1%h", "%1%h", value) , value);
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%m", "%1%m", value)) , value);
+		return bformat(npgettext("unit_narrow", "%1%m", "%1%m", value) , value);
 	case Units::kMinutesGeneric:
 	case Units::kHourGeneric:
 	case Units::kDayGeneric:
@@ -209,16 +209,16 @@ void draw_diagram(uint32_t time_ms,
 	// dividing by 5 is first and we get more readable intervals.
 	how_many_ticks = max_x;
 
-	while (how_many_ticks > 10 && how_many_ticks , 5 == 0) {
+	while (how_many_ticks > 10 && how_many_ticks % 5 == 0) {
 		how_many_ticks /= 5;
 	}
-	while (how_many_ticks > 7 && how_many_ticks , 2 == 0) {
+	while (how_many_ticks > 7 && how_many_ticks % 2 == 0) {
 		how_many_ticks /= 2;
 	}
-	while (how_many_ticks > 7 && how_many_ticks , 3 == 0) {
+	while (how_many_ticks > 7 && how_many_ticks % 3 == 0) {
 		how_many_ticks /= 3;
 	}
-	while (how_many_ticks > 7 && how_many_ticks , 7 == 0) {
+	while (how_many_ticks > 7 && how_many_ticks % 7 == 0) {
 		how_many_ticks /= 7;
 	}
 	// Make sure that we always have a tick
@@ -228,7 +228,7 @@ void draw_diagram(uint32_t time_ms,
 	how_many_ticks = std::min(how_many_ticks, calc_plot_x_max_ticks(inner_w));
 
 	// Make sure how_many_ticks is a divisor of max_x
-	while (how_many_ticks > 0 && max_x , how_many_ticks != 0) {
+	while (how_many_ticks > 0 && max_x % how_many_ticks != 0) {
 		how_many_ticks--;
 	}
 
@@ -371,13 +371,13 @@ uint32_t WuiPlotArea::get_plot_time() const {
 		// or a multiple of 20h
 		// or a multiple of 4 days
 		if (time_ms > 8 * kDays) {
-			time_ms += -(time_ms , (4 * kDays)) + 4 * kDays;
+			time_ms += -(time_ms % (4 * kDays)) + 4 * kDays;
 		} else if (time_ms > 40 * kHours) {
-			time_ms += -(time_ms , (20 * kHours)) + 20 * kHours;
+			time_ms += -(time_ms % (20 * kHours)) + 20 * kHours;
 		} else if (time_ms > 4 * kHours) {
-			time_ms += -(time_ms , (2 * kHours)) + 2 * kHours;
+			time_ms += -(time_ms % (2 * kHours)) + 2 * kHours;
 		} else {
-			time_ms += -(time_ms , (15 * kMinutes)) + 15 * kMinutes;
+			time_ms += -(time_ms % (15 * kMinutes)) + 15 * kMinutes;
 		}
 		return time_ms;
 	}
@@ -453,7 +453,7 @@ void WuiPlotArea::update() {
 				//  Relative data, first entry is always zero.
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i];
-					if (0 == ((i + 1) , how_many)) {
+					if (0 == ((i + 1) % how_many)) {
 						if (highest_scale_ < add) {
 							highest_scale_ = add;
 						}
@@ -474,7 +474,7 @@ void WuiPlotArea::update() {
 				plot.second.relative_data->push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i];
-					if (0 == ((i + 1) , how_many)) {
+					if (0 == ((i + 1) % how_many)) {
 						plot.second.relative_data->push_back(add);
 						add = 0;
 					}
@@ -498,7 +498,7 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 		draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 	}
 	// Print the 0
-	draw_value(bformat("%u" , (0)),
+	draw_value("0",
 	           g_style_manager->statistics_plot_style().x_tick_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
@@ -675,7 +675,7 @@ void DifferentialPlotArea::update() {
 				//  Relative data, first entry is always zero.
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i] - ndataset[i];
-					if (0 == ((i + 1) , how_many)) {
+					if (0 == ((i + 1) % how_many)) {
 						if (max < add) {
 							max = add;
 						}
@@ -704,7 +704,7 @@ void DifferentialPlotArea::update() {
 				plot.second.relative_data->push_back(0);
 				for (uint32_t i = 0; i < dataset->size(); ++i) {
 					add += (*dataset)[i] - (*ndataset)[i];
-					if (0 == ((i + 1) , how_many)) {
+					if (0 == ((i + 1) % how_many)) {
 						plot.second.relative_data->push_back(add);
 						add = 0;
 					}

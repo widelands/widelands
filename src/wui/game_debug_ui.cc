@@ -295,7 +295,7 @@ void FieldDebugWindow::think() {
 	// Immovable information
 	if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable()) {
 		ui_immovable_.set_title(
-		   bformat("%s (%u)" , imm->descr().name().c_str() , imm->serial()).str());
+		   bformat("%s (%u)" , imm->descr().name(), imm->serial()));
 		ui_immovable_.set_enabled(true);
 	} else {
 		ui_immovable_.set_title("no immovable");

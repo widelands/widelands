@@ -231,7 +231,7 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 
 	if (error_ == Error::kDeletingBackupFailed) {
 		return std::string(_("File successfully saved!")) + "\n" +
-		       bformat(_("Backup file ‘%s’ could not be deleted.")));
+		       bformat(_("Backup file ‘%s’ could not be deleted."), backup_filename_);
 	}
 
 	if (error_ == Error::kCreatingDirFailed) {
@@ -239,7 +239,7 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 	}
 
 	if (error_ == Error::kBackupFailed) {
-		return bformat(_("File ‘%s’ could not be removed!") , complete_filename_.c_str())
+		return bformat(_("File ‘%s’ could not be removed!") , complete_filename_)
 		           +
 		       "\n" + _("Try saving under a different name!");
 	}
@@ -247,25 +247,25 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 	// from here on multiple errors might have occurred
 	if ((error_ & Error::kSavingDataFailed) != Error::kNone) {
 		msg =
-		   bformat(_("Error writing data to file ‘%s’!") , complete_filename_.c_str()).str();
+		   bformat(_("Error writing data to file ‘%s’!") , complete_filename_);
 	}
 
 	if ((error_ & Error::kCorruptFileLeft) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += bformat(_("Saved file may be corrupt!")));
+		msg += _("Saved file may be corrupt!");
 	}
 
 	if ((error_ & Error::kRestoringBackupFailed) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
 		msg +=
-		   bformat(_("File ‘%s’ could not be restored!") , complete_filename_.c_str()).str() +
+		   bformat(_("File ‘%s’ could not be restored!") , complete_filename_) +
 		   "\n" +
 		   bformat(_("Backup file ‘%s’ will be available for some time.") ,
-		    backup_filename_.c_str())
+		    backup_filename_)
 		      ;
 	}
 
@@ -273,18 +273,19 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 	    !((error_ & Error::kCorruptFileLeft) != Error::kNone) &&
 	    !((error_ & Error::kRestoringBackupFailed) != Error::kNone)) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += bformat(_("File ‘%s’ was restored from backup.") , complete_filename_.c_str())
+		msg += bformat(_("File ‘%s’ was restored from backup.") , complete_filename_)
 		          ;
 	}
 
 	if ((error_ & Error::kUnexpectedError) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += bformat(_("An unexpected error occurred:"))) + "\n" +
-		       error_message(Error::kUnexpectedError);
+		msg += _("An unexpected error occurred:");
+		msg += '\n';
+		msg += error_message(Error::kUnexpectedError);
 	}
 
 	return msg;

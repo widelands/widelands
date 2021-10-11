@@ -200,7 +200,7 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kHuman) {
 		dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
-		dropdown_.set_tooltip(bformat(_("%1%: %2%") , _("Type" , _("Human")));
+		dropdown_.set_tooltip(bformat(_("%1%: %2%") , _("Type"), _("Human")));
 		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
 		dropdown_.select(kClosed);

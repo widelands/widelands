@@ -53,7 +53,7 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
         _("Evaluate"),
         bformat("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>" ,
          g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-            .as_font_tag(_("Compare stocked amounts to economy target quantities") ,
+            .as_font_tag(_("Compare stocked amounts to economy target quantities")),
          g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
             .as_font_tag(color_tag(
                colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) ,

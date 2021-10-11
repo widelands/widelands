@@ -467,7 +467,7 @@ void FieldActionWindow::add_buttons_auto() {
 						tooltip =
 						   bformat("<rt><p>%s</p><p>%s</p></rt>" ,
 						    g_style_manager->font_style(UI::FontStyle::kDisabled)
-						       .as_font_tag(_("Send scout to explore surroundings") ,
+						       .as_font_tag(_("Send scout to explore surroundings")),
 						    g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(tooltip))
 						      ;
 					}

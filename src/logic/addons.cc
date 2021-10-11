@@ -187,7 +187,7 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			// Wrong versions might work, so do not forbid loading
 			return std::make_pair(bformat(ngettext("%1$u add-on with wrong version: %2$s",
 			                                              "%1$u add-ons with wrong version: %2$s",
-			                                              addons_wrong_version.size())) ,
+			                                              addons_wrong_version.size()) ,
 			                       addons_wrong_version.size() , list)
 			                         ,
 			                      false);
@@ -204,7 +204,7 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			}
 			return std::make_pair(
 			   bformat(ngettext(
-			       "%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s", addons_missing.size())) ,
+			       "%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s", addons_missing.size()) ,
 			    addons_missing.size() , list)
 			      ,
 			   true);
@@ -226,11 +226,11 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			return std::make_pair(
 			   bformat(_("%1$s and %2$s: %3$s") ,
 			    bformat(
-			        ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size())) ,
+			        ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size()) ,
 			     addons_missing.size())
 			        ,
 			    bformat(ngettext("%u add-on with wrong version",
-			                            "%u add-ons with wrong version", addons_missing.size())) ,
+			                            "%u add-ons with wrong version", addons_missing.size()) ,
 			     addons_missing.size())
 			        ,
 			    list)

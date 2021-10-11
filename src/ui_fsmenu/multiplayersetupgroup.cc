@@ -353,7 +353,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Now select the entry according to server settings
 		if (player_setting.state == PlayerSettings::State::kHuman) {
 			type_dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
-			type_dropdown_.set_tooltip(bformat(_("%1%: %2%") , _("Type" , _("Human")));
+			type_dropdown_.set_tooltip(bformat(_("%1%: %2%") , _("Type"), _("Human")));
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
 		} else if (player_setting.state == PlayerSettings::State::kOpen) {

@@ -237,7 +237,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game,
 	if (nr_animations < 1) {
 		throw GameDataError("No battle animations for %s found!", animation_name.c_str());
 	}
-	uint32_t i = game.logic_rand() , nr_animations;
+	uint32_t i = game.logic_rand() % nr_animations;
 	for (const auto& pair : *animations) {
 		if (pair.second.matches(soldier)) {
 			if (i == 0) {
@@ -1500,14 +1500,14 @@ void Soldier::battle_update(Game& game, State&) {
 				                  "happen. No solution for this problem has been "
 				                  "implemented yet. (bug #536066) (The game has been "
 				                  "paused.)" ,
-				    descr().descname().c_str() , serial() ,
+				    descr().descname() , serial() ,
 				    static_cast<unsigned int>(owner().player_number()) , get_position().x ,
 				    get_position().y ,
-				    (immovable_position ? immovable_position->descr().descname().c_str() : ("no") ,
-				    opponent.descr().descname().c_str() , opponent.serial() ,
+				    (immovable_position ? immovable_position->descr().descname() : ("no")) ,
+				    opponent.descr().descname() , opponent.serial() ,
 				    static_cast<unsigned int>(opponent.owner().player_number()) , dest.x , dest.y ,
-				    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no") ,
-				    descr().descname().c_str())
+				    (immovable_dest ? immovable_dest->descr().descname() : ("no")) ,
+				    descr().descname())
 				      ;
 				get_owner()->add_message(
 				   game, std::unique_ptr<Message>(

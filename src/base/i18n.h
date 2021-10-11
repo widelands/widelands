@@ -42,7 +42,7 @@
 #define _(str) i18n::translate(str)
 
 #undef pgettext
-#define pgettext(context, message) original_pgettext(context, message, i18n::log_i18n_if_desired_)
+#define pgettext(c, m) i18n::pgettext_wrapper(c, m)
 
 #ifndef BASE_I18N_CC
 #undef ngettext
@@ -57,7 +57,7 @@ void enable_verbose_i18n();
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
 char const* ngettext_wrapper(const char* singular, const char* plural, int n);
-extern void (*log_i18n_if_desired_)(const char*, const char*);
+char const* pgettext_wrapper(const char* msgctxt, const char* msgid);
 
 void grab_textdomain(const std::string&, const char* localedir);
 void release_textdomain();

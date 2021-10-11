@@ -118,12 +118,12 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 
 	const std::string header_second_part(
 	   /** TRANSLATORS: This is the second part of "Selected %1, directory/directories and %2%" */
-	   bformat(ngettext("%d file", "%d files", number_of_files)) , number_of_files));
+	   bformat(ngettext("%d file", "%d files", number_of_files) , number_of_files));
 
 	std::string combined_header = as_richtext(as_heading_with_content(
 	   /** TRANSLATORS: %1, = number of selected directories, %2, = number of selected files*/
 	   bformat(ngettext("Selected %1, directory and %2%:",
-	                           "Selected %1, directories and %2%:", number_of_directories)) ,
+	                           "Selected %1, directories and %2%:", number_of_directories) ,
 	    number_of_directories , header_second_part)
 	      ,
 	   "", panel_style_, true));

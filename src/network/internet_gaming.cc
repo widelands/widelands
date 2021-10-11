@@ -508,7 +508,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
 			std::string temp =
 			   bformat(ngettext("Server time offset is %d second.",
-			                           "Server time offset is %d seconds.", time_offset_)) ,
+			                           "Server time offset is %d seconds.", time_offset_) ,
 			    time_offset_)
 			      ;
 			format_and_add_chat("", "", true, temp);

@@ -156,7 +156,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	}
 
 	// Second pass through fields - reset mr
-	pick = game.logic_rand() , totalchance;
+	pick = game.logic_rand() % totalchance;
 	mr = MapRegion<Area<FCoords>>(
 	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 	do {
@@ -261,7 +261,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 
 	// Second pass through fields - reset mr!
 	assert(totalchance);
-	pick = game.logic_rand() , totalchance;
+	pick = game.logic_rand() % totalchance;
 	mr = MapRegion<Area<FCoords>>(
 	   *map, Area<FCoords>(map->get_fcoords(get_position()), action.iparam1));
 
@@ -344,7 +344,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			}
 		}
 		if (!list.empty()) {
-			set_program_objvar(game, state, list[game.logic_rand() , list.size()].object);
+			set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 			++state.ivar1;
 			schedule_act(game, Duration(10));
 			return true;
@@ -395,7 +395,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			}
 
 			if (!list.empty()) {
-				set_program_objvar(game, state, list[game.logic_rand() , list.size()].object);
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 				break;
 			}
 		} else {
@@ -418,7 +418,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 				}
 			}
 			if (!list.empty()) {
-				set_program_objvar(game, state, list[game.logic_rand() , list.size()]);
+				set_program_objvar(game, state, list[game.logic_rand() % list.size()]);
 				break;
 			}
 		}
@@ -661,7 +661,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	}
 
 	// Pick a location at random
-	state.coords = list[game.logic_rand() , list.size()];
+	state.coords = list[game.logic_rand() % list.size()];
 
 	// Special case: forester checks multiple locations instead of one.
 	if (1 < action.iparam6) {
@@ -670,7 +670,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		int stubborness = action.iparam6;
 		int16_t best = findspace_helper_for_forester(state.coords, map, game);
 		while (1 < stubborness--) {
-			const Coords altpos = list[game.logic_rand() , list.size()];
+			const Coords altpos = list[game.logic_rand() % list.size()];
 			const int16_t alt_pos_goodness = findspace_helper_for_forester(altpos, map, game);
 			if (alt_pos_goodness > best) {
 				best = alt_pos_goodness;
@@ -922,7 +922,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	// Avoid division by 0
-	int choice = game.logic_rand() , std::max(1, total_weight);
+	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = bsii.first;
 		state.ivar2 = bsii.second;
@@ -952,7 +952,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
  * sparamv = possible bobs
  */
 bool Worker::run_createbob(Game& game, State& state, const Action& action) {
-	int32_t const idx = game.logic_rand() , action.sparamv.size();
+	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
 	DescriptionIndex index = owner_->tribe().worker_index(bob);
@@ -1021,7 +1021,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	}
 	assert(game.mutable_map());
 	auto it = triangles.begin();
-	for (size_t rand = game.logic_rand() , triangles.size(); rand > 0; --rand) {
+	for (size_t rand = game.logic_rand() % triangles.size(); rand > 0; --rand) {
 		++it;
 	}
 	game.mutable_map()->change_terrain(game, it->first, it->second);
@@ -2627,7 +2627,7 @@ void Worker::start_task_fugitive(Game& game) {
 	push_task(game, taskFugitive);
 
 	// Fugitives survive for two to four minutes
-	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() , 600);
+	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() % 600);
 }
 
 struct FindFlagWithPlayersWarehouse {
@@ -2715,7 +2715,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 		if (best && bestdist > vision) {
 			uint32_t chance = maxdist - (bestdist - vision);
-			if (game.logic_rand() , maxdist >= chance) {
+			if (game.logic_rand() % maxdist >= chance) {
 				best = nullptr;
 			}
 		}
@@ -2840,9 +2840,9 @@ void Worker::geologist_update(Game& game, State& state) {
 			bool is_target_mountain;
 			uint32_t n = list.size();
 			assert(n);
-			uint32_t i = game.logic_rand() , n;
+			uint32_t i = game.logic_rand() % n;
 			do {
-				target = map.get_fcoords(list[game.logic_rand() , list.size()]);
+				target = map.get_fcoords(list[game.logic_rand() % list.size()]);
 				is_target_mountain = is_mountain(target);
 				if (i == 0) {
 					i = list.size();
@@ -3123,10 +3123,10 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 	// if some fields can be reached
 	if (map.find_reachable_fields(game, exploring_area, &list, cstep, ffa) > 0) {
 		// Parse randomly the reachable fields, maximum 50 iterations
-		uint8_t iterations = list.size() , 51;
+		uint8_t iterations = list.size() % 51;
 		uint8_t oldest_distance = 0;
 		for (uint8_t i = 0; i < iterations; ++i) {
-			const std::vector<Coords>::size_type lidx = game.logic_rand() , list.size();
+			const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
@@ -3202,7 +3202,7 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 			}
 			for (uint8_t i = 0; i < formax; ++i) {
 				const std::vector<Coords>::size_type l_idx =
-				   game.logic_rand() , surrounding_places.size();
+				   game.logic_rand() % surrounding_places.size();
 				Coords const coord = surrounding_places[l_idx];
 				surrounding_places.erase(surrounding_places.begin() + l_idx);
 				// The variable name "oldest_coords" makes sense in the "random walk" branch.
