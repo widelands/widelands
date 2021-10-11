@@ -191,7 +191,7 @@ void write_wares(const Widelands::TribeDescr& tribe, FileSystem* out_filesystem)
 		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
-	json->write_to_file(*out_filesystem, bformat("%s_wares.json", tribe.name()).str());
+	json->write_to_file(*out_filesystem, bformat("%s_wares.json", tribe.name()));
 	log_info("\n");
 }
 
@@ -223,7 +223,7 @@ void write_workers(const Widelands::TribeDescr& tribe, FileSystem* out_filesyste
 		}
 	}
 
-	json->write_to_file(*out_filesystem, bformat("%s_workers.json", tribe.name()).str());
+	json->write_to_file(*out_filesystem, bformat("%s_workers.json", tribe.name()));
 	log_info("\n");
 }
 
