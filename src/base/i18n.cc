@@ -96,7 +96,8 @@ char const* ngettext_wrapper(const char* singular, const char* plural, const int
 	log_i18n_if_desired_("ngettext", singular);
 	return ngettext(singular, plural, n);
 }
-char const* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
+char const*
+npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
 	log_i18n_if_desired_("npgettext", singular);
 	return npgettext_expr(msgctxt, singular, plural, n);
 }
