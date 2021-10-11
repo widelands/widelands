@@ -70,7 +70,6 @@ public:
 		bool auto_roadbuild_mode;
 		bool transparent_chat;
 		bool single_watchwin;
-		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		bool edge_scrolling;
@@ -121,10 +120,27 @@ private:
 	void add_languages_to_list(const std::string& current_locale);
 	void update_language_stats();
 
+	void add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt);
+
+	// Saves the options and closes the window
+	void clicked_ok();
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 	// Restores old options when canceled
 	void clicked_cancel();
+
+	// Data model for the screen resolution dropdown
+	class ScreenResolution {
+	public:
+		int32_t xres;
+		int32_t yres;
+		inline bool operator==(const ScreenResolution& x) const {
+			return xres == x.xres && yres == x.yres;
+		}
+		inline bool operator!=(const ScreenResolution& x) const {
+			return !(*this == x);
+		}
+	};
 
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
@@ -139,7 +155,7 @@ private:
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Dropdown<int> resolution_dropdown_;
+	UI::Dropdown<ScreenResolution> resolution_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
@@ -175,7 +191,6 @@ private:
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
-	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
@@ -188,16 +203,6 @@ private:
 #endif
 
 	OptionsCtrl::OptionsStruct os_;
-
-	class ScreenResolution {
-	public:
-		int32_t xres;
-		int32_t yres;
-		int32_t depth;
-	};
-
-	/// All supported screen resolutions.
-	std::vector<ScreenResolution> resolutions_;
 
 	// Data model for the entries in the language selection list.
 	struct LanguageEntry {

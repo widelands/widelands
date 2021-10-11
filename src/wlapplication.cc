@@ -81,29 +81,12 @@
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/options.h"
 #include "wlapplication_messages.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-namespace {
-
-/**
- * Shut the hardware down: stop graphics mode, stop sound handler
- */
-#ifndef _WIN32
-void terminate(int) {
-	// The logger can already be shut down, so we use cout
-	std::cout
-	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
-	      " Update your sound driver and/or SDL to fix this problem\n";
-	raise(SIGKILL);
-}
-#endif
-
-/**
- * Returns the widelands executable path.
- */
-std::string get_executable_directory() {
+std::string get_executable_directory(const bool logdir) {
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
@@ -131,9 +114,26 @@ std::string get_executable_directory() {
 	executabledir = filename;
 	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
-	log_info("Widelands executable directory: %s\n", executabledir.c_str());
+	if (logdir) {
+		log_info("Widelands executable directory: %s\n", executabledir.c_str());
+	}
 	return executabledir;
 }
+
+namespace {
+
+/**
+ * Shut the hardware down: stop graphics mode, stop sound handler
+ */
+#ifndef _WIN32
+void terminate(int) {
+	// The logger can already be shut down, so we use cout
+	std::cout
+	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
+	      " Update your sound driver and/or SDL to fix this problem\n";
+	raise(SIGKILL);
+}
+#endif
 
 bool is_absolute_path(const std::string& path) {
 	std::regex re("^/|\\w:");
@@ -354,6 +354,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      mouse_position_(Vector2i::zero()),
      mouse_locked_(false),
      mouse_compensate_warp_(Vector2i::zero()),
+     handle_key_enabled_(true),
      should_die_(false),
 #ifdef _WIN32
      homedir_(FileSystem::get_homedir() + "\\.widelands"),
@@ -876,7 +877,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 }
 
 bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
-	if (!down) {
+	if (!down || !handle_key_enabled_) {
 		return false;
 	}
 
@@ -925,6 +926,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		switch (ev.type) {
 		case SDL_KEYUP:
 		case SDL_KEYDOWN: {
+			normalize_numpad(ev.key.keysym);
 			bool handled = false;
 			// Workaround for duplicate triggering of the Alt key in Ubuntu:
 			// Don't accept the same key twice, so we use a map to squash them and handle them later.
@@ -952,7 +954,7 @@ void WLApplication::handle_input(InputCallback const* cb) {
 			break;
 		case SDL_MOUSEWHEEL:
 			if (cb && cb->mouse_wheel) {
-				cb->mouse_wheel(ev.wheel.which, ev.wheel.x, ev.wheel.y);
+				cb->mouse_wheel(ev.wheel.x, ev.wheel.y, SDL_GetModState());
 			}
 			break;
 		case SDL_MOUSEMOTION:
@@ -1123,6 +1125,9 @@ bool WLApplication::init_settings() {
 
 	// Keyboard shortcuts
 	init_shortcuts();
+
+	// Mousewheel options
+	update_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);
 	int64_t now = time(nullptr);

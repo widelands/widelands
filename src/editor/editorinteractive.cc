@@ -68,6 +68,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 #include "wui/toolbar.h"
@@ -873,6 +874,17 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	return InteractiveBase::handle_key(down, code);
+}
+
+bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolsize, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	set_sel_radius_and_update_menu(
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)));
+	return true;
 }
 
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {

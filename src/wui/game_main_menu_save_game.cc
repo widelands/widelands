@@ -223,7 +223,6 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		}
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			ok();
 			return true;

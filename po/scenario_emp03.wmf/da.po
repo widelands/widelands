@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -654,12 +654,9 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
 msgid ""
 "So, let’s think this over. To weave cloth we need some wool from a sheep "
-"farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
+"farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"Lad os overveje nærmere. For at væve klæde skal vi bruge uld fra et fåreavl."
-" Fåreavlen skal bruge hvede og vand for at fungere. Så lad os finde et sted "
-"for en stor bygning og bygge et landbrug."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375

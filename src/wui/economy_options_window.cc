@@ -603,7 +603,7 @@ void EconomyOptionsWindow::SaveProfileWindow::update_table() {
 	layout();
 }
 
-void EconomyOptionsWindow::SaveProfileWindow::save() {
+void EconomyOptionsWindow::SaveProfileWindow::save_profile() {
 	const std::string name = profile_name_.text();
 	assert(!name.empty());
 	assert(name != kDefaultEconomyProfile);
@@ -676,9 +676,9 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
 
 	table_.selected.connect([this](uint32_t) { table_selection_changed(); });
 	profile_name_.changed.connect([this] { update_save_enabled(); });
-	profile_name_.ok.connect([this] { save(); });
+	profile_name_.ok.connect([this] { save_profile(); });
 	profile_name_.cancel.connect([this] { die(); });
-	save_.sigclicked.connect([this] { save(); });
+	save_.sigclicked.connect([this] { save_profile(); });
 	cancel_.sigclicked.connect([this] { die(); });
 	delete_.sigclicked.connect([this] { delete_selected(); });
 

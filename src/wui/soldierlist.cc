@@ -372,6 +372,9 @@ struct SoldierList : UI::Box {
 
 	const SoldierControl* soldiers() const;
 
+protected:
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+
 private:
 	void mouseover(const Soldier* soldier);
 	void eject(const Soldier* soldier);
@@ -384,6 +387,8 @@ private:
 	SoldierPanel soldierpanel_;
 	UI::Radiogroup soldier_preference_;
 	UI::Textarea infotext_;
+
+	UI::Panel* soldier_capacity_control_;
 };
 
 SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
@@ -445,7 +450,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, ib, building));
+	soldier_capacity_control_ = create_soldier_capacity_control(*buttons, ib, building);
+	buttons->add(soldier_capacity_control_);
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
@@ -504,6 +510,10 @@ void SoldierList::set_soldier_preference(int32_t changed_to) {
 	} else {
 		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 	}
+}
+
+bool SoldierList::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return soldier_capacity_control_->handle_mousewheel(x, y, modstate);
 }
 
 UI::Panel*

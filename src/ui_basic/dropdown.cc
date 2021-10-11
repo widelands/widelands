@@ -72,6 +72,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                        w,
                     // Height only to fit the button, so we can use this in Box layout.
                     base_height(button_dimension, style)),
+     ignore_space_(false),
+     was_open_already_(false),
      id_(next_id_++),
      max_list_items_(max_list_items),
      max_list_height_(std::numeric_limits<uint32_t>::max()),
@@ -107,6 +109,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      type_(type),
      is_enabled_(true),
      button_style_(button_style),
+
      autoexpand_display_button_(false) {
 	if (label.empty()) {
 		set_tooltip(pgettext("dropdown", "Select Item"));
@@ -131,20 +134,27 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	}
 	list_ =
 	   new UI::Listselect<uintptr_t>(list_parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
-	list_->set_notify_on_delete(this);
+	list_->set_linked_dropdown(this);
 
 	list_->set_visible(false);
 	button_box_.add(&display_button_, UI::Box::Resizing::kExpandBoth);
-	display_button_.sigclicked.connect([this]() { toggle_list(); });
+	display_button_.sigclicked.connect([this]() {
+		toggle_list();
+		clear_filter();
+	});
 	if (push_button_ != nullptr) {
 		display_button_.set_perm_pressed(true);
 		button_box_.add(push_button_, UI::Box::Resizing::kFullSize);
-		push_button_->sigclicked.connect([this]() { toggle_list(); });
+		push_button_->sigclicked.connect([this]() {
+			toggle_list();
+			clear_filter();
+		});
 	}
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
 		set_value();
 		close();
+		clear_filter();
 	});
 
 	if (push_button_) {
@@ -173,7 +183,7 @@ BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
 	if (list_) {
-		list_->set_notify_on_delete(nullptr);
+		list_->set_linked_dropdown(nullptr);
 		list_->die();
 	}
 
@@ -430,9 +440,12 @@ void BaseDropdown::update() {
 }
 
 void BaseDropdown::set_value() {
-	current_selection_ = list_->selection_index();
-	update();
-	selected();
+	if (list_->has_selection()) {
+		current_selection_ = list_->selection_index();
+		save_selected_entry(current_selection_);
+		update();
+		selected();
+	}
 }
 
 void BaseDropdown::toggle() {
@@ -442,6 +455,7 @@ void BaseDropdown::toggle() {
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	if (!open) {
 		list_->select(current_selection_);
+		clear_filter();
 	}
 	if (!is_enabled_) {
 		list_->set_visible(false);
@@ -449,6 +463,8 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
+		was_open_already_ = true;
+		enable_textinput();
 		list_->move_to_top();
 		focus();
 		Notifications::publish(NoteDropdown(id_));
@@ -461,6 +477,8 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 		    !has_selection() && !list_->empty()) {
 			select(0);
 		}
+	} else {
+		disable_textinput();
 	}
 	if (type_ != DropdownType::kTextual) {
 		display_button_.set_perm_pressed(list_->is_visible());
@@ -489,26 +507,32 @@ bool BaseDropdown::is_mouse_away() const {
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-		case SDLK_SPACE:
 			if (list_->is_visible()) {
 				set_value();
-				// Check list visibility again, set_value() might has toggled it
-				if ((list_->is_visible() && code.sym != SDLK_SPACE) ||
-				    (!list_->is_visible() && code.sym == SDLK_SPACE)) {
+				// Check list visibility again, set_value() might have toggled it
+				if (list_->is_visible()) {
 					toggle_list();
 				}
-			} else if (code.sym == SDLK_SPACE) {
-				set_list_visibility(true);
 			} else {
 				// Handle Enter only if the list is open
 				return false;
 			}
 			return true;
 		case SDLK_ESCAPE:
-			if (list_->is_visible()) {
-				toggle_list();
+			if (is_expanded()) {
+				if (is_filtered()) {
+					clear_filter();
+				} else {
+					set_list_visibility(false);
+				}
+				return true;
+			}
+			break;
+		case SDLK_SPACE:
+			if (!is_expanded()) {
+				ignore_space_ = was_open_already_;
+				set_list_visibility(true);
 				return true;
 			}
 			break;
@@ -516,10 +540,26 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	if (list_->is_visible()) {
+	if (is_expanded()) {
 		return list_->handle_key(down, code);
 	}
 	return NamedPanel::handle_key(down, code);
+}
+void BaseDropdown::delete_last_of_filter() {
+	if (is_filtered()) {
+		current_filter_.pop_back();
+		apply_filter();
+	}
+}
+bool BaseDropdown::is_filtered() {
+	return !current_filter_.empty();
+}
+void BaseDropdown::disable_textinput() {
+	set_handle_textinput(false);
+}
+
+void BaseDropdown::enable_textinput() {
+	set_handle_textinput(true);
 }
 
 }  // namespace UI

@@ -68,12 +68,28 @@ void FileViewPanel::add_tab(const std::string& title, const std::string& lua_scr
 	update_tab_size(index);
 }
 
+void FileViewPanel::add_tab_without_script(const std::string& name,
+                                           const std::string& title,
+                                           Panel* panel,
+                                           const std::string& tooltip) {
+	script_paths_.push_back("");
+	boxes_.push_back(nullptr);
+	textviews_.push_back(nullptr);
+	add(name, title, panel, tooltip);
+}
+
 void FileViewPanel::update_tab_size(size_t index) {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 	assert(contents_width_ >= 0 && contents_height_ >= 0);
 
-	boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
-	textviews_.at(index)->set_size(contents_width_, contents_height_);
+	if (boxes_.at(index).get() != nullptr) {
+		boxes_.at(index)->set_size(get_inner_w(), get_inner_h());
+	}
+	if (textviews_.at(index).get() != nullptr) {
+		textviews_.at(index)->set_size(contents_width_, contents_height_);
+	} else {
+		tabs().at(index)->panel->set_size(contents_width_, contents_height_);
+	}
 }
 
 void FileViewPanel::layout() {

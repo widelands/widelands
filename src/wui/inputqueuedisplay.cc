@@ -23,6 +23,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wui/interactive_base.h"
 
 constexpr int8_t kButtonSize = 25;
@@ -381,6 +382,36 @@ bool InputQueueDisplay::handle_mousemove(
 	return true;
 }
 
+bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (show_only_ || !can_act_) {
+		return false;
+	}
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y,
+	                                       // shift has special meaning, prevent it to work
+	                                       // as part of modifier
+	                                       modstate & ~KMOD_SHIFT);
+	if (change) {
+		if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
+			// Mouse is over desired fill
+			if (modstate & KMOD_SHIFT) {
+				recurse([change](InputQueueDisplay& i) { i.change_desired_fill(change); });
+			} else {
+				change_desired_fill(change);
+			}
+			return true;
+		} else if (has_priority_) {
+			// Mouse is over priority or collapse button
+			// Can't just use method from Slider, because of the special
+			// meaning of shift to change all input priorities together.
+
+			// KMOD_SHIFT + changedto is already connected to recurse.
+			priority_.change_value_by(change);
+			return true;
+		}
+	}
+	return false;
+}
+
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
@@ -430,6 +461,44 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 			queue_->set_max_fill(new_fill);
 		} else {
 			get_setting()->desired_fill = new_fill;
+		}
+	}
+}
+
+void InputQueueDisplay::change_desired_fill(const int8_t delta) {
+	if (delta == 0) {
+		return;
+	}
+	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
+	unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
+	assert(desired_fill <= max_fill);
+
+	if (!can_act_ || desired_fill == (delta < 0 ? 0 : max_fill)) {
+		return;
+	}
+
+	if (delta < 0 && static_cast<int>(desired_fill) <= -delta) {
+		desired_fill = 0;
+	} else {
+		desired_fill += delta;
+		if (desired_fill > max_fill) {
+			desired_fill = max_fill;
+		}
+	}
+
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_set_input_max_fill(*b, index_, type_, desired_fill, settings_ != nullptr);
+	} else {
+		if (queue_) {
+			queue_->set_max_fill(desired_fill);
+		} else {
+			get_setting()->desired_fill = desired_fill;
 		}
 	}
 }
