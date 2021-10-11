@@ -88,13 +88,17 @@ char const* translate(const std::string& str) {
 	return translate(str.c_str());
 }
 
+char const* pgettext_wrapper(const char* msgctxt, const char* msgid) {
+	log_i18n_if_desired_("pgettext", msgid);
+	return pgettext_expr(msgctxt, msgid);
+}
 char const* ngettext_wrapper(const char* singular, const char* plural, const int n) {
 	log_i18n_if_desired_("ngettext", singular);
 	return ngettext(singular, plural, n);
 }
-char const* pgettext_wrapper(const char* msgctxt, const char* msgid) {
-	log_i18n_if_desired_("pgettext", msgid);
-	return pgettext_expr(msgctxt, msgid);
+char const* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n) {
+	log_i18n_if_desired_("npgettext", singular);
+	return npgettext_expr(msgctxt, singular, plural, n);
 }
 
 /**

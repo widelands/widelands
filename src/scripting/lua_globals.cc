@@ -308,13 +308,13 @@ static int L_pgettext(lua_State* L) {
 		if (td->second) {
 			std::unique_ptr<i18n::GenericTextdomain> dom(
 			   AddOns::create_textdomain_for_addon(td->first));
-			lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+			lua_pushstring(L, pgettext(msgctxt, msgid));
 		} else {
 			i18n::Textdomain dom(td->first);
-			lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+			lua_pushstring(L, pgettext(msgctxt, msgid));
 		}
 	} else {
-		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+		lua_pushstring(L, pgettext(msgctxt, msgid));
 	}
 	return 1;
 }
@@ -350,13 +350,13 @@ static int L_npgettext(lua_State* L) {
 		if (td->second) {
 			std::unique_ptr<i18n::GenericTextdomain> dom(
 			   AddOns::create_textdomain_for_addon(td->first));
-			lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 		} else {
 			i18n::Textdomain dom(td->first);
-			lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 		}
 	} else {
-		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+		lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 	}
 	return 1;
 }
