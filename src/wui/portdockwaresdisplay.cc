@@ -94,9 +94,9 @@ public:
 
 			UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>& d =
 			   *new UI::Dropdown<std::pair<Widelands::WareWorker, Widelands::DescriptionIndex>>(
-			      box, bformat("additional_%u" , c), 0, 0, kWareMenuPicWidth, 8,
-			      kWareMenuPicHeight, _("Additional item"), UI::DropdownType::kPictorial,
-			      UI::PanelStyle::kWui, UI::ButtonStyle::kWuiSecondary);
+			      box, bformat("additional_%u", c), 0, 0, kWareMenuPicWidth, 8, kWareMenuPicHeight,
+			      _("Additional item"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+			      UI::ButtonStyle::kWuiSecondary);
 			d.add(_("(Empty)"), kEmptySlot, g_image_cache->get(kNoWare), true, _("(Empty)"));
 			std::set<std::tuple<std::string, Widelands::WareWorker, Widelands::DescriptionIndex,
 			                    const Image*>>

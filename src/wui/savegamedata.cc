@@ -132,8 +132,8 @@ const std::string as_filename_list(const std::vector<SavegameData>& savefiles) {
 			std::vector<std::string> listme;
 			listme.push_back(richtext_escape(gamedata.mapname));
 			listme.push_back(gamedata.savedonstring);
-			message = bformat("%s\n%s", message,
-			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
+			message =
+			   bformat("%s\n%s", message, i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
 		}
 	}
 	return message;

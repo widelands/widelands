@@ -104,12 +104,13 @@ protected:
 			}
 		}
 		for (const auto& pair : all_building_sorted) {
-			dd->add(bformat(
-			            /** TRANSLATORS: [Tribe Name] Building Name */
-			            _("[%1$s] %2$s"),
-			         game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname(),
-			         pair.second->descname()),
-			        pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
+			dd->add(
+			   bformat(
+			      /** TRANSLATORS: [Tribe Name] Building Name */
+			      _("[%1$s] %2$s"),
+			      game_for_fastplace->descriptions().get_tribe_descr(pair.first.first)->descname(),
+			      pair.second->descname()),
+			   pair.second->name(), pair.second->icon(), fastplace == pair.second->name());
 		}
 
 		if (!dd->has_selection()) {
@@ -201,10 +202,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
 		    game_.get() == nullptr) {
 			return bformat(
-			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
-			              "Action: Key" */
-			           _("%1$s: %2$s"),
-			        to_string(key), shortcut);
+			   /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
+			      "Action: Key" */
+			   _("%1$s: %2$s"), to_string(key), shortcut);
 		}
 
 		const std::string& fp = get_fastplace_shortcut(key);
@@ -219,12 +219,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		}
 
 		return bformat(
-		           /** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
-		           _("[%1$s] %2$s: %3$s"),
-		        game_->descriptions()
-		           .get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))
-		           ->descname(),
-		        bld->descname(), shortcut);
+		   /** TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut */
+		   _("[%1$s] %2$s: %3$s"),
+		   game_->descriptions()
+		      .get_tribe_descr(game_->descriptions().safe_tribe_index(bld->get_owning_tribe()))
+		      ->descname(),
+		   bld->descname(), shortcut);
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -279,11 +279,11 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					}
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
-					   as_richtext_paragraph(bformat(
-					          _("The shortcut you selected (‘%1$s’) is already in use for the "
-					            "following action: ‘%2$s’. Please select a different shortcut "
-					            "or change the conflicting shortcut first."),
-					       shortcut_string_for(c.key, true), conflict_name),
+					   as_richtext_paragraph(
+					      bformat(_("The shortcut you selected (‘%1$s’) is already in use for the "
+					                "following action: ‘%2$s’. Please select a different shortcut "
+					                "or change the conflicting shortcut first."),
+					              shortcut_string_for(c.key, true), conflict_name),
 					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 					   UI::WLMessageBox::MBoxType::kOk);
 					warning.run<UI::Panel::Returncodes>();

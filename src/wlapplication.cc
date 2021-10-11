@@ -770,15 +770,12 @@ void WLApplication::run() {
 			}
 		} catch (const Widelands::GameDataError& e) {
 			message = bformat(_("Widelands could not load the file \"%s\". The file format "
-			                           "seems to be incompatible.") ,
-			           filename_.c_str())
-			             ;
+			                    "seems to be incompatible."),
+			                  filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("Game data error");
 		} catch (const FileNotFoundError& e) {
-			message =
-			   bformat(_("Widelands could not find the file \"%s\".") , filename_.c_str())
-			      ;
+			message = bformat(_("Widelands could not find the file \"%s\"."), filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("File system error");
 		} catch (const std::exception& e) {
@@ -888,8 +885,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {
-				const std::string filename =
-				   bformat("%s/shot%04u.png" , kScreenshotsDir , nr);
+				const std::string filename = bformat("%s/shot%04u.png", kScreenshotsDir, nr);
 				if (g_fs->file_exists(filename)) {
 					continue;
 				}
@@ -1276,14 +1272,12 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 void WLApplication::handle_commandline_parameters() {
 	auto throw_empty_value = [](const std::string& opt) {
 		throw ParameterError(
-		   CmdLineVerbosity::None,
-		   bformat(_("Empty value of command line parameter: %s") , opt));
+		   CmdLineVerbosity::None, bformat(_("Empty value of command line parameter: %s"), opt));
 	};
 
 	auto throw_exclusive = [](const std::string& opt) {
 		throw ParameterError(
-		   CmdLineVerbosity::None,
-		   bformat(_("%s can not be combined with other actions") , opt));
+		   CmdLineVerbosity::None, bformat(_("%s can not be combined with other actions"), opt));
 	};
 
 	if (commandline_.count("nosound")) {
@@ -1435,11 +1429,9 @@ void WLApplication::handle_commandline_parameters() {
 	fill_parameter_vector();
 
 	if (commandline_.count("error")) {
-		throw ParameterError(
-		   CmdLineVerbosity::Normal,
-		   bformat(_("Unknown command line parameter: %s\nMaybe a '=' is missing?") ,
-		    commandline_["error"])
-		      );
+		throw ParameterError(CmdLineVerbosity::Normal,
+		                     bformat(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
+		                             commandline_["error"]));
 	}
 
 	if (commandline_.count("datadir_for_testing")) {
@@ -1576,8 +1568,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 		} else {
 			throw ParameterError(
-			   CmdLineVerbosity::Normal,
-			   bformat(_("Unknown command line parameter: %s") , pair.first));
+			   CmdLineVerbosity::Normal, bformat(_("Unknown command line parameter: %s"), pair.first));
 		}
 	}
 }
@@ -1612,12 +1603,11 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		UI::WLMessageBox m(
 		   panel, UI::WindowStyle::kFsMenu, _("Error"),
 		   bformat(
-		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-		         "this problem to help us improve Widelands. You will find related messages in the "
-		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\nPlease add this information to your report.") ,
-		    error , build_id() , build_type())
-		      ,
+		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		        "this problem to help us improve Widelands. You will find related messages in the "
+		        "standard output (stdout.txt on Windows). You are using build %2$s "
+		        "(%3$s).\nPlease add this information to your report."),
+		      error, build_id(), build_type()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return;
@@ -1628,22 +1618,20 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   panel, UI::WindowStyle::kFsMenu,
 		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
 		   ask_for_bug_report ?
-            bformat(_(
-		          "An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
-		          "this problem to help us improve Widelands. You will find related messages in the "
-		          "standard output (stdout.txt on Windows). You are using build %2$s "
-		          "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
-		          "Widelands "
-		          "to attempt to create an emergency savegame? It is often – though not always – "
-		          "possible to load it and continue playing.") ,
-		       error , build_id() , build_type())
-		          :
             bformat(
-		          _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
-		            "Widelands to attempt to create an emergency savegame? It is often – though not "
-		            "always – possible to load it and continue playing.") ,
-		       error)
-		         ,
+		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
+		           "this problem to help us improve Widelands. You will find related messages in the "
+		           "standard output (stdout.txt on Windows). You are using build %2$s "
+		           "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
+		           "Widelands "
+		           "to attempt to create an emergency savegame? It is often – though not always – "
+		           "possible to load it and continue playing."),
+		         error, build_id(), build_type()) :
+            bformat(
+		         _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
+		           "Widelands to attempt to create an emergency savegame? It is often – though not "
+		           "always – possible to load it and continue playing."),
+		         error),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -1668,9 +1656,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 			UI::WLMessageBox m(
 			   panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"),
 			   bformat(_("We are sorry, but Widelands was unable to create an emergency "
-			                    "savegame for the following reason:\n\n%s") ,
-			    e.what())
-			      ,
+			             "savegame for the following reason:\n\n%s"),
+			           e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -1683,8 +1670,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
  */
 void WLApplication::cleanup_replays() {
 	for (const std::string& filename : g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
-		     return boost::ends_with(
-		        fn, bformat("%s%s" , kReplayExtension , kSyncstreamExtension));
+		     return boost::ends_with(fn, bformat("%s%s", kReplayExtension, kSyncstreamExtension));
 	     })) {
 		if (is_autogenerated_and_expired(filename, kReplayKeepAroundTime)) {
 			log_info("Delete syncstream or replay %s\n", filename.c_str());

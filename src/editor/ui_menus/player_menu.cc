@@ -182,8 +182,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
-		   row, bformat("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50,
-		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+		   row, bformat("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50, 16,
+		   plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
 		for (const Widelands::TribeBasicInfo& tribeinfo : parent.egbase().all_tribes()) {

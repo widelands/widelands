@@ -90,17 +90,15 @@ void set_logging_dir();
 #endif
 
 /** Wrapper functions for boost::format with better exception handling. */
-template<typename T0>
-void bformat_helper(boost::format& f, const T0& arg0) {
+template <typename T0> void bformat_helper(boost::format& f, const T0& arg0) {
 	f % arg0;
 }
-template<typename T0, typename ... T>
-void bformat_helper(boost::format& f, const T0& arg0, T ... args) {
+template <typename T0, typename... T>
+void bformat_helper(boost::format& f, const T0& arg0, T... args) {
 	f % arg0;
 	bformat_helper(f, args...);
 }
-template<typename ... T>
-std::string bformat(const std::string& format_string, T ... args) {
+template <typename... T> std::string bformat(const std::string& format_string, T... args) {
 	try {
 		boost::format f(format_string);
 		bformat_helper(f, args...);

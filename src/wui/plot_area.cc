@@ -101,13 +101,13 @@ std::string get_value_with_unit(Units unit, int value) {
 	switch (unit) {
 	case Units::kDayNarrow:
 		/** TRANSLATORS: day(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%d", "%1%d", value) , value);
+		return bformat(npgettext("unit_narrow", "%1%d", "%1%d", value), value);
 	case Units::kHourNarrow:
 		/** TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%h", "%1%h", value) , value);
+		return bformat(npgettext("unit_narrow", "%1%h", "%1%h", value), value);
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%m", "%1%m", value) , value);
+		return bformat(npgettext("unit_narrow", "%1%m", "%1%m", value), value);
 	case Units::kMinutesGeneric:
 	case Units::kHourGeneric:
 	case Units::kDayGeneric:
@@ -263,8 +263,8 @@ void draw_diagram(uint32_t time_ms,
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
 		if (how_many_ticks != 0 && i != 0) {
-			std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh->render(
-			   xtick_text_style(bformat("-%u " , (max_x / how_many_ticks * i))));
+			std::shared_ptr<const UI::RenderedText> xtick =
+			   UI::g_fh->render(xtick_text_style(bformat("-%u ", (max_x / how_many_ticks * i))));
 			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
 			UI::center_vertically(xtick->height(), &pos);
 			xtick->draw(dst, pos, UI::Align::kCenter);
@@ -498,8 +498,7 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 		draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 	}
 	// Print the 0
-	draw_value("0",
-	           g_style_manager->statistics_plot_style().x_tick_font(),
+	draw_value("0", g_style_manager->statistics_plot_style().x_tick_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }
 
@@ -731,7 +730,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
-	draw_value(bformat("-%u" , (highest_scale_)),
+	draw_value(bformat("-%u", (highest_scale_)),
 	           g_style_manager->statistics_plot_style().y_min_value_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }

@@ -58,8 +58,7 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 			i18n::Textdomain td("widelands");
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
-				Section& s = prof.get_safe_section(
-				   bformat("player_%u", static_cast<unsigned int>(p)));
+				Section& s = prof.get_safe_section(bformat("player_%u", static_cast<unsigned int>(p)));
 
 				// Replace empty or standard player names with localized standard player name
 				std::string player_name = s.get_string("name", "");
@@ -90,8 +89,7 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		const std::string section_key =
-		   bformat("player_%u", static_cast<unsigned int>(p));
+		const std::string section_key = bformat("player_%u", static_cast<unsigned int>(p));
 
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);

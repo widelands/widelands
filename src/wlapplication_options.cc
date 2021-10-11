@@ -385,9 +385,9 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
-		   KeyboardShortcutInfo(                                                                     \
-		      {KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key), "editor_toolsize" #radius, \
-		      []() { return bformat(_("Set Toolsize to %d"), radius); })              \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
+		                        "editor_toolsize" #radius,                                           \
+		                        []() { return bformat(_("Set Toolsize to %d"), radius); })           \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -609,12 +609,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return bformat(_("Set Landmark #%d"), i); })},      \
+	                      []() { return bformat(_("Set Landmark #%d"), i); })},                     \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
 		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return bformat(_("Go To Landmark #%d"), i); }) \
+		                        []() { return bformat(_("Go To Landmark #%d"), i); })                \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -978,9 +978,8 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-			                           bformat("fastplace_%i" , off), [off]() {
-				                           return bformat(_("Fastplace #%i") , off);
-			                           }));
+			                           bformat("fastplace_%i", off),
+			                           [off]() { return bformat(_("Fastplace #%i"), off); }));
 		}
 	}
 }

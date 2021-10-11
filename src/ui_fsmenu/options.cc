@@ -652,12 +652,11 @@ void Options::update_language_stats() {
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */
-					   bformat(_("The translation into %s is complete.") , entry.descname);
+					   bformat(_("The translation into %s is complete."), entry.descname);
 				} else {
-					/** TRANSLATORS: %1, = language name, %2, = percentage */
-					message = bformat(_("The translation into %1, is %2%%, complete.") ,
-					           entry.descname , percent)
-					             ;
+					message = bformat(
+					   /** TRANSLATORS: %1% = language name, %2% = percentage */
+					   _("The translation into %1% is %2%%, complete."), entry.descname, percent);
 				}
 			} catch (...) {
 			}
@@ -669,9 +668,8 @@ void Options::update_language_stats() {
 	// will catch up with the work later.
 	if (percent <= 90) {
 		message = message + " " +
-		          bformat(_("If you wish to help us translate, please visit %s") ,
-		           "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>")
-		             ;
+		          bformat(_("If you wish to help us translate, please visit %s"),
+		                  "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
 	translation_info_.set_text(

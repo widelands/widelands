@@ -307,8 +307,7 @@ void BaseDropdown::add(const std::string& name,
 
 	if (autoexpand_display_button_) {
 		/// Fit width of display button to make enough room for the entry's text
-		const std::string fitme =
-		   label_.empty() ? name : bformat(_("%1%: %2%"), label_, name);
+		const std::string fitme = label_.empty() ? name : bformat(_("%1%: %2%"), label_, name);
 		const int new_width =
 		   text_width(fitme, g_style_manager->button_style(button_style_).enabled().font()) + 8;
 		if (new_width > display_button_.get_w()) {

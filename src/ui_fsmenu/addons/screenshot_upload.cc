@@ -42,7 +42,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
                 0,
                 100,
                 100,
-                bformat(_("Upload Screenshot for ‘%s’") , info->internal_name)),
+                bformat(_("Upload Screenshot for ‘%s’"), info->internal_name)),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -126,9 +126,8 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   bformat(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded "
-			                    "to the server.\n\nError Message:\n%3$s") ,
-			    sel , info->internal_name , e.what())
-			      ,
+			             "to the server.\n\nError Message:\n%3$s"),
+			           sel, info->internal_name, e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 			ok_.set_enabled(true);

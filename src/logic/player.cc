@@ -1918,7 +1918,7 @@ const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (remaining_shipnames_.empty()) {
-		return bformat(pgettext("shipname", "Ship %d") , ship_name_counter_);
+		return bformat(pgettext("shipname", "Ship %d"), ship_name_counter_);
 	}
 
 	Game& game = dynamic_cast<Game&>(egbase());

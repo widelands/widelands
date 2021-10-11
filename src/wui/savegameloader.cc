@@ -98,14 +98,13 @@ void SavegameLoader::add_general_information(SavegameData& gamedata,
 
 void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormessage) const {
 	boost::replace_all(errormessage, "\n", "<br>");
-	gamedata.errormessage =
-	   bformat("<p>%s</p><p>%s</p><p>%s</p>",
-	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-	     _("This file has the wrong format and can’t be loaded."
-	        " Maybe it was created with an older version of Widelands.")
-	    /** TRANSLATORS: This text is on a separate line with an error message below */
-	    , _("Error message:") , errormessage)
-	      ;
+	gamedata.errormessage = bformat(
+	   "<p>%s</p><p>%s</p><p>%s</p>",
+	   /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+	   _("This file has the wrong format and can’t be loaded."
+	     " Maybe it was created with an older version of Widelands."),
+	   /** TRANSLATORS: This text is on a separate line with an error message below */
+	   _("Error message:"), errormessage);
 
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
@@ -134,7 +133,7 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute */
-			   bformat(_("Today, %1%:%2%"), savedate->tm_hour , minute);
+			   bformat(_("Today, %1%:%2%"), savedate->tm_hour, minute);
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute. This is part of a list.
@@ -152,26 +151,24 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute */
-			   bformat(_("Yesterday, %1%:%2%"), savedate->tm_hour , minute);
+			   bformat(_("Yesterday, %1%:%2%"), savedate->tm_hour, minute);
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute. This is part of a list.
 			    */
-			   bformat(_("saved yesterday at %1%:%2%"), savedate->tm_hour , minute);
+			   bformat(_("saved yesterday at %1%:%2%"), savedate->tm_hour, minute);
 		} else {  // Older
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    month day, year */
-			   bformat(_("%1% %2%, %3%"), localize_month(savedate->tm_mon) ,
-			    savedate->tm_mday , (1900 + savedate->tm_year))
-			      ;
+			   bformat(_("%1% %2%, %3%"), localize_month(savedate->tm_mon), savedate->tm_mday,
+			           (1900 + savedate->tm_year));
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    month (short name) day (number),
 			      year (number). This is part of a list. */
-			   bformat(_("saved on %1$s %2$u, %3$u"), localize_month(savedate->tm_mon) ,
-			    savedate->tm_mday , (1900 + savedate->tm_year))
-			      ;
+			   bformat(_("saved on %1$s %2$u, %3$u"), localize_month(savedate->tm_mon),
+			           savedate->tm_mday, (1900 + savedate->tm_year));
 		}
 	}
 }

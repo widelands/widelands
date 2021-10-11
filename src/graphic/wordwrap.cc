@@ -37,14 +37,11 @@
 #include "graphic/text_layout.h"
 
 namespace {
-inline
-std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+inline std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	return bformat(
 	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>",
-	ptsize,
-	clr.hex_value(),
-	richtext_escape(text));
+	   ptsize, clr.hex_value(), richtext_escape(text));
 }
 
 int text_width(const std::string& text, int ptsize) {

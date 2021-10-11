@@ -341,7 +341,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		}
 	}
 
-	set_title(bformat("(%s)" , construction_site->building().descname()));
+	set_title(bformat("(%s)", construction_site->building().descname()));
 
 	think();
 	initialization_complete();

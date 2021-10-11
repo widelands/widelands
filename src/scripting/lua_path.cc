@@ -22,8 +22,8 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/macros.h"
 #include "base/log.h"
+#include "base/macros.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
@@ -69,8 +69,7 @@ bool NumberGlob::next(std::string* s) {
 	}
 
 	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, bformat(format_, current_));
+		*s = boost::replace_last_copy(template_, to_replace_, bformat(format_, current_));
 	} else {
 		*s = template_;
 	}

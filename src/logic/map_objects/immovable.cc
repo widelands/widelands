@@ -498,11 +498,11 @@ void Immovable::draw_construction(const Time& gametime,
 	                    &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(info_to_draw, descr().descname(),
-	             StyleManager::color_tag(
-	                bformat(_("%i%, built") , (done.get() * 100 / total.get())),
-	                g_style_manager->building_statistics_style().construction_color()),
-	             point_on_dst, scale, dst);
+	do_draw_info(
+	   info_to_draw, descr().descname(),
+	   StyleManager::color_tag(bformat(_("%i%, built"), (done.get() * 100 / total.get())),
+	                           g_style_manager->building_statistics_style().construction_color()),
+	   point_on_dst, scale, dst);
 }
 
 /**

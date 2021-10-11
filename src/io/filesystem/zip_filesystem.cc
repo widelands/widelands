@@ -469,12 +469,11 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, size
 	case ZIP_OK:
 		break;
 	case ZIP_ERRNO:
-		throw FileError(
-		   "ZipFilesystem::write", complete_filename,
-		   bformat("in path '%s'', Error", zip_file_->path(), strerror(errno)));
-	default:
 		throw FileError("ZipFilesystem::write", complete_filename,
-		                bformat("in path '%s'", zip_file_->path()));
+		                bformat("in path '%s'', Error", zip_file_->path(), strerror(errno)));
+	default:
+		throw FileError(
+		   "ZipFilesystem::write", complete_filename, bformat("in path '%s'", zip_file_->path()));
 	}
 
 	zipCloseFileInZip(zip_file_->write_handle());

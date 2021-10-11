@@ -153,10 +153,10 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
  * Update all the textareas, so that they represent the correct values
  */
 void EditorToolChangeResourcesOptionsMenu::update() {
-	cur_selection_.set_text(bformat(_("Current: %s"),
-	                         eia()
-	                            .egbase()
-	                            .descriptions()
-	                            .get_resource_descr(increase_tool_.set_tool().get_cur_res())
-	                            ->descname()));
+	cur_selection_.set_text(
+	   bformat(_("Current: %s"), eia()
+	                                .egbase()
+	                                .descriptions()
+	                                .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                                ->descname()));
 }

@@ -117,15 +117,14 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	boost::replace_all(name_list, "\n", "<br> • ");
 
 	const std::string header_second_part(
-	   /** TRANSLATORS: This is the second part of "Selected %1, directory/directories and %2%" */
-	   bformat(ngettext("%d file", "%d files", number_of_files) , number_of_files));
+	   /** TRANSLATORS: This is the second part of "Selected %1% directory/directories and %2%" */
+	   bformat(ngettext("%d file", "%d files", number_of_files), number_of_files));
 
 	std::string combined_header = as_richtext(as_heading_with_content(
-	   /** TRANSLATORS: %1, = number of selected directories, %2, = number of selected files*/
-	   bformat(ngettext("Selected %1, directory and %2%:",
-	                           "Selected %1, directories and %2%:", number_of_directories) ,
-	    number_of_directories , header_second_part)
-	      ,
+	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
+	   bformat(ngettext("Selected %1% directory and %2%:", "Selected %1% directories and %2%:",
+	                    number_of_directories),
+	           number_of_directories, header_second_part),
 	   "", panel_style_, true));
 
 	name_label_.set_text(combined_header);
@@ -172,41 +171,37 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
             _("Game Time:"),
 	   gamedata.gametime, panel_style_);
 
-	description = bformat("%s%s" , description ,
-	               as_heading_with_content(_("Players:"), gamedata.nrplayers, panel_style_))
-	                 ;
+	description = bformat("%s%s", description,
+	                      as_heading_with_content(_("Players:"), gamedata.nrplayers, panel_style_));
 
-	description = bformat("%s%s" , description ,
-	               as_heading_with_content(_("Widelands Version:"), gamedata.version, panel_style_))
-	                 ;
+	description =
+	   bformat("%s%s", description,
+	           as_heading_with_content(_("Widelands Version:"), gamedata.version, panel_style_));
 
-	description = bformat("%s%s" , description ,
-	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_))
-	                 ;
+	description =
+	   bformat("%s%s", description,
+	           as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_));
 
 	AddOns::AddOnConflict addons = AddOns::check_requirements(gamedata.required_addons);
 	has_conflicts_ = addons.second;
 
-	description = bformat("%s%s" , description ,
-	               as_heading_with_content(_("Add-Ons:"), addons.first, panel_style_, false, true))
-	                 ;
+	description =
+	   bformat("%s%s", description,
+	           as_heading_with_content(_("Add-Ons:"), addons.first, panel_style_, false, true));
 
 	std::string filename = gamedata.filename;
 	// Remove first directory from filename. This will be the save/ or replays/ folder
 	assert(filename.find('/') != std::string::npos);
 	filename.erase(0, filename.find('/') + 1);
 	assert(!filename.empty());
-	description = bformat("%s%s" , description ,
-	               as_heading_with_content(_("Filename:"), filename, panel_style_))
-	                 ;
+	description =
+	   bformat("%s%s", description, as_heading_with_content(_("Filename:"), filename, panel_style_));
 
 	const std::string err = show_minimap(gamedata);
 	if (!err.empty()) {
 		// Critical error, put this on top
-		description =
-		   bformat("%s%s" ,
-		    as_heading_with_content(_("Game data error:"), err, panel_style_) , description)
-		      ;
+		description = bformat(
+		   "%s%s", as_heading_with_content(_("Game data error:"), err, panel_style_), description);
 	}
 
 	descr_.set_text(as_richtext(description));
