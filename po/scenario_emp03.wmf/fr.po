@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Atanase Albaran, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -681,13 +681,9 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
 msgid ""
 "So, let’s think this over. To weave cloth we need some wool from a sheep "
-"farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
+"farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"Bon, pensons ceci dans son ensemble. Pour tisser de l'étoffe nous avons "
-"besoin de laine d'une bergerie. La bergerie elle-même aura besoin d'eau et "
-"de blé pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment "
-"et construisez une ferme en premier."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
