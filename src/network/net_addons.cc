@@ -152,6 +152,7 @@ void NetAddons::init(std::string username, std::string password) {
 	signal(SIGPIPE, SIG_IGN);  // NOLINT
 #endif
 
+	cached_remotes_ = 0;
 	if (password.empty()) {
 		username = "";
 	}
@@ -324,10 +325,13 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n) : net_(n), ok_(false) {
+	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n), ok_(false) {
 		assert(net_.initialized_);
 		if (net_.network_active_) {
 			throw WLWarning("", "Network is already active");
+		}
+		if (!uses_cache && net_.cached_remotes_ > 0) {
+			throw WLWarning("", "Network has stale remotes cache");
 		}
 		net_.network_active_ = true;
 	}
@@ -356,7 +360,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 	CrashGuard guard(*this);
 
 	std::string send = "CMD_LIST ";
-	send += all ? "true" : "false";
+	send += all ? "showall" : "showcompatible";
 	send += '\n';
 	write_to_server(send);
 
@@ -366,6 +370,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 		result_vector[i] = read_line();
 	}
 
+	cached_remotes_ = nr_addons;
 	check_endofstream();
 	guard.ok();
 	return result_vector;
@@ -374,8 +379,10 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
-	{
+	CrashGuard guard(*this, true);
+	if (cached_remotes_ > 0) {
+		--cached_remotes_;
+	} else {
 		std::string send = "CMD_INFO ";
 		send += name;
 		send += '\n';
