@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-01 02:56+0000\n"
-"PO-Revision-Date: 2021-09-12 19:15+0000\n"
+"POT-Creation-Date: 2021-10-10 02:42+0000\n"
+"PO-Revision-Date: 2021-10-10 20:54+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1288,7 +1288,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Manioková kuchyně"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1717,8 +1716,6 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1728,7 +1725,6 @@ msgstr "vyrábění lopaty"
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1929,7 +1925,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
@@ -2196,9 +2191,10 @@ msgstr "Došly ryby"
 msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
-"fish in his work area. Remember that you can only regenerate your fish "
-"resources if there are some fish left to breed."
-msgstr "Porybnému, pracujícímu v tomto domku porybného, se nedaří ve svém okolí najít žádné ryby. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud nějaké ryby stále zbývají."
+"water where he can breed fish in his work area. Remember that you can only "
+"regenerate your fish resources if there ever were some fish in the vicinity "
+"in the first place."
+msgstr "Porybnému, pracujícímu v tomto domku porybného, se nedaří ve svém okolí najít žádnou vodu vhodnou k chovu ryb. Nezapomeň, že obnovovat populaci ryb lze pouze tehdy, pokud v okolí nějaké ryby jsou."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -3712,7 +3708,7 @@ msgstr "Pivovar"
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:8
 msgctxt "frisians_building"
 msgid "Brick Kiln"
-msgstr "Cihlárna"
+msgstr "Cihelna"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:71
