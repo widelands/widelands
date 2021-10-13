@@ -153,10 +153,6 @@ constexpr uint16_t kDefaultCtrlModifier = KMOD_GUI;
 constexpr uint16_t kDefaultCtrlModifier = KMOD_CTRL;
 #endif
 
-static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
-	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
-}
-
 static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                          keysym(SDLK_n),
@@ -366,7 +362,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kEditorShowhideGrid,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_g),
-                         "editor_showhide_",
+                         "editor_showhide_grid",
                          []() { return _("Toggle Grid"); })},
    {KeyboardShortcut::kEditorShowhideImmovables,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
@@ -630,6 +626,321 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
+#ifdef __APPLE__
+constexpr uint16_t kDefaultFastplaceModifier = KMOD_CTRL;
+#elif defined(_WIN32)
+constexpr uint16_t kDefaultFastplaceModifier = KMOD_CTRL | KMOD_ALT;
+#else
+constexpr uint16_t kDefaultFastplaceModifier = KMOD_GUI;
+#endif
+
+static const std::pair<std::string, SDL_Keysym> kFastplaceDefaults[] = {
+
+	// ****************************************
+	// Warehouses
+	// ****************************************
+
+	// Warehouse
+	{ "barbarians_warehouse", keysym(SDLK_0, kDefaultFastplaceModifier) },
+	{ "empire_warehouse", keysym(SDLK_0, kDefaultFastplaceModifier) },
+	{ "atlanteans_warehouse", keysym(SDLK_0, kDefaultFastplaceModifier) },
+	{ "frisians_warehouse", keysym(SDLK_0, kDefaultFastplaceModifier) },
+	{ "amazons_warehouse", keysym(SDLK_0, kDefaultFastplaceModifier) },
+
+	// Port
+	{ "barbarians_port", keysym(SDLK_0, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "empire_port", keysym(SDLK_0, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "atlanteans_port", keysym(SDLK_0, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "frisians_port", keysym(SDLK_0, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "amazons_port", keysym(SDLK_0, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// ****************************************
+	// Training Sites
+	// ****************************************
+
+	// "Smaller" training site
+	{ "barbarians_battlearena", keysym(SDLK_8, kDefaultFastplaceModifier) },
+	{ "empire_arena", keysym(SDLK_8, kDefaultFastplaceModifier) },
+	{ "atlanteans_labyrinth", keysym(SDLK_8, kDefaultFastplaceModifier) },
+	{ "frisians_training_camp", keysym(SDLK_8, kDefaultFastplaceModifier) },
+	{ "amazons_warriors_gathering", keysym(SDLK_8, kDefaultFastplaceModifier) },
+
+	// "Larger" training site
+	{ "barbarians_trainingcamp", keysym(SDLK_9, kDefaultFastplaceModifier) },
+	{ "empire_trainingcamp", keysym(SDLK_9, kDefaultFastplaceModifier) },
+	{ "atlanteans_dungeon", keysym(SDLK_9, kDefaultFastplaceModifier) },
+	{ "amazons_training_glade", keysym(SDLK_9, kDefaultFastplaceModifier) },
+
+	// ****************************************
+	// Military Sites
+	// ****************************************
+
+	// Primary small military site
+	{ "barbarians_sentry", keysym(SDLK_4, kDefaultFastplaceModifier) },
+	{ "empire_sentry", keysym(SDLK_4, kDefaultFastplaceModifier) },
+	{ "atlanteans_guardhouse", keysym(SDLK_4, kDefaultFastplaceModifier) },
+	{ "frisians_sentinel", keysym(SDLK_4, kDefaultFastplaceModifier) },
+	{ "amazons_patrol_post", keysym(SDLK_4, kDefaultFastplaceModifier) },
+
+	// Secondary small military site
+	{ "empire_blockhouse", keysym(SDLK_4, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "atlanteans_tower_small", keysym(SDLK_4, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "frisians_wooden_tower", keysym(SDLK_4, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "amazons_treetop_sentry", keysym(SDLK_4, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// Primary medium military site
+	{ "barbarians_barrier", keysym(SDLK_5, kDefaultFastplaceModifier) },
+	{ "atlanteans_guardhall", keysym(SDLK_5, kDefaultFastplaceModifier) },
+	{ "empire_outpost", keysym(SDLK_5, kDefaultFastplaceModifier) },
+	{ "frisians_outpost", keysym(SDLK_5, kDefaultFastplaceModifier) },
+	{ "amazons_warriors_dwelling", keysym(SDLK_5, kDefaultFastplaceModifier) },
+
+	// Secondary medium military site
+	{ "empire_barrier", keysym(SDLK_5, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// Tower
+	{ "barbarians_tower", keysym(SDLK_6, kDefaultFastplaceModifier) },
+	{ "empire_tower", keysym(SDLK_6, kDefaultFastplaceModifier) },
+	{ "atlanteans_tower", keysym(SDLK_6, kDefaultFastplaceModifier) },
+	{ "frisians_tower", keysym(SDLK_6, kDefaultFastplaceModifier) },
+	{ "amazons_tower", keysym(SDLK_6, kDefaultFastplaceModifier) },
+
+	// Fortress
+	{ "barbarians_fortress", keysym(SDLK_7, kDefaultFastplaceModifier) },
+	{ "empire_fortress", keysym(SDLK_7, kDefaultFastplaceModifier) },
+	{ "atlanteans_castle", keysym(SDLK_7, kDefaultFastplaceModifier) },
+	{ "frisians_fortress", keysym(SDLK_7, kDefaultFastplaceModifier) },
+	{ "amazons_fortress", keysym(SDLK_7, kDefaultFastplaceModifier) },
+
+	// ****************************************
+	// Production Sites
+	// ****************************************
+
+	// Woodcutter
+	{ "barbarians_lumberjacks_hut", keysym(SDLK_d, kDefaultFastplaceModifier) },
+	{ "empire_lumberjacks_house", keysym(SDLK_d, kDefaultFastplaceModifier) },
+	{ "atlanteans_woodcutters_house", keysym(SDLK_d, kDefaultFastplaceModifier) },
+	{ "frisians_woodcutters_house", keysym(SDLK_d, kDefaultFastplaceModifier) },
+	{ "amazons_woodcutters_hut", keysym(SDLK_d, kDefaultFastplaceModifier) },
+
+	// Forester
+	{ "barbarians_rangers_hut", keysym(SDLK_f, kDefaultFastplaceModifier) },
+	{ "empire_foresters_house", keysym(SDLK_f, kDefaultFastplaceModifier) },
+	{ "atlanteans_foresters_house", keysym(SDLK_f, kDefaultFastplaceModifier) },
+	{ "frisians_foresters_house", keysym(SDLK_f, kDefaultFastplaceModifier) },
+	{ "amazons_jungle_preservers_hut", keysym(SDLK_f, kDefaultFastplaceModifier) },
+
+	// Quarry
+	{ "barbarians_quarry", keysym(SDLK_q, kDefaultFastplaceModifier) },
+	{ "empire_quarry", keysym(SDLK_q, kDefaultFastplaceModifier) },
+	{ "atlanteans_quarry", keysym(SDLK_q, kDefaultFastplaceModifier) },
+	{ "frisians_quarry", keysym(SDLK_q, kDefaultFastplaceModifier) },
+	{ "amazons_stonecutters_hut", keysym(SDLK_q, kDefaultFastplaceModifier) },
+
+	// Primary building materials industry
+	{ "barbarians_wood_hardener", keysym(SDLK_1, kDefaultFastplaceModifier) },
+	{ "empire_sawmill", keysym(SDLK_1, kDefaultFastplaceModifier) },
+	{ "atlanteans_sawmill", keysym(SDLK_1, kDefaultFastplaceModifier) },
+	{ "frisians_brick_kiln", keysym(SDLK_1, kDefaultFastplaceModifier) },
+	{ "amazons_rope_weaver_booth", keysym(SDLK_1, kDefaultFastplaceModifier) },
+
+	// Secondary building materials industry
+	{ "barbarians_lime_kiln", keysym(SDLK_2, kDefaultFastplaceModifier) },
+	{ "empire_stonemasons_house", keysym(SDLK_2, kDefaultFastplaceModifier) },
+	{ "atlanteans_weaving_mill", keysym(SDLK_2, kDefaultFastplaceModifier) },
+	{ "frisians_clay_pit", keysym(SDLK_2, kDefaultFastplaceModifier) },
+	{ "amazons_liana_cutters_hut", keysym(SDLK_2, kDefaultFastplaceModifier) },
+
+	// Tertiary building materials industry
+	{ "barbarians_reed_yard", keysym(SDLK_3, kDefaultFastplaceModifier) },
+	{ "atlanteans_spiderfarm", keysym(SDLK_3, kDefaultFastplaceModifier) },
+	{ "frisians_reed_farm", keysym(SDLK_3, kDefaultFastplaceModifier) },
+	{ "amazons_rare_tree_plantation", keysym(SDLK_3, kDefaultFastplaceModifier) },
+
+	// Fisher
+	{ "barbarians_fishers_hut", keysym(SDLK_m, kDefaultFastplaceModifier) },
+	{ "empire_fishers_house", keysym(SDLK_m, kDefaultFastplaceModifier) },
+	{ "atlanteans_fishers_house", keysym(SDLK_m, kDefaultFastplaceModifier) },
+	{ "frisians_fishers_house", keysym(SDLK_m, kDefaultFastplaceModifier) },
+	{ "amazons_hunter_gatherers_hut", keysym(SDLK_m, kDefaultFastplaceModifier) },
+
+	// Hunter
+	{ "barbarians_hunters_hut", keysym(SDLK_m, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "empire_hunters_house", keysym(SDLK_m, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "atlanteans_hunters_house", keysym(SDLK_m, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "frisians_hunters_house", keysym(SDLK_m, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// Fish/Meat replenishing site
+	{ "barbarians_gamekeepers_hut", keysym(SDLK_n, kDefaultFastplaceModifier) },
+	{ "empire_piggery", keysym(SDLK_n, kDefaultFastplaceModifier) },
+	{ "atlanteans_fishbreeders_house", keysym(SDLK_n, kDefaultFastplaceModifier) },
+	{ "frisians_aqua_farm", keysym(SDLK_n, kDefaultFastplaceModifier) },
+	{ "amazons_wilderness_keepers_tent", keysym(SDLK_n, kDefaultFastplaceModifier) },
+
+	// Well
+	{ "barbarians_well", keysym(SDLK_a, kDefaultFastplaceModifier) },
+	{ "empire_well", keysym(SDLK_a, kDefaultFastplaceModifier) },
+	{ "atlanteans_well", keysym(SDLK_a, kDefaultFastplaceModifier) },
+	{ "frisians_well", keysym(SDLK_a, kDefaultFastplaceModifier) },
+	{ "amazons_water_gatherers_hut", keysym(SDLK_a, kDefaultFastplaceModifier) },
+
+	// Primary Farm
+	{ "barbarians_farm", keysym(SDLK_b, kDefaultFastplaceModifier) },
+	{ "empire_farm", keysym(SDLK_b, kDefaultFastplaceModifier) },
+	{ "atlanteans_farm", keysym(SDLK_b, kDefaultFastplaceModifier) },
+	{ "frisians_farm", keysym(SDLK_b, kDefaultFastplaceModifier) },
+	{ "amazons_cassava_plantation", keysym(SDLK_b, kDefaultFastplaceModifier) },
+
+	// Secondary Farm
+	{ "atlanteans_blackroot_farm", keysym(SDLK_b, kDefaultFastplaceModifier | KMOD_SHIFT) },
+	{ "amazons_cocoa_farm", keysym(SDLK_b, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// Mill
+	{ "empire_mill", keysym(SDLK_g, kDefaultFastplaceModifier) },
+	{ "atlanteans_mill", keysym(SDLK_g, kDefaultFastplaceModifier) },
+	{ "frisians_recycling_center", keysym(SDLK_g, kDefaultFastplaceModifier) },
+	{ "amazons_gardening_center", keysym(SDLK_g, kDefaultFastplaceModifier) },
+
+	// Bakery
+	{ "barbarians_bakery", keysym(SDLK_h, kDefaultFastplaceModifier) },
+	{ "empire_bakery", keysym(SDLK_h, kDefaultFastplaceModifier) },
+	{ "atlanteans_bakery", keysym(SDLK_h, kDefaultFastplaceModifier) },
+	{ "frisians_bakery", keysym(SDLK_h, kDefaultFastplaceModifier) },
+	{ "amazons_cassava_root_cooker", keysym(SDLK_h, kDefaultFastplaceModifier) },
+
+	// Brewery
+	{ "barbarians_micro_brewery", keysym(SDLK_j, kDefaultFastplaceModifier) },
+	{ "empire_brewery", keysym(SDLK_j, kDefaultFastplaceModifier) },
+	{ "frisians_brewery", keysym(SDLK_j, kDefaultFastplaceModifier) },
+	{ "amazons_chocolate_brewery", keysym(SDLK_j, kDefaultFastplaceModifier) },
+
+	// Smokery
+	{ "atlanteans_smokery", keysym(SDLK_k, kDefaultFastplaceModifier) },
+	{ "frisians_smokery", keysym(SDLK_k, kDefaultFastplaceModifier) },
+
+	// Tavern
+	{ "barbarians_tavern", keysym(SDLK_l, kDefaultFastplaceModifier) },
+	{ "empire_tavern", keysym(SDLK_l, kDefaultFastplaceModifier) },
+	{ "frisians_tavern", keysym(SDLK_l, kDefaultFastplaceModifier) },
+	{ "amazons_food_preserver", keysym(SDLK_l, kDefaultFastplaceModifier) },
+
+	// Ore smelting
+	{ "barbarians_smelting_works", keysym(SDLK_r, kDefaultFastplaceModifier) },
+	{ "empire_smelting_works", keysym(SDLK_r, kDefaultFastplaceModifier) },
+	{ "atlanteans_smelting_works", keysym(SDLK_r, kDefaultFastplaceModifier) },
+	{ "frisians_furnace", keysym(SDLK_r, kDefaultFastplaceModifier) },
+	{ "amazons_furnace", keysym(SDLK_r, kDefaultFastplaceModifier) },
+
+	// Tools
+	{ "barbarians_metal_workshop", keysym(SDLK_t, kDefaultFastplaceModifier) },
+	{ "empire_toolsmithy", keysym(SDLK_t, kDefaultFastplaceModifier) },
+	{ "atlanteans_toolsmithy", keysym(SDLK_t, kDefaultFastplaceModifier) },
+	{ "frisians_blacksmithy", keysym(SDLK_t, kDefaultFastplaceModifier) },
+	{ "amazons_stone_workshop", keysym(SDLK_t, kDefaultFastplaceModifier) },
+
+	// Weapon smithy
+	{ "empire_weaponsmithy", keysym(SDLK_i, kDefaultFastplaceModifier) },
+	{ "atlanteans_weaponsmithy", keysym(SDLK_i, kDefaultFastplaceModifier) },
+	{ "frisians_armor_smithy_small", keysym(SDLK_i, kDefaultFastplaceModifier) },
+
+	// Armour smithy
+	{ "barbarians_helmsmithy", keysym(SDLK_u, kDefaultFastplaceModifier) },
+	{ "empire_armorsmithy", keysym(SDLK_u, kDefaultFastplaceModifier) },
+	{ "atlanteans_armorsmithy", keysym(SDLK_u, kDefaultFastplaceModifier) },
+	{ "frisians_sewing_room", keysym(SDLK_u, kDefaultFastplaceModifier) },
+	{ "amazons_dressmakery", keysym(SDLK_u, kDefaultFastplaceModifier) },
+
+	// Weaving mill
+	{ "barbarians_weaving_mill", keysym(SDLK_v, kDefaultFastplaceModifier) },
+	{ "empire_weaving_mill", keysym(SDLK_v, kDefaultFastplaceModifier) },
+	{ "atlanteans_gold_spinning_mill", keysym(SDLK_v, kDefaultFastplaceModifier) },
+	{ "frisians_weaving_mill", keysym(SDLK_v, kDefaultFastplaceModifier) },
+
+	// Shipyard
+	{ "barbarians_shipyard", keysym(SDLK_z, kDefaultFastplaceModifier) },
+	{ "empire_shipyard", keysym(SDLK_z, kDefaultFastplaceModifier) },
+	{ "atlanteans_shipyard", keysym(SDLK_z, kDefaultFastplaceModifier) },
+	{ "frisians_shipyard", keysym(SDLK_z, kDefaultFastplaceModifier) },
+	{ "amazons_shipyard", keysym(SDLK_z, kDefaultFastplaceModifier) },
+
+	// Ferry yard
+	{ "barbarians_ferry_yard", keysym(SDLK_y, kDefaultFastplaceModifier) },
+	{ "empire_ferry_yard", keysym(SDLK_y, kDefaultFastplaceModifier) },
+	{ "atlanteans_ferry_yard", keysym(SDLK_y, kDefaultFastplaceModifier) },
+	{ "frisians_ferry_yard", keysym(SDLK_y, kDefaultFastplaceModifier) },
+	{ "amazons_ferry_yard", keysym(SDLK_y, kDefaultFastplaceModifier) },
+
+	// Scout
+	{ "barbarians_scouts_hut", keysym(SDLK_o, kDefaultFastplaceModifier) },
+	{ "empire_scouts_house", keysym(SDLK_o, kDefaultFastplaceModifier) },
+	{ "atlanteans_scouts_house", keysym(SDLK_o, kDefaultFastplaceModifier) },
+	{ "frisians_scouts_house", keysym(SDLK_o, kDefaultFastplaceModifier) },
+	{ "amazons_scouts_hut", keysym(SDLK_o, kDefaultFastplaceModifier) },
+
+	// Barracks
+	{ "barbarians_barracks", keysym(SDLK_x, kDefaultFastplaceModifier) },
+	{ "empire_barracks", keysym(SDLK_x, kDefaultFastplaceModifier) },
+	{ "atlanteans_barracks", keysym(SDLK_x, kDefaultFastplaceModifier) },
+	{ "frisians_barracks", keysym(SDLK_x, kDefaultFastplaceModifier) },
+	{ "amazons_initiation_site", keysym(SDLK_x, kDefaultFastplaceModifier) },
+
+	// Second carrier
+	{ "barbarians_cattlefarm", keysym(SDLK_w, kDefaultFastplaceModifier) },
+	{ "empire_donkeyfarm", keysym(SDLK_w, kDefaultFastplaceModifier) },
+	{ "atlanteans_horsefarm", keysym(SDLK_w, kDefaultFastplaceModifier) },
+	{ "frisians_reindeer_farm", keysym(SDLK_w, kDefaultFastplaceModifier) },
+	{ "amazons_tapir_farm", keysym(SDLK_w, kDefaultFastplaceModifier) },
+
+	// Charcoal
+	{ "barbarians_charcoal_kiln", keysym(SDLK_c, kDefaultFastplaceModifier) },
+	{ "empire_charcoal_kiln", keysym(SDLK_c, kDefaultFastplaceModifier) },
+	{ "atlanteans_charcoal_kiln", keysym(SDLK_c, kDefaultFastplaceModifier) },
+	{ "amazons_charcoal_kiln", keysym(SDLK_c, kDefaultFastplaceModifier) },
+	{ "frisians_charcoal_kiln", keysym(SDLK_c, kDefaultFastplaceModifier) },
+	{ "frisians_charcoal_burners_house", keysym(SDLK_c, kDefaultFastplaceModifier | KMOD_SHIFT) },
+
+	// Miscellaneous sites
+	{ "empire_vineyard", keysym(SDLK_PERIOD, kDefaultFastplaceModifier) },
+	{ "frisians_berry_farm", keysym(SDLK_PERIOD, kDefaultFastplaceModifier) },
+
+	{ "empire_winery", keysym(SDLK_COMMA, kDefaultFastplaceModifier) },
+	{ "frisians_collectors_house", keysym(SDLK_COMMA, kDefaultFastplaceModifier) },
+
+	{ "empire_sheepfarm", keysym(SDLK_MINUS, kDefaultFastplaceModifier) },
+	{ "frisians_beekeepers_house", keysym(SDLK_MINUS, kDefaultFastplaceModifier) },
+
+	// ****************************************
+	// Mines
+	// ****************************************
+
+	// Stones
+	{ "barbarians_granitemine", keysym(SDLK_F5, kDefaultFastplaceModifier) },
+	{ "empire_marblemine", keysym(SDLK_F5, kDefaultFastplaceModifier) },
+	{ "atlanteans_crystalmine", keysym(SDLK_F5, kDefaultFastplaceModifier) },
+	{ "frisians_rockmine", keysym(SDLK_F5, kDefaultFastplaceModifier) },
+	{ "amazons_stonemine", keysym(SDLK_F5, kDefaultFastplaceModifier) },
+
+	// Coal
+	{ "barbarians_coalmine", keysym(SDLK_F6, kDefaultFastplaceModifier) },
+	{ "empire_coalmine", keysym(SDLK_F6, kDefaultFastplaceModifier) },
+	{ "atlanteans_coalmine", keysym(SDLK_F6, kDefaultFastplaceModifier) },
+	{ "frisians_coalmine", keysym(SDLK_F6, kDefaultFastplaceModifier) },
+
+	// Iron
+	{ "barbarians_ironmine", keysym(SDLK_F7, kDefaultFastplaceModifier) },
+	{ "empire_ironmine", keysym(SDLK_F7, kDefaultFastplaceModifier) },
+	{ "atlanteans_ironmine", keysym(SDLK_F7, kDefaultFastplaceModifier) },
+	{ "frisians_ironmine", keysym(SDLK_F7, kDefaultFastplaceModifier) },
+
+	// Gold
+	{ "barbarians_goldmine", keysym(SDLK_F8, kDefaultFastplaceModifier) },
+	{ "empire_goldmine", keysym(SDLK_F8, kDefaultFastplaceModifier) },
+	{ "atlanteans_goldmine", keysym(SDLK_F8, kDefaultFastplaceModifier) },
+	{ "frisians_goldmine", keysym(SDLK_F8, kDefaultFastplaceModifier) },
+	{ "amazons_gold_digger_dwelling", keysym(SDLK_F8, kDefaultFastplaceModifier) },
+
+};
+
 const std::string& get_fastplace_shortcut(const KeyboardShortcut id) {
 	return shortcuts_.at(id).fastplace_name;
 }
@@ -713,6 +1024,24 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 	return shortcuts_.at(id).current_shortcut;
 }
 
+void clear_fastplace_shortcuts() {
+	static const std::string none;
+	for (uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace__Begin); i < static_cast<uint16_t>(KeyboardShortcut::kFastplace__End); ++i) {
+		set_shortcut(static_cast<KeyboardShortcut>(i), keysym(SDLK_UNKNOWN), nullptr, &none, [](const std::string& s) { return s; });
+	}
+}
+
+void set_fastplace_shortcuts_proposed() {
+	clear_fastplace_shortcuts();
+
+	uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace__Begin);
+	for (const auto& pair : kFastplaceDefaults) {
+		assert(i <= static_cast<uint16_t>(KeyboardShortcut::kFastplace__End));
+		set_shortcut(static_cast<KeyboardShortcut>(i), pair.second, nullptr, &pair.first, [](const std::string& s) { return s; });
+		++i;
+	}
+}
+
 static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
    {SDLK_KP_9, SDLK_PAGEUP},         {SDLK_KP_8, SDLK_UP},          {SDLK_KP_7, SDLK_HOME},
    {SDLK_KP_6, SDLK_RIGHT},          {SDLK_KP_5, SDLK_UNKNOWN},     {SDLK_KP_4, SDLK_LEFT},
@@ -762,10 +1091,15 @@ bool matches_keymod(const uint16_t mod1, const uint16_t mod2) {
 }
 
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
-	return matches_shortcut(id, code.sym, code.mod);
+	return matches_shortcut(get_shortcut(id), code.sym, code.mod);
 }
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const int mod) {
-	const SDL_Keysym key = get_shortcut(id);
+	return matches_shortcut(get_shortcut(id), code, mod);
+}
+bool matches_shortcut(const SDL_Keysym k1, const SDL_Keysym k2) {
+	return matches_shortcut(k1, k2.sym, k2.mod);
+}
+bool matches_shortcut(const SDL_Keysym key, const SDL_Keycode code, const int mod) {
 	if (key.sym == SDLK_UNKNOWN || code == SDLK_UNKNOWN) {
 		return false;
 	}
@@ -1007,6 +1341,36 @@ void init_shortcuts(const bool force_defaults) {
 				         a.second.internal_name.c_str(), b.second.internal_name.c_str(),
 				         shortcut_string_for(a.first, false).c_str(),
 				         shortcut_string_for(b.first, false).c_str());
+			}
+		}
+
+		if (a.second.scopes.count(KeyboardShortcutInfo::Scope::kGlobal) || a.second.scopes.count(KeyboardShortcutInfo::Scope::kGame)) {
+			for (const auto& d : kFastplaceDefaults) {
+				if (matches_shortcut(a.first, d.second)) {
+					log_warn("The default shortcuts for %s and fastplace %s (%s, %s) collide",
+						     a.second.internal_name.c_str(), d.first.c_str(),
+						     shortcut_string_for(a.first, false).c_str(),
+						     shortcut_string_for(d.second, false).c_str());
+				}
+			}
+		}
+	}
+
+	for (const auto& a : kFastplaceDefaults) {
+		for (const auto& b : kFastplaceDefaults) {
+			if (a.first == b.first) {
+				continue;
+			}
+			const size_t pa = a.first.find('_');
+			const size_t pb = a.first.find('_');
+			if (pa != pb || pa == std::string::npos || pb == std::string::npos || a.first.compare(0, pa, b.first, 0, pb) != 0) {
+				continue;  // Different tribes
+			}
+			if (matches_shortcut(a.second, b.second)) {
+					log_warn("The default fastplace shortcuts for %s and %s (%s, %s) collide",
+						     a.first.c_str(), b.first.c_str(),
+						     shortcut_string_for(a.second, false).c_str(),
+						     shortcut_string_for(b.second, false).c_str());
 			}
 		}
 	}

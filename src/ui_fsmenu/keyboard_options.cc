@@ -242,8 +242,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			const bool fastplace = is_fastplace(key);
 			auto get_building_descr = [this](const std::string& bld) {
 				return game_.get() == nullptr ? nullptr :
-                                            game_->descriptions().get_building_descr(
-				                                   game_->descriptions().building_index(bld));
+				                            game_->descriptions().get_building_descr(
+						                           game_->descriptions().building_index(bld));
 			};
 
 			WLApplication* const app = WLApplication::get();
@@ -301,12 +301,14 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto create_tab = [this, add_key](const std::string& title,
 	                                  const KeyboardShortcut shortcut_start,
-	                                  const KeyboardShortcut shortcut_end) {
+	                                  const KeyboardShortcut shortcut_end,
+	                                  UI::Box* b) {
 		const uint16_t s1 = static_cast<uint16_t>(shortcut_start);
 		const uint16_t s2 = static_cast<uint16_t>(shortcut_end);
 		assert(s1 < s2);
-		UI::Box* b =
-		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		if (b == nullptr) {
+			b = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		}
 		b->set_force_scrolling(true);
 		for (uint16_t k = s1; k <= s2; ++k) {
 			add_key(*b, static_cast<KeyboardShortcut>(k));
@@ -314,14 +316,40 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		tabs_.add(title, title, b, "");
 		boxes_.push_back(b);
 	};
-	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
-	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
-	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
-	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End, nullptr);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End, nullptr);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End, nullptr);
+	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End, nullptr);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
-	create_tab(
-	   _("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
+	{
+		UI::Box* capsule = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		UI::Box* box = new UI::Box(capsule, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+		box->add_inf_space();
+
+		UI::Button* b1 = new UI::Button(box, "fp_clear", 0, 0, kButtonHeight, kButtonHeight,
+		                               UI::ButtonStyle::kFsMenuSecondary, _("Clear"), _("Remove all Fastplace shortcuts"));
+		box->add(b1, UI::Box::Resizing::kExpandBoth);
+		box->add_inf_space();
+
+		UI::Button* b2 = new UI::Button(box, "fp_proposed", 0, 0, kButtonHeight, kButtonHeight,
+		                               UI::ButtonStyle::kFsMenuSecondary, _("Defaults"), _("Reset all Fastplace shortcuts to their proposed default values"));
+		box->add(b2, UI::Box::Resizing::kExpandBoth);
+		box->add_inf_space();
+
+		capsule->add(box, UI::Box::Resizing::kFullSize);
+		capsule->add_space(kPadding);
+		create_tab(_("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End, capsule);
+
+		b1->sigclicked.connect([all_keyboard_buttons, generate_title]() { clear_fastplace_shortcuts();
+		for (auto& pair : all_keyboard_buttons) {
+			pair.second->set_title(generate_title(pair.first));
+		} });
+		b2->sigclicked.connect([all_keyboard_buttons, generate_title]() { set_fastplace_shortcuts_proposed();
+		for (auto& pair : all_keyboard_buttons) {
+			pair.second->set_title(generate_title(pair.first));
+		} });
+	}
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

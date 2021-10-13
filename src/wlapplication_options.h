@@ -216,7 +216,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGame__End = kInGameQuicknavGoto9,
 
 	kFastplace__Begin = kInGame__End + 1,
-	kFastplace__End = kFastplace__Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
+	kFastplace__End = kFastplace__Begin + 199,  // Arbitrary limit of 200 fastplace shortcuts.
 
 	k__End = kFastplace__End
 };
@@ -224,6 +224,11 @@ enum class KeyboardShortcut : uint16_t {
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
 	return id >= KeyboardShortcut::kFastplace__Begin && id <= KeyboardShortcut::kFastplace__End;
+}
+
+/** Generate a Keysym for the given keycode and modifiers. */
+inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
+	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
 }
 
 /**
@@ -267,6 +272,8 @@ bool matches_keymod(uint16_t, uint16_t);
 /** Check if the given keysym should trigger the given shortcut. */
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
+bool matches_shortcut(SDL_Keysym, SDL_Keysym);
+bool matches_shortcut(SDL_Keysym, SDL_Keycode, int modifiers);
 
 /** Look up the fastplace building(s) assigned to a given shortcut. May return \c "" / \c {}. */
 const std::string& get_fastplace_shortcut(KeyboardShortcut);
@@ -274,6 +281,12 @@ std::set<std::string> matching_fastplace_shortcut(SDL_Keysym);
 
 /** Read all shortcuts from the config file, or replace all mappings with the default values. */
 void init_shortcuts(bool force_defaults = false);
+
+/** Remove all fastplace keybindings. */
+void clear_fastplace_shortcuts();
+
+/** Set all fastplace keybindings to the proposed default profile. */
+void set_fastplace_shortcuts_proposed();
 
 /** The human-readable name of a shortcut identifier. */
 std::string to_string(KeyboardShortcut);
