@@ -318,12 +318,6 @@ if(NOT MSVC)
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 endif()
 
-if (APPLE)
-  if (${DARWIN_MAJOR_VERSION} GREATER 11)
-    SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
-  endif()
-endif()
-
 # Cross-compile-unit optimization slows linking significantly.
 # Therefore, impatient user may want to prevent that.
 if(USE_FLTO_IF_AVAILABLE STREQUAL "yes")
