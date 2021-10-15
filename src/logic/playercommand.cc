@@ -19,6 +19,8 @@
 
 #include "logic/playercommand.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -2139,11 +2141,21 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 // CmdDiplomacy
 void CmdDiplomacy::execute(Game& game) {
-	switch (action_) {
-	case DiplomacyAction::kLeaveTeam:
-		game.get_safe_player(sender())->set_team_number(0);
-		break;
+	Player& sending_player = *game.get_safe_player(sender());
+	auto broadcast_message = [&game, &sending_player](const std::string& heading, const std::string& text) {
+		iterate_players_existing(p, game.map().get_nrplayers(), game, player) {
+			player->add_message(game, std::unique_ptr<Message>(new Message(
+				Message::Type::kScenario,
+				game.get_gametime(),
+				_("Diplomacy"),
+				"images/players/team.png",
+				heading,
+				text
+			)));
+		}
+	};
 
+	switch (action_) {
 	case DiplomacyAction::kResign:
 		for (const auto& status : game.player_manager()->get_players_end_status()) {
 			if (status.player == sender()) {
@@ -2151,11 +2163,30 @@ void CmdDiplomacy::execute(Game& game) {
 				return;
 			}
 		}
+		broadcast_message(_("Player Resigned"), (boost::format(_("%s has resigned and is now a spectator.")) % sending_player.get_name()).str());
 		game.game_controller()->report_result(sender(), PlayerEndResult::kResigned, "");
+		sending_player.set_see_all(true);  // NOCOM make the player a real spectator
+		break;
+
+	case DiplomacyAction::kLeaveTeam:
+		if (sending_player.team_number() == 0) {
+			break;
+		}
+		broadcast_message(_("Player Leaves Team"),
+					(boost::format(_("%1$s has left team %2$u and is now teamless."))
+					% sending_player.get_name() % static_cast<unsigned>(sending_player.team_number())).str());
+		sending_player.set_team_number(0);
 		break;
 
 	case DiplomacyAction::kJoin:
 	case DiplomacyAction::kInvite:
+		broadcast_message(action_ == DiplomacyAction::kJoin ? _("Team Joining Request") : _("Team Joining Invitation"),
+					(boost::format(
+						action_ == DiplomacyAction::kJoin ?
+							_("%1$s has requested to join the team of %2$s.") :
+							_("%1$s has invited %2$s to join their team.")
+					) % sending_player.get_name() % game.get_safe_player(other_player_)->get_name()).str()
+				);
 		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
 		// If other_player_ is the interactive player, the IBase
 		// will open a confirmation window on next think()
@@ -2174,7 +2205,20 @@ void CmdDiplomacy::execute(Game& game) {
 			// Note that in the response the numbers of the two players
 			// are swapped compared to the original message.
 			if (it->action == original_action && it->sender == other_player_ && it->other == sender()) {
-				if (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite) {
+				const bool accept = action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
+				broadcast_message(accept ? _("Team Change Accepted") : _("Team Change Rejected"),
+							(boost::format(
+								accept ?
+									original_action == DiplomacyAction::kJoin ?
+										_("%1$s has accepted %2$s into their team.") :
+										_("%1$s has accepted the invitation to join the team of %2$s.") :
+									original_action == DiplomacyAction::kJoin ?
+										_("%1$s has denied %2$s membership in their team.") :
+										_("%1$s has rejected the invitation to join the team of %2$s.")
+							) % sending_player.get_name() % game.get_safe_player(other_player_)->get_name()).str()
+						);
+
+				if (accept) {
 					Player* joiner = game.get_safe_player(original_action == DiplomacyAction::kJoin ? other_player_ : sender());
 					Player* other = game.get_safe_player(original_action != DiplomacyAction::kJoin ? other_player_ : sender());
 					if (other->team_number() == 0) {
