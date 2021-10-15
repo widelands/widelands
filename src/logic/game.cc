@@ -860,6 +860,8 @@ void Game::cleanup_for_load() {
 
 	cmdqueue().flush();
 
+	pending_diplomacy_actions_.clear();
+
 	// Statistics
 	general_stats_.clear();
 }

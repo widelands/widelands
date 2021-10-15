@@ -365,6 +365,22 @@ public:
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
 
+	struct PendingDiplomacyAction {
+		const PlayerNumber sender;     ///< The player who initiated the action.
+		const DiplomacyAction action;  ///< The action to perform.
+		const PlayerNumber other;      ///< The other player affected, if any.
+
+		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
+		: sender(p1), action(a), other(p2) {
+		}
+	};
+	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {
+		return pending_diplomacy_actions_;
+	}
+	std::list<PendingDiplomacyAction>& pending_diplomacy_actions() {
+		return pending_diplomacy_actions_;
+	}
+
 private:
 	void sync_reset();
 
@@ -449,6 +465,8 @@ private:
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
+
+	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

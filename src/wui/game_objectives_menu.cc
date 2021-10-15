@@ -65,7 +65,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players = iplayer_.player().see_all() || iplayer_.omnipotent();
-	iterate_players_existing_const(p, iplayer_.egbase().player_manager()->get_number_of_players(), iplayer_.egbase(), player) {
+	iterate_players_existing_const(p, iplayer_.egbase().map().get_nrplayers(), iplayer_.egbase(), player) {
 		if (p != iplayer_.player_number() && !show_all_players && player->is_hidden_from_general_statistics()) {
 			continue;
 		}

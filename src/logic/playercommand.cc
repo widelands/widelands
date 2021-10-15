@@ -2139,10 +2139,9 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 // CmdDiplomacy
 void CmdDiplomacy::execute(Game& game) {
-	Player& player = *game.get_safe_player(sender());
 	switch (action_) {
 	case DiplomacyAction::kLeaveTeam:
-		player.set_team_number(0);
+		game.get_safe_player(sender())->set_team_number(0);
 		break;
 
 	case DiplomacyAction::kResign:
@@ -2156,28 +2155,52 @@ void CmdDiplomacy::execute(Game& game) {
 		break;
 
 	case DiplomacyAction::kJoin:
-		// NOCOM
+	case DiplomacyAction::kInvite:
+		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
+		// NOCOM: If other_player_ is the interactive player, pop up a UI to choose
 		break;
 
 	case DiplomacyAction::kAcceptJoin:
-		// NOCOM
-		break;
-
 	case DiplomacyAction::kRefuseJoin:
-		// NOCOM
-		break;
-
-	case DiplomacyAction::kInvite:
-		// NOCOM
-		break;
-
 	case DiplomacyAction::kAcceptInvite:
-		// NOCOM
-		break;
-
 	case DiplomacyAction::kRefuseInvite:
-		// NOCOM
-		break;
+	{
+		assert(other_player_ != sender());
+		const DiplomacyAction original_action =
+				(action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kRefuseJoin)
+				? DiplomacyAction::kJoin : DiplomacyAction::kInvite;
+		for (auto it = game.pending_diplomacy_actions().begin(); it != game.pending_diplomacy_actions().end(); ++it) {
+			// Note that in the response the numbers of the two players
+			// are swapped compared to the original message.
+			if (it->action == original_action && it->sender == other_player_ && it->other == sender()) {
+				if (action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite) {
+					Player* joiner = game.get_safe_player(original_action == DiplomacyAction::kJoin ? other_player_ : sender());
+					Player* other = game.get_safe_player(original_action != DiplomacyAction::kJoin ? other_player_ : sender());
+					if (other->team_number() == 0) {
+						// Assign both players to a previously unused team slot
+						std::set<TeamNumber> teams;
+						iterate_players_existing_const(p, game.map().get_nrplayers(), game, player) {
+							teams.insert(player->team_number());
+						}
+						for (TeamNumber t = 1;; ++t) {
+							if (teams.count(t)) {
+								continue;
+							}
+							other->set_team_number(t);
+							joiner->set_team_number(t);
+							break;
+						}
+					} else {
+						joiner->set_team_number(other->team_number());
+					}
+				}
+
+				game.pending_diplomacy_actions().erase(it);
+				return;
+			}
+		}
+		NEVER_HERE();
+	}
 	}
 }
 
