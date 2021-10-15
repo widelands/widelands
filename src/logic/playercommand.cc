@@ -2165,7 +2165,8 @@ void CmdDiplomacy::execute(Game& game) {
 		}
 		broadcast_message(_("Player Resigned"), (boost::format(_("%s has resigned and is now a spectator.")) % sending_player.get_name()).str());
 		game.game_controller()->report_result(sender(), PlayerEndResult::kResigned, "");
-		sending_player.set_see_all(true);  // NOCOM make the player a real spectator
+		// TODO(Nordfriese): Making the player a spectator is currently left to the win condition.
+		// In Endless Game and scenarios this makes it effectively impossible to resign currently.
 		break;
 
 	case DiplomacyAction::kLeaveTeam:
