@@ -20,8 +20,13 @@
 #ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
 #define WL_WUI_GAME_OBJECTIVES_MENU_H
 
+#include "logic/widelands.h"
+#include "ui_basic/box.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
@@ -33,7 +38,7 @@ class InteractivePlayer;
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
+	GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
 	void think() override;
 
 	UI::Panel::SaveType save_type() const override {
@@ -43,12 +48,20 @@ public:
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& iplayer() const;
+	InteractivePlayer& iplayer_;
 	void selected(uint32_t);
+	void update_diplomacy_details();
+
+	UI::TabPanel tabs_;
+	UI::Box objective_box_, diplomacy_box_;
 
 	using ListType = UI::Listselect<const Widelands::Objective&>;
-	ListType list;
-	UI::MultilineTextarea objectivetext;
+	ListType objective_list_;
+	UI::MultilineTextarea objective_text_;
+
+	std::map<Widelands::PlayerNumber, UI::Icon*> diplomacy_teams_;
+	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
+	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H
