@@ -31,6 +31,78 @@ constexpr int16_t kSpacing = 4;
 constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
 
+DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent, const Widelands::Game::PendingDiplomacyAction& a)
+: UI::Window(&parent, UI::WindowStyle::kWui, "diplomacy_confirm", 0, 0, 300, 200, _("Diplomacy")),
+iplayer_(parent),
+action_(&a) {
+	// The layout here is designed to mimic the ActionConfirm dialog.
+	UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+
+	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	                                   g_image_cache->get("images/wui/menu_okay.png"), _("Accept"));
+	UI::Button* cancelbtn =
+	   new UI::Button(button_box, "reject", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	                  g_image_cache->get("images/wui/menu_abort.png"), _("Reject"));
+
+	okbtn->sigclicked.connect([this]() { ok(); });
+	cancelbtn->sigclicked.connect([this]() { die(); });
+
+	button_box->add(
+	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
+	button_box->add_space(2 * kSpacing);
+	button_box->add(
+	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
+	box->add_inf_space();
+	box->add(new UI::MultilineTextarea(box, 0, 0, 100, 50, UI::PanelStyle::kWui,
+			(boost::format(
+				action_->action == Widelands::DiplomacyAction::kInvite ?
+					_("%s has invited you to join their team.")
+				: _("%s wants to join your team.")
+			) % iplayer_.egbase().get_safe_player(a.sender)->get_name()
+		).str(), UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling), UI::Box::Resizing::kExpandBoth);
+	box->add_space(kSpacing);
+	box->add(button_box, UI::Box::Resizing::kFullSize);
+
+	set_center_panel(box);
+	center_to_parent();
+	initialization_complete();
+}
+
+bool DiplomacyConfirmWindow::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_RETURN:
+			ok();
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
+
+void DiplomacyConfirmWindow::ok() {
+	iplayer_.game().send_player_diplomacy(action_->other,
+		action_->action == Widelands::DiplomacyAction::kInvite ?
+			Widelands::DiplomacyAction::kAcceptInvite : Widelands::DiplomacyAction::kAcceptJoin,
+		action_->sender);
+
+	action_ = nullptr;
+	die();
+}
+
+void DiplomacyConfirmWindow::die() {
+	if (action_ != nullptr) {
+		iplayer_.game().send_player_diplomacy(action_->other,
+			action_->action == Widelands::DiplomacyAction::kInvite ?
+				Widelands::DiplomacyAction::kRefuseInvite : Widelands::DiplomacyAction::kRefuseJoin,
+			action_->sender);
+	}
+
+	UI::Window::die();
+}
+
 GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
@@ -146,12 +218,12 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 	tabs_.add("diplomacy", _("Diplomacy"), &diplomacy_box_);
 
 	objective_list_.selected.connect([this](uint32_t a) { selected(a); });
+
+	update_diplomacy_details();
+	set_center_panel(&tabs_);
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
-
-	set_center_panel(&tabs_);
-	update_diplomacy_details();
 	initialization_complete();
 }
 

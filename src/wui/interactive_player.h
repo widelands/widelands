@@ -118,6 +118,8 @@ private:
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
 
+	std::set<const Widelands::Game::PendingDiplomacyAction*> handled_diplomacy_actions_;
+
 public:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;

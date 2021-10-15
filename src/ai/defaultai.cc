@@ -267,6 +267,16 @@ void DefaultAI::think() {
 		}
 		return;
 	}
+	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
+		if (pda.other == player_number()) {
+			// TODO(Nordfriese): The AI just accepts everything now.
+			// In the future, make a strategic decision here.
+			game().send_player_diplomacy(pda.other,
+				pda.action == Widelands::DiplomacyAction::kInvite ?
+					Widelands::DiplomacyAction::kAcceptInvite : Widelands::DiplomacyAction::kAcceptJoin,
+				pda.sender);
+		}
+	}
 
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 

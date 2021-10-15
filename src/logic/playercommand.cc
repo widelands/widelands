@@ -2157,7 +2157,8 @@ void CmdDiplomacy::execute(Game& game) {
 	case DiplomacyAction::kJoin:
 	case DiplomacyAction::kInvite:
 		game.pending_diplomacy_actions().emplace_back(sender(), action_, other_player_);
-		// NOCOM: If other_player_ is the interactive player, pop up a UI to choose
+		// If other_player_ is the interactive player, the IBase
+		// will open a confirmation window on next think()
 		break;
 
 	case DiplomacyAction::kAcceptJoin:
@@ -2196,10 +2197,11 @@ void CmdDiplomacy::execute(Game& game) {
 				}
 
 				game.pending_diplomacy_actions().erase(it);
-				return;
+				break;
 			}
 		}
-		NEVER_HERE();
+		// If we found nothing, perhaps the command had been sent twice. Ignore.
+		break;
 	}
 	}
 }

@@ -20,7 +20,7 @@
 #ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
 #define WL_WUI_GAME_OBJECTIVES_MENU_H
 
-#include "logic/widelands.h"
+#include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
@@ -33,7 +33,6 @@ namespace Widelands {
 class Objective;
 }
 class InteractiveBase;
-class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
@@ -63,6 +62,26 @@ private:
 	std::map<Widelands::PlayerNumber, UI::Icon*> diplomacy_teams_;
 	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
 	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;
+};
+
+/**
+ * A window that allows a player to decide whether to accept or refuse another player's
+ * invitation to join their team or request to join your team.
+ *
+ * This window is not saveloaded; it will be recreated automatically by the InteractivePlayer.
+ */
+class DiplomacyConfirmWindow : public UI::Window {
+public:
+	DiplomacyConfirmWindow(InteractivePlayer& parent, const Widelands::Game::PendingDiplomacyAction&);
+
+	void die() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+private:
+	void ok();
+
+	InteractivePlayer& iplayer_;
+	const Widelands::Game::PendingDiplomacyAction* action_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H
