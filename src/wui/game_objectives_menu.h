@@ -40,6 +40,7 @@ class GameObjectivesMenu : public UI::UniqueWindow {
 public:
 	GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
 	void think() override;
+	void draw(RenderTarget&) override;
 
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kObjectives;

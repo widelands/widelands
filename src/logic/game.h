@@ -303,6 +303,7 @@ public:
 	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
+	void send_player_diplomacy(PlayerNumber, DiplomacyAction, PlayerNumber);
 
 	InteractivePlayer* get_ipl();
 

@@ -1134,6 +1134,10 @@ void Game::send_player_expedition_config(PortDock& pd,
 	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
 }
 
+void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2) {
+	send_player_command(new CmdDiplomacy(get_gametime(), p1, a, p2));
+}
+
 void Game::send_player_propose_trade(const Trade& trade) {
 	auto* object = objects().get_object(trade.initiator);
 	assert(object != nullptr);

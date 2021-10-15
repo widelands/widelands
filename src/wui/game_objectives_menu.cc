@@ -30,7 +30,6 @@
 constexpr int16_t kSpacing = 4;
 constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
-constexpr int16_t kStatusWidth = 300;
 
 GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
@@ -81,7 +80,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
 		icon_flag->set_tooltip((boost::format(_("Player %u")) % static_cast<unsigned>(p)).str());
-		txt_status->set_fixed_width(kStatusWidth);
+		txt_status->set_fixed_width(230);
 
 		UI::Button* b1 = nullptr;
 		UI::Button* b2 = nullptr;
@@ -92,21 +91,21 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 			b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
 					_("Resign"), _("Give up and become a spectator"));
 			b1->sigclicked.connect([this]() {
-				// NOCOM leave
+				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
 			});
 			b2->sigclicked.connect([this]() {
-				// NOCOM resign
+				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
 			});
 		} else {
 			b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
 					_("Join"), _("Request to join this player’s team"));
 			b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
 					_("Invite"), _("Invite this player to join your team"));
-			b1->sigclicked.connect([this]() {
-				// NOCOM join
+			b1->sigclicked.connect([this, p]() {
+				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kJoin, p);
 			});
-			b2->sigclicked.connect([this]() {
-				// NOCOM invite
+			b2->sigclicked.connect([this, p]() {
+				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kInvite, p);
 			});
 		}
 
@@ -156,6 +155,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 	initialization_complete();
 }
 
+/** Recompute the data in the Diplomacy tab and update which buttons are enabled. */
 void GameObjectivesMenu::update_diplomacy_details() {
 	for (auto& pair : diplomacy_teams_) {
 		const unsigned t = iplayer_.egbase().player(pair.first).team_number();
@@ -189,8 +189,9 @@ void GameObjectivesMenu::update_diplomacy_details() {
 	}
 
 	const unsigned own_team = iplayer_.egbase().player(iplayer_.player_number()).team_number();
+	const bool has_result = players_with_result.count(iplayer_.player_number());
 	for (auto& pair : diplomacy_buttons_) {
-		if (players_with_result.count(pair.first)) {
+		if (has_result || players_with_result.count(pair.first)) {
 			// Ignore players who are no longer playing
 			pair.second.first->set_enabled(false);
 			pair.second.second->set_enabled(false);
@@ -244,6 +245,23 @@ void GameObjectivesMenu::think() {
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objective_text_.set_text(t == ListType::no_selection_index() ? "" : objective_list_[t].descr());
+}
+
+void GameObjectivesMenu::draw(RenderTarget& rt) {
+	UI::UniqueWindow::draw(rt);
+
+	if (tabs_.active() == 1) {
+		const auto it = diplomacy_buttons_.find(iplayer_.player_number());
+		if (it != diplomacy_buttons_.end()) {
+			UI::Panel* panel = it->second.first;
+			const int h = panel->get_h();
+			int y = 0;
+			for (; panel != this; panel = panel->get_parent()) {
+				y += panel->get_y();
+			}
+			rt.brighten_rect(Recti(0, y - kSpacing / 2, get_inner_w(), h + kSpacing), 32);
+		}
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersion = 2;

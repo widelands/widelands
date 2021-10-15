@@ -29,10 +29,12 @@
 #include "io/filewrite.h"
 #include "io/streamwrite.h"
 #include "logic/game.h"
+#include "logic/game_controller.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
@@ -158,6 +160,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdPickCustomStartingPosition(des);
 	case QueueCommandTypes::kMarkMapObjectForRemoval:
 		return new CmdMarkMapObjectForRemoval(des);
+	case QueueCommandTypes::kDiplomacy:
+		return new CmdDiplomacy(des);
 
 	default:
 		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
@@ -2131,6 +2135,87 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(object_)));
 	fw.unsigned_8(mark_);
+}
+
+// CmdDiplomacy
+void CmdDiplomacy::execute(Game& game) {
+	Player& player = *game.get_safe_player(sender());
+	switch (action_) {
+	case DiplomacyAction::kLeaveTeam:
+		player.set_team_number(0);
+		break;
+
+	case DiplomacyAction::kResign:
+		for (const auto& status : game.player_manager()->get_players_end_status()) {
+			if (status.player == sender()) {
+				// Ignore if the player lost a moment ago
+				return;
+			}
+		}
+		game.game_controller()->report_result(sender(), PlayerEndResult::kResigned, "");
+		break;
+
+	case DiplomacyAction::kJoin:
+		// NOCOM
+		break;
+
+	case DiplomacyAction::kAcceptJoin:
+		// NOCOM
+		break;
+
+	case DiplomacyAction::kRefuseJoin:
+		// NOCOM
+		break;
+
+	case DiplomacyAction::kInvite:
+		// NOCOM
+		break;
+
+	case DiplomacyAction::kAcceptInvite:
+		// NOCOM
+		break;
+
+	case DiplomacyAction::kRefuseInvite:
+		// NOCOM
+		break;
+	}
+}
+
+CmdDiplomacy::CmdDiplomacy(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
+	action_ = static_cast<DiplomacyAction>(des.unsigned_8());
+	other_player_ = des.unsigned_8();
+}
+
+void CmdDiplomacy::serialize(StreamWrite& ser) {
+	write_id_and_sender(ser);
+	ser.unsigned_8(static_cast<uint8_t>(action_));
+	ser.unsigned_8(other_player_);
+}
+
+constexpr uint8_t kCurrentPacketVersionCmdDiplomacy = 1;
+
+void CmdDiplomacy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersionCmdDiplomacy) {
+			PlayerCommand::read(fr, egbase, mol);
+			action_ = static_cast<DiplomacyAction>(fr.unsigned_8());
+			other_player_ = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError("CmdDiplomacy", packet_version,
+			                            kCurrentPacketVersionCmdDiplomacy);
+		}
+	} catch (const std::exception& e) {
+		throw GameDataError("Cmd_Diplomacy: %s", e.what());
+	}
+}
+
+void CmdDiplomacy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	fw.unsigned_8(kCurrentPacketVersionCmdDiplomacy);
+	PlayerCommand::write(fw, egbase, mos);
+	fw.unsigned_8(static_cast<uint8_t>(action_));
+	fw.unsigned_8(other_player_);
 }
 
 // CmdPickCustomStartingPosition
