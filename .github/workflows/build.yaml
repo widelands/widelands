@@ -250,7 +250,7 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macOS-latest
+    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
     steps:
     - name: Installing dependencies
       run: |
