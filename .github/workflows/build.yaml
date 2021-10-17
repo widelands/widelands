@@ -263,6 +263,7 @@ jobs:
         fetch-depth: 1
     - name: Building
       run: |
+        alias 'clang++'='clang -stdlib=libc++'
         mkdir build_wl
         cd build_wl/
         ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
