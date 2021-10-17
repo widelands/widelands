@@ -255,9 +255,8 @@ jobs:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
-        export PATH="$(brew --prefix llvm)/bin:/usr/local/opt/gettext/bin:$PATH";
-        echo "PATH=$PATH" >> $GITHUB_ENV
-        brew install boost glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
