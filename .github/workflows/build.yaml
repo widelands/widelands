@@ -265,7 +265,9 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
+        export C_COMPILER="$(brew --prefix llvm)/bin/clang"
+        export CXX_COMPILER="$(brew --prefix llvm)/bin/clang++"
+        ../utils/macos/build_app.sh ${{ matrix.config }} ../
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
