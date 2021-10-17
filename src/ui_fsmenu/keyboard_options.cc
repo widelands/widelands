@@ -320,8 +320,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	create_tab(_("Game"), KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_End);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
-	create_tab(
-	   _("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
+	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

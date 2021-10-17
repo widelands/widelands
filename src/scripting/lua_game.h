@@ -137,10 +137,10 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State*) override;
 	void __unpersist(lua_State*) override;
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -159,9 +159,9 @@ CLANG_DIAG_ON("-Wreserved-identifier")
 	 * Lua Methods
 	 */
 	int remove(lua_State* L);
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	int __eq(lua_State* L);
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * C Methods
@@ -185,10 +185,10 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State*) override;
 	void __unpersist(lua_State*) override;
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -205,9 +205,9 @@ CLANG_DIAG_ON("-Wreserved-identifier")
 	/*
 	 * Lua Methods
 	 */
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	int __eq(lua_State* L);
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * C Methods

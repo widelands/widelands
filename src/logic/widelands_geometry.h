@@ -67,8 +67,7 @@ struct Coords {
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
-template <typename CT = Coords, typename RT = uint16_t>
-struct Area : public CT {
+template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
 	using CoordsType = CT;
 	using RadiusType = RT;
 	Area() {

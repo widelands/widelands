@@ -57,7 +57,7 @@ public:
 	~LuaPanel() override {
 	}
 
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override {
 		report_error(L, "Trying to persist a User Interface Panel which is not supported!");
 	}
@@ -65,7 +65,7 @@ CLANG_DIAG_OFF("-Wreserved-identifier")
 		report_error(L, "Trying to unpersist a User Interface Panel which is "
 		                "not supported!");
 	}
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -239,11 +239,11 @@ public:
 	~LuaMapView() override {
 	}
 
-CLANG_DIAG_OFF("-Wreserved-identifier")
+	CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State*) override {
 	}
 	void __unpersist(lua_State* L) override;
-CLANG_DIAG_ON("-Wreserved-identifier")
+	CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
