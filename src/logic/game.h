@@ -381,6 +381,13 @@ public:
 		return pending_diplomacy_actions_;
 	}
 
+	bool diplomacy_allowed() const {
+		return diplomacy_allowed_;
+	}
+	void set_diplomacy_allowed(bool d) {
+		diplomacy_allowed_ = d;
+	}
+
 private:
 	void sync_reset();
 
@@ -467,6 +474,7 @@ private:
 	std::map<int, TradeAgreement> trade_agreements_;
 
 	std::list<PendingDiplomacyAction> pending_diplomacy_actions_;
+	bool diplomacy_allowed_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

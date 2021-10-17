@@ -48,6 +48,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 				}
 			}
 
+			game.diplomacy_allowed_ = (packet_version < 7 || fr.unsigned_8());
 			game.pending_diplomacy_actions_.clear();
 			if (packet_version >= 7) {
 				for (size_t i = fr.unsigned_32(); i; --i) {
@@ -91,6 +92,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 		fw.string(s);
 	}
 
+	fw.unsigned_8(game.diplomacy_allowed_ ? 1 : 0);
 	fw.unsigned_32(game.pending_diplomacy_actions_.size());
 	for (const auto& a : game.pending_diplomacy_actions_) {
 		fw.unsigned_8(a.sender);

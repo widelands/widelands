@@ -59,6 +59,7 @@ private:
 	ListType objective_list_;
 	UI::MultilineTextarea objective_text_;
 
+	UI::Box hbox_, vbox_flag_, vbox_name_, vbox_team_, vbox_status_, vbox_action_;
 	std::map<Widelands::PlayerNumber, UI::Icon*> diplomacy_teams_;
 	std::map<Widelands::PlayerNumber, UI::Textarea*> diplomacy_status_;
 	std::map<Widelands::PlayerNumber, std::pair<UI::Button*, UI::Button*>> diplomacy_buttons_;

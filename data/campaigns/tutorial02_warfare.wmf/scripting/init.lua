@@ -15,6 +15,7 @@ include "scripting/table.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
 sf = map.player_slots[1].starting_field
 
 include "map:scripting/starting_conditions.lua"

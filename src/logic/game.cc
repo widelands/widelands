@@ -150,6 +150,7 @@ Game::Game()
      state_(gs_notrunning),
      cmdqueue_(*this),
      scenario_difficulty_(kScenarioDifficultyNotSet),
+     diplomacy_allowed_(true),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -861,6 +862,7 @@ void Game::cleanup_for_load() {
 	cmdqueue().flush();
 
 	pending_diplomacy_actions_.clear();
+	diplomacy_allowed_ = true;
 
 	// Statistics
 	general_stats_.clear();

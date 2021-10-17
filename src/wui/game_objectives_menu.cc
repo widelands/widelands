@@ -123,17 +123,16 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
                    UI::PanelStyle::kWui,
                    "",
                    UI::Align::kLeft,
-                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
+                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
+	hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	vbox_flag_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	vbox_name_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
 
 	objective_box_.add(&objective_list_, UI::Box::Resizing::kExpandBoth);
 	objective_box_.add(&objective_text_, UI::Box::Resizing::kExpandBoth);
-
-	UI::Box* hbox = new UI::Box(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-	UI::Box* vbox_flag = new UI::Box(hbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* vbox_name = new UI::Box(hbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* vbox_team = new UI::Box(hbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* vbox_status = new UI::Box(hbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	UI::Box* vbox_action = new UI::Box(hbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players = iplayer_.player().see_all() || iplayer_.omnipotent();
@@ -142,12 +141,12 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 			continue;
 		}
 
-		UI::Icon* icon_flag = new UI::Icon(vbox_flag, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
+		UI::Icon* icon_flag = new UI::Icon(&vbox_flag_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
 				playercolor_image(player->get_playercolor(), "images/players/genstats_player.png"));
-		UI::Icon* icon_team = new UI::Icon(vbox_team, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
-		UI::Textarea* txt_name = new UI::Textarea(vbox_name, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, player->get_name(),
+		UI::Icon* icon_team = new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
+		UI::Textarea* txt_name = new UI::Textarea(&vbox_name_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, player->get_name(),
 				UI::mirror_alignment(UI::Align::kLeft, rtl));
-		UI::Textarea* txt_status = new UI::Textarea(vbox_status, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::mirror_alignment(UI::Align::kRight, rtl));
+		UI::Textarea* txt_status = new UI::Textarea(&vbox_status_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::mirror_alignment(UI::Align::kRight, rtl));
 
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
@@ -156,7 +155,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 
 		UI::Button* b1 = nullptr;
 		UI::Button* b2 = nullptr;
-		UI::Box* buttonsbox = new UI::Box(vbox_action, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		UI::Box* buttonsbox = new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 		if (p == iplayer_.player_number()) {
 			b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
 					_("Leave"), _("Leave your current team and become teamless"));
@@ -185,34 +184,34 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 		buttonsbox->add_space(kSpacing);
 		buttonsbox->add(b2, UI::Box::Resizing::kExpandBoth);
 
-		vbox_name->add_space(kSpacing);
-		vbox_status->add_space(kSpacing);
-		vbox_name->add(txt_name, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
-		vbox_status->add(txt_status, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
-		vbox_team->add(icon_team, UI::Box::Resizing::kExpandBoth);
-		vbox_flag->add(icon_flag, UI::Box::Resizing::kExpandBoth);
-		vbox_action->add(buttonsbox, UI::Box::Resizing::kExpandBoth);
+		vbox_name_.add_space(kSpacing);
+		vbox_status_.add_space(kSpacing);
+		vbox_name_.add(txt_name, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+		vbox_status_.add(txt_status, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
+		vbox_team_.add(icon_team, UI::Box::Resizing::kExpandBoth);
+		vbox_flag_.add(icon_flag, UI::Box::Resizing::kExpandBoth);
+		vbox_action_.add(buttonsbox, UI::Box::Resizing::kExpandBoth);
 
 		diplomacy_teams_[p] = icon_team;
 		diplomacy_status_[p] = txt_status;
 		diplomacy_buttons_[p] = {b1, b2};
 
-		for (UI::Box* b : { vbox_flag, vbox_name, vbox_team, vbox_status, vbox_action }) {
+		for (UI::Box* b : { &vbox_flag_, &vbox_name_, &vbox_team_, &vbox_status_, &vbox_action_ }) {
 			b->add_space(kSpacing);
 			b->add_inf_space();
 		}
 	}
 
-	hbox->add(rtl ? vbox_action : vbox_flag, UI::Box::Resizing::kExpandBoth);
-	hbox->add_space(kSpacing);
-	hbox->add(rtl ? vbox_team : vbox_name, UI::Box::Resizing::kExpandBoth);
-	hbox->add_space(kSpacing);
-	hbox->add(vbox_status, UI::Box::Resizing::kExpandBoth);
-	hbox->add_space(kSpacing);
-	hbox->add(rtl ? vbox_name : vbox_team, UI::Box::Resizing::kExpandBoth);
-	hbox->add_space(kSpacing);
-	hbox->add(rtl ? vbox_flag : vbox_action, UI::Box::Resizing::kExpandBoth);
-	diplomacy_box_.add(hbox, UI::Box::Resizing::kExpandBoth);
+	hbox_.add(rtl ? &vbox_action_ : &vbox_flag_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kSpacing);
+	hbox_.add(rtl ? &vbox_team_ : &vbox_name_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kSpacing);
+	hbox_.add(&vbox_status_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kSpacing);
+	hbox_.add(rtl ? &vbox_name_ : &vbox_team_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kSpacing);
+	hbox_.add(rtl ? &vbox_flag_ : &vbox_action_, UI::Box::Resizing::kExpandBoth);
+	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
 
 	tabs_.add("objectives", _("Objectives"), &objective_box_);
 	tabs_.add("diplomacy", _("Diplomacy"), &diplomacy_box_);
@@ -229,6 +228,12 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 
 /** Recompute the data in the Diplomacy tab and update which buttons are enabled. */
 void GameObjectivesMenu::update_diplomacy_details() {
+	if (!iplayer_.game().diplomacy_allowed()) {
+		vbox_action_.set_visible(false);
+		return;
+	}
+	vbox_action_.set_visible(true);
+
 	for (auto& pair : diplomacy_teams_) {
 		const unsigned t = iplayer_.egbase().player(pair.first).team_number();
 		pair.second->set_icon(playercolor_image(kTeamColors[t /* it's 1-based, 0 means No Team */],

@@ -2141,6 +2141,9 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 // CmdDiplomacy
 void CmdDiplomacy::execute(Game& game) {
+	if (!game.diplomacy_allowed()) {
+		return;
+	}
 	Player& sending_player = *game.get_safe_player(sender());
 	auto broadcast_message = [&game, &sending_player](const std::string& heading, const std::string& text) {
 		iterate_players_existing(p, game.map().get_nrplayers(), game, player) {
