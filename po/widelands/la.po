@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-10 02:42+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
+"POT-Creation-Date: 2021-10-13 02:46+0000\n"
+"PO-Revision-Date: 2021-10-13 02:48+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Latin (http://www.transifex.com/widelands/widelands/language/la/)\n"
 "MIME-Version: 1.0\n"
@@ -266,10 +266,10 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
-#: ../../src/ui_fsmenu/keyboard_options.cc:290
+#: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -281,12 +281,12 @@ msgstr "Index princeps"
 msgid "Tools"
 msgstr "Instrumenta"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -476,10 +476,10 @@ msgstr "Nuntiatio"
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -968,9 +968,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1389,8 +1389,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
@@ -3251,7 +3251,8 @@ msgid "Version:"
 msgstr ""
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:74 ../../src/wui/interactive_gamebase.cc:532
+#: ../../src/ui_fsmenu/about.cc:74 ../../src/ui_fsmenu/keyboard_options.cc:269
+#: ../../src/wui/interactive_gamebase.cc:532
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr ""
@@ -4854,7 +4855,7 @@ msgid "Version"
 msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:292
+#: ../../src/ui_fsmenu/keyboard_options.cc:320
 msgid "Game"
 msgstr ""
 
@@ -4933,11 +4934,17 @@ msgstr ""
 msgid "[%1$s] %2$s: %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:257
+#. * TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name)
+#: ../../src/ui_fsmenu/keyboard_options.cc:274
+#, c-format
+msgid "%1$s ([%2$s] %3$s)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/keyboard_options.cc:285
 msgid "Keyboard Shortcut Conflict"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:260
+#: ../../src/ui_fsmenu/keyboard_options.cc:288
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4946,21 +4953,21 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:289
+#: ../../src/ui_fsmenu/keyboard_options.cc:317
 #: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:291
+#: ../../src/ui_fsmenu/keyboard_options.cc:319
 #: ../../src/wlapplication_options.cc:200
 msgid "Editor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:296
+#: ../../src/ui_fsmenu/keyboard_options.cc:324
 msgid "Fastplace"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:298
+#: ../../src/ui_fsmenu/keyboard_options.cc:326
 msgid "Mouse Scrolling"
 msgstr ""
 
@@ -6477,212 +6484,212 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:828
+#: ../../src/wlapplication_options.cc:848
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:831
+#: ../../src/wlapplication_options.cc:851
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:835
+#: ../../src/wlapplication_options.cc:855
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:837
+#: ../../src/wlapplication_options.cc:857
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:841
+#: ../../src/wlapplication_options.cc:861
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:850
+#: ../../src/wlapplication_options.cc:870
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:863
+#: ../../src/wlapplication_options.cc:883
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:865
+#: ../../src/wlapplication_options.cc:885
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:867
+#: ../../src/wlapplication_options.cc:887
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:869
+#: ../../src/wlapplication_options.cc:889
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:871
+#: ../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:873
+#: ../../src/wlapplication_options.cc:893
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:875
+#: ../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:877
+#: ../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:879
+#: ../../src/wlapplication_options.cc:899
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:881
+#: ../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:883
+#: ../../src/wlapplication_options.cc:903
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:885
+#: ../../src/wlapplication_options.cc:905
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:887
+#: ../../src/wlapplication_options.cc:907
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:889
+#: ../../src/wlapplication_options.cc:909
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:911
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:893
+#: ../../src/wlapplication_options.cc:913
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:895
+#: ../../src/wlapplication_options.cc:915
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:897
+#: ../../src/wlapplication_options.cc:917
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:899
+#: ../../src/wlapplication_options.cc:919
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:921
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:903
+#: ../../src/wlapplication_options.cc:923
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:905
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:907
+#: ../../src/wlapplication_options.cc:927
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:909
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:911
+#: ../../src/wlapplication_options.cc:931
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:913
+#: ../../src/wlapplication_options.cc:933
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:915
+#: ../../src/wlapplication_options.cc:935
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:917
+#: ../../src/wlapplication_options.cc:937
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:919
+#: ../../src/wlapplication_options.cc:939
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:921
+#: ../../src/wlapplication_options.cc:941
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:943
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:925
+#: ../../src/wlapplication_options.cc:945
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:947
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:949
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:931
+#: ../../src/wlapplication_options.cc:951
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:953
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
@@ -6690,12 +6697,12 @@ msgstr ""
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:946 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:966 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:964
+#: ../../src/wlapplication_options.cc:984
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -7298,8 +7305,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -7853,8 +7860,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Census"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""
