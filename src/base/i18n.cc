@@ -46,7 +46,9 @@
 #endif
 #endif
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 extern int _nl_msg_cat_cntr;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 namespace i18n {
 

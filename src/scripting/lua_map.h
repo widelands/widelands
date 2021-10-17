@@ -75,8 +75,10 @@ public:
 		report_error(L, "Cannot instantiate a 'Map' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -126,8 +128,10 @@ public:
 		report_error(L, "Cannot instantiate a 'LuaTribeDescription' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -191,8 +195,10 @@ public:
 		report_error(L, "Cannot instantiate a 'MapObjectDescription' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -244,8 +250,10 @@ public:
 	explicit LuaImmovableDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -285,8 +293,10 @@ public:
 	explicit LuaBuildingDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -568,8 +578,10 @@ public:
 	explicit LuaWareDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -605,8 +617,10 @@ public:
 	explicit LuaWorkerDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -688,8 +702,10 @@ public:
 	explicit LuaShipDescription(lua_State* L) : LuaMapObjectDescription(L) {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -725,8 +741,10 @@ public:
 		report_error(L, "Cannot instantiate a 'LuaResourceDescription' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -776,8 +794,10 @@ public:
 		report_error(L, "Cannot instantiate a 'LuaTerrainDescription' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -829,8 +849,10 @@ public:
 		report_error(L, "Cannot instantiate a 'LuaEconomy' directly!");
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
@@ -882,20 +904,26 @@ public:
 		ptr_ = nullptr;
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * attributes
 	 */
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	int get___hash(lua_State*);
+CLANG_DIAG_ON("-Wreserved-identifier")
 	int get_descr(lua_State*);
 	int get_serial(lua_State*);
 
 	/*
 	 * Lua Methods
 	 */
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	int __eq(lua_State* L);
+CLANG_DIAG_ON("-Wreserved-identifier")
 	int remove(lua_State* L);
 	int destroy(lua_State* L);
 	int has_attribute(lua_State* L);
@@ -1499,13 +1527,17 @@ public:
 	~LuaField() override {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
 	 */
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	int get___hash(lua_State*);
+CLANG_DIAG_ON("-Wreserved-identifier")
 	int get_x(lua_State* L);
 	int get_y(lua_State* L);
 	int get_viewpoint_x(lua_State* L);
@@ -1539,8 +1571,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	int __tostring(lua_State* L);
 	int __eq(lua_State* L);
+CLANG_DIAG_ON("-Wreserved-identifier")
 	int region(lua_State* L);
 	int has_caps(lua_State*);
 	int has_max_caps(lua_State*);
@@ -1577,8 +1611,10 @@ public:
 	~LuaPlayerSlot() override {
 	}
 
+CLANG_DIAG_OFF("-Wreserved-identifier")
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+CLANG_DIAG_ON("-Wreserved-identifier")
 
 	/*
 	 * Properties
