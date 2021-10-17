@@ -35,7 +35,8 @@ SUPPRESSED_CHECKS = {
     '[clang-analyzer-optin.cplusplus.UninitializedObject]',
     '[clang-analyzer-optin.cplusplus.VirtualCall]',
     '[clang-diagnostic-documentation-unknown-command]',
-    '[clang-diagnostic-unknown-warning-option]',  # Needed to suppress compiler warnings not known to older clang versions
+    # Needed to suppress compiler warnings not known to older clang versions
+    '[clang-diagnostic-unknown-warning-option]',
     '[cppcoreguidelines-avoid-c-arrays]',
     '[cppcoreguidelines-avoid-goto]',
     '[cppcoreguidelines-avoid-magic-numbers]',
