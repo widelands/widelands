@@ -127,12 +127,12 @@ jobs:
           - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-10
-          - clang-9
+          - clang-12
+          - clang-11
           - clang-7
           - clang-6.0
+          - g++-11
           - g++-10
-          - g++-9
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-5
@@ -266,7 +266,7 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macOS-latest
+    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
     steps:
     - name: Installing dependencies
       run: |
