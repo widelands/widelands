@@ -23,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr "Upozornění"
+msgstr "Poznámka"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -48,8 +48,8 @@ msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
-"Postav lom, rákosovou farmu, jámový výkop, studnu, uhlířskou pec, cihlárnu a"
-" domy pro dřevorubce a lesníky."
+"Postav lom, rákosovou farmu, jámový výkop, studnu, uhlířskou pec, cihelnu a "
+"domy pro dřevorubce a lesníky."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
@@ -64,7 +64,7 @@ msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
-"Sever nevypadá, že by nám měl co nabídnout. Ale kdo ví, co najdeme na jihu?"
+"Sever nevypadá, že by nám měl co nabídnout, ale kdo ví, co najdeme na jihu?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
