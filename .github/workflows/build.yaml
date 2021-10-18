@@ -133,9 +133,9 @@ jobs:
             config: Release
     runs-on: ${{ matrix.os }}
     env:
-      LSAN_OPTIONS: 'suppressions=asan_3rd_party_leaks'
       SDL_VIDEODRIVER: 'x11'
       DISPLAY: ':99.0'
+      LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
     steps:
     - name: Installing dependencies
       run: |
