@@ -230,7 +230,9 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
       :type str: :class:`string`
       :returns: The translated string.
 */
+CLANG_DIAG_OFF("-Wreserved-identifier")
 static int L__(lua_State* L) {
+CLANG_DIAG_ON("-Wreserved-identifier")
 	if (const TextdomainInfo* td = current_textdomain(L)) {
 		if (td->second) {
 			std::unique_ptr<i18n::GenericTextdomain> dom(
