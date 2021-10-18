@@ -670,6 +670,9 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Takže si to projdeme. Na tkaní látky potřebujeme vlnu z ovčince. Ovčinec sám"
+" potřebuje na svůj provoz obilí a vodu. Takže se nejprve podívejme po velkém"
+" stavebním místě a postavme obilné pole."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
