@@ -94,12 +94,15 @@
 #endif
 
 // Older clang versions don't have "-Wreserved-identifier" either
-#if defined(__clang__) && __has_warning("-Wreserved-identifier")
-#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF CLANG_DIAG_OFF("-Wreserved-identifier")
-#define CLANG_DIAG_RESERVED_IDENTIFIER_ON CLANG_DIAG_ON("-Wreserved-identifier")
-#else
 #define CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 #define CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#ifdef __clang__
+#if __has_warning("-Wreserved-identifier")
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF CLANG_DIAG_OFF("-Wreserved-identifier")
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON CLANG_DIAG_ON("-Wreserved-identifier")
+#endif
 #endif
 
 // disallow copying or assigning a class
