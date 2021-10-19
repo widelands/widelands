@@ -90,7 +90,7 @@ A set of maps and/or standalone scenarios.
 
 All valid map files (including those in subdirectories) contained in the add-on are offered in map selection screens. It is recommended to place the map files in a subdirectory rather than in the top-level directory.
 
-The add-on can optionally contain an ini-style file called "dirnames" which defines the localized displaynames of the subdirectories in the "global" section.
+The add-on can optionally contain an ini-style file called "dirnames" which defines the localized displaynames of the subdirectories in the "global" section. Two subdirectories with the same name always have the same displayname, independent of their parent directories.
 
 
 campaign

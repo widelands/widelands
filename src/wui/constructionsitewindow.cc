@@ -20,6 +20,8 @@
 #include "wui/constructionsitewindow.h"
 
 #include "logic/map_objects/tribes/militarysite.h"
+#include "wlapplication_mousewheel_options.h"
+#include "wlapplication_options.h"
 #include "wui/actionconfirm.h"
 #include "wui/inputqueuedisplay.h"
 #include "wui/interactive_player.h"
@@ -112,9 +114,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
      progress_(nullptr),
      cs_launch_expedition_(nullptr),
      cs_prefer_heroes_rookies_(nullptr),
-     cs_soldier_capacity_decrease_(nullptr),
-     cs_soldier_capacity_increase_(nullptr),
-     cs_soldier_capacity_display_(nullptr),
+     cs_soldier_capacity_(nullptr),
      cs_stopped_(nullptr),
      cs_warehouse_wares_(nullptr),
      cs_warehouse_workers_(nullptr) {
@@ -183,48 +183,19 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-				UI::Box& soldier_capacity_box =
-				   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				cs_soldier_capacity_decrease_ = new UI::Button(
-				   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_image_cache->get(pic_decrease_capacity),
-				   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
-				cs_soldier_capacity_increase_ = new UI::Button(
-				   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-				   g_image_cache->get(pic_increase_capacity),
-				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
-				cs_soldier_capacity_display_ =
-				   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui,
-				                    UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
-				cs_soldier_capacity_decrease_->set_repeating(true);
-				cs_soldier_capacity_increase_->set_repeating(true);
-				cs_soldier_capacity_decrease_->set_enabled(can_act);
-				cs_soldier_capacity_increase_->set_enabled(can_act);
-				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					if (game_) {
-						game_->send_player_change_soldier_capacity(
-						   *construction_site_.get(ibase()->egbase()),
-						   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
-					} else {
-						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-					}
-				});
-				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					if (game_) {
-						game_->send_player_change_soldier_capacity(
-						   *construction_site_.get(ibase()->egbase()),
-						   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
-					} else {
-						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-					}
-				});
-				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-				soldier_capacity_box.add(
-				   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-				soldier_capacity_box.add(cs_soldier_capacity_increase_);
-				cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
+				cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
+				   &settings_box, ts->desired_capacity, 0, ts->max_capacity, can_act);
+				settings_box.add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				settings_box.add_space(8);
+				cs_soldier_capacity_->changed.connect([this]() {
+					if (game_) {
+						game_->send_player_change_soldier_capacity(
+						   *construction_site_.get(ibase()->egbase()),
+						   cs_soldier_capacity_->get_current());
+					} else {
+						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					}
+				});
 			}
 			cs_stopped_ =
 			   new UI::Checkbox(&settings_box, UI::PanelStyle::kWui, Vector2i::zero(), _("Stopped"),
@@ -245,48 +216,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		} break;
 		case Widelands::MapObjectType::MILITARYSITE: {
 			upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
-			UI::Box& soldier_capacity_box =
-			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			cs_soldier_capacity_decrease_ = new UI::Button(
-			   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get(pic_decrease_capacity),
-			   _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"));
-			cs_soldier_capacity_increase_ = new UI::Button(
-			   &soldier_capacity_box, "increase", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get(pic_increase_capacity),
-			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
-			cs_soldier_capacity_display_ =
-			   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
-			                    "", UI::Align::kCenter);
-			cs_soldier_capacity_decrease_->set_repeating(true);
-			cs_soldier_capacity_increase_->set_repeating(true);
-			cs_soldier_capacity_decrease_->set_enabled(can_act);
-			cs_soldier_capacity_increase_->set_enabled(can_act);
-			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
-				if (game_) {
-					game_->send_player_change_soldier_capacity(
-					   *construction_site_.get(ibase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
-				} else {
-					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-				}
-			});
-			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
-				if (game_) {
-					game_->send_player_change_soldier_capacity(
-					   *construction_site_.get(ibase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
-				} else {
-					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-				}
-			});
-			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
-			soldier_capacity_box.add(
-			   cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			soldier_capacity_box.add(cs_soldier_capacity_increase_);
-			cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
+			cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
+			   &settings_box, ms->desired_capacity, 1, ms->max_capacity, can_act);
+			settings_box.add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			settings_box.add_space(8);
+			cs_soldier_capacity_->changed.connect([this]() {
+				if (game_) {
+					game_->send_player_change_soldier_capacity(
+					   *construction_site_.get(ibase()->egbase()), cs_soldier_capacity_->get_current());
+				} else {
+					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+				}
+			});
 
 			UI::Box& soldier_preference_box =
 			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -461,28 +402,12 @@ void ConstructionSiteWindow::think() {
 		cs_stopped_->set_state(ps->stopped);
 	}
 	if (upcast(Widelands::TrainingsiteSettings, ts, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_decrease_);
-		assert(cs_soldier_capacity_increase_);
-		assert(cs_soldier_capacity_display_);
-		cs_soldier_capacity_display_->set_text(
-		   (boost::format(ngettext("%u soldier", "%u soldiers", ts->desired_capacity)) %
-		    ts->desired_capacity)
-		      .str());
-		cs_soldier_capacity_decrease_->set_enabled(can_act && ts->desired_capacity > 0);
-		cs_soldier_capacity_increase_->set_enabled(can_act &&
-		                                           ts->desired_capacity < ts->max_capacity);
+		assert(cs_soldier_capacity_);
+		cs_soldier_capacity_->refresh(ts->desired_capacity, ts->max_capacity, can_act);
 	} else if (upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings())) {
-		assert(cs_soldier_capacity_decrease_);
-		assert(cs_soldier_capacity_increase_);
-		assert(cs_soldier_capacity_display_);
+		assert(cs_soldier_capacity_);
 		assert(cs_prefer_heroes_rookies_);
-		cs_soldier_capacity_display_->set_text(
-		   (boost::format(ngettext("%u soldier", "%u soldiers", ms->desired_capacity)) %
-		    ms->desired_capacity)
-		      .str());
-		cs_soldier_capacity_decrease_->set_enabled(can_act && ms->desired_capacity > 1);
-		cs_soldier_capacity_increase_->set_enabled(can_act &&
-		                                           ms->desired_capacity < ms->max_capacity);
+		cs_soldier_capacity_->refresh(ms->desired_capacity, ms->max_capacity, can_act);
 		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
 		if (cs_launch_expedition_) {
@@ -494,4 +419,129 @@ void ConstructionSiteWindow::think() {
 		}
 #endif
 	}
+}
+
+ConstructionSoldierCapacityBox::ConstructionSoldierCapacityBox(
+   Panel* parent, uint32_t current, uint32_t min, uint32_t max, bool enabled)
+   : Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     current_(current),
+     min_(min),
+     max_(max),
+     enabled_(enabled),
+     cs_soldier_capacity_decrease_(
+        this,
+        "decrease",
+        0,
+        0,
+        32,
+        32,
+        UI::ButtonStyle::kWuiMenu,
+        g_image_cache->get(pic_decrease_capacity),
+        _("Decrease capacity. Hold down Ctrl to set the capacity to the lowest value")),
+     cs_soldier_capacity_increase_(
+        this,
+        "increase",
+        0,
+        0,
+        32,
+        32,
+        UI::ButtonStyle::kWuiMenu,
+        g_image_cache->get(pic_increase_capacity),
+        _("Increase capacity. Hold down Ctrl to set the capacity to the highest value")),
+     cs_soldier_capacity_display_(
+        this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter) {
+	cs_soldier_capacity_decrease_.set_repeating(true);
+	cs_soldier_capacity_increase_.set_repeating(true);
+	add(&cs_soldier_capacity_decrease_);
+	add(&cs_soldier_capacity_display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add(&cs_soldier_capacity_increase_);
+	cs_soldier_capacity_display_.set_fixed_width(kSoldierCapacityDisplayWidth);
+	cs_soldier_capacity_decrease_.sigclicked.connect([this]() {
+		if (matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
+			set_current(min_);
+		} else {
+			change_current(-1);
+		}
+	});
+	cs_soldier_capacity_increase_.sigclicked.connect([this]() {
+		if (matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
+			set_current(max_);
+		} else {
+			change_current(1);
+		}
+	});
+	set_can_focus(true);
+	layout();
+	update();
+}
+void ConstructionSoldierCapacityBox::refresh(uint32_t current, uint32_t max, bool enabled) {
+	if (current_ == current && max_ == max && enabled_ == enabled) {
+		return;
+	}
+	assert(max >= current);
+	current_ = current;
+	max_ = max;
+	enabled_ = enabled;
+	update();
+}
+void ConstructionSoldierCapacityBox::set_current(uint32_t value) {
+	if (!enabled_ || value == current_) {
+		return;
+	}
+	current_ = value;
+	update();
+	changed();
+}
+void ConstructionSoldierCapacityBox::change_current(int32_t delta) {
+	if (!enabled_ || delta == 0) {
+		return;
+	}
+	int32_t new_val = current_ + delta;
+	if (delta < 0 && static_cast<int32_t>(min_) >= new_val) {
+		set_current(min_);
+	} else if (delta > 0 && max_ <= static_cast<uint32_t>(new_val)) {
+		set_current(max_);
+	} else {
+		set_current(new_val);
+	}
+}
+void ConstructionSoldierCapacityBox::update() {
+	cs_soldier_capacity_display_.set_text(
+	   (boost::format(ngettext("%u soldier", "%u soldiers", current_)) % current_).str());
+	cs_soldier_capacity_decrease_.set_enabled(enabled_ && current_ > min_);
+	cs_soldier_capacity_increase_.set_enabled(enabled_ && current_ < max_);
+}
+bool ConstructionSoldierCapacityBox::handle_key(bool down, SDL_Keysym code) {
+	if (enabled_ && down) {
+		switch (get_keyboard_change(code)) {
+		case ChangeType::kNone:
+			break;
+		case ChangeType::kPlus:
+			change_current(1);
+			return true;
+		case ChangeType::kMinus:
+			change_current(-1);
+			return true;
+		case ChangeType::kSetMax:
+			set_current(max_);
+			return true;
+		case ChangeType::kSetMin:
+			set_current(min_);
+			return true;
+		default:
+			break;
+		}
+	}
+	return false;
+}
+bool ConstructionSoldierCapacityBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (!enabled_) {
+		return false;
+	}
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	change_current(change);
+	return true;
 }

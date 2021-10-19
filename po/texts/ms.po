@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-28 02:36+0000\n"
-"PO-Revision-Date: 2021-08-28 02:37+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-07 04:31+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -552,8 +552,8 @@ msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
-"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
-"only released near trees uninhabited by sentries."
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:36
@@ -564,8 +564,8 @@ msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
-"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
-"lashing canoes together to form ships."
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
 msgstr ""
 
 #: ../../data/txts/tips/amazons.lua:43
