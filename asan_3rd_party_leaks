@@ -8,3 +8,4 @@ leak:src/scripting/persistence.cc
 
 # Various graphics drivers
 leak:radeonsi_dri
+leak:libdbus
