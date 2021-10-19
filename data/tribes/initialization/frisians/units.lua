@@ -721,6 +721,13 @@ descriptions:new_tribe {
                -- TRANSLATORS: Helptext for a frisian worker: Shipwright
                purpose = pgettext("frisians_worker", "Works at the shipyard and constructs new ships.")
             }
+         },
+         {
+            name = "frisians_diker",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for a frisian worker: Diker
+               purpose = pgettext("frisians_worker", "Constructs breakwaters to gain new land from the sea.")
+            }
          }
       },
       {
@@ -1959,6 +1966,13 @@ descriptions:new_tribe {
             purpose = pgettext("building", "Sows and harvests barley."),
             -- TRANSLATORS: Note helptext for a frisian production site: Farm
             note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds.")
+         }
+      },
+      {
+         name = "frisians_dikers_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
+            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea.")
          }
       },
 

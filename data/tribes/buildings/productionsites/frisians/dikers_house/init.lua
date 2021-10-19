@@ -1,6 +1,6 @@
-dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
+push_textdomain("tribes")
 
-push_textdomain("scenario_fri03.wmf")
+dirname = path.dirname (__file__)
 
 descriptions:new_productionsite_type {
    name = "frisians_dikers_house",
@@ -21,10 +21,9 @@ descriptions:new_productionsite_type {
       granite = 1
    },
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {75, 95},
          frames = 10,
          columns = 5,
@@ -34,8 +33,6 @@ descriptions:new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {75, 76}
       }
    },

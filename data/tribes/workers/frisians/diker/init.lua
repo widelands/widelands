@@ -1,6 +1,6 @@
-dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
+push_textdomain("tribes")
 
-push_textdomain("scenario_fri03.wmf")
+dirname = path.dirname (__file__)
 
 descriptions:new_worker_type {
    name = "frisians_diker",
@@ -15,12 +15,20 @@ descriptions:new_worker_type {
       },
       dike = {
          "findspace=size:swim radius:5 terraform:diking",
+         -- Note that while the diker CAN also terraform non-water nodes, he only works
+         -- directly at the shore. This introduces some randomness in the pattern of how
+         -- many water tiles actually make the two-step transformation to arable land.
          "walk=coords",
          "animate=work duration:60s",
          "terraform=diking",
          "animate=work duration:20s",
          "return"
       }
+   },
+
+   buildcost = {
+      frisians_carrier = 1,
+      hammer = 1
    },
 
    ware_hotspot = {0, 20},
