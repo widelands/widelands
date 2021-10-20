@@ -203,11 +203,12 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button("wui/menus/objectives", "objectives",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Objectives & Diplomacy"), shortcut_string_for(KeyboardShortcut::kInGameObjectives),
-	                      UI::PanelStyle::kWui),
-	                   &objectives_, true);
+	add_toolbar_button(
+	   "wui/menus/objectives", "objectives",
+	   as_tooltip_text_with_hotkey(_("Objectives & Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives),
+	                               UI::PanelStyle::kWui),
+	   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
 	toggle_message_menu_ =

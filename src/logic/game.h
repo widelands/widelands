@@ -371,7 +371,7 @@ public:
 		const PlayerNumber other;      ///< The other player affected, if any.
 
 		PendingDiplomacyAction(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2)
-		: sender(p1), action(a), other(p2) {
+		   : sender(p1), action(a), other(p2) {
 		}
 	};
 	const std::list<PendingDiplomacyAction>& pending_diplomacy_actions() const {

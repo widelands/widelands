@@ -74,7 +74,8 @@ private:
  */
 class DiplomacyConfirmWindow : public UI::Window {
 public:
-	DiplomacyConfirmWindow(InteractivePlayer& parent, const Widelands::Game::PendingDiplomacyAction&);
+	DiplomacyConfirmWindow(InteractivePlayer& parent,
+	                       const Widelands::Game::PendingDiplomacyAction&);
 
 	void die() override;
 	bool handle_key(bool down, SDL_Keysym code) override;

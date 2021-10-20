@@ -33,10 +33,12 @@ constexpr int16_t kSpacing = 4;
 constexpr int16_t kRowSize = 32;
 constexpr int16_t kButtonWidth = 128;
 
-DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent, const Widelands::Game::PendingDiplomacyAction& a)
-: UI::Window(&parent, UI::WindowStyle::kWui, "diplomacy_confirm", 0, 0, 300, 200, _("Diplomacy")),
-iplayer_(parent),
-action_(&a) {
+DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent,
+                                               const Widelands::Game::PendingDiplomacyAction& a)
+   : UI::Window(
+        &parent, UI::WindowStyle::kWui, "diplomacy_confirm", 0, 0, 300, 200, _("Diplomacy")),
+     iplayer_(parent),
+     action_(&a) {
 	// The layout here is designed to mimic the ActionConfirm dialog.
 	UI::Box* box = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	UI::Box* button_box = new UI::Box(box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -56,13 +58,15 @@ action_(&a) {
 	button_box->add(
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	box->add_inf_space();
-	box->add(new UI::MultilineTextarea(box, 0, 0, 100, 50, UI::PanelStyle::kWui,
-			(boost::format(
-				action_->action == Widelands::DiplomacyAction::kInvite ?
-					_("%s has invited you to join their team.")
-				: _("%s wants to join your team.")
-			) % iplayer_.egbase().get_safe_player(a.sender)->get_name()
-		).str(), UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling), UI::Box::Resizing::kExpandBoth);
+	box->add(new UI::MultilineTextarea(
+	            box, 0, 0, 100, 50, UI::PanelStyle::kWui,
+	            (boost::format(action_->action == Widelands::DiplomacyAction::kInvite ?
+                                 _("%s has invited you to join their team.") :
+                                 _("%s wants to join your team.")) %
+	             iplayer_.egbase().get_safe_player(a.sender)->get_name())
+	               .str(),
+	            UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	         UI::Box::Resizing::kExpandBoth);
 	box->add_space(kSpacing);
 	box->add(button_box, UI::Box::Resizing::kFullSize);
 
@@ -86,9 +90,10 @@ bool DiplomacyConfirmWindow::handle_key(bool down, SDL_Keysym code) {
 
 void DiplomacyConfirmWindow::ok() {
 	iplayer_.game().send_player_diplomacy(action_->other,
-		action_->action == Widelands::DiplomacyAction::kInvite ?
-			Widelands::DiplomacyAction::kAcceptInvite : Widelands::DiplomacyAction::kAcceptJoin,
-		action_->sender);
+	                                      action_->action == Widelands::DiplomacyAction::kInvite ?
+                                            Widelands::DiplomacyAction::kAcceptInvite :
+                                            Widelands::DiplomacyAction::kAcceptJoin,
+	                                      action_->sender);
 
 	action_ = nullptr;
 	die();
@@ -97,20 +102,23 @@ void DiplomacyConfirmWindow::ok() {
 void DiplomacyConfirmWindow::die() {
 	if (action_ != nullptr) {
 		iplayer_.game().send_player_diplomacy(action_->other,
-			action_->action == Widelands::DiplomacyAction::kInvite ?
-				Widelands::DiplomacyAction::kRefuseInvite : Widelands::DiplomacyAction::kRefuseJoin,
-			action_->sender);
+		                                      action_->action == Widelands::DiplomacyAction::kInvite ?
+                                               Widelands::DiplomacyAction::kRefuseInvite :
+                                               Widelands::DiplomacyAction::kRefuseJoin,
+		                                      action_->sender);
 	}
 
 	UI::Window::die();
 }
 
-GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry& registry)
+GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
+                                       UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
                       UI::WindowStyle::kWui,
                       "objectives",
                       &registry,
-                      300, 200,
+                      300,
+                      200,
                       _("Objectives & Diplomacy")),
      iplayer_(parent),
      tabs_(this, UI::TabPanelStyle::kWuiLight),
@@ -118,46 +126,53 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
      diplomacy_box_(&tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      objective_list_(&objective_box_, 0, 0, 550, 180, UI::PanelStyle::kWui),
      objective_text_(&objective_box_,
-                   0,
-                   0,
-                   100,
-                   150,
-                   UI::PanelStyle::kWui,
-                   "",
-                   UI::Align::kLeft,
-                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
-	hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-	vbox_flag_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	vbox_name_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	diplomacy_info_(&diplomacy_box_,
-                   0,
-                   0,
-                   100,
-                   0,
-                   UI::PanelStyle::kWui,
-                   "",
-                   UI::Align::kLeft,
-                   UI::MultilineTextarea::ScrollMode::kNoScrolling) {
+                     0,
+                     0,
+                     100,
+                     150,
+                     UI::PanelStyle::kWui,
+                     "",
+                     UI::Align::kLeft,
+                     UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
+     hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     vbox_flag_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     vbox_name_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     diplomacy_info_(&diplomacy_box_,
+                     0,
+                     0,
+                     100,
+                     0,
+                     UI::PanelStyle::kWui,
+                     "",
+                     UI::Align::kLeft,
+                     UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 
 	objective_box_.add(&objective_list_, UI::Box::Resizing::kExpandBoth);
 	objective_box_.add(&objective_text_, UI::Box::Resizing::kExpandBoth);
 
 	const bool rtl = UI::g_fh->fontset()->is_rtl();
 	const bool show_all_players = iplayer_.player().see_all() || iplayer_.omnipotent();
-	iterate_players_existing_const(p, iplayer_.egbase().map().get_nrplayers(), iplayer_.egbase(), player) {
-		if (p != iplayer_.player_number() && !show_all_players && player->is_hidden_from_general_statistics()) {
+	iterate_players_existing_const(
+	   p, iplayer_.egbase().map().get_nrplayers(), iplayer_.egbase(), player) {
+		if (p != iplayer_.player_number() && !show_all_players &&
+		    player->is_hidden_from_general_statistics()) {
 			continue;
 		}
 
-		UI::Icon* icon_flag = new UI::Icon(&vbox_flag_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
-				playercolor_image(player->get_playercolor(), "images/players/genstats_player.png"));
-		UI::Icon* icon_team = new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
-		UI::Textarea* txt_name = new UI::Textarea(&vbox_name_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, player->get_name(),
-				UI::mirror_alignment(UI::Align::kLeft, rtl));
-		UI::Textarea* txt_status = new UI::Textarea(&vbox_status_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::mirror_alignment(UI::Align::kRight, rtl));
+		UI::Icon* icon_flag = new UI::Icon(
+		   &vbox_flag_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
+		   playercolor_image(player->get_playercolor(), "images/players/genstats_player.png"));
+		UI::Icon* icon_team =
+		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
+		UI::Textarea* txt_name =
+		   new UI::Textarea(&vbox_name_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+		                    player->get_name(), UI::mirror_alignment(UI::Align::kLeft, rtl));
+		UI::Textarea* txt_status =
+		   new UI::Textarea(&vbox_status_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "",
+		                    UI::mirror_alignment(UI::Align::kRight, rtl));
 
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
@@ -166,28 +181,37 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 
 		UI::Button* b1 = nullptr;
 		UI::Button* b2 = nullptr;
-		UI::Box* buttonsbox = new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		UI::Box* buttonsbox =
+		   new UI::Box(&vbox_action_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 		if (p == iplayer_.player_number()) {
-			b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
-					_("Leave"), _("Leave your current team and become teamless"));
-			b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
-					_("Resign"), _("Give up and become a spectator"));
+			b1 = new UI::Button(buttonsbox, "leave", 0, 0, kButtonWidth, kRowSize,
+			                    UI::ButtonStyle::kWuiSecondary, _("Leave"),
+			                    _("Leave your current team and become teamless"));
+			b2 = new UI::Button(buttonsbox, "resign", 0, 0, kButtonWidth, kRowSize,
+			                    UI::ButtonStyle::kWuiSecondary, _("Resign"),
+			                    _("Give up and become a spectator"));
 			b1->sigclicked.connect([this]() {
-				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
+				iplayer_.game().send_player_diplomacy(
+				   iplayer_.player_number(), Widelands::DiplomacyAction::kLeaveTeam, 0 /* ignored */);
 			});
 			b2->sigclicked.connect([this]() {
-				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
+				iplayer_.game().send_player_diplomacy(
+				   iplayer_.player_number(), Widelands::DiplomacyAction::kResign, 0 /* ignored */);
 			});
 		} else {
-			b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
-					_("Join"), _("Request to join this player’s team"));
-			b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, kRowSize, UI::ButtonStyle::kWuiSecondary,
-					_("Invite"), _("Invite this player to join your team"));
+			b1 = new UI::Button(buttonsbox, "join", 0, 0, kButtonWidth, kRowSize,
+			                    UI::ButtonStyle::kWuiSecondary, _("Join"),
+			                    _("Request to join this player’s team"));
+			b2 = new UI::Button(buttonsbox, "invite", 0, 0, kButtonWidth, kRowSize,
+			                    UI::ButtonStyle::kWuiSecondary, _("Invite"),
+			                    _("Invite this player to join your team"));
 			b1->sigclicked.connect([this, p]() {
-				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kJoin, p);
+				iplayer_.game().send_player_diplomacy(
+				   iplayer_.player_number(), Widelands::DiplomacyAction::kJoin, p);
 			});
 			b2->sigclicked.connect([this, p]() {
-				iplayer_.game().send_player_diplomacy(iplayer_.player_number(), Widelands::DiplomacyAction::kInvite, p);
+				iplayer_.game().send_player_diplomacy(
+				   iplayer_.player_number(), Widelands::DiplomacyAction::kInvite, p);
 			});
 		}
 
@@ -207,7 +231,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 		diplomacy_status_[p] = txt_status;
 		diplomacy_buttons_[p] = {b1, b2};
 
-		for (UI::Box* b : { &vbox_flag_, &vbox_name_, &vbox_team_, &vbox_status_, &vbox_action_ }) {
+		for (UI::Box* b : {&vbox_flag_, &vbox_name_, &vbox_team_, &vbox_status_, &vbox_action_}) {
 			b->add_space(kSpacing);
 			b->add_inf_space();
 		}
@@ -245,8 +269,9 @@ void GameObjectivesMenu::update_diplomacy_details() {
 
 	for (auto& pair : diplomacy_teams_) {
 		const unsigned t = iplayer_.egbase().player(pair.first).team_number();
-		pair.second->set_icon(playercolor_image(kTeamColors[t /* it's 1-based, 0 means No Team */],
-				t == 0 ? "images/players/no_team.png" : "images/players/team.png"));
+		pair.second->set_icon(
+		   playercolor_image(kTeamColors[t /* it's 1-based, 0 means No Team */],
+		                     t == 0 ? "images/players/no_team.png" : "images/players/team.png"));
 		pair.second->set_tooltip(t == 0 ? _("No team") : (boost::format(_("Team %u")) % t).str());
 	}
 
@@ -266,7 +291,8 @@ void GameObjectivesMenu::update_diplomacy_details() {
 				case Widelands::PlayerEndResult::kResigned:
 					str = (boost::format(_("Resigned at %s")) % gametimestring(s.time.get())).str();
 					break;
-				default: break;
+				default:
+					break;
 				}
 				break;
 			}
@@ -286,7 +312,8 @@ void GameObjectivesMenu::update_diplomacy_details() {
 			pair.second.first->set_enabled(own_team > 0);
 		} else {
 			// Other player. The two buttons are "Request to join" and "Invite to join".
-			const bool can_join = (own_team != iplayer_.egbase().player(pair.first).team_number()) || own_team == 0;
+			const bool can_join =
+			   (own_team != iplayer_.egbase().player(pair.first).team_number()) || own_team == 0;
 			pair.second.first->set_enabled(can_join);
 			pair.second.second->set_enabled(can_join);
 		}
@@ -296,18 +323,24 @@ void GameObjectivesMenu::update_diplomacy_details() {
 		diplomacy_info_.set_visible(false);
 	} else {
 		std::string text = "<rt><p>";
-		text += g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading).as_font_tag(_("Pending Diplomacy Actions"));
+		text += g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		           .as_font_tag(_("Pending Diplomacy Actions"));
 		text += "</p>";
-		for (const Widelands::Game::PendingDiplomacyAction& pda : iplayer_.game().pending_diplomacy_actions()) {
+		for (const Widelands::Game::PendingDiplomacyAction& pda :
+		     iplayer_.game().pending_diplomacy_actions()) {
 			std::string descr;
 			switch (pda.action) {
 			case Widelands::DiplomacyAction::kJoin:
-				descr = (boost::format(_("%1$s has requested to join the team of %2$s."))
-					% iplayer_.egbase().player(pda.sender).get_name() % iplayer_.egbase().player(pda.other).get_name()).str();
+				descr = (boost::format(_("%1$s has requested to join the team of %2$s.")) %
+				         iplayer_.egbase().player(pda.sender).get_name() %
+				         iplayer_.egbase().player(pda.other).get_name())
+				           .str();
 				break;
 			case Widelands::DiplomacyAction::kInvite:
-				descr = (boost::format(_("%1$s has invited %2$s to join their team."))
-					% iplayer_.egbase().player(pda.sender).get_name() % iplayer_.egbase().player(pda.other).get_name()).str();
+				descr = (boost::format(_("%1$s has invited %2$s to join their team.")) %
+				         iplayer_.egbase().player(pda.sender).get_name() %
+				         iplayer_.egbase().player(pda.other).get_name())
+				           .str();
 				break;
 			default:
 				NEVER_HERE();
@@ -336,7 +369,8 @@ void GameObjectivesMenu::think() {
 			if (&objective_list_[j] == &obj) {  //  the objective is in our list
 				if (!should_show) {
 					objective_list_.remove(j);
-				} else if (objective_list_[j].descname() != obj.descname() || objective_list_[j].descr() != obj.descr()) {
+				} else if (objective_list_[j].descname() != obj.descname() ||
+				           objective_list_[j].descr() != obj.descr()) {
 					// Update
 					objective_list_.remove(j);
 					objective_list_.add(obj.descname(), obj);

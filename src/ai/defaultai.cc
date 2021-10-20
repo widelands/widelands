@@ -272,9 +272,10 @@ void DefaultAI::think() {
 			// TODO(Nordfriese): The AI just accepts everything now.
 			// In the future, make a strategic decision here.
 			game().send_player_diplomacy(pda.other,
-				pda.action == Widelands::DiplomacyAction::kInvite ?
-					Widelands::DiplomacyAction::kAcceptInvite : Widelands::DiplomacyAction::kAcceptJoin,
-				pda.sender);
+			                             pda.action == Widelands::DiplomacyAction::kInvite ?
+                                         Widelands::DiplomacyAction::kAcceptInvite :
+                                         Widelands::DiplomacyAction::kAcceptJoin,
+			                             pda.sender);
 		}
 	}
 

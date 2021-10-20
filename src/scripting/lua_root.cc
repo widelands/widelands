@@ -92,8 +92,8 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   PROP_RW(LuaGame, allow_diplomacy),
-   PROP_RO(LuaGame, win_condition),      {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_diplomacy),    PROP_RO(LuaGame, win_condition),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
