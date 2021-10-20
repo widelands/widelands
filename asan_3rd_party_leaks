@@ -6,6 +6,6 @@ leak:libSDL2
 # Eris
 leak:src/scripting/persistence.cc
 
-# Various graphics drivers
+# Various graphics drivers and X11 stuff.
 leak:radeonsi_dri
 leak:libdbus
