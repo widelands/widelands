@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-13 02:46+0000\n"
+"POT-Creation-Date: 2021-10-16 02:48+0000\n"
 "PO-Revision-Date: 2021-10-15 16:30+0000\n"
 "Last-Translator: Alen Ciga\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -275,8 +275,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dic"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -290,12 +290,12 @@ msgstr "Menù principale"
 msgid "Tools"
 msgstr "Strumenti"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -485,10 +485,10 @@ msgstr "Informazioni"
 msgid "Click on a field to show information about it"
 msgstr "Fai click su un campo per mostrare le informazioni"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -667,8 +667,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1398,8 +1398,8 @@ msgid ""
 "location."
 msgstr "Seleziona la nuova dimensione della mappa, quindi fai click sul punto dove vuoi effettuare la modifica. Quando si aumenta la dimensione della mappa, verranno inserite nuove colonne/righe a est/sud del punto selezionato. Quando si riduce la dimensione della mappa, il numero di colonne/righe indicato verrà rimosso da est/sud del punto indicato."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
