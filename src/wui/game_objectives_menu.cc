@@ -21,6 +21,8 @@
 
 #include "base/time_string.h"
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
+#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "logic/objective.h"
 #include "logic/player.h"
@@ -129,7 +131,16 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 	vbox_name_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 	vbox_team_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 	vbox_status_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+	vbox_action_(&hbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	diplomacy_info_(&diplomacy_box_,
+                   0,
+                   0,
+                   100,
+                   0,
+                   UI::PanelStyle::kWui,
+                   "",
+                   UI::Align::kLeft,
+                   UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 
 	objective_box_.add(&objective_list_, UI::Box::Resizing::kExpandBoth);
 	objective_box_.add(&objective_text_, UI::Box::Resizing::kExpandBoth);
@@ -212,6 +223,8 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 	hbox_.add_space(kSpacing);
 	hbox_.add(rtl ? &vbox_flag_ : &vbox_action_, UI::Box::Resizing::kExpandBoth);
 	diplomacy_box_.add(&hbox_, UI::Box::Resizing::kExpandBoth);
+	diplomacy_box_.add_space(kSpacing);
+	diplomacy_box_.add(&diplomacy_info_, UI::Box::Resizing::kFullSize);
 
 	tabs_.add("objectives", _("Objectives"), &objective_box_);
 	tabs_.add("diplomacy", _("Diplomacy"), &diplomacy_box_);
@@ -228,11 +241,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWind
 
 /** Recompute the data in the Diplomacy tab and update which buttons are enabled. */
 void GameObjectivesMenu::update_diplomacy_details() {
-	if (!iplayer_.game().diplomacy_allowed()) {
-		vbox_action_.set_visible(false);
-		return;
-	}
-	vbox_action_.set_visible(true);
+	vbox_action_.set_visible(iplayer_.game().diplomacy_allowed());
 
 	for (auto& pair : diplomacy_teams_) {
 		const unsigned t = iplayer_.egbase().player(pair.first).team_number();
@@ -281,6 +290,33 @@ void GameObjectivesMenu::update_diplomacy_details() {
 			pair.second.first->set_enabled(can_join);
 			pair.second.second->set_enabled(can_join);
 		}
+	}
+
+	if (iplayer_.game().pending_diplomacy_actions().empty()) {
+		diplomacy_info_.set_visible(false);
+	} else {
+		std::string text = "<rt><p>";
+		text += g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading).as_font_tag(_("Pending Diplomacy Actions"));
+		text += "</p>";
+		for (const Widelands::Game::PendingDiplomacyAction& pda : iplayer_.game().pending_diplomacy_actions()) {
+			std::string descr;
+			switch (pda.action) {
+			case Widelands::DiplomacyAction::kJoin:
+				descr = (boost::format(_("%1$s has requested to join the team of %2$s."))
+					% iplayer_.egbase().player(pda.sender).get_name() % iplayer_.egbase().player(pda.other).get_name()).str();
+				break;
+			case Widelands::DiplomacyAction::kInvite:
+				descr = (boost::format(_("%1$s has invited %2$s to join their team."))
+					% iplayer_.egbase().player(pda.sender).get_name() % iplayer_.egbase().player(pda.other).get_name()).str();
+				break;
+			default:
+				NEVER_HERE();
+			}
+			text += as_listitem(descr, UI::FontStyle::kWuiInfoPanelParagraph);
+		}
+		text += "</rt>";
+		diplomacy_info_.set_text(text);
+		diplomacy_info_.set_visible(true);
 	}
 }
 
