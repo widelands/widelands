@@ -2145,8 +2145,7 @@ void CmdDiplomacy::execute(Game& game) {
 		return;
 	}
 	Player& sending_player = *game.get_safe_player(sender());
-	auto broadcast_message = [&game, &sending_player](
-	                            const std::string& heading, const std::string& text) {
+	auto broadcast_message = [&game](const std::string& heading, const std::string& text) {
 		iterate_players_existing(p, game.map().get_nrplayers(), game, player) {
 			player->add_message(game, std::unique_ptr<Message>(new Message(
 			                             Message::Type::kScenario, game.get_gametime(), _("Diplomacy"),
