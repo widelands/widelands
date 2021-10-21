@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Alen Ciga, 2021
 # Bananasoft <bananasoftservice@yahoo.it>, 2015
 # xno, 2016
 # Davide Nicolini <davide97@gmail.com>, 2015
@@ -20,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-10 02:42+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-10-16 02:48+0000\n"
+"PO-Revision-Date: 2021-10-15 16:30+0000\n"
+"Last-Translator: Alen Ciga\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -277,7 +278,7 @@ msgstr "Dic"
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
-#: ../../src/ui_fsmenu/keyboard_options.cc:290
+#: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -666,8 +667,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -976,9 +977,9 @@ msgstr "(nessuno)"
 msgid "Waterway length limit:"
 msgstr "Limite lunghezza del corso d'acqua:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1413,7 +1414,7 @@ msgstr "Dimensione strumento"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:46
 msgid "Current Size:"
-msgstr ""
+msgstr "Dimensione attuale: "
 
 #: ../../src/game_io/game_loader.cc:70
 #, c-format
@@ -1471,7 +1472,7 @@ msgstr ""
 msgid ""
 "Widelands won't work because we were unable to detect the shading language "
 "version."
-msgstr ""
+msgstr "Widelands non funziona: impossibile rilevare versione dello shader"
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver. Font
@@ -1508,7 +1509,7 @@ msgstr "Widelands non può funzionare perché la versione dei driver grafici è 
 #: ../../src/graphic/gl/initialize.cc:223
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "Aggiornare la versione %1$u a %2$u,%3$u o successiva."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1524,7 +1525,7 @@ msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:310
 msgid "Shading Language"
-msgstr ""
+msgstr "Linguaggio dello shader"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
 #. replaces tha
@@ -1693,7 +1694,7 @@ msgstr[1] ""
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:249
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: ../../src/logic/addons.cc:253
 #, c-format
@@ -2285,15 +2286,15 @@ msgstr "Un nuovo magazzino è stato aggiunto alla tua economia."
 #. * available)
 #: ../../src/logic/map_objects/tribes/warehouse.cc:644
 msgid "Waterway"
-msgstr ""
+msgstr "Corso d'acqua"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:645
 msgid "Waterway destroyed"
-msgstr ""
+msgstr "Corso d'acqua eliminato"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:646
 msgid "A waterway had to be destroyed to make room for your new port dock."
-msgstr ""
+msgstr "Un corso d'acqua è stato eliminato per fare spazio al tuo nuovo molo."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1109
 msgid "A geologist found resources."
@@ -2302,7 +2303,7 @@ msgstr "Un geologo ha trovato delle risorse."
 #: ../../src/logic/map_objects/tribes/worker.cc:2063
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Il tuo %s non riesce a tornare a casa: potrebbe morire!"
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2070
@@ -2345,7 +2346,7 @@ msgstr "non attraversabile"
 msgid ""
 "A map file is invalid:\n"
 "%s"
-msgstr ""
+msgstr "File mappa non valido:\n%s"
 
 #: ../../src/logic/objective.h:34
 msgid "This objective has no description."
@@ -2359,7 +2360,7 @@ msgstr "Nave%d"
 
 #: ../../src/logic/replay.cc:87
 msgid "Desync"
-msgstr ""
+msgstr "Desincronizza"
 
 #: ../../src/logic/replay.cc:88
 #, c-format
@@ -2369,7 +2370,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "Il replay è desincronizzato. La partita è in pausa.\nProbabilmente stai guardando un replay in una versione di Widelands precedente non più supportata.\n\nSe è certo che il replay è stato creato nella stessa versione di Widelands, %1$s (%2$s), segnala il problema come bug.\nVedrai i messaggi correlati nell'output standard (stdout.txt su Windows). Aggiungili alla segnalazione."
 
 #: ../../src/logic/replay_game_controller.cc:107
 msgid "End of Replay"
@@ -2402,12 +2403,12 @@ msgstr "Salvataggio della mappa: %1$s (%2$d/%3$d)"
 
 #: ../../src/map_io/map_saver.cc:90
 msgid "Autosaving map…"
-msgstr ""
+msgstr "Salvataggio automatico mappa in corso..."
 
 #: ../../src/map_io/map_saver.cc:123
 #: ../../src/map_io/widelands_map_loader.cc:225
 msgid "Heights"
-msgstr ""
+msgstr "Rilievi"
 
 #: ../../src/map_io/map_saver.cc:130
 #: ../../src/map_io/widelands_map_loader.cc:232
@@ -2437,7 +2438,7 @@ msgstr "Bandierine"
 #: ../../src/map_io/map_saver.cc:209
 #: ../../src/map_io/widelands_map_loader.cc:311
 msgid "Roads and waterways"
-msgstr ""
+msgstr "Strade e canali"
 
 #: ../../src/map_io/map_saver.cc:231
 #: ../../src/map_io/widelands_map_loader.cc:241
@@ -2455,7 +2456,7 @@ msgstr "Dettagli della bandiera"
 
 #: ../../src/map_io/map_saver.cc:258
 msgid "Road and waterway details"
-msgstr ""
+msgstr "Dettagli di strade e canali"
 
 #: ../../src/map_io/map_saver.cc:275
 msgid "Building details"
@@ -2468,12 +2469,12 @@ msgstr "Territorio"
 #: ../../src/map_io/map_saver.cc:290
 #: ../../src/map_io/widelands_map_loader.cc:379
 msgid "Vision"
-msgstr ""
+msgstr "Vista"
 
 #: ../../src/map_io/map_saver.cc:299
 #: ../../src/map_io/widelands_map_loader.cc:414
 msgid "Scripting"
-msgstr ""
+msgstr "Script"
 
 #: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
@@ -2522,24 +2523,24 @@ msgstr "Inizializzazione bandiere"
 
 #: ../../src/map_io/widelands_map_loader.cc:339
 msgid "Initializing roads and waterways"
-msgstr ""
+msgstr "Avvio di strade e canali"
 
 #: ../../src/map_io/widelands_map_loader.cc:352
 msgid "Initializing buildings"
-msgstr ""
+msgstr "Avvio di edifici"
 
 #: ../../src/map_io/widelands_map_loader.cc:359
 msgid "Initializing map objects"
-msgstr ""
+msgstr "Avvio di oggetti della mappa"
 
 #: ../../src/map_io/widelands_map_loader.cc:424
 msgid "Checking map"
-msgstr ""
+msgstr "Controlla la mappa"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
 #: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:722
 msgid "Preparing game…"
-msgstr ""
+msgstr "Creazione partita in corso..."
 
 #: ../../src/network/gameclient.cc:213
 #: ../../src/network/internet_gaming.cc:116
@@ -2565,18 +2566,18 @@ msgstr[1] ""
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
-msgstr ""
+msgstr "%1$s\n· ‘%2$s’ richiesto dall'host non è stato trovato"
 
 #: ../../src/network/gameclient.cc:760
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
-msgstr ""
+msgstr "%1$s\n· ‘%2$s’ installato nella versione %3$s ma l'host utilizza la %4$s"
 
 #: ../../src/network/gameclient.cc:932
 msgid "/me ’s file failed md5 checksumming."
-msgstr ""
+msgstr "Il file /me non ha superato il controllo in MD5."
 
 #: ../../src/network/gameclient.cc:974
 msgid ""
@@ -2667,7 +2668,7 @@ msgstr "Se sì, digita /ack_kick %s"
 
 #: ../../src/network/gamehost.cc:191
 msgid "Kick acknowledgement cancelled: No name given!"
-msgstr ""
+msgstr "Rimozione annullata: nessun nome è stato indicato!"
 
 #: ../../src/network/gamehost.cc:193
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -2675,7 +2676,7 @@ msgstr "Uso sbagliato, dovrebbe essere: /ack_kick <nome>"
 
 #: ../../src/network/gamehost.cc:199
 msgid "Kick acknowledgement cancelled: Wrong name given!"
-msgstr ""
+msgstr "Rimozione annullata: nome errato!"
 
 #: ../../src/network/gamehost.cc:209
 msgid "Pause was already forced - game should be paused."
@@ -2691,13 +2692,13 @@ msgstr "Comando non valido! Digita /help per la lista dei comandi."
 
 #: ../../src/network/gamehost.cc:377
 msgid "Failed to host the server!"
-msgstr ""
+msgstr "Impossibile fornire un host al server!"
 
 #: ../../src/network/gamehost.cc:378
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr ""
+msgstr "Widelands non ha potuto fare da host al server.\nQuesto non dovrebbe succedere, e l'unico modo per risolvere il problema è scriverci. Segnala il bug."
 
 #: ../../src/network/gamehost.cc:386
 msgid "Failed to start the server!"
@@ -2725,7 +2726,7 @@ msgstr "Widelands non ha potuto stabilire una connessione con l'indirizzo indica
 
 #: ../../src/network/internet_gaming.cc:180
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Gli utenti marcati IRC potrebbero non rispondere ai messaggi."
 
 #: ../../src/network/internet_gaming.cc:217
 msgid "Successfully reconnected to the metaserver!"
@@ -2739,22 +2740,22 @@ msgstr "Qualcosa è andato storto: %s"
 
 #: ../../src/network/internet_gaming.cc:430
 msgid "Welcome to the Widelands Metaserver!"
-msgstr ""
+msgstr "Benvenuto al metaserver di Widelands!"
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Hai fatto accesso con il nome di ‘%s’, in quanto quello che che avevi richiesto è già in uso o prenotato."
 
 #: ../../src/network/internet_gaming.cc:447
 msgid "Our forums can be found at:"
-msgstr ""
+msgstr "Puoi trovare i nostri forum qui:"
 
 #: ../../src/network/internet_gaming.cc:449
 msgid "For reporting bugs, visit:"
-msgstr ""
+msgstr "Per segnalare i bug, vai su:"
 
 #: ../../src/network/internet_gaming.cc:472
 msgid "Mixed up"
@@ -2773,7 +2774,7 @@ msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
-msgstr ""
+msgstr "Ricevuto un pacchetto di rete inaspettato dal metaserver. Forse il metaserver sta usando una versione diversa del protocollo. Se l'errore persiste, prova ad aggiornare il gioco."
 
 #: ../../src/network/internet_gaming.cc:500
 #, c-format
@@ -2823,7 +2824,7 @@ msgstr "Non è stato possibile inviare il messaggio di chat."
 
 #: ../../src/network/internet_gaming.cc:697
 msgid "Command could not be executed."
-msgstr ""
+msgstr "Non è stato possibile eseguire il comando."
 
 #: ../../src/network/internet_gaming.cc:717
 #, c-format
@@ -2832,7 +2833,7 @@ msgstr "ERRORE: %s"
 
 #: ../../src/network/internet_gaming.cc:720
 msgid "An unexpected error message has been received about command %1%: %2%"
-msgstr ""
+msgstr "Ricevuto messaggio di errore per il comando %1%:%2%"
 
 #: ../../src/network/internet_gaming.cc:733
 #, c-format
@@ -2850,27 +2851,27 @@ msgstr "Il messaggio non può essere inviato: era previsto che fosse un messaggi
 
 #: ../../src/network/internet_gaming.cc:927
 msgid "Supported admin commands:"
-msgstr ""
+msgstr "Comandi per amministratore supportati:"
 
 #: ../../src/network/internet_gaming.cc:928
 msgid "/motd <msg> - Set a permanent greeting message"
-msgstr ""
+msgstr "/motd <msg> - Imposta un messaggio di saluto fisso"
 
 #: ../../src/network/internet_gaming.cc:929
 msgid "/announce <msg> - Send a one time system message"
-msgstr ""
+msgstr "/announce <msg> - Invia un solo messaggio di sistema"
 
 #: ../../src/network/internet_gaming.cc:932
 msgid "/warn <user> <msg> - Send a private system message to the given user"
-msgstr ""
+msgstr "/warn <user> <msg> - Invia un messaggio di sistema privato all'utente indicato"
 
 #: ../../src/network/internet_gaming.cc:935
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
-msgstr ""
+msgstr "/kick <user|game> - Rimuovi dal metaserver l'utente o la partita indicati"
 
 #: ../../src/network/internet_gaming.cc:937
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
-msgstr ""
+msgstr "/ban <user> - Blocca un utente dal metaserver per 24 ore"
 
 #: ../../src/network/internet_gaming.cc:1013
 msgid "Conversion error"
@@ -2890,19 +2891,19 @@ msgstr "Sconosciuto"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Nessun utente connesso con questo nome."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "Partita inesistente. Forse si è già conclusa."
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Password errata. Riprova."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Sei stato momentaneamente escluso dal gioco."
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid "The protocol version you are using is not supported!"
@@ -2982,7 +2983,7 @@ msgstr "%1$s ha lasciato il gioco (%2$s)"
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "%1$s sostituito con %2$s"
 
 #: ../../src/network/network_gaming_messages.cc:135
 #, c-format
@@ -3096,11 +3097,11 @@ msgstr "Il client %1$s non ha risposto per più di %2$s."
 #: ../../src/network/network_gaming_messages.cc:169
 #, c-format
 msgid "Client %s is cheating!"
-msgstr ""
+msgstr "L'utente %s sta barando!"
 
 #: ../../src/network/network_lan_promotion.cc:362
 msgid "Failed to use the local network!"
-msgstr ""
+msgstr "Connessione alla rete locale fallita!"
 
 #. * TRANSLATORS: %s is a list of alternative ports with "or"
 #: ../../src/network/network_lan_promotion.cc:364
@@ -3108,7 +3109,7 @@ msgstr ""
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %s or your network setup is broken."
-msgstr ""
+msgstr "Widelands non è riuscito a connettersi alla rete locale. Forse ci sono processi attivi che utilizzano un server attraverso %s; oppure, la configurazione di rete non è più valida."
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
@@ -3118,45 +3119,45 @@ msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/color_chooser.cc:244
 msgid "Choose Color…"
-msgstr ""
+msgstr "Scegli il colore..."
 
 #: ../../src/ui_basic/color_chooser.cc:280
 msgid "Initial Color"
-msgstr ""
+msgstr "Colore iniziale"
 
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "V"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
-msgstr ""
+msgstr "Colore predefinito"
 
 #: ../../src/ui_basic/color_chooser.cc:328
 msgid "Red"
-msgstr ""
+msgstr "Rosso"
 
 #: ../../src/ui_basic/color_chooser.cc:340
 msgid "Green"
-msgstr ""
+msgstr "Verde"
 
 #: ../../src/ui_basic/color_chooser.cc:352
 msgid "Blue"
-msgstr ""
+msgstr "Blu"
 
 #: ../../src/ui_basic/dropdown.cc:115
 msgctxt "dropdown"
@@ -3171,15 +3172,15 @@ msgstr "Non selezionato"
 
 #: ../../src/ui_basic/dropdown.h:360
 msgid "No matches"
-msgstr ""
+msgstr "Nessuna corrispondenza"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
-msgstr ""
+msgstr "Attendi..."
 
 #: ../../src/ui_basic/panel.cc:442
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "Partita finita – Attendi…"
 
 #: ../../src/ui_basic/progresswindow.cc:75
 msgid "Loading…"
@@ -3232,19 +3233,19 @@ msgstr "Chiudi"
 
 #: ../../src/ui_basic/window.cc:173
 msgid "Minimize"
-msgstr ""
+msgstr "Minimizza"
 
 #: ../../src/ui_basic/window.cc:173
 msgid "Restore"
-msgstr ""
+msgstr "Ripristina"
 
 #: ../../src/ui_basic/window.cc:178 ../../src/wui/info_panel.cc:197
 msgid "Pin"
-msgstr ""
+msgstr "Blocca"
 
 #: ../../src/ui_basic/window.cc:178
 msgid "Unpin"
-msgstr ""
+msgstr "Sblocca"
 
 #: ../../src/ui_fsmenu/about.cc:47 ../../src/ui_fsmenu/main.cc:475
 msgid "About Widelands"
@@ -3252,101 +3253,102 @@ msgstr "Riguardo a Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:58 ../../src/ui_fsmenu/about.cc:63
 msgid "Lua Error"
-msgstr ""
+msgstr "Errore LUA"
 
 #: ../../src/ui_fsmenu/about.cc:72 ../../src/ui_fsmenu/addons/packager.cc:144
 msgid "Version:"
-msgstr ""
+msgstr "Versione:"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:74 ../../src/wui/interactive_gamebase.cc:532
+#: ../../src/ui_fsmenu/about.cc:74 ../../src/ui_fsmenu/keyboard_options.cc:269
+#: ../../src/wui/interactive_gamebase.cc:532
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
 #: ../../src/ui_fsmenu/about.cc:75
 msgid "Operating System:"
-msgstr ""
+msgstr "Sistema operativo:"
 
 #: ../../src/ui_fsmenu/about.cc:77
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../src/ui_fsmenu/about.cc:79
 msgid "Windows (64 bit)"
-msgstr ""
+msgstr "Windows (64 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:81
 msgid "Windows (32 bit)"
-msgstr ""
+msgstr "Windows (32 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:83
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../src/ui_fsmenu/about.cc:85
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../src/ui_fsmenu/about.cc:87
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../src/ui_fsmenu/about.cc:89
 msgid "Unknown"
-msgstr ""
+msgstr "Sconosciuto"
 
 #: ../../src/ui_fsmenu/about.cc:92
 msgid "Locale:"
-msgstr ""
+msgstr "Locale:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Home Directory:"
-msgstr ""
+msgstr "Cartella Home:"
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Configuration File:"
-msgstr ""
+msgstr "File di configurazione:"
 
 #: ../../src/ui_fsmenu/about.cc:95
 msgid "Data Directory:"
-msgstr ""
+msgstr "Cartella dati:"
 
 #: ../../src/ui_fsmenu/about.cc:96
 msgid "Locale Directory:"
-msgstr ""
+msgstr "Cartella locale:"
 
 #: ../../src/ui_fsmenu/about.cc:97
 msgid "Executable Directory:"
-msgstr ""
+msgstr "Cartella eseguibili:"
 
 #: ../../src/ui_fsmenu/about.cc:104 ../../src/ui_fsmenu/about.cc:151
 msgid "Technical Info"
-msgstr ""
+msgstr "Info tecniche"
 
 #: ../../src/ui_fsmenu/about.cc:133
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: ../../src/ui_fsmenu/about.cc:134
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "Copia report tecnico negli appunti"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:39
 msgid "Contact Form"
-msgstr ""
+msgstr "Modulo di contatto"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:51
 msgid "Send message"
-msgstr ""
+msgstr "Invia messaggio"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:75
 msgid "Send Message"
-msgstr ""
+msgstr "Invia messaggio"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:76
 msgid "Send this message now?"
-msgstr ""
+msgstr "Invia ora?"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:86
 #, c-format
@@ -3354,29 +3356,29 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Impossibile inviare la tua richiesta.\nMessaggio di errore:\n%s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:95
 msgid "Sent"
-msgstr ""
+msgstr "Inviato"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:96
 msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Il tuo messaggio è stato inviato al team degli sviluppatori di Widelands. Ti risponderemo il prima possibile! Controlla spesso la casella di posta."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:39
 msgid "Login"
-msgstr ""
+msgstr "Accedi"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:71
 #: ../../src/ui_fsmenu/addons/manager.cc:230
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:185
 #: ../../src/ui_fsmenu/training_wheel_options.cc:120
 msgid "Reset"
-msgstr ""
+msgstr "Resetta"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:78
 #: ../../src/ui_fsmenu/login_box.cc:60
@@ -3385,11 +3387,11 @@ msgid ""
 "In order to use a registered account, you need an account on the Widelands "
 "website. Please log in at %s and set an online gaming password on your "
 "profile page."
-msgstr ""
+msgstr "Per usare un account registrato, crea un account sul sito di Widelands. Fai log in su %s e scegli una password sulla tua pagina profilo per giocare online."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:86
 msgid "Username:"
-msgstr ""
+msgstr "Nome utente:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:91
 #: ../../src/ui_fsmenu/login_box.cc:53
@@ -3399,62 +3401,62 @@ msgstr "Password:"
 #: ../../src/ui_fsmenu/addons/manager.cc:69
 #, c-format
 msgid "%.2f GB"
-msgstr ""
+msgstr "%.2f GB"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:71
 #, c-format
 msgid "%.2f MB"
-msgstr ""
+msgstr "%.2f MB"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:73
 #, c-format
 msgid "%.2f kB"
-msgstr ""
+msgstr "%.2f kB"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:75
 #, c-format
 msgid "%u bytes"
-msgstr ""
+msgstr "%u byte"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Qualsiasi"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Qualità non ancora valutata"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:101
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Scarsa"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Questo add-on potrebbe causare glitch ed errori gravi."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Buona"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Questo add-on funziona come pubblicizzato."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:113
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Eccellente"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:114
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Questo add-on è stato premiato per l'alto livello di qualità."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:126
 msgid "Add-On Manager"
@@ -3462,73 +3464,73 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:171
 msgid "Verified only"
-msgstr ""
+msgstr "Solo verificati"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Mostra solo add-on verificati"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:180
 msgid "Sort by"
-msgstr ""
+msgstr "Ordina per"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:191
 msgid "Minimum quality"
-msgstr ""
+msgstr "Qualità minima"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:202
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Scegli add-on da caricare..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:213
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Carica uno screenshot…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:220
 msgid "Understood and confirmed"
-msgstr ""
+msgstr "Ricevuto e confermato"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:221
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr ""
+msgstr "Seleziona questa casella per confermare di aver letto e accettato le condizioni di cui sopra."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:231
 msgid "Reset the filters"
-msgstr ""
+msgstr "Cancella i filtri"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:247
 msgid "Refresh"
-msgstr ""
+msgstr "Aggiorna"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:248
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Aggiorna la lista di add-on disponibili dal server"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:265
 msgid "Fix dependencies…"
-msgstr ""
+msgstr "Risolvi dipendenze..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:266
 msgid "Try to automatically fix the dependency errors"
-msgstr ""
+msgstr "Prova a risolvere automaticamente gli errori nelle dipendenze"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:276
 msgid "Move selected add-on to top"
-msgstr ""
+msgstr "Sposta in alto gli add-on selezionati"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:285
 msgid "Move selected add-on one step up"
-msgstr ""
+msgstr "Sposta sopra add-on selezionato"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:294
 msgid "Move selected add-on one step down"
-msgstr ""
+msgstr "Sposta sotto add-on selezionato"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:303
 msgid "Move selected add-on to bottom"
-msgstr ""
+msgstr "Sposta add-on selezionato in fondo"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:311
 msgid "Launch the add-ons packager…"
@@ -3539,11 +3541,11 @@ msgstr ""
 #. Development Team
 #: ../../src/ui_fsmenu/addons/manager.cc:322
 msgid "Contact us…"
-msgstr ""
+msgstr "Contattaci..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:327
 msgid "Tools for Add-Ons Developers"
-msgstr ""
+msgstr "Strumenti per sviluppatori di add-on"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:335
 msgid ""
@@ -3562,11 +3564,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
 msgid "Open Link"
-msgstr ""
+msgstr "Apri link"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:364
 msgid "Copy Link"
-msgstr ""
+msgstr "Copia link"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:386
 msgid ""
@@ -4261,7 +4263,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:91
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "Sei sicuro di voler cancellare il commento?"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:105
 #, c-format
@@ -4274,11 +4276,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:162
 msgid "Edit Comment"
-msgstr ""
+msgstr "Modifica commento"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:162
 msgid "Write Comment"
-msgstr ""
+msgstr "Scrivi commento"
 
 #. * TRANSLATORS: Short for Bold text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:215
@@ -4862,7 +4864,7 @@ msgid "Version"
 msgstr "Versione"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:292
+#: ../../src/ui_fsmenu/keyboard_options.cc:320
 msgid "Game"
 msgstr "Partita"
 
@@ -4941,11 +4943,17 @@ msgstr ""
 msgid "[%1$s] %2$s: %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:257
+#. * TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name)
+#: ../../src/ui_fsmenu/keyboard_options.cc:274
+#, c-format
+msgid "%1$s ([%2$s] %3$s)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/keyboard_options.cc:285
 msgid "Keyboard Shortcut Conflict"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:260
+#: ../../src/ui_fsmenu/keyboard_options.cc:288
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4954,21 +4962,21 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:289
+#: ../../src/ui_fsmenu/keyboard_options.cc:317
 #: ../../src/wui/interactive_player.cc:328
 msgid "General"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:291
+#: ../../src/ui_fsmenu/keyboard_options.cc:319
 #: ../../src/wlapplication_options.cc:200
 msgid "Editor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:296
+#: ../../src/ui_fsmenu/keyboard_options.cc:324
 msgid "Fastplace"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:298
+#: ../../src/ui_fsmenu/keyboard_options.cc:326
 msgid "Mouse Scrolling"
 msgstr ""
 
@@ -6485,212 +6493,212 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:828
+#: ../../src/wlapplication_options.cc:848
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:831
+#: ../../src/wlapplication_options.cc:851
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:835
+#: ../../src/wlapplication_options.cc:855
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:837
+#: ../../src/wlapplication_options.cc:857
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:841
+#: ../../src/wlapplication_options.cc:861
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:850
+#: ../../src/wlapplication_options.cc:870
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:863
+#: ../../src/wlapplication_options.cc:883
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:865
+#: ../../src/wlapplication_options.cc:885
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:867
+#: ../../src/wlapplication_options.cc:887
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:869
+#: ../../src/wlapplication_options.cc:889
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:871
+#: ../../src/wlapplication_options.cc:891
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:873
+#: ../../src/wlapplication_options.cc:893
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:875
+#: ../../src/wlapplication_options.cc:895
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:877
+#: ../../src/wlapplication_options.cc:897
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:879
+#: ../../src/wlapplication_options.cc:899
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:881
+#: ../../src/wlapplication_options.cc:901
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:883
+#: ../../src/wlapplication_options.cc:903
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:885
+#: ../../src/wlapplication_options.cc:905
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:887
+#: ../../src/wlapplication_options.cc:907
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:889
+#: ../../src/wlapplication_options.cc:909
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:911
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:893
+#: ../../src/wlapplication_options.cc:913
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:895
+#: ../../src/wlapplication_options.cc:915
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:897
+#: ../../src/wlapplication_options.cc:917
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:899
+#: ../../src/wlapplication_options.cc:919
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:921
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:903
+#: ../../src/wlapplication_options.cc:923
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:905
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:907
+#: ../../src/wlapplication_options.cc:927
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:909
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:911
+#: ../../src/wlapplication_options.cc:931
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:913
+#: ../../src/wlapplication_options.cc:933
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:915
+#: ../../src/wlapplication_options.cc:935
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:917
+#: ../../src/wlapplication_options.cc:937
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:919
+#: ../../src/wlapplication_options.cc:939
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:921
+#: ../../src/wlapplication_options.cc:941
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:943
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:925
+#: ../../src/wlapplication_options.cc:945
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:947
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:949
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:931
+#: ../../src/wlapplication_options.cc:951
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:953
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
@@ -6698,12 +6706,12 @@ msgstr ""
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:946 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:966 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:964
+#: ../../src/wlapplication_options.cc:984
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -7291,7 +7299,7 @@ msgstr ""
 #. * TRANSLATORS: Button text
 #: ../../src/wui/game_client_disconnected.cc:78
 msgid "Continue game"
-msgstr ""
+msgstr "Continua partita"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:80
@@ -7306,8 +7314,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -7861,8 +7869,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistiche"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Viaggiare in mare"
