@@ -704,6 +704,8 @@ void NetAddons::admin_action(const AdminAction a,
 	send += addon.internal_name;
 	if (a == AdminAction::kSetupTx) {
 		send += '\n';
+		send += value;
+		send += "\nENDOFSTREAM\n";
 	} else {
 		if (a == AdminAction::kDelete) {
 			append_multiline_message(send, value);

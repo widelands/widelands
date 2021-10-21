@@ -373,6 +373,106 @@ void CommentEditor::reset_text() {
 	think();
 }
 
+/* TransifexSettingsBox implementation */
+
+class TransifexSettingsBox : public UI::Box {
+public:
+	TransifexSettingsBox(UI::Box& parent, std::shared_ptr<AddOns::AddOnInfo> info)
+	: UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	priority_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+	name_(this, 0, 0, 450, UI::PanelStyle::kFsMenu),
+	categories_(this, 0, 0, 0, UI::PanelStyle::kFsMenu)
+	{
+		add(new UI::Textarea(
+		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 pgettext("tx", "Priority:"), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(&priority_, UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(new UI::Textarea(
+		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 /** TRANSLATORS: "Resource" here refers to the name of a translation unit */
+		                 pgettext("tx", "Resource Name:"), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(&name_, UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(new UI::Textarea(
+		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 pgettext("tx", "Categories (whitespace-separated; characters only):"), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(&categories_, UI::Box::Resizing::kFullSize);
+		add_space(kRowButtonSpacing);
+		add(new UI::Textarea(
+		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 _("This may take several minutes. Please be patient."), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
+
+		name_.set_text(info->unlocalized_descname);
+		priority_.add(_("Low"), "normal", nullptr, false);
+		priority_.add(_("Normal"), "high", nullptr, true);
+		priority_.add(_("High"), "urgent", nullptr, false);
+		priority_.set_desired_size(300, priority_.get_lineheight() * (priority_.size() + 1));
+	}
+
+	/** Whether the data is valid and can be submitted. */
+	bool ok_enabled() const {
+		return priority_.has_selection() && !name_.text().empty() &&
+			categories_.text().find_first_not_of(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
+	}
+
+	/** Generate the data for the server command, in the format "Priority\nName\n[Categories]". */
+	std::string make_data() const {
+		std::string str = priority_.get_selected();
+		str += '\n';
+		str += name_.text();
+		str += "\n[";
+
+		std::string cats = categories_.text();
+		size_t count = 0;
+		for (;;) {
+			size_t pos = cats.find(' ');
+			if (pos == 0) {
+				// Skip over multiple whitespaces
+				pos = cats.find_first_not_of(" ");
+				if (pos == std::string::npos) {
+					break;
+				}
+				cats = cats.substr(pos);
+				continue;
+			}
+
+			if (count > 0) {
+				str += ',';
+			}
+			++count;
+
+			if (pos == std::string::npos) {
+				// Single tag
+				str += '"';
+				str += cats;
+				str += '"';
+				break;
+			}
+
+			// Multiple tags remaining
+			str += '"';
+			str += cats.substr(0, pos);
+			str += '"';
+			cats = cats.substr(pos + 1);
+		}
+
+		str += ']';
+		return str;
+	}
+
+private:
+	UI::Listselect<std::string> priority_;
+	UI::EditBox name_, categories_;
+};
+
 /* AdminDialog implementation */
 
 AdminDialog::AdminDialog(AddOnsCtrl& parent,
@@ -399,8 +499,10 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
              UI::ButtonStyle::kFsMenuSecondary,
              _("Cancel")),
      list_(nullptr),
-     text_(nullptr) {
-	if (a == AddOns::NetAddons::AdminAction::kDelete) {
+     text_(nullptr),
+     txsettings_(nullptr) {
+	switch (a) {
+	case AddOns::NetAddons::AdminAction::kDelete: {
 		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
 		text_->focus();
 
@@ -410,7 +512,14 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 		              UI::Box::Resizing::kFullSize);
 		main_box_.add_space(kRowButtonSpacing);
 		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
-	} else {
+		break;
+	}
+	case AddOns::NetAddons::AdminAction::kSetupTx: {
+		txsettings_ = new TransifexSettingsBox(main_box_, info);
+		main_box_.add(txsettings_, UI::Box::Resizing::kFullSize);
+		break;
+	}
+	default: {
 		list_ = new UI::Listselect<std::string>(&main_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu);
 
 		switch (a) {
@@ -439,6 +548,8 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 
 		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
 		main_box_.add(list_, UI::Box::Resizing::kExpandBoth);
+		break;
+	}
 	}
 
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
@@ -450,14 +561,22 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 	cancel_.sigclicked.connect([this]() { die(); });
 	ok_.sigclicked.connect([this, info, a, &parent, &riw]() {
 		try {
-			if (a == AddOns::NetAddons::AdminAction::kDelete) {
+			switch (a) {
+			case AddOns::NetAddons::AdminAction::kDelete:
 				parent.net().admin_action(a, *info, text_->get_text());
 				riw.die();
 				parent.erase_remote(info);
-			} else {
+				break;
+
+			case AddOns::NetAddons::AdminAction::kSetupTx:
+				parent.net().admin_action(a, *info, txsettings_->make_data());
+				break;
+
+			default:
 				parent.net().admin_action(a, *info, list_->get_selected());
 				*info = parent.net().fetch_one_remote(info->internal_name);
 				riw.update_data();
+				break;
 			}
 
 			parent.rebuild(false);
@@ -478,6 +597,8 @@ void AdminDialog::think() {
 	UI::Window::think();
 	if (text_) {
 		ok_.set_enabled(!text_->get_text().empty());
+	} else if (txsettings_) {
+		ok_.set_enabled(txsettings_->ok_enabled());
 	}
 }
 
@@ -679,50 +800,16 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
 	admin_action_.set_image(g_image_cache->get("images/wui/editor/menus/tools.png"));
-	admin_action_.add(_("Change verification status…"), AddOns::NetAddons::AdminAction::kVerify);
-	admin_action_.add(_("Change quality rating…"), AddOns::NetAddons::AdminAction::kQuality);
-	admin_action_.add(_("Change sync-safety status…"), AddOns::NetAddons::AdminAction::kSyncSafe);
-	admin_action_.add(_("Enable Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
+	admin_action_.add(_("Change verification status"), AddOns::NetAddons::AdminAction::kVerify);
+	admin_action_.add(_("Change quality rating"), AddOns::NetAddons::AdminAction::kQuality);
+	admin_action_.add(_("Change sync-safety status"), AddOns::NetAddons::AdminAction::kSyncSafe);
+	admin_action_.add(_("Configure Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
 	admin_action_.add(_("Delete this add-on"), AddOns::NetAddons::AdminAction::kDelete);
 	admin_action_.selected.connect([this]() {
 		const AddOns::NetAddons::AdminAction action = admin_action_.get_selected();
 		admin_action_.set_list_visibility(false);
-		if (action == AddOns::NetAddons::AdminAction::kSetupTx) {
-			{
-				UI::WLMessageBox m(
-				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
-				   (boost::format("<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>") %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(
-				          _("Are you sure you want to enable Transifex integration for this add-on?")) %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(
-				          (boost::format(
-				              /** TRANSLATORS: The placeholder is an URL */
-				              _("Don’t forget to configure the new resources at %1% afterwards.")) %
-				           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				              .as_font_tag(underline_tag(
-				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
-				             .str()) %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(_("This may take several minutes. Please be patient.")))
-				      .str(),
-				   UI::WLMessageBox::MBoxType::kOkCancel);
-				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-					return;
-				}
-			}
-			try {
-				parent_.net().admin_action(action, *info_, "" /* ignored */);
-			} catch (const std::exception& e) {
-				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-				                   e.what(), UI::WLMessageBox::MBoxType::kOk);
-				m.run<UI::Panel::Returncodes>();
-			}
-		} else {
-			AdminDialog ar(parent_, *this, info_, action);
-			ar.run<UI::Panel::Returncodes>();
-		}
+		AdminDialog ar(parent_, *this, info_, action);
+		ar.run<UI::Panel::Returncodes>();
 	});
 
 	login_button_.sigclicked.connect([this]() {
