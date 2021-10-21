@@ -435,7 +435,7 @@ public:
 			size_t pos = cats.find(' ');
 			if (pos == 0) {
 				// Skip over multiple whitespaces
-				pos = cats.find_first_not_of(" ");
+				pos = cats.find_first_not_of(' ');
 				if (pos == std::string::npos) {
 					break;
 				}

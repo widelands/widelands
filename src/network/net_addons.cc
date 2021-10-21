@@ -655,13 +655,13 @@ void NetAddons::comment(const AddOnInfo& addon,
 
 	std::string send;
 	if (index_to_edit == nullptr) {
-		std::string send = kCmdComment;
+		send = kCmdComment;
 		send += ' ';
 		send += addon.internal_name;
 		send += ' ';
 		send += version_to_string(addon.version, false);
 	} else {
-		std::string send = kCmdEditComment;
+		send = kCmdEditComment;
 		send += ' ';
 		send += std::to_string(*index_to_edit);
 	}
