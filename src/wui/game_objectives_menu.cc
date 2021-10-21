@@ -164,7 +164,9 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
 
 		UI::Icon* icon_flag = new UI::Icon(
 		   &vbox_flag_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize,
-		   THREADSAFE_T(const Image*, const Image*(*)(const RGBColor&, const std::string&), playercolor_image, player->get_playercolor(), "images/players/genstats_player.png"));
+		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
+		                playercolor_image, player->get_playercolor(),
+		                "images/players/genstats_player.png"));
 		UI::Icon* icon_team =
 		   new UI::Icon(&vbox_team_, UI::PanelStyle::kWui, 0, 0, kRowSize, kRowSize, nullptr);
 		UI::Textarea* txt_name =
@@ -270,8 +272,9 @@ void GameObjectivesMenu::update_diplomacy_details() {
 	for (auto& pair : diplomacy_teams_) {
 		const unsigned t = iplayer_.egbase().player(pair.first).team_number();
 		pair.second->set_icon(
-		   THREADSAFE_T(const Image*, const Image*(*)(const RGBColor&, const std::string&), playercolor_image, kTeamColors[t /* it's 1-based, 0 means No Team */],
-		                     t == 0 ? "images/players/no_team.png" : "images/players/team.png"));
+		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
+		                playercolor_image, kTeamColors[t /* it's 1-based, 0 means No Team */],
+		                t == 0 ? "images/players/no_team.png" : "images/players/team.png"));
 		pair.second->set_tooltip(t == 0 ? _("No team") : (boost::format(_("Team %u")) % t).str());
 	}
 
