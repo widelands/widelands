@@ -27,7 +27,12 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons() : initialized_(false), network_active_(false), client_socket_(0), is_admin_(false), cached_remotes_(0) {
+	NetAddons()
+	   : initialized_(false),
+	     network_active_(false),
+	     client_socket_(0),
+	     is_admin_(false),
+	     cached_remotes_(0) {
 	}
 	~NetAddons();
 

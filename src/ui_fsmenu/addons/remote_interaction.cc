@@ -378,37 +378,35 @@ void CommentEditor::reset_text() {
 class TransifexSettingsBox : public UI::Box {
 public:
 	TransifexSettingsBox(UI::Box& parent, std::shared_ptr<AddOns::AddOnInfo> info)
-	: UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	priority_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-	name_(this, 0, 0, 450, UI::PanelStyle::kFsMenu),
-	categories_(this, 0, 0, 0, UI::PanelStyle::kFsMenu)
-	{
-		add(new UI::Textarea(
-		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                 pgettext("tx", "Priority:"), UI::Align::kCenter),
-		              UI::Box::Resizing::kFullSize);
+	   : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     priority_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+	     name_(this, 0, 0, 450, UI::PanelStyle::kFsMenu),
+	     categories_(this, 0, 0, 0, UI::PanelStyle::kFsMenu) {
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                     pgettext("tx", "Priority:"), UI::Align::kCenter),
+		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&priority_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(new UI::Textarea(
-		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                 /** TRANSLATORS: "Resource" here refers to the name of a translation unit */
-		                 pgettext("tx", "Resource Name:"), UI::Align::kCenter),
-		              UI::Box::Resizing::kFullSize);
+		       this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		       /** TRANSLATORS: "Resource" here refers to the name of a translation unit */
+		       pgettext("tx", "Resource Name:"), UI::Align::kCenter),
+		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&name_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
-		add(new UI::Textarea(
-		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                 pgettext("tx", "Categories (whitespace-separated; characters only):"), UI::Align::kCenter),
-		              UI::Box::Resizing::kFullSize);
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                     pgettext("tx", "Categories (whitespace-separated; characters only):"),
+		                     UI::Align::kCenter),
+		    UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
 		add(&categories_, UI::Box::Resizing::kFullSize);
 		add_space(kRowButtonSpacing);
-		add(new UI::Textarea(
-		                 this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                 _("This may take several minutes. Please be patient."), UI::Align::kCenter),
-		              UI::Box::Resizing::kFullSize);
+		add(new UI::Textarea(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                     _("This may take several minutes. Please be patient."),
+		                     UI::Align::kCenter),
+		    UI::Box::Resizing::kFullSize);
 
 		name_.set_text(info->unlocalized_descname);
 		priority_.add(_("Low"), "normal", nullptr, false);
@@ -420,7 +418,8 @@ public:
 	/** Whether the data is valid and can be submitted. */
 	bool ok_enabled() const {
 		return priority_.has_selection() && !name_.text().empty() &&
-			categories_.text().find_first_not_of(" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
+		       categories_.text().find_first_not_of(
+		          " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
 	}
 
 	/** Generate the data for the server command, in the format "Priority\nName\n[Categories]". */
@@ -803,7 +802,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	admin_action_.add(_("Change verification status"), AddOns::NetAddons::AdminAction::kVerify);
 	admin_action_.add(_("Change quality rating"), AddOns::NetAddons::AdminAction::kQuality);
 	admin_action_.add(_("Change sync-safety status"), AddOns::NetAddons::AdminAction::kSyncSafe);
-	admin_action_.add(_("Configure Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
+	admin_action_.add(
+	   _("Configure Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
 	admin_action_.add(_("Delete this add-on"), AddOns::NetAddons::AdminAction::kDelete);
 	admin_action_.selected.connect([this]() {
 		const AddOns::NetAddons::AdminAction action = admin_action_.get_selected();
