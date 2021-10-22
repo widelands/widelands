@@ -45,8 +45,10 @@ void StreamRead::data_complete(void* const read_data, const size_t size) {
 	size_t read = data(read_data, size);
 
 	if (read != size) {
+		FORMAT_WARNINGS_OFF
 		throw data_error(
 		   "Stream ended unexpectedly (%" PRIuS " bytes read, %" PRIuS " expected)", read, size);
+		FORMAT_WARNINGS_ON
 	}
 }
 
