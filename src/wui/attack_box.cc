@@ -102,8 +102,8 @@ UI::Button* add_button(AttackBox* a,
                        void (AttackBox::*fn)(),
                        UI::ButtonStyle style,
                        const std::string& tooltip_text) {
-	UI::Button* button = new UI::Button(
-	   &parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
+	UI::Button* button =
+	   new UI::Button(&parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
 	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
 	parent.add(button);
 	return button;
@@ -211,8 +211,8 @@ void AttackBox::init(const bool fastclick) {
 	mainbox.add(&linebox, UI::Box::Resizing::kFullSize);
 
 	less_soldiers_.reset(add_button(this, linebox, "less", "0", &AttackBox::send_less_soldiers,
-	                            UI::ButtonStyle::kWuiSecondary,
-	                            _("Send less soldiers. Hold down Ctrl to send no soldiers")));
+	                                UI::ButtonStyle::kWuiSecondary,
+	                                _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 
 	UI::Box& columnbox = *new UI::Box(&linebox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
@@ -224,10 +224,10 @@ void AttackBox::init(const bool fastclick) {
 	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
-	more_soldiers_.reset(add_button(
-	   this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
-	   UI::ButtonStyle::kWuiSecondary,
-	   _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
+	more_soldiers_.reset(
+	   add_button(this, linebox, "more", std::to_string(max_attackers),
+	              &AttackBox::send_more_soldiers, UI::ButtonStyle::kWuiSecondary,
+	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox.add_space(kSpacing);
 
 	attack_button_.reset(new UI::Button(
@@ -297,7 +297,7 @@ void AttackBox::init(const bool fastclick) {
 	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(this, bottombox, "debug",
 		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug,
-	               UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
+		           UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
 		bottombox.add_space(kSpacing);
 	}
 	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"),
