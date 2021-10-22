@@ -422,7 +422,10 @@ public:
 		          " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
 	}
 
-	/** Generate the data for the server command, in the format "Priority\nName\n[Categories]". */
+	/**
+	 * Generate the data for the server command, in the format
+	 * "Priority <Linefeed> Name <Linefeed> [Categories]".
+	 */
 	std::string make_data() const {
 		std::string str = priority_.get_selected();
 		str += '\n';
