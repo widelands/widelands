@@ -41,6 +41,7 @@
 #include "logic/player.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication_options.h"
+#include "wui/attack_box.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
@@ -52,6 +53,7 @@
 #include "wui/stock_menu.h"
 #include "wui/toolbar.h"
 #include "wui/tribal_encyclopedia.h"
+#include "wui/unique_window_handler.h"
 #include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
@@ -696,6 +698,17 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
+			} else if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+					UI::UniqueWindow::Registry& registry =
+					   unique_windows().get_registry((boost::format("attackbox_%d")
+					   % building->serial()).str());
+					registry.open_window = [this, &registry, &node_and_triangle]() {
+						new AttackBox(*this, registry, node_and_triangle.node);
+					};
+					registry.create();
+					return;
+				}
 			}
 		}
 

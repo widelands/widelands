@@ -29,17 +29,17 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
 
 constexpr Duration kUpdateTimeInGametimeMs = Duration(500);  //  half a second, gametime
 
-AttackBox::AttackBox(UI::Panel* parent,
-                     Widelands::Player* player,
-                     Widelands::FCoords* target,
-                     uint32_t const x,
-                     uint32_t const y)
-   : UI::Box(parent, UI::PanelStyle::kWui, x, y, UI::Box::Vertical),
-     player_(player),
-     map_(player_->egbase().map()),
+AttackBox::AttackBox(InteractivePlayer& parent,
+                     UI::UniqueWindow::Registry& reg,
+                     const Widelands::Coords& target)
+     : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
+     iplayer_(parent),
+     map_(iplayer_.player().egbase().map()),
      node_coordinates_(target),
      lastupdate_(0) {
 	init();
@@ -48,17 +48,16 @@ AttackBox::AttackBox(UI::Panel* parent,
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	MutexLock m(MutexLock::ID::kObjects);
 
-	assert(player_);
-	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
-		for (Widelands::Coords& coords : building->get_positions(player_->egbase())) {
-			if (player_->is_seeing(map_.get_index(coords, map_.get_width()))) {
+	if (upcast(Widelands::Building, building, map_.get_immovable(node_coordinates_))) {
+		for (Widelands::Coords& coords : building->get_positions(iplayer_.egbase())) {
+			if (iplayer_.player().is_seeing(map_.get_index(coords, map_.get_width()))) {
 				std::vector<Widelands::Soldier*> v;
 				// TODO(Nordfriese): This method decides by itself which soldier remains in the
 				// building. This soldier will not show up in the result vector. Perhaps we should show
 				// all available soldiers, grouped by building, so the player can choose between all
 				// soldiers knowing that at least one of each group will have to stay at home. However,
 				// this could clutter up the screen a lot. Especially if you have many small buildings.
-				player_->find_attack_soldiers(building->base_flag(), &v);
+				iplayer_.get_player()->find_attack_soldiers(building->base_flag(), &v);
 				return v;
 			}
 		}
@@ -91,13 +90,16 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
 	return result;
 }
 
-std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
-                                                  const std::string& text,
+template <typename T>
+std::unique_ptr<UI::Button> add_button(AttackBox* a,
+                                                  UI::Box& parent,
+                                                  const std::string& name,
+                                                  const T& text_or_image,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, text, 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
-	button->sigclicked.connect([this, fn]() { (this->*fn)(); });
+	   &parent, name, 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary, text_or_image, tooltip_text));
+	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
 	parent.add(button.get());
 	return button;
 }
@@ -106,9 +108,16 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
  * Update available soldiers
  */
 void AttackBox::think() {
-	if ((player_->egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if (!iplayer_.player().is_seeing(iplayer_.egbase().map().get_index(node_coordinates_)) &&
+	    !iplayer_.player().see_all()) {
+		die();
+	}
+
+	if ((iplayer_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_attack(false);
 	}
+
+	UI::Window::think();
 }
 
 static inline std::string slider_heading(uint32_t num_attackers) {
@@ -120,7 +129,7 @@ static inline std::string slider_heading(uint32_t num_attackers) {
 void AttackBox::update_attack(bool action_on_panel) {
 	MutexLock m(MutexLock::ID::kObjects);
 
-	lastupdate_ = player_->egbase().get_gametime();
+	lastupdate_ = iplayer_.egbase().get_gametime();
 
 	assert(soldiers_slider_.get());
 	assert(soldiers_text_.get());
@@ -187,17 +196,15 @@ void AttackBox::update_attack(bool action_on_panel) {
 }
 
 void AttackBox::init() {
-	assert(node_coordinates_);
 	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
 	const size_t max_attackers = all_attackers.size();
 
 	UI::Box& mainbox = *new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
-	add(&mainbox);
 
 	UI::Box& linebox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-	mainbox.add(&linebox);
+	mainbox.add(&linebox, UI::Box::Resizing::kFullSize);
 
-	less_soldiers_ = add_button(linebox, "0", &AttackBox::send_less_soldiers,
+	less_soldiers_ = add_button(this, linebox, "less", "0", &AttackBox::send_less_soldiers,
 	                            _("Send less soldiers. Hold down Ctrl to send no soldiers"));
 
 	UI::Box& columnbox = *new UI::Box(&linebox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
@@ -211,7 +218,7 @@ void AttackBox::init() {
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
 	more_soldiers_ =
-	   add_button(linebox, std::to_string(max_attackers), &AttackBox::send_more_soldiers,
+	   add_button(this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
 	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
 	linebox.add_space(8);
 
@@ -219,6 +226,8 @@ void AttackBox::init() {
 	   &linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
 	   g_image_cache->get("images/wui/buildings/menu_attack.png"), _("Start attack")));
 	linebox.add(attack_button_.get());
+	attack_button_->sigclicked.connect([this]() { act_attack(); });
+	set_fastclick_panel(attack_button_.get());
 
 	attacking_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
 	remaining_soldiers_.reset(new ListOfSoldiers(&mainbox, this, 0, 0, 30, 30));
@@ -262,21 +271,55 @@ void AttackBox::init() {
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
-	const Widelands::BaseImmovable* i = map_.get_immovable(*node_coordinates_);
+	const Widelands::BaseImmovable* i = map_.get_immovable(node_coordinates_);
 	if (i && i->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		do_not_conquer_.reset(
 		   new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
 		do_not_conquer_->set_state(
 		   !dynamic_cast<const Widelands::MilitarySite&>(*i).attack_target()->get_allow_conquer(
-		      player_->player_number()));
+		      iplayer_.player_number()));
 		mainbox.add(do_not_conquer_.get(), UI::Box::Resizing::kFullSize);
 	}
+
+	UI::Box& bottombox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	mainbox.add(&bottombox, UI::Box::Resizing::kFullSize);
+	bottombox.add_inf_space();
+	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
+		add_button(this, bottombox, "debug", g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug, _("Show Debug Window")).release();
+		bottombox.add_space(8);
+	}
+	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"), &AttackBox::act_goto, _("Center view on this")).release();
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
 	// Update the list of soldiers now to avoid a flickering window in the next tick
 	update_attack(false);
+
+	set_center_panel(&mainbox);
+	center_to_parent();
+	warp_mouse_to_fastclick_panel();
+	initialization_complete();
+}
+
+/** The attack button was pressed. */
+void AttackBox::act_attack() {
+	MutexLock m(MutexLock::ID::kObjects);
+	if (upcast(Widelands::Building, building, iplayer_.egbase().map().get_immovable(node_coordinates_))) {
+		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
+		                                  soldiers(), get_allow_conquer());
+	}
+	die();
+}
+
+/** Center the player's view on the building. Callback function for the corresponding button. */
+void AttackBox::act_goto() {
+	iplayer_.map_view()->scroll_to_field(node_coordinates_, MapView::Transition::Smooth);
+}
+
+/** Callback for debug window. */
+void AttackBox::act_debug() {
+	show_field_debug(iplayer_, iplayer_.egbase().map().get_fcoords(node_coordinates_));
 }
 
 void AttackBox::send_less_soldiers() {
@@ -426,7 +469,7 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
 		soldiers_[i]->draw_info_icon(
-		   location, 1.0f, Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+		   location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
 		if (restricted_row_number_) {
 			++row;
 			if (row >= current_size_) {

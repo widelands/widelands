@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
@@ -30,30 +29,21 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-
-using Widelands::Bob;
-using Widelands::Building;
-using Widelands::Soldier;
+#include "ui_basic/unique_window.h"
 
 /**
  * Provides the attack settings that are part of a \ref FieldActionWindow
  * when clicking on an enemy building.
  */
-struct AttackBox : public UI::Box {
-	AttackBox(UI::Panel* parent,
-	          Widelands::Player* player,
-	          Widelands::FCoords* target,
-	          uint32_t const x,
-	          uint32_t const y);
+struct AttackBox : public UI::UniqueWindow {
+	AttackBox(InteractivePlayer& parent,
+	          UI::UniqueWindow::Registry&,
+	          const Widelands::Coords& target);
 
 	void init();
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
-
-	UI::Button* get_attack_button() const {
-		return attack_button_.get();
-	}
 
 	bool get_allow_conquer() const {
 		return do_not_conquer_ && !do_not_conquer_->get_state();
@@ -72,10 +62,6 @@ private:
 	                       const std::string& str,
 	                       UI::Align alignment,
 	                       const UI::FontStyle style);
-	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
-	                                       const std::string& text,
-	                                       void (AttackBox::*fn)(),
-	                                       const std::string& tooltip_text);
 
 	void think() override;
 	void update_attack(bool);
@@ -86,9 +72,9 @@ public:
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 private:
-	Widelands::Player* player_;
+	InteractivePlayer& iplayer_;
 	const Widelands::Map& map_;
-	Widelands::FCoords* node_coordinates_;
+	const Widelands::Coords node_coordinates_;
 
 	std::unique_ptr<UI::Slider> soldiers_slider_;
 	std::unique_ptr<UI::Textarea> soldiers_text_;
@@ -161,6 +147,10 @@ private:
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
 	std::unique_ptr<UI::Button> attack_button_;
 	std::unique_ptr<UI::Checkbox> do_not_conquer_;
+
+	void act_attack();
+	void act_goto();
+	void act_debug();
 
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
