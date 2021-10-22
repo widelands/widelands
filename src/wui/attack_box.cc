@@ -41,7 +41,7 @@ AttackBox::AttackBox(InteractivePlayer& parent,
                      UI::UniqueWindow::Registry& reg,
                      const Widelands::Coords& target,
                      bool fastclick)
-     : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
+   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
      iplayer_(parent),
      map_(iplayer_.player().egbase().map()),
      node_coordinates_(target),
@@ -96,11 +96,11 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
 
 template <typename T>
 std::unique_ptr<UI::Button> add_button(AttackBox* a,
-                                                  UI::Box& parent,
-                                                  const std::string& name,
-                                                  const T& text_or_image,
-                                                  void (AttackBox::*fn)(),
-                                                  const std::string& tooltip_text) {
+                                       UI::Box& parent,
+                                       const std::string& name,
+                                       const T& text_or_image,
+                                       void (AttackBox::*fn)(),
+                                       const std::string& tooltip_text) {
 	std::unique_ptr<UI::Button> button(new UI::Button(
 	   &parent, name, 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary, text_or_image, tooltip_text));
 	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
@@ -222,9 +222,9 @@ void AttackBox::init(const bool fastclick) {
 	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
-	more_soldiers_ =
-	   add_button(this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
-	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
+	more_soldiers_ = add_button(
+	   this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
+	   _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
 	linebox.add_space(kSpacing);
 
 	attack_button_.reset(new UI::Button(
@@ -292,10 +292,15 @@ void AttackBox::init(const bool fastclick) {
 	bottombox.add_inf_space();
 
 	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
-		add_button(this, bottombox, "debug", g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug, _("Show Debug Window")).release();
+		add_button(this, bottombox, "debug",
+		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug,
+		           _("Show Debug Window"))
+		   .release();
 		bottombox.add_space(kSpacing);
 	}
-	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"), &AttackBox::act_goto, _("Center view on this")).release();
+	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"),
+	           &AttackBox::act_goto, _("Center view on this"))
+	   .release();
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
@@ -312,9 +317,10 @@ void AttackBox::init(const bool fastclick) {
 /** The attack button was pressed. */
 void AttackBox::act_attack() {
 	MutexLock m(MutexLock::ID::kObjects);
-	if (upcast(Widelands::Building, building, iplayer_.egbase().map().get_immovable(node_coordinates_))) {
-		iplayer_.game().send_player_enemyflagaction(building->base_flag(), iplayer_.player_number(),
-		                                  soldiers(), get_allow_conquer());
+	if (upcast(Widelands::Building, building,
+	           iplayer_.egbase().map().get_immovable(node_coordinates_))) {
+		iplayer_.game().send_player_enemyflagaction(
+		   building->base_flag(), iplayer_.player_number(), soldiers(), get_allow_conquer());
 	}
 	die();
 }
@@ -475,8 +481,8 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 	int32_t row = 0;
 	for (uint32_t i = 0; i < nr_soldiers; ++i) {
 		Vector2i location(column * kSoldierIconWidth, row * kSoldierIconHeight);
-		soldiers_[i]->draw_info_icon(
-		   location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding, InfoToDraw::kSoldierLevels, &dst);
+		soldiers_[i]->draw_info_icon(location, 1.0f, Widelands::Soldier::InfoMode::kInBuilding,
+		                             InfoToDraw::kSoldierLevels, &dst);
 		if (restricted_row_number_) {
 			++row;
 			if (row >= current_size_) {
@@ -500,7 +506,8 @@ UI::Window& AttackBox::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObj
 		if (packet_version == kCurrentPacketVersion) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
-			AttackBox* a = dynamic_cast<AttackBox*>(dynamic_cast<InteractivePlayer&>(ib).show_attack_box(Widelands::Coords(x, y), false));
+			AttackBox* a = dynamic_cast<AttackBox*>(
+			   dynamic_cast<InteractivePlayer&>(ib).show_attack_box(Widelands::Coords(x, y), false));
 			assert(a != nullptr);
 
 			const uint8_t destroy = fr.unsigned_8();

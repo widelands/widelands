@@ -721,9 +721,8 @@ UI::Window* InteractivePlayer::show_attack_box(const Widelands::Coords& c, const
 		if (upcast(Building, building, map.get_immovable(c))) {
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry((boost::format("attackbox_%d")
-					   % building->serial()).str());
+					UI::UniqueWindow::Registry& registry = unique_windows().get_registry(
+					   (boost::format("attackbox_%d") % building->serial()).str());
 					registry.open_window = [this, &registry, &c, fastclick]() {
 						new AttackBox(*this, registry, c, fastclick);
 					};
