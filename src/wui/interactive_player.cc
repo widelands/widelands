@@ -692,24 +692,16 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 
 	const Map& map = egbase().map();
-	if (player().is_seeing(Map::get_index(node_and_triangle.node, map.get_width()))) {
+	if (player().is_seeing(map.get_index(node_and_triangle.node))) {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
-			} else if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
-				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry((boost::format("attackbox_%d")
-					   % building->serial()).str());
-					registry.open_window = [this, &registry, &node_and_triangle]() {
-						new AttackBox(*this, registry, node_and_triangle.node);
-					};
-					registry.create();
-					return;
-				}
 			}
+		}
+		if (show_attack_box(node_and_triangle.node, true)) {
+			return;
 		}
 
 		if (!in_road_building_mode()) {
@@ -721,6 +713,27 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &fieldaction_);
 	}
+}
+
+UI::Window* InteractivePlayer::show_attack_box(const Widelands::Coords& c, const bool fastclick) {
+	const Map& map = egbase().map();
+	if (player().is_seeing(Map::get_index(c, map.get_width()))) {
+		if (upcast(Building, building, map.get_immovable(c))) {
+			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+					UI::UniqueWindow::Registry& registry =
+					   unique_windows().get_registry((boost::format("attackbox_%d")
+					   % building->serial()).str());
+					registry.open_window = [this, &registry, &c, fastclick]() {
+						new AttackBox(*this, registry, c, fastclick);
+					};
+					registry.create();
+					return registry.window;
+				}
+			}
+		}
+	}
+	return nullptr;
 }
 
 /**

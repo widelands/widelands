@@ -53,6 +53,7 @@
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/attack_box.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
@@ -988,6 +989,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kConfigureEconomy:
 					w = EconomyOptionsWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kAttackBox:
+					w = &AttackBox::load(fr, *this, mol);
 					break;
 				default:
 					throw Widelands::GameDataError(

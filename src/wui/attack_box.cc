@@ -29,20 +29,24 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 
 constexpr Duration kUpdateTimeInGametimeMs = Duration(500);  //  half a second, gametime
+constexpr int kSpacing = 8;
 
 AttackBox::AttackBox(InteractivePlayer& parent,
                      UI::UniqueWindow::Registry& reg,
-                     const Widelands::Coords& target)
+                     const Widelands::Coords& target,
+                     bool fastclick)
      : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
      iplayer_(parent),
      map_(iplayer_.player().egbase().map()),
      node_coordinates_(target),
      lastupdate_(0) {
-	init();
+	init(fastclick);
 }
 
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
@@ -195,11 +199,12 @@ void AttackBox::update_attack(bool action_on_panel) {
 	more_soldiers_->set_title(std::to_string(max_attackers));
 }
 
-void AttackBox::init() {
+void AttackBox::init(const bool fastclick) {
 	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
 	const size_t max_attackers = all_attackers.size();
 
 	UI::Box& mainbox = *new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	set_center_panel(&mainbox);
 
 	UI::Box& linebox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	mainbox.add(&linebox, UI::Box::Resizing::kFullSize);
@@ -220,7 +225,7 @@ void AttackBox::init() {
 	more_soldiers_ =
 	   add_button(this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
 	              _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
-	linebox.add_space(8);
+	linebox.add_space(kSpacing);
 
 	attack_button_.reset(new UI::Button(
 	   &linebox, "attack", 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary,
@@ -271,23 +276,24 @@ void AttackBox::init() {
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
+	UI::Box& bottombox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	mainbox.add(&bottombox, UI::Box::Resizing::kFullSize);
+
 	const Widelands::BaseImmovable* i = map_.get_immovable(node_coordinates_);
 	if (i && i->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		do_not_conquer_.reset(
-		   new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
+		   new UI::Checkbox(&bottombox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
 		do_not_conquer_->set_state(
 		   !dynamic_cast<const Widelands::MilitarySite&>(*i).attack_target()->get_allow_conquer(
 		      iplayer_.player_number()));
-		mainbox.add(do_not_conquer_.get(), UI::Box::Resizing::kFullSize);
+		bottombox.add(do_not_conquer_.get(), UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	}
-
-	UI::Box& bottombox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-	mainbox.add(&bottombox, UI::Box::Resizing::kFullSize);
 	bottombox.add_inf_space();
+
 	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(this, bottombox, "debug", g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug, _("Show Debug Window")).release();
-		bottombox.add_space(8);
+		bottombox.add_space(kSpacing);
 	}
 	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"), &AttackBox::act_goto, _("Center view on this")).release();
 
@@ -296,9 +302,10 @@ void AttackBox::init() {
 	// Update the list of soldiers now to avoid a flickering window in the next tick
 	update_attack(false);
 
-	set_center_panel(&mainbox);
 	center_to_parent();
-	warp_mouse_to_fastclick_panel();
+	if (fastclick) {
+		warp_mouse_to_fastclick_panel();
+	}
 	initialization_complete();
 }
 
@@ -483,5 +490,52 @@ void AttackBox::ListOfSoldiers::draw(RenderTarget& dst) {
 				++row;
 			}
 		}
+	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& AttackBox::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			const int32_t x = fr.signed_32();
+			const int32_t y = fr.signed_32();
+			AttackBox* a = dynamic_cast<AttackBox*>(dynamic_cast<InteractivePlayer&>(ib).show_attack_box(Widelands::Coords(x, y), false));
+			assert(a != nullptr);
+
+			const uint8_t destroy = fr.unsigned_8();
+			if (a->do_not_conquer_ != nullptr) {
+				a->do_not_conquer_->set_state(destroy == 0);
+			}
+
+			for (const Widelands::Soldier* s : a->attacking_soldiers_->get_soldiers()) {
+				a->attacking_soldiers_->remove(s);
+				a->remaining_soldiers_->add(s);
+			}
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
+				a->remaining_soldiers_->remove(s);
+				a->attacking_soldiers_->add(s);
+			}
+
+			return *a;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Attack Box", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("attack box: %s", e.what());
+	}
+}
+void AttackBox::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.signed_32(node_coordinates_.x);
+	fw.signed_32(node_coordinates_.y);
+
+	fw.unsigned_8(do_not_conquer_ && !do_not_conquer_->get_state() ? 1 : 0);
+
+	fw.unsigned_32(attacking_soldiers_->get_soldiers().size());
+	for (const Widelands::Soldier* s : attacking_soldiers_->get_soldiers()) {
+		fw.unsigned_32(mos.get_object_file_index(*s));
 	}
 }

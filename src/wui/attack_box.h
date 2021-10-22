@@ -31,16 +31,21 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-/**
- * Provides the attack settings that are part of a \ref FieldActionWindow
- * when clicking on an enemy building.
- */
-struct AttackBox : public UI::UniqueWindow {
+/** Provides the attack settings when clicking on an enemy building. */
+class AttackBox : public UI::UniqueWindow {
+public:
 	AttackBox(InteractivePlayer& parent,
 	          UI::UniqueWindow::Registry&,
-	          const Widelands::Coords& target);
+	          const Widelands::Coords& target,
+	          bool fastclick);
 
-	void init();
+	void init(bool fastclick);
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kAttackBox;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader& mol);
 
 	size_t count_soldiers() const;
 	std::vector<Widelands::Serial> soldiers() const;
