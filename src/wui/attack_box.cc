@@ -51,11 +51,11 @@ AttackBox::AttackBox(InteractivePlayer& parent,
 
 std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 	MutexLock m(MutexLock::ID::kObjects);
+	std::vector<Widelands::Soldier*> v;
 
 	if (upcast(Widelands::Building, building, map_.get_immovable(node_coordinates_))) {
 		for (Widelands::Coords& coords : building->get_positions(iplayer_.egbase())) {
 			if (iplayer_.player().is_seeing(map_.get_index(coords, map_.get_width()))) {
-				std::vector<Widelands::Soldier*> v;
 				// TODO(Nordfriese): This method decides by itself which soldier remains in the
 				// building. This soldier will not show up in the result vector. Perhaps we should show
 				// all available soldiers, grouped by building, so the player can choose between all
@@ -68,7 +68,7 @@ std::vector<Widelands::Soldier*> AttackBox::get_max_attackers() {
 		// Player can't see any part of the building, so it can't be attacked
 		// This is the same check as done later on in send_player_enemyflagaction()
 	}
-	return std::vector<Widelands::Soldier*>();
+	return v;
 }
 
 std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
@@ -79,7 +79,7 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
                                                             uint32_t initial,
                                                             char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
-	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiDark, hint));
+	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
 	parent.add(result.get());
 	return result;
 }
@@ -95,16 +95,17 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
 }
 
 template <typename T>
-std::unique_ptr<UI::Button> add_button(AttackBox* a,
-                                       UI::Box& parent,
-                                       const std::string& name,
-                                       const T& text_or_image,
-                                       void (AttackBox::*fn)(),
-                                       const std::string& tooltip_text) {
-	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, name, 8, 8, 34, 34, UI::ButtonStyle::kWuiPrimary, text_or_image, tooltip_text));
+UI::Button* add_button(AttackBox* a,
+                       UI::Box& parent,
+                       const std::string& name,
+                       const T& text_or_image,
+                       void (AttackBox::*fn)(),
+                       UI::ButtonStyle style,
+                       const std::string& tooltip_text) {
+	UI::Button* button = new UI::Button(
+	   &parent, name, 8, 8, 34, 34, style, text_or_image, tooltip_text);
 	button->sigclicked.connect([a, fn]() { (a->*fn)(); });
-	parent.add(button.get());
+	parent.add(button);
 	return button;
 }
 
@@ -209,8 +210,9 @@ void AttackBox::init(const bool fastclick) {
 	UI::Box& linebox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	mainbox.add(&linebox, UI::Box::Resizing::kFullSize);
 
-	less_soldiers_ = add_button(this, linebox, "less", "0", &AttackBox::send_less_soldiers,
-	                            _("Send less soldiers. Hold down Ctrl to send no soldiers"));
+	less_soldiers_.reset(add_button(this, linebox, "less", "0", &AttackBox::send_less_soldiers,
+	                            UI::ButtonStyle::kWuiSecondary,
+	                            _("Send less soldiers. Hold down Ctrl to send no soldiers")));
 
 	UI::Box& columnbox = *new UI::Box(&linebox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
@@ -222,9 +224,10 @@ void AttackBox::init(const bool fastclick) {
 	   columnbox, 210, 17, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 	soldiers_slider_->changed.connect([this]() { update_attack(false); });
 
-	more_soldiers_ = add_button(
+	more_soldiers_.reset(add_button(
 	   this, linebox, "more", std::to_string(max_attackers), &AttackBox::send_more_soldiers,
-	   _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible"));
+	   UI::ButtonStyle::kWuiSecondary,
+	   _("Send more soldiers. Hold down Ctrl to send as many soldiers as possible")));
 	linebox.add_space(kSpacing);
 
 	attack_button_.reset(new UI::Button(
@@ -294,13 +297,11 @@ void AttackBox::init(const bool fastclick) {
 	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(this, bottombox, "debug",
 		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackBox::act_debug,
-		           _("Show Debug Window"))
-		   .release();
+	               UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
 		bottombox.add_space(kSpacing);
 	}
 	add_button(this, bottombox, "goto", g_image_cache->get("images/wui/menus/goto.png"),
-	           &AttackBox::act_goto, _("Center view on this"))
-	   .release();
+	           &AttackBox::act_goto, UI::ButtonStyle::kWuiMenu, _("Center view on this"));
 
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > 0);
