@@ -327,7 +327,6 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	~ProductionSite() override;
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -344,8 +343,8 @@ public:
 		OPtr<Worker> worker;
 	};
 
-	WorkingPosition const* working_positions() const {
-		return working_positions_;
+	const std::vector<WorkingPosition>* working_positions() const {
+		return working_positions_.get();
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
@@ -481,7 +480,7 @@ protected:
 	}
 
 protected:  // TrainingSite must have access to this stuff
-	WorkingPosition* working_positions_;
+	std::unique_ptr<std::vector<WorkingPosition>> working_positions_;
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
 

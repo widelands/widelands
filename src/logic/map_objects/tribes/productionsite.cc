@@ -286,7 +286,7 @@ IMPLEMENTATION
 
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
    : Building(ps_descr),
-     working_positions_(new WorkingPosition[ps_descr.nr_working_positions()]),
+     working_positions_(new std::vector<WorkingPosition>(ps_descr.nr_working_positions())),
      fetchfromflag_(0),
      program_timer_(false),
      program_time_(0),
@@ -298,11 +298,6 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      default_anim_("idle"),
      main_worker_(-1) {
 	format_statistics_string();
-}
-
-ProductionSite::~ProductionSite() {
-	// TODO(sirver): Use std::vector<std::unique_ptr<>> to avoid naked delete.
-	delete[] working_positions_;
 }
 
 void ProductionSite::load_finish(EditorGameBase& egbase) {
@@ -317,7 +312,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t nr_requests = 0;
 	uint32_t nr_coming = 0;
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
-		const Widelands::Request* request = working_positions_[i].worker_request;
+		const Widelands::Request* request = working_positions_->at(i).worker_request;
 		// Check whether a request is being fulfilled or not
 		if (request) {
 			if (request->is_open()) {
@@ -325,7 +320,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 			} else {
 				++nr_coming;
 			}
-		} else if (working_positions_[i].worker == nullptr) {
+		} else if (working_positions_->at(i).worker == nullptr) {
 			// We might have no request, but no worker either
 			++nr_requests;
 		}
@@ -379,7 +374,7 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 				const DescriptionIndex needed_worker = wp.first;
 				bool worker_available = false;
 				for (unsigned int i = 0; i < descr().nr_working_positions(); ++i) {
-					const Worker* cw = working_positions()[i].worker.get(game);
+					const Worker* cw = working_positions()->at(i).worker.get(game);
 					if (cw) {
 						DescriptionIndex current_worker = cw->descr().worker_index();
 						if (owner().tribe().get_worker_descr(current_worker)->can_act_as(needed_worker)) {
@@ -482,7 +477,7 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 	}
 
 	//  Request missing workers.
-	WorkingPosition* wp = working_positions_;
+	auto wp = working_positions_->begin();
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
@@ -516,7 +511,7 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 
 	Building::set_economy(e, type);
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		if (Request* const r = working_positions_[--i].worker_request) {
+		if (Request* const r = working_positions_->at(--i).worker_request) {
 			if (r->get_type() == type) {
 				r->set_economy(e);
 			}
@@ -538,12 +533,12 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 void ProductionSite::cleanup(EditorGameBase& egbase) {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
-		delete working_positions_[i].worker_request;
-		working_positions_[i].worker_request = nullptr;
-		Worker* const w = working_positions_[i].worker.get(egbase);
+		delete working_positions_->at(i).worker_request;
+		working_positions_->at(i).worker_request = nullptr;
+		Worker* const w = working_positions_->at(i).worker.get(egbase);
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
-		working_positions_[i].worker = nullptr;
+		working_positions_->at(i).worker = nullptr;
 
 		// Actually remove the worker
 		if (w) {
@@ -567,9 +562,8 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
  * returns true on success and false if there is no room for this worker
  */
 bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes, int32_t slot) {
-	WorkingPosition* current = working_positions_;
-	for (WorkingPosition* const end = current + descr().nr_working_positions(); current < end;
-	     ++current) {
+	auto current = working_positions_->begin();
+	for (int i = descr().nr_working_positions(); i; i--, ++current) {
 		if (slot < 0) {
 			if (current->worker.get(egbase)) {
 				continue;
@@ -610,7 +604,7 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
  */
 void ProductionSite::remove_worker(Worker& w) {
 	molog(owner().egbase().get_gametime(), "%s leaving\n", w.descr().name().c_str());
-	WorkingPosition* wp = working_positions_;
+	auto wp = working_positions_->begin();
 	int32_t wp_index = 0;
 
 	for (const auto& temp_wp : descr().working_positions()) {
@@ -668,18 +662,18 @@ void ProductionSite::request_worker_callback(
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
 	DescriptionIndex idx = w->descr().worker_index();
-	for (WorkingPosition* wp = psite.working_positions_;; ++wp) {
-		if (wp->worker_request == &rq) {
-			if (wp->worker_request->get_index() == idx) {
+	for (WorkingPosition& wp : *psite.working_positions_) {
+		if (wp.worker_request == &rq) {
+			if (wp.worker_request->get_index() == idx) {
 				// Place worker
 				delete &rq;
-				*wp = WorkingPosition(nullptr, w);
+				wp = WorkingPosition(nullptr, w);
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
-				DescriptionIndex workerid = wp->worker_request->get_index();
-				delete wp->worker_request;
-				wp->worker_request = &psite.request_worker(workerid);
+				DescriptionIndex workerid = wp.worker_request->get_index();
+				delete wp.worker_request;
+				wp.worker_request = &psite.request_worker(workerid);
 			}
 			break;
 		}
@@ -688,7 +682,7 @@ void ProductionSite::request_worker_callback(
 		{
 			uint8_t nwp = psite.descr().nr_working_positions();
 			uint8_t pos = 0;
-			WorkingPosition* wp = psite.working_positions_;
+			auto wp = psite.working_positions_->begin();
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker.get(game) && !worker_placed) {
@@ -747,7 +741,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 		} else {
 			assert(main_worker_ >= 0);
 			if (stack_.empty()) {
-				working_positions_[main_worker_].worker.get(game)->update_task_buildingwork(game);
+				working_positions_->at(main_worker_).worker.get(game)->update_task_buildingwork(game);
 				return;
 			}
 
@@ -814,8 +808,8 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
 	if (main_worker_ >= 0) {
-		assert(working_positions_[main_worker_].worker.get(game));
-		working_positions_[main_worker_].worker.get(game)->update_task_buildingwork(game);
+		assert(working_positions_->at(main_worker_).worker.get(game));
+		working_positions_->at(main_worker_).worker.get(game)->update_task_buildingwork(game);
 	}
 
 	return true;
@@ -841,7 +835,7 @@ void ProductionSite::set_stopped(bool const stopped) {
  */
 bool ProductionSite::can_start_working() const {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		if (working_positions_[--i].worker_request) {
+		if (working_positions_->at(--i).worker_request) {
 			return false;
 		}
 	}
@@ -852,7 +846,7 @@ void ProductionSite::try_start_working(Game& game) {
 	const size_t nr_workers = descr().nr_working_positions();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
 		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
-			if (Worker* worker = working_positions_[i].worker.get(game)) {
+			if (Worker* worker = working_positions_->at(i).worker.get(game)) {
 				// We may start even if can_start_working() returns false, because basic actions
 				// like unloading extra wares should take place anyway
 				main_worker_ = i;
@@ -872,7 +866,7 @@ void ProductionSite::try_start_working(Game& game) {
 bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
 	assert(!descr().working_positions().empty());
 	assert(main_worker_ >= 0);
-	assert(&worker == working_positions_[main_worker_].worker.get(game));
+	assert(&worker == working_positions_->at(main_worker_).worker.get(game));
 
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
@@ -1067,7 +1061,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		working_positions_[--i].worker.get(game)->gain_experience(game);
+		working_positions_->at(--i).worker.get(game)->gain_experience(game);
 	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
