@@ -600,36 +600,84 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
 }
 
 /**
+ * @return index in descr().working_positions() (slot requirement) and working_positions_ (current
+ * slot)
+ */
+std::pair<int32_t, int32_t> ProductionSite::find_worker(OPtr<Worker> w) {
+	auto wp = working_positions_->begin();
+	const BillOfMaterials& bom = descr().working_positions();
+	int32_t wp_index = 0;
+	int32_t bom_index = 0;
+	for (auto temp_wp = bom.begin(); temp_wp != bom.end(); ++temp_wp, ++bom_index) {
+		for (uint32_t j = temp_wp->second; j; --j, ++wp, ++wp_index) {
+			if (wp->worker == w) {
+				return std::pair<size_t, size_t>(bom_index, wp_index);
+			}
+		}
+	}
+	return std::pair<int32_t, int32_t>(-1, -1);
+}
+
+void ProductionSite::try_replace_worker(const Game* game,
+                                        DescriptionIndex worker_index,
+                                        WorkingPosition* wp) {
+	// Search replacement worker in the same building
+	for (auto wp_repl = working_positions_->begin(); wp_repl != working_positions_->end();
+	     wp_repl++) {
+		if (!wp_repl->worker.is_set()) {
+			continue;
+		}
+		std::pair<int32_t, int32_t> w_pair = find_worker(wp_repl->worker);
+		const DescriptionIndex worker_index_repl = descr().working_positions().at(w_pair.first).first;
+
+		// Only move workers into higher qualified jobs
+		const WorkerDescr& wd = game->descriptions().workers().get(worker_index);
+		bool needs_higher_qualification = wd.can_act_as(worker_index_repl);
+
+		Worker* w_repl = wp_repl->worker.get(*game);
+		bool is_over_qualified = w_repl->descr().worker_index() != worker_index_repl;
+		if (is_over_qualified && needs_higher_qualification &&
+		    w_repl->descr().can_act_as(worker_index)) {
+			// Move worker to evicted slot
+			delete wp->worker_request;
+			*wp = std::move(*wp_repl);
+			molog(owner().egbase().get_gametime(), "%s promoted\n", w_repl->descr().name().c_str());
+			// Request the now missing worker instead and loop again
+			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
+			try_replace_worker(game, worker_index_repl, wp_repl.base());
+		}
+	}
+}
+
+/**
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
 	molog(owner().egbase().get_gametime(), "%s leaving\n", w.descr().name().c_str());
-	auto wp = working_positions_->begin();
-	int32_t wp_index = 0;
 
-	for (const auto& temp_wp : descr().working_positions()) {
-		DescriptionIndex const worker_index = temp_wp.first;
-		for (uint32_t j = temp_wp.second; j; --j, ++wp, ++wp_index) {
-			if (wp->worker == &w) {
-				// do not request the type of worker that is currently assigned – maybe a
-				// trained worker was evicted to make place for a level 0 worker.
-				// Therefore we again request the worker from the WorkingPosition of descr()
-				if (main_worker_ == wp_index) {
-					main_worker_ = -1;
-				}
-				*wp = WorkingPosition(&request_worker(worker_index), nullptr);
-				Building::remove_worker(w);
-				// If the main worker was evicted, perhaps another worker is
-				// still there to perform basic tasks
-				if (upcast(Game, game, &get_owner()->egbase())) {
-					try_start_working(*game);
-				}
-				return;
-			}
-		}
+	std::pair<int32_t, int32_t> wp_indexes = find_worker(OPtr<Worker>(&w));
+	if (wp_indexes.first < 0) {
+		Building::remove_worker(w);
+		return;
 	}
 
+	DescriptionIndex const worker_index = descr().working_positions().at(wp_indexes.first).first;
+	WorkingPosition* wp = &working_positions_->at(wp_indexes.second);
+	// do not request the type of worker that is currently assigned – maybe a
+	// trained worker was evicted to make place for a level 0 worker.
+	// Therefore we again request the worker from the WorkingPosition of descr()
+	if (main_worker_ == wp_indexes.second) {
+		main_worker_ = -1;
+	}
+	*wp = WorkingPosition(&request_worker(worker_index), nullptr);
 	Building::remove_worker(w);
+	// If the main worker was evicted, perhaps another worker is
+	// still there to perform basic tasks
+	if (upcast(Game, game, &get_owner()->egbase())) {
+		try_replace_worker(game, worker_index, wp);
+		try_start_working(*game);
+	}
+	return;
 }
 
 /**
