@@ -67,13 +67,12 @@ struct Coords {
 };
 static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
-template <typename _CoordsType = Coords, typename _RadiusType = uint16_t>
-struct Area : public _CoordsType {
-	using CoordsType = _CoordsType;
-	using RadiusType = _RadiusType;
+template <typename CT = Coords, typename RT = uint16_t> struct Area : public CT {
+	using CoordsType = CT;
+	using RadiusType = RT;
 	Area() {
 	}
-	Area(const CoordsType center, const RadiusType Radius) : CoordsType(center), radius(Radius) {
+	Area(const CoordsType center, const RadiusType rad) : CoordsType(center), radius(rad) {
 	}
 
 	bool operator==(const Area& other) const {
