@@ -46,7 +46,9 @@
 #endif
 #endif
 
+CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 extern int _nl_msg_cat_cntr;
+CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 namespace i18n {
 
