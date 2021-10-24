@@ -28,6 +28,7 @@ if(POLICY CMP0072)
 
   # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
   # still needed or not.
+  # --- Seems to work fine on 21.04
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
@@ -254,9 +255,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
 
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
-
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wint-to-void-pointer-cast")
@@ -310,10 +308,12 @@ endif()
 
 if(NOT MSVC)
   # Turn some warnings into errors.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")  # This is a false-positive on g++5
+  if (APPLE)  # Our Mac CI needs these
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+  endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 endif()

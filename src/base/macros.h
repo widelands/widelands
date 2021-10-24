@@ -93,6 +93,18 @@
 #define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
 #endif
 
+// Older clang versions don't have "-Wreserved-identifier" either
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#ifdef __clang__
+#if __has_warning("-Wreserved-identifier")
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF CLANG_DIAG_OFF("-Wreserved-identifier")
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON CLANG_DIAG_ON("-Wreserved-identifier")
+#endif
+#endif
+
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
 	TypeName(const TypeName&) = delete;                                                             \

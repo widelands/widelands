@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-28 02:36+0000\n"
-"PO-Revision-Date: 2021-09-04 21:16+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-07 07:24+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -559,9 +559,9 @@ msgstr "Das Waschen von Gold benötigt eine stetige Versorgung mit Wasser, die f
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
-"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
-"only released near trees uninhabited by sentries."
-msgstr "Wildnishüterinnen gewährleisten frisches Wild für die Jagd und Fische für für den Fischfang. Wildtiere werden nur neben Bäumen ohne Baumwipfelposten freigelassen."
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Wildnishüterinnen gewährleisten frisches Wild für die Jagd und Fische für den Fischfang. Wild wird nur neben Bäumen ohne Baumwipfelposten freigelassen."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
@@ -571,9 +571,9 @@ msgstr "Der Lagerbestand von seltenen Hölzern wird von den Edelbaumpflanzungen 
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
-"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
-"lashing canoes together to form ships."
-msgstr "Seile sind essentiell um stabile Gebäude zu sichern, robuste Kleidung zu nähen und Kanus zu Schiffen zusammen zu binden."
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "Seile sind essentiell um stabile Gebäude sicher zu stellen, robuste Kleidung zu nähen und Kanus zu Schiffen zusammen zu binden."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
