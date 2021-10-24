@@ -216,7 +216,8 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
 		const Widelands::Worker* worker =
 		   production_site->working_positions()->at(i).worker.get(ibase()->egbase());
-		const Widelands::Request* request = production_site->working_positions()->at(i).worker_request;
+		const Widelands::Request* request =
+		   production_site->working_positions()->at(i).worker_request;
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
 		if (worker) {
@@ -261,9 +262,9 @@ void ProductionSiteWindow::evict_worker() {
 	}
 
 	if (worker_table_->has_selection()) {
-		Widelands::Worker* worker =
-		   production_site->working_positions()->at(worker_table_->get_selected()).worker.get(
-		      ibase()->egbase());
+		Widelands::Worker* worker = production_site->working_positions()
+		                               ->at(worker_table_->get_selected())
+		                               .worker.get(ibase()->egbase());
 		if (worker) {
 			if (game_) {
 				game_->send_player_evict_worker(*worker);

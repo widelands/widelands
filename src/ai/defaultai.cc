@@ -4489,7 +4489,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			if (current_worker != site.bo->positions.at(i) &&
 			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
 				// kick out the worker
-				game().send_player_evict_worker(*site.site->working_positions()->at(i).worker.get(game()));
+				game().send_player_evict_worker(
+				   *site.site->working_positions()->at(i).worker.get(game()));
 				return true;
 			}
 		}
@@ -5041,7 +5042,8 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 			Widelands::DescriptionIndex current_worker = cw->descr().worker_index();
 			if (current_worker != site.bo->positions.at(i) &&
 			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
-				game().send_player_evict_worker(*site.site->working_positions()->at(i).worker.get(game()));
+				game().send_player_evict_worker(
+				   *site.site->working_positions()->at(i).worker.get(game()));
 				return true;
 			}
 		}

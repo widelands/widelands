@@ -2017,7 +2017,9 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
-		psite.working_positions_->at(psite.main_worker_).worker.get(game)->update_task_buildingwork(game);
+		psite.working_positions_->at(psite.main_worker_)
+		   .worker.get(game)
+		   ->update_task_buildingwork(game);
 		return;
 	}
 
@@ -2053,7 +2055,9 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 		state.coord = best_coords;
 
-		psite.working_positions_->at(psite.main_worker_).worker.get(game)->update_task_buildingwork(game);
+		psite.working_positions_->at(psite.main_worker_)
+		   .worker.get(game)
+		   ->update_task_buildingwork(game);
 		return;
 	}
 
