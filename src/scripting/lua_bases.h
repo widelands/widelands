@@ -49,8 +49,10 @@ public:
 	~LuaEditorGameBase() override {
 	}
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -97,8 +99,10 @@ public:
 	~LuaPlayerBase() override {
 	}
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -109,8 +113,10 @@ public:
 	/*
 	 * Lua methods
 	 */
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	int __eq(lua_State* L);
 	int __tostring(lua_State* L);
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int place_flag(lua_State* L);
 	int place_road(lua_State* L);
 	int place_building(lua_State* L);
