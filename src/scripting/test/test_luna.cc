@@ -77,10 +77,13 @@ public:
 		prop = lua_tointeger(L, -1);
 		return 0;
 	}
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* /* L */) override {
 	}
 	void __unpersist(lua_State* /* L */) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 
 const char LuaClass::className[] = "Class";
@@ -103,10 +106,13 @@ public:
 	explicit LuaSubClass(lua_State* L) : LuaClass(L), y(1240) {
 	}
 	virtual int subtest(lua_State* L);
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* /* L */) override {
 	}
 	void __unpersist(lua_State* /* L */) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 const char LuaSubClass::className[] = "SubClass";
 const MethodType<LuaSubClass> LuaSubClass::Methods[] = {
@@ -131,10 +137,13 @@ public:
 	explicit LuaVirtualClass(lua_State* L) : LuaClass(L), z(12400) {
 	}
 	virtual int virtualtest(lua_State* L);
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* /* L */) override {
 	}
 	void __unpersist(lua_State* /* L */) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 const char LuaVirtualClass::className[] = "VirtualClass";
 const MethodType<LuaVirtualClass> LuaVirtualClass::Methods[] = {
@@ -172,10 +181,13 @@ public:
 	explicit LuaMultiClass(lua_State* L) : LuaClass(L), z(12400) {
 	}
 	virtual int virtualtest(lua_State* L);
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* /* L */) override {
 	}
 	void __unpersist(lua_State* /* L */) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 const char LuaMultiClass::className[] = "MultiClass";
 const MethodType<LuaMultiClass> LuaMultiClass::Methods[] = {
