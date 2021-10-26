@@ -640,7 +640,7 @@ void ProductionSite::try_replace_worker(const Game* game,
 		    w_repl->descr().can_act_as(worker_index)) {
 			// Move worker to evicted slot
 			delete wp->worker_request;
-			*wp = std::move(*wp_repl);
+			*wp = *wp_repl;
 			molog(owner().egbase().get_gametime(), "%s promoted\n", w_repl->descr().name().c_str());
 			// Request the now missing worker instead and loop again
 			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
@@ -677,7 +677,6 @@ void ProductionSite::remove_worker(Worker& w) {
 		try_replace_worker(game, worker_index, wp);
 		try_start_working(*game);
 	}
-	return;
 }
 
 /**
