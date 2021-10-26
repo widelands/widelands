@@ -47,8 +47,10 @@ public:
 	}
 	explicit LuaGame(lua_State* L);
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -91,8 +93,10 @@ public:
 	~LuaEditor() override {
 	}
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -118,8 +122,10 @@ public:
 	}
 	explicit LuaDescriptions(lua_State* L);
 
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 
 	/*
 	 * Properties
@@ -181,10 +187,13 @@ public:
 	LuaWorld() = default;
 	explicit LuaWorld(lua_State*) {
 	}
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override {
 	}
 	void __unpersist(lua_State*) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 
 // TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
@@ -198,10 +207,13 @@ public:
 	LuaTribes() = default;
 	explicit LuaTribes(lua_State*) {
 	}
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	void __persist(lua_State*) override {
 	}
 	void __unpersist(lua_State*) override {
 	}
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 };
 
 void luaopen_wlroot(lua_State*, bool in_editor);
