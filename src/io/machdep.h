@@ -27,7 +27,7 @@
 // Disable this warning for files where we might use these macros.
 CLANG_DIAG_OFF("-Wself-assign")
 
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+#if !defined(SDL_BYTEORDER) || SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define little_16(x) (x)
 #define little_32(x) (x)
 #define little_float(x) (x)

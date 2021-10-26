@@ -30,9 +30,9 @@
 
 // Config file options
 enum class MousewheelOptionID : uint16_t {
-	k__Begin = 0,
+	k_Begin = 0,
 
-	kUIChangeValueInvertX = k__Begin,
+	kUIChangeValueInvertX = k_Begin,
 	kUIChangeValueInvertY,
 	kUITabInvertX,
 	kUITabInvertY,
@@ -50,7 +50,7 @@ enum class MousewheelOptionID : uint16_t {
 	kEditorToolsizeX,
 	kEditorToolsizeY,
 
-	k__End = kEditorToolsizeY,
+	k_End = kEditorToolsizeY,
 
 	kAlwaysOn,
 	kDisabled,
@@ -65,9 +65,9 @@ uint16_t get_mousewheel_keymod(MousewheelOptionID);
 
 // Map config options to handlers
 enum class MousewheelHandlerConfigID : uint16_t {
-	k__Begin = 0,
+	k_Begin = 0,
 
-	kChangeValue = k__Begin,
+	kChangeValue = k_Begin,
 	kTabBar,
 	kZoom,
 	kMapScroll,
@@ -77,7 +77,7 @@ enum class MousewheelHandlerConfigID : uint16_t {
 	                     // Horizontal will have to be configurable, because we can't determine
 	                     // whether the hardware has 2D scrolling capability.
 
-	k__End = kScrollbarVertical
+	k_End = kScrollbarVertical
 };
 
 // Read settings and apply them to handlers
