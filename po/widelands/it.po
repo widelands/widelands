@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-13 02:46+0000\n"
-"PO-Revision-Date: 2021-10-15 16:30+0000\n"
+"POT-Creation-Date: 2021-10-22 02:55+0000\n"
+"PO-Revision-Date: 2021-10-20 22:36+0000\n"
 "Last-Translator: Alen Ciga\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -275,8 +275,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dic"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -290,12 +290,12 @@ msgstr "Menù principale"
 msgid "Tools"
 msgstr "Strumenti"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -485,10 +485,10 @@ msgstr "Informazioni"
 msgid "Click on a field to show information about it"
 msgstr "Fai click su un campo per mostrare le informazioni"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -667,8 +667,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -977,9 +977,9 @@ msgstr "(nessuno)"
 msgid "Waterway length limit:"
 msgstr "Limite lunghezza del corso d'acqua:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -3534,7 +3534,7 @@ msgstr "Sposta add-on selezionato in fondo"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:311
 msgid "Launch the add-ons packager…"
-msgstr ""
+msgstr "Avvia il package di estensioni..."
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
@@ -3553,14 +3553,14 @@ msgid ""
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
 " using the graphical interface and share them with other players, without "
 "having to write a single line of code."
-msgstr ""
+msgstr "Il pacchetto di estensioni interattive ti permette di creare, modificare e cancellare estensioni. Puoi raggruppare mappe create con l'editor di mappe di Widelands sotto forma di estensione usando l'interfaccia grafica e condividendola con altri giocatori, senza dover scrivere una singola stringa di codice."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:351
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "Per ulteriori informazioni su come sviluppare e presentare i tuoi add-on, visita %s."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
 msgid "Open Link"
@@ -3585,7 +3585,7 @@ msgid ""
 " spam. By uploading an add-on, you assert that the add-on is of your own "
 "creation or you have the add-on’s author(s) permission to submit it in their"
 " stead."
-msgstr ""
+msgstr "È vietato caricare estensioni dai contenuti pericolosi o dannosi o spam. Caricando un'estensione, affermi che essa è di tua creazione o che hai ottenuto il permesso di caricarla da parte di chi l'ha creata."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:398
 msgid ""
@@ -3625,7 +3625,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:490
 msgid "Development"
-msgstr ""
+msgstr "Sviluppo"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons/manager.cc:493
@@ -3640,36 +3640,36 @@ msgstr "Nome (Z-A)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:497
 msgid "Most popular"
-msgstr ""
+msgstr "Più popolari"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:499
 msgid "Least popular"
-msgstr ""
+msgstr "Meno popolari"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:501
 msgid "Most often downloaded"
-msgstr ""
+msgstr "Più scaricate"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:503
 msgid "Least often downloaded"
-msgstr ""
+msgstr "Meno scaricate"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons/manager.cc:505
 msgid "Oldest"
-msgstr ""
+msgstr "Più vecchie"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
 #: ../../src/ui_fsmenu/addons/manager.cc:507
 msgid "Newest"
-msgstr ""
+msgstr "Più recenti"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:515
 msgid "Filter add-ons by name"
-msgstr ""
+msgstr "Filtra estensioni per nome"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:525
 #, c-format
@@ -3706,39 +3706,39 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Not logged in"
-msgstr ""
+msgstr "Non collegato"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:773
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Clicca per accedere. Potrai commentare e votare le estensioni e caricarne di tue."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:777
 msgid "Please log in to upload add-ons"
-msgstr ""
+msgstr "Accedi per caricare estensioni"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:779
 msgid "Please log in to upload content"
-msgstr ""
+msgstr "Accedi per caricare contenuti"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:781
 msgid "Please log in to send an enquiry"
-msgstr ""
+msgstr "Accedi per inviare una richiesta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:786
 #, c-format
 msgid "Logged in as %s"
-msgstr ""
+msgstr "Accesso effettuato come %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:786
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Accesso effettuato come %s (admin)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:789
 msgid "Click to log out"
-msgstr ""
+msgstr "Clicca per disconnetterti"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:794
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -3750,7 +3750,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:824
 msgid "Server Error"
-msgstr ""
+msgstr "Errore del server"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:825
 #, c-format
@@ -3758,18 +3758,18 @@ msgid ""
 "Unable to connect to the server.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Impossibile connettersi al server.\nMessaggio di errore:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:834
 msgid "Wrong Password"
-msgstr ""
+msgstr "Password errata"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:835
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Il nome utente o la password sono errati.\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:930
 #, c-format
@@ -3778,11 +3778,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Connessione al server in corso..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Errore di connessione al server"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
@@ -3830,7 +3830,7 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1151
 #, c-format
 msgid "· %s"
-msgstr ""
+msgstr "· %s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1187
 #, c-format
@@ -3878,12 +3878,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1368
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:58
 msgid "Upload"
-msgstr ""
+msgstr "Carica"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1369
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
-msgstr ""
+msgstr "Vuoi davvero caricare l'estensione ‘%s’ sul server?"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
 #, c-format
@@ -3894,7 +3894,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1442
 #: ../../src/ui_fsmenu/addons/manager.cc:1506
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1409
 #, c-format
@@ -3935,21 +3935,21 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:50
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Package di estensioni"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:77
 msgid "New add-on"
-msgstr ""
+msgstr "Nuova estensione"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:85
 #: ../../src/ui_fsmenu/addons/packager_box.cc:165
 msgid "–"
-msgstr ""
+msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:686
 msgid "Delete this add-on"
-msgstr ""
+msgstr "Elimina questa estensione"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:94
 msgid "Discard changes"
@@ -3969,7 +3969,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:134
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:139
 msgid "Author:"
@@ -3977,7 +3977,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:313
 msgid "New Add-On"
-msgstr ""
+msgstr "Nuova estensione"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:314
 msgid "Enter the name for the new add-on."
@@ -6060,18 +6060,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr ""
@@ -7869,8 +7869,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Statistiche"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Viaggiare in mare"

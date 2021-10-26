@@ -25,6 +25,7 @@ wl_library(scripting_luna
     luna_impl.cc
     luna_impl.h
   DEPENDS
+    base_macros
     scripting_base
     scripting_errors
 )

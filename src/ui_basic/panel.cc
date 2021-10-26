@@ -1499,6 +1499,9 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 	} else {
 		mousein = modal_;
 	}
+	if (mousein == nullptr) {
+		return nullptr;
+	}
 
 	// ugly hack to handle dropdowns in modal windows correctly
 	if (mousein->get_parent()) {
@@ -1625,6 +1628,9 @@ bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 		return true;
 	}
 	Panel* p = modal_;
+	if (p == nullptr) {
+		return false;
+	}
 	if (p->get_parent()) {
 		if (UI::Panel* dd = p->get_open_dropdown()) {
 			p = dd;
@@ -1639,6 +1645,9 @@ bool Panel::ui_key(bool const down, SDL_Keysym const code) {
 bool Panel::ui_textinput(const std::string& text) {
 	if (!allow_user_input_) {
 		return true;
+	}
+	if (modal_ == nullptr) {
+		return false;
 	}
 	return modal_->do_textinput(text);
 }
