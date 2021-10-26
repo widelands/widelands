@@ -20,9 +20,10 @@
 #ifndef WL_BASE_MACROS_H
 #define WL_BASE_MACROS_H
 
+#include <cinttypes>
+
 // Make sure that Visual C++ does not bark at __attribute__.
 #ifdef _MSC_VER
-#include <cinttypes>
 #ifndef __attribute__
 #define __attribute__(x)
 #endif
@@ -93,6 +94,18 @@
 #define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
 #endif
 
+// Older clang versions don't have "-Wreserved-identifier" either
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#ifdef __clang__
+#if __has_warning("-Wreserved-identifier")
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_OFF
+#undef CLANG_DIAG_RESERVED_IDENTIFIER_ON
+#define CLANG_DIAG_RESERVED_IDENTIFIER_OFF CLANG_DIAG_OFF("-Wreserved-identifier")
+#define CLANG_DIAG_RESERVED_IDENTIFIER_ON CLANG_DIAG_ON("-Wreserved-identifier")
+#endif
+#endif
+
 // disallow copying or assigning a class
 #define DISALLOW_COPY_AND_ASSIGN(TypeName)                                                         \
 	TypeName(const TypeName&) = delete;                                                             \
@@ -120,7 +133,15 @@
 #define PRIuS PRIu32
 #endif
 #else
+#if __WORDSIZE == 64
 #define PRIuS "lu"
+#else
+#if defined(__WORDSIZE32_SIZE_ULONG) && __WORDSIZE32_SIZE_ULONG
+#define PRIuS "lu"
+#else
+#define PRIuS "u"
+#endif
+#endif
 #endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H

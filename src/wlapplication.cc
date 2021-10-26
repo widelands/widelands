@@ -394,7 +394,9 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	cleanup_temp_files();
 	cleanup_temp_backups();
 
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+#ifndef SDL_BYTEORDER
+	log_info("Byte order: unknown, assuming little-endian\n");
+#elif SDL_BYTEORDER == SDL_LIL_ENDIAN
 	log_info("Byte order: little-endian\n");
 #else
 	log_info("Byte order: big-endian\n");
