@@ -20,6 +20,7 @@
 #include "base/string.h"
 
 void split(std::vector<std::string>& result, const std::string& str, const std::set<char>& set) {
+	result.clear();
 	std::string cur;
 
 	for (const char* c = str.c_str(); *c; ++c) {
