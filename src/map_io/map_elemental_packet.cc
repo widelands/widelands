@@ -110,8 +110,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					split(players_string, team_string, {','});
 
 					for (const std::string& player : players_string) {
-						PlayerNumber player_number =
-						   static_cast<PlayerNumber>(stoul(player));
+						PlayerNumber player_number = static_cast<PlayerNumber>(stoul(player));
 						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}

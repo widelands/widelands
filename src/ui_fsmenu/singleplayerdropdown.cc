@@ -82,9 +82,8 @@ void SinglePlayerTribeDropdown::rebuild() {
 				   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 				         another player's starting position. */
 				   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str();
-				dropdown_.add(player_name,
-				              as_string(static_cast<unsigned int>(i + 1)),
-				              player_image, (i + 1) == player_setting.shared_in, player_name);
+				dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)), player_image,
+				              (i + 1) == player_setting.shared_in, player_name);
 			}
 		}
 		dropdown_.set_enabled(dropdown_.size() > 1);
@@ -124,8 +123,7 @@ void SinglePlayerTribeDropdown::selection_action() {
                                   UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
-			settings_->set_player_shared(
-			   id_, stoul(dropdown_.get_selected()));
+			settings_->set_player_shared(id_, stoul(dropdown_.get_selected()));
 		} else {
 			const std::string& selected = dropdown_.get_selected();
 			settings_->set_player_tribe(id_, selected, selected == kRandom);
@@ -173,12 +171,13 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	// AIs
 	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-			dropdown_.add(_(impl->descname), (boost::format("%s%s") % kAiNamePrefix % impl->name).str(),
+			dropdown_.add(_(impl->descname),
+			              (boost::format("%s%s") % kAiNamePrefix % impl->name).str(),
 			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		dropdown_.add(_("Random AI"), kRandomAiName,
-		              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
+		dropdown_.add(_("Random AI"), kRandomAiName, g_image_cache->get("images/ai/ai_random.png"),
+		              false, _("Random AI"));
 	}
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */

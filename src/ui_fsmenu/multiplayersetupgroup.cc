@@ -393,8 +393,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
                                             UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
-				n->set_player_shared(
-				   id_, stoul(tribes_dropdown_.get_selected()));
+				n->set_player_shared(id_, stoul(tribes_dropdown_.get_selected()));
 			} else {
 				n->set_player_tribe(id_, tribes_dropdown_.get_selected());
 			}
@@ -428,9 +427,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					      another player's starting position. */
 					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
 					      .str();
-					tribes_dropdown_.add(
-					   player_name, as_string(static_cast<unsigned int>(i + 1)),
-					   player_image, (i + 1) == player_setting.shared_in, player_name);
+					tribes_dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)),
+					                     player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);

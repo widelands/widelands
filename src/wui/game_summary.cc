@@ -304,7 +304,8 @@ std::string GameSummaryScreen::parse_player_info(const std::string& info) {
 			log_warn("Malformed player info string: "
 			         "Expected 2 entries, found %" PRIuS ".\n"
 			         "  Substring is: %s\n"
-			         "  Full data is: %s", pair.size(), substring.c_str(), info.c_str());
+			         "  Full data is: %s",
+			         pair.size(), substring.c_str(), info.c_str());
 			continue;
 		}
 

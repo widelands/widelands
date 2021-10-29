@@ -19,6 +19,7 @@ whitelist_headers = [
     'boost/test',
 ]
 
+
 def evaluate_matches(lines, fn):
     errors = []
 
@@ -30,7 +31,8 @@ def evaluate_matches(lines, fn):
                     whitelisted = True
                     break
             if not whitelisted:
-                errors.append((fn, lineno+1, "Forbidden {}".format(line[0:-1:])))
+                errors.append(
+                    (fn, lineno+1, 'Forbidden {}'.format(line[0:-1:])))
         elif line.count('boost::'):
             whitelisted = False
             for w in whitelist:
@@ -49,7 +51,8 @@ def evaluate_matches(lines, fn):
                 if pos3 <= 0:
                     pos3 = 1000
                 offending = offending[0:min(pos1, pos2, pos3):]
-                errors.append((fn, lineno+1, "'{}' is deprecated.".format(offending)))
+                errors.append(
+                    (fn, lineno+1, "'{}' is deprecated.".format(offending)))
 
     return errors
 # /end evaluate_matches

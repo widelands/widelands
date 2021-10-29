@@ -53,7 +53,10 @@ void trim(std::string& str, const bool remove_leading, const bool remove_trailin
 	}
 }
 
-bool replace_first_or_last(std::string& str, const std::string& f, const std::string& r, bool first) {
+bool replace_first_or_last(std::string& str,
+                           const std::string& f,
+                           const std::string& r,
+                           bool first) {
 	const size_t pos = (first ? str.find(f) : str.rfind(f));
 	if (pos == std::string::npos) {
 		return false;

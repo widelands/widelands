@@ -30,7 +30,7 @@
 // that the AI names don't contain the separator that's used to parse the strings there.
 constexpr char kAiNameSeparator = '|';
 static const std::string kAiNamePrefix =  // comment to fix codecheck
-	std::string("ai") + as_string(kAiNameSeparator);
+   std::string("ai") + as_string(kAiNameSeparator);
 static const std::string kRandom = "random";
 static const std::string kRandomAiName = kAiNamePrefix + kRandom;
 
