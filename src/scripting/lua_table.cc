@@ -58,7 +58,7 @@ void LuaTable::get_existing_table_value(const std::string& key) const {
 }
 
 void LuaTable::get_existing_table_value(const int key) const {
-	const std::string key_as_string = boost::lexical_cast<std::string>(key);
+	const std::string key_as_string = as_string(key);
 	lua_pushint32(L_, key);
 	check_if_key_was_in_table(key_as_string);
 }

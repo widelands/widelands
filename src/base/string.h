@@ -54,7 +54,7 @@ inline bool contains(const std::string& str, const std::string& test, bool case_
 void trim(std::string&, bool remove_leading = true, bool remove_trailing = true);
 
 /** Concatenate all strings in `words` with the given `separator` between them. */
-std::string join(const std::vector<std::string>& words, const std::string& separator);
+std::string join(const std::set<std::string>& words, const std::string& separator);
 
 /** Helper function for the replace_* functions. */
 bool replace_first_or_last(std::string&, const std::string&, const std::string&, bool);
@@ -68,6 +68,38 @@ inline void replace_last(std::string& str, const std::string& f, const std::stri
 }
 inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
 	while (replace_first_or_last(str, f, r, true));
+}
+
+/** Convert various types to string. Useful in templates where the parameter type is not fixed. */
+inline const std::string& as_string(const std::string& str) {
+	return str;
+}
+inline std::string as_string(const char* str) {
+	return str;
+}
+inline std::string as_string(const int8_t t) {
+	return std::to_string(static_cast<int>(t));
+}
+inline std::string as_string(const int16_t t) {
+	return std::to_string(static_cast<int>(t));
+}
+inline std::string as_string(const int32_t t) {
+	return std::to_string(static_cast<int64_t>(t));
+}
+inline std::string as_string(const int64_t t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const uint8_t t) {
+	return std::to_string(static_cast<unsigned>(t));
+}
+inline std::string as_string(const uint16_t t) {
+	return std::to_string(static_cast<unsigned>(t));
+}
+inline std::string as_string(const uint32_t t) {
+	return std::to_string(static_cast<uint64_t>(t));
+}
+inline std::string as_string(const uint64_t t) {
+	return std::to_string(t);
 }
 
 #endif  // end of include guard: WL_BASE_STRING_H

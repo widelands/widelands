@@ -5,16 +5,33 @@ strip_comments_and_strings = True
 
 whitelist = [
     'boost::format',
+    'boost::io::format_error',
     'boost::signals2',
     'boost::uuids',
     'boost::asio',
+    'boost::system::error_code',
+    'boost::system::system_error',
+]
+whitelist_headers = [
+    'boost/format',
+    'boost/uuid',
+    'boost/asio',
+    'boost/test',
 ]
 
 def evaluate_matches(lines, fn):
     errors = []
 
     for lineno, line in enumerate(lines):
-        if line.count('boost::'):
+        if line.count('#include') and line.count('boost/'):
+            whitelisted = False
+            for w in whitelist_headers:
+                if w in line:
+                    whitelisted = True
+                    break
+            if not whitelisted:
+                errors.append((fn, lineno+1, "Forbidden {}".format(line)))
+        elif line.count('boost::'):
             whitelisted = False
             for w in whitelist:
                 if w in line:
@@ -32,8 +49,7 @@ def evaluate_matches(lines, fn):
                 if pos3 <= 0:
                     pos3 = 1000
                 offending = offending[0:min(pos1, pos2, pos3):]
-                errors.append(
-                    (fn, lineno+1, "'{}' is deprecated.".format(offending)))
+                errors.append((fn, lineno+1, "'{}' is deprecated.".format(offending)))
 
     return errors
 # /end evaluate_matches

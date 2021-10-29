@@ -29,11 +29,7 @@
 #include <cstdio>
 #endif
 
-// We have to add Boost to this block to make codecheck happy
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <windows.h>
@@ -107,7 +103,7 @@ private:
  */
 NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + std::to_string(nchars) + "i";
+	format_ = "%0" + as_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {

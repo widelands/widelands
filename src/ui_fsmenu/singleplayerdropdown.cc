@@ -87,7 +87,7 @@ void SinglePlayerTribeDropdown::rebuild() {
 				         another player's starting position. */
 				   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str();
 				dropdown_.add(player_name,
-				              boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
+				              as_string(static_cast<unsigned int>(i + 1)),
 				              player_image, (i + 1) == player_setting.shared_in, player_name);
 			}
 		}
@@ -129,7 +129,7 @@ void SinglePlayerTribeDropdown::selection_action() {
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
 			settings_->set_player_shared(
-			   id_, boost::lexical_cast<unsigned int>(dropdown_.get_selected()));
+			   id_, stoul(dropdown_.get_selected()));
 		} else {
 			const std::string& selected = dropdown_.get_selected();
 			settings_->set_player_tribe(id_, selected, selected == RANDOM);

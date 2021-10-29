@@ -53,18 +53,18 @@ void trim(std::string& str, const bool remove_leading, const bool remove_trailin
 	}
 }
 
-std::string join(const std::vector<std::string>& words, const std::string& separator) {
+std::string join(const std::set<std::string>& words, const std::string& separator) {
 	if (words.empty()) {
 		return std::string();
 	}
 
-	std::string str = words[0];
-	const size_t n = words.size();
-
-	for (size_t i = 1; i < n; ++i) {
+	auto it = words.begin();
+	std::string str = *it;
+	for (; it != words.end();) {
 		str += separator;
-		str += words[i];
+		str += *(++it);
 	}
+
 	return str;
 }
 

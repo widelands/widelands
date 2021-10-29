@@ -19,8 +19,7 @@
 
 #include "map_io/map_player_names_and_tribes_packet.h"
 
-#include <boost/algorithm/string/trim.hpp>
-
+#include "base/string.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -95,7 +94,7 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
-		boost::trim(player_name);
+		trim(player_name);
 
 		// Save default player names as empty
 		if (player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {

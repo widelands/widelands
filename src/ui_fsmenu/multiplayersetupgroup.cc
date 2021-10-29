@@ -398,7 +398,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
-				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+				   id_, stoul(tribes_dropdown_.get_selected()));
 			} else {
 				n->set_player_tribe(id_, tribes_dropdown_.get_selected());
 			}
@@ -433,7 +433,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
 					      .str();
 					tribes_dropdown_.add(
-					   player_name, boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
+					   player_name, as_string(static_cast<unsigned int>(i + 1)),
 					   player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}

@@ -159,7 +159,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	verb_log_info("InternetGaming: Sending login request.");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
-	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+	s.string(as_string(kInternetGamingProtocolVersion));
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
@@ -255,7 +255,7 @@ bool InternetGaming::check_password(const std::string& nick,
 	{
 		SendPacket s;
 		s.string(IGPCMD_CHECK_PWD);
-		s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+		s.string(as_string(kInternetGamingProtocolVersion));
 		s.string(nick);
 		s.string(build_id());
 		net->send(s);
@@ -505,7 +505,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
-			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
+			time_offset_ = stoi(packet.string()) - time(nullptr);
 			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
 			std::string temp =
 			   (boost::format(ngettext("Server time offset is %d second.",
@@ -540,7 +540,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetGame> old = gamelist_;
 			gamelist_.clear();
 			verb_log_info("InternetGaming: Received a game list update with %u items.", number);
@@ -590,7 +590,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
 			// Push admins/registred/IRC users to a temporary list and add them back later
 			clientlist_.clear();
