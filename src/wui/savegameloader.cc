@@ -1,6 +1,5 @@
 #include "wui/savegameloader.h"
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -61,7 +60,7 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
                                              std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
-	if (!g_fs->file_exists(savename) || !boost::ends_with(savename, kSavegameExtension)) {
+	if (!g_fs->file_exists(savename) || !ends_with(savename, kSavegameExtension)) {
 		return;
 	}
 
@@ -97,7 +96,7 @@ void SavegameLoader::add_general_information(SavegameData& gamedata,
 }
 
 void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormessage) const {
-	boost::replace_all(errormessage, "\n", "<br>");
+	replace_all(errormessage, "\n", "<br>");
 	gamedata.errormessage =
 	   ((boost::format("<p>%s</p><p>%s</p><p>%s</p>"))
 	    /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */

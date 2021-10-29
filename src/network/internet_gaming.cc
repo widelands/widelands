@@ -22,7 +22,6 @@
 #include <algorithm>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -887,7 +886,8 @@ void InternetGaming::send(const std::string& msg) {
 		return;
 	}
 
-	std::string trimmed = boost::algorithm::trim_copy(msg);
+	std::string trimmed = msg;
+	trim(trimmed);
 	if (trimmed.empty()) {
 		// Message is empty or only space characters. We don't want it either way
 		return;
@@ -905,7 +905,8 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		trimmed = boost::algorithm::trim_copy(msg.substr(space + 1));
+		trimmed = msg.substr(space + 1);
+		trim(trimmed);
 		if (trimmed.empty()) {
 			format_and_add_chat(
 			   "", "", true,
@@ -949,7 +950,8 @@ void InternetGaming::send(const std::string& msg) {
 
 		// get the cmd and the arg
 		cmd = temp.substr(0, space);
-		arg = boost::algorithm::trim_copy(temp.substr(space + 1));
+		arg = temp.substr(space + 1);
+		trim(arg);
 
 		if (!arg.empty() && cmd == "motd") {
 			SendPacket m;
@@ -1065,9 +1067,5 @@ bool InternetGaming::valid_username(const std::string& username) {
 		return false;
 	}
 	// Check whether the username is not "team" without regarding upper/lower case
-	// Note: The memory for the lowercase version must be allocated before calling transform()
-	std::string lowercase = username;
-	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
-	               [](unsigned char c) { return std::tolower(c); });
-	return lowercase != "team";
+	return to_lower(username) != "team";
 }

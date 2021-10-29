@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"

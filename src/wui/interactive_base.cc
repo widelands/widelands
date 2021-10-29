@@ -22,7 +22,6 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -1616,7 +1615,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
-	const std::string cmd = boost::algorithm::join(args, " ");
+	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
 

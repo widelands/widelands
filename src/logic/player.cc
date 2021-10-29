@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <memory>
+#include <sstream>
 
 #include "base/i18n.h"
 #include "base/log.h"

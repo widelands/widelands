@@ -22,8 +22,6 @@
 #include <cstdlib>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 
@@ -508,7 +506,7 @@ Attributes
 }
 
 Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
-	boost::replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
+	replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
 
 	text_stream_.reset(new TextStream(text));
 

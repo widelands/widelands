@@ -19,8 +19,6 @@
 
 #include "wui/interactive_player.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/multithreading.h"

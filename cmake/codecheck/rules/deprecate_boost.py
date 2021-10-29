@@ -30,7 +30,7 @@ def evaluate_matches(lines, fn):
                     whitelisted = True
                     break
             if not whitelisted:
-                errors.append((fn, lineno+1, "Forbidden {}".format(line)))
+                errors.append((fn, lineno+1, "Forbidden {}".format(line[0:-1:])))
         elif line.count('boost::'):
             whitelisted = False
             for w in whitelist:
