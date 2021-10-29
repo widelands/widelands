@@ -45,8 +45,16 @@ inline bool iequals(const std::string& a, const std::string& b) {
  * Check whether `str` starts with / ends with / contains `test`.
  * Can be case-sensitive or -insensitive depending on the last argument, default is sensitive.
  */
-bool starts_with(const std::string& str, const std::string& test, bool case_sensitive = true);
-bool ends_with(const std::string& str, const std::string& test, bool case_sensitive = true);
+inline bool starts_with(const std::string& str, const std::string& test, bool case_sensitive = true) {
+	const size_t s1 = str.size();
+	const size_t s2 = test.size();
+	return s1 >= s2 && 0 == (case_sensitive ? str.compare(0, s2, test) : to_lower(str).compare(0, s2, to_lower(test)));
+}
+inline bool ends_with(const std::string& str, const std::string& test, bool case_sensitive = true) {
+	const size_t s1 = str.size();
+	const size_t s2 = test.size();
+	return s1 >= s2 && 0 == (case_sensitive ? str.compare(s1 - s2, s2, test) : to_lower(str).compare(s1 - s2, s2, to_lower(test)));
+}
 inline bool contains(const std::string& str, const std::string& test, bool case_sensitive = true) {
 	return (case_sensitive ? str.find(test) : to_lower(str).find(to_lower(test))) != std::string::npos;
 }
@@ -114,10 +122,8 @@ inline std::string as_string(const uint32_t t) {
 inline std::string as_string(const uint64_t t) {
 	return std::to_string(t);
 }
-std::string as_string(char c) {
-	std::string str;
-	str += c;
-	return str;
+inline std::string as_string(char c) {
+	return { c, '\0' };
 }
 
 #endif  // end of include guard: WL_BASE_STRING_H

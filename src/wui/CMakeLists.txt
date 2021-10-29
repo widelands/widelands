@@ -83,6 +83,7 @@ wl_library(wui_common_gamedetails
     base_i18n
     base_log
     base_macros
+    base_string
     base_time_string
     game_io
     graphic

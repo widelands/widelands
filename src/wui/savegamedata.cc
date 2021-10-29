@@ -3,6 +3,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
 

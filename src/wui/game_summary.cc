@@ -21,6 +21,7 @@
 
 #include <SDL_mouse.h>
 
+#include "base/log.h"
 #include "base/time_string.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
@@ -294,15 +295,16 @@ std::string GameSummaryScreen::parse_player_info(const std::string& info) {
 
 	std::vector<std::string> data;
 	split(data, info, {';'});
+	std::string info_str;
 
 	for (const std::string& substring : data) {
 		std::vector<std::string> pair;
 		split(pair, substring, {'='});
 		if (pair.size() != 2) {
 			log_warn("Malformed player info string: "
-			         "Found %" PRIuS " entries where 2 where expected.\n"
+			         "Expected 2 entries, found %" PRIuS ".\n"
 			         "  Substring is: %s\n"
-			         "  Full string is: %s", pair.size(), substring.c_str(), info.c_str());
+			         "  Full data is: %s", pair.size(), substring.c_str(), info.c_str());
 			continue;
 		}
 

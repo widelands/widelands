@@ -53,51 +53,6 @@ void trim(std::string& str, const bool remove_leading, const bool remove_trailin
 	}
 }
 
-bool starts_with(const std::string& str, const std::string& test, const bool case_sensitive) {
-	const size_t s1 = str.size();
-	const size_t s2 = test.size();
-	if (s2 > s1) {
-		return false;
-	}
-
-	for (size_t i = 0; i < s2; ++i) {
-		if (case_sensitive) {
-			if (str[i] != test[i]) {
-				return false;
-			}
-		} else {
-			if (tolower(str[i]) != tolower(test[i])) {
-				return false;
-			}
-		}
-	}
-
-	return true;
-}
-
-bool ends_with(const std::string& str, const std::string& test, const bool case_sensitive) {
-	const size_t s1 = str.size();
-	const size_t s2 = test.size();
-	if (s2 > s1) {
-		return false;
-	}
-
-	const size_t off = s1 - s2;
-	for (size_t i = 0; i < s2; ++i) {
-		if (case_sensitive) {
-			if (str[i + off] != test[i]) {
-				return false;
-			}
-		} else {
-			if (tolower(str[i + off]) != tolower(test[i])) {
-				return false;
-			}
-		}
-	}
-
-	return true;
-}
-
 bool replace_first_or_last(std::string& str, const std::string& f, const std::string& r, bool first) {
 	const size_t pos = (first ? str.find(f) : str.rfind(f));
 	if (pos == std::string::npos) {
