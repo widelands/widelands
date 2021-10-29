@@ -28,7 +28,10 @@
 
 // We need to use a string prefix in the game setup screens to identify the AIs, so we make sure
 // that the AI names don't contain the separator that's used to parse the strings there.
-#define AI_NAME_SEPARATOR "|"
+constexpr char kAiNameSeparator = '|';
+static const std::string kAiNamePrefix = std::string("ai") + kAiNameSeparator;
+static const std::string kRandom = "random";
+static const std::string kRandomAiName = kAiNamePrefix + kRandom
 
 namespace Widelands {
 class Game;
@@ -75,7 +78,7 @@ struct ComputerPlayer {
 		     descname(init_descname),
 		     icon_filename(init_icon_filename),
 		     type(init_type) {
-			assert(!contains(name, AI_NAME_SEPARATOR));
+			assert(!contains(name, kAiNameSeparator));
 		}
 
 		virtual ~Implementation() {

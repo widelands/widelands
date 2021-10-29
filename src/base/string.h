@@ -101,5 +101,10 @@ inline std::string as_string(const uint32_t t) {
 inline std::string as_string(const uint64_t t) {
 	return std::to_string(t);
 }
+std::string as_string(char c) {
+	std::string str;
+	str += c;
+	return str;
+}
 
 #endif  // end of include guard: WL_BASE_STRING_H

@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
@@ -32,8 +30,6 @@
 
 namespace FsMenu {
 
-#define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
-#define RANDOM "random"
 constexpr const char* const kClosed = "closed";
 constexpr const char* const kHuman_player = "human_player";
 
@@ -99,11 +95,11 @@ void SinglePlayerTribeDropdown::rebuild() {
 				              false, tribeinfo.tooltip);
 			}
 		}
-		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
+		dropdown_.add(pgettext("tribe", "Random"), kRandom,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
 		              _("The tribe will be selected at random"));
 		if (player_setting.random_tribe) {
-			dropdown_.select(RANDOM);
+			dropdown_.select(kRandom);
 		} else {
 			dropdown_.select(player_setting.tribe);
 		}
@@ -177,11 +173,11 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	// AIs
 	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-			dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+			dropdown_.add(_(impl->descname), (boost::format(kAiNamePrefix "%s") % impl->name).str(),
 			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
+		dropdown_.add(_("Random AI"), kRandomAiName,
 		              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 	}
 	dropdown_.add(
@@ -207,13 +203,13 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 	} else {
 		if (player_setting.state == PlayerSettings::State::kComputer) {
 			if (player_setting.random_ai) {
-				dropdown_.select(AI_NAME_PREFIX RANDOM);
+				dropdown_.select(kRandomAiName);
 			} else if (player_setting.ai.empty()) {
 				dropdown_.set_errored(_("No AI"));
 			} else {
 				const AI::ComputerPlayer::Implementation* impl =
 				   AI::ComputerPlayer::get_implementation(player_setting.ai);
-				dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
+				dropdown_.select((boost::format(kAiNamePrefix "%s") % impl->name).str());
 			}
 		}
 	}
@@ -233,12 +229,12 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 			state = PlayerSettings::State::kHuman;
 			dropdown_.set_enabled(false);
 		} else {
-			if (selected == AI_NAME_PREFIX RANDOM) {
+			if (selected == kRandomAiName) {
 				settings_->set_player_ai(id_, "", true);
 			} else {
-				if (boost::starts_with(selected, AI_NAME_PREFIX)) {
+				if (starts_with(selected, kAiNamePrefix)) {
 					std::vector<std::string> parts;
-					boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
+					split(parts, selected, {kAiNameSeparator});
 					assert(parts.size() == 2);
 					settings_->set_player_ai(id_, parts[1], false);
 				} else {
