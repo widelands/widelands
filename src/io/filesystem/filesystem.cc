@@ -48,6 +48,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "config.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -106,7 +107,7 @@ private:
  */
 NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+	format_ = "%0" + std::to_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {
@@ -121,11 +122,9 @@ bool NumberGlob::next(std::string* s) {
 		return false;
 	}
 
+	*s = template_;
 	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, (boost::format(format_) % current_).str());
-	} else {
-		*s = template_;
+		replace_last(*s, to_replace_, (boost::format(format_) % current_).str());
 	}
 	++current_;
 	return true;
@@ -227,12 +226,12 @@ bool FileSystem::is_legal_filename(const std::string& filename) {
 		return false;
 	}
 	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (boost::starts_with(filename, illegal_start)) {
+		if (starts_with(filename, illegal_start)) {
 			return false;
 		}
 	}
 	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (boost::contains(filename, illegal_char)) {
+		if (contains(filename, illegal_char)) {
 			return false;
 		}
 	}

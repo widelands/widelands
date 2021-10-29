@@ -166,7 +166,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
+		no_of_players_.add(std::to_string(static_cast<unsigned>(p)), p, nullptr,
 		                   p == nr_players);
 		no_of_players_.selected.connect([this]() { no_of_players_clicked(); });
 

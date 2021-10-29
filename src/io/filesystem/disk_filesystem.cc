@@ -49,6 +49,7 @@
 #endif
 
 #include "base/macros.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -113,7 +114,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 		std::string result = filename.substr(root_.size() + 1);
 
 		// Paths should not contain any windows line separators.
-		boost::replace_all(result, "\\", "/");
+		replace_all(result, "\\", "/");
 		results.insert(result);
 	} while (_findnext(hFile, &c_file) == 0);
 
@@ -310,7 +311,7 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 	// Make sure we always use "/" for splitting the directory, because
 	// directory names might be hardcoded in C++ or come from the file system.
 	// Calling canonicalize_name will take care of this working for all file systems.
-	boost::replace_all(clean_dirname, "\\", "/");
+	replace_all(clean_dirname, "\\", "/");
 #else
 	const std::string& clean_dirname = dirname;
 #endif

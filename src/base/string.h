@@ -51,14 +51,14 @@ inline bool contains(const std::string& str, const std::string& test, bool case_
 }
 
 /** Remove leading and/or trailing whitespace from a string. */
-std::string trim(std::string, bool remove_leading = true, bool remove_trailing = true);
+void trim(std::string&, bool remove_leading = true, bool remove_trailing = true);
 
 /** Concatenate all strings in `words` with the given `separator` between them. */
 std::string join(const std::vector<std::string>& words, const std::string& separator);
 
 /** Replace all / the first / the last occurrence(s) of `f` in `str` with `r`. */
-std::string replace_all(std::string str, const std::string& f, const std::string& r);
-std::string replace_first(const std::string& str, const std::string& f, const std::string& r);
-std::string replace_last(const std::string& str, const std::string& f, const std::string& r);
+void replace_all(std::string& str, const std::string& f, const std::string& r);
+void replace_first(std::string& str, const std::string& f, const std::string& r);
+void replace_last(std::string& str, const std::string& f, const std::string& r);
 
 #endif  // end of include guard: WL_BASE_STRING_H

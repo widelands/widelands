@@ -36,11 +36,12 @@ std::vector<std::string> split(const std::string& str, const std::set<char>& set
 	return result;
 }
 
-std::string trim(std::string str, const bool remove_leading, const bool remove_trailing) {
+void trim(std::string& str, const bool remove_leading, const bool remove_trailing) {
 	if (remove_leading) {
 		const size_t pos = str.find_first_not_of(" ");
 		if (pos == std::string::npos) {
-			return std::string();
+			str.clear();
+			return;
 		}
 		str = str.substr(pos);
 	}
@@ -52,8 +53,6 @@ std::string trim(std::string str, const bool remove_leading, const bool remove_t
 			--len;
 		}
 	}
-
-	return str;
 }
 
 std::string join(const std::vector<std::string>& words, const std::string& separator) {
@@ -116,32 +115,22 @@ bool ends_with(const std::string& str, const std::string& test, const bool case_
 	return true;
 }
 
-static std::pair<std::string, bool /* changed */> replace_first_or_last(const std::string& str, const std::string& f, const std::string& r, bool first) {
+bool replace_first_or_last(std::string& str, const std::string& f, const std::string& r, bool first) {
 	const size_t pos = (first ? str.find(f) : str.rfind(f));
 	if (pos == std::string::npos) {
-		return {str, false};
+		return false;
 	}
 
-	std::string result = str.substr(0, pos);
-	result += r;
-	result += str.substr(pos + f.size());
-	return {result, true};
+	str.replace(pos, f.size(), r);
+	return true;
 }
 
-inline std::string replace_first(const std::string& str, const std::string& f, const std::string& r) {
-	return replace_first_or_last(str, f, r, true).first;
+inline void replace_first(std::string& str, const std::string& f, const std::string& r) {
+	replace_first_or_last(str, f, r, true);
 }
-inline std::string replace_last(const std::string& str, const std::string& f, const std::string& r) {
-	return replace_first_or_last(str, f, r, false).first;
+inline void replace_last(std::string& str, const std::string& f, const std::string& r) {
+	replace_first_or_last(str, f, r, false);
 }
-
-std::string replace_all(std::string str, const std::string& f, const std::string& r) {
-	for (;;) {
-		const auto pair = replace_first_or_last(str, f, r, true);
-		if (!pair.second) {
-			break;
-		}
-		str = pair.first;
-	}
-	return str;
+inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
+	while (replace_first_or_last(str, f, r, true));
 }
