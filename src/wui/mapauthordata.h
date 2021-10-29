@@ -21,6 +21,7 @@
 #define WL_WUI_MAPAUTHORDATA_H
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "logic/map.h"
 
 /**

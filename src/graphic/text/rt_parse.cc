@@ -22,6 +22,7 @@
 #include <cstdlib>
 #include <memory>
 
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 #include "graphic/text/textstream.h"
 

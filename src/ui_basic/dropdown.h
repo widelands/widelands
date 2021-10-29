@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/note_graphic_resolution_changed.h"

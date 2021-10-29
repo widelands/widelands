@@ -24,6 +24,7 @@
 
 #include <boost/asio.hpp>
 
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"

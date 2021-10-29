@@ -19,6 +19,8 @@
 
 #include "map_io/map_players_view_packet.h"
 
+#include <sstream>
+
 #include "base/log.h"
 #include "base/string.h"
 #include "base/wexception.h"

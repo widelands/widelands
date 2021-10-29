@@ -19,8 +19,10 @@
 
 #include "graphic/playercolor.h"
 
+#include <cassert>
 #include <memory>
 
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"

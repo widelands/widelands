@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/string.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"

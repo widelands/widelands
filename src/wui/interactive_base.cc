@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/multithreading.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"

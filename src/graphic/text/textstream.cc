@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 
 namespace RT {

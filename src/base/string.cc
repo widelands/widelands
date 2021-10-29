@@ -53,21 +53,6 @@ void trim(std::string& str, const bool remove_leading, const bool remove_trailin
 	}
 }
 
-std::string join(const std::set<std::string>& words, const std::string& separator) {
-	if (words.empty()) {
-		return std::string();
-	}
-
-	auto it = words.begin();
-	std::string str = *it;
-	for (; it != words.end();) {
-		str += separator;
-		str += *(++it);
-	}
-
-	return str;
-}
-
 bool starts_with(const std::string& str, const std::string& test, const bool case_sensitive) {
 	const size_t s1 = str.size();
 	const size_t s2 = test.size();

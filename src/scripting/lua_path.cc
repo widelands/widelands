@@ -69,7 +69,7 @@ bool NumberGlob::next(std::string* s) {
 
 	*s = template_;
 	if (max_) {
-		boost::replace_last_copy(*s, to_replace_, (boost::format(format_) % current_).str());
+		replace_last(*s, to_replace_, (boost::format(format_) % current_).str());
 	}
 	++current_;
 	return true;

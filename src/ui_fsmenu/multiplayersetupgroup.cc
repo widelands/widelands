@@ -320,7 +320,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || can_change_hidden_tribe)) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
-				                   (boost::format(kAiNamePrefix "%s") % impl->name).str(),
+				                   (boost::format("%s%s") % kAiNamePrefix % impl->name).str(),
 				                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 			}
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
@@ -366,7 +366,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						const AI::ComputerPlayer::Implementation* impl =
 						   AI::ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select((boost::format(kAiNamePrefix "%s") % impl->name).str());
+						type_dropdown_.select((boost::format("%s%s") % kAiNamePrefix % impl->name).str());
 					}
 				}
 			}

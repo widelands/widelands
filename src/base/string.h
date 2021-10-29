@@ -21,12 +21,13 @@
 #define WL_BASE_STRING_H
 
 #include <algorithm>
+#include <functional>
 #include <set>
 #include <string>
 #include <vector>
 
 /** Split a string into substrings at all occurrences of any of the given delimiters. */
-void split(std::vector<std::string>&, const std::string&, const std::set<char>&);
+void split(std::vector<std::string>& result, const std::string&, const std::set<char>&);
 
 /** Convert a string to lowercase. */
 inline std::string to_lower(const std::string& str) {
@@ -53,9 +54,6 @@ inline bool contains(const std::string& str, const std::string& test, bool case_
 /** Remove leading and/or trailing whitespace from a string. */
 void trim(std::string&, bool remove_leading = true, bool remove_trailing = true);
 
-/** Concatenate all strings in `words` with the given `separator` between them. */
-std::string join(const std::set<std::string>& words, const std::string& separator);
-
 /** Helper function for the replace_* functions. */
 bool replace_first_or_last(std::string&, const std::string&, const std::string&, bool);
 
@@ -68,6 +66,21 @@ inline void replace_last(std::string& str, const std::string& f, const std::stri
 }
 inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
 	while (replace_first_or_last(str, f, r, true));
+}
+
+/** Concatenate all strings in `words` with the given `separator` between them. */
+template <typename Container>
+std::string join(const Container& words, const std::string& separator) {
+	if (words.empty()) {
+		return std::string();
+	}
+	auto it = words.begin();
+	std::string str = *it;
+	for (; it != words.end();) {
+		str += separator;
+		str += *(++it);
+	}
+	return str;
 }
 
 /** Convert various types to string. Useful in templates where the parameter type is not fixed. */
