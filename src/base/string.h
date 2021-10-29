@@ -20,6 +20,7 @@
 #ifndef WL_BASE_STRING_H
 #define WL_BASE_STRING_H
 
+#include <algorithm>
 #include <set>
 #include <string>
 #include <vector>
@@ -29,7 +30,7 @@ std::vector<std::string> split(const std::string&, const std::set<char>&);
 
 /** Convert a string to lowercase. */
 inline std::string to_lower(const std::string& str) {
-	std::string result = a;
+	std::string result = str;
 	std::transform(result.begin(), result.end(), result.begin(), tolower);
 	return result;
 }

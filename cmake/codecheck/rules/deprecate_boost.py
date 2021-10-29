@@ -22,7 +22,16 @@ def evaluate_matches(lines, fn):
                     break
             if not whitelisted:
                 offending = line[line.find('boost::'):]
-                offending = offending[0:min(offending.find(' '), offending.find('(')):]
+                pos1 = offending.find('(')
+                pos2 = offending.find(' ')
+                pos3 = offending.find(';')
+                if pos1 <= 0:
+                    pos1 = 1000
+                if pos2 <= 0:
+                    pos2 = 1000
+                if pos3 <= 0:
+                    pos3 = 1000
+                offending = offending[0:min(pos1, pos2, pos3):]
                 errors.append(
                     (fn, lineno+1, "'{}' is deprecated.".format(offending)))
 

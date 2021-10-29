@@ -20,9 +20,10 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <cassert>
 
 #include "base/macros.h"
+#include "base/string.h"
 #include "logic/widelands.h"
 
 // We need to use a string prefix in the game setup screens to identify the AIs, so we make sure
@@ -74,7 +75,7 @@ struct ComputerPlayer {
 		     descname(init_descname),
 		     icon_filename(init_icon_filename),
 		     type(init_type) {
-			assert(!boost::contains(name, AI_NAME_SEPARATOR));
+			assert(!contains(name, AI_NAME_SEPARATOR));
 		}
 
 		virtual ~Implementation() {

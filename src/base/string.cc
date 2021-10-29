@@ -24,7 +24,7 @@ std::vector<std::string> split(const std::string& str, const std::set<char>& set
 	std::string cur;
 
 	for (const char* c = str.c_str(); *c; ++c) {
-		if (set.contains(*c)) {
+		if (set.count(*c)) {
 			result.push_back(cur);
 			cur.clear();
 		} else {
@@ -116,7 +116,7 @@ bool ends_with(const std::string& str, const std::string& test, const bool case_
 	return true;
 }
 
-std::pair<std::string, bool /* changed */> replace_first_or_last(const std::string& str, const std::string& f, const std::string& r, bool first) {
+static std::pair<std::string, bool /* changed */> replace_first_or_last(const std::string& str, const std::string& f, const std::string& r, bool first) {
 	const size_t pos = (first ? str.find(f) : str.rfind(f));
 	if (pos == std::string::npos) {
 		return {str, false};
@@ -124,15 +124,15 @@ std::pair<std::string, bool /* changed */> replace_first_or_last(const std::stri
 
 	std::string result = str.substr(0, pos);
 	result += r;
-	result += str.substr(pos + f.size())
+	result += str.substr(pos + f.size());
 	return {result, true};
 }
 
 inline std::string replace_first(const std::string& str, const std::string& f, const std::string& r) {
-	return replace_first_or_last(str, f, r, true);
+	return replace_first_or_last(str, f, r, true).first;
 }
 inline std::string replace_last(const std::string& str, const std::string& f, const std::string& r) {
-	return replace_first_or_last(str, f, r, false);
+	return replace_first_or_last(str, f, r, false).first;
 }
 
 std::string replace_all(std::string str, const std::string& f, const std::string& r) {
