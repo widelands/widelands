@@ -110,6 +110,12 @@ wl_library(base_times
 )
 
 
+wl_library(base_string
+  SRCS
+    string.h
+    string.cc
+)
+
 wl_library(base_math
   SRCS
     math.h
