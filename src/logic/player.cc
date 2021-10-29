@@ -23,11 +23,10 @@
 #include <cstdlib>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -1981,15 +1980,14 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	                                       const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
-			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			split(stats_vector, stats_string, {'|'});
 			if (stats_vector.size() != nr_entries) {
 				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
 				                    " but got %" PRIuS,
 				                    description.c_str(), nr_entries, stats_vector.size());
 			}
 			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] =
-				   boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
+				stats->at(ware_index)[j] = stoul(stats_vector.at(j));
 			}
 		} else if (nr_entries > 0) {
 			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",

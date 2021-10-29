@@ -19,8 +19,7 @@
 
 #include "base/string.h"
 
-std::vector<std::string> split(const std::string& str, const std::set<char>& set) {
-	std::vector<std::string> result;
+void split(std::vector<std::string>& result, const std::string& str, const std::set<char>& set) {
 	std::string cur;
 
 	for (const char* c = str.c_str(); *c; ++c) {
@@ -33,7 +32,6 @@ std::vector<std::string> split(const std::string& str, const std::set<char>& set
 	}
 
 	result.push_back(cur);
-	return result;
 }
 
 void trim(std::string& str, const bool remove_leading, const bool remove_trailing) {
@@ -123,14 +121,4 @@ bool replace_first_or_last(std::string& str, const std::string& f, const std::st
 
 	str.replace(pos, f.size(), r);
 	return true;
-}
-
-inline void replace_first(std::string& str, const std::string& f, const std::string& r) {
-	replace_first_or_last(str, f, r, true);
-}
-inline void replace_last(std::string& str, const std::string& f, const std::string& r) {
-	replace_first_or_last(str, f, r, false);
-}
-inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
-	while (replace_first_or_last(str, f, r, true));
 }

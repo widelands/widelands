@@ -26,7 +26,7 @@
 #include <vector>
 
 /** Split a string into substrings at all occurrences of any of the given delimiters. */
-std::vector<std::string> split(const std::string&, const std::set<char>&);
+void split(std::vector<std::string>&, const std::string&, const std::set<char>&);
 
 /** Convert a string to lowercase. */
 inline std::string to_lower(const std::string& str) {
@@ -56,9 +56,18 @@ void trim(std::string&, bool remove_leading = true, bool remove_trailing = true)
 /** Concatenate all strings in `words` with the given `separator` between them. */
 std::string join(const std::vector<std::string>& words, const std::string& separator);
 
+/** Helper function for the replace_* functions. */
+bool replace_first_or_last(std::string&, const std::string&, const std::string&, bool);
+
 /** Replace all / the first / the last occurrence(s) of `f` in `str` with `r`. */
-void replace_all(std::string& str, const std::string& f, const std::string& r);
-void replace_first(std::string& str, const std::string& f, const std::string& r);
-void replace_last(std::string& str, const std::string& f, const std::string& r);
+inline void replace_first(std::string& str, const std::string& f, const std::string& r) {
+	replace_first_or_last(str, f, r, true);
+}
+inline void replace_last(std::string& str, const std::string& f, const std::string& r) {
+	replace_first_or_last(str, f, r, false);
+}
+inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
+	while (replace_first_or_last(str, f, r, true));
+}
 
 #endif  // end of include guard: WL_BASE_STRING_H

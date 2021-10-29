@@ -163,6 +163,7 @@ wl_library(logic_map
     base_log
     base_macros
     base_scoped_timer
+    base_string
     build_info
     economy
     graphic
@@ -271,6 +272,7 @@ wl_library(logic
     base_multithreading
     base_random
     base_scoped_timer
+    base_string
     base_time_string
     base_times
     build_info
