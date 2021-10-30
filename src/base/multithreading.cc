@@ -144,6 +144,10 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	uint32_t counter = 0;
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
+	if (g_mutex.find(id_) == g_mutex.end()) {
+		// Initialize MutexRecord
+		g_mutex[id_];
+	}
 
 	MutexRecord& record = g_mutex.at(id_);
 

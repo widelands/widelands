@@ -239,7 +239,7 @@ public:
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
-			terrains.d = terrains.r = 0;
+			terrains.store(Widelands::Field::Terrains{0, 0});
 
 			time_triangle_last_surveyed[0] = Time();
 			time_triangle_last_surveyed[1] = Time();
@@ -298,7 +298,7 @@ public:
 		 * Each value is only valid when one of the corner nodes of the triangle
 		 * has been seen.
 		 */
-		Widelands::Field::Terrains terrains;
+		std::atomic<Widelands::Field::Terrains> terrains;
 
 		/**
 		 * The road types of the 3 edges, as far as this player knows.

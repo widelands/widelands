@@ -566,9 +566,7 @@ void Map::set_origin(const Coords& new_origin) {
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	for (size_t ind = 0; ind < field_size; ind++) {
-		fields_[ind] = new_field_order[ind];
-	}
+	fields_ = std::move(new_field_order);
 
 	//  Inform immovables and bobs about their new coordinates.
 	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y) {
