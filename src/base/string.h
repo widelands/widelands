@@ -86,9 +86,10 @@ std::string join(const Container& words, const std::string& separator) {
 	}
 	auto it = words.begin();
 	std::string str = *it;
-	for (; it != words.end();) {
+	++it;
+	for (; it != words.end(); ++it) {
 		str += separator;
-		str += *(++it);
+		str += *it;
 	}
 	return str;
 }

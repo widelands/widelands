@@ -29,6 +29,7 @@
 #endif
 #include <cstdlib>
 #include <cstring>
+#include <limits>
 
 #include <sys/stat.h>
 #ifdef _WIN32
