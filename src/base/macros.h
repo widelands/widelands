@@ -20,9 +20,10 @@
 #ifndef WL_BASE_MACROS_H
 #define WL_BASE_MACROS_H
 
+#include <cinttypes>
+
 // Make sure that Visual C++ does not bark at __attribute__.
 #ifdef _MSC_VER
-#include <cinttypes>
 #ifndef __attribute__
 #define __attribute__(x)
 #endif
@@ -132,7 +133,15 @@
 #define PRIuS PRIu32
 #endif
 #else
+#if __WORDSIZE == 64
 #define PRIuS "lu"
+#else
+#if defined(__WORDSIZE32_SIZE_ULONG) && __WORDSIZE32_SIZE_ULONG
+#define PRIuS "lu"
+#else
+#define PRIuS "u"
+#endif
+#endif
 #endif
 
 #endif  // end of include guard: WL_BASE_MACROS_H
