@@ -145,7 +145,7 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
 
-	MutexRecord& record = g_mutex[id_];
+	MutexRecord& record = g_mutex.at(id_);
 
 	// When several threads are waiting to grab the same mutex, the first one is advantaged
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
