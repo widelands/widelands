@@ -361,7 +361,7 @@ protected:
 	const MapObjectDescr* descr_;
 	Serial serial_;
 	LogSink* logsink_;
-	Player* owner_;
+	std::atomic<Player*> owner_;
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking

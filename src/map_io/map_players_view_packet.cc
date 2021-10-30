@@ -246,7 +246,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					field->terrains.store({static_cast<DescriptionIndex>(stoi(data_vector[0])), static_cast<DescriptionIndex>(stoi(data_vector[1]))});
+					field->terrains.store({static_cast<DescriptionIndex>(stoi(data_vector[0])),
+					                       static_cast<DescriptionIndex>(stoi(data_vector[1]))});
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -383,7 +384,8 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					f.resource_amounts.d = fr.unsigned_8();
 					f.resource_amounts.r = fr.unsigned_8();
 
-					f.terrains.store({static_cast<DescriptionIndex>(fr.unsigned_32()), static_cast<DescriptionIndex>(fr.unsigned_32())});
+					f.terrains.store({static_cast<DescriptionIndex>(fr.unsigned_32()),
+					                  static_cast<DescriptionIndex>(fr.unsigned_32())});
 
 					f.r_e = static_cast<RoadSegment>(fr.unsigned_8());
 					f.r_se = static_cast<RoadSegment>(fr.unsigned_8());

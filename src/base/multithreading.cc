@@ -136,6 +136,8 @@ constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
+// To protect the global mutex list
+std::mutex MutexLock::s_mutex_;
 MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
@@ -144,12 +146,9 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	uint32_t counter = 0;
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
-	if (g_mutex.find(id_) == g_mutex.end()) {
-		// Initialize MutexRecord
-		g_mutex[id_];
-	}
-
-	MutexRecord& record = g_mutex.at(id_);
+	s_mutex_.lock();
+	MutexRecord& record = g_mutex[id_];
+	s_mutex_.unlock();
 
 	// When several threads are waiting to grab the same mutex, the first one is advantaged
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
@@ -191,6 +190,7 @@ MutexLock::~MutexLock() {
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
 #endif
-
+	s_mutex_.lock();
 	g_mutex.at(id_).mutex.unlock();
+	s_mutex_.unlock();
 }
