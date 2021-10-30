@@ -317,10 +317,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	};
 	create_tab(
 	   _("General"), KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End, nullptr);
-	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu_Begin, KeyboardShortcut::kMainMenu_End,
-	           nullptr);
 	create_tab(
-	   _("Editor"), KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End, nullptr);
+	   _("Main Menu"), KeyboardShortcut::kMainMenu_Begin, KeyboardShortcut::kMainMenu_End, nullptr);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End, nullptr);
 	create_tab(_("Game"), KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_End, nullptr);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
