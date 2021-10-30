@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-19 02:46+0000\n"
+"POT-Creation-Date: 2021-10-25 02:44+0000\n"
 "PO-Revision-Date: 2021-10-13 02:48+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:391
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:393
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -34,7 +34,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:395
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:397
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s or %2$s"
@@ -46,7 +46,7 @@ msgstr "%1$s or %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
+#: ../../src/base/i18n.cc:401 ../../src/base/i18n.cc:410
 #: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%1$s, %2$s"
@@ -55,7 +55,7 @@ msgstr "%1$s,%2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:403
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:405
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s 和 %2$s"
@@ -155,7 +155,7 @@ msgstr "较弱人工智能"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:418
+#: ../../src/base/i18n.cc:420
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1%%2%"
@@ -267,8 +267,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -282,12 +282,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -477,10 +477,10 @@ msgstr "信息"
 msgid "Click on a field to show information about it"
 msgstr "点击区域以显示与其相关的信息"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -539,7 +539,7 @@ msgstr "显示资源"
 msgid "Unsupported Format"
 msgstr "不支持的格式"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:772
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -570,11 +570,11 @@ msgstr "这个地图没有保存，您确定真的要退出吗？"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1615
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -659,8 +659,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -2518,7 +2518,7 @@ msgid "Checking map"
 msgstr "检查地图"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:722
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr "准备游戏…"
 
@@ -4934,11 +4934,11 @@ msgstr "常规的"
 msgid "Editor"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:324
+#: ../../src/ui_fsmenu/keyboard_options.cc:323
 msgid "Fastplace"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:326
+#: ../../src/ui_fsmenu/keyboard_options.cc:325
 msgid "Mouse Scrolling"
 msgstr ""
 
@@ -5152,7 +5152,7 @@ msgstr "昵称："
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "没有人"
 
@@ -6022,18 +6022,18 @@ msgstr "campaigns.lua 中的文件路径无效 在  tutorials.lua：%s"
 msgid "Tutorial"
 msgstr "教程"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "作者"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "作者"
@@ -6066,59 +6066,59 @@ msgid "Unmark All"
 msgstr "取消全部"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:776 ../../src/wlapplication.cc:782
-#: ../../src/wlapplication.cc:787 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:778 ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:789 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "错误消息："
 
-#: ../../src/wlapplication.cc:777 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:779 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "游戏数据错误"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:782
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands 找不到文件 \"%s\"。"
 
-#: ../../src/wlapplication.cc:783
+#: ../../src/wlapplication.cc:785
 msgid "File system error"
 msgstr "文件系统错误"
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1286
+#: ../../src/wlapplication.cc:1288
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1440
+#: ../../src/wlapplication.cc:1442
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1564
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1580
+#: ../../src/wlapplication.cc:1582
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Unexpected error during the game"
 msgstr "游戏中出现意外错误"
 
-#: ../../src/wlapplication.cc:1632
+#: ../../src/wlapplication.cc:1634
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6132,7 +6132,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "游戏时发生错误，错误消息是：\n\n%1$s\n\n请报告这个问题帮助我们改进Widelands。你将在标准输出中找到相关消息（stdout.txt on Windows）。你正生成%2$s (%3$s)。\n\n请添加此信息到你的报告中。\n\n你希望Widelands尝试创建一个应急游戏存档吗？应急游戏存档通常 – 并不总是 – 可以加载并继续游戏。"
 
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6142,11 +6142,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1671
 msgid "Emergency save failed"
 msgstr "应急保存失败"
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1672
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6872,9 +6872,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
@@ -7275,8 +7275,8 @@ msgstr "用选定的AI替换断开连接的游戏玩家并继续进行游戏"
 msgid "AI for the disconnected player"
 msgstr "断开连接的游戏玩家的AI"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
