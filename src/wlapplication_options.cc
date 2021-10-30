@@ -1026,8 +1026,8 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 
 void clear_fastplace_shortcuts() {
 	static const std::string none;
-	for (uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace__Begin);
-	     i < static_cast<uint16_t>(KeyboardShortcut::kFastplace__End); ++i) {
+	for (uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin);
+	     i < static_cast<uint16_t>(KeyboardShortcut::kFastplace_End); ++i) {
 		set_shortcut(static_cast<KeyboardShortcut>(i), keysym(SDLK_UNKNOWN), nullptr, &none,
 		             [](const std::string& s) { return s; });
 	}
@@ -1036,9 +1036,9 @@ void clear_fastplace_shortcuts() {
 void set_fastplace_shortcuts_proposed() {
 	clear_fastplace_shortcuts();
 
-	uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace__Begin);
+	uint16_t i = static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin);
 	for (const auto& pair : kFastplaceDefaults) {
-		assert(i <= static_cast<uint16_t>(KeyboardShortcut::kFastplace__End));
+		assert(i <= static_cast<uint16_t>(KeyboardShortcut::kFastplace_End));
 		set_shortcut(static_cast<KeyboardShortcut>(i), pair.second, nullptr, &pair.first,
 		             [](const std::string& s) { return s; });
 		++i;
