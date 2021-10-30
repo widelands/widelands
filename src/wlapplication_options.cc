@@ -1158,8 +1158,8 @@ bool matches_shortcut(const SDL_Keysym key, const SDL_Keycode code, const int mo
 
 std::set<std::string> matching_fastplace_shortcut(const SDL_Keysym key) {
 	std::set<std::string> result;
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
+	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		const std::string& str = shortcuts_.at(id).fastplace_name;
 		if (!str.empty() && matches_shortcut(id, key)) {
@@ -1306,15 +1306,15 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 }
 
 static void init_fastplace_shortcuts(const bool force_defaults) {
-	for (KeyboardShortcut k = KeyboardShortcut::kFastplace__Begin;
-	     k <= KeyboardShortcut::kFastplace__End;
+	for (KeyboardShortcut k = KeyboardShortcut::kFastplace_Begin;
+	     k <= KeyboardShortcut::kFastplace_End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
 		}
 		if (shortcuts_.count(k) == 0) {
 			const int off =
-			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
+			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace_Begin) + 1;
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
 			                           (boost::format("fastplace_%i") % off).str(), [off]() {
@@ -1326,7 +1326,7 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 
 void init_shortcuts(const bool force_defaults) {
 	init_fastplace_shortcuts(force_defaults);
-	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
+	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {

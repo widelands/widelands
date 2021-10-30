@@ -82,10 +82,10 @@ void set_config_string(const std::string& section,
 // Keyboard shortcuts. The order in which they are defined here
 // defines the order in which they appear in the options menu.
 enum class KeyboardShortcut : uint16_t {
-	k__Begin = 0,
+	k_Begin = 0,
 
-	kMainMenu__Begin = k__Begin,
-	kMainMenuSP = kMainMenu__Begin,
+	kMainMenu_Begin = k_Begin,
+	kMainMenuSP = kMainMenu_Begin,
 	kMainMenuNew,
 	kMainMenuRandomMatch,
 	kMainMenuCampaign,
@@ -106,10 +106,10 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuAddons,
 	kMainMenuAbout,
 	kMainMenuQuit,
-	kMainMenu__End = kMainMenuQuit,
+	kMainMenu_End = kMainMenuQuit,
 
-	kCommon__Begin = kMainMenu__End + 1,
-	kCommonFullscreen = kCommon__Begin,
+	kCommon_Begin = kMainMenu_End + 1,
+	kCommonFullscreen = kCommon_Begin,
 	kCommonScreenshot,
 	kCommonTextCut,
 	kCommonTextCopy,
@@ -125,10 +125,10 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomReset,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
-	kCommon__End = kCommonQuicknavNext,
+	kCommon_End = kCommonQuicknavNext,
 
-	kEditor__Begin = kCommon__End + 1,
-	kEditorMenu = kEditor__Begin,
+	kEditor_Begin = kCommon_End + 1,
+	kEditorMenu = kEditor_Begin,
 	kEditorSave,
 	kEditorLoad,
 	kEditorUndo,
@@ -150,10 +150,10 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorToolsize8,
 	kEditorToolsize9,
 	kEditorToolsize10,
-	kEditor__End = kEditorToolsize10,
+	kEditor_End = kEditorToolsize10,
 
-	kInGame__Begin = kEditor__End + 1,
-	kInGameSave = kInGame__Begin,
+	kInGame_Begin = kEditor_End + 1,
+	kInGameSave = kInGame_Begin,
 	kInGameLoad,
 	kInGameChat,
 	kInGameMessages,
@@ -213,17 +213,17 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-	kInGame__End = kInGameQuicknavGoto9,
+	kInGame_End = kInGameQuicknavGoto9,
 
-	kFastplace__Begin = kInGame__End + 1,
-	kFastplace__End = kFastplace__Begin + 199,  // Arbitrary limit of 200 fastplace shortcuts.
+	kFastplace_Begin = kInGame_End + 1,
+	kFastplace_End = kFastplace_Begin + 199,  // Arbitrary limit of 200 fastplace shortcuts.
 
-	k__End = kFastplace__End
+	k_End = kFastplace_End
 };
 
 /** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
 inline bool is_fastplace(const KeyboardShortcut id) {
-	return id >= KeyboardShortcut::kFastplace__Begin && id <= KeyboardShortcut::kFastplace__End;
+	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
 }
 
 /** Generate a Keysym for the given keycode and modifiers. */

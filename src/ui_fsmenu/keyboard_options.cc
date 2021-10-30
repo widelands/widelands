@@ -200,7 +200,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
+		if (key < KeyboardShortcut::kFastplace_Begin || key > KeyboardShortcut::kFastplace_End ||
 		    game_.get() == nullptr) {
 			return (boost::format(
 			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
@@ -316,12 +316,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		boxes_.push_back(b);
 	};
 	create_tab(
-	   _("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End, nullptr);
-	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End,
+	   _("General"), KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End, nullptr);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu_Begin, KeyboardShortcut::kMainMenu_End,
 	           nullptr);
 	create_tab(
-	   _("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End, nullptr);
-	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End, nullptr);
+	   _("Editor"), KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End, nullptr);
+	create_tab(_("Game"), KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_End, nullptr);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
 	{
@@ -344,8 +344,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 		capsule->add(box, UI::Box::Resizing::kFullSize);
 		capsule->add_space(kPadding);
-		create_tab(_("Fastplace"), KeyboardShortcut::kFastplace__Begin,
-		           KeyboardShortcut::kFastplace__End, capsule);
+		create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin,
+		           KeyboardShortcut::kFastplace_End, capsule);
 
 		b1->sigclicked.connect([all_keyboard_buttons, generate_title]() {
 			clear_fastplace_shortcuts();
