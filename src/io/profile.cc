@@ -23,8 +23,6 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/string.h"
@@ -586,7 +584,7 @@ void Profile::check_used() const {
  */
 Section* Profile::get_section(const std::string& name) {
 	for (Section& temp_section : sections_) {
-		if (iequals(temp_section.get_name(), name.c_str())) {
+		if (iequals(temp_section.get_name(), name)) {
 			temp_section.mark_used();
 			return &temp_section;
 		}

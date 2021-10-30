@@ -70,15 +70,12 @@ void trim(std::string&, bool remove_leading = true, bool remove_trailing = true)
 bool replace_first_or_last(std::string&, const std::string&, const std::string&, bool);
 
 /** Replace all / the first / the last occurrence(s) of `f` in `str` with `r`. */
+void replace_all(std::string& str, const std::string& f, const std::string& r);
 inline void replace_first(std::string& str, const std::string& f, const std::string& r) {
 	replace_first_or_last(str, f, r, true);
 }
 inline void replace_last(std::string& str, const std::string& f, const std::string& r) {
 	replace_first_or_last(str, f, r, false);
-}
-inline void replace_all(std::string& str, const std::string& f, const std::string& r) {
-	while (replace_first_or_last(str, f, r, true))
-		;
 }
 
 /** Concatenate all strings in `words` with the given `separator` between them. */

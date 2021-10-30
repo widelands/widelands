@@ -14,8 +14,10 @@ whitelist = [
 ]
 whitelist_headers = [
     'boost/format',
+    'boost/signals2',
     'boost/uuid',
     'boost/asio',
+    'boost/version',
     'boost/test',
 ]
 

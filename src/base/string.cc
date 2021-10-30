@@ -37,7 +37,7 @@ void split(std::vector<std::string>& result, const std::string& str, const std::
 
 void trim(std::string& str, const bool remove_leading, const bool remove_trailing) {
 	if (remove_leading) {
-		const size_t pos = str.find_first_not_of(" ");
+		const size_t pos = str.find_first_not_of(' ');
 		if (pos == std::string::npos) {
 			str.clear();
 			return;
@@ -65,4 +65,17 @@ bool replace_first_or_last(std::string& str,
 
 	str.replace(pos, f.size(), r);
 	return true;
+}
+
+void replace_all(std::string& str, const std::string& f, const std::string& r) {
+	const size_t sf = f.size();
+	const size_t sr = r.size();
+	for (size_t pos = 0;;) {
+		pos = str.find(f, pos);
+		if (pos == std::string::npos) {
+			return;
+		}
+		str.replace(pos, sf, r);
+		pos += sr;
+	}
 }
