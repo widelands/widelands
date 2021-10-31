@@ -26,7 +26,6 @@ end
 function see_reebaud(field)
    scroll_to_field(field)
    sleep(2000)
-   p2.hidden_from_general_statistics = false
    campaign_message_box(reebaud_1)
    p2.team = 1
    campaign_message_box(reebaud_2)
@@ -75,7 +74,7 @@ function see_reebaud(field)
    game:save_campaign_data("frisians", "fri04", data)
    campaign_message_box(victory)
    p1:mark_scenario_as_solved("fri04.wmf")
-   -- END OF MISSION 3
+   -- END OF MISSION 4
 end
 
 function mission_thread()

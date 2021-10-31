@@ -67,7 +67,7 @@ intro_1 = {
 intro_2 = {
    title =_ "Welcome Back!",
    body=claus(_"Arrived at last",
-      -- TRANSLATORS: Claus Lembeck – Introduction 2a
+      -- TRANSLATORS: Claus Lembeck – Introduction 2
       _([[The legate and I have no more business with each other now. I have taken a dislike to his superior attitude during the journey, and especially to the disdainful manner in which he treated his galley slaves. It did not seem to occur to him that they are human beings like him and me; or if it did, he acted as though they themselves were to blame for their bad fortune. I do not regret that I will probably not be seeing him again. He set up his camp some distance away from mine so that we will not hinder each other.]])),
 }
 intro_3 = {
