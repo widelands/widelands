@@ -276,15 +276,15 @@ Vector2i get_mousewheel_change_2D(MousewheelHandlerConfigID handler_id,
 }
 
 void update_mousewheel_settings() {
-	for (MousewheelHandlerConfigID i = MousewheelHandlerConfigID::k__Begin;
-	     i <= MousewheelHandlerConfigID::k__End;
+	for (MousewheelHandlerConfigID i = MousewheelHandlerConfigID::k_Begin;
+	     i <= MousewheelHandlerConfigID::k_End;
 	     i = static_cast<MousewheelHandlerConfigID>(static_cast<uint16_t>(i) + 1)) {
 		mousewheel_handlers.at(i).update_settings();
 	}
 }
 
 void reset_mousewheel_settings() {
-	for (MousewheelOptionID i = MousewheelOptionID::k__Begin; i <= MousewheelOptionID::k__End;
+	for (MousewheelOptionID i = MousewheelOptionID::k_Begin; i <= MousewheelOptionID::k_End;
 	     i = static_cast<MousewheelOptionID>(static_cast<uint16_t>(i) + 1)) {
 		mousewheel_options.at(i).reset();
 	}
