@@ -82,8 +82,10 @@ function mission_thread()
    campaign_message_box(intro_1)
    scroll_to_field(map.player_slots[1].starting_field)
    include "map:scripting/starting_conditions.lua"
-   sleep(3000)
-   if campaign_data.payment then campaign_message_box(intro_2) end
+   if campaign_data.payment then
+      sleep(3000)
+      campaign_message_box(intro_2)
+   end
    sleep(2000)
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_find_reebaud)

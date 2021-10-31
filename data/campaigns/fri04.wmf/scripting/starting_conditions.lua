@@ -48,6 +48,7 @@ hq:set_workers {
    frisians_woodcutter = 3,
    frisians_forester = 2,
    frisians_miner = 4,
+   frisians_smelter = 1,
    frisians_stonemason = 2,
 }
 

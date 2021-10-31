@@ -220,4 +220,5 @@ victory = {
       _([[The enemies are defeated. Now I will come South with you together with all my soldiers except for a small garrison to safeguard my lands, and we will reconquer your island!]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
 }
