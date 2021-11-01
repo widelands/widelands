@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-22 02:55+0000\n"
+"POT-Creation-Date: 2021-10-31 02:44+0000\n"
 "PO-Revision-Date: 2021-10-13 02:48+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -28,7 +28,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:391
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:393
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -36,7 +36,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:395
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:397
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s of %2$s"
@@ -48,7 +48,7 @@ msgstr "%1$s of %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
+#: ../../src/base/i18n.cc:401 ../../src/base/i18n.cc:410
 #: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%1$s, %2$s"
@@ -57,7 +57,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:403
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:405
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s en %2$s"
@@ -157,7 +157,7 @@ msgstr "Zeer Zwakke AI"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:418
+#: ../../src/base/i18n.cc:420
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -269,8 +269,8 @@ msgstr "nov."
 msgid "Dec"
 msgstr "dec."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -284,12 +284,12 @@ msgstr "Hoofdmenu"
 msgid "Tools"
 msgstr "Gereedschap"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informatie"
 msgid "Click on a field to show information about it"
 msgstr "Klik op een veld om er informatie over te tonen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -541,7 +541,7 @@ msgstr "Toon Grondstoffen"
 msgid "Unsupported Format"
 msgstr "Niet-ondersteund formaat"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:772
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -572,11 +572,11 @@ msgstr "Deze kaart is niet opgeslagen, weet je zeker dat je wilt afsluiten?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1615
 msgid "Error"
 msgstr "Fout"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -661,8 +661,8 @@ msgstr "mijn"
 msgid "port"
 msgstr "haven"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -971,9 +971,9 @@ msgstr "(geen)"
 msgid "Waterway length limit:"
 msgstr "Lengtelimiet waterweg:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1392,8 +1392,8 @@ msgid ""
 "location."
 msgstr "Selecteer het nieuwe formaat van de kaart, klik dan op de kaart om deze te splitsen op de gewenste locatie. Wanneer de kaart wordt vergroot, zullen nieuwe kolommen/rijen worden ingevoegd ten oosten/zuiden van het geselcteerde punt. Wanneer de kaart wordt verkleind, wordt het gewenste aantal kolommen/rijen verwijderd ten oosten/zuiden van de splitsingslocatie."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
@@ -2532,7 +2532,7 @@ msgid "Checking map"
 msgstr "Kaart controleren"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:722
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr "Spel Voorbereiden..."
 
@@ -4966,11 +4966,11 @@ msgstr "Algemeen"
 msgid "Editor"
 msgstr "Bewerkingen"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:324
+#: ../../src/ui_fsmenu/keyboard_options.cc:323
 msgid "Fastplace"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:326
+#: ../../src/ui_fsmenu/keyboard_options.cc:325
 msgid "Mouse Scrolling"
 msgstr ""
 
@@ -5184,7 +5184,7 @@ msgstr "Bijnaam:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "niemand"
 
@@ -6098,59 +6098,59 @@ msgid "Unmark All"
 msgstr "Alle markeringen weg halen"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:776 ../../src/wlapplication.cc:782
-#: ../../src/wlapplication.cc:787 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:778 ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:789 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "Foutboodschap:"
 
-#: ../../src/wlapplication.cc:777 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:779 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "Spelgegevensfout"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:782
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands kon de file \"%s\" niet vinden."
 
-#: ../../src/wlapplication.cc:783
+#: ../../src/wlapplication.cc:785
 msgid "File system error"
 msgstr "Bestandssysteem Fout"
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Lege waarde in opdracht regel parameter: %s"
 
-#: ../../src/wlapplication.cc:1286
+#: ../../src/wlapplication.cc:1288
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s kan niet worden gecombineerd met andere acties"
 
-#: ../../src/wlapplication.cc:1440
+#: ../../src/wlapplication.cc:1442
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Onbekende opdracht regel parameter: %s\nMisschien ontbreekt er een '=' ?"
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1564
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized en --fullscreen kunnen niet worden gecombineerd"
 
-#: ../../src/wlapplication.cc:1580
+#: ../../src/wlapplication.cc:1582
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Onbekende opdracht regel parameter:  %s"
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Game ended unexpectedly"
 msgstr "Spel eindigde onverwacht"
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Unexpected error during the game"
 msgstr "Onverwachte fout gedurende dit spel"
 
-#: ../../src/wlapplication.cc:1632
+#: ../../src/wlapplication.cc:1634
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6164,7 +6164,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Er ging iets fout tijdens het spelen. De foutboodschap is:\n\n%1$s\n\nMeld dit probleem a.u.b. om Widelands te helpen verbeteren. Je kan gerelateerde meldingen vinden in de standaard berichten (stdout.txt in Windows). Je gebruikt 'build' %2$s (%3$s).\n\nWil je dat Widelands een poging doet om als noodoplossing het spel te bewaren? Het is vaak – maar niet altijd – mogelijk om het weer te laden en verder te spelen."
 
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6174,11 +6174,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Het spel stopte onverwacht om de volgende reden:\n\n%s\n\nWil je dat Widelands een poging doet om als noodoplossing het spel te bewaren? Het is vaak – maar niet altijd – mogelijk om het weer te laden en verder te spelen."
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1671
 msgid "Emergency save failed"
 msgstr "Noodprocedure Spelbewaren faalde"
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1672
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
