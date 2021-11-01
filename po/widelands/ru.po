@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-22 02:55+0000\n"
-"PO-Revision-Date: 2021-10-13 02:48+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-10-31 02:44+0000\n"
+"PO-Revision-Date: 2021-10-27 14:51+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:391
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:393
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s и %2$s"
@@ -44,7 +44,7 @@ msgstr "%1$s и %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:395
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:397
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s или %2$s"
@@ -56,7 +56,7 @@ msgstr "%1$s или %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:399 ../../src/base/i18n.cc:408
+#: ../../src/base/i18n.cc:401 ../../src/base/i18n.cc:410
 #: ../../src/logic/addons.cc:204
 #, c-format
 msgid "%1$s, %2$s"
@@ -65,7 +65,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:403
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:405
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s и %2$s"
@@ -165,7 +165,7 @@ msgstr "Очень слабый ИИ"
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:418
+#: ../../src/base/i18n.cc:420
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -277,8 +277,8 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -292,12 +292,12 @@ msgstr "Главное меню"
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -487,10 +487,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -549,7 +549,7 @@ msgstr "Показать ресурсы"
 msgid "Unsupported Format"
 msgstr "Формат не поддерживается"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:772
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -580,11 +580,11 @@ msgstr "Карта не была сохранена, вы действитель
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:483
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1615
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -669,8 +669,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -979,9 +979,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1402,8 +1402,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
@@ -2564,7 +2564,7 @@ msgid "Checking map"
 msgstr "Проверка карты"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:546
-#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:722
+#: ../../src/ui_fsmenu/launch_spg.cc:166 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr "Подготовка к игре..."
 
@@ -3204,7 +3204,7 @@ msgstr "Не выбрано"
 
 #: ../../src/ui_basic/dropdown.h:360
 msgid "No matches"
-msgstr ""
+msgstr "Совпадений нет"
 
 #: ../../src/ui_basic/panel.cc:312
 msgid "Please wait…"
@@ -3306,39 +3306,39 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/ui_fsmenu/about.cc:75
 msgid "Operating System:"
-msgstr ""
+msgstr "ОС:"
 
 #: ../../src/ui_fsmenu/about.cc:77
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../src/ui_fsmenu/about.cc:79
 msgid "Windows (64 bit)"
-msgstr ""
+msgstr "Windows (64 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:81
 msgid "Windows (32 bit)"
-msgstr ""
+msgstr "Windows (32 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:83
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../src/ui_fsmenu/about.cc:85
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../src/ui_fsmenu/about.cc:87
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../src/ui_fsmenu/about.cc:89
 msgid "Unknown"
-msgstr ""
+msgstr "Неопределена"
 
 #: ../../src/ui_fsmenu/about.cc:92
 msgid "Locale:"
-msgstr ""
+msgstr "Язык:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Home Directory:"
@@ -3346,31 +3346,31 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Configuration File:"
-msgstr ""
+msgstr "Файл настроек:"
 
 #: ../../src/ui_fsmenu/about.cc:95
 msgid "Data Directory:"
-msgstr ""
+msgstr "Папка с данными:"
 
 #: ../../src/ui_fsmenu/about.cc:96
 msgid "Locale Directory:"
-msgstr ""
+msgstr "Папка с переводами:"
 
 #: ../../src/ui_fsmenu/about.cc:97
 msgid "Executable Directory:"
-msgstr ""
+msgstr "Папка с программами:"
 
 #: ../../src/ui_fsmenu/about.cc:104 ../../src/ui_fsmenu/about.cc:151
 msgid "Technical Info"
-msgstr ""
+msgstr "Технические данные"
 
 #: ../../src/ui_fsmenu/about.cc:133
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: ../../src/ui_fsmenu/about.cc:134
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "Скопировать тех.отчёт в буфер обмена"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:39
 msgid "Contact Form"
@@ -3460,41 +3460,41 @@ msgstr "%u байт"
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Любые"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:95
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Качество не оценено"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:101
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Низкое"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:102
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Это дополнение может стать причиной сбоев и ошибок."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Достаточное"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:108
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Работа дополнения соответствует нормам."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:113
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Отличное"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:114
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Это дополнение носит знак высшего качества."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:126
 msgid "Add-On Manager"
@@ -3506,7 +3506,7 @@ msgstr "Только для проверенных"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:172
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Только проверенные дополнения"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:180
 msgid "Sort by"
@@ -3514,7 +3514,7 @@ msgstr "Сортировка"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:191
 msgid "Minimum quality"
-msgstr ""
+msgstr "Низкого качества"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:202
 msgid "Choose add-on to upload…"
@@ -3678,12 +3678,12 @@ msgstr "Название (по убыванию)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:497
 msgid "Most popular"
-msgstr ""
+msgstr "Самые популярные"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:499
 msgid "Least popular"
-msgstr ""
+msgstr "Наименее популярные"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:501
@@ -3818,7 +3818,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Подключаемся к серверу…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:956
 msgid "Server Connection Error"
@@ -4171,20 +4171,20 @@ msgstr "По причине '%2$s' \nне удалось записать доп
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:56
 msgid "Invalid filename"
-msgstr ""
+msgstr "Название файла забраковано"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:59
 msgid "Name too long"
-msgstr ""
+msgstr "Название слишком длинное"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:64
 #, c-format
 msgid "Invalid character ‘%c’"
-msgstr ""
+msgstr "Символ ‘%c’ недопустим"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:69
 msgid "Filename may not contain ‘..’"
-msgstr ""
+msgstr "В названии файла не может быть ‘..’"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "Add selected map"
@@ -4313,7 +4313,7 @@ msgstr "Изменить…"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:91
 msgid "Are you sure you want to delete this comment?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить этот комментарий?"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:105
 #, c-format
@@ -4452,7 +4452,7 @@ msgstr ""
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:419
 msgid "Unchecked"
-msgstr ""
+msgstr "Непроверено"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:421
@@ -4464,12 +4464,12 @@ msgstr "Проверено"
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:425
 msgid "Desyncs"
-msgstr ""
+msgstr "Рассинхрон"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:427
 msgid "Sync-safe"
-msgstr ""
+msgstr "Синхро-безопасно"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:528
 msgid "Your vote"
@@ -4521,11 +4521,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:685
 msgid "Enable Transifex integration"
-msgstr ""
+msgstr "Доступна интеграция с Transifex"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:697
 msgid "Are you sure you want to enable Transifex integration for this add-on?"
-msgstr ""
+msgstr "Вы хотите интегрировать то дополнение с Transifex?"
 
 #. * TRANSLATORS: The placeholder is an URL
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:702
@@ -4534,7 +4534,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:708
 msgid "This may take several minutes. Please be patient."
-msgstr ""
+msgstr "Это займёт до нескольких минут. Будьте терпеливы."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
 #, c-format
@@ -5034,13 +5034,13 @@ msgstr "Главное"
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:324
+#: ../../src/ui_fsmenu/keyboard_options.cc:323
 msgid "Fastplace"
 msgstr "Выбранная площадка"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:326
+#: ../../src/ui_fsmenu/keyboard_options.cc:325
 msgid "Mouse Scrolling"
-msgstr ""
+msgstr "Прокрутка мышкой"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -5252,7 +5252,7 @@ msgstr "Имя:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:109
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "никто"
 
@@ -5564,19 +5564,19 @@ msgstr "Закрыть окно"
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:60
 msgid "Vertical scroll"
-msgstr ""
+msgstr "Вертикальная прокрутка"
 
 #. * TRANSLATORS: e.g. Ctrl+Horizontal scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:62
 msgid "Horizontal scroll"
-msgstr ""
+msgstr "Горизонтальная прокрутка"
 
 #. * TRANSLATORS: Used when a function works with either vertical or
 #. horizontal scrolling.
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:65
 msgid "Any scroll"
-msgstr ""
+msgstr "Прокрутка в любую сторону"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
@@ -5602,7 +5602,7 @@ msgstr ""
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:206
 msgid "Both"
-msgstr ""
+msgstr "В обе стороны"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:221
 msgid "%1%:"
@@ -6166,59 +6166,59 @@ msgid "Unmark All"
 msgstr "Снять метки со всех"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:776 ../../src/wlapplication.cc:782
-#: ../../src/wlapplication.cc:787 ../../src/wui/savegameloader.cc:107
+#: ../../src/wlapplication.cc:778 ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:789 ../../src/wui/savegameloader.cc:107
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
-#: ../../src/wlapplication.cc:777 ../../src/wui/mapdetails.cc:231
+#: ../../src/wlapplication.cc:779 ../../src/wui/mapdetails.cc:231
 msgid "Game data error"
 msgstr "Ошибка в данных игры"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:782
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Игра не нашла этот файл: \"%s\""
 
-#: ../../src/wlapplication.cc:783
+#: ../../src/wlapplication.cc:785
 msgid "File system error"
 msgstr "Ошибка файловой системы"
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Не указан параметр командной строки %s"
 
-#: ../../src/wlapplication.cc:1286
+#: ../../src/wlapplication.cc:1288
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "Сочетать %s с другими действиями не получится"
 
-#: ../../src/wlapplication.cc:1440
+#: ../../src/wlapplication.cc:1442
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Что это за параметр такой, %s?\nМожет, пропущен знак =?"
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1564
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Нельзя использовать сочетания параметров --xres/--yres, --maximized и --fullscreen. Выберите что-то одно"
 
-#: ../../src/wlapplication.cc:1580
+#: ../../src/wlapplication.cc:1582
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан странный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1629
+#: ../../src/wlapplication.cc:1631
 msgid "Unexpected error during the game"
 msgstr "При игре проскочила ошибка"
 
-#: ../../src/wlapplication.cc:1632
+#: ../../src/wlapplication.cc:1634
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6232,7 +6232,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "В ходе игры возникла следующая ошибка:\n\n%1$s\n\nПожалуйста, отправьте отчет об ошибке нам, это поможет в улучшении Widelands. Вся нужная информация приведена в стандартном выходном потоке (в ОС Windows это файл stdout.txt). Ваша текущая сборка - %2$s (%3$s).\n\nПроверьте: игра могла попытаться создать быстрое сохранение. Если оно есть, попробуйте загрузить его и продолжить игру."
 
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6242,11 +6242,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра завершена по следующей причине:\n\n%s.\n\nПроверьте, Widelands создало быстрое сохранение? Если оно доступно, попробуйте запустить его и продолжить игру."
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1671
 msgid "Emergency save failed"
 msgstr "Быстрое сохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1672
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
