@@ -643,7 +643,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
-			const auto& wp_begin = productionsite.working_positions_->begin();
+			const auto& wp_begin = productionsite.working_positions_.begin();
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
 			const BillOfMaterials& working_positions = pr_descr.working_positions();
 
@@ -1281,7 +1281,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.unsigned_16(kCurrentPacketVersionProductionsite);
 
 	uint32_t const nr_working_positions = productionsite.descr().nr_working_positions();
-	const auto& begin = productionsite.working_positions_->begin();
+	const auto& begin = productionsite.working_positions_.begin();
 	const auto& end = std::next(begin, nr_working_positions);
 	uint32_t nr_workers = 0;
 	for (auto i = begin; i != end; ++i) {
@@ -1364,7 +1364,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	} else {
 		fw.unsigned_8(1);
 		fw.unsigned_32(mos.get_object_file_index(
-		   *productionsite.working_positions_->at(productionsite.main_worker_).worker.get(game)));
+		   *productionsite.working_positions_.at(productionsite.main_worker_).worker.get(game)));
 	}
 }
 

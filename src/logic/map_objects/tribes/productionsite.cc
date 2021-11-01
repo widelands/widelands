@@ -286,7 +286,7 @@ IMPLEMENTATION
 
 ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
    : Building(ps_descr),
-     working_positions_(new std::vector<WorkingPosition>(ps_descr.nr_working_positions())),
+     working_positions_(ps_descr.nr_working_positions()),
      fetchfromflag_(0),
      program_timer_(false),
      program_time_(0),
@@ -312,7 +312,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	uint32_t nr_requests = 0;
 	uint32_t nr_coming = 0;
 	for (uint32_t i = 0; i < descr().nr_working_positions(); ++i) {
-		const Widelands::Request* request = working_positions_->at(i).worker_request;
+		const Widelands::Request* request = working_positions_.at(i).worker_request;
 		// Check whether a request is being fulfilled or not
 		if (request) {
 			if (request->is_open()) {
@@ -320,7 +320,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 			} else {
 				++nr_coming;
 			}
-		} else if (working_positions_->at(i).worker == nullptr) {
+		} else if (working_positions_.at(i).worker == nullptr) {
 			// We might have no request, but no worker either
 			++nr_requests;
 		}
@@ -477,7 +477,7 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 	}
 
 	//  Request missing workers.
-	auto wp = working_positions_->begin();
+	auto wp = working_positions_.begin();
 	for (const auto& temp_wp : descr().working_positions()) {
 		DescriptionIndex const worker_index = temp_wp.first;
 		for (uint32_t j = temp_wp.second; j; --j, ++wp) {
@@ -511,7 +511,7 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 
 	Building::set_economy(e, type);
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		if (Request* const r = working_positions_->at(--i).worker_request) {
+		if (Request* const r = working_positions_.at(--i).worker_request) {
 			if (r->get_type() == type) {
 				r->set_economy(e);
 			}
@@ -533,12 +533,12 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 void ProductionSite::cleanup(EditorGameBase& egbase) {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
-		delete working_positions_->at(i).worker_request;
-		working_positions_->at(i).worker_request = nullptr;
-		Worker* const w = working_positions_->at(i).worker.get(egbase);
+		delete working_positions_.at(i).worker_request;
+		working_positions_.at(i).worker_request = nullptr;
+		Worker* const w = working_positions_.at(i).worker.get(egbase);
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
-		working_positions_->at(i).worker = nullptr;
+		working_positions_.at(i).worker = nullptr;
 
 		// Actually remove the worker
 		if (w) {
@@ -562,7 +562,7 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
  * returns true on success and false if there is no room for this worker
  */
 bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes, int32_t slot) {
-	auto current = working_positions_->begin();
+	auto current = working_positions_.begin();
 	for (int i = descr().nr_working_positions(); i; i--, ++current) {
 		if (slot < 0) {
 			if (current->worker.get(egbase)) {
@@ -600,29 +600,36 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
 }
 
 /**
- * @return index in descr().working_positions() (slot requirement) and working_positions_ (current
- * slot)
+ * Locate the worker slot at which the given worker is currently employed.
+ * @return Index in descr().working_positions() (slot requirement) and working_positions_ (current
+ *         slot), or (-1, -1) if the worker does not work here.
  */
 std::pair<int32_t, int32_t> ProductionSite::find_worker(OPtr<Worker> w) {
-	auto wp = working_positions_->begin();
+	auto wp = working_positions_.begin();
 	const BillOfMaterials& bom = descr().working_positions();
 	int32_t wp_index = 0;
 	int32_t bom_index = 0;
 	for (auto temp_wp = bom.begin(); temp_wp != bom.end(); ++temp_wp, ++bom_index) {
 		for (uint32_t j = temp_wp->second; j; --j, ++wp, ++wp_index) {
 			if (wp->worker == w) {
-				return std::pair<size_t, size_t>(bom_index, wp_index);
+				return std::pair<int32_t, int32_t>(bom_index, wp_index);
 			}
 		}
 	}
 	return std::pair<int32_t, int32_t>(-1, -1);
 }
 
+/**
+ * Tries to replace a new worker request with a worker already present on the site
+ * @param game: Game reference to retrieve description info
+ * @param worker_index: The required worker type
+ * @param wp: Pointer to the slot to be filled (contains the worker request)
+ */
 void ProductionSite::try_replace_worker(const Game* game,
                                         DescriptionIndex worker_index,
                                         WorkingPosition* wp) {
 	// Search replacement worker in the same building
-	for (auto wp_repl = working_positions_->begin(); wp_repl != working_positions_->end();
+	for (auto wp_repl = working_positions_.begin(); wp_repl != working_positions_.end();
 	     wp_repl++) {
 		if (!wp_repl->worker.is_set()) {
 			continue;
@@ -635,6 +642,7 @@ void ProductionSite::try_replace_worker(const Game* game,
 		bool needs_higher_qualification = wd.can_act_as(worker_index_repl);
 
 		Worker* w_repl = wp_repl->worker.get(*game);
+		assert(w_repl != nullptr);
 		bool is_over_qualified = w_repl->descr().worker_index() != worker_index_repl;
 		if (is_over_qualified && needs_higher_qualification &&
 		    w_repl->descr().can_act_as(worker_index)) {
@@ -645,6 +653,7 @@ void ProductionSite::try_replace_worker(const Game* game,
 			// Request the now missing worker instead and loop again
 			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
 			try_replace_worker(game, worker_index_repl, wp_repl.base());
+			return;
 		}
 	}
 }
@@ -662,7 +671,7 @@ void ProductionSite::remove_worker(Worker& w) {
 	}
 
 	DescriptionIndex const worker_index = descr().working_positions().at(wp_indexes.first).first;
-	WorkingPosition* wp = &working_positions_->at(wp_indexes.second);
+	WorkingPosition* wp = &working_positions_.at(wp_indexes.second);
 	// do not request the type of worker that is currently assigned – maybe a
 	// trained worker was evicted to make place for a level 0 worker.
 	// Therefore we again request the worker from the WorkingPosition of descr()
@@ -709,7 +718,7 @@ void ProductionSite::request_worker_callback(
 	// placed on the slot that originally requested the arrived worker.
 	bool worker_placed = false;
 	DescriptionIndex idx = w->descr().worker_index();
-	for (WorkingPosition& wp : *psite.working_positions_) {
+	for (WorkingPosition& wp : psite.working_positions_) {
 		if (wp.worker_request == &rq) {
 			if (wp.worker_request->get_index() == idx) {
 				// Place worker
@@ -729,7 +738,7 @@ void ProductionSite::request_worker_callback(
 		{
 			uint8_t nwp = psite.descr().nr_working_positions();
 			uint8_t pos = 0;
-			auto wp = psite.working_positions_->begin();
+			auto wp = psite.working_positions_.begin();
 			for (; pos < nwp; ++wp, ++pos) {
 				// Find a fitting slot
 				if (!wp->worker.get(game) && !worker_placed) {
@@ -788,7 +797,7 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 		} else {
 			assert(main_worker_ >= 0);
 			if (stack_.empty()) {
-				working_positions_->at(main_worker_).worker.get(game)->update_task_buildingwork(game);
+				working_positions_.at(main_worker_).worker.get(game)->update_task_buildingwork(game);
 				return;
 			}
 
@@ -855,8 +864,8 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	++fetchfromflag_;
 
 	if (main_worker_ >= 0) {
-		assert(working_positions_->at(main_worker_).worker.get(game));
-		working_positions_->at(main_worker_).worker.get(game)->update_task_buildingwork(game);
+		assert(working_positions_.at(main_worker_).worker.get(game));
+		working_positions_.at(main_worker_).worker.get(game)->update_task_buildingwork(game);
 	}
 
 	return true;
@@ -882,7 +891,7 @@ void ProductionSite::set_stopped(bool const stopped) {
  */
 bool ProductionSite::can_start_working() const {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		if (working_positions_->at(--i).worker_request) {
+		if (working_positions_.at(--i).worker_request) {
 			return false;
 		}
 	}
@@ -893,7 +902,7 @@ void ProductionSite::try_start_working(Game& game) {
 	const size_t nr_workers = descr().nr_working_positions();
 	for (uint32_t i = 0; i < nr_workers; ++i) {
 		if (main_worker_ == static_cast<int>(i) || main_worker_ < 0) {
-			if (Worker* worker = working_positions_->at(i).worker.get(game)) {
+			if (Worker* worker = working_positions_.at(i).worker.get(game)) {
 				// We may start even if can_start_working() returns false, because basic actions
 				// like unloading extra wares should take place anyway
 				main_worker_ = i;
@@ -913,7 +922,7 @@ void ProductionSite::try_start_working(Game& game) {
 bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
 	assert(!descr().working_positions().empty());
 	assert(main_worker_ >= 0);
-	assert(&worker == working_positions_->at(main_worker_).worker.get(game));
+	assert(&worker == working_positions_.at(main_worker_).worker.get(game));
 
 	// If unsuccessful: Check if we need to abort current program
 	if (!success) {
@@ -1108,7 +1117,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 
 void ProductionSite::train_workers(Game& game) {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
-		working_positions_->at(--i).worker.get(game)->gain_experience(game);
+		working_positions_.at(--i).worker.get(game)->gain_experience(game);
 	}
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }

@@ -344,7 +344,7 @@ public:
 	};
 
 	const std::vector<WorkingPosition>* working_positions() const {
-		return working_positions_.get();
+		return &working_positions_;
 	}
 
 	virtual bool has_workers(DescriptionIndex targetSite, Game& game);
@@ -482,7 +482,7 @@ protected:
 	}
 
 protected:  // TrainingSite must have access to this stuff
-	std::unique_ptr<std::vector<WorkingPosition>> working_positions_;
+	std::vector<WorkingPosition> working_positions_;
 
 	int32_t fetchfromflag_;  ///< Number of wares to fetch from flag
 
