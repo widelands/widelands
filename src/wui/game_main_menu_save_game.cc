@@ -149,8 +149,10 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 void GameMainMenuSaveGame::layout() {
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
-	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
-	load_or_save_.delete_button()->set_desired_size(ok_.get_w(), ok_.get_h());
+	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, 0);
+	load_or_save_.delete_button()->set_desired_size(cancel_.get_w(), cancel_.get_h());
+
+	UI::UniqueWindow::layout();
 }
 
 void GameMainMenuSaveGame::entry_selected() {
