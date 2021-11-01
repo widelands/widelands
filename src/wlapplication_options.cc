@@ -36,6 +36,7 @@
 
 static Profile g_options(Profile::err_log);
 
+static std::string config_file;
 static std::unique_ptr<FileSystem> config_dir = nullptr;
 
 void check_config_used() {
@@ -639,16 +640,6 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #undef QUICKNAV
 };
 
-void set_fastplace_shortcut(const KeyboardShortcut id, const std::string& building) {
-	assert(id >= KeyboardShortcut::kFastplace__Begin && id <= KeyboardShortcut::kFastplace__End);
-	KeyboardShortcutInfo& info = shortcuts_.at(id);
-	info.fastplace_name = building;
-	set_config_string("keyboard_fastplace", info.internal_name, building);
-	if (building.empty()) {
-		set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
-	}
-}
-
 const std::string& get_fastplace_shortcut(const KeyboardShortcut id) {
 	return shortcuts_.at(id).fastplace_name;
 }
@@ -681,20 +672,49 @@ static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
 	return false;
 }
 
-bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
-	const std::set<KeyboardShortcutInfo::Scope>& scopes = shortcuts_.at(id).scopes;
+bool set_shortcut(KeyboardShortcut id,
+                  SDL_Keysym code,
+                  KeyboardShortcut* conflict,
+                  const std::string* fastplace_building,
+                  const std::function<std::string(const std::string&)>& building_to_tribename) {
+	const bool is_fp = is_fastplace(id);
+	assert(is_fp == (fastplace_building != nullptr));
+	KeyboardShortcutInfo& info = shortcuts_.at(id);
 
-	for (auto& pair : shortcuts_) {
-		if (pair.first != id && shared_scope(scopes, pair.second) &&
-		    matches_shortcut(pair.first, code)) {
-			if (conflict != nullptr) {
-				*conflict = pair.first;
+	if (fastplace_building == nullptr || !fastplace_building->empty()) {
+		for (auto& pair : shortcuts_) {
+			if (pair.first != id && shared_scope(info.scopes, pair.second) &&
+			    matches_shortcut(pair.first, code)) {
+				if (is_fp && is_fastplace(pair.first)) {
+					if (pair.second.fastplace_name.empty()) {
+						// It's a disabled fastplace shortcut
+						continue;
+					}
+					const std::string t1 = building_to_tribename(pair.second.fastplace_name);
+					const std::string t2 = building_to_tribename(*fastplace_building);
+					if (!t1.empty() && !t2.empty() && t1 != t2) {
+						// Assigned to different tribes
+						continue;
+					}
+				}
+
+				if (conflict != nullptr) {
+					*conflict = pair.first;
+				}
+				return false;
 			}
-			return false;
 		}
 	}
 
-	shortcuts_.at(id).current_shortcut = code;
+	if (fastplace_building != nullptr) {
+		info.fastplace_name = *fastplace_building;
+		set_config_string("keyboard_fastplace", info.internal_name, *fastplace_building);
+		if (fastplace_building->empty()) {
+			code = keysym(SDLK_UNKNOWN);
+		}
+	}
+
+	info.current_shortcut = code;
 	write_shortcut(id, code);
 	return true;
 }
@@ -740,21 +760,15 @@ void normalize_numpad(SDL_Keysym& keysym) {
 	keysym.sym = search->second;
 }
 
+uint16_t normalize_keymod(uint16_t keymod) {
+	return ((keymod & KMOD_SHIFT) ? KMOD_SHIFT : KMOD_NONE) |
+	       ((keymod & KMOD_CTRL) ? KMOD_CTRL : KMOD_NONE) |
+	       ((keymod & KMOD_ALT) ? KMOD_ALT : KMOD_NONE) |
+	       ((keymod & KMOD_GUI) ? KMOD_GUI : KMOD_NONE);
+}
+
 bool matches_keymod(const uint16_t mod1, const uint16_t mod2) {
-	const bool ctrl1 = mod1 & KMOD_CTRL;
-	const bool shift1 = mod1 & KMOD_SHIFT;
-	const bool alt1 = mod1 & KMOD_ALT;
-	const bool gui1 = mod1 & KMOD_GUI;
-	const bool ctrl2 = mod2 & KMOD_CTRL;
-	const bool shift2 = mod2 & KMOD_SHIFT;
-	const bool alt2 = mod2 & KMOD_ALT;
-	const bool gui2 = mod2 & KMOD_GUI;
-
-	if (ctrl1 != ctrl2 || shift1 != shift2 || alt1 != alt2 || gui1 != gui2) {
-		return false;
-	}
-
-	return true;
+	return normalize_keymod(mod1) == normalize_keymod(mod2);
 }
 
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
@@ -815,16 +829,17 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	return false;
 }
 
-std::string matching_fastplace_shortcut(const SDL_Keysym key) {
-	for (int i = static_cast<int>(KeyboardShortcut::kFastplace__Begin);
-	     i < static_cast<int>(KeyboardShortcut::kFastplace__End); ++i) {
+std::set<std::string> matching_fastplace_shortcut(const SDL_Keysym key) {
+	std::set<std::string> result;
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
+	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		const std::string& str = shortcuts_.at(id).fastplace_name;
 		if (!str.empty() && matches_shortcut(id, key)) {
-			return str;
+			result.insert(str);
 		}
 	}
-	return "";
+	return result;
 }
 
 KeyboardShortcut shortcut_from_string(const std::string& name) {
@@ -834,6 +849,38 @@ KeyboardShortcut shortcut_from_string(const std::string& name) {
 		}
 	}
 	throw wexception("Shortcut '%s' does not exist", name.c_str());
+}
+
+std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
+	i18n::Textdomain textdomain("widelands");
+	std::vector<std::string> mods;
+	if (modstate & KMOD_SHIFT) {
+		mods.push_back(pgettext("hotkey", "Shift"));
+	}
+	if (modstate & KMOD_ALT) {
+		mods.push_back(pgettext("hotkey", "Alt"));
+	}
+	if (modstate & KMOD_GUI) {
+#ifdef __APPLE__
+		mods.push_back(pgettext("hotkey", "Cmd"));
+#else
+		mods.push_back(pgettext("hotkey", "GUI"));
+#endif
+	}
+	if (modstate & KMOD_CTRL) {
+		mods.push_back(pgettext("hotkey", "Ctrl"));
+	}
+
+	std::string result;
+
+	// Return value will have a trailing "+" if any modifier is matched,
+	// because all current uses need it anyway, and extra checks can
+	// be avoided both here and in the users this way
+	for (const std::string& m : mods) {
+		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
+	}
+
+	return rt_escape ? richtext_escape(result) : result;
 }
 
 std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape) {
@@ -924,42 +971,23 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 		return "";
 	}
 	i18n::Textdomain textdomain("widelands");
-	std::vector<std::string> mods;
-	if (sym.mod & KMOD_SHIFT) {
-		mods.push_back(pgettext("hotkey", "Shift"));
-	}
-	if (sym.mod & KMOD_ALT) {
-		mods.push_back(pgettext("hotkey", "Alt"));
-	}
-	if (sym.mod & KMOD_GUI) {
-#ifdef __APPLE__
-		mods.push_back(pgettext("hotkey", "Cmd"));
-#else
-		mods.push_back(pgettext("hotkey", "GUI"));
-#endif
-	}
-	if (sym.mod & KMOD_CTRL) {
-		mods.push_back(pgettext("hotkey", "Ctrl"));
-	}
 
-	std::string result = key_name(sym.sym);
-	for (const std::string& m : mods) {
-		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
-	}
+	std::string result =
+	   (boost::format(_("%1$s%2$s")) % keymod_string_for(sym.mod, false) % key_name(sym.sym)).str();
 
 	return rt_escape ? richtext_escape(result) : result;
 }
 
 static void init_fastplace_shortcuts(const bool force_defaults) {
-	for (KeyboardShortcut k = KeyboardShortcut::kFastplace__Begin;
-	     k <= KeyboardShortcut::kFastplace__End;
+	for (KeyboardShortcut k = KeyboardShortcut::kFastplace_Begin;
+	     k <= KeyboardShortcut::kFastplace_End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
 		}
 		if (shortcuts_.count(k) == 0) {
 			const int off =
-			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace__Begin) + 1;
+			   static_cast<int>(k) - static_cast<int>(KeyboardShortcut::kFastplace_Begin) + 1;
 			shortcuts_.emplace(
 			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
 			                           (boost::format("fastplace_%i") % off).str(), [off]() {
@@ -971,7 +999,7 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 
 void init_shortcuts(const bool force_defaults) {
 	init_fastplace_shortcuts(force_defaults);
-	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
+	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
@@ -1067,7 +1095,15 @@ ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log_info("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
+
+	config_file = userconfigdir;
+	config_file += FileSystem::file_separator();
+	config_file += kConfigFile;
+	log_info("Set configuration file: %s", config_file.c_str());
+}
+
+const std::string& get_config_file() {
+	return config_file;
 }
 
 void read_config() {

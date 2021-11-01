@@ -153,13 +153,14 @@ void Box::update_desired_size() {
 	layout();
 }
 
-bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool Box::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (scrollbar_) {
 		assert(scrolling_ || force_scrolling_);
-		return scrollbar_->handle_mousewheel(which, x, y);
+		return scrollbar_->handle_mousewheel(x, y, modstate);
 	}
-	return Panel::handle_mousewheel(which, x, y);
+	return Panel::handle_mousewheel(x, y, modstate);
 }
+
 bool Box::handle_key(bool down, SDL_Keysym code) {
 	if (scrollbar_) {
 		assert(scrolling_ || force_scrolling_);

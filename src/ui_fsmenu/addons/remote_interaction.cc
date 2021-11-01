@@ -35,6 +35,8 @@
 namespace FsMenu {
 namespace AddOnsUI {
 
+static const std::string kVotingTabName("votes");
+
 std::map<std::pair<std::string, std::string>, std::string>
    RemoteInteractionWindow::downloaded_screenshots_cache_;
 
@@ -663,7 +665,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	} else {
 		box_screenies_.set_visible(false);
 	}
-	tabs_.add("votes", "", &box_votes_);
+	tabs_.add(kVotingTabName, "", &box_votes_);
+	tabs_.sigclicked.connect([this]() { update_current_vote_on_demand(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(kRowButtonSpacing);
@@ -702,7 +705,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
 				             .str()) %
 				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(_("This may take several minutes, please be patient.")))
+				       .as_font_tag(_("This may take several minutes. Please be patient.")))
 				      .str(),
 				   UI::WLMessageBox::MBoxType::kOkCancel);
 				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -888,20 +891,27 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	}
 }
 
+void RemoteInteractionWindow::update_current_vote_on_demand() {
+	if (current_vote_ < 0 && !parent_.username().empty() &&
+	    tabs_.tabs()[tabs_.active()]->get_name() == kVotingTabName) {
+		current_vote_ = parent_.net().get_vote(info_->internal_name);
+	}
+	own_voting_.select(std::max(0, current_vote_));
+}
+
 void RemoteInteractionWindow::login_changed() {
-	current_vote_ = parent_.net().get_vote(info_->internal_name);
-	if (current_vote_ < 0) {
+	current_vote_ = -1;
+	update_current_vote_on_demand();
+	if (parent_.username().empty()) {
 		write_comment_.set_enabled(false);
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-		own_voting_.select(0);
 	} else {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
-		own_voting_.select(current_vote_);
 	}
 	for (auto& cr : comment_rows_) {
 		cr->update_edit_enabled();

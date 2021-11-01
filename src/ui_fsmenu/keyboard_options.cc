@@ -27,12 +27,14 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_fsmenu/mousewheel_options.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {
 
 constexpr int16_t kPadding = 4;
+constexpr int16_t kButtonHeight = 28;
 
 struct ShortcutChooser : public UI::Window {
 	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)
@@ -163,24 +165,26 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
    : UI::Window(&parent.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "keyboard_options",
-                0,
-                0,
-                // This window's height is set relative to the parent window (i.e. the
-                // Options dialog) because setting it relative to the whole game window
-                // would make the window look too big and cluttered. The width has to
-                // be set relative to the game window though, because we need lots of
+                // Size and position will be set by the main game window so that
+                // it can follow resolution change.
+                // This window's height is set smaller than the Options dialog to
+                // avoid looking too big and cluttered. The width is set quite big
+                // relative to the game window though, because we need lots of
                 // horizontal space for the fastplace tab's button labels.
-                parent.get_topmost_forefather().get_w() * 3 / 4,
-                parent.get_h() * 3 / 4,
-                _("Edit Keyboard Shortcuts")),
+                0,
+                0,
+                0,
+                0,
+                _("Edit Keyboard And Mouse Actions")),
      buttons_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
      tabs_(this, UI::TabPanelStyle::kFsMenu),
+     mousewheel_options_(&tabs_),
      reset_(&buttons_box_,
             "reset",
             0,
             0,
-            get_w() / 3,
-            28,
+            0,
+            0,
             UI::ButtonStyle::kFsMenuSecondary,
             _("Reset all"),
             _("Reset all to defaults")),
@@ -196,7 +200,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
+		if (key < KeyboardShortcut::kFastplace_Begin || key > KeyboardShortcut::kFastplace_End ||
 		    game_.get() == nullptr) {
 			return (boost::format(
 			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
@@ -235,20 +239,48 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
-			                        key <= KeyboardShortcut::kFastplace__End);
+			const bool fastplace = is_fastplace(key);
+			auto get_building_descr = [this](const std::string& bld) {
+				return game_.get() == nullptr ? nullptr :
+                                            game_->descriptions().get_building_descr(
+				                                   game_->descriptions().building_index(bld));
+			};
+
 			WLApplication* const app = WLApplication::get();
 			app->enable_handle_key(false);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
-				if (set_shortcut(key, c.key, &conflict)) {
-					if (fastplace) {
-						set_fastplace_shortcut(key, c.fastplace);
-					}
+				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
+				                 [get_building_descr](const std::string& name) {
+					                 const Widelands::BuildingDescr* d = get_building_descr(name);
+					                 return d == nullptr ? "" :
+                                                      get_building_descr(name)->get_owning_tribe();
+				                 })) {
 					b->set_title(generate_title(key));
 					break;
 				} else {
+					const std::string& conflict_fp = get_fastplace_shortcut(conflict);
+					std::string conflict_name = to_string(conflict);
+					if (!conflict_fp.empty()) {
+						const Widelands::BuildingDescr* d = get_building_descr(conflict_fp);
+						if (d == nullptr) {
+							conflict_name =
+							   (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
+						} else {
+							conflict_name =
+							   (boost::format(
+							       /** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
+							       _("%1$s ([%2$s] %3$s)")) %
+							    conflict_name %
+							    game_->descriptions()
+							       .get_tribe_descr(
+							          game_->descriptions().safe_tribe_index(d->get_owning_tribe()))
+							       ->descname() %
+							    d->descname())
+							      .str();
+						}
+					}
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
 					   as_richtext_paragraph(
@@ -256,7 +288,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					          _("The shortcut you selected (‘%1$s’) is already in use for the "
 					            "following action: ‘%2$s’. Please select a different shortcut "
 					            "or change the conflicting shortcut first.")) %
-					       shortcut_string_for(c.key, true) % to_string(conflict))
+					       shortcut_string_for(c.key, true) % conflict_name)
 					         .str(),
 					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 					   UI::WLMessageBox::MBoxType::kOk);
@@ -282,14 +314,15 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		tabs_.add(title, title, b, "");
 		boxes_.push_back(b);
 	};
-	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
-	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
-	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
-	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+	create_tab(_("General"), KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu_Begin, KeyboardShortcut::kMainMenu_End);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
+	create_tab(_("Game"), KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_End);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
-	create_tab(
-	   _("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
+	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
+
+	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -309,21 +342,25 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			game_->remove_loader_ui();
 		}
 	});
-	reset_.sigclicked.connect([all_keyboard_buttons, generate_title]() {
+	reset_.sigclicked.connect([this, all_keyboard_buttons, generate_title]() {
 		init_shortcuts(true);
 		for (auto& pair : all_keyboard_buttons) {
 			pair.second->set_title(generate_title(pair.first));
 		}
+		mousewheel_options_.reset();
 	});
-	ok_.sigclicked.connect([this]() { die(); });
+	ok_.sigclicked.connect([this]() {
+		mousewheel_options_.apply_settings();
+		die();
+	});
 
-	layout();
-	center_to_parent();
+	get_parent()->layout();
 	initialization_complete();
 }
 
 bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
 	if (down && code.sym == SDLK_RETURN) {
+		mousewheel_options_.apply_settings();
 		die();
 		return true;
 	}
@@ -332,14 +369,17 @@ bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
 
 void KeyboardOptions::layout() {
 	if (!is_minimal()) {
+		reset_.set_desired_size(get_w() / 3, kButtonHeight);
+		ok_.set_desired_size(reset_.get_w(), reset_.get_h());
 		int w, h;
 		buttons_box_.get_desired_size(&w, &h);
 		buttons_box_.set_size(get_inner_w(), h);
-		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h));
-		tabs_.set_size(get_inner_w(), get_inner_h() - h - kPadding);
+		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h - kPadding));
+		tabs_.set_size(get_inner_w(), get_inner_h() - h - 2 * kPadding);
 		for (UI::Box* b : boxes_) {
 			b->set_max_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 		}
+		mousewheel_options_.set_size(tabs_.get_inner_w(), tabs_.get_inner_h());
 	}
 	UI::Window::layout();
 }

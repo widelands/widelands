@@ -197,7 +197,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          0,
                          0,
                          UI::ButtonStyle::kFsMenuSecondary,
-                         _("Edit keyboard shortcuts…")),
+                         _("Edit keyboard and mouse actions…")),
 
      // Sound options
      sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
@@ -271,11 +271,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                          or a map region,*/
                       /** TRANSLATORS: and it also lets you jump to it on the map. */
                       _("Use single watchwindow mode")),
-     ctrl_zoom_(&box_ingame_,
-                UI::PanelStyle::kFsMenu,
-                Vector2i::zero(),
-                /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-                _("Zoom only when Ctrl is pressed")),
      game_clock_(&box_ingame_,
                  UI::PanelStyle::kFsMenu,
                  Vector2i::zero(),
@@ -374,7 +369,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
-	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
@@ -423,7 +417,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 #endif
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
-	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
@@ -449,7 +443,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
 	transparent_chat_.set_state(opt.transparent_chat);
 	single_watchwin_.set_state(opt.single_watchwin);
-	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
@@ -526,7 +519,7 @@ void Options::layout() {
 		// Tabs
 		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
 
-		const int tab_panel_width = get_inner_w() - 2 * kPadding;
+		const int tab_panel_width = get_inner_w() - 3 * kPadding;
 		const int unit_w = tab_panel_width / 3;
 
 		// Interface
@@ -685,6 +678,10 @@ void Options::update_language_stats() {
 	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
+void Options::clicked_ok() {
+	end_modal<MenuTarget>(MenuTarget::kOk);
+}
+
 void Options::clicked_apply() {
 	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
@@ -698,10 +695,10 @@ bool Options::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_RETURN:
-			end_modal<MenuTarget>(MenuTarget::kOk);
+			clicked_ok();
 			return true;
 		case SDLK_ESCAPE:
-			end_modal<MenuTarget>(MenuTarget::kBack);
+			clicked_cancel();
 			return true;
 		default:
 			break;
@@ -747,7 +744,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
-	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
@@ -829,7 +825,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
-	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
@@ -879,7 +874,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
-	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
