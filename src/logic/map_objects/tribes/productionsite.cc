@@ -629,8 +629,7 @@ void ProductionSite::try_replace_worker(const Game* game,
                                         DescriptionIndex worker_index,
                                         WorkingPosition* wp) {
 	// Search replacement worker in the same building
-	for (auto wp_repl = working_positions_.begin(); wp_repl != working_positions_.end();
-	     wp_repl++) {
+	for (auto wp_repl = working_positions_.begin(); wp_repl != working_positions_.end(); wp_repl++) {
 		if (!wp_repl->worker.is_set()) {
 			continue;
 		}
