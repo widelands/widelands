@@ -20,6 +20,9 @@
 #ifndef WL_WLAPPLICATION_OPTIONS_H
 #define WL_WLAPPLICATION_OPTIONS_H
 
+#include <functional>
+#include <set>
+
 #include <SDL_keyboard.h>
 
 #include "io/profile.h"
@@ -79,10 +82,10 @@ void set_config_string(const std::string& section,
 // Keyboard shortcuts. The order in which they are defined here
 // defines the order in which they appear in the options menu.
 enum class KeyboardShortcut : uint16_t {
-	k__Begin = 0,
+	k_Begin = 0,
 
-	kMainMenu__Begin = k__Begin,
-	kMainMenuSP = kMainMenu__Begin,
+	kMainMenu_Begin = k_Begin,
+	kMainMenuSP = kMainMenu_Begin,
 	kMainMenuNew,
 	kMainMenuRandomMatch,
 	kMainMenuCampaign,
@@ -103,10 +106,10 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuAddons,
 	kMainMenuAbout,
 	kMainMenuQuit,
-	kMainMenu__End = kMainMenuQuit,
+	kMainMenu_End = kMainMenuQuit,
 
-	kCommon__Begin = kMainMenu__End + 1,
-	kCommonFullscreen = kCommon__Begin,
+	kCommon_Begin = kMainMenu_End + 1,
+	kCommonFullscreen = kCommon_Begin,
 	kCommonScreenshot,
 	kCommonTextCut,
 	kCommonTextCopy,
@@ -122,10 +125,10 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomReset,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
-	kCommon__End = kCommonQuicknavNext,
+	kCommon_End = kCommonQuicknavNext,
 
-	kEditor__Begin = kCommon__End + 1,
-	kEditorMenu = kEditor__Begin,
+	kEditor_Begin = kCommon_End + 1,
+	kEditorMenu = kEditor_Begin,
 	kEditorSave,
 	kEditorLoad,
 	kEditorUndo,
@@ -147,10 +150,10 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorToolsize8,
 	kEditorToolsize9,
 	kEditorToolsize10,
-	kEditor__End = kEditorToolsize10,
+	kEditor_End = kEditorToolsize10,
 
-	kInGame__Begin = kEditor__End + 1,
-	kInGameSave = kInGame__Begin,
+	kInGame_Begin = kEditor_End + 1,
+	kInGameSave = kInGame_Begin,
 	kInGameLoad,
 	kInGameChat,
 	kInGameMessages,
@@ -210,33 +213,82 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameQuicknavGoto8,
 	kInGameQuicknavSet9,
 	kInGameQuicknavGoto9,
-	kInGame__End = kInGameQuicknavGoto9,
+	kInGame_End = kInGameQuicknavGoto9,
 
-	kFastplace__Begin = kInGame__End + 1,
-	kFastplace__End = kFastplace__Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
+	kFastplace_Begin = kInGame_End + 1,
+	kFastplace_End = kFastplace_Begin + 127,  // Arbitrary limit of 128 fastplace shortcuts.
 
-	k__End = kFastplace__End
+	k_End = kFastplace_End
 };
-bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
+
+/** Check whether a given shortcut is reserved for a fastplace shortcut slot. */
+inline bool is_fastplace(const KeyboardShortcut id) {
+	return id >= KeyboardShortcut::kFastplace_Begin && id <= KeyboardShortcut::kFastplace_End;
+}
+
+/**
+ * Change a keyboard shortcut.
+ * @param id ID of the shortcut to change.
+ * @param code New keysym to use. Ignored when setting a fastplace shortcut to \c "".
+ * @param conflict If not \c nullptr and a conflict occurs, this will
+ *                 be filled in with the conflicting shortcut's ID.
+ * @param fastplace_building For fastplace shortcuts, the new building name to use (may be \c "").
+ *                           Must be \c nullptr for non-fastplace shortcuts.
+ * @param building_to_tribename A lookup function that returns the internal
+ *                              tribe name for a given building name.
+ *                              \c "" means the tribe is not known.
+ * @return The shortcut was changed successfully. If \c false, #conflict will contain the reason.
+ */
+bool set_shortcut(KeyboardShortcut id,
+                  SDL_Keysym code,
+                  KeyboardShortcut* conflict,
+                  const std::string* fastplace_building,
+                  const std::function<std::string(const std::string&)>& building_to_tribename);
+
+/** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
+
+/** Look up the hardcoded default keysym for a given shortcut ID. */
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
+
+/** Replace numpad keysyms with their non-numpad equivalents. */
 void normalize_numpad(SDL_Keysym&);
+
+/**
+ * Filter out all modifiers we are not interested in as well as left/right information.
+ * @param keymod Modifier bitset to normalize.
+ * @return #KMOD_NONE or a bitset of #KMOD_CTRL, #KMOD_SHIFT, #KMOD_ALT, and #KMOD_GUI.
+ */
 uint16_t normalize_keymod(uint16_t keymod);
+
+/** Check if the two modifier bitsets match each other. */
 bool matches_keymod(uint16_t, uint16_t);
+
+/** Check if the given keysym should trigger the given shortcut. */
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
-std::string matching_fastplace_shortcut(SDL_Keysym);
+
+/** Look up the fastplace building(s) assigned to a given shortcut. May return \c "" / \c {}. */
+const std::string& get_fastplace_shortcut(KeyboardShortcut);
+std::set<std::string> matching_fastplace_shortcut(SDL_Keysym);
+
+/** Read all shortcuts from the config file, or replace all mappings with the default values. */
 void init_shortcuts(bool force_defaults = false);
+
+/** The human-readable name of a shortcut identifier. */
 std::string to_string(KeyboardShortcut);
+
+/** Get the shortcut ID from an internal shortcut name. Throws an exception for invalid names. */
 KeyboardShortcut shortcut_from_string(const std::string&);
 
-// Return value will either be an empty string or have a trailing "+"
+/**
+ * Generate a human-readable description of a keyboard shortcut.
+ * Return value will either be an empty string or have a trailing "+".
+ */
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
 
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
-void set_fastplace_shortcut(KeyboardShortcut, const std::string& building);
-const std::string& get_fastplace_shortcut(KeyboardShortcut);
 
 // Return values for changing value of spinbox, slider, etc.
 enum class ChangeType : int32_t {

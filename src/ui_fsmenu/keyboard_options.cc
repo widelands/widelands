@@ -200,7 +200,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		if (key < KeyboardShortcut::kFastplace__Begin || key > KeyboardShortcut::kFastplace__End ||
+		if (key < KeyboardShortcut::kFastplace_Begin || key > KeyboardShortcut::kFastplace_End ||
 		    game_.get() == nullptr) {
 			return (boost::format(
 			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
@@ -239,20 +239,48 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			const bool fastplace = (key >= KeyboardShortcut::kFastplace__Begin &&
-			                        key <= KeyboardShortcut::kFastplace__End);
+			const bool fastplace = is_fastplace(key);
+			auto get_building_descr = [this](const std::string& bld) {
+				return game_.get() == nullptr ? nullptr :
+                                            game_->descriptions().get_building_descr(
+				                                   game_->descriptions().building_index(bld));
+			};
+
 			WLApplication* const app = WLApplication::get();
 			app->enable_handle_key(false);
 			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
-				if (set_shortcut(key, c.key, &conflict)) {
-					if (fastplace) {
-						set_fastplace_shortcut(key, c.fastplace);
-					}
+				if (set_shortcut(key, c.key, &conflict, fastplace ? &c.fastplace : nullptr,
+				                 [get_building_descr](const std::string& name) {
+					                 const Widelands::BuildingDescr* d = get_building_descr(name);
+					                 return d == nullptr ? "" :
+                                                      get_building_descr(name)->get_owning_tribe();
+				                 })) {
 					b->set_title(generate_title(key));
 					break;
 				} else {
+					const std::string& conflict_fp = get_fastplace_shortcut(conflict);
+					std::string conflict_name = to_string(conflict);
+					if (!conflict_fp.empty()) {
+						const Widelands::BuildingDescr* d = get_building_descr(conflict_fp);
+						if (d == nullptr) {
+							conflict_name =
+							   (boost::format(_("%1$s (%2$s)")) % conflict_name % conflict_fp).str();
+						} else {
+							conflict_name =
+							   (boost::format(
+							       /** TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name) */
+							       _("%1$s ([%2$s] %3$s)")) %
+							    conflict_name %
+							    game_->descriptions()
+							       .get_tribe_descr(
+							          game_->descriptions().safe_tribe_index(d->get_owning_tribe()))
+							       ->descname() %
+							    d->descname())
+							      .str();
+						}
+					}
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
 					   as_richtext_paragraph(
@@ -260,7 +288,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					          _("The shortcut you selected (‘%1$s’) is already in use for the "
 					            "following action: ‘%2$s’. Please select a different shortcut "
 					            "or change the conflicting shortcut first.")) %
-					       shortcut_string_for(c.key, true) % to_string(conflict))
+					       shortcut_string_for(c.key, true) % conflict_name)
 					         .str(),
 					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 					   UI::WLMessageBox::MBoxType::kOk);
@@ -286,14 +314,13 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		tabs_.add(title, title, b, "");
 		boxes_.push_back(b);
 	};
-	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
-	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
-	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
-	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+	create_tab(_("General"), KeyboardShortcut::kCommon_Begin, KeyboardShortcut::kCommon_End);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu_Begin, KeyboardShortcut::kMainMenu_End);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor_Begin, KeyboardShortcut::kEditor_End);
+	create_tab(_("Game"), KeyboardShortcut::kInGame_Begin, KeyboardShortcut::kInGame_End);
 
 	const size_t fastplace_tab_index = tabs_.tabs().size();
-	create_tab(
-	   _("Fastplace"), KeyboardShortcut::kFastplace__Begin, KeyboardShortcut::kFastplace__End);
+	create_tab(_("Fastplace"), KeyboardShortcut::kFastplace_Begin, KeyboardShortcut::kFastplace_End);
 
 	tabs_.add("options_scroll", _("Mouse Scrolling"), &mousewheel_options_, "");
 

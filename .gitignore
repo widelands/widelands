@@ -32,6 +32,9 @@ CMakeLists.txt.user*
 /.vs
 CMakeSettings.json
 
+# Profilers
+gmon.out
+
 # Validation checks
 po_validation
 clang-tidy.log

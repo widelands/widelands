@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-28 02:36+0000\n"
-"PO-Revision-Date: 2021-08-28 02:37+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-27 15:18+0000\n"
+"Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -530,7 +530,7 @@ msgstr "Амазонки предпочитают леса. Ставьте до�
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Редкие деревья нужны для амазонской экономики. Ставьте плантации редких деревьев для их выращивания."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -547,43 +547,43 @@ msgstr "Еда готовится на древесном угле. Обеспе
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Собиратели лиан срезают их с деревьев. Деревьям это вреда не наносит."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Вода жизненно важна для амазонцев. Услуги водовозов чрезвычайно важны для племени."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Для вымывания золота нужен источник воды, при чём как можно ближе к старателям, чтобы она была свежей и чистой."
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
-"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
-"only released near trees uninhabited by sentries."
-msgstr ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Звероводы обеспечивают ваших охотников дичью, а рыболовов рыбой. Выпускать зверей нужно возле деревьев, в стороне от сторожек."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Мастера джунглей будут садить деревья на плантациях согласно экономическим потребностям."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
-"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
-"lashing canoes together to form ships."
-msgstr ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "Верёвки необходимы в постройке домов, пошиве одежды и преобразования каноэ в корабли путём связки."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Мастера джунглей наращивают опыт в процессе работы, что пригодится им в центрах разведения редких деревьев."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""

@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-08-28 02:36+0000\n"
-"PO-Revision-Date: 2021-08-28 02:37+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-10 17:10+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -524,7 +524,7 @@ msgstr "Amazonky milují stromy. Postav dostatek chat ochránkyň džungle, aby 
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Vzácné dřeviny představují páteř amazonského hospodářství. Postav plantáž vzácných dřevin pro jejich výsadbu."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -541,43 +541,43 @@ msgstr "Jídlo je sušeno za pomoci dřevěného uhlí. Zajisti jeho stabilní p
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Sběračky lián sklízí liány z blízkých stromů, aniž by stromy během tohoto procesu poničily."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Voda je pro amazonky život. Sběračky vody vykonávají pro svůj kmen důležitou službu."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Rýžování zlata potřebuje tekoucí vodu, kvůli výkonnosti je nejlépe ji mít co nejblíže."
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
-"Wilderness keepers ensure fresh game for hunting and fishing. Animals are "
-"only released near trees uninhabited by sentries."
-msgstr ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Ochránkyně divoké fauny zajišťují zvěř pro lov a ryby pro rybaření. Zvěř je vypuštěna pouze v okolí stromů, které nejsou předělány na strážnice."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Zásoby vzácných dřevin jsou kontrolovány na plantáži vzácných dřevin a paní džungle je budou sázet na základě požadavků hospodářství."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
-"Rope is essential for ensuring sound buildings, sewing sturdy clothing, and "
-"lashing canoes together to form ships."
-msgstr ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "Lana jsou důležitá pro zpevnění staveb, šití pevného oblečení a spojování kánoí dohromady k vytvoření lodí."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo na plantáži vzácných dřevin, musí nejprve pracovat jako ochránkyně džungle. "
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
