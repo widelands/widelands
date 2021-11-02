@@ -132,7 +132,6 @@ void fill_parameter_vector() {
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
 		_("Allow diagonal scrolling with the numeric keypad"), true},
 	  {"", "game_clock", _("[true|false*]"), _("Display system time in the info panel"), true},
-	  {"", "ctrl_zoom", _("[true|false*]"), _("Zoom only when Ctrl is pressed"), true},
 	  {"", "single_watchwin", _("[true|false*]"), _("Use single watchwindow mode"), true},
 	  {"", "transparent_chat", _("[true*|false]"),
 		_("Show in-game chat with transparent background"), true},

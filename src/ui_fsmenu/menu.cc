@@ -160,7 +160,6 @@ void TwoColumnsFullNavigationMenu::layout() {
 bool TwoColumnsFullNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

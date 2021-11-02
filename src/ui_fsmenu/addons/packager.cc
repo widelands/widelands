@@ -205,7 +205,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 }
 
 bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
-	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+	if (down && code.sym == SDLK_RETURN) {
 		die();
 		return true;
 	}
@@ -331,9 +331,14 @@ void AddOnsPackager::clicked_new_addon() {
 
 		std::string name = n.text();
 
-		if (name.empty() || !FileSystem::is_legal_filename(name)) {
+		const std::string err = check_addon_filename_validity(name);
+		if (!err.empty()) {
 			main_menu_.show_messagebox(
-			   _("Invalid Name"), _("This name is invalid. Please choose a different name."));
+			   _("Invalid Name"),
+			   (boost::format(
+			       _("This name is invalid. Reason: %s\n\nPlease choose a different name.")) %
+			    err)
+			      .str());
 			continue;
 		}
 
@@ -343,7 +348,7 @@ void AddOnsPackager::clicked_new_addon() {
 			// Ensure add-on names always end with '.wad'
 			name += kAddOnExtension;
 			// The name was legal before, so it should be so still
-			assert(FileSystem::is_legal_filename(name));
+			assert(check_addon_filename_validity(name).empty());
 		}
 
 		if (mutable_addons_.find(name) != mutable_addons_.end()) {

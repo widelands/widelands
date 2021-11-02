@@ -40,6 +40,7 @@ constexpr int kTabPanelButtonHeight = 34;
 struct TabPanel;
 struct Tab : public NamedPanel {
 	friend struct TabPanel;
+	friend class FileViewPanel;
 
 	/** If title is not empty, this will be a textual tab.
 	 *  In that case, pic will need to be the rendered title
@@ -120,7 +121,7 @@ struct TabPanel : public Panel {
 	const TabList& tabs() const;
 	void activate(uint32_t idx);
 	void activate(const std::string&);
-	uint32_t active() {
+	uint32_t active() const {
 		return active_;
 	}
 	// Removes the last tab if the 'tabname' matches. Returns whether a tab was removed.
@@ -130,7 +131,7 @@ struct TabPanel : public Panel {
 	boost::signals2::signal<void()> sigclicked;
 
 	bool handle_key(bool, SDL_Keysym) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 protected:
 	void layout() override;

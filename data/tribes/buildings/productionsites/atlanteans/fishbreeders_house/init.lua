@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fish",
       heading = _"Out of Fish",
-      message = pgettext("atlanteans_building", "The fish breeder working out of this fish breeder’s house can’t find any fish in his work area. Remember that you can only regenerate your fish resources if there are some fish left to breed."),
+      message = pgettext("atlanteans_building", "The fish breeder working out of this fish breeder’s house can’t find any water where he can breed fish in his work area. Remember that you can only regenerate your fish resources if there ever were some fish in the vicinity in the first place."),
       productivity_threshold = 60
    },
    -- Translators: Productivity tooltip for Atlantean fish breeders when all water fields are already full of fish

@@ -23,9 +23,12 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/player.h"
+#include "map_io/map_object_loader.h"
+#include "map_io/map_object_saver.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
@@ -296,6 +299,48 @@ void WatchWindow::close_cur_view() {
 	views_.erase(views_.begin() + cur_index_);
 	set_current_view(cur_index_ % views_.size(), false);
 	toggle_buttons();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			WatchWindow* w = nullptr;
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				WatchWindow* ww =
+				   show_watch_window(dynamic_cast<InteractiveGameBase&>(ib), Widelands::Coords(0, 0));
+				assert(ww != nullptr);
+				assert((w == nullptr) ^ (w == ww));
+				w = ww;
+				w->views_.back().view.viewpoint.x = fr.float_32();
+				w->views_.back().view.viewpoint.y = fr.float_32();
+				w->views_.back().view.zoom = fr.float_32();
+				if (const uint32_t bob = fr.unsigned_32()) {
+					w->views_.back().tracking = &mol.get<Widelands::Bob>(bob);
+				}
+			}
+			assert(w);
+			w->set_current_view(fr.unsigned_8(), false);
+			return *w;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Watchwindow", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("watchwindow: %s", e.what());
+	}
+}
+void WatchWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_32(views_.size());
+	for (const WatchWindow::View& v : views_) {
+		fw.float_32(v.view.viewpoint.x);
+		fw.float_32(v.view.viewpoint.y);
+		fw.float_32(v.view.zoom);
+		fw.unsigned_32(mos.get_object_file_index_or_zero(v.tracking.get(parent_.egbase())));
+	}
+	fw.unsigned_8(cur_index_);
 }
 
 /*

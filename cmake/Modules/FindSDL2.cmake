@@ -315,11 +315,16 @@ FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2
                                   VERSION_VAR SDL2_VERSION_STRING)
 
 if(SDL2MAIN_LIBRARY)
-  FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2main
-                                    REQUIRED_VARS SDL2MAIN_LIBRARY SDL2_INCLUDE_DIR
-                                    VERSION_VAR SDL2_VERSION_STRING)
-# With Cmake 3.17 suppress naming mismatches
-#                                    NAME_MISMATCHED)
+  if(${CMAKE_VERSION} VERSION_LESS 3.17)
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2main
+                                      REQUIRED_VARS SDL2MAIN_LIBRARY SDL2_INCLUDE_DIR
+                                      VERSION_VAR SDL2_VERSION_STRING)
+  else()
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(SDL2main
+                                      REQUIRED_VARS SDL2MAIN_LIBRARY SDL2_INCLUDE_DIR
+                                      VERSION_VAR SDL2_VERSION_STRING
+                                      NAME_MISMATCHED)
+  endif()
 endif()
 
 

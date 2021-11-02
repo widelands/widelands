@@ -181,6 +181,94 @@
 --
 --    dirname = path.dirname(__file__)
 --
+--    spritesheets = {
+--       atk_fail_e = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 13, 35 }
+--       },
+--       atk_fail_w = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 36, 39 }
+--       },
+--       atk_ok_e = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 13, 36 }
+--       },
+--       atk_ok_w = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 36, 39 }
+--       },
+--       die_e = {
+--          fps = 10,
+--          frames = 20,
+--          rows = 5,
+--          columns = 4,
+--          hotspot = { 10, 36 }
+--       },
+--       die_w = {
+--          fps = 10,
+--          frames = 20,
+--          rows = 5,
+--          columns = 4,
+--          hotspot = { 10, 36 }
+--       },
+--       eva_fail_e = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 14, 27 }
+--       },
+--       eva_fail_w = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          hotspot = { 34, 26 }
+--       },
+--       eva_ok_e = {
+--          fps = 20,
+--          frames = 20,
+--          rows = 5,
+--          columns = 4,
+--          hotspot = { 21, 28 }
+--       },
+--       eva_ok_w = {
+--          fps = 20,
+--          frames = 20,
+--          rows = 5,
+--          columns = 4,
+--          hotspot = { 31, 31 }
+--       },
+--       idle = {
+--          fps = 5,
+--          frames = 40,
+--          rows = 7,
+--          columns = 6,
+--          hotspot = { 10, 32 }
+--       },
+--       walk = {
+--          fps = 10,
+--          frames = 10,
+--          rows = 4,
+--          columns = 3,
+--          directional = true,
+--          hotspot = { 19, 27 }
+--       },
+--    }
+--
 --    all_levels_atl = {
 --       min_health = 0,
 --       min_attack = 0,
@@ -199,23 +287,7 @@
 --       icon = dirname .. "menu.png",
 --       vision_range = 2,
 --
---       animations = {
---          idle = { hotspot = { 10, 36 } },
---          atk_ok_e   = { hotspot = { 36, 40 } },
---          atk_fail_e = { hotspot = { 36, 40 } },
---          eva_ok_e   = { hotspot = { 36, 40 } },
---          eva_fail_e = { hotspot = { 36, 40 } },
---          atk_ok_w   = { hotspot = { 36, 40 } },
---          atk_fail_w = { hotspot = { 36, 40 } },
---          eva_ok_w   = { hotspot = { 36, 40 } },
---          eva_fail_w = { hotspot = { 36, 40 } },
---          die_w = { hotspot = { 10, 36 } },
---          die_e = { hotspot = { 10, 36 } },
---          walk = {
---             hotspot = { 20, 34 },
---             directional = true
---          }
---       }
+--       spritesheets = spritesheets,
 --
 --       -- Battle attributes - initial values and per level increase
 --       health = {
@@ -297,58 +369,92 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      hotspot = { 10, 36 },
-      fps = 5
-   },
-   atk_ok_e = {
-      hotspot = { 36, 40 },
-      fps = 10
-   },
+spritesheets = {
    atk_fail_e = {
-      hotspot = { 36, 40 },
-      fps = 10
-   },
-   eva_ok_e = {
-      hotspot = { 36, 40 },
-      fps = 20
-   },
-   eva_fail_e = {
-      hotspot = { 36, 40 },
-      fps = 10
-   },
-   atk_ok_w = {
-      hotspot = { 36, 40 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 35 }
    },
    atk_fail_w = {
-      hotspot = { 36, 40 },
-      fps = 10
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 36, 39 }
    },
-   eva_ok_w = {
-      hotspot = { 36, 40 },
-      fps = 20
+   atk_ok_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 13, 36 }
    },
-   eva_fail_w = {
-      hotspot = { 36, 40 },
-      fps = 10
-   },
-   die_w = {
-      basename = "die",
-      hotspot = { 10, 36 },
-      fps = 10
+   atk_ok_w = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 36, 39 }
    },
    die_e = {
-      basename = "die",
-      hotspot = { 10, 36 },
-      fps = 10
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 10, 36 }
+   },
+   die_w = {
+      fps = 10,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 10, 36 }
+   },
+   eva_fail_e = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 14, 27 }
+   },
+   eva_fail_w = {
+      fps = 10,
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      hotspot = { 34, 26 }
+   },
+   eva_ok_e = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 21, 28 }
+   },
+   eva_ok_w = {
+      fps = 20,
+      frames = 20,
+      rows = 5,
+      columns = 4,
+      hotspot = { 31, 31 }
+   },
+   idle = {
+      fps = 5,
+      frames = 40,
+      rows = 7,
+      columns = 6,
+      hotspot = { 10, 32 }
    },
    walk = {
-      hotspot = { 20, 34 },
       fps = 10,
-      directional = true
-   }
+      frames = 10,
+      rows = 4,
+      columns = 3,
+      directional = true,
+      hotspot = { 19, 27 }
+   },
 }
 
 all_levels_atl = {
@@ -370,7 +476,7 @@ descriptions:new_soldier_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   animations = animations,
+   spritesheets = spritesheets,
 
    -- Battle attributes - initial values and per level increase
    health = {

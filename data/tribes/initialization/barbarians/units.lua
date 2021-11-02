@@ -1820,8 +1820,7 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "barbarians_builder",
-   carrier = "barbarians_carrier",
-   carrier2 = "barbarians_ox",
+   carriers = {"barbarians_carrier", "barbarians_ox"},
    geologist = "barbarians_geologist",
    scouts_house = "barbarians_scouts_hut",
    soldier = "barbarians_soldier",

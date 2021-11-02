@@ -1,6 +1,5 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.com/widelands/widelands.svg?branch=master)](https://travis-ci.com/widelands/widelands)
 [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
 [![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3A%22Formatting+your+code%22)
 [![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3ABuild)
@@ -12,7 +11,7 @@ The game was inspired by Settlers II™ (© Bluebyte) but has significantly more
 ![Widelands Screenshot](https://www.widelands.org/static/img/welcome.jpg)
 
 
-## License [![License](https://img.shields.io/github/license/widelands/widelands.svg?color=blue)](LICENCE)
+## License [![License](https://img.shields.io/github/license/widelands/widelands.svg?color=blue)](COPYING)
 
 GPL v2+. Some assets are released under various Creative Commons licenses – see the respective folders.
 
@@ -178,8 +177,6 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 
 ## Obtaining MacOS and MS-Windows builds and testsuite runs
 
-Travis builds are triggered for all pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
-
-All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This also does not work for branches in forks.
+All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This will not work if the branch is in a fork though.
 
 All pull request branches as well as master are additionally deployed for MacOS, and a testsuite checks them under various compilers. To obtain MacOS builds or testsuite results, temporarily add the name of your branch to the `branches` section in `.github/workflows/build.yaml`. This *does* work for branches in forks as well.

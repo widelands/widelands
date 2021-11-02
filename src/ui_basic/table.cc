@@ -438,66 +438,35 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			// Let the panel handle the tab key
 			return get_parent()->handle_key(true, code);
 
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			if (selection_ != no_selection_index()) {
 				double_clicked(selection_);
 			}
 			return true;
 
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_UP:
 			move_selection(-1);
 			return true;
 
-		case SDLK_KP_2:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_DOWN:
 			move_selection(1);
 			return true;
 
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEDOWN:
 			move_selection(get_h() / get_lineheight());
 			return true;
 
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_PAGEUP: {
 			const int32_t sel = get_h() / get_lineheight();
 			move_selection(-1 * sel);
 			return true;
 		}
 
-		case SDLK_KP_7:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_HOME:
 			multiselect(0);
 			scroll_to_item(0);
 			return true;
 
-		case SDLK_KP_1:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
 		case SDLK_END: {
 			const uint32_t sel = entry_records_.size() - 1;
 			multiselect(sel);
@@ -513,8 +482,8 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return scrollbar_->handle_mousewheel(which, x, y);
+bool Table<void*>::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return scrollbar_->handle_mousewheel(x, y, modstate);
 }
 
 /**

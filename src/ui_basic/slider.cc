@@ -27,6 +27,8 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_mousewheel_options.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -240,27 +242,59 @@ void Slider::set_highlighted(bool highlighted) {
 
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
-		switch (code.sym) {
-		case SDLK_MINUS:
-		case SDLK_KP_MINUS:
-			set_value((code.mod & KMOD_CTRL) ? 0 : get_value() - 1);
+		switch (get_keyboard_change(code, false)) {
+		case ChangeType::kPlus:
+			set_value(get_value() + 1);
 			return true;
-		case SDLK_PLUS:
-		case SDLK_KP_PLUS:
-			set_value((code.mod & KMOD_CTRL) ? get_max_value() : get_value() + 1);
+		case ChangeType::kMinus:
+			set_value(get_value() - 1);
+			return true;
+		case ChangeType::kSetMax:
+			set_value(get_max_value());
+			return true;
+		case ChangeType::kSetMin:
+			set_value(0);
 			return true;
 		default:
-			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
-				set_value(get_min_value() + code.sym - SDLK_1);
-			} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && !(code.mod & KMOD_NUM)) {
-				set_value(get_min_value() + code.sym - SDLK_KP_1);
+			break;
+		}
+
+		int32_t num = -1;
+		if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+			num = code.sym - SDLK_1;
+		}
+		if (num >= 0) {
+			constexpr int32_t max_num = 9 - 1;
+			int32_t min = get_min_value();
+			int32_t max = get_max_value();
+
+			if (num == 0) {
+				set_value(min);
+			} else if (num == max_num) {
+				set_value(max);
+			} else if (max - min <= max_num) {
+				set_value(min + num);
 			} else {
-				break;
+				set_value(min + ((max - min) * num) / max_num);
 			}
 			return true;
 		}
 	}
 	return Panel::handle_key(down, code);
+}
+
+bool Slider::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (!enabled_) {
+		return false;
+	}
+
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change != 0) {
+		set_value(get_value() + change);
+		return true;
+	}
+
+	return false;
 }
 
 /**

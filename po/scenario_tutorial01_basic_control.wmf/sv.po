@@ -5,14 +5,15 @@
 # D M <kamera001dm@gmail.com>, 2017
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-08-22 19:27+0000\n"
+"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,7 +63,7 @@ msgstr ""
 msgid ""
 " You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Du kan öppna och stänga 'Uppdrag'-fönstret genom att klicka på knappen 'Uppdrag' i verktygsraden längst ner på skärmen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""

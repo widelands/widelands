@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "logic/addons.h"
+#include "network/net_addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -40,14 +41,14 @@ namespace AddOnsUI {
 class AddOnsCtrl;
 class RemoteInteractionWindow;
 
-class CommentRow : public UI::MultilineTextarea {
+class CommentRow : public UI::Box {
 public:
 	CommentRow(AddOnsCtrl& ctrl,
 	           std::shared_ptr<AddOns::AddOnInfo> info,
 	           RemoteInteractionWindow& r,
 	           UI::Panel& parent,
 	           const std::string& text,
-	           const int64_t index);
+	           const size_t& index);
 
 	void update_edit_enabled();
 	void layout() override;
@@ -55,19 +56,22 @@ public:
 private:
 	AddOnsCtrl& ctrl_;
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	const int64_t index_;
-	UI::Button edit_;
+	const size_t& index_;
+	bool layouting_;
+	UI::MultilineTextarea text_;
+	UI::Box buttons_;
+	UI::Button edit_, delete_;
 };
 
 class CommentEditor : public UI::Window {
 public:
-	CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const int64_t index);
+	CommentEditor(AddOnsCtrl& ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const size_t* index);
 
 	void think() override;
 
 private:
 	std::shared_ptr<AddOns::AddOnInfo> info_;
-	const int64_t index_;
+	const size_t* index_;
 
 	UI::Box main_box_, markup_box_, buttons_box_;
 	UI::MultilineTextarea preview_;
@@ -79,13 +83,31 @@ private:
 	void reset_text();
 };
 
+class AdminDialog : public UI::Window {
+public:
+	AdminDialog(AddOnsCtrl&,
+	            RemoteInteractionWindow&,
+	            std::shared_ptr<AddOns::AddOnInfo>,
+	            AddOns::NetAddons::AdminAction);
+	void think() override;
+
+private:
+	UI::Box main_box_, buttons_box_;
+	UI::Button ok_, cancel_;
+	UI::Listselect<std::string>* list_;
+	UI::MultilineEditbox* text_;
+};
+
 class RemoteInteractionWindow : public UI::Window {
 public:
 	RemoteInteractionWindow(AddOnsCtrl& parent, std::shared_ptr<AddOns::AddOnInfo> info);
 
-	void on_resolution_changed_note(const GraphicResolutionChanged& note);
-	void layout();
+	void on_resolution_changed_note(const GraphicResolutionChanged& note) override;
+	void layout() override;
 	void update_data();
+	void die() override {
+		UI::Window::die();
+	}
 
 private:
 	static std::map<std::pair<std::string /* add-on */, std::string /* screenshot */>,
@@ -101,7 +123,10 @@ private:
 	int32_t current_screenshot_, nr_screenshots_;
 	std::vector<const Image*> screenshot_cache_;
 
+	/** How the user voted the current add-on (1-10; 0 for not voted; -1 for unknown). */
 	int current_vote_;
+
+	void update_current_vote_on_demand();
 
 	UI::Box main_box_;
 	UI::TabPanel tabs_;
@@ -118,6 +143,7 @@ private:
 	UI::Textarea* voting_txt_[AddOns::kMaxRating];
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
 	UI::Button screenshot_next_, screenshot_prev_, write_comment_, ok_, login_button_;
+	UI::Dropdown<AddOns::NetAddons::AdminAction> admin_action_;
 };
 
 }  // namespace AddOnsUI

@@ -35,6 +35,8 @@
 namespace FsMenu {
 namespace AddOnsUI {
 
+static const std::string kVotingTabName("votes");
+
 std::map<std::pair<std::string, std::string>, std::string>
    RemoteInteractionWindow::downloaded_screenshots_cache_;
 
@@ -45,54 +47,111 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
                        RemoteInteractionWindow& r,
                        UI::Panel& parent,
                        const std::string& text,
-                       const int64_t index)
-   : UI::MultilineTextarea(&parent,
-                           0,
-                           0,
-                           0,
-                           0,
-                           UI::PanelStyle::kFsMenu,
-                           text,
-                           UI::Align::kLeft,
-                           UI::MultilineTextarea::ScrollMode::kNoScrolling),
+                       const size_t& index)
+   : UI::Box(&parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      ctrl_(ctrl),
      info_(info),
      index_(index),
-     edit_(this, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Edit…")) {
+     layouting_(false),
+     text_(this,
+           0,
+           0,
+           0,
+           0,
+           UI::PanelStyle::kFsMenu,
+           text,
+           UI::Align::kLeft,
+           UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     buttons_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     edit_(&buttons_, "edit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Edit…")),
+     delete_(&buttons_, "delete", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Delete")) {
+	buttons_.add(&edit_, UI::Box::Resizing::kFullSize);
+	buttons_.add_space(kRowButtonSpacing);
+	buttons_.add(&delete_, UI::Box::Resizing::kFullSize);
+
+	add(&text_, UI::Box::Resizing::kExpandBoth);
+	buttons_.add_space(kRowButtonSpacing);
+	add(&buttons_, UI::Box::Resizing::kFullSize);
+
 	edit_.sigclicked.connect([this, &r]() {
 		if (ctrl_.username().empty()) {
 			return;
 		}
-		CommentEditor m(ctrl_, info_, index_);
+		CommentEditor m(ctrl_, info_, &index_);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			r.update_data();
 		}
 	});
-	layout();
+	delete_.sigclicked.connect([this, &r]() {
+		if (ctrl_.username().empty()) {
+			return;
+		}
+		{
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Delete"),
+			                   _("Are you sure you want to delete this comment?"),
+			                   UI::WLMessageBox::MBoxType::kOkCancel);
+			if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
+			}
+		}
+		try {
+			ctrl_.net().comment(*info_, "", &index_);
+			*info_ = ctrl_.net().fetch_one_remote(info_->internal_name);
+		} catch (const std::exception& e) {
+			log_err("Delete comment #%" PRIuS " for %s: %s", index_, info_->internal_name.c_str(),
+			        e.what());
+			UI::WLMessageBox m(
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			   (boost::format(_("The comment could not be deleted.\n\nError Message:\n%s")) % e.what())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+		r.update_data();
+	});
+
 	update_edit_enabled();
 	initialization_complete();
 }
 
+/** The server disallows editing a comment more than 24 hours after posting. */
+constexpr std::time_t kCommentEditTimeout = 24 * 60 * 60;
+
 void CommentRow::update_edit_enabled() {
-	/* Admins can edit all posts; normal users only their own posts and only if the post was
-	 * never edited by an admin yet. */
-	edit_.set_visible(
+	/* Admins can edit all posts at all times;
+	 * normal users can edit only their own posts and only if the post was never edited
+	 * by an admin yet and only within the server-defined timeout after posting.
+	 */
+	const AddOns::AddOnComment& comment = info_->user_comments.at(index_);
+	const std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+
+	buttons_.set_visible(
 	   !ctrl_.username().empty() &&
-	   (ctrl_.net().is_admin() || (info_->user_comments[index_].username == ctrl_.username() &&
-	                               (info_->user_comments[index_].editor.empty() ||
-	                                info_->user_comments[index_].editor == ctrl_.username()))));
+	   (ctrl_.net().is_admin() ||
+	    (comment.username == ctrl_.username() &&
+	     (comment.editor.empty() || comment.editor == ctrl_.username()) &&
+	     (now < comment.timestamp || now - comment.timestamp < kCommentEditTimeout))));
+	layout();
 }
 
 void CommentRow::layout() {
-	UI::MultilineTextarea::layout();
-	edit_.set_pos(Vector2i(get_w() - edit_.get_w(), 0));
+	if (layouting_) {
+		return;
+	}
+	layouting_ = true;
+
+	text_.set_visible(false);  // Prevent the text from taking up all available space
+	UI::Box::layout();
+	text_.set_visible(true);
+
+	layouting_ = false;
 }
 
 /* CommentEditor implementation */
 
 CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                              std::shared_ptr<AddOns::AddOnInfo> info,
-                             const int64_t index)
+                             const size_t* index)
    : UI::Window(&ctrl.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "write_comment",
@@ -100,7 +159,7 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
                 0,
                 100,
                 100,
-                index < 0 ? _("Write Comment") : _("Edit Comment")),
+                index == nullptr ? _("Write Comment") : _("Edit Comment")),
      info_(info),
      index_(index),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -226,8 +285,12 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			*info_ = ctrl.net().fetch_one_remote(info_->internal_name);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		} catch (const std::exception& e) {
-			log_err(
-			   "Edit comment #%" PRId64 " for %s: %s", index_, info_->internal_name.c_str(), e.what());
+			if (index_ == nullptr) {
+				log_err("Create new comment for %s: %s", info_->internal_name.c_str(), e.what());
+			} else {
+				log_err("Edit comment #%" PRIuS " for %s: %s", *index_, info_->internal_name.c_str(),
+				        e.what());
+			}
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
@@ -306,8 +369,116 @@ void CommentEditor::apply_format(const std::string& open_tag, const std::string&
 }
 
 void CommentEditor::reset_text() {
-	text_->set_text(index_ < 0 ? "" : info_->user_comments[index_].message);
+	text_->set_text(index_ == nullptr ? "" : info_->user_comments.at(*index_).message);
 	think();
+}
+
+/* AdminDialog implementation */
+
+AdminDialog::AdminDialog(AddOnsCtrl& parent,
+                         RemoteInteractionWindow& riw,
+                         std::shared_ptr<AddOns::AddOnInfo> info,
+                         AddOns::NetAddons::AdminAction a)
+   : UI::Window(parent.get_parent(),
+                UI::WindowStyle::kFsMenu,
+                info->internal_name,
+                0,
+                0,
+                0,
+                0,
+                info->descname()),
+     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     cancel_(&buttons_box_,
+             "cancel",
+             0,
+             0,
+             kRowButtonSize,
+             0,
+             UI::ButtonStyle::kFsMenuSecondary,
+             _("Cancel")),
+     list_(nullptr),
+     text_(nullptr) {
+	if (a == AddOns::NetAddons::AdminAction::kDelete) {
+		text_ = new UI::MultilineEditbox(&main_box_, 0, 0, 450, 200, UI::PanelStyle::kFsMenu);
+		text_->focus();
+
+		main_box_.add(new UI::Textarea(
+		                 &main_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+		                 _("Please explain why you are deleting this add-on."), UI::Align::kCenter),
+		              UI::Box::Resizing::kFullSize);
+		main_box_.add_space(kRowButtonSpacing);
+		main_box_.add(text_, UI::Box::Resizing::kExpandBoth);
+	} else {
+		list_ = new UI::Listselect<std::string>(&main_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu);
+
+		switch (a) {
+		case AddOns::NetAddons::AdminAction::kVerify:
+			/** TRANSLATORS: This add-on has not yet been verified */
+			list_->add(_("Unchecked"), "0", nullptr, !info->verified);
+			/** TRANSLATORS: This add-on has been verified */
+			list_->add(_("Verified"), "1", nullptr, info->verified);
+			break;
+		case AddOns::NetAddons::AdminAction::kSyncSafe:
+			/** TRANSLATORS: This add-on is known to cause desyncs */
+			list_->add(_("Desyncs"), "false", nullptr, !info->sync_safe);
+			/** TRANSLATORS: This add-on will not cause desyncs */
+			list_->add(_("Sync-safe"), "true", nullptr, info->sync_safe);
+			break;
+		case AddOns::NetAddons::AdminAction::kQuality:
+			for (const auto& pair : AddOnQuality::kQualities) {
+				const AddOnQuality q = pair.second();
+				list_->add(q.name, std::to_string(pair.first), q.icon, pair.first == info->quality,
+				           q.description);
+			}
+			break;
+		default:
+			NEVER_HERE();
+		}
+
+		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
+		main_box_.add(list_, UI::Box::Resizing::kExpandBoth);
+	}
+
+	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(kRowButtonSpacing);
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+
+	cancel_.sigclicked.connect([this]() { die(); });
+	ok_.sigclicked.connect([this, info, a, &parent, &riw]() {
+		try {
+			if (a == AddOns::NetAddons::AdminAction::kDelete) {
+				parent.net().admin_action(a, *info, text_->get_text());
+				riw.die();
+				parent.erase_remote(info);
+			} else {
+				parent.net().admin_action(a, *info, list_->get_selected());
+				*info = parent.net().fetch_one_remote(info->internal_name);
+				riw.update_data();
+			}
+
+			parent.rebuild(false);
+			die();
+		} catch (const std::exception& e) {
+			UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			                   e.what(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		}
+	});
+
+	set_center_panel(&main_box_);
+	center_to_parent();
+	initialization_complete();
+}
+
+void AdminDialog::think() {
+	UI::Window::think();
+	if (text_) {
+		ok_.set_enabled(!text_->get_text().empty());
+	}
 }
 
 /* RemoteInteractionWindow implementation */
@@ -397,7 +568,18 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
                     UI::ButtonStyle::kFsMenuSecondary,
                     _("Write a comment…")),
      ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "") {
+     login_button_(this, "login", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, ""),
+     admin_action_(this,
+                   "admin",
+                   0,
+                   0,
+                   0,
+                   10,
+                   login_button_.get_h(),
+                   _("Administrator actions"),
+                   UI::DropdownType::kPictorialMenu,
+                   UI::PanelStyle::kFsMenu,
+                   UI::ButtonStyle::kFsMenuSecondary) {
 
 	ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
@@ -419,13 +601,13 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			return;
 		}
 		update_data();
-		parent_.rebuild();
+		parent_.rebuild(false);
 	});
 	write_comment_.sigclicked.connect([this]() {
-		CommentEditor m(parent_, info_, -1);
+		CommentEditor m(parent_, info_, nullptr);
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			update_data();
-			parent_.rebuild();
+			parent_.rebuild(false);
 		}
 	});
 
@@ -483,7 +665,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	} else {
 		box_screenies_.set_visible(false);
 	}
-	tabs_.add("votes", "", &box_votes_);
+	tabs_.add(kVotingTabName, "", &box_votes_);
+	tabs_.sigclicked.connect([this]() { update_current_vote_on_demand(); });
 
 	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(kRowButtonSpacing);
@@ -494,6 +677,53 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	screenshot_cache_.resize(nr_screenshots_, nullptr);
 	screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
 	screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
+
+	admin_action_.set_image(g_image_cache->get("images/wui/editor/menus/tools.png"));
+	admin_action_.add(_("Change verification status…"), AddOns::NetAddons::AdminAction::kVerify);
+	admin_action_.add(_("Change quality rating…"), AddOns::NetAddons::AdminAction::kQuality);
+	admin_action_.add(_("Change sync-safety status…"), AddOns::NetAddons::AdminAction::kSyncSafe);
+	admin_action_.add(_("Enable Transifex integration"), AddOns::NetAddons::AdminAction::kSetupTx);
+	admin_action_.add(_("Delete this add-on"), AddOns::NetAddons::AdminAction::kDelete);
+	admin_action_.selected.connect([this]() {
+		const AddOns::NetAddons::AdminAction action = admin_action_.get_selected();
+		admin_action_.set_list_visibility(false);
+		if (action == AddOns::NetAddons::AdminAction::kSetupTx) {
+			{
+				UI::WLMessageBox m(
+				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
+				   (boost::format("<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>") %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(
+				          _("Are you sure you want to enable Transifex integration for this add-on?")) %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(
+				          (boost::format(
+				              /** TRANSLATORS: The placeholder is an URL */
+				              _("Don’t forget to configure the new resources at %1% afterwards.")) %
+				           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				              .as_font_tag(underline_tag(
+				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
+				             .str()) %
+				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				       .as_font_tag(_("This may take several minutes. Please be patient.")))
+				      .str(),
+				   UI::WLMessageBox::MBoxType::kOkCancel);
+				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+					return;
+				}
+			}
+			try {
+				parent_.net().admin_action(action, *info_, "" /* ignored */);
+			} catch (const std::exception& e) {
+				UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+				                   e.what(), UI::WLMessageBox::MBoxType::kOk);
+				m.run<UI::Panel::Returncodes>();
+			}
+		} else {
+			AdminDialog ar(parent_, *this, info_, action);
+			ar.run<UI::Panel::Returncodes>();
+		}
+	});
 
 	login_button_.sigclicked.connect([this]() {
 		parent_.login_button_clicked();
@@ -520,8 +750,15 @@ void RemoteInteractionWindow::on_resolution_changed_note(const GraphicResolution
 void RemoteInteractionWindow::layout() {
 	if (!is_minimal()) {
 		main_box_.set_size(get_inner_w(), get_inner_h());
+
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
+
+		admin_action_.set_visible(parent_.net().is_admin());
+		admin_action_.set_size(login_button_.get_h(), login_button_.get_h());
+		admin_action_.set_pos(Vector2i(
+		   login_button_.get_x() - admin_action_.get_w() - kRowButtonSpacing, login_button_.get_y()));
+
 		box_comment_rows_.set_pos(box_comment_rows_placeholder_.get_pos());
 		box_comment_rows_.set_size(
 		   box_comment_rows_placeholder_.get_w(), box_comment_rows_placeholder_.get_h());
@@ -565,40 +802,40 @@ void RemoteInteractionWindow::update_data() {
 	                              .str());
 	text += "</p></rt>";
 	comments_header_.set_text(text);
-	int64_t index = 0;
 	for (const auto& comment : info_->user_comments) {
 		text = "<rt><p>";
-		if (comment.editor.empty()) {
+		if (comment.second.editor.empty()) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag(time_string(comment.timestamp));
-		} else if (comment.editor == comment.username) {
-			text +=
-			   g_style_manager->font_style(UI::FontStyle::kItalic)
-			      .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
-			                    time_string(comment.timestamp) % time_string(comment.edit_timestamp))
-			                      .str());
+			           .as_font_tag(time_string(comment.second.timestamp));
+		} else if (comment.second.editor == comment.second.username) {
+			text += g_style_manager->font_style(UI::FontStyle::kItalic)
+			           .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
+			                         time_string(comment.second.timestamp) %
+			                         time_string(comment.second.edit_timestamp))
+			                           .str());
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %
-			                         time_string(comment.timestamp) % comment.editor %
-			                         time_string(comment.edit_timestamp))
+			                         time_string(comment.second.timestamp) % comment.second.editor %
+			                         time_string(comment.second.edit_timestamp))
 			                           .str());
 		}
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kItalic)
 		           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
-		                         comment.username % AddOns::version_to_string(comment.version))
+		                         comment.second.username %
+		                         AddOns::version_to_string(comment.second.version))
 		                           .str());
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		           .as_font_tag(comment.message);
+		           .as_font_tag(comment.second.message);
 		text += "</p></rt>";
 
-		CommentRow* cr = new CommentRow(parent_, info_, *this, box_comment_rows_, text, index);
+		CommentRow* cr =
+		   new CommentRow(parent_, info_, *this, box_comment_rows_, text, comment.first);
 		comment_rows_.push_back(std::unique_ptr<CommentRow>(cr));
 		box_comment_rows_.add_space(kRowButtonSize);
 		box_comment_rows_.add(cr, UI::Box::Resizing::kFullSize);
-		++index;
 	}
 }
 
@@ -654,20 +891,27 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	}
 }
 
+void RemoteInteractionWindow::update_current_vote_on_demand() {
+	if (current_vote_ < 0 && !parent_.username().empty() &&
+	    tabs_.tabs()[tabs_.active()]->get_name() == kVotingTabName) {
+		current_vote_ = parent_.net().get_vote(info_->internal_name);
+	}
+	own_voting_.select(std::max(0, current_vote_));
+}
+
 void RemoteInteractionWindow::login_changed() {
-	current_vote_ = parent_.net().get_vote(info_->internal_name);
-	if (current_vote_ < 0) {
+	current_vote_ = -1;
+	update_current_vote_on_demand();
+	if (parent_.username().empty()) {
 		write_comment_.set_enabled(false);
 		write_comment_.set_tooltip(_("Please log in to comment"));
 		own_voting_.set_enabled(false);
 		own_voting_.set_tooltip(_("Please log in to vote"));
-		own_voting_.select(0);
 	} else {
 		write_comment_.set_enabled(true);
 		write_comment_.set_tooltip("");
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
-		own_voting_.select(current_vote_);
 	}
 	for (auto& cr : comment_rows_) {
 		cr->update_edit_enabled();

@@ -111,12 +111,12 @@ jobs:
           - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-10
-          - clang-9
+          - clang-12
+          - clang-11
           - clang-7
           - clang-6.0
+          - g++-11
           - g++-10
-          - g++-9
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-5
@@ -132,6 +132,14 @@ jobs:
             os: ubuntu-18.04
             config: Release
     runs-on: ${{ matrix.os }}
+    env:
+      SDL_VIDEODRIVER: 'x11'
+      DISPLAY: ':99.0'
+      # TODO: Under Xvfb, the usual X11 memory leaks show up as an unsymbolized
+      # <unknown module> making them impossible to suppress. So we disable all
+      # memory leaks checking in the testsuite for now.
+      ASAN_OPTIONS: 'detect_leaks=0'
+      LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
     steps:
     - name: Installing dependencies
       run: |
@@ -154,24 +162,19 @@ jobs:
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         sleep 1m
-        export SDL_VIDEODRIVER=x11
-        export DISPLAY=:99.0
         # Ignore transient SDL errors (exit code 2)
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
-      run: |
-        export SDL_VIDEODRIVER=x11
-        export DISPLAY=:99.0
-        ./regression_test.py -b build/src/widelands
+      run: ./regression_test.py -b build/src/widelands
 
 
   windows:
@@ -250,7 +253,7 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macOS-latest
+    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
     steps:
     - name: Installing dependencies
       run: |

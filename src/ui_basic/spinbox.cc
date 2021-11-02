@@ -29,6 +29,8 @@
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_mousewheel_options.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -150,8 +152,20 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->button_ten_minus->set_can_focus(false);
 		sbi_->button_ten_plus->set_can_focus(false);
 
-		sbi_->button_ten_plus->sigclicked.connect([this]() { change_value(sbi_->big_step_size); });
-		sbi_->button_ten_minus->sigclicked.connect([this]() { change_value(-sbi_->big_step_size); });
+		sbi_->button_ten_plus->sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_CTRL) {
+				set_value(sbi_->max);
+			} else {
+				change_value(sbi_->big_step_size);
+			}
+		});
+		sbi_->button_ten_minus->sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_CTRL) {
+				set_value(sbi_->min);
+			} else {
+				change_value(-sbi_->big_step_size);
+			}
+		});
 		sbi_->button_ten_plus->set_repeating(true);
 		sbi_->button_ten_minus->set_repeating(true);
 		buttons_.push_back(sbi_->button_ten_minus);
@@ -170,8 +184,20 @@ SpinBox::SpinBox(Panel* const parent,
 		box_->add(sbi_->button_plus);
 	}
 
-	sbi_->button_plus->sigclicked.connect([this]() { change_value(sbi_->step_size); });
-	sbi_->button_minus->sigclicked.connect([this]() { change_value(-sbi_->step_size); });
+	sbi_->button_plus->sigclicked.connect([this]() {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			set_value(sbi_->max);
+		} else {
+			change_value(sbi_->step_size);
+		}
+	});
+	sbi_->button_minus->sigclicked.connect([this]() {
+		if (SDL_GetModState() & KMOD_CTRL) {
+			set_value(sbi_->min);
+		} else {
+			change_value(-sbi_->step_size);
+		}
+	});
 	sbi_->button_plus->set_repeating(true);
 	sbi_->button_minus->set_repeating(true);
 	buttons_.push_back(sbi_->button_minus);
@@ -189,69 +215,44 @@ SpinBox::~SpinBox() {
 
 bool SpinBox::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		switch (code.sym) {
-
-		// Up and Right behave like clicking the Increase button
-		case SDLK_KP_6:
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_UP:
-		case SDLK_RIGHT:
-			if (sbi_->button_plus) {
-				change_value(sbi_->step_size);
-				return true;
-			}
+		switch (get_keyboard_change(code, type_ == SpinBox::Type::kBig)) {
+		case ChangeType::kNone:
 			break;
-
-		// Down and Left behave like clicking the Decrease button
-		case SDLK_KP_2:
-		case SDLK_KP_4:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_DOWN:
-		case SDLK_LEFT:
-			if (sbi_->button_minus) {
-				change_value(-sbi_->step_size);
-				return true;
-			}
-			break;
-
-		// PageUp behaves like clicking the IncreaseFast button (if any)
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			if (sbi_->button_ten_plus) {
-				change_value(sbi_->big_step_size);
-				return true;
-			}
-			break;
-
-		// PageDown behaves like clicking the DecreaseFast button (if any)
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			if (sbi_->button_ten_minus) {
-				change_value(-sbi_->big_step_size);
-				return true;
-			}
-			break;
-
-		default:
-			break;
+		case ChangeType::kPlus:
+			change_value(sbi_->step_size);
+			return true;
+		case ChangeType::kMinus:
+			change_value(-sbi_->step_size);
+			return true;
+		case ChangeType::kBigPlus:
+			change_value(sbi_->big_step_size);
+			return true;
+		case ChangeType::kBigMinus:
+			change_value(-sbi_->big_step_size);
+			return true;
+		case ChangeType::kSetMax:
+			set_value(sbi_->max);
+			return true;
+		case ChangeType::kSetMin:
+			set_value(sbi_->min);
+			return true;
 		}
 	}
 	return Panel::handle_key(down, code);
+}
+
+bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if ((change > 0) && (sbi_->button_plus)) {
+		change_value(change * sbi_->step_size);
+	}
+	if ((change < 0) && (sbi_->button_minus)) {
+		change_value(change * sbi_->step_size);
+	}
+	return true;
 }
 
 void SpinBox::layout() {

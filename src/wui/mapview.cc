@@ -30,6 +30,7 @@
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -578,20 +579,33 @@ void MapView::think() {
 	}
 }
 
-bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {
-	if (which != 0) {
-		return false;
-	}
-	if ((get_config_bool("ctrl_zoom", false)) && !(SDL_GetModState() & KMOD_CTRL)) {
-		return false;
-	}
-	if (is_animating()) {
+bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	Vector2i change_2d =
+	   get_mousewheel_change_2D(MousewheelHandlerConfigID::kMapScroll, x, y, modstate);
+	if (change_2d != Vector2i::zero()) {
+		if (is_animating()) {
+			return true;
+		}
+		const uint16_t scroll_distance_y = g_gr->get_yres() / 20;
+		const uint16_t scroll_distance_x = g_gr->get_xres() / 20;
+		pan_by(Vector2i(change_2d.x * scroll_distance_x, change_2d.y * scroll_distance_y),
+		       Transition::Jump);
 		return true;
 	}
-	constexpr float kPercentPerMouseWheelTick = 0.02f;
-	float zoom = view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, y));
-	zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
-	return true;
+
+	int32_t zoom_step = get_mousewheel_change(MousewheelHandlerConfigID::kZoom, x, y, modstate);
+	if (zoom_step) {
+		if (is_animating()) {
+			return true;
+		}
+		static constexpr float kPercentPerMouseWheelTick = 0.02f;
+		float zoom =
+		   view_.zoom * static_cast<float>(std::pow(1.f - kPercentPerMouseWheelTick, zoom_step));
+		zoom_around(zoom, last_mouse_pos_.cast<float>(), Transition::Jump);
+		return true;
+	}
+
+	return false;
 }
 
 void MapView::zoom_around(float new_zoom,
@@ -637,15 +651,18 @@ void MapView::zoom_around(float new_zoom,
 }
 
 void MapView::reset_zoom() {
-	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	zoom_around(1.f, Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::increase_zoom() {
 	zoom_around(animation_target_view().view.zoom - kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 void MapView::decrease_zoom() {
 	zoom_around(animation_target_view().view.zoom + kZoomPercentPerKeyPress,
-	            Vector2f(get_w() / 2.f, get_h() / 2.f), Transition::Smooth);
+	            Vector2f(get_w() / 2.f, get_h() / 2.f),
+	            animate_map_panning_ ? Transition::Smooth : Transition::Jump);
 }
 
 bool MapView::is_dragging() const {
@@ -667,23 +684,34 @@ Widelands::NodeAndTriangle<> MapView::track_sel(const Vector2i& p) {
 bool MapView::scroll_map() {
 	const bool numpad_diagonalscrolling = get_config_bool("numpad_diagonalscrolling", false);
 	// arrow keys
-	const bool kUP = get_key_state(SDL_SCANCODE_UP);
-	const bool kDOWN = get_key_state(SDL_SCANCODE_DOWN);
-	const bool kLEFT = get_key_state(SDL_SCANCODE_LEFT);
-	const bool kRIGHT = get_key_state(SDL_SCANCODE_RIGHT);
+	const bool kUP = get_key_state(SDL_GetScancodeFromKey(SDLK_UP));
+	const bool kDOWN = get_key_state(SDL_GetScancodeFromKey(SDLK_DOWN));
+	const bool kLEFT = get_key_state(SDL_GetScancodeFromKey(SDLK_LEFT));
+	const bool kRIGHT = get_key_state(SDL_GetScancodeFromKey(SDLK_RIGHT));
 
 	// numpad keys
 	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
-#define kNP(x) const bool kNP##x = kNumlockOff && get_key_state(SDL_SCANCODE_KP_##x);
+#define kNP(x)                                                                                     \
+	const bool kNP##x = kNumlockOff && get_key_state(SDL_GetScancodeFromKey(SDLK_KP_##x));
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
 #undef kNP
 
 	   // set the scrolling distance
-	   const uint8_t denominator = ((SDL_GetModState() & KMOD_CTRL)  ? 4 :
-	                                (SDL_GetModState() & KMOD_SHIFT) ? 16 :
-                                                                      8);
-	const uint16_t scroll_distance_y = g_gr->get_yres() / denominator;
-	const uint16_t scroll_distance_x = g_gr->get_xres() / denominator;
+	   const uint16_t xres = g_gr->get_xres();
+	const uint16_t yres = g_gr->get_yres();
+
+	uint16_t scroll_distance_x = xres / 8;
+	uint16_t scroll_distance_y = yres / 8;
+
+	SDL_Keymod modstate = SDL_GetModState();
+	if (modstate & KMOD_CTRL) {
+		scroll_distance_x = xres - scroll_distance_x;
+		scroll_distance_y = yres - scroll_distance_y;
+	} else if (modstate & KMOD_SHIFT) {
+		scroll_distance_x = std::min(kTriangleWidth / view_.zoom, scroll_distance_x / 3.f);
+		scroll_distance_y = std::min(kTriangleHeight / view_.zoom, scroll_distance_y / 3.f);
+	}
+
 	int32_t distance_to_scroll_x = 0;
 	int32_t distance_to_scroll_y = 0;
 
@@ -718,15 +746,21 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
-		increase_zoom();
+		if (!is_animating()) {
+			increase_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
-		decrease_zoom();
+		if (!is_animating()) {
+			decrease_zoom();
+		}
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
-		reset_zoom();
+		if (!is_animating()) {
+			reset_zoom();
+		}
 		return true;
 	}
 
