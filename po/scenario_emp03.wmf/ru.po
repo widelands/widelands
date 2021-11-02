@@ -664,6 +664,9 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Давай подумаем. Чтобы ткать ткань, нужна шерсть с овцеферм. Они нуждаются в "
+"пшенице и воде. Для начала нам нужно найти достаточно места, чтобы поставить"
+" ферму."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
