@@ -9,14 +9,15 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # henrique terto de souza <henrique.terto.new@gmail.com>, 2015
+# Sara Carreiro, 2021
 # Yuri Laskowski <yurinikolai00@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2020-10-30 23:01+0000\n"
-"Last-Translator: Yuri Laskowski <yurinikolai00@gmail.com>\n"
+"PO-Revision-Date: 2021-10-16 16:16+0000\n"
+"Last-Translator: Sara Carreiro\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,7 +166,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr ""
+msgstr "Outros meios de produzir comida - diferentes tipos de comida - são pesqueiros e fazendas. O trigo da fazenda deve ser processado com água numa padaria antes de virar comestível. Você pode obter água construindo um poço. Para a melhor produtividade, construa-o num local onde seus geólogos tenham encontrado fonte de água."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -221,7 +222,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "Tais estruturas geralmente tem maiores demandas do que o tipo básico dessa estrutura - por exemplo, minas profundas precisam de petiscos ao invés de rações. Você terá que melhorar sua taverna para um hotel para produzir petiscos de pita E um segundo tipo de comida (carne ou peixe) E cerveja."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
@@ -243,7 +244,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Maiores e melhores estruturas - incluindo todas as militares - requerem materiais de construção melhores. Elas não podem ser construídas de simples pedaços de madeira - os pedaços devem ser refinados em pau-preto por um endurecedor de madeira primeiro. Sempre lembrar de construir um endurecedor de madeira antes de você ficar sem pau-preto, como sem isso você não pode expandir."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -252,7 +253,7 @@ msgstr "Construir o Forno da cal e a economia do carvão"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "Construa um forno de cal alimentado por um poço, e por um forno de carvão ou por uma mina de carvão"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""

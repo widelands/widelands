@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-01 02:56+0000\n"
-"PO-Revision-Date: 2021-08-22 19:55+0000\n"
+"POT-Creation-Date: 2021-10-31 02:44+0000\n"
+"PO-Revision-Date: 2021-10-07 07:26+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1729,8 +1729,6 @@ msgstr "Das Herstellen einer Schaufel"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
@@ -1739,7 +1737,6 @@ msgstr "Das Herstellen einer Holzfälleraxt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1782,9 +1779,9 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a chisel"
 msgstr "Das Schleifen eines Meißels"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -2205,9 +2202,10 @@ msgstr "Kein Fisch"
 msgctxt "atlanteans_building"
 msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
-"fish in his work area. Remember that you can only regenerate your fish "
-"resources if there are some fish left to breed."
-msgstr "Der Fischzüchter in diesem Fischzüchterhaus kann keine Fische in seinem Arbeitsbereich finden. Denke daran, dass du deine Fischbestände nur regenerieren kannst, wenn noch Fische zur Zucht da sind."
+"water where he can breed fish in his work area. Remember that you can only "
+"regenerate your fish resources if there ever were some fish in the vicinity "
+"in the first place."
+msgstr "Der Fischzüchter in diesem Fischzüchterhaus kann kein Gewässer in seinem Arbeitsbereich finden, in dem er Fische züchten kann. Denke daran, dass du deine Fischbestände nur regenerieren kannst, wenn es in der Umgebung einmal Fische gegeben hat."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
