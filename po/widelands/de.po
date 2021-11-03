@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-25 02:44+0000\n"
+"POT-Creation-Date: 2021-10-31 02:44+0000\n"
 "PO-Revision-Date: 2021-10-14 20:54+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -983,9 +983,9 @@ msgstr "(kein)"
 msgid "Waterway length limit:"
 msgstr "maximale Wasserweglänge"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -6917,9 +6917,9 @@ msgstr "Häfen"
 msgid "Low productivity:"
 msgstr "Geringe Produktivität:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
@@ -7320,8 +7320,8 @@ msgstr "Ersetze den Spieler durch die ausgewählte KI und setze das Spiel fort"
 msgid "AI for the disconnected player"
 msgstr "Ersatz-KI für den Spieler"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -7875,8 +7875,8 @@ msgstr "Spiel pausieren"
 msgid "Statistics"
 msgstr "Statistiken"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Seefahrt"
