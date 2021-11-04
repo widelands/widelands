@@ -938,7 +938,7 @@ void Flag::act(Game& game, uint32_t) {
 			ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
 			   *this, owner().tribe().scouts_house(), true);
 			if (ps) {
-				Worker* worker = ps->working_positions()[0].worker.get(game);
+				Worker* worker = ps->working_positions()->at(0).worker.get(game);
 				assert(worker);
 				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps &&
 				    !ps->has_forced_state()) {
