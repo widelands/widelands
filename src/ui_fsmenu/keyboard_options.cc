@@ -201,7 +201,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
 		if (key < KeyboardShortcut::kFastplace_Begin || key > KeyboardShortcut::kFastplace_End ||
-		    game_.get() == nullptr) {
+		    game_ == nullptr) {
 			return (boost::format(
 			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
 			              "Action: Key" */
@@ -241,7 +241,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			const bool fastplace = is_fastplace(key);
 			auto get_building_descr = [this](const std::string& bld) {
-				return game_.get() == nullptr ? nullptr :
+				return game_ == nullptr ? nullptr :
                                             game_->descriptions().get_building_descr(
 				                                   game_->descriptions().building_index(bld));
 			};
@@ -331,7 +331,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	buttons_box_.add_inf_space();
 
 	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
-		if (tabs_.active() == fastplace_tab_index && game_.get() == nullptr) {
+		if (tabs_.active() == fastplace_tab_index && game_ == nullptr) {
 			game_.reset(new Widelands::Game());
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();

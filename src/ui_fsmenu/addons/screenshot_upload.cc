@@ -114,7 +114,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 		do_redraw_now();
 		try {
 			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
-			if (remote.get() != nullptr) {
+			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild(false);
 			}

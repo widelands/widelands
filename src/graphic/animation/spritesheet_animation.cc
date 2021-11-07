@@ -42,8 +42,7 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
                                                                      int init_rows,
                                                                      int init_columns)
-   : Animation::MipMapEntry(),
-     sheet(nullptr),
+   : sheet(nullptr),
      playercolor_mask_sheet(nullptr),
      rows(init_rows),
      columns(init_columns),

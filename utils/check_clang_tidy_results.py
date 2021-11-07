@@ -88,6 +88,7 @@ SUPPRESSED_CHECKS = {
     '[performance-unnecessary-value-param]',
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
+    '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
     '[readability-inconsistent-declaration-parameter-name]',

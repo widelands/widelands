@@ -1394,7 +1394,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 			   nr_files = l;
 		   });
 		std::shared_ptr<AddOns::AddOnInfo> r = find_remote(addon->internal_name);
-		if (r.get() != nullptr) {
+		if (r != nullptr) {
 			*r = net().fetch_one_remote(r->internal_name);
 		}
 		rebuild(false);

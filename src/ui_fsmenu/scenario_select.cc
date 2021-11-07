@@ -179,7 +179,7 @@ void ScenarioSelect::clicked_ok() {
 	}
 
 	std::unique_ptr<Widelands::Game> game(capsule_.menu().create_safe_game());
-	if (!game.get()) {
+	if (game == nullptr) {
 		return;
 	}
 	capsule_.set_visible(false);
