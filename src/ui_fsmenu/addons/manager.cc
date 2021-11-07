@@ -856,7 +856,7 @@ void AddOnsCtrl::focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo> in
 }
 
 void AddOnsCtrl::think() {
-	UI::Panel::think();
+	UI::UniqueWindow::think();
 	check_enable_move_buttons();
 }
 

@@ -18,7 +18,6 @@ SUPPRESSED_CHECKS = {
     '[bugprone-macro-parentheses]',
     '[bugprone-narrowing-conversions]',
     '[bugprone-not-null-terminated-result]',
-    '[bugprone-parent-virtual-call]',
     '[bugprone-signed-char-misuse]',
     '[bugprone-too-small-loop-variable]',
     '[cert-dcl50-cpp]',  # We need this for our logger
@@ -97,7 +96,6 @@ SUPPRESSED_CHECKS = {
     '[readability-make-member-function-const]',
     '[readability-named-parameter]',
     '[readability-qualified-auto]',
-    '[readability-simplify-boolean-expr]',
     '[readability-uppercase-literal-suffix]'
 }
 
