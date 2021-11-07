@@ -134,7 +134,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		build_settings_tab(construction_site);
 	}
 
-	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
+	set_title((boost::format(_("(%s)")) % construction_site->building().descname()).str());
 
 	think();
 	initialization_complete();
