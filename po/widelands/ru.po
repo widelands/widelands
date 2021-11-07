@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-01 02:44+0000\n"
+"POT-Creation-Date: 2021-11-04 02:52+0000\n"
 "PO-Revision-Date: 2021-11-02 08:04+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -979,9 +979,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1205,7 +1205,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:270
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
@@ -2095,19 +2095,19 @@ msgstr "Нет солдат для этого уровня тренировки!
 msgid "Completed %s"
 msgstr "Завершено %s"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:352
+#: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "(stopped)"
 msgstr "(остановлено)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:435
+#: ../../src/logic/map_objects/tribes/productionsite.cc:430
 #: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1086
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1135
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
@@ -2413,12 +2413,12 @@ msgid "Saving game…"
 msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:178
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
 #: ../../src/logic/save_handler.cc:192
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Игра сохранена"
 
@@ -6975,13 +6975,13 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7407,8 +7407,8 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "Ошибка при сохранении игры!"
 
@@ -8234,12 +8234,12 @@ msgstr "Поднять опыт на 1"
 msgid "Terminate the employment of the selected worker"
 msgstr "Уволить выбранного работника"
 
-#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:247
 msgid "(coming)"
 msgstr "(идёт)"
 
-#: ../../src/wui/productionsitewindow.cc:246
-#: ../../src/wui/productionsitewindow.cc:308
+#: ../../src/wui/productionsitewindow.cc:247
+#: ../../src/wui/productionsitewindow.cc:309
 msgid "(vacant)"
 msgstr "(вакантно)"
 
