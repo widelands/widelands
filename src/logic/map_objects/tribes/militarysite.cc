@@ -400,8 +400,8 @@ void MilitarySite::update_statistics_string(std::string* s) {
 				statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
 				return new_string;
 			} catch (LuaError& err) {
-				log_err("Failed to read soldier capacity for building '%s': %s",
-				        descr().name().c_str(), err.what());
+				log_err("Failed to read soldier capacity for building '%s': %s", descr().name().c_str(),
+				        err.what());
 				return std::string();
 			}
 		}

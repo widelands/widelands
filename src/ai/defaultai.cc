@@ -1541,7 +1541,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// Is this near the border? Get rid of fields owned by ally
-	field.near_border = (map.find_fields(
+	field.near_border =
+	   (map.find_fields(
 	       game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr, find_ally) ||
 	    map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr,
 	                    find_unowned_walkable) > 0);
