@@ -134,7 +134,6 @@ FieldDebugWindow
 FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords const coords)
    : /** TRANSLATORS: Title for a window that shows debug information for a field on the map */
      UI::Window(&parent, UI::WindowStyle::kWui, "field_debug", 0, 60, 300, 400, _("Debug Field")),
-     text_(""),
      map_(parent.egbase().map()),
      coords_(map_.get_fcoords(coords)),
 

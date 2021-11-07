@@ -384,26 +384,25 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		auto it = statistics_string_cache_[idx].find(cache_key);
 		if (it != statistics_string_cache_[idx].end()) {
 			return it->second;
-		} else {
-			const std::string& military_capacity_script = owner().tribe().military_capacity_script();
-			// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
-			if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
-				try {
-					LuaInterface lua;
-					std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
-					std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-					cr->push_arg(pres);
-					cr->push_arg(stat);
-					cr->push_arg(capacity_);
-					cr->resume();
-					std::string new_string = cr->pop_string();
-					statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
-					return new_string;
-				} catch (LuaError& err) {
-					log_err("Failed to read soldier capacity for building '%s': %s",
-					        descr().name().c_str(), err.what());
-					return std::string();
-				}
+		}
+		const std::string& military_capacity_script = owner().tribe().military_capacity_script();
+		// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
+		if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
+			try {
+				LuaInterface lua;
+				std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
+				std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+				cr->push_arg(pres);
+				cr->push_arg(stat);
+				cr->push_arg(capacity_);
+				cr->resume();
+				std::string new_string = cr->pop_string();
+				statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
+				return new_string;
+			} catch (LuaError& err) {
+				log_err("Failed to read soldier capacity for building '%s': %s",
+				        descr().name().c_str(), err.what());
+				return std::string();
 			}
 		}
 		return std::string();

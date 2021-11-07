@@ -8,8 +8,7 @@
 #include "graphic/text_layout.h"
 
 SavegameData::SavegameData()
-   : gametime(""),
-     nrplayers("0"),
+   : nrplayers("0"),
      savetimestamp(0),
      gametype(GameController::GameType::kSingleplayer),
      type_(SavegameType::kSavegame) {
@@ -20,7 +19,6 @@ SavegameData::SavegameData(const std::string& fname)
 }
 SavegameData::SavegameData(const std::string& fname, const SavegameType& type)
    : filename(fname),
-     gametime(""),
      nrplayers("0"),
      savetimestamp(0),
      gametype(GameController::GameType::kSingleplayer),

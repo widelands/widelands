@@ -49,8 +49,7 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::
      columns(init_columns),
      w(0),
      h(0),
-     sheet_file(file),
-     playercolor_mask_sheet_file("") {
+     sheet_file(file) {
 
 	assert(g_fs->file_exists(file));
 

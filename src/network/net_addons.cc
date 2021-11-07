@@ -437,8 +437,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	a.total_file_size = math::to_long(read_line());
 	a.upload_timestamp = math::to_long(read_line());
 	a.download_count = math::to_long(read_line());
-	for (int j = 0; j < kMaxRating; ++j) {
-		a.votes[j] = math::to_long(read_line());
+	for (uint32_t& v : a.votes) {
+		v = math::to_long(read_line());
 	}
 
 	const int comments = math::to_int(read_line());

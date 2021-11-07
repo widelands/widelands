@@ -126,7 +126,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
 						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
-						   get_coords("position", extent, Coords::null(), s), serial, nullptr, status)));
+						   get_coords("position", extent, Coords::null(), s), serial, "", status)));
 					} else {
 
 						messages->add_message(std::unique_ptr<Message>(new Message(

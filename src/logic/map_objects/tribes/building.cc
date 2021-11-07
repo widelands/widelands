@@ -124,7 +124,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
 				const BuildingDescr* tmp_enhancement = descriptions.get_building_descr(en_i);
-				for (auto area : tmp_enhancement->workarea_info_) {
+				for (const auto& area : tmp_enhancement->workarea_info_) {
 					std::set<std::string>& strs = workarea_info_[area.first];
 					for (const std::string& str : area.second) {
 						strs.insert(str);
@@ -208,7 +208,7 @@ void BuildingDescr::set_enhancement(Descriptions& descriptions, LuaTable& enhanc
 	   Buildcost(enhancement_table.get_table("enhancement_return_on_dismantle"), descriptions));
 
 	// Merge the enhancements workarea info into this building's workarea info
-	for (auto area : enhanced_building->workarea_info_) {
+	for (const auto& area : enhanced_building->workarea_info_) {
 		std::set<std::string>& strs = workarea_info_[area.first];
 		for (const std::string& str : area.second) {
 			strs.insert(str);

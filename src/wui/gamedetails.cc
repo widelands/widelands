@@ -66,7 +66,6 @@ GameDetails::GameDetails(Panel* parent,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(&main_box_, style, 0, 0, UI::Box::Vertical)),
-     last_game_(""),
      egbase_(egbase) {
 	descr_.set_handle_mouse(false);
 	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);

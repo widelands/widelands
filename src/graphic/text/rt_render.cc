@@ -1034,7 +1034,6 @@ public:
 	ImgRenderNode(NodeStyle& ns, const Image* image)
 	   : RenderNode(ns),
 	     image_(image),
-	     filename_(""),
 	     scale_(1.0),
 	     color_(RGBColor(0, 0, 0)),
 	     use_playercolor_(false) {
