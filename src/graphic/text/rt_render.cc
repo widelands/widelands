@@ -740,8 +740,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 		auto texture = std::make_shared<Texture>(width(), height());
 		for (uint16_t curx = 0; curx < w_; curx += ttf->width()) {
 			Rectf srcrect(0.f, 0.f, std::min<int>(ttf->width(), w_ - curx), h_);
-			texture->blit(
-			   Rectf(curx, 0, srcrect.w, srcrect.h), *ttf, srcrect, 1., BlendMode::Copy);
+			texture->blit(Rectf(curx, 0, srcrect.w, srcrect.h), *ttf, srcrect, 1., BlendMode::Copy);
 		}
 		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}

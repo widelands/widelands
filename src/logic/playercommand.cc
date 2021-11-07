@@ -1879,8 +1879,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(const Time& time,
 	policy_ = policy;
 }
 
-CmdSetStockPolicy::CmdSetStockPolicy()
-   : warehouse_(0), isworker_(false), ware_(0), policy_() {
+CmdSetStockPolicy::CmdSetStockPolicy() : warehouse_(0), isworker_(false), ware_(0), policy_() {
 }
 
 void CmdSetStockPolicy::execute(Game& game) {

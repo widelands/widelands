@@ -242,8 +242,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			const bool fastplace = is_fastplace(key);
 			auto get_building_descr = [this](const std::string& bld) {
 				return game_ == nullptr ? nullptr :
-                                            game_->descriptions().get_building_descr(
-				                                   game_->descriptions().building_index(bld));
+                                      game_->descriptions().get_building_descr(
+				                             game_->descriptions().building_index(bld));
 			};
 
 			WLApplication* const app = WLApplication::get();

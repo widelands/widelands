@@ -340,8 +340,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-BufferedConnection::BufferedConnection()
-   : socket_(io_service_), currently_sending_(false) {
+BufferedConnection::BufferedConnection() : socket_(io_service_), currently_sending_(false) {
 }
 
 void BufferedConnection::notify_connected() {
