@@ -63,8 +63,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				std::vector<std::string> tags;
 				boost::split(tags, t, boost::is_any_of(","));
 
-				for (auto ci : tags) {
-					std::string tn = *ci;
+				for (std::string tn : tags) {
 					boost::trim(tn);
 					map->add_tag(tn);
 				}
