@@ -361,7 +361,9 @@ public:
 	}
 	void set_mute_messages(bool m) {
 		mute_messages_ = m;
-		muted(serial());
+		if (m) {
+			muted(serial());
+		}
 	}
 
 	void notify_worker_evicted(Game&, Worker&);
