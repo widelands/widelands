@@ -253,7 +253,7 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-12.0  
+    runs-on: macos-11.0  
     steps:
     - name: Installing dependencies
       run: |
