@@ -443,6 +443,10 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
+		upcast(Building, site, mo);
+		if (site) {
+			site->muted.connect([this, id](unsigned) { message_object_removed(id); });
+		}
 	}
 
 	// Sound & popup
@@ -770,7 +774,7 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
-                                 get_buildcaps(fc) :
+	                              get_buildcaps(fc) :
                                  map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE)) {
@@ -873,7 +877,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
 						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other = flag == &primary_start ?
-                                           primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
                                            primary_start;
 						primary_road->destroy(egbase());
 						verb_log_info_time(egbase().get_gametime(),
