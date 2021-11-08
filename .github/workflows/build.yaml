@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ m1arm ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -244,7 +244,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
@@ -253,13 +253,15 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
+    runs-on: macos-12.0  
     steps:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf dylibbundler
+        brewprefix="`brew --prefix`"
+        export CMAKE_PREFIX_PATH="${brewprefix}/opt/icu4c"
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -268,7 +270,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
+        ../utils/macos/build_app.sh -r
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"

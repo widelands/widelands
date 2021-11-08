@@ -113,6 +113,9 @@ EOF
 	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
 	--dest-dir $DESTINATION/Widelands.app/Contents/libs
 
+   echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
+   codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
+
    echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands
 }
