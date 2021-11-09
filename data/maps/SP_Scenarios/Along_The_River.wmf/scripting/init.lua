@@ -182,8 +182,16 @@ function mission_thread()
          p1:hide_fields(warehouse:region(6))
       end)
       transport_wares(p1, hq, "gold_ore", 25, true, "tribes/buildings/warehouses/barbarians/headquarters_interim/idle_00.png")
-      while not immovable_has_name(warehouse.immovable, "barbarians_warehouse") do sleep(2053) end
-      o_build_warehouse.done = true
+      while not o_build_warehouse.done do
+         sleep(2053)
+         for i, field in pairs(map:get_field(53,92):region(8)) do 
+            if immovable_has_name(field.immovable, "barbarians_warehouse") then
+               warehouse = field
+               o_build_warehouse.done = true
+               break
+            end
+         end
+      end
    end)
 
    while not (obj_done(o_build_warehouse) and obj_done(o_build_port)) do sleep(2063) end
