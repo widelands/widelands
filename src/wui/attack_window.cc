@@ -40,10 +40,10 @@ static unsigned next_serial_(0);
 static std::map<unsigned, AttackWindow*> living_attack_windows_;
 
 AttackWindow::AttackWindow(InteractivePlayer& parent,
-                     UI::UniqueWindow::Registry& reg,
-	          Widelands::Building& target_bld,
-                     const Widelands::Coords& target_coords,
-                     bool fastclick)
+                           UI::UniqueWindow::Registry& reg,
+                           Widelands::Building& target_bld,
+                           const Widelands::Coords& target_coords,
+                           bool fastclick)
    : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "attack", &reg, 0, 0, _("Attack")),
      serial_(next_serial_++),
      iplayer_(parent),
@@ -52,10 +52,10 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      target_coordinates_(target_coords),
      lastupdate_(0),
 
-		mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-		linebox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-		columnbox_(&linebox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-		bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
+     mainbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     linebox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     columnbox_(&linebox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
 	target_building_.removed.connect([serial](unsigned) {
@@ -109,12 +109,12 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 }
 
 std::unique_ptr<UI::HorizontalSlider> AttackWindow::add_slider(UI::Box& parent,
-                                                            uint32_t width,
-                                                            uint32_t height,
-                                                            uint32_t min,
-                                                            uint32_t max,
-                                                            uint32_t initial,
-                                                            char const* hint) {
+                                                               uint32_t width,
+                                                               uint32_t height,
+                                                               uint32_t min,
+                                                               uint32_t max,
+                                                               uint32_t initial,
+                                                               char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
 	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiLight, hint));
 	parent.add(result.get());
@@ -122,9 +122,9 @@ std::unique_ptr<UI::HorizontalSlider> AttackWindow::add_slider(UI::Box& parent,
 }
 
 UI::Textarea& AttackWindow::add_text(UI::Box& parent,
-                                  const std::string& str,
-                                  UI::Align alignment,
-                                  const UI::FontStyle style) {
+                                     const std::string& str,
+                                     UI::Align alignment,
+                                     const UI::FontStyle style) {
 	UI::Textarea& result =
 	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, style, str, UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
@@ -314,17 +314,17 @@ void AttackWindow::init_bottombox() {
 		do_not_conquer_.reset(
 		   new UI::Checkbox(&bottombox_, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
-		do_not_conquer_->set_state(
-		   !dynamic_cast<const Widelands::MilitarySite&>(target_building_).attack_target()->get_allow_conquer(
-		      iplayer_.player_number()));
+		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite&>(target_building_)
+		                               .attack_target()
+		                               ->get_allow_conquer(iplayer_.player_number()));
 		bottombox_.add(do_not_conquer_.get(), UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	}
 	bottombox_.add_inf_space();
 
 	if (iplayer_.get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(this, bottombox_, "debug",
-		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"), &AttackWindow::act_debug,
-		           UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
+		           g_image_cache->get("images/wui/fieldaction/menu_debug.png"),
+		           &AttackWindow::act_debug, UI::ButtonStyle::kWuiMenu, _("Show Debug Window"));
 		bottombox_.add_space(kSpacing);
 	}
 	add_button(this, bottombox_, "goto", g_image_cache->get("images/wui/menus/goto.png"),
@@ -377,12 +377,12 @@ constexpr int kSoldierIconWidth = 32;
 constexpr int kSoldierIconHeight = 30;
 
 AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
-                                          AttackWindow* parent_box,
-                                          int32_t const x,
-                                          int32_t const y,
-                                          int const w,
-                                          int const h,
-                                          bool restrict_rows)
+                                             AttackWindow* parent_box,
+                                             int32_t const x,
+                                             int32_t const y,
+                                             int const w,
+                                             int const h,
+                                             bool restrict_rows)
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      restricted_row_number_(restrict_rows),
      attack_box_(parent_box) {
@@ -424,7 +424,8 @@ void AttackWindow::ListOfSoldiers::handle_mousein(bool) {
 	set_tooltip(std::string());
 }
 
-bool AttackWindow::ListOfSoldiers::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
+bool AttackWindow::ListOfSoldiers::handle_mousemove(
+   uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		set_tooltip((boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
 		             soldier->get_health_level() % soldier->descr().get_max_health_level() %
@@ -521,8 +522,9 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 		if (packet_version == kCurrentPacketVersion) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
-			AttackWindow* a = dynamic_cast<AttackWindow*>(
-			   dynamic_cast<InteractivePlayer&>(ib).show_attack_window(Widelands::Coords(x, y), false));
+			AttackWindow* a =
+			   dynamic_cast<AttackWindow*>(dynamic_cast<InteractivePlayer&>(ib).show_attack_window(
+			      Widelands::Coords(x, y), false));
 			assert(a != nullptr);
 
 			const uint8_t destroy = fr.unsigned_8();

@@ -34,11 +34,12 @@
 /** Provides the attack settings when clicking on an enemy building. */
 class AttackWindow : public UI::UniqueWindow {
 public:
-	AttackWindow(InteractivePlayer& parent,
-	          UI::UniqueWindow::Registry&,
-	          Widelands::Building& target_bld,
-	          const Widelands::Coords& target_coords,  // not necessarily the building's main location
-	          bool fastclick);
+	AttackWindow(
+	   InteractivePlayer& parent,
+	   UI::UniqueWindow::Registry&,
+	   Widelands::Building& target_bld,
+	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
+	   bool fastclick);
 	~AttackWindow() override;
 
 	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader& mol);

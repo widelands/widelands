@@ -715,7 +715,8 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c, const bool fastclick) {
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
+                                                  const bool fastclick) {
 	const Map& map = egbase().map();
 	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
 		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
