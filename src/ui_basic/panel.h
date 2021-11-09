@@ -382,7 +382,7 @@ public:
 		kMinimap,
 		kEncyclopedia,
 		kShipWindow,
-		kAttackBox,
+		kAttackWindow,
 	};
 	virtual SaveType save_type() const {
 		return SaveType::kNone;

@@ -41,7 +41,7 @@
 #include "logic/player.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication_options.h"
-#include "wui/attack_box.h"
+#include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
@@ -700,7 +700,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 		}
-		if (show_attack_box(node_and_triangle.node, true)) {
+		if (show_attack_window(node_and_triangle.node, true)) {
 			return;
 		}
 
@@ -715,16 +715,18 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 }
 
-UI::Window* InteractivePlayer::show_attack_box(const Widelands::Coords& c, const bool fastclick) {
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c, const bool fastclick) {
 	const Map& map = egbase().map();
-	if (player().is_seeing(Map::get_index(c, map.get_width()))) {
-		if (upcast(Building, building, map.get_immovable(c))) {
+	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
+		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+			upcast(Building, building, immo);
+			assert(building != nullptr);
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
 					UI::UniqueWindow::Registry& registry = unique_windows().get_registry(
-					   (boost::format("attackbox_%d") % building->serial()).str());
-					registry.open_window = [this, &registry, &c, fastclick]() {
-						new AttackBox(*this, registry, c, fastclick);
+					   (boost::format("attack_%d") % building->serial()).str());
+					registry.open_window = [this, &registry, building, &c, fastclick]() {
+						new AttackWindow(*this, registry, *building, c, fastclick);
 					};
 					registry.create();
 					return registry.window;
