@@ -202,25 +202,27 @@ function mission_thread()
 
    -- Wait for shovels in warehouse and hand them (done in "wares_collected_at_field" function)out.
    run(function()
-      push_textdomain("map_along_the_river.wmf")
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_1)
       o_bring_shovels_1 = add_campaign_objective(obj_bring_shovels_1)
       while not wares_collected_at_field(warehouse, "shovel", 4) do sleep(2027) end
+      push_textdomain("map_along_the_river.wmf")
       send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      pop_textdomain()
       o_bring_shovels_1.done = true
       sleep(180000)
       scroll_to_field(warehouse)
       campaign_message_box(briefing_bring_shovels_2)
       o_bring_shovels_2 = add_campaign_objective(obj_bring_shovels_2)
       while not wares_collected_at_field(warehouse, "shovel", 4) do sleep(2027) end
+      push_textdomain("map_along_the_river.wmf")
       send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      pop_textdomain()
       remove_swamps(p1)
       sleep(198000)
       -- After the work is done the shovels are returned to the Wh.
       transport_wares(p1, warehouse, "shovel", 8, true, "tribes/buildings/warehouses/barbarians/warehouse/menu.png")
       o_bring_shovels_2.done = true
-      pop_textdomain()
    end)
 
    while not obj_done(o_bring_shovels_2) do sleep(2029) end

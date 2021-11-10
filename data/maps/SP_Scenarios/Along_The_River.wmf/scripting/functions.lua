@@ -44,7 +44,6 @@ end
 
 -- Transports wares to flag, warehouse or productionsite.
 function transport_wares(player, point, ware, amount, alert, image)
-   push_textdomain("map_along_the_river.wmf")
    local count = amount
    while count > 0 do
       sleep(499)
@@ -56,15 +55,16 @@ function transport_wares(player, point, ware, amount, alert, image)
       local immovable = point.immovable
       if immovable then
          if immovable.descr.type_name == "flag" or immovable.descr.type_name == "warehouse" or immovable.descr.type_name == "productionsite" then
+            push_textdomain("map_along_the_river.wmf")
             if image then
                send_to_inbox(player, _"Transport", li_image(image, ngettext("%1% unit of %2% has been brought to your ‘%3%’ building.", "%1% units of %2% have been brought to your ‘%3%’ building.", amount):bformat(amount, ware_name, immovable.descr.descname)), { field = point, popup = true, })
             else
                send_to_inbox(player, _"Transport", p(ngettext("%1% unit of %2% has been brought to your ‘%3%’ building.", "%1% units of %2% have been brought to your ‘%3%’ building.", amount):bformat(amount, ware_name, immovable.descr.descname)), { field = point, popup = true, })
             end
+            pop_textdomain()
          end
       end
    end
-   pop_textdomain()
 end
 
 -- =======================================================================

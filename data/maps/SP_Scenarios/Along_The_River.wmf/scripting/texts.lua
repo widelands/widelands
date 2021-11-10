@@ -98,7 +98,7 @@ briefing_defeat_pirates = {
 briefing_pirates_defeated = {
    title = _"Your Advisor",
    body = advisor(_"The pirates were defeated.",
-      _([[Sire, we have defeated the pirates. They have hidden some gold in their last bastion which is now transferred to our headquarters.]]))
+      _([[Sire, we have defeated the pirates. They have hidden some gold in their last bastion which is now being transferred to our headquarters.]]))
 }
 
 briefing_pirates_regrouping = {
