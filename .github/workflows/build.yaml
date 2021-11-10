@@ -251,7 +251,7 @@ jobs:
           - --release
           - --debug
         compiler:
-          - clang
+          - --clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macos-11.6
     steps:
