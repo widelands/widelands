@@ -25,6 +25,7 @@
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/mousewheel_options.h"
@@ -88,24 +89,42 @@ protected:
 
 	void create_fastplace_dropdowns(const Widelands::Game& game, const int height) {
 		for (Widelands::DescriptionIndex t = 0; t < game.descriptions().nr_tribes(); ++t) {
-			create_fastplace_dropdown(height, *game.descriptions().get_tribe_descr(t));
+			const Widelands::TribeDescr* tribe = game.descriptions().get_tribe_descr(t);
+			const auto iterator = fastplace.find(tribe->name());
+			const std::string selection = (iterator == fastplace.end() ? "" : iterator->second);
+			create_fastplace_dropdown(height, tribe->name(), selection, tribe);
 		}
+		for (const auto& pair : fastplace) {
+			if (!game.descriptions().tribe_exists(pair.first)) {
+				create_fastplace_dropdown(height, pair.first, pair.second, nullptr);
+			}
+		}
+		box_.add_space(height);
 	}
 
-	void create_fastplace_dropdown(const int height, const Widelands::TribeDescr& tribe) {
-		const auto iterator = fastplace.find(tribe.name());
-		const std::string selection = (iterator == fastplace.end() ? "" : iterator->second);
+	void create_fastplace_dropdown(const int height, const std::string& tribename, const std::string& selection, const Widelands::TribeDescr* tribe) {
+		UI::Box* hbox = new UI::Box(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+		box_.add(hbox, UI::Box::Resizing::kFullSize);
+
+		UI::Icon* icon = new UI::Icon(hbox, UI::PanelStyle::kFsMenu, 0, 0, height, height,
+				tribe == nullptr ? nullptr : g_image_cache->get(tribe->basic_info().icon));
+		icon->set_handle_mouse(true);
+		icon->set_tooltip(tribe == nullptr ? tribename : tribe->descname());
+		hbox->add(icon, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		hbox->add_space(kPadding);
 
 		UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(
-		   &box_, "choose_fastplace", 0, 0, 100, 8, height, "", UI::DropdownType::kTextual,
+		   hbox, "choose_fastplace", 0, 0, 100, 8, height, "", UI::DropdownType::kTextual,
 		   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 
 		dd->add(_("(unused)"), "", nullptr, selection.empty());
 
-		for (Widelands::DescriptionIndex di : tribe.buildings()) {
-			const Widelands::BuildingDescr* bld = tribe.get_building_descr(di);
-			if (bld->is_buildable()) {
-				dd->add(bld->descname(), bld->name(), bld->icon(), selection == bld->name());
+		if (tribe != nullptr) {
+			for (Widelands::DescriptionIndex di : tribe->buildings()) {
+				const Widelands::BuildingDescr* bld = tribe->get_building_descr(di);
+				if (bld->is_buildable()) {
+					dd->add(bld->descname(), bld->name(), bld->icon(), selection == bld->name());
+				}
 			}
 		}
 
@@ -114,15 +133,15 @@ protected:
 			dd->add(selection, selection, nullptr, true);
 		}
 
-		dd->selected.connect([this, &tribe, dd]() {
+		dd->selected.connect([this, tribename, dd]() {
 			const std::string& sel = dd->get_selected();
 			if (sel.empty()) {
-				fastplace.erase(tribe.name());
+				fastplace.erase(tribename);
 			} else {
-				fastplace[tribe.name()] = sel;
+				fastplace[tribename] = sel;
 			}
 		});
-		box_.add(dd, UI::Box::Resizing::kFullSize);
+		hbox->add(dd, UI::Box::Resizing::kExpandBoth);
 	}
 
 	bool handle_key(const bool down, const SDL_Keysym code) override {
