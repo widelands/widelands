@@ -233,7 +233,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
          _("OK")) {
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
-	auto generate_title = [this](const KeyboardShortcut key) {
+	auto generate_title = [](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
 		return (boost::format(
 		           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
