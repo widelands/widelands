@@ -112,7 +112,7 @@ protected:
 		box_.add_space(height);
 	}
 
-	void create_fastplace_dropdown(const int height,
+	void create_fastplace_dropdown(int height,
 	                               const std::string& tribename,
 	                               const std::string& selection,
 	                               const Widelands::TribeDescr* tribe) {

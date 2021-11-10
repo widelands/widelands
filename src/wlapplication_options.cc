@@ -694,7 +694,7 @@ void unset_shortcut(const KeyboardShortcut id) {
 	set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
 }
 
-void set_fastplace_shortcuts(const KeyboardShortcut id,
+void set_fastplace_shortcuts(KeyboardShortcut id,
                              const std::map<std::string, std::string>& map) {
 	assert(is_fastplace(id));
 	KeyboardShortcutInfo& info = shortcuts_.at(id);
