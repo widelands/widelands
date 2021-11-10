@@ -95,7 +95,7 @@ EOF
    rsync -Ca $SOURCE_DIR/data $DESTINATION/Widelands.app/Contents/MacOS/
 
    echo "Copying locales ..."
-   rsync -Ca $SOURCE_DIR/data/locale $DESTINATION/Widelands.app/Contents/MacOS/data/
+   rsync -Ca $SOURCE_DIR/build/locale $DESTINATION/Widelands.app/Contents/MacOS/data/
 
    echo "Copying binary ..."
    cp -a $SOURCE_DIR/widelands $DESTINATION/Widelands.app/Contents/MacOS/
