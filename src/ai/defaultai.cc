@@ -2660,9 +2660,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		verb_log_dbg_time(gametime,
 		                  "Name: %-30s id:%d stock: %d actual policy: %hhu policies(allow, stop, "
 		                  "dismantle): %hhu, %hhu, %hhu \n",
-		                  bo.name, bo.id, stocked_wood_margin, wood_policy_.at(bo.id),
-		                  WoodPolicy::kAllowRangers, WoodPolicy::kStopRangers,
-		                  WoodPolicy::kDismantleRangers);
+		                  bo.name, bo.id, stocked_wood_margin, static_cast<uint8_t>(wood_policy_.at(bo.id)),
+		                  static_cast<uint8_t>(WoodPolicy::kAllowRangers), static_cast<uint8_t>(WoodPolicy::kStopRangers),
+		                  static_cast<uint8_t>(WoodPolicy::kDismantleRangers));
 	}
 
 	BuildingObserver* best_building = nullptr;
