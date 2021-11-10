@@ -37,9 +37,17 @@ constexpr int16_t kPadding = 4;
 constexpr int16_t kButtonHeight = 28;
 
 struct ShortcutChooser : public UI::Window {
-	ShortcutChooser(KeyboardOptions& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)
-	   : UI::Window(
-	        &parent.get_topmost_forefather(), UI::WindowStyle::kFsMenu, "choose_shortcut", 0, 0, 300, 200, to_string(c)),
+	ShortcutChooser(KeyboardOptions& parent,
+	                const KeyboardShortcut c,
+	                Widelands::Game* game_for_fastplace)
+	   : UI::Window(&parent.get_topmost_forefather(),
+	                UI::WindowStyle::kFsMenu,
+	                "choose_shortcut",
+	                0,
+	                0,
+	                300,
+	                200,
+	                to_string(c)),
 	     code_(c),
 	     key(get_shortcut(code_)),
 	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
@@ -104,12 +112,16 @@ protected:
 		box_.add_space(height);
 	}
 
-	void create_fastplace_dropdown(const int height, const std::string& tribename, const std::string& selection, const Widelands::TribeDescr* tribe) {
+	void create_fastplace_dropdown(const int height,
+	                               const std::string& tribename,
+	                               const std::string& selection,
+	                               const Widelands::TribeDescr* tribe) {
 		UI::Box* hbox = new UI::Box(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
 		box_.add(hbox, UI::Box::Resizing::kFullSize);
 
-		UI::Icon* icon = new UI::Icon(hbox, UI::PanelStyle::kFsMenu, 0, 0, height, height,
-				tribe == nullptr ? nullptr : g_image_cache->get(tribe->basic_info().icon));
+		UI::Icon* icon =
+		   new UI::Icon(hbox, UI::PanelStyle::kFsMenu, 0, 0, height, height,
+		                tribe == nullptr ? nullptr : g_image_cache->get(tribe->basic_info().icon));
 		icon->set_handle_mouse(true);
 		icon->set_tooltip(tribe == nullptr ? tribename : tribe->descname());
 		hbox->add(icon, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -223,12 +235,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [this](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-			return (boost::format(
-			           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
-			              "Action: Key" */
-			           _("%1$s: %2$s")) %
-			        to_string(key) % shortcut)
-			   .str();
+		return (boost::format(
+		           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
+		              "Action: Key" */
+		           _("%1$s: %2$s")) %
+		        to_string(key) % shortcut)
+		   .str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -338,7 +350,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	initialization_complete();
 }
 
-std::map<std::string, std::string> KeyboardOptions::get_default_fastplace_shortcuts(const KeyboardShortcut id) const {
+std::map<std::string, std::string>
+KeyboardOptions::get_default_fastplace_shortcuts(const KeyboardShortcut id) const {
 	assert(is_fastplace(id));
 	assert(game_);
 
@@ -359,7 +372,8 @@ std::map<std::string, std::string> KeyboardOptions::get_default_fastplace_shortc
 
 void KeyboardOptions::init_fastplace_default_shortcuts() {
 	assert(game_);
-	std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>> fp;
+	std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>>
+	   fp;
 	for (Widelands::DescriptionIndex t = 0; t < game_->descriptions().nr_tribes(); ++t) {
 		const Widelands::TribeDescr* tribe = game_->descriptions().get_tribe_descr(t);
 		for (const auto& pair : tribe->fastplace_defaults()) {

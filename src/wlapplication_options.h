@@ -286,7 +286,9 @@ const std::map<std::string, std::string>& get_fastplace_shortcuts(KeyboardShortc
 const std::string& get_fastplace_group_name(KeyboardShortcut);
 
 /** Initialize all fastplace group definitions, but do not overwrite existing mappings. */
-void init_fastplace_default_shortcuts(const std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>>&);
+void init_fastplace_default_shortcuts(
+   const std::map<std::string /* key */,
+                  std::map<std::string /* tribe */, std::string /* building */>>&);
 
 /** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
