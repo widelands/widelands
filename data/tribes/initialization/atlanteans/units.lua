@@ -211,13 +211,12 @@
 --       }
 --
 --    **fastplace**: *Optional*. Assigns some of the tribe's buildings to the default fastplace shortcut groups.
---                   Valid groups are: ``warehouse port training_small training_large military_small_primary
---                   military_small_secondary military_medium_primary military_medium_secondary military_tower
---                   military_fortress woodcutter forester quarry building_materials_primary building_materials_secondary
---                   building_materials_tertiary fisher hunter fish_meat_replenisher well farm_primary farm_secondary mill bakery
---                   brewery smokery tavern smelting tool_smithy weapon_smithy armor_smithy weaving_mill shipyard ferry_yard
---                   scout barracks second_carrier charcoal mine_stone mine_coal mine_iron mine_gold misc1 misc2 misc3 misc4``.
---                   Example:
+--    Valid groups are: ``warehouse port training_small training_large military_small_primary military_small_secondary
+--    military_medium_primary military_medium_secondary military_tower military_fortress woodcutter forester quarry
+--    building_materials_primary building_materials_secondary building_materials_tertiary fisher hunter
+--    fish_meat_replenisher well farm_primary farm_secondary mill bakery brewery smokery tavern smelting tool_smithy
+--    weapon_smithy armor_smithy weaving_mill shipyard ferry_yard scout barracks second_carrier charcoal mine_stone
+--    mine_coal mine_iron mine_gold misc1 misc2 misc3 misc4``. Example:
 --
 --    .. code-block:: lua
 --

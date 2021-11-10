@@ -30,7 +30,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_fsmenu/mousewheel_options.h"
 #include "wlapplication.h"
-#include "wlapplication_options.h"
 
 namespace FsMenu {
 
@@ -38,16 +37,19 @@ constexpr int16_t kPadding = 4;
 constexpr int16_t kButtonHeight = 28;
 
 struct ShortcutChooser : public UI::Window {
-	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)
+	ShortcutChooser(KeyboardOptions& parent, const KeyboardShortcut c, Widelands::Game* game_for_fastplace)
 	   : UI::Window(
-	        &parent, UI::WindowStyle::kFsMenu, "choose_shortcut", 0, 0, 300, 200, to_string(c)),
+	        &parent.get_topmost_forefather(), UI::WindowStyle::kFsMenu, "choose_shortcut", 0, 0, 300, 200, to_string(c)),
 	     code_(c),
 	     key(get_shortcut(code_)),
 	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
 		UI::Button* const reset = new UI::Button(
 		   &box_, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
-		reset->sigclicked.connect([this]() {
+		reset->sigclicked.connect([this, &parent]() {
 			key = get_default_shortcut(code_);
+			if (is_fastplace(code_)) {
+				fastplace = parent.get_default_fastplace_shortcuts(code_);
+			}
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		});
 
@@ -240,7 +242,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			const bool fastplace = is_fastplace(key);
 			WLApplication* const app = WLApplication::get();
 			app->enable_handle_key(false);
-			ShortcutChooser c(*get_parent(), key, fastplace ? game_.get() : nullptr);
+			ShortcutChooser c(*this, key, fastplace ? game_.get() : nullptr);
 			while (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict)) {
@@ -305,17 +307,26 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();
 			game_->postload_addons();
+
+			init_fastplace_default_shortcuts();
+
 			for (auto& pair : all_keyboard_buttons) {
 				pair.second->set_title(generate_title(pair.first));
 			}
+
 			game_->remove_loader_ui();
 		}
 	});
 	reset_.sigclicked.connect([this, all_keyboard_buttons, generate_title]() {
 		init_shortcuts(true);
+		if (game_) {
+			init_fastplace_default_shortcuts();
+		}
+
 		for (auto& pair : all_keyboard_buttons) {
 			pair.second->set_title(generate_title(pair.first));
 		}
+
 		mousewheel_options_.reset();
 	});
 	ok_.sigclicked.connect([this]() {
@@ -325,6 +336,37 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	get_parent()->layout();
 	initialization_complete();
+}
+
+std::map<std::string, std::string> KeyboardOptions::get_default_fastplace_shortcuts(const KeyboardShortcut id) const {
+	assert(is_fastplace(id));
+	assert(game_);
+
+	std::string key = get_fastplace_group_name(id);
+	assert(key.compare(0, kFastplaceGroupPrefix.size(), kFastplaceGroupPrefix) == 0);
+	key.erase(0, kFastplaceGroupPrefix.size());
+	std::map<std::string, std::string> values;
+	for (Widelands::DescriptionIndex t = 0; t < game_->descriptions().nr_tribes(); ++t) {
+		const Widelands::TribeDescr* tribe = game_->descriptions().get_tribe_descr(t);
+		const auto it = tribe->fastplace_defaults().find(key);
+		if (it != tribe->fastplace_defaults().end()) {
+			values.emplace(tribe->name(), it->second);
+		}
+	}
+
+	return values;
+}
+
+void KeyboardOptions::init_fastplace_default_shortcuts() {
+	assert(game_);
+	std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>> fp;
+	for (Widelands::DescriptionIndex t = 0; t < game_->descriptions().nr_tribes(); ++t) {
+		const Widelands::TribeDescr* tribe = game_->descriptions().get_tribe_descr(t);
+		for (const auto& pair : tribe->fastplace_defaults()) {
+			fp[kFastplaceGroupPrefix + pair.first][tribe->name()] = pair.second;
+		}
+	}
+	::init_fastplace_default_shortcuts(fp);
 }
 
 bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {

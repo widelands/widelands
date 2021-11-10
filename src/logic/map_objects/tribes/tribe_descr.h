@@ -186,7 +186,7 @@ public:
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
-	const std::map<std::string /* key */, std::string /* building */> fastplace_defaults() const {
+	const std::map<std::string /* key */, std::string /* building */>& fastplace_defaults() const {
 		return fastplace_defaults_;
 	}
 

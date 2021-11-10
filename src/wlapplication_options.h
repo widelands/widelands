@@ -78,6 +78,8 @@ void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value);
 
+static const std::string kFastplaceGroupPrefix = "fastplace_";
+
 // Keyboard shortcuts. The order in which they are defined here
 // defines the order in which they appear in the options menu.
 enum class KeyboardShortcut : uint16_t {
@@ -278,9 +280,15 @@ std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = tr
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 
+/** Set or get each tribe's fastplace building for a given fastplace group. */
 void set_fastplace_shortcuts(KeyboardShortcut, const std::map<std::string, std::string>&);
 const std::map<std::string, std::string>& get_fastplace_shortcuts(KeyboardShortcut);
+const std::string& get_fastplace_group_name(KeyboardShortcut);
 
+/** Initialize all fastplace group definitions, but do not overwrite existing mappings. */
+void init_fastplace_default_shortcuts(const std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>>&);
+
+/** Clear a shortcut. */
 void unset_shortcut(KeyboardShortcut);
 
 // Return values for changing value of spinbox, slider, etc.
