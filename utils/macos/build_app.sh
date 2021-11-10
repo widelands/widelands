@@ -26,14 +26,12 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-REVISION=`python $DIR/../detect_revision.py`
+WLVERSION=`python $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
 
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
-else
-   WLVERSION="$REVISION"
 fi
 
 echo ""
@@ -62,12 +60,6 @@ function MakeDMG {
    # elif [ "$TYPE" == "Debug" ]; then
    #  hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
    # fi
-}
-
-function CopyLibrary {
-   path=$1; shift
-   cp $path "$DESTINATION/Widelands.app/Contents/MacOS/"
-   chmod 644 "$DESTINATION/Widelands.app/Contents/MacOS/$(basename ${path})"
 }
 
 function MakeAppPackage {
@@ -108,10 +100,17 @@ EOF
    echo "Copying binary ..."
    cp -a $SOURCE_DIR/widelands $DESTINATION/Widelands.app/Contents/MacOS/
 
+   # Locate ASAN Library by asking llvm (nice trick by SirVer I suppose)
+   ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address \
+       -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
+
+   ASANPATH=`dirname $ASANLIB`
+
    echo "Copying and fixing dynamic libraries... "
    dylibbundler --create-dir --bundle-deps \
 	--fix-file $DESTINATION/Widelands.app/Contents/MacOS/widelands \
-	--dest-dir $DESTINATION/Widelands.app/Contents/libs
+	--dest-dir $DESTINATION/Widelands.app/Contents/libs \
+	--search-path $ASANPATH 
 
    echo "Re-sign libraries with an 'ad-hoc signing' see man codesign"
    codesign --sign - --force $DESTINATION/Widelands.app/Contents/libs/*
