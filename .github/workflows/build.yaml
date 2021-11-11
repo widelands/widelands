@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ m1arm ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -244,7 +244,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
@@ -270,7 +270,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh  ${{ matrix.config }} ${{ matrix.compiler }}
+        ../utils/macos/build_app.sh ${{ matrix.config }} ${{ matrix.compiler }}
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
