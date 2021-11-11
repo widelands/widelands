@@ -17,12 +17,11 @@
  *
  */
 
-#ifndef WL_WUI_ATTACK_BOX_H
-#define WL_WUI_ATTACK_BOX_H
+#ifndef WL_WUI_ATTACK_WINDOW_H
+#define WL_WUI_ATTACK_WINDOW_H
 
 #include <memory>
 
-#include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
@@ -30,36 +29,33 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
-using Widelands::Bob;
-using Widelands::Building;
-using Widelands::Soldier;
+/** Provides the attack settings when clicking on an enemy building. */
+class AttackWindow : public UI::UniqueWindow {
+public:
+	AttackWindow(
+	   InteractivePlayer& parent,
+	   UI::UniqueWindow::Registry&,
+	   Widelands::Building& target_bld,
+	   const Widelands::Coords& target_coords,  // not necessarily the building's main location
+	   bool fastclick);
+	~AttackWindow() override;
 
-/**
- * Provides the attack settings that are part of a \ref FieldActionWindow
- * when clicking on an enemy building.
- */
-struct AttackBox : public UI::Box {
-	AttackBox(UI::Panel* parent,
-	          Widelands::Player* player,
-	          Widelands::FCoords* target,
-	          uint32_t const x,
-	          uint32_t const y);
+	static UI::Window& load(FileRead&, InteractiveBase&, Widelands::MapObjectLoader& mol);
 
-	void init();
+protected:
+	void think() override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
-	size_t count_soldiers() const;
-	std::vector<Widelands::Serial> soldiers() const;
-
-	UI::Button* get_attack_button() const {
-		return attack_button_.get();
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kAttackWindow;
 	}
-
-	bool get_allow_conquer() const {
-		return do_not_conquer_ && !do_not_conquer_->get_state();
-	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
 
 private:
+	const unsigned serial_;
+
 	std::vector<Widelands::Soldier*> get_max_attackers();
 	std::unique_ptr<UI::HorizontalSlider> add_slider(UI::Box& parent,
 	                                                 uint32_t width,
@@ -72,34 +68,31 @@ private:
 	                       const std::string& str,
 	                       UI::Align alignment,
 	                       const UI::FontStyle style);
-	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
-	                                       const std::string& text,
-	                                       void (AttackBox::*fn)(),
-	                                       const std::string& tooltip_text);
 
-	void think() override;
-	void update_attack(bool);
+	void init_slider(const std::vector<Widelands::Soldier*>&);
+	void init_soldier_lists(const std::vector<Widelands::Soldier*>&);
+	void init_bottombox();
+
+	void update(bool);
 	void send_less_soldiers();
 	void send_more_soldiers();
 
-public:
-	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
+	size_t count_soldiers() const;
+	std::vector<Widelands::Serial> soldiers() const;
 
-private:
-	Widelands::Player* player_;
+	bool get_allow_conquer() const {
+		return do_not_conquer_ && !do_not_conquer_->get_state();
+	}
+
+	InteractivePlayer& iplayer_;
 	const Widelands::Map& map_;
-	Widelands::FCoords* node_coordinates_;
-
-	std::unique_ptr<UI::Slider> soldiers_slider_;
-	std::unique_ptr<UI::Textarea> soldiers_text_;
-
-	std::unique_ptr<UI::Button> less_soldiers_;
-	std::unique_ptr<UI::Button> more_soldiers_;
+	Widelands::Building& target_building_;
+	const Widelands::Coords target_coordinates_;
 
 	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much
 	struct ListOfSoldiers : public UI::Panel {
 		ListOfSoldiers(UI::Panel* const parent,
-		               AttackBox* parent_box,
+		               AttackWindow* parent_box,
 		               int32_t const x,
 		               int32_t const y,
 		               int const w,
@@ -152,18 +145,30 @@ private:
 		std::vector<const Widelands::Soldier*> soldiers_;
 
 		ListOfSoldiers* other_;
-		AttackBox* attack_box_;
+		AttackWindow* attack_box_;
 
 		void update_desired_size() override;
 	};
+
+	void act_attack();
+	void act_goto();
+	void act_debug();
+
+	/// The last time the information in this Panel got updated
+	Time lastupdate_;
+
+	UI::Box mainbox_, linebox_, columnbox_, bottombox_;
 
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
 	std::unique_ptr<UI::Button> attack_button_;
 	std::unique_ptr<UI::Checkbox> do_not_conquer_;
 
-	/// The last time the information in this Panel got updated
-	Time lastupdate_;
+	std::unique_ptr<UI::Slider> soldiers_slider_;
+	std::unique_ptr<UI::Textarea> soldiers_text_;
+
+	std::unique_ptr<UI::Button> less_soldiers_;
+	std::unique_ptr<UI::Button> more_soldiers_;
 };
 
-#endif  // end of include guard: WL_WUI_ATTACK_BOX_H
+#endif  // end of include guard: WL_WUI_ATTACK_WINDOW_H
