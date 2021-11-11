@@ -1653,9 +1653,9 @@ descriptions:new_tribe {
       mine_coal = "empire_coalmine",
       mine_iron = "empire_ironmine",
       mine_gold = "empire_goldmine",
-      misc1 = "empire_vineyard",
-      misc2 = "empire_winery",
-      misc3 = "empire_sheepfarm",
+      agriculture_producer = "empire_vineyard",
+      agriculture_consumer_primary = "empire_winery",
+      industry_supporter = "empire_sheepfarm",
    },
 }
 

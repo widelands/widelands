@@ -158,64 +158,59 @@ static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
 }
 
-static const std::map<KeyboardShortcut, KeyboardShortcutInfo> kFastplaceDefaults = {
-#define FP(i, name, descname)                                                                      \
-	{                                                                                               \
-		static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin) +    \
-		                              i),                                                            \
-		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),          \
-		                        kFastplaceGroupPrefix + name, []() { return descname; })             \
-	}
-   FP(0, "warehouse", _("Warehouse")),
-   FP(1, "port", _("Port")),
-   FP(2, "training_small", _("Minor Training Site")),
-   FP(3, "training_large", _("Major Training Site")),
-   FP(4, "military_small_primary", _("Primary Small Military Site")),
-   FP(5, "military_small_secondary", _("Secondary Small Military Site")),
-   FP(6, "military_medium_primary", _("Primary Medium Military Site")),
-   FP(7, "military_medium_secondary", _("Secondary Medium Military Site")),
-   FP(8, "military_tower", _("Tower")),
-   FP(9, "military_fortress", _("Fortress")),
-   FP(10, "woodcutter", _("Woodcutter’s House")),
-   FP(11, "forester", _("Forester’s House")),
-   FP(12, "quarry", _("Quarry")),
-   FP(13, "building_materials_primary", _("Primary Building Materials Industry")),
-   FP(14, "building_materials_secondary", _("Secondary Building Materials Industry")),
-   FP(15, "building_materials_tertiary", _("Tertiary Building Materials Industry")),
-   FP(16, "fisher", _("Fishing")),
-   FP(17, "hunter", _("Hunting")),
-   FP(18, "fish_meat_replenisher", _("Fish/Meat Replenishing")),
-   FP(19, "well", _("Well")),
-   FP(20, "farm_primary", _("Primary Farm")),
-   FP(21, "farm_secondary", _("Secondary Farm")),
-   FP(22, "mill", _("Mill")),
-   FP(23, "bakery", _("Bakery")),
-   FP(24, "brewery", _("Brewery")),
-   FP(25, "smokery", _("Smokery")),
-   FP(26, "tavern", _("Tavern")),
-   FP(27, "smelting", _("Ore Smelting")),
-   FP(28, "tool_smithy", _("Tool Smithy")),
-   FP(29, "weapon_smithy", _("Weapon Smithy")),
-   FP(30, "armor_smithy", _("Armor Smithy")),
-   FP(31, "weaving_mill", _("Weaving Mill")),
-   FP(32, "shipyard", _("Shipyard")),
-   FP(33, "ferry_yard", _("Ferry Yard")),
-   FP(34, "scout", _("Scouting")),
-   FP(35, "barracks", _("Barracks")),
-   FP(36, "second_carrier", _("Second Carrier")),
-   FP(37, "charcoal", _("Charcoal")),
-   FP(38, "mine_stone", _("Stone Mine")),
-   FP(39, "mine_coal", _("Coal Mine")),
-   FP(40, "mine_iron", _("Iron Mine")),
-   FP(41, "mine_gold", _("Gold Mine")),
-#define FPM(i, d) FP(i, "misc" #d, (boost::format(_("Miscellaneous #%d")) % d).str())
-   FPM(42, 1),
-   FPM(43, 2),
-   FPM(44, 3),
-   FPM(45, 4),
-   FPM(46, 5),
+static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
+#define FP(name, descname)                                                                      \
+		KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),          \
+		                        kFastplaceGroupPrefix + name, []() { return descname; })
+   FP("warehouse", _("Warehouse")),
+   FP("port", _("Port")),
+   FP("training_small", _("Minor Training Site")),
+   FP("training_large", _("Major Training Site")),
+   FP("military_small_primary", _("Primary Small Military Site")),
+   FP("military_small_secondary", _("Secondary Small Military Site")),
+   FP("military_medium_primary", _("Primary Medium Military Site")),
+   FP("military_medium_secondary", _("Secondary Medium Military Site")),
+   FP("military_tower", _("Tower")),
+   FP("military_fortress", _("Fortress")),
+   FP("woodcutter", _("Woodcutter’s House")),
+   FP("forester", _("Forester’s House")),
+   FP("quarry", _("Quarry")),
+   FP("building_materials_primary", _("Primary Building Materials Industry")),
+   FP("building_materials_secondary", _("Secondary Building Materials Industry")),
+   FP("building_materials_tertiary", _("Tertiary Building Materials Industry")),
+   FP("fisher", _("Fishing")),
+   FP("hunter", _("Hunting")),
+   FP("fish_meat_replenisher", _("Fish/Meat Replenishing")),
+   FP("well", _("Well")),
+   FP("farm_primary", _("Primary Farm")),
+   FP("farm_secondary", _("Secondary Farm")),
+   FP("mill", _("Mill")),
+   FP("bakery", _("Bakery")),
+   FP("brewery", _("Brewery")),
+   FP("smokery", _("Smokery")),
+   FP("tavern", _("Tavern")),
+   FP("smelting", _("Ore Smelting")),
+   FP("tool_smithy", _("Tool Smithy")),
+   FP("weapon_smithy", _("Weapon Smithy")),
+   FP("armor_smithy", _("Armor Smithy")),
+   FP("weaving_mill", _("Weaving Mill")),
+   FP("shipyard", _("Shipyard")),
+   FP("ferry_yard", _("Ferry Yard")),
+   FP("scout", _("Scouting")),
+   FP("barracks", _("Barracks")),
+   FP("second_carrier", _("Second Carrier")),
+   FP("charcoal", _("Charcoal")),
+   FP("mine_stone", _("Stone Mine")),
+   FP("mine_coal", _("Coal Mine")),
+   FP("mine_iron", _("Iron Mine")),
+   FP("mine_gold", _("Gold Mine")),
+   FP("agriculture_producer", _("Agricultural Producer")),
+   FP("agriculture_consumer_primary", _("Primary Agricultural Consumer")),
+   FP("agriculture_consumer_secondary", _("Secondary Agricultural Consumer")),
+   FP("industry_alternative", _("Alternative Industry")),
+   FP("industry_supporter", _("Industry Support")),
+   FP("terraforming", _("Terraforming")),
 #undef FP
-#undef FPM
 };
 
 static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
@@ -1052,9 +1047,10 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 			continue;
 		}
 
-		const auto it = kFastplaceDefaults.find(k);
-		if (it != kFastplaceDefaults.end()) {
-			shortcuts_.emplace(*it);
+		const unsigned off =
+		   static_cast<uint16_t>(k) - static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin);
+		if (off < kFastplaceDefaults.size()) {
+			shortcuts_.emplace(k, kFastplaceDefaults[off]);
 		} else {
 			++counter;
 			shortcuts_.emplace(
@@ -1069,10 +1065,18 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 void init_fastplace_default_shortcuts(
    const std::map<std::string /* key */,
                   std::map<std::string /* tribe */, std::string /* building */>>& fpdefaults) {
+#ifndef NDEBUG
+	std::set<std::string> used_keys;
+#endif
+
 	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
 	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
 		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
 		KeyboardShortcutInfo& info = shortcuts_.at(id);
+
+#ifndef NDEBUG
+		used_keys.insert(info.internal_name);
+#endif
 
 		const auto defaults_it = fpdefaults.find(info.internal_name);
 		if (defaults_it != fpdefaults.end()) {
@@ -1083,6 +1087,14 @@ void init_fastplace_default_shortcuts(
 			}
 		}
 	}
+
+#ifndef NDEBUG
+	for (const auto& pair : fpdefaults) {
+		if (!used_keys.count(pair.first)) {
+			log_warn("Fastplace defaults: Unused key '%s'", pair.first.c_str());
+		}
+	}
+#endif
 }
 
 void init_shortcuts(const bool force_defaults) {

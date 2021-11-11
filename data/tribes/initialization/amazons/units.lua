@@ -1687,7 +1687,7 @@ descriptions:new_tribe {
       charcoal = "amazons_charcoal_kiln",
       mine_stone = "amazons_stonemine",
       mine_gold = "amazons_gold_digger_dwelling",
-      misc1 = "amazons_gardening_center",
+      terraforming = "amazons_gardening_center",
    },
 }
 

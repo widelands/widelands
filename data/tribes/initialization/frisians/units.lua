@@ -2254,11 +2254,12 @@ descriptions:new_tribe {
       mine_coal = "frisians_coalmine",
       mine_iron = "frisians_ironmine",
       mine_gold = "frisians_goldmine",
-      misc1 = "frisians_berry_farm",
-      misc2 = "frisians_collectors_house",
-      misc3 = "frisians_beekeepers_house",
-      misc4 = "frisians_charcoal_burners_house",
-      misc5 = "frisians_recycling_center",
+      agriculture_producer = "frisians_berry_farm",
+      agriculture_consumer_primary = "frisians_collectors_house",
+      agriculture_consumer_secondary = "frisians_beekeepers_house",
+      industry_alternative = "frisians_charcoal_burners_house",
+      industry_supporter = "frisians_recycling_center",
+      terraforming = "frisians_dikers_house",
    },
 }
 
