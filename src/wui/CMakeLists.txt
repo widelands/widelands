@@ -204,8 +204,8 @@ wl_library(wui
   SRCS
     actionconfirm.cc
     actionconfirm.h
-    attack_box.cc
-    attack_box.h
+    attack_window.cc
+    attack_window.h
     building_statistics_menu.cc
     building_statistics_menu.h
     buildingwindow.cc

@@ -443,6 +443,11 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
+		if (mo->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, site, mo);
+			assert(site != nullptr);
+			site->muted.connect([this, id](unsigned) { message_object_removed(id); });
+		}
 	}
 
 	// Sound & popup
@@ -1277,11 +1282,11 @@ void Player::enemyflagaction(const Flag& flag,
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
-							verb_log_warn_time(
-							   egbase().get_gametime(),
-							   "Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
-							   "building\n",
-							   player_number(), temp_attacker->serial());
+							verb_log_warn_time(egbase().get_gametime(),
+							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+							                   "because he left the "
+							                   "building\n",
+							                   player_number(), temp_attacker->serial());
 						}
 					}
 				}
