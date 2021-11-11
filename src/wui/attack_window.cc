@@ -279,14 +279,15 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		   add_text(mainbox_, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
-		txt.set_tooltip(
-		   bformat(tooltip_format,
-		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
-		    as_listitem(
-		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip) %
-		    as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kWuiTooltip)));
+		txt.set_tooltip(bformat(
+		   tooltip_format,
+		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+		         .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
+		      as_listitem(_("Hold down Ctrl to remove all soldiers from the list"),
+		                  UI::FontStyle::kWuiTooltip) %
+		      as_listitem(
+		         _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		         UI::FontStyle::kWuiTooltip)));
 		mainbox_.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
@@ -294,14 +295,14 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		UI::Textarea& txt =
 		   add_text(mainbox_, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		txt.set_handle_mouse(true);
-		txt.set_tooltip(
-		   bformat(tooltip_format,
-		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
-		    as_listitem(
-		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) %
-		    as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kWuiTooltip)));
+		txt.set_tooltip(bformat(
+		   tooltip_format,
+		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+		         .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
+		      as_listitem(
+		         _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) %
+		      as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		                  UI::FontStyle::kWuiTooltip)));
 		mainbox_.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 }
