@@ -270,6 +270,14 @@ public:
 	virtual Coords get_position() const {
 		return position_;
 	}
+
+	/**
+	 * Is called right after the building is muted.
+	 *
+	 * param serial : the building serial
+	 */
+	boost::signals2::signal<void(uint32_t serial)> muted;
+
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	std::string info_string(const InfoStringFormat& format);
@@ -368,6 +376,9 @@ public:
 	}
 	void set_mute_messages(bool m) {
 		mute_messages_ = m;
+		if (m) {
+			muted(serial());
+		}
 	}
 
 	void notify_worker_evicted(Game&, Worker&);
