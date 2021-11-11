@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-31 02:44+0000\n"
-"PO-Revision-Date: 2021-10-27 14:51+0000\n"
+"POT-Creation-Date: 2021-11-07 02:52+0000\n"
+"PO-Revision-Date: 2021-11-02 08:04+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -669,8 +669,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -979,9 +979,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1205,7 +1205,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:270
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
@@ -1402,8 +1402,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
@@ -2095,19 +2095,19 @@ msgstr "Нет солдат для этого уровня тренировки!
 msgid "Completed %s"
 msgstr "Завершено %s"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:352
+#: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "(stopped)"
 msgstr "(остановлено)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:435
+#: ../../src/logic/map_objects/tribes/productionsite.cc:430
 #: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1086
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1135
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
@@ -2413,12 +2413,12 @@ msgid "Saving game…"
 msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:178
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
 #: ../../src/logic/save_handler.cc:192
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Игра сохранена"
 
@@ -3342,7 +3342,7 @@ msgstr "Язык:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Home Directory:"
-msgstr ""
+msgstr "Домашняя директория:"
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Configuration File:"
@@ -3814,7 +3814,7 @@ msgstr "Логин или пароль введены неверно:\n%s"
 #: ../../src/ui_fsmenu/addons/manager.cc:930
 #, c-format
 msgid "Fetching add-ons (%.1f%%)"
-msgstr ""
+msgstr "Выборка дополнений (%.1f %%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
@@ -4047,7 +4047,7 @@ msgid ""
 "This name is invalid. Reason: %s\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "Имя недействительно по следующей причине: %s\n\nВыберете другое имя."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "An add-on with this internal name already exists."
@@ -4206,7 +4206,7 @@ msgstr "Удалить карту или каталог"
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
-msgstr ""
+msgstr "Выбранное имя для внешней директории уже многократно использовано. Все директории с похожими названиями будут доступны по аналогии."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:191
 msgid "Directory Display Name"
@@ -4247,7 +4247,7 @@ msgstr "Каталог верхнего уровня"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:377
 msgid "Zipped Map"
-msgstr ""
+msgstr "Сжатая карта"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:378
 #, c-format
@@ -4255,7 +4255,7 @@ msgid ""
 "The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr ""
+msgstr "Карта ‘%s’ не является папкой. Пожалуйста, отключите опцию сжатия файлов Widelands в меню опций и сохраните карту в редакторе по новой.\n\nИли вы хотите добавить карту всё равно?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:395
 msgid "New Directory"
@@ -4271,7 +4271,7 @@ msgid ""
 "Directories may not use the extension ‘%s’.\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "У директорий не может быть расширения ‘%s’.\n\nПодберите другое имя."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:432
 msgid "A directory with this name already exists."
@@ -4322,7 +4322,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Комментарий не был сохранён.\n\nОшибка:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:162
 msgid "Edit Comment"
@@ -4447,7 +4447,7 @@ msgstr "Комментарий содержит недопустимую раз�
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
 msgid "Please explain why you are deleting this add-on."
-msgstr ""
+msgstr "Пожалуйста, расскажите, зачем вам удалять это дополнение."
 
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:419
@@ -4489,7 +4489,7 @@ msgstr "Написать комментарий..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:579
 msgid "Administrator actions"
-msgstr ""
+msgstr "Административные возможности"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:586
 msgid "Not voted"
@@ -4509,15 +4509,15 @@ msgstr "Снимков (%u шт.)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
 msgid "Change verification status…"
-msgstr ""
+msgstr "Смена статуса годности..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
 msgid "Change quality rating…"
-msgstr ""
+msgstr "Переоценка качества..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
 msgid "Change sync-safety status…"
-msgstr ""
+msgstr "Смена статуса синхронизации..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:685
 msgid "Enable Transifex integration"
@@ -4981,7 +4981,7 @@ msgstr "[%1$s] %2$s"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:178
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Настроить действия по клавиатуре и мыши"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:189
 msgid "Reset all"
@@ -5009,7 +5009,7 @@ msgstr "[%1$s] %2$s: %3$s"
 #: ../../src/ui_fsmenu/keyboard_options.cc:274
 #, c-format
 msgid "%1$s ([%2$s] %3$s)"
-msgstr ""
+msgstr "%1$s ([ %2$s]%3$s)"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:285
 msgid "Keyboard Shortcut Conflict"
@@ -5582,7 +5582,7 @@ msgstr "Прокрутка в любую сторону"
 #. Horizontal scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:146
 msgid "(plain)"
-msgstr ""
+msgstr "(в плоскости)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:200
@@ -5592,12 +5592,12 @@ msgstr ""
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:202
 msgid "Vertical"
-msgstr ""
+msgstr "Вертикально"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:204
 msgid "Horizontal"
-msgstr ""
+msgstr "Горизонтально"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:206
@@ -5606,11 +5606,11 @@ msgstr "В обе стороны"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:221
 msgid "%1%:"
-msgstr ""
+msgstr "%1%:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:278
 msgid "Scroll Setting Conflict"
-msgstr ""
+msgstr "Противоречие в настройках прокрутки"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
@@ -5624,17 +5624,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:342
 msgid "Reset Scrolling"
-msgstr ""
+msgstr "Сбросить настройки прокрутки"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:343
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
-msgstr ""
+msgstr "Установить настройки прокрутки по умолчанию для обычной одноколёсной мыши"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:352
 msgid "Set for Touchpad"
-msgstr ""
+msgstr "Настроить тачпад"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:353
 msgid ""
@@ -5644,11 +5644,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:363
 msgid "Apply Scrolling"
-msgstr ""
+msgstr "Принять"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:364
 msgid "Apply scroll settings"
-msgstr ""
+msgstr "Принять"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -6122,18 +6122,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Авторы"
@@ -6975,13 +6975,13 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7407,8 +7407,8 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "Ошибка при сохранении игры!"
 
@@ -8234,12 +8234,12 @@ msgstr "Поднять опыт на 1"
 msgid "Terminate the employment of the selected worker"
 msgstr "Уволить выбранного работника"
 
-#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:247
 msgid "(coming)"
 msgstr "(идёт)"
 
-#: ../../src/wui/productionsitewindow.cc:246
-#: ../../src/wui/productionsitewindow.cc:308
+#: ../../src/wui/productionsitewindow.cc:247
+#: ../../src/wui/productionsitewindow.cc:309
 msgid "(vacant)"
 msgstr "(вакантно)"
 

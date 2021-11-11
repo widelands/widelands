@@ -50,11 +50,20 @@ public:
 	uint32_t get_conquers() const override {
 		return conquer_radius_;
 	}
+	void set_conquers(uint32_t c) {
+		conquer_radius_ = c;
+	}
 	Quantity get_max_number_of_soldiers() const {
 		return num_soldiers_;
 	}
+	void set_max_number_of_soldiers(Quantity q) {
+		num_soldiers_ = q;
+	}
 	uint32_t get_heal_per_second() const {
 		return heal_per_second_;
+	}
+	void set_heal_per_second(uint32_t h) {
+		heal_per_second_ = h;
 	}
 
 	bool prefers_heroes_at_start_;
