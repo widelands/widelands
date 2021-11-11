@@ -159,9 +159,9 @@ static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 }
 
 static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
-#define FP(name, descname)                                                                      \
-		KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),          \
-		                        kFastplaceGroupPrefix + name, []() { return descname; })
+#define FP(name, descname)                                                                         \
+	KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),                \
+	                     kFastplaceGroupPrefix + name, []() { return descname; })
    FP("warehouse", _("Warehouse")),
    FP("port", _("Port")),
    FP("training_small", _("Minor Training Site")),
