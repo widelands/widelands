@@ -79,11 +79,17 @@ public:
 	const Buildcost& buildcost() const {
 		return buildcost_;
 	}
+	Buildcost& mutable_buildcost() {
+		return buildcost_;
+	}
 
 	/**
 	 * Returned wares for dismantling
 	 */
 	const Buildcost& returns_on_dismantle() const {
+		return returns_on_dismantle_;
+	}
+	Buildcost& mutable_returns_on_dismantle() {
 		return returns_on_dismantle_;
 	}
 
@@ -93,11 +99,17 @@ public:
 	const Buildcost& enhancement_cost() const {
 		return enhancement_cost_;
 	}
+	Buildcost& mutable_enhancement_cost() {
+		return enhancement_cost_;
+	}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
 	const Buildcost& enhancement_returns_on_dismantle() const {
+		return enhancement_returns_on_dismantle_;
+	}
+	Buildcost& mutable_enhancement_returns_on_dismantle() {
 		return enhancement_returns_on_dismantle_;
 	}
 
@@ -131,6 +143,9 @@ public:
 	}
 	void set_enhanced_from(const DescriptionIndex& index) {
 		enhanced_from_ = index;
+	}
+	void set_vision_range(uint32_t v) {
+		vision_range_ = v;
 	}
 
 	/// Create a building of this type in the game. Calls init, which does
@@ -255,6 +270,14 @@ public:
 	virtual Coords get_position() const {
 		return position_;
 	}
+
+	/**
+	 * Is called right after the building is muted.
+	 *
+	 * param serial : the building serial
+	 */
+	boost::signals2::signal<void(uint32_t serial)> muted;
+
 	PositionList get_positions(const EditorGameBase&) const override;
 
 	std::string info_string(const InfoStringFormat& format);
@@ -353,6 +376,9 @@ public:
 	}
 	void set_mute_messages(bool m) {
 		mute_messages_ = m;
+		if (m) {
+			muted(serial());
+		}
 	}
 
 	void notify_worker_evicted(Game&, Worker&);
