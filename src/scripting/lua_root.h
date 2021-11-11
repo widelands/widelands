@@ -161,6 +161,7 @@ public:
 	 */
 
 	void do_modify_tribe(lua_State* L, const std::string& name, const std::string& property);
+	void do_modify_building(lua_State* L, const std::string&, const std::string&);
 	void do_modify_trainingsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_productionsite(lua_State* L, const std::string&, const std::string&);
 	void do_modify_militarysite(lua_State* L, const std::string&, const std::string&);
