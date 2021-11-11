@@ -128,7 +128,7 @@ protected:
 		hbox->add_space(kPadding);
 
 		UI::Dropdown<std::string>* dd = new UI::Dropdown<std::string>(
-		   hbox, "choose_fastplace", 0, 0, 100, 8, height, "", UI::DropdownType::kTextual,
+		   hbox, "choose_fastplace", 0, 0, 400, 8, height, "", UI::DropdownType::kTextual,
 		   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 
 		dd->add(_("(unused)"), "", nullptr, selection.empty());
@@ -200,12 +200,13 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
    : UI::Window(&parent.get_topmost_forefather(),
                 UI::WindowStyle::kFsMenu,
                 "keyboard_options",
-                // Size and position will be set by the main game window so that
-                // it can follow resolution change.
-                // This window's height is set smaller than the Options dialog to
-                // avoid looking too big and cluttered. The width is set quite big
-                // relative to the game window though, because we need lots of
-                // horizontal space for the fastplace tab's button labels.
+                /* Size and position will be set by the main game window so that
+                 * it can follow resolution change.
+                 * This window's height is set smaller than the Options dialog to
+                 * avoid looking too big and cluttered. The width is set quite big
+                 * relative to the game window though, because we need lots of
+                 * horizontal space for some button labels.
+                 */
                 0,
                 0,
                 0,

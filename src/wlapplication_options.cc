@@ -213,6 +213,7 @@ static const std::map<KeyboardShortcut, KeyboardShortcutInfo> kFastplaceDefaults
    FPM(43, 2),
    FPM(44, 3),
    FPM(45, 4),
+   FPM(46, 5),
 #undef FP
 #undef FPM
 };

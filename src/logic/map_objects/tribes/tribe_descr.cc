@@ -214,10 +214,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			std::unique_ptr<LuaTable> fp = table.get_table("fastplace");
 			for (const std::string& key : fp->keys<std::string>()) {
 				const std::string& val = fp->get_string(key);
-				if (!has_building(building_index(val))) {
-					throw GameDataError("tribe does not use building '%s'", val.c_str());
+				if (has_building(building_index(val))) {
+					fastplace_defaults_.emplace(key, val);
+				} else {
+					log_warn(
+					   "fastplace: tribe %s does not use building '%s'", name().c_str(), val.c_str());
 				}
-				fastplace_defaults_.emplace(key, val);
 			}
 		}
 

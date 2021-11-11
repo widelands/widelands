@@ -2235,7 +2235,6 @@ descriptions:new_tribe {
       fish_meat_replenisher = "frisians_aqua_farm",
       well = "frisians_well",
       farm_primary = "frisians_farm",
-      mill = "frisians_recycling_center",
       bakery = "frisians_bakery",
       brewery = "frisians_brewery",
       smokery = "frisians_smokery",
@@ -2259,6 +2258,7 @@ descriptions:new_tribe {
       misc2 = "frisians_collectors_house",
       misc3 = "frisians_beekeepers_house",
       misc4 = "frisians_charcoal_burners_house",
+      misc5 = "frisians_recycling_center",
    },
 }
 
