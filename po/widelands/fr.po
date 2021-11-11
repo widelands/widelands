@@ -7957,7 +7957,7 @@ msgstr "Déséquilibré"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Ferries"
-msgstr "fées"
+msgstr "Transbordeurs"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
