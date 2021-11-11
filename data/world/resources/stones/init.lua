@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-local pics_dir = path.dirname(__file__) .. "../pics/"
+local pics_dir = path.dirname(__file__)
 
 wl.Descriptions():new_resource_type{
    name = "resource_stones",

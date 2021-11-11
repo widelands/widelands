@@ -439,7 +439,7 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 		if (!c.second.empty()) {
 			index = addons_.size();
 			for (uint32_t i = 0; i < addons_.size(); ++i) {
-				if (addons_[i]->internal_name == c.second) {
+				if (addons_.at(i)->internal_name == c.second) {
 					index = i;
 					break;
 				}
@@ -447,6 +447,13 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 			if (index >= addons_.size()) {
 				throw wexception("Terrain %s defined by add-on %s which is not enabled",
 				                 type_name.c_str(), c.second.c_str());
+			}
+			++index;  // To avoid conflicts between add-on number 0 and official units.
+			if (index >= TerrainDescription::kMaxDitherLayerDisambiguator) {
+				// This should not happen in normal gameplay, and it is not a major problem:
+				verb_log_warn("You have enabled more than %d add-ons. "
+				              "With such a large number of add-ons, glitches may occur.",
+				              TerrainDescription::kMaxDitherLayerDisambiguator - 1);
 			}
 		}
 		terrains_->add(new TerrainDescription(table, *this, index));
