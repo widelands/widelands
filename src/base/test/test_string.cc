@@ -73,8 +73,9 @@ BOOST_AUTO_TEST_CASE(contain_start_end) {
 }
 
 BOOST_AUTO_TEST_CASE(join_strings) {
-	BOOST_CHECK_EQUAL(join(std::vector<std::string>{ "foo", "bar", "baz" }, " "), "foo bar baz");
-	BOOST_CHECK_EQUAL(join(std::set<std::string>{ "foo", "bar", "baz" }, "HelloWorld"), "barHelloWorldbazHelloWorldfoo");
+	BOOST_CHECK_EQUAL(join(std::vector<std::string>{"foo", "bar", "baz"}, " "), "foo bar baz");
+	BOOST_CHECK_EQUAL(join(std::set<std::string>{"foo", "bar", "baz"}, "HelloWorld"),
+	                  "barHelloWorldbazHelloWorldfoo");
 }
 
 BOOST_AUTO_TEST_CASE(trim_split_replace) {
