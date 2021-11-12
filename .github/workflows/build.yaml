@@ -248,10 +248,10 @@ jobs:
     strategy:
       matrix:
         config:
-          - --release
-          - --debug
+          - release
+          - debug
         compiler:
-          - --clang
+          - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macos-11
     steps:
@@ -270,7 +270,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.config }} ${{ matrix.compiler }}
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
