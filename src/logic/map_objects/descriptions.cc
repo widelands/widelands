@@ -499,8 +499,8 @@ void Descriptions::add_terrain_description(const std::string& type_name, const L
 			}
 		}
 		if (index >= addons_.size()) {
-			throw wexception("Terrain %s defined by add-on %s which is not enabled",
-			                 type_name.c_str(), c.second.c_str());
+			throw wexception("Terrain %s defined by add-on %s which is not enabled", type_name.c_str(),
+			                 c.second.c_str());
 		}
 		++index;  // To avoid conflicts between add-on number 0 and official units.
 	}
