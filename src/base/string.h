@@ -30,35 +30,21 @@
 void split(std::vector<std::string>& result, const std::string&, const std::set<char>&);
 
 /** Convert a string to lowercase. */
-inline std::string to_lower(const std::string& str) {
-	std::string result = str;
-	std::transform(result.begin(), result.end(), result.begin(), tolower);
-	return result;
-}
+std::string to_lower(const std::string&);
 
 /** Check whether two strings are equal regardless of case. */
-inline bool iequals(const std::string& a, const std::string& b) {
-	return to_lower(a) == to_lower(b);
-}
+bool iequals(const std::string&, const std::string&);
 
 /**
  * Check whether `str` starts with / ends with / contains `test`.
  * Can be case-sensitive or -insensitive depending on the last argument, default is sensitive.
  */
-inline bool
-starts_with(const std::string& str, const std::string& test, bool case_sensitive = true) {
-	const size_t s1 = str.size();
-	const size_t s2 = test.size();
-	return s1 >= s2 && 0 == (case_sensitive ? str.compare(0, s2, test) :
-                                             to_lower(str).compare(0, s2, to_lower(test)));
-}
-inline bool ends_with(const std::string& str, const std::string& test, bool case_sensitive = true) {
-	const size_t s1 = str.size();
-	const size_t s2 = test.size();
-	return s1 >= s2 && 0 == (case_sensitive ? str.compare(s1 - s2, s2, test) :
-                                             to_lower(str).compare(s1 - s2, s2, to_lower(test)));
-}
+bool starts_with(const std::string& str, const std::string& test, bool case_sensitive = true);
+bool ends_with(const std::string& str, const std::string& test, bool case_sensitive = true);
 inline bool contains(const std::string& str, const std::string& test, bool case_sensitive = true) {
+	// This could be made more efficient in the same way as `starts_with` and `ends_with`
+	// – especially the case-insensitive variant – but this makes for horrible readability.
+	// So, don't use this in performance-critical code.
 	return (case_sensitive ? str.find(test) : to_lower(str).find(to_lower(test))) !=
 	       std::string::npos;
 }

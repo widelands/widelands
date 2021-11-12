@@ -60,16 +60,22 @@ BOOST_AUTO_TEST_CASE(contain_start_end) {
 	BOOST_CHECK_EQUAL(contains(str2, str4, false), true);
 	BOOST_CHECK_EQUAL(contains(str1, str6, true), false);
 	BOOST_CHECK_EQUAL(contains(str1, str6, false), false);
+	BOOST_CHECK_EQUAL(contains(str6, str1, true), false);
+	BOOST_CHECK_EQUAL(contains(str6, str1, false), false);
 
 	BOOST_CHECK_EQUAL(starts_with(str1, str4, true), true);
 	BOOST_CHECK_EQUAL(starts_with(str1, str4, false), true);
 	BOOST_CHECK_EQUAL(starts_with(str2, str4, true), false);
 	BOOST_CHECK_EQUAL(starts_with(str2, str4, false), true);
+	BOOST_CHECK_EQUAL(starts_with(str6, str1, true), false);
+	BOOST_CHECK_EQUAL(starts_with(str6, str1, false), false);
 
 	BOOST_CHECK_EQUAL(ends_with(str1, str5, true), true);
 	BOOST_CHECK_EQUAL(ends_with(str1, str5, false), true);
 	BOOST_CHECK_EQUAL(ends_with(str2, str5, true), false);
 	BOOST_CHECK_EQUAL(ends_with(str2, str5, false), true);
+	BOOST_CHECK_EQUAL(ends_with(str6, str1, true), false);
+	BOOST_CHECK_EQUAL(ends_with(str6, str1, false), false);
 }
 
 BOOST_AUTO_TEST_CASE(join_strings) {

@@ -46,7 +46,7 @@ struct WidelandsMapLoader : public MapLoader {
 		return mol_.get();
 	}
 
-	static bool is_widelands_map(const std::string& filename) {
+	static inline bool is_widelands_map(const std::string& filename) {
 		return ends_with(filename, kWidelandsMapExtension, false);
 	}
 
