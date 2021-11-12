@@ -962,7 +962,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		descr->add_created_attribute(attribute_info);
 	}
 	for (const std::string& resourcename : workerprogram->collected_resources()) {
-		// Workers always collect 100, of the resource, and then find no more
+		// Workers always collect 100% of the resource, and then find no more
 		descr->add_collected_resource(resourcename, 100, 0);
 	}
 	for (const std::string& resourcename : workerprogram->created_resources()) {
@@ -1304,7 +1304,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 		if (1 < item_pair.second || 1 < produced_wares_.size()) {
 			ware_descname = bformat(
 			   /** TRANSLATORS: This is an item in a list of wares, e.g. "Produced 2x Coal": */
-			   /** TRANSLATORS:    %%1$i = "2" */
+			   /** TRANSLATORS:    %1$i = "2" */
 			   /** TRANSLATORS:    %2$s = "Coal" */
 			   _("%1$ix %2$s"), static_cast<unsigned int>(item_pair.second), ware_descname);
 		}

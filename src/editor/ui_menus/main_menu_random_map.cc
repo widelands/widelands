@@ -368,7 +368,7 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 	nr_edit_box_changed();  // Update ID String
 }
 
-// If the the sum of our landmass is < 0, or > 100, change the mountain value.
+// If the the sum of our landmass is < 0% or > 100% change the mountain value.
 // If the mountain value gets out of range, change the other values.
 void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 	int32_t sum_without_mountainsval = waterval_ + landval_ + wastelandval_;
@@ -381,7 +381,7 @@ void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 		++mountainsval_;
 	}
 
-	// Compensate if mountainsval got above 100, / below 0,
+	// Compensate if mountainsval got above 100% / below 0%
 	while (mountainsval_ < 0) {
 		if (clicked_button != ButtonId::kWasteland && wastelandval_ > 0) {
 			wastelandval_ -= 5;

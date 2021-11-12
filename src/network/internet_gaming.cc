@@ -118,7 +118,7 @@ void InternetGaming::initialize_connection() {
 		                  "your network setup is broken."));
 	}
 
-	// Of course not 100, true, but we just care about an answer at all, so we reset this tracker
+	// Of course not 100% true, but we just care about an answer at all, so we reset this tracker
 	lastping_ = time(nullptr);
 }
 

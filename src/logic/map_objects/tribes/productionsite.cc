@@ -1217,7 +1217,7 @@ void ProductionSite::update_actual_statistics(Duration duration, const bool prod
 	const Duration past_duration = kStatsEntireDuration - duration;
 	actual_percent_ = (actual_percent_ * past_duration.get() + produced * duration.get() * 1000) /
 	                  kStatsEntireDuration.get();
-	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 ,
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100%
 }
 
 }  // namespace Widelands

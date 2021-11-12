@@ -863,7 +863,7 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 		}
 	}
 
-	// Adjust used_percent if we don't have at least 5, for each remaining trainingsite
+	// Adjust used_percent if we don't have at least 5% for each remaining trainingsite
 	const float limit = 100 - trainingsites_without_percent * 5;
 	if (used_percent > limit) {
 		const int deductme = (used_percent - limit) / traingsites_with_percent.size();
@@ -878,8 +878,8 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 	// Now adjust for trainingsites that didn't have their max_percent set
 	if (trainingsites_without_percent > 0) {
 		int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
-		// We sometimes get below 100, in spite of the ceil call above.
-		// A total sum a bit above 100, is fine though, so we increment until it's big enough.
+		// We sometimes get below 100% in spite of the ceil call above.
+		// A total sum a bit above 100% is fine though, so we increment until it's big enough.
 		while ((used_percent + percent_to_use * trainingsites_without_percent) < 100) {
 			++percent_to_use;
 		}

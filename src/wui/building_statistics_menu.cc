@@ -689,7 +689,7 @@ void BuildingStatisticsMenu::update() {
                                              style_.medium_color() :
                                              style_.high_color();
 
-				/** TRANSLATORS: Percent in building statistics window, e.g. 85, */
+				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = bformat(_("%i%%"), percent);
 				set_labeltext(productivity_labels_[id], perc_str, color);
