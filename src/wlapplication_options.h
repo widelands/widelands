@@ -20,8 +20,7 @@
 #ifndef WL_WLAPPLICATION_OPTIONS_H
 #define WL_WLAPPLICATION_OPTIONS_H
 
-#include <functional>
-#include <set>
+#include <map>
 
 #include <SDL_keyboard.h>
 
@@ -78,6 +77,8 @@ void set_config_string(const std::string& name, const std::string& value);
 void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value);
+
+static const std::string kFastplaceGroupPrefix = "fastplace_";
 
 // Keyboard shortcuts. The order in which they are defined here
 // defines the order in which they appear in the options menu.
@@ -232,18 +233,9 @@ inline bool is_fastplace(const KeyboardShortcut id) {
  * @param code New keysym to use. Ignored when setting a fastplace shortcut to \c "".
  * @param conflict If not \c nullptr and a conflict occurs, this will
  *                 be filled in with the conflicting shortcut's ID.
- * @param fastplace_building For fastplace shortcuts, the new building name to use (may be \c "").
- *                           Must be \c nullptr for non-fastplace shortcuts.
- * @param building_to_tribename A lookup function that returns the internal
- *                              tribe name for a given building name.
- *                              \c "" means the tribe is not known.
  * @return The shortcut was changed successfully. If \c false, #conflict will contain the reason.
  */
-bool set_shortcut(KeyboardShortcut id,
-                  SDL_Keysym code,
-                  KeyboardShortcut* conflict,
-                  const std::string* fastplace_building,
-                  const std::function<std::string(const std::string&)>& building_to_tribename);
+bool set_shortcut(KeyboardShortcut id, SDL_Keysym code, KeyboardShortcut* conflict);
 
 /** Look up the keysym assigned to a given shortcut ID. */
 SDL_Keysym get_shortcut(KeyboardShortcut);
@@ -268,9 +260,8 @@ bool matches_keymod(uint16_t, uint16_t);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 
-/** Look up the fastplace building(s) assigned to a given shortcut. May return \c "" / \c {}. */
-const std::string& get_fastplace_shortcut(KeyboardShortcut);
-std::set<std::string> matching_fastplace_shortcut(SDL_Keysym);
+/** Look up the fastplace building assigned to a given shortcut. May return \c "". */
+std::string matching_fastplace_shortcut(SDL_Keysym, const std::string& tribename);
 
 /** Read all shortcuts from the config file, or replace all mappings with the default values. */
 void init_shortcuts(bool force_defaults = false);
@@ -286,9 +277,21 @@ KeyboardShortcut shortcut_from_string(const std::string&);
  * Return value will either be an empty string or have a trailing "+".
  */
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
-
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
+
+/** Set or get each tribe's fastplace building for a given fastplace group. */
+void set_fastplace_shortcuts(KeyboardShortcut, const std::map<std::string, std::string>&);
+const std::map<std::string, std::string>& get_fastplace_shortcuts(KeyboardShortcut);
+const std::string& get_fastplace_group_name(KeyboardShortcut);
+
+/** Initialize all fastplace group definitions, but do not overwrite existing mappings. */
+void init_fastplace_default_shortcuts(
+   const std::map<std::string /* key */,
+                  std::map<std::string /* tribe */, std::string /* building */>>&);
+
+/** Clear a shortcut. */
+void unset_shortcut(KeyboardShortcut);
 
 // Return values for changing value of spinbox, slider, etc.
 enum class ChangeType : int32_t {
