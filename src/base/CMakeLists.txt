@@ -1,3 +1,5 @@
+add_subdirectory(test)
+
 wl_library(base_macros
   SRCS
     macros.h
