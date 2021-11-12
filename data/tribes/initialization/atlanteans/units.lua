@@ -190,8 +190,6 @@
 --
 --    **scouts_house**:  The internal name of the tribe's scout's hut or house. This unit needs to be defined in the ``buildings`` table too.
 --
---    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
---
 --    **productionsite_worker_missing**: The string to display over this tribe's productionsites when 1 worker is missing.
 --
 --    **productionsite_worker_coming**: The string to display over this tribe's productionsites when 1 worker is coming.
@@ -199,6 +197,8 @@
 --    **productionsite_workers_missing**: The string to display over this tribe's productionsites when more than 1 worker is missing.
 --
 --    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
+--
+--    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
 --
@@ -208,6 +208,22 @@
 --          center = dirname .. "images/atlanteans/toolbar_center.png",
 --          right = dirname .. "images/atlanteans/toolbar_right.png", -- Will be tiled
 --          right_corner = dirname .. "images/atlanteans/toolbar_right_corner.png"
+--       }
+--
+--    **fastplace**: *Optional*. Assigns some of the tribe's buildings to the default fastplace shortcut groups.
+--    Valid groups are: ``warehouse port training_small training_large military_small_primary military_small_secondary
+--    military_medium_primary military_medium_secondary military_tower military_fortress woodcutter forester quarry
+--    building_materials_primary building_materials_secondary building_materials_tertiary fisher hunter
+--    fish_meat_replenisher well farm_primary farm_secondary mill bakery brewery smokery tavern smelting tool_smithy
+--    weapon_smithy armor_smithy weaving_mill shipyard ferry_yard scout barracks second_carrier charcoal mine_stone
+--    mine_coal mine_iron mine_gold agriculture_producer agriculture_consumer_primary agriculture_consumer_secondary
+--    industry_alternative industry_supporter terraforming``. Example:
+--
+--    .. code-block:: lua
+--
+--       fastplace = {
+--          warehouse = "atlanteans_warehouse",
+--          port = "atlanteans_port",
 --       }
 --
 --
@@ -1771,6 +1787,48 @@ descriptions:new_tribe {
    ship = "atlanteans_ship",
    ferry = "atlanteans_ferry",
    port = "atlanteans_port",
+
+   fastplace = {
+      warehouse = "atlanteans_warehouse",
+      port = "atlanteans_port",
+      training_small = "atlanteans_labyrinth",
+      training_large = "atlanteans_dungeon",
+      military_small_primary = "atlanteans_guardhouse",
+      military_small_secondary = "atlanteans_tower_small",
+      military_medium_primary = "atlanteans_guardhall",
+      military_tower = "atlanteans_tower",
+      military_fortress = "atlanteans_castle",
+      woodcutter = "atlanteans_woodcutters_house",
+      forester = "atlanteans_foresters_house",
+      quarry = "atlanteans_quarry",
+      building_materials_primary = "atlanteans_sawmill",
+      building_materials_secondary = "atlanteans_weaving_mill",
+      building_materials_tertiary = "atlanteans_spiderfarm",
+      fisher = "atlanteans_fishers_house",
+      hunter = "atlanteans_hunters_house",
+      fish_meat_replenisher = "atlanteans_fishbreeders_house",
+      well = "atlanteans_well",
+      farm_primary = "atlanteans_farm",
+      farm_secondary = "atlanteans_blackroot_farm",
+      mill = "atlanteans_mill",
+      bakery = "atlanteans_bakery",
+      smokery = "atlanteans_smokery",
+      smelting = "atlanteans_smelting_works",
+      tool_smithy = "atlanteans_toolsmithy",
+      weapon_smithy = "atlanteans_weaponsmithy",
+      armor_smithy = "atlanteans_armorsmithy",
+      weaving_mill = "atlanteans_gold_spinning_mill",
+      shipyard = "atlanteans_shipyard",
+      ferry_yard = "atlanteans_ferry_yard",
+      scout = "atlanteans_scouts_house",
+      barracks = "atlanteans_barracks",
+      second_carrier = "atlanteans_horsefarm",
+      charcoal = "atlanteans_charcoal_kiln",
+      mine_stone = "atlanteans_crystalmine",
+      mine_coal = "atlanteans_coalmine",
+      mine_iron = "atlanteans_ironmine",
+      mine_gold = "atlanteans_goldmine",
+   },
 }
 
 pop_textdomain()
