@@ -210,6 +210,9 @@ private:
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 	std::unique_ptr<DescriptionsCompatibilityTable> compatibility_table_;
 
+	/** Helper function for add_object_description(). */
+	void add_terrain_description(const std::string&, const LuaTable&);
+
 	uint32_t largest_workarea_;
 
 	/// Custom scenario tribes

@@ -431,33 +431,9 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	case MapObjectType::RESOURCE:
 		resources_->add(new ResourceDescription(table));
 		break;
-	case MapObjectType::TERRAIN: {
-		const DescriptionManager::RegistryCallerInfo& c =
-		   description_manager_->get_registry_caller_info(type_name);
-		assert(c.second.empty() ^ (c.first == DescriptionManager::RegistryCallerType::kWorldAddon));
-		uint32_t index = 0;
-		if (!c.second.empty()) {
-			index = addons_.size();
-			for (uint32_t i = 0; i < addons_.size(); ++i) {
-				if (addons_.at(i)->internal_name == c.second) {
-					index = i;
-					break;
-				}
-			}
-			if (index >= addons_.size()) {
-				throw wexception("Terrain %s defined by add-on %s which is not enabled",
-				                 type_name.c_str(), c.second.c_str());
-			}
-			++index;  // To avoid conflicts between add-on number 0 and official units.
-			if (index >= TerrainDescription::kMaxDitherLayerDisambiguator) {
-				// This should not happen in normal gameplay, and it is not a major problem:
-				verb_log_warn("You have enabled more than %d add-ons. "
-				              "With such a large number of add-ons, glitches may occur.",
-				              TerrainDescription::kMaxDitherLayerDisambiguator - 1);
-			}
-		}
-		terrains_->add(new TerrainDescription(table, *this, index));
-	} break;
+	case MapObjectType::TERRAIN:
+		add_terrain_description(type_name, table);
+		break;
 	case MapObjectType::CARRIER:
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
@@ -507,6 +483,28 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 
 	// Update status
 	description_manager_->mark_loading_done(type_name);
+}
+
+void Descriptions::add_terrain_description(const std::string& type_name, const LuaTable& table) {
+	const DescriptionManager::RegistryCallerInfo& c =
+	   description_manager_->get_registry_caller_info(type_name);
+	assert(c.second.empty() ^ (c.first == DescriptionManager::RegistryCallerType::kWorldAddon));
+	uint32_t index = 0;
+	if (!c.second.empty()) {
+		index = addons_.size();
+		for (uint32_t i = 0; i < addons_.size(); ++i) {
+			if (addons_.at(i)->internal_name == c.second) {
+				index = i;
+				break;
+			}
+		}
+		if (index >= addons_.size()) {
+			throw wexception("Terrain %s defined by add-on %s which is not enabled",
+			                 type_name.c_str(), c.second.c_str());
+		}
+		++index;  // To avoid conflicts between add-on number 0 and official units.
+	}
+	terrains_->add(new TerrainDescription(table, *this, index));
 }
 
 void Descriptions::add_tribe(const LuaTable& table) {

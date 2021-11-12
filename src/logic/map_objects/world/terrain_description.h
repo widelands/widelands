@@ -55,7 +55,13 @@ public:
 		const Image* icon;
 	};
 
+	/**
+	 * Arbitrary multiplicator for dither layers to prevent terrains from different
+	 * add-ons from sharing the same layer. This value puts a limit on the number
+	 * of add-ons that can safely be enabled at the same time.
+	 */
 	static constexpr uint16_t kMaxDitherLayerDisambiguator = 100;
+
 	TerrainDescription(const LuaTable& table,
 	                   Descriptions& descriptions,
 	                   uint16_t dither_layer_disambiguator);
