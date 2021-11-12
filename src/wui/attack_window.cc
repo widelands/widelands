@@ -282,9 +282,9 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		txt.set_tooltip(bformat(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		         .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
+		         .as_font_tag(_("Click on a soldier to remove him from the list of attackers")),
 		      as_listitem(_("Hold down Ctrl to remove all soldiers from the list"),
-		                  UI::FontStyle::kWuiTooltip) %
+		                  UI::FontStyle::kWuiTooltip),
 		      as_listitem(
 		         _("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
 		         UI::FontStyle::kWuiTooltip)));
@@ -298,9 +298,9 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		txt.set_tooltip(bformat(
 		   tooltip_format,
 		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		         .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
+		         .as_font_tag(_("Click on a soldier to add him to the list of attackers")),
 		      as_listitem(
-		         _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) %
+		         _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip),
 		      as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
 		                  UI::FontStyle::kWuiTooltip)));
 		mainbox_.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
@@ -429,7 +429,7 @@ bool AttackWindow::ListOfSoldiers::handle_mousemove(
 		             soldier->get_health_level(), soldier->descr().get_max_health_level(),
 		             soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
 		             soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
-		             soldier->get_evade_level(), soldier->descr().get_max_evade_level());
+		             soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 	} else {
 		set_tooltip(std::string());
 	}
