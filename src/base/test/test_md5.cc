@@ -17,6 +17,8 @@
  *
  */
 
+#include <cstring>
+
 #include <boost/test/unit_test.hpp>
 
 #include "base/macros.h"
