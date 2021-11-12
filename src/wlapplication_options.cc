@@ -1052,10 +1052,9 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 		} else {
 			++counter;
 			shortcuts_.emplace(
-			   k, KeyboardShortcutInfo(
-			         {KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-			         bformat("%scustom_%i", kFastplaceGroupPrefix, counter),
-			         [counter]() { return bformat(_("Fastplace #%i"), counter); }));
+			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+			                           bformat("%scustom_%i", kFastplaceGroupPrefix, counter),
+			                           [counter]() { return bformat(_("Fastplace #%i"), counter); }));
 		}
 	}
 }

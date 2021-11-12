@@ -722,8 +722,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 			assert(building != nullptr);
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry = unique_windows().get_registry(
-					   bformat("attack_%d", building->serial()));
+					UI::UniqueWindow::Registry& registry =
+					   unique_windows().get_registry(bformat("attack_%d", building->serial()));
 					registry.open_window = [this, &registry, building, &c, fastclick]() {
 						new AttackWindow(*this, registry, *building, c, fastclick);
 					};
