@@ -1,6 +1,5 @@
 #include "wui/savegametable.h"
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -22,9 +21,9 @@ const std::string SavegameTable::map_filename(const std::string& filename,
                                               const std::string& mapname) const {
 	std::string result = FileSystem::filename_without_ext(filename.c_str());
 
-	if (localize_autosave_ && boost::starts_with(result, kAutosavePrefix)) {
+	if (localize_autosave_ && starts_with(result, kAutosavePrefix)) {
 		std::vector<std::string> autosave_name;
-		boost::split(autosave_name, result, boost::is_any_of("_"));
+		split(autosave_name, result, {'_'});
 		if (autosave_name.empty() || autosave_name.size() < 3) {
 			/** TRANSLATORS: %1% is a map's name. */
 			result = (boost::format(_("Autosave: %1%")) % mapname).str();
@@ -32,7 +31,7 @@ const std::string SavegameTable::map_filename(const std::string& filename,
 			/** TRANSLATORS: %1% is a number, %2% a map's name. */
 			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname).str();
 		}
-	} else if (!(boost::starts_with(result, mapname))) {
+	} else if (!starts_with(result, mapname)) {
 		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
 		result = (boost::format(pgettext("filename_mapname", "%1%: %2%")) % result % mapname).str();
 	}
