@@ -23,7 +23,6 @@
 #include <regex>
 
 #include <SDL_messagebox.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -197,7 +196,7 @@ SDL_GLContext initialize(
 	                        const std::string& descname, const int required_major_version,
 	                        const int required_minor_version, const std::function<void()>& error) {
 		std::vector<std::string> version_vector;
-		boost::split(version_vector, version_string, boost::is_any_of(". "));
+		split(version_vector, version_string, {'.', ' '});
 		if (version_vector.size() >= 2) {
 			int major_version = 0, minor_version = 0;
 			try {

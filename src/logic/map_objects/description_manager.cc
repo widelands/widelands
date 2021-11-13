@@ -20,6 +20,7 @@
 #include "logic/map_objects/description_manager.h"
 
 #include <cassert>
+#include <cstring>
 #include <memory>
 
 #include "base/log.h"
