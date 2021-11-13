@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -57,15 +55,15 @@ constexpr int kDropdownMaximized = -1;
 void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
 	if (selected_locale->empty()) {
 		std::vector<std::string> parts;
-		boost::split(parts, current_locale, boost::is_any_of("."));
+		split(parts, current_locale, {'.'});
 		if (current_locale == parts[0]) {
 			*selected_locale = current_locale;
 		} else {
-			boost::split(parts, parts[0], boost::is_any_of("@"));
+			split(parts, parts[0], {'@'});
 			if (current_locale == parts[0]) {
 				*selected_locale = current_locale;
 			} else {
-				boost::split(parts, parts[0], boost::is_any_of("_"));
+				split(parts, parts[0], {'_'});
 				if (current_locale == parts[0]) {
 					*selected_locale = current_locale;
 				}
@@ -624,15 +622,15 @@ void Options::update_language_stats() {
 		// Empty locale means try system locale
 		if (locale.empty()) {
 			std::vector<std::string> parts;
-			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
+			split(parts, i18n::get_locale(), {'.'});
 			if (language_entries_.count(parts[0]) == 1) {
 				locale = parts[0];
 			} else {
-				boost::split(parts, parts[0], boost::is_any_of("@"));
+				split(parts, parts[0], {'@'});
 				if (language_entries_.count(parts[0]) == 1) {
 					locale = parts[0];
 				} else {
-					boost::split(parts, parts[0], boost::is_any_of("_"));
+					split(parts, parts[0], {'_'});
 					if (language_entries_.count(parts[0]) == 1) {
 						locale = parts[0];
 					}

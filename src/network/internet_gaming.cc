@@ -22,7 +22,6 @@
 #include <algorithm>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -159,7 +158,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	verb_log_info("InternetGaming: Sending login request.");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
-	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+	s.string(as_string(kInternetGamingProtocolVersion));
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
@@ -255,7 +254,7 @@ bool InternetGaming::check_password(const std::string& nick,
 	{
 		SendPacket s;
 		s.string(IGPCMD_CHECK_PWD);
-		s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+		s.string(as_string(kInternetGamingProtocolVersion));
 		s.string(nick);
 		s.string(build_id());
 		net->send(s);
@@ -505,7 +504,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
-			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
+			time_offset_ = stoi(packet.string()) - time(nullptr);
 			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
 			std::string temp =
 			   (boost::format(ngettext("Server time offset is %d second.",
@@ -540,7 +539,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetGame> old = gamelist_;
 			gamelist_.clear();
 			verb_log_info("InternetGaming: Received a game list update with %u items.", number);
@@ -590,7 +589,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
 			// Push admins/registred/IRC users to a temporary list and add them back later
 			clientlist_.clear();
@@ -887,7 +886,8 @@ void InternetGaming::send(const std::string& msg) {
 		return;
 	}
 
-	std::string trimmed = boost::algorithm::trim_copy(msg);
+	std::string trimmed = msg;
+	trim(trimmed);
 	if (trimmed.empty()) {
 		// Message is empty or only space characters. We don't want it either way
 		return;
@@ -905,7 +905,8 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		trimmed = boost::algorithm::trim_copy(msg.substr(space + 1));
+		trimmed = msg.substr(space + 1);
+		trim(trimmed);
 		if (trimmed.empty()) {
 			format_and_add_chat(
 			   "", "", true,
@@ -949,7 +950,8 @@ void InternetGaming::send(const std::string& msg) {
 
 		// get the cmd and the arg
 		cmd = temp.substr(0, space);
-		arg = boost::algorithm::trim_copy(temp.substr(space + 1));
+		arg = temp.substr(space + 1);
+		trim(arg);
 
 		if (!arg.empty() && cmd == "motd") {
 			SendPacket m;
@@ -1065,9 +1067,5 @@ bool InternetGaming::valid_username(const std::string& username) {
 		return false;
 	}
 	// Check whether the username is not "team" without regarding upper/lower case
-	// Note: The memory for the lowercase version must be allocated before calling transform()
-	std::string lowercase = username;
-	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
-	               [](unsigned char c) { return std::tolower(c); });
-	return lowercase != "team";
+	return to_lower(username) != "team";
 }

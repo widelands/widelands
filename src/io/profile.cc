@@ -23,10 +23,9 @@
 #include <cstdlib>
 #include <cstring>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "io/fileread.h"
@@ -126,12 +125,12 @@ uint32_t Section::Value::get_positive() const {
 
 bool Section::Value::get_bool() const {
 	for (char const* word : trueWords) {
-		if (boost::iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word)) {
 			return true;
 		}
 	}
 	for (char const* word : falseWords) {
-		if (boost::iequals(value_.get(), word)) {
+		if (iequals(value_.get(), word)) {
 			return false;
 		}
 	}
@@ -227,7 +226,7 @@ void Section::check_used() const {
 
 bool Section::has_val(char const* const name) const {
 	for (const Value& temp_value : values_) {
-		if (boost::iequals(temp_value.get_name(), name)) {
+		if (iequals(temp_value.get_name(), name)) {
 			return true;
 		}
 	}
@@ -243,7 +242,7 @@ bool Section::has_val(char const* const name) const {
  */
 Section::Value* Section::get_val(char const* const name) {
 	for (Value& value : values_) {
-		if (boost::iequals(value.get_name(), name)) {
+		if (iequals(value.get_name(), name)) {
 			value.mark_used();
 			return &value;
 		}
@@ -261,7 +260,7 @@ Section::Value* Section::get_val(char const* const name) {
 Section::Value* Section::get_next_val(char const* const name) {
 	for (Value& value : values_) {
 		if (!value.is_used()) {
-			if (!name || boost::iequals(value.get_name(), name)) {
+			if (!name || iequals(value.get_name(), name)) {
 				value.mark_used();
 				return &value;
 			}
@@ -272,7 +271,7 @@ Section::Value* Section::get_next_val(char const* const name) {
 
 Section::Value& Section::create_val(char const* const name, char const* const value) {
 	for (Value& temp_value : values_) {
-		if (boost::iequals(temp_value.get_name(), name)) {
+		if (iequals(temp_value.get_name(), name)) {
 			temp_value.set_string(value);
 			return temp_value;
 		}
@@ -585,7 +584,7 @@ void Profile::check_used() const {
  */
 Section* Profile::get_section(const std::string& name) {
 	for (Section& temp_section : sections_) {
-		if (boost::iequals(temp_section.get_name(), name.c_str())) {
+		if (iequals(temp_section.get_name(), name)) {
 			temp_section.mark_used();
 			return &temp_section;
 		}
@@ -626,7 +625,7 @@ Section& Profile::pull_section(char const* const name) {
 Section* Profile::get_next_section(char const* const name) {
 	for (Section& section : sections_) {
 		if (!section.is_used()) {
-			if (!name || boost::iequals(section.get_name(), name)) {
+			if (!name || iequals(section.get_name(), name)) {
 				section.mark_used();
 				return &section;
 			}
@@ -637,7 +636,7 @@ Section* Profile::get_next_section(char const* const name) {
 
 Section& Profile::create_section(char const* const name) {
 	for (Section& section : sections_) {
-		if (boost::iequals(section.get_name(), name)) {
+		if (iequals(section.get_name(), name)) {
 			return section;
 		}
 	}

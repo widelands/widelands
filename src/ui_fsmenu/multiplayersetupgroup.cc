@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -36,8 +34,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/mouse_constants.h"
-
-#define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
 constexpr int kPadding = 4;
 
@@ -278,12 +274,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			} else if (selected == "shared_in") {
 				state = PlayerSettings::State::kShared;
 			} else {
-				if (selected == AI_NAME_PREFIX "random") {
+				if (selected == kRandomAiName) {
 					n->set_player_ai(id_, "", true);
 				} else {
-					if (boost::starts_with(selected, AI_NAME_PREFIX)) {
+					if (starts_with(selected, kAiNamePrefix)) {
 						std::vector<std::string> parts;
-						boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
+						split(parts, selected, {kAiNameSeparator});
 						assert(parts.size() == 2);
 						n->set_player_ai(id_, parts[1], false);
 					} else {
@@ -324,11 +320,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || can_change_hidden_tribe)) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
 				type_dropdown_.add(_(impl->descname),
-				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+				                   (boost::format("%s%s") % kAiNamePrefix % impl->name).str(),
 				                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 			}
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
+			type_dropdown_.add(_("Random AI"), kRandomAiName,
 			                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 		}
 
@@ -366,11 +362,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					type_dropdown_.set_errored(_("No AI"));
 				} else {
 					if (player_setting.random_ai) {
-						type_dropdown_.select(AI_NAME_PREFIX "random");
+						type_dropdown_.select(kRandomAiName);
 					} else {
 						const AI::ComputerPlayer::Implementation* impl =
 						   AI::ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
+						type_dropdown_.select((boost::format("%s%s") % kAiNamePrefix % impl->name).str());
 					}
 				}
 			}
@@ -397,8 +393,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
                                             UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
-				n->set_player_shared(
-				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+				n->set_player_shared(id_, stoul(tribes_dropdown_.get_selected()));
 			} else {
 				n->set_player_tribe(id_, tribes_dropdown_.get_selected());
 			}
@@ -432,9 +427,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					      another player's starting position. */
 					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
 					      .str();
-					tribes_dropdown_.add(
-					   player_name, boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
-					   player_image, (i + 1) == player_setting.shared_in, player_name);
+					tribes_dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)),
+					                     player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
@@ -447,11 +441,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 
-			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
+			tribes_dropdown_.add(pgettext("tribe", "Random"), kRandom,
 			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
 			                     _("The tribe will be selected at random"));
 			if (player_setting.random_tribe) {
-				tribes_dropdown_.select("random");
+				tribes_dropdown_.select(kRandom);
 			} else {
 				tribes_dropdown_.select(player_setting.tribe);
 			}

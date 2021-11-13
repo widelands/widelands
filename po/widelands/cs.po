@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-07 02:52+0000\n"
-"PO-Revision-Date: 2021-10-13 02:48+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-11-10 04:08+0000\n"
+"PO-Revision-Date: 2021-11-12 17:35+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -269,8 +269,8 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -284,12 +284,12 @@ msgstr "Hlavní nabídka"
 msgid "Tools"
 msgstr "Nástroje"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -479,10 +479,10 @@ msgstr "Informace"
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -1394,8 +1394,8 @@ msgid ""
 "location."
 msgstr "Zvol nový rozměr mapy, pak klikni na mapu do místa, kde má být mapa rozdělena. Pokud se rozměr zvětšuje, nové sloupce/řádky budou vloženy doprava a dolů od místa rozdělení, tzn. na jih a východ od místa rozdělení. Pokud se mapa zmenšuje bude odebrán požadovaný počet sloupců/řádků, které jsou taktéž ve směru vpravo a dolů od místa rozdělení."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:311 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_basic/dropdown.cc:430 ../../src/ui_basic/dropdown.cc:438
@@ -4677,6 +4677,7 @@ msgstr "%1$s %2$s"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:191
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:378
+#: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
@@ -5001,7 +5002,7 @@ msgstr "[%1$s] %2$s: %3$s"
 #: ../../src/ui_fsmenu/keyboard_options.cc:274
 #, c-format
 msgid "%1$s ([%2$s] %3$s)"
-msgstr ""
+msgstr "%1$s ([%2$s] %3$s)"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:285
 msgid "Keyboard Shortcut Conflict"
@@ -6114,18 +6115,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Autoři"
@@ -6835,7 +6836,7 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr "Opravdu chceš zrušit probíhající výpravu?"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
-#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:510
+#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:523
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -7051,7 +7052,7 @@ msgid "Show work area"
 msgstr "Zobrazit pracovní oblast"
 
 #: ../../src/wui/buildingwindow.cc:666
-#: ../../src/wui/constructionsitewindow.cc:315
+#: ../../src/wui/constructionsitewindow.cc:334
 msgid "Start an expedition"
 msgstr "Zahájit výpravu"
 
@@ -7064,67 +7065,67 @@ msgstr "Zrušit výpravu"
 msgid "Building materials"
 msgstr "Stavební materiály"
 
-#: ../../src/wui/constructionsitewindow.cc:201
-msgid "Stopped"
-msgstr "Pozastaveno"
-
-#: ../../src/wui/constructionsitewindow.cc:202
+#: ../../src/wui/constructionsitewindow.cc:223
 msgid "Stop this building’s work after completion"
 msgstr "Zastav činnost této budovy, jakmile bude dokončena"
 
-#: ../../src/wui/constructionsitewindow.cc:241
+#: ../../src/wui/constructionsitewindow.cc:223
+msgid "Stopped"
+msgstr "Pozastaveno"
+
+#: ../../src/wui/constructionsitewindow.cc:261
 #: ../../src/wui/soldierlist.cc:437
 msgid "Prefer heroes"
 msgstr "Upřednostňovat hrdiny"
 
-#: ../../src/wui/constructionsitewindow.cc:244
+#: ../../src/wui/constructionsitewindow.cc:264
 #: ../../src/wui/soldierlist.cc:434
 msgid "Prefer rookies"
 msgstr "Upřednostňovat bačkory"
 
-#: ../../src/wui/constructionsitewindow.cc:274
+#: ../../src/wui/constructionsitewindow.cc:293
 #: ../../src/wui/warehousewindow.cc:150
 msgid "Normal policy"
 msgstr "Běžný provoz"
 
-#: ../../src/wui/constructionsitewindow.cc:278
+#: ../../src/wui/constructionsitewindow.cc:297
 #: ../../src/wui/warehousewindow.cc:151
 msgid "Preferably store selected wares here"
 msgstr "Přednostně skladovat vybrané suroviny zde"
 
-#: ../../src/wui/constructionsitewindow.cc:282
+#: ../../src/wui/constructionsitewindow.cc:301
 #: ../../src/wui/warehousewindow.cc:152
 msgid "Do not store selected wares here"
 msgstr "Neskladovat zde vybrané suroviny"
 
-#: ../../src/wui/constructionsitewindow.cc:286
+#: ../../src/wui/constructionsitewindow.cc:305
 #: ../../src/wui/warehousewindow.cc:153
 msgid "Remove selected wares from here"
 msgstr "Vystěhovat odtud označené suroviny"
 
-#: ../../src/wui/constructionsitewindow.cc:305
+#: ../../src/wui/constructionsitewindow.cc:324
 msgid "Ware settings to apply after construction"
 msgstr "Počáteční nastavení surovin u nově postavené budovy"
 
-#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/constructionsitewindow.cc:327
 msgid "Worker settings to apply after construction"
 msgstr "Počáteční nastavení dělníků u nově postavené budovy"
 
-#: ../../src/wui/constructionsitewindow.cc:316
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Start an expedition from this port after completion"
 msgstr "Zahaj výpravu z tohoto přístavu, jakmile bude dokončen"
 
-#: ../../src/wui/constructionsitewindow.cc:340
+#: ../../src/wui/constructionsitewindow.cc:359
 msgid "Settings to apply after construction"
 msgstr "Počáteční nastavení u nově postavené budovy"
 
-#: ../../src/wui/constructionsitewindow.cc:440
+#: ../../src/wui/constructionsitewindow.cc:453
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Snížit kapacitu. Současným přidržením Ctrl se nastaví na nejnižší úroveň"
 
-#: ../../src/wui/constructionsitewindow.cc:450
+#: ../../src/wui/constructionsitewindow.cc:463
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -7933,8 +7934,8 @@ msgstr "Pozastavit hru"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Námořní"

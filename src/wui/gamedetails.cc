@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -115,7 +114,7 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 		}
 	}
 	std::string name_list = richtext_escape(as_filename_list(gamedata));
-	boost::replace_all(name_list, "\n", "<br> • ");
+	replace_all(name_list, "\n", "<br> • ");
 
 	const std::string header_second_part(
 	   /** TRANSLATORS: This is the second part of "Selected %1% directory/directories and %2%" */
