@@ -455,10 +455,8 @@ void InteractivePlayer::think() {
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
 			msg_icon = "images/wui/menus/message_new.png";
-			msg_tooltip =
-			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
-			    nr_new_messages)
-			      .str();
+			msg_tooltip = bformat(
+			   ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
@@ -722,8 +720,8 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 			assert(building != nullptr);
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
-					UI::UniqueWindow::Registry& registry = unique_windows().get_registry(
-					   (boost::format("attack_%d") % building->serial()).str());
+					UI::UniqueWindow::Registry& registry =
+					   unique_windows().get_registry(bformat("attack_%d", building->serial()));
 					registry.open_window = [this, &registry, building, &c, fastclick]() {
 						new AttackWindow(*this, registry, *building, c, fastclick);
 					};
@@ -855,12 +853,11 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
-		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
+		DebugConsole::write(bformat("Player #%d does not exist.", n));
 		return;
 	}
 
-	DebugConsole::write(
-	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
+	DebugConsole::write(bformat("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
 	player_number_ = n;
 
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {

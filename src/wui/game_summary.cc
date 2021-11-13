@@ -206,10 +206,9 @@ void GameSummaryScreen::fill_data() {
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team
-		std::string teastr_ =
-		   p->team_number() == 0 ?
-            "—" :
-            (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
+		std::string teastr_ = p->team_number() == 0 ?
+                               "—" :
+                               bformat("%|1$u|", static_cast<unsigned int>(p->team_number()));
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;
@@ -250,10 +249,9 @@ void GameSummaryScreen::fill_data() {
 		}
 	} else {
 		if (team_won == 0) {
-			title_area_->set_text((boost::format(_("%s won!")) % won_name).str());
+			title_area_->set_text(bformat(_("%s won!"), won_name));
 		} else {
-			title_area_->set_text(
-			   (boost::format(_("Team %|1$u| won!")) % static_cast<unsigned int>(team_won)).str());
+			title_area_->set_text(bformat(_("Team %|1$u| won!"), static_cast<unsigned int>(team_won)));
 		}
 	}
 	if (!players_status.empty()) {
@@ -311,11 +309,11 @@ std::string GameSummaryScreen::parse_player_info(const std::string& info) {
 
 		const std::string key = pair.at(0);
 		if (key == "score") {
-			info_str += (boost::format("%1% : %2%\n") % _("Score") % pair.at(1)).str();
+			info_str += bformat("%1% : %2%\n", _("Score"), pair.at(1));
 		} else if (key == "team_score") {
-			info_str += (boost::format("%1% : %2%\n") % _("Team Score") % pair.at(1)).str();
+			info_str += bformat("%1% : %2%\n", _("Team Score"), pair.at(1));
 		} else if (key == "resign_reason") {
-			info_str += (boost::format("%1%\n") % pair.at(1)).str();
+			info_str += bformat("%1%\n", pair.at(1));
 		}
 	}
 

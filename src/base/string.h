@@ -26,6 +26,10 @@
 #include <string>
 #include <vector>
 
+#include <boost/format.hpp>
+
+#include "base/log.h"
+
 /** Split a string into substrings at all occurrences of any of the given delimiters. */
 void split(std::vector<std::string>& result, const std::string&, const std::set<char>&);
 
@@ -113,6 +117,33 @@ inline std::string as_string(const uint64_t t) {
 }
 inline std::string as_string(char c) {
 	return {c, '\0'};
+}
+
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+
+/** Wrapper functions for boost::format with better exception handling. */
+template <typename T0> void bformat_helper(boost::format& f, const T0& arg0) {
+	f % arg0;
+}
+template <typename T0, typename... T>
+void bformat_helper(boost::format& f, const T0& arg0, T... args) {
+	f % arg0;
+	bformat_helper(f, args...);
+}
+template <typename... T> std::string bformat(const std::string& format_string, T... args) {
+	try {
+		boost::format f(format_string);
+		bformat_helper(f, args...);
+		return f.str();
+	} catch (const std::exception& e) {
+		log_err("bformat error: A string contains invalid printf placeholders");
+		log_err("Error: %s", e.what());
+		log_err("String: %s", format_string.c_str());
+		throw;
+	}
 }
 
 #endif  // end of include guard: WL_BASE_STRING_H
