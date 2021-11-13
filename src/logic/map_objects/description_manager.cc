@@ -61,6 +61,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 			register_directory(file, filesystem, caller);
 		} else {
 			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
+				unsigned nr_registered_items = 0;
 				std::set<std::string> all_registered_items;
 				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
@@ -72,6 +73,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						                              attributes);
 						register_attributes(attributes, object_name);
 						all_registered_items.insert(object_name);
+						++nr_registered_items;
 					}
 				} else {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script(file);
@@ -82,13 +84,16 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes, caller);
 						register_attributes(attributes, object_name);
 						all_registered_items.insert(object_name);
+						++nr_registered_items;
 					}
 				}
-				if (all_registered_items.empty()) {
+				if (nr_registered_items == 0) {
 					log_warn("Registry file %s does not define any units", file.c_str());
 				} else if ((g_verbose || caller.first != RegistryCallerType::kDefault) &&
-				           all_registered_items.size() > 1) {
+				           nr_registered_items > 1) {
 					std::string all;
+					/* Arbitrary estimate to reduce number of memory reallocations */
+					all.reserve(nr_registered_items * 20);
 					for (const std::string& str : all_registered_items) {
 						all += ' ';
 						all += str;
@@ -97,8 +102,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 					         "    defines multiple (%u) units:%s\n"
 					         "    Defining multiple units in one file is error-prone. "
 					         "Every unit should be defined in a registry directory of its own.",
-					         file.c_str(), static_cast<unsigned>(all_registered_items.size()),
-					         all.c_str());
+					         file.c_str(), nr_registered_items, all.c_str());
 				}
 			}
 		}
