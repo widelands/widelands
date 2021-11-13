@@ -20,7 +20,7 @@
 #include "editor/tools/info_tool.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/descriptions.h"

@@ -83,6 +83,7 @@ wl_library(wui_common_gamedetails
     base_i18n
     base_log
     base_macros
+    base_string
     base_time_string
     game_io
     graphic
@@ -116,7 +117,7 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
-    base_log
+    base_string
     graphic
     graphic_image_cache
     graphic_minimap_renderer
@@ -304,6 +305,7 @@ wl_library(wui
     base_macros
     base_math
     base_multithreading
+    base_string
     base_time_string
     chat
     economy

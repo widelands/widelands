@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "base/warning.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -22,6 +22,7 @@
 #include <SDL_timer.h>
 
 #include "base/log.h"
+#include "base/string.h"
 
 ScopedTimer::ScopedTimer(const std::string& message, bool v) : message_(message), only_verbose_(v) {
 	startime_ = SDL_GetTicks();

@@ -24,7 +24,7 @@
 #include <regex>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 
 constexpr size_t kIndent = 23;
 constexpr size_t kTextWidth = 50;

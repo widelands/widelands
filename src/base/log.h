@@ -24,8 +24,6 @@
 #include <limits>
 #include <string>
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/times.h"
 
@@ -88,32 +86,4 @@ bool set_logging_dir(const std::string& homedir);
 // from. Use this only for test cases.
 void set_logging_dir();
 #endif
-
-// @CodeCheck allow boost::format
-// @CodeCheck allow boost::format
-// @CodeCheck allow boost::format
-// @CodeCheck allow boost::format
-
-/** Wrapper functions for boost::format with better exception handling. */
-template <typename T0> void bformat_helper(boost::format& f, const T0& arg0) {
-	f % arg0;
-}
-template <typename T0, typename... T>
-void bformat_helper(boost::format& f, const T0& arg0, T... args) {
-	f % arg0;
-	bformat_helper(f, args...);
-}
-template <typename... T> std::string bformat(const std::string& format_string, T... args) {
-	try {
-		boost::format f(format_string);
-		bformat_helper(f, args...);
-		return f.str();
-	} catch (const std::exception& e) {
-		log_err("bformat error: A string contains invalid printf placeholders");
-		log_err("Error: %s", e.what());
-		log_err("String: %s", format_string.c_str());
-		throw;
-	}
-}
-
 #endif  // end of include guard: WL_BASE_LOG_H

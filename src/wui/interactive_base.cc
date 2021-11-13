@@ -22,12 +22,12 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/multithreading.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -1617,7 +1617,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
-	const std::string cmd = boost::algorithm::join(args, " ");
+	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
 
@@ -1640,7 +1640,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
+	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {

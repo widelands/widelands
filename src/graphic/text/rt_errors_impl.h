@@ -20,7 +20,7 @@
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H
 
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/text/rt_errors.h"
 
 namespace RT {

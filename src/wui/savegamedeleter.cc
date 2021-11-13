@@ -2,6 +2,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"

@@ -1,9 +1,8 @@
 #include "wui/savegamedata.h"
 
-#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
 
@@ -31,7 +30,7 @@ void SavegameData::set_gametime(uint32_t input_gametime) {
 	gametime = gametimestring(input_gametime);
 }
 void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
-	nrplayers = boost::lexical_cast<std::string>(static_cast<unsigned int>(input_nrplayers));
+	nrplayers = as_string(static_cast<unsigned int>(input_nrplayers));
 }
 void SavegameData::set_mapname(const std::string& input_mapname) {
 	// TODO(Nordfriese): If the map was defined by an add-on, use that add-on's textdomain

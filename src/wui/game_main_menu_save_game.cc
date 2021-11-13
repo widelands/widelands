@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -254,10 +252,10 @@ void GameMainMenuSaveGame::pause_game(bool paused) {
  */
 bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(filename);
+	trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kSavegameExtension)) {
+	if (!ends_with(filename, kSavegameExtension, false)) {
 		filename += kSavegameExtension;
 	}
 

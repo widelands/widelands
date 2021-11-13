@@ -22,7 +22,7 @@
 #include <map>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 
 static std::map<std::string, std::string> ngmessages;
 

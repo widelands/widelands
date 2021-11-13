@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "io/fileread.h"

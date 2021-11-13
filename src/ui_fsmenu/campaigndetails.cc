@@ -19,7 +19,7 @@
 #include "ui_fsmenu/campaigndetails.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/scrollbar.h"
 

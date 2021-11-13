@@ -19,7 +19,7 @@
 
 #include "graphic/styles/font_style.h"
 
-#include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 
 namespace UI {

@@ -20,7 +20,7 @@
 #include "ui_fsmenu/keyboard_options.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/dropdown.h"

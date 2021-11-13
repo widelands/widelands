@@ -19,8 +19,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "config.h"

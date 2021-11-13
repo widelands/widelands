@@ -21,7 +21,7 @@
 
 #include <boost/format.hpp>
 
-#include "base/log.h"
+#include "base/string.h"
 #include "network/crypto.h"
 #include "ui_fsmenu/addons/manager.h"
 #include "wlapplication_options.h"

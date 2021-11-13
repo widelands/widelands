@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"

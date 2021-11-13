@@ -27,7 +27,7 @@
 #include <ctime>
 #include <memory>
 
-#include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"

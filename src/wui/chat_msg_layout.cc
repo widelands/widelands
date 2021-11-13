@@ -19,8 +19,6 @@
 
 #include "wui/chat_msg_layout.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "graphic/playercolor.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -39,7 +37,7 @@ std::string as_playercolor(const int16_t playern, const std::string& text) {
 std::string sanitize_message(const std::string& given_text) {
 	std::string result = richtext_escape(given_text);
 	// Preserve br tag
-	boost::replace_all(result, "&lt;br&gt;", "<br>");
+	replace_all(result, "&lt;br&gt;", "<br>");
 	return result;
 }
 

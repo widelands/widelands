@@ -21,7 +21,7 @@
 
 #include <memory>
 
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
 

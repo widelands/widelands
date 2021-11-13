@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/playercolor.h"
@@ -167,8 +167,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
-		                   p == nr_players);
+		no_of_players_.add(as_string(p), p, nullptr, p == nr_players);
 		no_of_players_.selected.connect([this]() { no_of_players_clicked(); });
 
 		UI::Box* row = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);

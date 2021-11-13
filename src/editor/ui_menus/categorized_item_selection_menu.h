@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "editor/editor_category.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "ui_basic/box.h"

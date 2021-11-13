@@ -29,6 +29,7 @@
 #include <map>
 
 #include "base/log.h"
+#include "base/string.h"
 #include "config.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"

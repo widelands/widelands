@@ -23,8 +23,6 @@
 #include <memory>
 #include <queue>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -56,10 +54,10 @@ namespace {
  * It is used by the renderer after the tags have been parsed.
  */
 void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+	replace_all(*text, "&gt;", ">");
+	replace_all(*text, "&lt;", "<");
+	replace_all(*text, "&nbsp;", " ");
+	replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 }  // namespace
 
@@ -1659,7 +1657,7 @@ public:
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
 				render_node_->set_desired_width(DesiredWidth(INFINITE_WIDTH, WidthUnit::kFill));
-			} else if (boost::algorithm::ends_with(width_string, "%")) {
+			} else if (ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {

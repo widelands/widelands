@@ -20,7 +20,7 @@
 #include "ui_fsmenu/menu.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "ui_basic/icon.h"
 #include "ui_fsmenu/main.h"

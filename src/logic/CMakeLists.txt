@@ -5,7 +5,7 @@ wl_library(logic_exceptions
   DEPENDS
     base_exceptions
     base_i18n
-    base_log
+    base_string
 )
 
 wl_library(logic_widelands_geometry
@@ -127,6 +127,7 @@ wl_library(logic_generic_save_handler
   DEPENDS
     base_i18n
     base_log
+    base_string
     base_time_string
     io_filesystem
     logic_filesystem_constants
@@ -164,6 +165,7 @@ wl_library(logic_map
     base_log
     base_macros
     base_scoped_timer
+    base_string
     build_info
     economy
     graphic
@@ -272,6 +274,7 @@ wl_library(logic
     base_multithreading
     base_random
     base_scoped_timer
+    base_string
     base_time_string
     base_times
     build_info

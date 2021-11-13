@@ -19,7 +19,7 @@
 
 #include "graphic/color.h"
 
-#include "base/log.h"
+#include "base/string.h"
 
 RGBColor::RGBColor() : RGBColor(0, 0, 0) {
 }

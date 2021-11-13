@@ -20,10 +20,10 @@
 #include "logic/save_handler.h"
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/scoped_timer.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
@@ -220,10 +220,10 @@ std::string SaveHandler::create_file_name(const std::string& dir,
 	// Append directory name.
 	std::string complete_filename = dir + FileSystem::file_separator() + filename;
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(complete_filename);
+	trim(complete_filename);
 
 	// Now check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, kSavegameExtension)) {
+	if (!ends_with(filename, kSavegameExtension, false)) {
 		complete_filename += kSavegameExtension;
 	}
 
