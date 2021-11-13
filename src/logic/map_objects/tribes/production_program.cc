@@ -904,7 +904,7 @@ Calls a program of the productionsite's main worker. Example:
       harvest = {
          "findobject=attrib:ripe_wheat radius:2",
          "walk=object",
-         "playsound=sound/farm/scythe priority:70, allow_multiple",
+         "playsound=sound/farm/scythe priority:70% allow_multiple",
          "animate=harvest duration:10s",
          "callobject=harvest",
          "animate=gather duration:4s",
@@ -1351,7 +1351,7 @@ then leave the site looking for employment. The produced workers are of the type
          "return=skipped unless economy needs atlanteans_horse",
          "consume=corn water",
          "sleep=duration:15s",
-         "playsound=sound/farm/horse priority:50, allow_multiple",
+         "playsound=sound/farm/horse priority:50% allow_multiple",
          "animate=working duration:15s",
          -- Create 2 horses
          "recruit=atlanteans_horse:2"
@@ -1437,19 +1437,19 @@ mine
          "consume=ration",
          "sleep=duration:45s",
          "animate=working duration:20s",
-          -- Search radius of 2 for iron. Will always find iron until 33.33, of it has been dug up.
-          -- After that, there's still a chance of 5, for finding iron.
-          -- If this fails, the workers still have a chance of 17, of gaining experience.
-         "mine=resource_iron radius:2 yield:33.33, when_empty:5, experience_on_fail:17%",
+          -- Search radius of 2 for iron. Will always find iron until 33.33% of it has been dug up.
+          -- After that, there's still a chance of 5% for finding iron.
+          -- If this fails, the workers still have a chance of 17% of gaining experience.
+         "mine=resource_iron radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
          "produce=iron_ore"
      }
 
      actions = {
          "sleep=duration:20s",
          "animate=working duration:20s",
-          -- Search radius of 1 for water. Will always find water until 100, of it has been drawn.
-          -- After that, there's still a chance of 65, for finding water.
-         "mine=resource_water radius:1 yield:100, when_empty:65%",
+          -- Search radius of 1 for water. Will always find water until 100% of it has been drawn.
+          -- After that, there's still a chance of 65% for finding water.
+         "mine=resource_water radius:1 yield:100% when_empty:65%",
          "produce=water"
      }
 */
@@ -1909,7 +1909,7 @@ an immovable. Example:
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:barbarians_shipconstruction unless object",
-         "playsound=sound/sawmill/sawmill priority:80, allow_multiple",
+         "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=work duration:500ms",
          "construct",
          "animate=work duration:5s",

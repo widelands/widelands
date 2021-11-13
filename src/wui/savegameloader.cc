@@ -99,7 +99,7 @@ void SavegameLoader::add_general_information(SavegameData& gamedata,
 void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormessage) const {
 	boost::replace_all(errormessage, "\n", "<br>");
 	gamedata.errormessage = bformat(
-	   "<p>%s</p><p>%s</p><p>%s</p>",
+	   "<p>%s</p><p>%s</p>",
 	   /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
 	   _("This file has the wrong format and can’t be loaded."
 	     " Maybe it was created with an older version of Widelands."),
