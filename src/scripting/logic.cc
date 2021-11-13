@@ -21,8 +21,7 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
+#include "base/string.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
@@ -54,7 +53,7 @@ void setup_for_editor_and_game(lua_State* L, Widelands::EditorGameBase* g) {
 
 // Can run script also from the map.
 std::unique_ptr<LuaTable> run_script_maybe_from_map(lua_State* L, const std::string& path) {
-	if (boost::starts_with(path, "map:")) {
+	if (starts_with(path, "map:")) {
 		return run_script(L, path.substr(4), get_egbase(L).map().filesystem());
 	}
 	return run_script(L, path, g_fs);

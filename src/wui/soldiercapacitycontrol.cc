@@ -99,7 +99,7 @@ void SoldierCapacityControl::think() {
 	const SoldierControl* soldiers = building_.soldier_control();
 	assert(soldiers != nullptr);
 	uint32_t const capacity = soldiers->soldier_capacity();
-	value_.set_text(boost::lexical_cast<std::string>(capacity));
+	value_.set_text(as_string(capacity));
 
 	bool const can_act = ibase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);

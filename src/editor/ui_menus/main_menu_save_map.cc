@@ -23,6 +23,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
@@ -141,7 +142,7 @@ void MainMenuSaveMap::clicked_ok() {
 		Widelands::Map* map = eia().egbase().mutable_map();
 		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
-			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
+			map->set_name(4 <= filename_size && ends_with(filename, kWidelandsMapExtension, false) ?
                           filename.substr(0, filename_size - 4) :
                           filename);
 		}
@@ -165,7 +166,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			std::string fullname = curdir_ + FileSystem::file_separator() + md.get_dirname();
 			// Trim it for preceding/trailing whitespaces in user input
-			boost::trim(fullname);
+			trim(fullname);
 			if (g_fs->file_exists(fullname)) {
 				const std::string s = _("A file or directory with that name already exists.");
 				UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
@@ -293,10 +294,10 @@ void MainMenuSaveMap::layout() {
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(filename);
+	trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kWidelandsMapExtension)) {
+	if (!ends_with(filename, kWidelandsMapExtension, false)) {
 		filename += kWidelandsMapExtension;
 	}
 

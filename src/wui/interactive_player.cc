@@ -19,8 +19,6 @@
 
 #include "wui/interactive_player.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/multithreading.h"
@@ -855,7 +853,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 		return;
 	}
 
-	int const n = boost::lexical_cast<int>(args[1]);
+	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
 		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
 		return;
