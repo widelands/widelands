@@ -53,8 +53,8 @@ bool ends_with(const std::string& str, const std::string& test, const bool case_
 	const char* a = str.c_str();
 	size_t len_a = 0;
 	// Go to the end of the `str` string
-	for (; *a; ++a, ++len_a)
-		;
+	for (; *a; ++a, ++len_a) {
+	}
 
 	// Go to the end of the `test` string
 	const char* b = test.c_str();
