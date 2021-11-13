@@ -385,8 +385,9 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					f.resource_amounts.d = fr.unsigned_8();
 					f.resource_amounts.r = fr.unsigned_8();
 
-					f.terrains.store({static_cast<DescriptionIndex>(fr.unsigned_32()),
-					                  static_cast<DescriptionIndex>(fr.unsigned_32())});
+					DescriptionIndex terrains_d = static_cast<DescriptionIndex>(fr.unsigned_32());
+					DescriptionIndex terrains_r = static_cast<DescriptionIndex>(fr.unsigned_32());
+					f.terrains.store({terrains_d, terrains_r});
 
 					f.r_e = static_cast<RoadSegment>(fr.unsigned_8());
 					f.r_se = static_cast<RoadSegment>(fr.unsigned_8());
