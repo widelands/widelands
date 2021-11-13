@@ -109,6 +109,7 @@ wl_library(widelands_ball_of_mud
     base_macros
     base_multithreading
     base_random
+    base_string
     base_time_string
     build_info
     editor

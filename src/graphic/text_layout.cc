@@ -21,20 +21,18 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 
 namespace {
-bool is_paragraph(const std::string& text) {
-	return boost::starts_with(text, "<p");
+inline bool is_paragraph(const std::string& text) {
+	return starts_with(text, "<p");
 }
 
-bool is_div(const std::string& text) {
-	return boost::starts_with(text, "<div");
+inline bool is_div(const std::string& text) {
+	return starts_with(text, "<div");
 }
 
 std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
@@ -78,9 +76,9 @@ int text_height(UI::FontStyle style, float scale) {
 
 std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;
-	boost::replace_all(text, "&", "&amp;");  // Must be performed first
-	boost::replace_all(text, ">", "&gt;");
-	boost::replace_all(text, "<", "&lt;");
+	replace_all(text, "&", "&amp;");  // Must be performed first
+	replace_all(text, ">", "&gt;");
+	replace_all(text, "<", "&lt;");
 	return text;
 }
 
@@ -92,8 +90,8 @@ void newlines_to_richtext(std::string& text) {
 	// \n\n or \n\n\n will give us 1 blank line,
 	// \n\n\n or \n\n\n\” will give us 2 blank lines etc.
 	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
-	boost::replace_all(text, "\n\n", "<br>&nbsp;<br>");
-	boost::replace_all(text, "\n", "<br>");
+	replace_all(text, "\n\n", "<br>&nbsp;<br>");
+	replace_all(text, "\n", "<br>");
 }
 
 /// Bullet list item

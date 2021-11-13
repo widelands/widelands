@@ -21,9 +21,8 @@
 
 #include <cstdlib>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
+#include "base/string.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -61,12 +60,12 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			std::string t = s.get_string("tags", "");
 			if (!t.empty()) {
 				std::vector<std::string> tags;
-				boost::split(tags, t, boost::is_any_of(","));
+				split(tags, t, {','});
 
 				for (std::vector<std::string>::const_iterator ci = tags.begin(); ci != tags.end();
 				     ++ci) {
 					std::string tn = *ci;
-					boost::trim(tn);
+					trim(tn);
 					map->add_tag(tn);
 				}
 			}
@@ -108,11 +107,10 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					SuggestedTeam team;
 
 					std::vector<std::string> players_string;
-					boost::split(players_string, team_string, boost::is_any_of(","));
+					split(players_string, team_string, {','});
 
 					for (const std::string& player : players_string) {
-						PlayerNumber player_number =
-						   static_cast<PlayerNumber>(boost::lexical_cast<unsigned int>(player.c_str()));
+						PlayerNumber player_number = static_cast<PlayerNumber>(stoul(player));
 						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}
@@ -174,7 +172,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	if (!map.get_background_theme().empty()) {
 		global_section.set_string("theme", map.get_background_theme());
 	}
-	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+	global_section.set_string("tags", join(map.get_tags(), ","));
 
 	std::string addons;
 	for (const auto& addon : egbase.enabled_addons()) {

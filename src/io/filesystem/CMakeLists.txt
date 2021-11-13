@@ -17,6 +17,7 @@ wl_library(io_filesystem
     base_i18n
     base_log
     base_macros
+    base_string
     graphic_text_layout
     io_stream
     third_party_minizip

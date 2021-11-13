@@ -25,6 +25,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/roadbase.h"
@@ -2110,17 +2111,16 @@ void Map::get_neighbour(const FCoords& f, Direction const dir, FCoords* const o)
 std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) {
 	std::unique_ptr<MapLoader> result;
 
-	std::string lower_filename = filename;
-	boost::algorithm::to_lower(lower_filename);
+	const std::string lower_filename = to_lower(filename);
 
 	try {
-		if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
+		if (ends_with(lower_filename, kWidelandsMapExtension)) {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
-		} else if (boost::algorithm::ends_with(lower_filename, kSavegameExtension)) {
+		} else if (ends_with(lower_filename, kSavegameExtension)) {
 			std::unique_ptr<FileSystem> sub_fs(g_fs->make_sub_file_system(filename));
 			result.reset(new WidelandsMapLoader(sub_fs->make_sub_file_system("map"), this));
-		} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
-		           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
+		} else if (ends_with(lower_filename, kS2MapExtension1) ||
+		           ends_with(lower_filename, kS2MapExtension2)) {
 			result.reset(new S2MapLoader(filename, *this));
 		}
 	} catch (const FileError& e) {

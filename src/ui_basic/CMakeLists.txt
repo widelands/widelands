@@ -70,6 +70,7 @@ wl_library(ui_basic
     base_log
     base_macros
     base_multithreading
+    base_string
     base_utf8
     graphic
     graphic_align

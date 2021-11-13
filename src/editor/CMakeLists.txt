@@ -95,6 +95,7 @@ wl_library(editor
     base_macros
     base_random
     base_scoped_timer
+    base_string
     build_info
     graphic
     graphic_fonthandler

@@ -23,8 +23,8 @@
 #include <functional>
 
 #include <boost/asio.hpp>
-#include <boost/lexical_cast.hpp>
 
+#include "base/string.h"
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -206,8 +206,7 @@ private:
  * protocol.
  */
 struct ProtocolException : public std::exception {
-	explicit ProtocolException(uint8_t code)
-	   : what_(boost::lexical_cast<std::string>(static_cast<unsigned int>(code))) {
+	explicit ProtocolException(uint8_t code) : what_(as_string(static_cast<unsigned int>(code))) {
 	}
 
 	/// \returns the command number of the received message
