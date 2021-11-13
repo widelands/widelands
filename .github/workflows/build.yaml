@@ -280,5 +280,5 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 10.5 AppImage
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
