@@ -5,6 +5,7 @@ wl_library(logic_exceptions
   DEPENDS
     base_exceptions
     base_i18n
+    base_string
 )
 
 wl_library(logic_widelands_geometry
@@ -126,6 +127,7 @@ wl_library(logic_generic_save_handler
   DEPENDS
     base_i18n
     base_log
+    base_string
     base_time_string
     io_filesystem
     logic_filesystem_constants

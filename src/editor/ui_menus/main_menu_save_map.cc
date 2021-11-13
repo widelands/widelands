@@ -182,8 +182,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 					log_err("directory creation failed in MainMenuSaveMap::"
 					        "clicked_make_directory: %s\n",
 					        e.what());
-					const std::string s =
-					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
+					const std::string s = bformat(_("Error while creating directory ‘%s’."), fullname);
 					UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
 					                      UI::WLMessageBox::MBoxType::kOk);
 					mbox.run<UI::Panel::Returncodes>();
@@ -276,8 +275,7 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
-	      .str());
+	   bformat(_("Current directory: %s"), (_("My Maps") + curdir_.substr(basedir_.size()))));
 }
 
 void MainMenuSaveMap::layout() {
@@ -306,10 +304,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s =
-		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
+		const std::string s = bformat(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                              FileSystem::fs_filename(filename.c_str()));
 		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), s,
 		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
