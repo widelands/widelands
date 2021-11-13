@@ -1,3 +1,5 @@
+add_subdirectory(test)
+
 wl_library(base_macros
   SRCS
     macros.h
@@ -109,6 +111,12 @@ wl_library(base_times
     io_fileread
 )
 
+
+wl_library(base_string
+  SRCS
+    string.h
+    string.cc
+)
 
 wl_library(base_math
   SRCS

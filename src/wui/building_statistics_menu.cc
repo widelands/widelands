@@ -19,8 +19,6 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "graphic/style_manager.h"
 #include "logic/game_data_error.h"

@@ -57,7 +57,7 @@ PortDockWaresDisplay::PortDockWaresDisplay(Panel* parent,
 
 std::string PortDockWaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	const uint32_t count = portdock_.count_waiting(get_type(), ware);
-	return boost::lexical_cast<std::string>(count);
+	return as_string(count);
 }
 
 }  // anonymous namespace

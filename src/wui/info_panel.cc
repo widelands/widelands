@@ -21,6 +21,7 @@
 
 #include <iomanip>
 #include <memory>
+#include <sstream>
 
 #include <SDL_timer.h>
 

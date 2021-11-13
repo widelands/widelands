@@ -83,7 +83,7 @@ public:
 	// applied.
 	std::shared_ptr<const UI::RenderedText> render(const std::string& text,
 	                                               uint16_t w = 0) override {
-		const std::string hash = boost::lexical_cast<std::string>(w) + text;
+		const std::string hash = as_string(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text == nullptr) {
 			// TODO(Nordfriese): There are two possibilities to make this function thread-safe.

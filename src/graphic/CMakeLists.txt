@@ -37,6 +37,7 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
+    base_string
     graphic_color
     graphic_image_cache
     graphic_surface
@@ -52,6 +53,7 @@ wl_library(graphic_build_texture_atlas
     build_texture_atlas.cc
   DEPENDS
     base_log
+    base_string
     graphic
     graphic_image_io
     graphic_surface
