@@ -69,12 +69,11 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					icons_all_.push_back(icon3);
 					icons_all_.push_back(icon4);
 					labels_all_.push_back(txt);
-					const std::string tt =
-					   bformat("%s<br>%s<br>%s<br>%s",              //
-					           bformat(_("Health: %u"), health),    //
-					           bformat(_("Attack: %u"), attack),    //
-					           bformat(_("Defense: %u"), defense),  //
-					           bformat(_("Evade: %u"), evade));
+					const std::string tt = bformat("%s<br>%s<br>%s<br>%s",              //
+					                               bformat(_("Health: %u"), health),    //
+					                               bformat(_("Attack: %u"), attack),    //
+					                               bformat(_("Defense: %u"), defense),  //
+					                               bformat(_("Evade: %u"), evade));
 					txt->set_handle_mouse(true);
 					icon1->set_tooltip(tt);
 					icon2->set_tooltip(tt);
