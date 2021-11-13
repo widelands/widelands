@@ -21,11 +21,10 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/multithreading.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
@@ -79,16 +78,16 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	if (type() != MapObjectType::CONSTRUCTIONSITE && type() != MapObjectType::DISMANTLESITE) {
 		try {
 			const std::string size = table.get_string("size");
-			if (boost::iequals(size, "small")) {
+			if (iequals(size, "small")) {
 				size_ = BaseImmovable::SMALL;
-			} else if (boost::iequals(size, "medium")) {
+			} else if (iequals(size, "medium")) {
 				size_ = BaseImmovable::MEDIUM;
-			} else if (boost::iequals(size, "big")) {
+			} else if (iequals(size, "big")) {
 				size_ = BaseImmovable::BIG;
-			} else if (boost::iequals(size, "mine")) {
+			} else if (iequals(size, "mine")) {
 				size_ = BaseImmovable::SMALL;
 				mine_ = true;
-			} else if (boost::iequals(size, "port")) {
+			} else if (iequals(size, "port")) {
 				size_ = BaseImmovable::BIG;
 				port_ = true;
 			} else {

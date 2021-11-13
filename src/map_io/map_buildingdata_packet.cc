@@ -759,7 +759,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.stack_.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
 				std::string program_name = fr.c_string();
-				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+				program_name = to_lower(program_name);
 				if (!pr_descr.programs().count(program_name)) {
 					log_warn("productionsite has unknown program \"%s\", replacing it with "
 					         "\"main\"\n",

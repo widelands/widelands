@@ -22,8 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
@@ -53,7 +51,7 @@ SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::
 	assert(g_fs->file_exists(file));
 
 	playercolor_mask_sheet_file = file;
-	boost::replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
+	replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
 	if (g_fs->file_exists(playercolor_mask_sheet_file)) {
 		has_playercolor_masks = true;
 	} else {

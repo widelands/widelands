@@ -127,19 +127,16 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 	bool loadable = true;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text(
-		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
-		    as_content(mapdata.localized_name, style_))
-		      .str());
+		name_label_.set_text(bformat("<rt>%s%s</rt>", as_heading(_("Directory"), style_, true),
+		                             as_content(mapdata.localized_name, style_)));
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
-		name_label_.set_text(
-		   (boost::format("<rt>%s%s</rt>") %
-		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"),
-		               style_, true) %
-		    as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_))
-		      .str());
+		name_label_.set_text(bformat(
+		   "<rt>%s%s</rt>",
+		   as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario") : _("Map"),
+		              style_, true),
+		   as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_)));
 
 		if (mapdata.localized_name != mapdata.name) {
 			if (localize_mapname) {
@@ -147,15 +144,13 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 				   /** TRANSLATORS: Tooltip in map description when translated map names are being
 				      displayed. */
 				   /** TRANSLATORS: %s is the English name of the map. */
-				   ((boost::format(_("The original name of this map: %s")) % mapdata.name).str());
+				   (bformat(_("The original name of this map: %s"), mapdata.name));
 			} else {
 				name_label_.set_tooltip
 				   /** TRANSLATORS: Tooltip in map description when map names are being displayed in
 				      English. */
 				   /** TRANSLATORS: %s is the localized name of the map. */
-				   ((boost::format(_("The name of this map in your language: %s")) %
-				     mapdata.localized_name)
-				       .str());
+				   (bformat(_("The name of this map in your language: %s"), mapdata.localized_name));
 			}
 		} else {
 			name_label_.set_tooltip("");
@@ -170,37 +165,32 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
                forms here, please let us know. */
                _("Authors");
 		std::string description = as_heading(authors_heading, style_);
-		description =
-		   (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_))
-		      .str();
+		description = bformat("%s%s", description, as_content(mapdata.authors.get_names(), style_));
 
 		std::vector<std::string> tags;
 		for (const auto& tag : mapdata.tags) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_heading(_("Tags"), style_)).str();
-		description = (boost::format("%s%s") % description %
-		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
-		                 .str();
+		description = bformat("%s%s", description, as_heading(_("Tags"), style_));
+		description =
+		   bformat("%s%s", description,
+		           as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_));
 
 		AddOns::AddOnConflict addons = AddOns::check_requirements(mapdata.required_addons);
 		loadable = !addons.second;
 
-		description = (boost::format("%s%s") % description %
-		               as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true))
-		                 .str();
+		description =
+		   bformat("%s%s", description,
+		           as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true));
 
-		description =
-		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();
-		description =
-		   (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
+		description = bformat("%s%s", description, as_heading(_("Description"), style_));
+		description = bformat("%s%s", description, as_content(mapdata.description, style_));
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_heading(_("Hint"), style_)).str();
-			description =
-			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
+			description = bformat("%s%s", description, as_heading(_("Hint"), style_));
+			description = bformat("%s%s", description, as_content(mapdata.hint, style_));
 		}
 
 		// Render minimap
@@ -223,11 +213,8 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 					}
 				} catch (const Widelands::GameDataError& e) {
 					// Put error message on top for better visibility
-					description =
-					   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
-					description =
-					   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
-					      .str();
+					description = bformat("%s%s", as_content(e.what(), style_), description);
+					description = bformat("%s%s", as_heading(_("Game data error"), style_), description);
 					loadable = false;
 				}
 			}

@@ -21,10 +21,9 @@
 
 #include <csignal>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/string.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -43,7 +42,7 @@ void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string&
 	assert(map_fs);
 	target_fs.ensure_directory_exists(path);
 	for (const std::string& script : map_fs->filter_directory(
-	        path, [](const std::string& fn) { return boost::ends_with(fn, ".lua"); })) {
+	        path, [](const std::string& fn) { return ends_with(fn, ".lua"); })) {
 		size_t length;
 		void* input_data = map_fs->load(script, length);
 		target_fs.write(script, input_data, length);
@@ -65,7 +64,7 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 			const std::string filename(FileSystem::fs_filename(file.c_str()));
 			// TODO(GunChleoc): Savegame compatibility, forbid "helptexts.lua" after v1.0
 			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
-			    boost::ends_with(filename, ".png")) {
+			    ends_with(filename, ".png")) {
 				size_t length;
 				void* input_data = map_fs->load(file, length);
 				target_fs.write(file, input_data, length);
