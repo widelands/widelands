@@ -1,6 +1,5 @@
 #include "wui/savegamedata.h"
 
-
 #include "base/i18n.h"
 #include "base/string.h"
 #include "base/time_string.h"

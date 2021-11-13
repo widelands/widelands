@@ -172,8 +172,7 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	// AIs
 	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-			dropdown_.add(_(impl->descname),
-			              bformat("%s%s", kAiNamePrefix, impl->name),
+			dropdown_.add(_(impl->descname), bformat("%s%s", kAiNamePrefix, impl->name),
 			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
