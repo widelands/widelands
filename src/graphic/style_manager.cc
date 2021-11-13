@@ -155,8 +155,7 @@ StyleManager::StyleManager() {
 	scrollbarstyles_.clear();
 
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(
-	   lua.run_script((boost::format("%1%init.lua") % template_dir()).str()));
+	std::unique_ptr<LuaTable> table(lua.run_script(bformat("%1%init.lua", template_dir())));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
@@ -383,10 +382,7 @@ const RGBColor& StyleManager::minimap_icon_frame() const {
 }
 
 std::string StyleManager::color_tag(const std::string& text, const RGBColor& color) {
-	boost::format f("<font color=%s>%s</font>");
-	f % color.hex_value();
-	f % text;
-	return f.str();
+	return bformat("<font color=%s>%s</font>", color.hex_value(), text);
 }
 
 // Fill the maps

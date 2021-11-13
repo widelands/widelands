@@ -24,8 +24,6 @@
 #include <memory>
 #include <set>
 
-#include <boost/format.hpp>
-
 #include "base/string.h"
 #include "base/vector.h"
 #include "scripting/lua.h"
@@ -145,7 +143,7 @@ public:
 		std::unique_ptr<LuaTable> table(get_table(key));
 		std::vector<ValueType> pts = table->array_entries<ValueType>();
 		if (pts.size() != 2) {
-			throw LuaError((boost::format("Expected 2 entries, but got %d.") % pts.size()).str());
+			throw LuaError(bformat("Expected 2 entries, but got %d.", pts.size()));
 		}
 		result.x = pts[0];
 		result.y = pts[1];
