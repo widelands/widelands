@@ -19,9 +19,9 @@
 
 #include "graphic/text/textstream.h"
 
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 
 namespace RT {
@@ -132,7 +132,7 @@ std::string TextStream::till_any(std::string chars) {
 	consume(j - started_at);
 
 	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
-	boost::replace_all(rv, "\\\\", "\\");
+	replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }

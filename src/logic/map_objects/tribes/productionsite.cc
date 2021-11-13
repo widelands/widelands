@@ -164,7 +164,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	// Get programs
 	items_table = table.get_table("programs");
 	for (std::string program_name : items_table->keys<std::string>()) {
-		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		program_name = to_lower(program_name);
 		if (programs_.count(program_name)) {
 			throw GameDataError("Program '%s' has already been declared for productionsite '%s'",
 			                    program_name.c_str(), name().c_str());

@@ -22,12 +22,12 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/multithreading.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -53,6 +53,7 @@
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
@@ -989,6 +990,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 				case UI::Panel::SaveType::kConfigureEconomy:
 					w = EconomyOptionsWindow::load(fr, *this, mol);
 					break;
+				case UI::Panel::SaveType::kAttackWindow:
+					w = &AttackWindow::load(fr, *this, mol);
+					break;
 				default:
 					throw Widelands::GameDataError(
 					   "Invalid panel save type %u", static_cast<unsigned>(type));
@@ -1616,7 +1620,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
-	const std::string cmd = boost::algorithm::join(args, " ");
+	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
 
@@ -1639,7 +1643,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
+	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {

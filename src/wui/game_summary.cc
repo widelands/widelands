@@ -20,8 +20,8 @@
 #include "wui/game_summary.h"
 
 #include <SDL_mouse.h>
-#include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "base/time_string.h"
 #include "graphic/playercolor.h"
 #include "logic/game.h"
@@ -288,22 +288,28 @@ void GameSummaryScreen::player_selected(uint32_t entry_index) {
 	layout();
 }
 
-std::string GameSummaryScreen::parse_player_info(std::string info) {
-	using StringSplitIterator = boost::split_iterator<std::string::iterator>;
+std::string GameSummaryScreen::parse_player_info(const std::string& info) {
 	if (info.empty()) {
-		return info;
+		return std::string();
 	}
-	// Iterate through all key=value pairs
-	StringSplitIterator substring_it =
-	   boost::make_split_iterator(info, boost::first_finder(";", boost::is_equal()));
-	std::string info_str;
-	while (substring_it != StringSplitIterator()) {
-		std::string substring = boost::copy_range<std::string>(*substring_it);
-		std::vector<std::string> pair;
-		boost::split(pair, substring, boost::is_any_of("="));
-		assert(pair.size() == 2);
 
-		std::string key = pair.at(0);
+	std::vector<std::string> data;
+	split(data, info, {';'});
+	std::string info_str;
+
+	for (const std::string& substring : data) {
+		std::vector<std::string> pair;
+		split(pair, substring, {'='});
+		if (pair.size() != 2) {
+			log_warn("Malformed player info string: "
+			         "Expected 2 entries, found %" PRIuS ".\n"
+			         "  Substring is: %s\n"
+			         "  Full data is: %s",
+			         pair.size(), substring.c_str(), info.c_str());
+			continue;
+		}
+
+		const std::string key = pair.at(0);
 		if (key == "score") {
 			info_str += (boost::format("%1% : %2%\n") % _("Score") % pair.at(1)).str();
 		} else if (key == "team_score") {
@@ -311,7 +317,7 @@ std::string GameSummaryScreen::parse_player_info(std::string info) {
 		} else if (key == "resign_reason") {
 			info_str += (boost::format("%1%\n") % pair.at(1)).str();
 		}
-		++substring_it;
 	}
+
 	return info_str;
 }

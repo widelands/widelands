@@ -19,9 +19,8 @@
 
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -101,9 +100,9 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const bool is_legal_filename = FileSystem::is_legal_filename(text);
 	// Prevent the user from creating directory names that the game would
 	// try to interpret as maps
-	const bool has_map_extension = boost::iends_with(text, kWidelandsMapExtension) ||
-	                               boost::iends_with(text, kS2MapExtension1) ||
-	                               boost::iends_with(text, kS2MapExtension2);
+	const bool has_map_extension = ends_with(text, kWidelandsMapExtension, false) ||
+	                               ends_with(text, kS2MapExtension1, false) ||
+	                               ends_with(text, kS2MapExtension2, false);
 	ok_button_.set_enabled(is_legal_filename && !has_map_extension);
 	edit_.set_tooltip(is_legal_filename ?
                         (has_map_extension ? _("This extension is reserved!") : "") :
