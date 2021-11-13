@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-28 02:42+0000\n"
+"POT-Creation-Date: 2021-11-10 04:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -243,8 +243,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:318
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -258,10 +258,10 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -451,9 +451,9 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
+#. * shown
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
 #: ../../src/wui/interactive_gamebase.cc:226
@@ -1153,7 +1153,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:270
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
@@ -1988,19 +1988,19 @@ msgstr ""
 msgid "Completed %s"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:352
+#: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:435
+#: ../../src/logic/map_objects/tribes/productionsite.cc:430
 #: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1086
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1135
 msgid "Can’t find any more resources!"
 msgstr ""
 
@@ -2298,12 +2298,12 @@ msgid "Saving game…"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:178
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:192
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr ""
 
@@ -4541,6 +4541,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:191
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:378
+#: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
 msgstr ""
@@ -6682,7 +6683,7 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
-#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:510
+#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:523
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -6816,7 +6817,7 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr ""
 
@@ -6894,7 +6895,7 @@ msgid "Show work area"
 msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:666
-#: ../../src/wui/constructionsitewindow.cc:315
+#: ../../src/wui/constructionsitewindow.cc:334
 msgid "Start an expedition"
 msgstr ""
 
@@ -6907,65 +6908,65 @@ msgstr ""
 msgid "Building materials"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:201
-msgid "Stopped"
-msgstr ""
-
-#: ../../src/wui/constructionsitewindow.cc:202
+#: ../../src/wui/constructionsitewindow.cc:223
 msgid "Stop this building’s work after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:241 ../../src/wui/soldierlist.cc:437
+#: ../../src/wui/constructionsitewindow.cc:223
+msgid "Stopped"
+msgstr ""
+
+#: ../../src/wui/constructionsitewindow.cc:261 ../../src/wui/soldierlist.cc:437
 msgid "Prefer heroes"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:244 ../../src/wui/soldierlist.cc:434
+#: ../../src/wui/constructionsitewindow.cc:264 ../../src/wui/soldierlist.cc:434
 msgid "Prefer rookies"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:274
+#: ../../src/wui/constructionsitewindow.cc:293
 #: ../../src/wui/warehousewindow.cc:150
 msgid "Normal policy"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:278
+#: ../../src/wui/constructionsitewindow.cc:297
 #: ../../src/wui/warehousewindow.cc:151
 msgid "Preferably store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:282
+#: ../../src/wui/constructionsitewindow.cc:301
 #: ../../src/wui/warehousewindow.cc:152
 msgid "Do not store selected wares here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:286
+#: ../../src/wui/constructionsitewindow.cc:305
 #: ../../src/wui/warehousewindow.cc:153
 msgid "Remove selected wares from here"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:305
+#: ../../src/wui/constructionsitewindow.cc:324
 msgid "Ware settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/constructionsitewindow.cc:327
 msgid "Worker settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:316
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Start an expedition from this port after completion"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:340
+#: ../../src/wui/constructionsitewindow.cc:359
 msgid "Settings to apply after construction"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:440
+#: ../../src/wui/constructionsitewindow.cc:453
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr ""
 
-#: ../../src/wui/constructionsitewindow.cc:450
+#: ../../src/wui/constructionsitewindow.cc:463
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -7209,8 +7210,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -7237,8 +7238,8 @@ msgstr ""
 msgid "Are you sure you wish to exit this game?"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr ""
 
@@ -8035,12 +8036,12 @@ msgstr ""
 msgid "Terminate the employment of the selected worker"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:247
 msgid "(coming)"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:246
-#: ../../src/wui/productionsitewindow.cc:308
+#: ../../src/wui/productionsitewindow.cc:247
+#: ../../src/wui/productionsitewindow.cc:309
 msgid "(vacant)"
 msgstr ""
 
