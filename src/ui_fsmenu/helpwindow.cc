@@ -44,7 +44,7 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
                 0,
                 width,
                 height,
-                (boost::format(_("Help: %s")) % caption).str()),
+                bformat(_("Help: %s"), caption)),
      textarea_(
         new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;

@@ -20,11 +20,10 @@
 #ifndef WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 #define WL_EDITOR_UI_MENUS_CATEGORIZED_ITEM_SELECTION_MENU_H
 
-#include "boost/format.hpp"
-
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editor_category.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "ui_basic/box.h"
@@ -172,14 +171,14 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 		}
 	}
 	if (buf.size() > max_string_size) {
-		/** TRANSLATORS: %s are the currently selected items in an editor tool*/
-		buf = (boost::format(_("Current: %s …")) % buf).str();
+		/** TRANSLATORS: %s are the currently selected items in an editor tool */
+		buf = bformat(_("Current: %s …"), buf);
 	} else if (buf.empty()) {
-		/** TRANSLATORS: Help text in an editor tool*/
+		/** TRANSLATORS: Help text in an editor tool */
 		buf = _("Click to select an item. Use the Ctrl key to select multiple items.");
 	} else {
-		/** TRANSLATORS: %s are the currently selected items in an editor tool*/
-		buf = (boost::format(_("Current: %s")) % buf).str();
+		/** TRANSLATORS: %s are the currently selected items in an editor tool */
+		buf = bformat(_("Current: %s"), buf);
 	}
 	current_selection_names_.set_text(buf);
 }

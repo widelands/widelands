@@ -25,10 +25,9 @@
 #include <set>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -443,9 +442,9 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
-		   KeyboardShortcutInfo(                                                                     \
-		      {KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key), "editor_toolsize" #radius, \
-		      []() { return (boost::format(_("Set Toolsize to %d")) % radius).str(); })              \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
+		                        "editor_toolsize" #radius,                                           \
+		                        []() { return bformat(_("Set Toolsize to %d"), radius); })           \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -667,12 +666,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return (boost::format(_("Set Landmark #%d")) % i).str(); })},      \
+	                      []() { return bformat(_("Set Landmark #%d"), i); })},                     \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
 		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return (boost::format(_("Go To Landmark #%d")) % i).str(); }) \
+		                        []() { return bformat(_("Go To Landmark #%d"), i); })                \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -935,7 +934,7 @@ std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
 	// because all current uses need it anyway, and extra checks can
 	// be avoided both here and in the users this way
 	for (const std::string& m : mods) {
-		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
+		result = bformat(_("%1$s+%2$s"), m, result);
 	}
 
 	return rt_escape ? richtext_escape(result) : result;
@@ -1031,7 +1030,7 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	}
 
 	std::string result =
-	   (boost::format(_("%1$s%2$s")) % keymod_string_for(sym.mod, false) % key_name(sym.sym)).str();
+	   bformat(_("%1$s%2$s"), keymod_string_for(sym.mod, false), key_name(sym.sym));
 
 	return rt_escape ? richtext_escape(result) : result;
 }
@@ -1054,10 +1053,9 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 		} else {
 			++counter;
 			shortcuts_.emplace(
-			   k, KeyboardShortcutInfo(
-			         {KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
-			         (boost::format("%scustom_%i") % kFastplaceGroupPrefix % counter).str(),
-			         [counter]() { return (boost::format(_("Fastplace #%i")) % counter).str(); }));
+			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+			                           bformat("%scustom_%i", kFastplaceGroupPrefix, counter),
+			                           [counter]() { return bformat(_("Fastplace #%i"), counter); }));
 		}
 	}
 }

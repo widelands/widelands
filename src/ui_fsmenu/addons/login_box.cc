@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/string.h"
 #include "network/crypto.h"
 #include "ui_fsmenu/addons/manager.h"
 #include "wlapplication_options.h"
@@ -73,12 +74,10 @@ AddOnsLoginBox::AddOnsLoginBox(AddOnsCtrl& ctrl)
 	   new UI::MultilineTextarea(&box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "",
 	                             UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
-	m->set_text(
-	   (boost::format(
-	       _("In order to use a registered account, you need an account on the Widelands website. "
-	         "Please log in at %s and set an online gaming password on your profile page.")) %
-	    "\n\nhttps://widelands.org/accounts/register/\n\n")
-	      .str());
+	m->set_text(bformat(
+	   _("In order to use a registered account, you need an account on the Widelands website. "
+	     "Please log in at %s and set an online gaming password on your profile page."),
+	   "\n\nhttps://widelands.org/accounts/register/\n\n"));
 
 	left_box_.add_inf_space();
 	left_box_.add(

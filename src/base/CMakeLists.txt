@@ -35,6 +35,7 @@ wl_library(base_i18n
     base_log
     base_macros
     base_multithreading
+    base_string
     io_filesystem
     logic_filesystem_constants
     third_party_gettext
@@ -90,6 +91,7 @@ wl_library(base_scoped_timer
   DEPENDS
     base_log
     base_macros
+    base_string
 )
 
 
@@ -116,6 +118,8 @@ wl_library(base_string
   SRCS
     string.h
     string.cc
+  DEPENDS
+    base_log
 )
 
 wl_library(base_math
