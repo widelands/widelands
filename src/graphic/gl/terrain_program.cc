@@ -19,6 +19,8 @@
 
 #include "graphic/gl/terrain_program.h"
 
+#include <atomic>
+
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"

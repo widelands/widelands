@@ -521,7 +521,7 @@ private:
 	Panel* mousein_child_;  //  child panel that the mouse is in
 	Panel* focus_;          //  keyboard focus
 
-	std::atomic_uint32_t flags_;
+	std::atomic<uint32_t> flags_;
 
 	/**
 	 * The outer rectangle is defined by (x_, y_, w_, h_)

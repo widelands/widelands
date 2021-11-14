@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <atomic>
 #include <cassert>
 #include <cstdlib>
 #include <memory>
