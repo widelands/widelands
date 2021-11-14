@@ -145,8 +145,8 @@ void replace_all(std::string& str, const std::string& f, const std::string& r) {
 namespace format_impl {
 
 std::map<std::string, std::unique_ptr<Tree>> Tree::cache_;
-thread_local AbstractNode::Argument Tree::arg_;
-thread_local char Tree::buffer_[Tree::kBufferSize];
+AbstractNode::Argument Tree::arg_;
+char Tree::buffer_[Tree::kBufferSize];
 
 const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);

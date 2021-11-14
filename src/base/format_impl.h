@@ -292,7 +292,7 @@ struct NumberNodeT : FormatNode {
 
 				Number i = (arg < 0 ? -arg : arg);
 				for (size_t d = nr_digits; d; --d, i /= base_) {
-					static thread_local Number digit;
+					static Number digit;
 					digit = (i % base_);
 					if (hexadecimal_ && digit > 9) {
 						*(out + d - 1) = (uppercase_ ? 'A' : 'a') + digit - 10;
@@ -351,7 +351,7 @@ struct NumberNodeT : FormatNode {
 		} else {
 			Number i = (arg < 0 ? -arg : arg);
 			for (size_t d = nr_digits; d; --d, i /= base_) {
-				static thread_local Number digit;
+				static Number digit;
 				digit = (i % base_);
 				if (hexadecimal_ && digit > 9) {
 					*(out + d - 1) = (uppercase_ ? 'A' : 'a') + digit - 10;
@@ -449,7 +449,7 @@ struct FloatNode : FormatNode {
 				for (size_t remaining_max_decimals = precision_; remaining_max_decimals > 0 && decimal_part > 0;
 						--remaining_max_decimals, ++out, ++written, any_decimal_written = true) {
 					decimal_part *= 10;
-					static thread_local int64_t digit;
+					static int64_t digit;
 					digit = static_cast<int64_t>(decimal_part);
 					*out = '0' + digit;
 					decimal_part -= digit;
@@ -536,7 +536,7 @@ struct FloatNode : FormatNode {
 			for (size_t remaining_max_decimals = precision_; remaining_max_decimals > 0 && decimal_part > 0;
 					--remaining_max_decimals, ++out, any_decimal_written = true) {
 				decimal_part *= 10;
-				static thread_local int64_t digit;
+				static int64_t digit;
 				digit = static_cast<int64_t>(decimal_part);
 				*out = '0' + digit;
 				decimal_part -= digit;
@@ -581,7 +581,7 @@ class Tree {
 	static std::map<std::string, std::unique_ptr<Tree>> cache_;
 
 	static constexpr int64_t kBufferSize = 1024 * 1024;  // arbitrary limit
-	static thread_local char buffer_[kBufferSize];
+	static char buffer_[kBufferSize];
 
 public:
 	static const Tree& get(const std::string& format_string) {
@@ -641,7 +641,7 @@ public:
 	}
 
 private:
-	static thread_local AbstractNode::Argument arg_;
+	static AbstractNode::Argument arg_;
 	inline void format_do_impl_run(char** out, unsigned orig_index, bool localize, AbstractNode::ArgType t) const {
 		*out = format_nodes_by_index_[orig_index - 1]->append(*out, t, arg_, localize);
 	}
@@ -749,10 +749,10 @@ private:
 				continue;
 			}
 
-			static thread_local unsigned format_index;
-			static thread_local unsigned precision;
-			static thread_local size_t min_width;
-			static thread_local uint8_t flags;
+			static unsigned format_index;
+			static unsigned precision;
+			static size_t min_width;
+			static uint8_t flags;
 			precision = kInfinitePrecision;
 			min_width = 0;
 			flags = kNone;
@@ -918,9 +918,11 @@ private:
 	}
 };
 
-template <bool localize, typename... Args>
-std::string format(const std::string& format_string, Args... args) {
+template <typename... Args>
+std::string format(const bool localize, const std::string& format_string, Args... args) {
 	try {
+		// The textdomain uses a mutex internally, so it guarantees thread-safety.
+		i18n::Textdomain textdomain("widelands");
 		return format_impl::Tree::get(format_string).format(localize, args...);
 	} catch (const std::exception& e) {
 		log_err("bformat error: A string contains invalid printf placeholders");

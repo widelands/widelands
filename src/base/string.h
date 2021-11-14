@@ -117,14 +117,14 @@ inline std::string as_string(char c) {
 	return {c, '\0'};
 }
 
-/** String formatting function, with or without localized substitutions. */
+/** String formatting function, without or with localized substitutions. */
 template <typename... Args>
 inline std::string bformat(const std::string& format_string, Args... args) {
-	return format_impl::format<false>(format_string, args...);
+	return format_impl::format(false, format_string, args...);
 }
 template <typename... Args>
 inline std::string bformat_l(const std::string& format_string, Args... args) {
-	return format_impl::format<true>(format_string, args...);
+	return format_impl::format(true, format_string, args...);
 }
 
 #endif  // end of include guard: WL_BASE_STRING_H
