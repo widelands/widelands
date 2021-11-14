@@ -177,7 +177,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
 
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
-		icon_flag->set_tooltip(bformat(_("Player %u"), static_cast<unsigned>(p)).str());
+		icon_flag->set_tooltip(bformat(_("Player %u"), static_cast<unsigned>(p)));
 		txt_status->set_fixed_width(230);
 
 		UI::Button* b1 = nullptr;
