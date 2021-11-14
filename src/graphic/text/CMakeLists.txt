@@ -28,12 +28,10 @@ wl_library(graphic_text
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
-    base_string
     graphic
     graphic_align
     graphic_animation

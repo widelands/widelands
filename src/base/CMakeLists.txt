@@ -1,20 +1,34 @@
 add_subdirectory(test)
 
+wl_library(base
+  SRCS
+    format_impl.h
+    i18n.h
+    i18n.cc
+    multithreading.h
+    multithreading.cc
+    log.cc
+    log.h
+    string.h
+    string.cc
+  SRCS
+  USES_INTL
+  USES_SDL2
+  DEPENDS
+    base_exceptions
+    base_macros
+    base_times
+    build_info
+    io_filesystem
+    logic_filesystem_constants
+    notifications
+    third_party_gettext
+)
+
 wl_library(base_macros
   SRCS
     macros.h
     macros.cc
-)
-
-wl_library(base_log
-  SRCS
-    log.cc
-    log.h
-  USES_SDL2
-  DEPENDS
-    base_macros
-    base_times
-    build_info
 )
 
 wl_library(base_exceptions
@@ -24,32 +38,6 @@ wl_library(base_exceptions
     wexception.h
   DEPENDS
     base_macros
-)
-
-wl_library(base_i18n
-  SRCS
-    i18n.h
-    i18n.cc
-  USES_INTL
-  DEPENDS
-    base_log
-    base_macros
-    base_multithreading
-    base_string
-    io_filesystem
-    logic_filesystem_constants
-    third_party_gettext
-)
-
-wl_library(base_multithreading
-  SRCS
-    multithreading.h
-    multithreading.cc
-  DEPENDS
-    base_exceptions
-    base_log
-    notifications
-  USES_SDL2
 )
 
 wl_library(base_utf8
@@ -89,9 +77,8 @@ wl_library(base_scoped_timer
     scoped_timer.cc
   USES_SDL2
   DEPENDS
-    base_log
+    base
     base_macros
-    base_string
 )
 
 
@@ -100,7 +87,7 @@ wl_library(base_time_string
     time_string.h
     time_string.cc
   DEPENDS
-    base_i18n
+    base
 )
 
 
@@ -113,18 +100,6 @@ wl_library(base_times
     io_fileread
 )
 
-
-wl_library(base_string
-  SRCS
-    format_impl.h
-    string.h
-    string.cc
-  DEPENDS
-    # NOCOM circular dependency on i18n and base_log
-    base_exceptions
-    base_i18n
-    base_log
-)
 
 wl_library(base_math
   SRCS

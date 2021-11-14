@@ -6,12 +6,10 @@ wl_library(map_io_map_loader
     s2map.cc
     s2map.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_scoped_timer
-    base_string
     io_fileread
     io_filesystem
     logic
@@ -92,12 +90,10 @@ wl_library(map_io
     map_wincondition_packet.cc
     map_wincondition_packet.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
-    base_multithreading
     base_scoped_timer
-    base_string
     economy
     graphic_image_cache
     graphic_image_io

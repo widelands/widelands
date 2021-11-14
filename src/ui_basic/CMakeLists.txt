@@ -64,13 +64,10 @@ wl_library(ui_basic
     window.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
-    base_multithreading
-    base_string
     base_utf8
     graphic
     graphic_align

@@ -22,10 +22,9 @@ wl_library(game_io
     game_saver.cc
     game_saver.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
-    base_multithreading
     base_scoped_timer
     base_times
     build_info

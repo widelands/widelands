@@ -3,9 +3,8 @@ wl_library(logic_exceptions
     game_data_error.cc
     game_data_error.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_string
 )
 
 wl_library(logic_widelands_geometry
@@ -49,8 +48,8 @@ wl_library(logic_single_player_game_settings
     single_player_game_settings_provider.h
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
     graphic_playercolor
     logic_game_settings
     logic_tribe_basic_info
@@ -95,9 +94,8 @@ wl_library(logic_addons
     mutable_addon.cc
     mutable_addon.h
   DEPENDS
-    base_i18n
+    base
     base_exceptions
-    base_log
     base_math
     build_info
     graphic
@@ -116,7 +114,7 @@ wl_library(logic_objectives
     objective.cc
     objective.h
   DEPENDS
-    base_i18n
+    base
 )
 
 
@@ -125,9 +123,7 @@ wl_library(logic_generic_save_handler
     generic_save_handler.h
     generic_save_handler.cc
   DEPENDS
-    base_i18n
-    base_log
-    base_string
+    base
     base_time_string
     io_filesystem
     logic_filesystem_constants
@@ -160,12 +156,10 @@ wl_library(logic_map
     pathfield.cc
     pathfield.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_scoped_timer
-    base_string
     build_info
     economy
     graphic
@@ -206,9 +200,8 @@ wl_library(logic_commands
     playercommand.cc
     playercommand.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_times
     economy # TODO(GunChleoc): Circular dependency
@@ -234,7 +227,7 @@ wl_library(logic_training_wheels
     training_wheels.cc
     training_wheels.h
   DEPENDS
-    base_log
+    base
     io_filesystem
     io_profile
     logic_filesystem_constants
@@ -266,15 +259,12 @@ wl_library(logic
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_md5
-    base_multithreading
     base_random
     base_scoped_timer
-    base_string
     base_time_string
     base_times
     build_info
