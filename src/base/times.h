@@ -136,7 +136,7 @@ struct Duration {
 	void save(FileWrite&) const;
 
 private:
-	std::atomic_uint32_t value_;
+	std::atomic<uint32_t> value_;
 };
 
 // A time point, in milliseconds gametime.
