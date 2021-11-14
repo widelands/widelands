@@ -179,6 +179,9 @@ MapData MapData::create_directory(const std::string& directory) {
 	if (directory == "maps/MP_Scenarios") {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
+	} else if (directory == "maps/SP_Scenarios") {
+		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
+		localized_name = _("Singleplayer Scenarios");
 	} else if (directory == "maps/My_Maps") {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");

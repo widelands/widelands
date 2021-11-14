@@ -79,6 +79,8 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		replace_first(display_dir, "My_Maps", _("My Maps"));
 	} else if (starts_with(display_dir, "MP_Scenarios")) {
 		replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (starts_with(display_dir, "SP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Singleplayer Scenarios"));
 	} else if (starts_with(display_dir, "Downloaded")) {
 		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
