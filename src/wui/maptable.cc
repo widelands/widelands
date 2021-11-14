@@ -18,8 +18,6 @@
 
 #include "wui/maptable.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
@@ -49,7 +47,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 			   1, g_image_cache->get("images/ui_basic/ls_dir.png"), mapdata.localized_name);
 			te.set_string(2, "");
 		} else {
-			te.set_string(0, (boost::format("(%i)") % mapdata.nrplayers).str());
+			te.set_string(0, bformat("(%i)", mapdata.nrplayers));
 
 			std::string picture = "images/ui_basic/ls_wlmap.png";
 			if (mapdata.maptype == MapData::MapType::kScenario) {
@@ -71,7 +69,7 @@ void MapTable::fill(const std::vector<MapData>& entries, MapData::DisplayType ty
 				}
 			}
 
-			te.set_string(2, (boost::format("%u x %u") % mapdata.width % mapdata.height).str());
+			te.set_string(2, bformat("%u x %u", mapdata.width, mapdata.height));
 		}
 	}
 	sort();

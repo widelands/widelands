@@ -28,6 +28,7 @@
 #include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
+#include "base/string.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -36,14 +37,11 @@
 #include "graphic/text_layout.h"
 
 namespace {
-std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+inline std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
-	boost::format f(
-	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
+	return bformat(
+	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>",
+	   ptsize, clr.hex_value(), richtext_escape(text));
 }
 
 int text_width(const std::string& text, int ptsize) {
