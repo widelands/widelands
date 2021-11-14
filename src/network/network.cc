@@ -33,8 +33,7 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 	try {
 		boost::asio::io_service io_service;
 		boost::asio::ip::tcp::resolver resolver(io_service);
-		boost::asio::ip::tcp::resolver::query query(
-		   protocol, hostname, boost::lexical_cast<std::string>(port));
+		boost::asio::ip::tcp::resolver::query query(protocol, hostname, as_string(port));
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed

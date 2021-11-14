@@ -199,7 +199,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 
 	std::unique_ptr<LuaTable> programs = table.get_table("programs");
 	for (std::string program_name : programs->keys<std::string>()) {
-		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		program_name = to_lower(program_name);
 		if (programs_.count(program_name)) {
 			throw GameDataError("Program '%s' has already been declared for immovable '%s'",
 			                    program_name.c_str(), name().c_str());
@@ -498,11 +498,11 @@ void Immovable::draw_construction(const Time& gametime,
 	                    &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(info_to_draw, descr().descname(),
-	             StyleManager::color_tag(
-	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
-	                g_style_manager->building_statistics_style().construction_color()),
-	             point_on_dst, scale, dst);
+	do_draw_info(
+	   info_to_draw, descr().descname(),
+	   StyleManager::color_tag(bformat(_("%i%% built"), (done.get() * 100 / total.get())),
+	                           g_style_manager->building_statistics_style().construction_color()),
+	   point_on_dst, scale, dst);
 }
 
 /**
@@ -577,7 +577,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		std::string program_name;
 		if (1 == packet_version) {
 			program_name = fr.unsigned_8() ? fr.c_string() : MapObjectProgram::kMainProgram;
-			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+			program_name = to_lower(program_name);
 		} else {
 			program_name = fr.c_string();
 			if (program_name.empty()) {

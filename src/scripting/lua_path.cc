@@ -19,11 +19,8 @@
 
 #include "scripting/lua_path.h"
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "base/macros.h"
+#include "base/string.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
@@ -53,7 +50,7 @@ private:
  */
 NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+	format_ = "%0" + as_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {
@@ -68,11 +65,9 @@ bool NumberGlob::next(std::string* s) {
 		return false;
 	}
 
+	*s = template_;
 	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, (boost::format(format_) % current_).str());
-	} else {
-		*s = template_;
+		replace_last(*s, to_replace_, bformat(format_, current_));
 	}
 	++current_;
 	return true;
