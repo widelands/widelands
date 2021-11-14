@@ -197,6 +197,7 @@ public:
 
 private:
 	AllTribes all_tribes_;
+	const AddOns::AddOnsList& addons_;
 
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
@@ -208,6 +209,9 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 	std::unique_ptr<DescriptionsCompatibilityTable> compatibility_table_;
+
+	/** Helper function for add_object_description(). */
+	void add_terrain_description(const std::string&, const LuaTable&);
 
 	uint32_t largest_workarea_;
 
