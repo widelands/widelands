@@ -173,7 +173,7 @@ public:
 		// Seafaring constants for controlling expeditions
 		static constexpr uint32_t kColonyScanStartArea = 35;
 		static constexpr uint32_t kColonyScanMinArea = 12;
-		static constexpr Time kNoExpedition = Time(0);
+		static constexpr Time kNoExpedition{0};
 
 		AiPersistentState()
 		   : initialized(false),

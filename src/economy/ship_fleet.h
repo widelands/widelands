@@ -47,7 +47,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
-constexpr Duration kFleetInterval = Duration(4000);
+constexpr Duration kFleetInterval(4000);
 constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 
 /**

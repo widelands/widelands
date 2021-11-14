@@ -321,6 +321,9 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
+
+  # Detect invalid constexpr initialization
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-elide-constructors")
 endif()
 
 if(NOT MSVC)
