@@ -266,7 +266,7 @@ protected:
 
 	Coords position_;
 
-	std::atomic_uint32_t anim_;
+	std::atomic<uint32_t> anim_;
 	Time animstart_;
 
 	const ImmovableProgram* program_;
@@ -291,8 +291,8 @@ public:
 
 protected:
 #else
-	std::atomic_uint32_t anim_construction_total_;
-	std::atomic_uint32_t anim_construction_done_;
+	std::atomic<uint32_t> anim_construction_total_;
+	std::atomic<uint32_t> anim_construction_done_;
 	Time program_step_;  ///< time of next step
 #endif
 

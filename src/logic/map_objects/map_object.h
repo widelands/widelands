@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
+#include <atomic>
 #include <boost/signals2/signal.hpp>
 
 #include "base/macros.h"

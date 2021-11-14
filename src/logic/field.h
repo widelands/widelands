@@ -289,7 +289,7 @@ private:
 	RoadSegment road_southwest = RoadSegment::kNone;
 
 	Height height = 0U;
-	std::atomic_int8_t brightness;
+	std::atomic<int8_t> brightness;
 
 	std::atomic<OwnerInfoAndSelectionsType> owner_info_and_selections;
 

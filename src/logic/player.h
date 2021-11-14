@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_PLAYER_H
 #define WL_LOGIC_PLAYER_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/macros.h"
