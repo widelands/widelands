@@ -436,12 +436,14 @@ void InfoPanel::update_time_speed_string() {
 		break;
 	case 2:
 		text_time_speed_.set_text(bformat(
-		/** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed) */
-		_("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
+		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		    */
+		   _("%1$s · %2$s"),
+		   *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
 		text_time_speed_.set_text(bformat(
-		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
+		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
 		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
