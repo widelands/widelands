@@ -19,6 +19,8 @@
 
 #include "base/string.h"
 
+#include <memory>
+
 std::string to_lower(const std::string& str) {
 	std::string s;
 	for (const char* c = str.c_str(); *c; ++c) {
@@ -138,3 +140,33 @@ void replace_all(std::string& str, const std::string& f, const std::string& r) {
 		pos += sr;
 	}
 }
+
+
+namespace format_impl {
+
+std::map<std::string, std::unique_ptr<Tree>> Tree::cache_;
+thread_local AbstractNode::Argument Tree::arg_;
+thread_local char Tree::buffer_[Tree::kBufferSize];
+
+const CharNode CharNode::node_;
+const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
+const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
+const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
+template<> const IntNode IntNode::node_(kNone, 0, false, false);
+template<> const UintNode UintNode::node_(kNone, 0, false, false);
+
+std::string to_string(const AbstractNode::ArgType t) {
+	switch (t) {
+		case AbstractNode::ArgType::kNone: return "none";
+		case AbstractNode::ArgType::kChar: return "char";
+		case AbstractNode::ArgType::kString: return "string";
+		case AbstractNode::ArgType::kBoolean: return "bool";
+		case AbstractNode::ArgType::kFloat: return "float";
+		case AbstractNode::ArgType::kSigned: return "int";
+		case AbstractNode::ArgType::kUnsigned: return "unsigned";
+		case AbstractNode::ArgType::kPointer: return "pointer";
+		case AbstractNode::ArgType::kNullptr: return "nullptr";
+	}
+	NEVER_HERE();
+}
+}  // namespace format_impl

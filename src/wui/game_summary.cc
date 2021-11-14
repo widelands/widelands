@@ -208,7 +208,7 @@ void GameSummaryScreen::fill_data() {
 		// Team
 		std::string teastr_ = p->team_number() == 0 ?
                                "—" :
-                               bformat("%|1$u|", static_cast<unsigned int>(p->team_number()));
+                               bformat("%1$u", static_cast<unsigned int>(p->team_number()));
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;
@@ -251,7 +251,7 @@ void GameSummaryScreen::fill_data() {
 		if (team_won == 0) {
 			title_area_->set_text(bformat(_("%s won!"), won_name));
 		} else {
-			title_area_->set_text(bformat(_("Team %|1$u| won!"), static_cast<unsigned int>(team_won)));
+			title_area_->set_text(bformat(_("Team %u won!"), static_cast<unsigned int>(team_won)));
 		}
 	}
 	if (!players_status.empty()) {

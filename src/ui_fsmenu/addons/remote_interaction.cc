@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/image_cache.h"

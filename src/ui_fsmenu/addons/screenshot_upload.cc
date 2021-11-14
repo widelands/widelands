@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/layered_filesystem.h"

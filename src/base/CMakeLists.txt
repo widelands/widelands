@@ -116,9 +116,13 @@ wl_library(base_times
 
 wl_library(base_string
   SRCS
+    format_impl.h
     string.h
     string.cc
   DEPENDS
+    # NOCOM circular dependency on i18n and base_log
+    base_exceptions
+    base_i18n
     base_log
 )
 

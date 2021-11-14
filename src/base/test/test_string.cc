@@ -122,4 +122,39 @@ BOOST_AUTO_TEST_CASE(trim_split_replace) {
 	BOOST_CHECK_EQUAL(str, "foo/wordr/wordz");
 }
 
+BOOST_AUTO_TEST_CASE(string_formatting) {
+	BOOST_CHECK_EQUAL("Hello World", bformat("%s", "Hello World"));
+	BOOST_CHECK_EQUAL("Hello World", bformat("%s %s", "Hello", "World"));
+	BOOST_CHECK_EQUAL("Hello World", bformat("%1$s %2%", "Hello", "World"));
+	BOOST_CHECK_EQUAL("Hello World", bformat("%2% %1%", "World", "Hello"));
+	BOOST_CHECK_EQUAL("   Hello World", bformat("%1$14s", "Hello World"));
+	BOOST_CHECK_EQUAL("Hello World   ", bformat("%-14s", "Hello World"));
+	BOOST_CHECK_EQUAL("         Hello", bformat("%14.5s", "Hello World"));
+	BOOST_CHECK_EQUAL("Hello         ", bformat("%1$-14.5s", "Hello World"));
+
+	BOOST_CHECK_EQUAL("A123X", bformat("A%dX", 123));
+	BOOST_CHECK_EQUAL("AABCDEFX", bformat("A%XX", 0xABCDEF));
+	BOOST_CHECK_EQUAL("A-1X", bformat("A%dX", -1));
+	BOOST_CHECK_EQUAL("A     123X", bformat("A%8dX", 123));
+	BOOST_CHECK_EQUAL("A00000123X", bformat("A%08dX", 123));
+	BOOST_CHECK_EQUAL("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
+
+	BOOST_CHECK_EQUAL("Aw77X", bformat("A%2$c%1$iX", 77, 'w'));
+	BOOST_CHECK_EQUAL("AfalsetrueX", bformat("A%b%bX", 0, 1));
+
+	BOOST_CHECK_EQUAL("AnullptrX", bformat("A%PX", nullptr));
+	BOOST_CHECK_EQUAL("A123abcX", bformat("A%pX", reinterpret_cast<int*>(0x123abc)));
+
+	BOOST_CHECK_EQUAL("A123.456X", bformat("A%.3fX", 123.456));
+	BOOST_CHECK_EQUAL("A-0.45600000X", bformat("A%2.8fX", -0.456));
+	BOOST_CHECK_EQUAL("A      12.3X", bformat("A%10.1fX", 12.34567));
+
+	format_impl::ArgsPair p1, p2;
+	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;
+	p1.second.string_val = "World";
+	p2.second.string_val = "Hello";
+	BOOST_CHECK_EQUAL("Hello World", bformat("%2% %1%", format_impl::ArgsVector{p1, p2}));
+	BOOST_CHECK_EQUAL("World Hello", bformat("%2% %1%", format_impl::ArgsVector{p2, p1}));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
