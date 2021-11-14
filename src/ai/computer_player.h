@@ -20,14 +20,19 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
-#include <boost/algorithm/string/predicate.hpp>
+#include <cassert>
 
 #include "base/macros.h"
+#include "base/string.h"
 #include "logic/widelands.h"
 
 // We need to use a string prefix in the game setup screens to identify the AIs, so we make sure
 // that the AI names don't contain the separator that's used to parse the strings there.
-#define AI_NAME_SEPARATOR "|"
+constexpr char kAiNameSeparator = '|';
+static const std::string kAiNamePrefix =  // comment to fix codecheck
+   std::string("ai") + as_string(kAiNameSeparator);
+static const std::string kRandom = "random";
+static const std::string kRandomAiName = kAiNamePrefix + kRandom;
 
 namespace Widelands {
 class Game;
@@ -74,7 +79,7 @@ struct ComputerPlayer {
 		     descname(init_descname),
 		     icon_filename(init_icon_filename),
 		     type(init_type) {
-			assert(!boost::contains(name, AI_NAME_SEPARATOR));
+			assert(!contains(name, as_string(kAiNameSeparator)));
 		}
 
 		virtual ~Implementation() {
