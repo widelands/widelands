@@ -103,7 +103,7 @@
 
 push_textdomain("world")
 
-pics_dir = path.dirname(__file__) .. "pics/"
+local pics_dir = path.dirname(__file__) .. "../pics/"
 
 wl.Descriptions():new_resource_type{
    name = "resource_coal",
@@ -118,86 +118,6 @@ wl.Descriptions():new_resource_type{
       [10] = pics_dir .. "coal2.png",
       [15] = pics_dir .. "coal3.png",
       [1000] = pics_dir .. "coal4.png",
-   }
-}
-
-wl.Descriptions():new_resource_type{
-   name = "resource_gold",
-   descname = _ "Gold",
-   max_amount = 20,
-   detectable = true,
-   timeout_ms = 300000,
-   timeout_radius = 8,
-   representative_image = pics_dir .. "gold4.png",
-   editor_pictures = {
-      [5] = pics_dir .. "gold1.png",
-      [10] = pics_dir .. "gold2.png",
-      [15] = pics_dir .. "gold3.png",
-      [1000] = pics_dir .. "gold4.png",
-   }
-}
-
-wl.Descriptions():new_resource_type{
-   name = "resource_iron",
-   descname = _ "Iron",
-   max_amount = 20,
-   detectable = true,
-   timeout_ms = 300000,
-   timeout_radius = 8,
-   representative_image = pics_dir .. "iron4.png",
-   editor_pictures = {
-      [5] = pics_dir .. "iron1.png",
-      [10] = pics_dir .. "iron2.png",
-      [15] = pics_dir .. "iron3.png",
-      [1000] = pics_dir .. "iron4.png",
-   }
-}
-
-wl.Descriptions():new_resource_type{
-   name = "resource_stones",
-   descname = _ "Stones",
-   max_amount = 20,
-   detectable = true,
-   timeout_ms = 300000,
-   timeout_radius = 8,
-   representative_image = pics_dir .. "stones4.png",
-   editor_pictures = {
-      [5] = pics_dir .. "stones1.png",
-      [10] = pics_dir .. "stones2.png",
-      [15] = pics_dir .. "stones3.png",
-      [1000] = pics_dir .. "stones4.png",
-   }
-}
-
-wl.Descriptions():new_resource_type{
-   name = "resource_water",
-   descname = _ "Water",
-   max_amount = 50,
-   detectable = true,
-   timeout_ms = 300000,
-   timeout_radius = 8,
-   representative_image = pics_dir .. "water4.png",
-   editor_pictures = {
-      [10] = pics_dir .."water1.png",
-      [20] = pics_dir .."water2.png",
-      [30] = pics_dir .."water3.png",
-      [1000] = pics_dir .. "water4.png",
-   }
-}
-
-wl.Descriptions():new_resource_type{
-   name = "resource_fish",
-   descname = _ "Fish",
-   max_amount = 20,
-   detectable = false,
-   timeout_ms = 0,
-   timeout_radius = 0,
-   representative_image = pics_dir .. "fish.png",
-   editor_pictures = {
-      [5] = pics_dir .. "fish1.png",
-      [10] = pics_dir .. "fish2.png",
-      [15] = pics_dir .. "fish3.png",
-      [1000] = pics_dir .. "fish4.png",
    }
 }
 
