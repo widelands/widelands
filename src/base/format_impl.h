@@ -258,6 +258,9 @@ struct NumberNodeT : FormatNode {
 		case ArgType::kPointer:
 			arg = arg_u.unsigned_val;
 			break;
+		case ArgType::kFloat:
+			arg = arg_u.float_val;
+			break;
 		case ArgType::kNullptr:
 			arg_u.string_val = "nullptr";
 			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
@@ -376,11 +379,26 @@ struct FloatNode : FormatNode {
 	FloatNode(const uint8_t f, const size_t w, const int32_t p) : FormatNode(f, w, p) {
 	}
 
-	char* append(char* out, const ArgType t, const Argument arg_u, const bool localize) const override {
-		if (t != ArgType::kFloat) {
+	char* append(char* out, const ArgType t, Argument arg_u, const bool localize) const override {
+		double arg;
+		switch (t) {
+		case ArgType::kFloat:
+			arg = arg_u.float_val;
+			break;
+		case ArgType::kSigned:
+			arg = arg_u.signed_val;
+			break;
+		case ArgType::kUnsigned:
+		case ArgType::kPointer:
+			arg = arg_u.unsigned_val;
+			break;
+		case ArgType::kNullptr:
+			arg_u.string_val = "nullptr";
+			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
+		default:
 			throw wexception("Wrong argument type: excepted float/double, found %s", to_string(t).c_str());
 		}
-		const double arg = arg_u.float_val;
+
 		const int64_t as_int = static_cast<int64_t>(arg < 0 ? -arg : arg);
 
 		if (min_width_ == 0 || flags_ & kLeftAlign) {

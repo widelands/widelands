@@ -342,7 +342,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
               filesize_string(info->total_file_size),
               info->download_count,
-              (info->number_of_votes() ? bformat("%.2f", info->average_rating()) : "–"),
+              (info->number_of_votes() ? bformat_l("%.2f", info->average_rating()) : "–"),
               info->user_comments.size(),
               info->screenshots.size()),
         UI::Align::kRight),
@@ -471,7 +471,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	         bformat(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() ?
-                bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
+                bformat_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                              "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                     info->average_rating(), info->number_of_votes()) :
                 _("No votes yet")),

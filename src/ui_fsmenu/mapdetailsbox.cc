@@ -46,21 +46,17 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 		infotext_fmt += i > 1 ? "<br>" : "</p></rt>";
 	}
 	infotext_fmt += "</p></rt>";
-	format_impl::ArgsVector fmt_args;
-	format_impl::ArgsPair arg;
-	arg.first = format_impl::AbstractNode::ArgType::kString;
+	std::vector<std::string> format_arg_strings;
 
-	arg.second.string_val = g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(_("Saved Players")).c_str();
-	fmt_args.emplace_back(arg);
+	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	              .as_font_tag(_("Saved Players")));
 
 	for (unsigned i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 
 		if (current_player.state == PlayerSettings::State::kClosed) {
-			arg.second.string_val = g_style_manager->font_style(UI::FontStyle::kDisabled)
-			              .as_font_tag(bformat(_("Player %u: –"), (i + 1))).c_str();
-			fmt_args.emplace_back(arg);
+			format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kDisabled)
+			              .as_font_tag(bformat(_("Player %u: –"), (i + 1))));
 			continue;
 		}
 
@@ -79,16 +75,22 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 			name = i18n::localize_list(names, i18n::ConcatenateWith::AMPERSAND);
 		}
 
-		arg.second.string_val =
+		format_arg_strings.emplace_back(
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(bformat(
 		         /** TRANSLATORS: "Player 1 (Barbarians): Playername" */
 		         _("Player %1$u (%2$s): %3$s"), (i + 1), tribe_of(game_settings, current_player),
 		         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		            .as_font_tag(name))).c_str();
-		fmt_args.emplace_back(arg);
+		            .as_font_tag(name))));
 	}
 
+	format_impl::ArgsVector fmt_args;
+	format_impl::ArgsPair arg;
+	arg.first = format_impl::AbstractNode::ArgType::kString;
+	for (const std::string& str : format_arg_strings) {
+		arg.second.string_val = str.c_str();
+		fmt_args.emplace_back(arg);
+	}
 	return bformat(infotext_fmt, fmt_args);
 }
 
@@ -99,44 +101,44 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 		infotext_fmt += "<br>%s";
 	}
 	infotext_fmt += "</p></rt>";
-	format_impl::ArgsVector fmt_args;
-	format_impl::ArgsPair arg;
-	arg.first = format_impl::AbstractNode::ArgType::kString;
+	std::vector<std::string> format_arg_strings;
 
-	arg.second.string_val = g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details")).c_str();
-	fmt_args.emplace_back(arg);
+	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details")));
 
-	arg.second.string_val = g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	              .as_font_tag(bformat(
 	                 _("Size: %s"),
 	                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                    .as_font_tag(bformat(_("%1$u×%2$u"), map.get_width(), map.get_height())))).c_str();
-	fmt_args.emplace_back(arg);
+	                    .as_font_tag(bformat(_("%1$u×%2$u"), map.get_width(), map.get_height())))));
 
-	arg.second.string_val =
+	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	      .as_font_tag(bformat(
 	         _("Players: %s"), g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                              .as_font_tag(std::to_string(game_settings.players.size())))).c_str();
-	fmt_args.emplace_back(arg);
+	                              .as_font_tag(std::to_string(game_settings.players.size())))));
 
-	arg.second.string_val =
+	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	      .as_font_tag(bformat(_("Description: %s"),
 	                           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                              .as_font_tag(richtext_escape(map.get_description())))).c_str();
-	fmt_args.emplace_back(arg);
+	                              .as_font_tag(richtext_escape(map.get_description())))));
 
 	if (!map.get_hint().empty()) {
-		arg.second.string_val =
+		format_arg_strings.emplace_back(
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		      .as_font_tag(bformat(
 		         _("Hint: %s"), g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		                           .as_font_tag(map.get_hint()))).c_str();
-		fmt_args.emplace_back(arg);
+		                           .as_font_tag(map.get_hint()))));
 	}
 
+	format_impl::ArgsVector fmt_args;
+	format_impl::ArgsPair arg;
+	arg.first = format_impl::AbstractNode::ArgType::kString;
+	for (const std::string& str : format_arg_strings) {
+		arg.second.string_val = str.c_str();
+		fmt_args.emplace_back(arg);
+	}
 	return bformat(infotext_fmt, fmt_args);
 }
 
