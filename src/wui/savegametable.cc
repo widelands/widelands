@@ -1,8 +1,7 @@
 #include "wui/savegametable.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -26,14 +25,14 @@ const std::string SavegameTable::map_filename(const std::string& filename,
 		split(autosave_name, result, {'_'});
 		if (autosave_name.empty() || autosave_name.size() < 3) {
 			/** TRANSLATORS: %1% is a map's name. */
-			result = (boost::format(_("Autosave: %1%")) % mapname).str();
+			result = bformat(_("Autosave: %1%"), mapname);
 		} else {
 			/** TRANSLATORS: %1% is a number, %2% a map's name. */
-			result = (boost::format(_("Autosave %1%: %2%")) % autosave_name.back() % mapname).str();
+			result = bformat(_("Autosave %1%: %2%"), autosave_name.back(), mapname);
 		}
 	} else if (!starts_with(result, mapname)) {
 		/** TRANSLATORS: %1% is a filename, %2% a map's name. */
-		result = (boost::format(pgettext("filename_mapname", "%1%: %2%")) % result % mapname).str();
+		result = bformat(pgettext("filename_mapname", "%1%: %2%"), result, mapname);
 	}
 	return result;
 }
@@ -53,7 +52,7 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		/** TRANSLATORS: Make sure that this translation is consistent with the
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
-		return (boost::format(_("H (%1%)")) % savegame.nrplayers).str();
+		return bformat(_("H (%1%)"), savegame.nrplayers);
 	}
 	if (savegame.is_multiplayer_client()) {
 		/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
@@ -62,7 +61,7 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		/** TRANSLATORS: Make sure that this translation is consistent with the
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
-		return (boost::format(_("MP (%1%)")) % savegame.nrplayers).str();
+		return bformat(_("MP (%1%)"), savegame.nrplayers);
 	}
 	if (savegame.is_replay()) {
 		return "";
@@ -94,8 +93,7 @@ void SavegameTable::create_error_entry(UI::Table<uintptr_t const>::EntryRecord& 
 	for (size_t col_index = 0; col_index < last_column_index; col_index++) {
 		te.set_string(col_index, "");
 	}
-	te.set_string(
-	   last_column_index, (boost::format(_("Incompatible: %s")) % savegame.mapname).str());
+	te.set_string(last_column_index, bformat(_("Incompatible: %s"), savegame.mapname));
 }
 
 void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryRecord& te,
@@ -107,7 +105,7 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 	if (savegame.is_parent_directory()) {
 		te.set_picture(last_column_index, g_image_cache->get("images/ui_basic/ls_dir.png"),
 		               /** TRANSLATORS: Parent directory/folder */
-		               (boost::format("<%s>") % _("parent")).str());
+		               bformat("<%s>", _("parent")));
 	} else if (savegame.is_sub_directory()) {
 		te.set_picture(last_column_index, g_image_cache->get("images/ui_basic/ls_dir.png"),
 		               FileSystem::filename_without_ext(savegame.filename.c_str()));
@@ -198,10 +196,9 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 		te.set_string(1, find_game_type(savegame));
 		const std::string map_basename =
 		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
-		te.set_picture(2, g_image_cache->get("images/ui_basic/ls_wlmap.png"),
-		               (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
-		                savegame.gametime)
-		                  .str());
+		te.set_picture(
+		   2, g_image_cache->get("images/ui_basic/ls_wlmap.png"),
+		   bformat(pgettext("mapname_gametime", "%1% (%2%)"), map_basename, savegame.gametime));
 	}
 }
 

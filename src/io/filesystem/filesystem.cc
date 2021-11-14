@@ -29,7 +29,6 @@
 #include <cstdio>
 #endif
 
-#include <boost/format.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <windows.h>
@@ -120,7 +119,7 @@ bool NumberGlob::next(std::string* s) {
 
 	*s = template_;
 	if (max_) {
-		replace_last(*s, to_replace_, (boost::format(format_) % current_).str());
+		replace_last(*s, to_replace_, bformat(format_, current_));
 	}
 	++current_;
 	return true;
@@ -248,25 +247,24 @@ std::string FileSystem::illegal_filename_tooltip() {
 	const std::string illegal_start(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    *  %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
-	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
+	   bformat(pgettext("illegal_filename_characters", "%s at the start of the filename"),
+	           richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    * %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
-	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
+	   bformat(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
+	           richtext_escape(
+	              i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
-	return (boost::format("%s%s%s") %
-	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	         * This is followed by a list of bullet points */
-	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
-	        illegal_start % illegal)
-	   .str();
+	return bformat(
+	   "%s%s%s",
+	   /** TRANSLATORS: Tooltip header for characters in illegal filenames.
+	    * This is followed by a list of bullet points */
+	   pgettext("illegal_filename_characters", "The following characters are not allowed:"),
+	   illegal_start, illegal);
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems
