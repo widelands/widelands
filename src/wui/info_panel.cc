@@ -438,8 +438,7 @@ void InfoPanel::update_time_speed_string() {
 		text_time_speed_.set_text(bformat(
 		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
 		    */
-		   _("%1$s · %2$s"),
-		   *non_empty[0], *non_empty[1]));
+		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
 		text_time_speed_.set_text(bformat(
