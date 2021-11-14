@@ -440,7 +440,8 @@ void InfoPanel::update_time_speed_string() {
 		break;
 	case 3:
 		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		text_time_speed_.set_text(bformat(_("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
+		text_time_speed_.set_text(
+		   bformat(_("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();

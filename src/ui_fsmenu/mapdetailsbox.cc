@@ -49,14 +49,14 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 	std::vector<std::string> format_arg_strings;
 
 	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(_("Saved Players")));
+	                                   .as_font_tag(_("Saved Players")));
 
 	for (unsigned i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 
 		if (current_player.state == PlayerSettings::State::kClosed) {
 			format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kDisabled)
-			              .as_font_tag(bformat(_("Player %u: –"), (i + 1))));
+			                                   .as_font_tag(bformat(_("Player %u: –"), (i + 1))));
 			continue;
 		}
 
@@ -103,12 +103,14 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	infotext_fmt += "</p></rt>";
 	std::vector<std::string> format_arg_strings;
 
-	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details")));
+	format_arg_strings.emplace_back(
+	   g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	      .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details")));
 
-	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	              .as_font_tag(bformat(
-	                 _("Size: %s"),
+	format_arg_strings.emplace_back(
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(
+	         bformat(_("Size: %s"),
 	                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	                    .as_font_tag(bformat(_("%1$u×%2$u"), map.get_width(), map.get_height())))));
 

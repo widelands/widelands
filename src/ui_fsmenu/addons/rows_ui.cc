@@ -472,8 +472,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() ?
                 bformat_l(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                              "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
-	                     info->average_rating(), info->number_of_votes()) :
+	                                "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
+	                       info->average_rating(), info->number_of_votes()) :
                 _("No votes yet")),
 	         bformat(ngettext("%u comment", "%u comments", info->user_comments.size()),
 	                 info->user_comments.size()),

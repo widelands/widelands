@@ -36,36 +36,36 @@
 namespace format_impl {
 
 /**
-	General syntax of format specifiers:
-		%N%
-	OR
-		[ N$ ] [ flags ] [ width ] [ . precision ] fmt
+   General syntax of format specifiers:
+      %N%
+   OR
+      [ N$ ] [ flags ] [ width ] [ . precision ] fmt
 
-	flags: Any combination of
-		-    Left align
-		+    Show number sign for non-negative numbers
-		0    pad with zeros instead of whitespace
+   flags: Any combination of
+      -    Left align
+      +    Show number sign for non-negative numbers
+      0    pad with zeros instead of whitespace
 
-		Note that - and 0 can not be combined.
+      Note that - and 0 can not be combined.
 
-	width: minimal number of characters
+   width: minimal number of characters
 
-	precision:
-		For floating-point, max number of digits after the period.
-		For strings, max number of characters before padding.
+   precision:
+      For floating-point, max number of digits after the period.
+      For strings, max number of characters before padding.
 
-	fmt:
-		%                   percent sign                No arguments allowed
-		c                   character                   No arguments allowed
-		s                   string                      Can not have + or 0
-		b                   boolean                     Similar to string
-		i,d,li,ld,lli,lld   int
-		u,lu,llu            unsigned int
-		x                   hexadecimal int (lowercase)
-		X                   hexadecimal int (uppercase)
-		p                   unsigned hexadecimal int (lowercase)
-		P                   unsigned hexadecimal int (uppercase)
-		f                   float
+   fmt:
+      %                   percent sign                No arguments allowed
+      c                   character                   No arguments allowed
+      s                   string                      Can not have + or 0
+      b                   boolean                     Similar to string
+      i,d,li,ld,lli,lld   int
+      u,lu,llu            unsigned int
+      x                   hexadecimal int (lowercase)
+      X                   hexadecimal int (uppercase)
+      p                   unsigned hexadecimal int (lowercase)
+      P                   unsigned hexadecimal int (uppercase)
+      f                   float
 */
 
 enum Flags : uint8_t {
@@ -81,7 +81,8 @@ struct BooleanNode;
 struct FloatNode;
 
 struct AbstractNode {
-	virtual ~AbstractNode() {}
+	virtual ~AbstractNode() {
+	}
 
 	union Argument {
 		char char_val;
@@ -111,7 +112,8 @@ using ArgsVector = std::vector<ArgsPair>;
 std::string to_string(AbstractNode::ArgType);
 
 struct LiteralNode : AbstractNode {
-	LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {}
+	LiteralNode(const std::string& str) : content_(str), len_(content_.size()) {
+	}
 
 	inline char* append(char* out, const ArgType t, Argument, bool) const override {
 		if (t != ArgType::kNone) {
@@ -141,7 +143,9 @@ constexpr unsigned kDefaultFloatPrecision = 6;
 
 struct FormatNode : AbstractNode {
 protected:
-	FormatNode(const uint8_t f, const size_t w, const int32_t p) : flags_(f), min_width_(w), precision_(p) {}
+	FormatNode(const uint8_t f, const size_t w, const int32_t p)
+	   : flags_(f), min_width_(w), precision_(p) {
+	}
 
 	const uint8_t flags_;       ///< Bitset of flags
 	const size_t min_width_;    ///< Minimum number of characters to write; may be 0
@@ -149,7 +153,8 @@ protected:
 };
 
 struct CharNode : FormatNode {
-	CharNode() : FormatNode(kNone, 0, 0) {}
+	CharNode() : FormatNode(kNone, 0, 0) {
+	}
 
 	inline char* append(char* out, const ArgType t, const Argument arg, bool) const override {
 		if (t != ArgType::kChar) {
@@ -240,9 +245,9 @@ struct BooleanNode : StringNode {
 	static const BooleanNode node_;
 };
 
-template <typename Number>
-struct NumberNodeT : FormatNode {
-	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool uc) : FormatNode(f, w, 0), base_(hex ? 16 : 10), hexadecimal_(hex), uppercase_(uc) {
+template <typename Number> struct NumberNodeT : FormatNode {
+	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool uc)
+	   : FormatNode(f, w, 0), base_(hex ? 16 : 10), hexadecimal_(hex), uppercase_(uc) {
 		if ((flags_ & kLeftAlign) && (flags_ & kPadWith0)) {
 			throw wexception("'-' and '0' can not be combined");
 		}
@@ -265,7 +270,9 @@ struct NumberNodeT : FormatNode {
 			arg_u.string_val = "nullptr";
 			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
 		default:
-			throw wexception("Wrong argument type: excepted %s, found %s", (std::is_signed<Number>::value ? "int": "unsigned"), to_string(t).c_str());
+			throw wexception("Wrong argument type: excepted %s, found %s",
+			                 (std::is_signed<Number>::value ? "int" : "unsigned"),
+			                 to_string(t).c_str());
 		}
 
 		if (min_width_ == 0 || flags_ & kLeftAlign) {
@@ -396,7 +403,8 @@ struct FloatNode : FormatNode {
 			arg_u.string_val = "nullptr";
 			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
 		default:
-			throw wexception("Wrong argument type: excepted float/double, found %s", to_string(t).c_str());
+			throw wexception(
+			   "Wrong argument type: excepted float/double, found %s", to_string(t).c_str());
 		}
 
 		const int64_t as_int = static_cast<int64_t>(arg < 0 ? -arg : arg);
@@ -434,7 +442,8 @@ struct FloatNode : FormatNode {
 
 			if (precision_ > 0) {
 				if (localize) {
-					for (const char* decimal_sep = pgettext("decimal_separator", "."); *decimal_sep; ++decimal_sep, ++out, ++written) {
+					for (const char* decimal_sep = pgettext("decimal_separator", "."); *decimal_sep;
+					     ++decimal_sep, ++out, ++written) {
 						*out = *decimal_sep;
 					}
 				} else {
@@ -446,8 +455,9 @@ struct FloatNode : FormatNode {
 				// Now write the decimals
 				double decimal_part = (arg < 0 ? -arg : arg) - as_int;
 				bool any_decimal_written = 0;
-				for (size_t remaining_max_decimals = precision_; remaining_max_decimals > 0 && decimal_part > 0;
-						--remaining_max_decimals, ++out, ++written, any_decimal_written = true) {
+				for (size_t remaining_max_decimals = precision_;
+				     remaining_max_decimals > 0 && decimal_part > 0;
+				     --remaining_max_decimals, ++out, ++written, any_decimal_written = true) {
 					decimal_part *= 10;
 					static int64_t digit;
 					digit = static_cast<int64_t>(decimal_part);
@@ -473,7 +483,8 @@ struct FloatNode : FormatNode {
 
 		// The more complex case: We want a right-aligned string with a given minimum width,
 		// padded with leading whitespace or zeroes.
-		const char* decimal_sep = precision_ > 0 ? localize ? pgettext("decimal_separator", ".") : "." : "";
+		const char* decimal_sep =
+		   precision_ > 0 ? localize ? pgettext("decimal_separator", ".") : "." : "";
 		const size_t decimal_sep_len = strlen(decimal_sep);
 		size_t nr_digits_before_decimal;
 		size_t nr_digits_after_decimal = 0;
@@ -486,8 +497,10 @@ struct FloatNode : FormatNode {
 		}
 		{
 			double decimal_part = (arg < 0 ? -arg : arg) - as_int;
-			for (size_t remaining_max_decimals = precision_; remaining_max_decimals > 0 && decimal_part > 0;
-					--remaining_max_decimals, ++nr_digits_after_decimal, decimal_part = (decimal_part * 10 - static_cast<int64_t>(decimal_part))) {
+			for (size_t remaining_max_decimals = precision_;
+			     remaining_max_decimals > 0 && decimal_part > 0;
+			     --remaining_max_decimals, ++nr_digits_after_decimal,
+			            decimal_part = (decimal_part * 10 - static_cast<int64_t>(decimal_part))) {
 			}
 			if (nr_digits_after_decimal == 0 && precision_ > 0) {
 				nr_digits_after_decimal = 1;
@@ -533,8 +546,9 @@ struct FloatNode : FormatNode {
 			// Now the decimals
 			double decimal_part = (arg < 0 ? -arg : arg) - as_int;
 			bool any_decimal_written = 0;
-			for (size_t remaining_max_decimals = precision_; remaining_max_decimals > 0 && decimal_part > 0;
-					--remaining_max_decimals, ++out, any_decimal_written = true) {
+			for (size_t remaining_max_decimals = precision_;
+			     remaining_max_decimals > 0 && decimal_part > 0;
+			     --remaining_max_decimals, ++out, any_decimal_written = true) {
 				decimal_part *= 10;
 				static int64_t digit;
 				digit = static_cast<int64_t>(decimal_part);
@@ -554,21 +568,30 @@ struct FloatNode : FormatNode {
 };
 
 struct WildcardNode : FormatNode {
-	WildcardNode() : FormatNode(kNone, 0, 0) {}
+	WildcardNode() : FormatNode(kNone, 0, 0) {
+	}
 
 	char* append(char* out, const ArgType t, Argument arg_u, const bool localize) const override {
 		switch (t) {
-			case AbstractNode::ArgType::kChar:     return CharNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kString:   return StringNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kBoolean:  return BooleanNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kFloat:    return FloatNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kSigned:   return IntNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kUnsigned: return UintNode::node_.append(out, t, arg_u, localize);
-			case AbstractNode::ArgType::kPointer:  return UintNode::node_.append(out, AbstractNode::ArgType::kUnsigned, arg_u, localize);
-			case AbstractNode::ArgType::kNullptr:
-				arg_u.string_val = "nullptr";
-				return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
-			default: throw wexception("No argument for wildcard found");
+		case AbstractNode::ArgType::kChar:
+			return CharNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kString:
+			return StringNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kBoolean:
+			return BooleanNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kFloat:
+			return FloatNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kSigned:
+			return IntNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kUnsigned:
+			return UintNode::node_.append(out, t, arg_u, localize);
+		case AbstractNode::ArgType::kPointer:
+			return UintNode::node_.append(out, AbstractNode::ArgType::kUnsigned, arg_u, localize);
+		case AbstractNode::ArgType::kNullptr:
+			arg_u.string_val = "nullptr";
+			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
+		default:
+			throw wexception("No argument for wildcard found");
 		}
 	}
 };
@@ -595,14 +618,14 @@ public:
 		return *t;
 	}
 
-	template <typename... Args>
-	std::string format(const bool localize, Args... args) const {
+	template <typename... Args> std::string format(const bool localize, Args... args) const {
 		char* out(buffer_);
 		bool hit_last_arg = false;
 
 		for (const auto& pair : nodes_) {
 			if (pair.second == 0) {
-				out = pair.first->append(out, AbstractNode::ArgType::kNone, AbstractNode::Argument(), localize);
+				out = pair.first->append(
+				   out, AbstractNode::ArgType::kNone, AbstractNode::Argument(), localize);
 			} else {
 				hit_last_arg |= format_impl(&out, pair.second, pair.second - 1, localize, args...);
 			}
@@ -613,7 +636,8 @@ public:
 		}
 
 		if (static_cast<int64_t>(out - buffer_) >= kBufferSize) {
-			throw wexception("Buffer overflow: found %" PRId64 " characters, limit is %" PRId64, static_cast<int64_t>(out - buffer_), kBufferSize);
+			throw wexception("Buffer overflow: found %" PRId64 " characters, limit is %" PRId64,
+			                 static_cast<int64_t>(out - buffer_), kBufferSize);
 		}
 		*out = '\0';
 		return buffer_;
@@ -621,20 +645,24 @@ public:
 
 	std::string format(const bool localize, const ArgsVector& args) const {
 		if (args.size() != format_nodes_count_) {
-			throw wexception("Wrong number of arguments: expected %u, found %u", format_nodes_count_, static_cast<unsigned>(args.size()));
+			throw wexception("Wrong number of arguments: expected %u, found %u", format_nodes_count_,
+			                 static_cast<unsigned>(args.size()));
 		}
 
 		char* out(buffer_);
 		for (const auto& pair : nodes_) {
 			if (pair.second == 0) {
-				out = pair.first->append(out, AbstractNode::ArgType::kNone, AbstractNode::Argument(), localize);
+				out = pair.first->append(
+				   out, AbstractNode::ArgType::kNone, AbstractNode::Argument(), localize);
 			} else {
-				out = format_nodes_by_index_[pair.second - 1]->append(out, args[pair.second - 1].first, args[pair.second - 1].second, localize);
+				out = format_nodes_by_index_[pair.second - 1]->append(
+				   out, args[pair.second - 1].first, args[pair.second - 1].second, localize);
 			}
 		}
 
 		if (static_cast<int64_t>(out - buffer_) >= kBufferSize) {
-			throw wexception("Buffer overflow: found %" PRId64 " characters, limit is %" PRId64, static_cast<int64_t>(out - buffer_), kBufferSize);
+			throw wexception("Buffer overflow: found %" PRId64 " characters, limit is %" PRId64,
+			                 static_cast<int64_t>(out - buffer_), kBufferSize);
 		}
 		*out = '\0';
 		return buffer_;
@@ -642,7 +670,10 @@ public:
 
 private:
 	static AbstractNode::Argument arg_;
-	inline void format_do_impl_run(char** out, unsigned orig_index, bool localize, AbstractNode::ArgType t) const {
+	inline void format_do_impl_run(char** out,
+	                               unsigned orig_index,
+	                               bool localize,
+	                               AbstractNode::ArgType t) const {
 		*out = format_nodes_by_index_[orig_index - 1]->append(*out, t, arg_, localize);
 	}
 
@@ -658,7 +689,8 @@ private:
 		arg_.string_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, const std::string& t) const {
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, const std::string& t) const {
 		arg_.string_val = t.c_str();
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
 	}
@@ -702,21 +734,29 @@ private:
 		arg_.unsigned_val = reinterpret_cast<uintptr_t>(t);
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kPointer);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, const nullptr_t) const {
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, const nullptr_t) const {
 		arg_.string_val = "nullptr";
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kNullptr);
 	}
 
 	template <typename T>
-	inline bool format_impl(char** out, unsigned orig_index, unsigned arg_index, const bool localize, T t) const {
+	inline bool format_impl(
+	   char** out, unsigned orig_index, unsigned arg_index, const bool localize, T t) const {
 		if (arg_index != 0) {
-			throw wexception("Too few arguments provided: %u required but only %u passed", format_nodes_count_, orig_index - arg_index);
+			throw wexception("Too few arguments provided: %u required but only %u passed",
+			                 format_nodes_count_, orig_index - arg_index);
 		}
 		format_do_impl(out, orig_index, localize, t);
 		return true;
 	}
 	template <typename T, typename... Args>
-	inline bool format_impl(char** out, unsigned orig_index, unsigned arg_index, const bool localize, T t, Args... args) const {
+	inline bool format_impl(char** out,
+	                        unsigned orig_index,
+	                        unsigned arg_index,
+	                        const bool localize,
+	                        T t,
+	                        Args... args) const {
 		if (arg_index == 0) {
 			format_do_impl(out, orig_index, localize, t);
 			return false;
@@ -735,7 +775,8 @@ private:
 				size_t len = 0;
 				for (; *format_string != '\0' && *format_string != '%'; ++format_string, ++len) {
 				}
-				nodes_.push_back({std::unique_ptr<AbstractNode>(new LiteralNode(std::string(start, len))), 0});
+				nodes_.push_back(
+				   {std::unique_ptr<AbstractNode>(new LiteralNode(std::string(start, len))), 0});
 				continue;
 			}
 			// A format node. Let's see what it says.
@@ -825,7 +866,8 @@ private:
 			if (*format_string == '.') {
 				++format_string;
 				if (*format_string < '0' || *format_string > '9') {
-					throw wexception("expected numerical argument after '.', found '%c'", *format_string);
+					throw wexception(
+					   "expected numerical argument after '.', found '%c'", *format_string);
 				}
 				precision = 0;
 				do {
@@ -845,7 +887,9 @@ private:
 				node = new BooleanNode(flags, min_width, precision);
 				break;
 			case 'f':
-				node = new FloatNode(flags, min_width, precision == kInfinitePrecision ? kDefaultFloatPrecision : precision);
+				node =
+				   new FloatNode(flags, min_width,
+				                 precision == kInfinitePrecision ? kDefaultFloatPrecision : precision);
 				break;
 
 			case 'c':
