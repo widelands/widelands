@@ -19,6 +19,8 @@
 
 #include "wui/constructionsitewindow.h"
 
+#include <memory>
+
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
@@ -184,9 +186,6 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	bool nothing_added = false;
 	std::unique_ptr<UI::Box> settings_box(
 	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
-
-	//	UI::Box& settings_box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0,
-	// UI::Box::Vertical);
 	switch (construction_site->building().type()) {
 	case Widelands::MapObjectType::PRODUCTIONSITE:
 	case Widelands::MapObjectType::TRAININGSITE: {
@@ -359,7 +358,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	}
 
 	if (!nothing_added) {
-		get_tabs()->add("settings", g_image_cache->get(pic_tab_settings), settings_box.get(),
+		get_tabs()->add("settings", g_image_cache->get(pic_tab_settings), settings_box.release(),
 		                _("Settings to apply after construction"));
 	}
 }
