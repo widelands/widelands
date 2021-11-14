@@ -60,11 +60,10 @@ DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent,
 	box->add_inf_space();
 	box->add(new UI::MultilineTextarea(
 	            box, 0, 0, 100, 50, UI::PanelStyle::kWui,
-	            (boost::format(action_->action == Widelands::DiplomacyAction::kInvite ?
+	            bformat(action_->action == Widelands::DiplomacyAction::kInvite ?
                                  _("%s has invited you to join their team.") :
-                                 _("%s wants to join your team.")) %
-	             iplayer_.egbase().get_safe_player(a.sender)->get_name())
-	               .str(),
+                                 _("%s wants to join your team."),
+	             iplayer_.egbase().get_safe_player(a.sender)->get_name()),
 	            UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	         UI::Box::Resizing::kExpandBoth);
 	box->add_space(kSpacing);
@@ -178,7 +177,7 @@ GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
 
 		icon_team->set_handle_mouse(true);
 		icon_flag->set_handle_mouse(true);
-		icon_flag->set_tooltip((boost::format(_("Player %u")) % static_cast<unsigned>(p)).str());
+		icon_flag->set_tooltip(bformat(_("Player %u"), static_cast<unsigned>(p)).str());
 		txt_status->set_fixed_width(230);
 
 		UI::Button* b1 = nullptr;
@@ -275,7 +274,7 @@ void GameObjectivesMenu::update_diplomacy_details() {
 		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
 		                playercolor_image, kTeamColors[t /* it's 1-based, 0 means No Team */],
 		                t == 0 ? "images/players/no_team.png" : "images/players/team.png"));
-		pair.second->set_tooltip(t == 0 ? _("No team") : (boost::format(_("Team %u")) % t).str());
+		pair.second->set_tooltip(t == 0 ? _("No team") : bformat(_("Team %u"), t));
 	}
 
 	std::set<Widelands::PlayerNumber> players_with_result;
@@ -286,13 +285,13 @@ void GameObjectivesMenu::update_diplomacy_details() {
 				players_with_result.insert(s.player);
 				switch (s.result) {
 				case Widelands::PlayerEndResult::kWon:
-					str = (boost::format(_("Won at %s")) % gametimestring(s.time.get())).str();
+					str = bformat(_("Won at %s"), gametimestring(s.time.get()));
 					break;
 				case Widelands::PlayerEndResult::kLost:
-					str = (boost::format(_("Lost at %s")) % gametimestring(s.time.get())).str();
+					str = bformat(_("Lost at %s"), gametimestring(s.time.get()));
 					break;
 				case Widelands::PlayerEndResult::kResigned:
-					str = (boost::format(_("Resigned at %s")) % gametimestring(s.time.get())).str();
+					str = bformat(_("Resigned at %s"), gametimestring(s.time.get()));
 					break;
 				default:
 					break;
@@ -334,16 +333,14 @@ void GameObjectivesMenu::update_diplomacy_details() {
 			std::string descr;
 			switch (pda.action) {
 			case Widelands::DiplomacyAction::kJoin:
-				descr = (boost::format(_("%1$s has requested to join the team of %2$s.")) %
-				         iplayer_.egbase().player(pda.sender).get_name() %
-				         iplayer_.egbase().player(pda.other).get_name())
-				           .str();
+				descr = bformat(_("%1$s has requested to join the team of %2$s."),
+				         iplayer_.egbase().player(pda.sender).get_name(),
+				         iplayer_.egbase().player(pda.other).get_name());
 				break;
 			case Widelands::DiplomacyAction::kInvite:
-				descr = (boost::format(_("%1$s has invited %2$s to join their team.")) %
-				         iplayer_.egbase().player(pda.sender).get_name() %
-				         iplayer_.egbase().player(pda.other).get_name())
-				           .str();
+				descr = bformat(_("%1$s has invited %2$s to join their team."),
+				         iplayer_.egbase().player(pda.sender).get_name(),
+				         iplayer_.egbase().player(pda.other).get_name());
 				break;
 			default:
 				NEVER_HERE();
