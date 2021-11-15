@@ -132,8 +132,7 @@ const std::string& ZipFilesystem::ZipFile::path() const {
 /**
  * Initialize the real file-system
  */
-ZipFilesystem::ZipFilesystem(const std::string& zipfile)
-   : zip_file_(new ZipFile(zipfile)), basedir_in_zip_file_() {
+ZipFilesystem::ZipFilesystem(const std::string& zipfile) : zip_file_(new ZipFile(zipfile)) {
 	// TODO(unknown): check OS permissions on whether the file is writable
 }
 

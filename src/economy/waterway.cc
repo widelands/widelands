@@ -226,7 +226,7 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 }
 
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
-	MapObject::log_general_info(egbase);
+	RoadBase::log_general_info(egbase);
 
 	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) ? ferry_.serial() : 0);
 	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_.get(egbase) ? fleet_.serial() : 0);

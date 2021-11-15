@@ -320,7 +320,6 @@ MapView::MapView(
    : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
-     view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false),
      edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&

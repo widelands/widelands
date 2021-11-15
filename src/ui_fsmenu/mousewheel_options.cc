@@ -376,7 +376,6 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
 // The main scrolling options dialog box
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     settings_(),
      zoom_box_(this,
                /** TRANSLATORS: Name of a function for the scroll wheel.
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"

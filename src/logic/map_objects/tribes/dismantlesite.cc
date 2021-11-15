@@ -87,7 +87,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
 	set_building(*cur_descr);
 
 	if (loading) {
-		Building::init(egbase);
+		PartiallyFinishedBuilding::init(egbase);
 	} else {
 		init(egbase);
 	}
