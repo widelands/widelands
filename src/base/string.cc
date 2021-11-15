@@ -151,8 +151,6 @@ const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
 const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
 const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
-template <> const IntNode IntNode::node_(kNone, 0, false, false);
-template <> const UintNode UintNode::node_(kNone, 0, false, false);
 
 std::string to_string(const AbstractNode::ArgType t) {
 	switch (t) {

@@ -92,12 +92,10 @@ static int L_string_bformat(lua_State* L) {
 				if (lua_isinteger(L, i)) {
 					arg.first = format_impl::AbstractNode::ArgType::kSigned;
 					arg.second.signed_val = luaL_checkint32(L, i);
-					;
 					fmt_args.emplace_back(arg);
 				} else {
 					arg.first = format_impl::AbstractNode::ArgType::kFloat;
 					arg.second.float_val = luaL_checknumber(L, i);
-					;
 					fmt_args.emplace_back(arg);
 				}
 				break;
@@ -105,14 +103,12 @@ static int L_string_bformat(lua_State* L) {
 			case LUA_TBOOLEAN:
 				arg.first = format_impl::AbstractNode::ArgType::kBoolean;
 				arg.second.boolean_val = luaL_checkboolean(L, i);
-				;
 				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TSTRING:
 				arg.first = format_impl::AbstractNode::ArgType::kString;
 				arg.second.string_val = luaL_checkstring(L, i);
-				;
 				fmt_args.emplace_back(arg);
 				break;
 

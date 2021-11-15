@@ -21,6 +21,7 @@
 #define WL_BASE_FORMAT_IMPL_H
 
 #include <cassert>
+#include <cstddef>
 #include <cstring>
 #include <iostream>
 #include <limits>
@@ -694,6 +695,10 @@ private:
 		arg_.string_val = t.c_str();
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
 	}
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, float t) const {
+		arg_.float_val = t;
+		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kFloat);
+	}
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, double t) const {
 		arg_.float_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kFloat);
@@ -735,7 +740,7 @@ private:
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kPointer);
 	}
 	inline void
-	format_do_impl(char** out, unsigned orig_index, bool localize, const nullptr_t) const {
+	format_do_impl(char** out, unsigned orig_index, bool localize, const std::nullptr_t) const {
 		arg_.string_val = "nullptr";
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kNullptr);
 	}
@@ -961,6 +966,9 @@ private:
 		}
 	}
 };
+
+template <> const IntNode IntNode::node_(kNone, 0, false, false);
+template <> const UintNode UintNode::node_(kNone, 0, false, false);
 
 template <typename... Args>
 std::string format(const bool localize, const std::string& format_string, Args... args) {
