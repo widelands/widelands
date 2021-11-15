@@ -164,7 +164,7 @@ bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::Window::handle_key(down, code);
 }
 
 void WLMessageBox::clicked_ok() {
