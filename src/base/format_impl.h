@@ -748,7 +748,8 @@ private:
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, unsigned int t) const {
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned int t) const {
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
