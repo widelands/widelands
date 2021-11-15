@@ -1,0 +1,14 @@
+# Automatically created by Widelands 1.1~git25434[57f4aa3@master] (Release)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="144"
+nr_players="5"
+name=_"Along The River"
+author="fk, hessenfarmer"
+descr=_"It is the land where the sun is hardly seen during the winter and where spring floods away any reminiscence of the past. Strange tensions have grown among its residents and many selfish rulers have taken advantage of the chaos. The superstitious people appear to be no obstacle for the developments of better equipped armies. Tough times are on the brink of emerging, and you should heed the words of your wise advisors, or fade into oblivion like the others."
+hint=
+theme="summer"
+tags="seafaring, official"
+addons=
