@@ -382,6 +382,8 @@ private:
 };
 using IntNode = NumberNodeT<int64_t>;
 using UintNode = NumberNodeT<uint64_t>;
+template <typename NumberT>
+const NumberNodeT<NumberT> NumberNodeT<NumberT>::node_(kNone, 0, false, false);
 
 struct FloatNode : FormatNode {
 	FloatNode(const uint8_t f, const size_t w, const int32_t p) : FormatNode(f, w, p) {
@@ -966,9 +968,6 @@ private:
 		}
 	}
 };
-
-template <> const IntNode IntNode::node_(kNone, 0, false, false);
-template <> const UintNode UintNode::node_(kNone, 0, false, false);
 
 template <typename... Args>
 std::string format(const bool localize, const std::string& format_string, Args... args) {
