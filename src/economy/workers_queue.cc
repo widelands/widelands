@@ -39,7 +39,7 @@ namespace Widelands {
 WorkersQueue::WorkersQueue(PlayerImmovable& init_owner,
                            DescriptionIndex const init_ware,
                            uint8_t const init_max_size)
-   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER), workers_() {
+   : InputQueue(init_owner, init_ware, init_max_size, wwWORKER) {
 	if (index_ != INVALID_INDEX) {
 		update();
 	}

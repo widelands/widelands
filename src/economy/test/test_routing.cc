@@ -543,7 +543,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 /*                            Distance routing                           */
 /*************************************************************************/
 struct DistanceRoutingFixture : public ComplexRouterFixture {
-	DistanceRoutingFixture() : ComplexRouterFixture() {
+	DistanceRoutingFixture() {
 		// node is connected through a long and a short path
 		// start d1 end
 		start = d0;

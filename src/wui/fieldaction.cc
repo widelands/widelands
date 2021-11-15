@@ -70,7 +70,6 @@ private:
 	void mouseout_slot(int32_t idx);
 	void mousein_slot(int32_t idx);
 
-private:
 	Widelands::Player* plr_;
 };
 

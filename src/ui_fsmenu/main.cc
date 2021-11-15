@@ -334,7 +334,7 @@ void MainMenu::set_labels() {
 	{
 		filename_for_continue_playing_ = "";
 		std::unique_ptr<Widelands::Game> game(create_safe_game(false));
-		if (game.get()) {
+		if (game != nullptr) {
 			SinglePlayerLoader loader(*game);
 			std::vector<SavegameData> games = loader.load_files(kSaveDir);
 			SavegameData* newest_singleplayer = nullptr;
@@ -869,7 +869,7 @@ void MainMenu::action(const MenuTarget t) {
 	case MenuTarget::kContinueLastsave:
 		if (!filename_for_continue_playing_.empty()) {
 			std::unique_ptr<Widelands::Game> game(create_safe_game(true));
-			if (game.get()) {
+			if (game != nullptr) {
 				game->set_ai_training_mode(get_config_bool("ai_training", false));
 				SinglePlayerGameSettingsProvider sp;
 				try {

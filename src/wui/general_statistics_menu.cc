@@ -220,8 +220,8 @@ void GeneralStatisticsMenu::create_player_buttons() {
 		self = &ipl->player();
 	}
 
-	for (unsigned i = 0; i < kMaxPlayers; i++) {
-		cbs_[i] = nullptr;
+	for (UI::Button*& c : cbs_) {
+		c = nullptr;
 	}
 	iterate_players_existing_const(p, nr_players, game_, player) {
 		if (player != self && !show_all_players && player->is_hidden_from_general_statistics()) {
@@ -321,9 +321,9 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(radiogroup_.get_state());
-	for (unsigned i = 0; i < kMaxPlayers; ++i) {
+	for (UI::Button* c : cbs_) {
 		// The saved value indicates whether we explicitly need to toggle this button
-		fw.unsigned_8((cbs_[i] && cbs_[i]->style() != UI::Button::VisualState::kPermpressed) ? 1 : 0);
+		fw.unsigned_8((c && c->style() != UI::Button::VisualState::kPermpressed) ? 1 : 0);
 	}
 	fw.signed_32(slider_->get_slider().get_value());
 }

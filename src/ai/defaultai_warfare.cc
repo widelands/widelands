@@ -345,7 +345,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
                            -3 :
                            0;
 				inputs[10] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
-				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
+				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 2 : 0;
 				inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
 				inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
 				inputs[14] = (strong_enough) ? 1 : -1;
