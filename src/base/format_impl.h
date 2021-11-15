@@ -120,8 +120,11 @@ struct LiteralNode : AbstractNode {
 		if (t != ArgType::kNone) {
 			throw wexception("Attempt to call a literal node with a value");
 		}
-		strncpy(out, content_.c_str(), len_);
-		return out + len_;
+		const char* it = content_.c_str();
+		for (size_t l = len_; l; --l, ++out, ++it) {
+			*out = *it;
+		}
+		return out;
 	}
 
 private:
@@ -206,8 +209,10 @@ struct StringNode : FormatNode {
 				*out = ' ';
 			}
 		}
-		strncpy(out, arg, arg_len);
-		return out + arg_len;
+		for (size_t l = arg_len; l; --l, ++out, ++arg) {
+			*out = *arg;
+		}
+		return out;
 	}
 
 	static const StringNode node_;
@@ -543,8 +548,9 @@ struct FloatNode : FormatNode {
 		}
 
 		if (precision_ > 0) {
-			strncpy(out, decimal_sep, decimal_sep_len);
-			out += decimal_sep_len;
+			for (size_t l = decimal_sep_len; l; --l, ++out, ++decimal_sep) {
+				*out = *decimal_sep;
+			}
 
 			// Now the decimals
 			double decimal_part = (arg < 0 ? -arg : arg) - as_int;
