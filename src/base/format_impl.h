@@ -694,6 +694,7 @@ private:
 		arg_.char_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kChar);
 	}
+
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, const char* t) const {
 		arg_.string_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
@@ -703,6 +704,7 @@ private:
 		arg_.string_val = t.c_str();
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
 	}
+
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, float t) const {
 		arg_.float_val = static_cast<double>(t);
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kFloat);
@@ -711,15 +713,23 @@ private:
 		arg_.float_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kFloat);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, int64_t t) const {
+
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed long long int t) const {
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, int32_t t) const {
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed long int t) const {
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, int16_t t) const {
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, signed int t) const {
+		arg_.signed_val = t;
+		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
+	}
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, signed short int t) const {
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
@@ -727,15 +737,23 @@ private:
 		arg_.signed_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kSigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, uint64_t t) const {
+
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long long int t) const {
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, uint32_t t) const {
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned long int t) const {
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
-	inline void format_do_impl(char** out, unsigned orig_index, bool localize, uint16_t t) const {
+	inline void format_do_impl(char** out, unsigned orig_index, bool localize, unsigned int t) const {
+		arg_.unsigned_val = t;
+		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
+	}
+	inline void
+	format_do_impl(char** out, unsigned orig_index, bool localize, unsigned short t) const {
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
@@ -743,13 +761,13 @@ private:
 		arg_.unsigned_val = t;
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kUnsigned);
 	}
+
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, const void* t) const {
 		arg_.unsigned_val = reinterpret_cast<uintptr_t>(t);
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kPointer);
 	}
 	inline void
 	format_do_impl(char** out, unsigned orig_index, bool localize, const std::nullptr_t) const {
-		arg_.string_val = "nullptr";
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kNullptr);
 	}
 
@@ -807,9 +825,11 @@ private:
 			static unsigned precision;
 			static size_t min_width;
 			static uint8_t flags;
+			static bool min_w_found;
 			precision = kInfinitePrecision;
 			min_width = 0;
 			flags = kNone;
+			min_w_found = false;
 
 			if (*format_string >= '1' && *format_string <= '9') {
 				// Read a number. This is either a format index or the min width.
@@ -845,33 +865,34 @@ private:
 					// Correct the assumptions and jump forward.
 					min_width = format_index;
 					format_index = format_nodes_count_ + 1;
-					goto min_width_done;
+					min_w_found = true;
 				}
 			} else {
 				format_index = format_nodes_count_ + 1;
 			}
 
-			// Index was discovered. Now we get the flags.
-			for (;; ++format_string) {
-				if (*format_string == '+') {
-					flags |= Flags::kNumberSign;
-				} else if (*format_string == '-') {
-					flags |= Flags::kLeftAlign;
-				} else if (*format_string == '0') {
-					flags |= Flags::kPadWith0;
-				} else {
-					break;
+			if (!min_w_found) {
+				// Index was discovered. Now we get the flags.
+				for (;; ++format_string) {
+					if (*format_string == '+') {
+						flags |= Flags::kNumberSign;
+					} else if (*format_string == '-') {
+						flags |= Flags::kLeftAlign;
+					} else if (*format_string == '0') {
+						flags |= Flags::kPadWith0;
+					} else {
+						break;
+					}
+				}
+
+				// Now check if a width has been specified.
+				while (*format_string >= '0' && *format_string <= '9') {
+					min_width *= 10;
+					min_width += (*format_string - '0');
+					++format_string;
 				}
 			}
 
-			// Now check if a width has been specified.
-			while (*format_string >= '0' && *format_string <= '9') {
-				min_width *= 10;
-				min_width += (*format_string - '0');
-				++format_string;
-			}
-
-		min_width_done:
 			// Now we check if a precision has been specified.
 			if (*format_string == '\0') {
 				throw wexception("unterminated format sequence at end of string");
