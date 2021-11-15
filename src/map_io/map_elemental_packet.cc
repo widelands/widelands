@@ -61,10 +61,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			if (!t.empty()) {
 				std::vector<std::string> tags;
 				split(tags, t, {','});
-
-				for (std::vector<std::string>::const_iterator ci = tags.begin(); ci != tags.end();
-				     ++ci) {
-					std::string tn = *ci;
+				for (std::string tn : tags) {
 					trim(tn);
 					map->add_tag(tn);
 				}
@@ -186,10 +183,10 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("addons", addons);
 
 	int counter = 0;
-	for (Widelands::SuggestedTeamLineup lineup : map.get_suggested_teams()) {
+	for (const Widelands::SuggestedTeamLineup& lineup : map.get_suggested_teams()) {
 		Section& teams_section = prof.create_section(bformat("teams%02d", counter++).c_str());
 		int lineup_counter = 0;
-		for (Widelands::SuggestedTeam team : lineup) {
+		for (const Widelands::SuggestedTeam& team : lineup) {
 			std::string section_contents;
 			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
 				if (it == team.begin()) {

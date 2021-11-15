@@ -310,7 +310,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	buttons_box_.add_inf_space();
 
 	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
-		if (tabs_.active() == fastplace_tab_index && game_.get() == nullptr) {
+		if (tabs_.active() == fastplace_tab_index && game_ == nullptr) {
 			game_.reset(new Widelands::Game());
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();

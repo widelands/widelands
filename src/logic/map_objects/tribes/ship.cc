@@ -207,12 +207,12 @@ void Ship::wakeup_neighbours(Game& game) {
 	std::vector<Bob*> ships;
 	game.map().find_bobs(game, area, &ships, FindBobShip());
 
-	for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-		if (*it == this) {
+	for (Bob* it : ships) {
+		if (it == this) {
 			continue;
 		}
 
-		dynamic_cast<Ship*>(*it)->ship_wakeup(game);
+		dynamic_cast<Ship&>(*it).ship_wakeup(game);
 	}
 }
 
@@ -471,8 +471,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			std::vector<Bob*> ships;
 			map.find_bobs(game, area, &ships, FindBobShip());
 
-			for (std::vector<Bob*>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-				if (*it == this) {
+			for (Bob* it : ships) {
+				if (it == this) {
 					continue;
 				}
 
