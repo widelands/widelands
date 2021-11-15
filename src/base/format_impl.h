@@ -698,7 +698,7 @@ private:
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kString);
 	}
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, float t) const {
-		arg_.float_val = t;
+		arg_.float_val = static_cast<double>(t);
 		format_do_impl_run(out, orig_index, localize, AbstractNode::ArgType::kFloat);
 	}
 	inline void format_do_impl(char** out, unsigned orig_index, bool localize, double t) const {
