@@ -19,6 +19,8 @@
 
 #include "wui/constructionsitewindow.h"
 
+#include <memory>
+
 #include "logic/map_objects/tribes/militarysite.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
@@ -182,7 +184,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	// a simplified faksimile of the later building window that contains only
 	// the relevant options.
 	bool nothing_added = false;
-	UI::Box& settings_box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	std::unique_ptr<UI::Box> settings_box(
+	   new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
 	switch (construction_site->building().type()) {
 	case Widelands::MapObjectType::PRODUCTIONSITE:
 	case Widelands::MapObjectType::TRAININGSITE: {
@@ -191,25 +194,25 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
 		assert(prodsite != nullptr);
 		assert(ps->ware_queues.size() == prodsite->input_wares().size());
-		ensure_box_can_hold_input_queues(settings_box);
+		ensure_box_can_hold_input_queues(*settings_box);
 		for (const auto& pair : prodsite->input_wares()) {
 			InputQueueDisplay* queue = new InputQueueDisplay(
-			   &settings_box, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
-			settings_box.add(queue, UI::Box::Resizing::kFullSize);
+			   settings_box.get(), *ibase(), *construction_site, Widelands::wwWARE, pair.first);
+			settings_box->add(queue, UI::Box::Resizing::kFullSize);
 			cs_ware_queues_.push_back(queue);
 		}
 		assert(ps->worker_queues.size() == prodsite->input_workers().size());
 		for (const auto& pair : prodsite->input_workers()) {
 			InputQueueDisplay* queue = new InputQueueDisplay(
-			   &settings_box, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
-			settings_box.add(queue, UI::Box::Resizing::kFullSize);
+			   settings_box.get(), *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
+			settings_box->add(queue, UI::Box::Resizing::kFullSize);
 			cs_ware_queues_.push_back(queue);
 		}
 		if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
 			cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
-			   &settings_box, ts->desired_capacity, 0, ts->max_capacity, can_act);
-			settings_box.add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-			settings_box.add_space(8);
+			   settings_box.get(), ts->desired_capacity, 0, ts->max_capacity, can_act);
+			settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+			settings_box->add_space(8);
 			cs_soldier_capacity_->changed.connect([this]() {
 				if (game_) {
 					game_->send_player_change_soldier_capacity(
@@ -219,7 +222,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			});
 		}
-		cs_stopped_ = new UI::Checkbox(&settings_box, UI::PanelStyle::kWui, Vector2i::zero(),
+		cs_stopped_ = new UI::Checkbox(settings_box.get(), UI::PanelStyle::kWui, Vector2i::zero(),
 		                               _("Stopped"), _("Stop this building’s work after completion"));
 		cs_stopped_->clickedto.connect([this, ps](bool stop) {
 			if (stop != ps->stopped) {
@@ -230,16 +233,16 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			}
 		});
-		settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		settings_box.add_space(6);
+		settings_box->add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		settings_box->add_space(6);
 		cs_stopped_->set_enabled(can_act);
 	} break;
 	case Widelands::MapObjectType::MILITARYSITE: {
 		upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
 		cs_soldier_capacity_ = new ConstructionSoldierCapacityBox(
-		   &settings_box, ms->desired_capacity, 1, ms->max_capacity, can_act);
-		settings_box.add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-		settings_box.add_space(8);
+		   settings_box.get(), ms->desired_capacity, 1, ms->max_capacity, can_act);
+		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		settings_box->add_space(8);
 		cs_soldier_capacity_->changed.connect([this]() {
 			if (game_) {
 				game_->send_player_change_soldier_capacity(
@@ -250,8 +253,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		});
 
 		UI::Box& soldier_preference_box =
-		   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-		settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		   *new UI::Box(settings_box.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+		settings_box->add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		Panel& soldier_preference_panel =
 		   *new Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, 64, 32);
 		soldier_preference_box.add(&soldier_preference_panel);
@@ -275,7 +278,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 				}
 			});
 		}
-		settings_box.add_space(8);
+		settings_box->add_space(8);
 	} break;
 	case Widelands::MapObjectType::WAREHOUSE: {
 		upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
@@ -331,7 +334,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
 		if (construction_site->get_info().becomes->get_isport()) {
 			cs_launch_expedition_ = new UI::Checkbox(
-			   &settings_box, UI::PanelStyle::kWui, Vector2i::zero(), _("Start an expedition"),
+			   settings_box.get(), UI::PanelStyle::kWui, Vector2i::zero(), _("Start an expedition"),
 			   _("Start an expedition from this port after completion"));
 			cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 				if (launch != ws->launch_expedition) {
@@ -343,8 +346,8 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 					}
 				}
 			});
-			settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
-			settings_box.add_space(6);
+			settings_box->add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
+			settings_box->add_space(6);
 			cs_launch_expedition_->set_enabled(can_act);
 		} else {
 			nothing_added = true;
@@ -355,7 +358,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 	}
 
 	if (!nothing_added) {
-		get_tabs()->add("settings", g_image_cache->get(pic_tab_settings), &settings_box,
+		get_tabs()->add("settings", g_image_cache->get(pic_tab_settings), settings_box.release(),
 		                _("Settings to apply after construction"));
 	}
 }
