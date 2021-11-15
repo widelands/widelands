@@ -58,8 +58,8 @@ print_help () {
     echo "                      Debug builds are created with AddressSanitizer by"
     echo "                      default."
     echo " "
-    echo "-ts or --no-tsan       Switch off the ThreadSanitizer (default)."
-    echo "+ts or --with-tsan     Switch on the ThreadSanitizer."
+    echo "-m or --no-tsan       Switch off the ThreadSanitizer (default)."
+    echo "+m or --with-tsan     Switch on the ThreadSanitizer."
     echo "                      Can only be used with --no-asan, because AddressSanitizer"
     echo "                      cannot be enabled at the same time."
     echo " "
@@ -185,11 +185,11 @@ do
       USE_ASAN="ON"
     shift
     ;;
-    -ts|--no-tsan)
+    -m|--no-tsan)
       USE_TSAN="OFF"
     shift
     ;;
-    +ts|--with-tsan)
+    +m|--with-tsan)
       USE_TSAN="ON"
     shift
     ;;
@@ -443,11 +443,11 @@ fi
 if [ $USE_TSAN = "ON" ]; then
   echo "Will build with ThreadSanitizer."
   echo "https://clang.llvm.org/docs/ThreadSanitizer.html"
-  echo "You can use -ts or --no-tsan to switch it off."
+  echo "You can use -m or --no-tsan to switch it off."
   CMD_ADD "--with-tsan"
 else
   echo "Will build without ThreadSanitizer."
-  echo "You can use +ts or --with-tsan to switch it on."
+  echo "You can use +m or --with-tsan to switch it on."
   CMD_ADD "--no-tsan"
 fi
 if [ $USE_XDG = "ON" ]; then
