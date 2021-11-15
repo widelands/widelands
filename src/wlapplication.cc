@@ -1312,7 +1312,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		try {
 			std::unique_ptr<FileSystem> fs(&FileSystem::create(dd));
-			if (!fs.get()) {
+			if (!fs) {
 				return std::string("Unable to allocate filesystem");
 			}
 

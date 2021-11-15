@@ -194,7 +194,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
 		assert(prodsite != nullptr);
 		assert(ps->ware_queues.size() == prodsite->input_wares().size());
-		ensure_box_can_hold_input_queues(*settings_box.get());
+		ensure_box_can_hold_input_queues(*settings_box);
 		for (const auto& pair : prodsite->input_wares()) {
 			InputQueueDisplay* queue = new InputQueueDisplay(
 			   settings_box.get(), *ibase(), *construction_site, Widelands::wwWARE, pair.first);
