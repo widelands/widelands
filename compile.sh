@@ -100,6 +100,18 @@ print_help () {
     echo "                      have to clean your build directory before switching"
     echo "                      compilers."
     echo " "
+    echo "Options for developers:"
+    echo " "
+    echo "-b <dir> or --builddir <dir>"
+    echo "                      Build in specified directory."
+    echo "                      Default is '<sourcedir>/build'"
+    echo " "
+    echo "CMake options:"
+    echo " "
+    echo "-D...                 Any option starting with -D will be passed to cmake"
+    echo "                      unchanged before the above options."
+    echo " "
+    echo " "
     echo "For the AddressSanitizer output to be useful, some systems (e.g. Ubuntu Linux)"
     echo "require that you set a symlink to the symbolizer. For example:"
     echo " "
@@ -109,16 +121,12 @@ print_help () {
     echo " "
     echo "    https://clang.llvm.org/docs/AddressSanitizer.html"
     echo " "
-    echo " "
-    echo "CMake options:"
-    echo " "
-    echo "-D...                 Any option starting with -D will be passed to cmake"
-    echo "                      unchanged before the above options."
-    echo " "
     return
   }
 
 ## Options to control the build.
+BUILDDIR_DEFAULT="build"
+BUILDDIR=$BUILDDIR_DEFAULT
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
@@ -302,6 +310,21 @@ do
       USE_XDG="ON"
     shift
     ;;
+    -b|--builddir)
+      case $2 in
+        -*)
+          echo "'$1' is called with '$2', which looks like an option switch, not a"
+          echo "directory name."
+          exit 1
+        ;;
+        '')
+          echo "Call '$1' with a directory name."
+          exit 1
+        ;;
+      esac
+      BUILDDIR="$2"
+      shift 2 # past argument and value
+    ;;
     -D*)
       EXTRA_OPTS="$EXTRA_OPTS $1"
     shift
@@ -328,22 +351,59 @@ if [ "${USE_ASAN}" = "ON" ] && [ "${USE_TSAN}" = "ON" ]; then
   exit 1
 fi
 
-if [ $QUIET -eq 0 ]; then
-  echo " "
-  echo "###########################################################"
-  echo "#     Script to simplify the compilation of Widelands     #"
-  echo "###########################################################"
-  echo " "
+## Sort out directories
 
-  if [ -n "$LOCAL_DEFAULTS" ]; then
-    echo "Using default compile options from '$COMPILE_DEFAULTS':"
-    echo "   $LOCAL_DEFAULTS"
-    echo " "
-    echo "Command line options:"
-    echo "   $OLD_CLI_ARGS"
-    echo " "
+# Check whether the script is run in a widelands main directory
+if ! [ -f src/wlapplication.cc ] ; then
+  echo "  This script must be located in the main directory of the widelands"
+  echo "  source code."
+  exit 1
+fi
+
+SOURCEDIR=$(pwd -P)
+
+if [ ! -d "$BUILDDIR" ]
+then
+  if ! mkdir -p "$BUILDDIR"
+  then
+    echo "Can't create build directory: $BUILDDIR"
+    exit 1
   fi
 fi
+
+if ! cd "$BUILDDIR" ; then
+  echo "Can't enter build directory: $BUILDDIR"
+  exit 1
+fi
+BUILDDIR=$(pwd -P)
+BUILD_BASEDIR=$(dirname "$BUILDDIR")
+
+cd "$SOURCEDIR"
+
+if [ "$BUILD_BASEDIR" = "$SOURCEDIR" ] ; then
+  SOURCEDIR=..
+  BUILD_BASEDIR=..
+  BUILDDIR=$(basename "$BUILDDIR")
+fi
+
+builddir_in_sourcedir () {
+  if [ "$BUILD_BASEDIR" = "$SOURCEDIR" ] ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+using_default_builddir () {
+  if ! builddir_in_sourcedir ; then
+    return 1
+  fi
+  if [ "$BUILDDIR" = "$BUILDDIR_DEFAULT" ] ; then
+    return 0
+  else
+    return 1
+  fi
+}
 
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
@@ -351,11 +411,32 @@ CMD_ADD () {
   COMMANDLINE="$COMMANDLINE $@"
 }
 
-if [ $QUIET -ne 0 ]; then
+if [ $QUIET -ne 0 ] ; then
 
   CMD_ADD "$LOCAL_DEFAULTS $OLD_CLI_ARGS"
 
 else  # Start of verbose output section
+
+echo " "
+echo "###########################################################"
+echo "#     Script to simplify the compilation of Widelands     #"
+echo "###########################################################"
+echo " "
+
+if [ -n "$LOCAL_DEFAULTS" ]; then
+  echo "Using default compile options from '$COMPILE_DEFAULTS':"
+  echo "   $LOCAL_DEFAULTS"
+  echo " "
+  echo "Command line options:"
+  echo "   $OLD_CLI_ARGS"
+  echo " "
+fi
+
+echo "Using build directory:"
+echo "   '$BUILDDIR'"
+echo " "
+# Adding build directory to update script is not necessary, because the script
+# will only be created for the default.
 
 if [ -n "$EXTRA_OPTS" ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
@@ -489,17 +570,6 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 ######################################
 #    Definition of some functions    #
 ######################################
-  # Check basic stuff
-  basic_check () {
-    # Check whether the script is run in a widelands main directory
-    if ! [ -f src/wlapplication.cc ] ; then
-      echo "  This script must be run from the main directory of the widelands"
-      echo "  source code."
-      exit 1
-    fi
-    return 0
-  }
-
   set_buildtool () {
     GENERATOR=""
     #Defaults to ninja, but if that is not found, we use make instead
@@ -520,14 +590,26 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d build/locale || mkdir -p build/locale
-    test -e data/locale || ln -s ../build/locale data/locale
+    test -d "$BUILDDIR"/locale || mkdir -p "$BUILDDIR"/locale
+
+    # Link only if build directory is under source directory
+    if builddir_in_sourcedir ; then
+      if [ -e data/locale ] ; then
+        # Prefer link to default builddir
+        if using_default_builddir ; then
+          rm data/locale
+        else
+          return 0
+        fi
+      fi
+      ln -s ../"$BUILDDIR"/locale data/locale
+    fi
     return 0
   }
 
   # Compile Widelands
   compile_widelands () {
-    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    cmake $GENERATOR "$SOURCEDIR" $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $buildtool -j $CORES
 
@@ -536,6 +618,12 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Remove old and move newly compiled files
   move_built_files () {
+    # Only replace files for the default build
+    if ! using_default_builddir ; then
+      return 1
+    fi
+    # This is called in $BUILDDIR, but only if it is ${SOURCEDIR}/$BUILDDIR_DEFAULT,
+    # so .. is $SOURCEDIR
     rm  -f ../VERSION || true
     rm  -f ../widelands || true
 
@@ -546,23 +634,29 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
-        mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
-        mv ../build/src/website/wl_map_object_info ../wl_map_object_info
-        mv ../build/src/website/wl_map_info ../wl_map_info
+      mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
+      mv ../build/src/website/wl_map_object_info ../wl_map_object_info
+      mv ../build/src/website/wl_map_info ../wl_map_info
     fi
     return 0
   }
 
   create_update_script () {
-    # First check if this is an git checkout at all - only in that case,
+    # Only create for default build
+    if ! using_default_builddir ; then
+      return 2
+    fi
+    # First check if this is a git checkout at all - only in that case,
     # creation of a script makes any sense.
     if [ -n "$(git status -s)" ]; then
-      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created."
+      echo "You don't appear to be using Git, or your working tree is not clean."
+      echo "An update script will not be created."
       if [ $QUIET -eq 0 ]; then
         git status
       fi
-      return 0
+      return 1
     fi
+    # This is called in $SOURCEDIR
       rm -f update.sh || true
       cat > update.sh << END_SCRIPT
 #!/bin/sh
@@ -603,7 +697,6 @@ END_SCRIPT
 #    Here is the "main" function     #
 ######################################
 set -e
-basic_check
 set_buildtool
 prepare_directories_and_links
 
@@ -612,12 +705,19 @@ if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-bui
   utils/build_deps.py
 fi
 
-mkdir -p build
-cd build
+cd "$BUILDDIR"
 compile_widelands
-move_built_files
-cd ..
-create_update_script
+if move_built_files ; then
+  FILES_MOVED=yes
+else
+  FILES_MOVED=""
+fi
+cd "$SOURCEDIR"
+if create_update_script ; then
+  UPDATE_SCRIPT=yes
+else
+  UPDATE_SCRIPT=""
+fi
 
 if [ $QUIET -eq 0 ]; then  # Start of verbose output section
 
@@ -626,6 +726,10 @@ echo "###########################################################"
 echo "# Congratulations! Widelands has been built successfully  #"
 echo "# with the following settings:                            #"
 echo "#                                                         #"
+if ! using_default_builddir ; then
+  echo "# - Build directory:                                      #"
+  printf "#   %-53s #\n" "'$BUILDDIR'"
+fi
 if [ $BUILD_TYPE = "Release" ]; then
   echo "# - Release build                                         #"
 else
@@ -641,7 +745,6 @@ if [ $BUILD_TESTS = "ON" ]; then
 else
   echo "# - No tests                                              #"
 fi
-
 if [ $USE_XDG = "ON" ]; then
   echo "# - With support for the XDG Base Directory Specification #"
 else
@@ -654,11 +757,24 @@ else
   echo "# - No website-related executables                        #"
 fi
 echo "#                                                         #"
-echo "# You should now be able to run Widelands via             #"
-echo "# typing ./widelands + ENTER in your terminal             #"
-echo "#                                                         #"
-echo "# You can update Widelands via running ./update.sh        #"
-echo "# in the same directory that you ran this script in.      #"
+if [ -n "$FILES_MOVED" ] ; then
+  echo "# You should now be able to run Widelands via             #"
+  echo "# typing ./widelands + ENTER in your terminal             #"
+else
+  echo "# Newly built executable was not moved to the source      #"
+  echo "# directory because of non-standard build directory.      #"
+  echo "# It can be found at:                                     #"
+  printf "#   %-53s #\n" "'${BUILDDIR}/src/widelands'"
+  echo "#                                                         #"
+  echo "# Don't forget to move it to the source directory or use  #"
+  echo "# the --datadir option. You may also need --localedir and #"
+  echo "# --skip_check_datadir_version                            #"
+fi
+if [ -n "$UPDATE_SCRIPT" ] ; then
+  echo "#                                                         #"
+  echo "# You can update Widelands via running ./update.sh        #"
+  echo "# in the source directory.                                #"
+fi
 echo "###########################################################"
 
 else
