@@ -107,6 +107,10 @@ print_help () {
     echo "-b <dir> or --builddir <dir>"
     echo "                      Build in specified directory."
     echo "                      Default is '<sourcedir>/build'"
+    echo "-e <filename> or --exename <filename>"
+    echo "                      Move newly built executable to '<sourcedir>/<filename>'"
+    echo "                      Default is to not move if the build directory is changed,"
+    echo "                      or '<sourcedir>/widelands for the default build directory."
     echo " "
     echo "CMake options:"
     echo " "
@@ -126,9 +130,12 @@ print_help () {
     return
   }
 
-## Options to control the build.
+
+###############################################################################
+### Options to control the build.
 BUILDDIR_DEFAULT="build"
 BUILDDIR=$BUILDDIR_DEFAULT
+EXENAME=""
 BUILD_WEBSITE="ON"
 BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
@@ -148,7 +155,8 @@ if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
 fi
 
-# try to set default number of cores automatically
+###############################################################################
+### Try to set default number of cores automatically
 
 # nproc is a GNU tool, may not be available everywhere, but it is preferable,
 # when it is available
@@ -177,6 +185,9 @@ else
   MAXCORES=0
   CORES=1
 fi
+
+###############################################################################
+### Parse options
 
 OLD_CLI_ARGS="$@"
 if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
@@ -332,6 +343,21 @@ do
       BUILDDIR="$2"
       shift 2 # past argument and value
     ;;
+    -e|--exename)
+      case $2 in
+        -*)
+          echo "'$1' is called with '$2', which looks like an option switch, not a"
+          echo "filename."
+          exit 1
+        ;;
+        '')
+          echo "Call '$1' with a filename."
+          exit 1
+        ;;
+      esac
+      EXENAME="$2"
+      shift 2 # past argument and value
+    ;;
     -D*)
       EXTRA_OPTS="$EXTRA_OPTS $1"
     shift
@@ -358,7 +384,8 @@ if [ "${USE_ASAN}" = "ON" ] && [ "${USE_TSAN}" = "ON" ]; then
   exit 1
 fi
 
-## Sort out directories
+###############################################################################
+### Sort out directories
 
 # Check whether the script is run in a widelands main directory
 if ! [ -f src/wlapplication.cc ] ; then
@@ -369,10 +396,8 @@ fi
 
 SOURCEDIR=$(pwd -P)
 
-if [ ! -d "$BUILDDIR" ]
-then
-  if ! $RUN mkdir -p "$BUILDDIR"
-  then
+if [ ! -d "$BUILDDIR" ]; then
+  if ! $RUN mkdir -p "$BUILDDIR" ; then
     echo "Can't create build directory: $BUILDDIR"
     exit 1
   fi
@@ -383,15 +408,13 @@ if ! $RUN cd "$BUILDDIR" ; then
   exit 1
 fi
 
-if [ -z "$RUN" ]
-then
+if [ -z "$RUN" ]; then
   BUILDDIR=$(pwd -P)
 fi
 
 BUILD_BASEDIR=$(dirname "$BUILDDIR")
 
-if [ "$RUN" = "echo" -a "$BUILD_BASEDIR" = "." ]
-then
+if [ "$RUN" = "echo" -a "$BUILD_BASEDIR" = "." ]; then
   BUILD_BASEDIR="$SOURCEDIR"
 fi
 
@@ -422,13 +445,14 @@ using_default_builddir () {
   fi
 }
 
-## Get command and options to use in update.sh
+###############################################################################
+### Get command and options to use in update.sh
 COMMANDLINE="$0"
 CMD_ADD () {
   COMMANDLINE="$COMMANDLINE $@"
 }
 
-if [ $QUIET -ne 0 ] ; then
+if [ $QUIET -ne 0 ]; then
 
   CMD_ADD "$LOCAL_DEFAULTS $OLD_CLI_ARGS"
 
@@ -517,6 +541,21 @@ else
   echo "You can use +s or --do-tests to build them."
   CMD_ADD "--skip-tests"
 fi
+if [ $USE_XDG = "ON" ]; then
+  echo " "
+  echo "Basic XDG Base Directory Specification will be used on Linux"
+  echo "if no existing \$HOME/.widelands folder is found."
+  echo "The widelands user data can be found in \$XDG_DATA_HOME/widelands"
+  echo "and defaults to \$HOME/.local/share/widelands."
+  echo "The widelands user configuration can be found in \$XDG_CONFIG_HOME/widelands"
+  echo "and defaults to \$HOME/.config/widelands."
+  echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+  echo "for more information."
+  echo " "
+  CMD_ADD "--with-xdg"
+else
+  CMD_ADD "--without-xdg"
+fi
 echo " "
 echo "###########################################################"
 echo " "
@@ -548,20 +587,15 @@ else
   echo "You can use +m or --with-tsan to switch it on."
   CMD_ADD "--no-tsan"
 fi
-if [ $USE_XDG = "ON" ]; then
+
+if [ -n "$EXENAME" ]; then
   echo " "
-  echo "Basic XDG Base Directory Specification will be used on Linux"
-  echo "if no existing \$HOME/.widelands folder is found."
-  echo "The widelands user data can be found in \$XDG_DATA_HOME/widelands"
-  echo "and defaults to \$HOME/.local/share/widelands."
-  echo "The widelands user configuration can be found in \$XDG_CONFIG_HOME/widelands"
-  echo "and defaults to \$HOME/.config/widelands."
-  echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-  echo "for more information."
+  echo "###########################################################"
   echo " "
-  CMD_ADD "--with-xdg"
-else
-  CMD_ADD "--without-xdg"
+  echo "Move executable to:"
+  echo "   '$EXENAME'"
+  echo " "
+  CMD_ADD "--exename '$EXENAME'"
 fi
 echo " "
 echo "###########################################################"
@@ -577,17 +611,16 @@ echo " "
 
 fi  # End of verbose output section
 
-######################################
-# Definition of some local variables #
-######################################
-buildtool="" #Use ninja by default, fall back to make if that is not available.
-######################################
 
+###############################################################################
+#                                                                             #
+#                        Definition of some functions                         #
+#                                                                             #
+###############################################################################
 
-######################################
-#    Definition of some functions    #
-######################################
+### Function to detect the build system
   set_buildtool () {
+    buildtool=""
     GENERATOR=""
     #Defaults to ninja, but if that is not found, we use make instead
     if [ `command -v ninja` ] ; then
@@ -605,7 +638,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     fi
   }
 
-  # Check if directories / links already exists and create / update them if needed.
+### Function to check if directories / links already exists and create / update
+### them if needed.
   prepare_directories_and_links () {
     test -d "$BUILDDIR"/locale || $RUN mkdir -p "$BUILDDIR"/locale
 
@@ -624,7 +658,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     return 0
   }
 
-  # Compile Widelands
+### Function to actually compile Widelands
   compile_widelands () {
     $RUN cmake $GENERATOR  "$SOURCEDIR"  $EXTRA_OPTS           \
                -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
@@ -641,22 +675,34 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     return 0
   }
 
-  # Remove old and move newly compiled files
+### Function to remove old and move newly compiled files
   move_built_files () {
-    # Only replace files for the default build
+    # Only replace files for the default build, except for main executable,
+    # which is also replaced in case of -e or --exename
     if ! using_default_builddir ; then
+      if [ -n "$EXENAME" ]; then
+        # This is called in $BUILDDIR
+        $RUN rm -f "${SOURCEDIR}/$EXENAME" || true
+        $RUN mv src/widelands "${SOURCEDIR}/$EXENAME"
+        return 0
+      fi
       return 1
     fi
+
+    if [ -z "$EXENAME" ]; then
+      EXENAME=widelands
+    fi
+
     # This is called in $BUILDDIR, but only if it is ${SOURCEDIR}/$BUILDDIR_DEFAULT,
     # so .. is $SOURCEDIR
     $RUN rm  -f ../VERSION || true
-    $RUN rm  -f ../widelands || true
+    $RUN rm  -f ../"$EXENAME" || true
 
     $RUN rm  -f ../wl_map_object_info || true
     $RUN rm  -f ../wl_map_info || true
 
     $RUN cp VERSION ../VERSION
-    $RUN mv src/widelands ../widelands
+    $RUN mv src/widelands ../"$EXENAME"
 
     if [ $BUILD_WEBSITE = "ON" ]; then
       $RUN mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
@@ -666,6 +712,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     return 0
   }
 
+### Function to create update script
   create_update_script () {
     # Only create for default build
     if ! using_default_builddir ; then
@@ -714,19 +761,23 @@ END_SCRIPT
         echo "The update script has successfully been created."
       fi
   }
-######################################
+
+### End of function definitions
 
 
+###############################################################################
+#                                                                             #
+#                        Here is the "main" function                          #
+#                                                                             #
+###############################################################################
 
-######################################
-#    Here is the "main" function     #
-######################################
 set -e
 set_buildtool
 prepare_directories_and_links
 
 # Dependency check doesn't work with ninja, so we do it manually here
-if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
+if [ $BUILD_TYPE = "Debug" -a \
+     \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
   $RUN utils/build_deps.py
 fi
 
@@ -737,6 +788,7 @@ if move_built_files ; then
 else
   FILES_MOVED=""
 fi
+
 $RUN cd "$SOURCEDIR"
 if create_update_script ; then
   UPDATE_SCRIPT=yes
@@ -784,10 +836,10 @@ fi
 echo "#                                                         #"
 if [ -n "$FILES_MOVED" ] ; then
   echo "# You should now be able to run Widelands via             #"
-  echo "# typing ./widelands + ENTER in your terminal             #"
+  printf "# %-55s #\n" "typing './$EXENAME' + ENTER in your terminal"
 else
-  echo "# Newly built executable was not moved to the source      #"
-  echo "# directory because of non-standard build directory.      #"
+  echo "# The newly built executable was not moved to the source  #"
+  echo "# directory because of a non-standard build directory.    #"
   echo "# It can be found at:                                     #"
   printf "#   %-53s #\n" "'${BUILDDIR}/src/widelands'"
   echo "#                                                         #"
@@ -805,4 +857,5 @@ echo "###########################################################"
 else
   echo "Widelands has been built successfully."
 fi  # End of verbose output section
-######################################
+
+### End of compile.sh
