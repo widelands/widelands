@@ -512,7 +512,7 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	fw.unsigned_8(HeaderFerryFleet);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	fw.unsigned_8(owner_->player_number());
+	fw.unsigned_8(owner_.load()->player_number());
 
 	MapObject::save(egbase, mos, fw);
 

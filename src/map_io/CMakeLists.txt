@@ -91,6 +91,7 @@ wl_library(map_io
     map_waterwaydata_packet.h
     map_wincondition_packet.cc
     map_wincondition_packet.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_log

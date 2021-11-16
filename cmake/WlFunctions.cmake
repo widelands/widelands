@@ -5,6 +5,7 @@ macro(_parse_common_args ARGS)
     THIRD_PARTY  # Is a third party lib. Less warnings, no codecheck.
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
+    USES_ATOMIC
     USES_BOOST_LIBRARIES
     USES_INTL
     USES_OPENGL
@@ -79,6 +80,11 @@ macro(_common_compile_tasks)
     # Boost is practically the standard library, so we always add a search path
     # to include it easily. Except for third party.
     wl_include_system_directories(${NAME} ${Boost_INCLUDE_DIR})
+  endif()
+
+  if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+    # clang on linux needs explicit linkage against standard library atomic
+    target_link_libraries(${NAME} atomic)
   endif()
 
   if(ARG_USES_ZLIB)
