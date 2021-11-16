@@ -19,6 +19,7 @@
 
 #include "ui_basic/panel.h"
 
+#include <atomic>
 #include <memory>
 
 #include <SDL_timer.h>
@@ -38,8 +39,8 @@
 
 namespace UI {
 
-Panel* Panel::modal_ = nullptr;
-Panel* Panel::mousegrab_ = nullptr;
+std::atomic<Panel*> Panel::modal_(nullptr);
+std::atomic<Panel*> Panel::mousegrab_(nullptr);
 Panel* Panel::mousein_ = nullptr;
 Panel* Panel::tooltip_panel_ = nullptr;
 Vector2i Panel::tooltip_fixed_pos_ = Vector2i::invalid();
@@ -178,7 +179,7 @@ Panel::ModalGuard::~ModalGuard() {
 	}
 }
 
-bool Panel::logic_thread_running_(false);
+std::atomic_bool Panel::logic_thread_running_(false);
 
 constexpr uint32_t kGameLogicDelay = 50;
 
@@ -192,7 +193,7 @@ void Panel::logic_thread() {
 		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
 
 		if (m && (m->flags_ & pf_logic_think)) {
-			switch (m->logic_thread_locked_) {
+			switch (m->logic_thread_locked_.load()) {
 			case LogicThreadState::kFree: {
 				MutexLock lock(MutexLock::ID::kLogicFrame);
 
@@ -200,7 +201,7 @@ void Panel::logic_thread() {
 
 				m->game_logic_think();  // actual game logic
 
-				switch (m->logic_thread_locked_) {
+				switch (m->logic_thread_locked_.load()) {
 				case LogicThreadState::kLocked:
 					m->logic_thread_locked_ = LogicThreadState::kFree;
 					break;
@@ -290,7 +291,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 		// their children take precedence over a (potentially non-modal) toplevel panel.
 		if (message.empty() && (flags_ & pf_hide_all_overlays) == 0) {
 			if (modal_ != nullptr) {
-				modal_->do_tooltip();
+				modal_.load()->do_tooltip();
 			} else if (is_modal()) {
 				do_tooltip();
 			} else {
@@ -305,7 +306,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 void Panel::stay_responsive() {
 	assert(modal_);
 	if (modal_ != this) {
-		return modal_->stay_responsive();
+		return modal_.load()->stay_responsive();
 	}
 
 	handle_notes();
@@ -1649,7 +1650,7 @@ bool Panel::ui_textinput(const std::string& text) {
 	if (modal_ == nullptr) {
 		return false;
 	}
-	return modal_->do_textinput(text);
+	return modal_.load()->do_textinput(text);
 }
 
 /**

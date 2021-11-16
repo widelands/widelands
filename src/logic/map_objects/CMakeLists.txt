@@ -135,6 +135,7 @@ wl_library(logic_map_objects
     world/terrain_description.cc
     world/terrain_description.h
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
     ai_hints
     base_exceptions

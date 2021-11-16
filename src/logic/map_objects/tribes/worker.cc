@@ -955,8 +955,8 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	DescriptionIndex index = owner_->tribe().worker_index(bob);
-	if (owner_->tribe().has_worker(index)) {
+	DescriptionIndex index = owner_.load()->tribe().worker_index(bob);
+	if (owner_.load()->tribe().has_worker(index)) {
 		game.create_worker(get_position(), index, owner_);
 	} else {
 		const DescriptionIndex critter = game.descriptions().critter_index(bob);
@@ -1039,7 +1039,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
  */
 // TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
-	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
+	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
 	++state.ivar1;
 	schedule_act(game, Duration(10));
 	return true;

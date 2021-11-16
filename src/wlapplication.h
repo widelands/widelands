@@ -29,6 +29,7 @@
 #endif
 #endif
 
+#include <atomic>
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -263,7 +264,7 @@ private:
 	bool handle_key_enabled_;
 
 	/// true if an external entity wants us to quit
-	bool should_die_;
+	std::atomic_bool should_die_;
 
 	std::string homedir_;
 #ifdef USE_XDG
