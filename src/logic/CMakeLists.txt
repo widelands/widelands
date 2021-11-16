@@ -159,6 +159,7 @@ wl_library(logic_map
     path.h
     pathfield.cc
     pathfield.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_i18n
@@ -265,6 +266,7 @@ wl_library(logic
     trade_agreement.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_i18n

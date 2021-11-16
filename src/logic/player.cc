@@ -19,6 +19,7 @@
 
 #include "logic/player.h"
 
+#include <atomic>
 #include <cassert>
 #include <cstdlib>
 #include <memory>
@@ -1380,7 +1381,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
 		if (tr_field.vision != VisibleState::kVisible) {
-			tr_field.terrains.d = tr.field->terrain_d();
+			tr_field.terrains.store({tr.field->terrain_d(), tr_field.terrains.load().r});
 			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
 		}
@@ -1398,7 +1399,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
 		if (l_field.vision != VisibleState::kVisible) {
-			l_field.terrains.r = l.field->terrain_r();
+			l_field.terrains.store({l_field.terrains.load().d, l.field->terrain_r()});
 			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
 		}

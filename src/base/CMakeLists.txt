@@ -45,6 +45,7 @@ wl_library(base_multithreading
   SRCS
     multithreading.h
     multithreading.cc
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_log
@@ -108,6 +109,7 @@ wl_library(base_times
   SRCS
     times.h
     times.cc
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     io_fileread
