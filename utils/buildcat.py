@@ -115,7 +115,7 @@ ITERATIVEPOTS = [
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/',
-     ['../../data/maps/%(name)s/scripting/*.lua', ]
+     ['../../data/maps/SP_Scenarios/%(name)s/scripting/*.lua', ]
      ),
     ('mp_scenario_%(name)s/mp_scenario_%(name)s', 'data/maps/MP_Scenarios/',
      ['../../data/maps/MP_Scenarios/%(name)s/scripting/*.lua', ]
