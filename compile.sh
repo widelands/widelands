@@ -37,6 +37,8 @@ print_help () {
     echo "-h or --help          Print this help."
     echo "-q or --quiet         Suppress most of compile.sh's output."
     echo "-v or --verbose       Make compile.sh's output verbose."
+    echo "-n or --dry-run       Only print commands, do NOT run cmake nor compile"
+    echo "                      anything."
     echo " "
     echo "Omission options and their overrides:"
     echo " "
@@ -140,6 +142,7 @@ USE_XDG="ON"
 EXTRA_OPTS=""
 # Option for this script itself
 QUIET=0
+RUN=""
 
 if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
@@ -280,6 +283,10 @@ do
       QUIET=0
     shift
     ;;
+    -n|--dry-run)
+      RUN=echo
+    shift
+    ;;
     --gcc)
       if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
         COMPILER=gcc
@@ -364,21 +371,31 @@ SOURCEDIR=$(pwd -P)
 
 if [ ! -d "$BUILDDIR" ]
 then
-  if ! mkdir -p "$BUILDDIR"
+  if ! $RUN mkdir -p "$BUILDDIR"
   then
     echo "Can't create build directory: $BUILDDIR"
     exit 1
   fi
 fi
 
-if ! cd "$BUILDDIR" ; then
+if ! $RUN cd "$BUILDDIR" ; then
   echo "Can't enter build directory: $BUILDDIR"
   exit 1
 fi
-BUILDDIR=$(pwd -P)
+
+if [ -z "$RUN" ]
+then
+  BUILDDIR=$(pwd -P)
+fi
+
 BUILD_BASEDIR=$(dirname "$BUILDDIR")
 
-cd "$SOURCEDIR"
+if [ "$RUN" = "echo" -a "$BUILD_BASEDIR" = "." ]
+then
+  BUILD_BASEDIR="$SOURCEDIR"
+fi
+
+$RUN cd "$SOURCEDIR"
 
 if [ "$BUILD_BASEDIR" = "$SOURCEDIR" ] ; then
   SOURCEDIR=..
@@ -590,36 +607,36 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Check if directories / links already exists and create / update them if needed.
   prepare_directories_and_links () {
-    test -d "$BUILDDIR"/locale || mkdir -p "$BUILDDIR"/locale
+    test -d "$BUILDDIR"/locale || $RUN mkdir -p "$BUILDDIR"/locale
 
     # Link only if build directory is under source directory
     if builddir_in_sourcedir ; then
       if [ -e data/locale ] ; then
         # Prefer link to default builddir
         if using_default_builddir ; then
-          rm data/locale
+          $RUN rm data/locale
         else
           return 0
         fi
       fi
-      ln -s ../"$BUILDDIR"/locale data/locale
+      $RUN ln -s ../"$BUILDDIR"/locale data/locale
     fi
     return 0
   }
 
   # Compile Widelands
   compile_widelands () {
-    cmake $GENERATOR  "$SOURCEDIR"  $EXTRA_OPTS           \
-          -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
-          -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
-          -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
-          -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
-          -DOPTION_ASAN=$USE_ASAN                         \
-          -DOPTION_TSAN=$USE_TSAN                         \
-          -DUSE_XDG=$USE_XDG                              \
-          -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    $RUN cmake $GENERATOR  "$SOURCEDIR"  $EXTRA_OPTS           \
+               -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
+               -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
+               -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
+               -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
+               -DOPTION_ASAN=$USE_ASAN                         \
+               -DOPTION_TSAN=$USE_TSAN                         \
+               -DUSE_XDG=$USE_XDG                              \
+               -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
-    $buildtool -j $CORES
+    $RUN $buildtool -j $CORES
 
     return 0
   }
@@ -632,19 +649,19 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     fi
     # This is called in $BUILDDIR, but only if it is ${SOURCEDIR}/$BUILDDIR_DEFAULT,
     # so .. is $SOURCEDIR
-    rm  -f ../VERSION || true
-    rm  -f ../widelands || true
+    $RUN rm  -f ../VERSION || true
+    $RUN rm  -f ../widelands || true
 
-    rm  -f ../wl_map_object_info || true
-    rm  -f ../wl_map_info || true
+    $RUN rm  -f ../wl_map_object_info || true
+    $RUN rm  -f ../wl_map_info || true
 
-    cp VERSION ../VERSION
-    mv src/widelands ../widelands
+    $RUN cp VERSION ../VERSION
+    $RUN mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
-      mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
-      mv ../build/src/website/wl_map_object_info ../wl_map_object_info
-      mv ../build/src/website/wl_map_info ../wl_map_info
+      $RUN mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet
+      $RUN mv ../build/src/website/wl_map_object_info ../wl_map_object_info
+      $RUN mv ../build/src/website/wl_map_info ../wl_map_info
     fi
     return 0
   }
@@ -665,8 +682,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       return 1
     fi
     # This is called in $SOURCEDIR
-      rm -f update.sh || true
-      cat > update.sh << END_SCRIPT
+      $RUN rm -f update.sh || true
+      $RUN cat > update.sh << END_SCRIPT
 #!/bin/sh
 echo "################################################"
 echo "#            Widelands update script.          #"
@@ -692,7 +709,7 @@ echo "#      Widelands was updated successfully.     #"
 echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
-      chmod +x ./update.sh
+      $RUN chmod +x ./update.sh
       if [ $QUIET -eq 0 ]; then
         echo "The update script has successfully been created."
       fi
@@ -710,17 +727,17 @@ prepare_directories_and_links
 
 # Dependency check doesn't work with ninja, so we do it manually here
 if [ $BUILD_TYPE = "Debug" -a \( $buildtool = "ninja" -o $buildtool = "ninja-build" \) ]; then
-  utils/build_deps.py
+  $RUN utils/build_deps.py
 fi
 
-cd "$BUILDDIR"
+$RUN cd "$BUILDDIR"
 compile_widelands
 if move_built_files ; then
   FILES_MOVED=yes
 else
   FILES_MOVED=""
 fi
-cd "$SOURCEDIR"
+$RUN cd "$SOURCEDIR"
 if create_update_script ; then
   UPDATE_SCRIPT=yes
 else
