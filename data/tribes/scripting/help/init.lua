@@ -48,17 +48,9 @@ end
 
 -- Returns help entries for all the immovables of the world that all tribes can use
 function world_immovable_entries(tribename)
-   --local tribe = wl.Game():get_tribe_description(tribename)
    local all_immovables = wl.Descriptions().immovable_descriptions
-   local tribes = {
-      "amazons",
-      "atlanteans",
-      "barbarians",
-      "empire",
-      "frisians", }
    local tribes_immovables = {}
-   for i, tribename in ipairs(tribes) do
-      local tribe = wl.Game():get_tribe_description(tribename)
+   for i, tribe in ipairs(wl.Descriptions().tribes_descriptions) do
       for i, t_immo in ipairs(tribe.immovables) do
          tribes_immovables[t_immo.name] = true
       end
