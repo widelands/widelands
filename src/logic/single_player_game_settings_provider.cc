@@ -107,7 +107,7 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.name = (boost::format(_("Player %u")) % (player_nr + 1)).str();
+		player.name = bformat(_("Player %u"), (player_nr + 1));
 		player.team = 0;
 		player.color = kPlayerColors[player_nr];
 		// Set default computerplayer ai type

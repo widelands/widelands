@@ -926,9 +926,8 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
-		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-		                static_cast<int>(mo->descr().type()))
-		                  .str());
+		throw LuaError(
+		   bformat("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
 	NEVER_HERE();
 }
@@ -8187,7 +8186,7 @@ int LuaField::__eq(lua_State* L) {
 }
 
 int LuaField::__tostring(lua_State* L) {
-	const std::string pushme = (boost::format("Field(%i,%i)") % coords_.x % coords_.y).str();
+	const std::string pushme = bformat("Field(%i,%i)", coords_.x, coords_.y);
 	lua_pushstring(L, pushme);
 	return 1;
 }

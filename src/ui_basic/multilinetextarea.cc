@@ -19,8 +19,6 @@
 
 #include "ui_basic/multilinetextarea.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"

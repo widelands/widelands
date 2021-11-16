@@ -69,9 +69,8 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 			std::string label, localized_label, value, localized_value;
 		};
 		const std::vector<ContentT> content = {
-		   {"Version:", _("Version:"),
-		    (boost::format("%1$s (%2$s)") % build_id() % build_type()).str(),
-		    (boost::format(_("%1$s (%2$s)")) % build_id() % build_type()).str()},
+		   {"Version:", _("Version:"), bformat("%1$s (%2$s)", build_id(), build_type()),
+		    bformat(_("%1$s (%2$s)"), build_id(), build_type())},
 		   {"Operating System:", _("Operating System:"),
 #if defined(__APPLE__) || defined(__MACH__)
 		    "MacOS", _("MacOS")

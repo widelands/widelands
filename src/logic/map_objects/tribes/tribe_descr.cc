@@ -167,7 +167,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   /** TRANSLATORS: Example: Loading Barbarians: Buildings (2/6) */
-		   (boost::format(_("Loading %1%: %2% (%3%/%4%)")) % descname() % str % i % 6).str()));
+		   bformat(_("Loading %1%: %2% (%3%/%4%)"), descname(), str, i, 6)));
 	};
 
 	try {
@@ -208,6 +208,19 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		verb_log_info("┃    Finalizing");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
+
+		if (table.has_key("fastplace")) {
+			std::unique_ptr<LuaTable> fp = table.get_table("fastplace");
+			for (const std::string& key : fp->keys<std::string>()) {
+				const std::string& val = fp->get_string(key);
+				if (has_building(building_index(val))) {
+					fastplace_defaults_.emplace(key, val);
+				} else {
+					log_warn(
+					   "fastplace: tribe %s does not use building '%s'", name().c_str(), val.c_str());
+				}
+			}
 		}
 
 		// TODO(Nordfriese): Require these strings after v1.1
@@ -872,7 +885,7 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 		}
 		if (percent_to_use < 1) {
 			throw GameDataError(
-			   "%s: Training sites without predefined proportions add up to < 1%% and "
+			   "%s: Training sites without predefined proportions add up to < 1%%, and "
 			   "will never be built: %d",
 			   name().c_str(), used_percent);
 		}

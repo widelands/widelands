@@ -246,10 +246,6 @@ int32_t TrainingSite::get_max_unstall_level(const TrainingAttribute at,
 	return rtv;
 }
 
-int32_t TrainingSiteDescr::get_max_stall() const {
-	return max_stall_;
-}
-
 void TrainingSiteDescr::add_training_inputs(const LuaTable& table,
                                             std::vector<std::vector<std::string>>* food,
                                             std::vector<std::string>* weapons) {
@@ -1056,7 +1052,7 @@ void TrainingSite::start_upgrade(Game& game, Upgrade& upgrade) {
 	upgrade.lastattempt = level;
 	upgrade.lastsuccess = false;
 
-	return program_start(game, (boost::format("%s%i") % upgrade.prefix.c_str() % level).str());
+	return program_start(game, bformat("%s%i", upgrade.prefix, level));
 }
 
 TrainingSite::Upgrade* TrainingSite::get_upgrade(TrainingAttribute const atr) {

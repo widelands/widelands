@@ -23,8 +23,6 @@
 #include <memory>
 #include <queue>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
@@ -56,10 +54,10 @@ namespace {
  * It is used by the renderer after the tags have been parsed.
  */
 void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+	replace_all(*text, "&gt;", ">");
+	replace_all(*text, "&lt;", "<");
+	replace_all(*text, "&nbsp;", " ");
+	replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 }  // namespace
 
@@ -286,10 +284,8 @@ protected:
 	void check_size(int check_w, int check_h) {
 		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		if (check_w > maximum_size || check_h > maximum_size) {
-			const std::string error_message =
-			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
-			    maximum_size)
-			      .str();
+			const std::string error_message = bformat(
+			   "Texture (%d, %d) too big! Maximum size is %d.", check_w, check_h, maximum_size);
 			log_err("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
@@ -729,9 +725,8 @@ private:
 std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_cache) {
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	const std::string hash =
-	   (boost::format("rt:fill:%s:%s:%i:%i:%i:%s") % txt_ % nodestyle_.font_color.hex_value() %
-	    nodestyle_.font_style % width() % height() % (is_expanding_ ? "e" : "f"))
-	      .str();
+	   bformat("rt:fill:%s:%s:%i:%i:%i:%s", txt_, nodestyle_.font_color.hex_value(),
+	           nodestyle_.font_style, width(), height(), (is_expanding_ ? "e" : "f"));
 
 	std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 	if (rendered_image == nullptr) {
@@ -740,8 +735,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 		auto texture = std::make_shared<Texture>(width(), height());
 		for (uint16_t curx = 0; curx < w_; curx += ttf->width()) {
 			Rectf srcrect(0.f, 0.f, std::min<int>(ttf->width(), w_ - curx), h_);
-			texture->blit(
-			   Rectf(curx, 0, srcrect.w, srcrect.h), *ttf.get(), srcrect, 1., BlendMode::Copy);
+			texture->blit(Rectf(curx, 0, srcrect.w, srcrect.h), *ttf, srcrect, 1., BlendMode::Copy);
 		}
 		rendered_image = texture_cache->insert(hash, std::move(texture));
 	}
@@ -771,7 +765,7 @@ public:
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
 		if (show_spaces_) {
 			std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
-			const std::string hash = (boost::format("rt:wsp:%i:%i") % width() % height()).str();
+			const std::string hash = bformat("rt:wsp:%i:%i", width(), height());
 			std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 			if (rendered_image == nullptr) {
 				auto texture = std::make_shared<Texture>(width(), height());
@@ -849,9 +843,8 @@ public:
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* texture_cache) override {
 		std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
-		const std::string hash = (boost::format("rt:sp:%s:%i:%i:%s") % filename_ % width() %
-		                          height() % (is_expanding_ ? "e" : "f"))
-		                            .str();
+		const std::string hash =
+		   bformat("rt:sp:%s:%i:%i:%s", filename_, width(), height(), (is_expanding_ ? "e" : "f"));
 
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 		if (rendered_image == nullptr) {
@@ -905,7 +898,6 @@ class DivTagRenderNode : public RenderNode {
 public:
 	explicit DivTagRenderNode(const NodeStyle& ns)
 	   : RenderNode(ns),
-	     desired_width_(),
 	     w_(0),
 	     h_(0),
 	     background_color_(0, 0, 0),
@@ -1034,7 +1026,6 @@ public:
 	ImgRenderNode(NodeStyle& ns, const Image* image)
 	   : RenderNode(ns),
 	     image_(image),
-	     filename_(""),
 	     scale_(1.0),
 	     color_(RGBColor(0, 0, 0)),
 	     use_playercolor_(false) {
@@ -1073,9 +1064,9 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 		rendered_text->rects.push_back(
 		   std::unique_ptr<UI::RenderedRect>(new UI::RenderedRect(image_)));
 	} else {
-		const std::string hash = (boost::format("rt:img:%s:%s:%i:%i") % filename_ %
-		                          (use_playercolor_ ? color_.hex_value() : "") % width() % height())
-		                            .str();
+		const std::string hash =
+		   bformat("rt:img:%s:%s:%i:%i", filename_, (use_playercolor_ ? color_.hex_value() : ""),
+		           width(), height());
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 		if (rendered_image == nullptr) {
 			auto texture = std::make_shared<Texture>(width(), height());
@@ -1663,7 +1654,7 @@ public:
 			std::string width_string = a["width"].get_string();
 			if (width_string == "*") {
 				render_node_->set_desired_width(DesiredWidth(INFINITE_WIDTH, WidthUnit::kFill));
-			} else if (boost::algorithm::ends_with(width_string, "%")) {
+			} else if (ends_with(width_string, "%")) {
 				width_string = width_string.substr(0, width_string.length() - 1);
 				uint8_t width_percent = strtol(width_string.c_str(), nullptr, 10);
 				if (width_percent > 100) {
@@ -1769,9 +1760,7 @@ TagHandler* create_taghandler(Tag& tag,
 	TagHandlerMap::iterator i = map.find(tag.name());
 	if (i == map.end()) {
 		throw RenderError(
-		   (boost::format("No Tag handler for %s. This is a bug, please submit a report.") %
-		    tag.name())
-		      .str());
+		   bformat("No Tag handler for %s. This is a bug, please submit a report.", tag.name()));
 	}
 	return i->second(tag, fc, ns, image_cache, renderer_style, fontsets);
 }

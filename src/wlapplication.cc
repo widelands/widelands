@@ -42,6 +42,7 @@
 #include "base/macros.h"
 #include "base/multithreading.h"
 #include "base/random.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -771,16 +772,13 @@ void WLApplication::run() {
 				game.run_load_game(filename_, script_to_run_);
 			}
 		} catch (const Widelands::GameDataError& e) {
-			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
-			                           "seems to be incompatible.")) %
-			           filename_.c_str())
-			             .str();
+			message = bformat(_("Widelands could not load the file \"%s\". The file format "
+			                    "seems to be incompatible."),
+			                  filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("Game data error");
 		} catch (const FileNotFoundError& e) {
-			message =
-			   (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str())
-			      .str();
+			message = bformat(_("Widelands could not find the file \"%s\"."), filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("File system error");
 		} catch (const std::exception& e) {
@@ -890,8 +888,7 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int 
 		} else {
 			g_fs->ensure_directory_exists(kScreenshotsDir);
 			for (uint32_t nr = 0; nr < 10000; ++nr) {
-				const std::string filename =
-				   (boost::format("%s/shot%04u.png") % kScreenshotsDir % nr).str();
+				const std::string filename = bformat("%s/shot%04u.png", kScreenshotsDir, nr);
 				if (g_fs->file_exists(filename)) {
 					continue;
 				}
@@ -1278,14 +1275,12 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 void WLApplication::handle_commandline_parameters() {
 	auto throw_empty_value = [](const std::string& opt) {
 		throw ParameterError(
-		   CmdLineVerbosity::None,
-		   (boost::format(_("Empty value of command line parameter: %s")) % opt).str());
+		   CmdLineVerbosity::None, bformat(_("Empty value of command line parameter: %s"), opt));
 	};
 
 	auto throw_exclusive = [](const std::string& opt) {
 		throw ParameterError(
-		   CmdLineVerbosity::None,
-		   (boost::format(_("%s can not be combined with other actions")) % opt).str());
+		   CmdLineVerbosity::None, bformat(_("%s can not be combined with other actions"), opt));
 	};
 
 	if (commandline_.count("nosound")) {
@@ -1317,7 +1312,7 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		try {
 			std::unique_ptr<FileSystem> fs(&FileSystem::create(dd));
-			if (!fs.get()) {
+			if (!fs) {
 				return std::string("Unable to allocate filesystem");
 			}
 
@@ -1437,11 +1432,9 @@ void WLApplication::handle_commandline_parameters() {
 	fill_parameter_vector();
 
 	if (commandline_.count("error")) {
-		throw ParameterError(
-		   CmdLineVerbosity::Normal,
-		   (boost::format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?")) %
-		    commandline_["error"])
-		      .str());
+		throw ParameterError(CmdLineVerbosity::Normal,
+		                     bformat(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
+		                             commandline_["error"]));
 	}
 
 	if (commandline_.count("datadir_for_testing")) {
@@ -1578,8 +1571,7 @@ void WLApplication::handle_commandline_parameters() {
 			}
 		} else {
 			throw ParameterError(
-			   CmdLineVerbosity::Normal,
-			   (boost::format(_("Unknown command line parameter: %s")) % pair.first).str());
+			   CmdLineVerbosity::Normal, bformat(_("Unknown command line parameter: %s"), pair.first));
 		}
 	}
 }
@@ -1613,13 +1605,12 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		}
 		UI::WLMessageBox m(
 		   panel, UI::WindowStyle::kFsMenu, _("Error"),
-		   (boost::format(
-		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-		         "this problem to help us improve Widelands. You will find related messages in the "
-		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\nPlease add this information to your report.")) %
-		    error % build_id() % build_type())
-		      .str(),
+		   bformat(
+		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		        "this problem to help us improve Widelands. You will find related messages in the "
+		        "standard output (stdout.txt on Windows). You are using build %2$s "
+		        "(%3$s).\nPlease add this information to your report."),
+		      error, build_id(), build_type()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return;
@@ -1630,22 +1621,20 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   panel, UI::WindowStyle::kFsMenu,
 		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
 		   ask_for_bug_report ?
-            (boost::format(_(
-		          "An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
-		          "this problem to help us improve Widelands. You will find related messages in the "
-		          "standard output (stdout.txt on Windows). You are using build %2$s "
-		          "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
-		          "Widelands "
-		          "to attempt to create an emergency savegame? It is often – though not always – "
-		          "possible to load it and continue playing.")) %
-		       error % build_id() % build_type())
-		         .str() :
-            (boost::format(
-		          _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
-		            "Widelands to attempt to create an emergency savegame? It is often – though not "
-		            "always – possible to load it and continue playing.")) %
-		       error)
-		         .str(),
+            bformat(
+		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
+		           "this problem to help us improve Widelands. You will find related messages in the "
+		           "standard output (stdout.txt on Windows). You are using build %2$s "
+		           "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
+		           "Widelands "
+		           "to attempt to create an emergency savegame? It is often – though not always – "
+		           "possible to load it and continue playing."),
+		         error, build_id(), build_type()) :
+            bformat(
+		         _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
+		           "Widelands to attempt to create an emergency savegame? It is often – though not "
+		           "always – possible to load it and continue playing."),
+		         error),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -1669,10 +1658,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		if (panel) {
 			UI::WLMessageBox m(
 			   panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"),
-			   (boost::format(_("We are sorry, but Widelands was unable to create an emergency "
-			                    "savegame for the following reason:\n\n%s")) %
-			    e.what())
-			      .str(),
+			   bformat(_("We are sorry, but Widelands was unable to create an emergency "
+			             "savegame for the following reason:\n\n%s"),
+			           e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -1685,8 +1673,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
  */
 void WLApplication::cleanup_replays() {
 	for (const std::string& filename : g_fs->filter_directory(kReplayDir, [](const std::string& fn) {
-		     return boost::ends_with(
-		        fn, (boost::format("%s%s") % kReplayExtension % kSyncstreamExtension).str());
+		     return ends_with(fn, bformat("%s%s", kReplayExtension, kSyncstreamExtension));
 	     })) {
 		if (is_autogenerated_and_expired(filename, kReplayKeepAroundTime)) {
 			log_info("Delete syncstream or replay %s\n", filename.c_str());
@@ -1705,7 +1692,7 @@ void WLApplication::cleanup_replays() {
  */
 void WLApplication::cleanup_ai_files() {
 	for (const std::string& filename : g_fs->filter_directory(kAiDir, [](const std::string& fn) {
-		     return boost::ends_with(fn, kAiExtension) || boost::contains(fn, "ai_player");
+		     return ends_with(fn, kAiExtension) || contains(fn, "ai_player");
 	     })) {
 		if (is_autogenerated_and_expired(filename, kAIFilesKeepAroundTime)) {
 			log_info("Deleting generated ai file: %s\n", filename.c_str());
@@ -1724,8 +1711,7 @@ void WLApplication::cleanup_ai_files() {
  */
 void WLApplication::cleanup_temp_files() {
 	for (const std::string& filename : g_fs->filter_directory(
-	        kTempFileDir,
-	        [](const std::string& fn) { return boost::ends_with(fn, kTempFileExtension); })) {
+	        kTempFileDir, [](const std::string& fn) { return ends_with(fn, kTempFileExtension); })) {
 		if (is_autogenerated_and_expired(filename, kTempFilesKeepAroundTime)) {
 			log_info("Deleting old temp file: %s\n", filename.c_str());
 			try {
@@ -1743,7 +1729,7 @@ void WLApplication::cleanup_temp_files() {
  */
 void WLApplication::cleanup_temp_backups(const std::string& dir) {
 	for (const std::string& filename : g_fs->filter_directory(
-	        dir, [](const std::string& fn) { return boost::ends_with(fn, kTempBackupExtension); })) {
+	        dir, [](const std::string& fn) { return ends_with(fn, kTempBackupExtension); })) {
 		if (is_autogenerated_and_expired(filename, kTempBackupsKeepAroundTime)) {
 			log_info("Deleting old temp backup file: %s\n", filename.c_str());
 			try {
@@ -1759,9 +1745,8 @@ void WLApplication::cleanup_temp_backups(const std::string& dir) {
 		     return g_fs->is_directory(fn) &&
 		            // avoid searching within savegames/maps/backups that were created
 		            // as directories instead of zipfiles
-		            !boost::ends_with(fn, kSavegameExtension) &&
-		            !boost::ends_with(fn, kWidelandsMapExtension) &&
-		            !boost::ends_with(fn, kTempBackupExtension);
+		            !ends_with(fn, kSavegameExtension) && !ends_with(fn, kWidelandsMapExtension) &&
+		            !ends_with(fn, kTempBackupExtension);
 	     })) {
 		cleanup_temp_backups(dirname);
 	}

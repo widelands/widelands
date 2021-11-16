@@ -84,8 +84,7 @@ void MapSaver::save() {
 
 	auto set_progress_message = [](std::string text, int step) {
 		Notifications::publish(UI::NoteLoadingMessage(
-		   step < 0 ? text :
-                    (boost::format(_("Saving map: %1$s (%2$d/%3$d)")) % text % step % 22).str()));
+		   step < 0 ? text : bformat(_("Saving map: %1$s (%2$d/%3$d)"), text, step, 22)));
 	};
 	set_progress_message(_("Autosaving map…"), -1);
 

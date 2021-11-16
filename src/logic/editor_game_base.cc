@@ -221,7 +221,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		ScopedTimer timer("Registering the descriptions took %ums", true);
 		assert(lua_);
 		descriptions_.reset(new Descriptions(lua_.get(), enabled_addons_));
-		if (game_tips_.get()) {
+		if (game_tips_) {
 			game_tips_.reset(new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
 		}
 	}
@@ -249,7 +249,7 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& name,
                                    TeamNumber team) {
 	Notifications::publish(UI::NoteLoadingMessage(
-	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
+	   bformat(_("Creating player %d…"), static_cast<unsigned int>(player_number))));
 	return player_manager_->add_player(player_number, initialization_index, pc, tribe, name, team);
 }
 
@@ -622,10 +622,9 @@ void EditorGameBase::set_road(const FCoords& f,
 	MapIndex const i = f.field - &first_field;
 	MapIndex const neighbour_i = neighbour.field - &first_field;
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
-		Player::Field& first_player_field = *p->fields_.get();
-		Player::Field& player_field = (&first_player_field)[i];
+		Player::Field& player_field = p->fields_[i];
 		if (VisibleState::kVisible == player_field.vision ||
-		    VisibleState::kVisible == (&first_player_field)[neighbour_i].vision) {
+		    VisibleState::kVisible == p->fields_[neighbour_i].vision) {
 			switch (direction) {
 			case WALK_SE:
 				player_field.r_se = roadtype;

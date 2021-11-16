@@ -547,7 +547,6 @@ struct CmdSetWarePriority : public PlayerCommand {
 	   : PlayerCommand(),
 	     serial_(0),
 	     type_(wwWARE),
-	     index_(),
 	     priority_(WarePriority::kNormal),
 	     is_constructionsite_setting_(false) {
 	}
@@ -584,7 +583,6 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	CmdSetInputMaxFill()
 	   : PlayerCommand(),
 	     serial_(0),
-	     index_(),
 	     type_(wwWARE),
 	     max_fill_(0),
 	     is_constructionsite_setting_(false) {

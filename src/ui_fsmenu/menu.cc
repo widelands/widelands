@@ -19,9 +19,8 @@
 
 #include "ui_fsmenu/menu.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "ui_basic/icon.h"
 #include "ui_fsmenu/main.h"
@@ -269,7 +268,7 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 	}
 
 	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
-	                                    title, (boost::format(_("Back to ‘%s’")) % title).str());
+	                                    title, bformat(_("Back to ‘%s’"), title));
 	UI::Panel* spacer1 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* spacer2 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* icon;

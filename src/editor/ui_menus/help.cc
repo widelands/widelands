@@ -35,10 +35,9 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
 		init(parent, lua_->run_script("scripting/editor/editor_help.lua"));
 	} catch (LuaError& err) {
 		log_err("Error loading script for editor help:\n%s\n", err.what());
-		UI::WLMessageBox wmb(
-		   &parent, UI::WindowStyle::kWui, _("Error!"),
-		   (boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
-		   UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
+		                     bformat("Error loading script for editor help:\n%s", err.what()),
+		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
 

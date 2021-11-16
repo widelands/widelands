@@ -24,9 +24,7 @@
 #include <memory>
 #include <set>
 
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-
+#include "base/string.h"
 #include "base/vector.h"
 #include "scripting/lua.h"
 #include "scripting/lua_coroutine.h"
@@ -84,7 +82,7 @@ public:
 				break;
 			}
 			values.emplace_back(get_value<ValueType>());
-			accessed_keys_.insert(boost::lexical_cast<std::string>(index));
+			accessed_keys_.insert(as_string(index));
 			lua_pop(L_, 1);  // S: table
 			++index;
 		}
@@ -131,7 +129,7 @@ public:
 		get_existing_table_value(key);
 		if (!lua_isstring(L_, -1)) {
 			lua_pop(L_, 1);
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a string value.");
+			throw LuaError(as_string(key) + " is not a string value.");
 		}
 		const std::string rv = lua_tostring(L_, -1);
 		lua_pop(L_, 1);
@@ -145,7 +143,7 @@ public:
 		std::unique_ptr<LuaTable> table(get_table(key));
 		std::vector<ValueType> pts = table->array_entries<ValueType>();
 		if (pts.size() != 2) {
-			throw LuaError((boost::format("Expected 2 entries, but got %d.") % pts.size()).str());
+			throw LuaError(bformat("Expected 2 entries, but got %d.", pts.size()));
 		}
 		result.x = pts[0];
 		result.y = pts[1];
@@ -156,7 +154,7 @@ public:
 		get_existing_table_value(key);
 		if (!lua_istable(L_, -1)) {
 			lua_pop(L_, 1);
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a table value.");
+			throw LuaError(as_string(key) + " is not a table value.");
 		}
 		std::unique_ptr<LuaTable> rv(new LuaTable(L_));
 		lua_pop(L_, 1);
@@ -167,7 +165,7 @@ public:
 		get_existing_table_value(key);
 		if (!lua_isnumber(L_, -1)) {
 			lua_pop(L_, 1);
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a number value.");
+			throw LuaError(as_string(key) + " is not a number value.");
 		}
 		const double rv = lua_tonumber(L_, -1);
 		lua_pop(L_, 1);
@@ -178,7 +176,7 @@ public:
 		const double value = get_double(key);
 
 		if (std::abs(value - std::floor(value)) > 1e-7) {
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a integer value.");
+			throw LuaError(as_string(key) + " is not a integer value.");
 		}
 		return static_cast<int>(value);
 	}
@@ -187,7 +185,7 @@ public:
 		get_existing_table_value(key);
 		if (!lua_isboolean(L_, -1)) {
 			lua_pop(L_, 1);
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a boolean value.");
+			throw LuaError(as_string(key) + " is not a boolean value.");
 		}
 		const bool rv = lua_toboolean(L_, -1);
 		lua_pop(L_, 1);
@@ -210,7 +208,7 @@ public:
 
 		if (!lua_isthread(L_, -1)) {
 			lua_pop(L_, 1);
-			throw LuaError(boost::lexical_cast<std::string>(key) + " is not a function value.");
+			throw LuaError(as_string(key) + " is not a function value.");
 		}
 		std::unique_ptr<LuaCoroutine> cr(new LuaCoroutine(luaL_checkthread(L_, -1)));
 		lua_pop(L_, 1);  // Remove coroutine from stack
@@ -238,7 +236,7 @@ template <> std::unique_ptr<LuaTable> LuaTable::get_value<std::unique_ptr<LuaTab
 template <typename KeyType> uint32_t get_uint(const LuaTable& table, const KeyType& key) {
 	int value = table.get_int(key);
 	if (value < 0) {
-		throw LuaError(boost::lexical_cast<std::string>(key) + " is not a positive value.");
+		throw LuaError(as_string(key) + " is not a positive value.");
 	}
 	return static_cast<uint32_t>(value);
 }
@@ -247,7 +245,7 @@ template <typename KeyType> uint32_t get_uint(const LuaTable& table, const KeyTy
 template <typename KeyType> uint32_t get_positive_int(const LuaTable& table, const KeyType& key) {
 	int value = get_uint(table, key);
 	if (value == 0) {
-		throw LuaError(boost::lexical_cast<std::string>(key) + " must be > 0.");
+		throw LuaError(as_string(key) + " must be > 0.");
 	}
 	return static_cast<uint32_t>(value);
 }

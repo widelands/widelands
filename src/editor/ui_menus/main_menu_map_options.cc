@@ -20,6 +20,7 @@
 #include "editor/ui_menus/main_menu_map_options.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
@@ -426,7 +427,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	const unsigned nr_players = eia().egbase().map().get_nrplayers();
 	teams_box_.add(new UI::Textarea(
 	   &teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
+	   bformat(ngettext("%u Player", "%u Players", nr_players), nr_players)));
 	teams_box_.add_space(padding_);
 	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
 	                                0, max_w_, labelh_, _("Suggested Teams:")));
@@ -488,9 +489,8 @@ void MainMenuMapOptions::update_waterway_length_warning() {
 	if (len > kMaxRecommendedWaterwayLengthLimit) {
 		waterway_length_warning_->set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_tooltip(
-		   (boost::format(_("It is not recommended to permit waterway lengths greater than %u")) %
-		    kMaxRecommendedWaterwayLengthLimit)
-		      .str());
+		   bformat(_("It is not recommended to permit waterway lengths greater than %u"),
+		           kMaxRecommendedWaterwayLengthLimit));
 	} else {
 		waterway_length_warning_->set_icon(nullptr);
 		waterway_length_warning_->set_tooltip("");
@@ -505,7 +505,7 @@ void MainMenuMapOptions::update() {
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
 	name_.set_text(map.get_name());
-	size_.set_text((boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str());
+	size_.set_text(bformat(_("Size: %1% x %2%"), map.get_width(), map.get_height()));
 	descr_->set_text(map.get_description());
 	hint_->set_text(map.get_hint());
 	waterway_length_box_->set_value(map.get_waterway_max_length());
