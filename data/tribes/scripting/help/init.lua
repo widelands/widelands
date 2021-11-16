@@ -57,26 +57,18 @@ function world_immovable_entries(tribename)
       "empire",
       "frisians", }
    local tribes_immovables = {}
-   local world_immovables = {}
    for i, tribename in ipairs(tribes) do
       local tribe = wl.Game():get_tribe_description(tribename)
       for i, t_immo in ipairs(tribe.immovables) do
-         table.insert(tribes_immovables, t_immo)
+         tribes_immovables[t_immo.name] = true
       end
    end
-   for i, immo in ipairs(all_immovables) do
-      local world_immo = true
-      for j, tribe_immo in ipairs(tribes_immovables) do
-         if tribe_immo.name == immo.name then
-            world_immo = false
-            break
-         end
-      end
-      if world_immo then
-         table.insert(world_immovables, immo)
+   for i = #all_immovables, 1, -1 do
+      if tribes_immovables[all_immovables[i].name] then
+         table.remove(all_immovables, i);
       end
    end
-   return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", world_immovables)
+   return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", all_immovables)
 end
 
 -- Main function
