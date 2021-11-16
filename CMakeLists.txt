@@ -123,11 +123,7 @@ if (OPTION_BUILD_WINSTATIC)
 endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.48
-  COMPONENTS
-    unit_test_framework
-  REQUIRED
-    system)
+find_package(Boost 1.48 COMPONENTS REQUIRED system)
 
 find_package (PythonInterp REQUIRED)
 
