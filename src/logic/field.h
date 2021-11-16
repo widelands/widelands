@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_FIELD_H
 #define WL_LOGIC_FIELD_H
 
+#include <atomic>
 #include <cassert>
 
 #include "base/wexception.h"
@@ -55,7 +56,8 @@ struct BaseImmovable;
 #pragma pack(push, 1)
 /// a field like it is represented in the game
 // TODO(unknown): This is all one evil hack :(
-struct Field {
+class Field {
+public:
 	friend class Map;
 	friend class Bob;
 	friend struct BaseImmovable;
@@ -87,6 +89,27 @@ struct Field {
 		ResourceAmount d : 4, r : 4;
 	};
 	static_assert(sizeof(ResourceAmounts) == 1, "assert(sizeof(ResourceAmounts) == 1) failed.");
+
+	Field() : brightness(0), owner_info_and_selections(Widelands::neutral()) {
+	}
+
+	Field& operator=(const Field& other) {
+		bobs = other.bobs;
+		immovable = other.immovable;
+		caps = other.caps;
+		max_caps = other.max_caps;
+		road_east = other.road_east;
+		road_southeast = other.road_southeast;
+		road_southwest = other.road_southwest;
+		height = other.height;
+		brightness = other.brightness.load();
+		owner_info_and_selections = other.owner_info_and_selections.load();
+		resources = other.resources;
+		initial_res_amount = other.initial_res_amount;
+		res_amount = other.res_amount;
+		terrains = other.terrains;
+		return *this;
+	}
 
 	Height get_height() const {
 		return height;
@@ -266,9 +289,9 @@ private:
 	RoadSegment road_southwest = RoadSegment::kNone;
 
 	Height height = 0U;
-	int8_t brightness = 0;
+	std::atomic<int8_t> brightness;
 
-	OwnerInfoAndSelectionsType owner_info_and_selections = Widelands::neutral();
+	std::atomic<OwnerInfoAndSelectionsType> owner_info_and_selections;
 
 	DescriptionIndex resources = INVALID_INDEX;  ///< Resource type on this field, if any
 	ResourceAmount initial_res_amount = 0U;      ///< Initial amount of resources

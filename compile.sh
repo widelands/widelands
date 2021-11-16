@@ -58,6 +58,11 @@ print_help () {
     echo "                      Debug builds are created with AddressSanitizer by"
     echo "                      default."
     echo " "
+    echo "-m or --no-tsan       Switch off the ThreadSanitizer (default)."
+    echo "+m or --with-tsan     Switch on the ThreadSanitizer."
+    echo "                      Can only be used with --no-asan, because AddressSanitizer"
+    echo "                      cannot be enabled at the same time."
+    echo " "
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
     echo " "
@@ -121,6 +126,7 @@ BUILD_TYPE="Debug"
 USE_FLTO="yes"
 USE_ASAN="default"
 USE_ASAN_DEFAULT="ON"
+USE_TSAN="OFF"
 COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
@@ -179,6 +185,14 @@ do
       USE_ASAN="ON"
     shift
     ;;
+    -m|--no-tsan)
+      USE_TSAN="OFF"
+    shift
+    ;;
+    +m|--with-tsan)
+      USE_TSAN="ON"
+    shift
+    ;;
     -h|--help)
       print_help
       exit 0
@@ -213,7 +227,7 @@ do
     ;;
     -d|--debug)
       BUILD_TYPE="Debug"
-      if [ "${USE_ASAN}" = "default" ]; then
+      if [ "${USE_ASAN}" = "default" ] && [ "${USE_TSAN}" = "OFF" ]; then
         USE_ASAN="ON"
       fi
     shift
@@ -302,7 +316,16 @@ do
 done
 
 if [ "${USE_ASAN}" = "default" ]; then
-  USE_ASAN="${USE_ASAN_DEFAULT}"
+  if [ "${USE_TSAN}" = "ON" ]; then
+    USE_ASAN="OFF"
+  else
+    USE_ASAN="${USE_ASAN_DEFAULT}"
+  fi
+fi
+if [ "${USE_ASAN}" = "ON" ] && [ "${USE_TSAN}" = "ON" ]; then
+  echo " "
+  echo "Cannot compile with both Address and Thread Sanitizer enabled!"
+  exit 1
 fi
 
 if [ $QUIET -eq 0 ]; then
@@ -417,6 +440,16 @@ else
   echo "You can use +a or --with-asan to switch it on."
   CMD_ADD "--no-asan"
 fi
+if [ $USE_TSAN = "ON" ]; then
+  echo "Will build with ThreadSanitizer."
+  echo "https://clang.llvm.org/docs/ThreadSanitizer.html"
+  echo "You can use -m or --no-tsan to switch it off."
+  CMD_ADD "--with-tsan"
+else
+  echo "Will build without ThreadSanitizer."
+  echo "You can use +m or --with-tsan to switch it on."
+  CMD_ADD "--no-tsan"
+fi
 if [ $USE_XDG = "ON" ]; then
   echo " "
   echo "Basic XDG Base Directory Specification will be used on Linux"
@@ -494,7 +527,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $buildtool -j $CORES
 

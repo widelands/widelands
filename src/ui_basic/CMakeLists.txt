@@ -63,6 +63,7 @@ wl_library(ui_basic
     window.cc
     window.h
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
     base
     base_exceptions

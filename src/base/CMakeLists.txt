@@ -11,7 +11,7 @@ wl_library(base
     log.h
     string.h
     string.cc
-  SRCS
+  USES_ATOMIC
   USES_INTL
   USES_SDL2
   DEPENDS
@@ -95,6 +95,7 @@ wl_library(base_times
   SRCS
     times.h
     times.cc
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     io_fileread

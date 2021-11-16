@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-07-11 22:44+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -798,6 +798,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Misztikus vidék, különböző tájakkal, amiket hatalmas folyók választanak el."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "A zöld fennsík"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Egy szigeten állsz, amelyet fenséges hegyek díszítenek, közöttük pedig csodás és gazdag kincs rejtőzik – a Zöld Fennsík, amit nehéz meghódítani, de könnyű elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra!"
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Homokos átjárók"
@@ -862,18 +889,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Azt mondják, a távoli északra vezető áthatolhatatlan vidék elijesztette még a legelszántabb gyarmatosítókat és a legbátrabb harcosok legbátrabbjait is. A nagy és öreg erdőket, tele hatalmas ragadozókkal, lápokkal és dombokkal szabdalva, a rejtély homálya fedi. Akiknek sikerült visszatérni, azok óriási épületekről meséltek, faragott díszekkel, és arannyal, ami valahol a vadonban található fenséges hegyláncokból származik. Emberöltők után immár csak néhány omladozó, mohos, fákkal benőtt rom maradt a régi dicső korból. Alakjukból csak felsejlik ősi alkotóik szakértelme. Senki sem tudja, miért tűntek el. Senki sem tudja. Azt beszélik, immár semmi sem állja el a gazdagsághoz vezető utat. De sokakat elragadnak a farkasok, elnyelnek a mocsarak… elfognak ellenséges törzsek."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "A zöld fennsík"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Egy szigeten állsz, amelyet fenséges hegyek díszítenek, közöttük pedig csodás és gazdag kincs rejtőzik – a Zöld Fennsík, amit nehéz meghódítani, de könnyű elveszíteni. Ha meg akarod szerezni, figyelj oda a többi klánra!"
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

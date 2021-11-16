@@ -243,6 +243,7 @@ wl_library(graphic_terrain_programs
     gl/dither_program.h
     gl/workarea_program.cc
     gl/workarea_program.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_geometry

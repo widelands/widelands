@@ -28,6 +28,7 @@ wl_library(io_profile
   SRCS
     profile.h
     profile.cc
+  USES_ATOMIC
   DEPENDS
     base
     base_exceptions

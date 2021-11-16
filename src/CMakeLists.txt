@@ -99,6 +99,7 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
+  USES_ATOMIC
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
