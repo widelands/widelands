@@ -310,7 +310,7 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 }
 
 BufferedConnection::BufferedConnection(const NetAddress& host)
-   : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
+   : socket_(io_service_), currently_sending_(false) {
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
@@ -340,8 +340,7 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 	}
 }
 
-BufferedConnection::BufferedConnection()
-   : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
+BufferedConnection::BufferedConnection() : socket_(io_service_), currently_sending_(false) {
 }
 
 void BufferedConnection::notify_connected() {

@@ -19,8 +19,6 @@
 
 #include "wui/interactive_player.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/multithreading.h"
@@ -41,6 +39,7 @@
 #include "logic/player.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication_options.h"
+#include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
@@ -52,6 +51,7 @@
 #include "wui/stock_menu.h"
 #include "wui/toolbar.h"
 #include "wui/tribal_encyclopedia.h"
+#include "wui/unique_window_handler.h"
 #include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
@@ -455,10 +455,8 @@ void InteractivePlayer::think() {
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
 			msg_icon = "images/wui/menus/message_new.png";
-			msg_tooltip =
-			   (boost::format(ngettext("%u new message", "%u new messages", nr_new_messages)) %
-			    nr_new_messages)
-			      .str();
+			msg_tooltip = bformat(
+			   ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
@@ -690,13 +688,16 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 	}
 
 	const Map& map = egbase().map();
-	if (player().is_seeing(Map::get_index(node_and_triangle.node, map.get_width()))) {
+	if (player().is_seeing(map.get_index(node_and_triangle.node))) {
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node))) {
 			if (can_see(building->owner().player_number())) {
 				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
+		}
+		if (show_attack_window(node_and_triangle.node, true)) {
+			return;
 		}
 
 		if (!in_road_building_mode()) {
@@ -708,6 +709,29 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &fieldaction_);
 	}
+}
+
+UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
+                                                  const bool fastclick) {
+	const Map& map = egbase().map();
+	if (Widelands::BaseImmovable* immo = map.get_immovable(c)) {
+		if (immo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+			upcast(Building, building, immo);
+			assert(building != nullptr);
+			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
+				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
+					UI::UniqueWindow::Registry& registry =
+					   unique_windows().get_registry(bformat("attack_%d", building->serial()));
+					registry.open_window = [this, &registry, building, &c, fastclick]() {
+						new AttackWindow(*this, registry, *building, c, fastclick);
+					};
+					registry.create();
+					return registry.window;
+				}
+			}
+		}
+	}
+	return nullptr;
 }
 
 /**
@@ -782,13 +806,11 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-		for (const std::string& fp : matching_fastplace_shortcut(code)) {
-			const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(fp);
-			if (player().tribe().has_building(fastplace)) {
-				game().send_player_build(player_number(), get_sel_pos().node, fastplace);
-				set_flag_to_connect(game().map().br_n(get_sel_pos().node));
-				break;
-			}
+		const Widelands::DescriptionIndex fastplace = egbase().descriptions().building_index(
+		   matching_fastplace_shortcut(code, player().tribe().name()));
+		if (player().tribe().has_building(fastplace)) {
+			game().send_player_build(player_number(), get_sel_pos().node, fastplace);
+			set_flag_to_connect(game().map().br_n(get_sel_pos().node));
 		}
 	}
 
@@ -829,14 +851,13 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 		return;
 	}
 
-	int const n = boost::lexical_cast<int>(args[1]);
+	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
-		DebugConsole::write(str(boost::format("Player #%1% does not exist.") % n));
+		DebugConsole::write(bformat("Player #%d does not exist.", n));
 		return;
 	}
 
-	DebugConsole::write(
-	   str(boost::format("Switching from #%1% to #%2%.") % static_cast<int>(player_number_) % n));
+	DebugConsole::write(bformat("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
 	player_number_ = n;
 
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {

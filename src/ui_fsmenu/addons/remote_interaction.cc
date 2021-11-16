@@ -102,8 +102,7 @@ CommentRow::CommentRow(AddOnsCtrl& ctrl,
 			        e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The comment could not be deleted.\n\nError Message:\n%s")) % e.what())
-			      .str(),
+			   bformat(_("The comment could not be deleted.\n\nError Message:\n%s"), e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -293,9 +292,7 @@ CommentEditor::CommentEditor(AddOnsCtrl& ctrl,
 			}
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The comment could not be submitted.\n\nError Message:\n%s")) %
-			    e.what())
-			      .str(),
+			   bformat(_("The comment could not be submitted.\n\nError Message:\n%s"), e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -595,7 +592,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 		} catch (const std::exception& e) {
 			UI::WLMessageBox w(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The vote could not be submitted.\nError code: %s")) % e.what()).str(),
+			   bformat(_("The vote could not be submitted.\nError code: %s"), e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
@@ -654,9 +651,8 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 
 	tabs_.add("comments", "", &box_comments_);
 	if (nr_screenshots_) {
-		tabs_.add("screenshots",
-		          (boost::format(_("Screenshots (%u)")) % info_->screenshots.size()).str(),
-		          &box_screenies_);
+		tabs_.add(
+		   "screenshots", bformat(_("Screenshots (%u)"), info_->screenshots.size()), &box_screenies_);
 		tabs_.sigclicked.connect([this]() {
 			if (tabs_.active() == 1) {
 				next_screenshot(0);
@@ -691,22 +687,20 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			{
 				UI::WLMessageBox m(
 				   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, info_->descname(),
-				   (boost::format("<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>") %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(
-				          _("Are you sure you want to enable Transifex integration for this add-on?")) %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(
-				          (boost::format(
-				              /** TRANSLATORS: The placeholder is an URL */
-				              _("Don’t forget to configure the new resources at %1% afterwards.")) %
-				           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				              .as_font_tag(underline_tag(
-				                 "https://www.transifex.com/widelands/widelands-addons/content/")))
-				             .str()) %
-				    g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
-				       .as_font_tag(_("This may take several minutes. Please be patient.")))
-				      .str(),
+				   bformat(
+				      "<rt><p>%1$s<br>&nbsp;<br>%2$s<br>&nbsp;<br>%3$s</p></rt>",
+				      g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				         .as_font_tag(_("Are you sure you want to enable Transifex integration for "
+				                        "this add-on?")),
+				      g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				         .as_font_tag(bformat(
+				            /** TRANSLATORS: The placeholder is an URL */
+				            _("Don’t forget to configure the new resources at %1% afterwards."),
+				            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				               .as_font_tag(underline_tag("https://www.transifex.com/widelands/"
+				                                          "widelands-addons/content/")))),
+				      g_style_manager->font_style(UI::FontStyle::kFsMenuLabel)
+				         .as_font_tag(_("This may take several minutes. Please be patient."))),
 				   UI::WLMessageBox::MBoxType::kOkCancel);
 				if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 					return;
@@ -767,17 +761,14 @@ void RemoteInteractionWindow::layout() {
 }
 
 void RemoteInteractionWindow::update_data() {
-	(*tabs_.tabs().begin())
-	   ->set_title((boost::format(_("Comments (%u)")) % info_->user_comments.size()).str());
-	(*tabs_.tabs().rbegin())
-	   ->set_title((boost::format(_("Votes (%u)")) % info_->number_of_votes()).str());
+	(*tabs_.tabs().begin())->set_title(bformat(_("Comments (%u)"), info_->user_comments.size()));
+	(*tabs_.tabs().rbegin())->set_title(bformat(_("Votes (%u)"), info_->number_of_votes()));
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() ?
-         (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                              "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes())) %
-	       info_->average_rating() % info_->number_of_votes())
-	         .str() :
+         bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                       "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
+	              info_->average_rating(), info_->number_of_votes()) :
          _("No votes yet"));
 
 	uint32_t most_votes = 1;
@@ -794,12 +785,11 @@ void RemoteInteractionWindow::update_data() {
 	comment_rows_.clear();
 	std::string text = "<rt><p>";
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	           .as_font_tag(info_->user_comments.empty() ?
-                              _("No comments yet.") :
-                              (boost::format(ngettext(
-	                               "%u comment:", "%u comments:", info_->user_comments.size())) %
-	                            info_->user_comments.size())
-	                              .str());
+	           .as_font_tag(
+	              info_->user_comments.empty() ?
+                    _("No comments yet.") :
+                    bformat(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
+	                         info_->user_comments.size()));
 	text += "</p></rt>";
 	comments_header_.set_text(text);
 	for (const auto& comment : info_->user_comments) {
@@ -809,23 +799,20 @@ void RemoteInteractionWindow::update_data() {
 			           .as_font_tag(time_string(comment.second.timestamp));
 		} else if (comment.second.editor == comment.second.username) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag((boost::format(_("%1$s (edited on %2$s)")) %
-			                         time_string(comment.second.timestamp) %
-			                         time_string(comment.second.edit_timestamp))
-			                           .str());
+			           .as_font_tag(bformat(_("%1$s (edited on %2$s)"),
+			                                time_string(comment.second.timestamp),
+			                                time_string(comment.second.edit_timestamp)));
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag((boost::format(_("%1$s (edited by ‘%2$s’ on %3$s)")) %
-			                         time_string(comment.second.timestamp) % comment.second.editor %
-			                         time_string(comment.second.edit_timestamp))
-			                           .str());
+			           .as_font_tag(bformat(
+			              _("%1$s (edited by ‘%2$s’ on %3$s)"), time_string(comment.second.timestamp),
+			              comment.second.editor, time_string(comment.second.edit_timestamp)));
 		}
 		text += "<br>";
-		text += g_style_manager->font_style(UI::FontStyle::kItalic)
-		           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
-		                         comment.second.username %
-		                         AddOns::version_to_string(comment.second.version))
-		                           .str());
+		text +=
+		   g_style_manager->font_style(UI::FontStyle::kItalic)
+		      .as_font_tag(bformat(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
+		                           AddOns::version_to_string(comment.second.version)));
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);
@@ -851,7 +838,7 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	std::advance(it, current_screenshot_);
 
 	screenshot_stats_.set_text(
-	   (boost::format(_("%1$u / %2$u")) % (current_screenshot_ + 1) % nr_screenshots_).str());
+	   bformat(_("%1$u / %2$u"), (current_screenshot_ + 1), nr_screenshots_));
 	screenshot_descr_.set_text(it->second);
 	screenshot_.set_tooltip("");
 

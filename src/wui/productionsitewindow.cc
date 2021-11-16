@@ -173,7 +173,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 void ProductionSiteWindow::clicked_watch() {
 	if (Widelands::ProductionSite* p = production_site_.get(ibase()->egbase())) {
 		if (upcast(InteractiveGameBase, igb, ibase())) {
-			igb->show_watch_window(*p->working_positions()[0].worker.get(ibase()->egbase()));
+			igb->show_watch_window(*p->working_positions()->begin()->worker.get(ibase()->egbase()));
 		}
 	}
 }
@@ -190,13 +190,13 @@ void ProductionSiteWindow::think() {
 
 	if (watch_button_) {
 		watch_button_->set_enabled(
-		   production_site->working_positions()[0].worker.get(ibase()->egbase()));
+		   production_site->working_positions()->begin()->worker.get(ibase()->egbase()));
 	}
 
 	// If we have pending requests, update table each tick.
 	// This is required to update from 'vacant' to 'coming'
 	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
-		Widelands::Request* r = production_site->working_positions()[i].worker_request;
+		Widelands::Request* r = production_site->working_positions()->at(i).worker_request;
 		if (r) {
 			update_worker_table(production_site);
 			break;
@@ -215,8 +215,9 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 
 	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
 		const Widelands::Worker* worker =
-		   production_site->working_positions()[i].worker.get(ibase()->egbase());
-		const Widelands::Request* request = production_site->working_positions()[i].worker_request;
+		   production_site->working_positions()->at(i).worker.get(ibase()->egbase());
+		const Widelands::Request* request =
+		   production_site->working_positions()->at(i).worker_request;
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
 		if (worker) {
@@ -230,9 +231,8 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 				// Fill upgrade status
 				/** TRANSLATORS: %1% = the experience a worker has */
 				/** TRANSLATORS: %2% = the experience a worker needs to reach the next level */
-				er.set_string(1, (boost::format(_("%1%/%2%")) % worker->get_current_experience() %
-				                  worker->descr().get_needed_experience())
-				                    .str());
+				er.set_string(1, bformat(_("%1%/%2%"), worker->get_current_experience(),
+				                         worker->descr().get_needed_experience()));
 				er.set_string(
 				   2, worker->owner().tribe().get_worker_descr(worker->descr().becomes())->descname());
 			} else {
@@ -261,9 +261,9 @@ void ProductionSiteWindow::evict_worker() {
 	}
 
 	if (worker_table_->has_selection()) {
-		Widelands::Worker* worker =
-		   production_site->working_positions()[worker_table_->get_selected()].worker.get(
-		      ibase()->egbase());
+		Widelands::Worker* worker = production_site->working_positions()
+		                               ->at(worker_table_->get_selected())
+		                               .worker.get(ibase()->egbase());
 		if (worker) {
 			if (game_) {
 				game_->send_player_evict_worker(*worker);
@@ -291,7 +291,7 @@ void ProductionSiteWindow::worker_table_selection_changed() {
 		   working_positions = ps->descr().working_positions();
 		const size_t selected_index = worker_table_->get_selected();
 		const Widelands::Worker* worker =
-		   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+		   ps->working_positions()->at(selected_index).worker.get(ibase()->egbase());
 
 		Widelands::DescriptionIndex di = Widelands::INVALID_INDEX;
 		size_t i = 0;
@@ -347,7 +347,7 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 
 	const size_t selected_index = worker_table_->get_selected();
 	Widelands::Worker* worker =
-	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+	   ps->working_positions()->at(selected_index).worker.get(ibase()->egbase());
 
 	const Widelands::DescriptionIndex current =
 	   worker ? ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
@@ -386,7 +386,7 @@ void ProductionSiteWindow::worker_table_xp_clicked(int8_t delta) {
 
 	const size_t selected_index = worker_table_->get_selected();
 	Widelands::Worker* worker =
-	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+	   ps->working_positions()->at(selected_index).worker.get(ibase()->egbase());
 	if (!worker) {
 		return;
 	}

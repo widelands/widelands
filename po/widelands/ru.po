@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-31 02:44+0000\n"
-"PO-Revision-Date: 2021-10-27 14:51+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2021-11-13 02:41+0000\n"
+"PO-Revision-Date: 2021-11-13 02:42+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -277,10 +277,10 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
-#: ../../src/ui_fsmenu/keyboard_options.cc:318
+#: ../../src/ui_fsmenu/keyboard_options.cc:302
 #: ../../src/wui/interactive_gamebase.cc:91
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -288,16 +288,16 @@ msgstr "Главное меню"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #: ../../src/editor/editorinteractive.cc:109
-#: ../../src/wlapplication_options.cc:357
+#: ../../src/wlapplication_options.cc:413
 msgid "Tools"
 msgstr "Инструменты"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -308,17 +308,17 @@ msgid "Tool size"
 msgstr "Размер инструмента"
 
 #: ../../src/editor/editorinteractive.cc:152
-#: ../../src/wlapplication_options.cc:349
+#: ../../src/wlapplication_options.cc:405
 msgid "Undo"
 msgstr "Отменить"
 
 #: ../../src/editor/editorinteractive.cc:156
-#: ../../src/wlapplication_options.cc:353
+#: ../../src/wlapplication_options.cc:409
 msgid "Redo"
 msgstr "Повторить"
 
 #: ../../src/editor/editorinteractive.cc:167
-#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:225
+#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:227
 msgid "Help"
 msgstr "Помощь"
 
@@ -338,14 +338,14 @@ msgstr "Новая случайная карта"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:209
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:345
+#: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:401
 msgid "Load Map"
 msgstr "Загрузить карту"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:217
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
-#: ../../src/wlapplication_options.cc:341
+#: ../../src/wlapplication_options.cc:397
 msgid "Save Map"
 msgstr "Сохранить Карту"
 
@@ -487,10 +487,10 @@ msgstr "Информация"
 msgid "Click on a field to show information about it"
 msgstr "Щелкнуть на поле, чтобы показать информацию о нем"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -669,8 +669,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -863,8 +863,8 @@ msgstr "Экран"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:392
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:570
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:59
-#: ../../src/ui_fsmenu/keyboard_options.cc:198 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:70
+#: ../../src/ui_fsmenu/keyboard_options.cc:234 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
 #: ../../src/wui/game_main_menu_save_game.cc:88
@@ -884,7 +884,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:193
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:400
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:66
-#: ../../src/ui_fsmenu/keyboard_options.cc:54
+#: ../../src/ui_fsmenu/keyboard_options.cc:65
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:672
@@ -979,9 +979,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1205,7 +1205,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:270
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
@@ -1445,9 +1445,9 @@ msgstr "Очередь команд"
 
 #: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:149
 #: ../../src/map_io/widelands_map_loader.cc:389
-#: ../../src/wlapplication_options.cc:468
-#: ../../src/wui/interactive_player.cc:216
-#: ../../src/wui/interactive_player.cc:454
+#: ../../src/wlapplication_options.cc:524
+#: ../../src/wui/interactive_player.cc:218
+#: ../../src/wui/interactive_player.cc:456
 msgid "Messages"
 msgstr "Сообщения"
 
@@ -2095,19 +2095,19 @@ msgstr "Нет солдат для этого уровня тренировки!
 msgid "Completed %s"
 msgstr "Завершено %s"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:352
+#: ../../src/logic/map_objects/tribes/productionsite.cc:347
 msgid "(stopped)"
 msgstr "(остановлено)"
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:435
+#: ../../src/logic/map_objects/tribes/productionsite.cc:430
 #: ../../src/wui/building_statistics_menu.cc:694
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:1086
+#: ../../src/logic/map_objects/tribes/productionsite.cc:1135
 msgid "Can’t find any more resources!"
 msgstr "Больше не можем найти ресурсов!"
 
@@ -2244,7 +2244,7 @@ msgstr "Корабли"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:183
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:152
-#: ../../src/wui/interactive_player.cc:323
+#: ../../src/wui/interactive_player.cc:325
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:265
 msgid "Wares"
@@ -2266,32 +2266,32 @@ msgstr "Работники"
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
 #: ../../src/wui/general_statistics_menu.cc:148
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:197
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/minimap.cc:197
 msgid "Buildings"
 msgstr "Строения"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:227
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:240
 msgid "Worker missing"
 msgstr "Не хватает работника"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:232
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:245
 msgid "Workers missing"
 msgstr "Не хватает работников"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:236
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:249
 msgid "Worker is coming"
 msgstr "Рабочий идет на свое место"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:241
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:254
 msgid "Workers are coming"
 msgstr "Рабочий прибыл"
 
@@ -2378,7 +2378,7 @@ msgstr "Файл карты забракован по причине:\n%s"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1921
+#: ../../src/logic/player.cc:1926
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2413,12 +2413,12 @@ msgid "Saving game…"
 msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:178
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
 #: ../../src/logic/save_handler.cc:192
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Игра сохранена"
 
@@ -2504,9 +2504,9 @@ msgstr "Сценарий"
 
 #: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
-#: ../../src/wlapplication_options.cc:464
+#: ../../src/wlapplication_options.cc:520
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:210
 msgid "Objectives"
 msgstr "Задания"
 
@@ -3298,8 +3298,7 @@ msgid "Version:"
 msgstr "Версия игры: "
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:74 ../../src/ui_fsmenu/keyboard_options.cc:269
-#: ../../src/wui/interactive_gamebase.cc:532
+#: ../../src/ui_fsmenu/about.cc:74 ../../src/wui/interactive_gamebase.cc:532
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -3342,7 +3341,7 @@ msgstr "Язык:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Home Directory:"
-msgstr ""
+msgstr "Домашняя директория:"
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Configuration File:"
@@ -3814,7 +3813,7 @@ msgstr "Логин или пароль введены неверно:\n%s"
 #: ../../src/ui_fsmenu/addons/manager.cc:930
 #, c-format
 msgid "Fetching add-ons (%.1f%%)"
-msgstr ""
+msgstr "Выборка дополнений (%.1f %%)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:933
 msgid "Connecting to the server…"
@@ -4047,7 +4046,7 @@ msgid ""
 "This name is invalid. Reason: %s\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "Имя недействительно по следующей причине: %s\n\nВыберете другое имя."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:356
 msgid "An add-on with this internal name already exists."
@@ -4206,7 +4205,7 @@ msgstr "Удалить карту или каталог"
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
-msgstr ""
+msgstr "Выбранное имя для внешней директории уже многократно использовано. Все директории с похожими названиями будут доступны по аналогии."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:191
 msgid "Directory Display Name"
@@ -4247,7 +4246,7 @@ msgstr "Каталог верхнего уровня"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:377
 msgid "Zipped Map"
-msgstr ""
+msgstr "Сжатая карта"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:378
 #, c-format
@@ -4255,7 +4254,7 @@ msgid ""
 "The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr ""
+msgstr "Карта ‘%s’ не является папкой. Пожалуйста, отключите опцию сжатия файлов Widelands в меню опций и сохраните карту в редакторе по новой.\n\nИли вы хотите добавить карту всё равно?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:395
 msgid "New Directory"
@@ -4271,7 +4270,7 @@ msgid ""
 "Directories may not use the extension ‘%s’.\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "У директорий не может быть расширения ‘%s’.\n\nПодберите другое имя."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:432
 msgid "A directory with this name already exists."
@@ -4322,7 +4321,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Комментарий не был сохранён.\n\nОшибка:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:162
 msgid "Edit Comment"
@@ -4447,7 +4446,7 @@ msgstr "Комментарий содержит недопустимую раз�
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
 msgid "Please explain why you are deleting this add-on."
-msgstr ""
+msgstr "Пожалуйста, расскажите, зачем вам удалять это дополнение."
 
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:419
@@ -4489,7 +4488,7 @@ msgstr "Написать комментарий..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:579
 msgid "Administrator actions"
-msgstr ""
+msgstr "Административные возможности"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:586
 msgid "Not voted"
@@ -4509,15 +4508,15 @@ msgstr "Снимков (%u шт.)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
 msgid "Change verification status…"
-msgstr ""
+msgstr "Смена статуса годности..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
 msgid "Change quality rating…"
-msgstr ""
+msgstr "Переоценка качества..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
 msgid "Change sync-safety status…"
-msgstr ""
+msgstr "Смена статуса синхронизации..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:685
 msgid "Enable Transifex integration"
@@ -4685,6 +4684,7 @@ msgstr "%1$s %2$s"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:191
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:378
+#: ../../src/wui/constructionsitewindow.cc:137
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
@@ -4869,7 +4869,7 @@ msgid "Help: %s"
 msgstr "Помощь: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
-#: ../../src/wlapplication_options.cc:246
+#: ../../src/wlapplication_options.cc:302
 msgid "Metaserver Lobby"
 msgstr "Прихожая метасервера"
 
@@ -4926,7 +4926,7 @@ msgid "Version"
 msgstr "Версия"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:320
+#: ../../src/ui_fsmenu/keyboard_options.cc:304
 msgid "Game"
 msgstr "Игра"
 
@@ -4960,62 +4960,42 @@ msgstr "Ошибка сети"
 msgid "unnamed %u"
 msgstr "неименованый%u"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:47
+#: ../../src/ui_fsmenu/keyboard_options.cc:55
 msgid "Reset to default"
 msgstr "Сбросить на умолчания"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:65
+#: ../../src/ui_fsmenu/keyboard_options.cc:76
 msgid "Press the new shortcut or close this window to cancel."
 msgstr "Введите новые горячие клавиши. Или закройте окно."
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:215
+#: ../../src/ui_fsmenu/keyboard_options.cc:134
 msgid "(unused)"
 msgstr "(не использовано)"
 
-#. * TRANSLATORS: [Tribe Name] Building Name
-#: ../../src/ui_fsmenu/keyboard_options.cc:110
-#, c-format
-msgid "[%1$s] %2$s"
-msgstr "[%1$s] %2$s"
-
-#: ../../src/ui_fsmenu/keyboard_options.cc:178
+#: ../../src/ui_fsmenu/keyboard_options.cc:214
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Настроить действия по клавиатуре и мыши"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:189
+#: ../../src/ui_fsmenu/keyboard_options.cc:225
 msgid "Reset all"
 msgstr "Сбросить все"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:190
+#: ../../src/ui_fsmenu/keyboard_options.cc:226
 msgid "Reset all to defaults"
 msgstr "Откатить все к умолчаниям"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
-#: ../../src/ui_fsmenu/keyboard_options.cc:208
-#: ../../src/ui_fsmenu/keyboard_options.cc:221
+#: ../../src/ui_fsmenu/keyboard_options.cc:242
 #, c-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#. * TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut
-#: ../../src/ui_fsmenu/keyboard_options.cc:226
-#, c-format
-msgid "[%1$s] %2$s: %3$s"
-msgstr "[%1$s] %2$s: %3$s"
-
-#. * TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name)
-#: ../../src/ui_fsmenu/keyboard_options.cc:274
-#, c-format
-msgid "%1$s ([%2$s] %3$s)"
-msgstr ""
-
-#: ../../src/ui_fsmenu/keyboard_options.cc:285
+#: ../../src/ui_fsmenu/keyboard_options.cc:269
 msgid "Keyboard Shortcut Conflict"
 msgstr "Пересечение функций горячих клавиш"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:288
+#: ../../src/ui_fsmenu/keyboard_options.cc:272
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -5024,21 +5004,21 @@ msgid ""
 msgstr "Выбранные горячие клавиши (%1$s) уже используются как триггер \"%2$s\". Попробуйте другое их сочетание."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:317
-#: ../../src/wui/interactive_player.cc:328
+#: ../../src/ui_fsmenu/keyboard_options.cc:301
+#: ../../src/wui/interactive_player.cc:330
 msgid "General"
 msgstr "Главное"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:319
-#: ../../src/wlapplication_options.cc:200
+#: ../../src/ui_fsmenu/keyboard_options.cc:303
+#: ../../src/wlapplication_options.cc:256
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:323
+#: ../../src/ui_fsmenu/keyboard_options.cc:307
 msgid "Fastplace"
 msgstr "Выбранная площадка"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:325
+#: ../../src/ui_fsmenu/keyboard_options.cc:309
 msgid "Mouse Scrolling"
 msgstr "Прокрутка мышкой"
 
@@ -5282,12 +5262,12 @@ msgstr "Организация игр недоступна!\nОшибка:\n%s"
 msgid "Begin a new game"
 msgstr "Начать новую игру"
 
-#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:164
+#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:220
 msgid "New Game"
 msgstr "Новая игра"
 
 #: ../../src/ui_fsmenu/main.cc:321 ../../src/ui_fsmenu/random_game.cc:30
-#: ../../src/wlapplication_options.cc:178
+#: ../../src/wlapplication_options.cc:234
 msgid "New Random Game"
 msgstr "Новая игра со случайными параметрами"
 
@@ -5295,7 +5275,7 @@ msgstr "Новая игра со случайными параметрами"
 msgid "Create a new random match"
 msgstr "Начать новую катку"
 
-#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:188
+#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:244
 msgid "Campaigns"
 msgstr "Кампании"
 
@@ -5303,7 +5283,7 @@ msgstr "Кампании"
 msgid "Play a campaign"
 msgstr "Сыграть в кампанию"
 
-#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:183
+#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:239
 msgid "Tutorials"
 msgstr "Обучение"
 
@@ -5312,8 +5292,8 @@ msgid "Play one of our beginners’ tutorials"
 msgstr "Пройти один из обучающих сценариев"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:168
-#: ../../src/wlapplication_options.cc:524
+#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:224
+#: ../../src/wlapplication_options.cc:580
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:155
 msgid "Load Game"
@@ -5323,7 +5303,7 @@ msgstr "Загрузить игру"
 msgid "Continue a saved game"
 msgstr "Продолжить сохраненную игру"
 
-#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:225
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:281
 msgid "Continue Playing"
 msgstr "Продолжить игру"
 
@@ -5361,7 +5341,7 @@ msgstr "Присоединиться к лобби Widelands"
 msgid "Log in as a registered user"
 msgstr "Войти как зарегистрированный игрок"
 
-#: ../../src/ui_fsmenu/main.cc:394 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:394 ../../src/wlapplication_options.cc:298
 msgid "LAN / Direct IP"
 msgstr "LAN / Direct IP"
 
@@ -5381,7 +5361,7 @@ msgstr "Сгенерировать новую карту"
 msgid "Edit an existing map"
 msgstr "Изменить имеющуюся карту"
 
-#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:220
+#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:276
 msgid "Continue Editing"
 msgstr "Продолжить правку"
 
@@ -5409,7 +5389,7 @@ msgstr "Сыграйте с друзьями по сети"
 msgid "Launch the map editor"
 msgstr "Запустить редактор карт"
 
-#: ../../src/ui_fsmenu/main.cc:462 ../../src/wlapplication_options.cc:173
+#: ../../src/ui_fsmenu/main.cc:462 ../../src/wlapplication_options.cc:229
 msgid "Watch Replay"
 msgstr "Посмотреть повтор"
 
@@ -5417,7 +5397,7 @@ msgstr "Посмотреть повтор"
 msgid "Watch the replay of an old game"
 msgstr "Просмотр повтора старой игры"
 
-#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:238
+#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:294
 msgid "Add-Ons"
 msgstr "Дополнения"
 
@@ -5426,7 +5406,7 @@ msgid "Install and manage add-ons"
 msgstr "Установить и настроить дополнения"
 
 #: ../../src/ui_fsmenu/main.cc:471 ../../src/ui_fsmenu/options.cc:89
-#: ../../src/wlapplication_options.cc:255
+#: ../../src/wlapplication_options.cc:311
 msgid "Options"
 msgstr "Настройки"
 
@@ -5438,7 +5418,7 @@ msgstr "Технические и не только настройки игры"
 msgid "Readme, License, and Credits"
 msgstr "Readme, лицензия и благодарности"
 
-#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:229
+#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:285
 msgid "Exit Widelands"
 msgstr "Выйти из Widelands"
 
@@ -5582,7 +5562,7 @@ msgstr "Прокрутка в любую сторону"
 #. Horizontal scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:146
 msgid "(plain)"
-msgstr ""
+msgstr "(в плоскости)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:200
@@ -5592,12 +5572,12 @@ msgstr ""
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:202
 msgid "Vertical"
-msgstr ""
+msgstr "Вертикально"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:204
 msgid "Horizontal"
-msgstr ""
+msgstr "Горизонтально"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:206
@@ -5606,11 +5586,11 @@ msgstr "В обе стороны"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:221
 msgid "%1%:"
-msgstr ""
+msgstr "%1%:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:278
 msgid "Scroll Setting Conflict"
-msgstr ""
+msgstr "Противоречие в настройках прокрутки"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
@@ -5624,17 +5604,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:342
 msgid "Reset Scrolling"
-msgstr ""
+msgstr "Сбросить настройки прокрутки"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:343
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
-msgstr ""
+msgstr "Установить настройки прокрутки по умолчанию для обычной одноколёсной мыши"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:352
 msgid "Set for Touchpad"
-msgstr ""
+msgstr "Настроить тачпад"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:353
 msgid ""
@@ -5644,11 +5624,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:363
 msgid "Apply Scrolling"
-msgstr ""
+msgstr "Принять"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:364
 msgid "Apply scroll settings"
-msgstr ""
+msgstr "Принять"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -5939,7 +5919,7 @@ msgstr "Показывать здания"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:253 ../../src/wui/interactive_player.cc:374
+#: ../../src/ui_fsmenu/options.cc:253 ../../src/wui/interactive_player.cc:376
 msgid "Show Workarea Overlaps"
 msgstr "Показывать слои рабочей области"
 
@@ -6122,18 +6102,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "Авторы"
@@ -6254,526 +6234,722 @@ msgid ""
 "%s"
 msgstr "Увы, Widelands не смог выполнить быстрое сохранение по следующей причине:\n\n%s"
 
+#: ../../src/wlapplication_options.cc:165
+msgid "Warehouse"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:166
+msgid "Port"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:167
+msgid "Minor Training Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:168
+msgid "Major Training Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:169
+msgid "Primary Small Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:170
+msgid "Secondary Small Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:171
+msgid "Primary Medium Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:172
+msgid "Secondary Medium Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:173
+msgid "Tower"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:174
+msgid "Fortress"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:175
+msgid "Woodcutter’s House"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:176
+msgid "Forester’s House"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:177
+msgid "Quarry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:178
+msgid "Primary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:179
+msgid "Secondary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:180
+msgid "Tertiary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:181
+msgid "Fishing"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:182
+msgid "Hunting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:183
+msgid "Fish/Meat Replenishing"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:184
+msgid "Well"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:185
+msgid "Primary Farm"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:186
+msgid "Secondary Farm"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:187
+msgid "Mill"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:188
+msgid "Bakery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:189
+msgid "Brewery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:190
+msgid "Smokery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:191
+msgid "Tavern"
+msgstr ""
+
 #: ../../src/wlapplication_options.cc:192
+msgid "Ore Smelting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:193
+msgid "Tool Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:194
+msgid "Weapon Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:195
+msgid "Armor Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:196
+msgid "Weaving Mill"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:197
+msgid "Shipyard"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:198
+msgid "Ferry Yard"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:199
+msgid "Scouting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:200
+msgid "Barracks"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:201
+msgid "Second Carrier"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:202
+msgid "Charcoal"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:203
+msgid "Stone Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:204
+msgid "Coal Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:205
+msgid "Iron Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:206
+msgid "Gold Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:207
+msgid "Agricultural Producer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:208
+msgid "Primary Agricultural Consumer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:209
+msgid "Secondary Agricultural Consumer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:210
+msgid "Alternative Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:211
+msgid "Industry Support"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:212
+msgid "Terraforming"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:248
 msgid "Singleplayer"
 msgstr "Один игрок"
 
-#: ../../src/wlapplication_options.cc:196
+#: ../../src/wlapplication_options.cc:252
 msgid "Multiplayer"
 msgstr "Несколько игроков"
 
-#: ../../src/wlapplication_options.cc:205
+#: ../../src/wlapplication_options.cc:261
 msgid "Editor – Load Map"
 msgstr "Редактор. Загрузка карты"
 
-#: ../../src/wlapplication_options.cc:210
+#: ../../src/wlapplication_options.cc:266
 msgid "Editor – New Map"
 msgstr "Редактор. Новая карта"
 
-#: ../../src/wlapplication_options.cc:215
+#: ../../src/wlapplication_options.cc:271
 msgid "Editor – New Random Map"
 msgstr "Редактор. Сгенерировать карту"
 
-#: ../../src/wlapplication_options.cc:233
+#: ../../src/wlapplication_options.cc:289
 msgid "About"
 msgstr "Об игре"
 
-#: ../../src/wlapplication_options.cc:250
+#: ../../src/wlapplication_options.cc:306
 msgid "Internet Login"
 msgstr "Ник для игры в Интернет"
 
-#: ../../src/wlapplication_options.cc:261
+#: ../../src/wlapplication_options.cc:317
 msgid "Toggle Building Spaces"
 msgstr "Показать/скрыть рабочие области здания"
 
-#: ../../src/wlapplication_options.cc:266
+#: ../../src/wlapplication_options.cc:322
 msgid "Toggle Minimap"
 msgstr "Показать/скрыть миникарту"
 
-#: ../../src/wlapplication_options.cc:271
+#: ../../src/wlapplication_options.cc:327
 msgid "Encyclopedia"
 msgstr "Энциклопедия"
 
-#: ../../src/wlapplication_options.cc:275
+#: ../../src/wlapplication_options.cc:331
 msgid "Cut Text"
 msgstr "Вырезать текст"
 
-#: ../../src/wlapplication_options.cc:279
+#: ../../src/wlapplication_options.cc:335
 msgid "Copy Text"
 msgstr "Скопировать текст"
 
-#: ../../src/wlapplication_options.cc:283
+#: ../../src/wlapplication_options.cc:339
 msgid "Paste Text"
 msgstr "Вставить текст"
 
-#: ../../src/wlapplication_options.cc:287
+#: ../../src/wlapplication_options.cc:343
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: ../../src/wlapplication_options.cc:292
+#: ../../src/wlapplication_options.cc:348
 msgid "Delete Item"
 msgstr "Удалить пункт"
 
-#: ../../src/wlapplication_options.cc:297
+#: ../../src/wlapplication_options.cc:353
 msgid "Tooltip Accessibility Mode Key"
 msgstr "Переключение между режимами доступа"
 
-#: ../../src/wlapplication_options.cc:302
+#: ../../src/wlapplication_options.cc:358
 msgid "Toggle Fullscreen"
 msgstr "Переключение между оконными режимами"
 
-#: ../../src/wlapplication_options.cc:307
+#: ../../src/wlapplication_options.cc:363
 msgid "Take Screenshot"
 msgstr "Сделать снимок экрана"
 
-#: ../../src/wlapplication_options.cc:312
+#: ../../src/wlapplication_options.cc:368
 msgid "Zoom In"
 msgstr "Приблизить"
 
-#: ../../src/wlapplication_options.cc:317
+#: ../../src/wlapplication_options.cc:373
 msgid "Zoom Out"
 msgstr "Отдалиться"
 
-#: ../../src/wlapplication_options.cc:322
+#: ../../src/wlapplication_options.cc:378
 msgid "Reset Zoom"
 msgstr "Сбросить масштаб"
 
-#: ../../src/wlapplication_options.cc:327
+#: ../../src/wlapplication_options.cc:383
 msgid "Jump to Next Location"
 msgstr "Перейти в следующее место"
 
-#: ../../src/wlapplication_options.cc:332
+#: ../../src/wlapplication_options.cc:388
 msgid "Jump to Previous Location"
 msgstr "Вернуться на прежнее место"
 
-#: ../../src/wlapplication_options.cc:337
+#: ../../src/wlapplication_options.cc:393
 msgid "Menu"
 msgstr "Меню"
 
-#: ../../src/wlapplication_options.cc:361
+#: ../../src/wlapplication_options.cc:417
 msgid "Info Tool"
 msgstr "Инструменты информирования"
 
-#: ../../src/wlapplication_options.cc:365
+#: ../../src/wlapplication_options.cc:421
 msgid "Players Menu"
 msgstr "Игровое меню"
 
-#: ../../src/wlapplication_options.cc:370
+#: ../../src/wlapplication_options.cc:426
 msgid "Toggle Grid"
 msgstr "Переключить видимость сетки"
 
-#: ../../src/wlapplication_options.cc:375
+#: ../../src/wlapplication_options.cc:431
 msgid "Toggle Immovables"
 msgstr "Переключение неподвижных объектов"
 
-#: ../../src/wlapplication_options.cc:380
+#: ../../src/wlapplication_options.cc:436
 msgid "Toggle Animals"
 msgstr "Переключить видимость животных"
 
-#: ../../src/wlapplication_options.cc:385
+#: ../../src/wlapplication_options.cc:441
 msgid "Toggle Resources"
 msgstr "Переключение ресурсов"
 
-#: ../../src/wlapplication_options.cc:392
+#: ../../src/wlapplication_options.cc:448
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "Задать размер панели инструментов равный %d"
 
-#: ../../src/wlapplication_options.cc:410
+#: ../../src/wlapplication_options.cc:466
 msgid "Toggle Census"
 msgstr "Переключение численности населения"
 
-#: ../../src/wlapplication_options.cc:415
+#: ../../src/wlapplication_options.cc:471
 msgid "Toggle Status Labels"
 msgstr "Переключение меток состояния"
 
-#: ../../src/wlapplication_options.cc:420
+#: ../../src/wlapplication_options.cc:476
 msgid "Toggle Soldier Levels"
 msgstr "Переключение уровня солдат"
 
-#: ../../src/wlapplication_options.cc:425
+#: ../../src/wlapplication_options.cc:481
 msgid "Toggle Buildings Visibility"
 msgstr "Переключение видимости зданий"
 
-#: ../../src/wlapplication_options.cc:430
+#: ../../src/wlapplication_options.cc:486
 msgid "Toggle Overlapping Workareas"
 msgstr "Переключение видимости слоёв рабочей области"
 
-#: ../../src/wlapplication_options.cc:435
+#: ../../src/wlapplication_options.cc:491
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "Общая статистика"
 
-#: ../../src/wlapplication_options.cc:440
+#: ../../src/wlapplication_options.cc:496
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Статистика товаров"
 
-#: ../../src/wlapplication_options.cc:445
+#: ../../src/wlapplication_options.cc:501
 #: ../../src/wui/building_statistics_menu.cc:55
 msgid "Building Statistics"
 msgstr "Статистика построек"
 
-#: ../../src/wlapplication_options.cc:450
+#: ../../src/wlapplication_options.cc:506
 msgid "Stock Inventory"
 msgstr "Перечень товаров"
 
-#: ../../src/wlapplication_options.cc:455
+#: ../../src/wlapplication_options.cc:511
 #: ../../src/wui/soldier_statistics_menu.cc:133
 msgid "Soldier Statistics"
 msgstr "Статистика по солдатам"
 
-#: ../../src/wlapplication_options.cc:460
+#: ../../src/wlapplication_options.cc:516
 #: ../../src/wui/seafaring_statistics_menu.cc:50
 msgid "Seafaring Statistics"
 msgstr "Статистика мореплавания"
 
-#: ../../src/wlapplication_options.cc:473
+#: ../../src/wlapplication_options.cc:529
 msgid "Decrease Game Speed by 1×"
 msgstr "Замедлить игру в 1× раз"
 
-#: ../../src/wlapplication_options.cc:478
+#: ../../src/wlapplication_options.cc:534
 msgid "Decrease Game Speed by 0.25×"
 msgstr "Замедлить игру в 0.25× раз"
 
-#: ../../src/wlapplication_options.cc:483
+#: ../../src/wlapplication_options.cc:539
 msgid "Decrease Game Speed by 10×"
 msgstr "Замедлить игру в 10× раз"
 
-#: ../../src/wlapplication_options.cc:488
+#: ../../src/wlapplication_options.cc:544
 msgid "Increase Game Speed by 1×"
 msgstr "Ускорить игру в 1× раз"
 
-#: ../../src/wlapplication_options.cc:493
+#: ../../src/wlapplication_options.cc:549
 msgid "Increase Game Speed by 0.25×"
 msgstr "Ускорить игру в 0.25× раз"
 
-#: ../../src/wlapplication_options.cc:498
+#: ../../src/wlapplication_options.cc:554
 msgid "Increase Game Speed by 10×"
 msgstr "Ускорить игру в 10× раз"
 
-#: ../../src/wlapplication_options.cc:503
+#: ../../src/wlapplication_options.cc:559
 msgid "Reset Game Speed"
 msgstr "Вернуться к нормальной скорости игры"
 
-#: ../../src/wlapplication_options.cc:507
+#: ../../src/wlapplication_options.cc:563
 #: ../../src/wui/interactive_gamebase.cc:326
 msgid "Pause"
 msgstr "Пауза"
 
-#: ../../src/wlapplication_options.cc:512
+#: ../../src/wlapplication_options.cc:568
 msgid "Scroll to Starting Field"
 msgstr "Прокрутить к стартовому полю"
 
-#: ../../src/wlapplication_options.cc:516 ../../src/wui/game_chat_menu.cc:55
+#: ../../src/wlapplication_options.cc:572 ../../src/wui/game_chat_menu.cc:55
 #: ../../src/wui/interactive_gamebase.cc:366
 msgid "Chat"
 msgstr "Общение"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:520
+#: ../../src/wlapplication_options.cc:576
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:146
 msgid "Save Game"
 msgstr "Сохранить игру"
 
-#: ../../src/wlapplication_options.cc:529
+#: ../../src/wlapplication_options.cc:585
 msgid "Messages: Go to Location"
 msgstr "Сообщения: перейти в точку"
 
-#: ../../src/wlapplication_options.cc:534
+#: ../../src/wlapplication_options.cc:590
 msgid "Messages: Show "
 msgstr "Показать сообщения"
 
-#: ../../src/wlapplication_options.cc:539
+#: ../../src/wlapplication_options.cc:595
 msgid "Messages: Show Geologists’ Messages"
 msgstr "Показать сообщения от геологов"
 
-#: ../../src/wlapplication_options.cc:544
+#: ../../src/wlapplication_options.cc:600
 msgid "Messages: Show Economy Messages"
 msgstr "Показать экономические сообщения"
 
-#: ../../src/wlapplication_options.cc:549
+#: ../../src/wlapplication_options.cc:605
 msgid "Messages: Show Seafaring Messages"
 msgstr "Показать сообщения от мореходов"
 
-#: ../../src/wlapplication_options.cc:554
+#: ../../src/wlapplication_options.cc:610
 msgid "Messages: Show Military Messages"
 msgstr "Показать сообщения от армий"
 
-#: ../../src/wlapplication_options.cc:559
+#: ../../src/wlapplication_options.cc:615
 msgid "Messages: Show Scenario Messages"
 msgstr "Показать сценарные сообщения"
 
-#: ../../src/wlapplication_options.cc:564
+#: ../../src/wlapplication_options.cc:620
 msgid "Seafaring: Go to Ship"
 msgstr "Перейти к кораблю"
 
-#: ../../src/wlapplication_options.cc:569
+#: ../../src/wlapplication_options.cc:625
 msgid "Seafaring: Watch Ship"
 msgstr "Следить за кораблём"
 
-#: ../../src/wlapplication_options.cc:574
+#: ../../src/wlapplication_options.cc:630
 msgid "Seafaring: Open Ship Window"
 msgstr "Открыть окно \"Корабль\""
 
-#: ../../src/wlapplication_options.cc:579
+#: ../../src/wlapplication_options.cc:635
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr "Открыть окно \"Кораблю\" и перейти к кораблю"
 
-#: ../../src/wlapplication_options.cc:584
+#: ../../src/wlapplication_options.cc:640
 msgid "Seafaring: Show All Ships"
 msgstr "Показать все корабли"
 
-#: ../../src/wlapplication_options.cc:589
+#: ../../src/wlapplication_options.cc:645
 msgid "Seafaring: Show Idle Ships"
 msgstr "Показать простаивающие корабли"
 
-#: ../../src/wlapplication_options.cc:594
+#: ../../src/wlapplication_options.cc:650
 msgid "Seafaring: Show Transport Ships"
 msgstr "Показать грузовые суда"
 
-#: ../../src/wlapplication_options.cc:599
+#: ../../src/wlapplication_options.cc:655
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr "Показать простаивающие экспедиции"
 
-#: ../../src/wlapplication_options.cc:604
+#: ../../src/wlapplication_options.cc:660
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr "Показать разведывательные экспедиции"
 
-#: ../../src/wlapplication_options.cc:609
+#: ../../src/wlapplication_options.cc:665
 msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr "Показать экспедиции, отправленные отсюда"
 
-#: ../../src/wlapplication_options.cc:614
+#: ../../src/wlapplication_options.cc:670
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "Установить метку №%d"
 
-#: ../../src/wlapplication_options.cc:619
+#: ../../src/wlapplication_options.cc:675
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "Перейти к метке №%d"
 
-#: ../../src/wlapplication_options.cc:848
+#: ../../src/wlapplication_options.cc:916
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift"
 
-#: ../../src/wlapplication_options.cc:851
+#: ../../src/wlapplication_options.cc:919
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../src/wlapplication_options.cc:855
+#: ../../src/wlapplication_options.cc:923
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../src/wlapplication_options.cc:857
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:861
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:870
+#: ../../src/wlapplication_options.cc:938
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:883
+#: ../../src/wlapplication_options.cc:951
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Пробел"
 
-#: ../../src/wlapplication_options.cc:885
+#: ../../src/wlapplication_options.cc:953
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Enter"
 
-#: ../../src/wlapplication_options.cc:887
+#: ../../src/wlapplication_options.cc:955
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape"
 
-#: ../../src/wlapplication_options.cc:889
+#: ../../src/wlapplication_options.cc:957
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Tab"
 
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:959
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Меню"
 
-#: ../../src/wlapplication_options.cc:893
+#: ../../src/wlapplication_options.cc:961
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Пауза"
 
-#: ../../src/wlapplication_options.cc:895
+#: ../../src/wlapplication_options.cc:963
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../src/wlapplication_options.cc:897
+#: ../../src/wlapplication_options.cc:965
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
-#: ../../src/wlapplication_options.cc:899
+#: ../../src/wlapplication_options.cc:967
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:969
 msgctxt "hotkey"
 msgid "End"
 msgstr "End"
 
-#: ../../src/wlapplication_options.cc:903
+#: ../../src/wlapplication_options.cc:971
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Стрелка влево"
 
-#: ../../src/wlapplication_options.cc:905
+#: ../../src/wlapplication_options.cc:973
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Стрелка вправо"
 
-#: ../../src/wlapplication_options.cc:907
+#: ../../src/wlapplication_options.cc:975
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Стрелка вверх"
 
-#: ../../src/wlapplication_options.cc:909
+#: ../../src/wlapplication_options.cc:977
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Стрелка вниз"
 
-#: ../../src/wlapplication_options.cc:911
+#: ../../src/wlapplication_options.cc:979
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Insert"
 
-#: ../../src/wlapplication_options.cc:913
+#: ../../src/wlapplication_options.cc:981
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
 
-#: ../../src/wlapplication_options.cc:915
+#: ../../src/wlapplication_options.cc:983
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Backspace"
 
-#: ../../src/wlapplication_options.cc:917
+#: ../../src/wlapplication_options.cc:985
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: ../../src/wlapplication_options.cc:919
+#: ../../src/wlapplication_options.cc:987
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Numpad Lock"
 
-#: ../../src/wlapplication_options.cc:921
+#: ../../src/wlapplication_options.cc:989
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:991
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Keypad 1"
 
-#: ../../src/wlapplication_options.cc:925
+#: ../../src/wlapplication_options.cc:993
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Keypad 2"
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Keypad 3"
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:997
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Keypad 4"
 
-#: ../../src/wlapplication_options.cc:931
+#: ../../src/wlapplication_options.cc:999
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Keypad 5"
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:1001
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Keypad 6"
 
-#: ../../src/wlapplication_options.cc:935
+#: ../../src/wlapplication_options.cc:1003
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Keypad 7"
 
-#: ../../src/wlapplication_options.cc:937
+#: ../../src/wlapplication_options.cc:1005
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Keypad 8"
 
-#: ../../src/wlapplication_options.cc:939
+#: ../../src/wlapplication_options.cc:1007
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Keypad 9"
 
-#: ../../src/wlapplication_options.cc:941
+#: ../../src/wlapplication_options.cc:1009
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Keypad 0"
 
-#: ../../src/wlapplication_options.cc:943
+#: ../../src/wlapplication_options.cc:1011
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Keypad ."
 
-#: ../../src/wlapplication_options.cc:945
+#: ../../src/wlapplication_options.cc:1013
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Keypad +"
 
-#: ../../src/wlapplication_options.cc:947
+#: ../../src/wlapplication_options.cc:1015
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Keypad -"
 
-#: ../../src/wlapplication_options.cc:949
+#: ../../src/wlapplication_options.cc:1017
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Keypad *"
 
-#: ../../src/wlapplication_options.cc:951
+#: ../../src/wlapplication_options.cc:1019
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Keypad /"
 
-#: ../../src/wlapplication_options.cc:953
+#: ../../src/wlapplication_options.cc:1021
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Keypad Enter"
 
+#: ../../src/wlapplication_options.cc:1030
+msgid "(disabled)"
+msgstr ""
+
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:966 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:1034 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:984
+#: ../../src/wlapplication_options.cc:1060
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Площадка №%i"
@@ -6842,8 +7018,14 @@ msgstr "Отменить экспедицию?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Вы действительно хотите отменить текущую экспедицию?"
 
-#. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
-#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:510
+#: ../../src/wui/attack_window.cc:47
+msgid "Attack"
+msgstr "Атака"
+
+#. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
+#. window.
+#: ../../src/wui/attack_window.cc:167
+#: ../../src/wui/constructionsitewindow.cc:523
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
@@ -6852,66 +7034,75 @@ msgstr[1] "%u солдата"
 msgstr[2] "%u солдат"
 msgstr[3] "%u солдат"
 
-#: ../../src/wui/attack_box.cc:201
-msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr "Отправьте меньше солдат. Удерживайте Ctrl, чтобы не отправлять солдат"
-
-#: ../../src/wui/attack_box.cc:210
+#: ../../src/wui/attack_window.cc:246
 msgid "Number of soldiers"
 msgstr "Выберете количество солдат для атаки"
 
-#: ../../src/wui/attack_box.cc:215
+#: ../../src/wui/attack_window.cc:252
+msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
+msgstr "Отправьте меньше солдат. Удерживайте Ctrl, чтобы не отправлять солдат"
+
+#: ../../src/wui/attack_window.cc:257
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "Отправьте больше солдат. Удерживайте Ctrl, чтобы отправить как можно больше солдат"
 
-#: ../../src/wui/attack_box.cc:220
+#: ../../src/wui/attack_window.cc:261
 msgid "Start attack"
 msgstr "Начать атаку"
 
-#: ../../src/wui/attack_box.cc:234
+#: ../../src/wui/attack_window.cc:280
 msgid "Attackers:"
 msgstr "Атакующие:"
 
-#: ../../src/wui/attack_box.cc:240
+#: ../../src/wui/attack_window.cc:286
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "Нажмите на солдата, чтобы удалить его из списка атакующих"
 
-#: ../../src/wui/attack_box.cc:242
+#: ../../src/wui/attack_window.cc:288
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "Удерживайте Ctrl, чтобы удалить всех солдат из списка"
 
-#: ../../src/wui/attack_box.cc:243
+#: ../../src/wui/attack_window.cc:289
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "Удерживайте Shift, чтобы убрать всех солдат до того, на которого вы указываете"
 
-#: ../../src/wui/attack_box.cc:251
+#: ../../src/wui/attack_window.cc:297
 msgid "Not attacking:"
 msgstr "Не атакуют:"
 
-#: ../../src/wui/attack_box.cc:256
+#: ../../src/wui/attack_window.cc:302
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "Нажмите на солдата, чтобы добавить его в список атакующих"
 
-#: ../../src/wui/attack_box.cc:258
+#: ../../src/wui/attack_window.cc:304
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "Удерживайте Ctrl, чтобы добавить всех солдат в список"
 
-#: ../../src/wui/attack_box.cc:259
+#: ../../src/wui/attack_window.cc:305
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "Удерживайте Shift, чтобы добавить всех солдат до того, на кого вы указываете"
 
-#: ../../src/wui/attack_box.cc:268
+#: ../../src/wui/attack_window.cc:315
 msgid "Destroy target"
 msgstr "Снести"
 
-#: ../../src/wui/attack_box.cc:269
+#: ../../src/wui/attack_window.cc:316
 msgid "Destroy the target building instead of conquering it"
 msgstr "Если здание не захвачено, оно будет снесено"
 
+#: ../../src/wui/attack_window.cc:327 ../../src/wui/buildingwindow.cc:391
+#: ../../src/wui/fieldaction.cc:501 ../../src/wui/shipwindow.cc:144
+msgid "Show Debug Window"
+msgstr "Показать окно отладки"
+
+#: ../../src/wui/attack_window.cc:331 ../../src/wui/buildingwindow.cc:407
+msgid "Center view on this"
+msgstr "Центрировать вид на это здание"
+
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_box.cc:358 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:430 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:482
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -6975,13 +7166,13 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:732
 #: ../../src/wui/building_statistics_menu.cc:734
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7021,7 +7212,7 @@ msgstr "Остановить"
 msgid "Enhance to %s"
 msgstr "Улучшить до %s"
 
-#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:101
+#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "Стоимость постройки:"
 
@@ -7037,18 +7228,9 @@ msgstr "Разобрать"
 msgid "Returns:"
 msgstr "Вернётся:"
 
-#: ../../src/wui/buildingwindow.cc:391 ../../src/wui/fieldaction.cc:524
-#: ../../src/wui/shipwindow.cc:144
-msgid "Show Debug Window"
-msgstr "Показать окно отладки"
-
 #: ../../src/wui/buildingwindow.cc:400
 msgid "Watch the scout"
 msgstr "Показать разведчика"
-
-#: ../../src/wui/buildingwindow.cc:407
-msgid "Center view on this"
-msgstr "Центрировать вид на это здание"
 
 #: ../../src/wui/buildingwindow.cc:638
 msgid "Hide work area"
@@ -7059,7 +7241,7 @@ msgid "Show work area"
 msgstr "Показать рабочую область"
 
 #: ../../src/wui/buildingwindow.cc:666
-#: ../../src/wui/constructionsitewindow.cc:315
+#: ../../src/wui/constructionsitewindow.cc:334
 msgid "Start an expedition"
 msgstr "Начать экспедицию"
 
@@ -7072,67 +7254,67 @@ msgstr "Отменить экспедицию"
 msgid "Building materials"
 msgstr "Стройматериалы"
 
-#: ../../src/wui/constructionsitewindow.cc:201
-msgid "Stopped"
-msgstr "Остановлено"
-
-#: ../../src/wui/constructionsitewindow.cc:202
+#: ../../src/wui/constructionsitewindow.cc:223
 msgid "Stop this building’s work after completion"
 msgstr "Остановить работу в здании по готовности"
 
-#: ../../src/wui/constructionsitewindow.cc:241
+#: ../../src/wui/constructionsitewindow.cc:223
+msgid "Stopped"
+msgstr "Остановлено"
+
+#: ../../src/wui/constructionsitewindow.cc:261
 #: ../../src/wui/soldierlist.cc:437
 msgid "Prefer heroes"
 msgstr "Предпочитать героев"
 
-#: ../../src/wui/constructionsitewindow.cc:244
+#: ../../src/wui/constructionsitewindow.cc:264
 #: ../../src/wui/soldierlist.cc:434
 msgid "Prefer rookies"
 msgstr "Предпочитать новобранцев"
 
-#: ../../src/wui/constructionsitewindow.cc:274
+#: ../../src/wui/constructionsitewindow.cc:293
 #: ../../src/wui/warehousewindow.cc:150
 msgid "Normal policy"
 msgstr "Нормальная политика"
 
-#: ../../src/wui/constructionsitewindow.cc:278
+#: ../../src/wui/constructionsitewindow.cc:297
 #: ../../src/wui/warehousewindow.cc:151
 msgid "Preferably store selected wares here"
 msgstr "Предпочтительно хранить выбранные изделия здесь"
 
-#: ../../src/wui/constructionsitewindow.cc:282
+#: ../../src/wui/constructionsitewindow.cc:301
 #: ../../src/wui/warehousewindow.cc:152
 msgid "Do not store selected wares here"
 msgstr "Не хранить выбранные изделия здесь"
 
-#: ../../src/wui/constructionsitewindow.cc:286
+#: ../../src/wui/constructionsitewindow.cc:305
 #: ../../src/wui/warehousewindow.cc:153
 msgid "Remove selected wares from here"
 msgstr "Переместить выбранные изделия отсюда"
 
-#: ../../src/wui/constructionsitewindow.cc:305
+#: ../../src/wui/constructionsitewindow.cc:324
 msgid "Ware settings to apply after construction"
 msgstr "Настройки товара для применения после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:308
+#: ../../src/wui/constructionsitewindow.cc:327
 msgid "Worker settings to apply after construction"
 msgstr "Настройки работника для применения после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:316
+#: ../../src/wui/constructionsitewindow.cc:335
 msgid "Start an expedition from this port after completion"
 msgstr "Отправить экспедицию с причала по готовности"
 
-#: ../../src/wui/constructionsitewindow.cc:340
+#: ../../src/wui/constructionsitewindow.cc:359
 msgid "Settings to apply after construction"
 msgstr "Настройки применить после строительства"
 
-#: ../../src/wui/constructionsitewindow.cc:440
+#: ../../src/wui/constructionsitewindow.cc:453
 #: ../../src/wui/soldiercapacitycontrol.cc:72
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
 msgstr "Уменьшить емкость. Удерживайте Ctrl, чтобы установить минимальное значение емкости"
 
-#: ../../src/wui/constructionsitewindow.cc:450
+#: ../../src/wui/constructionsitewindow.cc:463
 #: ../../src/wui/soldiercapacitycontrol.cc:81
 msgid ""
 "Increase capacity. Hold down Ctrl to set the capacity to the highest value"
@@ -7211,123 +7393,119 @@ msgstr "Сохранить профиль"
 msgid "Existing Profiles"
 msgstr "Существующие профили"
 
-#: ../../src/wui/fieldaction.cc:234
+#: ../../src/wui/fieldaction.cc:224
 msgid "Build small building"
 msgstr "Построить маленькое здание"
 
-#: ../../src/wui/fieldaction.cc:235
+#: ../../src/wui/fieldaction.cc:225
 msgid "Build big building"
 msgstr "Построить большое здание"
 
-#: ../../src/wui/fieldaction.cc:235
+#: ../../src/wui/fieldaction.cc:225
 msgid "Build medium building"
 msgstr "Построить среднее здание"
 
-#: ../../src/wui/fieldaction.cc:236
+#: ../../src/wui/fieldaction.cc:226
 msgid "Build port building"
 msgstr "Построить портовое здание"
 
-#: ../../src/wui/fieldaction.cc:267
+#: ../../src/wui/fieldaction.cc:256
 msgid "Action"
 msgstr "Действие"
 
-#: ../../src/wui/fieldaction.cc:395
+#: ../../src/wui/fieldaction.cc:382
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "Рабочий помечен на удаление. Кликните для отмены"
 
-#: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:383 ../../src/wui/fieldaction.cc:390
 msgid "Immovable Actions"
 msgstr "Использование неподвижного объекта"
 
-#: ../../src/wui/fieldaction.cc:402
+#: ../../src/wui/fieldaction.cc:389
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "Отметьте это здание,чтобы подходящий работник его снес"
 
-#: ../../src/wui/fieldaction.cc:423 ../../src/wui/fieldaction.cc:529
+#: ../../src/wui/fieldaction.cc:410 ../../src/wui/fieldaction.cc:506
 msgid "Build road"
 msgstr "Построить дорогу"
 
-#: ../../src/wui/fieldaction.cc:427
+#: ../../src/wui/fieldaction.cc:414
 msgid "Build waterway"
 msgstr "Построить водный путь"
 
-#: ../../src/wui/fieldaction.cc:434
+#: ../../src/wui/fieldaction.cc:421
 msgid "Destroy this flag"
 msgstr "Уничтожить этот флаг"
 
-#: ../../src/wui/fieldaction.cc:441
+#: ../../src/wui/fieldaction.cc:428
 msgid "Configure this flag’s economy"
 msgstr "Настроить экономику узла"
 
-#: ../../src/wui/fieldaction.cc:444
+#: ../../src/wui/fieldaction.cc:431
 msgid "Send geologist to explore site"
 msgstr "Отправить геолога исследовать район"
 
-#: ../../src/wui/fieldaction.cc:450 ../../src/wui/fieldaction.cc:470
+#: ../../src/wui/fieldaction.cc:437 ../../src/wui/fieldaction.cc:457
 msgid "Send scout to explore surroundings"
 msgstr "Послать разведчика изучать окрестности"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../src/wui/fieldaction.cc:462
+#: ../../src/wui/fieldaction.cc:449
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "Соедините узел со штабом разведки, чтобы выслать разведчика."
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:478
 msgid "Place a flag"
 msgstr "Установить флаг"
 
-#: ../../src/wui/fieldaction.cc:496
+#: ../../src/wui/fieldaction.cc:483
 msgid "Destroy a road"
 msgstr "Разрушить дорогу"
 
-#: ../../src/wui/fieldaction.cc:501
+#: ../../src/wui/fieldaction.cc:488
 msgid "Destroy a waterway"
 msgstr "Отказаться от фарватера"
 
-#: ../../src/wui/fieldaction.cc:519
+#: ../../src/wui/fieldaction.cc:496
 msgid "Watch field in a separate window"
 msgstr "Наблюдать за участком в отдельном окне"
 
-#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:52
+#: ../../src/wui/fieldaction.cc:509 ../../src/wui/watchwindow.cc:52
 msgid "Watch"
 msgstr "Наблюдение"
 
-#: ../../src/wui/fieldaction.cc:553
-msgid "Attack"
-msgstr "Атака"
-
-#: ../../src/wui/fieldaction.cc:670
+#: ../../src/wui/fieldaction.cc:625
 msgid "Build mines"
 msgstr "Построить шахту"
 
-#: ../../src/wui/fieldaction.cc:684 ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:639 ../../src/wui/fieldaction.cc:662
 msgid "Build flag"
 msgstr "Установить флаг"
 
-#: ../../src/wui/fieldaction.cc:688
+#: ../../src/wui/fieldaction.cc:643
 msgid "Cancel road"
 msgstr "Отменить дорогу"
 
-#: ../../src/wui/fieldaction.cc:695
+#: ../../src/wui/fieldaction.cc:650
 msgid "Cancel road and start building waterway"
 msgstr "Отменить стр. дороги и начать прокладку фарватера"
 
-#: ../../src/wui/fieldaction.cc:699
+#: ../../src/wui/fieldaction.cc:654
 msgid "Build roads"
 msgstr "Строить дороги"
 
-#: ../../src/wui/fieldaction.cc:711
+#: ../../src/wui/fieldaction.cc:666
 msgid "Cancel waterway"
 msgstr "Отменить прокладку фарватера"
 
-#: ../../src/wui/fieldaction.cc:714
+#: ../../src/wui/fieldaction.cc:669
 msgid "Cancel waterway and start building road"
 msgstr "Отказаться от фарватера и начать строительство дороги"
 
-#: ../../src/wui/fieldaction.cc:717
+#: ../../src/wui/fieldaction.cc:672
 msgid "Build waterways"
 msgstr "Построить водные пути"
 
@@ -7407,8 +7585,8 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "Ошибка при сохранении игры!"
 
@@ -7797,49 +7975,49 @@ msgid "Show controls"
 msgstr "Показать панель"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:131
+#: ../../src/wui/interactive_base.cc:132
 msgid "Map View"
 msgstr "Просмотр карты"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Hide Minimap"
 msgstr "Скрыть миникарту"
 
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Show Minimap"
 msgstr "Показать миникарту"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:288
+#: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
 msgstr "Увеличить +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:294
 msgid "Reset zoom"
 msgstr "Сбросить масштаб"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:299
 msgid "Zoom –"
 msgstr "Масштаб – "
 
-#: ../../src/wui/interactive_base.cc:728
+#: ../../src/wui/interactive_base.cc:729
 #, c-format
 msgid "Road length: %u"
 msgstr "Длина дороги: %u"
 
-#: ../../src/wui/interactive_base.cc:730
+#: ../../src/wui/interactive_base.cc:731
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Длина фарватера: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1562
+#: ../../src/wui/interactive_base.cc:1566
 msgid "Failed saving screenshot!"
 msgstr "Не удалось записать снимок экрана!"
 
-#: ../../src/wui/interactive_base.cc:1566
+#: ../../src/wui/interactive_base.cc:1570
 msgid "Screenshot saved"
 msgstr "Снимок сохранен"
 
@@ -7936,25 +8114,25 @@ msgid "Pause the Game"
 msgstr "Приостановить игру"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "Статистика"
 
 #. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
+#: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "С мореплаванием"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:308
+#: ../../src/wui/interactive_player.cc:310
 #: ../../src/wui/militarysitewindow.cc:41 ../../src/wui/warehousewindow.cc:288
 msgid "Soldiers"
 msgstr "Солдаты"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:41
+#: ../../src/wui/interactive_player.cc:315 ../../src/wui/stock_menu.cc:41
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "Запасы"
@@ -7962,17 +8140,17 @@ msgstr "Запасы"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:371
+#: ../../src/wui/interactive_player.cc:373
 msgid "Hide Workarea Overlaps"
 msgstr "Скрыть слои рабочей области"
 
-#: ../../src/wui/interactive_player.cc:377
+#: ../../src/wui/interactive_player.cc:379
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Переключить, указываются ли перекрывающиеся рабочие области при размещении строительной площадки"
 
-#: ../../src/wui/interactive_player.cc:459
+#: ../../src/wui/interactive_player.cc:461
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -8234,12 +8412,12 @@ msgstr "Поднять опыт на 1"
 msgid "Terminate the employment of the selected worker"
 msgstr "Уволить выбранного работника"
 
-#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:247
 msgid "(coming)"
 msgstr "(идёт)"
 
-#: ../../src/wui/productionsitewindow.cc:246
-#: ../../src/wui/productionsitewindow.cc:308
+#: ../../src/wui/productionsitewindow.cc:247
+#: ../../src/wui/productionsitewindow.cc:309
 msgid "(vacant)"
 msgstr "(вакантно)"
 

@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-07-13 16:09+0000\n"
-"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -790,6 +790,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Et mystisk land, fuldt med forskellige landskaber, som alle krydses af en håndfuld store floder."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Det grønne plateau"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Du står på en ø, kronet af store bjerge, som har en vidunderlig og stor skat i sin midte - Det grønne plateau, som er svær at erobre men nem at miste. Så, hvis du ønsker den, så hold øje med de andre klaner."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr ""
@@ -854,18 +881,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Nogle siger at de uigennemtrængelige lande fjernt mod nord skræmte selv de mest modige bosættere og krigere væk. Store og gamle skove, fulde af store og jagende dyr, gennemskåret af vådområder og bakker var indhyllet i mystik. De få, som vendte tilbage, nævnte enorme bygninger, dekoreret med indgraveringer og guld fra majestætiske bjergkæder et sted i vildmarken. År efter er der kun nedbrudte ruiner dækket af mos og træer tilbage fra disse gode, gamle tider. Deres former giver kun en ide om den håndværksviden, de gamle bygningsarbejdere havde. Ingen ved, hvorfor de forsvandt. Folk siger, at vejen til rigdom ingen hindringer har. Men mange vil dø og blive spist af ulvene, opslugt af sumpe ... omringet af fjendtlige stammer."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Det grønne plateau"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Du står på en ø, kronet af store bjerge, som har en vidunderlig og stor skat i sin midte - Det grønne plateau, som er svær at erobre men nem at miste. Så, hvis du ønsker den, så hold øje med de andre klaner."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

@@ -22,12 +22,10 @@
 #include <algorithm>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/random.h"
+#include "base/string.h"
 #include "base/warning.h"
 #include "build_info.h"
 #include "io/fileread.h"
@@ -48,7 +46,6 @@ InternetGaming::InternetGaming()
      reg_(false),
      port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     gameips_(),
      clientupdateonmetaserver_(true),
      gameupdateonmetaserver_(true),
      clientupdate_(false),
@@ -159,7 +156,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	verb_log_info("InternetGaming: Sending login request.");
 	SendPacket s;
 	s.string(IGPCMD_LOGIN);
-	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+	s.string(as_string(kInternetGamingProtocolVersion));
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
@@ -255,7 +252,7 @@ bool InternetGaming::check_password(const std::string& nick,
 	{
 		SendPacket s;
 		s.string(IGPCMD_CHECK_PWD);
-		s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
+		s.string(as_string(kInternetGamingProtocolVersion));
 		s.string(nick);
 		s.string(build_id());
 		net->send(s);
@@ -336,7 +333,7 @@ void InternetGaming::handle_metaserver_communication(bool relogin_on_error) {
 			}
 		}
 	} catch (const std::exception& e) {
-		logout((boost::format(_("Something went wrong: %s")) % e.what()).str());
+		logout(bformat(_("Something went wrong: %s"), e.what()));
 		set_error();
 	}
 
@@ -431,10 +428,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
 				format_and_add_chat("", "", true,
-				                    (boost::format(_("You have been logged in as ‘%s’ since your "
-				                                     "requested name is already in use or reserved.")) %
-				                     assigned_name)
-				                       .str());
+				                    bformat(_("You have been logged in as ‘%s’ since your "
+				                              "requested name is already in use or reserved."),
+				                            assigned_name));
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -495,23 +491,18 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			// Login specific commands but not in CONNECTING state...
 			log_err("InternetGaming: Received %s cmd although client is not in CONNECTING state.\n",
 			        cmd.c_str());
-			std::string temp =
-			   (boost::format(
-			       _("WARNING: Received a %s command although we are not in CONNECTING state.")) %
-			    cmd)
-			      .str();
+			std::string temp = bformat(
+			   _("WARNING: Received a %s command although we are not in CONNECTING state."), cmd);
 			format_and_add_chat("", "", true, temp);
 		}
 
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
-			time_offset_ = boost::lexical_cast<int>(packet.string()) - time(nullptr);
+			time_offset_ = stoi(packet.string()) - time(nullptr);
 			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
-			std::string temp =
-			   (boost::format(ngettext("Server time offset is %d second.",
-			                           "Server time offset is %d seconds.", time_offset_)) %
-			    time_offset_)
-			      .str();
+			std::string temp = bformat(ngettext("Server time offset is %d second.",
+			                                    "Server time offset is %d seconds.", time_offset_),
+			                           time_offset_);
 			format_and_add_chat("", "", true, temp);
 		}
 
@@ -540,7 +531,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_GAMES) {
 			// Client received the new list of games
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetGame> old = gamelist_;
 			gamelist_.clear();
 			verb_log_info("InternetGaming: Received a game list update with %u items.", number);
@@ -563,8 +554,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				    (ing->build_id == build_id() || (ing->build_id.compare(0, 6, "build-") != 0 &&
 				                                     build_id().compare(0, 6, "build-") != 0))) {
 					format_and_add_chat(
-					   "", "", true,
-					   (boost::format(_("The game %s is now available")) % ing->name).str());
+					   "", "", true, bformat(_("The game %s is now available"), ing->name));
 				}
 
 				delete ing;
@@ -574,8 +564,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			for (InternetGame& old_game : old) {
 				if (!old_game.name.empty()) {
 					format_and_add_chat(
-					   "", "", true,
-					   (boost::format(_("The game %s has been closed")) % old_game.name).str());
+					   "", "", true, bformat(_("The game %s has been closed"), old_game.name));
 				}
 			}
 
@@ -590,7 +579,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		else if (cmd == IGPCMD_CLIENTS) {
 			// Client received the new list of clients
-			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
+			uint8_t number = stoi(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
 			// Push admins/registred/IRC users to a temporary list and add them back later
 			clientlist_.clear();
@@ -614,8 +603,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 					}
 				}
 				if (!found) {
-					format_and_add_chat(
-					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
+					format_and_add_chat("", "", true, bformat(_("%s joined the lobby"), inc.name));
 				}
 			}
 
@@ -626,8 +614,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 			for (InternetClient& client : old) {
 				if (!client.name.empty()) {
-					format_and_add_chat(
-					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
+					format_and_add_chat("", "", true, bformat(_("%s left the lobby"), client.name));
 				}
 			}
 			clientupdate_ = true;
@@ -686,18 +673,14 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				// Something went wrong with the chat message the user sent.
 				message += _("Chat message could not be sent.");
 				if (reason == "NO_SUCH_USER") {
-					message =
-					   (boost::format("%s %s") % message % InternetGamingMessages::get_message(reason))
-					      .str();
+					message = bformat("%s %s", message, InternetGamingMessages::get_message(reason));
 				}
 			}
 
 			else if (subcmd == IGPCMD_CMD) {
 				// Something went wrong with the command
 				message += _("Command could not be executed.");
-				message =
-				   (boost::format("%s %s") % message % InternetGamingMessages::get_message(reason))
-				      .str();
+				message = bformat("%s %s", message, InternetGamingMessages::get_message(reason));
 			}
 
 			else if (subcmd == IGPCMD_GAME_OPEN) {
@@ -714,12 +697,11 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 				waitcmd_ = "";
 			}
 			if (!message.empty()) {
-				message = (boost::format(_("ERROR: %s")) % message).str();
+				message = bformat(_("ERROR: %s"), message);
 			} else {
-				message = (boost::format(_(
-				              "An unexpected error message has been received about command %1%: %2%")) %
-				           subcmd % reason)
-				             .str();
+				message =
+				   bformat(_("An unexpected error message has been received about command %1%: %2%"),
+				           subcmd, reason);
 			}
 
 			// Finally send the error message as system chat to the client.
@@ -729,8 +711,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 		else {
 			// Inform the client about the unknown command
 			format_and_add_chat(
-			   "", "", true,
-			   (boost::format(_("Received an unknown command from the metaserver: %s")) % cmd).str());
+			   "", "", true, bformat(_("Received an unknown command from the metaserver: %s"), cmd));
 		}
 
 	} catch (WLWarning& e) {
@@ -887,7 +868,8 @@ void InternetGaming::send(const std::string& msg) {
 		return;
 	}
 
-	std::string trimmed = boost::algorithm::trim_copy(msg);
+	std::string trimmed = msg;
+	trim(trimmed);
 	if (trimmed.empty()) {
 		// Message is empty or only space characters. We don't want it either way
 		return;
@@ -905,7 +887,8 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		trimmed = boost::algorithm::trim_copy(msg.substr(space + 1));
+		trimmed = msg.substr(space + 1);
+		trim(trimmed);
 		if (trimmed.empty()) {
 			format_and_add_chat(
 			   "", "", true,
@@ -949,7 +932,8 @@ void InternetGaming::send(const std::string& msg) {
 
 		// get the cmd and the arg
 		cmd = temp.substr(0, space);
-		arg = boost::algorithm::trim_copy(temp.substr(space + 1));
+		arg = temp.substr(space + 1);
+		trim(arg);
 
 		if (!arg.empty() && cmd == "motd") {
 			SendPacket m;
@@ -1037,8 +1021,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
                                          const std::string& msg) {
 	ChatMessage c(msg);
 	if (!system && from.empty()) {
-		std::string unkown_string =
-		   (boost::format("<%s>") % pgettext("chat_sender", "Unknown")).str();
+		std::string unkown_string = bformat("<%s>", pgettext("chat_sender", "Unknown"));
 		c.sender = unkown_string;
 	} else {
 		c.sender = from;
@@ -1065,9 +1048,5 @@ bool InternetGaming::valid_username(const std::string& username) {
 		return false;
 	}
 	// Check whether the username is not "team" without regarding upper/lower case
-	// Note: The memory for the lowercase version must be allocated before calling transform()
-	std::string lowercase = username;
-	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
-	               [](unsigned char c) { return std::tolower(c); });
-	return lowercase != "team";
+	return to_lower(username) != "team";
 }

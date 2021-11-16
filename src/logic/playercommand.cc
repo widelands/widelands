@@ -1969,8 +1969,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(const Time& time,
 	policy_ = policy;
 }
 
-CmdSetStockPolicy::CmdSetStockPolicy()
-   : PlayerCommand(), warehouse_(0), isworker_(false), ware_(0), policy_() {
+CmdSetStockPolicy::CmdSetStockPolicy() : warehouse_(0), isworker_(false), ware_(0), policy_() {
 }
 
 void CmdSetStockPolicy::execute(Game& game) {
@@ -2062,7 +2061,7 @@ CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade&
    : PlayerCommand(time, pn), trade_(trade) {
 }
 
-CmdProposeTrade::CmdProposeTrade() : PlayerCommand() {
+CmdProposeTrade::CmdProposeTrade() {
 }
 
 void CmdProposeTrade::execute(Game& game) {

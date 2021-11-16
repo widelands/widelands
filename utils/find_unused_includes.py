@@ -38,7 +38,7 @@ FILE_EXCLUDES = {'graphic/gl/system_headers.h', 'scripting/lua.h',
                  'third_party/eris/lua.hpp', 'scripting/eris.h'}
 
 # Headers files with contents that need to be detected by functions
-DIFFICULT_FILES = {'graphic/build_texture_atlas.h',
+DIFFICULT_FILES = {'graphic/build_texture_atlas.h', 'base/string.h',
                    'scripting/report_error.h', 'editor/tools/set_resources_tool.h'}
 
 # Remove overgenerated symbols

@@ -384,26 +384,25 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		auto it = statistics_string_cache_[idx].find(cache_key);
 		if (it != statistics_string_cache_[idx].end()) {
 			return it->second;
-		} else {
-			const std::string& military_capacity_script = owner().tribe().military_capacity_script();
-			// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
-			if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
-				try {
-					LuaInterface lua;
-					std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
-					std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-					cr->push_arg(pres);
-					cr->push_arg(stat);
-					cr->push_arg(capacity_);
-					cr->resume();
-					std::string new_string = cr->pop_string();
-					statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
-					return new_string;
-				} catch (LuaError& err) {
-					log_err("Failed to read soldier capacity for building '%s': %s",
-					        descr().name().c_str(), err.what());
-					return std::string();
-				}
+		}
+		const std::string& military_capacity_script = owner().tribe().military_capacity_script();
+		// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
+		if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
+			try {
+				LuaInterface lua;
+				std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
+				std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+				cr->push_arg(pres);
+				cr->push_arg(stat);
+				cr->push_arg(capacity_);
+				cr->resume();
+				std::string new_string = cr->pop_string();
+				statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
+				return new_string;
+			} catch (LuaError& err) {
+				log_err("Failed to read soldier capacity for building '%s': %s", descr().name().c_str(),
+				        err.what());
+				return std::string();
 			}
 		}
 		return std::string();
@@ -417,38 +416,34 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			if (s->empty()) {
 				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
 				 * number of soldier slots in the building */
-				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-				      stationed % (capacity_ - stationed))
-				        .str();
+				*s = bformat(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed),
+				             stationed, (capacity_ - stationed));
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 1);
 			if (s->empty()) {
 				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed)
-				        .str();
+				*s = bformat(ngettext("%1% soldier", "%1% soldiers", stationed), stationed);
 			}
 		}
 	} else {
 		if (capacity_ > stationed) {
 			*s = read_capacity_string(present, stationed, 2);
 			if (s->empty()) {
-				*s = (boost::format(
-				         /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-				            currently open soldier slots in the building. %3% is the maximum number of
-				            soldier slots in the building */
-				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-				      present % (stationed - present) % (capacity_ - stationed))
-				        .str();
+				*s = bformat(
+				   /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
+				      currently open soldier slots in the building. %3% is the maximum number of
+				      soldier slots in the building */
+				   ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed),
+				   present, (stationed - present), (capacity_ - stationed));
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 3);
 			if (s->empty()) {
 				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
 				 * open soldier slots in the building */
-				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-				      present % (stationed - present))
-				        .str();
+				*s = bformat(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed), present,
+				             (stationed - present));
 			}
 		}
 	}

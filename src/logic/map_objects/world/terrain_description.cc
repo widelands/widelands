@@ -59,7 +59,7 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 	if (type == "unwalkable") {
 		return TerrainDescription::Is::kUnwalkable;
 	}
-	throw LuaError((boost::format("Invalid terrain \"is\" value '%s'") % type).str());
+	throw LuaError(bformat("Invalid terrain \"is\" value '%s'", type));
 }
 
 }  // namespace
@@ -99,15 +99,22 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	}
 }
 
-TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& descriptions)
+TerrainDescription::TerrainDescription(const LuaTable& table,
+                                       Descriptions& descriptions,
+                                       const uint16_t dither_layer_disambiguator)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
      default_resource_amount_(table.get_int("default_resource_amount")),
-     dither_layer_(table.get_int("dither_layer")),
+     dither_layer_(table.get_int("dither_layer") * kMaxDitherLayerDisambiguator +
+                   dither_layer_disambiguator),
      temperature_(table.get_int("temperature")),
      fertility_(table.get_int("fertility")),
      humidity_(table.get_int("humidity")) {
+	if (dither_layer_disambiguator >= kMaxDitherLayerDisambiguator) {
+		throw wexception("Terrain %s: dither layer disambiguator %u exceeds maximum of %u",
+		                 name_.c_str(), dither_layer_disambiguator, kMaxDitherLayerDisambiguator);
+	}
 
 	if (table.has_key("tooltips")) {
 		// TODO(GunChleoc): Compatibility, remove after v1.0
@@ -139,6 +146,26 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
 
+	for (const std::string& resource :
+	     table.get_table("valid_resources")->array_entries<std::string>()) {
+		valid_resources_.push_back(descriptions.load_resource(resource));
+	}
+
+	const std::string default_resource(table.get_string("default_resource"));
+	default_resource_index_ = !default_resource.empty() ?
+                                descriptions.load_resource(default_resource) :
+                                Widelands::INVALID_INDEX;
+
+	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
+		throw GameDataError("Default resource is not in valid resources.\n");
+	}
+
+	replace_textures(table);
+}
+
+void TerrainDescription::replace_textures(const LuaTable& table) {
+	texture_paths_.clear();
+	textures_.clear();
 	// Note: Terrain texures are loaded in "graphic/build_texture_atlas.h"
 
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
@@ -152,20 +179,6 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 		}
 	} else {
 		frame_length_ = 1000 / get_positive_int(table, "fps");
-	}
-
-	for (const std::string& resource :
-	     table.get_table("valid_resources")->array_entries<std::string>()) {
-		valid_resources_.push_back(descriptions.load_resource(resource));
-	}
-
-	const std::string default_resource(table.get_string("default_resource"));
-	default_resource_index_ = !default_resource.empty() ?
-                                descriptions.load_resource(default_resource) :
-                                Widelands::INVALID_INDEX;
-
-	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
-		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
 	for (size_t j = 0; j < texture_paths().size(); ++j) {
