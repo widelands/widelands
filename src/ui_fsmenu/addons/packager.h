@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_ADDONS_PACKAGER_H
 #define WL_UI_FSMENU_ADDONS_PACKAGER_H
 
-#include <boost/format.hpp>
 #include <memory>
 
 #include "logic/addons.h"

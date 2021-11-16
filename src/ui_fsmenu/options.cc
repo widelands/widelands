@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
@@ -57,15 +55,15 @@ constexpr int kDropdownMaximized = -1;
 void find_selected_locale(std::string* selected_locale, const std::string& current_locale) {
 	if (selected_locale->empty()) {
 		std::vector<std::string> parts;
-		boost::split(parts, current_locale, boost::is_any_of("."));
+		split(parts, current_locale, {'.'});
 		if (current_locale == parts[0]) {
 			*selected_locale = current_locale;
 		} else {
-			boost::split(parts, parts[0], boost::is_any_of("@"));
+			split(parts, parts[0], {'@'});
 			if (current_locale == parts[0]) {
 				*selected_locale = current_locale;
 			} else {
-				boost::split(parts, parts[0], boost::is_any_of("_"));
+				split(parts, parts[0], {'_'});
 				if (current_locale == parts[0]) {
 					*selected_locale = current_locale;
 				}
@@ -490,8 +488,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;
 				resolution_dropdown_.add(
 				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-				   (boost::format(_("%1% × %2%")) % this_res.xres % this_res.yres).str(), this_res,
-				   nullptr, selected);
+				   bformat(_("%1% × %2%"), this_res.xres, this_res.yres), this_res, nullptr, selected);
 			}
 		}
 	}
@@ -499,8 +496,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	if (!resolution_dropdown_.has_selection()) {
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-		   (boost::format(_("%1% × %2%")) % current_res.xres % current_res.yres).str(), current_res,
-		   nullptr, true);
+		   bformat(_("%1% × %2%"), current_res.xres, current_res.yres), current_res, nullptr, true);
 	}
 }
 
@@ -624,15 +620,15 @@ void Options::update_language_stats() {
 		// Empty locale means try system locale
 		if (locale.empty()) {
 			std::vector<std::string> parts;
-			boost::split(parts, i18n::get_locale(), boost::is_any_of("."));
+			split(parts, i18n::get_locale(), {'.'});
 			if (language_entries_.count(parts[0]) == 1) {
 				locale = parts[0];
 			} else {
-				boost::split(parts, parts[0], boost::is_any_of("@"));
+				split(parts, parts[0], {'@'});
 				if (language_entries_.count(parts[0]) == 1) {
 					locale = parts[0];
 				} else {
-					boost::split(parts, parts[0], boost::is_any_of("_"));
+					split(parts, parts[0], {'_'});
 					if (language_entries_.count(parts[0]) == 1) {
 						locale = parts[0];
 					}
@@ -652,12 +648,11 @@ void Options::update_language_stats() {
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */
-					   (boost::format(_("The translation into %s is complete.")) % entry.descname).str();
+					   bformat(_("The translation into %s is complete."), entry.descname);
 				} else {
-					/** TRANSLATORS: %1% = language name, %2% = percentage */
-					message = (boost::format(_("The translation into %1% is %2%%% complete.")) %
-					           entry.descname % percent)
-					             .str();
+					message = bformat(
+					   /** TRANSLATORS: %1% = language name, %2% = percentage */
+					   _("The translation into %1% is %2%%% complete."), entry.descname, percent);
 				}
 			} catch (...) {
 			}
@@ -669,9 +664,8 @@ void Options::update_language_stats() {
 	// will catch up with the work later.
 	if (percent <= 90) {
 		message = message + " " +
-		          (boost::format(_("If you wish to help us translate, please visit %s")) %
-		           "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>")
-		             .str();
+		          bformat(_("If you wish to help us translate, please visit %s"),
+		                  "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
 	translation_info_.set_text(

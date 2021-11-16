@@ -21,10 +21,9 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -71,11 +70,10 @@ void GenericSaveHandler::make_backup() {
 			error_ |= Error::kBackupFailed;
 			uint32_t index = get_index(Error::kBackupFailed);
 			error_msg_[index] =
-			   (boost::format("GenericSaveHandler::make_backup: %s: for all "
-			                  "considered filenames a file already existed (last filename tried "
-			                  "was %s)\n") %
-			    complete_filename_.c_str() % backup_filename_)
-			      .str();
+			   bformat("GenericSaveHandler::make_backup: %s: for all "
+			           "considered filenames a file already existed (last filename tried "
+			           "was %s)\n",
+			           complete_filename_.c_str(), backup_filename_);
 			log_err("%s", error_msg_[index].c_str());
 			return;
 		}
@@ -87,10 +85,9 @@ void GenericSaveHandler::make_backup() {
 	} catch (const FileError& e) {
 		error_ |= Error::kBackupFailed;
 		uint32_t index = get_index(Error::kBackupFailed);
-		error_msg_[index] = (boost::format("GenericSaveHandler::make_backup: file %s "
-		                                   "could not be renamed to %s: %s\n") %
-		                     complete_filename_.c_str() % backup_filename_ % e.what())
-		                       .str();
+		error_msg_[index] = bformat("GenericSaveHandler::make_backup: file %s "
+		                            "could not be renamed to %s: %s\n",
+		                            complete_filename_.c_str(), backup_filename_, e.what());
 		log_err("%s", error_msg_[index].c_str());
 		return;
 	}
@@ -104,10 +101,9 @@ void GenericSaveHandler::save_file() {
 	} catch (const std::exception& e) {
 		error_ |= Error::kSavingDataFailed;
 		uint32_t index = get_index(Error::kSavingDataFailed);
-		error_msg_[index] = (boost::format("GenericSaveHandler::save_file: data could not be "
-		                                   "written to file %s: %s\n") %
-		                     complete_filename_.c_str() % e.what())
-		                       .str();
+		error_msg_[index] = bformat("GenericSaveHandler::save_file: data could not be "
+		                            "written to file %s: %s\n",
+		                            complete_filename_.c_str(), e.what());
 		log_err("%s", error_msg_[index].c_str());
 	}
 
@@ -119,10 +115,9 @@ void GenericSaveHandler::save_file() {
 			} catch (const FileError& e) {
 				error_ |= Error::kCorruptFileLeft;
 				uint32_t index = get_index(Error::kCorruptFileLeft);
-				error_msg_[index] = (boost::format("GenericSaveHandler::save_file: possibly corrupt "
-				                                   "file %s could not be deleted: %s\n") %
-				                     complete_filename_.c_str() % e.what())
-				                       .str();
+				error_msg_[index] = bformat("GenericSaveHandler::save_file: possibly corrupt "
+				                            "file %s could not be deleted: %s\n",
+				                            complete_filename_.c_str(), e.what());
 				log_err("%s", error_msg_[index].c_str());
 			}
 		}
@@ -140,10 +135,9 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 		} catch (const FileError& e) {
 			error_ |= Error::kCreatingDirFailed;
 			uint32_t index = get_index(Error::kCreatingDirFailed);
-			error_msg_[index] = (boost::format("GenericSaveHandler::save: directory %s could not be "
-			                                   "created: %s\n") %
-			                     dir_.c_str() % e.what())
-			                       .str();
+			error_msg_[index] = bformat("GenericSaveHandler::save: directory %s could not be "
+			                            "created: %s\n",
+			                            dir_.c_str(), e.what());
 			log_err("%s", error_msg_[index].c_str());
 			return error_;
 		}
@@ -168,10 +162,9 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 				} catch (const FileError& e) {
 					error_ |= Error::kDeletingBackupFailed;
 					uint32_t index = get_index(Error::kDeletingBackupFailed);
-					error_msg_[index] = (boost::format("GenericSaveHandler::save: backup file %s could "
-					                                   "not be deleted: %s\n") %
-					                     backup_filename_.c_str() % e.what())
-					                       .str();
+					error_msg_[index] = bformat("GenericSaveHandler::save: backup file %s could "
+					                            "not be deleted: %s\n",
+					                            backup_filename_.c_str(), e.what());
 					log_err("%s", error_msg_[index].c_str());
 				}
 
@@ -179,10 +172,9 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 				if ((error_ & Error::kCorruptFileLeft) != Error::kNone) {
 					error_ |= Error::kRestoringBackupFailed;
 					uint32_t index = get_index(Error::kRestoringBackupFailed);
-					error_msg_[index] = (boost::format("GenericSaveHandler::save: file %s could not be "
-					                                   "restored from backup %s: file still exists\n") %
-					                     complete_filename_.c_str() % backup_filename_.c_str())
-					                       .str();
+					error_msg_[index] = bformat("GenericSaveHandler::save: file %s could not be "
+					                            "restored from backup %s: file still exists\n",
+					                            complete_filename_.c_str(), backup_filename_.c_str());
 					log_err("%s", error_msg_[index].c_str());
 				} else {
 					// Restore backup.
@@ -192,10 +184,9 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 						error_ |= Error::kRestoringBackupFailed;
 						uint32_t index = get_index(Error::kRestoringBackupFailed);
 						error_msg_[index] =
-						   (boost::format("GenericSaveHandler::save: file %s could not "
-						                  "be restored from backup %s: %s\n") %
-						    backup_filename_.c_str() % backup_filename_.c_str() % e.what())
-						      .str();
+						   bformat("GenericSaveHandler::save: file %s could not "
+						           "be restored from backup %s: %s\n",
+						           backup_filename_.c_str(), backup_filename_.c_str(), e.what());
 						log_err("%s", error_msg_[index].c_str());
 					}
 				}
@@ -205,8 +196,7 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 	} catch (const std::exception& e) {
 		error_ |= Error::kUnexpectedError;
 		uint32_t index = get_index(Error::kUnexpectedError);
-		error_msg_[index] =
-		   (boost::format("GenericSaveHandler::save: unknown error: %s\n") % e.what()).str();
+		error_msg_[index] = bformat("GenericSaveHandler::save: unknown error: %s\n", e.what());
 		log_err("%s", error_msg_[index].c_str());
 	}
 
@@ -233,60 +223,54 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 
 	if (error_ == Error::kDeletingBackupFailed) {
 		return std::string(_("File successfully saved!")) + "\n" +
-		       (boost::format(_("Backup file ‘%s’ could not be deleted."))).str();
+		       bformat(_("Backup file ‘%s’ could not be deleted."), backup_filename_);
 	}
 
 	if (error_ == Error::kCreatingDirFailed) {
-		return (boost::format(_("Directory ‘%s’ could not be created!")) % dir_).str();
+		return bformat(_("Directory ‘%s’ could not be created!"), dir_);
 	}
 
 	if (error_ == Error::kBackupFailed) {
-		return (boost::format(_("File ‘%s’ could not be removed!")) % complete_filename_.c_str())
-		          .str() +
-		       "\n" + _("Try saving under a different name!");
+		return bformat(_("File ‘%s’ could not be removed!"), complete_filename_) + "\n" +
+		       _("Try saving under a different name!");
 	}
 
 	// from here on multiple errors might have occurred
 	if ((error_ & Error::kSavingDataFailed) != Error::kNone) {
-		msg =
-		   (boost::format(_("Error writing data to file ‘%s’!")) % complete_filename_.c_str()).str();
+		msg = bformat(_("Error writing data to file ‘%s’!"), complete_filename_);
 	}
 
 	if ((error_ & Error::kCorruptFileLeft) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += (boost::format(_("Saved file may be corrupt!"))).str();
+		msg += _("Saved file may be corrupt!");
 	}
 
 	if ((error_ & Error::kRestoringBackupFailed) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg +=
-		   (boost::format(_("File ‘%s’ could not be restored!")) % complete_filename_.c_str()).str() +
-		   "\n" +
-		   (boost::format(_("Backup file ‘%s’ will be available for some time.")) %
-		    backup_filename_.c_str())
-		      .str();
+		msg += bformat(_("File ‘%s’ could not be restored!"), complete_filename_) + "\n" +
+		       bformat(_("Backup file ‘%s’ will be available for some time."), backup_filename_);
 	}
 
 	if (!backup_filename_.empty() && ((error_ & Error::kSavingDataFailed) != Error::kNone) &&
 	    !((error_ & Error::kCorruptFileLeft) != Error::kNone) &&
 	    !((error_ & Error::kRestoringBackupFailed) != Error::kNone)) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += (boost::format(_("File ‘%s’ was restored from backup.")) % complete_filename_.c_str())
-		          .str();
+		msg += bformat(_("File ‘%s’ was restored from backup."), complete_filename_);
 	}
 
 	if ((error_ & Error::kUnexpectedError) != Error::kNone) {
 		if (!msg.empty()) {
-			msg += "\n";
+			msg += '\n';
 		}
-		msg += (boost::format(_("An unexpected error occurred:"))).str() + "\n" +
-		       error_message(Error::kUnexpectedError);
+		msg += _("An unexpected error occurred:");
+		msg += '\n';
+		msg += error_message(Error::kUnexpectedError);
 	}
 
 	return msg;

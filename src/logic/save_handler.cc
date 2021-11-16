@@ -20,10 +20,10 @@
 #include "logic/save_handler.h"
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/scoped_timer.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "game_io/game_saver.h"
@@ -55,8 +55,7 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 
 	// Only roll the smallest necessary number of files.
 	while (rolls < number_of_rolls_) {
-		filename_previous =
-		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
+		filename_previous = create_file_name(kSaveDir, bformat("%s_%02d", filename, rolls));
 		if (!g_fs->file_exists(filename_previous)) {
 			break;
 		}
@@ -69,8 +68,7 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 	} else {
 		verb_log_info("Autosave: Rolling savefiles (count): %d\n", rolls);
 		rolls--;
-		filename_previous =
-		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
+		filename_previous = create_file_name(kSaveDir, bformat("%s_%02d", filename, rolls));
 		if (rolls > 0) {
 			try {
 				g_fs->fs_unlink(filename_previous);  // Delete last of the rolling files
@@ -79,9 +77,8 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 				log_warn(
 				   "Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
 				if (error) {
-					*error = (boost::format("Autosave: Unable to delete file %s: %s\n") %
-					          filename_previous.c_str() % e.what())
-					            .str();
+					*error = bformat(
+					   "Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
 				}
 				return false;
 			}
@@ -91,7 +88,7 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 	rolls--;
 	while (rolls >= 0) {
 		const std::string filename_next =
-		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
+		   create_file_name(kSaveDir, bformat("%s_%02d", filename, rolls));
 		try {
 			g_fs->fs_rename(
 			   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
@@ -163,7 +160,7 @@ void SaveHandler::think(Widelands::Game& game) {
 			// Autosave ...
 			save_success = roll_save_files(filename, &error);
 			if (save_success) {
-				filename = (boost::format("%s_00") % autosave_filename_).str();
+				filename = bformat("%s_00", autosave_filename_);
 				verb_log_info_time(game.get_gametime(), "Autosave: saving as %s\n", filename.c_str());
 			}
 		}
@@ -223,10 +220,10 @@ std::string SaveHandler::create_file_name(const std::string& dir,
 	// Append directory name.
 	std::string complete_filename = dir + FileSystem::file_separator() + filename;
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(complete_filename);
+	trim(complete_filename);
 
 	// Now check if the extension matches (ignoring case)
-	if (!boost::iends_with(filename, kSavegameExtension)) {
+	if (!ends_with(filename, kSavegameExtension, false)) {
 		complete_filename += kSavegameExtension;
 	}
 

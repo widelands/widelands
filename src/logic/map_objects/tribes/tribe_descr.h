@@ -186,6 +186,10 @@ public:
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
+	const std::map<std::string /* key */, std::string /* building */>& fastplace_defaults() const {
+		return fastplace_defaults_;
+	}
+
 	// Read helptext from Lua table
 	void load_helptexts(MapObjectDescr*, const LuaTable&);
 
@@ -262,6 +266,8 @@ private:
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
+
+	std::map<std::string, std::string> fastplace_defaults_;
 
 	Widelands::TribeBasicInfo basic_info_;
 

@@ -18,9 +18,8 @@
 
 #include "ui_fsmenu/scenariodetails.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/scrollbar.h"
 
@@ -44,11 +43,10 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 }
 
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
-	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-	                      as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
-	                                 UI::PanelStyle::kFsMenu, true) %
-	                      as_content(scenariodata.descname, UI::PanelStyle::kFsMenu))
-	                        .str());
+	name_label_.set_text(bformat("<rt>%s%s</rt>",
+	                             as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
+	                                        UI::PanelStyle::kFsMenu, true),
+	                             as_content(scenariodata.descname, UI::PanelStyle::kFsMenu)));
 
 	if (scenariodata.playable) {
 		const std::string authors_heading =
@@ -59,16 +57,13 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
                   you need plural forms here, please let us know. */
                _("Authors");
 		std::string description =
-		   (boost::format("%s%s") % as_heading(authors_heading, UI::PanelStyle::kFsMenu) %
-		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu))
-		      .str();
+		   bformat("%s%s", as_heading(authors_heading, UI::PanelStyle::kFsMenu),
+		           as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu));
 
-		description = (boost::format("%s%s") % description %
-		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
-		                 .str();
-		description = (boost::format("%s%s") % description %
-		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
-		                 .str();
+		description =
+		   bformat("%s%s", description, as_heading(_("Description"), UI::PanelStyle::kFsMenu));
+		description = bformat(
+		   "%s%s", description, as_content(scenariodata.description, UI::PanelStyle::kFsMenu));
 
 		// Do we want to show add-on conflicts info for campaigns or scenarios?
 		// The official ones don't use add-ons, and add-on campaigns will tell users
@@ -76,7 +71,7 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		// Plus, ScenarioData currently does not preload the scenario map, so fetching
 		// add-ons info there would introduce additional complexity.
 
-		description = (boost::format("<rt>%s</rt>") % description).str();
+		description = bformat("<rt>%s</rt>", description);
 		descr_.set_text(description);
 	} else {
 		descr_.set_text("");

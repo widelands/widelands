@@ -406,18 +406,18 @@ const std::string SpinBox::unit_text(int32_t value) const {
 	switch (sbi_->unit) {
 	case (Units::kMinutes):
 		/** TRANSLATORS: A spinbox unit */
-		return (boost::format(ngettext("%d minute", "%d minutes", value)) % value).str();
+		return bformat(ngettext("%d minute", "%d minutes", value), value);
 	case (Units::kPixels):
 		/** TRANSLATORS: A spinbox unit */
-		return (boost::format(ngettext("%d pixel", "%d pixels", value)) % value).str();
+		return bformat(ngettext("%d pixel", "%d pixels", value), value);
 	case (Units::kFields):
 		/** TRANSLATORS: A spinbox unit */
-		return (boost::format(ngettext("%d field", "%d fields", value)) % value).str();
+		return bformat(ngettext("%d field", "%d fields", value), value);
 	case (Units::kPercent):
 		/** TRANSLATORS: A spinbox unit */
-		return (boost::format(_("%i %%")) % value).str();
+		return bformat(_("%i %%"), value);
 	case (Units::kNone):
-		return (boost::format("%d") % value).str();
+		return bformat("%d", value);
 	}
 	NEVER_HERE();
 }

@@ -116,7 +116,6 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
      time_of_last_construction_(0),
      next_mine_construction_due_(0),
      fishers_count_(0),
-     bakeries_count_(),
      first_iron_mine_built(50 * 60 * 60 * 1000),
      ts_finished_count_(0),
      ts_in_const_count_(0),
@@ -1541,14 +1540,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// Is this near the border? Get rid of fields owned by ally
-	if (map.find_fields(
+	field.near_border =
+	   (map.find_fields(
 	       game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr, find_ally) ||
 	    map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, 3), nullptr,
-	                    find_unowned_walkable)) {
-		field.near_border = true;
-	} else {
-		field.near_border = false;
-	}
+	                    find_unowned_walkable) > 0);
 
 	// are we going to count resources now?
 	static bool resource_count_now = false;
@@ -1610,11 +1606,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				nearest_distance = std::min(nearest_distance, actual_distance);
 			}
 		}
-		if (nearest_distance < 15) {
-			field.port_nearby = true;
-		} else {
-			field.port_nearby = false;
-		}
+		field.port_nearby = (nearest_distance < 15);
 	}
 
 	// testing fields in radius 1 to find biggest buildcaps.

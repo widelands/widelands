@@ -228,7 +228,8 @@ load_s2mf_section(FileRead& fr, int32_t const width, int32_t const height) {
 		fr.data(dw - width);  // skip the alignment junk
 	}
 	while (y < dh) {
-		fr.data(dw);  // more alignment junk++ y;
+		fr.data(dw);  // more alignment junk
+		++y;
 	}
 
 	return section;

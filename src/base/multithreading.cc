@@ -79,7 +79,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				}
 				done = true;
 			}));
-			while (!done) {
+			while (!done) {  // NOLINT
 				// Wait until the NoteThreadSafeFunction has been handled.
 				// Since `done` was passed by address, it will set to
 				// `true` when the function has been executed.

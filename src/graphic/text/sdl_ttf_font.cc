@@ -21,8 +21,7 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/sdl_utils.h"
 #include "graphic/text/rt_errors.h"
 
@@ -66,9 +65,8 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
                                                 int style,
                                                 TextureCache* texture_cache) {
 	const std::string hash =
-	   (boost::format("ttf:%s:%s:%i:%02x%02x%02x:%i") % font_name_ % ptsize_ % txt %
-	    static_cast<int>(clr.r) % static_cast<int>(clr.g) % static_cast<int>(clr.b) % style)
-	      .str();
+	   bformat("ttf:%s:%s:%i:%02x%02x%02x:%i", font_name_, ptsize_, txt, static_cast<int>(clr.r),
+	           static_cast<int>(clr.g), static_cast<int>(clr.b), style);
 	std::shared_ptr<const Image> rv = texture_cache->get(hash);
 	if (rv != nullptr) {
 		return rv;
@@ -132,8 +130,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 	}
 
 	if (!text_surface) {
-		throw RenderError(
-		   (boost::format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
+		throw RenderError(bformat("Rendering '%s' gave the error: %s", txt, TTF_GetError()));
 	}
 
 	return texture_cache->insert(hash, std::make_shared<Texture>(text_surface));

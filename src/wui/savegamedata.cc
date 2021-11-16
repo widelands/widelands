@@ -1,15 +1,12 @@
 #include "wui/savegamedata.h"
 
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "graphic/text_layout.h"
 
 SavegameData::SavegameData()
-   : gametime(""),
-     nrplayers("0"),
+   : nrplayers("0"),
      savetimestamp(0),
      gametype(GameController::GameType::kSingleplayer),
      type_(SavegameType::kSavegame) {
@@ -20,7 +17,6 @@ SavegameData::SavegameData(const std::string& fname)
 }
 SavegameData::SavegameData(const std::string& fname, const SavegameType& type)
    : filename(fname),
-     gametime(""),
      nrplayers("0"),
      savetimestamp(0),
      gametype(GameController::GameType::kSingleplayer),
@@ -31,7 +27,7 @@ void SavegameData::set_gametime(uint32_t input_gametime) {
 	gametime = gametimestring(input_gametime);
 }
 void SavegameData::set_nrplayers(Widelands::PlayerNumber input_nrplayers) {
-	nrplayers = boost::lexical_cast<std::string>(static_cast<unsigned int>(input_nrplayers));
+	nrplayers = as_string(static_cast<unsigned int>(input_nrplayers));
 }
 void SavegameData::set_mapname(const std::string& input_mapname) {
 	// TODO(Nordfriese): If the map was defined by an add-on, use that add-on's textdomain
@@ -124,17 +120,17 @@ SavegameData SavegameData::create_sub_dir(const std::string& directory) {
 }
 
 const std::string as_filename_list(const std::vector<SavegameData>& savefiles) {
-	boost::format message;
+	std::string message;
 	for (const SavegameData& gamedata : savefiles) {
 		if (gamedata.is_directory() || !gamedata.errormessage.empty()) {
-			message = boost::format("%s\n%s") % message % richtext_escape(gamedata.filename);
+			message = bformat("%s\n%s", message, richtext_escape(gamedata.filename));
 		} else if (gamedata.errormessage.empty()) {
 			std::vector<std::string> listme;
 			listme.push_back(richtext_escape(gamedata.mapname));
 			listme.push_back(gamedata.savedonstring);
-			message = (boost::format("%s\n%s") % message %
-			           i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
+			message =
+			   bformat("%s\n%s", message, i18n::localize_list(listme, i18n::ConcatenateWith::COMMA));
 		}
 	}
-	return message.str();
+	return message;
 }

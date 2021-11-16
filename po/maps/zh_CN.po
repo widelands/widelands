@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-04-29 12:00+0000\n"
-"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -790,6 +790,33 @@ msgid ""
 "handful of big rivers."
 msgstr "一片神秘的土地，到处都是不同的风景，几乎都有几条大河穿越而过。"
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "绿色高原"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "你伫立于岛屿之上，巍峨的群山为你加冕，群山之间隐藏着一个奇妙而巨大的宝藏 – 难以征服绿色的高原，却又那么容易失去。所以，如果你想要的话，请留意其他的部族。"
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr ""
@@ -854,18 +881,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "有人说，遥远北方那片难以逾越的土地吓跑了最勇敢的定居者，即使是最勇敢的战士亦是如此。久远而又巨大的古老森林，密布体型硕大的掠食性动物，穿过湿地，山峦笼罩在神秘之中。那些设法回来的人提起了用黄金和雕刻图案装饰的巨大的建筑物，位于雄伟的山脉间的荒野之中。几十年后，只剩下被苔藓和树木所覆盖的残垣断壁见证曾经美好的旧日时光。它们的外形仅仅反映了对古代建筑者技艺的看法。没人知道他们为什么(已经) 消逝了。没人知道为什么。人们说，现在没有什么能阻挡通往财富的道路。 但很多人会被野狼撕碎，被沼泽吞没… 被敌对的部落包围。"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "绿色高原"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "你伫立于岛屿之上，巍峨的群山为你加冕，群山之间隐藏着一个奇妙而巨大的宝藏 – 难以征服绿色的高原，却又那么容易失去。所以，如果你想要的话，请留意其他的部族。"
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
