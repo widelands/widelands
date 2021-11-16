@@ -19,8 +19,7 @@
 
 #include "map_io/map_player_names_and_tribes_packet.h"
 
-#include <boost/algorithm/string/trim.hpp>
-
+#include "base/string.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -58,14 +57,13 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 			i18n::Textdomain td("widelands");
 			PlayerNumber const nr_players = map->get_nrplayers();
 			iterate_player_numbers(p, nr_players) {
-				Section& s = prof.get_safe_section(
-				   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
+				Section& s = prof.get_safe_section(bformat("player_%u", static_cast<unsigned int>(p)));
 
 				// Replace empty or standard player names with localized standard player name
 				std::string player_name = s.get_string("name", "");
 				if (player_name.empty() ||
-				    player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
-					player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+				    player_name == bformat("Player %u", static_cast<unsigned int>(p))) {
+					player_name = bformat(_("Player %u"), static_cast<unsigned int>(p));
 				}
 				map->set_scenario_player_name(p, player_name);
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
@@ -90,15 +88,14 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 	const Map& map = egbase.map();
 	PlayerNumber const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		const std::string section_key =
-		   (boost::format("player_%u") % static_cast<unsigned int>(p)).str();
+		const std::string section_key = bformat("player_%u", static_cast<unsigned int>(p));
 
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
-		boost::trim(player_name);
+		trim(player_name);
 
 		// Save default player names as empty
-		if (player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
+		if (player_name == bformat(_("Player %u"), static_cast<unsigned int>(p))) {
 			player_name = "";
 		}
 

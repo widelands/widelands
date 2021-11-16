@@ -34,6 +34,7 @@ wl_library(io_profile
     base_i18n
     base_log
     base_macros
+    base_string
     build_info
     io_fileread
     io_filesystem

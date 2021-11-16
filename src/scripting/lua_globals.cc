@@ -68,13 +68,14 @@ files name.
 
    Not really a global function. But we add a method to string built in type in
    Lua that has similar functionality to the built in string.format, but
-   instead uses boost::format. This allows for better control of the formatting
+   instead uses our own ``bformat``. This allows for better control of the formatting
    as well as reordering of arguments which is needed for proper localisation.
 
    :returns: :const:`nil`
 */
 static int L_string_bformat(lua_State* L) {
 	try {
+		// @CodeCheck allow boost::format
 		boost::format fmt(luaL_checkstring(L, 1));
 		const int nargs = lua_gettop(L);
 
@@ -309,13 +310,13 @@ static int L_pgettext(lua_State* L) {
 		if (td->second) {
 			std::unique_ptr<i18n::GenericTextdomain> dom(
 			   AddOns::create_textdomain_for_addon(td->first));
-			lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+			lua_pushstring(L, pgettext(msgctxt, msgid));
 		} else {
 			i18n::Textdomain dom(td->first);
-			lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+			lua_pushstring(L, pgettext(msgctxt, msgid));
 		}
 	} else {
-		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+		lua_pushstring(L, pgettext(msgctxt, msgid));
 	}
 	return 1;
 }
@@ -351,13 +352,13 @@ static int L_npgettext(lua_State* L) {
 		if (td->second) {
 			std::unique_ptr<i18n::GenericTextdomain> dom(
 			   AddOns::create_textdomain_for_addon(td->first));
-			lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 		} else {
 			i18n::Textdomain dom(td->first);
-			lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+			lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 		}
 	} else {
-		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+		lua_pushstring(L, npgettext(msgctxt, msgid, msgid_plural, n));
 	}
 	return 1;
 }
@@ -428,7 +429,7 @@ void luaopen_globals(lua_State* L) {
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
-	// Also add in string.bformat to use boost::format instead, so that we get
+	// Also add in string.bformat to use bformat instead, so that we get
 	// proper localisation.
 	lua_getglobal(L, "string");               // S: string_lib
 	lua_pushstring(L, "bformat");             // S: string_lib "bformat"

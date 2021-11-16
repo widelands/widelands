@@ -21,8 +21,7 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "io/fileread.h"
@@ -51,9 +50,7 @@ IFont* load_font(const std::string& face, int ptsize) {
 
 	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
 	if (!font) {
-		throw BadFont(
-		   (boost::format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError())
-		      .str());
+		throw BadFont(bformat("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
 	}
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());

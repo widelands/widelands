@@ -49,7 +49,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 
 	settings_.reset(new SinglePlayerGameSettingsProvider());
 	game_.reset(m.menu().create_safe_game());
-	if (!game_.get()) {
+	if (game_ == nullptr) {
 		die();
 		return;
 	}
@@ -89,7 +89,7 @@ RandomGame::RandomGame(MenuCapsule& m)
 }
 
 RandomGame::~RandomGame() {
-	if (game_.get()) {
+	if (game_ != nullptr) {
 		game_->cleanup_objects();
 	}
 	if (progress_window_) {

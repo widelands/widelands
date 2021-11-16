@@ -215,10 +215,8 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
                                  uint8_t* dir,
                                  bool two_d)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
-     title_area_(this,
-                 UI::PanelStyle::kFsMenu,
-                 UI::FontStyle::kFsMenuLabel,
-                 (boost::format(_("%1%:")) % title).str()),
+     title_area_(
+        this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, bformat(_("%1%:"), title)),
      keymod_dropdown_(this),
      dir_dropdown_(this, two_d),
      title_(title),
@@ -280,11 +278,10 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 			      /** TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 			                         empty if none is used. %2 is scrolling direction.
 			                         %3 is the name of the conflicting function. */
-			      (boost::format(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
-			                       "Please select a different combination or "
-			                       "change the conflicting setting first.")) %
-			       keymod_string_for(keymod) % _(sd_names[dir]) % other->get_title())
-			         .str(),
+			      bformat(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
+			                "Please select a different combination or "
+			                "change the conflicting setting first."),
+			              keymod_string_for(keymod), _(sd_names[dir]), other->get_title()),
 			      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 			   UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
@@ -380,7 +377,6 @@ ScrollOptionsButtonBox::ScrollOptionsButtonBox(MousewheelOptionsDialog* parent)
 // The main scrolling options dialog box
 MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     settings_(),
      zoom_box_(this,
                /** TRANSLATORS: Name of a function for the scroll wheel.
                    Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -470,12 +466,10 @@ void MousewheelOptionsDialog::set_touchpad() {
 	if (conflict_speed || conflict_toolsize) {
 		UI::WLMessageBox warning(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
-		   as_richtext_paragraph(
-		      (boost::format(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
-		                       "settings. Change the conflicting setting(s) too?")) %
-		       speed_box_.get_title() % toolsize_box_.get_title())
-		         .str(),
-		      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+		   as_richtext_paragraph(bformat(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
+		                                   "settings. Change the conflicting setting(s) too?"),
+		                                 speed_box_.get_title(), toolsize_box_.get_title()),
+		                         UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

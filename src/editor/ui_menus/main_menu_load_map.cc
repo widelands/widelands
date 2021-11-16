@@ -20,6 +20,7 @@
 #include "editor/ui_menus/main_menu_load_map.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
@@ -71,18 +72,20 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 
 	std::string display_dir = curdir_.substr(basedir_.size());
-	if (boost::starts_with(display_dir, "/")) {
+	if (starts_with(display_dir, "/")) {
 		display_dir = display_dir.substr(1);
 	}
-	if (boost::starts_with(display_dir, "My_Maps")) {
-		boost::replace_first(display_dir, "My_Maps", _("My Maps"));
-	} else if (boost::starts_with(display_dir, "MP_Scenarios")) {
-		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
-	} else if (boost::starts_with(display_dir, "Downloaded")) {
-		boost::replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
+	if (starts_with(display_dir, "My_Maps")) {
+		replace_first(display_dir, "My_Maps", _("My Maps"));
+	} else if (starts_with(display_dir, "MP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (starts_with(display_dir, "SP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Singleplayer Scenarios"));
+	} else if (starts_with(display_dir, "Downloaded")) {
+		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
+	directory_info_.set_text(bformat(_("Current directory: %s"), display_dir));
 }
 
 /**

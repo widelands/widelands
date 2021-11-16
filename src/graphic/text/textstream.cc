@@ -19,18 +19,14 @@
 
 #include "graphic/text/textstream.h"
 
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "graphic/text/rt_errors_impl.h"
 
 namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
 	EndOfTextImpl(size_t pos, const std::string& text)
-	   : EndOfText(
-	        (boost::format("Unexpected End of Text, starting at %1%. Text is: '%2%'") % pos % text)
-	           .str()) {
+	   : EndOfText(bformat("Unexpected End of Text, starting at %1%. Text is: '%2%'", pos, text)) {
 	}
 };
 
@@ -81,8 +77,7 @@ void TextStream::expect(std::string n, bool skip_whitespace) {
 	}
 
 	if (peek(n.size()) != n) {
-		throw SyntaxErrorImpl(
-		   line_, col_, (boost::format("'%s'") % n).str(), peek(n.size()), peek(100));
+		throw SyntaxErrorImpl(line_, col_, bformat("'%s'", n), peek(n.size()), peek(100));
 	}
 	consume(n.size());
 }
@@ -132,7 +127,7 @@ std::string TextStream::till_any(std::string chars) {
 	consume(j - started_at);
 
 	// Undo the extra \ that were inserted in Parser::parse to prevent crashes.
-	boost::replace_all(rv, "\\\\", "\\");
+	replace_all(rv, "\\\\", "\\");
 
 	return rv;
 }

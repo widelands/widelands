@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-20 08:36+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -796,6 +796,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Загадочная страна с разнообразными ландшафтами, рассеченными несколькими большими реками."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Зелёное Плато"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Вы стоите на острове, увенчанном могучими горами, в сердцевине которых скрыто удивительное и могущественное сокровище — Зеленое Плато, которое трудно захватить, но легко потерять. Так что, если хотите заполучить его, опасайтесь других кланов."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Златоносные пески"
@@ -860,18 +887,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Говорят, что непроходимые земли крайнего севера пугают даже самых отважных поселенцев и храбрейших воинов. Обширные старые леса, полные крупной и хищной дичи, пересекают болота и таинственные холмы. Те, кто отважился добраться туда, рассказывали об огромных зданиях, украшенных резьбой и золотом из горных приисков где-то в глуши. Спустя многие годы лишь остатки руин, на которых уже проросли кустарник и деревья, напоминали об этих старых добрых временах. Очертания руин дают лишь слабое представление о мастерстве древних строителей. Никто не знает, почему (и как) они исчезли. Говорят, что теперь ничто не преграждает путь к богатству. Но многие умерли разорванные волками, другие утопли в болоте... в окружении враждебных племен."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Зелёное Плато"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Вы стоите на острове, увенчанном могучими горами, в сердцевине которых скрыто удивительное и могущественное сокровище — Зеленое Плато, которое трудно захватить, но легко потерять. Так что, если хотите заполучить его, опасайтесь других кланов."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

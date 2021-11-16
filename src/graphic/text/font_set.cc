@@ -159,10 +159,9 @@ void FontSet::set_font_group(const LuaTable& table,
                              std::string* italic,
                              std::string* bold_italic) {
 	*basic = get_string_with_default(table, key, fallback);
-	*bold = get_string_with_default(table, (boost::format("%s_bold") % key).str(), *basic);
-	*italic = get_string_with_default(table, (boost::format("%s_italic") % key).str(), *basic);
-	*bold_italic =
-	   get_string_with_default(table, (boost::format("%s_bold_italic") % key).str(), *bold);
+	*bold = get_string_with_default(table, bformat("%s_bold", key), *basic);
+	*italic = get_string_with_default(table, bformat("%s_italic", key), *basic);
+	*bold_italic = get_string_with_default(table, bformat("%s_bold_italic", key), *bold);
 }
 
 FontSets::FontSets() {

@@ -125,15 +125,14 @@ void LaunchSPG::clicked_ok() {
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
 		UI::WLMessageBox m(
 		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
-		   (boost::format(_("Widelands tried to start a game with a file that could not be "
-		                    "found at the given path.\n"
-		                    "The file was: %s\n"
-		                    "If this happens in a network game, the host might have selected "
-		                    "a file that you do not own. Normally, such a file should be sent "
-		                    "from the host to you, but perhaps the transfer was not yet "
-		                    "finished!?!")) %
-		    filename)
-		      .str(),
+		   bformat(_("Widelands tried to start a game with a file that could not be "
+		             "found at the given path.\n"
+		             "The file was: %s\n"
+		             "If this happens in a network game, the host might have selected "
+		             "a file that you do not own. Normally, such a file should be sent "
+		             "from the host to you, but perhaps the transfer was not yet "
+		             "finished!?!"),
+		           filename),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<int>();
 		return;

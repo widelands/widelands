@@ -106,7 +106,10 @@ private:
 	FakeWaresDisplay* cs_warehouse_wares_;
 	FakeWaresDisplay* cs_warehouse_workers_;
 	void change_policy(Widelands::WareWorker, Widelands::StockPolicy);
-
+	void add_wares_queues(Widelands::ConstructionSite* construction_site, UI::Box& box) const;
+	void add_progress_bar(UI::Box& box);
+	void build_wares_tab(Widelands::ConstructionSite* construction_site);
+	void build_settings_tab(Widelands::ConstructionSite* construction_site);
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };
 

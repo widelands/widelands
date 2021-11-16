@@ -117,31 +117,30 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 }
 
 static inline std::string create_tooltip(const bool increase) {
-	return (boost::format("<p>%s%s%s</p>") %
-	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-	           .as_font_tag(
-	              increase ?
-                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Increase the number of wares you want to be stored here") :
-                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Decrease the number of wares you want to be stored here")) %
-	        as_listitem(increase ?
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Shift to increase all ware types at the same time") :
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Shift to decrease all ware types at the same time"),
-	                    UI::FontStyle::kWuiTooltip) %
-	        as_listitem(increase ?
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Ctrl to allow all of this ware") :
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Ctrl to allow none of this ware"),
-	                    UI::FontStyle::kWuiTooltip))
-	   .str();
+	return bformat(
+	   "<p>%s%s%s</p>",
+	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+	      .as_font_tag(increase ?
+                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                         _("Increase the number of wares you want to be stored here") :
+                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                         _("Decrease the number of wares you want to be stored here")),
+	   as_listitem(increase ?
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Shift to increase all ware types at the same time") :
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Shift to decrease all ware types at the same time"),
+	               UI::FontStyle::kWuiTooltip),
+	   as_listitem(increase ?
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Ctrl to allow all of this ware") :
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Ctrl to allow none of this ware"),
+	               UI::FontStyle::kWuiTooltip));
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
