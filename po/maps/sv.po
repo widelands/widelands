@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-11 23:10+0000\n"
-"Last-Translator: D M <kamera001dm@gmail.com>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -791,6 +791,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Ett mystiskt land, fullt av olika landskap, som genomskärs av en handfull stora floder."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Den gröna platån"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Du står på en ö, krönt av mäktiga berg, vars mitt döljer en underbar och mäktig hemlighet –  den gröna platån, svår att komma till men lätt att bli av med. Om du vill ha den, var medveten om de andra klanerna!"
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Sandiga Passager"
@@ -855,18 +882,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Vissa säger att ogenomträngliga marker långt uppe i den avlägsna norden skrämde iväg även de modigaste nybyggarna och de tappraste av de tappra krigarna. Stora och gamla skogar, fulla av stora rovdjur, genomskurna av våtmarker och kullar och insvepta i mysterier. De som hade lyckats komma tillbaka därifrån nämnde enorma byggnader, dekorerade med träsniderier och guld från majestätiska bergskedjor någonstans i vildmarken. Dussintals år senare återstår bara några nedrasade ruiner från dessa gamla goda tider, täckta av mossa och träd. Deras form ger bara en antydan om de forntida byggarnas hantverksskicklighet. Ingen vet varför de försvann. Folk säger att nu finns det ingenting som blockerar vägen till rikedom, men många kommer att dö sönderslitna av vargar, uppslukade av träsk och omringade av fientliga stammar."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Den gröna platån"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Du står på en ö, krönt av mäktiga berg, vars mitt döljer en underbar och mäktig hemlighet –  den gröna platån, svår att komma till men lätt att bli av med. Om du vill ha den, var medveten om de andra klanerna!"
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

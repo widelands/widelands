@@ -52,8 +52,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std:
                   UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft),
      owner_(*i),
      creation_time_(SDL_GetTicks()),
-     message_(nullptr),
-     id_() {
+     message_(nullptr) {
 	set_thinks(true);
 	set_handle_mouse(true);
 	set_tooltip(tooltip);

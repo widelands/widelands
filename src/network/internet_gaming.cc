@@ -46,7 +46,6 @@ InternetGaming::InternetGaming()
      reg_(false),
      port_(kInternetGamingPort),
      clientrights_(INTERNET_CLIENT_UNREGISTERED),
-     gameips_(),
      clientupdateonmetaserver_(true),
      gameupdateonmetaserver_(true),
      clientupdate_(false),

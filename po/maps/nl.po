@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-07 19:02+0000\n"
-"Last-Translator: CrisiusXIII <chris@cborn.nl>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -792,6 +792,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Een mystiek land met een grote verscheidenheid aan landschappen die door een handvol grote rivieren worden doorkruist."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "De Groene Hoogvlakte"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Je staat op een eiland gekroond met machtige bergen die een schitterende en rijke schat in hun midden bewaren - de Groene Hoogvlakte, moeilijk te verkrijgen maar makkelijk te verliezen.  Dus, als je ze wilt, moet je de andere clans in de gaten houden."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Zandige Passen"
@@ -856,18 +883,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Sommigen zeggen dat ondoordringbare landen in het verre noorden zelfs de meest onverschrokken kolonisten en de dapperste der dappere strijders afschrikten.  Grote en oude wouden, vol groot en jagend wild, doorsneden door drassige gronden en bergen, werden door mysteries omringd.  Degenen die erin slaagden terug te keren, spraken over geweldige bouwwerken, versierd met snijwerk en goud uit majestueuze bergketens, ergens in de wildernis.  Tientallen jaren later staan er nog slechts enkele bouwvallige ruïnes van deze goede oude tijd, overwoekerd met mos en bomen.  Hun vormen geven slechts een idee van het vakmanschap van de oude bouwers.  Niemand weet waarom ze zijn verdwenen.  Niemand weet het.  Mensen zeggen dat de weg naar rijkdom nu open staat.  Maar velen zullen worden verscheurd door wolven of opgeslokt door het moeras – omgeven door vijandige stammen."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "De Groene Hoogvlakte"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Je staat op een eiland gekroond met machtige bergen die een schitterende en rijke schat in hun midden bewaren - de Groene Hoogvlakte, moeilijk te verkrijgen maar makkelijk te verliezen.  Dus, als je ze wilt, moet je de andere clans in de gaten houden."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

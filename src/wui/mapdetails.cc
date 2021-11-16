@@ -47,7 +47,6 @@ MapDetails::MapDetails(Panel* parent,
      padding_(4),
      main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     name_(""),
      name_label_(&main_box_,
                  0,
                  0,
@@ -69,7 +68,6 @@ MapDetails::MapDetails(Panel* parent,
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
-     last_map_(""),
      egbase_(egbase) {
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());

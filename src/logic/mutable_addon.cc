@@ -425,7 +425,7 @@ void CampaignAddon::do_recursively_add_scenarios(std::string& scenarios,
 bool CampaignAddon::write_to_disk() {
 	setup_temp_dir();
 
-	if (!MutableAddOn::write_to_disk()) {
+	if (!MutableAddOn::write_to_disk()) {  // NOLINT
 		return false;
 	}
 

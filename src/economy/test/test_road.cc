@@ -36,7 +36,7 @@ CLANG_DIAG_OFF("-Wused-but-marked-unused")
 /* Helper classes */
 /******************/
 struct TestingFlag : public Widelands::Flag {
-	TestingFlag(Widelands::EditorGameBase&, const Widelands::Coords& c) : Widelands::Flag() {
+	TestingFlag(Widelands::EditorGameBase&, const Widelands::Coords& c) {
 		set_flag_position(c);
 	}
 };
