@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-10 04:08+0000\n"
-"PO-Revision-Date: 2021-10-13 02:48+0000\n"
+"POT-Creation-Date: 2021-11-13 02:41+0000\n"
+"PO-Revision-Date: 2021-11-13 02:42+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -271,7 +271,7 @@ msgstr "12월"
 #. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
-#: ../../src/ui_fsmenu/keyboard_options.cc:318
+#: ../../src/ui_fsmenu/keyboard_options.cc:302
 #: ../../src/wui/interactive_gamebase.cc:91
 #: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
@@ -279,7 +279,7 @@ msgstr "기본 차림표"
 
 #. * TRANSLATORS: Title for the tool menu button in the editor
 #: ../../src/editor/editorinteractive.cc:109
-#: ../../src/wlapplication_options.cc:357
+#: ../../src/wlapplication_options.cc:413
 msgid "Tools"
 msgstr "도구"
 
@@ -299,17 +299,17 @@ msgid "Tool size"
 msgstr "도구 크기"
 
 #: ../../src/editor/editorinteractive.cc:152
-#: ../../src/wlapplication_options.cc:349
+#: ../../src/wlapplication_options.cc:405
 msgid "Undo"
 msgstr "되돌리기"
 
 #: ../../src/editor/editorinteractive.cc:156
-#: ../../src/wlapplication_options.cc:353
+#: ../../src/wlapplication_options.cc:409
 msgid "Redo"
 msgstr "재실행하기"
 
 #: ../../src/editor/editorinteractive.cc:167
-#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:225
+#: ../../src/wui/buildingwindow.cc:419 ../../src/wui/interactive_player.cc:227
 msgid "Help"
 msgstr "도움말"
 
@@ -329,14 +329,14 @@ msgstr "새로운 무작위 지도"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:209
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:345
+#: ../../src/ui_fsmenu/main.cc:403 ../../src/wlapplication_options.cc:401
 msgid "Load Map"
 msgstr "지도 불러오기"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:217
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:52
-#: ../../src/wlapplication_options.cc:341
+#: ../../src/wlapplication_options.cc:397
 msgid "Save Map"
 msgstr "지도 저장"
 
@@ -854,8 +854,8 @@ msgstr "표시"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:392
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:570
 #: ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/keyboard_options.cc:59
-#: ../../src/ui_fsmenu/keyboard_options.cc:198 ../../src/ui_fsmenu/menu.cc:145
+#: ../../src/ui_fsmenu/keyboard_options.cc:70
+#: ../../src/ui_fsmenu/keyboard_options.cc:234 ../../src/ui_fsmenu/menu.cc:145
 #: ../../src/ui_fsmenu/options.cc:95
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
 #: ../../src/wui/game_main_menu_save_game.cc:88
@@ -875,7 +875,7 @@ msgstr "확인"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:193
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:400
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:66
-#: ../../src/ui_fsmenu/keyboard_options.cc:54
+#: ../../src/ui_fsmenu/keyboard_options.cc:65
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:672
@@ -1433,9 +1433,9 @@ msgstr "명령 대기열"
 
 #: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:149
 #: ../../src/map_io/widelands_map_loader.cc:389
-#: ../../src/wlapplication_options.cc:468
-#: ../../src/wui/interactive_player.cc:216
-#: ../../src/wui/interactive_player.cc:454
+#: ../../src/wlapplication_options.cc:524
+#: ../../src/wui/interactive_player.cc:218
+#: ../../src/wui/interactive_player.cc:456
 msgid "Messages"
 msgstr "메시지"
 
@@ -2199,7 +2199,7 @@ msgstr "배들"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:183
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:152
-#: ../../src/wui/interactive_player.cc:323
+#: ../../src/wui/interactive_player.cc:325
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:265
 msgid "Wares"
@@ -2221,32 +2221,32 @@ msgstr "일꾼들"
 #: ../../src/map_io/map_saver.cc:222
 #: ../../src/map_io/widelands_map_loader.cc:324
 #: ../../src/wui/general_statistics_menu.cc:148
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:197
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/minimap.cc:197
 msgid "Buildings"
 msgstr "건물"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:227
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:240
 msgid "Worker missing"
 msgstr "일꾼이 없습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:232
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:245
 msgid "Workers missing"
 msgstr "일꾼들이 없습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:236
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:249
 msgid "Worker is coming"
 msgstr "일꾼이 오고 있습니다"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:241
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:254
 msgid "Workers are coming"
 msgstr "일꾼들이 오고 있습니다"
 
@@ -2333,7 +2333,7 @@ msgstr "지도 파일이 잘못되었습니다:\n%s"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1921
+#: ../../src/logic/player.cc:1926
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2459,9 +2459,9 @@ msgstr "스크립트를 하고 있음"
 
 #: ../../src/map_io/map_saver.cc:306
 #: ../../src/map_io/widelands_map_loader.cc:407
-#: ../../src/wlapplication_options.cc:464
+#: ../../src/wlapplication_options.cc:520
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:210
 msgid "Objectives"
 msgstr "목표"
 
@@ -3235,8 +3235,7 @@ msgid "Version:"
 msgstr "버전:"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:74 ../../src/ui_fsmenu/keyboard_options.cc:269
-#: ../../src/wui/interactive_gamebase.cc:532
+#: ../../src/ui_fsmenu/about.cc:74 ../../src/wui/interactive_gamebase.cc:532
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -4771,7 +4770,7 @@ msgid "Help: %s"
 msgstr "도움말: %s"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
-#: ../../src/wlapplication_options.cc:246
+#: ../../src/wlapplication_options.cc:302
 msgid "Metaserver Lobby"
 msgstr "메타서버 앞마당"
 
@@ -4828,7 +4827,7 @@ msgid "Version"
 msgstr "버전"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:173
-#: ../../src/ui_fsmenu/keyboard_options.cc:320
+#: ../../src/ui_fsmenu/keyboard_options.cc:304
 msgid "Game"
 msgstr "게임"
 
@@ -4862,62 +4861,42 @@ msgstr "네트워크 오류"
 msgid "unnamed %u"
 msgstr "이름 없는 %u"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:47
+#: ../../src/ui_fsmenu/keyboard_options.cc:55
 msgid "Reset to default"
 msgstr "기본값으로 다시 설정"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:65
+#: ../../src/ui_fsmenu/keyboard_options.cc:76
 msgid "Press the new shortcut or close this window to cancel."
 msgstr "취소하려면 새로운 바로가기를 누르거나 이 창을 닫으십시오."
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:215
+#: ../../src/ui_fsmenu/keyboard_options.cc:134
 msgid "(unused)"
 msgstr ""
 
-#. * TRANSLATORS: [Tribe Name] Building Name
-#: ../../src/ui_fsmenu/keyboard_options.cc:110
-#, c-format
-msgid "[%1$s] %2$s"
-msgstr ""
-
-#: ../../src/ui_fsmenu/keyboard_options.cc:178
+#: ../../src/ui_fsmenu/keyboard_options.cc:214
 msgid "Edit Keyboard And Mouse Actions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:189
+#: ../../src/ui_fsmenu/keyboard_options.cc:225
 msgid "Reset all"
 msgstr "모두 다시 설정"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:190
+#: ../../src/ui_fsmenu/keyboard_options.cc:226
 msgid "Reset all to defaults"
 msgstr "모두 기본값으로 다시 설정"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
-#: ../../src/ui_fsmenu/keyboard_options.cc:208
-#: ../../src/ui_fsmenu/keyboard_options.cc:221
+#: ../../src/ui_fsmenu/keyboard_options.cc:242
 #, c-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#. * TRANSLATORS: [Tribe Name] Building Name: Fastplace Shortcut
-#: ../../src/ui_fsmenu/keyboard_options.cc:226
-#, c-format
-msgid "[%1$s] %2$s: %3$s"
-msgstr ""
-
-#. * TRANSLATORS: Shortcut Name ([Tribe Name] Fastplace Building Name)
-#: ../../src/ui_fsmenu/keyboard_options.cc:274
-#, c-format
-msgid "%1$s ([%2$s] %3$s)"
-msgstr ""
-
-#: ../../src/ui_fsmenu/keyboard_options.cc:285
+#: ../../src/ui_fsmenu/keyboard_options.cc:269
 msgid "Keyboard Shortcut Conflict"
 msgstr "키보드 바로가기 키 충돌"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:288
+#: ../../src/ui_fsmenu/keyboard_options.cc:272
 #, c-format
 msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
@@ -4926,21 +4905,21 @@ msgid ""
 msgstr "선택한 바로 가기 (‘%1$s’) 는 이미 작업 : ‘%2$s’ 에 사용되고 있습니다. 먼저 다른 바로 가기를 선택하거나 충돌하는 바로 가기를 변경하십시오."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:317
-#: ../../src/wui/interactive_player.cc:328
+#: ../../src/ui_fsmenu/keyboard_options.cc:301
+#: ../../src/wui/interactive_player.cc:330
 msgid "General"
 msgstr "일반"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:319
-#: ../../src/wlapplication_options.cc:200
+#: ../../src/ui_fsmenu/keyboard_options.cc:303
+#: ../../src/wlapplication_options.cc:256
 msgid "Editor"
 msgstr "편집기"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:323
+#: ../../src/ui_fsmenu/keyboard_options.cc:307
 msgid "Fastplace"
 msgstr ""
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:325
+#: ../../src/ui_fsmenu/keyboard_options.cc:309
 msgid "Mouse Scrolling"
 msgstr ""
 
@@ -5184,12 +5163,12 @@ msgstr "게임 인스턴스를 만들 수 없습니다!\n오류 메시지:\n%s"
 msgid "Begin a new game"
 msgstr "새로운 놀이 시작"
 
-#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:164
+#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:220
 msgid "New Game"
 msgstr "새로운 놀이"
 
 #: ../../src/ui_fsmenu/main.cc:321 ../../src/ui_fsmenu/random_game.cc:30
-#: ../../src/wlapplication_options.cc:178
+#: ../../src/wlapplication_options.cc:234
 msgid "New Random Game"
 msgstr "새로운 아무런 놀이"
 
@@ -5197,7 +5176,7 @@ msgstr "새로운 아무런 놀이"
 msgid "Create a new random match"
 msgstr "새로운 아무 경기를 만듬"
 
-#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:188
+#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:244
 msgid "Campaigns"
 msgstr "캠페인"
 
@@ -5205,7 +5184,7 @@ msgstr "캠페인"
 msgid "Play a campaign"
 msgstr "켐페인을 시작"
 
-#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:183
+#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:239
 msgid "Tutorials"
 msgstr "자습서"
 
@@ -5214,8 +5193,8 @@ msgid "Play one of our beginners’ tutorials"
 msgstr "초보자의 자습서의 하나를 시작"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:168
-#: ../../src/wlapplication_options.cc:524
+#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:224
+#: ../../src/wlapplication_options.cc:580
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:155
 msgid "Load Game"
@@ -5225,7 +5204,7 @@ msgstr "게임 불러오기"
 msgid "Continue a saved game"
 msgstr "저장된 놀이 계속하기"
 
-#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:225
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:281
 msgid "Continue Playing"
 msgstr "계속 놀고 있음"
 
@@ -5263,7 +5242,7 @@ msgstr "와이드랜드 앞마당 들어가기"
 msgid "Log in as a registered user"
 msgstr "등록된 사용자로 로그인"
 
-#: ../../src/ui_fsmenu/main.cc:394 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:394 ../../src/wlapplication_options.cc:298
 msgid "LAN / Direct IP"
 msgstr "랜 / 다이렉트 IP"
 
@@ -5283,7 +5262,7 @@ msgstr "새로운 아무런 지도를 만듬"
 msgid "Edit an existing map"
 msgstr "있는 지도를 편집"
 
-#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:220
+#: ../../src/ui_fsmenu/main.cc:419 ../../src/wlapplication_options.cc:276
 msgid "Continue Editing"
 msgstr "계속 편집"
 
@@ -5311,7 +5290,7 @@ msgstr "인터넷을 통해 친구들과 놀기"
 msgid "Launch the map editor"
 msgstr "지도 편집기를 실행"
 
-#: ../../src/ui_fsmenu/main.cc:462 ../../src/wlapplication_options.cc:173
+#: ../../src/ui_fsmenu/main.cc:462 ../../src/wlapplication_options.cc:229
 msgid "Watch Replay"
 msgstr "다시보기 감상"
 
@@ -5319,7 +5298,7 @@ msgstr "다시보기 감상"
 msgid "Watch the replay of an old game"
 msgstr "오래된 놀이의 다시놀기를 보기"
 
-#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:238
+#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:294
 msgid "Add-Ons"
 msgstr "추가 기능"
 
@@ -5328,7 +5307,7 @@ msgid "Install and manage add-ons"
 msgstr "추가 기능 설치 및 관리"
 
 #: ../../src/ui_fsmenu/main.cc:471 ../../src/ui_fsmenu/options.cc:89
-#: ../../src/wlapplication_options.cc:255
+#: ../../src/wlapplication_options.cc:311
 msgid "Options"
 msgstr "선택사항"
 
@@ -5340,7 +5319,7 @@ msgstr "기술 및 놀이 관련 설정"
 msgid "Readme, License, and Credits"
 msgstr "읽어보기, 허가서 및 크레딧"
 
-#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:229
+#: ../../src/ui_fsmenu/main.cc:479 ../../src/wlapplication_options.cc:285
 msgid "Exit Widelands"
 msgstr "와이드랜드 종료"
 
@@ -5841,7 +5820,7 @@ msgstr "건물 표시"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:253 ../../src/wui/interactive_player.cc:374
+#: ../../src/ui_fsmenu/options.cc:253 ../../src/wui/interactive_player.cc:376
 msgid "Show Workarea Overlaps"
 msgstr "작업 영역 겹침을 표시"
 
@@ -6024,18 +6003,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:170
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:173
 msgid "Authors"
 msgstr "제작자들"
@@ -6156,526 +6135,722 @@ msgid ""
 "%s"
 msgstr "죄송합니다. 와이드랜드는 다음과 같은 이유로 긴급 저장 게임을 만들 수 없습니다:\n\n%s"
 
+#: ../../src/wlapplication_options.cc:165
+msgid "Warehouse"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:166
+msgid "Port"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:167
+msgid "Minor Training Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:168
+msgid "Major Training Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:169
+msgid "Primary Small Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:170
+msgid "Secondary Small Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:171
+msgid "Primary Medium Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:172
+msgid "Secondary Medium Military Site"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:173
+msgid "Tower"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:174
+msgid "Fortress"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:175
+msgid "Woodcutter’s House"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:176
+msgid "Forester’s House"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:177
+msgid "Quarry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:178
+msgid "Primary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:179
+msgid "Secondary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:180
+msgid "Tertiary Building Materials Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:181
+msgid "Fishing"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:182
+msgid "Hunting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:183
+msgid "Fish/Meat Replenishing"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:184
+msgid "Well"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:185
+msgid "Primary Farm"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:186
+msgid "Secondary Farm"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:187
+msgid "Mill"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:188
+msgid "Bakery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:189
+msgid "Brewery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:190
+msgid "Smokery"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:191
+msgid "Tavern"
+msgstr ""
+
 #: ../../src/wlapplication_options.cc:192
+msgid "Ore Smelting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:193
+msgid "Tool Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:194
+msgid "Weapon Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:195
+msgid "Armor Smithy"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:196
+msgid "Weaving Mill"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:197
+msgid "Shipyard"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:198
+msgid "Ferry Yard"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:199
+msgid "Scouting"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:200
+msgid "Barracks"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:201
+msgid "Second Carrier"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:202
+msgid "Charcoal"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:203
+msgid "Stone Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:204
+msgid "Coal Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:205
+msgid "Iron Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:206
+msgid "Gold Mine"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:207
+msgid "Agricultural Producer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:208
+msgid "Primary Agricultural Consumer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:209
+msgid "Secondary Agricultural Consumer"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:210
+msgid "Alternative Industry"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:211
+msgid "Industry Support"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:212
+msgid "Terraforming"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:248
 msgid "Singleplayer"
 msgstr "단일 선수"
 
-#: ../../src/wlapplication_options.cc:196
+#: ../../src/wlapplication_options.cc:252
 msgid "Multiplayer"
 msgstr "여러 선수"
 
-#: ../../src/wlapplication_options.cc:205
+#: ../../src/wlapplication_options.cc:261
 msgid "Editor – Load Map"
 msgstr "편집기 – 지도를 불러오기"
 
-#: ../../src/wlapplication_options.cc:210
+#: ../../src/wlapplication_options.cc:266
 msgid "Editor – New Map"
 msgstr "편집기 – 새로운 지도"
 
-#: ../../src/wlapplication_options.cc:215
+#: ../../src/wlapplication_options.cc:271
 msgid "Editor – New Random Map"
 msgstr "편집기 – 아무런 새로운 지도"
 
-#: ../../src/wlapplication_options.cc:233
+#: ../../src/wlapplication_options.cc:289
 msgid "About"
 msgstr "프로그램 정보"
 
-#: ../../src/wlapplication_options.cc:250
+#: ../../src/wlapplication_options.cc:306
 msgid "Internet Login"
 msgstr "인터넷 로그인"
 
-#: ../../src/wlapplication_options.cc:261
+#: ../../src/wlapplication_options.cc:317
 msgid "Toggle Building Spaces"
 msgstr "건물 공간 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:266
+#: ../../src/wlapplication_options.cc:322
 msgid "Toggle Minimap"
 msgstr "작은 지도 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:271
+#: ../../src/wlapplication_options.cc:327
 msgid "Encyclopedia"
 msgstr "백과사전"
 
-#: ../../src/wlapplication_options.cc:275
+#: ../../src/wlapplication_options.cc:331
 msgid "Cut Text"
 msgstr "글자를 잘라내기"
 
-#: ../../src/wlapplication_options.cc:279
+#: ../../src/wlapplication_options.cc:335
 msgid "Copy Text"
 msgstr "글자를 복사"
 
-#: ../../src/wlapplication_options.cc:283
+#: ../../src/wlapplication_options.cc:339
 msgid "Paste Text"
 msgstr "글자를 붙여넣기"
 
-#: ../../src/wlapplication_options.cc:287
+#: ../../src/wlapplication_options.cc:343
 msgid "Select All"
 msgstr "모두 선택"
 
-#: ../../src/wlapplication_options.cc:292
+#: ../../src/wlapplication_options.cc:348
 msgid "Delete Item"
 msgstr "항목을 삭제"
 
-#: ../../src/wlapplication_options.cc:297
+#: ../../src/wlapplication_options.cc:353
 msgid "Tooltip Accessibility Mode Key"
 msgstr "연장 설명 접근성 모드 키"
 
-#: ../../src/wlapplication_options.cc:302
+#: ../../src/wlapplication_options.cc:358
 msgid "Toggle Fullscreen"
 msgstr "전체 화면을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:307
+#: ../../src/wlapplication_options.cc:363
 msgid "Take Screenshot"
 msgstr "화면을 갈무리"
 
-#: ../../src/wlapplication_options.cc:312
+#: ../../src/wlapplication_options.cc:368
 msgid "Zoom In"
 msgstr "확대"
 
-#: ../../src/wlapplication_options.cc:317
+#: ../../src/wlapplication_options.cc:373
 msgid "Zoom Out"
 msgstr "축소"
 
-#: ../../src/wlapplication_options.cc:322
+#: ../../src/wlapplication_options.cc:378
 msgid "Reset Zoom"
 msgstr "확대/축소 다시 설정"
 
-#: ../../src/wlapplication_options.cc:327
+#: ../../src/wlapplication_options.cc:383
 msgid "Jump to Next Location"
 msgstr "다음 위치로 뛰기"
 
-#: ../../src/wlapplication_options.cc:332
+#: ../../src/wlapplication_options.cc:388
 msgid "Jump to Previous Location"
 msgstr "지난 위치로 뛰기"
 
-#: ../../src/wlapplication_options.cc:337
+#: ../../src/wlapplication_options.cc:393
 msgid "Menu"
 msgstr "차림표"
 
-#: ../../src/wlapplication_options.cc:361
+#: ../../src/wlapplication_options.cc:417
 msgid "Info Tool"
 msgstr "정보 연장"
 
-#: ../../src/wlapplication_options.cc:365
+#: ../../src/wlapplication_options.cc:421
 msgid "Players Menu"
 msgstr "선수들 차림표"
 
-#: ../../src/wlapplication_options.cc:370
+#: ../../src/wlapplication_options.cc:426
 msgid "Toggle Grid"
 msgstr "격자 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:375
+#: ../../src/wlapplication_options.cc:431
 msgid "Toggle Immovables"
 msgstr "부동산 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:380
+#: ../../src/wlapplication_options.cc:436
 msgid "Toggle Animals"
 msgstr "동물들 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:385
+#: ../../src/wlapplication_options.cc:441
 msgid "Toggle Resources"
 msgstr "자원들을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:392
+#: ../../src/wlapplication_options.cc:448
 #, c-format
 msgid "Set Toolsize to %d"
 msgstr "연장 크기를 %d 로 설정"
 
-#: ../../src/wlapplication_options.cc:410
+#: ../../src/wlapplication_options.cc:466
 msgid "Toggle Census"
 msgstr "인구 조사를 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:415
+#: ../../src/wlapplication_options.cc:471
 msgid "Toggle Status Labels"
 msgstr "상태 딱지를 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:420
+#: ../../src/wlapplication_options.cc:476
 msgid "Toggle Soldier Levels"
 msgstr "군인 수준을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:425
+#: ../../src/wlapplication_options.cc:481
 msgid "Toggle Buildings Visibility"
 msgstr "건물 가시성을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:430
+#: ../../src/wlapplication_options.cc:486
 msgid "Toggle Overlapping Workareas"
 msgstr "겹치는 작업 영역을 켜기/끄기"
 
-#: ../../src/wlapplication_options.cc:435
+#: ../../src/wlapplication_options.cc:491
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
 msgstr "일반 통계"
 
-#: ../../src/wlapplication_options.cc:440
+#: ../../src/wlapplication_options.cc:496
 #: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "물품 통계"
 
-#: ../../src/wlapplication_options.cc:445
+#: ../../src/wlapplication_options.cc:501
 #: ../../src/wui/building_statistics_menu.cc:55
 msgid "Building Statistics"
 msgstr "건물 통계"
 
-#: ../../src/wlapplication_options.cc:450
+#: ../../src/wlapplication_options.cc:506
 msgid "Stock Inventory"
 msgstr "재고품 목록"
 
-#: ../../src/wlapplication_options.cc:455
+#: ../../src/wlapplication_options.cc:511
 #: ../../src/wui/soldier_statistics_menu.cc:133
 msgid "Soldier Statistics"
 msgstr "군인 통계"
 
-#: ../../src/wlapplication_options.cc:460
+#: ../../src/wlapplication_options.cc:516
 #: ../../src/wui/seafaring_statistics_menu.cc:50
 msgid "Seafaring Statistics"
 msgstr "항해 통계"
 
-#: ../../src/wlapplication_options.cc:473
+#: ../../src/wlapplication_options.cc:529
 msgid "Decrease Game Speed by 1×"
 msgstr "놀이 속도를 1배 낮춤"
 
-#: ../../src/wlapplication_options.cc:478
+#: ../../src/wlapplication_options.cc:534
 msgid "Decrease Game Speed by 0.25×"
 msgstr "놀이 속도를 0.25배 낮춤"
 
-#: ../../src/wlapplication_options.cc:483
+#: ../../src/wlapplication_options.cc:539
 msgid "Decrease Game Speed by 10×"
 msgstr "놀이 속도를 10배 낮춤"
 
-#: ../../src/wlapplication_options.cc:488
+#: ../../src/wlapplication_options.cc:544
 msgid "Increase Game Speed by 1×"
 msgstr "놀이 속도를 1배 높임"
 
-#: ../../src/wlapplication_options.cc:493
+#: ../../src/wlapplication_options.cc:549
 msgid "Increase Game Speed by 0.25×"
 msgstr "놀이 속도를 0.25배 높임"
 
-#: ../../src/wlapplication_options.cc:498
+#: ../../src/wlapplication_options.cc:554
 msgid "Increase Game Speed by 10×"
 msgstr "놀이 속도를 10배 높임"
 
-#: ../../src/wlapplication_options.cc:503
+#: ../../src/wlapplication_options.cc:559
 msgid "Reset Game Speed"
 msgstr "놀이 속도를 다시 설정"
 
-#: ../../src/wlapplication_options.cc:507
+#: ../../src/wlapplication_options.cc:563
 #: ../../src/wui/interactive_gamebase.cc:326
 msgid "Pause"
 msgstr "일시정지"
 
-#: ../../src/wlapplication_options.cc:512
+#: ../../src/wlapplication_options.cc:568
 msgid "Scroll to Starting Field"
 msgstr "번역확인 -> 시작 입력란으로 스크롤"
 
-#: ../../src/wlapplication_options.cc:516 ../../src/wui/game_chat_menu.cc:55
+#: ../../src/wlapplication_options.cc:572 ../../src/wui/game_chat_menu.cc:55
 #: ../../src/wui/interactive_gamebase.cc:366
 msgid "Chat"
 msgstr "채팅"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:520
+#: ../../src/wlapplication_options.cc:576
 #: ../../src/wui/game_main_menu_save_game.cc:54
 #: ../../src/wui/interactive_gamebase.cc:146
 msgid "Save Game"
 msgstr "게임 저장"
 
-#: ../../src/wlapplication_options.cc:529
+#: ../../src/wlapplication_options.cc:585
 msgid "Messages: Go to Location"
 msgstr "알릴말: 위치로 이동"
 
-#: ../../src/wlapplication_options.cc:534
+#: ../../src/wlapplication_options.cc:590
 msgid "Messages: Show "
 msgstr "알릴말: 표시 "
 
-#: ../../src/wlapplication_options.cc:539
+#: ../../src/wlapplication_options.cc:595
 msgid "Messages: Show Geologists’ Messages"
 msgstr "알릴말: 지질학자의 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:544
+#: ../../src/wlapplication_options.cc:600
 msgid "Messages: Show Economy Messages"
 msgstr "알릴말: 경제 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:549
+#: ../../src/wlapplication_options.cc:605
 msgid "Messages: Show Seafaring Messages"
 msgstr "알릴말: 항해 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:554
+#: ../../src/wlapplication_options.cc:610
 msgid "Messages: Show Military Messages"
 msgstr "알릴말: 군사 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:559
+#: ../../src/wlapplication_options.cc:615
 msgid "Messages: Show Scenario Messages"
 msgstr "알릴말: 시나리오 알릴말을 표시"
 
-#: ../../src/wlapplication_options.cc:564
+#: ../../src/wlapplication_options.cc:620
 msgid "Seafaring: Go to Ship"
 msgstr "항해: 배로 이동"
 
-#: ../../src/wlapplication_options.cc:569
+#: ../../src/wlapplication_options.cc:625
 msgid "Seafaring: Watch Ship"
 msgstr "항해: 배를 감시"
 
-#: ../../src/wlapplication_options.cc:574
+#: ../../src/wlapplication_options.cc:630
 msgid "Seafaring: Open Ship Window"
 msgstr "항해: 배 창을 열기"
 
-#: ../../src/wlapplication_options.cc:579
+#: ../../src/wlapplication_options.cc:635
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr "항해: 배 창을 열고 배로 이동"
 
-#: ../../src/wlapplication_options.cc:584
+#: ../../src/wlapplication_options.cc:640
 msgid "Seafaring: Show All Ships"
 msgstr "항해: 모든 배를 표시"
 
-#: ../../src/wlapplication_options.cc:589
+#: ../../src/wlapplication_options.cc:645
 msgid "Seafaring: Show Idle Ships"
 msgstr "항해: 놀고있는 배를 표시"
 
-#: ../../src/wlapplication_options.cc:594
+#: ../../src/wlapplication_options.cc:650
 msgid "Seafaring: Show Transport Ships"
 msgstr "항해: 수송선을 표시"
 
-#: ../../src/wlapplication_options.cc:599
+#: ../../src/wlapplication_options.cc:655
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr "항해: 기다리고 있는 탐험대를 표시"
 
-#: ../../src/wlapplication_options.cc:604
+#: ../../src/wlapplication_options.cc:660
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr "항해: 정찰하고 있는 탐험대 표시"
 
-#: ../../src/wlapplication_options.cc:609
+#: ../../src/wlapplication_options.cc:665
 msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr "항해: 항구공간과 탐험대를 표시"
 
-#: ../../src/wlapplication_options.cc:614
+#: ../../src/wlapplication_options.cc:670
 #, c-format
 msgid "Set Landmark #%d"
 msgstr "주요 지형물 #%d를 설정"
 
-#: ../../src/wlapplication_options.cc:619
+#: ../../src/wlapplication_options.cc:675
 #, c-format
 msgid "Go To Landmark #%d"
 msgstr "주요 지형물 #%d로 이동"
 
-#: ../../src/wlapplication_options.cc:848
+#: ../../src/wlapplication_options.cc:916
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "쉬프트"
 
-#: ../../src/wlapplication_options.cc:851
+#: ../../src/wlapplication_options.cc:919
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "알트"
 
-#: ../../src/wlapplication_options.cc:855
+#: ../../src/wlapplication_options.cc:923
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "CMD"
 
-#: ../../src/wlapplication_options.cc:857
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:861
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:870
+#: ../../src/wlapplication_options.cc:938
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:883
+#: ../../src/wlapplication_options.cc:951
 msgctxt "hotkey"
 msgid "Space"
 msgstr "공백"
 
-#: ../../src/wlapplication_options.cc:885
+#: ../../src/wlapplication_options.cc:953
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "엔터"
 
-#: ../../src/wlapplication_options.cc:887
+#: ../../src/wlapplication_options.cc:955
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "탈출"
 
-#: ../../src/wlapplication_options.cc:889
+#: ../../src/wlapplication_options.cc:957
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "탭"
 
-#: ../../src/wlapplication_options.cc:891
+#: ../../src/wlapplication_options.cc:959
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "차림표"
 
-#: ../../src/wlapplication_options.cc:893
+#: ../../src/wlapplication_options.cc:961
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "일시 중지"
 
-#: ../../src/wlapplication_options.cc:895
+#: ../../src/wlapplication_options.cc:963
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "페이지 업"
 
-#: ../../src/wlapplication_options.cc:897
+#: ../../src/wlapplication_options.cc:965
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "페이지 다운"
 
-#: ../../src/wlapplication_options.cc:899
+#: ../../src/wlapplication_options.cc:967
 msgctxt "hotkey"
 msgid "Home"
 msgstr "홈"
 
-#: ../../src/wlapplication_options.cc:901
+#: ../../src/wlapplication_options.cc:969
 msgctxt "hotkey"
 msgid "End"
 msgstr "엔드"
 
-#: ../../src/wlapplication_options.cc:903
+#: ../../src/wlapplication_options.cc:971
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "왼쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:905
+#: ../../src/wlapplication_options.cc:973
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "오른쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:907
+#: ../../src/wlapplication_options.cc:975
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "위쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:909
+#: ../../src/wlapplication_options.cc:977
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "아래쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:911
+#: ../../src/wlapplication_options.cc:979
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "인서트"
 
-#: ../../src/wlapplication_options.cc:913
+#: ../../src/wlapplication_options.cc:981
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "딜리트"
 
-#: ../../src/wlapplication_options.cc:915
+#: ../../src/wlapplication_options.cc:983
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: ../../src/wlapplication_options.cc:917
+#: ../../src/wlapplication_options.cc:985
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "캡스 록"
 
-#: ../../src/wlapplication_options.cc:919
+#: ../../src/wlapplication_options.cc:987
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "넘 록"
 
-#: ../../src/wlapplication_options.cc:921
+#: ../../src/wlapplication_options.cc:989
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "스크롤 록"
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:991
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "키패드 1"
 
-#: ../../src/wlapplication_options.cc:925
+#: ../../src/wlapplication_options.cc:993
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "키패드 2"
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "키패드 3"
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:997
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "키패드 4"
 
-#: ../../src/wlapplication_options.cc:931
+#: ../../src/wlapplication_options.cc:999
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "키패드 5"
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:1001
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "키패드 6"
 
-#: ../../src/wlapplication_options.cc:935
+#: ../../src/wlapplication_options.cc:1003
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "키패드 7"
 
-#: ../../src/wlapplication_options.cc:937
+#: ../../src/wlapplication_options.cc:1005
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "키패드 8"
 
-#: ../../src/wlapplication_options.cc:939
+#: ../../src/wlapplication_options.cc:1007
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "키패드 9"
 
-#: ../../src/wlapplication_options.cc:941
+#: ../../src/wlapplication_options.cc:1009
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "키패드 0"
 
-#: ../../src/wlapplication_options.cc:943
+#: ../../src/wlapplication_options.cc:1011
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "키패드 ."
 
-#: ../../src/wlapplication_options.cc:945
+#: ../../src/wlapplication_options.cc:1013
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "키패드 +"
 
-#: ../../src/wlapplication_options.cc:947
+#: ../../src/wlapplication_options.cc:1015
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "키패드 -"
 
-#: ../../src/wlapplication_options.cc:949
+#: ../../src/wlapplication_options.cc:1017
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "키패드 *"
 
-#: ../../src/wlapplication_options.cc:951
+#: ../../src/wlapplication_options.cc:1019
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "키패드 /"
 
-#: ../../src/wlapplication_options.cc:953
+#: ../../src/wlapplication_options.cc:1021
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "키패드 엔터"
 
+#: ../../src/wlapplication_options.cc:1030
+msgid "(disabled)"
+msgstr ""
+
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:966 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:1034 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:984
+#: ../../src/wlapplication_options.cc:1060
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -6744,73 +6919,88 @@ msgstr "탐험을 취소합니까?"
 msgid "Do you really want to cancel the active expedition?"
 msgstr "정말 활성화된 탐험을 취소합니까?"
 
-#. * TRANSLATORS: Number of soldiers that should attack. Used in Attack box.
-#: ../../src/wui/attack_box.cc:116 ../../src/wui/constructionsitewindow.cc:523
+#: ../../src/wui/attack_window.cc:47
+msgid "Attack"
+msgstr "공격"
+
+#. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
+#. window.
+#: ../../src/wui/attack_window.cc:167
+#: ../../src/wui/constructionsitewindow.cc:523
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u 명 군인"
 
-#: ../../src/wui/attack_box.cc:201
-msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
-msgstr "더 적은 군인을 보냅니다. 군인을 보내지 않으려면 Ctrl 키를 누르고 있으십시오"
-
-#: ../../src/wui/attack_box.cc:210
+#: ../../src/wui/attack_window.cc:246
 msgid "Number of soldiers"
 msgstr "군인들의 수"
 
-#: ../../src/wui/attack_box.cc:215
+#: ../../src/wui/attack_window.cc:252
+msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
+msgstr "더 적은 군인을 보냅니다. 군인을 보내지 않으려면 Ctrl 키를 누르고 있으십시오"
+
+#: ../../src/wui/attack_window.cc:257
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "더 많은 군인을 보냅니다. 가능한 많은 군인들을 보내려면 Ctrl 키를 누르고 있으십시오"
 
-#: ../../src/wui/attack_box.cc:220
+#: ../../src/wui/attack_window.cc:261
 msgid "Start attack"
 msgstr "공격 시작"
 
-#: ../../src/wui/attack_box.cc:234
+#: ../../src/wui/attack_window.cc:280
 msgid "Attackers:"
 msgstr "공격자들:"
 
-#: ../../src/wui/attack_box.cc:240
+#: ../../src/wui/attack_window.cc:286
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "군인을 클릭하여 공격자 목록에서 그를 제거하십시오"
 
-#: ../../src/wui/attack_box.cc:242
+#: ../../src/wui/attack_window.cc:288
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "목록에서 모든 군인들을 제거하려면 컨트롤 키를 누르십시오"
 
-#: ../../src/wui/attack_box.cc:243
+#: ../../src/wui/attack_window.cc:289
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "쉬프트 키를 누른 상태에서 가리키는 군인까지 모든 군인을 제거하십시오"
 
-#: ../../src/wui/attack_box.cc:251
+#: ../../src/wui/attack_window.cc:297
 msgid "Not attacking:"
 msgstr "공격하지 않음:"
 
-#: ../../src/wui/attack_box.cc:256
+#: ../../src/wui/attack_window.cc:302
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "군인을 눌러 공격자 목록에 추가하십시오"
 
-#: ../../src/wui/attack_box.cc:258
+#: ../../src/wui/attack_window.cc:304
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "모든 군인을 목록에 추가하려면 Ctrl 키를 누르고 선택하십시오"
 
-#: ../../src/wui/attack_box.cc:259
+#: ../../src/wui/attack_window.cc:305
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "Shift 키를 누른 상태에서 모든 군인을 가리키는 군인까지 추가하십시오"
 
-#: ../../src/wui/attack_box.cc:268
+#: ../../src/wui/attack_window.cc:315
 msgid "Destroy target"
 msgstr "대상을 파괴"
 
-#: ../../src/wui/attack_box.cc:269
+#: ../../src/wui/attack_window.cc:316
 msgid "Destroy the target building instead of conquering it"
 msgstr "목표 건물을 정복하는 대신 파괴"
 
+#: ../../src/wui/attack_window.cc:327 ../../src/wui/buildingwindow.cc:391
+#: ../../src/wui/fieldaction.cc:501 ../../src/wui/shipwindow.cc:144
+msgid "Show Debug Window"
+msgstr "디버그 창 확인"
+
+#: ../../src/wui/attack_window.cc:331 ../../src/wui/buildingwindow.cc:407
+msgid "Center view on this"
+msgstr "중앙 시야로 이동"
+
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_box.cc:358 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:430 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:482
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -6920,7 +7110,7 @@ msgstr "중지"
 msgid "Enhance to %s"
 msgstr "%s 로 향상"
 
-#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:101
+#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/fieldaction.cc:99
 msgid "Construction costs:"
 msgstr "건설 비용:"
 
@@ -6936,18 +7126,9 @@ msgstr "해체"
 msgid "Returns:"
 msgstr "반납:"
 
-#: ../../src/wui/buildingwindow.cc:391 ../../src/wui/fieldaction.cc:524
-#: ../../src/wui/shipwindow.cc:144
-msgid "Show Debug Window"
-msgstr "디버그 창 확인"
-
 #: ../../src/wui/buildingwindow.cc:400
 msgid "Watch the scout"
 msgstr "정찰을 감시"
-
-#: ../../src/wui/buildingwindow.cc:407
-msgid "Center view on this"
-msgstr "중앙 시야로 이동"
 
 #: ../../src/wui/buildingwindow.cc:638
 msgid "Hide work area"
@@ -7110,123 +7291,119 @@ msgstr "프로필 저장"
 msgid "Existing Profiles"
 msgstr "이미 있는 프로필"
 
-#: ../../src/wui/fieldaction.cc:234
+#: ../../src/wui/fieldaction.cc:224
 msgid "Build small building"
 msgstr "작은 건물 짓기"
 
-#: ../../src/wui/fieldaction.cc:235
+#: ../../src/wui/fieldaction.cc:225
 msgid "Build big building"
 msgstr "큰 건물 짓기"
 
-#: ../../src/wui/fieldaction.cc:235
+#: ../../src/wui/fieldaction.cc:225
 msgid "Build medium building"
 msgstr "중간 건물 짓기"
 
-#: ../../src/wui/fieldaction.cc:236
+#: ../../src/wui/fieldaction.cc:226
 msgid "Build port building"
 msgstr "항구 건물 짓기"
 
-#: ../../src/wui/fieldaction.cc:267
+#: ../../src/wui/fieldaction.cc:256
 msgid "Action"
 msgstr "행동"
 
-#: ../../src/wui/fieldaction.cc:395
+#: ../../src/wui/fieldaction.cc:382
 msgid "Marked for removal by a worker – click to unmark"
 msgstr "일꾼이 제거하도록 표시했습니다 – 표시를 해제하려면 클릭하십시오"
 
-#: ../../src/wui/fieldaction.cc:396 ../../src/wui/fieldaction.cc:403
+#: ../../src/wui/fieldaction.cc:383 ../../src/wui/fieldaction.cc:390
 msgid "Immovable Actions"
 msgstr "부동산 행동"
 
-#: ../../src/wui/fieldaction.cc:402
+#: ../../src/wui/fieldaction.cc:389
 msgid "Mark this immovable for timely removal by a suited worker"
 msgstr "적합한 일꾼이 제때에 제거할 수 있도록 이 부동 상태를 표시하십시오"
 
-#: ../../src/wui/fieldaction.cc:423 ../../src/wui/fieldaction.cc:529
+#: ../../src/wui/fieldaction.cc:410 ../../src/wui/fieldaction.cc:506
 msgid "Build road"
 msgstr "땅길 건설"
 
-#: ../../src/wui/fieldaction.cc:427
+#: ../../src/wui/fieldaction.cc:414
 msgid "Build waterway"
 msgstr "물길 만들기"
 
-#: ../../src/wui/fieldaction.cc:434
+#: ../../src/wui/fieldaction.cc:421
 msgid "Destroy this flag"
 msgstr "깃발을 파괴"
 
-#: ../../src/wui/fieldaction.cc:441
+#: ../../src/wui/fieldaction.cc:428
 msgid "Configure this flag’s economy"
 msgstr "이 깃발의 경제를 구성"
 
-#: ../../src/wui/fieldaction.cc:444
+#: ../../src/wui/fieldaction.cc:431
 msgid "Send geologist to explore site"
 msgstr "지질학자를 탐사 장소로 파견"
 
-#: ../../src/wui/fieldaction.cc:450 ../../src/wui/fieldaction.cc:470
+#: ../../src/wui/fieldaction.cc:437 ../../src/wui/fieldaction.cc:457
 msgid "Send scout to explore surroundings"
 msgstr "정찰대를 보내 주변을 탐색합니다"
 
 #. * TRANSLATORS: This string is used only when the name of the tribe’s scout
 #. house/hut is unknown.
-#: ../../src/wui/fieldaction.cc:462
+#: ../../src/wui/fieldaction.cc:449
 msgid ""
 "You need to connect this flag to a scouting building before you can send a "
 "scout here."
 msgstr "여기에 정찰대를 보내려면 먼저 이 깃발을 정찰대 건물에 연결해야 합니다."
 
-#: ../../src/wui/fieldaction.cc:491
+#: ../../src/wui/fieldaction.cc:478
 msgid "Place a flag"
 msgstr "깃발 건설"
 
-#: ../../src/wui/fieldaction.cc:496
+#: ../../src/wui/fieldaction.cc:483
 msgid "Destroy a road"
 msgstr "땅길을 파괴"
 
-#: ../../src/wui/fieldaction.cc:501
+#: ../../src/wui/fieldaction.cc:488
 msgid "Destroy a waterway"
 msgstr "물길을 파괴"
 
-#: ../../src/wui/fieldaction.cc:519
+#: ../../src/wui/fieldaction.cc:496
 msgid "Watch field in a separate window"
 msgstr "분리된 창에 지역 주시하기"
 
-#: ../../src/wui/fieldaction.cc:532 ../../src/wui/watchwindow.cc:52
+#: ../../src/wui/fieldaction.cc:509 ../../src/wui/watchwindow.cc:52
 msgid "Watch"
 msgstr "주시하기"
 
-#: ../../src/wui/fieldaction.cc:553
-msgid "Attack"
-msgstr "공격"
-
-#: ../../src/wui/fieldaction.cc:670
+#: ../../src/wui/fieldaction.cc:625
 msgid "Build mines"
 msgstr "광산 건설"
 
-#: ../../src/wui/fieldaction.cc:684 ../../src/wui/fieldaction.cc:707
+#: ../../src/wui/fieldaction.cc:639 ../../src/wui/fieldaction.cc:662
 msgid "Build flag"
 msgstr "깃발 건설"
 
-#: ../../src/wui/fieldaction.cc:688
+#: ../../src/wui/fieldaction.cc:643
 msgid "Cancel road"
 msgstr "땅길 취소"
 
-#: ../../src/wui/fieldaction.cc:695
+#: ../../src/wui/fieldaction.cc:650
 msgid "Cancel road and start building waterway"
 msgstr "땅길을 취소하고 물길을 만들기 시작합니다"
 
-#: ../../src/wui/fieldaction.cc:699
+#: ../../src/wui/fieldaction.cc:654
 msgid "Build roads"
 msgstr "땅길 건설"
 
-#: ../../src/wui/fieldaction.cc:711
+#: ../../src/wui/fieldaction.cc:666
 msgid "Cancel waterway"
 msgstr "물길을 취소"
 
-#: ../../src/wui/fieldaction.cc:714
+#: ../../src/wui/fieldaction.cc:669
 msgid "Cancel waterway and start building road"
 msgstr "물길을 취소하고 땅길을 만들기 시작합니다"
 
-#: ../../src/wui/fieldaction.cc:717
+#: ../../src/wui/fieldaction.cc:672
 msgid "Build waterways"
 msgstr "물길 만들기"
 
@@ -7684,49 +7861,49 @@ msgid "Show controls"
 msgstr "제어를 표시"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:131
+#: ../../src/wui/interactive_base.cc:132
 msgid "Map View"
 msgstr "지도 보기"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Hide Minimap"
 msgstr "작은 지도 숨김"
 
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Show Minimap"
 msgstr "작은 지도 표시"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:288
+#: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
 msgstr "확대"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:294
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:299
 msgid "Zoom –"
 msgstr "축소"
 
-#: ../../src/wui/interactive_base.cc:728
+#: ../../src/wui/interactive_base.cc:729
 #, c-format
 msgid "Road length: %u"
 msgstr "땅길 길이: %u"
 
-#: ../../src/wui/interactive_base.cc:730
+#: ../../src/wui/interactive_base.cc:731
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "물길 길이: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1562
+#: ../../src/wui/interactive_base.cc:1566
 msgid "Failed saving screenshot!"
 msgstr "화면 갈무리를 저장하지 못했습니다!"
 
-#: ../../src/wui/interactive_base.cc:1566
+#: ../../src/wui/interactive_base.cc:1570
 msgid "Screenshot saved"
 msgstr "화면 갈무리가 저장됨"
 
@@ -7823,25 +8000,25 @@ msgid "Pause the Game"
 msgstr "놀이를 일시정지"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
+#. * TRANSLATORS: An entry in the game's statistics menu
+#: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:308
+#: ../../src/wui/interactive_player.cc:310
 #: ../../src/wui/militarysitewindow.cc:41 ../../src/wui/warehousewindow.cc:288
 msgid "Soldiers"
 msgstr "군인"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:41
+#: ../../src/wui/interactive_player.cc:315 ../../src/wui/stock_menu.cc:41
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "재고"
@@ -7849,17 +8026,17 @@ msgstr "재고"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:371
+#: ../../src/wui/interactive_player.cc:373
 msgid "Hide Workarea Overlaps"
 msgstr "작업 영역 겹침을 숨김"
 
-#: ../../src/wui/interactive_player.cc:377
+#: ../../src/wui/interactive_player.cc:379
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "건설 현장을 배치 할 때 겹치는 작업 영역을 표시할지 여부를 전환합니다"
 
-#: ../../src/wui/interactive_player.cc:459
+#: ../../src/wui/interactive_player.cc:461
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

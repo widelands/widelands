@@ -233,7 +233,7 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-11-12 18:15+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -793,6 +793,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Mystická země plná různorodých krajin, které jsou všechny protkány několika velkými řekami."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Zelená pláň"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný, moc propůjčující poklad – Zelenou pláň. Je nesmírně těžké ji dobýt, ale snadné ji zase ztratit. Jestli ji chceš pro sebe, měj se před druhými kmeny na pozoru."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Písečná úžina"
@@ -857,18 +884,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Říká se, že neproniknutelné severní země odstrašily i ty nejodvážnější osadníky a nejudatnější z udatných válečníků. Rozlehlé a staré lesy plné velké a dravé zvěře, protknuté mokřinami a kopci, jsou opředeny tajemstvím. Ti, kteří se odtud dokázali vrátit, mluvili o ohromných stavbách pokrytých rytinami a zlatem pocházejícím z majestátních pohoří, která lze nalézt někde v tamní divočině. Po několika dekádách zůstaly z tamního zlatého věku jen rozpadající se ruiny pokryté mechem a zarostlé stromy. Jejich tvary dávají jen tušit zručnost a umění dávných stavitelů. Nikdo neví, kam a ani proč se vytratili. Lidé říkají, že cestě k bohatství nyní nic nebrání. Přesto mnozí zahynou roztrháni vlky, pohlceni bažinami… a v obklíčení nenávistných kmenů."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Zelená pláň"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný, moc propůjčující poklad – Zelenou pláň. Je nesmírně těžké ji dobýt, ale snadné ji zase ztratit. Jestli ji chceš pro sebe, měj se před druhými kmeny na pozoru."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

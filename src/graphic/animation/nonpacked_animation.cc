@@ -41,7 +41,7 @@ NonPackedAnimation::MipMapEntry IMPLEMENTATION
 */
 
 NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::string> files)
-   : Animation::MipMapEntry(), image_files(std::move(files)) {
+   : image_files(std::move(files)) {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError(
 		   "Animation without image files. For a scale of 1.0, the template should look similar to "
