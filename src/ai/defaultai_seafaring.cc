@@ -477,7 +477,7 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 	return RNG::static_rand(20) < 10 ? Widelands::IslandExploreDirection::kClockwise :
-                                       Widelands::IslandExploreDirection::kCounterClockwise;
+                                      Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires

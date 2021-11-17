@@ -110,20 +110,18 @@ std::string generate_random_uuid() {
 	RNG temp_rng;
 	int64_t seed = clock();
 	for (uint32_t& val_ref : values) {
-		seed += std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now()).time_since_epoch().count();
+		seed += std::chrono::time_point_cast<std::chrono::nanoseconds>(
+		           std::chrono::high_resolution_clock::now())
+		           .time_since_epoch()
+		           .count();
 		temp_rng.seed(seed % 0xfedcba98);
 		val_ref = temp_rng.rand();
 	}
 
 	char buffer[16 * 4 + 4 + 1];
-	snprintf(buffer, sizeof(buffer), "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
-		values[0] & 0xffff,
-		values[1] & 0xffff,
-		values[2] & 0xffff,
-		values[3] & 0xffff,
-		(values[0] & 0xffff0000) >> 16,
-		(values[1] & 0xffff0000) >> 16,
-		(values[2] & 0xffff0000) >> 16,
-		(values[3] & 0xffff0000) >> 16);
+	snprintf(buffer, sizeof(buffer), "%04x%04x-%04x-%04x-%04x-%04x%04x%04x", values[0] & 0xffff,
+	         values[1] & 0xffff, values[2] & 0xffff, values[3] & 0xffff,
+	         (values[0] & 0xffff0000) >> 16, (values[1] & 0xffff0000) >> 16,
+	         (values[2] & 0xffff0000) >> 16, (values[3] & 0xffff0000) >> 16);
 	return buffer;
 }

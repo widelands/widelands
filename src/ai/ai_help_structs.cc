@@ -766,8 +766,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && RNG::static_rand(8) == 0 &&
-	    ai_type == AiType::kNormal) {
+	if (ai_training_mode_ && RNG::static_rand(8) == 0 && ai_type == AiType::kNormal) {
 		probability /= 3;
 		preferred_numbers_count = 5;
 		wild_card = true;
