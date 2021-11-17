@@ -19,6 +19,8 @@
 
 #include "base/random.h"
 
+#include <chrono>
+
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -106,8 +108,10 @@ uint32_t RNG::static_rand() {
 std::string generate_random_uuid() {
 	uint32_t values[4];
 	RNG temp_rng;
+	int64_t seed = clock();
 	for (uint32_t& val_ref : values) {
-		temp_rng.seed(clock());
+		seed += std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now()).time_since_epoch().count();
+		temp_rng.seed(seed % 0xfedcba98);
 		val_ref = temp_rng.rand();
 	}
 
