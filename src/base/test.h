@@ -129,8 +129,11 @@ inline bool compare(const unsigned a, const int b) {
 inline bool compare(const unsigned long a, const int b) {
 	return static_cast<long long>(a) == b;
 }
-inline bool compare(const float a, const float b) {
+template <typename T> inline bool compare(const float a, const T b) {
 	return std::abs(a - b) < 0.001f;
+}
+template <typename T> inline bool compare(const double a, const T b) {
+	return std::abs(a - b) < 0.001;
 }
 
 #define check_equal(a, b) do_check_equal(__FILE__, __LINE__, a, b)
