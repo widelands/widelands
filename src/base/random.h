@@ -20,6 +20,7 @@
 #ifndef WL_BASE_RANDOM_H
 #define WL_BASE_RANDOM_H
 
+#include <cassert>
 #include <string>
 
 extern const uint32_t rng_sbox[256];
@@ -29,6 +30,9 @@ class StreamWrite;
 
 struct RNG {
 	RNG();
+	explicit RNG(const uint32_t s) : RNG() {
+		seed(s);
+	}
 
 	void seed(uint32_t);
 
@@ -36,6 +40,12 @@ struct RNG {
 
 	void read_state(StreamRead&);
 	void write_state(StreamWrite&);
+
+	static uint32_t static_rand();
+	static inline uint32_t static_rand(const uint32_t exclusive_upper_bound) {
+		assert(exclusive_upper_bound > 1);
+		return static_rand() % exclusive_upper_bound;
+	}
 
 private:
 	uint32_t state0;

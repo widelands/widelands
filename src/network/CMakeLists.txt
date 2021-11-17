@@ -3,8 +3,6 @@ wl_library(network
     bufferedconnection.cc
     bufferedconnection.h
     constants.h
-    crypto.h
-    crypto.cc
     internet_gaming.cc
     internet_gaming.h
     internet_gaming_messages.cc
@@ -70,6 +68,7 @@ wl_library(network
     map_io_map_loader
     scripting_lua_interface
     scripting_lua_table
+    third_party_sha1
     ui_basic
     ui_fsmenu
     widelands_ball_of_mud

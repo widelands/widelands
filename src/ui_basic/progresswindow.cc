@@ -29,6 +29,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -139,7 +140,7 @@ void ProgressWindow::set_background(const std::string& file_name) {
 			// choose random theme
 			const std::set<std::string> dirs = g_fs->list_directory(dir);
 			auto it = dirs.begin();
-			std::advance(it, std::rand() % dirs.size());  // NOLINT
+			std::advance(it, RNG::static_rand(dirs.size()));
 			dir = *it;
 		} else if (g_fs->is_directory(dir + theme_)) {
 			dir += theme_;
@@ -155,7 +156,7 @@ void ProgressWindow::set_background(const std::string& file_name) {
 			background_ = "images/logos/wl-ico-128.png";
 		} else {
 			auto it = images.begin();
-			std::advance(it, std::rand() % images.size());  // NOLINT
+			std::advance(it, RNG::static_rand(images.size()));
 			background_ = *it;
 		}
 	} else {

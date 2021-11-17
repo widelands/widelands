@@ -19,12 +19,6 @@
 
 #include "base/random.h"
 
-#include <random>
-
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/uuid_generators.hpp>
-#include <boost/uuid/uuid_io.hpp>
-
 #include "base/wexception.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -104,7 +98,28 @@ void RNG::write_state(StreamWrite& sw) {
 	sw.unsigned_32(state1);
 }
 
+static RNG static_rng_(clock());
+uint32_t RNG::static_rand() {
+	return static_rng_.rand();
+}
+
 std::string generate_random_uuid() {
-	static boost::uuids::random_generator gen;
-	return boost::uuids::to_string(gen());
+	uint32_t values[4];
+	RNG temp_rng;
+	for (uint32_t& val_ref : values) {
+		temp_rng.seed(clock());
+		val_ref = temp_rng.rand();
+	}
+
+	char buffer[16 * 4 + 4 + 1];
+	snprintf(buffer, sizeof(buffer), "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
+		values[0] & 0xffff,
+		values[1] & 0xffff,
+		values[2] & 0xffff,
+		values[3] & 0xffff,
+		(values[0] & 0xffff0000) >> 16,
+		(values[1] & 0xffff0000) >> 16,
+		(values[2] & 0xffff0000) >> 16,
+		(values[3] & 0xffff0000) >> 16);
+	return buffer;
 }

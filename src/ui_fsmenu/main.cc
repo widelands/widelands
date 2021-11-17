@@ -253,7 +253,7 @@ void MainMenu::update_template() {
 		images_.push_back("images/logos/wl-ico-128.png");
 	}
 
-	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
+	last_image_ = draw_image_ = RNG::static_rand(images_.size());
 	last_image_exchange_time_ = 0;
 }
 
@@ -678,7 +678,7 @@ void MainMenu::draw(RenderTarget& r) {
 		last_image_ = draw_image_;
 		if (images_.size() > 1) {
 			do {
-				draw_image_ = std::rand() % images_.size();  // NOLINT
+				draw_image_ = RNG::static_rand(images_.size());
 			} while (draw_image_ == last_image_);
 		}
 		last_image_exchange_time_ = time;

@@ -444,9 +444,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	set_input_grab(get_config_bool("inputgrab", false));
 
-	// seed random number generator used for random tribe selection
-	std::srand(time(nullptr));
-
 	// Make sure we didn't forget to read any global option
 	check_config_used();
 

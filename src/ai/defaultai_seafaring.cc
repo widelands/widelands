@@ -476,8 +476,8 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 }
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
-	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :  // NOLINT
-                                  Widelands::IslandExploreDirection::kCounterClockwise;
+	return RNG::static_rand(20) < 10 ? Widelands::IslandExploreDirection::kClockwise :
+                                       Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -507,7 +507,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		                  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random
-		if (std::rand() % 8 < spot_score) {  // NOLINT
+		if (RNG::static_rand(8) < spot_score) {
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
@@ -605,15 +605,15 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
 	// If only open sea (no unexplored sea) is found, we don't always divert the ship
-	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {  // NOLINT
+	if (new_teritory_directions.empty() && RNG::static_rand(100) < 80) {
 		return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
-            new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
-            possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
+            new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
+            possible_directions.at(RNG::static_rand(possible_directions.size()));
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
