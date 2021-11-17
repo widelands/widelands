@@ -325,7 +325,9 @@ endif()
 if(NOT MSVC)
   # Turn some warnings into errors.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")  # This is a false-positive on g++5
+  # These generate false positives on g++ 5 and 6
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
   if (APPLE)  # Our Mac CI needs these
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
