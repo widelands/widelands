@@ -51,7 +51,7 @@
  *
  *     TESTSUITE_START(name)
  *     // testcases here
- *     TESTSUITE_END
+ *     TESTSUITE_END()
  *
  * where `name` is the unique name of the testsuite.
  * A testcase is declared as
@@ -78,6 +78,7 @@
 namespace WLTestsuite {
 using Testcases = std::map<std::string, void (*)()>;
 using Testsuite = std::map<std::string, Testcases>;
+extern Testsuite all_testsuites_;
 
 struct InternalTestcaseInserter {
 	explicit InternalTestcaseInserter(Testcases& tc, const std::string& name, void (*fn)()) {
@@ -148,7 +149,7 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 	namespace WLTestsuite {                                                                         \
 	Testsuite all_testsuites_;                                                                      \
 	namespace WLTestsuite_##name {                                                                  \
-		int main() {                                                                                 \
+		static int main() {                                                                          \
 			bool errors = false;                                                                      \
 			for (const auto& suite : all_testsuites_) {                                               \
 				for (const auto& test : suite.second) {                                                \
@@ -171,7 +172,6 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 
 #define TESTSUITE_START(name)                                                                      \
 	namespace WLTestsuite {                                                                         \
-	extern Testsuite all_testsuites_;                                                               \
 	namespace WLTestsuite_##name {                                                                  \
 		static Testcases& all_testcases_ = all_testsuites_[#name];
 
