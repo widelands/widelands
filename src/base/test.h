@@ -76,22 +76,20 @@
  */
 
 namespace WLTestsuite {
-using Testcases = std::map<std::string, void(*)()>;
+using Testcases = std::map<std::string, void (*)()>;
 using Testsuite = std::map<std::string, Testcases>;
 
 struct InternalTestcaseInserter {
-	explicit InternalTestcaseInserter(Testcases& tc, const std::string& name, void(*fn)()) {
+	explicit InternalTestcaseInserter(Testcases& tc, const std::string& name, void (*fn)()) {
 		std::cout << "Adding testcase " << name << std::endl;
 		tc[name] = fn;
 	}
 };
 
-template <typename T>
-inline void log_value(std::ostringstream& oss, T* t) {
+template <typename T> inline void log_value(std::ostringstream& oss, T* t) {
 	oss << as_string(reinterpret_cast<uint64_t>(t));
 }
-template <typename T>
-inline void log_value(std::ostringstream& oss, const T& t) {
+template <typename T> inline void log_value(std::ostringstream& oss, const T& t) {
 	oss << as_string(t);
 }
 inline void log_value(std::ostringstream& oss, const bool t) {
@@ -107,24 +105,20 @@ inline void log_value(std::ostringstream& oss, char* str) {
 	oss << str;
 }
 
-#define UNLOGGABLE_VALUE(T)  \
-namespace WLTestsuite {  \
-template<>  \
-inline void log_value<T>(std::ostringstream& oss, const T&) {  \
-    oss << "<unloggable>";  \
-}  \
-}
+#define UNLOGGABLE_VALUE(T)                                                                        \
+	namespace WLTestsuite {                                                                         \
+	template <> inline void log_value<T>(std::ostringstream & oss, const T&) {                      \
+		oss << "<unloggable>";                                                                       \
+	}                                                                                               \
+	}
 
-template <typename T1, typename T2>
-inline bool compare(const T1 a, const T2 b) {
+template <typename T1, typename T2> inline bool compare(const T1 a, const T2 b) {
 	return a == b;
 }
-template <typename T>
-inline bool compare(const char* a, const T b) {
+template <typename T> inline bool compare(const char* a, const T b) {
 	return std::string(a) == b;
 }
-template <typename T>
-inline bool compare(char* a, const T b) {
+template <typename T> inline bool compare(char* a, const T b) {
 	return std::string(a) == b;
 }
 inline bool compare(const unsigned a, const int b) {
@@ -150,43 +144,45 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 }
 }  // namespace WLTestsuite
 
-#define TEST_EXECUTABLE(name)  \
-	namespace WLTestsuite {  \
-	Testsuite all_testsuites_;  \
-	namespace WLTestsuite_##name {  \
-	int main() {  \
-		bool errors = false;  \
-		for (const auto& suite : all_testsuites_) {  \
-			for (const auto& test : suite.second) {  \
-				try {  \
-					test.second();  \
-				} catch (const std::exception& e) {  \
-					errors = true;  \
-					std::cout << "Error in " << suite.first << "::" << test.first << ": " << e.what() << std::endl;  \
-				}  \
-			}  \
-		}  \
-		return errors ? 3 : 0;  \
-	}  \
-	}  \
-	} \
-	int main(int, char**) {  \
-		return WLTestsuite::WLTestsuite_##name::main();  \
+#define TEST_EXECUTABLE(name)                                                                      \
+	namespace WLTestsuite {                                                                         \
+	Testsuite all_testsuites_;                                                                      \
+	namespace WLTestsuite_##name {                                                                  \
+		int main() {                                                                                 \
+			bool errors = false;                                                                      \
+			for (const auto& suite : all_testsuites_) {                                               \
+				for (const auto& test : suite.second) {                                                \
+					try {                                                                               \
+						test.second();                                                                   \
+					} catch (const std::exception& e) {                                                 \
+						errors = true;                                                                   \
+						std::cout << "Error in " << suite.first << "::" << test.first << ": "            \
+						          << e.what() << std::endl;                                              \
+					}                                                                                   \
+				}                                                                                      \
+			}                                                                                         \
+			return errors ? 3 : 0;                                                                    \
+		}                                                                                            \
+	}                                                                                               \
+	}                                                                                               \
+	int main(int, char**) {                                                                         \
+		return WLTestsuite::WLTestsuite_##name::main();                                              \
 	}
 
-#define TESTSUITE_START(name)  \
-	namespace WLTestsuite {  \
-	extern Testsuite all_testsuites_;  \
-	namespace WLTestsuite_##name {  \
-	static Testcases& all_testcases_ = all_testsuites_[#name];
+#define TESTSUITE_START(name)                                                                      \
+	namespace WLTestsuite {                                                                         \
+	extern Testsuite all_testsuites_;                                                               \
+	namespace WLTestsuite_##name {                                                                  \
+		static Testcases& all_testcases_ = all_testsuites_[#name];
 
-#define TESTCASE(name)  \
-	static void testcase_##name();  \
-	static const InternalTestcaseInserter _internal_testcase_inserter_##name(all_testcases_, #name, &testcase_##name); \
+#define TESTCASE(name)                                                                             \
+	static void testcase_##name();                                                                  \
+	static const InternalTestcaseInserter _internal_testcase_inserter_##name(                       \
+	   all_testcases_, #name, &testcase_##name);                                                    \
 	static void testcase_##name()
 
-#define TESTSUITE_END() \
-	}  \
+#define TESTSUITE_END()                                                                            \
+	}                                                                                               \
 	}  // namespace WLTestsuite
 
 #endif  // end of include guard: WL_BASE_TEST_H

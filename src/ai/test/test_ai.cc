@@ -31,18 +31,15 @@ TESTCASE(flag_distance_soft_expiry) {
 	check_equal(tmp_wh, 3);
 
 	// setting longer distance below soft_expiry time
-	check_equal(
-	   fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 4), false);
+	check_equal(fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 4), false);
 	// distance to 3 not updated
-	check_equal(
-	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 2);
+	check_equal(fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 2);
 	check_equal(tmp_wh, 3);
 
 	// now setting after soft expiry
 	check_equal(fw.set_distance(1, 1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 6),
-	                  true);  // distance set to 1
-	check_equal(
-	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 1);
+	            true);  // distance set to 1
+	check_equal(fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 1);
 	check_equal(tmp_wh, 6);
 }
 TESTCASE(flag_distance_below_expiry)
@@ -68,8 +65,7 @@ TESTCASE(flag_distance_after_expiry)
 	check_equal(fw.set_distance(1, 2, Time(0), 3), true);
 
 	// setting longer distance below expiry time
-	check_equal(
-	   fw.set_distance(1, 3, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), 5), true);
+	check_equal(fw.set_distance(1, 3, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), 5), true);
 	check_equal(fw.get_distance(1, Time(3), &tmp_wh), 3);
 	check_equal(tmp_wh, 5);
 }
@@ -81,20 +77,17 @@ TESTCASE(flag_distance_expiration_extension)
 	uint32_t tmp_wh;
 	check_equal(fw.set_distance(1, 2, Time(0), 3), true);
 	check_equal(fw.set_distance(1, 2, Time(0), 3),
-	                  false);  // cannot reset the same distance in the same time
+	            false);  // cannot reset the same distance in the same time
 
 	// Now we are after expiration time
 	check_equal(
 	   fw.get_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), &tmp_wh), 1000);
 
 	// setting distance 2 time shortly one after another
-	check_equal(
-	   fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), 5), true);
-	check_equal(
-	   fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 10), 5), true);
+	check_equal(fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), 5), true);
+	check_equal(fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 10), 5), true);
 	// current expiry_time should be 2*AI::kFlagDistanceExpirationPeriod + 10
-	check_equal(
-	   fw.get_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), &tmp_wh), 2);
+	check_equal(fw.get_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), &tmp_wh), 2);
 	check_equal(tmp_wh, 5);
 	check_equal(
 	   fw.get_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get() + 15), &tmp_wh), 1000);
@@ -128,13 +121,13 @@ TESTCASE(flag_distance_old_removal)
 	AI::FlagWarehouseDistances fw;
 	fw.set_distance(1, 2, Time(0), 3);
 	check_equal(fw.count(), 1);
-	check_equal(fw.remove_old_flag(Time(AI::kOldFlagRemoveTime.get() +
-	                                          AI::kFlagDistanceExpirationPeriod.get())),
-	                  false);
+	check_equal(fw.remove_old_flag(
+	               Time(AI::kOldFlagRemoveTime.get() + AI::kFlagDistanceExpirationPeriod.get())),
+	            false);
 	check_equal(fw.count(), 1);
-	check_equal(fw.remove_old_flag(Time(AI::kOldFlagRemoveTime.get() +
-	                                          AI::kFlagDistanceExpirationPeriod.get() + 2)),
-	                  true);
+	check_equal(fw.remove_old_flag(
+	               Time(AI::kOldFlagRemoveTime.get() + AI::kFlagDistanceExpirationPeriod.get() + 2)),
+	            true);
 	check_equal(fw.count(), 0);
 }
 
@@ -171,9 +164,8 @@ TESTCASE(flag_candidate_winner_score) {
 	fc.add_flag(kTestedCoords, false, kCurFlDistToWh, 1);
 	// setting coords, dist
 	check_equal(fc.set_cur_road_distance(kTestedCoords, kCurRoadDistFlToFl), true);
-	check_equal(
-	   fc.set_cur_road_distance(1, 5), false);  // we cannot set distance to unknown flag
-	check_equal(fc.get_winner(), nullptr);      // road not possible
+	check_equal(fc.set_cur_road_distance(1, 5), false);  // we cannot set distance to unknown flag
+	check_equal(fc.get_winner(), nullptr);               // road not possible
 	// set length of possible road
 	check_equal(fc.set_road_possible(kTestedCoords, kPosRoadDist), true);
 	check_equal(fc.get_winner() != nullptr, true);
@@ -185,7 +177,7 @@ TESTCASE(flag_candidate_winner_score) {
 	check_equal(fc.get_winner()->different_economy, false);
 
 	check_equal(fc.get_winner()->score(),
-	                  +(kStartFlagToWh - kCurFlDistToWh) + (kCurRoadDistFlToFl - 2 * kPosRoadDist));
+	            +(kStartFlagToWh - kCurFlDistToWh) + (kCurRoadDistFlToFl - 2 * kPosRoadDist));
 }
 TESTCASE(flag_candidates_sorting) {
 	AI::FlagCandidates fc = AI::FlagCandidates(10);

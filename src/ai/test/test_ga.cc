@@ -54,8 +54,8 @@ TESTCASE(fneuron_position) {
 	fn.flip_bit(0);
 	check_equal(!fn.get_position(0), val0);
 	check_equal(fn.get_position(1), val1);  // should not be changed
-	check_equal(fn.get_int() != 0, true);         // Initialized as 0, so now must be different
-	fn.flip_bit(0);                               // reverting back
+	check_equal(fn.get_int() != 0, true);   // Initialized as 0, so now must be different
+	fn.flip_bit(0);                         // reverting back
 	check_equal(fn.get_int(), 0);
 }
 

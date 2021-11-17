@@ -74,7 +74,7 @@ TESTCASE(contain_start_end) {
 TESTCASE(join_strings) {
 	check_equal(join(std::vector<std::string>{"foo", "bar", "baz"}, " "), "foo bar baz");
 	check_equal(join(std::set<std::string>{"foo", "bar", "baz"}, "HelloWorld"),
-	                  "barHelloWorldbazHelloWorldfoo");
+	            "barHelloWorldbazHelloWorldfoo");
 }
 
 TESTCASE(trim_split_replace) {
