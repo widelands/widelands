@@ -627,7 +627,13 @@ std::pair<int32_t, int32_t> ProductionSite::find_worker(OPtr<Worker> w) {
  */
 void ProductionSite::try_replace_worker(const Game* game,
                                         DescriptionIndex worker_index,
-                                        WorkingPosition* wp) {
+                                        WorkingPosition* wp,
+                                        size_t iteration) {
+	if (iteration >= working_positions_.size()) {
+		// cancel recursion, something went wrong
+		log_warn("Aborting try_replace_worker() after %" PRIuS " calls.", iteration);
+		return;
+	}
 	// Search replacement worker in the same building
 	for (auto wp_repl = working_positions_.begin(); wp_repl != working_positions_.end(); ++wp_repl) {
 		if (!wp_repl->worker.is_set()) {
@@ -651,7 +657,7 @@ void ProductionSite::try_replace_worker(const Game* game,
 			molog(owner().egbase().get_gametime(), "%s promoted\n", w_repl->descr().name().c_str());
 			// Request the now missing worker instead and loop again
 			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
-			try_replace_worker(game, worker_index_repl, wp_repl.base());
+			try_replace_worker(game, worker_index_repl, wp_repl.base(), iteration + 1);
 			return;
 		}
 	}
@@ -682,7 +688,7 @@ void ProductionSite::remove_worker(Worker& w) {
 	// If the main worker was evicted, perhaps another worker is
 	// still there to perform basic tasks
 	if (upcast(Game, game, &get_owner()->egbase())) {
-		try_replace_worker(game, worker_index, wp);
+		try_replace_worker(game, worker_index, wp, 0);
 		try_start_working(*game);
 	}
 }
