@@ -20,6 +20,7 @@
 #ifndef WL_BASE_TEST_H
 #define WL_BASE_TEST_H
 
+#include <cstdlib>
 #include <cstring>
 #include <iostream>
 #include <map>
@@ -96,7 +97,7 @@ template <typename T> inline void log_value(std::ostringstream& oss, const T& t)
 inline void log_value(std::ostringstream& oss, const bool t) {
 	oss << (t ? "true" : "false");
 }
-inline void log_value(std::ostringstream& oss, nullptr_t) {
+inline void log_value(std::ostringstream& oss, std::nullptr_t) {
 	oss << "<nullptr>";
 }
 inline void log_value(std::ostringstream& oss, const char* str) {
@@ -127,6 +128,9 @@ inline bool compare(const unsigned a, const int b) {
 }
 inline bool compare(const unsigned long a, const int b) {
 	return static_cast<long long>(a) == b;
+}
+inline bool compare(const float a, const float b) {
+	return std::abs(a - b) < 0.001f;
 }
 
 #define check_equal(a, b) do_check_equal(__FILE__, __LINE__, a, b)

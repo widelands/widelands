@@ -36,8 +36,8 @@ TESTCASE(rect_and_vector) {
 	check_equal(r1.origin(), v);
 	check_equal(r2.origin(), v);
 	check_equal(r2.opposite_of_origin(), Vector2i(21, 8));
-	check_equal(abs(r1.center().x - 51.f) < 0.001f, true);
-	check_equal(abs(r1.center().y - 405.f) < 0.001f, true);
+	check_equal(r1.center().x, 51.f);
+	check_equal(r1.center().y, 405.f);
 
 	v += Vector2i(3, -8);
 	check_equal(v.x, 4);
