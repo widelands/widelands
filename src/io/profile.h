@@ -20,6 +20,7 @@
 #ifndef WL_IO_PROFILE_H
 #define WL_IO_PROFILE_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/macros.h"
@@ -107,6 +108,17 @@ public:
 	using ValueList = std::vector<Value>;
 
 	Section(Profile*, const std::string& name);
+	Section(const Section& other) {
+		operator=(other);
+	}
+
+	Section& operator=(const Section& other) {
+		profile_ = other.profile_;
+		used_ = other.used_.load();
+		section_name_ = other.section_name_;
+		values_ = other.values_;
+		return *this;
+	}
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
@@ -175,7 +187,7 @@ public:
 
 private:
 	Profile* profile_;
-	bool used_;
+	std::atomic_bool used_;
 	std::string section_name_;
 	ValueList values_;
 };
