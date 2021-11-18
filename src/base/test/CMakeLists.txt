@@ -11,9 +11,9 @@ wl_test(test_base
   DEPENDS
     base
     base_geometry
-    base_macros
     base_math
     base_md5
+    base_test
     base_times
     base_time_string
     base_utf8

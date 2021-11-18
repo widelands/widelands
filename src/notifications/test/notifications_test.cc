@@ -17,16 +17,13 @@
  *
  */
 
-#define BOOST_TEST_MODULE Notifications
-#include <boost/test/unit_test.hpp>
+#include <vector>
 
 #include "base/log.h"
-#include "base/macros.h"
+#include "base/test.h"
 #include "notifications/notifications.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
+TEST_EXECUTABLE(notifications)
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
@@ -37,9 +34,9 @@ struct SimpleNote {
 	std::string text;
 };
 
-BOOST_AUTO_TEST_SUITE(NotificationsTestSuite)
+TESTSUITE_START(NotificationsTestSuite)
 
-BOOST_AUTO_TEST_CASE(SimpleTest) {
+TESTCASE(SimpleTest) {
 #ifdef _WIN32
 	set_logging_dir();
 #endif
@@ -56,12 +53,12 @@ BOOST_AUTO_TEST_CASE(SimpleTest) {
 
 	Notifications::publish(SimpleNote("World"));
 
-	BOOST_CHECK_EQUAL(received1.size(), 2);
-	BOOST_CHECK_EQUAL("Hello", received1[0].text);
-	BOOST_CHECK_EQUAL("World", received1[1].text);
+	check_equal(received1.size(), 2);
+	check_equal("Hello", received1[0].text);
+	check_equal("World", received1[1].text);
 
-	BOOST_CHECK_EQUAL(received2.size(), 1);
-	BOOST_CHECK_EQUAL("World", received2[0].text);
+	check_equal(received2.size(), 1);
+	check_equal("World", received2[0].text);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()
