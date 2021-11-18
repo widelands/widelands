@@ -62,7 +62,7 @@ struct WareList {
 	}
 
 private:
-	std::vector<std::atomic<Quantity>> wares_;
+	std::vector<Quantity> wares_;
 };
 }  // namespace Widelands
 

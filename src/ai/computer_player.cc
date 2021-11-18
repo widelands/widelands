@@ -33,7 +33,7 @@ ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const
 }
 
 ComputerPlayer::~ComputerPlayer() {
-	thread_running_ = false;
+	thread_running_.store(false);
 	if (thread_ != nullptr) {
 		thread_->join();
 		thread_.reset(nullptr);
@@ -44,12 +44,12 @@ void ComputerPlayer::start_thread() {
 	if (thread_ != nullptr) {
 		throw wexception("Thread for AI #%u already running", static_cast<unsigned>(player_number_));
 	}
-	thread_running_ = true;
+	thread_running_.store(true);
 	thread_.reset(new std::thread(&ComputerPlayer::thread_function, this));
 }
 
 void ComputerPlayer::thread_function() {
-	while (thread_running_) {
+	while (thread_running_.load()) {
 		think();
 		SDL_Delay(kMinAIThinkDelay);
 	}

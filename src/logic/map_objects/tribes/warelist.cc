@@ -33,7 +33,7 @@ namespace Widelands {
 WareList::~WareList() {
 	for (uint32_t id = 0; id < wares_.size(); ++id) {
 		if (wares_[id]) {
-			log_warn("WareList: %i items of %i left.\n", wares_[id].load(), id);
+			log_warn("WareList: %i items of %i left.\n", wares_[id], id);
 		}
 	}
 }
@@ -91,7 +91,7 @@ void WareList::remove(const WareList& wl) {
  * Return the number of wares of a given type stored in this storage.
  */
 Quantity WareList::stock(DescriptionIndex const id) const {
-	return id < wares_.size() ? wares_[id].load() : 0;
+	return id < wares_.size() ? wares_[id] : 0;
 }
 
 /**
