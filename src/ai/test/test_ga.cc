@@ -19,50 +19,44 @@
 
 // Unittests related to Genetic Algorithm
 
-#include <boost/test/unit_test.hpp>
-
 #include "ai/ai_help_structs.h"
-#include "base/macros.h"
+#include "base/test.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
-
-BOOST_AUTO_TEST_SUITE(ai_ga)
+TESTSUITE_START(ai_ga)
 
 // AI::Neuron presents a curve, of integers in range (0-20) (21 values)
-BOOST_AUTO_TEST_CASE(neuron) {
+TESTCASE(neuron) {
 	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
-	BOOST_CHECK_EQUAL(n1.get_id(), 0);
-	BOOST_CHECK_EQUAL(n1.get_weight(), -50);
-	BOOST_CHECK_EQUAL(n1.get_result(10), -25);
-	BOOST_CHECK_EQUAL(n1.get_result(20), -50);
-	BOOST_CHECK_EQUAL(n1.get_result_safe(100), -50);
+	check_equal(n1.get_id(), 0);
+	check_equal(n1.get_weight(), -50);
+	check_equal(n1.get_result(10), -25);
+	check_equal(n1.get_result(20), -50);
+	check_equal(n1.get_result_safe(100), -50);
 }
 
-BOOST_AUTO_TEST_CASE(neuron_updated_weight) {
+TESTCASE(neuron_updated_weight) {
 	AI::Neuron n1 = AI::Neuron(-50, 0, 0);
 	n1.set_weight(50);
 	n1.recalculate();
-	BOOST_CHECK_EQUAL(n1.get_id(), 0);
-	BOOST_CHECK_EQUAL(n1.get_weight(), 50);
-	BOOST_CHECK_EQUAL(n1.get_result(10), 25);
-	BOOST_CHECK_EQUAL(n1.get_result_safe(100), 50);
+	check_equal(n1.get_id(), 0);
+	check_equal(n1.get_weight(), 50);
+	check_equal(n1.get_result(10), 25);
+	check_equal(n1.get_result_safe(100), 50);
 }
 
 // AI::FNeuron is uint32_t that serves as 32 bools, that can be set and get independently
-BOOST_AUTO_TEST_CASE(fneuron_position) {
+TESTCASE(fneuron_position) {
 	AI::FNeuron fn = AI::FNeuron(0, 0);
-	BOOST_CHECK_EQUAL(fn.get_int(), 0);  // Initialized as 0, so must be still 0
+	check_equal(fn.get_int(), 0u);  // Initialized as 0, so must be still 0
 	const bool val0 = fn.get_position(0);
 	const bool val1 = fn.get_position(1);
-	BOOST_CHECK_EQUAL(fn.get_position(0), val0);
+	check_equal(fn.get_position(0), val0);
 	fn.flip_bit(0);
-	BOOST_CHECK_EQUAL(!fn.get_position(0), val0);
-	BOOST_CHECK_EQUAL(fn.get_position(1), val1);  // should not be changed
-	BOOST_CHECK(fn.get_int() != 0);               // Initialized as 0, so now must be different
-	fn.flip_bit(0);                               // reverting back
-	BOOST_CHECK_EQUAL(fn.get_int(), 0);
+	check_equal(!fn.get_position(0), val0);
+	check_equal(fn.get_position(1), val1);  // should not be changed
+	check_equal(fn.get_int() != 0, true);   // Initialized as 0, so now must be different
+	fn.flip_bit(0);                         // reverting back
+	check_equal(fn.get_int(), 0);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()
