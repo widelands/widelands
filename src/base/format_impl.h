@@ -369,7 +369,10 @@ template <typename Number> struct NumberNodeT : FormatNode {
 
 		size_t required_width = nr_digits;
 		if (arg < 0 || flags_ & kNumberSign) {
-			required_width += localize ? (arg == 0) ? kPlusMinusSignLength : (arg < 0) ? kLocalizedMinusSignLength : 1 : 1;
+			required_width += localize ? (arg == 0) ? kPlusMinusSignLength :
+			                             (arg < 0)  ? kLocalizedMinusSignLength :
+                                                   1 :
+                                      1;
 		}
 		if (required_width < min_width_) {
 			required_width = min_width_ - required_width;
