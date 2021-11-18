@@ -774,8 +774,8 @@ private:
 struct MilitarySiteSizeObserver {
 	MilitarySiteSizeObserver();
 
-	uint16_t in_construction;
-	uint16_t finished;
+	std::atomic<uint16_t> in_construction;
+	std::atomic<uint16_t> finished;
 };
 
 // this represents a scheduler task

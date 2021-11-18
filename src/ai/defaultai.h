@@ -332,7 +332,7 @@ private:
 	MineFieldsObserver mine_fields_stat;
 
 	// used for statistics of buildings
-	uint32_t numof_psites_in_constr;
+	std::atomic<uint32_t> numof_psites_in_constr;
 	uint32_t num_ports;
 	uint16_t numof_warehouses_;
 	uint16_t numof_warehouses_in_const_;

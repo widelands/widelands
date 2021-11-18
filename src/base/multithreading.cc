@@ -130,6 +130,8 @@ static std::string to_string(const MutexLock::ID i) {
 		return "IBaseVisualizations";
 	case MutexLock::ID::kI18N:
 		return "i18n";
+	case MutexLock::ID::kAI:
+		return "AI";
 	}
 	return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 }

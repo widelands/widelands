@@ -3790,6 +3790,7 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	}
 
 	if (economies.size() >= 2) {  // rotating economies
+		MutexLock m(MutexLock::ID::kAI);
 		economies.push_back(economies.front());
 		economies.pop_front();
 	}
@@ -6517,9 +6518,12 @@ void DefaultAI::lose_immovable(const Widelands::PlayerImmovable& pi) {
 	} else if (upcast(Widelands::Flag const, flag, &pi)) {
 		// Flag to be removed can be:
 		// 1. In one of our economies
-		for (EconomyObserver* eco_obs : economies) {
-			if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)) {
-				return;
+		{
+			MutexLock m(MutexLock::ID::kAI);
+			for (EconomyObserver* eco_obs : economies) {
+				if (remove_from_dqueue<Widelands::Flag>(eco_obs->flags, flag)) {
+					return;
+				}
 			}
 		}
 
@@ -6769,10 +6773,10 @@ void DefaultAI::lose_building(const Widelands::Building& b) {
 			--numof_psites_in_constr;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMilitarysite) {
-			--msites_per_size[target_bo.desc->get_size()].in_construction;
+			--msites_per_size.at(target_bo.desc->get_size()).in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kMine) {
-			--mines_per_type[target_bo.mines].in_construction;
+			--mines_per_type.at(target_bo.mines).in_construction;
 		}
 		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
 			--numof_warehouses_in_const_;
@@ -7001,7 +7005,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 
 // Sets due_time based on job ID
 void DefaultAI::set_taskpool_task_time(const Time& gametime, const SchedulerTaskId task) {
-
+	MutexLock m(MutexLock::ID::kAI);
 	for (auto& item : taskPool) {
 		if (item.id == task) {
 			item.due_time = gametime;
@@ -7013,6 +7017,7 @@ void DefaultAI::set_taskpool_task_time(const Time& gametime, const SchedulerTask
 
 // Retrieves due time of the task based on its ID
 const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
+	MutexLock m(MutexLock::ID::kAI);
 	for (const auto& item : taskPool) {
 		if (item.id == task) {
 			return item.due_time;
@@ -7025,9 +7030,10 @@ const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 // This performs one "iteration" of sorting based on due_time
 // We by design do not need full sorting...
 void DefaultAI::sort_task_pool() {
+	MutexLock m(MutexLock::ID::kAI);
 	assert(!taskPool.empty());
 	for (int8_t i = taskPool.size() - 1; i > 0; --i) {
-		if (taskPool[i - 1].due_time > taskPool[i].due_time) {
+		if (taskPool.at(i - 1).due_time > taskPool.at(i).due_time) {
 			std::iter_swap(taskPool.begin() + i - 1, taskPool.begin() + i);
 		}
 	}
@@ -7190,8 +7196,8 @@ void DefaultAI::print_stats(const Time& gametime) {
 	}
 
 	verb_log_dbg_time(
-	   gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n", numof_psites_in_constr,
-	   mines_in_constr(),
+	   gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
+	   numof_psites_in_constr.load(), mines_in_constr(),
 	   (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? "NEW BUILDING STOP" : "",
 	   why.c_str());
 
