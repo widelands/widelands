@@ -20,9 +20,10 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
+#include <atomic>
+#include <cassert>
 #include <memory>
 #include <thread>
-#include <cassert>
 
 #include "base/macros.h"
 #include "base/string.h"
@@ -106,7 +107,7 @@ private:
 	Widelands::Game& game_;
 	Widelands::PlayerNumber const player_number_;
 
-	bool thread_running_;
+	std::atomic_bool thread_running_;
 	std::unique_ptr<std::thread> thread_;
 	void thread_function();
 
