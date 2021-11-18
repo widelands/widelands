@@ -22,8 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/image.h"
@@ -43,7 +41,7 @@ NonPackedAnimation::MipMapEntry IMPLEMENTATION
 */
 
 NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::string> files)
-   : Animation::MipMapEntry(), image_files(std::move(files)) {
+   : image_files(std::move(files)) {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError(
 		   "Animation without image files. For a scale of 1.0, the template should look similar to "
@@ -52,7 +50,7 @@ NonPackedAnimation::NonPackedMipMapEntry::NonPackedMipMapEntry(std::vector<std::
 	}
 
 	for (std::string image_file : image_files) {
-		boost::replace_last(image_file, ".png", "_pc.png");
+		replace_last(image_file, ".png", "_pc.png");
 		if (g_fs->file_exists(image_file)) {
 			has_playercolor_masks = true;
 			playercolor_mask_image_files.push_back(image_file);

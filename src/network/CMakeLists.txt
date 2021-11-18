@@ -51,6 +51,7 @@ wl_library(network
     base_math
     base_md5
     base_random
+    base_string
     build_info
     chat
     game_io

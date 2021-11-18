@@ -412,12 +412,12 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w = UI::g_fh
 	           ->render(as_richtext_paragraph(
-	              (boost::format("%s ")  // We need some extra space to fix bug 724169
-	               % (boost::format(
-	                     /** TRANSLATORS: Health, Attack, Defense, Evade */
-	                     _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-	                  8 % 8 % 8 % 8 % 8 % 8 % 8 % 8))
-	                 .str(),
+	              bformat("%s "  // We need some extra space to fix bug 724169
+	                      ,
+	                      bformat(
+	                         /** TRANSLATORS: Health, Attack, Defense, Evade */
+	                         _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"), 8, 8,
+	                         8, 8, 8, 8, 8, 8)),
 	              font_style_))
 	           ->width();
 	uint32_t maxtextwidth = std::max(
@@ -478,13 +478,12 @@ void SoldierList::mouseover(const Soldier* soldier) {
 		return;
 	}
 
-	infotext_.set_text(
-	   (boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-	    soldier->get_health_level() % soldier->descr().get_max_health_level() %
-	    soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
-	    soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
-	    soldier->get_evade_level() % soldier->descr().get_max_evade_level())
-	      .str());
+	infotext_.set_text(bformat(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
+	                           soldier->get_health_level(), soldier->descr().get_max_health_level(),
+	                           soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
+	                           soldier->get_defense_level(),
+	                           soldier->descr().get_max_defense_level(), soldier->get_evade_level(),
+	                           soldier->descr().get_max_evade_level()));
 }
 
 void SoldierList::eject(const Soldier* soldier) {

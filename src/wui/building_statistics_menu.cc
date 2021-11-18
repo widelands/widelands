@@ -19,8 +19,6 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "graphic/style_manager.h"
 #include "logic/game_data_error.h"
@@ -38,7 +36,7 @@ constexpr int kLabelHeight = 18;
 constexpr int kSpinboxWidth = 4 * kBuildGridCellWidth;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
-constexpr Duration kUpdateTimeInGametimeMs = Duration(1000);  //  1 second, gametime
+constexpr Duration kUpdateTimeInGametimeMs(1000);  //  1 second, gametime
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -434,8 +432,8 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
-	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
-	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
+	   new UI::Button(button_box, bformat("building_button%s", id), 0, 0, kBuildGridCellWidth,
+	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
 	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	                  UI::Button::VisualState::kFlat);
 	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
@@ -691,7 +689,7 @@ void BuildingStatisticsMenu::update() {
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
-				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
+				const std::string perc_str = bformat(_("%i%%"), percent);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -709,8 +707,7 @@ void BuildingStatisticsMenu::update() {
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
                                                                          style_.high_color();
 				const std::string perc_str =
-				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
-				      .str();
+				   bformat(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -729,9 +726,9 @@ void BuildingStatisticsMenu::update() {
 		   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
 		if (can_construct_this_building) {
 			/** TRANSLATORS: Buildings: owned / under construction */
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
+			owned_text = bformat(_("%1%/%2%"), nr_owned, nr_build);
 		} else {
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
+			owned_text = bformat(_("%1%/%2%"), nr_owned, "–");
 		}
 		set_labeltext(
 		   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());

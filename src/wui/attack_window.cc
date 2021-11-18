@@ -33,7 +33,7 @@
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 
-constexpr Duration kUpdateTimeInGametimeMs = Duration(500);  //  half a second, gametime
+constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 constexpr int kSpacing = 8;
 
 static unsigned next_serial_(0);
@@ -164,8 +164,7 @@ void AttackWindow::think() {
 
 static inline std::string slider_heading(uint32_t num_attackers) {
 	/** TRANSLATORS: Number of soldiers that should attack. Used in the attack window. */
-	return (boost::format(ngettext("%u soldier", "%u soldiers", num_attackers)) % num_attackers)
-	   .str();
+	return bformat(ngettext("%u soldier", "%u soldiers", num_attackers), num_attackers);
 }
 
 void AttackWindow::update(bool action_on_panel) {
@@ -274,21 +273,20 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		remaining_soldiers_->add(s);
 	}
 
-	boost::format tooltip_format("<p>%s%s%s</p>");
+	const std::string tooltip_format("<p>%s%s%s</p>");
 	{
 		UI::Textarea& txt =
 		   add_text(mainbox_, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
-		txt.set_tooltip(
-		   (tooltip_format %
-		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
-		    as_listitem(
-		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip) %
-		    as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kWuiTooltip))
-		      .str());
+		txt.set_tooltip(bformat(
+		   tooltip_format,
+		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+		      .as_font_tag(_("Click on a soldier to remove him from the list of attackers")),
+		   as_listitem(
+		      _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip),
+		   as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
+		               UI::FontStyle::kWuiTooltip)));
 		mainbox_.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
@@ -296,15 +294,14 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 		UI::Textarea& txt =
 		   add_text(mainbox_, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		txt.set_handle_mouse(true);
-		txt.set_tooltip(
-		   (tooltip_format %
-		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
-		    as_listitem(
-		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) %
-		    as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kWuiTooltip))
-		      .str());
+		txt.set_tooltip(bformat(
+		   tooltip_format,
+		   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+		      .as_font_tag(_("Click on a soldier to add him to the list of attackers")),
+		   as_listitem(
+		      _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip),
+		   as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
+		               UI::FontStyle::kWuiTooltip)));
 		mainbox_.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 }
@@ -427,12 +424,11 @@ void AttackWindow::ListOfSoldiers::handle_mousein(bool) {
 bool AttackWindow::ListOfSoldiers::handle_mousemove(
    uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
-		set_tooltip((boost::format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
-		             soldier->get_health_level() % soldier->descr().get_max_health_level() %
-		             soldier->get_attack_level() % soldier->descr().get_max_attack_level() %
-		             soldier->get_defense_level() % soldier->descr().get_max_defense_level() %
-		             soldier->get_evade_level() % soldier->descr().get_max_evade_level())
-		               .str());
+		set_tooltip(bformat(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
+		                    soldier->get_health_level(), soldier->descr().get_max_health_level(),
+		                    soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
+		                    soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
+		                    soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 	} else {
 		set_tooltip(std::string());
 	}

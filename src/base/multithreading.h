@@ -101,6 +101,7 @@ public:
 private:
 	ID id_;
 	static ID last_custom_mutex_;
+	static std::mutex s_mutex_;
 };
 
 #endif  // end of include guard: WL_BASE_MULTITHREADING_H

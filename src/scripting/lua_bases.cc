@@ -19,9 +19,8 @@
 
 #include "scripting/lua_bases.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
+#include "base/string.h"
 #include "economy/economy.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
@@ -462,12 +461,12 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	luaL_checktype(L, 4, LUA_TTABLE);
 
 	std::string dir = kCampaignDataDir + FileSystem::file_separator() + campaign_name;
-	boost::trim(dir);
+	trim(dir);
 	g_fs->ensure_directory_exists(dir);
 
 	std::string complete_filename =
 	   dir + FileSystem::file_separator() + scenario_name + kCampaignDataExtension;
-	boost::trim(complete_filename);
+	trim(complete_filename);
 
 	std::map<std::string, const char*> data;
 	std::map<std::string, const char*> keys;
@@ -574,7 +573,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	std::string complete_filename = kCampaignDataDir + FileSystem::file_separator() + campaign_name +
 	                                FileSystem::file_separator() + scenario_name +
 	                                kCampaignDataExtension;
-	boost::trim(complete_filename);
+	trim(complete_filename);
 
 	Profile profile;
 	profile.read(complete_filename.c_str());
@@ -683,9 +682,8 @@ int LuaPlayerBase::__eq(lua_State* L) {
 }
 
 int LuaPlayerBase::__tostring(lua_State* L) {
-	const std::string pushme = (boost::format("Player(%i)") %
-	                            static_cast<unsigned int>(get(L, get_egbase(L)).player_number()))
-	                              .str();
+	const std::string pushme =
+	   bformat("Player(%i)", static_cast<unsigned int>(get(L, get_egbase(L)).player_number()));
 	lua_pushstring(L, pushme.c_str());
 	return 1;
 }

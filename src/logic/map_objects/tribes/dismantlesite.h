@@ -86,7 +86,7 @@ protected:
 
 	void cleanup(EditorGameBase&) override;
 
-	static constexpr Duration kDismantlesiteStepTime = Duration(45000);
+	static constexpr Duration kDismantlesiteStepTime{45000};
 	const Duration& build_step_time() const override {
 		return kDismantlesiteStepTime;
 	}

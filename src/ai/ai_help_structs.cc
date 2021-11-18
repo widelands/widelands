@@ -304,7 +304,7 @@ uint32_t EventTimeQueue::count(const Time& current_time, const uint32_t addition
 		return queue.size();
 	} else {
 		uint32_t cnt = 0;
-		for (auto item : queue) {
+		for (const auto& item : queue) {
 			if (item.second == additional_id) {
 				++cnt;
 			}
@@ -992,7 +992,7 @@ uint32_t BlockedFields::count() {
 
 void BlockedFields::remove_expired(const Time& gametime) {
 	std::vector<uint32_t> fields_to_remove;
-	for (auto field : blocked_fields_) {
+	for (const auto& field : blocked_fields_) {
 		if (field.second < gametime) {
 			fields_to_remove.push_back(field.first);
 		}
@@ -1314,7 +1314,7 @@ bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
 	}
 	uint32_t my_strength = all_stats[pl].players_power;
 	uint32_t strongest_opponent_strength = 0;
-	for (auto item : all_stats) {
+	for (const auto& item : all_stats) {
 		if (!players_in_same_team(item.first, pl) && pl != item.first) {
 			if (get_modified_player_power(item.first) > strongest_opponent_strength) {
 				strongest_opponent_strength = get_modified_player_power(item.first);

@@ -100,7 +100,7 @@ constexpr const char* const INTERNET_GAME_RUNNING = "RUNNING";  // Playing
  *
  * \note ALL PAYLOADS SHALL BE STRINGS - this is for easier handling and debugging of the
  *       communication between metaserver and client. If an unsigned or signed value has
- *       to be sent, convert it with boost::lexical_cast<std::string>. Boolean values should
+ *       to be sent, convert it with as_string. Boolean values should
          be sent in form of "true" or "false".
  */
 

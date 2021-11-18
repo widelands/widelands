@@ -354,10 +354,9 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 
 void LanBase::report_network_error() {
 	// No socket open? Sorry, but we can't continue this way
-	const std::vector<std::string> ports_list(
-	   {boost::lexical_cast<std::string>(kWidelandsLanDiscoveryPort),
-	    boost::lexical_cast<std::string>(kWidelandsLanPromotionPort),
-	    boost::lexical_cast<std::string>(kWidelandsLanPort)});
+	const std::vector<std::string> ports_list({as_string(kWidelandsLanDiscoveryPort),
+	                                           as_string(kWidelandsLanPromotionPort),
+	                                           as_string(kWidelandsLanPort)});
 
 	throw WLWarning(_("Failed to use the local network!"),
 	                /** TRANSLATORS: %s is a list of alternative ports with "or" */

@@ -28,12 +28,14 @@ wl_library(io_profile
   SRCS
     profile.h
     profile.cc
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_geometry
     base_i18n
     base_log
     base_macros
+    base_string
     build_info
     io_fileread
     io_filesystem

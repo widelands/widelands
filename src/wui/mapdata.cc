@@ -21,8 +21,7 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
@@ -165,25 +164,28 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 // static
 std::string MapData::parent_name() {
 	/** TRANSLATORS: Parent directory/folder */
-	return (boost::format("<%s>") % _("parent")).str();
+	return bformat("<%s>", _("parent"));
 }
 
 // static
 MapData MapData::create_empty_dir(const std::string& current_dir) {
 	/** TRANSLATORS: This label is shown when a folder is empty */
-	return MapData(current_dir, (boost::format("<%s>") % _("empty")).str());
+	return MapData(current_dir, bformat("<%s>", _("empty")));
 }
 
 // static
 MapData MapData::create_directory(const std::string& directory) {
 	std::string localized_name = FileSystem::fs_filename(directory.c_str());
-	if (boost::equals(directory, "maps/MP_Scenarios")) {
+	if (directory == "maps/MP_Scenarios") {
 		/** TRANSLATORS: Directory name for MP Scenarios in map selection */
 		localized_name = _("Multiplayer Scenarios");
-	} else if (boost::equals(directory, "maps/My_Maps")) {
+	} else if (directory == "maps/SP_Scenarios") {
+		/** TRANSLATORS: Directory name for SP Scenarios in map selection */
+		localized_name = _("Singleplayer Scenarios");
+	} else if (directory == "maps/My_Maps") {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
-	} else if (boost::equals(directory, "maps/Downloaded")) {
+	} else if (directory == "maps/Downloaded") {
 		/** TRANSLATORS: Directory name for downloaded maps in map selection */
 		localized_name = _("Downloaded Maps");
 	} else if (directory.compare(0, kAddOnDir.size(), kAddOnDir) == 0) {

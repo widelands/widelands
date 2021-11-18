@@ -21,9 +21,8 @@
 
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include "base/log.h"
+#include "base/string.h"
 #include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/texture_atlas.h"
@@ -40,7 +39,7 @@ constexpr int kMaxAreaForTextureAtlas = 240 * 240;
 
 // Returns true if 'filename' ends with an image extension.
 bool is_image(const std::string& filename) {
-	return boost::ends_with(filename, ".png") || boost::ends_with(filename, ".jpg");
+	return ends_with(filename, ".png") || ends_with(filename, ".jpg");
 }
 
 // Recursively adds all images in 'directory' to 'ordered_images' and
@@ -66,7 +65,7 @@ void find_images(const std::string& directory,
 // If 'filename' should end up in the texture atlas, will load it into 'image'
 // and return true.
 bool should_be_packed(const std::string& filename, std::unique_ptr<Texture>* image) {
-	if (boost::ends_with(filename, ".jpg")) {
+	if (ends_with(filename, ".jpg")) {
 		return false;
 	}
 	*image = load_image(filename, g_fs);

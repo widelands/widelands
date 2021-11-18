@@ -19,9 +19,11 @@
 
 #include "map_io/map_players_view_packet.h"
 
-#include <boost/algorithm/string.hpp>
+#include <atomic>
+#include <sstream>
 
 #include "base/log.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -112,7 +114,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// TODO(Niektory): Savegame compatibility
 				if (packet_version <= 4) {
-					boost::split(field_vector, parseme, boost::is_any_of("|"));
+					split(field_vector, parseme, {'|'});
 					assert(field_vector.size() == no_of_fields);
 				}
 
@@ -164,7 +166,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					no_of_seen_fields += additionally_seen;
 					if (additionally_seen > 0) {
 						parseme = fr.c_string();
-						boost::split(field_vector, parseme, boost::is_any_of("|"));
+						split(field_vector, parseme, {'|'});
 						assert(field_vector.size() == additionally_seen);
 						for (size_t i = 0; i < additionally_seen; ++i) {
 							Player::Field& f = player->fields_[stoi(field_vector[i])];
@@ -182,7 +184,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Owner: playernumber|playernumber|playernumber ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == seen_fields.size());
 
 				size_t counter = 0;
@@ -194,7 +196,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Last Unseen: time|time|time ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
@@ -206,12 +208,12 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Last Surveyed: time|time|time ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
+					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
 					field->time_triangle_last_surveyed[0] = Time(stoll(data_vector[0]));
@@ -222,12 +224,12 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Resource Amounts: down*right|down*right|down*right| ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
+					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
 					field->resource_amounts.d = stoi(data_vector[0]);
@@ -238,28 +240,28 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Terrains: down*right|down*right|down*right| ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
+					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
-					field->terrains.d = stoi(data_vector[0]);
-					field->terrains.r = stoi(data_vector[1]);
+					field->terrains.store({static_cast<DescriptionIndex>(stoi(data_vector[0])),
+					                       static_cast<DescriptionIndex>(stoi(data_vector[1]))});
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
 
 				// Roads east*southeast*southwest|east*southeast*southwest| ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
+					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 3);
 
 					field->r_e = static_cast<Widelands::RoadSegment>(stoi(data_vector[0]));
@@ -271,12 +273,12 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Borders: here*right*bottom_right*bottom_left|here*right*bottom_right*bottom_left| ...
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
+				split(field_vector, parseme, {'|'});
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
+					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 4);
 
 					field->border = from_unsigned(stoi(data_vector[0]));
@@ -384,8 +386,9 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					f.resource_amounts.d = fr.unsigned_8();
 					f.resource_amounts.r = fr.unsigned_8();
 
-					f.terrains.d = fr.unsigned_32();
-					f.terrains.r = fr.unsigned_32();
+					DescriptionIndex terrains_d = static_cast<DescriptionIndex>(fr.unsigned_32());
+					DescriptionIndex terrains_r = static_cast<DescriptionIndex>(fr.unsigned_32());
+					f.terrains.store({terrains_d, terrains_r});
 
 					f.r_e = static_cast<RoadSegment>(fr.unsigned_8());
 					f.r_se = static_cast<RoadSegment>(fr.unsigned_8());
@@ -614,7 +617,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Terrains
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << (*it)->terrains.d << "*" << (*it)->terrains.r;
+				oss << (*it)->terrains.load().d << "*" << (*it)->terrains.load().r;
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";

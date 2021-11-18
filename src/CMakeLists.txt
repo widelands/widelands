@@ -99,6 +99,7 @@ wl_library(widelands_ball_of_mud
     wlapplication.h
     wlapplication_messages.cc
     wlapplication_messages.h
+  USES_ATOMIC
   USES_SDL2
   USES_SDL2_TTF
   DEPENDS
@@ -109,6 +110,7 @@ wl_library(widelands_ball_of_mud
     base_macros
     base_multithreading
     base_random
+    base_string
     base_time_string
     build_info
     editor
@@ -144,6 +146,7 @@ wl_library(widelands_options
     base_geometry
     base_i18n
     base_log
+    base_string
     graphic_text_layout
     io_filesystem
     io_profile

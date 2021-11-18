@@ -308,7 +308,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 		/** TRANSLATORS: Infinite number of wares or workers */
 		return g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(_("∞"));
 	}
-	return boost::lexical_cast<std::string>(amount);
+	return as_string(amount);
 }
 
 /**
@@ -476,7 +476,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	}
 }
 
-constexpr Duration kThinkInterval = Duration(200);
+constexpr Duration kThinkInterval(200);
 
 void EconomyOptionsWindow::think() {
 	const Time& time = player_->egbase().get_gametime();
