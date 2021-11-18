@@ -94,29 +94,41 @@ inline std::string as_string(const char* str) {
 inline std::string as_string(const int8_t t) {
 	return std::to_string(static_cast<int>(t));
 }
-inline std::string as_string(const int16_t t) {
+inline std::string as_string(const signed short t) {
 	return std::to_string(static_cast<int>(t));
 }
-inline std::string as_string(const int32_t t) {
-	return std::to_string(static_cast<int64_t>(t));
+inline std::string as_string(const signed int t) {
+	return std::to_string(t);
 }
-inline std::string as_string(const int64_t t) {
+inline std::string as_string(const signed long t) {
+	return std::to_string(static_cast<long long>(t));
+}
+inline std::string as_string(const signed long long t) {
 	return std::to_string(t);
 }
 inline std::string as_string(const uint8_t t) {
 	return std::to_string(static_cast<unsigned>(t));
 }
-inline std::string as_string(const uint16_t t) {
+inline std::string as_string(const unsigned short t) {
 	return std::to_string(static_cast<unsigned>(t));
 }
-inline std::string as_string(const uint32_t t) {
-	return std::to_string(static_cast<uint64_t>(t));
-}
-inline std::string as_string(const uint64_t t) {
+inline std::string as_string(const unsigned int t) {
 	return std::to_string(t);
 }
-inline std::string as_string(char c) {
-	return {c, '\0'};
+inline std::string as_string(const unsigned long t) {
+	return std::to_string(static_cast<unsigned long long>(t));
+}
+inline std::string as_string(const unsigned long long t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const float t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const double t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const char c) {
+	return {c};
 }
 
 // @CodeCheck allow boost::format
