@@ -14,14 +14,11 @@ SUPPRESSED_CHECKS = {
     '[boost-use-to-string]',
     '[bugprone-branch-clone]',
     '[bugprone-exception-escape]',
-    '[bugprone-infinite-loop]',
     '[bugprone-integer-division]',
     '[bugprone-macro-parentheses]',
     '[bugprone-narrowing-conversions]',
     '[bugprone-not-null-terminated-result]',
-    '[bugprone-parent-virtual-call]',
     '[bugprone-signed-char-misuse]',
-    '[bugprone-string-constructor]',
     '[bugprone-too-small-loop-variable]',
     '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
@@ -78,9 +75,7 @@ SUPPRESSED_CHECKS = {
     '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
     '[misc-non-private-member-variables-in-classes]',
-    '[misc-redundant-expression]',
     '[modernize-avoid-c-arrays]',
-    '[modernize-loop-convert]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
     '[modernize-raw-string-literal]',
@@ -89,7 +84,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-emplace]',
     '[modernize-use-equals-default]',
     '[modernize-use-trailing-return-type]',
-    '[performance-for-range-copy]',
     '[performance-no-automatic-move]',
     '[performance-unnecessary-value-param]',
     '[readability-const-return-type]',
@@ -103,10 +97,6 @@ SUPPRESSED_CHECKS = {
     '[readability-make-member-function-const]',
     '[readability-named-parameter]',
     '[readability-qualified-auto]',
-    '[readability-redundant-access-specifiers]',
-    '[readability-redundant-member-init]',
-    '[readability-redundant-smartptr-get]',
-    '[readability-simplify-boolean-expr]',
     '[readability-uppercase-literal-suffix]'
 }
 

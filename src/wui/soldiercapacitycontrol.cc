@@ -24,6 +24,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wui/interactive_base.h"
 
 using Widelands::SoldierControl;
@@ -34,6 +35,9 @@ using Widelands::SoldierControl;
  */
 struct SoldierCapacityControl : UI::Box {
 	SoldierCapacityControl(UI::Panel* parent, InteractiveBase& ib, Widelands::Building& building);
+
+public:
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 
 protected:
 	void think() override;
@@ -95,7 +99,7 @@ void SoldierCapacityControl::think() {
 	const SoldierControl* soldiers = building_.soldier_control();
 	assert(soldiers != nullptr);
 	uint32_t const capacity = soldiers->soldier_capacity();
-	value_.set_text(boost::lexical_cast<std::string>(capacity));
+	value_.set_text(as_string(capacity));
 
 	bool const can_act = ibase_.can_act(building_.owner().player_number());
 	decrease_.set_enabled(can_act && soldiers->min_soldier_capacity() < capacity);
@@ -124,6 +128,19 @@ void SoldierCapacityControl::click_increase() {
 	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
                               soldiers->max_soldier_capacity() - soldiers->soldier_capacity() :
                               1);
+}
+
+bool SoldierCapacityControl::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if (change > 0) {
+		click_increase();
+	} else {
+		click_decrease();
+	}
+	return true;
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,

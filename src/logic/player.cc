@@ -19,15 +19,16 @@
 
 #include "logic/player.h"
 
+#include <atomic>
 #include <cassert>
 #include <cstdlib>
 #include <memory>
-
-#include <boost/algorithm/string.hpp>
+#include <sstream>
 
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/string.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -443,6 +444,11 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
 		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
+		if (mo->descr().type() >= MapObjectType::BUILDING) {
+			upcast(Building, site, mo);
+			assert(site != nullptr);
+			site->muted.connect([this, id](unsigned) { message_object_removed(id); });
+		}
 	}
 
 	// Sound & popup
@@ -1277,11 +1283,11 @@ void Player::enemyflagaction(const Flag& flag,
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand
-							verb_log_warn_time(
-							   egbase().get_gametime(),
-							   "Player(%u)::enemyflagaction: Not sending soldier %u because he left the "
-							   "building\n",
-							   player_number(), temp_attacker->serial());
+							verb_log_warn_time(egbase().get_gametime(),
+							                   "Player(%u)::enemyflagaction: Not sending soldier %u "
+							                   "because he left the "
+							                   "building\n",
+							                   player_number(), temp_attacker->serial());
 						}
 					}
 				}
@@ -1375,7 +1381,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		FCoords tr = map.tr_n(f);
 		Field& tr_field = fields_[tr.field - &first_map_field];
 		if (tr_field.vision != VisibleState::kVisible) {
-			tr_field.terrains.d = tr.field->terrain_d();
+			tr_field.terrains.store({tr.field->terrain_d(), tr_field.terrains.load().r});
 			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
 		}
@@ -1393,7 +1399,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		FCoords l = map.l_n(f);
 		Field& l_field = fields_[l.field - &first_map_field];
 		if (l_field.vision != VisibleState::kVisible) {
-			l_field.terrains.r = l.field->terrain_r();
+			l_field.terrains.store({l_field.terrains.load().d, l.field->terrain_r()});
 			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
 		}
@@ -1918,7 +1924,7 @@ const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (remaining_shipnames_.empty()) {
-		return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
+		return bformat(pgettext("shipname", "Ship %d"), ship_name_counter_);
 	}
 
 	Game& game = dynamic_cast<Game&>(egbase());
@@ -1981,15 +1987,14 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	                                       const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
-			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			split(stats_vector, stats_string, {'|'});
 			if (stats_vector.size() != nr_entries) {
 				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
 				                    " but got %" PRIuS,
 				                    description.c_str(), nr_entries, stats_vector.size());
 			}
 			for (size_t j = 0; j < nr_entries; ++j) {
-				stats->at(ware_index)[j] =
-				   boost::lexical_cast<unsigned int>(stats_vector.at(j).c_str());
+				stats->at(ware_index)[j] = stoul(stats_vector.at(j));
 			}
 		} else if (nr_entries > 0) {
 			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",

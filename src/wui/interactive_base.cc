@@ -22,12 +22,12 @@
 #include <memory>
 
 #include <SDL_timer.h>
-#include <boost/algorithm/string.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/multithreading.h"
+#include "base/string.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -53,6 +53,7 @@
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/attack_window.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
@@ -724,12 +725,10 @@ void InteractiveBase::think() {
 	UI::Panel::think();
 	if (in_road_building_mode()) {
 		if (in_road_building_mode(RoadBuildingType::kRoad)) {
-			set_tooltip(
-			   (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str());
+			set_tooltip(bformat(_("Road length: %u"), get_build_road_path().get_nsteps()));
 		} else {
-			set_tooltip((boost::format(_("Waterway length: %1$u/%2$u")) %
-			             get_build_road_path().get_nsteps() % egbase().map().get_waterway_max_length())
-			               .str());
+			set_tooltip(bformat(_("Waterway length: %1$u/%2$u"), get_build_road_path().get_nsteps(),
+			                    egbase().map().get_waterway_max_length()));
 		}
 	}
 }
@@ -781,9 +780,8 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	std::string node_text;
 	if (game == nullptr || get_display_flag(dfDebug)) {
 		// Blit node information in the editor, and in debug mode also for games
-		boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
-		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
+		node_text = bformat("(%i, %i, %i)", sel_.pos.node.x, sel_.pos.node.y, height);
 	}
 	info_panel_.set_coords_string(node_text);
 
@@ -988,6 +986,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kConfigureEconomy:
 					w = EconomyOptionsWindow::load(fr, *this, mol);
+					break;
+				case UI::Panel::SaveType::kAttackWindow:
+					w = &AttackWindow::load(fr, *this, mol);
 					break;
 				default:
 					throw Widelands::GameDataError(
@@ -1480,7 +1481,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
 	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
+	   unique_windows().get_registry(bformat("building_%d", building->serial()));
 
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
@@ -1533,7 +1534,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 
 UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	   unique_windows().get_registry(bformat("ship_%d", ship->serial()));
 	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
 	registry.create();
 	return *registry.window;
@@ -1616,7 +1617,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
-	const std::string cmd = boost::algorithm::join(args, " ");
+	const std::string cmd = join(args, " ");
 
 	broadcast_cheating_message();
 
@@ -1639,11 +1640,11 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 		return;
 	}
 
-	uint32_t serial = boost::lexical_cast<uint32_t>(args[1]);
+	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
-		DebugConsole::write(str(boost::format("No MapObject with serial number %1%") % serial));
+		DebugConsole::write(bformat("No MapObject with serial number %1%", serial));
 		return;
 	}
 

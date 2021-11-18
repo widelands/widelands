@@ -5,6 +5,7 @@ wl_library(logic_exceptions
   DEPENDS
     base_exceptions
     base_i18n
+    base_string
 )
 
 wl_library(logic_widelands_geometry
@@ -97,6 +98,7 @@ wl_library(logic_addons
     base_i18n
     base_exceptions
     base_log
+    base_math
     build_info
     graphic
     graphic_image_cache
@@ -125,6 +127,7 @@ wl_library(logic_generic_save_handler
   DEPENDS
     base_i18n
     base_log
+    base_string
     base_time_string
     io_filesystem
     logic_filesystem_constants
@@ -156,12 +159,14 @@ wl_library(logic_map
     path.h
     pathfield.cc
     pathfield.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_i18n
     base_log
     base_macros
     base_scoped_timer
+    base_string
     build_info
     economy
     graphic
@@ -261,6 +266,7 @@ wl_library(logic
     trade_agreement.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_i18n
@@ -270,6 +276,7 @@ wl_library(logic
     base_multithreading
     base_random
     base_scoped_timer
+    base_string
     base_time_string
     base_times
     build_info

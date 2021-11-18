@@ -30,6 +30,7 @@
 #include "graphic/text_layout.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 constexpr int kMargin = 2;
 constexpr int kHotkeyGap = 16;
@@ -83,7 +84,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
      lineheight_(text_height(table_style().enabled()) + kMargin),
-     notify_on_delete_(nullptr) {
+     linked_dropdown(nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
@@ -107,8 +108,8 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (notify_on_delete_) {
-		notify_on_delete_->notify_list_deleted();
+	if (linked_dropdown) {
+		linked_dropdown->notify_list_deleted();
 	}
 }
 
@@ -472,16 +473,25 @@ void BaseListselect::draw(RenderTarget& dst) {
 /**
  * Handle mouse wheel events
  */
-bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	const uint32_t selected_idx = selection_index();
-	const uint32_t max = size() - 1;
-	if (y > 0 && selected_idx > 0) {
-		select(selected_idx - 1);
-	} else if (y < 0 && selected_idx < max) {
-		select(selected_idx + 1);
+	uint32_t max = size();
+	if (max > 0) {
+		--max;
+	} else {
+		return false;
 	}
-
-	return scrollbar_.handle_mousewheel(which, x, y);
+	if (y != 0 && matches_keymod(modstate, KMOD_NONE)) {
+		if (selected_idx > max) {
+			select(y < 0 ? 0 : max);
+		} else if (y > 0 && selected_idx > 0) {
+			select(selected_idx - 1);
+		} else if (y < 0 && selected_idx < max) {
+			select(selected_idx + 1);
+		}
+		return scrollbar_.handle_mousewheel(x, y, modstate);
+	}
+	return false;
 }
 
 /**
@@ -504,6 +514,7 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 			if (selection_mode_ == ListselectLayout::kDropdown) {
 				set_visible(false);
+				linked_dropdown->disable_textinput();
 				return true;
 			}
 			return false;
@@ -539,68 +550,57 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
-	if (down && size() > 1) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_BACKSPACE:
+			linked_dropdown->delete_last_of_filter();
+			return true;
+		case SDLK_ESCAPE:
+			if (linked_dropdown->is_filtered()) {
+				linked_dropdown->clear_filter();
+			} else {
+				linked_dropdown->set_list_visibility(false);
+			}
+			return true;
+		default:
+			break;
+		}
+
 		bool handle = true;
 		uint32_t selected_idx = selection_index();
-		const uint32_t max = size() - 1;
+		const uint32_t max = empty() ? 0 : size() - 1;
 		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
-
-		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
-		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
-			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
-			if (max < 9) {
-				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
-					selected_idx = code.sym - SDLK_1;
-				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
-					selected_idx = code.sym - SDLK_KP_1;
-				} else {
-					// don't handle the '9' when there are less than 9 items
-					handle = false;
-				}
-			} else {
-				// 10 or more items – ignore number keys
-				handle = false;
-			}
-		} else {
-			// Up, Down, PageUp, PageDown, Home, End
-			switch (code.sym) {
-			case SDLK_KP_2:
-			case SDLK_DOWN:
-				if (!has_selection()) {
-					selected_idx = 0;
-				} else if (selected_idx < max) {
-					++selected_idx;
-				}
-				break;
-			case SDLK_KP_8:
-			case SDLK_UP:
-				if (!has_selection()) {
-					selected_idx = max;
-				} else if (selected_idx > 0) {
-					--selected_idx;
-				}
-				break;
-			case SDLK_KP_7:
-			case SDLK_HOME:
+		switch (code.sym) {
+		case SDLK_DOWN:
+			if (!has_selection()) {
 				selected_idx = 0;
-				break;
-			case SDLK_KP_1:
-			case SDLK_END:
-				selected_idx = max;
-				break;
-			case SDLK_KP_3:
-			case SDLK_PAGEDOWN:
-				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
-				break;
-			case SDLK_KP_9:
-			case SDLK_PAGEUP:
-				selected_idx =
-				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
-				break;
-			default:
-				handle = false;
-				break;  // not handled
+			} else if (selected_idx < max) {
+				++selected_idx;
 			}
+			break;
+		case SDLK_UP:
+			if (!has_selection()) {
+				selected_idx = max;
+			} else if (selected_idx > 0) {
+				--selected_idx;
+			}
+			break;
+		case SDLK_HOME:
+			selected_idx = 0;
+			break;
+		case SDLK_END:
+			selected_idx = max;
+			break;
+		case SDLK_PAGEDOWN:
+			selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+			break;
+		case SDLK_PAGEUP:
+			selected_idx =
+			   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+			break;
+		default:
+			handle = false;
+			break;  // not handled
 		}
 		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
 		if (handle) {
@@ -616,7 +616,6 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 	}
-
 	return UI::Panel::handle_key(down, code);
 }
 

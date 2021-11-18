@@ -86,5 +86,4 @@ bool set_logging_dir(const std::string& homedir);
 // from. Use this only for test cases.
 void set_logging_dir();
 #endif
-
 #endif  // end of include guard: WL_BASE_LOG_H

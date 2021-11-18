@@ -120,7 +120,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 		                   false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
-		                   (boost::format(_("Replace player with %s")) % impl->descname).str());
+		                   bformat(_("Replace player with %s"), impl->descname));
 	}
 
 	// Set default mode to normal AI

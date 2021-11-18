@@ -28,7 +28,6 @@
 #include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
-#include "logic/map_objects/tribes/attack_target.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -41,7 +40,6 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/actionconfirm.h"
-#include "wui/attack_box.h"
 #include "wui/economy_options_window.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
@@ -72,7 +70,6 @@ private:
 	void mouseout_slot(int32_t idx);
 	void mousein_slot(int32_t idx);
 
-private:
 	Widelands::Player* plr_;
 };
 
@@ -163,7 +160,6 @@ public:
 	void add_buttons_build(int32_t buildcaps, int32_t max_nodecaps);
 	void add_buttons_road(bool flag);
 	void add_buttons_waterway(bool flag);
-	void add_buttons_attack();
 
 	void act_watch();
 	void act_debug();
@@ -185,10 +181,6 @@ public:
 	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
-	void act_attack();  /// Launch the attack
-
-	/// Total number of attackers available for a specific enemy flag
-	uint32_t get_max_attackers();
 
 private:
 	uint32_t add_tab(const std::string& name,
@@ -218,9 +210,6 @@ private:
 	std::set<Widelands::Coords> overlapping_workareas_;
 	bool is_showing_workarea_overlaps_;
 	Widelands::DescriptionIndex building_under_mouse_;
-
-	/// Variables to use with attack dialog.
-	AttackBox* attack_box_;
 };
 
 constexpr const char* const kImgTabBuildroad = "images/wui/fieldaction/menu_tab_buildroad.png";
@@ -254,7 +243,6 @@ constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
 
 constexpr const char* const kImgTabTarget = "images/wui/fieldaction/menu_tab_target.png";
-constexpr const char* const kImgTabAttack = "images/wui/fieldaction/menu_tab_attack.png";
 
 /*
 ===============
@@ -273,8 +261,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      best_tab_(0),
      showing_workarea_preview_(false),
      is_showing_workarea_overlaps_(ib->get_display_flag(InteractiveBase::dfShowWorkareaOverlap)),
-     building_under_mouse_(Widelands::INVALID_INDEX),
-     attack_box_(nullptr) {
+     building_under_mouse_(Widelands::INVALID_INDEX) {
 	ib->set_sel_freeze(true);
 	set_center_panel(&tabpanel_);
 }
@@ -286,7 +273,6 @@ FieldActionWindow::~FieldActionWindow() {
 	showing_workarea_preview_ = false;
 	clear_overlapping_workareas();
 	ibase().set_sel_freeze(false);
-	delete attack_box_;
 }
 
 void FieldActionWindow::think() {
@@ -464,12 +450,11 @@ void FieldActionWindow::add_buttons_auto() {
 						} else {
 							tooltip = it->second;
 						}
-						tooltip =
-						   (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
-						    g_style_manager->font_style(UI::FontStyle::kDisabled)
-						       .as_font_tag(_("Send scout to explore surroundings")) %
-						    g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(tooltip))
-						      .str();
+						tooltip = bformat(
+						   "<rt><p>%s</p><p>%s</p></rt>",
+						   g_style_manager->font_style(UI::FontStyle::kDisabled)
+						      .as_font_tag(_("Send scout to explore surroundings")),
+						   g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(tooltip));
 					}
 					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
 					           tooltip, false, enabled);
@@ -501,16 +486,6 @@ void FieldActionWindow::add_buttons_auto() {
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 			}
 		}
-	} else if (player_) {
-		if (upcast(Building, building, map_.get_immovable(node_))) {
-			for (Widelands::Coords& coords : building->get_positions(igbase->egbase())) {
-				if (player_->is_seeing(
-				       Widelands::Map::get_index(coords, ibase().egbase().map().get_width()))) {
-					add_buttons_attack();
-					break;
-				}
-			}
-		}
 	}
 
 	//  Watch actions, only when in game (no use in editor).
@@ -530,28 +505,6 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 
 	add_tab("watch", kImgTabWatch, &watchbox, _("Watch"));
-}
-
-void FieldActionWindow::add_buttons_attack() {
-	UI::Box& a_box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
-
-	if (upcast(Widelands::Building, building, map_.get_immovable(node_))) {
-		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
-			if (player_ && player_->is_hostile(building->owner()) &&
-			    attack_target->can_be_attacked()) {
-				attack_box_ = new AttackBox(&a_box, player_, &node_, 0, 0);
-				a_box.add(attack_box_);
-
-				UI::Button* attack_button = attack_box_->get_attack_button();
-				attack_button->sigclicked.connect([this]() { act_attack(); });
-				set_fastclick_panel(attack_button);
-			}
-		}
-	}
-
-	if (a_box.get_nritems()) {  //  add tab
-		add_tab("attack", kImgTabAttack, &a_box, _("Attack"));
-	}
 }
 
 /*
@@ -1092,23 +1045,6 @@ void FieldActionWindow::act_unmark_removal() {
 	if (upcast(Widelands::Immovable, i, game->map().get_immovable(node_))) {
 		game->send_player_mark_object_for_removal(
 		   dynamic_cast<InteractiveGameBase&>(ibase()).player_number(), *i, false);
-	}
-	reset_mouse_and_die();
-}
-
-/**
- * Here there are a problem: the sender of an event is always the owner of
- * were is done this even. But for attacks, the owner of an event is the
- * player who start an attack, so is needed to get an extra parameter to
- * the send_player_enemyflagaction, the player number
- */
-void FieldActionWindow::act_attack() {
-	assert(attack_box_);
-	upcast(Game, game, &ibase().egbase());
-	if (upcast(Building, building, game->map().get_immovable(node_))) {
-		upcast(InteractivePlayer const, iaplayer, &ibase());
-		game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
-		                                  attack_box_->soldiers(), attack_box_->get_allow_conquer());
 	}
 	reset_mouse_and_die();
 }

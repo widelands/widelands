@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -149,8 +147,10 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 void GameMainMenuSaveGame::layout() {
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
-	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
-	load_or_save_.delete_button()->set_desired_size(ok_.get_w(), ok_.get_h());
+	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, 0);
+	load_or_save_.delete_button()->set_desired_size(cancel_.get_w(), cancel_.get_h());
+
+	UI::UniqueWindow::layout();
 }
 
 void GameMainMenuSaveGame::entry_selected() {
@@ -223,7 +223,6 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		}
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			ok();
 			return true;
@@ -234,7 +233,7 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {
@@ -253,10 +252,10 @@ void GameMainMenuSaveGame::pause_game(bool paused) {
  */
 bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	// Trim it for preceding/trailing whitespaces in user input
-	boost::trim(filename);
+	trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kSavegameExtension)) {
+	if (!ends_with(filename, kSavegameExtension, false)) {
 		filename += kSavegameExtension;
 	}
 
@@ -265,10 +264,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s =
-		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
+		const std::string s = bformat(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                              FileSystem::fs_filename(filename.c_str()));
 		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Game!"), s,
 		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {

@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/playercolor.h"
@@ -157,7 +158,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		mutable_map->set_scenario_player_ai(1, "");
 		mutable_map->set_scenario_player_closeable(1, false);
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
-		mutable_map->set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
+		mutable_map->set_scenario_player_name(1, bformat(_("Player %u"), 1));
 		mutable_map->set_scenario_player_tribe(1, "");
 		eia().set_need_save(true);
 	}
@@ -166,8 +167,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 
-		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
-		                   p == nr_players);
+		no_of_players_.add(as_string(p), p, nullptr, p == nr_players);
 		no_of_players_.selected.connect([this]() { no_of_players_clicked(); });
 
 		UI::Box* row = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -181,8 +181,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
-		   row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50,
-		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
+		   row, bformat("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50, 16,
+		   plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
 		for (const Widelands::TribeBasicInfo& tribeinfo : parent.egbase().all_tribes()) {
@@ -286,7 +286,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			// Register new default name and tribe for these players
 			const std::string name =
 			   /** TRANSLATORS: Default player name, e.g. Player 1 */
-			   (boost::format(_("Player %u")) % static_cast<unsigned int>(pn)).str();
+			   bformat(_("Player %u"), static_cast<unsigned int>(pn));
 			map->set_scenario_player_name(pn, name);
 			rows_.at(pn - 1)->name->set_text(name);
 

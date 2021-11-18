@@ -1310,7 +1310,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's Hut
             purpose = pgettext("amazons_building", "Home of the liana cutter who cuts lianas for making ropes."),
             -- TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's Hut
-            note = pgettext("amazons_building", "The cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
+            note = pgettext("amazons_building", "The liana cutter harvests liana from fully matured trees within the work area which are not being used as lookouts."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Liana Cutter's Hut
             performance = pgettext("amazons_building", "The liana cutter rests %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(34))
          }
@@ -1644,14 +1644,51 @@ descriptions:new_tribe {
 
    -- Special types
    builder = "amazons_builder",
-   carrier = "amazons_carrier",
-   carrier2 = "amazons_tapir",
+   carriers = {"amazons_carrier", "amazons_tapir"},
    geologist = "amazons_geologist",
    scouts_house = "amazons_scouts_hut",
    soldier = "amazons_soldier",
    ship = "amazons_ship",
    ferry = "amazons_ferry",
    port = "amazons_port",
+
+   fastplace = {
+      warehouse = "amazons_warehouse",
+      port = "amazons_port",
+      training_small = "amazons_warriors_gathering",
+      training_large = "amazons_training_glade",
+      military_small_primary = "amazons_patrol_post",
+      military_small_secondary = "amazons_treetop_sentry",
+      military_medium_primary = "amazons_warriors_dwelling",
+      military_tower = "amazons_tower",
+      military_fortress = "amazons_fortress",
+      woodcutter = "amazons_woodcutters_hut",
+      forester = "amazons_jungle_preservers_hut",
+      quarry = "amazons_stonecutters_hut",
+      building_materials_primary = "amazons_rope_weaver_booth",
+      building_materials_secondary = "amazons_liana_cutters_hut",
+      building_materials_tertiary = "amazons_rare_tree_plantation",
+      fisher = "amazons_hunter_gatherers_hut",
+      fish_meat_replenisher = "amazons_wilderness_keepers_tent",
+      well = "amazons_water_gatherers_hut",
+      farm_primary = "amazons_cassava_plantation",
+      farm_secondary = "amazons_cocoa_farm",
+      bakery = "amazons_cassava_root_cooker",
+      brewery = "amazons_chocolate_brewery",
+      tavern = "amazons_food_preserver",
+      smelting = "amazons_furnace",
+      tool_smithy = "amazons_stone_workshop",
+      armor_smithy = "amazons_dressmakery",
+      shipyard = "amazons_shipyard",
+      ferry_yard = "amazons_ferry_yard",
+      scout = "amazons_scouts_hut",
+      barracks = "amazons_initiation_site",
+      second_carrier = "amazons_tapir_farm",
+      charcoal = "amazons_charcoal_kiln",
+      mine_stone = "amazons_stonemine",
+      mine_gold = "amazons_gold_digger_dwelling",
+      terraforming = "amazons_gardening_center",
+   },
 }
 
 pop_textdomain()

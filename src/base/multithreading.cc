@@ -28,20 +28,21 @@
 #include "base/log.h"
 #include "base/wexception.h"
 
-static std::unique_ptr<std::thread::id> initializer_thread;
+static const std::thread::id kNoThread;
+static std::thread::id initializer_thread(kNoThread);
 
 void set_initializer_thread() {
 	log_info("Setting initializer thread.");
 
-	if (initializer_thread) {
+	if (initializer_thread != kNoThread) {
 		throw wexception("attempt to set initializer thread again");
 	}
 
-	initializer_thread.reset(new std::thread::id(std::this_thread::get_id()));
+	initializer_thread = std::this_thread::get_id();
 }
 
 bool is_initializer_thread() {
-	return (initializer_thread != nullptr) && (*initializer_thread == std::this_thread::get_id());
+	return initializer_thread == std::this_thread::get_id();
 }
 
 uint32_t NoteThreadSafeFunction::next_id_(0);
@@ -49,7 +50,7 @@ uint32_t NoteThreadSafeFunction::next_id_(0);
 void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
                                          const bool wait_until_completion,
                                          const bool rethrow_errors) {
-	if (!initializer_thread) {
+	if (initializer_thread == kNoThread) {
 		throw wexception("NoteThreadSafeFunction::instantiate: initializer thread was not set yet");
 	} else if (is_initializer_thread()) {
 		// The initializer thread may run the desired function directly. Publishing
@@ -78,7 +79,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				}
 				done = true;
 			}));
-			while (!done) {
+			while (!done) {  // NOLINT
 				// Wait until the NoteThreadSafeFunction has been handled.
 				// Since `done` was passed by address, it will set to
 				// `true` when the function has been executed.
@@ -94,12 +95,14 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	}
 }
 
+/** Wrapper around a STL recursive mutex plus some metadata. */
 struct MutexRecord {
-	std::recursive_mutex mutex;
-	std::atomic_uint nr_waiting_threads;
-
-	MutexRecord() : nr_waiting_threads(0) {
-	}
+	std::recursive_mutex mutex;  ///< The actual mutex.
+	std::atomic_uint nr_waiting_threads = {
+	   0};  ///< How many threads are currently trying to lock this mutex.
+	std::thread::id current_owner =
+	   kNoThread;  ///< The thread that has currently locked this mutex (may be #kNoThread).
+	size_t ownership_count = 0;  ///< How many times this mutex was locked.
 };
 static std::map<MutexLock::ID, MutexRecord> g_mutex;
 
@@ -136,6 +139,8 @@ constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
+// To protect the global mutex list
+std::mutex MutexLock::s_mutex_;
 MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
@@ -145,7 +150,10 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
 
+	const std::thread::id self = std::this_thread::get_id();
+	s_mutex_.lock();
 	MutexRecord& record = g_mutex[id_];
+	s_mutex_.unlock();
 
 	// When several threads are waiting to grab the same mutex, the first one is advantaged
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
@@ -155,7 +163,7 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	                           (id_ == ID::kLogicFrame) ? kMutexLogicFrameLockInterval :
                                                          kMutexNormalLockInterval;
 	++record.nr_waiting_threads;
-	if (!has_priority) {
+	if (!has_priority && record.current_owner != self) {
 		SDL_Delay(sleeptime);
 	}
 
@@ -177,6 +185,10 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	assert(record.nr_waiting_threads > 0);
 	--record.nr_waiting_threads;
 
+	assert(record.current_owner == kNoThread || record.current_owner == self);
+	record.current_owner = self;
+	record.ownership_count++;
+
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
 	        SDL_GetTicks() - time, counter);
@@ -188,5 +200,16 @@ MutexLock::~MutexLock() {
 	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
 #endif
 
-	g_mutex.at(id_).mutex.unlock();
+	s_mutex_.lock();
+	MutexRecord& record = g_mutex.at(id_);
+
+	assert(record.ownership_count > 0);
+	--record.ownership_count;
+	assert(record.current_owner == std::this_thread::get_id());
+	if (record.ownership_count == 0) {
+		record.current_owner = kNoThread;
+	}
+
+	record.mutex.unlock();
+	s_mutex_.unlock();
 }

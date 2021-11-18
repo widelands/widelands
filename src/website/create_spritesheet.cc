@@ -21,8 +21,6 @@
 #include <iostream>
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -196,7 +194,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 	} else {
 		// Frontier and flag animations need special treatment
 		std::vector<std::string> map_object_name_vector;
-		boost::split(map_object_name_vector, map_object_name, boost::is_any_of("_"));
+		split(map_object_name_vector, map_object_name, {'_'});
 		if (map_object_name_vector.size() == 2) {
 			const Widelands::TribeDescr* tribe =
 			   descriptions.get_tribe_descr(descriptions.tribe_index(map_object_name_vector.front()));
@@ -292,9 +290,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 					throw wexception(
 					   "Missing directional animation '%s\'", directional_animname.c_str());
 				}
-				const std::string filename_base = (boost::format("%s%s_%d") % animation_name %
-				                                   animation_direction_names[dir - 1] % scale)
-				                                     .str();
+				const std::string filename_base =
+				   bformat("%s%s_%d", animation_name, animation_direction_names[dir - 1], scale);
 				const Animation& directional_animation = g_animation_manager->get_animation(
 				   descr->get_animation(directional_animname, nullptr));
 				spritesheets_to_write.emplace_back(
@@ -302,9 +299,8 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 			}
 
 		} else {
-			spritesheets_to_write.emplace_back(
-			   new SpritesheetData((boost::format("%s_%d") % animation_name % scale).str(),
-			                       representative_animation, scale));
+			spritesheets_to_write.emplace_back(new SpritesheetData(
+			   bformat("%s_%d", animation_name, scale), representative_animation, scale));
 		}
 
 		// Find margins for trimming

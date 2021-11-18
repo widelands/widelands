@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
+#include <atomic>
 #include <deque>
 #include <list>
 #include <memory>
@@ -41,7 +42,7 @@
 class FileWrite;
 class RenderTarget;
 namespace Widelands {
-class MapObjectSaver;
+struct MapObjectSaver;
 }
 
 namespace UI {
@@ -271,7 +272,7 @@ public:
 	virtual bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
 	virtual bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	virtual bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	virtual bool handle_key(bool down, SDL_Keysym);
 	virtual bool handle_textinput(const std::string& text);
 	virtual bool handle_tooltip();
@@ -382,6 +383,7 @@ public:
 		kMinimap,
 		kEncyclopedia,
 		kShipWindow,
+		kAttackWindow,
 	};
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
@@ -393,8 +395,12 @@ public:
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
-	void set_handle_textinput() {
-		flags_ |= pf_handle_textinput;
+	void set_handle_textinput(bool const on = true) {
+		if (on) {
+			flags_ |= pf_handle_textinput;
+		} else {
+			flags_ &= ~pf_handle_textinput;
+		}
 	}
 
 	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
@@ -490,7 +496,7 @@ private:
 	bool do_mousepress(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mouserelease(const uint8_t btn, int32_t x, int32_t y);
 	bool do_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos);
+	bool do_mousewheel(int32_t x, int32_t y, uint16_t modstate, Vector2i rel_mouse_pos);
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
@@ -503,7 +509,7 @@ private:
 	static bool ui_mouserelease(const uint8_t button, int32_t x, int32_t y);
 	static bool
 	ui_mousemove(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static bool ui_mousewheel(uint32_t which, int32_t x, int32_t y);
+	static bool ui_mousewheel(int32_t x, int32_t y, uint16_t modstate);
 	static bool ui_key(bool down, SDL_Keysym code);
 	static bool ui_textinput(const std::string& text);
 
@@ -515,7 +521,7 @@ private:
 	Panel* mousein_child_;  //  child panel that the mouse is in
 	Panel* focus_;          //  keyboard focus
 
-	uint32_t flags_;
+	std::atomic<uint32_t> flags_;
 
 	/**
 	 * The outer rectangle is defined by (x_, y_, w_, h_)
@@ -534,8 +540,8 @@ private:
 	int return_code_;
 
 	std::string tooltip_;
-	static Panel* modal_;
-	static Panel* mousegrab_;
+	static std::atomic<Panel*> modal_;
+	static std::atomic<Panel*> mousegrab_;
 	static Panel* mousein_;
 	static Panel* tooltip_panel_;
 	static Vector2i tooltip_fixed_pos_;
@@ -545,8 +551,8 @@ private:
 	static FxId click_fx_;
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
-	LogicThreadState logic_thread_locked_;
-	static bool logic_thread_running_;
+	std::atomic<LogicThreadState> logic_thread_locked_;
+	static std::atomic_bool logic_thread_running_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunction>> subscriber1_;
 	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunctionHandled>> subscriber2_;

@@ -21,10 +21,9 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "map_io/map_loader.h"
@@ -32,8 +31,6 @@
 
 namespace FsMenu {
 
-#define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
-#define RANDOM "random"
 constexpr const char* const kClosed = "closed";
 constexpr const char* const kHuman_player = "human_player";
 
@@ -85,10 +82,9 @@ void SinglePlayerTribeDropdown::rebuild() {
 				const std::string player_name =
 				   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 				         another player's starting position. */
-				   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1)).str();
-				dropdown_.add(player_name,
-				              boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
-				              player_image, (i + 1) == player_setting.shared_in, player_name);
+				   bformat(_("Shared in Player %u"), static_cast<unsigned int>(i + 1));
+				dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)), player_image,
+				              (i + 1) == player_setting.shared_in, player_name);
 			}
 		}
 		dropdown_.set_enabled(dropdown_.size() > 1);
@@ -99,11 +95,11 @@ void SinglePlayerTribeDropdown::rebuild() {
 				              false, tribeinfo.tooltip);
 			}
 		}
-		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
+		dropdown_.add(pgettext("tribe", "Random"), kRandom,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,
 		              _("The tribe will be selected at random"));
 		if (player_setting.random_tribe) {
-			dropdown_.select(RANDOM);
+			dropdown_.select(kRandom);
 		} else {
 			dropdown_.select(player_setting.tribe);
 		}
@@ -128,11 +124,10 @@ void SinglePlayerTribeDropdown::selection_action() {
                                   UI::ButtonDisableStyle::kFlat);
 	if (dropdown_.has_selection()) {
 		if (player_settings.state == PlayerSettings::State::kShared) {
-			settings_->set_player_shared(
-			   id_, boost::lexical_cast<unsigned int>(dropdown_.get_selected()));
+			settings_->set_player_shared(id_, stoul(dropdown_.get_selected()));
 		} else {
 			const std::string& selected = dropdown_.get_selected();
-			settings_->set_player_tribe(id_, selected, selected == RANDOM);
+			settings_->set_player_tribe(id_, selected, selected == kRandom);
 		}
 		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 	}
@@ -177,12 +172,12 @@ void SinglePlayerPlayerTypeDropdown::fill() {
 	// AIs
 	if (settings.get_tribeinfo(settings.players[id_].tribe).suited_for_ai) {
 		for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-			dropdown_.add(_(impl->descname), (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+			dropdown_.add(_(impl->descname), bformat("%s%s", kAiNamePrefix, impl->name),
 			              g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 		}
 		/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-		dropdown_.add(_("Random AI"), AI_NAME_PREFIX RANDOM,
-		              g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
+		dropdown_.add(_("Random AI"), kRandomAiName, g_image_cache->get("images/ai/ai_random.png"),
+		              false, _("Random AI"));
 	}
 	dropdown_.add(
 	   /** TRANSLATORS: This is the "name" of the single player */
@@ -200,20 +195,20 @@ void SinglePlayerPlayerTypeDropdown::select_entry() {
 	const PlayerSettings& player_setting = settings.players[id_];
 	if (player_setting.state == PlayerSettings::State::kHuman) {
 		dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
-		dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
+		dropdown_.set_tooltip(bformat(_("%1%: %2%"), _("Type"), _("Human")));
 		dropdown_.set_enabled(false);
 	} else if (player_setting.state == PlayerSettings::State::kClosed) {
 		dropdown_.select(kClosed);
 	} else {
 		if (player_setting.state == PlayerSettings::State::kComputer) {
 			if (player_setting.random_ai) {
-				dropdown_.select(AI_NAME_PREFIX RANDOM);
+				dropdown_.select(kRandomAiName);
 			} else if (player_setting.ai.empty()) {
 				dropdown_.set_errored(_("No AI"));
 			} else {
 				const AI::ComputerPlayer::Implementation* impl =
 				   AI::ComputerPlayer::get_implementation(player_setting.ai);
-				dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
+				dropdown_.select(bformat("%s%s", kAiNamePrefix, impl->name));
 			}
 		}
 	}
@@ -233,12 +228,12 @@ void SinglePlayerPlayerTypeDropdown::selection_action() {
 			state = PlayerSettings::State::kHuman;
 			dropdown_.set_enabled(false);
 		} else {
-			if (selected == AI_NAME_PREFIX RANDOM) {
+			if (selected == kRandomAiName) {
 				settings_->set_player_ai(id_, "", true);
 			} else {
-				if (boost::starts_with(selected, AI_NAME_PREFIX)) {
+				if (starts_with(selected, kAiNamePrefix)) {
 					std::vector<std::string> parts;
-					boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
+					split(parts, selected, {kAiNameSeparator});
 					assert(parts.size() == 2);
 					settings_->set_player_ai(id_, parts[1], false);
 				} else {
@@ -387,7 +382,7 @@ void SinglePlayerTeamDropdown::rebuild() {
 #endif
 	for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
 		assert(t < no_of_team_colors);
-		dropdown_.add((boost::format(_("Team %d")) % static_cast<unsigned int>(t)).str(), t,
+		dropdown_.add(bformat(_("Team %d"), static_cast<unsigned int>(t)), t,
 		              playercolor_image(kTeamColors[t], "images/players/team.png"));
 	}
 	dropdown_.select(player_setting.team);

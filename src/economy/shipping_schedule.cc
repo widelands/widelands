@@ -44,7 +44,7 @@ namespace Widelands {
 // All times in this file are given in milliseconds of gametime.
 
 // Performance tradeoff in the First Pass
-constexpr Duration kActualDurationsRecalculationInterval = Duration(60 * 1000);
+constexpr Duration kActualDurationsRecalculationInterval(60 * 1000);
 
 // Give a ship the highest score for assigning wares to it if it will
 // arrive at the port of interest within the next 10 s gametime,
@@ -1096,21 +1096,21 @@ Duration ShippingSchedule::update(Game& game) {
 	 *    start and end port between its two existing targets.
 	 */
 	std::set<PrioritisedPortPair> _open_pairs;
-	for (auto& start__map : items_in_ports) {
-		for (auto& dest__shipsinfos : start__map.second) {
-			assert(dest__shipsinfos.second.second <= 0);
-			if (dest__shipsinfos.second.second < 0) {
-				const int32_t maxprio = start__map.first.get(game)->calc_max_priority(
-				   game, *dest__shipsinfos.first.get(game));
+	for (auto& start_to_map : items_in_ports) {
+		for (auto& dest_to_shipsinfos : start_to_map.second) {
+			assert(dest_to_shipsinfos.second.second <= 0);
+			if (dest_to_shipsinfos.second.second < 0) {
+				const int32_t maxprio = start_to_map.first.get(game)->calc_max_priority(
+				   game, *dest_to_shipsinfos.first.get(game));
 				const int32_t total_waiting =
-				   start__map.first.get(game)->count_waiting(dest__shipsinfos.first.get(game));
-				const int32_t open = -dest__shipsinfos.second.second;
+				   start_to_map.first.get(game)->count_waiting(dest_to_shipsinfos.first.get(game));
+				const int32_t open = -dest_to_shipsinfos.second.second;
 				assert(total_waiting >= open);
 				assert(maxprio >= total_waiting);  // a priority of at least 1 per item
 				const int32_t prio = maxprio * open / total_waiting;
 				assert(prio >= 0);
 				_open_pairs.insert(PrioritisedPortPair(
-				   start__map.first.get(game), dest__shipsinfos.first.get(game), open, prio));
+				   start_to_map.first.get(game), dest_to_shipsinfos.first.get(game), open, prio));
 			}
 		}
 	}

@@ -45,24 +45,22 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
-		   safe_richtext_message(
-		      (boost::format(
-		          local ? _("Are you certain that you want to uninstall this add-on?\n\n"
-		                    "%1$s\n"
-		                    "by %2$s\n"
-		                    "Version %3$s\n"
-		                    "Category: %4$s\n"
-		                    "%5$s\n\n"
-		                    "Note that this add-on can not be downloaded again from the server.") :
-                        _("Are you certain that you want to uninstall this add-on?\n\n"
-		                    "%1$s\n"
-		                    "by %2$s\n"
-		                    "Version %3$s\n"
-		                    "Category: %4$s\n"
-		                    "%5$s")) %
-		       info->descname() % info->author() % AddOns::version_to_string(info->version) %
-		       AddOns::kAddOnCategories.at(info->category).descname() % info->description())
-		         .str()),
+		   safe_richtext_message(bformat(
+		      local ? _("Are you certain that you want to uninstall this add-on?\n\n"
+		                "%1$s\n"
+		                "by %2$s\n"
+		                "Version %3$s\n"
+		                "Category: %4$s\n"
+		                "%5$s\n\n"
+		                "Note that this add-on can not be downloaded again from the server.") :
+                    _("Are you certain that you want to uninstall this add-on?\n\n"
+		                "%1$s\n"
+		                "by %2$s\n"
+		                "Version %3$s\n"
+		                "Category: %4$s\n"
+		                "%5$s"),
+		      info->descname(), info->author(), AddOns::version_to_string(info->version),
+		      AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -86,7 +84,7 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 				AddOns::update_ui_theme(AddOns::UpdateThemeAction::kAutodetect);
 				ctrl->get_topmost_forefather().template_directory_changed();
 			}
-			return ctrl->rebuild();
+			return ctrl->rebuild(true);
 		}
 	}
 	NEVER_HERE();
@@ -104,18 +102,12 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 		result += "<br>";
 		std::string str;
 		if (info->max_wl_version.empty()) {
-			str += (boost::format(_("Requires a Widelands version of at least %s.")) %
-			        info->min_wl_version)
-			          .str();
+			str += bformat(_("Requires a Widelands version of at least %s."), info->min_wl_version);
 		} else if (info->min_wl_version.empty()) {
-			str +=
-			   (boost::format(_("Requires a Widelands version of at most %s.")) % info->max_wl_version)
-			      .str();
+			str += bformat(_("Requires a Widelands version of at most %s."), info->max_wl_version);
 		} else {
-			str +=
-			   (boost::format(_("Requires a Widelands version of at least %1$s and at most %2$s.")) %
-			    info->min_wl_version % info->max_wl_version)
-			      .str();
+			str += bformat(_("Requires a Widelands version of at least %1$s and at most %2$s."),
+			               info->min_wl_version, info->max_wl_version);
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
@@ -171,31 +163,29 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info->version) %
-               info->i18n_version)
-                 .str(),
+              bformat(_("%1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version),
               UI::Align::kCenter),
-     txt_(this,
-          0,
-          0,
-          24,
-          24,
-          UI::PanelStyle::kFsMenu,
-          (boost::format("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>") %
-           (boost::format(
-               /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
-               _("%1$s %2$s")) %
-            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-               .as_font_tag(info->descname()) %
-            g_style_manager->font_style(UI::FontStyle::kItalic)
-               .as_font_tag((boost::format(_("(%s)")) % info->internal_name).str()))
-              .str() %
+     txt_(
+        this,
+        0,
+        0,
+        24,
+        24,
+        UI::PanelStyle::kFsMenu,
+        bformat(
+           "<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>",
+           bformat(
+              /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
+              _("%1$s %2$s"),
+              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+                 .as_font_tag(info->descname()),
+              g_style_manager->font_style(UI::FontStyle::kItalic)
+                 .as_font_tag(bformat(_("(%s)"), info->internal_name))),
            g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag((boost::format(_("by %s")) % info->author()).str()) %
-           required_wl_version_and_sync_safety_string(info) %
+              .as_font_tag(bformat(_("by %s"), info->author())),
+           required_wl_version_and_sync_safety_string(info),
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-              .as_font_tag(info->description()))
-             .str()) {
+              .as_font_tag(info->description()))) {
 
 	uninstall_.sigclicked.connect(
 	   [ctrl, this]() { uninstall(ctrl, info_, !ctrl->is_remote(info_->internal_name)); });
@@ -213,23 +203,19 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                                      AddOns::UpdateThemeAction::kAutodetect,
 					                        pair.first->internal_name);
 					get_topmost_forefather().template_directory_changed();
-					ctrl->rebuild();
 				}
-				return ctrl->update_dependency_errors();
+				return ctrl->rebuild(true);
 			}
 		}
 		NEVER_HERE();
 	});
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info->category).descname())
-	      .str());
+	   bformat(_("Category: %s"), AddOns::kAddOnCategories.at(info->category).descname()));
 	version_.set_handle_mouse(true);
-	version_.set_tooltip(
+	version_.set_tooltip(bformat(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info->version) %
-	    info->i18n_version)
-	      .str());
+	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));
 	set_can_focus(true);
 	layout();
 }
@@ -322,6 +308,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(info->verified ? "images/ui_basic/list_selected.png" :
                                                    "images/ui_basic/stop.png")),
+     quality_(this, UI::PanelStyle::kFsMenu, AddOnQuality::kQualities.at(info->quality)().icon),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -330,9 +317,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info->version) %
-               info->i18n_version)
-                 .str(),
+              bformat(_("%1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version),
               UI::Align::kCenter),
      bottom_row_left_(this,
                       UI::PanelStyle::kFsMenu,
@@ -353,40 +338,41 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         0,
         info->internal_name.empty() ?
            "" :
-           (boost::format(
-               /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
-                  Number of screenshots */
-               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u")) %
-            filesize_string(info->total_file_size) % info->download_count %
-            (info->number_of_votes() ? (boost::format("%.2f") % info->average_rating()).str() :
-                                       "–") %
-            info->user_comments.size() % info->screenshots.size())
-              .str(),
+           bformat(
+              /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
+                 Number of screenshots */
+              _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
+              filesize_string(info->total_file_size),
+              info->download_count,
+              (info->number_of_votes() ? bformat("%.2f", info->average_rating()) : "–"),
+              info->user_comments.size(),
+              info->screenshots.size()),
         UI::Align::kRight),
-     txt_(this,
-          0,
-          0,
-          24,
-          24,
-          UI::PanelStyle::kFsMenu,
-          (boost::format("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>")
-           /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
-           % (boost::format(_("%1$s %2$s")) %
+     txt_(
+        this,
+        0,
+        0,
+        24,
+        24,
+        UI::PanelStyle::kFsMenu,
+        bformat(
+           "<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>",
+           bformat(
+              /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
+              _("%1$s %2$s"),
               g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-                 .as_font_tag(info->descname()) %
+                 .as_font_tag(info->descname()),
               g_style_manager->font_style(UI::FontStyle::kItalic)
-                 .as_font_tag((boost::format(_("(%s)")) % info->internal_name).str()))
-                .str() %
+                 .as_font_tag(bformat(_("(%s)"), info->internal_name))),
            g_style_manager->font_style(UI::FontStyle::kItalic)
               .as_font_tag(info->author() == info->upload_username ?
-                              (boost::format(_("by %s")) % info->author()).str() :
-                              (boost::format(_("by %1$s (uploaded by %2$s)")) % info->author() %
-                               info->upload_username)
-                                 .str()) %
-           required_wl_version_and_sync_safety_string(info) %
+                              bformat(_("by %s"), info->author()) :
+                              bformat(_("by %1$s (uploaded by %2$s)"),
+                                      info->author(),
+                                      info->upload_username)),
+           required_wl_version_and_sync_safety_string(info),
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-              .as_font_tag(info->description()))
-             .str()),
+              .as_font_tag(info->description()))),
      full_upgrade_possible_(AddOns::is_newer_version(installed_version, info->version)) {
 
 	interact_.sigclicked.connect([ctrl, info]() {
@@ -399,53 +385,51 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		if (!info_->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
-			   safe_richtext_message(
-			      (boost::format(_("Are you certain that you want to install this add-on?\n\n"
-			                       "%1$s\n"
-			                       "by %2$s\n"
-			                       "%3$s\n"
-			                       "Version %4$s\n"
-			                       "Category: %5$s\n"
-			                       "%6$s\n")) %
-			       info_->descname() % info_->author() %
-			       (info_->verified ? _("Verified") : _("NOT VERIFIED")) %
-			       AddOns::version_to_string(info_->version) %
-			       AddOns::kAddOnCategories.at(info_->category).descname() % info_->description())
-			         .str()),
+			   safe_richtext_message(bformat(
+			      _("Are you certain that you want to install this add-on?\n\n"
+			        "%1$s\n"
+			        "by %2$s\n"
+			        "%3$s\n"
+			        "Version %4$s\n"
+			        "Category: %5$s\n"
+			        "%6$s\n"),
+			      info_->descname(), info_->author(),
+			      (info_->verified ? _("Verified") : _("NOT VERIFIED")),
+			      AddOns::version_to_string(info_->version),
+			      AddOns::kAddOnCategories.at(info_->category).descname(), info_->description())),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
 		}
 		ctrl->install_or_upgrade(info_, false);
-		ctrl->rebuild();
+		ctrl->rebuild(true);
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
 		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
-			   safe_richtext_message(
-			      (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
-			                       "%1$s\n"
-			                       "by %2$s\n"
-			                       "%3$s\n"
-			                       "Installed version: %4$s\n"
-			                       "Available version: %5$s\n"
-			                       "Category: %6$s\n"
-			                       "%7$s")) %
-			       info->descname() % info->author() %
-			       (info->verified ? _("Verified") : _("NOT VERIFIED")) %
-			       AddOns::version_to_string(installed_version) %
-			       AddOns::version_to_string(info->version) %
-			       AddOns::kAddOnCategories.at(info->category).descname() % info->description())
-			         .str()),
+			   safe_richtext_message(bformat(
+			      _("Are you certain that you want to upgrade this add-on?\n\n"
+			        "%1$s\n"
+			        "by %2$s\n"
+			        "%3$s\n"
+			        "Installed version: %4$s\n"
+			        "Available version: %5$s\n"
+			        "Category: %6$s\n"
+			        "%7$s"),
+			      info->descname(), info->author(),
+			      (info->verified ? _("Verified") : _("NOT VERIFIED")),
+			      AddOns::version_to_string(installed_version),
+			      AddOns::version_to_string(info->version),
+			      AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
 			}
 		}
 		ctrl->install_or_upgrade(info, !full_upgrade_possible_);
-		ctrl->rebuild();
+		ctrl->rebuild(true);
 	});
 	if (info->internal_name.empty()) {
 		install_.set_enabled(false);
@@ -461,17 +445,14 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	}
 
 	for (UI::Panel* p :
-	     std::vector<UI::Panel*>{&category_, &version_, &verified_, &bottom_row_right_}) {
+	     std::vector<UI::Panel*>{&category_, &version_, &verified_, &quality_, &bottom_row_right_}) {
 		p->set_handle_mouse(true);
 	}
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info->category).descname())
-	      .str());
-	version_.set_tooltip(
+	   bformat(_("Category: %s"), AddOns::kAddOnCategories.at(info->category).descname()));
+	version_.set_tooltip(bformat(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info->version) %
-	    info->i18n_version)
-	      .str());
+	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));
 	verified_.set_tooltip(
 	   info->internal_name.empty() ?
          _("Error") :
@@ -479,29 +460,27 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
          _("Verified by the Widelands Development Team") :
          _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
+	quality_.set_tooltip(info->internal_name.empty() ?
+                           _("Error") :
+                           AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
          "" :
-         (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
-	       (boost::format(
-	           ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size)) %
-	        info->total_file_size)
-	          .str() %
-	       (boost::format(ngettext("%u download", "%u downloads", info->download_count)) %
-	        info->download_count)
-	          .str() %
-	       (info->number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                                          "Average rating: %1$.3f (%2$u votes)",
-	                                                          info->number_of_votes())) %
-	                                   info->average_rating() % info->number_of_votes())
-	                                     .str() :
-                                     _("No votes yet")) %
-	       (boost::format(ngettext("%u comment", "%u comments", info->user_comments.size())) %
-	        info->user_comments.size()) %
-	       (boost::format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size())) %
-	        info->screenshots.size())
-	          .str())
-	         .str());
+         bformat(
+	         "%s<br>%s<br>%s<br>%s<br>%s",
+	         bformat(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
+	                 info->total_file_size),
+	         bformat(
+	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
+	         (info->number_of_votes() ?
+                bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                              "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
+	                     info->average_rating(), info->number_of_votes()) :
+                _("No votes yet")),
+	         bformat(ngettext("%u comment", "%u comments", info->user_comments.size()),
+	                 info->user_comments.size()),
+	         bformat(ngettext("%u screenshot", "%u screenshots", info->screenshots.size()),
+	                 info->screenshots.size())));
 
 	layout();
 }
@@ -514,12 +493,12 @@ void RemoteAddOnRow::layout() {
 	}
 	set_desired_size(get_w(), 4 * kRowButtonSize);
 	for (UI::Panel* p : std::vector<UI::Panel*>{
-	        &install_, &uninstall_, &interact_, &upgrade_, &category_, &version_, &verified_}) {
+	        &install_, &uninstall_, &upgrade_, &category_, &version_, &verified_, &quality_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
-	const int icon_size = 2 * kRowButtonSize + kRowButtonSpacing;
+	const int icon_size = 2 * kRowButtonSize;
 	icon_.set_size(icon_size, icon_size);
-	icon_.set_pos(Vector2i(0, kRowButtonSpacing));
+	icon_.set_pos(Vector2i(0, 0));
 	version_.set_size(
 	   3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize - kRowButtonSpacing);
 	version_.set_pos(Vector2i(
@@ -527,11 +506,13 @@ void RemoteAddOnRow::layout() {
 	uninstall_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
 	upgrade_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
+	interact_.set_size(2 * kRowButtonSize + kRowButtonSpacing, kRowButtonSize);
+	interact_.set_pos(
+	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
 	category_.set_pos(
 	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
-	verified_.set_pos(
-	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
+	verified_.set_pos(Vector2i(0, 2 * kRowButtonSize));
+	quality_.set_pos(Vector2i(kRowButtonSize, 2 * kRowButtonSize));
 	txt_.set_size(
 	   get_w() - icon_size - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(icon_size, 0));

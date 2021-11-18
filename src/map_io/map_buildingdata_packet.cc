@@ -643,7 +643,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
-			ProductionSite::WorkingPosition& wp_begin = *productionsite.working_positions_;
+			const auto& wp_begin = productionsite.working_positions_.begin();
 			const ProductionSiteDescr& pr_descr = productionsite.descr();
 			const BillOfMaterials& working_positions = pr_descr.working_positions();
 
@@ -655,7 +655,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				const DescriptionIndex& worker_index = req.get_index();
 
 				//  Find a working position that matches this request.
-				ProductionSite::WorkingPosition* wp = &wp_begin;
+				auto wp = wp_begin;
 				bool found_working_position = false;
 				for (const auto& working_position : working_positions) {
 					uint32_t count = working_position.second;
@@ -697,7 +697,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 				//  Find a working position that matches this worker.
 				const WorkerDescr& worker_descr = worker->descr();
-				ProductionSite::WorkingPosition* wp = &wp_begin;
+				auto wp = wp_begin;
 				bool found_working_position = false;
 				for (const auto& working_position : working_positions) {
 					uint32_t count = working_position.second;
@@ -759,7 +759,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.stack_.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
 				std::string program_name = fr.c_string();
-				std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+				program_name = to_lower(program_name);
 				if (!pr_descr.programs().count(program_name)) {
 					log_warn("productionsite has unknown program \"%s\", replacing it with "
 					         "\"main\"\n",
@@ -815,8 +815,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 				const Worker& worker = mol.get<Worker>(fr.unsigned_32());
 				int32_t i = 0;
 				// Determine main worker's index as this may change during saveloading (#3891)
-				for (const auto* wp = productionsite.working_positions();; ++wp) {
-					if (wp->worker.get(game) == &worker) {
+				for (const ProductionSite::WorkingPosition& wp : *productionsite.working_positions()) {
+					if (wp.worker.get(game) == &worker) {
 						productionsite.main_worker_ = i;
 						break;
 					}
@@ -1281,16 +1281,16 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	fw.unsigned_16(kCurrentPacketVersionProductionsite);
 
 	uint32_t const nr_working_positions = productionsite.descr().nr_working_positions();
-	const ProductionSite::WorkingPosition& begin = productionsite.working_positions_[0];
-	const ProductionSite::WorkingPosition& end = (&begin)[nr_working_positions];
+	const auto& begin = productionsite.working_positions_.begin();
+	const auto& end = std::next(begin, nr_working_positions);
 	uint32_t nr_workers = 0;
-	for (ProductionSite::WorkingPosition const* i = &begin; i < &end; ++i) {
+	for (auto i = begin; i != end; ++i) {
 		nr_workers += i->worker.get(game) ? 1 : 0;
 	}
 
 	//  worker requests
 	fw.unsigned_16(nr_working_positions - nr_workers);
-	for (ProductionSite::WorkingPosition const* i = &begin; i < &end; ++i) {
+	for (auto i = begin; i != end; ++i) {
 		if (Request const* const r = i->worker_request) {
 			r->write(fw, game, mos);
 		}
@@ -1298,7 +1298,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 
 	//  workers
 	fw.unsigned_16(nr_workers);
-	for (ProductionSite::WorkingPosition const* i = &begin; i < &end; ++i) {
+	for (auto i = begin; i != end; ++i) {
 		if (Worker const* const w = i->worker.get(game)) {
 			assert(!i->worker_request);
 			assert(mos.is_object_known(*w));
@@ -1364,7 +1364,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	} else {
 		fw.unsigned_8(1);
 		fw.unsigned_32(mos.get_object_file_index(
-		   *productionsite.working_positions_[productionsite.main_worker_].worker.get(game)));
+		   *productionsite.working_positions_.at(productionsite.main_worker_).worker.get(game)));
 	}
 }
 

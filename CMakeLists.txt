@@ -12,6 +12,7 @@ option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
+option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
@@ -28,6 +29,7 @@ if(POLICY CMP0072)
 
   # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
   # still needed or not.
+  # --- Seems to work fine on 21.04
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
@@ -122,11 +124,7 @@ if (OPTION_BUILD_WINSTATIC)
 endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.48
-  COMPONENTS
-    unit_test_framework
-  REQUIRED
-    system)
+find_package(Boost 1.48 COMPONENTS REQUIRED system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -187,7 +185,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   else()
     set(WL_DEBUG_FLAGS "-g -DDEBUG")
   endif()
-  option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  if(NOT OPTION_TSAN)
+    option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
     message(STATUS "GCC >6.2.0 breaks -03, setting -02")
@@ -205,13 +205,23 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
-  option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  if(NOT OPTION_TSAN)
+    option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "None")
   message(STATUS "Not setting any default flags.")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
+if(OPTION_TSAN)
+  message(STATUS "Using ThreadSanitizer https://clang.llvm.org/docs/ThreadSanitizer.html")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=thread")
+  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=thread" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  option(OPTION_ASAN "Build with AddressSanitizer" OFF)
+else()
+  message(STATUS "Not using ThreadSanitizer.")
+endif(OPTION_TSAN)
 
 if(OPTION_ASAN)
   message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
@@ -222,6 +232,10 @@ if(OPTION_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
 endif(OPTION_ASAN)
+
+if(OPTION_ASAN AND OPTION_TSAN)
+  message(FATAL_ERROR "OPTION_ASAN and OPTION_TSAN cannot be used together")
+endif()
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
@@ -253,9 +267,6 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
-
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=deprecated")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=non-pod-varargs")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
 
@@ -306,14 +317,23 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
+
+  # Detect invalid constexpr initialization
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-elide-constructors")
 endif()
 
 if(NOT MSVC)
   # Turn some warnings into errors.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=format-security")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=return-type")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=shadow")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror=uninitialized")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 7.0))
+    # Silence some false positives on g++ 5 and 6
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+  endif()
+  if (APPLE)  # Our Mac CI needs these
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+  endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")
 endif()

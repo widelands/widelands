@@ -33,6 +33,7 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "network/gamehost.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
@@ -49,7 +50,8 @@ namespace {
 
 std::string speed_string(int const speed) {
 	if (speed) {
-		return (boost::format("%u.%ux") % (speed / 1000) % (speed / 100 % 10)).str();
+		/** TRANSLATORS: This is a game speed value */
+		return bformat(_("%1$u.%2$u×"), (speed / 1000), (speed / 100 % 10));
 	}
 	return _("PAUSE");
 }
@@ -408,20 +410,6 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		return false;
 	}
 
-	if (get_config_bool("numpad_diagonalscrolling", false)) {
-		// If this option is enabled and one of the numpad keys 1,3,7,9 was pressed,
-		// ignore any shortcuts assigned to PageUp/PageDown/Home/End and move the map instead
-		switch (code.sym) {
-		case SDLK_KP_1:
-		case SDLK_KP_3:
-		case SDLK_KP_7:
-		case SDLK_KP_9:
-			return false;
-		default:
-			break;
-		}
-	}
-
 	if (matches_shortcut(KeyboardShortcut::kInGameSpeedReset, code)) {
 		reset_gamespeed();
 		return true;
@@ -499,6 +487,19 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	return false;
 }
 
+bool InteractiveGameBase::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kGameSpeed, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	if (change < 0) {
+		decrease_gamespeed(-kSpeedSlow * change);
+	} else {
+		increase_gamespeed(kSpeedSlow * change);
+	}
+	return true;
+}
+
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game* InteractiveGameBase::get_game() const {
 	return dynamic_cast<Widelands::Game*>(&egbase());
@@ -527,11 +528,9 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 				game_speed = speed_string(real);
 			}
 		} else {
-			game_speed = (boost::format
-			              /** TRANSLATORS: actual_speed (desired_speed) */
-			              (_("%1$s (%2$s)")) %
-			              speed_string(real) % speed_string(desired))
-			                .str();
+			game_speed = bformat
+			   /** TRANSLATORS: actual_speed (desired_speed) */
+			   (_("%1$s (%2$s)"), speed_string(real), speed_string(desired));
 		}
 
 		info_panel_.set_speed_string(game_speed);

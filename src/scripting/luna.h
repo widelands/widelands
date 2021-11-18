@@ -64,6 +64,7 @@
 
 #include <cstring>
 
+#include "base/macros.h"
 #include "scripting/lua.h"
 #include "scripting/luna_impl.h"
 
@@ -74,8 +75,12 @@ class LunaClass {
 public:
 	virtual ~LunaClass() {
 	}
+
+	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	virtual void __persist(lua_State*) = 0;
 	virtual void __unpersist(lua_State*) = 0;
+	CLANG_DIAG_RESERVED_IDENTIFIER_ON
+
 	virtual const char* get_modulename() = 0;
 };
 

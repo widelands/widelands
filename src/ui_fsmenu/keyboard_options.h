@@ -27,6 +27,8 @@
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
+#include "ui_fsmenu/mousewheel_options.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 
@@ -38,13 +40,22 @@ public:
 
 	bool handle_key(bool, SDL_Keysym) override;
 
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuKeyboardOptions;
+	}
+
+	std::map<std::string, std::string> get_default_fastplace_shortcuts(KeyboardShortcut) const;
+
 private:
 	// TabPanels with scrolling content boxes do not layout properly
 	// as box children. Therefore no main box here.
 	UI::Box buttons_box_;
 	UI::TabPanel tabs_;
+	MousewheelOptionsDialog mousewheel_options_;
 	UI::Button reset_, ok_;
 	std::vector<UI::Box*> boxes_;
+
+	void init_fastplace_default_shortcuts();
 
 	std::unique_ptr<Widelands::Game> game_;
 };

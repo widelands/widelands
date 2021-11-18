@@ -22,8 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
@@ -42,20 +40,18 @@ SpriteSheetAnimation::MipMapEntry IMPLEMENTATION
 SpriteSheetAnimation::SpriteSheetMipMapEntry::SpriteSheetMipMapEntry(const std::string& file,
                                                                      int init_rows,
                                                                      int init_columns)
-   : Animation::MipMapEntry(),
-     sheet(nullptr),
+   : sheet(nullptr),
      playercolor_mask_sheet(nullptr),
      rows(init_rows),
      columns(init_columns),
      w(0),
      h(0),
-     sheet_file(file),
-     playercolor_mask_sheet_file("") {
+     sheet_file(file) {
 
 	assert(g_fs->file_exists(file));
 
 	playercolor_mask_sheet_file = file;
-	boost::replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
+	replace_last(playercolor_mask_sheet_file, ".png", "_pc.png");
 	if (g_fs->file_exists(playercolor_mask_sheet_file)) {
 		has_playercolor_masks = true;
 	} else {

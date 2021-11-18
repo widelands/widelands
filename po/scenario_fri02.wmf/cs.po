@@ -23,7 +23,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr "Upozornění"
+msgstr "Poznámka"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -48,8 +48,8 @@ msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
-"Postav lom, rákosovou farmu, jámový výkop, studnu, uhlířskou pec, cihlárnu a"
-" domy pro dřevorubce a lesníky."
+"Postav lom, rákosovou farmu, jámový výkop, studnu, uhlířskou pec, cihelnu a "
+"domy pro dřevorubce a lesníky."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:33
 msgid "Expand to the south"
@@ -64,7 +64,7 @@ msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
-"Sever nevypadá, že by nám měl co nabídnout. Ale kdo ví, co najdeme na jihu?"
+"Sever nevypadá, že by nám měl co nabídnout, ale kdo ví, co najdeme na jihu?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:41
 msgid "Train and recycle"
@@ -99,7 +99,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
-msgstr "Postav rybí sádka"
+msgstr "Postav rybí sádku"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
@@ -121,7 +121,7 @@ msgstr "Rozhodni se, zda chceš spolupracovat s Císařstvím."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr "Nahromaď suroviny jako dar, nebo znič Císařský sklad"
+msgstr "Nahromaď suroviny pro dar nebo znič Císařský sklad"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:61
 msgid ""
@@ -133,51 +133,51 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "30 × Log"
-msgstr "30 klád"
+msgstr "30 × kláda"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid "40 × Granite"
-msgstr "40 kvádrů žuly"
+msgstr "40 × žula"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Fish"
-msgstr "30 ryb"
+msgstr "30 × ryba"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "30 × Beer"
-msgstr "30 piv"
+msgstr "30 × pivo"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "150 × Water"
-msgstr "150 kýblů vody"
+msgstr "150 × voda"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
-msgstr "40 malých svačin"
+msgstr "40 × malá svačina"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
-msgstr "10 jídel"
+msgstr "10 × jídlo"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "30 × Coal"
-msgstr "30 hrud uhlí"
+msgstr "30 × uhlí"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "40 × Iron Ore"
-msgstr "40 valounů železné rudy"
+msgstr "40 × železná ruda"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "20 × Iron"
-msgstr "20 prutů železa"
+msgstr "20 × železo"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr "20 valounů zlaté rudy"
+msgstr "20 × zlatá ruda"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
-msgstr "10 prutů zlata"
+msgstr "10 × zlato"
 
 #. TRANSLATORS: Continues from "Decide whether you want to work with Murilius
 #. against the Barbarians. If so, fill his warehouse with these wares: [list
@@ -189,7 +189,8 @@ msgid ""
 "over."
 msgstr ""
 "V opačném případě znič sklad. Tím ale riskuješ, že se Murilius stane tvým "
-"nepřítelem. Zakázal ti rozšiřovat tvé území, dokud mu zboží nebude předáno."
+"nepřítelem. Mezitím ti zakázal rozšiřovat tvé území, dokud mu zboží nebude "
+"předáno."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
@@ -211,7 +212,7 @@ msgstr "Dešifruj báseň"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr "Pochop báseň, kterou tvůj průzkumný špeh zachytil v Císařství"
+msgstr "Pochop báseň, kterou tvůj průzkumný špeh našel v Císařství"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91

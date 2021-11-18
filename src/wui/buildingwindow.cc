@@ -296,8 +296,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
-				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-				   "<br>" +
+				   bformat(_("Enhance to %s"), building_descr.descname()) + "<br>" +
 				   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 				      .header_font()
 				      .as_font_tag(_("Construction costs:")) +
@@ -396,7 +395,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (building->owner().tribe().safe_building_index(building->descr().name()) ==
 		    building->owner().tribe().scouts_house()) {
 			watch_button_ = new UI::Button(
-			   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   capsbuttons, "watchscout", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
 			watch_button_->sigclicked.connect([this]() { clicked_watch(); });
 			capsbuttons->add(watch_button_);
