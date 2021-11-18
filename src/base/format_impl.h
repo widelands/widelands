@@ -80,8 +80,8 @@ namespace format_impl {
       - Unicode plusminus sign for integers with value zero if the '+' flag is set.
 
    Unsigned integral values may not be larger than (2^64)-1, so that they can be stored in a
-   uint64_t. All other numeric values may not be larger than (2^63)-1 or smaller than -(2^63),
-   so that they can be stored in a int64_t. This also applies to floats and doubles.
+   uint64_t. All other numeric values may not be larger than (2^63)-1 or smaller than
+   1-(2^63), so that they can be cast to int64_t. This also applies to floats and doubles.
 */
 
 enum Flags : uint8_t {
@@ -92,10 +92,14 @@ enum Flags : uint8_t {
 };
 
 // These are multi-character UTF-8 strings
-constexpr const char* kLocalizedMinusSign = "−";
-constexpr size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
-constexpr const char* kPlusMinusSign = "±";
-constexpr size_t kPlusMinusSignLength = strlen(kPlusMinusSign);
+static const char kLocalizedMinusSign[] = "−";  // minus sign
+static const char kDigitWidthSpace[] = " ";     // digit-sized whitespace
+static const size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
+static const size_t kDigitWidthSpaceLength = strlen(kDigitWidthSpace);
+
+constexpr int64_t kMaxInt = std::numeric_limits<int64_t>::max();
+constexpr unsigned kInfinitePrecision = std::numeric_limits<unsigned>::max();
+constexpr unsigned kDefaultFloatPrecision = 6;
 
 struct AbstractNode {
 	virtual ~AbstractNode() {
@@ -157,9 +161,6 @@ struct PercentNode : AbstractNode {
 		return out + 1;
 	}
 };
-
-constexpr unsigned kInfinitePrecision = std::numeric_limits<unsigned>::max();
-constexpr unsigned kDefaultFloatPrecision = 6;
 
 struct FormatNode : AbstractNode {
 protected:
@@ -283,9 +284,15 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			break;
 		case ArgType::kUnsigned:
 		case ArgType::kPointer:
+			if (arg_u.unsigned_val > static_cast<uint64_t>(kMaxInt)) {
+				throw wexception("Unsigned integral value too large: %" PRIu64, arg_u.unsigned_val);
+			}
 			arg = arg_u.unsigned_val;
 			break;
 		case ArgType::kFloat:
+			if (arg_u.float_val > kMaxInt || arg_u.float_val < -kMaxInt) {
+				throw wexception("Floating point value too large: %f", arg_u.float_val);
+			}
 			arg = arg_u.float_val;
 			break;
 		case ArgType::kNullptr:
@@ -312,7 +319,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 				}
 			} else if (flags_ & kNumberSign) {
 				if (localize && arg == 0) {
-					for (const char* c = kPlusMinusSign; *c; ++c, ++out, ++written) {
+					for (const char* c = kDigitWidthSpace; *c; ++c, ++out, ++written) {
 						*out = *c;
 					}
 				} else {
@@ -369,7 +376,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 
 		size_t required_width = nr_digits;
 		if (arg < 0 || flags_ & kNumberSign) {
-			required_width += localize ? (arg == 0) ? kPlusMinusSignLength :
+			required_width += localize ? (arg == 0) ? kDigitWidthSpaceLength :
 			                             (arg < 0)  ? kLocalizedMinusSignLength :
                                                    1 :
                                       1;
@@ -392,7 +399,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			}
 		} else if (flags_ & kNumberSign) {
 			if (localize && arg == 0) {
-				for (const char* c = kPlusMinusSign; *c; ++c, ++out) {
+				for (const char* c = kDigitWidthSpace; *c; ++c, ++out) {
 					*out = *c;
 				}
 			} else {
@@ -441,6 +448,9 @@ struct FloatNode : FormatNode {
 		double arg;
 		switch (t) {
 		case ArgType::kFloat:
+			if (arg_u.float_val > kMaxInt || arg_u.float_val < -kMaxInt) {
+				throw wexception("Floating point value too large: %f", arg_u.float_val);
+			}
 			arg = arg_u.float_val;
 			break;
 		case ArgType::kSigned:
@@ -448,6 +458,9 @@ struct FloatNode : FormatNode {
 			break;
 		case ArgType::kUnsigned:
 		case ArgType::kPointer:
+			if (arg_u.unsigned_val > static_cast<uint64_t>(kMaxInt)) {
+				throw wexception("Unsigned integral value too large: %" PRIu64, arg_u.unsigned_val);
+			}
 			arg = arg_u.unsigned_val;
 			break;
 		case ArgType::kNullptr:
