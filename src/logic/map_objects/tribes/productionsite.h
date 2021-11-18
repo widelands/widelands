@@ -378,7 +378,7 @@ public:
 	void act(Game&, uint32_t data) override;
 
 	std::pair<int32_t, int32_t> find_worker(OPtr<Worker>);
-	void try_replace_worker(const Game*, DescriptionIndex, WorkingPosition*, size_t);
+	void try_replace_worker(const Game*, DescriptionIndex, WorkingPosition*);
 	void remove_worker(Worker&) override;
 	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
