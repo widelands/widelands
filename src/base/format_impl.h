@@ -40,25 +40,30 @@ namespace format_impl {
    General syntax of format specifiers:
       %N%
    OR
-      [ N$ ] [ flags ] [ width ] [ . precision ] fmt
+      % [ N$ ] [ flags ] [ width ] [ . precision ] fmt
+
+   N: Argument index. The N-th format argument will be used for the placeholder with ID N.
+      Argument indices are 1-based and there may be no gaps or duplicates.
+      Unnumbered placeholders are enumerated from left to right.
 
    flags: Any combination of
       -    Left align
       +    Show number sign for non-negative numbers
       0    pad with zeros instead of whitespace
 
-      Note that - and 0 can not be combined.
+      Note that '-' and '0' can not be combined.
 
    width: minimal number of characters
 
    precision:
       For floating-point, max number of digits after the period.
       For strings, max number of characters before padding.
+      Not allowed for other types.
 
    fmt:
       %                   percent sign                No arguments allowed
       c                   character                   No arguments allowed
-      s                   string                      Can not have + or 0
+      s                   string                      Can not have '+' or '0'
       b                   boolean                     Similar to string
       i,d,li,ld,lli,lld   int
       u,lu,llu            unsigned int
@@ -66,7 +71,17 @@ namespace format_impl {
       X                   hexadecimal int (uppercase)
       p                   unsigned hexadecimal int (lowercase)
       P                   unsigned hexadecimal int (uppercase)
-      f                   float
+      f                   float/double
+
+   The argument that controls localized output has the following effects:
+      - Translatable decimal separator for floating point values.
+      - Translatable "true"/"false" constants for booleans.
+      - Unicode minus sign for negative numbers.
+      - Unicode plusminus sign for integers with value zero if the '+' flag is set.
+
+   Unsigned integral values may not be larger than (2^64)-1, so that they can be stored in a
+   uint64_t. All other numeric values may not be larger than (2^63)-1 or smaller than -(2^63),
+   so that they can be stored in a int64_t. This also applies to floats and doubles.
 */
 
 enum Flags : uint8_t {
@@ -76,10 +91,11 @@ enum Flags : uint8_t {
 	kPadWith0 = 4,
 };
 
-struct CharNode;
-struct StringNode;
-struct BooleanNode;
-struct FloatNode;
+// These are multi-character UTF-8 strings
+constexpr const char* kLocalizedMinusSign = "−";
+constexpr size_t kLocalizedMinusSignLength = strlen(kLocalizedMinusSign);
+constexpr const char* kPlusMinusSign = "±";
+constexpr size_t kPlusMinusSignLength = strlen(kPlusMinusSign);
 
 struct AbstractNode {
 	virtual ~AbstractNode() {
@@ -285,13 +301,25 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			// The easy case: Just start writing.
 			size_t written = 0;
 			if (arg < 0) {
-				*out = '-';
-				++out;
-				++written;
+				if (localize) {
+					for (const char* c = kLocalizedMinusSign; *c; ++c, ++out, ++written) {
+						*out = *c;
+					}
+				} else {
+					*out = '-';
+					++out;
+					++written;
+				}
 			} else if (flags_ & kNumberSign) {
-				*out = '+';
-				++out;
-				++written;
+				if (localize && arg == 0) {
+					for (const char* c = kPlusMinusSign; *c; ++c, ++out, ++written) {
+						*out = *c;
+					}
+				} else {
+					*out = '+';
+					++out;
+					++written;
+				}
 			}
 
 			if (arg == 0) {
@@ -341,7 +369,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 
 		size_t required_width = nr_digits;
 		if (arg < 0 || flags_ & kNumberSign) {
-			++required_width;
+			required_width += localize ? (arg == 0) ? kPlusMinusSignLength : (arg < 0) ? kLocalizedMinusSignLength : 1 : 1;
 		}
 		if (required_width < min_width_) {
 			required_width = min_width_ - required_width;
@@ -351,11 +379,23 @@ template <typename Number> struct NumberNodeT : FormatNode {
 		}
 
 		if (arg < 0) {
-			*out = '-';
-			++out;
+			if (localize) {
+				for (const char* c = kLocalizedMinusSign; *c; ++c, ++out) {
+					*out = *c;
+				}
+			} else {
+				*out = '-';
+				++out;
+			}
 		} else if (flags_ & kNumberSign) {
-			*out = '+';
-			++out;
+			if (localize && arg == 0) {
+				for (const char* c = kPlusMinusSign; *c; ++c, ++out) {
+					*out = *c;
+				}
+			} else {
+				*out = '+';
+				++out;
+			}
 		}
 
 		if (arg == 0) {
@@ -421,9 +461,15 @@ struct FloatNode : FormatNode {
 			// The easy case: Just start writing.
 			size_t written = 0;
 			if (arg < 0) {
-				*out = '-';
-				++out;
-				++written;
+				if (localize) {
+					for (const char* c = kLocalizedMinusSign; *c; ++c, ++out, ++written) {
+						*out = *c;
+					}
+				} else {
+					*out = '-';
+					++out;
+					++written;
+				}
 			} else if (flags_ & kNumberSign) {
 				*out = '+';
 				++out;
@@ -517,7 +563,7 @@ struct FloatNode : FormatNode {
 
 		size_t required_width = nr_digits_before_decimal + decimal_sep_len + nr_digits_after_decimal;
 		if (arg < 0 || flags_ & kNumberSign) {
-			++required_width;
+			required_width += (localize && arg < 0 ? kLocalizedMinusSignLength : 1);
 		}
 
 		// Start writing
@@ -529,8 +575,14 @@ struct FloatNode : FormatNode {
 		}
 
 		if (arg < 0) {
-			*out = '-';
-			++out;
+			if (localize) {
+				for (const char* c = kLocalizedMinusSign; *c; ++c, ++out) {
+					*out = *c;
+				}
+			} else {
+				*out = '-';
+				++out;
+			}
 		} else if (flags_ & kNumberSign) {
 			*out = '+';
 			++out;

@@ -128,6 +128,10 @@ TESTCASE(string_formatting) {
 	check_equal("A123X", bformat("A%dX", 123));
 	check_equal("AABCDEFX", bformat("A%XX", 0xABCDEF));
 	check_equal("A-1X", bformat("A%dX", -1));
+	check_equal("A+123X", bformat("A%0+2dX", 123));
+	check_equal("A+123    X", bformat("A%+-8dX", 123));
+	check_equal("A+123    X", bformat("A%-+8dX", 123));
+	check_equal("A123     X", bformat("A%-8dX", 123));
 	check_equal("A     123X", bformat("A%8dX", 123));
 	check_equal("A00000123X", bformat("A%08dX", 123));
 	check_equal("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
@@ -141,6 +145,8 @@ TESTCASE(string_formatting) {
 	check_equal("A123.456X", bformat("A%.3fX", 123.456));
 	check_equal("A-0.45600000X", bformat("A%2.8fX", -0.456));
 	check_equal("A      12.3X", bformat("A%10.1fX", 12.34567));
+	check_equal("A123      X", bformat("A%-9.0fX", 123.456));
+	check_equal("A+123.4   X", bformat("A%+-9.1fX", 123.456));
 
 	format_impl::ArgsPair p1, p2;
 	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;
@@ -148,6 +154,15 @@ TESTCASE(string_formatting) {
 	p2.second.string_val = "Hello";
 	check_equal("Hello World", bformat("%2% %1%", format_impl::ArgsVector{p1, p2}));
 	check_equal("World Hello", bformat("%2% %1%", format_impl::ArgsVector{p2, p1}));
+
+	check_error("invalid placeholder", []() { bformat("%q", 1); });
+	check_error("invalid placeholder", []() { bformat("%lf", 1); });
+	check_error("invalid character after %", []() { bformat("%|1$d|", 1); });
+	check_error("end of string", []() { bformat("%02.7", 4); });
+	check_error("missing placeholder", []() { bformat("%2% %3$i", 2, 3); });
+	check_error("duplicate placeholder", []() { bformat("%1% %1$d", 1, 1); });
+	check_error("too many args", []() { bformat("%u %li %lld", 1, 2, 3, 4); });
+	check_error("too few args", []() { bformat("%lu %llu %lli", 1, 2); });
 }
 
 TESTSUITE_END()

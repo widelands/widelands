@@ -23,6 +23,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
+#include <functional>
 #include <iostream>
 #include <map>
 #include <sstream>
@@ -153,6 +154,19 @@ inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) 
 		const std::string str = oss.str();
 		throw WException(f, l, "%s", str.c_str());
 	}
+}
+
+#define check_error(what, fn) do_check_error(__FILE__, __LINE__, what, fn)
+inline void do_check_error(const char* f,
+                           uint32_t l,
+                           const std::string& what,
+                           const std::function<void()>& fn) {
+	try {
+		fn();
+	} catch (...) {
+		return;
+	}
+	throw WException(f, l, "Error not detected: %s", what.c_str());
 }
 }  // namespace WLTestsuite
 
