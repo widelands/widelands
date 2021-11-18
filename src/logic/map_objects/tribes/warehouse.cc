@@ -49,7 +49,7 @@ namespace Widelands {
 
 namespace {
 
-constexpr Duration kCostlessWorkerSpawnInterval = Duration(2500);
+constexpr Duration kCostlessWorkerSpawnInterval(2500);
 constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the

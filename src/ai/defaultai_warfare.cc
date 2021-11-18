@@ -51,7 +51,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	// first we scan vicinity of couple of militarysites to get new enemy sites
 	// Militarysites rotate (see check_militarysites())
 	int32_t i = 0;
-	for (MilitarySiteObserver mso : militarysites) {
+	for (const MilitarySiteObserver& mso : militarysites) {
 		++i;
 		if (i % 4 == 0) {
 			continue;
@@ -345,7 +345,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
                            -3 :
                            0;
 				inputs[10] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 3 : -1;
-				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 0 : 0;
+				inputs[11] = (observer.second.mines_nearby == ExtendedBool::kTrue) ? 2 : 0;
 				inputs[12] = (owner_number == persistent_data->last_attacked_player) ? 2 : -2;
 				inputs[13] = (owner_number == persistent_data->last_attacked_player) ? 4 : -4;
 				inputs[14] = (strong_enough) ? 1 : -1;
@@ -653,7 +653,7 @@ void DefaultAI::count_military_vacant_positions() {
 		                          tso.site->soldier_control()->stationed_soldiers().size()),
 		                         2);
 	}
-	for (MilitarySiteObserver mso : militarysites) {
+	for (const MilitarySiteObserver& mso : militarysites) {
 		vacant_mil_positions_ += mso.site->soldier_control()->soldier_capacity() -
 		                         mso.site->soldier_control()->stationed_soldiers().size();
 		understaffed_ += mso.understaffed;

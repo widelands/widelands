@@ -21,9 +21,8 @@
 
 #include <map>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 
 static std::map<std::string, std::string> ngmessages;
 
@@ -42,9 +41,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
                                                      const std::string& arg2,
                                                      const std::string& arg3) {
 	if (ngmessages.find(code) == ngmessages.end()) {
-		return ((boost::format("%s, %s, %s, %s") % code % get_message(arg1) % get_message(arg2) %
-		         get_message(arg3))
-		           .str());
+		return (
+		   bformat("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
 	}
 
 	// push code and all arguments - if existing - in a vector for easier handling
@@ -68,8 +66,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		// try to merge the strings from back to front
 		try {
 			// try to merge last two strings
-			std::string temp =
-			   (boost::format(strings.at(strings.size() - 2)) % strings.at(strings.size() - 1)).str();
+			std::string temp = bformat(strings.at(strings.size() - 2), strings.at(strings.size() - 1));
 			strings.resize(strings.size() - 2);
 			strings.push_back(temp);
 		} catch (...) {
@@ -78,9 +75,9 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 			}
 			try {
 				// try to merge last three strings
-				std::string temp = (boost::format(strings.at(strings.size() - 3)) %
-				                    strings.at(strings.size() - 2) % strings.at(strings.size() - 1))
-				                      .str();
+				std::string temp =
+				   bformat(strings.at(strings.size() - 3), strings.at(strings.size() - 2),
+				           strings.at(strings.size() - 1));
 				strings.resize(strings.size() - 3);
 				strings.push_back(temp);
 			} catch (...) {
@@ -90,9 +87,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 				try {
 					// try to merge all four strings
 					std::string temp =
-					   (boost::format(strings.at(strings.size() - 4)) % strings.at(strings.size() - 3) %
-					    strings.at(strings.size() - 2) % strings.at(strings.size() - 1))
-					      .str();
+					   bformat(strings.at(strings.size() - 4), strings.at(strings.size() - 3),
+					           strings.at(strings.size() - 2), strings.at(strings.size() - 1));
 					strings.resize(strings.size() - 4);
 					strings.push_back(temp);
 				} catch (...) {
@@ -108,9 +104,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	}
 
 	// No, it did not
-	return ((boost::format("%s, %s, %s, %s") % get_message(code) % get_message(arg1) %
-	         get_message(arg2) % get_message(arg3))
-	           .str());
+	return (bformat("%s, %s, %s, %s", get_message(code), get_message(arg1), get_message(arg2),
+	                get_message(arg3)));
 }
 
 /// Fills the map.

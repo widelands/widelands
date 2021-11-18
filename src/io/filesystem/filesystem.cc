@@ -29,11 +29,6 @@
 #include <cstdio>
 #endif
 
-// We have to add Boost to this block to make codecheck happy
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <windows.h>
@@ -48,6 +43,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "config.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
@@ -106,7 +102,7 @@ private:
  */
 NumberGlob::NumberGlob(const std::string& file_template) : template_(file_template), current_(0) {
 	int nchars = count(file_template.begin(), file_template.end(), '?');
-	format_ = "%0" + boost::lexical_cast<std::string>(nchars) + "i";
+	format_ = "%0" + as_string(nchars) + "i";
 
 	max_ = 1;
 	for (int i = 0; i < nchars; ++i) {
@@ -121,11 +117,9 @@ bool NumberGlob::next(std::string* s) {
 		return false;
 	}
 
+	*s = template_;
 	if (max_) {
-		*s = boost::replace_last_copy(
-		   template_, to_replace_, (boost::format(format_) % current_).str());
-	} else {
-		*s = template_;
+		replace_last(*s, to_replace_, bformat(format_, current_));
 	}
 	++current_;
 	return true;
@@ -227,12 +221,12 @@ bool FileSystem::is_legal_filename(const std::string& filename) {
 		return false;
 	}
 	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (boost::starts_with(filename, illegal_start)) {
+		if (starts_with(filename, illegal_start)) {
 			return false;
 		}
 	}
 	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (boost::contains(filename, illegal_char)) {
+		if (contains(filename, illegal_char)) {
 			return false;
 		}
 	}
@@ -253,25 +247,24 @@ std::string FileSystem::illegal_filename_tooltip() {
 	const std::string illegal_start(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    *  %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
-	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
+	   bformat(pgettext("illegal_filename_characters", "%s at the start of the filename"),
+	           richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    * %s is a list of illegal characters */
-	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
-	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
-	      .str(),
+	   bformat(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
+	           richtext_escape(
+	              i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
-	return (boost::format("%s%s%s") %
-	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	         * This is followed by a list of bullet points */
-	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
-	        illegal_start % illegal)
-	   .str();
+	return bformat(
+	   "%s%s%s",
+	   /** TRANSLATORS: Tooltip header for characters in illegal filenames.
+	    * This is followed by a list of bullet points */
+	   pgettext("illegal_filename_characters", "The following characters are not allowed:"),
+	   illegal_start, illegal);
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems

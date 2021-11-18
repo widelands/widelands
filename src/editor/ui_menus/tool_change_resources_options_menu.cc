@@ -20,6 +20,7 @@
 #include "editor/ui_menus/tool_change_resources_options_menu.h"
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -152,11 +153,10 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
  * Update all the textareas, so that they represent the correct values
  */
 void EditorToolChangeResourcesOptionsMenu::update() {
-	cur_selection_.set_text((boost::format(_("Current: %s")) %
-	                         eia()
-	                            .egbase()
-	                            .descriptions()
-	                            .get_resource_descr(increase_tool_.set_tool().get_cur_res())
-	                            ->descname())
-	                           .str());
+	cur_selection_.set_text(
+	   bformat(_("Current: %s"), eia()
+	                                .egbase()
+	                                .descriptions()
+	                                .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                                ->descname()));
 }

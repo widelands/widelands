@@ -42,7 +42,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
                 0,
                 100,
                 100,
-                (boost::format(_("Upload Screenshot for ‘%s’")) % info->internal_name).str()),
+                bformat(_("Upload Screenshot for ‘%s’"), info->internal_name)),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      hbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      vbox_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -114,7 +114,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 		do_redraw_now();
 		try {
 			ctrl.net().upload_screenshot(info->internal_name, sel, description_.text());
-			if (remote.get() != nullptr) {
+			if (remote != nullptr) {
 				*remote = ctrl.net().fetch_one_remote(remote->internal_name);
 				ctrl.rebuild(false);
 			}
@@ -125,10 +125,9 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			progress_.set_text("");
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded "
-			                    "to the server.\n\nError Message:\n%3$s")) %
-			    sel % info->internal_name % e.what())
-			      .str(),
+			   bformat(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded "
+			             "to the server.\n\nError Message:\n%3$s"),
+			           sel, info->internal_name, e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 			ok_.set_enabled(true);

@@ -21,10 +21,9 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/string.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
@@ -36,8 +35,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/mouse_constants.h"
-
-#define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
 constexpr int kPadding = 4;
 
@@ -51,7 +48,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
 	     slot_dropdown_(this,
-	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
+	                    bformat("dropdown_slot%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    0,
@@ -101,11 +98,10 @@ struct MultiPlayerClientGroup : public UI::Box {
 					slot_dropdown_.toggle();
 					UI::WLMessageBox m(
 					   menu_parent_, UI::WindowStyle::kFsMenu, _("Divergent Player Name"),
-					   (boost::format(
-					       _("The player name of the selected slot (%1%) does not match your own (%2%). "
-					         "Are you sure that you want to occupy this slot?")) %
-					    slotname % username)
-					      .str(),
+					   bformat(
+					      _("The player name of the selected slot (%1%) does not match your own (%2%). "
+					        "Are you sure that you want to occupy this slot?"),
+					      slotname, username),
 					   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 
 					if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
@@ -133,11 +129,10 @@ struct MultiPlayerClientGroup : public UI::Box {
 		for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
 			if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
-				slot_dropdown_.add(
-				   (boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(), slot,
-				   playercolor_image(
-				      settings.players[slot].color, "images/players/genstats_player.png"),
-				   slot == user_setting.position);
+				slot_dropdown_.add(bformat(_("Player %u"), static_cast<unsigned int>(slot + 1)), slot,
+				                   playercolor_image(settings.players[slot].color,
+				                                     "images/players/genstats_player.png"),
+				                   slot == user_setting.position);
 			}
 		}
 		slot_dropdown_.add(_("Spectator"), UserSettings::none(),
@@ -188,9 +183,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	             UI::ButtonStyle::kFsMenuSecondary,
 	             playercolor_image(settings_->settings().players[id].color,
 	                               "images/players/player_position_menu.png"),
-	             (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str()),
+	             bformat(_("Player %u"), static_cast<unsigned int>(id_ + 1))),
 	     type_dropdown_(this,
-	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
+	                    bformat("dropdown_type%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -201,7 +196,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::PanelStyle::kFsMenu,
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     tribes_dropdown_(this,
-	                      (boost::format("dropdown_tribes%d") % static_cast<unsigned int>(id)).str(),
+	                      bformat("dropdown_tribes%d", static_cast<unsigned int>(id)),
 	                      0,
 	                      0,
 	                      h,
@@ -212,7 +207,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                      UI::PanelStyle::kFsMenu,
 	                      UI::ButtonStyle::kFsMenuSecondary),
 	     init_dropdown_(this,
-	                    (boost::format("dropdown_init%d") % static_cast<unsigned int>(id)).str(),
+	                    bformat("dropdown_init%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -223,7 +218,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::PanelStyle::kFsMenu,
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     team_dropdown_(this,
-	                    (boost::format("dropdown_team%d") % static_cast<unsigned int>(id)).str(),
+	                    bformat("dropdown_team%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -278,12 +273,12 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 			} else if (selected == "shared_in") {
 				state = PlayerSettings::State::kShared;
 			} else {
-				if (selected == AI_NAME_PREFIX "random") {
+				if (selected == kRandomAiName) {
 					n->set_player_ai(id_, "", true);
 				} else {
-					if (boost::starts_with(selected, AI_NAME_PREFIX)) {
+					if (starts_with(selected, kAiNamePrefix)) {
 						std::vector<std::string> parts;
-						boost::split(parts, selected, boost::is_any_of(AI_NAME_SEPARATOR));
+						split(parts, selected, {kAiNameSeparator});
 						assert(parts.size() == 2);
 						n->set_player_ai(id_, parts[1], false);
 					} else {
@@ -323,12 +318,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		    (player_setting.tribe.empty() ||
 		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || can_change_hidden_tribe)) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-				type_dropdown_.add(_(impl->descname),
-				                   (boost::format(AI_NAME_PREFIX "%s") % impl->name).str(),
+				type_dropdown_.add(_(impl->descname), bformat("%s%s", kAiNamePrefix, impl->name),
 				                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 			}
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
-			type_dropdown_.add(_("Random AI"), AI_NAME_PREFIX "random",
+			type_dropdown_.add(_("Random AI"), kRandomAiName,
 			                   g_image_cache->get("images/ai/ai_random.png"), false, _("Random AI"));
 		}
 
@@ -353,7 +347,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Now select the entry according to server settings
 		if (player_setting.state == PlayerSettings::State::kHuman) {
 			type_dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
-			type_dropdown_.set_tooltip((boost::format(_("%1%: %2%")) % _("Type") % _("Human")).str());
+			type_dropdown_.set_tooltip(bformat(_("%1%: %2%"), _("Type"), _("Human")));
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
 		} else if (player_setting.state == PlayerSettings::State::kOpen) {
@@ -366,11 +360,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					type_dropdown_.set_errored(_("No AI"));
 				} else {
 					if (player_setting.random_ai) {
-						type_dropdown_.select(AI_NAME_PREFIX "random");
+						type_dropdown_.select(kRandomAiName);
 					} else {
 						const AI::ComputerPlayer::Implementation* impl =
 						   AI::ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select((boost::format(AI_NAME_PREFIX "%s") % impl->name).str());
+						type_dropdown_.select(bformat("%s%s", kAiNamePrefix, impl->name));
 					}
 				}
 			}
@@ -397,8 +391,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
                                             UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
-				n->set_player_shared(
-				   id_, boost::lexical_cast<unsigned int>(tribes_dropdown_.get_selected()));
+				n->set_player_shared(id_, stoul(tribes_dropdown_.get_selected()));
 			} else {
 				n->set_player_tribe(id_, tribes_dropdown_.get_selected());
 			}
@@ -430,11 +423,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 					      another player's starting position. */
-					   (boost::format(_("Shared in Player %u")) % static_cast<unsigned int>(i + 1))
-					      .str();
-					tribes_dropdown_.add(
-					   player_name, boost::lexical_cast<std::string>(static_cast<unsigned int>(i + 1)),
-					   player_image, (i + 1) == player_setting.shared_in, player_name);
+					   bformat(_("Shared in Player %u"), static_cast<unsigned int>(i + 1));
+					tribes_dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)),
+					                     player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
 			}
 			tribes_dropdown_.set_enabled(tribes_dropdown_.size() > 1);
@@ -447,11 +438,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 			}
 
-			tribes_dropdown_.add(pgettext("tribe", "Random"), "random",
+			tribes_dropdown_.add(pgettext("tribe", "Random"), kRandom,
 			                     g_image_cache->get("images/ui_fsmenu/random.png"), false,
 			                     _("The tribe will be selected at random"));
 			if (player_setting.random_tribe) {
-				tribes_dropdown_.select("random");
+				tribes_dropdown_.select(kRandom);
 			} else {
 				tribes_dropdown_.select(player_setting.tribe);
 			}
@@ -571,7 +562,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 #endif
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
 			assert(t < no_of_team_colors);
-			team_dropdown_.add((boost::format(_("Team %d")) % static_cast<unsigned int>(t)).str(), t,
+			team_dropdown_.add(bformat(_("Team %d"), static_cast<unsigned int>(t)), t,
 			                   playercolor_image(kTeamColors[t], "images/players/team.png"));
 		}
 		team_dropdown_.select(player_setting.team);

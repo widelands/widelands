@@ -5,15 +5,16 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
+# Zlopez <michal.konecny@psmail.xyz>, 2021
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-31 15:56+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,7 +50,7 @@ msgstr "Tato země je naše země"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami, cvičišti a podíváme se i na boj."
+msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami a cvičišti a také vás uvede do tajů boje."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
@@ -122,7 +123,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "Před šesti měsíci byl Lutius, mladý generál sloužící Císařství, poslán se 150 vojáky na hranici za severními lesy, kudy docházelo k pronikání barbarských kmenů na Císařstvím ovládaná území. Měl za úkol bránit državy císařství. Z počátku šlo vše hladce. Setkal se dokonce s několika barbarskými dětmi a vypadalo to na pokojné soužití, bok po boku s tímto prehistorickým společenstvem. Začínal se tu cítit bezpečněji a i jeho vojáci polevili v ostražitosti vůči nepřátelské hrozbě. To se jim však mělo vymstít. Jedné březnové noci bylo jeho nepozorné vojsko přepadeno stovkou barbarských primitivů a bylo zcela zdecimováno. Lutius sám a pár jeho vojáků se štěstím vyvázli holými životy."
+msgstr "Před šesti měsíci byl Lutius, mladý generál sloužící Císařství, poslán se 150 vojáky na hranici za severními lesy, kudy docházelo k pronikání barbarských kmenů na Císařstvím ovládaná území. Měl za úkol bránit državy císařství. Z počátku šlo vše hladce. Setkal se dokonce s několika barbarskými dětmi a vypadalo to na pokojné soužití, bok po boku s tímto prastarým společenstvem. Začínal se tu cítit bezpečněji a i jeho vojáci polevili v ostražitosti vůči nepřátelské hrozbě. To se jim však vymstilo. Jedné březnové noci bylo jeho nepozorné vojsko přepadeno stovkou barbarských primitivů a bylo zcela rozprášeno. Pouze Lutius sám a pár jeho vojáků se štěstím vyvázlo s holými životy."
 
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
@@ -142,7 +143,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnější lidskou bytostí své doby. To vše za cenu velkých obětí, její lidskosti a duše."
+msgstr "Když bůh Atlanťanů ztratil víru v jejich skutky a potopil jejich ostrov, boj jedné ženy za spravedlnost a druhou šanci pro její lid se stal námětem legend. V době, kdy vedla poslední Atlanťany vstříc nové budoucnosti neznámými končinami, stala se Jundlina nejmocnějším člověkem své doby. Avšak tohle jí stálo mnoho, její lidskost a duši."
 
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
@@ -178,11 +179,11 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "Když vaše živobytí závisí na moři, je to neustálý boj. Své o tom ví obyvatelé fríského pobřeží Severního moře. Co si myslet o posledním bouřlivém přílivu, nejničivější pohromě, která, kam až paměť sahá, nemá obdoby? Byla to opravdu jen obyčejná ukázka nesnází, kterým musí Frísové čelit? Nebo to bylo znamením Boha, že tento kmen, který se tu před nedávnem usadil, by si měl vyhledat nový domov?"
+msgstr "Když vaše živobytí závisí na moři, je to neustálý boj. Své o tom ví obyvatelé fríského pobřeží Severního moře. Co si myslet o posledním bouřlivém přílivu, nejničivější pohromě, která, kam až paměť sahá, nemá obdoby? Byla to opravdu jen obyčejná ukázka nesnází, kterým musí Frísové čelit? Nebo se jednalo o Boží znamení, které má tento sotva zabydlený kmen přesvědčit, aby si vyhledal nový domov?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
-msgstr "Chybí"
+msgstr "Není implementováno"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -249,7 +250,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr "V roce 1362 byl klidný a mírumilovný život obyvatel Severních fríských ostrovů přerušen největším bouřlivým přílivem v lidské historii: Záplava svatého Marcela. Zůstává otázkou, byla tato bouře dílem náhody, nebo znamením toho, že Bůh už žádné Frísy na ostrově Laněnés nechce?"
+msgstr "V roce 1362 byl klidný a mírumilovný život obyvatel Severních fríských ostrovů přerušen největším bouřlivým přílivem v lidské historii: Záplava svatého Marcela. Zůstává otázkou, byla tato bouře dílem náhody, nebo znamením toho, že Bohové už žádné Frísy na ostrově Laněnés nechtějí?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -276,7 +277,7 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
+msgstr "Rýbaud a jeho kmen vedou šťastný život v severních končinách. Ale život v zemích, které opustili, je všechno, jen ne pokojný a starý přítel zoufale potřebuje jeho pomoc…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -297,7 +298,7 @@ msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle. Scouting will be"
 " also covered."
-msgstr "V tomto tutoriálu se naučíš umění válčení: jak získávat vojáky, jak je cvičit a vést do bitvy. Dozvíš se i o povolání průzkumníků."
+msgstr "V tomto tutoriálu se naučíš umění války: jak získávat vojáky, jak je cvičit a vést do bitvy. Dozvíš se i o povolání průzkumníků."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -370,7 +371,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "Je velkým štěstím usadit se zde, na této členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou cestu a hodně odboček. Může se stát, že nás navedou k území cizích kmenů."
+msgstr "Je velkým štěstím usadit se zde na této členité pevnině. Ale abychom si ji podmanili, budeme muset překonat dlouhou a strastiplnou cestu. Může se lehce stát, že nás dovede k území cizích kmenů."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -381,7 +382,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr "Ať už jen z nejbláznivějších výstřelků přírody, nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
+msgstr "Ať už se jedná o jeden z nejzvláštnějších výstřelků přírody nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
 
 #: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
@@ -399,7 +400,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš že ano a doufáš, že na tomto ostrově tvůj kmen nalezne jeho bohatství dříve, než jej objeví ostatní."
+msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš, že ano, a doufáš, že na tomto ostrově tvůj kmen nalezne tento poklad dříve, než jej objeví ostatní."
 
 #: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
@@ -417,7 +418,7 @@ msgstr "Kráter"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a dva kmeny bojují o nerostné bohatství."
+msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zelená a dva kmeny bojují o jeho bohaté nerostné bohatství."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -792,6 +793,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Mystická země plná různorodých krajin, které jsou všechny protkány několika velkými řekami."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Zelená pláň"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný, moc propůjčující poklad – Zelenou pláň. Je nesmírně těžké ji dobýt, ale snadné ji zase ztratit. Jestli ji chceš pro sebe, měj se před druhými kmeny na pozoru."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Písečná úžina"
@@ -856,18 +884,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Říká se, že neproniknutelné severní země odstrašily i ty nejodvážnější osadníky a nejudatnější z udatných válečníků. Rozlehlé a staré lesy plné velké a dravé zvěře, protknuté mokřinami a kopci, jsou opředeny tajemstvím. Ti, kteří se odtud dokázali vrátit, mluvili o ohromných stavbách pokrytých rytinami a zlatem pocházejícím z majestátních pohoří, která lze nalézt někde v tamní divočině. Po několika dekádách zůstaly z tamního zlatého věku jen rozpadající se ruiny pokryté mechem a zarostlé stromy. Jejich tvary dávají jen tušit zručnost a umění dávných stavitelů. Nikdo neví, kam a ani proč se vytratili. Lidé říkají, že cestě k bohatství nyní nic nebrání. Přesto mnozí zahynou roztrháni vlky, pohlceni bažinami… a v obklíčení nenávistných kmenů."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Zelená pláň"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Stojíš na ostrově korunovaném mohutnými velehorami, které ve svém srdci ukrývají nádherný, moc propůjčující poklad – Zelenou pláň. Je nesmírně těžké ji dobýt, ale snadné ji zase ztratit. Jestli ji chceš pro sebe, měj se před druhými kmeny na pozoru."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
