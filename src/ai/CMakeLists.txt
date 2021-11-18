@@ -22,6 +22,7 @@ wl_library(ai
     defaultai_warfare.cc
     defaultai.cc
     defaultai.h
+  USES_ATOMIC  
   USES_SDL2
   DEPENDS
     ai_hints

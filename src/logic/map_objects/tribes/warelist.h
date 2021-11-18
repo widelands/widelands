@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H
 
+#include <atomic>
 #include <cassert>
 
 #include "logic/widelands.h"
@@ -61,7 +62,7 @@ struct WareList {
 	}
 
 private:
-	std::vector<Quantity> wares_;
+	std::vector<std::atomic<Quantity>> wares_;
 };
 }  // namespace Widelands
 

@@ -34,14 +34,14 @@ ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const
 
 ComputerPlayer::~ComputerPlayer() {
 	thread_running_ = false;
-	if (thread_.get() != nullptr) {
+	if (thread_ != nullptr) {
 		thread_->join();
 		thread_.reset(nullptr);
 	}
 }
 
 void ComputerPlayer::start_thread() {
-	if (thread_.get() != nullptr) {
+	if (thread_ != nullptr) {
 		throw wexception("Thread for AI #%u already running", static_cast<unsigned>(player_number_));
 	}
 	thread_running_ = true;

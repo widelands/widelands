@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_PATHFIELD_H
 #define WL_LOGIC_PATHFIELD_H
 
+#include <atomic>
 #include <memory>
 
 #include "logic/cookie_priority_queue.h"
@@ -61,7 +62,7 @@ struct Pathfield {
 
 struct Pathfields {
 	std::unique_ptr<Pathfield[]> fields;
-	uint16_t cycle;
+	std::atomic<uint16_t> cycle;
 
 	explicit Pathfields(uint32_t nrfields);
 };
