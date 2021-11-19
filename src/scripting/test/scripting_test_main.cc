@@ -17,6 +17,5 @@
  *
  */
 
-#define BOOST_AUTO_TEST_MAIN
-#define BOOST_TEST_MODULE Scripting
-#include <boost/test/unit_test.hpp>
+#include "base/test.h"
+TEST_EXECUTABLE(scripting)
