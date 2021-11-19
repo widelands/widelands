@@ -476,7 +476,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	}
 }
 
-constexpr Duration kThinkInterval = Duration(200);
+constexpr Duration kThinkInterval(200);
 
 void EconomyOptionsWindow::think() {
 	const Time& time = player_->egbase().get_gametime();

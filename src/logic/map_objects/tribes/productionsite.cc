@@ -424,10 +424,10 @@ void ProductionSite::format_statistics_string() {
 	// as a string and persists them into a string for reuse when the class is
 	// asked for the statistics string. However this string should only then be constructed.
 
-	// boost::format would treat uint8_t as char
+	// bformat would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
 	const std::string perc_str = StyleManager::color_tag(
-	   (boost::format(_("%i%%")) % percent).str(),
+	   bformat(_("%i%%"), percent),
 	   (percent < 33) ? g_style_manager->building_statistics_style().low_color() :
 	   (percent < 66) ? g_style_manager->building_statistics_style().medium_color() :
                        g_style_manager->building_statistics_style().high_color());
@@ -451,7 +451,7 @@ void ProductionSite::format_statistics_string() {
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % StyleManager::color_tag(trend, color)).str();
+		   bformat("%s\u2009%s", perc_str, StyleManager::color_tag(trend, color));
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -638,7 +638,8 @@ void ProductionSite::try_replace_worker(const Game* game,
 
 		// Only move workers into higher qualified jobs
 		const WorkerDescr& wd = game->descriptions().workers().get(worker_index);
-		bool needs_higher_qualification = wd.can_act_as(worker_index_repl);
+		bool needs_higher_qualification =
+		   worker_index_repl != worker_index && wd.can_act_as(worker_index_repl);
 
 		Worker* w_repl = wp_repl->worker.get(*game);
 		assert(w_repl != nullptr);
@@ -1205,9 +1206,8 @@ void ProductionSite::set_default_anim(const std::string& anim) {
 	default_anim_ = anim;
 }
 
-constexpr Duration kStatsEntireDuration = Duration(5 * 60 * 1000);  // statistic evaluation base
-constexpr Duration kStatsDurationCap =
-   Duration(180 * 1000);  // This is highest allowed program duration
+constexpr Duration kStatsEntireDuration(5 * 60 * 1000);  // statistic evaluation base
+constexpr Duration kStatsDurationCap(180 * 1000);        // This is highest allowed program duration
 
 void ProductionSite::update_actual_statistics(Duration duration, const bool produced) {
 	// just for case something went very wrong...
@@ -1217,7 +1217,7 @@ void ProductionSite::update_actual_statistics(Duration duration, const bool prod
 	const Duration past_duration = kStatsEntireDuration - duration;
 	actual_percent_ = (actual_percent_ * past_duration.get() + produced * duration.get() * 1000) /
 	                  kStatsEntireDuration.get();
-	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
+	assert(actual_percent_ <= 1000);  // be sure we do not go above 100%
 }
 
 }  // namespace Widelands

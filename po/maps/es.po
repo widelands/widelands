@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-03 21:12+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -796,6 +796,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Una tierra mística, repleta de diferentes paisajes, todos atravesados por un puñado de grandes ríos."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "La Meseta Verde"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Está parado en una isla, coronada por grandes montañas que mantienen un maravilloso y  gran tesoro en su centro - La Meseta Verde, que es difícil de conquistar, pero fácil de perder. Entonces, si la quiere, tenga en cuenta los otros clanes."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Desfiladeros Arenosos"
@@ -860,18 +887,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Algunos dicen que las tierras impenetrables del lejano norte ahuyentan incluso a los colonos más corajudos y al más valiente de los guerreros valientes. Grandes y antiguos bosques, llenos de grandes depredadores, cortado por los humedales y las colinas estaban envueltas en el misterio. Los que habían conseguido volver mencionaron edificios enormes, decorados con tallados y el oro de majestuosas montañas encadenadas en algún lugar entre el desierto. Decenas de años después sólo quedan algunas ruinas desmenuzables de estos buenos viejos tiempos, cubiertas de musgo y árboles. Sus formas sólo dan una idea acerca de la artesanía de los constructores antiguos. Nadie sabe por qué desaparecieron. Nadie sabe por qué. La gente dice que ahora no hay nada bloqueando el camino hacia la riqueza. Sin embargo, muchos murieron separados por los lobos, rodeado por pantanos ... rodeados por tribus hostiles. ()"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "La Meseta Verde"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Está parado en una isla, coronada por grandes montañas que mantienen un maravilloso y  gran tesoro en su centro - La Meseta Verde, que es difícil de conquistar, pero fácil de perder. Entonces, si la quiere, tenga en cuenta los otros clanes."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

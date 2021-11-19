@@ -26,6 +26,10 @@
 #include <string>
 #include <vector>
 
+#include <boost/format.hpp>
+
+#include "base/log.h"
+
 /** Split a string into substrings at all occurrences of any of the given delimiters. */
 void split(std::vector<std::string>& result, const std::string&, const std::set<char>&);
 
@@ -90,29 +94,68 @@ inline std::string as_string(const char* str) {
 inline std::string as_string(const int8_t t) {
 	return std::to_string(static_cast<int>(t));
 }
-inline std::string as_string(const int16_t t) {
+inline std::string as_string(const signed short t) {
 	return std::to_string(static_cast<int>(t));
 }
-inline std::string as_string(const int32_t t) {
-	return std::to_string(static_cast<int64_t>(t));
+inline std::string as_string(const signed int t) {
+	return std::to_string(t);
 }
-inline std::string as_string(const int64_t t) {
+inline std::string as_string(const signed long t) {
+	return std::to_string(static_cast<long long>(t));
+}
+inline std::string as_string(const signed long long t) {
 	return std::to_string(t);
 }
 inline std::string as_string(const uint8_t t) {
 	return std::to_string(static_cast<unsigned>(t));
 }
-inline std::string as_string(const uint16_t t) {
+inline std::string as_string(const unsigned short t) {
 	return std::to_string(static_cast<unsigned>(t));
 }
-inline std::string as_string(const uint32_t t) {
-	return std::to_string(static_cast<uint64_t>(t));
-}
-inline std::string as_string(const uint64_t t) {
+inline std::string as_string(const unsigned int t) {
 	return std::to_string(t);
 }
-inline std::string as_string(char c) {
-	return {c, '\0'};
+inline std::string as_string(const unsigned long t) {
+	return std::to_string(static_cast<unsigned long long>(t));
+}
+inline std::string as_string(const unsigned long long t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const float t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const double t) {
+	return std::to_string(t);
+}
+inline std::string as_string(const char c) {
+	return {c};
+}
+
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+// @CodeCheck allow boost::format
+
+/** Wrapper functions for boost::format with better exception handling. */
+template <typename T0> void bformat_helper(boost::format& f, const T0& arg0) {
+	f % arg0;
+}
+template <typename T0, typename... T>
+void bformat_helper(boost::format& f, const T0& arg0, T... args) {
+	f % arg0;
+	bformat_helper(f, args...);
+}
+template <typename... T> std::string bformat(const std::string& format_string, T... args) {
+	try {
+		boost::format f(format_string);
+		bformat_helper(f, args...);
+		return f.str();
+	} catch (const std::exception& e) {
+		log_err("bformat error: A string contains invalid printf placeholders");
+		log_err("Error: %s", e.what());
+		log_err("String: %s", format_string.c_str());
+		throw;
+	}
 }
 
 #endif  // end of include guard: WL_BASE_STRING_H

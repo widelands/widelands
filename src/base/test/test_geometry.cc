@@ -17,37 +17,34 @@
  *
  */
 
-#include <boost/test/unit_test.hpp>
+#include <cstdlib>
 
-#include "base/macros.h"
 #include "base/rect.h"
+#include "base/test.h"
 #include "base/vector.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
-BOOST_TEST_DONT_PRINT_LOG_VALUE(Vector2i)
-BOOST_TEST_DONT_PRINT_LOG_VALUE(Recti)
+UNLOGGABLE_VALUE(Vector2i)
+UNLOGGABLE_VALUE(Recti)
 
-BOOST_AUTO_TEST_SUITE(geometry)
+TESTSUITE_START(geometry)
 
-BOOST_AUTO_TEST_CASE(rect_and_vector) {
+TESTCASE(rect_and_vector) {
 	Vector2i v(1, 5);
 	const Recti r1(1, 5, 100, 800);
 	const Recti r2(v, 20, 3);
 
-	BOOST_CHECK_EQUAL(r1.origin(), v);
-	BOOST_CHECK_EQUAL(r2.origin(), v);
-	BOOST_CHECK_EQUAL(r2.opposite_of_origin(), Vector2i(21, 8));
-	BOOST_CHECK_CLOSE(r1.center().x, 51.f, 0.001f);
-	BOOST_CHECK_CLOSE(r1.center().y, 405.f, 0.001f);
+	check_equal(r1.origin(), v);
+	check_equal(r2.origin(), v);
+	check_equal(r2.opposite_of_origin(), Vector2i(21, 8));
+	check_equal(r1.center().x, 51.f);
+	check_equal(r1.center().y, 405.f);
 
 	v += Vector2i(3, -8);
-	BOOST_CHECK_EQUAL(v.x, 4);
-	BOOST_CHECK_EQUAL(v.y, -3);
-	BOOST_CHECK_EQUAL(-v, Vector2i(-4, 3));
+	check_equal(v.x, 4);
+	check_equal(v.y, -3);
+	check_equal(-v, Vector2i(-4, 3));
 	v -= Vector2i(4, -3);
-	BOOST_CHECK_EQUAL(v, Vector2i::zero());
+	check_equal(v, Vector2i::zero());
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

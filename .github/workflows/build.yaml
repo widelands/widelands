@@ -94,7 +94,7 @@ jobs:
         mkdir build
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* > ../clang-tidy.log
+        python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* | tee ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
@@ -253,13 +253,13 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
+    runs-on: macos-11
     steps:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf dylibbundler
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -268,7 +268,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
@@ -278,5 +278,5 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 10.5 AppImage
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg

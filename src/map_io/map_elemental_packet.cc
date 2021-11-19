@@ -61,10 +61,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			if (!t.empty()) {
 				std::vector<std::string> tags;
 				split(tags, t, {','});
-
-				for (std::vector<std::string>::const_iterator ci = tags.begin(); ci != tags.end();
-				     ++ci) {
-					std::string tn = *ci;
+				for (std::string tn : tags) {
 					trim(tn);
 					map->add_tag(tn);
 				}
@@ -93,14 +90,14 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->suggested_teams_.clear();
 
 			uint16_t team_section_id = 0;
-			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
+			std::string teamsection_key = bformat("teams%02i", team_section_id);
 			while (Section* teamsection = prof.get_section(teamsection_key)) {
 
 				// A lineup is made up of teams
 				SuggestedTeamLineup lineup;
 
 				uint16_t team_number = 1;
-				std::string team_key = (boost::format("team%i") % team_number).str();
+				std::string team_key = bformat("team%i", team_number);
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
 					// A team is made up of players
@@ -119,7 +116,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 					// Increase team number
 					++team_number;
-					team_key = (boost::format("team%i") % team_number).str();
+					team_key = bformat("team%i", team_number);
 					team_string = teamsection->get_string(team_key.c_str(), "");
 				}
 
@@ -127,7 +124,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 				// Increase teamsection
 				++team_section_id;
-				teamsection_key = (boost::format("teams%02i") % team_section_id).str();
+				teamsection_key = bformat("teams%02i", team_section_id);
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -186,23 +183,20 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("addons", addons);
 
 	int counter = 0;
-	for (Widelands::SuggestedTeamLineup lineup : map.get_suggested_teams()) {
-		Section& teams_section =
-		   prof.create_section((boost::format("teams%02d") % counter++).str().c_str());
+	for (const Widelands::SuggestedTeamLineup& lineup : map.get_suggested_teams()) {
+		Section& teams_section = prof.create_section(bformat("teams%02d", counter++).c_str());
 		int lineup_counter = 0;
-		for (Widelands::SuggestedTeam team : lineup) {
+		for (const Widelands::SuggestedTeam& team : lineup) {
 			std::string section_contents;
 			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
 				if (it == team.begin()) {
-					section_contents = (boost::format("%d") % static_cast<unsigned int>(*it)).str();
+					section_contents = bformat("%d", static_cast<unsigned int>(*it));
 				} else {
 					section_contents =
-					   (boost::format("%s,%d") % section_contents % static_cast<unsigned int>(*it))
-					      .str();
+					   bformat("%s,%d", section_contents, static_cast<unsigned int>(*it));
 				}
 			}
-			teams_section.set_string(
-			   (boost::format("team%d") % ++lineup_counter).str().c_str(), section_contents);
+			teams_section.set_string(bformat("team%d", ++lineup_counter).c_str(), section_contents);
 		}
 	}
 

@@ -25,6 +25,12 @@ source_file = po/map_the_green_plateau.wmf/map_the_green_plateau.wmf.pot
 source_lang = en
 type = PO
 
+[widelands.map_river]
+file_filter = po/map_along_the_river.wmf/<lang>.po
+source_file = po/map_along_the_river.wmf/map_along_the_river.wmf.pot
+source_lang = en
+type = PO
+
 [widelands.mp_scenario_island_hopping]
 file_filter = po/mp_scenario_island_hopping.wmf/<lang>.po
 source_file = po/mp_scenario_island_hopping.wmf/mp_scenario_island_hopping.wmf.pot

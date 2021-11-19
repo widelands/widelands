@@ -19,9 +19,8 @@
 
 #include "ui_fsmenu/keyboard_options.h"
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "ui_basic/dropdown.h"
@@ -236,12 +235,10 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		return (boost::format(
-		           /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
-		              "Action: Key" */
-		           _("%1$s: %2$s")) %
-		        to_string(key) % shortcut)
-		   .str();
+		return bformat(
+		   /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
+		      "Action: Key" */
+		   _("%1$s: %2$s"), to_string(key), shortcut);
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -268,12 +265,10 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
 					   as_richtext_paragraph(
-					      (boost::format(
-					          _("The shortcut you selected (‘%1$s’) is already in use for the "
-					            "following action: ‘%2$s’. Please select a different shortcut "
-					            "or change the conflicting shortcut first.")) %
-					       shortcut_string_for(c.key, true) % to_string(conflict))
-					         .str(),
+					      bformat(_("The shortcut you selected (‘%1$s’) is already in use for the "
+					                "following action: ‘%2$s’. Please select a different shortcut "
+					                "or change the conflicting shortcut first."),
+					              shortcut_string_for(c.key, true), to_string(conflict)),
 					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 					   UI::WLMessageBox::MBoxType::kOk);
 					warning.run<UI::Panel::Returncodes>();
@@ -315,7 +310,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	buttons_box_.add_inf_space();
 
 	tabs_.sigclicked.connect([this, all_keyboard_buttons, generate_title, fastplace_tab_index]() {
-		if (tabs_.active() == fastplace_tab_index && game_.get() == nullptr) {
+		if (tabs_.active() == fastplace_tab_index && game_ == nullptr) {
 			game_.reset(new Widelands::Game());
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();

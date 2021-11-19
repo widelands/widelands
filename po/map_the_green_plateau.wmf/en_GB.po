@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-11-16 09:23+0000\n"
 "PO-Revision-Date: 2017-09-23 20:46+0000\n"
 "Last-Translator: Adam Piggott\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:12
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "The Forbidden Island"
 msgstr "The Forbidden Island"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -35,49 +35,49 @@ msgid ""
 "positions."
 msgstr "Finally! We have just taken our first step towards victory! Last night, we landed on the forbidden island and defeated the few guards that were watching the north-western part of the island. I am quite sure that none of the other warlords has detected us so far, so we should keep quiet and build up our infrastructure. Soon we will be strong enough to raid their positions."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:23
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:25
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:23
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
 msgstr "Capture the Ancient Castle"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Defeat Lanissa and capture the Ancient Castle."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:32
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:34
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Defeat Erwyn"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:35
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Defeat Erwyn. He commands the strongest opposing military force left on this island."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:40
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:42
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:40
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo"
 msgstr "Defeat Jomo"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:43
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Defeat Jomo. He is taking care of the soldiers’ food supply."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
 msgid "First Briefing"
 msgstr "First Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
 msgid "Second Briefing"
 msgstr "Second Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
 msgid "An Ancient Castle"
 msgstr "An Ancient Castle"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -85,7 +85,7 @@ msgid ""
 "craft."
 msgstr "By the Gods! One of our scouts has discovered a mighty castle at the centre of the old plateau. The castle must be quite old and seems to have been built in a foreign style. It’s quite obvious that this is not barbarian craft."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -93,17 +93,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Let’s hope that Lanissa – the warlord holding sway over that castle – has not discovered our movements yet. Perhaps we have a chance of conquering that mighty building without a bigger fight! However, it is essential that we capture it. It will be the key to our reign over this island!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"
 msgstr "Ancient Castle Captured"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The Ancient Castle is ours!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -116,46 +116,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "It is amazing how far one can see from the highest tower of the castle. We can watch the whole island. So now I wonder why Lanissa did not see us and thus did not prepare. Be that as it may, some things will never come to the light of day. The only important issue at the moment are the opposing troops still left. We have discovered enemy positions held by Erwyn to the north and east of the castle. He is known to be a strong warlord and surely commands the strongest warriors. In the south, we caught sight of some food infrastructures guarded by Jomo – a younger warlord – and we should take care of those infrastructures so we can cut off our enemies’ food supply."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid "Another Briefing"
 msgstr "Another Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
 msgid "Erwyn Defeated"
 msgstr "Erwyn Defeated"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Great! Erwyn gave up when he saw his last buildings burning down. That’s one less strong warlord on this island!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Jomo Defeated"
 msgstr "Jomo Defeated"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Great! Jomo gave up when he saw his last buildings burning down. That’s one less warlord on this island!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
 msgstr "Last Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Victory!"
 msgstr "Victory!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Finally! The island is completely ours. Now we just have to defend it better than the warlords did."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

@@ -167,7 +167,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   /** TRANSLATORS: Example: Loading Barbarians: Buildings (2/6) */
-		   (boost::format(_("Loading %1%: %2% (%3%/%4%)")) % descname() % str % i % 6).str()));
+		   bformat(_("Loading %1%: %2% (%3%/%4%)"), descname(), str, i, 6)));
 	};
 
 	try {
@@ -885,7 +885,7 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 		}
 		if (percent_to_use < 1) {
 			throw GameDataError(
-			   "%s: Training sites without predefined proportions add up to < 1%% and "
+			   "%s: Training sites without predefined proportions add up to < 1%%, and "
 			   "will never be built: %d",
 			   name().c_str(), used_percent);
 		}

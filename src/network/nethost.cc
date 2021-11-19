@@ -167,7 +167,7 @@ void NetHost::start_accepting(
 }
 
 NetHost::NetHost(const uint16_t port)
-   : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
+   : next_id_(1), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
 	if (open_acceptor(
 	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {

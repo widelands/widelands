@@ -19,8 +19,6 @@
 
 #include "scripting/lua_path.h"
 
-#include <boost/format.hpp>
-
 #include "base/macros.h"
 #include "base/string.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -69,7 +67,7 @@ bool NumberGlob::next(std::string* s) {
 
 	*s = template_;
 	if (max_) {
-		replace_last(*s, to_replace_, (boost::format(format_) % current_).str());
+		replace_last(*s, to_replace_, bformat(format_, current_));
 	}
 	++current_;
 	return true;

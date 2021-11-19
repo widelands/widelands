@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-06-14 09:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 02:41+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -790,6 +790,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Tìr rùnach le caochladh crutha-tìre le aibhnean mòra ann."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "An t-àrd-chlàr uaine"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Tha thu ann an eilean mòr le mullachan beanntan àrda ann ’s mòr-ulaidh san teas-mheadhan aca – an àrd-chlàr uaine a tha doirbh ceannsachadh ach furasta call. Mar sin, ma tha thu airson a thogail, thoir an aire air na cinnidhean eile."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Bealaichean gainmhich"
@@ -854,18 +881,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Tha cuid ag ràdh gun do chum an tìr dho-inntrig fada tuath fiù ’s an luchd-tuineachaidh ’s na gaisgich as dàna air falbh. ’S e seann choilltean mòra dìomhair a bh’ ann làn bheathaichean sealgair mòra eadar talamh fliuch ’s cnuic. Dh’innseadh an fheadhainn a thill beò às mu thogalaichean mòra le sgeadachadh snaidhte ’s òir orra agus gun dàinig an t-òr à monaidhean àite air choireigin san fhàsach. Bliadhnaichean mòra às dèidh seo, chan eil ach fuighill còmhdaichte le còinneach ’s craobhan air fhàgail dhen bheatha mhath a b’ àbhaist a bhith ann. Cha doir an cruthan ach beachd farsaing dhut mu cheàird an luchd-togail àrsaidh. Chan eil fios aig duine carson a dh’fhalbh iad. Chan eil fios aig duine carson. Thathar ag ràdh nach eil dad a’ bacadh an rathad dhan bheairteas a-nis. Ach gheibh mòran dhiubh bàs air an reubadh le madaidhean-allaidh, air an dol fodha ann am boglach… le treubhan nàimhdeil timcheall orra."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "An t-àrd-chlàr uaine"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Tha thu ann an eilean mòr le mullachan beanntan àrda ann ’s mòr-ulaidh san teas-mheadhan aca – an àrd-chlàr uaine a tha doirbh ceannsachadh ach furasta call. Mar sin, ma tha thu airson a thogail, thoir an aire air na cinnidhean eile."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

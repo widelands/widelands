@@ -29,6 +29,8 @@ wl_library(graphic_color
   SRCS
     color.h
     color.cc
+  DEPENDS
+    base_string
   USES_SDL2
 )
 
@@ -243,6 +245,7 @@ wl_library(graphic_terrain_programs
     gl/dither_program.h
     gl/workarea_program.cc
     gl/workarea_program.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_geometry
@@ -277,6 +280,7 @@ wl_library(graphic_text_layout
     text_layout.cc
     text_layout.h
   DEPENDS
+    base_string
     graphic # TODO(Gunchleoc): For text_width safety only - rewrite that function
     graphic_align
     graphic_color
@@ -294,6 +298,7 @@ wl_library(graphic_wordwrap
   USES_ICU
   DEPENDS
     base_geometry
+    base_string
     graphic
     graphic_align
     graphic_color

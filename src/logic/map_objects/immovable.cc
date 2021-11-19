@@ -498,11 +498,11 @@ void Immovable::draw_construction(const Time& gametime,
 	                    &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
-	do_draw_info(info_to_draw, descr().descname(),
-	             StyleManager::color_tag(
-	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
-	                g_style_manager->building_statistics_style().construction_color()),
-	             point_on_dst, scale, dst);
+	do_draw_info(
+	   info_to_draw, descr().descname(),
+	   StyleManager::color_tag(bformat(_("%i%% built"), (done.get() * 100 / total.get())),
+	                           g_style_manager->building_statistics_style().construction_color()),
+	   point_on_dst, scale, dst);
 }
 
 /**
@@ -917,9 +917,9 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "this: %p\n", this);
-	molog(egbase.get_gametime(), "owner_: %p\n", owner_);
+	molog(egbase.get_gametime(), "owner_: %p\n", owner_.load());
 	FORMAT_WARNINGS_ON
-	molog(egbase.get_gametime(), "player_number: %i\n", owner_->player_number());
+	molog(egbase.get_gametime(), "player_number: %i\n", owner_.load()->player_number());
 	FORMAT_WARNINGS_OFF
 	molog(egbase.get_gametime(), "ware_economy_: %p\n", ware_economy_);
 	molog(egbase.get_gametime(), "worker_economy_: %p\n", worker_economy_);

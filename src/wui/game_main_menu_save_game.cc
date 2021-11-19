@@ -233,7 +233,7 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	return UI::Panel::handle_key(down, code);
+	return UI::UniqueWindow::handle_key(down, code);
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {
@@ -264,10 +264,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s =
-		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
+		const std::string s = bformat(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                              FileSystem::fs_filename(filename.c_str()));
 		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Game!"), s,
 		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {

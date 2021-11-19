@@ -79,11 +79,13 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		replace_first(display_dir, "My_Maps", _("My Maps"));
 	} else if (starts_with(display_dir, "MP_Scenarios")) {
 		replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
+	} else if (starts_with(display_dir, "SP_Scenarios")) {
+		replace_first(display_dir, "MP_Scenarios", _("Singleplayer Scenarios"));
 	} else if (starts_with(display_dir, "Downloaded")) {
 		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
+	directory_info_.set_text(bformat(_("Current directory: %s"), display_dir));
 }
 
 /**
