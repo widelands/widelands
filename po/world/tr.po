@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-09-10 02:39+0000\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
@@ -815,23 +815,27 @@ msgstr "Kış"
 msgid "Desert"
 msgstr "Çöl"
 
-#: ../../data/world/resources/init.lua:110
+#: ../../data/world/resources/coal/init.lua:110
 msgid "Coal"
 msgstr "Kömür"
 
-#: ../../data/world/resources/init.lua:126
+#: ../../data/world/resources/fish/init.lua:7
+msgid "Fish"
+msgstr "Balık"
+
+#: ../../data/world/resources/gold/init.lua:7
 msgid "Gold"
 msgstr "Altın"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/iron/init.lua:7
 msgid "Iron"
 msgstr "Demir"
 
-#: ../../data/world/resources/init.lua:158
+#: ../../data/world/resources/stones/init.lua:7
 msgid "Stones"
 msgstr "Kayalar"
 
-#: ../../data/world/resources/init.lua:174
+#: ../../data/world/resources/water/init.lua:7
 #: ../../data/world/terrains/desert/water/init.lua:5
 #: ../../data/world/terrains/summer/water/init.lua:5
 #: ../../data/world/terrains/wasteland/water/init.lua:5
@@ -839,11 +843,7 @@ msgstr "Kayalar"
 msgid "Water"
 msgstr "Su"
 
-#: ../../data/world/resources/init.lua:190
-msgid "Fish"
-msgstr "Balık"
-
-#: ../../data/world/terrains/desert/beach/init.lua:177
+#: ../../data/world/terrains/desert/beach/init.lua:179
 #: ../../data/world/terrains/summer/beach/init.lua:5
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5

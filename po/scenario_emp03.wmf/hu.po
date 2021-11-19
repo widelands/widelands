@@ -670,6 +670,10 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Gondoljuk végig! A szövet szövéséhez gyapjúra van szükség egy juhtelepről. A"
+" juhtelepnek pedig búzára és vízre van szüksége a juhok neveléséhez. Ezért "
+"hát, ha találunk egy nagy épületnek megfelelő helyet, ott először egy "
+"földbirtokot kell építenünk."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
