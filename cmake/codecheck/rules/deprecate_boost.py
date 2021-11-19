@@ -18,7 +18,6 @@ whitelist_headers = [
     'boost/uuid',
     'boost/asio',
     'boost/version',
-    'boost/test',
 ]
 
 

@@ -17,41 +17,35 @@
  *
  */
 
-#include <boost/test/unit_test.hpp>
-
-#include "base/macros.h"
 #include "base/math.h"
+#include "base/test.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
+TESTSUITE_START(math)
 
-BOOST_AUTO_TEST_SUITE(math)
-
-BOOST_AUTO_TEST_CASE(math_sign) {
-	BOOST_CHECK_EQUAL(math::sign(5), 1);
-	BOOST_CHECK_EQUAL(math::sign(-5), -1);
-	BOOST_CHECK_EQUAL(math::sign(0), 1);
-	BOOST_CHECK_EQUAL(math::sign(0.0001), 1);
-	BOOST_CHECK_EQUAL(math::sign(-0.0001), -1);
+TESTCASE(math_sign) {
+	check_equal(math::sign(5), 1);
+	check_equal(math::sign(-5), -1);
+	check_equal(math::sign(0), 1);
+	check_equal(math::sign(0.0001), 1);
+	check_equal(math::sign(-0.0001), -1);
 }
 
-BOOST_AUTO_TEST_CASE(math_clamp) {
-	BOOST_CHECK_EQUAL(math::clamp(100, 50, 200), 100);
-	BOOST_CHECK_EQUAL(math::clamp(0, 50, 200), 50);
-	BOOST_CHECK_EQUAL(math::clamp(1000, 50, 200), 200);
-	BOOST_CHECK_EQUAL(math::clamp(0, -200, -50), -50);
-	BOOST_CHECK_EQUAL(math::clamp(-1000, -200, -50), -200);
+TESTCASE(math_clamp) {
+	check_equal(math::clamp(100, 50, 200), 100);
+	check_equal(math::clamp(0, 50, 200), 50);
+	check_equal(math::clamp(1000, 50, 200), 200);
+	check_equal(math::clamp(0, -200, -50), -50);
+	check_equal(math::clamp(-1000, -200, -50), -200);
 }
 
-BOOST_AUTO_TEST_CASE(math_misc) {
-	BOOST_CHECK_EQUAL(math::sqr(9), 81);
-	BOOST_CHECK_EQUAL(math::sqr(-8), 64);
-	BOOST_CHECK_EQUAL(math::to_int("5"), 5);
-	BOOST_CHECK_EQUAL(math::to_int("+0"), 0);
-	BOOST_CHECK_EQUAL(math::to_long("-100"), -100);
-	BOOST_CHECK_EQUAL(math::read_percent_to_int("9%"), 900);
-	BOOST_CHECK_EQUAL(math::read_percent_to_int("12.34%"), 1234);
+TESTCASE(math_misc) {
+	check_equal(math::sqr(9), 81);
+	check_equal(math::sqr(-8), 64);
+	check_equal(math::to_int("5"), 5);
+	check_equal(math::to_int("+0"), 0);
+	check_equal(math::to_long("-100"), -100);
+	check_equal(math::read_percent_to_int("9%"), 900);
+	check_equal(math::read_percent_to_int("12.34%"), 1234);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()
