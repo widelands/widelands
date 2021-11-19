@@ -648,11 +648,12 @@ void WLApplication::init_and_run_game_from_template() {
 	}
 
 	std::unique_ptr<GameSettingsProvider> settings;
-	std::unique_ptr<GameHost> host;
+	std::shared_ptr<GameHost> host;
+	std::shared_ptr<GameController> ctrl;
 	if (multiplayer) {
-		std::shared_ptr<GameController> ctrl(nullptr);
 		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
 		                        Widelands::get_all_tribeinfos(nullptr), false));
+		ctrl.reset(host.get());
 		settings.reset(new HostGameSettingsProvider(host.get()));
 	} else {
 		settings.reset(new SinglePlayerGameSettingsProvider());
