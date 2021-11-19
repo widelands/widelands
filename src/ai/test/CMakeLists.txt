@@ -4,6 +4,6 @@ wl_test(test_ai
     test_ai.cc
     test_ga.cc
   DEPENDS
-    base_macros
+    base_test
     ai
 )

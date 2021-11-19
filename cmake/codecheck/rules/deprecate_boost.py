@@ -16,7 +16,6 @@ whitelist_headers = [
     'boost/signals2',
     'boost/asio',
     'boost/version',
-    'boost/test',
 ]
 
 

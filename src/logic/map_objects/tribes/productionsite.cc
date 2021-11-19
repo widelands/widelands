@@ -638,7 +638,8 @@ void ProductionSite::try_replace_worker(const Game* game,
 
 		// Only move workers into higher qualified jobs
 		const WorkerDescr& wd = game->descriptions().workers().get(worker_index);
-		bool needs_higher_qualification = wd.can_act_as(worker_index_repl);
+		bool needs_higher_qualification =
+		   worker_index_repl != worker_index && wd.can_act_as(worker_index_repl);
 
 		Worker* w_repl = wp_repl->worker.get(*game);
 		assert(w_repl != nullptr);

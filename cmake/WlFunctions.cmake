@@ -233,13 +233,6 @@ function(wl_test NAME)
 
   add_executable(${NAME} ${ARG_SRCS})
 
-  # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-  string(REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -DBOOST_TEST_DYN_LINK")
-  endif()
-  target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-
   # Tests need to link with SDL2 library without main.
   target_link_libraries(${NAME} SDL2::Core)
 
