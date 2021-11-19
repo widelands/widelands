@@ -1068,9 +1068,13 @@ private:
 template <typename... Args>
 std::string format(const bool localize, const std::string& format_string, Args... args) {
 	try {
-		// The textdomain uses a mutex internally, so it guarantees thread-safety.
-		i18n::Textdomain textdomain("widelands");
-		return format_impl::Tree::get(format_string).format(localize, args...);
+		if (localize) {
+			// The textdomain uses a mutex internally, so it guarantees thread-safety.
+			i18n::Textdomain textdomain("widelands");
+			return format_impl::Tree::get(format_string).format(true, args...);
+		}
+		MutexLock m(MutexLock::ID::kI18N);
+		return format_impl::Tree::get(format_string).format(false, args...);
 	} catch (const std::exception& e) {
 		log_err("bformat error: A string contains invalid printf placeholders");
 		log_err("Error: %s", e.what());
