@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdarg>
 #ifdef _WIN32
+#include <cstdio>
 #include <fstream>
 #endif
 #include <iostream>
@@ -32,9 +33,7 @@
 #include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
-#endif
 
-#ifdef _WIN32
 #include "build_info.h"
 #endif
 
@@ -59,10 +58,11 @@ std::string get_output_directory() {
 	return path;
 }
 
-// This Logger emulates the SDL1.2 behavior of writing a stdout.txt.
+// This Logger emulates the SDL1.2 behavior of writing a stdout.txt and stderr.txt.
 class WindowsLogger {
 public:
-	WindowsLogger(const std::string& dir) : stdout_filename_(dir + "\\stdout.txt") {
+	WindowsLogger(const std::string& dir)
+	   : stdout_filename_(dir + "\\stdout.txt"), stderr_filename_(dir + "\\stderr.txt") {
 		stdout_.open(stdout_filename_);
 		if (!stdout_.good()) {
 			throw wexception(
@@ -75,6 +75,7 @@ public:
 		stdout_ << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
 		        << std::endl;
 		stdout_.flush();
+		stderr_.reset(freopen(stderr_filename_.c_str(), "wb", stderr));
 	}
 
 	void log_cstring(const char* buffer) {
@@ -83,8 +84,9 @@ public:
 	}
 
 private:
-	const std::string stdout_filename_;
+	const std::string stdout_filename_, stderr_filename_;
 	std::ofstream stdout_;
+	std::unique_ptr<FILE> stderr_;
 
 	DISALLOW_COPY_AND_ASSIGN(WindowsLogger);
 };
