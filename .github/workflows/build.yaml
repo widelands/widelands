@@ -191,7 +191,7 @@ jobs:
     runs-on: windows-latest
     # From https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     env:
-      VCPKG_ROOT: $VCPKG_INSTALLATION_ROOT
+      VCPKG_ROOT: $env:VCPKG_INSTALLATION_ROOT
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
       GETTEXT: 0.21
