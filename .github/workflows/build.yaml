@@ -222,9 +222,10 @@ jobs:
         vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp curl[http2] nghttp2
 
     - uses: ilammy/msvc-dev-cmd@v1
-    - name: Compiler
       with:
         arch: ${{ matrix.arch }}
+
+    - name: Compiler
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
