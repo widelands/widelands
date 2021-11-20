@@ -64,6 +64,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	            Widelands::NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged) {
 		        save_state_to_registry();
 		        create_player_buttons();
+				initialization_complete();
 	        }
         })) {
 	assert(my_registry_);
@@ -233,7 +234,9 @@ void GeneralStatisticsMenu::create_player_buttons() {
 		}
 
 		const Image* player_image =
-		   playercolor_image(player->get_playercolor(), "images/players/genstats_player.png");
+		   THREADSAFE_T(const Image*, const Image* (*)(const RGBColor&, const std::string&),
+		                playercolor_image, player->get_playercolor(),
+		                "images/players/genstats_player.png");
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(&player_buttons_box_, "playerbutton", 0, 0, 25, 25,
 		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
