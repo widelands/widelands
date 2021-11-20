@@ -202,8 +202,6 @@ jobs:
       run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
       shell: bash
 
-    - uses: lukka/get-cmake@latest
-
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
       with:
@@ -223,8 +221,8 @@ jobs:
       run: |
         vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp curl[http2] nghttp2
 
+    - uses: ilammy/msvc-dev-cmd@v1
     - name: Compiler
-      uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: ${{ matrix.arch }}
       run: |
