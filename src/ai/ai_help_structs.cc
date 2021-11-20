@@ -1294,18 +1294,10 @@ uint32_t PlayersStrengths::get_modified_player_power(Widelands::PlayerNumber pn)
 
 // Are the player in the same team
 bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
-                                            Widelands::PlayerNumber pl2) {
+                                                   Widelands::PlayerNumber pl2) {
 	assert(all_stats.count(pl1) > 0);
 	assert(all_stats.count(pl2) > 0);
-	if (pl1 == pl2) {
-		return false;
-	} else if (all_stats[pl1].team_number > 0 &&
-	           all_stats[pl1].team_number == all_stats[pl2].team_number) {
-		// team number 0 = no team
-		return true;
-	} else {
-		return false;
-	}
+	return pl1 != pl2 && all_stats.at(pl1).team_number > 0 && all_stats.at(pl1).team_number == all_stats.at(pl2).team_number;
 }
 
 bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
@@ -1514,7 +1506,7 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	for (auto& item : flags_) {
+	for (const auto& item : flags_) {
 		if (item.coords_hash == coords_hash) {
 			return true;
 		}

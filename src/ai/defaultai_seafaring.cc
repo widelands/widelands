@@ -186,34 +186,12 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	assert(allships.size() >= expeditions_in_progress);
 	bool ship_free = allships.size() - expeditions_in_progress > 0;
 
-	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
-
-	// now we decide whether we have enough ships or need to build another
-	// three values: kDoNothing, kNeedShip, kEnoughShips
-	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked) {
-
-		if (!basic_economy_established) {
-			enough_ships = FleetStatus::kEnoughShips;
-			// we always need at least one ship in transport mode
-		} else if (!ship_free) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// we want at least as many free ships as we have ports
-		} else if (int(allships.size()) - ports_count - expeditions_in_progress < 0) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// if ships utilization is too high
-		} else if (persistent_data->ships_utilization > 5000) {
-			enough_ships = FleetStatus::kNeedShip;
-
-		} else {
-			enough_ships = FleetStatus::kEnoughShips;
-		}
-	}
-
-	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (enough_ships == FleetStatus::kNeedShip) {
+	// Mow we decide whether we have enough ships or need to build another.
+	// Building a ship? If yes, find a shipyard and order it to build a ship.
+	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked && basic_economy_established &&
+			(!ship_free ||
+			static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0 ||
+			persistent_data->ships_utilization > 5000)) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
 			if (ps_obs.bo->is(BuildingAttribute::kShipyard) && ps_obs.site->can_start_working() &&

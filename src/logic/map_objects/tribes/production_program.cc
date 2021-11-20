@@ -640,9 +640,6 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 		result_ = ProgramResult::kFailed;
 	} else if (match_and_skip(arguments, begin, "completed")) {
 		result_ = ProgramResult::kCompleted;
-	} else if (match_and_skip(arguments, begin, "no_stats")) {
-		// TODO(GunChleoc): Savegame cpmpatibility - remove no_stats after Build 21
-		result_ = ProgramResult::kCompleted;
 	} else if (match_and_skip(arguments, begin, "skipped")) {
 		result_ = ProgramResult::kSkipped;
 	} else {

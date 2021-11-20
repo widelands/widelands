@@ -2620,7 +2620,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const int32_t stocked_wood_margin = calculate_stocklevel(wood_index) -
 	                                    productionsites.size() * 2 - numof_psites_in_constr +
 	                                    management_data.get_military_number_at(87) / 5;
-	if (gametime < Time(15 * 60 * 1000)) {
+	if (gametime < Time(15 * 60 * 1000)) {  // NOLINT
 		wood_policy_ = WoodPolicy::kAllowRangers;
 	} else if (stocked_wood_margin > 80) {
 		wood_policy_ = WoodPolicy::kDismantleRangers;
@@ -3939,9 +3939,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		}
 	}
 
-	if (spots_ > kSpotsEnough && wares_on_road > 5) {
-		return false;
-	} else if (wares_on_road > 8) {
+	if (wares_on_road > (spots_ > kSpotsEnough ? 5 : 8)) {
 		return false;
 	}
 
@@ -4510,7 +4508,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// the site is pending for upgrade - one possible cause is this is a freshly loaded game
 	if (!site.upgrade_pending) {
 		bool resetting_wares = false;
-		for (auto& queue : site.site->inputqueues()) {
+		for (const auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() == 0) {
 				resetting_wares = true;
 				game().send_player_set_input_max_fill(
@@ -4659,7 +4657,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		}
 
 		assert(site.bo->total_count() == 1);
-		for (auto& queue : site.site->inputqueues()) {
+		for (const auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() > 4) {
 				game().send_player_set_input_max_fill(
 				   *site.site, queue->get_index(), queue->get_type(), 4);
@@ -4706,7 +4704,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		// starting the site
 		if (site.site->is_stopped() && tmp_score >= 0) {
 			game().send_player_start_stop_building(*site.site);
-			for (auto& queue : site.site->inputqueues()) {
+			for (const auto& queue : site.site->inputqueues()) {
 				game().send_player_set_input_max_fill(
 				   *site.site, queue->get_index(), queue->get_type(), 4);
 			}
@@ -4714,7 +4712,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		// stopping the site
 		if (!site.site->is_stopped() && tmp_score < 0) {
 			game().send_player_start_stop_building(*site.site);
-			for (auto& queue : site.site->inputqueues()) {
+			for (const auto& queue : site.site->inputqueues()) {
 				game().send_player_set_input_max_fill(
 				   *site.site, queue->get_index(), queue->get_type(), 2);
 			}
@@ -5110,11 +5108,8 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	}
 
 	// dismantling a mine
-	if (!has_upgrade) {  // if no upgrade, now
-		initiate_dismantling(site, gametime);
-		return true;
-		// if having an upgrade, after half hour
-	} else if (site.no_resources_since + Duration(30 * 60 * 1000) < gametime && !forcing_upgrade) {
+	if (!has_upgrade || (site.no_resources_since + Duration(30 * 60 * 1000) < gametime && !forcing_upgrade)) {
+		// If no upgrade, now; if having an upgrade, after half an hour.
 		initiate_dismantling(site, gametime);
 		return true;
 	}
@@ -5295,22 +5290,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	// First we deal with training sites, they are separate category
 	if (bo.type == BuildingObserver::Type::kTrainingsite) {
-
-		if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(1)) {
+		if ((!basic_economy_established && management_data.f_neuron_pool[17].get_position(1))
+				|| bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed
+				|| ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 ||
+				       ts_in_const_count_ > 1
+				|| bo.prohibited_till > gametime
+				|| ts_without_trainers_ > 1
+				|| (bo.total_count() > 0 && soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5)) {
 			return BuildingNecessity::kNotNeeded;
-		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
-			return BuildingNecessity::kNotNeeded;
-		} else if (ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 ||
-		           ts_in_const_count_ > 1) {
-			return BuildingNecessity::kNotNeeded;
-		} else if (bo.prohibited_till > gametime) {
-			return BuildingNecessity::kNotNeeded;
-		} else if (ts_without_trainers_ > 1) {
-			return BuildingNecessity::kNotNeeded;
-		} else if (bo.total_count() > 0) {
-			if (soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5) {
-				return BuildingNecessity::kNotNeeded;
-			}
 		}
 
 		// It seems we might need it after all
@@ -5749,18 +5736,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 
-			if (wood_policy_ != WoodPolicy::kAllowRangers) {
-				return BuildingNecessity::kForbidden;
-			}
-
-			if (bo.total_count() > bo.cnt_target) {
+			if (wood_policy_ != WoodPolicy::kAllowRangers || bo.total_count() > bo.cnt_target) {
 				return BuildingNecessity::kForbidden;
 			}
 
 			const bool parallel_construction = (bo.total_count() + 2 < bo.cnt_target);
-			if (parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) {
-				return BuildingNecessity::kNeeded;
-			} else if (bo.cnt_under_construction + bo.unoccupied_count == 0) {
+			if ((parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) || bo.cnt_under_construction + bo.unoccupied_count == 0) {
 				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kForbidden;
@@ -5856,18 +5837,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.max_needed_preciousness == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			if (gametime - bo.construction_decision_time < kBuildingMinInterval) {
-				return BuildingNecessity::kForbidden;
-			}
-			if (mines_per_type[bo.mines].in_construction > 0) {
-				return BuildingNecessity::kForbidden;
-			}
-			if (mines_per_type[bo.mines].finished >= 1 && bo.current_stats < 50) {
-				return BuildingNecessity::kForbidden;
-			}
-
-			if (bo.last_building_built.is_valid() &&
-			    gametime < bo.last_building_built + Duration(3 * 60 * 1000)) {
+			if (gametime - bo.construction_decision_time < kBuildingMinInterval
+				|| mines_per_type[bo.mines].in_construction > 0
+				|| (mines_per_type[bo.mines].finished >= 1 && bo.current_stats < 50)
+				|| (bo.last_building_built.is_valid() &&
+			    gametime < bo.last_building_built + Duration(3 * 60 * 1000))) {
 				return BuildingNecessity::kForbidden;
 			}
 
@@ -6233,21 +6207,16 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	} else if (purpose == PerfEvaluation::kForDismantle) {  // now for dismantling
 		// never dismantle last building (a care should be taken elsewhere)
 		assert(bo.total_count() > 0);
-		if (bo.total_count() == 1) {
-			return BuildingNecessity::kNeeded;
-		} else if (bo.max_preciousness >= 10 && bo.total_count() == 2) {
-			return BuildingNecessity::kNeeded;
-		} else if (!bo.ware_outputs.empty() &&
-		           bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) {
-			return BuildingNecessity::kNeeded;
-		} else if (bo.inputs.size() == 1 &&
+
+		return (bo.total_count() == 1
+			|| (bo.max_preciousness >= 10 && bo.total_count() == 2)
+			|| (!bo.ware_outputs.empty() &&
+		           bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2)
+			|| (bo.inputs.size() == 1 &&
 		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
 		              static_cast<unsigned int>(
-		                 std::abs(management_data.get_military_number_at(171)))) {
-			return BuildingNecessity::kNeeded;
-		} else {
-			return BuildingNecessity::kNotNeeded;
-		}
+		                 std::abs(management_data.get_military_number_at(171)))))
+			? BuildingNecessity::kNeeded : BuildingNecessity::kNotNeeded;
 	}
 	NEVER_HERE();
 }
@@ -7272,7 +7241,7 @@ bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 bool DefaultAI::set_inputs_to_zero(const ProductionSiteObserver& site) {
 	uint16_t remaining_wares = 0;
 
-	for (auto& queue : site.site->inputqueues()) {
+	for (const auto& queue : site.site->inputqueues()) {
 		remaining_wares += queue->get_filled();
 		if (queue->get_max_fill() > 0) {
 			game().send_player_set_input_max_fill(
@@ -7283,7 +7252,7 @@ bool DefaultAI::set_inputs_to_zero(const ProductionSiteObserver& site) {
 }
 
 void DefaultAI::set_inputs_to_max(const ProductionSiteObserver& site) {
-	for (auto& queue : site.site->inputqueues()) {
+	for (const auto& queue : site.site->inputqueues()) {
 		if (queue->get_max_fill() < queue->get_max_size()) {
 			game().send_player_set_input_max_fill(
 			   *site.site, queue->get_index(), queue->get_type(), queue->get_max_size());
