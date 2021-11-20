@@ -3,6 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
+    # TODO: cleanup
     branches: [ master, msvc_ci_action ]
 
 jobs:
@@ -213,16 +214,20 @@ jobs:
         # The other paths starting with '!' are exclusions: they contain temporary files generated during the build of the installed packages.
         path: |
           ${{ env.VCPKG_ROOT }}
+          ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
           !${{ env.VCPKG_ROOT }}/buildtrees
           !${{ env.VCPKG_ROOT }}/packages
           !${{ env.VCPKG_ROOT }}/downloads
           !${{ env.VCPKG_ROOT }}/installed
+        # TODO: build.yaml
         key: |
-          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ matrix.arch }}
+          ${{ hashFiles( '.github/workflows/format.yaml' ) }}-${{ matrix.arch }}
 
     - name: Installing dependencies
       run: |
-        vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp curl[http2] nghttp2
+        vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
+        vcpkg list
+        ls ${{ env.VCPKG_ROOT }}/installed/${{ env.VCPKG_TARGET_TRIPLET }}/share/* || true
 
     - uses: ilammy/msvc-dev-cmd@v1
       with:
