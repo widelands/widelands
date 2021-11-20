@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, msvc_ci_action ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -74,6 +74,7 @@ jobs:
         sphinx-build -W -b json -d build/doctrees source build/json
 
   clang_tidy:
+    needs: windows-msvc
     runs-on: ubuntu-latest
     steps:
     - name: Installing dependencies
@@ -176,6 +177,84 @@ jobs:
     - name: Testsuite
       run: ./regression_test.py -b build/src/widelands
 
+  windows-msvc:
+    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    strategy:
+      matrix:
+        config:
+          - Release
+          - Debug
+        arch:
+          - x64
+          - x86
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
+    runs-on: windows-latest
+    # From https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
+    env:
+      VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
+      VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+      GETTEXT: 0.21
+      ICONV: 1.16
+
+    steps:
+    - name: "Create directory '${{ env.VCPKG_DEFAULT_BINARY_CACHE }}'"
+    run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+    shell: bash
+
+    - uses: lukka/get-cmake@latest
+
+    - name: Restore vcpkg and its artifacts.
+      uses: actions/cache@v2
+      with:
+        # The first path is the location of vcpkg: it contains the vcpkg executable and data files, as long as the
+        # built package archives (aka binary cache) which are located by VCPKG_DEFAULT_BINARY_CACHE env var.
+        # The other paths starting with '!' are exclusions: they contain temporary files generated during the build of the installed packages.
+        path: |
+          ${{ env.VCPKG_ROOT }}
+          !${{ env.VCPKG_ROOT }}/buildtrees
+          !${{ env.VCPKG_ROOT }}/packages
+          !${{ env.VCPKG_ROOT }}/downloads
+          !${{ env.VCPKG_ROOT }}/installed
+        key: |
+          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ matrix.arch }}
+
+    - name: Installing dependencies
+      run: |
+        vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp curl[http2] nghttp2
+
+    - name: Compiler
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.arch }}
+      run: |
+        mkdir $env:GITHUB_WORKSPACE\build
+        cd $env:GITHUB_WORKSPACE\build
+        cmake.exe -G "NMake Makefiles" .. -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
+        nmake
+        strip -sv ./src/widelands.exe
+
+    - name: InnoSetup
+      run: |
+        cd $env:GITHUB_WORKSPACE
+        # Environment variables needed by our InnoSetup script
+        if ("${{ matrix.arch }}" -Match "x64") {
+          $env:PLATFORM = "x64"
+          $env:MINGWPATH = "C:\msys64\mingw64\bin"
+        } else {
+          $env:PLATFORM = "x86"
+          $env:MINGWPATH = "C:\msys64\mingw32\bin"
+        }
+        $env:CONFIGURATION = "${{ matrix.config }}"
+        $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
+        $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
+        strip.exe -sv .\build\src\widelands.exe
+        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
+    - name: Uploading installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
