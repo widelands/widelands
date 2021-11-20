@@ -5108,7 +5108,8 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	}
 
 	// dismantling a mine
-	if (!has_upgrade || (site.no_resources_since + Duration(30 * 60 * 1000) < gametime && !forcing_upgrade)) {
+	if (!has_upgrade ||
+	    (site.no_resources_since + Duration(30 * 60 * 1000) < gametime && !forcing_upgrade)) {
 		// If no upgrade, now; if having an upgrade, after half an hour.
 		initiate_dismantling(site, gametime);
 		return true;
@@ -5290,13 +5291,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	// First we deal with training sites, they are separate category
 	if (bo.type == BuildingObserver::Type::kTrainingsite) {
-		if ((!basic_economy_established && management_data.f_neuron_pool[17].get_position(1))
-				|| bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed
-				|| ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 ||
-				       ts_in_const_count_ > 1
-				|| bo.prohibited_till > gametime
-				|| ts_without_trainers_ > 1
-				|| (bo.total_count() > 0 && soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5)) {
+		if ((!basic_economy_established && management_data.f_neuron_pool[17].get_position(1)) ||
+		    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed ||
+		    ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 || ts_in_const_count_ > 1 ||
+		    bo.prohibited_till > gametime || ts_without_trainers_ > 1 ||
+		    (bo.total_count() > 0 &&
+		     soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5)) {
 			return BuildingNecessity::kNotNeeded;
 		}
 
@@ -5741,7 +5741,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			const bool parallel_construction = (bo.total_count() + 2 < bo.cnt_target);
-			if ((parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) || bo.cnt_under_construction + bo.unoccupied_count == 0) {
+			if ((parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) ||
+			    bo.cnt_under_construction + bo.unoccupied_count == 0) {
 				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kForbidden;
@@ -5837,11 +5838,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (bo.max_needed_preciousness == 0) {
 				return BuildingNecessity::kNotNeeded;
 			}
-			if (gametime - bo.construction_decision_time < kBuildingMinInterval
-				|| mines_per_type[bo.mines].in_construction > 0
-				|| (mines_per_type[bo.mines].finished >= 1 && bo.current_stats < 50)
-				|| (bo.last_building_built.is_valid() &&
-			    gametime < bo.last_building_built + Duration(3 * 60 * 1000))) {
+			if (gametime - bo.construction_decision_time < kBuildingMinInterval ||
+			    mines_per_type[bo.mines].in_construction > 0 ||
+			    (mines_per_type[bo.mines].finished >= 1 && bo.current_stats < 50) ||
+			    (bo.last_building_built.is_valid() &&
+			     gametime < bo.last_building_built + Duration(3 * 60 * 1000))) {
 				return BuildingNecessity::kForbidden;
 			}
 
@@ -6208,15 +6209,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// never dismantle last building (a care should be taken elsewhere)
 		assert(bo.total_count() > 0);
 
-		return (bo.total_count() == 1
-			|| (bo.max_preciousness >= 10 && bo.total_count() == 2)
-			|| (!bo.ware_outputs.empty() &&
-		           bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2)
-			|| (bo.inputs.size() == 1 &&
-		           calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
-		              static_cast<unsigned int>(
-		                 std::abs(management_data.get_military_number_at(171)))))
-			? BuildingNecessity::kNeeded : BuildingNecessity::kNotNeeded;
+		return (bo.total_count() == 1 || (bo.max_preciousness >= 10 && bo.total_count() == 2) ||
+		        (!bo.ware_outputs.empty() &&
+		         bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
+		        (bo.inputs.size() == 1 && calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
+		                                     static_cast<unsigned int>(std::abs(
+		                                        management_data.get_military_number_at(171))))) ?
+                BuildingNecessity::kNeeded :
+                BuildingNecessity::kNotNeeded;
 	}
 	NEVER_HERE();
 }

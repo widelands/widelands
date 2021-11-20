@@ -188,10 +188,11 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	// Mow we decide whether we have enough ships or need to build another.
 	// Building a ship? If yes, find a shipyard and order it to build a ship.
-	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked && basic_economy_established &&
-			(!ship_free ||
-			static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0 ||
-			persistent_data->ships_utilization > 5000)) {
+	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked &&
+	    basic_economy_established &&
+	    (!ship_free ||
+	     static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0 ||
+	     persistent_data->ships_utilization > 5000)) {
 
 		for (const ProductionSiteObserver& ps_obs : productionsites) {
 			if (ps_obs.bo->is(BuildingAttribute::kShipyard) && ps_obs.site->can_start_working() &&
