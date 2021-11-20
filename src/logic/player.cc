@@ -1827,16 +1827,15 @@ const std::string& Player::get_ai() const {
 
 void Player::set_muted(DescriptionIndex di, bool mute) {
 	if (mute) {
-		// toggle mute status twice to emit muted signal for message deleting
+		// trigger muted signal for message deleting
 		const std::vector<Widelands::Player::BuildingStats>& stats_vector =
 		   get_building_statistics(di);
+		Game& game = dynamic_cast<Game&>(egbase());
 		for (const Widelands::Player::BuildingStats& stats : stats_vector) {
 			if (!stats.is_constructionsite) {
-				Game& game = dynamic_cast<Game&>(egbase());
 				Widelands::BaseImmovable& immovable = *game.map()[stats.pos].get_immovable();
 				Widelands::Building& current_building = dynamic_cast<Widelands::Building&>(immovable);
-				current_building.set_mute_messages(!current_building.mute_messages());
-				current_building.set_mute_messages(!current_building.mute_messages());
+				current_building.muted(current_building.serial());
 			}
 		}
 		muted_building_types_.insert(di);
