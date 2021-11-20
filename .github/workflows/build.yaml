@@ -200,6 +200,11 @@ jobs:
       run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
       shell: bash
 
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
       with:
