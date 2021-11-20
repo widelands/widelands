@@ -649,7 +649,7 @@ void WLApplication::init_and_run_game_from_template() {
 
 	std::unique_ptr<GameSettingsProvider> settings;
 	std::shared_ptr<GameController> ctrl;
-	GameHost* host;  // will be deleted by ctrl
+	GameHost* host = nullptr;  // will be deleted by ctrl
 	if (multiplayer) {
 		host = new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
 		                    Widelands::get_all_tribeinfos(nullptr), false);
