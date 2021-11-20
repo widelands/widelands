@@ -143,7 +143,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_MIXER)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Mixer opusfile opus FLAC vorbisfile vorbis ogg mpg123 shlwapi ${SDL_MIXER_EXTRA_LIBS})
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Mixer opusfile opus FLAC vorbisfile vorbis ogg shlwapi ${SDL_MIXER_EXTRA_LIBS})
     else()
       target_link_libraries(${NAME} SDL2::Mixer)
     endif()
