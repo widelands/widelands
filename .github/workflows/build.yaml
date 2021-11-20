@@ -230,8 +230,30 @@ jobs:
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
-        nmake || true
-        # strip -sv ./src/widelands.exe
+        nmake
+        strip -sv ./src/widelands.exe
+
+    - name: InnoSetup
+      run: |
+        cd $env:GITHUB_WORKSPACE
+        # Environment variables needed by our InnoSetup script
+        if ("${{ matrix.arch }}" -Match "x64") {
+          $env:PLATFORM = "x64"
+          $env:MINGWPATH = "C:\msys64\mingw64\bin"
+        } else {
+          $env:PLATFORM = "x86"
+          $env:MINGWPATH = "C:\msys64\mingw32\bin"
+        }
+        $env:CONFIGURATION = "${{ matrix.config }}"
+        $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
+        $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
+        strip.exe -sv .\build\src\widelands.exe
+        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
+    - name: Uploading installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
