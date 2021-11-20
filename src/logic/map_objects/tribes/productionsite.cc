@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/tribes/productionsite.h"
 
+#include <iterator>
 #include <memory>
 
 #include "base/i18n.h"
@@ -652,7 +653,7 @@ void ProductionSite::try_replace_worker(const Game* game,
 			molog(owner().egbase().get_gametime(), "%s promoted\n", w_repl->descr().name().c_str());
 			// Request the now missing worker instead and loop again
 			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
-			try_replace_worker(game, worker_index_repl, wp_repl.base());
+			try_replace_worker(game, worker_index_repl, &(*wp_repl));
 			return;
 		}
 	}
