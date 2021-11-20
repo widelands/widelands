@@ -212,13 +212,7 @@ jobs:
         # The first path is the location of vcpkg: it contains the vcpkg executable and data files, as long as the
         # built package archives (aka binary cache) which are located by VCPKG_DEFAULT_BINARY_CACHE env var.
         # The other paths starting with '!' are exclusions: they contain temporary files generated during the build of the installed packages.
-        path: |
-          ${{ env.VCPKG_ROOT }}
-          ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-          !${{ env.VCPKG_ROOT }}/buildtrees
-          !${{ env.VCPKG_ROOT }}/packages
-          !${{ env.VCPKG_ROOT }}/downloads
-          !${{ env.VCPKG_ROOT }}/installed
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         # TODO: build.yaml
         key: |
           ${{ hashFiles( '.github/workflows/format.yaml' ) }}-${{ matrix.arch }}
