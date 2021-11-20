@@ -75,7 +75,6 @@ jobs:
         sphinx-build -W -b json -d build/doctrees source build/json
 
   clang_tidy:
-    needs: windows-msvc
     runs-on: ubuntu-latest
     steps:
     - name: Installing dependencies
@@ -179,18 +178,18 @@ jobs:
       run: ./regression_test.py -b build/src/widelands
 
   windows-msvc:
+    # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
-          #  - Release
+          #- Release
           - Debug
         arch:
           - x64
-          #  - x86
+          #- x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
     runs-on: windows-latest
-    # From https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
@@ -201,38 +200,30 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-
-    - name: "Create directory '${{ env.VCPKG_DEFAULT_BINARY_CACHE }}'"
+    - name: "Create cache directory"
       run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
       shell: bash
-
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
       with:
-        # The first path is the location of vcpkg: it contains the vcpkg executable and data files, as long as the
-        # built package archives (aka binary cache) which are located by VCPKG_DEFAULT_BINARY_CACHE env var.
-        # The other paths starting with '!' are exclusions: they contain temporary files generated during the build of the installed packages.
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-        # TODO: build.yaml
+        # TODO: change to build.yaml once the build steps are correct.
         key: |
           ${{ hashFiles( '.github/workflows/format.yaml' ) }}-${{ matrix.arch }}
-
     - name: Installing dependencies
       run: |
         vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
-
-    - uses: ilammy/msvc-dev-cmd@v1
+    - name: Configure MSVC development console
+      uses: ilammy/msvc-dev-cmd@v1
       with:
         arch: ${{ matrix.arch }}
-
     - name: Compiler
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
         nmake
-        strip -sv ./src/widelands.exe
-
+      # strip -sv ./src/widelands.exe
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
