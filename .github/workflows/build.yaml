@@ -199,8 +199,8 @@ jobs:
 
     steps:
     - name: "Create directory '${{ env.VCPKG_DEFAULT_BINARY_CACHE }}'"
-    run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
-    shell: bash
+      run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+      shell: bash
 
     - uses: lukka/get-cmake@latest
 
