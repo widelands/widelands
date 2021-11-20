@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-10-31 18:28+0000\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 09:27+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -792,6 +792,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Een wunnerlikes Land, vull vun verschedenen Landskuppen, wat all vun eenigen groten Stromen krüüzt worden."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr "Langs de Stroom"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr "'t is dat Land, waar man de Sünn winterdaags haast nich to sehn kriggt un waar Frohjahrsfloden elkeen Erinnerung an froher Tieden wegwasken. Komisk Stunk is tüsken sienen Inwohners wasen, un inhaalsk Anföhrers bruken dat Chaos to hör Vördeel. De avergloovsk Lüü sünd keen Hinner vör dat Utbilden vun machtiger Soldateree. Stuve Tieden worden uphands vandaag kummen, un du sallst up de Woorden vun dienen kloken Beraders hören, of mit de annern in de Vergetenheid sinken."
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Dat Gröne Flackland"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Du stahst up eener Insel, un run um di stahn machtige Bargen, wat eenen wunnerbaaren un machtigen Schatt in hör Midde bargen – dat Gröne Flackland, wat swaar intonehmen un licht to verlesen is. Wenn du ’t also willst, pass up de anner Völkers up."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Sandpassen"
@@ -856,18 +883,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Eenige seggen, dat de unbetredtbaren Lannen wied im Noorden sülvst de modigsten Siedlers un de dappersten vun all dappern Kriegers ofschricken. Grote, olle Walden, vull vun groten wilden Deerten; daartüsken Broken un Höchten vull vun Geheemnissen. De minnen, well torügg komen sünd, hebben vun machtigen Husen vertellt, updaan mit Sniddjereen un Gold vun baldadigen Bargen in de Midde vun de Wildernis. Hunnerte Jahre daarna sünd vun deesen goden ollen Tieden nix as grusige Ruinen över, bedeckt vun Moss un Bomen. Hör Formen laten de Künst vun de ollen Baukeerls blot ahnen. Nüms weet, waarum se nich mehr daar sünd. Nüms weet dat. De Lüü seggen, dat nu nix mehr up de Straat tum Riekdoom liggt. Aver völe mutten vun Wulfen freten worden, vun Broken verslungen … vun feindelk Völkers umringt."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Dat Gröne Flackland"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Du stahst up eener Insel, un run um di stahn machtige Bargen, wat eenen wunnerbaaren un machtigen Schatt in hör Midde bargen – dat Gröne Flackland, wat swaar intonehmen un licht to verlesen is. Wenn du ’t also willst, pass up de anner Völkers up."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"

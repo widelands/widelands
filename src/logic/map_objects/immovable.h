@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H
 
+#include <atomic>
 #include <memory>
 
 #include "base/macros.h"
@@ -265,7 +266,7 @@ protected:
 
 	Coords position_;
 
-	uint32_t anim_;
+	std::atomic<uint32_t> anim_;
 	Time animstart_;
 
 	const ImmovableProgram* program_;
@@ -290,8 +291,8 @@ public:
 
 protected:
 #else
-	uint32_t anim_construction_total_;
-	uint32_t anim_construction_done_;
+	std::atomic<uint32_t> anim_construction_total_;
+	std::atomic<uint32_t> anim_construction_done_;
 	Time program_step_;  ///< time of next step
 #endif
 

@@ -47,7 +47,7 @@ namespace Widelands {
 constexpr uint32_t kReplayKnownToDesync = 0x2E21A100;
 constexpr uint32_t kReplayMagic = 0x2E21A101;
 constexpr uint8_t kCurrentPacketVersion = 3;
-constexpr Duration kSyncInterval = Duration(200);
+constexpr Duration kSyncInterval(200);
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
 

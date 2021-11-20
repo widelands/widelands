@@ -396,6 +396,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>
+  <translation type="gettext">map_along_the_river.wmf</translation>
   <translation type="gettext">map_the_green_plateau.wmf</translation>
   <translation type="gettext">maps</translation>
   <translation type="gettext">mp_scenario_island_hopping.wmf</translation>

@@ -19,6 +19,8 @@
 
 #include "graphic/gl/terrain_program.h"
 
+#include <atomic>
+
 #include "graphic/gl/coordinate_conversion.h"
 #include "graphic/gl/fields_to_draw.h"
 #include "graphic/gl/utils.h"
@@ -109,7 +111,7 @@ void TerrainProgram::draw(
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
 			   player && !player->see_all() ?
-               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.d :
+               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().d :
                field.fcoords.field->terrain_d();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
@@ -122,7 +124,7 @@ void TerrainProgram::draw(
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
 			   player && !player->see_all() ?
-               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.r :
+               player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().r :
                field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =
 			   to_gl_texture(terrains.get(terrain).get_texture(gametime).blit_data()).origin();
