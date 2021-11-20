@@ -638,7 +638,8 @@ void ProductionSite::try_replace_worker(const Game* game,
 
 		// Only move workers into higher qualified jobs
 		const WorkerDescr& wd = game->descriptions().workers().get(worker_index);
-		bool needs_higher_qualification = wd.can_act_as(worker_index_repl);
+		bool needs_higher_qualification =
+		   worker_index_repl != worker_index && wd.can_act_as(worker_index_repl);
 
 		Worker* w_repl = wp_repl->worker.get(*game);
 		assert(w_repl != nullptr);
@@ -1205,9 +1206,8 @@ void ProductionSite::set_default_anim(const std::string& anim) {
 	default_anim_ = anim;
 }
 
-constexpr Duration kStatsEntireDuration = Duration(5 * 60 * 1000);  // statistic evaluation base
-constexpr Duration kStatsDurationCap =
-   Duration(180 * 1000);  // This is highest allowed program duration
+constexpr Duration kStatsEntireDuration(5 * 60 * 1000);  // statistic evaluation base
+constexpr Duration kStatsDurationCap(180 * 1000);        // This is highest allowed program duration
 
 void ProductionSite::update_actual_statistics(Duration duration, const bool produced) {
 	// just for case something went very wrong...

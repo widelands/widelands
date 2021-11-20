@@ -81,6 +81,7 @@ __USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
 __USES_INCLUDES['USES_SDL2_TTF'] = r'<SDL_ttf\.h>'
 __USES_INCLUDES['USES_SDL2'] = r'(?!(<SDL_image\.h>|<SDL_mixer\.h>|<SDL_ttf\.h>))(<SDL.+\.h>)'
 __USES_INCLUDES['USES_ZLIB'] = r'"zlib\.h"'
+__USES_INCLUDES['USES_ATOMIC'] = r'<atomic>'
 
 
 def extract_uses_includes(srcdir, source):

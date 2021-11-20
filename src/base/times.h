@@ -20,6 +20,7 @@
 #ifndef WL_BASE_TIMES_H
 #define WL_BASE_TIMES_H
 
+#include <atomic>
 #include <limits>
 
 #include "base/wexception.h"
@@ -33,6 +34,15 @@ struct Duration {
 	// (semantically an "endless" duration)
 	constexpr explicit Duration(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
 	}
+
+	Duration(const Duration& other) : value_(other.get()) {
+	}
+
+	Duration& operator=(const Duration& other) {
+		value_ = other.get();
+		return *this;
+	}
+
 	void operator+=(const Duration& delta) {
 		if (!is_valid() || !delta.is_valid()) {
 			throw wexception("Attempt to add invalid Durations");
@@ -55,7 +65,7 @@ struct Duration {
 		if (d == 0) {
 			throw wexception("Attempt to divide Duration by zero");
 		}
-		value_ /= d;
+		value_ = value_ / d;
 	}
 
 	// Intervals arithmetics
@@ -91,7 +101,7 @@ struct Duration {
 	}
 
 	uint32_t get() const {
-		return value_;
+		return value_.load();
 	}
 
 	inline bool operator<(const Duration& m) const {
@@ -126,7 +136,7 @@ struct Duration {
 	void save(FileWrite&) const;
 
 private:
-	uint32_t value_;
+	std::atomic<uint32_t> value_;
 };
 
 // A time point, in milliseconds gametime.
@@ -134,6 +144,14 @@ struct Time {
 	// The default-constructed Time is the special "invalid" value
 	// (semantically meaning "never")
 	constexpr explicit Time(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
+	}
+
+	Time(const Time& other) : value_(other.get()) {
+	}
+
+	Time& operator=(const Time& other) {
+		value_ = other.get();
+		return *this;
 	}
 
 	// Adding/subtracting intervals
@@ -207,7 +225,7 @@ struct Time {
 	void save(FileWrite&) const;
 
 private:
-	uint32_t value_;
+	std::atomic<uint32_t> value_;
 };
 
 #endif  // end of include guard: WL_BASE_TIMES_H

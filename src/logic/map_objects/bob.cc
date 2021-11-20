@@ -888,11 +888,11 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
  */
 void Bob::set_owner(Player* const player) {
 	if (owner_ && position_.field) {
-		owner_->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
+		owner_.load()->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 	owner_ = player;
 	if (owner_ && position_.field) {
-		owner_->see_area(Area<FCoords>(get_position(), descr().vision_range()));
+		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 }
 
@@ -922,9 +922,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	*linkpprev_ = this;
 
 	if (owner_) {
-		owner_->see_area(Area<FCoords>(get_position(), descr().vision_range()));
+		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 		if (oldposition.field) {
-			owner_->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
+			owner_.load()->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
 		}
 	}
 
@@ -947,7 +947,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 /// Give debug information.
 void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF
-	molog(egbase.get_gametime(), "Owner: %p\n", owner_);
+	molog(egbase.get_gametime(), "Owner: %p\n", owner_.load());
 	FORMAT_WARNINGS_ON
 	molog(egbase.get_gametime(), "Postition: (%i, %i)\n", position_.x, position_.y);
 	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
@@ -1173,7 +1173,8 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	fw.unsigned_8(owner_ ? owner_->player_number() : 0);
+	const Widelands::Player* const owner = owner_.load();
+	fw.unsigned_8(owner ? owner->player_number() : 0);
 	write_coords_32(&fw, position_);
 
 	// linkprev_ and linknext_ are recreated automatically

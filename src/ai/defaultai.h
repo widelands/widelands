@@ -143,20 +143,20 @@ private:
 
 	static constexpr bool kAbsValue = true;
 	static constexpr int32_t kSpotsTooLittle = 15;
-	static constexpr Duration kManagementUpdateInterval = Duration(10 * 60 * 1000);
-	static constexpr Duration kStatUpdateInterval = Duration(60 * 1000);
-	static constexpr Duration kFlagWarehouseUpdInterval = Duration(15 * 1000);
+	static constexpr Duration kManagementUpdateInterval{10 * 60 * 1000};
+	static constexpr Duration kStatUpdateInterval{60 * 1000};
+	static constexpr Duration kFlagWarehouseUpdInterval{15 * 1000};
 
 	// common for defaultai.cc and defaultai_seafaring.cc
-	static constexpr Duration kExpeditionMinDuration = Duration(60 * 60 * 1000);
-	static constexpr Duration kExpeditionMaxDuration = Duration(210 * 60 * 1000);
+	static constexpr Duration kExpeditionMinDuration{60 * 60 * 1000};
+	static constexpr Duration kExpeditionMaxDuration{210 * 60 * 1000};
 	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
-	static constexpr Duration kShipCheckInterval = Duration(5 * 1000);
+	static constexpr Duration kShipCheckInterval{5 * 1000};
 
 	// used by defaultai_warfare.cc
 	// duration of military campaign
-	static constexpr Duration kCampaignDuration = Duration(15 * 60 * 1000);
-	static constexpr Duration kTrainingSitesCheckInterval = Duration(15 * 1000);
+	static constexpr Duration kCampaignDuration{15 * 60 * 1000};
+	static constexpr Duration kTrainingSitesCheckInterval{15 * 1000};
 
 	// Variables of default AI
 	AiType type_;
