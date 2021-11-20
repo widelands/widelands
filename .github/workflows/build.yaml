@@ -196,14 +196,14 @@ jobs:
       VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
 
     steps:
-    - name: "Create directory '${{ env.VCPKG_DEFAULT_BINARY_CACHE }}'"
-      run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
-      shell: bash
-
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
+
+    - name: "Create directory '${{ env.VCPKG_DEFAULT_BINARY_CACHE }}'"
+      run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+      shell: bash
 
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
