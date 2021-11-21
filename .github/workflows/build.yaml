@@ -188,7 +188,7 @@ jobs:
         arch:
           - x64
           #- x86
-    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-latest
     env:
       VCPKG_ROOT: C:\vcpkg
@@ -256,7 +256,7 @@ jobs:
         arch:
           - x64
           - x86
-    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
