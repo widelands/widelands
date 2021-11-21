@@ -776,7 +776,7 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
-                                 get_buildcaps(fc) :
+	                              get_buildcaps(fc) :
                                  map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE)) {
@@ -879,7 +879,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
 						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other = flag == &primary_start ?
-                                           primary_road->get_flag(RoadBase::FlagEnd) :
+						                         primary_road->get_flag(RoadBase::FlagEnd) :
                                            primary_start;
 						primary_road->destroy(egbase());
 						verb_log_info_time(egbase().get_gametime(),
@@ -1831,10 +1831,9 @@ void Player::set_muted(DescriptionIndex di, bool mute) {
 		// trigger muted signal for message deleting
 		const std::vector<Widelands::Player::BuildingStats>& stats_vector =
 		   get_building_statistics(di);
-		Game& game = dynamic_cast<Game&>(egbase());
 		for (const Widelands::Player::BuildingStats& stats : stats_vector) {
 			if (!stats.is_constructionsite) {
-				Widelands::BaseImmovable& immovable = *game.map()[stats.pos].get_immovable();
+				Widelands::BaseImmovable& immovable = *egbase().map()[stats.pos].get_immovable();
 				Widelands::Building& current_building = dynamic_cast<Widelands::Building&>(immovable);
 				current_building.muted(current_building.serial());
 			}
