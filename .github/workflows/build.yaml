@@ -183,7 +183,7 @@ jobs:
     strategy:
       matrix:
         config:
-          #- Release
+          - Release
           - Debug
         arch:
           - x64
