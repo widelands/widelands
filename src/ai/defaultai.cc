@@ -5502,7 +5502,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			bo.max_needed_preciousness = bo.max_preciousness;
 			return BuildingNecessity::kForced;
-		} else if (bo.prohibited_till > gametime) {
+		} else if (bo.prohibited_till > gametime) {  // NOLINT
 			return BuildingNecessity::kForbidden;
 		} else if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher) ||
 		           bo.is(BuildingAttribute::kWell)) {
@@ -5822,16 +5822,14 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
-			if (mines_per_type[bo.mines].total_count() == 0 &&
-			    site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
-				// unless a mine is prohibited, we want to have at least one of the kind
-				bo.max_needed_preciousness = bo.max_preciousness;
-				return BuildingNecessity::kNeeded;
-			} else if (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
+			if ((mines_per_type[bo.mines].total_count() == 0 &&
+			    site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) ||
+			    (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
 			           bo.current_stats >
 			              static_cast<uint32_t>(
 			                 85 + std::abs(management_data.get_military_number_at(129)) / 10) &&
-			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) {
+			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged)) {
+				// unless a mine is prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
 			}
