@@ -84,7 +84,6 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	window_mode_height_ = window_mode_h;
 
 	if (SDL_GL_LoadLibrary(nullptr) == -1) {
-		log_err("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 

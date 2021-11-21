@@ -19,7 +19,6 @@
 
 #include "logic/map_objects/tribes/productionsite.h"
 
-#include <iterator>
 #include <memory>
 
 #include "base/i18n.h"
