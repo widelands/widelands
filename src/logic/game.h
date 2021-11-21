@@ -416,6 +416,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
+	void do_send_player_command(PlayerCommand*);
 	std::shared_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
