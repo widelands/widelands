@@ -228,7 +228,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Exe
-        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
+        path: ${{ github.workspace }}\build\src\widelands.exe
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
