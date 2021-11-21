@@ -37,7 +37,7 @@ public:
 	/** Wrapper around a callback function. */
 	struct SignalSubscriber {
 		explicit SignalSubscriber(const Signal& p, const std::function<void(Args...)>& c)
-		: parent_(p), callback_(c) {
+		   : parent_(p), callback_(c) {
 		}
 		~SignalSubscriber() {
 			parent_.unsubscribe(this);
@@ -57,8 +57,8 @@ public:
 	}
 
 	/** Create a subscriber with a user-defined lifetime. */
-	std::unique_ptr<SignalSubscriber>
-	subscribe(const std::function<void(Args...)>& callback, bool at_front = false) const {
+	std::unique_ptr<SignalSubscriber> subscribe(const std::function<void(Args...)>& callback,
+	                                            bool at_front = false) const {
 		SignalSubscriber* s = new SignalSubscriber(*this, callback);
 		if (at_front) {
 			all_subscribers_.push_front(s);
@@ -74,8 +74,8 @@ public:
 	}
 
 	/** Create a subscriber that echoes the signal's invokations to another signal. */
-	inline std::unique_ptr<SignalSubscriber>
-	subscribe(const Signal& s, bool at_front = false) const {
+	inline std::unique_ptr<SignalSubscriber> subscribe(const Signal& s,
+	                                                   bool at_front = false) const {
 		return subscribe([&s](Args... args) { s(args...); }, at_front);
 	}
 	inline void connect(const Signal& s, bool at_front = false) const {
