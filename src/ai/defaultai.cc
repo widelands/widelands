@@ -5823,12 +5823,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
 			if ((mines_per_type[bo.mines].total_count() == 0 &&
-			    site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) ||
+			     site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) ||
 			    (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
-			           bo.current_stats >
-			              static_cast<uint32_t>(
-			                 85 + std::abs(management_data.get_military_number_at(129)) / 10) &&
-			           site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged)) {
+			     bo.current_stats >
+			        static_cast<uint32_t>(85 + std::abs(management_data.get_military_number_at(129)) /
+			                                      10) &&
+			     site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged)) {
 				// unless a mine is prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness = bo.max_preciousness;
 				return BuildingNecessity::kNeeded;
