@@ -3,8 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    # TODO: cleanup
-    branches: [ master, msvc_ci_action ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -179,6 +178,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
+    # TODO: uncomment, once the build steps are correct.
     # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
@@ -187,7 +187,7 @@ jobs:
           - Debug
         arch:
           - x64
-          #- x86
+          - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-latest
     env:
@@ -223,11 +223,12 @@ jobs:
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
         nmake
-      # strip -sv ./src/widelands.exe
+        strip -sv ./src/widelands.exe
+      # TODO: remove this step once the InnoSetup works
     - name: Uploading executable
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Exe
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} executable
         path: ${{ github.workspace }}\build\src\widelands.exe
     - name: InnoSetup
       run: |
