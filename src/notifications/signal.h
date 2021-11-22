@@ -31,6 +31,12 @@
 
 namespace Notifications {
 
+/**
+ * Whether a new subscriber will be the last (default)
+ * or first to be invoked when the signal is triggered.
+ */
+enum class SubscriberPosition { kFront, kBack };
+
 /** Class that allows attaching callback functions to an object. */
 template <typename... Args> class Signal {
 public:
@@ -57,29 +63,34 @@ public:
 	}
 
 	/** Create a subscriber with a user-defined lifetime. */
-	std::unique_ptr<SignalSubscriber> subscribe(const std::function<void(Args...)>& callback,
-	                                            bool at_front = false) const {
+	std::unique_ptr<SignalSubscriber>
+	subscribe(const std::function<void(Args...)>& callback,
+	          SubscriberPosition pos = SubscriberPosition::kBack) const {
 		SignalSubscriber* s = new SignalSubscriber(*this, callback);
-		if (at_front) {
-			all_subscribers_.push_front(s);
-		} else {
+		switch (pos) {
+		case SubscriberPosition::kBack:
 			all_subscribers_.push_back(s);
+			break;
+		case SubscriberPosition::kFront:
+			all_subscribers_.push_front(s);
+			break;
 		}
 		return std::unique_ptr<SignalSubscriber>(s);
 	}
 
 	/** Create a subscriber with the same lifetime as the signal. */
-	inline void connect(const std::function<void(Args...)>& callback, bool at_front = false) const {
-		owned_subscribers_.insert(subscribe(callback, at_front));
+	inline void connect(const std::function<void(Args...)>& callback,
+	                    SubscriberPosition pos = SubscriberPosition::kBack) const {
+		owned_subscribers_.insert(subscribe(callback, pos));
 	}
 
 	/** Create a subscriber that echoes the signal's invokations to another signal. */
-	inline std::unique_ptr<SignalSubscriber> subscribe(const Signal& s,
-	                                                   bool at_front = false) const {
-		return subscribe([&s](Args... args) { s(args...); }, at_front);
+	inline std::unique_ptr<SignalSubscriber>
+	subscribe(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
+		return subscribe([&s](Args... args) { s(args...); }, pos);
 	}
-	inline void connect(const Signal& s, bool at_front = false) const {
-		connect([&s](Args... args) { s(args...); }, at_front);
+	inline void connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
+		connect([&s](Args... args) { s(args...); }, pos);
 	}
 
 	/** Called by a subscriber at the end of its lifetime. */
