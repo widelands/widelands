@@ -67,7 +67,7 @@ void Ferry::start_task_unemployed(Game& game) {
 	unemployed_since_ = game.get_gametime();
 }
 
-constexpr Duration kUnemployedLifetime = Duration(1000 * 60 * 10);  // 10 minutes
+constexpr Duration kUnemployedLifetime(1000 * 60 * 10);  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (!get_signal().empty()) {

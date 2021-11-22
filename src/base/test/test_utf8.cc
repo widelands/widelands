@@ -17,36 +17,30 @@
  *
  */
 
-#include <boost/test/unit_test.hpp>
-
-#include "base/macros.h"
+#include "base/test.h"
 #include "base/utf8.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
+TESTSUITE_START(utf8)
 
-BOOST_AUTO_TEST_SUITE(utf8)
-
-BOOST_AUTO_TEST_CASE(utf8_unicode) {
+TESTCASE(utf8_unicode) {
 	const std::string str = "aäü?";
 
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(0)), false);
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(1)), false);
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(2)), true);
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(3)), false);
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(4)), true);
-	BOOST_CHECK_EQUAL(Utf8::is_utf8_extended(str.at(5)), false);
+	check_equal(Utf8::is_utf8_extended(str.at(0)), false);
+	check_equal(Utf8::is_utf8_extended(str.at(1)), false);
+	check_equal(Utf8::is_utf8_extended(str.at(2)), true);
+	check_equal(Utf8::is_utf8_extended(str.at(3)), false);
+	check_equal(Utf8::is_utf8_extended(str.at(4)), true);
+	check_equal(Utf8::is_utf8_extended(str.at(5)), false);
 
 	size_t pos = 0;
-	BOOST_CHECK_EQUAL(Utf8::utf8_to_unicode(str, pos), 0x61);
-	BOOST_CHECK_EQUAL(pos, 1);
-	BOOST_CHECK_EQUAL(Utf8::utf8_to_unicode(str, pos), 0xe4);
-	BOOST_CHECK_EQUAL(pos, 3);
-	BOOST_CHECK_EQUAL(Utf8::utf8_to_unicode(str, pos), 0xfc);
-	BOOST_CHECK_EQUAL(pos, 5);
-	BOOST_CHECK_EQUAL(Utf8::utf8_to_unicode(str, pos), 0x3f);
-	BOOST_CHECK_EQUAL(pos, 6);
+	check_equal(Utf8::utf8_to_unicode(str, pos), 0x61);
+	check_equal(pos, 1);
+	check_equal(Utf8::utf8_to_unicode(str, pos), 0xe4);
+	check_equal(pos, 3);
+	check_equal(Utf8::utf8_to_unicode(str, pos), 0xfc);
+	check_equal(pos, 5);
+	check_equal(Utf8::utf8_to_unicode(str, pos), 0x3f);
+	check_equal(pos, 6);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

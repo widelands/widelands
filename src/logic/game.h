@@ -39,7 +39,7 @@ class GameController;
 namespace Widelands {
 
 /// How often are statistics to be sampled.
-constexpr Duration kStatisticsSampleTime = Duration(30 * 1000);
+constexpr Duration kStatisticsSampleTime(30 * 1000);
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
@@ -440,6 +440,7 @@ private:
 		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
+	void do_send_player_command(PlayerCommand*);
 	std::shared_ptr<GameController> ctrl_;
 
 	/// Whether a replay writer should be created.
