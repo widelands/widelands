@@ -64,7 +64,7 @@ public:
 	WindowsLogger(const std::string& dir)
 	   : stdout_filename_(dir + "\\stdout.txt"), stderr_filename_(dir + "\\stderr.txt") {
 		stdout_.open(stdout_filename_);
-		stderr_.open(stdout_filename_);
+		stderr_.open(stderr_filename_);
 		if (!stdout_.good() || !stderr_.good()) {
 			throw wexception(
 			   "Unable to initialize stdout logging destination: %s", stdout_filename_.c_str());
