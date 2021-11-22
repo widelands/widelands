@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
 "PO-Revision-Date: 2021-10-07 04:31+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -23,151 +23,151 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: ../../src/wlapplication_messages.cc:49
+#: ../../src/wlapplication_messages.cc:48
 msgid "Usage:"
 msgstr "Použití:"
 
-#: ../../src/wlapplication_messages.cc:49
+#: ../../src/wlapplication_messages.cc:48
 msgid "widelands <option0>=<value0> ... <optionN>=<valueN>"
 msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
-#: ../../src/wlapplication_messages.cc:50
+#: ../../src/wlapplication_messages.cc:49
 msgid "widelands <save.wgf>/<replay.wrpl>"
 msgstr "widelands <save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:52
-#: ../../src/wlapplication_messages.cc:54
-#: ../../src/wlapplication_messages.cc:58
-#: ../../src/wlapplication_messages.cc:189
+#: ../../src/wlapplication_messages.cc:51
+#: ../../src/wlapplication_messages.cc:53
+#: ../../src/wlapplication_messages.cc:57
+#: ../../src/wlapplication_messages.cc:188
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: ../../src/wlapplication_messages.cc:52
+#: ../../src/wlapplication_messages.cc:51
 msgid "Options:"
 msgstr "Volby:"
 
-#: ../../src/wlapplication_messages.cc:53
+#: ../../src/wlapplication_messages.cc:52
 msgid "Use specified directory for the widelands data files"
 msgstr "Použij zvolený adresář pro datové soubory Widelands"
 
-#: ../../src/wlapplication_messages.cc:55
+#: ../../src/wlapplication_messages.cc:54
 msgid ""
 "Use specified directory for widelands config files, savegames and replays. "
 "Default is "
 msgstr "Použij zvolený adresář pro konfigurační soubory, uložené hry a záznamy Widelands. Výchozí adresář"
 
-#: ../../src/wlapplication_messages.cc:58
+#: ../../src/wlapplication_messages.cc:57
 msgid "Use specified directory for the widelands locale files"
 msgstr "Použij zvolený adresář pro lokalizační soubory Widelands"
 
-#: ../../src/wlapplication_messages.cc:63
+#: ../../src/wlapplication_messages.cc:62
 msgid "The locale to use"
 msgstr "Použitá lokalizace"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
-#: ../../src/wlapplication_messages.cc:63
+#: ../../src/wlapplication_messages.cc:62
 msgid "[de_DE|sv_SE|...]"
 msgstr "[de_DE|sv_SE|...]"
 
-#: ../../src/wlapplication_messages.cc:65
+#: ../../src/wlapplication_messages.cc:64
 msgid ""
 "Do not check whether the data directory to use is compatible with this "
 "Widelands version"
 msgstr "Přeskoč kontrolu, zda je uvedený datový adresář kompatibilní s touto verzí Widelands."
 
-#: ../../src/wlapplication_messages.cc:68
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:67
+#: ../../src/wlapplication_messages.cc:71
+#: ../../src/wlapplication_messages.cc:73
 #: ../../src/wlapplication_messages.cc:74
 #: ../../src/wlapplication_messages.cc:75
-#: ../../src/wlapplication_messages.cc:76
 msgid "FILENAME"
 msgstr "FILENAME"
 
-#: ../../src/wlapplication_messages.cc:69
+#: ../../src/wlapplication_messages.cc:68
 msgid ""
 "Directly create a new singleplayer game configured in the given file. An "
 "example can be found in `data/templates/new_game_template`"
 msgstr "Vytvoří hru jednoho hráče podle nastavení, které je definováno v poskytnutém souboru. Příklad lze nalézt v `data/templates/new_game_template`."
 
-#: ../../src/wlapplication_messages.cc:72
+#: ../../src/wlapplication_messages.cc:71
 msgid "Directly starts the map `FILENAME` as scenario map"
 msgstr "Přímo spustí mapu `FILENAME` jako mapu scénáře."
 
-#: ../../src/wlapplication_messages.cc:74
+#: ../../src/wlapplication_messages.cc:73
 msgid "Directly loads the savegame `FILENAME`"
 msgstr "Načte uloženou hru `FILENAME`."
 
-#: ../../src/wlapplication_messages.cc:75
+#: ../../src/wlapplication_messages.cc:74
 msgid "Directly loads the replay `FILENAME`"
 msgstr "Načte záznam hry `FILENAME`."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:76
 msgid ""
 "Run the given Lua script after initialization. Only valid with --scenario, "
 "--loadgame, or --editor"
 msgstr "Spustí zadaný Lua script po inicializaci. Funkční pouze v kombinaci s --scenario, --loadgame nebo --editor."
 
-#: ../../src/wlapplication_messages.cc:81
+#: ../../src/wlapplication_messages.cc:80
 msgid ""
 "Directly starts the Widelands editor. You can add a =FILENAME to directly "
 "load the map `FILENAME` in editor"
 msgstr "Spustí Editor Widelands. Může být doplněno o =FILENAME pro přímé načtení vybrané mapy `FILENAME` v editoru."
 
-#: ../../src/wlapplication_messages.cc:85
+#: ../../src/wlapplication_messages.cc:84
 msgid "Starts the game with sound disabled"
 msgstr "Spustí hru bez zvuku."
 
-#: ../../src/wlapplication_messages.cc:86
+#: ../../src/wlapplication_messages.cc:85
 msgid "Force Widelands to crash when a Lua error occurs"
 msgstr "Vynutí pád aplikace Widelands v případě výskytu chyby v Lua."
 
-#: ../../src/wlapplication_messages.cc:88
+#: ../../src/wlapplication_messages.cc:87
 msgid ""
 "Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ "
 "for a full description of the AI training logic"
 msgstr "Aktivuje režim AI training. Stránka                      https://www.widelands.org/wiki/Ai%20Training/ obsahuje podrobnější informace k jeho využití."
 
-#: ../../src/wlapplication_messages.cc:92
+#: ../../src/wlapplication_messages.cc:91
 msgid ""
 "In multiplayer games only, this will keep adjusting the game speed "
 "automatically, depending on FPS. Useful in conjunction with --ai_training"
 msgstr "Pouze pro hru více hráčů, automaticky upravuje rychlost hry podle snímkové frekvence (FPS). Praktické ve spojení s --ai_training."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:95
 msgid "Game options:"
 msgstr "Volby hry:"
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:95
 msgid "Note: New values will be written to config file"
 msgstr "Poznámka: Nové hodnoty budou zapsány do konfiguračního souboru"
 
 #. * TRANSLATORS: A placeholder for a numerical value
-#: ../../src/wlapplication_messages.cc:99
-#: ../../src/wlapplication_messages.cc:102
-#: ../../src/wlapplication_messages.cc:151
-#: ../../src/wlapplication_messages.cc:163
-#: ../../src/wlapplication_messages.cc:186
-#: ../../src/wlapplication_messages.cc:194
-#: ../../src/wlapplication_messages.cc:203
+#: ../../src/wlapplication_messages.cc:98
+#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:185
+#: ../../src/wlapplication_messages.cc:193
+#: ../../src/wlapplication_messages.cc:202
 msgid "n"
 msgstr "n"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:101
+#: ../../src/wlapplication_messages.cc:100
 msgid "Automatically save each `n` minutes"
 msgstr "Automaticky ukládá každých `n` minut"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:103
 msgid "Use `n` files for rolling autosaves"
 msgstr "Použij `n` souborů pro automatické ukládání."
 
-#: ../../src/wlapplication_messages.cc:105
+#: ../../src/wlapplication_messages.cc:104
 msgid "Do not save files as binary zip archives"
 msgstr "Neukládat soubory jako binární zip archivy."
 
-#: ../../src/wlapplication_messages.cc:106
+#: ../../src/wlapplication_messages.cc:105
 msgid "Show filenames in replay screen"
 msgstr "Zobrazuj názvy souborů v okně záznamů."
 
@@ -175,45 +175,45 @@ msgstr "Zobrazuj názvy souborů v okně záznamů."
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
-#: ../../src/wlapplication_messages.cc:106
-#: ../../src/wlapplication_messages.cc:108
-#: ../../src/wlapplication_messages.cc:111
-#: ../../src/wlapplication_messages.cc:120
-#: ../../src/wlapplication_messages.cc:136
-#: ../../src/wlapplication_messages.cc:144
-#: ../../src/wlapplication_messages.cc:182
-#: ../../src/wlapplication_messages.cc:192
+#: ../../src/wlapplication_messages.cc:105
+#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:110
+#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:143
+#: ../../src/wlapplication_messages.cc:181
+#: ../../src/wlapplication_messages.cc:191
 msgid "[true*|false]"
 msgstr "[ano*|ne]"
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:108
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
 msgstr "Zda by mělo být v editoru zobrazeno varování o velkém množství hráčů"
 
-#: ../../src/wlapplication_messages.cc:111
+#: ../../src/wlapplication_messages.cc:110
 msgid "Start building road after placing a flag"
 msgstr "Začít budovat cestu po umístění vlajky"
 
-#: ../../src/wlapplication_messages.cc:116
+#: ../../src/wlapplication_messages.cc:115
 msgid "Bitmask of display flags to set for new games"
 msgstr "Bitová maska zobrazovacích přepínačů pro novou hru"
 
 #. * TRANSLATORS: The … character is not used on purpose to increase
 #. readability on monospaced
 #. terminals
-#: ../../src/wlapplication_messages.cc:116
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:115
+#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:153
 #: ../../src/wlapplication_messages.cc:154
 #: ../../src/wlapplication_messages.cc:155
 #: ../../src/wlapplication_messages.cc:156
-#: ../../src/wlapplication_messages.cc:157
-#: ../../src/wlapplication_messages.cc:160
+#: ../../src/wlapplication_messages.cc:159
 msgid "[...]"
 msgstr "[...]"
 
-#: ../../src/wlapplication_messages.cc:129
+#: ../../src/wlapplication_messages.cc:128
 msgid "Scroll when the mouse cursor is near the screen edge"
 msgstr "Posunovat pohled, pokud se kurzor myši přiblíží k okraji obrazovky"
 
@@ -221,46 +221,46 @@ msgstr "Posunovat pohled, pokud se kurzor myši přiblíží k okraji obrazovky"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands textdomain.
 #. * TRANSLATORS: * marks the default value
+#: ../../src/wlapplication_messages.cc:128
 #: ../../src/wlapplication_messages.cc:129
-#: ../../src/wlapplication_messages.cc:130
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:131
+#: ../../src/wlapplication_messages.cc:133
 #: ../../src/wlapplication_messages.cc:134
-#: ../../src/wlapplication_messages.cc:135
-#: ../../src/wlapplication_messages.cc:158
-#: ../../src/wlapplication_messages.cc:167
-#: ../../src/wlapplication_messages.cc:169
-#: ../../src/wlapplication_messages.cc:181
-#: ../../src/wlapplication_messages.cc:184
-#: ../../src/wlapplication_messages.cc:199
-#: ../../src/wlapplication_messages.cc:208
+#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:166
+#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:183
+#: ../../src/wlapplication_messages.cc:198
+#: ../../src/wlapplication_messages.cc:207
 msgid "[true|false*]"
 msgstr "[ano|ne*]"
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:129
 msgid "Invert click-and-drag map movement direction"
 msgstr "Otoč pohyb mapy při kliknutí a táhnutí"
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:132
 msgid "Allow diagonal scrolling with the numeric keypad"
 msgstr "Dovolit diagonální posun prostřednictvím numerické klávesnice"
 
-#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:133
 msgid "Display system time in the info panel"
 msgstr "Zobrazit na informačním panelu místní čas systému"
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:134
 msgid "Use single watchwindow mode"
 msgstr "Použít mód jednoduchého pohledového okna"
 
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:136
 msgid "Show in-game chat with transparent background"
 msgstr "Zobrazit ve hře chat s průhledným pozadím"
 
-#: ../../src/wlapplication_messages.cc:138
+#: ../../src/wlapplication_messages.cc:137
 msgid "Bitmask to set the toolbar location and mode"
 msgstr "Bitová maska k nastavení pozice a módu nástrojové lišty"
 
-#: ../../src/wlapplication_messages.cc:140
+#: ../../src/wlapplication_messages.cc:139
 msgid "Networking:"
 msgstr "Síť:"
 
@@ -268,177 +268,177 @@ msgstr "Síť:"
 #. used in multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../src/wlapplication_messages.cc:148
+#: ../../src/wlapplication_messages.cc:147
 msgid "Create syncstream dump files to help debug network games"
 msgstr "Vytváří soubory s výpisem syncstream, určené pro kontrolu desynchronizací při ladění síťových her."
 
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:148
 msgid "Connect to a different metaserver for internet gaming"
 msgstr "Umožňuje připojení k vybranému metaserveru pro hru přes internet."
 
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:148
 msgid "URI"
 msgstr "URI"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:152
 msgid "Port number `n` of the metaserver for internet gaming"
 msgstr "Číslo portu `n` metaserveru pro hru přes internet"
 
-#: ../../src/wlapplication_messages.cc:154
+#: ../../src/wlapplication_messages.cc:153
 msgid "The name of the last hosted game"
 msgstr "Název poslední hostované hry"
 
-#: ../../src/wlapplication_messages.cc:155
+#: ../../src/wlapplication_messages.cc:154
 msgid "The nickname used for LAN and online games"
 msgstr "Přezdívka použitá pro LAN a online hry"
 
-#: ../../src/wlapplication_messages.cc:156
+#: ../../src/wlapplication_messages.cc:155
 msgid "Name of map author"
 msgstr "Jméno autora mapy"
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:156
 msgid "The last host connected to"
 msgstr "Poslední hostitel"
 
-#: ../../src/wlapplication_messages.cc:159
+#: ../../src/wlapplication_messages.cc:158
 msgid "Whether the used metaserver login is for a registered user"
 msgstr "Zda je použité metaserver přihlášení pro registrovaného uživatele"
 
-#: ../../src/wlapplication_messages.cc:160
+#: ../../src/wlapplication_messages.cc:159
 msgid "The hashed password for online logins"
 msgstr "Zahashované heslo pro online přihlášení"
 
-#: ../../src/wlapplication_messages.cc:161
+#: ../../src/wlapplication_messages.cc:160
 msgid "IP"
 msgstr "IP"
 
-#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:161
 msgid "Connect to a different server address from the add-ons manager"
 msgstr "Připojit se k jiné adrese serveru ze správce rozšíření"
 
-#: ../../src/wlapplication_messages.cc:164
+#: ../../src/wlapplication_messages.cc:163
 msgid "Connect to a different server port from the add-ons manager"
 msgstr "Připojit se k jinému portu serveru ze správce rozšíření"
 
-#: ../../src/wlapplication_messages.cc:167
+#: ../../src/wlapplication_messages.cc:166
 msgid "Graphic options:"
 msgstr "Grafické volby:"
 
-#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:167
 msgid "Whether to use the whole display for the game screen"
 msgstr "Zda použít celý displej pro herní obrazovku"
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:168
 msgid "Whether to start the game in a maximized window"
 msgstr "Zda spustit hru v maximalizovaném okně"
 
 #. * TRANSLATORS: A placeholder for window width
-#: ../../src/wlapplication_messages.cc:173
+#: ../../src/wlapplication_messages.cc:172
 msgid "x"
 msgstr "x"
 
 #. * TRANSLATORS: `x` references a window width placeholder
-#: ../../src/wlapplication_messages.cc:175
+#: ../../src/wlapplication_messages.cc:174
 msgid "Width `x` of the window in pixel"
 msgstr "Šířka `x` okna v pixelech."
 
 #. * TRANSLATORS: A placeholder for window height
-#: ../../src/wlapplication_messages.cc:178
+#: ../../src/wlapplication_messages.cc:177
 msgid "y"
 msgstr "y"
 
 #. * TRANSLATORS: `y` references a window height placeholder
-#: ../../src/wlapplication_messages.cc:180
+#: ../../src/wlapplication_messages.cc:179
 msgid "Height `y` of the window in pixel"
 msgstr "Výška `y` okna v pixelech."
 
-#: ../../src/wlapplication_messages.cc:181
+#: ../../src/wlapplication_messages.cc:180
 msgid "Whether to grab the mouse input"
 msgstr "Zda odchytit vstup z myši"
 
-#: ../../src/wlapplication_messages.cc:182
+#: ../../src/wlapplication_messages.cc:181
 msgid "Whether to use the mouse cursor provided by SDL"
 msgstr "Zda použít kurzor myši poskytovaný SDL"
 
-#: ../../src/wlapplication_messages.cc:184
+#: ../../src/wlapplication_messages.cc:183
 msgid "Whether to use sticky tooltips"
 msgstr "Zda používat přichytávající se nápovědy"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:188
+#: ../../src/wlapplication_messages.cc:187
 msgid "Maximal optical framerate `n` of the game"
 msgstr " Maximální snímková frekvence `n` hry"
 
-#: ../../src/wlapplication_messages.cc:189
+#: ../../src/wlapplication_messages.cc:188
 msgid "The path to the active UI theme relative to the homedir"
 msgstr "Cesta k aktivnímu motivu UI (Uživatelské rozhraní) relativní k domovskému adresáři"
 
-#: ../../src/wlapplication_messages.cc:192
+#: ../../src/wlapplication_messages.cc:191
 msgid "Options for the internal window manager:"
 msgstr "Volby pro interního správce oken:"
 
-#: ../../src/wlapplication_messages.cc:193
+#: ../../src/wlapplication_messages.cc:192
 msgid "Should automatic map movements be animated"
 msgstr "Měly by být animovány automatické pohyby mapy"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:196
+#: ../../src/wlapplication_messages.cc:195
 msgid ""
 "Move a window to the edge of the screen when the edge of the window comes "
 "within a distance `n` from the edge of the screen"
 msgstr "Přichyť okno k okraji obrazovky, pokud se okraj okna dostane do vzdálenosti `n` od okraje obrazovky"
 
-#: ../../src/wlapplication_messages.cc:200
+#: ../../src/wlapplication_messages.cc:199
 msgid ""
 "Eliminate a window’s border towards the edge of the screen when the edge of "
 "the window is next to the edge of the screen"
 msgstr "Odstraní okraj okna u okraje obrazovky, pokud narazí okraj okna na okraj obrazovky"
 
 #. * TRANSLATORS: `n` references a numerical placeholder
-#: ../../src/wlapplication_messages.cc:205
+#: ../../src/wlapplication_messages.cc:204
 msgid ""
 "Move a window to the edge of the panel when the edge of the window comes "
 "within a distance of `n` from the edge of the panel"
 msgstr "Přichyť okno k okraji panelu, pokud se okraj okna dostane do vzdálenosti `n` od okraje panelu"
 
-#: ../../src/wlapplication_messages.cc:209
+#: ../../src/wlapplication_messages.cc:208
 msgid ""
 "Only move a window to the edge of a panel if the window is overlapping with "
 "the panel"
 msgstr "Přichyť okno k okraji panelu, jen pokud okraj okna přesahuje přes okraj panelu"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:211
 msgid "Enable verbose debug messages"
 msgstr "Povolí generování podrobných ladících zpráv"
 
-#: ../../src/wlapplication_messages.cc:212
+#: ../../src/wlapplication_messages.cc:211
 msgid "Others:"
 msgstr "Další:"
 
-#: ../../src/wlapplication_messages.cc:214
+#: ../../src/wlapplication_messages.cc:213
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
 msgstr "Vytiskni všechny textové řetězce i s překladem. To pomůže při vyhledávání chyb v lokalizaci."
 
-#: ../../src/wlapplication_messages.cc:217
+#: ../../src/wlapplication_messages.cc:216
 msgid "Only print version and exit"
 msgstr "Pouze vytiskne verzi a ukončí se"
 
-#: ../../src/wlapplication_messages.cc:218
+#: ../../src/wlapplication_messages.cc:217
 msgid "Show this help"
 msgstr "Zobrazí tuto nápovědu"
 
-#: ../../src/wlapplication_messages.cc:219
+#: ../../src/wlapplication_messages.cc:218
 msgid "Show this help with all available config options"
 msgstr "Zobrazí tuto nápovědu se všemi dostupnými konfiguračními nastaveními"
 
-#: ../../src/wlapplication_messages.cc:220
+#: ../../src/wlapplication_messages.cc:219
 msgid "<save.wgf>/<replay.wrpl>"
 msgstr "<save.wgf>/<replay.wrpl>"
 
-#: ../../src/wlapplication_messages.cc:221
+#: ../../src/wlapplication_messages.cc:220
 msgid ""
 "Directly loads the given savegame or replay. Useful for .wgf/.wrpl file "
 "extension association. Does not work with other options. Also see "
@@ -446,12 +446,12 @@ msgid ""
 msgstr "Přímo načte zadanou uloženou hru nebo záznam. Praktické z důvodu rozeznávání přípon .wgf/.wrpl. Nefunguje s ostatními nastaveními. Viz také --loadgame/--replay."
 
 #. * TRANSLATORS: %s = version information
-#: ../../src/wlapplication_messages.cc:250
+#: ../../src/wlapplication_messages.cc:249
 #, c-format
 msgid "This is Widelands Version %s"
 msgstr "Toto je Widelands verze %s"
 
-#: ../../src/wlapplication_messages.cc:311
+#: ../../src/wlapplication_messages.cc:308
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

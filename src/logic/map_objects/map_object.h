@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
+#include <atomic>
 #include <boost/signals2/signal.hpp>
 
 #include "base/macros.h"
@@ -361,7 +362,7 @@ protected:
 	const MapObjectDescr* descr_;
 	Serial serial_;
 	LogSink* logsink_;
-	Player* owner_;
+	std::atomic<Player*> owner_;
 
 	/**
 	 * MapObjects like trees are reserved by a worker that is walking

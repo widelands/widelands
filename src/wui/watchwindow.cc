@@ -34,7 +34,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-constexpr Duration kRefreshInterval = Duration(5000);
+constexpr Duration kRefreshInterval(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
