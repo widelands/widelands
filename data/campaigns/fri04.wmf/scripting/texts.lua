@@ -50,6 +50,15 @@ obj_defeat_emp = {
       li(_[[Defeat Marcus Caius Iniucundus.]])
    ),
 }
+obj_recruit_train = {
+   name = "recruit_train",
+   title=_"Recruit & train",
+   number = 1,
+   body = objective_text(_"Recruit And Train Your Soldiers",
+      li(_[[Train your soldiers while you are waiting for Reebaud to proclaim his soldiers battle-ready.]]) ..
+      li(_[[You have one hour to train as many soldiers as you can.]])
+   ),
+}
 
 -- ==================
 -- Texts to the user
@@ -180,6 +189,13 @@ reebaud_9b = {
       _([[Truly, it would be most unseemly to sit around enjoying mugs of mead while you are fighting for your lives. We shall seek out those invaders and fight them alongside you!]]))
       .. new_objectives(obj_defeat_amz),
 }
+reebaud_9c = {
+   title =_ "An Old Friend",
+   body=henneke(_"Met up at last",
+      -- TRANSLATORS: Henneke Lembeck – Reebaud 9c
+      _([[I am almost disappointed that your reputation does not exceed the facts, for as you where describing the invaders I was looking forward to fighting them alongside you. While your soldiers are recuperating, I will take charge of arranging training sessions for our own soldiers, so that they may learn from yours and become as strong as possible before we return to our homeland.]]))
+      .. new_objectives(obj_recruit_train),
+}
 
 reebaud_10 = {
    title =_ "An Old Enemy",
@@ -226,11 +242,17 @@ legate_expands = {
       _([[We should increase the pace of our own expansion. Without knowing in which direction we need to head, I’d advise to focus on spreading westwards for now before Marcus Caius Iniucundus blocks us out on this frontier.]])),
 }
 
-victory_amz = {
+victory_amz_a = {
    title =_ "Victory",
    body=claus(_"Intruders defeated",
       -- TRANSLATORS: Claus Lembeck – Victory over Amazons
       _([[These intruders were not as strong as they thought. They will trouble you no more.]])),
+}
+victory_amz_b = {
+   title =_ "Victory",
+   body=claus(_"Strangers defeated",
+      -- TRANSLATORS: Claus Lembeck – Victory over Amazons
+      _([[These strangers were not as strong as they thought. Whoever they were, they will trouble us no more.]])),
 }
 victory_emp = {
    title =_ "Victory",
@@ -238,11 +260,20 @@ victory_emp = {
       -- TRANSLATORS: Reebaud – Victory over Empire
       _([[Attempting to take me on is the last mistake you ever made, foolish legate.]])),
 }
-victory = {
+victory_a = {
    title =_ "Victory",
    body=reebaud(_"We have won",
       -- TRANSLATORS: Reebaud – Victory
       _([[The enemies are defeated. Now I will come South with you together with all my soldiers except for a small garrison to safeguard my lands, and we will reconquer your island!]]))
+      .. objective_text(_"Congratulations",
+      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+   allow_next_scenario = true,
+}
+victory_b = {
+   title =_ "Victory",
+   body=reebaud(_"We have won",
+      -- TRANSLATORS: Reebaud – Victory
+      _([[Our soldiers have recovered, and you have spent the time well by increasing the strength of your army. Now I will come South with you together with all my soldiers except for a small garrison to safeguard my lands, and we will reconquer your island!]]))
       .. objective_text(_"Congratulations",
       _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
    allow_next_scenario = true,

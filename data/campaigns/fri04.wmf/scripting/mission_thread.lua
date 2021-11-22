@@ -16,6 +16,21 @@ function hurry_up()
    end
 end
 
+function warn_empire_expansion()
+   while (
+         #p3:get_buildings("empire_blockhouse") +
+         #p3:get_buildings("empire_sentry") +
+         #p3:get_buildings("empire_outpost") +
+         #p3:get_buildings("empire_barrier") +
+         #p3:get_buildings("empire_tower") +
+         #p3:get_buildings("empire_fortress") +
+         #p3:get_buildings("empire_castle")) < 4 do
+      sleep(100000)
+      if seen_reebaud then return end
+   end
+   campaign_message_box(legate_expands)
+end
+
 function see_amazons(field)
    if amazons_defeated_by_reebaud then return end
    scroll_to_field(field)
@@ -32,11 +47,13 @@ function see_amazons(field)
    campaign_message_box(amz_3)
    if not o_defeat_amz then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
    while not p4.defeated do sleep(1000) end
-   campaign_message_box(victory_amz)
+   if seen_reebaud then campaign_message_box(victory_amz_a) else campaign_message_box(victory_amz_b) end
    set_objective_done(o_defeat_amz)
 end
 
 function see_reebaud(field)
+   local empire_already_defeated = (p3.defeated or not campaign_data.payment)
+   local o_recruit_train = nil
    scroll_to_field(field)
    sleep(2000)
    campaign_message_box(reebaud_1)
@@ -51,19 +68,25 @@ function see_reebaud(field)
    if p4.defeated then
       amazons_defeated_by_reebaud = true
       campaign_message_box(reebaud_8b)
+      if empire_already_defeated then
+         campaign_message_box(reebaud_9c)
+         o_recruit_train = add_campaign_objective(obj_recruit_train)
+      end
    else
       campaign_message_box(reebaud_8a)
       if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
    end
    p3.team = 0
-   if not o_defeat_amz then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
-   if campaign_data.payment then
+   if not o_defeat_amz and not amazons_defeated_by_reebaud then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
+   if not empire_already_defeated then
       sleep(2000)
       campaign_message_box(reebaud_10)
       campaign_message_box(reebaud_11)
       campaign_message_box(reebaud_12)
       o_defeat_emp = add_campaign_objective(obj_defeat_emp)
+      p1:set_attack_forbidden(2, false)
       p1:set_attack_forbidden(3, false)
+      p2:set_attack_forbidden(1, false)
       p2:set_attack_forbidden(3, false)
       p3:set_attack_forbidden(1, false)
       p3:set_attack_forbidden(2, false)
@@ -74,7 +97,13 @@ function see_reebaud(field)
       set_objective_done(o_defeat_emp)
    end
    while not p4.defeated do sleep(1000) end
-   sleep(5000)
+
+   if o_recruit_train then
+      sleep(1000 * 60 * 60)
+      set_objective_done(o_recruit_train)
+   else
+      sleep(5000)
+   end
 
    local data = {}
    for x = 0, map.width - 1 do
@@ -92,7 +121,7 @@ function see_reebaud(field)
       end
    end
    game:save_campaign_data("frisians", "fri04", data)
-   campaign_message_box(victory)
+   if o_recruit_train then campaign_message_box(victory_b) else campaign_message_box(victory_a) end
    p1:mark_scenario_as_solved("fri04.wmf")
    -- END OF MISSION 4
 end
@@ -107,13 +136,10 @@ function mission_thread()
    end
    sleep(2000)
    campaign_message_box(intro_3)
-   run(hurry_up)
-   if campaign_data.payment then run(function()
-      sleep(1000 * 60 * 10)
-      campaign_message_box(legate_expands)
-   end) end
    local o = add_campaign_objective(obj_find_reebaud)
    local f
+   run(hurry_up)
+   if campaign_data.payment then run(warn_empire_expansion) end
    while true do
       sleep(1000)
       for x=0,map.width - 1 do
