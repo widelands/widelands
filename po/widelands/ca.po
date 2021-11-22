@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 09:23+0000\n"
-"PO-Revision-Date: 2021-11-16 09:25+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-11-19 02:44+0000\n"
+"PO-Revision-Date: 2021-11-20 19:13+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -656,8 +656,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -823,7 +823,7 @@ msgstr "Escenaris multijugador"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/wui/mapdata.cc:184
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Escenaris d'un sol jugador"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
@@ -1393,8 +1393,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -1733,11 +1733,11 @@ msgstr "S'està inicialitzant el joc…"
 msgid "Creating player infrastructure…"
 msgstr "S'està creant la infraestructura del jugador…"
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:238
 msgid "Missing starting position"
 msgstr "No s'ha trobat la posició inicial"
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:239
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -2344,7 +2344,7 @@ msgstr "Un nom de mapa no és vàlid:\n%s"
 msgid "This objective has no description."
 msgstr "Aquest objectiu no disposa de descripció."
 
-#: ../../src/logic/player.cc:1926
+#: ../../src/logic/player.cc:1927
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3166,11 +3166,11 @@ msgstr "No seleccionat"
 msgid "No matches"
 msgstr "Sense coincidències"
 
-#: ../../src/ui_basic/panel.cc:312
+#: ../../src/ui_basic/panel.cc:313
 msgid "Please wait…"
 msgstr "Per favor, espereu…"
 
-#: ../../src/ui_basic/panel.cc:442
+#: ../../src/ui_basic/panel.cc:443
 msgid "Game ending – please wait…"
 msgstr "S'està acabant la partida – Per favor, espereu…"
 
@@ -4126,7 +4126,7 @@ msgstr "Caràcter no vàlid «%c»"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:69
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr ""
+msgstr "El nom del fitxer no pot contenir «%s»."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "Add selected map"
@@ -7095,9 +7095,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7946,7 +7946,7 @@ msgstr "S'ha desat la captura de pantalla."
 #: ../../src/wui/interactive_gamebase.cc:54
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
