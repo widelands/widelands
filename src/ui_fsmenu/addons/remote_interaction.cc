@@ -406,9 +406,9 @@ public:
 		    UI::Box::Resizing::kFullSize);
 
 		name_.set_text(info->unlocalized_descname);
-		priority_.add(_("Low"), "normal", nullptr, false);
-		priority_.add(_("Normal"), "high", nullptr, true);
-		priority_.add(_("High"), "urgent", nullptr, false);
+		priority_.add(pgettext("priority", "Low"), "normal", nullptr, false);
+		priority_.add(pgettext("priority", "Normal"), "high", nullptr, true);
+		priority_.add(pgettext("priority", "High"), "urgent", nullptr, false);
 		priority_.set_desired_size(300, priority_.get_lineheight() * (priority_.size() + 1));
 	}
 

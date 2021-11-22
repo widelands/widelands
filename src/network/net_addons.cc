@@ -77,9 +77,9 @@ static const std::string kCmdSubmitScreenshot = "1:CMD_SUBMIT_SCREENSHOT";
 static const std::string kCmdContact = "1:CMD_CONTACT";
 static const std::string kCmdSetupTx = "2:CMD_SETUP_TX";
 static const std::string kCmdAdminDelete = "1:CMD_ADMIN_DELETE";
-static const std::string kCmdAdminVerify = "1:CMD_VERIFY";
-static const std::string kCmdAdminQuality = "1:CMD_QUALITY";
-static const std::string kCmdAdminSyncSafe = "1:CMD_SYNC_SAFE";
+static const std::string kCmdAdminVerify = "1:CMD_ADMIN_VERIFY";
+static const std::string kCmdAdminQuality = "1:CMD_ADMIN_QUALITY";
+static const std::string kCmdAdminSyncSafe = "1:CMD_ADMIN_SYNC_SAFE";
 
 namespace {
 
