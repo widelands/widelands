@@ -20,6 +20,7 @@
 #include "ui_fsmenu/addons/remote_interaction.h"
 
 #include <memory>
+#include <regex>
 
 #include "base/log.h"
 #include "base/string.h"
@@ -414,8 +415,7 @@ public:
 	/** Whether the data is valid and can be submitted. */
 	bool ok_enabled() const {
 		return priority_.has_selection() && !name_.text().empty() &&
-		       categories_.text().find_first_not_of(
-		          " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") == std::string::npos;
+		       std::regex_match(categories_.text(), std::regex("^( *[a-zA-Z]+)+ *$"));
 	}
 
 	/**
@@ -428,39 +428,8 @@ public:
 		str += name_.text();
 		str += "\n[";
 
-		std::string cats = categories_.text();
-		size_t count = 0;
-		for (;;) {
-			size_t pos = cats.find(' ');
-			if (pos == 0) {
-				// Skip over multiple whitespaces
-				pos = cats.find_first_not_of(' ');
-				if (pos == std::string::npos) {
-					break;
-				}
-				cats = cats.substr(pos);
-				continue;
-			}
-
-			if (count > 0) {
-				str += ',';
-			}
-			++count;
-
-			if (pos == std::string::npos) {
-				// Single tag
-				str += '"';
-				str += cats;
-				str += '"';
-				break;
-			}
-
-			// Multiple tags remaining
-			str += '"';
-			str += cats.substr(0, pos);
-			str += '"';
-			cats = cats.substr(pos + 1);
-		}
+		str += std::regex_replace(categories_.text(), std::regex("( *)([a-zA-Z]+)( +|$)"), "\"$2\",");
+		str.pop_back();  // strip last ','
 
 		str += ']';
 		return str;
