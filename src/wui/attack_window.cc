@@ -33,7 +33,7 @@
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 
-constexpr Duration kUpdateTimeInGametimeMs = Duration(500);  //  half a second, gametime
+constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 constexpr int kSpacing = 8;
 
 static unsigned next_serial_(0);

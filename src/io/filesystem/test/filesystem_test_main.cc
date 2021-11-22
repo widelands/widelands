@@ -17,5 +17,5 @@
  *
  */
 
-#define BOOST_TEST_MODULE FileSystemTests
-#include <boost/test/unit_test.hpp>
+#include "base/test.h"
+TEST_EXECUTABLE(filesystem)

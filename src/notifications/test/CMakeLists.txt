@@ -3,6 +3,6 @@ wl_test(notifications_test
     notifications_test.cc
   DEPENDS
     base_log
-    base_macros
+    base_test
     notifications
 )

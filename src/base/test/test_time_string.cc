@@ -17,29 +17,23 @@
  *
  */
 
-#include <boost/test/unit_test.hpp>
-
-#include "base/macros.h"
+#include "base/test.h"
 #include "base/time_string.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
+TESTSUITE_START(time_string)
 
-BOOST_AUTO_TEST_SUITE(time_string)
+TESTCASE(time_string_formatting) {
+	check_equal(gametimestring(123456789L, false), "34:17");
+	check_equal(gametimestring(123456789L, true), "34:17:36");
+	check_equal(gametimestring(90000, false), "0:01");
+	check_equal(gametimestring(90000, true), "01:30");
+	check_equal(gametimestring(5000, false), "0:00");
+	check_equal(gametimestring(5000, true), "00:05");
+	check_equal(gametimestring(100, false), "0:00");
+	check_equal(gametimestring(100, true), "00:00");
 
-BOOST_AUTO_TEST_CASE(time_string_formatting) {
-	BOOST_CHECK_EQUAL(gametimestring(123456789L, false), "34:17");
-	BOOST_CHECK_EQUAL(gametimestring(123456789L, true), "34:17:36");
-	BOOST_CHECK_EQUAL(gametimestring(90000, false), "0:01");
-	BOOST_CHECK_EQUAL(gametimestring(90000, true), "01:30");
-	BOOST_CHECK_EQUAL(gametimestring(5000, false), "0:00");
-	BOOST_CHECK_EQUAL(gametimestring(5000, true), "00:05");
-	BOOST_CHECK_EQUAL(gametimestring(100, false), "0:00");
-	BOOST_CHECK_EQUAL(gametimestring(100, true), "00:00");
-
-	BOOST_CHECK_EQUAL(strcmp(gamestring_with_leading_zeros(123456789L), "034:17:36"), 0);
-	BOOST_CHECK_EQUAL(strcmp(gamestring_with_leading_zeros(2000), "000:00:02"), 0);
+	check_equal(gamestring_with_leading_zeros(123456789L), "034:17:36");
+	check_equal(gamestring_with_leading_zeros(2000), "000:00:02");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

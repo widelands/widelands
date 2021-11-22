@@ -1,0 +1,495 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2021 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2021-11-16 09:23+0000\n"
+"PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Language-Team: Georgian (https://www.transifex.com/widelands/teams/35159/ka/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
+msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "Transport"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+msgid ""
+"Four shovels for removing the swamps have been collected at the warehouse."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+msgid "Shovels"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+msgid ""
+"Four more shovels for removing the swamps have been collected at the "
+"warehouse."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
+msgid "Defeat Törver"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
+msgid "Defeat the Armies of Törver"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
+msgid ""
+"Törver is the enemy in the north, who is fighting under the red banner."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
+msgid "Build a port"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
+msgid "Build a Port in the North"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
+msgid ""
+"We should build a port in Törver’s former land to be ready to send an "
+"expedition as soon as we found out how to build ships."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
+msgid "Conquer pirate sentry"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
+msgid "Conquer the Pirate Sentry"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
+msgid ""
+"Conquer the pirate sentry near the brook to the east. Hopefully we will find"
+" out what happened to the gold in this area."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
+msgid "Build warehouse"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
+msgid "Build a Warehouse near the Pirate Sentry"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
+msgid ""
+"Build a warehouse close to the conquered pirate sentry near the brook. We "
+"will need it as a basis for further exploration. Furthermore we could use it"
+" to store some gold that we will mine from the surrounding hills."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
+msgid "Bring shovels"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
+msgid "Bring Four Shovels to the new Warehouse"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
+msgid "They will be handed out to some volunteers for drying up the swamps."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
+msgid ""
+"They will be handed out to additional volunteers for drying up the swamps."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
+msgid "Defeat the pirates"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
+msgid "Defeat the Pirates"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
+msgid ""
+"Free our neighbourhood from the pirate menace. The pirates are fighting "
+"under the grey banner."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
+msgid "Free our scout from the pirates"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
+msgid "Conquer the Stronghold on the Island"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
+msgid "This is where the scout is held captive."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
+msgid "Defeat Hjalmar"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
+msgid "Defeat the Armies of Hjalmar"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
+msgid ""
+"Hjalmar is the enemy north of the former pirates, who is fighting under the "
+"green banner."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
+msgid "Defeat Runar"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
+msgid "Defeat the Armies of Runar"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
+msgid ""
+"Runar is the enemy south-east of the former pirates, who is fighting under "
+"the yellow banner."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:34
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:45
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:51
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:69
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:85
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:92
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:99
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:105
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:111
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:117
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:123
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:132
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:138
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
+msgid "Your Advisor"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
+msgid "Along the River"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
+msgid "Sire, let me inform you about the surrounding tribes."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
+msgid ""
+"From the north we are endangered by a belligerent tribe, led by warlord "
+"Törver, that is rapidly building up its armies. They may soon have become "
+"too strong to be defeated."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
+msgid ""
+"A large area to the north-east is agonized by a wild horde of unfettered "
+"pirates, led by their insane Arvid. Their presence blocks our ways to other "
+"tribes."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
+msgid ""
+"Over the river lies the prosperous land of the mysterious king Runar. We "
+"have been in war with him before the pirates occupied the eastern area. His "
+"strength is based on his vast industry and large armies."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
+msgid ""
+"The area beyond the pirates belongs to a developed tribe led by their mighty"
+" chieftain Hjalmar. They have had a long time of preparement to build up "
+"their deterring armies."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
+msgid ""
+"The situation looks quite perilous and my advice is that we direct our "
+"efforts towards building up a strong army."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
+msgid "Our northern enemy"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
+msgid ""
+"Sire, although our soldiers would face any enemy without the slightest fear,"
+" our rival in the north is still stronger than all our armies combined. We "
+"should avoid a conflict until we are able to defeat them."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
+msgid ""
+"Be patient and recognize that a strong army is indispensable in this "
+"situation. Törver has a very bad reputation."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
+msgid "Peril from the north"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
+msgid ""
+"Sire, we received an alarming message from one of our explorers. Törver is "
+"expanding his front line and approaching our territory."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
+msgid ""
+"We cannot avoid attacking their armies forever. If we manage to conquer our "
+"northern enemy, we will enlarge our territory and find more resources to "
+"strengthen our armies."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
+msgid ""
+"We can then also use their access to the lake in order to explore more land."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
+msgid "On the good way"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
+msgid ""
+"Sire, the battle with Törver progresses gloriously and we have already "
+"beaten the strongest part of his army. But this enemy will not be defeated "
+"easily. In a desperate move Törver has called in a group of hardened "
+"mercenaries."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
+msgid "The great lake"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
+msgid ""
+"Sire, now that we have conquered the land of Törver, we can make use of "
+"their excellent access to the adjacent great lake. A port in the north will "
+"give us better opportunities to have contact with other tribes."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
+msgid ""
+"In Törver’s headquarters we found papers describing the construction of "
+"ships. Unfortunately, the texts are written in a language that is unknown to"
+" us. Our wise men will try to translate these descriptions."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
+msgid "Searching for gold"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
+msgid ""
+"Sire, our men have located an isolated enemy pirate sentry. The abandoned "
+"huts indicate that there is gold nearby."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
+msgid ""
+"We should however be careful if we want to conquer the sentry. There can be "
+"more enemy buildings that are still out of sight, and the pirates are known "
+"to be very good fighters. It is best to establish a strong military presence"
+" here before we proceed."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
+msgid "Found a treasure"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
+msgid ""
+"Sire, we have found 25 units of gold ore inside the pirate sentry. They may "
+"have been looted from the gold diggers’ huts nearby. This gold ore will be "
+"transported to our headquarters."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
+msgid ""
+"With our successful expansion into this area we should consider building a "
+"warehouse to the direct southwest of the sentry in order to further explore "
+"this area. There is a good building spot only three steps away from the "
+"sentry."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
+msgid "Removing the swamps"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
+msgid ""
+"Sire, the wet season has created swamps along the brook to the east and we "
+"are unable to pass through them. They have to be removed before we can "
+"continue. If you bring enough shovels to the new warehouse then volunteers "
+"will remove the swamps."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
+msgid ""
+"Sire, all shovels have been handed out but if we continue at this pace than "
+"we will not have removed the swamps before the next wet season. If you bring"
+" more shovels to the new warehouse then more volunteers will join in."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
+msgid ""
+"Sire, now that we have access to the pirates’ hideout, we should conquer it "
+"and finish them off. Maybe there are even more treasures hidden in their "
+"territory."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
+msgid "The pirates were defeated."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
+msgid ""
+"Sire, we have defeated the pirates. They have hidden some gold in their last"
+" bastion which is now being transferred to our headquarters."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
+msgid "Pirates are regrouping"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
+msgid ""
+"Sire, as a result of our attacks on the pirates they have started to regroup"
+" with pirates from other tribes. They could regain much of their previously "
+"lost strength. Our dwindling resources can become a problem with such a "
+"mighty enemy in front of us."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
+msgid "Pirates on the run"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
+msgid ""
+"Sire, thanks to our successful efforts to drive out the pirates, lots of "
+"them have fled and moved away in small boats. It is unknown in which "
+"direction they have escaped."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
+msgid "Ability to build shipyards"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
+msgid ""
+"Sire, after long study and research our wise men have finally managed to "
+"decipher the strange language in Törver’s descriptions that we had found in "
+"his headquarters. From now on we are able to build shipyards."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
+msgid "Our scout has been captured"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
+msgid ""
+"Sire, one of our scouts has been captured by the pirates and brought to "
+"their island. He is the only person who knows the way through the swamps "
+"towards Hjalmar."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
+msgid ""
+"According to our fishermen he is locked up in the stronghold on the island. "
+"We should use the knowledge about shipbuilding that we took from Törver to "
+"build ships and attack their positions."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
+msgid "Island conquered"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
+msgid ""
+"Sire, our soldiers have conquered the island and managed to free the scout. "
+"It turns out that the pirates have left a large amount of gold, beer, and "
+"weapons on the island."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
+msgid "The scout returns"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
+msgid ""
+"Sire, our scout has returned to our territory, and he has shown us the road "
+"through the swamps towards Hjalmar."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
+msgid ""
+"He noticed that we can also move along the other side of the mountain, in "
+"case we might fail here, but it will be much more difficult to do."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
+msgid "The last frontier"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
+msgid ""
+"Sire, we have almost defeated all armies and we are now approaching our "
+"final enemy. They have been expecting us for a long time and will be "
+"prepared for the heaviest battle in their lifetime."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
+msgid ""
+"Make sure that our armies are at full strength and then act decisively."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
+msgid "Victory!"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
+msgid "Sire, my congratulations!"
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
+msgid ""
+"You have completed all goals and defeated all our enemies. You have not only"
+" conquered our rivalling tribes, but you have also captured the hearts of "
+"your loving people."
+msgstr ""
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
+msgid "Your name will be remembered forever."
+msgstr ""
