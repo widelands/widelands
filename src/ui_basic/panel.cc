@@ -185,6 +185,7 @@ constexpr uint32_t kGameLogicDelay = 50;
 
 // static
 void Panel::logic_thread() {
+	set_logic_thread();
 	logic_thread_running_ = true;
 	WLApplication* const app = WLApplication::get();
 

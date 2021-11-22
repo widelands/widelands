@@ -30,9 +30,10 @@
 
 static const std::thread::id kNoThread;
 static std::thread::id initializer_thread(kNoThread);
+static std::thread::id logic_thread(kNoThread);
 
 void set_initializer_thread() {
-	log_info("Setting initializer thread.");
+	verb_log_info("Setting initializer thread.");
 
 	if (initializer_thread != kNoThread) {
 		throw wexception("attempt to set initializer thread again");
@@ -41,8 +42,27 @@ void set_initializer_thread() {
 	initializer_thread = std::this_thread::get_id();
 }
 
+void set_logic_thread() {
+	verb_log_info("Setting logic thread.");
+
+	if (initializer_thread == kNoThread) {
+		throw wexception("attempt to set logic thread before initializer thread");
+	}
+	if (logic_thread != kNoThread) {
+		throw wexception("attempt to set logic thread again");
+	}
+	if (is_initializer_thread()) {
+		throw wexception("initializer thread can not be the logic thread");
+	}
+
+	logic_thread = std::this_thread::get_id();
+}
+
 bool is_initializer_thread() {
 	return initializer_thread == std::this_thread::get_id();
+}
+bool is_logic_thread() {
+	return logic_thread == std::this_thread::get_id();
 }
 
 uint32_t NoteThreadSafeFunction::next_id_(0);

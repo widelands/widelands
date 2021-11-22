@@ -35,6 +35,9 @@
 void set_initializer_thread();
 // Whether the current thread is the same that called `set_initializer_thread()` on startup
 bool is_initializer_thread();
+// Same for the game logic thread
+void set_logic_thread();
+bool is_logic_thread();
 
 /*
  * Informs the drawing thread to run the given function ASAP.
