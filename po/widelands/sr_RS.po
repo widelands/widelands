@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 09:23+0000\n"
+"POT-Creation-Date: 2021-11-19 02:44+0000\n"
 "PO-Revision-Date: 2021-11-16 09:25+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/widelands/widelands/language/sr_RS/)\n"
@@ -652,8 +652,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1390,8 +1390,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -1734,11 +1734,11 @@ msgstr ""
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:238
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:645 ../../src/logic/player.cc:239
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
@@ -2352,7 +2352,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1926
+#: ../../src/logic/player.cc:1927
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3177,11 +3177,11 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:312
+#: ../../src/ui_basic/panel.cc:313
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:442
+#: ../../src/ui_basic/panel.cc:443
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -7122,9 +7122,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
