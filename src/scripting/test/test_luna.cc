@@ -21,16 +21,11 @@
 
 #include <cstring>
 
-#include <boost/test/unit_test.hpp>
-
 #include "base/macros.h"
+#include "base/test.h"
 #include "scripting/lua.h"
 #include "scripting/luna.h"
 #include "scripting/luna_impl.h"
-
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
 #ifndef BEGIN_LUNA_PROPERTIES
 #define BEGIN_LUNA_PROPERTIES(klass) const PropertyType<klass> klass::Properties[] = {
@@ -40,6 +35,8 @@ CLANG_DIAG_OFF("-Wused-but-marked-unused")
 	}                                                                                               \
 	;
 #endif
+
+TESTSUITE_START(luna)
 
 struct LuaCloser {
 	void operator()(lua_State* L) {
@@ -211,7 +208,7 @@ static int test_check_int(lua_State* L) {
 	int a = lua_tointeger(L, -2);
 	int b = lua_tointeger(L, -1);
 
-	BOOST_CHECK_EQUAL(a, b);
+	check_equal(a, b);
 	return 0;
 }
 
@@ -232,7 +229,7 @@ static void init_lua_tests(lua_State* L) {
 	lua_pop(L, 2);                          // S:
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_simple) {
+TESTCASE(test_luna_simple) {
 	const char* script1 = "t = wl.test.Class()\n"
 	                      "wl.test.CheckInt(248,t.prop1)\n"
 	                      "wl.test.CheckInt(124,t:test())\n"
@@ -244,11 +241,11 @@ BOOST_AUTO_TEST_CASE(test_luna_simple) {
 	init_lua_tests(L);
 	register_class<LuaClass>(L, "test");
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_property_ro) {
+TESTCASE(test_luna_property_ro) {
 	const char* script1 = "t = wl.test.Class()\n"
 	                      "wl.test.CheckInt(1, t.propr)"
 	                      "t.propr = 1\n";  // This final line should generate an arror
@@ -258,12 +255,12 @@ BOOST_AUTO_TEST_CASE(test_luna_property_ro) {
 	init_lua_tests(L);
 	register_class<LuaClass>(L, "test");
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
+	check_equal(0, luaL_loadbuffer(L, script1, strlen(script1), "testscript1"));
 	// Should get LUA runtime error instead of for example crashing
-	BOOST_REQUIRE_EQUAL(LUA_ERRRUN, lua_pcall(L, 0, 1, 0));
+	check_equal(LUA_ERRRUN, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_inheritance) {
+TESTCASE(test_luna_inheritance) {
 	const char* script2 = "t = wl.test.SubClass()\n"
 	                      "wl.test.CheckInt(124, t:test())\n"
 	                      "wl.test.CheckInt(248, t.prop1)\n";
@@ -277,11 +274,11 @@ BOOST_AUTO_TEST_CASE(test_luna_inheritance) {
 	add_parent<LuaSubClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script2, strlen(script2), "testscript2"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script2, strlen(script2), "testscript2"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method) {
+TESTCASE(test_luna_virtualbase_method) {
 	const char* script3 = "t = wl.test.VirtualClass()\n"
 	                      "wl.test.CheckInt(124, t:test())\n";
 
@@ -294,11 +291,11 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method) {
 	add_parent<LuaVirtualClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script3, strlen(script3), "testscript3"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script3, strlen(script3), "testscript3"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_virtualbase_property) {
+TESTCASE(test_luna_virtualbase_property) {
 	const char* script4 = "t = wl.test.VirtualClass()\n"
 	                      "wl.test.CheckInt(248, t.prop1)\n";
 
@@ -311,11 +308,11 @@ BOOST_AUTO_TEST_CASE(test_luna_virtualbase_property) {
 	add_parent<LuaVirtualClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script4, strlen(script4), "testscript4"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script4, strlen(script4), "testscript4"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_multibase_method) {
+TESTCASE(test_luna_multibase_method) {
 	const char* script5 = "t = wl.test.MultiClass()\n"
 	                      "wl.test.CheckInt(124, t:test())\n"
 	                      "wl.test.CheckInt(2002, t:multitest())\n";
@@ -329,11 +326,11 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_method) {
 	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script5, strlen(script5), "testscript5"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script5, strlen(script5), "testscript5"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_multibase_property_get) {
+TESTCASE(test_luna_multibase_property_get) {
 	const char* script6 = "t = wl.test.MultiClass()\n"
 	                      "wl.test.CheckInt(248, t.prop1)\n"
 	                      "wl.test.CheckInt(2001, t.second)\n";
@@ -346,11 +343,11 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_get) {
 	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
 
-BOOST_AUTO_TEST_CASE(test_luna_multibase_property_set) {
+TESTCASE(test_luna_multibase_property_set) {
 	const char* script6 = "t = wl.test.MultiClass()\n"
 	                      "wl.test.CheckInt(248, t.prop1)\n"
 	                      "t.prop1 = 111\n"
@@ -364,6 +361,8 @@ BOOST_AUTO_TEST_CASE(test_luna_multibase_property_set) {
 	add_parent<LuaMultiClass, LuaClass>(L);
 	lua_pop(L, 1);  // Pop the meta table
 
-	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));
-	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
+	check_equal(0, luaL_loadbuffer(L, script6, strlen(script6), "testscript6"));
+	check_equal(0, lua_pcall(L, 0, 1, 0));
 }
+
+TESTSUITE_END()

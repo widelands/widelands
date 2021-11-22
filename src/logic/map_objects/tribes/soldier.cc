@@ -1272,7 +1272,7 @@ void Soldier::defense_update(Game& game, State& state) {
 		// If enemy is in our land, then go after it!
 		if (upcast(Soldier, soldier, temp_bob)) {
 			assert(soldier != this);
-			Field const f = game.map().operator[](soldier->get_position());
+			const Field& f = game.map().operator[](soldier->get_position());
 
 			//  Check soldier, be sure that we can fight against soldier.
 			// Soldiers can not go over enemy land when defending.
