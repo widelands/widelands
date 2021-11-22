@@ -3,8 +3,21 @@ local seen_amazons = false
 
 local o_defeat_amz = nil
 local o_defeat_emp = nil
+local amazons_defeated_by_reebaud = false
+
+function hurry_up()
+   while true do
+      sleep(10000)
+      if seen_reebaud or p4.defeated then return end
+      if #p2:get_buildings("frisians_headquarters") < 1 then
+         campaign_message_box(reebaud_in_danger)
+         return
+      end
+   end
+end
 
 function see_amazons(field)
+   if amazons_defeated_by_reebaud then return end
    scroll_to_field(field)
    sleep(2000)
    if not seen_reebaud then
@@ -35,8 +48,13 @@ function see_reebaud(field)
    campaign_message_box(reebaud_5)
    campaign_message_box(reebaud_6)
    campaign_message_box(reebaud_7)
-   campaign_message_box(reebaud_8)
-   if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
+   if p4.defeated then
+      amazons_defeated_by_reebaud = true
+      campaign_message_box(reebaud_8b)
+   else
+      campaign_message_box(reebaud_8a)
+      if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
+   end
    p3.team = 0
    if not o_defeat_amz then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
    if campaign_data.payment then
@@ -49,6 +67,8 @@ function see_reebaud(field)
       p2:set_attack_forbidden(3, false)
       p3:set_attack_forbidden(1, false)
       p3:set_attack_forbidden(2, false)
+      p3:set_attack_forbidden(4, false)
+      p4:set_attack_forbidden(3, false)
       while not p3.defeated do sleep(1000) end
       campaign_message_box(victory_emp)
       set_objective_done(o_defeat_emp)
@@ -87,6 +107,11 @@ function mission_thread()
    end
    sleep(2000)
    campaign_message_box(intro_3)
+   run(hurry_up)
+   if campaign_data.payment then run(function()
+      sleep(1000 * 60 * 10)
+      campaign_message_box(legate_expands)
+   end) end
    local o = add_campaign_objective(obj_find_reebaud)
    local f
    while true do

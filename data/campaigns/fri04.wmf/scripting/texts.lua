@@ -155,11 +155,17 @@ reebaud_7 = {
       -- TRANSLATORS: Reebaud – Reebaud 7
       _([[Had you arrived a week earlier, I would have agreed to your request instantly. Now, however, a spot of bother has appeared on the horizon. I mean this quite literally; foreigners have come from far away and seek to drive us out and take over our lands as we ourselves did, driven by need, seize them from the hostile people who lived here. Warlike barbarians, and an imperial scallywag named Murilius who made the most outrageous demands. We defeated them all, and believed to have found peace at last. And for four long years, life was peaceful indeed.]]))
 }
-reebaud_8 = {
+reebaud_8a = {
    title =_ "An Old Friend",
    body=reebaud(_"Met up at last",
-      -- TRANSLATORS: Reebaud – Reebaud 8
+      -- TRANSLATORS: Reebaud – Reebaud 8a
       _([[But now, as I was saying, in the arrival of the short period of summer, during which the snow melts in some places and travel to distant places is possible, the strangers appeared and engaged us in battle. They took us by surprise, the life without fighting having made us careless. Many a good soldier fell to their spears, including Hauke, my best friend and most venerable advisor, and Fiete, my only son and heir. Their sneaky battle moves were a novelty to us, though now that we know what we are up against there can be no doubt that we will beat them in the end. But I fear it will still take some time until they are defeated and it is safe for me to travel South with you. For this period, you shall of course receive all the hospitality and courtesy we can offer.]]))
+}
+reebaud_8b = {
+   title =_ "An Old Friend",
+   body=reebaud(_"Met up at last",
+      -- TRANSLATORS: Reebaud – Reebaud 8b
+      _([[But now, as I was saying, in the arrival of the short period of summer, during which the snow melts in some places and travel to distant places is possible, the strangers appeared and engaged us in battle. They took us by surprise, the life without fighting having made us careless. Many a good soldier fell to their spears, including Hauke, my best friend and most venerable advisor, and Fiete, my only son and heir. Their sneaky battle moves were a novelty to us, though now that we knew what we were up against we managed to beat them in the end. However, all our soldiers are still sore and wounded from the heavy fighting, and they will need some time to recuperate before we can send them into battle again. For this period, you shall of course receive all the hospitality and courtesy we can offer.]]))
 }
 reebaud_9a = {
    title =_ "An Old Friend",
@@ -199,6 +205,25 @@ reebaud_12 = {
       -- TRANSLATORS: Claus Lembeck – Reebaud 12
       _([[I am sorry. He offered us a passage on his ship, and I had no way of knowing nor any reason to assume that he would seek a quarrel with you. But seeing that it is I who brought this trouble to you, the least I can do is to take responsibility for ridding you of him.]]))
       .. new_objectives(obj_defeat_emp),
+}
+
+reebaud_in_danger = {
+   title =_ "Strangers",
+   body=henneke(_"Something is going on…",
+      -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
+      _([[We met a wounded soldier near our north-eastern border today. He gasped something about his tribe being attacked by vicous strangers, but he died before he could tell us more. His armour and weaponry looked startlingly familiar. I wonder if Reebaud’s tribe is in danger?]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
+      _([[We must hurry.]])),
+}
+legate_expands = {
+   title =_ "Expansion",
+   body=henneke(_"We are being cut off",
+      -- TRANSLATORS: Henneke Lembeck – Empire expands
+      _([[Marcus Caius Iniucundus is expanding his territory quickly. While he is perfectly within his rights to do so, I am worried that we might be cut off from Reebaud’s land if we don’t watch out.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Henneke Lembeck – Empire expands
+      _([[We should increase the pace of our own expansion. Without knowing in which direction we need to head, I’d advise to focus on spreading westwards for now before Marcus Caius Iniucundus blocks us out on this frontier.]])),
 }
 
 victory_amz = {

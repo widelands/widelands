@@ -128,8 +128,8 @@ hq:set_workers {
    frisians_stonemason = 2,
 }
 soldiers = {
-   {{2,6,2,0}, 50},
-   {{1,3,1,0}, 30},
+   {{2,6,2,0}, 30},
+   {{1,3,1,0}, 20},
    {{0,0,0,0}, 10},
 }
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
@@ -157,8 +157,10 @@ else
    }
 
    hq = p3:place_building("empire_port_large", map.player_slots[3].starting_field, false, true)
+   local gold_iron_ratio = {80, 60, 40}
    hq:set_wares {
-         gold = campaign_data.payment,
+         gold = campaign_data.payment * gold_iron_ratio[difficulty] / 100,
+         iron = campaign_data.payment * (100 - gold_iron_ratio[difficulty]) / 100,
          armor_helmet = 4,
          spear_wooden = 5,
          felling_ax = 6,
@@ -174,7 +176,6 @@ else
          grape = 4,
          hammer = 14,
          hunting_spear = 2,
-         iron = 12,
          iron_ore = 5,
          kitchen_tools = 4,
          marble = 25,
@@ -280,9 +281,9 @@ hq:set_workers {
 }
 if campaign_data.payment then
    soldiers = {
-      {{1,1,1,1}, 30},
-      {{2,2,1,2}, 40},
-      {{3,2,2,3}, 50},
+      {{1,1,1,1}, 45},
+      {{2,2,1,2}, 55},
+      {{3,2,2,3}, 65},
    }
 else
    soldiers = {
