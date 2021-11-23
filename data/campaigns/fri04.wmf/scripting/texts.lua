@@ -227,7 +227,7 @@ reebaud_in_danger = {
    title =_ "Strangers",
    body=henneke(_"Something is going on…",
       -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
-      _([[We met a wounded soldier near our north-eastern border today. He gasped something about his tribe being attacked by vicous strangers, but he died before he could tell us more. His armour and weaponry looked startlingly familiar. I wonder if Reebaud’s tribe is in danger?]])
+      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked by vicous strangers, but he died before he could tell us more. His armour and weaponry looked startlingly familiar. I wonder if Reebaud’s tribe is in danger?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
       _([[We must hurry.]])),
