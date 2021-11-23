@@ -12,6 +12,7 @@ function insert_soldiers(tbl, what)
 end
 
 function port_space_blocked(f)
+   if f.owner == p1 then return false end
    for i,field in pairs({
       f,
       f.ln,
