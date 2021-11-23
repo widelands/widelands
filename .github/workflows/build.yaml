@@ -178,8 +178,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    # TODO: uncomment, once the build steps are correct.
-    # needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
     strategy:
       matrix:
         config:
@@ -207,12 +206,11 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-        # TODO: change to build.yaml once the build steps are correct.
         key: |
-          ${{ hashFiles( '.github/workflows/format.yaml' ) }}-${{ matrix.arch }}
+          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
-        vcpkg install --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
+        vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
       with:
@@ -221,30 +219,19 @@ jobs:
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
         nmake
-        strip -sv ./src/widelands.exe
-      # TODO: remove this step once the InnoSetup works
-    - name: Uploading executable
-      uses: actions/upload-artifact@v2
-      with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} executable
-        path: ${{ github.workspace }}\build\src\widelands.exe
+        if ("${{ matrix.config }}" -Match "Release") {
+          strip -sv ./src/widelands.exe
+        } 
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
         # Environment variables needed by our InnoSetup script
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:PLATFORM = "x64"
-          $env:MINGWPATH = "C:\msys64\mingw64\bin"
-        } else {
-          $env:PLATFORM = "x86"
-          $env:MINGWPATH = "C:\msys64\mingw32\bin"
-        }
+        $env:PLATFORM = "${{ matrix.arch }}"
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
-        strip.exe -sv .\build\src\widelands.exe
         ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
       uses: actions/upload-artifact@v2

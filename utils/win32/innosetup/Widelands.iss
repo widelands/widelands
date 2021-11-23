@@ -36,7 +36,6 @@
 
 ;Appveyor environment
 #define BuildFolder GetEnv("APPVEYOR_BUILD_FOLDER")
-#define DLLFolder GetEnv("MINGWPATH")
 #define Version GetEnv("APPVEYOR_BUILD_VERSION") + GetEnv("CONFIGURATION") + GetEnv("PLATFORM")
 
 [Setup]
