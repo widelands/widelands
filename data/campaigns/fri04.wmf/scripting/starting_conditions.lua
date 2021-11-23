@@ -159,8 +159,8 @@ else
    hq = p3:place_building("empire_port_large", map.player_slots[3].starting_field, false, true)
    local gold_iron_ratio = {80, 60, 40}
    hq:set_wares {
-         gold = campaign_data.payment * gold_iron_ratio[difficulty] / 100,
-         iron = campaign_data.payment * (100 - gold_iron_ratio[difficulty]) / 100,
+         gold = campaign_data.payment * gold_iron_ratio[difficulty] // 100,
+         iron = campaign_data.payment * (100 - gold_iron_ratio[difficulty]) // 100,
          armor_helmet = 4,
          spear_wooden = 5,
          felling_ax = 6,
