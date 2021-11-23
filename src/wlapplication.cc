@@ -431,9 +431,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_sh = new SoundHandler();
 
-	g_sh->register_songs("music", "intro");
-	g_sh->register_songs("music", "menu");
-	g_sh->register_songs("music", "ingame");
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
 
 	initialize_g_addons();
 
@@ -595,7 +596,7 @@ static void init_one_player_from_template(unsigned p,
 	const Widelands::TribeBasicInfo t = settings->settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-             init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
              addon == t.initializations[i].script) {
 			settings->set_player_init(p, i);
 			found_init = true;
@@ -749,7 +750,7 @@ void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
 	if (game_type_ == GameType::kEditor) {
-		g_sh->change_music("ingame");
+		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
@@ -788,7 +789,7 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
-			g_sh->change_music("menu");
+			g_sh->change_music(Songset::kMenu);
 			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);
 			log_err("%s\n", message.c_str());
@@ -807,9 +808,9 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kFromTemplate) {
 		init_and_run_game_from_template();
 	} else {
-		g_sh->change_music("intro");
+		g_sh->change_music(Songset::kIntro);
 
-		g_sh->change_music("menu", 1000);
+		g_sh->change_music(Songset::kMenu, 1000);
 
 		FsMenu::MainMenu m;
 		m.run<int>();
@@ -1622,7 +1623,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   panel, UI::WindowStyle::kFsMenu,
 		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
 		   ask_for_bug_report ?
-            bformat(
+		      bformat(
 		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
 		           "this problem to help us improve Widelands. You will find related messages in the "
 		           "standard output (stdout.txt on Windows). You are using build %2$s "

@@ -366,7 +366,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	if (!settings.mapfilename.empty()) {
 		assert(maploader);
 		maploader->load_map_complete(*this, settings.scenario ?
-                                             Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kScenario :
                                              Widelands::MapLoader::LoadType::kGame);
 	} else {
 		// Normally the map loader takes care of this, but if the map was
@@ -750,7 +750,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music("ingame", 1000);
+	g_sh->change_music(Songset::kIngame, 1000);
 
 	state_ = gs_running;
 
@@ -769,7 +769,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_ending;
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);

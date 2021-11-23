@@ -34,6 +34,11 @@
  * afterwards
  */
 struct Songset {
+
+	static constexpr const char* const kIngame = "ingame";
+	static constexpr const char* const kCustom = "custom";
+	static constexpr const char* const kMenu = "menu";
+	static constexpr const char* const kIntro = "intro";
 	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 

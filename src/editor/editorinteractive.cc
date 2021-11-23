@@ -519,7 +519,7 @@ void EditorInteractive::cleanup_for_load() {
 void EditorInteractive::start() {
 	// Run the editor initialization script, if any
 	try {
-		g_sh->change_music("ingame", 1000);
+		g_sh->change_music(Songset::kIngame, 1000);
 		egbase().lua().run_script("map:scripting/editor_init.lua");
 	} catch (LuaScriptNotExistingError&) {
 		// do nothing.
@@ -559,7 +559,7 @@ void EditorInteractive::exit() {
 			}
 		}
 	}
-	g_sh->change_music("menu", 200);
+	g_sh->change_music(Songset::kMenu, 200);
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
@@ -716,7 +716,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-                                  sel.triangle != get_sel_pos().triangle :
+	                               sel.triangle != get_sel_pos().triangle :
                                   sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_) {
