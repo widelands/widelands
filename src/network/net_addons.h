@@ -27,7 +27,12 @@
 namespace AddOns {
 
 struct NetAddons {
-	NetAddons() : initialized_(false), network_active_(false), client_socket_(0), is_admin_(false) {
+	NetAddons()
+	   : initialized_(false),
+	     network_active_(false),
+	     client_socket_(0),
+	     is_admin_(false),
+	     cached_remotes_(0) {
 	}
 	~NetAddons();
 
@@ -97,6 +102,7 @@ private:
 	bool network_active_;
 	int client_socket_;
 	bool is_admin_;
+	size_t cached_remotes_;
 };
 
 }  // namespace AddOns
