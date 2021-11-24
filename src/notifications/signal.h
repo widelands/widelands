@@ -43,7 +43,7 @@ public:
 	/** Wrapper around a callback function. */
 	class SignalSubscriber {
 	public:
-		explicit SignalSubscriber(const Signal& p, const std::function<void(Args...)> c)
+		SignalSubscriber(const Signal& p, const std::function<void(Args...)> c)
 		   : callback_(c), parent_(p) {
 		}
 		~SignalSubscriber() {
