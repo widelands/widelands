@@ -2718,7 +2718,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		    bo.buildable(*player_)) {
 			persistent_data->remaining_basic_buildings.emplace(std::make_pair(bo.id, bo.basic_amount));
 		}
-		if (!bo.buildable(*player_)) {
+		if (!(bo.buildable(*player_) && tribe_->has_building(bo.id))) {
 			bo.new_building = BuildingNecessity::kNotNeeded;
 			// This line removes buildings from basic economy if they are not allowed for the player
 			// this should only happen by scripting.
