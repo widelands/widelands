@@ -1729,8 +1729,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						continue;
 					}
 				}
-				uint8_t amount = 0;
-				amount = map.find_immovables(
+				uint8_t amount = map.find_immovables(
 				   game(),
 				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
 				   nullptr, Widelands::FindImmovableAttribute(attribute_category.first));
