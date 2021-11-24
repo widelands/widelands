@@ -41,17 +41,19 @@ enum class SubscriberPosition { kFront, kBack };
 template <typename... Args> class Signal {
 public:
 	/** Wrapper around a callback function. */
-	struct SignalSubscriber {
-		explicit SignalSubscriber(const Signal& p, const std::function<void(Args...)>& c)
-		   : parent_(p), callback_(c) {
+	class SignalSubscriber {
+	public:
+		explicit SignalSubscriber(const Signal& p, const std::function<void(Args...)> c)
+		   : callback_(c), parent_(p) {
 		}
 		~SignalSubscriber() {
 			parent_.unsubscribe(this);
 		}
 
-		const Signal& parent_;
 		const std::function<void(Args...)> callback_;
 
+	private:
+		const Signal& parent_;
 		DISALLOW_COPY_AND_ASSIGN(SignalSubscriber);
 	};
 
@@ -62,9 +64,12 @@ public:
 		}
 	}
 
-	/** Create a subscriber with a user-defined lifetime. */
+	/**
+	 * Create a subscriber with a user-defined lifetime.
+	 * The caller must ensure that the subscriber is destroyed before the signal.
+	 */
 	std::unique_ptr<SignalSubscriber>
-	subscribe(const std::function<void(Args...)>& callback,
+	subscribe(const std::function<void(Args...)> callback,
 	          SubscriberPosition pos = SubscriberPosition::kBack) const {
 		SignalSubscriber* s = new SignalSubscriber(*this, callback);
 		switch (pos) {
@@ -79,12 +84,20 @@ public:
 	}
 
 	/** Create a subscriber with the same lifetime as the signal. */
-	inline void connect(const std::function<void(Args...)>& callback,
+	inline void connect(const std::function<void(Args...)> callback,
 	                    SubscriberPosition pos = SubscriberPosition::kBack) const {
 		owned_subscribers_.insert(subscribe(callback, pos));
 	}
 
-	/** Create a subscriber that echoes the signal's invokations to another signal. */
+	/**
+	 * Create a subscriber that echoes the signal's invokations to another signal.
+	 * This means that every invokation of this signal triggers the callback function
+	 * of the signal `s` with the same arguments as passed to this signal.
+	 *
+	 * The caller is responsible for ensuring that `s` will not be destroyed before
+	 * the last invokation of this signal, otherwise this will segfault.
+	 * The caller is furthermore responsible for ensuring that no cycles are created.
+	 */
 	inline std::unique_ptr<SignalSubscriber>
 	subscribe(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
 		return subscribe([&s](Args... args) { s(args...); }, pos);
@@ -92,6 +105,16 @@ public:
 	inline void connect(const Signal& s, SubscriberPosition pos = SubscriberPosition::kBack) const {
 		connect([&s](Args... args) { s(args...); }, pos);
 	}
+
+	Signal() = default;
+	~Signal() {
+		owned_subscribers_.clear();
+		// Any subscribers not owned by us should have been destroyed by their owner by now
+		assert(all_subscribers_.empty());
+	}
+
+private:
+	friend class SignalSubscriber;
 
 	/** Called by a subscriber at the end of its lifetime. */
 	void unsubscribe(const SignalSubscriber* s) const {
@@ -104,14 +127,11 @@ public:
 		NEVER_HERE();
 	}
 
-	Signal() = default;
-	~Signal() {
-		owned_subscribers_.clear();
-		// Any subscribers not owned by us should have been destroyed by their owner by now
-		assert(all_subscribers_.empty());
-	}
-
-private:
+	/* A Signal instance can sometimes be a member of a const object, but we still want
+	 * to allow new subscriptions to the object, so all member functions of Signal need
+	 * to be const-qualified while still being able to add/remove subscribers to/from
+	 * these lists. So these two member variables need to be declared mutable.
+	 */
 	mutable std::set<std::unique_ptr<SignalSubscriber>> owned_subscribers_;
 	mutable std::list<SignalSubscriber*> all_subscribers_;
 
