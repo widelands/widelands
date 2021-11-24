@@ -1120,8 +1120,7 @@ void DefaultAI::late_initialization() {
 				for (Widelands::Bob* bob = f.field->get_first_bob(); bob;
 				     bob = bob->get_next_on_field()) {
 					if (upcast(Widelands::Ship, ship, bob)) {
-						if (ship->get_owner() == player_ && !found_ships.count(ship)) {
-							found_ships.insert(ship);
+						if (ship->get_owner() == player_ && !found_ships.insert(ship)) {
 							gain_ship(*ship, NewShip::kFoundOnLoad);
 						}
 					}
@@ -1144,8 +1143,7 @@ void DefaultAI::late_initialization() {
 
 			if (upcast(Widelands::PlayerImmovable, imm, f.field->get_immovable())) {
 				//  Guard by a set - immovables might be on several nodes at once.
-				if (&imm->owner() == player_ && !found_immovables.count(imm)) {
-					found_immovables.insert(imm);
+				if (&imm->owner() == player_ && !found_immovables.insert(imm)) {
 					gain_immovable(*imm, true);
 				}
 			}
@@ -1174,17 +1172,13 @@ void DefaultAI::late_initialization() {
 		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(c), 3));
 		do {
 			const uint32_t hash = mr.location().hash();
-			if (!ports_vicinity.count(hash)) {
-				ports_vicinity.insert(hash);
-			}
+			ports_vicinity.insert(hash);
 		} while (mr.advance(map));
 		Widelands::HollowArea<> ha(Widelands::Area<>(map.get_fcoords(c), 8), 3);
 		Widelands::MapHollowRegion<> mhr(map, ha);
 		do {
 			const uint32_t hash = mhr.location().hash();
-			if (!ports_shipyard_region.count(hash)) {
-				ports_shipyard_region.insert(hash);
-			}
+			ports_shipyard_region.insert(hash);
 		} while (mhr.advance(map));
 	}
 
@@ -7145,14 +7139,10 @@ void DefaultAI::print_stats(const Time& gametime) {
 			const Widelands::ProductionSiteDescr& prod =
 			   dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
 			for (const auto& temp_input : prod.input_wares()) {
-				if (materials.count(temp_input.first) == 0) {
-					materials.insert(temp_input.first);
-				}
+				materials.insert(temp_input.first);
 			}
 			for (const auto& temp_cost : prod.buildcost()) {
-				if (materials.count(temp_cost.first) == 0) {
-					materials.insert(temp_cost.first);
-				}
+				materials.insert(temp_cost.first);
 			}
 		}
 
@@ -7160,9 +7150,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 			const Widelands::ProductionSiteDescr& train =
 			   dynamic_cast<const Widelands::TrainingSiteDescr&>(bld);
 			for (const auto& temp_cost : train.buildcost()) {
-				if (materials.count(temp_cost.first) == 0) {
-					materials.insert(temp_cost.first);
-				}
+				materials.insert(temp_cost.first);
 			}
 		}
 	}
