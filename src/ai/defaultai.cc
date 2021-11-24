@@ -1120,7 +1120,8 @@ void DefaultAI::late_initialization() {
 				for (Widelands::Bob* bob = f.field->get_first_bob(); bob;
 				     bob = bob->get_next_on_field()) {
 					if (upcast(Widelands::Ship, ship, bob)) {
-						if (ship->get_owner() == player_ && !found_ships.insert(ship)) {
+						if (ship->get_owner() == player_ && !found_ships.count(ship)) {
+							found_ships.insert(ship);
 							gain_ship(*ship, NewShip::kFoundOnLoad);
 						}
 					}
@@ -1143,7 +1144,8 @@ void DefaultAI::late_initialization() {
 
 			if (upcast(Widelands::PlayerImmovable, imm, f.field->get_immovable())) {
 				//  Guard by a set - immovables might be on several nodes at once.
-				if (&imm->owner() == player_ && !found_immovables.insert(imm)) {
+				if (&imm->owner() == player_ && !found_immovables.count(imm)) {
+					found_immovables.insert(imm);
 					gain_immovable(*imm, true);
 				}
 			}
