@@ -21,21 +21,20 @@
 
 #include <cassert>
 #include <cstdlib>
-#include <map>
 #include <memory>
 #include <set>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/string.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "logic/filesystem_constants.h"
 
 static Profile g_options(Profile::err_log);
 
+static std::string config_file;
 static std::unique_ptr<FileSystem> config_dir = nullptr;
 
 void check_config_used() {
@@ -121,6 +120,8 @@ void set_config_string(const std::string& section,
 	g_options.pull_section(section.c_str()).set_string(name.c_str(), value.c_str());
 }
 
+constexpr char kFastplaceNameSeparator = '$';
+
 struct KeyboardShortcutInfo {
 	enum class Scope {
 		kGlobal,  // special value that intersects with all other scopes
@@ -135,6 +136,7 @@ struct KeyboardShortcutInfo {
 	SDL_Keysym current_shortcut;
 	const std::string internal_name;
 	const std::function<std::string()> descname;
+	std::map<std::string /* tribe */, std::string /* building */> fastplace;
 
 	KeyboardShortcutInfo(const std::set<Scope>& s,
 	                     const SDL_Keysym& sym,
@@ -154,6 +156,61 @@ constexpr uint16_t kDefaultCtrlModifier = KMOD_CTRL;
 static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
 }
+
+static const std::vector<KeyboardShortcutInfo> kFastplaceDefaults = {
+#define FP(name, descname)                                                                         \
+	KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),                \
+	                     kFastplaceGroupPrefix + name, []() { return descname; })
+   FP("warehouse", _("Warehouse")),
+   FP("port", _("Port")),
+   FP("training_small", _("Minor Training Site")),
+   FP("training_large", _("Major Training Site")),
+   FP("military_small_primary", _("Primary Small Military Site")),
+   FP("military_small_secondary", _("Secondary Small Military Site")),
+   FP("military_medium_primary", _("Primary Medium Military Site")),
+   FP("military_medium_secondary", _("Secondary Medium Military Site")),
+   FP("military_tower", _("Tower")),
+   FP("military_fortress", _("Fortress")),
+   FP("woodcutter", _("Woodcutter’s House")),
+   FP("forester", _("Forester’s House")),
+   FP("quarry", _("Quarry")),
+   FP("building_materials_primary", _("Primary Building Materials Industry")),
+   FP("building_materials_secondary", _("Secondary Building Materials Industry")),
+   FP("building_materials_tertiary", _("Tertiary Building Materials Industry")),
+   FP("fisher", _("Fishing")),
+   FP("hunter", _("Hunting")),
+   FP("fish_meat_replenisher", _("Fish/Meat Replenishing")),
+   FP("well", _("Well")),
+   FP("farm_primary", _("Primary Farm")),
+   FP("farm_secondary", _("Secondary Farm")),
+   FP("mill", _("Mill")),
+   FP("bakery", _("Bakery")),
+   FP("brewery", _("Brewery")),
+   FP("smokery", _("Smokery")),
+   FP("tavern", _("Tavern")),
+   FP("smelting", _("Ore Smelting")),
+   FP("tool_smithy", _("Tool Smithy")),
+   FP("weapon_smithy", _("Weapon Smithy")),
+   FP("armor_smithy", _("Armor Smithy")),
+   FP("weaving_mill", _("Weaving Mill")),
+   FP("shipyard", _("Shipyard")),
+   FP("ferry_yard", _("Ferry Yard")),
+   FP("scout", _("Scouting")),
+   FP("barracks", _("Barracks")),
+   FP("second_carrier", _("Second Carrier")),
+   FP("charcoal", _("Charcoal")),
+   FP("mine_stone", _("Stone Mine")),
+   FP("mine_coal", _("Coal Mine")),
+   FP("mine_iron", _("Iron Mine")),
+   FP("mine_gold", _("Gold Mine")),
+   FP("agriculture_producer", _("Agricultural Producer")),
+   FP("agriculture_consumer_primary", _("Primary Agricultural Consumer")),
+   FP("agriculture_consumer_secondary", _("Secondary Agricultural Consumer")),
+   FP("industry_alternative", _("Alternative Industry")),
+   FP("industry_supporter", _("Industry Support")),
+   FP("terraforming", _("Terraforming")),
+#undef FP
+};
 
 static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
@@ -364,30 +421,30 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kEditorShowhideGrid,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_g),
-                         "editor_showhide_",
+                         "editor_showhide_grid",
                          []() { return _("Toggle Grid"); })},
    {KeyboardShortcut::kEditorShowhideImmovables,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_2, kDefaultCtrlModifier),
+                         keysym(SDLK_o),
                          "editor_showhide_immovables",
                          []() { return _("Toggle Immovables"); })},
    {KeyboardShortcut::kEditorShowhideCritters,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_3, kDefaultCtrlModifier),
+                         keysym(SDLK_a),
                          "editor_showhide_critters",
                          []() { return _("Toggle Animals"); })},
    {KeyboardShortcut::kEditorShowhideResources,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_4, kDefaultCtrlModifier),
+                         keysym(SDLK_r),
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
 
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
-		   KeyboardShortcutInfo(                                                                     \
-		      {KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key), "editor_toolsize" #radius, \
-		      []() { return (boost::format(_("Set Toolsize to %d")) % radius).str(); })              \
+		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
+		                        "editor_toolsize" #radius,                                           \
+		                        []() { return bformat(_("Set Toolsize to %d"), radius); })           \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -609,12 +666,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return (boost::format(_("Set Landmark #%d")) % i).str(); })},      \
+	                      []() { return bformat(_("Set Landmark #%d"), i); })},                     \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
 		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return (boost::format(_("Go To Landmark #%d")) % i).str(); }) \
+		                        []() { return bformat(_("Go To Landmark #%d"), i); })                \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -627,6 +684,51 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    QUICKNAV(9),
 #undef QUICKNAV
 };
+
+void unset_shortcut(const KeyboardShortcut id) {
+	set_shortcut(id, keysym(SDLK_UNKNOWN), nullptr);
+}
+
+void set_fastplace_shortcuts(KeyboardShortcut id, const std::map<std::string, std::string>& map) {
+	assert(is_fastplace(id));
+	KeyboardShortcutInfo& info = shortcuts_.at(id);
+
+	auto config_key = [&info](const std::string& tribe) {
+		std::string key = info.internal_name;
+		key += kFastplaceNameSeparator;
+		key += tribe;
+		return key;
+	};
+
+	// Update or remove existing mapping
+	for (auto& pair : info.fastplace) {
+		const auto it = map.find(pair.first);
+		if (it == map.end()) {
+			pair.second.clear();
+		} else {
+			pair.second = it->second;
+		}
+		set_config_string("keyboard_fastplace", config_key(pair.first), pair.second);
+	}
+
+	// Add new mapping
+	for (auto& pair : map) {
+		if (!info.fastplace.count(pair.first)) {
+			info.fastplace.emplace(pair);
+			set_config_string("keyboard_fastplace", config_key(pair.first), pair.second);
+		}
+	}
+}
+
+const std::map<std::string, std::string>& get_fastplace_shortcuts(const KeyboardShortcut id) {
+	assert(is_fastplace(id));
+	return shortcuts_.at(id).fastplace;
+}
+
+const std::string& get_fastplace_group_name(const KeyboardShortcut id) {
+	assert(is_fastplace(id));
+	return shortcuts_.at(id).internal_name;
+}
 
 std::string to_string(const KeyboardShortcut id) {
 	return shortcuts_.at(id).descname();
@@ -662,7 +764,9 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	for (auto& pair : shortcuts_) {
 		if (pair.first != id && shared_scope(scopes, pair.second) &&
 		    matches_shortcut(pair.first, code)) {
-			*conflict = pair.first;
+			if (conflict != nullptr) {
+				*conflict = pair.first;
+			}
 			return false;
 		}
 	}
@@ -677,29 +781,63 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 }
 
 static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
-   {SDLK_KP_9, SDLK_PAGEUP},      {SDLK_KP_8, SDLK_UP},         {SDLK_KP_7, SDLK_HOME},
-   {SDLK_KP_6, SDLK_RIGHT},       {SDLK_KP_4, SDLK_LEFT},       {SDLK_KP_3, SDLK_PAGEDOWN},
-   {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},        {SDLK_KP_0, SDLK_INSERT},
-   {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN}, {SDLK_KP_MINUS, SDLK_MINUS},
-   {SDLK_KP_PLUS, SDLK_PLUS},
-};
+   {SDLK_KP_9, SDLK_PAGEUP},         {SDLK_KP_8, SDLK_UP},          {SDLK_KP_7, SDLK_HOME},
+   {SDLK_KP_6, SDLK_RIGHT},          {SDLK_KP_5, SDLK_UNKNOWN},     {SDLK_KP_4, SDLK_LEFT},
+   {SDLK_KP_3, SDLK_PAGEDOWN},       {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},
+   {SDLK_KP_0, SDLK_INSERT},         {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN},
+   {SDLK_KP_MINUS, SDLK_MINUS},      {SDLK_KP_PLUS, SDLK_PLUS},     {SDLK_KP_DIVIDE, SDLK_SLASH},
+   {SDLK_KP_MULTIPLY, SDLK_ASTERISK}};
+
+void normalize_numpad(SDL_Keysym& keysym) {
+	auto search = kNumpadIdentifications.find(keysym.sym);
+	if (search == kNumpadIdentifications.end()) {
+		return;
+	}
+	if (keysym.mod & KMOD_NUM) {
+		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
+			keysym.sym = keysym.sym - SDLK_KP_1 + SDLK_1;
+			return;
+		} else if (keysym.sym == SDLK_KP_0) {
+			keysym.sym = SDLK_0;
+			return;
+		} else if (keysym.sym == SDLK_KP_PERIOD) {
+			keysym.sym = SDLK_PERIOD;
+			return;
+		}
+	}  // Not else, because '/', '*', '-' and '+' are not affected by NumLock state
+
+	if (get_config_bool("numpad_diagonalscrolling", false)) {
+		// If this option is enabled, reserve numpad movement keys for map scrolling
+		// Numpad 5 becomes go to HQ
+		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
+			return;
+		}
+	}  // Not else, because there are 7 more keys which are not affected
+
+	keysym.sym = search->second;
+}
+
+uint16_t normalize_keymod(uint16_t keymod) {
+	return ((keymod & KMOD_SHIFT) ? KMOD_SHIFT : KMOD_NONE) |
+	       ((keymod & KMOD_CTRL) ? KMOD_CTRL : KMOD_NONE) |
+	       ((keymod & KMOD_ALT) ? KMOD_ALT : KMOD_NONE) |
+	       ((keymod & KMOD_GUI) ? KMOD_GUI : KMOD_NONE);
+}
+
+bool matches_keymod(const uint16_t mod1, const uint16_t mod2) {
+	return normalize_keymod(mod1) == normalize_keymod(mod2);
+}
 
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 	return matches_shortcut(id, code.sym, code.mod);
 }
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const int mod) {
 	const SDL_Keysym key = get_shortcut(id);
+	if (key.sym == SDLK_UNKNOWN || code == SDLK_UNKNOWN) {
+		return false;
+	}
 
-	const bool ctrl1 = key.mod & KMOD_CTRL;
-	const bool shift1 = key.mod & KMOD_SHIFT;
-	const bool alt1 = key.mod & KMOD_ALT;
-	const bool gui1 = key.mod & KMOD_GUI;
-	const bool ctrl2 = mod & KMOD_CTRL;
-	const bool shift2 = mod & KMOD_SHIFT;
-	const bool alt2 = mod & KMOD_ALT;
-	const bool gui2 = mod & KMOD_GUI;
-
-	if (ctrl1 != ctrl2 || shift1 != shift2 || alt1 != alt2 || gui1 != gui2) {
+	if (!matches_keymod(key.mod, mod)) {
 		return false;
 	}
 
@@ -709,6 +847,10 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 
 	// Some extra checks so we can identify keypad keys with their "normal" equivalents,
 	// e.g. pressing '+' or numpad_'+' should always have the same effect
+
+	// This is now only required for config file backward compatibility, as all keyboard
+	// events get converted to "normal" keys (except for the numpad keys used for diagonal
+	// scrolling if it is enabled)
 
 	if (mod & KMOD_NUM) {
 		// If numlock is on and a number was pressed, only compare the entered number value.
@@ -728,6 +870,12 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 		}
 	}
 
+	if (get_config_bool("numpad_diagonalscrolling", false) &&
+	    (code >= SDLK_KP_1 && code <= SDLK_KP_9)) {
+		// Reserve numpad movement keys for map scrolling
+		return false;
+	}
+
 	for (const auto& pair : kNumpadIdentifications) {
 		if ((code == pair.first && key.sym == pair.second) ||
 		    (code == pair.second && key.sym == pair.first)) {
@@ -738,6 +886,19 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	return false;
 }
 
+std::string matching_fastplace_shortcut(const SDL_Keysym key, const std::string& tribename) {
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
+	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
+		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+		if (matches_shortcut(id, key)) {
+			const KeyboardShortcutInfo& info = shortcuts_.at(id);
+			const auto it = info.fastplace.find(tribename);
+			return it == info.fastplace.end() ? "" : it->second;
+		}
+	}
+	return "";
+}
+
 KeyboardShortcut shortcut_from_string(const std::string& name) {
 	for (const auto& pair : shortcuts_) {
 		if (pair.second.internal_name == name) {
@@ -745,6 +906,38 @@ KeyboardShortcut shortcut_from_string(const std::string& name) {
 		}
 	}
 	throw wexception("Shortcut '%s' does not exist", name.c_str());
+}
+
+std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
+	i18n::Textdomain textdomain("widelands");
+	std::vector<std::string> mods;
+	if (modstate & KMOD_SHIFT) {
+		mods.push_back(pgettext("hotkey", "Shift"));
+	}
+	if (modstate & KMOD_ALT) {
+		mods.push_back(pgettext("hotkey", "Alt"));
+	}
+	if (modstate & KMOD_GUI) {
+#ifdef __APPLE__
+		mods.push_back(pgettext("hotkey", "Cmd"));
+#else
+		mods.push_back(pgettext("hotkey", "GUI"));
+#endif
+	}
+	if (modstate & KMOD_CTRL) {
+		mods.push_back(pgettext("hotkey", "Ctrl"));
+	}
+
+	std::string result;
+
+	// Return value will have a trailing "+" if any modifier is matched,
+	// because all current uses need it anyway, and extra checks can
+	// be avoided both here and in the users this way
+	for (const std::string& m : mods) {
+		result = bformat(_("%1$s+%2$s"), m, result);
+	}
+
+	return rt_escape ? richtext_escape(result) : result;
 }
 
 std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape) {
@@ -832,34 +1025,79 @@ static std::string key_name(const SDL_Keycode k) {
 
 std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	i18n::Textdomain textdomain("widelands");
-	std::vector<std::string> mods;
-	if (sym.mod & KMOD_SHIFT) {
-		mods.push_back(pgettext("hotkey", "Shift"));
-	}
-	if (sym.mod & KMOD_ALT) {
-		mods.push_back(pgettext("hotkey", "Alt"));
-	}
-	if (sym.mod & KMOD_GUI) {
-#ifdef __APPLE__
-		mods.push_back(pgettext("hotkey", "Cmd"));
-#else
-		mods.push_back(pgettext("hotkey", "GUI"));
-#endif
-	}
-	if (sym.mod & KMOD_CTRL) {
-		mods.push_back(pgettext("hotkey", "Ctrl"));
+	if (sym.sym == SDLK_UNKNOWN) {
+		return _("(disabled)");
 	}
 
-	std::string result = key_name(sym.sym);
-	for (const std::string& m : mods) {
-		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
-	}
+	std::string result =
+	   bformat(_("%1$s%2$s"), keymod_string_for(sym.mod, false), key_name(sym.sym));
 
 	return rt_escape ? richtext_escape(result) : result;
 }
 
+static void init_fastplace_shortcuts(const bool force_defaults) {
+	int counter = 0;
+	for (KeyboardShortcut k = KeyboardShortcut::kFastplace_Begin;
+	     k <= KeyboardShortcut::kFastplace_End;
+	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+		if (force_defaults) {
+			shortcuts_.erase(k);
+		} else if (shortcuts_.count(k)) {
+			continue;
+		}
+
+		const unsigned off =
+		   static_cast<uint16_t>(k) - static_cast<uint16_t>(KeyboardShortcut::kFastplace_Begin);
+		if (off < kFastplaceDefaults.size()) {
+			shortcuts_.emplace(k, kFastplaceDefaults[off]);
+		} else {
+			++counter;
+			shortcuts_.emplace(
+			   k, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_UNKNOWN),
+			                           bformat("%scustom_%i", kFastplaceGroupPrefix, counter),
+			                           [counter]() { return bformat(_("Fastplace #%i"), counter); }));
+		}
+	}
+}
+
+void init_fastplace_default_shortcuts(
+   const std::map<std::string /* key */,
+                  std::map<std::string /* tribe */, std::string /* building */>>& fpdefaults) {
+#ifndef NDEBUG
+	std::set<std::string> used_keys;
+#endif
+
+	for (int i = static_cast<int>(KeyboardShortcut::kFastplace_Begin);
+	     i < static_cast<int>(KeyboardShortcut::kFastplace_End); ++i) {
+		const KeyboardShortcut id = static_cast<KeyboardShortcut>(i);
+		KeyboardShortcutInfo& info = shortcuts_.at(id);
+
+#ifndef NDEBUG
+		used_keys.insert(info.internal_name);
+#endif
+
+		const auto defaults_it = fpdefaults.find(info.internal_name);
+		if (defaults_it != fpdefaults.end()) {
+			for (const auto& pair : defaults_it->second) {
+				if (info.fastplace.count(pair.first) == 0) {
+					info.fastplace.emplace(pair);
+				}
+			}
+		}
+	}
+
+#ifndef NDEBUG
+	for (const auto& pair : fpdefaults) {
+		if (!used_keys.count(pair.first)) {
+			log_warn("Fastplace defaults: Unused key '%s'", pair.first.c_str());
+		}
+	}
+#endif
+}
+
 void init_shortcuts(const bool force_defaults) {
-	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
+	init_fastplace_shortcuts(force_defaults);
+	for (KeyboardShortcut k = KeyboardShortcut::k_Begin; k <= KeyboardShortcut::k_End;
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		shortcuts_.at(k).current_shortcut = get_default_shortcut(k);
 		if (force_defaults) {
@@ -904,12 +1142,73 @@ void init_shortcuts(const bool force_defaults) {
 			}
 		}
 	}
+	Section& sf = get_config_section("keyboard_fastplace");
+	while (Section::Value* v = sf.get_next_val()) {
+		const std::string full_key = v->get_name();
+		const size_t separator = full_key.find(kFastplaceNameSeparator);
+		if (separator == std::string::npos) {
+			log_warn("Ignoring malformed fastplace config string: %s", full_key.c_str());
+			continue;
+		}
+		const std::string fp_key = full_key.substr(0, separator);
+		for (auto& pair : shortcuts_) {
+			if (pair.second.internal_name == fp_key) {
+				pair.second.fastplace[full_key.substr(separator + 1)] = v->get_string();
+				break;
+			}
+		}
+	}
+}
+
+ChangeType get_keyboard_change(SDL_Keysym keysym, bool enable_big_step) {
+	bool to_limit = false;
+	if (matches_keymod(keysym.mod, KMOD_CTRL)) {
+		to_limit = true;
+	} else if (keysym.mod != KMOD_NONE) {
+		return ChangeType::kNone;
+	}
+	switch (keysym.sym) {
+	case SDLK_HOME:
+		return ChangeType::kSetMin;
+	case SDLK_END:
+		return ChangeType::kSetMax;
+	case SDLK_MINUS:
+	case SDLK_DOWN:
+	case SDLK_LEFT:
+		return to_limit ? ChangeType::kSetMin : ChangeType::kMinus;
+	case SDLK_PLUS:
+	case SDLK_UP:
+	case SDLK_RIGHT:
+		return to_limit ? ChangeType::kSetMax : ChangeType::kPlus;
+	case SDLK_PAGEDOWN:
+		if (enable_big_step) {
+			return to_limit ? ChangeType::kSetMin : ChangeType::kBigMinus;
+		} else {
+			return ChangeType::kNone;
+		}
+	case SDLK_PAGEUP:
+		if (enable_big_step) {
+			return to_limit ? ChangeType::kSetMax : ChangeType::kBigPlus;
+		} else {
+			return ChangeType::kNone;
+		}
+	default:
+		return ChangeType::kNone;
+	}
 }
 
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log_info("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
+
+	config_file = userconfigdir;
+	config_file += FileSystem::file_separator();
+	config_file += kConfigFile;
+	log_info("Set configuration file: %s", config_file.c_str());
+}
+
+const std::string& get_config_file() {
+	return config_file;
 }
 
 void read_config() {

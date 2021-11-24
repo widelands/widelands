@@ -125,6 +125,16 @@ public:
 		return &tree_;
 	}
 
+	std::map<std::string, unsigned> count_all_dirnames(const DirectoryTree* start = nullptr) const;
+
+	void set_dirname(const std::string& dir, const std::string& name) {
+		dirnames_[dir] = name;
+	}
+	std::string get_dirname(const std::string& dir) const {
+		const auto it = dirnames_.find(dir);
+		return it != dirnames_.end() ? it->second : "";
+	}
+
 protected:
 	std::string parse_requirements() override;
 	size_t do_recursively_create_filesystem_structure(const std::string& dir,
@@ -132,6 +142,8 @@ protected:
 	                                                  std::set<std::string>* all_dirnames,
 	                                                  bool dry_run);
 	DirectoryTree tree_;
+
+	std::map<std::string, std::string> dirnames_;
 
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);

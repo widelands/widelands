@@ -2,12 +2,24 @@ wl_library(ui_fsmenu
   SRCS
     about.cc
     about.h
-    addons.cc
-    addons.h
-    addons_packager.cc
-    addons_packager.h
-    addons_packager_box.cc
-    addons_packager_box.h
+    addons/contact.cc
+    addons/contact.h
+    addons/login_box.cc
+    addons/login_box.h
+    addons/manager.cc
+    addons/manager.h
+    addons/packager.cc
+    addons/packager.h
+    addons/packager_box.cc
+    addons/packager_box.h
+    addons/progress.cc
+    addons/progress.h
+    addons/remote_interaction.cc
+    addons/remote_interaction.h
+    addons/rows_ui.cc
+    addons/rows_ui.h
+    addons/screenshot_upload.cc
+    addons/screenshot_upload.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc
@@ -38,6 +50,8 @@ wl_library(ui_fsmenu
     main.h
     menu.h
     menu.cc
+    mousewheel_options.cc
+    mousewheel_options.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
     netsetup_lan.cc
@@ -62,6 +76,7 @@ wl_library(ui_fsmenu
     base_i18n
     base_log
     base_random
+    base_string
     build_info
     editor
     graphic
@@ -80,6 +95,7 @@ wl_library(ui_fsmenu
     logic_game_settings
     logic_game_controller
     logic_map
+    logic_map_objects
     logic_single_player_game_settings
     logic_training_wheels
     logic_tribe_basic_info

@@ -71,7 +71,6 @@ public:
 	FontHandler(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(kTextureCacheSize)),
 	     render_cache_(new RenderCache(kRenderCacheSize)),
-	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), &fontsets_)),
 	     image_cache_(image_cache) {
@@ -83,7 +82,7 @@ public:
 	// applied.
 	std::shared_ptr<const UI::RenderedText> render(const std::string& text,
 	                                               uint16_t w = 0) override {
-		const std::string hash = boost::lexical_cast<std::string>(w) + text;
+		const std::string hash = as_string(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
 		if (rendered_text == nullptr) {
 			// TODO(Nordfriese): There are two possibilities to make this function thread-safe.

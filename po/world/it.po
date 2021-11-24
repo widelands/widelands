@@ -3,20 +3,21 @@
 # 
 # Translators:
 # Aba Baba <pietrodenicola2014@gmail.com>, 2020
+# Alen Ciga, 2021
 # Filippo Montano, 2020
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # tbcrew <light@twobeers.net>, 2021
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
-# Samuele Battarra <battarsa@email.it>, 2020
+# Samuele Battarra <battarsa@email.it>, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-10-18 18:39+0000\n"
+"Last-Translator: Alen Ciga\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:119
+#: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"
 msgstr "Tasso"
 
@@ -88,7 +89,7 @@ msgstr "Bisonte"
 msgid "Wolf"
 msgstr "Lupo"
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:176
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
@@ -753,11 +754,11 @@ msgstr "Varie"
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr "Artefatti"
+msgstr "Manufatti"
 
 #: ../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Questi oggetti inamovibili sono usati nella condizione di vittoria \"artefatti\""
+msgstr "Questi oggetti inamovibili sono usati nella condizione di vittoria “manufatti”."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:220
@@ -819,23 +820,27 @@ msgstr "Inverno"
 msgid "Desert"
 msgstr "Deserto"
 
-#: ../../data/world/resources/init.lua:110
+#: ../../data/world/resources/coal/init.lua:110
 msgid "Coal"
 msgstr "Carbone"
 
-#: ../../data/world/resources/init.lua:126
+#: ../../data/world/resources/fish/init.lua:7
+msgid "Fish"
+msgstr "Pesce"
+
+#: ../../data/world/resources/gold/init.lua:7
 msgid "Gold"
 msgstr "Oro"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/iron/init.lua:7
 msgid "Iron"
 msgstr "Ferro"
 
-#: ../../data/world/resources/init.lua:158
+#: ../../data/world/resources/stones/init.lua:7
 msgid "Stones"
 msgstr "Pietre"
 
-#: ../../data/world/resources/init.lua:174
+#: ../../data/world/resources/water/init.lua:7
 #: ../../data/world/terrains/desert/water/init.lua:5
 #: ../../data/world/terrains/summer/water/init.lua:5
 #: ../../data/world/terrains/wasteland/water/init.lua:5
@@ -843,11 +848,7 @@ msgstr "Pietre"
 msgid "Water"
 msgstr "Acqua"
 
-#: ../../data/world/resources/init.lua:190
-msgid "Fish"
-msgstr "Pesce"
-
-#: ../../data/world/terrains/desert/beach/init.lua:177
+#: ../../data/world/terrains/desert/beach/init.lua:179
 #: ../../data/world/terrains/summer/beach/init.lua:5
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5
@@ -1017,19 +1018,19 @@ msgstr "Banchi di ghiaccio 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Taiga 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Taiga 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Taiga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

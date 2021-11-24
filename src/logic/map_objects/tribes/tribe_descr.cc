@@ -148,8 +148,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
-     carrier_(Widelands::INVALID_INDEX),
-     carrier2_(Widelands::INVALID_INDEX),
      geologist_(Widelands::INVALID_INDEX),
      soldier_(Widelands::INVALID_INDEX),
      ship_(Widelands::INVALID_INDEX),
@@ -169,7 +167,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   /** TRANSLATORS: Example: Loading Barbarians: Buildings (2/6) */
-		   (boost::format(_("Loading %1%: %2% (%3%/%4%)")) % descname() % str % i % 6).str()));
+		   bformat(_("Loading %1%: %2% (%3%/%4%)"), descname(), str, i, 6)));
 	};
 
 	try {
@@ -210,6 +208,19 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		verb_log_info("┃    Finalizing");
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
+		}
+
+		if (table.has_key("fastplace")) {
+			std::unique_ptr<LuaTable> fp = table.get_table("fastplace");
+			for (const std::string& key : fp->keys<std::string>()) {
+				const std::string& val = fp->get_string(key);
+				if (has_building(building_index(val))) {
+					fastplace_defaults_.emplace(key, val);
+				} else {
+					log_warn(
+					   "fastplace: tribe %s does not use building '%s'", name().c_str(), val.c_str());
+				}
+			}
 		}
 
 		// TODO(Nordfriese): Require these strings after v1.1
@@ -481,14 +492,23 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 		}
 	}
 
+	if (table.has_key("carriers")) {
+		for (const std::string& name : table.get_table("carriers")->array_entries<std::string>()) {
+			carriers_.push_back(add_special_worker(name, descriptions));
+		}
+	} else {
+		log_warn("Tribe %s: Specifying `carrier`/`carrier2` instead of `carriers` is deprecated",
+		         name().c_str());
+		if (table.has_key("carrier")) {
+			carriers_.push_back(add_special_worker(table.get_string("carrier"), descriptions));
+		}
+		if (table.has_key("carrier2")) {
+			carriers_.push_back(add_special_worker(table.get_string("carrier2"), descriptions));
+		}
+	}
+
 	if (table.has_key("builder")) {
 		builder_ = add_special_worker(table.get_string("builder"), descriptions);
-	}
-	if (table.has_key("carrier")) {
-		carrier_ = add_special_worker(table.get_string("carrier"), descriptions);
-	}
-	if (table.has_key("carrier2")) {
-		carrier2_ = add_special_worker(table.get_string("carrier2"), descriptions);
 	}
 	if (table.has_key("geologist")) {
 		geologist_ = add_special_worker(table.get_string("geologist"), descriptions);
@@ -660,14 +680,6 @@ DescriptionIndex TribeDescr::builder() const {
 	assert(descriptions_.worker_exists(builder_));
 	return builder_;
 }
-DescriptionIndex TribeDescr::carrier() const {
-	assert(descriptions_.worker_exists(carrier_));
-	return carrier_;
-}
-DescriptionIndex TribeDescr::carrier2() const {
-	assert(descriptions_.worker_exists(carrier2_));
-	return carrier2_;
-}
 DescriptionIndex TribeDescr::geologist() const {
 	assert(descriptions_.worker_exists(geologist_));
 	return geologist_;
@@ -809,11 +821,9 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 	if (builder_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'builder' not defined");
 	}
-	if (carrier_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special worker 'carrier' not defined");
-	}
-	if (carrier2_ == Widelands::INVALID_INDEX) {
-		throw GameDataError("special worker 'carrier2' not defined");
+	if (carriers_.size() < 2) {
+		throw GameDataError(
+		   "only %d type(s) of carriers defined", static_cast<int>(carriers_.size()));
 	}
 	if (geologist_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special worker 'geologist' not defined");
@@ -875,7 +885,7 @@ void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descrip
 		}
 		if (percent_to_use < 1) {
 			throw GameDataError(
-			   "%s: Training sites without predefined proportions add up to < 1%% and "
+			   "%s: Training sites without predefined proportions add up to < 1%%, and "
 			   "will never be built: %d",
 			   name().c_str(), used_percent);
 		}

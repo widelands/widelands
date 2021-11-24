@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Mikel Alzibar <mikelalzibar@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"PO-Revision-Date: 2021-11-16 12:04+0000\n"
+"Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,8 +19,8 @@ msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Not yet implemented"
-msgstr ""
+msgstr "Garatu gabe oraindik"
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Sorry, this map is not yet implemented."
-msgstr ""
+msgstr "Barkatu, mapa hau garatu gabe dago oraindik."

@@ -133,11 +133,13 @@ void Statebox::set_enabled(bool const enabled) {
  *
  * Args: on  true if the checkbox should be checked
  */
-void Statebox::set_state(bool const on) {
+void Statebox::set_state(bool const on, const bool send_signal) {
 	if (on ^ ((flags_ & Is_Checked) > 1)) {
 		set_flags(Is_Checked, on);
-		changed();
-		changedto(on);
+		if (send_signal) {
+			changed();
+			changedto(on);
+		}
 	}
 }
 

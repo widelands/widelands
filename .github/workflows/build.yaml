@@ -30,7 +30,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -79,7 +79,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev clang-tidy python-yaml -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev clang-tidy python-yaml -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -94,7 +94,7 @@ jobs:
         mkdir build
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* > ../clang-tidy.log
+        python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* | tee ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
@@ -111,12 +111,12 @@ jobs:
           - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-10
-          - clang-9
+          - clang-12
+          - clang-11
           - clang-7
           - clang-6.0
+          - g++-11
           - g++-10
-          - g++-9
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-5
@@ -132,11 +132,19 @@ jobs:
             os: ubuntu-18.04
             config: Release
     runs-on: ${{ matrix.os }}
+    env:
+      SDL_VIDEODRIVER: 'x11'
+      DISPLAY: ':99.0'
+      # TODO: Under Xvfb, the usual X11 memory leaks show up as an unsymbolized
+      # <unknown module> making them impossible to suppress. So we disable all
+      # memory leaks checking in the testsuite for now.
+      ASAN_OPTIONS: 'detect_leaks=0'
+      LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
     steps:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-gnutls-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -154,24 +162,19 @@ jobs:
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         sleep 1m
-        export SDL_VIDEODRIVER=x11
-        export DISPLAY=:99.0
         # Ignore transient SDL errors (exit code 2)
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
-      run: |
-        export SDL_VIDEODRIVER=x11
-        export DISPLAY=:99.0
-        ./regression_test.py -b build/src/widelands
+      run: ./regression_test.py -b build/src/widelands
 
 
   windows:
@@ -197,20 +200,8 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost mingw-w64-$env:archname-curl unzip
-    - name: Fix CURL
-      # Replace libcurl.a with proper static version
-      run: |
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:bits = "64"
-        } else {
-          $env:bits = "32"
-        }
-        $env:curl = "7.74.0"
-        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
-        curl -Lo curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
-        unzip curl.zip
-        mv -Force curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost
+        pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -262,13 +253,13 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macOS-latest
+    runs-on: macos-11
     steps:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost curl ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf dylibbundler
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -277,7 +268,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
@@ -287,5 +278,5 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 10.5 AppImage
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg

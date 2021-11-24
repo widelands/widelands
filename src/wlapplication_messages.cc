@@ -23,9 +23,8 @@
 #include <iostream>
 #include <regex>
 
-#include <boost/format.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 
 constexpr size_t kIndent = 23;
 constexpr size_t kTextWidth = 50;
@@ -132,7 +131,6 @@ void fill_parameter_vector() {
 	  {"", "numpad_diagonalscrolling", _("[true|false*]"),
 		_("Allow diagonal scrolling with the numeric keypad"), true},
 	  {"", "game_clock", _("[true|false*]"), _("Display system time in the info panel"), true},
-	  {"", "ctrl_zoom", _("[true|false*]"), _("Zoom only when Ctrl is pressed"), true},
 	  {"", "single_watchwin", _("[true|false*]"), _("Use single watchwindow mode"), true},
 	  {"", "transparent_chat", _("[true*|false]"),
 		_("Show in-game chat with transparent background"), true},
@@ -159,8 +157,11 @@ void fill_parameter_vector() {
 	  {"", "registered", _("[true|false*]"),
 		_("Whether the used metaserver login is for a registered user"), true},
 	  {"", "password_sha1", _("[...]"), _("The hashed password for online logins"), true},
-	  {"", "addon_server", _("URI"),
-		_("Connect to a different github repository and branch from the add-ons manager"), false},
+	  {"", "addon_server_ip", _("IP"),
+		_("Connect to a different server address from the add-ons manager"), false},
+	  {"", "addon_server_port", _("n"),
+		_("Connect to a different server port from the add-ons manager"), false},
+
 	  /// Interface options
 	  {_("Graphic options:"), "fullscreen", _("[true|false*]"),
 		_("Whether to use the whole display for the game screen"), false},
@@ -208,6 +209,10 @@ void fill_parameter_vector() {
 		true},
 	  /// Others
 	  {_("Others:"), "verbose", "", _("Enable verbose debug messages"), false},
+	  {"", "verbose-i18n", "",
+		_("Print all strings as they are translated. "
+		  "This helps with tracing down bugs with internationalization."),
+		true},
 	  {"", "version", "", _("Only print version and exit"), false},
 	  {"", "help", "", _("Show this help"), false},
 	  {"", "help-all", "", _("Show this help with all available config options"), false},
@@ -241,9 +246,7 @@ void show_usage(const std::string& build_id,
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << (boost::format(_("This is Widelands Version %s")) %
-	              (boost::format("%s(%s)") % build_id % build_type).str())
-	                .str()
+	          << bformat(_("This is Widelands Version %s"), bformat("%s(%s)", build_id, build_type))
 	          << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {

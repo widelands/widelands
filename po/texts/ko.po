@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-24 13:29+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-07 04:31+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +51,7 @@ msgstr "Widelands 허가서 정보"
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr "저작권 2002 - %1% 와이드랜드 개발 팀"
+msgstr "저작권 2002 - %1% 와이드랜드 개발 팀."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -458,7 +458,7 @@ msgstr "깃발의 색깔을 가진 선수. 둘 이상의 클라이언트가 동�
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다."
+msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -523,7 +523,7 @@ msgstr "아마존은 나무를 좋아합니다. 정글 보호자의 오두막을
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
 msgstr "희귀한 숲은 아마존 경제의 중추입니다. 희귀한 나무 농장을 건설하여 이 숲을위한 특별한 나무를 심으십시오."
 
@@ -537,6 +537,48 @@ msgstr "희귀한 나무는 희귀 나무 벌목공의 오두막으로 개선된
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
 msgstr "음식은 숯불로 말립니다. 꾸준한 공급을 보장하십시오."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "덩굴나무 나무꾼은 근처 나무에서 덩굴을 수확하지만 이 과정에서 나무는 해를 입지 않습니다. "
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "물은 아마존에게 생명입니다. 물을 모으는 사람들은 부족에 중요한 봉사를 수행합니다. "
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "사금 캐기는 효율성과 신선도를 위해 가능한 한 가까운 곳에서 더 잘 공급되는 꾸준한 물의 흐름을 필요로 합니다."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "희귀 나무 농장의 재고 수준은 희귀 나무 농장에 의해 감시되고, 정글 달인들은 경제적 필요에 따라 심을 것입니다."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr ""
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "정글 달인들은 정원 가꾸기 가게나 희귀한 나무 농장에서 일하기 전에 정글을 지키는 사람으로 일하면서 그들의 기술을 배웁니다."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""

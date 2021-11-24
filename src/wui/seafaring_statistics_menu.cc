@@ -24,6 +24,7 @@
 #include "economy/ship_fleet.h"
 #include "graphic/text_layout.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/box.h"
@@ -134,18 +135,18 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         kButtonSize,
         UI::ButtonStyle::kWuiPrimary,
         g_image_cache->get("images/ui_basic/fsel.png"),
-        (boost::format("%s<br>%s") %
-         as_tooltip_text_with_hotkey(
-            /** TRANSLATORS: Tooltip in the seafaring statistics window */
-            _("Open the selected ship’s window"),
-            shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow),
-            UI::PanelStyle::kWui) %
-         as_tooltip_text_with_hotkey(
-            /** TRANSLATORS: Tooltip in the seafaring statistics window */
-            _("Go to the selected ship and open its window"),
-            shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto),
-            UI::PanelStyle::kWui))
-           .str()),
+        bformat(
+           "%s<br>%s",
+           as_tooltip_text_with_hotkey(
+              /** TRANSLATORS: Tooltip in the seafaring statistics window */
+              _("Open the selected ship’s window"),
+              shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow),
+              UI::PanelStyle::kWui),
+           as_tooltip_text_with_hotkey(
+              /** TRANSLATORS: Tooltip in the seafaring statistics window */
+              _("Go to the selected ship and open its window"),
+              shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto),
+              UI::PanelStyle::kWui))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
@@ -568,4 +569,31 @@ void SeafaringStatisticsMenu::fill_table() {
 		// Fix column width. Because no entries were added, the table didn't layout itself
 		table_.layout();
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_seafaring;
+			r.create();
+			assert(r.window);
+			SeafaringStatisticsMenu& m = dynamic_cast<SeafaringStatisticsMenu&>(*r.window);
+			m.filter_ships(static_cast<ShipFilterStatus>(fr.unsigned_8()));
+			m.table_.select(fr.unsigned_32());
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("seafaring statistics menu: %s", e.what());
+	}
+}
+void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(static_cast<uint8_t>(ship_filter_));
+	fw.unsigned_32(table_.selection_index());
 }

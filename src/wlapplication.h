@@ -29,6 +29,7 @@
 #endif
 #endif
 
+#include <atomic>
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -46,6 +47,9 @@ class Panel;
 namespace Widelands {
 class Game;
 }
+
+/** Returns the widelands executable path. */
+std::string get_executable_directory(bool logdir = true);
 
 /// Thrown if a commandline parameter is faulty
 struct ParameterError : public std::runtime_error {
@@ -68,7 +72,9 @@ struct InputCallback {
 	bool (*mouse_move)(const uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool (*key)(bool down, SDL_Keysym code);
 	bool (*textinput)(const std::string& text);
-	bool (*mouse_wheel)(uint32_t which, int32_t x, int32_t y);
+	bool (*mouse_wheel)(const int32_t x,           // The number of horizontal scroll ticks
+	                    const int32_t y,           // The number of vertical scroll ticks
+	                    const uint16_t modstate);  // Modifier keys pressed at the time of the event
 };
 
 /// You know main functions, of course. This is the main struct.
@@ -175,9 +181,16 @@ struct WLApplication {
 	void set_mouse_lock(bool locked);
 	// @}
 
+	const std::string& get_datadir() const {
+		return datadir_;
+	}
+
 	// Handle the given pressed key. Returns true when key was
 	// handled.
 	bool handle_key(bool down, const SDL_Keycode& keycode, int modifiers);
+	void enable_handle_key(bool enable) {
+		handle_key_enabled_ = enable;
+	}
 
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
@@ -247,8 +260,11 @@ private:
 	/// used to cancel the resulting SDL_MouseMotionEvent.
 	Vector2i mouse_compensate_warp_;
 
+	/// Makes it possible to disable the fullscreen and screenshot shortcuts
+	bool handle_key_enabled_;
+
 	/// true if an external entity wants us to quit
-	bool should_die_;
+	std::atomic_bool should_die_;
 
 	std::string homedir_;
 #ifdef USE_XDG

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: English (United States) (http://www.transifex.com/widelands/widelands/language/en_US/)\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:119
+#: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Wolf"
 msgstr ""
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:176
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
@@ -811,23 +811,27 @@ msgstr ""
 msgid "Desert"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:110
+#: ../../data/world/resources/coal/init.lua:110
 msgid "Coal"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:126
+#: ../../data/world/resources/fish/init.lua:7
+msgid "Fish"
+msgstr ""
+
+#: ../../data/world/resources/gold/init.lua:7
 msgid "Gold"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/iron/init.lua:7
 msgid "Iron"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:158
+#: ../../data/world/resources/stones/init.lua:7
 msgid "Stones"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:174
+#: ../../data/world/resources/water/init.lua:7
 #: ../../data/world/terrains/desert/water/init.lua:5
 #: ../../data/world/terrains/summer/water/init.lua:5
 #: ../../data/world/terrains/wasteland/water/init.lua:5
@@ -835,11 +839,7 @@ msgstr ""
 msgid "Water"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:190
-msgid "Fish"
-msgstr ""
-
-#: ../../data/world/terrains/desert/beach/init.lua:177
+#: ../../data/world/terrains/desert/beach/init.lua:179
 #: ../../data/world/terrains/summer/beach/init.lua:5
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5

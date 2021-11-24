@@ -44,7 +44,7 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
                 0,
                 width,
                 height,
-                (boost::format(_("Help: %s")) % caption).str()),
+                bformat(_("Help: %s"), caption)),
      textarea_(
         new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
@@ -96,7 +96,6 @@ bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 bool HelpWindow::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;

@@ -19,10 +19,9 @@
 
 #include "wui/building_statistics_menu.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
 #include "graphic/style_manager.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -37,7 +36,7 @@ constexpr int kLabelHeight = 18;
 constexpr int kSpinboxWidth = 4 * kBuildGridCellWidth;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
-constexpr Duration kUpdateTimeInGametimeMs = Duration(1000);  //  1 second, gametime
+constexpr Duration kUpdateTimeInGametimeMs(1000);  //  1 second, gametime
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -433,8 +432,8 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
-	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
-	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
+	   new UI::Button(button_box, bformat("building_button%s", id), 0, 0, kBuildGridCellWidth,
+	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
 	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	                  UI::Button::VisualState::kFlat);
 	building_buttons_[id]->set_disable_style(UI::ButtonDisableStyle::kMonochrome |
@@ -690,7 +689,7 @@ void BuildingStatisticsMenu::update() {
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
-				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
+				const std::string perc_str = bformat(_("%i%%"), percent);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -708,8 +707,7 @@ void BuildingStatisticsMenu::update() {
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
                                                                          style_.high_color();
 				const std::string perc_str =
-				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
-				      .str();
+				   bformat(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -728,9 +726,9 @@ void BuildingStatisticsMenu::update() {
 		   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
 		if (can_construct_this_building) {
 			/** TRANSLATORS: Buildings: owned / under construction */
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
+			owned_text = bformat(_("%1%/%2%"), nr_owned, nr_build);
 		} else {
-			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
+			owned_text = bformat(_("%1%/%2%"), nr_owned, "–");
 		}
 		set_labeltext(
 		   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());
@@ -785,4 +783,42 @@ void BuildingStatisticsMenu::set_current_building_type(Widelands::DescriptionInd
 void BuildingStatisticsMenu::low_production_changed() {
 	low_production_ = unproductive_threshold_.get_value();
 	update();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_buildings;
+			r.create();
+			assert(r.window);
+			BuildingStatisticsMenu& m = dynamic_cast<BuildingStatisticsMenu&>(*r.window);
+			m.unproductive_threshold_.set_value(fr.unsigned_8());
+			m.low_production_changed();
+			m.tab_panel_.activate(fr.unsigned_8());
+			const std::string sel = fr.string();
+			if (!sel.empty()) {
+				m.set_current_building_type(ib.egbase().descriptions().safe_building_index(sel));
+			}
+			m.last_building_index_ = fr.signed_32();
+			return m;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("building statistics menu: %s", e.what());
+	}
+}
+void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(low_production_);
+	fw.unsigned_8(tab_panel_.active());
+	fw.string(
+	   current_building_type_ == Widelands::INVALID_INDEX ?
+         "" :
+         iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
+	fw.signed_32(last_building_index_);
 }

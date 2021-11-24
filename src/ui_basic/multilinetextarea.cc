@@ -19,8 +19,6 @@
 
 #include "ui_basic/multilinetextarea.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -179,8 +177,8 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
 }
 
-bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
-	return scrollbar_.is_enabled() && scrollbar_.handle_mousewheel(which, x, y);
+bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	return scrollbar_.is_enabled() && scrollbar_.handle_mousewheel(x, y, modstate);
 }
 bool MultilineTextarea::handle_key(bool down, SDL_Keysym code) {
 	return scrollbar_.handle_key(down, code);
@@ -199,14 +197,7 @@ void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode
 
 std::string MultilineTextarea::make_richtext() {
 	std::string temp = richtext_escape(text_);
-	// Double paragraphs should generate an empty line.
-	// We do this here rather than in the font renderer, because a single \n
-	// should only create a new line without any added space.
-	// \n\n or \n\n\n will give us 1 blank line,
-	// \n\n\n or \n\n\n\” will give us 2 blank lines etc.
-	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
-	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
-	boost::replace_all(temp, "\n", "<br>");
+	newlines_to_richtext(temp);
 
 	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),

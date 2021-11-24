@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: ks k, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -32,7 +32,7 @@ msgstr "첫번째 전초기지"
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
-msgstr "임시 본부 동쪽에 있는 노란 집 기호에 전초기지를 지으십시오"
+msgstr "임시 본부 동쪽에 있는 노란 집 기호에 전초기지를 지으십시오."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
@@ -491,7 +491,7 @@ msgid ""
 "sufficient for the moment being."
 msgstr ""
 "하지만 문제가 있는데, 만약 우리가 대리석을 모두 기둥을 깎는데 사용하면, 다 떨어지겠지요. 그래서 우리는 경제 구성에서 대리석 기둥의 "
-"구성을 더 적은 양으로 낮춰야만 해요. 제 생각에는 네 개의 기둥이 여분으로 확보되면 거의 다 될 것 같아요. "
+"구성을 더 적은 양으로 낮춰야만 해요. 제 생각에는 네 개의 기둥이 여분으로 확보되면 거의 다 될 것 같아요."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
@@ -602,11 +602,9 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
 msgid ""
 "So, let’s think this over. To weave cloth we need some wool from a sheep "
-"farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
+"farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
-"자, 다시 생각해 보죠. 옷감을 직조하라면 양 목장에서 양털이 있어야 합니다. 양 목장이 운영되려면 밀과 물이 있어야 합니다. 그러면, "
-"큰 건물을 지을 공간을 찾아 농장을 먼저 짓습니다."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375

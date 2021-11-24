@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "economy/economy.h"
 #include "graphic/style_manager.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
@@ -33,7 +34,7 @@ static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_worke
 
 static inline std::string
 color_tag(const RGBColor& c, const std::string& text1, const std::string& text2) {
-	return (boost::format(_("%1$s %2$s")) % StyleManager::color_tag(text1, c) % text2).str();
+	return bformat(_("%1$s %2$s"), StyleManager::color_tag(text1, c), text2);
 }
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
@@ -50,21 +51,21 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
            different background colors; each icon's color indicates whether the stock is higher or
            lower than the economy target setting. Very little space is available. */
         _("Evaluate"),
-        (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>") %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-            .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(
-               colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(colors_.alternative_medium_color(),
-                                   _("Yellow:"),
-                                   _("Stock is equal to the target"))) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(colors_.alternative_high_color(),
-                                   _("Green:"),
-                                   _("Stock is higher than the target"))))
-           .str()) {
+        bformat(
+           "<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>",
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+              .as_font_tag(_("Compare stocked amounts to economy target quantities")),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(
+                 colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(colors_.alternative_medium_color(),
+                                     _("Yellow:"),
+                                     _("Stock is equal to the target"))),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(colors_.alternative_high_color(),
+                                     _("Green:"),
+                                     _("Stock is higher than the target"))))) {
 	set_center_panel(&main_box_);
 
 	all_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE);
@@ -151,4 +152,33 @@ void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
 			}
 		}
 	}
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r =
+			   dynamic_cast<InteractivePlayer&>(ib).menu_windows_.stats_stock;
+			r.create();
+			assert(r.window);
+			StockMenu& sm = dynamic_cast<StockMenu&>(*r.window);
+
+			sm.tabs_.activate(fr.unsigned_8());
+			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8());
+
+			return sm;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Stock Menu", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("stock menu: %s", e.what());
+	}
+}
+void StockMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.unsigned_8(tabs_.active());
+	fw.unsigned_8(solid_icon_backgrounds_.get_state() ? 1 : 0);
 }

@@ -291,9 +291,8 @@ void LaunchMPG::refresh() {
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
-			   (boost::format(_("Unable to load the win condition script file ‘%s’.")) %
-			    settings_.get_win_condition_script())
-			      .str());
+			   bformat(_("Unable to load the win condition script file ‘%s’."),
+			           settings_.get_win_condition_script()));
 
 		} catch (LuaTableKeyError& e) {
 			log_err("LaunchMPG: Error loading win condition: %s %s\n",
@@ -351,8 +350,7 @@ void LaunchMPG::load_previous_playerdata() {
 	   settings_.settings().mapname, "", "", "", settings_.settings().players.size(), true);
 
 	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
-		Section* s =
-		   prof.get_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
+		Section* s = prof.get_section(bformat("player_%u", static_cast<unsigned int>(i)));
 		if (s == nullptr) {
 			// Due to asynchronous notifications, the client can crash on savegame change when number
 			// of players goes down. So, we abort if the section does not exist to prevent crashes.
@@ -409,7 +407,7 @@ void LaunchMPG::load_map_info() {
 	map.set_filename(settings_.settings().mapfilename);
 	{
 		std::unique_ptr<i18n::GenericTextdomain> td(
-		   AddOns::create_correct_textdomain(settings_.settings().mapfilename));
+		   AddOns::create_textdomain_for_map(settings_.settings().mapfilename));
 		ml->preload_map(true, nullptr);
 	}
 

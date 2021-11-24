@@ -51,7 +51,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 		Profile prof;
 		try {
 			const std::string profile_filename =
-			   (boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
+			   bformat(kFilenameTemplate, static_cast<unsigned int>(p));
 			prof.read(profile_filename.c_str(), nullptr, fs);
 		} catch (...) {
 			continue;
@@ -126,7 +126,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
 						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
-						   get_coords("position", extent, Coords::null(), s), serial, nullptr, status)));
+						   get_coords("position", extent, Coords::null(), s), serial, "", status)));
 					} else {
 
 						messages->add_message(std::unique_ptr<Message>(new Message(
@@ -189,11 +189,9 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			}
 			s.set_string("subtype", message.sub_type().c_str());
 		}
-		fs.ensure_directory_exists(
-		   (boost::format(kPlayerDirnameTemplate) % static_cast<unsigned int>(p)).str());
+		fs.ensure_directory_exists(bformat(kPlayerDirnameTemplate, static_cast<unsigned int>(p)));
 
-		const std::string profile_filename =
-		   (boost::format(kFilenameTemplate) % static_cast<unsigned int>(p)).str();
+		const std::string profile_filename = bformat(kFilenameTemplate, static_cast<unsigned int>(p));
 		prof.write(profile_filename.c_str(), false, fs);
 	}
 }

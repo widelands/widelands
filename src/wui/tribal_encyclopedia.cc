@@ -42,7 +42,8 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
 		cr->push_arg(tribe.name());
 		upcast(Widelands::Game, game, &parent.egbase());
-		if (game->game_controller()->get_game_type() == GameController::GameType::kSingleplayer) {
+		if (game->game_controller() == nullptr ||
+		    game->game_controller()->get_game_type() == GameController::GameType::kSingleplayer) {
 			cr->push_arg("singleplayer");
 		} else {
 			cr->push_arg("multiplayer");
@@ -52,10 +53,9 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 	} catch (LuaError& err) {
 		log_err_time(parent.egbase().get_gametime(),
 		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());
-		UI::WLMessageBox wmb(
-		   &parent, UI::WindowStyle::kWui, _("Error!"),
-		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
-		   UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
+		                     bformat("Error loading script for tribal encyclopedia:\n%s", err.what()),
+		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
 

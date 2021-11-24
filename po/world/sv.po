@@ -5,13 +5,14 @@
 # Daniel Nylander <po@danielnylander.se>, 2005
 # D M <kamera001dm@gmail.com>, 2017
 # D M <kamera001dm@gmail.com>, 2021
+# Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-08-22 19:20+0000\n"
+"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/world/critters/badger/init.lua:119
+#: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"
 msgstr "Grävling"
 
@@ -83,7 +84,7 @@ msgstr "Visent"
 msgid "Wolf"
 msgstr "Varg"
 
-#: ../../data/world/immovables/artifacts/artifact00/init.lua:167
+#: ../../data/world/immovables/artifacts/artifact00/init.lua:176
 #: ../../data/world/immovables/artifacts/artifact01/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
@@ -814,23 +815,27 @@ msgstr "Vinter"
 msgid "Desert"
 msgstr "Öken"
 
-#: ../../data/world/resources/init.lua:110
+#: ../../data/world/resources/coal/init.lua:110
 msgid "Coal"
 msgstr "Kol"
 
-#: ../../data/world/resources/init.lua:126
+#: ../../data/world/resources/fish/init.lua:7
+msgid "Fish"
+msgstr "Fisk"
+
+#: ../../data/world/resources/gold/init.lua:7
 msgid "Gold"
 msgstr "Guld"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/iron/init.lua:7
 msgid "Iron"
 msgstr "Järn"
 
-#: ../../data/world/resources/init.lua:158
+#: ../../data/world/resources/stones/init.lua:7
 msgid "Stones"
 msgstr "Sten"
 
-#: ../../data/world/resources/init.lua:174
+#: ../../data/world/resources/water/init.lua:7
 #: ../../data/world/terrains/desert/water/init.lua:5
 #: ../../data/world/terrains/summer/water/init.lua:5
 #: ../../data/world/terrains/wasteland/water/init.lua:5
@@ -838,11 +843,7 @@ msgstr "Sten"
 msgid "Water"
 msgstr "Vatten"
 
-#: ../../data/world/resources/init.lua:190
-msgid "Fish"
-msgstr "Fisk"
-
-#: ../../data/world/terrains/desert/beach/init.lua:177
+#: ../../data/world/terrains/desert/beach/init.lua:179
 #: ../../data/world/terrains/summer/beach/init.lua:5
 #: ../../data/world/terrains/wasteland/beach/init.lua:5
 #: ../../data/world/terrains/winter/beach/init.lua:5
@@ -1012,19 +1013,19 @@ msgstr "Isflak 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Taiga 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Taiga 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Taiga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

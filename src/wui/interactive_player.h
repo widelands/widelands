@@ -65,7 +65,6 @@ public:
 	void set_player_number(uint32_t plrn);
 
 	// For load
-	void cleanup_for_load() override;
 	void postload() override;
 	void think() override;
 	void draw(RenderTarget& dst) override;
@@ -84,6 +83,9 @@ public:
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
+
+	/** Open an attack box for the building at the given position, if applicable. */
+	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
@@ -118,10 +120,13 @@ private:
 
 	// Statistics menu on the toolbar
 	UI::Dropdown<StatisticsMenuEntry> statisticsmenu_;
+
+public:
 	UI::UniqueWindow::Registry objectives_;
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
+private:
 	const Image* grid_marker_pic_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

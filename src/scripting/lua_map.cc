@@ -320,11 +320,14 @@ WaresWorkersMap get_valid_workers_for(const Widelands::RoadBase& r) {
 	if (r.descr().type() == Widelands::MapObjectType::WATERWAY) {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().ferry(), 1));
 	} else {
-		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
 		upcast(const Widelands::Road, road, &r);
 		assert(road);
 		if (road->is_busy()) {
-			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+			for (Widelands::DescriptionIndex c : r.owner().tribe().carriers()) {
+				valid_workers.insert(WorkerAmount(c, 1));
+			}
+		} else {
+			valid_workers.insert(WorkerAmount(r.owner().tribe().carriers()[0], 1));
 		}
 	}
 
@@ -923,9 +926,8 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	case Widelands::MapObjectType::SHIP_FLEET:
 	case Widelands::MapObjectType::FERRY_FLEET:
 	case Widelands::MapObjectType::WARE:
-		throw LuaError((boost::format("upcasted_map_object_to_lua: Unknown %i") %
-		                static_cast<int>(mo->descr().type()))
-		                  .str());
+		throw LuaError(
+		   bformat("upcasted_map_object_to_lua: Unknown %i", static_cast<int>(mo->descr().type())));
 	}
 	NEVER_HERE();
 }
@@ -1792,6 +1794,7 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, buildings),
    PROP_RO(LuaTribeDescription, builder),
+   PROP_RO(LuaTribeDescription, carriers),
    PROP_RO(LuaTribeDescription, carrier),
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, ferry),
@@ -1861,26 +1864,51 @@ int LuaTribeDescription::get_builder(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: carriers
+
+      .. versionadded:: 1.1
+
+      (RO) An :class:`array` of the internal names of the carrier types that this tribe uses as
+      :class:`string`.
+*/
+
+int LuaTribeDescription::get_carriers(lua_State* L) {
+	const Widelands::TribeDescr& tribe = *get();
+	lua_newtable(L);
+	int counter = 0;
+	for (Widelands::DescriptionIndex c : tribe.carriers()) {
+		lua_pushinteger(L, ++counter);
+		lua_pushstring(L, tribe.get_worker_descr(c)->name());
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: carrier
+
+      .. deprecated:: 1.1 Use :attr:`carriers` instead.
 
       (RO) The internal name of the carrier type that this tribe uses as
       :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carrier())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carriers()[0])->name());
 	return 1;
 }
 
 /* RST
    .. attribute:: carrier2
 
-      (RO) The internal name of the carrier2 type that this tribe uses as
+      .. deprecated:: 1.1 Use :attr:`carriers` instead.
+
+      (RO) The internal name of the secondary carrier type that this tribe uses as
       :class:`string`.
 */
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carrier2())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carriers()[1])->name());
 	return 1;
 }
 
@@ -8158,7 +8186,7 @@ int LuaField::__eq(lua_State* L) {
 }
 
 int LuaField::__tostring(lua_State* L) {
-	const std::string pushme = (boost::format("Field(%i,%i)") % coords_.x % coords_.y).str();
+	const std::string pushme = bformat("Field(%i,%i)", coords_.x, coords_.y);
 	lua_pushstring(L, pushme);
 	return 1;
 }

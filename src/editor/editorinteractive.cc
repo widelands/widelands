@@ -68,6 +68,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 #include "wui/toolbar.h"
@@ -473,7 +474,7 @@ void EditorInteractive::load(const std::string& filename) {
 	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
-	if (!ml.get()) {
+	if (!ml) {
 		throw WLWarning(
 		   _("Unsupported Format"),
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
@@ -498,6 +499,11 @@ void EditorInteractive::load(const std::string& filename) {
 }
 
 void EditorInteractive::cleanup_for_load() {
+	if (cleaning_up_) {
+		return;
+	}
+	cleaning_up_ = true;
+
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
 	// TODO(Nordfriese): …and then we can get rid of delete_world_and_tribes() as well
@@ -505,6 +511,8 @@ void EditorInteractive::cleanup_for_load() {
 	// This is needed so add-ons are configured correctly if current
 	// and previous map had different world add-on settings
 	egbase().delete_world_and_tribes();
+
+	cleaning_up_ = false;
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -868,6 +876,17 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	return InteractiveBase::handle_key(down, code);
 }
 
+bool EditorInteractive::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	int32_t change =
+	   get_mousewheel_change(MousewheelHandlerConfigID::kEditorToolsize, x, y, modstate);
+	if (change == 0) {
+		return false;
+	}
+	set_sel_radius_and_update_menu(
+	   std::max(0, std::min(static_cast<int32_t>(get_sel_radius()) + change, MAX_TOOL_AREA)));
+	return true;
+}
+
 void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex const which) {
 	if (which == EditorTool::First && &primary != tools_->current_pointer) {
 		if (primary.has_size_one()) {
@@ -914,13 +933,12 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		// during winter time freeze. We can consider rephrasing it after v1.0.
 		UI::WLMessageBox m(
 		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
-		   (boost::format(
-		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-		         "this problem to help us improve Widelands. You will find related messages in the "
-		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\nPlease add this information to your report.")) %
-		    e.what() % build_id() % build_type())
-		      .str(),
+		   bformat(
+		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		        "this problem to help us improve Widelands. You will find related messages in the "
+		        "standard output (stdout.txt on Windows). You are using build %2$s "
+		        "(%3$s).\nPlease add this information to your report."),
+		      e.what(), build_id(), build_type()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -950,8 +968,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Empty map file name");
 		}
 
-		Notifications::publish(
-		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		Notifications::publish(UI::NoteLoadingMessage(bformat(_("Loading map “%s”…"), filename)));
 		eia.load(filename);
 
 		egbase.postload_addons();

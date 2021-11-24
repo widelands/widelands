@@ -19,8 +19,6 @@
 
 #include <memory>
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "config.h"
@@ -166,7 +164,7 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 		json_building->add_string("helptext", get_helptext(*building, tribe));
 	}
 
-	json->write_to_file(*out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, bformat("%s_buildings.json", tribe.name()));
 	log_info("\n");
 }
 
@@ -191,7 +189,7 @@ void write_wares(const Widelands::TribeDescr& tribe, FileSystem* out_filesystem)
 		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
-	json->write_to_file(*out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, bformat("%s_wares.json", tribe.name()));
 	log_info("\n");
 }
 
@@ -223,7 +221,7 @@ void write_workers(const Widelands::TribeDescr& tribe, FileSystem* out_filesyste
 		}
 	}
 
-	json->write_to_file(*out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, bformat("%s_workers.json", tribe.name()));
 	log_info("\n");
 }
 
@@ -264,7 +262,7 @@ void write_tribes(const Widelands::EditorGameBase& egbase, FileSystem* out_files
 		std::unique_ptr<JSON::Object> json_tribe_for_file(new JSON::Object());
 		add_tribe_info(tribe_info, json_tribe_for_file.get());
 		json_tribe_for_file->write_to_file(
-		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str());
+		   *out_filesystem, bformat("tribe_%s.json", tribe_info.name));
 
 		const Widelands::TribeDescr& tribe =
 		   *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));

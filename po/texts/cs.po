@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-10 08:29+0000\n"
-"PO-Revision-Date: 2021-06-10 18:23+0000\n"
+"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"PO-Revision-Date: 2021-10-10 17:10+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -522,7 +522,7 @@ msgstr "Amazonky milují stromy. Postav dostatek chat ochránkyň džungle, aby 
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
-"Rare woods are the backbone of an amazon economy. Build rare tree "
+"Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
 msgstr "Vzácné dřeviny představují páteř amazonského hospodářství. Postav plantáž vzácných dřevin pro jejich výsadbu."
 
@@ -536,6 +536,48 @@ msgstr "Vzácné dřeviny jsou káceny zkušenými dřevorubkyněmi, které pře
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
 msgstr "Jídlo je sušeno za pomoci dřevěného uhlí. Zajisti jeho stabilní přísun."
+
+#: ../../data/txts/tips/amazons.lua:20
+msgid ""
+"Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
+"this process."
+msgstr "Sběračky lián sklízí liány z blízkých stromů, aniž by stromy během tohoto procesu poničily."
+
+#: ../../data/txts/tips/amazons.lua:24
+msgid ""
+"Water is life for the Amazons. Water gatherers perform an important service "
+"to their tribe."
+msgstr "Voda je pro amazonky život. Sběračky vody vykonávají pro svůj kmen důležitou službu."
+
+#: ../../data/txts/tips/amazons.lua:28
+msgid ""
+"Panning for gold requires a steady stream of water, better sourced as close "
+"as possible for efficiency and freshness."
+msgstr "Rýžování zlata potřebuje tekoucí vodu, kvůli výkonnosti je nejlépe ji mít co nejblíže."
+
+#: ../../data/txts/tips/amazons.lua:32
+msgid ""
+"Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
+"is only released near trees uninhabited by sentries."
+msgstr "Ochránkyně divoké fauny zajišťují zvěř pro lov a ryby pro rybaření. Zvěř je vypuštěna pouze v okolí stromů, které nejsou předělány na strážnice."
+
+#: ../../data/txts/tips/amazons.lua:36
+msgid ""
+"Rare wood stock levels are monitored by rare tree plantations, and jungle "
+"masters will plant according to economic requirements."
+msgstr "Zásoby vzácných dřevin jsou kontrolovány na plantáži vzácných dřevin a paní džungle je budou sázet na základě požadavků hospodářství."
+
+#: ../../data/txts/tips/amazons.lua:40
+msgid ""
+"Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
+"and lashing canoes together to form ships."
+msgstr "Lana jsou důležitá pro zpevnění staveb, šití pevného oblečení a spojování kánoí dohromady k vytvoření lodí."
+
+#: ../../data/txts/tips/amazons.lua:43
+msgid ""
+"Jungle masters learn their skills by working as jungle preservers before "
+"working in gardening centres or rare tree plantations."
+msgstr "Aby paní džungle získala dovednosti pro práci v zahradnictví nebo na plantáži vzácných dřevin, musí nejprve pracovat jako ochránkyně džungle. "
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -658,7 +700,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr "Na výrobu cihel potřebuješ žulu; na získání žuly potřebuješ lom, nebo kamenný důl; na postavení těchto budov jsou třeba cihly. Dávej si pozor, ať se nedostaneš do bezvýchodné situace!"
+msgstr "Na výrobu cihel potřebuješ žulu; na získání žuly potřebuješ lom, nebo důl na kámen; na postavení těchto budov jsou třeba cihly. Dávej si pozor, ať se nedostaneš do bezvýchodné situace!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
@@ -756,7 +798,7 @@ msgstr "Hospodářství se skládá ze staveb a vlajek propojených cestami. Zá
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Některé budovy, jako například obilné pole, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
+msgstr "Některé budovy, jako například statek, mají velmi malou pracovní oblast. Pokud je budova obklopena stromy nebo cestami, výroba se zastaví."
 
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
@@ -778,7 +820,7 @@ msgstr "Zrychluj nebo zpomaluj tempo hry pomocí %1%/%2%. Použij %3%/%4% pro v�
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr "Kurzorové šipky na klávesnici"
+msgstr "Klávesy šipek"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"

@@ -36,24 +36,6 @@ wl_library(wui_chat_ui
     widelands_options
 )
 
-wl_library(wui_economy_options
-  SRCS
-    economy_options_window.cc
-    economy_options_window.h
-  DEPENDS
-    economy
-    graphic
-    graphic_fonthandler
-    logic
-    logic_commands
-    logic_filesystem_constants
-    logic_map_objects
-    notifications
-    io_profile
-    ui_basic
-    wui_waresdisplay
-)
-
 wl_library(wui_mapview_pixelconstants
   SRCS
     mapviewpixelconstants.h
@@ -101,6 +83,7 @@ wl_library(wui_common_gamedetails
     base_i18n
     base_log
     base_macros
+    base_string
     base_time_string
     game_io
     graphic
@@ -134,6 +117,7 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
+    base_string
     graphic
     graphic_image_cache
     graphic_minimap_renderer
@@ -221,8 +205,8 @@ wl_library(wui
   SRCS
     actionconfirm.cc
     actionconfirm.h
-    attack_box.cc
-    attack_box.h
+    attack_window.cc
+    attack_window.h
     building_statistics_menu.cc
     building_statistics_menu.h
     buildingwindow.cc
@@ -233,6 +217,8 @@ wl_library(wui
     debugconsole.h
     dismantlesitewindow.cc
     dismantlesitewindow.h
+    economy_options_window.cc
+    economy_options_window.h
     encyclopedia_window.cc
     encyclopedia_window.h
     fieldaction.cc
@@ -319,6 +305,7 @@ wl_library(wui
     base_macros
     base_math
     base_multithreading
+    base_string
     base_time_string
     chat
     economy
@@ -340,6 +327,7 @@ wl_library(wui
     logic
     logic_constants
     logic_commands
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -348,8 +336,10 @@ wl_library(wui
     logic_map_objects
     logic_objectives
     logic_widelands_geometry
+    map_io
     network
     note_sound
+    notifications
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
@@ -358,7 +348,6 @@ wl_library(wui
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
-    wui_economy_options
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation

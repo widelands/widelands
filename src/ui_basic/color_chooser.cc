@@ -286,7 +286,7 @@ ColorChooser::ColorChooser(Panel* parent,
                kButtonSize,
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Red" */
-               _("R")),
+               pgettext("color", "R")),
      button_g_(&box_g_,
                "button_g",
                0,
@@ -295,7 +295,7 @@ ColorChooser::ColorChooser(Panel* parent,
                kButtonSize,
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Green" */
-               _("G")),
+               pgettext("color", "G")),
      button_b_(&box_b_,
                "button_b",
                0,
@@ -304,7 +304,7 @@ ColorChooser::ColorChooser(Panel* parent,
                kButtonSize,
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Blue" */
-               _("B")),
+               pgettext("color", "B")),
      button_default_(default_color ?
                         new Button(&buttonsbox_,
                                    "default_color",
@@ -467,7 +467,7 @@ void ColorChooser::set_color(const RGBColor& color) {
 }
 
 bool ColorChooser::handle_key(const bool down, const SDL_Keysym code) {
-	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+	if (down && code.sym == SDLK_RETURN) {
 		end_modal<Panel::Returncodes>(Panel::Returncodes::kOk);
 		return true;
 	}

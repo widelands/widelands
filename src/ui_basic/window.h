@@ -121,11 +121,17 @@ public:
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;
 	bool
 	handle_mousemove(uint8_t state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_tooltip() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
-	enum class WindowLayoutID { kNone, kFsMenuDefault, kFsMenuOptions, kFsMenuAbout };
+	enum class WindowLayoutID {
+		kNone,
+		kFsMenuDefault,
+		kFsMenuOptions,
+		kFsMenuKeyboardOptions,
+		kFsMenuAbout
+	};
 	virtual WindowLayoutID window_layout_id() const {
 		return WindowLayoutID::kNone;
 	}

@@ -24,6 +24,7 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -94,7 +95,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 					   init(true, showing_workarea_);
 					   tabs_->activate(active_tab);
 				   },
-				   false);
+				   true);
 			}
 			break;
 		// The building is no more. Next think() will call die().
@@ -295,8 +296,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
-				   (boost::format(_("Enhance to %s")) % building_descr.descname().c_str()).str() +
-				   "<br>" +
+				   bformat(_("Enhance to %s"), building_descr.descname()) + "<br>" +
 				   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 				      .header_font()
 				      .as_font_tag(_("Construction costs:")) +
@@ -395,7 +395,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (building->owner().tribe().safe_building_index(building->descr().name()) ==
 		    building->owner().tribe().scouts_house()) {
 			watch_button_ = new UI::Button(
-			   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   capsbuttons, "watchscout", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
 			watch_button_->sigclicked.connect([this]() { clicked_watch(); });
 			capsbuttons->add(watch_button_);
@@ -670,4 +670,32 @@ void BuildingWindow::update_expedition_button(bool expedition_was_canceled) {
 		expeditionbtn_->set_pic(g_image_cache->get("images/wui/buildings/cancel_expedition.png"));
 	}
 	expeditionbtn_->set_enabled(true);
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			const int32_t x = fr.signed_32();
+			const int32_t y = fr.signed_32();
+			const bool workarea = fr.unsigned_8();
+			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(
+			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
+			bw.tabs_->activate(fr.unsigned_8());
+			return bw;
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "Building Window", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("building window: %s", e.what());
+	}
+}
+void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	fw.signed_32(building_position_.x);
+	fw.signed_32(building_position_.y);
+	fw.unsigned_8(showing_workarea_ ? 1 : 0);
+	fw.unsigned_8(tabs_->active());
 }

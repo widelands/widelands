@@ -1,9 +1,4 @@
 #!/bin/sh
-echo " "
-echo "###########################################################"
-echo "#     Script to simplify the compilation of Widelands     #"
-echo "###########################################################"
-echo " "
 
 print_help () {
     # Print help for our options
@@ -40,7 +35,8 @@ print_help () {
     echo "The following options are available:"
     echo " "
     echo "-h or --help          Print this help."
-    echo " "
+    echo "-q or --quiet         Suppress most of compile.sh's output."
+    echo "-v or --verbose       Make compile.sh's output verbose."
     echo " "
     echo "Omission options and their overrides:"
     echo " "
@@ -62,8 +58,10 @@ print_help () {
     echo "                      Debug builds are created with AddressSanitizer by"
     echo "                      default."
     echo " "
-    echo "     Note: The ASan setting is overridden by setting the build type, so these"
-    echo "           options should be given after the build type option, when needed."
+    echo "-m or --no-tsan       Switch off the ThreadSanitizer (default)."
+    echo "+m or --with-tsan     Switch on the ThreadSanitizer."
+    echo "                      Can only be used with --no-asan, because AddressSanitizer"
+    echo "                      cannot be enabled at the same time."
     echo " "
     echo "-x or --without-xdg   Disable support for the XDG Base Directory Specification."
     echo "+x or --with-xdg      Enable support for the XDG Base Directory Specification."
@@ -126,28 +124,18 @@ BUILD_TRANSLATIONS="ON"
 BUILD_TESTS="ON"
 BUILD_TYPE="Debug"
 USE_FLTO="yes"
-USE_ASAN="ON"
+USE_ASAN="default"
+USE_ASAN_DEFAULT="ON"
+USE_TSAN="OFF"
 COMPILER="default"
 USE_XDG="ON"
 EXTRA_OPTS=""
+# Option for this script itself
+QUIET=0
 
 if [ -z "$COMPILE_DEFAULTS" ]; then
   COMPILE_DEFAULTS=.compile_defaults
 fi
-
-if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
-  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
-  echo "Using default compile options from '$COMPILE_DEFAULTS':"
-  echo "   $LOCAL_DEFAULTS"
-  echo " "
-  echo "Command line options:"
-  echo "   $@"
-  echo " "
-
-  # We want $LOCAL_DEFAULTS to be split, so no "" for it
-  set -- $LOCAL_DEFAULTS "$@"
-fi
-
 
 # try to set default number of cores automatically
 
@@ -179,6 +167,12 @@ else
   CORES=1
 fi
 
+OLD_CLI_ARGS="$@"
+if [ -f "$COMPILE_DEFAULTS" -a -r "$COMPILE_DEFAULTS" ]; then
+  read LOCAL_DEFAULTS <"$COMPILE_DEFAULTS"
+  # We want $LOCAL_DEFAULTS to be split, so no "" for it
+  set -- $LOCAL_DEFAULTS "$@"
+fi
 
 while [ $# -gt 0 ]
 do
@@ -189,6 +183,14 @@ do
     ;;
     +a|--with-asan)
       USE_ASAN="ON"
+    shift
+    ;;
+    -m|--no-tsan)
+      USE_TSAN="OFF"
+    shift
+    ;;
+    +m|--with-tsan)
+      USE_TSAN="ON"
     shift
     ;;
     -h|--help)
@@ -218,12 +220,16 @@ do
     ;;
     -r|--release)
       BUILD_TYPE="Release"
-      USE_ASAN="OFF"
+      if [ "${USE_ASAN}" = "default" ]; then
+        USE_ASAN="OFF"
+      fi
     shift
     ;;
     -d|--debug)
       BUILD_TYPE="Debug"
-      USE_ASAN="ON"
+      if [ "${USE_ASAN}" = "default" ] && [ "${USE_TSAN}" = "OFF" ]; then
+        USE_ASAN="ON"
+      fi
     shift
     ;;
     -t|--no-translations)
@@ -256,6 +262,14 @@ do
     ;;
     +w|--with-website)
       BUILD_WEBSITE="ON"
+    shift
+    ;;
+    -q|--quiet)
+      QUIET=1
+    shift
+    ;;
+    -v|--verbose)
+      QUIET=0
     shift
     ;;
     --gcc)
@@ -301,11 +315,47 @@ do
   esac
 done
 
+if [ "${USE_ASAN}" = "default" ]; then
+  if [ "${USE_TSAN}" = "ON" ]; then
+    USE_ASAN="OFF"
+  else
+    USE_ASAN="${USE_ASAN_DEFAULT}"
+  fi
+fi
+if [ "${USE_ASAN}" = "ON" ] && [ "${USE_TSAN}" = "ON" ]; then
+  echo " "
+  echo "Cannot compile with both Address and Thread Sanitizer enabled!"
+  exit 1
+fi
+
+if [ $QUIET -eq 0 ]; then
+  echo " "
+  echo "###########################################################"
+  echo "#     Script to simplify the compilation of Widelands     #"
+  echo "###########################################################"
+  echo " "
+
+  if [ -n "$LOCAL_DEFAULTS" ]; then
+    echo "Using default compile options from '$COMPILE_DEFAULTS':"
+    echo "   $LOCAL_DEFAULTS"
+    echo " "
+    echo "Command line options:"
+    echo "   $OLD_CLI_ARGS"
+    echo " "
+  fi
+fi
+
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
 CMD_ADD () {
   COMMANDLINE="$COMMANDLINE $@"
 }
+
+if [ $QUIET -ne 0 ]; then
+
+  CMD_ADD "$LOCAL_DEFAULTS $OLD_CLI_ARGS"
+
+else  # Start of verbose output section
 
 if [ -n "$EXTRA_OPTS" ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
@@ -390,6 +440,16 @@ else
   echo "You can use +a or --with-asan to switch it on."
   CMD_ADD "--no-asan"
 fi
+if [ $USE_TSAN = "ON" ]; then
+  echo "Will build with ThreadSanitizer."
+  echo "https://clang.llvm.org/docs/ThreadSanitizer.html"
+  echo "You can use -m or --no-tsan to switch it off."
+  CMD_ADD "--with-tsan"
+else
+  echo "Will build without ThreadSanitizer."
+  echo "You can use +m or --with-tsan to switch it on."
+  CMD_ADD "--no-tsan"
+fi
 if [ $USE_XDG = "ON" ]; then
   echo " "
   echo "Basic XDG Base Directory Specification will be used on Linux"
@@ -417,6 +477,8 @@ echo " "
 echo "###########################################################"
 echo " "
 
+fi  # End of verbose output section
+
 ######################################
 # Definition of some local variables #
 ######################################
@@ -439,12 +501,15 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   }
 
   set_buildtool () {
+    GENERATOR=""
     #Defaults to ninja, but if that is not found, we use make instead
     if [ `command -v ninja` ] ; then
       buildtool="ninja"
+      GENERATOR="-G Ninja"
     #On some systems (most notably Fedora), the binary is called ninja-build
     elif [ `command -v ninja-build` ] ; then
       buildtool="ninja-build"
+      GENERATOR="-G Ninja"
     #... and some systems refer to GNU make as gmake
     elif [ `command -v gmake` ] ; then
       buildtool="gmake"
@@ -462,11 +527,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
-    else
-      cmake .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
-    fi
+    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $buildtool -j $CORES
 
@@ -496,8 +557,10 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     # First check if this is an git checkout at all - only in that case,
     # creation of a script makes any sense.
     if [ -n "$(git status -s)" ]; then
-      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created"
-      git status
+      echo "You don't appear to be using Git, or your working tree is not clean. An update script will not be created."
+      if [ $QUIET -eq 0 ]; then
+        git status
+      fi
       return 0
     fi
       rm -f update.sh || true
@@ -528,7 +591,9 @@ echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
       chmod +x ./update.sh
-      echo "  -> The update script has successfully been created."
+      if [ $QUIET -eq 0 ]; then
+        echo "The update script has successfully been created."
+      fi
   }
 ######################################
 
@@ -553,6 +618,9 @@ compile_widelands
 move_built_files
 cd ..
 create_update_script
+
+if [ $QUIET -eq 0 ]; then  # Start of verbose output section
+
 echo " "
 echo "###########################################################"
 echo "# Congratulations! Widelands has been built successfully  #"
@@ -592,4 +660,8 @@ echo "#                                                         #"
 echo "# You can update Widelands via running ./update.sh        #"
 echo "# in the same directory that you ran this script in.      #"
 echo "###########################################################"
+
+else
+  echo "Widelands has been built successfully."
+fi  # End of verbose output section
 ######################################

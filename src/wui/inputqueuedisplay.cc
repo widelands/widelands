@@ -23,6 +23,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wui/interactive_base.h"
 
 constexpr int8_t kButtonSize = 25;
@@ -116,32 +117,104 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 }
 
 static inline std::string create_tooltip(const bool increase) {
-	return (boost::format("<p>%s%s%s</p>") %
-	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-	           .as_font_tag(
-	              increase ?
-                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Increase the number of wares you want to be stored here") :
-                    /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                    _("Decrease the number of wares you want to be stored here")) %
-	        as_listitem(increase ?
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Shift to increase all ware types at the same time") :
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Shift to decrease all ware types at the same time"),
-	                    UI::FontStyle::kWuiTooltip) %
-	        as_listitem(increase ?
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Ctrl to allow all of this ware") :
-                             /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                                option explanation */
-                             _("Hold down Ctrl to allow none of this ware"),
-	                    UI::FontStyle::kWuiTooltip))
-	   .str();
+	return bformat(
+	   "<p>%s%s%s</p>",
+	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+	      .as_font_tag(increase ?
+                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                         _("Increase the number of wares you want to be stored here") :
+                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+                         _("Decrease the number of wares you want to be stored here")),
+	   as_listitem(increase ?
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Shift to increase all ware types at the same time") :
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Shift to decrease all ware types at the same time"),
+	               UI::FontStyle::kWuiTooltip),
+	   as_listitem(increase ?
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Ctrl to allow all of this ware") :
+                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+                           option explanation */
+                        _("Hold down Ctrl to allow none of this ware"),
+	               UI::FontStyle::kWuiTooltip));
 }
+
+// TODO(Nordfriese): This is here to help debug issue #5052
+// clang-format off
+void InputQueueDisplay::nr_icons_assert() const {
+	if (nr_icons_ > 0) {
+		return;
+	}
+	MutexLock m(MutexLock::ID::kObjects);
+	const Widelands::Building& b = *building_.get(ibase_.egbase());
+	log_dbg("**************************************************\n"
+	        " The infamous nr_icons_ input queue display bug\n"
+	        " (issue #5052) has been triggered!\n"
+	        " Please report the following information under\n"
+	        " https://github.com/widelands/widelands/issues/5052\n"
+	        " to help us investigate and fix this issue.\n"
+	        "**************************************************\n");
+	log_dbg(" Main");
+	log_dbg("   nr_icons_        %7u", static_cast<unsigned>(nr_icons_));
+	log_dbg("   icons_.size()    %7u", static_cast<unsigned>(icons_.size()));
+	log_dbg("   can_act_         %7s", can_act_      ? "true" : "false");
+	log_dbg("   show_only_       %7s", show_only_    ? "true" : "false");
+	log_dbg("   has_priority_    %7s", has_priority_ ? "true" : "false");
+	log_dbg("   type_            %7s", type_ == Widelands::wwWARE ? "WARE" : "WORKER");
+	log_dbg("   index_           %7d", index_);
+	log_dbg("   <typename>       %s", type_ == Widelands::wwWARE
+	                                   ? ibase_.egbase().descriptions().get_ware_descr(index_)
+	                                      ->name().c_str()
+	                                   : ibase_.egbase().descriptions().get_worker_descr(index_)
+	                                      ->name().c_str());
+	log_dbg("   Building ID      %7u", building_.serial());
+	log_dbg("   Building name    %s", b.descr().name().c_str());
+	log_dbg("   queue_           %7p", static_cast<const void*>(queue_));
+	log_dbg("   settings_        %7p", static_cast<const void*>(settings_));
+	if (queue_) {
+		log_dbg(" Queue");
+		log_dbg("   type             %7s", queue_->get_type() == Widelands::wwWARE ? "WARE" : "WORKER");
+		log_dbg("   index            %7d", queue_->get_index());
+		log_dbg("   max_size         %7d", queue_->get_max_size());
+		log_dbg("   max_fill         %7d", queue_->get_max_fill());
+		log_dbg("   filled           %7d", queue_->get_filled());
+		log_dbg("   missing          %7d", queue_->get_missing());
+	} else {
+		const Widelands::ProductionsiteSettings::InputQueueSetting* s = get_setting();
+		log_dbg(" Settings");
+		log_dbg("   Setting          %7p", static_cast<const void*>(s));
+		log_dbg("     Max fill       %7u", s->max_fill);
+		log_dbg("     Desired fill   %7u", s->desired_fill);
+		log_dbg("     Priority       %7u", s->priority.to_weighting_factor());
+		log_dbg("   Stopped          %7s", settings_->stopped ? "true" : "false");
+		log_dbg("   #wares           %7u", static_cast<unsigned>(settings_->ware_queues.size()));
+		for (const auto& pair : settings_->ware_queues) {
+			log_dbg("     Setting        %7p", static_cast<const void*>(&pair.second));
+			log_dbg("       Index        %7u", pair.first);
+			log_dbg("       Name         %s", ibase_.egbase().descriptions().get_ware_descr(pair.first)
+	                                           ->name().c_str());
+			log_dbg("       Max fill     %7u", pair.second.max_fill);
+			log_dbg("       Desired fill %7u", pair.second.desired_fill);
+			log_dbg("       Priority     %7u", pair.second.priority.to_weighting_factor());
+		}
+		log_dbg("   #workers       %7u", static_cast<unsigned>(settings_->worker_queues.size()));
+		for (const auto& pair : settings_->worker_queues) {
+			log_dbg("     Setting        %7p", static_cast<const void*>(&pair.second));
+			log_dbg("       Index        %7u", pair.first);
+			log_dbg("       Name         %s", ibase_.egbase().descriptions().get_worker_descr(pair.first)
+	                                           ->name().c_str());
+			log_dbg("       Max fill     %7u", pair.second.max_fill);
+			log_dbg("       Desired fill %7u", pair.second.desired_fill);
+			log_dbg("       Priority     %7u", pair.second.priority.to_weighting_factor());
+		}
+	}
+	log_dbg("**************************************************");
+}
+// clang-format on
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      InteractiveBase& ib,
@@ -336,8 +409,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                   bld.owner().tribe().get_ware_descr(index_)->descname() :
                   bld.owner().tribe().get_worker_descr(index_)->descname());
 
-	// Initialize tooltips, icon colours and stuff
-	think();
+	// Do not call think() yet, it might deadlock
 }
 
 void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
@@ -349,6 +421,7 @@ void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& f
 }
 
 int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const {
+	nr_icons_assert();
 	assert(nr_icons_ > 0);
 	if (y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
 	    x < hbox_.get_x() + icons_[0]->get_x() ||
@@ -380,6 +453,36 @@ bool InputQueueDisplay::handle_mousemove(
    uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
 	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
+}
+
+bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
+	if (show_only_ || !can_act_) {
+		return false;
+	}
+	int32_t change = get_mousewheel_change(MousewheelHandlerConfigID::kChangeValue, x, y,
+	                                       // shift has special meaning, prevent it to work
+	                                       // as part of modifier
+	                                       modstate & ~KMOD_SHIFT);
+	if (change) {
+		if (get_mouse_position().x < priority_.get_x() - kButtonSize / 4) {
+			// Mouse is over desired fill
+			if (modstate & KMOD_SHIFT) {
+				recurse([change](InputQueueDisplay& i) { i.change_desired_fill(change); });
+			} else {
+				change_desired_fill(change);
+			}
+			return true;
+		} else if (has_priority_) {
+			// Mouse is over priority or collapse button
+			// Can't just use method from Slider, because of the special
+			// meaning of shift to change all input priorities together.
+
+			// KMOD_SHIFT + changedto is already connected to recurse.
+			priority_.change_value_by(change);
+			return true;
+		}
+	}
+	return false;
 }
 
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
@@ -431,6 +534,44 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 			queue_->set_max_fill(new_fill);
 		} else {
 			get_setting()->desired_fill = new_fill;
+		}
+	}
+}
+
+void InputQueueDisplay::change_desired_fill(const int8_t delta) {
+	if (delta == 0) {
+		return;
+	}
+	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::Building* b = building_.get(ibase_.egbase());
+	if (!b) {
+		return;
+	}
+
+	unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
+	assert(desired_fill <= max_fill);
+
+	if (!can_act_ || desired_fill == (delta < 0 ? 0 : max_fill)) {
+		return;
+	}
+
+	if (delta < 0 && static_cast<int>(desired_fill) <= -delta) {
+		desired_fill = 0;
+	} else {
+		desired_fill += delta;
+		if (desired_fill > max_fill) {
+			desired_fill = max_fill;
+		}
+	}
+
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_set_input_max_fill(*b, index_, type_, desired_fill, settings_ != nullptr);
+	} else {
+		if (queue_) {
+			queue_->set_max_fill(desired_fill);
+		} else {
+			get_setting()->desired_fill = desired_fill;
 		}
 	}
 }
@@ -582,7 +723,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw max fill indicator
 	if (!show_only_) {
-		assert(nr_icons_);
+		nr_icons_assert();
+		assert(nr_icons_ > 0);
 		const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 		assert(desired_fill <= nr_icons_);
 

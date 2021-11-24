@@ -113,21 +113,20 @@ struct HostChatProvider : public ChatProvider {
 
 			// Help
 			if (cmd == "help") {
-				c.msg = (boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-				         _("Available host commands are:") %
-				         /** TRANSLATORS: Available host command */
-				         _("/help  -  Shows this help") %
-				         /** TRANSLATORS: Available host command */
-				         _("/announce <msg>  -  Send a chatmessage as announcement (system chat)") %
-				         /** TRANSLATORS: Available host command */
-				         _("/warn <name> <reason>  -  Warn the user <name> because of <reason>") %
-				         /** TRANSLATORS: Available host command */
-				         _("/kick <name> <reason>  -  Kick the user <name> because of <reason>") %
-				         /** TRANSLATORS: Available host command */
-				         _("/forcePause            -  Force the game to pause.") %
-				         /** TRANSLATORS: Available host command */
-				         _("/endForcedPause        -  Return game to normal speed."))
-				           .str();
+				c.msg = bformat(
+				   "<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s", _("Available host commands are:"),
+				   /** TRANSLATORS: Available host command */
+				   _("/help  -  Shows this help"),
+				   /** TRANSLATORS: Available host command */
+				   _("/announce <msg>  -  Send a chatmessage as announcement (system chat)"),
+				   /** TRANSLATORS: Available host command */
+				   _("/warn <name> <reason>  -  Warn the user <name> because of <reason>"),
+				   /** TRANSLATORS: Available host command */
+				   _("/kick <name> <reason>  -  Kick the user <name> because of <reason>"),
+				   /** TRANSLATORS: Available host command */
+				   _("/forcePause            -  Force the game to pause."),
+				   /** TRANSLATORS: Available host command */
+				   _("/endForcedPause        -  Return game to normal speed."));
 			}
 
 			// Announce
@@ -149,9 +148,9 @@ struct HostChatProvider : public ChatProvider {
 				} else {
 					int32_t num = h->check_client(arg1);
 					if (num == -1) {
-						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = bformat(_("The client %s could not be found."), arg1);
 					} else {
-						c.msg = (boost::format("HOST WARNING FOR %s: ") % arg1).str();
+						c.msg = bformat("HOST WARNING FOR %s: ", arg1);
 						c.msg += arg2;
 					}
 				}
@@ -173,14 +172,12 @@ struct HostChatProvider : public ChatProvider {
 					if (num == -2) {
 						c.msg = _("You can not kick yourself!");
 					} else if (num == -1) {
-						c.msg = (boost::format(_("The client %s could not be found.")) % arg1).str();
+						c.msg = bformat(_("The client %s could not be found."), arg1);
 					} else {
 						kickClient = num;
-						c.msg =
-						   (boost::format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
-						c.msg +=
-						   (boost::format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
-						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
+						c.msg = bformat(_("Are you sure you want to kick %s?"), arg1) + "<br>";
+						c.msg += bformat(_("The stated reason was: %s"), kickReason) + "<br>";
+						c.msg += bformat(_("If yes, type: /ack_kick %s"), arg1);
 					}
 				}
 			}
@@ -549,8 +546,7 @@ void GameHost::run_callback() {
 		game_->set_game_controller(pointer_);
 		InteractiveGameBase* igb;
 		player_number = d->settings.playernum + 1;
-		game_->save_handler().set_autosave_filename(
-		   (boost::format("%s_nethost") % kAutosavePrefix).str());
+		game_->save_handler().set_autosave_filename(bformat("%s_nethost", kAutosavePrefix));
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition
@@ -1634,7 +1630,7 @@ std::string GameHost::get_computer_player_name(uint8_t const playernum) {
 	std::string name;
 	uint32_t suffix = playernum;
 	do {
-		name = (boost::format(_("Computer %u")) % static_cast<unsigned int>(++suffix)).str();
+		name = bformat(_("Computer %u"), static_cast<unsigned int>(++suffix));
 	} while (has_user_name(name, playernum));
 	return name;
 }
@@ -1709,7 +1705,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	if (has_user_name(effective_name, client.usernum)) {
 		uint32_t i = 1;
 		do {
-			effective_name = (boost::format("%s%u") % playername % i++).str();
+			effective_name = bformat("%s%u", playername, i++);
 		} while (has_user_name(effective_name, client.usernum));
 	}
 
@@ -1881,8 +1877,7 @@ void GameHost::check_hung_clients() {
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
 						std::string seconds =
-						   (boost::format(ngettext("%li second", "%li seconds", deltanow)) % deltanow)
-						      .str();
+						   bformat(ngettext("%li second", "%li seconds", deltanow), deltanow);
 						send_system_message_code(
 						   "CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, seconds);
 						d->clients.at(i).lastdelta = deltanow;

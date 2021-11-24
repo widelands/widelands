@@ -4,14 +4,14 @@
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Mikel Alzibar <mikelalzibar@gmail.com>, 2016
+# Mikel Alzibar <mikelalzibar@gmail.com>, 2016,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2021-11-16 12:51+0000\n"
+"Last-Translator: Mikel Alzibar <mikelalzibar@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/widelands/widelands/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Aintzinako artefaktuen bilaketa. Denak topatutakoan, artefaktu gehien di
 
 #: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
-msgstr ""
+msgstr "Eskuratutako artefaktuak"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:76
 msgid "No Artifacts"
@@ -43,13 +43,13 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "Ez dago artefakturik mapa honetan. Hori ez litzateke gertatu beharko. Mesedez gorde errore txosten bat %s-n eta zehaztu zure Widelands bertsioa eta kargatzen saiatu zaren mapa."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
 #: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefaktua topatua"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "Your team found a new artifact."
@@ -57,7 +57,7 @@ msgstr "Zure taldeak artefaktu berri bat topatu du."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Artefaktu berri bat topatu duzu."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -70,7 +70,7 @@ msgstr "Zure taldeko artefaktu bat etsaiak lapurtua izan da."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Zure artefaktu bat etsai batek ostu dizu."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -83,7 +83,7 @@ msgstr "Zure taldeak etsai baten artefaktu bat lapurtu du."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Artefaktu bat ostu diozu etsai bati."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -159,7 +159,7 @@ msgstr "Autokrata"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Beste guztiak menperatzen dituen tribu edo taldeak irabazten du!\nHonek esan nahi du etsaiek ez dituztela ez kuartel nagusirik, ezta portu edo biltegirik."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -179,13 +179,13 @@ msgstr "Hau araurik gabeko bukaera gabeko joko bat da. Gerrako lainoa ezgaitua d
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Kuartel Nagusi Ehiza"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Beste guztien kuartel nagusiak topatu eta txikitzen dituen tribu edo taldeak irabazten du! Ez du funtzionatzen hasierako baldintzetan kuartel nagusirik ez badago."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -204,7 +204,7 @@ msgstr "%1$s-k lurraren %2$3.0f%% eduki du (%4$i-tik %3$i)."
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Lurraldearen ehunekoa"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -239,11 +239,11 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Jokalari edo talde bakoitza maparen azaleraren gehiengoa eskuratzen saiatuko da. Azaleraren gehiengoa gutxienez 20 minutuz mantentzeko gai dena izango da irabazlea. Modu baketsua aukeratua egon ezkero, jokoa bukatzen da jokalari batek beste inork eskura lezakeena baino azalera gehiago badauka."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr ""
+msgstr "Momentu honetan ez dago talderik maparen erdia baino gehiago bereganatu duenik."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
@@ -256,7 +256,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Jokalari edo talde bakoitza maparen azaleraren gehiengoa eskuratzen saiatuko da. Azaleraren gehiengoa gutxienez 20 minutuz mantentzeko gai dena ala 4 orduren ostean lurralde gehien duena izango da irabazlea. Modu baketsua aukeratua egon ezkero, jokoa bukatzen da jokalari batek beste inork eskura lezakeena baino azalera gehiago badauka."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
@@ -272,8 +272,8 @@ msgstr[1] "%i minutu"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:363
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% ordu eta %2%"
+msgstr[1] "%1% ordu eta %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:369

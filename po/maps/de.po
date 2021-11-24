@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
-"PO-Revision-Date: 2021-03-22 20:29+0000\n"
+"POT-Creation-Date: 2021-11-16 02:40+0000\n"
+"PO-Revision-Date: 2021-11-16 15:47+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -797,6 +797,33 @@ msgid ""
 "handful of big rivers."
 msgstr "Ein geheimnisvolles Land, reich an unterschiedlichen Landschaften, durchzogen von einer Handvoll großer Flüsse."
 
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
+msgid "Along The River"
+msgstr "Entlang des Flusses"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
+msgid ""
+"It is the land where the sun is hardly seen during the winter and where "
+"spring floods away any reminiscence of the past. Strange tensions have grown"
+" among its residents and many selfish rulers have taken advantage of the "
+"chaos. The superstitious people appear to be no obstacle for the "
+"developments of better equipped armies. Tough times are on the brink of "
+"emerging, and you should heed the words of your wise advisors, or fade into "
+"oblivion like the others."
+msgstr "Es ist das Land wo man die Sonne im Winter kaum sieht und wo der Frühling alle Erinnerungen an die Vergangenheit wegspült. Seltsame Spannungen sind zwischen den Bewohnern enstanden und viele eigennützige Führer haben aus dem Chaos Profit geschlagen. Die abergläubischen Menschen scheinen kein Hindernis für die Entwicklung immer besser gerüsteter Armeen zu sein. Harte Zeiten stehen kurz bevor, und du solltest den Worten deines weisen Beraters folgen oder in Vergessenheit geraten wie all die Anderen."
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
+msgid "The Green Plateau"
+msgstr "Das Grüne Plateau"
+
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:10
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr "Du stehst auf einer Insel, die von mächtigen Bergen gekrönt wird. Sie behüten den wundervollen Schatz in ihrer Mitte – Das Grüne Plateau. Es ist schwer zu bekommen und schnell wieder verloren. Wenn du es halten willst, beobachte jeden Schritt deiner Gegner."
+
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
 msgstr "Sandige Pfade"
@@ -861,18 +888,6 @@ msgid ""
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
 msgstr "Man sagt, dass die undurchdringlichen Länder im hohen Norden selbst die mutigsten Siedler und die tapfersten der tapferen Soldaten abgeschreckt haben. Riesige uralte Wälder, voller Großwild und Raubtieren, unterbrochen nur von Feuchtgebieten und Hügeln, blieben geheimnisumwittert. Die wenigen, die es geschafft haben, zurückzukehren, berichten von gewaltigen Bauten, reich verziert mit Ornamenten und Gold aus den majestätischen Gebirgszügen in der Wildnis. Dutzende Jahre später zeugen nur noch einige moosüberwucherte Ruinen von der guten alten Zeit. Ihre Gestalt deutet die Kunstfertigkeiten ihrer Erbauer nur an. Niemand weiß, warum sie verschwunden sind. Die Leute erzählen, dass dem Reichtum nun nichts mehr im Wege steht. Aber viele werden sterben, zerrissen von Wölfen, in Sümpfen versinkend … umzingelt von feindlichen Stämmen."
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:8
-msgid "The Green Plateau"
-msgstr "Das Grüne Plateau"
-
-#: ../../data/maps/The_Green_Plateau.wmf/elemental:10
-msgid ""
-"You are standing on an island, crowned by mighty mountains which keep a "
-"wonderful and mighty treasure in their middle – The Green Plateau, which is "
-"hard to conquer but easy to lose. So, if you want it, be aware of the other "
-"clans."
-msgstr "Du stehst auf einer Insel, die von mächtigen Bergen gekrönt wird. Sie behüten den wundervollen Schatz in ihrer Mitte – Das Grüne Plateau. Es ist schwer zu bekommen und schnell wieder verloren. Wenn du es halten willst, beobachte jeden Schritt deiner Gegner."
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
