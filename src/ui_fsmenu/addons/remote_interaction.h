@@ -83,6 +83,8 @@ private:
 	void reset_text();
 };
 
+class TransifexSettingsBox;
+
 class AdminDialog : public UI::Window {
 public:
 	AdminDialog(AddOnsCtrl&,
@@ -96,6 +98,7 @@ private:
 	UI::Button ok_, cancel_;
 	UI::Listselect<std::string>* list_;
 	UI::MultilineEditbox* text_;
+	TransifexSettingsBox* txsettings_;
 };
 
 class RemoteInteractionWindow : public UI::Window {
