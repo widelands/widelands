@@ -129,7 +129,14 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
              0,
              0,
-             UI::Box::Vertical) {
+             UI::Box::Vertical),
+     custom_songset(
+        this,
+        UI::PanelStyle::kFsMenu,
+        {0, 0},
+        _("Play your own music ingame"),
+        _("Put music files named custom_XX.ogg (where XX are digits) into datadir/music"),
+        0) {
 
 	set_inner_spacing(kSpacing);
 
@@ -147,6 +154,9 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	add(new SoundControl(
 	   this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
 	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+	add(&custom_songset);
+	custom_songset.set_state(g_sh->use_custom_songset());
+	custom_songset.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if
