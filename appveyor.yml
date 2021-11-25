@@ -23,6 +23,7 @@ install:
   - choco install -y InnoSetup
   - cmd: "set PATH=C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   # Install required libs
+  - cmd: md %VCPKG_DEFAULT_BINARY_CACHE%
   - cmd: "vcpkg install --disable-metrics --triplet=%VCPKG_TARGET_TRIPLET% boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp"
   # Setup build environment (https://www.appveyor.com/docs/lang/cpp/)
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars%BITS%.bat"
