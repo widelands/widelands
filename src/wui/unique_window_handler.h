@@ -20,6 +20,8 @@
 #ifndef WL_WUI_UNIQUE_WINDOW_HANDLER_H
 #define WL_WUI_UNIQUE_WINDOW_HANDLER_H
 
+#include <map>
+
 #include "base/macros.h"
 #include "ui_basic/unique_window.h"
 

@@ -62,7 +62,7 @@ public:
 	        int32_t big_step_size = 10);
 	~SpinBox() override;
 
-	boost::signals2::signal<void()> changed;
+	Notifications::Signal<> changed;
 
 	void set_value(int32_t);
 	// For spinboxes of type kValueList. The vector needs to be sorted in ascending order,

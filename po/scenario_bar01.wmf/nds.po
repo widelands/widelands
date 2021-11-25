@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-28 07:16+0000\n"
+"PO-Revision-Date: 2021-11-22 19:28+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -805,7 +805,7 @@ msgid ""
 "bring what our brave miners gain for us into a more useful state. The iron "
 "ore has to be melted into iron so that it is ready to be forged into "
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
-msgstr "Nu dat wi Bargwarken hebben un ok de Spiesen, dat se warken könen, sallen wi dat, wat uns’ dappern Bargwarkskeerls uns bringen, nützelker maken. De Iesenkluut mutt in Iesen smelt worden, daarmit wi daarit smelten könen, wat wi wullen. Un wi bruken de Köhl, daarmit de Smelters hör Ovends alltied brannen."
+msgstr "Nu dat wi Bargwarken hebben un ok de Spiesen, dat se warken könen, sallen wi dat, wat uns’ dappern Bargwarkskeerls uns brengen, nützelker maken. De Iesenkluut mutt in Iesen smelt worden, daarmit wi daarit smelten könen, wat wi wullen. Un wi bruken de Köhl, daarmit de Smelters hör Ovends alltied brannen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
