@@ -17,4 +17,11 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries.
+#include "base/test.h"
+
+namespace WLTestsuite {
+Testsuite& all_testsuites() {
+	static Testsuite* t = new Testsuite;
+	return *t;
+}
+}  // namespace WLTestsuite

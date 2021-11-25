@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-04-16 15:34+0000\n"
-"PO-Revision-Date: 2021-07-11 18:32+0000\n"
+"PO-Revision-Date: 2021-11-22 19:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -867,7 +867,7 @@ msgstr "Versöök ’t nu: Upstünds is de End-Tahl för Marmelpielers 10. Verho
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
 msgid "Bring 20 marble columns to the front line"
-msgstr "Bring 20 Marmelpielers tur Grenz"
+msgstr "Breng 20 Marmelpielers tur Grenz"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:522
 msgid ""
@@ -893,7 +893,7 @@ msgstr "Kraamhuus-Instellens"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:534
 msgid "Bring the marble columns to the front line"
-msgstr "Bring de Marmelpielers tur Grenz"
+msgstr "Breng de Marmelpielers tur Grenz"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:536
 msgid ""
