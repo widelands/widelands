@@ -17,9 +17,9 @@
  */
 
 #include "wui/sound_options.h"
-#include <graphic/text_layout.h>
 
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
