@@ -7,13 +7,7 @@
 image: Visual Studio 2019
 
 init:
-  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set BITS=32) ELSE (set BITS=64)"
-  - cmd: "set VCPKG_ROOT=C:\\tools\\vcpkg"
-  - cmd: "set VCPKG_DEFAULT_BINARY_CACHE=%APPVEYOR_BUILD_FOLDER%\\vcpkg_bincache"
-  - cmd: "set VCPKG_TARGET_TRIPLET=%PLATFORM%-windows-static"
-  
-cache: 
-  - '%VCPKG_DEFAULT_BINARY_CACHE% -> appveyor.yml'
+  - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
 
 install:
   # Installing various utilities
@@ -21,19 +15,29 @@ install:
   # Otherwise installing 'InnoSetup' will fail.
   - choco install -y chocolatey-core.extension
   - choco install -y InnoSetup
-  - cmd: "set PATH=C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
-  # Install required libs
-  - cmd: md %VCPKG_DEFAULT_BINARY_CACHE%
-  - cmd: "vcpkg install --disable-metrics --triplet=%VCPKG_TARGET_TRIPLET% boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp"
-  # Setup build environment (https://www.appveyor.com/docs/lang/cpp/)
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars%BITS%.bat"
+  - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
+  - cmd: "set CC=%MINGWPATH%\\gcc.exe"
+  - cmd: "set CXX=%MINGWPATH%\\g++.exe"
+  # deleting broken repo from mirrorlist
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  # Update msys2 system (twice, first run does system packages)
+  - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
+  # deleting broken repo from mirrorlist again
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
+  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
+  - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
+  # Installed required libs
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
+  - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-libtiff-4.3.0-3-any.pkg.tar.zst\""
 
 shallow_clone: false
 
 branches:
   only:
     - master
-    - msvc_ci_action
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
@@ -42,10 +46,10 @@ build_script:
   # detect revision
   - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: "cmake -G \"NMake Makefiles\" -DVCPKG_TARGET_TRIPLET=%VCPKG_TARGET_TRIPLET% -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%\\scripts\\buildsystems\\vcpkg.cmake -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON %APPVEYOR_BUILD_FOLDER%"
-  - cmd: nmake
+  - cmd: "cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "cmake --build ."
 on_success:
-  - cmd: "IF \"%CONFIGURATION%\" == \"Release\" (strip -sv %APPVEYOR_BUILD_FOLDER%\\build\\src\\widelands.exe)"
+  - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
   - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
   - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING%.exe
 
