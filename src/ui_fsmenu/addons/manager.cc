@@ -22,6 +22,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <memory>
+#include <ostream>
 #include <sstream>
 
 #include <SDL.h>

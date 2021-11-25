@@ -35,7 +35,7 @@ namespace UI {
 struct MultilineEditbox : public Panel {
 	MultilineEditbox(Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, PanelStyle style);
 
-	boost::signals2::signal<void()> changed;
+	Notifications::Signal<> changed;
 
 	const std::string& get_text() const;
 	void set_text(const std::string&);
