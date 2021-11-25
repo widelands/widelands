@@ -17,9 +17,9 @@
  */
 
 #include "wui/sound_options.h"
-#include <graphic/text_layout.h>
 
 #include "base/i18n.h"
+#include "graphic/text_layout.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -136,10 +136,10 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
         UI::PanelStyle::kFsMenu,
         {0, 0},
         _("Play your own music in-game"),
-        _(richtext_escape(
-           "You can play custom in-game music by placing your own music files in "
-           "‘<Widelands Home Directory>/music/custom_XX.mp3’ (where ‘XX’ are sequential "
-           "two-digit numbers starting with 00). .ogg-files are also supported.")),
+        richtext_escape(
+           _("You can play custom in-game music by placing your own music files in "
+             "‘<Widelands Home Directory>/music/custom_XX.mp3’ (where ‘XX’ are sequential "
+             "two-digit numbers starting with 00). .ogg-files are also supported")),
         0) {
 
 	set_inner_spacing(kSpacing);
