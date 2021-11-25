@@ -138,8 +138,8 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
         _("Play your own music in-game"),
         _(richtext_escape(
            "You can play custom in-game music by placing your own music files in "
-           "‘<Widelands Home Directory>/music/custom_XX.ogg’ (where ‘XX’ are sequential "
-           "two-digit numbers starting with 00)")),
+           "‘<Widelands Home Directory>/music/custom_XX.mp3’ (where ‘XX’ are sequential "
+           "two-digit numbers starting with 00). .ogg-files are also supported.")),
         0) {
 
 	set_inner_spacing(kSpacing);

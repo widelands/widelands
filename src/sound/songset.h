@@ -45,6 +45,7 @@ struct Songset {
 	Mix_Music* get_song(uint32_t random);
 
 private:
+	void add_songs(const std::vector<std::string>& files);
 	void add_song(const std::string& filename);
 
 	/// The filenames of all configured songs
