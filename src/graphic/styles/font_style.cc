@@ -19,8 +19,7 @@
 
 #include "graphic/styles/font_style.h"
 
-#include <boost/format.hpp>
-
+#include "base/string.h"
 #include "base/wexception.h"
 
 namespace UI {
@@ -79,7 +78,6 @@ FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) 
 }
 
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {
-	boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
 	std::string optionals;
 	if (bold_) {
 		optionals += " bold=1";
@@ -93,12 +91,8 @@ std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 	if (underline_) {
 		optionals += " underline=1";
 	}
-	f % face_to_string();
-	f % size_;
-	f % color_.hex_value();
-	f % optionals;
-	f % text;
-	return f.str();
+	return bformat("<font face=%s size=%d color=%s%s>%s</font>", face_to_string(), size_,
+	               color_.hex_value(), optionals, text);
 }
 
 FontStyleInfo::Face FontStyleInfo::face() const {

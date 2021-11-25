@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/string.h"
 #include "graphic/image.h"
 #include "graphic/image_cache.h"
 #include "graphic/note_graphic_resolution_changed.h"
@@ -82,7 +83,7 @@ protected:
 
 public:
 	/// An entry was selected
-	boost::signals2::signal<void()> selected;
+	Notifications::Signal<> selected;
 
 	/// \return true if an element has been selected from the list
 	bool has_selection() const;
@@ -333,10 +334,7 @@ public:
 		return true;
 	}
 	void update_filter(const std::string& input_text) {
-		std::string lower = input_text;
-		transform(
-		   lower.begin(), lower.end(), lower.begin(), [](unsigned char c) { return tolower(c); });
-		current_filter_ = current_filter_.append(lower);
+		current_filter_ = current_filter_.append(to_lower(input_text));
 	}
 
 	void apply_filter() override {
@@ -364,10 +362,7 @@ public:
 
 	void add_matching_entries() {
 		for (auto& x : unfiltered_entries) {
-			std::string lowerName = std::string(x.name);
-			transform(lowerName.begin(), lowerName.end(), lowerName.begin(),
-			          [](unsigned char c) { return tolower(c); });
-			if (lowerName.find(current_filter_) != std::string::npos) {
+			if (to_lower(x.name).find(current_filter_) != std::string::npos) {
 				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
 			}
 		}

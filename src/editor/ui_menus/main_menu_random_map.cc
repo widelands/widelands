@@ -165,7 +165,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                 0,
                 inner_w / 3,
                 mountains_label_.get_h(),
-                (boost::format(_("%i %%")) % mountainsval_).str(),
+                bformat(_("%i %%"), mountainsval_),
                 UI::Align::kCenter),
      island_mode_(this, panel_style_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
@@ -415,7 +415,7 @@ void MainMenuNewRandomMapPanel::normalize_landmass(ButtonId clicked_button) {
 	water_.set_value(waterval_);
 	land_.set_value(landval_);
 	wasteland_.set_value(wastelandval_);
-	mountains_.set_text((boost::format(_("%i %%")) % mountainsval_).str());
+	mountains_.set_text(bformat(_("%i %%"), mountainsval_));
 }
 
 void MainMenuNewRandomMapPanel::select_terrains_distribution() {
@@ -619,8 +619,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 
 			for (unsigned p = 0; p < nr_players; ++p) {
 				sp->set_player_name(
-				   p, p == plnum ? _("Player") :
-                               (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
+				   p, p == plnum ? _("Player") : bformat(_("Computer %u"), (p > plnum ? p : p + 1)));
 				sp->set_player_tribe(p, "", true);
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);

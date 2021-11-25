@@ -34,7 +34,7 @@ static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_worke
 
 static inline std::string
 color_tag(const RGBColor& c, const std::string& text1, const std::string& text2) {
-	return (boost::format(_("%1$s %2$s")) % StyleManager::color_tag(text1, c) % text2).str();
+	return bformat(_("%1$s %2$s"), StyleManager::color_tag(text1, c), text2);
 }
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
@@ -51,21 +51,21 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
            different background colors; each icon's color indicates whether the stock is higher or
            lower than the economy target setting. Very little space is available. */
         _("Evaluate"),
-        (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>") %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
-            .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(
-               colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(colors_.alternative_medium_color(),
-                                   _("Yellow:"),
-                                   _("Stock is equal to the target"))) %
-         g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-            .as_font_tag(color_tag(colors_.alternative_high_color(),
-                                   _("Green:"),
-                                   _("Stock is higher than the target"))))
-           .str()) {
+        bformat(
+           "<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>",
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+              .as_font_tag(_("Compare stocked amounts to economy target quantities")),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(
+                 colors_.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(colors_.alternative_medium_color(),
+                                     _("Yellow:"),
+                                     _("Stock is equal to the target"))),
+           g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+              .as_font_tag(color_tag(colors_.alternative_high_color(),
+                                     _("Green:"),
+                                     _("Stock is higher than the target"))))) {
 	set_center_panel(&main_box_);
 
 	all_wares_ = new StockMenuWaresDisplay(&tabs_, 0, 0, plr.player(), Widelands::wwWARE);

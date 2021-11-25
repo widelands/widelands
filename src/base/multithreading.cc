@@ -30,9 +30,10 @@
 
 static const std::thread::id kNoThread;
 static std::thread::id initializer_thread(kNoThread);
+static std::thread::id logic_thread(kNoThread);
 
 void set_initializer_thread() {
-	log_info("Setting initializer thread.");
+	verb_log_info("Setting initializer thread.");
 
 	if (initializer_thread != kNoThread) {
 		throw wexception("attempt to set initializer thread again");
@@ -41,8 +42,27 @@ void set_initializer_thread() {
 	initializer_thread = std::this_thread::get_id();
 }
 
+void set_logic_thread() {
+	verb_log_info("Setting logic thread.");
+
+	if (initializer_thread == kNoThread) {
+		throw wexception("attempt to set logic thread before initializer thread");
+	}
+	if (logic_thread != kNoThread) {
+		throw wexception("attempt to set logic thread again");
+	}
+	if (is_initializer_thread()) {
+		throw wexception("initializer thread can not be the logic thread");
+	}
+
+	logic_thread = std::this_thread::get_id();
+}
+
 bool is_initializer_thread() {
 	return initializer_thread == std::this_thread::get_id();
+}
+bool is_logic_thread() {
+	return logic_thread == std::this_thread::get_id();
 }
 
 uint32_t NoteThreadSafeFunction::next_id_(0);
@@ -79,7 +99,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				}
 				done = true;
 			}));
-			while (!done) {
+			while (!done) {  // NOLINT
 				// Wait until the NoteThreadSafeFunction has been handled.
 				// Since `done` was passed by address, it will set to
 				// `true` when the function has been executed.
@@ -139,6 +159,8 @@ constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
 constexpr uint32_t kMutexLogicFrameLockInterval = 400;
 
+// To protect the global mutex list
+std::mutex MutexLock::s_mutex_;
 MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
@@ -149,7 +171,9 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 #endif
 
 	const std::thread::id self = std::this_thread::get_id();
+	s_mutex_.lock();
 	MutexRecord& record = g_mutex[id_];
+	s_mutex_.unlock();
 
 	// When several threads are waiting to grab the same mutex, the first one is advantaged
 	// by giving it a lower sleep time between attempts. This keeps overall waiting times low.
@@ -196,6 +220,7 @@ MutexLock::~MutexLock() {
 	log_dbg("Unlocking mutex %s", to_string(id_).c_str());
 #endif
 
+	s_mutex_.lock();
 	MutexRecord& record = g_mutex.at(id_);
 
 	assert(record.ownership_count > 0);
@@ -206,4 +231,5 @@ MutexLock::~MutexLock() {
 	}
 
 	record.mutex.unlock();
+	s_mutex_.unlock();
 }

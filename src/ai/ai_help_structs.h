@@ -124,10 +124,10 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 constexpr int kFNeuronBitSize = 32;
 constexpr int kMutationRatePosition = 42;
 // This is expiration time for distance from a flag to nearest warehouse
-constexpr Duration kFlagDistanceExpirationPeriod = Duration(120 * 1000);
+constexpr Duration kFlagDistanceExpirationPeriod(120 * 1000);
 // If the distance of flag-warehouse was not updated for this time, we presume that the flag
 // does not exist anymore and remove it
-constexpr Duration kOldFlagRemoveTime = Duration(5 * 60 * 1000);
+constexpr Duration kOldFlagRemoveTime(5 * 60 * 1000);
 
 constexpr uint32_t kNoField = std::numeric_limits<uint32_t>::max();
 
@@ -416,7 +416,8 @@ struct BuildableField {
 	ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
-	ExtendedBool portspace_nearby;  // special fields intended for ports
+	ExtendedBool portspace_nearby;    // special fields intended for ports
+	ExtendedBool shipyard_preferred;  // special fields intended for shipyards
 	int32_t max_buildcap_nearby;
 	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
 	// fast. This stores the time of the last check.

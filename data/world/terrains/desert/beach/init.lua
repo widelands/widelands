@@ -115,7 +115,9 @@
 --        to hide the harsh edges of the triangles. This describes the
 --        `z layer <https://en.wikipedia.org/wiki/Z-order>`_ of a terrain when
 --        rendered next to another terrain. Terrains with a higher value will be
---        dithered on top of terrains with a lower value. Example::
+--        dithered on top of terrains with a lower value. No two terrains may
+--        have the same dither layer, unless they are defined by different add-ons (in which case
+--        unique layers will be automatically assigned during world loading). Example::
 --
 --            dither_layer = 340,
 --

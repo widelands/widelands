@@ -217,7 +217,9 @@ Production Sites
 
         requires_supporters = true,
 
-    For example if set for lumberjack, it will be built only if a renger is nearby.
+    For example if set for a frisian aqua farm, it will be built only if a clay pit producing the
+ponds is nearby.
+    **Note:** This hint shouldn't be used for lumberjacks due to internal AI mechanics
 
 **trainingsites_max_percent**
     The maximum percengate this training site will have among all training sites, e.g.::

@@ -38,8 +38,17 @@
 #include "base/multithreading.h"
 #include "config.h"
 
-/// A macro to make i18n more readable and aid in tagging strings for translation
+/// Some macros to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)
+
+#undef pgettext
+#define pgettext(c, m) i18n::pgettext_wrapper(c, m)
+#ifndef BASE_I18N_CC
+#undef ngettext
+#undef npgettext
+#define ngettext(s, p, n) i18n::ngettext_wrapper(s, p, n)
+#define npgettext(c, s, p, n) i18n::npgettext_wrapper(c, s, p, n)
+#endif
 
 namespace i18n {
 
@@ -48,6 +57,9 @@ void enable_verbose_i18n();
 
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
+char const* ngettext_wrapper(const char* singular, const char* plural, int n);
+char const* pgettext_wrapper(const char* msgctxt, const char* msgid);
+char const* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n);
 
 void grab_textdomain(const std::string&, const char* localedir);
 void release_textdomain();

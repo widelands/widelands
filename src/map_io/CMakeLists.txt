@@ -11,6 +11,7 @@ wl_library(map_io_map_loader
     base_log
     base_macros
     base_scoped_timer
+    base_string
     io_fileread
     io_filesystem
     logic
@@ -90,12 +91,14 @@ wl_library(map_io
     map_waterwaydata_packet.h
     map_wincondition_packet.cc
     map_wincondition_packet.h
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_log
     base_macros
     base_multithreading
     base_scoped_timer
+    base_string
     economy
     graphic_image_cache
     graphic_image_io

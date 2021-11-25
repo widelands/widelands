@@ -100,7 +100,7 @@ template <typename AreaType = Area<>> struct HollowArea : public AreaType {
 	typename AreaType::RadiusType hole_radius;
 };
 
-struct Field;
+class Field;
 
 struct FCoords : public Coords {
 	FCoords() : field(nullptr) {

@@ -474,7 +474,7 @@ void EditorInteractive::load(const std::string& filename) {
 	cleanup_for_load();
 
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
-	if (!ml.get()) {
+	if (!ml) {
 		throw WLWarning(
 		   _("Unsupported Format"),
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
@@ -933,13 +933,12 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		// during winter time freeze. We can consider rephrasing it after v1.0.
 		UI::WLMessageBox m(
 		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
-		   (boost::format(
-		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-		         "this problem to help us improve Widelands. You will find related messages in the "
-		         "standard output (stdout.txt on Windows). You are using build %2$s "
-		         "(%3$s).\nPlease add this information to your report.")) %
-		    e.what() % build_id() % build_type())
-		      .str(),
+		   bformat(
+		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		        "this problem to help us improve Widelands. You will find related messages in the "
+		        "standard output (stdout.txt on Windows). You are using build %2$s "
+		        "(%3$s).\nPlease add this information to your report."),
+		      e.what(), build_id(), build_type()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -969,8 +968,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Empty map file name");
 		}
 
-		Notifications::publish(
-		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		Notifications::publish(UI::NoteLoadingMessage(bformat(_("Loading map “%s”…"), filename)));
 		eia.load(filename);
 
 		egbase.postload_addons();

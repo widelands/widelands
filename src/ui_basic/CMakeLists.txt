@@ -63,6 +63,7 @@ wl_library(ui_basic
     window.cc
     window.h
   USES_SDL2
+  USES_ATOMIC
   DEPENDS
     base_exceptions
     base_geometry
@@ -70,6 +71,7 @@ wl_library(ui_basic
     base_log
     base_macros
     base_multithreading
+    base_string
     base_utf8
     graphic
     graphic_align

@@ -29,8 +29,7 @@
 
 namespace Widelands {
 
-Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions)
-   : std::map<DescriptionIndex, uint8_t>() {
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions) {
 	for (const std::string& warename : table->keys<std::string>()) {
 		DescriptionIndex const idx = descriptions.load_ware(warename);
 

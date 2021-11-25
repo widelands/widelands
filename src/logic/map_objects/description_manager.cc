@@ -20,6 +20,7 @@
 #include "logic/map_objects/description_manager.h"
 
 #include <cassert>
+#include <cstring>
 #include <memory>
 
 #include "base/log.h"
@@ -53,14 +54,16 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 /// Walk given directory and register descriptions
 void DescriptionManager::register_directory(const std::string& dirname,
                                             FileSystem* filesystem,
-                                            const RegistryCaller caller) {
+                                            const RegistryCallerInfo& caller) {
 	FilenameSet files = filesystem->list_directory(dirname);
 	for (const std::string& file : files) {
 		if (filesystem->is_directory(file)) {
 			register_directory(file, filesystem, caller);
 		} else {
 			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
-				if (caller == RegistryCaller::kScenario) {
+				unsigned nr_registered_items = 0;
+				std::set<std::string> all_registered_items;
+				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
 						const std::vector<std::string> attributes =
@@ -69,6 +72,8 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						                              FileSystem::fs_dirname(file) + "init.lua",
 						                              attributes);
 						register_attributes(attributes, object_name);
+						all_registered_items.insert(object_name);
+						++nr_registered_items;
 					}
 				} else {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script(file);
@@ -78,7 +83,26 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						register_description(
 						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes, caller);
 						register_attributes(attributes, object_name);
+						all_registered_items.insert(object_name);
+						++nr_registered_items;
 					}
+				}
+				if (nr_registered_items == 0) {
+					log_warn("Registry file %s does not define any units", file.c_str());
+				} else if ((g_verbose || caller.first != RegistryCallerType::kDefault) &&
+				           nr_registered_items > 1) {
+					std::string all;
+					/* Arbitrary estimate to reduce number of memory reallocations */
+					all.reserve(nr_registered_items * 20);
+					for (const std::string& str : all_registered_items) {
+						all += ' ';
+						all += str;
+					}
+					log_warn("The registry file %s\n"
+					         "    defines multiple (%u) units:%s\n"
+					         "    Defining multiple units in one file is error-prone. "
+					         "Every unit should be defined in a registry directory of its own.",
+					         file.c_str(), nr_registered_items, all.c_str());
 				}
 			}
 		}
@@ -88,7 +112,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 void DescriptionManager::register_description(const std::string& description_name,
                                               const std::string& script_path,
                                               const std::vector<std::string>& attributes,
-                                              const RegistryCaller caller) {
+                                              const RegistryCallerInfo& caller) {
 	const bool skip =
 	   std::find(attributes.begin(), attributes.end(), "__skip_if_exists") != attributes.end();
 	const bool replace =
@@ -98,17 +122,17 @@ void DescriptionManager::register_description(const std::string& description_nam
 		                    "'__replace_if_exists' are mutually exclusive",
 		                    description_name.c_str());
 	}
-	switch (caller) {
-	case RegistryCaller::kDefault:
-	case RegistryCaller::kScenario:
+	switch (caller.first) {
+	case RegistryCallerType::kDefault:
+	case RegistryCallerType::kScenario:
 		if (skip || replace) {
 			throw GameDataError("DescriptionManager::register_description %s: '__skip_if_exists' and "
 			                    "'__replace_if_exists' may be used only by add-ons",
 			                    description_name.c_str());
 		}
 		break;
-	case RegistryCaller::kTribeAddon:
-	case RegistryCaller::kWorldAddon:
+	case RegistryCallerType::kTribeAddon:
+	case RegistryCallerType::kWorldAddon:
 		if (!skip && !replace) {
 			throw GameDataError("DescriptionManager::register_description %s: add-on entities must "
 			                    "define either '__skip_if_exists' or '__replace_if_exists'",
@@ -173,7 +197,8 @@ void DescriptionManager::register_scenario_description(FileSystem* filesystem,
 
 	registered_scenario_descriptions_.insert(std::make_pair(
 	   description_name,
-	   RegisteredObject("map:" + script_path, attributes, RegistryCaller::kScenario)));
+	   RegisteredObject("map:" + script_path, attributes,
+	                    RegistryCallerInfo(RegistryCallerType::kScenario, std::string()))));
 }
 
 void DescriptionManager::load_description(const std::string& description_name) {
@@ -222,6 +247,15 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
              registered_scenario_descriptions_.at(description_name).attributes :
              registered_descriptions_.at(description_name).attributes;
+}
+
+const DescriptionManager::RegistryCallerInfo&
+DescriptionManager::get_registry_caller_info(const std::string& description_name) const {
+	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
+	       registered_descriptions_.count(description_name) == 1);
+	return registered_scenario_descriptions_.count(description_name) == 1 ?
+             registered_scenario_descriptions_.at(description_name).caller :
+             registered_descriptions_.at(description_name).caller;
 }
 
 void DescriptionManager::clear_scenario_descriptions() {

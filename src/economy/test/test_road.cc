@@ -17,26 +17,21 @@
  *
  */
 
-#include <boost/test/unit_test.hpp>
-
 #ifdef _WIN32
 #include "base/log.h"
 #endif
+#include "base/test.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
-
 /******************/
 /* Helper classes */
 /******************/
 struct TestingFlag : public Widelands::Flag {
-	TestingFlag(Widelands::EditorGameBase&, const Widelands::Coords& c) : Widelands::Flag() {
+	TestingFlag(Widelands::EditorGameBase&, const Widelands::Coords& c) {
 		set_flag_position(c);
 	}
 };
@@ -81,22 +76,19 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 	TestingFlag* end;
 };
 
-BOOST_AUTO_TEST_SUITE(Road)
+TESTSUITE_START(Road)
 
 /*
  * Simple tests
  */
-BOOST_FIXTURE_TEST_CASE(PassabilityTest, SimpleRoadTestsFixture) {
-	BOOST_CHECK_EQUAL(r.get_passable(), true);
+
+TESTCASE(passability) {
+	SimpleRoadTestsFixture f;
+	check_equal(f.r.get_passable(), true);
 }
-BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {
-	BOOST_CHECK_EQUAL(r.get_size(), static_cast<int32_t>(Widelands::BaseImmovable::SMALL));
-}
-BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
-	BOOST_TEST_MESSAGE(start->get_position().x
-	                   << ',' << start->get_position().y << "   " << end->get_position().x << ','
-	                   << end->get_position().y << "   " << path.get_start().x << ','
-	                   << path.get_start().y);
+TESTCASE(correct_size) {
+	SimpleRoadTestsFixture f;
+	check_equal(f.r.get_size(), static_cast<int32_t>(Widelands::BaseImmovable::SMALL));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

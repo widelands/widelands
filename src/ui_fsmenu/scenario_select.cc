@@ -85,10 +85,9 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit “OK”.");
 		const std::string subtitle2 =
 		   _("You can see a description of the currently selected tutorial on the right.");
-		subtitle_.set_text((boost::format("%s\n%s") % subtitle1 % subtitle2).str());
+		subtitle_.set_text(bformat("%s\n%s", subtitle1, subtitle2));
 	} else {
-		subtitle_.set_text(
-		   (boost::format("%s — %s") % campaign_->tribename % campaign_->descname).str());
+		subtitle_.set_text(bformat("%s — %s", campaign_->tribename, campaign_->descname));
 	}
 
 	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
@@ -179,7 +178,7 @@ void ScenarioSelect::clicked_ok() {
 	}
 
 	std::unique_ptr<Widelands::Game> game(capsule_.menu().create_safe_game());
-	if (!game.get()) {
+	if (game == nullptr) {
 		return;
 	}
 	capsule_.set_visible(false);
@@ -278,7 +277,7 @@ void ScenarioSelect::fill_table() {
 
 		// Now add to table
 		UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
-		te.set_string(0, (boost::format("%d") % (i + 1)).str());
+		te.set_string(0, bformat("%d", (i + 1)));
 		te.set_picture(
 		   1, g_image_cache->get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
 		te.set_disabled(!scenario_data->playable);

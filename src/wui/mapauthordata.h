@@ -20,9 +20,8 @@
 #ifndef WL_WUI_MAPAUTHORDATA_H
 #define WL_WUI_MAPAUTHORDATA_H
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/i18n.h"
+#include "base/string.h"
 #include "logic/map.h"
 
 /**
@@ -41,7 +40,7 @@ struct MapAuthorData {
 		{
 			i18n::Textdomain td("maps");
 			const std::string loc_author_list = _(author_list);
-			boost::split(authors, loc_author_list, boost::is_any_of(","));
+			split(authors, loc_author_list, {','});
 		}
 		names_ = i18n::localize_list(authors, i18n::ConcatenateWith::AMPERSAND);
 		number_ = authors.size();

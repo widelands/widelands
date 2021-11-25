@@ -19,10 +19,10 @@
 
 #include "graphic/playercolor.h"
 
+#include <cassert>
 #include <memory>
 
-#include <boost/algorithm/string/replace.hpp>
-
+#include "base/string.h"
 #include "graphic/image_cache.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -37,7 +37,7 @@ const Image* playercolor_image(const RGBColor& clr, const std::string& image_fil
 
 	// Check whether we have a player color mask
 	std::string color_mask_filename = image_filename;
-	boost::replace_last(color_mask_filename, ".png", "_pc.png");
+	replace_last(color_mask_filename, ".png", "_pc.png");
 	if (!g_fs->file_exists(color_mask_filename)) {
 		return g_image_cache->get(image_filename);
 	}

@@ -26,7 +26,6 @@
 #include <list>
 #include <memory>
 
-#include <boost/format.hpp>
 #ifndef _WIN32
 #include <arpa/inet.h>
 #include <netdb.h>
@@ -62,6 +61,25 @@ namespace AddOns {
  * The communication protocol is documented in the server
  * repo (widelands/wl_addons_server) in `wl.server.Command`.
  */
+
+constexpr unsigned kCurrentProtocolVersion = 6;
+static const std::string kCmdList = "2:CMD_LIST";
+static const std::string kCmdInfo = "2:CMD_INFO";
+static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
+static const std::string kCmdI18N = "1:CMD_I18N";
+static const std::string kCmdScreenshot = "1:CMD_SCREENSHOT";
+static const std::string kCmdVote = "1:CMD_VOTE";
+static const std::string kCmdGetVote = "1:CMD_GET_VOTE";
+static const std::string kCmdComment = "1:CMD_COMMENT";
+static const std::string kCmdEditComment = "2:CMD_EDIT_COMMENT";
+static const std::string kCmdSubmit = "1:CMD_SUBMIT";
+static const std::string kCmdSubmitScreenshot = "1:CMD_SUBMIT_SCREENSHOT";
+static const std::string kCmdContact = "1:CMD_CONTACT";
+static const std::string kCmdSetupTx = "2:CMD_SETUP_TX";
+static const std::string kCmdAdminDelete = "1:CMD_ADMIN_DELETE";
+static const std::string kCmdAdminVerify = "1:CMD_ADMIN_VERIFY";
+static const std::string kCmdAdminQuality = "1:CMD_ADMIN_QUALITY";
+static const std::string kCmdAdminSyncSafe = "1:CMD_ADMIN_SYNC_SAFE";
 
 namespace {
 
@@ -125,6 +143,7 @@ size_t gather_addon_content(const std::string& current_dir,
 }
 
 void append_multiline_message(std::string& send, const std::string& message) {
+	send += ' ';
 	if (message.empty()) {
 		send += "0\nENDOFSTREAM\n";
 		return;
@@ -136,8 +155,6 @@ void append_multiline_message(std::string& send, const std::string& message) {
 	send += "\nENDOFSTREAM\n";
 }
 }  // namespace
-
-constexpr unsigned kCurrentProtocolVersion = 5;
 
 void NetAddons::init(std::string username, std::string password) {
 	if (initialized_) {
@@ -152,6 +169,7 @@ void NetAddons::init(std::string username, std::string password) {
 	signal(SIGPIPE, SIG_IGN);  // NOLINT
 #endif
 
+	cached_remotes_ = 0;
 	if (password.empty()) {
 		username = "";
 	}
@@ -324,10 +342,13 @@ void NetAddons::check_endofstream() {
 // reading or writing random leftover bytes. Create it before doing some
 // networking stuff and call `ok()` after everything has gone well.
 struct CrashGuard {
-	explicit CrashGuard(NetAddons& n) : net_(n), ok_(false) {
+	explicit CrashGuard(NetAddons& n, bool uses_cache = false) : net_(n), ok_(false) {
 		assert(net_.initialized_);
 		if (net_.network_active_) {
 			throw WLWarning("", "Network is already active");
+		}
+		if (!uses_cache && net_.cached_remotes_ > 0) {
+			throw WLWarning("", "Network has stale remotes cache");
 		}
 		net_.network_active_ = true;
 	}
@@ -355,8 +376,9 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 	init();
 	CrashGuard guard(*this);
 
-	std::string send = "CMD_LIST ";
-	send += all ? "true" : "false";
+	std::string send = kCmdList;
+	send += ' ';
+	send += all ? "showall" : "showcompatible";
 	send += '\n';
 	write_to_server(send);
 
@@ -366,6 +388,7 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 		result_vector[i] = read_line();
 	}
 
+	cached_remotes_ = nr_addons;
 	check_endofstream();
 	guard.ok();
 	return result_vector;
@@ -374,9 +397,12 @@ std::vector<std::string> NetAddons::refresh_remotes(const bool all) {
 AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	check_string_validity(name);
 	init();
-	CrashGuard guard(*this);
-	{
-		std::string send = "CMD_INFO ";
+	CrashGuard guard(*this, true);
+	if (cached_remotes_ > 0) {
+		--cached_remotes_;
+	} else {
+		std::string send = kCmdInfo;
+		send += ' ';
 		send += name;
 		send += '\n';
 		write_to_server(send);
@@ -437,8 +463,8 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	a.total_file_size = math::to_long(read_line());
 	a.upload_timestamp = math::to_long(read_line());
 	a.download_count = math::to_long(read_line());
-	for (int j = 0; j < kMaxRating; ++j) {
-		a.votes[j] = math::to_long(read_line());
+	for (uint32_t& vote_ref : a.votes) {
+		vote_ref = math::to_long(read_line());
 	}
 
 	const int comments = math::to_int(read_line());
@@ -488,7 +514,8 @@ void NetAddons::download_addon(const std::string& name,
 	init();
 	CrashGuard guard(*this);
 	{
-		std::string send = "CMD_DOWNLOAD ";
+		std::string send = kCmdDownload;
+		send += ' ';
 		send += name;
 		send += '\n';
 		write_to_server(send);
@@ -546,7 +573,8 @@ void NetAddons::download_i18n(const std::string& name,
 	init();
 	CrashGuard guard(*this);
 	{
-		std::string send = "CMD_I18N ";
+		std::string send = kCmdI18N;
+		send += ' ';
 		send += name;
 		send += '\n';
 		write_to_server(send);
@@ -579,7 +607,8 @@ int NetAddons::get_vote(const std::string& addon) {
 		init();
 		CrashGuard guard(*this);
 
-		std::string send = "CMD_GET_VOTE ";
+		std::string send = kCmdGetVote;
+		send += ' ';
 		send += addon;
 		send += '\n';
 		write_to_server(send);
@@ -605,7 +634,8 @@ void NetAddons::vote(const std::string& addon, const unsigned vote) {
 	assert(vote <= kMaxRating);
 	init();
 	CrashGuard guard(*this);
-	std::string send = "CMD_VOTE ";
+	std::string send = kCmdVote;
+	send += ' ';
 	send += addon;
 	send += ' ';
 	send += std::to_string(vote);
@@ -624,15 +654,16 @@ void NetAddons::comment(const AddOnInfo& addon,
 
 	std::string send;
 	if (index_to_edit == nullptr) {
-		send = "CMD_COMMENT ";
+		send = kCmdComment;
+		send += ' ';
 		send += addon.internal_name;
 		send += ' ';
 		send += version_to_string(addon.version, false);
 	} else {
-		send = "CMD_EDIT_COMMENT ";
+		send = kCmdEditComment;
+		send += ' ';
 		send += std::to_string(*index_to_edit);
 	}
-	send += ' ';
 	append_multiline_message(send, message);
 	write_to_server(send);
 
@@ -653,29 +684,32 @@ void NetAddons::admin_action(const AdminAction a,
 	std::string send;
 	switch (a) {
 	case AdminAction::kSetupTx:
-		send = "CMD_SETUP_TX ";
+		send = kCmdSetupTx;
 		break;
 	case AdminAction::kVerify:
-		send = "CMD_ADMIN_VERIFY ";
+		send = kCmdAdminVerify;
 		break;
 	case AdminAction::kQuality:
-		send = "CMD_ADMIN_QUALITY ";
+		send = kCmdAdminQuality;
 		break;
 	case AdminAction::kSyncSafe:
-		send = "CMD_ADMIN_SYNC_SAFE ";
+		send = kCmdAdminSyncSafe;
 		break;
 	case AdminAction::kDelete:
-		send = "CMD_ADMIN_DELETE ";
+		send = kCmdAdminDelete;
 		break;
 	}
+	send += ' ';
 	send += addon.internal_name;
 	if (a == AdminAction::kSetupTx) {
 		send += '\n';
+		send += value;
+		send += "\nENDOFSTREAM\n";
 	} else {
-		send += ' ';
 		if (a == AdminAction::kDelete) {
 			append_multiline_message(send, value);
 		} else {
+			send += ' ';
 			send += value;
 			send += '\n';
 		}
@@ -701,7 +735,8 @@ void NetAddons::upload_addon(const std::string& name,
 	}
 
 	CrashGuard guard(*this);
-	std::string send = "CMD_SUBMIT ";
+	std::string send = kCmdSubmit;
+	send += ' ';
 	send += name;
 	send += '\n';
 	write_to_server(send);
@@ -764,7 +799,8 @@ void NetAddons::upload_screenshot(const std::string& addon,
 	init();
 	CrashGuard guard(*this);
 
-	std::string send = "CMD_SUBMIT_SCREENSHOT ";
+	std::string send = kCmdSubmitScreenshot;
+	send += ' ';
 	send += addon;
 	send += ' ';
 
@@ -800,7 +836,8 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		init();
 		CrashGuard guard(*this);
 
-		std::string send = "CMD_SCREENSHOT ";
+		std::string send = kCmdScreenshot;
+		send += ' ';
 		send += name;
 		send += ' ';
 		send += screenie;
@@ -830,7 +867,7 @@ void NetAddons::contact(const std::string& enquiry) {
 	init();
 	CrashGuard guard(*this);
 
-	std::string send = "CMD_CONTACT ";
+	std::string send = kCmdContact;
 	append_multiline_message(send, enquiry);
 	write_to_server(send);
 

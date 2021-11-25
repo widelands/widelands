@@ -128,7 +128,7 @@ struct TabPanel : public Panel {
 	// We use the tabname as a safety precaution to prevent acidentally removing the wrong tab.
 	bool remove_last_tab(const std::string& tabname);
 
-	boost::signals2::signal<void()> sigclicked;
+	Notifications::Signal<> sigclicked;
 
 	bool handle_key(bool, SDL_Keysym) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;

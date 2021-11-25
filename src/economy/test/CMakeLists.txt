@@ -6,6 +6,7 @@ wl_test(test_economy
   DEPENDS
     base_log
     base_macros
+    base_test
     economy
     io_filesystem
     logic

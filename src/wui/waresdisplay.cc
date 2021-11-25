@@ -554,7 +554,7 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
          StyleManager::color_tag(_("="), colors.alternative_medium_color());
 	/** TRANSLATORS: The first placeholder is the stock amount of a ware/worker, and the second is an
 	 * icon indicating a trend. Very little space is available. */
-	return (boost::format(_("%1$s%2$s")) % text % indicator).str();
+	return bformat(_("%1$s%2$s"), text, indicator);
 }
 
 RGBAColor
@@ -606,7 +606,7 @@ std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 		amount /= 1000;
 		size++;
 	}
-	return (boost::format(unit_suffixes[size]) % amount).str();
+	return bformat(unit_suffixes[size], amount);
 }
 
 uint32_t WaresDisplay::amount_of(const Widelands::DescriptionIndex ware) {
