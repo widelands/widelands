@@ -32,6 +32,7 @@ shallow_clone: false
 branches:
   only:
     - master
+    - msvc_ci_action
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
