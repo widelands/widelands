@@ -13,7 +13,7 @@ init:
   - cmd: "set VCPKG_TARGET_TRIPLET=%PLATFORM%-windows-static"
   
 cache: 
-  - '%VCPKG_DEFAULT_BINARY_CACHE%' -> appveyor.yml
+  - '%VCPKG_DEFAULT_BINARY_CACHE% -> appveyor.yml'
 
 install:
   # Installing various utilities
