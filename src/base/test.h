@@ -81,7 +81,7 @@
 namespace WLTestsuite {
 using Testcases = std::map<std::string, void (*)()>;
 using Testsuite = std::map<std::string, Testcases>;
-extern Testsuite all_testsuites_;
+Testsuite& all_testsuites();
 
 struct InternalTestcaseInserter {
 	explicit InternalTestcaseInserter(Testcases& tc, const std::string& name, void (*fn)()) {
@@ -172,13 +172,13 @@ inline void do_check_error(const char* f,
 
 #define TEST_EXECUTABLE(name)                                                                      \
 	namespace WLTestsuite {                                                                         \
-	Testsuite all_testsuites_;                                                                      \
 	namespace WLTestsuite_##name {                                                                  \
 		static int main() {                                                                          \
 			bool errors = false;                                                                      \
-			for (const auto& suite : all_testsuites_) {                                               \
+			for (const auto& suite : all_testsuites()) {                                              \
 				for (const auto& test : suite.second) {                                                \
 					try {                                                                               \
+						std::cout << "Running " << suite.first << "::" << test.first << std::endl;       \
 						test.second();                                                                   \
 					} catch (const std::exception& e) {                                                 \
 						errors = true;                                                                   \
@@ -198,7 +198,7 @@ inline void do_check_error(const char* f,
 #define TESTSUITE_START(name)                                                                      \
 	namespace WLTestsuite {                                                                         \
 	namespace WLTestsuite_##name {                                                                  \
-		static Testcases& all_testcases_ = all_testsuites_[#name];
+		static Testcases& all_testcases_ = all_testsuites()[#name];
 
 #define TESTCASE(name)                                                                             \
 	static void testcase_##name();                                                                  \
