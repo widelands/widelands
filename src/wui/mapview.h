@@ -107,18 +107,18 @@ public:
 	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.
-	boost::signals2::signal<void()> changeview;
+	Notifications::Signal<> changeview;
 
 	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel, or by
 	// starting to drag the view.
 	// Note: This signal is called *before* the view actually starts to move.
-	boost::signals2::signal<void()> jump;
+	Notifications::Signal<> jump;
 
 	// Called when the user clicked on a field.
-	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
+	Notifications::Signal<const Widelands::NodeAndTriangle<>&> field_clicked;
 
 	// Called when the field under the mouse cursor has changed.
-	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> track_selection;
+	Notifications::Signal<const Widelands::NodeAndTriangle<>&> track_selection;
 
 	// Defines if an animation should be immediate (one-frame) or nicely
 	// animated for the user to follow.
