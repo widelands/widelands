@@ -44,9 +44,9 @@ struct EditBox : public Panel {
 	EditBox(Panel*, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style);
 	~EditBox() override;
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void()> ok;
-	boost::signals2::signal<void()> cancel;
+	Notifications::Signal<> changed;
+	Notifications::Signal<> ok;
+	Notifications::Signal<> cancel;
 
 	const std::string& text() const;
 	void set_text(const std::string&);

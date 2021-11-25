@@ -41,13 +41,11 @@ struct GameChatPanel : public UI::Panel {
 	              ChatProvider&,
 	              UI::PanelStyle style);
 
-	~GameChatPanel() override;
-
 	// Signal is called when a message has been sent by the user.
-	boost::signals2::signal<void()> sent;
+	Notifications::Signal<> sent;
 
 	// Signal is called when the user has aborted entering a message.
-	boost::signals2::signal<void()> aborted;
+	Notifications::Signal<> aborted;
 
 	const std::string& get_edit_text() const {
 		return editbox.text();
@@ -83,7 +81,7 @@ private:
 	FxId chat_sound;
 	bool has_team_;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
-	boost::signals2::connection update_signal_connection;
+	std::unique_ptr<Notifications::Signal<>::SignalSubscriber> update_signal_connection_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_CHAT_PANEL_H

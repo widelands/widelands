@@ -26,11 +26,7 @@ descriptions:new_productionsite_type {
       rows = 2
    }},
 
-   aihints = {
-      needs_water = true,
-      basic_amount = 1,
-      prohibited_till = 360,
-   },
+   aihints = {},
 
    working_positions = {
       amazons_wilderness_keeper = 1

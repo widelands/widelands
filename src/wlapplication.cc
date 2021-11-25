@@ -1342,17 +1342,17 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		return std::string();
 	};
+	bool found = false;
 	if (commandline_.count("datadir")) {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
 
 		const std::string err = checkdatadirversion(datadir_);
-		if (!err.empty()) {
+		found = err.empty();
+		if (!found) {
 			log_err("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
-			exit(2);
 		}
 	} else {
-		bool found = false;
 		std::vector<std::pair<std::string, std::string>> wrong_candidates;
 
 		// Try absolute path first.
@@ -1404,16 +1404,15 @@ void WLApplication::handle_commandline_parameters() {
 			for (const auto& pair : wrong_candidates) {
 				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
 			}
-			exit(2);
 		}
 	}
-	if (!is_absolute_path(datadir_)) {
+	if (found && !is_absolute_path(datadir_)) {
 		try {
 			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
 			log_err("Error parsing datadir: %s\n", e.what());
-			exit(2);
+			found = false;
 		}
 	}
 
@@ -1422,11 +1421,15 @@ void WLApplication::handle_commandline_parameters() {
 		if (!lang.empty()) {
 			set_config_string("language", lang);
 		} else {
-			init_language();
+			if (found) {
+				init_language();
+			}
 			throw_empty_value("--language");
 		}
 	}
-	init_language();  // do this now to have translated command line help
+	if (found) {
+		init_language();  // do this now to have translated command line help
+	}
 	fill_parameter_vector();
 
 	if (commandline_.count("error")) {
@@ -1571,6 +1574,10 @@ void WLApplication::handle_commandline_parameters() {
 			throw ParameterError(
 			   CmdLineVerbosity::Normal, bformat(_("Unknown command line parameter: %s"), pair.first));
 		}
+	}
+
+	if (!found) {
+		throw ParameterError(CmdLineVerbosity::None);  // datadir error already printed
 	}
 }
 

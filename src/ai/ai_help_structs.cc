@@ -409,7 +409,8 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	}
 }
 bool BuildingObserver::buildable(const Widelands::Player& p) {
-	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
+	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id) &&
+	       p.tribe().has_building(id);
 }
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material

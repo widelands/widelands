@@ -127,46 +127,27 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	uint16_t ports_count = 0;
 	uint16_t shipyards_count = 0;
 	uint16_t expeditions_in_prep = 0;
+	uint16_t expeditions_ready = 0;
 	uint16_t expeditions_in_progress = 0;
 	bool idle_shipyard_stocked = false;
-
-	// goes over all warehouses (these includes ports)
-	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
-			++ports_count;
-			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
-				if (pd->expedition_started()) {
-					++expeditions_in_prep;
-				}
-			}
-		}
-	}
 
 	// goes over productionsites and gets status of shipyards
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
 			++shipyards_count;
 
-			// In very rare situation, we might have non-seafaring map but the shipyard is working
-			if (!map_allows_seafaring_ && !ps_obs.site->is_stopped()) {
+			// In very rare situation, we might have non-seafaring map but there is a shipyard
+			if (!map_allows_seafaring_) {
 				verb_log_dbg_time(
 				   game().get_gametime(),
-				   "  %1d: we have working shipyard in a non seafaring ecoomy, stopping it...\n",
+				   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
 				   player_number());
-				game().send_player_start_stop_building(*ps_obs.site);
-				return false;
-			}
-
-			// counting stocks
-			uint8_t stocked_wares = 0;
-			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-			for (Widelands::InputQueue* queue : inputqueues) {
-				if (queue->get_type() == Widelands::wwWARE) {
-					stocked_wares += queue->get_filled();
+				if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+					game().send_player_dismantle(*ps_obs.site, true);
+				} else {
+					game().send_player_bulldoze(*ps_obs.site);
 				}
-			}
-			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
-				idle_shipyard_stocked = true;
+				return false;
 			}
 		}
 	}
@@ -176,7 +157,22 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		return false;
 	}
 
-	// and now over ships
+	// goes over all warehouses (these includes ports)
+	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
+		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
+			++ports_count;
+			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
+				if (pd->expedition_started()) {
+					++expeditions_in_prep;
+				}
+				if (pd->is_expedition_ready()) {
+					++expeditions_ready;
+				}
+			}
+		}
+	}
+
+	// iterates over all ships
 	for (const ShipObserver& observer : allships) {
 		if (observer.ship->state_is_expedition()) {
 			++expeditions_in_progress;
@@ -186,12 +182,10 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	assert(allships.size() >= expeditions_in_progress);
 	bool ship_free = allships.size() - expeditions_in_progress > 0;
 
-	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
-
 	// now we decide whether we have enough ships or need to build another
 	// three values: kDoNothing, kNeedShip, kEnoughShips
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked) {
+	if (ports_count > 0 && shipyards_count > 0) {
 
 		if (!basic_economy_established) {
 			enough_ships = FleetStatus::kEnoughShips;
@@ -212,27 +206,38 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 		}
 	}
 
-	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (enough_ships == FleetStatus::kNeedShip) {
+	// goes over productionsites finds shipyards and configures them
+	for (const ProductionSiteObserver& ps_obs : productionsites) {
+		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
+			// counting stocks
+			uint8_t stocked_wares = 0;
+			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
+			for (Widelands::InputQueue* queue : inputqueues) {
+				if (queue->get_type() == Widelands::wwWARE) {
+					stocked_wares += queue->get_filled();
+				}
+			}
+			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
+				idle_shipyard_stocked = true;
+			}
 
-		for (const ProductionSiteObserver& ps_obs : productionsites) {
-			if (ps_obs.bo->is(BuildingAttribute::kShipyard) && ps_obs.site->can_start_working() &&
-			    ps_obs.site->is_stopped()) {
-				// make sure it is fully stocked
-				// counting stocks
-				uint8_t stocked_wares = 0;
-				std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-				for (Widelands::InputQueue* queue : inputqueues) {
-					if (queue->get_type() == Widelands::wwWARE) {
-						stocked_wares += queue->get_filled();
+			if (expeditions_ready > 0 && idle_shipyard_stocked && allships.size() - ports_count == 0) {
+				if (potential_wrong_shipyard_) {
+					if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+						game().send_player_dismantle(*ps_obs.site, true);
+					} else {
+						game().send_player_bulldoze(*ps_obs.site);
 					}
+					game().send_player_sink_ship(*allships.back().ship);
+					allships.pop_back();
+					potential_wrong_shipyard_ = false;
+					return true;
 				}
-				if (stocked_wares < 16) {
-					continue;
-				}
-
+				potential_wrong_shipyard_ = true;
+				return false;
+			}
+			if (enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked) {
 				game().send_player_start_stop_building(*ps_obs.site);
-				return true;
 			}
 		}
 	}

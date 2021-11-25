@@ -714,19 +714,33 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 
 	const Widelands::DescriptionIndex enhancement = ts->descr().enhancement();
 
-	if (enhancement != Widelands::INVALID_INDEX && ts_without_trainers_ == 0 && mines_.size() > 3 &&
+	if (enhancement != Widelands::INVALID_INDEX && ts_without_trainers_ == 0 &&
 	    ts_finished_count_ > 1 && ts_in_const_count_ == 0) {
 
 		// Make sure that:
 		// 1. Building is allowed
 		// 2. AI limit for weaker AI is not to be exceeded
+		// 3. We have enough material to construct it
 		BuildingObserver& en_bo =
 		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
 		uint16_t current_proportion =
 		   en_bo.total_count() * 100 / (ts_finished_count_ + ts_in_const_count_);
+		en_bo.build_material_shortage = false;
+		uint8_t shortage_counter = 0;
+		// checking we have enough critical material on stock
+		for (uint32_t m = 0; m < en_bo.critical_building_material.size(); ++m) {
+			Widelands::DescriptionIndex wt(
+			   static_cast<size_t>(en_bo.critical_building_material.at(m)));
+			if (calculate_stocklevel(wt) <=
+			    static_cast<unsigned int>(std::abs(management_data.get_military_number_at(19)) / 20)) {
+				shortage_counter++;
+				en_bo.build_material_shortage = true;
+			}
+		}
 		if (player_->is_building_type_allowed(enhancement) &&
 		    en_bo.aimode_limit_status() == AiModeBuildings::kAnotherAllowed &&
-		    en_bo.max_trainingsites_proportion > current_proportion) {
+		    en_bo.max_trainingsites_proportion > current_proportion &&
+		    shortage_counter < std::abs(management_data.get_military_number_at(11)) / 25) {
 			game().send_player_enhance_building(*tso.site, enhancement, true);
 		}
 	}
@@ -1122,6 +1136,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	                         3)};
 	const uint16_t total_score = scores[0] + scores[1] + scores[2];
 
+	// help variable to determine wood availability in the economy
+	const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
+	                                   productionsites.size() * 2 - numof_psites_in_constr +
+	                                   management_data.get_military_number_at(87) / 5;
+
 	static int32_t inputs[4 * kFNeuronBitSize] = {0};
 	// Resetting values as the variable is static
 	std::fill(std::begin(inputs), std::end(inputs), 0);
@@ -1358,10 +1377,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
                     -3 :
                     0;
 	inputs[105] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -1 : 0;
-	inputs[106] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -1 * (size - 1) : 0;
-	inputs[107] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -3 * (size - 1) : 0;
-	inputs[108] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * size : 0;
-	inputs[109] = (wood_policy_ == WoodPolicy::kAllowRangers) ? -5 * (size - 1) : 0;
+	inputs[106] = stocked_wood_level < 25 ? -1 * (size - 1) : 0;
+	inputs[107] = stocked_wood_level < 25 ? -3 * (size - 1) : 0;
+	inputs[108] = stocked_wood_level < 25 ? -5 * size : 0;
+	inputs[109] = stocked_wood_level < 25 ? -5 * (size - 1) : 0;
 	if (!bo.critical_building_material.empty() && buil_material_mines_count == 0) {
 		inputs[110] = -5;
 		inputs[111] = -2;
