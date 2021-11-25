@@ -271,7 +271,7 @@ private:
 	 * called. false = can be played
 	 */
 	static bool backend_is_disabled_;
-	bool use_custom_songset_instead_ingame;
+	bool use_custom_songset_instead_ingame_;
 };
 
 extern SoundHandler* g_sh;

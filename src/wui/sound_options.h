@@ -31,7 +31,7 @@ struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
 
 private:
-	UI::Checkbox custom_songset;
+	UI::Checkbox custom_songset_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

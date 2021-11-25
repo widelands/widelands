@@ -130,14 +130,15 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              0,
              0,
              UI::Box::Vertical),
-     custom_songset(this,
-                    UI::PanelStyle::kFsMenu,
-                    {0, 0},
-                    _("Play your own music ingame"),
-                    _("You can play custom in-game music by placing your own music files in "
-                      "‘<Widelands Home Directory>/music/custom_XX.ogg’ (where ‘XX’ are sequential "
-                      "two-digit numbers starting with 00)"),
-                    0) {
+     custom_songset_(
+        this,
+        UI::PanelStyle::kFsMenu,
+        {0, 0},
+        _("Play your own music in-game"),
+        _("You can play custom in-game music by placing your own music files in "
+          "‘[Widelands Home Directory]/music/custom_XX.ogg’ (where ‘XX’ are sequential "
+          "two-digit numbers starting with 00)"),
+        0) {
 
 	set_inner_spacing(kSpacing);
 
@@ -155,9 +156,9 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	add(new SoundControl(
 	   this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
 	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
-	add(&custom_songset);
-	custom_songset.set_state(g_sh->use_custom_songset());
-	custom_songset.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
+	add(&custom_songset_);
+	custom_songset_.set_state(g_sh->use_custom_songset());
+	custom_songset_.changedto.connect([](bool state) { g_sh->use_custom_songset(state); });
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if
