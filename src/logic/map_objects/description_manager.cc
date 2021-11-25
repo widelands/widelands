@@ -143,33 +143,27 @@ void DescriptionManager::register_description(const std::string& description_nam
 
 	if (registered_descriptions_.count(description_name) == 1) {
 		// World and tribe addons are loaded first actually
-		bool is_addon = true;
 		if (caller.first == RegistryCallerType::kDefault ||
 		    caller.first == RegistryCallerType::kScenario) {
-			is_addon = false;
 			const std::vector<std::string>& registered_attributes =
 			   registered_descriptions_.at(description_name).attributes;
 			// Reverse logic: replace if should have been skipped,
 			//                skip if would replace this
-			replace = std::find(registered_attributes.begin(),
-			                    registered_attributes.end(),
+			replace = std::find(registered_attributes.begin(), registered_attributes.end(),
 			                    "__skip_if_exists") != registered_attributes.end();
-			skip = std::find(registered_attributes.begin(),
-			                    registered_attributes.end(),
-			                    "__replace_if_exists") != registered_attributes.end();
+			skip = std::find(registered_attributes.begin(), registered_attributes.end(),
+			                 "__replace_if_exists") != registered_attributes.end();
 			assert(!(replace && skip));
 		}
 		if (skip) {
-			log_info("Skipped registering '%s'\n", description_name.c_str());
-			if (!is_addon) {
-				log_info("   A replacement from an addon is already in place\n");
-			}
+			verb_log_info("%s: using '%s' instead of '%s'", description_name.c_str(),
+			              registered_descriptions_.at(description_name).script_path.c_str(),
+			              script_path.c_str());
 			return;
 		} else if (replace) {
-			log_info("Replacing registry entry '%s'\n", description_name.c_str());
-			if (!is_addon) {
-				log_info("   Earlier registration from an addon had __skip_if_exists attribute\n");
-			}
+			verb_log_info("%s: using '%s' instead of '%s'", description_name.c_str(),
+			              script_path.c_str(),
+			              registered_descriptions_.at(description_name).script_path.c_str());
 			registered_descriptions_.erase(registered_descriptions_.find(description_name));
 		} else {
 			throw GameDataError(
