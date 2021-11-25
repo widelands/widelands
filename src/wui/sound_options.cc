@@ -130,13 +130,14 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              0,
              0,
              UI::Box::Vertical),
-     custom_songset(
-        this,
-        UI::PanelStyle::kFsMenu,
-        {0, 0},
-        _("Play your own music ingame"),
-        _("You can play custom in-game music by placing your own music files in ‘<Widelands Home Directory>/music/custom_XX.ogg’ (where ‘XX’ are sequential two-digit numbers starting with 00)"),
-        0) {
+     custom_songset(this,
+                    UI::PanelStyle::kFsMenu,
+                    {0, 0},
+                    _("Play your own music ingame"),
+                    _("You can play custom in-game music by placing your own music files in "
+                      "‘<Widelands Home Directory>/music/custom_XX.ogg’ (where ‘XX’ are sequential "
+                      "two-digit numbers starting with 00)"),
+                    0) {
 
 	set_inner_spacing(kSpacing);
 

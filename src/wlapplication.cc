@@ -596,7 +596,7 @@ static void init_one_player_from_template(unsigned p,
 	const Widelands::TribeBasicInfo t = settings->settings().get_tribeinfo(tribe);
 	for (unsigned i = 0; i < t.initializations.size(); ++i) {
 		if (addon.empty() ?
-		       init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
+             init_script_name == FileSystem::fs_filename(t.initializations[i].script.c_str()) :
              addon == t.initializations[i].script) {
 			settings->set_player_init(p, i);
 			found_init = true;
@@ -1623,7 +1623,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   panel, UI::WindowStyle::kFsMenu,
 		   ask_for_bug_report ? _("Unexpected error during the game") : _("Game ended unexpectedly"),
 		   ask_for_bug_report ?
-		      bformat(
+            bformat(
 		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
 		           "this problem to help us improve Widelands. You will find related messages in the "
 		           "standard output (stdout.txt on Windows). You are using build %2$s "
