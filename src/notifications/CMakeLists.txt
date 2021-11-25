@@ -6,7 +6,9 @@ wl_library(notifications
     notifications.h
     notifications_impl.h
     note_ids.h
+    signal.h
   DEPENDS
+    base_exceptions
     base_log
     base_macros
 )

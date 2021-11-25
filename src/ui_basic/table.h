@@ -59,9 +59,9 @@ public:
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
-	boost::signals2::signal<void()> cancel;
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<> cancel;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	///
@@ -186,9 +186,9 @@ public:
 	 */
 	using CompareFn = std::function<bool(uint32_t, uint32_t)>;
 
-	boost::signals2::signal<void()> cancel;
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<> cancel;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
