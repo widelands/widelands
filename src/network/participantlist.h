@@ -22,9 +22,8 @@
 
 #include <string>
 
-#include <boost/signals2/signal.hpp>
-
 #include "logic/widelands.h"
+#include "notifications/signal.h"
 
 // Avoid as many includes as possible
 struct GameSettings;
@@ -183,13 +182,13 @@ public:
 	uint8_t get_participant_rtt(int16_t participant) const;
 
 	/// Called when the underlying data was updated and should be re-fetched.
-	boost::signals2::signal<void()> participants_updated;
+	Notifications::Signal<> participants_updated;
 
 	/**
 	 * Called when the RTT for a participant changed.
 	 * Passed parameters are the participant index and the new RTT.
 	 */
-	boost::signals2::signal<void(int16_t, uint8_t)> participant_updated_rtt;
+	Notifications::Signal<int16_t, uint8_t> participant_updated_rtt;
 
 private:
 	/**

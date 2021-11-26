@@ -22,6 +22,8 @@
 #include <cstdlib>
 #include <iomanip>
 #include <memory>
+#include <ostream>
+#include <sstream>
 
 #include <SDL.h>
 
@@ -51,7 +53,7 @@ namespace FsMenu {
 namespace AddOnsUI {
 
 constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
-constexpr const char* const kForumURL = "https://www.widelands.org/forum/17/";
+constexpr const char* const kForumURL = "https://www.widelands.org/forum/forum/17/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
