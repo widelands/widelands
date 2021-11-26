@@ -57,9 +57,9 @@ struct Radiogroup {
 	Radiogroup();
 	~Radiogroup();
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
-	boost::signals2::signal<void()> clicked;  //  clicked without things changed
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
+	Notifications::Signal<> clicked;  //  clicked without things changed
 
 	/**
 	 * Text conventions: Sentence case for the 'tooltip'

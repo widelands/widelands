@@ -59,9 +59,9 @@ constexpr int kBuildGridCellSize = 50;
 struct BuildGrid : public UI::IconGrid {
 	BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols);
 
-	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildclicked;
-	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmouseout;
-	boost::signals2::signal<void(Widelands::DescriptionIndex)> buildmousein;
+	Notifications::Signal<Widelands::DescriptionIndex> buildclicked;
+	Notifications::Signal<Widelands::DescriptionIndex> buildmouseout;
+	Notifications::Signal<Widelands::DescriptionIndex> buildmousein;
 
 	void add(Widelands::DescriptionIndex);
 

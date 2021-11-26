@@ -43,7 +43,7 @@ public:
 	          UI::PanelStyle style,
 	          bool horiz = false);
 
-	boost::signals2::signal<void(int32_t)> moved;
+	Notifications::Signal<int32_t> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);

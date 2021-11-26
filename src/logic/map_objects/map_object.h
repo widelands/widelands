@@ -21,7 +21,6 @@
 #define WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H
 
 #include <atomic>
-#include <boost/signals2/signal.hpp>
 
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
@@ -33,6 +32,7 @@
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
+#include "notifications/signal.h"
 #include "scripting/lua_table.h"
 
 class RenderTarget;
@@ -213,7 +213,7 @@ public:
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
-	boost::signals2::signal<void(uint32_t serial)> removed;
+	Notifications::Signal<uint32_t /* serial */> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.
