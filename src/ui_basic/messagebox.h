@@ -60,8 +60,8 @@ struct WLMessageBox : public Window {
 	             MBoxType,
 	             Align = UI::Align::kCenter);
 
-	boost::signals2::signal<void()> ok;
-	boost::signals2::signal<void()> cancel;
+	Notifications::Signal<> ok;
+	Notifications::Signal<> cancel;
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 	bool handle_mouserelease(uint8_t btn, int32_t mx, int32_t my) override;

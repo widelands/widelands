@@ -276,7 +276,7 @@ public:
 	 *
 	 * param serial : the building serial
 	 */
-	boost::signals2::signal<void(uint32_t serial)> muted;
+	Notifications::Signal<uint32_t /* serial */> muted;
 
 	PositionList get_positions(const EditorGameBase&) const override;
 
