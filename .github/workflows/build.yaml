@@ -290,9 +290,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Check origin
-        # TODO: switch to widelands only when merging
+        # TODO: switch to 'widelands' when merging
         run: |
-          if [ "${GITHUB_REPOSITORY%/*}" != "matthiakl" ] && [ "${GITHUB_REPOSITORY%/*}" == "widelands" ]
+          if [ "${GITHUB_REPOSITORY%/*}" != "matthiakl" ]
           then
             echo "Skipping release creation on fork"
             exit 1
