@@ -3,7 +3,8 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    # TODO: switch to master only when merging
+    branches: [ master, ci_dev_release ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -280,3 +281,54 @@ jobs:
       with:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
+
+  dev_release:
+    name: Automated development pre-release
+    # TODO: switch to 'refs/heads/master' when merging
+    if: ${{ github.ref == 'refs/heads/ci_dev_release' && always() }}
+    needs: [windows, macos]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Check origin
+        # TODO: switch to widelands only when merging
+        run: |
+          if [ "${GITHUB_REPOSITORY%/*}" != "matthiakl" ] && [ "${GITHUB_REPOSITORY%/*}" == "widelands" ]
+          then
+            echo "Skipping release creation on fork"
+            exit 1
+          fi
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+      - name: Check missing artifacts
+        # This step ensures, that the development release always contain an artifact for every platform
+        # artifacts.list lists all attachements of the pre-release. In case a build step failed, we detect
+        # that a file is missing and download the last successful build from the pre-release.
+        run: |
+          RELEASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/latest"
+          mkdir Widelands-latest
+          cd Widelands-latest
+          curl -L -O "$RELEASE_URL/artifacts.list"
+          for ARTIFACT in $(cat artifacts.list)
+          do
+            [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
+            MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
+            ls ../Widelands*/Widelands*${MATRIX} || \
+              curl -L -O "$RELEASE_URL/$ARTIFACT"
+          done
+      - name: List artifacts
+        run: |
+          find . -name 'Widelands*' -type f -printf '%f\n' | tee artifacts.list
+      - name: Updating latest pre-release
+        # Creates a new pre-release with the "latest" tag and all gathered artifacts.
+        # Because all older artifacts are removed, we have to reupload the missing ones detected in the previous step
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Builds"
+          files: |
+            */*.exe
+            */*.dmg
+            artifacts.list
+
