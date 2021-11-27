@@ -20,7 +20,7 @@ ParticipantList::ParticipantList(const GameSettings* settings,
 
 	// When the update signal is called, re-calculate the participant counts
 	participants_updated.connect(
-	   [this]() { update_participant_counts(); }, boost::signals2::connect_position::at_front);
+	   [this]() { update_participant_counts(); }, Notifications::SubscriberPosition::kFront);
 }
 
 const ParticipantList::ParticipantCounts& ParticipantList::get_participant_counts() const {

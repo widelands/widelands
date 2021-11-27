@@ -83,7 +83,7 @@ protected:
 
 public:
 	/// An entry was selected
-	boost::signals2::signal<void()> selected;
+	Notifications::Signal<> selected;
 
 	/// \return true if an element has been selected from the list
 	bool has_selection() const;
