@@ -133,8 +133,7 @@ private:
 	 * these lists. So these two member variables need to be declared mutable.
 	 */
 	mutable std::set<std::unique_ptr<SignalSubscriber>> owned_subscribers_;
-	mutable std::list<std::pair<SignalSubscriber*, std::function<void(Args...)>>>
-	   all_subscribers_;
+	mutable std::list<std::pair<SignalSubscriber*, std::function<void(Args...)>>> all_subscribers_;
 
 	DISALLOW_COPY_AND_ASSIGN(Signal);
 };
