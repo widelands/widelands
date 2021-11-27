@@ -25,6 +25,7 @@
 #include <list>
 #include <memory>
 #include <set>
+#include <vector>
 
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -59,8 +60,14 @@ public:
 
 	/** Invoke all the signal's subscribers' callback functions. */
 	void operator()(Args... args) const {
+		// Make a deep copy before iteration – a callback function may delete their
+		// Subscriber or even the Signal itself, resulting in a heap-use-after-free.
+		std::vector<std::function<void(Args...)>> all_callbacks;
 		for (const auto& s : all_subscribers_) {
-			s->callback_(args...);
+			all_callbacks.emplace_back(s->callback_);
+		}
+		for (const auto& s : all_callbacks) {
+			s(args...);
 		}
 	}
 
