@@ -34,9 +34,9 @@ struct IconGrid : public Panel {
 	IconGrid(
 	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
 
-	boost::signals2::signal<void(int32_t)> icon_clicked;
-	boost::signals2::signal<void(int32_t)> mouseout;
-	boost::signals2::signal<void(int32_t)> mousein;
+	Notifications::Signal<int32_t> icon_clicked;
+	Notifications::Signal<int32_t> mouseout;
+	Notifications::Signal<int32_t> mousein;
 
 	int32_t
 	add(const std::string& name, const Image* pic, void* data, const std::string& tooltip_text = "");

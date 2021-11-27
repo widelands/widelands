@@ -102,7 +102,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 		recipient_dropdown_.select(chat_.last_recipient_);
 		// Insert "@playername " into the edit field if the dropdown currently has a selection
 		set_recipient();
-		update_signal_connection = chat_.participants_->participants_updated.connect([this]() {
+		update_signal_connection_ = chat_.participants_->participants_updated.subscribe([this]() {
 			// When the participants change, create new contents for dropdown
 			has_team_ = chat_.participants_->needs_teamchat();
 			prepare_recipients();
@@ -122,12 +122,6 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 void GameChatPanel::layout() {
 	vbox_.set_size(get_inner_w(), get_inner_h());
-}
-
-GameChatPanel::~GameChatPanel() {
-	if (chat_.participants_ != nullptr) {
-		update_signal_connection.disconnect();
-	}
 }
 
 /**
