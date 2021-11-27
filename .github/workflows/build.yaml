@@ -284,19 +284,11 @@ jobs:
 
   dev_release:
     name: Automated development pre-release
-    # TODO: switch to 'refs/heads/master' when merging
-    if: ${{ github.ref == 'refs/heads/ci_dev_release' && always() }}
+    # TODO: switch to 'widelands/widelands' and 'refs/heads/master' when merging
+    if: ${{ github.repository == 'matthiakl/widelands' && github.ref == 'refs/heads/ci_dev_release' && always() }}
     needs: [windows, macos]
     runs-on: "ubuntu-latest"
     steps:
-      - name: Check origin
-        # TODO: switch to 'widelands' when merging
-        run: |
-          if [ "${GITHUB_REPOSITORY%/*}" != "matthiakl" ]
-          then
-            echo "Skipping release creation on fork"
-            exit 1
-          fi
       - name: Download artifacts
         uses: actions/download-artifact@v2
       - name: Check missing artifacts
@@ -313,22 +305,45 @@ jobs:
             [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
             MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
             ls ../Widelands*/Widelands*${MATRIX} || \
-              curl -L -O "$RELEASE_URL/$ARTIFACT"
+              curl -L -o $ARTIFACT "$RELEASE_URL/Widelands-daily-${MATRIX}"
           done
-      - name: List artifacts
+      - name: List and rename artifacts
         run: |
+          sudo apt-get update
+          sudo apt-get install rename
           find . -name 'Widelands*' -type f -printf '%f\n' | tee artifacts.list
+          find . -name 'Widelands*' -type f -exec prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "{}" \;
+          find . -name 'Widelands*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
+            dir=$(dirname "$ARTIFACT")
+            filename=$(basename "$ARTIFACT")
+            echo "Calculate checksum for \"$ARTIFACT\""
+            pushd "$dir"
+            md5sum "${filename}" > "${filename}.md5"
+            popd
+          done
+          # curl exits 23 because grep will kill it after the first match
+          set +e
+          latest=$(curl -i "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/master" | grep -m 1 "\"sha\": ")
+          set -e
+          latest=${latest#*: \"}
+          latest=${latest%\",}
+          if [ "$latest" != "$GITHUB_SHA" ]
+          then
+            echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
+            exit 1
+          fi
       - name: Updating latest pre-release
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
         # Because all older artifacts are removed, we have to reupload the missing ones detected in the previous step
         uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          repo_token: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
           title: "Development Builds"
           files: |
-            */*.exe
-            */*.dmg
+            */Widelands-daily-*.exe
+            */Widelands-daily-*.dmg
+            */Widelands-daily-*.md5
             artifacts.list
 
