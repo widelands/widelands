@@ -330,7 +330,7 @@ jobs:
           if [ "$latest" != "$GITHUB_SHA" ]
           then
             echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
-            exit 1
+            # TODO: exit 1 when merging to master
           fi
       - name: Updating latest pre-release
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
