@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_INFO_WINDOW_H
-#define WL_EDITOR_UI_MENUS_TOOL_INFO_WINDOW_H
+#ifndef WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H
+#define WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H
 
 #include "editor/editorinteractive.h"
 #include "ui_basic/multilinetextarea.h"
@@ -50,4 +50,4 @@ private:
 	UI::MultilineTextarea multiline_textarea_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_INFO_WINDOW_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H

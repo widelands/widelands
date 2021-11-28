@@ -18,6 +18,7 @@
  */
 
 #include "editor/ui_menus/field_info_window.h"
+
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/resource_description.h"
@@ -59,7 +60,6 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
 
 	multiline_textarea_.set_text(as_richtext(all_infos));
 	set_center_panel(&multiline_textarea_);
-	//	center_to_parent();
 
 	initialization_complete();
 }
