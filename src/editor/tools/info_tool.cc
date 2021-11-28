@@ -18,8 +18,7 @@
  */
 
 #include "editor/tools/info_tool.h"
-#include "base/string.h"
-#include "editor/editorinteractive.h"
+
 #include "editor/ui_menus/field_info_window.h"
 #include "wui/unique_window_handler.h"
 
