@@ -883,10 +883,14 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 /* RST
 callworker
 ----------
-.. function:: callworker=\<worker_program_name\>
+.. function:: callworker=\<worker_program_name\> \[on failure fail|complete|skip\]
 
    :arg string worker_program_name: The name of a :ref:`worker program <tribes_worker_programs>`
       defined in the productionsite's main :ref:`worker <lua_tribes_basic_workers>`.
+
+   :arg string on: Defines what to do if the worker program fails. The production program
+      is always terminated immediately when ``callworker`` fails; this parameter specifies
+      what result status the production program should report. Default is ``fail``.
 
 Calls a program of the productionsite's main worker. Example:
 
