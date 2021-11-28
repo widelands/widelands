@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2021 by the Widelands Development Team
+ * Copyright (C) 2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,20 +34,27 @@ struct FieldInfoWindow : public UI::UniqueWindow {
 	                const Widelands::Field& tf,
 	                Widelands::Map* map);
 
+protected:
+	void think() override;
+
 private:
-	void add_node_info(std::string& buf);
-	void add_caps_info(std::string& buf);
-	void add_owner_info(std::string& buf);
-	void add_terrain_info(std::string& buf);
-	void add_mapobject_info(std::string& buf);
-	void add_resources_info(std::string& buf);
-	void add_map_info(std::string& buf);
+	void update();
+
+	void add_node_info(std::string& buf) const;
+	void add_caps_info(std::string& buf) const;
+	void add_owner_info(std::string& buf) const;
+	void add_terrain_info(std::string& buf) const;
+	void add_mapobject_info(std::string& buf) const;
+	void add_resources_info(std::string& buf) const;
+	void add_map_info(std::string& buf) const;
 	EditorInteractive& parent_;
-	const Widelands::NodeAndTriangle<>& center_;
+	const Widelands::NodeAndTriangle<> center_;
 	const Widelands::Field& f_;
 	const Widelands::Field& tf_;
 	Widelands::Map* map_;
 	UI::MultilineTextarea multiline_textarea_;
+	/// The last time the information in this Panel got updated
+	Time lastupdate_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H

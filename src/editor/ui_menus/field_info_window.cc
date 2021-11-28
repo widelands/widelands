@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2021 by the Widelands Development Team
+ * Copyright (C) 2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 
 constexpr UI::FontStyle font_style = UI::FontStyle::kWuiInfoPanelParagraph;
+constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  int32_t const x,
@@ -37,18 +38,24 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                       UI::WindowStyle::kWui,
                       "tool_options_menu",
                       &registry,
+                      x,
+                      y,
                       400,
                       200,
-                      _("Field Information"),
-                      x,
-                      y),
+                      _("Field Information")),
      parent_(parent),
      center_(center),
      f_(f),
      tf_(tf),
      map_(map),
-     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui) {
+     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
+     lastupdate_(0) {
 
+	update();
+
+	initialization_complete();
+}
+void FieldInfoWindow::update() {
 	std::string all_infos;
 	add_node_info(all_infos);
 	add_caps_info(all_infos);
@@ -60,17 +67,16 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
 
 	multiline_textarea_.set_text(as_richtext(all_infos));
 	set_center_panel(&multiline_textarea_);
-
-	initialization_complete();
+	lastupdate_ = parent_.egbase().get_gametime();
 }
 
-void FieldInfoWindow::add_node_info(std::string& buf) {
+void FieldInfoWindow::add_node_info(std::string& buf) const {
 	buf += as_heading(_("Node"), UI::PanelStyle::kWui, true);
 	buf += as_listitem(
 	   bformat(_("Coordinates: (%1$i, %2$i)"), center_.node.x, center_.node.y), font_style);
 }
 
-void FieldInfoWindow::add_caps_info(std::string& buf) {
+void FieldInfoWindow::add_caps_info(std::string& buf) const {
 	std::vector<std::string> caps_strings;
 	Widelands::NodeCaps const caps = f_.nodecaps();
 	switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
@@ -118,7 +124,7 @@ void FieldInfoWindow::add_caps_info(std::string& buf) {
 	   font_style);
 }
 
-void FieldInfoWindow::add_owner_info(std::string& buf) {
+void FieldInfoWindow::add_owner_info(std::string& buf) const {
 	if (f_.get_owned_by() > 0) {
 		buf += as_listitem(
 		   bformat(_("Owned by: Player %u"), static_cast<unsigned int>(f_.get_owned_by())),
@@ -128,7 +134,7 @@ void FieldInfoWindow::add_owner_info(std::string& buf) {
 	}
 }
 
-void FieldInfoWindow::add_terrain_info(std::string& buf) {
+void FieldInfoWindow::add_terrain_info(std::string& buf) const {
 	buf += as_heading(_("Terrain"), UI::PanelStyle::kWui);
 
 	const Widelands::TerrainDescription* ter = parent_.egbase().descriptions().get_terrain_descr(
@@ -149,7 +155,7 @@ void FieldInfoWindow::add_terrain_info(std::string& buf) {
 	   font_style);
 }
 
-void FieldInfoWindow::add_mapobject_info(std::string& buf) {
+void FieldInfoWindow::add_mapobject_info(std::string& buf) const {
 	const Widelands::BaseImmovable* immovable = f_.get_immovable();
 	Widelands::Bob* bob = f_.get_first_bob();
 	if (immovable || bob) {
@@ -177,10 +183,11 @@ void FieldInfoWindow::add_mapobject_info(std::string& buf) {
 				case (Widelands::MapObjectType::WORKER):
 				case (Widelands::MapObjectType::CARRIER):
 				case (Widelands::MapObjectType::SOLDIER):
+				case (Widelands::MapObjectType::FERRY):
 					workernames.push_back(bob->descr().descname());
 					break;
 				default:
-					break;
+					NEVER_HERE();
 				}
 			} while ((bob = bob->get_next_bob()));
 
@@ -206,24 +213,24 @@ void FieldInfoWindow::add_mapobject_info(std::string& buf) {
 	}
 }
 
-void FieldInfoWindow::add_resources_info(std::string& buf) {
+void FieldInfoWindow::add_resources_info(std::string& buf) const {
 	Widelands::ResourceAmount ramount = f_.get_resources_amount();
 	if (ramount > 0) {
 		buf += as_heading(_("Resources"), UI::PanelStyle::kWui);
 		buf += as_listitem(
 		   bformat(
-		      pgettext("resources", "%1%x %2%"), static_cast<unsigned int>(ramount),
+		      pgettext("resources", "%1%× %2%"), static_cast<unsigned int>(ramount),
 		      parent_.egbase().descriptions().get_resource_descr(f_.get_resources())->descname()),
 		   font_style);
 	}
 }
 
-void FieldInfoWindow::add_map_info(std::string& buf) {
+void FieldInfoWindow::add_map_info(std::string& buf) const {
 	buf += as_heading(_("Map"), UI::PanelStyle::kWui);
 	buf += as_listitem(
 	   bformat(pgettext("map_name", "Name: %s"), richtext_escape(map_->get_name())), font_style);
 	buf +=
-	   as_listitem(bformat(_("Size: %1% x %2%"), map_->get_width(), map_->get_height()), font_style);
+	   as_listitem(bformat(_("Size: %1% × %2%"), map_->get_width(), map_->get_height()), font_style);
 
 	if (map_->get_nrplayers() > 0) {
 		buf += as_listitem(
@@ -254,4 +261,11 @@ void FieldInfoWindow::add_map_info(std::string& buf) {
 		}
 		buf += as_listitem(bformat(_("Enabled Add-Ons: %s"), richtext_escape(addons)), font_style);
 	}
+}
+
+void FieldInfoWindow::think() {
+	if ((parent_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update();
+	}
+	UI::UniqueWindow::think();
 }

@@ -89,9 +89,22 @@ UniqueWindow::UniqueWindow(Panel* const parent,
                            UniqueWindow::Registry* const reg,
                            int32_t const w,
                            int32_t const h,
-                           const std::string& title,
+                           const std::string& title)
+   : UniqueWindow(parent, s, name, reg, 0, 0, w, h, title) {
+}
+
+/**
+ * Register, position according to the registry information.
+ */
+UniqueWindow::UniqueWindow(Panel* const parent,
+                           WindowStyle s,
+                           const std::string& name,
+                           UniqueWindow::Registry* const reg,
                            int32_t const x,
-                           int32_t const y)
+                           int32_t const y,
+                           int32_t const w,
+                           int32_t const h,
+                           const std::string& title)
    : Window(parent, s, name, x, y, w, h, title), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
 		delete registry_->window;
