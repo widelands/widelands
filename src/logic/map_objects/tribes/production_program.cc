@@ -923,7 +923,8 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
    : on_failure_(ProgramResult::kFailed) {
 	const size_t nr_args = arguments.size();
 	if (nr_args != 1 && nr_args != 4) {
-		throw GameDataError("Usage: callworker=<worker_program_name> [on failure fail|complete|skip]");
+		throw GameDataError(
+		   "Usage: callworker=<worker_program_name> [on failure fail|complete|skip]");
 	}
 
 	program_ = arguments.front();
