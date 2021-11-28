@@ -301,10 +301,12 @@ void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::stri
 findobject
 ^^^^^^^^^^
 .. function:: findobject=radius:\<distance\> [type:\<map_object_type\>] [attrib:\<attribute\>]
+   [no_notify]
 
    :arg int radius: Search for an object within the given radius around the worker.
    :arg string type: The type of map object to search for. Defaults to ``immovable``.
    :arg string attrib: The attribute that the map object should possess.
+   :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Find and select an object based on a number of predicates, which can be specified
    in arbitrary order. The object can then be used in other commands like ``walk``
@@ -334,16 +336,23 @@ findobject
 /**
  * iparam1 = radius predicate
  * iparam2 = attribute predicate (if >= 0)
+ * iparam3 = send message on failure (if != 0)
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findobject;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
+	act->iparam3 = 1;
 	act->sparam1 = "immovable";
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
+		if (argument == "no_notify") {
+			act->iparam3 = 0;
+			continue;
+		}
+
 		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 
 		if (item.first == "radius") {

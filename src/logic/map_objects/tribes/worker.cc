@@ -359,10 +359,10 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			send_signal(game, "fail");  //  no object found, cannot run program
 			pop_task(game);
 			if (upcast(ProductionSite, productionsite, get_location(game))) {
-				if (!found_reserved) {
-					productionsite->notify_player(game, 30);
-				} else {
+				if (found_reserved) {
 					productionsite->unnotify_player();
+				} else if (action.iparam3 != 0) {
+					productionsite->notify_player(game, 30);
 				}
 			}
 			return true;
