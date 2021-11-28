@@ -292,8 +292,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
       - name: Check missing artifacts
-        # This step ensures, that the development release always contain an artifact for every platform
-        # artifacts.list lists all attachements of the pre-release. In case a build step failed, we detect
+        # This step ensures that the development release always contains an artifact for every platform.
+        # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
         # that a file is missing and download the last successful build from the pre-release.
         run: |
           RELEASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/latest"
