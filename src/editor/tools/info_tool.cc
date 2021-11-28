@@ -18,19 +18,12 @@
  */
 
 #include "editor/tools/info_tool.h"
-#include "base/i18n.h"
 #include "base/string.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/field_info_window.h"
-#include "graphic/text_layout.h"
-#include "logic/map_objects/descriptions.h"
-#include "logic/map_objects/tribes/ship.h"
-#include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/terrain_description.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/window.h"
 #include "wui/unique_window_handler.h"
 
+constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                           EditorInteractive& parent,
@@ -39,21 +32,18 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	parent.stop_painting();
 
-	//	UI::Window* const w = new UI::Window(&parent, UI::WindowStyle::kWui, "field_information", 30,
-	// 30, 	                                     400, 200, _("Field Information"));
-	// UI::MultilineTextarea* const multiline_textarea = 	   new UI::MultilineTextarea(w, 0, 0,
-	// w->get_inner_w(), w->get_inner_h(), UI::PanelStyle::kWui);
-
 	Widelands::Field& f = (*map)[center.node];
 	Widelands::Field& tf = (*map)[center.triangle.node];
 
 	UI::UniqueWindow::Registry& registry = parent.unique_windows().get_registry(
 	   bformat("fieldinfo_%d_%d", center.node.x, center.node.y));
-	registry.open_window = [&parent, &registry, &center, &f, &tf, map]() {
-		new FieldInfoWindow(parent, registry, _("Field Information"), center, f, tf, map);
+	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
+		new FieldInfoWindow(parent, registry, number_of_open_windows_ * kOffset,
+		                    number_of_open_windows_ * kOffset, center, f, tf, map);
 	};
+	registry.opened.connect([this]() { ++number_of_open_windows_; });
+	registry.closed.connect([this]() { --number_of_open_windows_; });
 	registry.create();
-	//		return registry.window;
 
 	return 0;
 }

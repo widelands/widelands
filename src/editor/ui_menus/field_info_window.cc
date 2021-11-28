@@ -26,13 +26,21 @@
 constexpr UI::FontStyle font_style = UI::FontStyle::kWuiInfoPanelParagraph;
 FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
-                                 const std::string& title,
+                                 int32_t const x,
+                                 int32_t const y,
                                  const Widelands::NodeAndTriangle<>& center,
                                  const Widelands::Field& f,
                                  const Widelands::Field& tf,
                                  Widelands::Map* map)
-   : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "tool_options_menu", &registry, 400, 200, title),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "tool_options_menu",
+                      &registry,
+                      400,
+                      200,
+                      _("Field Information"),
+                      x,
+                      y),
      parent_(parent),
      center_(center),
      f_(f),
@@ -142,7 +150,6 @@ void FieldInfoWindow::add_terrain_info(std::string& buf) {
 }
 
 void FieldInfoWindow::add_mapobject_info(std::string& buf) {
-	// *** Map Object info
 	const Widelands::BaseImmovable* immovable = f_.get_immovable();
 	Widelands::Bob* bob = f_.get_first_bob();
 	if (immovable || bob) {

@@ -27,7 +27,8 @@
 struct FieldInfoWindow : public UI::UniqueWindow {
 	FieldInfoWindow(EditorInteractive& parent,
 	                UI::UniqueWindow::Registry&,
-	                const std::string& title,
+	                int32_t x,
+	                int32_t y,
 	                const Widelands::NodeAndTriangle<>& center,
 	                const Widelands::Field& f,
 	                const Widelands::Field& tf,

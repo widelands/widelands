@@ -63,7 +63,9 @@ struct UniqueWindow : public Window {
 	             Registry*,
 	             int32_t w,
 	             int32_t h,
-	             const std::string& title);
+	             const std::string& title,
+	             int32_t x = 0,
+	             int32_t y = 0);
 	~UniqueWindow() override;
 
 	bool get_usedefaultpos() {

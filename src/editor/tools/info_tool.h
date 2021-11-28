@@ -39,6 +39,9 @@ struct EditorInfoTool : public EditorTool {
 	bool has_size_one() const override {
 		return true;
 	}
+
+private:
+	int number_of_open_windows_ = 0;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INFO_TOOL_H
