@@ -915,12 +915,30 @@ Calls a program of the productionsite's main worker. Example:
 ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
-                                                const Descriptions& descriptions) {
-	if (arguments.size() != 1) {
-		throw GameDataError("Usage: callworker=<worker_program_name>");
+                                                const Descriptions& descriptions)
+   : on_failure_(ProgramResult::kFailed) {
+	const size_t nr_args = arguments.size();
+	if (nr_args != 1 && nr_args != 4) {
+		throw GameDataError("Usage: callworker=<worker_program_name> [on failure fail|complete|skip]");
 	}
 
 	program_ = arguments.front();
+
+	if (nr_args > 1) {
+		if (arguments.at(1) != "on" || arguments.at(2) != "failure") {
+			throw GameDataError("Expected 'on failure' after worker program name");
+		}
+		if (arguments.at(3) == "fail") {
+			on_failure_ = ProgramResult::kFailed;
+		} else if (arguments.at(3) == "complete") {
+			on_failure_ = ProgramResult::kCompleted;
+		} else if (arguments.at(3) == "skip") {
+			on_failure_ = ProgramResult::kSkipped;
+		} else {
+			throw GameDataError("Expected fail|complete|skip in final position but found '%s'",
+			                    arguments.at(3).c_str());
+		}
+	}
 
 	//  Quote from "void ProductionSite::program_act(Game &)":
 	//  "Always main worker is doing stuff"
@@ -997,7 +1015,7 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
                                                             ProductionSite& psite,
                                                             Worker&) const {
-	psite.program_end(game, ProgramResult::kFailed);
+	psite.program_end(game, on_failure_);
 }
 
 /* RST

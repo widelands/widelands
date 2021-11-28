@@ -313,6 +313,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		std::string program_;
+		ProgramResult on_failure_;
 	};
 
 	/// Does nothing.
