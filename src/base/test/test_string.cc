@@ -161,12 +161,14 @@ TESTCASE(string_formatting) {
 	check_error("end of string", []() { bformat("%02.7", 4); });
 	check_error("missing placeholder", []() { bformat("%2% %3$i", 2, 3); });
 	check_error("duplicate placeholder", []() { bformat("%1% %1$d", 1, 1); });
+	check_error("mixed placeholders", []() { bformat("%4d %2%", 123, 123); });
 	check_error("too many args", []() { bformat("%u %li %lld", 1, 2, 3, 4); });
 	check_error("too few args", []() { bformat("%lu %llu %lli", 1, 2); });
 	check_error("wrong arg type", []() { bformat("%s", 1); });
 	check_error("wrong arg type", []() { bformat("%i", "foo"); });
 	check_error("float too large", []() { bformat("%f", 12345678901234567890.f); });
 	check_error("int too large", []() { bformat("%ld", 0x876543210fedcba9); });
+	check_error("repeated flag", []() { bformat("%0-+03d", 123); });
 }
 
 TESTSUITE_END()
