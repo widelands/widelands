@@ -135,7 +135,7 @@ TESTCASE(string_formatting) {
 	check_equal("A     123X", bformat("A%8dX", 123));
 	check_equal("A00000123X", bformat("A%08dX", 123));
 	check_equal("A    +123X", bformat("A%+8dX", 123));
-	check_equal("A0000+123X", bformat("A%+08dX", 123));
+	check_equal("A+0000123X", bformat("A%+08dX", 123));
 	check_equal("A    -123X", bformat("A%+8dX", -123));
 	check_equal("A      +0X", bformat("A%+8dX", 0));
 	check_equal("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
@@ -151,6 +151,7 @@ TESTCASE(string_formatting) {
 	check_equal("A      12.3X", bformat("A%10.1fX", 12.34567));
 	check_equal("A123      X", bformat("A%-9.0fX", 123.456));
 	check_equal("A+123.4   X", bformat("A%+-9.1fX", 123.456));
+	check_equal("A+00123.45X", bformat("A%0+9.2fX", 123.456));
 
 	format_impl::ArgsPair p1, p2;
 	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;

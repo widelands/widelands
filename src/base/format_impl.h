@@ -180,7 +180,7 @@ struct CharNode : FormatNode {
 
 	inline char* append(char* out, const ArgType t, const Argument arg, bool) const override {
 		if (t != ArgType::kChar) {
-			throw wexception("Wrong argument type: excepted char, found %s", to_string(t).c_str());
+			throw wexception("Wrong argument type: expected char, found %s", to_string(t).c_str());
 		}
 		*out = arg.char_val;
 		return out + 1;
@@ -201,7 +201,7 @@ struct StringNode : FormatNode {
 
 	char* append(char* out, const ArgType t, const Argument arg_u, bool) const override {
 		if (t != ArgType::kString) {
-			throw wexception("Wrong argument type: excepted string, found %s", to_string(t).c_str());
+			throw wexception("Wrong argument type: expected string, found %s", to_string(t).c_str());
 		}
 		const char* arg = arg_u.string_val;
 
@@ -260,7 +260,7 @@ struct BooleanNode : StringNode {
 			val = arg.char_val != 0;
 			break;
 		default:
-			throw wexception("Wrong argument type: excepted bool, found %s", to_string(t).c_str());
+			throw wexception("Wrong argument type: expected bool, found %s", to_string(t).c_str());
 		}
 		arg.string_val = localize ? val ? _("true") : _("false") : val ? "true" : "false";
 		return StringNode::append(out, ArgType::kString, arg, localize);
@@ -268,6 +268,12 @@ struct BooleanNode : StringNode {
 
 	static const BooleanNode node_;
 };
+
+inline char* append_nullptr_node(char* out, const bool localize) {
+	AbstractNode::Argument a;
+	a.string_val = "nullptr";
+	return StringNode::node_.append(out, AbstractNode::ArgType::kString, a, localize);
+}
 
 template <typename Number> struct NumberNodeT : FormatNode {
 	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool uc)
@@ -297,10 +303,9 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			arg = arg_u.float_val;
 			break;
 		case ArgType::kNullptr:
-			arg_u.string_val = "nullptr";
-			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
+			return append_nullptr_node(out, localize);
 		default:
-			throw wexception("Wrong argument type: excepted %s, found %s",
+			throw wexception("Wrong argument type: expected %s, found %s",
 			                 (std::is_signed<Number>::value ? "int" : "unsigned"),
 			                 to_string(t).c_str());
 		}
@@ -382,10 +387,10 @@ template <typename Number> struct NumberNodeT : FormatNode {
                                                    1 :
                                       1;
 		}
-		if (required_width < min_width_) {
+		if ((flags_ & kPadWith0) == 0 && required_width < min_width_) {
 			required_width = min_width_ - required_width;
 			for (; required_width; ++out, --required_width) {
-				*out = (flags_ & kPadWith0 ? '0' : ' ');
+				*out = ' ';
 			}
 		}
 
@@ -406,6 +411,13 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			} else {
 				*out = '+';
 				++out;
+			}
+		}
+
+		if ((flags_ & kPadWith0) != 0 && required_width < min_width_) {
+			required_width = min_width_ - required_width;
+			for (; required_width; ++out, --required_width) {
+				*out = '0';
 			}
 		}
 
@@ -465,11 +477,10 @@ struct FloatNode : FormatNode {
 			arg = arg_u.unsigned_val;
 			break;
 		case ArgType::kNullptr:
-			arg_u.string_val = "nullptr";
-			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
+			return append_nullptr_node(out, localize);
 		default:
 			throw wexception(
-			   "Wrong argument type: excepted float/double, found %s", to_string(t).c_str());
+			   "Wrong argument type: expected float/double, found %s", to_string(t).c_str());
 		}
 
 		const int64_t as_int = static_cast<int64_t>(arg < 0 ? -arg : arg);
@@ -584,10 +595,10 @@ struct FloatNode : FormatNode {
 		}
 
 		// Start writing
-		if (required_width < min_width_) {
+		if ((flags_ & kPadWith0) == 0 && required_width < min_width_) {
 			required_width = min_width_ - required_width;
 			for (; required_width; ++out, --required_width) {
-				*out = (flags_ & kPadWith0 ? '0' : ' ');
+				*out = ' ';
 			}
 		}
 
@@ -603,6 +614,13 @@ struct FloatNode : FormatNode {
 		} else if (flags_ & kNumberSign) {
 			*out = '+';
 			++out;
+		}
+
+		if ((flags_ & kPadWith0) != 0 && required_width < min_width_) {
+			required_width = min_width_ - required_width;
+			for (; required_width; ++out, --required_width) {
+				*out = '0';
+			}
 		}
 
 		if (as_int == 0) {
@@ -666,8 +684,7 @@ struct WildcardNode : FormatNode {
 		case AbstractNode::ArgType::kPointer:
 			return UintNode::node_.append(out, AbstractNode::ArgType::kUnsigned, arg_u, localize);
 		case AbstractNode::ArgType::kNullptr:
-			arg_u.string_val = "nullptr";
-			return StringNode::node_.append(out, AbstractNode::ArgType::kString, arg_u, localize);
+			return append_nullptr_node(out, localize);
 		default:
 			throw wexception("No argument for wildcard found");
 		}
