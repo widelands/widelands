@@ -100,10 +100,10 @@ void RNG::write_state(StreamWrite& sw) {
 	sw.unsigned_32(state1);
 }
 
-static RNG static_rng_(std::chrono::time_point_cast<std::chrono::nanoseconds>(
-                       std::chrono::high_resolution_clock::now())
-                       .time_since_epoch()
-                       .count());
+static RNG static_rng_(
+   std::chrono::time_point_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now())
+      .time_since_epoch()
+      .count());
 uint32_t RNG::static_rand() {
 	return static_rng_.rand();
 }
