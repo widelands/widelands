@@ -1437,7 +1437,7 @@ mine
 ----
 
 .. function:: mine=\<resource_name\> radius:\<number\> yield:\<percent\> when_empty:\<percent\>
-     \[experience_on_fail:\<percent\>\]
+     \[experience_on_fail:\<percent\>\] [no_notify]
 
    :arg string resource_name: The name of the resource to mine, e.g. 'coal' or 'water'.
    :arg int radius: The workarea radius that is searched for resources. Must be ``>0``.
@@ -1448,6 +1448,7 @@ mine
    :arg percent experience_on_fail: The :ref:`map_object_programs_datatypes_percent` chance that the
       mine's workers will still gain some experience when mining fails after its resources have been
       depleted.
+   :arg empty no_notify: Do not send a message to the player if this step fails.
 
    Takes resources from the ground. A building that mines will deplete when the percentage of
    resources given in ``resources`` has been dug up, leaving a chance of ``depleted`` that it
@@ -1479,17 +1480,18 @@ mine
 ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     Descriptions& descriptions,
                                     const std::string& production_program_name,
-                                    ProductionSiteDescr* descr) {
-	if (arguments.size() != 5 && arguments.size() != 4) {
+                                    ProductionSiteDescr* descr)
+   : resource_(INVALID_INDEX), notify_on_failure_(true) {
+	if (arguments.size() > 6 || arguments.size() < 4) {
 		throw GameDataError("Usage: mine=<resource name> radius:<number> yield:<percent> "
-		                    "when_empty:<percent> [experience:<percent>]");
+		                    "when_empty:<percent> [experience:<percent>] [no_notify]");
 	}
 	experience_chance_ = 0U;
 
 	if (read_key_value_pair(arguments.at(2), ':').second.empty()) {
 		// TODO(GunChleoc): Savegame compatibility, remove after v1.0
 		log_warn("Using old syntax in %s. Please use 'mine=<resource name> radius:<number> "
-		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>]'\n",
+		         "yield:<percent> when_empty:<percent> [experience_on_fail:<percent>] [no_notify]'",
 		         descr->name().c_str());
 		resource_ = descriptions.load_resource(arguments.front());
 		workarea_ = read_positive(arguments.at(1));
@@ -1502,7 +1504,12 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.second.empty()) {
-				resource_ = descriptions.load_resource(item.first);
+				// The safeguard is for the case that someone creates a resource called "no_notify"
+				if (item.first == "no_notify" && resource_ != INVALID_INDEX) {
+					notify_on_failure_ = false;
+				} else {
+					resource_ = descriptions.load_resource(item.first);
+				}
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
@@ -1617,7 +1624,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (depleted_chance_ <= 20 * math::k100PercentAsInt / 100U) {
+		if (notify_on_failure_ && depleted_chance_ <= 20 * math::k100PercentAsInt / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
