@@ -45,6 +45,7 @@ namespace format_impl {
    N: Argument index. The N-th format argument will be used for the placeholder with ID N.
       Argument indices are 1-based and there may be no gaps or duplicates.
       Unnumbered placeholders are enumerated from left to right.
+      Numbered and unnumbered placeholders may not be mixed in a format string.
 
    flags: Any combination of
       -    Left align
@@ -866,229 +867,17 @@ private:
 		return format_impl(out, orig_index, arg_index - 1, localize, args...);
 	}
 
-	static inline void add_flag_if_not_present(uint8_t& flags, const Flags f, const char d) {
-		if (flags & f) {
-			throw wexception("Repeated flag '%c'", d);
-		}
-		flags |= f;
-	}
-
-	explicit Tree(const char* format_string) : format_nodes_count_(0) {
-		bool has_positional_node = false;
-		bool has_unpositional_node = false;
-
-		for (; *format_string != '\0';) {
-			// read the next character and determine the kind of node we're looking at
-			if (*format_string != '%') {
-				// plain text, read until the next % sign
-				const char* start = format_string;
-				size_t len = 0;
-				for (; *format_string != '\0' && *format_string != '%'; ++format_string, ++len) {
-				}
-				nodes_.push_back(
-				   {std::unique_ptr<AbstractNode>(new LiteralNode(std::string(start, len))), 0});
-				continue;
-			}
-			// A format node. Let's see what it says.
-			++format_string;
-			if (*format_string == '\0') {
-				throw wexception("expected format sequence after '%%', found \\0");
-			}
-			if (*format_string == '%') {
-				nodes_.push_back({std::unique_ptr<AbstractNode>(new PercentNode), 0});
-				++format_string;
-				continue;
-			}
-
-			static unsigned format_index;
-			static unsigned precision;
-			static size_t min_width;
-			static uint8_t flags;
-			static bool min_w_found;
-			precision = kInfinitePrecision;
-			min_width = 0;
-			flags = kNone;
-			min_w_found = false;
-
-			if (*format_string >= '1' && *format_string <= '9') {
-				// Read a number. This is either a format index or the min width.
-				format_index = 0;
-				do {
-					format_index *= 10;
-					format_index += (*format_string - '0');
-					++format_string;
-				} while (*format_string >= '0' && *format_string <= '9');
-				if (*format_string == '\0') {
-					throw wexception("expected format sequence after '%%%u', found \\0", format_index);
-				}
-
-				if (*format_string == '%') {
-					// A node of the form '%N%' is complete.
-					AbstractNode* node = new WildcardNode;
-					nodes_.push_back({std::unique_ptr<AbstractNode>(node), format_index});
-					if (format_index > format_nodes_count_) {
-						format_nodes_count_ = format_index;
-						format_nodes_by_index_.resize(format_nodes_count_, nullptr);
-					}
-					if (format_nodes_by_index_[format_index - 1] != nullptr) {
-						throw wexception("duplicate use of index %u", format_index);
-					}
-					if (has_unpositional_node) {
-						throw wexception("Cannot mix positional and unpositional placeholders");
-					}
-					has_positional_node = true;
-					format_nodes_by_index_[format_index - 1] = node;
-					++format_string;
-					continue;
-				} else if (*format_string == '$') {
-					// $ character was recognized. Continue below.
-					has_positional_node = true;
-					if (has_unpositional_node) {
-						throw wexception("Cannot mix positional and unpositional placeholders");
-					}
-					++format_string;
-				} else {
-					// This was not a format index but the min_width.
-					// Correct the assumptions and jump forward.
-					if (has_positional_node) {
-						throw wexception("Cannot mix positional and unpositional placeholders");
-					}
-					has_unpositional_node = true;
-					min_width = format_index;
-					format_index = format_nodes_count_ + 1;
-					min_w_found = true;
-				}
-			} else {
-				if (has_positional_node) {
-					throw wexception("Cannot mix positional and unpositional placeholders");
-				}
-				has_unpositional_node = true;
-				format_index = format_nodes_count_ + 1;
-			}
-
-			if (!min_w_found) {
-				// Index was discovered. Now we get the flags.
-				for (;; ++format_string) {
-					if (*format_string == '+') {
-						add_flag_if_not_present(flags, Flags::kNumberSign, *format_string);
-					} else if (*format_string == '-') {
-						add_flag_if_not_present(flags, Flags::kLeftAlign, *format_string);
-					} else if (*format_string == '0') {
-						add_flag_if_not_present(flags, Flags::kPadWith0, *format_string);
-					} else {
-						break;
-					}
-				}
-
-				// Now check if a width has been specified.
-				while (*format_string >= '0' && *format_string <= '9') {
-					min_width *= 10;
-					min_width += (*format_string - '0');
-					++format_string;
-				}
-			}
-
-			// Now we check if a precision has been specified.
-			if (*format_string == '\0') {
-				throw wexception("unterminated format sequence at end of string");
-			}
-			if (*format_string == '.') {
-				++format_string;
-				if (*format_string < '0' || *format_string > '9') {
-					throw wexception(
-					   "expected numerical argument after '.', found '%c'", *format_string);
-				}
-				precision = 0;
-				do {
-					precision *= 10;
-					precision += (*format_string - '0');
-					++format_string;
-				} while (*format_string >= '0' && *format_string <= '9');
-			}
-
-			// Finally, we reach the type specifiers.
-			AbstractNode* node = nullptr;
-			switch (*format_string) {
-			case 's':
-				node = new StringNode(flags, min_width, precision);
-				break;
-			case 'b':
-				node = new BooleanNode(flags, min_width, precision);
-				break;
-			case 'f':
-				node =
-				   new FloatNode(flags, min_width,
-				                 precision == kInfinitePrecision ? kDefaultFloatPrecision : precision);
-				break;
-
-			case 'c':
-				if (flags != kNone || min_width != 0 || precision != kInfinitePrecision) {
-					throw wexception("%%c can not have additional specifiers");
-				}
-				node = new CharNode;
-				break;
-
-			case 'l':
-			case 'i':
-			case 'd':
-			case 'u': {
-				if (precision != kInfinitePrecision) {
-					throw wexception("integers can not have precision");
-				}
-				for (; *format_string == 'l'; ++format_string) {
-				}
-				if (*format_string == 'd' || *format_string == 'i') {
-					node = new IntNode(flags, min_width, false, false);
-				} else if (*format_string == 'u') {
-					node = new UintNode(flags, min_width, false, false);
-				} else {
-					throw wexception("invalid format type character '%c' after '%%l'", *format_string);
-				}
-				break;
-			}
-
-			case 'x':
-			case 'X': {
-				if (precision != kInfinitePrecision) {
-					throw wexception("integers can not have precision");
-				}
-				node = new IntNode(flags, min_width, true, *format_string == 'X');
-				break;
-			}
-
-			case 'p':
-			case 'P': {
-				if (precision != kInfinitePrecision) {
-					throw wexception("pointers can not have precision");
-				}
-				node = new UintNode(flags, min_width, true, *format_string == 'P');
-				break;
-			}
-
-			default:
-				throw wexception("unrecognized format type character '%c'", *format_string);
-			}
-			++format_string;
-
-			nodes_.push_back({std::unique_ptr<AbstractNode>(node), format_index});
-			if (format_index > format_nodes_count_) {
-				format_nodes_count_ = format_index;
-				format_nodes_by_index_.resize(format_nodes_count_, nullptr);
-			}
-			if (format_nodes_by_index_[format_index - 1] != nullptr) {
-				throw wexception("duplicate use of index %u", format_index);
-			}
-			format_nodes_by_index_[format_index - 1] = node;
-
-		}  // end of the big for loop
-
-		assert(format_nodes_by_index_.size() == format_nodes_count_);
-		for (unsigned i = format_nodes_count_; i; --i) {
-			if (format_nodes_by_index_[format_nodes_count_ - i] == nullptr) {
-				throw wexception("index %u is unused", format_nodes_count_ - i + 1);
-			}
-		}
-	}
+	// Parser functions
+	explicit Tree(const char* format_string);
+	void parse_next_node(const char*&);
+	void parse_literal_node(const char*&);
+	void parse_format_index(const char*&);
+	bool parse_index_or_minwidth(const char*&);
+	void parse_flags_and_minwidth(const char*&);
+	void parse_precision(const char*&);
+	std::unique_ptr<AbstractNode> parse_type_spec(const char*&);
+	void recognized_wildcard_node();
+	void recognized_node(std::unique_ptr<AbstractNode>);
 };
 
 template <typename... Args>

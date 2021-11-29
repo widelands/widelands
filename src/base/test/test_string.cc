@@ -134,6 +134,10 @@ TESTCASE(string_formatting) {
 	check_equal("A123     X", bformat("A%-8dX", 123));
 	check_equal("A     123X", bformat("A%8dX", 123));
 	check_equal("A00000123X", bformat("A%08dX", 123));
+	check_equal("A    +123X", bformat("A%+8dX", 123));
+	check_equal("A0000+123X", bformat("A%+08dX", 123));
+	check_equal("A    -123X", bformat("A%+8dX", -123));
+	check_equal("A      +0X", bformat("A%+8dX", 0));
 	check_equal("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
 
 	check_equal("Aw77X", bformat("A%2$c%1$iX", 77, 'w'));
@@ -168,7 +172,8 @@ TESTCASE(string_formatting) {
 	check_error("wrong arg type", []() { bformat("%i", "foo"); });
 	check_error("float too large", []() { bformat("%f", 12345678901234567890.f); });
 	check_error("int too large", []() { bformat("%ld", 0x876543210fedcba9); });
-	check_error("repeated flag", []() { bformat("%0-+03d", 123); });
+	check_error("invalid flag combination", []() { bformat("%-05d", 123); });
+	check_error("repeated flag", []() { bformat("%+0+5d", 123); });
 }
 
 TESTSUITE_END()

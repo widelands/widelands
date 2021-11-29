@@ -2,6 +2,7 @@ add_subdirectory(test)
 
 wl_library(base
   SRCS
+    format_impl.cc
     format_impl.h
     i18n.h
     i18n.cc
