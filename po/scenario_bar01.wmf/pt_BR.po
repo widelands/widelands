@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-10-16 16:16+0000\n"
+"PO-Revision-Date: 2021-11-27 20:04+0000\n"
 "Last-Translator: Sara Carreiro\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -260,34 +260,34 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Construções melhores talvez também requeiram materiais melhorados além de ébano. Um desses é rejunte, que é produzido através de granito, água e carvão por um caieiro."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Você pode obter água construindo um poço sobre uma fonte de água, que seus geólogos podem descobrir quando você os enviar para qualquer bandeira que não esteja em uma montanha."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "Para fazer com que um geólogo vá procurar água, clique em uma bandeira na área em que você quer que ele vá e depois no botão ''Envie um geólogo para explorar o sítio''."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "Carvão pode ser obtido construindo um forno ou uma mina de carvão. Obter carvão da queima de toras é lento. Você só deve construir um forno quando nenhum carvão está disponível."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "Construa um forno de calcinação e um poço. Adicionalmente, construa ou um forno ou uma mina de carvão para estoque de carvão."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
