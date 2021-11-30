@@ -408,4 +408,15 @@ jobs:
             */Widelands-daily-*.dmg
             */Widelands-daily-*.md5
             artifacts.list
+      - name: Update Release Body
+        uses: tubone24/update_release@v1.3.1
+        env:
+          TAG_NAME: "latest"
+          GITHUB_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
+        with:
+          is_append_body: true
+          body: |
+            ---
+            These builds are automatically generated from master. Changes since the last build are listed above.
+            The file `artifacts.list` lists the original installer names, which also contain the commit hash from which they were generated.
 
