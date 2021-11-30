@@ -45,7 +45,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		new FieldInfoWindow(
 		   parent, registry, offset_factor * kOffset, offset_factor * kOffset, center, f, tf, map);
 	};
-	registry.opened.connect([this, &registry]() { ++number_of_open_windows_; });
+	registry.opened.connect([this]() { ++number_of_open_windows_; });
 	registry.closed.connect([this]() { --number_of_open_windows_; });
 	registry.create();
 

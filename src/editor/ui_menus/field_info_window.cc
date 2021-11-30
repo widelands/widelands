@@ -25,6 +25,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 
 constexpr UI::FontStyle font_style = UI::FontStyle::kWuiInfoPanelParagraph;
+constexpr Duration kUpdateTimeInGametimeMs(500);  //  half a second, gametime
 FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  int32_t const x,
@@ -47,7 +48,8 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
      f_(f),
      tf_(tf),
      map_(map),
-     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui) {
+     multiline_textarea_(this, 0, 0, get_inner_w(), get_inner_h(), UI::PanelStyle::kWui),
+     lastupdate_(0) {
 
 	update();
 	registry.opened.connect([this]() { update(); });
@@ -63,8 +65,12 @@ void FieldInfoWindow::update() {
 	add_resources_info(all_infos);
 	add_map_info(all_infos);
 
-	multiline_textarea_.set_text(as_richtext(all_infos));
-	set_center_panel(&multiline_textarea_);
+	const std::string& richtext = as_richtext(all_infos);
+
+	if (richtext != multiline_textarea_.get_text()) {
+		multiline_textarea_.set_text(richtext);
+		set_center_panel(&multiline_textarea_);
+	}
 }
 
 void FieldInfoWindow::add_node_info(std::string& buf) const {
@@ -258,4 +264,13 @@ void FieldInfoWindow::add_map_info(std::string& buf) const {
 		}
 		buf += as_listitem(bformat(_("Enabled Add-Ons: %s"), richtext_escape(addons)), font_style);
 	}
+}
+
+void FieldInfoWindow::think() {
+	if ((parent_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update();
+		lastupdate_ = parent_.egbase().get_gametime();
+	}
+
+	UI::UniqueWindow::think();
 }

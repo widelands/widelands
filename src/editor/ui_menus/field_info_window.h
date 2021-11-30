@@ -40,6 +40,8 @@ struct FieldInfoWindow : public UI::UniqueWindow {
 	                Widelands::Map* map);
 
 protected:
+	void think() override;
+
 private:
 	void update();
 
@@ -56,6 +58,7 @@ private:
 	const Widelands::Field& tf_;
 	Widelands::Map* map_;
 	UI::MultilineTextarea multiline_textarea_;
+	Time lastupdate_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H
