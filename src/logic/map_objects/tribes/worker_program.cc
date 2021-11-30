@@ -462,6 +462,9 @@ findspace
  * sparam1 = Resource
  * sparamv = The terraform category (if any)
  */
+// TODO(Nordfriese): All boolean flags (space. breed, no_notify) should be placed in
+// just one iparam. Unfortunately there is no way to have saveloading versioning here.
+// Refactor this when we next break savegame compatibility completely.
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
 	act->function = &Worker::run_findspace;
 	act->iparam1 = -1;
