@@ -5,6 +5,7 @@ wl_library(wui_sound_options
   DEPENDS
     base_i18n
     graphic_styles
+    graphic_text_layout
     sound
     ui_basic
 )
