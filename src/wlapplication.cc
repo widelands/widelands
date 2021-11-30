@@ -431,9 +431,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_sh = new SoundHandler();
 
-	g_sh->register_songs("music", "intro");
-	g_sh->register_songs("music", "menu");
-	g_sh->register_songs("music", "ingame");
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
 
 	initialize_g_addons();
 
@@ -749,7 +750,7 @@ void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
 	if (game_type_ == GameType::kEditor) {
-		g_sh->change_music("ingame");
+		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
@@ -788,7 +789,7 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
-			g_sh->change_music("menu");
+			g_sh->change_music(Songset::kMenu);
 			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);
 			log_err("%s\n", message.c_str());
@@ -807,9 +808,9 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kFromTemplate) {
 		init_and_run_game_from_template();
 	} else {
-		g_sh->change_music("intro");
+		g_sh->change_music(Songset::kIntro);
 
-		g_sh->change_music("menu", 1000);
+		g_sh->change_music(Songset::kMenu, 1000);
 
 		FsMenu::MainMenu m;
 		m.run<int>();

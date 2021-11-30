@@ -43,14 +43,11 @@ public:
 	/** Wrapper around a callback function. */
 	class SignalSubscriber {
 	public:
-		SignalSubscriber(const Signal& p, const std::function<void(Args...)> c)
-		   : callback_(c), parent_(p) {
+		explicit SignalSubscriber(const Signal& p) : parent_(p) {
 		}
 		~SignalSubscriber() {
 			parent_.unsubscribe(this);
 		}
-
-		const std::function<void(Args...)> callback_;
 
 	private:
 		const Signal& parent_;
@@ -59,8 +56,11 @@ public:
 
 	/** Invoke all the signal's subscribers' callback functions. */
 	void operator()(Args... args) const {
-		for (const auto& s : all_subscribers_) {
-			s->callback_(args...);
+		// Make a copy before iteration – a callback function may delete their
+		// Subscriber or even the Signal itself, resulting in a heap-use-after-free.
+		auto all = all_subscribers_;
+		for (const auto& pair : all) {
+			pair.second(args...);
 		}
 	}
 
@@ -69,22 +69,22 @@ public:
 	 * The caller must ensure that the subscriber is destroyed before the signal.
 	 */
 	std::unique_ptr<SignalSubscriber>
-	subscribe(const std::function<void(Args...)> callback,
+	subscribe(std::function<void(Args...)> callback,
 	          SubscriberPosition pos = SubscriberPosition::kBack) const {
-		SignalSubscriber* s = new SignalSubscriber(*this, callback);
+		SignalSubscriber* s = new SignalSubscriber(*this);
 		switch (pos) {
 		case SubscriberPosition::kBack:
-			all_subscribers_.push_back(s);
+			all_subscribers_.emplace_back(s, callback);
 			break;
 		case SubscriberPosition::kFront:
-			all_subscribers_.push_front(s);
+			all_subscribers_.emplace_front(s, callback);
 			break;
 		}
 		return std::unique_ptr<SignalSubscriber>(s);
 	}
 
 	/** Create a subscriber with the same lifetime as the signal. */
-	inline void connect(const std::function<void(Args...)> callback,
+	inline void connect(std::function<void(Args...)> callback,
 	                    SubscriberPosition pos = SubscriberPosition::kBack) const {
 		owned_subscribers_.insert(subscribe(callback, pos));
 	}
@@ -119,7 +119,7 @@ private:
 	/** Called by a subscriber at the end of its lifetime. */
 	void unsubscribe(const SignalSubscriber* s) const {
 		for (auto it = all_subscribers_.begin(); it != all_subscribers_.end(); ++it) {
-			if (*it == s) {
+			if (it->first == s) {
 				all_subscribers_.erase(it);
 				return;
 			}
@@ -133,7 +133,7 @@ private:
 	 * these lists. So these two member variables need to be declared mutable.
 	 */
 	mutable std::set<std::unique_ptr<SignalSubscriber>> owned_subscribers_;
-	mutable std::list<SignalSubscriber*> all_subscribers_;
+	mutable std::list<std::pair<SignalSubscriber*, std::function<void(Args...)>>> all_subscribers_;
 
 	DISALLOW_COPY_AND_ASSIGN(Signal);
 };
