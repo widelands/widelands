@@ -21,6 +21,7 @@
 
 #include "graphic/styles/text_panel_style.h"
 #include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
 
 /**
  * A box with all sound options.
@@ -28,6 +29,9 @@
  */
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
+
+private:
+	UI::Checkbox custom_songset_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

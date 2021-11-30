@@ -629,11 +629,11 @@ void ProductionSite::try_replace_worker(const Game* game,
                                         DescriptionIndex worker_index,
                                         WorkingPosition* wp) {
 	// Search replacement worker in the same building
-	for (auto wp_repl = working_positions_.begin(); wp_repl != working_positions_.end(); ++wp_repl) {
-		if (!wp_repl->worker.is_set()) {
+	for (auto& wp_repl : working_positions_) {
+		if (!wp_repl.worker.is_set()) {
 			continue;
 		}
-		std::pair<int32_t, int32_t> w_pair = find_worker(wp_repl->worker);
+		std::pair<int32_t, int32_t> w_pair = find_worker(wp_repl.worker);
 		const DescriptionIndex worker_index_repl = descr().working_positions().at(w_pair.first).first;
 
 		// Only move workers into higher qualified jobs
@@ -641,18 +641,18 @@ void ProductionSite::try_replace_worker(const Game* game,
 		bool needs_higher_qualification =
 		   worker_index_repl != worker_index && wd.can_act_as(worker_index_repl);
 
-		Worker* w_repl = wp_repl->worker.get(*game);
+		Worker* w_repl = wp_repl.worker.get(*game);
 		assert(w_repl != nullptr);
 		bool is_over_qualified = w_repl->descr().worker_index() != worker_index_repl;
 		if (is_over_qualified && needs_higher_qualification &&
 		    w_repl->descr().can_act_as(worker_index)) {
 			// Move worker to evicted slot
 			delete wp->worker_request;
-			*wp = *wp_repl;
+			*wp = wp_repl;
 			molog(owner().egbase().get_gametime(), "%s promoted\n", w_repl->descr().name().c_str());
 			// Request the now missing worker instead and loop again
-			*wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
-			try_replace_worker(game, worker_index_repl, wp_repl.base());
+			wp_repl = WorkingPosition(&request_worker(worker_index_repl), nullptr);
+			try_replace_worker(game, worker_index_repl, &wp_repl);
 			return;
 		}
 	}
