@@ -17,11 +17,50 @@
  *
  */
 
-#include "base/format_impl.h"
+#include "base/format/tree.h"
 
 #include <memory>
 
+#include "base/format/wildcard_node.h"
+
 namespace format_impl {
+
+// Definitions of globals
+
+std::map<std::string, std::unique_ptr<Tree>> Tree::cache_;
+AbstractNode::Argument Tree::arg_;
+char Tree::buffer_[Tree::kBufferSize];
+
+const CharNode CharNode::node_;
+const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
+const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
+const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
+
+std::string to_string(const AbstractNode::ArgType t) {
+	switch (t) {
+	case AbstractNode::ArgType::kNone:
+		return "none";
+	case AbstractNode::ArgType::kChar:
+		return "char";
+	case AbstractNode::ArgType::kString:
+		return "string";
+	case AbstractNode::ArgType::kBoolean:
+		return "bool";
+	case AbstractNode::ArgType::kFloat:
+		return "float";
+	case AbstractNode::ArgType::kSigned:
+		return "int";
+	case AbstractNode::ArgType::kUnsigned:
+		return "unsigned";
+	case AbstractNode::ArgType::kPointer:
+		return "pointer";
+	case AbstractNode::ArgType::kNullptr:
+		return "nullptr";
+	}
+	NEVER_HERE();
+}
+
+// Parser implementation
 
 static unsigned format_index;
 static unsigned precision;

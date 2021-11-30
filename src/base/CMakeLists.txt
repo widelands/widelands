@@ -2,8 +2,15 @@ add_subdirectory(test)
 
 wl_library(base
   SRCS
-    format_impl.cc
-    format_impl.h
+    format/abstract_node.h
+    format/boolean_node.h
+    format/common_nodes.h
+    format/float_node.h
+    format/number_node.h
+    format/string_node.h
+    format/tree.cc
+    format/tree.h
+    format/wildcard_node.h
     i18n.h
     i18n.cc
     multithreading.h
