@@ -750,7 +750,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music("ingame", 1000);
+	g_sh->change_music(Songset::kIngame, 1000);
 
 	state_ = gs_running;
 
@@ -769,7 +769,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_ending;
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);

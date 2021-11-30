@@ -519,7 +519,7 @@ void EditorInteractive::cleanup_for_load() {
 void EditorInteractive::start() {
 	// Run the editor initialization script, if any
 	try {
-		g_sh->change_music("ingame", 1000);
+		g_sh->change_music(Songset::kIngame, 1000);
 		egbase().lua().run_script("map:scripting/editor_init.lua");
 	} catch (LuaScriptNotExistingError&) {
 		// do nothing.
@@ -559,7 +559,7 @@ void EditorInteractive::exit() {
 			}
 		}
 	}
-	g_sh->change_music("menu", 200);
+	g_sh->change_music(Songset::kMenu, 200);
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
