@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-22 03:03+0000\n"
-"PO-Revision-Date: 2021-11-16 09:25+0000\n"
+"POT-Creation-Date: 2021-11-25 04:56+0000\n"
+"PO-Revision-Date: 2021-11-25 04:57+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -148,17 +148,17 @@ msgid "No AI"
 msgstr "Без ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:95
+#: ../../src/ai/defaultai.h:96
 msgid "Normal AI"
 msgstr "Нормальный ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:110
+#: ../../src/ai/defaultai.h:111
 msgid "Weak AI"
 msgstr "Слабый ИИ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/ai/defaultai.h:125
+#: ../../src/ai/defaultai.h:126
 msgid "Very Weak AI"
 msgstr "Очень слабый ИИ"
 
@@ -573,18 +573,17 @@ msgstr "Карта не была сохранена, вы действитель
 #: ../../src/ui_fsmenu/addons/manager.cc:1577
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:104
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:294
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:463
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:594
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:712
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:552
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:685
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:458
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1608
+#: ../../src/wlapplication.cc:1615
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1610
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -669,8 +668,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -866,8 +865,8 @@ msgstr "Экран"
 #: ../../src/ui_fsmenu/addons/manager.cc:256
 #: ../../src/ui_fsmenu/addons/packager.cc:111
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:176
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:389
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:567
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:459
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:658
 #: ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/keyboard_options.cc:69
 #: ../../src/ui_fsmenu/keyboard_options.cc:233 ../../src/ui_fsmenu/menu.cc:144
@@ -888,7 +887,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/addons/contact.cc:59
 #: ../../src/ui_fsmenu/addons/login_box.cc:64
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:192
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:397
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:467
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:66
 #: ../../src/ui_fsmenu/keyboard_options.cc:64
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:91
@@ -1408,8 +1407,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -2381,7 +2380,7 @@ msgstr "Файл карты забракован по причине:\n%s"
 msgid "This objective has no description."
 msgstr "Эта задача без описания."
 
-#: ../../src/logic/player.cc:1927
+#: ../../src/logic/player.cc:1937
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3993,7 +3992,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:87
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:682
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:774
 msgid "Delete this add-on"
 msgstr "Удалить дополнение"
 
@@ -4448,108 +4447,130 @@ msgstr "Обзор:"
 msgid "The comment contains invalid richtext markup:"
 msgstr "Комментарий содержит недопустимую разметку:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:406
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:383
+msgctxt "tx"
+msgid "Priority:"
+msgstr ""
+
+#. * TRANSLATORS: "Resource" here refers to the name of a translation unit
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:391
+msgctxt "tx"
+msgid "Resource Name:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:397
+msgctxt "tx"
+msgid "Categories (whitespace-separated; characters only):"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:404
+msgid "This may take several minutes. Please be patient."
+msgstr "Это займёт до нескольких минут. Будьте терпеливы."
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
+msgctxt "priority"
+msgid "Low"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
+msgctxt "priority"
+msgid "Normal"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:411
+msgctxt "priority"
+msgid "High"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:478
 msgid "Please explain why you are deleting this add-on."
 msgstr "Пожалуйста, расскажите, зачем вам удалять это дополнение."
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:416
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:495
 msgid "Unchecked"
 msgstr "Непроверено"
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:418
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:497
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:397
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:422
 msgid "Verified"
 msgstr "Проверено"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:422
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:501
 msgid "Desyncs"
 msgstr "Рассинхрон"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:424
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:503
 msgid "Sync-safe"
 msgstr "Синхро-безопасно"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:525
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:616
 msgid "Your vote"
 msgstr "Вы проголосовали за"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:549
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:640
 msgid "Next screenshot"
 msgstr "Следующий снимок"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:558
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:649
 msgid "Previous screenshot"
 msgstr "Предыдущий снимок"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:566
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
 msgid "Write a comment…"
 msgstr "Написать комментарий..."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:576
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:667
 msgid "Administrator actions"
 msgstr "Административные возможности"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:583
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:674
 msgid "Not voted"
 msgstr "Не голосовали"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:595
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:686
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr "Голос не был принят.\nКод ошибки: %s"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:655
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:746
 #, c-format
 msgid "Screenshots (%u)"
 msgstr "Снимков (%u шт.)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:678
-msgid "Change verification status…"
-msgstr "Смена статуса годности..."
-
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
-msgid "Change quality rating…"
-msgstr "Переоценка качества..."
-
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:680
-msgid "Change sync-safety status…"
-msgstr "Смена статуса синхронизации..."
-
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:681
-msgid "Enable Transifex integration"
-msgstr "Доступна интеграция с Transifex"
-
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:693
-msgid "Are you sure you want to enable Transifex integration for this add-on?"
-msgstr "Вы хотите интегрировать то дополнение с Transifex?"
-
-#. * TRANSLATORS: The placeholder is an URL
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:698
-msgid "Don’t forget to configure the new resources at %1% afterwards."
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:703
-msgid "This may take several minutes. Please be patient."
-msgstr "Это займёт до нескольких минут. Будьте терпеливы."
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:770
+msgid "Change quality rating"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:764
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
+msgid "Change sync-safety status"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:773
+msgid "Configure Transifex integration"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:824
 #, c-format
 msgid "Comments (%u)"
 msgstr "Комментарии (%u шт.)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:765
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:825
 #, c-format
 msgid "Votes (%u)"
 msgstr "Голосование (%u раз)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:829
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4559,16 +4580,16 @@ msgstr[1] "Средняя оценка: %1$.3f (проголосовало %2$u 
 msgstr[2] "Средняя оценка: %1$.3f (проголосовало %2$u человек)"
 msgstr[3] "Средняя оценка: %1$.3f (проголосовало %2$u человек)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:772
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:832
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:479
 msgid "No votes yet"
 msgstr "Никто не голосовал"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:850
 msgid "No comments yet."
 msgstr "Комментариев нет."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:851
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -4577,35 +4598,35 @@ msgstr[1] "%u комментария:"
 msgstr[2] "%u комментариев:"
 msgstr[3] "%u комментариев:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:802
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:862
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr "%1$s (обновлено %2$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:808
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:868
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr "%1$s (обновлено ‘%2$s’ в %3$s)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:814
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:874
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr "\"%1$s\" прокомментировал версию %2$s:"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:841
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:901
 #, c-format
 msgid "%1$u / %2$u"
 msgstr "%1$u / %2$u"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:877
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:937
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Из-за ошибки не удалось получить снимок с сервера."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:894
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
 msgid "Please log in to comment"
 msgstr "Войдите, чтобы оставить комментарий"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:896
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:956
 msgid "Please log in to vote"
 msgstr "Войдите, чтобы проголосовать"
 
@@ -6106,18 +6127,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:163
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:166
 msgid "Authors"
 msgstr "Авторы"
@@ -6178,31 +6199,31 @@ msgstr "Не указан параметр командной строки %s"
 msgid "%s can not be combined with other actions"
 msgstr "Сочетать %s с другими действиями не получится"
 
-#: ../../src/wlapplication.cc:1437
+#: ../../src/wlapplication.cc:1440
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Что это за параметр такой, %s?\nМожет, пропущен знак =?"
 
-#: ../../src/wlapplication.cc:1558
+#: ../../src/wlapplication.cc:1561
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Нельзя использовать сочетания параметров --xres/--yres, --maximized и --fullscreen. Выберите что-то одно"
 
-#: ../../src/wlapplication.cc:1575
+#: ../../src/wlapplication.cc:1578
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Задан странный параметр командной строки: %s"
 
-#: ../../src/wlapplication.cc:1623
+#: ../../src/wlapplication.cc:1630
 msgid "Game ended unexpectedly"
 msgstr "Неожиданный конец игры"
 
-#: ../../src/wlapplication.cc:1623
+#: ../../src/wlapplication.cc:1630
 msgid "Unexpected error during the game"
 msgstr "При игре проскочила ошибка"
 
-#: ../../src/wlapplication.cc:1626
+#: ../../src/wlapplication.cc:1633
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6216,7 +6237,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "В ходе игры возникла следующая ошибка:\n\n%1$s\n\nПожалуйста, отправьте отчет об ошибке нам, это поможет в улучшении Widelands. Вся нужная информация приведена в стандартном выходном потоке (в ОС Windows это файл stdout.txt). Ваша текущая сборка - %2$s (%3$s).\n\nПроверьте: игра могла попытаться создать быстрое сохранение. Если оно есть, попробуйте загрузить его и продолжить игру."
 
-#: ../../src/wlapplication.cc:1635
+#: ../../src/wlapplication.cc:1642
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6226,11 +6247,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Игра завершена по следующей причине:\n\n%s.\n\nПроверьте, Widelands создало быстрое сохранение? Если оно доступно, попробуйте запустить его и продолжить игру."
 
-#: ../../src/wlapplication.cc:1661
+#: ../../src/wlapplication.cc:1668
 msgid "Emergency save failed"
 msgstr "Быстрое сохранение завершилось с ошибкой"
 
-#: ../../src/wlapplication.cc:1662
+#: ../../src/wlapplication.cc:1669
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7170,9 +7191,9 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7560,8 +7581,8 @@ msgstr "Замените отключенного игрока выбранны�
 msgid "AI for the disconnected player"
 msgstr "Искусственный Интеллект для отключенного игрока"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7962,19 +7983,19 @@ msgstr "Удерживайте Ctrl, чтобы разрешить весь эт
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "Удерживайте Ctrl, чтобы не допускать этот товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:194
+#: ../../src/wui/inputqueuedisplay.cc:267
 msgid "Remove ware"
 msgstr "Убрать товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:203
+#: ../../src/wui/inputqueuedisplay.cc:276
 msgid "Add ware"
 msgstr "Добавить товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:694
 msgid "Hide controls"
 msgstr "Скрыть панель"
 
-#: ../../src/wui/inputqueuedisplay.cc:620
+#: ../../src/wui/inputqueuedisplay.cc:694
 msgid "Show controls"
 msgstr "Показать панель"
 
