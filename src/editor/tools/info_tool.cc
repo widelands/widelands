@@ -37,10 +37,15 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	UI::UniqueWindow::Registry& registry = parent.unique_windows().get_registry(
 	   bformat("fieldinfo_%d_%d", center.node.x, center.node.y));
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
-		new FieldInfoWindow(parent, registry, number_of_open_windows_ * kOffset,
-		                    number_of_open_windows_ * kOffset, center, f, tf, map);
+		// if window reaches bottom right corner, start from top left corner again
+		int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
+		int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
+		int offset_factor = number_of_open_windows_ % std::min(a, b);
+
+		new FieldInfoWindow(
+		   parent, registry, offset_factor * kOffset, offset_factor * kOffset, center, f, tf, map);
 	};
-	registry.opened.connect([this]() { ++number_of_open_windows_; });
+	registry.opened.connect([this, &registry]() { ++number_of_open_windows_; });
 	registry.closed.connect([this]() { --number_of_open_windows_; });
 	registry.create();
 

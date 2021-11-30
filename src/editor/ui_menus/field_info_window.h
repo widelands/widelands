@@ -25,6 +25,11 @@
 #include "ui_basic/unique_window.h"
 
 struct FieldInfoWindow : public UI::UniqueWindow {
+	static constexpr int16_t width = 400;
+	static constexpr int16_t total_width = width + 2 * UI::Window::kVerticalBorderThickness;
+	static constexpr int16_t height = 200;
+	static constexpr int16_t total_height =
+	   height + UI::Window::kTopBorderThickness + UI::Window::kBottomBorderThickness;
 	FieldInfoWindow(EditorInteractive& parent,
 	                UI::UniqueWindow::Registry&,
 	                int32_t x,
@@ -35,8 +40,6 @@ struct FieldInfoWindow : public UI::UniqueWindow {
 	                Widelands::Map* map);
 
 protected:
-	void think() override;
-
 private:
 	void update();
 
@@ -53,8 +56,6 @@ private:
 	const Widelands::Field& tf_;
 	Widelands::Map* map_;
 	UI::MultilineTextarea multiline_textarea_;
-	/// The last time the information in this Panel got updated
-	Time lastupdate_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_FIELD_INFO_WINDOW_H
