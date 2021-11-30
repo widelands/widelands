@@ -144,6 +144,7 @@ template <typename T> inline bool compare(const double a, const T b) {
 #define check_equal(a, b) do_check_equal(__FILE__, __LINE__, a, b)
 template <typename T1, typename T2>
 inline void do_check_equal(const char* f, uint32_t l, const T1& a, const T2& b) {
+	std::cout << "Running testcase " << f << ':' << l << std::endl;
 	if (!compare(a, b)) {
 		std::ostringstream oss;
 		oss << "Check failed: (";
@@ -161,6 +162,7 @@ inline void do_check_error(const char* f,
                            uint32_t l,
                            const std::string& what,
                            const std::function<void()>& fn) {
+	std::cout << "Running testcase " << f << ':' << l << std::endl;
 	try {
 		fn();
 	} catch (...) {
