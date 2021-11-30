@@ -22,6 +22,7 @@
 #include <cassert>
 #include <cstdarg>
 #ifdef _WIN32
+#include <cstdio>
 #include <fstream>
 #endif
 #include <iostream>
@@ -32,9 +33,7 @@
 #include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
-#endif
 
-#ifdef _WIN32
 #include "build_info.h"
 #endif
 
@@ -59,21 +58,26 @@ std::string get_output_directory() {
 	return path;
 }
 
-// This Logger emulates the SDL1.2 behavior of writing a stdout.txt.
+// This Logger emulates the SDL1.2 behavior of writing a stdout.txt and stderr.txt.
 class WindowsLogger {
 public:
-	WindowsLogger(const std::string& dir) : stdout_filename_(dir + "\\stdout.txt") {
+	WindowsLogger(const std::string& dir)
+	   : stdout_filename_(dir + "\\stdout.txt"), stderr_filename_(dir + "\\stderr.txt") {
 		stdout_.open(stdout_filename_);
-		if (!stdout_.good()) {
+		stderr_.open(stderr_filename_);
+		if (!stdout_.good() || !stderr_.good()) {
 			throw wexception(
 			   "Unable to initialize stdout logging destination: %s", stdout_filename_.c_str());
 		}
 		SDL_LogSetOutputFunction(sdl_logging_func, this);
 		std::cout << "Log output will be written to: " << stdout_filename_ << std::endl;
 
+		// Configure redirection
+		std::cout.rdbuf(stdout_.rdbuf());
+		std::cerr.rdbuf(stderr_.rdbuf());
 		// Repeat version info so that we'll have it available in the log file too
-		stdout_ << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
-		        << std::endl;
+		std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
+		          << std::endl;
 		stdout_.flush();
 	}
 
@@ -83,8 +87,8 @@ public:
 	}
 
 private:
-	const std::string stdout_filename_;
-	std::ofstream stdout_;
+	const std::string stdout_filename_, stderr_filename_;
+	std::ofstream stdout_, stderr_;
 
 	DISALLOW_COPY_AND_ASSIGN(WindowsLogger);
 };
