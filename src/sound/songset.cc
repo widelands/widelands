@@ -29,7 +29,12 @@
 Songset::Songset(const std::string& dir, const std::string& basename)
    : m_(nullptr), rwops_(nullptr) {
 	assert(g_fs);
-	std::vector<std::string> files = g_fs->get_sequential_files(dir, basename, "ogg");
+	std::vector<std::string> mp3_files = g_fs->get_sequential_files(dir, basename, "mp3");
+	std::vector<std::string> ogg_files = g_fs->get_sequential_files(dir, basename, "ogg");
+	add_songs(mp3_files);
+	add_songs(ogg_files);
+}
+void Songset::add_songs(const std::vector<std::string>& files) {
 	for (const std::string& filename : files) {
 		assert(!g_fs->is_directory(filename));
 		add_song(filename);

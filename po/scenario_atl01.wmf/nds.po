@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-08-28 07:30+0000\n"
+"PO-Revision-Date: 2021-11-25 07:14+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -370,7 +370,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Aver nich mal dat kunn de Gott anners stimmen. Dat Water leep wieder up. Haast dördreiht vör Schuld, Pien un Wut wurr Jundlin’ tur Ketterin: In’t Geheem hett se normale Lüü sammelt, wat mit de Beslutt vun de Pastoren, de Will vun de Gott antonehmen, nich tofree weren. Tosamen hebben se all de Tempel ofbrannt un een Schipp stohlen, mit de se weg vun Atlantis un Luutas sien Macht flüchtden. De lütte Klottje hett begunnen, to Satuul de Füürgott to beden, Luutas sien slimmster Feind."
+msgstr "Aver nich mal dat kunn de Gott anners stimmen. Dat Water leep wieder up. Haast dördreiht vör Schuld, Pien un Wut wurr Jundlin’ tur Ketterin: In’t Geheem hett se normaale Lüü sammelt, wat mit de Beslutt vun de Pastoren, de Will vun de Gott antonehmen, nich tofree weren. Tosamen hebben se all de Tempel ofbrannt un een Schipp stohlen, mit de se weg vun Atlantis un Luutas sien Macht flüchtden. De lütte Klottje hett begunnen, to Satuul de Füürgott to beden, Luutas sien slimmster Feind."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
