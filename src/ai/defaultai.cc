@@ -1751,28 +1751,29 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	unique_serials.clear();
 
 	for (const Widelands::ImmovableFound& imm_found : immovables) {
-		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
-		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is a duplicate
-		}
-
-		if (upcast(Widelands::PlayerImmovable const, player_immovable, &base_immovable)) {
-
-			// TODO(unknown): Only continue if this is an opposing site
-			// allied sites should be counted for military influence
-			if (player_immovable->owner().player_number() != pn) {
-				continue;
+		Widelands::OPtr<Widelands::BaseImmovable> b_immo = imm_found.object;
+		if (Widelands::BaseImmovable* base_immovable = b_immo.get(game())){
+			if (!unique_serials.insert(base_immovable->serial()).second) {
+				continue;  // serial was not inserted in the set, so this is a duplicate
 			}
-			// here we identify the buiding (including expected building if constructionsite)
-			// and calculate some statistics about nearby buildings
-			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
-				consider_productionsite_influence(field, imm_found.coords, bo);
-			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+			if (upcast(Widelands::PlayerImmovable const, player_immovable, base_immovable)) {
+
+				// TODO(unknown): Only continue if this is an opposing site
+				// allied sites should be counted for military influence
+				if (player_immovable->owner().player_number() != pn) {
+					continue;
+				}
+				// here we identify the buiding (including expected building if constructionsite)
+				// and calculate some statistics about nearby buildings
+				if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+					BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
 					consider_productionsite_influence(field, imm_found.coords, bo);
+				} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+					const Widelands::BuildingDescr& target_descr = constructionsite->building();
+					if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+						BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+						consider_productionsite_influence(field, imm_found.coords, bo);
+					}
 				}
 			}
 		}
