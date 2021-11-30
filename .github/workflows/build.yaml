@@ -348,7 +348,7 @@ jobs:
     name: Automated development pre-release
     # TODO: switch to 'widelands/widelands' and 'refs/heads/master' when merging
     if: ${{ github.repository == 'matthiakl/widelands' && github.ref == 'refs/heads/ci_dev_release' && always() }}
-    needs: [windows, macos]
+    needs: [windows, windows-msvc, macos]
     runs-on: "ubuntu-latest"
     steps:
       - name: Download artifacts
