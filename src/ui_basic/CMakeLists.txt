@@ -71,6 +71,7 @@ wl_library(ui_basic
     base_log
     base_macros
     base_multithreading
+    base_random
     base_string
     base_utf8
     graphic
