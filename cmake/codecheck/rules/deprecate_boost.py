@@ -4,13 +4,11 @@ strip_comments_and_strings = True
 
 
 whitelist = [
-    'boost::uuids',
     'boost::asio',
     'boost::system::error_code',
     'boost::system::system_error',
 ]
 whitelist_headers = [
-    'boost/uuid',
     'boost/asio',
     'boost/version',
 ]

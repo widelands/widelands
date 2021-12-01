@@ -69,6 +69,7 @@ wl_library(ui_basic
     base_exceptions
     base_geometry
     base_macros
+    base_random
     base_utf8
     graphic
     graphic_align

@@ -186,6 +186,7 @@ wl_library(wui_game_tips
   USES_SDL2
   DEPENDS
     base
+    base_random
     graphic_functions
     graphic
     graphic_fonthandler

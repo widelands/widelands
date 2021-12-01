@@ -65,7 +65,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
               UI::SpinBox::Units::kNone,
               UI::SpinBox::Type::kSmall),
      // World + Resources
-     current_world_(std::rand() % Widelands::Map::kOldWorldNames.size()),  // NOLINT
+     current_world_(RNG::static_rand(Widelands::Map::kOldWorldNames.size())),
      resource_amounts_({
         /** TRANSLATORS: Amount of resources in the random map generator in the editor */
         _("Low"),
@@ -215,7 +215,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
 	world_.selected.connect([this]() {
 		current_world_ = world_.get_selected();
 		if (current_world_ == static_cast<int>(Widelands::Map::kOldWorldNames.size())) {
-			current_world_ = std::rand() % Widelands::Map::kOldWorldNames.size();  // NOLINT
+			current_world_ = RNG::static_rand(Widelands::Map::kOldWorldNames.size());
 		}
 		nr_edit_box_changed();
 	});
@@ -447,9 +447,9 @@ void MainMenuNewRandomMapPanel::select_terrains_distribution() {
 	case TerrainDistribution::kRandom: {
 		// Decide the values randomly (within reasonable intervals)
 
-		waterval_ = 5 + 5 * (std::rand() % 7);       // [ 5, 35], NOLINT
-		landval_ = 15 + 5 * (std::rand() % 6);       // [15, 40], NOLINT
-		mountainsval_ = 10 + 5 * (std::rand() % 6);  // [10, 35], NOLINT
+		waterval_ = 5 + 5 * RNG::static_rand(7);       // [ 5, 35]
+		landval_ = 15 + 5 * RNG::static_rand(6);       // [15, 40]
+		mountainsval_ = 10 + 5 * RNG::static_rand(6);  // [10, 35]
 
 		unsigned sum = waterval_ + landval_ + mountainsval_;
 		assert(sum % 5 == 0);
@@ -603,13 +603,13 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		if (result) {
 			// Initialize with some good default values
 
-			const unsigned plnum = std::rand() % nr_players;  // NOLINT
+			const unsigned plnum = RNG::static_rand(nr_players);
 
 			map->set_name(_("Random Map"));
 			map->set_author(_("The Widelands Random Map Generator"));
 			map->set_description(
 			   _("This map was generated automatically by the Widelands Random Map Generator."));
-			map->set_waterway_max_length((std::rand() % 5) * (std::rand() % 6));  // NOLINT
+			map->set_waterway_max_length(RNG::static_rand(5) * RNG::static_rand(6));
 
 			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);

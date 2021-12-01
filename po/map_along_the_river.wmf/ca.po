@@ -103,6 +103,9 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
+"Construïu un magatzem prop del sentinella pirata conquerit prop del rierol. "
+"El  necessitarem per poder iniciar l'exploració. A més a més podríem usar-lo"
+" per guardar l'or que extraurem de les muntanyes properes."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
@@ -116,7 +119,7 @@ msgstr "Porteu quatre pales al nou magatzem."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr ""
+msgstr "Les donarem a alguns voluntaris per assecar les zones pantanoses."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
@@ -232,6 +235,9 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Per damunt del riu hi ha la terra pròspera del misteriós rei Runar. Hi hem "
+"estat en guerra des d'abans que els pirates ocupessin l'àrea de l'est. La "
+"seva força es basa en la seva extensa indústria i el seus grans exèrcits."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
@@ -239,12 +245,17 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"L'àrea que hi ha més enllà dels pirates pertany a un clan liderat pel seu "
+"valent cabdill Hjalmar. Han tingut molt temps per preparar els seus "
+"exèrcits. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"La situació ens preocupa i el meu consell és que dirigim els nostres "
+"esforços a construir un exèrcit fort."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -378,6 +389,9 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Senyor, ara que tenim accés a la guarida dels pirates, l'hauríem de "
+"conquerir i acabar amb ells. Potser hi ha més tresors amagats al seu "
+"territori."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
@@ -388,6 +402,8 @@ msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Senyor, hem derrotat els pirates. Havien amagat una mica d'or al seu últim "
+"bastió que ara mateix estem enviant al nostre quarter general."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
@@ -411,6 +427,9 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Senyor, gràcies als nostres esforços per fer fora els pirates, molts d'ells "
+"han fugit i han marxat amb barques petites. No sabem en quina direcció han "
+"escapat."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -467,6 +486,8 @@ msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Ha vist que també ens podem moure a través de l'altre vessant de la muntanya"
+" si fallem per aquesta banda, però serà molt més difícil fer-ho."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
