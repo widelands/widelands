@@ -1745,7 +1745,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	do {
 		// TODO(hessenfarmer): Only continue if this is an opposing site
 		// allied sites should be counted for military influence
-		if (ps_influence_area.location().field->get_owned_by() != pn || ps_influence_area.location().field->get_immovable() == nullptr) {
+		if (ps_influence_area.location().field->get_owned_by() != pn ||
+		    ps_influence_area.location().field->get_immovable() == nullptr) {
 			continue;
 		}
 		// here we identify the buiding (including expected building if constructionsite)
