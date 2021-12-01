@@ -41,9 +41,9 @@ struct UniqueWindow : public Window {
 		std::function<void()> open_window;
 
 		// Triggered when the window opens
-		boost::signals2::signal<void()> opened;
+		Notifications::Signal<> opened;
 		// Triggered when the window closes
-		boost::signals2::signal<void()> closed;
+		Notifications::Signal<> closed;
 
 		void create();
 		void destroy();

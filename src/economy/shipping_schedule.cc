@@ -44,7 +44,7 @@ namespace Widelands {
 // All times in this file are given in milliseconds of gametime.
 
 // Performance tradeoff in the First Pass
-constexpr Duration kActualDurationsRecalculationInterval = Duration(60 * 1000);
+constexpr Duration kActualDurationsRecalculationInterval(60 * 1000);
 
 // Give a ship the highest score for assigning wares to it if it will
 // arrive at the port of interest within the next 10 s gametime,

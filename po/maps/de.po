@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-11-16 15:47+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -799,7 +799,7 @@ msgstr "Ein geheimnisvolles Land, reich an unterschiedlichen Landschaften, durch
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Entlang des Flusses"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -810,7 +810,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "Es ist das Land wo man die Sonne im Winter kaum sieht und wo der Frühling alle Erinnerungen an die Vergangenheit wegspült. Seltsame Spannungen sind zwischen den Bewohnern enstanden und viele eigennützige Führer haben aus dem Chaos Profit geschlagen. Die abergläubischen Menschen scheinen kein Hindernis für die Entwicklung immer besser gerüsteter Armeen zu sein. Harte Zeiten stehen kurz bevor, und du solltest den Worten deines weisen Beraters folgen oder in Vergessenheit geraten wie all die Anderen."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"

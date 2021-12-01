@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 09:23+0000\n"
+"POT-Creation-Date: 2021-12-01 13:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1161,7 +1161,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:38
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:42
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:38
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:214
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:53
@@ -1277,7 +1277,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1681,7 +1680,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
@@ -1700,7 +1698,6 @@ msgstr ""
 msgid "making a felling ax"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1724,7 +1721,6 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
@@ -1891,17 +1887,16 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
 msgid "breeding fish"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
 msgid "releasing game"
 msgstr ""
 

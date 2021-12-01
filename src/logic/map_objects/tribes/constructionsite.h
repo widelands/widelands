@@ -139,7 +139,7 @@ public:
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
-	static constexpr Duration kConstructionsiteStepTime = Duration(30000);
+	static constexpr Duration kConstructionsiteStepTime{30000};
 	const Duration& build_step_time() const override {
 		return kConstructionsiteStepTime;
 	}

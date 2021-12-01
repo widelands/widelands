@@ -750,7 +750,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music("ingame", 1000);
+	g_sh->change_music(Songset::kIngame, 1000);
 
 	state_ = gs_running;
 
@@ -769,7 +769,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_ending;
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);
@@ -801,6 +801,21 @@ void Game::set_next_game_to_load(const std::string& file) {
 	next_game_to_load_ = file;
 }
 
+void Game::do_send_player_command(PlayerCommand* pc) {
+	// At this point, the command has not yet been distributed to the other
+	// clients, nor written to the replay. If multithreading has caused the
+	// command's duetime to lie in the past, we can just safely increase it.
+	if (pc->duetime() <= get_gametime()) {
+		const Time new_time = get_gametime() + Duration(1);
+		verb_log_info_time(get_gametime(),
+		                   "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+		                   pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
+		pc->set_duetime(new_time);
+	}
+
+	ctrl_->send_player_command(pc);
+}
+
 /**
  * think() is called by the UI objects initiated during Game::run()
  * during their modal loop.
@@ -812,24 +827,8 @@ void Game::think() {
 
 	while (!pending_player_commands_.empty()) {
 		MutexLock m(MutexLock::ID::kCommands);
-
-		PlayerCommand* pc = pending_player_commands_.front();
+		do_send_player_command(pending_player_commands_.front());
 		pending_player_commands_.pop_front();
-
-		// At this point, the command has not yet been distributed to the other
-		// clients, nor written to the replay. If multithreading has caused the
-		// command's duetime to lie in the past, we can just safely increase it.
-		if (pc->duetime() <= get_gametime()) {
-			const Time new_time = get_gametime() + Duration(1);
-			if (g_verbose) {
-				log_info_time(get_gametime(),
-				              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
-				              pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
-			}
-			pc->set_duetime(new_time);
-		}
-
-		ctrl_->send_player_command(pc);
 	}
 
 	ctrl_->think();
@@ -974,7 +973,11 @@ uint32_t Game::logic_rand() {
  */
 void Game::send_player_command(PlayerCommand* pc) {
 	MutexLock m(MutexLock::ID::kCommands);
-	pending_player_commands_.push_back(pc);
+	if (is_logic_thread()) {
+		do_send_player_command(pc);
+	} else {
+		pending_player_commands_.push_back(pc);
+	}
 }
 
 /**

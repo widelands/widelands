@@ -56,9 +56,9 @@ struct Statebox : public Panel {
 	         const std::string& tooltip_text = std::string(),
 	         int width = 0);
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(bool)> changedto;
-	boost::signals2::signal<void(bool)> clickedto;  // same as changedto but only called when clicked
+	Notifications::Signal<> changed;
+	Notifications::Signal<bool> changedto;
+	Notifications::Signal<bool> clickedto;  // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 

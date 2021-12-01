@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2021-11-20 19:12+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -793,7 +793,7 @@ msgstr "Una terra mística, plena de diferents paisatges, creuada per un grapat 
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Al llarg del riu"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -804,7 +804,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "És la terra on el Sol es veu poc durant l'hivern i on la primavera anega tot el passat. Entre els seus residents han anat creixent tensions estranyes i alguns  dirigents avariciosos s'estan aprofitant del caos. La gent supersticiosa sembla que no és obstacle per desenvolupar exèrcits millor equipats. Estan a punt d'arribar temps durs i heu d'escoltar les paraules dels consellers savis o caure en l'oblit com altres han fet."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"

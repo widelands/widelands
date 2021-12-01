@@ -150,9 +150,9 @@ public:
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
 
-	boost::signals2::signal<void()> sigclicked;
-	boost::signals2::signal<void()> sigmousein;
-	boost::signals2::signal<void()> sigmouseout;
+	Notifications::Signal<> sigclicked;
+	Notifications::Signal<> sigmousein;
+	Notifications::Signal<> sigmouseout;
 
 protected:
 	bool highlighted_;  //  mouse is over the button

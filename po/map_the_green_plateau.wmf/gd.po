@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-11-16 09:23+0000\n"
 "PO-Revision-Date: 2019-04-11 11:51+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -21,14 +21,14 @@ msgstr ""
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:12
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "The Forbidden Island"
 msgstr "An t-eilean toirmisgte"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -38,49 +38,49 @@ msgid ""
 "positions."
 msgstr "Mu dheireadh thall! Tha sinn air a’ chiad cheum a ghabhail ach am faigheamaid buannachd! Chaidh sinn air tìr san eilean toirmisgte a-raoir agus chuir sinn ruaig air na bha ann de fhreiceadain air ceann iar-thuath an eilein. Tha mi reusanta cinnteach nach do mhothaich na tighearnan-cogaidh oirnn fhathast is mar sin bu chòir dhuinn cumail gu socair agus am bun-structar againn a thogail. Chan fhada gus am bi sinn làidir gu leòr gus creach a thogail bhuapa."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:23
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:25
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:23
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
 msgstr "Gabh an caisteal àrsaidh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Cuir ruaig air Lanasa agus gabh an caisteal àrsaidh."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:32
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:34
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Cuir ruaig air Erwyn"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:35
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Cuir ruaig air Erwyn. Tha am feachd as treasa fo a smachd a tha air fhàgail air an eilean seo."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:40
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:42
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:40
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo"
 msgstr "Cuir ruaig air Iòmo"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:43
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Cuir ruaig air Iòmo. Tha e a’ saothrachadh biadh dha na saighdearan."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
 msgid "First Briefing"
 msgstr "A’ chiad bhrath-ullachaidh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
 msgid "Second Briefing"
 msgstr "An dàrna brath-ullachaidh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
 msgid "An Ancient Castle"
 msgstr "Caisteal àrsaidh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -88,7 +88,7 @@ msgid ""
 "craft."
 msgstr "Air na diathan fhèin! Lorg fear dhe na rabhadairean againn caisteal mòr ann am meadhan an t-seann àrd-chlàir. Feumaidh gu bheil an caisteal sean dha-rìribh ’s tha coltais na stoidhle cèine air. Tha e follaiseach nach e ceàrd nan tùsanach a thog e."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -96,17 +96,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Tha mi ’n dòchas nach do mhothaich Lanasa – an tighearna-cogaidh a chumas smachd air a’ chaisteal ud – air ar gluasadan fhathast. Dh’fhaodte gun dèid leinn an togalach mòr ud a bhuinnigeadh gun strì ro mhòr! Co-dhiù no co-dheth, tha e riatanach gun gabh sinn e. Seo na bheir smachd air an eilean dhuinn!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"
 msgstr "Ghabh thu an caisteal àrsaidh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Mìorbhaileach! Chuir am feachd againn ruaig air Lanasa ’s a cuid shaighdearan. ’S ann againne a tha an caisteal àrsaidh a-nis!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -119,46 +119,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "Nach iongantach dè cho fad ’s farsaing a chì sinn on tùr as àirde aig a’ chaisteal seo. ’S urrainn dhuinn sùil a chumail air an eilean air fad. Saoil carson nach fhaca Lanasa gun robh sinn a’ tighinn ’s nach do rinn i ullachadh. Co-dhiù no co-dheth, chan fhaigh sinn seo a-mach a-nis. Na tha cudromach a-nis, ’s e na naimhdean a tha rim fàgail fhathast. Lorg sinn ionadan aig Erwyn gu tuath ’s gu h-ear air a’ chaisteal. Tha e cliùiteach mar thighearna-cogaidh làidir agus ’s ann aigesan a tha na saighdearan as treasa gun teagamh. Chunnaic sinn bun-structaran ’gan dìon le Iòmo – sin tighearna-cogaidh òg – gu deas agus bu chòir dhuinn an gabhail ach nach faigh ar nàmhaid biadh bhuaithe tuilleadh."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid "Another Briefing"
 msgstr "Brath-ullachaidh eile"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
 msgid "Erwyn Defeated"
 msgstr "Chuir thu ruaig air Erwyn"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Taghta! Ghèill Erwyn nuair a chunnaic e na togalaichean mu dheireadh aire ’nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh làidir eile!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Jomo Defeated"
 msgstr "Chuir thu ruaig air Iòmo"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Taghta! Ghèill Iòmo nuair a chunnaic e na togalaichean mu dheireadh aire ’nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh eile!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
 msgstr "Am brath-ullachaidh mu dheireadh"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Victory!"
 msgstr "Buaidh!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Mu dheireadh thall! ’S an leinne a tha an t-eilean air fad. Feumaidh sinn a nas fheàrr air a dhìon na bha na tighearnan-cogaidh."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

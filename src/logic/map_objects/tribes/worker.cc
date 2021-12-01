@@ -359,10 +359,10 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			send_signal(game, "fail");  //  no object found, cannot run program
 			pop_task(game);
 			if (upcast(ProductionSite, productionsite, get_location(game))) {
-				if (!found_reserved) {
-					productionsite->notify_player(game, 30);
-				} else {
+				if (found_reserved) {
 					productionsite->unnotify_player();
+				} else if (action.iparam3 != 0) {
+					productionsite->notify_player(game, 30);
 				}
 			}
 			return true;
@@ -533,7 +533,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
- * iparam3 = whether the "space" flag is set
+ * iparam3 = 1st bit: whether the "space" flag is set; 2nd bit: whether the no_notify flag is set
  * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
@@ -608,7 +608,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam5 > -1) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 	}
-	if (action.iparam3) {
+	if (action.iparam3 & 1) {
 		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 	}
 	for (const std::string& terraform : action.sparamv) {
@@ -632,7 +632,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			if (action.iparam5 > -1) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 			}
-			if (action.iparam3) {
+			if (action.iparam3 & 1) {
 				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 			}
 			// If there are fields full of fish, we change the type of notification
@@ -648,8 +648,10 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			molog(game.get_gametime(), "  no space found\n");
 		}
 
-		if (upcast(ProductionSite, productionsite, get_location(game))) {
-			productionsite->notify_player(game, 30, fail_notification_type);
+		if ((action.iparam3 & 2) == 0) {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->notify_player(game, 30, fail_notification_type);
+			}
 		}
 
 		send_signal(game, "fail");
@@ -955,8 +957,8 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	const std::string& bob = action.sparamv[idx];
-	DescriptionIndex index = owner_->tribe().worker_index(bob);
-	if (owner_->tribe().has_worker(index)) {
+	DescriptionIndex index = owner_.load()->tribe().worker_index(bob);
+	if (owner_.load()->tribe().has_worker(index)) {
 		game.create_worker(get_position(), index, owner_);
 	} else {
 		const DescriptionIndex critter = game.descriptions().critter_index(bob);
@@ -1039,7 +1041,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
  */
 // TODO(GunChleoc): Savegame compatibility, remove after v1.0.
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
-	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
+	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
 	++state.ivar1;
 	schedule_act(game, Duration(10));
 	return true;

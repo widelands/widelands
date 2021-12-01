@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
+#include <atomic>
 #include <deque>
 #include <list>
 #include <memory>
@@ -27,8 +28,6 @@
 #include <vector>
 
 #include <SDL_keyboard.h>
-#include <boost/signals2/signal.hpp>
-#include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
 #include "base/multithreading.h"
@@ -36,6 +35,7 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/styles/panel_styles.h"
+#include "notifications/signal.h"
 #include "sound/constants.h"
 
 class FileWrite;
@@ -66,7 +66,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-class Panel : public boost::signals2::trackable {
+class Panel {
 public:
 	// Panel flags. The `Panel::flags_` attribute is a bitset of these flags.
 	enum {
@@ -102,8 +102,8 @@ public:
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
-	boost::signals2::signal<void()> clicked;
-	boost::signals2::signal<void()> position_changed;
+	Notifications::Signal<> clicked;
+	Notifications::Signal<> position_changed;
 
 	Panel* get_parent() const {
 		return parent_;
@@ -520,7 +520,7 @@ private:
 	Panel* mousein_child_;  //  child panel that the mouse is in
 	Panel* focus_;          //  keyboard focus
 
-	uint32_t flags_;
+	std::atomic<uint32_t> flags_;
 
 	/**
 	 * The outer rectangle is defined by (x_, y_, w_, h_)
@@ -539,8 +539,8 @@ private:
 	int return_code_;
 
 	std::string tooltip_;
-	static Panel* modal_;
-	static Panel* mousegrab_;
+	static std::atomic<Panel*> modal_;
+	static std::atomic<Panel*> mousegrab_;
 	static Panel* mousein_;
 	static Panel* tooltip_panel_;
 	static Vector2i tooltip_fixed_pos_;
@@ -550,8 +550,8 @@ private:
 	static FxId click_fx_;
 
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
-	LogicThreadState logic_thread_locked_;
-	static bool logic_thread_running_;
+	std::atomic<LogicThreadState> logic_thread_locked_;
+	static std::atomic_bool logic_thread_running_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunction>> subscriber1_;
 	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunctionHandled>> subscriber2_;

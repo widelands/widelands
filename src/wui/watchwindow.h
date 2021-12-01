@@ -40,7 +40,7 @@ struct WatchWindow : public UI::Window {
 	            bool single_window_ = false);
 	~WatchWindow() override;
 
-	boost::signals2::signal<void(Vector2f)> warp_mainview;
+	Notifications::Signal<const Vector2f&> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void follow(Widelands::Bob* bob);

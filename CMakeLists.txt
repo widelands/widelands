@@ -12,6 +12,7 @@ option(OPTION_BUILD_TRANSLATIONS "Build translations" ON)
 option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
+option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
@@ -123,11 +124,7 @@ if (OPTION_BUILD_WINSTATIC)
 endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.48
-  COMPONENTS
-    unit_test_framework
-  REQUIRED
-    system)
+find_package(Boost 1.48 COMPONENTS REQUIRED system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -188,7 +185,9 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   else()
     set(WL_DEBUG_FLAGS "-g -DDEBUG")
   endif()
-  option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  if(NOT OPTION_TSAN)
+    option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
     message(STATUS "GCC >6.2.0 breaks -03, setting -02")
@@ -206,13 +205,23 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     set(WL_OPTIMIZE_FLAGS "-O3")
   endif ()
   set(WL_DEBUG_FLAGS "-DNDEBUG -DNOPARACHUTE")
-  option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  if(NOT OPTION_TSAN)
+    option(OPTION_ASAN "Build with AddressSanitizer" ON)
+  endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "None")
   message(STATUS "Not setting any default flags.")
 else()
   message(FATAL_ERROR "Unknown CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
+if(OPTION_TSAN)
+  message(STATUS "Using ThreadSanitizer https://clang.llvm.org/docs/ThreadSanitizer.html")
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fsanitize=thread")
+  set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=thread" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  option(OPTION_ASAN "Build with AddressSanitizer" OFF)
+else()
+  message(STATUS "Not using ThreadSanitizer.")
+endif(OPTION_TSAN)
 
 if(OPTION_ASAN)
   message(STATUS "Using AddressSanitizer https://clang.llvm.org/docs/AddressSanitizer.html")
@@ -223,6 +232,10 @@ if(OPTION_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
 endif(OPTION_ASAN)
+
+if(OPTION_ASAN AND OPTION_TSAN)
+  message(FATAL_ERROR "OPTION_ASAN and OPTION_TSAN cannot be used together")
+endif()
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
@@ -304,12 +317,19 @@ else()
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
+
+  # Detect invalid constexpr initialization
+  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-elide-constructors")
 endif()
 
 if(NOT MSVC)
   # Turn some warnings into errors.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")  # This is a false-positive on g++5
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+    # Silence some false positives on older g++
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+  endif()
   if (APPLE)  # Our Mac CI needs these
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
@@ -350,8 +370,10 @@ IF (WIN32)
     add_definitions(-D_WIN32_WINNT=0x0601 -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -DNOMINMAX)
     # Needed for minizip
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
-    set(SDL_EXTRA_LIBS charset)
     if (OPTION_BUILD_WINSTATIC)
+      set(ZSTD zstd_static)
+      set(BROTLI brotlidec-static brotlicommon-static brotlienc-static)
+      set(SDL_EXTRA_LIBS charset)
       if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         wl_add_flag(TARGET_COMPILE_FLAGS "/MTd")
       else()
@@ -360,7 +382,9 @@ IF (WIN32)
     endif()
   else()
     # Fix static library dependencies
-    set(SDL_MIXER_EXTRA_LIBS ssp)    
+    set(ZSTD zstd)
+    set(BROTLI brotlidec brotlicommon brotlienc)
+    set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
     set(SDL_IMG_EXTRA_LIBS jbig deflate)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
