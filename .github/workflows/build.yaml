@@ -3,8 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    # TODO: switch to master only when merging
-    branches: [ master, ci_dev_release ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -346,8 +345,7 @@ jobs:
 
   dev_release:
     name: Automated development pre-release
-    # TODO: switch to 'widelands/widelands' and 'refs/heads/master' when merging
-    if: ${{ github.repository == 'matthiakl/widelands' && github.ref == 'refs/heads/ci_dev_release' && always() }}
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
     needs: [windows, windows-msvc, macos]
     runs-on: "ubuntu-latest"
     steps:
@@ -392,7 +390,7 @@ jobs:
           if [ "$latest" != "$GITHUB_SHA" ]
           then
             echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
-            # TODO: exit 1 when merging to master
+            exit 1
           fi
       - name: Updating latest pre-release
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
