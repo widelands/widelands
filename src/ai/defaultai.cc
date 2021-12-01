@@ -1755,8 +1755,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			BuildingObserver& bo = get_building_observer(
 			   ps_influence_area.location().field->get_immovable()->descr().name().c_str());
 			consider_productionsite_influence(field, ps_influence_area.location(), bo);
-		} else if (upcast(Widelands::ConstructionSite const, constructionsite,
-		                  ps_influence_area.location().field->get_immovable())) {
+		} else if (ps_influence_area.location().field->get_immovable()->descr().type() ==
+		    Widelands::MapObjectType::CONSTRUCTIONSITE) {
+			upcast(Widelands::ConstructionSite const, constructionsite,
+		                  ps_influence_area.location().field->get_immovable()));
 			const Widelands::BuildingDescr& target_descr = constructionsite->building();
 			if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 				BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
