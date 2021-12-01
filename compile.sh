@@ -56,7 +56,7 @@ print_help () {
     echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
     echo "                      Release builds are created without AddressSanitizer"
     echo "                      by default."
-    echo "+a or --with-asan     If in release mode, switch on the AddressSanitizer."
+    echo "+a or --with-asan     If in release mode, switch on the AddressSanitizer.[1]"
     echo "                      Debug builds are created with AddressSanitizer by"
     echo "                      default."
     echo " "
@@ -118,14 +118,13 @@ print_help () {
     echo "                      unchanged before the above options."
     echo " "
     echo " "
-    echo "For the AddressSanitizer output to be useful, some systems (e.g. Ubuntu Linux)"
-    echo "require that you set a symlink to the symbolizer. For example:"
+    echo "[1] For the AddressSanitizer output to be useful, some systems"
+    echo "    (e.g. Ubuntu Linux) require that you set a symlink to the symbolizer."
+    echo "    For example:"
+    echo "        sudo ln -s /usr/bin/llvm-symbolizer-3.8 /usr/bin/llvm-symbolizer"
     echo " "
-    echo "    sudo ln -s /usr/bin/llvm-symbolizer-3.8 /usr/bin/llvm-symbolizer"
-    echo " "
-    echo "More info about AddressSanitizer at:"
-    echo " "
-    echo "    https://clang.llvm.org/docs/AddressSanitizer.html"
+    echo "    More info about AddressSanitizer at:"
+    echo "        https://clang.llvm.org/docs/AddressSanitizer.html"
     echo " "
     return
   }
@@ -478,6 +477,9 @@ echo "   '$BUILDDIR'"
 echo " "
 # Adding build directory to update script is not necessary, because the script
 # will only be created for the default.
+# (Custom build directories are aimed at developers while the update script
+# is aimed at end users. All it does is that it pulls the latest commit from
+# github/master and runs this script with the stored options.)
 
 if [ -n "$EXTRA_OPTS" ]; then
   echo "Extra CMake options used: $EXTRA_OPTS"
@@ -698,6 +700,7 @@ fi  # End of verbose output section
     $RUN rm  -f ../VERSION || true
     $RUN rm  -f ../"$EXENAME" || true
 
+    $RUN rm  -f ../wl_create_spritesheet || true
     $RUN rm  -f ../wl_map_object_info || true
     $RUN rm  -f ../wl_map_info || true
 
@@ -756,6 +759,7 @@ echo "#      Widelands was updated successfully.     #"
 echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
+
       $RUN chmod +x ./update.sh
       if [ $QUIET -eq 0 ]; then
         echo "The update script has successfully been created."
@@ -846,6 +850,12 @@ else
   echo "# Don't forget to move it to the source directory or use  #"
   echo "# the --datadir option. You may also need --localedir and #"
   echo "# --skip_check_datadir_version                            #"
+fi
+if [ $BUILD_WEBSITE = "ON" ] && ! using_default_builddir ; then
+  echo "#                                                         #"
+  echo "# The newly built website-related executables can be      #"
+  echo "# found in:                                               #"
+  printf "#   %-53s #\n" "'${BUILDDIR}/src/website/'"
 fi
 if [ -n "$UPDATE_SCRIPT" ] ; then
   echo "#                                                         #"
