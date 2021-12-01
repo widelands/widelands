@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-11-22 19:29+0000\n"
+"PO-Revision-Date: 2021-11-25 07:14+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -578,7 +578,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
+msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normaale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331

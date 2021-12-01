@@ -188,6 +188,8 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+	void use_custom_songset(bool on);
+	bool use_custom_songset() const;
 
 	const std::string current_songset() const;
 
@@ -269,6 +271,7 @@ private:
 	 * called. false = can be played
 	 */
 	static bool backend_is_disabled_;
+	bool use_custom_songset_instead_ingame_;
 };
 
 extern SoundHandler* g_sh;

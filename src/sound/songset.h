@@ -34,12 +34,18 @@
  * afterwards
  */
 struct Songset {
+
+	static constexpr const char* const kIngame = "ingame";
+	static constexpr const char* const kCustom = "custom";
+	static constexpr const char* const kMenu = "menu";
+	static constexpr const char* const kIntro = "intro";
 	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
 	Mix_Music* get_song(uint32_t random);
 
 private:
+	void add_songs(const std::vector<std::string>& files);
 	void add_song(const std::string& filename);
 
 	/// The filenames of all configured songs
