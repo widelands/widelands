@@ -51,6 +51,7 @@ wl_library(logic_single_player_game_settings
     ai
     base_exceptions
     base_i18n
+    base_random
     graphic_playercolor
     logic_game_settings
     logic_tribe_basic_info
