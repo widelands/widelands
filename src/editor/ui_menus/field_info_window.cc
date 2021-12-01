@@ -52,6 +52,7 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
      lastupdate_(0) {
 
 	update();
+	set_center_panel(&multiline_textarea_);
 	registry.opened.connect([this]() { update(); });
 	initialization_complete();
 }
@@ -65,11 +66,10 @@ void FieldInfoWindow::update() {
 	add_resources_info(all_infos);
 	add_map_info(all_infos);
 
-	const std::string& richtext = as_richtext(all_infos);
+	const std::string richtext = as_richtext(all_infos);
 
 	if (richtext != multiline_textarea_.get_text()) {
 		multiline_textarea_.set_text(richtext);
-		set_center_panel(&multiline_textarea_);
 	}
 }
 
