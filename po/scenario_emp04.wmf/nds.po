@@ -64,7 +64,7 @@ msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
-"'t sall nich mehr as 3 Sackgassen un ok nich mehr as eene Fahn mit mehr as 4"
+"’t sall nich mehr as 3 Sackgassen un ok nich mehr as eene Fahn mit mehr as 4"
 " Straten geven."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
@@ -192,7 +192,7 @@ msgid ""
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
 "Um eenen Soldaten in eenem Huus up de hoogsten Stand uttobilden, holl de "
-"Övens-Bau an, bit 't mit all bruukt Spiesen un Wapen kumpleet utrüst is."
+"Övens-Bau an, bit ’t mit all bruukt Spiesen un Wapen kumpleet utrüst is."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
@@ -623,7 +623,7 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
-"Broor, ick bün bang, dat ick al weer slimme Narichten bringen mutt. As du "
+"Broor, ick bün bang, dat ick al weer slimme Narichten brengen mutt. As du "
 "süchst, produzeren uns’ Buurdereen nix, un wi könen se ok nich plattrieten."
 
 #. TRANSLATORS: Amalea
@@ -1264,11 +1264,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
-msgstr "Amalee' in Iel"
+msgstr "Amalee’ in Iel"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr "Amalee' is bannig besig …"
+msgstr "Amalee’ is bannig besig …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612
