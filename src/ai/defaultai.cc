@@ -2863,7 +2863,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				continue;
 			}
 
-			if (std::rand() % 3 == 0 && bo.total_count() > 0) {  // NOLINT
+			if (RNG::static_rand(3) == 0 && bo.total_count() > 0) {
 				continue;
 			}  // add randomnes and ease AI
 
@@ -3878,12 +3878,12 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	if (needs_warehouse) {
 		probability_score += 500;
 	}
-	if (std::rand() % 10 == 0) {  // NOLINT
+	if (RNG::static_rand(10) == 0) {
 		probability_score +=
 		   flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
 	}
 
-	if (std::rand() % 200 < probability_score) {  // NOLINT
+	if (RNG::static_rand(200) < probability_score) {
 		create_shortcut_road(flag, 14, gametime);
 		return true;
 	}
