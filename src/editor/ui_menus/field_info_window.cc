@@ -53,7 +53,6 @@ FieldInfoWindow::FieldInfoWindow(EditorInteractive& parent,
 
 	update();
 	set_center_panel(&multiline_textarea_);
-	registry.opened.connect([this]() { update(); });
 	initialization_complete();
 }
 void FieldInfoWindow::update() {
