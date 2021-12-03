@@ -41,12 +41,20 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
 		int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
 		int offset_factor = number_of_open_windows_ % std::min(a, b);
+		int offset = offset_factor * kOffset;
+		log_dbg("a: %d, b: %d, number: %d offsetfactor: %d, offset: %d", a, b,
+		        number_of_open_windows_.load(), offset_factor, offset);
 
-		new FieldInfoWindow(
-		   parent, registry, offset_factor * kOffset, offset_factor * kOffset, center, f, tf, map);
+		new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
+		log_dbg("increment now: %d", number_of_open_windows_.load());
+		++number_of_open_windows_;
 	};
-	registry.opened.connect([this]() { ++number_of_open_windows_; });
-	registry.closed.connect([this]() { --number_of_open_windows_; });
+	registry.closed.connect([this]() {
+		log_dbg("decrement now: %d", number_of_open_windows_.load());
+		if (number_of_open_windows_ > 0) {
+			--number_of_open_windows_;
+		}
+	});
 	registry.create();
 
 	return 0;

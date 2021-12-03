@@ -20,11 +20,13 @@
 #ifndef WL_EDITOR_TOOLS_INFO_TOOL_H
 #define WL_EDITOR_TOOLS_INFO_TOOL_H
 
+#include <atomic>
+
 #include "editor/tools/tool.h"
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool() : EditorTool(*this, *this, false) {
+	EditorInfoTool() : EditorTool(*this, *this, false), number_of_open_windows_(0) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -41,7 +43,7 @@ struct EditorInfoTool : public EditorTool {
 	}
 
 private:
-	int number_of_open_windows_ = 0;
+	std::atomic<int16_t> number_of_open_windows_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INFO_TOOL_H
