@@ -1925,9 +1925,11 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// TODO(Nordfriese): Someone should update the code since the big economy splitting for
 			// the ferries but we don't care about unconnected constructionsites
 		} else if (enemy_influence_area.location().field->get_immovable()->descr().type() >
-			   Widelands::MapObjectType::BUILDING) {
+		           Widelands::MapObjectType::BUILDING) {
 			verb_log_dbg_time(
-			   gametime, "pos: %d, %d; Building: %s ", enemy_influence_area.location().x, enemy_influence_area.location().y,enemy_influence_area.location().field->get_immovable()->descr().name().c_str());
+			   gametime, "pos: %d, %d; Building: %s ", enemy_influence_area.location().x,
+			   enemy_influence_area.location().y,
+			   enemy_influence_area.location().field->get_immovable()->descr().name().c_str());
 			upcast(Widelands::Building const, building,
 			       enemy_influence_area.location().field->get_immovable());
 			if (building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
