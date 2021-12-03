@@ -1754,7 +1754,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 		// we are only interested in buildings
 		if (ps_influence_area.location().field->get_immovable()->descr().type() <
-			   Widelands::MapObjectType::BUILDING) {
+		    Widelands::MapObjectType::BUILDING) {
 			continue;
 		}
 		if (!unique_serials.insert(ps_influence_area.location().field->get_immovable()->serial())
@@ -1847,7 +1847,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 		}
 		// we are only interested in buildings
 		if (enemy_influence_area.location().field->get_immovable()->descr().type() <
-			   Widelands::MapObjectType::BUILDING) {
+		    Widelands::MapObjectType::BUILDING) {
 			continue;
 		}
 		if (!unique_serials.insert(enemy_influence_area.location().field->get_immovable()->serial())
@@ -1925,7 +1925,7 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// TODO(Nordfriese): Someone should update the code since the big economy splitting for
 			// the ferries but we don't care about unconnected constructionsites
 		} else if (enemy_influence_area.location().field->get_immovable()->descr().type() >
-			   Widelands::MapObjectType::BUILDING) {
+		           Widelands::MapObjectType::BUILDING) {
 			upcast(Widelands::Building const, building,
 			       enemy_influence_area.location().field->get_immovable());
 			if (building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
