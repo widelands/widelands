@@ -20,6 +20,8 @@
 #ifndef WL_EDITOR_TOOLS_INFO_TOOL_H
 #define WL_EDITOR_TOOLS_INFO_TOOL_H
 
+#include <memory>
+
 #include "editor/tools/tool.h"
 
 /// A simple tool to show information about the clicked node.
