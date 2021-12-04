@@ -44,9 +44,9 @@ struct EditorInfoTool : public EditorTool {
 
 private:
 	int16_t number_of_open_windows_;
-	std::map<std::pair<int16_t, int16_t>, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
 	   cached_subscribers_opened_;
-	std::map<std::pair<int16_t, int16_t>, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
 	   cached_subscribers_closed_;
 };
 

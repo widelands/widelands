@@ -33,11 +33,10 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	Widelands::Field& f = (*map)[center.node];
 	Widelands::Field& tf = (*map)[center.triangle.node];
-	int16_t x = center.node.x;
-	int16_t y = center.node.y;
+	const Widelands::Coords& coords = center.node;
 
 	UI::UniqueWindow::Registry& registry =
-	   parent.unique_windows().get_registry(bformat("fieldinfo_%d_%d", x, y));
+	   parent.unique_windows().get_registry(bformat("fieldinfo_%d_%d", coords.x, coords.y));
 
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again
@@ -50,12 +49,12 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
 	};
 
-	cached_subscribers_opened_[{x, y}] = registry.opened.subscribe([this]() {
+	cached_subscribers_opened_[coords] = registry.opened.subscribe([this]() {
 		log_dbg("increment now: %d", number_of_open_windows_);
 		++number_of_open_windows_;
 	});
 
-	cached_subscribers_closed_[{x, y}] = registry.closed.subscribe([this]() {
+	cached_subscribers_closed_[coords] = registry.closed.subscribe([this]() {
 		log_dbg("decrement now: %d", number_of_open_windows_);
 		--number_of_open_windows_;
 	});
