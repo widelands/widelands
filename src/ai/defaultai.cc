@@ -1926,20 +1926,20 @@ void DefaultAI::update_buildable_field_military_aspects(BuildableField& field) {
 			// the ferries but we don't care about unconnected constructionsites
 <<<<<<< HEAD
 		} /*else if (enemy_influence_area.location().field->get_immovable()->descr().type() >
-			   Widelands::MapObjectType::BUILDING) {
+		      Widelands::MapObjectType::BUILDING) {
 =======
 		} else if (enemy_influence_area.location().field->get_immovable()->descr().type() >
 		           Widelands::MapObjectType::BUILDING) {
 >>>>>>> b1b157069d5cbb90c575caab5ffd5cf49c28f6bb
-			verb_log_dbg_time(
-			   gametime, "pos: %d, %d; Building: %s ", enemy_influence_area.location().x,
-			   enemy_influence_area.location().y,
-			   enemy_influence_area.location().field->get_immovable()->descr().name().c_str());
-			upcast(Widelands::Building const, building,
-			       enemy_influence_area.location().field->get_immovable());
-			if (building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-				any_unconnected_imm = true;
-			}
+		   verb_log_dbg_time(
+		      gametime, "pos: %d, %d; Building: %s ", enemy_influence_area.location().x,
+		      enemy_influence_area.location().y,
+		      enemy_influence_area.location().field->get_immovable()->descr().name().c_str());
+		   upcast(Widelands::Building const, building,
+		          enemy_influence_area.location().field->get_immovable());
+		   if (building->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+		      any_unconnected_imm = true;
+		   }
 		} TODO(hessenfarmer): readdd this section if a proper guard is implemented*/
 
 		if (enemy_influence_area.location().field->get_immovable()->descr().type() ==
