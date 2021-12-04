@@ -33,9 +33,12 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	Widelands::Field& f = (*map)[center.node];
 	Widelands::Field& tf = (*map)[center.triangle.node];
+	int16_t x = center.node.x;
+	int16_t y = center.node.y;
 
-	UI::UniqueWindow::Registry& registry = parent.unique_windows().get_registry(
-	   bformat("fieldinfo_%d_%d", center.node.x, center.node.y));
+	UI::UniqueWindow::Registry& registry =
+	   parent.unique_windows().get_registry(bformat("fieldinfo_%d_%d", x, y));
+
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again
 		int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
@@ -43,19 +46,22 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		int offset_factor = number_of_open_windows_ % std::min(a, b);
 		int offset = offset_factor * kOffset;
 		log_dbg("a: %d, b: %d, number: %d offsetfactor: %d, offset: %d", a, b,
-		        number_of_open_windows_.load(), offset_factor, offset);
-
+		        number_of_open_windows_, offset_factor, offset);
 		new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
-		log_dbg("increment now: %d", number_of_open_windows_.load());
-		++number_of_open_windows_;
 	};
-	registry.closed.connect([this]() {
-		log_dbg("decrement now: %d", number_of_open_windows_.load());
-		if (number_of_open_windows_ > 0) {
-			--number_of_open_windows_;
-		}
-	});
-	registry.create();
 
+	cached_subscribers_opened_[{x, y}] = registry.opened.subscribe([this]() {
+		log_dbg("increment now: %d", number_of_open_windows_);
+		++number_of_open_windows_;
+	});
+
+	cached_subscribers_closed_[{x, y}] = registry.closed.subscribe([this]() {
+		log_dbg("decrement now: %d", number_of_open_windows_);
+		--number_of_open_windows_;
+	});
+
+	registry.create();
+	log_dbg("closed size: %lu, opened size %lu", cached_subscribers_closed_.size(),
+	        cached_subscribers_opened_.size());
 	return 0;
 }

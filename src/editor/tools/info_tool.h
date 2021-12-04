@@ -20,8 +20,6 @@
 #ifndef WL_EDITOR_TOOLS_INFO_TOOL_H
 #define WL_EDITOR_TOOLS_INFO_TOOL_H
 
-#include <atomic>
-
 #include "editor/tools/tool.h"
 
 /// A simple tool to show information about the clicked node.
@@ -43,7 +41,11 @@ struct EditorInfoTool : public EditorTool {
 	}
 
 private:
-	std::atomic<int16_t> number_of_open_windows_;
+	int16_t number_of_open_windows_;
+	std::map<std::pair<int16_t, int16_t>, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+	   cached_subscribers_opened_;
+	std::map<std::pair<int16_t, int16_t>, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+	   cached_subscribers_closed_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INFO_TOOL_H
