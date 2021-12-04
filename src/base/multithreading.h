@@ -91,6 +91,7 @@ public:
 		kLogicFrame,
 		kObjects,
 		kCommands,
+		kPathfinding,
 		kMessages,
 		kIBaseVisualizations,
 		kI18N,

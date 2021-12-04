@@ -24,6 +24,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/scoped_timer.h"
 #include "base/string.h"
 #include "base/wexception.h"
@@ -1037,6 +1038,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
                          const CheckStep& checkstep,
                          functorT& functor) const {
 	std::vector<Coords> queue;
+	MutexLock m(MutexLock::ID::kPathfinding);
 	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
 	queue.push_back(area);
@@ -2196,6 +2198,7 @@ int32_t Map::findpath(Coords instart,
 	}
 
 	// Actual pathfinding
+	MutexLock m(MutexLock::ID::kPathfinding);
 	std::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
