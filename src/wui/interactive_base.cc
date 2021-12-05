@@ -752,30 +752,6 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	Game* game = dynamic_cast<Game*>(&egbase());
 
-	// This portion of code keeps the speed of game so that FPS are kept within
-	// range 13 - 15, this is used for training of AI
-	if (game != nullptr) {
-		if (game->is_auto_speed()) {
-			const uint32_t cur_fps = average_fps();
-			int32_t speed_diff = 0;
-			if (cur_fps < 13) {
-				speed_diff = -100;
-			}
-			if (cur_fps > 15) {
-				speed_diff = +100;
-			}
-			if (speed_diff != 0) {
-				if (GameController* const ctrl = game->game_controller()) {
-					if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
-					    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
-					    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
-						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
-					}
-				}
-			}
-		}
-	}
-
 	// Node information
 	std::string node_text;
 	if (game == nullptr || get_display_flag(dfDebug)) {
