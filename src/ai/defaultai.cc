@@ -291,8 +291,8 @@ void DefaultAI::think() {
 		if (speed_diff != 0) {
 			if (GameController* const ctrl = game().game_controller()) {
 				if ((ctrl->desired_speed() > 950 && ctrl->desired_speed() < 30000) ||
-					(ctrl->desired_speed() < 1000 && speed_diff > 0) ||
-					(ctrl->desired_speed() > 29999 && speed_diff < 0)) {
+				    (ctrl->desired_speed() < 1000 && speed_diff > 0) ||
+				    (ctrl->desired_speed() > 29999 && speed_diff < 0)) {
 					ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
 				}
 			}
