@@ -9,6 +9,7 @@ wl_library(ai_hints
     base_macros
     logic_constants
     logic_exceptions
+    logic_game_controller
     scripting_lua_table
 )
 
