@@ -44,23 +44,16 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
 		int offset_factor = number_of_open_windows_ % std::min(a, b);
 		int offset = offset_factor * kOffset;
-		log_dbg("a: %d, b: %d, number: %d offsetfactor: %d, offset: %d", a, b,
-		        number_of_open_windows_, offset_factor, offset);
+
 		new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
 	};
 
-	cached_subscribers_opened_[coords] = registry.opened.subscribe([this]() {
-		log_dbg("increment now: %d", number_of_open_windows_);
-		++number_of_open_windows_;
-	});
+	cached_subscribers_opened_[coords] =
+	   registry.opened.subscribe([this]() { ++number_of_open_windows_; });
 
-	cached_subscribers_closed_[coords] = registry.closed.subscribe([this]() {
-		log_dbg("decrement now: %d", number_of_open_windows_);
-		--number_of_open_windows_;
-	});
+	cached_subscribers_closed_[coords] =
+	   registry.closed.subscribe([this]() { --number_of_open_windows_; });
 
 	registry.create();
-	log_dbg("closed size: %lu, opened size %lu", cached_subscribers_closed_.size(),
-	        cached_subscribers_opened_.size());
 	return 0;
 }
