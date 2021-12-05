@@ -750,11 +750,9 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	avg_usframetime_ = ((avg_usframetime_ * 15) + (frametime_ * 1000)) / 16;
 	lastframe_ = curframe;
 
-	Game* game = dynamic_cast<Game*>(&egbase());
-
 	// Node information
 	std::string node_text;
-	if (game == nullptr || get_display_flag(dfDebug)) {
+	if (!egbase().is_game() || get_display_flag(dfDebug)) {
 		// Blit node information in the editor, and in debug mode also for games
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = bformat("(%i, %i, %i)", sel_.pos.node.x, sel_.pos.node.y, height);

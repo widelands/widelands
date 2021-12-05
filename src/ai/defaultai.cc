@@ -274,18 +274,13 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime.get() - taskPool.front().due_time.get();
 
-	// Here we decide how many jobs will be run now (none - 5)
-	// in case no job is due now, it can be zero
-	uint32_t jobs_to_run_count = (delay_time < 0) ? 0 : 1;
-
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
 		if (delay_time > 3000) {
 			speed_diff = -100;
-		}
-		if (delay_time < 500) {
+		}else if (delay_time < 500) {
 			speed_diff = +100;
 		}
 		if (speed_diff != 0) {
@@ -298,6 +293,10 @@ void DefaultAI::think() {
 			}
 		}
 	}
+
+	// Here we decide how many jobs will be run now (none - 5)
+	// in case no job is due now, it can be zero
+	uint32_t jobs_to_run_count = (delay_time < 0) ? 0 : 1;
 
 	// Here we collect data for "too late ..." message
 	if (delay_time > 5000) {
