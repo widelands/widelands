@@ -9,7 +9,6 @@ wl_library(ai_hints
     base_macros
     logic_constants
     logic_exceptions
-    logic_game_controller
     scripting_lua_table
 )
 
@@ -35,6 +34,7 @@ wl_library(ai
     logic
     logic_constants
     logic_commands
+    logic_game_controller
     logic_map
     logic_map_objects
 )
