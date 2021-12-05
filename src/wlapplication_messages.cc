@@ -88,8 +88,8 @@ void fill_parameter_vector() {
 		  "description of the AI training logic"),
 		false},
 	  {"", "auto_speed", "",
-		_("In multiplayer games only, this will keep adjusting the game speed "
-		  "automatically, depending on FPS. Useful in conjunction with --ai_training"),
+		_("This will keep adjusting the game speed automatically, depending on AI delay."
+		  "Only to be used for AI testing or training (in conjunction with --ai_training)"),
 		false},
 	  /// Saving options
 	  {_("Game options:"), _("Note: New values will be written to config file"), "--", "", false},
