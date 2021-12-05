@@ -598,7 +598,8 @@ void ManagementData::review(const Time& gametime,
                             const int16_t trained_soldiers,
                             const uint16_t strength,
                             const uint32_t existing_ps,
-                            const Time& first_iron_mine_time) {
+                            const Time& first_iron_mine_time,
+							const uint16_t ships_count) {
 
 	// bonuses (1000 or nothing)
 	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
@@ -611,17 +612,18 @@ void ManagementData::review(const Time& gametime,
 	const uint16_t strength_score = std::min<uint16_t>(strength, 100) * kStrengthMultiplier;
 	const uint16_t attack_score = std::min<uint16_t>(attackers, 40) * 50;
 	const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
+	const uint32_t ships_score = kShipBonus * ships_count;
 
 	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
-	        strength_score + ps_sites_score + attack_score;
+	        strength_score + ps_sites_score + attack_score + ships_score;
 
 	verb_log_dbg_time(
 	   gametime,
-	   " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
-	   "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
-	   pn, gamestring_with_leading_zeros(gametime.get()), score, primary_parent,
+	   "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
+	   "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d, Sh:%d\n",
+	   pn, score, primary_parent,
 	   (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
-	   (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
+	   (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score, ships_count);
 
 	if (score < -10000 || score > 30000) {
 		verb_log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,

@@ -507,7 +507,7 @@ void DefaultAI::think() {
 				   player_statistics.get_old60_player_land(player_number()), attackers_count_,
 				   soldier_trained_log.count(gametime),
 				   player_statistics.get_player_power(player_number()),
-				   count_productionsites_without_buildings(), first_iron_mine_built);
+				   count_productionsites_without_buildings(), first_iron_mine_built, allships.size());
 				set_taskpool_task_time(
 				   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			}

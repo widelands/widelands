@@ -656,6 +656,7 @@ constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
 constexpr int16_t kStrengthMultiplier = 30;
 constexpr int16_t kPSitesRatioMultiplier = 1;
+constexpr int32_t kShipBonus = 1000;
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -729,7 +730,8 @@ struct ManagementData {
 	            int16_t trained_soldiers,
 	            uint16_t strength,
 	            uint32_t existing_ps,
-	            const Time& first_iron_mine_time);
+	            const Time& first_iron_mine_time,
+				uint16_t ships_count);
 	void dump_data(Widelands::PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
