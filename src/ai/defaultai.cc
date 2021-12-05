@@ -280,7 +280,7 @@ void DefaultAI::think() {
 		int32_t speed_diff = 0;
 		if (delay_time > 3000) {
 			speed_diff = -100;
-		}else if (delay_time < 500) {
+		} else if (delay_time < 500) {
 			speed_diff = +100;
 		}
 		if (speed_diff != 0) {
