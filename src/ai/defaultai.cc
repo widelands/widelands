@@ -72,9 +72,6 @@ constexpr uint16_t kTargetQuantCap = 30;
 // this is intended for map developers & testers, should be off by default
 constexpr bool kPrintStats = false;
 
-// for scheduler
-constexpr int kMaxJobs = 4;
-
 // Count of mine types / ground resources
 constexpr int kMineTypes = 4;
 
@@ -270,15 +267,13 @@ void DefaultAI::think() {
 
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 
-	sort_task_pool();
-
 	const int32_t delay_time = gametime.get() - taskPool.front().due_time.get();
 
-	// This portion of code keeps the speed of game so that FPS are kept within
-	// range 13 - 15, this is used for training of AI
+	// This portion of code tries to keep the speed of game high, but so that AI's jobs
+	// have reasonably enough time for execution and are not too much delayed
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
-		if (delay_time > 5000) {
+		if (delay_time > 4000) {
 			speed_diff = -100;
 		} else if (delay_time < 1000) {
 			speed_diff = +100;
@@ -294,20 +289,18 @@ void DefaultAI::think() {
 		}
 	}
 
-	// Here we decide how many jobs will be run now (none - 5)
-	// in case no job is due now, it can be zero
-	uint32_t jobs_to_run_count = (delay_time < 0) ? 0 : 1;
+	// Here we decide limit for jobs will be run now
+	// generelly 3, if situation is wrong: 4
+	uint32_t jobs_to_run_count = std::min<uint32_t>((delay_time > 3000) ? 5 : 3, taskPool.size());
+
+	// we need to get more urgent jobs to the front
+	sort_task_pool(jobs_to_run_count);
 
 	// Here we collect data for "too late ..." message
 	if (delay_time > 5000) {
 		++scheduler_delay_counter_;
 	} else {
 		scheduler_delay_counter_ = 0;
-	}
-
-	if (jobs_to_run_count == 0) {
-		// well we have nothing to do now
-		return;
 	}
 
 	// And printing it now and resetting counter
@@ -317,31 +310,23 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-	// 400 provides that second job is run if delay time is longer then 1.6 sec
-	if (delay_time / 400 > 1) {
-		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 500));
-	}
-
-	jobs_to_run_count = (jobs_to_run_count > kMaxJobs) ? kMaxJobs : jobs_to_run_count;
-	assert(jobs_to_run_count > 0 && jobs_to_run_count <= kMaxJobs);
-	assert(jobs_to_run_count < taskPool.size());
-
-	// Pool of tasks to be executed this run. In ideal situation it will consist of one task only.
+	// Pool of tasks to be executed this run.
 	std::vector<SchedulerTask> current_task_queue;
 	assert(current_task_queue.empty());
 	// Here we push SchedulerTask members into the temporary queue, providing that a task is due now
-	// and
-	// the limit (jobs_to_run_count) is not exceeded
+	// and the limit (jobs_to_run_count) is not exceeded
 	for (uint8_t i = 0; i < jobs_to_run_count; ++i) {
 		if (taskPool[i].due_time <= gametime) {
 			current_task_queue.push_back(taskPool[i]);
-			sort_task_pool();
 		} else {
 			break;
 		}
 	}
 
-	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
+	// Nothing to do
+	if (current_task_queue.empty()) {
+		return;
+	}
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
 	std::sort(current_task_queue.begin(), current_task_queue.end());
@@ -7088,13 +7073,15 @@ const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 	throw wexception("AI internal error: nonexistent task.");
 }
 
-// This performs one "iteration" of sorting based on due_time
-// We by design do not need full sorting...
-void DefaultAI::sort_task_pool() {
+// This does not perform full sorting
+// we just need n first members properly placed...
+void DefaultAI::sort_task_pool(const uint32_t to_be_sorted_count) {
 	assert(!taskPool.empty());
-	for (int8_t i = taskPool.size() - 1; i > 0; --i) {
-		if (taskPool[i - 1].due_time > taskPool[i].due_time) {
-			std::iter_swap(taskPool.begin() + i - 1, taskPool.begin() + i);
+	for (uint32_t j = 0; j < to_be_sorted_count; j++) {
+		for (int8_t i = taskPool.size() - 1; i > 0; --i) {
+			if (taskPool[i - 1].due_time > taskPool[i].due_time) {
+				std::iter_swap(taskPool.begin() + i - 1, taskPool.begin() + i);
+			}
 		}
 	}
 }

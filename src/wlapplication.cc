@@ -1534,6 +1534,7 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("auto_speed")) {
 		set_config_bool("auto_speed", true);
+		verb_log_info("auto_speed ON");
 		commandline_.erase("auto_speed");
 	} else {
 		set_config_bool("auto_speed", false);
