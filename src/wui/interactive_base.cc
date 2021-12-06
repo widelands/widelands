@@ -760,7 +760,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
+	info_panel_.set_time_string(egbase().is_game() ? gametimestring(egbase().get_gametime().get(), true) : "");
 	info_panel_.set_fps_string(
 	   get_display_flag(dfDebug), cheat_mode_enabled_, 1000.0 / frametime_, average_fps());
 }
