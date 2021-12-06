@@ -267,6 +267,9 @@ void DefaultAI::think() {
 
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 
+	// we need to get more one most urgent job
+	sort_task_pool(1);
+
 	const int32_t delay_time = gametime.get() - taskPool.front().due_time.get();
 
 	// This portion of code tries to keep the speed of game high, but so that AI's jobs
@@ -293,9 +296,6 @@ void DefaultAI::think() {
 	// generelly 3, if situation is wrong: 4
 	uint32_t jobs_to_run_count = std::min<uint32_t>((delay_time > 3000) ? 5 : 3, taskPool.size());
 
-	// we need to get more urgent jobs to the front
-	sort_task_pool(jobs_to_run_count);
-
 	// Here we collect data for "too late ..." message
 	if (delay_time > 5000) {
 		++scheduler_delay_counter_;
@@ -309,6 +309,9 @@ void DefaultAI::think() {
 		              player_number(), static_cast<int32_t>(delay_time / 1000));
 		scheduler_delay_counter_ = 0;
 	}
+
+	// we need to get more urgent jobs to the front
+	sort_task_pool(jobs_to_run_count);
 
 	// Pool of tasks to be executed this run.
 	std::vector<SchedulerTask> current_task_queue;
