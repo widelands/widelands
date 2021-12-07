@@ -342,7 +342,8 @@ void DefaultAI::think() {
 	}
 
 	if (GameController* const ctrl = game().game_controller()) {
-	 verb_log_dbg_time(gametime, "Jobs: %d; delay: %d; gamespeed: %d \n", jobs_to_run_count, delay_time, ctrl->real_speed());
+		verb_log_dbg_time(gametime, "Jobs: %d; delay: %d; gamespeed: %d \n", jobs_to_run_count,
+		                  delay_time, ctrl->real_speed());
 	}
 
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
