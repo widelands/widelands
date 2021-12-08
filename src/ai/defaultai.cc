@@ -317,8 +317,8 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-	// 400 provides that second job is run if delay time is longer then 1.6 sec
-	if (delay_time / 400 > 1) {
+	// 500 provides that second job is run if delay time is longer then 2 sec
+	if (delay_time / 500 >= 1) {
 		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 500));
 	}
 
