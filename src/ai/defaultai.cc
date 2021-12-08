@@ -345,7 +345,8 @@ void DefaultAI::think() {
 	if (kPrintStats) {
 		if (GameController* const ctrl = game().game_controller()) {
 			verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
-			            player_->player_number(), jobs_to_run_count,delay_time, ctrl->real_speed());
+			                  player_->player_number(), jobs_to_run_count, delay_time,
+			                  ctrl->real_speed());
 		}
 	}
 
