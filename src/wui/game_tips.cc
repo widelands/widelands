@@ -26,6 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "base/random.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/graphic_functions.h"
@@ -97,7 +98,7 @@ void GameTips::load_tips(const std::string& name, const Widelands::AllTribes& t)
 void GameTips::update(RenderTarget& rt, const Recti& bounds) {
 	uint32_t ticks = SDL_GetTicks();
 	if (ticks >= (last_updated_ + update_after_)) {
-		const uint32_t next = std::rand() % tips_.size();  // NOLINT
+		const uint32_t next = RNG::static_rand(tips_.size());
 		if (next == last_tip_) {
 			last_tip_ = (next + 1) % tips_.size();
 		} else {

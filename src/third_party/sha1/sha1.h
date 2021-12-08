@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2021 by the Widelands Development Team
+ * Copyright (C) 2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,25 +13,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#ifndef WL_NETWORK_CRYPTO_H
-#define WL_NETWORK_CRYPTO_H
-
 #include <string>
 
-#include <boost/version.hpp>
+#ifndef WL_THIRD_PARTY_SHA1_SHA1_H
+#define WL_THIRD_PARTY_SHA1_SHA1_H
 
 namespace crypto {
-
-/**
- Hashes the given input string with SHA-1 and returns the hash.
- @param input A string to calculate the hash of.
- @return The hash as hex-string.
- */
-std::string sha1(const std::string& input);
+std::string sha1(const std::string&);
 }  // namespace crypto
 
-#endif  // end of include guard: WL_NETWORK_CRYPTO_H
+#endif  // end of include guard: WL_THIRD_PARTY_SHA1_SHA1_H

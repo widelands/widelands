@@ -106,6 +106,7 @@ wl_library(ui_fsmenu
     scripting_lua_table
     ui_basic
     sound
+    third_party_sha1
     widelands_ball_of_mud
     widelands_options
     wui
