@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-25 04:56+0000\n"
+"POT-Creation-Date: 2021-12-04 02:56+0000\n"
 "PO-Revision-Date: 2021-10-17 20:11+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1284,6 +1284,7 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Forn de tapioca"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1924,6 +1925,7 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tenda del cuidador de la jungla"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
