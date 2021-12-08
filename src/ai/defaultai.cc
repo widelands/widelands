@@ -70,7 +70,7 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -278,7 +278,7 @@ void DefaultAI::think() {
 	// range 13 - 15, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
-		if (delay_time > 5000) {
+		if (delay_time > 5500) {
 			speed_diff = -100;
 		} else if (delay_time < 1000) {
 			speed_diff = +100;
@@ -340,13 +340,14 @@ void DefaultAI::think() {
 			break;
 		}
 	}
-
-	if (GameController* const ctrl = game().game_controller()) {
-		verb_log_dbg_time(gametime, "Jobs: %d; delay: %d; gamespeed: %d \n", jobs_to_run_count,
-		                  delay_time, ctrl->real_speed());
-	}
-
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
+
+	if (kPrintStats) {
+		if (GameController* const ctrl = game().game_controller()) {
+			verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
+			            player_->player_number(), jobs_to_run_count,delay_time, ctrl->real_speed());
+		}
+	}
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
 	std::sort(current_task_queue.begin(), current_task_queue.end());
