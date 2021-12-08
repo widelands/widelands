@@ -70,7 +70,7 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = true;
+constexpr bool kPrintStats = false;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
