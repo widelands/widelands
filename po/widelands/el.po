@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-28 02:42+0000\n"
-"PO-Revision-Date: 2021-11-25 04:57+0000\n"
+"POT-Creation-Date: 2021-12-04 02:56+0000\n"
+"PO-Revision-Date: 2021-12-01 13:37+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -263,8 +263,8 @@ msgstr "Νοε"
 msgid "Dec"
 msgstr "Δεκ"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -278,12 +278,12 @@ msgstr "Αρχικό Μενού"
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -473,10 +473,10 @@ msgstr "Πληροφορίες"
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Unsupported Format"
 msgstr "Μη Υποστηριζόμενη Δομή"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:776
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -565,11 +565,11 @@ msgstr "Ο χάρτης δεν έχει αποθηκευτεί. Θέλετε σ�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1615
+#: ../../src/wlapplication.cc:1613
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -654,8 +654,8 @@ msgstr "ορυχείο"
 msgid "port"
 msgstr "λιμάνι"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1266,7 +1266,7 @@ msgstr "Αριθμός παικτών"
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:161
 #: ../../src/editor/ui_menus/player_menu.cc:289
-#: ../../src/logic/single_player_game_settings_provider.cc:110
+#: ../../src/logic/single_player_game_settings_provider.cc:111
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:66
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:132
@@ -1952,9 +1952,9 @@ msgstr "η οικονομία δεν χρειάζεται τον εργάτη �
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:535
 #: ../../src/logic/map_objects/tribes/production_program.cc:558
-#: ../../src/logic/map_objects/tribes/production_program.cc:1204
-#: ../../src/logic/map_objects/tribes/production_program.cc:1309
-#: ../../src/logic/map_objects/tribes/production_program.cc:1391
+#: ../../src/logic/map_objects/tribes/production_program.cc:1227
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
+#: ../../src/logic/map_objects/tribes/production_program.cc:1414
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1997,7 +1997,7 @@ msgstr "οι εργάτες δεν χρειάζονται εμπειρία"
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:718
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1249
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
@@ -2019,7 +2019,7 @@ msgstr ""
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1213
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2029,7 +2029,7 @@ msgstr[1] "%s λείπουν"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1318
+#: ../../src/logic/map_objects/tribes/production_program.cc:1341
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2039,14 +2039,14 @@ msgstr[1] "Παρήγαγε %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1400
+#: ../../src/logic/map_objects/tribes/production_program.cc:1423
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Στρατολόγησε %s"
 msgstr[1] "Στρατολόγησε %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1819
+#: ../../src/logic/map_objects/tribes/production_program.cc:1849
 msgid "No soldier found for this training level!"
 msgstr "Δεν βρέθηκε κανένας στρατιώτης για αυτό το επίπεδο εκπαίδευσης!"
 
@@ -2054,7 +2054,7 @@ msgstr "Δεν βρέθηκε κανένας στρατιώτης για αυτ�
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1860
+#: ../../src/logic/map_objects/tribes/production_program.cc:1890
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -2286,23 +2286,23 @@ msgstr ""
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1109
+#: ../../src/logic/map_objects/tribes/worker.cc:1111
 msgid "A geologist found resources."
 msgstr "Ένας γεωλόγος βρήκε πόρους."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2063
+#: ../../src/logic/map_objects/tribes/worker.cc:2065
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2070
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2069
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 msgid "Worker got lost!"
 msgstr "Χάθηκε εργάτης!"
 
@@ -2528,7 +2528,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:543
-#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:726
+#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr ""
 
@@ -3172,7 +3172,7 @@ msgstr ""
 msgid "Game ending – please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:76
 msgid "Loading…"
 msgstr "Φόρτωση σε εξέλιξη…"
 
@@ -5183,7 +5183,7 @@ msgstr "Παρατσούκλι:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:108
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:654
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:652
 msgid "nobody"
 msgstr "κανείς"
 
@@ -6097,59 +6097,59 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:779 ../../src/wlapplication.cc:783
-#: ../../src/wlapplication.cc:788 ../../src/wui/savegameloader.cc:105
+#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:105
 msgid "Error message:"
 msgstr "Μήνυμα σφάλματος:"
 
-#: ../../src/wlapplication.cc:780 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Σφάλμα δεδομένων παιχνιδιού"
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:780
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1279
+#: ../../src/wlapplication.cc:1277
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1284
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1440
+#: ../../src/wlapplication.cc:1438
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1559
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1576
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1628
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1628
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1631
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6163,7 +6163,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1640
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6173,11 +6173,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1668
+#: ../../src/wlapplication.cc:1666
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7115,9 +7115,9 @@ msgstr "Λιμάνια"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7505,8 +7505,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7907,11 +7907,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Show controls"
 msgstr ""
 
@@ -8066,8 +8066,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Στατιστικά"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Θαλασσοπορεία"
@@ -8774,36 +8774,48 @@ msgid "Click soldier to send away"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for volume slider in sound options
-#: ../../src/wui/sound_options.cc:66
+#: ../../src/wui/sound_options.cc:67
 msgid "Changes the volume. Click to hear a sample."
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:136
+#: ../../src/wui/sound_options.cc:138
+msgid "Play your own music in-game"
+msgstr ""
+
+#: ../../src/wui/sound_options.cc:140
+msgid ""
+"You can play custom in-game music by placing your own music files in "
+"‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
+"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
+"‘.ogg’."
+msgstr ""
+
+#: ../../src/wui/sound_options.cc:147
 msgctxt "sound_options"
 msgid "Music"
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:138
+#: ../../src/wui/sound_options.cc:149
 msgctxt "sound_options"
 msgid "Chat Messages"
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:141
+#: ../../src/wui/sound_options.cc:152
 msgctxt "sound_options"
 msgid "Game Messages"
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:145
+#: ../../src/wui/sound_options.cc:156
 msgctxt "sound_options"
 msgid "User Interface"
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:148
+#: ../../src/wui/sound_options.cc:159
 msgctxt "sound_options"
 msgid "Ambient Sounds"
 msgstr ""
 
-#: ../../src/wui/sound_options.cc:161
+#: ../../src/wui/sound_options.cc:175
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
