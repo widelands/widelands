@@ -190,6 +190,7 @@ wl_library(wui_game_tips
   DEPENDS
     base_i18n
     base_log
+    base_random
     graphic_functions
     graphic
     graphic_fonthandler

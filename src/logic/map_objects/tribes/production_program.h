@@ -313,6 +313,7 @@ struct ProductionProgram : public MapObjectProgram {
 
 	private:
 		std::string program_;
+		ProgramResult on_failure_;
 	};
 
 	/// Does nothing.
@@ -467,6 +468,7 @@ struct ProductionProgram : public MapObjectProgram {
 		unsigned max_resources_;      // Can work up to this percent (of total mountain resources)
 		unsigned depleted_chance_;    // odds of finding resources from empty mine
 		unsigned experience_chance_;  // probability of training in _empty_ mines
+		bool notify_on_failure_;      // Send a message if no resources could be found.
 	};
 
 	struct ActCheckSoldier : public Action {
