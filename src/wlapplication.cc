@@ -728,7 +728,7 @@ void WLApplication::init_and_run_game_from_template() {
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
-		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, false, "single_player");
 	} catch (const Widelands::GameDataError& e) {
 		log_err("Game not started: Game data error: %s\n", e.what());
 	} catch (const std::exception& e) {
