@@ -39,6 +39,9 @@ branches:
   only:
     - master
 
+skip_tags: true
+
+
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
