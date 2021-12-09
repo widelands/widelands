@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-01 13:36+0000\n"
+"POT-Creation-Date: 2021-12-07 02:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -5361,6 +5361,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _ "Discovery",
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

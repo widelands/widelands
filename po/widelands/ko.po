@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-28 02:42+0000\n"
-"PO-Revision-Date: 2021-11-25 04:57+0000\n"
+"POT-Creation-Date: 2021-12-04 02:56+0000\n"
+"PO-Revision-Date: 2021-12-01 13:37+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -268,8 +268,8 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -283,12 +283,12 @@ msgstr "기본 차림표"
 msgid "Tools"
 msgstr "도구"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -478,10 +478,10 @@ msgstr "정보"
 msgid "Click on a field to show information about it"
 msgstr "필드에 대한 정보를 표시하려면 필드를 클릭하십시오"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -540,7 +540,7 @@ msgstr "자원 표시"
 msgid "Unsupported Format"
 msgstr "지원되지 않는 형식"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:776
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -570,11 +570,11 @@ msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1615
+#: ../../src/wlapplication.cc:1613
 msgid "Error"
 msgstr "오류"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1617
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -659,8 +659,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1270,7 +1270,7 @@ msgstr "선수의 수"
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:161
 #: ../../src/editor/ui_menus/player_menu.cc:289
-#: ../../src/logic/single_player_game_settings_provider.cc:110
+#: ../../src/logic/single_player_game_settings_provider.cc:111
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:66
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:132
@@ -1948,9 +1948,9 @@ msgstr "경제가 일꾼 '%s'를 필요로 하지 않기"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:535
 #: ../../src/logic/map_objects/tribes/production_program.cc:558
-#: ../../src/logic/map_objects/tribes/production_program.cc:1204
-#: ../../src/logic/map_objects/tribes/production_program.cc:1309
-#: ../../src/logic/map_objects/tribes/production_program.cc:1391
+#: ../../src/logic/map_objects/tribes/production_program.cc:1227
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
+#: ../../src/logic/map_objects/tribes/production_program.cc:1414
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1993,7 +1993,7 @@ msgstr "일꾼들은 경험이 필요없습니다"
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:718
-#: ../../src/logic/map_objects/tribes/production_program.cc:1226
+#: ../../src/logic/map_objects/tribes/production_program.cc:1249
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "%2$s 때문에 %1$s 시작하지 않았습니다"
@@ -2015,7 +2015,7 @@ msgstr "%2$s 때문에 %1$s 건너뛰었습니다"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1213
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2024,7 +2024,7 @@ msgstr[0] "%s 가 없기"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1318
+#: ../../src/logic/map_objects/tribes/production_program.cc:1341
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2033,13 +2033,13 @@ msgstr[0] "%s 생산됨"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1400
+#: ../../src/logic/map_objects/tribes/production_program.cc:1423
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s 선발됨"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1819
+#: ../../src/logic/map_objects/tribes/production_program.cc:1849
 msgid "No soldier found for this training level!"
 msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 
@@ -2047,7 +2047,7 @@ msgstr "훈련 수준에 걸맞는 군인이 없습니다!"
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1860
+#: ../../src/logic/map_objects/tribes/production_program.cc:1890
 #, c-format
 msgid "Completed %s"
 msgstr "%s를 완료했습니다"
@@ -2279,23 +2279,23 @@ msgstr "물길이 파괴됨"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "새로운 항구 부두를 위한 공간을 마련하기 위해 수로를 파괴해야 했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1109
+#: ../../src/logic/map_objects/tribes/worker.cc:1111
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2063
+#: ../../src/logic/map_objects/tribes/worker.cc:2065
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "%s 이(가) 집으로가는 길을 찾지 못하고 죽을 가능성이 높습니다."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2070
 #: ../../src/wui/productionsitewindow.cc:109
 #: ../../src/wui/productionsitewindow.cc:126
 msgid "Worker"
 msgstr "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2069
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -2521,7 +2521,7 @@ msgid "Checking map"
 msgstr "지도를 검사하고 있음"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:543
-#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:726
+#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr "놀이를 준비하고 있음…"
 
@@ -3162,7 +3162,7 @@ msgstr "잠시 기다리십시오…"
 msgid "Game ending – please wait…"
 msgstr "게임 종료 – 잠시 기다십시오…"
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:76
 msgid "Loading…"
 msgstr "불러오는 중…"
 
@@ -5158,7 +5158,7 @@ msgstr "별명:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:108
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:654
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:652
 msgid "nobody"
 msgstr "아무도 없음"
 
@@ -6072,59 +6072,59 @@ msgid "Unmark All"
 msgstr "모두 자국 표시 해제"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:779 ../../src/wlapplication.cc:783
-#: ../../src/wlapplication.cc:788 ../../src/wui/savegameloader.cc:105
+#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:105
 msgid "Error message:"
 msgstr "오류 메시지:"
 
-#: ../../src/wlapplication.cc:780 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "게임 데이터 오류"
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:780
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "와이드랜드가 \"%s\" 파일을 찾을 수 없습니다."
 
-#: ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr "파일 시스템 오류"
 
-#: ../../src/wlapplication.cc:1279
+#: ../../src/wlapplication.cc:1277
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "명령 줄 매개 변수의 빈 값: %s"
 
-#: ../../src/wlapplication.cc:1284
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s 은 다른 작업과 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1440
+#: ../../src/wlapplication.cc:1438
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "알 수 없는 명령 줄 매개 변수: %s\n혹시 '='가 없는 건 아닌가요?"
 
-#: ../../src/wlapplication.cc:1561
+#: ../../src/wlapplication.cc:1559
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized 과 --fullscreen 은 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1578
+#: ../../src/wlapplication.cc:1576
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "알 수 없는 명령 줄 매개 변수: %s"
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1628
 msgid "Game ended unexpectedly"
 msgstr "놀이가 예기치 않게 종료되었습니다"
 
-#: ../../src/wlapplication.cc:1630
+#: ../../src/wlapplication.cc:1628
 msgid "Unexpected error during the game"
 msgstr "게임 중 예상치 못한 오류가 발생"
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1631
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6138,7 +6138,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "놀이 중에 오류가 발생했습니다. 오류 메시지는 다음과 같습니다:\n\n%1$s\n\n이 문제를 보고하여 와이드랜드 개선에 도움을 주십시오. 표준 출력 (윈도우즈에서는 stdout.txt) 에서 관련 메시지를 찾을 수 있습니다. 빌드 %2$s (%3$s)를 사용 중입니다.\n\n이 정보를 보고서에 추가하십시오.\n\n와이드랜드가 긴급 저장 놀이를 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기와 계속 놀기는 것이 종종 가능합니다."
 
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1640
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6148,11 +6148,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "다음과 같은 이유로 게임이 예기치 않게 종료되었습니다:\n\n%s\n\n와이드랜드가 긴급 저장 게임을 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기하고 계속 플레이하는 것이 가능합니다."
 
-#: ../../src/wlapplication.cc:1668
+#: ../../src/wlapplication.cc:1666
 msgid "Emergency save failed"
 msgstr "긴급 저장 실패"
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7089,9 +7089,9 @@ msgstr "항구"
 msgid "Low productivity:"
 msgstr "낮은 생산성:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7479,8 +7479,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7877,11 +7877,11 @@ msgstr "물품을 제거"
 msgid "Add ware"
 msgstr "물품을 추가"
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Hide controls"
 msgstr "제어를 숨김"
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Show controls"
 msgstr "제어를 표시"
 
@@ -8036,8 +8036,8 @@ msgstr "놀이를 일시정지"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"
@@ -8736,36 +8736,48 @@ msgid "Click soldier to send away"
 msgstr "발령낼 군인을 클릭"
 
 #. * TRANSLATORS: Tooltip for volume slider in sound options
-#: ../../src/wui/sound_options.cc:66
+#: ../../src/wui/sound_options.cc:67
 msgid "Changes the volume. Click to hear a sample."
 msgstr "음량을 변경합니다. 샘플을 들으려면 누르십시오."
 
-#: ../../src/wui/sound_options.cc:136
+#: ../../src/wui/sound_options.cc:138
+msgid "Play your own music in-game"
+msgstr ""
+
+#: ../../src/wui/sound_options.cc:140
+msgid ""
+"You can play custom in-game music by placing your own music files in "
+"‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
+"two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
+"‘.ogg’."
+msgstr ""
+
+#: ../../src/wui/sound_options.cc:147
 msgctxt "sound_options"
 msgid "Music"
 msgstr "음악"
 
-#: ../../src/wui/sound_options.cc:138
+#: ../../src/wui/sound_options.cc:149
 msgctxt "sound_options"
 msgid "Chat Messages"
 msgstr "대화 알릴말"
 
-#: ../../src/wui/sound_options.cc:141
+#: ../../src/wui/sound_options.cc:152
 msgctxt "sound_options"
 msgid "Game Messages"
 msgstr "놀이 알릴말"
 
-#: ../../src/wui/sound_options.cc:145
+#: ../../src/wui/sound_options.cc:156
 msgctxt "sound_options"
 msgid "User Interface"
 msgstr "사용자 인터페이스"
 
-#: ../../src/wui/sound_options.cc:148
+#: ../../src/wui/sound_options.cc:159
 msgctxt "sound_options"
 msgid "Ambient Sounds"
 msgstr "주변 소리"
 
-#: ../../src/wui/sound_options.cc:161
+#: ../../src/wui/sound_options.cc:175
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
