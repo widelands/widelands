@@ -32,6 +32,7 @@ wl_library(ai
     logic
     logic_constants
     logic_commands
+    logic_game_controller
     logic_map
     logic_map_objects
 )
