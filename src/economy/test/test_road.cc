@@ -17,9 +17,6 @@
  *
  */
 
-#ifdef _WIN32
-#include "base/log.h"
-#endif
 #include "base/test.h"
 #include "economy/flag.h"
 #include "economy/road.h"

@@ -19,7 +19,6 @@
 
 #include <vector>
 
-#include "base/log.h"
 #include "base/test.h"
 #include "notifications/notifications.h"
 
