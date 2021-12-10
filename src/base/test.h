@@ -172,11 +172,13 @@ inline void do_check_error(const char* f,
 }
 }  // namespace WLTestsuite
 
-#define TEST_EXECUTABLE(name)                                                                      \
+#define TEST_EXECUTABLE(name, needs_logging)                                                       \
 	namespace WLTestsuite {                                                                         \
 	namespace WLTestsuite_##name {                                                                  \
 		static int main() {                                                                          \
-			set_testcase_logging_dir();                                                               \
+			if (needs_logging) {                                                                      \
+				set_testcase_logging_dir();                                                            \
+			}                                                                                         \
 			bool errors = false;                                                                      \
 			for (const auto& suite : all_testsuites()) {                                              \
 				for (const auto& test : suite.second) {                                                \
