@@ -37,9 +37,6 @@ struct SimpleNote {
 TESTSUITE_START(NotificationsTestSuite)
 
 TESTCASE(SimpleTest) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
 
 	std::vector<SimpleNote> received1;
 	auto subscriber1 = Notifications::subscribe<SimpleNote>(

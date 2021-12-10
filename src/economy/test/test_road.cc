@@ -41,9 +41,6 @@ struct TestingFlag : public Widelands::Flag {
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
-#ifdef _WIN32
-		set_logging_dir();
-#endif
 		g_fs = new LayeredFileSystem();
 	}
 	~WlTestFixture() {

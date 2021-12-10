@@ -149,7 +149,7 @@ bool set_logging_dir(const std::string& homedir) {
 }
 
 // Set the logging dir to the program's dir. For running test cases where we don't have a homedir.
-void set_logging_dir() {
+void set_testcase_logging_dir() {
 	logger.reset(new WindowsLogger(get_output_directory()));
 }
 
