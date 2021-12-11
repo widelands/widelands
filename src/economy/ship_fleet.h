@@ -139,13 +139,7 @@ private:
 
 	bool act_pending_;
 
-	/**
-	 * Store all pairs shortest paths between port docks
-	 *
-	 * Let i < j, then the path from ports_[i] to ports_[j] is stored in
-	 * portpaths_[binom(j,2) + i]
-	 */
-	std::vector<PortPath> portpaths_;
+	std::map<std::pair<Serial, Serial>, PortPath> port_paths_;
 
 	ShippingSchedule schedule_;
 
