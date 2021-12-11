@@ -579,16 +579,18 @@ void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 }
 
 void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
-	std::vector<PortDock*>::iterator it = std::find(ports_.begin(), ports_.end(), port);
-	if (it != ports_.end()) {
-		for (auto it = port_paths_.begin(); it != port_paths_.end();) {
-			if (it->first.first == port->serial() || it->first.second == port->serial()) {
-				it = port_paths_.erase(it);
-			} else {
-				++it;
-			}
+	for (auto it = port_paths_.begin(); it != port_paths_.end();) {
+		if (it->first.first == port->serial() || it->first.second == port->serial()) {
+			it = port_paths_.erase(it);
+		} else {
+			++it;
 		}
-		ports_.erase(it);
+	}
+	{
+		std::vector<PortDock*>::iterator it = std::find(ports_.begin(), ports_.end(), port);
+		if (it != ports_.end()) {
+			ports_.erase(it);
+		}
 	}
 	port->set_fleet(nullptr);
 
