@@ -6273,11 +6273,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		assert(bo.total_count() > 0);
 
 		if (bo.total_count() == 1 || (bo.max_preciousness >= 10 && bo.total_count() == 2) ||
-		        (!bo.ware_outputs.empty() &&
-		         bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
-		        (bo.inputs.size() == 1 && calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
-		                                     static_cast<unsigned int>(std::abs(
-		                                        management_data.get_military_number_at(171))))) {
+		    (!bo.ware_outputs.empty() && bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
+		    (bo.inputs.size() == 1 &&
+		     calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
+		        static_cast<unsigned int>(std::abs(management_data.get_military_number_at(171))))) {
 			return BuildingNecessity::kNeeded;
 		}
 		return BuildingNecessity::kNotNeeded;
