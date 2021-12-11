@@ -182,10 +182,15 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	assert(allships.size() >= expeditions_in_progress);
 	bool ship_free = allships.size() - expeditions_in_progress > 0;
 
-	// now we decide whether we have enough ships or need to build another
+	/* Now we decide whether we have enough ships or need to build another:
+	 * - We always need at least one ship in transport mode
+	 * - We want at least as many free ships as we have ports
+	 * - If ships utilization is too high
+	 */
 	const bool need_ship =
 	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
-	   (!ship_free || static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0);
+	   (!ship_free || persistent_data->ships_utilization > 5000 ||
+	    static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {

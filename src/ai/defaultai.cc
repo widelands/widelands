@@ -3999,7 +3999,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		}
 	}
 
-	if (wares_on_road > (spots_ > kSpotsEnough ? 5 : 8)) {
+	if (wares_on_road > 8 || (spots_ > kSpotsEnough && wares_on_road > 5)) {
 		return false;
 	}
 
@@ -5355,7 +5355,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if ((!basic_economy_established && management_data.f_neuron_pool[17].get_position(1)) ||
 		    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed ||
 		    ts_without_trainers_ > 0 || bo.cnt_under_construction > 0 || ts_in_const_count_ > 1 ||
-		    bo.prohibited_till > gametime || ts_without_trainers_ > 1 ||
+		    bo.prohibited_till > gametime ||
 		    (bo.total_count() > 0 &&
 		     soldier_trained_log.count(gametime, bo.id) / bo.total_count() < 5)) {
 			return BuildingNecessity::kNotNeeded;
@@ -5888,12 +5888,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 		} else if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
+			const uint32_t current_stats_threshold =
+			   85 + std::abs(management_data.get_military_number_at(129)) / 10;
 			if ((mines_per_type[bo.mines].total_count() == 0 &&
 			     site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged) ||
 			    (mines_per_type[bo.mines].finished == mines_per_type[bo.mines].total_count() &&
-			     bo.current_stats >
-			        static_cast<uint32_t>(85 + std::abs(management_data.get_military_number_at(129)) /
-			                                      10) &&
+			     bo.current_stats > current_stats_threshold &&
 			     site_needed_for_economy != BasicEconomyBuildingStatus::kDiscouraged)) {
 				// unless a mine is prohibited, we want to have at least one of the kind
 				bo.max_needed_preciousness = bo.max_preciousness;
@@ -6272,14 +6272,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// never dismantle last building (a care should be taken elsewhere)
 		assert(bo.total_count() > 0);
 
-		return (bo.total_count() == 1 || (bo.max_preciousness >= 10 && bo.total_count() == 2) ||
+		if (bo.total_count() == 1 || (bo.max_preciousness >= 10 && bo.total_count() == 2) ||
 		        (!bo.ware_outputs.empty() &&
 		         bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
 		        (bo.inputs.size() == 1 && calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
 		                                     static_cast<unsigned int>(std::abs(
-		                                        management_data.get_military_number_at(171))))) ?
-                BuildingNecessity::kNeeded :
-                BuildingNecessity::kNotNeeded;
+		                                        management_data.get_military_number_at(171))))) {
+			return BuildingNecessity::kNeeded;
+		}
+		return BuildingNecessity::kNotNeeded;
 	}
 	NEVER_HERE();
 }
