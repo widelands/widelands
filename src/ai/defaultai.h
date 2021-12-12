@@ -22,6 +22,8 @@
 #define WL_AI_DEFAULTAI_H
 
 #include <memory>
+#include <chrono>
+#include <ctime>
 
 #include "ai/ai_help_structs.h"
 #include "ai/computer_player.h"
@@ -189,6 +191,7 @@ private:
 	void sort_by_priority();
 	void set_taskpool_task_time(const Time&, SchedulerTaskId);
 	const Time& get_taskpool_task_time(SchedulerTaskId);
+	std::chrono::high_resolution_clock::time_point time_point;
 
 	bool construct_building(const Time&);
 
@@ -293,7 +296,7 @@ private:
 	EventTimeQueue soldier_attacks_log;
 
 	// used by AI scheduler
-	uint32_t sched_stat_[20] = {0};
+	//uint32_t sched_stat_[20] = {0};  NOCOM
 	Time next_ai_think_;
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
@@ -325,7 +328,8 @@ private:
 	std::vector<WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
-	std::vector<SchedulerTask> taskPool;
+	std::vector<std::shared_ptr<SchedulerTask>> taskPool;
+	std::vector<std::shared_ptr<SchedulerTask>> current_task_queue;
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	std::set<uint32_t> enemy_warehouses;
 	// it will map mined material to observer
