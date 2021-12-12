@@ -199,6 +199,7 @@ void SoundHandler::read_config() {
 		option.second.enabled =
 		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
+	use_custom_songset_instead_ingame_ = get_config_bool("sound", "custom_ingame_music", false);
 }
 
 /// Save the current sound options to config cache
@@ -214,6 +215,7 @@ void SoundHandler::save_config() {
 		const std::string volume_name = "volume_" + name;
 		set_config_int("sound", volume_name, volume);
 	}
+	set_config_bool("sound", "custom_ingame_music", use_custom_songset_instead_ingame_);
 }
 
 /// Read the sound options from the cache and apply them
@@ -473,13 +475,29 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 	}
 
 	if (!songset_name.empty()) {
-		current_songset_ = songset_name;
+		if (songset_name == Songset::kIngame && use_custom_songset_instead_ingame_) {
+			current_songset_ = Songset::kCustom;
+		} else {
+			current_songset_ = songset_name;
+		}
 	}
 
 	if (Mix_PlayingMusic()) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
+	}
+}
+bool SoundHandler::use_custom_songset() const {
+	return use_custom_songset_instead_ingame_;
+}
+
+void SoundHandler::use_custom_songset(bool on) {
+	use_custom_songset_instead_ingame_ = on;
+	if (current_songset_ == Songset::kIngame && on) {
+		change_music(Songset::kCustom);
+	} else if (current_songset_ == Songset::kCustom && !on) {
+		change_music(Songset::kIngame);
 	}
 }
 

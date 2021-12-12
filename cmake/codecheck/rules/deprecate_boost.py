@@ -6,14 +6,12 @@ strip_comments_and_strings = True
 whitelist = [
     'boost::format',
     'boost::io::format_error',
-    'boost::uuids',
     'boost::asio',
     'boost::system::error_code',
     'boost::system::system_error',
 ]
 whitelist_headers = [
     'boost/format',
-    'boost/uuid',
     'boost/asio',
     'boost/version',
 ]

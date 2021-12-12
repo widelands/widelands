@@ -781,8 +781,8 @@ msgid ""
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
 "Crec que he sentit que el vent del nord portava sons estranys però coneguts."
-" Si no vaig errat, he sentit tambors de guerra bàrbars. Així que hauríem d"
-"'anar-hi i veure que està passant."
+" Si no vaig errat, he sentit tambors de guerra bàrbars. Així que hauríem "
+"d'anar-hi i veure que està passant."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:427

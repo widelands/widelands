@@ -8,6 +8,13 @@ wl_library(third_party_minizip
   USES_ZLIB
 )
 
+wl_library(third_party_sha1
+  THIRD_PARTY
+  SRCS
+    sha1/sha1.cc
+    sha1/sha1.h
+)
+
 wl_library(third_party_eris
   THIRD_PARTY
   C_LIBRARY

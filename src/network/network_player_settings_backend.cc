@@ -22,6 +22,7 @@
 #include <cstdlib>
 
 #include "ai/computer_player.h"
+#include "base/random.h"
 
 void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
 	if (id >= s->settings().players.size()) {
@@ -43,7 +44,7 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 		if (impls.size() > 1) {
 			do {
 				// Choose a random AI
-				const size_t random = (std::rand() % impls.size());  // NOLINT
+				const size_t random = RNG::static_rand(impls.size());
 				it = impls.begin() + random;
 			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}

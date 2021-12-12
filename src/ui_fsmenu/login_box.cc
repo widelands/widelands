@@ -21,9 +21,9 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
-#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
+#include "third_party/sha1/sha1.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/main.h"
