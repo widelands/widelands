@@ -145,7 +145,7 @@ bool Market::is_ready_to_launch_batch(const int trade_id) const {
 	if (it == trade_orders_.end()) {
 		return false;
 	}
-	auto& trade_order = it->second;
+	const auto& trade_order = it->second;
 	assert(!trade_order.fulfilled());
 
 	// Do we have all necessary wares for a batch?
