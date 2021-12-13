@@ -71,6 +71,7 @@ constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
 constexpr bool kPrintStats = true;
+constexpr bool kCollectPerfData = true;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -357,9 +358,11 @@ void DefaultAI::think() {
 
 		due_task = task->id;
 
+		// Collecting some statistics, performance data only when explicitely enabled
 		task->call_count++;
-		time_point = std::chrono::high_resolution_clock::now();
-		//++sched_stat_[static_cast<uint32_t>(due_task)];
+		if (kCollectPerfData) {
+			time_point = std::chrono::high_resolution_clock::now();
+		}
 
 		// Now AI runs a job selected above to be performed in this turn
 		// (only one but some of them needs to run check_economies() to
@@ -554,7 +557,11 @@ void DefaultAI::think() {
 			NEVER_HERE();
 		}
 
-		task->total_exec_time += std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time_point ).count();
+		if (kCollectPerfData) {
+			task->total_exec_time += std::chrono::duration_cast<std::chrono::microseconds>(
+			                            std::chrono::high_resolution_clock::now() - time_point)
+			                            .count();
+		}
 	}
 }
 
@@ -7101,7 +7108,7 @@ const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 // This performs one "iteration" of sorting based on due_time
 // We by design do not need full sorting...
 void DefaultAI::sort_task_pool() {
-	assert(!taskPool.empty());
+	assert(taskPool.size() >= 2);
 	for (int8_t i = taskPool.size() - 1; i > 0; --i) {
 		if (taskPool[i - 1]->due_time > taskPool[i]->due_time) {
 			std::iter_swap(taskPool.begin() + i - 1, taskPool.begin() + i);
@@ -7274,8 +7281,9 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  player_statistics.get_modified_player_power(player_number()));
 	
 	// 5. printing some performance data
+	log_dbg("Player: %d, AI tasks statistics    call count   ms spent\n", player_number());
 	for (auto task : taskPool) {
-		printf("Task: %-25s:  %6u   %8.2f\n", task->descr.c_str(), task->call_count, task->total_exec_time/1000);
+		log_dbg("Task: %-28s:  %6u   %8.0f\n", task->descr.c_str(), task->call_count, task->total_exec_time/1000);
 	}
 }
 
