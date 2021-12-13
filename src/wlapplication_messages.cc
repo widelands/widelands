@@ -86,11 +86,11 @@ void fill_parameter_vector() {
 	  {"", "ai_training", "",
 		_("Enables AI training mode. See https://www.widelands.org/wiki/Ai%20Training/ for a full "
 		  "description of the AI training logic"),
-		false},
+		true},
 	  {"", "auto_speed", "",
-		_("In multiplayer games only, this will keep adjusting the game speed "
-		  "automatically, depending on FPS. Useful in conjunction with --ai_training"),
-		false},
+		_("This will keep adjusting the game speed automatically, depending on AI delay."
+		  "Only to be used for AI testing or training (in conjunction with --ai_training)"),
+		true},
 	  /// Saving options
 	  {_("Game options:"), _("Note: New values will be written to config file"), "--", "", false},
 	  {"", "autosave",
