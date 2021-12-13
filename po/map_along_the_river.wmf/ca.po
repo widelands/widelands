@@ -347,6 +347,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the north will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Senyor, ara que hem conquerit la terra d'en Törver, podem usar el seu accés "
+"al gran llac. Un port al nord ens donarà millors oportunitats de contactar "
+"amb altres clans."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -402,6 +405,9 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Amb la nostra reeixida expansió, hauríem de considerar construir un magatzem"
+" al sud-oest de la sentinella per tal d'explorar millor la zona. Hi ha un "
+"bon lloc de construcció només a tres passes de la sentinella."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -415,6 +421,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Senyor, han aparegut pantans durant la temporada humida al llarg del rierol "
+"que va cap a l'est i no podem travessar-lo. S'hauria de treure les zones "
+"pantanoses abans de continuar. Si porteu prou pales al magatzem nou, alguns "
+"voluntaris se n'encarregaran de treure-les."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -459,6 +469,10 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Senyor, degut als atacs que hem fet als pirates, han començat a reagrupar-se"
+" amb pirates d'altres clans. Podrien recuperar la força que han perdut "
+"últimament. Cada vegada disposem de menys recursos i això podria suposar un "
+"problema amb un enemic tan fort a prop."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -509,6 +523,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Segons els nostres pescadors, s'ha atrinxerat a la fortalesa de la illa. "
+"Hauríem d'usar els nostres coneixements de navegació que vam aconseguir d'en"
+" Törver per construir vaixells i atacar les seves posicions."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -554,6 +571,9 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Senyor, quasi hem derrotat tots els exèrcits i ara ens apropem a l'últim "
+"enemic. Ens han estat esperant durant molt temps i estaran preparats per a "
+"la batalla més dura de la seva vida."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
