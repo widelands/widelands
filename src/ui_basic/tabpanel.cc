@@ -424,8 +424,8 @@ void TabPanel::draw(RenderTarget& dst) {
 			uint16_t picture_width = image_scale * tabs_[idx]->pic->width();
 			uint16_t picture_height = image_scale * tabs_[idx]->pic->height();
 			dst.blitrect_scale(
-			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2,
-			         (kTabPanelButtonHeight - picture_height) / 2, picture_width, picture_height),
+			   Rectf(x + (kTabPanelButtonHeight - picture_width) / 2.f,
+			         (kTabPanelButtonHeight - picture_height) / 2.f, picture_width, picture_height),
 			   tabs_[idx]->pic, Recti(0, 0, tabs_[idx]->pic->width(), tabs_[idx]->pic->height()), 1,
 			   BlendMode::UseAlpha);
 		} else if (tabs_[idx]->rendered_title != nullptr) {
