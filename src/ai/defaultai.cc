@@ -70,8 +70,9 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = true;
-constexpr bool kCollectPerfData = true;
+constexpr bool kPrintStats = false;
+// enable also the above to print the results of the performance data collection
+constexpr bool kCollectPerfData = false;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -558,7 +559,7 @@ void DefaultAI::think() {
 		}
 
 		if (kCollectPerfData) {
-			task->total_exec_time += std::chrono::duration_cast<std::chrono::microseconds>(
+			task->total_exec_time_ms += std::chrono::duration_cast<std::chrono::microseconds>(
 			                            std::chrono::high_resolution_clock::now() - time_point)
 			                            .count();
 		}
@@ -1134,16 +1135,14 @@ void DefaultAI::late_initialization() {
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
 	if (ai_training_mode_) {
 		taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 1000)),
-		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
+		                                 SchedulerTaskId::kManagementUpdate, 8, "AI training review"));
 	}
 	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(9 * 1000)),
 	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (
-	   std::max<Time>(gametime, Time(10 * 1000)), SchedulerTaskId::kUpdateStats, 15, "review"));
 
 	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 1000)),
 	                                 SchedulerTaskId::kWarehouseFlagDist, 5,
-	                                 "Flag-Warehouse Update"));
+	                                 "flag warehouse Update"));
 
 	const Widelands::Map& map = game().map();
 
@@ -7279,11 +7278,13 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  persistent_data->ai_personality_mil_upper_limit, msites_in_constr(),
 	                  static_cast<int8_t>(soldier_status_),
 	                  player_statistics.get_modified_player_power(player_number()));
-	
+
 	// 5. printing some performance data
-	log_dbg("Player: %d, AI tasks statistics    call count   ms spent\n", player_number());
+	log_dbg_time(
+	   gametime, "Player: %d, AI tasks statistics:  call count   ms spent\n", player_number());
 	for (auto task : taskPool) {
-		log_dbg("Task: %-28s:  %6u   %8.0f\n", task->descr.c_str(), task->call_count, task->total_exec_time/1000);
+		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f\n", task->descr.c_str(), task->call_count,
+		             task->total_exec_time_ms / 1000);
 	}
 }
 
