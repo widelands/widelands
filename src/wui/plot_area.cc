@@ -371,13 +371,13 @@ uint32_t WuiPlotArea::get_plot_time() const {
 		// or a multiple of 20h
 		// or a multiple of 4 days
 		if (time_ms > 8 * kDays) {
-			time_ms += -(time_ms % (4 * kDays)) + 4 * kDays;
+			time_ms += 4 * kDays - (time_ms % (4 * kDays));
 		} else if (time_ms > 40 * kHours) {
-			time_ms += -(time_ms % (20 * kHours)) + 20 * kHours;
+			time_ms += 20 * kHours - (time_ms % (20 * kHours));
 		} else if (time_ms > 4 * kHours) {
-			time_ms += -(time_ms % (2 * kHours)) + 2 * kHours;
+			time_ms += 2 * kHours - (time_ms % (2 * kHours));
 		} else {
-			time_ms += -(time_ms % (15 * kMinutes)) + 15 * kMinutes;
+			time_ms += 15 * kMinutes - (time_ms % (15 * kMinutes));
 		}
 		return time_ms;
 	}

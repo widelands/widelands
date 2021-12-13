@@ -114,7 +114,7 @@ void Box::set_max_size(int w, int h) {
 void Box::update_desired_size() {
 	int totaldepth = 0;
 	int maxbreadth = mindesiredbreadth_;
-	int spacing = -inner_spacing_;
+	int spacing = -1 * inner_spacing_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth = 0, breadth = 0;
@@ -175,7 +175,7 @@ bool Box::handle_key(bool down, SDL_Keysym code) {
 void Box::layout() {
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	int totaldepth = 0;
-	int spacing = -inner_spacing_;
+	int spacing = -1 * inner_spacing_;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, unused = 0;
