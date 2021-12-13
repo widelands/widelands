@@ -560,8 +560,8 @@ void DefaultAI::think() {
 
 		if (kCollectPerfData) {
 			task->total_exec_time_ms += std::chrono::duration_cast<std::chrono::microseconds>(
-			                            std::chrono::high_resolution_clock::now() - time_point)
-			                            .count();
+			                               std::chrono::high_resolution_clock::now() - time_point)
+			                               .count();
 		}
 	}
 }
@@ -1090,59 +1090,66 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Populating taskPool with all AI jobs and their starting times
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(0)),
-	                                 SchedulerTaskId::kConstructBuilding, 6,
-	                                 "construct a building"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(0)),
+	                                                   SchedulerTaskId::kConstructBuilding, 6,
+	                                                   "construct a building"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(1000)), SchedulerTaskId::kRoadCheck, 2, "roads check"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(15 * 1000)),
-	                                 SchedulerTaskId::kCheckProductionsites, 5,
-	                                 "productionsites check"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(30 * 1000)),
-	                                 SchedulerTaskId::kProductionsitesStats, 1,
-	                                 "productionsites statistics"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 1000)),
+	                                                   SchedulerTaskId::kCheckProductionsites, 5,
+	                                                   "productionsites check"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(30 * 1000)),
+	                                                   SchedulerTaskId::kProductionsitesStats, 1,
+	                                                   "productionsites statistics"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckMines, 5, "check mines"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(0)),
-	                                 SchedulerTaskId::kCheckMilitarysites, 5,
-	                                 "check militarysites"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(0)),
+	                                                   SchedulerTaskId::kCheckMilitarysites, 5,
+	                                                   "check militarysites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckShips, 5, "check ships"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kCheckEconomies, 1, "check economies"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(30 * 1000)),
-	                                 SchedulerTaskId::KMarineDecisions, 5, "marine decisions"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(2 * 60 * 1000)),
-	                                 SchedulerTaskId::kCheckTrainingsites, 5,
-	                                 "check training sites"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kBbuildableFieldsCheck, 2,
-	                                 "check buildable fields"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kMineableFieldsCheck, 2,
-	                                 "check mineable fields"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kUnbuildableFCheck, 1,
-	                                 "check unbuildable fields"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(15 * 60 * 1000)),
-	                                 SchedulerTaskId::kWareReview, 9, "wares review"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                 SchedulerTaskId::kPrintStats, 9, "print statistics"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(60 * 1000)),
-	                                 SchedulerTaskId::kCountMilitaryVacant, 2,
-	                                 "count military vacant"));
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kCheckEconomies, 1,
+	                                                   "check economies"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(30 * 1000)),
+	                                                   SchedulerTaskId::KMarineDecisions, 5,
+	                                                   "marine decisions"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(2 * 60 * 1000)),
+	                                                   SchedulerTaskId::kCheckTrainingsites, 5,
+	                                                   "check training sites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kBbuildableFieldsCheck, 2,
+	                                                   "check buildable fields"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kMineableFieldsCheck, 2,
+	                                                   "check mineable fields"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kUnbuildableFCheck, 1,
+	                                                   "check unbuildable fields"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 60 * 1000)),
+	                                   SchedulerTaskId::kWareReview, 9, "wares review"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(60 * 1000)),
+	                                                   SchedulerTaskId::kCountMilitaryVacant, 2,
+	                                                   "count military vacant"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
 	if (ai_training_mode_) {
-		taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 1000)),
-		                                 SchedulerTaskId::kManagementUpdate, 8, "AI training review"));
+		taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
+		                                                   SchedulerTaskId::kManagementUpdate, 8,
+		                                                   "AI training review"));
 	}
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(9 * 1000)),
-	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(9 * 1000)),
+	                                                   SchedulerTaskId::kUpdateStats, 6,
+	                                                   "update player stats"));
 
-	taskPool.push_back(std::make_shared<SchedulerTask> (std::max<Time>(gametime, Time(10 * 1000)),
-	                                 SchedulerTaskId::kWarehouseFlagDist, 5,
-	                                 "flag warehouse Update"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
+	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
+	                                                   "flag warehouse Update"));
 
 	const Widelands::Map& map = game().map();
 
@@ -7158,7 +7165,8 @@ uint32_t DefaultAI::msites_built() const {
 void DefaultAI::print_stats(const Time& gametime) {
 
 	if (!kPrintStats) {
-		set_taskpool_task_time(Time(), SchedulerTaskId::kPrintStats); // NOCOM what does Time() returns??
+		set_taskpool_task_time(
+		   Time(), SchedulerTaskId::kPrintStats);  // NOCOM what does Time() returns??
 		return;
 	}
 
