@@ -294,7 +294,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 		if (tribe.empty()) {
 			verb_log_info_time(
 			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
+			const DescriptionIndex random = RNG::static_rand(descriptions().nr_tribes());
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
@@ -750,7 +750,7 @@ bool Game::run(StartGameType const start_game_type,
 		;
 #endif
 
-	g_sh->change_music("ingame", 1000);
+	g_sh->change_music(Songset::kIngame, 1000);
 
 	state_ = gs_running;
 
@@ -769,7 +769,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_ending;
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music(Songset::kMenu, 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);

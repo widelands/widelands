@@ -312,10 +312,10 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow: {
 		const uint16_t move_x =
-		   static_cast<uint16_t>(view_area.center().x * scale / kTriangleWidth + minimap_w / 2) %
+		   static_cast<uint16_t>(view_area.center().x * scale / kTriangleWidth + minimap_w / 2.f) %
 		   minimap_w;
 		const uint16_t move_y =
-		   static_cast<uint16_t>(view_area.center().y * scale / kTriangleHeight + minimap_h / 2) %
+		   static_cast<uint16_t>(view_area.center().y * scale / kTriangleHeight + minimap_h / 2.f) %
 		   minimap_h;
 
 		// Assemble the output texture from 4 parts of the input texture.

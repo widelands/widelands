@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-12-10 02:41+0000\n"
+"PO-Revision-Date: 2021-12-10 17:05+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,9 +124,10 @@ msgstr "Knipst de KS-Öven an. Kiek https://www.widelands.org/wiki/Ai%20Training
 
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
-"In multiplayer games only, this will keep adjusting the game speed "
-"automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr "Sett de Gauheid vum Speel in Spelen för mennig Spelers so, dat 't good tur FPS-Tahl passt. Passt good to --ai_training"
+"This will keep adjusting the game speed automatically, depending on AI "
+"delay.Only to be used for AI testing or training (in conjunction with "
+"--ai_training)"
+msgstr "De Speel-Gauheid all de Tied an dat Hentrecken vun de künstelk Spelers anpassen. Bruuk dat blot bi'm Utprobeeren of Öven vun de künstelk Spelers (tosamen mit --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Game options:"
@@ -184,7 +185,7 @@ msgstr "[jau*|nee]"
 msgid ""
 "Whether a warning should be shown in the editor if there are too many "
 "players"
-msgstr "Of de Bewarker nafragen sall, wenn 't to völe Spelers gifft"
+msgstr "Of de Bewarker nafragen sall, wenn ’t to völe Spelers gifft"
 
 #: ../../src/wlapplication_messages.cc:110
 msgid "Start building road after placing a flag"
@@ -301,7 +302,7 @@ msgstr "Of dat leste Anmellen bi de Metaserver as vermarkt Bruuker weer"
 
 #: ../../src/wlapplication_messages.cc:159
 msgid "The hashed password for online logins"
-msgstr "Dat verslötelt Passwoord för 't Internett-Anmellen"
+msgstr "Dat verslötelt Passwoord för ’t Internett-Anmellen"
 
 #: ../../src/wlapplication_messages.cc:160
 msgid "IP"
@@ -408,13 +409,13 @@ msgstr "Unbannig völe Narichten utgeven"
 
 #: ../../src/wlapplication_messages.cc:211
 msgid "Others:"
-msgstr "Wat 't sünst noch so gifft:"
+msgstr "Wat ’t sünst noch so gifft:"
 
 #: ../../src/wlapplication_messages.cc:213
 msgid ""
 "Print all strings as they are translated. This helps with tracing down bugs "
 "with internationalization."
-msgstr "All Texten bi'm Översetten utgeven. Dat hülpt daarbi, Fehlers in de Översetten to finnen."
+msgstr "All Texten bi’m Översetten utgeven. Dat hülpt daarbi, Fehlers in de Översetten to finnen."
 
 #: ../../src/wlapplication_messages.cc:216
 msgid "Only print version and exit"
@@ -426,7 +427,7 @@ msgstr "Deese Hülp wiesen"
 
 #: ../../src/wlapplication_messages.cc:218
 msgid "Show this help with all available config options"
-msgstr "Deese Hülp un all de Instellens, wat 't gifft, wiesen"
+msgstr "Deese Hülp un all de Instellens, wat ’t gifft, wiesen"
 
 #: ../../src/wlapplication_messages.cc:219
 msgid "<save.wgf>/<replay.wrpl>"
