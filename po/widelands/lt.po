@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-01 13:36+0000\n"
-"PO-Revision-Date: 2021-12-01 13:37+0000\n"
+"POT-Creation-Date: 2021-12-10 02:41+0000\n"
+"PO-Revision-Date: 2021-12-07 02:58+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/widelands/widelands/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -264,8 +264,8 @@ msgstr "Lap"
 msgid "Dec"
 msgstr "Gruo"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -279,12 +279,12 @@ msgstr "Pagrindinis meniu"
 msgid "Tools"
 msgstr "Įrankiai"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -371,7 +371,7 @@ msgstr "Nustatyti reljefo aukščiui atsitiktinę vertę"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:283
-#: ../../src/editor/tools/info_tool.cc:110
+#: ../../src/editor/ui_menus/field_info_window.cc:140
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../src/wui/minimap.cc:153
 msgid "Terrain"
@@ -407,7 +407,7 @@ msgstr "Pridėti ar pašalinti gyvūnus"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:312
-#: ../../src/editor/tools/info_tool.cc:189
+#: ../../src/editor/ui_menus/field_info_window.cc:221
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:97
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:42
 #: ../../src/map_io/map_saver.cc:156
@@ -474,10 +474,10 @@ msgstr "Informacija"
 msgid "Click on a field to show information about it"
 msgstr "Paspausk ant laukelio, kad būtų rodoma informacija apie jį"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -536,7 +536,7 @@ msgstr "Rodyti išteklius"
 msgid "Unsupported Format"
 msgstr "Nepalaikomas formatas"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:777
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -566,11 +566,11 @@ msgstr "Žemėlapis nebuvo išsaugotas. Ar tikrai norite išeiti? "
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1616
+#: ../../src/wlapplication.cc:1613
 msgid "Error"
 msgstr "Klaida"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1618
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -612,175 +612,6 @@ msgstr "Įkeliamas pasaulis..."
 msgid "Random Player"
 msgstr "Atsitiktinis žaidėjas"
 
-#: ../../src/editor/tools/info_tool.cc:44
-msgid "Field Information"
-msgstr "Laukelio informacija"
-
-#: ../../src/editor/tools/info_tool.cc:51
-msgid "Node"
-msgstr "Mazgas "
-
-#: ../../src/editor/tools/info_tool.cc:53
-#, c-format
-msgid "Coordinates: (%1$i, %2$i)"
-msgstr "Koordinatės: (%1$i, %2$i)"
-
-#. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:61
-msgid "small"
-msgstr "mažas"
-
-#. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/info_tool.cc:66
-msgid "medium"
-msgstr "vidutinis"
-
-#. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:70
-msgid "big"
-msgstr "didelis"
-
-#. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:78
-msgid "flag"
-msgstr "vėliava"
-
-#. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:82
-msgid "mine"
-msgstr "kasykla"
-
-#. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:86
-msgid "port"
-msgstr "uostas"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#: ../../src/editor/tools/info_tool.cc:90
-#: ../../src/logic/map_objects/world/terrain_description.cc:76
-msgid "walkable"
-msgstr "praeinamas"
-
-#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
-#. (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:94
-msgid "swimmable"
-msgstr "praplaukiamas"
-
-#: ../../src/editor/tools/info_tool.cc:98
-#, c-format
-msgid "Caps: %s"
-msgstr "Galimybės: %s"
-
-#: ../../src/editor/tools/info_tool.cc:103
-#, c-format
-msgid "Owned by: Player %u"
-msgstr "Priklauso: Žaidėjui %u"
-
-#: ../../src/editor/tools/info_tool.cc:106
-msgid "Owned by: —"
-msgstr "Priklauso: —"
-
-#: ../../src/editor/tools/info_tool.cc:116
-#, c-format
-msgctxt "terrain_name"
-msgid "Name: %s"
-msgstr "Vardas: %s"
-
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
-#. unreachable and
-#. * unwalkable". You can also translate this as "Category: %s" or "Property:
-#. %s"
-#: ../../src/editor/tools/info_tool.cc:127
-#, c-format
-msgid "Is: %s"
-msgstr "Yra: %s"
-
-#. * TRANSLATORS: Heading for immovables and animals in editor info tool
-#: ../../src/editor/tools/info_tool.cc:135
-msgid "Objects"
-msgstr "Objektai"
-
-#: ../../src/editor/tools/info_tool.cc:137
-#, c-format
-msgid "Immovable: %s"
-msgstr "Nekilnojamas objektas: %s"
-
-#: ../../src/editor/tools/info_tool.cc:168
-#, c-format
-msgid "Animals: %s"
-msgstr "Gyvūnai: %s"
-
-#: ../../src/editor/tools/info_tool.cc:174
-#, c-format
-msgid "Workers: %s"
-msgstr "Darbininkai: %s"
-
-#: ../../src/editor/tools/info_tool.cc:179
-#, c-format
-msgid "Ships: %s"
-msgstr "Laivai: %s"
-
-#: ../../src/editor/tools/info_tool.cc:191
-msgctxt "resources"
-msgid "%1%x %2%"
-msgstr "%1% x %2%"
-
-#: ../../src/editor/tools/info_tool.cc:197
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
-#: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:137
-#: ../../src/wui/minimap.cc:141
-msgid "Map"
-msgstr "Žemėlapis"
-
-#: ../../src/editor/tools/info_tool.cc:199
-#, c-format
-msgctxt "map_name"
-msgid "Name: %s"
-msgstr "Pavadinimas: %s"
-
-#: ../../src/editor/tools/info_tool.cc:201
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:508
-msgid "Size: %1% x %2%"
-msgstr "Dydis:%1% x %2%"
-
-#: ../../src/editor/tools/info_tool.cc:205
-#, c-format
-msgid "Players: %u"
-msgstr "Žaidėjai: %u"
-
-#: ../../src/editor/tools/info_tool.cc:207
-msgid "Players: –"
-msgstr "Žaidėjai: –"
-
-#: ../../src/editor/tools/info_tool.cc:210
-#, c-format
-msgid "Author: %s"
-msgstr "Autorius: %s"
-
-#: ../../src/editor/tools/info_tool.cc:212
-#: ../../src/ui_fsmenu/addons/packager_box.cc:283
-#: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:113
-#, c-format
-msgid "Description: %s"
-msgstr "Aprašymas: %s"
-
-#. * TRANSLATORS: No add-ons enabled
-#: ../../src/editor/tools/info_tool.cc:219
-msgid "(none)"
-msgstr "(nėra)"
-
-#: ../../src/editor/tools/info_tool.cc:226
-#, c-format
-msgid "%1$s; %2$s"
-msgstr "%1$s; %2$s"
-
-#: ../../src/editor/tools/info_tool.cc:230
-#, c-format
-msgid "Enabled Add-Ons: %s"
-msgstr "Galimi priedai: %s"
-
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:175
 #, c-format
@@ -798,6 +629,174 @@ msgstr "Norėdamas pažymėti spustelėk elementą. Naudok Ctrl klavišą norėd
 #, c-format
 msgid "Current: %s"
 msgstr "Dabartinis: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:45
+msgid "Field Information"
+msgstr "Laukelio informacija"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:76
+msgid "Node"
+msgstr "Mazgas "
+
+#: ../../src/editor/ui_menus/field_info_window.cc:78
+#, c-format
+msgid "Coordinates: (%1$i, %2$i)"
+msgstr "Koordinatės: (%1$i, %2$i)"
+
+#. * TRANSLATORS: Editor terrain property: small building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:88
+msgid "small"
+msgstr "mažas"
+
+#. * TRANSLATORS: Editor terrain property: medium building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:93
+msgid "medium"
+msgstr "vidutinis"
+
+#. * TRANSLATORS: Editor terrain property: big building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:97
+msgid "big"
+msgstr "didelis"
+
+#. * TRANSLATORS: Editor terrain property: space for a flag
+#: ../../src/editor/ui_menus/field_info_window.cc:105
+msgid "flag"
+msgstr "vėliava"
+
+#. * TRANSLATORS: Editor terrain property: mine building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:109
+msgid "mine"
+msgstr "kasykla"
+
+#. * TRANSLATORS: Editor terrain property: port space
+#: ../../src/editor/ui_menus/field_info_window.cc:113
+msgid "port"
+msgstr "uostas"
+
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/field_info_window.cc:117
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
+msgid "walkable"
+msgstr "praeinamas"
+
+#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
+#. (fish, ships)
+#: ../../src/editor/ui_menus/field_info_window.cc:121
+msgid "swimmable"
+msgstr "praplaukiamas"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:125
+#, c-format
+msgid "Caps: %s"
+msgstr "Galimybės: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:132
+#, c-format
+msgid "Owned by: Player %u"
+msgstr "Priklauso: Žaidėjui %u"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:135
+msgid "Owned by: —"
+msgstr "Priklauso: —"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:145
+#, c-format
+msgctxt "terrain_name"
+msgid "Name: %s"
+msgstr "Vardas: %s"
+
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
+#. unreachable and
+#. * unwalkable". You can also translate this as "Category: %s" or "Property:
+#. %s"
+#: ../../src/editor/ui_menus/field_info_window.cc:156
+#, c-format
+msgid "Is: %s"
+msgstr "Yra: %s"
+
+#. * TRANSLATORS: Heading for immovables and animals in editor info tool
+#: ../../src/editor/ui_menus/field_info_window.cc:165
+msgid "Objects"
+msgstr "Objektai"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:167
+#, c-format
+msgid "Immovable: %s"
+msgstr "Nekilnojamas objektas: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:199
+#, c-format
+msgid "Animals: %s"
+msgstr "Gyvūnai: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:205
+#, c-format
+msgid "Workers: %s"
+msgstr "Darbininkai: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:210
+#, c-format
+msgid "Ships: %s"
+msgstr "Laivai: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:224
+msgctxt "resources"
+msgid "%1%× %2%"
+msgstr ""
+
+#: ../../src/editor/ui_menus/field_info_window.cc:231
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/minimap.cc:141
+msgid "Map"
+msgstr "Žemėlapis"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:233
+#, c-format
+msgctxt "map_name"
+msgid "Name: %s"
+msgstr "Pavadinimas: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:235
+msgid "Size: %1% × %2%"
+msgstr ""
+
+#: ../../src/editor/ui_menus/field_info_window.cc:239
+#, c-format
+msgid "Players: %u"
+msgstr "Žaidėjai: %u"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:241
+msgid "Players: –"
+msgstr "Žaidėjai: –"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:244
+#, c-format
+msgid "Author: %s"
+msgstr "Autorius: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:246
+#: ../../src/ui_fsmenu/addons/packager_box.cc:283
+#: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:113
+#, c-format
+msgid "Description: %s"
+msgstr "Aprašymas: %s"
+
+#. * TRANSLATORS: No add-ons enabled
+#: ../../src/editor/ui_menus/field_info_window.cc:253
+msgid "(none)"
+msgstr "(nėra)"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:260
+#, c-format
+msgid "%1$s; %2$s"
+msgstr "%1$s; %2$s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:264
+#, c-format
+msgid "Enabled Add-Ons: %s"
+msgstr "Galimi priedai: %s"
 
 #: ../../src/editor/ui_menus/help.cc:38 ../../src/ui_fsmenu/login_box.cc:239
 #: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:145
@@ -971,9 +970,9 @@ msgstr "(nėra)"
 msgid "Waterway length limit:"
 msgstr "Vandens kelio ilgio riba:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1009,6 +1008,10 @@ msgstr "Komandos"
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:508
+msgid "Size: %1% x %2%"
+msgstr "Dydis:%1% x %2%"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:61
 msgid "Create Map"
@@ -1269,7 +1272,7 @@ msgstr "Žaidėjų skaičius"
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:161
 #: ../../src/editor/ui_menus/player_menu.cc:289
-#: ../../src/logic/single_player_game_settings_provider.cc:110
+#: ../../src/logic/single_player_game_settings_provider.cc:111
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:66
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:132
@@ -2553,7 +2556,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:543
-#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:727
+#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr ""
 
@@ -3203,7 +3206,7 @@ msgstr ""
 msgid "Game ending – please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:76
 msgid "Loading…"
 msgstr "Įkeliama..."
 
@@ -5244,7 +5247,7 @@ msgstr "Slapyvardis:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:108
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:655
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:652
 msgid "nobody"
 msgstr ""
 
@@ -6158,59 +6161,59 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:780 ../../src/wlapplication.cc:784
-#: ../../src/wlapplication.cc:789 ../../src/wui/savegameloader.cc:105
+#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:105
 msgid "Error message:"
 msgstr "Klaidos pranešimas:"
 
-#: ../../src/wlapplication.cc:781 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:783
+#: ../../src/wlapplication.cc:780
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:785
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr "Failų išdėstymo sistemos klaida"
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1277
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1438
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1559
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1579
+#: ../../src/wlapplication.cc:1576
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1628
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1628
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1634
+#: ../../src/wlapplication.cc:1631
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6224,7 +6227,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1643
+#: ../../src/wlapplication.cc:1640
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6234,11 +6237,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1666
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7178,9 +7181,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7978,11 +7981,11 @@ msgstr "Pašalinti gaminį"
 msgid "Add ware"
 msgstr "Pridėti gaminį"
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Show controls"
 msgstr ""
 
@@ -8025,11 +8028,11 @@ msgstr ""
 msgid "Waterway length: %1$u/%2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1563
+#: ../../src/wui/interactive_base.cc:1538
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1567
+#: ../../src/wui/interactive_base.cc:1542
 msgid "Screenshot saved"
 msgstr ""
 

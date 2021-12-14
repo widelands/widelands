@@ -188,7 +188,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == seen_fields.size());
 
 				size_t counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					field->owner = stoi(field_vector[counter]);
 					++counter;
 				}
@@ -200,7 +200,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					field->time_node_last_unseen = Time(stoll(field_vector[counter]));
 					++counter;
 				}
@@ -212,7 +212,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
@@ -228,7 +228,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
@@ -244,7 +244,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 2);
 
@@ -260,7 +260,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 3);
 
@@ -277,7 +277,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(field_vector.size() == no_of_seen_fields);
 
 				counter = 0;
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					split(data_vector, field_vector[counter], {'*'});
 					assert(data_vector.size() == 4);
 
@@ -291,7 +291,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 				// Map objects
 				const Descriptions& descriptions = egbase.descriptions();
-				for (auto& field : seen_fields) {
+				for (const auto& field : seen_fields) {
 					std::string descr = fr.string();
 					if (descr.empty()) {
 						field->map_object_descr = nullptr;

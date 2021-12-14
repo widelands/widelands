@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-01 13:36+0000\n"
-"PO-Revision-Date: 2021-12-01 13:37+0000\n"
+"POT-Creation-Date: 2021-12-10 02:41+0000\n"
+"PO-Revision-Date: 2021-12-07 02:58+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -271,8 +271,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:297
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -286,12 +286,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -378,7 +378,7 @@ msgstr "Terep magasságának véletlenszerű megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:283
-#: ../../src/editor/tools/info_tool.cc:110
+#: ../../src/editor/ui_menus/field_info_window.cc:140
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:92
 #: ../../src/wui/minimap.cc:153
 msgid "Terrain"
@@ -414,7 +414,7 @@ msgstr "Állatok hozzáadása és törlése"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:312
-#: ../../src/editor/tools/info_tool.cc:189
+#: ../../src/editor/ui_menus/field_info_window.cc:221
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:97
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:42
 #: ../../src/map_io/map_saver.cc:156
@@ -481,10 +481,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -543,7 +543,7 @@ msgstr "Nyersanyagok megjelenítése"
 msgid "Unsupported Format"
 msgstr "Nem támogatott formátum"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:777
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -573,11 +573,11 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1616
+#: ../../src/wlapplication.cc:1613
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1618
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -619,175 +619,6 @@ msgstr "Világ betöltése…"
 msgid "Random Player"
 msgstr "Véletlenszerű játékos"
 
-#: ../../src/editor/tools/info_tool.cc:44
-msgid "Field Information"
-msgstr "Mező információ"
-
-#: ../../src/editor/tools/info_tool.cc:51
-msgid "Node"
-msgstr "Csomópont"
-
-#: ../../src/editor/tools/info_tool.cc:53
-#, c-format
-msgid "Coordinates: (%1$i, %2$i)"
-msgstr "Koordináták: (%1$i, %2$i)"
-
-#. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:61
-msgid "small"
-msgstr "kicsi"
-
-#. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/info_tool.cc:66
-msgid "medium"
-msgstr "közepes"
-
-#. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:70
-msgid "big"
-msgstr "nagy"
-
-#. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:78
-msgid "flag"
-msgstr "zászló"
-
-#. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:82
-msgid "mine"
-msgstr "bánya"
-
-#. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:86
-msgid "port"
-msgstr "kikötő"
-
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#: ../../src/editor/tools/info_tool.cc:90
-#: ../../src/logic/map_objects/world/terrain_description.cc:76
-msgid "walkable"
-msgstr "járható"
-
-#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
-#. (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:94
-msgid "swimmable"
-msgstr "úszható"
-
-#: ../../src/editor/tools/info_tool.cc:98
-#, c-format
-msgid "Caps: %s"
-msgstr "Adottságok: %s"
-
-#: ../../src/editor/tools/info_tool.cc:103
-#, c-format
-msgid "Owned by: Player %u"
-msgstr "Birtokolja: %u. játékos"
-
-#: ../../src/editor/tools/info_tool.cc:106
-msgid "Owned by: —"
-msgstr "Birtokolja: —"
-
-#: ../../src/editor/tools/info_tool.cc:116
-#, c-format
-msgctxt "terrain_name"
-msgid "Name: %s"
-msgstr "Név: %s"
-
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
-#. unreachable and
-#. * unwalkable". You can also translate this as "Category: %s" or "Property:
-#. %s"
-#: ../../src/editor/tools/info_tool.cc:127
-#, c-format
-msgid "Is: %s"
-msgstr "Tulajdonság: %s"
-
-#. * TRANSLATORS: Heading for immovables and animals in editor info tool
-#: ../../src/editor/tools/info_tool.cc:135
-msgid "Objects"
-msgstr "Objektumok"
-
-#: ../../src/editor/tools/info_tool.cc:137
-#, c-format
-msgid "Immovable: %s"
-msgstr "Mozdíthatatlan: %s"
-
-#: ../../src/editor/tools/info_tool.cc:168
-#, c-format
-msgid "Animals: %s"
-msgstr "Állatok: %s"
-
-#: ../../src/editor/tools/info_tool.cc:174
-#, c-format
-msgid "Workers: %s"
-msgstr "Munkások: %s"
-
-#: ../../src/editor/tools/info_tool.cc:179
-#, c-format
-msgid "Ships: %s"
-msgstr "Hajók: %s"
-
-#: ../../src/editor/tools/info_tool.cc:191
-msgctxt "resources"
-msgid "%1%x %2%"
-msgstr "%1%× %2%"
-
-#: ../../src/editor/tools/info_tool.cc:197
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
-#: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:137
-#: ../../src/wui/minimap.cc:141
-msgid "Map"
-msgstr "Térkép"
-
-#: ../../src/editor/tools/info_tool.cc:199
-#, c-format
-msgctxt "map_name"
-msgid "Name: %s"
-msgstr "Név: %s"
-
-#: ../../src/editor/tools/info_tool.cc:201
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:508
-msgid "Size: %1% x %2%"
-msgstr "Méret: %1% x %2%"
-
-#: ../../src/editor/tools/info_tool.cc:205
-#, c-format
-msgid "Players: %u"
-msgstr "Játékosok: %u"
-
-#: ../../src/editor/tools/info_tool.cc:207
-msgid "Players: –"
-msgstr "Játékosok: –"
-
-#: ../../src/editor/tools/info_tool.cc:210
-#, c-format
-msgid "Author: %s"
-msgstr "Szerző: %s"
-
-#: ../../src/editor/tools/info_tool.cc:212
-#: ../../src/ui_fsmenu/addons/packager_box.cc:283
-#: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:113
-#, c-format
-msgid "Description: %s"
-msgstr "Leírás: %s"
-
-#. * TRANSLATORS: No add-ons enabled
-#: ../../src/editor/tools/info_tool.cc:219
-msgid "(none)"
-msgstr "(nincs)"
-
-#: ../../src/editor/tools/info_tool.cc:226
-#, c-format
-msgid "%1$s; %2$s"
-msgstr "%1$s; %2$s"
-
-#: ../../src/editor/tools/info_tool.cc:230
-#, c-format
-msgid "Enabled Add-Ons: %s"
-msgstr "Aktív Bővítmények: %s"
-
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:175
 #, c-format
@@ -805,6 +636,174 @@ msgstr "Kattints egy elem kiválasztásához. Használd a Ctrl billentyűt több
 #, c-format
 msgid "Current: %s"
 msgstr "Jelenlegi: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:45
+msgid "Field Information"
+msgstr "Mező információ"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:76
+msgid "Node"
+msgstr "Csomópont"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:78
+#, c-format
+msgid "Coordinates: (%1$i, %2$i)"
+msgstr "Koordináták: (%1$i, %2$i)"
+
+#. * TRANSLATORS: Editor terrain property: small building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:88
+msgid "small"
+msgstr "kicsi"
+
+#. * TRANSLATORS: Editor terrain property: medium building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:93
+msgid "medium"
+msgstr "közepes"
+
+#. * TRANSLATORS: Editor terrain property: big building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:97
+msgid "big"
+msgstr "nagy"
+
+#. * TRANSLATORS: Editor terrain property: space for a flag
+#: ../../src/editor/ui_menus/field_info_window.cc:105
+msgid "flag"
+msgstr "zászló"
+
+#. * TRANSLATORS: Editor terrain property: mine building plot
+#: ../../src/editor/ui_menus/field_info_window.cc:109
+msgid "mine"
+msgstr "bánya"
+
+#. * TRANSLATORS: Editor terrain property: port space
+#: ../../src/editor/ui_menus/field_info_window.cc:113
+msgid "port"
+msgstr "kikötő"
+
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
+#: ../../src/editor/ui_menus/field_info_window.cc:117
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
+msgid "walkable"
+msgstr "járható"
+
+#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
+#. (fish, ships)
+#: ../../src/editor/ui_menus/field_info_window.cc:121
+msgid "swimmable"
+msgstr "úszható"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:125
+#, c-format
+msgid "Caps: %s"
+msgstr "Adottságok: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:132
+#, c-format
+msgid "Owned by: Player %u"
+msgstr "Birtokolja: %u. játékos"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:135
+msgid "Owned by: —"
+msgstr "Birtokolja: —"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:145
+#, c-format
+msgctxt "terrain_name"
+msgid "Name: %s"
+msgstr "Név: %s"
+
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
+#. unreachable and
+#. * unwalkable". You can also translate this as "Category: %s" or "Property:
+#. %s"
+#: ../../src/editor/ui_menus/field_info_window.cc:156
+#, c-format
+msgid "Is: %s"
+msgstr "Tulajdonság: %s"
+
+#. * TRANSLATORS: Heading for immovables and animals in editor info tool
+#: ../../src/editor/ui_menus/field_info_window.cc:165
+msgid "Objects"
+msgstr "Objektumok"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:167
+#, c-format
+msgid "Immovable: %s"
+msgstr "Mozdíthatatlan: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:199
+#, c-format
+msgid "Animals: %s"
+msgstr "Állatok: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:205
+#, c-format
+msgid "Workers: %s"
+msgstr "Munkások: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:210
+#, c-format
+msgid "Ships: %s"
+msgstr "Hajók: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:224
+msgctxt "resources"
+msgid "%1%× %2%"
+msgstr ""
+
+#: ../../src/editor/ui_menus/field_info_window.cc:231
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/netsetup_lan.cc:132 ../../src/wui/mapdetails.cc:137
+#: ../../src/wui/minimap.cc:141
+msgid "Map"
+msgstr "Térkép"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:233
+#, c-format
+msgctxt "map_name"
+msgid "Name: %s"
+msgstr "Név: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:235
+msgid "Size: %1% × %2%"
+msgstr ""
+
+#: ../../src/editor/ui_menus/field_info_window.cc:239
+#, c-format
+msgid "Players: %u"
+msgstr "Játékosok: %u"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:241
+msgid "Players: –"
+msgstr "Játékosok: –"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:244
+#, c-format
+msgid "Author: %s"
+msgstr "Szerző: %s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:246
+#: ../../src/ui_fsmenu/addons/packager_box.cc:283
+#: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:113
+#, c-format
+msgid "Description: %s"
+msgstr "Leírás: %s"
+
+#. * TRANSLATORS: No add-ons enabled
+#: ../../src/editor/ui_menus/field_info_window.cc:253
+msgid "(none)"
+msgstr "(nincs)"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:260
+#, c-format
+msgid "%1$s; %2$s"
+msgstr "%1$s; %2$s"
+
+#: ../../src/editor/ui_menus/field_info_window.cc:264
+#, c-format
+msgid "Enabled Add-Ons: %s"
+msgstr "Aktív Bővítmények: %s"
 
 #: ../../src/editor/ui_menus/help.cc:38 ../../src/ui_fsmenu/login_box.cc:239
 #: ../../src/ui_fsmenu/main.cc:1007 ../../src/wui/encyclopedia_window.cc:145
@@ -829,7 +828,7 @@ msgstr "Többjátékos küldetések"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:83
 #: ../../src/wui/mapdata.cc:184
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Egyjátékos küldetések"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:85
@@ -978,9 +977,9 @@ msgstr "(nincs)"
 msgid "Waterway length limit:"
 msgstr "Víziutak megengedett hossza:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:58
 msgid "Disabled"
@@ -1014,6 +1013,10 @@ msgstr "Csapatok"
 #, c-format
 msgid "It is not recommended to permit waterway lengths greater than %u"
 msgstr "Nem javasolt %u-nál hosszabb víziutak engedélyezése"
+
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:508
+msgid "Size: %1% x %2%"
+msgstr "Méret: %1% x %2%"
 
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:61
 msgid "Create Map"
@@ -1274,7 +1277,7 @@ msgstr "Játékosok száma"
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:161
 #: ../../src/editor/ui_menus/player_menu.cc:289
-#: ../../src/logic/single_player_game_settings_provider.cc:110
+#: ../../src/logic/single_player_game_settings_provider.cc:111
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:66
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:98
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:132
@@ -2536,7 +2539,7 @@ msgid "Checking map"
 msgstr "Térkép ellenőrzése"
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:543
-#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:727
+#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:724
 msgid "Preparing game…"
 msgstr "Játék előkészítése…"
 
@@ -3127,19 +3130,19 @@ msgstr "Kezdeti szín"
 #: ../../src/ui_basic/color_chooser.cc:289
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "P"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:298
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "Z"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "K"
 
 #: ../../src/ui_basic/color_chooser.cc:317
 msgid "Default Color"
@@ -3180,7 +3183,7 @@ msgstr "Kérjük várj…"
 msgid "Game ending – please wait…"
 msgstr "Játék befejezése – kérjük várj…"
 
-#: ../../src/ui_basic/progresswindow.cc:75
+#: ../../src/ui_basic/progresswindow.cc:76
 msgid "Loading…"
 msgstr "Betöltés…"
 
@@ -3265,71 +3268,71 @@ msgstr "%1$s (%2$s)"
 
 #: ../../src/ui_fsmenu/about.cc:74
 msgid "Operating System:"
-msgstr ""
+msgstr "Operációs rendszer:"
 
 #: ../../src/ui_fsmenu/about.cc:76
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (64 bit)"
-msgstr ""
+msgstr "Windows (64 bites)"
 
 #: ../../src/ui_fsmenu/about.cc:80
 msgid "Windows (32 bit)"
-msgstr ""
+msgstr "Windows (32 bites)"
 
 #: ../../src/ui_fsmenu/about.cc:82
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../src/ui_fsmenu/about.cc:84
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../src/ui_fsmenu/about.cc:86
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../src/ui_fsmenu/about.cc:88
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
 #: ../../src/ui_fsmenu/about.cc:91
 msgid "Locale:"
-msgstr ""
+msgstr "Nyelv:"
 
 #: ../../src/ui_fsmenu/about.cc:92
 msgid "Home Directory:"
-msgstr ""
+msgstr "Saját könyvtár:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Configuration File:"
-msgstr ""
+msgstr "Beállító fájl:"
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Data Directory:"
-msgstr ""
+msgstr "Adatfájlok helye:"
 
 #: ../../src/ui_fsmenu/about.cc:95
 msgid "Locale Directory:"
-msgstr ""
+msgstr "Fordítások helye:"
 
 #: ../../src/ui_fsmenu/about.cc:96
 msgid "Executable Directory:"
-msgstr ""
+msgstr "Program helye:"
 
 #: ../../src/ui_fsmenu/about.cc:103 ../../src/ui_fsmenu/about.cc:150
 msgid "Technical Info"
-msgstr ""
+msgstr "Műszaki információk"
 
 #: ../../src/ui_fsmenu/about.cc:132
 msgid "Copy"
-msgstr ""
+msgstr "Másolás"
 
 #: ../../src/ui_fsmenu/about.cc:133
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "Műszaki információk másolása a vágólapra"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:39
 msgid "Contact Form"
@@ -3337,11 +3340,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:51
 msgid "Send message"
-msgstr ""
+msgstr "Üzenet küldése"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:75
 msgid "Send Message"
-msgstr ""
+msgstr "Üzenet küldése"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:76
 msgid "Send this message now?"
@@ -3357,7 +3360,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:94
 msgid "Sent"
-msgstr ""
+msgstr "Elküldve"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:95
 msgid ""
@@ -3368,7 +3371,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:40
 msgid "Login"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:72
 #: ../../src/ui_fsmenu/addons/manager.cc:232
@@ -3388,7 +3391,7 @@ msgstr "Regisztrált felhasználóként való belépéshez a Widelands honlapjá
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:85
 msgid "Username:"
-msgstr ""
+msgstr "Felhasználónév:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:90
 #: ../../src/ui_fsmenu/login_box.cc:53
@@ -3419,41 +3422,41 @@ msgstr "%u bájt"
 #: ../../src/ui_fsmenu/addons/manager.cc:97
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Bármilyen"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:97
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Ennek a bővítménynek még nem ellenőrizték a minőségét."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:103
 msgctxt "quality"
 msgid "Poor"
-msgstr ""
+msgstr "Gyenge"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:104
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "Ez a bővítmény nagyobb hibákat és leállást is okozhat."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:110
 msgctxt "quality"
 msgid "Good"
-msgstr ""
+msgstr "Jó"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:110
 msgid "This add-on works as advertised."
-msgstr ""
+msgstr "Ez a bővítmény a leírásnak megfelelően működik."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:115
 msgctxt "quality"
 msgid "Excellent"
-msgstr ""
+msgstr "Kiváló"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:116
 msgid "This add-on has been decorated for its remarkably high quality."
-msgstr ""
+msgstr "Ez a bővítmény dicséretben részesült a kiemelkedően jó minőségéért."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:128
 msgid "Add-On Manager"
@@ -3465,33 +3468,33 @@ msgstr "Csak ellenőrzöttek"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:174
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "Csak az ellenőrzött bővítmények mutatása"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:182
 msgid "Sort by"
-msgstr "Rendezés:"
+msgstr "Rendezés"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:193
 msgid "Minimum quality"
-msgstr ""
+msgstr "Szükséges minőség"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:204
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Feltöltendő bővítmény kiválasztása…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:215
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Képernyőkép feltöltése…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:222
 msgid "Understood and confirmed"
-msgstr ""
+msgstr "Megértettem és elfogadom"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:223
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
-msgstr ""
+msgstr "Ennek a négyzetnek a bejelölésével igazolod, hogy elolvastad és elfogadod a fenti feltételeket."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:233
 msgid "Reset the filters"
@@ -3538,7 +3541,7 @@ msgstr "Bővítménycsomagoló indítása"
 #. Development Team
 #: ../../src/ui_fsmenu/addons/manager.cc:324
 msgid "Contact us…"
-msgstr ""
+msgstr "Kapcsolatfelvétel"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:329
 msgid "Tools for Add-Ons Developers"
@@ -3637,12 +3640,12 @@ msgstr "Név (csökkenő)"
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:496
 msgid "Most popular"
-msgstr ""
+msgstr "Legnépszerűbb"
 
 #. * TRANSLATORS: Sort add-ons by average rating
 #: ../../src/ui_fsmenu/addons/manager.cc:498
 msgid "Least popular"
-msgstr ""
+msgstr "Legkevésbé népszerű"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
 #: ../../src/ui_fsmenu/addons/manager.cc:500
@@ -3703,13 +3706,13 @@ msgstr "Az összes frissítése"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:768
 msgid "Not logged in"
-msgstr ""
+msgstr "Nem vagy bejelentkezve"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:769
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Kattints ide a bejelentkezéshez! Csak ezután tudsz megjegyzéseket küldeni, szavazni a bővítményekre és saját bővítményeket feltölteni."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:773
 msgid "Please log in to upload add-ons"
@@ -3875,7 +3878,7 @@ msgstr "A bővítmények függőségi hibái hibás működést okozhatnak, vagy
 #: ../../src/ui_fsmenu/addons/manager.cc:1346
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:58
 msgid "Upload"
-msgstr ""
+msgstr "Feltöltés"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1347
 #, c-format
@@ -4118,21 +4121,21 @@ msgstr "A(z) „%1$s” bővítmény nem menthető el:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:56
 msgid "Invalid filename"
-msgstr ""
+msgstr "Érvénytelen fájlnév"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:59
 msgid "Name too long"
-msgstr ""
+msgstr "A név túl hosszú"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:64
 #, c-format
 msgid "Invalid character ‘%c’"
-msgstr ""
+msgstr "Érvénytelen karakter: '%c'"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:69
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr ""
+msgstr "A fájlnév nem tartalmazhat '%s'-t"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "Add selected map"
@@ -4929,11 +4932,11 @@ msgstr "Nyomd le a hozzárendelendő billentyűt, vagy zárd be ezt az ablakot a
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:133
 msgid "(unused)"
-msgstr ""
+msgstr "(nincs)"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:213
 msgid "Edit Keyboard And Mouse Actions"
-msgstr ""
+msgstr "Billentyű- és egér-hozzárendelések szerkesztése"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:224
 msgid "Reset all"
@@ -4975,11 +4978,11 @@ msgstr "Térképszerkesztő"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:302
 msgid "Fastplace"
-msgstr ""
+msgstr "Építés gyorsbillentyűk"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:304
 msgid "Mouse Scrolling"
-msgstr ""
+msgstr "Görgetés egérrel"
 
 #: ../../src/ui_fsmenu/launch_game.cc:43
 msgid "Launch Game"
@@ -5191,7 +5194,7 @@ msgstr "Becenév:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:108
-#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:655
+#: ../../src/ui_fsmenu/netsetup_lan.cc:129 ../../src/wlapplication.cc:652
 msgid "nobody"
 msgstr "névtelen"
 
@@ -5503,53 +5506,53 @@ msgstr "Ablak bezárása"
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:60
 msgid "Vertical scroll"
-msgstr ""
+msgstr "Függőleges görgetés"
 
 #. * TRANSLATORS: e.g. Ctrl+Horizontal scroll
 #: ../../src/ui_fsmenu/mousewheel_options.cc:62
 msgid "Horizontal scroll"
-msgstr ""
+msgstr "Vízszintes görgetés"
 
 #. * TRANSLATORS: Used when a function works with either vertical or
 #. horizontal scrolling.
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:65
 msgid "Any scroll"
-msgstr ""
+msgstr "Bármilyen görgetés"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:146
 msgid "(plain)"
-msgstr ""
+msgstr "(sima)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:200
 msgid "Neither"
-msgstr ""
+msgstr "Egyik sem"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:202
 msgid "Vertical"
-msgstr ""
+msgstr "Függőleges"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:204
 msgid "Horizontal"
-msgstr ""
+msgstr "Vízszintes"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:206
 msgid "Both"
-msgstr ""
+msgstr "Mindkettő"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:219
 msgid "%1%:"
-msgstr ""
+msgstr "%1%:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:276
 msgid "Scroll Setting Conflict"
-msgstr ""
+msgstr "Görgetési hozzárendelés ütközés"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
@@ -5594,50 +5597,50 @@ msgstr ""
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:384
 msgid "Zoom Map"
-msgstr ""
+msgstr "Térkép nagyítása"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:392
 msgid "Scroll Map"
-msgstr ""
+msgstr "Térkép mozgatása"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:401
 msgid "Change Game Speed"
-msgstr ""
+msgstr "Játéksebesség"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:409
 msgid "Change Editor Toolsize"
-msgstr ""
+msgstr "Térképszerkesztő eszközméret"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:416
 msgid "Invert scroll direction for map zooming:"
-msgstr ""
+msgstr "Görgetés irányának megfordítása nagyításkor:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:421
 msgid "Invert scroll direction for tab switching:"
-msgstr ""
+msgstr "Görgetés irányának megfordítása lapfül választáskor:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:426
 msgid "Invert scroll direction for increase/decrease:"
-msgstr ""
+msgstr "Görgetés irányának megfordítása értékek változtatásakor:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:468
 msgid "Scroll Settings Conflict"
-msgstr ""
+msgstr "Görgetési hozzárendelés ütközés"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:469
 #, c-format
@@ -5837,7 +5840,7 @@ msgstr "Ablak szélhez illesztése, ha ennél közelebb kerül hozzá:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Edit keyboard and mouse actions…"
-msgstr ""
+msgstr "Billentyű- és egér-hozzárendelések szerkesztése…"
 
 #: ../../src/ui_fsmenu/options.cc:213
 msgid "Save game automatically every:"
@@ -5961,7 +5964,7 @@ msgstr "Kinagyított"
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
 #: ../../src/ui_fsmenu/options.cc:491 ../../src/ui_fsmenu/options.cc:499
 msgid "%1% × %2%"
-msgstr ""
+msgstr "%1% × %2%"
 
 #: ../../src/ui_fsmenu/options.cc:547
 msgid "Try system language"
@@ -6105,59 +6108,59 @@ msgid "Unmark All"
 msgstr "Kijelölések megszüntetése"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:780 ../../src/wlapplication.cc:784
-#: ../../src/wlapplication.cc:789 ../../src/wui/savegameloader.cc:105
+#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
+#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:105
 msgid "Error message:"
 msgstr "Hibaüzenet:"
 
-#: ../../src/wlapplication.cc:781 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:783
+#: ../../src/wlapplication.cc:780
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "A Widelands nem találja a(z) „%s” fájlt."
 
-#: ../../src/wlapplication.cc:785
+#: ../../src/wlapplication.cc:782
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1277
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1285
+#: ../../src/wlapplication.cc:1282
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1441
+#: ../../src/wlapplication.cc:1438
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1559
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1579
+#: ../../src/wlapplication.cc:1576
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1628
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1628
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1634
+#: ../../src/wlapplication.cc:1631
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6171,7 +6174,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1643
+#: ../../src/wlapplication.cc:1640
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6181,11 +6184,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1666
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1670
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6195,195 +6198,195 @@ msgstr "Elnézést kérünk, a Widelands nem tudta elkészíteni a vészhelyzeti
 
 #: ../../src/wlapplication_options.cc:164
 msgid "Warehouse"
-msgstr ""
+msgstr "Raktár"
 
 #: ../../src/wlapplication_options.cc:165
 msgid "Port"
-msgstr ""
+msgstr "Kikötő"
 
 #: ../../src/wlapplication_options.cc:166
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Kisebb kiképzőhely"
 
 #: ../../src/wlapplication_options.cc:167
 msgid "Major Training Site"
-msgstr ""
+msgstr "Nagyobb kiképzőhely"
 
 #: ../../src/wlapplication_options.cc:168
 msgid "Primary Small Military Site"
-msgstr ""
+msgstr "Elsődleges kis katonai épület"
 
 #: ../../src/wlapplication_options.cc:169
 msgid "Secondary Small Military Site"
-msgstr ""
+msgstr "Másodlagos kis katonai épület"
 
 #: ../../src/wlapplication_options.cc:170
 msgid "Primary Medium Military Site"
-msgstr ""
+msgstr "Elsődleges közepes katonai épület"
 
 #: ../../src/wlapplication_options.cc:171
 msgid "Secondary Medium Military Site"
-msgstr ""
+msgstr "Másodlagos közepes katonai épület"
 
 #: ../../src/wlapplication_options.cc:172
 msgid "Tower"
-msgstr ""
+msgstr "Torony"
 
 #: ../../src/wlapplication_options.cc:173
 msgid "Fortress"
-msgstr ""
+msgstr "Erőd"
 
 #: ../../src/wlapplication_options.cc:174
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Favágóház"
 
 #: ../../src/wlapplication_options.cc:175
 msgid "Forester’s House"
-msgstr ""
+msgstr "Erdészház"
 
 #: ../../src/wlapplication_options.cc:176
 msgid "Quarry"
-msgstr ""
+msgstr "Kőfejtő"
 
 #: ../../src/wlapplication_options.cc:177
 msgid "Primary Building Materials Industry"
-msgstr ""
+msgstr "Elsődleges építőanyag termelés"
 
 #: ../../src/wlapplication_options.cc:178
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Másodlagos építőanyag termelés"
 
 #: ../../src/wlapplication_options.cc:179
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Harmadlagos építőanyag termelés"
 
 #: ../../src/wlapplication_options.cc:180
 msgid "Fishing"
-msgstr ""
+msgstr "Halász"
 
 #: ../../src/wlapplication_options.cc:181
 msgid "Hunting"
-msgstr ""
+msgstr "Vadász"
 
 #: ../../src/wlapplication_options.cc:182
 msgid "Fish/Meat Replenishing"
-msgstr ""
+msgstr "Hal/hús újratermelés"
 
 #: ../../src/wlapplication_options.cc:183
 msgid "Well"
-msgstr ""
+msgstr "Kút"
 
 #: ../../src/wlapplication_options.cc:184
 msgid "Primary Farm"
-msgstr ""
+msgstr "Elsődleges földbirtok"
 
 #: ../../src/wlapplication_options.cc:185
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Másodlagos földbirtok"
 
 #: ../../src/wlapplication_options.cc:186
 msgid "Mill"
-msgstr ""
+msgstr "Malom"
 
 #: ../../src/wlapplication_options.cc:187
 msgid "Bakery"
-msgstr ""
+msgstr "Pékség"
 
 #: ../../src/wlapplication_options.cc:188
 msgid "Brewery"
-msgstr ""
+msgstr "Sörfőzde"
 
 #: ../../src/wlapplication_options.cc:189
 msgid "Smokery"
-msgstr ""
+msgstr "Füstölő"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Tavern"
-msgstr ""
+msgstr "Kocsma"
 
 #: ../../src/wlapplication_options.cc:191
 msgid "Ore Smelting"
-msgstr ""
+msgstr "Kohó"
 
 #: ../../src/wlapplication_options.cc:192
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Szerszámkészítő"
 
 #: ../../src/wlapplication_options.cc:193
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Fegyverkovács műhely"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Páncélkovács műhely"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Szövőmalom"
 
 #: ../../src/wlapplication_options.cc:196
 msgid "Shipyard"
-msgstr ""
+msgstr "Hajóács műhely"
 
 #: ../../src/wlapplication_options.cc:197
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Csónakkészítő műhely"
 
 #: ../../src/wlapplication_options.cc:198
 msgid "Scouting"
-msgstr ""
+msgstr "Felderítő"
 
 #: ../../src/wlapplication_options.cc:199
 msgid "Barracks"
-msgstr ""
+msgstr "Laktanya"
 
 #: ../../src/wlapplication_options.cc:200
 msgid "Second Carrier"
-msgstr ""
+msgstr "Teherhordó állat"
 
 #: ../../src/wlapplication_options.cc:201
 msgid "Charcoal"
-msgstr ""
+msgstr "Faszénégető"
 
 #: ../../src/wlapplication_options.cc:202
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kőbánya"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Coal Mine"
-msgstr ""
+msgstr "Szénbánya"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Iron Mine"
-msgstr ""
+msgstr "Vasércbánya"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Gold Mine"
-msgstr ""
+msgstr "Aranybánya"
 
 #: ../../src/wlapplication_options.cc:206
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Mezőgazdasági termelő"
 
 #: ../../src/wlapplication_options.cc:207
 msgid "Primary Agricultural Consumer"
-msgstr ""
+msgstr "Elsődleges mezőgazdasági fogyasztó"
 
 #: ../../src/wlapplication_options.cc:208
 msgid "Secondary Agricultural Consumer"
-msgstr ""
+msgstr "Másodlagos mezőgazdasági fogyasztó"
 
 #: ../../src/wlapplication_options.cc:209
 msgid "Alternative Industry"
-msgstr ""
+msgstr "Egyéb ipar"
 
 #: ../../src/wlapplication_options.cc:210
 msgid "Industry Support"
-msgstr ""
+msgstr "Ipari alapanyag"
 
 #: ../../src/wlapplication_options.cc:211
 msgid "Terraforming"
-msgstr ""
+msgstr "Tereprendezés"
 
 #: ../../src/wlapplication_options.cc:247
 msgid "Singleplayer"
@@ -6911,7 +6914,7 @@ msgstr "%1$s%2$s"
 #: ../../src/wlapplication_options.cc:1058
 #, c-format
 msgid "Fastplace #%i"
-msgstr ""
+msgstr "%i. építési gyorsbillentyű"
 
 #: ../../src/wui/actionconfirm.cc:187
 msgid "Destroy building?"
@@ -7123,9 +7126,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7915,11 +7918,11 @@ msgstr "Áru eltávolítása"
 msgid "Add ware"
 msgstr "Áru hozzáadása"
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Hide controls"
 msgstr "Vezérlők elrejtése"
 
-#: ../../src/wui/inputqueuedisplay.cc:694
+#: ../../src/wui/inputqueuedisplay.cc:705
 msgid "Show controls"
 msgstr "Vezérlők megjelenítése"
 
@@ -7962,11 +7965,11 @@ msgstr "Út hossza: %u"
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Vízi út hossza: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1563
+#: ../../src/wui/interactive_base.cc:1538
 msgid "Failed saving screenshot!"
 msgstr "Nem sikerült elmenteni a képernyőképet!"
 
-#: ../../src/wui/interactive_base.cc:1567
+#: ../../src/wui/interactive_base.cc:1542
 msgid "Screenshot saved"
 msgstr "Képernyőkép elmentve"
 
@@ -7974,7 +7977,7 @@ msgstr "Képernyőkép elmentve"
 #: ../../src/wui/interactive_gamebase.cc:54
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
@@ -8788,7 +8791,7 @@ msgstr "Hangerő megváltoztatása. Kattints az ellenőrzéséhez."
 
 #: ../../src/wui/sound_options.cc:138
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "Saját zene használata játék közben"
 
 #: ../../src/wui/sound_options.cc:140
 msgid ""
