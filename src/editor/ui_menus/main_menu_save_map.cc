@@ -29,6 +29,7 @@
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/illegal_filename_tooltip.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -77,7 +78,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                      0,
                      UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);

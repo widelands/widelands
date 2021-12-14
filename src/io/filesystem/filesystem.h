@@ -103,7 +103,6 @@ public:
 
 	/// Returns true if the filename is legal in all operating systems
 	static bool is_legal_filename(const std::string& filename);
-	static std::string illegal_filename_tooltip();
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();

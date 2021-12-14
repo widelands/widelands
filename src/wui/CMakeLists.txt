@@ -325,6 +325,7 @@ wl_library(wui
     graphic_text_layout
     graphic_toolbar_imageset
     io_filesystem
+    io_filesystem_illegal_filename_tooltip
     io_profile
     logic
     logic_constants

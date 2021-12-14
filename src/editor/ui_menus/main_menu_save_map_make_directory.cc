@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/string.h"
 #include "graphic/font_handler.h"
+#include "io/filesystem/illegal_filename_tooltip.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 
@@ -66,7 +67,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     buth_,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 
 	vbox_.add(&label_);
 	vbox_.add_space(padding_);
