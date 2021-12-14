@@ -560,8 +560,8 @@ void DefaultAI::think() {
 
 		if (kCollectPerfData) {
 			double exec_time = std::chrono::duration_cast<std::chrono::microseconds>(
-			                               std::chrono::high_resolution_clock::now() - time_point)
-			                               .count();
+			                      std::chrono::high_resolution_clock::now() - time_point)
+			                      .count();
 			task->total_exec_time_ms += exec_time;
 			if (exec_time > task->max_exec_time_ms) {
 				task->max_exec_time_ms = exec_time;
@@ -7169,8 +7169,7 @@ uint32_t DefaultAI::msites_built() const {
 void DefaultAI::print_stats(const Time& gametime) {
 
 	if (!kPrintStats) {
-		set_taskpool_task_time(
-		   Time(), SchedulerTaskId::kPrintStats);
+		set_taskpool_task_time(Time(), SchedulerTaskId::kPrintStats);
 		return;
 	}
 
@@ -7292,12 +7291,13 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  player_statistics.get_modified_player_power(player_number()));
 
 	// 5. printing some performance data
-	log_dbg_time(
-	   gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n", player_number());
+	log_dbg_time(gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
+	             player_number());
 	for (const auto& task : taskPool) {
 		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
 		             task->call_count, task->total_exec_time_ms / 1000,
-		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0, task->max_exec_time_ms/1000);
+		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
+		             task->max_exec_time_ms / 1000);
 	}
 }
 
