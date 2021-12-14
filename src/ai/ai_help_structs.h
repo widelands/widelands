@@ -795,6 +795,7 @@ struct SchedulerTask {
 	std::string descr;
 	uint32_t call_count;
 	double total_exec_time_ms;
+	double max_exec_time_ms;
 };
 
 // List of blocked fields with block time, with some accompanying functions

@@ -355,7 +355,7 @@ void DefaultAI::think() {
 	std::sort(current_task_queue.begin(), current_task_queue.end());
 
 	// Performing tasks from temporary queue one by one
-	for (auto task : current_task_queue) {
+	for (const auto& task : current_task_queue) {
 
 		due_task = task->id;
 
@@ -559,9 +559,13 @@ void DefaultAI::think() {
 		}
 
 		if (kCollectPerfData) {
-			task->total_exec_time_ms += std::chrono::duration_cast<std::chrono::microseconds>(
+			double exec_time = std::chrono::duration_cast<std::chrono::microseconds>(
 			                               std::chrono::high_resolution_clock::now() - time_point)
 			                               .count();
+			task->total_exec_time_ms += exec_time;
+			if (exec_time > task->max_exec_time_ms) {
+				task->max_exec_time_ms = exec_time;
+			}
 		}
 	}
 }
@@ -7166,7 +7170,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 
 	if (!kPrintStats) {
 		set_taskpool_task_time(
-		   Time(), SchedulerTaskId::kPrintStats);  // NOCOM what does Time() returns??
+		   Time(), SchedulerTaskId::kPrintStats);
 		return;
 	}
 
@@ -7289,10 +7293,11 @@ void DefaultAI::print_stats(const Time& gametime) {
 
 	// 5. printing some performance data
 	log_dbg_time(
-	   gametime, "Player: %d, AI tasks statistics:  call count   ms spent\n", player_number());
-	for (auto task : taskPool) {
-		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f\n", task->descr.c_str(), task->call_count,
-		             task->total_exec_time_ms / 1000);
+	   gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n", player_number());
+	for (const auto& task : taskPool) {
+		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
+		             task->call_count, task->total_exec_time_ms / 1000,
+		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0, task->max_exec_time_ms/1000);
 	}
 }
 
