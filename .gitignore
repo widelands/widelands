@@ -29,7 +29,7 @@ VERSION
 CMakeLists.txt.user*
 
 # Visual Studio settings
-/.vs
+/.vscode
 CMakeSettings.json
 
 # Profilers
