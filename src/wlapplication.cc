@@ -653,6 +653,7 @@ void WLApplication::init_and_run_game_from_template() {
 		                    Widelands::get_all_tribeinfos(nullptr), false);
 		ctrl.reset(host);
 		settings.reset(new HostGameSettingsProvider(host));
+		host->set_script_to_run(script_to_run_);
 	} else {
 		settings.reset(new SinglePlayerGameSettingsProvider());
 	}
