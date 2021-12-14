@@ -289,6 +289,8 @@ elseif(MSVC)
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4244")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4267")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "/wd4018")
+  # Use correct code page
+  wl_add_flag(WL_GENERIC_CXX_FLAGS "/utf-8")
 else()
   # Assuming GCC 4.8 or higher.
   if(WIN32)
