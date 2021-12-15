@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, vcpkg_cache ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -200,14 +200,19 @@ jobs:
       with:
         fetch-depth: 1
     - name: "Create cache directory"
-      run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+      id: prepare
+      run: |
+        mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+        cd ${{ env.VCPKG_ROOT }}
+        $env:HEAD = git rev-parse --short HEAD
+        echo "::set-output name=head::$env:HEAD"
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: |
-          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ matrix.arch }}
+          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ steps.prepare.outputs.head }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
         vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
