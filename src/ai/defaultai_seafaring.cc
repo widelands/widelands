@@ -182,29 +182,15 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	assert(allships.size() >= expeditions_in_progress);
 	bool ship_free = allships.size() - expeditions_in_progress > 0;
 
-	// now we decide whether we have enough ships or need to build another
-	// three values: kDoNothing, kNeedShip, kEnoughShips
-	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (ports_count > 0 && shipyards_count > 0) {
-
-		if (!basic_economy_established) {
-			enough_ships = FleetStatus::kEnoughShips;
-			// we always need at least one ship in transport mode
-		} else if (!ship_free) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// we want at least as many free ships as we have ports
-		} else if (int(allships.size()) - ports_count - expeditions_in_progress < 0) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// if ships utilization is too high
-		} else if (persistent_data->ships_utilization > 5000) {
-			enough_ships = FleetStatus::kNeedShip;
-
-		} else {
-			enough_ships = FleetStatus::kEnoughShips;
-		}
-	}
+	/* Now we decide whether we have enough ships or need to build another:
+	 * - We always need at least one ship in transport mode
+	 * - We want at least as many free ships as we have ports
+	 * - If ships utilization is too high
+	 */
+	const bool need_ship =
+	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
+	   (!ship_free || persistent_data->ships_utilization > 5000 ||
+	    static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0);
 
 	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
@@ -236,7 +222,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				potential_wrong_shipyard_ = true;
 				return false;
 			}
-			if (enough_ships == FleetStatus::kNeedShip && idle_shipyard_stocked) {
+			if (need_ship && idle_shipyard_stocked) {
 				game().send_player_start_stop_building(*ps_obs.site);
 			}
 		}
