@@ -25,8 +25,8 @@
 
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
-// prevent defining sprintf / snprintf / vsnprintf to libintl_sprintf / libintl_snprintf / libintl_vsnprintf
-// in libintl.h, libintl.h is included by getext.h
+// prevent defining sprintf / snprintf / vsnprintf to libintl_sprintf / libintl_snprintf /
+// libintl_vsnprintf in libintl.h, libintl.h is included by getext.h
 #ifdef sprintf
 #undef sprintf
 #endif
