@@ -12,9 +12,7 @@ SUPPRESSED_CHECKS = {
     '[abseil-string-find-startswith]',
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
-    '[bugprone-branch-clone]',
     '[bugprone-exception-escape]',
-    '[bugprone-integer-division]',
     '[bugprone-macro-parentheses]',
     '[bugprone-narrowing-conversions]',
     '[bugprone-not-null-terminated-result]',
@@ -71,7 +69,6 @@ SUPPRESSED_CHECKS = {
     '[hicpp-use-equals-default]',
     '[hicpp-vararg]',
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
-    '[llvm-qualified-auto]',
     '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
     '[misc-non-private-member-variables-in-classes]',
@@ -96,7 +93,6 @@ SUPPRESSED_CHECKS = {
     '[readability-magic-numbers]',
     '[readability-make-member-function-const]',
     '[readability-named-parameter]',
-    '[readability-qualified-auto]',
     '[readability-uppercase-literal-suffix]'
 }
 

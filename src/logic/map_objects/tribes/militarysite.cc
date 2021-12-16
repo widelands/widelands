@@ -807,9 +807,11 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 					// * heal healthiest if multiple of same total level exist
 					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
 					    (soldier->get_total_level() == max_total_level &&
-					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+					     soldier->get_current_health() / static_cast<float>(soldier->get_max_health()) >
+					        max_health)) {
 						max_total_level = soldier->get_total_level();
-						max_health = soldier->get_current_health() / soldier->get_max_health();
+						max_health =
+						   soldier->get_current_health() / static_cast<float>(soldier->get_max_health());
 						soldier_to_heal = soldier;
 					}
 				} else if ((soldier->get_battle() == nullptr ||
