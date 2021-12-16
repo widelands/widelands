@@ -1,0 +1,610 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2021 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Benedikt Straub <benedikt-straub@web.de>, 2021
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2021-11-16 09:23+0000\n"
+"PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nds\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
+msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
+msgstr[0] "%1% Deel %2% is to dienem »%3%«-Huus brocht worden."
+msgstr[1] "%1% Delen %2% sünd to dienem »%3%«-Huus brocht worden."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
+msgid "Transport"
+msgstr "Transporteren"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+msgid ""
+"Four shovels for removing the swamps have been collected at the warehouse."
+msgstr ""
+"Veer Schüppen, um de Broken wegtodoon, sünd in de Kraamhuus sammelt worden."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+msgid "Shovels"
+msgstr "Schüppen"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+msgid ""
+"Four more shovels for removing the swamps have been collected at the "
+"warehouse."
+msgstr ""
+"Noch veer Schüppen, um de Broken wegtodoon, sünd in de Kraamhuus sammelt "
+"worden."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
+msgid "Defeat Törver"
+msgstr "Manntje Törver"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
+msgid "Defeat the Armies of Törver"
+msgstr "Manntje Törver sien Soldateree"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
+msgid ""
+"Törver is the enemy in the north, who is fighting under the red banner."
+msgstr "Törver is de Feind im Noorden, well unner de rode Fahn kämpt."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
+msgid "Build a port"
+msgstr "Bau eene Muu"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
+msgid "Build a Port in the North"
+msgstr "Bau eene Muu im Noorden"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
+msgid ""
+"We should build a port in Törver’s former land to be ready to send an "
+"expedition as soon as we found out how to build ships."
+msgstr ""
+"Laat uns eene Muu in de Land bauen, wat to Törver höört hett, daarmit wi "
+"eene Söök utstafferen könen, sobold wi utfunnen hebben, wo man Schippen "
+"baut."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
+msgid "Conquer pirate sentry"
+msgstr "Manntje de Seerover-Wachters-Kamer"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
+msgid "Conquer the Pirate Sentry"
+msgstr "Manntje de Seerover-Wachters-Kamer"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
+msgid ""
+"Conquer the pirate sentry near the brook to the east. Hopefully we will find"
+" out what happened to the gold in this area."
+msgstr ""
+"Manntje de Seerover-Wachters-Kamer dicht bi de Brook im Oosten. Hopentlik "
+"finnen wi dann ut, wat mit de Gold in de Gewest passeert is."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
+msgid "Build warehouse"
+msgstr "Bau een Kraamhuus"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
+msgid "Build a Warehouse near the Pirate Sentry"
+msgstr "Bau een Kraamhuus dicht bi de Seerover-Wachters-Kamer"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
+msgid ""
+"Build a warehouse close to the conquered pirate sentry near the brook. We "
+"will need it as a basis for further exploration. Furthermore we could use it"
+" to store some gold that we will mine from the surrounding hills."
+msgstr ""
+"Bau een Kraamhuus dicht bi de innohmen Seerover-Wachters-Kamer bi de Beek. "
+"Wi bruken ’t as Utgangsstee för wieders Utförsken. Un wi könen daar ok wat "
+"Gold lagern, wat wi ut de umgeven Höchten ofboen wullen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
+msgid "Bring shovels"
+msgstr "Breng Schüppen"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
+msgid "Bring Four Shovels to the new Warehouse"
+msgstr "Breng veer Schüppen ins neje Kraamhuus"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
+msgid "They will be handed out to some volunteers for drying up the swamps."
+msgstr "Se worden an freeiwillig Lüü utgeven, um de Broken uttodrögen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
+msgid ""
+"They will be handed out to additional volunteers for drying up the swamps."
+msgstr ""
+"Se worden an noch mehr freeiwillig Lüü utgeven, um de Broken uttodrögen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
+msgid "Defeat the pirates"
+msgstr "Manntje de Seerovers"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
+msgid "Defeat the Pirates"
+msgstr "Manntje de Seerovers"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
+msgid ""
+"Free our neighbourhood from the pirate menace. The pirates are fighting "
+"under the grey banner."
+msgstr ""
+"Maak uns’ Naberskupp vun de slimmen Seerovers freei. De Seerovers kämpen "
+"unner de graue Fahn."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
+msgid "Free our scout from the pirates"
+msgstr "Maak de Bespejer von de Seerovers freei"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
+msgid "Conquer the Stronghold on the Island"
+msgstr "Manntje de Schanz up de Insel"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
+msgid "This is where the scout is held captive."
+msgstr "Daar word de Bespejer festhollen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
+msgid "Defeat Hjalmar"
+msgstr "Manntje Hjalmar"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
+msgid "Defeat the Armies of Hjalmar"
+msgstr "Manntje Hjalmar sien Soldateree"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
+msgid ""
+"Hjalmar is the enemy north of the former pirates, who is fighting under the "
+"green banner."
+msgstr ""
+"Hjalmar is de Feind im Noorden vun waar de Seerovers weren, well unner de "
+"gröne Fahn kämpt."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
+msgid "Defeat Runar"
+msgstr "Manntje Runar"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
+msgid "Defeat the Armies of Runar"
+msgstr "Manntje Runar sien Soldateree"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
+msgid ""
+"Runar is the enemy south-east of the former pirates, who is fighting under "
+"the yellow banner."
+msgstr ""
+"Runar is de Feind im Südoost vun waar de Seerovers weren, well unner de gele"
+" Fahn kämpt."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:34
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:45
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:51
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:60
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:69
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:85
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:92
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:99
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:105
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:111
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:117
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:123
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:132
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:138
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
+msgid "Your Advisor"
+msgstr "Dien Berader"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
+msgid "Along the River"
+msgstr "Langs de Stroom"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
+msgid "Sire, let me inform you about the surrounding tribes."
+msgstr "Mienheer, laat mi di vun de umgeven Völkers vertellen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
+msgid ""
+"From the north we are endangered by a belligerent tribe, led by warlord "
+"Törver, that is rapidly building up its armies. They may soon have become "
+"too strong to be defeated."
+msgstr ""
+"Im Noorden droht uns een striedlevend Volk, wat Generaal Törver anföhrt, un "
+"wat siene Soldateree fix utbaut. Se worden bold to machtig worden, um se "
+"noch manntjen to könen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
+msgid ""
+"A large area to the north-east is agonized by a wild horde of unfettered "
+"pirates, led by their insane Arvid. Their presence blocks our ways to other "
+"tribes."
+msgstr ""
+"Een grotes Gewest im Noordoost word vun eener willen Schaar Seerovers "
+"belemmert, well vun hör malle Arvid anföhrt worden. Hör Biwesen blockeert "
+"uns vun de anner Völkers."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
+msgid ""
+"Over the river lies the prosperous land of the mysterious king Runar. We "
+"have been in war with him before the pirates occupied the eastern area. His "
+"strength is based on his vast industry and large armies."
+msgstr ""
+"Up de anner Sied vun de Stroom liggt dat früchtbaar Land vun de Sagenkönig "
+"Runar. Wi hebben mit hüm in Krieg legen, ehr de Seerovers de Gewest im "
+"Oosten besett hebben. Siene Macht is unbannig, denn he hett mennig "
+"Produzerens-Husen un eene baldadige Soldateree."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
+msgid ""
+"The area beyond the pirates belongs to a developed tribe led by their mighty"
+" chieftain Hjalmar. They have had a long time of preparement to build up "
+"their deterring armies."
+msgstr ""
+"De Kuntrei up de anner Sied vun de Seerovers höört to een entwickelt Volk "
+"unner hör machtig Anföhrer Hjalmar. Se hebben bannig vööl Tied hebbt, um hör"
+" schruuve Soldateree uptobauen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
+msgid ""
+"The situation looks quite perilous and my advice is that we direct our "
+"efforts towards building up a strong army."
+msgstr ""
+"Dat all sücht bannig gefahrelk ut, un ick raad an, dat wi futtmaken, eene "
+"machtige Soldateree uptobauen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
+msgid "Our northern enemy"
+msgstr "Uns’ Feind im Noorden"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
+msgid ""
+"Sire, although our soldiers would face any enemy without the slightest fear,"
+" our rival in the north is still stronger than all our armies combined. We "
+"should avoid a conflict until we are able to defeat them."
+msgstr ""
+"Mienheer, woll worden uns’ Soldaten tegen elkeen Feind sünner Angst kämpen, "
+"man uns’ Feind im Noorden is vööl machtiger as uns Soldateree all tosamen. "
+"Laat uns nich anfangen, tegen se to kämpen, ehr wi se ok manntjen könen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
+msgid ""
+"Be patient and recognize that a strong army is indispensable in this "
+"situation. Törver has a very bad reputation."
+msgstr ""
+"Wees gedüldig un vergeet nich, dat man in deeser Laag nich sünner eene "
+"machtige Soldateree överleven kann. Törver sall bannig slimm wesen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
+msgid "Peril from the north"
+msgstr "Gefahr ut Noorden"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
+msgid ""
+"Sire, we received an alarming message from one of our explorers. Törver is "
+"expanding his front line and approaching our territory."
+msgstr ""
+"Mienheer, wi hebben eene slimme Naricht vun uns’ Bespejers kregen. Törver "
+"schuuvt siene Grenz na vörn un is al dicht bi uns’ Gewest."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
+msgid ""
+"We cannot avoid attacking their armies forever. If we manage to conquer our "
+"northern enemy, we will enlarge our territory and find more resources to "
+"strengthen our armies."
+msgstr ""
+"Wi könen hör Soldateree nich weig utwieken. Wenn wi de Feind im Noorden "
+"manntjen, vergrotern wi uns’ Gewest un kriegen mehr Mineraale, um uns’ "
+"Soldateree wieder uttobauen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
+msgid ""
+"We can then also use their access to the lake in order to explore more land."
+msgstr ""
+"Wi könen dann ok hör Togang tum Meer bruken, um noch mehr nejes Land "
+"uttoförsken."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
+msgid "On the good way"
+msgstr "Up eenem goden Weg"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
+msgid ""
+"Sire, the battle with Törver progresses gloriously and we have already "
+"beaten the strongest part of his army. But this enemy will not be defeated "
+"easily. In a desperate move Törver has called in a group of hardened "
+"mercenaries."
+msgstr ""
+"Mienheer, de Slacht tegen Törver löppt bannig good för uns un wi hebben dat "
+"Meeste vun siener Soldateree al slagen. Aver deeser Feind is nich licht to "
+"manntjen: In siener Vertwieflung hett Törver eene Rott vun baldadigen Lohn-"
+"Soldaten ranropen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
+msgid "The great lake"
+msgstr "Dat grote Meer"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
+msgid ""
+"Sire, now that we have conquered the land of Törver, we can make use of "
+"their excellent access to the adjacent great lake. A port in the north will "
+"give us better opportunities to have contact with other tribes."
+msgstr ""
+"Mienheer, nu dat wi Törver sien Land innohmen hebben, könen wi hör allerbest"
+" Togang to de groten Meer in de Naberskupp bruken. Eene Muu im Noorden gifft"
+" uns mehr Kansen, mit anner Völkers in Beröhren to komen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
+msgid ""
+"In Törver’s headquarters we found papers describing the construction of "
+"ships. Unfortunately, the texts are written in a language that is unknown to"
+" us. Our wise men will try to translate these descriptions."
+msgstr ""
+"In Törver sien Raadhuus hebben wi Papieren funnen, wat verklaren, wo man "
+"Schippen baut. Leider verstahn wi de Spraak nich, in wat se schreven sünd. "
+"Uns’ kloke Lüü versöken nu, de Beschrievens to översetten."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
+msgid "Searching for gold"
+msgstr "Na Gold söken"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
+msgid ""
+"Sire, our men have located an isolated enemy pirate sentry. The abandoned "
+"huts indicate that there is gold nearby."
+msgstr ""
+"Mienheer, uns’ Lüü hebben eene ofgelegen feindelk Seerover-Wachters-Kamer "
+"funnen. De verlaten Katen wiesen, dat ’t Gold in de Naberskupp gifft."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
+msgid ""
+"We should however be careful if we want to conquer the sentry. There can be "
+"more enemy buildings that are still out of sight, and the pirates are known "
+"to be very good fighters. It is best to establish a strong military presence"
+" here before we proceed."
+msgstr ""
+"Aver wi sallen uppassen, wenn wi de Wachters-Kamer innehmen wollen. ’t kann "
+"noch mehr feindelk Husen geven, wat wi nich nich sehn, un de Seerovers "
+"sallen baldadig good kämpen könen. Laat uns eerst eene machtige Soldateree "
+"um dat Gewest upbauen, ehr wi daarmit wiedermaken."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
+msgid "Found a treasure"
+msgstr "Schatt funnen"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
+msgid ""
+"Sire, we have found 25 units of gold ore inside the pirate sentry. They may "
+"have been looted from the gold diggers’ huts nearby. This gold ore will be "
+"transported to our headquarters."
+msgstr ""
+"Mienheer, wi hebben 25 Delen Goldkluut in de Seerover-Wachters-Kamer funnen."
+" Se sünd wull ut de Goldgravers-Katen in de Naberskupp klaut worden. Dat "
+"Goldkluut word nu to uns’ Raadhuus brocht."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
+msgid ""
+"With our successful expansion into this area we should consider building a "
+"warehouse to the direct southwest of the sentry in order to further explore "
+"this area. There is a good building spot only three steps away from the "
+"sentry."
+msgstr ""
+"Nadeem wi nu to deeses Gewest komen sünd, sallen wi een Kraamhuus stracks "
+"süüdwest vun de Wachters-Kamer bauen, um de Kuntrei wieder utförsken to "
+"könen. Blot dree Stappen weg vun de Wachters-Kamer gifft ’t eene gode Stee."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
+msgid "Removing the swamps"
+msgstr "De Broken wegmaken"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
+msgid ""
+"Sire, the wet season has created swamps along the brook to the east and we "
+"are unable to pass through them. They have to be removed before we can "
+"continue. If you bring enough shovels to the new warehouse then volunteers "
+"will remove the swamps."
+msgstr ""
+"Mienheer, de natte Jahrstied hett Broken langs de Beek im Oost maakt, un wi "
+"komen daar nich dör. Se mutten wegmaakt worden, ehr wi wiedermaken könen. "
+"Wenn du genoog Schüppen to de nejen Kraamhuus brengst, worden freeiwillig "
+"Hülpers de Broken wegmaken."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
+msgid ""
+"Sire, all shovels have been handed out but if we continue at this pace than "
+"we will not have removed the swamps before the next wet season. If you bring"
+" more shovels to the new warehouse then more volunteers will join in."
+msgstr ""
+"Mienheer, de Schüppen sünd all utgeven, aver wenn wi dat nich fixer "
+"henkriegen, düürt dat noch bit to de anner natt Jahrstied. Breng mehr "
+"Schüppen to de nejen Kraamhuus, daarmit mehr freeiwillig Hülpers mitmaken "
+"könen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
+msgid ""
+"Sire, now that we have access to the pirates’ hideout, we should conquer it "
+"and finish them off. Maybe there are even more treasures hidden in their "
+"territory."
+msgstr ""
+"Mienheer, nu dat wi to de Versteek vun de Seerovers henkomen könen, sallen "
+"wi ’t angriepen un se all manntjen. Villicht gifft ’t sogaar Schatten in hör"
+" Gewest."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
+msgid "The pirates were defeated."
+msgstr "De Seerovers sünd manntjet worden."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
+msgid ""
+"Sire, we have defeated the pirates. They have hidden some gold in their last"
+" bastion which is now being transferred to our headquarters."
+msgstr ""
+"Mienheer, wi hebben de Seerovers manntjet. In hör leste Schanz weer wat Gold"
+" wegstoppt, wat nu to uns’ Raadhuus brocht word."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
+msgid "Pirates are regrouping"
+msgstr "De Seerovers komen torügg"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
+msgid ""
+"Sire, as a result of our attacks on the pirates they have started to regroup"
+" with pirates from other tribes. They could regain much of their previously "
+"lost strength. Our dwindling resources can become a problem with such a "
+"mighty enemy in front of us."
+msgstr ""
+"Mienheer, siet wi de Seerovers angriepen, sluten se sik mit Seerovers von "
+"anner Völkern neei tosamen. Bold worden se so machtig wesen as tovör. Dat wi"
+" uns’ Soldateree nich mehr so good nabetern könen word een Probleem, wenn wi"
+" so eenen slimmen Feind vör uns hebben."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
+msgid "Pirates on the run"
+msgstr "De Seerovers flüchten"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
+msgid ""
+"Sire, thanks to our successful efforts to drive out the pirates, lots of "
+"them have fled and moved away in small boats. It is unknown in which "
+"direction they have escaped."
+msgstr ""
+"Mienheer, wi hebben uns unbannig ofrackert, um de Seerovers to verdrieven, "
+"un nu flüchten se un sünd in lütten Schippen utnaiht. Wi weten nich, in "
+"welche Richt se weglopen sünd."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
+msgid "Ability to build shipyards"
+msgstr "Warften bauen"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
+msgid ""
+"Sire, after long study and research our wise men have finally managed to "
+"decipher the strange language in Törver’s descriptions that we had found in "
+"his headquarters. From now on we are able to build shipyards."
+msgstr ""
+"Mienheer, uns’ kloke Lüü hebben lang studeert un utförsket, un se hebben dat"
+" uplest daan kregen, de komisk Spraak to översetten, wat wi in de "
+"Beschrievens ut Törver sien Raadhuus funnen hebben. Nu könen wi Warften "
+"bauen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
+msgid "Our scout has been captured"
+msgstr "Uns’ Bespejer is fangen worden"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
+msgid ""
+"Sire, one of our scouts has been captured by the pirates and brought to "
+"their island. He is the only person who knows the way through the swamps "
+"towards Hjalmar."
+msgstr ""
+"Mienheer, een vun uns’ Bespejers is vun de Seerovers fangen nohmen worden un"
+" to hör Insel brocht worden. He is de eenzigst, well de Weg dör de Broken to"
+" Hjalmar weet."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
+msgid ""
+"According to our fishermen he is locked up in the stronghold on the island. "
+"We should use the knowledge about shipbuilding that we took from Törver to "
+"build ships and attack their positions."
+msgstr ""
+"Uns’ Fiskers seggen, dat he in eener Schanz up de Insel insperrt is. Wi "
+"sallen dat Weten över dat Schippebauen bruken, wat wi vun Törver lehrt "
+"hebben, um Schippen to bauen un hör Schanz antogriepen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
+msgid "Island conquered"
+msgstr "Insel innohmen"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
+msgid ""
+"Sire, our soldiers have conquered the island and managed to free the scout. "
+"It turns out that the pirates have left a large amount of gold, beer, and "
+"weapons on the island."
+msgstr ""
+"Mienheer, uns’ Soldaten hebben de Insel innohmen un de Bespejer freei sett. "
+"Wi hebben ok bannig vööl Gold, Beer un Wapens von de Seerovers funnen."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
+msgid "The scout returns"
+msgstr "De Bespejer kummt torügg"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
+msgid ""
+"Sire, our scout has returned to our territory, and he has shown us the road "
+"through the swamps towards Hjalmar."
+msgstr ""
+"Mienheer, uns’ Bespejer is weer in uns’ Gewest, un he hett uns de Straat dör"
+" de Broken to Hjalmar wiest."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
+msgid ""
+"He noticed that we can also move along the other side of the mountain, in "
+"case we might fail here, but it will be much more difficult to do."
+msgstr ""
+"He hett ok markt, dat wi ok langs de anner Sied vun de Bargen vörbikomen "
+"könen, wenn wi dat hier nich henkriegen, aver dat is wull vööl swaarer."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
+msgid "The last frontier"
+msgstr "De leste Grenz"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
+msgid ""
+"Sire, we have almost defeated all armies and we are now approaching our "
+"final enemy. They have been expecting us for a long time and will be "
+"prepared for the heaviest battle in their lifetime."
+msgstr ""
+"Mienheer, wi hebben haast all Soldatereen manntjet un komen nu to uns’ "
+"lesten Feind. Se hebben uns lang verwacht un sünd bannig good vörbereidt up "
+"de grootste Slacht in hör Leven."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
+msgid ""
+"Make sure that our armies are at full strength and then act decisively."
+msgstr ""
+"Pass up, dat uns’ Soldateree so stark is, as se wesen kann, un griep dann "
+"machtig an."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
+msgid "Victory!"
+msgstr "Sieg!"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
+msgid "Sire, my congratulations!"
+msgstr "Mienheer, ick graleer!"
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
+msgid ""
+"You have completed all goals and defeated all our enemies. You have not only"
+" conquered our rivalling tribes, but you have also captured the hearts of "
+"your loving people."
+msgstr ""
+"Du hest all diene Upgaven ofsluten un all uns’ Feinden manntjet. Du hest "
+"nich blot de feinelk Volken innohmen, sünnern ok de Harten vun dienen Lüü, "
+"well di all good leven."
+
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
+msgid "Your name will be remembered forever."
+msgstr "An dien Naam word man ewig torüggdenken."

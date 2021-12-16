@@ -111,8 +111,8 @@ private:
 	void set_highlighted(bool highlighted);
 
 public:
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
 
 private:
 	int32_t min_value_;  //  cursor values
@@ -236,8 +236,8 @@ struct DiscreteSlider : public Panel {
 
 	void set_labels(const std::vector<std::string>&);
 
-	boost::signals2::signal<void()> changed;
-	boost::signals2::signal<void(int32_t)> changedto;
+	Notifications::Signal<> changed;
+	Notifications::Signal<int32_t> changedto;
 
 	Slider& get_slider() {
 		return slider;

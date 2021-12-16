@@ -5,6 +5,7 @@ wl_library(wui_sound_options
   DEPENDS
     base_i18n
     graphic_styles
+    graphic_text_layout
     sound
     ui_basic
 )
@@ -189,6 +190,7 @@ wl_library(wui_game_tips
   DEPENDS
     base_i18n
     base_log
+    base_random
     graphic_functions
     graphic
     graphic_fonthandler

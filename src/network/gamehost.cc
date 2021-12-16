@@ -589,7 +589,7 @@ void GameHost::run_callback() {
 		game_->run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
 		           d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
                                         Widelands::Game::StartGameType::kMap,
-		           "", false, "nethost");
+		           script_to_run_, false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
@@ -1234,7 +1234,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 
 	while (!d->settings.savegame && random_tribe) {
 		uint8_t num_tribes = d->settings.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);  // NOLINT
+		uint8_t random = RNG::static_rand(num_tribes);
 		actual_tribe = d->settings.tribes.at(random).name;
 		if (player.state != PlayerSettings::State::kComputer ||
 		    d->settings.get_tribeinfo(actual_tribe).suited_for_ai) {

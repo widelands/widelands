@@ -124,11 +124,7 @@ if (OPTION_BUILD_WINSTATIC)
 endif()
 set (Boost_USE_MULTITHREADED ON)
 set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.48
-  COMPONENTS
-    unit_test_framework
-  REQUIRED
-    system)
+find_package(Boost 1.48 COMPONENTS REQUIRED system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -329,7 +325,11 @@ endif()
 if(NOT MSVC)
   # Turn some warnings into errors.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")  # This is a false-positive on g++5
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+    # Silence some false positives on older g++
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+  endif()
   if (APPLE)  # Our Mac CI needs these
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
@@ -370,8 +370,10 @@ IF (WIN32)
     add_definitions(-D_WIN32_WINNT=0x0601 -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -DNOMINMAX)
     # Needed for minizip
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
-    set(SDL_EXTRA_LIBS charset)
     if (OPTION_BUILD_WINSTATIC)
+      set(ZSTD zstd_static)
+      set(BROTLI brotlidec-static brotlicommon-static brotlienc-static)
+      set(SDL_EXTRA_LIBS charset)
       if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         wl_add_flag(TARGET_COMPILE_FLAGS "/MTd")
       else()
@@ -380,7 +382,9 @@ IF (WIN32)
     endif()
   else()
     # Fix static library dependencies
-    set(SDL_MIXER_EXTRA_LIBS ssp)    
+    set(ZSTD zstd)
+    set(BROTLI brotlidec brotlicommon brotlienc)
+    set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
     set(SDL_IMG_EXTRA_LIBS jbig deflate)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)

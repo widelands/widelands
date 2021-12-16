@@ -135,7 +135,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Main ${SDL_EXTRA_LIBS} intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 brotlidec brotlicommon brotlienc zstd)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::Main ${SDL_EXTRA_LIBS} intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 ${BROTLI} ${ZSTD})
     else()
       target_link_libraries(${NAME} SDL2::Main)
     endif()
@@ -159,7 +159,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2_TTF)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF freetype bz2 graphite2 usp10 dwrite harfbuzz zstd freetype rpcrt4)
+      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} SDL2::TTF freetype bz2 graphite2 usp10 dwrite harfbuzz ${ZSTD} freetype rpcrt4)
     else()
       target_link_libraries(${NAME} SDL2::TTF)
     endif()
@@ -232,13 +232,6 @@ function(wl_test NAME)
   _parse_common_args("${ARGN}")
 
   add_executable(${NAME} ${ARG_SRCS})
-
-  # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
-  string(REGEX MATCH ".a$" BOOST_STATIC_UNIT_TEST_LIB ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-  if (NOT BOOST_STATIC_UNIT_TEST_LIB)
-    set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} -DBOOST_TEST_DYN_LINK")
-  endif()
-  target_link_libraries(${NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
   # Tests need to link with SDL2 library without main.
   target_link_libraries(${NAME} SDL2::Core)

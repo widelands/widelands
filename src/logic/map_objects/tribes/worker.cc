@@ -359,10 +359,10 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 			send_signal(game, "fail");  //  no object found, cannot run program
 			pop_task(game);
 			if (upcast(ProductionSite, productionsite, get_location(game))) {
-				if (!found_reserved) {
-					productionsite->notify_player(game, 30);
-				} else {
+				if (found_reserved) {
 					productionsite->unnotify_player();
+				} else if (action.iparam3 != 0) {
+					productionsite->notify_player(game, 30);
 				}
 			}
 			return true;
@@ -533,7 +533,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX
- * iparam3 = whether the "space" flag is set
+ * iparam3 = 1st bit: whether the "space" flag is set; 2nd bit: whether the no_notify flag is set
  * iparam4 = whether the "breed" flag is set
  * sparam1 = Resource
  */
@@ -608,7 +608,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	if (action.iparam5 > -1) {
 		functor.add(FindNodeImmovableAttribute(action.iparam5), true);
 	}
-	if (action.iparam3) {
+	if (action.iparam3 & 1) {
 		functor.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 	}
 	for (const std::string& terraform : action.sparamv) {
@@ -632,7 +632,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			if (action.iparam5 > -1) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
 			}
-			if (action.iparam3) {
+			if (action.iparam3 & 1) {
 				functorAnyFull.add(FindNodeSpace(findnodesize != FindNodeSize::Size::sizeSwim));
 			}
 			// If there are fields full of fish, we change the type of notification
@@ -648,8 +648,10 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 			molog(game.get_gametime(), "  no space found\n");
 		}
 
-		if (upcast(ProductionSite, productionsite, get_location(game))) {
-			productionsite->notify_player(game, 30, fail_notification_type);
+		if ((action.iparam3 & 2) == 0) {
+			if (upcast(ProductionSite, productionsite, get_location(game))) {
+				productionsite->notify_player(game, 30, fail_notification_type);
+			}
 		}
 
 		send_signal(game, "fail");

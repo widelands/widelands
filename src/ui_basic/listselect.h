@@ -54,8 +54,8 @@ struct BaseListselect : public Panel {
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
 	~BaseListselect() override;
 
-	boost::signals2::signal<void(uint32_t)> selected;
-	boost::signals2::signal<void(uint32_t)> double_clicked;
+	Notifications::Signal<uint32_t> selected;
+	Notifications::Signal<uint32_t> double_clicked;
 
 	void clear();
 	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());

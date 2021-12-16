@@ -431,9 +431,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_sh = new SoundHandler();
 
-	g_sh->register_songs("music", "intro");
-	g_sh->register_songs("music", "menu");
-	g_sh->register_songs("music", "ingame");
+	g_sh->register_songs("music", Songset::kIntro);
+	g_sh->register_songs("music", Songset::kMenu);
+	g_sh->register_songs("music", Songset::kIngame);
+	g_sh->register_songs("music", Songset::kCustom);
 
 	initialize_g_addons();
 
@@ -443,9 +444,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	UI::Panel::register_click();
 
 	set_input_grab(get_config_bool("inputgrab", false));
-
-	// seed random number generator used for random tribe selection
-	std::srand(time(nullptr));
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
@@ -648,12 +646,14 @@ void WLApplication::init_and_run_game_from_template() {
 	}
 
 	std::unique_ptr<GameSettingsProvider> settings;
-	std::unique_ptr<GameHost> host;
+	std::shared_ptr<GameController> ctrl;
+	GameHost* host = nullptr;  // will be deleted by ctrl
 	if (multiplayer) {
-		std::shared_ptr<GameController> ctrl(nullptr);
-		host.reset(new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
-		                        Widelands::get_all_tribeinfos(nullptr), false));
-		settings.reset(new HostGameSettingsProvider(host.get()));
+		host = new GameHost(nullptr, ctrl, get_config_string("nickname", _("nobody")),
+		                    Widelands::get_all_tribeinfos(nullptr), false);
+		ctrl.reset(host);
+		settings.reset(new HostGameSettingsProvider(host));
+		host->set_script_to_run(script_to_run_);
 	} else {
 		settings.reset(new SinglePlayerGameSettingsProvider());
 	}
@@ -729,7 +729,7 @@ void WLApplication::init_and_run_game_from_template() {
 	game.set_game_controller(std::make_shared<SinglePlayerGameController>(game, true, playernumber));
 	game.init_newgame(settings->settings());
 	try {
-		game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		game.run(Widelands::Game::StartGameType::kMap, script_to_run_, false, "single_player");
 	} catch (const Widelands::GameDataError& e) {
 		log_err("Game not started: Game data error: %s\n", e.what());
 	} catch (const std::exception& e) {
@@ -748,7 +748,7 @@ void WLApplication::run() {
 	GameLogicThread game_logic_thread(&should_die_);
 
 	if (game_type_ == GameType::kEditor) {
-		g_sh->change_music("ingame");
+		g_sh->change_music(Songset::kIngame);
 		if (filename_.empty()) {
 			EditorInteractive::run_editor(nullptr, EditorInteractive::Init::kDefault);
 		} else {
@@ -787,7 +787,7 @@ void WLApplication::run() {
 			title = _("Error message:");
 		}
 		if (!message.empty()) {
-			g_sh->change_music("menu");
+			g_sh->change_music(Songset::kMenu);
 			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);
 			log_err("%s\n", message.c_str());
@@ -806,9 +806,9 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kFromTemplate) {
 		init_and_run_game_from_template();
 	} else {
-		g_sh->change_music("intro");
+		g_sh->change_music(Songset::kIntro);
 
-		g_sh->change_music("menu", 1000);
+		g_sh->change_music(Songset::kMenu, 1000);
 
 		FsMenu::MainMenu m;
 		m.run<int>();
@@ -1344,17 +1344,17 @@ void WLApplication::handle_commandline_parameters() {
 		}
 		return std::string();
 	};
+	bool found = false;
 	if (commandline_.count("datadir")) {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
 
 		const std::string err = checkdatadirversion(datadir_);
-		if (!err.empty()) {
+		found = err.empty();
+		if (!found) {
 			log_err("Invalid explicit datadir '%s': %s", datadir_.c_str(), err.c_str());
-			exit(2);
 		}
 	} else {
-		bool found = false;
 		std::vector<std::pair<std::string, std::string>> wrong_candidates;
 
 		// Try absolute path first.
@@ -1406,16 +1406,15 @@ void WLApplication::handle_commandline_parameters() {
 			for (const auto& pair : wrong_candidates) {
 				log_err(" · '%s': %s", pair.first.c_str(), pair.second.c_str());
 			}
-			exit(2);
 		}
 	}
-	if (!is_absolute_path(datadir_)) {
+	if (found && !is_absolute_path(datadir_)) {
 		try {
 			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
 			                                        FileSystem::file_separator() + datadir_);
 		} catch (const WException& e) {
 			log_err("Error parsing datadir: %s\n", e.what());
-			exit(2);
+			found = false;
 		}
 	}
 
@@ -1424,11 +1423,15 @@ void WLApplication::handle_commandline_parameters() {
 		if (!lang.empty()) {
 			set_config_string("language", lang);
 		} else {
-			init_language();
+			if (found) {
+				init_language();
+			}
 			throw_empty_value("--language");
 		}
 	}
-	init_language();  // do this now to have translated command line help
+	if (found) {
+		init_language();  // do this now to have translated command line help
+	}
 	fill_parameter_vector();
 
 	if (commandline_.count("error")) {
@@ -1573,6 +1576,10 @@ void WLApplication::handle_commandline_parameters() {
 			throw ParameterError(
 			   CmdLineVerbosity::Normal, bformat(_("Unknown command line parameter: %s"), pair.first));
 		}
+	}
+
+	if (!found) {
+		throw ParameterError(CmdLineVerbosity::None);  // datadir error already printed
 	}
 }
 

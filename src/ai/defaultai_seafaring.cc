@@ -127,8 +127,35 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	uint16_t ports_count = 0;
 	uint16_t shipyards_count = 0;
 	uint16_t expeditions_in_prep = 0;
+	uint16_t expeditions_ready = 0;
 	uint16_t expeditions_in_progress = 0;
 	bool idle_shipyard_stocked = false;
+
+	// goes over productionsites and gets status of shipyards
+	for (const ProductionSiteObserver& ps_obs : productionsites) {
+		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
+			++shipyards_count;
+
+			// In very rare situation, we might have non-seafaring map but there is a shipyard
+			if (!map_allows_seafaring_) {
+				verb_log_dbg_time(
+				   game().get_gametime(),
+				   "  %1d: we have a shipyard in a non seafaring economy, dismantling it...\n",
+				   player_number());
+				if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+					game().send_player_dismantle(*ps_obs.site, true);
+				} else {
+					game().send_player_bulldoze(*ps_obs.site);
+				}
+				return false;
+			}
+		}
+	}
+
+	// If non-seafaring economy, no sense to go on with this function
+	if (!map_allows_seafaring_) {
+		return false;
+	}
 
 	// goes over all warehouses (these includes ports)
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
@@ -138,25 +165,36 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 				if (pd->expedition_started()) {
 					++expeditions_in_prep;
 				}
+				if (pd->is_expedition_ready()) {
+					++expeditions_ready;
+				}
 			}
 		}
 	}
 
-	// goes over productionsites and gets status of shipyards
+	// iterates over all ships
+	for (const ShipObserver& observer : allships) {
+		if (observer.ship->state_is_expedition()) {
+			++expeditions_in_progress;
+		}
+	}
+
+	assert(allships.size() >= expeditions_in_progress);
+	bool ship_free = allships.size() - expeditions_in_progress > 0;
+
+	/* Now we decide whether we have enough ships or need to build another:
+	 * - We always need at least one ship in transport mode
+	 * - We want at least as many free ships as we have ports
+	 * - If ships utilization is too high
+	 */
+	const bool need_ship =
+	   ports_count > 0 && shipyards_count > 0 && basic_economy_established &&
+	   (!ship_free || persistent_data->ships_utilization > 5000 ||
+	    static_cast<int>(allships.size()) - ports_count - expeditions_in_progress < 0);
+
+	// goes over productionsites finds shipyards and configures them
 	for (const ProductionSiteObserver& ps_obs : productionsites) {
 		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
-			++shipyards_count;
-
-			// In very rare situation, we might have non-seafaring map but the shipyard is working
-			if (!map_allows_seafaring_ && !ps_obs.site->is_stopped()) {
-				verb_log_dbg_time(
-				   game().get_gametime(),
-				   "  %1d: we have working shipyard in a non seafaring ecoomy, stopping it...\n",
-				   player_number());
-				game().send_player_start_stop_building(*ps_obs.site);
-				return false;
-			}
-
 			// counting stocks
 			uint8_t stocked_wares = 0;
 			std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
@@ -168,71 +206,24 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 			if (stocked_wares == 16 && ps_obs.site->is_stopped() && ps_obs.site->can_start_working()) {
 				idle_shipyard_stocked = true;
 			}
-		}
-	}
 
-	// If non-seafaring economy, no sense to go on with this function
-	if (!map_allows_seafaring_) {
-		return false;
-	}
-
-	// and now over ships
-	for (const ShipObserver& observer : allships) {
-		if (observer.ship->state_is_expedition()) {
-			++expeditions_in_progress;
-		}
-	}
-
-	assert(allships.size() >= expeditions_in_progress);
-	bool ship_free = allships.size() - expeditions_in_progress > 0;
-
-	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
-
-	// now we decide whether we have enough ships or need to build another
-	// three values: kDoNothing, kNeedShip, kEnoughShips
-	FleetStatus enough_ships = FleetStatus::kDoNothing;
-	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked) {
-
-		if (!basic_economy_established) {
-			enough_ships = FleetStatus::kEnoughShips;
-			// we always need at least one ship in transport mode
-		} else if (!ship_free) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// we want at least as many free ships as we have ports
-		} else if (int(allships.size()) - ports_count - expeditions_in_progress < 0) {
-			enough_ships = FleetStatus::kNeedShip;
-
-			// if ships utilization is too high
-		} else if (persistent_data->ships_utilization > 5000) {
-			enough_ships = FleetStatus::kNeedShip;
-
-		} else {
-			enough_ships = FleetStatus::kEnoughShips;
-		}
-	}
-
-	// building a ship? if yes, find a shipyard and order it to build a ship
-	if (enough_ships == FleetStatus::kNeedShip) {
-
-		for (const ProductionSiteObserver& ps_obs : productionsites) {
-			if (ps_obs.bo->is(BuildingAttribute::kShipyard) && ps_obs.site->can_start_working() &&
-			    ps_obs.site->is_stopped()) {
-				// make sure it is fully stocked
-				// counting stocks
-				uint8_t stocked_wares = 0;
-				std::vector<Widelands::InputQueue*> const inputqueues = ps_obs.site->inputqueues();
-				for (Widelands::InputQueue* queue : inputqueues) {
-					if (queue->get_type() == Widelands::wwWARE) {
-						stocked_wares += queue->get_filled();
+			if (expeditions_ready > 0 && idle_shipyard_stocked && allships.size() - ports_count == 0) {
+				if (potential_wrong_shipyard_) {
+					if (!ps_obs.site->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+						game().send_player_dismantle(*ps_obs.site, true);
+					} else {
+						game().send_player_bulldoze(*ps_obs.site);
 					}
+					game().send_player_sink_ship(*allships.back().ship);
+					allships.pop_back();
+					potential_wrong_shipyard_ = false;
+					return true;
 				}
-				if (stocked_wares < 16) {
-					continue;
-				}
-
+				potential_wrong_shipyard_ = true;
+				return false;
+			}
+			if (need_ship && idle_shipyard_stocked) {
 				game().send_player_start_stop_building(*ps_obs.site);
-				return true;
 			}
 		}
 	}
@@ -476,8 +467,8 @@ void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 }
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
-	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :  // NOLINT
-                                  Widelands::IslandExploreDirection::kCounterClockwise;
+	return RNG::static_rand(20) < 10 ? Widelands::IslandExploreDirection::kClockwise :
+                                      Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -507,7 +498,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		                  so.ship->get_position().y, spot_score);
 
 		// we make a decision based on the score value and random
-		if (std::rand() % 8 < spot_score) {  // NOLINT
+		if (RNG::static_rand(8) < spot_score) {
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
@@ -605,15 +596,15 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
 	// If only open sea (no unexplored sea) is found, we don't always divert the ship
-	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {  // NOLINT
+	if (new_teritory_directions.empty() && RNG::static_rand(100) < 80) {
 		return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
-            new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :  // NOLINT
-            possible_directions.at(std::rand() % possible_directions.size());           // NOLINT
+            new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
+            possible_directions.at(RNG::static_rand(possible_directions.size()));
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));
 
