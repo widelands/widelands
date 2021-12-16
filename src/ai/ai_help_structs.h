@@ -793,6 +793,9 @@ struct SchedulerTask {
 	uint8_t priority;
 	// used only for debug purposes
 	std::string descr;
+	uint32_t call_count;
+	double total_exec_time_ms;
+	double max_exec_time_ms;
 };
 
 // List of blocked fields with block time, with some accompanying functions
