@@ -88,7 +88,7 @@ const Animation::MipMapEntry& Animation::mipmap_entry(float scale) const {
 
 Rectf Animation::source_rectangle(const int percent_from_bottom, float scale) const {
 	const MipMapEntry& mipmap = mipmap_entry(find_best_scale(scale));
-	const float h = percent_from_bottom * mipmap.height() / 100;
+	const float h = percent_from_bottom * mipmap.height() / 100.f;
 	// Using floor for pixel perfect positioning
 	return Rectf(0.f, std::floor(mipmap.height() - h), mipmap.width(), h);
 }

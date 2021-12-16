@@ -575,6 +575,7 @@ void MapObject::schedule_destroy(Game& game) {
  * \warning Make sure you call this from derived classes!
  */
 bool MapObject::init(EditorGameBase& egbase) {
+	MutexLock m(MutexLock::ID::kObjects);
 	egbase.objects().insert(this);
 	return true;
 }

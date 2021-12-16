@@ -843,9 +843,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
 		case Widelands::MapObjectType::WARE:
 			return CAST_TO_LUA(Widelands::WareDescr, LuaWareDescription);
 		case Widelands::MapObjectType::WORKER:
-			return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
 		case Widelands::MapObjectType::CARRIER:
-			return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
 		case Widelands::MapObjectType::FERRY:
 			return CAST_TO_LUA(Widelands::WorkerDescr, LuaWorkerDescription);
 		case Widelands::MapObjectType::SOLDIER:
@@ -875,13 +873,10 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 		return CAST_TO_LUA(Bob);
 	case Widelands::MapObjectType::SHIP:
 		return CAST_TO_LUA(Ship);
+	// TODO(sirver / Nordfriese): Carrier / Ferry not yet implemented
 	case Widelands::MapObjectType::WORKER:
-		return CAST_TO_LUA(Worker);
 	case Widelands::MapObjectType::CARRIER:
-		// TODO(sirver): not yet implemented
-		return CAST_TO_LUA(Worker);
 	case Widelands::MapObjectType::FERRY:
-		// TODO(Nordfriese): not yet implemented
 		return CAST_TO_LUA(Worker);
 	case Widelands::MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
