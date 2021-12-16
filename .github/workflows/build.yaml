@@ -204,8 +204,7 @@ jobs:
       run: |
         mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
         cd ${{ env.VCPKG_ROOT }}
-        $env:HEAD = git rev-parse --short HEAD
-        echo "::set-output name=head::$env:HEAD"
+        echo "::set-output name=head::$(git rev-parse --short HEAD)"
       shell: bash
     - name: Restore vcpkg and its artifacts.
       uses: actions/cache@v2
