@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-10 02:41+0000\n"
-"PO-Revision-Date: 2021-12-12 08:40+0000\n"
+"POT-Creation-Date: 2021-12-13 02:43+0000\n"
+"PO-Revision-Date: 2021-12-13 20:13+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -1295,7 +1295,6 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1599,7 +1598,7 @@ msgstr "Alberi esauriti"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:50
 msgid "No Tree to Cut Lianas"
-msgstr ""
+msgstr "Nessun albero da cui tagliare delle liane"
 
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
 msgctxt "amazons_building"
@@ -1710,9 +1709,9 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1721,17 +1720,17 @@ msgstr ""
 msgid "making a shovel"
 msgstr "sta producendo una pala"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
 msgstr "sta producendo un'ascia da disboscamento"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1744,9 +1743,9 @@ msgstr "sta producendo un piccone"
 msgid "making a machete"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1754,9 +1753,9 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "sta producendo degli utensili da cucina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1771,9 +1770,9 @@ msgstr "sta producendo un martello"
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1929,6 +1928,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5416,7 +5416,7 @@ msgstr "Il team di sviluppo di Widelands"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons (experimental)"
-msgstr ""
+msgstr "Amazzoni (tribù sperimentale)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid ""
@@ -7196,7 +7196,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:212
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr ""
+msgstr "Ossidiana"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:214
@@ -7592,7 +7592,7 @@ msgstr "Ben Hur"
 #: ../../data/tribes/ships/empire/init.lua:54
 msgctxt "shipname"
 msgid "Bounty"
-msgstr ""
+msgstr "Bottino"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:56
@@ -7814,7 +7814,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:128
 msgctxt "shipname"
 msgid "Saturn"
-msgstr ""
+msgstr "Saturno"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:130
@@ -7838,13 +7838,13 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:136
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr ""
+msgstr "Tiberio"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:138
 msgctxt "shipname"
 msgid "Titus"
-msgstr ""
+msgstr "Tito"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:140
@@ -8245,7 +8245,7 @@ msgstr ""
 #: ../../data/tribes/wares/chisel/init.lua:8
 msgctxt "ware"
 msgid "Chisel"
-msgstr ""
+msgstr "Scalpello"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chocolate/init.lua:8
@@ -8811,7 +8811,7 @@ msgstr ""
 #: ../../data/tribes/wares/warriors_coat/init.lua:8
 msgctxt "ware"
 msgid "Warrior’s Coat"
-msgstr ""
+msgstr "Cappotto del guerriero"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/water/init.lua:8
@@ -8937,7 +8937,7 @@ msgstr "Esploratore"
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
 msgctxt "amazons_worker"
 msgid "Shipwright"
-msgstr ""
+msgstr "Carpentiere navale"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
