@@ -7,7 +7,7 @@ import os
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
-MAX_CHILDS = 2
+MAX_CHILDREN = 3
 MAX_PARENTS = 1
 MAX_NAME_LENGTH = 15
 
@@ -32,6 +32,8 @@ class LuaClass:
         self.children = []
 
     def get_parent_name(self):
+        # If the parent is defined in a different file than the child
+        # return it's long_name
         diff = False
         if self.children:
             for c in self.children:
@@ -133,24 +135,22 @@ class LuaClasses:
                 l.append(c)
         return l
 
-    def get_children(self, c_name, tree=None):
-        """Recursively find all children of c_name.
 
-        Returns a list of LuaClass instances.
-        """
+    def get_children_rows(self, c_name, max_children=0, tree=None):
         if tree == None:
             tree = []
         for c in self.all_classes:
             if c.name == c_name:
-                if c.children:
+                if not c.children or max_children == MAX_CHILDREN:
+                    return tree
+                else:
+                    max_children += 1
                     l = []
                     l.append(c)
                     l.append([x for x in c.children])
                     tree.append(l)
                     for child in c.children:
-                        self.get_children(child.name, tree)
-                else:
-                    return tree
+                        self.get_children_rows(child.name, max_children, tree)
         return tree
 
     def print_classes(self):
@@ -166,13 +166,14 @@ classes = LuaClasses()
 def fill_data(file_name, outfile):
     """Find class names in given File.
 
-    Reads out each occurrence of "class x : public y::z" and fills
-    main_classes and derived_classes. The values have to be cleaned
-    which is made in two steps:
+    Reads out each occurrence of "class x : public y::z".
+    Each found class will be an instance of LuaClass and added to a list
+    of classes.
+    The values have to be cleaned which is made in two steps:
     - Strip leading 'Lua' from the name of classes.
       In contrast to classes in .h-files the Lua-classes have no leading
       string 'Lua'. Future implementations have to be exactly like this!
-    -  The class derived from 'LunaClass'' is the base class for all other
+    -  The class derived from 'LunaClass' is the base class for all other
       classes in this file. This class has no meaning for the Lua
       documentation, so we do not store it's name.
     """
@@ -222,8 +223,8 @@ def init(base_dir, cpp_files):
         h_path = os.path.join(base_dir, header)
         fill_data(h_path, outfile)
 
-    # Apply inheritances. This can only be done after all classes are created because
-    # some class definitions are in different files.
+    # Apply inheritances. This can only be done after all classes are
+    # created because some class definitions are in different files.
     classes.create_inheritances()
     #classes.print_classes()
 
@@ -310,28 +311,20 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
 
 def format_graphviz_children(c_name):
 
-    children = classes.get_children(c_name)
-    ret_str = ''
-    last_row = 0
-
-    if children:
+    def create_row(parent, children):
+        ret_str = ''
         for child in children:
-            #print(child[0].name, [x.name for x in child[1]])
-            last_row += 1
-            ret_str += '{} -- {{'.format(child[0].name)
+            ret_str += '{} [{url}, label="{label}"]'.format(child.name,
+                                                    url=child.get_graphviz_link(),
+                                                    label=child.name)
+            ret_str += '\n    '
+            ret_str += '{} -- {}\n    '.format(parent.name, child.name)
+        return ret_str
 
-            for i, grandchild in enumerate(child[1]):
-                ret_str += '"{name}"[{link}]'.format(
-                    name=grandchild.get_child_name(),
-                    link=grandchild.get_graphviz_link(),
-                )
-
-                if i < len(child[1]) - 1:
-                    # add space except after last entry
-                    ret_str += ' '
-            ret_str += '}\n    '
-            if last_row >= MAX_CHILDS:
-                break
+    all_children = classes.get_children_rows(c_name)
+    ret_str = ''
+    for parent, children in all_children:
+        ret_str += create_row(parent, children)
 
     return ret_str
 
@@ -347,7 +340,6 @@ def create_directive(c_name):
     :alt: Dependency graph for class: {cur_cls}
 
     graph {cur_cls} {{
-
 
     bgcolor="transparent"
     node [shape=box, style=filled, fillcolor=white,
