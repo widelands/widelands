@@ -281,24 +281,26 @@ void draw_diagram(uint32_t time_ms,
 	dst.draw_line_strip(
 	   {Vector2f(
 	       inner_w - kSpaceRight + 2,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2),
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f),
 	    Vector2f(
 	       inner_w - kSpaceRight,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2)},
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2),
-	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2)},
+	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f),
+	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight + 2,
-	             inner_h - kSpaceBottom -
-	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2),
-	    Vector2f(inner_w - kSpaceRight,
-	             inner_h - kSpaceBottom -
-	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2)},
+	   {Vector2f(
+	       inner_w - kSpaceRight + 2,
+	       inner_h - kSpaceBottom -
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f),
+	    Vector2f(
+	       inner_w - kSpaceRight,
+	       inner_h - kSpaceBottom -
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, inner_h - kSpaceBottom),
@@ -720,7 +722,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	         Vector2i::zero());
 
 	// yoffset of the zero line
-	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2;
+	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2.f;
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),

@@ -113,9 +113,9 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 			bool should_grow_right = can_grow_right && (root->r.h >= root->r.w + block_width);
 			bool should_grow_down = can_grow_down && (root->r.w >= root->r.h + block_height);
 
-			if (should_grow_right) {
+			if (should_grow_right) {  // NOLINT
 				grow_right(block_width);
-			} else if (should_grow_down) {
+			} else if (should_grow_down) {  // NOLINT
 				grow_down(block_height);
 			} else if (can_grow_right) {
 				grow_right(block_width);
