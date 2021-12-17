@@ -182,7 +182,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 
 InputQueue&
 ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool additional) const {
-	for (auto& iq : queues_) {
+	for (const auto& iq : queues_) {
 		if (iq.first->get_index() == index && iq.first->get_type() == type &&
 		    iq.second == additional) {
 			return *iq.first;
@@ -192,7 +192,7 @@ ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool ad
 }
 
 InputQueue& ExpeditionBootstrap::inputqueue(const Request& r) const {
-	for (auto& iq : queues_) {
+	for (const auto& iq : queues_) {
 		if (iq.first->matches(r)) {
 			return *iq.first;
 		}

@@ -173,8 +173,6 @@ protected:
 		case SDLK_LSHIFT:
 		case SDLK_LALT:
 		case SDLK_LGUI:
-			return false;
-
 		// Also ignore reserved system keys
 		case SDLK_RETURN:
 		case SDLK_SPACE:
@@ -318,7 +316,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 			init_fastplace_default_shortcuts();
 
-			for (auto& pair : all_keyboard_buttons) {
+			for (const auto& pair : all_keyboard_buttons) {
 				pair.second->set_title(generate_title(pair.first));
 			}
 
@@ -331,7 +329,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			init_fastplace_default_shortcuts();
 		}
 
-		for (auto& pair : all_keyboard_buttons) {
+		for (const auto& pair : all_keyboard_buttons) {
 			pair.second->set_title(generate_title(pair.first));
 		}
 

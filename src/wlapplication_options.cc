@@ -712,7 +712,7 @@ void set_fastplace_shortcuts(KeyboardShortcut id, const std::map<std::string, st
 	}
 
 	// Add new mapping
-	for (auto& pair : map) {
+	for (const auto& pair : map) {
 		if (!info.fastplace.count(pair.first)) {
 			info.fastplace.emplace(pair);
 			set_config_string("keyboard_fastplace", config_key(pair.first), pair.second);
