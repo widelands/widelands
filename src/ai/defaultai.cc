@@ -280,9 +280,9 @@ void DefaultAI::think() {
 	// range 13 - 15, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
-		if (delay_time > 5500) {
-			speed_diff = -100;
-		} else if (delay_time < 1000) {
+		if (delay_time > 4000) {
+			speed_diff = -200;
+		} else if (delay_time < 1600) {
 			speed_diff = +100;
 		}
 		if (speed_diff != 0) {
