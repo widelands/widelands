@@ -7,7 +7,7 @@ import os
 HFILE_CLS_RE = re.compile(r'^class\s(\w+)\s+:\s+\w+\s+(\w+)[::]*(\w*)', re.M)
 RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
-MAX_CHILDREN = 3
+MAX_CHILDREN = 2
 MAX_PARENTS = 1
 MAX_NAME_LENGTH = 15
 
@@ -43,11 +43,8 @@ class LuaClass:
             return self.long_name
         return self.name
 
-    def get_child_name(self):
-        if self.parent:
-            if self.parent.outfile != self.outfile:
-                return self.long_name
-        return self.name
+    def get_formatted_name(self):
+        return self.name[:MAX_NAME_LENGTH]
 
     def get_graphviz_link(self):
         html_link = 'href="../{}#{}", target="_parent"'.format(
@@ -108,7 +105,7 @@ class LuaClasses:
         """Returns a list of base class names."""
         return [c.name for c in self.all_classes if c.is_base]
 
-    def get_parents(self, c_name, tree=None):
+    def get_parents(self, cls_inst, tree=None):
         """Recursively find all parents of c_name.
 
         Returns a list of LuaClass instances.
@@ -116,12 +113,12 @@ class LuaClasses:
         if tree == None:
             tree = []
         for c in self.all_classes:
-            if c.name == c_name:
+            if c == cls_inst:
                 if c.parent:
                     if not c.parent in tree:
                         # This is only needed for double defined class Player.
                         tree.append(c.parent)
-                    self.get_parents(c.parent.name, tree)
+                    self.get_parents(c.parent, tree)
                 else:
                     # No parent anymore, end of recursion
                     return tree
@@ -136,11 +133,19 @@ class LuaClasses:
         return l
 
 
-    def get_children_rows(self, c_name, max_children=0, tree=None):
+    def get_instance(self, cls_name, outfile):
+        for c in self.all_classes:
+            if cls_name == c.name and outfile == c.outfile:
+                return c
+        raise Exception('No class named "{}" found with outfile "{}": '.format(
+            cls_name, outfile))
+
+
+    def get_children_rows(self, cls_inst, max_children=0, tree=None):
         if tree == None:
             tree = []
         for c in self.all_classes:
-            if c.name == c_name:
+            if c == cls_inst:
                 if not c.children or max_children == MAX_CHILDREN:
                     return tree
                 else:
@@ -150,7 +155,7 @@ class LuaClasses:
                     l.append([x for x in c.children])
                     tree.append(l)
                     for child in c.children:
-                        self.get_children_rows(child.name, max_children, tree)
+                        self.get_children_rows(child, max_children, tree)
         return tree
 
     def print_classes(self):
@@ -229,14 +234,15 @@ def init(base_dir, cpp_files):
     #classes.print_classes()
 
 
-def add_child_of(rst_data):
+def add_child_of(rst_data, outfile):
     """Adds the String 'Child of: …' to rst_data."""
 
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
     for c_name in found_classes:
-        parents = classes.get_parents(c_name)
+        cls_inst = classes.get_instance(c_name, outfile)
+        parents = classes.get_parents(cls_inst)
         if parents:
-            repl_str = '.. class:: {}\n\n'.format(c_name)
+            repl_str = '.. class:: {}\n\n'.format(cls_inst.name)
             child_str = '{}   Child of:'.format(repl_str)
             for i, parent in enumerate(parents):
                 child_str += ' :class:`{}`'.format(parent.get_parent_name())
@@ -309,29 +315,30 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
     return base_name, base_link, ret_str
 
 
-def format_graphviz_children(c_name):
+def format_graphviz_children(cls_inst):
 
-    def create_row(parent, children):
+    def _create_row(parent, children):
         ret_str = ''
         for child in children:
             ret_str += '{} [{url}, label="{label}"]'.format(child.name,
                                                     url=child.get_graphviz_link(),
                                                     label=child.name)
+            # Add spaces to make sphinx happy
             ret_str += '\n    '
             ret_str += '{} -- {}\n    '.format(parent.name, child.name)
         return ret_str
 
-    all_children = classes.get_children_rows(c_name)
+    all_children = classes.get_children_rows(cls_inst)
     ret_str = ''
     for parent, children in all_children:
-        ret_str += create_row(parent, children)
+        ret_str += _create_row(parent, children)
 
     return ret_str
 
 
-def create_directive(c_name):
-    children = format_graphviz_children(c_name)
-    base_cls, base_link, parents = format_graphviz_parents(c_name)
+def create_directive(cls_inst):
+    children = format_graphviz_children(cls_inst)
+    base_cls, base_link, parents = format_graphviz_parents(cls_inst.name)
     graph_directive = None
 
     if parents or children:
@@ -349,7 +356,7 @@ def create_directive(c_name):
     {base_cls} [shape=house, {link}]
     {parents}
     {child_list}
-    }}\n""".format(cur_cls=c_name,
+    }}\n""".format(cur_cls=cls_inst.name,
                    base_cls=base_cls,
                    link=base_link,
                    parents=parents,
@@ -359,10 +366,13 @@ def create_directive(c_name):
     return graph_directive
 
 
-def add_dependency_graph(rst_data):
+def add_dependency_graph(rst_data, outfile):
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
     for c_name in found_cls:
-        directive = create_directive(c_name)
+        cls_inst = classes.get_instance(c_name, outfile)
+        if not isinstance(cls_inst, LuaClass):
+            raise
+        directive = create_directive(cls_inst)
         if directive:
             repl_str = '.. class:: {}\n\n'.format(c_name)
             directive_str = '{}\n{}'.format(directive, repl_str)
