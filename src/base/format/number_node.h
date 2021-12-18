@@ -26,7 +26,11 @@ namespace format_impl {
 
 template <typename Number> struct NumberNodeT : FormatNode {
 	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool p0x, const bool uc)
-	   : FormatNode(f, w, 0), base_(hex ? 16 : 10), hexadecimal_(hex), print0x_(p0x), uppercase_(uc) {
+	   : FormatNode(f, w, 0),
+	     base_(hex ? 16 : 10),
+	     hexadecimal_(hex),
+	     print0x_(p0x),
+	     uppercase_(uc) {
 		if ((flags_ & kLeftAlign) != 0 && (flags_ & kPadWith0) != 0) {
 			throw wexception("'-' and '0' can not be combined");
 		}
