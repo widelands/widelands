@@ -69,7 +69,7 @@ struct FloatNode : FormatNode {
 			as_int = static_cast<int64_t>(arg);
 		}
 
-		if (min_width_ == 0 || flags_ & kLeftAlign) {
+		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
 			// The easy case: Just start writing.
 			size_t written = 0;
 			if (arg < 0) {
@@ -82,7 +82,7 @@ struct FloatNode : FormatNode {
 					++out;
 					++written;
 				}
-			} else if (flags_ & kNumberSign) {
+			} else if ((flags_ & kNumberSign) != 0) {
 				*out = '+';
 				++out;
 				++written;
@@ -174,7 +174,7 @@ struct FloatNode : FormatNode {
 		}
 
 		size_t required_width = nr_digits_before_decimal + decimal_sep_len + nr_digits_after_decimal;
-		if (arg < 0 || flags_ & kNumberSign) {
+		if (arg < 0 || (flags_ & kNumberSign) != 0) {
 			required_width += (localize && arg < 0 ? kLocalizedMinusSignLength : 1);
 		}
 
@@ -195,7 +195,7 @@ struct FloatNode : FormatNode {
 				*out = '-';
 				++out;
 			}
-		} else if (flags_ & kNumberSign) {
+		} else if ((flags_ & kNumberSign) != 0) {
 			*out = '+';
 			++out;
 		}

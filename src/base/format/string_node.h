@@ -28,10 +28,10 @@ namespace format_impl {
 
 struct StringNode : FormatNode {
 	StringNode(const uint8_t f, const size_t w, const int32_t p) : FormatNode(f, w, p) {
-		if (flags_ & kNumberSign) {
+		if ((flags_ & kNumberSign) != 0) {
 			throw wexception("%%s can not have '+' specifier");
 		}
-		if (flags_ & kPadWith0) {
+		if ((flags_ & kPadWith0) != 0) {
 			throw wexception("%%s can not have '0' specifier");
 		}
 	}
@@ -42,7 +42,7 @@ struct StringNode : FormatNode {
 		}
 		const char* arg = arg_u.string_val;
 
-		if (min_width_ == 0 || flags_ & kLeftAlign) {
+		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
 			// The easy case: Just start writing.
 			size_t written = 0;
 			for (const char* a = arg; *a && written < precision_; ++a, ++out, ++written) {

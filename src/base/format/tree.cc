@@ -35,7 +35,7 @@ const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
 const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
 const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
-const UintNode pointer_node_(kNone, 0, true, false);
+const UintNode pointer_node_(kNone, 0, true, true, false);
 
 std::string to_string(const AbstractNode::ArgType t) {
 	switch (t) {
@@ -72,7 +72,7 @@ static bool has_positional_node;
 static bool has_unpositional_node;
 
 static inline void add_flag_if_not_present(const Flags f, const char d) {
-	if (flags & f) {
+	if ((flags & f) != 0) {
 		throw wexception("Repeated flag '%c'", d);
 	}
 	flags |= f;
@@ -213,9 +213,9 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		for (; *format_string == 'l'; ++format_string) {
 		}
 		if (*format_string == 'd' || *format_string == 'i') {
-			return std::unique_ptr<AbstractNode>(new IntNode(flags, min_width, false, false));
+			return std::unique_ptr<AbstractNode>(new IntNode(flags, min_width, false, false, false));
 		} else if (*format_string == 'u') {
-			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false));
+			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
 		} else {
 			throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 		}
@@ -227,7 +227,7 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 			throw wexception("integers can not have precision");
 		}
 		return std::unique_ptr<AbstractNode>(
-		   new IntNode(flags, min_width, true, *format_string == 'X'));
+		   new IntNode(flags, min_width, true, false, *format_string == 'X'));
 	}
 
 	case 'p':
@@ -236,7 +236,7 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 			throw wexception("pointers can not have precision");
 		}
 		return std::unique_ptr<AbstractNode>(
-		   new UintNode(flags, min_width, true, *format_string == 'P'));
+		   new UintNode(flags, min_width, true, true, *format_string == 'P'));
 	}
 
 	default:

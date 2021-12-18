@@ -25,10 +25,13 @@
 namespace format_impl {
 
 template <typename Number> struct NumberNodeT : FormatNode {
-	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool uc)
-	   : FormatNode(f, w, 0), base_(hex ? 16 : 10), hexadecimal_(hex), uppercase_(uc) {
-		if ((flags_ & kLeftAlign) && (flags_ & kPadWith0)) {
+	NumberNodeT(const uint8_t f, const size_t w, const bool hex, const bool p0x, const bool uc)
+	   : FormatNode(f, w, 0), base_(hex ? 16 : 10), hexadecimal_(hex), print0x_(p0x), uppercase_(uc) {
+		if ((flags_ & kLeftAlign) != 0 && (flags_ & kPadWith0) != 0) {
 			throw wexception("'-' and '0' can not be combined");
+		}
+		if (print0x_ && !hexadecimal_) {
+			throw wexception("0x can only be prefixed to hexadecimal numbers");
 		}
 	}
 
@@ -59,7 +62,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			                 to_string(t).c_str());
 		}
 
-		if (min_width_ == 0 || flags_ & kLeftAlign) {
+		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
 			// The easy case: Just start writing.
 			size_t written = 0;
 			if (arg < 0) {
@@ -72,7 +75,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 					++out;
 					++written;
 				}
-			} else if (flags_ & kNumberSign) {
+			} else if ((flags_ & kNumberSign) != 0) {
 				if (localize && arg == 0) {
 					for (const char* c = kDigitWidthSpace; *c; ++c, ++out, ++written) {
 						*out = *c;
@@ -83,7 +86,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 					++written;
 				}
 			}
-			if (hexadecimal_) {
+			if (print0x_) {
 				*out = '0';
 				*(out + 1) = 'x';
 				out += 2;
@@ -136,10 +139,10 @@ template <typename Number> struct NumberNodeT : FormatNode {
 		}
 
 		size_t required_width = nr_digits;
-		if (hexadecimal_) {
+		if (print0x_) {
 			required_width += 2;
 		}
-		if (arg < 0 || flags_ & kNumberSign) {
+		if (arg < 0 || (flags_ & kNumberSign) != 0) {
 			required_width += localize ? (arg == 0) ? kDigitWidthSpaceLength :
 			                             (arg < 0)  ? kLocalizedMinusSignLength :
                                                    1 :
@@ -161,7 +164,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 				*out = '-';
 				++out;
 			}
-		} else if (flags_ & kNumberSign) {
+		} else if ((flags_ & kNumberSign) != 0) {
 			if (localize && arg == 0) {
 				for (const char* c = kDigitWidthSpace; *c; ++c, ++out) {
 					*out = *c;
@@ -171,7 +174,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 				++out;
 			}
 		}
-		if (hexadecimal_) {
+		if (print0x_) {
 			*out = '0';
 			*(out + 1) = 'x';
 			out += 2;
@@ -209,12 +212,12 @@ template <typename Number> struct NumberNodeT : FormatNode {
 
 private:
 	const Number base_;
-	const bool hexadecimal_, uppercase_;
+	const bool hexadecimal_, print0x_, uppercase_;
 };
 using IntNode = NumberNodeT<int64_t>;
 using UintNode = NumberNodeT<uint64_t>;
 template <typename NumberT>
-const NumberNodeT<NumberT> NumberNodeT<NumberT>::node_(kNone, 0, false, false);
+const NumberNodeT<NumberT> NumberNodeT<NumberT>::node_(kNone, 0, false, false, false);
 extern const UintNode pointer_node_;
 
 }  // namespace format_impl
