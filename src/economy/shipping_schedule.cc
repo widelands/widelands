@@ -942,7 +942,8 @@ Duration ShippingSchedule::update(Game& game) {
 			cargo_to.insert(si.destination_dock_.serial());
 		}
 		for (auto it = plans_[ship].begin(); it != plans_[ship].end();) {
-			if (it->load_there.empty() && !it->expedition && (cargo_to.count(it->dock.serial()) == 0u)) {
+			if (it->load_there.empty() && !it->expedition &&
+			    (cargo_to.count(it->dock.serial()) == 0u)) {
 				it = plans_[ship].erase(it);
 				if (it != plans_[ship].end()) {
 					if (previt == plans_[ship].end()) {

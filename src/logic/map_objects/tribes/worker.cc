@@ -1099,13 +1099,15 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		}
 		const Immovable& ri = game.create_immovable(
 		   position,
-		   t.get_resource_indicator(
-		      rdescr, ((rdescr != nullptr) && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
+		   t.get_resource_indicator(rdescr, ((rdescr != nullptr) && rdescr->detectable()) ?
+                                             position.field->get_resources_amount() :
+                                             0),
 		   get_owner());
 
 		// Geologist also sends a message notifying the player
 		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
-		if ((rdescr != nullptr) && rdescr->detectable() && (position.field->get_resources_amount() != 0u)) {
+		if ((rdescr != nullptr) && rdescr->detectable() &&
+		    (position.field->get_resources_amount() != 0u)) {
 			const std::string rt_description = as_mapobject_message(
 			   ri.descr().name(), g_image_cache->get(rdescr->representative_image())->width(),
 			   _("A geologist found resources."));
@@ -1991,7 +1993,7 @@ void Worker::start_task_return(Game& game, bool const dropware) {
 	PlayerImmovable* const location = get_location(game);
 
 	if ((location == nullptr) || (location->descr().type() < MapObjectType::BUILDING &&
-	                  location->descr().type() != MapObjectType::FLAG)) {
+	                              location->descr().type() != MapObjectType::FLAG)) {
 		throw wexception("MO(%u): start_task_return(): not owned by building or flag", serial());
 	}
 
@@ -2798,7 +2800,7 @@ void Worker::geologist_update(Game& game, State& state) {
 		BaseImmovable* const imm = map.get_immovable(get_position());
 
 		if ((imm == nullptr) || (imm->get_size() == BaseImmovable::NONE &&
-		             !imm->has_attribute(resource_indicator_attribute))) {
+		                         !imm->has_attribute(resource_indicator_attribute))) {
 			--state.ivar1;
 			return start_task_program(game, state.svar1);
 		}
@@ -2822,10 +2824,10 @@ void Worker::geologist_update(Game& game, State& state) {
 				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
 				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
 					if ((descriptions
-					       .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
-                                                                    t.node.field->terrain_r()))
-					       ->get_is() &
-					    TerrainDescription::Is::kMineable) != 0) {
+					        .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
+                                                                     t.node.field->terrain_r()))
+					        ->get_is() &
+					     TerrainDescription::Is::kMineable) != 0) {
 						return true;
 					}
 				}

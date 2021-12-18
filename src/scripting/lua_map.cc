@@ -3797,7 +3797,8 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 		const Widelands::DescriptionIndex& ware_index = descriptions.safe_ware_index(get()->name());
 		int tribeindex = descriptions.tribe_index(tribename);
 		lua_pushboolean(
-		   L, static_cast<int>(descriptions.get_tribe_descr(tribeindex)->is_construction_material(ware_index)));
+		   L, static_cast<int>(
+		         descriptions.get_tribe_descr(tribeindex)->is_construction_material(ware_index)));
 	} else {
 		lua_pushboolean(L, 0);
 	}
@@ -4700,7 +4701,8 @@ int LuaMapObject::__eq(lua_State* L) {
 	           you == nullptr) {  // One of the objects is destroyed: they are distinct
 		lua_pushboolean(L, 0);
 	} else {  // Compare their serial number.
-		lua_pushboolean(L, static_cast<int>(other->get(L, egbase)->serial() == get(L, egbase)->serial()));
+		lua_pushboolean(
+		   L, static_cast<int>(other->get(L, egbase)->serial() == get(L, egbase)->serial()));
 	}
 
 	return 1;
@@ -8250,7 +8252,8 @@ int LuaField::region(lua_State* L) {
 int LuaField::has_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(L, static_cast<int>(check_has_caps(L, query, f, f.field->nodecaps(), get_egbase(L).map())));
+	lua_pushboolean(
+	   L, static_cast<int>(check_has_caps(L, query, f, f.field->nodecaps(), get_egbase(L).map())));
 	return 1;
 }
 
@@ -8267,7 +8270,8 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(L, static_cast<int>(check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map())));
+	lua_pushboolean(
+	   L, static_cast<int>(check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map())));
 	return 1;
 }
 

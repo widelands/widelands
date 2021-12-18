@@ -397,14 +397,16 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 			++priority;
 			if (ware != nullptr) {
 				assert(!worker);
-				if ((ware->get_transfer() != nullptr) && (ware->get_transfer()->get_request() != nullptr)) {
+				if ((ware->get_transfer() != nullptr) &&
+				    (ware->get_transfer()->get_request() != nullptr)) {
 					// I don't know when this shouldn't be true,
 					// but the regression tests assure me that it's possible…
 					priority += ware->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			} else {
 				assert(worker);
-				if ((worker->get_transfer() != nullptr) && (worker->get_transfer()->get_request() != nullptr)) {
+				if ((worker->get_transfer() != nullptr) &&
+				    (worker->get_transfer()->get_request() != nullptr)) {
 					priority +=
 					   worker->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
@@ -463,7 +465,8 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	} else {
 		molog(egbase.get_gametime(),
 		      "PortDock without a warehouse in fleet %u, expedition_ready: %s, waiting: %" PRIuS "\n",
-		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false", waiting_.size());
+		      fleet_ != nullptr ? fleet_->serial() : 0, expedition_ready_ ? "true" : "false",
+		      waiting_.size());
 	}
 
 	for (const ShippingItem& shipping_item : waiting_) {

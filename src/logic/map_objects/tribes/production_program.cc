@@ -1061,7 +1061,8 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_.get() != 0u ? duration_ : Duration(0), ps.top_state().phase);
+	return ps.program_step(
+	   game, duration_.get() != 0u ? duration_ : Duration(0), ps.top_state().phase);
 }
 
 /* RST
@@ -1076,8 +1077,8 @@ ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argume
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, parameters.animation);
-	return ps.program_step(
-	   game, parameters.duration.get() != 0u ? parameters.duration : Duration(0), ps.top_state().phase);
+	return ps.program_step(game, parameters.duration.get() != 0u ? parameters.duration : Duration(0),
+	                       ps.top_state().phase);
 }
 
 /* RST
@@ -2026,7 +2027,8 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
 	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
-	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr)) != 0u) {
+	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr)) !=
+	    0u) {
 		state.objvar = immovables[0].object;
 
 		psite.working_positions_.at(psite.main_worker_)

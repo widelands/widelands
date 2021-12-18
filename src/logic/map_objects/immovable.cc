@@ -465,7 +465,8 @@ void Immovable::draw_construction(const Time& gametime,
 		   dynamic_cast<const ImmovableProgram::ActConstruct*>(&(*program_)[program_ptr_]);
 	}
 
-	const Duration steptime = constructionact != nullptr ? constructionact->buildtime() : Duration(5000);
+	const Duration steptime =
+	   constructionact != nullptr ? constructionact->buildtime() : Duration(5000);
 
 	Duration done(0);
 	if (anim_construction_done_ > 0) {

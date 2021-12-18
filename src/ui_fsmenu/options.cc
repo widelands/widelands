@@ -455,7 +455,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	show_statistics_.set_state((opt.display_flags & InteractiveBase::dfShowStatistics) != 0);
 	show_soldier_levels_.set_state((opt.display_flags & InteractiveBase::dfShowSoldierLevels) != 0);
 	show_buildings_.set_state((opt.display_flags & InteractiveBase::dfShowBuildings) != 0);
-	show_workarea_overlap_.set_state((opt.display_flags & InteractiveBase::dfShowWorkareaOverlap) != 0);
+	show_workarea_overlap_.set_state((opt.display_flags & InteractiveBase::dfShowWorkareaOverlap) !=
+	                                 0);
 
 	// Language options
 	add_languages_to_list(opt.language);

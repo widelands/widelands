@@ -81,7 +81,8 @@ void MapBuildingPacket::read(FileSystem& fs,
 							if (!tribe.has_building(index) &&
 							    !((bd != nullptr) && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError("tribe %s does not define building type \"%s\"",
-								                    tribe.name().c_str(), bd != nullptr ? bd->name().c_str() : name);
+								                    tribe.name().c_str(),
+								                    bd != nullptr ? bd->name().c_str() : name);
 							}
 
 							//  Now, create this Building, take extra special care for

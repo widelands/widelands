@@ -165,8 +165,9 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
-	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
-	                                         (checkbox_ != nullptr ? checkbox_->get_h() + padding : 0));
+	main_box->set_size(
+	   textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
+	                         (checkbox_ != nullptr ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
 	center_to_parent();
@@ -201,7 +202,8 @@ void BulldozeConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
-	if ((todestroy == nullptr) || (building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
+	if ((todestroy == nullptr) || (building == nullptr) ||
+	    !iaplayer().can_act(building->owner().player_number()) ||
 	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) == 0u)) {
 		die();
 	}
@@ -215,7 +217,8 @@ void BulldozeConfirm::ok() {
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(game));
 
-	if ((todestroy != nullptr) && (building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+	if ((todestroy != nullptr) && (building != nullptr) &&
+	    iaplayer().can_act(building->owner().player_number()) &&
 	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) != 0u)) {
 		game.send_player_bulldoze(*todestroy, (SDL_GetModState() & KMOD_CTRL) != 0);
 	}
@@ -348,7 +351,8 @@ void EnhanceConfirm::ok() {
 		upcast(Widelands::Building, building, object_.get(game));
 		if ((building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
 		    ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u)) {
-			game.send_player_enhance_building(*building, id_, (checkbox_ != nullptr) && checkbox_->get_state());
+			game.send_player_enhance_building(
+			   *building, id_, (checkbox_ != nullptr) && checkbox_->get_state());
 		}
 	}
 

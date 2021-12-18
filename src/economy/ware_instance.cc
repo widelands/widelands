@@ -367,11 +367,11 @@ void WareInstance::update(Game& game) {
 		}
 
 		if (upcast(Flag, flag, location)) {
-			flag->call_carrier(
-			   game, *this,
-			   (dynamic_cast<Building const*>(nextstep) != nullptr) && &nextstep->base_flag() != location ?
-               &nextstep->base_flag() :
-               nextstep);
+			flag->call_carrier(game, *this,
+			                   (dynamic_cast<Building const*>(nextstep) != nullptr) &&
+			                         &nextstep->base_flag() != location ?
+                               &nextstep->base_flag() :
+                               nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -514,7 +514,8 @@ void WareInstance::cancel_moving() {
  * has been completed successfully.
  */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
-	return transfer_ != nullptr ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
+	return transfer_ != nullptr ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) :
+                                 nullptr;
 }
 
 void WareInstance::log_general_info(const EditorGameBase& egbase) const {

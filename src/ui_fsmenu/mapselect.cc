@@ -368,9 +368,11 @@ void MapSelect::fill_table() {
 					}
 				}
 				// Backwards compatibility
-				if ((mapdata.tags.count("balanced") == 0u) && (mapdata.tags.count("unbalanced") == 0u)) {
+				if ((mapdata.tags.count("balanced") == 0u) &&
+				    (mapdata.tags.count("unbalanced") == 0u)) {
 					unspecified_balancing_found = true;
-				} else if ((mapdata.tags.count("balanced") != 0u) && (mapdata.tags.count("unbalanced") != 0u)) {
+				} else if ((mapdata.tags.count("balanced") != 0u) &&
+				           (mapdata.tags.count("unbalanced") != 0u)) {
 					log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
 					         "packet\n",
 					         mapfilename.c_str());

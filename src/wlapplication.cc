@@ -959,7 +959,8 @@ void WLApplication::handle_input(InputCallback const* cb) {
 		case SDL_MOUSEMOTION:
 			mouse_position_ = Vector2i(ev.motion.x, ev.motion.y);
 
-			if (((ev.motion.xrel != 0) || (ev.motion.yrel != 0)) && (cb != nullptr) && (cb->mouse_move != nullptr)) {
+			if (((ev.motion.xrel != 0) || (ev.motion.yrel != 0)) && (cb != nullptr) &&
+			    (cb->mouse_move != nullptr)) {
 				cb->mouse_move(
 				   ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
 			}

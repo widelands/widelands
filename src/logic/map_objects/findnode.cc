@@ -83,17 +83,17 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 	case sizeSwim: {
 		const Descriptions& world = egbase.descriptions();
 		return ((world.get_terrain_descr(coord.field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) != 0) ||
+		         TerrainDescription::Is::kWater) != 0) ||
 		       ((world.get_terrain_descr(coord.field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater) != 0) ||
+		         TerrainDescription::Is::kWater) != 0) ||
 		       ((world.get_terrain_descr(map.tl_n(coord).field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) != 0) ||
+		         TerrainDescription::Is::kWater) != 0) ||
 		       ((world.get_terrain_descr(map.tl_n(coord).field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater) != 0) ||
+		         TerrainDescription::Is::kWater) != 0) ||
 		       ((world.get_terrain_descr(map.tr_n(coord).field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) != 0) ||
+		         TerrainDescription::Is::kWater) != 0) ||
 		       ((world.get_terrain_descr(map.l_n(coord).field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater) != 0);
+		         TerrainDescription::Is::kWater) != 0);
 	}
 	case sizeAny:
 		return true;

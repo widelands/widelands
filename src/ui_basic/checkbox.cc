@@ -145,7 +145,7 @@ void Statebox::set_state(bool const on, const bool send_signal) {
 
 std::vector<Recti> Statebox::focus_overlay_rects() {
 	return (flags_ & Has_Custom_Picture) != 0 ? Panel::focus_overlay_rects(1, 1, -1) :
-                                          Panel::focus_overlay_rects();
+                                               Panel::focus_overlay_rects();
 }
 
 /**

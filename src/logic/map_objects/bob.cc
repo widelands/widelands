@@ -672,8 +672,9 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove = ((state.ivar2 != 0) && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
-	                                    path->get_nsteps());
+	bool forcemove =
+	   ((state.ivar2 != 0) &&
+	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);

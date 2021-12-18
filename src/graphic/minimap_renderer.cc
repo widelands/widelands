@@ -71,9 +71,11 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		    (f.field->get_immovable() != nullptr)) {
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
 			if ((((layers & MiniMapLayer::Flag) != 0) && type == Widelands::MapObjectType::FLAG) ||
-			    (((layers & MiniMapLayer::Building) != 0) && type >= Widelands::MapObjectType::BUILDING)) {
+			    (((layers & MiniMapLayer::Building) != 0) &&
+			     type >= Widelands::MapObjectType::BUILDING)) {
 				color = kWhite;
-			} else if (((layers & MiniMapLayer::Road) != 0) && type >= Widelands::MapObjectType::ROADBASE &&
+			} else if (((layers & MiniMapLayer::Road) != 0) &&
+			           type >= Widelands::MapObjectType::ROADBASE &&
 			           type <= Widelands::MapObjectType::WATERWAY) {
 				color = blend_color(color, kWhite);
 			}

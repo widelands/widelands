@@ -203,8 +203,8 @@ int LuaEditorGameBase::immovable_exists(lua_State* L) {
 	const std::string immovable_name = luaL_checkstring(L, 2);
 	Notifications::publish(Widelands::NoteMapObjectDescription(
 	   immovable_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
-	lua_pushboolean(
-	   L, static_cast<int>(get_egbase(L).descriptions().immovable_index(immovable_name) != Widelands::INVALID_INDEX));
+	lua_pushboolean(L, static_cast<int>(get_egbase(L).descriptions().immovable_index(
+	                                       immovable_name) != Widelands::INVALID_INDEX));
 	return 1;
 }
 

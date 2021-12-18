@@ -635,7 +635,8 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 }
 
 const Image* MapObject::representative_image() const {
-	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() : nullptr);
+	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
+                                                                nullptr);
 }
 
 /**

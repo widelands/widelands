@@ -284,7 +284,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
 	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
-                          WarePriority::kNormal);
+                                     WarePriority::kNormal);
 
 	// Workaround for bug #4809 Kicking a worker let him go the building where he was kicked off
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
@@ -304,8 +304,8 @@ uint32_t Request::get_priority(const int32_t cost) const {
 		return 0;
 	}
 
-	const uint32_t req_time =
-	   (target_constructionsite_ != nullptr ? get_required_time().get() : get_last_request_time().get());
+	const uint32_t req_time = (target_constructionsite_ != nullptr ? get_required_time().get() :
+                                                                    get_last_request_time().get());
 	return
 	   // Linear scaling of request priority depending on
 	   // the building's user-specified ware priority.

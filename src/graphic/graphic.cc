@@ -264,7 +264,8 @@ void Graphic::set_maximized(const bool to_maximize) {
 
 bool Graphic::fullscreen() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	return ((flags & SDL_WINDOW_FULLSCREEN) != 0u) || ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
+	return ((flags & SDL_WINDOW_FULLSCREEN) != 0u) ||
+	       ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
 }
 
 void Graphic::set_fullscreen(const bool value) {

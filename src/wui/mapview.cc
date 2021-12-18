@@ -322,7 +322,8 @@ MapView::MapView(
      map_(map),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false),
-     edge_scrolling_((parent != nullptr) && (parent->get_parent() == nullptr) /* not in watch windows */ &&
+     edge_scrolling_((parent != nullptr) &&
+                     (parent->get_parent() == nullptr) /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
      invert_movement_(get_config_bool("invert_movement", false)),
      is_scrolling_x_(0),
@@ -573,7 +574,7 @@ void MapView::think() {
 
 		const int16_t speed = (SDL_GetModState() & KMOD_CTRL) != 0  ? kEdgeScrollingSpeedFast :
 		                      (SDL_GetModState() & KMOD_SHIFT) != 0 ? kEdgeScrollingSpeedSlow :
-                                                               kEdgeScrollingSpeedNormal;
+                                                                    kEdgeScrollingSpeedNormal;
 		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
 }

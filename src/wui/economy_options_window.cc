@@ -480,7 +480,8 @@ constexpr Duration kThinkInterval(200);
 
 void EconomyOptionsWindow::think() {
 	const Time& time = player_->egbase().get_gametime();
-	if (time - time_last_thought_ < kThinkInterval || (player_->get_economy(ware_serial_) == nullptr) ||
+	if (time - time_last_thought_ < kThinkInterval ||
+	    (player_->get_economy(ware_serial_) == nullptr) ||
 	    (player_->get_economy(worker_serial_) == nullptr)) {
 		// If our economy has been deleted, die() was already called, no need to do anything
 		return;

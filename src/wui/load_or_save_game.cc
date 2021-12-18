@@ -31,7 +31,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave,
                                UI::Panel* table_parent,
                                UI::Panel* delete_button_parent)
-   : table_box_(new UI::Box(table_parent != nullptr ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
+   : table_box_(new UI::Box(
+        table_parent != nullptr ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description
@@ -40,16 +41,16 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
         style,
         filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
         g),
-     delete_(
-        new UI::Button(delete_button_parent != nullptr ? delete_button_parent : game_details()->button_box(),
-                       "delete",
-                       0,
-                       0,
-                       0,
-                       0,
-                       style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                          UI::ButtonStyle::kWuiSecondary,
-                       _("Delete"))),
+     delete_(new UI::Button(
+        delete_button_parent != nullptr ? delete_button_parent : game_details()->button_box(),
+        "delete",
+        0,
+        0,
+        0,
+        0,
+        style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                           UI::ButtonStyle::kWuiSecondary,
+        _("Delete"))),
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {

@@ -604,7 +604,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (work_steps_ == 0u) {         //  Happens for building without buildcost.
+	if (work_steps_ == 0u) {    //  Happens for building without buildcost.
 		schedule_destroy(game);  //  Complete the building immediately.
 	}
 
@@ -758,8 +758,8 @@ void ConstructionSite::draw(const Time& gametime,
 		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
 	}
 
-	info_.draw(
-	   point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0, player_color, dst);
+	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0,
+	           player_color, dst);
 
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);

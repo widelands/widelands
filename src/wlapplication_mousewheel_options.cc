@@ -156,8 +156,7 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
 
    {MousewheelOptionID::kMapScrollMod,
     MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
-   {MousewheelOptionID::kMapScroll,
-    MousewheelOption("move_map", MousewheelOptionType::kBool, 0u)},
+   {MousewheelOptionID::kMapScroll, MousewheelOption("move_map", MousewheelOptionType::kBool, 0u)},
 
    {MousewheelOptionID::kGameSpeedMod,
     MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},

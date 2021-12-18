@@ -243,7 +243,8 @@ void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what
 
 static bool layouting = false;
 void WareStatisticsMenu::layout() {
-	if (layouting || (tab_panel_ == nullptr) || (display_ == nullptr) || (slider_ == nullptr) || (main_box_ == nullptr)) {
+	if (layouting || (tab_panel_ == nullptr) || (display_ == nullptr) || (slider_ == nullptr) ||
+	    (main_box_ == nullptr)) {
 		return;
 	}
 	layouting = true;

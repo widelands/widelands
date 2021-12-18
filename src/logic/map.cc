@@ -266,7 +266,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
 				const DescriptionIndex resr = terr->get_default_resource();
 				const ResourceAmount default_amount = terr->get_default_resource_amount();
-				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) && default_amount > 0) {
+				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -277,7 +278,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
 				const DescriptionIndex resd = terd->get_default_resource();
 				const ResourceAmount default_amount = terd->get_default_resource_amount();
-				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) && default_amount > 0) {
+				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -291,7 +293,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
 				const DescriptionIndex resd = terd->get_default_resource();
 				const ResourceAmount default_amount = terd->get_default_resource_amount();
-				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) && default_amount > 0) {
+				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -305,7 +308,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
 				const DescriptionIndex resr = terr->get_default_resource();
 				const ResourceAmount default_amount = terr->get_default_resource_amount();
-				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) && default_amount > 0) {
+				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -1527,7 +1531,8 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 		//  3) General buildability check: if a "robust" MapObject is on this node
 		//  we cannot build anything on it. Exception: we can build flags on roads and waterways.
 		if (BaseImmovable* const imm = get_immovable(f)) {
-			if ((dynamic_cast<RoadBase const*>(imm) == nullptr) && imm->get_size() >= BaseImmovable::SMALL) {
+			if ((dynamic_cast<RoadBase const*>(imm) == nullptr) &&
+			    imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable()) {
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
@@ -1543,7 +1548,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	if ((caps & MOVECAPS_WALK) != 0) {
 		//  4b) Flags must be at least 2 edges apart
 		if (consider_mobs && (find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
-		                                     FindImmovableType(MapObjectType::FLAG)) != 0u)) {
+		                                      FindImmovableType(MapObjectType::FLAG)) != 0u)) {
 			return static_cast<NodeCaps>(caps);
 		}
 		caps |= BUILDCAPS_FLAG;
@@ -1717,7 +1722,8 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
 	for (const TerrainDescription::Is& is : terrains) {
-		if (((is & TerrainDescription::Is::kWater) != 0) || ((is & TerrainDescription::Is::kUnwalkable) != 0)) {
+		if (((is & TerrainDescription::Is::kWater) != 0) ||
+		    ((is & TerrainDescription::Is::kUnwalkable) != 0)) {
 			return BaseImmovable::NONE;
 		}
 		if ((is & TerrainDescription::Is::kMineable) != 0) {
@@ -2251,7 +2257,7 @@ int32_t Map::findpath(Coords instart,
 
 			// Calculate cost
 			cost = curpf->real_cost + ((flags & fpBidiCost) != 0u ? calc_bidi_cost(cur, *direction) :
-                                                           calc_cost(cur, *direction));
+                                                                 calc_cost(cur, *direction));
 
 			// If required (indicated by caps_sensitivity) we increase the path costs
 			// if the path is just crossing a field with building capabilities
@@ -2364,22 +2370,28 @@ bool Map::is_resource_valid(const Widelands::Descriptions& descriptions,
 	int32_t count = 0;
 
 	//  this field
-	count += static_cast<int>(descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres));
-	count += static_cast<int>(descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres));
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	get_neighbour(c, Widelands::WALK_NW, &f1);
-	count += static_cast<int>(descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
-	count += static_cast<int>(descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
 
 	//  top right neigbour
 	get_neighbour(c, Widelands::WALK_NE, &f1);
-	count += static_cast<int>(descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
 
 	//  left neighbour
 	get_neighbour(c, Widelands::WALK_W, &f1);
-	count += static_cast<int>(descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
 
 	return count > 1;
 }
