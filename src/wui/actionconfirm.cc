@@ -166,7 +166,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
 	button_box->set_size(textarea->get_w(), okbtn->get_h());
 	main_box->set_size(textarea->get_w(), textarea->get_h() + button_box->get_h() + 1.5 * padding +
-	                                         (checkbox_ ? checkbox_->get_h() + padding : 0));
+	                                         (checkbox_ != nullptr ? checkbox_->get_h() + padding : 0));
 	set_inner_size(main_box->get_w() + 2 * padding, main_box->get_h() + 2 * padding);
 
 	center_to_parent();
@@ -187,7 +187,7 @@ BulldozeConfirm::BulldozeConfirm(InteractivePlayer& parent,
                    _("Destroy building?"),
                    _("Do you really want to destroy this building?"),
                    building),
-     todestroy_(todestroy ? todestroy : &building) {
+     todestroy_(todestroy != nullptr ? todestroy : &building) {
 	// Nothing special to do
 }
 
@@ -201,8 +201,8 @@ void BulldozeConfirm::think() {
 	upcast(Widelands::Building, building, object_.get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(egbase));
 
-	if (!todestroy || !building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
+	if ((todestroy == nullptr) || (building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
+	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) == 0u)) {
 		die();
 	}
 }
@@ -215,9 +215,9 @@ void BulldozeConfirm::ok() {
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todestroy, todestroy_.get(game));
 
-	if (todestroy && building && iaplayer().can_act(building->owner().player_number()) &&
-	    (building->get_playercaps() & Widelands::Building::PCap_Bulldoze)) {
-		game.send_player_bulldoze(*todestroy, SDL_GetModState() & KMOD_CTRL);
+	if ((todestroy != nullptr) && (building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+	    ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) != 0u)) {
+		game.send_player_bulldoze(*todestroy, (SDL_GetModState() & KMOD_CTRL) != 0);
 	}
 
 	die();
@@ -247,7 +247,7 @@ DismantleConfirm::DismantleConfirm(InteractivePlayer& parent, Widelands::Buildin
                    _("Do you really want to dismantle this building?"),
                    building,
                    should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : "") {
-	if (checkbox_) {
+	if (checkbox_ != nullptr) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
 		                         "increasing the dismantling time"));
 		checkbox_->set_state(true);
@@ -263,8 +263,8 @@ void DismantleConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
-	    !(building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
+	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
+	    ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) == 0u)) {
 		die();
 	}
 }
@@ -277,9 +277,9 @@ void DismantleConfirm::ok() {
 	upcast(Widelands::Building, building, object_.get(game));
 	upcast(Widelands::PlayerImmovable, todismantle, object_.get(game));
 
-	if (building && iaplayer().can_act(building->owner().player_number()) &&
-	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
-		game.send_player_dismantle(*todismantle, checkbox_ && checkbox_->get_state());
+	if ((building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+	    ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) != 0u)) {
+		game.send_player_dismantle(*todismantle, (checkbox_ != nullptr) && checkbox_->get_state());
 		iaplayer().hide_workarea(building->get_position(), false);
 	}
 
@@ -309,7 +309,7 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
         should_allow_preserving_wares(building.descr()) ? _("Preserve wares") : ""),
      id_(id),
      still_under_construction_(still_under_construction) {
-	if (checkbox_) {
+	if (checkbox_ != nullptr) {
 		checkbox_->set_tooltip(_("Any wares left in the building will be dropped out by the builder, "
 		                         "increasing the enhancing time"));
 		checkbox_->set_state(true);
@@ -325,9 +325,9 @@ void EnhanceConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Building, building, object_.get(egbase));
 
-	if (!building || !iaplayer().can_act(building->owner().player_number()) ||
+	if ((building == nullptr) || !iaplayer().can_act(building->owner().player_number()) ||
 	    !(still_under_construction_ ||
-	      (building->get_playercaps() & Widelands::Building::PCap_Enhancable))) {
+	      ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u))) {
 		die();
 	}
 }
@@ -340,15 +340,15 @@ void EnhanceConfirm::ok() {
 
 	if (still_under_construction_) {
 		upcast(Widelands::ConstructionSite, cs, object_.get(game));
-		if (cs && iaplayer().can_act(cs->owner().player_number())) {
+		if ((cs != nullptr) && iaplayer().can_act(cs->owner().player_number())) {
 			game.send_player_enhance_building(
-			   *cs, cs->building().enhancement(), checkbox_ && checkbox_->get_state());
+			   *cs, cs->building().enhancement(), (checkbox_ != nullptr) && checkbox_->get_state());
 		}
 	} else {
 		upcast(Widelands::Building, building, object_.get(game));
-		if (building && iaplayer().can_act(building->owner().player_number()) &&
-		    (building->get_playercaps() & Widelands::Building::PCap_Enhancable)) {
-			game.send_player_enhance_building(*building, id_, checkbox_ && checkbox_->get_state());
+		if ((building != nullptr) && iaplayer().can_act(building->owner().player_number()) &&
+		    ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u)) {
+			game.send_player_enhance_building(*building, id_, (checkbox_ != nullptr) && checkbox_->get_state());
 		}
 	}
 
@@ -374,7 +374,7 @@ void ShipSinkConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number())) {
+	if ((ship == nullptr) || !iaplayer().can_act(ship->get_owner()->player_number())) {
 		die();
 	}
 }
@@ -386,7 +386,7 @@ void ShipSinkConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
+	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
 	}
 
@@ -412,7 +412,7 @@ void ShipCancelExpeditionConfirm::think() {
 	const Widelands::EditorGameBase& egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, object_.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()) ||
+	if ((ship == nullptr) || !iaplayer().can_act(ship->get_owner()->player_number()) ||
 	    !ship->state_is_expedition()) {
 		die();
 	}
@@ -425,7 +425,7 @@ void ShipCancelExpeditionConfirm::ok() {
 	Widelands::Game& game = iaplayer().game();
 	upcast(Widelands::Ship, ship, object_.get(game));
 
-	if (ship && iaplayer().can_act(ship->get_owner()->player_number()) &&
+	if ((ship != nullptr) && iaplayer().can_act(ship->get_owner()->player_number()) &&
 	    ship->get_ship_state() != Widelands::Ship::ShipStates::kTransport &&
 	    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionColonizing) {
 		game.send_player_cancel_expedition_ship(*ship);

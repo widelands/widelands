@@ -68,12 +68,12 @@ Flag::Flag()
  * since die() always calls cleanup() first.
  */
 Flag::~Flag() {
-	if (ware_filled_) {
+	if (ware_filled_ != 0) {
 		log_warn("Flag: ouch! wares left\n");
 	}
 	delete[] wares_;
 
-	if (building_) {
+	if (building_ != nullptr) {
 		log_warn("Flag: ouch! building left\n");
 	}
 
@@ -82,7 +82,7 @@ Flag::~Flag() {
 	}
 
 	for (const RoadBase* const road : roads_) {
-		if (road) {
+		if (road != nullptr) {
 			log_warn("Flag: ouch! road left\n");
 		}
 	}
@@ -139,31 +139,31 @@ Flag::Flag(EditorGameBase& egbase,
 	upcast(RoadBase, road, egbase.map().get_immovable(coords));
 	upcast(Game, game, &egbase);
 
-	if (game) {
-		if (ware_eco) {
+	if (game != nullptr) {
+		if (ware_eco != nullptr) {
 			// We're saveloading
 			ware_eco->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy(wwWARE) : owning_player->create_economy(wwWARE))
+			(road != nullptr ? road->get_economy(wwWARE) : owning_player->create_economy(wwWARE))
 			   ->add_flag(*this);
 		}
-		if (worker_eco) {
+		if (worker_eco != nullptr) {
 			// We're saveloading
 			worker_eco->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy(wwWORKER) : owning_player->create_economy(wwWORKER))
+			(road != nullptr ? road->get_economy(wwWORKER) : owning_player->create_economy(wwWORKER))
 			   ->add_flag(*this);
 		}
-		if (road && !ware_eco && !worker_eco) {
+		if ((road != nullptr) && (ware_eco == nullptr) && (worker_eco == nullptr)) {
 			road->presplit(*game, coords);
 		}
 	}
 
 	init(egbase);
 
-	if (!ware_eco && !worker_eco && road && game) {
+	if ((ware_eco == nullptr) && (worker_eco == nullptr) && (road != nullptr) && (game != nullptr)) {
 		road->postsplit(*game, *this);
 	}
 }
@@ -202,18 +202,18 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	if (building_) {
+	if (building_ != nullptr) {
 		building_->set_economy(e, type);
 	}
 
 	for (const FlagJob& temp_job : flag_jobs_) {
-		if (temp_job.request && temp_job.request->get_type() == type) {
+		if ((temp_job.request != nullptr) && temp_job.request->get_type() == type) {
 			temp_job.request->set_economy(e);
 		}
 	}
 
 	for (RoadBase* const road : roads_) {
-		if (road) {
+		if (road != nullptr) {
 			road->set_economy(e, type);
 		}
 	}
@@ -287,7 +287,7 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
  */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	for (RoadBase* const road : roads_) {
-		if (!road) {
+		if (road == nullptr) {
 			continue;
 		}
 
@@ -313,7 +313,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 		neighbours.push_back(n);
 	}
 
-	if (building_ && building_->descr().get_isport()) {
+	if ((building_ != nullptr) && building_->descr().get_isport()) {
 		Warehouse* wh = dynamic_cast<Warehouse*>(building_);
 		if (PortDock* pd = wh->get_portdock()) {
 			pd->add_neighbours(neighbours);
@@ -326,7 +326,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
  */
 RoadBase* Flag::get_roadbase(Flag& flag) {
 	for (RoadBase* const road : roads_) {
-		if (road) {
+		if (road != nullptr) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
@@ -348,13 +348,13 @@ Road* Flag::get_road(Flag& flag) {
 }
 
 Road* Flag::get_road(uint8_t const dir) const {
-	if (roads_[dir - 1] && Road::is_road_descr(&roads_[dir - 1]->descr())) {
+	if ((roads_[dir - 1] != nullptr) && Road::is_road_descr(&roads_[dir - 1]->descr())) {
 		return dynamic_cast<Road*>(roads_[dir - 1]);
 	}
 	return nullptr;
 }
 Waterway* Flag::get_waterway(uint8_t const dir) const {
-	if (roads_[dir - 1] && Waterway::is_waterway_descr(&roads_[dir - 1]->descr())) {
+	if ((roads_[dir - 1] != nullptr) && Waterway::is_waterway_descr(&roads_[dir - 1]->descr())) {
 		return dynamic_cast<Waterway*>(roads_[dir - 1]);
 	}
 	return nullptr;
@@ -397,7 +397,7 @@ uint8_t Flag::nr_of_waterways() const {
 }
 
 bool Flag::is_dead_end() const {
-	if (get_building()) {
+	if (get_building() != nullptr) {
 		return false;
 	}
 	Flag const* first_other_flag = nullptr;
@@ -406,7 +406,7 @@ bool Flag::is_dead_end() const {
 		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
-			if (first_other_flag) {
+			if (first_other_flag != nullptr) {
 				if (&other != first_other_flag) {
 					return false;
 				}
@@ -457,7 +457,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
 	pi.priority = 0;
 
 	Transfer* trans = ware.get_transfer();
-	if (trans) {
+	if (trans != nullptr) {
 		uint32_t trans_steps = trans->get_steps_left();
 		if (trans_steps < 3) {
 			pi.priority = 2;
@@ -466,7 +466,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
 		}
 
 		Request* req = trans->get_request();
-		if (req) {
+		if (req != nullptr) {
 			pi.priority = pi.priority + req->get_normalized_transfer_priority();
 		}
 	}
@@ -577,7 +577,7 @@ void Flag::wake_up_capacity_queue(Game& game) {
 	while (!capacity_wait_.empty()) {
 		Worker* const w = capacity_wait_.front().get(game);
 		capacity_wait_.pop_front();
-		if (w && w->wakeup_flag_capacity(game, *this)) {
+		if ((w != nullptr) && w->wakeup_flag_capacity(game, *this)) {
 			break;
 		}
 	}
@@ -627,7 +627,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
  */
 void Flag::propagate_promoted_road(Road* const promoted_road) {
 	// Abort if flag has a building attached to it
-	if (building_) {
+	if (building_ != nullptr) {
 		return;
 	}
 
@@ -635,7 +635,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	int32_t sum = 0;
 	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
-		if (road && road != promoted_road) {
+		if ((road != nullptr) && road != promoted_road) {
 			sum += kRoadMaxWallet + road->wallet() * road->wallet();
 		}
 	}
@@ -643,7 +643,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	// Distribute propagation coins in a smart way
 	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
-		if (road && !road->is_busy()) {
+		if ((road != nullptr) && !road->is_busy()) {
 			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
 			                    (kRoadMaxWallet + road->wallet() * road->wallet()) / sum);
 		}
@@ -729,7 +729,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 		pi = &wares_[i];
 
 		// Deal with the non-moving case quickly
-		if (!nextstep) {
+		if (nextstep == nullptr) {
 			pi->nextstep = nullptr;
 			pi->pending = true;
 			return;
@@ -764,7 +764,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 			Flag* other;
 			RoadBase::FlagId flagid;
 
-			if (!road) {
+			if (road == nullptr) {
 				continue;
 			}
 
@@ -834,20 +834,20 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		flag_jobs_.erase(flag_jobs_.begin());
 	}
 
-	while (ware_filled_) {
+	while (ware_filled_ != 0) {
 		WareInstance& ware = *wares_[--ware_filled_].ware;
 
 		ware.set_location(egbase, nullptr);
 		ware.destroy(egbase);
 	}
 
-	if (building_) {
+	if (building_ != nullptr) {
 		building_->remove(egbase);  //  immediate death
 		assert(!building_);
 	}
 
 	for (RoadBase* rb : roads_) {
-		if (rb) {
+		if (rb != nullptr) {
 			rb->remove(egbase);  //  immediate death
 		}
 	}
@@ -906,7 +906,7 @@ void Flag::draw(const Time& gametime,
  * when a player removes a flag.
  */
 void Flag::destroy(EditorGameBase& egbase) {
-	if (building_) {
+	if (building_ != nullptr) {
 		building_->destroy(egbase);
 		assert(!building_);
 	}
@@ -937,7 +937,7 @@ void Flag::act(Game& game, uint32_t) {
 		if (it->type == FlagJob::Type::kScout) {
 			ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
 			   *this, owner().tribe().scouts_house(), true);
-			if (ps) {
+			if (ps != nullptr) {
 				Worker* worker = ps->working_positions()->at(0).worker.get(game);
 				assert(worker);
 				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps &&
@@ -1021,7 +1021,7 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
 
-	if (ware_filled_) {
+	if (ware_filled_ != 0) {
 		molog(egbase.get_gametime(), "Wares at flag:\n");
 		for (int i = 0; i < ware_filled_; ++i) {
 			PendingWare& pi = wares_[i];

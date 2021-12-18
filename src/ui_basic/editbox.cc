@@ -205,7 +205,7 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 
 bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	// state != 0 -> mouse button is pressed
-	if (state && get_can_focus()) {
+	if ((state != 0u) && get_can_focus()) {
 		select_until(m_->caret);
 		set_caret_to_cursor_pos(x);
 		select_until(m_->caret);
@@ -271,7 +271,7 @@ int EditBox::calculate_text_width(int pos) const {
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && SDL_HasClipboardText()) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && (SDL_HasClipboardText() != 0u)) {
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
 			}
@@ -356,19 +356,19 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
 
-				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = prev_char(m_->caret);
-					while (newpos > 0 && isspace(m_->text[newpos])) {
+					while (newpos > 0 && (isspace(m_->text[newpos]) != 0)) {
 						newpos = prev_char(newpos);
 					}
 					while (newpos > 0) {
 						uint32_t prev = prev_char(newpos);
-						if (isspace(m_->text[prev])) {
+						if (isspace(m_->text[prev]) != 0) {
 							break;
 						}
 						newpos = prev;
 					}
-					if (SDL_GetModState() & KMOD_SHIFT) {
+					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						reset_selection();
@@ -376,7 +376,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					m_->caret = newpos;
 
 				} else {
-					if (SDL_GetModState() & KMOD_SHIFT) {
+					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 						select_until(prev_char(m_->caret));
 					} else {
 						reset_selection();
@@ -390,15 +390,15 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
 
-				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) != 0) {
 					uint32_t newpos = next_char(m_->caret);
-					while (newpos < m_->text.size() && isspace(m_->text[newpos])) {
+					while (newpos < m_->text.size() && (isspace(m_->text[newpos]) != 0)) {
 						newpos = next_char(newpos);
 					}
-					while (newpos < m_->text.size() && !isspace(m_->text[newpos])) {
+					while (newpos < m_->text.size() && (isspace(m_->text[newpos]) == 0)) {
 						newpos = next_char(newpos);
 					}
-					if (SDL_GetModState() & KMOD_SHIFT) {
+					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 						select_until(newpos);
 					} else {
 						reset_selection();
@@ -406,7 +406,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 					m_->caret = newpos;
 
 				} else {
-					if (SDL_GetModState() & KMOD_SHIFT) {
+					if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 						select_until(next_char(m_->caret));
 					} else {
 						reset_selection();
@@ -419,7 +419,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_HOME:
 			if (m_->caret > 0) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
+				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 					select_until(0);
 				} else {
 					reset_selection();
@@ -431,7 +431,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
-				if (SDL_GetModState() & KMOD_SHIFT) {
+				if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 					select_until(m_->text.size());
 				} else {
 					reset_selection();

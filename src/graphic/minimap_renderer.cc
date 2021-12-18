@@ -52,13 +52,13 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::PlayerNumber owner,
                                    const bool see_details) {
 	RGBColor color;
-	if (layers & MiniMapLayer::Terrain) {
+	if ((layers & MiniMapLayer::Terrain) != 0) {
 		color = egbase.descriptions()
 		           .get_terrain_descr(f.field->terrain_d())
 		           ->get_minimap_color(f.field->get_brightness());
 	}
 
-	if (layers & MiniMapLayer::Owner) {
+	if ((layers & MiniMapLayer::Owner) != 0) {
 		if (0 < owner) {
 			color = blend_color(color, egbase.player(owner).get_playercolor());
 		}
@@ -67,19 +67,19 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 	if (see_details) {
 		// if ownership layer is displayed, it creates enough contrast to
 		// visualize objects using white color.
-		if (layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building) &&
-		    f.field->get_immovable()) {
+		if (((layers & (MiniMapLayer::Road | MiniMapLayer::Flag | MiniMapLayer::Building)) != 0) &&
+		    (f.field->get_immovable() != nullptr)) {
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
-			if ((layers & MiniMapLayer::Flag && type == Widelands::MapObjectType::FLAG) ||
-			    (layers & MiniMapLayer::Building && type >= Widelands::MapObjectType::BUILDING)) {
+			if ((((layers & MiniMapLayer::Flag) != 0) && type == Widelands::MapObjectType::FLAG) ||
+			    (((layers & MiniMapLayer::Building) != 0) && type >= Widelands::MapObjectType::BUILDING)) {
 				color = kWhite;
-			} else if (layers & MiniMapLayer::Road && type >= Widelands::MapObjectType::ROADBASE &&
+			} else if (((layers & MiniMapLayer::Road) != 0) && type >= Widelands::MapObjectType::ROADBASE &&
 			           type <= Widelands::MapObjectType::WATERWAY) {
 				color = blend_color(color, kWhite);
 			}
 		}
 
-		if (layers & MiniMapLayer::StartingPositions) {
+		if ((layers & MiniMapLayer::StartingPositions) != 0) {
 			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
@@ -168,7 +168,7 @@ void do_draw_minimap(Texture& texture,
                      const bool draw_full = true,
                      uint16_t* const rows_drawn = nullptr) {
 	const Widelands::Map& map = egbase.map();
-	const uint8_t scale = scale_map(map, layers & MiniMapLayer::Zoom2);
+	const uint8_t scale = scale_map(map, (layers & MiniMapLayer::Zoom2) != 0);
 	const uint16_t map_h = map.get_height();
 	const uint16_t map_w = map.get_width();
 
@@ -266,7 +266,7 @@ std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
 std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& egbase,
                                               const MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
-	const int8_t scale = scale_map(map, layers & MiniMapLayer::Zoom2);
+	const int8_t scale = scale_map(map, (layers & MiniMapLayer::Zoom2) != 0);
 	const int16_t minimap_w = map.get_width() * scale;
 	const int16_t minimap_h = map.get_height() * scale;
 
@@ -301,7 +301,7 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
                                             const MiniMapType& minimap_type,
                                             const MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
-	const bool zoom = layers & MiniMapLayer::Zoom2;
+	const bool zoom = (layers & MiniMapLayer::Zoom2) != 0;
 	const int8_t scale = scale_map(map, zoom);
 	const int16_t minimap_w = map.get_width() * scale;
 	const int16_t minimap_h = map.get_height() * scale;
@@ -341,7 +341,7 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 		break;
 	}
 
-	if (layers & MiniMapLayer::ViewWindow) {
+	if ((layers & MiniMapLayer::ViewWindow) != 0) {
 		texture->lock();
 		draw_view_window(map, view_area, minimap_type, zoom, texture.get());
 		texture->unlock(Texture::Unlock_Update);

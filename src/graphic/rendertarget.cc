@@ -73,10 +73,10 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs) {
 	Rectf newrect_f = rc.cast<float>();
 	if (clip(newrect_f)) {
-		if (previous) {
+		if (previous != nullptr) {
 			*previous = rect_;
 		}
-		if (prevofs) {
+		if (prevofs != nullptr) {
 			*prevofs = offset_;
 		}
 
@@ -374,7 +374,7 @@ bool RenderTarget::clip(Rectf& r) const {
 	r.x += rect_.x;
 	r.y += rect_.y;
 
-	return r.w && r.h;
+	return (r.w != 0.0f) && (r.h != 0.0f);
 }
 
 /**

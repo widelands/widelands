@@ -161,7 +161,7 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	Player* owner = military_site_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
 	const Map& map = game.map();
-	if (enemy.get_owner() == owner || enemy.get_battle() ||
+	if (enemy.get_owner() == owner || (enemy.get_battle() != nullptr) ||
 	    military_site_->descr().get_conquers() <=
 	       map.calc_distance(enemy.get_position(), military_site_->get_position())) {
 		return;
@@ -169,7 +169,7 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 
 	if (map.find_bobs(game,
 	                  Area<FCoords>(map.get_fcoords(military_site_->base_flag().get_position()), 2),
-	                  nullptr, FindBobEnemySoldier(owner))) {
+	                  nullptr, FindBobEnemySoldier(owner)) != 0u) {
 		return;
 	}
 
@@ -224,7 +224,7 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 		}
 	}
 
-	if (defender) {
+	if (defender != nullptr) {
 		military_site_->pop_soldier_job(defender);  // defense overrides all other jobs
 
 		SoldierJob sj;
@@ -462,7 +462,7 @@ bool MilitarySite::init(EditorGameBase& egbase) {
 		if (upcast(Soldier, soldier, worker)) {
 			soldier->set_location_initially(*this);
 			assert(!soldier->get_state());  //  Should be newly created.
-			if (game) {
+			if (game != nullptr) {
 				soldier->start_task_buildingwork(*game);
 			}
 		}
@@ -471,7 +471,7 @@ bool MilitarySite::init(EditorGameBase& egbase) {
 
 	//  schedule the first healing
 	nexthealtime_ = egbase.get_gametime() + Duration(1000);
-	if (game) {
+	if (game != nullptr) {
 		schedule_act(*game, Duration(1000));
 	}
 	return true;
@@ -486,10 +486,10 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void MilitarySite::set_economy(Economy* const e, WareWorker type) {
 	Building::set_economy(e, type);
 
-	if (normal_soldier_request_ && e && type == normal_soldier_request_->get_type()) {
+	if (normal_soldier_request_ && (e != nullptr) && type == normal_soldier_request_->get_type()) {
 		normal_soldier_request_->set_economy(e);
 	}
-	if (upgrade_soldier_request_ && e && type == upgrade_soldier_request_->get_type()) {
+	if (upgrade_soldier_request_ && (e != nullptr) && type == upgrade_soldier_request_->get_type()) {
 		upgrade_soldier_request_->set_economy(e);
 	}
 }
@@ -875,7 +875,7 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 				return true;
 			}
 			if (upcast(Soldier, opponent, enemy)) {
-				if (!opponent->get_battle()) {
+				if (opponent->get_battle() == nullptr) {
 					soldier->start_task_defense(game, stayhome);
 					if (stayhome) {
 						opponent->send_signal(game, "sleep");
@@ -1013,7 +1013,7 @@ MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier, bool* const sta
 	     job_iter != soldierjobs_.end(); ++job_iter) {
 		if (job_iter->soldier == soldier) {
 			MapObject* const enemy = job_iter->enemy.get(owner().egbase());
-			if (stayhome) {
+			if (stayhome != nullptr) {
 				*stayhome = job_iter->stayhome;
 			}
 			soldierjobs_.erase(job_iter);

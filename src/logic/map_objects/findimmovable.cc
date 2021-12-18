@@ -52,7 +52,7 @@ bool FindImmovableAttribute::accept(const BaseImmovable& imm) const {
 }
 
 bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
-	return dynamic_cast<PlayerImmovable const*>(&imm);
+	return dynamic_cast<PlayerImmovable const*>(&imm) != nullptr;
 }
 
 bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {

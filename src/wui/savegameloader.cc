@@ -175,7 +175,7 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
                                  std::vector<SavegameData>& loaded_games) const {
 	// Add subdirectory to the list
 	const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
-	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+	if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 		return;
 	}
 	loaded_games.push_back(SavegameData::create_sub_dir(gamefilename));

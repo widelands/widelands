@@ -52,7 +52,7 @@ void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uin
 	int w, h;
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
-	if (style & SHADOW) {
+	if ((style & SHADOW) != 0) {
 		w += SHADOW_OFFSET;
 		h += SHADOW_OFFSET;
 	}
@@ -77,7 +77,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 	SDL_Surface* text_surface = nullptr;
 
 	SDL_Color sdlclr = {clr.r, clr.g, clr.b, SDL_ALPHA_OPAQUE};
-	if (style & SHADOW) {
+	if ((style & SHADOW) != 0) {
 		SDL_Surface* tsurf = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 		SDL_Surface* shadow = TTF_RenderUTF8_Blended(font_, txt.c_str(), SHADOW_CLR);
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
@@ -115,7 +115,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 				SDL_GetRGBA(dpix[didx], text_surface->format, &dr, &dg, &db, &da);
 
 				outa = (255 * sa + da * (255 - sa)) / 255;
-				if (outa) {
+				if (outa != 0u) {
 					outr = (255 * sa * sr + da * dr * (255 - sa)) / outa / 255;
 					outg = (255 * sa * sg + da * dg * (255 - sa)) / outa / 255;
 					outb = (255 * sa * sb + da * db * (255 - sa)) / outa / 255;
@@ -129,7 +129,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		text_surface = TTF_RenderUTF8_Blended(font_, txt.c_str(), sdlclr);
 	}
 
-	if (!text_surface) {
+	if (text_surface == nullptr) {
 		throw RenderError(bformat("Rendering '%s' gave the error: %s", txt, TTF_GetError()));
 	}
 
@@ -138,7 +138,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 
 uint16_t SdlTtfFont::ascent(int style) const {
 	uint16_t rv = TTF_FontAscent(font_);
-	if (style & SHADOW) {
+	if ((style & SHADOW) != 0) {
 		rv += SHADOW_OFFSET;
 	}
 	return rv;
@@ -146,7 +146,7 @@ uint16_t SdlTtfFont::ascent(int style) const {
 
 void SdlTtfFont::set_style(int style) {
 	int sdl_style = TTF_STYLE_NORMAL;
-	if (style & UNDERLINE) {
+	if ((style & UNDERLINE) != 0) {
 		sdl_style |= TTF_STYLE_UNDERLINE;
 	}
 

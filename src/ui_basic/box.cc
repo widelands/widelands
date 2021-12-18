@@ -37,8 +37,8 @@ Box::Box(Panel* const parent,
          uint32_t const inner_spacing)
    : Panel(parent, s, x, y, 0, 0),
 
-     max_x_(max_x ? max_x : g_gr->get_xres()),
-     max_y_(max_y ? max_y : g_gr->get_yres()),
+     max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
+     max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
 
      scrolling_(false),
      force_scrolling_(false),

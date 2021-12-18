@@ -129,7 +129,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
 	UI::Panel* list_parent = &display_button_;
-	while (list_parent->get_parent()) {
+	while (list_parent->get_parent() != nullptr) {
 		list_parent = list_parent->get_parent();
 	}
 	list_ =
@@ -157,7 +157,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		clear_filter();
 	});
 
-	if (push_button_) {
+	if (push_button_ != nullptr) {
 		push_button_->set_can_focus(false);
 	}
 	display_button_.set_can_focus(false);
@@ -182,7 +182,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
-	if (list_) {
+	if (list_ != nullptr) {
 		list_->set_linked_dropdown(nullptr);
 		list_->die();
 	}
@@ -217,7 +217,7 @@ std::vector<Recti> BaseDropdown::focus_overlay_rects() {
  * descendant of the modal panel).
  */
 UI::Panel* BaseDropdown::get_open_dropdown() {
-	return list_ && list_->is_visible() ? list_ : nullptr;
+	return (list_ != nullptr) && list_->is_visible() ? list_ : nullptr;
 }
 
 void BaseDropdown::layout() {
@@ -233,7 +233,7 @@ void BaseDropdown::layout() {
 	UI::Panel* parent = &display_button_;
 	int new_list_x = display_button_.get_x();
 	int new_list_y = display_button_.get_y();
-	while (parent->get_parent()) {
+	while (parent->get_parent() != nullptr) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
@@ -353,7 +353,7 @@ void BaseDropdown::set_image(const Image* image) {
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
-	if (push_button_) {
+	if (push_button_ != nullptr) {
 		push_button_->set_tooltip(push_button_->enabled() ? tooltip_ : "");
 	}
 }

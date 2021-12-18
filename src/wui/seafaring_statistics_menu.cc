@@ -282,7 +282,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
 	case Widelands::Ship::ShipStates::kTransport:
-		if (ship.get_destination() && ship.get_fleet()->get_schedule().is_busy(ship)) {
+		if ((ship.get_destination() != nullptr) && ship.get_fleet()->get_schedule().is_busy(ship)) {
 			status = ShipFilterStatus::kShipping;
 		} else {
 			status = ShipFilterStatus::kIdle;
@@ -444,7 +444,7 @@ void SeafaringStatisticsMenu::watch_ship() {
 void SeafaringStatisticsMenu::open_ship_window() {
 	if (table_.has_selection()) {
 		// Move to ship if CTRL is prssed
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			center_view();
 		}
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());

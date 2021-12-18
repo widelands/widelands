@@ -572,7 +572,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
-		refresh_remotes(SDL_GetModState() & KMOD_CTRL);
+		refresh_remotes((SDL_GetModState() & KMOD_CTRL) != 0);
 		tabs_.activate(1);
 	});
 	tabs_.sigclicked.connect([this]() {
@@ -609,7 +609,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			}
 		}
 		assert(!upgrades.empty());
-		if (nr_full_updates > 0 && (!all_verified || !(SDL_GetModState() & KMOD_CTRL))) {
+		if (nr_full_updates > 0 && (!all_verified || ((SDL_GetModState() & KMOD_CTRL) == 0))) {
 			// We ask for confirmation only for real upgrades. i18n-only upgrades are done silently.
 			std::string text = bformat(
 			   ngettext("Are you certain that you want to upgrade this %u add-on?",
@@ -764,7 +764,7 @@ void AddOnsCtrl::update_login_button(UI::Button* b) {
 	if (username_.empty()) {
 		upload_addon_accept_.set_enabled(false);
 		upload_addon_accept_.set_state(false);
-		if (b) {
+		if (b != nullptr) {
 			b->set_title(_("Not logged in"));
 			b->set_tooltip(_("Click to log in. You can then comment and vote on add-ons and upload "
 			                 "your own add-ons."));
@@ -777,7 +777,7 @@ void AddOnsCtrl::update_login_button(UI::Button* b) {
 		contact_.set_tooltip(_("Please log in to send an enquiry"));
 	} else {
 		upload_addon_accept_.set_enabled(true);
-		if (b) {
+		if (b != nullptr) {
 			b->set_title(bformat(
 			   net().is_admin() ? _("Logged in as %s (admin)") : _("Logged in as %s"), username_));
 			b->set_tooltip(_("Click to log out"));
@@ -838,7 +838,7 @@ inline std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::selected_installed_addon()
 	return dynamic_cast<InstalledAddOnRow&>(*installed_addons_box_.focused_child()).info();
 }
 void AddOnsCtrl::focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo> info) {
-	for (UI::Panel* p = installed_addons_box_.get_first_child(); p; p = p->get_next_sibling()) {
+	for (UI::Panel* p = installed_addons_box_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
 		if (dynamic_cast<InstalledAddOnRow&>(*p).info()->internal_name == info->internal_name) {
 			p->focus();
 			return;
@@ -862,7 +862,7 @@ void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 
 	// Normal click enables the selected category and disables all others,
 	// Ctrl+Click or Shift+Click disables this behaviour.
-	if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT))) {
+	if ((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) {
 		for (auto& pair : filter_category_) {
 			pair.second->set_state(pair.first == which);
 		}
@@ -1007,10 +1007,10 @@ bool AddOnsCtrl::matches_filter(std::shared_ptr<AddOns::AddOnInfo> info) {
 
 void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	const uint32_t scrollpos_i =
-	   installed_addons_inner_wrapper_.get_scrollbar() ?
+	   installed_addons_inner_wrapper_.get_scrollbar() != nullptr ?
          installed_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
          0;
-	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() ?
+	const uint32_t scrollpos_b = browse_addons_inner_wrapper_.get_scrollbar() != nullptr ?
                                    browse_addons_inner_wrapper_.get_scrollbar()->get_scrollpos() :
                                    0;
 	installed_addons_box_.free_children();
@@ -1118,10 +1118,10 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 	}
 	tabs_.tabs()[1]->set_title(index == 0 ? _("Browse") : bformat(_("Browse (%u)"), index));
 
-	if (installed_addons_inner_wrapper_.get_scrollbar() && scrollpos_i) {
+	if ((installed_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_i != 0u)) {
 		installed_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_i);
 	}
-	if (browse_addons_inner_wrapper_.get_scrollbar() && scrollpos_b) {
+	if ((browse_addons_inner_wrapper_.get_scrollbar() != nullptr) && (scrollpos_b != 0u)) {
 		browse_addons_inner_wrapper_.get_scrollbar()->set_scrollpos(scrollpos_b);
 	}
 

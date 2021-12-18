@@ -24,7 +24,7 @@ Widelands::Game& get_game(lua_State* const L) {
 	Widelands::Game* g = static_cast<Widelands::Game*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!g) {
+	if (g == nullptr) {
 		throw LuaError("\"game\" field was nil. get_game was not called in a game.");
 	}
 
@@ -36,7 +36,7 @@ Widelands::EditorGameBase& get_egbase(lua_State* const L) {
 	Widelands::EditorGameBase* g = static_cast<Widelands::EditorGameBase*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!g) {
+	if (g == nullptr) {
 		throw LuaError("\"egbase\" field was nil. This should be impossible.");
 	}
 
@@ -52,7 +52,7 @@ Widelands::MapObjectLoader* get_mol(lua_State* const L) {
 
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!mol) {
+	if (mol == nullptr) {
 		throw LuaError("\"mol\" field was nil. This should be impossible.");
 	}
 
@@ -67,7 +67,7 @@ Widelands::MapObjectSaver* get_mos(lua_State* const L) {
 
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!mos) {
+	if (mos == nullptr) {
 		throw LuaError("\"mos\" field was nil. This should be impossible.");
 	}
 

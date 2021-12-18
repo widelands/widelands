@@ -112,7 +112,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 				}
 			}
 
-			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
 				bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 			}
@@ -181,7 +181,7 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
 	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
-	if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+	if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}

@@ -192,16 +192,16 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			try {
 				ml->preload_map(true, nullptr);
 
-				if (!map.get_width() || !map.get_height()) {
+				if ((map.get_width() == 0) || (map.get_height() == 0)) {
 					continue;
 				}
 
 				MapData::MapType maptype;
 
-				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-				    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+				if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
+				    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
 					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get()) != nullptr) {
 					maptype = MapData::MapType::kNormal;
 				} else {
 					maptype = MapData::MapType::kSettlers2;
@@ -214,7 +214,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
 			maps_data_.push_back(MapData::create_directory(mapfilename));

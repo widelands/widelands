@@ -169,7 +169,7 @@ bool GameMessageMenu::compare_title(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		if (msga->title() == msgb->title()) {
 			return compare_time_sent(a, b);
 		}
@@ -187,7 +187,7 @@ bool GameMessageMenu::compare_status(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		if (msga->status() == msgb->status()) {
 			return compare_time_sent(a, b);
 		}
@@ -205,7 +205,7 @@ bool GameMessageMenu::compare_type(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		const Widelands::Message::Type cat_a = msga->message_type_category();
 		const Widelands::Message::Type cat_b = msgb->message_type_category();
 		if (cat_a == cat_b) {
@@ -224,7 +224,7 @@ bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b) {
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
-	if (msga && msgb) {
+	if ((msga != nullptr) && (msgb != nullptr)) {
 		return msga->sent() > msgb->sent();
 	}
 	return false;  // shouldn't happen
@@ -285,7 +285,7 @@ void GameMessageMenu::think() {
 	uint32_t removed = 0;
 	const auto& sel = list->selections();
 	const uint32_t max_index = (sel.empty() ? 0 : *sel.rbegin());
-	for (uint32_t j = list->size(); j; --j) {
+	for (uint32_t j = list->size(); j != 0u; --j) {
 		MessageId id_((*list)[j - 1]);
 		if (Message const* const message = mq[id_]) {
 			if (should_be_hidden(*message)) {
@@ -313,7 +313,7 @@ void GameMessageMenu::think() {
 	for (const auto& temp_message : mq) {
 		MessageId const id = temp_message.first;
 		const Message& message = *temp_message.second;
-		if (!should_be_hidden(message) && !list->find(id.value())) {
+		if (!should_be_hidden(message) && (list->find(id.value()) == nullptr)) {
 			UI::Table<uintptr_t>::EntryRecord& er = list->add(id.value());
 			update_record(er, message);
 			list->sort();
@@ -670,8 +670,8 @@ UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			m.filter_messages(static_cast<Widelands::Message::Type>(fr.unsigned_8()));
 			size_t nr_sel = fr.unsigned_32();
-			if (nr_sel) {
-				for (; nr_sel; --nr_sel) {
+			if (nr_sel != 0u) {
+				for (; nr_sel != 0u; --nr_sel) {
 					m.list->multiselect(fr.unsigned_32(), true);
 				}
 				m.list->multiselect(fr.unsigned_32(), true);
@@ -691,7 +691,7 @@ void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
 	fw.unsigned_8(static_cast<uint8_t>(message_filter_));
 	const size_t nr_sel = list->selections().size();
 	fw.unsigned_32(nr_sel);
-	if (nr_sel) {
+	if (nr_sel != 0u) {
 		for (const uint32_t& s : list->selections()) {
 			fw.unsigned_32(s);
 		}

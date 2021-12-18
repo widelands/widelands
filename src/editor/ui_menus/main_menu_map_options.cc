@@ -516,7 +516,7 @@ void MainMenuMapOptions::update() {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
 
-	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
+	balancing_dropdown_.select(tags.count("balanced") != 0u ? "balanced" : "unbalanced");
 
 	theme_dropdown_.select(map.get_background_theme());
 	if (!theme_dropdown_.has_selection()) {

@@ -115,7 +115,7 @@ struct MousewheelHandlerOptions {
 	}
 
 	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) {
-		return (((y && current_sign_y_) || (x && current_sign_x_)) &&
+		return ((((y != 0) && (current_sign_y_ != 0)) || ((x != 0) && (current_sign_x_ != 0))) &&
 		        matches_keymod(current_keymod_, modstate));
 	}
 	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) {
@@ -134,47 +134,47 @@ struct MousewheelHandlerOptions {
 
 static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options = {
    {MousewheelOptionID::kUIChangeValueInvertX,
-    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, 0u)},
    {MousewheelOptionID::kUIChangeValueInvertY,
-    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, 0u)},
 
    {MousewheelOptionID::kUITabInvertX,
-    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, 0u)},
    {MousewheelOptionID::kUITabInvertY,
-    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, 0u)},
 
    {MousewheelOptionID::kMapZoomMod,
     MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
    {MousewheelOptionID::kMapZoomX,  //
-    MousewheelOption("zoom_x", MousewheelOptionType::kBool, true)},
+    MousewheelOption("zoom_x", MousewheelOptionType::kBool, 1u)},
    {MousewheelOptionID::kMapZoomY,  //
-    MousewheelOption("zoom_y", MousewheelOptionType::kBool, true)},
+    MousewheelOption("zoom_y", MousewheelOptionType::kBool, 1u)},
    {MousewheelOptionID::kMapZoomInvertX,
-    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, 0u)},
    {MousewheelOptionID::kMapZoomInvertY,
-    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, 0u)},
 
    {MousewheelOptionID::kMapScrollMod,
     MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
    {MousewheelOptionID::kMapScroll,
-    MousewheelOption("move_map", MousewheelOptionType::kBool, false)},
+    MousewheelOption("move_map", MousewheelOptionType::kBool, 0u)},
 
    {MousewheelOptionID::kGameSpeedMod,
     MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
    {MousewheelOptionID::kGameSpeedX,
-    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, true)},
+    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, 1u)},
    {MousewheelOptionID::kGameSpeedY,
-    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, true)},
+    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, 1u)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
     MousewheelOption("editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
    {MousewheelOptionID::kEditorToolsizeX,
-    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, true)},
+    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, 1u)},
    {MousewheelOptionID::kEditorToolsizeY,
-    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, true)},
+    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, 1u)},
 
-   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, false)},
+   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, 1u)},
+   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, 0u)},
    {MousewheelOptionID::kNoMod, MousewheelOption("", MousewheelOptionType::kKeymod, KMOD_NONE)},
 
 };

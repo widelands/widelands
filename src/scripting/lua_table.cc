@@ -107,7 +107,7 @@ template <> int LuaTable::get_value() const {
 	int is_num;
 	int return_value = lua_tointegerx(L_, -1, &is_num);
 	lua_pop(L_, 1);
-	if (!is_num) {
+	if (is_num == 0) {
 		throw LuaError("Could not convert value at top of the stack to integer.");
 	}
 	return return_value;

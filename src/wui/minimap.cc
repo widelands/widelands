@@ -85,7 +85,7 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	dynamic_cast<MiniMap&>(*get_parent())
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
-	                                       *minimap_type_, *minimap_layers_ & MiniMapLayer::Zoom2));
+	                                       *minimap_type_, (*minimap_layers_ & MiniMapLayer::Zoom2) != 0));
 	return true;
 }
 
@@ -240,7 +240,7 @@ void MiniMap::toggle(MiniMapLayer const button) {
 }
 
 void MiniMap::resize() {
-	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
+	view_.set_zoom((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 	// Read number of rows after the zoom.
 	const uint32_t rows = number_of_button_rows();
 	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
@@ -265,16 +265,16 @@ void MiniMap::resize() {
 }
 
 void MiniMap::update_button_permpressed() {
-	button_terrn.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Terrain);
-	button_owner.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Owner);
-	button_flags.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Flag);
-	button_roads.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Road);
-	button_bldns.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Building);
-	button_zoom.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
+	button_terrn.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Terrain) != 0);
+	button_owner.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Owner) != 0);
+	button_flags.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Flag) != 0);
+	button_roads.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Road) != 0);
+	button_bldns.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Building) != 0);
+	button_zoom.set_perm_pressed((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0);
 }
 
 void MiniMap::check_boundaries() {
-	if (!view_.can_zoom() && (*view_.minimap_layers_ & MiniMapLayer::Zoom2)) {
+	if (!view_.can_zoom() && ((*view_.minimap_layers_ & MiniMapLayer::Zoom2) != 0)) {
 		toggle(MiniMapLayer::Zoom2);
 	} else {
 		resize();

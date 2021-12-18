@@ -43,7 +43,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 
 			game.list_of_scenarios_.clear();
 			if (packet_version >= 6) {
-				for (size_t i = fr.unsigned_32(); i; --i) {
+				for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 					game.list_of_scenarios_.push_back(fr.string());
 				}
 			}

@@ -31,7 +31,7 @@ struct EndOfTextImpl : public EndOfText {
 };
 
 void TextStream::consume(size_t cnt) {
-	while (cnt) {
+	while (cnt != 0u) {
 		if (text_[pos_] == '\n') {
 			++line_;
 			col_ = 0;
@@ -50,12 +50,12 @@ void TextStream::consume(size_t cnt) {
  * r* means skip_ws starting from the back of the string
  */
 void TextStream::skip_ws() {
-	while (pos_ < end_ && isspace(text_[pos_])) {
+	while (pos_ < end_ && (isspace(text_[pos_]) != 0)) {
 		consume(1);
 	}
 }
 void TextStream::rskip_ws() {
-	while (pos_ < end_ && isspace(text_[end_ - 1])) {
+	while (pos_ < end_ && (isspace(text_[end_ - 1]) != 0)) {
 		--end_;
 	}
 }

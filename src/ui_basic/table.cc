@@ -193,7 +193,7 @@ void Table<void*>::clear() {
 	}
 	entry_records_.clear();
 
-	if (scrollbar_) {
+	if (scrollbar_ != nullptr) {
 		scrollbar_->set_steps(1);
 	}
 	scrollpos_ = 0;
@@ -265,7 +265,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		if (idx == selection_ || multiselect_.count(idx)) {
+		if (idx == selection_ || (multiselect_.count(idx) != 0u)) {
 			assert(2 <= get_eff_w());
 			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
@@ -512,7 +512,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		}
 
 		// Check if doubleclicked
-		if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) &&
+		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) &&
 		    time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
 		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
@@ -573,7 +573,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
-		if (SDL_GetModState() & KMOD_SHIFT) {
+		if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 			multiselect_.clear();
 			if (has_selection()) {
 				const uint32_t last_selected = selection_index();
@@ -589,7 +589,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 			}
 		} else {
 			// Single selection without Ctrl
-			if (!(SDL_GetModState() & KMOD_CTRL)) {
+			if ((SDL_GetModState() & KMOD_CTRL) == 0) {
 				multiselect_.clear();
 			}
 			select(toggle_entry(row));
@@ -602,7 +602,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 
 // Scroll to the given item. Out of range items will be corrected automatically.
 void Table<void*>::scroll_to_item(int32_t item) {
-	if (scrollbar_) {
+	if (scrollbar_ != nullptr) {
 		// Correct out of range items
 		if (item < 0) {
 			item = 0;
@@ -626,7 +626,7 @@ void Table<void*>::scroll_to_item(int32_t item) {
  */
 uint32_t Table<void*>::toggle_entry(uint32_t row) {
 	assert(is_multiselect_);
-	if (multiselect_.count(row)) {
+	if (multiselect_.count(row) != 0u) {
 		multiselect_.erase(row);
 		// Find last selection
 		if (multiselect_.empty()) {

@@ -124,7 +124,7 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 			}
 			fitting_node = find_node(root.get(), block_width, block_height);
 		}
-		if (fitting_node) {
+		if (fitting_node != nullptr) {
 			fitting_node->split(block_width, block_height);
 			block.node = fitting_node;
 			packed.push_back(block);

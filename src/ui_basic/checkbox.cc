@@ -83,11 +83,11 @@ void Statebox::update_template() {
 
 void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
-	if ((flags_ & Has_Text)) {
+	if ((flags_ & Has_Text) != 0) {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
-		if (pic_graphics_) {
+		if (pic_graphics_ != nullptr) {
 			w = std::max(pic_graphics_->width(), w);
 			h = pic_graphics_->height();
 			pic_width = pic_graphics_->width();
@@ -121,10 +121,10 @@ void Statebox::set_enabled(bool const enabled) {
 	set_flags(Is_Enabled, enabled);
 	set_can_focus(enabled);
 
-	if (!(flags_ & Has_Custom_Picture)) {
+	if ((flags_ & Has_Custom_Picture) == 0) {
 		pic_graphics_ = g_image_cache->get(enabled ? get_checkbox_graphics(panel_style_) :
                                                    "images/ui_basic/checkbox.png");
-		set_flags(Is_Highlighted, (flags_ & Is_Highlighted) && (flags_ & Is_Enabled));
+		set_flags(Is_Highlighted, ((flags_ & Is_Highlighted) != 0) && ((flags_ & Is_Enabled) != 0));
 	}
 }
 
@@ -144,7 +144,7 @@ void Statebox::set_state(bool const on, const bool send_signal) {
 }
 
 std::vector<Recti> Statebox::focus_overlay_rects() {
-	return (flags_ & Has_Custom_Picture) ? Panel::focus_overlay_rects(1, 1, -1) :
+	return (flags_ & Has_Custom_Picture) != 0 ? Panel::focus_overlay_rects(1, 1, -1) :
                                           Panel::focus_overlay_rects();
 }
 
@@ -153,18 +153,18 @@ std::vector<Recti> Statebox::focus_overlay_rects() {
  */
 void Statebox::draw_overlay(RenderTarget& dst) {
 	Panel::draw_overlay(dst);
-	if (flags_ & Has_Custom_Picture) {
+	if ((flags_ & Has_Custom_Picture) != 0) {
 		// TODO(Nordfriese): Move colours to style manager
-		if (flags_ & Is_Checked) {
+		if ((flags_ & Is_Checked) != 0) {
 			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(226, 200, 6));
-		} else if (flags_ & Is_Highlighted) {
+		} else if ((flags_ & Is_Highlighted) != 0) {
 			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
 		}
 	}
 }
 void Statebox::draw(RenderTarget& dst) {
-	if (flags_ & Has_Custom_Picture) {
-		if (flags_ & Is_Checked) {
+	if ((flags_ & Has_Custom_Picture) != 0) {
+		if ((flags_ & Is_Checked) != 0) {
 			dst.brighten_rect(Recti(0, 0, get_w(), get_h()), -24);
 		}
 
@@ -188,10 +188,10 @@ void Statebox::draw(RenderTarget& dst) {
 		}
 
 		dst.blitrect(image_anchor, pic_graphics_,
-		             Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0), kStateboxSize,
+		             Recti(Vector2i((flags_ & Is_Checked) != 0 ? kStateboxSize : 0, 0), kStateboxSize,
 		                   kStateboxSize));
 
-		if (flags_ & Is_Highlighted) {
+		if ((flags_ & Is_Highlighted) != 0) {
 			dst.draw_rect(
 			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
 		}
@@ -202,14 +202,14 @@ void Statebox::draw(RenderTarget& dst) {
  * Highlight the checkbox when the mouse moves into it
  */
 void Statebox::handle_mousein(bool const inside) {
-	set_flags(Is_Highlighted, inside && (flags_ & Is_Enabled));
+	set_flags(Is_Highlighted, inside && ((flags_ & Is_Enabled) != 0));
 }
 
 /**
  * Left-click: Toggle checkbox state
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
+	if (btn == SDL_BUTTON_LEFT && ((flags_ & Is_Enabled) != 0)) {
 		button_clicked();
 		return true;
 	}

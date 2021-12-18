@@ -161,7 +161,7 @@ public:
         state[2] = 0x98BADCFE;
         state[3] = 0x10325476;
         state[4] = 0xC3D2E1F0;
-        if (text) add(text);
+        if (text != nullptr) add(text);
     }
 
     sha1& add(uint8_t x){
@@ -175,12 +175,12 @@ public:
     }
 
     sha1& add(const void *data, uint32_t n){
-        if (!data) return *this;
+        if (data == nullptr) return *this;
 
         const uint8_t *ptr = (const uint8_t*)data;
 
         // fill up block if not full
-        for (; n && i % sizeof(buf); n--) add(*ptr++);
+        for (; (n != 0u) && ((i % sizeof(buf)) != 0u); n--) add(*ptr++);
 
         // process full blocks
         for (; n >= sizeof(buf); n -= sizeof(buf)){
@@ -190,13 +190,13 @@ public:
         }
 
         // process remaining part of block
-        for (; n; n--) add(*ptr++);
+        for (; n != 0u; n--) add(*ptr++);
 
         return *this;
     }
 
     sha1& add(const char *text){
-        if (!text) return *this;
+        if (text == nullptr) return *this;
         return add(text, strlen(text));
     }
 

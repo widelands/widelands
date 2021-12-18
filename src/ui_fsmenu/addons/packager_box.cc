@@ -104,7 +104,7 @@ void make_valid_addon_filename(std::string& name,
 		name.erase(0, len - kAddOnFileNameLengthLimit);
 	}
 
-	if (names_already_in_use.count(name)) {
+	if (names_already_in_use.count(name) != 0u) {
 		for (int i = 1;; ++i) {
 			std::string prefix = std::to_string(i);
 			prefix += "_";
@@ -114,7 +114,7 @@ void make_valid_addon_filename(std::string& name,
 			if (len > kAddOnFileNameLengthLimit) {
 				new_name.erase(prefix.size(), len - kAddOnFileNameLengthLimit);
 			}
-			if (!names_already_in_use.count(new_name)) {
+			if (names_already_in_use.count(new_name) == 0u) {
 				name = new_name;
 				break;
 			}
@@ -557,7 +557,7 @@ void CampaignAddOnsPackagerBox::edited_difficulty_icon() {
 }
 
 void CampaignAddOnsPackagerBox::edited_difficulty() {
-	if (AddOns::kDifficultyIcons.count(difficulty_.text())) {
+	if (AddOns::kDifficultyIcons.count(difficulty_.text()) != 0u) {
 		// Transfer editbox to icon
 		last_difficulty_ = difficulty_.text();
 		icon_difficulty_.select(AddOns::kDifficultyIcons.at(last_difficulty_));
@@ -605,7 +605,7 @@ void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 }
 
 void CampaignAddOnsPackagerBox::layout() {
-	if (header_align_) {
+	if (header_align_ != 0) {
 		difficulty_label_.set_fixed_width(header_align_);
 	}
 	AddOnsPackagerBox::layout();

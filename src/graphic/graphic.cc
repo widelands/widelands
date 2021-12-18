@@ -150,11 +150,11 @@ Graphic::~Graphic() {
 	g_animation_manager = nullptr;
 	delete g_image_cache;
 	g_image_cache = nullptr;
-	if (sdl_window_) {
+	if (sdl_window_ != nullptr) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;
 	}
-	if (gl_context_) {
+	if (gl_context_ != nullptr) {
 		SDL_GL_DeleteContext(gl_context_);
 		gl_context_ = nullptr;
 	}
@@ -243,7 +243,7 @@ int Graphic::max_texture_size_for_font_rendering() const {
 
 bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	return flags & SDL_WINDOW_MAXIMIZED;
+	return (flags & SDL_WINDOW_MAXIMIZED) != 0u;
 }
 
 void Graphic::set_maximized(const bool to_maximize) {
@@ -264,7 +264,7 @@ void Graphic::set_maximized(const bool to_maximize) {
 
 bool Graphic::fullscreen() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
+	return ((flags & SDL_WINDOW_FULLSCREEN) != 0u) || ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
 }
 
 void Graphic::set_fullscreen(const bool value) {

@@ -164,7 +164,7 @@ int LuaGame::set_allow_saving(lua_State* L) {
 }
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
+	lua_pushboolean(L, static_cast<int>(get_game(L).save_handler().get_allow_saving()));
 	return 1;
 }
 
@@ -940,7 +940,7 @@ void LuaDescriptions::do_modify_tribe(lua_State* L,
 		if (!lua_isnil(L, 7)) {
 			wdescr.set_default_target_quantity(unit_name, luaL_checkuint32(L, 7));
 		}
-		if (!lua_isinteger(L, 8)) {
+		if (lua_isinteger(L, 8) == 0) {
 			report_error(L, "Preciousness is mandatory for wares (item: %s)", warename.c_str());
 		}
 		wdescr.set_preciousness(unit_name, luaL_checkuint32(L, 8));

@@ -134,7 +134,7 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 		return false;
 	}
 
-	if (!down || code.sym != SDLK_SPACE || !(SDL_GetModState() & KMOD_CTRL)) {
+	if (!down || code.sym != SDLK_SPACE || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
 		return false;
 	}
 

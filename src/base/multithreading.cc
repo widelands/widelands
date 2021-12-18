@@ -106,7 +106,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				SDL_Delay(2);
 			}
 
-			if (error) {
+			if (error != nullptr) {
 				throw *error;
 			}
 		} else {

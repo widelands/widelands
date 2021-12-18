@@ -166,7 +166,7 @@ UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
 			StockMenu& sm = dynamic_cast<StockMenu&>(*r.window);
 
 			sm.tabs_.activate(fr.unsigned_8());
-			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8());
+			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8() != 0u);
 
 			return sm;
 		} else {

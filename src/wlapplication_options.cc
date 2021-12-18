@@ -713,7 +713,7 @@ void set_fastplace_shortcuts(KeyboardShortcut id, const std::map<std::string, st
 
 	// Add new mapping
 	for (const auto& pair : map) {
-		if (!info.fastplace.count(pair.first)) {
+		if (info.fastplace.count(pair.first) == 0u) {
 			info.fastplace.emplace(pair);
 			set_config_string("keyboard_fastplace", config_key(pair.first), pair.second);
 		}
@@ -745,13 +745,13 @@ static void write_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 
 static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
                          const KeyboardShortcutInfo& k) {
-	if (scopes.count(KeyboardShortcutInfo::Scope::kGlobal) ||
-	    k.scopes.count(KeyboardShortcutInfo::Scope::kGlobal)) {
+	if ((scopes.count(KeyboardShortcutInfo::Scope::kGlobal) != 0u) ||
+	    (k.scopes.count(KeyboardShortcutInfo::Scope::kGlobal) != 0u)) {
 		return true;
 	}
 
 	for (KeyboardShortcutInfo::Scope s : scopes) {
-		if (k.scopes.count(s)) {
+		if (k.scopes.count(s) != 0u) {
 			return true;
 		}
 	}
@@ -793,7 +793,7 @@ void normalize_numpad(SDL_Keysym& keysym) {
 	if (search == kNumpadIdentifications.end()) {
 		return;
 	}
-	if (keysym.mod & KMOD_NUM) {
+	if ((keysym.mod & KMOD_NUM) != 0) {
 		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
 			keysym.sym = keysym.sym - SDLK_KP_1 + SDLK_1;
 			return;
@@ -818,10 +818,10 @@ void normalize_numpad(SDL_Keysym& keysym) {
 }
 
 uint16_t normalize_keymod(uint16_t keymod) {
-	return ((keymod & KMOD_SHIFT) ? KMOD_SHIFT : KMOD_NONE) |
-	       ((keymod & KMOD_CTRL) ? KMOD_CTRL : KMOD_NONE) |
-	       ((keymod & KMOD_ALT) ? KMOD_ALT : KMOD_NONE) |
-	       ((keymod & KMOD_GUI) ? KMOD_GUI : KMOD_NONE);
+	return ((keymod & KMOD_SHIFT) != 0 ? KMOD_SHIFT : KMOD_NONE) |
+	       ((keymod & KMOD_CTRL) != 0 ? KMOD_CTRL : KMOD_NONE) |
+	       ((keymod & KMOD_ALT) != 0 ? KMOD_ALT : KMOD_NONE) |
+	       ((keymod & KMOD_GUI) != 0 ? KMOD_GUI : KMOD_NONE);
 }
 
 bool matches_keymod(const uint16_t mod1, const uint16_t mod2) {
@@ -852,7 +852,7 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	// events get converted to "normal" keys (except for the numpad keys used for diagonal
 	// scrolling if it is enabled)
 
-	if (mod & KMOD_NUM) {
+	if ((mod & KMOD_NUM) != 0) {
 		// If numlock is on and a number was pressed, only compare the entered number value.
 		// Annoyingly, there seems to be no strict rule whether the SDLK_ constants are
 		// ranged 0,1,…,9 or 1,…,9,0 so we have to treat 0 as a special case.
@@ -911,20 +911,20 @@ KeyboardShortcut shortcut_from_string(const std::string& name) {
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
 	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;
-	if (modstate & KMOD_SHIFT) {
+	if ((modstate & KMOD_SHIFT) != 0) {
 		mods.push_back(pgettext("hotkey", "Shift"));
 	}
-	if (modstate & KMOD_ALT) {
+	if ((modstate & KMOD_ALT) != 0) {
 		mods.push_back(pgettext("hotkey", "Alt"));
 	}
-	if (modstate & KMOD_GUI) {
+	if ((modstate & KMOD_GUI) != 0) {
 #ifdef __APPLE__
 		mods.push_back(pgettext("hotkey", "Cmd"));
 #else
 		mods.push_back(pgettext("hotkey", "GUI"));
 #endif
 	}
-	if (modstate & KMOD_CTRL) {
+	if ((modstate & KMOD_CTRL) != 0) {
 		mods.push_back(pgettext("hotkey", "Ctrl"));
 	}
 
@@ -1042,7 +1042,7 @@ static void init_fastplace_shortcuts(const bool force_defaults) {
 	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		if (force_defaults) {
 			shortcuts_.erase(k);
-		} else if (shortcuts_.count(k)) {
+		} else if (shortcuts_.count(k) != 0u) {
 			continue;
 		}
 
@@ -1088,7 +1088,7 @@ void init_fastplace_default_shortcuts(
 
 #ifndef NDEBUG
 	for (const auto& pair : fpdefaults) {
-		if (!used_keys.count(pair.first)) {
+		if (used_keys.count(pair.first) == 0u) {
 			log_warn("Fastplace defaults: Unused key '%s'", pair.first.c_str());
 		}
 	}

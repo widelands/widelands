@@ -32,7 +32,7 @@ UniqueWindow IMPLEMENTATION
  * Creates the window, if it does not exist.
  */
 void UniqueWindow::Registry::create() {
-	if (!window) {
+	if (window == nullptr) {
 		open_window();
 	} else {
 		if (window->is_minimal()) {
@@ -46,7 +46,7 @@ void UniqueWindow::Registry::create() {
  * Destroys the window, if it exists.
  */
 void UniqueWindow::Registry::destroy() {
-	if (window) {
+	if (window != nullptr) {
 		window->die();
 	}
 }
@@ -55,7 +55,7 @@ void UniqueWindow::Registry::destroy() {
  * Either destroys or creates the window.
  */
 void UniqueWindow::Registry::toggle() {
-	if (window) {
+	if (window != nullptr) {
 		// There is already a window. If it is minimal, restore it.
 		if (window->is_minimal()) {
 			window->restore();
@@ -74,7 +74,7 @@ void UniqueWindow::Registry::toggle() {
  * here.
  */
 UniqueWindow::Registry::~Registry() {
-	if (window) {
+	if (window != nullptr) {
 		delete window;
 		window = nullptr;
 	}
@@ -106,7 +106,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
                            int32_t const h,
                            const std::string& title)
    : Window(parent, s, name, x, y, w, h, title), registry_(reg), usedefaultpos_(true) {
-	if (registry_) {
+	if (registry_ != nullptr) {
 		delete registry_->window;
 		registry_->window = this;
 		if (registry_->valid_pos) {
@@ -121,7 +121,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
  * Unregister, save latest position.
  */
 UniqueWindow::~UniqueWindow() {
-	if (registry_ && registry_->window) {
+	if ((registry_ != nullptr) && (registry_->window != nullptr)) {
 		assert(registry_->window == this);
 
 		registry_->window = nullptr;

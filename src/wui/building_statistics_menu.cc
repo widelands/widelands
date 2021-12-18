@@ -166,7 +166,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      last_building_index_(0),
      last_building_type_(Widelands::INVALID_INDEX),
      lastupdate_(0),
-     was_minimized_(false),
+     was_minimized_(0u),
      has_selection_(false),
      nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
@@ -589,13 +589,13 @@ void BuildingStatisticsMenu::think() {
 	// Update statistics
 	const Time& gametime = iplayer().game().get_gametime();
 
-	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if ((was_minimized_ != 0u) || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_building_list();
 		update();
 		lastupdate_ = gametime;
 	}
 	// Make sure we don't have a delay with displaying labels when we restore the window.
-	was_minimized_ = is_minimal();
+	was_minimized_ = static_cast<uint32_t>(is_minimal());
 }
 
 /*
@@ -675,7 +675,7 @@ void BuildingStatisticsMenu::update() {
 
 		if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
 		    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
@@ -701,7 +701,7 @@ void BuildingStatisticsMenu::update() {
 				label_unproductive_.set_text(_("Low productivity:"));
 			}
 		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				const RGBColor& color =
 				   (total_stationed_soldiers < total_soldier_capacity / 2) ? style_.low_color() :
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :

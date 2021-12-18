@@ -40,9 +40,9 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                      Widelands::Game& g,
                      const MapData* mapdata,
                      const bool scenario)
-   : LaunchGame(fsmm, settings, nullptr, !mapdata, false),
+   : LaunchGame(fsmm, settings, nullptr, mapdata == nullptr, false),
      player_setup_(&left_column_box_, *this, &settings, scale_factor * standard_height_),
-     preconfigured_(!mapdata),
+     preconfigured_(mapdata == nullptr),
      game_(g) {
 
 	left_column_box_.add(&player_setup_, UI::Box::Resizing::kExpandBoth);

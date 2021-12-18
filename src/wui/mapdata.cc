@@ -110,14 +110,14 @@ bool MapData::compare_names(const MapData& other) {
 	}
 
 	// If there is no width, we have a directory - we want them first.
-	if (!width) {
-		if (other.width) {
+	if (width == 0u) {
+		if (other.width != 0u) {
 			return true;
 		}
 		return this_name < other_name;
 	}
 
-	if (!other.width) {
+	if (other.width == 0u) {
 		return false;
 	}
 	return this_name < other_name;

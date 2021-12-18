@@ -496,7 +496,7 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 		update();
 		needs_update_ = false;
 	}
-	if (highest_scale_) {
+	if (highest_scale_ != 0u) {
 		draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 	}
 	// Print the 0

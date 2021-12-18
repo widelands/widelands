@@ -68,7 +68,7 @@ Textarea::Textarea(
 }
 
 inline const FontStyleInfo& Textarea::font_style() const {
-	return font_style_override_ ? *font_style_override_ : g_style_manager->font_style(font_style_);
+	return font_style_override_ != nullptr ? *font_style_override_ : g_style_manager->font_style(font_style_);
 }
 
 void Textarea::set_style(const FontStyle style) {

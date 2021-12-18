@@ -87,7 +87,7 @@ static int L_string_bformat(lua_State* L) {
 				break;
 
 			case LUA_TNUMBER:
-				if (lua_isinteger(L, i)) {
+				if (lua_isinteger(L, i) != 0) {
 					fmt % luaL_checkint32(L, i);
 				} else {
 					fmt % luaL_checknumber(L, i);
@@ -186,9 +186,9 @@ void read_textdomain_stack(FileRead& fr, const lua_State* L) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const std::string str = fr.string();
-				const bool a = fr.unsigned_8();
+				const bool a = fr.unsigned_8() != 0u;
 				textdomains[L].push_back(std::make_pair(str, a));
 			}
 		} else {

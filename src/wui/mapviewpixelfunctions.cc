@@ -95,7 +95,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
 	if (right_col == mapwidth) {
 		right_col = 0;
 	}
-	bool slash = (col_number + row_number) & 1;
+	bool slash = ((col_number + row_number) & 1) != 0;
 
 	//  Find out which two nodes the mouse is between in the y-dimension, taking
 	//  the height factor into account.

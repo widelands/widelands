@@ -146,8 +146,8 @@ IFont& FontCache::get_font(NodeStyle* ns) {
 	} else if (ns->font_face == "sans") {
 		ns->font_face = ns->fontset->sans();
 	}
-	const bool is_bold = ns->font_style & IFont::BOLD;
-	const bool is_italic = ns->font_style & IFont::ITALIC;
+	const bool is_bold = (ns->font_style & IFont::BOLD) != 0;
+	const bool is_italic = (ns->font_style & IFont::ITALIC) != 0;
 	if (is_bold && is_italic) {
 		if (ns->font_face == ns->fontset->condensed() ||
 		    ns->font_face == ns->fontset->condensed_bold() ||
@@ -672,7 +672,7 @@ uint16_t TextNode::hotspot_y() const {
 		// (UChar32, char32At, TTF_GlyphIsProvided32, TTF_GlyphMetrics32)
 		UChar codepoint = unicode_txt.charAt(i);
 		int maxy;
-		if (TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) &&
+		if ((TTF_GlyphIsProvided(font_.get_ttf_font(), codepoint) != 0) &&
 		    TTF_GlyphMetrics(
 		       font_.get_ttf_font(), codepoint, nullptr, nullptr, nullptr, &maxy, nullptr) == 0) {
 			ascent = std::max(ascent, maxy);
@@ -1216,7 +1216,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 
 void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 	for (Child* c : tag_.children()) {
-		if (c->tag) {
+		if (c->tag != nullptr) {
 			std::unique_ptr<TagHandler> th(create_taghandler(
 			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
 			th->enter();
@@ -1313,7 +1313,7 @@ public:
 		if (!nodes.empty()) {
 			nodes.push_back(std::shared_ptr<RenderNode>(new NewlineNode(nodestyle_)));
 		}
-		if (indent_) {
+		if (indent_ != 0u) {
 			nodes.push_back(std::shared_ptr<RenderNode>(new SpaceNode(nodestyle_, indent_)));
 		}
 		TagHandler::emit_nodes(nodes);
@@ -1451,7 +1451,7 @@ public:
 			} else {
 				node.reset(new SpaceNode(nodestyle_, 0, 0, true));
 			}
-			if (background_image_) {
+			if (background_image_ != nullptr) {
 				node->set_background(background_image_, image_filename_);
 			}
 			nodes.push_back(node);
@@ -1562,7 +1562,7 @@ public:
 			if (n->width() >= INFINITE_WIDTH) {
 				continue;
 			}
-			if (width_first_subnode >= INFINITE_WIDTH && n->width()) {
+			if (width_first_subnode >= INFINITE_WIDTH && (n->width() != 0u)) {
 				width_first_subnode = n->width() + padding.left + padding.right;
 			}
 			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
@@ -1595,7 +1595,7 @@ public:
 			}
 			break;
 		default:
-			if (!w_) {
+			if (w_ == 0u) {
 				w_ = widest_subnode;
 			}
 			// Else do nothing
@@ -1786,7 +1786,7 @@ std::shared_ptr<RenderNode>
 Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const TagSet& allowed_tags) {
 	std::unique_ptr<Tag> rt(parser_->parse(text, allowed_tags));
 
-	if (!width) {
+	if (width == 0u) {
 		width = INFINITE_WIDTH;
 	}
 
