@@ -83,6 +83,12 @@ template <typename Number> struct NumberNodeT : FormatNode {
 					++written;
 				}
 			}
+			if (hexadecimal_) {
+				*out = '0';
+				*(out + 1) = 'x';
+				out += 2;
+				written += 2;
+			}
 
 			if (arg == 0) {
 				*out = '0';
@@ -130,6 +136,9 @@ template <typename Number> struct NumberNodeT : FormatNode {
 		}
 
 		size_t required_width = nr_digits;
+		if (hexadecimal_) {
+			required_width += 2;
+		}
 		if (arg < 0 || flags_ & kNumberSign) {
 			required_width += localize ? (arg == 0) ? kDigitWidthSpaceLength :
 			                             (arg < 0)  ? kLocalizedMinusSignLength :
@@ -161,6 +170,11 @@ template <typename Number> struct NumberNodeT : FormatNode {
 				*out = '+';
 				++out;
 			}
+		}
+		if (hexadecimal_) {
+			*out = '0';
+			*(out + 1) = 'x';
+			out += 2;
 		}
 
 		if ((flags_ & kPadWith0) != 0 && required_width < min_width_) {

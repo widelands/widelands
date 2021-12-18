@@ -126,7 +126,7 @@ TESTCASE(string_formatting) {
 	check_equal("Hello         ", bformat("%1$-14.5s", "Hello World"));
 
 	check_equal("A123X", bformat("A%dX", 123));
-	check_equal("AABCDEFX", bformat("A%XX", 0xABCDEF));
+	check_equal("A-0xABCDEFX", bformat("A%XX", -0xABCDEF));
 	check_equal("A-1X", bformat("A%dX", -1));
 	check_equal("A+123X", bformat("A%0+2dX", 123));
 	check_equal("A+123    X", bformat("A%+-8dX", 123));
@@ -147,8 +147,8 @@ TESTCASE(string_formatting) {
 	check_equal("A^[X", bformat("A%1$cX", '\x1b'));
 
 	check_equal("AnullptrX", bformat("A%PX", nullptr));
-	check_equal("A123abcX", bformat("A%pX", reinterpret_cast<int*>(0x123abc)));
-	check_equal("A123abcX", bformat("A%1%X", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A0x123abcX", bformat("A%pX", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A0x123abcX", bformat("A%1%X", reinterpret_cast<int*>(0x123abc)));
 	check_equal("A1194684X", bformat("A%1%X", 0x123abc));
 
 	check_equal("A123.456X", bformat("A%.3fX", 123.456));

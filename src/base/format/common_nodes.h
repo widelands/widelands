@@ -63,9 +63,14 @@ struct CharNode : FormatNode {
 			throw wexception("Wrong argument type: expected char, found %s", to_string(t).c_str());
 		}
 
-		if (arg.char_val < 0x20) {  // control characters
+		// control characters
+		if (arg.char_val >= 0 && arg.char_val < 0x20) {
 			*out = '^';
 			*(out + 1) = '@' + arg.char_val;
+			return out + 2;
+		} else if (arg.char_val == 0x7f) {
+			*out = '^';
+			*(out + 1) = '?';
 			return out + 2;
 		}
 
