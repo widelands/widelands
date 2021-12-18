@@ -39,7 +39,7 @@ std::string illegal_filename_tooltip() {
 		if (character == " ") {
 			/** TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces the
 			 * blank space in a list of illegal characters */
-			starting_characters.push_back(pgettext("illegal_filename_characters", "blank space"));
+			starting_characters.emplace_back(pgettext("illegal_filename_characters", "blank space"));
 		} else {
 			starting_characters.push_back(character);
 		}
