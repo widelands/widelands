@@ -280,9 +280,9 @@ void DefaultAI::think() {
 	// range 13 - 15, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
-		if (delay_time > 4000) {
+		if (delay_time > 4500) {
 			speed_diff = -200;
-		} else if (delay_time < 1600) {
+		} else if (delay_time < 2000) {
 			speed_diff = +100;
 		}
 		if (speed_diff != 0) {
@@ -321,7 +321,7 @@ void DefaultAI::think() {
 
 	// 500 provides that second job is run if delay time is longer then 2 sec
 	if (delay_time > 2000) {
-		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 500));
+		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 400));
 	}
 
 	jobs_to_run_count = (jobs_to_run_count > kMaxJobs) ? kMaxJobs : jobs_to_run_count;
@@ -534,13 +534,21 @@ void DefaultAI::think() {
 					verb_log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
 					                   enemy_warehouses.size());
 				}
-				management_data.review(
-				   gametime, player_number(), player_statistics.get_player_land(player_number()),
-				   player_statistics.get_enemies_max_land(),
-				   player_statistics.get_old60_player_land(player_number()), attackers_count_,
-				   soldier_trained_log.count(gametime),
-				   player_statistics.get_player_power(player_number()),
-				   count_productionsites_without_buildings(), first_iron_mine_built, allships.size());
+								
+				// how many types of mines have at least one finished mine?
+				uint16_t finished_mines_type=0;
+				for (auto const& mt : mines_per_type) {
+					finished_mines_type += (mt.second.finished > 0) ? 1 : 0;
+				}
+
+				management_data.review(gametime, player_number(),
+				                       player_statistics.get_player_land(player_number()),
+				                       player_statistics.get_enemies_max_land(),
+				                       player_statistics.get_old60_player_land(player_number()),
+				                       attackers_count_, soldier_trained_log.count(gametime),
+				                       player_statistics.get_player_power(player_number()),
+				                       count_productionsites_without_buildings(), first_iron_mine_built,
+				                       allships.size(), finished_mines_type);
 				set_taskpool_task_time(
 				   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			}

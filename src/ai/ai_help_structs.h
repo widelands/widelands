@@ -731,7 +731,8 @@ struct ManagementData {
 	            uint16_t strength,
 	            uint32_t existing_ps,
 	            const Time& first_iron_mine_time,
-				uint16_t ships_count);
+				uint16_t ships_count,
+				uint16_t finished_mine_types);
 	void dump_data(Widelands::PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;
