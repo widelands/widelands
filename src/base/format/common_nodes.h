@@ -62,6 +62,13 @@ struct CharNode : FormatNode {
 		if (t != ArgType::kChar) {
 			throw wexception("Wrong argument type: expected char, found %s", to_string(t).c_str());
 		}
+
+		if (arg.char_val < 0x20) {  // control characters
+			*out = '^';
+			*(out + 1) = '@' + arg.char_val;
+			return out + 2;
+		}
+
 		*out = arg.char_val;
 		return out + 1;
 	}

@@ -56,7 +56,18 @@ struct FloatNode : FormatNode {
 			   "Wrong argument type: expected float/double, found %s", to_string(t).c_str());
 		}
 
-		const int64_t as_int = static_cast<int64_t>(arg < 0 ? -arg : arg);
+		double rounding = 0.5;
+		for (unsigned p = precision_; p; --p) {
+			rounding /= 10.;
+		}
+		int64_t as_int;
+		if (arg < 0) {
+			arg -= rounding;
+			as_int = static_cast<int64_t>(-arg);
+		} else {
+			arg += rounding;
+			as_int = static_cast<int64_t>(arg);
+		}
 
 		if (min_width_ == 0 || flags_ & kLeftAlign) {
 			// The easy case: Just start writing.

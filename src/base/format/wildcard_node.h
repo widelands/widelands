@@ -46,7 +46,7 @@ struct WildcardNode : FormatNode {
 		case AbstractNode::ArgType::kUnsigned:
 			return UintNode::node_.append(out, t, arg_u, localize);
 		case AbstractNode::ArgType::kPointer:
-			return UintNode::node_.append(out, AbstractNode::ArgType::kUnsigned, arg_u, localize);
+			return pointer_node_.append(out, AbstractNode::ArgType::kUnsigned, arg_u, localize);
 		case AbstractNode::ArgType::kNullptr:
 			return append_nullptr_node(out, localize);
 		default:

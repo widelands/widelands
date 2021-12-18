@@ -140,18 +140,24 @@ TESTCASE(string_formatting) {
 	check_equal("A      +0X", bformat("A%+8dX", 0));
 	check_equal("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
 
-	check_equal("Aw77X", bformat("A%2$c%1$iX", 77, 'w'));
 	check_equal("AfalsetrueX", bformat("A%b%bX", 0, 1));
+	check_equal("Aw77X", bformat("A%2$c%1$iX", 77, 'w'));
+	check_equal("A^@X", bformat("A%1$cX", '\0'));
+	check_equal("A^MX", bformat("A%1$cX", '\r'));
+	check_equal("A^[X", bformat("A%1$cX", '\x1b'));
 
 	check_equal("AnullptrX", bformat("A%PX", nullptr));
 	check_equal("A123abcX", bformat("A%pX", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A123abcX", bformat("A%1%X", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A1194684X", bformat("A%1%X", 0x123abc));
 
 	check_equal("A123.456X", bformat("A%.3fX", 123.456));
 	check_equal("A-0.45600000X", bformat("A%2.8fX", -0.456));
+	check_equal("A-0.300X", bformat("A%2.3fX", -0.2999));
 	check_equal("A      12.3X", bformat("A%10.1fX", 12.34567));
 	check_equal("A123      X", bformat("A%-9.0fX", 123.456));
-	check_equal("A+123.4   X", bformat("A%+-9.1fX", 123.456));
-	check_equal("A+00123.45X", bformat("A%0+9.2fX", 123.456));
+	check_equal("A+123.5   X", bformat("A%+-9.1fX", 123.456));
+	check_equal("A+00123.46X", bformat("A%0+9.2fX", 123.456));
 
 	format_impl::ArgsPair p1, p2;
 	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;

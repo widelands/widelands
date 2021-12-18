@@ -201,6 +201,7 @@ using IntNode = NumberNodeT<int64_t>;
 using UintNode = NumberNodeT<uint64_t>;
 template <typename NumberT>
 const NumberNodeT<NumberT> NumberNodeT<NumberT>::node_(kNone, 0, false, false);
+extern const UintNode pointer_node_;
 
 }  // namespace format_impl
 

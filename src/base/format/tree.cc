@@ -35,6 +35,7 @@ const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
 const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
 const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
+const UintNode pointer_node_(kNone, 0, true, false);
 
 std::string to_string(const AbstractNode::ArgType t) {
 	switch (t) {
