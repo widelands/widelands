@@ -7,7 +7,6 @@ wl_library(io_filesystem
     filesystem.cc
     filesystem.h
     filesystem_exceptions.h
-    illegal_filename_characters.h
     layered_filesystem.cc
     layered_filesystem.h
     zip_exceptions.h
@@ -23,13 +22,12 @@ wl_library(io_filesystem
     third_party_minizip
 )
 
-wl_library(io_filesystem_illegal_filename_tooltip
+wl_library(io_filesystem_illegal_filename_check
   SRCS
-    illegal_filename_tooltip.cc
-    illegal_filename_tooltip.h
+    illegal_filename_check.cc
+    illegal_filename_check.h
   DEPENDS
     base_i18n
     base_string
-    io_filesystem
     graphic_text_layout
 )

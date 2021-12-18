@@ -16,21 +16,52 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-// this originally comes from Return to the Shadows (http://www.rtts.org/)
-// files.cc: provides all the OS abstraction to access files
 
-#include "io/filesystem/illegal_filename_tooltip.h"
+#include "io/filesystem/illegal_filename_check.h"
 
 #include <cstdlib>
 #include <list>
 #include <string>
+#include <vector>
 
 #include "base/i18n.h"
 #include "base/string.h"
 #include "graphic/text_layout.h"
-#include "io/filesystem/illegal_filename_characters.h"
 
 namespace FileSystemHelper {
+
+// Characters that are allowed in filenames, but not at the beginning
+const std::vector<std::string> illegal_filename_starting_characters {
+   ".", "-",
+   " ",  // Keep the blank last
+};
+
+// Characters that are disallowed anywhere in a filename
+// No potential file separators or other potentially illegal characters
+// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
+// http://www.linfo.org/file_name.html
+// https://support.apple.com/en-us/HT202808
+// We can't just regex for word & digit characters here because of non-Latin scripts.
+const std::vector<std::string> illegal_filename_characters {
+   "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
+};
+
+bool is_legal_filename(const std::string& filename) {
+	if (filename.empty()) {
+		return false;
+	}
+	for (const std::string& illegal_start : illegal_filename_starting_characters) {
+		if (starts_with(filename, illegal_start)) {
+			return false;
+		}
+	}
+	for (const std::string& illegal_char : illegal_filename_characters) {
+		if (contains(filename, illegal_char)) {
+			return false;
+		}
+	}
+	return true;
+}
 
 std::string illegal_filename_tooltip() {
 	std::vector<std::string> starting_characters;

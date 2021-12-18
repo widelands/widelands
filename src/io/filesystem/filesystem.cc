@@ -47,7 +47,6 @@
 #include "config.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
-#include "io/filesystem/illegal_filename_characters.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 
@@ -198,23 +197,6 @@ char FileSystem::file_separator() {
 #else
 	return '/';
 #endif
-}
-
-bool FileSystem::is_legal_filename(const std::string& filename) {
-	if (filename.empty()) {
-		return false;
-	}
-	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (starts_with(filename, illegal_start)) {
-			return false;
-		}
-	}
-	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (contains(filename, illegal_char)) {
-			return false;
-		}
-	}
-	return true;
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems

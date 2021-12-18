@@ -107,7 +107,7 @@ wl_library(editor
     graphic_surface
     graphic_text_layout
     io_filesystem
-    io_filesystem_illegal_filename_tooltip
+    io_filesystem_illegal_filename_check
     logic
     logic_addons
     logic_constants
