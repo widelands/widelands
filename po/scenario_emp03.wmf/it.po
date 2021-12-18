@@ -1321,8 +1321,8 @@ msgstr ""
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Abbiamo ancora bisogno di scoprire %d pezzo del nostro tempio."
+msgstr[1] "Abbiamo ancora bisogno di scoprire %d pezzi del nostro tempio."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
