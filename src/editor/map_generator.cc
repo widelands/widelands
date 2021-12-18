@@ -639,7 +639,7 @@ bool MapGenerator::create_random_map() {
 		//  current node.
 
 		//  ... Treat "even" and "uneven" row numbers differently
-		uint32_t const x_dec = static_cast<const uint32_t>(fc.y % 2 == 0);
+		uint32_t const x_dec = static_cast<uint32_t>(fc.y % 2 == 0);
 
 		uint32_t right_x = fc.x + 1;
 		uint32_t lower_y = fc.y + 1;

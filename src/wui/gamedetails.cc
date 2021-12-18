@@ -231,7 +231,7 @@ std::string GameDetails::show_minimap(const SavegameData& gamedata) {
 				filename.append(kSavegameExtension);
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   egbase_.mutable_map()->get_correct_loader(filename));
-				if ((ml.get() != nullptr) &&
+				if ((ml != nullptr) &&
 				    0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
 					minimap_cache_[last_game_] =
 					   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,

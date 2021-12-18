@@ -227,7 +227,7 @@ void CmdBulldoze::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mo
 		if (packet_version == kCurrentPacketVersionCmdBulldoze) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
-			recurse = (2 <= packet_version ? fr.unsigned_8() : 0 != 0);
+			recurse = (2 <= packet_version) && (fr.unsigned_8() != 0);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBulldoze", packet_version, kCurrentPacketVersionCmdBulldoze);
