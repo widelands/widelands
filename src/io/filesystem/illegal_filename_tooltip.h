@@ -27,7 +27,7 @@
 #include <string>
 
 namespace FileSystemHelper {
-extern std::string illegal_filename_tooltip();
+std::string illegal_filename_tooltip();
 }
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_ILLEGAL_FILENAME_TOOLTIP_H

@@ -26,7 +26,6 @@
 #include <string>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/string.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/illegal_filename_characters.h"

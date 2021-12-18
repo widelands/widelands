@@ -25,9 +25,11 @@ wl_library(io_filesystem
 
 wl_library(io_filesystem_illegal_filename_tooltip
   SRCS
-    illegal_filename_tooltip.h
     illegal_filename_tooltip.cc
+    illegal_filename_tooltip.h
   DEPENDS
+    base_i18n
+    base_string
     io_filesystem
     graphic_text_layout
 )

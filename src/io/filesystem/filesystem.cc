@@ -45,7 +45,6 @@
 #include "base/log.h"
 #include "base/string.h"
 #include "config.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/illegal_filename_characters.h"

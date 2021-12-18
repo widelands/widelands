@@ -20,7 +20,6 @@
 #ifndef WL_IO_FILESYSTEM_ILLEGAL_FILENAME_CHARACTERS_H
 #define WL_IO_FILESYSTEM_ILLEGAL_FILENAME_CHARACTERS_H
 
-namespace {
 // Characters that are allowed in filenames, but not at the beginning
 static const std::vector<std::string> illegal_filename_starting_characters{
    ".", "-",
@@ -36,7 +35,5 @@ static const std::vector<std::string> illegal_filename_starting_characters{
 static const std::vector<std::string> illegal_filename_characters{
    "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
-
-}  // namespace
 
 #endif  // end of include guard: WL_IO_FILESYSTEM_ILLEGAL_FILENAME_CHARACTERS_H
