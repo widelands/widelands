@@ -31,9 +31,13 @@
 
 namespace AI {
 
-constexpr int kNoAiTrainingMutation = 200;
-constexpr int kUpperDefaultMutationLimit = 150;
-constexpr int kLowerDefaultMutationLimit = 75;
+constexpr int kNoAiTrainingMutation = 501;
+constexpr int kUpperDefaultMutationLimit = 500;
+constexpr int kLowerDefaultMutationLimit = 425;
+
+constexpr int kMilitaryNumbersPos = 0;
+constexpr int kNeuronsPos = 1;
+constexpr int kFNeuronsPos = 2;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe)
@@ -779,10 +783,12 @@ void ManagementData::mutate(const uint8_t pn) {
 
 	assert(probability > 0 && probability <= 201);
 
-	verb_log_dbg("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
+	verb_log_dbg("AIPARSE %2d  mutating_probability 1 / %3d preffered numbers target %d %s:\n", pn,
 	             probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
-	if (probability < 201) {
+	uint16_t changed_stat [3] = { }; // sum for military numbers, neurons and f-neurons
+
+	if (probability < kNoAiTrainingMutation) {
 
 		// Modifying pool of Military numbers
 		{
@@ -806,6 +812,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
+					changed_stat[kMilitaryNumbersPos] += 1;
 					verb_log_dbg(
 					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
 					   new_value,
@@ -838,6 +845,7 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
+					changed_stat[kNeuronsPos] += 1;
 					verb_log_dbg(
 					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					   old_value, item.get_weight(), item.get_type(),
@@ -878,6 +886,7 @@ void ManagementData::mutate(const uint8_t pn) {
 				}
 
 				if (changed_bits) {
+					changed_stat[kFNeuronsPos] += 1;
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
 					             item.get_id(), item.get_int(), changed_bits,
@@ -886,6 +895,9 @@ void ManagementData::mutate(const uint8_t pn) {
 			}
 		}
 	}
+
+	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn, changed_stat[kMilitaryNumbersPos],
+	             changed_stat[kNeuronsPos], changed_stat[kFNeuronsPos]);
 
 	test_consistency();
 }
