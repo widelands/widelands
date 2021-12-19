@@ -13,8 +13,8 @@ wl_library(graphic_styles
     ware_info_style.h
     window_style.h
   DEPENDS
+    base
     base_exceptions
-    base_string
     graphic_color
     graphic_surface
 )

@@ -72,11 +72,9 @@ wl_library(ui_fsmenu
     training_wheel_options.h
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_random
-    base_string
     build_info
     editor
     graphic

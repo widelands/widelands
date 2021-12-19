@@ -22,7 +22,6 @@
 #include <list>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"

@@ -17,9 +17,6 @@
  *
  */
 
-#ifdef _WIN32
-#include "base/log.h"
-#endif
 #include "base/test.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,9 +38,6 @@ struct TestingFlag : public Widelands::Flag {
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
-#ifdef _WIN32
-		set_logging_dir();
-#endif
 		g_fs = new LayeredFileSystem();
 	}
 	~WlTestFixture() {
