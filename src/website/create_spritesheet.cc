@@ -373,9 +373,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
  */
 
 int main(int argc, char** argv) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
+	set_testcase_logging_dir();
 	if (argc != 4) {
 		log_err("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;

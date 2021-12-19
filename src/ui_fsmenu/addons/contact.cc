@@ -19,8 +19,6 @@
 
 #include "ui_fsmenu/addons/contact.h"
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"

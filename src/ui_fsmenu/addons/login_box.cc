@@ -19,8 +19,6 @@
 
 #include "ui_fsmenu/addons/login_box.h"
 
-#include <boost/format.hpp>
-
 #include "base/string.h"
 #include "third_party/sha1/sha1.h"
 #include "ui_fsmenu/addons/manager.h"
