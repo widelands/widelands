@@ -124,8 +124,7 @@ private:
 	 * \param version Whether a IPv4 or IPv6 socket should be opened.
 	 * \param port The port to listen on.
 	 */
-	void
-	start_socket(asio::ip::udp::socket* socket, asio::ip::udp version, uint16_t port);
+	void start_socket(asio::ip::udp::socket* socket, asio::ip::udp version, uint16_t port);
 
 	/**
 	 * Closes the given socket.

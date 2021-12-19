@@ -247,12 +247,11 @@ bool LanBase::send(void const* const buf, size_t const len, const NetAddress& ad
 
 bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const port) {
 
-	const auto do_broadcast = [this, buf, len, port](asio::ip::udp::socket& socket,
-	                                                 const std::string& address) -> bool {
+	const auto do_broadcast = [this, buf, len, port](
+	                             asio::ip::udp::socket& socket, const std::string& address) -> bool {
 		if (socket.is_open()) {
 			std::error_code ec;
-			asio::ip::udp::endpoint destination(
-			   asio::ip::address::from_string(address), port);
+			asio::ip::udp::endpoint destination(asio::ip::address::from_string(address), port);
 			socket.send_to(asio::buffer(buf, len), destination, 0, ec);
 			if (!ec) {
 				return true;
@@ -304,9 +303,7 @@ bool LanBase::broadcast(void const* const buf, size_t const len, uint16_t const 
 	return one_success;
 }
 
-void LanBase::start_socket(asio::ip::udp::socket* socket,
-                           asio::ip::udp version,
-                           uint16_t port) {
+void LanBase::start_socket(asio::ip::udp::socket* socket, asio::ip::udp version, uint16_t port) {
 
 	if (socket->is_open()) {
 		return;

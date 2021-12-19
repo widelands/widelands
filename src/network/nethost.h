@@ -77,9 +77,9 @@ private:
 	 * @param acceptor The acceptor we should be listening on.
 	 * @param pair A pair of the BufferedConnection for the new client and its socket.
 	 */
-	void start_accepting(
-	   asio::ip::tcp::acceptor& acceptor,
-	   std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair);
+	void
+	start_accepting(asio::ip::tcp::acceptor& acceptor,
+	                std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair);
 
 	/**
 	 * Tries to listen on the given port.
@@ -95,8 +95,7 @@ private:
 	 * @param endpoint The IP version, transport protocol and port number we should listen on.
 	 * @return \c True iff the acceptor is listening now.
 	 */
-	bool open_acceptor(asio::ip::tcp::acceptor* acceptor,
-	                   const asio::ip::tcp::endpoint& endpoint);
+	bool open_acceptor(asio::ip::tcp::acceptor* acceptor, const asio::ip::tcp::endpoint& endpoint);
 
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.

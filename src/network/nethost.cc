@@ -149,32 +149,29 @@ void NetHost::start_accepting(
 		pair = BufferedConnection::create_unconnected();
 	}
 
-	acceptor.async_accept(
-	   *(pair.second), [this, &acceptor, &pair](const std::error_code& ec) {
-		   if (!ec) {
-			   // No error occurred, so we have establish a (TCP) connection.
-			   // We can't say whether it is valid Widelands client yet
-			   pair.first->notify_connected();
-			   assert(pair.first->is_connected());
-			   std::lock_guard<std::mutex> lock(mutex_accept_);
-			   accept_queue_.push(std::move(pair.first));
-			   // pair.first is cleared by the std::move
-			   pair.second = nullptr;
-		   }
-		   // Wait for the next client
-		   start_accepting(acceptor, pair);
-	   });
+	acceptor.async_accept(*(pair.second), [this, &acceptor, &pair](const std::error_code& ec) {
+		if (!ec) {
+			// No error occurred, so we have establish a (TCP) connection.
+			// We can't say whether it is valid Widelands client yet
+			pair.first->notify_connected();
+			assert(pair.first->is_connected());
+			std::lock_guard<std::mutex> lock(mutex_accept_);
+			accept_queue_.push(std::move(pair.first));
+			// pair.first is cleared by the std::move
+			pair.second = nullptr;
+		}
+		// Wait for the next client
+		start_accepting(acceptor, pair);
+	});
 }
 
 NetHost::NetHost(const uint16_t port)
    : next_id_(1), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
-	if (open_acceptor(
-	       &acceptor_v4_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))) {
+	if (open_acceptor(&acceptor_v4_, asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port))) {
 		verb_log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u", port);
 	}
-	if (open_acceptor(
-	       &acceptor_v6_, asio::ip::tcp::endpoint(asio::ip::tcp::v6(), port))) {
+	if (open_acceptor(&acceptor_v6_, asio::ip::tcp::endpoint(asio::ip::tcp::v6(), port))) {
 		verb_log_info("[NetHost] Opening a listening IPv6 socket on TCP port %u", port);
 	}
 
