@@ -69,20 +69,27 @@ namespace format_impl {
       b                   boolean                     Similar to string
       i,d,li,ld,lli,lld   int
       u,lu,llu            unsigned int
-      x                   hexadecimal int (lowercase)
-      X                   hexadecimal int (uppercase)
+      x                   signed hexadecimal int (lowercase)
+      X                   signed hexadecimal int (uppercase)
       p                   unsigned hexadecimal int (lowercase)
       P                   unsigned hexadecimal int (uppercase)
       f                   float/double
+
+   Some notes:
+      - The number of optional 'l' characters in %i, %d, and %u placeholders is limited to 2; it
+        has no semantic meaning though as their arguments are always cast to a 64-bit value.
+      - The %c specifier escapes control characters (0x0 to 0x1F and 0x7F) using caret notation.
+      - The %p and %P specifiers add the prefix "0x" to the output; %x and %X do not add a prefix.
+      - It is not possible to print a floating-point number in scientific exponent notation.
 
    The argument that controls localized output has the following effects:
       - Translatable decimal separator for floating point values.
       - Translatable "true"/"false" constants for booleans.
       - Unicode minus sign for negative numbers.
-      - Unicode plusminus sign for integers with value zero if the '+' flag is set.
+      - Unicode digit-sized whitespace for integers with value zero if the '+' flag is set.
 
-   Unsigned integral values may not be larger than (2^64)-1, so that they can be stored in a
-   uint64_t. All other numeric values may not be larger than (2^63)-1 or smaller than
+   Unsigned integral and pointer values may not be greater than (2^64)-1, so that they can be
+   stored in a uint64_t. All other numeric values may not be larger than (2^63)-1 or less than
    1-(2^63), so that they can be cast to int64_t. This also applies to floats and doubles.
 */
 
