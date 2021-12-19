@@ -426,33 +426,27 @@ void InfoPanel::update_time_speed_string() {
 		}
 	}
 
-	// @CodeCheck allow boost::format
-	boost::format f;
 	switch (non_empty.size()) {
 	case 0:
 		text_time_speed_.set_text("");
-		return;
+		break;
 	case 1:
 		text_time_speed_.set_text(*non_empty.back());
-		return;
+		break;
 	case 2:
-		// @CodeCheck allow boost::format
-		/** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed) */
-		f = boost::format(_("%1$s · %2$s"));
+		text_time_speed_.set_text(bformat(
+		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		    */
+		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
-		// @CodeCheck allow boost::format
-		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		f = boost::format(_("%1$s · %2$s · %3$s"));
+		text_time_speed_.set_text(bformat(
+		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
+		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();
 	}
-
-	for (std::string* s : non_empty) {
-		f % *s;
-	}
-	text_time_speed_.set_text(f.str());
 }
 
 void InfoPanel::fast_forward_message_queue() {

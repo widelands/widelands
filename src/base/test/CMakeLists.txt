@@ -9,6 +9,7 @@ wl_test(test_base
     test_utf8.cc
     test_string.cc
   DEPENDS
+    base
     base_geometry
     base_math
     base_md5
@@ -16,5 +17,4 @@ wl_test(test_base
     base_times
     base_time_string
     base_utf8
-    base_string
 )
