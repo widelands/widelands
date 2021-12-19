@@ -115,4 +115,73 @@ TESTCASE(trim_split_replace) {
 	check_equal(str, "foo/wordr/wordz");
 }
 
+TESTCASE(string_formatting) {
+	check_equal("Hello World", bformat("%s", "Hello World"));
+	check_equal("Hello World", bformat("%s %s", "Hello", "World"));
+	check_equal("Hello World", bformat("%1$s %2%", "Hello", "World"));
+	check_equal("Hello World", bformat("%2% %1%", "World", "Hello"));
+	check_equal("   Hello World", bformat("%1$14s", "Hello World"));
+	check_equal("Hello World   ", bformat("%-14s", "Hello World"));
+	check_equal("         Hello", bformat("%14.5s", "Hello World"));
+	check_equal("Hello         ", bformat("%1$-14.5s", "Hello World"));
+
+	check_equal("A123X", bformat("A%dX", 123));
+	check_equal("A-1X", bformat("A%dX", -1));
+	check_equal("A+123X", bformat("A%0+2dX", 123));
+	check_equal("A+123    X", bformat("A%+-8dX", 123));
+	check_equal("A+123    X", bformat("A%-+8dX", 123));
+	check_equal("A123     X", bformat("A%-8dX", 123));
+	check_equal("A     123X", bformat("A%8dX", 123));
+	check_equal("A00000123X", bformat("A%08dX", 123));
+	check_equal("A    +123X", bformat("A%+8dX", 123));
+	check_equal("A+0000123X", bformat("A%+08dX", 123));
+	check_equal("A    -123X", bformat("A%+8dX", -123));
+	check_equal("A      +0X", bformat("A%+8dX", 0));
+	check_equal("A0123X", bformat("A%d%u%d%uX", 0, 1, 2, 3));
+
+	check_equal("AfalsetrueX", bformat("A%b%bX", 0, 1));
+	check_equal("Aw77X", bformat("A%2$c%1$iX", 77, 'w'));
+	check_equal("A^@X", bformat("A%1$cX", '\0'));
+	check_equal("A^MX", bformat("A%cX", '\r'));
+	check_equal("A^[X", bformat("A%1%X", '\x1b'));
+
+	check_equal("AnullptrX", bformat("A%PX", nullptr));
+	check_equal("A0x123abcX", bformat("A%pX", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A0x123abcX", bformat("A%1%X", reinterpret_cast<int*>(0x123abc)));
+	check_equal("A+0xABC123X", bformat("A%+PX", 0xabc123));
+	check_equal("A-ABC123X", bformat("A%XX", -0xabc123));
+	check_equal("A1194684X", bformat("A%1%X", 0x123abc));
+
+	check_equal("A123.456X", bformat("A%.3fX", 123.456));
+	check_equal("A-0.45600000X", bformat("A%2.8fX", -0.456));
+	check_equal("A-0.300X", bformat("A%2.3fX", -0.2999));
+	check_equal("A      12.3X", bformat("A%10.1fX", 12.34567));
+	check_equal("A123      X", bformat("A%-9.0fX", 123.456));
+	check_equal("A+123.5   X", bformat("A%+-9.1fX", 123.456));
+	check_equal("A+00123.46X", bformat("A%0+9.2fX", 123.456));
+
+	format_impl::ArgsPair p1, p2;
+	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;
+	p1.second.string_val = "World";
+	p2.second.string_val = "Hello";
+	check_equal("Hello World", bformat("%2% %1%", format_impl::ArgsVector{p1, p2}));
+	check_equal("World Hello", bformat("%2% %1%", format_impl::ArgsVector{p2, p1}));
+
+	check_error("invalid placeholder", []() { bformat("%q", 1); });
+	check_error("invalid placeholder", []() { bformat("%lf", 1); });
+	check_error("invalid character after %", []() { bformat("%|1$d|", 1); });
+	check_error("end of string", []() { bformat("%02.7", 4); });
+	check_error("missing placeholder", []() { bformat("%2% %3$i", 2, 3); });
+	check_error("duplicate placeholder", []() { bformat("%1% %1$d", 1, 1); });
+	check_error("mixed placeholders", []() { bformat("%4d %2%", 123, 123); });
+	check_error("too many args", []() { bformat("%u %li %lld", 1, 2, 3, 4); });
+	check_error("too few args", []() { bformat("%lu %llu %lli", 1, 2); });
+	check_error("wrong arg type", []() { bformat("%s", 1); });
+	check_error("wrong arg type", []() { bformat("%i", "foo"); });
+	check_error("float too large", []() { bformat("%f", 12345678901234567890.f); });
+	check_error("int too large", []() { bformat("%ld", 0x876543210fedcba9); });
+	check_error("invalid flag combination", []() { bformat("%-05d", 123); });
+	check_error("repeated flag", []() { bformat("%+0+5d", 123); });
+}
+
 TESTSUITE_END()

@@ -18,4 +18,4 @@
  */
 
 #include "base/test.h"
-TEST_EXECUTABLE(economy)
+TEST_EXECUTABLE(economy, true)

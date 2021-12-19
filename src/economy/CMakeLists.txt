@@ -58,8 +58,8 @@ wl_library(economy
     workers_queue.cc
     workers_queue.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
     base_times
     graphic
