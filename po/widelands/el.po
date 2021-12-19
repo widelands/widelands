@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-13 02:43+0000\n"
+"POT-Creation-Date: 2021-12-16 02:44+0000\n"
 "PO-Revision-Date: 2021-12-07 02:58+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
@@ -263,8 +263,8 @@ msgstr "Νοε"
 msgid "Dec"
 msgstr "Δεκ"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:295
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -278,12 +278,12 @@ msgstr "Αρχικό Μενού"
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -304,7 +304,7 @@ msgid "Redo"
 msgstr "Επανάληψη"
 
 #: ../../src/editor/editorinteractive.cc:167
-#: ../../src/wui/buildingwindow.cc:418 ../../src/wui/interactive_player.cc:225
+#: ../../src/wui/buildingwindow.cc:418 ../../src/wui/interactive_player.cc:226
 msgid "Help"
 msgstr "Βοήθεια"
 
@@ -473,10 +473,10 @@ msgstr "Πληροφορίες"
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Unsupported Format"
 msgstr "Μη Υποστηριζόμενη Δομή"
 
-#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:774
+#: ../../src/editor/editorinteractive.cc:480 ../../src/wlapplication.cc:775
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -565,11 +565,11 @@ msgstr "Ο χάρτης δεν έχει αποθηκευτεί. Θέλετε σ�
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:464
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:127
 #: ../../src/ui_fsmenu/launch_mpg.cc:292 ../../src/ui_fsmenu/main.cc:232
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1614
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:937 ../../src/wlapplication.cc:1616
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1394,8 +1394,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -1438,8 +1438,8 @@ msgstr ""
 #: ../../src/game_io/game_loader.cc:174 ../../src/map_io/map_saver.cc:148
 #: ../../src/map_io/widelands_map_loader.cc:388
 #: ../../src/wlapplication_options.cc:523
-#: ../../src/wui/interactive_player.cc:216
-#: ../../src/wui/interactive_player.cc:454
+#: ../../src/wui/interactive_player.cc:217
+#: ../../src/wui/interactive_player.cc:455
 msgid "Messages"
 msgstr "Μηνύματα"
 
@@ -1745,11 +1745,11 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:1180
+#: ../../src/logic/game.cc:1179
 msgid "Trade Offer"
 msgstr "Προσφορά Εμπορίου"
 
-#: ../../src/logic/game.cc:1182
+#: ../../src/logic/game.cc:1181
 msgid "This market has received a new trade offer."
 msgstr "Αυτή η αγορά δέχτηκε μια νέα εμπορική προσφορά."
 
@@ -2211,7 +2211,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:183
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:152
-#: ../../src/wui/interactive_player.cc:323
+#: ../../src/wui/interactive_player.cc:324
 #: ../../src/wui/productionsitewindow.cc:95
 #: ../../src/wui/warehousewindow.cc:265
 msgid "Wares"
@@ -2233,7 +2233,7 @@ msgstr "Εργάτες"
 #: ../../src/map_io/map_saver.cc:221
 #: ../../src/map_io/widelands_map_loader.cc:323
 #: ../../src/wui/general_statistics_menu.cc:148
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:197
+#: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:197
 msgid "Buildings"
 msgstr "Κτίρια"
 
@@ -2473,7 +2473,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_loader.cc:406
 #: ../../src/wlapplication_options.cc:519
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:209
 msgid "Objectives"
 msgstr "Στόχοι"
 
@@ -2531,7 +2531,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:143 ../../src/network/gamehost.cc:543
-#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:724
+#: ../../src/ui_fsmenu/launch_spg.cc:165 ../../src/wlapplication.cc:725
 msgid "Preparing game…"
 msgstr ""
 
@@ -4959,7 +4959,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:294
-#: ../../src/wui/interactive_player.cc:328
+#: ../../src/wui/interactive_player.cc:329
 msgid "General"
 msgstr ""
 
@@ -5873,7 +5873,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:251 ../../src/wui/interactive_player.cc:374
+#: ../../src/ui_fsmenu/options.cc:251 ../../src/wui/interactive_player.cc:375
 msgid "Show Workarea Overlaps"
 msgstr ""
 
@@ -6056,18 +6056,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:163
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:166
 msgid "Authors"
 msgstr ""
@@ -6100,59 +6100,59 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
-#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:105
+#: ../../src/wlapplication.cc:778 ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:787 ../../src/wui/savegameloader.cc:105
 msgid "Error message:"
 msgstr "Μήνυμα σφάλματος:"
 
-#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:779 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Σφάλμα δεδομένων παιχνιδιού"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:781
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:783
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1278
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1283
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1438
+#: ../../src/wlapplication.cc:1439
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1559
+#: ../../src/wlapplication.cc:1560
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1577
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1629
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1629
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1632
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6166,7 +6166,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1641
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6176,11 +6176,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1666
+#: ../../src/wlapplication.cc:1667
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1667
+#: ../../src/wlapplication.cc:1668
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7118,9 +7118,9 @@ msgstr "Λιμάνια"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7508,8 +7508,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -8064,25 +8064,25 @@ msgid "Pause the Game"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Statistics"
 msgstr "Στατιστικά"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:38
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "Θαλασσοπορεία"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:308
+#: ../../src/wui/interactive_player.cc:309
 #: ../../src/wui/militarysitewindow.cc:41 ../../src/wui/warehousewindow.cc:288
 msgid "Soldiers"
 msgstr "Στρατιώτες"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:41
+#: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:41
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:82
 msgid "Stock"
 msgstr "Απόθεμα"
@@ -8090,17 +8090,17 @@ msgstr "Απόθεμα"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:371
+#: ../../src/wui/interactive_player.cc:372
 msgid "Hide Workarea Overlaps"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:377
+#: ../../src/wui/interactive_player.cc:378
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:459
+#: ../../src/wui/interactive_player.cc:460
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

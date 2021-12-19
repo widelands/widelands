@@ -432,7 +432,7 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
-	   new UI::Button(button_box, bformat("building_button%s", id), 0, 0, kBuildGridCellWidth,
+	   new UI::Button(button_box, bformat("building_button%d", id), 0, 0, kBuildGridCellWidth,
 	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
 	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	                  UI::Button::VisualState::kFlat);

@@ -826,9 +826,9 @@ void RemoteInteractionWindow::update_data() {
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() ?
-         bformat(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                       "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
-	              info_->average_rating(), info_->number_of_votes()) :
+         bformat_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                         "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
+	                info_->average_rating(), info_->number_of_votes()) :
          _("No votes yet"));
 
 	uint32_t most_votes = 1;

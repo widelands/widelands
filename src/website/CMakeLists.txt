@@ -6,10 +6,8 @@ wl_library(website_common
     website_common.cc
     website_common.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
-    base_multithreading
     graphic
     io_filesystem
 )
@@ -18,7 +16,7 @@ wl_binary(wl_create_spritesheet
   SRCS
     create_spritesheet.cc
   DEPENDS
-    base_log
+    base
     base_macros
     graphic
     graphic_animation
@@ -36,7 +34,7 @@ wl_binary(wl_map_info
   SRCS
     map_info.cc
   DEPENDS
-    base_log
+    base
     graphic
     graphic_image_io
     graphic_minimap_renderer
@@ -54,7 +52,7 @@ wl_binary(wl_map_object_info
   SRCS
     map_object_info.cc
   DEPENDS
-    base_log
+    base
     base_macros
     graphic
     io_fileread

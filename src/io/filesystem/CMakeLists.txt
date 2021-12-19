@@ -13,11 +13,9 @@ wl_library(io_filesystem
     zip_filesystem.cc
     zip_filesystem.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
-    base_string
     graphic_text_layout
     io_stream
     third_party_minizip
