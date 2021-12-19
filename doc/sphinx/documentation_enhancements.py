@@ -124,37 +124,41 @@ class LuaClasses:
                     return tree
         return tree
 
-    def get_instances(self, c_name):
-        # Because some classes have the same name, we have to gather all.
-        l = []
+    def get_name(self, cls_inst):
+        # Returns either the long_name or name, depending of double defined
+        # class names.
+        found = 0
         for c in self.all_classes:
-            if c.name == c_name:
-                l.append(c)
-        return l
+            if c.name == cls_inst.name:
+                found += 1
+        if found > 1:
+            return cls_inst.long_name
+        return cls_inst.name
 
 
-    def get_instance(self, cls_name, outfile):
+    def get_instance(self, cls_str, outfile):
+        # Returns a LuaClass object
         for c in self.all_classes:
-            if cls_name == c.name and outfile == c.outfile:
+            if cls_str == c.name and outfile == c.outfile:
                 return c
         raise Exception('No class named "{}" found with outfile "{}": '.format(
-            cls_name, outfile))
+            cls_str, outfile))
 
 
     def get_children_rows(self, cls_inst, max_children=0, tree=None):
         if tree == None:
             tree = []
-        for c in self.all_classes:
-            if c == cls_inst:
-                if not c.children or max_children == MAX_CHILDREN:
+        for parent in self.all_classes:
+            if parent == cls_inst:
+                if not parent.children or max_children == MAX_CHILDREN:
                     return tree
                 else:
                     max_children += 1
                     l = []
-                    l.append(c)
-                    l.append([x for x in c.children])
+                    l.append(parent)
+                    l.append([x for x in parent.children])
                     tree.append(l)
-                    for child in c.children:
+                    for child in parent.children:
                         self.get_children_rows(child, max_children, tree)
         return tree
 
@@ -305,12 +309,12 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
                         a=show_list[i-1].name,
                         link=show_list[i-1].get_graphviz_link(),
-                        b=cur_cls
+                        b=cur_cls.name
                         )
         else:
             # No parents
             ret_str = '{base} -- {cur}'.format(base=base_name,
-                                               cur=cur_cls
+                                               cur=cur_cls.name
                                                )
     return base_name, base_link, ret_str
 
@@ -320,15 +324,18 @@ def format_graphviz_children(cls_inst):
     def _create_row(parent, children):
         ret_str = ''
         for child in children:
-            ret_str += '{} [{url}, label="{label}"]'.format(child.name,
+            name = classes.get_name(child)
+            ret_str += '"{}" [{url}, label="{label}"]'.format(name,
                                                     url=child.get_graphviz_link(),
-                                                    label=child.name)
+                                                    label=name)
             # Add spaces to make sphinx happy
             ret_str += '\n    '
-            ret_str += '{} -- {}\n    '.format(parent.name, child.name)
+            ret_str += '{} -- "{}"\n    '.format(parent.name, name)
         return ret_str
 
     all_children = classes.get_children_rows(cls_inst)
+    for parent, children in all_children:
+        print(i, parent.name, [x.name for x in children])
     ret_str = ''
     for parent, children in all_children:
         ret_str += _create_row(parent, children)
@@ -338,7 +345,7 @@ def format_graphviz_children(cls_inst):
 
 def create_directive(cls_inst):
     children = format_graphviz_children(cls_inst)
-    base_cls, base_link, parents = format_graphviz_parents(cls_inst.name)
+    base_cls, base_link, parents = format_graphviz_parents(cls_inst)
     graph_directive = None
 
     if parents or children:
@@ -368,13 +375,11 @@ def create_directive(cls_inst):
 
 def add_dependency_graph(rst_data, outfile):
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
-    for c_name in found_cls:
-        cls_inst = classes.get_instance(c_name, outfile)
-        if not isinstance(cls_inst, LuaClass):
-            raise
+    for cls_name in found_cls:
+        cls_inst = classes.get_instance(cls_name, outfile)
         directive = create_directive(cls_inst)
         if directive:
-            repl_str = '.. class:: {}\n\n'.format(c_name)
+            repl_str = '.. class:: {}\n\n'.format(cls_name)
             directive_str = '{}\n{}'.format(directive, repl_str)
             rst_data = rst_data.replace(repl_str, directive_str)
 
