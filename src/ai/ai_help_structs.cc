@@ -409,7 +409,8 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	}
 }
 bool BuildingObserver::buildable(const Widelands::Player& p) {
-	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
+	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id) &&
+	       p.tribe().has_building(id);
 }
 
 // as all mines have 3 levels, AI does not know total count of mines per mined material
@@ -576,7 +577,7 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 
 	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, kNeuronWeightLimit);
 	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -kNeuronWeightLimit);
-	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);  // NOLINT
+	int16_t new_value = bottom_limit + RNG::static_rand(upper_limit - bottom_limit + 1);
 
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
 		new_value = 0;
@@ -637,8 +638,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	verb_log_dbg("%2d: DNA initialization... \n", pn);
 
-	primary_parent = std::rand() % 4;         // NOLINT
-	const uint8_t parent2 = std::rand() % 4;  // NOLINT
+	primary_parent = RNG::static_rand(4);
+	const uint8_t parent2 = RNG::static_rand(4);
 
 	std::vector<int16_t> AI_military_numbers_P1(
 	   Widelands::Player::AiPersistentState::kMagicNumbersSize);
@@ -661,7 +662,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
-		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                DnaParent::kPrimary :
                                DnaParent::kSecondary;
 		if (i == kMutationRatePosition) {  // Overwriting
@@ -683,7 +684,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	persistent_data->f_neurons.clear();
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                      DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 
@@ -700,7 +701,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	}
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                      DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 		switch (dna_donor) {
@@ -722,7 +723,7 @@ MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
 	if (is_preferred > 0) {
 		return MutatingIntensity::kAgressive;
 	}
-	if (std::rand() % mutation_probability == 0) {  // NOLINT
+	if (RNG::static_rand(mutation_probability) == 0) {
 		return MutatingIntensity::kNormal;
 	}
 	return MutatingIntensity::kNo;
@@ -766,8 +767,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	}
 
 	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && std::rand() % 8 == 0 &&  // NOLINT
-	    ai_type == AiType::kNormal) {
+	if (ai_training_mode_ && RNG::static_rand(8) == 0 && ai_type == AiType::kNormal) {
 		probability /= 3;
 		preferred_numbers_count = 5;
 		wild_card = true;
@@ -786,7 +786,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// [-kWeightRange, kWeightRange]
 			std::set<int32_t> preferred_numbers;
 			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_numbers.insert(std::rand() % pref_number_probability);  // NOLINT
+				preferred_numbers.insert(RNG::static_rand(pref_number_probability));
 			}
 
 			for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
@@ -815,7 +815,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// Neurons to be mutated more agressively
 			std::set<int32_t> preferred_neurons;
 			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
+				preferred_neurons.insert(RNG::static_rand(pref_number_probability));
 			}
 			for (auto& item : neuron_pool) {
 
@@ -824,9 +824,9 @@ void ManagementData::mutate(const uint8_t pn) {
 
 				if (mutating_intensity != MutatingIntensity::kNo) {
 					const int16_t old_value = item.get_weight();
-					if (std::rand() % 4 == 0) {  // NOLINT
+					if (RNG::static_rand(4) == 0) {
 						assert(!neuron_curves.empty());
-						item.set_type(std::rand() % neuron_curves.size());  // NOLINT
+						item.set_type(RNG::static_rand(neuron_curves.size()));
 						persistent_data->neuron_functs[item.get_id()] = item.get_type();
 					} else {
 						int16_t new_value = shift_weight_value(
@@ -851,7 +851,7 @@ void ManagementData::mutate(const uint8_t pn) {
 			// preferred_numbers_count is multiplied by 3 because FNeuron store more than
 			// one value
 			for (int i = 0; i < 3 * preferred_numbers_count; i++) {
-				preferred_f_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
+				preferred_f_neurons.insert(RNG::static_rand(pref_number_probability));
 			}
 
 			for (auto& item : f_neuron_pool) {
@@ -859,14 +859,14 @@ void ManagementData::mutate(const uint8_t pn) {
 				// is this a preferred neuron
 				if (preferred_f_neurons.count(item.get_id()) > 0) {
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % 5 == 0) {  // NOLINT
+						if (RNG::static_rand(5) == 0) {
 							item.flip_bit(i);
 							++changed_bits;
 						}
 					}
 				} else {  // normal mutation
 					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % (probability * 3) == 0) {  // NOLINT
+						if (RNG::static_rand(probability * 3) == 0) {
 							item.flip_bit(i);
 							++changed_bits;
 						}
@@ -969,6 +969,9 @@ SchedulerTask::SchedulerTask(const Time& time,
                              const uint8_t p,
                              const char* d)
    : due_time(time), id(t), priority(p), descr(d) {
+	call_count = 0;
+	total_exec_time_ms = 0;
+	max_exec_time_ms = 0;
 }
 
 bool SchedulerTask::operator<(const SchedulerTask& other) const {
@@ -1297,15 +1300,8 @@ bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
 	assert(all_stats.count(pl1) > 0);
 	assert(all_stats.count(pl2) > 0);
-	if (pl1 == pl2) {
-		return false;
-	} else if (all_stats[pl1].team_number > 0 &&
-	           all_stats[pl1].team_number == all_stats[pl2].team_number) {
-		// team number 0 = no team
-		return true;
-	} else {
-		return false;
-	}
+	return pl1 != pl2 && all_stats.at(pl1).team_number > 0 &&
+	       all_stats.at(pl1).team_number == all_stats.at(pl2).team_number;
 }
 
 bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
@@ -1514,7 +1510,7 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	for (auto& item : flags_) {
+	for (const auto& item : flags_) {
 		if (item.coords_hash == coords_hash) {
 			return true;
 		}

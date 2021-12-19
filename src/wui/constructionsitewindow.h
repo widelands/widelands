@@ -49,7 +49,7 @@ public:
 	void refresh(uint32_t current, uint32_t max, bool enabled);
 	void set_current(uint32_t value);
 	void change_current(int32_t delta);
-	boost::signals2::signal<void()> changed;
+	Notifications::Signal<> changed;
 	uint32_t get_current() {
 		return current_;
 	}

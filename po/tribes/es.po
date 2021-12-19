@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-13 02:41+0000\n"
+"POT-Creation-Date: 2021-12-16 02:44+0000\n"
 "PO-Revision-Date: 2021-10-07 04:31+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -1184,7 +1184,7 @@ msgstr "Plantación de Mandioca"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:56
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:38
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:42
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:38
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:214
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:53
@@ -1302,7 +1302,6 @@ msgstr "Cocinera de raíz de mandioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1717,6 +1716,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de Piedra"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1728,6 +1728,8 @@ msgstr "Taller de Piedra"
 msgid "making a shovel"
 msgstr "fabricando una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1737,6 +1739,7 @@ msgstr "fabricando una pala"
 msgid "making a felling ax"
 msgstr "la fabricación del hacha de talar"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1751,6 +1754,8 @@ msgstr "fabricando un pico"
 msgid "making a machete"
 msgstr "fabricando un machete"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1761,6 +1766,7 @@ msgstr "fabricando un machete"
 msgid "making kitchen tools"
 msgstr "fabricando utensilios de cocina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1778,9 +1784,9 @@ msgstr "fabricando un martillo"
 msgid "making a chisel"
 msgstr "fabricando un cincel"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1934,16 +1940,17 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Cabaña de Guarda de Naturaleza\n\n "
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:50
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
 msgid "breeding fish"
 msgstr "alimentando peces"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
 msgid "releasing game"
 msgstr "soltando caza"
 

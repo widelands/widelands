@@ -21,6 +21,8 @@
 #ifndef WL_AI_DEFAULTAI_H
 #define WL_AI_DEFAULTAI_H
 
+#include <chrono>
+#include <ctime>
 #include <memory>
 
 #include "ai/ai_help_structs.h"
@@ -79,6 +81,7 @@ struct DefaultAI : ComputerPlayer {
 	enum class WalkSearch : uint8_t { kAnyPlayer, kOtherPlayers, kEnemy };
 	enum class WoodPolicy : uint8_t { kDismantleRangers, kStopRangers, kAllowRangers };
 	enum class NewShip : uint8_t { kBuilt, kFoundOnLoad };
+	enum class FleetStatus : uint8_t { kNeedShip = 0, kEnoughShips = 1, kDoNothing = 2 };
 	enum class PerfEvaluation : uint8_t { kForConstruction, kForDismantle };
 	enum class BasicEconomyBuildingStatus : uint8_t { kEncouraged, kDiscouraged, kNeutral, kNone };
 
@@ -185,9 +188,10 @@ private:
 	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Time&);
 	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
 	void sort_task_pool();
-	void sort_by_priority();
+	// void sort_by_priority(); NOCOM
 	void set_taskpool_task_time(const Time&, SchedulerTaskId);
 	const Time& get_taskpool_task_time(SchedulerTaskId);
+	std::chrono::high_resolution_clock::time_point time_point;
 
 	bool construct_building(const Time&);
 
@@ -292,20 +296,21 @@ private:
 	EventTimeQueue soldier_attacks_log;
 
 	// used by AI scheduler
-	uint32_t sched_stat_[20] = {0};
 	Time next_ai_think_;
 	// this is helping counter to track how many scheduler tasks are too delayed
 	// the purpose is to print out a warning that the game is pacing too fast
 	int32_t scheduler_delay_counter_;
 
-	WoodPolicy wood_policy_;
+	std::map<Widelands::DescriptionIndex, WoodPolicy> wood_policy_;
 	uint16_t trees_nearby_treshold_;
 
 	std::vector<BuildingObserver> buildings_;
+	std::vector<BuildingObserver> rangers_;
 	std::deque<Widelands::FCoords> unusable_fields;
 	std::deque<BuildableField*> buildable_fields;
 	BlockedFields blocked_fields;
 	std::unordered_set<uint32_t> ports_vicinity;
+	std::unordered_set<uint32_t> ports_shipyard_region;
 	PlayersStrengths player_statistics;
 	ManagementData management_data;
 	ExpansionType expansion_type;
@@ -322,7 +327,8 @@ private:
 	std::vector<WareObserver> wares;
 	// This is a vector that is filled up on initiatlization
 	// and no items are added/removed afterwards
-	std::vector<SchedulerTask> taskPool;
+	std::vector<std::shared_ptr<SchedulerTask>> taskPool;
+	std::vector<std::shared_ptr<SchedulerTask>> current_task_queue;
 	std::map<uint32_t, EnemySiteObserver> enemy_sites;
 	std::set<uint32_t> enemy_warehouses;
 	// it will map mined material to observer
@@ -368,7 +374,7 @@ private:
 
 	int16_t productionsites_ratio_;
 
-	bool resource_necessity_water_needed_;  // unless atlanteans
+	bool resource_necessity_water_needed_;  // unless atlanteans or amazons
 
 	// This stores highest priority for new buildings except for militarysites
 	int32_t highest_nonmil_prio_;
@@ -392,10 +398,11 @@ private:
 	   "trident", "tabard", "shield", "mask",    "spear", "warrior"};
 
 	// seafaring related
-	enum { kReprioritize, kStopShipyard, kStapShipyard };
+	enum { kReprioritize, kStopShipyard, kStartShipyard };
 	static Time last_seafaring_check_;
 	// False by default, until Map::allows_seafaring() is true
 	static bool map_allows_seafaring_;
+	bool potential_wrong_shipyard_ = false;
 	uint32_t expedition_ship_;
 	Duration expedition_max_duration;
 	std::vector<int16_t> marine_task_queue;

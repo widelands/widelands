@@ -311,8 +311,8 @@ bool MapView::View::view_near(const View& other) const {
 
 bool MapView::View::view_roughly_near(const View& other) const {
 	return zoom_near(other.zoom) &&
-	       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2 &&
-	       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2;
+	       std::abs(viewpoint.x - other.viewpoint.x) < g_gr->get_xres() / 2.f &&
+	       std::abs(viewpoint.y - other.viewpoint.y) < g_gr->get_yres() / 2.f;
 }
 
 MapView::MapView(

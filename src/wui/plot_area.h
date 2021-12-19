@@ -20,6 +20,7 @@
 #ifndef WL_WUI_PLOT_AREA_H
 #define WL_WUI_PLOT_AREA_H
 
+#include <map>
 #include <memory>
 
 #include "graphic/color.h"

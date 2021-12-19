@@ -131,3 +131,12 @@ wl_library(base_math
   DEPENDS
     base_exceptions
 )
+
+wl_library(base_test
+  SRCS
+    test.h
+    test.cc
+  DEPENDS
+    base_exceptions
+    base_string
+)

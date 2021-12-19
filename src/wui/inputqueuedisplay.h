@@ -157,6 +157,9 @@ private:
 
 	int32_t fill_index_at(int32_t, int32_t) const;
 	int32_t fill_index_under_mouse_;
+
+	void hide_from_view();
+	void nr_icons_assert() const;
 };
 
 #endif  // end of include guard: WL_WUI_INPUTQUEUEDISPLAY_H

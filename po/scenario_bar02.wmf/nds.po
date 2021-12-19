@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-28 07:16+0000\n"
+"PO-Revision-Date: 2021-11-25 07:14+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -303,7 +303,7 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr "Troon will gloven, dat Kalitat nich wieder kämpen will uns sik uns ansluten word, wenn wi komen, um Free un Gesetz weer na Alltunraan to bringen. Aver ick gloov dat nich. Kalitat is de Söhn vun eenem vun de machtigesten Offizeren, un deese Famielje hett sik nie geern vör Schatt-Karut un siener Fahn verbugen. Waarum also sall he Schatt-Karut sien Söhn helpen, sien Arv un de Throon intonehmen?"
+msgstr "Troon will gloven, dat Kalitat nich wieder kämpen will uns sik uns ansluten word, wenn wi komen, um Free un Gesetz weer na Alltunraan to brengen. Aver ick gloov dat nich. Kalitat is de Söhn vun eenem vun de machtigesten Offizeren, un deese Famielje hett sik nie geern vör Schatt-Karut un siener Fahn verbugen. Waarum also sall he Schatt-Karut sien Söhn helpen, sien Arv un de Throon intonehmen?"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
@@ -482,7 +482,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü bringen, well in de Müren vun uns’ neje Stadt wohnen, wat wi »Onduun« benöhmt hebben. wat in de ollen Spraak »Se well wachten« hett. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komsiken Sporen gifft."
+msgstr "De eersten Schanzen, wat Troon hett bauen laten, sünd nu beschickt. Jüüst nu will he Vertrauen un Free to de Lüü brengen, well in de Müren vun uns’ neje Stadt wohnen, wat wi »Onduun« benöhmt hebben. wat in de ollen Spraak »Se well wachten« hett. Aver Troon is noch nich tofree – un ick verstah siene Angst: De Walden sünd deep, un de Grenz vun Alltunraan is dicht bi. Ick bün mi seker, dat dat daar buten dusend slimmere Gefahren as de komsiken Sporen gifft."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
@@ -578,7 +578,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
+msgstr "Miene Bröörs uns hör Soldaten sünd dood un hebben Füür un Verneelen achter sik laten. In keener Ruin hebb ick normaale Lüü finnen könen, un ick hoop, dat se all ut deesem grausamen Slachtfeld utnaiht sünd un annerwaar een beters Leven begünnen hebben."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -611,7 +611,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr "Se wees ’t, de Offizeren sünd buten un kümmern sik um de Soldatereem un Boldreth sülvst föhrt de eerste Slacht an. Ick will an siener Sied rieden, um Alltunraan vun deesem Krieg freeitomaken un weer Free to uns’ Höövdstadt to bringen."
+msgstr "Se wees ’t, de Offizeren sünd buten un kümmern sik um de Soldatereem un Boldreth sülvst föhrt de eerste Slacht an. Ick will an siener Sied rieden, um Alltunraan vun deesem Krieg freeitomaken un weer Free to uns’ Höövdstadt to brengen."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344

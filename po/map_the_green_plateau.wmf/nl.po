@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2021-11-16 09:23+0000\n"
 "PO-Revision-Date: 2017-09-21 23:33+0000\n"
 "Last-Translator: ben2s <ben2s@telenet.be>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -19,14 +19,14 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:12
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:14
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:56
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:12
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:14
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:56
 msgid "The Forbidden Island"
 msgstr "Het Verboden Eiland"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:15
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:57
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:15
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:57
 msgid ""
 "Finally! We have just taken our first step towards victory! Last night, we "
 "landed on the forbidden island and defeated the few guards that were "
@@ -36,49 +36,49 @@ msgid ""
 "positions."
 msgstr "Eindelijk! We hebben onze eerste stap naar de overwinning zojuist gezet! Afgelopen nacht zijn we geland op het verboden eiland en hebben we de weinige bewakers, die het noord-westelijke deel van het eiland bewaakten, verslagen. Ik ben er vrij zeker van, dat geen van de andere krijgsheren ons tot nu toe heeft opgemerkt, dus we zullen ons moeten stilhouden en onze infrastructuur opbouwen. We zullen spoedig sterk genoeg zijn om hun posities aan te vallen."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:23
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:25
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:23
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:25
 msgid "Capture the Ancient Castle"
 msgstr "Verover het Oude Kasteel"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:26
 msgid "Defeat Lanissa and capture the ancient castle."
 msgstr "Versla Lanissa en verover het oude kasteel."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:32
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:34
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:32
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Versla Erwyn"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:35
 msgid ""
 "Defeat Erwyn. He commands the strongest opposing military force left on this"
 " island."
 msgstr "Versla Erwyn. Hij voert de sterkste tegengestelde soldaten aan op dit eiland."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:40
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:42
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:40
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo"
 msgstr "Versla Jomo"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:43
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:43
 msgid "Defeat Jomo. He is taking care of the soldiers’ food supply."
 msgstr "Versla Jomo. Hij zorgt voor de voedseltoevoer naar de soldaten."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:52
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:52
 msgid "First Briefing"
 msgstr "Eerste Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:62
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:73
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:62
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:73
 msgid "Second Briefing"
 msgstr "Tweede Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:66
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:66
 msgid "An Ancient Castle"
 msgstr "Een Oud Kasteel"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:67
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:67
 msgid ""
 "By the Gods! One of our scouts has discovered a mighty castle at the center "
 "of the old plateau. The castle must be quite old and seems to have been "
@@ -86,7 +86,7 @@ msgid ""
 "craft."
 msgstr "Bij de Goden! Één van onze verkenners heeft een groots kasteel in het midden van het oude plateau gevonden. Het kasteel moet redelijk oud zijn en lijkt in een uitheemse stijl te zijn gebouwd. Het is duidelijk dat dit geen werk van barbaren is."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:68
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:68
 msgid ""
 "Let’s hope that Lanissa – the warlord holding sway over that castle – has "
 "not discovered our movements yet. Perhaps we have a chance of conquering "
@@ -94,17 +94,17 @@ msgid ""
 "we capture it. It will be the key to our reign over this island!"
 msgstr "Laten we hopen dat Lanissa - de krijgsheer die het bevel voert over dat kasteel - ons nog niet heeft ontdekt. Misschien hebben we een kans om dat machtige gebouw te veroveren zonder een groot gevecht! We moeten het hoe dan ook bezetten. Het zal de sleutel zijn voor onze heerschappij over dit eiland!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:77
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:77
 msgid "Ancient Castle Captured"
 msgstr "Oud Kasteel Veroverd"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:78
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:78
 msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr "Geweldig! Onze troepen hebben eindelijk Lanissa en haar soldaten verslagen. Het oude kasteel is van ons!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:79
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:79
 msgid ""
 "It is amazing how far one can see from the highest tower of the castle. We "
 "can watch the whole island. So now I wonder why Lanissa did not see us and "
@@ -117,46 +117,46 @@ msgid ""
 "care of those infrastructures so we can cut off our enemies’ food supply."
 msgstr "Het is verbazingwekkend hoe ver iemand vanaf de hoogste toren van het kasteel kan zien. We kunnen het hele eiland zien. Dus nu vraag ik me af waarom Lanissa ons niet heeft gezien en zich dus niet heeft voorbereid. Maar goed, sommige dingen zullen nooit aan het licht komen. Het enige belangrijke op het moment zijn de vijandige troepen die nog over zijn. We hebben vijandelijke posities van Erwyn ten noorden en ten oosten van het kasteel ontdekt. Hij staat bekend als een sterke krijgsheer en hij heeft zeer zeker de leiding over de sterkste krijgers. In het zuiden zijn een aantal bewaakte voedselgebouwen van Jomo - een jongere krijgsheer - opgemerkt, en we moeten die gebouwen voor onze rekening nemen zodat we de voedseltoevoer van de vijanden kunnen afsnijden."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:84
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:93
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:84
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:93
 msgid "Another Briefing"
 msgstr "Nog een Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:88
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:88
 msgid "Erwyn Defeated"
 msgstr "Erwyn verslagen"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one"
 " less strong warlord on this island!"
 msgstr "Geweldig! Erwyn heeft opgegeven, toen hij z'n laatste gebouwen zag afbranden. Één sterke krijgsheer minder op dit eiland!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:97
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Jomo Defeated"
 msgstr "Jomo verslagen"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:98
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:98
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr "Geweldig! Jomo heeft opgegeven, toen hij z'n laatste gebouwen zag afbranden. Één krijgsheer minder op dit eiland!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
 msgstr "Laatste Briefing"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:106
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Victory!"
 msgstr "Victorie!"
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:107
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:107
 msgid ""
 "Finally! The island is completely ours. Now we just have to defend it better"
 " than the warlords did."
 msgstr "Eindelijk! Het hele eiland is van ons. Nu hoeven we het alleen nog maar beter te verdedigen dan de krijgsheren hebben gedaan."
 
-#: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:108
+#: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/scripting/texts.lua:108
 msgid ""
 "Congratulations! You have mastered this scenario. You may play on if you "
 "like!"

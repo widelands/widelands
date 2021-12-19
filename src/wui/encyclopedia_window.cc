@@ -58,7 +58,7 @@ static const std::string kTabNamePrefix = "encyclopedia_";
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
-	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
+	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * kPadding;
 
 	try {
 		set_title(table->get_string("title"));

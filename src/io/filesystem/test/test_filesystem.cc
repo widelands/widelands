@@ -21,9 +21,7 @@
 #include <sstream>
 #endif
 
-#include <boost/test/unit_test.hpp>
-
-#include "base/macros.h"
+#include "base/test.h"
 #include "io/filesystem/disk_filesystem.h"
 
 #ifdef _WIN32
@@ -42,24 +40,20 @@ static int setenv(const char* envname, const char* envval, int /* overwrite */) 
 	return _putenv_s(envname, envval);
 }
 #else
-// BOOST_CHECK_EQUAL generates an old-style cast usage warning, so ignore
+// check_equal generates an old-style cast usage warning, so ignore
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 #endif
 
-// Triggered by BOOST_AUTO_TEST_CASE
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-CLANG_DIAG_OFF("-Wused-but-marked-unused")
-
-BOOST_AUTO_TEST_SUITE(FileSystemTests)
+TESTSUITE_START(FileSystemTests)
 #ifndef _WIN32
 #define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
-	BOOST_CHECK_EQUAL(RealFSImpl(root).canonicalize_name(path), expected);
+	check_equal(RealFSImpl(root).canonicalize_name(path), expected);
 #else
 #define TEST_CANONICALIZE_NAME(root, path, expected)                                               \
-	BOOST_CHECK_EQUAL(RealFSImpl(Win32Path(root)).canonicalize_name(path), Win32Path(expected));
+	check_equal(RealFSImpl(Win32Path(root)).canonicalize_name(path), Win32Path(expected));
 #endif
 
-BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
+TESTCASE(test_canonicalize_name) {
 	setenv("HOME", "/home/test", 1);
 	const std::string cwd(FileSystem::get_working_directory());
 
@@ -128,15 +122,15 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 
 #ifdef _WIN32
 	// Check drive letter handling.
-	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("C:\\"), "C:");
-	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").canonicalize_name("D:\\"), "C:\\D:");
+	check_equal(RealFSImpl("C:\\").canonicalize_name("C:\\"), "C:");
+	check_equal(RealFSImpl("C:\\").canonicalize_name("D:\\"), "C:\\D:");
 #endif
 }
 
 // Skip testing tilde expansion on windows.
 #ifndef _WIN32
 // ~ gets expanded to $HOME
-BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
+TESTCASE(test_canonicalize_name_home_expansion) {
 	setenv("HOME", "/my/home", 1);
 	const std::string cwd(FileSystem::get_working_directory());
 
@@ -189,4 +183,4 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 	TEST_CANONICALIZE_NAME("/opt", "a/path~/here", "/opt/a/path~/here")
 }
 #endif
-BOOST_AUTO_TEST_SUITE_END()
+TESTSUITE_END()

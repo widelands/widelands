@@ -101,6 +101,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const InfoToDraw info_to_draw,
                                  const Widelands::Player& player,
                                  RenderTarget* dst) {
+	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 	     bob = bob->get_next_bob()) {
 		bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,

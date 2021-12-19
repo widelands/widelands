@@ -41,9 +41,9 @@ struct UniqueWindow : public Window {
 		std::function<void()> open_window;
 
 		// Triggered when the window opens
-		boost::signals2::signal<void()> opened;
+		Notifications::Signal<> opened;
 		// Triggered when the window closes
-		boost::signals2::signal<void()> closed;
+		Notifications::Signal<> closed;
 
 		void create();
 		void destroy();
@@ -57,6 +57,15 @@ struct UniqueWindow : public Window {
 		~Registry();
 	};
 
+	UniqueWindow(Panel* parent,
+	             WindowStyle,
+	             const std::string& name,
+	             Registry*,
+	             int32_t x,
+	             int32_t y,
+	             int32_t w,
+	             int32_t h,
+	             const std::string& title);
 	UniqueWindow(Panel* parent,
 	             WindowStyle,
 	             const std::string& name,

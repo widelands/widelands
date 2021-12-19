@@ -856,7 +856,7 @@ int LuaMapView::get_is_animating(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::click(lua_State* L) {
-	const auto field = *get_user_class<LuaMaps::LuaField>(L, 2);
+	auto* const field = *get_user_class<LuaMaps::LuaField>(L, 2);
 	get()->map_view()->mouse_to_field(field->coords(), MapView::Transition::Jump);
 
 	// We fake the triangle here, since we only support clicking on Nodes from

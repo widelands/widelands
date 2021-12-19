@@ -176,6 +176,68 @@ jobs:
     - name: Testsuite
       run: ./regression_test.py -b build/src/widelands
 
+  windows-msvc:
+    # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    strategy:
+      matrix:
+        config:
+          - Release
+          - Debug
+        arch:
+          - x64
+          - x86
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
+    runs-on: windows-latest
+    env:
+      VCPKG_ROOT: C:\vcpkg
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
+      VCPKG_TARGET_TRIPLET: ${{ matrix.arch }}-windows-static
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: "Create cache directory"
+      run: mkdir -p $VCPKG_DEFAULT_BINARY_CACHE
+      shell: bash
+    - name: Restore vcpkg and its artifacts.
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        key: |
+          ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ matrix.arch }}
+    - name: Installing dependencies
+      run: |
+        vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} boost gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
+    - name: Configure MSVC development console
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.arch }}
+    - name: Compiler
+      run: |
+        mkdir $env:GITHUB_WORKSPACE\build
+        cd $env:GITHUB_WORKSPACE\build
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
+        nmake
+        if ("${{ matrix.config }}" -Match "Release") {
+          strip -sv ./src/widelands.exe
+        } 
+    - name: InnoSetup
+      run: |
+        cd $env:GITHUB_WORKSPACE
+        # Environment variables needed by our InnoSetup script
+        $env:PLATFORM = "${{ matrix.arch }}"
+        $env:CONFIGURATION = "${{ matrix.config }}"
+        $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
+        $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
+        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
+    - name: Uploading installer
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MSVC)
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
@@ -187,7 +249,7 @@ jobs:
         arch:
           - x64
           - x86
-    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build
+    name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-latest
     steps:
     - name: Installing dependencies
@@ -236,12 +298,12 @@ jobs:
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
         strip.exe -sv .\build\src\widelands.exe
-        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
+        ISCC.exe /o$env:GITHUB_WORKSPACE /fWidelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }} $env:GITHUB_WORKSPACE\utils\win32\innosetup\Widelands.iss
     - name: Uploading installer
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer
-        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}.exe
+        name: Widelands ${{ matrix.config }} ${{ matrix.arch }} Installer (MinGW)
+        path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
@@ -253,13 +315,13 @@ jobs:
         compiler:
           - clang
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: macos-10.15  # Building with clang on MacOS 11 is currently broken
+    runs-on: macos-11
     steps:
     - name: Installing dependencies
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf dylibbundler
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -268,7 +330,7 @@ jobs:
       run: |
         mkdir build_wl
         cd build_wl/
-        ../utils/macos/build_app.sh ${{ matrix.compiler }} ${{ matrix.config }} ../
+        ../utils/macos/build_app.sh "--${{ matrix.config }}" "--${{ matrix.compiler }}"
         DMGPATH="$(pwd)"
         DMGFILE="$(ls *.dmg)"
         echo "DMG file is: $DMGPATH/$DMGFILE"
@@ -278,5 +340,81 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 10.5 AppImage
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
+
+  dev_release:
+    name: Automated development pre-release
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
+    needs: [windows, windows-msvc, macos]
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+      - name: Check missing artifacts
+        # This step ensures that the development release always contains an artifact for every platform.
+        # artifacts.list lists all attachments of the pre-release. In case a build step failed, we detect
+        # that a file is missing and download the last successful build from the pre-release.
+        run: |
+          RELEASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/latest"
+          mkdir Widelands-latest
+          cd Widelands-latest
+          curl -L -O "$RELEASE_URL/artifacts.list"
+          for ARTIFACT in $(cat artifacts.list)
+          do
+            [ "${ARTIFACT%%-*}" != "Widelands" ] && continue
+            MATRIX=$(echo $ARTIFACT | sed 's/Widelands-[0-9a-f]*-//' -)
+            ls ../Widelands*/Widelands*${MATRIX} || \
+              curl -L -o $ARTIFACT "$RELEASE_URL/Widelands-daily-${MATRIX}"
+          done
+      - name: List and rename artifacts
+        run: |
+          sudo apt-get update
+          sudo apt-get install rename
+          find . -name 'Widelands*' -type f -printf '%f\n' | tee artifacts.list
+          find . -name 'Widelands*' -type f -exec prename 's/Widelands-[0-9a-f]*-/Widelands-daily-/' "{}" \;
+          find . -name 'Widelands*' -type f -print0 | while IFS= read -d '' -r ARTIFACT; do
+            dir=$(dirname "$ARTIFACT")
+            filename=$(basename "$ARTIFACT")
+            echo "Calculate checksum for \"$ARTIFACT\""
+            pushd "$dir"
+            md5sum "${filename}" > "${filename}.md5"
+            popd
+          done
+          # curl exits 23 because grep will kill it after the first match
+          set +e
+          latest=$(curl -i "https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/master" | grep -m 1 "\"sha\": ")
+          set -e
+          latest=${latest#*: \"}
+          latest=${latest%\",}
+          if [ "$latest" != "$GITHUB_SHA" ]
+          then
+            echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
+            exit 1
+          fi
+      - name: Updating latest pre-release
+        # Creates a new pre-release with the "latest" tag and all gathered artifacts.
+        # Because all older artifacts are removed, we have to reupload the missing ones detected in the previous step
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
+        with:
+          repo_token: "${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Builds"
+          files: |
+            */Widelands-daily-*.exe
+            */Widelands-daily-*.dmg
+            */Widelands-daily-*.md5
+            artifacts.list
+      - name: Update Release Body
+        uses: tubone24/update_release@v1.3.1
+        env:
+          TAG_NAME: "latest"
+          GITHUB_TOKEN: ${{ secrets.WIDELANDS_FORMAT_TOKEN }}
+        with:
+          is_append_body: true
+          body: |
+            ---
+            These builds are automatically generated from master. Changes since the last build are listed above.
+            The file `artifacts.list` lists the original installer names, which also contain the commit hash from which they were generated.
+
