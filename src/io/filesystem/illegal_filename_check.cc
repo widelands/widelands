@@ -31,7 +31,7 @@
 namespace FileSystemHelper {
 
 // Characters that are allowed in filenames, but not at the beginning
-const std::vector<std::string> illegal_filename_starting_characters {
+const std::vector<std::string> illegal_filename_starting_characters{
    ".", "-",
    " ",  // Keep the blank last
 };
@@ -42,7 +42,7 @@ const std::vector<std::string> illegal_filename_starting_characters {
 // http://www.linfo.org/file_name.html
 // https://support.apple.com/en-us/HT202808
 // We can't just regex for word & digit characters here because of non-Latin scripts.
-const std::vector<std::string> illegal_filename_characters {
+const std::vector<std::string> illegal_filename_characters{
    "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
 
