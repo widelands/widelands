@@ -283,9 +283,7 @@ void write_tribes(const Widelands::EditorGameBase& egbase, FileSystem* out_files
  */
 
 int main(int argc, char** argv) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
+	set_testcase_logging_dir();
 	if (argc != 2) {
 		log_err("Usage: %s <existing-output-path>\n", argv[0]);
 		return 1;

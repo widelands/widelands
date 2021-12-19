@@ -68,13 +68,13 @@ std::string underline_tag(const std::string& text) {
 
 std::string filesize_string(const uint32_t bytes) {
 	if (bytes > 1000000000) {
-		return bformat(_("%.2f GB"), (bytes / 1000000000.f));
+		return bformat_l(_("%.2f GB"), (bytes / 1000000000.f));
 	} else if (bytes > 1000000) {
-		return bformat(_("%.2f MB"), (bytes / 1000000.f));
+		return bformat_l(_("%.2f MB"), (bytes / 1000000.f));
 	} else if (bytes > 1000) {
-		return bformat(_("%.2f kB"), (bytes / 1000.f));
+		return bformat_l(_("%.2f kB"), (bytes / 1000.f));
 	} else {
-		return bformat(_("%u bytes"), bytes);
+		return bformat_l(_("%u bytes"), bytes);
 	}
 }
 
@@ -931,7 +931,7 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		remotes_.resize(nr_addons);
 
 		for (int64_t i = 0, counter = 0; i < nr_addons; ++i, ++counter) {
-			progress.step(bformat(step_message, (100.0 * counter / nr_orig_entries)));
+			progress.step(bformat_l(step_message, (100.0 * counter / nr_orig_entries)));
 
 			try {
 				remotes_[i].reset(new AddOns::AddOnInfo(net().fetch_one_remote(names[i])));
