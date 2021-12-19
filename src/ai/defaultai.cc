@@ -71,6 +71,8 @@ constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
 constexpr bool kPrintStats = false;
+// enable also the above to print the results of the performance data collection
+constexpr bool kCollectPerfData = false;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -272,7 +274,7 @@ void DefaultAI::think() {
 
 	sort_task_pool();
 
-	const int32_t delay_time = gametime.get() - taskPool.front().due_time.get();
+	const int32_t delay_time = gametime.get() - taskPool.front()->due_time.get();
 
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
@@ -327,13 +329,12 @@ void DefaultAI::think() {
 	assert(jobs_to_run_count < taskPool.size());
 
 	// Pool of tasks to be executed this run. In ideal situation it will consist of one task only.
-	std::vector<SchedulerTask> current_task_queue;
-	assert(current_task_queue.empty());
+	current_task_queue.clear();
 	// Here we push SchedulerTask members into the temporary queue, providing that a task is due now
 	// and
 	// the limit (jobs_to_run_count) is not exceeded
 	for (uint8_t i = 0; i < jobs_to_run_count; ++i) {
-		if (taskPool[i].due_time <= gametime) {
+		if (taskPool[i]->due_time <= gametime) {
 			current_task_queue.push_back(taskPool[i]);
 			sort_task_pool();
 		} else {
@@ -354,11 +355,15 @@ void DefaultAI::think() {
 	std::sort(current_task_queue.begin(), current_task_queue.end());
 
 	// Performing tasks from temporary queue one by one
-	for (const SchedulerTask& task : current_task_queue) {
+	for (const auto& task : current_task_queue) {
 
-		due_task = task.id;
+		due_task = task->id;
 
-		++sched_stat_[static_cast<uint32_t>(due_task)];
+		// Collecting some statistics, performance data only when explicitely enabled
+		task->call_count++;
+		if (kCollectPerfData) {
+			time_point = std::chrono::high_resolution_clock::now();
+		}
 
 		// Now AI runs a job selected above to be performed in this turn
 		// (only one but some of them needs to run check_economies() to
@@ -551,6 +556,16 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kUnset:
 			NEVER_HERE();
+		}
+
+		if (kCollectPerfData) {
+			double exec_time = std::chrono::duration_cast<std::chrono::microseconds>(
+			                      std::chrono::high_resolution_clock::now() - time_point)
+			                      .count();
+			task->total_exec_time_ms += exec_time;
+			if (exec_time > task->max_exec_time_ms) {
+				task->max_exec_time_ms = exec_time;
+			}
 		}
 	}
 }
@@ -1079,61 +1094,66 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Populating taskPool with all AI jobs and their starting times
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(0)),
-	                                 SchedulerTaskId::kConstructBuilding, 6,
-	                                 "construct a building"));
-	taskPool.push_back(SchedulerTask(
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(0)),
+	                                                   SchedulerTaskId::kConstructBuilding, 6,
+	                                                   "construct a building"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(1000)), SchedulerTaskId::kRoadCheck, 2, "roads check"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(15 * 1000)),
-	                                 SchedulerTaskId::kCheckProductionsites, 5,
-	                                 "productionsites check"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(30 * 1000)),
-	                                 SchedulerTaskId::kProductionsitesStats, 1,
-	                                 "productionsites statistics"));
-	taskPool.push_back(SchedulerTask(
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 1000)),
+	                                                   SchedulerTaskId::kCheckProductionsites, 5,
+	                                                   "productionsites check"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(30 * 1000)),
+	                                                   SchedulerTaskId::kProductionsitesStats, 1,
+	                                                   "productionsites statistics"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckMines, 5, "check mines"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(0)),
-	                                 SchedulerTaskId::kCheckMilitarysites, 5,
-	                                 "check militarysites"));
-	taskPool.push_back(SchedulerTask(
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(0)),
+	                                                   SchedulerTaskId::kCheckMilitarysites, 5,
+	                                                   "check militarysites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(
 	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckShips, 5, "check ships"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kCheckEconomies, 1, "check economies"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(30 * 1000)),
-	                                 SchedulerTaskId::KMarineDecisions, 5, "marine decisions"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(2 * 60 * 1000)),
-	                                 SchedulerTaskId::kCheckTrainingsites, 5,
-	                                 "check training sites"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kBbuildableFieldsCheck, 2,
-	                                 "check buildable fields"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kMineableFieldsCheck, 2,
-	                                 "check mineable fields"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
-	                                 SchedulerTaskId::kUnbuildableFCheck, 1,
-	                                 "check unbuildable fields"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(15 * 60 * 1000)),
-	                                 SchedulerTaskId::kWareReview, 9, "wares review"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                 SchedulerTaskId::kPrintStats, 9, "print statistics"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(60 * 1000)),
-	                                 SchedulerTaskId::kCountMilitaryVacant, 2,
-	                                 "count military vacant"));
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kCheckEconomies, 1,
+	                                                   "check economies"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(30 * 1000)),
+	                                                   SchedulerTaskId::KMarineDecisions, 5,
+	                                                   "marine decisions"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(2 * 60 * 1000)),
+	                                                   SchedulerTaskId::kCheckTrainingsites, 5,
+	                                                   "check training sites"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kBbuildableFieldsCheck, 2,
+	                                                   "check buildable fields"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kMineableFieldsCheck, 2,
+	                                                   "check mineable fields"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(1000)),
+	                                                   SchedulerTaskId::kUnbuildableFCheck, 1,
+	                                                   "check unbuildable fields"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 60 * 1000)),
+	                                   SchedulerTaskId::kWareReview, 9, "wares review"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(60 * 1000)),
+	                                                   SchedulerTaskId::kCountMilitaryVacant, 2,
+	                                                   "count military vacant"));
+	taskPool.push_back(
+	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+	                                   SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
 	if (ai_training_mode_) {
-		taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 1000)),
-		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
+		taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
+		                                                   SchedulerTaskId::kManagementUpdate, 8,
+		                                                   "AI training review"));
 	}
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(9 * 1000)),
-	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
-	taskPool.push_back(SchedulerTask(
-	   std::max<Time>(gametime, Time(10 * 1000)), SchedulerTaskId::kUpdateStats, 15, "review"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(9 * 1000)),
+	                                                   SchedulerTaskId::kUpdateStats, 6,
+	                                                   "update player stats"));
 
-	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 1000)),
-	                                 SchedulerTaskId::kWarehouseFlagDist, 5,
-	                                 "Flag-Warehouse Update"));
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
+	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
+	                                                   "flag warehouse Update"));
 
 	const Widelands::Map& map = game().map();
 
@@ -7044,8 +7064,8 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 void DefaultAI::set_taskpool_task_time(const Time& gametime, const SchedulerTaskId task) {
 
 	for (auto& item : taskPool) {
-		if (item.id == task) {
-			item.due_time = gametime;
+		if (item->id == task) {
+			item->due_time = gametime;
 			return;
 		}
 	}
@@ -7055,8 +7075,8 @@ void DefaultAI::set_taskpool_task_time(const Time& gametime, const SchedulerTask
 // Retrieves due time of the task based on its ID
 const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 	for (const auto& item : taskPool) {
-		if (item.id == task) {
-			return item.due_time;
+		if (item->id == task) {
+			return item->due_time;
 		}
 	}
 
@@ -7066,9 +7086,9 @@ const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 // This performs one "iteration" of sorting based on due_time
 // We by design do not need full sorting...
 void DefaultAI::sort_task_pool() {
-	assert(!taskPool.empty());
+	assert(taskPool.size() >= 2);
 	for (int8_t i = taskPool.size() - 1; i > 0; --i) {
-		if (taskPool[i - 1].due_time > taskPool[i].due_time) {
+		if (taskPool[i - 1]->due_time > taskPool[i]->due_time) {
 			std::iter_swap(taskPool.begin() + i - 1, taskPool.begin() + i);
 		}
 	}
@@ -7237,6 +7257,16 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  persistent_data->ai_personality_mil_upper_limit, msites_in_constr(),
 	                  static_cast<int8_t>(soldier_status_),
 	                  player_statistics.get_modified_player_power(player_number()));
+
+	// 5. printing some performance data
+	log_dbg_time(gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
+	             player_number());
+	for (const auto& task : taskPool) {
+		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
+		             task->call_count, task->total_exec_time_ms / 1000,
+		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
+		             task->max_exec_time_ms / 1000);
+	}
 }
 
 template <typename T>

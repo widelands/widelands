@@ -24,7 +24,7 @@ wl_library(graphic_text_test_render
     render.cc
     render.h
   DEPENDS
-    base_i18n
+    base
     graphic_image_cache
     graphic_text
     io_filesystem

@@ -4,14 +4,11 @@ strip_comments_and_strings = True
 
 
 whitelist = [
-    'boost::format',
-    'boost::io::format_error',
     'boost::asio',
     'boost::system::error_code',
     'boost::system::system_error',
 ]
 whitelist_headers = [
-    'boost/format',
     'boost/asio',
     'boost/version',
 ]
@@ -60,11 +57,10 @@ forbidden = [
     'table_->set_column_compare(0, boost::bind(&LoadOrSaveGame::compare_save_time, boost::ref(*this), _1, _2));',
     'boost::trim(filename);',
     '#include <boost/algorithm/string.hpp>',
+    'str = (boost::format("foo %1%") % 5).str();',
 ]
 
 allowed = [
     'table_->set_column_compare(0, [this](uint32_t a, uint32_t b) { compare_save_time(a, b); });',
-    'str = (boost::format("foo %1%") % 5).str();',
     'std::string boost = "This function will boost performance.";',
-    '#include <boost/format.hpp>',
 ]
