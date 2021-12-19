@@ -30,12 +30,10 @@ wl_library(io_profile
     profile.cc
   USES_ATOMIC
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
-    base_string
     build_info
     io_fileread
     io_filesystem
