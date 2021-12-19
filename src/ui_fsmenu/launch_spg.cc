@@ -125,7 +125,7 @@ void LaunchSPG::clicked_ok() {
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
 		UI::WLMessageBox m(
 		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
-		   bformat(_("Widelands tried to start a game with a file that could not be "
+		   format(_("Widelands tried to start a game with a file that could not be "
 		             "found at the given path.\n"
 		             "The file was: %s\n"
 		             "If this happens in a network game, the host might have selected "

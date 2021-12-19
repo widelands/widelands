@@ -230,7 +230,7 @@ Widelands::Game* MainMenu::create_safe_game(const bool show_error) {
 		if (show_error) {
 			UI::WLMessageBox m(
 			   this, UI::WindowStyle::kFsMenu, _("Error"),
-			   bformat(_("Unable to create a Game instance!\nError message:\n%s"), e.what()),
+			   format(_("Unable to create a Game instance!\nError message:\n%s"), e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
@@ -348,7 +348,7 @@ void MainMenu::set_labels() {
 				filename_for_continue_playing_ = newest_singleplayer->filename;
 				singleplayer_.add(
 				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
-				   bformat("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
+				   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
 				           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 				              .as_font_tag(
 				                 /* strip leading "save/" and trailing ".wgf" */
@@ -356,22 +356,22 @@ void MainMenu::set_labels() {
 				                    kSaveDir.length() + 1, filename_for_continue_playing_.length() -
 				                                              kSaveDir.length() -
 				                                              kSavegameExtension.length() - 1)),
-				           bformat(_("Map: %s"),
+				           format(_("Map: %s"),
 				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                      .as_font_tag(newest_singleplayer->mapname)),
-				           bformat(_("Win Condition: %s"),
+				           format(_("Win Condition: %s"),
 				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                      .as_font_tag(newest_singleplayer->wincondition)),
-				           bformat(_("Players: %s"),
+				           format(_("Players: %s"),
 				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                      .as_font_tag(newest_singleplayer->nrplayers)),
-				           bformat(_("Gametime: %s"),
+				           format(_("Gametime: %s"),
 				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                      .as_font_tag(newest_singleplayer->gametime)),
 				           /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 				            * 10:30'
 				            */
-				           bformat(_("Saved: %s"),
+				           format(_("Saved: %s"),
 				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                      .as_font_tag(newest_singleplayer->savedatestring))),
 				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
@@ -412,23 +412,23 @@ void MainMenu::set_labels() {
 			filename_for_continue_editing_ = last_edited->first.filename;
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
-			   bformat("%s<br>%s<br>%s<br>%s<br>%s",
+			   format("%s<br>%s<br>%s<br>%s<br>%s",
 			           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			              .as_font_tag(
 			                 /* strip leading "maps/My_Maps/" and trailing ".wgf" */
 			                 filename_for_continue_editing_.substr(
 			                    13, filename_for_continue_editing_.length() - 17)),
-			           bformat(_("Name: %s"),
+			           format(_("Name: %s"),
 			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                      .as_font_tag(last_edited->first.localized_name)),
-			           bformat(_("Size: %s"),
+			           format(_("Size: %s"),
 			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(bformat(_("%1$u×%2$u"), last_edited->first.width,
+			                      .as_font_tag(format(_("%1$u×%2$u"), last_edited->first.width,
 			                                           last_edited->first.height))),
-			           bformat(_("Players: %s"),
+			           format(_("Players: %s"),
 			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                      .as_font_tag(std::to_string(last_edited->first.nrplayers))),
-			           bformat(_("Description: %s"),
+			           format(_("Description: %s"),
 			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                      .as_font_tag(last_edited->first.description))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
@@ -472,10 +472,10 @@ void MainMenu::set_labels() {
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-	   bformat(_("Version %1$s (%2$s)"), build_id(), build_type()));
+	   format(_("Version %1$s (%2$s)"), build_id(), build_type()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
-	   bformat(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
+	   format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
 	             "the GNU General Public License V2.0"),
 	           kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
 }

@@ -59,7 +59,7 @@ TerrainDescription::Is terrain_type_from_string(const std::string& type) {
 	if (type == "unwalkable") {
 		return TerrainDescription::Is::kUnwalkable;
 	}
-	throw LuaError(bformat("Invalid terrain \"is\" value '%s'", type));
+	throw LuaError(format("Invalid terrain \"is\" value '%s'", type));
 }
 
 }  // namespace

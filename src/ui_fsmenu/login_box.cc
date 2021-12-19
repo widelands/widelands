@@ -57,7 +57,7 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
                        0,
                        180,
                        UI::PanelStyle::kFsMenu,
-                       bformat(_("In order to use a registered "
+                       format(_("In order to use a registered "
                                  "account, you need an account on the Widelands website. "
                                  "Please log in at %s and set an online "
                                  "gaming password on your profile page."),

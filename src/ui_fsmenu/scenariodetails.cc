@@ -43,7 +43,7 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 }
 
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
-	name_label_.set_text(bformat("<rt>%s%s</rt>",
+	name_label_.set_text(format("<rt>%s%s</rt>",
 	                             as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
 	                                        UI::PanelStyle::kFsMenu, true),
 	                             as_content(scenariodata.descname, UI::PanelStyle::kFsMenu)));
@@ -57,12 +57,12 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
                   you need plural forms here, please let us know. */
                _("Authors");
 		std::string description =
-		   bformat("%s%s", as_heading(authors_heading, UI::PanelStyle::kFsMenu),
+		   format("%s%s", as_heading(authors_heading, UI::PanelStyle::kFsMenu),
 		           as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu));
 
 		description =
-		   bformat("%s%s", description, as_heading(_("Description"), UI::PanelStyle::kFsMenu));
-		description = bformat(
+		   format("%s%s", description, as_heading(_("Description"), UI::PanelStyle::kFsMenu));
+		description = format(
 		   "%s%s", description, as_content(scenariodata.description, UI::PanelStyle::kFsMenu));
 
 		// Do we want to show add-on conflicts info for campaigns or scenarios?
@@ -71,7 +71,7 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		// Plus, ScenarioData currently does not preload the scenario map, so fetching
 		// add-ons info there would introduce additional complexity.
 
-		description = bformat("<rt>%s</rt>", description);
+		description = format("<rt>%s</rt>", description);
 		descr_.set_text(description);
 	} else {
 		descr_.set_text("");

@@ -233,7 +233,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 	auto generate_title = [](const KeyboardShortcut key) {
 		const std::string shortcut = shortcut_string_for(key, false);
-		return bformat(
+		return format(
 		   /** TRANSLATORS: This is a button label for a keyboard shortcut in the form
 		      "Action: Key" */
 		   _("%1$s: %2$s"), to_string(key), shortcut);
@@ -263,7 +263,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
 					   as_richtext_paragraph(
-					      bformat(_("The shortcut you selected (‘%1$s’) is already in use for the "
+					      format(_("The shortcut you selected (‘%1$s’) is already in use for the "
 					                "following action: ‘%2$s’. Please select a different shortcut "
 					                "or change the conflicting shortcut first."),
 					              shortcut_string_for(c.key, true), to_string(conflict)),
