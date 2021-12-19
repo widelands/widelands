@@ -278,9 +278,9 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 			                         empty if none is used. %2 is scrolling direction.
 			                         %3 is the name of the conflicting function. */
 			      format(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
-			                "Please select a different combination or "
-			                "change the conflicting setting first."),
-			              keymod_string_for(keymod), _(sd_names[dir]), other->get_title()),
+			               "Please select a different combination or "
+			               "change the conflicting setting first."),
+			             keymod_string_for(keymod), _(sd_names[dir]), other->get_title()),
 			      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 			   UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
@@ -466,8 +466,8 @@ void MousewheelOptionsDialog::set_touchpad() {
 		UI::WLMessageBox warning(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
 		   as_richtext_paragraph(format(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
-		                                   "settings. Change the conflicting setting(s) too?"),
-		                                 speed_box_.get_title(), toolsize_box_.get_title()),
+		                                  "settings. Change the conflicting setting(s) too?"),
+		                                speed_box_.get_title(), toolsize_box_.get_title()),
 		                         UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {

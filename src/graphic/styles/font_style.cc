@@ -92,7 +92,7 @@ std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 		optionals += " underline=1";
 	}
 	return format("<font face=%s size=%d color=%s%s>%s</font>", face_to_string(), size_,
-	               color_.hex_value(), optionals, text);
+	              color_.hex_value(), optionals, text);
 }
 
 FontStyleInfo::Face FontStyleInfo::face() const {

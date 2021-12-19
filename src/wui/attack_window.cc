@@ -425,10 +425,10 @@ bool AttackWindow::ListOfSoldiers::handle_mousemove(
    uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
-		                    soldier->get_health_level(), soldier->descr().get_max_health_level(),
-		                    soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
-		                    soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
-		                    soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
+		                   soldier->get_health_level(), soldier->descr().get_max_health_level(),
+		                   soldier->get_attack_level(), soldier->descr().get_max_attack_level(),
+		                   soldier->get_defense_level(), soldier->descr().get_max_defense_level(),
+		                   soldier->get_evade_level(), soldier->descr().get_max_evade_level()));
 	} else {
 		set_tooltip(std::string());
 	}

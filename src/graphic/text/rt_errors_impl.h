@@ -33,11 +33,11 @@ struct SyntaxErrorImpl : public SyntaxError {
 	                const std::string& next_chars)
 	   : SyntaxError(
 	        format("Syntax error at %1%:%2%: expected %3%, got '%4%'. String continues with: '%5%'",
-	                line,
-	                col,
-	                expected,
-	                got,
-	                next_chars)) {
+	               line,
+	               col,
+	               expected,
+	               got,
+	               next_chars)) {
 	}
 };
 }  // namespace RT

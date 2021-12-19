@@ -349,31 +349,31 @@ void MainMenu::set_labels() {
 				singleplayer_.add(
 				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
 				   format("%s<br>%s<br>%s<br>%s<br>%s<br>%s",
-				           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-				              .as_font_tag(
-				                 /* strip leading "save/" and trailing ".wgf" */
-				                 filename_for_continue_playing_.substr(
-				                    kSaveDir.length() + 1, filename_for_continue_playing_.length() -
-				                                              kSaveDir.length() -
-				                                              kSavegameExtension.length() - 1)),
-				           format(_("Map: %s"),
-				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                      .as_font_tag(newest_singleplayer->mapname)),
-				           format(_("Win Condition: %s"),
-				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                      .as_font_tag(newest_singleplayer->wincondition)),
-				           format(_("Players: %s"),
-				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                      .as_font_tag(newest_singleplayer->nrplayers)),
-				           format(_("Gametime: %s"),
-				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                      .as_font_tag(newest_singleplayer->gametime)),
-				           /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
-				            * 10:30'
-				            */
-				           format(_("Saved: %s"),
-				                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-				                      .as_font_tag(newest_singleplayer->savedatestring))),
+				          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+				             .as_font_tag(
+				                /* strip leading "save/" and trailing ".wgf" */
+				                filename_for_continue_playing_.substr(
+				                   kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+				                                             kSaveDir.length() -
+				                                             kSavegameExtension.length() - 1)),
+				          format(_("Map: %s"),
+				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				                    .as_font_tag(newest_singleplayer->mapname)),
+				          format(_("Win Condition: %s"),
+				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				                    .as_font_tag(newest_singleplayer->wincondition)),
+				          format(_("Players: %s"),
+				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				                    .as_font_tag(newest_singleplayer->nrplayers)),
+				          format(_("Gametime: %s"),
+				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				                    .as_font_tag(newest_singleplayer->gametime)),
+				          /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
+				           * 10:30'
+				           */
+				          format(_("Saved: %s"),
+				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+				                    .as_font_tag(newest_singleplayer->savedatestring))),
 				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
 			}
 		}
@@ -413,24 +413,24 @@ void MainMenu::set_labels() {
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",
-			           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			              .as_font_tag(
-			                 /* strip leading "maps/My_Maps/" and trailing ".wgf" */
-			                 filename_for_continue_editing_.substr(
-			                    13, filename_for_continue_editing_.length() - 17)),
-			           format(_("Name: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(last_edited->first.localized_name)),
-			           format(_("Size: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(format(_("%1$u×%2$u"), last_edited->first.width,
-			                                           last_edited->first.height))),
-			           format(_("Players: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(std::to_string(last_edited->first.nrplayers))),
-			           format(_("Description: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(last_edited->first.description))),
+			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			             .as_font_tag(
+			                /* strip leading "maps/My_Maps/" and trailing ".wgf" */
+			                filename_for_continue_editing_.substr(
+			                   13, filename_for_continue_editing_.length() - 17)),
+			          format(_("Name: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(last_edited->first.localized_name)),
+			          format(_("Size: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(format(_("%1$u×%2$u"), last_edited->first.width,
+			                                        last_edited->first.height))),
+			          format(_("Players: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(std::to_string(last_edited->first.nrplayers))),
+			          format(_("Description: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(last_edited->first.description))),
 			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
 		}
 	}
@@ -476,8 +476,8 @@ void MainMenu::set_labels() {
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
 	   format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
-	             "the GNU General Public License V2.0"),
-	           kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
+	            "the GNU General Public License V2.0"),
+	          kWidelandsCopyrightStart, kWidelandsCopyrightEnd));
 }
 
 void MainMenu::set_button_visibility(const bool v) {

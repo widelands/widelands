@@ -681,10 +681,9 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 			parent_.net().vote(info_->internal_name, current_vote_);
 			*info_ = parent_.net().fetch_one_remote(info_->internal_name);
 		} catch (const std::exception& e) {
-			UI::WLMessageBox w(
-			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   format(_("The vote could not be submitted.\nError code: %s"), e.what()),
-			   UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			                   format(_("The vote could not be submitted.\nError code: %s"), e.what()),
+			                   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
 		}
@@ -827,8 +826,8 @@ void RemoteInteractionWindow::update_data() {
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() ?
          format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                         "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
-	                info_->average_rating(), info_->number_of_votes()) :
+	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
+	               info_->average_rating(), info_->number_of_votes()) :
          _("No votes yet"));
 
 	uint32_t most_votes = 1;
@@ -849,7 +848,7 @@ void RemoteInteractionWindow::update_data() {
 	              info_->user_comments.empty() ?
                     _("No comments yet.") :
                     format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
-	                         info_->user_comments.size()));
+	                        info_->user_comments.size()));
 	text += "</p></rt>";
 	comments_header_.set_text(text);
 	for (const auto& comment : info_->user_comments) {
@@ -860,8 +859,8 @@ void RemoteInteractionWindow::update_data() {
 		} else if (comment.second.editor == comment.second.username) {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(format(_("%1$s (edited on %2$s)"),
-			                                time_string(comment.second.timestamp),
-			                                time_string(comment.second.edit_timestamp)));
+			                               time_string(comment.second.timestamp),
+			                               time_string(comment.second.edit_timestamp)));
 		} else {
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
 			           .as_font_tag(format(
@@ -872,7 +871,7 @@ void RemoteInteractionWindow::update_data() {
 		text +=
 		   g_style_manager->font_style(UI::FontStyle::kItalic)
 		      .as_font_tag(format(_("‘%1$s’ commented on version %2$s:"), comment.second.username,
-		                           AddOns::version_to_string(comment.second.version)));
+		                          AddOns::version_to_string(comment.second.version)));
 		text += "<br>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 		           .as_font_tag(comment.second.message);
@@ -897,8 +896,7 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	auto it = info_->screenshots.begin();
 	std::advance(it, current_screenshot_);
 
-	screenshot_stats_.set_text(
-	   format(_("%1$u / %2$u"), (current_screenshot_ + 1), nr_screenshots_));
+	screenshot_stats_.set_text(format(_("%1$u / %2$u"), (current_screenshot_ + 1), nr_screenshots_));
 	screenshot_descr_.set_text(it->second);
 	screenshot_.set_tooltip("");
 

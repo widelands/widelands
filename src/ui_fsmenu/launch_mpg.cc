@@ -292,7 +292,7 @@ void LaunchMPG::refresh() {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
 			   format(_("Unable to load the win condition script file ‘%s’."),
-			           settings_.get_win_condition_script()));
+			          settings_.get_win_condition_script()));
 
 		} catch (LuaTableKeyError& e) {
 			log_err("LaunchMPG: Error loading win condition: %s %s\n",

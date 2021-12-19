@@ -60,9 +60,9 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
         10,
         UI::PanelStyle::kFsMenu,
         format("<rt><p>%s</p></rt>",
-                g_style_manager->font_style(UI::FontStyle::kWarning)
-                   .as_font_tag(_(
-                      "An enabled add-on is known to cause desyncs. No replay will be written."))),
+               g_style_manager->font_style(UI::FontStyle::kWarning)
+                  .as_font_tag(
+                     _("An enabled add-on is known to cause desyncs. No replay will be written."))),
         UI::Align::kLeft,
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
      win_condition_dropdown_(&right_column_content_box_,
@@ -318,8 +318,8 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 	} catch (const std::exception& e) {
 		const std::string error_message =
 		   format(_("Unable to determine valid win conditions because the map ‘%s’ "
-		             "could not be loaded."),
-		           settings_.settings().mapfilename);
+		            "could not be loaded."),
+		          settings_.settings().mapfilename);
 		win_condition_dropdown_.set_errored(error_message);
 		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}

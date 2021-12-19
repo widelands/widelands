@@ -456,8 +456,8 @@ void InteractivePlayer::think() {
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
 			msg_icon = "images/wui/menus/message_new.png";
-			msg_tooltip = format(
-			   ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
+			msg_tooltip =
+			   format(ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(

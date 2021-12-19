@@ -444,7 +444,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor}, keysym(SDLK_##key),          \
 		                        "editor_toolsize" #radius,                                           \
-		                        []() { return format(_("Set Toolsize to %d"), radius); })           \
+		                        []() { return format(_("Set Toolsize to %d"), radius); })            \
 	}
    EDITOR_TOOLSIZE(1, 1),
    EDITOR_TOOLSIZE(2, 2),
@@ -666,12 +666,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
 	{KeyboardShortcut::kInGameQuicknavSet##i,                                                       \
 	 KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},                                     \
 	                      keysym(SDLK_##i, kDefaultCtrlModifier), "game_quicknav_set_" #i,          \
-	                      []() { return format(_("Set Landmark #%d"), i); })},                     \
+	                      []() { return format(_("Set Landmark #%d"), i); })},                      \
 	{                                                                                               \
 		KeyboardShortcut::kInGameQuicknavGoto##i,                                                    \
 		   KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, keysym(SDLK_##i),              \
 		                        "game_quicknav_goto_" #i,                                            \
-		                        []() { return format(_("Go To Landmark #%d"), i); })                \
+		                        []() { return format(_("Go To Landmark #%d"), i); })                 \
 	}
    QUICKNAV(1),
    QUICKNAV(2),
@@ -1029,8 +1029,7 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 		return _("(disabled)");
 	}
 
-	std::string result =
-	   format(_("%1$s%2$s"), keymod_string_for(sym.mod, false), key_name(sym.sym));
+	std::string result = format(_("%1$s%2$s"), keymod_string_for(sym.mod, false), key_name(sym.sym));
 
 	return rt_escape ? richtext_escape(result) : result;
 }

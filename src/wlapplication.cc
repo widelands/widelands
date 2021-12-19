@@ -773,8 +773,8 @@ void WLApplication::run() {
 			}
 		} catch (const Widelands::GameDataError& e) {
 			message = format(_("Widelands could not load the file \"%s\". The file format "
-			                    "seems to be incompatible."),
-			                  filename_.c_str());
+			                   "seems to be incompatible."),
+			                 filename_.c_str());
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("Game data error");
 		} catch (const FileNotFoundError& e) {
@@ -1437,7 +1437,7 @@ void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("error")) {
 		throw ParameterError(CmdLineVerbosity::Normal,
 		                     format(_("Unknown command line parameter: %s\nMaybe a '=' is missing?"),
-		                             commandline_["error"]));
+		                            commandline_["error"]));
 	}
 
 	if (commandline_.count("datadir_for_testing")) {
@@ -1666,8 +1666,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 			UI::WLMessageBox m(
 			   panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"),
 			   format(_("We are sorry, but Widelands was unable to create an emergency "
-			             "savegame for the following reason:\n\n%s"),
-			           e.what()),
+			            "savegame for the following reason:\n\n%s"),
+			          e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}

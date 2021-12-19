@@ -77,7 +77,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 				// try to merge last three strings
 				std::string temp =
 				   format(strings.at(strings.size() - 3), strings.at(strings.size() - 2),
-				           strings.at(strings.size() - 1));
+				          strings.at(strings.size() - 1));
 				strings.resize(strings.size() - 3);
 				strings.push_back(temp);
 			} catch (...) {
@@ -88,7 +88,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 					// try to merge all four strings
 					std::string temp =
 					   format(strings.at(strings.size() - 4), strings.at(strings.size() - 3),
-					           strings.at(strings.size() - 2), strings.at(strings.size() - 1));
+					          strings.at(strings.size() - 2), strings.at(strings.size() - 1));
 					strings.resize(strings.size() - 4);
 					strings.push_back(temp);
 				} catch (...) {
@@ -105,7 +105,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 
 	// No, it did not
 	return (format("%s, %s, %s, %s", get_message(code), get_message(arg1), get_message(arg2),
-	                get_message(arg3)));
+	               get_message(arg3)));
 }
 
 /// Fills the map.

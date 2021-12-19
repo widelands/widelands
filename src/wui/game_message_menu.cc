@@ -627,8 +627,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * DO NOT omit the placeholder in your translation.
 			    */
 			   format(ngettext("Restore the selected %d message", "Restore the selected %d messages",
-			                    no_selections),
-			           no_selections);
+			                   no_selections),
+			          no_selections);
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Restore selected message");
@@ -642,8 +642,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 			    * DO NOT omit the placeholder in your translation.
 			    */
 			   format(ngettext("Archive the selected %d message", "Archive the selected %d messages",
-			                    no_selections),
-			           no_selections);
+			                   no_selections),
+			          no_selections);
 		} else {
 			/** TRANSLATORS: Tooltip in the messages window */
 			button_tooltip = _("Archive selected message");

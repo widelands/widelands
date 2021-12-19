@@ -43,8 +43,8 @@ SavegameDeleter::create_header_for_confirmation_window(const size_t no_selection
                               /** TRANSLATORS: Used with multiple games, 1 game has a separate
                                  string. DO NOT omit the placeholder in your translation. */
                               format(ngettext("Do you really want to delete this %d game?",
-                          "Do you really want to delete these %d games?", no_selections),
-                 no_selections);
+                         "Do you really want to delete these %d games?", no_selections),
+                no_selections);
 
 	return header;
 }
@@ -107,8 +107,8 @@ ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections)
                             /** TRANSLATORS: Used with multiple replays, 1 replay has a
                                                separate string. DO NOT omit the placeholder in your translation. */
                             format(ngettext("Do you really want to delete this %d replay?",
-                          "Do you really want to delete these %d replays?", no_selections),
-                 no_selections);
+                         "Do you really want to delete these %d replays?", no_selections),
+                no_selections);
 
 	return header;
 }

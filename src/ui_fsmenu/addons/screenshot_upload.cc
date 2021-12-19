@@ -124,8 +124,8 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 			   format(_("The screenshot ‘%1$s’ for the add-on ‘%2$s’ could not be uploaded "
-			             "to the server.\n\nError Message:\n%3$s"),
-			           sel, info->internal_name, e.what()),
+			            "to the server.\n\nError Message:\n%3$s"),
+			          sel, info->internal_name, e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 			ok_.set_enabled(true);

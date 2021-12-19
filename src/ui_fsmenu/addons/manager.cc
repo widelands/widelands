@@ -347,11 +347,11 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add(new UI::MultilineTextarea(
 	                &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	                format("<rt><p>%1$s</p></rt>",
-	                        g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                           .as_font_tag(format(
-	                              _("For more information regarding how to develop and package your "
-	                                "own add-ons, please visit %s."),
-	                              underline_tag(kDocumentationURL)))),
+	                       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                          .as_font_tag(format(
+	                             _("For more information regarding how to develop and package your "
+	                               "own add-ons, please visit %s."),
+	                             underline_tag(kDocumentationURL)))),
 	                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	             UI::Box::Resizing::kFullSize);
 	auto add_button = [this](const std::string& url) {
@@ -430,13 +430,13 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
-	              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                 .as_font_tag(
-	                    format(_("Technical problems? Unclear documentation? Advanced needs such "
-	                              "as deletion of an add-on or collaborating with another add-on "
-	                              "designer? Please visit our forums at %s, explain your needs, and "
-	                              "the Widelands Development Team will be happy to help."),
-	                            underline_tag(kForumURL)))),
+	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                .as_font_tag(
+	                   format(_("Technical problems? Unclear documentation? Advanced needs such "
+	                            "as deletion of an add-on or collaborating with another add-on "
+	                            "designer? Please visit our forums at %s, explain your needs, and "
+	                            "the Widelands Development Team will be happy to help."),
+	                          underline_tag(kForumURL)))),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSpacing);
@@ -447,15 +447,15 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      format("<rt><p>%1$s</p></rt>",
-	              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                 .as_font_tag(
-	                    _("Alternatively you can also send a message to the Widelands Development "
-	                      "Team and we’ll try to help you with your enquiry as soon as we can. "
-	                      "Only the server administrators can read messages sent in this way. "
-	                      "Since other add-on designers can usually benefit from others’ questions "
-	                      "and answers, please use this way of communication only if there is a "
-	                      "reason why your concern is not for everyone’s ears. You’ll receive our "
-	                      "reply via a PM on your Widelands website user profile page."))),
+	             g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                .as_font_tag(
+	                   _("Alternatively you can also send a message to the Widelands Development "
+	                     "Team and we’ll try to help you with your enquiry as soon as we can. "
+	                     "Only the server administrators can read messages sent in this way. "
+	                     "Since other add-on designers can usually benefit from others’ questions "
+	                     "and answers, please use this way of communication only if there is a "
+	                     "reason why your concern is not for everyone’s ears. You’ll receive our "
+	                     "reply via a PM on your Widelands website user profile page."))),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	contact_.sigclicked.connect([this]() {
@@ -619,8 +619,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			for (const auto& pair : upgrades) {
 				if (pair.second) {
 					text += format(_("\n· %1$s (%2$s) by %3$s"), pair.first->descname(),
-					                (pair.first->verified ? _("verified") : _("NOT VERIFIED")),
-					                pair.first->author());
+					               (pair.first->verified ? _("verified") : _("NOT VERIFIED")),
+					               pair.first->author());
 				}
 			}
 			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade All"),
@@ -949,8 +949,8 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
 		const std::string err = format(_("Unable to fetch the list of available add-ons from "
-		                                  "the server!<br>Error Message: %s"),
-		                                e.what());
+		                                 "the server!<br>Error Message: %s"),
+		                               e.what());
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;
@@ -1132,8 +1132,8 @@ void AddOnsCtrl::rebuild(const bool need_to_update_dependency_errors) {
 		upgrade_all_.set_tooltip(_("No upgrades are available for your installed add-ons"));
 	} else {
 		std::string text = format(ngettext("Upgrade the following %u add-on:",
-		                                    "Upgrade the following %u add-ons:", has_upgrades.size()),
-		                           has_upgrades.size());
+		                                   "Upgrade the following %u add-ons:", has_upgrades.size()),
+		                          has_upgrades.size());
 		for (const std::string& name : has_upgrades) {
 			text += "<br>";
 			text += format(_("· %s"), name);
@@ -1173,18 +1173,18 @@ void AddOnsCtrl::update_dependency_errors() {
 			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
 				   format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found"),
-				           addon->first->descname(), requirement));
+				          addon->first->descname(), requirement));
 			} else {
 				if (!search_result->second) {
 					warn_requirements.push_back(format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled"),
-					                                    addon->first->descname(),
-					                                    search_result->first->descname()));
+					                                   addon->first->descname(),
+					                                   search_result->first->descname()));
 				}
 				if (too_late &&
 				    AddOns::order_matters(addon->first->category, search_result->first->category)) {
 					warn_requirements.push_back(
 					   format(_("· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"),
-					           addon->first->descname(), search_result->first->descname()));
+					          addon->first->descname(), search_result->first->descname()));
 				}
 			}
 			// Also warn if the add-on's requirements are present in the wrong order
@@ -1226,8 +1226,8 @@ void AddOnsCtrl::update_dependency_errors() {
 		} catch (const std::exception& e) {
 			warn_requirements_.set_text(
 			   format(_("An enabled add-on is defective. No games can be started with the "
-			             "current configuration.\nError message:\n%s"),
-			           e.what()));
+			            "current configuration.\nError message:\n%s"),
+			          e.what()));
 		}
 	} else {
 		const unsigned nr_warnings = warn_requirements.size();
@@ -1345,7 +1345,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	{
 		UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upload"),
 		                   format(_("Do you really want to upload the add-on ‘%s’ to the server?"),
-		                           addon->internal_name),
+		                          addon->internal_name),
 		                   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -1382,9 +1382,8 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 		w.set_visible(false);
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-		   format(
-		      _("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s"),
-		      addon->internal_name, e.what()),
+		   format(_("The add-on ‘%1$s’ could not be uploaded to the server.\n\nError Message:\n%2$s"),
+		          addon->internal_name, e.what()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
@@ -1509,9 +1508,9 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		UI::WLMessageBox m(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
 		   format(_("The translations for the add-on ‘%1$s’ could not be downloaded from the "
-		             "server. Installing/upgrading "
-		             "the translations will be skipped.\n\nError Message:\n%2$s"),
-		           remote->internal_name, e.what()),
+		            "server. Installing/upgrading "
+		            "the translations will be skipped.\n\nError Message:\n%2$s"),
+		          remote->internal_name, e.what()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}

@@ -192,8 +192,7 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 				if (it == team.begin()) {
 					section_contents = format("%d", static_cast<unsigned int>(*it));
 				} else {
-					section_contents =
-					   format("%s,%d", section_contents, static_cast<unsigned int>(*it));
+					section_contents = format("%s,%d", section_contents, static_cast<unsigned int>(*it));
 				}
 			}
 			teams_section.set_string(format("team%d", ++lineup_counter).c_str(), section_contents);

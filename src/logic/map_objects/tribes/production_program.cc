@@ -463,7 +463,7 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWare::description_negation
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy doesn't need the
 	 * ware '%s' */
 	std::string result = format(_("the economy doesn’t need the ware ‘%s’"),
-	                             descriptions.get_ware_descr(ware_type)->descname());
+	                            descriptions.get_ware_descr(ware_type)->descname());
 	return result;
 }
 
@@ -475,7 +475,7 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description(
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy needs the worker
 	 * '%s' */
 	std::string result = format(_("the economy needs the worker ‘%s’"),
-	                             descriptions.get_worker_descr(worker_type)->descname());
+	                            descriptions.get_worker_descr(worker_type)->descname());
 	return result;
 }
 
@@ -484,7 +484,7 @@ std::string ProductionProgram::ActReturn::EconomyNeedsWorker::description_negati
 	/** TRANSLATORS: e.g. Completed/Skipped/Did not start ... */
 	/** TRANSLATORS:      ... because the economy doesn’t need the worker '%s' */
 	std::string result = format(_("the economy doesn’t need the worker ‘%s’"),
-	                             descriptions.get_worker_descr(worker_type)->descname());
+	                            descriptions.get_worker_descr(worker_type)->descname());
 	return result;
 }
 
@@ -713,7 +713,7 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 		case ProgramResult::kFailed: {
 			/** TRANSLATORS: "Did not start working because the economy needs the ware '%s'" */
 			result_string = format(_("Did not start %1$s because %2$s"),
-			                        ps.top_state().program->descname(), condition_string);
+			                       ps.top_state().program->descname(), condition_string);
 		} break;
 		case ProgramResult::kCompleted: {
 			result_string = format(
@@ -1231,7 +1231,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 		    */
 		   format(ngettext("%s is missing", "%s are missing", nr_missing_groups),
-		           i18n::localize_list(group_list, i18n::ConcatenateWith::AND));
+		          i18n::localize_list(group_list, i18n::ConcatenateWith::AND));
 
 		std::string result_string =
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
@@ -1244,7 +1244,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		    */
 		   /** TRANSLATORS: we need to address for your language. */
 		   format(_("Did not start %1$s because %2$s"), ps.top_state().program->descname(),
-		           is_missing_string);
+		          is_missing_string);
 
 		if (ps.production_result() != ps.descr().out_of_resource_heading() ||
 		    ps.descr().out_of_resource_heading().empty()) {

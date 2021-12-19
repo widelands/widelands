@@ -429,8 +429,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			if (clientname_ != assigned_name) {
 				format_and_add_chat("", "", true,
 				                    format(_("You have been logged in as ‘%s’ since your "
-				                              "requested name is already in use or reserved."),
-				                            assigned_name));
+				                             "requested name is already in use or reserved."),
+				                           assigned_name));
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
@@ -501,8 +501,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			time_offset_ = stoi(packet.string()) - time(nullptr);
 			verb_log_info("InternetGaming: Server time offset is %d second(s).", time_offset_);
 			std::string temp = format(ngettext("Server time offset is %d second.",
-			                                    "Server time offset is %d seconds.", time_offset_),
-			                           time_offset_);
+			                                   "Server time offset is %d seconds.", time_offset_),
+			                          time_offset_);
 			format_and_add_chat("", "", true, temp);
 		}
 
@@ -701,7 +701,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			} else {
 				message =
 				   format(_("An unexpected error message has been received about command %1%: %2%"),
-				           subcmd, reason);
+				          subcmd, reason);
 			}
 
 			// Finally send the error message as system chat to the client.

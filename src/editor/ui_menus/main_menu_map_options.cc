@@ -490,7 +490,7 @@ void MainMenuMapOptions::update_waterway_length_warning() {
 		waterway_length_warning_->set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 		waterway_length_warning_->set_tooltip(
 		   format(_("It is not recommended to permit waterway lengths greater than %u"),
-		           kMaxRecommendedWaterwayLengthLimit));
+		          kMaxRecommendedWaterwayLengthLimit));
 	} else {
 		waterway_length_warning_->set_icon(nullptr);
 		waterway_length_warning_->set_tooltip("");

@@ -261,8 +261,7 @@ void write_tribes(const Widelands::EditorGameBase& egbase, FileSystem* out_files
 		// These go in separate files
 		std::unique_ptr<JSON::Object> json_tribe_for_file(new JSON::Object());
 		add_tribe_info(tribe_info, json_tribe_for_file.get());
-		json_tribe_for_file->write_to_file(
-		   *out_filesystem, format("tribe_%s.json", tribe_info.name));
+		json_tribe_for_file->write_to_file(*out_filesystem, format("tribe_%s.json", tribe_info.name));
 
 		const Widelands::TribeDescr& tribe =
 		   *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));

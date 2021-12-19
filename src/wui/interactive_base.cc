@@ -728,7 +728,7 @@ void InteractiveBase::think() {
 			set_tooltip(format(_("Road length: %u"), get_build_road_path().get_nsteps()));
 		} else {
 			set_tooltip(format(_("Waterway length: %1$u/%2$u"), get_build_road_path().get_nsteps(),
-			                    egbase().map().get_waterway_max_length()));
+			                   egbase().map().get_waterway_max_length()));
 		}
 	}
 }

@@ -128,9 +128,9 @@ void FieldInfoWindow::add_caps_info(std::string& buf) const {
 
 void FieldInfoWindow::add_owner_info(std::string& buf) const {
 	if (f_.get_owned_by() > 0) {
-		buf += as_listitem(
-		   format(_("Owned by: Player %u"), static_cast<unsigned int>(f_.get_owned_by())),
-		   font_style);
+		buf +=
+		   as_listitem(format(_("Owned by: Player %u"), static_cast<unsigned int>(f_.get_owned_by())),
+		               font_style);
 	} else {
 		buf += as_listitem(_("Owned by: —"), font_style);
 	}
@@ -197,19 +197,19 @@ void FieldInfoWindow::add_mapobject_info(std::string& buf) const {
 			if (!critternames.empty()) {
 				buf +=
 				   as_listitem(format(_("Animals: %s"),
-				                       i18n::localize_list(critternames, i18n::ConcatenateWith::COMMA)),
+				                      i18n::localize_list(critternames, i18n::ConcatenateWith::COMMA)),
 				               font_style);
 			}
 			if (!workernames.empty()) {
 				buf +=
 				   as_listitem(format(_("Workers: %s"),
-				                       i18n::localize_list(workernames, i18n::ConcatenateWith::COMMA)),
+				                      i18n::localize_list(workernames, i18n::ConcatenateWith::COMMA)),
 				               font_style);
 			}
 			if (!shipnames.empty()) {
-				buf += as_listitem(format(_("Ships: %s"), i18n::localize_list(
-				                                              shipnames, i18n::ConcatenateWith::COMMA)),
-				                   font_style);
+				buf += as_listitem(
+				   format(_("Ships: %s"), i18n::localize_list(shipnames, i18n::ConcatenateWith::COMMA)),
+				   font_style);
 			}
 		}
 	}
@@ -220,9 +220,8 @@ void FieldInfoWindow::add_resources_info(std::string& buf) const {
 	if (ramount > 0) {
 		buf += as_heading(_("Resources"), UI::PanelStyle::kWui);
 		buf += as_listitem(
-		   format(
-		      pgettext("resources", "%1%× %2%"), static_cast<unsigned int>(ramount),
-		      parent_.egbase().descriptions().get_resource_descr(f_.get_resources())->descname()),
+		   format(pgettext("resources", "%1%× %2%"), static_cast<unsigned int>(ramount),
+		          parent_.egbase().descriptions().get_resource_descr(f_.get_resources())->descname()),
 		   font_style);
 	}
 }
@@ -256,8 +255,8 @@ void FieldInfoWindow::add_map_info(std::string& buf) const {
 				if (addons.empty()) {
 					addons = parent_.egbase().enabled_addons()[i]->descname();
 				} else {
-					addons = format(
-					   _("%1$s; %2$s"), addons, parent_.egbase().enabled_addons()[i]->descname());
+					addons =
+					   format(_("%1$s; %2$s"), addons, parent_.egbase().enabled_addons()[i]->descname());
 				}
 			}
 		}

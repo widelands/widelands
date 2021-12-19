@@ -232,7 +232,7 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 				/** TRANSLATORS: %1% = the experience a worker has */
 				/** TRANSLATORS: %2% = the experience a worker needs to reach the next level */
 				er.set_string(1, format(_("%1%/%2%"), worker->get_current_experience(),
-				                         worker->descr().get_needed_experience()));
+				                        worker->descr().get_needed_experience()));
 				er.set_string(
 				   2, worker->owner().tribe().get_worker_descr(worker->descr().becomes())->descname());
 			} else {

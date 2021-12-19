@@ -155,8 +155,8 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text(
 	   format(_("Current: %s"), eia()
-	                                .egbase()
-	                                .descriptions()
-	                                .get_resource_descr(increase_tool_.set_tool().get_cur_res())
-	                                ->descname()));
+	                               .egbase()
+	                               .descriptions()
+	                               .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                               ->descname()));
 }

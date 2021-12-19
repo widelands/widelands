@@ -71,9 +71,9 @@ void GenericSaveHandler::make_backup() {
 			uint32_t index = get_index(Error::kBackupFailed);
 			error_msg_[index] =
 			   format("GenericSaveHandler::make_backup: %s: for all "
-			           "considered filenames a file already existed (last filename tried "
-			           "was %s)\n",
-			           complete_filename_.c_str(), backup_filename_);
+			          "considered filenames a file already existed (last filename tried "
+			          "was %s)\n",
+			          complete_filename_.c_str(), backup_filename_);
 			log_err("%s", error_msg_[index].c_str());
 			return;
 		}
@@ -86,8 +86,8 @@ void GenericSaveHandler::make_backup() {
 		error_ |= Error::kBackupFailed;
 		uint32_t index = get_index(Error::kBackupFailed);
 		error_msg_[index] = format("GenericSaveHandler::make_backup: file %s "
-		                            "could not be renamed to %s: %s\n",
-		                            complete_filename_.c_str(), backup_filename_, e.what());
+		                           "could not be renamed to %s: %s\n",
+		                           complete_filename_.c_str(), backup_filename_, e.what());
 		log_err("%s", error_msg_[index].c_str());
 		return;
 	}
@@ -102,8 +102,8 @@ void GenericSaveHandler::save_file() {
 		error_ |= Error::kSavingDataFailed;
 		uint32_t index = get_index(Error::kSavingDataFailed);
 		error_msg_[index] = format("GenericSaveHandler::save_file: data could not be "
-		                            "written to file %s: %s\n",
-		                            complete_filename_.c_str(), e.what());
+		                           "written to file %s: %s\n",
+		                           complete_filename_.c_str(), e.what());
 		log_err("%s", error_msg_[index].c_str());
 	}
 
@@ -116,8 +116,8 @@ void GenericSaveHandler::save_file() {
 				error_ |= Error::kCorruptFileLeft;
 				uint32_t index = get_index(Error::kCorruptFileLeft);
 				error_msg_[index] = format("GenericSaveHandler::save_file: possibly corrupt "
-				                            "file %s could not be deleted: %s\n",
-				                            complete_filename_.c_str(), e.what());
+				                           "file %s could not be deleted: %s\n",
+				                           complete_filename_.c_str(), e.what());
 				log_err("%s", error_msg_[index].c_str());
 			}
 		}
@@ -136,8 +136,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 			error_ |= Error::kCreatingDirFailed;
 			uint32_t index = get_index(Error::kCreatingDirFailed);
 			error_msg_[index] = format("GenericSaveHandler::save: directory %s could not be "
-			                            "created: %s\n",
-			                            dir_.c_str(), e.what());
+			                           "created: %s\n",
+			                           dir_.c_str(), e.what());
 			log_err("%s", error_msg_[index].c_str());
 			return error_;
 		}
@@ -163,8 +163,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 					error_ |= Error::kDeletingBackupFailed;
 					uint32_t index = get_index(Error::kDeletingBackupFailed);
 					error_msg_[index] = format("GenericSaveHandler::save: backup file %s could "
-					                            "not be deleted: %s\n",
-					                            backup_filename_.c_str(), e.what());
+					                           "not be deleted: %s\n",
+					                           backup_filename_.c_str(), e.what());
 					log_err("%s", error_msg_[index].c_str());
 				}
 
@@ -173,8 +173,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 					error_ |= Error::kRestoringBackupFailed;
 					uint32_t index = get_index(Error::kRestoringBackupFailed);
 					error_msg_[index] = format("GenericSaveHandler::save: file %s could not be "
-					                            "restored from backup %s: file still exists\n",
-					                            complete_filename_.c_str(), backup_filename_.c_str());
+					                           "restored from backup %s: file still exists\n",
+					                           complete_filename_.c_str(), backup_filename_.c_str());
 					log_err("%s", error_msg_[index].c_str());
 				} else {
 					// Restore backup.
@@ -185,8 +185,8 @@ GenericSaveHandler::Error GenericSaveHandler::save() {
 						uint32_t index = get_index(Error::kRestoringBackupFailed);
 						error_msg_[index] =
 						   format("GenericSaveHandler::save: file %s could not "
-						           "be restored from backup %s: %s\n",
-						           backup_filename_.c_str(), backup_filename_.c_str(), e.what());
+						          "be restored from backup %s: %s\n",
+						          backup_filename_.c_str(), backup_filename_.c_str(), e.what());
 						log_err("%s", error_msg_[index].c_str());
 					}
 				}

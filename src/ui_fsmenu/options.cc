@@ -665,7 +665,7 @@ void Options::update_language_stats() {
 	if (percent <= 90) {
 		message = message + " " +
 		          format(_("If you wish to help us translate, please visit %s"),
-		                  "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
+		                 "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
 	translation_info_.set_text(

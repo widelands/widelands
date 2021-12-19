@@ -268,21 +268,21 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			my_maps_.add(
 			   entry.first.localized_name, entry.first.filename, nullptr, false,
 			   format("%s<br>%s<br>%s<br>%s<br>%s",
-			           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			              .as_font_tag(entry.first.filename),
-			           format(_("Name: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(entry.first.localized_name)),
-			           format(_("Size: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(
-			                         format(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
-			           format(_("Players: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(std::to_string(entry.first.nrplayers))),
-			           format(_("Description: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(entry.first.description))));
+			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			             .as_font_tag(entry.first.filename),
+			          format(_("Name: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(entry.first.localized_name)),
+			          format(_("Size: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(
+			                       format(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
+			          format(_("Players: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
+			          format(_("Description: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(entry.first.description))));
 		}
 	}
 
@@ -371,10 +371,10 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			UI::WLMessageBox mbox(
 			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
 			   format(_("The map ‘%s’ is not a directory. "
-			             "Please consider disabling the ‘Compress widelands data files’ option "
-			             "in the options menu and resaving the map in the editor."
-			             "\n\nDo you want to add this map anyway?"),
-			           filename),
+			            "Please consider disabling the ‘Compress widelands data files’ option "
+			            "in the options menu and resaving the map in the editor."
+			            "\n\nDo you want to add this map anyway?"),
+			          filename),
 			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -408,8 +408,8 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 				if (name.size() >= ext.size() &&
 				    name.compare(name.size() - ext.size(), ext.size(), ext) == 0) {
 					err = format(_("Directories may not use the extension ‘%s’.\n\nPlease "
-					                "choose a different name."),
-					              ext);
+					               "choose a different name."),
+					             ext);
 					break;
 				}
 			}
@@ -437,7 +437,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
             format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
-		              select.back()) :
+		             select.back()) :
             format(_("Do you really want to delete the map ‘%s’?"), selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {

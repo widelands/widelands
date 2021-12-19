@@ -121,8 +121,8 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	std::string combined_header = as_richtext(as_heading_with_content(
 	   /** TRANSLATORS: %1% = number of selected directories, %2% = number of selected files*/
 	   format(ngettext("Selected %1% directory and %2%:", "Selected %1% directories and %2%:",
-	                    number_of_directories),
-	           number_of_directories, header_second_part),
+	                   number_of_directories),
+	          number_of_directories, header_second_part),
 	   "", panel_style_, true));
 
 	name_label_.set_text(combined_header);
@@ -170,22 +170,22 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	   gamedata.gametime, panel_style_);
 
 	description = format("%s%s", description,
-	                      as_heading_with_content(_("Players:"), gamedata.nrplayers, panel_style_));
+	                     as_heading_with_content(_("Players:"), gamedata.nrplayers, panel_style_));
 
 	description =
 	   format("%s%s", description,
-	           as_heading_with_content(_("Widelands Version:"), gamedata.version, panel_style_));
+	          as_heading_with_content(_("Widelands Version:"), gamedata.version, panel_style_));
 
 	description =
 	   format("%s%s", description,
-	           as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_));
+	          as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_));
 
 	AddOns::AddOnConflict addons = AddOns::check_requirements(gamedata.required_addons);
 	has_conflicts_ = addons.second;
 
 	description =
 	   format("%s%s", description,
-	           as_heading_with_content(_("Add-Ons:"), addons.first, panel_style_, false, true));
+	          as_heading_with_content(_("Add-Ons:"), addons.first, panel_style_, false, true));
 
 	std::string filename = gamedata.filename;
 	// Remove first directory from filename. This will be the save/ or replays/ folder

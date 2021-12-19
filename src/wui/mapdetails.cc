@@ -128,7 +128,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text(format("<rt>%s%s</rt>", as_heading(_("Directory"), style_, true),
-		                             as_content(mapdata.localized_name, style_)));
+		                            as_content(mapdata.localized_name, style_)));
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
@@ -175,14 +175,14 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		description = format("%s%s", description, as_heading(_("Tags"), style_));
 		description =
 		   format("%s%s", description,
-		           as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_));
+		          as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_));
 
 		AddOns::AddOnConflict addons = AddOns::check_requirements(mapdata.required_addons);
 		loadable = !addons.second;
 
 		description =
 		   format("%s%s", description,
-		           as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true));
+		          as_heading_with_content(_("Add-Ons:"), addons.first, style_, false, true));
 
 		description = format("%s%s", description, as_heading(_("Description"), style_));
 		description = format("%s%s", description, as_content(mapdata.description, style_));

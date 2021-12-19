@@ -248,15 +248,15 @@ std::string FileSystem::illegal_filename_tooltip() {
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    *  %s is a list of illegal characters */
 	   format(pgettext("illegal_filename_characters", "%s at the start of the filename"),
-	           richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
+	          richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    * %s is a list of illegal characters */
 	   format(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
-	           richtext_escape(
-	              i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
+	          richtext_escape(
+	             i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
 	return format(

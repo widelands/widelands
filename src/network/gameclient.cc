@@ -754,7 +754,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		}
 		for (const auto& pair : wrong_version_addons) {
 			message = format(_("%1$s\n· ‘%2$s’ installed at version %3$s but host uses version %4$s"),
-			                  message, pair.first, pair.second.first, pair.second.second);
+			                 message, pair.first, pair.second.first, pair.second.second);
 		}
 		throw AddOnsMismatchException(message);
 	}
@@ -1276,8 +1276,8 @@ void GameClient::disconnect(const std::string& reason,
 			capsule_.menu().show_messagebox(
 			   _("Disconnected"),
 			   format(_("The connection with the host was lost for the following reason:\n%s"),
-			           (arg.empty() ? NetworkGamingMessages::get_message(reason) :
-                                   NetworkGamingMessages::get_message(reason, arg))));
+			          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
+                                  NetworkGamingMessages::get_message(reason, arg))));
 		}
 	}
 

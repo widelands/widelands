@@ -414,9 +414,9 @@ void InternetLobby::change_servername() {
 			if (game.name == servername_.text()) {
 				hostgame_.set_enabled(false);
 				servername_.set_warning(true);
-				servername_.set_tooltip(format(
-				   _("The game %s is already running. Please choose a different name."),
-				   g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name)));
+				servername_.set_tooltip(
+				   format(_("The game %s is already running. Please choose a different name."),
+				          g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name)));
 			}
 		}
 	}

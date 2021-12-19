@@ -284,8 +284,8 @@ protected:
 	void check_size(int check_w, int check_h) {
 		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		if (check_w > maximum_size || check_h > maximum_size) {
-			const std::string error_message = format(
-			   "Texture (%d, %d) too big! Maximum size is %d.", check_w, check_h, maximum_size);
+			const std::string error_message =
+			   format("Texture (%d, %d) too big! Maximum size is %d.", check_w, check_h, maximum_size);
 			log_err("%s\n", error_message.c_str());
 			throw TextureTooBig(error_message);
 		}
@@ -726,7 +726,7 @@ std::shared_ptr<UI::RenderedText> FillingTextNode::render(TextureCache* texture_
 	std::shared_ptr<UI::RenderedText> rendered_text(new UI::RenderedText());
 	const std::string hash =
 	   format("rt:fill:%s:%s:%i:%i:%i:%s", txt_, nodestyle_.font_color.hex_value(),
-	           nodestyle_.font_style, width(), height(), (is_expanding_ ? "e" : "f"));
+	          nodestyle_.font_style, width(), height(), (is_expanding_ ? "e" : "f"));
 
 	std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 	if (rendered_image == nullptr) {
@@ -1066,7 +1066,7 @@ std::shared_ptr<UI::RenderedText> ImgRenderNode::render(TextureCache* texture_ca
 	} else {
 		const std::string hash =
 		   format("rt:img:%s:%s:%i:%i", filename_, (use_playercolor_ ? color_.hex_value() : ""),
-		           width(), height());
+		          width(), height());
 		std::shared_ptr<const Image> rendered_image = texture_cache->get(hash);
 		if (rendered_image == nullptr) {
 			auto texture = std::make_shared<Texture>(width(), height());

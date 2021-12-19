@@ -111,8 +111,8 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	      .as_font_tag(
 	         format(_("Size: %s"),
-	                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                    .as_font_tag(format(_("%1$u×%2$u"), map.get_width(), map.get_height())))));
+	                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                   .as_font_tag(format(_("%1$u×%2$u"), map.get_width(), map.get_height())))));
 
 	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
@@ -123,8 +123,8 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	      .as_font_tag(format(_("Description: %s"),
-	                           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                              .as_font_tag(richtext_escape(map.get_description())))));
+	                          g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                             .as_font_tag(richtext_escape(map.get_description())))));
 
 	if (!map.get_hint().empty()) {
 		format_arg_strings.emplace_back(

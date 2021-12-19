@@ -54,8 +54,8 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message = as_playercolor(chat_message.playern,
-			                         format("%s @%s: ", sender_escaped, recipient_escaped)) +
+			message = as_playercolor(
+			             chat_message.playern, format("%s @%s: ", sender_escaped, recipient_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
 		} else {
 			message = as_playercolor(chat_message.playern,
@@ -73,9 +73,9 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		} else if (!chat_message.sender.empty()) {
 			const std::string sender_formatted =
 			   as_playercolor(chat_message.playern, format("%s:", sender_escaped));
-			message = format(
-			   "%s %s", sender_formatted,
-			   g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized));
+			message =
+			   format("%s %s", sender_formatted,
+			          g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized));
 		} else {
 			message =
 			   g_style_manager->font_style(UI::FontStyle::kChatServer).as_font_tag("*** " + sanitized);
@@ -86,6 +86,6 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	strftime(ts, sizeof(ts), "[%H:%M]", localtime(&chat_message.time));
 
 	return format("<p>%s %s</p>",
-	               g_style_manager->font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts),
-	               message);
+	              g_style_manager->font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts),
+	              message);
 }

@@ -43,22 +43,22 @@ void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const 
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
-		   safe_richtext_message(format(
-		      local ? _("Are you certain that you want to uninstall this add-on?\n\n"
-		                "%1$s\n"
-		                "by %2$s\n"
-		                "Version %3$s\n"
-		                "Category: %4$s\n"
-		                "%5$s\n\n"
-		                "Note that this add-on can not be downloaded again from the server.") :
-                    _("Are you certain that you want to uninstall this add-on?\n\n"
-		                "%1$s\n"
-		                "by %2$s\n"
-		                "Version %3$s\n"
-		                "Category: %4$s\n"
-		                "%5$s"),
-		      info->descname(), info->author(), AddOns::version_to_string(info->version),
-		      AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
+		   safe_richtext_message(
+		      format(local ? _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s\n\n"
+		                       "Note that this add-on can not be downloaded again from the server.") :
+                           _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s"),
+		             info->descname(), info->author(), AddOns::version_to_string(info->version),
+		             AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -105,7 +105,7 @@ std::string required_wl_version_and_sync_safety_string(std::shared_ptr<AddOns::A
 			str += format(_("Requires a Widelands version of at most %s."), info->max_wl_version);
 		} else {
 			str += format(_("Requires a Widelands version of at least %1$s and at most %2$s."),
-			               info->min_wl_version, info->max_wl_version);
+			              info->min_wl_version, info->max_wl_version);
 		}
 		result += g_style_manager
 		             ->font_style(info->matches_widelands_version() ? UI::FontStyle::kItalic :
@@ -363,11 +363,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               g_style_manager->font_style(UI::FontStyle::kItalic)
                  .as_font_tag(format(_("(%s)"), info->internal_name))),
            g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag(info->author() == info->upload_username ?
-                              format(_("by %s"), info->author()) :
-                              format(_("by %1$s (uploaded by %2$s)"),
-                                      info->author(),
-                                      info->upload_username)),
+              .as_font_tag(
+                 info->author() == info->upload_username ?
+                    format(_("by %s"), info->author()) :
+                    format(_("by %1$s (uploaded by %2$s)"), info->author(), info->upload_username)),
            required_wl_version_and_sync_safety_string(info),
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info->description()))),
@@ -407,20 +406,20 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
-			   safe_richtext_message(format(
-			      _("Are you certain that you want to upgrade this add-on?\n\n"
-			        "%1$s\n"
-			        "by %2$s\n"
-			        "%3$s\n"
-			        "Installed version: %4$s\n"
-			        "Available version: %5$s\n"
-			        "Category: %6$s\n"
-			        "%7$s"),
-			      info->descname(), info->author(),
-			      (info->verified ? _("Verified") : _("NOT VERIFIED")),
-			      AddOns::version_to_string(installed_version),
-			      AddOns::version_to_string(info->version),
-			      AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
+			   safe_richtext_message(
+			      format(_("Are you certain that you want to upgrade this add-on?\n\n"
+			               "%1$s\n"
+			               "by %2$s\n"
+			               "%3$s\n"
+			               "Installed version: %4$s\n"
+			               "Available version: %5$s\n"
+			               "Category: %6$s\n"
+			               "%7$s"),
+			             info->descname(), info->author(),
+			             (info->verified ? _("Verified") : _("NOT VERIFIED")),
+			             AddOns::version_to_string(installed_version),
+			             AddOns::version_to_string(info->version),
+			             AddOns::kAddOnCategories.at(info->category).descname(), info->description())),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -467,18 +466,18 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
          format(
 	         "%s<br>%s<br>%s<br>%s<br>%s",
 	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
-	                 info->total_file_size),
+	                info->total_file_size),
 	         format(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() ?
                 format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
-	                       info->average_rating(), info->number_of_votes()) :
+	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
+	                      info->average_rating(), info->number_of_votes()) :
                 _("No votes yet")),
 	         format(ngettext("%u comment", "%u comments", info->user_comments.size()),
-	                 info->user_comments.size()),
+	                info->user_comments.size()),
 	         format(ngettext("%u screenshot", "%u screenshots", info->screenshots.size()),
-	                 info->screenshots.size())));
+	                info->screenshots.size())));
 
 	layout();
 }

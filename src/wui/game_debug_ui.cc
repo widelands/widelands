@@ -173,8 +173,8 @@ void FieldDebugWindow::think() {
 	{
 		Widelands::PlayerNumber const owner = coords_.field->get_owned_by();
 		str += format("(%i, %i)\nheight: %u\nowner: %u\n", coords_.x, coords_.y,
-		               static_cast<unsigned int>(coords_.field->get_height()),
-		               static_cast<unsigned int>(owner));
+		              static_cast<unsigned int>(coords_.field->get_height()),
+		              static_cast<unsigned int>(owner));
 
 		if (owner) {
 			Widelands::NodeCaps const buildcaps = egbase.player(owner).get_buildcaps(coords_);
@@ -216,9 +216,8 @@ void FieldDebugWindow::think() {
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
 			if (time_last_surveyed.is_valid()) {
-				str +=
-				   format("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				           static_cast<unsigned int>(player_field.resource_amounts.d));
+				str += format("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.d));
 
 			} else {
 				str += "  D triangle never surveyed\n";
@@ -229,9 +228,8 @@ void FieldDebugWindow::think() {
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
 			if (time_last_surveyed.is_valid()) {
-				str +=
-				   format("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				           static_cast<unsigned int>(player_field.resource_amounts.r));
+				str += format("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.r));
 
 			} else {
 				str += "  R triangle never surveyed\n";
@@ -246,11 +244,11 @@ void FieldDebugWindow::think() {
 				animation_name = "(seen an animation)";
 			}
 			str += format("  last seen at %u:\n"
-			               "    owner: %u\n"
-			               "    immovable animation:\n%s\n"
-			               "      ",
-			               player_field.time_node_last_unseen.get(),
-			               static_cast<unsigned int>(player_field.owner), animation_name.c_str());
+			              "    owner: %u\n"
+			              "    immovable animation:\n%s\n"
+			              "      ",
+			              player_field.time_node_last_unseen.get(),
+			              static_cast<unsigned int>(player_field.owner), animation_name.c_str());
 		} else if (!vision.is_seen_by_us()) {
 			str += "  seen only by teammate(s)\n";
 		} else {
@@ -272,10 +270,10 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
 			str += format("Resource: %s\n",
-			               ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str());
+			              ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str());
 
 			str += format("  Amount: %i/%i\n", static_cast<unsigned int>(ramount),
-			               static_cast<unsigned int>(initial_amount));
+			              static_cast<unsigned int>(initial_amount));
 		}
 	}
 
