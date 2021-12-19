@@ -6,6 +6,9 @@
 ## Linux distro detection taken from
 ## https://superuser.com/questions/11008/how-do-i-find-out-what-version-of-linux-im-running
 
+# TODO: As of 12/2021, Boost is no longer required, but we now need Asio.
+# TODO: Python2 should be replaced with Python3.
+
 DISTRO="$1"
 
 echo "Script for installing Widelands dependencies."
@@ -42,7 +45,7 @@ echo "*homebrew   Homebrew"
 echo " "
 echo "We will try to install the following dependencies:"
 echo " "
-echo "* Boost >= 1.48"
+echo "* Asio"
 echo "* Python >= 1.5.2"
 echo "* libSDL >=2.0"
 echo "* libSDL_image"
@@ -110,8 +113,7 @@ elif [ "$DISTRO" == "mandriva" ]; then
     tiff-devel git glew-devel boost-static-devel
 elif [ "$DISTRO" == "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
-   sudo apt install git cmake g++ gcc gettext libboost-dev libboost-regex-dev \
-    libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev \
+   sudo apt install git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
     libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev
 elif [ "$DISTRO" == "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."

@@ -88,9 +88,7 @@ endif()
 
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-set (Boost_USE_STATIC_LIBS  OFF)
 if (WIN32)
-  set (Boost_USE_STATIC_LIBS  ON)
   link_libraries(wsock32 ws2_32 bcrypt)
 endif()
 if (OPTION_BUILD_WINSTATIC)
@@ -122,9 +120,6 @@ if (OPTION_BUILD_WINSTATIC)
   endif()
   set (OPTION_GLEW_STATIC ON)
 endif()
-set (Boost_USE_MULTITHREADED ON)
-set (Boost_DETAILED_FAILURE_MSG ON)
-find_package(Boost 1.48 COMPONENTS REQUIRED system)
 
 find_package (PythonInterp REQUIRED)
 
@@ -290,9 +285,6 @@ else()
     # SDL and MinGW both declare 'unsigned int __builtin_ia32_crc32qi(unsigned int, unsigned char)', resulting in lots of warnings. So, we can't have this flag in Windows.
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   endif()
-
-  # Because of: https://svn.boost.org/trac/boost/ticket/9240.
-  wl_add_flag(WL_GENERIC_CXX_FLAGS "-fext-numeric-literals")
 
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
