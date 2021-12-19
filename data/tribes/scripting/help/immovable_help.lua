@@ -62,7 +62,7 @@ function immovable_help_string(tribe, immovable_description)
          if (immovable_description.size == "small") then
             result = result .. p(_"Workers and animals can walk on fields with this immovable.")
          else
-            result = result .. p(_"Workers and animals can't walk on fields with this immovable.")
+            result = result .. p(_"Workers and animals can’t walk on fields with this immovable.")
          end
       end
    end
