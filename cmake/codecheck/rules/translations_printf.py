@@ -20,8 +20,10 @@ CLEAN_WILDCARD_FOR_UNORDERED = re.compile(r'(\%\d\%)')
 
 
 def FIND_UNORDERED_placeholders(sanitized_entry):
-    """We need to remove wildcard matches first, because we have cases like
-    %1%m that match both regex expressions."""
+    """We need to remove wildcard matches first, because we have cases like.
+
+    %1%m that match both regex expressions.
+    """
     for entry in CLEAN_WILDCARD_FOR_UNORDERED.findall(sanitized_entry):
         sanitized_entry = sanitized_entry.replace(entry, '')
     return FIND_UNORDERED.findall(sanitized_entry)
