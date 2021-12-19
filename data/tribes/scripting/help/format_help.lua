@@ -38,15 +38,16 @@ function image_line(image, count, text)
 end
 
 -- RST
--- .. function:: plot_size_line(size)
+-- .. function:: plot_size_line(size, size_only)
 --
 --    Creates a line describing space required on the map.
 --    Consists of a header colored text, followed by normal text and an image.
 --
 --    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
+--    :arg size_only: size_only key. Optional bool value if size is a space requirement as well.
 --    :returns: header followed by normal text and image if a space is required, or empty string.
 --
-function plot_size_line(size)
+function plot_size_line(size, size_only)
    local text = ""
    local image = ""
    if (size == "mine") then
@@ -73,11 +74,18 @@ function plot_size_line(size)
       return ""
    end
 
+   if (size_only == true) then
+      -- TRANSLATORS: Size of a map immovable
+      text = p(join_sentences(font("size=13 color=D1D1D1", _"Size:"), text))
+   else
+   -- TRANSLATORS: Space on the map required for building a building there
+      text = p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+   end
+
    return
       div("width=100%",
          div("float=right padding_l=6", p(img(image))) ..
-         -- TRANSLATORS: Space on the map required for building a building there
-         p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+         text
       )
 end
 

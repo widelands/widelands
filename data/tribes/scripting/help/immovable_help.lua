@@ -55,8 +55,16 @@ function immovable_help_string(tribe, immovable_description)
       result = result .. h2(_"Requirements")
       if (buildcost ~= "") then
          result = result .. h3(_"Build cost:") .. buildcost
+         result = result .. plot_size_line(immovable_description.size)
+         result = result .. p(_"Workers and animals can't walk on fields with this immovable.")
+      else
+         result = result .. plot_size_line(immovable_description.size, true)
+         if (immovable_description.size == "small") then
+            result = result .. p(_"Workers and animals can walk on fields with this immovable.")
+         else
+            result = result .. p(_"Workers and animals can't walk on fields with this immovable.")
+         end
       end
-      result = result .. space_required
    end
 
    local becomes_list = immovable_description.becomes
