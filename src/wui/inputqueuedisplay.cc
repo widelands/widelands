@@ -117,7 +117,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 }
 
 static inline std::string create_tooltip(const bool increase) {
-	return bformat(
+	return format(
 	   "<p>%s%s%s</p>",
 	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	      .as_font_tag(increase ?
