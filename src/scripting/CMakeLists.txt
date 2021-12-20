@@ -35,9 +35,8 @@ wl_library(scripting_lua_table
     lua_table.cc
     lua_table.h
   DEPENDS
-    base_log
+    base
     base_geometry
-    base_string
     scripting_base
     scripting_coroutine
     scripting_errors
@@ -70,10 +69,8 @@ wl_library(scripting_lua_interface
     run_script.h
   USES_SDL2
   DEPENDS
-    base_i18n
+    base
     base_macros
-    base_log
-    base_string
     build_info
     io_fileread
     io_filesystem
@@ -111,10 +108,9 @@ wl_library(scripting_logic
     eris.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
-    base_string
     economy
     io_fileread
     io_filesystem

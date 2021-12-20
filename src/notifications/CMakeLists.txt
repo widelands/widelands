@@ -8,7 +8,7 @@ wl_library(notifications
     note_ids.h
     signal.h
   DEPENDS
+    base
     base_exceptions
-    base_log
     base_macros
 )

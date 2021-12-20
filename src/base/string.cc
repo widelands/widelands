@@ -19,6 +19,8 @@
 
 #include "base/string.h"
 
+#include <memory>
+
 std::string to_lower(const std::string& str) {
 	std::string s;
 	for (const char* c = str.c_str(); *c; ++c) {

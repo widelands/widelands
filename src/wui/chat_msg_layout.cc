@@ -54,12 +54,12 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
-			message = as_playercolor(chat_message.playern,
-			                         bformat("%s @%s: ", sender_escaped, recipient_escaped)) +
+			message = as_playercolor(
+			             chat_message.playern, format("%s @%s: ", sender_escaped, recipient_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
 		} else {
 			message = as_playercolor(chat_message.playern,
-			                         (bformat("@%s: %s", recipient_escaped, sender_escaped))) +
+			                         (format("@%s: %s", recipient_escaped, sender_escaped))) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper)
 			             .as_font_tag(sanitized.substr(3));
 		}
@@ -72,10 +72,10 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			             .as_font_tag(sanitized.substr(3));
 		} else if (!chat_message.sender.empty()) {
 			const std::string sender_formatted =
-			   as_playercolor(chat_message.playern, bformat("%s:", sender_escaped));
-			message = bformat(
-			   "%s %s", sender_formatted,
-			   g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized));
+			   as_playercolor(chat_message.playern, format("%s:", sender_escaped));
+			message =
+			   format("%s %s", sender_formatted,
+			          g_style_manager->font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized));
 		} else {
 			message =
 			   g_style_manager->font_style(UI::FontStyle::kChatServer).as_font_tag("*** " + sanitized);
@@ -85,7 +85,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	char ts[12];
 	strftime(ts, sizeof(ts), "[%H:%M]", localtime(&chat_message.time));
 
-	return bformat("<p>%s %s</p>",
-	               g_style_manager->font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts),
-	               message);
+	return format("<p>%s %s</p>",
+	              g_style_manager->font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts),
+	              message);
 }

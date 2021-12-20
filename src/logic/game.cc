@@ -699,8 +699,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
 
-	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
-	                               start_game_type == StartGameType::kSaveGame)) {
+	if (!script_to_run.empty()) {
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 

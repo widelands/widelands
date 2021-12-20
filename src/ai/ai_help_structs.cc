@@ -969,6 +969,9 @@ SchedulerTask::SchedulerTask(const Time& time,
                              const uint8_t p,
                              const char* d)
    : due_time(time), id(t), priority(p), descr(d) {
+	call_count = 0;
+	total_exec_time_ms = 0;
+	max_exec_time_ms = 0;
 }
 
 bool SchedulerTask::operator<(const SchedulerTask& other) const {

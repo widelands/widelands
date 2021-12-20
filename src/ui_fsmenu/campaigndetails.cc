@@ -43,33 +43,33 @@ CampaignDetails::CampaignDetails(Panel* parent)
 }
 
 void CampaignDetails::update(const CampaignData& campaigndata) {
-	name_label_.set_text(bformat("<rt>%s%s</rt>",
-	                             /** TRANSLATORS: Header for campaign name */
-	                             as_heading(_("Campaign"), UI::PanelStyle::kFsMenu, true),
-	                             as_content(campaigndata.descname, UI::PanelStyle::kFsMenu)));
+	name_label_.set_text(format("<rt>%s%s</rt>",
+	                            /** TRANSLATORS: Header for campaign name */
+	                            as_heading(_("Campaign"), UI::PanelStyle::kFsMenu, true),
+	                            as_content(campaigndata.descname, UI::PanelStyle::kFsMenu)));
 
 	std::string description;
 
 	if (campaigndata.visible) {
-		description = bformat("%s%s",
-		                      /** TRANSLATORS: Header for campaign tribe */
-		                      as_heading(_("Tribe"), UI::PanelStyle::kFsMenu),
-		                      as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu));
-		description = bformat("%s%s", description,
-		                      /** TRANSLATORS: Header for campaign difficulty */
-		                      as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu));
+		description = format("%s%s",
+		                     /** TRANSLATORS: Header for campaign tribe */
+		                     as_heading(_("Tribe"), UI::PanelStyle::kFsMenu),
+		                     as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu));
+		description = format("%s%s", description,
+		                     /** TRANSLATORS: Header for campaign difficulty */
+		                     as_heading(_("Difficulty"), UI::PanelStyle::kFsMenu));
 		description =
-		   bformat("%s%s", description,
-		           as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu));
+		   format("%s%s", description,
+		          as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu));
 
-		description = bformat("%s%s", description,
-		                      /** TRANSLATORS: Header for campaign description */
-		                      as_heading(_("Description"), UI::PanelStyle::kFsMenu));
-		description = bformat(
-		   "%s%s", description, as_content(campaigndata.description, UI::PanelStyle::kFsMenu));
+		description = format("%s%s", description,
+		                     /** TRANSLATORS: Header for campaign description */
+		                     as_heading(_("Description"), UI::PanelStyle::kFsMenu));
+		description =
+		   format("%s%s", description, as_content(campaigndata.description, UI::PanelStyle::kFsMenu));
 	}
 
-	description = bformat("<rt>%s</rt>", description);
+	description = format("<rt>%s</rt>", description);
 	descr_.set_text(description);
 	descr_.scroll_to_top();
 }
