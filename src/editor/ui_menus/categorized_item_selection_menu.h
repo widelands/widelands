@@ -172,13 +172,13 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 	}
 	if (buf.size() > max_string_size) {
 		/** TRANSLATORS: %s are the currently selected items in an editor tool */
-		buf = bformat(_("Current: %s …"), buf);
+		buf = format(_("Current: %s …"), buf);
 	} else if (buf.empty()) {
 		/** TRANSLATORS: Help text in an editor tool */
 		buf = _("Click to select an item. Use the Ctrl key to select multiple items.");
 	} else {
 		/** TRANSLATORS: %s are the currently selected items in an editor tool */
-		buf = bformat(_("Current: %s"), buf);
+		buf = format(_("Current: %s"), buf);
 	}
 	current_selection_names_.set_text(buf);
 }
