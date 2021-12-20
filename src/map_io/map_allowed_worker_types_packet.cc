@@ -54,7 +54,7 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
 			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const TribeDescr& tribe = player->tribe();
 				try {
-					Section* s = prof.get_section(bformat("player_%u", static_cast<unsigned int>(p)));
+					Section* s = prof.get_section(format("player_%u", static_cast<unsigned int>(p)));
 					if (s == nullptr) {
 						continue;
 					}
@@ -91,7 +91,7 @@ void MapAllowedWorkerTypesPacket::write(FileSystem& fs, EditorGameBase& egbase, 
 	bool forbidden_worker_seen = false;
 	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
 		const TribeDescr& tribe = player->tribe();
-		const std::string section_key = bformat("player_%u", static_cast<unsigned int>(p));
+		const std::string section_key = format("player_%u", static_cast<unsigned int>(p));
 		Section& section = prof.create_section(section_key.c_str());
 
 		// Only write the workers which are disabled.

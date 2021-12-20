@@ -81,7 +81,7 @@ ContactForm::ContactForm(AddOnsCtrl& ctrl)
 			log_err("contact error: %s", e.what());
 			UI::WLMessageBox m(
 			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-			   bformat(_("Unable to submit your enquiry.\nError message:\n%s"), e.what()),
+			   format(_("Unable to submit your enquiry.\nError message:\n%s"), e.what()),
 			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 			return;

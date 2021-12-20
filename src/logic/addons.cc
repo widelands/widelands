@@ -102,7 +102,7 @@ std::string version_to_string(const AddOnVersion& version, const bool localize) 
 		if (s.empty()) {
 			s = std::to_string(v);
 		} else if (localize) {
-			s = bformat(_("%1$s.%2$u"), s, v);
+			s = format(_("%1$s.%2$u"), s, v);
 		} else {
 			s += '.';
 			s += std::to_string(v);
@@ -174,20 +174,18 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 			std::string list;
 			for (const auto& a : addons_wrong_version) {
 				if (list.empty()) {
-					list =
-					   bformat(_("%1$s (expected version %2$s, found %3$s)"), a.first,
-					           version_to_string(a.second.second), version_to_string(a.second.first));
+					list = format(_("%1$s (expected version %2$s, found %3$s)"), a.first,
+					              version_to_string(a.second.second), version_to_string(a.second.first));
 				} else {
-					list =
-					   bformat(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
-					           version_to_string(a.second.second), version_to_string(a.second.first));
+					list = format(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
+					              version_to_string(a.second.second), version_to_string(a.second.first));
 				}
 			}
 			// Wrong versions might work, so do not forbid loading
 			return std::make_pair(
-			   bformat(ngettext("%1$u add-on with wrong version: %2$s",
-			                    "%1$u add-ons with wrong version: %2$s", addons_wrong_version.size()),
-			           addons_wrong_version.size(), list),
+			   format(ngettext("%1$u add-on with wrong version: %2$s",
+			                   "%1$u add-ons with wrong version: %2$s", addons_wrong_version.size()),
+			          addons_wrong_version.size(), list),
 			   false);
 		}
 	} else {
@@ -197,35 +195,34 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 				if (list.empty()) {
 					list = a;
 				} else {
-					list = bformat(_("%1$s, %2$s"), list, a);
+					list = format(_("%1$s, %2$s"), list, a);
 				}
 			}
-			return std::make_pair(
-			   bformat(ngettext("%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s",
-			                    addons_missing.size()),
-			           addons_missing.size(), list),
-			   true);
+			return std::make_pair(format(ngettext("%1$u missing add-on: %2$s",
+			                                      "%1$u missing add-ons: %2$s", addons_missing.size()),
+			                             addons_missing.size(), list),
+			                      true);
 		} else {
 			std::string list;
 			for (const std::string& a : addons_missing) {
 				if (list.empty()) {
-					list = bformat(_("%s (missing)"), a);
+					list = format(_("%s (missing)"), a);
 				} else {
-					list = bformat(_("%1$s, %2$s (missing)"), list, a);
+					list = format(_("%1$s, %2$s (missing)"), list, a);
 				}
 			}
 			for (const auto& a : addons_wrong_version) {
-				list = bformat(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
-				               version_to_string(a.second.second), version_to_string(a.second.first));
+				list = format(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
+				              version_to_string(a.second.second), version_to_string(a.second.first));
 			}
 			return std::make_pair(
-			   bformat(
+			   format(
 			      _("%1$s and %2$s: %3$s"),
-			      bformat(ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size()),
-			              addons_missing.size()),
-			      bformat(ngettext("%u add-on with wrong version", "%u add-ons with wrong version",
-			                       addons_missing.size()),
-			              addons_missing.size()),
+			      format(ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size()),
+			             addons_missing.size()),
+			      format(ngettext("%u add-on with wrong version", "%u add-ons with wrong version",
+			                      addons_missing.size()),
+			             addons_missing.size()),
 			      list),
 			   true);
 		}
@@ -240,8 +237,8 @@ AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
 	}
 	AddOnConflict result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result.first = bformat(_("%1$s<br>· %2$s (version %3$s)"), result.first, pair.first,
-		                       version_to_string(pair.second));
+		result.first = format(_("%1$s<br>· %2$s (version %3$s)"), result.first, pair.first,
+		                      version_to_string(pair.second));
 	}
 	return result;
 }
