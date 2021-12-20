@@ -291,7 +291,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 					   "Missing directional animation '%s\'", directional_animname.c_str());
 				}
 				const std::string filename_base =
-				   bformat("%s%s_%d", animation_name, animation_direction_names[dir - 1], scale);
+				   format("%s%s_%d", animation_name, animation_direction_names[dir - 1], scale);
 				const Animation& directional_animation = g_animation_manager->get_animation(
 				   descr->get_animation(directional_animname, nullptr));
 				spritesheets_to_write.emplace_back(
@@ -300,7 +300,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 
 		} else {
 			spritesheets_to_write.emplace_back(new SpritesheetData(
-			   bformat("%s_%d", animation_name, scale), representative_animation, scale));
+			   format("%s_%d", animation_name, scale), representative_animation, scale));
 		}
 
 		// Find margins for trimming
@@ -373,9 +373,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
  */
 
 int main(int argc, char** argv) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
+	set_testcase_logging_dir();
 	if (argc != 4) {
 		log_err("Usage: %s <mapobject_name> <animation_name> <existing-output-path>\n", argv[0]);
 		return 1;

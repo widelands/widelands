@@ -47,14 +47,14 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
              h,
              UI::ButtonStyle::kFsMenuSecondary,
              playercolor_image(),
-             bformat(_("Player %u"), static_cast<unsigned>(id_ + 1))),
+             format(_("Player %u"), static_cast<unsigned>(id_ + 1))),
      player_type_(
-        this, lg, bformat("dropdown_type%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id),
+        this, lg, format("dropdown_type%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id),
      tribe_(
-        this, lg, bformat("dropdown_tribe%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id),
+        this, lg, format("dropdown_tribe%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id),
      start_type(this,
                 lg,
-                bformat("dropdown_init%d", static_cast<unsigned>(id)),
+                format("dropdown_init%d", static_cast<unsigned>(id)),
                 0,
                 0,
                 8 * h,
@@ -62,7 +62,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                 settings,
                 id),
      teams_(
-        this, lg, bformat("dropdown_team%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id) {
+        this, lg, format("dropdown_team%d", static_cast<unsigned>(id)), 0, 0, h, h, settings, id) {
 
 	add(&player_);
 	add(player_type_.get_dropdown());

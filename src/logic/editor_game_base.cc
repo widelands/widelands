@@ -249,7 +249,7 @@ Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    const std::string& name,
                                    TeamNumber team) {
 	Notifications::publish(UI::NoteLoadingMessage(
-	   bformat(_("Creating player %d…"), static_cast<unsigned int>(player_number))));
+	   format(_("Creating player %d…"), static_cast<unsigned int>(player_number))));
 	return player_manager_->add_player(player_number, initialization_index, pc, tribe, name, team);
 }
 

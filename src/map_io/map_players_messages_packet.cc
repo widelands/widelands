@@ -51,7 +51,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 		Profile prof;
 		try {
 			const std::string profile_filename =
-			   bformat(kFilenameTemplate, static_cast<unsigned int>(p));
+			   format(kFilenameTemplate, static_cast<unsigned int>(p));
 			prof.read(profile_filename.c_str(), nullptr, fs);
 		} catch (...) {
 			continue;
@@ -189,9 +189,9 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			}
 			s.set_string("subtype", message.sub_type().c_str());
 		}
-		fs.ensure_directory_exists(bformat(kPlayerDirnameTemplate, static_cast<unsigned int>(p)));
+		fs.ensure_directory_exists(format(kPlayerDirnameTemplate, static_cast<unsigned int>(p)));
 
-		const std::string profile_filename = bformat(kFilenameTemplate, static_cast<unsigned int>(p));
+		const std::string profile_filename = format(kFilenameTemplate, static_cast<unsigned int>(p));
 		prof.write(profile_filename.c_str(), false, fs);
 	}
 }

@@ -48,9 +48,9 @@ IFont* load_font(const std::string& face, int ptsize) {
 		throw BadFont("could not load font!: RWops Pointer invalid");
 	}
 
-	TTF_Font* font = TTF_OpenFontIndexRW(ops, 1, ptsize, 0);
+	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
 	if (font == nullptr) {
-		throw BadFont(bformat("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
+		throw BadFont(format("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
 	}
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());

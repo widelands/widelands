@@ -90,14 +90,14 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->suggested_teams_.clear();
 
 			uint16_t team_section_id = 0;
-			std::string teamsection_key = bformat("teams%02i", team_section_id);
+			std::string teamsection_key = format("teams%02i", team_section_id);
 			while (Section* teamsection = prof.get_section(teamsection_key)) {
 
 				// A lineup is made up of teams
 				SuggestedTeamLineup lineup;
 
 				uint16_t team_number = 1;
-				std::string team_key = bformat("team%i", team_number);
+				std::string team_key = format("team%i", team_number);
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
 					// A team is made up of players
@@ -116,7 +116,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 					// Increase team number
 					++team_number;
-					team_key = bformat("team%i", team_number);
+					team_key = format("team%i", team_number);
 					team_string = teamsection->get_string(team_key.c_str(), "");
 				}
 
@@ -124,7 +124,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 				// Increase teamsection
 				++team_section_id;
-				teamsection_key = bformat("teams%02i", team_section_id);
+				teamsection_key = format("teams%02i", team_section_id);
 			}
 		} else {
 			throw UnhandledVersionError(
@@ -184,19 +184,18 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	int counter = 0;
 	for (const Widelands::SuggestedTeamLineup& lineup : map.get_suggested_teams()) {
-		Section& teams_section = prof.create_section(bformat("teams%02d", counter++).c_str());
+		Section& teams_section = prof.create_section(format("teams%02d", counter++).c_str());
 		int lineup_counter = 0;
 		for (const Widelands::SuggestedTeam& team : lineup) {
 			std::string section_contents;
 			for (std::vector<PlayerNumber>::const_iterator it = team.begin(); it != team.end(); ++it) {
 				if (it == team.begin()) {
-					section_contents = bformat("%d", static_cast<unsigned int>(*it));
+					section_contents = format("%d", static_cast<unsigned int>(*it));
 				} else {
-					section_contents =
-					   bformat("%s,%d", section_contents, static_cast<unsigned int>(*it));
+					section_contents = format("%s,%d", section_contents, static_cast<unsigned int>(*it));
 				}
 			}
-			teams_section.set_string(bformat("team%d", ++lineup_counter).c_str(), section_contents);
+			teams_section.set_string(format("team%d", ++lineup_counter).c_str(), section_contents);
 		}
 	}
 

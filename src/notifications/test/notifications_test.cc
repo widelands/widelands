@@ -19,11 +19,10 @@
 
 #include <vector>
 
-#include "base/log.h"
 #include "base/test.h"
 #include "notifications/notifications.h"
 
-TEST_EXECUTABLE(notifications)
+TEST_EXECUTABLE(notifications, true)
 
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
@@ -37,9 +36,6 @@ struct SimpleNote {
 TESTSUITE_START(NotificationsTestSuite)
 
 TESTCASE(SimpleTest) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
 
 	std::vector<SimpleNote> received1;
 	auto subscriber1 = Notifications::subscribe<SimpleNote>(

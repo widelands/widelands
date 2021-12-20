@@ -193,7 +193,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	// PRELOAD DATA BEGIN
 	auto set_progress_message = [is_editor](const std::string& text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
-		   bformat(_("Loading map: %1$s (%2$u/%3$d)"), text, step, (is_editor ? 9 : 23))));
+		   format(_("Loading map: %1$s (%2$u/%3$d)"), text, step, (is_editor ? 9 : 23))));
 	};
 
 	set_progress_message(_("Elemental data"), 1);

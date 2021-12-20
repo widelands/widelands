@@ -26,7 +26,7 @@ namespace RT {
 
 struct EndOfTextImpl : public EndOfText {
 	EndOfTextImpl(size_t pos, const std::string& text)
-	   : EndOfText(bformat("Unexpected End of Text, starting at %1%. Text is: '%2%'", pos, text)) {
+	   : EndOfText(format("Unexpected End of Text, starting at %1%. Text is: '%2%'", pos, text)) {
 	}
 };
 
@@ -77,7 +77,7 @@ void TextStream::expect(std::string n, bool skip_whitespace) {
 	}
 
 	if (peek(n.size()) != n) {
-		throw SyntaxErrorImpl(line_, col_, bformat("'%s'", n), peek(n.size()), peek(100));
+		throw SyntaxErrorImpl(line_, col_, format("'%s'", n), peek(n.size()), peek(100));
 	}
 	consume(n.size());
 }

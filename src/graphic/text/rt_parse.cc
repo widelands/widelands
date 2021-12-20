@@ -53,7 +53,7 @@ bool Attr::get_bool() const {
 
 RGBColor Attr::get_color() const {
 	if (value_.size() != 6) {
-		throw InvalidColor(bformat("Could not parse '%s' as a color.", value_));
+		throw InvalidColor(format("Could not parse '%s' as a color.", value_));
 	}
 
 	uint32_t clrn = strtol(value_.c_str(), nullptr, 16);
@@ -116,8 +116,8 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (allowed_attrs.count(aname) == 0u) {
-		const std::string error_info = bformat("an allowed attribute for '%s' tag", name_);
+	if (allowed_attrs.count(aname) == 0) {
+		const std::string error_info = format("an allowed attribute for '%s' tag", name_);
 		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
 	}
 

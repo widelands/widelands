@@ -96,13 +96,13 @@ void SavegameLoader::add_general_information(SavegameData& gamedata,
 
 void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormessage) const {
 	replace_all(errormessage, "\n", "<br>");
-	gamedata.errormessage = bformat(
-	   "<p>%s</p><p>%s</p><p>%s</p>",
-	   /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
-	   _("This file has the wrong format and can’t be loaded."
-	     " Maybe it was created with an older version of Widelands."),
-	   /** TRANSLATORS: This text is on a separate line with an error message below */
-	   _("Error message:"), errormessage);
+	gamedata.errormessage =
+	   format("<p>%s</p><p>%s</p><p>%s</p>",
+	          /** TRANSLATORS: Error message introduction for when an old savegame can't be loaded */
+	          _("This file has the wrong format and can’t be loaded."
+	            " Maybe it was created with an older version of Widelands."),
+	          /** TRANSLATORS: This text is on a separate line with an error message below */
+	          _("Error message:"), errormessage);
 
 	gamedata.mapname = FileSystem::filename_without_ext(gamedata.filename.c_str());
 }
@@ -126,17 +126,17 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 
 			// Adding the 0 padding in a separate statement so translators won't have to deal
 			// with it
-			const std::string minute = bformat("%02u", savedate->tm_min);
+			const std::string minute = format("%02u", savedate->tm_min);
 
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute */
-			   bformat(_("Today, %1%:%2%"), savedate->tm_hour, minute);
+			   format(_("Today, %1%:%2%"), savedate->tm_hour, minute);
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute. This is part of a list.
 			    */
-			   bformat(_("saved today at %1%:%2%"), savedate->tm_hour, minute);
+			   format(_("saved today at %1%:%2%"), savedate->tm_hour, minute);
 		} else if ((savedate->tm_year == current_year && savedate->tm_mon == current_month &&
 		            savedate->tm_mday == current_day - 1) ||
 		           (savedate->tm_year == current_year - 1 && savedate->tm_mon == 11 &&
@@ -144,29 +144,29 @@ void SavegameLoader::add_time_info(SavegameData& gamedata,
 		            current_day == 1)) {  // Yesterday
 			// Adding the 0 padding in a separate statement so translators won't have to deal
 			// with it
-			const std::string minute = bformat("%02u", savedate->tm_min);
+			const std::string minute = format("%02u", savedate->tm_min);
 
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute */
-			   bformat(_("Yesterday, %1%:%2%"), savedate->tm_hour, minute);
+			   format(_("Yesterday, %1%:%2%"), savedate->tm_hour, minute);
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    hour:minute. This is part of a list.
 			    */
-			   bformat(_("saved yesterday at %1%:%2%"), savedate->tm_hour, minute);
+			   format(_("saved yesterday at %1%:%2%"), savedate->tm_hour, minute);
 		} else {  // Older
 			gamedata.savedatestring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    month day, year */
-			   bformat(_("%1% %2%, %3%"), localize_month(savedate->tm_mon), savedate->tm_mday,
-			           (1900 + savedate->tm_year));
+			   format(_("%1% %2%, %3%"), localize_month(savedate->tm_mon), savedate->tm_mday,
+			          (1900 + savedate->tm_year));
 			gamedata.savedonstring =
 			   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 			                                                    month (short name) day (number),
 			      year (number). This is part of a list. */
-			   bformat(_("saved on %1$s %2$u, %3$u"), localize_month(savedate->tm_mon),
-			           savedate->tm_mday, (1900 + savedate->tm_year));
+			   format(_("saved on %1$s %2$u, %3$u"), localize_month(savedate->tm_mon),
+			          savedate->tm_mday, (1900 + savedate->tm_year));
 		}
 	}
 }

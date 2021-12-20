@@ -115,7 +115,7 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = StyleManager::color_tag(bformat(_("%u%% dismantled"), percent),
+	*s = StyleManager::color_tag(format(_("%u%% dismantled"), percent),
 	                             g_style_manager->building_statistics_style().construction_color());
 }
 

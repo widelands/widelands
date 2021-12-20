@@ -164,13 +164,13 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 // static
 std::string MapData::parent_name() {
 	/** TRANSLATORS: Parent directory/folder */
-	return bformat("<%s>", _("parent"));
+	return format("<%s>", _("parent"));
 }
 
 // static
 MapData MapData::create_empty_dir(const std::string& current_dir) {
 	/** TRANSLATORS: This label is shown when a folder is empty */
-	return MapData(current_dir, bformat("<%s>", _("empty")));
+	return MapData(current_dir, format("<%s>", _("empty")));
 }
 
 // static

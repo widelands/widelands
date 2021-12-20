@@ -66,8 +66,8 @@ bool NumberGlob::next(std::string* s) {
 	}
 
 	*s = template_;
-	if (max_ != 0u) {
-		replace_last(*s, to_replace_, bformat(format_, current_));
+	if (max_ != 0) {
+		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
 	return true;

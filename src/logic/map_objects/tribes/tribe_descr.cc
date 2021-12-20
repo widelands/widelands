@@ -167,7 +167,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   /** TRANSLATORS: Example: Loading Barbarians: Buildings (2/6) */
-		   bformat(_("Loading %1%: %2% (%3%/%4%)"), descname(), str, i, 6)));
+		   format(_("Loading %1%: %2% (%3%/%4%)"), descname(), str, i, 6)));
 	};
 
 	try {

@@ -307,7 +307,7 @@ void BaseDropdown::add(const std::string& name,
 
 	if (autoexpand_display_button_) {
 		/// Fit width of display button to make enough room for the entry's text
-		const std::string fitme = label_.empty() ? name : bformat(_("%1%: %2%"), label_, name);
+		const std::string fitme = label_.empty() ? name : format(_("%1%: %2%"), label_, name);
 		const int new_width =
 		   text_width(fitme, g_style_manager->button_style(button_style_).enabled().font()) + 8;
 		if (new_width > display_button_.get_w()) {
@@ -359,7 +359,7 @@ void BaseDropdown::set_tooltip(const std::string& text) {
 }
 
 void BaseDropdown::set_errored(const std::string& error_message) {
-	set_tooltip(bformat(_("%1%: %2%"), _("Error"), error_message));
+	set_tooltip(format(_("%1%: %2%"), _("Error"), error_message));
 	if (type_ != DropdownType::kPictorial && type_ != DropdownType::kPictorialMenu) {
 		set_label(_("Error"));
 	} else {
@@ -426,7 +426,7 @@ void BaseDropdown::update() {
 			display_button_.set_title(name);
 		} else {
 			/** TRANSLATORS: Label: Value. */
-			display_button_.set_title(bformat(_("%1%: %2%"), label_, name));
+			display_button_.set_title(format(_("%1%: %2%"), label_, name));
 		}
 		display_button_.set_tooltip(list_->has_selection() ? list_->get_selected_tooltip() :
                                                            tooltip_);
@@ -434,7 +434,7 @@ void BaseDropdown::update() {
 		display_button_.set_pic(list_->has_selection() ?
                                  list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
-		display_button_.set_tooltip(bformat(_("%1%: %2%"), label_, name));
+		display_button_.set_tooltip(format(_("%1%: %2%"), label_, name));
 	}
 }
 
