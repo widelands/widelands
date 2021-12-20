@@ -102,7 +102,7 @@ bool NumberGlob::next(std::string* s) {
 
 	*s = template_;
 	if (max_) {
-		replace_last(*s, to_replace_, bformat(format_, current_));
+		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
 	return true;

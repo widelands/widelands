@@ -77,19 +77,19 @@ std::string illegal_filename_tooltip() {
 	const std::string illegal_start(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    *  %s is a list of illegal characters */
-	   bformat(pgettext("illegal_filename_characters", "%s at the start of the filename"),
+	   format(pgettext("illegal_filename_characters", "%s at the start of the filename"),
 	           richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
 	    * %s is a list of illegal characters */
-	   bformat(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
+	   format(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
 	           richtext_escape(
 	              i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
 	   UI::FontStyle::kWuiMessageParagraph));
 
-	return bformat(
+	return format(
 	   "%s%s%s",
 	   /** TRANSLATORS: Tooltip header for characters in illegal filenames.
 	    * This is followed by a list of bullet points */

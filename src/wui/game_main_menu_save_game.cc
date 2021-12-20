@@ -265,8 +265,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s = bformat(_("A file with the name ‘%s’ already exists. Overwrite?"),
-		                              FileSystem::fs_filename(filename.c_str()));
+		const std::string s = format(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                             FileSystem::fs_filename(filename.c_str()));
 		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Game!"), s,
 		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
