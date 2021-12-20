@@ -650,11 +650,11 @@ constexpr size_t kSecondParentProbability = 50;
 constexpr int16_t kCurrentLandDivider = 2;
 constexpr int16_t kLandDeltaMultiplier = 1;
 constexpr int16_t kBonus = 1000;
-constexpr int16_t kAttackersMultiplier = 1;
+constexpr int16_t kAttackersBonus = 3;
 constexpr int16_t kAttackBonus = 100;
 constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
-constexpr int16_t kStrengthMultiplier = 30;
+constexpr int16_t kStrengthMultiplier = 15;
 constexpr int16_t kPSitesRatioMultiplier = 1;
 constexpr int32_t kShipBonus = 1000;
 

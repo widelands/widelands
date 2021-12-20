@@ -606,30 +606,32 @@ void ManagementData::review(const Time& gametime,
 							const uint16_t ships_count,
 							const uint16_t finished_mine_types) {
 
-	// bonuses (1000 or nothing)
-	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
+	// bonuses (something or nothing)
 	const uint16_t iron_mine_bonus = (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
-	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
+	const uint16_t attack_bonus = (attackers > 0) ? kAttackBonus : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 	const uint16_t finished_mine_type_bonus = finished_mine_types * 250;
+	const uint16_t best_player_bonus = (land > max_e_land) ? 100 : 0;
 
 	// scores (numbers dependant on performance)
+	const int16_t territory_growth_bonus = (land - old_land) * kLandDeltaMultiplier;
 	const uint16_t land_score = land / kCurrentLandDivider;
-	const uint16_t strength_score = std::min<uint16_t>(strength, 100) * kStrengthMultiplier;
-	const uint16_t attack_score = std::min<uint16_t>(attackers, 40) * 50;
+	const uint16_t strength_score = std::min<uint16_t>(strength, 200) * kStrengthMultiplier;
+	const uint16_t attackers_score = std::min<uint16_t>(attackers, 200) * kAttackersBonus;
 	const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
 	const uint32_t ships_score = kShipBonus * ships_count;
 
-	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
-	        strength_score + ps_sites_score + attack_score + ships_score + finished_mine_type_bonus;
+	score = territory_growth_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
+	        strength_score + ps_sites_score + attackers_score + ships_score +
+	        finished_mine_type_bonus + best_player_bonus;
 
 	verb_log_dbg_time(gametime,
-	                  "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
-	                  "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d, Sh:%d, FinMt:%d\n",
-	                  pn, score, primary_parent, (territory_bonus) ? "Y" : "N",
-	                  (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
-	                  (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score,
-	                  attack_score, ships_count, finished_mine_types);
+	                  "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s Tr:%s, "
+	                  "Scores:Land:%5d+%4d Str:%4d PS:%4d, Att:%4d, Sh:%d, FinMns:%d\n",
+	                  pn, score, primary_parent, (best_player_bonus) ? "Y" : "N",
+	                  (iron_mine_bonus) ? "Y" : "N", (training_bonus) ? "Y" : "N", land_score,
+	                  territory_growth_bonus, strength_score, ps_sites_score,
+	                  attack_bonus + attackers_score, ships_count, finished_mine_types);
 
 	if (score < -10000 || score > 30000) {
 		verb_log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
