@@ -61,9 +61,9 @@ DiplomacyConfirmWindow::DiplomacyConfirmWindow(InteractivePlayer& parent,
 	box->add(new UI::MultilineTextarea(
 	            box, 0, 0, 100, 50, UI::PanelStyle::kWui,
 	            format(action_->action == Widelands::DiplomacyAction::kInvite ?
-                          _("%s has invited you to join their team.") :
-                          _("%s wants to join your team."),
-	                    iplayer_.egbase().get_safe_player(a.sender)->get_name()),
+                         _("%s has invited you to join their team.") :
+                         _("%s wants to join your team."),
+	                   iplayer_.egbase().get_safe_player(a.sender)->get_name()),
 	            UI::Align::kCenter, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	         UI::Box::Resizing::kExpandBoth);
 	box->add_space(kSpacing);
@@ -334,13 +334,13 @@ void GameObjectivesMenu::update_diplomacy_details() {
 			switch (pda.action) {
 			case Widelands::DiplomacyAction::kJoin:
 				descr = format(_("%1$s has requested to join the team of %2$s."),
-				                iplayer_.egbase().player(pda.sender).get_name(),
-				                iplayer_.egbase().player(pda.other).get_name());
+				               iplayer_.egbase().player(pda.sender).get_name(),
+				               iplayer_.egbase().player(pda.other).get_name());
 				break;
 			case Widelands::DiplomacyAction::kInvite:
 				descr = format(_("%1$s has invited %2$s to join their team."),
-				                iplayer_.egbase().player(pda.sender).get_name(),
-				                iplayer_.egbase().player(pda.other).get_name());
+				               iplayer_.egbase().player(pda.sender).get_name(),
+				               iplayer_.egbase().player(pda.other).get_name());
 				break;
 			default:
 				NEVER_HERE();
