@@ -42,7 +42,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
                                                      const std::string& arg3) {
 	if (ngmessages.find(code) == ngmessages.end()) {
 		return (
-		   bformat("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
+		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
 	}
 
 	// push code and all arguments - if existing - in a vector for easier handling
@@ -66,7 +66,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		// try to merge the strings from back to front
 		try {
 			// try to merge last two strings
-			std::string temp = bformat(strings.at(strings.size() - 2), strings.at(strings.size() - 1));
+			std::string temp = format(strings.at(strings.size() - 2), strings.at(strings.size() - 1));
 			strings.resize(strings.size() - 2);
 			strings.push_back(temp);
 		} catch (...) {
@@ -76,8 +76,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 			try {
 				// try to merge last three strings
 				std::string temp =
-				   bformat(strings.at(strings.size() - 3), strings.at(strings.size() - 2),
-				           strings.at(strings.size() - 1));
+				   format(strings.at(strings.size() - 3), strings.at(strings.size() - 2),
+				          strings.at(strings.size() - 1));
 				strings.resize(strings.size() - 3);
 				strings.push_back(temp);
 			} catch (...) {
@@ -87,8 +87,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 				try {
 					// try to merge all four strings
 					std::string temp =
-					   bformat(strings.at(strings.size() - 4), strings.at(strings.size() - 3),
-					           strings.at(strings.size() - 2), strings.at(strings.size() - 1));
+					   format(strings.at(strings.size() - 4), strings.at(strings.size() - 3),
+					          strings.at(strings.size() - 2), strings.at(strings.size() - 1));
 					strings.resize(strings.size() - 4);
 					strings.push_back(temp);
 				} catch (...) {
@@ -104,8 +104,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	}
 
 	// No, it did not
-	return (bformat("%s, %s, %s, %s", get_message(code), get_message(arg1), get_message(arg2),
-	                get_message(arg3)));
+	return (format("%s, %s, %s, %s", get_message(code), get_message(arg1), get_message(arg2),
+	               get_message(arg3)));
 }
 
 /// Fills the map.

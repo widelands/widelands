@@ -48,7 +48,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
 	     slot_dropdown_(this,
-	                    bformat("dropdown_slot%d", static_cast<unsigned int>(id)),
+	                    format("dropdown_slot%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    0,
@@ -98,7 +98,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 					slot_dropdown_.toggle();
 					UI::WLMessageBox m(
 					   menu_parent_, UI::WindowStyle::kFsMenu, _("Divergent Player Name"),
-					   bformat(
+					   format(
 					      _("The player name of the selected slot (%1%) does not match your own (%2%). "
 					        "Are you sure that you want to occupy this slot?"),
 					      slotname, username),
@@ -129,7 +129,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
 			if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
-				slot_dropdown_.add(bformat(_("Player %u"), static_cast<unsigned int>(slot + 1)), slot,
+				slot_dropdown_.add(format(_("Player %u"), static_cast<unsigned int>(slot + 1)), slot,
 				                   playercolor_image(settings.players[slot].color,
 				                                     "images/players/genstats_player.png"),
 				                   slot == user_setting.position);
@@ -183,9 +183,9 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	             UI::ButtonStyle::kFsMenuSecondary,
 	             playercolor_image(settings_->settings().players[id].color,
 	                               "images/players/player_position_menu.png"),
-	             bformat(_("Player %u"), static_cast<unsigned int>(id_ + 1))),
+	             format(_("Player %u"), static_cast<unsigned int>(id_ + 1))),
 	     type_dropdown_(this,
-	                    bformat("dropdown_type%d", static_cast<unsigned int>(id)),
+	                    format("dropdown_type%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -196,7 +196,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::PanelStyle::kFsMenu,
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     tribes_dropdown_(this,
-	                      bformat("dropdown_tribes%d", static_cast<unsigned int>(id)),
+	                      format("dropdown_tribes%d", static_cast<unsigned int>(id)),
 	                      0,
 	                      0,
 	                      h,
@@ -207,7 +207,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                      UI::PanelStyle::kFsMenu,
 	                      UI::ButtonStyle::kFsMenuSecondary),
 	     init_dropdown_(this,
-	                    bformat("dropdown_init%d", static_cast<unsigned int>(id)),
+	                    format("dropdown_init%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -218,7 +218,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                    UI::PanelStyle::kFsMenu,
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     team_dropdown_(this,
-	                    bformat("dropdown_team%d", static_cast<unsigned int>(id)),
+	                    format("dropdown_team%d", static_cast<unsigned int>(id)),
 	                    0,
 	                    0,
 	                    h,
@@ -318,7 +318,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		    (player_setting.tribe.empty() ||
 		     settings.get_tribeinfo(player_setting.tribe).suited_for_ai || can_change_hidden_tribe)) {
 			for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
-				type_dropdown_.add(_(impl->descname), bformat("%s%s", kAiNamePrefix, impl->name),
+				type_dropdown_.add(_(impl->descname), format("%s%s", kAiNamePrefix, impl->name),
 				                   g_image_cache->get(impl->icon_filename), false, _(impl->descname));
 			}
 			/** TRANSLATORS: This is the name of an AI used in the game setup screens */
@@ -347,7 +347,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Now select the entry according to server settings
 		if (player_setting.state == PlayerSettings::State::kHuman) {
 			type_dropdown_.set_image(g_image_cache->get("images/wui/stats/genstats_nrworkers.png"));
-			type_dropdown_.set_tooltip(bformat(_("%1%: %2%"), _("Type"), _("Human")));
+			type_dropdown_.set_tooltip(format(_("%1%: %2%"), _("Type"), _("Human")));
 		} else if (player_setting.state == PlayerSettings::State::kClosed) {
 			type_dropdown_.select("closed");
 		} else if (player_setting.state == PlayerSettings::State::kOpen) {
@@ -364,7 +364,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					} else {
 						const AI::ComputerPlayer::Implementation* impl =
 						   AI::ComputerPlayer::get_implementation(player_setting.ai);
-						type_dropdown_.select(bformat("%s%s", kAiNamePrefix, impl->name));
+						type_dropdown_.select(format("%s%s", kAiNamePrefix, impl->name));
 					}
 				}
 			}
@@ -423,7 +423,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
 					      another player's starting position. */
-					   bformat(_("Shared in Player %u"), static_cast<unsigned int>(i + 1));
+					   format(_("Shared in Player %u"), static_cast<unsigned int>(i + 1));
 					tribes_dropdown_.add(player_name, as_string(static_cast<unsigned int>(i + 1)),
 					                     player_image, (i + 1) == player_setting.shared_in, player_name);
 				}
@@ -562,7 +562,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 #endif
 		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
 			assert(t < no_of_team_colors);
-			team_dropdown_.add(bformat(_("Team %d"), static_cast<unsigned int>(t)), t,
+			team_dropdown_.add(format(_("Team %d"), static_cast<unsigned int>(t)), t,
 			                   playercolor_image(kTeamColors[t], "images/players/team.png"));
 		}
 		team_dropdown_.select(player_setting.team);

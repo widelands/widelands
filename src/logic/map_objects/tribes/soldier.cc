@@ -1491,7 +1491,7 @@ void Soldier::battle_update(Game& game, State&) {
 				BaseImmovable const* const immovable_position = get_position().field->get_immovable();
 				BaseImmovable const* const immovable_dest = map[dest].get_immovable();
 
-				const std::string messagetext = bformat(
+				const std::string messagetext = format(
 				   "The game engine has encountered a logic error. The %s "
 				   "#%u of player %u could not find a way from (%i, %i) "
 				   "(with %s immovable) to the opponent (%s #%u of player "

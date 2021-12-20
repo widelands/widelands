@@ -131,11 +131,11 @@ inline std::string as_string(const char c) {
 
 /** String formatting function, without or with localized substitutions. */
 template <typename... Args>
-inline std::string bformat(const std::string& format_string, Args... args) {
+inline std::string format(const std::string& format_string, Args... args) {
 	return format_impl::format(false, format_string, args...);
 }
 template <typename... Args>
-inline std::string bformat_l(const std::string& format_string, Args... args) {
+inline std::string format_l(const std::string& format_string, Args... args) {
 	return format_impl::format(true, format_string, args...);
 }
 
