@@ -36,7 +36,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	const Widelands::Coords& coords = center.node;
 
 	UI::UniqueWindow::Registry& registry =
-	   parent.unique_windows().get_registry(bformat("fieldinfo_%d_%d", coords.x, coords.y));
+	   parent.unique_windows().get_registry(format("fieldinfo_%d_%d", coords.x, coords.y));
 
 	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
 		// if window reaches bottom right corner, start from top left corner again

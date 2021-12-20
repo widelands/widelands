@@ -18,4 +18,4 @@
  */
 
 #include "base/test.h"
-TEST_EXECUTABLE(base)
+TEST_EXECUTABLE(base, true)

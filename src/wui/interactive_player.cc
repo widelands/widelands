@@ -101,6 +101,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const InfoToDraw info_to_draw,
                                  const Widelands::Player& player,
                                  RenderTarget* dst) {
+	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 	     bob = bob->get_next_bob()) {
 		bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
@@ -455,8 +456,8 @@ void InteractivePlayer::think() {
 		if (uint32_t const nr_new_messages =
 		       player().messages().nr_messages(Widelands::Message::Status::kNew)) {
 			msg_icon = "images/wui/menus/message_new.png";
-			msg_tooltip = bformat(
-			   ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
+			msg_tooltip =
+			   format(ngettext("%u new message", "%u new messages", nr_new_messages), nr_new_messages);
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
 		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
@@ -721,7 +722,7 @@ UI::Window* InteractivePlayer::show_attack_window(const Widelands::Coords& c,
 			if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 				if (player().is_hostile(building->owner()) && attack_target->can_be_attacked()) {
 					UI::UniqueWindow::Registry& registry =
-					   unique_windows().get_registry(bformat("attack_%d", building->serial()));
+					   unique_windows().get_registry(format("attack_%d", building->serial()));
 					registry.open_window = [this, &registry, building, &c, fastclick]() {
 						new AttackWindow(*this, registry, *building, c, fastclick);
 					};
@@ -853,11 +854,11 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 
 	int const n = stoi(args[1]);
 	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
-		DebugConsole::write(bformat("Player #%d does not exist.", n));
+		DebugConsole::write(format("Player #%d does not exist.", n));
 		return;
 	}
 
-	DebugConsole::write(bformat("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
+	DebugConsole::write(format("Switching from #%d to #%d.", static_cast<int>(player_number_), n));
 	player_number_ = n;
 
 	if (UI::UniqueWindow* const building_statistics_window = menu_windows_.stats_buildings.window) {
