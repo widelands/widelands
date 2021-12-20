@@ -2160,7 +2160,7 @@ void CmdDiplomacy::execute(Game& game) {
 				return;
 			}
 		}
-		broadcast_message(_("Player Resigned"), bformat(_("%s has resigned and is now a spectator."),
+		broadcast_message(_("Player Resigned"), format(_("%s has resigned and is now a spectator."),
 		                                                sending_player.get_name()));
 		game.game_controller()->report_result(sender(), PlayerEndResult::kResigned, "");
 		// TODO(Nordfriese): Making the player a spectator is currently left to the win condition.
@@ -2173,7 +2173,7 @@ void CmdDiplomacy::execute(Game& game) {
 		}
 		broadcast_message(
 		   _("Player Leaves Team"),
-		   bformat(_("%1$s has left team %2$u and is now teamless."), sending_player.get_name(),
+		   format(_("%1$s has left team %2$u and is now teamless."), sending_player.get_name(),
 		           static_cast<unsigned>(sending_player.team_number())));
 		sending_player.set_team_number(0);
 		break;
@@ -2183,7 +2183,7 @@ void CmdDiplomacy::execute(Game& game) {
 		broadcast_message(
 		   action_ == DiplomacyAction::kJoin ? _("Team Joining Request") :
                                              _("Team Joining Invitation"),
-		   bformat(action_ == DiplomacyAction::kJoin ?
+		   format(action_ == DiplomacyAction::kJoin ?
                     _("%1$s has requested to join the team of %2$s.") :
                     _("%1$s has invited %2$s to join their team."),
 		           sending_player.get_name(), game.get_safe_player(other_player_)->get_name()));
@@ -2211,7 +2211,7 @@ void CmdDiplomacy::execute(Game& game) {
 				   action_ == DiplomacyAction::kAcceptJoin || action_ == DiplomacyAction::kAcceptInvite;
 				broadcast_message(
 				   accept ? _("Team Change Accepted") : _("Team Change Rejected"),
-				   bformat(accept ? original_action == DiplomacyAction::kJoin ?
+				   format(accept ? original_action == DiplomacyAction::kJoin ?
                                 _("%1$s has accepted %2$s into their team.") :
                                 _("%1$s has accepted the invitation to join the team of %2$s.") :
 				           original_action == DiplomacyAction::kJoin ?
