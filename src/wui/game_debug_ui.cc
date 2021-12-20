@@ -109,7 +109,7 @@ void MapObjectDebugWindow::think() {
 		}
 		UI::Window::think();
 	} else {
-		set_title(bformat("DEAD: %u", serial_));
+		set_title(format("DEAD: %u", serial_));
 	}
 }
 
@@ -172,9 +172,9 @@ void FieldDebugWindow::think() {
 	   dynamic_cast<const InteractiveBase&>(*get_parent()).egbase();
 	{
 		Widelands::PlayerNumber const owner = coords_.field->get_owned_by();
-		str += bformat("(%i, %i)\nheight: %u\nowner: %u\n", coords_.x, coords_.y,
-		               static_cast<unsigned int>(coords_.field->get_height()),
-		               static_cast<unsigned int>(owner));
+		str += format("(%i, %i)\nheight: %u\nowner: %u\n", coords_.x, coords_.y,
+		              static_cast<unsigned int>(coords_.field->get_height()),
+		              static_cast<unsigned int>(owner));
 
 		if (owner) {
 			Widelands::NodeCaps const buildcaps = egbase.player(owner).get_buildcaps(coords_);
@@ -206,19 +206,18 @@ void FieldDebugWindow::think() {
 	Widelands::PlayerNumber const nr_players = map_.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		const Widelands::Player::Field& player_field = player->fields()[i];
-		str += bformat("Player %u:\n", static_cast<unsigned int>(plnum));
-		str += bformat("  military influence: %u\n", player_field.military_influence);
+		str += format("Player %u:\n", static_cast<unsigned int>(plnum));
+		str += format("  military influence: %u\n", player_field.military_influence);
 
 		Widelands::Vision const vision = player_field.vision;
-		str += bformat("  vision: %u\n", vision.value());
+		str += format("  vision: %u\n", vision.value());
 		{
 			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
 			if (time_last_surveyed.is_valid()) {
-				str +=
-				   bformat("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				           static_cast<unsigned int>(player_field.resource_amounts.d));
+				str += format("  D triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.d));
 
 			} else {
 				str += "  D triangle never surveyed\n";
@@ -229,9 +228,8 @@ void FieldDebugWindow::think() {
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
 			if (time_last_surveyed.is_valid()) {
-				str +=
-				   bformat("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
-				           static_cast<unsigned int>(player_field.resource_amounts.r));
+				str += format("  R triangle last surveyed at %u: amount %u\n", time_last_surveyed.get(),
+				              static_cast<unsigned int>(player_field.resource_amounts.r));
 
 			} else {
 				str += "  R triangle never surveyed\n";
@@ -245,12 +243,12 @@ void FieldDebugWindow::think() {
 			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
 			}
-			str += bformat("  last seen at %u:\n"
-			               "    owner: %u\n"
-			               "    immovable animation:\n%s\n"
-			               "      ",
-			               player_field.time_node_last_unseen.get(),
-			               static_cast<unsigned int>(player_field.owner), animation_name.c_str());
+			str += format("  last seen at %u:\n"
+			              "    owner: %u\n"
+			              "    immovable animation:\n%s\n"
+			              "      ",
+			              player_field.time_node_last_unseen.get(),
+			              static_cast<unsigned int>(player_field.owner), animation_name.c_str());
 		} else if (!vision.is_seen_by_us()) {
 			str += "  seen only by teammate(s)\n";
 		} else {
@@ -259,7 +257,7 @@ void FieldDebugWindow::think() {
 			} else if (vision.is_hidden()) {
 				str += "  permanently hidden\n";
 			}
-			str += bformat("  seen %u times\n", vision.seers());
+			str += format("  seen %u times\n", vision.seers());
 		}
 	}
 	{
@@ -271,11 +269,11 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount ramount = coords_.field->get_resources_amount();
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
-			str += bformat("Resource: %s\n",
-			               ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str());
+			str += format("Resource: %s\n",
+			              ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str());
 
-			str += bformat("  Amount: %i/%i\n", static_cast<unsigned int>(ramount),
-			               static_cast<unsigned int>(initial_amount));
+			str += format("  Amount: %i/%i\n", static_cast<unsigned int>(ramount),
+			              static_cast<unsigned int>(initial_amount));
 		}
 	}
 
@@ -287,7 +285,7 @@ void FieldDebugWindow::think() {
 
 	// Immovable information
 	if (Widelands::BaseImmovable* const imm = coords_.field->get_immovable()) {
-		ui_immovable_.set_title(bformat("%s (%u)", imm->descr().name(), imm->serial()));
+		ui_immovable_.set_title(format("%s (%u)", imm->descr().name(), imm->serial()));
 		ui_immovable_.set_enabled(true);
 	} else {
 		ui_immovable_.set_title("no immovable");
@@ -328,7 +326,7 @@ void FieldDebugWindow::think() {
 	// Add remaining
 	for (const Widelands::Bob* temp_bob : bobs) {
 		ui_bobs_.add(
-		   bformat("%s (%u)", temp_bob->descr().name(), temp_bob->serial()), temp_bob->serial());
+		   format("%s (%u)", temp_bob->descr().name(), temp_bob->serial()), temp_bob->serial());
 	}
 }
 

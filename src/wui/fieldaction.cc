@@ -450,7 +450,7 @@ void FieldActionWindow::add_buttons_auto() {
 						} else {
 							tooltip = it->second;
 						}
-						tooltip = bformat(
+						tooltip = format(
 						   "<rt><p>%s</p><p>%s</p></rt>",
 						   g_style_manager->font_style(UI::FontStyle::kDisabled)
 						      .as_font_tag(_("Send scout to explore surroundings")),

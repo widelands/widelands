@@ -42,14 +42,12 @@ wl_library(network
   USES_SDL2
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_math
     base_md5
     base_random
-    base_string
     build_info
     chat
     game_io

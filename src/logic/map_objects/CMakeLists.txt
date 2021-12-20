@@ -12,7 +12,7 @@ wl_library(logic_map_objects_description_manager
     description_manager.cc
     description_manager.h
   DEPENDS
-    base_log
+    base
     base_macros
     io_filesystem
     logic_exceptions
@@ -27,8 +27,7 @@ wl_library(logic_tribe_basic_info
     tribes/tribe_basic_info.cc
     tribes/tribe_basic_info.h
   DEPENDS
-    base_i18n
-    base_log
+    base
     io_filesystem
     logic_addons
     logic_exceptions
@@ -138,15 +137,12 @@ wl_library(logic_map_objects
   USES_ATOMIC
   DEPENDS
     ai_hints
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     base_math
-    base_multithreading
     base_scoped_timer
-    base_string
     base_times
     economy
     graphic
