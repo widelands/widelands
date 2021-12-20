@@ -32,7 +32,7 @@ RGBColor::RGBColor(const uint32_t hex)
 }
 
 std::string RGBColor::hex_value() const {
-	return bformat("%02x%02x%02x", int(r), int(g), int(b));
+	return format("%02x%02x%02x", int(r), int(g), int(b));
 }
 
 uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
@@ -71,7 +71,7 @@ RGBAColor::RGBAColor(uint32_t hex)
 }
 
 std::string RGBAColor::hex_value() const {
-	return bformat("%02x%02x%02x%02x>", int(r), int(g), int(b), int(a));
+	return format("%02x%02x%02x%02x>", int(r), int(g), int(b), int(a));
 }
 
 uint32_t RGBAColor::map(const SDL_PixelFormat& fmt) const {

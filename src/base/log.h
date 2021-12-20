@@ -84,6 +84,10 @@ void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4)
 bool set_logging_dir(const std::string& homedir);
 // Set the directory that stdout.txt shall be written to to the directory the program is started
 // from. Use this only for test cases.
-void set_logging_dir();
+void set_testcase_logging_dir();
+
+#else
+inline void set_testcase_logging_dir() {
+}
 #endif
 #endif  // end of include guard: WL_BASE_LOG_H

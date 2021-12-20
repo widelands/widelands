@@ -382,14 +382,14 @@ void InfoPanel::set_fps_string(const bool show,
 		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
 	} else {
-		const std::string text = bformat("%5.1f fps (avg: %5.1f fps)", fps, average);
+		const std::string text = format("%5.1f fps (avg: %5.1f fps)", fps, average);
 		// The FPS string overlaps with the coords string at low resolution.
 		// Therefore abbreviate it if the available width is less than an arbitrary threshold.
 		if (cheating) {
 			text_fps_.set_text(_("Cheat mode enabled"));
 			text_fps_.set_tooltip(text);
 		} else if (get_w() < 970) {
-			text_fps_.set_text(bformat("%.1f / %.1f", fps, average));
+			text_fps_.set_text(format("%.1f / %.1f", fps, average));
 			text_fps_.set_tooltip(text);
 		} else {
 			text_fps_.set_text(text);
@@ -426,33 +426,27 @@ void InfoPanel::update_time_speed_string() {
 		}
 	}
 
-	// @CodeCheck allow boost::format
-	boost::format f;
 	switch (non_empty.size()) {
 	case 0:
 		text_time_speed_.set_text("");
-		return;
+		break;
 	case 1:
 		text_time_speed_.set_text(*non_empty.back());
-		return;
+		break;
 	case 2:
-		// @CodeCheck allow boost::format
-		/** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed) */
-		f = boost::format(_("%1$s · %2$s"));
+		text_time_speed_.set_text(format(
+		   /** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed)
+		    */
+		   _("%1$s · %2$s"), *non_empty[0], *non_empty[1]));
 		break;
 	case 3:
-		// @CodeCheck allow boost::format
-		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
-		f = boost::format(_("%1$s · %2$s · %3$s"));
+		text_time_speed_.set_text(format(
+		   /** TRANSLATORS: Gametime · Realtime · Gamespeed */
+		   _("%1$s · %2$s · %3$s"), *non_empty[0], *non_empty[1], *non_empty[2]));
 		break;
 	default:
 		NEVER_HERE();
 	}
-
-	for (std::string* s : non_empty) {
-		f % *s;
-	}
-	text_time_speed_.set_text(f.str());
 }
 
 void InfoPanel::fast_forward_message_queue() {

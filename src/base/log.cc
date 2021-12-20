@@ -33,7 +33,11 @@
 #include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
+#endif
 
+#include "base/multithreading.h"
+#include "base/string.h"
+#ifdef _WIN32
 #include "build_info.h"
 #endif
 
@@ -124,16 +128,6 @@ void sdl_logging_func(void* userdata,
 }
 #endif
 
-std::vector<std::string> split(const std::string& s) {
-	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
-		endpos = s.find('\n', pos);
-		result.push_back(s.substr(pos, endpos - pos));
-	}
-	return result;
-}
-
 }  // namespace
 
 // Default to stdout for logging.
@@ -155,7 +149,7 @@ bool set_logging_dir(const std::string& homedir) {
 }
 
 // Set the logging dir to the program's dir. For running test cases where we don't have a homedir.
-void set_logging_dir() {
+void set_testcase_logging_dir() {
 	logger.reset(new WindowsLogger(get_output_directory()));
 }
 
@@ -178,6 +172,7 @@ static const char* to_string(const LogType& type) {
 }
 
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {
+	MutexLock m(MutexLock::ID::kLog);
 	assert(logger != nullptr);
 
 	// message type and timestamp
@@ -201,8 +196,9 @@ void do_log(const LogType type, const Time& gametime, const char* const fmt, ...
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	// split by '\n'
-	for (std::string str : split(buffer)) {
+	std::vector<std::string> vec;
+	split(vec, buffer, {'\n'});
+	for (std::string& str : vec) {
 		if (str.find_first_not_of(' ') == std::string::npos) {
 			continue;
 		}

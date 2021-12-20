@@ -66,40 +66,52 @@ files name.
 /* RST
 .. function:: string.bformat
 
-   Not really a global function. But we add a method to string built in type in
-   Lua that has similar functionality to the built in string.format, but
-   instead uses our own ``bformat``. This allows for better control of the formatting
-   as well as reordering of arguments which is needed for proper localisation.
+   Not really a global function. But we add a method to ``string`` built-in type in
+   Lua that has similar functionality to the built-in ``string.format``, but
+   instead uses our own ``format`` function. This allows for better control of the
+   formatting as well as reordering of arguments which is needed for proper localisation.
 
-   :returns: :const:`nil`
+   :returns: The formatted string.
 */
+// The 'b' in bformat used to stand for "boost", which we no longer use, but
+// renaming the Lua function would break backwards compatibility.
 static int L_string_bformat(lua_State* L) {
 	try {
-		// @CodeCheck allow boost::format
-		boost::format fmt(luaL_checkstring(L, 1));
+		format_impl::ArgsVector fmt_args;
+		format_impl::ArgsPair arg;
 		const int nargs = lua_gettop(L);
 
 		// Start with argument, the first is already consumed
 		for (int i = 2; i <= nargs; ++i) {
 			switch (lua_type(L, i)) {
 			case LUA_TNIL:
-				fmt % "nil";
+				arg.first = format_impl::AbstractNode::ArgType::kString;
+				arg.second.string_val = "nil";
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TNUMBER:
 				if (lua_isinteger(L, i)) {
-					fmt % luaL_checkint32(L, i);
+					arg.first = format_impl::AbstractNode::ArgType::kSigned;
+					arg.second.signed_val = luaL_checkint32(L, i);
+					fmt_args.emplace_back(arg);
 				} else {
-					fmt % luaL_checknumber(L, i);
+					arg.first = format_impl::AbstractNode::ArgType::kFloat;
+					arg.second.float_val = luaL_checknumber(L, i);
+					fmt_args.emplace_back(arg);
 				}
 				break;
 
 			case LUA_TBOOLEAN:
-				fmt % luaL_checkboolean(L, i);
+				arg.first = format_impl::AbstractNode::ArgType::kBoolean;
+				arg.second.boolean_val = luaL_checkboolean(L, i);
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TSTRING:
-				fmt % luaL_checkstring(L, i);
+				arg.first = format_impl::AbstractNode::ArgType::kString;
+				arg.second.string_val = luaL_checkstring(L, i);
+				fmt_args.emplace_back(arg);
 				break;
 
 			case LUA_TTABLE:
@@ -117,9 +129,9 @@ static int L_string_bformat(lua_State* L) {
 			}
 		}
 
-		lua_pushstring(L, fmt.str());
+		lua_pushstring(L, format(luaL_checkstring(L, 1), fmt_args));
 		return 1;
-	} catch (const boost::io::format_error& err) {
+	} catch (const std::exception& err) {
 		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
@@ -429,7 +441,7 @@ void luaopen_globals(lua_State* L) {
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
-	// Also add in string.bformat to use bformat instead, so that we get
+	// Also add in string.bformat to use format instead, so that we get
 	// proper localisation.
 	lua_getglobal(L, "string");               // S: string_lib
 	lua_pushstring(L, "bformat");             // S: string_lib "bformat"

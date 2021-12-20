@@ -35,9 +35,7 @@
 #include "website/website_common.h"
 
 int main(int argc, char** argv) {
-#ifdef _WIN32
-	set_logging_dir();
-#endif
+	set_testcase_logging_dir();
 	if (!(2 <= argc && argc <= 3)) {
 		log_err("Usage: %s <map file>\n", argv[0]);
 		return 1;

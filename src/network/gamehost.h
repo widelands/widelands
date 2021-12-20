@@ -102,6 +102,10 @@ public:
 	void set_custom_starting_positions(bool);
 	void replace_client_with_ai(uint8_t playernumber, const std::string& ai);
 
+	void set_script_to_run(const std::string& s) {
+		script_to_run_ = s;
+	}
+
 	// just visible stuff for the select mapmenu
 	void set_multiplayer_game_settings();
 
@@ -218,6 +222,7 @@ private:
 	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
 	std::unique_ptr<Widelands::Game> game_;
+	std::string script_to_run_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

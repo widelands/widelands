@@ -246,7 +246,7 @@ void show_usage(const std::string& build_id,
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << bformat(_("This is Widelands Version %s"), bformat("%s(%s)", build_id, build_type))
+	          << format(_("This is Widelands Version %s"), format("%s(%s)", build_id, build_type))
 	          << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {

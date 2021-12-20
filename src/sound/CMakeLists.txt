@@ -25,8 +25,7 @@ wl_library(sound
   USES_SDL2
   USES_SDL2_MIXER
   DEPENDS
-    base_i18n
-    base_log
+    base
     base_macros
     base_random
     io_fileread
