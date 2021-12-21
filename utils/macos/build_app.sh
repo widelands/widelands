@@ -26,7 +26,6 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    fi
 fi
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WLVERSION=`python $DIR/../detect_revision.py`
 
 DESTINATION="WidelandsRelease"
