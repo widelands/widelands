@@ -4,7 +4,8 @@ set -e
 
 USAGE="See compile.sh"
 
-SOURCE_DIR=../
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SOURCE_DIR=$DIR/../../
 
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
@@ -126,7 +127,7 @@ function BuildWidelands() {
 
    echo "FIXED ICU Issue $CMAKE_PREFIX_PATH"
 
-   pushd ../
+   pushd $SOURCE_DIR
    ./compile.sh $@
    popd
 
