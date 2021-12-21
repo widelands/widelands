@@ -43,8 +43,8 @@ class LuaClass:
             return self.long_name
         return self.name
 
-    def get_formatted_name(self):
-        return self.name[:MAX_NAME_LENGTH]
+    def get_label_name(self):
+        return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
     def get_graphviz_link(self):
         html_link = 'href="../{}#{}", target="_parent"'.format(
@@ -125,7 +125,7 @@ class LuaClasses:
         return tree
 
     def get_name(self, cls_inst):
-        # Returns either the long_name or name, depending of double defined
+        # Returns either the long_name or name, depending on double defined
         # class names.
         found = 0
         for c in self.all_classes:
@@ -145,12 +145,14 @@ class LuaClasses:
             cls_str, outfile))
 
 
-    def get_children_rows(self, cls_inst, max_children=0, tree=None):
+    def get_children(self, cls_inst, max_children=0, tree=None):
+        #print('Recursion of: ', cls_inst.name)
         if tree == None:
             tree = []
         for parent in self.all_classes:
             if parent == cls_inst:
                 if not parent.children or max_children == MAX_CHILDREN:
+                    #print('End recursion of: ', cls_inst.name)
                     return tree
                 else:
                     max_children += 1
@@ -159,7 +161,7 @@ class LuaClasses:
                     l.append([x for x in parent.children])
                     tree.append(l)
                     for child in parent.children:
-                        self.get_children_rows(child, max_children, tree)
+                        self.get_children(child, max_children, tree)
         return tree
 
     def print_classes(self):
@@ -235,6 +237,7 @@ def init(base_dir, cpp_files):
     # Apply inheritances. This can only be done after all classes are
     # created because some class definitions are in different files.
     classes.create_inheritances()
+
     #classes.print_classes()
 
 
@@ -318,28 +321,53 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                                                )
     return base_name, base_link, ret_str
 
+def get_children_rows(cls_inst, count=0, rows=None):
+    if rows == None:
+        rows = {count: []}
+    if count == MAX_CHILDREN:
+        return rows
+    if cls_inst.children:
+        #print('Row', count, 'Adding children of: ', cls_inst.name)
+        if count in rows:
+            rows[count].append([cls_inst, cls_inst.children])
+        else:
+            rows[count] = [[cls_inst, cls_inst.children]]
+        #print('rows', rows)
+        count += 1
+    for child in cls_inst.children:
+        #print('call again for: ', child.name, int(count), rows)
+        get_children_rows(child, count, rows)
+    return rows
+
 
 def format_graphviz_children(cls_inst):
 
-    def _create_row(parent, children):
+    def _get_label(cls, last_row):
+        name = cls.get_label_name()
+        if last_row and cls.children:
+            return '{}\\n… more …'.format(name)
+        return name
+
+    def _create_row(parent, children, last_row):
         ret_str = ''
         for child in children:
             name = classes.get_name(child)
             ret_str += '"{}" [{url}, label="{label}"]'.format(name,
                                                     url=child.get_graphviz_link(),
-                                                    label=name)
+                                                    label=_get_label(child, last_row))
             # Add spaces to make sphinx happy
             ret_str += '\n    '
             ret_str += '{} -- "{}"\n    '.format(parent.name, name)
         return ret_str
 
-    all_children = classes.get_children_rows(cls_inst)
-    for parent, children in all_children:
-        print(i, parent.name, [x.name for x in children])
     ret_str = ''
-    for parent, children in all_children:
-        ret_str += _create_row(parent, children)
-
+    all_children = get_children_rows(cls_inst)
+    for row, row_items in all_children.items():
+        for parent, children in row_items:
+            last = False
+            if row == len(all_children)-1:
+                last = True
+            ret_str += _create_row(parent, children, last)
     return ret_str
 
 
