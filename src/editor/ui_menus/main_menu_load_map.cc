@@ -85,7 +85,7 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		replace_first(display_dir, "Downloaded", _("Downloaded Maps"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text(bformat(_("Current directory: %s"), display_dir));
+	directory_info_.set_text(format(_("Current directory: %s"), display_dir));
 }
 
 /**

@@ -291,8 +291,8 @@ void LaunchMPG::refresh() {
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
-			   bformat(_("Unable to load the win condition script file ‘%s’."),
-			           settings_.get_win_condition_script()));
+			   format(_("Unable to load the win condition script file ‘%s’."),
+			          settings_.get_win_condition_script()));
 
 		} catch (LuaTableKeyError& e) {
 			log_err("LaunchMPG: Error loading win condition: %s %s\n",
@@ -350,7 +350,7 @@ void LaunchMPG::load_previous_playerdata() {
 	   settings_.settings().mapname, "", "", "", settings_.settings().players.size(), true);
 
 	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
-		Section* s = prof.get_section(bformat("player_%u", static_cast<unsigned int>(i)));
+		Section* s = prof.get_section(format("player_%u", static_cast<unsigned int>(i)));
 		if (s == nullptr) {
 			// Due to asynchronous notifications, the client can crash on savegame change when number
 			// of players goes down. So, we abort if the section does not exist to prevent crashes.

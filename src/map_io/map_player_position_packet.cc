@@ -47,7 +47,7 @@ void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 				try {
 					map->set_starting_pos(
 					   p,
-					   get_safe_coords(bformat("player_%u", static_cast<unsigned int>(p)), extent, &s));
+					   get_safe_coords(format("player_%u", static_cast<unsigned int>(p)), extent, &s));
 				} catch (const WException& e) {
 					throw GameDataError("player %u: %s", p, e.what());
 				}
@@ -71,7 +71,7 @@ void MapPlayerPositionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 	const Map& map = egbase.map();
 	const PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
-		set_coords(bformat("player_%u", static_cast<unsigned int>(p)), map.get_starting_pos(p), &s);
+		set_coords(format("player_%u", static_cast<unsigned int>(p)), map.get_starting_pos(p), &s);
 	}
 
 	prof.write("player_position", false, fs);
