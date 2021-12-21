@@ -310,7 +310,7 @@ std::string format(const bool localize, const std::string& format_string, Args..
 		MutexLock m(MutexLock::ID::kI18N);
 		return format_impl::Tree::get(format_string).format(false, args...);
 	} catch (const std::exception& e) {
-		log_err("bformat error: A string contains invalid printf placeholders");
+		log_err("format error: A string contains invalid printf placeholders");
 		log_err("Error: %s", e.what());
 		log_err("String: %s", format_string.c_str());
 		throw;

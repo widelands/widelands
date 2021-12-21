@@ -488,7 +488,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 				const bool selected = !resolution_dropdown_.has_selection() && this_res == current_res;
 				resolution_dropdown_.add(
 				   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-				   bformat(_("%1% × %2%"), this_res.xres, this_res.yres), this_res, nullptr, selected);
+				   format(_("%1% × %2%"), this_res.xres, this_res.yres), this_res, nullptr, selected);
 			}
 		}
 	}
@@ -496,7 +496,7 @@ void Options::add_screen_resolutions(const OptionsCtrl::OptionsStruct& opt) {
 	if (!resolution_dropdown_.has_selection()) {
 		resolution_dropdown_.add(
 		   /** TRANSLATORS: Screen resolution, e.g. 800 × 600*/
-		   bformat(_("%1% × %2%"), current_res.xres, current_res.yres), current_res, nullptr, true);
+		   format(_("%1% × %2%"), current_res.xres, current_res.yres), current_res, nullptr, true);
 	}
 }
 
@@ -648,9 +648,9 @@ void Options::update_language_stats() {
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */
-					   bformat(_("The translation into %s is complete."), entry.descname);
+					   format(_("The translation into %s is complete."), entry.descname);
 				} else {
-					message = bformat(
+					message = format(
 					   /** TRANSLATORS: %1% = language name, %2% = percentage */
 					   _("The translation into %1% is %2%%% complete."), entry.descname, percent);
 				}
@@ -664,8 +664,8 @@ void Options::update_language_stats() {
 	// will catch up with the work later.
 	if (percent <= 90) {
 		message = message + " " +
-		          bformat(_("If you wish to help us translate, please visit %s"),
-		                  "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
+		          format(_("If you wish to help us translate, please visit %s"),
+		                 "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>");
 	}
 	// Make font a bit smaller so the link will fit at 800x600 resolution.
 	translation_info_.set_text(
