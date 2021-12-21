@@ -644,7 +644,7 @@ private:
 
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
-constexpr size_t kSecondParentProbability = 50;
+constexpr size_t kSecondParentProbability = 500; // Almost disabling crossbreeding
 
 // A bunch of parameters used for trainig AI (for calculation of fitness function result)
 constexpr int16_t kCurrentLandDivider = 2;
