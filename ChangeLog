@@ -37,7 +37,6 @@
     - Added extra note to wilderness keeper as that is necessary info not covered elsewhere.
 - Atlantean and Amazon soldier prefs (#5047): Sets military sites with 4+ soldiers to request heroes by default, and Atlantean small tower now requests rookies by default.
 - Support more properties in `modify_unit` (#4866)
--  Add-ons: Disambiguations for dither layers and registries (#4936)
 - Extend productionsite/worker program failure handling (#5146)
     - Allow specifying `callworker` failure handling method
     - Allow suppressing sending out-of-resource notifications in programs
@@ -46,6 +45,30 @@
 ### Maps
 
 
+
+
+
+### Add-Ons
+
+- Use shared_ptr for AddOnInfo (#4747)
+- Fix duplicate description registries by add-ons (#4760)
+- Add-Ons Webserver (#4934)
+- Add-ons: Disambiguations for dither layers and registries (#4936)
+- Fix add-on translation handling glitches (#4976)
+- Refactor `ui_fsmenu/addons.*` (#5012)
+- Add-On UI Tweaks (#5061)
+    - Fix add-on comment layouting glitch
+    - Make dependency checking more clever
+    - Packager enhancements
+    - Fix multiple-dependency logic
+- Add-Ons Packager File Name Handling (#5074)
+    - Fix invalid file/dir names in the packager
+    - Add UI to set dirnames
+    - Enable save/discard buttons after editing displayname
+- Allow loading add-ons with unit replacements first (#5141)
+- Update Add-Ons Manager for Protocol Version 5 (#5039)
+- Speed up add-on remote interaction window (#5076)
+- Add-Ons Protocol Version 6 (#5092)
 
 
 ### Saveloading
@@ -77,7 +100,6 @@
 
 - Fixed the `SupplyList::remove_supply` crash (#4913)
 - Multiplayer template game (#4884)
-- Fix duplicate description registries by add-ons (#4760)
 - Fix constructionsite enhancement race condition (#5002)
 - Catch invalid cast in `Carrier::transport_update` (#5009)
 - Fix race condition when changing military-constructionsite soldier capacity (#5007)
@@ -87,7 +109,6 @@
 - Remove messages of muted buildings (#5109)
 - Fix worker reordering stack overflow (#5125)
 - Remove messages when muting building via "mute all" (#5130)
-- Allow loading add-ons with unit replacements first (#5141)
 
 
 ### User Interface
@@ -109,16 +130,7 @@
 - Unify arrow and +/- handling for spinbox and slider (#5054)
     - Also refactors hardcoded key scancode detection
 - Disable keys for fullscreen and screenshot when changing shortcuts (#5066)
-- Add-On UI Tweaks (#5061)
-    - Fix add-on comment layouting glitch
-    - Make dependency checking more clever
-    - Packager enhancements
-    - Fix multiple-dependency logic
 - Only handle textinput when dropdown is expanded (#5065)
-- Add-Ons Packager File Name Handling (#5074)
-    - Fix invalid file/dir names in the packager
-    - Add UI to set dirnames
-    - Enable save/discard buttons after editing displayname
 - Add technical info to About window (#5071)
 - Add more uses for mousewheel scrolling (#5068)
 - Fix race condition when resizing game window (#5067)
@@ -145,7 +157,6 @@
 - Improved exception reporting (#5003)
     - Fix exception reporting in the game logic thread.
     - Adds `--verbose-i18n` flag.
-- Fix add-on translation handling glitches (#4976)
 - Fix Transifex String Issues (#5072)
 - Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
 - Properly format `size_t` type printf placeholder (#5096)
@@ -170,14 +181,9 @@
 
 ### Networking
 
-- Use shared_ptr for AddOnInfo (#4747)
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
-- Add-Ons Webserver (#4934)
-- Update Add-Ons Manager for Protocol Version 5 (#5039)
-- Speed up add-on remote interaction window (#5076)
 - Keep GameController pointer alive for template game (#5128)
-- Add-Ons Protocol Version 6 (#5092)
 
 
 ### Build System
@@ -232,7 +238,6 @@
 - Resolve threading race conditions by assigning mutex locking priorities (#4943)
 - Fix more threading-related issues (#4966)
 - Set Windows logging dir in all website main functions (#4973)
-- Refactor `ui_fsmenu/addons.*` (#5012)
 - Continue parsing commandline without datadir (#5134)
 - Allow using `--script` with `--new_game_from_template` (#5153)
 
