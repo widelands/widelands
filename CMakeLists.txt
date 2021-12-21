@@ -374,6 +374,7 @@ IF (WIN32)
     endif()
   else()
     # Fix static library dependencies
+    set(ZSTD zstd)
     set(BROTLI brotlidec brotlicommon brotlienc)
     set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
