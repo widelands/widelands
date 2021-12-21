@@ -358,8 +358,9 @@ endif(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
 
 IF (WIN32)
+  add_definitions(-D_WIN32_WINNT=0x0601)
   if(MSVC)
-    add_definitions(-D_WIN32_WINNT=0x0601 -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -DNOMINMAX)
+    add_definitions(-DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -DNOMINMAX)
     # Needed for minizip
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
     if (OPTION_BUILD_WINSTATIC)
