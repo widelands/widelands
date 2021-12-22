@@ -33,9 +33,6 @@ CMakeLists.txt.user*
 /.vscode
 CMakeSettings.json
 
-# Visual Studio Code
-/.vscode
-
 # Profilers
 gmon.out
 

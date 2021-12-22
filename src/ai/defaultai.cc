@@ -276,8 +276,8 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime.get() - taskPool.front()->due_time.get();
 
-	// This portion of code keeps the speed of game so that FPS are kept within
-	// range 13 - 15, this is used for training of AI
+	/// This portion of code keeps the speed of game to ensure AI tasks
+	// being on time, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
 		if (delay_time > 4500) {
@@ -319,7 +319,7 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-	// 400 provides that second job is run if delay time is longer then 2 sec
+	// 400 provides that second job is run if delay time is longer then 1.6 sec
 	if (delay_time > 2000) {
 		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 400));
 	}
