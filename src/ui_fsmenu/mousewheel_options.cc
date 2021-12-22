@@ -22,7 +22,6 @@
 #include <list>
 
 #include <SDL_keycode.h>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
@@ -216,7 +215,7 @@ KeymodAndDirBox::KeymodAndDirBox(UI::Panel* parent,
                                  bool two_d)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      title_area_(
-        this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, bformat(_("%1%:"), title)),
+        this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, format(_("%1%:"), title)),
      keymod_dropdown_(this),
      dir_dropdown_(this, two_d),
      title_(title),
@@ -278,10 +277,10 @@ bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 			      /** TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 			                         empty if none is used. %2 is scrolling direction.
 			                         %3 is the name of the conflicting function. */
-			      bformat(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
-			                "Please select a different combination or "
-			                "change the conflicting setting first."),
-			              keymod_string_for(keymod), _(sd_names[dir]), other->get_title()),
+			      format(_("‘%1$s%2$s’ conflicts with ‘%3$s’. "
+			               "Please select a different combination or "
+			               "change the conflicting setting first."),
+			             keymod_string_for(keymod), _(sd_names[dir]), other->get_title()),
 			      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 			   UI::WLMessageBox::MBoxType::kOk);
 			warning.run<UI::Panel::Returncodes>();
@@ -466,9 +465,9 @@ void MousewheelOptionsDialog::set_touchpad() {
 	if (conflict_speed || conflict_toolsize) {
 		UI::WLMessageBox warning(
 		   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Scroll Settings Conflict"),
-		   as_richtext_paragraph(bformat(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
-		                                   "settings. Change the conflicting setting(s) too?"),
-		                                 speed_box_.get_title(), toolsize_box_.get_title()),
+		   as_richtext_paragraph(format(_("‘%1$s’ or ‘%2$s’ conflicts with the recommended "
+		                                  "settings. Change the conflicting setting(s) too?"),
+		                                speed_box_.get_title(), toolsize_box_.get_title()),
 		                         UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (warning.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
