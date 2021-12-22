@@ -537,7 +537,7 @@ void DefaultAI::think() {
 
 				// how many types of mines have at least one finished mine? So can be up to 4 now
 				uint16_t finished_mines_type = 0;
-				for (auto const& mt : mines_per_type) {
+				for (const auto& mt : mines_per_type) {
 					finished_mines_type += (mt.second.finished > 0) ? 1 : 0;
 				}
 
