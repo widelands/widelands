@@ -319,7 +319,7 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-	// 500 provides that second job is run if delay time is longer then 2 sec
+	// 400 provides that second job is run if delay time is longer then 2 sec
 	if (delay_time > 2000) {
 		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 400));
 	}
@@ -535,7 +535,7 @@ void DefaultAI::think() {
 					                   enemy_warehouses.size());
 				}
 								
-				// how many types of mines have at least one finished mine?
+				// how many types of mines have at least one finished mine? So can be up to 4 now
 				uint16_t finished_mines_type=0;
 				for (auto const& mt : mines_per_type) {
 					finished_mines_type += (mt.second.finished > 0) ? 1 : 0;

@@ -610,15 +610,22 @@ void ManagementData::review(const Time& gametime,
 	const uint16_t iron_mine_bonus = (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
 	const uint16_t attack_bonus = (attackers > 0) ? kAttackBonus : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
+	// For having at least one mine of each type (iron, coal, ...), so up to 1000 points
 	const uint16_t finished_mine_type_bonus = finished_mine_types * 250;
+	// Are this player best one in the game? Probably does not make sense on irregular maps
 	const uint16_t best_player_bonus = (land > max_e_land) ? 100 : 0;
 
 	// scores (numbers dependant on performance)
-	const int16_t territory_growth_bonus = (land - old_land) * kLandDeltaMultiplier;
+	// points for the size of territory
 	const uint16_t land_score = land / kCurrentLandDivider;
+	// points for the territory growth within last 60 minutes
+	const int16_t territory_growth_bonus = (land - old_land) * kLandDeltaMultiplier;
+    // score for what get_player_power() returns
 	const uint16_t strength_score = std::min<uint16_t>(strength, 200) * kStrengthMultiplier;
+	// score for soldiers that ever attacked (can repeat of course)
 	const uint16_t attackers_score = std::min<uint16_t>(attackers, 200) * kAttackersBonus;
 	const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
+	// On most maps AI will not build ships of course
 	const uint32_t ships_score = kShipBonus * ships_count;
 
 	score = territory_growth_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
@@ -788,7 +795,10 @@ void ManagementData::mutate(const uint8_t pn) {
 	verb_log_dbg("AIPARSE %2d  mutating_probability 1 / %3d preffered numbers target %d %s:\n", pn,
 	             probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
-	uint16_t changed_stat [3] = { }; // sum for military numbers, neurons and f-neurons
+	// This statistics is not used in the game, but is printed and perhaps evaluated by a human
+	// Helps to understand how aggressive the mutation was in each of category:
+	// military numbers, neurons, f-neurons. So its length is 3
+	uint16_t mutation_stat [3] = { };
 
 	if (probability < kNoAiTrainingMutation) {
 
@@ -814,7 +824,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					changed_stat[kMilitaryNumbersPos] += 1;
+					mutation_stat[kMilitaryNumbersPos] += 1;
 					verb_log_dbg(
 					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
 					   new_value,
@@ -847,7 +857,7 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					changed_stat[kNeuronsPos] += 1;
+					mutation_stat[kNeuronsPos] += 1;
 					verb_log_dbg(
 					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					   old_value, item.get_weight(), item.get_type(),
@@ -887,8 +897,8 @@ void ManagementData::mutate(const uint8_t pn) {
 					}
 				}
 
-				if (changed_bits) {
-					changed_stat[kFNeuronsPos] += 1;
+				if (changed_bits) { // -> the f-neuron was changed
+					mutation_stat[kFNeuronsPos] += 1;
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
 					             item.get_id(), item.get_int(), changed_bits,
@@ -898,8 +908,8 @@ void ManagementData::mutate(const uint8_t pn) {
 		}
 	}
 
-	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn, changed_stat[kMilitaryNumbersPos],
-	             changed_stat[kNeuronsPos], changed_stat[kFNeuronsPos]);
+	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn, mutation_stat[kMilitaryNumbersPos],
+	             mutation_stat[kNeuronsPos], mutation_stat[kFNeuronsPos]);
 
 	test_consistency();
 }

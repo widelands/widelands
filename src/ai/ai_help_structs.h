@@ -644,19 +644,20 @@ private:
 
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
-constexpr size_t kSecondParentProbability = 500; // Almost disabling crossbreeding
+// This defines probability of taking DNA from second parent
+// Probably it would best to remove the 'crossbreeding' concept altogether
+constexpr size_t kSecondParentProbability = 500;
 
 // A bunch of parameters used for trainig AI (for calculation of fitness function result)
 constexpr int16_t kCurrentLandDivider = 2;
 constexpr int16_t kLandDeltaMultiplier = 1;
-constexpr int16_t kBonus = 1000;
 constexpr int16_t kAttackersBonus = 3;
-constexpr int16_t kAttackBonus = 100;
+constexpr int16_t kAttackBonus = 100; // Bonus if the AI attacked at least once
 constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
 constexpr int16_t kStrengthMultiplier = 15;
 constexpr int16_t kPSitesRatioMultiplier = 1;
-constexpr int32_t kShipBonus = 1000;
+constexpr int32_t kShipBonus = 1000; // Bonus for each completed ship
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
