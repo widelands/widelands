@@ -9,7 +9,6 @@ RSTDATA_CLS_RE = re.compile(r'.. class:: (\w+)')
 
 MAX_CHILDREN = 2
 MAX_PARENTS = 1
-MAX_NAME_LENGTH = 15
 
 EXCLUDE_CLASSES = ['Market',
                    'MarketDescription',
@@ -242,7 +241,7 @@ def add_child_of(rst_data, outfile):
 def format_graphviz_parents(cls_inst):
 
     if cls_inst.name in classes.get_base_names():
-        # This is already a base class
+        # cls_inst is already a base class
         return cls_inst.name, '', ''
 
     def _make_tooltip(p_list):
@@ -269,26 +268,26 @@ def format_graphviz_parents(cls_inst):
                 # Show big edge with tooltip.
                 ret_str += '{base} -- {n} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
 penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
-                                                n=show_list[-1].name,
+                                                n=show_list[0].name,
                                                 tooltip=_make_tooltip(tt_list)
                                                 )
             else:
                 # No tooltip, normal edge
                 ret_str += '{base} -- {n}\n'.format(base=base_name,
-                                                n=show_list[-1].name,
+                                                n=show_list[0].name,
                                                 )
             for i, p in enumerate(show_list):
                 # Create the connections between parents
                 try:
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
-                        a=show_list[i+1].name,
-                        link=show_list[i+1].get_graphviz_link(),
-                        b=show_list[i].name
+                        a=show_list[i].name,
+                        link=show_list[i].get_graphviz_link(),
+                        b=show_list[i+1].name
                         )
                 except:
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
-                        a=show_list[i-1].name,
-                        link=show_list[i-1].get_graphviz_link(),
+                        a=show_list[i].name,
+                        link=show_list[i].get_graphviz_link(),
                         b=cls_inst.name
                         )
         else:
@@ -308,10 +307,10 @@ def get_children_rows(cls_inst, count=0, rows=None):
         return rows
     if cls_inst.children:
         if count in rows:
-            # add children
+            # add a list of [parent,[children]]
             rows[count].append([cls_inst, cls_inst.children])
         else:
-            # create row
+            # create new row
             rows[count] = [[cls_inst, cls_inst.children]]
         count += 1
     for child in cls_inst.children:
