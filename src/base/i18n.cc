@@ -407,24 +407,24 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 			if (listtype == ConcatenateWith::AMPERSAND) {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = bformat(_("%1$s & %2$s"), result, (*it));
+				result = format(_("%1$s & %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::OR) {
 				/** TRANSLATORS: Join the last 2 items on a list with "or". */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = bformat(_("%1$s or %2$s"), result, (*it));
+				result = format(_("%1$s or %2$s"), result, (*it));
 			} else if (listtype == ConcatenateWith::COMMA) {
 				/** TRANSLATORS: Join the last 2 items on a list with a comma. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = bformat(_("%1$s, %2$s"), result, (*it));
+				result = format(_("%1$s, %2$s"), result, (*it));
 			} else {
 				/** TRANSLATORS: Concatenate the last 2 items on a list. */
 				/** TRANSLATORS: RTL languages might want to change the word order here. */
-				result = bformat(_("%1$s and %2$s"), result, (*it));
+				result = format(_("%1$s and %2$s"), result, (*it));
 			}
 		} else {
 			/** TRANSLATORS: Concatenate 2 items at in the middle of a list. */
 			/** TRANSLATORS: RTL languages might want to change the word order here. */
-			result = bformat(_("%1$s, %2$s"), result, (*it));
+			result = format(_("%1$s, %2$s"), result, (*it));
 		}
 	}
 	return result;
@@ -434,7 +434,7 @@ std::string join_sentences(const std::string& sentence1, const std::string& sent
 	i18n::Textdomain td("widelands");
 	/** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably
 	 * want to lose the blank space here. */
-	return bformat(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
+	return format(pgettext("sentence_separator", "%1% %2%"), sentence1, sentence2);
 }
 
 }  // namespace i18n

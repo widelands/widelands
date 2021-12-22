@@ -91,13 +91,11 @@ wl_library(editor
     ui_menus/toolsize_menu.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_random
     base_scoped_timer
-    base_string
     build_info
     graphic
     graphic_fonthandler

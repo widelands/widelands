@@ -50,7 +50,7 @@ IFont* load_font(const std::string& face, int ptsize) {
 
 	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
 	if (!font) {
-		throw BadFont(bformat("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
+		throw BadFont(format("Font loading error for %s, %i pts: %s", face, ptsize, TTF_GetError()));
 	}
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());

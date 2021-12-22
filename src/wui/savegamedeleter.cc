@@ -27,7 +27,7 @@ bool SavegameDeleter::show_confirmation_window(const std::vector<SavegameData>& 
 	size_t no_selections = selections.size();
 	std::string confirmation_window_header = create_header_for_confirmation_window(no_selections);
 	const std::string message =
-	   bformat("%s\n%s", confirmation_window_header, as_filename_list(selections));
+	   format("%s\n%s", confirmation_window_header, as_filename_list(selections));
 
 	UI::WLMessageBox confirmationBox(
 	   parent_->get_parent()->get_parent(), style_,
@@ -42,9 +42,9 @@ SavegameDeleter::create_header_for_confirmation_window(const size_t no_selection
 	   no_selections == 1    ? _("Do you really want to delete this game?") :
                               /** TRANSLATORS: Used with multiple games, 1 game has a separate
                                  string. DO NOT omit the placeholder in your translation. */
-                              bformat(ngettext("Do you really want to delete this %d game?",
-                          "Do you really want to delete these %d games?", no_selections),
-                 no_selections);
+                              format(ngettext("Do you really want to delete this %d game?",
+                         "Do you really want to delete these %d games?", no_selections),
+                no_selections);
 
 	return header;
 }
@@ -77,7 +77,7 @@ void SavegameDeleter::notify_deletion_failed(const std::vector<SavegameData>& to
 	const std::string caption =
 	   (no_failed == 1) ? _("Error Deleting File!") : _("Error Deleting Files!");
 	std::string header = create_header_for_deletion_failed_window(to_be_deleted.size(), no_failed);
-	std::string message = bformat("%s\n%s", header, as_filename_list(to_be_deleted));
+	std::string message = format("%s\n%s", header, as_filename_list(to_be_deleted));
 
 	UI::WLMessageBox msgBox(parent_->get_parent()->get_parent(), style_, caption, message,
 	                        UI::WLMessageBox::MBoxType::kOk);
@@ -89,7 +89,7 @@ std::string SavegameDeleter::create_header_for_deletion_failed_window(size_t no_
 	if (no_to_be_deleted == 1) {
 		return _("The game could not be deleted.");
 	}
-	return bformat(
+	return format(
 	   /** TRANSLATORS: Used with multiple games, 1 game has a separate string. DO NOT omit the
 	    * placeholder in your translation. */
 	   ngettext("%d game could not be deleted.", "%d games could not be deleted.", no_failed),
@@ -106,9 +106,9 @@ ReplayDeleter::create_header_for_confirmation_window(const size_t no_selections)
                             _("Do you really want to delete this replay?") :
                             /** TRANSLATORS: Used with multiple replays, 1 replay has a
                                                separate string. DO NOT omit the placeholder in your translation. */
-                            bformat(ngettext("Do you really want to delete this %d replay?",
-                          "Do you really want to delete these %d replays?", no_selections),
-                 no_selections);
+                            format(ngettext("Do you really want to delete this %d replay?",
+                         "Do you really want to delete these %d replays?", no_selections),
+                no_selections);
 
 	return header;
 }
@@ -118,7 +118,7 @@ std::string ReplayDeleter::create_header_for_deletion_failed_window(size_t no_to
 	if (no_to_be_deleted == 1) {
 		return _("The replay could not be deleted.");
 	}
-	return bformat(
+	return format(
 	   /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. DO NOT omit the
 	    * placeholder in your translation. */
 	   ngettext("%d replay could not be deleted.", "%d replays could not be deleted.", no_failed),

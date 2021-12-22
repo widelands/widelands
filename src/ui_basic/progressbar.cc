@@ -95,7 +95,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 
 	// Print the state in percent without decimal points.
 	std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(
-	   show_percent_ ? bformat("%u%%", floorf(fraction * 100.f)) : std::to_string(state_),
+	   show_percent_ ? format("%u%%", floorf(fraction * 100.f)) : std::to_string(state_),
 	   progress_style().font()));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);

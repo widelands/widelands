@@ -65,8 +65,8 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
                                                 int style,
                                                 TextureCache* texture_cache) {
 	const std::string hash =
-	   bformat("ttf:%s:%s:%i:%02x%02x%02x:%i", font_name_, ptsize_, txt, static_cast<int>(clr.r),
-	           static_cast<int>(clr.g), static_cast<int>(clr.b), style);
+	   format("ttf:%s:%i:%s:%02x%02x%02x:%i", font_name_, ptsize_, txt, static_cast<int>(clr.r),
+	          static_cast<int>(clr.g), static_cast<int>(clr.b), style);
 	std::shared_ptr<const Image> rv = texture_cache->get(hash);
 	if (rv != nullptr) {
 		return rv;
@@ -130,7 +130,7 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 	}
 
 	if (!text_surface) {
-		throw RenderError(bformat("Rendering '%s' gave the error: %s", txt, TTF_GetError()));
+		throw RenderError(format("Rendering '%s' gave the error: %s", txt, TTF_GetError()));
 	}
 
 	return texture_cache->insert(hash, std::make_shared<Texture>(text_surface));

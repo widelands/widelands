@@ -296,7 +296,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			    owner.tribe().has_building(enhancement)) {
 				const Widelands::BuildingDescr& building_descr = *tribe.get_building_descr(enhancement);
 				std::string enhance_tooltip =
-				   bformat(_("Enhance to %s"), building_descr.descname()) + "<br>" +
+				   format(_("Enhance to %s"), building_descr.descname()) + "<br>" +
 				   g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 				      .header_font()
 				      .as_font_tag(_("Construction costs:")) +
