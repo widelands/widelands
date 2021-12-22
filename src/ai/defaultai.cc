@@ -1297,6 +1297,35 @@ void DefaultAI::late_initialization() {
  */
 void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
+	//Looking for small/medium/big buildable fields with most expired info
+	Time oldest_info [3] = {gametime, gametime, gametime};
+	uint32_t invalidated_count = 0;
+
+	for (uint32_t j = buildable_fields.size(); j < buildable_fields.size(); j++) {
+		if (buildable_fields[j]->invalidated) {
+			invalidated_count += 1;
+			continue;
+		}
+
+
+		uint16_t build_caps = player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
+		assert (build_caps >= 0 && build_caps <= 3);
+
+		oldest_info[build_caps] = std::min<Time>(oldest_info[build_caps], buildable_fields[j]->field_info_expiration);
+	}
+
+	printf("Now %s, oldest expirations: %s  %s  %ss\n", gametimestring(gametime.get(), true).c_str(), 
+	gametimestring(oldest_info[0].get(), true).c_str(),
+	gametimestring(oldest_info[1].get(), true).c_str(),
+	gametimestring(oldest_info[2].get(), true).c_str());
+
+
+
+
+
+
+
+
 	// Every call we try to check first 35 buildable fields
 	constexpr uint16_t kMinimalFieldsCheck = 35;
 

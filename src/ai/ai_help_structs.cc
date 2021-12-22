@@ -325,6 +325,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      preferred(false),
      enemy_nearby(false),
      enemy_accessible_(false),
+	 invalidated(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),
      enemy_owned_land_nearby(0U),
