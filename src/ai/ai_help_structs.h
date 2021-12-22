@@ -652,12 +652,12 @@ constexpr size_t kSecondParentProbability = 500;
 constexpr int16_t kCurrentLandDivider = 2;
 constexpr int16_t kLandDeltaMultiplier = 1;
 constexpr int16_t kAttackersBonus = 3;
-constexpr int16_t kAttackBonus = 100; // Bonus if the AI attacked at least once
+constexpr int16_t kAttackBonus = 100;  // Bonus if the AI attacked at least once
 constexpr int16_t kTrainedSoldiersScore = 250;
 constexpr int16_t kConqueredWhBonus = 300;
 constexpr int16_t kStrengthMultiplier = 15;
 constexpr int16_t kPSitesRatioMultiplier = 1;
-constexpr int32_t kShipBonus = 1000; // Bonus for each completed ship
+constexpr int32_t kShipBonus = 1000;  // Bonus for each completed ship
 
 struct Neuron {
 	static int clip_weight_to_range(int w) {
@@ -732,8 +732,8 @@ struct ManagementData {
 	            uint16_t strength,
 	            uint32_t existing_ps,
 	            const Time& first_iron_mine_time,
-				uint16_t ships_count,
-				uint16_t finished_mine_types);
+	            uint16_t ships_count,
+	            uint16_t finished_mine_types);
 	void dump_data(Widelands::PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

@@ -603,8 +603,8 @@ void ManagementData::review(const Time& gametime,
                             const uint16_t strength,
                             const uint32_t existing_ps,
                             const Time& first_iron_mine_time,
-							const uint16_t ships_count,
-							const uint16_t finished_mine_types) {
+                            const uint16_t ships_count,
+                            const uint16_t finished_mine_types) {
 
 	// bonuses (something or nothing)
 	const uint16_t iron_mine_bonus = (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
@@ -620,7 +620,7 @@ void ManagementData::review(const Time& gametime,
 	const uint16_t land_score = land / kCurrentLandDivider;
 	// points for the territory growth within last 60 minutes
 	const int16_t territory_growth_bonus = (land - old_land) * kLandDeltaMultiplier;
-    // score for what get_player_power() returns
+	// score for what get_player_power() returns
 	const uint16_t strength_score = std::min<uint16_t>(strength, 200) * kStrengthMultiplier;
 	// score for soldiers that ever attacked (can repeat of course)
 	const uint16_t attackers_score = std::min<uint16_t>(attackers, 200) * kAttackersBonus;
@@ -798,7 +798,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	// This statistics is not used in the game, but is printed and perhaps evaluated by a human
 	// Helps to understand how aggressive the mutation was in each of category:
 	// military numbers, neurons, f-neurons. So its length is 3
-	uint16_t mutation_stat [3] = { };
+	uint16_t mutation_stat[3] = {};
 
 	if (probability < kNoAiTrainingMutation) {
 
@@ -897,7 +897,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					}
 				}
 
-				if (changed_bits) { // -> the f-neuron was changed
+				if (changed_bits) {  // -> the f-neuron was changed
 					mutation_stat[kFNeuronsPos] += 1;
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
@@ -908,8 +908,9 @@ void ManagementData::mutate(const uint8_t pn) {
 		}
 	}
 
-	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn, mutation_stat[kMilitaryNumbersPos],
-	             mutation_stat[kNeuronsPos], mutation_stat[kFNeuronsPos]);
+	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn,
+	             mutation_stat[kMilitaryNumbersPos], mutation_stat[kNeuronsPos],
+	             mutation_stat[kFNeuronsPos]);
 
 	test_consistency();
 }

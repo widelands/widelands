@@ -534,9 +534,9 @@ void DefaultAI::think() {
 					verb_log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
 					                   enemy_warehouses.size());
 				}
-								
+
 				// how many types of mines have at least one finished mine? So can be up to 4 now
-				uint16_t finished_mines_type=0;
+				uint16_t finished_mines_type = 0;
 				for (auto const& mt : mines_per_type) {
 					finished_mines_type += (mt.second.finished > 0) ? 1 : 0;
 				}
