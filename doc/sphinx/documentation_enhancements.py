@@ -30,7 +30,7 @@ class LuaClass:
         self.is_base = is_base
         self.children = []
 
-    def hyphenated(self):
+    def name_hyphenated(self):
         # Hyphenation by uppercase
         return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
@@ -91,28 +91,39 @@ class LuaClasses:
                 c.parent = parent
                 c.parent.children.append(c)
 
-    def get_base_names(self):
-        """Returns a list of base class names."""
-        return [c.name for c in self.all_classes if c.is_base]
-
-    def get_parents(self, cls_inst, tree=None):
+    def get_parent_tree(self, cls_inst, tree=None):
         """Recursively find all parents of cls_inst.
 
         Returns a list of LuaClass instances.
         """
-        if tree == None:
+        if tree is None:
             tree = []
-        for c in self.all_classes:
-            if c == cls_inst:
-                if c.parent:
-                    if not c.parent in tree:
-                        # This is only needed for double defined class Player.
-                        tree.append(c.parent)
-                    self.get_parents(c.parent, tree)
-                else:
-                    # No parent anymore, end of recursion
-                    return tree
+        if cls_inst.is_base:
+            return tree
+        else:
+            tree.append(cls_inst.parent)
+            self.get_parent_tree(cls_inst.parent, tree)
         return tree
+
+    def get_children_rows(self, cls_inst, count=0, rows=None):
+        # Recursively find all children of cls_inst.
+        # Returns a dict where the keys are the rownumbers and the values are
+        # lists in form of [[parent,[children],],]
+        if rows == None:
+            rows = {count: []}
+        if count == MAX_CHILDREN:
+            return rows
+        if cls_inst.children:
+            if count in rows:
+                # Add a list to a row
+                rows[count].append([cls_inst, cls_inst.children])
+            else:
+                # Create new row
+                rows[count] = [[cls_inst, cls_inst.children]]
+            count += 1
+        for child in cls_inst.children:
+            self.get_children_rows(child, count, rows)
+        return rows
 
     def get_instance(self, cls_str, outfile):
         # Returns a LuaClass object
@@ -122,10 +133,16 @@ class LuaClasses:
         raise Exception('No class named "{}" found with outfile "{}": '.format(
             cls_str, outfile))
 
+    def have_same_source(self, cls1, cls2):
+        if cls1.outfile != cls2.outfile:
+            return False
+        return True
+
     def print_classes(self):
         print('all classes:')
         for c in self.all_classes:
             c.print_data()
+
 # End of LuaClasses
 
 
@@ -205,14 +222,14 @@ def add_child_of(rst_data, outfile):
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
     for c_name in found_classes:
         cls_inst = classes.get_instance(c_name, outfile)
-        parents = classes.get_parents(cls_inst)
+        parents = classes.get_parent_tree(cls_inst)
         if parents:
             repl_str = '.. class:: {}\n\n'.format(cls_inst.name)
             child_str = '{}   Child of:'.format(repl_str)
             for i, parent in enumerate(parents):
-                cls_name = parent.name 
-
-                if cls_inst.outfile != parent.outfile:
+                if classes.have_same_source(parent, cls_inst):
+                    cls_name = parent.name
+                else:
                     # Apply the long name to make sphinx-links work across
                     # documents
                     cls_name = parent.long_name
@@ -230,8 +247,7 @@ def add_child_of(rst_data, outfile):
 
 def format_graphviz_parents(cls_inst):
 
-    if cls_inst.name in classes.get_base_names():
-        # cls_inst is already a base class
+    if cls_inst.is_base:
         return cls_inst.name, '', ''
 
     def _make_tooltip(p_list):
@@ -242,7 +258,7 @@ def format_graphviz_parents(cls_inst):
                 via_list += ' → '
         return via_list
 
-    parents = list(reversed(classes.get_parents(cls_inst)))
+    parents = list(reversed(classes.get_parent_tree(cls_inst)))
     ret_str = ''
     base_name = ''
     base_link = ''
@@ -281,39 +297,19 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                         b=cls_inst.name
                     )
         else:
-            # No parents
+            # No intermediate parents
             ret_str = '{base} -- {cur}'.format(base=base_name,
                                                cur=cls_inst.name
                                                )
     return base_name, base_link, ret_str
 
 
-def get_children_rows(cls_inst, count=0, rows=None):
-    # Recursively find all children of cls_inst.
-    # Returns a dict where the keys are the rownumbers and the values are
-    # lists in form of [[parent,[children],],]
-    if rows == None:
-        rows = {count: []}
-    if count == MAX_CHILDREN:
-        return rows
-    if cls_inst.children:
-        if count in rows:
-            # Add a list to a row
-            rows[count].append([cls_inst, cls_inst.children])
-        else:
-            # Create new row
-            rows[count] = [[cls_inst, cls_inst.children]]
-        count += 1
-    for child in cls_inst.children:
-        get_children_rows(child, count, rows)
-    return rows
-
-
 def format_graphviz_children(cls_inst):
 
     def _node_opts(cls, last_row):
-        label = cls.hyphenated()
-        if cls.parent.outfile != cls.outfile:
+        if classes.have_same_source(parent, cls):
+            label = cls.name_hyphenated()
+        else:
             label = cls.long_name
         tt = cls.name
         if last_row and cls.children:
@@ -329,8 +325,9 @@ def format_graphviz_children(cls_inst):
     def _create_row(parent, children, last_row):
         ret_str = ''
         for child in children:
-            node_name = child.name
-            if child.parent.outfile != child.outfile:
+            if classes.have_same_source(child, child.parent):
+                node_name = child.name
+            else:
                 node_name = child.long_name
             ret_str += '"{}" {options}'.format(node_name,
                                                options=_node_opts(child, last_row))
@@ -340,7 +337,7 @@ def format_graphviz_children(cls_inst):
         return ret_str
 
     ret_str = ''
-    all_children = get_children_rows(cls_inst)
+    all_children = classes.get_children_rows(cls_inst)
     for row, row_items in all_children.items():
         for parent, children in row_items:
             last_row = False
