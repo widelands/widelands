@@ -31,7 +31,7 @@ class LuaClass:
         self.children = []
 
     def name_hyphenated(self):
-        # Hyphenation by uppercase
+        """Return the hyphenated name split uppercase."""
         return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
     def get_graphviz_link(self):
@@ -57,14 +57,14 @@ class LuaClasses:
     """Stores and handles LuaClass objects."""
 
     def __init__(self):
-        self.all_classes = []
+        self.class_list = []
 
     def add_class(self, name, outfile, parent=None, is_base=False):
         if not is_base and not parent:
             raise Exception('Error: Derived class needs a parent class!')
 
         new_cls = LuaClass(name, outfile, parent, is_base)
-        self.all_classes.append(new_cls)
+        self.class_list.append(new_cls)
 
     def apply_inheritances(self):
         """Modify some LuaClass attributes.
@@ -74,7 +74,7 @@ class LuaClasses:
         """
         def _get_parent_instance(cls_name):
             c_list = []
-            for c in self.all_classes:
+            for c in self.class_list:
                 if c.name == cls_name:
                     c_list.append(c)
             if len(c_list) == 0:
@@ -85,7 +85,7 @@ class LuaClasses:
                     'Error: Two parent classes with name:', cls_name)
             return c_list[0]
 
-        for c in self.all_classes:
+        for c in self.class_list:
             if c.parent:
                 parent = _get_parent_instance(c.parent)
                 c.parent = parent
@@ -106,16 +106,18 @@ class LuaClasses:
         return tree
 
     def get_children_rows(self, cls_inst, count=0, rows=None):
-        # Recursively find all children of cls_inst.
-        # Returns a dict where the keys are the rownumbers and the values are
-        # lists in form of [[parent,[children],],]
-        if rows == None:
+        """Recursively find all children of cls_inst.
+
+        Returns a dict where the keys are the rownumbers and the values
+        are lists in form of [[parent,[children],],]
+        """
+        if rows is None:
             rows = {count: []}
         if count == MAX_CHILDREN:
             return rows
         if cls_inst.children:
             if count in rows:
-                # Add a list to a row
+                # Add a list to an existing row
                 rows[count].append([cls_inst, cls_inst.children])
             else:
                 # Create new row
@@ -126,8 +128,8 @@ class LuaClasses:
         return rows
 
     def get_instance(self, cls_str, outfile):
-        # Returns a LuaClass object
-        for c in self.all_classes:
+        """Returns a unique LuaClass object."""
+        for c in self.class_list:
             if cls_str == c.name and outfile == c.outfile:
                 return c
         raise Exception('No class named "{}" found with outfile "{}": '.format(
@@ -140,7 +142,7 @@ class LuaClasses:
 
     def print_classes(self):
         print('all classes:')
-        for c in self.all_classes:
+        for c in self.class_list:
             c.print_data()
 
 # End of LuaClasses
@@ -175,7 +177,8 @@ def fill_data(file_name, outfile):
             # cls_name : public namespace_or_parent::parent_cls
 
             # Strip out leading 'Lua'. This can't be done in the regexp
-            # because we need 'LunaClass' to get the parent class of all classes.
+            # because we need 'LunaClass' to get the parent class of
+            # all classes.
             cls_name = cls_name.replace('Lua', '')
             namespace_or_parent = namespace_or_parent.replace('Lua', '')
             parent_cls = parent_cls.replace('Lua', '')
@@ -210,7 +213,7 @@ def init(base_dir, cpp_files):
         fill_data(h_path, outfile)
 
     # Apply inheritances. This can only be done after all classes are
-    # created because some class definitions are in different files.
+    # read because some class definitions are in different files.
     classes.apply_inheritances()
 
     # classes.print_classes()
@@ -246,6 +249,7 @@ def add_child_of(rst_data, outfile):
 
 
 def format_graphviz_parents(cls_inst):
+    """Add nodes in graphviz syntax for the parents of cls_inst."""
 
     if cls_inst.is_base:
         return cls_inst.name, '', ''
@@ -290,7 +294,7 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                         link=show_list[i].get_graphviz_link(),
                         b=show_list[i+1].name
                     )
-                except:
+                except IndexError:
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
                         a=show_list[i].name,
                         link=show_list[i].get_graphviz_link(),
@@ -305,6 +309,7 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
 
 
 def format_graphviz_children(cls_inst):
+    """Add nodes in graphviz syntax for the children of cls_inst."""
 
     def _node_opts(cls, last_row):
         if classes.have_same_source(parent, cls):
@@ -329,8 +334,9 @@ def format_graphviz_children(cls_inst):
                 node_name = child.name
             else:
                 node_name = child.long_name
-            ret_str += '"{}" {options}'.format(node_name,
-                                               options=_node_opts(child, last_row))
+            ret_str += '"{}" {options}'.format(
+                node_name,
+                options=_node_opts(child, last_row))
             # Add spaces to make sphinx happy
             ret_str += '\n    '
             ret_str += '"{}" -- "{}"\n    '.format(parent.name, node_name)
@@ -349,6 +355,10 @@ def format_graphviz_children(cls_inst):
 
 
 def create_directive(cls_inst):
+    """Create a graphviz directive.
+
+    Define the main look and feel here.
+    """
     children = format_graphviz_children(cls_inst)
     base_cls, base_link, parents = format_graphviz_parents(cls_inst)
     graph_directive = None
@@ -379,6 +389,8 @@ def create_directive(cls_inst):
 
 
 def add_dependency_graph(rst_data, outfile):
+    """Insert a dependency graph to rst_data."""
+
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
     for cls_name in found_cls:
         cls_inst = classes.get_instance(cls_name, outfile)
