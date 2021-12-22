@@ -66,10 +66,10 @@ class LuaClasses:
         new_cls = LuaClass(name, outfile, parent, is_base)
         self.all_classes.append(new_cls)
 
-    def create_inheritances(self):
+    def apply_inheritances(self):
         """Modify some LuaClass attributes.
 
-        - Parent is just a name, we apply the LuaClass instance instead
+        - Parent is just a name yet, we apply the LuaClass instance instead
         - Add all children instances to the parent class
         """
         def _get_parent_instance(cls_name):
@@ -78,9 +78,11 @@ class LuaClasses:
                 if c.name == cls_name:
                     c_list.append(c)
             if len(c_list) == 0:
-                raise Exception('Error: There is no parent class named:', cls_name)
+                raise Exception(
+                    'Error: There is no parent class named:', cls_name)
             elif len(c_list) > 1:
-                raise Exception('Error: Two parent classes with name:', cls_name)
+                raise Exception(
+                    'Error: Two parent classes with name:', cls_name)
             return c_list[0]
 
         for c in self.all_classes:
@@ -112,15 +114,6 @@ class LuaClasses:
                     return tree
         return tree
 
-    def is_double(self, cls_inst):
-        found = 0
-        for c in self.all_classes:
-            if c.name == cls_inst.name:
-                found += 1
-        if found > 1:
-            return True
-        return False
-
     def get_instance(self, cls_str, outfile):
         # Returns a LuaClass object
         for c in self.all_classes:
@@ -128,7 +121,6 @@ class LuaClasses:
                 return c
         raise Exception('No class named "{}" found with outfile "{}": '.format(
             cls_str, outfile))
-
 
     def print_classes(self):
         print('all classes:')
@@ -202,22 +194,13 @@ def init(base_dir, cpp_files):
 
     # Apply inheritances. This can only be done after all classes are
     # created because some class definitions are in different files.
-    classes.create_inheritances()
+    classes.apply_inheritances()
 
-    #classes.print_classes()
+    # classes.print_classes()
 
 
 def add_child_of(rst_data, outfile):
     """Adds the String 'Child of: …, …' to rst_data."""
-
-    def _long_or_short(cls):
-        # If the parent is defined in a different file than the child
-        # return it's long_name
-        if cls.children:
-            for c in cls.children:
-                if c.outfile != cls.outfile:
-                    return cls.long_name
-        return cls.name
 
     found_classes = RSTDATA_CLS_RE.findall(rst_data)
     for c_name in found_classes:
@@ -227,9 +210,16 @@ def add_child_of(rst_data, outfile):
             repl_str = '.. class:: {}\n\n'.format(cls_inst.name)
             child_str = '{}   Child of:'.format(repl_str)
             for i, parent in enumerate(parents):
-                child_str += ' :class:`{}`'.format(_long_or_short(parent))
+                cls_name = parent.name 
+
+                if cls_inst.outfile != parent.outfile:
+                    # Apply the long name to make sphinx-links work across
+                    # documents
+                    cls_name = parent.long_name
+
+                child_str += ' :class:`{}`'.format(cls_name)
                 if i < len(parents) - 1:
-                    # add separator except after last entry
+                    # Add separator except after last entry
                     child_str += ', '
 
             child_str += '\n\n'
@@ -274,8 +264,8 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
             else:
                 # No tooltip, normal edge
                 ret_str += '{base} -- {n}\n'.format(base=base_name,
-                                                n=show_list[0].name,
-                                                )
+                                                    n=show_list[0].name,
+                                                    )
             for i, p in enumerate(show_list):
                 # Create the connections between parents
                 try:
@@ -283,19 +273,20 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                         a=show_list[i].name,
                         link=show_list[i].get_graphviz_link(),
                         b=show_list[i+1].name
-                        )
+                    )
                 except:
                     ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
                         a=show_list[i].name,
                         link=show_list[i].get_graphviz_link(),
                         b=cls_inst.name
-                        )
+                    )
         else:
             # No parents
             ret_str = '{base} -- {cur}'.format(base=base_name,
                                                cur=cls_inst.name
                                                )
     return base_name, base_link, ret_str
+
 
 def get_children_rows(cls_inst, count=0, rows=None):
     # Recursively find all children of cls_inst.
@@ -307,10 +298,10 @@ def get_children_rows(cls_inst, count=0, rows=None):
         return rows
     if cls_inst.children:
         if count in rows:
-            # add a list of [parent,[children]]
+            # Add a list to a row
             rows[count].append([cls_inst, cls_inst.children])
         else:
-            # create new row
+            # Create new row
             rows[count] = [[cls_inst, cls_inst.children]]
         count += 1
     for child in cls_inst.children:
@@ -322,7 +313,7 @@ def format_graphviz_children(cls_inst):
 
     def _node_opts(cls, last_row):
         label = cls.hyphenated()
-        if classes.is_double(cls):
+        if cls.parent.outfile != cls.outfile:
             label = cls.long_name
         tt = cls.name
         if last_row and cls.children:
@@ -339,7 +330,7 @@ def format_graphviz_children(cls_inst):
         ret_str = ''
         for child in children:
             node_name = child.name
-            if classes.is_double(child):
+            if child.parent.outfile != child.outfile:
                 node_name = child.long_name
             ret_str += '"{}" {options}'.format(node_name,
                                                options=_node_opts(child, last_row))
