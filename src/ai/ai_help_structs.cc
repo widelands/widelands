@@ -31,7 +31,7 @@
 
 namespace AI {
 
-constexpr int kNormalMutation = 500; // Almost no mutation
+constexpr int kNormalMutation = 500;  // Almost no mutation
 constexpr int kTrainingMutation = 200;
 
 constexpr int kMilitaryNumbersPos = 0;
@@ -795,18 +795,17 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 
 			const MutatingIntensity mutating_intensity =
-				do_mutate(preferred_numbers.count(i) > 0, mutation_intensity);
+			   do_mutate(preferred_numbers.count(i) > 0, mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = get_military_number_at(i);
 				const int16_t new_value = shift_weight_value(
-					get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
+				   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 				set_military_number_at(i, new_value);
 				++mutation_stat[kMilitaryNumbersPos];
-				verb_log_dbg(
-					"      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					new_value,
-					(mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+				verb_log_dbg("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+				             new_value,
+				             (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 			}
 		}
 	}
@@ -821,7 +820,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (auto& item : neuron_pool) {
 
 			const MutatingIntensity mutating_intensity =
-				do_mutate(preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
+			   do_mutate(preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = item.get_weight();
@@ -831,15 +830,14 @@ void ManagementData::mutate(const uint8_t pn) {
 					persistent_data->neuron_functs[item.get_id()] = item.get_type();
 				} else {
 					int16_t new_value = shift_weight_value(
-						item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
+					   item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
 					item.set_weight(new_value);
 					persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 				}
 				++mutation_stat[kNeuronsPos];
-				verb_log_dbg(
-					"      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
-					old_value, item.get_weight(), item.get_type(),
-					(mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+				verb_log_dbg("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n",
+				             item.get_id(), old_value, item.get_weight(), item.get_type(),
+				             (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 
 				item.recalculate();
 			}
@@ -879,12 +877,11 @@ void ManagementData::mutate(const uint8_t pn) {
 				++mutation_stat[kFNeuronsPos];
 				persistent_data->f_neurons[item.get_id()] = item.get_int();
 				verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
-								item.get_id(), item.get_int(), changed_bits,
-								(preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+				             item.get_id(), item.get_int(), changed_bits,
+				             (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
 			}
 		}
 	}
-
 
 	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn,
 	             mutation_stat[kMilitaryNumbersPos], mutation_stat[kNeuronsPos],
