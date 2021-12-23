@@ -824,7 +824,7 @@ void ManagementData::mutate(const uint8_t pn) {
 					const int16_t new_value = shift_weight_value(
 					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
 					set_military_number_at(i, new_value);
-					mutation_stat[kMilitaryNumbersPos] += 1;
+					++mutation_stat[kMilitaryNumbersPos];
 					verb_log_dbg(
 					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
 					   new_value,
@@ -857,7 +857,7 @@ void ManagementData::mutate(const uint8_t pn) {
 						item.set_weight(new_value);
 						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
 					}
-					mutation_stat[kNeuronsPos] += 1;
+					++mutation_stat[kNeuronsPos];
 					verb_log_dbg(
 					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
 					   old_value, item.get_weight(), item.get_type(),
@@ -898,7 +898,7 @@ void ManagementData::mutate(const uint8_t pn) {
 				}
 
 				if (changed_bits) {  // -> the f-neuron was changed
-					mutation_stat[kFNeuronsPos] += 1;
+					++mutation_stat[kFNeuronsPos];
 					persistent_data->f_neurons[item.get_id()] = item.get_int();
 					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
 					             item.get_id(), item.get_int(), changed_bits,
