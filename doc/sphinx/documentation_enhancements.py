@@ -69,7 +69,7 @@ class LuaClasses:
     def apply_inheritances(self):
         """Modify some LuaClass attributes.
 
-        - Parent is just a name yet, we apply the LuaClass instance instead
+        - Parent is just a string yet, apply the LuaClass instance instead
         - Add all children instances to the parent class
         """
         def _get_parent_instance(cls_name):
@@ -85,11 +85,11 @@ class LuaClasses:
                     'Error: Two parent classes with name:', cls_name)
             return c_list[0]
 
-        for c in self.class_list:
-            if c.parent:
-                parent = _get_parent_instance(c.parent)
-                c.parent = parent
-                c.parent.children.append(c)
+        for cls_inst in self.class_list:
+            if cls_inst.parent:
+                parent = _get_parent_instance(cls_inst.parent)
+                cls_inst.parent = parent
+                cls_inst.parent.children.append(cls_inst)
 
     def get_parent_tree(self, cls_inst, tree=None):
         """Recursively find all parents of cls_inst.
@@ -271,14 +271,14 @@ def format_graphviz_parents(cls_inst):
         base_link = base.get_graphviz_link()
         base_name = base.name
         if parents:
-            # Split parents into two lists depending on MAX_PARENTS
+            # Split parents into two lists
             tt_list = parents[:-MAX_PARENTS]
             show_list = parents[-MAX_PARENTS:]
             if tt_list:
                 # Show big edge with tooltip.
-                ret_str += '{base} -- {n} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
+                ret_str += '{base} -- {cls} [style=tapered, arrowhead=none, arrowtail=none dir=both,\
 penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
-                                                n=show_list[0].name,
+                                                cls=show_list[0].name,
                                                 tooltip=_make_tooltip(tt_list)
                                                 )
             else:
@@ -288,23 +288,28 @@ penwidth=15, edgetooltip="{tooltip}"]\n'.format(base=base_name,
                                                     )
             for i, p in enumerate(show_list):
                 # Create the connections between parents
+                # Add node options
+                ret_str += '    {name} [{link}]\n'.format(
+                    name=p.name,
+                    link=p.get_graphviz_link(),
+                )
+                # Create connections
                 try:
-                    ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
-                        a=show_list[i].name,
-                        link=show_list[i].get_graphviz_link(),
-                        b=show_list[i+1].name
+                    ret_str += '    {a} -- {b}\n'.format(
+                        a=p.name,
+                        b=show_list[i+1].name,
                     )
                 except IndexError:
-                    ret_str += '    {{{a}[{link}]}} -- {b}\n'.format(
-                        a=show_list[i].name,
-                        link=show_list[i].get_graphviz_link(),
-                        b=cls_inst.name
+                    ret_str += '    {a} -- {b}\n'.format(
+                        a=p.name,
+                        b=cls_inst.name,
                     )
         else:
             # No intermediate parents
-            ret_str = '{base} -- {cur}'.format(base=base_name,
-                                               cur=cls_inst.name
-                                               )
+            ret_str = '{base} -- {cur}'.format(
+                base=base_name,
+                cur=cls_inst.name
+            )
     return base_name, base_link, ret_str
 
 
@@ -330,16 +335,22 @@ def format_graphviz_children(cls_inst):
     def _create_row(parent, children, last_row):
         ret_str = ''
         for child in children:
+            ret_str += '\n    '
             if classes.have_same_source(child, child.parent):
                 node_name = child.name
             else:
+                # Using long_name to distuinguish between double
+                # defined classnames
                 node_name = child.long_name
-            ret_str += '"{}" {options}'.format(
-                node_name,
-                options=_node_opts(child, last_row))
-            # Add spaces to make sphinx happy
-            ret_str += '\n    '
-            ret_str += '"{}" -- "{}"\n    '.format(parent.name, node_name)
+
+            ret_str += '"{name}" {options}\n'.format(
+                name=node_name,
+                options=_node_opts(child, last_row),
+            )
+            ret_str += '    "{c1}" -- "{c2}"\n'.format(
+                c1=parent.name,
+                c2=node_name,
+            )
         return ret_str
 
     ret_str = ''
