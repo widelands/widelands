@@ -1302,12 +1302,12 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	}
 
 	//Collecting expiration data for special spots, and medium and big buildings spots. Positions are below:
-	Time oldest_info [3] = {Time(), Time(), Time()};
+	Time oldest_expiration_per_category [3] = {Time(), Time(), Time()};
 	const uint16_t kSpecialFieldPos = 0;
-	const uint16_t kMediumlFieldPos = 0;
-	const uint16_t kBigFieldPos = 0;
+	const uint16_t kMediumlFieldPos = 1;
+	const uint16_t kBigFieldPos = 2;
 	// how many fields are not valid and need to be rid of (removed from Buildable Fields)
-	uint32_t invalidated_count = 0;
+	uint32_t invalidated_bf_count = 0;
 
 	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
 		const uint16_t build_caps = player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
@@ -1321,73 +1321,76 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 		// if marked as invalid, continuing with next one
 		if (buildable_fields[j]->invalidated) {
-			invalidated_count += 1;
+			invalidated_bf_count += 1;
 			continue;
 		}
 
 		// 20000 is starting value for new bf, so ignoring these
-		if (buildable_fields[j]->field_info_expiration > Time(20000)) {continue;}
+		if (buildable_fields[j]->field_info_expiration == Time(20000)) {continue;}
 		
 		if (build_caps == 2) {
-			oldest_info[build_caps] = std::min<Time>(oldest_info[kMediumlFieldPos], buildable_fields[j]->field_info_expiration);
+			oldest_expiration_per_category[kMediumlFieldPos] = std::min<Time>(oldest_expiration_per_category[kMediumlFieldPos], buildable_fields[j]->field_info_expiration);
 		}
-		if (build_caps <= 3) {
-			oldest_info[build_caps] = std::min<Time>(oldest_info[kBigFieldPos], buildable_fields[j]->field_info_expiration);
+		if (build_caps == 3) {
+			oldest_expiration_per_category[kBigFieldPos] = std::min<Time>(oldest_expiration_per_category[kBigFieldPos], buildable_fields[j]->field_info_expiration);
 		}
 
 		// here we cover (going to prefer) fields of special interests
 		const bool is_special = buildable_fields[j]->is_portspace  == ExtendedBool::kTrue || buildable_fields[j]->unowned_land_nearby || buildable_fields[j]->enemy_nearby;
 		if (is_special) {
-			oldest_info[kSpecialFieldPos] = std::min<Time>(oldest_info[kSpecialFieldPos], buildable_fields[j]->field_info_expiration);
+			oldest_expiration_per_category[kSpecialFieldPos] = std::min<Time>(oldest_expiration_per_category[kSpecialFieldPos], buildable_fields[j]->field_info_expiration);
 		}
 
 	}
 
-	printf("Now %s, oldest expirations: S:%s  M:%s  B:%s, we have %lu fields\n", gametimestring(gametime.get(), true).c_str(), 
-	gametimestring(oldest_info[0].get(), true).c_str(),
-	gametimestring(oldest_info[1].get(), true).c_str(),
-	gametimestring(oldest_info[2].get(), true).c_str(),
-	buildable_fields.size());
+	printf("Now %s, oldest expirations: S:%s  M:%s  B:%s\n", gametimestring(gametime.get(), true).c_str(), 
+	gametimestring(oldest_expiration_per_category[0].get(), true).c_str(),
+	gametimestring(oldest_expiration_per_category[1].get(), true).c_str(),
+	gametimestring(oldest_expiration_per_category[2].get(), true).c_str());
 
-	Time refresh_limit [3] = {Time(), Time(), Time()};
+	Time upper_exp_limit_per_category [3] = {Time(), Time(), Time()};
 	for (int i = 0; i <= 2; i++) {
 		// Adding 30 seconds to the expiration time of oldest field
-		refresh_limit[i] = std::min<Time>(gametime, (oldest_info[i] == Time()) ? oldest_info[i] : oldest_info[i] + Duration(30000));
+		upper_exp_limit_per_category[i] = std::min<Time>(gametime, (oldest_expiration_per_category[i] == Time()) ? oldest_expiration_per_category[i] : oldest_expiration_per_category[i] + Duration(30000));
 	}
 
-	uint16_t fields_to_check_count[3]= {6,6,6}; // we do not care about first two members
+	uint16_t fields_to_check_count[3]= {6,6,6};
 	uint16_t updated_fields_count = 0;
 
-	// now updating info for medium and gig sized fields, up to the count defined in fields_to_check_count
+	// now running update_b_f for special files up to their desired count
 	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+		if (buildable_fields[j]->field_info_expiration > gametime) {
+			continue;
+		}
+
 		uint16_t build_caps =
 		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
 
-		uint16_t applicable_reason = 100; // to which of 3 preferred categories this belongs
-		if (build_caps == 2) {
-			applicable_reason = kMediumlFieldPos;
-		} else if (build_caps == 3) {
-			applicable_reason = kBigFieldPos;
-		} else if (buildable_fields[j]->is_portspace   == ExtendedBool::kTrue || buildable_fields[j]->unowned_land_nearby ||
-		           buildable_fields[j]->enemy_nearby) {
-			applicable_reason = kSpecialFieldPos;
+		uint16_t reason_to_preffer = 100; // to which of 3 preferred categories this belongs
+		if (build_caps == 2 && fields_to_check_count[kMediumlFieldPos]) {
+			reason_to_preffer = kMediumlFieldPos;
+		} else if (build_caps == 3 && fields_to_check_count[kBigFieldPos]) {
+			reason_to_preffer = kBigFieldPos;
+		} else if (fields_to_check_count[kSpecialFieldPos] && (buildable_fields[j]->is_portspace   == ExtendedBool::kTrue || buildable_fields[j]->unowned_land_nearby ||
+		           buildable_fields[j]->enemy_nearby)) {
+			reason_to_preffer = kSpecialFieldPos;
 		}
 
-		if (applicable_reason < 100 &&
-		    buildable_fields[j]->field_info_expiration < refresh_limit[applicable_reason]) {
+		if (reason_to_preffer < 100 &&
+		    buildable_fields[j]->field_info_expiration < upper_exp_limit_per_category[reason_to_preffer]) {
 				update_buildable_field(*buildable_fields[j]);
 				buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
-				fields_to_check_count[applicable_reason]--;
+				fields_to_check_count[reason_to_preffer]--;
 				updated_fields_count++;
 		}
 	}
 	assert(updated_fields_count <= 18); // sum of fields_to_check_count
 
 	// get rid of invalid files / and rotate the deque
-	while (invalidated_count) {
+	while (invalidated_bf_count) {
 		BuildableField& bf = *buildable_fields.front();
 		if (bf.invalidated) {
-			invalidated_count--;
+			invalidated_bf_count--;
 			if (bf.coords.field->get_owned_by() != player_number()) { // field is not ours, getting rid completely
 				delete &bf;
 				buildable_fields.pop_front();
@@ -1420,9 +1423,9 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	assert(updated_fields_count <= 30);
 
-	printf(" ... %d fields updated of %lu. Fields unupdated: Sped: %d, Mid: %d, Big: %d\n",
+	printf(" ... %d fields updated of %lu. Fields unupdated: Spec: %d, Mid: %d, Big: %d\n",
 	       updated_fields_count, buildable_fields.size(), fields_to_check_count[kSpecialFieldPos],
-	       fields_to_check_count[kMediumFieldPos], fields_to_check_count[kBigFieldPos]);
+	       fields_to_check_count[kMediumlFieldPos], fields_to_check_count[kBigFieldPos]);
 	return;
 
 	// // Every call we try to check first 35 buildable fields
