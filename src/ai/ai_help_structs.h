@@ -122,7 +122,6 @@ const std::vector<std::vector<int8_t>> neuron_curves = {
 
 // TODO(tiborb): this should be replaced by command line switch
 constexpr int kFNeuronBitSize = 32;
-constexpr int kMutationRatePosition = 42;
 // This is expiration time for distance from a flag to nearest warehouse
 constexpr Duration kFlagDistanceExpirationPeriod(120 * 1000);
 // If the distance of flag-warehouse was not updated for this time, we presume that the flag

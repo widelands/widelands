@@ -629,8 +629,6 @@ void DefaultAI::late_initialization() {
 		}
 
 		management_data.test_consistency(true);
-		assert(management_data.get_military_number_at(42) ==
-		       management_data.get_military_number_at(kMutationRatePosition));
 
 	} else {
 		// Doing some consistency checks
@@ -2215,9 +2213,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			verb_log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
-			for (int32_t part : score_parts) {
-				verb_log_dbg_time(gametime, "%d, ", part);
-			}
 		}
 	}
 
