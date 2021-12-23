@@ -753,7 +753,7 @@ void ManagementData::mutate(const uint8_t pn) {
 	// Probability that a value will be mutated = 1 / probability
 	// (lesser number means higher probability and higher mutation)
 	int16_t probability =
-	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
+	   (shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101) * 10;
 	// Some of mutation will be agressive - over full range of values, the number below
 	// say how many (aproximately) they will be
 	uint16_t preferred_numbers_count = 0;
@@ -773,7 +773,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		probability = kNoAiTrainingMutation;
 	}
 
-	set_military_number_at(kMutationRatePosition, probability - 101);
+	set_military_number_at(kMutationRatePosition, probability / 10 - 101);
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
 	if (ai_type == AiType::kWeak) {
 		probability /= 15;
