@@ -1297,148 +1297,247 @@ void DefaultAI::late_initialization() {
  */
 void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
-	//Looking for small/medium/big buildable fields with most expired info
-	Time oldest_info [3] = {gametime, gametime, gametime};
+	if (buildable_fields.empty()) {
+		return;
+	}
+
+	//Collecting expiration data for special spots, and medium and big buildings spots. Positions are below:
+	Time oldest_info [3] = {Time(), Time(), Time()};
+	const uint16_t kSpecialFieldPos = 0;
+	const uint16_t kMediumlFieldPos = 0;
+	const uint16_t kBigFieldPos = 0;
+	// how many fields are not valid and need to be rid of (removed from Buildable Fields)
 	uint32_t invalidated_count = 0;
 
-	for (uint32_t j = buildable_fields.size(); j < buildable_fields.size(); j++) {
+	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+		const uint16_t build_caps = player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
+		const Widelands::PlayerNumber field_owner = buildable_fields[j]->coords.field->get_owned_by();
+
+		if (build_caps == 0 || field_owner != player_number()) {
+			buildable_fields[j]->invalidated = true;
+		} else{
+			buildable_fields[j]->invalidated = false; // should not happen but stil
+		}
+
+		// if marked as invalid, continuing with next one
 		if (buildable_fields[j]->invalidated) {
 			invalidated_count += 1;
 			continue;
 		}
 
+		// 20000 is starting value for new bf, so ignoring these
+		if (buildable_fields[j]->field_info_expiration > Time(20000)) {continue;}
+		
+		if (build_caps == 2) {
+			oldest_info[build_caps] = std::min<Time>(oldest_info[kMediumlFieldPos], buildable_fields[j]->field_info_expiration);
+		}
+		if (build_caps <= 3) {
+			oldest_info[build_caps] = std::min<Time>(oldest_info[kBigFieldPos], buildable_fields[j]->field_info_expiration);
+		}
 
-		uint16_t build_caps = player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
-		assert (build_caps >= 0 && build_caps <= 3);
+		// here we cover (going to prefer) fields of special interests
+		const bool is_special = buildable_fields[j]->is_portspace  == ExtendedBool::kTrue || buildable_fields[j]->unowned_land_nearby || buildable_fields[j]->enemy_nearby;
+		if (is_special) {
+			oldest_info[kSpecialFieldPos] = std::min<Time>(oldest_info[kSpecialFieldPos], buildable_fields[j]->field_info_expiration);
+		}
 
-		oldest_info[build_caps] = std::min<Time>(oldest_info[build_caps], buildable_fields[j]->field_info_expiration);
 	}
 
-	printf("Now %s, oldest expirations: %s  %s  %ss\n", gametimestring(gametime.get(), true).c_str(), 
+	printf("Now %s, oldest expirations: S:%s  M:%s  B:%s, we have %lu fields\n", gametimestring(gametime.get(), true).c_str(), 
 	gametimestring(oldest_info[0].get(), true).c_str(),
 	gametimestring(oldest_info[1].get(), true).c_str(),
-	gametimestring(oldest_info[2].get(), true).c_str());
+	gametimestring(oldest_info[2].get(), true).c_str(),
+	buildable_fields.size());
 
+	Time refresh_limit [3] = {Time(), Time(), Time()};
+	for (int i = 0; i <= 2; i++) {
+		// Adding 30 seconds to the expiration time of oldest field
+		refresh_limit[i] = std::min<Time>(gametime, (oldest_info[i] == Time()) ? oldest_info[i] : oldest_info[i] + Duration(30000));
+	}
 
+	uint16_t fields_to_check_count[3]= {6,6,6}; // we do not care about first two members
+	uint16_t updated_fields_count = 0;
 
+	// now updating info for medium and gig sized fields, up to the count defined in fields_to_check_count
+	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+		uint16_t build_caps =
+		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
 
+		uint16_t applicable_reason = 100; // to which of 3 preferred categories this belongs
+		if (build_caps == 2) {
+			applicable_reason = kMediumlFieldPos;
+		} else if (build_caps == 3) {
+			applicable_reason = kBigFieldPos;
+		} else if (buildable_fields[j]->is_portspace   == ExtendedBool::kTrue || buildable_fields[j]->unowned_land_nearby ||
+		           buildable_fields[j]->enemy_nearby) {
+			applicable_reason = kSpecialFieldPos;
+		}
 
+		if (applicable_reason < 100 &&
+		    buildable_fields[j]->field_info_expiration < refresh_limit[applicable_reason]) {
+				update_buildable_field(*buildable_fields[j]);
+				buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
+				fields_to_check_count[applicable_reason]--;
+				updated_fields_count++;
+		}
+	}
+	assert(updated_fields_count <= 18); // sum of fields_to_check_count
 
-
-
-	// Every call we try to check first 35 buildable fields
-	constexpr uint16_t kMinimalFieldsCheck = 35;
-
-	uint16_t i = 0;
-
-	// To be sure we have some info about enemies we might see
-	update_player_stat(gametime);
-
-	// Generally we check fields as they are in the container, but we need also given
-	// number of "special" fields. So if given number of fields are not found within
-	// "regular" check, we must go on and look also on other fields...
-	uint8_t non_small_needed = 4;
-	uint8_t near_border_needed = 10;
-
-	// we test 35 fields that were update more than 1 seconds ago
-	while (!buildable_fields.empty() &&
-	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
+	// get rid of invalid files / and rotate the deque
+	while (invalidated_count) {
 		BuildableField& bf = *buildable_fields.front();
-
-		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration +
-		     Duration(1000)) <= gametime) {
-
-			//  check whether we lost ownership of the node
-			if (bf.coords.field->get_owned_by() != player_number()) {
+		if (bf.invalidated) {
+			invalidated_count--;
+			if (bf.coords.field->get_owned_by() != player_number()) { // field is not ours, getting rid completely
 				delete &bf;
 				buildable_fields.pop_front();
 				continue;
-			}
-
-			//  check whether we can still construct regular buildings on the node
-			if ((player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK) == 0) {
+			} else {  // field is ours but unusable, obviously with builcaps size 0
 				unusable_fields.push_back(bf.coords);
 				delete &bf;
 				buildable_fields.pop_front();
 				continue;
 			}
-
-			update_buildable_field(bf);
-			if (non_small_needed > 0) {
-				int32_t const maxsize =
-				   player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK;
-				if (maxsize > 1) {
-					--non_small_needed;
-				}
-			}
-			if (near_border_needed > 0) {
-				if (bf.near_border) {
-					--near_border_needed;
-				}
-			}
+			
+		} else {  // just rotating
+			buildable_fields.push_back(&bf);
+			buildable_fields.pop_front();
 		}
-		bf.field_info_expiration = gametime + kFieldInfoExpiration;
-		buildable_fields.push_back(&bf);
-		buildable_fields.pop_front();
-
-		++i;
 	}
 
-	// If needed we iterate once more and look for 'special' fields
-	// starting in the middle of buildable_fields to skip fields tested lately
-	// But not doing this if the count of buildable fields is too low
-	// (no need to bother)
-	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
-		return;
-	}
-
-	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
-		// If we dont need to iterate (anymore) ...
-		if (non_small_needed + near_border_needed == 0) {
+	// now update all buildable fields (expired ones of course) up to the limit
+	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+		if (updated_fields_count >= 30) {
 			break;
 		}
-
-		// Skip if the field is not ours or was updated lately
-		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
-			continue;
+		assert(!buildable_fields[j]->invalidated);  // there should be no more invalid fields
+		if (buildable_fields[j]->field_info_expiration < gametime) {
+			update_buildable_field(*buildable_fields[j]);
+			buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
+			updated_fields_count++;
 		}
-		// We are not interested in fields where info has expired less than 20s ago
-		if (buildable_fields[j]->field_info_expiration + Duration(20 * 1000) > gametime) {
-			continue;
-		}
-
-		// Continue if field is blocked at the moment
-		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
-			continue;
-		}
-
-		// Few constants to keep the code cleaner
-		const int32_t field_maxsize =
-		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
-		const bool field_near_border = buildable_fields[j]->near_border;
-
-		// Let decide if we need to update and for what reason
-		const bool update_due_size = non_small_needed && field_maxsize > 1;
-		const bool update_due_border = near_border_needed && field_near_border;
-
-		if (!(update_due_size || update_due_border)) {
-			continue;
-		}
-
-		// decreasing the counters
-		if (update_due_size) {
-			assert(non_small_needed > 0);
-			--non_small_needed;
-		}
-		if (update_due_border) {
-			assert(near_border_needed > 0);
-			--near_border_needed;
-		}
-
-		// and finnaly update the buildable field
-		update_buildable_field(*buildable_fields[j]);
-		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
+
+	assert(updated_fields_count <= 30);
+
+	printf(" ... %d fields updated of %lu. Fields unupdated: Sped: %d, Mid: %d, Big: %d\n",
+	       updated_fields_count, buildable_fields.size(), fields_to_check_count[kSpecialFieldPos],
+	       fields_to_check_count[kMediumFieldPos], fields_to_check_count[kBigFieldPos]);
+	return;
+
+	// // Every call we try to check first 35 buildable fields
+	// constexpr uint16_t kMinimalFieldsCheck = 35;
+
+	// uint16_t i = 0;
+
+	// // To be sure we have some info about enemies we might see
+	// update_player_stat(gametime);
+
+	// // Generally we check fields as they are in the container, but we need also given
+	// // number of "special" fields. So if given number of fields are not found within
+	// // "regular" check, we must go on and look also on other fields...
+	// uint8_t non_small_needed = 4;
+	// uint8_t near_border_needed = 10;
+
+	// // we test 35 fields that were update more than 1 seconds ago
+	// while (!buildable_fields.empty() &&
+	//        i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
+	// 	BuildableField& bf = *buildable_fields.front();
+
+	// 	if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration +
+	// 	     Duration(1000)) <= gametime) {
+
+	// 		//  check whether we lost ownership of the node
+	// 		if (bf.coords.field->get_owned_by() != player_number()) {
+	// 			delete &bf;
+	// 			buildable_fields.pop_front();
+	// 			continue;
+	// 		}
+
+	// 		//  check whether we can still construct regular buildings on the node
+	// 		if ((player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK) == 0) {
+	// 			unusable_fields.push_back(bf.coords);
+	// 			delete &bf;
+	// 			buildable_fields.pop_front();
+	// 			continue;
+	// 		}
+
+	// 		update_buildable_field(bf);
+	// 		if (non_small_needed > 0) {
+	// 			int32_t const maxsize =
+	// 			   player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK;
+	// 			if (maxsize > 1) {
+	// 				--non_small_needed;
+	// 			}
+	// 		}
+	// 		if (near_border_needed > 0) {
+	// 			if (bf.near_border) {
+	// 				--near_border_needed;
+	// 			}
+	// 		}
+	// 	}
+	// 	bf.field_info_expiration = gametime + kFieldInfoExpiration;
+	// 	buildable_fields.push_back(&bf);
+	// 	buildable_fields.pop_front();
+
+	// 	++i;
+	// }
+
+	// // If needed we iterate once more and look for 'special' fields
+	// // starting in the middle of buildable_fields to skip fields tested lately
+	// // But not doing this if the count of buildable fields is too low
+	// // (no need to bother)
+	// if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
+	// 	return;
+	// }
+
+	// for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
+	// 	// If we dont need to iterate (anymore) ...
+	// 	if (non_small_needed + near_border_needed == 0) {
+	// 		break;
+	// 	}
+
+	// 	// Skip if the field is not ours or was updated lately
+	// 	if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
+	// 		continue;
+	// 	}
+	// 	// We are not interested in fields where info has expired less than 20s ago
+	// 	if (buildable_fields[j]->field_info_expiration + Duration(20 * 1000) > gametime) {
+	// 		continue;
+	// 	}
+
+	// 	// Continue if field is blocked at the moment
+	// 	if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
+	// 		continue;
+	// 	}
+
+	// 	// Few constants to keep the code cleaner
+	// 	const int32_t field_maxsize =
+	// 	   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
+	// 	const bool field_near_border = buildable_fields[j]->near_border;
+
+	// 	// Let decide if we need to update and for what reason
+	// 	const bool update_due_size = non_small_needed && field_maxsize > 1;
+	// 	const bool update_due_border = near_border_needed && field_near_border;
+
+	// 	if (!(update_due_size || update_due_border)) {
+	// 		continue;
+	// 	}
+
+	// 	// decreasing the counters
+	// 	if (update_due_size) {
+	// 		assert(non_small_needed > 0);
+	// 		--non_small_needed;
+	// 	}
+	// 	if (update_due_border) {
+	// 		assert(near_border_needed > 0);
+	// 		--near_border_needed;
+	// 	}
+
+	// 	// and finnaly update the buildable field
+	// 	update_buildable_field(*buildable_fields[j]);
+	// 	buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
+	// }
 }
 
 /**
