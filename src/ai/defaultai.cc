@@ -52,7 +52,7 @@
 #include "logic/playercommand.h"
 
 // following is in milliseconds (widelands counts time in ms)
-constexpr Duration kFieldInfoExpiration(12 * 1000);
+constexpr Duration kFieldInfoExpiration(14 * 1000);
 constexpr Duration kMineFieldInfoExpiration(20 * 1000);
 constexpr Duration kNewMineConstInterval(19000);
 constexpr Duration kBusyMineUpdateInterval(2000);
@@ -1298,10 +1298,13 @@ void DefaultAI::late_initialization() {
  * Checks PART of available buildable fields.
  *
  * It has 3 stages:
- * 1. Checking for invalid fields and updating fields to the limit as defined special_fields_to_preffer (no rotating)
+ * 1. Checking for invalid fields (not more buildable, e.g. tree grew there and so on) and updating
+ *  specific types of fields to the limit as quantified in special_fields_to_preffer array (no
+ *  rotating of buildable_fields here)
  * 2. Removing invalid fields and partial rotating of the deque as a side effect
- * 3. Updating BFs up to the limit of max_fields_to_check (no rotating here)
- * As a rule we update fields with expired info
+ * 3. Updating further BFs up to the overall limit of max_fields_to_check (no rotating)
+ * As a rule we update fields with expired info only. 
+ * The total count of BF to be updated is hardlimited to max_fields_to_check (30 now)
  */
 void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
@@ -1367,14 +1370,15 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		}
 	}
 
-	printf(" first round: %d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
-	       "files found: %d\n",
+	printf(" first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
+	       "fields found: %3d\n",
 	       updated_fields_count, special_fields_to_preffer[kSpecialFieldPos],
 	       special_fields_to_preffer[kMediumlFieldPos], special_fields_to_preffer[kBigFieldPos],
 	       invalidated_bf_count);
 
 	// Stage #2: get rid of invalid files / and rotate the deque
-	while (invalidated_bf_count) {
+	uint16_t min_fields_rotated = buildable_fields.size() / 15; // rotating at least this number of items
+	while (invalidated_bf_count || min_fields_rotated--) {
 		BuildableField& bf = *buildable_fields.front();
 		if (bf.invalidated) {
 			invalidated_bf_count--;
@@ -1411,7 +1415,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	assert(updated_fields_count <= max_fields_to_check);
 
-	printf(" ... %d fields updated of %lu.\n", updated_fields_count, buildable_fields.size());
+	printf(" ... %2d fields updated of %4lu.\n", updated_fields_count, buildable_fields.size());
 }
 
 /**
