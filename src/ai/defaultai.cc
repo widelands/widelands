@@ -1313,11 +1313,12 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	}
 
 	// This defines count of preffered types of fields to update info stright away
-	uint16_t special_fields_to_preffer[3] = {6, 6, 6};
+	uint16_t special_fields_to_preffer[3] = {6, 6, 5};
 	// Positions and types are defined here
 	const uint16_t kSpecialFieldPos = 0;
 	const uint16_t kMediumlFieldPos = 1;
 	const uint16_t kBigFieldPos = 2;
+	const uint16_t kNoReasonPos = 3;
 
 	// The overall limit should be of course higher than the sum of above special fields
 	const u_int16_t max_fields_to_check = 30;
@@ -1331,7 +1332,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		const uint16_t build_caps =
 		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
 		const Widelands::PlayerNumber field_owner = buildable_fields[j]->coords.field->get_owned_by();
-		uint16_t update_reason = 100;
+		uint16_t update_reason = kNoReasonPos;
 
 		if (build_caps == 0 || field_owner != player_number()) {
 			buildable_fields[j]->invalidated = true;
@@ -1362,7 +1363,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 				update_reason = kSpecialFieldPos;
 			}
 		}
-		if (update_reason < 100) {
+		if (update_reason < kNoReasonPos) {
 			update_buildable_field(*buildable_fields[j]);
 			buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 			special_fields_to_preffer[update_reason]--;
