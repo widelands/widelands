@@ -2,12 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-terrain_affinity = {
-   preferred_temperature = 100,
-   preferred_humidity = 200,
-   preferred_fertility = 800,
-   pickiness = 80,
-}
+include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "mushroom_dark_wasteland_old",
@@ -15,7 +10,7 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Dark Mushroom Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Dark Mushroom Tree",
-   icon = dirname .. "menu.png",
+   icon = dirname .. "../menu.png",
    size = "small",
 
    terrain_affinity = terrain_affinity,

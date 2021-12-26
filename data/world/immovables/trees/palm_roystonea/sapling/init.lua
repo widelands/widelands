@@ -2,12 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-terrain_affinity = {
-   preferred_temperature = 160,
-   preferred_humidity = 600,
-   preferred_fertility = 600,
-   pickiness = 90,
-}
+include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_sapling",

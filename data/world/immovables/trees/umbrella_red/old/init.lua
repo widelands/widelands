@@ -2,12 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-terrain_affinity = {
-   preferred_temperature = 90,
-   preferred_humidity = 150,
-   preferred_fertility = 825,
-   pickiness = 80,
-}
+include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "umbrella_red_wasteland_old",
@@ -15,7 +10,7 @@ wl.Descriptions():new_immovable_type{
    descname = _ "Red Umbrella Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Red Umbrella Tree",
-   icon = dirname .. "menu.png",
+   icon = dirname .. "../menu.png",
    size = "small",
 
    terrain_affinity = terrain_affinity,

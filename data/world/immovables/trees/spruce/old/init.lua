@@ -2,18 +2,13 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-terrain_affinity = {
-   preferred_temperature = 60,
-   preferred_humidity = 700,
-   preferred_fertility = 500,
-   pickiness = 60,
-}
+include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
    species = _ "Spruce",
-   icon = dirname .. "menu.png",
+   icon = dirname .. "../menu.png",
    size = "small",
 
    terrain_affinity = terrain_affinity,
