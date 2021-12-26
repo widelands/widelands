@@ -385,7 +385,7 @@ def create_directive(cls_inst):
     node [shape=box, style=filled, fillcolor=white,
           fontsize=12, fontname="Helvetica"]
     edge [color=gray]
-    {cur_cls} [fillcolor=green, fontcolor=white, fontsize=13, shape=oval]
+    {cur_cls} [fillcolor="#118811", fontcolor=white, fontsize=13, shape=oval]
     {base_cls} [shape=house, {link}]
     {parents}
     {children}
