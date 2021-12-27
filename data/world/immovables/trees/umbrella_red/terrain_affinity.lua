@@ -4,4 +4,3 @@ terrain_affinity = {
    preferred_fertility = 825,
    pickiness = 80,
 }
-
