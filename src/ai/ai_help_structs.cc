@@ -801,7 +801,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 
 			const MutatingIntensity mutating_intensity =
-			   do_mutate(preferred_numbers.count(i) > 0, mutation_intensity);
+			   do_mutate(preferred_numbers.count(i), mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = get_military_number_at(i);
@@ -826,7 +826,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (auto& item : neuron_pool) {
 
 			const MutatingIntensity mutating_intensity =
-			   do_mutate(preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
+			   do_mutate(preferred_neurons.count(item.get_id()), mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = item.get_weight();
