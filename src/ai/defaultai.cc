@@ -1303,7 +1303,7 @@ void DefaultAI::late_initialization() {
  *  rotating of buildable_fields here)
  * 2. Removing invalid fields and partial rotating of the deque as a side effect
  * 3. Updating further BFs up to the overall limit of max_fields_to_check (no rotating)
- * As a rule we update fields with expired info only. 
+ * As a rule we update fields with expired info only.
  * The total count of BF to be updated is hardlimited to max_fields_to_check (30 now)
  */
 void DefaultAI::update_all_buildable_fields(const Time& gametime) {
@@ -1378,7 +1378,8 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	       invalidated_bf_count);
 
 	// Stage #2: get rid of invalid files / and rotate the deque
-	uint16_t min_fields_rotated = buildable_fields.size() / 15; // rotating at least this number of items
+	uint16_t min_fields_rotated =
+	   buildable_fields.size() / 15;  // rotating at least this number of items
 	while (invalidated_bf_count || min_fields_rotated--) {
 		BuildableField& bf = *buildable_fields.front();
 		if (bf.invalidated) {
