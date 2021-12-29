@@ -1371,11 +1371,13 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		}
 	}
 
-	verb_log_dbg_time(gametime, " first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
-	       "fields found: %3d\n",
-	       updated_fields_count, special_fields_to_preffer[kSpecialFieldPos],
-	       special_fields_to_preffer[kMediumlFieldPos], special_fields_to_preffer[kBigFieldPos],
-	       invalidated_bf_count);
+	verb_log_dbg_time(
+	   gametime,
+	   " first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
+	   "fields found: %3d\n",
+	   updated_fields_count, special_fields_to_preffer[kSpecialFieldPos],
+	   special_fields_to_preffer[kMediumlFieldPos], special_fields_to_preffer[kBigFieldPos],
+	   invalidated_bf_count);
 
 	// Stage #2: get rid of invalid files / and rotate the deque
 	uint16_t min_fields_rotated =
@@ -1417,7 +1419,8 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	assert(updated_fields_count <= max_fields_to_check);
 
-	verb_log_dbg_time(gametime, " ... %2d fields updated of %4lu.\n", updated_fields_count, buildable_fields.size());
+	verb_log_dbg_time(gametime, " ... %2d fields updated of %4lu.\n", updated_fields_count,
+	                  buildable_fields.size());
 }
 
 /**
