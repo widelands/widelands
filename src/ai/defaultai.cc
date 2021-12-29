@@ -70,9 +70,9 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true;
 // enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = false;
+constexpr bool kCollectPerfData = true;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -1478,9 +1478,11 @@ void DefaultAI::update_all_mineable_fields(const Time& gametime) {
 }
 
 /**
- * Checks up to 50 fields that weren't buildable the last time.
- *
- * milliseconds if the area the computer owns is big.
+ * Checks a part of unusable_fields. Outcome can be:
+ * - the field is not ours anymore - drop it
+ * - it is still ours, but still not buildable - do nothing (keep it)
+ * - is ours, and buildable, drop from unused fields and create buildable_field or
+ * mineable_field and insert to particular dequeue
  */
 void DefaultAI::update_all_not_buildable_fields() {
 	int32_t const pn = player_number();
@@ -1494,7 +1496,12 @@ void DefaultAI::update_all_not_buildable_fields() {
 		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 15, 200);
 	}
 
-	for (uint32_t i = 0; i < maxchecks; ++i) {
+	// for performance reasons we update only this count of fields
+	const uint32_t fields_update_limit = 5;
+	// just counter
+	uint32_t updated_fields = 0;
+
+	while (maxchecks--) {
 		//  check whether we lost ownership of the node
 		if (unusable_fields.front().field->get_owned_by() != pn) {
 			unusable_fields.pop_front();
@@ -1505,14 +1512,18 @@ void DefaultAI::update_all_not_buildable_fields() {
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_SIZEMASK) {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			update_buildable_field(*buildable_fields.back());
+			if (fields_update_limit > updated_fields++) {
+				update_buildable_field(*buildable_fields.back());
+			}
 			continue;
 		}
 
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_MINE) {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			update_mineable_field(*mineable_fields.back());
+			if (fields_update_limit > updated_fields++) {
+				update_mineable_field(*mineable_fields.back());
+			}
 			continue;
 		}
 
