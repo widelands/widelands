@@ -1371,7 +1371,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		}
 	}
 
-	printf(" first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
+	verb_log_dbg_time(gametime, " first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
 	       "fields found: %3d\n",
 	       updated_fields_count, special_fields_to_preffer[kSpecialFieldPos],
 	       special_fields_to_preffer[kMediumlFieldPos], special_fields_to_preffer[kBigFieldPos],
@@ -1417,7 +1417,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	assert(updated_fields_count <= max_fields_to_check);
 
-	printf(" ... %2d fields updated of %4lu.\n", updated_fields_count, buildable_fields.size());
+	verb_log_dbg_time(gametime, " ... %2d fields updated of %4lu.\n", updated_fields_count, buildable_fields.size());
 }
 
 /**
