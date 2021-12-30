@@ -51,7 +51,7 @@ namespace {
 std::string speed_string(int const speed) {
 	if (speed) {
 		/** TRANSLATORS: This is a game speed value */
-		return bformat(_("%1$u.%2$u×"), (speed / 1000), (speed / 100 % 10));
+		return format(_("%1$u.%2$u×"), (speed / 1000), (speed / 100 % 10));
 	}
 	return _("PAUSE");
 }
@@ -528,7 +528,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 				game_speed = speed_string(real);
 			}
 		} else {
-			game_speed = bformat
+			game_speed = format
 			   /** TRANSLATORS: actual_speed (desired_speed) */
 			   (_("%1$s (%2$s)"), speed_string(real), speed_string(desired));
 		}

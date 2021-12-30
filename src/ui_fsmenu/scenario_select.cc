@@ -85,9 +85,9 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit “OK”.");
 		const std::string subtitle2 =
 		   _("You can see a description of the currently selected tutorial on the right.");
-		subtitle_.set_text(bformat("%s\n%s", subtitle1, subtitle2));
+		subtitle_.set_text(format("%s\n%s", subtitle1, subtitle2));
 	} else {
-		subtitle_.set_text(bformat("%s — %s", campaign_->tribename, campaign_->descname));
+		subtitle_.set_text(format("%s — %s", campaign_->tribename, campaign_->descname));
 	}
 
 	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
@@ -277,7 +277,7 @@ void ScenarioSelect::fill_table() {
 
 		// Now add to table
 		UI::Table<uintptr_t>::EntryRecord& te = table_.add(i);
-		te.set_string(0, bformat("%d", (i + 1)));
+		te.set_string(0, format("%d", (i + 1)));
 		te.set_picture(
 		   1, g_image_cache->get("images/ui_basic/ls_wlmap.png"), scenario_data->descname);
 		te.set_disabled(!scenario_data->playable);

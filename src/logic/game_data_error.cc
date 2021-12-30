@@ -40,7 +40,7 @@ GameDataError::GameDataError(char const* const fmt, ...) {
 UnhandledVersionError::UnhandledVersionError(const char* packet_name,
                                              int32_t packet_version,
                                              int32_t current_packet_version) {
-	what_ = bformat(
+	what_ = format(
 	   "\n\nUnhandledVersionError: %s\n\nPacket Name: %s\nSaved Version: %i\nCurrent "
 	   "Version: %i",
 	   _("This game was saved using an older version of Widelands and cannot be loaded anymore, "

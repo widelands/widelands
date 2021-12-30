@@ -66,13 +66,15 @@ files name.
 /* RST
 .. function:: string.bformat
 
-   Not really a global function. But we add a method to string built in type in
-   Lua that has similar functionality to the built in string.format, but
-   instead uses our own ``bformat``. This allows for better control of the formatting
-   as well as reordering of arguments which is needed for proper localisation.
+   Not really a global function. But we add a method to ``string`` built-in type in
+   Lua that has similar functionality to the built-in ``string.format``, but
+   instead uses our own ``format`` function. This allows for better control of the
+   formatting as well as reordering of arguments which is needed for proper localisation.
 
-   :returns: :const:`nil`
+   :returns: The formatted string.
 */
+// The 'b' in bformat used to stand for "boost", which we no longer use, but
+// renaming the Lua function would break backwards compatibility.
 static int L_string_bformat(lua_State* L) {
 	try {
 		format_impl::ArgsVector fmt_args;
@@ -127,7 +129,7 @@ static int L_string_bformat(lua_State* L) {
 			}
 		}
 
-		lua_pushstring(L, bformat(luaL_checkstring(L, 1), fmt_args));
+		lua_pushstring(L, format(luaL_checkstring(L, 1), fmt_args));
 		return 1;
 	} catch (const std::exception& err) {
 		report_error(L, "Error in bformat: %s", err.what());
@@ -439,7 +441,7 @@ void luaopen_globals(lua_State* L) {
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
-	// Also add in string.bformat to use bformat instead, so that we get
+	// Also add in string.bformat to use format instead, so that we get
 	// proper localisation.
 	lua_getglobal(L, "string");               // S: string_lib
 	lua_pushstring(L, "bformat");             // S: string_lib "bformat"

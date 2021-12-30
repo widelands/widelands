@@ -279,7 +279,7 @@ jobs:
         } else {
           $env:bits = "32"
         }
-        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
+        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/mingw$env:bits/bin;C:/msys64/usr/bin;$env:Path"
         $env:CC = "C:/msys64/mingw$env:bits/bin/gcc.exe"
         $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build

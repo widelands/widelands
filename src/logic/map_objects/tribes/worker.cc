@@ -2061,7 +2061,7 @@ void Worker::return_update(Game& game, State& state) {
 	if (!start_task_movepath(game, target_flag.get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
-		const std::string message = bformat(
+		const std::string message = format(
 		   _("Your %s can’t find a way home and will likely die."), descr().descname().c_str());
 
 		get_owner()->add_message(

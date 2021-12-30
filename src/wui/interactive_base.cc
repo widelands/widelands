@@ -725,10 +725,10 @@ void InteractiveBase::think() {
 	UI::Panel::think();
 	if (in_road_building_mode()) {
 		if (in_road_building_mode(RoadBuildingType::kRoad)) {
-			set_tooltip(bformat(_("Road length: %u"), get_build_road_path().get_nsteps()));
+			set_tooltip(format(_("Road length: %u"), get_build_road_path().get_nsteps()));
 		} else {
-			set_tooltip(bformat(_("Waterway length: %1$u/%2$u"), get_build_road_path().get_nsteps(),
-			                    egbase().map().get_waterway_max_length()));
+			set_tooltip(format(_("Waterway length: %1$u/%2$u"), get_build_road_path().get_nsteps(),
+			                   egbase().map().get_waterway_max_length()));
 		}
 	}
 }
@@ -755,7 +755,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	if (!egbase().is_game() || get_display_flag(dfDebug)) {
 		// Blit node information in the editor, and in debug mode also for games
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
-		node_text = bformat("(%i, %i, %i)", sel_.pos.node.x, sel_.pos.node.y, height);
+		node_text = format("(%i, %i, %i)", sel_.pos.node.x, sel_.pos.node.y, height);
 	}
 	info_panel_.set_coords_string(node_text);
 
@@ -1456,7 +1456,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
 	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry(bformat("building_%d", building->serial()));
+	   unique_windows().get_registry(format("building_%d", building->serial()));
 
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
@@ -1509,7 +1509,7 @@ UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords&
 
 UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry(bformat("ship_%d", ship->serial()));
+	   unique_windows().get_registry(format("ship_%d", ship->serial()));
 	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
 	registry.create();
 	return *registry.window;
@@ -1619,7 +1619,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 	MapObject* obj = egbase().objects().get_object(serial);
 
 	if (!obj) {
-		DebugConsole::write(bformat("No MapObject with serial number %1%", serial));
+		DebugConsole::write(format("No MapObject with serial number %1%", serial));
 		return;
 	}
 
