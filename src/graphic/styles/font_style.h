@@ -72,7 +72,7 @@ struct FontStyleInfo {
 	                       bool init_shadow);
 	explicit FontStyleInfo(const FontStyleInfo& other);
 
-	std::string as_font_tag(const std::string& text) const;
+	std::string as_font_tag(const std::string& text) const NO_OPTIMIZATION;
 
 	Face face() const;
 	void make_condensed();

@@ -40,7 +40,7 @@
 class WException : public std::exception {
 public:
 	explicit WException(char const* const file, uint32_t const line, char const* const fmt, ...)
-	   PRINTF_FORMAT(4, 5);
+	   PRINTF_FORMAT(4, 5) NO_OPTIMIZATION;
 
 	/**
 	 * The target of the returned pointer remains valid during the lifetime of
