@@ -52,7 +52,7 @@
  */
 #ifdef WL_OPTIMIZATION_SEGFAULTS
 #define NO_OPTIMIZATION __attribute__((optimize("O0")))
-#else 
+#else
 #define NO_OPTIMIZATION
 #endif
 
