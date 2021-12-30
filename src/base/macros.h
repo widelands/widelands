@@ -51,9 +51,7 @@
  * segfaults caused by optimization under older g++ versions.
  */
 #ifdef WL_OPTIMIZATION_SEGFAULTS
-#define NO_OPTIMIZATION_START                                                                      \
-_Pragma("GCC push_options")                                                                        \
-_Pragma("GCC optimize (\"O0\")")
+#define NO_OPTIMIZATION_START _Pragma("GCC push_options") _Pragma("GCC optimize (\"O0\")")
 #define NO_OPTIMIZATION_END _Pragma("GCC pop_options")
 #else
 #define NO_OPTIMIZATION_START
