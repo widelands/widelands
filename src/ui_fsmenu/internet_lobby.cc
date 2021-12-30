@@ -154,7 +154,7 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	});
 
 	// Prepare the lists
-	const std::string t_tip = bformat(
+	const std::string t_tip = format(
 	   "<rt padding=2><p align=center spacing=3>%s</p>"
 	   "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	   "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
@@ -414,9 +414,9 @@ void InternetLobby::change_servername() {
 			if (game.name == servername_.text()) {
 				hostgame_.set_enabled(false);
 				servername_.set_warning(true);
-				servername_.set_tooltip(bformat(
-				   _("The game %s is already running. Please choose a different name."),
-				   g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name)));
+				servername_.set_tooltip(
+				   format(_("The game %s is already running. Please choose a different name."),
+				          g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(game.name)));
 			}
 		}
 	}
@@ -480,7 +480,7 @@ void InternetLobby::clicked_hostgame() {
 				do {
 					/** TRANSLATORS: This is shown for multiplayer games when no host */
 					/** TRANSLATORS: server to connect to has been specified yet. */
-					servername_ui = bformat(_("unnamed %u"), i++);
+					servername_ui = format(_("unnamed %u"), i++);
 				} while (servername_ui == game.name);
 			} else if (game.name == servername_ui) {
 				change_servername();

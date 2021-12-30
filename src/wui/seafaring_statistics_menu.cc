@@ -135,18 +135,17 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         kButtonSize,
         UI::ButtonStyle::kWuiPrimary,
         g_image_cache->get("images/ui_basic/fsel.png"),
-        bformat(
-           "%s<br>%s",
-           as_tooltip_text_with_hotkey(
-              /** TRANSLATORS: Tooltip in the seafaring statistics window */
-              _("Open the selected ship’s window"),
-              shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow),
-              UI::PanelStyle::kWui),
-           as_tooltip_text_with_hotkey(
-              /** TRANSLATORS: Tooltip in the seafaring statistics window */
-              _("Go to the selected ship and open its window"),
-              shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto),
-              UI::PanelStyle::kWui))),
+        format("%s<br>%s",
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                  _("Open the selected ship’s window"),
+                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow),
+                  UI::PanelStyle::kWui),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                  _("Go to the selected ship and open its window"),
+                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto),
+                  UI::PanelStyle::kWui))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
