@@ -39,7 +39,7 @@ extern bool g_verbose;
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 // If `gametime` is not invalid, a timestamp for the gametime will be prepended to the
 // output; otherwise, the real time will be used for the timestamp.
-void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4) NO_OPTIMIZATION;
+void do_log(LogType, const Time& gametime, const char*, ...) PRINTF_FORMAT(3, 4);
 
 #define log_info_time(time, ...) do_log(LogType::kInfo, time, __VA_ARGS__)
 #define log_dbg_time(time, ...) do_log(LogType::kDebug, time, __VA_ARGS__)

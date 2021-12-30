@@ -31,9 +31,11 @@ RGBColor::RGBColor(const uint32_t hex)
    : r((hex & 0xff0000) >> 16), g((hex & 0xff00) >> 8), b((hex & 0xff)) {
 }
 
+NO_OPTIMIZATION_START
 std::string RGBColor::hex_value() const {
 	return format("%02x%02x%02x", int(r), int(g), int(b));
 }
+NO_OPTIMIZATION_END
 
 uint32_t RGBColor::map(const SDL_PixelFormat& fmt) const {
 	return SDL_MapRGB(&const_cast<SDL_PixelFormat&>(fmt), r, g, b);

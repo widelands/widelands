@@ -206,6 +206,7 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
+NO_OPTIMIZATION_START
 bool ZipFilesystem::file_exists(const std::string& path) const {
 	try {
 		unzGoToFirstFile(zip_file_->read_handle());
@@ -250,6 +251,7 @@ bool ZipFilesystem::file_exists(const std::string& path) const {
 	}
 	return false;
 }
+NO_OPTIMIZATION_END
 
 /**
  * Returns true if the given file is a directory, and false if it doesn't.
