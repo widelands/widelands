@@ -6,7 +6,6 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_ATOMIC
-    USES_BOOST_LIBRARIES
     USES_INTL
     USES_OPENGL
     USES_PNG
@@ -76,10 +75,6 @@ macro(_common_compile_tasks)
     # src/ is the base for all of our includes. The binary one is for generated files.
     wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src)
     wl_include_directories(${NAME} ${CMAKE_BINARY_DIR}/src)
-
-    # Boost is practically the standard library, so we always add a search path
-    # to include it easily. Except for third party.
-    wl_include_system_directories(${NAME} ${Boost_INCLUDE_DIR})
   endif()
 
   if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
@@ -175,14 +170,6 @@ macro(_common_compile_tasks)
       else()
         target_link_libraries(${NAME} ${Intl_LIBRARIES})
       endif()
-    endif()
-  endif()
-
-  if (ARG_USES_BOOST_LIBRARIES)
-    if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} ${TARGET_LINK_FLAGS} ${Boost_LIBRARIES})
-    else()
-      target_link_libraries(${NAME} ${Boost_LIBRARIES})
     endif()
   endif()
 
