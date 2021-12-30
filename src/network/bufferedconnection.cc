@@ -97,7 +97,7 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 	return ptr;
 }
 
-std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
+std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>
 BufferedConnection::create_unconnected() {
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection());
 	assert(!ptr->is_connected());
@@ -114,8 +114,8 @@ bool BufferedConnection::is_connected() const {
 }
 
 void BufferedConnection::close() {
-	boost::system::error_code ec;
-	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
+	std::error_code ec;
+	asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
 		verb_log_info("[BufferedConnection] Closing network socket connected to %s:%i.",
 		              remote.address().to_string().c_str(), remote.port());
@@ -140,7 +140,7 @@ void BufferedConnection::close() {
 	assert(!asio_thread_.joinable());
 	// Close the socket
 	if (socket_.is_open()) {
-		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+		socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
 		socket_.close(ec);
 	}
 }
@@ -228,12 +228,12 @@ void BufferedConnection::start_sending() {
 	// Start writing to the socket. This might block if the network buffer within
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
-	boost::asio::async_write(
-	   socket_, boost::asio::buffer(nonempty_queue->front()),
+	asio::async_write(
+	   socket_, asio::buffer(nonempty_queue->front()),
 #ifndef NDEBUG
-	   [this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
+	   [this, nonempty_queue](std::error_code ec, std::size_t length) {
 #else
-	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
+	   [this, nonempty_queue](std::error_code ec, std::size_t /*length*/) {
 #endif
 		   std::unique_lock<std::mutex> lock2(mutex_send_);
 		   currently_sending_ = false;
@@ -251,7 +251,7 @@ void BufferedConnection::start_sending() {
 				   log_err("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
 				           ec.value(), ec.message().c_str());
 				   log_err("[BufferedConnection] Closing socket\n");
-				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
 		   }
@@ -266,8 +266,8 @@ void BufferedConnection::start_receiving() {
 	}
 
 	socket_.async_read_some(
-	   boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
-	   [this](boost::system::error_code ec, std::size_t length) {
+	   asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
+	   [this](std::error_code ec, std::size_t length) {
 		   if (!ec) {
 			   assert(length > 0);
 			   assert(length <= kNetworkBufferSize);
@@ -284,22 +284,22 @@ void BufferedConnection::start_receiving() {
 				   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
 				           ec.value(), ec.message().c_str());
 				   log_err("[BufferedConnection] Closing socket\n");
-				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+				   socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
 		   }
 	   });
 }
 
-void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
+void BufferedConnection::reduce_send_buffer(asio::ip::tcp::socket& socket) {
 	// Reduce the size of the send buffer. This will result in (slightly) slower
 	// file transfers but keeps the program responsive (e.g., chat messages are
 	// displayed) while transmitting files
-	boost::system::error_code ec;
-	boost::asio::socket_base::send_buffer_size send_buffer_size;
+	std::error_code ec;
+	asio::socket_base::send_buffer_size send_buffer_size;
 	socket.get_option(send_buffer_size, ec);
 	if (!ec && send_buffer_size.value() > 20 * static_cast<int>(kNetworkBufferSize)) {
-		const boost::asio::socket_base::send_buffer_size new_buffer_size(20 * kNetworkBufferSize);
+		const asio::socket_base::send_buffer_size new_buffer_size(20 * kNetworkBufferSize);
 		socket.set_option(new_buffer_size, ec);
 		// Ignore error. When it fails, chat messages will lag while transmitting files,
 		// but nothing really bad happens
@@ -312,11 +312,11 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 BufferedConnection::BufferedConnection(const NetAddress& host)
    : socket_(io_service_), currently_sending_(false) {
 
-	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
+	const asio::ip::tcp::endpoint destination(host.ip, host.port);
 
 	verb_log_info("[BufferedConnection] Trying to connect to %s:%u ... ",
 	              host.ip.to_string().c_str(), host.port);
-	boost::system::error_code ec;
+	std::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
 		verb_log_info("success.\n");
