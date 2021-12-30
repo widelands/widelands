@@ -15,6 +15,7 @@ wl_library(graphic_styles
   DEPENDS
     base
     base_exceptions
+    base_macros
     graphic_color
     graphic_surface
 )

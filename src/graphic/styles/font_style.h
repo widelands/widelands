@@ -20,6 +20,7 @@
 #ifndef WL_GRAPHIC_STYLES_FONT_STYLE_H
 #define WL_GRAPHIC_STYLES_FONT_STYLE_H
 
+#include "base/macros.h"
 #include "graphic/color.h"
 
 namespace UI {
