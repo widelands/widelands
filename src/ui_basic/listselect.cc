@@ -59,7 +59,8 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
 }
-BaseListselect::EntryRecord::~EntryRecord() {
+
+inline BaseListselect::EntryRecord::~EntryRecord() {
 	// This ensures that the last instance of this smart pointer does
 	// not go out of scope in a thread that is not the main thread.
 	std::shared_ptr<const UI::RenderedText> r1 = rendered_name;
