@@ -56,10 +56,11 @@ void fill_parameter_vector() {
 		_("Use the specified directory for the widelands data files."), false},
 	  {"", "homedir", _("DIRNAME"),
 		format(_("Use the specified directory for widelands config files, savegames and replays. "
-		         "Default is `%s`."), kDefaultHomedir),
+		         "Default is `%s`."),
+		       kDefaultHomedir),
 		false},
-	  {"", "localedir", _("DIRNAME"), _("Use the specified directory for the widelands locale files."),
-		false},
+	  {"", "localedir", _("DIRNAME"),
+		_("Use the specified directory for the widelands locale files."), false},
 	  {"", "language",
 		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
 		 */
@@ -71,10 +72,12 @@ void fill_parameter_vector() {
 	  /// Game setup
 	  {"", "new_game_from_template", _("FILENAME"),
 		format(_("Directly create a new game with the settings configured in the given file. "
-		  "An example can be found in `%s`."), "data/templates/new_game_template"),
+		         "An example can be found in `%s`."),
+		       "data/templates/new_game_template"),
 		false},
-	  {"", "scenario", _("FILENAME"), _("Directly start the map `FILENAME` "
-	                                    "as a singleplayer scenario."),
+	  {"", "scenario", _("FILENAME"),
+		_("Directly start the map `FILENAME` "
+		  "as a singleplayer scenario."),
 		false},
 	  {"", "loadgame", _("FILENAME"), _("Directly load the savegame `FILENAME`."), false},
 	  {"", "replay", _("FILENAME"), _("Directly load the replay `FILENAME`."), false},
@@ -98,7 +101,8 @@ void fill_parameter_vector() {
 		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
 		true},
 	  /// Saving options
-	  {_("Game options:"), _("Note: New values will be written to the config file."), "--", "", false},
+	  {_("Game options:"), _("Note: New values will be written to the config file."), "--", "",
+		false},
 	  {"", "autosave",
 		/** TRANSLATORS: A placeholder for a numerical value */
 		_("n"),
@@ -113,8 +117,8 @@ void fill_parameter_vector() {
 	  {"", "editor_player_menu_warn_too_many_players", _("[true*|false]"),
 		_("Whether a warning should be shown in the editor if there are too many players."), true},
 	  /// Game options
-	  {"", "auto_roadbuild_mode", _("[true*|false]"), _("Start building a road after placing a flag."),
-		true},
+	  {"", "auto_roadbuild_mode", _("[true*|false]"),
+		_("Start building a road after placing a flag."), true},
 	  {"", "display_flags",
 		/** TRANSLATORS: The … character is not used on purpose to increase readability on monospaced
 		   terminals */
@@ -191,8 +195,8 @@ void fill_parameter_vector() {
 	  {"", "maxfps", _("n"),
 		/** TRANSLATORS: `n` references a numerical placeholder */
 		_("Maximal optical framerate `n` of the game."), true},
-	  {"", "theme", _("DIRNAME"), _("The path to the active UI theme, relative to the Widelands home directory."),
-		false},
+	  {"", "theme", _("DIRNAME"),
+		_("The path to the active UI theme, relative to the Widelands home directory."), false},
 	  /// Window options
 	  {_("Options for the internal window manager:"), "animate_map_panning", _("[true*|false]"),
 		_("Whether automatic map movements should be animated."), true},
