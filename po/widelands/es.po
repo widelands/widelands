@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-22 02:58+0000\n"
+"POT-Creation-Date: 2021-12-28 02:46+0000\n"
 "PO-Revision-Date: 2021-12-22 03:00+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -1003,9 +1003,9 @@ msgstr "(ninguno)"
 msgid "Waterway length limit:"
 msgstr "Limitación al largo de vías acuáticas:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"

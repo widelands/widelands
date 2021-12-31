@@ -27,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-12-22 02:58+0000\n"
-"PO-Revision-Date: 2021-12-22 03:00+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2021-12-28 02:46+0000\n"
+"PO-Revision-Date: 2021-12-26 18:07+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -184,7 +184,7 @@ msgstr "vrai"
 #: ../../src/base/format/float_node.h:153
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -780,7 +780,7 @@ msgstr "Navires : %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:223
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1%× %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:230
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:159
@@ -797,7 +797,7 @@ msgstr "Nom : %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:234
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Taille: %1% × %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:238
 #, c-format
@@ -1007,9 +1007,9 @@ msgstr "(aucun)"
 msgid "Waterway length limit:"
 msgstr "Longueur limite des voies navigables"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -3152,7 +3152,7 @@ msgstr ""
 #: ../../src/ui_basic/color_chooser.cc:298
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "V"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:307
@@ -3288,31 +3288,31 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:76
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (64 bit)"
-msgstr ""
+msgstr "Windows (64 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:80
 msgid "Windows (32 bit)"
-msgstr ""
+msgstr "Windows (32 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:82
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../src/ui_fsmenu/about.cc:84
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../src/ui_fsmenu/about.cc:86
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../src/ui_fsmenu/about.cc:88
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: ../../src/ui_fsmenu/about.cc:91
 msgid "Locale:"
@@ -4415,7 +4415,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:383
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Priorité:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:391
@@ -4440,7 +4440,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:411
 msgctxt "priority"
@@ -5550,12 +5550,12 @@ msgstr ""
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:201
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:203
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:205
@@ -5564,7 +5564,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:218
 msgid "%1%:"
-msgstr ""
+msgstr "%1%:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:275
 msgid "Scroll Setting Conflict"
@@ -5980,7 +5980,7 @@ msgstr "Maximisé"
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
 #: ../../src/ui_fsmenu/options.cc:491 ../../src/ui_fsmenu/options.cc:499
 msgid "%1% × %2%"
-msgstr ""
+msgstr "%1% × %2%"
 
 #: ../../src/ui_fsmenu/options.cc:547
 msgid "Try system language"
@@ -6214,11 +6214,11 @@ msgstr "Nous sommes désolés, mais Widelands n'a pas été dans la possibilité
 
 #: ../../src/wlapplication_options.cc:164
 msgid "Warehouse"
-msgstr ""
+msgstr "Entrepôt"
 
 #: ../../src/wlapplication_options.cc:165
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../src/wlapplication_options.cc:166
 msgid "Minor Training Site"
@@ -6246,23 +6246,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:172
 msgid "Tower"
-msgstr ""
+msgstr "Tour"
 
 #: ../../src/wlapplication_options.cc:173
 msgid "Fortress"
-msgstr ""
+msgstr "Forteresse"
 
 #: ../../src/wlapplication_options.cc:174
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Maison de bûcheron"
 
 #: ../../src/wlapplication_options.cc:175
 msgid "Forester’s House"
-msgstr ""
+msgstr "Maison de garde forestier"
 
 #: ../../src/wlapplication_options.cc:176
 msgid "Quarry"
-msgstr ""
+msgstr "Carrière"
 
 #: ../../src/wlapplication_options.cc:177
 msgid "Primary Building Materials Industry"
@@ -6278,11 +6278,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:180
 msgid "Fishing"
-msgstr ""
+msgstr "Pêche"
 
 #: ../../src/wlapplication_options.cc:181
 msgid "Hunting"
-msgstr ""
+msgstr "Chasse"
 
 #: ../../src/wlapplication_options.cc:182
 msgid "Fish/Meat Replenishing"
@@ -6290,7 +6290,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:183
 msgid "Well"
-msgstr ""
+msgstr "Puits"
 
 #: ../../src/wlapplication_options.cc:184
 msgid "Primary Farm"
@@ -6302,59 +6302,59 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:186
 msgid "Mill"
-msgstr ""
+msgstr "Moulin"
 
 #: ../../src/wlapplication_options.cc:187
 msgid "Bakery"
-msgstr ""
+msgstr "Boulangerie"
 
 #: ../../src/wlapplication_options.cc:188
 msgid "Brewery"
-msgstr ""
+msgstr "Brasserie"
 
 #: ../../src/wlapplication_options.cc:189
 msgid "Smokery"
-msgstr ""
+msgstr "Fumoir"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Tavern"
-msgstr ""
+msgstr "Taverne"
 
 #: ../../src/wlapplication_options.cc:191
 msgid "Ore Smelting"
-msgstr ""
+msgstr "Fonderie"
 
 #: ../../src/wlapplication_options.cc:192
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Forgeron d'outils"
 
 #: ../../src/wlapplication_options.cc:193
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Forgeron d'armes"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Forgeron d'armures"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Moulin à tisser"
 
 #: ../../src/wlapplication_options.cc:196
 msgid "Shipyard"
-msgstr ""
+msgstr "Chantier naval"
 
 #: ../../src/wlapplication_options.cc:197
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Chantier de ferrys"
 
 #: ../../src/wlapplication_options.cc:198
 msgid "Scouting"
-msgstr ""
+msgstr "Explore"
 
 #: ../../src/wlapplication_options.cc:199
 msgid "Barracks"
-msgstr ""
+msgstr "Caserne"
 
 #: ../../src/wlapplication_options.cc:200
 msgid "Second Carrier"
@@ -6362,23 +6362,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:201
 msgid "Charcoal"
-msgstr ""
+msgstr "Charbon"
 
 #: ../../src/wlapplication_options.cc:202
 msgid "Stone Mine"
-msgstr ""
+msgstr "Mine de pierre"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mine de charbon"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mine de fer"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mine d'or"
 
 #: ../../src/wlapplication_options.cc:206
 msgid "Agricultural Producer"
@@ -6917,7 +6917,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:1029
 msgid "(disabled)"
-msgstr ""
+msgstr "(Désactivé)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
@@ -7738,7 +7738,7 @@ msgstr "%s a gagné !"
 #: ../../src/wui/game_summary.cc:253
 #, c-format
 msgid "Team %u won!"
-msgstr ""
+msgstr "L'équipe %u a gagné!"
 
 #: ../../src/wui/game_summary.cc:311
 msgid "Score"
@@ -7994,7 +7994,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:54
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"

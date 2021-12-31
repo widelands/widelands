@@ -136,6 +136,7 @@ private:
 		                     const std::string& hotkey_text,
 		                     const unsigned indent,
 		                     const UI::TableStyleInfo& style);
+		~EntryRecord();
 
 		const std::string name;
 		const uint32_t entry_;
