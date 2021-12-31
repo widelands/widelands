@@ -87,7 +87,6 @@ void TextStream::expect(std::string n, bool skip_whitespace) {
  * Return the substring we went over
  */
 std::string TextStream::till_any(std::string chars) {
-	// Boost should provide a function here, but I was unable to figure it out
 	// Sticking with a double loop because chars will likely be short
 	std::string rv;
 
