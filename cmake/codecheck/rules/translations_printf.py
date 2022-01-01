@@ -3,7 +3,7 @@
 """Checks that all translatable strings that have multiple printf placeholders
 have defined those as reversible.
 
-Checks that unordered, ordered and boost placeholders aren't mixed up in the same string.
+Checks that unordered, ordered and wildcard placeholders aren't mixed up in the same string.
 
 Checks that ngettext singular and plural strings have the same placeholders.
 
@@ -15,16 +15,16 @@ import re
 # Regex to find placeholders
 FIND_UNORDERED = re.compile(r'(\%[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})')
 FIND_ORDERED = re.compile(r'\%[|]{0,1}(\d\$[0-9#*]*\.*[0-9#]*[a-zA-Z]{1,2})')
-FIND_BOOST = re.compile(r'\%(\d)\%')
-CLEAN_BOOST_FOR_UNORDERED = re.compile(r'(\%\d\%)')
+FIND_WILDCARD = re.compile(r'\%(\d)\%')
+CLEAN_WILDCARD_FOR_UNORDERED = re.compile(r'(\%\d\%)')
 
 
 def FIND_UNORDERED_placeholders(sanitized_entry):
-    """We need to remove boost-style matches first, because we have cases like.
+    """We need to remove wildcard matches first, because we have cases like.
 
     %1%m that match both regex expressions.
     """
-    for entry in CLEAN_BOOST_FOR_UNORDERED.findall(sanitized_entry):
+    for entry in CLEAN_WILDCARD_FOR_UNORDERED.findall(sanitized_entry):
         sanitized_entry = sanitized_entry.replace(entry, '')
     return FIND_UNORDERED.findall(sanitized_entry)
 
@@ -37,22 +37,22 @@ def check_placeholders(entry):
         return 'Translatable string has multiple sprintf placeholders that are not ordered:'
     else:
         ordered = FIND_ORDERED.findall(sanitized_entry)
-        boost = FIND_BOOST.findall(sanitized_entry)
+        wildcard = FIND_WILDCARD.findall(sanitized_entry)
         if len(unordered) > 0:
             if len(ordered) > 0:
                 return 'Translatable string is mixing unordered sprintf placeholders with ordered placeholders:'
-            if len(boost) > 0:
-                return 'Translatable string is mixing unordered sprintf placeholders with boost-style placeholders:'
-        if len(ordered) > 0 and len(boost) > 0:
-            return 'Translatable string is mixing ordered sprintf placeholders with boost-style placeholders:'
+            if len(wildcard) > 0:
+                return 'Translatable string is mixing unordered sprintf placeholders with wildcard placeholders:'
+        if len(ordered) > 0 and len(wildcard) > 0:
+            return 'Translatable string is mixing ordered sprintf placeholders with wildcard placeholders:'
         if len(ordered) > 0:
             for entryno, placeholder in enumerate(ordered, 1):
                 if str(entryno) != placeholder[:placeholder.find('$')]:
                     return 'Translatable string has an ordered sprintf placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
-        if len(boost) > 0:
-            for entryno, placeholder in enumerate(boost, 1):
+        if len(wildcard) > 0:
+            for entryno, placeholder in enumerate(wildcard, 1):
                 if str(entryno) != placeholder:
-                    return 'Translatable string has an ordered boost-style placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
+                    return 'Translatable string has an ordered wildcard placeholder "' + placeholder + '" in position ' + str(entryno) + " - the numbers don't match:"
     return ''
 
 
@@ -62,10 +62,9 @@ def compare_placeholders(entry1, entry2):
     sanitized_entry1 = entry1.replace('%%', '')
     sanitized_entry2 = entry2.replace('%%', '')
 
-    # There is interaction between boost and unordered, so boost has to come
-    # first.
-    placeholders1 = FIND_BOOST.findall(sanitized_entry1)
-    placeholders2 = FIND_BOOST.findall(sanitized_entry2)
+    # There is interaction between wildcard and unordered, so wildcard has to come first.
+    placeholders1 = FIND_WILDCARD.findall(sanitized_entry1)
+    placeholders2 = FIND_WILDCARD.findall(sanitized_entry2)
     if len(placeholders1) == 0 and len(placeholders2) == 0:
         placeholders1 = FIND_ORDERED.findall(sanitized_entry1)
         placeholders2 = FIND_ORDERED.findall(sanitized_entry2)
@@ -170,10 +169,10 @@ forbidden = [
     # Unordered with multiple
     '_("One %d and another %s")',
 
-    # Mixed Boost + Ordered
+    # Mixed Wildcard + Ordered
     '_("One %1$i and another %2%")',
 
-    # Mixed Boost + Unordered
+    # Mixed Wildcard + Unordered
     '_("One %i and another %2%")',
 
     # Mixed Ordered + Unordered
@@ -185,22 +184,22 @@ forbidden = [
 ]
 
 allowed = [
-    # Boost followed by letter
+    # Wildcard followed by letter
     'npgettext("foo", "%1%d", "%1%d", value)',
     'ngettext("%1%m", "%1%m", value)',
     'gettext("%1%s")',
     '_("%1%s")',
-    # Boost
+    # Wildcard
     'npgettext("foo", "%1%", "%1%", value)',
     'ngettext("%1%", "%1%", value)',
     'gettext("%1%")',
     '_("%1%")',
-    # Boost with percent
+    # Wildcard with percent
     'npgettext("foo", "%1%%%", "%1%%%", value)',
     'ngettext("%1%%%", "%1%%%", value)',
     'gettext("%1%%%")',
     '_("%1%%%")',
-    # Boost with multiple
+    # Wildcard with multiple
     'npgettext("foo", "One %1% and another %2%", "Many %1% and another %2%", value,)',
     'ngettext("One %1% and another %2%", "Many %1% and another %2%", value)',
     'gettext("One %1% and another %2%")',

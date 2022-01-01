@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git 5b6e9ba63d4b083015f5c8f7360b96e38f607a04](https://github.com/widelands/widelands/commit/5b6e9ba63d4b083015f5c8f7360b96e38f607a04)
+## post-1.0 until [git 7c0a3e7](https://github.com/widelands/widelands/commit/7c0a3e7242e37ca74696d75f0f72db7db678c151)
 
 ### Animations, Icons and Overlays
 
@@ -8,27 +8,67 @@
 - Create spritesheets (#4935)
 - Spritesheet cleanup & campaigns (#4974)
 - Updated barbarian barracks graphics by DragonAtma (#4977)
+- Spritesheets fixes and cleanups (#5049)
 
 
 ### Sounds and Music
 
 - Write config after sound initialization (#4940)
+- Enable custom in-game music (#5138)
 
 
 ### Tutorials and Campaigns
 
-
+- Emp02: Allow sheep farm and weaving mill with barracks (#5048)
+- Add "Along the river" scenario (#5062)
 
 
 ### Scripting
 
 - Replenish reed in Frisian trading outpost (#4955)
 - Add enhancement method for buildings to Lua (#4989)
+- Added more ship names for Amazon tribes (#5034)
+- Amazon encyclopedia enhancements (#5037)
+  - Added lore for Dressmakery
+  - Added help text and lore for liana cutter's hut
+  - Added tips for amazons
+    - Tips on liana cutters, wilderness keepers, water gatherers, ropes, jungle masters, rare wood plantations and gold mines.
+    - Last change for now, to add info for plantations to close off #4981.
+    - Added extra note to wilderness keeper as that is necessary info not covered elsewhere.
+- Atlantean and Amazon soldier prefs (#5047): Sets military sites with 4+ soldiers to request heroes by default, and Atlantean small tower now requests rookies by default.
+- Support more properties in `modify_unit` (#4866)
+- Extend productionsite/worker program failure handling (#5146)
+    - Allow specifying `callworker` failure handling method
+    - Allow suppressing sending out-of-resource notifications in programs
 
 
 ### Maps
 
 
+
+
+
+### Add-Ons
+
+- Use shared_ptr for AddOnInfo (#4747)
+- Fix duplicate description registries by add-ons (#4760)
+- Add-Ons Webserver (#4934)
+- Add-ons: Disambiguations for dither layers and registries (#4936)
+- Fix add-on translation handling glitches (#4976)
+- Refactor `ui_fsmenu/addons.*` (#5012)
+- Add-On UI Tweaks (#5061)
+    - Fix add-on comment layouting glitch
+    - Make dependency checking more clever
+    - Packager enhancements
+    - Fix multiple-dependency logic
+- Add-Ons Packager File Name Handling (#5074)
+    - Fix invalid file/dir names in the packager
+    - Add UI to set dirnames
+    - Enable save/discard buttons after editing displayname
+- Allow loading add-ons with unit replacements first (#5141)
+- Update Add-Ons Manager for Protocol Version 5 (#5039)
+- Speed up add-on remote interaction window (#5076)
+- Add-Ons Protocol Version 6 (#5092)
 
 
 ### Saveloading
@@ -41,21 +81,34 @@
 - Reset Lua interface when loading games in-game (#4954)
 - Fix invalid resource loading (#4918)
 - Fix replay writing in savegames created from replays (#4972)
+- Implement saveloading unique windows (#4823)
+- Fix immovable savegame compatibility Long Long Way (#5060)
+- Cleanup player end statuses on loading (#5070)
 
 
 ### AI
 
-
+- Miscellaneous AI Fixes (#4995)
+- Fix auto speed (#5149)
+    - Moved autospeed detection to defaultai.cc
+    - Changed the documentation of the commandline option --auto_speed
+    - Added some debug log
+- Adding performance statistics for AI tasks (#5156)
 
 
 ### Gameplay
 
 - Fixed the `SupplyList::remove_supply` crash (#4913)
 - Multiplayer template game (#4884)
-- Fix duplicate description registries by add-ons (#4760)
 - Fix constructionsite enhancement race condition (#5002)
 - Catch invalid cast in `Carrier::transport_update` (#5009)
 - Fix race condition when changing military-constructionsite soldier capacity (#5007)
+- Fix another race condition in constructionsite enhancing (#5033)
+- Support having more than 2 carriers on a road (#4938)
+- Intelligent worker reordering (#5099)
+- Remove messages of muted buildings (#5109)
+- Fix worker reordering stack overflow (#5125)
+- Remove messages when muting building via "mute all" (#5130)
 
 
 ### User Interface
@@ -72,6 +125,24 @@
 - Change tab panel hotkeys to `CTRL+<num>` (#4993)
 - Fix richtext escape issues in message boxes (#4879)
 - Fastplace Shortcuts (#4849)
+- Mousewheel and key fixes (#5053)
+- Allow textually filtering dropdowns (#5040)
+- Unify arrow and +/- handling for spinbox and slider (#5054)
+    - Also refactors hardcoded key scancode detection
+- Disable keys for fullscreen and screenshot when changing shortcuts (#5066)
+- Only handle textinput when dropdown is expanded (#5065)
+- Add technical info to About window (#5071)
+- Add more uses for mousewheel scrolling (#5068)
+- Fix race condition when resizing game window (#5067)
+- Allow the same fastplace shortcut for different tribes' buildings (#5073)
+- Fix segfault when no modal panel exists (#5093)
+- Fix Save Game Window Layout Issues (#5105)
+- Fix mouse fastclick offset for construction site windows (#5107)
+- Convert Attack Box to Window (#5094)
+- Fastplace Groups (#5110)
+- Use `unique_ptr` for settings box in construction site window (#5116)
+- Hide Empty Input Queue Displays (#5139)
+- Protect map object drawing with a mutex (#5147)
 
 
 ### Internationalization
@@ -86,6 +157,10 @@
 - Improved exception reporting (#5003)
     - Fix exception reporting in the game logic thread.
     - Adds `--verbose-i18n` flag.
+- Fix Transifex String Issues (#5072)
+- Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
+- Properly format `size_t` type printf placeholder (#5096)
+
 
 ### Help and Documentation
 
@@ -96,19 +171,19 @@
 ### Editor
 
 - Editor toolsize menu: use spinbox instead of custom dialog (#4990)
+- Add offset to editor info windows (#5145)
 
 
 ### Graphics Engine
 
-
+- Catch crash when preloading minimap (#5021)
 
 
 ### Networking
 
-- Use shared_ptr for AddOnInfo (#4747)
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
-- Add-Ons Webserver (#4934)
+- Keep GameController pointer alive for template game (#5128)
 
 
 ### Build System
@@ -124,6 +199,36 @@
 - Modify compiler static dependencies (#4991, #4992)
 - Linux: only enable backtrace when using glibc (#5011)
 - cmake: add support for None build type (#5010)
+- Added missing direct include (#5025)
+- Fix clang compiler warnings (#5057)
+- Fix compiling error introduced by boost 1.77 (#5063)
+- Honour `--(no|with)-asan`-option regardless of ARGV-order (#5078)
+- Fix Brotli Windows CI Error (#5079)
+- Build System Update (#5085)
+    - Silence an undesired naming scheme warning in the SDL2 finding module
+    - Add a customized copy of CMake's deprecated Documentation module as recommended
+    - Update latest g++/clang versions in the CI
+    - Treat enabled compiler warnings as errors
+    - Allow silencing compile.sh status messages with `-q`
+- Fix Clang 13 Warnings (#5088)
+- Handle undefined `__WORDSIZE32_SIZE_ULONG` (#5098)
+- Enable ASan in the Testsuite (#5090)
+- Allow validating `appdata.xml` with `appstream-util` if `appstreamcli` is not available (#5084)
+- `appdata.xml`: Add leading `~` to release names as necessary to force proper ordering (#5102)
+- Deprecate Boost (#5101)
+- Refactor String Assembly / Boost Format (#5081)
+- Clean some more clang-tidy checks (#5108, #5131)
+- Resolve thread sanitizer issues (#5114)
+    - Increased thread safety using atomic member variables
+    - New compile option to build with TSan
+- Replace Boost Unit Tests (#5122, #5137)
+- Compile on MacOS 11 and M1 Arm Processor (Apple Silicon) (#5112)
+- Fix Frequent Testsuite Timeouts (#5129)
+- Replace `boost::signals2` (#5133, #5144)
+- GitHub MSVC CI Action (#5132)
+- Replace Boost UUID, Boost SHA1, and `std::rand` (#5124)
+- Deploy build artifacts to automated pre-release (#5143)
+- Replace `boost::format` (#5118, #5163)
 
 
 ### Other Issues
@@ -133,6 +238,8 @@
 - Resolve threading race conditions by assigning mutex locking priorities (#4943)
 - Fix more threading-related issues (#4966)
 - Set Windows logging dir in all website main functions (#4973)
+- Continue parsing commandline without datadir (#5134)
+- Allow using `--script` with `--new_game_from_template` (#5153)
 
 
 
