@@ -30,6 +30,7 @@ echo "* suse      SuSE"
 echo "* slackware Slackware"
 echo "* mageia    Mageia"
 echo "* debian    Debian/Ubuntu/Mint"
+echo "* solus     Solus"
 echo " "
 echo "BSD:"
 echo "* freebsd   FreeBSD"
@@ -80,10 +81,22 @@ if [ -z "$DISTRO" ]; then
       DISTRO="mandriva"
    elif [ -f /etc/debian_version ]; then
       DISTRO="debian"
+   elif [ -f NOCOM ]; then
+      DISTRO="solus"
    elif [ -f /usr/local/Homebrew/bin/brew ]; then
       DISTRO="homebrew"
    fi
 fi
+
+asio_not_packaged() {
+   echo "Asio is not packaged for $1, please install it from source:"
+   echo " - Download the latest stable version from"
+   echo "      https://sourceforge.net/projects/asio/files/asio/"
+   echo " - Unpack in your development directory"
+   echo " - Run './configure --prefix=/usr && make install-data' in the unpacked asio"
+   echo "   directory (or just copy recursively 'asio.hpp' and the 'asio' subdirectory"
+   echo "   from 'include' to '/usr/include')"
+}
 
 # Install the dependencies
 if [ "$DISTRO" == "arch" ]; then
@@ -114,6 +127,11 @@ elif [ "$DISTRO" == "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
    sudo apt install git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev \
     libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev
+elif [ "$DISTRO" == "solus" ]; then
+   echo "Installing dependencies for Solus..."
+   sudo eopkg install -c system.devel
+   sudo eopkg install git gettext glew-devel libicu-devel libpng-devel sdl2-develsdl2-image-devel sdl2-mixer-devel sdl2-ttf python
+   asio_not_packaged "Solus"
 elif [ "$DISTRO" == "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
    pkg install git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_net sdl2_ttf
@@ -121,13 +139,7 @@ elif [ "$DISTRO" == "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
    pkg_add git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
     sdl2-image sdl2-mixer sdl2-net sdl2-ttf
-   echo "Asio is not packaged for OpenBSD, please install it from source:"
-   echo " - Download the latest stable version from"
-   echo "      https://sourceforge.net/projects/asio/files/asio/"
-   echo " - Unpack in your development directory"
-   echo " - Run './configure --prefix=/usr && make install-data' in the unpacked asio"
-   echo "   directory (or just copy recursively 'asio.hpp' and the 'asio' subdirectory"
-   echo "   from 'include' to '/usr/include')"
+   asio_not_packaged "OpenBSD"
 elif [ "$DISTRO" == "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
    pacman -S pacman -S mingw-w64-i686-toolchain git mingw-w64-i686-cmake \
