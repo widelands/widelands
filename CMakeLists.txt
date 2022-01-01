@@ -143,6 +143,16 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
+IF(NOT HAVE_ASIO OR HAVE_ASIO STREQUAL "")
+  unset(HAVE_ASIO CACHE)
+  include(CheckIncludeFileCXX)
+  CHECK_INCLUDE_FILE_CXX("asio.hpp" HAVE_ASIO)
+  IF(NOT HAVE_ASIO)
+    message(FATAL_ERROR "Please install the standaline Asio library from https://think-async.com/Asio/")
+  ENDIF()
+ENDIF()
+add_definitions(-DASIO_STANDALONE)
+
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
