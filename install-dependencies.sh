@@ -81,7 +81,7 @@ if [ -z "$DISTRO" ]; then
       DISTRO="mandriva"
    elif [ -f /etc/debian_version ]; then
       DISTRO="debian"
-   elif [ -f NOCOM ]; then
+   elif [ -f /etc/solus-release ]; then
       DISTRO="solus"
    elif [ -f /usr/local/Homebrew/bin/brew ]; then
       DISTRO="homebrew"
@@ -93,7 +93,7 @@ asio_not_packaged() {
    echo " - Download the latest stable version from"
    echo "      https://sourceforge.net/projects/asio/files/asio/"
    echo " - Unpack in your development directory"
-   echo " - Run './configure --prefix=/usr && make install-data' in the unpacked asio"
+   echo " - Run '$2./configure --prefix=/usr && $2make install-data' in the unpacked asio"
    echo "   directory (or just copy recursively 'asio.hpp' and the 'asio' subdirectory"
    echo "   from 'include' to '/usr/include')"
 }
@@ -130,8 +130,8 @@ elif [ "$DISTRO" == "debian" ]; then
 elif [ "$DISTRO" == "solus" ]; then
    echo "Installing dependencies for Solus..."
    sudo eopkg install -c system.devel
-   sudo eopkg install git gettext glew-devel libicu-devel libpng-devel sdl2-develsdl2-image-devel sdl2-mixer-devel sdl2-ttf python
-   asio_not_packaged "Solus"
+   sudo eopkg install git gettext glew-devel libicu-devel libpng-devel sdl2-devel sdl2-image-devel sdl2-mixer-devel sdl2-ttf-devel python
+   asio_not_packaged "Solus" "sudo "
 elif [ "$DISTRO" == "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
    pkg install git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_net sdl2_ttf
