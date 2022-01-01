@@ -28,7 +28,7 @@
 namespace UI {
 
 // TODO(GunChleoc): Step 1: Clean up superfluous usages of kLeft/kTop, especially with dalls to
-// Box::ad and Textarea constructor.
+// Box::add and Textarea constructor.
 // TODO(GunChleoc): Step 2: Rename to kBeginning, kCenter, kEnd
 /// Horizontal or vertical alignment
 enum class Align {
@@ -43,8 +43,12 @@ void center_vertically(uint32_t h, Vector2i* pt);
 void correct_for_align(Align, uint32_t w, Vector2i* pt);
 Align mirror_alignment(Align alignment, bool is_rtl);
 
-// Position an image at the screen center, as large as possible without upscaling
-Rectf fit_image(float img_width, float img_height, float available_width, float available_height);
+/**
+ * Position an image at the screen center, as large as possible without upscaling,
+ * with or without cropping the image.
+ */
+Rectf fit_image_crop(float img_width, float img_height, float available_width, float available_height);
+Rectf fit_image_nocrop(float img_width, float img_height, float available_width, float available_height);
 
 }  // namespace UI
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

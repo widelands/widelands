@@ -136,7 +136,7 @@ private:
 	std::vector<std::string> images_;
 	uint32_t last_image_exchange_time_;
 	size_t draw_image_, last_image_;
-	Rectf image_pos(const Image&);
+	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
 	float calc_opacity(uint32_t time);
 
