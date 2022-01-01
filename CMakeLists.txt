@@ -17,6 +17,14 @@ option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Add custom includes to override system libs
+FILE(GLOB custom_include_directories auto_dependencies/*)
+foreach(custom_include_dir ${custom_include_directories})
+  message(STATUS "Using custom include directory '${custom_include_dir}'")
+  list(INSERT CMAKE_INCLUDE_PATH 0 "${custom_include_dir}")
+endforeach()
+
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -144,7 +152,7 @@ else()
 endif()
 
 # Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
-IF(NOT asio_location OR asio_location STREQUAL "")
+if(NOT asio_location OR asio_location STREQUAL "")
   unset(asio_location CACHE)
   find_path(asio_location "asio.hpp")
   if(asio_location)
@@ -152,9 +160,9 @@ IF(NOT asio_location OR asio_location STREQUAL "")
     get_filename_component(asio_include_dir ${asio_location} DIRECTORY)
     list(APPEND CMAKE_INCLUDE_PATH ${asio_include_dir})
   else()
-    message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please install the standaline Asio library from https://think-async.com/Asio/")
+    message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
   endif()
-ENDIF()
+endif()
 add_definitions(-DASIO_STANDALONE)
 
 if (APPLE OR WIN32 OR
