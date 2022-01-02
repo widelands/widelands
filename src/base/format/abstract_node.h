@@ -46,7 +46,7 @@ struct AbstractNode {
 	}
 
 	union Argument {
-		char char_val;
+		signed char char_val;
 		const char* string_val;
 		double float_val;
 		bool boolean_val;

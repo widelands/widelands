@@ -48,7 +48,7 @@ void NetClient::send(const SendPacket& packet, NetPriority priority) {
 
 NetClient::NetClient(const NetAddress& host) {
 
-	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
+	const asio::ip::tcp::endpoint destination(host.ip, host.port);
 
 	verb_log_info(
 	   "[NetClient]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(), host.port);

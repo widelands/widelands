@@ -12,11 +12,9 @@ Build-Depends: debhelper (>= 9),
 #  This package isn't available in older Ubuntu releases.
 #  As long as we support 14.04, we build using the embedded one.
 #  libminizip-dev,
-  libboost-dev,
-  libboost-regex-dev,
-  libboost-system-dev,
-  libboost-test-dev,
+  libasio-dev,
   libglew-dev,
+  libicu-dev,
   libpng-dev,
   libsdl2-dev,
   libsdl2-image-dev,
