@@ -16,7 +16,15 @@ wl_library(io_filesystem
     base
     base_exceptions
     base_macros
-    graphic_text_layout
     io_stream
     third_party_minizip
+)
+
+wl_library(io_filesystem_illegal_filename_check
+  SRCS
+    illegal_filename_check.cc
+    illegal_filename_check.h
+  DEPENDS
+    base
+    graphic_text_layout
 )

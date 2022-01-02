@@ -36,7 +36,7 @@ You will need to install the following dependencies:
 * libiconv (on same mirrors as gettext)
 *  [zlib](https://www.zlib.net/)
 *  [libpng](http://www.libpng.org/pub/png/libpng.html)
-*  [Boost](https://www.boost.org/) >= 1.48
+*  [Asio](https://think-async.com/Asio/)
 *  [Python](https://www.python.org) >= 1.5.2
 *  [libglew](http://glew.sourceforge.net) or [glbinding](https://glbinding.org/)
 
@@ -104,7 +104,7 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `OPTION_BUILD_TRANSLATIONS` | `ON`/`OFF` | `ON` | Build translations |
 | `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
-| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build Boost tests |
+| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
 | `CMAKE_INSTALL_PREFIX` | A directory | See [CMake documentation](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) | Define the target directory for the "install" target, e.g. `-DCMAKE_INSTALL_PREFIX=~/widelands-install`. |
 | `WL_VERSION` | A version string | Autodetected from git/bzr, or set by adding a `VERSION` file | Define the Widelands version |
 | `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
