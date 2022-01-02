@@ -186,18 +186,18 @@ elif [ "$DISTRO" == "solus" ]; then
          REMOTE="wget -O"
       elif which curl > /dev/null
       then
-         REMOTE="curl -o"
+         REMOTE="curl -Lo"
       else
          asio_not_packaged "Solus" "sudo"
          exit 1
       fi
 
-      $REMOTE sources https://sourceforge.net/projects/asio/files/asio/1.20.0%20%28Stable%29/asio-1.20.0.tar.bz2/download
+      $REMOTE sources https://downloads.sourceforge.net/project/asio/asio/1.20.0%20%28Stable%29/asio-1.20.0.tar.bz2
       CHECKSUM=$(md5sum sources)
-      CHECKSUM="${CHECKSUM% *}"
+      CHECKSUM="${CHECKSUM%% *}"
       if ! [ "$CHECKSUM" = "bdd3e37404dc19eb8f71d67df568a060" ]
       then
-         echo "ERROR: Checksum mismatch: Expected bdd3e37404dc19eb8f71d67df568a060, found $CHECKSUM"
+         echo "ERROR: Checksum mismatch: Expected bdd3e37404dc19eb8f71d67df568a060, found $CHECKSUM."
          echo "There is probably a problem with the network connection, or possibly the file was compromised."
          echo
          echo "If this is the first time you see this error, please try again. Otherwise, follow these steps:"
