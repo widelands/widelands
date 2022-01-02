@@ -97,7 +97,7 @@ void fill_parameter_vector() {
 		  "description of the AI training logic."),
 		true},
 	  {"", "auto_speed", "",
-		_("Keep adjusting the game speed automatically depending on AI delay. "
+		_("Constantly adjust the game speed automatically depending on AI delay. "
 		  "Only to be used for AI testing or training (in conjunction with --ai_training)."),
 		true},
 	  /// Saving options
