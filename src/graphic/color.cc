@@ -17,9 +17,6 @@
  *
  */
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
 #include "graphic/color.h"
 
 #include "base/string.h"

@@ -17,9 +17,6 @@
  *
  */
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
 #include "io/filesystem/zip_filesystem.h"
 
 #include <cassert>

@@ -17,9 +17,6 @@
  *
  */
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
 #include "base/log.h"
 
 #include <cassert>

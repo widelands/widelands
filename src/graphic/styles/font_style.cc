@@ -17,9 +17,6 @@
  *
  */
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
 #include "graphic/styles/font_style.h"
 
 #include "base/string.h"
