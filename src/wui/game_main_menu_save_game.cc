@@ -26,6 +26,7 @@
 #include "game_io/game_preload_packet.h"
 #include "game_io/game_saver.h"
 #include "io/filesystem/filesystem.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -86,7 +87,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	filename_box_.set_visible(type_ == Type::kSave);
 
 	layout();
@@ -166,7 +167,7 @@ void GameMainMenuSaveGame::entry_selected() {
 
 void GameMainMenuSaveGame::edit_box_changed() {
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystem::is_legal_filename(filename_editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(filename_editbox_.text());
 	ok_.set_enabled(is_legal_filename);
 	filename_editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	load_or_save_.delete_button()->set_enabled(false);
