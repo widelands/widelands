@@ -12,8 +12,8 @@ jobs:
         os:
           - ubuntu-18.04
         compiler:
-          - compiler: g++-6
-          - compiler: g++-5
+          - g++-6
+          - g++-5
     runs-on: ${{ matrix.os }}
     env:
       SDL_VIDEODRIVER: 'x11'
