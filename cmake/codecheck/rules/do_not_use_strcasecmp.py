@@ -2,12 +2,12 @@
 
 """strcasecmp isn't available on win32."""
 
-error_msg = 'Do not use strcasecmp/strncasecmp. Use boost::iequals instead.'
+error_msg = 'Do not use strcasecmp/strncasecmp. Use iequals instead.'
 
 regexp = r'\bstrn?casecmp\s*\('
 
 allowed = [
-    'boost::iequals(a, b)',
+    'iequals(a, b)',
 ]
 
 forbidden = [

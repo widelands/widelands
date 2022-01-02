@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -52,7 +53,7 @@ inline bool selection_is_map(const std::vector<std::string>& select) {
 }  // namespace
 
 std::string check_addon_filename_validity(const std::string& name) {
-	if (name.empty() || !FileSystem::is_legal_filename(name)) {
+	if (name.empty() || !FileSystemHelper::is_legal_filename(name)) {
 		return _("Invalid filename");
 	}
 	if (name.size() + kAddOnExtension.size() > kAddOnFileNameLengthLimit) {
@@ -121,7 +122,7 @@ void make_valid_addon_filename(std::string& name,
 		}
 	}
 
-	assert(FileSystem::is_legal_filename(name));
+	assert(FileSystemHelper::is_legal_filename(name));
 }
 
 AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
