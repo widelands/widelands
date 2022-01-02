@@ -252,7 +252,7 @@ jobs:
           - Debug
         arch:
           - x64
-          - x86
+          # - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-latest
     steps:
