@@ -61,13 +61,13 @@ float MapviewPixelFunctions::calc_pix_distance(const Widelands::Map& map, Vector
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
 		if (dx > map_end_screen_x / 2) {
-			dx = -(dx - map_end_screen_x);
+			dx = map_end_screen_x - dx;
 		}
 	}
 	{
 		const uint32_t map_end_screen_y = get_map_end_screen_y(map);
 		if (dy > map_end_screen_y / 2) {
-			dy = -(dy - map_end_screen_y);
+			dy = map_end_screen_y - dy;
 		}
 	}
 	return dx + dy;
