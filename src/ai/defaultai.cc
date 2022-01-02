@@ -1493,13 +1493,13 @@ void DefaultAI::update_all_not_buildable_fields() {
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 5) {
-		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 15, 200);
+		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 10, 400);
 	}
 
 	// for performance reasons we update only this count of fields
 	const uint32_t fields_update_limit = 5;
 	// just counter
-	uint32_t updated_fields = 0;
+	uint32_t checked_fields = 0;
 
 	while (maxchecks--) {
 		//  check whether we lost ownership of the node
@@ -1512,7 +1512,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_SIZEMASK) {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			if (fields_update_limit > updated_fields++) {
+			if (fields_update_limit > checked_fields++) {
 				update_buildable_field(*buildable_fields.back());
 			}
 			continue;
@@ -1521,7 +1521,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_MINE) {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			if (fields_update_limit > updated_fields++) {
+			if (fields_update_limit > checked_fields++) {
 				update_mineable_field(*mineable_fields.back());
 			}
 			continue;
