@@ -1488,7 +1488,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	int32_t const pn = player_number();
 
 	// We are checking at least 5 unusable fields (or less if there are not 5 of them)
-	// at once, but not more then 200...
+	// at once, but not more then 400...
 	// The idea is to check each field at least once a minute, of course with big maps
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
