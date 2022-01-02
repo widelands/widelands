@@ -22,7 +22,7 @@
 
 #include <functional>
 
-#include <boost/asio.hpp>
+#include <asio.hpp>
 
 #include "base/string.h"
 #include "base/wexception.h"
@@ -81,7 +81,7 @@ struct NetAddress {
 	 */
 	bool is_valid() const;
 
-	boost::asio::ip::address ip;
+	asio::ip::address ip;
 	uint16_t port;
 };
 

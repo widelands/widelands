@@ -36,8 +36,8 @@ The Widelands Development Team thanks the following projects:
     * Project can be found at http://www.gzip.org/zlib/
 
 
-    boost
-    * Project can be found at http://www.boost.org
+    Asio
+    * Project can be found at https://think-async.com/Asio/
 
 
     STLport

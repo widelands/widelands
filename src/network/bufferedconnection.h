@@ -125,7 +125,7 @@ public:
 	 * called. \return A pair with a pointer to an unconnected \c BufferedConnection object and a
 	 * pointer to the internal socket.
 	 */
-	static std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
+	static std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>
 	create_unconnected();
 
 	/**
@@ -306,18 +306,18 @@ private:
 	 * Reduces the send buffer of the given socket to only contain 20 packets.
 	 * @param socket The socket to modify.
 	 */
-	static void reduce_send_buffer(boost::asio::ip::tcp::socket& socket);
+	static void reduce_send_buffer(asio::ip::tcp::socket& socket);
 
 	/// The buffers that are waiting to be send.
 	/// The map key is the priority of the packets stored in the queue.
 	/// Each packet in the queue is a vector of uint8_t.
 	std::map<uint8_t, std::queue<std::vector<uint8_t>>> buffers_to_send_;
 
-	/// An io_service needed by boost.asio. Primarily needed for asynchronous operations.
-	boost::asio::io_service io_service_;
+	/// An io_service needed by asio. Primarily needed for asynchronous operations.
+	asio::io_service io_service_;
 
 	/// The socket that connects us to the host.
-	boost::asio::ip::tcp::socket socket_;
+	asio::ip::tcp::socket socket_;
 
 	/// Buffer for arriving data. We need to store it until we have enough
 	/// to return the required type.
