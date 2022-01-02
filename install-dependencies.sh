@@ -143,7 +143,11 @@ elif [ "$DISTRO" == "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
    doas pkg_add git cmake gcc g++ gettext-tools glew icu4c libexecinfo png \
     sdl2-image sdl2-mixer sdl2-net sdl2-ttf
-   asio_not_packaged "OpenBSD" "doas"
+   if ! [ -f /usr/include/asio.hpp -o -f ./auto_dependencies/asio/asio.hpp ]
+   then
+      asio_not_packaged "OpenBSD" "doas"
+      exit 1
+   fi
 
 elif [ "$DISTRO" == "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
@@ -172,27 +176,39 @@ elif [ "$DISTRO" == "solus" ]; then
 
    if ! [ -f /usr/include/asio.hpp -o -f ./auto_dependencies/asio/asio.hpp ]
    then
-     echo "Installing Asio from source..."
-     rm -r ./auto_dependencies/asio >/dev/null 2>/dev/null || true
-     mkdir -p ./auto_dependencies/asio
-     cd ./auto_dependencies/asio
+      echo "Installing Asio from source..."
+      rm -r ./auto_dependencies/asio >/dev/null 2>/dev/null || true
+      mkdir -p ./auto_dependencies/asio
+      cd ./auto_dependencies/asio
 
-     if which wget > /dev/null
-     then
-       REMOTE="wget -O"
-     elif which curl > /dev/null
-     then
-       REMOTE="curl -o"
-     else
-       sudo eopkg install wget
-       REMOTE="wget -O"
-     fi
+      if which wget > /dev/null
+      then
+         REMOTE="wget -O"
+      elif which curl > /dev/null
+      then
+         REMOTE="curl -o"
+      else
+         asio_not_packaged "Solus" "sudo"
+         exit 1
+      fi
 
-     $REMOTE sources https://sourceforge.net/projects/asio/files/latest/download
-     unzip sources
-     mv asio* extracted
-     mv extracted/include/asio* .
-     rm -r extracted sources
+      $REMOTE sources https://sourceforge.net/projects/asio/files/asio/1.20.0%20%28Stable%29/asio-1.20.0.tar.bz2/download
+      CHECKSUM=$(md5sum sources)
+      CHECKSUM="${CHECKSUM% *}"
+      if ! [ "$CHECKSUM" = "bdd3e37404dc19eb8f71d67df568a060" ]
+      then
+         echo "ERROR: Checksum mismatch: Expected bdd3e37404dc19eb8f71d67df568a060, found $CHECKSUM"
+         echo "There is probably a problem with the network connection, or possibly the file was compromised."
+         echo
+         echo "If this is the first time you see this error, please try again. Otherwise, follow these steps:"
+         asio_not_packaged "Solus" "sudo"
+         rm sources
+         exit 1
+      fi
+
+      tar -xf sources
+      mv asio-1.20.0/include/asio* .
+      rm -r asio-1.20.0 sources
    fi
 
 elif [ -z "$DISTRO" ]; then
