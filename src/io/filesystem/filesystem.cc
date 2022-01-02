@@ -182,7 +182,12 @@ std::string FileSystem::fix_cross_file(const std::string& path) const {
 // static
 std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
+#ifdef _MSC_VER
+	// getcwd is deprecated on MSVC
+	char* const result = _getcwd(cwd, PATH_MAX);
+#else
 	char* const result = getcwd(cwd, PATH_MAX);
+#endif
 	if (!result) {
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
 	}

@@ -48,10 +48,10 @@ void RoadProgram::add_road(const int renderbuffer_width,
                            const Direction direction,
                            uint32_t* gl_texture) {
 	// The thickness of the road in pixels on screen.
-	static constexpr float kRoadThicknessInPixels = 5.;
+	static constexpr float kRoadThicknessInPixels = 5.f;
 
 	// The overshot of the road in either direction in percent.
-	static constexpr float kRoadElongationInPercent = .1;
+	static constexpr float kRoadElongationInPercent = .1f;
 
 	const float delta_x = end.surface_pixel.x - start.surface_pixel.x;
 	const float delta_y = end.surface_pixel.y - start.surface_pixel.y;
