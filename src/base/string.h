@@ -130,7 +130,6 @@ inline std::string as_string(const char c) {
 }
 
 /** String formatting function, without or with localized substitutions. */
-NO_OPTIMIZATION_START
 template <typename... Args>
 inline std::string format(const std::string& format_string, Args... args) {
 	return format_impl::format(false, format_string, args...);
@@ -139,6 +138,5 @@ template <typename... Args>
 inline std::string format_l(const std::string& format_string, Args... args) {
 	return format_impl::format(true, format_string, args...);
 }
-NO_OPTIMIZATION_END
 
 #endif  // end of include guard: WL_BASE_STRING_H

@@ -17,6 +17,9 @@
  *
  */
 
+#Pragma GCC push_options
+#Pragma GCC optimize ("O0")
+
 #include "base/warning.h"
 #include "base/wexception.h"
 
@@ -29,7 +32,6 @@ bool g_fail_on_lua_error(false);
  * class WException implementation
  */
 #undef wexception
-NO_OPTIMIZATION_START
 WException::WException(char const* const file, uint32_t const line, char const* const fmt, ...) {
 	char buffer[512];
 	{
@@ -42,7 +44,6 @@ WException::WException(char const* const file, uint32_t const line, char const* 
 	ost << '[' << file << ':' << line << "] " << buffer;
 	what_ = ost.str();
 }
-NO_OPTIMIZATION_END
 
 char const* WException::what() const noexcept {
 	return what_.c_str();
@@ -51,7 +52,6 @@ char const* WException::what() const noexcept {
 /*
  * class warning implementation
  */
-NO_OPTIMIZATION_START
 WLWarning::WLWarning(char const* const et, char const* const em, ...) : title_(et) {
 	char buffer[512];
 	{
@@ -62,7 +62,6 @@ WLWarning::WLWarning(char const* const et, char const* const em, ...) : title_(e
 	}
 	what_ = buffer;
 }
-NO_OPTIMIZATION_END
 
 char const* WLWarning::title() const {
 	return title_.c_str();

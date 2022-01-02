@@ -1,0 +1,60 @@
+name: Testsuite with older g++
+on:
+  push:
+
+  testsuite:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - Release
+        os:
+          - ubuntu-18.04
+        compiler:
+          - compiler: g++-6
+          - compiler: g++-5
+    runs-on: ${{ matrix.os }}
+    env:
+      SDL_VIDEODRIVER: 'x11'
+      DISPLAY: ':99.0'
+      # TODO: Under Xvfb, the usual X11 memory leaks show up as an unsymbolized
+      # <unknown module> making them impossible to suppress. So we disable all
+      # memory leaks checking in the testsuite for now.
+      ASAN_OPTIONS: 'detect_leaks=0'
+      LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
+    steps:
+    - name: Installing dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Compile
+      run: |
+        CXX="${{ matrix.compiler }}"
+        if [ "${CXX:0:1}" == "c" ]
+        then
+          export CC="/usr/bin/${{ matrix.compiler }}"  # clang-10
+          export CXX="${CC/clang/clang++}"             # clang++-10
+        else
+          export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
+          export CC="${CXX/g++/gcc}"                   # gcc-10
+        fi
+        mkdir build
+        pushd build
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
+        make -k -j$(nproc)
+        cd ..
+    - name: Website Binaries
+      run: |
+        /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
+        sleep 1m
+        # Ignore transient SDL errors (exit code 2)
+        mkdir temp_web
+        build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
+        build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
+    - name: Testsuite
+      run: ./regression_test.py -b build/src/widelands
+

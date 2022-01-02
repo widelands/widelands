@@ -17,6 +17,9 @@
  *
  */
 
+#Pragma GCC push_options
+#Pragma GCC optimize ("O0")
+
 #include "base/log.h"
 
 #include <cassert>
@@ -171,7 +174,6 @@ static const char* to_string(const LogType& type) {
 	NEVER_HERE();
 }
 
-NO_OPTIMIZATION_START
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {
 	MutexLock m(MutexLock::ID::kLog);
 	assert(logger != nullptr);
@@ -208,4 +210,3 @@ void do_log(const LogType type, const Time& gametime, const char* const fmt, ...
 		logger->log_cstring(str.c_str());
 	}
 }
-NO_OPTIMIZATION_END

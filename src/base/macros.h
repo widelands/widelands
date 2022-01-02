@@ -46,18 +46,6 @@
 #define GCC_DIAG_ON(x)
 #endif
 
-/**
- * Macros to disable optimization for selected functions to fix
- * segfaults caused by optimization under older g++ versions.
- */
-#ifdef WL_OPTIMIZATION_SEGFAULTS
-#define NO_OPTIMIZATION_START _Pragma("GCC push_options") _Pragma("GCC optimize (\"O0\")")
-#define NO_OPTIMIZATION_END _Pragma("GCC pop_options")
-#else
-#define NO_OPTIMIZATION_START
-#define NO_OPTIMIZATION_END
-#endif
-
 /* Macros for disabling Clang warnings and errors
  * From https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines and
  * slightly modified.

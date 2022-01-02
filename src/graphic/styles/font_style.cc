@@ -17,6 +17,9 @@
  *
  */
 
+#Pragma GCC push_options
+#Pragma GCC optimize ("O0")
+
 #include "graphic/styles/font_style.h"
 
 #include "base/string.h"
@@ -77,7 +80,6 @@ FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) 
 	return result;
 }
 
-NO_OPTIMIZATION_START
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 	std::string optionals;
 	if (bold_) {
@@ -95,7 +97,6 @@ std::string FontStyleInfo::as_font_tag(const std::string& text) const {
 	return format("<font face=%s size=%d color=%s%s>%s</font>", face_to_string(), size_,
 	              color_.hex_value(), optionals, text);
 }
-NO_OPTIMIZATION_END
 
 FontStyleInfo::Face FontStyleInfo::face() const {
 	return face_;
