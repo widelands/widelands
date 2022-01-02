@@ -2,6 +2,7 @@ name: Testsuite with older g++
 on:
   push:
 
+jobs:
   testsuite:
     strategy:
       fail-fast: false
