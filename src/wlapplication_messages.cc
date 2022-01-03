@@ -64,29 +64,28 @@ void fill_parameter_vector() {
 	  {"", "language",
 		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
 		 */
-		_("[de_DE|sv_SE|...]"), _("The locale to use."), false},
+		_("[de_DE|sv_SE|...]"), _("Use the specified locale."), false},
 	  {"", "skip_check_datadir_version", "",
 		_("Do not check whether the data directory to use is "
 		  "compatible with this Widelands version."),
 		true},
 	  /// Game setup
 	  {"", "new_game_from_template", _("FILENAME"),
-		format(_("Directly create a new game with the settings configured in the given file. "
+		format(_("Create a new game directly with the settings configured in the given file. "
 		         "An example can be found in `%s`."),
 		       "data/templates/new_game_template"),
 		false},
 	  {"", "scenario", _("FILENAME"),
-		_("Directly start the map `FILENAME` "
-		  "as a singleplayer scenario."),
+		_("Start the map `FILENAME` directly as a singleplayer scenario."),
 		false},
-	  {"", "loadgame", _("FILENAME"), _("Directly load the savegame `FILENAME`."), false},
-	  {"", "replay", _("FILENAME"), _("Directly load the replay `FILENAME`."), false},
+	  {"", "loadgame", _("FILENAME"), _("Load the savegame `FILENAME` directly."), false},
+	  {"", "replay", _("FILENAME"), _("Load the replay `FILENAME` directly."), false},
 	  {"", "script", _("FILENAME"),
 		_("Run the given Lua script after initialization. Only valid with --scenario, --loadgame, or "
 		  "--editor."),
 		false},
 	  {"", "editor", "",
-		_("Directly start the Widelands editor. You can add `=FILENAME` to directly load the map "
+		_("Start the Widelands map editor directly. You can add `=FILENAME` to directly load the map "
 		  "`FILENAME` in the editor."),
 		false},
 	  /// Misc
@@ -227,7 +226,7 @@ void fill_parameter_vector() {
 	  {"", "help", "", _("Show this help."), false},
 	  {"", "help-all", "", _("Show this help with all available config options."), false},
 	  {"", _("<save.wgf>/<replay.wrpl>"), "--",
-		_("Directly load the given savegame or replay. Useful for .wgf/.wrpl file extension "
+		_("Load the given savegame or replay directly. Useful for .wgf/.wrpl file extension "
 		  "association. Does not work with other options. Also see --loadgame/--replay."),
 		false} };
 }
