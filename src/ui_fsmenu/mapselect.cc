@@ -343,14 +343,14 @@ void MapSelect::fill_table() {
 				if (team_tags_dropdown_->has_selection()) {
 					const std::string selected_tag = team_tags_dropdown_->get_selected();
 					if (!selected_tag.empty()) {
-						has_all_tags &= mapdata.tags.count(selected_tag);
+						has_all_tags &= mapdata.tags.count(selected_tag) > 0;
 					}
 				}
 				if (official_tags_dropdown_->has_selection()) {
 					const std::string selected_tag = official_tags_dropdown_->get_selected();
 					if (!selected_tag.empty()) {
 						if (selected_tag == "official") {
-							has_all_tags &= mapdata.tags.count("official");
+							has_all_tags &= mapdata.tags.count("official") > 0;
 						} else {
 							has_all_tags &= !mapdata.tags.count("official");
 						}
@@ -363,7 +363,7 @@ void MapSelect::fill_table() {
 							has_all_tags &= !mapdata.tags.count("balanced");
 							has_all_tags &= !mapdata.tags.count("unbalanced");
 						} else {
-							has_all_tags &= mapdata.tags.count(selected_tag);
+							has_all_tags &= mapdata.tags.count(selected_tag) > 0;
 						}
 					}
 				}
@@ -377,7 +377,7 @@ void MapSelect::fill_table() {
 				}
 
 				for (uint32_t tag : req_tags_) {
-					has_all_tags &= mapdata.tags.count(tags_ordered_[tag]);
+					has_all_tags &= mapdata.tags.count(tags_ordered_[tag]) > 0;
 				}
 
 				if (!has_all_tags) {

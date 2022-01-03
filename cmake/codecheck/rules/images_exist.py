@@ -84,5 +84,5 @@ allowed = [
     'g_image_cache->get("images/logos/wl-ico-128.png")',
     'g_image_cache->get(kConstexpr)',
     'g_image_cache->get("images/" + "foo/nonexistent.png")',
-    'g_image_cache->get((boost::format("images/%s") % "foo/nonexistent.png").str())',
+    'g_image_cache->get(format("images/%s", "foo/nonexistent.png"))',
 ]
