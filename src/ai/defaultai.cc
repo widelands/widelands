@@ -1321,7 +1321,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	const uint16_t kNoReasonPos = 3;
 
 	// The overall limit should be of course higher than the sum of above special fields
-	const u_int16_t max_fields_to_check = 30;
+	const uint16_t max_fields_to_check = 30;
 	// Just a counter
 	uint16_t updated_fields_count = 0;
 	// how many fields are not valid and need to be rid of (removed from buildable_fields)
