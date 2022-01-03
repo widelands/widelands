@@ -348,7 +348,7 @@ descriptions:new_ship_type {
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Toototobi"),
       -- TRANSLATORS: This Amazonian ship is named after a river
-      pgettext("shipname", "Traira"),
+      pgettext("shipname", "Traíra"),
       -- TRANSLATORS: This Amazonian ship is named after a river
       pgettext("shipname", "Tumiã"),
       -- TRANSLATORS: This Amazonian ship is named after a river
