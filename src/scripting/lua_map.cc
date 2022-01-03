@@ -3199,7 +3199,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. method:: consumed_wares_workers(program_name)
 
-      Returns a :class:`table` of ``{{ware_name},ware_amount}`` for the wares consumed by this
+      Returns a :class:`table` of ``{ware_amount,{ware_names},}`` for the wares consumed by this
       production program. Multiple entries in ``{ware_name}`` are alternatives (OR logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares

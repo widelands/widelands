@@ -1,4 +1,5 @@
 include "tribes/scripting/help/format_help.lua"
+include "tribes/scripting/help/ware_help.lua"
 
 -- RST
 -- building_help.lua
@@ -318,8 +319,8 @@ end
 --
 --    Creates the string for the general section in building help
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
@@ -465,8 +466,8 @@ end
 --
 --    The input and output wares of a productionsite
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
@@ -510,11 +511,27 @@ function building_help_dependencies_production(tribe, building_description)
    end
 
    -- Produced items
+   local producing_programs = {}
+
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       result = result .. h3(_"Produces:")
       for i, ware_description in ipairs(building_description.output_ware_types) do
          result = result ..
             dependencies({building_description, ware_description}, ware_description.descname)
+         for j, program_name in ipairs(building_description.production_programs) do
+            for ware, amount in pairs(building_description:produced_wares(program_name)) do
+               if (ware_description.name == ware) then
+                  producing_programs[program_name] = ware_description
+               end
+            end
+         end
+      end
+
+      for program, ware in pairs(producing_programs) do
+         print(ware, program)
+         result = result .. h2(ware.descname .." needs:") ..
+            help_consumed_wares_workers(tribe, building_description, program)
+         result = result .. p("END TEST")
       end
       for i, worker_description in ipairs(building_description.output_worker_types) do
          result = result ..
@@ -563,8 +580,8 @@ end
 --
 --    Shows the production dependencies for a training site.
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt string with training dependencies information.
 --
@@ -632,7 +649,7 @@ end
 --
 --    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: an rt string describing the building section
 --
@@ -809,10 +826,10 @@ end
 --
 --    Displays the building's workers with an image and the tool they use
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe
 --                that we are displaying this help for.
 --
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --
 --    :returns: Workers/Crew section of the help file
@@ -882,8 +899,8 @@ end
 --
 --    Displays the production/performance section with a headline
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --
 --    :returns: rt for the production section
@@ -905,8 +922,8 @@ end
 --
 --    Main function to create a building help string.
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
