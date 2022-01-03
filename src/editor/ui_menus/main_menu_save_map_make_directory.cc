@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/string.h"
 #include "graphic/font_handler.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 
@@ -66,7 +67,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     buth_,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 
 	vbox_.add(&label_);
 	vbox_.add_space(padding_);
@@ -97,7 +98,7 @@ void MainMenuSaveMapMakeDirectory::start() {
 void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const std::string& text = edit_.text();
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystem::is_legal_filename(text);
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(text);
 	// Prevent the user from creating directory names that the game would
 	// try to interpret as maps
 	const bool has_map_extension = ends_with(text, kWidelandsMapExtension, false) ||
