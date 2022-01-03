@@ -453,11 +453,11 @@ function building_help_general_string(tribe, building_description)
          .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
       result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
       result = result .. inline_header(_"Conquer range:", building_description.conquers)
+      result = result .. inline_header(_"Vision range:", building_description.vision_range)
 
    elseif(building_description.type_name == "trainingsite") then
       result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
    end
-   result = result .. inline_header(_"Vision range:", building_description.vision_range)
    return result
 end
 
