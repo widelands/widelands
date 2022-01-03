@@ -93,16 +93,19 @@ asio_not_packaged() {
    echo "Asio is not packaged for $1, please install it from source:"
    echo " - Download the latest stable version from"
    echo "      https://sourceforge.net/projects/asio/files/asio/"
-   echo " - Unpack in your development directory"
-   echo " - Run './configure --prefix=/usr && $2 make install-data' in the unpacked asio"
-   echo "   directory (or just copy recursively 'asio.hpp' and the 'asio' subdirectory"
-   echo "   from 'include' to '/usr/include')"
+   echo " - Unpack in your development directory."
+   echo " - For a system-wide installation, run"
+   echo "      ./configure --prefix=/usr && $2 make install-data"
+   echo "   in the unpacked asio directory."
+   echo " - Alternatively, for a Widelands-local installation, copy"
+   echo "   recursively 'asio.hpp' and the 'asio' subdirectory from"
+   echo "   'include' to '<Widelands directory>/auto_dependencies/asio/'."
 }
 
 # Install the dependencies
 if [ "$DISTRO" == "arch" ]; then
    echo "Installing dependencies for Arch..."
-   pacman -S cmake gcc asio git glew make python python2 sdl2 sdl2_image sdl2_mixer sdl2_ttf
+   sudo pacman -S cmake gcc asio git glew make python python2 sdl2 sdl2_image sdl2_mixer sdl2_ttf
 
 elif [ "$DISTRO" == "fedora" ]; then
    echo "Installing dependencies for Fedora/Red Hat/CentOS..."
@@ -111,7 +114,7 @@ elif [ "$DISTRO" == "fedora" ]; then
     SDL2_mixer-devel SDL2_net-devel SDL2_ttf-devel zlib-devel
 
 elif [ "$DISTRO" == "gentoo" ]; then
-      cho "Please contribute the command and package list for Gentoo"
+   echo "Please contribute the command and package list for Gentoo"
    echo "so that we can add support for it"
 
 elif [ "$DISTRO" == "suse" ]; then
