@@ -71,7 +71,6 @@ def extract_includes(srcdir, source):
 
 
 __USES_INCLUDES = defaultdict(str)
-__USES_INCLUDES['USES_BOOST_LIBRARIES'] = r'<boost\/asio\.hpp>'
 __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_INTL'] = r'"third_party\/gettext\/gettext\.h"'
