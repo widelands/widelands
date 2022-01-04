@@ -82,7 +82,7 @@ if hash wget 2>/dev/null ; then
    DOWNLOADER="wget -O"
 elif hash curl 2>/dev/null ; then
    DOWNLOADER="curl -Lo"
-elif [ "$DISTRO" = OpenBSD -o "DISTRO" = openbsd ] ; then
+elif [ "$DISTRO" = OpenBSD -o "$DISTRO" = openbsd ] ; then
    DOWNLOADER="ftp -o"
 else
    echo "Cannot find a suitable download tool."
