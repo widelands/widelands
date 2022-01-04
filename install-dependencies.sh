@@ -139,10 +139,9 @@ elif [ "$DISTRO" = "slackware" ]; then
 
 elif [ "$DISTRO" = "mageia" ]; then
    echo "Installing dependencies for Mageia..."
-   MAGEIA_CMD="urpmi gcc gcc-c++ binutils make asio-devel SDL_image-devel SDL_ttf-devel"
-   MAGEIA_CMD="$MAGEIA_CMD SDL_mixer-devel png-devel gettext-devel cmake SDL_gfx-devel"
-   MAGEIA_CMD="$MAGEIA_CMD jpeg-devel tiff-devel git glew-devel"
-   sudo_or_su $MAGEIA_CMD
+   sudo_or_su urpmi gcc gcc-c++ binutils make asio-devel SDL_image-devel \
+    SDL_ttf-devel SDL_mixer-devel png-devel gettext-devel cmake SDL_gfx-devel \
+    jpeg-devel tiff-devel git glew-devel
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
@@ -151,8 +150,7 @@ elif [ "$DISTRO" = "debian" ]; then
 
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
-   FREEBSD_CMD="pkg install git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_net sdl2_ttf"
-   sudo_or_su $FREEBSD_CMD
+   sudo_or_su pkg install git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_net sdl2_ttf
 
 elif [ "$DISTRO" = "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
