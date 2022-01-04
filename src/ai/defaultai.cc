@@ -6090,7 +6090,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[30] = bo.max_needed_preciousness / 2;
 			inputs[31] = ((bo.cnt_under_construction + bo.unoccupied_count) > 0) ? -5 : 0;
 			inputs[32] = bo.max_needed_preciousness / 2;
-			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
+			inputs[33] = -1 * (bo.cnt_under_construction + bo.unoccupied_count) * 4;
 			if (bo.cnt_built > 0 && !bo.ware_outputs.empty() && !bo.inputs.empty()) {
 				inputs[34] +=
 				   bo.current_stats / (std::abs(management_data.get_military_number_at(192)) + 1) * 10;
@@ -6231,8 +6231,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[115] = 4;
 				}
 			}
-			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
-			inputs[117] = -(2 * bo.unoccupied_count);
+			inputs[116] = -1 * (bo.unoccupied_count * bo.unoccupied_count);
+			inputs[117] = -1 * (2 * bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {

@@ -77,9 +77,9 @@ private:
 	 * @param acceptor The acceptor we should be listening on.
 	 * @param pair A pair of the BufferedConnection for the new client and its socket.
 	 */
-	void start_accepting(
-	   boost::asio::ip::tcp::acceptor& acceptor,
-	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
+	void
+	start_accepting(asio::ip::tcp::acceptor& acceptor,
+	                std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*>& pair);
 
 	/**
 	 * Tries to listen on the given port.
@@ -95,25 +95,24 @@ private:
 	 * @param endpoint The IP version, transport protocol and port number we should listen on.
 	 * @return \c True iff the acceptor is listening now.
 	 */
-	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
-	                   const boost::asio::ip::tcp::endpoint& endpoint);
+	bool open_acceptor(asio::ip::tcp::acceptor* acceptor, const asio::ip::tcp::endpoint& endpoint);
 
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
 	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_;
-	/// An io_service needed by boost.asio. Primary needed for async operations.
-	boost::asio::io_service io_service_;
+	/// An io_service needed by asio. Primary needed for async operations.
+	asio::io_service io_service_;
 	/// The acceptor we get IPv4 connection requests to.
-	boost::asio::ip::tcp::acceptor acceptor_v4_;
+	asio::ip::tcp::acceptor acceptor_v4_;
 	/// The acceptor we get IPv6 connection requests to.
-	boost::asio::ip::tcp::acceptor acceptor_v6_;
+	asio::ip::tcp::acceptor acceptor_v6_;
 
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv4 connections
-	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v4_;
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v4_;
 	/// Socket and unconnected BuffereConnection that will be used for accepting IPv6 connections
-	std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*> accept_pair_v6_;
+	std::pair<std::unique_ptr<BufferedConnection>, asio::ip::tcp::socket*> accept_pair_v6_;
 
 	/// A thread used to wait for connections on the acceptor.
 	std::thread asio_thread_;

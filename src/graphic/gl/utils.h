@@ -137,7 +137,7 @@ private:
 };
 
 // Calls glVertexAttribPointer.
-void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset);
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, size_t offset);
 
 // Swap order of rows in pixels, to compensate for the upside-down nature of the
 // OpenGL coordinate system.
