@@ -1356,9 +1356,8 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 			update_reason = kBigFieldPos;
 		} else if (special_fields_to_preffer[kSpecialFieldPos]) {
 			// here we cover (going to prefer) fields of special interests
-			const bool is_special = bf->is_portspace == ExtendedBool::kTrue ||
-			                        bf->unowned_land_nearby ||
-			                        bf->enemy_nearby;
+			const bool is_special =
+			   bf->is_portspace == ExtendedBool::kTrue || bf->unowned_land_nearby || bf->enemy_nearby;
 			if (is_special) {
 				update_reason = kSpecialFieldPos;
 			}
