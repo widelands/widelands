@@ -53,8 +53,18 @@ manual_instructions() {
    echo " - You can remove all other files, including the 'src' directory and"
    echo "   'Makefile*' from the 'include' directory."
    echo
+
+   INSTALL="make install-data"
+   if hash sudo 2>/dev/null ; then
+      INSTALL="sudo $INSTALL"
+   elif hash doas 2>/dev/null ; then
+      INSTALL="doas $INSTALL"
+   else
+      INSTALL="su -c '$INSTALL'"
+   fi
+
    echo " - For a system-wide installation, run"
-   echo "      ./configure --prefix=/usr && $2 make install-data"
+   echo "      ./configure --prefix=/usr && $INSTALL"
    echo "   in the unpacked asio directory instead of moving the files."
 }
 
