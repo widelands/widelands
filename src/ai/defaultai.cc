@@ -1328,7 +1328,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	uint32_t invalidated_bf_count = 0;
 
 	// Stage #1:
-	for (auto *bf : buildable_fields) {
+	for (auto* bf : buildable_fields) {
 		const uint16_t build_caps =
 		   player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
 		const Widelands::PlayerNumber field_owner = bf->coords.field->get_owned_by();
@@ -1404,7 +1404,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	}
 
 	// Stage #3: update all buildable fields (expired ones of course) up to the limit
-	for (auto *bf : buildable_fields) {
+	for (auto* bf : buildable_fields) {
 		if (updated_fields_count >= max_fields_to_check) {
 			break;
 		}
