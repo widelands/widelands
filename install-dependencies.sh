@@ -89,10 +89,11 @@ if [ -z "$DISTRO" ]; then
 fi
 
 asio_not_packaged() {
-   if [ -f /usr/include/asio.hpp -o -f ./auto_dependencies/asio/asio.hpp ]; then
+   WL_DIR="$(dirname $0)"
+   if [ -f /usr/include/asio.hpp -o -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
       return 0
    else
-      if $(dirname "$0")/utils/download_asio.sh "$1" ; then
+      if "${WL_DIR}"/utils/download_asio.sh "$1" ; then
          return 0
       fi
    fi
@@ -109,6 +110,16 @@ asio_not_packaged() {
    echo "   recursively 'asio.hpp' and the 'asio' subdirectory from"
    echo "   'include' to '<Widelands directory>/auto_dependencies/asio/'."
    return 1
+}
+
+sudo_or_su() {
+   if hash sudo 2>/dev/null ; then
+      # sudo wants it split
+      sudo "$@"
+   else
+      # su wants it as a single argument
+      su -c "$*"
+   fi
 }
 
 # Install the dependencies
@@ -141,13 +152,7 @@ elif [ "$DISTRO" = "mageia" ]; then
    MAGEIA_CMD="urpmi gcc gcc-c++ binutils make asio-devel SDL_image-devel SDL_ttf-devel"
    MAGEIA_CMD="$MAGEIA_CMD SDL_mixer-devel png-devel gettext-devel cmake SDL_gfx-devel"
    MAGEIA_CMD="$MAGEIA_CMD jpeg-devel tiff-devel git glew-devel"
-   if hash sudo 2>/dev/null ; then
-      # sudo wants it split
-      sudo $MAGEIA_CMD
-   else
-      # su wants it as a single argument
-      su -c "$MAGEIA_CMD"
-   fi
+   sudo_or_su $MAGEIA_CMD
 
 elif [ "$DISTRO" = "debian" ]; then
    echo "Installing dependencies for Debian/Ubuntu Linux, Linux Mint..."
@@ -157,13 +162,7 @@ elif [ "$DISTRO" = "debian" ]; then
 elif [ "$DISTRO" = "freebsd" ]; then
    echo "Installing dependencies for FreeBSD..."
    FREEBSD_CMD="pkg install git asio cmake gettext glew png sdl2_image sdl2_mixer sdl2_net sdl2_ttf"
-   if hash sudo 2>/dev/null ; then
-      # sudo wants it split
-      sudo $FREEBSD_CMD
-   else
-      # su wants it as a single argument
-      su -c "$FREEBSD_CMD"
-   fi
+   sudo_or_su $FREEBSD_CMD
 
 elif [ "$DISTRO" = "openbsd" ]; then
    echo "Installing dependencies for OpenBSD..."
