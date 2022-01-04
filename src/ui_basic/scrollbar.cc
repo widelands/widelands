@@ -236,10 +236,10 @@ void Scrollbar::action(Area const area) {
 
 	switch (area) {
 	case Area::Minus:
-		diff = -singlestepsize_;
+		diff = -1 * singlestepsize_;
 		break;
 	case Area::MinusPage:
-		diff = -pagesize_;
+		diff = -1 * pagesize_;
 		break;
 	case Area::Plus:
 		diff = singlestepsize_;

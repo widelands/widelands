@@ -86,6 +86,7 @@ wl_library(ui_fsmenu
     graphic_text
     graphic_text_layout
     io_filesystem
+    io_filesystem_illegal_filename_check
     io_profile
     logic
     logic_addons
