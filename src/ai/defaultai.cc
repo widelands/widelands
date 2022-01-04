@@ -1328,25 +1328,25 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	uint32_t invalidated_bf_count = 0;
 
 	// Stage #1:
-	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+	for (auto bf : buildable_fields) {
 		const uint16_t build_caps =
-		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
-		const Widelands::PlayerNumber field_owner = buildable_fields[j]->coords.field->get_owned_by();
+		   player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
+		const Widelands::PlayerNumber field_owner = bf->coords.field->get_owned_by();
 		uint16_t update_reason = kNoReasonPos;
 
-		if (build_caps == 0 || field_owner != player_number()) {
-			buildable_fields[j]->invalidated = true;
+		if (!build_caps || field_owner != player_number()) {
+			bf->invalidated = true;
 		} else {
-			buildable_fields[j]->invalidated = false;  // should not happen but stil
+			bf->invalidated = false;  // should not happen but stil
 		}
 
 		// if marked as invalid, continuing with next one
-		if (buildable_fields[j]->invalidated) {
-			invalidated_bf_count += 1;
+		if (bf->invalidated) {
+			++invalidated_bf_count;
 			continue;
 		}
 
-		if (buildable_fields[j]->field_info_expiration > gametime) {
+		if (bf->field_info_expiration > gametime) {
 			continue;
 		}
 
@@ -1356,16 +1356,16 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 			update_reason = kBigFieldPos;
 		} else if (special_fields_to_preffer[kSpecialFieldPos]) {
 			// here we cover (going to prefer) fields of special interests
-			const bool is_special = buildable_fields[j]->is_portspace == ExtendedBool::kTrue ||
-			                        buildable_fields[j]->unowned_land_nearby ||
-			                        buildable_fields[j]->enemy_nearby;
+			const bool is_special = bf->is_portspace == ExtendedBool::kTrue ||
+			                        bf->unowned_land_nearby ||
+			                        bf->enemy_nearby;
 			if (is_special) {
 				update_reason = kSpecialFieldPos;
 			}
 		}
 		if (update_reason < kNoReasonPos) {
-			update_buildable_field(*buildable_fields[j]);
-			buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
+			update_buildable_field(*bf);
+			bf->field_info_expiration = gametime + kFieldInfoExpiration;
 			special_fields_to_preffer[update_reason]--;
 			updated_fields_count++;
 		}
@@ -1405,14 +1405,14 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	}
 
 	// Stage #3: update all buildable fields (expired ones of course) up to the limit
-	for (uint32_t j = 0; j < buildable_fields.size(); j++) {
+	for (auto bf : buildable_fields) {
 		if (updated_fields_count >= max_fields_to_check) {
 			break;
 		}
-		assert(!buildable_fields[j]->invalidated);  // there should be no more invalid fields
-		if (buildable_fields[j]->field_info_expiration < gametime) {
-			update_buildable_field(*buildable_fields[j]);
-			buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
+		assert(!bf->invalidated);  // there should be no more invalid fields
+		if (bf->field_info_expiration < gametime) {
+			update_buildable_field(*bf);
+			bf->field_info_expiration = gametime + kFieldInfoExpiration;
 			updated_fields_count++;
 		}
 	}
