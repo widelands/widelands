@@ -92,10 +92,8 @@ asio_not_packaged() {
    WL_DIR="$(dirname $0)"
    if [ -f /usr/include/asio.hpp -o -f "${WL_DIR}"/auto_dependencies/asio/asio.hpp ]; then
       return 0
-   else
-      if "${WL_DIR}"/utils/download_asio.sh "$1" ; then
-         return 0
-      fi
+   elif "${WL_DIR}"/utils/download_asio.sh "$1" ; then
+      return 0
    fi
    echo
    echo "Asio is not packaged for $1 and automatic downloading failed."
