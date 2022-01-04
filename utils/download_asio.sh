@@ -70,7 +70,7 @@ manual_instructions() {
 
 rm -r "./$INSTALL_TARGET" >/dev/null 2>/dev/null || true
 if ! mkdir -p "./$INSTALL_TARGET" ; then
-   echo 
+   echo
    echo "ERROR:  Cannot create directory for Asio."
    echo
    manual_instructions
