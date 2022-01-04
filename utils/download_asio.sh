@@ -106,7 +106,7 @@ if ! [ "$CHECKSUM" = "$TESTED_MD5" ] ; then
    echo "the file was compromised. If this is the first time you see this error,"
    echo "then please try again."
    echo
-   manual_instructions CHEKSUM_FAIL
+   manual_instructions CHECKSUM_FAIL
 
    rm "$DL_TARGET"
    exit 5
