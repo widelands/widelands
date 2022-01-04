@@ -97,16 +97,8 @@ asio_not_packaged() {
    fi
    echo
    echo "Asio is not packaged for $1 and automatic downloading failed."
-   echo "Please install it from source:"
-   echo " - Download the latest stable version from"
-   echo "      https://sourceforge.net/projects/asio/files/asio/"
-   echo " - Unpack in your development directory."
-   echo " - For a system-wide installation, run"
-   echo "      ./configure --prefix=/usr && $2 make install-data"
-   echo "   in the unpacked asio directory."
-   echo " - Alternatively, for a Widelands-local installation, copy"
-   echo "   recursively 'asio.hpp' and the 'asio' subdirectory from"
-   echo "   'include' to '<Widelands directory>/auto_dependencies/asio/'."
+   echo "You can retry installation by running 'utils/download_asio.sh'"
+   echo "from the main directory of the Widelands source code."
    return 1
 }
 

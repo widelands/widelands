@@ -25,21 +25,45 @@ cd "$WL_DIR"
 if ! [ -f src/wlapplication.cc ] ; then
    echo
    echo "ERROR:  Cannot find the main directory of the Widelands source code."
+   echo "        Please call 'utils/$(basename $0)' from the main directory"
+   echo "        of Widelands source where you would like to install Asio."
    echo
    exit 1
 fi
 
 if [ -f "./${INSTALL_TARGET}/asio.hpp" ] ; then
    echo "Asio is already installed in this Widelands source directory."
-   echo "If you want to replace it, then please remove it before running this script."
+   echo "If you want to replace it, then please remove it from"
+   echo "'${WL_DIR}/${INSTALL_TARGET}' before running this script."
    exit 2
 fi
+
+manual_instructions() {
+   if [ "$1" = "CHECKSUM_FAIL" ]; then
+      echo "Otherwise, please try manual installation:"
+      echo " - Download Asio:   https://think-async.com/Asio/Download.html"
+   else
+      echo "Please try manual installation:"
+      echo " - Download Asio from:   https://sourceforge.net/projects/asio/files/asio/"
+   fi
+   echo " - Extract the files from the 'include' subdirectory into"
+   echo "      '${WL_DIR}/${INSTALL_TARGET}/'"
+   echo " - Move 'asio.hpp' and the 'asio' subdirectory from the 'include' subdirectory"
+   echo "   to '${WL_DIR}/${INSTALL_TARGET}/'"
+   echo " - You can remove all other files, including the 'src' directory and"
+   echo "   'Makefile*' from the 'include' directory."
+   echo
+   echo " - For a system-wide installation, run"
+   echo "      ./configure --prefix=/usr && $2 make install-data"
+   echo "   in the unpacked asio directory instead of moving the files."
+}
 
 rm -r "./$INSTALL_TARGET" >/dev/null 2>/dev/null || true
 if ! mkdir -p "./$INSTALL_TARGET" ; then
    echo 
    echo "ERROR:  Cannot create directory for Asio."
    echo
+   manual_instructions
    exit 3
 fi
 cd "./$INSTALL_TARGET"
@@ -52,6 +76,8 @@ elif [ "$DISTRO" = OpenBSD -o "DISTRO" = openbsd ] ; then
    DOWNLOADER="ftp -o"
 else
    echo "Cannot find a suitable download tool."
+   echo
+   manual_instructions
    exit 4
 fi
 
@@ -62,6 +88,8 @@ elif hash md5 2>/dev/null ; then
 else
    echo "Cannot find tool to verify integrity of downloaded file."
    echo "Installing from an unverified download would be unsafe."
+   echo
+   manual_instructions
    exit 4
 fi
 
@@ -78,14 +106,7 @@ if ! [ "$CHECKSUM" = "$TESTED_MD5" ] ; then
    echo "the file was compromised. If this is the first time you see this error,"
    echo "then please try again."
    echo
-   echo "Otherwise, please try manual installation:"
-   echo " - Download Asio:   https://think-async.com/Asio/Download.html"
-   echo " - Extract the files from the 'include' subdirectory into"
-   echo "      '${WL_DIR}/${INSTALL_TARGET}/'"
-   echo " - Move 'asio.hpp' and the 'asio' subdirectory from the 'include' subdirectory"
-   echo "   to '${WL_DIR}/${INSTALL_TARGET}/'"
-   echo " - You can remove all other files, including the 'src' directory and"
-   echo "   'Makefile*' from the 'include' directory."
+   manual_instructions CHEKSUM_FAIL
 
    rm "$DL_TARGET"
    exit 5
@@ -102,6 +123,7 @@ else
    echo
    echo "ERROR: Something went wrong. Installed files are not found."
    echo
+   manual_instructions
    exit 6
 fi
 
