@@ -1331,13 +1331,13 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	for (auto* bf : buildable_fields) {
 		const uint16_t build_caps =
 		   player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
-		const Widelands::PlayerNumber field_owner = bf->coords.field->get_owned_by();
 		uint16_t update_reason = kNoReasonPos;
 
-		if (!build_caps || field_owner != player_number()) {
+		if (!build_caps || bf->coords.field->get_owned_by() != player_number()) {
+			// field is not buidlable or not ours
 			bf->invalidated = true;
 		} else {
-			bf->invalidated = false;  // should not happen but stil
+			bf->invalidated = false;  // should not happen but still
 		}
 
 		// if marked as invalid, continuing with next one
