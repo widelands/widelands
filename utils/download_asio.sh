@@ -15,7 +15,7 @@ INSTALL_TARGET=auto_dependencies/asio
 
 # Allow passing distro on command line.
 # This is currently only useful for OpenBSD, to also try their enhanced
-# `ftp` tool when neither `wget`, nor `curl` is available.
+# 'ftp' tool when neither 'wget', nor 'curl' is available.
 DISTRO="$1"
 
 echo "Installing Asio ${ASIO_VER} from source..."
@@ -80,12 +80,12 @@ if ! [ "$CHECKSUM" = "$TESTED_MD5" ] ; then
    echo
    echo "Otherwise, please try manual installation:"
    echo " - Download Asio:   https://think-async.com/Asio/Download.html"
-   echo " - Extract the files from the `include` subdirectory into"
-   echo "      `${WL_DIR}/${INSTALL_TARGET}/`"
-   echo " - Move `asio.hpp` and the `asio` subdirectory from the `include` subdirectory"
-   echo "   to `${WL_DIR}/${INSTALL_TARGET}/`"
-   echo " - You can remove all other files, including the `src` directory and"
-   echo "   `Makefile*` from the `include` directory."
+   echo " - Extract the files from the 'include' subdirectory into"
+   echo "      '${WL_DIR}/${INSTALL_TARGET}/'"
+   echo " - Move 'asio.hpp' and the 'asio' subdirectory from the 'include' subdirectory"
+   echo "   to '${WL_DIR}/${INSTALL_TARGET}/'"
+   echo " - You can remove all other files, including the 'src' directory and"
+   echo "   'Makefile*' from the 'include' directory."
 
    rm "$DL_TARGET"
    exit 5
