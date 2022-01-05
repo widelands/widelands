@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Guybrush88 <erpizzo@alice.it>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,7 +62,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/flags.lua:64
 msgid "Click on the flag symbol."
-msgstr ""
+msgstr "Clicca sul simbolo della bandiera."
 
 #: ../../data/scripting/training_wheels/flags.lua:75
 msgid "Click on the flag button."
@@ -78,7 +82,7 @@ msgstr ""
 #: ../../data/scripting/training_wheels/objectives.lua:22
 #: ../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "Obiettivi"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
@@ -135,12 +139,12 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:152
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
-msgstr ""
+msgstr "Strade"
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Clicca sul pulsante dell'edificio..."
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
@@ -165,7 +169,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "Chiudi questa finestra"
 
 #: ../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
@@ -208,7 +212,7 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:128
 #: ../../data/scripting/training_wheels/rocks.lua:176
 msgid "Granite"
-msgstr ""
+msgstr "Granito"
 
 #: ../../data/scripting/training_wheels/rocks.lua:131
 msgid ""

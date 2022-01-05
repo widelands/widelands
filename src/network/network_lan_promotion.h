@@ -124,22 +124,21 @@ private:
 	 * \param version Whether a IPv4 or IPv6 socket should be opened.
 	 * \param port The port to listen on.
 	 */
-	void
-	start_socket(boost::asio::ip::udp::socket* socket, boost::asio::ip::udp version, uint16_t port);
+	void start_socket(asio::ip::udp::socket* socket, asio::ip::udp version, uint16_t port);
 
 	/**
 	 * Closes the given socket.
 	 * Does nothing if the socket already has been closed.
 	 * \param socket The socket to close.
 	 */
-	void close_socket(boost::asio::ip::udp::socket* socket);
+	void close_socket(asio::ip::udp::socket* socket);
 
 	/// No idea what this does. I think it is only really used when asynchronous operations are done.
-	boost::asio::io_service io_service;
+	asio::io_service io_service;
 	/// The socket for IPv4.
-	boost::asio::ip::udp::socket socket_v4;
+	asio::ip::udp::socket socket_v4;
 	/// The socket for IPv6.
-	boost::asio::ip::udp::socket socket_v6;
+	asio::ip::udp::socket socket_v6;
 	/// The found broadcast addresses for IPv4.
 	/// No addresses for v6, there is only one fixed address.
 	std::set<std::string> broadcast_addresses_v4;

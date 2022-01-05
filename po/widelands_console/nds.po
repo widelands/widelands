@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018-2021
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-11-30 13:00+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-10 17:05+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -124,9 +124,10 @@ msgstr "Knipst de KS-Öven an. Kiek https://www.widelands.org/wiki/Ai%20Training
 
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
-"In multiplayer games only, this will keep adjusting the game speed "
-"automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr "Sett de Gauheid vum Speel in Spelen för mennig Spelers so, dat ’t good tur FPS-Tahl passt. Passt good to --ai_training"
+"This will keep adjusting the game speed automatically, depending on AI "
+"delay.Only to be used for AI testing or training (in conjunction with "
+"--ai_training)"
+msgstr "De Speel-Gauheid all de Tied an dat Hentrecken vun de künstelk Spelers anpassen. Bruuk dat blot bi'm Utprobeeren of Öven vun de künstelk Spelers (tosamen mit --ai_training)."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Game options:"

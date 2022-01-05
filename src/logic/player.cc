@@ -359,7 +359,7 @@ void Player::AiPersistentState::initialize() {
 	no_more_expeditions = false;
 	target_military_score = 100;
 	least_military_score = 0;
-	ai_productionsites_ratio = std::rand() % 5 + 7;  // NOLINT
+	ai_productionsites_ratio = RNG::static_rand(5) + 7;
 	ai_personality_mil_upper_limit = 100;
 
 	// all zeroes
@@ -1934,7 +1934,7 @@ const std::string Player::pick_shipname() {
 	++ship_name_counter_;
 
 	if (remaining_shipnames_.empty()) {
-		return bformat(pgettext("shipname", "Ship %d"), ship_name_counter_);
+		return format(pgettext("shipname", "Ship %d"), ship_name_counter_);
 	}
 
 	Game& game = dynamic_cast<Game&>(egbase());

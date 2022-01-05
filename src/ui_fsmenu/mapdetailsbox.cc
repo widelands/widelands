@@ -36,7 +36,7 @@ static std::string tribe_of(const GameSettings& game_settings, const PlayerSetti
 		}
 	}
 	return g_style_manager->font_style(UI::FontStyle::kDisabled)
-	   .as_font_tag(bformat(_("invalid tribe ‘%s’"), p.tribe));
+	   .as_font_tag(format(_("invalid tribe ‘%s’"), p.tribe));
 }
 
 static std::string assemble_infotext_for_savegame(const GameSettings& game_settings) {
@@ -45,18 +45,18 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 		infotext_fmt += "%s";
 		infotext_fmt += i > 1 ? "<br>" : "</p></rt>";
 	}
-	// @CodeCheck allow boost::format
-	boost::format infotext(infotext_fmt + "</p></rt>");
+	infotext_fmt += "</p></rt>";
+	std::vector<std::string> format_arg_strings;
 
-	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(_("Saved Players"));
+	format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	                                   .as_font_tag(_("Saved Players")));
 
 	for (unsigned i = 0; i < game_settings.players.size(); ++i) {
 		const PlayerSettings& current_player = game_settings.players.at(i);
 
 		if (current_player.state == PlayerSettings::State::kClosed) {
-			infotext % g_style_manager->font_style(UI::FontStyle::kDisabled)
-			              .as_font_tag(bformat(_("Player %u: –"), (i + 1)));
+			format_arg_strings.emplace_back(g_style_manager->font_style(UI::FontStyle::kDisabled)
+			                                   .as_font_tag(format(_("Player %u: –"), (i + 1))));
 			continue;
 		}
 
@@ -75,16 +75,23 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 			name = i18n::localize_list(names, i18n::ConcatenateWith::AMPERSAND);
 		}
 
-		infotext %
+		format_arg_strings.emplace_back(
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		      .as_font_tag(bformat(
+		      .as_font_tag(format(
 		         /** TRANSLATORS: "Player 1 (Barbarians): Playername" */
 		         _("Player %1$u (%2$s): %3$s"), (i + 1), tribe_of(game_settings, current_player),
 		         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		            .as_font_tag(name)));
+		            .as_font_tag(name))));
 	}
 
-	return infotext.str();
+	format_impl::ArgsVector fmt_args;
+	format_impl::ArgsPair arg;
+	arg.first = format_impl::AbstractNode::ArgType::kString;
+	for (const std::string& str : format_arg_strings) {
+		arg.second.string_val = str.c_str();
+		fmt_args.emplace_back(arg);
+	}
+	return format(infotext_fmt, fmt_args);
 }
 
 static std::string assemble_infotext_for_map(const Widelands::Map& map,
@@ -93,35 +100,48 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 	if (!map.get_hint().empty()) {
 		infotext_fmt += "<br>%s";
 	}
-	// @CodeCheck allow boost::format
-	boost::format infotext(infotext_fmt + "</p></rt>");
+	infotext_fmt += "</p></rt>";
+	std::vector<std::string> format_arg_strings;
 
-	infotext % g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
-	              .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details"));
-	infotext % g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	              .as_font_tag(bformat(
-	                 _("Size: %s"),
-	                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                    .as_font_tag(bformat(_("%1$u×%2$u"), map.get_width(), map.get_height()))));
-	infotext %
+	format_arg_strings.emplace_back(
+	   g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)
+	      .as_font_tag(game_settings.scenario ? _("Scenario Details") : _("Map Details")));
+
+	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	      .as_font_tag(bformat(
+	      .as_font_tag(
+	         format(_("Size: %s"),
+	                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                   .as_font_tag(format(_("%1$u×%2$u"), map.get_width(), map.get_height())))));
+
+	format_arg_strings.emplace_back(
+	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+	      .as_font_tag(format(
 	         _("Players: %s"), g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                              .as_font_tag(std::to_string(game_settings.players.size()))));
-	infotext %
+	                              .as_font_tag(std::to_string(game_settings.players.size())))));
+
+	format_arg_strings.emplace_back(
 	   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-	      .as_font_tag(bformat(_("Description: %s"),
-	                           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	                              .as_font_tag(richtext_escape(map.get_description()))));
+	      .as_font_tag(format(_("Description: %s"),
+	                          g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	                             .as_font_tag(richtext_escape(map.get_description())))));
+
 	if (!map.get_hint().empty()) {
-		infotext %
+		format_arg_strings.emplace_back(
 		   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		      .as_font_tag(bformat(
+		      .as_font_tag(format(
 		         _("Hint: %s"), g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-		                           .as_font_tag(map.get_hint())));
+		                           .as_font_tag(map.get_hint()))));
 	}
 
-	return infotext.str();
+	format_impl::ArgsVector fmt_args;
+	format_impl::ArgsPair arg;
+	arg.first = format_impl::AbstractNode::ArgType::kString;
+	for (const std::string& str : format_arg_strings) {
+		arg.second.string_val = str.c_str();
+		fmt_args.emplace_back(arg);
+	}
+	return format(infotext_fmt, fmt_args);
 }
 
 // MapDetailsBox implementation

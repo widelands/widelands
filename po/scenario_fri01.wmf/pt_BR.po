@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# YuriNikolai <yurinikolai00@gmail.com>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-13 10:15+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018\n"
+"Last-Translator: YuriNikolai <yurinikolai00@gmail.com>, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,8 +52,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Construa um Forno de Tijolos, uma mina de carvão, uma mina de pedra, uma "
-"Argilaria e um poço para começar a produzir tijolos."
+"Construa um Forno de Tijolos, uma Mina de Carvão, uma Pedreira, uma "
+"Argilaria e um Poço para começar a produzir tijolos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
@@ -73,23 +74,23 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Granito"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Argila"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Tijolos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Carvão"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
-msgstr ""
+msgstr "30 × Juncos"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
@@ -230,7 +231,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
-msgstr ""
+msgstr "Introdução"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"

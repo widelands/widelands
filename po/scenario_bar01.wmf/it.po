@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Davide Zandonella, 2021
 # SecondCloud500 <eddieven2000@gmail.com>, 2015,2017
 # Filippo Montano, 2020
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-03-18 19:53+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-09 01:09+0000\n"
+"Last-Translator: Davide Zandonella\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -167,7 +168,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Altri modi di produrre cibo – differenti tipi di cibo – sono pescatori e fattorie. Il grano delle fattorie deve essere processato con l'acqua nel forno prima di diventare commestibile. Puoi ottenere l'acqua costruendo un pozzo. Per la produzione più efficiente, costruiscilo su un punto in cui un geologo ha trovato una fonte d'acqua."
+msgstr "Altri modi di produrre cibo – differenti tipi di cibo – sono pescatori e fattorie. Il grano delle fattorie deve essere processato con l'acqua nel forno prima di diventare commestibile. Puoi ottenere l'acqua costruendo un pozzo. Per produrre in modo più efficiente, costruiscilo su un punto in cui un geologo ha trovato una fonte d'acqua."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
@@ -223,7 +224,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Certi edifici solitamente hanno maggiori esigenze rispetto agli edifici base – per esempio, le miniere profonde necessitano dei pasti invece che delle razioni. Dovrai espandere la tua taverna in una locanda allo scopo di produrre pasti dal pane pane arabo E un secondo tipo di alimenti (carne o pesce) E birra."
+msgstr "Certi edifici solitamente hanno maggiori esigenze rispetto agli edifici base – per esempio, le miniere profonde necessitano dei pasti invece che delle razioni. Dovrai espandere la tua taverna in una locanda allo scopo di produrre pasti dal pane arabo E un secondo tipo di alimenti (carne o pesce) E birra."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
@@ -236,7 +237,7 @@ msgstr "Ovviamente potrai migliorare tutte le tue miniere a miniere profonde ist
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr "Costruisci un trattamento del legno"
+msgstr "Costruisci un impianto di trattamento del legno"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -344,13 +345,13 @@ msgstr "Sono passati mesi e rimaniamo nascosti qui dove la foresta è vecchia e 
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr "I miei guerrieri cacciano di giorno e stanno sdraiati e svegli la notte - ascoltando il suono della crudele macellazione echeggiare lontano tra gli antichi alberi."
+msgstr "I miei guerrieri cacciano di giorno e stanno sdraiati e svegli la notte, ascoltando il suono del crudele genocidio echeggiare lontano tra gli antichi alberi."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr "Da qui possiamo vedere le fiamme infuriate che inghiottono Al'thunran."
+msgstr "Da qui possiamo vedere in lontananza le fiamme infuriate che inghiottono Al'thunran."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -365,7 +366,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr "Le ossa di mio padre riposano in pace sotto la terra su cui già una volta egli  terminò lo spargimento di sangue senza senso che nuovamente ci assale. Mi addolora che la sua pace sia durata una sola generazione."
+msgstr "Le ossa di mio padre riposano in pace sotto la terra su cui già una volta egli terminò lo spargimento di sangue senza senso che nuovamente ci assale. Mi addolora che la sua pace sia durata una sola generazione."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
@@ -536,7 +537,7 @@ msgstr "In un'altra notte insonne, Sono andato fino alla collina e ho guardato v
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
-msgstr "Sono un costante memento del perchè ci dobbiamo nascondere qui... e perchè dobbiamo eventualmente tornare!"
+msgstr "Sono un costante ricordo del perché ci dobbiamo nascondere qui... e perché dobbiamo eventualmente tornare!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
@@ -637,7 +638,7 @@ msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
-msgstr "Ti chiedo perdono, capitano, ma ho una grave faccenda da discutere con voi. Le rocce vicino al nostro campo si stanno riducendo velocemente sotto i nostri strumenti di lavoro, ed è solo una questione di poco tempo prima che sono andati tutti."
+msgstr "Ti chiedo perdono, capitano, ma ho una grave faccenda da discutere con voi. Le rocce vicino al nostro campo si stanno riducendo velocemente sotto i nostri strumenti di lavoro, ed è solo una questione di poco tempo prima che vengano esaurite tutte."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
@@ -766,7 +767,7 @@ msgstr "I nostri cacciatori sono in giro per le foreste, Thron."
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
-msgstr "Te lo prometto, prima che il sole tramonti oggi avrai  un sontuoso pranzo, degno del capo di tutti i clan!"
+msgstr "Te lo prometto, prima che il sole tramonti oggi avrai un sontuoso pranzo, degno del capo di tutti i clan!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"

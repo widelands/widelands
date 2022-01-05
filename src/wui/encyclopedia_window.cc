@@ -58,7 +58,7 @@ static const std::string kTabNamePrefix = "encyclopedia_";
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
-	const int contents_width = WINDOW_WIDTH / 2 - 1.5 * kPadding;
+	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * kPadding;
 
 	try {
 		set_title(table->get_string("title"));
@@ -143,7 +143,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
 		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
-		                     bformat("Error loading script for encyclopedia:\n%s", err.what()),
+		                     format("Error loading script for encyclopedia:\n%s", err.what()),
 		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}

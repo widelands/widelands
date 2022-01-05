@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -52,7 +53,7 @@ inline bool selection_is_map(const std::vector<std::string>& select) {
 }  // namespace
 
 std::string check_addon_filename_validity(const std::string& name) {
-	if (name.empty() || !FileSystem::is_legal_filename(name)) {
+	if (name.empty() || !FileSystemHelper::is_legal_filename(name)) {
 		return _("Invalid filename");
 	}
 	if (name.size() + kAddOnExtension.size() > kAddOnFileNameLengthLimit) {
@@ -61,12 +62,12 @@ std::string check_addon_filename_validity(const std::string& name) {
 
 	size_t pos = name.find_first_not_of(kValidAddOnFilenameChars);
 	if (pos != std::string::npos) {
-		return bformat(_("Invalid character ‘%c’"), name.at(pos));
+		return format(_("Invalid character ‘%c’"), name.at(pos));
 	}
 
 	for (const std::string& q : kInvalidAddOnFilenameSequences) {
 		if (name.find(q) != std::string::npos) {
-			return bformat(_("Filename may not contain ‘%s’"), q);
+			return format(_("Filename may not contain ‘%s’"), q);
 		}
 	}
 
@@ -121,7 +122,7 @@ void make_valid_addon_filename(std::string& name,
 		}
 	}
 
-	assert(FileSystem::is_legal_filename(name));
+	assert(FileSystemHelper::is_legal_filename(name));
 }
 
 AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
@@ -267,22 +268,22 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 			}
 			my_maps_.add(
 			   entry.first.localized_name, entry.first.filename, nullptr, false,
-			   bformat("%s<br>%s<br>%s<br>%s<br>%s",
-			           g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
-			              .as_font_tag(entry.first.filename),
-			           bformat(_("Name: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(entry.first.localized_name)),
-			           bformat(_("Size: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(
-			                         bformat(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
-			           bformat(_("Players: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(std::to_string(entry.first.nrplayers))),
-			           bformat(_("Description: %s"),
-			                   g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-			                      .as_font_tag(entry.first.description))));
+			   format("%s<br>%s<br>%s<br>%s<br>%s",
+			          g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			             .as_font_tag(entry.first.filename),
+			          format(_("Name: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(entry.first.localized_name)),
+			          format(_("Size: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(
+			                       format(_("%1$u×%2$u"), entry.first.width, entry.first.height))),
+			          format(_("Players: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(std::to_string(entry.first.nrplayers))),
+			          format(_("Description: %s"),
+			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                    .as_font_tag(entry.first.description))));
 		}
 	}
 
@@ -370,11 +371,11 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		if (!g_fs->is_directory(map)) {
 			UI::WLMessageBox mbox(
 			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
-			   bformat(_("The map ‘%s’ is not a directory. "
-			             "Please consider disabling the ‘Compress widelands data files’ option "
-			             "in the options menu and resaving the map in the editor."
-			             "\n\nDo you want to add this map anyway?"),
-			           filename),
+			   format(_("The map ‘%s’ is not a directory. "
+			            "Please consider disabling the ‘Compress widelands data files’ option "
+			            "in the options menu and resaving the map in the editor."
+			            "\n\nDo you want to add this map anyway?"),
+			          filename),
 			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;
@@ -399,7 +400,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			if (!err.empty()) {
 				main_menu_.show_messagebox(
 				   _("Invalid Name"),
-				   bformat(
+				   format(
 				      _("This name is invalid. Reason: %s\n\nPlease choose a different name."), err));
 				continue;
 			}
@@ -407,9 +408,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			     {kWidelandsMapExtension, kS2MapExtension1, kS2MapExtension2}) {
 				if (name.size() >= ext.size() &&
 				    name.compare(name.size() - ext.size(), ext.size(), ext) == 0) {
-					err = bformat(_("Directories may not use the extension ‘%s’.\n\nPlease "
-					                "choose a different name."),
-					              ext);
+					err = format(_("Directories may not use the extension ‘%s’.\n\nPlease "
+					               "choose a different name."),
+					             ext);
 					break;
 				}
 			}
@@ -436,9 +437,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            bformat(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
-		              select.back()) :
-            bformat(_("Do you really want to delete the map ‘%s’?"), selected_map),
+            format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
+		             select.back()) :
+            format(_("Do you really want to delete the map ‘%s’?"), selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;

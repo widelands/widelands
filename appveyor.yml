@@ -30,7 +30,7 @@ install:
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-asio mingw-w64-%MINGWSUFFIX%-icu mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
   - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-libtiff-4.3.0-3-any.pkg.tar.zst\""
 
 shallow_clone: false
@@ -39,6 +39,9 @@ branches:
   only:
     - master
 
+skip_tags: true
+
+
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
@@ -46,7 +49,7 @@ build_script:
   # detect revision
   - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: "cmake -G \"Ninja\" -DBoost_NO_BOOST_CMAKE=ON -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe

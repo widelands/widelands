@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
-# Guybrush88 <erpizzo@alice.it>, 2021
 # Stron Zios <danielekeb@gmail.com>, 2021
+# Guybrush88 <erpizzo@alice.it>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-16 15:34+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stron Zios <danielekeb@gmail.com>, 2021\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -191,7 +191,7 @@ msgstr "Addestra i tuoi soldati"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Addestrare i soldati"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
@@ -494,7 +494,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Carenze di mattoni"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
@@ -518,11 +518,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
-msgstr ""
+msgstr "Magazzini"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Costruisci un magazzino ad est"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -536,11 +536,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
-msgstr ""
+msgstr "Minatori affamati"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "I minatori stanno protestando..."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
@@ -568,16 +568,17 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Migliorare l'economia alimentare"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Dare da mangiare ai soldati"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
 msgstr ""
+"Ben fatto. I minatori sono soddisfatti e hanno ricominciato a lavorare."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -608,11 +609,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Costruisci un'economia mineraria"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
-msgstr ""
+msgstr "Economia mineraria"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
@@ -620,6 +621,8 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Ora riusciamo a produrre tutti i tipi di cibo a cui siamo abituati. Mi "
+"chiedo quali tesori potrebbero contenere queste colline. Dovremmo scoprirlo."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -634,7 +637,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
-msgstr ""
+msgstr "Sii preparato"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
@@ -680,11 +683,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr ""
+msgstr "Esplora l'isola"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Espandersi"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
@@ -710,13 +713,13 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
-msgstr ""
+msgstr "Nemici!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "Nemico avvistato!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
@@ -742,7 +745,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
-msgstr ""
+msgstr "Più forti in battaglia"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
@@ -829,7 +832,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "I nostri soldati sono forti"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
@@ -838,7 +841,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "I nostri soldati sono abbastanza forti?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -851,7 +854,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "I nostri soldati sono abbastanza forti"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
@@ -865,7 +868,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
-msgstr ""
+msgstr "Attenzione!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
@@ -901,12 +904,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Nemico sconfitto"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Nemico sconfitto!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
@@ -930,7 +933,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "L'isola si sta allagando!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -960,11 +963,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Non dimenticare i soldati"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Soldati al porto!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
@@ -996,11 +999,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
-msgstr ""
+msgstr "Vittoria"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
-msgstr ""
+msgstr "Siamo scappati!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
@@ -1012,7 +1015,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
-msgstr ""
+msgstr "Congratulazioni"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427

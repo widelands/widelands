@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2017-2018
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-14 20:43+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -132,9 +132,10 @@ msgstr "Aktiviert den KI-Trainingsmodus. Siehe https://www.widelands.org/wiki/Ai
 
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
-"In multiplayer games only, this will keep adjusting the game speed "
-"automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr "Nur im Mehrspielermodus verfügbar, wird diese Option die Spielgeschwindigkeit automatisch an die FPS anpassen. Sinnvoll in Benutzung mit --ai_training"
+"This will keep adjusting the game speed automatically, depending on AI "
+"delay.Only to be used for AI testing or training (in conjunction with "
+"--ai_training)"
+msgstr "Dies wird die Spielgeschwindigkeit automatisch basierend auf der Verzögerung in der KI einstellen. Nur zum Testen oder Trainieren (in Vebindung mit --ai_training) der KI zu verwenden."
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Game options:"

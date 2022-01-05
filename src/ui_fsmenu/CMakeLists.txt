@@ -72,11 +72,9 @@ wl_library(ui_fsmenu
     training_wheel_options.h
   DEPENDS
     ai
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_random
-    base_string
     build_info
     editor
     graphic
@@ -88,6 +86,7 @@ wl_library(ui_fsmenu
     graphic_text
     graphic_text_layout
     io_filesystem
+    io_filesystem_illegal_filename_check
     io_profile
     logic
     logic_addons
@@ -106,6 +105,7 @@ wl_library(ui_fsmenu
     scripting_lua_table
     ui_basic
     sound
+    third_party_sha1
     widelands_ball_of_mud
     widelands_options
     wui

@@ -1,13 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# tiu lau, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 09:23+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: tiu lau, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,44 +29,45 @@ msgstr[1] ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "Transport"
-msgstr ""
+msgstr "Transporte "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
-msgstr ""
+msgstr "Quatro pás para remoção dos pântanos foram recolhidas no armazém."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid "Shovels"
-msgstr ""
+msgstr "Pás"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
-msgstr ""
+msgstr "Quatro pás para remoção dos pântanos foram recolhidas no armazém."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
-msgstr ""
+msgstr "Derrote Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr ""
+msgstr "Derrote o exército de Töver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the north, who is fighting under the red banner."
 msgstr ""
+"Törver é o inimigo no norte, que está lutando sob a bandeira vermelha."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
-msgstr ""
+msgstr "Construa um porto"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr ""
+msgstr "Construa um porto ao norte"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""

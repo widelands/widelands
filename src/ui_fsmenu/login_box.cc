@@ -21,9 +21,9 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
-#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
+#include "third_party/sha1/sha1.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/main.h"
@@ -57,11 +57,11 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
                        0,
                        180,
                        UI::PanelStyle::kFsMenu,
-                       bformat(_("In order to use a registered "
-                                 "account, you need an account on the Widelands website. "
-                                 "Please log in at %s and set an online "
-                                 "gaming password on your profile page."),
-                               "\n\nhttps://widelands.org/accounts/register/\n\n")) {
+                       format(_("In order to use a registered "
+                                "account, you need an account on the Widelands website. "
+                                "Please log in at %s and set an online "
+                                "gaming password on your profile page."),
+                              "\n\nhttps://widelands.org/accounts/register/\n\n")) {
 	vbox1_.add_space(kMargin);
 	vbox1_.add(&ta_nickname_, UI::Box::Resizing::kExpandBoth);
 	vbox1_.add_space(kMargin);

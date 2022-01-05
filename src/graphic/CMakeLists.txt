@@ -30,7 +30,7 @@ wl_library(graphic_color
     color.h
     color.cc
   DEPENDS
-    base_string
+    base
   USES_SDL2
 )
 
@@ -39,7 +39,7 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
-    base_string
+    base
     graphic_color
     graphic_image_cache
     graphic_surface
@@ -54,8 +54,7 @@ wl_library(graphic_build_texture_atlas
     build_texture_atlas.h
     build_texture_atlas.cc
   DEPENDS
-    base_log
-    base_string
+    base
     graphic
     graphic_image_io
     graphic_surface
@@ -84,8 +83,8 @@ wl_library(graphic_image_cache
     image_cache.cc
     image_cache.h
   DEPENDS
+    base
     base_macros
-    base_multithreading
     graphic_image_io
     graphic_surface
 )
@@ -109,10 +108,9 @@ wl_library(graphic_gl_utils
   USES_SDL2
   USES_OPENGL
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     graphic_text
     io_fileread
@@ -130,10 +128,10 @@ wl_library(graphic_surface
     texture.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
     base_geometry
     base_macros
-    base_multithreading
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
@@ -222,8 +220,8 @@ wl_library(graphic_fields_to_draw
     gl/fields_to_draw.cc
     gl/fields_to_draw.h
   DEPENDS
+    base
     base_geometry
-    base_log
     graphic
     graphic_gl_utils
     logic
@@ -269,8 +267,8 @@ wl_library(graphic_fonthandler
     font_handler.cc
     font_handler.h
   DEPENDS
+    base
     base_macros
-    base_multithreading
     graphic_image_cache
     graphic_text
 )
@@ -280,7 +278,7 @@ wl_library(graphic_text_layout
     text_layout.cc
     text_layout.h
   DEPENDS
-    base_string
+    base
     graphic # TODO(Gunchleoc): For text_width safety only - rewrite that function
     graphic_align
     graphic_color
@@ -297,8 +295,8 @@ wl_library(graphic_wordwrap
     wordwrap.h
   USES_ICU
   DEPENDS
+    base
     base_geometry
-    base_string
     graphic
     graphic_align
     graphic_color
@@ -352,10 +350,9 @@ wl_library(graphic
     road_segments.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_scoped_timer
     base_times
     build_info

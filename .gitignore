@@ -8,6 +8,7 @@
 
 # the compile.sh file creates some files, links and directories
 /build
+/auto_dependencies
 /data/datadirversion
 update.sh
 /widelands
@@ -28,8 +29,9 @@ VERSION
 # QT Creator settings
 CMakeLists.txt.user*
 
-# Visual Studio settings
+# Visual Studio settings + VS Code
 /.vs
+/.vscode
 CMakeSettings.json
 
 # Profilers

@@ -432,7 +432,7 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
-	   new UI::Button(button_box, bformat("building_button%s", id), 0, 0, kBuildGridCellWidth,
+	   new UI::Button(button_box, format("building_button%d", id), 0, 0, kBuildGridCellWidth,
 	                  kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
 	                  descr.representative_image(&iplayer().get_player()->get_playercolor()), "",
 	                  UI::Button::VisualState::kFlat);
@@ -513,7 +513,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 				if (!stats_vector[last_building_index_].is_constructionsite) {
 					if (upcast(Widelands::MilitarySite, militarysite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
-						auto* soldier_control = militarysite->soldier_control();
+						const auto* soldier_control = militarysite->soldier_control();
 						assert(soldier_control != nullptr);
 						if (soldier_control->stationed_soldiers().size() <
 						    soldier_control->soldier_capacity()) {
@@ -535,7 +535,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 				if (!stats_vector[last_building_index_].is_constructionsite) {
 					if (upcast(Widelands::MilitarySite, militarysite,
 					           map[stats_vector[last_building_index_].pos].get_immovable())) {
-						auto* soldier_control = militarysite->soldier_control();
+						const auto* soldier_control = militarysite->soldier_control();
 						assert(soldier_control != nullptr);
 						if (soldier_control->stationed_soldiers().size() <
 						    soldier_control->soldier_capacity()) {
@@ -556,7 +556,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		if (!found) {  // Now look at the old
 			if (upcast(Widelands::MilitarySite, militarysite,
 			           map[stats_vector[last_building_index_].pos].get_immovable())) {
-				auto* soldier_control = militarysite->soldier_control();
+				const auto* soldier_control = militarysite->soldier_control();
 				assert(soldier_control != nullptr);
 				if (soldier_control->stationed_soldiers().size() <
 				    soldier_control->soldier_capacity()) {
@@ -689,7 +689,7 @@ void BuildingStatisticsMenu::update() {
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
-				const std::string perc_str = bformat(_("%i%%"), percent);
+				const std::string perc_str = format(_("%i%%"), percent);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -707,7 +707,7 @@ void BuildingStatisticsMenu::update() {
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
                                                                          style_.high_color();
 				const std::string perc_str =
-				   bformat(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
+				   format(_("%1%/%2%"), total_stationed_soldiers, total_soldier_capacity);
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
@@ -726,9 +726,9 @@ void BuildingStatisticsMenu::update() {
 		   player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced());
 		if (can_construct_this_building) {
 			/** TRANSLATORS: Buildings: owned / under construction */
-			owned_text = bformat(_("%1%/%2%"), nr_owned, nr_build);
+			owned_text = format(_("%1%/%2%"), nr_owned, nr_build);
 		} else {
-			owned_text = bformat(_("%1%/%2%"), nr_owned, "–");
+			owned_text = format(_("%1%/%2%"), nr_owned, "–");
 		}
 		set_labeltext(
 		   owned_labels_[id], owned_text, style_.building_statistics_details_font().color());

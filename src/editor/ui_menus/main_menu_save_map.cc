@@ -29,6 +29,7 @@
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/illegal_filename_check.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -77,7 +78,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                      0,
                      UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
-     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	map_details_box_.add(&edit_options_, UI::Box::Resizing::kFullSize);
@@ -182,7 +183,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 					log_err("directory creation failed in MainMenuSaveMap::"
 					        "clicked_make_directory: %s\n",
 					        e.what());
-					const std::string s = bformat(_("Error while creating directory ‘%s’."), fullname);
+					const std::string s = format(_("Error while creating directory ‘%s’."), fullname);
 					UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Creating Directory!"), s,
 					                      UI::WLMessageBox::MBoxType::kOk);
 					mbox.run<UI::Panel::Returncodes>();
@@ -258,7 +259,7 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_.text());
+	const bool is_legal_filename = FileSystemHelper::is_legal_filename(editbox_.text());
 	ok_.set_enabled(is_legal_filename);
 	editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
@@ -275,7 +276,7 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   bformat(_("Current directory: %s"), (_("My Maps") + curdir_.substr(basedir_.size()))));
+	   format(_("Current directory: %s"), (_("My Maps") + curdir_.substr(basedir_.size()))));
 }
 
 void MainMenuSaveMap::layout() {
@@ -304,8 +305,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
-		const std::string s = bformat(_("A file with the name ‘%s’ already exists. Overwrite?"),
-		                              FileSystem::fs_filename(filename.c_str()));
+		const std::string s = format(_("A file with the name ‘%s’ already exists. Overwrite?"),
+		                             FileSystem::fs_filename(filename.c_str()));
 		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Map!"), s,
 		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {

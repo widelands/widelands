@@ -3,7 +3,7 @@ wl_library(wui_sound_options
     sound_options.cc
     sound_options.h
   DEPENDS
-    base_i18n
+    base
     graphic_styles
     graphic_text_layout
     sound
@@ -22,8 +22,8 @@ wl_library(wui_chat_ui
     chat_msg_layout.cc
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
     chat
     graphic
     graphic_fonthandler
@@ -59,7 +59,7 @@ wl_library(wui_common_suggested_teams
     suggested_teams_box.cc
     suggested_teams_box.h
   DEPENDS
-    base_i18n
+    base
     graphic_image_cache
     graphic_playercolor
     logic_constants
@@ -81,10 +81,8 @@ wl_library(wui_common_gamedetails
     savegameloader.cc
     savegameloader.h
   DEPENDS
-    base_i18n
-    base_log
+    base
     base_macros
-    base_string
     base_time_string
     game_io
     graphic
@@ -116,9 +114,8 @@ wl_library(wui_common_mapdetails
     map_tags.cc
     map_tags.h
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_string
     graphic
     graphic_image_cache
     graphic_minimap_renderer
@@ -171,8 +168,8 @@ wl_library(wui_waresdisplay
     waresdisplay.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
     graphic
     graphic_fonthandler
     graphic_text_layout
@@ -188,8 +185,8 @@ wl_library(wui_game_tips
     game_tips.h
   USES_SDL2
   DEPENDS
-    base_i18n
-    base_log
+    base
+    base_random
     graphic_functions
     graphic
     graphic_fonthandler
@@ -299,14 +296,11 @@ wl_library(wui
   USES_SDL2
   DEPENDS
     ai
+    base
     base_exceptions
     base_geometry
-    base_i18n
-    base_log
     base_macros
     base_math
-    base_multithreading
-    base_string
     base_time_string
     chat
     economy
@@ -324,6 +318,7 @@ wl_library(wui
     graphic_text_layout
     graphic_toolbar_imageset
     io_filesystem
+    io_filesystem_illegal_filename_check
     io_profile
     logic
     logic_constants

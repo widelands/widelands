@@ -25,20 +25,20 @@
 
 namespace {
 
-bool do_resolve(const boost::asio::ip::tcp& protocol,
+bool do_resolve(const asio::ip::tcp& protocol,
                 NetAddress* addr,
                 const std::string& hostname,
                 uint16_t port) {
 	assert(addr != nullptr);
 	try {
-		boost::asio::io_service io_service;
-		boost::asio::ip::tcp::resolver resolver(io_service);
-		boost::asio::ip::tcp::resolver::query query(protocol, hostname, as_string(port));
-		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
-		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
+		asio::io_service io_service;
+		asio::ip::tcp::resolver resolver(io_service);
+		asio::ip::tcp::resolver::query query(protocol, hostname, as_string(port));
+		asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
+		if (iter == asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
 			log_err("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
-			        ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
+			        ((protocol == asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
@@ -46,26 +46,26 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		verb_log_info("Resolved network name '%s:%u' to %s", hostname.c_str(), port,
 		              addr->ip.to_string().c_str());
 		return true;
-	} catch (const boost::system::system_error& ec) {
+	} catch (const std::system_error& ec) {
 		// Resolution failed
 		log_err("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
-		        ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
+		        ((protocol == asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }
 }  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
+	return do_resolve(asio::ip::tcp::v4(), addr, hostname, port);
 }
 
 bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, uint16_t port) {
-	return do_resolve(boost::asio::ip::tcp::v6(), addr, hostname, port);
+	return do_resolve(asio::ip::tcp::v6(), addr, hostname, port);
 }
 
 bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
-	boost::system::error_code ec;
-	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
+	std::error_code ec;
+	asio::ip::address new_addr = asio::ip::address::from_string(ip, ec);
 	if (ec) {
 		return false;
 	}

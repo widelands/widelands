@@ -61,7 +61,7 @@ enum class Units {
 };
 
 std::string ytick_text_style(const std::string& text, const UI::FontStyleInfo& style) {
-	return bformat("<rt keep_spaces=1><p>%s</p></rt>", style.as_font_tag(text));
+	return format("<rt keep_spaces=1><p>%s</p></rt>", style.as_font_tag(text));
 }
 
 std::string xtick_text_style(const std::string& text) {
@@ -101,13 +101,13 @@ std::string get_value_with_unit(Units unit, int value) {
 	switch (unit) {
 	case Units::kDayNarrow:
 		/** TRANSLATORS: day(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%d", "%1%d", value), value);
+		return format(npgettext("unit_narrow", "%1%d", "%1%d", value), value);
 	case Units::kHourNarrow:
 		/** TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%h", "%1%h", value), value);
+		return format(npgettext("unit_narrow", "%1%h", "%1%h", value), value);
 	case Units::kMinutesNarrow:
 		/** TRANSLATORS: minute(s). Keep this as short as possible. Used in statistics. */
-		return bformat(npgettext("unit_narrow", "%1%m", "%1%m", value), value);
+		return format(npgettext("unit_narrow", "%1%m", "%1%m", value), value);
 	case Units::kMinutesGeneric:
 	case Units::kHourGeneric:
 	case Units::kDayGeneric:
@@ -264,7 +264,7 @@ void draw_diagram(uint32_t time_ms,
 		// over the number, not to the left
 		if (how_many_ticks != 0 && i != 0) {
 			std::shared_ptr<const UI::RenderedText> xtick =
-			   UI::g_fh->render(xtick_text_style(bformat("-%u ", (max_x / how_many_ticks * i))));
+			   UI::g_fh->render(xtick_text_style(format("-%u ", (max_x / how_many_ticks * i))));
 			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
 			UI::center_vertically(xtick->height(), &pos);
 			xtick->draw(dst, pos, UI::Align::kCenter);
@@ -281,24 +281,26 @@ void draw_diagram(uint32_t time_ms,
 	dst.draw_line_strip(
 	   {Vector2f(
 	       inner_w - kSpaceRight + 2,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2),
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f),
 	    Vector2f(
 	       inner_w - kSpaceRight,
-	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2) - kSpacing * 3) / 2)},
+	       kSpacing * 3 + ((((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) - kSpacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2),
-	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2)},
+	   {Vector2f(inner_w - kSpaceRight + 3, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f),
+	    Vector2f(inner_w - kSpaceRight, ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip(
-	   {Vector2f(inner_w - kSpaceRight + 2,
-	             inner_h - kSpaceBottom -
-	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2),
-	    Vector2f(inner_w - kSpaceRight,
-	             inner_h - kSpaceBottom -
-	                (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2) / 2)},
+	   {Vector2f(
+	       inner_w - kSpaceRight + 2,
+	       inner_h - kSpaceBottom -
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f),
+	    Vector2f(
+	       inner_w - kSpaceRight,
+	       inner_h - kSpaceBottom -
+	          (inner_h - kSpaceBottom - ((inner_h - kSpaceBottom) + kSpacing * 3) / 2.f) / 2.f)},
 	   axis_line_color, kAxisLinesWidth);
 
 	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight + 3, inner_h - kSpaceBottom),
@@ -371,13 +373,13 @@ uint32_t WuiPlotArea::get_plot_time() const {
 		// or a multiple of 20h
 		// or a multiple of 4 days
 		if (time_ms > 8 * kDays) {
-			time_ms += -(time_ms % (4 * kDays)) + 4 * kDays;
+			time_ms += 4 * kDays - (time_ms % (4 * kDays));
 		} else if (time_ms > 40 * kHours) {
-			time_ms += -(time_ms % (20 * kHours)) + 20 * kHours;
+			time_ms += 20 * kHours - (time_ms % (20 * kHours));
 		} else if (time_ms > 4 * kHours) {
-			time_ms += -(time_ms % (2 * kHours)) + 2 * kHours;
+			time_ms += 2 * kHours - (time_ms % (2 * kHours));
 		} else {
-			time_ms += -(time_ms % (15 * kMinutes)) + 15 * kMinutes;
+			time_ms += 15 * kMinutes - (time_ms % (15 * kMinutes));
 		}
 		return time_ms;
 	}
@@ -720,7 +722,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	         Vector2i::zero());
 
 	// yoffset of the zero line
-	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2;
+	float const yoffset = ((get_inner_h() - kSpaceBottom) + kSpacing * 3) / 2.f;
 
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
@@ -730,7 +732,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
-	draw_value(bformat("-%u", (highest_scale_)),
+	draw_value(format("-%u", (highest_scale_)),
 	           g_style_manager->statistics_plot_style().y_min_value_font(),
 	           Vector2i(get_inner_w() - kSpaceRight + 3, get_inner_h() - kSpaceBottom + 10), dst);
 }

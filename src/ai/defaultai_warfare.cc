@@ -592,7 +592,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	// we dont want to send all of them so we limit the surplus value above attackgroup
 	const uint8_t attack_group = std::abs(management_data.get_military_number_at(6)) / 10;
 	if (attackers > attack_group) {
-		attackers = attack_group + std::rand() % (attackers - attack_group);  // NOLINT
+		attackers = attack_group + RNG::static_rand(attackers - attack_group);
 	}
 
 	assert(attackers < 500);
@@ -748,7 +748,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 	// changing capacity to 0 - this will happen only once.....
 	if (tso.site->soldier_control()->soldier_capacity() > 1) {
 		game().send_player_change_soldier_capacity(
-		   *ts, -tso.site->soldier_control()->soldier_capacity());
+		   *ts, -1 * tso.site->soldier_control()->soldier_capacity());
 		return true;
 	}
 
@@ -1448,7 +1448,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 			if (trainingsite_obs.site->soldier_control()->soldier_capacity() > 0) {
 				game().send_player_change_soldier_capacity(
 				   *trainingsite_obs.site,
-				   -trainingsite_obs.site->soldier_control()->soldier_capacity());
+				   -1 * trainingsite_obs.site->soldier_control()->soldier_capacity());
 			}
 			return;
 		}

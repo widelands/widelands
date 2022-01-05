@@ -299,7 +299,7 @@ EnhanceConfirm::EnhanceConfirm(InteractivePlayer& parent,
         parent,
         _("Enhance building?"),
         building.descr().type() == Widelands::MapObjectType::MILITARYSITE ?
-           bformat(
+           format(
               "%s\n\n%s",
               _("Do you really want to enhance this building?"),
               /** TRANSLATORS: Warning message when player wants to enhance a military building */
@@ -362,7 +362,7 @@ ShipSinkConfirm::ShipSinkConfirm(InteractivePlayer& parent, Widelands::Ship& shi
    : ActionConfirm(parent,
                    _("Sink the ship?"),
                    /** TRANSLATORS: %s is a ship name */
-                   bformat(_("Do you really want to sink %s?"), ship.get_shipname()),
+                   format(_("Do you really want to sink %s?"), ship.get_shipname()),
                    ship) {
 	// Nothing special to do
 }

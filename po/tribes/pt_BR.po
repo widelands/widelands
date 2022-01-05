@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -8,13 +8,15 @@
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 # Pedro Figliolia <pedroluizf@gmail.com>, 2019
 # Tiago Henrique <tiagohrm@gmail.com>, 2019
+# tiu lau, 2021
+# YuriNikolai <yurinikolai00@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-28 02:42+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-28 01:34+0000\n"
+"Last-Translator: YuriNikolai <yurinikolai00@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,253 +28,253 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortification"
-msgstr ""
+msgstr "Fortificação"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr ""
+msgstr "Seus soldados ocuparam a Fortificação."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
 msgctxt "amazons_building"
 msgid "Your fortification discovered an aggressor."
-msgstr ""
+msgstr "Sua Fortificação descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:36
 msgctxt "amazons_building"
 msgid "Your fortification is under attack."
-msgstr ""
+msgstr "Sua Fortificação está sob ataque."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:38
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortification."
-msgstr ""
+msgstr "O inimigo derrotou os seus soldados na Fortificação."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:40
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortification."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Fortificação."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Forte"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Seus soldados ocuparam o forte."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Seu forte descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:63
 msgctxt "amazons_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Seu forte está sendo atacado."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:65
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas no forte."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:67
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo no forte."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Observation Tower"
-msgstr ""
+msgstr "Torre de observação."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr ""
+msgstr "Seus soldados ocuparam sua torre de observação."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr ""
+msgstr "Sua torre de observação descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
 msgctxt "amazons_building"
 msgid "Your observation tower is under attack."
-msgstr ""
+msgstr "Sua torre de observação está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados na torre de observação."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the observation tower."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo na torre de observação."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr ""
+msgstr "Posto de Patrulha"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr ""
+msgstr "Os seus soldados ocuparam o seu posto de patrulha."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
 msgctxt "amazons_building"
 msgid "Your patrol post discovered an aggressor."
-msgstr ""
+msgstr "O seu  posto de patrulha detetou um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr ""
+msgstr "O seu  posto de patrulha está sob ataque."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr ""
+msgstr "O inimigo derrotou os seus soldados no  posto de patrulha."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr ""
+msgstr "Os seus soldados derrotaram o inimigo no seu  posto de patrulha."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Tower"
-msgstr ""
+msgstr "Torre "
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Suas tropas ocuparam sua Torre."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
 msgctxt "amazons_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Sua Torre descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:62
 msgctxt "amazons_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Sua torre está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:64
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Torre."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:66
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Torre."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
 msgctxt "amazons_building"
 msgid "Treetop Sentry"
-msgstr ""
+msgstr "Sentinela"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your treetop sentry."
-msgstr ""
+msgstr "Os seus soldados ocuparam a sua sentinela."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr ""
+msgstr "A sua sentinela detetou um inimigo."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr ""
+msgstr "A sua sentinela está sob ataque."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr ""
+msgstr "O inimigo derrotou os seus soldados na sentinela."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr ""
+msgstr "Os seus soldados derrotaram o inimigo na sentinela."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Dwelling"
-msgstr ""
+msgstr "Moradia dos Guerreiros"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your warriors’ dwelling."
-msgstr ""
+msgstr "Seus soldados ocuparam a moradia dos guerreiros."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:44
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling discovered an aggressor."
-msgstr ""
+msgstr "Sua moradia dos guerreiros descobriu um agressor."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:46
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling is under attack."
-msgstr ""
+msgstr "Sua a moradia dos guerreiros está sob ataque."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:48
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the warriors’ dwelling."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados na moradia dos guerreiros."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:50
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo na moradia dos guerreiros."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -284,31 +286,31 @@ msgstr "Castelo"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Suas tropas ocuparam seu castelo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "O teu castelo detetou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "O teu castelo está sob ataque."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados no castelo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo no castelo."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -320,31 +322,31 @@ msgstr "Sala da Guarda"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Suas tropas ocuparam a Sala da Guarda."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "O teu posto da guarda detectou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Sua Sala da Guarda está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Sala da Guarda."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Sala da Guarda."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
@@ -356,31 +358,31 @@ msgstr "Casa-da-Guarda"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Suas tropas ocuparam a Casa da Guarda."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "A tua casa da guarda detectou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Sua Casa da Guarda está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Casa da Guarda."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Suas tropas derrotaram os inimigos na Casa da Guarda."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
@@ -392,31 +394,31 @@ msgstr "Torre"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Suas tropas ocuparam a Torre."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
 msgctxt "atlanteans_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "A tua torre detectou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Sua torre está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Torre"
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Torre."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -428,31 +430,31 @@ msgstr "Torre Alta"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Suas tropas ocuparam a Torre Alta."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "A tua Torre Alta detectou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Sua Torre Alta está sendo atacada."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados na Torre Alta."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo na Torre Alta."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
@@ -464,31 +466,31 @@ msgstr "Torre Pequena"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Seus soldados ocuparam a Torre Pequena."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "A sua Torre Pequena detectou um inimigo."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "A sua Torre Pequena está sob ataque."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados na Torre Pequena."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo na Torre Pequena."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -500,31 +502,31 @@ msgstr "Barreira"
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Seus soldados ocuparam a Barreira."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "A tua Barreira detectou um inimigo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Sua Barreira está sob ataque."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "O inimigo derrotou seus soldados na Barreira."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Seus soldados derrotaram o inimigo na Barreira."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -536,31 +538,31 @@ msgstr "Cidadela"
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:43
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your citadel."
-msgstr ""
+msgstr "Suas tropas ocuparam a Cidadela."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:45
 msgctxt "barbarians_building"
 msgid "Your citadel discovered an aggressor."
-msgstr ""
+msgstr "A Cidadela detectou um inimigo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:47
 msgctxt "barbarians_building"
 msgid "Your citadel is under attack."
-msgstr ""
+msgstr "Sua Cidadela está sendo atacada."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:49
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the citadel."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Cidadela."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the citadel."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Cidadela."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:8
@@ -572,31 +574,31 @@ msgstr "Fortaleza"
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:77
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Seus soldados ocuparam a sua Fortaleza."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:79
 msgctxt "barbarians_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Sua Fortaleza descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:81
 msgctxt "barbarians_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Sua Fortaleza está sob ataque."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:83
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Fortaleza."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:85
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Fortaleza."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -608,31 +610,31 @@ msgstr "Sentinela"
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your sentry."
-msgstr ""
+msgstr "Suas tropas ocuparam sua Sentinela."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your sentry discovered an aggressor."
-msgstr ""
+msgstr "Sua Sentinela descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:58
 msgctxt "barbarians_building"
 msgid "Your sentry is under attack."
-msgstr ""
+msgstr "Sua Sentinela está sob ataque."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:60
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the sentry."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Sentinela."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:62
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the sentry."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Sentinela."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:8
@@ -644,31 +646,31 @@ msgstr "Torre"
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:59
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Seus soldados ocuparam sua Torre."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:61
 msgctxt "barbarians_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Sua Torre descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:63
 msgctxt "barbarians_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Sua Torre está sob ataque."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:65
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Torre."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:67
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Torre."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:8
@@ -680,31 +682,31 @@ msgstr "Barreira"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:42
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Suas tropas ocuparam sua Barreira."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:44
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Sua Barreira descobriu um inimigo."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:46
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Sua Barreira está sob ataque."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:48
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "O inimigo derrotou suas tropas na Barreira."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Suas tropas derrotaram o inimigo na Barreira."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:8
@@ -926,7 +928,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:8
 msgctxt "frisians_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Fortaleza"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
@@ -962,7 +964,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:8
 msgctxt "frisians_building"
 msgid "Outpost"
-msgstr ""
+msgstr "Posto Avançado"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:56
@@ -998,7 +1000,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:8
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr ""
+msgstr "Sentinela"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:54
@@ -1034,7 +1036,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:8
 msgctxt "frisians_building"
 msgid "Tower"
-msgstr ""
+msgstr "Torre"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
@@ -1070,7 +1072,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:8
 msgctxt "frisians_building"
 msgid "Wooden Tower"
-msgstr ""
+msgstr "Torre de Madeira"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:63
@@ -1106,7 +1108,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:8
 msgctxt "frisians_building"
 msgid "High Wooden Tower"
-msgstr ""
+msgstr "Torre Alta de Madeira"
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
@@ -1156,7 +1158,7 @@ msgstr "Desmantelar sítio"
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
 msgctxt "amazons_building"
 msgid "Cassava Plantation"
-msgstr ""
+msgstr "Plantação de Mandioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:41
@@ -1236,17 +1238,17 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:87
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:52
 msgid "working"
-msgstr ""
+msgstr "trabalhando"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:49
 msgid "planting cassava"
-msgstr ""
+msgstr "plantando mandioca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:57
 msgid "harvesting cassava"
-msgstr ""
+msgstr "colhendo mandioca"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:66
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
@@ -1289,7 +1291,6 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1619,7 +1620,7 @@ msgstr ""
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:48
 msgid "harvesting rubber"
-msgstr ""
+msgstr "colhendo borracha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1921,8 +1922,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3143,7 +3144,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:57
 msgctxt "empire_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "recrutando soldado"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:8
@@ -3334,7 +3335,7 @@ msgstr "Mina de Mármore"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:69
 msgid "mining marble"
-msgstr ""
+msgstr "minerando mármore"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:140
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
@@ -3630,7 +3631,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:8
 msgctxt "frisians_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Padaria"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:8
@@ -3648,11 +3649,11 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:8
 msgctxt "frisians_building"
 msgid "Beekeeper’s House"
-msgstr ""
+msgstr "Casa de Apicultor"
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
 msgid "No Flowers"
-msgstr ""
+msgstr "Sem Flores"
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:64
 msgid "Out of Flowers"
@@ -3675,7 +3676,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:53
 msgid "planting bushes"
-msgstr ""
+msgstr "plantando arbustos"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
@@ -3726,7 +3727,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
 msgid "collecting coal"
-msgstr ""
+msgstr "coletando carvão"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
 msgid "Out of Clay Ponds"
@@ -5287,7 +5288,7 @@ msgstr ""
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Árvore Morta"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/init.lua:80
@@ -5514,7 +5515,7 @@ msgstr[1] ""
 #: ../../data/tribes/initialization/empire/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:11
 msgid "Discovery"
-msgstr ""
+msgstr "Descoberta"
 
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/discovery.lua:13
@@ -5524,7 +5525,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr ""
+msgstr "Inicie o jogo com três navios no oceano e somente um punhado de suprimentos"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5533,7 +5534,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
 msgid "Fortified Village"
-msgstr ""
+msgstr "Aldeia Fortificada"
 
 #. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
 #. condition
@@ -5543,7 +5544,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
 msgid "Start the game with a fortified military installation"
-msgstr ""
+msgstr "Inicie o jogo com uma instalação militar fortificada"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:11
@@ -5552,7 +5553,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Quartel-General"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
@@ -5561,7 +5562,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr ""
+msgstr "Inicie o jogo somente com o seu quartel-general"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:11
@@ -5570,7 +5571,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:11
 msgid "New World"
-msgstr ""
+msgstr "Novo Mundo"
 
 #. TRANSLATORS: This is the tooltip for the "New World" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:13
@@ -5579,7 +5580,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/new_world.lua:13
 msgid "Start the game with seven ships full of wares on the ocean"
-msgstr ""
+msgstr "Inicie o jogo com sete navios cheios de suprimentos no oceano"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:11
@@ -5608,13 +5609,13 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
 #: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:49
 msgid "Be careful"
-msgstr ""
+msgstr "Tenha Cuidado"
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Você só possui exatamente os objetos que precisa para começar sua economia. Certifique-se de que nenhuma ferramenta desnecessária seja criada."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5665,7 +5666,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Aldeia"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:13
@@ -5674,7 +5675,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Inicie o jogo com uma aldeia pacífica"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/atlanteans/init.lua:13
@@ -6518,7 +6519,7 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Manicoré"
-msgstr ""
+msgstr "Manicoré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
@@ -6638,7 +6639,7 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:283
 msgctxt "shipname"
 msgid "Papagaio"
-msgstr ""
+msgstr "Papagaio"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:285
@@ -6848,121 +6849,121 @@ msgstr ""
 #: ../../data/tribes/ships/amazons/init.lua:353
 msgctxt "shipname"
 msgid "Tumiã"
-msgstr ""
+msgstr "Tumiã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:355
 msgctxt "shipname"
 msgid "Tupana"
-msgstr ""
+msgstr "Tupana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:357
 msgctxt "shipname"
 msgid "Uaicurapa"
-msgstr ""
+msgstr "Uaicurapa"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:359
 msgctxt "shipname"
 msgid "Uarini"
-msgstr ""
+msgstr "Uarini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:361
 msgctxt "shipname"
 msgid "Uatumã"
-msgstr ""
+msgstr "Uatumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:363
 msgctxt "shipname"
 msgid "Uaupés"
-msgstr ""
+msgstr "Uaupés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:365
 msgctxt "shipname"
 msgid "Umari"
-msgstr ""
+msgstr "Umari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:367
 msgctxt "shipname"
 msgid "Uneiuxi"
-msgstr ""
+msgstr "Uneiuxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:369
 msgctxt "shipname"
 msgid "Unini"
-msgstr ""
+msgstr "Unini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Uruá"
-msgstr ""
+msgstr "Uruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Urubaxi"
-msgstr ""
+msgstr "Urubaxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Urubu"
-msgstr ""
+msgstr "Urubu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Urucu"
-msgstr ""
+msgstr "Urucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Urupadi"
-msgstr ""
+msgstr "Urupadi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Xeruã"
-msgstr ""
+msgstr "Xeruã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Xie"
-msgstr ""
+msgstr "Xie"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Zinho"
-msgstr ""
+msgstr "Zinho"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
 msgctxt "atlanteans_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Navio"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:134
 msgctxt "shipname"
 msgid "Abaco"
-msgstr ""
+msgstr "Abaco"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:136
 msgctxt "shipname"
 msgid "Agate"
-msgstr ""
+msgstr "Ágata"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:138
@@ -6974,13 +6975,13 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:140
 msgctxt "shipname"
 msgid "Amber"
-msgstr ""
+msgstr "Âmbar"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:142
 msgctxt "shipname"
 msgid "Amethyst"
-msgstr ""
+msgstr "Ametista"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:144
@@ -7058,7 +7059,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:168
 msgctxt "shipname"
 msgid "Cat’s Eye"
-msgstr ""
+msgstr "Olho de Tigre"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:170
@@ -7220,13 +7221,13 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:222
 msgctxt "shipname"
 msgid "Pearl"
-msgstr ""
+msgstr "Pérola"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:224
 msgctxt "shipname"
 msgid "Sapphire"
-msgstr ""
+msgstr "Safira"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:226
@@ -7250,7 +7251,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:232
 msgctxt "shipname"
 msgid "Spider"
-msgstr ""
+msgstr "Aranha"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:234
@@ -7268,7 +7269,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:238
 msgctxt "shipname"
 msgid "Tiger Eye"
-msgstr ""
+msgstr "Olho de Tigre"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:240
@@ -7292,7 +7293,7 @@ msgstr ""
 #: ../../data/tribes/ships/atlanteans/init.lua:246
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr ""
+msgstr "Turmalina"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:248
@@ -7304,25 +7305,25 @@ msgstr ""
 #: ../../data/tribes/ships/barbarians/init.lua:8
 msgctxt "barbarians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Navio"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:34
 msgctxt "shipname"
 msgid "Agilaz"
-msgstr ""
+msgstr "Agilaz"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:36
 msgctxt "shipname"
 msgid "Aslaug"
-msgstr ""
+msgstr "Aslaug"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:38
 msgctxt "shipname"
 msgid "Baldr"
-msgstr ""
+msgstr "Baldr"
 
 #. TRANSLATORS: This a Barbarian ship name
 #: ../../data/tribes/ships/barbarians/init.lua:40
@@ -7736,25 +7737,25 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:104
 msgctxt "shipname"
 msgid "Minerva"
-msgstr ""
+msgstr "Minerva"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:106
 msgctxt "shipname"
 msgid "Neptune"
-msgstr ""
+msgstr "Netuno"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:108
 msgctxt "shipname"
 msgid "Nero"
-msgstr ""
+msgstr "Nero"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:110
 msgctxt "shipname"
 msgid "Nerva"
-msgstr ""
+msgstr "Nerva"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:112
@@ -7766,13 +7767,13 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:114
 msgctxt "shipname"
 msgid "Otho"
-msgstr ""
+msgstr "Otho"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:116
 msgctxt "shipname"
 msgid "Pluto"
-msgstr ""
+msgstr "Plutão"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:118
@@ -7808,7 +7809,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:128
 msgctxt "shipname"
 msgid "Saturn"
-msgstr ""
+msgstr "Saturno"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:130
@@ -7850,7 +7851,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:142
 msgctxt "shipname"
 msgid "Venus"
-msgstr ""
+msgstr "Vênus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:144
@@ -7862,7 +7863,7 @@ msgstr ""
 #: ../../data/tribes/ships/empire/init.lua:146
 msgctxt "shipname"
 msgid "Vesta"
-msgstr ""
+msgstr "Vesta"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:148
@@ -7880,174 +7881,174 @@ msgstr ""
 #: ../../data/tribes/ships/frisians/init.lua:8
 msgctxt "frisians_ship"
 msgid "Ship"
-msgstr ""
+msgstr "Navio"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:45
 msgctxt "shipname"
 msgid "Amrum"
-msgstr ""
+msgstr "Amrum"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:47
 msgctxt "shipname"
 msgid "Alt-Nordstrand"
-msgstr ""
+msgstr "Alt-Nordstrand"
 
 #. TRANSLATORS: This frisian ship is named after a peninsula in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:49
 msgctxt "shipname"
 msgid "Eiderstedt"
-msgstr ""
+msgstr "Eiderstedt"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:51
 msgctxt "shipname"
 msgid "Föhr"
-msgstr ""
+msgstr "Föhr"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:53
 msgctxt "shipname"
 msgid "Gröde"
-msgstr ""
+msgstr "Gröde"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:55
 msgctxt "shipname"
 msgid "Habel"
-msgstr ""
+msgstr "Habel"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:57
 msgctxt "shipname"
 msgid "Hamburger Hallig"
-msgstr ""
+msgstr "Hamburger Hallig"
 
 #. TRANSLATORS: This frisian ship is named after an island in the North Sea
 #: ../../data/tribes/ships/frisians/init.lua:59
 msgctxt "shipname"
 msgid "Helgoland"
-msgstr ""
+msgstr "Helgoland"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:61
 msgctxt "shipname"
 msgid "Hever"
-msgstr ""
+msgstr "Hever"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:63
 msgctxt "shipname"
 msgid "Hooge"
-msgstr ""
+msgstr "Hooge"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:65
 msgctxt "shipname"
 msgid "Japsand"
-msgstr ""
+msgstr "Japsand"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:67
 msgctxt "shipname"
 msgid "Kormoransand"
-msgstr ""
+msgstr "Kormoransand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:69
 msgctxt "shipname"
 msgid "Langeneß"
-msgstr ""
+msgstr "Langeneß"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:71
 msgctxt "shipname"
 msgid "Norderaue"
-msgstr ""
+msgstr "Norderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:73
 msgctxt "shipname"
 msgid "Norderoog"
-msgstr ""
+msgstr "Norderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:75
 msgctxt "shipname"
 msgid "Norderoogsand"
-msgstr ""
+msgstr "Norderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:77
 msgctxt "shipname"
 msgid "Nordstrand"
-msgstr ""
+msgstr "Nordstrand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:79
 msgctxt "shipname"
 msgid "Nordstrandischmoor"
-msgstr ""
+msgstr "Nordstrandischmoor"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:81
 msgctxt "shipname"
 msgid "Oland"
-msgstr ""
+msgstr "Oland"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:83
 msgctxt "shipname"
 msgid "Pellworm"
-msgstr ""
+msgstr "Pellworm"
 
 #. TRANSLATORS: This frisian ship is named after a no longer existing island
 #. in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:85
 msgctxt "shipname"
 msgid "Strand"
-msgstr ""
+msgstr "Strand"
 
 #. TRANSLATORS: This frisian ship is named after a water body in Northern
 #. Frisia
 #: ../../data/tribes/ships/frisians/init.lua:87
 msgctxt "shipname"
 msgid "Süderaue"
-msgstr ""
+msgstr "Süderaue"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:89
 msgctxt "shipname"
 msgid "Süderoog"
-msgstr ""
+msgstr "Süderoog"
 
 #. TRANSLATORS: This frisian ship is named after a sand in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:91
 msgctxt "shipname"
 msgid "Süderoogsand"
-msgstr ""
+msgstr "Süderoogsand"
 
 #. TRANSLATORS: This frisian ship is named after a Hallig in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:93
 msgctxt "shipname"
 msgid "Südfall"
-msgstr ""
+msgstr "Südfall"
 
 #. TRANSLATORS: This frisian ship is named after an island in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:95
 msgctxt "shipname"
 msgid "Sylt"
-msgstr ""
+msgstr "Sylt"
 
 #. TRANSLATORS: This frisian ship is named after a region in Northern Frisia
 #: ../../data/tribes/ships/frisians/init.lua:97
 msgctxt "shipname"
 msgid "Uthlande"
-msgstr ""
+msgstr "Uthlande"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/armor/init.lua:77
@@ -8143,7 +8144,7 @@ msgstr "Cerveja"
 #: ../../data/tribes/wares/beer_strong/init.lua:8
 msgctxt "ware"
 msgid "Strong Beer"
-msgstr ""
+msgstr "Cerveja Forte"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/blackroot/init.lua:8
@@ -8167,7 +8168,7 @@ msgstr ""
 #: ../../data/tribes/wares/boots_hero/init.lua:8
 msgctxt "ware"
 msgid "Hero Boots"
-msgstr ""
+msgstr "Botas de Herói"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/boots_sturdy/init.lua:8
@@ -8185,7 +8186,7 @@ msgstr ""
 #: ../../data/tribes/wares/bread_amazons/init.lua:8
 msgctxt "ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pão"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -8209,7 +8210,7 @@ msgstr "Pão"
 #: ../../data/tribes/wares/bread_frisians/init.lua:8
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "Pão"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_paddle/init.lua:8
@@ -8221,7 +8222,7 @@ msgstr "Pá de pão"
 #: ../../data/tribes/wares/brick/init.lua:8
 msgctxt "ware"
 msgid "Brick"
-msgstr ""
+msgstr "Tijolo"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/buckets/init.lua:8
@@ -8233,7 +8234,7 @@ msgstr "Baldes"
 #: ../../data/tribes/wares/cassavaroot/init.lua:8
 msgctxt "ware"
 msgid "Cassava Root"
-msgstr ""
+msgstr "Raíz de Mandioca"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/chisel/init.lua:8
@@ -8245,13 +8246,13 @@ msgstr ""
 #: ../../data/tribes/wares/chocolate/init.lua:8
 msgctxt "ware"
 msgid "Chocolate"
-msgstr ""
+msgstr "Chocolate"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
 msgctxt "ware"
 msgid "Clay"
-msgstr ""
+msgstr "Argila"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/cloth/init.lua:8
@@ -8389,7 +8390,7 @@ msgstr ""
 #: ../../data/tribes/wares/granite/init.lua:8
 msgctxt "ware"
 msgid "Granite"
-msgstr ""
+msgstr "Granito"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/grape/init.lua:8
@@ -8443,13 +8444,13 @@ msgstr ""
 #: ../../data/tribes/wares/honey/init.lua:8
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "Mel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey_bread/init.lua:8
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "Pão de Mel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:8
@@ -8498,7 +8499,7 @@ msgstr "Ferramentas de Cozinha"
 #: ../../data/tribes/wares/liana/init.lua:8
 msgctxt "ware"
 msgid "Liana"
-msgstr ""
+msgstr "Cipó"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:8
@@ -8510,7 +8511,7 @@ msgstr ""
 #: ../../data/tribes/wares/machete/init.lua:8
 msgctxt "ware"
 msgid "Machete"
-msgstr ""
+msgstr "Facão"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
@@ -8552,7 +8553,7 @@ msgstr "Pinças de Ordenha"
 #: ../../data/tribes/wares/needles/init.lua:8
 msgctxt "ware"
 msgid "Needles"
-msgstr ""
+msgstr "Agulhas"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/pick/init.lua:8
@@ -8595,13 +8596,13 @@ msgstr ""
 #: ../../data/tribes/wares/rope/init.lua:8
 msgctxt "ware"
 msgid "Rope"
-msgstr ""
+msgstr "Corda"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/rubber/init.lua:8
 msgctxt "ware"
 msgid "Rubber"
-msgstr ""
+msgstr "Borracha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -8613,13 +8614,13 @@ msgstr "Serra"
 #: ../../data/tribes/wares/scrap_iron/init.lua:8
 msgctxt "ware"
 msgid "Scrap Iron"
-msgstr ""
+msgstr "Ferro de Sucata"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scrap_metal_mixed/init.lua:8
 msgctxt "ware"
 msgid "Mixed Scrap Metal"
-msgstr ""
+msgstr "Metal de Sucata Misto"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scythe/init.lua:8
@@ -8661,55 +8662,55 @@ msgstr "Carne Defumada"
 #: ../../data/tribes/wares/snack/init.lua:8
 msgctxt "ware"
 msgid "Snack"
-msgstr ""
+msgstr "Lanche"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear/init.lua:8
 msgctxt "ware"
 msgid "Spear"
-msgstr ""
+msgstr "Lança"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_advanced/init.lua:8
 msgctxt "ware"
 msgid "Advanced Spear"
-msgstr ""
+msgstr "Lança Avançada"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_hardened/init.lua:8
 msgctxt "ware"
 msgid "Hardened Spear"
-msgstr ""
+msgstr "Lança Endurecida"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
 msgctxt "ware"
 msgid "Heavy Spear"
-msgstr ""
+msgstr "Lança Pesada"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
 msgctxt "ware"
 msgid "Stone-tipped Spear"
-msgstr ""
+msgstr "Lança de Pedra"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
 msgctxt "ware"
 msgid "War Spear"
-msgstr ""
+msgstr "Lança de Guerra"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_wooden/init.lua:8
 msgctxt "ware"
 msgid "Wooden Spear"
-msgstr ""
+msgstr "Lança de Madeira"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spider_silk/init.lua:8
 msgctxt "ware"
 msgid "Spider Silk"
-msgstr ""
+msgstr "Seda de Aranha"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spidercloth/init.lua:8
@@ -8721,7 +8722,7 @@ msgstr "Tecido de Aranhas"
 #: ../../data/tribes/wares/stone_bowl/init.lua:8
 msgctxt "ware"
 msgid "Stone Bowl"
-msgstr ""
+msgstr "Tigela de Pedra"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -8739,7 +8740,7 @@ msgstr ""
 #: ../../data/tribes/wares/sword_long/init.lua:8
 msgctxt "ware"
 msgid "Long Sword"
-msgstr ""
+msgstr "Espada Longa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_short/init.lua:8
@@ -8853,7 +8854,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
 msgctxt "amazons_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Carvoeiro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
@@ -8967,7 +8968,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/trainer/init.lua:8
 msgctxt "amazons_worker"
 msgid "Trainer"
-msgstr ""
+msgstr "Treinador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
@@ -9357,7 +9358,7 @@ msgstr "Minerador"
 #: ../../data/tribes/workers/barbarians/miner_chief/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Chief Miner"
-msgstr ""
+msgstr "Minerador Chefe"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner_master/init.lua:8
@@ -9381,7 +9382,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/recruit/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Recruta"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:8
@@ -9555,7 +9556,7 @@ msgstr "Criador de Porcos"
 #: ../../data/tribes/workers/empire/recruit/init.lua:8
 msgctxt "empire_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Recruta"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:8
@@ -9633,7 +9634,7 @@ msgstr "Tecelão"
 #: ../../data/tribes/workers/frisians/baker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Baker"
-msgstr ""
+msgstr "Padeiro"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/baker_master/init.lua:8
@@ -9645,7 +9646,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/beekeeper/init.lua:8
 msgctxt "frisians_worker"
 msgid "Beekeeper"
-msgstr ""
+msgstr "Apicultor"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/berry_farmer/init.lua:8
@@ -9747,7 +9748,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/hunter/init.lua:8
 msgctxt "frisians_worker"
 msgid "Hunter"
-msgstr ""
+msgstr "Caçador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/landlady/init.lua:8
@@ -9759,13 +9760,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner/init.lua:8
 msgctxt "frisians_worker"
 msgid "Miner"
-msgstr ""
+msgstr "Minerador"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/miner_master/init.lua:8
 msgctxt "frisians_worker"
 msgid "Master Miner"
-msgstr ""
+msgstr "Minerador Mestre"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:8

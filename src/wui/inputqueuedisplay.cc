@@ -117,7 +117,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 }
 
 static inline std::string create_tooltip(const bool increase) {
-	return bformat(
+	return format(
 	   "<p>%s%s%s</p>",
 	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	      .as_font_tag(increase ?
@@ -409,6 +409,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                   bld.owner().tribe().get_ware_descr(index_)->descname() :
                   bld.owner().tribe().get_worker_descr(index_)->descname());
 
+	if (nr_icons_ == 0) {
+		// Can happen when this is a dropout queue that has already been emptied.
+		assert(queue_ != nullptr);
+		hide_from_view();
+	}
+
 	// Do not call think() yet, it might deadlock
 }
 
@@ -646,6 +652,12 @@ InputQueueDisplay::get_setting() const {
 static const RGBAColor kColorComing(127, 127, 127, 191);
 static const RGBAColor kColorMissing(191, 191, 191, 127);
 
+/** Prevent the queue from being drawn and receiving UI events. */
+void InputQueueDisplay::hide_from_view() {
+	set_visible(false);
+	set_thinks(false);
+}
+
 void InputQueueDisplay::think() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* b = building_.get(ibase_.egbase());
@@ -654,10 +666,9 @@ void InputQueueDisplay::think() {
 	}
 
 	if (queue_ && queue_->get_max_size() == 0) {
-		set_visible(false);
+		hide_from_view();
 		return;
 	}
-	set_visible(true);
 
 	const Widelands::ProductionsiteSettings::InputQueueSetting* setting = get_setting();
 	const unsigned max_fill = queue_ ? queue_->get_max_size() : setting->max_fill;

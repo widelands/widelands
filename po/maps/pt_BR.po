@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# tiu lau, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-01 14:00+0000\n"
+"Last-Translator: tiu lau\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,11 +38,11 @@ msgstr "Um lugar para chamar de lar."
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr ""
+msgstr "Neste cenário serão apresentados os edifícios com maiores níveis de produção, incluindo as minas."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 msgid "This Land is Our Land"
-msgstr ""
+msgstr "Essa é a nossa terra"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -52,32 +53,32 @@ msgstr "Este tutorial explica a gestão e treino militar e ainda faz a introduç
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Fácil."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Médio."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Difícil."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Desafiante."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "O segundo Império."
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Introduzindo os Bárbaros "
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52

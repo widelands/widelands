@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # xno, 2016
@@ -8,15 +8,15 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2017
+# Guybrush88 <erpizzo@alice.it>, 2015-2017,2021
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-11 23:36+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,32 +57,32 @@ msgstr "Questo tutorial spiega la gestione degli edifici militari e di allenamen
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Facile."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Media."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Difficile."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Impegnativa."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Il secondo impero"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Introduce i barbari."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -105,12 +105,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
 msgid "The Months of Exile"
-msgstr ""
+msgstr "I mesi di esilio"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:73
 msgid "Introduces the Empire."
-msgstr ""
+msgstr "Introduce l'impero."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:75
@@ -130,12 +130,12 @@ msgstr ""
 #. TRANSLATORS: The name of an Atlantean campaign
 #: ../../data/campaigns/campaigns.lua:93
 msgid "The Run for the Fire"
-msgstr ""
+msgstr "La corsa per il fuoco"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:96
 msgid "Introduces the Atlanteans."
-msgstr ""
+msgstr "Introduce gli atlantidei."
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:98
@@ -150,17 +150,17 @@ msgstr ""
 #. TRANSLATORS: The name of a Frisian campaign
 #: ../../data/campaigns/campaigns.lua:107
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Dall'acqua al ghiaccio"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:110
 msgid "Introduces the Frisians."
-msgstr ""
+msgstr "Introduce i frisiani."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
 #: ../../data/campaigns/campaigns.lua:115
 msgid "Sailor (Tricky)"
-msgstr ""
+msgstr "Marinaio (impegnativo)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
 #: ../../data/campaigns/campaigns.lua:117
@@ -170,7 +170,7 @@ msgstr ""
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
 #: ../../data/campaigns/campaigns.lua:119
 msgid "Captain (Unreasonable)"
-msgstr ""
+msgstr "Capitano (irragionevole)"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:124
@@ -222,7 +222,7 @@ msgstr "Infine la nave fu riparata, così Lutius e la sua gente andarono nuovame
 
 #: ../../data/campaigns/emp03.wmf/elemental:8
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "La vendetta di Nettuno"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -232,7 +232,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr ""
+msgstr "Sorpresa, sorpresa!"
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
@@ -262,7 +262,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Un benvenuto ghiacciato"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
@@ -346,11 +346,11 @@ msgstr "Grandi appezzamenti sono rari in quelle piccole isole. Dai priorità all
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
-msgstr ""
+msgstr "Astoria 2.R"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
-msgstr ""
+msgstr "pbuczny@gmail.com – modificata da Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
@@ -428,7 +428,7 @@ msgstr "Attraversando l'orizzonte"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – modificata da 3plus4i"
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
@@ -440,7 +440,7 @@ msgstr ""
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomiti 3.0"
 
 #: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
@@ -480,11 +480,11 @@ msgstr ""
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
-msgstr ""
+msgstr "v0.2"
 
 #: ../../data/maps/Europa.wmf/elemental:8
 msgid "Europa 1.2"
-msgstr ""
+msgstr "Europa 1.2"
 
 #: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
@@ -676,7 +676,7 @@ msgstr "Quattro tribù in lotta per il predominio in una zona desolata. Le risor
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Anello minore 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -797,7 +797,7 @@ msgstr "Una terra mistica, piena di paesaggi diversi, che sono tutti attraversat
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Lungo il fiume"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Aba Baba <pietrodenicola2014@gmail.com>, 2020
@@ -10,7 +10,7 @@
 # Filippo Montano, 2020
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2016,2021
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 # Stron Zios <danielekeb@gmail.com>, 2021
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-12 13:52+0000\n"
-"PO-Revision-Date: 2021-06-06 09:37+0000\n"
-"Last-Translator: Stron Zios <danielekeb@gmail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-12 09:42+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,7 +50,7 @@ msgstr "Cava"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
-msgstr "Costruisci una cava a sud del vostro quartier generale."
+msgstr "Costruisci una cava a sud del tuo quartier generale."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
@@ -516,7 +516,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "Il messaggio è stato indirizzato a me, pregandomi di tornare a Fremil. Si dice che l'Impero è in guerra con i barbari. Sono stati attaccati da nord da parte della tribù che mi era proibito di attaccare. E 'chiaro per me che cosa devo fare..."
+msgstr "Il messaggio è stato indirizzato a me, pregandomi di tornare a Fremil. Si dice che l'Impero è in guerra con i barbari. Sono stati attaccati da nord da parte della tribù che mi era proibito di attaccare. È chiaro per me che cosa devo fare..."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""

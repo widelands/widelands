@@ -336,7 +336,7 @@ void AddOnsPackager::clicked_new_addon() {
 		if (!err.empty()) {
 			main_menu_.show_messagebox(
 			   _("Invalid Name"),
-			   bformat(_("This name is invalid. Reason: %s\n\nPlease choose a different name."), err));
+			   format(_("This name is invalid. Reason: %s\n\nPlease choose a different name."), err));
 			continue;
 		}
 
@@ -383,11 +383,11 @@ void AddOnsPackager::clicked_delete_addon() {
 	const std::string& name = addons_.get_selected();
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
-	   bformat(ctrl_.is_remote(name) ?
-                 _("Do you really want to delete the add-on ‘%s’?") :
-                 _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
-	                "add-on can not be downloaded again from the server."),
-	           name),
+	   format(ctrl_.is_remote(name) ?
+                _("Do you really want to delete the add-on ‘%s’?") :
+                _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
+	               "add-on can not be downloaded again from the server."),
+	          name),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;
@@ -404,18 +404,18 @@ void AddOnsPackager::clicked_delete_addon() {
 void AddOnsPackager::die() {
 	if (!addons_with_changes_.empty()) {
 		std::string msg =
-		   bformat(ngettext(
-		              // Comments to fix codecheck false-positive
-		              "If you quit the packager now, all changes to the following %u add-on "
-		              "will be discarded.",
-		              // Comments to fix codecheck false-positive
-		              "If you quit the packager now, all changes to the following %u add-ons "
-		              "will be discarded.",
-		              // Comments to fix codecheck false-positive
-		              addons_with_changes_.size()),
-		           addons_with_changes_.size());
+		   format(ngettext(
+		             // Comments to fix codecheck false-positive
+		             "If you quit the packager now, all changes to the following %u add-on "
+		             "will be discarded.",
+		             // Comments to fix codecheck false-positive
+		             "If you quit the packager now, all changes to the following %u add-ons "
+		             "will be discarded.",
+		             // Comments to fix codecheck false-positive
+		             addons_with_changes_.size()),
+		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = bformat(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n· %2$s"), msg, str.first);
 		}
 
 		UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Quit Packager"), msg,
@@ -433,16 +433,16 @@ void AddOnsPackager::clicked_discard_changes() {
 
 	std::string msg;
 	if (addons_with_changes_.size() == 1) {
-		msg = bformat(_("Do you really want to discard all changes to the add-on ‘%s’?"),
-		              addons_with_changes_.begin()->first);
+		msg = format(_("Do you really want to discard all changes to the add-on ‘%s’?"),
+		             addons_with_changes_.begin()->first);
 	} else {
 		msg =
-		   bformat(ngettext("Do you really want to discard all changes to the following %u add-on?",
-		                    "Do you really want to discard all changes to the following %u add-ons?",
-		                    addons_with_changes_.size()),
-		           addons_with_changes_.size());
+		   format(ngettext("Do you really want to discard all changes to the following %u add-on?",
+		                   "Do you really want to discard all changes to the following %u add-ons?",
+		                   addons_with_changes_.size()),
+		          addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = bformat(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n· %2$s"), msg, str.first);
 		}
 	}
 
@@ -458,16 +458,16 @@ void AddOnsPackager::clicked_write_changes() {
 
 	std::string msg;
 	if (addons_with_changes_.size() == 1) {
-		msg = bformat(_("Do you really want to commit all changes to the add-on ‘%s’ to disk?"),
-		              addons_with_changes_.begin()->first);
+		msg = format(_("Do you really want to commit all changes to the add-on ‘%s’ to disk?"),
+		             addons_with_changes_.begin()->first);
 	} else {
-		msg = bformat(
+		msg = format(
 		   ngettext("Do you really want to commit all changes to the following %u add-on to disk?",
 		            "Do you really want to commit all changes to the following %u add-ons to disk?",
 		            addons_with_changes_.size()),
 		   addons_with_changes_.size());
 		for (const auto& str : addons_with_changes_) {
-			msg = bformat(_("%1$s\n· %2$s"), msg, str.first);
+			msg = format(_("%1$s\n· %2$s"), msg, str.first);
 		}
 	}
 	msg += "\n\n";
@@ -529,8 +529,8 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	} catch (...) {
 		main_menu_.show_messagebox(
 		   _("Invalid Version"),
-		   bformat(_("‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."),
-		           m->get_version(), addon));
+		   format(_("‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."),
+		          m->get_version(), addon));
 		return false;
 	}
 
@@ -539,7 +539,7 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	} catch (const WLWarning& e) {
 		main_menu_.show_messagebox(
 		   _("Error Writing Addon"),
-		   bformat(_("The add-on ‘%1$s’ can not be saved to disk:\n%2$s"), addon, e.what()));
+		   format(_("The add-on ‘%1$s’ can not be saved to disk:\n%2$s"), addon, e.what()));
 		return false;
 	}
 }

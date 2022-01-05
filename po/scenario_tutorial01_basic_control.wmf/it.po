@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Alen Ciga, 2021
 # xno, 2015
 # xno, 2016
+# Davide Zandonella, 2021
 # Filippo Montano, 2020
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2017
+# Guybrush88 <erpizzo@alice.it>, 2015-2017,2021
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
 # Mirco Scottà <mscotta@libero.it>, 2019
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-06-28 02:45+0000\n"
-"PO-Revision-Date: 2021-09-24 13:24+0000\n"
-"Last-Translator: Alen Ciga\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-12 08:54+0000\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -321,7 +322,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Eccellente. La capanna del taglialegna è completata. Un tagialegna ora vi enterà e comincerà a tagliare alberi, quindi la nostra scorta di legname per ora è assicurata. Ora il granito."
+msgstr "Eccellente. La capanna del taglialegna è completata. Un taglialegna ora vi entrerà e comincerà a tagliare alberi, quindi la nostra scorta di legname per ora è assicurata. Ora pensiamo al granito."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
@@ -335,7 +336,7 @@ msgstr "Sposta la visuale"
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr "Muovere la tua visuale è essenziale per avere una visione completa della tua economia. Ci sono tre modi per muovere la tua visuale in widelands."
+msgstr "Muovere la tua visuale è essenziale per avere una visione completa della tua economia. Ci sono tre modi per muovere la tua visuale in Widelands."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "The first one is to use the cursor keys on your keyboard."
@@ -778,7 +779,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr "Ciao, sono di nnuovo io!  Questa volta, ti ho mandato un messaggio. I messaggi ti vengono mandati da Widelands per informarti di eventi importanti: miniere esaurite, attacchi contro la tua tribù, edifici militari conquistati o persi, risorse trovate..."
+msgstr "Ciao, sono di nuovo io!  Questa volta, ti ho mandato un messaggio. I messaggi ti vengono mandati da Widelands per informarti di eventi importanti: miniere esaurite, attacchi contro la tua tribù, edifici militari conquistati o persi, risorse trovate..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:500
 msgid ""
@@ -962,7 +963,7 @@ msgstr "Questo conclude il primo tutorial. Per imparare di più sul gioco, puoi 
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr "Tuttavia, siccome sai controllare Widelands, puoi anche cominciare una partita, o contiuare questa, e scoprire di più per conto tuo."
+msgstr "Tuttavia, siccome adesso sai controllare Widelands, puoi anche cominciare una partita, o continuare questa, e scoprire di più per conto tuo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:604
 msgid "To leave this game and return to the main menu:"
@@ -976,7 +977,7 @@ msgstr "Clicca sul pulsante 'Menù Principale' a sinistra nella parte inferiore 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr "Poi clicca sulla voce 'Esci dal gioco'."
+msgstr "Poi clicca sulla voce 'Esci dalla partita'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:607
 msgid ""

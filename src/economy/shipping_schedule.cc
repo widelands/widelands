@@ -1709,7 +1709,7 @@ void ShippingSchedule::load_pointers(MapObjectLoader& mol) {
 		for (const auto& state_loader : plan.second) {
 			SchedulingState state(&mol.get<PortDock>(state_loader.dock), state_loader.expedition,
 			                      state_loader.duration_from_previous_location);
-			for (auto& pair : state_loader.load_there) {
+			for (const auto& pair : state_loader.load_there) {
 				state.load_there[&mol.get<PortDock>(pair.first)] = pair.second;
 			}
 			plan_for_this_ship.push_back(state);

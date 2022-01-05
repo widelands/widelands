@@ -416,21 +416,21 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			if (s->empty()) {
 				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
 				 * number of soldier slots in the building */
-				*s = bformat(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed),
-				             stationed, (capacity_ - stationed));
+				*s = format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed), stationed,
+				            (capacity_ - stationed));
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 1);
 			if (s->empty()) {
 				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = bformat(ngettext("%1% soldier", "%1% soldiers", stationed), stationed);
+				*s = format(ngettext("%1% soldier", "%1% soldiers", stationed), stationed);
 			}
 		}
 	} else {
 		if (capacity_ > stationed) {
 			*s = read_capacity_string(present, stationed, 2);
 			if (s->empty()) {
-				*s = bformat(
+				*s = format(
 				   /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 				      currently open soldier slots in the building. %3% is the maximum number of
 				      soldier slots in the building */
@@ -442,8 +442,8 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			if (s->empty()) {
 				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
 				 * open soldier slots in the building */
-				*s = bformat(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed), present,
-				             (stationed - present));
+				*s = format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed), present,
+				            (stationed - present));
 			}
 		}
 	}
@@ -807,9 +807,11 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 					// * heal healthiest if multiple of same total level exist
 					if (soldier_to_heal == nullptr || soldier->get_total_level() > max_total_level ||
 					    (soldier->get_total_level() == max_total_level &&
-					     soldier->get_current_health() / soldier->get_max_health() > max_health)) {
+					     soldier->get_current_health() / static_cast<float>(soldier->get_max_health()) >
+					        max_health)) {
 						max_total_level = soldier->get_total_level();
-						max_health = soldier->get_current_health() / soldier->get_max_health();
+						max_health =
+						   soldier->get_current_health() / static_cast<float>(soldier->get_max_health());
 						soldier_to_heal = soldier;
 					}
 				} else if ((soldier->get_battle() == nullptr ||

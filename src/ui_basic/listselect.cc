@@ -19,6 +19,8 @@
 
 #include "ui_basic/listselect.h"
 
+#include <memory>
+
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
 
@@ -56,6 +58,14 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
 	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
+}
+
+inline BaseListselect::EntryRecord::~EntryRecord() {
+	// This ensures that the last instance of this smart pointer does
+	// not go out of scope in a thread that is not the main thread.
+	std::shared_ptr<const UI::RenderedText> r1 = rendered_name;
+	std::shared_ptr<const UI::RenderedText> r2 = rendered_hotkey;
+	NoteThreadSafeFunction::instantiate([r1, r2]() {}, false);
 }
 
 /**

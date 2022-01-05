@@ -1,24 +1,24 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Airina Santonocito <airina.santonocito@gmail.com>, 2017
 # Mat V <enthusedquill6@gmail.com>, 2017
 # Filippo Montano, 2020
-# Guybrush88 <erpizzo@alice.it>, 2020
 # Samuele Battarra <battarsa@email.it>, 2020
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Leonardo Fontana <scuola.rovato@gmail.com>, 2021
 # Alen Ciga, 2021
+# Guybrush88 <erpizzo@alice.it>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Alen Ciga, 2021\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1123,7 +1123,7 @@ msgstr "Il Re sarà molto compiaciuto della nostra vittoria."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid "Pleasing Neptune"
-msgstr "Accontentare Neptuno"
+msgstr "Accontentare Nettuno"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:561
 msgid "Saledus is Very Sad and Anxious…"
@@ -1145,7 +1145,7 @@ msgid ""
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr ""
 "Come abbiamo potuto constatare più volte lungo la via, assai importante è "
-"impegnarsi a mantenere il favore degli dèi, e di Neptuno in particolare, per"
+"impegnarsi a mantenere il favore degli dei, e di Nettuno in particolare, per"
 " avere buona ventura."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:567
@@ -1154,7 +1154,7 @@ msgid ""
 "can’t worship him well. I think we should search the whole region to see if "
 "we can recover all six pieces of the shrine."
 msgstr ""
-"Sfortunatamente, la Sacra reliquia di Neptuno è andata perduta nell'ultima "
+"Sfortunatamente, la Sacra reliquia di Nettuno è andata perduta nell'ultima "
 "furibonda tempesta, e non possiamo quindi dedicargli le nostre preghiere "
 "come gli si confà. Potremmo cercare i 6 pezzi della Sacra reliquia, sparsi "
 "per la regione."
@@ -1182,7 +1182,7 @@ msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
 msgstr ""
-"Mio signore, abbiamo recuperato la Sacra reliquia di Neptuno. Ora potremo "
+"Mio signore, abbiamo recuperato la Sacra reliquia di Nettuno. Ora potremo "
 "avvalerci della sua protezione durante il viaggio."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:582
@@ -1191,9 +1191,9 @@ msgid ""
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
 "sea! Oh great Neptune, …"
 msgstr ""
-"O grande Neptuno, proteggici nel nostro viaggio! O magnifico Neptuno, fa' "
-"che i venti siano alleati nella nostra impresa! O glorioso Neptuno, salvaci "
-"dalle creature del mare! O potente Neptuno..."
+"O grande Nettuno, proteggici nel nostro viaggio! O magnifico Nettuno, fa' "
+"che i venti siano alleati nella nostra impresa! O glorioso Nettuno, salvaci "
+"dalle creature del mare! O potente Nettuno..."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Unpleasant Discoveries"
@@ -1307,22 +1307,22 @@ msgstr ""
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr ""
 "Finalmente abbiamo ritrovato un pezzo della nostra Sacra reliquia. Sia "
-"lodato Neptuno!"
+"lodato Nettuno!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:640
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr ""
 "Abbiamo trovato un altro pezzo della nostra Sacra reliquia. Lode a te, o "
-"Neptuno!"
+"Nettuno!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Abbiamo ancora bisogno di scoprire %d pezzo del nostro tempio."
+msgstr[1] "Abbiamo ancora bisogno di scoprire %d pezzi del nostro tempio."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
@@ -1331,7 +1331,7 @@ msgid ""
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
 "Finalmente abbiamo ritrovato l'ultimo pezzo della nostra Sacra reliquia. Ora"
-" possiamo riassemblarla e pregare il nostro dio. Sia lodato Neptuno!"
+" possiamo riassemblarla e pregare il nostro dio. Sia lodato Nettuno!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:651
 msgid "Artifact Found"

@@ -31,9 +31,12 @@
 
 namespace AI {
 
-constexpr int kNoAiTrainingMutation = 200;
-constexpr int kUpperDefaultMutationLimit = 150;
-constexpr int kLowerDefaultMutationLimit = 75;
+constexpr int kNormalMutation = 500;  // Almost no mutation
+constexpr int kTrainingMutation = 200;
+
+constexpr int kMilitaryNumbersPos = 0;
+constexpr int kNeuronsPos = 1;
+constexpr int kFNeuronsPos = 2;
 
 // CheckStepRoadAI
 CheckStepRoadAI::CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe)
@@ -577,7 +580,7 @@ int8_t ManagementData::shift_weight_value(const int8_t old_value, const bool agg
 
 	const int16_t upper_limit = std::min<int16_t>(old_value + halfVArRange, kNeuronWeightLimit);
 	const int16_t bottom_limit = std::max<int16_t>(old_value - halfVArRange, -kNeuronWeightLimit);
-	int16_t new_value = bottom_limit + std::rand() % (upper_limit - bottom_limit + 1);  // NOLINT
+	int16_t new_value = bottom_limit + RNG::static_rand(upper_limit - bottom_limit + 1);
 
 	if (!aggressive && ((old_value > 0 && new_value < 0) || (old_value < 0 && new_value > 0))) {
 		new_value = 0;
@@ -598,30 +601,43 @@ void ManagementData::review(const Time& gametime,
                             const int16_t trained_soldiers,
                             const uint16_t strength,
                             const uint32_t existing_ps,
-                            const Time& first_iron_mine_time) {
+                            const Time& first_iron_mine_time,
+                            const uint16_t ships_count,
+                            const uint16_t finished_mine_types) {
 
-	// bonuses (1000 or nothing)
-	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
+	// bonuses (something or nothing)
 	const uint16_t iron_mine_bonus = (first_iron_mine_time < Time(2 * 60 * 60 * 1000)) ? 1000 : 0;
-	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
+	const uint16_t attack_bonus = (attackers > 0) ? kAttackBonus : 0;
 	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
+	// For having at least one mine of each type (iron, coal, ...), so up to 1000 points
+	const uint16_t finished_mine_type_bonus = finished_mine_types * 250;
+	// Are this player best one in the game? Probably does not make sense on irregular maps
+	const uint16_t best_player_bonus = (land > max_e_land) ? 100 : 0;
 
 	// scores (numbers dependant on performance)
+	// points for the size of territory
 	const uint16_t land_score = land / kCurrentLandDivider;
-	const uint16_t strength_score = std::min<uint16_t>(strength, 100) * kStrengthMultiplier;
-	const uint16_t attack_score = std::min<uint16_t>(attackers, 40) * 50;
+	// points for the territory growth within last 60 minutes
+	const int16_t territory_growth_bonus = (land - old_land) * kLandDeltaMultiplier;
+	// score for what get_player_power() returns
+	const uint16_t strength_score = std::min<uint16_t>(strength, 200) * kStrengthMultiplier;
+	// score for soldiers that ever attacked (can repeat of course)
+	const uint16_t attackers_score = std::min<uint16_t>(attackers, 200) * kAttackersBonus;
 	const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
+	// On most maps AI will not build ships of course
+	const uint32_t ships_score = kShipBonus * ships_count;
 
-	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
-	        strength_score + ps_sites_score + attack_score;
+	score = territory_growth_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
+	        strength_score + ps_sites_score + attackers_score + ships_score +
+	        finished_mine_type_bonus + best_player_bonus;
 
-	verb_log_dbg_time(
-	   gametime,
-	   " %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
-	   "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
-	   pn, gamestring_with_leading_zeros(gametime.get()), score, primary_parent,
-	   (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
-	   (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
+	verb_log_dbg_time(gametime,
+	                  "AIPARSE %2d reviewing sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s Tr:%s, "
+	                  "Scores:Land:%5d+%4d Str:%4d PS:%4d, Att:%4d, Sh:%d, FinMns:%d\n",
+	                  pn, score, primary_parent, (best_player_bonus) ? "Y" : "N",
+	                  (iron_mine_bonus) ? "Y" : "N", (training_bonus) ? "Y" : "N", land_score,
+	                  territory_growth_bonus, strength_score, ps_sites_score,
+	                  attack_bonus + attackers_score, ships_count, finished_mine_types);
 
 	if (score < -10000 || score > 30000) {
 		verb_log_dbg_time(gametime, "%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
@@ -638,8 +654,8 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	verb_log_dbg("%2d: DNA initialization... \n", pn);
 
-	primary_parent = std::rand() % 4;         // NOLINT
-	const uint8_t parent2 = std::rand() % 4;  // NOLINT
+	primary_parent = RNG::static_rand(4);
+	const uint8_t parent2 = RNG::static_rand(4);
 
 	std::vector<int16_t> AI_military_numbers_P1(
 	   Widelands::Player::AiPersistentState::kMagicNumbersSize);
@@ -662,12 +678,9 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	// First setting of military numbers, they go directly to persistent data
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
-		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                DnaParent::kPrimary :
                                DnaParent::kSecondary;
-		if (i == kMutationRatePosition) {  // Overwriting
-			dna_donor = DnaParent::kPrimary;
-		}
 
 		switch (dna_donor) {
 		case DnaParent::kPrimary:
@@ -684,7 +697,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	persistent_data->f_neurons.clear();
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                      DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 
@@ -701,7 +714,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	}
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?  // NOLINT
+		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
                                      DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 		switch (dna_donor) {
@@ -723,7 +736,7 @@ MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
 	if (is_preferred > 0) {
 		return MutatingIntensity::kAgressive;
 	}
-	if (std::rand() % mutation_probability == 0) {  // NOLINT
+	if (RNG::static_rand(mutation_probability) == 0) {
 		return MutatingIntensity::kNormal;
 	}
 	return MutatingIntensity::kNo;
@@ -735,154 +748,144 @@ void ManagementData::mutate(const uint8_t pn) {
 	// Below numbers are used to dictate intensity of mutation
 	// Probability that a value will be mutated = 1 / probability
 	// (lesser number means higher probability and higher mutation)
-	int16_t probability =
-	   shift_weight_value(get_military_number_at(kMutationRatePosition), false) + 101;
+	int16_t mutation_intensity = (ai_training_mode_) ? kTrainingMutation : kNormalMutation;
 	// Some of mutation will be agressive - over full range of values, the number below
 	// say how many (aproximately) they will be
 	uint16_t preferred_numbers_count = 0;
 	// This is used to store status whether wild card was or was not used
 	bool wild_card = false;
 
-	// When doing training mutation probability is to be bigger than not in training mode
-	if (ai_training_mode_) {
-		if (probability > kUpperDefaultMutationLimit) {
-			probability = kUpperDefaultMutationLimit;
-		}
-		if (probability < kLowerDefaultMutationLimit) {
-			probability = kLowerDefaultMutationLimit;
-		}
-		preferred_numbers_count = 1;
-	} else {
-		probability = kNoAiTrainingMutation;
-	}
-
-	set_military_number_at(kMutationRatePosition, probability - 101);
 	// decreasing probability (or rather increasing probability of mutation) if weaker player
+	// The reason is to make them play worse
 	if (ai_type == AiType::kWeak) {
-		probability /= 15;
+		mutation_intensity /= 15;
 		preferred_numbers_count = 25;
 	} else if (ai_type == AiType::kVeryWeak) {
-		probability /= 40;
+		mutation_intensity /= 40;
 		preferred_numbers_count = 50;
 	}
 
-	// Wildcard for ai trainingmode
-	if (ai_training_mode_ && std::rand() % 8 == 0 &&  // NOLINT
-	    ai_type == AiType::kNormal) {
-		probability /= 3;
+	// Wildcard for ai trainingmode. This means that one of 8 AI players will mutate more agressively
+	// sometimes such more agrassively mutated AI player surprises and have better results than
+	// the rest
+	// (number 8 is just arbitrary number)
+	if (ai_training_mode_ && RNG::static_rand(8) == 0 && ai_type == AiType::kNormal) {
+		mutation_intensity /= 3;
 		preferred_numbers_count = 5;
 		wild_card = true;
 	}
 
-	assert(probability > 0 && probability <= 201);
+	verb_log_dbg("AIPARSE %2d  mutating_probability 1 / %3d preffered numbers target %d %s\n", pn,
+	             mutation_intensity, preferred_numbers_count, (wild_card) ? ", wild card" : "");
 
-	verb_log_dbg("%2d: mutating DNA with probability 1 / %3d, preffered numbers target %d%s:\n", pn,
-	             probability, preferred_numbers_count, (wild_card) ? ", wild card" : "");
+	// This statistics is not used in the game, but is printed and perhaps evaluated by a human
+	// Helps to understand how aggressive the mutation was in each of category:
+	// military numbers, neurons, f-neurons. So its length is 3
+	uint16_t mutation_stat[3] = {};
 
-	if (probability < 201) {
-
-		// Modifying pool of Military numbers
-		{
-			// Preferred numbers are ones that will be mutated agressively in full range
-			// [-kWeightRange, kWeightRange]
-			std::set<int32_t> preferred_numbers;
-			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_numbers.insert(std::rand() % pref_number_probability);  // NOLINT
-			}
-
-			for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
-				if (i == kMutationRatePosition) {  // mutated above
-					continue;
-				}
-
-				const MutatingIntensity mutating_intensity =
-				   do_mutate(preferred_numbers.count(i) > 0, probability);
-
-				if (mutating_intensity != MutatingIntensity::kNo) {
-					const int16_t old_value = get_military_number_at(i);
-					const int16_t new_value = shift_weight_value(
-					   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
-					set_military_number_at(i, new_value);
-					verb_log_dbg(
-					   "      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
-					   new_value,
-					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
-				}
-			}
+	// Modifying pool of Military numbers
+	{
+		// Preferred numbers are ones that will be mutated agressively in full range
+		// [-kWeightRange, kWeightRange]
+		std::set<int32_t> preferred_numbers;
+		for (int i = 0; i < preferred_numbers_count; i++) {
+			preferred_numbers.insert(RNG::static_rand(pref_number_probability));
 		}
 
-		// Modifying pool of neurons
-		{
-			// Neurons to be mutated more agressively
-			std::set<int32_t> preferred_neurons;
-			for (int i = 0; i < preferred_numbers_count; i++) {
-				preferred_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
-			}
-			for (auto& item : neuron_pool) {
+		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 
-				const MutatingIntensity mutating_intensity =
-				   do_mutate(preferred_neurons.count(item.get_id()) > 0, probability);
+			const MutatingIntensity mutating_intensity =
+			   do_mutate(preferred_numbers.count(i) > 0, mutation_intensity);
 
-				if (mutating_intensity != MutatingIntensity::kNo) {
-					const int16_t old_value = item.get_weight();
-					if (std::rand() % 4 == 0) {  // NOLINT
-						assert(!neuron_curves.empty());
-						item.set_type(std::rand() % neuron_curves.size());  // NOLINT
-						persistent_data->neuron_functs[item.get_id()] = item.get_type();
-					} else {
-						int16_t new_value = shift_weight_value(
-						   item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
-						item.set_weight(new_value);
-						persistent_data->neuron_weights[item.get_id()] = item.get_weight();
-					}
-					verb_log_dbg(
-					   "      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n", item.get_id(),
-					   old_value, item.get_weight(), item.get_type(),
-					   (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
-
-					item.recalculate();
-				}
-			}
-		}
-
-		// Modifying pool of f-neurons
-		{
-			// FNeurons to be mutated more agressively
-			std::set<int32_t> preferred_f_neurons;
-			// preferred_numbers_count is multiplied by 3 because FNeuron store more than
-			// one value
-			for (int i = 0; i < 3 * preferred_numbers_count; i++) {
-				preferred_f_neurons.insert(std::rand() % pref_number_probability);  // NOLINT
-			}
-
-			for (auto& item : f_neuron_pool) {
-				uint8_t changed_bits = 0;
-				// is this a preferred neuron
-				if (preferred_f_neurons.count(item.get_id()) > 0) {
-					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % 5 == 0) {  // NOLINT
-							item.flip_bit(i);
-							++changed_bits;
-						}
-					}
-				} else {  // normal mutation
-					for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-						if (std::rand() % (probability * 3) == 0) {  // NOLINT
-							item.flip_bit(i);
-							++changed_bits;
-						}
-					}
-				}
-
-				if (changed_bits) {
-					persistent_data->f_neurons[item.get_id()] = item.get_int();
-					verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
-					             item.get_id(), item.get_int(), changed_bits,
-					             (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
-				}
+			if (mutating_intensity != MutatingIntensity::kNo) {
+				const int16_t old_value = get_military_number_at(i);
+				const int16_t new_value = shift_weight_value(
+				   get_military_number_at(i), mutating_intensity == MutatingIntensity::kAgressive);
+				set_military_number_at(i, new_value);
+				++mutation_stat[kMilitaryNumbersPos];
+				verb_log_dbg("      Magic number %3d: value changed: %4d -> %4d  %s\n", i, old_value,
+				             new_value,
+				             (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
 			}
 		}
 	}
+
+	// Modifying pool of neurons
+	{
+		// Neurons to be mutated more agressively
+		std::set<int32_t> preferred_neurons;
+		for (int i = 0; i < preferred_numbers_count; i++) {
+			preferred_neurons.insert(RNG::static_rand(pref_number_probability));
+		}
+		for (auto& item : neuron_pool) {
+
+			const MutatingIntensity mutating_intensity =
+			   do_mutate(preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
+
+			if (mutating_intensity != MutatingIntensity::kNo) {
+				const int16_t old_value = item.get_weight();
+				if (RNG::static_rand(4) == 0) {
+					assert(!neuron_curves.empty());
+					item.set_type(RNG::static_rand(neuron_curves.size()));
+					persistent_data->neuron_functs[item.get_id()] = item.get_type();
+				} else {
+					int16_t new_value = shift_weight_value(
+					   item.get_weight(), mutating_intensity == MutatingIntensity::kAgressive);
+					item.set_weight(new_value);
+					persistent_data->neuron_weights[item.get_id()] = item.get_weight();
+				}
+				++mutation_stat[kNeuronsPos];
+				verb_log_dbg("      Neuron %2d: weight: %4d -> %4d, new curve: %d   %s\n",
+				             item.get_id(), old_value, item.get_weight(), item.get_type(),
+				             (mutating_intensity == MutatingIntensity::kAgressive) ? "aggressive" : "");
+
+				item.recalculate();
+			}
+		}
+	}
+
+	// Modifying pool of f-neurons
+	{
+		// FNeurons to be mutated more agressively
+		std::set<int32_t> preferred_f_neurons;
+		// preferred_numbers_count is multiplied by 3 because FNeuron store more than
+		// one value
+		for (int i = 0; i < 3 * preferred_numbers_count; i++) {
+			preferred_f_neurons.insert(RNG::static_rand(pref_number_probability));
+		}
+
+		for (auto& item : f_neuron_pool) {
+			uint8_t changed_bits = 0;
+			// is this a preferred neuron
+			if (preferred_f_neurons.count(item.get_id()) > 0) {
+				for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+					if (RNG::static_rand(5) == 0) {
+						item.flip_bit(i);
+						++changed_bits;
+					}
+				}
+			} else {  // normal mutation
+				for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+					if (RNG::static_rand(mutation_intensity * 3) == 0) {
+						item.flip_bit(i);
+						++changed_bits;
+					}
+				}
+			}
+
+			if (changed_bits) {  // -> the f-neuron was changed
+				++mutation_stat[kFNeuronsPos];
+				persistent_data->f_neurons[item.get_id()] = item.get_int();
+				verb_log_dbg("      F-Neuron %2d: new value: %13ul, changed bits: %2d   %s\n",
+				             item.get_id(), item.get_int(), changed_bits,
+				             (preferred_f_neurons.count(item.get_id()) > 0) ? "aggressive" : "");
+			}
+		}
+	}
+
+	verb_log_dbg("AIPARSE %2d mutation_statistics %d %d %d\n", pn,
+	             mutation_stat[kMilitaryNumbersPos], mutation_stat[kNeuronsPos],
+	             mutation_stat[kFNeuronsPos]);
 
 	test_consistency();
 }
@@ -970,6 +973,9 @@ SchedulerTask::SchedulerTask(const Time& time,
                              const uint8_t p,
                              const char* d)
    : due_time(time), id(t), priority(p), descr(d) {
+	call_count = 0;
+	total_exec_time_ms = 0;
+	max_exec_time_ms = 0;
 }
 
 bool SchedulerTask::operator<(const SchedulerTask& other) const {
@@ -1298,15 +1304,8 @@ bool PlayersStrengths::players_in_same_team(Widelands::PlayerNumber pl1,
                                             Widelands::PlayerNumber pl2) {
 	assert(all_stats.count(pl1) > 0);
 	assert(all_stats.count(pl2) > 0);
-	if (pl1 == pl2) {
-		return false;
-	} else if (all_stats[pl1].team_number > 0 &&
-	           all_stats[pl1].team_number == all_stats[pl2].team_number) {
-		// team number 0 = no team
-		return true;
-	} else {
-		return false;
-	}
+	return pl1 != pl2 && all_stats.at(pl1).team_number > 0 &&
+	       all_stats.at(pl1).team_number == all_stats.at(pl2).team_number;
 }
 
 bool PlayersStrengths::strong_enough(Widelands::PlayerNumber pl) {
@@ -1515,7 +1514,7 @@ void FlagCandidates::add_flag(const uint32_t coords,
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {
-	for (auto& item : flags_) {
+	for (const auto& item : flags_) {
 		if (item.coords_hash == coords_hash) {
 			return true;
 		}

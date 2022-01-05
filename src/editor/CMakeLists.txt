@@ -49,6 +49,8 @@ wl_library(editor
     tools/tool.h
     tools/tool_action.h
     ui_menus/categorized_item_selection_menu.h
+    ui_menus/field_info_window.h
+    ui_menus/field_info_window.cc
     ui_menus/help.cc
     ui_menus/help.h
     ui_menus/main_menu_load_map.cc
@@ -89,13 +91,11 @@ wl_library(editor
     ui_menus/toolsize_menu.h
   USES_SDL2
   DEPENDS
+    base
     base_exceptions
-    base_i18n
-    base_log
     base_macros
     base_random
     base_scoped_timer
-    base_string
     build_info
     graphic
     graphic_fonthandler
@@ -105,6 +105,7 @@ wl_library(editor
     graphic_surface
     graphic_text_layout
     io_filesystem
+    io_filesystem_illegal_filename_check
     logic
     logic_addons
     logic_constants

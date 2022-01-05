@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2020
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-11-16 02:40+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-10 02:42+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -129,9 +129,10 @@ msgstr "인공지능 훈련 모드를 활성화합니다. 이 모드에 대한 �
 
 #: ../../src/wlapplication_messages.cc:91
 msgid ""
-"In multiplayer games only, this will keep adjusting the game speed "
-"automatically, depending on FPS. Useful in conjunction with --ai_training"
-msgstr "멀티플레이어 게임에서만 FPS에 따라 자동으로 게임 속도를 조정합니다. --ai_training과 함께 사용하면 유용합니다"
+"This will keep adjusting the game speed automatically, depending on AI "
+"delay.Only to be used for AI testing or training (in conjunction with "
+"--ai_training)"
+msgstr ""
 
 #: ../../src/wlapplication_messages.cc:95
 msgid "Game options:"

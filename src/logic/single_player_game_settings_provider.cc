@@ -23,6 +23,7 @@
 
 #include "ai/computer_player.h"
 #include "base/i18n.h"
+#include "base/random.h"
 #include "base/wexception.h"
 #include "graphic/playercolor.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -107,7 +108,7 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 		player.tribe = s.tribes.at(0).name;
 		player.random_tribe = false;
 		player.initialization_index = 0;
-		player.name = bformat(_("Player %u"), (player_nr + 1));
+		player.name = format(_("Player %u"), (player_nr + 1));
 		player.team = 0;
 		player.color = kPlayerColors[player_nr];
 		// Set default computerplayer ai type
@@ -170,7 +171,7 @@ void SinglePlayerGameSettingsProvider::next_player_state(uint8_t const number) {
 			s.players[number].random_ai = true;
 			do {
 				// Choose a random AI
-				uint8_t random = (std::rand() % impls.size());  // NOLINT
+				uint8_t random = RNG::static_rand(impls.size());
 				it = impls.begin() + random;
 			} while ((*it)->type == AI::ComputerPlayer::Implementation::Type::kEmpty);
 		}
@@ -193,7 +194,7 @@ void SinglePlayerGameSettingsProvider::set_player_tribe(uint8_t const number,
 
 	while (random_tribe) {
 		uint8_t num_tribes = s.tribes.size();
-		uint8_t random = (std::rand() % num_tribes);  // NOLINT
+		uint8_t random = RNG::static_rand(num_tribes);
 		actual_tribe = s.tribes.at(random).name;
 		if (player.state != PlayerSettings::State::kComputer ||
 		    s.get_tribeinfo(actual_tribe).suited_for_ai) {

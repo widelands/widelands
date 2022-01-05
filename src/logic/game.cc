@@ -294,7 +294,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
 		if (tribe.empty()) {
 			verb_log_info_time(
 			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
+			const DescriptionIndex random = RNG::static_rand(descriptions().nr_tribes());
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
@@ -699,8 +699,7 @@ bool Game::run(StartGameType const start_game_type,
 
 	dynamic_cast<InteractiveGameBase&>(*get_ibase()).rebuild_main_menu();
 
-	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
-	                               start_game_type == StartGameType::kSaveGame)) {
+	if (!script_to_run.empty()) {
 		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 

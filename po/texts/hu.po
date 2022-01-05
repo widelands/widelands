@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Tóth András <txa-dev@posteo.hu>, 2021
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-07 04:29+0000\n"
-"PO-Revision-Date: 2021-11-18 21:12+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-06 21:41+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -541,43 +541,43 @@ msgstr "Az élelmiszereket faszén tüzén szárítják. Biztosítsd a folyamato
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "A liánvágók liánt gyűjtenek a közeli fákról, de ettől még a fák sértetlenek maradnak."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Az amazonok számára a víz az életet jelenti. A vízgyűjtők fontos szolgálatot látnak el a törzs számára."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Az aranymosáshoz folyamatos vízellátás szükséges, lehetőleg minél közelebbről a hatékonyság és frissesség érdekében."
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "A vadonőrzők biztosítják, hogy mindig legyen vadászható vad és halászható hal. Vadakat csak olyan fák mellett tudnak szabadon engedni, amelynek lombjában nincs őrház."
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "A ritkafa ültetvények figyelik a ritkafák raktárkészletét, és a dzsungelmesterek a gazdaság igényei szerint ültetik a fákat."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "A kötél elengedhetetlen az erős épületekhez, tartós ruhákhoz és a kenuk összekötözéséhez, amivel a hajók készülnek."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "A dzsungelmesterek dzsungelfenntartóként dolgozva szerzik meg a megfelelő tapasztalatot ahhoz, hogy kertészetben vagy ritkafa ültetvényen tudjanak dolgozni."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
