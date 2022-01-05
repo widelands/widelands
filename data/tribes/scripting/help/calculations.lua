@@ -1,3 +1,9 @@
+-- RST
+-- calculations.lua
+-- -------------------------------------
+--
+-- Functions used for the ingame help windows.
+
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
@@ -8,10 +14,12 @@ include "tribes/scripting/help/format_help.lua"
 --
 --    :arg building: The :class:`wl.map.BuildingDescription`
 --    :arg ware_description: A :class:`wl.map.WareDecription`
---    Returns (in this order):
---    An array of program_names this production site has
---    A table of `{program_name, wares_count}` 
---    A table of `{program_name, formatted_string(s)}
+--
+--    :returns (in this order):
+--       * An :class:`array` of program_names this production site has
+--       * A :class:`table` of ``{program_name,wares_count}``
+--       * A :class:`table` of ``{program_name,formatted_string(s)}``
+--
 
 function programs_wares_count(tribe, building, ware_description)
    local producing_programs = {}

@@ -3199,14 +3199,21 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 /* RST
    .. method:: consumed_wares_workers(program_name)
 
-      Returns a :class:`table` of ``{ware_amount,{ware_names},}`` for the wares consumed by this
-      production program. Multiple entries in ``{ware_name}`` are alternatives (OR logic)).
+      Returns an :class:`array` of ``{{ware_name,ware_amount}}`` for the wares consumed by this
+      production program. Multiple entries of ``{ware_name,ware_amount}`` are alternatives (OR logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares
          for. See :ref:`production site programs <productionsite_programs>`.
       :type program_name: :class:`string`
 
+      E.g. this will return for an atlanteans coalmine and the corresponding program:
 
+      .. code-block:: Lua
+
+         {
+           1, {smoked_meat, 2}, {smoked_fish, 2}  -- 2 smoked_meat OR 2 smoked_fish
+           2, {atlanteans_bread, 2}               -- AND 2 atlanteans_bread
+         }
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
