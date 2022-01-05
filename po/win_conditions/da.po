@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # Esben Aaberg <esben_aaberg@yahoo.com>, 2015
@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-21 13:12+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-07-13 11:37+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
