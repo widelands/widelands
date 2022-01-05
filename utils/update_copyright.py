@@ -74,8 +74,8 @@ def main():
         update_file(filename, regex, replace)
 
         print(' done.')
-        print(
-            f'You might need to update some copyright years in {filename} manually.')
+
+        print('You might need to update some copyright years in %s manually.' % filename)
 
     except Exception:
         print('Something went wrong:')
