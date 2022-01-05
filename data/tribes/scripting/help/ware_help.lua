@@ -50,16 +50,7 @@ function ware_help_producers_string(tribe, ware_description)
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
          result = result .. h2(_"Producer")
          result = result .. dependencies({building, ware_description}, building.descname)
-         producing_programs, produced_wares_counters, produced_wares_strings = programs_wares_count(building, ware_description)
-         for k,v in pairs(producing_programs) do
-            print("Programs: ", k, v)
-         end
-         for k,v in pairs(produced_wares_counters) do
-            print("wares count: ", k,v)
-         end
-         for k,v in pairs(produced_wares_strings) do
-            print("strings: ", k,v)
-         end
+         producing_programs, produced_wares_counters, produced_wares_strings = programs_wares_count(tribe, building, ware_description)
          -- Now collect the consumed wares for each filtered program and print the program info
          for j, program_name in ipairs(producing_programs) do
             result = result .. help_consumed_wares_workers(tribe, building, program_name)

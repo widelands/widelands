@@ -3,19 +3,17 @@ include "tribes/scripting/help/format_help.lua"
 -- RST
 -- .. function:: programs_wares_count(building, ware_description)
 --
---    Calculates programs, ware_counts and ware_strings for this
---    building and ware.
+--    Examines the :ref:`production site programs <productionsite_programs>`
+--    and returns three tables.
 --
 --    :arg building: The :class:`wl.map.BuildingDescription`
 --    :arg ware_description: A :class:`wl.map.WareDecription`
 --    Returns (in this order):
 --    An array of program_names this production site has
 --    A table of `{program_name, wares_count}` 
---    A table of `{program_name, formatted_string}
---
-function programs_wares_count(building, ware_description)
-   print("  Building: ", building.name)
-   print("  ware: ", ware_description.name)
+--    A table of `{program_name, formatted_string(s)}
+
+function programs_wares_count(tribe, building, ware_description)
    local producing_programs = {}
    if (building.is_mine) then
       -- Find out which programs in the building produce this ware for the mines we skip the real production and take a dummy "encyclopedia" program
@@ -76,6 +74,15 @@ function programs_wares_count(building, ware_description)
          table.insert(deduplicated_programs, prog1_name)
       end
    end
-   producing_programs = deduplicated_programs
-   return producing_programs, produced_wares_counters, produced_wares_strings
+   --producing_programs = deduplicated_programs
+--    for k,v in pairs(producing_programs) do
+--       print("Programs: ", k, v)
+--    end
+--    for k,v in pairs(produced_wares_counters) do
+--       print("wares counter: ", k,v)
+--    end
+--    for k,v in pairs(produced_wares_strings) do
+--       print("ware strings: ", k,v)
+--    end
+   return deduplicated_programs, produced_wares_counters, produced_wares_strings
 end

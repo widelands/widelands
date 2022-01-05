@@ -515,24 +515,18 @@ function building_help_dependencies_production(tribe, building_description)
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       result = result .. h2(_"Produces:")
       for i, ware_description in ipairs(building_description.output_ware_types) do
-         result = result ..
-            dependencies({building_description, ware_description}, ware_description.descname)
-         producing_programs, produced_wares_counters, produced_wares_strings = programs_wares_count(building_description, ware_description)
-         for k,v in pairs(producing_programs) do
-            print("Programs: ", k, v)
-         end
-         for k,v in pairs(produced_wares_counters) do
-            print("wares count: ", k,v)
-         end
-         for k,v in pairs(produced_wares_strings) do
-            print("strings: ", k,v)
-         end
-      
-         for j, program in ipairs(producing_programs) do
-            if (produced_wares_counters[program] > 0) then
+         programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
+         for j, program in ipairs(programs) do
+            if (ware_counters[program] > 0) then
+               if (ware_counters[program_name] == 1) then
+                  -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
+                  result = result .. h3(_"Ware produced:")
+               else
+                  -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
+                  result = result .. h3(_"Wares produced:")
+               end
+               result = result .. ware_strings[program]
                result = result .. help_consumed_wares_workers(tribe, building_description, program)
-               --result = result .. h3(_"for")
-               --result = result .. produced_wares_strings[program]
             end
          end
       end
