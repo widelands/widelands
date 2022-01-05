@@ -46,7 +46,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					if (attack || evade) {
 						hbox1->add_space(8);
 						hbox2->add_space(8);
-						hbox3->add_inf_space();
+						hbox3->add_space(8);
 					}
 					UI::Icon* icon1 =
 					   new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_attack_level_pic(attack));
