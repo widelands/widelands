@@ -19,7 +19,7 @@ include "tribes/scripting/help/calculations.lua"
 --
 --    Displays general info texts about the ware
 --
---    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
+--    :arg tribe: The :class:`wl.map.TribeDescription` for a tribe that uses this ware.
 --    :arg ware_description: the ware_description from C++.
 --    :returns: General info about the ware
 --
@@ -39,7 +39,7 @@ end
 --    Displays the buildings that produce this ware with information about
 --    wares consumed in their production programs
 --
---    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
+--    :arg tribe: The :class:`wl.map.TribeDescription` for a tribe that uses this ware.
 --    :arg ware_description: the ware_description from C++.
 --    :returns: Info about buildings producing this ware and the production cost.
 --
@@ -76,7 +76,7 @@ end
 --    Displays the buildings that consume this ware and about
 --    workers that use this ware as a tool
 --
---    :arg tribe: The :class:`LuaTribeDescription` for a tribe that uses this ware.
+--    :arg tribe: The :class:`wl.map.TribeDescription` for a tribe that uses this ware.
 --    :arg ware_description: the ware_description from C++.
 --    :returns: Info about buildings and workers that use this ware
 --
