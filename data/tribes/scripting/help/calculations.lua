@@ -7,11 +7,12 @@
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
--- .. function:: programs_wares_count(building, ware_description)
+-- .. function:: programs_wares_count(tribe, building, ware_description)
 --
 --    Examines the :ref:`production site programs <productionsite_programs>`
 --    and returns three tables.
 --
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that consumes the ware
 --    :arg building: The :class:`wl.map.BuildingDescription`
 --    :arg ware_description: A :class:`wl.map.WareDecription`
 --
