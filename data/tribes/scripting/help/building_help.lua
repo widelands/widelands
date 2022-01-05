@@ -513,23 +513,6 @@ function building_help_dependencies_production(tribe, building_description)
 
    -- Produced items
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
-      result = result .. h2(_"Produces:")
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
-         for j, program in ipairs(programs) do
-            if (ware_counters[program] > 0) then
-               if (ware_counters[program_name] == 1) then
-                  -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-                  result = result .. h3(_"Ware produced:")
-               else
-                  -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
-                  result = result .. h3(_"Wares produced:")
-               end
-               result = result .. ware_strings[program]
-               result = result .. help_consumed_wares_workers(tribe, building_description, program)
-            end
-         end
-      end
       for i, worker_description in ipairs(building_description.output_worker_types) do
          result = result ..
             dependencies({building_description, worker_description}, worker_description.descname)
@@ -903,14 +886,35 @@ end
 --    :returns: rt for the production section
 --
 function building_help_production_section(tribe, building_description)
+   -- Produced items
+   local result = h2(_"Production")
+   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+      result = result .. h3(_"Produces:")
+      for i, ware_description in ipairs(building_description.output_ware_types) do
+         programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
+         for j, program in ipairs(programs) do
+            if (ware_counters[program] > 0) then
+               if (ware_counters[program] == 1) then
+                  -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
+                  result = result .. h3(_"Ware produced:")
+               else
+                  -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
+                  result = result .. h3(_"Wares produced:")
+               end
+               result = result .. ware_strings[program]
+               result = result .. help_consumed_wares_workers(tribe, building_description, program)
+            end
+         end
+      end
+   end
    local helptexts = building_description:helptexts(tribe.name)
    -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
    local performance = _"Calculation needed"
    if (helptexts["performance"] ~= nil) then
       performance = helptexts["performance"]
    end
-   return h2(_"Production") ..
-     inline_header(_"Performance:", performance)
+   result = result .. inline_header(_"Performance:", performance)
+   return result
 end
 
 
