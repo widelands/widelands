@@ -3200,7 +3200,8 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
    .. method:: consumed_wares_workers(program_name)
 
       Returns an :class:`array` of ``{{ware_name,ware_amount}}`` for the wares consumed by this
-      production program. Multiple entries of ``{ware_name,ware_amount}`` are alternatives (OR logic)).
+      production program. Multiple entries of ``{ware_name,ware_amount}`` are alternatives (OR
+   logic)).
 
       :arg program_name: The name of the production program that we want to get the consumed wares
          for. See :ref:`production site programs <productionsite_programs>`.
