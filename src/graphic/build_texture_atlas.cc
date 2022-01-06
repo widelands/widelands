@@ -147,6 +147,11 @@ build_texture_atlas(const int max_size,
 		}
 	}
 
+	// …and similar for scenario-specific terrains.
+	for (const std::string& dir : g_fs->list_directory("campaigns")) {
+		find_images(dir + "/scripting/tribes", &all_images, &first_atlas_images);
+	}
+
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {
 		throw wexception("Not all images that should fit in the first texture atlas did actually "
