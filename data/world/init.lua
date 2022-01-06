@@ -276,7 +276,7 @@ local result = {
          name = "immovables_rocks",
          descname = _ "Rocks",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         picture = "world/immovables/rocks/greenland/rocks6.png",
+         picture = "world/immovables/rocks/greenland/6/rocks6.png",
          items_per_row = 6,
          items = {
             "blackland_rocks1",
