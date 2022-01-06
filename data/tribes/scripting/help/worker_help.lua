@@ -7,10 +7,64 @@
 -- worker type.
 
 include "tribes/scripting/help/format_help.lua"
+include "tribes/scripting/help/calculations.lua"
 
 --  =======================================================
 --  ************* Main worker help functions *************
 --  =======================================================
+
+function worker_help_produces_string(tribe, worker_description)
+   local result = ""
+   local prod_sites = {}
+   for i, building in ipairs(worker_description.employers) do
+      if building.type_name == "productionsite" then
+         is_prod_site = true
+         table.insert(prod_sites, building)
+      end
+   end
+   if (#prod_sites == 0) then
+      return ""
+   end
+   local has_production = false
+   if (#prod_sites > 0) then
+      for i, building in ipairs(prod_sites) do
+         for j, ware_description in ipairs(building.output_ware_types) do
+            programs, ware_counters, ware_strings = programs_wares_count(tribe, building, ware_description)
+            for j, program in ipairs(programs) do
+               if (ware_counters[program] > 0) then
+                  has_production = true
+                  if (#prod_sites < 2) then
+                     if (ware_counters[program] == 1) then
+                        -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
+                        result = result .. h3(_"Ware produced:")
+                     else
+                        -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
+                        result = result .. h3(_"Wares produced:")
+                     end
+                     result = result .. ware_strings[program]
+                     result = result .. help_consumed_wares_workers(tribe, building, program)
+                  else
+                     if (ware_counters[program] == 1) then
+                        -- TRANSLATORS: Ware Encyclopedia: 1 ware produced at a productionsite
+                        result = result .. inline_header(_"Ware produced at: ", building.descname)
+                     else
+                        -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced at a productionsite
+                        result = result .. inline_header(_"Wares produced at:", building.descname)
+                     end
+                     result = result .. ware_strings[program]
+                     result = result .. help_consumed_wares_workers(tribe, building, program)
+                  end
+               end
+            end
+         end
+      end
+   end
+   if has_production then
+      return h2(_"Production") .. result
+   end
+   return result
+end
+
 
 -- RST
 -- .. function:: worker_help_producers_string(worker_description)
@@ -244,6 +298,7 @@ function worker_help_string(tribe, worker_description)
          li(
             ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_evade_level):bformat(worker_description.max_evade_level))
    end
+   result = result .. worker_help_produces_string(tribe, worker_description)
    return result
 end
 
