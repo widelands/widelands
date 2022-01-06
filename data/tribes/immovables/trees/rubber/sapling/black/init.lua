@@ -3,6 +3,7 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__) .. "../"
 
 include(dirname .. "../terrain_affinity.lua")
+include(dirname .. "../spritesheets.lua")
 
 descriptions:new_immovable_type{
    name = "rubber_black_amazons_sapling",
