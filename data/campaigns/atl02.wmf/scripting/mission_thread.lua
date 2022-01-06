@@ -183,7 +183,7 @@ function intro()
    --p1.see_all = true -- TODO: remove this
    msg_boxes(initial_messages)
    include "map:scripting/starting_conditions.lua"
-   
+
    local port = add_campaign_objective(obj_find_port)
    while not check_for_buildings(p1, {
       atlanteans_port = 1,
