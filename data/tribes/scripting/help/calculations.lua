@@ -83,8 +83,7 @@ function programs_wares_count(tribe, building, ware_description)
          table.insert(deduplicated_programs, prog1_name)
       end
    end
-   --producing_programs = deduplicated_programs
---    for k,v in pairs(producing_programs) do
+--    for k,v in pairs(deduplicated_programs) do
 --       print("Programs: ", k, v)
 --    end
 --    for k,v in pairs(produced_wares_counters) do
