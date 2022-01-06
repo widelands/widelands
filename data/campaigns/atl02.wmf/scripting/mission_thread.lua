@@ -66,13 +66,15 @@ function enemy()
       end
    end
 
-   Kalitath:set_attack_forbidden(2, false)
-   Maletus:set_attack_forbidden(3, false)
+   --Kalitath:set_attack_forbidden(2, false)
+   --Maletus:set_attack_forbidden(3, false)
 
    msg_boxes(enemy_1)
    while not check_for_buildings(p1, {
       atlanteans_scouts_house1 = 1,
    }) do sleep(3731) end
+   Kalitath:set_attack_forbidden(2, false)
+   Maletus:set_attack_forbidden(3, false)
    local scout = nil
    local contact = nil
    while not scout do
@@ -109,12 +111,12 @@ function enemy()
    msg_boxes(allies)
    run(uncertain_allies)
    run(maletus_defeated)
-   run(check_defeat)
 end
 
 function uncertain_allies()
    p1:set_attack_forbidden(3, true)
    Kalitath:set_attack_forbidden(1, true)
+   run(check_kalitath_defeated)
    sleep(60000)
    msg_boxes(tribute)
    reveal_concentric(p1, map:get_field(112,150), 5, 500)
@@ -123,30 +125,43 @@ function uncertain_allies()
       atlanteans_trading_post = 1,
    }) do sleep(3731) end
    trading_post.done = true
-   trade = add_campaign_objective(obj_tribute)
-   run(check_kalitath_defeated)
    msg_boxes(trading)
+   trade = add_campaign_objective(obj_tribute)
    run(patience)
-
 end
 
 function patience()
    local trade_started = false
    local count = 0
-   while not (trade_started or p1.defeated or kalitath.defeated) do
+   local penalty = 1
+   while not (trade_started or p1.defeated or Kalitath.defeated) do
       if (p1:get_produced_wares_count("coin_wood") + p1:get_produced_wares_count("coin_copper") + p1:get_produced_wares_count("coin_silver") + p1:get_produced_wares_count("coin_gold")) > 0 then
          trade_started = true
       end
       count = count + 1
       if count == 2401 then
+         trade.done = true
          msg_boxes(tribute_not_started)
+         trade = add_campaign_objective(obj_tribute2)
+         penalty = 2
+      end
+      if count == 4801 then
+         msg_boxes(alliance_broken)
+         p1.see_all = true
       end
       sleep(500)
    end
+   msg_boxes(tribute_started)
+   defeat_maletus = add_campaign_objective(obj_defeat_maletus)
+   while not (p1:get_produced_wares_count("coin_wood") >= penalty * 5 and p1:get_produced_wares_count("coin_copper") >= penalty * 4 and p1:get_produced_wares_count("coin_silver") >= penalty * 3 and p1:get_produced_wares_count("coin_gold") >= penalty * 2) do
+      sleep(4235)
+   end
+   trade.done = true
 end
 
 function maletus_defeated()
    while not Maletus.defeated do sleep(6000) end
+   defeat_maletus.done = true
    msg_boxes(maletus_defeated)
 end
 
@@ -168,6 +183,7 @@ function intro()
    --p1.see_all = true -- TODO: remove this
    msg_boxes(initial_messages)
    include "map:scripting/starting_conditions.lua"
+   
    local port = add_campaign_objective(obj_find_port)
    while not check_for_buildings(p1, {
       atlanteans_port = 1,
@@ -182,7 +198,7 @@ function intro()
    run(infrastructure)
    run(enemy)
    run(iron)
-
+   run(check_defeat)
 end
 
 function check_defeat()
@@ -193,17 +209,14 @@ end
 
 function check_kalitath_defeated()
    defeat = p1.defeated == true
-   while not defeat or trade.done ==true do
+   while not defeat or trade.done == true do
       sleep(6000)
       defeat = p1.defeated == true
-      if kalitath.defeated then
+      if Kalitath.defeated then
          defeat = true
          msg_boxes(kalitath_dead)
+         p1.see_all = true
       end
-   end
-   if defeat == true then
-      msg_boxes(defeated)
-      p1.see_all = true
    end
 end
 

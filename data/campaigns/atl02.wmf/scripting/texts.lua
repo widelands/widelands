@@ -102,6 +102,27 @@ obj_tribute = {
    li(_[[Two batches with two gold.]]))
 }
 
+obj_tribute2 = {
+   name = "obj_tribute2",
+   title = _"Pay all tributes to Kalitath",
+   number = 1,
+   body = objective_text(_"Send our trader to Kalitath to deliver the demanded goods",
+   p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
+   p(_[[The following batches need to be delivered:]]) ..
+   li(_[[Ten batches with five logs.]]) ..
+   li(_[[Eight batches with four coal.]]) ..
+   li(_[[Six batches with three iron.]]) ..
+   li(_[[Four batches with two gold.]]))
+}
+
+obj_defeat_maletus = {
+   name = "obj_defeat_maletus",
+   title = _"Defeat Maletus",
+   number = 1,
+   body = objective_text(_"Defeat the empire troops led by maletus.",
+   p(_[[We need to finish the empire of to have a chance for making a new home.]]))
+}
+
 -- =======================================================================
 --                                  Texts
 -- =======================================================================
@@ -324,7 +345,7 @@ tribute = {
       body = kalitath(
          -- TRANSLATORS: Kalitath
          _([[Strangers, we need to get some sign of your good intentions. So if you are really on our side you should send us some gold and a couple of other wares on a regular basis.]])..
-         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us iron, coal, logs and gold.]])
+         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
          .. paragraphdivider() ..
          _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
    },
@@ -340,7 +361,7 @@ tribute = {
          -- TRANSLATORS: Jundlina
          _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]])
          .. paragraphdivider() ..
-         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of 4 gold, 9 iron, 16 coal and 25 log.]]))
+         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal and logs.]]))
          .. new_objectives(obj_trading_post)
    }
 }
@@ -356,48 +377,82 @@ trading = {
       title = _"Sidolus Agrees",
       body = sidolus(
          -- TRANSLATORS: sidolus
-         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this barbarian. I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
+         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this barbarian.]])
+         .. paragraphdivider() ..
+         _([[I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
+         .. new_objectives(obj_tribute)
    }
 }
 
 tribute_not_started = {
    {
-      title = _"Tribute Demand",
+      title = _"Urgent Tribute Demand",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we need to get some sign of your good intentions. So if you are really on our side you should send us some gold and a couple of other wares on a regular basis.]])..
-         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us iron, coal, logs and gold.]])
+         _([[Strangers, we haven't received any help yet. So if you are really on our side you should start sending some wares urgently.]])..
+         _([[As we are facing great losses due to your lazyness, you should now send us double the amount of each ware as before.]])
          .. paragraphdivider() ..
-         _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
+         _([[I am sure you won't loose our alliance, wouldn't you?]]))
    },
    {
-      title = _"Pitfall!",
+      title = _"Blackmail!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! This behaviour is truely babaric! I fear this is a trap to keep you as a hostage. And the demand itself is really an insult. I strongly recommend to decline this unsubstantiated claim.]]))
+         _([[May Satul warm us all. Our so-called ally is blackmailing us and we can't punish his insult as he has our princess at his hands.]])
+         .. paragraphdivider() ..
+         _([[Our only chance is to double our efforts and start delivering something soon.]]))
+         .. new_objectives(obj_tribute2)
+   },
+}
+
+tribute_started = {
+   {
+      title = _"Tribute Started",
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Strangers, we haven't received the first batch of wares. So we may finally trust you.]])..
+         _([[However our enemy in the north is very strong. I am afraid without significant help from your side we might loose the war despite any ware help you might provide.]])
+         .. paragraphdivider() ..
+         _([[They name themselves an empire and their leader is named Maletus. I want you to train your soldiers and help us defeat his lousy empire.]]))
+         .. new_objectives(obj_defeat_maletus)
    },
    {
-      title = _"Jundlina Concedes",
+      title = _"Be Vigilant!",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]])
+         _([[May Satul warm you, Sidolus. Our ally now has gained some trust, but we shouldn't trust to much in them.]])
          .. paragraphdivider() ..
-         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of 4 gold, 9 iron, 16 coal and 25 log.]]))
-         .. new_objectives(obj_trading_post)
-   }
+         _([[So I want you to defeat this empire but we should be strong enough to get the respect we earn.]]))
+   },
+}
+
+alliance_broken = {
+   {
+      title = _"Traitors",
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Strangers, we still haven't received any help. We are deeply insulted by your treachery.]])..
+         _([[At least your princess will make a reasonable slave, if we will survive the battle with our enemy.]]))
+   },
+   {
+      title = _"Jundlinas Suicide",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Barbarian, I am an atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then being your slave. May Satul revenge my sacrifice.]]))
+   },
+   {
+      title = _"Defeated!",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. So, we have lost this battle and our people is doomed!]]))
+   },
 }
 
 kalitath_dead = {
    {
-      title = _"Empire Defeated",
+      title = _"Kalitath Defeated",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and we have lost our noble princess with it. So, we have lost this battle and our people is doomed!]]))
    },
-   {
-      title = _"Jundlina Cheers",
-      body = jundlina(_"Jundlina",
-         -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will talk immediately to our Babarian ally how divide the land we gained.]]))
-   }
 }
