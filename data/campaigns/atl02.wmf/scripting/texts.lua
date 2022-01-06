@@ -37,7 +37,7 @@ obj_find_port = {
    number = 1,
    body = objective_text(_"Find a portspace",
    p(_[[To set foot on this island we first must find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]) ..
-   p(_[[We should choose the ship to found the port with carefully to not waste time for unloading first. after the port is build we should cancel the remaining ships expedition, to unload its wares as well.]]))
+   p(_[[After the port is build we should cancel the remaining ships expedition, to unload its wares as well.]]))
 }
 
 obj_basic_infrastructure = {
