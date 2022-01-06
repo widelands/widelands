@@ -144,7 +144,7 @@ end
 --    :returns: text describing the needed experience
 --
 function help_worker_experience(worker_description, becomes_description)
-   local result = h2(_"Experience levels")
+   local result = h3(_"Experience levels")
    -- TRANSLATORS: EP = Experience Points
    local exp_string = _"%s to %s (%s EP)":format(
          worker_description.descname,

@@ -477,10 +477,11 @@ function building_help_dependencies_production(tribe, building_description)
 
    -- Providers
    local hasinput = false
+   local inputs = ""
    for i, ware_description in ipairs(building_description.inputs) do
       hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
-         result = result .. dependencies(
+         inputs = inputs .. dependencies(
             {producer, ware_description},
             _"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
          )
@@ -488,7 +489,7 @@ function building_help_dependencies_production(tribe, building_description)
    end
    if (hasinput) then
       -- TRANSLATORS: Heading in the building help for wares that a building accepts (e.g. wheat for a mill).
-      result =  h3(_"Incoming:") .. result
+      result = h3(_"Incoming:") .. inputs
    end
 
    -- Collected items
@@ -511,16 +512,15 @@ function building_help_dependencies_production(tribe, building_description)
       result = result .. h3(_"Creates:") .. dependencies_creates(tribe, building_description)
    end
 
+   local outgoing = ""
    -- Produced items
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       for i, worker_description in ipairs(building_description.output_worker_types) do
-         result = result ..
+         outgoing = outgoing ..
             dependencies({building_description, worker_description}, worker_description.descname)
       end
    end
-
    -- Consumers
-   local outgoing = ""
    for i, ware_description in ipairs(building_description.output_ware_types) do
 
       -- Constructionsite isn't listed with the consumers, so we need a special check
