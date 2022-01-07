@@ -9,7 +9,7 @@ local result = {
             name = "atlanteans_trading_post",
             helptexts = {
                -- TRANSLATORS: Purpose helptext for an atlantean market site: Trading post
-               purpose = pgettext("atlanteans_building", "Enables the share of goods with other players.")
+               purpose = pgettext("atlanteans_building", "Allows sharing goods with other players.")
             }
          },
          {
