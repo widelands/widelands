@@ -1,4 +1,5 @@
 name: Translations Update
+concurrency: ${{ github.ref }}
 on:
   workflow_dispatch:
   schedule:
