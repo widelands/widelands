@@ -261,7 +261,7 @@ State& State::instance() {
 	return binder;
 }
 
-void vertex_attrib_pointer(int vertex_index, int num_items, int stride, int offset) {
+void vertex_attrib_pointer(int vertex_index, int num_items, int stride, size_t offset) {
 	glVertexAttribPointer(
 	   vertex_index, num_items, GL_FLOAT, GL_FALSE, stride, reinterpret_cast<void*>(offset));
 }

@@ -73,10 +73,7 @@ const Image* ImageCache::get(const std::string& hash) {
 	auto it = images_.find(hash);
 	if (it == images_.end()) {
 		NoteThreadSafeFunction::instantiate(
-		   [this, hash]() {
-			   images_.insert(std::make_pair(hash, load_image(hash))).first->second.get();
-		   },
-		   true);
+		   [this, hash]() { images_.insert(std::make_pair(hash, load_image(hash))); }, true);
 		it = images_.find(hash);
 		assert(it != images_.end());
 	}

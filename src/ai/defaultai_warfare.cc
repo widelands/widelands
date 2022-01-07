@@ -748,7 +748,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 	// changing capacity to 0 - this will happen only once.....
 	if (tso.site->soldier_control()->soldier_capacity() > 1) {
 		game().send_player_change_soldier_capacity(
-		   *ts, -tso.site->soldier_control()->soldier_capacity());
+		   *ts, -1 * tso.site->soldier_control()->soldier_capacity());
 		return true;
 	}
 
@@ -1448,7 +1448,7 @@ void DefaultAI::soldier_trained(const Widelands::TrainingSite& site) {
 			if (trainingsite_obs.site->soldier_control()->soldier_capacity() > 0) {
 				game().send_player_change_soldier_capacity(
 				   *trainingsite_obs.site,
-				   -trainingsite_obs.site->soldier_control()->soldier_capacity());
+				   -1 * trainingsite_obs.site->soldier_control()->soldier_capacity());
 			}
 			return;
 		}
