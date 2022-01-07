@@ -431,8 +431,8 @@ alliance_broken = {
       title = _"Traitors",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we still haven't received any help. We are deeply insulted by your treachery.]])..
-         _([[At least your princess will make a reasonable slave, if we will survive the battle with our enemy.]]))
+         _([[Strangers, we still haven’t received any help. We are deeply insulted by your treachery.]])..
+         _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
    },
    {
       title = _"Jundlinas Suicide",
