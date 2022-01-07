@@ -444,7 +444,7 @@ alliance_broken = {
       title = _"Defeated!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. So, we have lost this battle and our people is doomed!]]))
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. Thus, we have lost this battle and our people is doomed!]]))
    },
 }
 
