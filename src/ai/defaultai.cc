@@ -1413,7 +1413,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	assert(updated_fields_count <= max_fields_to_check);
 
-	verb_log_dbg_time(gametime, " ... %2d fields updated of %4lu.\n", updated_fields_count,
+	verb_log_dbg_time(gametime, " ... %2d fields updated of %" PRIuS ".\n", updated_fields_count,
 	                  buildable_fields.size());
 }
 
