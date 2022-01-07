@@ -96,7 +96,6 @@ if AIp2 > 0 then
 end
 if AIp3 > 0 then
    init_AI_player(game.players[AIp3], aip3_f_hq, aip3_f_port, aip3_f_vineyard, aip3_f_ship, game.players[AIp3].tribe_name)
-
 end
 if true then
    init_AI_player(game.players[AIp4], aip4_f_hq, aip4_f_port, aip4_f_vineyard, aip4_f_ship, game.players[AIp4].tribe_name)
