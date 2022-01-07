@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -38,18 +38,18 @@ msgid "Options:"
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:56
-msgid "Use the specified directory for the widelands data files."
+msgid "Use the specified directory for the Widelands data files."
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:58
 #, c-format
 msgid ""
-"Use the specified directory for widelands config files, savegames and "
+"Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:63
-msgid "Use the specified directory for the widelands locale files."
+msgid "Use the specified directory for the Widelands locale files."
 msgstr ""
 
 #: ../../src/wlapplication_messages.cc:67
