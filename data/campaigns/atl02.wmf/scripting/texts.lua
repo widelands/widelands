@@ -53,7 +53,7 @@ obj_tools = {
    title = _ "Build tools quickly",
    number = 1,
    body = objective_text(_"Make new tools",
-      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don’t forget to build a smelter as well.]]))
+      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, as it is a prerequisite for success on the island. Don’t forget to build a smelting works as well.]]))
 }
 
 obj_mining = {
