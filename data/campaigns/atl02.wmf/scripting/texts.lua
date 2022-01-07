@@ -453,6 +453,6 @@ kalitath_dead = {
       title = _"Kalitath Defeated",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and we have lost our noble princess with it. So, we have lost this battle and our people is doomed!]]))
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and our noble princess perished with him. Thus, we have lost this battle and our people is doomed!]]))
    },
 }
