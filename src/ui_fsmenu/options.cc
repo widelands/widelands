@@ -230,7 +230,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      zip_(&box_saving_,
           UI::PanelStyle::kFsMenu,
           Vector2i::zero(),
-          _("Compress widelands data files (maps, replays and savegames)"),
+          _("Compress Widelands data files (maps, replays, and savegames)"),
           "",
           0),
      write_syncstreams_(&box_saving_,

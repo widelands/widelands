@@ -586,7 +586,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_0, KMOD_ALT),
                          "game_msg_filter_all",
-                         []() { return _("Messages: Show "); })},
+                         []() { return _("Messages: Show All"); })},
    {KeyboardShortcut::kInGameMessagesFilterGeologists,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_1, KMOD_ALT),
