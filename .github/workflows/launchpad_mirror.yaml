@@ -1,5 +1,4 @@
 name: Launchpad Mirror
-concurrency: ${{ github.ref }}
 on:
   push:
     branches:
