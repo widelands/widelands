@@ -422,7 +422,7 @@ tribute_started = {
          -- TRANSLATORS: Jundlina
          _([[May Satul warm you, Sidolus. Our ally now has gained some trust, but we shouldn't trust to much in them.]])
          .. paragraphdivider() ..
-         _([[So I want you to defeat this empire but we should be strong enough to get the respect we earn.]]))
+         _([[So I want you to defeat this Empire, but ensure that we will become and remain strong enough to enforce the respect we deserve.]]))
    },
 }
 
