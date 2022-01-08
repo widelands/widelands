@@ -10,7 +10,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Olivier <olivier+transifex@migeot.org>, 2021
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net.TLD>, 2008
-# Renaud Bouchard, 2015-2021
+# Renaud Bouchard, 2015-2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # syl_, 2016-2017
 # Tubuntu, 2015
@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2022-01-05 03:25+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -530,7 +530,7 @@ msgstr "Les amazones aiment les arbres. Bâtissez assez de garde-jungle pour en 
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Les bois rares sont la colonne vertébrale de l'économie amazone. Construisez des plantations de bois rares pour planter ces arbres spéciaux pour ces bois."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -547,43 +547,43 @@ msgstr "La nourriture est séchée avec des feux de charbon de bois. Assurez vou
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Les coupeurs de lianes récoltent les lianes des arbres voisins, mais les arbres ne sont pas abimés pendant le processus."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "L'eau est la vie pour les amazones. Les porteurs d'eau produisent un service important pour leur tribu."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "L'orpaillage demande un flot d'eau régulier, il vaut mieux s'approvisionner au plus près pour plus d'efficacité et de fraîcheur."
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "Les gardiens de l'environnement s' assureront de gibier pour la chasse et de poisson pour la pêche. Le gibier n'est lâché que près d'arbres inhabités de guérites "
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Les niveaux de stock de bois rares sont surveillés par les plantations de bois rares, et les maîtres de la jungle en planteront en fonction des exigences économiques."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "Les cordes sont essentielles pour assurer des bâtiments sonores, coudre des vêtements robustes et arrimer les canots ensemble pour former des navires."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Les maîtres de la jungle apprennent leurs compétences en travaillant comme protecteurs de la jungle avant de travailler dans des centres de jardinage ou des plantations d'arbres rares."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
