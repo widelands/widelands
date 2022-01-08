@@ -17,6 +17,19 @@ option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
 set(WL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Add custom includes to override system libs
+FILE(GLOB custom_include_directories auto_dependencies/*)
+foreach(custom_include_dir ${custom_include_directories})
+  if(IS_DIRECTORY "${custom_include_dir}")
+    message(STATUS "Using custom include directory '${custom_include_dir}'.")
+    list(INSERT CMAKE_INCLUDE_PATH 0 "${custom_include_dir}")
+    include_directories(BEFORE SYSTEM "${custom_include_dir}")
+  else()
+    message(WARNING "Not a directory: '${custom_include_dir}' - Ignored.")
+  endif()
+endforeach()
+
 include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -149,6 +162,18 @@ else()
   find_package(GLEW REQUIRED)
 endif()
 
+# Check that Asio is installed. Asio does not have (or need) a Find… CMake Module, so we "only" need to check if the header exists.
+if(NOT asio_location OR asio_location STREQUAL "")
+  unset(asio_location CACHE)
+  find_path(asio_location "asio.hpp")
+  if(asio_location)
+    message(STATUS "Found Asio in '${asio_location}'.")
+  else()
+    message(FATAL_ERROR "Could NOT find Asio (missing: asio.hpp). Please run:\n./install-dependencies.sh\nwhich will attempt to install all missing dependencies automatically, or provide further instructions if this not supported on your system.")
+  endif()
+endif()
+add_definitions(-DASIO_STANDALONE)
+
 if (APPLE OR WIN32 OR
     CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR
     CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
@@ -190,7 +215,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   endif()
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -03, setting -02")
+    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
@@ -205,7 +230,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
   option(OPTION_ASAN "Build with AddressSanitizer" OFF)
 elseif(CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.2))
-    message(STATUS "GCC >6.2.0 breaks -03, setting -02")
+    message(STATUS "GCC >6.2.0 breaks -O3, setting -O2")
     set(WL_OPTIMIZE_FLAGS "-O2")
   elseif(MSVC)
     set(WL_OPTIMIZE_FLAGS "/O2")
