@@ -6,9 +6,9 @@ local region_to_forest = map:get_field(0,0):region(23)
          if not _fully_flooded(map:get_field(field.x,field.y)) then
             if map:get_field(field.x,field.y).immovable == nil then
                if (field.x + field.y) % 2 == 0 then
-                  map:place_immovable("aspen_summer_sapling", map:get_field(field.x,field.y))
+                  map:place_immovable("palm_date_desert_sapling", map:get_field(field.x,field.y))
                else
-                  map:place_immovable("oak_summer_sapling", map:get_field(field.x,field.y))
+                  map:place_immovable("palm_oil_desert_sapling", map:get_field(field.x,field.y))
                end
                sleep(750)
             end
@@ -19,9 +19,9 @@ local region_to_forest = map:get_field(0,0):region(23)
 end
 
 function _fully_flooded(f)
-   if f.terd == "summer_water" and f.terr == "summer_water" and
-      f.tln.terr == "summer_water" and f.tln.terd == "summer_water" and
-      f.ln.terr == "summer_water" and f.trn.terd == "summer_water" then
+   if f.terd == "desert_water" and f.terr == "desert_water" and
+      f.tln.terr == "desert_water" and f.tln.terd == "desert_water" and
+      f.ln.terr == "desert_water" and f.trn.terd == "desert_water" then
       return true
    end
    return false
@@ -42,10 +42,10 @@ function flooding()
       flooded_fields:add(f_Field:new(field, field.terd, field.terr))
       local tr_to_change = Set:new{Triangle:new(map:get_field(field.x,field.y),"d")}
       local tr = tr_to_change:pop_at(1)
-      tr:set_ter("summer_water")
+      tr:set_ter("desert_water")
       local tr_to_change = Set:new{Triangle:new(map:get_field(field.x,field.y),"r")}
       local tr = tr_to_change:pop_at(1)
-      tr:set_ter("summer_water")
+      tr:set_ter("desert_water")
    end
    sleep(3*60*60*1000)
    -- Fields terrains are set back to their former shape
