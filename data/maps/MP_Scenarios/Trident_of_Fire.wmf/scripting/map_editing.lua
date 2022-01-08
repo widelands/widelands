@@ -31,9 +31,11 @@ end
 function flooding()
    local flooded_fields = Set:new{}
    local region_to_change = joinTables(map:get_field(63,17):region(2),map:get_field(93,69):region(2))
-   region_to_change = joinTables(region_to_change,map:get_field(106,112):region(2))
+   region_to_change = joinTables(region_to_change,map:get_field(105,113):region(2))
+   region_to_change = joinTables(region_to_change,map:get_field(106,116):region(2))
    region_to_change = joinTables(region_to_change,map:get_field(62,89):region(2))
    region_to_change = joinTables(region_to_change,map:get_field(97,140):region(2))
+   region_to_change = joinTables(region_to_change,map:get_field(99,137):region(2))
    region_to_change = joinTables(region_to_change,map:get_field(52,39):region(2))
    region_to_change = joinTables(region_to_change,map:get_field(0,0):region(20, 4))
    -- Fields are flooded
