@@ -33,6 +33,7 @@ struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
 	                                  UI::UniqueWindow::Registry&);
 
 private:
+	EditorInteractive& eia_;
 	EditorIncreaseHeightTool& increase_tool_;
 	UI::Box box_;
 	UI::SpinBox change_by_;

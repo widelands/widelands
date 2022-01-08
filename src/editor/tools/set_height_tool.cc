@@ -33,7 +33,7 @@ int32_t EditorSetHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
 		            map->get_fcoords(center.node),
-		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 		do {
 			args->original_heights.push_back(mr.location().field->get_height());
 		} while (mr.advance(*map));
@@ -52,7 +52,7 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(
 	            map->get_fcoords(center.node),
-	            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+	            args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 1));
 
 	std::list<Widelands::Field::Height>::iterator i = args->original_heights.begin();
 
@@ -64,7 +64,7 @@ EditorSetHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands
 	map->recalc_for_field_area(
 	   eia.egbase(), Widelands::Area<Widelands::FCoords>(
 	                    map->get_fcoords(center.node),
-	                    args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 2));
+	                    args->sel_radius + MAX_FIELD_HEIGHT / map->max_field_height_diff() + 2));
 
 	return mr.radius() + 1;
 }

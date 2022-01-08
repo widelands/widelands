@@ -31,10 +31,11 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
+constexpr int MAX_FIELD_HEIGHT = 60;
+
 namespace Widelands {
 
-#define MAX_FIELD_HEIGHT 60
-#define MAX_FIELD_HEIGHT_DIFF 5
+constexpr int kDefaultMaxFieldHeightDiff = 5;
 
 // Think, if we shouldn't call for each field a new() in map::set_size
 // and a delete

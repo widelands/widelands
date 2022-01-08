@@ -139,6 +139,7 @@ Map::Map()
      width_(0),
      height_(0),
      localize_author_(false),
+     max_field_height_diff_(kDefaultMaxFieldHeightDiff),
      pathfieldmgr_(new PathfieldManager),
      allows_seafaring_(false),
      waterway_max_length_(0) {
@@ -2475,11 +2476,11 @@ Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval
 		bool changed;
 		do {
 			changed = false;
-			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
+			height_interval.min = height_interval.min < max_field_height_diff() ?
                                   0 :
-                                  height_interval.min - MAX_FIELD_HEIGHT_DIFF;
-			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
-                                  height_interval.max + MAX_FIELD_HEIGHT_DIFF :
+                                  height_interval.min - max_field_height_diff();
+			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - max_field_height_diff() ?
+                                  height_interval.max + max_field_height_diff() :
                                   MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min) {
@@ -2521,14 +2522,14 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 	for (uint8_t i = 0; i < 6; ++i) {
 		Field& f = *n[i].field;
 		const int32_t diff = height - f.get_height();
-		if (diff > MAX_FIELD_HEIGHT_DIFF) {
+		if (diff > max_field_height_diff()) {
 			++area;
-			f.set_height(height - MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height - max_field_height_diff());
 			check[i] = true;
 		}
-		if (diff < -MAX_FIELD_HEIGHT_DIFF) {
+		if (diff < -max_field_height_diff()) {
 			++area;
-			f.set_height(height + MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height + max_field_height_diff());
 			check[i] = true;
 		}
 	}
