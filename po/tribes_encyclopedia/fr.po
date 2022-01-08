@@ -17,7 +17,7 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Paulo Paulo <paulletilly@gmail.com>, 2021
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2016-2021
+# Renaud Bouchard, 2016-2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # syl_, 2017
 # Tubuntu, 2015
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-04 02:57+0000\n"
+"PO-Revision-Date: 2022-01-05 04:09+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,8 +35,8 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Log, part 1
+#. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
@@ -60,8 +60,8 @@ msgid ""
 "logs to produce charcoal."
 msgstr "Les bûcheronnes Amazones abattent les arbres et les sylvicultrices en replantent. Les grumes résultantes sont utilisées par la sculptrice sur pierre. Le four à charbon a également besoin de grumes pour produire du charbon de bois."
 
-#. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+#. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
@@ -120,8 +120,8 @@ msgid ""
 "construct buildings and ships."
 msgstr "Cette corde est faite de lianes. Elle est utilisé pour les armures et pour construire des bâtiments et des navires."
 
-#. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Water, part 1
+#. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
@@ -260,8 +260,8 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
@@ -278,8 +278,8 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
@@ -300,8 +300,8 @@ msgid ""
 "use them. They are produced by the stone carver."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
@@ -635,10 +635,10 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr "Explore un territoire inconnu."
 
-#. TRANSLATORS: Helptext for an empire immovable: Ashes
-#. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an empire immovable: Ashes
+#. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
@@ -658,8 +658,8 @@ msgstr "Explore un territoire inconnu."
 msgid "The remains of a destroyed building."
 msgstr "Les restes d'un bâtiment détruit."
 
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
@@ -775,8 +775,8 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
@@ -790,8 +790,8 @@ msgstr ""
 msgid "This field has just been planted."
 msgstr "Ce champ vient juste d'être planté."
 
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
@@ -810,8 +810,8 @@ msgstr "Ce champ vient juste d'être planté."
 msgid "This field is growing."
 msgstr "Ce champ est en croissance."
 
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
@@ -825,8 +825,8 @@ msgstr "Ce champ est en croissance."
 msgid "This field is ready for harvesting."
 msgstr "Ce champ est prêt pour la récolte."
 
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
@@ -860,8 +860,8 @@ msgstr ""
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
+#. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
@@ -881,8 +881,8 @@ msgid ""
 "digger dwellings."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
@@ -910,8 +910,8 @@ msgstr "Le granit est un matériau de construction de base et est extrait dans u
 msgid "There is only a little bit of granite here."
 msgstr "Il y a un petit peu de granit ici."
 
-#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
@@ -932,8 +932,8 @@ msgstr "Il y a un beaucoup d'or ici."
 msgid "There is a lot of granite here."
 msgstr "Il y a beaucoup de granit ici."
 
-#. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
@@ -1552,8 +1552,8 @@ msgid ""
 "between ports."
 msgstr ""
 
-#. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
@@ -1566,8 +1566,8 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "\"Ne vous en prenez pas au constructeur qui n'a plus de matériaux.\""
 
-#. TRANSLATORS: Lore author helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore author helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
@@ -1582,8 +1582,8 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "Proverbe couramment utilisé pour les tâches impossibles de toute sorte"
 
-#. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
+#. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
@@ -1596,8 +1596,8 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Un nouveau bâtiment est en cours de construction sur ce chantier."
 
-#. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
@@ -1610,8 +1610,8 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "De nouveaux chemins apparaîtrons  quand vous voudrez détruire l'ancien."
 
-#. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
@@ -1624,8 +1624,8 @@ msgctxt "building"
 msgid "Proverb"
 msgstr "Proverbe"
 
-#. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
@@ -1646,28 +1646,28 @@ msgstr "Un bâtiment est en train d'être démantelé sur ce site de démantèle
 #: ../../data/tribes/initialization/amazons/units.lua:1637
 msgctxt "amazons"
 msgid "Worker missing"
-msgstr ""
+msgstr "L'ouvrier arrive"
 
 #. TRANSLATORS: Productivity label on an amazon building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/amazons/units.lua:1639
 msgctxt "amazons"
 msgid "Worker is coming"
-msgstr ""
+msgstr "L'ouvrier arrive"
 
 #. TRANSLATORS: Productivity label on an amazon building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/amazons/units.lua:1641
 msgctxt "amazons"
 msgid "Workers missing"
-msgstr ""
+msgstr "Travailleurs manquants"
 
 #. TRANSLATORS: Productivity label on an amazon building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/amazons/units.lua:1643
 msgctxt "amazons"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Les ouvriers arrivent"
 
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:394
@@ -3058,28 +3058,28 @@ msgstr "Construit les bateaux utilisés pour le commerce et la colonisation de n
 #: ../../data/tribes/initialization/atlanteans/units.lua:1773
 msgctxt "atlanteans"
 msgid "Worker missing"
-msgstr ""
+msgstr "Travailleur manquant"
 
 #. TRANSLATORS: Productivity label on an atlantean building if there is 1
 #. worker coming
 #: ../../data/tribes/initialization/atlanteans/units.lua:1775
 msgctxt "atlanteans"
 msgid "Worker is coming"
-msgstr ""
+msgstr "Le travailleur arrive"
 
 #. TRANSLATORS: Productivity label on an atlantean building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/atlanteans/units.lua:1777
 msgctxt "atlanteans"
 msgid "Workers missing"
-msgstr ""
+msgstr "Travailleurs manquants"
 
 #. TRANSLATORS: Productivity label on an atlantean building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/atlanteans/units.lua:1779
 msgctxt "atlanteans"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Les ouvriers arrivent"
 
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:102
@@ -4940,28 +4940,28 @@ msgstr "Tissez de l'étoffe à partir de roseau."
 #: ../../data/tribes/initialization/barbarians/units.lua:1813
 msgctxt "barbarians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Travailleur manquant"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is 1
 #. worker coming
 #: ../../data/tribes/initialization/barbarians/units.lua:1815
 msgctxt "barbarians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "L'ouvrier arrive"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/barbarians/units.lua:1817
 msgctxt "barbarians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Travailleurs manquants"
 
 #. TRANSLATORS: Productivity label on a barbarian building if there is more
 #. than 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/barbarians/units.lua:1819
 msgctxt "barbarians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Les ouvriers arrivent"
 
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:103
@@ -5883,28 +5883,28 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1598
 msgctxt "empire"
 msgid "Worker missing"
-msgstr ""
+msgstr "Travailleur manquant"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/empire/units.lua:1600
 msgctxt "empire"
 msgid "Worker is coming"
-msgstr ""
+msgstr "L'ouvrier arrive"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:1602
 msgctxt "empire"
 msgid "Workers missing"
-msgstr ""
+msgstr "Travailleurs manquants"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/empire/units.lua:1604
 msgctxt "empire"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Les ouvriers arrivent"
 
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:101
@@ -7768,28 +7768,28 @@ msgstr "La filature a besoin de %s en moyenne pour produire un morceau de tissu.
 #: ../../data/tribes/initialization/frisians/units.lua:2186
 msgctxt "frisians"
 msgid "Worker missing"
-msgstr ""
+msgstr "Travailleur manquant"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1 worker
 #. coming
 #: ../../data/tribes/initialization/frisians/units.lua:2188
 msgctxt "frisians"
 msgid "Worker is coming"
-msgstr ""
+msgstr "L'ouvrier arrive"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2190
 msgctxt "frisians"
 msgid "Workers missing"
-msgstr ""
+msgstr "Travailleurs manquants"
 
 #. TRANSLATORS: Productivity label on a frisian building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
 #: ../../data/tribes/initialization/frisians/units.lua:2192
 msgctxt "frisians"
 msgid "Workers are coming"
-msgstr ""
+msgstr "Les ouvriers arrivent"
 
 #: ../../data/tribes/scripting/help/building_help.lua:240
 #: ../../data/tribes/scripting/help/format_help.lua:232
@@ -8212,7 +8212,7 @@ msgstr "Dés/activer le recensement"
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
 #: ../../data/tribes/scripting/help/controls.lua:58
 msgid "Toggle status"
-msgstr ""
+msgstr "Dés/activer les status"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:60
@@ -8581,8 +8581,8 @@ msgstr "Solo"
 msgid "Multiplayer"
 msgstr "Multi-joueur"
 
-#. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
+#. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:50
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
