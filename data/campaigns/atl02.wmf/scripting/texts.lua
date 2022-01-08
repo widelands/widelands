@@ -36,8 +36,8 @@ obj_find_port = {
    title = _ "Find a place to build a port",
    number = 1,
    body = objective_text(_"Find a portspace",
-   p(_[[To set foot on this island we first must find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]) ..
-   p(_[[After the port is build we should cancel the remaining ships expedition, to unload its wares as well.]]))
+   p(_[[To set foot on this island, we must first find a building space where a port can be built. Explore the nearby coast line to find such a building plot.]]) ..
+   p(_[[After the port is built we should cancel the other ship’s expedition, to unload its wares as well.]]))
 }
 
 obj_basic_infrastructure = {
@@ -45,7 +45,7 @@ obj_basic_infrastructure = {
    title = _ "Ensure the supply of build wares",
    number = 4,
    body = objective_text(_"Establish a basic production",
-   p(_[[We will need at least a quarry, a few lumberjacks and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]]))
+   p(_[[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]]))
 }
 
 obj_tools = {
@@ -53,7 +53,7 @@ obj_tools = {
    title = _ "Build tools quickly",
    number = 1,
    body = objective_text(_"Make new tools",
-      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, it is a prerequisite for success on island. Don’t forget to build a smelter as well.]]))
+      p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, as it is a prerequisite for success on the island. Don’t forget to build a smelting works as well.]]))
 }
 
 obj_mining = {
@@ -422,7 +422,7 @@ tribute_started = {
          -- TRANSLATORS: Jundlina
          _([[May Satul warm you, Sidolus. Our ally now has gained some trust, but we shouldn't trust to much in them.]])
          .. paragraphdivider() ..
-         _([[So I want you to defeat this empire but we should be strong enough to get the respect we earn.]]))
+         _([[So I want you to defeat this Empire, but ensure that we will become and remain strong enough to enforce the respect we deserve.]]))
    },
 }
 
@@ -431,20 +431,20 @@ alliance_broken = {
       title = _"Traitors",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we still haven't received any help. We are deeply insulted by your treachery.]])..
-         _([[At least your princess will make a reasonable slave, if we will survive the battle with our enemy.]]))
+         _([[Strangers, we still haven’t received any help. We are deeply insulted by your treachery.]])..
+         _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
    },
    {
       title = _"Jundlinas Suicide",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Barbarian, I am an atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then being your slave. May Satul revenge my sacrifice.]]))
+         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
    },
    {
       title = _"Defeated!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. So, we have lost this battle and our people is doomed!]]))
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. Thus, we have lost this battle and our people is doomed!]]))
    },
 }
 
@@ -453,6 +453,6 @@ kalitath_dead = {
       title = _"Kalitath Defeated",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and we have lost our noble princess with it. So, we have lost this battle and our people is doomed!]]))
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and our noble princess perished with him. Thus, we have lost this battle and our people is doomed!]]))
    },
 }
