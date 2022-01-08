@@ -19,6 +19,27 @@ difficulty = wl.Game().scenario_difficulty
 
 p2:set_attack_forbidden(1, false)  -- NOCOM
 
+trade = {  -- {Wares given} vs {wares received}
+   {
+      {{barley = 1, fruit = 1}, {iron_ore = 1}},
+      {{barley = 2, fruit = 2}, {gold_ore = 1}},
+      {{fish = 2}, {granite = 1}},
+      {{barley = 8, fruit = 8, fish = 8}, {granite = 4, iron_ore = 2, gold_ore = 2, log = 2, coal = 2}},
+   },
+   {
+      {{barley = 1, fruit = 2}, {iron_ore = 1}},
+      {{barley = 3, fruit = 2}, {gold_ore = 1}},
+      {{fish = 2, honey = 1}, {granite = 1}},
+      {{barley = 7, fruit = 7, fish = 7, honey = 7}, {granite = 3, iron_ore = 2, gold_ore = 1, log = 1, coal = 1}},
+   },
+   {
+      {{barley = 2, fruit = 3}, {iron_ore = 1}},
+      {{barley = 4, fruit = 5}, {gold_ore = 1}},
+      {{fish = 3, honey = 2}, {granite = 1}},
+   }
+}
+trade = trade[difficulty]
+
 campaign_data = game:read_campaign_data("frisians", "fri04")
 if not campaign_data then
    campaign_message_box({

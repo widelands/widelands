@@ -1,27 +1,14 @@
 -- =======================================================================
---                                 Player 1
--- =======================================================================
-p1:allow_buildings("all")
-p1:forbid_buildings({"frisians_quarry", "frisians_hunters_house", "frisians_tavern", "frisians_coalmine", "frisians_ironmine", "frisians_goldmine", "frisians_rockmine"})
--- NOCOM also forbid frisians_dikers_house
-include "map:scripting/init_p1.lua"
-
-local soldiers = {}
-for descr,n in pairs(campaign_data) do
-   soldiers[{tonumber(descr:sub(1,1)), tonumber(descr:sub(2,2)), tonumber(descr:sub(3,3)), 0}] = n
-end
-p1:get_buildings("frisians_headquarters")[1]:set_soldiers(soldiers)
-
--- =======================================================================
 --                                 Player 2
 -- =======================================================================
 p2:allow_buildings("all")
 p2:forbid_buildings({"empire_quarry", "empire_hunters_house", "empire_tavern", "empire_coalmine", "empire_ironmine", "empire_goldmine", "empire_marblemine", "empire_vineyard", "empire_winery"})
+p2:conquer(map.player_slots[2].starting_field, 9)
 hq = p2:place_building("empire_port", map.player_slots[2].starting_field, false, true)
 hq:set_wares {
-   log = 80,
-   granite = 40,
-   marble = 80,
+   log = 5000,
+   granite = 10000,
+   marble = 10000,
    marble_column = 20,
    planks = 40,
    cloth = 10,
@@ -61,5 +48,9 @@ hq:set_workers {
    empire_armorsmith = 1,
    empire_weaponsmith = 1,
 }
-local soldiers = {70, 110, 150}
-hq:set_soldiers({4,4,0,2}, soldiers[difficulty])
+local soldiers = {50, 300, 550}
+hq:set_soldiers({
+   [{0,0,0,0}] = soldiers[difficulty],
+   [{2,2,0,1}] = soldiers[difficulty],
+   [{4,4,0,2}] = soldiers[difficulty],
+})
