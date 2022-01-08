@@ -1,0 +1,35 @@
+-- =======================================================================
+--                         Frisian Campaign Mission 5
+-- =======================================================================
+push_textdomain("scenario_fri05.wmf")
+
+include "scripting/coroutine.lua"
+include "scripting/field_animations.lua"
+include "scripting/objective_utils.lua"
+include "scripting/infrastructure.lua"
+include "scripting/table.lua"
+include "scripting/ui.lua"
+include "scripting/messages.lua"
+
+game = wl.Game()
+map = game.map
+p1 = game.players[1]
+p2 = game.players[2]
+difficulty = wl.Game().scenario_difficulty
+
+p2:set_attack_forbidden(1, false)  -- NOCOM
+
+campaign_data = game:read_campaign_data("frisians", "fri04")
+if not campaign_data then
+   campaign_message_box({
+      -- TRANSLATORS: Message title for a piece of information
+      title = _("Note"),
+      body = p(_([[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]])),
+      w = 450,
+      h = 150,
+   })
+   campaign_data = {}
+end
+
+include "map:scripting/texts.lua"
+include "map:scripting/mission_thread.lua"
