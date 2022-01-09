@@ -28,7 +28,7 @@ void draw_border_markers(const FieldsToDraw::Field& field,
                          const float scale,
                          const FieldsToDraw& fields_to_draw,
                          RenderTarget* dst) {
-	if (!field.all_neighbors_valid() || !field.is_border) {
+	if (!field.all_neighbors_valid() || !field.is_border || field.obscured_by_slope) {
 		return;
 	}
 	assert(field.owner != nullptr);
