@@ -17,8 +17,6 @@ p1 = game.players[1]
 p2 = game.players[2]
 difficulty = wl.Game().scenario_difficulty
 
-p2:set_attack_forbidden(1, false)  -- NOCOM
-
 trade = {  -- {Wares given} vs {wares received}
    {
       {{barley = 1, fruit = 1}, {iron_ore = 1}},

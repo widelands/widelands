@@ -218,7 +218,7 @@ getting_started_4 = {
 
 getting_started_5 = {
    title = _"Planning the War",
-   body=claus(_"Dikes",
+   body=claus(_"Diking",
       -- TRANSLATORS: Claus Lembeck – Getting Started 5
       _([[The lack of space on Helgoland is indeed a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies you believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
       .. paragraphdivider() ..
@@ -233,37 +233,54 @@ getting_started_6 = {
       _([[I am heartened by your forwardness. Let us all hasten to our separate tasks, and may fortune smile on us!]]))
 }
 
-nocom = {
-   title = _"NOCOM",
-   body=claus(_"NOCOM",
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])),
-}
-
-nocom = {
-   title = _"NOCOM",
-   body=claus(_"NOCOM",
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])
-      .. paragraphdivider() ..
-      -- TRANSLATORS: Claus Lembeck – NOCOM 1
-      _([[NOCOM.]])),
-}
-
-victory = {
+victory_1 = {
    title = _"Victory",
-   body=claus(_"Victory!",
-      -- TRANSLATORS: Claus Lembeck – victory
-      _([[NOCOM!]]))
+   body=ketelsen(_"Enemy defeated",
+      -- TRANSLATORS: Ocke Ketelsen – Victory 1
+      _([[They are defeated! Thank you, thank you for your help. We could never have beaten them by ourselves. Our town did not even sustain any major damage – on the contrary, you have expanded it far beyond its former bounds.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Ocke Ketelsen – Victory 1
+      _([[My people and I will never be able to repay the debt we owe you. I will send all the soldiers you have trained along with you to aid your in your quest to liberate your own home. If there is anything else we can do for you, now or forevermore, you need only ask and we will be yours to command.]]))
+}
+
+victory_2 = {
+   title = _"Victory",
+   body=claus(_"Enemy defeated",
+      -- TRANSLATORS: Claus Lembeck – Victory 2
+      _([[You are very welcome, Ocke Ketelsen. Do not belittle your own part in this victory though, for we could not have achieved this by ourselves.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Claus Lembeck – Victory 2
+      _([[And take my heartfelt thanks for your promise to send your soldiers. I already knew that Atterdag was a formidable enemy, but the forces we now encountered outrival anything I have seen in all my life, and they were just a vanguard! We will need every advantage we can get, and even then I am not as certain of victory as I was before. If you have heard of anything else that might be useful – any piece of tactical advice – any towns who might join us – please share this information with us.]]))
+}
+
+victory_3 = {
+   title = _"Victory",
+   body=ketelsen(_"Know your enemy",
+      -- TRANSLATORS: Ocke Ketelsen – Victory 3
+      _([[I will do so gladly. Indeed, according to my trade partners Atterdag’s thirst for conquest is limitless. After he has established his presence on Föhr, he has conquered all the other islands in the vicinity as well. Your stronghold on Föhr has always been their only defence to speak of, so once you were gone he seized the entire area with ease.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Ocke Ketelsen – Victory 3
+      _([[The occupants are rumoured to enforce a cruel rule. It is a known fact that they have cut off all trade, and the locals are forced to give half of everything they produce to the Danes in tribute. Half! Already, dozens are said to have been executed for embezzling a bushel of grain. People are suffering, and will no doubt gladly join anyone who comes to free them.]]))
+}
+
+victory_4 = {
+   title = _"Victory",
+   body=ketelsen(_"Know your enemy",
+      -- TRANSLATORS: Ocke Ketelsen – Victory 3
+      _([[There is one more thing. Trade ships attempting to sail well north of the occupied area have been boarded and sunk by pirates. The survivors, however, swear that the pirates were in fact Danish soldiers, and that their ships belong to the Danish fleet.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Ocke Ketelsen – Victory 3
+      _([[Now this is mainly speculation, but I believe that Atterdag transports his troops from the Danish capital to the islands he conquers by ship. The land route is much longer and more strenuous, so it is not hard to see why he would do that. Clearly he attempts to disguise this fact. Why would he do that, unless he believes this secret to be of strategical importance?]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Ocke Ketelsen – Victory 3
+      _([[I do not know how large a part of his soldiers is exchanged between the capital and the islands by ship, but their numbers seem to be large enough that I would advise you to cut this exchange off. As you know, these two areas are connected by only one sea route, and it leads through a strait called the Kattegat. This strait is one a few miles wide and dotted with tiny islands. If you can reach this place without being attacked by their ships, you can seize the islands and build a belt of inconquerable strongholds that block any enemy ship attempting to pass.]]))
+}
+
+victory_5 = {
+   title = _"Victory",
+   body=reebaud(_"Victory!",
+      -- TRANSLATORS: Reebaud – Victory 4
+      _([[And if we can block it, they will lose their most important trade route! We must try it. We will sail to the Kattegat at once to conquer the strait, and then we’ll raise the people of Föhr and all the other islands in joint rebellion against the invader!]]))
       .. objective_text(_"Congratulations",
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    allow_next_scenario = true,

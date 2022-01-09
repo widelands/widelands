@@ -137,9 +137,44 @@ function mission_thread()
    sleep(2500)
    campaign_message_box(getting_started_6)
 
-   while not p2.defeated do sleep(1000) end
+   local defeated = false
+   while not defeated do
+      sleep(3000)
+      defeated = true
+      for i,bld in ipairs(p2.tribe.buildings) do
+         if #p2:get_buildings(bld.name) > 0 then
+            defeated = false
+            break
+         end
+      end
+   end
 
-   -- NOCOM victory
+   scroll_to_field(map.player_slots[2].starting_field)
+   sleep(1500)
+   campaign_message_box(victory_1)
+   campaign_message_box(victory_2)
+   campaign_message_box(victory_3)
+   campaign_message_box(victory_4)
+   campaign_message_box(victory_5)
+
+   local data = {}
+   for x = 0, map.width - 1 do
+      for y = 0, map.height - 1 do
+         for i,bob in pairs(map:get_field(x, y).bobs) do
+            if bob.descr.name == "frisians_soldier" then
+               local key = bob.health_level .. bob.attack_level .. bob.defense_level
+               if data[key] then
+                  data[key] = data[key] + 1
+               else
+                  data[key] = 1
+               end
+            end
+         end
+      end
+   end
+   game:save_campaign_data("frisians", "fri05", data)
+   p1:mark_scenario_as_solved("fri05.wmf")
+   -- END OF MISSION 5
 end
 
 run(mission_thread)
