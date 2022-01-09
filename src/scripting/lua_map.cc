@@ -4421,6 +4421,7 @@ const char LuaEconomy::className[] = "Economy";
 const MethodType<LuaEconomy> LuaEconomy::Methods[] = {
    METHOD(LuaEconomy, target_quantity),
    METHOD(LuaEconomy, set_target_quantity),
+   METHOD(LuaEconomy, needs),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEconomy> LuaEconomy::Properties[] = {
@@ -4456,6 +4457,7 @@ void LuaEconomy::__unpersist(lua_State* L) {
 
       :arg name: The name of the ware or worker.
       :type name: :class:`string`
+      :returns: :class:`integer`
 */
 int LuaEconomy::target_quantity(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
@@ -4525,6 +4527,45 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
 			}
 			get()->set_target_quantity(get()->type(), index, quantity, get_egbase(L).get_gametime());
+		} else {
+			report_error(L, "There is no worker '%s'.", wname.c_str());
+		}
+		break;
+	}
+	}
+	return 0;
+}
+
+/* RST
+   .. method:: needs(name)
+
+      Check whether the economy's stock of the given
+      ware or worker is lower than the target setting.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
+
+      :arg name: The name of the ware or worker.
+      :type name: :class:`string`
+      :returns: :class:`boolean`
+*/
+int LuaEconomy::needs(lua_State* L) {
+	const std::string wname = luaL_checkstring(L, 2);
+	switch (get()->type()) {
+	case Widelands::wwWARE: {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
+		if (get_egbase(L).descriptions().ware_exists(index)) {
+			lua_pushboolean(L, get()->needs_ware_or_worker(index));
+		} else {
+			report_error(L, "There is no ware '%s'.", wname.c_str());
+		}
+		break;
+	}
+	case Widelands::wwWORKER: {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
+		if (get_egbase(L).descriptions().worker_exists(index)) {
+			lua_pushboolean(L, get()->needs_ware_or_worker(index));
 		} else {
 			report_error(L, "There is no worker '%s'.", wname.c_str());
 		}

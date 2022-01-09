@@ -863,6 +863,7 @@ public:
 	 */
 	int target_quantity(lua_State*);
 	int set_target_quantity(lua_State*);
+	int needs(lua_State*);
 
 	/*
 	 * C methods

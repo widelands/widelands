@@ -43,7 +43,7 @@ obj_trade = {
    title =_"Trade",
    number = 1,
    body = objective_text(_"Trade",
-      p(_[[You can not build mines or quarry rocks on this island. Instead, you can trade local produce against other types of wares.]]) ..
+      p(_[[You can not mine resources or quarry rocks on this island. Instead, you can trade local produce against other types of wares.]]) ..
       p(_[[Any wares stored in a port will be traded. The trade prices are indicated by the following chart.]])
       .. trade_text
    ),
@@ -203,7 +203,7 @@ getting_started_3 = {
       _([[As for what we will build, I disagree. More military sites are important, but even more so is the ability to construct buildings in the first place. There are no woodcutters anywhere on the island, and we can’t rely on trade for wood, so we must secure our wood production at once before all our wood has used up by the smokeries and charcoal burners!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
-      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’d like. The lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
+      _([[The land looks fairly barren, so we will need to reserve more space for foresting than I’m comfortable with. The lowlands seem to be slightly more fertile, so it might be wise to build the forest infrastructure down here and relocate some of the farms to the uplands. Farms, reed farms, and berry farms do not depend on fertile land as much as trees do.]]))
 }
 
 getting_started_4 = {
@@ -223,7 +223,7 @@ getting_started_5 = {
       _([[The lack of space on Helgoland is indeed a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies you believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – Getting Started 5
-      _([[However, if you prefer to play it safe, don’t forget that we can simply enlarge the island. As soon as we have a steady supply of logs we can construct dikes and breakwaters to increase the available building space. When we are ready to attack, we can even use this as a way of bypassing the chokepoint in the east, or if we are to be truly bold we could dike around the whole western coast of the island to attack the enemy from two sides at once!]]))
+      _([[However, if you prefer to play it safe, don’t forget that we can simply enlarge the island. As soon as we have a steady supply of logs, we can construct dikes and breakwaters to gain more building space from the sea. When we are ready to attack, we can even use this as a way of bypassing the chokepoint in the east, or if we are to be truly bold we could dike around the whole western coast of the island to attack the enemy from two sides at once!]]))
 }
 
 getting_started_6 = {
