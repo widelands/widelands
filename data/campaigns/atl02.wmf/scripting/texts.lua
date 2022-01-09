@@ -69,7 +69,7 @@ obj_explore = {
    title = _"Explore the surroundings",
    number = 1,
    body = objective_text(_"Explore Your Surroundings",
-   p(_[[We are pretty sure that we are not alone on the island. We do not know if the others on this island are friends or foes so we need to treat carefully. Explore the island by building at least one habitat for a scout.]]))
+   p(_[[We are fairly sure that we are not alone on the island. We do not know if the others on this island are friends or foes, so we need to tread carefully. Explore the island by building at least one habitat for a scout.]]))
 }
 
 obj_expand = {
@@ -77,7 +77,7 @@ obj_expand = {
    title = _"Expand your teritory",
    number = 1,
    body = objective_text(_"Expand Territory",
-   p(_[[As our settlement is going to grow up, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for his bigger view range.]]))
+   p(_[[As our settlement is going to grow up, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for its larger view range.]]))
 }
 
 obj_spidercloth = {
@@ -85,8 +85,8 @@ obj_spidercloth = {
    title = _"Build a spider farm and a weaving mill",
    number = 2,
    body = objective_text(_"Spidercloth Production",
-      p(_[[We need some spidercloth urgently as we are running out of it. So it is essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth. Don’t forget the constructionsites.]]) ..
-      p(_[[After that we need to have a farm under all circumstances as it needs spidercloth to be build. Additionally we need a spiderfarm and a weaving mill. Later on a gold spinning mill would be helpful as well.]]))
+      p(_[[We need some spidercloth urgently as we are running out of it. It is therefore essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth, not forgetting the construction sites.]]) ..
+      p(_[[Afterwards we need to construct a farm under all circumstances, as it needs spidercloth to be built. Additionally, we need a spiderfarm and a weaving mill. Later on, a gold spinning mill would be helpful as well.]]))
 }
 
 obj_trading_post = {
@@ -94,7 +94,7 @@ obj_trading_post = {
    title = _"Build a trading post",
    number = 1,
    body = objective_text(_"Upgrade Scout’s House To Trading Post",
-   p(_[[To be able to pay the tributes to Kalitath, and keep contact with Jundlina. We need to enhance our scout’s house to a trading post.]]))
+   p(_[[To be able to pay the tributes to Kalitath, and to maintain contact with Jundlina, we need to enhance our scout’s house to a trading post.]]))
 }
 
 obj_tribute = {
@@ -104,10 +104,10 @@ obj_tribute = {
    body = objective_text(_"Send Trader To Kalitath",
    p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
    p(_[[The following batches need to be delivered:]]) ..
-   li(_[[Five batches with five logs.]]) ..
-   li(_[[Four batches with four coal.]]) ..
-   li(_[[Three batches with three iron.]]) ..
-   li(_[[Two batches with two gold.]]))
+   li(_[[Five batches of five logs each.]]) ..
+   li(_[[Four batches of four lumps of coal each.]]) ..
+   li(_[[Three batches of three iron bars each.]]) ..
+   li(_[[Two batches of two gold bars each.]]))
 }
 
 obj_tribute2 = {
@@ -117,10 +117,10 @@ obj_tribute2 = {
    body = objective_text(_"Send Trader To Kalitath",
    p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
    p(_[[The following batches need to be delivered:]]) ..
-   li(_[[Ten batches with five logs.]]) ..
-   li(_[[Eight batches with four coal.]]) ..
-   li(_[[Six batches with three iron.]]) ..
-   li(_[[Four batches with two gold.]]))
+   li(_[[Ten batches of five logs each.]]) ..
+   li(_[[Eight batches of four lumps of coal each.]]) ..
+   li(_[[Six batches of three iron bars each.]]) ..
+   li(_[[Four batches of two gold bars each.]]))
 }
 
 obj_defeat_maletus = {
