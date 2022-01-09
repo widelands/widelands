@@ -127,8 +127,8 @@ obj_defeat_maletus = {
    name = "obj_defeat_maletus",
    title = _"Defeat Maletus",
    number = 1,
-   body = objective_text(_"Defeat Empire Leader Maletus",
-   p(_[[We need to finish the empire of to have a chance for making a new home.]]))
+   body = objective_text(_"Defeat Imperial Leader Maletus",
+   p(_[[We need to finish the Empire off to have a chance to build a new home.]]))
 }
 
 -- =======================================================================
@@ -140,7 +140,7 @@ defeated = {
       title =_"Defeated!",
       body = sidolus(_"Sidolus has bad news…",
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh, Jundlina. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. They have destroyed our last warehouse. So, we have lost this battle and our people is doomed!]])),
+         _([[Aaaargh, Jundlina. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. They have destroyed our last warehouse. Thus we have lost this battle and our people is doomed!]])),
       posy=1,
    }
 }
@@ -148,7 +148,7 @@ defeated = {
 -- This is an array or message descriptions
 initial_messages = {
    {
-      title = _"The princess’ memoir",
+      title = _"The princess’s memoir",
       body = jundlina(_"Jundlina writes her diary",
       -- TRANSLATORS: Jundlina - Diary
       _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design. ]]) ..
