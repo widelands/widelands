@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game_data_error.h"
@@ -79,6 +80,8 @@ int LuaCoroutine::get_status() {
 }
 
 int LuaCoroutine::resume() {
+	MutexLock m(MutexLock::ID::kLua);
+
 	int rv = lua_resume(lua_state_, nullptr, ninput_args_);
 	ninput_args_ = 0;
 	nreturn_values_ = lua_gettop(lua_state_);
