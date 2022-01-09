@@ -44,7 +44,7 @@ obj_basic_infrastructure = {
    name = "obj_basic_infrastructure",
    title = _ "Ensure the supply of build wares",
    number = 4,
-   body = objective_text(_"Establish a basic production",
+   body = objective_text(_"Establish Basic Production Chain",
    p(_[[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]]))
 }
 
@@ -52,7 +52,7 @@ obj_tools = {
    name = "obj_tools",
    title = _ "Build tools quickly",
    number = 1,
-   body = objective_text(_"Make new tools",
+   body = objective_text(_"Make New Tools",
       p(_[[Most of our tools have been lost in the ship tragedy. Our people will not be able to fulfill their duties without proper tools. Luckily we still have some iron ore and plenty of coal. Build a production of tools, as it is a prerequisite for success on the island. Don’t forget to build a smelting works as well.]]))
 }
 
@@ -68,8 +68,16 @@ obj_explore = {
    name = "obj_explore",
    title = _"Explore the surroundings",
    number = 1,
-   body = objective_text(_"Explore your surroundings",
-   p(_[[We are pretty sure that we are not alone on the island. We do not know if the others on this island are friends or foes so we need to treat carefully. Expand and explore the island by building at least one habitat for a scout and military buildings. Build at least one tower for his bigger view range.]]))
+   body = objective_text(_"Explore Your Surroundings",
+   p(_[[We are pretty sure that we are not alone on the island. We do not know if the others on this island are friends or foes so we need to treat carefully. Explore the island by building at least one habitat for a scout.]]))
+}
+
+obj_expand = {
+   name = "obj_explore",
+   title = _"Expand your teritory",
+   number = 1,
+   body = objective_text(_"Expand Territory",
+   p(_[[As our settlement is going to grow up, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for his bigger view range.]]))
 }
 
 obj_spidercloth = {
@@ -85,7 +93,7 @@ obj_trading_post = {
    name = "obj_trading_post",
    title = _"Build a trading post",
    number = 1,
-   body = objective_text(_"Upgrade our scout’s house to a trading post",
+   body = objective_text(_"Upgrade Scout’s House To Trading Post",
    p(_[[To be able to pay the tributes to Kalitath, and keep contact with Jundlina. We need to enhance our scout’s house to a trading post.]]))
 }
 
@@ -93,7 +101,7 @@ obj_tribute = {
    name = "obj_tribute",
    title = _"Pay all tributes to Kalitath",
    number = 1,
-   body = objective_text(_"Send our trader to Kalitath to deliver the demanded goods",
+   body = objective_text(_"Send Trader To Kalitath",
    p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
    p(_[[The following batches need to be delivered:]]) ..
    li(_[[Five batches with five logs.]]) ..
@@ -106,7 +114,7 @@ obj_tribute2 = {
    name = "obj_tribute2",
    title = _"Pay all tributes to Kalitath",
    number = 1,
-   body = objective_text(_"Send our trader to Kalitath to deliver the demanded goods",
+   body = objective_text(_"Send Trader To Kalitath",
    p(_[[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]]) ..
    p(_[[The following batches need to be delivered:]]) ..
    li(_[[Ten batches with five logs.]]) ..
@@ -119,7 +127,7 @@ obj_defeat_maletus = {
    name = "obj_defeat_maletus",
    title = _"Defeat Maletus",
    number = 1,
-   body = objective_text(_"Defeat the empire troops led by maletus.",
+   body = objective_text(_"Defeat Empire Leader Maletus",
    p(_[[We need to finish the empire of to have a chance for making a new home.]]))
 }
 
@@ -174,12 +182,13 @@ initial_messages1= {
       _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
-      _([[Let’s also explore this island. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
+      _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
       _([[But we need to be careful with the stones and other precious material though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
       _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
       .. new_objectives(obj_tools)
       .. new_objectives(obj_basic_infrastructure)
-      .. new_objectives(obj_explore),
+      .. new_objectives(obj_explore)
+      .. new_objectives(obj_expand),
       h=500,
    },
 } -- end of initial messages.
@@ -234,6 +243,21 @@ spidercloth_3 = {
 }
 
 enemy_1 = {
+   {
+      title = _"Sidolus Reports foreign inhabitants",
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don’t know what to expect from the foreigners.]]))
+   },
+   {
+      title = _"Jundlina Cheers",
+      body = jundlina(_"Jundlina",
+         -- TRANSLATORS: Jundlina
+         _([[Sidolus, I agree this is very concerning. We need to find out more. Hopefully our scout will get us some information soon.]]))
+   }
+}
+
+enemy_1a = {
    {
       title = _"Sidolus Reports foreign inhabitants",
       body = sidolus(

@@ -15,8 +15,9 @@ local result = {
          {
             name = "atlanteans_scouts_house1",
             helptexts = {
+               no_scouting_building_connected = pgettext("atlanteans_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
                -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
-               purpose = pgettext("atlanteans_building", "Explores unknown territory.")
+               purpose = pgettext("building", "Explores unknown territory.")
             }
          },
       },

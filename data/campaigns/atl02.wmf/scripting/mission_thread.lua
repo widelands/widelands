@@ -66,10 +66,22 @@ function enemy()
       end
    end
 
-   --Kalitath:set_attack_forbidden(2, false)
-   --Maletus:set_attack_forbidden(3, false)
+   if check_for_buildings(p1, {atlanteans_scouts_house1 = 1,}) then
+      msg_boxes(enemy_1)
+   else
+      msg_boxes(enemy_1a)
+   end
+end
 
-   msg_boxes(enemy_1)
+function expansion()
+   while not check_for_buildings(p1, {
+      atlanteans_tower = 1,
+      atlanteans_guardhouse = 2,
+   }) do sleep(3731) end
+   expand.done = true
+end
+
+function scouting()
    while not check_for_buildings(p1, {
       atlanteans_scouts_house1 = 1,
    }) do sleep(3731) end
@@ -107,7 +119,7 @@ function enemy()
       sleep (2000)
    end
 
-   set_objective_done(explore)
+   explore.done = true
    msg_boxes(allies)
    run(uncertain_allies)
    run(maletus_defeated)
@@ -192,11 +204,14 @@ function intro()
    basic_infrastructure = add_campaign_objective(obj_basic_infrastructure)
    tools = add_campaign_objective(obj_tools)
    explore = add_campaign_objective(obj_explore)
+   expand = add_campaign_objective(obj_expand)
    msg_boxes(initial_messages1)
 
    run(spidercloth)
    run(infrastructure)
    run(enemy)
+   run(expansion)
+   run(scouting)
    run(iron)
    run(check_defeat)
 end

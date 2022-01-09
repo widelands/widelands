@@ -4,7 +4,7 @@
 -- state of the Lua engine.
 --
 -- Usage:
--- Press F6 to open the debug console (need a debug build for that).
+-- Press CTRL + SHIFT + Space to open the debug console (need a debug build for that).
 -- dofile("utils/load_economy.lua")
 -- load_eco(plrno, tribename, folder_of_the_file)
 --

@@ -4,7 +4,7 @@
 -- state of the Lua engine.
 --
 -- Usage:
--- Press F6 to open the debug console (need a debug build for that).
+-- Press CTRL + SHIFT + Space to open the debug console (need a debug build for that).
 -- dofile("utils/dump_economy.lua")
 -- dump_eco(plrnumber, mapname)
 
