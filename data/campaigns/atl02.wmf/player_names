@@ -4,7 +4,7 @@
 packet_version="2"
 
 [player_1]
-name="Scenario player"
+name="Atlanteans"
 tribe="atlanteans"
 ai=
 closeable="false"

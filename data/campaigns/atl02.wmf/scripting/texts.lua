@@ -58,10 +58,10 @@ obj_tools = {
 
 obj_mining = {
    name = "obj_mining",
-   title = _ "Explore the mountains for ressources",
+   title = _ "Search the mountains for resources",
    number = 3,
    body = objective_text(_"Build Mines",
-      p(_[[As we are able to make tools again, our supply of mining ressources needs to be replenished soon. Explore the mountains and build at least one mine of each type to mine coal, iron and gold.]]))
+      p(_[[As we are able to make tools again, our supply of mining resources needs to be replenished soon. Explore the mountains and build at least one mine of each type to mine coal, iron and gold.]]))
 }
 
 obj_explore = {
@@ -323,7 +323,7 @@ mining_established_1 = {
       title = _"Mining Established",
       body = loftomor(
          -- TRANSLATORS: loftomor
-         _([[Jundlina, may Satul warm you! Another issue solved. We have found some ressources and build a mine of each type.]]))
+         _([[Jundlina, may Satul warm you! Another issue solved. We have found some resources and build a mine of each type.]]))
    },
    {
       title = _"Jundlina is Excited",
@@ -338,7 +338,7 @@ mining_established_2 = {
       title = _"Mining Established",
       body = loftomor(
          -- TRANSLATORS: loftomor
-         _([[Sidolus, may Satul warm you! Another issue solved. We have found some ressources and build a mine of each type.]]))
+         _([[Sidolus, may Satul warm you! Another issue solved. We have found some resources and build a mine of each type.]]))
    },
    {
       title = _"Sidolus is Excited",
