@@ -61,6 +61,9 @@ void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, 
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+		if (field.obscured_by_slope) {
+			continue;
+		}
 
 		// Southwestern edge
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {

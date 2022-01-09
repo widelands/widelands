@@ -101,6 +101,9 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const InfoToDraw info_to_draw,
                                  const Widelands::Player& player,
                                  RenderTarget* dst) {
+	if (field.obscured_by_slope) {
+		return;
+	}
 	MutexLock m(MutexLock::ID::kObjects);
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 	     bob = bob->get_next_bob()) {
@@ -114,7 +117,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
                                                const Widelands::Player::Field& player_field,
                                                const float scale,
                                                RenderTarget* dst) {
-	if (player_field.map_object_descr == nullptr) {
+	if (player_field.map_object_descr == nullptr || field.obscured_by_slope) {
 		return;
 	}
 
@@ -398,6 +401,9 @@ void InteractivePlayer::draw_immovables_for_visible_field(
    const Widelands::Player& player,
    RenderTarget* dst,
    std::set<Widelands::Coords>& deferred_coords) {
+	if (field.obscured_by_slope) {
+		return;
+	}
 	MutexLock m(MutexLock::ID::kObjects);
 
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();

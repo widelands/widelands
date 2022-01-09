@@ -41,6 +41,8 @@ public:
 		// Surface pixel this will be plotted on.
 		Vector2f surface_pixel = Vector2f::zero();
 
+		bool obscured_by_slope;  // Whether this field is invisible due to an obstacle in front.
+
 		// Rendertarget pixel this will be plotted on. This is only different by
 		// the Rendertarget::get_rect().origin() of the view window.
 		Vector2f rendertarget_pixel = Vector2f::zero();

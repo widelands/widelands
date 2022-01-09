@@ -784,6 +784,9 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
                                          const Vector2i& hotspot,
                                          float scale,
                                          float opacity) {
+	if (field.obscured_by_slope) {
+		return;
+	}
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale, opacity);
 }
 
@@ -791,6 +794,9 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
                                    const Time& gametime,
                                    float scale) const {
+	if (f->obscured_by_slope) {
+		return;
+	}
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
 		                    f->owner->tribe().bridge_animation(

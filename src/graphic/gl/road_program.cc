@@ -148,6 +148,9 @@ void RoadProgram::draw(const int renderbuffer_width,
 	uint32_t gl_texture = 0;
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
+		if (field.obscured_by_slope) {
+			continue;
+		}
 
 		// Road to right neighbor.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
