@@ -399,7 +399,7 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kUnbuildableFCheck:
 			set_taskpool_task_time(gametime + Duration(4000), SchedulerTaskId::kUnbuildableFCheck);
-			update_all_not_buildable_fields();
+			update_all_not_buildable_fields(gametime);
 			break;
 		case SchedulerTaskId::kCheckEconomies:
 			check_economies();
@@ -1484,7 +1484,7 @@ void DefaultAI::update_all_mineable_fields(const Time& gametime) {
  * - is ours, and buildable, drop from unused fields and create buildable_field or
  * mineable_field and insert to particular dequeue
  */
-void DefaultAI::update_all_not_buildable_fields() {
+void DefaultAI::update_all_not_buildable_fields(const Time& gametime) {
 	int32_t const pn = player_number();
 
 	// We are checking at least 5 unusable fields (or less if there are not 5 of them)
@@ -1497,7 +1497,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 	}
 
 	// for performance reasons we update only this count of fields
-	const uint32_t fields_update_limit = 5;
+	const uint32_t fields_update_limit = 20;
 	// just counter
 	uint32_t checked_fields = 0;
 
@@ -1514,6 +1514,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 			unusable_fields.pop_front();
 			if (fields_update_limit > checked_fields++) {
 				update_buildable_field(*buildable_fields.back());
+				buildable_fields.back()->field_info_expiration = gametime + kFieldInfoExpiration;
 			}
 			continue;
 		}
@@ -1523,6 +1524,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 			unusable_fields.pop_front();
 			if (fields_update_limit > checked_fields++) {
 				update_mineable_field(*mineable_fields.back());
+				mineable_fields.back()->field_info_expiration = gametime + kMineFieldInfoExpiration;
 			}
 			continue;
 		}
