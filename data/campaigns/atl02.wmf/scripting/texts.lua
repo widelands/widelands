@@ -217,7 +217,7 @@ spidercloth_2 = {
       title = _"Opol makes a point",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven’t build a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion we are potentially running into a deadlock here.]]))
+         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven’t built a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion, not completing one in time will result in a crisis that can never be resolved.]]))
    },
    {
       title = _"Jundlina Acknowledges",
