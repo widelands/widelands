@@ -413,8 +413,8 @@ tribute_not_started = {
       title = _"Urgent Tribute Demand",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we haven't received any help yet. So if you are really on our side you should start sending some wares urgently.]])..
-         _([[As we are facing great losses due to your lazyness, you should now send us double the amount of each ware as before.]])
+         _([[Strangers, we haven’t received any help yet. If you are really on our side, you should start sending some wares urgently.]])..
+         _([[As we are facing great losses due to your laziness, you shall now send us twice the previous amount of each ware.]])
          .. paragraphdivider() ..
          _([[I am sure you won't loose our alliance, wouldn't you?]]))
    },
