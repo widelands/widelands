@@ -1,4 +1,7 @@
 name: Build
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 on:
   pull_request:
     types: [ opened, reopened, synchronize ]
