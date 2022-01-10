@@ -435,9 +435,9 @@ tribute_started = {
       body = kalitath(
          -- TRANSLATORS: Kalitath
          _([[Strangers, we haven't received the first batch of wares. So we may finally trust you.]])..
-         _([[However our enemy in the north is very strong. I am afraid without significant help from your side we might loose the war despite any ware help you might provide.]])
+         _([[However, our enemy in the north is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
          .. paragraphdivider() ..
-         _([[They name themselves an empire and their leader is named Maletus. I want you to train your soldiers and help us defeat his lousy empire.]]))
+         _([[They name themselves an Empire, and their leader is called Maletus. I want you to train your soldiers and help us defeat his lousy Empire.]]))
          .. new_objectives(obj_defeat_maletus)
    },
    {
