@@ -183,7 +183,7 @@ initial_messages1= {
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
       _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
-      _([[But we need to be careful with the stones and other precious material though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
+      _([[But we need to be careful with the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
       _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
       .. new_objectives(obj_tools)
       .. new_objectives(obj_basic_infrastructure)
