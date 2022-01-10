@@ -298,7 +298,7 @@ infrastructure_1 = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[This is good news indeed, Loftomor. Now we can think of constructing more sophisticated buildings to make our economy grow. Please advice if you feel we are missing necessary buildings.]]))
+         _([[This is good news indeed, Loftomor. Now we can consider constructing more sophisticated buildings to enlarge our economy. Please advise whenever you feel we are missing necessary buildings.]]))
    }
 }
 
