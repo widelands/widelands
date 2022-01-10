@@ -195,7 +195,7 @@ initial_messages1= {
 
 spidercloth_1 = {
    {
-      title = _"Opol arrives at Jundlina",
+      title = _"Opol visits Jundlina",
       body = opol(
          -- TRANSLATORS: Opol
          _([[May Satul warm you, Jundlina. As highest weaver of the guild I have bad news for you. I just realized we are running out of spidercloth. This is very critical as you know that spidercloth is needed for many buildings.]])
