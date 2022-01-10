@@ -292,7 +292,7 @@ enemy_1a = {
       title = _"Sidolus Reports foreign inhabitants",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don’t know what to expect from the foreigners.]]))
+         _([[May Satul warm you, Jundlina! I have some disturbing news. We have sighted land governed by foreigners, but we do not yet know what to expect from the natives.]]))
    },
    {
       title = _"Jundlina Cheers",
