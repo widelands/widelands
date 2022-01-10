@@ -1,6 +1,6 @@
 name: Formatting your code
 concurrency:
-  group: ${{ github.ref }}
+  group: format-${{ github.ref }}
   cancel-in-progress: true
 on:
   # We are interested only in master and PRs, but GitHub explicitly forbids

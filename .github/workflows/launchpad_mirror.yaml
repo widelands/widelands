@@ -1,6 +1,6 @@
 name: Launchpad Mirror
 concurrency:
-  group: ${{ github.ref }}
+  group: lp-${{ github.ref }}
   cancel-in-progress: true
 on:
   push:
