@@ -232,7 +232,7 @@ spidercloth_3 = {
       title = _"Opol Seeks Out Jundlina",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[Jundlina, may Satul warm you! The weaving mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
+         _([[Jundlina, may Satul warm you! The weaving mill and spider farm are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
    },
    {
       title = _"Jundlina Cheers",
