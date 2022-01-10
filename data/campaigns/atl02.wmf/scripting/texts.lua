@@ -416,7 +416,7 @@ tribute_not_started = {
          _([[Strangers, we haven’t received any help yet. If you are really on our side, you should start sending some wares urgently.]])..
          _([[As we are facing great losses due to your laziness, you shall now send us twice the previous amount of each ware.]])
          .. paragraphdivider() ..
-         _([[I am sure you won't loose our alliance, wouldn't you?]]))
+         _([[I am sure you do not want to break our alliance… do you?]]))
    },
    {
       title = _"Blackmail!",
