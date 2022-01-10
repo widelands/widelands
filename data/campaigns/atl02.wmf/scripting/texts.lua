@@ -368,10 +368,10 @@ tribute = {
       title = _"Tribute Demand",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we need to get some sign of your good intentions. So if you are really on our side you should send us some gold and a couple of other wares on a regular basis.]])..
-         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
+         _([[Strangers, we need to receive some sign of your good intentions. If you are really on our side, you should send us some gold and a couple of other wares on a regular basis.]])..
+         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
          .. paragraphdivider() ..
-         _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
+         _([[Oh, and I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our war plannings.]]))
    },
    {
       title = _"Pitfall!",
