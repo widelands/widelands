@@ -422,7 +422,7 @@ tribute_not_started = {
       title = _"Blackmail!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our so-called ally is blackmailing us and we can't punish his insult as he has our princess at his hands.]])
+         _([[May Satul warm us all. Our so-called ally is blackmailing us, and we can’t punish him for his insult as he has our princess at his hands.]])
          .. paragraphdivider() ..
          _([[Our only chance is to double our efforts and start delivering something soon.]]))
          .. new_objectives(obj_tribute2)
