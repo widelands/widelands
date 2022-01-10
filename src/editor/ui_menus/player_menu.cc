@@ -158,7 +158,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		mutable_map->set_scenario_player_ai(1, "");
 		mutable_map->set_scenario_player_closeable(1, false);
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
-		mutable_map->set_scenario_player_name(1, bformat(_("Player %u"), 1));
+		mutable_map->set_scenario_player_name(1, format(_("Player %u"), 1));
 		mutable_map->set_scenario_player_tribe(1, "");
 		eia().set_need_save(true);
 	}
@@ -181,7 +181,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
-		   row, bformat("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50, 16,
+		   row, format("dropdown_tribe%d", static_cast<unsigned int>(p)), 0, 0, 50, 16,
 		   plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
@@ -286,7 +286,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			// Register new default name and tribe for these players
 			const std::string name =
 			   /** TRANSLATORS: Default player name, e.g. Player 1 */
-			   bformat(_("Player %u"), static_cast<unsigned int>(pn));
+			   format(_("Player %u"), static_cast<unsigned int>(pn));
 			map->set_scenario_player_name(pn, name);
 			rows_.at(pn - 1)->name->set_text(name);
 

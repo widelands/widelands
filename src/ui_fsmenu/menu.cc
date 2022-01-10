@@ -268,7 +268,7 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 	}
 
 	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
-	                                    title, bformat(_("Back to ‘%s’"), title));
+	                                    title, format(_("Back to ‘%s’"), title));
 	UI::Panel* spacer1 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* spacer2 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* icon;

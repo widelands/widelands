@@ -52,7 +52,7 @@
 #include "logic/playercommand.h"
 
 // following is in milliseconds (widelands counts time in ms)
-constexpr Duration kFieldInfoExpiration(12 * 1000);
+constexpr Duration kFieldInfoExpiration(14 * 1000);
 constexpr Duration kMineFieldInfoExpiration(20 * 1000);
 constexpr Duration kNewMineConstInterval(19000);
 constexpr Duration kBusyMineUpdateInterval(2000);
@@ -276,13 +276,13 @@ void DefaultAI::think() {
 
 	const int32_t delay_time = gametime.get() - taskPool.front()->due_time.get();
 
-	// This portion of code keeps the speed of game so that FPS are kept within
-	// range 13 - 15, this is used for training of AI
+	/// This portion of code keeps the speed of game to ensure AI tasks
+	// being on time, this is used for training of AI
 	if (game().is_auto_speed()) {
 		int32_t speed_diff = 0;
-		if (delay_time > 5500) {
-			speed_diff = -100;
-		} else if (delay_time < 1000) {
+		if (delay_time > 4500) {
+			speed_diff = -200;
+		} else if (delay_time < 2000) {
 			speed_diff = +100;
 		}
 		if (speed_diff != 0) {
@@ -319,9 +319,9 @@ void DefaultAI::think() {
 		scheduler_delay_counter_ = 0;
 	}
 
-	// 500 provides that second job is run if delay time is longer then 2 sec
+	// 400 provides that second job is run if delay time is longer then 1.6 sec
 	if (delay_time > 2000) {
-		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 500));
+		jobs_to_run_count = sqrt(static_cast<uint32_t>(delay_time / 400));
 	}
 
 	jobs_to_run_count = (jobs_to_run_count > kMaxJobs) ? kMaxJobs : jobs_to_run_count;
@@ -534,13 +534,21 @@ void DefaultAI::think() {
 					verb_log_info_time(gametime, "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh,
 					                   enemy_warehouses.size());
 				}
-				management_data.review(
-				   gametime, player_number(), player_statistics.get_player_land(player_number()),
-				   player_statistics.get_enemies_max_land(),
-				   player_statistics.get_old60_player_land(player_number()), attackers_count_,
-				   soldier_trained_log.count(gametime),
-				   player_statistics.get_player_power(player_number()),
-				   count_productionsites_without_buildings(), first_iron_mine_built);
+
+				// how many types of mines have at least one finished mine? So can be up to 4 now
+				uint16_t finished_mines_type = 0;
+				for (const auto& mt : mines_per_type) {
+					finished_mines_type += (mt.second.finished > 0) ? 1 : 0;
+				}
+
+				management_data.review(gametime, player_number(),
+				                       player_statistics.get_player_land(player_number()),
+				                       player_statistics.get_enemies_max_land(),
+				                       player_statistics.get_old60_player_land(player_number()),
+				                       attackers_count_, soldier_trained_log.count(gametime),
+				                       player_statistics.get_player_power(player_number()),
+				                       count_productionsites_without_buildings(), first_iron_mine_built,
+				                       allships.size(), finished_mines_type);
 				set_taskpool_task_time(
 				   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			}
@@ -621,8 +629,6 @@ void DefaultAI::late_initialization() {
 		}
 
 		management_data.test_consistency(true);
-		assert(management_data.get_military_number_at(42) ==
-		       management_data.get_military_number_at(kMutationRatePosition));
 
 	} else {
 		// Doing some consistency checks
@@ -1291,125 +1297,124 @@ void DefaultAI::late_initialization() {
 /**
  * Checks PART of available buildable fields.
  *
- * this checks about 40-50 buildable fields. In big games, the player can have thousands
- * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
- * we look for medium & big fields and near border fields if needed.
+ * It has 3 stages:
+ * 1. Checking for invalid fields (not more buildable, e.g. tree grew there and so on) and updating
+ *  specific types of fields to the limit as quantified in special_fields_to_prefer array (no
+ *  rotating of buildable_fields here)
+ * 2. Removing invalid fields and partial rotating of the deque as a side effect
+ * 3. Updating further BFs up to the overall limit of max_fields_to_check (no rotating)
+ * As a rule we update fields with expired info only.
+ * The total count of BF to be updated is hardlimited to max_fields_to_check (30 now)
  */
 void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
-	// Every call we try to check first 35 buildable fields
-	constexpr uint16_t kMinimalFieldsCheck = 35;
+	if (buildable_fields.empty()) {
+		return;
+	}
 
-	uint16_t i = 0;
+	// This defines count of prefered types of fields to update info stright away
+	uint16_t special_fields_to_prefer[3] = {4, 2, 10};
+	// Positions and types are defined here
+	const uint16_t kSpecialFieldPos = 0;
+	const uint16_t kMediumlFieldPos = 1;
+	const uint16_t kBigFieldPos = 2;
+	const uint16_t kNoReasonPos = 3;
 
-	// To be sure we have some info about enemies we might see
-	update_player_stat(gametime);
+	// The overall limit should be of course higher than the sum of above special fields
+	const uint16_t max_fields_to_check = 30;
+	// Just a counter
+	uint16_t updated_fields_count = 0;
+	// how many fields are not valid and need to be rid of (removed from buildable_fields)
+	uint32_t invalidated_bf_count = 0;
 
-	// Generally we check fields as they are in the container, but we need also given
-	// number of "special" fields. So if given number of fields are not found within
-	// "regular" check, we must go on and look also on other fields...
-	uint8_t non_small_needed = 4;
-	uint8_t near_border_needed = 10;
+	// Stage #1:
+	for (auto* bf : buildable_fields) {
+		const uint16_t build_caps =
+		   player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
+		uint16_t update_reason = kNoReasonPos;
 
-	// we test 35 fields that were update more than 1 seconds ago
-	while (!buildable_fields.empty() &&
-	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
+		bf->invalidated = (!build_caps || bf->coords.field->get_owned_by() != player_number());
+
+		// if marked as invalid, continuing with next one
+		if (bf->invalidated) {
+			++invalidated_bf_count;
+			continue;
+		}
+
+		if (bf->field_info_expiration > gametime) {
+			continue;
+		}
+
+		if (build_caps == 2 && special_fields_to_prefer[kMediumlFieldPos]) {
+			update_reason = kMediumlFieldPos;
+		} else if (build_caps == 3 && special_fields_to_prefer[kBigFieldPos]) {
+			update_reason = kBigFieldPos;
+		} else if (special_fields_to_prefer[kSpecialFieldPos]) {
+			// here we cover (going to prefer) fields of special interests
+			const bool is_special =
+			   bf->is_portspace == ExtendedBool::kTrue || bf->unowned_land_nearby || bf->enemy_nearby;
+			if (is_special) {
+				update_reason = kSpecialFieldPos;
+			}
+		}
+		if (update_reason < kNoReasonPos) {
+			update_buildable_field(*bf);
+			bf->field_info_expiration = gametime + kFieldInfoExpiration;
+			special_fields_to_prefer[update_reason]--;
+			updated_fields_count++;
+		}
+	}
+
+	verb_log_dbg_time(
+	   gametime,
+	   " first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
+	   "fields found: %3d\n",
+	   updated_fields_count, special_fields_to_prefer[kSpecialFieldPos],
+	   special_fields_to_prefer[kMediumlFieldPos], special_fields_to_prefer[kBigFieldPos],
+	   invalidated_bf_count);
+
+	// Stage #2: get rid of invalid files / and rotate the deque
+	uint16_t min_fields_rotated =
+	   buildable_fields.size() / 15;  // rotating at least this number of items
+	while (invalidated_bf_count || min_fields_rotated--) {
 		BuildableField& bf = *buildable_fields.front();
-
-		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration +
-		     Duration(1000)) <= gametime) {
-
-			//  check whether we lost ownership of the node
-			if (bf.coords.field->get_owned_by() != player_number()) {
+		if (bf.invalidated) {
+			invalidated_bf_count--;
+			if (bf.coords.field->get_owned_by() !=
+			    player_number()) {  // field is not ours, getting rid completely
 				delete &bf;
 				buildable_fields.pop_front();
 				continue;
-			}
-
-			//  check whether we can still construct regular buildings on the node
-			if ((player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK) == 0) {
+			} else {  // field is ours but unusable, obviously with builcaps size 0
 				unusable_fields.push_back(bf.coords);
 				delete &bf;
 				buildable_fields.pop_front();
 				continue;
 			}
 
-			update_buildable_field(bf);
-			if (non_small_needed > 0) {
-				int32_t const maxsize =
-				   player_->get_buildcaps(bf.coords) & Widelands::BUILDCAPS_SIZEMASK;
-				if (maxsize > 1) {
-					--non_small_needed;
-				}
-			}
-			if (near_border_needed > 0) {
-				if (bf.near_border) {
-					--near_border_needed;
-				}
-			}
+		} else {  // just rotating
+			buildable_fields.push_back(&bf);
+			buildable_fields.pop_front();
 		}
-		bf.field_info_expiration = gametime + kFieldInfoExpiration;
-		buildable_fields.push_back(&bf);
-		buildable_fields.pop_front();
-
-		++i;
 	}
 
-	// If needed we iterate once more and look for 'special' fields
-	// starting in the middle of buildable_fields to skip fields tested lately
-	// But not doing this if the count of buildable fields is too low
-	// (no need to bother)
-	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
-		return;
-	}
-
-	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
-		// If we dont need to iterate (anymore) ...
-		if (non_small_needed + near_border_needed == 0) {
+	// Stage #3: update all buildable fields (expired ones of course) up to the limit
+	for (auto* bf : buildable_fields) {
+		if (updated_fields_count >= max_fields_to_check) {
 			break;
 		}
-
-		// Skip if the field is not ours or was updated lately
-		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
-			continue;
+		assert(!bf->invalidated);  // there should be no more invalid fields
+		if (bf->field_info_expiration < gametime) {
+			update_buildable_field(*bf);
+			bf->field_info_expiration = gametime + kFieldInfoExpiration;
+			updated_fields_count++;
 		}
-		// We are not interested in fields where info has expired less than 20s ago
-		if (buildable_fields[j]->field_info_expiration + Duration(20 * 1000) > gametime) {
-			continue;
-		}
-
-		// Continue if field is blocked at the moment
-		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
-			continue;
-		}
-
-		// Few constants to keep the code cleaner
-		const int32_t field_maxsize =
-		   player_->get_buildcaps(buildable_fields[j]->coords) & Widelands::BUILDCAPS_SIZEMASK;
-		const bool field_near_border = buildable_fields[j]->near_border;
-
-		// Let decide if we need to update and for what reason
-		const bool update_due_size = non_small_needed && field_maxsize > 1;
-		const bool update_due_border = near_border_needed && field_near_border;
-
-		if (!(update_due_size || update_due_border)) {
-			continue;
-		}
-
-		// decreasing the counters
-		if (update_due_size) {
-			assert(non_small_needed > 0);
-			--non_small_needed;
-		}
-		if (update_due_border) {
-			assert(near_border_needed > 0);
-			--near_border_needed;
-		}
-
-		// and finnaly update the buildable field
-		update_buildable_field(*buildable_fields[j]);
-		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
+
+	assert(updated_fields_count <= max_fields_to_check);
+
+	verb_log_dbg_time(gametime, " ... %2d fields updated of %" PRIuS ".\n", updated_fields_count,
+	                  buildable_fields.size());
 }
 
 /**
@@ -2207,9 +2212,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			verb_log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
-			for (int32_t part : score_parts) {
-				verb_log_dbg_time(gametime, "%d, ", part);
-			}
 		}
 	}
 
@@ -6076,7 +6078,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[30] = bo.max_needed_preciousness / 2;
 			inputs[31] = ((bo.cnt_under_construction + bo.unoccupied_count) > 0) ? -5 : 0;
 			inputs[32] = bo.max_needed_preciousness / 2;
-			inputs[33] = -(bo.cnt_under_construction + bo.unoccupied_count) * 4;
+			inputs[33] = -1 * (bo.cnt_under_construction + bo.unoccupied_count) * 4;
 			if (bo.cnt_built > 0 && !bo.ware_outputs.empty() && !bo.inputs.empty()) {
 				inputs[34] +=
 				   bo.current_stats / (std::abs(management_data.get_military_number_at(192)) + 1) * 10;
@@ -6217,8 +6219,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					inputs[115] = 4;
 				}
 			}
-			inputs[116] = -(bo.unoccupied_count * bo.unoccupied_count);
-			inputs[117] = -(2 * bo.unoccupied_count);
+			inputs[116] = -1 * (bo.unoccupied_count * bo.unoccupied_count);
+			inputs[117] = -1 * (2 * bo.unoccupied_count);
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {

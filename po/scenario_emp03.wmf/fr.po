@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,17 +9,17 @@
 # GunChleoc, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
-# Renaud Bouchard, 2020
 # C138, 2021
 # Atanase Albaran, 2021
+# Renaud Bouchard, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-10-07 04:29+0000\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Atanase Albaran, 2021\n"
+"Last-Translator: Renaud Bouchard, 2022\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -684,6 +684,10 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Bon, pensons ceci dans son ensemble. Pour tisser de l'étoffe nous avons "
+"besoin de laine d'une bergerie. La bergerie elle-même aura besoin de blé et "
+"d'eau pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment et"
+" construisez une ferme en premier."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375

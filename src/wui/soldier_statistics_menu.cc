@@ -46,7 +46,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					if (attack || evade) {
 						hbox1->add_space(8);
 						hbox2->add_space(8);
-						hbox3->add_inf_space();
+						hbox3->add_space(8);
 					}
 					UI::Icon* icon1 =
 					   new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_attack_level_pic(attack));
@@ -69,11 +69,11 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					icons_all_.push_back(icon3);
 					icons_all_.push_back(icon4);
 					labels_all_.push_back(txt);
-					const std::string tt = bformat("%s<br>%s<br>%s<br>%s",              //
-					                               bformat(_("Health: %u"), health),    //
-					                               bformat(_("Attack: %u"), attack),    //
-					                               bformat(_("Defense: %u"), defense),  //
-					                               bformat(_("Evade: %u"), evade));
+					const std::string tt = format("%s<br>%s<br>%s<br>%s",             //
+					                              format(_("Health: %u"), health),    //
+					                              format(_("Attack: %u"), attack),    //
+					                              format(_("Defense: %u"), defense),  //
+					                              format(_("Evade: %u"), evade));
 					txt->set_handle_mouse(true);
 					icon1->set_tooltip(tt);
 					icon2->set_tooltip(tt);
@@ -162,7 +162,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox1->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tt = bformat(_("Health: %u"), h);
+		const std::string tt = format(_("Health: %u"), h);
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
 		i->set_tooltip(tt);
@@ -177,7 +177,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox2->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tt = bformat(_("Attack: %u"), a);
+		const std::string tt = format(_("Attack: %u"), a);
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
 		i->set_tooltip(tt);
@@ -192,7 +192,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox3->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tt = bformat(_("Defense: %u"), d);
+		const std::string tt = format(_("Defense: %u"), d);
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
 		i->set_tooltip(tt);
@@ -207,7 +207,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		hbox4->add(txt, UI::Box::Resizing::kAlign);
 		icons_detail_.push_back(i);
 		labels_detail_.push_back(txt);
-		const std::string tt = bformat(_("Evade: %u"), e);
+		const std::string tt = format(_("Evade: %u"), e);
 		i->set_handle_mouse(true);
 		txt->set_handle_mouse(true);
 		i->set_tooltip(tt);
@@ -236,25 +236,25 @@ void SoldierStatisticsMenu::update() {
 	for (unsigned h = 0; h <= max_health_; ++h) {
 		const uint32_t nr = player_.count_soldiers_h(h);
 		icons_detail_[index]->set_grey_out(nr == 0);
-		labels_detail_[index]->set_text(bformat(_("×%u"), nr));
+		labels_detail_[index]->set_text(format(_("×%u"), nr));
 		++index;
 	}
 	for (unsigned a = 0; a <= max_attack_; ++a) {
 		const uint32_t nr = player_.count_soldiers_a(a);
 		icons_detail_[index]->set_grey_out(nr == 0);
-		labels_detail_[index]->set_text(bformat(_("×%u"), nr));
+		labels_detail_[index]->set_text(format(_("×%u"), nr));
 		++index;
 	}
 	for (unsigned d = 0; d <= max_defense_; ++d) {
 		const uint32_t nr = player_.count_soldiers_d(d);
 		icons_detail_[index]->set_grey_out(nr == 0);
-		labels_detail_[index]->set_text(bformat(_("×%u"), nr));
+		labels_detail_[index]->set_text(format(_("×%u"), nr));
 		++index;
 	}
 	for (unsigned e = 0; e <= max_evade_; ++e) {
 		const uint32_t nr = player_.count_soldiers_e(e);
 		icons_detail_[index]->set_grey_out(nr == 0);
-		labels_detail_[index]->set_text(bformat(_("×%u"), nr));
+		labels_detail_[index]->set_text(format(_("×%u"), nr));
 		++index;
 	}
 }

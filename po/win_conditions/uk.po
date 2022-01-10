@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2021 Widelands Development Team
+# Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
 # dector <dector9@gmail.com>, 2021
-# Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>, 2020
+# Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>, 2020-2021
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2021-04-21 13:12+0000\n"
-"PO-Revision-Date: 2021-04-29 13:23+0000\n"
-"Last-Translator: dector <dector9@gmail.com>\n"
+"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"PO-Revision-Date: 2021-12-20 11:22+0000\n"
+"Last-Translator: Dmytro Kyrychuk <dmytro.kyrychuck@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "Це нескінченна гра без правил. Туман війни вимкнено."
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
@@ -197,7 +197,7 @@ msgstr ""
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
 msgid "Team %i"
-msgstr ""
+msgstr "Команда %i"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."

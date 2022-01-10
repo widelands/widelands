@@ -45,7 +45,6 @@
 #include "base/log.h"
 #include "base/string.h"
 #include "config.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -62,22 +61,6 @@
 #endif
 
 namespace {
-// Characters that are allowed in filenames, but not at the beginning
-const std::vector<std::string> illegal_filename_starting_characters{
-   ".", "-",
-   " ",  // Keep the blank last
-};
-
-// Characters that are disallowed anywhere in a filename
-// No potential file separators or other potentially illegal characters
-// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
-// http://www.linfo.org/file_name.html
-// https://support.apple.com/en-us/HT202808
-// We can't just regex for word & digit characters here because of non-Latin scripts.
-const std::vector<std::string> illegal_filename_characters{
-   "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
-};
-
 /// A class that makes iteration over filename_?.* templates easy. It is much faster than using
 /// regex.
 class NumberGlob {
@@ -119,7 +102,7 @@ bool NumberGlob::next(std::string* s) {
 
 	*s = template_;
 	if (max_) {
-		replace_last(*s, to_replace_, bformat(format_, current_));
+		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
 	return true;
@@ -199,7 +182,12 @@ std::string FileSystem::fix_cross_file(const std::string& path) const {
 // static
 std::string FileSystem::get_working_directory() {
 	char cwd[PATH_MAX + 1];
+#ifdef _MSC_VER
+	// getcwd is deprecated on MSVC
+	char* const result = _getcwd(cwd, PATH_MAX);
+#else
 	char* const result = getcwd(cwd, PATH_MAX);
+#endif
 	if (!result) {
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
 	}
@@ -214,57 +202,6 @@ char FileSystem::file_separator() {
 #else
 	return '/';
 #endif
-}
-
-bool FileSystem::is_legal_filename(const std::string& filename) {
-	if (filename.empty()) {
-		return false;
-	}
-	for (const std::string& illegal_start : illegal_filename_starting_characters) {
-		if (starts_with(filename, illegal_start)) {
-			return false;
-		}
-	}
-	for (const std::string& illegal_char : illegal_filename_characters) {
-		if (contains(filename, illegal_char)) {
-			return false;
-		}
-	}
-	return true;
-}
-
-std::string FileSystem::illegal_filename_tooltip() {
-	std::vector<std::string> starting_characters;
-	for (const std::string& character : illegal_filename_starting_characters) {
-		if (character == " ") {
-			/** TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces tha
-			 * blank space in a list of illegal characters */
-			starting_characters.push_back(pgettext("illegal_filename_characters", "blank space"));
-		} else {
-			starting_characters.push_back(character);
-		}
-	}
-	const std::string illegal_start(as_listitem(
-	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	    *  %s is a list of illegal characters */
-	   bformat(pgettext("illegal_filename_characters", "%s at the start of the filename"),
-	           richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))),
-	   UI::FontStyle::kWuiMessageParagraph));
-
-	const std::string illegal(as_listitem(
-	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	    * %s is a list of illegal characters */
-	   bformat(pgettext("illegal_filename_characters", "%s anywhere in the filename"),
-	           richtext_escape(
-	              i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))),
-	   UI::FontStyle::kWuiMessageParagraph));
-
-	return bformat(
-	   "%s%s%s",
-	   /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	    * This is followed by a list of bullet points */
-	   pgettext("illegal_filename_characters", "The following characters are not allowed:"),
-	   illegal_start, illegal);
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems

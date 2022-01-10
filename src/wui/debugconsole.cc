@@ -99,9 +99,6 @@ struct Console : public ChatProvider, public Handler {
 	}
 };
 
-// TODO(sirver): This is unsafe. boost is involved and uses this static and it
-// makes no guarantees on the number of threads it uses. this can crash at any
-// time.
 extern Console g_console;  // To shup up clang.
 // TODO(sirver): should instead be in a static function that returns pointer to static object
 Console g_console;
