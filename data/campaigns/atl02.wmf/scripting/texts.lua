@@ -268,7 +268,7 @@ enemy_1a = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, I agree this is very concerning. We need to find out more. We definitly need to send out a scout to gather some information.]]))
+         _([[Sidolus, I agree this is very concerning. We need to find out more. We definitely need to send out a scout to gather some information.]]))
    }
 }
 
