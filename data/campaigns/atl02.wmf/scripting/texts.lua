@@ -165,9 +165,9 @@ initial_messages = {
       title = _"Planning for the future",
       body = jundlina(_"Jundlina continues",
       -- TRANSLATORS: Jundlina - Diary
-      _([[At least the east side of the island is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
-      _([[The only thing that is sure that they can’t be Atlanteans for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
-      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can’t afford sail any further an need to try to settle ourselves on this island.]]))
+      _([[At least the east side of the island is inhabited, that much is certain. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
+      _([[The only thing we know for sure is that they cannot be Atlanteans, for no ship of ours has sailed as far as we did for centuries. I can only hope they are friendly. ]]) ..
+      _([[We have not much water left; our food is running low; we lost all our tools and most of our building materials with the third ship. We can’t afford to sail any further, and we need to try to settle on this island.]]))
       .. new_objectives(obj_find_port),
       h=500,
    },
