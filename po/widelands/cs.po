@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
-"PO-Revision-Date: 2021-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -4255,10 +4255,10 @@ msgstr "Archivovaná mapa"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:374
 #, c-format
 msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
+"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr "Mapa '%s' není adresář. Prosím, zvaž vypnutí možnosti \"Komprimovat datové soubory widelands\" v nabídce nastavení a znovuuložení mapy v editoru.\n\nPřeješ si i přesto mapu přidat?"
+msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "New Directory"
@@ -5915,8 +5915,8 @@ msgid "Maximum number of autosave files:"
 msgstr "Maximální počet automaticky uložených pozic:"
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Komprimovat datové soubory widelands (mapy, záznamy a uložené hry)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6680,8 +6680,8 @@ msgid "Messages: Go to Location"
 msgstr "Zprávy: Jít na pozici"
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
-msgstr "Zprávy: Zobrazit"
+msgid "Messages: Show All"
+msgstr ""
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show Geologists’ Messages"
@@ -7192,9 +7192,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7582,8 +7582,8 @@ msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
 msgid "AI for the disconnected player"
 msgstr "UI místo odpojeného hráče"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7985,19 +7985,19 @@ msgstr "Při současném přidržení Ctrl se nastaví požadované množství v
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "Při současném přidržení Ctrl se nastaví požadované množství vybrané suroviny na minimum"
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr "Odebrat surovinu"
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr "Přidat surovinu"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "Skrýt nastavení"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "Zobrazit nastavení"
 

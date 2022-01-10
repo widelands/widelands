@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 # GunChleoc, 2015
 # GunChleoc, 2016,2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
-"PO-Revision-Date: 2021-12-22 17:13+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"PO-Revision-Date: 2022-01-07 10:56+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -4204,7 +4204,7 @@ msgstr "Spaarsam sekert Kaart"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:374
 #, c-format
 msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
+"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
 msgstr "De Kaart »%s« is keen Verteeknis. Bidde överlegg di, of du de Instellen »Dateien mit Widelands-Daten spaarsam sekern« in de Instellungen-Menü utknipst un de Kaart im Bewarker neei sekerst.\n\nWillst du de Kaart doch hentofögen?"
@@ -5852,7 +5852,7 @@ msgid "Maximum number of autosave files:"
 msgstr "Hoogste Tahl vun Dateien vun automatiskem Sekern:"
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr "Dateien mit Widelands-Daten (Kaarten, Uptekens un sekert Speelen) spaarsam sekern"
 
 #: ../../src/ui_fsmenu/options.cc:239
@@ -6617,8 +6617,8 @@ msgid "Messages: Go to Location"
 msgstr "Narichten: Tur Stee gahn"
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
-msgstr "Narichten: Wies op"
+msgid "Messages: Show All"
+msgstr "Narichten: All wiesen"
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show Geologists’ Messages"
@@ -7127,9 +7127,9 @@ msgstr "Muden"
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7517,8 +7517,8 @@ msgstr "De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Spele
 msgid "AI for the disconnected player"
 msgstr "Künstelker Speler för de Speler, de nich mehr verbunnen is"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7912,19 +7912,19 @@ msgstr "Holl de Strg-Tast drückt, um all vun deeser Waar to verlöven"
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "Holl de Strg-Tast drückt, um nix vun deeser Waar to verlöven"
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr "Waar wegdoon"
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr "Waar hentofögen"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "Stüren verbargen"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "Stüren wiesen"
 

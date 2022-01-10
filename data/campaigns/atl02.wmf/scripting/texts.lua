@@ -156,7 +156,7 @@ initial_messages = {
       _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
-      _([[The fear was great in us all. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts. ]]) ..
+      _([[All of us were fiercely afraid. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts. ]]) ..
       _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god. ]]) ..
       _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
       h=500,
@@ -165,9 +165,9 @@ initial_messages = {
       title = _"Planning for the future",
       body = jundlina(_"Jundlina continues",
       -- TRANSLATORS: Jundlina - Diary
-      _([[At least the east side of the island is inhabited, so much is clear. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
-      _([[The only thing that is sure that they can’t be Atlanteans for no ship of us has sailed as far as us in the last hundreds years. I can only hope they are friendly. ]]) ..
-      _([[We have not much water left, our food is running low, we lost all our tools and most of our building materials with the third ship. We can’t afford sail any further an need to try to settle ourselves on this island.]]))
+      _([[At least the east side of the island is inhabited, that much is certain. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]]) ..
+      _([[The only thing we know for sure is that they cannot be Atlanteans, for no ship of ours has sailed as far as we did for centuries. I can only hope they are friendly. ]]) ..
+      _([[We have not much water left; our food is running low; we lost all our tools and most of our building materials with the third ship. We can’t afford to sail any further, and we need to try to settle on this island.]]))
       .. new_objectives(obj_find_port),
       h=500,
    },
@@ -178,12 +178,12 @@ initial_messages1= {
       title = _"Jundlina gives orders",
       body = jundlina(_"Jundlina decides",
       -- TRANSLATORS: Jundlina - Diary
-      _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a metal workshop and a smelter will provide us with good tools in no time. Also, we need to solve our building material problem. ]]) ..
-      _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure!]])
+      _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will provide us with good tools in no time. However, we need to take care of our building materials: ]]) ..
+      _([[The island is full of trees, we might not even need foresters. But we need stone, that much is certain!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
       _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
-      _([[But we need to be careful with the stones and other precious material though. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
+      _([[But we need to be careful with the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down. ]]) ..
       _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
       .. new_objectives(obj_tools)
       .. new_objectives(obj_basic_infrastructure)
@@ -195,10 +195,10 @@ initial_messages1= {
 
 spidercloth_1 = {
    {
-      title = _"Opol arrives at Jundlina",
+      title = _"Opol visits Jundlina",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[May Satul warm you, Jundlina. As highest weaver of the guild I have bad news for you. I just realized we are running out of spidercloth. This is very critical as you know that spidercloth is needed for many buildings.]])
+         _([[May Satul warm you, Jundlina. As the highest weaver of the guild I have bad news for you. I just realized that we are running out of spidercloth. This is a most perilous case, for as you know, spidercloth is needed for many buildings.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Opol
          _([[We should build up a spidercloth production urgently.]]))
@@ -217,13 +217,13 @@ spidercloth_2 = {
       title = _"Opol makes a point",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven’t build a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion we are potentially running into a deadlock here.]]))
+         _([[Jundlina! It seems there is another problem even more urgent. I fear we haven’t built a farm to feed our spiders yet. As this is one of the buildings needing spidercloth for completion, not completing one in time will result in a crisis that can never be resolved.]]))
    },
    {
       title = _"Jundlina Acknowledges",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[I see the risk Opol. Thanks for reporting. We will build a farm first now.]]))
+         _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately now.]]))
    }
 }
 
@@ -232,7 +232,7 @@ spidercloth_3 = {
       title = _"Opol Seeks Out Jundlina",
       body = opol(
          -- TRANSLATORS: Opol
-         _([[Jundlina, may Satul warm you! The weaving mill and spider farm buildings are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
+         _([[Jundlina, may Satul warm you! The weaving mill and spider farm are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
    },
    {
       title = _"Jundlina Cheers",
@@ -247,7 +247,7 @@ enemy_1 = {
       title = _"Sidolus Reports foreign inhabitants",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! I have some disturbing news. We have seen some foreign reigned land, But we don’t know what to expect from the foreigners.]]))
+         _([[May Satul warm you, Jundlina! I have some disturbing news. We have sighted land governed by foreigners, but we do not yet know what to expect from the natives.]]))
    },
    {
       title = _"Jundlina Cheers",
@@ -268,7 +268,7 @@ enemy_1a = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, I agree this is very concerning. We need to find out more. We definitly need to send out a scout to gather some information.]]))
+         _([[Sidolus, I agree this is very concerning. We need to find out more. We definitely need to send out a scout to gather some information.]]))
    }
 }
 
@@ -298,7 +298,7 @@ infrastructure_1 = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[This is good news indeed, Loftomor. Now we can think of constructing more sophisticated buildings to make our economy grow. Please advice if you feel we are missing necessary buildings.]]))
+         _([[This is good news indeed, Loftomor. Now we can consider constructing more sophisticated buildings to enlarge our economy. Please advise whenever you feel we are missing necessary buildings.]]))
    }
 }
 
@@ -329,7 +329,7 @@ mining_established_1 = {
       title = _"Jundlina is Excited",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
+         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to build up bakeries and smokeries and all buildings to supply them.]]))
    }
 }
 
@@ -359,7 +359,7 @@ maletus_defeated = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will talk immediately to our Babarian ally how divide the land we gained.]]))
+         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
    }
 }
 
@@ -368,22 +368,22 @@ tribute = {
       title = _"Tribute Demand",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we need to get some sign of your good intentions. So if you are really on our side you should send us some gold and a couple of other wares on a regular basis.]])..
-         _([[At most we are interested in any wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
+         _([[Strangers, we need to receive some sign of your good intentions. If you are really on our side, you should send us some gold and a couple of other wares on a regular basis.]])..
+         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
          .. paragraphdivider() ..
-         _([[Oh I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our warplannings.]]))
+         _([[Oh, and I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our war plannings.]]))
    },
    {
       title = _"Pitfall!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! This behaviour is truely babaric! I fear this is a trap to keep you as a hostage. And the demand itself is really an insult. I strongly recommend to decline this unsubstantiated claim.]]))
+         _([[May Satul warm you, Jundlina! This behaviour is truly barbaric! I fear this is a trap to keep you as a hostage. And the demand itself is really an insult. I strongly recommend to decline this unsubstantiated claim.]]))
    },
    {
       title = _"Jundlina Concedes",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, I agree with you. However I think we have no choice so we need to obey to this demand. It is your obligation now to run our small people until I get back.]])
+         _([[Sidolus, I agree with you. However I think we have no choice, so we need to obey this demand. It is your obligation now to run our small people until I come back.]])
          .. paragraphdivider() ..
          _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal and logs.]]))
          .. new_objectives(obj_trading_post)
@@ -395,7 +395,7 @@ trading = {
       title = _"Trading post built",
       body = loftomor(
          -- TRANSLATORS: loftomor
-         _([[Sidolus, may Satul warm you! We have finished the new trading post. Hopefully this will get us back Jundlina soon]]))
+         _([[Sidolus, may Satul warm you! We have finished the new trading post. I hope this will allow Jundlina to return to us soon.]]))
    },
    {
       title = _"Sidolus Agrees",
@@ -413,16 +413,16 @@ tribute_not_started = {
       title = _"Urgent Tribute Demand",
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Strangers, we haven't received any help yet. So if you are really on our side you should start sending some wares urgently.]])..
-         _([[As we are facing great losses due to your lazyness, you should now send us double the amount of each ware as before.]])
+         _([[Strangers, we haven’t received any help yet. If you are really on our side, you should start sending some wares urgently.]])..
+         _([[As we are facing great losses due to your laziness, you shall now send us twice the previous amount of each ware.]])
          .. paragraphdivider() ..
-         _([[I am sure you won't loose our alliance, wouldn't you?]]))
+         _([[I am sure you do not want to break our alliance… do you?]]))
    },
    {
       title = _"Blackmail!",
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our so-called ally is blackmailing us and we can't punish his insult as he has our princess at his hands.]])
+         _([[May Satul warm us all. Our so-called ally is blackmailing us, and we can’t punish him for his insult as he has our princess at his hands.]])
          .. paragraphdivider() ..
          _([[Our only chance is to double our efforts and start delivering something soon.]]))
          .. new_objectives(obj_tribute2)
@@ -435,9 +435,9 @@ tribute_started = {
       body = kalitath(
          -- TRANSLATORS: Kalitath
          _([[Strangers, we haven't received the first batch of wares. So we may finally trust you.]])..
-         _([[However our enemy in the north is very strong. I am afraid without significant help from your side we might loose the war despite any ware help you might provide.]])
+         _([[However, our enemy in the north is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
          .. paragraphdivider() ..
-         _([[They name themselves an empire and their leader is named Maletus. I want you to train your soldiers and help us defeat his lousy empire.]]))
+         _([[They name themselves an Empire, and their leader is called Maletus. I want you to train your soldiers and help us defeat his lousy Empire.]]))
          .. new_objectives(obj_defeat_maletus)
    },
    {
