@@ -50,7 +50,8 @@ def main():
         regex = re.compile(
             '(.*constexpr uint16_t kWidelandsCopyrightEnd = )(\d\d\d\d)(;)')
 
-        def replace(match): return match.group(1) + year + match.group(3)
+        def replace(match):
+            return match.group(1) + year + match.group(3)
         update_file(filename, regex, replace)
 
         # Now update special files
