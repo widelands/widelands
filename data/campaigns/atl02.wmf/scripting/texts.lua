@@ -329,7 +329,7 @@ mining_established_1 = {
       title = _"Jundlina is Excited",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
+         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to build up bakeries and smokeries and all buildings to supply them.]]))
    }
 }
 
