@@ -178,8 +178,8 @@ initial_messages1= {
       title = _"Jundlina gives orders",
       body = jundlina(_"Jundlina decides",
       -- TRANSLATORS: Jundlina - Diary
-      _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a metal workshop and a smelter will provide us with good tools in no time. Also, we need to solve our building material problem. ]]) ..
-      _([[The island is full of trees, we might not even need foresters. But we need stone, that is for sure!]])
+      _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will provide us with good tools in no time. However, we need to take care of our building materials: ]]) ..
+      _([[The island is full of trees, we might not even need foresters. But we need stone, that much is certain!]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Jundlina - Diary
       _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]]) ..
