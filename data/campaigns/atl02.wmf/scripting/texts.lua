@@ -359,7 +359,7 @@ maletus_defeated = {
       title = _"Jundlina Cheers",
       body = jundlina(_"Jundlina",
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will talk immediately to our Babarian ally how divide the land we gained.]]))
+         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
    }
 }
 
