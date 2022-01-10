@@ -1299,7 +1299,7 @@ void DefaultAI::late_initialization() {
  *
  * It has 3 stages:
  * 1. Checking for invalid fields (not more buildable, e.g. tree grew there and so on) and updating
- *  specific types of fields to the limit as quantified in special_fields_to_preffer array (no
+ *  specific types of fields to the limit as quantified in special_fields_to_prefer array (no
  *  rotating of buildable_fields here)
  * 2. Removing invalid fields and partial rotating of the deque as a side effect
  * 3. Updating further BFs up to the overall limit of max_fields_to_check (no rotating)
@@ -1312,8 +1312,8 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		return;
 	}
 
-	// This defines count of preffered types of fields to update info stright away
-	uint16_t special_fields_to_preffer[3] = {6, 6, 5};
+	// This defines count of prefered types of fields to update info stright away
+	uint16_t special_fields_to_prefer[3] = {4, 2, 10};
 	// Positions and types are defined here
 	const uint16_t kSpecialFieldPos = 0;
 	const uint16_t kMediumlFieldPos = 1;
@@ -1345,11 +1345,11 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 			continue;
 		}
 
-		if (build_caps == 2 && special_fields_to_preffer[kMediumlFieldPos]) {
+		if (build_caps == 2 && special_fields_to_prefer[kMediumlFieldPos]) {
 			update_reason = kMediumlFieldPos;
-		} else if (build_caps == 3 && special_fields_to_preffer[kBigFieldPos]) {
+		} else if (build_caps == 3 && special_fields_to_prefer[kBigFieldPos]) {
 			update_reason = kBigFieldPos;
-		} else if (special_fields_to_preffer[kSpecialFieldPos]) {
+		} else if (special_fields_to_prefer[kSpecialFieldPos]) {
 			// here we cover (going to prefer) fields of special interests
 			const bool is_special =
 			   bf->is_portspace == ExtendedBool::kTrue || bf->unowned_land_nearby || bf->enemy_nearby;
@@ -1360,7 +1360,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		if (update_reason < kNoReasonPos) {
 			update_buildable_field(*bf);
 			bf->field_info_expiration = gametime + kFieldInfoExpiration;
-			special_fields_to_preffer[update_reason]--;
+			special_fields_to_prefer[update_reason]--;
 			updated_fields_count++;
 		}
 	}
@@ -1369,8 +1369,8 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	   gametime,
 	   " first round: %2d fields updated. Fields unupdated: Spec: %d, Mid: %d, Big: %d. Invalid "
 	   "fields found: %3d\n",
-	   updated_fields_count, special_fields_to_preffer[kSpecialFieldPos],
-	   special_fields_to_preffer[kMediumlFieldPos], special_fields_to_preffer[kBigFieldPos],
+	   updated_fields_count, special_fields_to_prefer[kSpecialFieldPos],
+	   special_fields_to_prefer[kMediumlFieldPos], special_fields_to_prefer[kBigFieldPos],
 	   invalidated_bf_count);
 
 	// Stage #2: get rid of invalid files / and rotate the deque
