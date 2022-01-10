@@ -201,7 +201,7 @@ initial_messages1= {
    {
       title = _"Jundlina gives orders",
       body = jundlina(_"Jundlina demands",
-         -- TRANSLATORS: Jundlina 
+         -- TRANSLATORS: Jundlina
          _([[However, we need to take care of our building materials: The island is full of trees, we might not even need foresters. But we need stone, that much is certain!]]))
          .. new_objectives(obj_basic_infrastructure),
       h=500,

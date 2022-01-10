@@ -32,7 +32,7 @@ descriptions:new_productionsite_type {
       log = 1
    },
 
-   animation_directory = dirname,                                 
+   animation_directory = dirname,
    animations = {
       idle = {
          hotspot = { 41, 44 },
@@ -77,7 +77,7 @@ descriptions:new_productionsite_type {
             "consume=smoked_fish,atlanteans_bread",
             "callworker=targeted_scouting"
          }
-      },                     
+      },
    },
 }
 
