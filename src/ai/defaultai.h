@@ -173,7 +173,7 @@ private:
 
 	void update_all_buildable_fields(const Time&);
 	void update_all_mineable_fields(const Time&);
-	void update_all_not_buildable_fields();
+	void update_all_not_buildable_fields(const Time&);
 	void update_buildable_field(BuildableField&);
 	void update_mineable_field(MineableField&);
 	void update_productionsite_stats();
