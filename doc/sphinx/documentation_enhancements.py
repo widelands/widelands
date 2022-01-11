@@ -407,6 +407,7 @@ def add_dependency_graph(rst_data, outfile):
         cls_inst = classes.get_instance(cls_name, outfile)
         directive = create_directive(cls_inst)
         if directive:
+            print("Adding dependency graph for: %s" % cls_inst.long_name)
             repl_str = '.. class:: {}\n\n'.format(cls_name)
             directive_str = '{}\n{}'.format(directive, repl_str)
             rst_data = rst_data.replace(repl_str, directive_str)
