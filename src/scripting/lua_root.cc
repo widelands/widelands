@@ -72,8 +72,6 @@ Game
 
 .. class:: Game
 
-   Child of: :class:`wl.bases.EditorGameBase`
-
    The root class to access the game internals. Use ``wl.Game()`` to access the properties, e.g.:
 
    .. code-block:: lua
@@ -320,8 +318,6 @@ Editor
 ------
 
 .. class:: Editor
-
-   Child of: :class:`wl.bases.EditorGameBase`
 
    The Editor object; it is the correspondence of the :class:`wl.Game`
    that is used in a Game. Use ``ẁl.Editor()`` to access the properties.
