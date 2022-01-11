@@ -9,9 +9,9 @@
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
 # Kura Go <kurago@ml1.net>, 2019
 # David D, 2021
-# Renaud Bouchard, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # Betsalel Horowitz <horo5766@outlook.com>, 2021
+# Renaud Bouchard, 2022
 # 
 msgid ""
 msgstr ""
@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Betsalel Horowitz <horo5766@outlook.com>, 2021\n"
+"Last-Translator: Renaud Bouchard, 2022\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,6 +48,8 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
+"Souvenez vous de vérifier les messages et les labels de statuts des "
+"bâtiments pour ceux qui sont devenus improductifs."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -69,6 +71,8 @@ msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
+"Assurez vous qu'il n'y ai pas plus de 3 cul-de-sacs, aucun drapeau ne peut "
+"supporter plus que 4 routes."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
@@ -199,12 +203,17 @@ msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
+"Pour entraîner un soldat vers son plus haut niveau sur un site, envisagez de"
+" stopper le site entraînement jusqu'à ce qu'il soit complètement équipé avec"
+" toute la nourriture et les armes nécessaires."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
+"Pour prévenir du gaspillage des marchandises, réduisez les soldats à "
+"entraîner à un par site."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -212,6 +221,9 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
+"Un site préfèrera toujours le soldat le plus adapté disponible pour "
+"l'entraînement. Assurez vous de ne pas avoir de soldats à moitié entraînés "
+"en garnison dans des bâtiments militaires."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
@@ -1168,6 +1180,8 @@ msgstr ""
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Je pense que nous devrions approfondir le problème et visiter l'un d'entre "
+"eux."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea’s Restrictions"
@@ -1284,11 +1298,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
-msgstr ""
+msgstr "Amalea est pressée"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr ""
+msgstr "Amalea est très occupée..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612
@@ -1297,6 +1311,10 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Frère, comme tu le vois, beaucoup de choses semblent aller de travers dans "
+"cette économie. Je vais être très occupé à tout examiner, alors je ne "
+"pourrais être là pour fournir des avis aussi détaillé comme j'en ai "
+"l'habitude."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:615
@@ -1305,6 +1323,9 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Mais je suis confiant en le fait que tu dirigeras les choses convenablement "
+"par toi même. Bien sûr je t'informerai et t'aviserai immédiatement si je "
+"découvrai de nouveaux problèmes."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"
@@ -1434,7 +1455,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Perhaps we should train them further in the arena as well."
-msgstr ""
+msgstr "Peut être devrions nous les entraîner davantage dans l'arène aussi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:684
 msgid "Training is Needed"
@@ -1705,18 +1726,20 @@ msgstr "récolte le blé"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
 msgid "No Fields"
-msgstr ""
+msgstr "Pas de champs"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
 msgctxt "empire_building"
 msgid "Out of Fields"
-msgstr ""
+msgstr "Plus de champs"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
+"Le fermier qui travaille à cette ferme n'a pas de sol défriché pour planter "
+"ses graines."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
@@ -1832,12 +1855,12 @@ msgstr "Abat des arbres"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Pas d'arbres"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "Plus d'arbres"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
@@ -1846,6 +1869,9 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Le bûcheron qui travaille dans cette cabane ne peut plus trouver d'arbre "
+"dans sa zone d'activité. Vous devriez envisager de démanteler ou détruire le"
+" bâtiment, ou de construire une cabane de sylviculteur."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
@@ -1934,14 +1960,15 @@ msgstr "Puits"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "Pas d'eau"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "Plus d'eau"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr ""
+"Le porteur travaillant à ce puits ne trouve plus d'eau dans son puits."

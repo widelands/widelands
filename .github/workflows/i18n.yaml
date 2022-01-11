@@ -1,4 +1,7 @@
 name: Translations Update
+concurrency:
+  group: i18n-${{ github.ref }}
+  cancel-in-progress: true
 on:
   workflow_dispatch:
   schedule:

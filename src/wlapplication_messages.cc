@@ -53,14 +53,14 @@ void fill_parameter_vector() {
 	  {"", _("widelands <save.wgf>/<replay.wrpl>"), "--", "", false},
 	  /// Paths
 	  {_("Options:"), "datadir", _("DIRNAME"),
-		_("Use the specified directory for the widelands data files."), false},
+		_("Use the specified directory for the Widelands data files."), false},
 	  {"", "homedir", _("DIRNAME"),
-		format(_("Use the specified directory for widelands config files, savegames and replays. "
+		format(_("Use the specified directory for Widelands config files, savegames, and replays. "
 		         "Default is `%s`."),
 		       kDefaultHomedir),
 		false},
 	  {"", "localedir", _("DIRNAME"),
-		_("Use the specified directory for the widelands locale files."), false},
+		_("Use the specified directory for the Widelands locale files."), false},
 	  {"", "language",
 		/** TRANSLATORS: The … is not used on purpose to increase readability on monospaced terminals
 		 */
