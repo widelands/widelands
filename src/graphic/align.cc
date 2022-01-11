@@ -66,7 +66,8 @@ Align mirror_alignment(Align alignment, bool is_rtl) {
 }
 
 Rectf fit_image(float img_w, float img_h, float available_w, float available_h, bool crop) {
-	if (crop ? (img_w < available_w || img_h < available_h) : (img_w < available_w && img_h < available_h)) {
+	if (crop ? (img_w < available_w || img_h < available_h) :
+              (img_w < available_w && img_h < available_h)) {
 		return Rectf((available_w - img_w) / 2.f, (available_h - img_h) / 2.f, img_w, img_h);
 	}
 

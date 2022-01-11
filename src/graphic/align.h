@@ -47,11 +47,8 @@ Align mirror_alignment(Align alignment, bool is_rtl);
  * Position an image at the screen center, as large as possible without upscaling,
  * with or without cropping the image.
  */
-Rectf fit_image(float img_width,
-                float img_height,
-                float available_width,
-                float available_height,
-                bool crop);
+Rectf fit_image(
+   float img_width, float img_height, float available_width, float available_height, bool crop);
 
 }  // namespace UI
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H
