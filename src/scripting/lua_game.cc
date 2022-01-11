@@ -70,8 +70,6 @@ Player
 
 .. class:: Player
 
-   Child of: :class:`wl.bases.PlayerBase`
-
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
    instantiate a class of this type directly. To get an object of a player index the
