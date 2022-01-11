@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
-"PO-Revision-Date: 2021-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -4181,7 +4181,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/packager_box.cc:374
 #, c-format
 msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
+"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
 msgstr ""
@@ -5823,8 +5823,8 @@ msgid "Maximum number of autosave files:"
 msgstr "自动保存文件的最大数目："
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "压缩widelands数据文件  (地图， 回放以及存档文件)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6588,7 +6588,7 @@ msgid "Messages: Go to Location"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
+msgid "Messages: Show All"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:594
@@ -7097,9 +7097,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7487,8 +7487,8 @@ msgstr "用选定的AI替换断开连接的游戏玩家并继续进行游戏"
 msgid "AI for the disconnected player"
 msgstr "断开连接的游戏玩家的AI"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7878,19 +7878,19 @@ msgstr "按住Ctrl键以允许所有的这些物品"
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "按住Ctrl键以禁止所有的这些物品"
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr "移除物品"
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr "添加物品"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "隐藏控件"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "显示控件"
 
