@@ -367,6 +367,8 @@ struct BuildableField {
 	bool enemy_nearby;
 	bool enemy_accessible_;
 
+	bool invalidated;
+
 	bool enemy_wh_nearby;
 	uint16_t unowned_land_nearby;
 	uint16_t enemy_owned_land_nearby;
