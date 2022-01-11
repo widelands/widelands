@@ -11,7 +11,9 @@ Building the documentation for offline reading
 First, extract the embedded documentation from the C++ and Lua code::
 
    $ cd doc/sphinx/
-   $ ./extract_rst.py
+   $ ./extract_rst.py [-graphs]
+
+The option ``-graphs`` adds dependency graphs for each class.
 
 Then, run ``make`` to see your options. Convenient for off-line reading is
 ``make html``.

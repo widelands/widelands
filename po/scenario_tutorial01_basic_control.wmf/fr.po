@@ -12,7 +12,7 @@
 # Jaypad <ju-ju@nataju.fr>, 2015
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2015-2021
+# Renaud Bouchard, 2015-2022
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # syl_, 2016
 # zecas <jjorge@free.fr>, 2020
@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2022-01-05 01:33+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -677,7 +677,7 @@ msgstr "Lorsqu'il y a beaucoup de rochers, vous pouvez envisager de construire u
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Status"
-msgstr ""
+msgstr "Recensement et statut"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
@@ -701,7 +701,7 @@ msgstr "Permettez-moi d'activer le recensement."
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid "Show the building status"
-msgstr ""
+msgstr "Affichez les statuts des bâtiments"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
@@ -709,7 +709,7 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Pour afficher ou masquer les libellés des statuts des constructions, vous pouvez sélectionner l'entrée \"Afficher les statistiques\" dans le menu \"Afficher / Masquer\" en bas, ou appuyez sur la touche \"%s\" du clavier."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -722,7 +722,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr ""
+msgstr "En plus du recensement des bâtiments, vous pouvez également activer des étiquettes de status ceux-ci. Cela affichera des informations sur la productivité des bâtiments ou la progression des chantiers de construction."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."

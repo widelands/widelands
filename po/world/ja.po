@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
@@ -165,45 +165,45 @@ msgstr "サボテン"
 msgid "Grass"
 msgstr "草"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:7
-#: ../../data/world/immovables/rocks/desert/init.lua:7
-#: ../../data/world/immovables/rocks/greenland/init.lua:7
-#: ../../data/world/immovables/rocks/winterland/init.lua:7
+#: ../../data/world/immovables/rocks/blackland/1/init.lua:7
+#: ../../data/world/immovables/rocks/desert/1/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/1/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/1/init.lua:7
 msgid "Rocks 1"
 msgstr "岩１"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:26
-#: ../../data/world/immovables/rocks/desert/init.lua:26
-#: ../../data/world/immovables/rocks/greenland/init.lua:26
-#: ../../data/world/immovables/rocks/winterland/init.lua:26
+#: ../../data/world/immovables/rocks/blackland/2/init.lua:7
+#: ../../data/world/immovables/rocks/desert/2/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/2/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/2/init.lua:7
 msgid "Rocks 2"
 msgstr "岩２"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:45
-#: ../../data/world/immovables/rocks/desert/init.lua:45
-#: ../../data/world/immovables/rocks/greenland/init.lua:45
-#: ../../data/world/immovables/rocks/winterland/init.lua:45
+#: ../../data/world/immovables/rocks/blackland/3/init.lua:7
+#: ../../data/world/immovables/rocks/desert/3/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/3/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/3/init.lua:7
 msgid "Rocks 3"
 msgstr "岩３"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:64
-#: ../../data/world/immovables/rocks/desert/init.lua:64
-#: ../../data/world/immovables/rocks/greenland/init.lua:64
-#: ../../data/world/immovables/rocks/winterland/init.lua:64
+#: ../../data/world/immovables/rocks/blackland/4/init.lua:7
+#: ../../data/world/immovables/rocks/desert/4/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/4/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/4/init.lua:7
 msgid "Rocks 4"
 msgstr "岩４"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:83
-#: ../../data/world/immovables/rocks/desert/init.lua:83
-#: ../../data/world/immovables/rocks/greenland/init.lua:83
-#: ../../data/world/immovables/rocks/winterland/init.lua:83
+#: ../../data/world/immovables/rocks/blackland/5/init.lua:7
+#: ../../data/world/immovables/rocks/desert/5/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/5/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/5/init.lua:7
 msgid "Rocks 5"
 msgstr "岩５"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:102
-#: ../../data/world/immovables/rocks/desert/init.lua:102
-#: ../../data/world/immovables/rocks/greenland/init.lua:102
-#: ../../data/world/immovables/rocks/winterland/init.lua:102
+#: ../../data/world/immovables/rocks/blackland/6/init.lua:7
+#: ../../data/world/immovables/rocks/desert/6/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/6/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/6/init.lua:7
 msgid "Rocks 6"
 msgstr "岩６"
 
@@ -232,110 +232,110 @@ msgstr "岩６"
 msgid "Standing Stone"
 msgstr "立て石"
 
-#: ../../data/world/immovables/trees/alder/init.lua:22
-msgid "Alder (Sapling)"
-msgstr "ハンノキ(苗木)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:47
-msgid "Alder (Pole)"
-msgstr "ハンノキ(若木)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:73
+#: ../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
 msgstr "ハンノキ(成木)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:98
+#: ../../data/world/immovables/trees/alder/old/init.lua:9
 msgid "Alder (Old)"
 msgstr "ハンノキ(老木)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:99
+#: ../../data/world/immovables/trees/alder/old/init.lua:10
 msgid "Alder"
 msgstr "ハンノキ"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:14
-msgid "Aspen (Sapling)"
-msgstr "ポプラ(苗木)"
+#: ../../data/world/immovables/trees/alder/pole/init.lua:9
+msgid "Alder (Pole)"
+msgstr "ハンノキ(若木)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:39
-msgid "Aspen (Pole)"
-msgstr "ポプラ(若木)"
+#: ../../data/world/immovables/trees/alder/sapling/init.lua:9
+msgid "Alder (Sapling)"
+msgstr "ハンノキ(苗木)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:65
+#: ../../data/world/immovables/trees/aspen/mature/init.lua:9
 msgid "Aspen (Mature)"
 msgstr "ポプラ(成木)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:93
+#: ../../data/world/immovables/trees/aspen/old/init.lua:9
 msgid "Aspen (Old)"
 msgstr "ポプラ(老木)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:94
+#: ../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
 msgstr "ポプラ"
 
-#: ../../data/world/immovables/trees/beech/init.lua:14
-msgid "Beech (Sapling)"
-msgstr "ブナ(苗木)"
+#: ../../data/world/immovables/trees/aspen/pole/init.lua:9
+msgid "Aspen (Pole)"
+msgstr "ポプラ(若木)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:39
-msgid "Beech (Pole)"
-msgstr "ブナ(若木)"
+#: ../../data/world/immovables/trees/aspen/sapling/init.lua:9
+msgid "Aspen (Sapling)"
+msgstr "ポプラ(苗木)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:65
+#: ../../data/world/immovables/trees/beech/mature/init.lua:9
 msgid "Beech (Mature)"
 msgstr "ブナ(成木)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:90
+#: ../../data/world/immovables/trees/beech/old/init.lua:9
 msgid "Beech (Old)"
 msgstr "ブナ(老木)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:91
+#: ../../data/world/immovables/trees/beech/old/init.lua:10
 msgid "Beech"
 msgstr "ブナ"
 
-#: ../../data/world/immovables/trees/birch/init.lua:14
-msgid "Birch (Sapling)"
-msgstr "シラカバ(苗木)"
+#: ../../data/world/immovables/trees/beech/pole/init.lua:9
+msgid "Beech (Pole)"
+msgstr "ブナ(若木)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:39
-msgid "Birch (Pole)"
-msgstr "シラカバ(若木)"
+#: ../../data/world/immovables/trees/beech/sapling/init.lua:9
+msgid "Beech (Sapling)"
+msgstr "ブナ(苗木)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:65
+#: ../../data/world/immovables/trees/birch/mature/init.lua:9
 msgid "Birch (Mature)"
 msgstr "シラカバ(成木)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:93
+#: ../../data/world/immovables/trees/birch/old/init.lua:9
 msgid "Birch (Old)"
 msgstr "シラカバ(老木)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:94
+#: ../../data/world/immovables/trees/birch/old/init.lua:10
 msgid "Birch"
 msgstr "シラカバ"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:15
-msgid "Cirrus Tree (Sapling)"
-msgstr "サーラス(苗木)"
+#: ../../data/world/immovables/trees/birch/pole/init.lua:9
+msgid "Birch (Pole)"
+msgstr "シラカバ(若木)"
+
+#: ../../data/world/immovables/trees/birch/sapling/init.lua:9
+msgid "Birch (Sapling)"
+msgstr "シラカバ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:41
-msgid "Cirrus Tree (Pole)"
-msgstr "サーラス(若木)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:68
+#: ../../data/world/immovables/trees/cirrus/mature/init.lua:10
 msgid "Cirrus Tree (Mature)"
 msgstr "サーラス(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:94
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:10
 msgid "Cirrus Tree (Old)"
 msgstr "サーラス(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:96
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:12
 msgid "Cirrus Tree"
 msgstr "サーラス"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/pole/init.lua:10
+msgid "Cirrus Tree (Pole)"
+msgstr "サーラス(若木)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/sapling/init.lua:10
+msgid "Cirrus Tree (Sapling)"
+msgstr "サーラス(苗木)"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:7
 #: ../../data/world/immovables/trees/deadtree2/init.lua:7
@@ -350,380 +350,380 @@ msgstr "枯れ木"
 msgid "Felled Tree"
 msgstr ""
 
-#: ../../data/world/immovables/trees/larch/init.lua:14
-msgid "Larch (Sapling)"
-msgstr "カラマツ(苗木)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:39
-msgid "Larch (Pole)"
-msgstr "カラマツ(若木)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:65
+#: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
 msgstr "カラマツ(成木)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:90
+#: ../../data/world/immovables/trees/larch/old/init.lua:9
 msgid "Larch (Old)"
 msgstr "カラマツ(老木)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:91
+#: ../../data/world/immovables/trees/larch/old/init.lua:10
 msgid "Larch"
 msgstr "カラマツ"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:15
-msgid "Liana Tree (Sapling)"
-msgstr "リアナ(苗木)"
+#: ../../data/world/immovables/trees/larch/pole/init.lua:9
+msgid "Larch (Pole)"
+msgstr "カラマツ(若木)"
+
+#: ../../data/world/immovables/trees/larch/sapling/init.lua:9
+msgid "Larch (Sapling)"
+msgstr "カラマツ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:41
-msgid "Liana Tree (Pole)"
-msgstr "リアナ(若木)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:68
+#: ../../data/world/immovables/trees/liana/mature/init.lua:10
 msgid "Liana Tree (Mature)"
 msgstr "リアナ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:97
+#: ../../data/world/immovables/trees/liana/old/init.lua:10
 msgid "Liana Tree (Old)"
 msgstr "リアナ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:99
+#: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
 msgstr "リアナ"
 
-#: ../../data/world/immovables/trees/maple/init.lua:14
-msgid "Maple (Sapling)"
-msgstr "カエデ(苗木)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/pole/init.lua:10
+msgid "Liana Tree (Pole)"
+msgstr "リアナ(若木)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:39
-msgid "Maple (Pole)"
-msgstr "カエデ(若木)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/sapling/init.lua:10
+msgid "Liana Tree (Sapling)"
+msgstr "リアナ(苗木)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:65
+#: ../../data/world/immovables/trees/maple/mature/init.lua:9
 msgid "Maple (Mature)"
 msgstr "カエデ(成木)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:90
+#: ../../data/world/immovables/trees/maple/old/init.lua:9
 msgid "Maple (Old)"
 msgstr "カエデ(老木)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:91
+#: ../../data/world/immovables/trees/maple/old/init.lua:10
 msgid "Maple"
 msgstr "カエデ"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:15
-msgid "Dark Mushroom Tree (Sapling)"
-msgstr "クロカサ(苗木)"
+#: ../../data/world/immovables/trees/maple/pole/init.lua:9
+msgid "Maple (Pole)"
+msgstr "カエデ(若木)"
+
+#: ../../data/world/immovables/trees/maple/sapling/init.lua:9
+msgid "Maple (Sapling)"
+msgstr "カエデ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
-msgid "Dark Mushroom Tree (Pole)"
-msgstr "クロカサ(若木)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_dark/mature/init.lua:10
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "クロカサ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:10
 msgid "Dark Mushroom Tree (Old)"
 msgstr "クロカサ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:12
 msgid "Dark Mushroom Tree"
 msgstr "クロカサ"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:15
-msgid "Green Mushroom Tree (Sapling)"
-msgstr "ミドリカサ(苗木)"
+#: ../../data/world/immovables/trees/mushroom_dark/pole/init.lua:10
+msgid "Dark Mushroom Tree (Pole)"
+msgstr "クロカサ(若木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
-msgid "Green Mushroom Tree (Pole)"
-msgstr "ミドリカサ(若木)"
+#: ../../data/world/immovables/trees/mushroom_dark/sapling/init.lua:10
+msgid "Dark Mushroom Tree (Sapling)"
+msgstr "クロカサ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_green/mature/init.lua:10
 msgid "Green Mushroom Tree (Mature)"
 msgstr "ミドリカサ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:10
 msgid "Green Mushroom Tree (Old)"
 msgstr "ミドリカサ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:12
 msgid "Green Mushroom Tree"
 msgstr "ミドリカサ"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:15
-msgid "Red Mushroom Tree (Sapling)"
-msgstr "アカカサ(苗木)"
+#: ../../data/world/immovables/trees/mushroom_green/pole/init.lua:10
+msgid "Green Mushroom Tree (Pole)"
+msgstr "ミドリカサ(若木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
-msgid "Red Mushroom Tree (Pole)"
-msgstr "アカカサ(若木)"
+#: ../../data/world/immovables/trees/mushroom_green/sapling/init.lua:10
+msgid "Green Mushroom Tree (Sapling)"
+msgstr "ミドリカサ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_red/mature/init.lua:10
 msgid "Red Mushroom Tree (Mature)"
 msgstr "アカカサ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:10
 msgid "Red Mushroom Tree (Old)"
 msgstr "アカカサ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:12
 msgid "Red Mushroom Tree"
 msgstr "アカカサ"
 
-#: ../../data/world/immovables/trees/oak/init.lua:14
-msgid "Oak (Sapling)"
-msgstr "カシ(苗木)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/pole/init.lua:10
+msgid "Red Mushroom Tree (Pole)"
+msgstr "アカカサ(若木)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:39
-msgid "Oak (Pole)"
-msgstr "カシ(若木)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/sapling/init.lua:10
+msgid "Red Mushroom Tree (Sapling)"
+msgstr "アカカサ(苗木)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:65
+#: ../../data/world/immovables/trees/oak/mature/init.lua:9
 msgid "Oak (Mature)"
 msgstr "カシ(成木)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:90
+#: ../../data/world/immovables/trees/oak/old/init.lua:9
 msgid "Oak (Old)"
 msgstr "カシ(老木)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:91
+#: ../../data/world/immovables/trees/oak/old/init.lua:10
 msgid "Oak"
 msgstr "カシ"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:14
-msgid "Borassus Palm (Sapling)"
-msgstr "オウギヤシ(苗木)"
+#: ../../data/world/immovables/trees/oak/pole/init.lua:9
+msgid "Oak (Pole)"
+msgstr "カシ(若木)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
-msgid "Borassus Palm (Pole)"
-msgstr "オウギヤシ(若木)"
+#: ../../data/world/immovables/trees/oak/sapling/init.lua:9
+msgid "Oak (Sapling)"
+msgstr "カシ(苗木)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:65
+#: ../../data/world/immovables/trees/palm_borassus/mature/init.lua:9
 msgid "Borassus Palm (Mature)"
 msgstr "オウギヤシ(成木)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:90
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:9
 msgid "Borassus Palm (Old)"
 msgstr "オウギヤシ(老木)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:91
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:10
 msgid "Borassus Palm"
 msgstr "オウギヤシ"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:14
-msgid "Coconut Palm (Sapling)"
-msgstr "ココナッツ(苗木)"
+#: ../../data/world/immovables/trees/palm_borassus/pole/init.lua:9
+msgid "Borassus Palm (Pole)"
+msgstr "オウギヤシ(若木)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
-msgid "Coconut Palm (Pole)"
-msgstr "ココナッツ(若木)"
+#: ../../data/world/immovables/trees/palm_borassus/sapling/init.lua:9
+msgid "Borassus Palm (Sapling)"
+msgstr "オウギヤシ(苗木)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:65
+#: ../../data/world/immovables/trees/palm_coconut/mature/init.lua:9
 msgid "Coconut Palm (Mature)"
 msgstr "ココナッツ(成木)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:90
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:9
 msgid "Coconut Palm (Old)"
 msgstr "ココナッツ(老木)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:91
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:10
 msgid "Coconut Palm"
 msgstr "ココナッツ"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:14
-msgid "Date Palm (Sapling)"
-msgstr "ナツメヤシ(苗木)"
+#: ../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
+msgid "Coconut Palm (Pole)"
+msgstr "ココナッツ(若木)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:39
-msgid "Date Palm (Pole)"
-msgstr "ナツメヤシ(若木)"
+#: ../../data/world/immovables/trees/palm_coconut/sapling/init.lua:9
+msgid "Coconut Palm (Sapling)"
+msgstr "ココナッツ(苗木)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:65
+#: ../../data/world/immovables/trees/palm_date/mature/init.lua:9
 msgid "Date Palm (Mature)"
 msgstr "ナツメヤシ(成木)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:93
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:9
 msgid "Date Palm (Old)"
 msgstr "ナツメヤシ(老木)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:94
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:10
 msgid "Date Palm"
 msgstr "ナツメヤシ"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:14
-msgid "Oil Palm (Sapling)"
-msgstr "アブラヤシ(苗木)"
+#: ../../data/world/immovables/trees/palm_date/pole/init.lua:9
+msgid "Date Palm (Pole)"
+msgstr "ナツメヤシ(若木)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:39
-msgid "Oil Palm (Pole)"
-msgstr "アブラヤシ(若木)"
+#: ../../data/world/immovables/trees/palm_date/sapling/init.lua:9
+msgid "Date Palm (Sapling)"
+msgstr "ナツメヤシ(苗木)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:65
+#: ../../data/world/immovables/trees/palm_oil/mature/init.lua:9
 msgid "Oil Palm (Mature)"
 msgstr "アブラヤシ(成木)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:94
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:9
 msgid "Oil Palm (Old)"
 msgstr "アブラヤシ(老木)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:95
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:10
 msgid "Oil Palm"
 msgstr "アブラヤシ"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:14
-msgid "Roystonea regia Palm (Sapling)"
-msgstr "ダイオウヤシ(苗木)"
+#: ../../data/world/immovables/trees/palm_oil/pole/init.lua:9
+msgid "Oil Palm (Pole)"
+msgstr "アブラヤシ(若木)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
-msgid "Roystonea regia Palm (Pole)"
-msgstr "ダイオウヤシ(若木)"
+#: ../../data/world/immovables/trees/palm_oil/sapling/init.lua:9
+msgid "Oil Palm (Sapling)"
+msgstr "アブラヤシ(苗木)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:65
+#: ../../data/world/immovables/trees/palm_roystonea/mature/init.lua:9
 msgid "Roystonea regia Palm (Mature)"
 msgstr "ダイオウヤシ(成木)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:90
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:9
 msgid "Roystonea regia Palm (Old)"
 msgstr "ダイオウヤシ(老木)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:91
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:10
 msgid "Roystonea regia Palm"
 msgstr "ダイオウヤシ"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:14
-msgid "Rowan (Sapling)"
-msgstr "ナナカマド(苗木)"
+#: ../../data/world/immovables/trees/palm_roystonea/pole/init.lua:9
+msgid "Roystonea regia Palm (Pole)"
+msgstr "ダイオウヤシ(若木)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:39
-msgid "Rowan (Pole)"
-msgstr "ナナカマド(若木)"
+#: ../../data/world/immovables/trees/palm_roystonea/sapling/init.lua:9
+msgid "Roystonea regia Palm (Sapling)"
+msgstr "ダイオウヤシ(苗木)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:65
+#: ../../data/world/immovables/trees/rowan/mature/init.lua:9
 msgid "Rowan (Mature)"
 msgstr "ナナカマド(成木)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:93
+#: ../../data/world/immovables/trees/rowan/old/init.lua:9
 msgid "Rowan (Old)"
 msgstr "ナナカマド(老木)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:94
+#: ../../data/world/immovables/trees/rowan/old/init.lua:10
 msgid "Rowan"
 msgstr "ナナカマド"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:14
-msgid "Spruce (Sapling)"
-msgstr "エゾマツ(苗木)"
+#: ../../data/world/immovables/trees/rowan/pole/init.lua:9
+msgid "Rowan (Pole)"
+msgstr "ナナカマド(若木)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:39
-msgid "Spruce (Pole)"
-msgstr "エゾマツ(若木)"
+#: ../../data/world/immovables/trees/rowan/sapling/init.lua:9
+msgid "Rowan (Sapling)"
+msgstr "ナナカマド(苗木)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:65
+#: ../../data/world/immovables/trees/spruce/mature/init.lua:9
 msgid "Spruce (Mature)"
 msgstr "エゾマツ(成木)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:90
+#: ../../data/world/immovables/trees/spruce/old/init.lua:9
 msgid "Spruce (Old)"
 msgstr "エゾマツ(老木)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:91
+#: ../../data/world/immovables/trees/spruce/old/init.lua:10
 msgid "Spruce"
 msgstr "エゾマツ"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:15
-msgid "Twine Tree (Sapling)"
-msgstr "トワイン(苗木)"
+#: ../../data/world/immovables/trees/spruce/pole/init.lua:9
+msgid "Spruce (Pole)"
+msgstr "エゾマツ(若木)"
+
+#: ../../data/world/immovables/trees/spruce/sapling/init.lua:9
+msgid "Spruce (Sapling)"
+msgstr "エゾマツ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:41
-msgid "Twine Tree (Pole)"
-msgstr "トワイン(若木)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:68
+#: ../../data/world/immovables/trees/twine/mature/init.lua:10
 msgid "Twine Tree (Mature)"
 msgstr "トワイン(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:94
+#: ../../data/world/immovables/trees/twine/old/init.lua:10
 msgid "Twine Tree (Old)"
 msgstr "トワイン(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:96
+#: ../../data/world/immovables/trees/twine/old/init.lua:12
 msgid "Twine Tree"
 msgstr "トワイン"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:15
-msgid "Green Umbrella Tree (Sapling)"
-msgstr "ミドリヤネ(苗木)"
+#: ../../data/world/immovables/trees/twine/pole/init.lua:10
+msgid "Twine Tree (Pole)"
+msgstr "トワイン(若木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
-msgid "Green Umbrella Tree (Pole)"
-msgstr "ミドリヤネ(若木)"
+#: ../../data/world/immovables/trees/twine/sapling/init.lua:10
+msgid "Twine Tree (Sapling)"
+msgstr "トワイン(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_green/mature/init.lua:10
 msgid "Green Umbrella Tree (Mature)"
 msgstr "ミドリヤネ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:94
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:10
 msgid "Green Umbrella Tree (Old)"
 msgstr "ミドリヤネ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:96
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:12
 msgid "Green Umbrella Tree"
 msgstr "ミドリヤネ"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:15
-msgid "Red Umbrella Tree (Sapling)"
-msgstr "アカヤネ(苗木)"
+#: ../../data/world/immovables/trees/umbrella_green/pole/init.lua:10
+msgid "Green Umbrella Tree (Pole)"
+msgstr "ミドリヤネ(若木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
-msgid "Red Umbrella Tree (Pole)"
-msgstr "アカヤネ(若木)"
+#: ../../data/world/immovables/trees/umbrella_green/sapling/init.lua:10
+msgid "Green Umbrella Tree (Sapling)"
+msgstr "ミドリヤネ(苗木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_red/mature/init.lua:10
 msgid "Red Umbrella Tree (Mature)"
 msgstr "アカヤネ(成木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:97
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:10
 msgid "Red Umbrella Tree (Old)"
 msgstr "アカヤネ(老木)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:99
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:12
 msgid "Red Umbrella Tree"
 msgstr "アカヤネ"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/pole/init.lua:10
+msgid "Red Umbrella Tree (Pole)"
+msgstr "アカヤネ(若木)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/sapling/init.lua:10
+msgid "Red Umbrella Tree (Sapling)"
+msgstr "アカヤネ(苗木)"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:121
