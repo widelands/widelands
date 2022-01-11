@@ -624,8 +624,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 }
 
 inline Rectf MainMenu::image_pos(const Image& i, const bool crop) {
-	return (crop ? UI::fit_image_crop : UI::fit_image_nocrop)(i.width(), i.height(), get_w(),
-	                                                          get_h());
+	return UI::fit_image(i.width(), i.height(), get_w(), get_h(), crop);
 }
 
 static inline void
