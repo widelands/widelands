@@ -42,6 +42,7 @@ def main():
                 return match.group(1) + match.group(3)
             else:
                 return match.group(1) + '-' + year + match.group(3)
+
         for filename in find_files(src_path, ['.h', '.cc']):
             update_file(filename, regex_header, repl_header)
 
@@ -52,6 +53,7 @@ def main():
 
         def replace(match):
             return match.group(1) + year + match.group(3)
+
         update_file(filename, regex, replace)
 
         # Now update special files
