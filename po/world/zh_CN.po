@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -166,45 +166,45 @@ msgstr "仙人掌"
 msgid "Grass"
 msgstr "青草"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:7
-#: ../../data/world/immovables/rocks/desert/init.lua:7
-#: ../../data/world/immovables/rocks/greenland/init.lua:7
-#: ../../data/world/immovables/rocks/winterland/init.lua:7
+#: ../../data/world/immovables/rocks/blackland/1/init.lua:7
+#: ../../data/world/immovables/rocks/desert/1/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/1/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/1/init.lua:7
 msgid "Rocks 1"
 msgstr "岩石 1"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:26
-#: ../../data/world/immovables/rocks/desert/init.lua:26
-#: ../../data/world/immovables/rocks/greenland/init.lua:26
-#: ../../data/world/immovables/rocks/winterland/init.lua:26
+#: ../../data/world/immovables/rocks/blackland/2/init.lua:7
+#: ../../data/world/immovables/rocks/desert/2/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/2/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/2/init.lua:7
 msgid "Rocks 2"
 msgstr "岩石 2"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:45
-#: ../../data/world/immovables/rocks/desert/init.lua:45
-#: ../../data/world/immovables/rocks/greenland/init.lua:45
-#: ../../data/world/immovables/rocks/winterland/init.lua:45
+#: ../../data/world/immovables/rocks/blackland/3/init.lua:7
+#: ../../data/world/immovables/rocks/desert/3/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/3/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/3/init.lua:7
 msgid "Rocks 3"
 msgstr "岩石 3"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:64
-#: ../../data/world/immovables/rocks/desert/init.lua:64
-#: ../../data/world/immovables/rocks/greenland/init.lua:64
-#: ../../data/world/immovables/rocks/winterland/init.lua:64
+#: ../../data/world/immovables/rocks/blackland/4/init.lua:7
+#: ../../data/world/immovables/rocks/desert/4/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/4/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/4/init.lua:7
 msgid "Rocks 4"
 msgstr "岩石 4"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:83
-#: ../../data/world/immovables/rocks/desert/init.lua:83
-#: ../../data/world/immovables/rocks/greenland/init.lua:83
-#: ../../data/world/immovables/rocks/winterland/init.lua:83
+#: ../../data/world/immovables/rocks/blackland/5/init.lua:7
+#: ../../data/world/immovables/rocks/desert/5/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/5/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/5/init.lua:7
 msgid "Rocks 5"
 msgstr "岩石 5"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:102
-#: ../../data/world/immovables/rocks/desert/init.lua:102
-#: ../../data/world/immovables/rocks/greenland/init.lua:102
-#: ../../data/world/immovables/rocks/winterland/init.lua:102
+#: ../../data/world/immovables/rocks/blackland/6/init.lua:7
+#: ../../data/world/immovables/rocks/desert/6/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/6/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/6/init.lua:7
 msgid "Rocks 6"
 msgstr "岩石 6"
 
@@ -233,110 +233,110 @@ msgstr "岩石 6"
 msgid "Standing Stone"
 msgstr "竖立的石柱"
 
-#: ../../data/world/immovables/trees/alder/init.lua:22
-msgid "Alder (Sapling)"
-msgstr "桤木(树苗)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:47
-msgid "Alder (Pole)"
-msgstr "桤木(树干)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:73
+#: ../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
 msgstr "桤木(成材的)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:98
+#: ../../data/world/immovables/trees/alder/old/init.lua:9
 msgid "Alder (Old)"
 msgstr "桤木(老树)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:99
+#: ../../data/world/immovables/trees/alder/old/init.lua:10
 msgid "Alder"
 msgstr "桤木"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:14
-msgid "Aspen (Sapling)"
-msgstr "白杨(树苗)"
+#: ../../data/world/immovables/trees/alder/pole/init.lua:9
+msgid "Alder (Pole)"
+msgstr "桤木(树干)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:39
-msgid "Aspen (Pole)"
-msgstr "白杨(树干)"
+#: ../../data/world/immovables/trees/alder/sapling/init.lua:9
+msgid "Alder (Sapling)"
+msgstr "桤木(树苗)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:65
+#: ../../data/world/immovables/trees/aspen/mature/init.lua:9
 msgid "Aspen (Mature)"
 msgstr "白杨(成材的)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:93
+#: ../../data/world/immovables/trees/aspen/old/init.lua:9
 msgid "Aspen (Old)"
 msgstr "白杨(老树)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:94
+#: ../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
 msgstr "白杨树"
 
-#: ../../data/world/immovables/trees/beech/init.lua:14
-msgid "Beech (Sapling)"
-msgstr "山毛榉(树苗)"
+#: ../../data/world/immovables/trees/aspen/pole/init.lua:9
+msgid "Aspen (Pole)"
+msgstr "白杨(树干)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:39
-msgid "Beech (Pole)"
-msgstr "山毛榉(树干)"
+#: ../../data/world/immovables/trees/aspen/sapling/init.lua:9
+msgid "Aspen (Sapling)"
+msgstr "白杨(树苗)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:65
+#: ../../data/world/immovables/trees/beech/mature/init.lua:9
 msgid "Beech (Mature)"
 msgstr "山毛榉(成材的)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:90
+#: ../../data/world/immovables/trees/beech/old/init.lua:9
 msgid "Beech (Old)"
 msgstr "山毛榉(老树)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:91
+#: ../../data/world/immovables/trees/beech/old/init.lua:10
 msgid "Beech"
 msgstr "山毛榉"
 
-#: ../../data/world/immovables/trees/birch/init.lua:14
-msgid "Birch (Sapling)"
-msgstr "白桦树(树苗)"
+#: ../../data/world/immovables/trees/beech/pole/init.lua:9
+msgid "Beech (Pole)"
+msgstr "山毛榉(树干)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:39
-msgid "Birch (Pole)"
-msgstr "白桦树(树干)"
+#: ../../data/world/immovables/trees/beech/sapling/init.lua:9
+msgid "Beech (Sapling)"
+msgstr "山毛榉(树苗)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:65
+#: ../../data/world/immovables/trees/birch/mature/init.lua:9
 msgid "Birch (Mature)"
 msgstr "白桦树(成材的)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:93
+#: ../../data/world/immovables/trees/birch/old/init.lua:9
 msgid "Birch (Old)"
 msgstr "白桦树(老树)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:94
+#: ../../data/world/immovables/trees/birch/old/init.lua:10
 msgid "Birch"
 msgstr "白桦树"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:15
-msgid "Cirrus Tree (Sapling)"
-msgstr "草海卷须树(树苗)"
+#: ../../data/world/immovables/trees/birch/pole/init.lua:9
+msgid "Birch (Pole)"
+msgstr "白桦树(树干)"
+
+#: ../../data/world/immovables/trees/birch/sapling/init.lua:9
+msgid "Birch (Sapling)"
+msgstr "白桦树(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:41
-msgid "Cirrus Tree (Pole)"
-msgstr "草海卷须树(树干)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:68
+#: ../../data/world/immovables/trees/cirrus/mature/init.lua:10
 msgid "Cirrus Tree (Mature)"
 msgstr "草海卷须树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:94
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:10
 msgid "Cirrus Tree (Old)"
 msgstr "草海卷须树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:96
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:12
 msgid "Cirrus Tree"
 msgstr "草海卷须树"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/pole/init.lua:10
+msgid "Cirrus Tree (Pole)"
+msgstr "草海卷须树(树干)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/sapling/init.lua:10
+msgid "Cirrus Tree (Sapling)"
+msgstr "草海卷须树(树苗)"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:7
 #: ../../data/world/immovables/trees/deadtree2/init.lua:7
@@ -351,380 +351,380 @@ msgstr "枯树"
 msgid "Felled Tree"
 msgstr "砍倒的树"
 
-#: ../../data/world/immovables/trees/larch/init.lua:14
-msgid "Larch (Sapling)"
-msgstr "落叶松(树苗)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:39
-msgid "Larch (Pole)"
-msgstr "落叶松(树干)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:65
+#: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
 msgstr "落叶松(成材的)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:90
+#: ../../data/world/immovables/trees/larch/old/init.lua:9
 msgid "Larch (Old)"
 msgstr "落叶松(老树)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:91
+#: ../../data/world/immovables/trees/larch/old/init.lua:10
 msgid "Larch"
 msgstr "落叶松"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:15
-msgid "Liana Tree (Sapling)"
-msgstr "香毛青藤树(树苗)"
+#: ../../data/world/immovables/trees/larch/pole/init.lua:9
+msgid "Larch (Pole)"
+msgstr "落叶松(树干)"
+
+#: ../../data/world/immovables/trees/larch/sapling/init.lua:9
+msgid "Larch (Sapling)"
+msgstr "落叶松(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:41
-msgid "Liana Tree (Pole)"
-msgstr "香毛青藤树(树干)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:68
+#: ../../data/world/immovables/trees/liana/mature/init.lua:10
 msgid "Liana Tree (Mature)"
 msgstr "香毛青藤树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:97
+#: ../../data/world/immovables/trees/liana/old/init.lua:10
 msgid "Liana Tree (Old)"
 msgstr "香毛青藤树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:99
+#: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
 msgstr "香毛青藤树"
 
-#: ../../data/world/immovables/trees/maple/init.lua:14
-msgid "Maple (Sapling)"
-msgstr "枫树(树苗)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/pole/init.lua:10
+msgid "Liana Tree (Pole)"
+msgstr "香毛青藤树(树干)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:39
-msgid "Maple (Pole)"
-msgstr "枫树(树干)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/sapling/init.lua:10
+msgid "Liana Tree (Sapling)"
+msgstr "香毛青藤树(树苗)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:65
+#: ../../data/world/immovables/trees/maple/mature/init.lua:9
 msgid "Maple (Mature)"
 msgstr "枫树(成材的)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:90
+#: ../../data/world/immovables/trees/maple/old/init.lua:9
 msgid "Maple (Old)"
 msgstr "枫树(老树)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:91
+#: ../../data/world/immovables/trees/maple/old/init.lua:10
 msgid "Maple"
 msgstr "枫树"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:15
-msgid "Dark Mushroom Tree (Sapling)"
-msgstr "黑远志蘑菇树(树苗)"
+#: ../../data/world/immovables/trees/maple/pole/init.lua:9
+msgid "Maple (Pole)"
+msgstr "枫树(树干)"
+
+#: ../../data/world/immovables/trees/maple/sapling/init.lua:9
+msgid "Maple (Sapling)"
+msgstr "枫树(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
-msgid "Dark Mushroom Tree (Pole)"
-msgstr "黑远志蘑菇树(树干)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_dark/mature/init.lua:10
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "黑远志蘑菇树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:10
 msgid "Dark Mushroom Tree (Old)"
 msgstr "黑远志蘑菇树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:12
 msgid "Dark Mushroom Tree"
 msgstr "黑远志蘑菇树"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:15
-msgid "Green Mushroom Tree (Sapling)"
-msgstr "草海绿蘑菇树(树苗)"
+#: ../../data/world/immovables/trees/mushroom_dark/pole/init.lua:10
+msgid "Dark Mushroom Tree (Pole)"
+msgstr "黑远志蘑菇树(树干)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
-msgid "Green Mushroom Tree (Pole)"
-msgstr "草海绿蘑菇树(树干)"
+#: ../../data/world/immovables/trees/mushroom_dark/sapling/init.lua:10
+msgid "Dark Mushroom Tree (Sapling)"
+msgstr "黑远志蘑菇树(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_green/mature/init.lua:10
 msgid "Green Mushroom Tree (Mature)"
 msgstr "草海绿蘑菇树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:10
 msgid "Green Mushroom Tree (Old)"
 msgstr "草海绿蘑菇树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:12
 msgid "Green Mushroom Tree"
 msgstr "草海绿蘑菇树"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:15
-msgid "Red Mushroom Tree (Sapling)"
-msgstr "乌蒙红菇树(树苗)"
+#: ../../data/world/immovables/trees/mushroom_green/pole/init.lua:10
+msgid "Green Mushroom Tree (Pole)"
+msgstr "草海绿蘑菇树(树干)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
-msgid "Red Mushroom Tree (Pole)"
-msgstr "乌蒙红菇树(树干)"
+#: ../../data/world/immovables/trees/mushroom_green/sapling/init.lua:10
+msgid "Green Mushroom Tree (Sapling)"
+msgstr "草海绿蘑菇树(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_red/mature/init.lua:10
 msgid "Red Mushroom Tree (Mature)"
 msgstr "乌蒙红菇树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:10
 msgid "Red Mushroom Tree (Old)"
 msgstr "乌蒙红菇树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:12
 msgid "Red Mushroom Tree"
 msgstr "乌蒙红菇树"
 
-#: ../../data/world/immovables/trees/oak/init.lua:14
-msgid "Oak (Sapling)"
-msgstr "橡树(树苗)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/pole/init.lua:10
+msgid "Red Mushroom Tree (Pole)"
+msgstr "乌蒙红菇树(树干)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:39
-msgid "Oak (Pole)"
-msgstr "橡树(树干)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/sapling/init.lua:10
+msgid "Red Mushroom Tree (Sapling)"
+msgstr "乌蒙红菇树(树苗)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:65
+#: ../../data/world/immovables/trees/oak/mature/init.lua:9
 msgid "Oak (Mature)"
 msgstr "橡树(成材的)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:90
+#: ../../data/world/immovables/trees/oak/old/init.lua:9
 msgid "Oak (Old)"
 msgstr "橡树(老树)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:91
+#: ../../data/world/immovables/trees/oak/old/init.lua:10
 msgid "Oak"
 msgstr "橡树"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:14
-msgid "Borassus Palm (Sapling)"
-msgstr "糖棕榈树(树苗)"
+#: ../../data/world/immovables/trees/oak/pole/init.lua:9
+msgid "Oak (Pole)"
+msgstr "橡树(树干)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
-msgid "Borassus Palm (Pole)"
-msgstr "糖棕榈树(树干)"
+#: ../../data/world/immovables/trees/oak/sapling/init.lua:9
+msgid "Oak (Sapling)"
+msgstr "橡树(树苗)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:65
+#: ../../data/world/immovables/trees/palm_borassus/mature/init.lua:9
 msgid "Borassus Palm (Mature)"
 msgstr "糖棕榈树(成材的)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:90
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:9
 msgid "Borassus Palm (Old)"
 msgstr "糖棕榈树(老树)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:91
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:10
 msgid "Borassus Palm"
 msgstr "糖棕榈树"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:14
-msgid "Coconut Palm (Sapling)"
-msgstr "椰子树(树苗)"
+#: ../../data/world/immovables/trees/palm_borassus/pole/init.lua:9
+msgid "Borassus Palm (Pole)"
+msgstr "糖棕榈树(树干)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
-msgid "Coconut Palm (Pole)"
-msgstr "椰子树(树干)"
+#: ../../data/world/immovables/trees/palm_borassus/sapling/init.lua:9
+msgid "Borassus Palm (Sapling)"
+msgstr "糖棕榈树(树苗)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:65
+#: ../../data/world/immovables/trees/palm_coconut/mature/init.lua:9
 msgid "Coconut Palm (Mature)"
 msgstr "椰子树(成材的)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:90
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:9
 msgid "Coconut Palm (Old)"
 msgstr "椰子树(老树)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:91
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:10
 msgid "Coconut Palm"
 msgstr "椰子树"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:14
-msgid "Date Palm (Sapling)"
-msgstr "椰枣树(树苗)"
+#: ../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
+msgid "Coconut Palm (Pole)"
+msgstr "椰子树(树干)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:39
-msgid "Date Palm (Pole)"
-msgstr "椰枣树(树干)"
+#: ../../data/world/immovables/trees/palm_coconut/sapling/init.lua:9
+msgid "Coconut Palm (Sapling)"
+msgstr "椰子树(树苗)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:65
+#: ../../data/world/immovables/trees/palm_date/mature/init.lua:9
 msgid "Date Palm (Mature)"
 msgstr "椰枣树(成材的)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:93
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:9
 msgid "Date Palm (Old)"
 msgstr "椰枣树(老树)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:94
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:10
 msgid "Date Palm"
 msgstr "椰枣树"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:14
-msgid "Oil Palm (Sapling)"
-msgstr "油棕榈树(树苗)"
+#: ../../data/world/immovables/trees/palm_date/pole/init.lua:9
+msgid "Date Palm (Pole)"
+msgstr "椰枣树(树干)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:39
-msgid "Oil Palm (Pole)"
-msgstr "油棕榈树(树干)"
+#: ../../data/world/immovables/trees/palm_date/sapling/init.lua:9
+msgid "Date Palm (Sapling)"
+msgstr "椰枣树(树苗)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:65
+#: ../../data/world/immovables/trees/palm_oil/mature/init.lua:9
 msgid "Oil Palm (Mature)"
 msgstr "油棕榈树(成材的)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:94
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:9
 msgid "Oil Palm (Old)"
 msgstr "油棕榈树(老树)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:95
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:10
 msgid "Oil Palm"
 msgstr "油棕榈树"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:14
-msgid "Roystonea regia Palm (Sapling)"
-msgstr "大王椰(树苗)"
+#: ../../data/world/immovables/trees/palm_oil/pole/init.lua:9
+msgid "Oil Palm (Pole)"
+msgstr "油棕榈树(树干)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
-msgid "Roystonea regia Palm (Pole)"
-msgstr "大王椰(树干)"
+#: ../../data/world/immovables/trees/palm_oil/sapling/init.lua:9
+msgid "Oil Palm (Sapling)"
+msgstr "油棕榈树(树苗)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:65
+#: ../../data/world/immovables/trees/palm_roystonea/mature/init.lua:9
 msgid "Roystonea regia Palm (Mature)"
 msgstr "大王椰(成材的)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:90
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:9
 msgid "Roystonea regia Palm (Old)"
 msgstr "大王椰(老树)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:91
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:10
 msgid "Roystonea regia Palm"
 msgstr "大王椰"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:14
-msgid "Rowan (Sapling)"
-msgstr "红果花楸(树苗)"
+#: ../../data/world/immovables/trees/palm_roystonea/pole/init.lua:9
+msgid "Roystonea regia Palm (Pole)"
+msgstr "大王椰(树干)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:39
-msgid "Rowan (Pole)"
-msgstr "红果花楸(树干)"
+#: ../../data/world/immovables/trees/palm_roystonea/sapling/init.lua:9
+msgid "Roystonea regia Palm (Sapling)"
+msgstr "大王椰(树苗)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:65
+#: ../../data/world/immovables/trees/rowan/mature/init.lua:9
 msgid "Rowan (Mature)"
 msgstr "红果花楸(成材的)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:93
+#: ../../data/world/immovables/trees/rowan/old/init.lua:9
 msgid "Rowan (Old)"
 msgstr "红果花楸(老树)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:94
+#: ../../data/world/immovables/trees/rowan/old/init.lua:10
 msgid "Rowan"
 msgstr "红果花楸"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:14
-msgid "Spruce (Sapling)"
-msgstr "云杉(树苗)"
+#: ../../data/world/immovables/trees/rowan/pole/init.lua:9
+msgid "Rowan (Pole)"
+msgstr "红果花楸(树干)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:39
-msgid "Spruce (Pole)"
-msgstr "云杉(树干)"
+#: ../../data/world/immovables/trees/rowan/sapling/init.lua:9
+msgid "Rowan (Sapling)"
+msgstr "红果花楸(树苗)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:65
+#: ../../data/world/immovables/trees/spruce/mature/init.lua:9
 msgid "Spruce (Mature)"
 msgstr "云杉(成材的)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:90
+#: ../../data/world/immovables/trees/spruce/old/init.lua:9
 msgid "Spruce (Old)"
 msgstr "云杉(老树)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:91
+#: ../../data/world/immovables/trees/spruce/old/init.lua:10
 msgid "Spruce"
 msgstr "云杉"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:15
-msgid "Twine Tree (Sapling)"
-msgstr "安庆连理树(树苗)"
+#: ../../data/world/immovables/trees/spruce/pole/init.lua:9
+msgid "Spruce (Pole)"
+msgstr "云杉(树干)"
+
+#: ../../data/world/immovables/trees/spruce/sapling/init.lua:9
+msgid "Spruce (Sapling)"
+msgstr "云杉(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:41
-msgid "Twine Tree (Pole)"
-msgstr "安庆连理树(树干)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:68
+#: ../../data/world/immovables/trees/twine/mature/init.lua:10
 msgid "Twine Tree (Mature)"
 msgstr "安庆连理树(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:94
+#: ../../data/world/immovables/trees/twine/old/init.lua:10
 msgid "Twine Tree (Old)"
 msgstr "安庆连理树(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:96
+#: ../../data/world/immovables/trees/twine/old/init.lua:12
 msgid "Twine Tree"
 msgstr "安庆连理树"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:15
-msgid "Green Umbrella Tree (Sapling)"
-msgstr "威宁绿木兰(树苗)"
+#: ../../data/world/immovables/trees/twine/pole/init.lua:10
+msgid "Twine Tree (Pole)"
+msgstr "安庆连理树(树干)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
-msgid "Green Umbrella Tree (Pole)"
-msgstr "威宁绿木兰(树干)"
+#: ../../data/world/immovables/trees/twine/sapling/init.lua:10
+msgid "Twine Tree (Sapling)"
+msgstr "安庆连理树(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_green/mature/init.lua:10
 msgid "Green Umbrella Tree (Mature)"
 msgstr "威宁绿木兰(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:94
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:10
 msgid "Green Umbrella Tree (Old)"
 msgstr "威宁绿木兰(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:96
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:12
 msgid "Green Umbrella Tree"
 msgstr "威宁绿木兰"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:15
-msgid "Red Umbrella Tree (Sapling)"
-msgstr "怀宁红木兰(树苗)"
+#: ../../data/world/immovables/trees/umbrella_green/pole/init.lua:10
+msgid "Green Umbrella Tree (Pole)"
+msgstr "威宁绿木兰(树干)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
-msgid "Red Umbrella Tree (Pole)"
-msgstr "怀宁红木兰(树干)"
+#: ../../data/world/immovables/trees/umbrella_green/sapling/init.lua:10
+msgid "Green Umbrella Tree (Sapling)"
+msgstr "威宁绿木兰(树苗)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_red/mature/init.lua:10
 msgid "Red Umbrella Tree (Mature)"
 msgstr "怀宁红木兰(成材的)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:97
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:10
 msgid "Red Umbrella Tree (Old)"
 msgstr "怀宁红木兰(老树)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:99
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:12
 msgid "Red Umbrella Tree"
 msgstr "怀宁红木兰"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/pole/init.lua:10
+msgid "Red Umbrella Tree (Pole)"
+msgstr "怀宁红木兰(树干)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/sapling/init.lua:10
+msgid "Red Umbrella Tree (Sapling)"
+msgstr "怀宁红木兰(树苗)"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:121

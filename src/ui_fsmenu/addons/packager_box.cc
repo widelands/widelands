@@ -372,7 +372,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 			UI::WLMessageBox mbox(
 			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
 			   format(_("The map ‘%s’ is not a directory. "
-			            "Please consider disabling the ‘Compress widelands data files’ option "
+			            "Please consider disabling the ‘Compress Widelands data files’ option "
 			            "in the options menu and resaving the map in the editor."
 			            "\n\nDo you want to add this map anyway?"),
 			          filename),
