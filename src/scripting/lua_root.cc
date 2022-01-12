@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2021 by the Widelands Development Team
+ * Copyright (C) 2006-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,8 +71,6 @@ Game
 -----
 
 .. class:: Game
-
-   Child of: :class:`wl.bases.EditorGameBase`
 
    The root class to access the game internals. Use ``wl.Game()`` to access the properties, e.g.:
 
@@ -320,8 +318,6 @@ Editor
 ------
 
 .. class:: Editor
-
-   Child of: :class:`wl.bases.EditorGameBase`
 
    The Editor object; it is the correspondence of the :class:`wl.Game`
    that is used in a Game. Use ``ẁl.Editor()`` to access the properties.

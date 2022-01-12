@@ -3,7 +3,7 @@ Upstream-Name: widelands
 Source: https://www.widelands.org/
 
 Files: *
-Copyright: 2002-2021 by the Widelands Development Team
+Copyright: 2002-2022 by the Widelands Development Team
 License: GPL-2+
 
 Files: src/third_party/eris/*
@@ -204,7 +204,7 @@ Copyright: 2006-2010, Peter Schwanemann (Peter (AT) drehatlas (DOT) de)
 License: SIL-Open-Font-License
 
 Files: data/tribes/*/*.png
-Copyright: 2002-2021 by the Widelands Development Team
+Copyright: 2002-2022 by the Widelands Development Team
 License: GPL-2+
  The media files of Widelands are distributed under the same license
  than the game itself. The blender source files are not included in the same
@@ -304,4 +304,3 @@ License: SIL-Open-Font-License
  DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
  OTHER DEALINGS IN THE FONT SOFTWARE.
-

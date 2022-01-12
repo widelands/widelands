@@ -6,6 +6,7 @@ import os
 import os.path as p
 import re
 import sys
+import documentation_enhancements as doc_enh
 
 ###################
 # inputs, outputs #
@@ -110,6 +111,12 @@ def extract_rst_from_cpp(inname, outname=None):
         r = r.expandtabs(4)
         output += r + '\n'
 
+    # Add string 'Child of: …'
+    output = doc_enh.add_child_of(output, outname)
+    if '-graphs' in sys.argv:
+        # Add dependency graph
+        output = doc_enh.add_dependency_graph(output, outname)
+
     if output.strip():
         out = sys.stdout
         if outname is not None:
@@ -174,6 +181,7 @@ def replace_tocs(toc_rst_dict):
 
 if __name__ == '__main__':
     def main():
+        doc_enh.init(base_dir, cpp_pairs)
         for inf, outf in cpp_pairs:
             extract_rst_from_cpp(inf, outf)
 

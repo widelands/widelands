@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2021 by the Widelands Development Team
+ * Copyright (C) 2008-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,7 +173,7 @@ private:
 
 	void update_all_buildable_fields(const Time&);
 	void update_all_mineable_fields(const Time&);
-	void update_all_not_buildable_fields();
+	void update_all_not_buildable_fields(const Time&);
 	void update_buildable_field(BuildableField&);
 	void update_mineable_field(MineableField&);
 	void update_productionsite_stats();

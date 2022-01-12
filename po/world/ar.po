@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
@@ -165,45 +165,45 @@ msgstr "صبار"
 msgid "Grass"
 msgstr "عشب"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:7
-#: ../../data/world/immovables/rocks/desert/init.lua:7
-#: ../../data/world/immovables/rocks/greenland/init.lua:7
-#: ../../data/world/immovables/rocks/winterland/init.lua:7
+#: ../../data/world/immovables/rocks/blackland/1/init.lua:7
+#: ../../data/world/immovables/rocks/desert/1/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/1/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/1/init.lua:7
 msgid "Rocks 1"
 msgstr "صخور 1"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:26
-#: ../../data/world/immovables/rocks/desert/init.lua:26
-#: ../../data/world/immovables/rocks/greenland/init.lua:26
-#: ../../data/world/immovables/rocks/winterland/init.lua:26
+#: ../../data/world/immovables/rocks/blackland/2/init.lua:7
+#: ../../data/world/immovables/rocks/desert/2/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/2/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/2/init.lua:7
 msgid "Rocks 2"
 msgstr "صخور 2"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:45
-#: ../../data/world/immovables/rocks/desert/init.lua:45
-#: ../../data/world/immovables/rocks/greenland/init.lua:45
-#: ../../data/world/immovables/rocks/winterland/init.lua:45
+#: ../../data/world/immovables/rocks/blackland/3/init.lua:7
+#: ../../data/world/immovables/rocks/desert/3/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/3/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/3/init.lua:7
 msgid "Rocks 3"
 msgstr "صخور 3"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:64
-#: ../../data/world/immovables/rocks/desert/init.lua:64
-#: ../../data/world/immovables/rocks/greenland/init.lua:64
-#: ../../data/world/immovables/rocks/winterland/init.lua:64
+#: ../../data/world/immovables/rocks/blackland/4/init.lua:7
+#: ../../data/world/immovables/rocks/desert/4/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/4/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/4/init.lua:7
 msgid "Rocks 4"
 msgstr "صخور 4"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:83
-#: ../../data/world/immovables/rocks/desert/init.lua:83
-#: ../../data/world/immovables/rocks/greenland/init.lua:83
-#: ../../data/world/immovables/rocks/winterland/init.lua:83
+#: ../../data/world/immovables/rocks/blackland/5/init.lua:7
+#: ../../data/world/immovables/rocks/desert/5/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/5/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/5/init.lua:7
 msgid "Rocks 5"
 msgstr "صخور 5"
 
-#: ../../data/world/immovables/rocks/blackland/init.lua:102
-#: ../../data/world/immovables/rocks/desert/init.lua:102
-#: ../../data/world/immovables/rocks/greenland/init.lua:102
-#: ../../data/world/immovables/rocks/winterland/init.lua:102
+#: ../../data/world/immovables/rocks/blackland/6/init.lua:7
+#: ../../data/world/immovables/rocks/desert/6/init.lua:7
+#: ../../data/world/immovables/rocks/greenland/6/init.lua:7
+#: ../../data/world/immovables/rocks/winterland/6/init.lua:7
 msgid "Rocks 6"
 msgstr "صخور 6"
 
@@ -232,110 +232,110 @@ msgstr "صخور 6"
 msgid "Standing Stone"
 msgstr "الحجر الواقف"
 
-#: ../../data/world/immovables/trees/alder/init.lua:22
-msgid "Alder (Sapling)"
-msgstr "جار الماء (شتلة)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:47
-msgid "Alder (Pole)"
-msgstr "جار الماء (قطب)"
-
-#: ../../data/world/immovables/trees/alder/init.lua:73
+#: ../../data/world/immovables/trees/alder/mature/init.lua:9
 msgid "Alder (Mature)"
 msgstr "جار الماء (بالغ)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:98
+#: ../../data/world/immovables/trees/alder/old/init.lua:9
 msgid "Alder (Old)"
 msgstr "جار الماء (كبير)"
 
-#: ../../data/world/immovables/trees/alder/init.lua:99
+#: ../../data/world/immovables/trees/alder/old/init.lua:10
 msgid "Alder"
 msgstr "جار الماء"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:14
-msgid "Aspen (Sapling)"
-msgstr "أسبن (شتلة)"
+#: ../../data/world/immovables/trees/alder/pole/init.lua:9
+msgid "Alder (Pole)"
+msgstr "جار الماء (قطب)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:39
-msgid "Aspen (Pole)"
-msgstr "أسبن (قطب)"
+#: ../../data/world/immovables/trees/alder/sapling/init.lua:9
+msgid "Alder (Sapling)"
+msgstr "جار الماء (شتلة)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:65
+#: ../../data/world/immovables/trees/aspen/mature/init.lua:9
 msgid "Aspen (Mature)"
 msgstr "أسبن (بالغ)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:93
+#: ../../data/world/immovables/trees/aspen/old/init.lua:9
 msgid "Aspen (Old)"
 msgstr "أسبن (قديم)"
 
-#: ../../data/world/immovables/trees/aspen/init.lua:94
+#: ../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
 msgstr "أسبن"
 
-#: ../../data/world/immovables/trees/beech/init.lua:14
-msgid "Beech (Sapling)"
-msgstr "خشب الزان (شتلة)"
+#: ../../data/world/immovables/trees/aspen/pole/init.lua:9
+msgid "Aspen (Pole)"
+msgstr "أسبن (قطب)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:39
-msgid "Beech (Pole)"
-msgstr "خشب الزان (قطب)"
+#: ../../data/world/immovables/trees/aspen/sapling/init.lua:9
+msgid "Aspen (Sapling)"
+msgstr "أسبن (شتلة)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:65
+#: ../../data/world/immovables/trees/beech/mature/init.lua:9
 msgid "Beech (Mature)"
 msgstr "خشب الزان (بالغ)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:90
+#: ../../data/world/immovables/trees/beech/old/init.lua:9
 msgid "Beech (Old)"
 msgstr "خشب الزان (قديم)"
 
-#: ../../data/world/immovables/trees/beech/init.lua:91
+#: ../../data/world/immovables/trees/beech/old/init.lua:10
 msgid "Beech"
 msgstr "خشب الزان"
 
-#: ../../data/world/immovables/trees/birch/init.lua:14
-msgid "Birch (Sapling)"
-msgstr "قضبان (شتلة)"
+#: ../../data/world/immovables/trees/beech/pole/init.lua:9
+msgid "Beech (Pole)"
+msgstr "خشب الزان (قطب)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:39
-msgid "Birch (Pole)"
-msgstr "قضبان (قطب)"
+#: ../../data/world/immovables/trees/beech/sapling/init.lua:9
+msgid "Beech (Sapling)"
+msgstr "خشب الزان (شتلة)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:65
+#: ../../data/world/immovables/trees/birch/mature/init.lua:9
 msgid "Birch (Mature)"
 msgstr "قضبان (بالغ)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:93
+#: ../../data/world/immovables/trees/birch/old/init.lua:9
 msgid "Birch (Old)"
 msgstr "قضبان (قديم)"
 
-#: ../../data/world/immovables/trees/birch/init.lua:94
+#: ../../data/world/immovables/trees/birch/old/init.lua:10
 msgid "Birch"
 msgstr "قضبان"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:15
-msgid "Cirrus Tree (Sapling)"
-msgstr "شجرة سيروس (شتلة)"
+#: ../../data/world/immovables/trees/birch/pole/init.lua:9
+msgid "Birch (Pole)"
+msgstr "قضبان (قطب)"
+
+#: ../../data/world/immovables/trees/birch/sapling/init.lua:9
+msgid "Birch (Sapling)"
+msgstr "قضبان (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:41
-msgid "Cirrus Tree (Pole)"
-msgstr "شجرة سيروس (قطب)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:68
+#: ../../data/world/immovables/trees/cirrus/mature/init.lua:10
 msgid "Cirrus Tree (Mature)"
 msgstr "شجرة سيروس (بالغ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:94
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:10
 msgid "Cirrus Tree (Old)"
 msgstr "شجرة سيروس (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/cirrus/init.lua:96
+#: ../../data/world/immovables/trees/cirrus/old/init.lua:12
 msgid "Cirrus Tree"
 msgstr "شجرة سيروس"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/pole/init.lua:10
+msgid "Cirrus Tree (Pole)"
+msgstr "شجرة سيروس (قطب)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/cirrus/sapling/init.lua:10
+msgid "Cirrus Tree (Sapling)"
+msgstr "شجرة سيروس (شتلة)"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:7
 #: ../../data/world/immovables/trees/deadtree2/init.lua:7
@@ -350,380 +350,380 @@ msgstr "شجره ميته"
 msgid "Felled Tree"
 msgstr ""
 
-#: ../../data/world/immovables/trees/larch/init.lua:14
-msgid "Larch (Sapling)"
-msgstr "أرزية (شتلة)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:39
-msgid "Larch (Pole)"
-msgstr "أرزية (قطب)"
-
-#: ../../data/world/immovables/trees/larch/init.lua:65
+#: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
 msgstr "أرزية (بالغة)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:90
+#: ../../data/world/immovables/trees/larch/old/init.lua:9
 msgid "Larch (Old)"
 msgstr "أرزية (قديمة)"
 
-#: ../../data/world/immovables/trees/larch/init.lua:91
+#: ../../data/world/immovables/trees/larch/old/init.lua:10
 msgid "Larch"
 msgstr "أرزية"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:15
-msgid "Liana Tree (Sapling)"
-msgstr "شجرة ليانا (شتلة)"
+#: ../../data/world/immovables/trees/larch/pole/init.lua:9
+msgid "Larch (Pole)"
+msgstr "أرزية (قطب)"
+
+#: ../../data/world/immovables/trees/larch/sapling/init.lua:9
+msgid "Larch (Sapling)"
+msgstr "أرزية (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:41
-msgid "Liana Tree (Pole)"
-msgstr "شجرة ليانا (قطب)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:68
+#: ../../data/world/immovables/trees/liana/mature/init.lua:10
 msgid "Liana Tree (Mature)"
 msgstr "شجرة ليانا (بالغة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:97
+#: ../../data/world/immovables/trees/liana/old/init.lua:10
 msgid "Liana Tree (Old)"
 msgstr "شجرة ليانا (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/liana/init.lua:99
+#: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
 msgstr "شجرة ليانا"
 
-#: ../../data/world/immovables/trees/maple/init.lua:14
-msgid "Maple (Sapling)"
-msgstr "قيقب (شتلة)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/pole/init.lua:10
+msgid "Liana Tree (Pole)"
+msgstr "شجرة ليانا (قطب)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:39
-msgid "Maple (Pole)"
-msgstr "قيقب (قطب)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/liana/sapling/init.lua:10
+msgid "Liana Tree (Sapling)"
+msgstr "شجرة ليانا (شتلة)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:65
+#: ../../data/world/immovables/trees/maple/mature/init.lua:9
 msgid "Maple (Mature)"
 msgstr "قيقب (بالغ)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:90
+#: ../../data/world/immovables/trees/maple/old/init.lua:9
 msgid "Maple (Old)"
 msgstr "قيقب (قديم)"
 
-#: ../../data/world/immovables/trees/maple/init.lua:91
+#: ../../data/world/immovables/trees/maple/old/init.lua:10
 msgid "Maple"
 msgstr "قيقب"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:15
-msgid "Dark Mushroom Tree (Sapling)"
-msgstr "شجرة الفطر الاسود (شتلة)"
+#: ../../data/world/immovables/trees/maple/pole/init.lua:9
+msgid "Maple (Pole)"
+msgstr "قيقب (قطب)"
+
+#: ../../data/world/immovables/trees/maple/sapling/init.lua:9
+msgid "Maple (Sapling)"
+msgstr "قيقب (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:41
-msgid "Dark Mushroom Tree (Pole)"
-msgstr "شجرة الفطر الاسود (قطب)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_dark/mature/init.lua:10
 msgid "Dark Mushroom Tree (Mature)"
 msgstr "شجرة الفطر الاسود (بالغة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:10
 msgid "Dark Mushroom Tree (Old)"
 msgstr "شجرة الفطر الاسود (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_dark/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:12
 msgid "Dark Mushroom Tree"
 msgstr "شجرة الفطر الاسود"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:15
-msgid "Green Mushroom Tree (Sapling)"
-msgstr "شجرة الفطر الاخضر (شتلة)"
+#: ../../data/world/immovables/trees/mushroom_dark/pole/init.lua:10
+msgid "Dark Mushroom Tree (Pole)"
+msgstr "شجرة الفطر الاسود (قطب)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:41
-msgid "Green Mushroom Tree (Pole)"
-msgstr "شجرة الفطر الاخضر (قطب)"
+#: ../../data/world/immovables/trees/mushroom_dark/sapling/init.lua:10
+msgid "Dark Mushroom Tree (Sapling)"
+msgstr "شجرة الفطر الاسود (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_green/mature/init.lua:10
 msgid "Green Mushroom Tree (Mature)"
 msgstr "شجرة الفطر الاخضر (بالغة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:94
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:10
 msgid "Green Mushroom Tree (Old)"
 msgstr "شجرة الفطر الاخضر (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_green/init.lua:96
+#: ../../data/world/immovables/trees/mushroom_green/old/init.lua:12
 msgid "Green Mushroom Tree"
 msgstr "شجرة الفطر الاخضر"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:15
-msgid "Red Mushroom Tree (Sapling)"
-msgstr "شجرة الفطر الاحمر (شتلة)"
+#: ../../data/world/immovables/trees/mushroom_green/pole/init.lua:10
+msgid "Green Mushroom Tree (Pole)"
+msgstr "شجرة الفطر الاخضر (قطب)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:41
-msgid "Red Mushroom Tree (Pole)"
-msgstr "شجرة الفطر الاحمر (قطب)"
+#: ../../data/world/immovables/trees/mushroom_green/sapling/init.lua:10
+msgid "Green Mushroom Tree (Sapling)"
+msgstr "شجرة الفطر الاخضر (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:68
+#: ../../data/world/immovables/trees/mushroom_red/mature/init.lua:10
 msgid "Red Mushroom Tree (Mature)"
 msgstr "شجرة الفطر الاحمر (بالغ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:97
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:10
 msgid "Red Mushroom Tree (Old)"
 msgstr "شجرة الفطر الاحمر (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/mushroom_red/init.lua:99
+#: ../../data/world/immovables/trees/mushroom_red/old/init.lua:12
 msgid "Red Mushroom Tree"
 msgstr "شجرة الفطر الاحمر"
 
-#: ../../data/world/immovables/trees/oak/init.lua:14
-msgid "Oak (Sapling)"
-msgstr "سنديان (شتلة)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/pole/init.lua:10
+msgid "Red Mushroom Tree (Pole)"
+msgstr "شجرة الفطر الاحمر (قطب)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:39
-msgid "Oak (Pole)"
-msgstr "سنديان (قطب)"
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/mushroom_red/sapling/init.lua:10
+msgid "Red Mushroom Tree (Sapling)"
+msgstr "شجرة الفطر الاحمر (شتلة)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:65
+#: ../../data/world/immovables/trees/oak/mature/init.lua:9
 msgid "Oak (Mature)"
 msgstr "سنديان (بالغ)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:90
+#: ../../data/world/immovables/trees/oak/old/init.lua:9
 msgid "Oak (Old)"
 msgstr "سنديان (قديم)"
 
-#: ../../data/world/immovables/trees/oak/init.lua:91
+#: ../../data/world/immovables/trees/oak/old/init.lua:10
 msgid "Oak"
 msgstr "سنديان"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:14
-msgid "Borassus Palm (Sapling)"
-msgstr "نخيل البوراس (شتلة)"
+#: ../../data/world/immovables/trees/oak/pole/init.lua:9
+msgid "Oak (Pole)"
+msgstr "سنديان (قطب)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:39
-msgid "Borassus Palm (Pole)"
-msgstr "نخيل البوراس (قطب)"
+#: ../../data/world/immovables/trees/oak/sapling/init.lua:9
+msgid "Oak (Sapling)"
+msgstr "سنديان (شتلة)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:65
+#: ../../data/world/immovables/trees/palm_borassus/mature/init.lua:9
 msgid "Borassus Palm (Mature)"
 msgstr "نخيل البوراس (بالغ)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:90
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:9
 msgid "Borassus Palm (Old)"
 msgstr "نخيل البوراس (قديم)"
 
-#: ../../data/world/immovables/trees/palm_borassus/init.lua:91
+#: ../../data/world/immovables/trees/palm_borassus/old/init.lua:10
 msgid "Borassus Palm"
 msgstr "نخيل البوراس"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:14
-msgid "Coconut Palm (Sapling)"
-msgstr "نخيل جوز الهند (شتلة)"
+#: ../../data/world/immovables/trees/palm_borassus/pole/init.lua:9
+msgid "Borassus Palm (Pole)"
+msgstr "نخيل البوراس (قطب)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:39
-msgid "Coconut Palm (Pole)"
-msgstr "نخيل جوز الهند (قطب)"
+#: ../../data/world/immovables/trees/palm_borassus/sapling/init.lua:9
+msgid "Borassus Palm (Sapling)"
+msgstr "نخيل البوراس (شتلة)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:65
+#: ../../data/world/immovables/trees/palm_coconut/mature/init.lua:9
 msgid "Coconut Palm (Mature)"
 msgstr "نخيل جوز الهند (بالغ)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:90
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:9
 msgid "Coconut Palm (Old)"
 msgstr "نخيل جوز الهند (قديم)"
 
-#: ../../data/world/immovables/trees/palm_coconut/init.lua:91
+#: ../../data/world/immovables/trees/palm_coconut/old/init.lua:10
 msgid "Coconut Palm"
 msgstr "نخيل جوز الهند"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:14
-msgid "Date Palm (Sapling)"
-msgstr "نخلة التمر (شتلة)"
+#: ../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
+msgid "Coconut Palm (Pole)"
+msgstr "نخيل جوز الهند (قطب)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:39
-msgid "Date Palm (Pole)"
-msgstr "نخلة التمر (قطب)"
+#: ../../data/world/immovables/trees/palm_coconut/sapling/init.lua:9
+msgid "Coconut Palm (Sapling)"
+msgstr "نخيل جوز الهند (شتلة)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:65
+#: ../../data/world/immovables/trees/palm_date/mature/init.lua:9
 msgid "Date Palm (Mature)"
 msgstr "نخلة التمر (بالغ)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:93
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:9
 msgid "Date Palm (Old)"
 msgstr "نخلة التمر (قديم)"
 
-#: ../../data/world/immovables/trees/palm_date/init.lua:94
+#: ../../data/world/immovables/trees/palm_date/old/init.lua:10
 msgid "Date Palm"
 msgstr "نخلة التمر"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:14
-msgid "Oil Palm (Sapling)"
-msgstr "نخيل الزيت (شتلة)"
+#: ../../data/world/immovables/trees/palm_date/pole/init.lua:9
+msgid "Date Palm (Pole)"
+msgstr "نخلة التمر (قطب)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:39
-msgid "Oil Palm (Pole)"
-msgstr "نخيل الزيت (قطب)"
+#: ../../data/world/immovables/trees/palm_date/sapling/init.lua:9
+msgid "Date Palm (Sapling)"
+msgstr "نخلة التمر (شتلة)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:65
+#: ../../data/world/immovables/trees/palm_oil/mature/init.lua:9
 msgid "Oil Palm (Mature)"
 msgstr "نخيل الزيت (بالغ)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:94
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:9
 msgid "Oil Palm (Old)"
 msgstr "نخيل الزيت (قديم)"
 
-#: ../../data/world/immovables/trees/palm_oil/init.lua:95
+#: ../../data/world/immovables/trees/palm_oil/old/init.lua:10
 msgid "Oil Palm"
 msgstr "نخيل الزيت"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:14
-msgid "Roystonea regia Palm (Sapling)"
-msgstr "نخيل رويستونيا ريجيا (شتلة)"
+#: ../../data/world/immovables/trees/palm_oil/pole/init.lua:9
+msgid "Oil Palm (Pole)"
+msgstr "نخيل الزيت (قطب)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:39
-msgid "Roystonea regia Palm (Pole)"
-msgstr "نخيل رويستونيا ريجيا (قطب)"
+#: ../../data/world/immovables/trees/palm_oil/sapling/init.lua:9
+msgid "Oil Palm (Sapling)"
+msgstr "نخيل الزيت (شتلة)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:65
+#: ../../data/world/immovables/trees/palm_roystonea/mature/init.lua:9
 msgid "Roystonea regia Palm (Mature)"
 msgstr "نخيل رويستونيا ريجيا (بالغ)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:90
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:9
 msgid "Roystonea regia Palm (Old)"
 msgstr "نخيل رويستونيا ريجيا (قديم)"
 
-#: ../../data/world/immovables/trees/palm_roystonea/init.lua:91
+#: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:10
 msgid "Roystonea regia Palm"
 msgstr "نخيل رويستونيا ريجيا"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:14
-msgid "Rowan (Sapling)"
-msgstr "شجرة السمن (شتلة)"
+#: ../../data/world/immovables/trees/palm_roystonea/pole/init.lua:9
+msgid "Roystonea regia Palm (Pole)"
+msgstr "نخيل رويستونيا ريجيا (قطب)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:39
-msgid "Rowan (Pole)"
-msgstr "شجرة السمن (قطب)"
+#: ../../data/world/immovables/trees/palm_roystonea/sapling/init.lua:9
+msgid "Roystonea regia Palm (Sapling)"
+msgstr "نخيل رويستونيا ريجيا (شتلة)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:65
+#: ../../data/world/immovables/trees/rowan/mature/init.lua:9
 msgid "Rowan (Mature)"
 msgstr "شجرة السمن (بالغ)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:93
+#: ../../data/world/immovables/trees/rowan/old/init.lua:9
 msgid "Rowan (Old)"
 msgstr "شجرة السمن (قديم)"
 
-#: ../../data/world/immovables/trees/rowan/init.lua:94
+#: ../../data/world/immovables/trees/rowan/old/init.lua:10
 msgid "Rowan"
 msgstr "شجرة السمن"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:14
-msgid "Spruce (Sapling)"
-msgstr "تنوب (شتلة)"
+#: ../../data/world/immovables/trees/rowan/pole/init.lua:9
+msgid "Rowan (Pole)"
+msgstr "شجرة السمن (قطب)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:39
-msgid "Spruce (Pole)"
-msgstr "تنوب (قطب)"
+#: ../../data/world/immovables/trees/rowan/sapling/init.lua:9
+msgid "Rowan (Sapling)"
+msgstr "شجرة السمن (شتلة)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:65
+#: ../../data/world/immovables/trees/spruce/mature/init.lua:9
 msgid "Spruce (Mature)"
 msgstr "تنوب (بالغ)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:90
+#: ../../data/world/immovables/trees/spruce/old/init.lua:9
 msgid "Spruce (Old)"
 msgstr "تنوب (قديم)"
 
-#: ../../data/world/immovables/trees/spruce/init.lua:91
+#: ../../data/world/immovables/trees/spruce/old/init.lua:10
 msgid "Spruce"
 msgstr "تنوب"
 
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:15
-msgid "Twine Tree (Sapling)"
-msgstr "الشجرة المتعرجة (شتلة)"
+#: ../../data/world/immovables/trees/spruce/pole/init.lua:9
+msgid "Spruce (Pole)"
+msgstr "تنوب (قطب)"
+
+#: ../../data/world/immovables/trees/spruce/sapling/init.lua:9
+msgid "Spruce (Sapling)"
+msgstr "تنوب (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:41
-msgid "Twine Tree (Pole)"
-msgstr "الشجرة المتعرجة (قطب)"
-
-#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:68
+#: ../../data/world/immovables/trees/twine/mature/init.lua:10
 msgid "Twine Tree (Mature)"
 msgstr "الشجرة المتعرجة (بالغ)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:94
+#: ../../data/world/immovables/trees/twine/old/init.lua:10
 msgid "Twine Tree (Old)"
 msgstr "الشجرة المتعرجة (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/twine/init.lua:96
+#: ../../data/world/immovables/trees/twine/old/init.lua:12
 msgid "Twine Tree"
 msgstr "الشجرة المتعرجة"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:15
-msgid "Green Umbrella Tree (Sapling)"
-msgstr "شجرة المظلة الخضراء (شتلة)"
+#: ../../data/world/immovables/trees/twine/pole/init.lua:10
+msgid "Twine Tree (Pole)"
+msgstr "الشجرة المتعرجة (قطب)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:41
-msgid "Green Umbrella Tree (Pole)"
-msgstr "شجرة المظلة الخضراء (قطب)"
+#: ../../data/world/immovables/trees/twine/sapling/init.lua:10
+msgid "Twine Tree (Sapling)"
+msgstr "الشجرة المتعرجة (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_green/mature/init.lua:10
 msgid "Green Umbrella Tree (Mature)"
 msgstr "شجرة المظلة الخضراء (بالغة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:94
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:10
 msgid "Green Umbrella Tree (Old)"
 msgstr "شجرة المظلة الخضراء (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_green/init.lua:96
+#: ../../data/world/immovables/trees/umbrella_green/old/init.lua:12
 msgid "Green Umbrella Tree"
 msgstr "شجرة المظلة الخضراء"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:15
-msgid "Red Umbrella Tree (Sapling)"
-msgstr "شجرة المظلة الحمراء (شتلة)"
+#: ../../data/world/immovables/trees/umbrella_green/pole/init.lua:10
+msgid "Green Umbrella Tree (Pole)"
+msgstr "شجرة المظلة الخضراء (قطب)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:41
-msgid "Red Umbrella Tree (Pole)"
-msgstr "شجرة المظلة الحمراء (قطب)"
+#: ../../data/world/immovables/trees/umbrella_green/sapling/init.lua:10
+msgid "Green Umbrella Tree (Sapling)"
+msgstr "شجرة المظلة الخضراء (شتلة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:68
+#: ../../data/world/immovables/trees/umbrella_red/mature/init.lua:10
 msgid "Red Umbrella Tree (Mature)"
 msgstr "شجرة المظلة الحمراء (بالغة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:97
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:10
 msgid "Red Umbrella Tree (Old)"
 msgstr "شجرة المظلة الحمراء (قديمة)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
-#: ../../data/world/immovables/trees/umbrella_red/init.lua:99
+#: ../../data/world/immovables/trees/umbrella_red/old/init.lua:12
 msgid "Red Umbrella Tree"
 msgstr "شجرة المظلة الحمراء"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/pole/init.lua:10
+msgid "Red Umbrella Tree (Pole)"
+msgstr "شجرة المظلة الحمراء (قطب)"
+
+#. TRANSLATORS: This is a fictitious tree. Be creative if you want.
+#: ../../data/world/immovables/trees/umbrella_red/sapling/init.lua:10
+msgid "Red Umbrella Tree (Sapling)"
+msgstr "شجرة المظلة الحمراء (شتلة)"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:121

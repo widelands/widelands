@@ -4,7 +4,7 @@
 # 
 # Translators:
 # C138, 2021
-# Renaud Bouchard, 2021
+# Renaud Bouchard, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Renaud Bouchard, 2021\n"
+"Last-Translator: Renaud Bouchard, 2022\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid "Shovels"
-msgstr ""
+msgstr "Pelles"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
-msgstr ""
+msgstr "Battez Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
@@ -59,7 +59,7 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the north, who is fighting under the red banner."
-msgstr ""
+msgstr "Törver est l'ennemi dans le nord, il se bat sous la bannière rouge."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -67,7 +67,7 @@ msgstr "Construire un port"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr ""
+msgstr "Construisez un port dans le Nord"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
@@ -91,11 +91,11 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr ""
+msgstr "Construire entrepôt"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr ""
+msgstr "Construire un entrepôt près de la sentinelle pirate"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -112,7 +112,7 @@ msgstr "Apportez des pelles"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr ""
+msgstr "Apportez quatre pelles au nouvel entrepôt"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
@@ -126,11 +126,11 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
 msgid "Defeat the pirates"
-msgstr ""
+msgstr "Défaire les pirates"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr ""
+msgstr "Défaire les pirates"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
@@ -140,7 +140,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr ""
+msgstr "Libérez notre éclaireur des pirates"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
@@ -148,11 +148,11 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr ""
+msgstr "Voici où l'éclaireur est retenu captif."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
-msgstr ""
+msgstr "Battez Hjalmar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
-msgstr ""
+msgstr "Battez Runar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
@@ -198,11 +198,11 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr ""
+msgstr "Votre conseiller"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr ""
+msgstr "Au long de la rivière"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
-msgstr ""
+msgstr "Notre ennemi nordique"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
@@ -261,7 +261,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the north"
-msgstr ""
+msgstr "Péril venant du nord"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
@@ -283,7 +283,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr ""
+msgstr "En bonne voie"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
@@ -295,7 +295,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
-msgstr ""
+msgstr "Le grand lac"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
@@ -313,7 +313,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr ""
+msgstr "A la recherche de l'or"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
@@ -331,7 +331,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr "Trouvez un trésor"
+msgstr "A trouvé un trésor"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -351,7 +351,7 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Séchage des marais"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -399,7 +399,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Pirates en fuite"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -421,7 +421,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr ""
+msgstr "Notre éclaireur a été capturé"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -439,7 +439,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr ""
+msgstr "Île conquise"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -466,7 +466,7 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "La dernière frontière"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -486,7 +486,7 @@ msgstr "Victoire!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Sire, mes félicitations !"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -497,4 +497,4 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Votre nom restera dans les mémoires à jamais."
