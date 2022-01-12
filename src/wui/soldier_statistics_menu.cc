@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2021 by the Widelands Development Team
+ * Copyright (C) 2020-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					if (attack || evade) {
 						hbox1->add_space(8);
 						hbox2->add_space(8);
-						hbox3->add_inf_space();
+						hbox3->add_space(8);
 					}
 					UI::Icon* icon1 =
 					   new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_attack_level_pic(attack));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2021 by the Widelands Development Team
+ * Copyright (C) 2002-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -623,8 +623,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf MainMenu::image_pos(const Image& i) {
-	return UI::fit_image(i.width(), i.height(), get_w(), get_h());
+inline Rectf MainMenu::image_pos(const Image& i, const bool crop) {
+	return UI::fit_image(i.width(), i.height(), get_w(), get_h(), crop);
 }
 
 static inline void
@@ -729,7 +729,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
                                1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
                                1.f;
-		do_draw_image(r, image_pos(*splashscreen_), *splashscreen_, opacity);
+		do_draw_image(r, image_pos(*splashscreen_, false), *splashscreen_, opacity);
 	} else {
 		const unsigned opacity =
 		   255 - 255.f * (time - init_time_ - kInitialFadeoutDelay - kInitialFadeoutDuration) /
