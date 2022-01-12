@@ -890,10 +890,11 @@ function building_help_production_section(tribe, building_description)
    local result = ""
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       --result = result .. h3(_"Produces:")
+      local checked_programs ={}
       for i, ware_description in ipairs(building_description.output_ware_types) do
          programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
          for j, program in ipairs(programs) do
-            if (ware_counters[program] > 0) then
+            if (ware_counters[program] > 0) and not checked_programs[program] then
                if (ware_counters[program] == 1) then
                   -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
                   result = result .. h3(_"Ware produced:")
@@ -904,6 +905,7 @@ function building_help_production_section(tribe, building_description)
                result = result .. ware_strings[program]
                result = result .. help_consumed_wares_workers(tribe, building_description, program)
             end
+         checked_programs[program] = true
          end
       end
    end
