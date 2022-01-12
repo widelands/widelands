@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2021 by the Widelands Development Team
+ * Copyright (C) 2007-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +96,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 		const float w = bg.width();
 		const float h = bg.height();
 		rt.blitrect_scale(
-		   fit_image(w, h, get_w(), get_h()), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
+		   fit_image(w, h, get_w(), get_h(), true), &bg, Recti(0, 0, w, h), 1.f, BlendMode::UseAlpha);
 	}
 
 	// No float division to avoid Texture subsampling.
