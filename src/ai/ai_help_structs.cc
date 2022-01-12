@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2021 by the Widelands Development Team
+ * Copyright (C) 2009-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -328,6 +328,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      preferred(false),
      enemy_nearby(false),
      enemy_accessible_(false),
+     invalidated(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),
      enemy_owned_land_nearby(0U),

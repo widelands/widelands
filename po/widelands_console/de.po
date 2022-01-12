@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
-"PO-Revision-Date: 2022-01-04 21:10+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"PO-Revision-Date: 2022-01-09 20:30+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -49,18 +49,18 @@ msgid "Options:"
 msgstr "Optionen:"
 
 #: ../../src/wlapplication_messages.cc:56
-msgid "Use the specified directory for the widelands data files."
-msgstr "Verwende das angegebene Verzeichnis für die widelands Dateien."
+msgid "Use the specified directory for the Widelands data files."
+msgstr "Verwende das angegebene Verzeichnis für die Widelands Dateien."
 
 #: ../../src/wlapplication_messages.cc:58
 #, c-format
 msgid ""
-"Use the specified directory for widelands config files, savegames and "
+"Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
 msgstr "Verwende das angegebene Verzeichnis für Widelands Konfigurationsdateien, Speicherungen und Replays. Standard ist `%s`."
 
 #: ../../src/wlapplication_messages.cc:63
-msgid "Use the specified directory for the widelands locale files."
+msgid "Use the specified directory for the Widelands locale files."
 msgstr "Verwende das angegebene Verzeichnis für Widelands Sprachdateien."
 
 #: ../../src/wlapplication_messages.cc:67
