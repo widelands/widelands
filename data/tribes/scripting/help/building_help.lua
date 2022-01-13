@@ -552,7 +552,7 @@ function building_help_dependencies_production(tribe, building_description)
    end
    if (outgoing ~= "") then result = result .. h3(_"Outgoing:") .. outgoing end
    if (result == "") then result = p(_"None") end
-   return result
+   return h2(_"Dependencies") .. result
 end
 
 -- RST
@@ -635,7 +635,7 @@ end
 --
 function building_help_building_section(building_description)
    -- TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
-   local result = ""
+   local result = h2(_"Building requirements")
 
    -- Space required
    if (building_description.is_mine) then
@@ -819,7 +819,7 @@ function building_help_crew_section(tribe, building_description)
 
    if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then
 
-      result = result .. h3(_"Crew required:")
+      result = result .. h2(_"Workers") .. h3(_"Crew required:")
 
       local worker_description = building_description.working_positions[1]
       local becomes_description = nil
@@ -888,11 +888,17 @@ end
 --
 function building_help_production_section(tribe, building_description)
    -- Produced items
-   local result = ""
+   local result = h2(_"Production")
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       local checked_programs ={}
       for i, ware_description in ipairs(building_description.output_ware_types) do
          programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
+         -- check if the ware is collected (no producing program)
+         if #programs == 0 then
+            result = result .. h3(_"Ware produced:")
+            result = result .. help_ware_amount_line(ware_description, 1)
+            break
+         end
          for j, program in ipairs(programs) do
             if (ware_counters[program] > 0) and not checked_programs[program] then
                if (ware_counters[program] == 1) then
@@ -945,13 +951,9 @@ end
 function building_help(tribe, building_description)
    if (building_description.type_name == "productionsite") then
       return building_help_general_string(tribe, building_description) ..
-         h2(_"Dependencies") ..
          building_help_dependencies_production(tribe, building_description) ..
-         h2(_"Workers") ..
          building_help_crew_section(tribe, building_description) ..
-         h2(_"Production") ..
          building_help_production_section(tribe, building_description) ..
-         h2(_"Building requirements") ..
          building_help_building_section(building_description)
    elseif (building_description.type_name == "militarysite") then
       return building_help_general_string(tribe, building_description) ..
@@ -960,19 +962,15 @@ function building_help(tribe, building_description)
       if (building_description.is_port) then
          return building_help_general_string(tribe, building_description) ..
             -- TODO(GunChleoc) expedition costs here?
-            h2(_"Building requirements") ..
             building_help_building_section(building_description)
       else
          return building_help_general_string(tribe, building_description) ..
-            h2(_"Building requirements") ..
             building_help_building_section(building_description)
       end
    elseif (building_description.type_name == "trainingsite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_training(tribe, building_description) ..
-         h2(_"Workers") ..
          building_help_crew_section(tribe, building_description) ..
-         h2(_"Building requirements") ..
          building_help_building_section(building_description) ..building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then
