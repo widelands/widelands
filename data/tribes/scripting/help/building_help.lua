@@ -866,6 +866,7 @@ function building_help_crew_section(tribe, building_description)
       becomes_description = worker_description.becomes
 
       if (becomes_description) then
+         result = result .. h3(_"Experience levels")
          result = result .. help_worker_experience(worker_description, becomes_description)
       end
    end
@@ -889,7 +890,6 @@ function building_help_production_section(tribe, building_description)
    -- Produced items
    local result = ""
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
-      --result = result .. h3(_"Produces:")
       local checked_programs ={}
       for i, ware_description in ipairs(building_description.output_ware_types) do
          programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
@@ -913,7 +913,7 @@ function building_help_production_section(tribe, building_description)
          for j, program in ipairs(programs) do
             if (worker_counters[program] > 0) and not checked_programs[program] then
                -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
-               result = result .. h3(_"Recruited:")
+               result = result .. h3(_"Workers recruited:")
                result = result .. worker_strings[program]
                result = result .. help_consumed_wares_workers(tribe, building_description, program)
             end
@@ -947,11 +947,11 @@ function building_help(tribe, building_description)
       return building_help_general_string(tribe, building_description) ..
          h2(_"Dependencies") ..
          building_help_dependencies_production(tribe, building_description) ..
-         h2(_"Production") ..
+         h2(_"Workers") ..
          building_help_crew_section(tribe, building_description) ..
-         -- no h2 header so the next is part of previous h2-section
+         h2(_"Production") ..
          building_help_production_section(tribe, building_description) ..
-         h2(_"Building") ..
+         h2(_"Building requirements") ..
          building_help_building_section(building_description)
    elseif (building_description.type_name == "militarysite") then
       return building_help_general_string(tribe, building_description) ..
@@ -960,11 +960,11 @@ function building_help(tribe, building_description)
       if (building_description.is_port) then
          return building_help_general_string(tribe, building_description) ..
             -- TODO(GunChleoc) expedition costs here?
-            h2(_"Building") ..
+            h2(_"Building requirements") ..
             building_help_building_section(building_description)
       else
          return building_help_general_string(tribe, building_description) ..
-            h2(_"Building") ..
+            h2(_"Building requirements") ..
             building_help_building_section(building_description)
       end
    elseif (building_description.type_name == "trainingsite") then
@@ -972,7 +972,7 @@ function building_help(tribe, building_description)
          building_help_dependencies_training(tribe, building_description) ..
          h2(_"Workers") ..
          building_help_crew_section(tribe, building_description) ..
-         h2(_"Building") ..
+         h2(_"Building requirements") ..
          building_help_building_section(building_description) ..building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then

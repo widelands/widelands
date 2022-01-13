@@ -114,7 +114,7 @@ end
 
 function programs_workers_count(tribe, building, worker_description)
    local producing_programs = {}
--- Find out which programs in the building produce this worker
+   -- Find out which programs in the building produce this worker
    for j, program_name in ipairs(building.production_programs) do
       for worker, amount in pairs(building:recruited_workers(program_name)) do
          if (worker_description.name == worker) then
@@ -124,32 +124,32 @@ function programs_workers_count(tribe, building, worker_description)
    end
    
    -- Now collect all wares produced by the filtered programs
-   local produced_workers_strings = {}
-   local produced_workers_counters = {}
+   local recruited_workers_strings = {}
+   local recruited_workers_counters = {}
    for j, program_name in ipairs(producing_programs) do
-      local produced_workers_amount = {}
-      produced_workers_counters[program_name] = 0
+      local recruited_workers_amount = {}
+      recruited_workers_counters[program_name] = 0
       for worker, amount in pairs(building:recruited_workers(program_name)) do
-         if (produced_workers_amount[worker] == nil) then
-            produced_workers_amount[worker] = 0
+         if (recruited_workers_amount[worker] == nil) then
+            recruited_workers_amount[worker] = 0
          end
-         produced_workers_amount[worker] = produced_workers_amount[worker] + amount
-         produced_workers_counters[program_name] = produced_workers_counters[program_name] + amount
+         recruited_workers_amount[worker] = recruited_workers_amount[worker] + amount
+         recruited_workers_counters[program_name] = recruited_workers_counters[program_name] + amount
       end
-      local produced_workers_string = ""
-      for worker, amount in pairs(produced_workers_amount) do
+      local recruited_workers_string = ""
+      for worker, amount in pairs(recruited_workers_amount) do
          local worker_descr = wl.Game():get_worker_description(worker)
-         produced_workers_string = produced_workers_string
+         recruited_workers_string = recruited_workers_string
             .. help_ware_amount_line(worker_descr, amount)
       end
-      produced_workers_strings[program_name] = produced_workers_string
+      recruited_workers_strings[program_name] = recruited_workers_string
    end
    -- check for doubled entries (identical consumed and produced workers)
    local deduplicated_programs = {}
    for j, prog1_name in ipairs(producing_programs) do
       local duplicate = false
       for i, prog2_name in ipairs(deduplicated_programs) do
-         if produced_workers_strings[prog1_name] == produced_workers_strings[prog2_name] and
+         if recruited_workers_strings[prog1_name] == recruited_workers_strings[prog2_name] and
                help_consumed_wares_workers(tribe, building, prog1_name) ==
                help_consumed_wares_workers(tribe, building, prog2_name) then
             duplicate = true
@@ -164,11 +164,11 @@ function programs_workers_count(tribe, building, worker_description)
 --    for k,v in pairs(deduplicated_programs) do
 --       print("Programs: ", k, v)
 --    end
---    for k,v in pairs(produced_workers_counters) do
+--    for k,v in pairs(recruited_workers_counters) do
 --       print("workers counter: ", k,v)
 --    end
---    for k,v in pairs(produced_workers_strings) do
+--    for k,v in pairs(recruited_workers_strings) do
 --       print("worker strings: ", k,v)
 --   end
-   return deduplicated_programs, produced_workers_counters, produced_workers_strings
+   return deduplicated_programs, recruited_workers_counters, recruited_workers_strings
 end
