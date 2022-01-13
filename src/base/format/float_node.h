@@ -123,8 +123,8 @@ struct FloatNode : FormatNode {
 		}
 
 		size_t nr_digits_before_decimal = number_of_digits(int_part);
-		size_t required_width = nr_digits_before_decimal +
-		                        (current_precision > 0 ? current_precision + 1 : 0);
+		size_t required_width =
+		   nr_digits_before_decimal + (current_precision > 0 ? current_precision + 1 : 0);
 		if (is_negative || (flags_ & kNumberSign) != 0) {
 			++required_width;
 		}
