@@ -41,7 +41,7 @@ constexpr int64_t kMaxInt = std::numeric_limits<int64_t>::max();
 constexpr unsigned kInfinitePrecision = std::numeric_limits<unsigned>::max();
 constexpr unsigned kDefaultFloatPrecision = 6;
 
-// Strip trailing zeroes only if at least the next two digits would also be 0.
+// Don't use localized + sign for 0.0 if at least the next two digits would also be 0.
 constexpr double kDynamicPrecisionExtra = 0.005;
 
 struct AbstractNode {

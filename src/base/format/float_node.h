@@ -51,13 +51,12 @@ struct FloatNode : FormatNode {
 			rounding_ /= 10.;
 			precision_multiplier_ *= 10.;
 		}
-		check_int_extra_precision_ = kDynamicPrecisionExtra / precision_multiplier_;
+		check_zero_extra_precision_ = kDynamicPrecisionExtra / precision_multiplier_;
 	}
 
 	char* append(char* out, const ArgType t, Argument arg_u, const bool localize) const override {
 		int64_t int_part;
 		int64_t fractional = 0;
-		bool is_int = true;
 		bool is_negative = false;
 		bool is_zero = false;
 		size_t current_precision = precision_;
@@ -67,16 +66,19 @@ struct FloatNode : FormatNode {
 			double rounded;
 			double frac;
 
-			is_negative = (arg_u.float_val < 0);
-			if (is_negative) {
+			if (arg_u.float_val < 0) {
+				is_negative = true;
 				rounded = -arg_u.float_val;
 			} else {
 				rounded = arg_u.float_val;
 			}
-			is_zero = (rounded < check_int_extra_precision_) && ((flags_ & kNumberSign) != 0);
-			is_negative = is_negative && !is_zero;
-			rounded += rounding_;
 
+			if ((flags_ & kNumberSign) != 0) {
+				is_zero = (rounded < check_zero_extra_precision_);
+				is_negative = is_negative && !is_zero;
+			}
+
+			rounded += rounding_;
 			if (rounded > kMaxInt) {
 				throw wexception("Floating point value too large: %f", arg_u.float_val);
 			}
@@ -84,26 +86,19 @@ struct FloatNode : FormatNode {
 
 			frac = (rounded - int_part) * precision_multiplier_;
 			fractional = static_cast<int64_t>(frac);
-			is_int = (fractional == 0);
 			if (dynamic_precision_) {
-				if (is_int) {
-					if (frac < check_int_extra_precision_) {
-						current_precision = 0;
-					}
-				} else if
-				     // Undo rounding and check that next decimal digits would also be 0.
-				     (abs(frac - fractional - 0.5) < kDynamicPrecisionExtra) {
-					int64_t f = fractional;
-					while ((f % 10 == 0) && (current_precision > 0)) {
-						f /= 10;
-						--current_precision;
-					}
+				while ((fractional % 10 == 0) && (current_precision > 0)) {
+					fractional /= 10;
+					--current_precision;
 				}
 			}
 			break;
 		case ArgType::kSigned:
 			int_part = arg_u.signed_val;
-			is_negative = (int_part < 0);
+			if (int_part < 0) {
+				is_negative = true;
+				int_part = -int_part;
+			}
 			is_zero = (int_part == 0);
 			if (dynamic_precision_) {
 				current_precision = 0;
@@ -127,53 +122,20 @@ struct FloatNode : FormatNode {
 			   "Wrong argument type: expected float/double, found %s", to_string(t).c_str());
 		}
 
-		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
-			// The easy case: Just start writing.
-			size_t written = 0;
-
-			// Write the sign
-			if (is_negative) {
-				out = write_minus_sign(out, localize);
-				++written;
-			} else if ((flags_ & kNumberSign) != 0) {
-				out = write_forced_plus_sign(out, localize, is_zero);
-				++written;
-			}
-
-			// Write the integer part
-			written = write_digits(out, int_part);
-			out += written;
-
-			if (current_precision > 0) {
-				out = write_decimal_separator(out, localize);
-				++written;
-
-				// Write the decimals
-				write_digits_w(out, fractional, current_precision);
-				out += current_precision;
-				written += current_precision;
-			}
-
-			for (size_t padding = min_width_ - written; padding > 0; --padding) {
-				*out = ' ';
-				++out;
-			}
-
-			return out;
-		}
-
-		// The more complex case: We want a right-aligned string with a given minimum width,
-		// padded with leading whitespace or zeroes. So we need the width first:
 		size_t nr_digits_before_decimal = number_of_digits(int_part);
 		size_t required_width = nr_digits_before_decimal +
-		                        current_precision > 0 ? current_precision + 1 : 0;
+		                        (current_precision > 0 ? current_precision + 1 : 0);
 		if (is_negative || (flags_ & kNumberSign) != 0) {
 			++required_width;
 		}
+		size_t padding = 0;
+		if (min_width_ > required_width) {
+			padding = min_width_ - required_width;
+		}
 
-		// Pad with spaces as needed
-		if ((flags_ & kPadWith0) == 0) {
-			for (size_t padding = min_width_ - required_width; padding > 0; --padding) {
+		// Right aligned, padding with spaces
+		if ((flags_ & (kPadWith0 | kLeftAlign)) == 0) {
+			for (; padding > 0; --padding) {
 				*out = ' ';
 				++out;
 			}
@@ -187,7 +149,7 @@ struct FloatNode : FormatNode {
 
 		// Pad with zeroes as needed
 		if ((flags_ & kPadWith0) != 0) {
-			for (size_t padding = min_width_ - required_width; padding > 0; --padding) {
+			for (; padding > 0; --padding) {
 				*out = '0';
 				++out;
 			}
@@ -205,6 +167,12 @@ struct FloatNode : FormatNode {
 			out += current_precision;
 		}
 
+		// No need to check for left aligned: Other cases already zeroed the padding.
+		for (; padding > 0; --padding) {
+			*out = ' ';
+			++out;
+		}
+
 		return out;
 	}
 
@@ -214,7 +182,7 @@ private:
 	bool dynamic_precision_;
 	double rounding_;
 	double precision_multiplier_;
-	double check_int_extra_precision_;
+	double check_zero_extra_precision_;
 };
 
 }  // namespace format_impl

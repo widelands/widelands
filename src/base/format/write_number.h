@@ -63,7 +63,8 @@ inline size_t write_digits(char* out, uint64_t arg, bool hex = false) {
 	return w;
 }
 
-// Only counts as a single display character, regardless of strlen.
+// Only counts as a single display character, even if it requires a UTF-8 multi-byte
+// character sequence for storage.
 // We return the next position, display width counter should be increased
 // by 1 in caller when needed.
 inline char* write_minus_sign(char* out, bool localize) {
@@ -79,7 +80,8 @@ inline char* write_minus_sign(char* out, bool localize) {
 	return out;
 }
 
-// Only counts as a single display character, regardless of strlen.
+// Only counts as a single display character, even if it requires a UTF-8 multi-byte
+// character sequence for storage.
 // We return the next position, display width counter should be increased
 // by 1 in caller when needed.
 inline char* write_forced_plus_sign(char* out, bool localize, bool is_zero = false) {

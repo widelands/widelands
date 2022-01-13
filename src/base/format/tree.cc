@@ -34,7 +34,7 @@ char Tree::buffer_[Tree::kBufferSize];
 const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
 const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
-const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision, false);
+const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision, true);
 const UintNode pointer_node_(kNone, 0, true, true, false);
 
 std::string to_string(const AbstractNode::ArgType t) {
