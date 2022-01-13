@@ -27,7 +27,7 @@
 namespace format_impl {
 
 // Always write exactly `width` characters.
-// Can be used for 0 padding right aligned, but make sure that it fits!
+// Can be used for 0 padding right aligned (decimal part of float), but make sure that it fits!
 inline void write_digits_w(char* out, uint64_t arg, const size_t width, bool hexadecimal = false,
                            bool uppercase = false) {
 	uint64_t base = hexadecimal ? 16 : 10;
@@ -56,17 +56,10 @@ inline size_t number_of_digits(uint64_t arg, bool hexadecimal = false) {
 	return n;
 }
 
-// Write as many characters, as required (use for left aligned)
-inline size_t write_digits(char* out, uint64_t arg, bool hex = false) {
-	size_t w = number_of_digits(arg, hex);
-	write_digits_w(out, arg, w, hex);
-	return w;
-}
-
 // Only counts as a single display character, even if it requires a UTF-8 multi-byte
 // character sequence for storage.
 // We return the next position, display width counter should be increased
-// by 1 in caller when needed.
+// by 1 in caller.
 inline char* write_minus_sign(char* out, bool localize) {
 	if (localize) {
 		for (const char* c = kLocalizedMinusSign; *c; ++c) {
@@ -83,7 +76,7 @@ inline char* write_minus_sign(char* out, bool localize) {
 // Only counts as a single display character, even if it requires a UTF-8 multi-byte
 // character sequence for storage.
 // We return the next position, display width counter should be increased
-// by 1 in caller when needed.
+// by 1 in caller.
 inline char* write_forced_plus_sign(char* out, bool localize, bool is_zero = false) {
 	if (localize && is_zero) {
 		for (const char* c = kDigitWidthSpace; *c; ++c) {
