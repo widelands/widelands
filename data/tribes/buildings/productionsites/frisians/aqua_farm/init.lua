@@ -82,7 +82,7 @@ descriptions:new_productionsite_type {
             "callworker=fish_in_pond",
          },
       },
-      encyclopedia_breed_fish = {
+      encyclopedia = {
          -- just a dummy program to fix encyclopedia
          descname = "encyclopedia",
          actions = {
