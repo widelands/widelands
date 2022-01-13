@@ -122,7 +122,7 @@ function programs_workers_count(tribe, building, worker_description)
          end
       end
    end
-   
+
    -- Now collect all wares produced by the filtered programs
    local recruited_workers_strings = {}
    local recruited_workers_counters = {}
