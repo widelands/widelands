@@ -95,3 +95,80 @@ function programs_wares_count(tribe, building, ware_description)
 --   end
    return deduplicated_programs, produced_wares_counters, produced_wares_strings
 end
+
+-- RST
+-- .. function:: programs_workers_count(tribe, building, worker_description)
+--
+--    Examines the :ref:`production site programs <productionsite_programs>`
+--    and returns three tables.
+--
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that consumes the ware
+--    :arg building: The :class:`wl.map.BuildingDescription`
+--    :arg worker_description: A :class:`wl.map.WorkerDecription`
+--
+--    :returns (in this order):
+--       * An :class:`array` of program_names this production site has
+--       * A :class:`table` of ``{program_name,workers_count}``
+--       * A :class:`table` of ``{program_name,formatted_string(s)}``
+--
+
+function programs_workers_count(tribe, building, worker_description)
+   local producing_programs = {}
+-- Find out which programs in the building produce this worker
+   for j, program_name in ipairs(building.production_programs) do
+      for worker, amount in pairs(building:recruited_workers(program_name)) do
+         if (worker_description.name == worker) then
+            table.insert(producing_programs, program_name)
+         end
+      end
+   end
+   
+   -- Now collect all wares produced by the filtered programs
+   local produced_workers_strings = {}
+   local produced_workers_counters = {}
+   for j, program_name in ipairs(producing_programs) do
+      local produced_workers_amount = {}
+      produced_workers_counters[program_name] = 0
+      for worker, amount in pairs(building:recruited_workers(program_name)) do
+         if (produced_workers_amount[worker] == nil) then
+            produced_workers_amount[worker] = 0
+         end
+         produced_workers_amount[worker] = produced_workers_amount[worker] + amount
+         produced_workers_counters[program_name] = produced_workers_counters[program_name] + amount
+      end
+      local produced_workers_string = ""
+      for worker, amount in pairs(produced_workers_amount) do
+         local worker_descr = wl.Game():get_worker_description(worker)
+         produced_workers_string = produced_workers_string
+            .. help_ware_amount_line(worker_descr, amount)
+      end
+      produced_workers_strings[program_name] = produced_workers_string
+   end
+   -- check for doubled entries (identical consumed and produced workers)
+   local deduplicated_programs = {}
+   for j, prog1_name in ipairs(producing_programs) do
+      local duplicate = false
+      for i, prog2_name in ipairs(deduplicated_programs) do
+         if produced_workers_strings[prog1_name] == produced_workers_strings[prog2_name] and
+               help_consumed_wares_workers(tribe, building, prog1_name) ==
+               help_consumed_wares_workers(tribe, building, prog2_name) then
+            duplicate = true
+            break
+         end
+      end
+      if not duplicate then
+         table.insert(deduplicated_programs, prog1_name)
+      end
+   end
+--    print("Building: ".. building.name, "worker: ".. worker_description.name)
+--    for k,v in pairs(deduplicated_programs) do
+--       print("Programs: ", k, v)
+--    end
+--    for k,v in pairs(produced_workers_counters) do
+--       print("workers counter: ", k,v)
+--    end
+--    for k,v in pairs(produced_workers_strings) do
+--       print("worker strings: ", k,v)
+--   end
+   return deduplicated_programs, produced_workers_counters, produced_workers_strings
+end

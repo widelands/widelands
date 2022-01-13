@@ -908,6 +908,18 @@ function building_help_production_section(tribe, building_description)
          checked_programs[program] = true
          end
       end
+      for i, worker_description in ipairs(building_description.output_worker_types) do
+         programs, worker_counters, worker_strings = programs_workers_count(tribe, building_description, worker_description)
+         for j, program in ipairs(programs) do
+            if (worker_counters[program] > 0) and not checked_programs[program] then
+               -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
+               result = result .. h3(_"Recruited:")
+               result = result .. worker_strings[program]
+               result = result .. help_consumed_wares_workers(tribe, building_description, program)
+            end
+         checked_programs[program] = true
+         end
+      end
    end
    local helptexts = building_description:helptexts(tribe.name)
    -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
