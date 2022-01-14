@@ -26,9 +26,9 @@
 
 namespace format_impl {
 
-// Always write exactly `width` characters.
+// Always writes exactly `width` characters.
 // Can be used for 0 padding right aligned (decimal part of float), but make sure that it fits!
-inline void write_digits_w(
+inline char* write_digits(
    char* out, uint64_t arg, const size_t width, bool hexadecimal = false, bool uppercase = false) {
 	uint64_t base = hexadecimal ? 16 : 10;
 
@@ -43,6 +43,7 @@ inline void write_digits_w(
 		arg /= base;
 	}
 	assert(arg == 0);
+	return out + width;
 }
 
 // Get the required width

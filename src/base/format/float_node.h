@@ -156,15 +156,13 @@ struct FloatNode : FormatNode {
 		}
 
 		// Write the integer part
-		write_digits_w(out, int_part, nr_digits_before_decimal);
-		out += nr_digits_before_decimal;
+		out = write_digits(out, int_part, nr_digits_before_decimal);
 
 		if (current_precision > 0) {
 			out = write_decimal_separator(out, localize);
 
 			// Write the decimals
-			write_digits_w(out, fractional, current_precision);
-			out += current_precision;
+			out = write_digits(out, fractional, current_precision);
 		}
 
 		// No need to check for left aligned: Other cases already zeroed the padding.

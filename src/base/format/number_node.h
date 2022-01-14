@@ -79,7 +79,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			required_width += 2;
 		}
 		if (is_negative || (flags_ & kNumberSign) != 0) {
-			required_width += 1;
+			++required_width;
 		}
 
 		size_t padding = 0;
@@ -113,8 +113,7 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			}
 		}
 
-		write_digits_w(out, arg, nr_digits, hexadecimal_, uppercase_);
-		out += nr_digits;
+		out = write_digits(out, arg, nr_digits, hexadecimal_, uppercase_);
 
 		// No need to check for left aligned: Other cases already zeroed the padding.
 		for (; padding > 0; --padding) {
