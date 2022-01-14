@@ -13,15 +13,22 @@ then
   tempfile=$(mktemp)
 
   i=0
+  skipped=0
   for image in $(find "data" -name '*.png')
   do
     ((++i))
     printf "\r[%5d] %-100s " "$i" "$image"
     pngquant 256 < "$image" > "$tempfile"
-    mv "$tempfile" "$image"
+    if [ $(wc -c < "$tempfile") -lt $(wc -c < "$image") ]
+    then
+      mv "$tempfile" "$image"
+    else
+      ((++skipped))
+    fi
   done
 fi
 
-echo
+printf "\n%d images converted, %d images skipped.\n\n" $((i-skipped)) $skipped
+
 echo "Running other tools..."
-./utils/optimize_pngs.py
+./utils/optimize_pngs.py  # NOCOM
