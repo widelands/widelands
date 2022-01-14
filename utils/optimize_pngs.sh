@@ -31,4 +31,4 @@ fi
 printf "\n%d images converted, %d images skipped.\n\n" $((i-skipped)) $skipped
 
 echo "Running other tools..."
-./utils/optimize_pngs.py  # NOCOM
+./utils/optimize_pngs.py
