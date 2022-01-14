@@ -24,6 +24,7 @@ function stable_save(game, savename, desired_speed)
       counter = counter + 1
    end
 
+   sleep(1000)
    game.desired_speed = desired_speed
    sleep(100)
 end
