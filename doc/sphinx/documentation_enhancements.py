@@ -35,8 +35,11 @@ class LuaClass:
         return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
     def get_graphviz_link(self):
-        html_link = 'href="../{}#{}", target="_parent"'.format(
-            self.outfile.replace('.rst', '.html'), self.name.lower())
+        html_link = 'href="../{folder}/index.html{anchor}",\
+            target="_parent"'.format(
+            folder=self.outfile.replace('.rst', ''),
+            anchor='#{}'.format(self.name.lower())
+        )
         return html_link
 
     def print_data(self):
