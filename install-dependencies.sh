@@ -83,8 +83,8 @@ if [ -z "$DISTRO" ]; then
       DISTRO="debian"
    elif [ -f /etc/solus-release ]; then
       DISTRO="solus"
-   elif [ -f /usr/local/Homebrew/bin/brew ]; then
-      DISTRO="homebrew"
+   elif brew --prefix > /dev/null 2>&1; then
+     DISTRO="homebrew"
    fi
 fi
 
