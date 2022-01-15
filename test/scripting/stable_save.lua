@@ -7,7 +7,7 @@ function stable_save(game, savename, desired_speed)
    print("###### stable_save: last save time " .. last_save_time)
 
    game.desired_speed = 1000
-   sleep(100)
+   sleep(1000)
    game:save(savename)
    game.desired_speed = 1000
 
