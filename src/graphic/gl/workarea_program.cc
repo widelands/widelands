@@ -223,18 +223,21 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			color = triangle_colors.at(Widelands::TCoords<>(field.fcoords, triangle_index));
 		}
 		if (color.a > 0) {
-			add_vertex(field, color, &vertices_);
-			add_vertex(fields_to_draw.at(field.brn_index), color, &vertices_);
-			add_vertex(
+			const FieldsToDraw::Field& f2 = fields_to_draw.at(field.brn_index);
+			const FieldsToDraw::Field& f3 =
 			   fields_to_draw.at(triangle_index == Widelands::TriangleIndex::D ? field.bln_index :
-                                                                              field.rn_index),
-			   color, &vertices_);
+                                                                                 field.rn_index);
+			if (!(field.obscured_by_slope && f2.obscured_by_slope && f3.obscured_by_slope)) {
+				add_vertex(field, color, &vertices_);
+				add_vertex(f2, color, &vertices_);
+				add_vertex(f3, color, &vertices_);
+			}
 		}
 	};
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-		if (field.brn_index != FieldsToDraw::kInvalidIndex && !field.obscured_by_slope) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
 			if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 				emplace_triangle(field, Widelands::TriangleIndex::D);
 			}

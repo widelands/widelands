@@ -2,7 +2,12 @@
 --                                 Player 2
 -- =======================================================================
 p2:allow_buildings("all")
-p2:forbid_buildings({"empire_quarry", "empire_hunters_house", "empire_tavern", "empire_coalmine", "empire_ironmine", "empire_goldmine", "empire_marblemine", "empire_vineyard", "empire_winery"})
+p2:forbid_buildings({
+   "empire_quarry", "empire_hunters_house", "empire_tavern", "empire_inn",
+   "empire_vineyard", "empire_winery",
+   "empire_coalmine", "empire_ironmine", "empire_goldmine", "empire_marblemine",
+   "empire_coalmine_deep", "empire_ironmine_deep", "empire_goldmine_deep", "empire_marblemine_deep",
+})
 p2:conquer(map.player_slots[2].starting_field, 9)
 p2:place_ship(map:get_field(73, 65))
 hq = p2:place_building("empire_port", map.player_slots[2].starting_field, false, true)

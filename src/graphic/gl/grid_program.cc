@@ -61,24 +61,21 @@ void GridProgram::draw(uint32_t texture_id, const FieldsToDraw& fields_to_draw, 
 
 	for (size_t current_index = 0; current_index < fields_to_draw.size(); ++current_index) {
 		const FieldsToDraw::Field& field = fields_to_draw.at(current_index);
-		if (field.obscured_by_slope) {
-			continue;
-		}
 
 		// Southwestern edge
-		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
+		if (field.bln_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.bln_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.bln_index));
 		}
 
 		// Southeastern edge
-		if (field.brn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.brn_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.brn_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.brn_index));
 		}
 
 		// Eastern edge
-		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
+		if (field.rn_index != FieldsToDraw::kInvalidIndex && !(field.obscured_by_slope && fields_to_draw.at(field.rn_index).obscured_by_slope)) {
 			add_vertex(fields_to_draw.at(current_index));
 			add_vertex(fields_to_draw.at(field.rn_index));
 		}

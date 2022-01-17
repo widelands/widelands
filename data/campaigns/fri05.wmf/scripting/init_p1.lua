@@ -2,7 +2,11 @@
 --                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
-p1:forbid_buildings({"frisians_quarry", "frisians_hunters_house", "frisians_tavern", "frisians_coalmine", "frisians_ironmine", "frisians_goldmine", "frisians_rockmine"})
+p1:forbid_buildings({
+   "frisians_quarry", "frisians_hunters_house", "frisians_tavern", "frisians_drinking_hall",
+   "frisians_coalmine", "frisians_ironmine", "frisians_goldmine", "frisians_rockmine",
+   "frisians_coalmine_deep", "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_rockmine_deep"
+})
 
 for i,f in ipairs({
    map:get_field(90, 114),

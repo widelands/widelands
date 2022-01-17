@@ -94,8 +94,7 @@ public:
 		kMessages,
 		kIBaseVisualizations,
 		kI18N,
-		kLog,
-		kLua,
+		kLog
 	};
 
 	static ID create_custom_mutex();
