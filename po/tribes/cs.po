@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-10 20:54+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"PO-Revision-Date: 2022-01-04 02:59+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1704,9 +1704,9 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kamenická dílna"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1715,17 +1715,17 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1738,9 +1738,9 @@ msgstr "vyrábění krumpáče"
 msgid "making a machete"
 msgstr "vyrábění mačety"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1748,9 +1748,9 @@ msgstr "vyrábění mačety"
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1765,9 +1765,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1921,8 +1921,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -4780,149 +4780,149 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr "Ječné pole (oseté)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:14
-msgid "Blueberry Bush (tiny)"
-msgstr "Borůvkový keř (drobný)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:38
-msgid "Blueberry Bush (small)"
-msgstr "Borůvkový keř (malý)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
 msgstr "Borůvkový keř (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/blueberry/ripe/init.lua:9
 msgid "Blueberry Bush (ripe)"
 msgstr "Borůvkový keř (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:14
-msgid "Black Currant (tiny)"
-msgstr "Černý rybíz (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/small/init.lua:9
+msgid "Blueberry Bush (small)"
+msgstr "Borůvkový keř (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
-msgid "Black Currant (small)"
-msgstr "Černý rybíz (malý)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/tiny/init.lua:9
+msgid "Blueberry Bush (tiny)"
+msgstr "Borůvkový keř (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
 msgstr "Černý rybíz (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
 msgstr "Černý rybíz (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:14
-msgid "Red Currant (tiny)"
-msgstr "Červený rybíz (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/small/init.lua:9
+msgid "Black Currant (small)"
+msgstr "Černý rybíz (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
-msgid "Red Currant (small)"
-msgstr "Červený rybíz (malý)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/tiny/init.lua:9
+msgid "Black Currant (tiny)"
+msgstr "Černý rybíz (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_red/medium/init.lua:9
 msgid "Red Currant (medium)"
 msgstr "Červený rybíz (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_red/ripe/init.lua:9
 msgid "Red Currant (ripe)"
 msgstr "Červený rybíz (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:14
-msgid "Desert Hackberry (tiny)"
-msgstr "Pouštní břestovec (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/small/init.lua:9
+msgid "Red Currant (small)"
+msgstr "Červený rybíz (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
-msgid "Desert Hackberry (small)"
-msgstr "Pouštní břestovec (malý)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/tiny/init.lua:9
+msgid "Red Currant (tiny)"
+msgstr "Červený rybíz (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
 msgstr "Pouštní břestovec (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
 msgstr "Pouštní břestovec (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:14
-msgid "Juniper (tiny)"
-msgstr "Jalovec (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
+msgid "Desert Hackberry (small)"
+msgstr "Pouštní břestovec (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
-msgid "Juniper (small)"
-msgstr "Jalovec (malý)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
+msgid "Desert Hackberry (tiny)"
+msgstr "Pouštní břestovec (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
 msgstr "Jalovec (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/juniper/ripe/init.lua:9
 msgid "Juniper (ripe)"
 msgstr "Jalovec (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:14
-msgid "Raspberry Bush (tiny)"
-msgstr "Maliník (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/small/init.lua:9
+msgid "Juniper (small)"
+msgstr "Jalovec (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
-msgid "Raspberry Bush (small)"
-msgstr "Maliník (malý)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/tiny/init.lua:9
+msgid "Juniper (tiny)"
+msgstr "Jalovec (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/raspberry/medium/init.lua:9
 msgid "Raspberry Bush (medium)"
 msgstr "Maliník (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/raspberry/ripe/init.lua:9
 msgid "Raspberry Bush (ripe)"
 msgstr "Maliník (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:14
-msgid "Sea Buckthorn (tiny)"
-msgstr "Rakytník (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/small/init.lua:9
+msgid "Raspberry Bush (small)"
+msgstr "Maliník (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
-msgid "Sea Buckthorn (small)"
-msgstr "Rakytník (malý)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/tiny/init.lua:9
+msgid "Raspberry Bush (tiny)"
+msgstr "Maliník (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/medium/init.lua:9
 msgid "Sea Buckthorn (medium)"
 msgstr "Rakytník (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/ripe/init.lua:9
 msgid "Sea Buckthorn (ripe)"
 msgstr "Rakytník (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
-msgid "Stink Shepherd’s Tree (tiny)"
-msgstr "Smradlavý pastýřský strom (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/small/init.lua:9
+msgid "Sea Buckthorn (small)"
+msgstr "Rakytník (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
-msgid "Stink Shepherd’s Tree (small)"
-msgstr "Smradlavý pastýřský strom (malý)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/tiny/init.lua:9
+msgid "Sea Buckthorn (tiny)"
+msgstr "Rakytník (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/medium/init.lua:9
 msgid "Stink Shepherd’s Tree (medium)"
 msgstr "Smradlavý pastýřský strom (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/ripe/init.lua:9
 msgid "Stink Shepherd’s Tree (ripe)"
 msgstr "Smradlavý pastýřský strom (zralý)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
-msgid "Strawberries (tiny)"
-msgstr "Jahodník (drobný)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/small/init.lua:9
+msgid "Stink Shepherd’s Tree (small)"
+msgstr "Smradlavý pastýřský strom (malý)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
-msgid "Strawberries (small)"
-msgstr "Jahodník (malý)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/tiny/init.lua:9
+msgid "Stink Shepherd’s Tree (tiny)"
+msgstr "Smradlavý pastýřský strom (drobný)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/strawberry/medium/init.lua:9
 msgid "Strawberries (medium)"
 msgstr "Jahodník (vzrostlý)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/strawberry/ripe/init.lua:9
 msgid "Strawberries (ripe)"
 msgstr "Jahodník (zralý)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/small/init.lua:9
+msgid "Strawberries (small)"
+msgstr "Jahodník (malý)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/tiny/init.lua:9
+msgid "Strawberries (tiny)"
+msgstr "Jahodník (drobný)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/harvested/init.lua:8
@@ -5099,116 +5099,116 @@ msgid "Reed Field (tiny)"
 msgstr "Rákosové pole (drobné)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:8
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:8
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:8
-#: ../../data/tribes/immovables/resi/empire/init.lua:8
-#: ../../data/tribes/immovables/resi/frisians/init.lua:8
-msgctxt "resource_indicator"
-msgid "No Resources"
-msgstr "Žádné suroviny"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:24
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:77
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:68
-#: ../../data/tribes/immovables/resi/empire/init.lua:68
-#: ../../data/tribes/immovables/resi/frisians/init.lua:77
+#: ../../data/tribes/immovables/resi/amazons/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Gold"
 msgstr "Něco zlata"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:40
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:108
-#: ../../data/tribes/immovables/resi/frisians/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Granite"
-msgstr "Něco žuly"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:56
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:169
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:148
-#: ../../data/tribes/immovables/resi/empire/init.lua:148
-#: ../../data/tribes/immovables/resi/frisians/init.lua:169
+#: ../../data/tribes/immovables/resi/amazons/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
 msgstr "Hodně zlata"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:72
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:188
-#: ../../data/tribes/immovables/resi/frisians/init.lua:215
+#: ../../data/tribes/immovables/resi/amazons/none/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/none/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/none/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/none/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/none/init.lua:8
+msgctxt "resource_indicator"
+msgid "No Resources"
+msgstr "Žádné suroviny"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr "Něco žuly"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
 msgstr "Hodně žuly"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:31
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:28
-#: ../../data/tribes/immovables/resi/empire/init.lua:28
-#: ../../data/tribes/immovables/resi/frisians/init.lua:31
-msgctxt "resource_indicator"
-msgid "Water"
-msgstr "Voda"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:48
-#: ../../data/tribes/immovables/resi/empire/init.lua:48
-#: ../../data/tribes/immovables/resi/frisians/init.lua:54
+#: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Coal"
 msgstr "Něco uhlí"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:100
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:88
-#: ../../data/tribes/immovables/resi/empire/init.lua:88
-#: ../../data/tribes/immovables/resi/frisians/init.lua:100
-msgctxt "resource_indicator"
-msgid "Some Iron"
-msgstr "Něco železa"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Crystals"
-msgstr "Nějaké krystaly"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:146
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:128
-#: ../../data/tribes/immovables/resi/empire/init.lua:128
-#: ../../data/tribes/immovables/resi/frisians/init.lua:146
+#: ../../data/tribes/immovables/resi/atlanteans/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
 msgstr "Hodně uhlí"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
-#: ../../data/tribes/immovables/resi/empire/init.lua:168
-#: ../../data/tribes/immovables/resi/frisians/init.lua:192
+#: ../../data/tribes/immovables/resi/atlanteans/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Iron"
+msgstr "Něco železa"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
 msgstr "Hodně železa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
+#: ../../data/tribes/immovables/resi/atlanteans/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Crystals"
+msgstr "Nějaké krystaly"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
 msgstr "Hodně krystalů"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:108
+#: ../../data/tribes/immovables/resi/atlanteans/water/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/water/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/water/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/water/init.lua:8
+msgctxt "resource_indicator"
+msgid "Water"
+msgstr "Voda"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Marble"
 msgstr "Něco mramoru"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:188
+#: ../../data/tribes/immovables/resi/empire/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
 msgstr "Hodně mramoru"
@@ -5223,66 +5223,66 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Rozestavěná loď"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:80
-#: ../../data/tribes/immovables/trees/balsa/init.lua:158
-#: ../../data/tribes/immovables/trees/balsa/init.lua:236
-#: ../../data/tribes/immovables/trees/balsa/init.lua:314
-msgid "Balsa Tree (Sapling)"
-msgstr "Balzovník jihoamerický (sazenice)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:98
-#: ../../data/tribes/immovables/trees/balsa/init.lua:176
-#: ../../data/tribes/immovables/trees/balsa/init.lua:254
-#: ../../data/tribes/immovables/trees/balsa/init.lua:332
-msgid "Balsa Tree (Pole)"
-msgstr "Balzovník jihoamerický (stromek)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:116
-#: ../../data/tribes/immovables/trees/balsa/init.lua:194
-#: ../../data/tribes/immovables/trees/balsa/init.lua:272
-#: ../../data/tribes/immovables/trees/balsa/init.lua:350
+#: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/winter/init.lua:11
 msgid "Balsa Tree (Mature)"
 msgstr "Balzovník jihoamerický (vzrostlý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:134
-#: ../../data/tribes/immovables/trees/balsa/init.lua:212
-#: ../../data/tribes/immovables/trees/balsa/init.lua:290
-#: ../../data/tribes/immovables/trees/balsa/init.lua:368
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:11
 msgid "Balsa Tree (Old)"
 msgstr "Balzovník jihoamerický (starý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:136
-#: ../../data/tribes/immovables/trees/balsa/init.lua:214
-#: ../../data/tribes/immovables/trees/balsa/init.lua:292
-#: ../../data/tribes/immovables/trees/balsa/init.lua:370
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
 msgstr "Balzovník jihoamerický"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:8
-msgid "Cocoa Tree (sapling)"
-msgstr "Kakaovník (sazenice)"
+#: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/winter/init.lua:11
+msgid "Balsa Tree (Pole)"
+msgstr "Balzovník jihoamerický (stromek)"
+
+#. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/winter/init.lua:11
+msgid "Balsa Tree (Sapling)"
+msgstr "Balzovník jihoamerický (sazenice)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:32
-msgid "Cocoa Tree (pole)"
-msgstr "Kakaovník (stromek)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:56
+#: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
 msgstr "Kakaovník (vzrostlý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:80
+#: ../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
 msgstr "Kakaovník (starý)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
+msgid "Cocoa Tree (pole)"
+msgstr "Kakaovník (stromek)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
+msgid "Cocoa Tree (sapling)"
+msgstr "Kakaovník (sazenice)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5290,84 +5290,84 @@ msgid "Dead Tree"
 msgstr "Suchý strom"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:80
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:158
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:236
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:314
-msgid "Ironwood Tree (Sapling)"
-msgstr "Železodřevný strom (sazenice)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:98
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:176
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:254
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:332
-msgid "Ironwood Tree (Pole)"
-msgstr "Železodřevný strom (stromek)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:116
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:194
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:272
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:350
+#: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/winter/init.lua:11
 msgid "Ironwood Tree (Mature)"
 msgstr "Železodřevný strom (vzrostlý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:134
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:212
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:290
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:368
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
 msgstr "Železodřevný strom (starý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:136
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:214
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:292
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:370
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
 msgstr "Železodřevný strom"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:80
-#: ../../data/tribes/immovables/trees/rubber/init.lua:158
-#: ../../data/tribes/immovables/trees/rubber/init.lua:236
-#: ../../data/tribes/immovables/trees/rubber/init.lua:314
-msgid "Rubber Tree (Sapling)"
-msgstr "Kaučukovník brazilský (sazenice)"
+#: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/winter/init.lua:11
+msgid "Ironwood Tree (Pole)"
+msgstr "Železodřevný strom (stromek)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:98
-#: ../../data/tribes/immovables/trees/rubber/init.lua:176
-#: ../../data/tribes/immovables/trees/rubber/init.lua:254
-#: ../../data/tribes/immovables/trees/rubber/init.lua:332
-msgid "Rubber Tree (Pole)"
-msgstr "Kaučukovník brazilský (stromek)"
+#: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/winter/init.lua:11
+msgid "Ironwood Tree (Sapling)"
+msgstr "Železodřevný strom (sazenice)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:116
-#: ../../data/tribes/immovables/trees/rubber/init.lua:194
-#: ../../data/tribes/immovables/trees/rubber/init.lua:272
-#: ../../data/tribes/immovables/trees/rubber/init.lua:350
+#: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/winter/init.lua:11
 msgid "Rubber Tree (Mature)"
 msgstr "Kaučukovník brazilský (vzrostlý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:134
-#: ../../data/tribes/immovables/trees/rubber/init.lua:212
-#: ../../data/tribes/immovables/trees/rubber/init.lua:290
-#: ../../data/tribes/immovables/trees/rubber/init.lua:368
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:11
 msgid "Rubber Tree (Old)"
 msgstr "Kaučukovník brazilský (starý)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:136
-#: ../../data/tribes/immovables/trees/rubber/init.lua:214
-#: ../../data/tribes/immovables/trees/rubber/init.lua:292
-#: ../../data/tribes/immovables/trees/rubber/init.lua:370
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:13
 msgid "Rubber Tree"
 msgstr "Kaučukovník brazilský"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/winter/init.lua:11
+msgid "Rubber Tree (Pole)"
+msgstr "Kaučukovník brazilský (stromek)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/desert/init.lua:12
+#: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/winter/init.lua:11
+msgid "Rubber Tree (Sapling)"
+msgstr "Kaučukovník brazilský (sazenice)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -6881,8 +6881,8 @@ msgstr "Toototobi"
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:351
 msgctxt "shipname"
-msgid "Traira"
-msgstr "Traira"
+msgid "Traíra"
+msgstr ""
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:353

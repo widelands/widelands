@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2021 by the Widelands Development Team
+ * Copyright (C) 2010-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,79 +142,6 @@ static inline std::string create_tooltip(const bool increase) {
                         _("Hold down Ctrl to allow none of this ware"),
 	               UI::FontStyle::kWuiTooltip));
 }
-
-// TODO(Nordfriese): This is here to help debug issue #5052
-// clang-format off
-void InputQueueDisplay::nr_icons_assert() const {
-	if (nr_icons_ > 0) {
-		return;
-	}
-	MutexLock m(MutexLock::ID::kObjects);
-	const Widelands::Building& b = *building_.get(ibase_.egbase());
-	log_dbg("**************************************************\n"
-	        " The infamous nr_icons_ input queue display bug\n"
-	        " (issue #5052) has been triggered!\n"
-	        " Please report the following information under\n"
-	        " https://github.com/widelands/widelands/issues/5052\n"
-	        " to help us investigate and fix this issue.\n"
-	        "**************************************************\n");
-	log_dbg(" Main");
-	log_dbg("   nr_icons_        %7u", static_cast<unsigned>(nr_icons_));
-	log_dbg("   icons_.size()    %7u", static_cast<unsigned>(icons_.size()));
-	log_dbg("   can_act_         %7s", can_act_      ? "true" : "false");
-	log_dbg("   show_only_       %7s", show_only_    ? "true" : "false");
-	log_dbg("   has_priority_    %7s", has_priority_ ? "true" : "false");
-	log_dbg("   type_            %7s", type_ == Widelands::wwWARE ? "WARE" : "WORKER");
-	log_dbg("   index_           %7d", index_);
-	log_dbg("   <typename>       %s", type_ == Widelands::wwWARE
-	                                   ? ibase_.egbase().descriptions().get_ware_descr(index_)
-	                                      ->name().c_str()
-	                                   : ibase_.egbase().descriptions().get_worker_descr(index_)
-	                                      ->name().c_str());
-	log_dbg("   Building ID      %7u", building_.serial());
-	log_dbg("   Building name    %s", b.descr().name().c_str());
-	log_dbg("   queue_           %7p", static_cast<const void*>(queue_));
-	log_dbg("   settings_        %7p", static_cast<const void*>(settings_));
-	if (queue_) {
-		log_dbg(" Queue");
-		log_dbg("   type             %7s", queue_->get_type() == Widelands::wwWARE ? "WARE" : "WORKER");
-		log_dbg("   index            %7d", queue_->get_index());
-		log_dbg("   max_size         %7d", queue_->get_max_size());
-		log_dbg("   max_fill         %7d", queue_->get_max_fill());
-		log_dbg("   filled           %7d", queue_->get_filled());
-		log_dbg("   missing          %7d", queue_->get_missing());
-	} else {
-		const Widelands::ProductionsiteSettings::InputQueueSetting* s = get_setting();
-		log_dbg(" Settings");
-		log_dbg("   Setting          %7p", static_cast<const void*>(s));
-		log_dbg("     Max fill       %7u", s->max_fill);
-		log_dbg("     Desired fill   %7u", s->desired_fill);
-		log_dbg("     Priority       %7u", s->priority.to_weighting_factor());
-		log_dbg("   Stopped          %7s", settings_->stopped ? "true" : "false");
-		log_dbg("   #wares           %7u", static_cast<unsigned>(settings_->ware_queues.size()));
-		for (const auto& pair : settings_->ware_queues) {
-			log_dbg("     Setting        %7p", static_cast<const void*>(&pair.second));
-			log_dbg("       Index        %7u", pair.first);
-			log_dbg("       Name         %s", ibase_.egbase().descriptions().get_ware_descr(pair.first)
-	                                           ->name().c_str());
-			log_dbg("       Max fill     %7u", pair.second.max_fill);
-			log_dbg("       Desired fill %7u", pair.second.desired_fill);
-			log_dbg("       Priority     %7u", pair.second.priority.to_weighting_factor());
-		}
-		log_dbg("   #workers       %7u", static_cast<unsigned>(settings_->worker_queues.size()));
-		for (const auto& pair : settings_->worker_queues) {
-			log_dbg("     Setting        %7p", static_cast<const void*>(&pair.second));
-			log_dbg("       Index        %7u", pair.first);
-			log_dbg("       Name         %s", ibase_.egbase().descriptions().get_worker_descr(pair.first)
-	                                           ->name().c_str());
-			log_dbg("       Max fill     %7u", pair.second.max_fill);
-			log_dbg("       Desired fill %7u", pair.second.desired_fill);
-			log_dbg("       Priority     %7u", pair.second.priority.to_weighting_factor());
-		}
-	}
-	log_dbg("**************************************************");
-}
-// clang-format on
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      InteractiveBase& ib,
@@ -427,7 +354,6 @@ void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& f
 }
 
 int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const {
-	nr_icons_assert();
 	assert(nr_icons_ > 0);
 	if (y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
 	    x < hbox_.get_x() + icons_[0]->get_x() ||
@@ -734,7 +660,6 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw max fill indicator
 	if (!show_only_) {
-		nr_icons_assert();
 		assert(nr_icons_ > 0);
 		const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 		assert(desired_fill <= nr_icons_);

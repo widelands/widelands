@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -355,7 +355,7 @@ msgstr "지도 불러오기"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:217
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:53
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:54
 #: ../../src/wlapplication_options.cc:396
 msgid "Save Map"
 msgstr "지도 저장"
@@ -363,7 +363,7 @@ msgstr "지도 저장"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:225
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:228
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:62
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:63
 msgid "Map Options"
 msgstr "지도 선택사항"
 
@@ -614,7 +614,7 @@ msgstr "지도 “%s”를 불러오고 있음…"
 #: ../../src/editor/editorinteractive.cc:995
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:143
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:144
 #: ../../src/logic/map.h:233 ../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr "이름 없음"
@@ -697,8 +697,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:117
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -801,7 +801,7 @@ msgid "Author: %s"
 msgstr "제작자: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:245
-#: ../../src/ui_fsmenu/addons/packager_box.cc:283
+#: ../../src/ui_fsmenu/addons/packager_box.cc:284
 #: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:125
 #, c-format
 msgid "Description: %s"
@@ -830,8 +830,8 @@ msgstr "오류!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:79
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
-#: ../../src/ui_fsmenu/addons/packager_box.cc:209 ../../src/wui/mapdata.cc:187
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:187
 msgid "My Maps"
 msgstr "내 지도"
 
@@ -855,7 +855,7 @@ msgstr "내려받은 지도들"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:88
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
 #, c-format
 msgid "Current directory: %s"
 msgstr "현재 디렉토리: %s"
@@ -867,7 +867,7 @@ msgstr "표시"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:251
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:79
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:47
@@ -882,7 +882,7 @@ msgstr "표시"
 #: ../../src/ui_fsmenu/keyboard_options.cc:231 ../../src/ui_fsmenu/menu.cc:144
 #: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
-#: ../../src/wui/game_main_menu_save_game.cc:86
+#: ../../src/wui/game_main_menu_save_game.cc:87
 #: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "확인"
@@ -891,7 +891,7 @@ msgstr "확인"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:259
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:756
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
 #: ../../src/ui_basic/color_chooser.cc:271
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:56
 #: ../../src/ui_fsmenu/addons/contact.cc:57
@@ -903,7 +903,7 @@ msgstr "확인"
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:91
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:672
-#: ../../src/wui/game_main_menu_save_game.cc:85
+#: ../../src/wui/game_main_menu_save_game.cc:86
 msgid "Cancel"
 msgstr "취소"
 
@@ -928,7 +928,7 @@ msgid "Click player to remove"
 msgstr "제거할 선수를 누르십시오"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:90
 #: ../../src/wui/economy_options_window.cc:673
@@ -942,7 +942,7 @@ msgstr "제안된 팀 라인업을 삭제"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:109
 #: ../../src/ui_fsmenu/addons/packager.cc:77
-#: ../../src/ui_fsmenu/addons/packager_box.cc:147
+#: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "+"
 msgstr "+"
 
@@ -994,9 +994,9 @@ msgstr "(없음)"
 msgid "Waterway length limit:"
 msgstr "수로 길이 제한:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1189,61 +1189,61 @@ msgstr "선수"
 msgid "Generate Map"
 msgstr "지도 생성"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:70
-#: ../../src/wui/game_main_menu_save_game.cc:76
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:71
+#: ../../src/wui/game_main_menu_save_game.cc:77
 #: ../../src/wui/gamedetails.cc:196
 msgid "Filename:"
 msgstr "파일 이름:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:79
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:31
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:80
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
 msgstr "디렉토리 생성"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:162
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:163
 #: ../../src/ui_fsmenu/internet_lobby.cc:491
 msgid "unnamed"
 msgstr "이름 없음"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:171
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
 msgid "A file or directory with that name already exists."
 msgstr "해당 이름의 파일 또는 디렉토리가 이미 있습니다."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:186
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:173
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:187
 msgid "Error Creating Directory!"
 msgstr "디렉토리를 만드는 중 오류가 발생했습니다!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:185
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
 msgstr "‘%s’ 디렉토리를 만드는 중 오류가 발생했습니다."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:267
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "파일 이름 ‘%s’ 가 이미 있습니다. 덮어쓰겠습니까?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr "지도 저장 오류!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:339
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
 msgid "Saving the map…"
 msgstr "지도를 저장하고 있음…"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:357
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
 msgid "Map saved"
 msgstr "저장된 지도"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:51
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:52
 msgid "Enter Directory Name:"
 msgstr "디렉토리 이름 입력:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:108
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:109
 msgid "This extension is reserved!"
 msgstr "이 확장은 예약되어 있습니다!"
 
@@ -1305,7 +1305,7 @@ msgstr "선수 %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:185
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:479
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:205
@@ -1418,8 +1418,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -1545,16 +1545,16 @@ msgid "Shading Language"
 msgstr "그림자 언어"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
-#. replaces tha
+#. replaces the
 #. * blank space in a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:242
+#: ../../src/io/filesystem/illegal_filename_check.cc:72
 msgctxt "illegal_filename_characters"
 msgid "blank space"
 msgstr "빈 공간"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:250
+#: ../../src/io/filesystem/illegal_filename_check.cc:80
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
@@ -1562,7 +1562,7 @@ msgstr "파일 이름의 시작 부분에 %s"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:257
+#: ../../src/io/filesystem/illegal_filename_check.cc:87
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
@@ -1570,7 +1570,7 @@ msgstr "파일 이름 어디에나 %s"
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
-#: ../../src/io/filesystem/filesystem.cc:266
+#: ../../src/io/filesystem/illegal_filename_check.cc:96
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "다음 문자는 허용되지 않습니다:"
@@ -2379,12 +2379,12 @@ msgid "Saving game…"
 msgstr "놀이를 저장하고 있습니다…"
 
 #: ../../src/logic/save_handler.cc:175
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Saving failed!"
 msgstr "저장 실패!"
 
 #: ../../src/logic/save_handler.cc:189
-#: ../../src/wui/game_main_menu_save_game.cc:302
+#: ../../src/wui/game_main_menu_save_game.cc:303
 msgid "Game saved"
 msgstr "게임 저장됨"
 
@@ -3924,7 +3924,7 @@ msgid "New add-on"
 msgstr "새로운 추가 기능"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/packager_box.cc:165
+#: ../../src/ui_fsmenu/addons/packager_box.cc:166
 msgid "–"
 msgstr "–"
 
@@ -3972,14 +3972,14 @@ msgstr "범주"
 #: ../../src/ui_fsmenu/addons/packager.cc:338
 #: ../../src/ui_fsmenu/addons/packager.cc:354
 #: ../../src/ui_fsmenu/addons/packager.cc:359
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:402
+#: ../../src/ui_fsmenu/addons/packager_box.cc:418
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "Invalid Name"
 msgstr "잘못된 이름"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:339
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4098,104 +4098,104 @@ msgid ""
 "%2$s"
 msgstr "추가 기능 ‘%1$s’을 (를) 디스크에 저장할 수 없습니다:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:56
+#: ../../src/ui_fsmenu/addons/packager_box.cc:57
 msgid "Invalid filename"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:59
+#: ../../src/ui_fsmenu/addons/packager_box.cc:60
 msgid "Name too long"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:64
+#: ../../src/ui_fsmenu/addons/packager_box.cc:65
 #, c-format
 msgid "Invalid character ‘%c’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:69
+#: ../../src/ui_fsmenu/addons/packager_box.cc:70
 #, c-format
 msgid "Filename may not contain ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:148
+#: ../../src/ui_fsmenu/addons/packager_box.cc:149
 msgid "Add selected map"
 msgstr "선택한 지도를 추가"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:156
+#: ../../src/ui_fsmenu/addons/packager_box.cc:157
 msgid "*"
 msgstr "*"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:157
+#: ../../src/ui_fsmenu/addons/packager_box.cc:158
 msgid "Create subdirectory"
 msgstr "하위 디렉토리를 만들기"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:166
+#: ../../src/ui_fsmenu/addons/packager_box.cc:167
 msgid "Remove selected map or directory"
 msgstr "선택한 지도 또는 디렉토리를 삭제"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:186
+#: ../../src/ui_fsmenu/addons/packager_box.cc:187
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:191
+#: ../../src/ui_fsmenu/addons/packager_box.cc:192
 msgid "Directory Display Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:200
+#: ../../src/ui_fsmenu/addons/packager_box.cc:201
 msgid "Directory Tree"
 msgstr "디렉토리 트리"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:273
+#: ../../src/ui_fsmenu/addons/packager_box.cc:274
 #: ../../src/ui_fsmenu/main.cc:421
 #, c-format
 msgid "Name: %s"
 msgstr "이름: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:276
+#: ../../src/ui_fsmenu/addons/packager_box.cc:277
 #: ../../src/ui_fsmenu/main.cc:424 ../../src/ui_fsmenu/mapdetailsbox.cc:113
 #, c-format
 msgid "Size: %s"
 msgstr "크기: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:280
 #: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:115
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:280
+#: ../../src/ui_fsmenu/addons/packager_box.cc:281
 #: ../../src/ui_fsmenu/main.cc:365 ../../src/ui_fsmenu/main.cc:428
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:120
 #, c-format
 msgid "Players: %s"
 msgstr "선수들: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:311
+#: ../../src/ui_fsmenu/addons/packager_box.cc:312
 msgid "Top-level directory"
 msgstr "최상위 디렉토리"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:372
+#: ../../src/ui_fsmenu/addons/packager_box.cc:373
 msgid "Zipped Map"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:373
+#: ../../src/ui_fsmenu/addons/packager_box.cc:374
 #, c-format
 msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
+"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "New Directory"
 msgstr "새로운 디렉토리"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:391
 msgid "Enter the name for the new directory."
 msgstr "새로운 디렉토리의 이름을 입력하십시오."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4203,37 +4203,37 @@ msgid ""
 "Please choose a different name."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "A directory with this name already exists."
 msgstr "이 이름을 가진 디렉토리가 이미 있습니다."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:440
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "디렉토리 ‘%s’ 과(와) 디렉토리의 모든 내용을 삭제하겠습니까?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:442
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "지도 ‘%s’ 를 정말 삭제 하겠습니까?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:490
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:60
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "난이도"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:498
+#: ../../src/ui_fsmenu/addons/packager_box.cc:499
 msgid "Difficulty:"
 msgstr "난이도:"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:523
+#: ../../src/ui_fsmenu/addons/packager_box.cc:524
 msgid "The campaigns difficulty. One word."
 msgstr "번역확인-> 캠페인 난이도입니다. 한 낱말로."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:525
 msgid "Short description, which will be appended to the difficulty."
 msgstr "난이도에 추가될 간단한 설명입니다."
 
@@ -5229,7 +5229,7 @@ msgstr "초보자의 자습서의 하나를 시작"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:328 ../../src/wlapplication_options.cc:223
 #: ../../src/wlapplication_options.cc:579
-#: ../../src/wui/game_main_menu_save_game.cc:52
+#: ../../src/wui/game_main_menu_save_game.cc:53
 #: ../../src/wui/interactive_gamebase.cc:156
 msgid "Load Game"
 msgstr "게임 불러오기"
@@ -5824,8 +5824,8 @@ msgid "Maximum number of autosave files:"
 msgstr "최대 자동 저장 파일 숫자:"
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Widelands 데이터 파일 압축 (지도, 리플레이, 저장된 게임)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6037,18 +6037,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:163
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:166
 msgid "Authors"
 msgstr "제작자들"
@@ -6579,7 +6579,7 @@ msgstr "채팅"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:575
-#: ../../src/wui/game_main_menu_save_game.cc:52
+#: ../../src/wui/game_main_menu_save_game.cc:53
 #: ../../src/wui/interactive_gamebase.cc:147
 msgid "Save Game"
 msgstr "게임 저장"
@@ -6589,8 +6589,8 @@ msgid "Messages: Go to Location"
 msgstr "알릴말: 위치로 이동"
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
-msgstr "알릴말: 표시 "
+msgid "Messages: Show All"
+msgstr ""
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show Geologists’ Messages"
@@ -7517,8 +7517,8 @@ msgstr "게임 종료 확인"
 msgid "Are you sure you wish to exit this game?"
 msgstr "정말 해당 게임을 종료합니까?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:269
-#: ../../src/wui/game_main_menu_save_game.cc:309
+#: ../../src/wui/game_main_menu_save_game.cc:270
+#: ../../src/wui/game_main_menu_save_game.cc:310
 msgid "Error Saving Game!"
 msgstr "놀이를 저장하다 오류 발생!"
 
@@ -7879,19 +7879,19 @@ msgstr "이 모든 물품을 허용하려면 Ctrl 키를 누른채로 선택하�
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "이 물품을 허용하지 않으려면 Ctrl 키를 누른채로 선택하십시오"
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr "물품을 제거"
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr "물품을 추가"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "제어를 숨김"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "제어를 표시"
 
@@ -8046,8 +8046,8 @@ msgstr "놀이를 일시정지"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "항해"

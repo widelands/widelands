@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-12-22 03:00+0000\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -364,7 +364,7 @@ msgstr "Загрузить карту"
 
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:217
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:53
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:54
 #: ../../src/wlapplication_options.cc:396
 msgid "Save Map"
 msgstr "Сохранить Карту"
@@ -372,7 +372,7 @@ msgstr "Сохранить Карту"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:225
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:228
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:62
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:63
 msgid "Map Options"
 msgstr "Параметры карты"
 
@@ -623,7 +623,7 @@ msgstr "Загрузка карты “%s”…"
 #: ../../src/editor/editorinteractive.cc:995
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:143
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:144
 #: ../../src/logic/map.h:233 ../../src/wui/mapdata.cc:50
 msgid "No Name"
 msgstr "Без имени"
@@ -706,8 +706,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:117
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -810,7 +810,7 @@ msgid "Author: %s"
 msgstr "Автор: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:245
-#: ../../src/ui_fsmenu/addons/packager_box.cc:283
+#: ../../src/ui_fsmenu/addons/packager_box.cc:284
 #: ../../src/ui_fsmenu/main.cc:431 ../../src/ui_fsmenu/mapdetailsbox.cc:125
 #, c-format
 msgid "Description: %s"
@@ -839,8 +839,8 @@ msgstr "Ошибка!"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:79
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
-#: ../../src/ui_fsmenu/addons/packager_box.cc:209 ../../src/wui/mapdata.cc:187
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:210 ../../src/wui/mapdata.cc:187
 msgid "My Maps"
 msgstr "Мои карты"
 
@@ -864,7 +864,7 @@ msgstr "Загруженные карты"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:88
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:278
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:279
 #, c-format
 msgid "Current directory: %s"
 msgstr "Выбран каталог: %s"
@@ -876,7 +876,7 @@ msgstr "Экран"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:80
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:251
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:79
 #: ../../src/ui_basic/color_chooser.cc:262
 #: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:47
@@ -891,7 +891,7 @@ msgstr "Экран"
 #: ../../src/ui_fsmenu/keyboard_options.cc:231 ../../src/ui_fsmenu/menu.cc:144
 #: ../../src/ui_fsmenu/options.cc:93
 #: ../../src/ui_fsmenu/training_wheel_options.cc:155
-#: ../../src/wui/game_main_menu_save_game.cc:86
+#: ../../src/wui/game_main_menu_save_game.cc:87
 #: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "OK"
@@ -900,7 +900,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:259
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:69
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:756
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
 #: ../../src/ui_basic/color_chooser.cc:271
 #: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:56
 #: ../../src/ui_fsmenu/addons/contact.cc:57
@@ -912,7 +912,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/login_box.cc:47 ../../src/ui_fsmenu/options.cc:91
 #: ../../src/ui_fsmenu/training_wheel_options.cc:109
 #: ../../src/wui/economy_options_window.cc:672
-#: ../../src/wui/game_main_menu_save_game.cc:85
+#: ../../src/wui/game_main_menu_save_game.cc:86
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -937,7 +937,7 @@ msgid "Click player to remove"
 msgstr "Нажмите на игрока для удаления"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:438
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:67
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:90
 #: ../../src/wui/economy_options_window.cc:673
@@ -951,7 +951,7 @@ msgstr "Отказаться от предложенного состава ко
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:109
 #: ../../src/ui_fsmenu/addons/packager.cc:77
-#: ../../src/ui_fsmenu/addons/packager_box.cc:147
+#: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "+"
 msgstr "+"
 
@@ -1003,9 +1003,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1201,61 +1201,61 @@ msgstr "Игрок"
 msgid "Generate Map"
 msgstr "Генерировать карту"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:70
-#: ../../src/wui/game_main_menu_save_game.cc:76
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:71
+#: ../../src/wui/game_main_menu_save_game.cc:77
 #: ../../src/wui/gamedetails.cc:196
 msgid "Filename:"
 msgstr "Имя файла:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:79
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:31
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:80
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
 msgstr "Создать каталог"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:162
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:163
 #: ../../src/ui_fsmenu/internet_lobby.cc:491
 msgid "unnamed"
 msgstr "Без названия"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:171
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
 msgid "A file or directory with that name already exists."
 msgstr "Файл или каталог с таким именем уже существует."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:172
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:186
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:173
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:187
 msgid "Error Creating Directory!"
 msgstr "Ошибка создания каталога!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:185
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:186
 #, c-format
 msgid "Error while creating directory ‘%s’."
 msgstr "Ошибка при создании каталога ‘%s’."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:267
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:308
+#: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:310
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:365
 msgid "Error Saving Map!"
 msgstr "Ошибка сохранения карты!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:339
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:340
 msgid "Saving the map…"
 msgstr "Сохранение карты...."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:357
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:358
 msgid "Map saved"
 msgstr "Карта сохранена"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:51
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:52
 msgid "Enter Directory Name:"
 msgstr "Введите имя каталога:"
 
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:108
+#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:109
 msgid "This extension is reserved!"
 msgstr "Это расширение зарезервировано!"
 
@@ -1317,7 +1317,7 @@ msgstr "Игрок %u"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:185
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:479
 #: ../../src/ui_fsmenu/campaign_select.cc:49
 #: ../../src/ui_fsmenu/campaigndetails.cc:56
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:205
@@ -1430,8 +1430,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -1557,16 +1557,16 @@ msgid "Shading Language"
 msgstr "Язык шейдинга"
 
 #. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
-#. replaces tha
+#. replaces the
 #. * blank space in a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:242
+#: ../../src/io/filesystem/illegal_filename_check.cc:72
 msgctxt "illegal_filename_characters"
 msgid "blank space"
 msgstr "пустое место"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:250
+#: ../../src/io/filesystem/illegal_filename_check.cc:80
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s at the start of the filename"
@@ -1574,7 +1574,7 @@ msgstr "%s в начале имени файла"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. * %s is a list of illegal characters
-#: ../../src/io/filesystem/filesystem.cc:257
+#: ../../src/io/filesystem/illegal_filename_check.cc:87
 #, c-format
 msgctxt "illegal_filename_characters"
 msgid "%s anywhere in the filename"
@@ -1582,7 +1582,7 @@ msgstr "%s в любом месте имени файла"
 
 #. * TRANSLATORS: Tooltip header for characters in illegal filenames.
 #. * This is followed by a list of bullet points
-#: ../../src/io/filesystem/filesystem.cc:266
+#: ../../src/io/filesystem/illegal_filename_check.cc:96
 msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "Указанные символы не допускаются:"
@@ -2424,12 +2424,12 @@ msgid "Saving game…"
 msgstr "Сохранение игры..."
 
 #: ../../src/logic/save_handler.cc:175
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Saving failed!"
 msgstr "Ошибки при сохранении игры!"
 
 #: ../../src/logic/save_handler.cc:189
-#: ../../src/wui/game_main_menu_save_game.cc:302
+#: ../../src/wui/game_main_menu_save_game.cc:303
 msgid "Game saved"
 msgstr "Игра сохранена"
 
@@ -3996,7 +3996,7 @@ msgid "New add-on"
 msgstr "Новое дополнение"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/packager_box.cc:165
+#: ../../src/ui_fsmenu/addons/packager_box.cc:166
 msgid "–"
 msgstr "–"
 
@@ -4044,14 +4044,14 @@ msgstr "Категория"
 #: ../../src/ui_fsmenu/addons/packager.cc:338
 #: ../../src/ui_fsmenu/addons/packager.cc:354
 #: ../../src/ui_fsmenu/addons/packager.cc:359
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:402
+#: ../../src/ui_fsmenu/addons/packager_box.cc:418
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "Invalid Name"
 msgstr "Дурацкое название"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:339
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4179,104 +4179,104 @@ msgid ""
 "%2$s"
 msgstr "По причине '%2$s' \nне удалось записать дополнение '%1$s' на диск"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:56
+#: ../../src/ui_fsmenu/addons/packager_box.cc:57
 msgid "Invalid filename"
 msgstr "Название файла забраковано"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:59
+#: ../../src/ui_fsmenu/addons/packager_box.cc:60
 msgid "Name too long"
 msgstr "Название слишком длинное"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:64
+#: ../../src/ui_fsmenu/addons/packager_box.cc:65
 #, c-format
 msgid "Invalid character ‘%c’"
 msgstr "Символ ‘%c’ недопустим"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:69
+#: ../../src/ui_fsmenu/addons/packager_box.cc:70
 #, c-format
 msgid "Filename may not contain ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:148
+#: ../../src/ui_fsmenu/addons/packager_box.cc:149
 msgid "Add selected map"
 msgstr "Добавить выбранную карту"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:156
+#: ../../src/ui_fsmenu/addons/packager_box.cc:157
 msgid "*"
 msgstr "*"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:157
+#: ../../src/ui_fsmenu/addons/packager_box.cc:158
 msgid "Create subdirectory"
 msgstr "Создать вложенный каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:166
+#: ../../src/ui_fsmenu/addons/packager_box.cc:167
 msgid "Remove selected map or directory"
 msgstr "Удалить карту или каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:186
+#: ../../src/ui_fsmenu/addons/packager_box.cc:187
 msgid ""
 "The selected internal directory name is used multiple times. All directories"
 " with the same internal name will also share the same display name."
 msgstr "Выбранное имя для внешней директории уже многократно использовано. Все директории с похожими названиями будут доступны по аналогии."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:191
+#: ../../src/ui_fsmenu/addons/packager_box.cc:192
 msgid "Directory Display Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:200
+#: ../../src/ui_fsmenu/addons/packager_box.cc:201
 msgid "Directory Tree"
 msgstr "Дерево каталогов"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:273
+#: ../../src/ui_fsmenu/addons/packager_box.cc:274
 #: ../../src/ui_fsmenu/main.cc:421
 #, c-format
 msgid "Name: %s"
 msgstr "Название: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:276
+#: ../../src/ui_fsmenu/addons/packager_box.cc:277
 #: ../../src/ui_fsmenu/main.cc:424 ../../src/ui_fsmenu/mapdetailsbox.cc:113
 #, c-format
 msgid "Size: %s"
 msgstr "Размеры: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:279
+#: ../../src/ui_fsmenu/addons/packager_box.cc:280
 #: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:115
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:280
+#: ../../src/ui_fsmenu/addons/packager_box.cc:281
 #: ../../src/ui_fsmenu/main.cc:365 ../../src/ui_fsmenu/main.cc:428
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:120
 #, c-format
 msgid "Players: %s"
 msgstr "Число игроков: %s"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:311
+#: ../../src/ui_fsmenu/addons/packager_box.cc:312
 msgid "Top-level directory"
 msgstr "Каталог верхнего уровня"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:372
+#: ../../src/ui_fsmenu/addons/packager_box.cc:373
 msgid "Zipped Map"
 msgstr "Сжатая карта"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:373
+#: ../../src/ui_fsmenu/addons/packager_box.cc:374
 #, c-format
 msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress widelands data files’ option in the options menu and resaving the map in the editor.\n"
+"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr "Карта ‘%s’ не является папкой. Пожалуйста, отключите опцию сжатия файлов Widelands в меню опций и сохраните карту в редакторе по новой.\n\nИли вы хотите добавить карту всё равно?"
+msgstr ""
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 msgid "New Directory"
 msgstr "Новый каталог"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:391
 msgid "Enter the name for the new directory."
 msgstr "Введите название каталога."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:411
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4284,37 +4284,37 @@ msgid ""
 "Please choose a different name."
 msgstr "У директорий не может быть расширения ‘%s’.\n\nПодберите другое имя."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 msgid "A directory with this name already exists."
 msgstr "Каталог с таким названием уже есть."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:440
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Вы уверены, что хотите удалить каталог '%s' со всем его содержимым?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:442
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "Вы уверены, что хотите удалить карту '%s'?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:490
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:60
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "Уровень сложности"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:498
+#: ../../src/ui_fsmenu/addons/packager_box.cc:499
 msgid "Difficulty:"
 msgstr "Сложность: "
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:523
+#: ../../src/ui_fsmenu/addons/packager_box.cc:524
 msgid "The campaigns difficulty. One word."
 msgstr "Сложность игры одним словом."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:525
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Краткое описание того, что вас ждет."
 
@@ -5328,7 +5328,7 @@ msgstr "Пройти один из обучающих сценариев"
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:328 ../../src/wlapplication_options.cc:223
 #: ../../src/wlapplication_options.cc:579
-#: ../../src/wui/game_main_menu_save_game.cc:52
+#: ../../src/wui/game_main_menu_save_game.cc:53
 #: ../../src/wui/interactive_gamebase.cc:156
 msgid "Load Game"
 msgstr "Загрузить игру"
@@ -5923,8 +5923,8 @@ msgid "Maximum number of autosave files:"
 msgstr "Максимум файлов автосохранения:"
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Сжать файлы данных (карты, повторы и сохранения)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6136,18 +6136,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:163
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:166
 msgid "Authors"
 msgstr "Авторы"
@@ -6678,7 +6678,7 @@ msgstr "Общение"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:575
-#: ../../src/wui/game_main_menu_save_game.cc:52
+#: ../../src/wui/game_main_menu_save_game.cc:53
 #: ../../src/wui/interactive_gamebase.cc:147
 msgid "Save Game"
 msgstr "Сохранить игру"
@@ -6688,8 +6688,8 @@ msgid "Messages: Go to Location"
 msgstr "Сообщения: перейти в точку"
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
-msgstr "Показать сообщения"
+msgid "Messages: Show All"
+msgstr ""
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show Geologists’ Messages"
@@ -7619,8 +7619,8 @@ msgstr "Подтверждение выхода из игры"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Вы действительно хотите покинуть эту игру?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:269
-#: ../../src/wui/game_main_menu_save_game.cc:309
+#: ../../src/wui/game_main_menu_save_game.cc:270
+#: ../../src/wui/game_main_menu_save_game.cc:310
 msgid "Error Saving Game!"
 msgstr "Ошибка при сохранении игры!"
 
@@ -7993,19 +7993,19 @@ msgstr "Удерживайте Ctrl, чтобы разрешить весь эт
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr "Удерживайте Ctrl, чтобы не допускать этот товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr "Убрать товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr "Добавить товар"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "Скрыть панель"
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "Показать панель"
 
@@ -8160,8 +8160,8 @@ msgstr "Приостановить игру"
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr "С мореплаванием"

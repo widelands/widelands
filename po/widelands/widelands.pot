@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
+"POT-Creation-Date: 2022-01-13 02:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -958,8 +958,8 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:410
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -3035,7 +3035,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1331
+#: ../../src/scripting/lua_game.cc:1329
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -4125,7 +4125,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The map ‘%s’ is not a directory. Please consider disabling the ‘Compress "
-"widelands data files’ option in the options menu and resaving the map in the "
+"Widelands data files’ option in the options menu and resaving the map in the "
 "editor.\n"
 "\n"
 "Do you want to add this map anyway?"
@@ -5770,7 +5770,7 @@ msgid "Maximum number of autosave files:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:233
-msgid "Compress widelands data files (maps, replays and savegames)"
+msgid "Compress Widelands data files (maps, replays, and savegames)"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:239
@@ -6531,7 +6531,7 @@ msgid "Messages: Go to Location"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:589
-msgid "Messages: Show "
+msgid "Messages: Show All"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:594
@@ -7422,8 +7422,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:103
 #: ../../src/wui/game_summary.cc:103 ../../src/wui/interactive_gamebase.cc:169
 msgid "Exit Game"
@@ -7808,19 +7808,19 @@ msgstr ""
 msgid "Hold down Ctrl to allow none of this ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:267
+#: ../../src/wui/inputqueuedisplay.cc:194
 msgid "Remove ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:276
+#: ../../src/wui/inputqueuedisplay.cc:203
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:705
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr ""
 
@@ -7975,8 +7975,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
 msgstr ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2021 by the Widelands Development Team
+ * Copyright (C) 2006-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 constexpr uint16_t kWidelandsCopyrightStart = 2002;
 // If the following line is changed, the corresponding regex in 'utils/update_copyright.py' will
 // also need updating.
-constexpr uint16_t kWidelandsCopyrightEnd = 2021;
+constexpr uint16_t kWidelandsCopyrightEnd = 2022;
 
 /// \return the build id which is automagically created from the revision number
 /// or the VERSION file

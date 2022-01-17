@@ -16,7 +16,7 @@
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Papa Ben <ben-oni@hotmail.fr>, 2019
 # Renaud Bouchard, 2015
-# Renaud Bouchard, 2015-2021
+# Renaud Bouchard, 2015-2022
 # Stanislas Dolcini <stan@wildfiregames.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
 # Tubuntu, 2015
@@ -25,9 +25,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"PO-Revision-Date: 2022-01-05 02:35+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1716,9 +1716,9 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Atelier de pierre"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1727,17 +1727,17 @@ msgstr "Atelier de pierre"
 msgid "making a shovel"
 msgstr "construit une pelle"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
 msgstr "construit une cognée"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1750,9 +1750,9 @@ msgstr "construit une pioche"
 msgid "making a machete"
 msgstr "Construit une machette"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
@@ -1760,9 +1760,9 @@ msgstr "Construit une machette"
 msgid "making kitchen tools"
 msgstr "construit des ustensiles de cuisine"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1777,9 +1777,9 @@ msgstr "construit un marteau"
 msgid "making a chisel"
 msgstr "Fabrique un ciseau"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1933,8 +1933,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tente de garde-champêtre"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2202,7 +2202,7 @@ msgid ""
 "water where he can breed fish in his work area. Remember that you can only "
 "regenerate your fish resources if there ever were some fish in the vicinity "
 "in the first place."
-msgstr ""
+msgstr "Le pisciculteur qui travaille dans cette maison de pisciculteur ne peut trouver d'eau où il peut élever du poisson dans sa zone d’activité. Rappelez vous que vous ne pouvez régénérer les poissons que si il en avait en tout premier lieu."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:57
 msgid "The fishing grounds are full"
@@ -4792,149 +4792,149 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr "Champ d'orge (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:14
-msgid "Blueberry Bush (tiny)"
-msgstr "Buisson de myrtilles (minuscule)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:38
-msgid "Blueberry Bush (small)"
-msgstr "Buisson de myrtilles (petit)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
 msgstr "Buisson de myrtilles (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/blueberry/ripe/init.lua:9
 msgid "Blueberry Bush (ripe)"
 msgstr "Buisson de myrtilles (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:14
-msgid "Black Currant (tiny)"
-msgstr "Cassis (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/small/init.lua:9
+msgid "Blueberry Bush (small)"
+msgstr "Buisson de myrtilles (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
-msgid "Black Currant (small)"
-msgstr "Cassis (petit)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/tiny/init.lua:9
+msgid "Blueberry Bush (tiny)"
+msgstr "Buisson de myrtilles (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
 msgstr "Cassis (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
 msgstr "Cassis (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:14
-msgid "Red Currant (tiny)"
-msgstr "Groseilles (minuscules)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/small/init.lua:9
+msgid "Black Currant (small)"
+msgstr "Cassis (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
-msgid "Red Currant (small)"
-msgstr "Groseilles (petites)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/tiny/init.lua:9
+msgid "Black Currant (tiny)"
+msgstr "Cassis (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_red/medium/init.lua:9
 msgid "Red Currant (medium)"
 msgstr "Groseilles (moyennes)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_red/ripe/init.lua:9
 msgid "Red Currant (ripe)"
 msgstr "Groseilles (mûres)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:14
-msgid "Desert Hackberry (tiny)"
-msgstr "Micocoulier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/small/init.lua:9
+msgid "Red Currant (small)"
+msgstr "Groseilles (petites)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
-msgid "Desert Hackberry (small)"
-msgstr "Micocoulier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/tiny/init.lua:9
+msgid "Red Currant (tiny)"
+msgstr "Groseilles (minuscules)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
 msgstr "Micocoulier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
 msgstr "Micocoulier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:14
-msgid "Juniper (tiny)"
-msgstr "Genévrier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
+msgid "Desert Hackberry (small)"
+msgstr "Micocoulier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
-msgid "Juniper (small)"
-msgstr "Genévrier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
+msgid "Desert Hackberry (tiny)"
+msgstr "Micocoulier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
 msgstr "Genévrier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/juniper/ripe/init.lua:9
 msgid "Juniper (ripe)"
 msgstr "Genévrier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:14
-msgid "Raspberry Bush (tiny)"
-msgstr "Buisson de framboises (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/small/init.lua:9
+msgid "Juniper (small)"
+msgstr "Genévrier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
-msgid "Raspberry Bush (small)"
-msgstr "Framboisier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/tiny/init.lua:9
+msgid "Juniper (tiny)"
+msgstr "Genévrier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/raspberry/medium/init.lua:9
 msgid "Raspberry Bush (medium)"
 msgstr "Buisson de framboises (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/raspberry/ripe/init.lua:9
 msgid "Raspberry Bush (ripe)"
 msgstr "Framboisier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:14
-msgid "Sea Buckthorn (tiny)"
-msgstr "Argousier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/small/init.lua:9
+msgid "Raspberry Bush (small)"
+msgstr "Framboisier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
-msgid "Sea Buckthorn (small)"
-msgstr "Argousier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/tiny/init.lua:9
+msgid "Raspberry Bush (tiny)"
+msgstr "Buisson de framboises (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/medium/init.lua:9
 msgid "Sea Buckthorn (medium)"
 msgstr "Argousier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/ripe/init.lua:9
 msgid "Sea Buckthorn (ripe)"
 msgstr "Argousier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
-msgid "Stink Shepherd’s Tree (tiny)"
-msgstr "Arbre Bois-puant (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/small/init.lua:9
+msgid "Sea Buckthorn (small)"
+msgstr "Argousier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
-msgid "Stink Shepherd’s Tree (small)"
-msgstr "Arbre Bois-puant (petit)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/tiny/init.lua:9
+msgid "Sea Buckthorn (tiny)"
+msgstr "Argousier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/medium/init.lua:9
 msgid "Stink Shepherd’s Tree (medium)"
 msgstr "Arbre Bois-puant (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/ripe/init.lua:9
 msgid "Stink Shepherd’s Tree (ripe)"
 msgstr "Arbre Bois-puant (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
-msgid "Strawberries (tiny)"
-msgstr "Fraises (miniuscules)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/small/init.lua:9
+msgid "Stink Shepherd’s Tree (small)"
+msgstr "Arbre Bois-puant (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
-msgid "Strawberries (small)"
-msgstr "Fraises (petites)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/tiny/init.lua:9
+msgid "Stink Shepherd’s Tree (tiny)"
+msgstr "Arbre Bois-puant (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/strawberry/medium/init.lua:9
 msgid "Strawberries (medium)"
 msgstr "Fraises (moyennes)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/strawberry/ripe/init.lua:9
 msgid "Strawberries (ripe)"
 msgstr "Fraises (mûres)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/small/init.lua:9
+msgid "Strawberries (small)"
+msgstr "Fraises (petites)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/tiny/init.lua:9
+msgid "Strawberries (tiny)"
+msgstr "Fraises (miniuscules)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/harvested/init.lua:8
@@ -5111,116 +5111,116 @@ msgid "Reed Field (tiny)"
 msgstr "Champ de roseau (minuscule)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:8
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:8
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:8
-#: ../../data/tribes/immovables/resi/empire/init.lua:8
-#: ../../data/tribes/immovables/resi/frisians/init.lua:8
-msgctxt "resource_indicator"
-msgid "No Resources"
-msgstr "Pas de ressources"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:24
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:77
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:68
-#: ../../data/tribes/immovables/resi/empire/init.lua:68
-#: ../../data/tribes/immovables/resi/frisians/init.lua:77
+#: ../../data/tribes/immovables/resi/amazons/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Gold"
 msgstr "De l'or"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:40
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:108
-#: ../../data/tribes/immovables/resi/frisians/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Granite"
-msgstr "Du granit"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:56
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:169
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:148
-#: ../../data/tribes/immovables/resi/empire/init.lua:148
-#: ../../data/tribes/immovables/resi/frisians/init.lua:169
+#: ../../data/tribes/immovables/resi/amazons/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
 msgstr "Beaucoup d'or"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:72
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:188
-#: ../../data/tribes/immovables/resi/frisians/init.lua:215
+#: ../../data/tribes/immovables/resi/amazons/none/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/none/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/none/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/none/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/none/init.lua:8
+msgctxt "resource_indicator"
+msgid "No Resources"
+msgstr "Pas de ressources"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr "Du granit"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
 msgstr "Beaucoup de granit"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:31
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:28
-#: ../../data/tribes/immovables/resi/empire/init.lua:28
-#: ../../data/tribes/immovables/resi/frisians/init.lua:31
-msgctxt "resource_indicator"
-msgid "Water"
-msgstr "Eau"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:48
-#: ../../data/tribes/immovables/resi/empire/init.lua:48
-#: ../../data/tribes/immovables/resi/frisians/init.lua:54
+#: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Coal"
 msgstr "Du charbon"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:100
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:88
-#: ../../data/tribes/immovables/resi/empire/init.lua:88
-#: ../../data/tribes/immovables/resi/frisians/init.lua:100
-msgctxt "resource_indicator"
-msgid "Some Iron"
-msgstr "Du fer"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Crystals"
-msgstr "Quelques cristaux"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:146
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:128
-#: ../../data/tribes/immovables/resi/empire/init.lua:128
-#: ../../data/tribes/immovables/resi/frisians/init.lua:146
+#: ../../data/tribes/immovables/resi/atlanteans/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
 msgstr "Beaucoup de charbon"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
-#: ../../data/tribes/immovables/resi/empire/init.lua:168
-#: ../../data/tribes/immovables/resi/frisians/init.lua:192
+#: ../../data/tribes/immovables/resi/atlanteans/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Iron"
+msgstr "Du fer"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
 msgstr "Beaucoup de fer"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
+#: ../../data/tribes/immovables/resi/atlanteans/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Crystals"
+msgstr "Quelques cristaux"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
 msgstr "Beaucoup de cristaux"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:108
+#: ../../data/tribes/immovables/resi/atlanteans/water/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/water/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/water/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/water/init.lua:8
+msgctxt "resource_indicator"
+msgid "Water"
+msgstr "Eau"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Marble"
 msgstr "Du marbre"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:188
+#: ../../data/tribes/immovables/resi/empire/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
 msgstr "Beaucoup de marbre"
@@ -5235,66 +5235,66 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Site de construction navale"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:80
-#: ../../data/tribes/immovables/trees/balsa/init.lua:158
-#: ../../data/tribes/immovables/trees/balsa/init.lua:236
-#: ../../data/tribes/immovables/trees/balsa/init.lua:314
-msgid "Balsa Tree (Sapling)"
-msgstr "Balsa (Jeune pousse)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:98
-#: ../../data/tribes/immovables/trees/balsa/init.lua:176
-#: ../../data/tribes/immovables/trees/balsa/init.lua:254
-#: ../../data/tribes/immovables/trees/balsa/init.lua:332
-msgid "Balsa Tree (Pole)"
-msgstr "Balsa (Arbuste)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:116
-#: ../../data/tribes/immovables/trees/balsa/init.lua:194
-#: ../../data/tribes/immovables/trees/balsa/init.lua:272
-#: ../../data/tribes/immovables/trees/balsa/init.lua:350
+#: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/winter/init.lua:11
 msgid "Balsa Tree (Mature)"
 msgstr "Balsa (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:134
-#: ../../data/tribes/immovables/trees/balsa/init.lua:212
-#: ../../data/tribes/immovables/trees/balsa/init.lua:290
-#: ../../data/tribes/immovables/trees/balsa/init.lua:368
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:11
 msgid "Balsa Tree (Old)"
 msgstr "Balsa (Vieux)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:136
-#: ../../data/tribes/immovables/trees/balsa/init.lua:214
-#: ../../data/tribes/immovables/trees/balsa/init.lua:292
-#: ../../data/tribes/immovables/trees/balsa/init.lua:370
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
 msgstr "Arbre de balsa"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:8
-msgid "Cocoa Tree (sapling)"
-msgstr "Cacaoyer (Jeune pousse)"
+#: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/winter/init.lua:11
+msgid "Balsa Tree (Pole)"
+msgstr "Balsa (Arbuste)"
+
+#. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/winter/init.lua:11
+msgid "Balsa Tree (Sapling)"
+msgstr "Balsa (Jeune pousse)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:32
-msgid "Cocoa Tree (pole)"
-msgstr "Cacaoyer (Arbuste)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:56
+#: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
 msgstr "Cacaoyer (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:80
+#: ../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
 msgstr "Cacaoyer (vieux)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
+msgid "Cocoa Tree (pole)"
+msgstr "Cacaoyer (Arbuste)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
+msgid "Cocoa Tree (sapling)"
+msgstr "Cacaoyer (Jeune pousse)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5302,84 +5302,84 @@ msgid "Dead Tree"
 msgstr "Arbre mort"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:80
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:158
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:236
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:314
-msgid "Ironwood Tree (Sapling)"
-msgstr "Arbre Bois de Fer (jeune arbre)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:98
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:176
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:254
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:332
-msgid "Ironwood Tree (Pole)"
-msgstr "Arbre Bois de Fer (perche)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:116
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:194
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:272
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:350
+#: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/winter/init.lua:11
 msgid "Ironwood Tree (Mature)"
 msgstr "Arbre Bois de Fer (adulte)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:134
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:212
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:290
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:368
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
 msgstr "Arbre Bois de Fer (jeune arbre)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:136
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:214
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:292
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:370
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
 msgstr "Arbre de bois ferreux"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:80
-#: ../../data/tribes/immovables/trees/rubber/init.lua:158
-#: ../../data/tribes/immovables/trees/rubber/init.lua:236
-#: ../../data/tribes/immovables/trees/rubber/init.lua:314
-msgid "Rubber Tree (Sapling)"
-msgstr "Arbre à caoutchouc (Jeune pousse)"
+#: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/winter/init.lua:11
+msgid "Ironwood Tree (Pole)"
+msgstr "Arbre Bois de Fer (perche)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:98
-#: ../../data/tribes/immovables/trees/rubber/init.lua:176
-#: ../../data/tribes/immovables/trees/rubber/init.lua:254
-#: ../../data/tribes/immovables/trees/rubber/init.lua:332
-msgid "Rubber Tree (Pole)"
-msgstr "Arbre à caoutchouc (Arbuste)"
+#: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/winter/init.lua:11
+msgid "Ironwood Tree (Sapling)"
+msgstr "Arbre Bois de Fer (jeune arbre)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:116
-#: ../../data/tribes/immovables/trees/rubber/init.lua:194
-#: ../../data/tribes/immovables/trees/rubber/init.lua:272
-#: ../../data/tribes/immovables/trees/rubber/init.lua:350
+#: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/winter/init.lua:11
 msgid "Rubber Tree (Mature)"
 msgstr "Arbre à caoutchouc (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:134
-#: ../../data/tribes/immovables/trees/rubber/init.lua:212
-#: ../../data/tribes/immovables/trees/rubber/init.lua:290
-#: ../../data/tribes/immovables/trees/rubber/init.lua:368
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:11
 msgid "Rubber Tree (Old)"
 msgstr "Arbre à caoutchouc (Vieux)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:136
-#: ../../data/tribes/immovables/trees/rubber/init.lua:214
-#: ../../data/tribes/immovables/trees/rubber/init.lua:292
-#: ../../data/tribes/immovables/trees/rubber/init.lua:370
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:13
 msgid "Rubber Tree"
 msgstr "Arbre à caoutchouc"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/winter/init.lua:11
+msgid "Rubber Tree (Pole)"
+msgstr "Arbre à caoutchouc (Arbuste)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/desert/init.lua:12
+#: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/winter/init.lua:11
+msgid "Rubber Tree (Sapling)"
+msgstr "Arbre à caoutchouc (Jeune pousse)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -5966,997 +5966,997 @@ msgstr "Putumayo"
 #: ../../data/tribes/ships/amazons/init.lua:55
 msgctxt "shipname"
 msgid "Acari"
-msgstr ""
+msgstr "Acari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:57
 msgctxt "shipname"
 msgid "Acre"
-msgstr ""
+msgstr "Acre"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:59
 msgctxt "shipname"
 msgid "Açuã"
-msgstr ""
+msgstr "Açuã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:61
 msgctxt "shipname"
 msgid "Acurauá"
-msgstr ""
+msgstr "Acurauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:63
 msgctxt "shipname"
 msgid "Aiari"
-msgstr ""
+msgstr "Aiari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:65
 msgctxt "shipname"
 msgid "Alalaú"
-msgstr ""
+msgstr "Alalaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:67
 msgctxt "shipname"
 msgid "Amanã"
-msgstr ""
+msgstr "Amanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:69
 msgctxt "shipname"
 msgid "Amapá"
-msgstr ""
+msgstr "Amapá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:71
 msgctxt "shipname"
 msgid "Andirá"
-msgstr ""
+msgstr "Andirá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:73
 msgctxt "shipname"
 msgid "Antimary"
-msgstr ""
+msgstr "Antimary"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:75
 msgctxt "shipname"
 msgid "Apoquitaua"
-msgstr ""
+msgstr "Apoquitaua"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:77
 msgctxt "shipname"
 msgid "Apuaú"
-msgstr ""
+msgstr "Apuaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:79
 msgctxt "shipname"
 msgid "Araçá"
-msgstr ""
+msgstr "Araçá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:81
 msgctxt "shipname"
 msgid "Arara"
-msgstr ""
+msgstr "Arara"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:83
 msgctxt "shipname"
 msgid "Ararirá"
-msgstr ""
+msgstr "Ararirá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:85
 msgctxt "shipname"
 msgid "Arauã"
-msgstr ""
+msgstr "Arauã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:87
 msgctxt "shipname"
 msgid "Aripuanã"
-msgstr ""
+msgstr "Aripuanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:89
 msgctxt "shipname"
 msgid "Arrojo"
-msgstr ""
+msgstr "Arrojo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:91
 msgctxt "shipname"
 msgid "Atiparaná"
-msgstr ""
+msgstr "Atiparaná"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:93
 msgctxt "shipname"
 msgid "Atucatiquini"
-msgstr ""
+msgstr "Atucatiquini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:95
 msgctxt "shipname"
 msgid "Autaz-mirim"
-msgstr ""
+msgstr "Autaz-mirim"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:97
 msgctxt "shipname"
 msgid "Badajós"
-msgstr ""
+msgstr "Badajós"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:99
 msgctxt "shipname"
 msgid "Bararati"
-msgstr ""
+msgstr "Bararati"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:101
 msgctxt "shipname"
 msgid "Biá"
-msgstr ""
+msgstr "Biá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:103
 msgctxt "shipname"
 msgid "Camaiú"
-msgstr ""
+msgstr "Camaiú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:105
 msgctxt "shipname"
 msgid "Camanaú"
-msgstr ""
+msgstr "Camanaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:107
 msgctxt "shipname"
 msgid "Canumã"
-msgstr ""
+msgstr "Canumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:109
 msgctxt "shipname"
 msgid "Capucapu"
-msgstr ""
+msgstr "Capucapu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:111
 msgctxt "shipname"
 msgid "Carabinani"
-msgstr ""
+msgstr "Carabinani"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:113
 msgctxt "shipname"
 msgid "Cauaburi"
-msgstr ""
+msgstr "Cauaburi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:115
 msgctxt "shipname"
 msgid "Caurés"
-msgstr ""
+msgstr "Caurés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:117
 msgctxt "shipname"
 msgid "Ciriquiri"
-msgstr ""
+msgstr "Ciriquiri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:119
 msgctxt "shipname"
 msgid "Coari"
-msgstr ""
+msgstr "Coari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:121
 msgctxt "shipname"
 msgid "Copatana"
-msgstr ""
+msgstr "Copatana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:123
 msgctxt "shipname"
 msgid "Coti"
-msgstr ""
+msgstr "Coti"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:125
 msgctxt "shipname"
 msgid "Cubate"
-msgstr ""
+msgstr "Cubate"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:127
 msgctxt "shipname"
 msgid "Cuiari"
-msgstr ""
+msgstr "Cuiari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:129
 msgctxt "shipname"
 msgid "Cuieiras"
-msgstr ""
+msgstr "Cuieiras"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:131
 msgctxt "shipname"
 msgid "Cuini"
-msgstr ""
+msgstr "Cuini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:133
 msgctxt "shipname"
 msgid "Cuniuá"
-msgstr ""
+msgstr "Cuniuá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:135
 msgctxt "shipname"
 msgid "Curicuriari"
-msgstr ""
+msgstr "Curicuriari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:137
 msgctxt "shipname"
 msgid "Curiuaú"
-msgstr ""
+msgstr "Curiuaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:139
 msgctxt "shipname"
 msgid "Curuçá"
-msgstr ""
+msgstr "Curuçá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:141
 msgctxt "shipname"
 msgid "Curuduri"
-msgstr ""
+msgstr "Curuduri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:143
 msgctxt "shipname"
 msgid "Curuquetê"
-msgstr ""
+msgstr "Curuquetê"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:145
 msgctxt "shipname"
 msgid "Daraá"
-msgstr ""
+msgstr "Daraá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:147
 msgctxt "shipname"
 msgid "Demini"
-msgstr ""
+msgstr "Demini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:149
 msgctxt "shipname"
 msgid "Dos Marmelos"
-msgstr ""
+msgstr "Dos Marmelos"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:151
 msgctxt "shipname"
 msgid "Eiru"
-msgstr ""
+msgstr "Eiru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:153
 msgctxt "shipname"
 msgid "Endimari"
-msgstr ""
+msgstr "Endimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:155
 msgctxt "shipname"
 msgid "Envira"
-msgstr ""
+msgstr "Envira"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:157
 msgctxt "shipname"
 msgid "Gregório"
-msgstr ""
+msgstr "Gregório"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:159
 msgctxt "shipname"
 msgid "Guaribe"
-msgstr ""
+msgstr "Guaribe"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:161
 msgctxt "shipname"
 msgid "Iá"
-msgstr ""
+msgstr "Iá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:163
 msgctxt "shipname"
 msgid "Iaco"
-msgstr ""
+msgstr "Iaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:165
 msgctxt "shipname"
 msgid "Içá"
-msgstr ""
+msgstr "Içá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Içana"
-msgstr ""
+msgstr "Içana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
 msgctxt "shipname"
 msgid "Inauini"
-msgstr ""
+msgstr "Inauini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:171
 msgctxt "shipname"
 msgid "Ipixuna"
-msgstr ""
+msgstr "Ipixuna"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:173
 msgctxt "shipname"
 msgid "Itanhauá"
-msgstr ""
+msgstr "Itanhauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:175
 msgctxt "shipname"
 msgid "Itaparaná"
-msgstr ""
+msgstr "Itaparaná"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:177
 msgctxt "shipname"
 msgid "Itaquai"
-msgstr ""
+msgstr "Itaquai"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:179
 msgctxt "shipname"
 msgid "Itucumã"
-msgstr ""
+msgstr "Itucumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:181
 msgctxt "shipname"
 msgid "Ituí"
-msgstr ""
+msgstr "Ituí"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:183
 msgctxt "shipname"
 msgid "Ituxi"
-msgstr ""
+msgstr "Ituxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:185
 msgctxt "shipname"
 msgid "Jacaré"
-msgstr ""
+msgstr "Jacaré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:187
 msgctxt "shipname"
 msgid "Jamicia"
-msgstr ""
+msgstr "Jamicia"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:189
 msgctxt "shipname"
 msgid "Jandiatuba"
-msgstr ""
+msgstr "Jandiatuba"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:191
 msgctxt "shipname"
 msgid "Japurá"
-msgstr ""
+msgstr "Japurá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:193
 msgctxt "shipname"
 msgid "Jaquirana"
-msgstr ""
+msgstr "Jaquirana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:195
 msgctxt "shipname"
 msgid "Jari"
-msgstr ""
+msgstr "Jari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:197
 msgctxt "shipname"
 msgid "Jatapu"
-msgstr ""
+msgstr "Jatapu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:199
 msgctxt "shipname"
 msgid "Jatuarana"
-msgstr ""
+msgstr "Jatuarana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:201
 msgctxt "shipname"
 msgid "Jaú"
-msgstr ""
+msgstr "Jaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:203
 msgctxt "shipname"
 msgid "Jauaperi"
-msgstr ""
+msgstr "Jauaperi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:205
 msgctxt "shipname"
 msgid "Javary"
-msgstr ""
+msgstr "Javary"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:207
 msgctxt "shipname"
 msgid "Juami"
-msgstr ""
+msgstr "Juami"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:209
 msgctxt "shipname"
 msgid "Jufari"
-msgstr ""
+msgstr "Jufari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:211
 msgctxt "shipname"
 msgid "Juma"
-msgstr ""
+msgstr "Juma"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:213
 msgctxt "shipname"
 msgid "Juruá"
-msgstr ""
+msgstr "Juruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:215
 msgctxt "shipname"
 msgid "Juruena"
-msgstr ""
+msgstr "Juruena"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:217
 msgctxt "shipname"
 msgid "Jurupari"
-msgstr ""
+msgstr "Jurupari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:219
 msgctxt "shipname"
 msgid "Jutai"
-msgstr ""
+msgstr "Jutai"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:221
 msgctxt "shipname"
 msgid "Jutaizinho"
-msgstr ""
+msgstr "Jutaizinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:223
 msgctxt "shipname"
 msgid "Liberdade"
-msgstr ""
+msgstr "Liberdade"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:225
 msgctxt "shipname"
 msgid "Luna"
-msgstr ""
+msgstr "Luna"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:227
 msgctxt "shipname"
 msgid "Madeira"
-msgstr ""
+msgstr "Madeira"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:229
 msgctxt "shipname"
 msgid "Madeirinha"
-msgstr ""
+msgstr "Madeirinha"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:231
 msgctxt "shipname"
 msgid "Maiá"
-msgstr ""
+msgstr "Maiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:233
 msgctxt "shipname"
 msgid "Maici"
-msgstr ""
+msgstr "Maici"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:235
 msgctxt "shipname"
 msgid "Mamiá"
-msgstr ""
+msgstr "Mamiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:237
 msgctxt "shipname"
 msgid "Mamoriá"
-msgstr ""
+msgstr "Mamoriá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:239
 msgctxt "shipname"
 msgid "Mamuru"
-msgstr ""
+msgstr "Mamuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:241
 msgctxt "shipname"
 msgid "Manacapuru"
-msgstr ""
+msgstr "Manacapuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Manicoré"
-msgstr ""
+msgstr "Manicoré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
 msgctxt "shipname"
 msgid "Manicorezinho"
-msgstr ""
+msgstr "Manicorezinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:247
 msgctxt "shipname"
 msgid "Mapari"
-msgstr ""
+msgstr "Mapari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:249
 msgctxt "shipname"
 msgid "Mapiá Grande"
-msgstr ""
+msgstr "Mapiá Grande"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:251
 msgctxt "shipname"
 msgid "Maracanã"
-msgstr ""
+msgstr "Maracanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:253
 msgctxt "shipname"
 msgid "Marari"
-msgstr ""
+msgstr "Marari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:255
 msgctxt "shipname"
 msgid "Marauiá"
-msgstr ""
+msgstr "Marauiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:257
 msgctxt "shipname"
 msgid "Marié"
-msgstr ""
+msgstr "Marié"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:259
 msgctxt "shipname"
 msgid "Mariepauá"
-msgstr ""
+msgstr "Mariepauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:261
 msgctxt "shipname"
 msgid "Marimari"
-msgstr ""
+msgstr "Marimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:263
 msgctxt "shipname"
 msgid "Mataurá"
-msgstr ""
+msgstr "Mataurá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:265
 msgctxt "shipname"
 msgid "Matupiri"
-msgstr ""
+msgstr "Matupiri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:267
 msgctxt "shipname"
 msgid "Maués Açu"
-msgstr ""
+msgstr "Maués Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:269
 msgctxt "shipname"
 msgid "Mineruázinho"
-msgstr ""
+msgstr "Mineruázinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:271
 msgctxt "shipname"
 msgid "Muaco"
-msgstr ""
+msgstr "Muaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:273
 msgctxt "shipname"
 msgid "Mucum"
-msgstr ""
+msgstr "Mucum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:275
 msgctxt "shipname"
 msgid "Mutum"
-msgstr ""
+msgstr "Mutum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:277
 msgctxt "shipname"
 msgid "Nhamundá"
-msgstr ""
+msgstr "Nhamundá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:279
 msgctxt "shipname"
 msgid "Paciá"
-msgstr ""
+msgstr "Paciá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:281
 msgctxt "shipname"
 msgid "Padauari"
-msgstr ""
+msgstr "Padauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:283
 msgctxt "shipname"
 msgid "Papagaio"
-msgstr ""
+msgstr "Papagaio"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:285
 msgctxt "shipname"
 msgid "Papuri"
-msgstr ""
+msgstr "Papuri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:287
 msgctxt "shipname"
 msgid "Paraconi"
-msgstr ""
+msgstr "Paraconi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:289
 msgctxt "shipname"
 msgid "Parauari"
-msgstr ""
+msgstr "Parauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:291
 msgctxt "shipname"
 msgid "Pardo"
-msgstr ""
+msgstr "Pardo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:293
 msgctxt "shipname"
 msgid "Pati"
-msgstr ""
+msgstr "Pati"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:295
 msgctxt "shipname"
 msgid "Pauini"
-msgstr ""
+msgstr "Pauini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:297
 msgctxt "shipname"
 msgid "Pinhuã"
-msgstr ""
+msgstr "Pinhuã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:299
 msgctxt "shipname"
 msgid "Piorini"
-msgstr ""
+msgstr "Piorini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:301
 msgctxt "shipname"
 msgid "Piratucu"
-msgstr ""
+msgstr "Piratucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:303
 msgctxt "shipname"
 msgid "Pitinga"
-msgstr ""
+msgstr "Pitinga"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:305
 msgctxt "shipname"
 msgid "Preto"
-msgstr ""
+msgstr "Preto"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:307
 msgctxt "shipname"
 msgid "Preto da Eva"
-msgstr ""
+msgstr "Preto da Eva"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:309
 msgctxt "shipname"
 msgid "Prêto do Igapó-Açu"
-msgstr ""
+msgstr "Prêto do Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:311
 msgctxt "shipname"
 msgid "Puduari"
-msgstr ""
+msgstr "Puduari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:313
 msgctxt "shipname"
 msgid "Pureté"
-msgstr ""
+msgstr "Pureté"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:315
 msgctxt "shipname"
 msgid "Puruê"
-msgstr ""
+msgstr "Puruê"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:317
 msgctxt "shipname"
 msgid "Purus"
-msgstr ""
+msgstr "Purus"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:319
 msgctxt "shipname"
 msgid "Quixito"
-msgstr ""
+msgstr "Quixito"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:321
 msgctxt "shipname"
 msgid "Rio Negro"
-msgstr ""
+msgstr "Rio Negro"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:323
 msgctxt "shipname"
 msgid "Riozinho"
-msgstr ""
+msgstr "Riozinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:325
 msgctxt "shipname"
 msgid "Sepatini"
-msgstr ""
+msgstr "Sepatini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:327
 msgctxt "shipname"
 msgid "Sepoti"
-msgstr ""
+msgstr "Sepoti"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:329
 msgctxt "shipname"
 msgid "Seruini"
-msgstr ""
+msgstr "Seruini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:331
 msgctxt "shipname"
 msgid "Sucunduri"
-msgstr ""
+msgstr "Sucunduri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:333
 msgctxt "shipname"
 msgid "Tapajós"
-msgstr ""
+msgstr "Tapajós"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:335
 msgctxt "shipname"
 msgid "Tapauá"
-msgstr ""
+msgstr "Tapauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:337
 msgctxt "shipname"
 msgid "Tarauacá"
-msgstr ""
+msgstr "Tarauacá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:339
 msgctxt "shipname"
 msgid "Tarumã Açu"
-msgstr ""
+msgstr "Tarumã Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:341
 msgctxt "shipname"
 msgid "Tarumã Mirim"
-msgstr ""
+msgstr "Tarumã Mirim"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:343
 msgctxt "shipname"
 msgid "Tea"
-msgstr ""
+msgstr "Tea"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:345
 msgctxt "shipname"
 msgid "Tefé"
-msgstr ""
+msgstr "Tefé"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:347
 msgctxt "shipname"
 msgid "Tonantins"
-msgstr ""
+msgstr "Tonantins"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:349
 msgctxt "shipname"
 msgid "Toototobi"
-msgstr ""
+msgstr "Toototobi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:351
 msgctxt "shipname"
-msgid "Traira"
-msgstr ""
+msgid "Traíra"
+msgstr "Traíra"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:353
 msgctxt "shipname"
 msgid "Tumiã"
-msgstr ""
+msgstr "Tumiã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:355
 msgctxt "shipname"
 msgid "Tupana"
-msgstr ""
+msgstr "Tupana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:357
 msgctxt "shipname"
 msgid "Uaicurapa"
-msgstr ""
+msgstr "Uaicurapa"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:359
 msgctxt "shipname"
 msgid "Uarini"
-msgstr ""
+msgstr "Uarini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:361
 msgctxt "shipname"
 msgid "Uatumã"
-msgstr ""
+msgstr "Uatumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:363
 msgctxt "shipname"
 msgid "Uaupés"
-msgstr ""
+msgstr "Uaupés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:365
 msgctxt "shipname"
 msgid "Umari"
-msgstr ""
+msgstr "Umari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:367
 msgctxt "shipname"
 msgid "Uneiuxi"
-msgstr ""
+msgstr "Uneiuxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:369
 msgctxt "shipname"
 msgid "Unini"
-msgstr ""
+msgstr "Unini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Uruá"
-msgstr ""
+msgstr "Uruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Urubaxi"
-msgstr ""
+msgstr "Urubaxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Urubu"
-msgstr ""
+msgstr "Urubu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Urucu"
-msgstr ""
+msgstr "Urucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Urupadi"
-msgstr ""
+msgstr "Urupadi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Xeruã"
-msgstr ""
+msgstr "Xeruã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Xie"
-msgstr ""
+msgstr "Xie"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Zinho"
-msgstr ""
+msgstr "Zinho"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101
