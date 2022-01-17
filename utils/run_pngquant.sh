@@ -17,9 +17,16 @@ fi
 echo "Running pngquant..."
 tempfile="$(mktemp -d)/image.png"
 
+if [ -z "$1" ]
+then
+  dir="data"
+else
+  dir="$1"
+fi
+
 i=0
 skipped=0
-for image in $(find "data" -name '*.png')
+for image in $(find "$dir" -name '*.png')
 do
   ((++i))
   printf "\r[%5d] %-100s " "$i" "$image"
