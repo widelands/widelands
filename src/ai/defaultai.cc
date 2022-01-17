@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2021 by the Widelands Development Team
+ * Copyright (C) 2004-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,9 +70,9 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = false;
+constexpr bool kPrintStats = true;
 // enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = false;
+constexpr bool kCollectPerfData = true;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -399,7 +399,7 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kUnbuildableFCheck:
 			set_taskpool_task_time(gametime + Duration(4000), SchedulerTaskId::kUnbuildableFCheck);
-			update_all_not_buildable_fields();
+			update_all_not_buildable_fields(gametime);
 			break;
 		case SchedulerTaskId::kCheckEconomies:
 			check_economies();
@@ -1477,23 +1477,30 @@ void DefaultAI::update_all_mineable_fields(const Time& gametime) {
 }
 
 /**
- * Checks up to 50 fields that weren't buildable the last time.
- *
- * milliseconds if the area the computer owns is big.
+ * Checks a part of unusable_fields. Outcome can be:
+ * - the field is not ours anymore - drop it
+ * - it is still ours, but still not buildable - do nothing (keep it)
+ * - is ours, and buildable, drop from unused fields and create buildable_field or
+ * mineable_field and insert to particular dequeue
  */
-void DefaultAI::update_all_not_buildable_fields() {
+void DefaultAI::update_all_not_buildable_fields(const Time& gametime) {
 	int32_t const pn = player_number();
 
 	// We are checking at least 5 unusable fields (or less if there are not 5 of them)
-	// at once, but not more then 200...
+	// at once, but not more then 400...
 	// The idea is to check each field at least once a minute, of course with big maps
 	// it will take longer
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 5) {
-		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 15, 200);
+		maxchecks = std::min<uint32_t>(5 + (unusable_fields.size() - 5) / 10, 400);
 	}
 
-	for (uint32_t i = 0; i < maxchecks; ++i) {
+	// for performance reasons we update only this count of fields
+	const uint32_t fields_update_limit = 20;
+	// just counter
+	uint32_t checked_fields = 0;
+
+	while (maxchecks--) {
 		//  check whether we lost ownership of the node
 		if (unusable_fields.front().field->get_owned_by() != pn) {
 			unusable_fields.pop_front();
@@ -1504,14 +1511,20 @@ void DefaultAI::update_all_not_buildable_fields() {
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_SIZEMASK) {
 			buildable_fields.push_back(new BuildableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			update_buildable_field(*buildable_fields.back());
+			if (fields_update_limit > checked_fields++) {
+				update_buildable_field(*buildable_fields.back());
+				buildable_fields.back()->field_info_expiration = gametime + kFieldInfoExpiration;
+			}
 			continue;
 		}
 
 		if (player_->get_buildcaps(unusable_fields.front()) & Widelands::BUILDCAPS_MINE) {
 			mineable_fields.push_back(new MineableField(unusable_fields.front()));
 			unusable_fields.pop_front();
-			update_mineable_field(*mineable_fields.back());
+			if (fields_update_limit > checked_fields++) {
+				update_mineable_field(*mineable_fields.back());
+				mineable_fields.back()->field_info_expiration = gametime + kMineFieldInfoExpiration;
+			}
 			continue;
 		}
 

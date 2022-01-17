@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2021 by the Widelands Development Team
+ * Copyright (C) 2006-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,8 +58,6 @@ Player
 ------
 
 .. class:: Player
-
-   Child of: :class:`wl.bases.PlayerBase`
 
    This class represents one of the players in the editor.
    Note that you cannot instantiate a class of this type directly, use
