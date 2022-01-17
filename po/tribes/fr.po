@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
 "PO-Revision-Date: 2022-01-05 02:35+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -1302,7 +1302,6 @@ msgstr "Cuisinier de racines de Manioc"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -4793,149 +4792,149 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr "Champ d'orge (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:14
-msgid "Blueberry Bush (tiny)"
-msgstr "Buisson de myrtilles (minuscule)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:38
-msgid "Blueberry Bush (small)"
-msgstr "Buisson de myrtilles (petit)"
-
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
 msgstr "Buisson de myrtilles (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/blueberry/ripe/init.lua:9
 msgid "Blueberry Bush (ripe)"
 msgstr "Buisson de myrtilles (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:14
-msgid "Black Currant (tiny)"
-msgstr "Cassis (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/small/init.lua:9
+msgid "Blueberry Bush (small)"
+msgstr "Buisson de myrtilles (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:38
-msgid "Black Currant (small)"
-msgstr "Cassis (petit)"
+#: ../../data/tribes/immovables/berry_bushes/blueberry/tiny/init.lua:9
+msgid "Blueberry Bush (tiny)"
+msgstr "Buisson de myrtilles (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
 msgstr "Cassis (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
 msgstr "Cassis (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:14
-msgid "Red Currant (tiny)"
-msgstr "Groseilles (minuscules)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/small/init.lua:9
+msgid "Black Currant (small)"
+msgstr "Cassis (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:38
-msgid "Red Currant (small)"
-msgstr "Groseilles (petites)"
+#: ../../data/tribes/immovables/berry_bushes/currant_black/tiny/init.lua:9
+msgid "Black Currant (tiny)"
+msgstr "Cassis (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/currant_red/medium/init.lua:9
 msgid "Red Currant (medium)"
 msgstr "Groseilles (moyennes)"
 
-#: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/currant_red/ripe/init.lua:9
 msgid "Red Currant (ripe)"
 msgstr "Groseilles (mûres)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:14
-msgid "Desert Hackberry (tiny)"
-msgstr "Micocoulier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/small/init.lua:9
+msgid "Red Currant (small)"
+msgstr "Groseilles (petites)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:38
-msgid "Desert Hackberry (small)"
-msgstr "Micocoulier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/currant_red/tiny/init.lua:9
+msgid "Red Currant (tiny)"
+msgstr "Groseilles (minuscules)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/medium/init.lua:9
 msgid "Desert Hackberry (medium)"
 msgstr "Micocoulier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/ripe/init.lua:9
 msgid "Desert Hackberry (ripe)"
 msgstr "Micocoulier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:14
-msgid "Juniper (tiny)"
-msgstr "Genévrier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/small/init.lua:9
+msgid "Desert Hackberry (small)"
+msgstr "Micocoulier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:38
-msgid "Juniper (small)"
-msgstr "Genévrier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/desert_hackberry/tiny/init.lua:9
+msgid "Desert Hackberry (tiny)"
+msgstr "Micocoulier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/juniper/medium/init.lua:9
 msgid "Juniper (medium)"
 msgstr "Genévrier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/juniper/ripe/init.lua:9
 msgid "Juniper (ripe)"
 msgstr "Genévrier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:14
-msgid "Raspberry Bush (tiny)"
-msgstr "Buisson de framboises (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/small/init.lua:9
+msgid "Juniper (small)"
+msgstr "Genévrier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:38
-msgid "Raspberry Bush (small)"
-msgstr "Framboisier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/juniper/tiny/init.lua:9
+msgid "Juniper (tiny)"
+msgstr "Genévrier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/raspberry/medium/init.lua:9
 msgid "Raspberry Bush (medium)"
 msgstr "Buisson de framboises (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/raspberry/ripe/init.lua:9
 msgid "Raspberry Bush (ripe)"
 msgstr "Framboisier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:14
-msgid "Sea Buckthorn (tiny)"
-msgstr "Argousier (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/small/init.lua:9
+msgid "Raspberry Bush (small)"
+msgstr "Framboisier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:38
-msgid "Sea Buckthorn (small)"
-msgstr "Argousier (petit)"
+#: ../../data/tribes/immovables/berry_bushes/raspberry/tiny/init.lua:9
+msgid "Raspberry Bush (tiny)"
+msgstr "Buisson de framboises (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/medium/init.lua:9
 msgid "Sea Buckthorn (medium)"
 msgstr "Argousier (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/ripe/init.lua:9
 msgid "Sea Buckthorn (ripe)"
 msgstr "Argousier (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:14
-msgid "Stink Shepherd’s Tree (tiny)"
-msgstr "Arbre Bois-puant (minuscule)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/small/init.lua:9
+msgid "Sea Buckthorn (small)"
+msgstr "Argousier (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:38
-msgid "Stink Shepherd’s Tree (small)"
-msgstr "Arbre Bois-puant (petit)"
+#: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/tiny/init.lua:9
+msgid "Sea Buckthorn (tiny)"
+msgstr "Argousier (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/medium/init.lua:9
 msgid "Stink Shepherd’s Tree (medium)"
 msgstr "Arbre Bois-puant (moyen)"
 
-#: ../../data/tribes/immovables/berry_bushes/stink_tree/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/ripe/init.lua:9
 msgid "Stink Shepherd’s Tree (ripe)"
 msgstr "Arbre Bois-puant (mûr)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:14
-msgid "Strawberries (tiny)"
-msgstr "Fraises (miniuscules)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/small/init.lua:9
+msgid "Stink Shepherd’s Tree (small)"
+msgstr "Arbre Bois-puant (petit)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:38
-msgid "Strawberries (small)"
-msgstr "Fraises (petites)"
+#: ../../data/tribes/immovables/berry_bushes/stink_tree/tiny/init.lua:9
+msgid "Stink Shepherd’s Tree (tiny)"
+msgstr "Arbre Bois-puant (minuscule)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:62
+#: ../../data/tribes/immovables/berry_bushes/strawberry/medium/init.lua:9
 msgid "Strawberries (medium)"
 msgstr "Fraises (moyennes)"
 
-#: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:86
+#: ../../data/tribes/immovables/berry_bushes/strawberry/ripe/init.lua:9
 msgid "Strawberries (ripe)"
 msgstr "Fraises (mûres)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/small/init.lua:9
+msgid "Strawberries (small)"
+msgstr "Fraises (petites)"
+
+#: ../../data/tribes/immovables/berry_bushes/strawberry/tiny/init.lua:9
+msgid "Strawberries (tiny)"
+msgstr "Fraises (miniuscules)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/harvested/init.lua:8
@@ -5112,116 +5111,116 @@ msgid "Reed Field (tiny)"
 msgstr "Champ de roseau (minuscule)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:8
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:8
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:8
-#: ../../data/tribes/immovables/resi/empire/init.lua:8
-#: ../../data/tribes/immovables/resi/frisians/init.lua:8
-msgctxt "resource_indicator"
-msgid "No Resources"
-msgstr "Pas de ressources"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:24
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:77
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:68
-#: ../../data/tribes/immovables/resi/empire/init.lua:68
-#: ../../data/tribes/immovables/resi/frisians/init.lua:77
+#: ../../data/tribes/immovables/resi/amazons/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Gold"
 msgstr "De l'or"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:40
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:108
-#: ../../data/tribes/immovables/resi/frisians/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Granite"
-msgstr "Du granit"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:56
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:169
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:148
-#: ../../data/tribes/immovables/resi/empire/init.lua:148
-#: ../../data/tribes/immovables/resi/frisians/init.lua:169
+#: ../../data/tribes/immovables/resi/amazons/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/gold_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/gold_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Gold"
 msgstr "Beaucoup d'or"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/amazons/init.lua:72
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:188
-#: ../../data/tribes/immovables/resi/frisians/init.lua:215
+#: ../../data/tribes/immovables/resi/amazons/none/init.lua:8
+#: ../../data/tribes/immovables/resi/atlanteans/none/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/none/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/none/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/none/init.lua:8
+msgctxt "resource_indicator"
+msgid "No Resources"
+msgstr "Pas de ressources"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr "Du granit"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/stones_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Granite"
 msgstr "Beaucoup de granit"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:31
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:28
-#: ../../data/tribes/immovables/resi/empire/init.lua:28
-#: ../../data/tribes/immovables/resi/frisians/init.lua:31
-msgctxt "resource_indicator"
-msgid "Water"
-msgstr "Eau"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:54
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:48
-#: ../../data/tribes/immovables/resi/empire/init.lua:48
-#: ../../data/tribes/immovables/resi/frisians/init.lua:54
+#: ../../data/tribes/immovables/resi/atlanteans/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Coal"
 msgstr "Du charbon"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:100
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:88
-#: ../../data/tribes/immovables/resi/empire/init.lua:88
-#: ../../data/tribes/immovables/resi/frisians/init.lua:100
-msgctxt "resource_indicator"
-msgid "Some Iron"
-msgstr "Du fer"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Crystals"
-msgstr "Quelques cristaux"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:146
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:128
-#: ../../data/tribes/immovables/resi/empire/init.lua:128
-#: ../../data/tribes/immovables/resi/frisians/init.lua:146
+#: ../../data/tribes/immovables/resi/atlanteans/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/coal_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/coal_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Coal"
 msgstr "Beaucoup de charbon"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:168
-#: ../../data/tribes/immovables/resi/empire/init.lua:168
-#: ../../data/tribes/immovables/resi/frisians/init.lua:192
+#: ../../data/tribes/immovables/resi/atlanteans/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_1/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Iron"
+msgstr "Du fer"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/iron_2/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/iron_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Iron"
 msgstr "Beaucoup de fer"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
+#: ../../data/tribes/immovables/resi/atlanteans/stones_1/init.lua:8
+msgctxt "resource_indicator"
+msgid "Some Crystals"
+msgstr "Quelques cristaux"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
 msgstr "Beaucoup de cristaux"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:108
+#: ../../data/tribes/immovables/resi/atlanteans/water/init.lua:8
+#: ../../data/tribes/immovables/resi/barbarians/water/init.lua:8
+#: ../../data/tribes/immovables/resi/empire/water/init.lua:8
+#: ../../data/tribes/immovables/resi/frisians/water/init.lua:8
+msgctxt "resource_indicator"
+msgid "Water"
+msgstr "Eau"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/empire/stones_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Marble"
 msgstr "Du marbre"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/empire/init.lua:188
+#: ../../data/tribes/immovables/resi/empire/stones_2/init.lua:8
 msgctxt "resource_indicator"
 msgid "A Lot of Marble"
 msgstr "Beaucoup de marbre"
@@ -5236,66 +5235,66 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Site de construction navale"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:80
-#: ../../data/tribes/immovables/trees/balsa/init.lua:158
-#: ../../data/tribes/immovables/trees/balsa/init.lua:236
-#: ../../data/tribes/immovables/trees/balsa/init.lua:314
-msgid "Balsa Tree (Sapling)"
-msgstr "Balsa (Jeune pousse)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:98
-#: ../../data/tribes/immovables/trees/balsa/init.lua:176
-#: ../../data/tribes/immovables/trees/balsa/init.lua:254
-#: ../../data/tribes/immovables/trees/balsa/init.lua:332
-msgid "Balsa Tree (Pole)"
-msgstr "Balsa (Arbuste)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:116
-#: ../../data/tribes/immovables/trees/balsa/init.lua:194
-#: ../../data/tribes/immovables/trees/balsa/init.lua:272
-#: ../../data/tribes/immovables/trees/balsa/init.lua:350
+#: ../../data/tribes/immovables/trees/balsa/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/mature/winter/init.lua:11
 msgid "Balsa Tree (Mature)"
 msgstr "Balsa (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:134
-#: ../../data/tribes/immovables/trees/balsa/init.lua:212
-#: ../../data/tribes/immovables/trees/balsa/init.lua:290
-#: ../../data/tribes/immovables/trees/balsa/init.lua:368
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:11
 msgid "Balsa Tree (Old)"
 msgstr "Balsa (Vieux)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/balsa/init.lua:136
-#: ../../data/tribes/immovables/trees/balsa/init.lua:214
-#: ../../data/tribes/immovables/trees/balsa/init.lua:292
-#: ../../data/tribes/immovables/trees/balsa/init.lua:370
+#: ../../data/tribes/immovables/trees/balsa/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/balsa/old/winter/init.lua:13
 msgid "Balsa Tree"
 msgstr "Arbre de balsa"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:8
-msgid "Cocoa Tree (sapling)"
-msgstr "Cacaoyer (Jeune pousse)"
+#: ../../data/tribes/immovables/trees/balsa/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/pole/winter/init.lua:11
+msgid "Balsa Tree (Pole)"
+msgstr "Balsa (Arbuste)"
+
+#. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/balsa/sapling/winter/init.lua:11
+msgid "Balsa Tree (Sapling)"
+msgstr "Balsa (Jeune pousse)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:32
-msgid "Cocoa Tree (pole)"
-msgstr "Cacaoyer (Arbuste)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:56
+#: ../../data/tribes/immovables/trees/cocoa/mature/init.lua:8
 msgid "Cocoa Tree (mature)"
 msgstr "Cacaoyer (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:80
+#: ../../data/tribes/immovables/trees/cocoa/old/init.lua:8
 msgid "Cocoa Tree (old)"
 msgstr "Cacaoyer (vieux)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/pole/init.lua:8
+msgid "Cocoa Tree (pole)"
+msgstr "Cacaoyer (Arbuste)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/sapling/init.lua:8
+msgid "Cocoa Tree (sapling)"
+msgstr "Cacaoyer (Jeune pousse)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5303,84 +5302,84 @@ msgid "Dead Tree"
 msgstr "Arbre mort"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:80
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:158
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:236
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:314
-msgid "Ironwood Tree (Sapling)"
-msgstr "Arbre Bois de Fer (jeune arbre)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:98
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:176
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:254
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:332
-msgid "Ironwood Tree (Pole)"
-msgstr "Arbre Bois de Fer (perche)"
-
-#. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:116
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:194
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:272
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:350
+#: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/mature/winter/init.lua:11
 msgid "Ironwood Tree (Mature)"
 msgstr "Arbre Bois de Fer (adulte)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:134
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:212
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:290
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:368
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:11
 msgid "Ironwood Tree (Old)"
 msgstr "Arbre Bois de Fer (jeune arbre)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:136
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:214
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:292
-#: ../../data/tribes/immovables/trees/ironwood/init.lua:370
+#: ../../data/tribes/immovables/trees/ironwood/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/ironwood/old/winter/init.lua:13
 msgid "Ironwood Tree"
 msgstr "Arbre de bois ferreux"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:80
-#: ../../data/tribes/immovables/trees/rubber/init.lua:158
-#: ../../data/tribes/immovables/trees/rubber/init.lua:236
-#: ../../data/tribes/immovables/trees/rubber/init.lua:314
-msgid "Rubber Tree (Sapling)"
-msgstr "Arbre à caoutchouc (Jeune pousse)"
+#: ../../data/tribes/immovables/trees/ironwood/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/pole/winter/init.lua:11
+msgid "Ironwood Tree (Pole)"
+msgstr "Arbre Bois de Fer (perche)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:98
-#: ../../data/tribes/immovables/trees/rubber/init.lua:176
-#: ../../data/tribes/immovables/trees/rubber/init.lua:254
-#: ../../data/tribes/immovables/trees/rubber/init.lua:332
-msgid "Rubber Tree (Pole)"
-msgstr "Arbre à caoutchouc (Arbuste)"
+#: ../../data/tribes/immovables/trees/ironwood/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/ironwood/sapling/winter/init.lua:11
+msgid "Ironwood Tree (Sapling)"
+msgstr "Arbre Bois de Fer (jeune arbre)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:116
-#: ../../data/tribes/immovables/trees/rubber/init.lua:194
-#: ../../data/tribes/immovables/trees/rubber/init.lua:272
-#: ../../data/tribes/immovables/trees/rubber/init.lua:350
+#: ../../data/tribes/immovables/trees/rubber/mature/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/mature/winter/init.lua:11
 msgid "Rubber Tree (Mature)"
 msgstr "Arbre à caoutchouc (Mature)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:134
-#: ../../data/tribes/immovables/trees/rubber/init.lua:212
-#: ../../data/tribes/immovables/trees/rubber/init.lua:290
-#: ../../data/tribes/immovables/trees/rubber/init.lua:368
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:11
 msgid "Rubber Tree (Old)"
 msgstr "Arbre à caoutchouc (Vieux)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
-#: ../../data/tribes/immovables/trees/rubber/init.lua:136
-#: ../../data/tribes/immovables/trees/rubber/init.lua:214
-#: ../../data/tribes/immovables/trees/rubber/init.lua:292
-#: ../../data/tribes/immovables/trees/rubber/init.lua:370
+#: ../../data/tribes/immovables/trees/rubber/old/black/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/desert/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/green/init.lua:13
+#: ../../data/tribes/immovables/trees/rubber/old/winter/init.lua:13
 msgid "Rubber Tree"
 msgstr "Arbre à caoutchouc"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/pole/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/desert/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/pole/winter/init.lua:11
+msgid "Rubber Tree (Pole)"
+msgstr "Arbre à caoutchouc (Arbuste)"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/sapling/black/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/desert/init.lua:12
+#: ../../data/tribes/immovables/trees/rubber/sapling/green/init.lua:11
+#: ../../data/tribes/immovables/trees/rubber/sapling/winter/init.lua:11
+msgid "Rubber Tree (Sapling)"
+msgstr "Arbre à caoutchouc (Jeune pousse)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8

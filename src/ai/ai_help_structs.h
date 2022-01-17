@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2021 by the Widelands Development Team
+ * Copyright (C) 2009-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -366,6 +366,8 @@ struct BuildableField {
 	bool preferred;
 	bool enemy_nearby;
 	bool enemy_accessible_;
+
+	bool invalidated;
 
 	bool enemy_wh_nearby;
 	uint16_t unowned_land_nearby;

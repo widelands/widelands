@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2021 by the Widelands Development Team
+ * Copyright (C) 2006-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -337,8 +337,6 @@ Button
 
 .. class:: Button
 
-   Child of: :class:`Panel`
-
    This represents a simple push button.
 */
 const char LuaButton::className[] = "Button";
@@ -400,8 +398,6 @@ Dropdown
 --------
 
 .. class:: Dropdown
-
-   Child of: :class:`Panel`
 
    This represents a dropdown menu.
 */
@@ -584,8 +580,6 @@ Tab
 
 .. class:: Tab
 
-   Child of: :class:`Panel`
-
    A tab button.
 */
 const char LuaTab::className[] = "Tab";
@@ -643,8 +637,6 @@ Window
 
 .. class:: Window
 
-   Child of: :class:`Panel`
-
    This represents a Window.
 */
 const char LuaWindow::className[] = "Window";
@@ -693,8 +685,6 @@ MapView
 -------
 
 .. class:: MapView
-
-   Child of :class:`Panel`
 
    The map view is the main widget and the root of all panels. It is the big
    view of the map that is visible at all times while playing.

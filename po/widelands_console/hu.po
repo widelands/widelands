@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-04 02:57+0000\n"
-"PO-Revision-Date: 2022-01-04 22:45+0000\n"
+"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"PO-Revision-Date: 2022-01-07 14:50+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -53,18 +53,18 @@ msgid "Options:"
 msgstr "Beállítások:"
 
 #: ../../src/wlapplication_messages.cc:56
-msgid "Use the specified directory for the widelands data files."
+msgid "Use the specified directory for the Widelands data files."
 msgstr "A megadott könyvtár használata a Widelands adatfájlok betöltéséhez."
 
 #: ../../src/wlapplication_messages.cc:58
 #, c-format
 msgid ""
-"Use the specified directory for widelands config files, savegames and "
+"Use the specified directory for Widelands config files, savegames, and "
 "replays. Default is `%s`."
 msgstr "A megadott könyvtár használata a Widelands beállító fájlok, mentett játékok és visszajátszások tárolására. Alapértelmezett: `%s`"
 
 #: ../../src/wlapplication_messages.cc:63
-msgid "Use the specified directory for the widelands locale files."
+msgid "Use the specified directory for the Widelands locale files."
 msgstr "A megadott könyvtár használata a Widelands nyelvi fájlokhoz."
 
 #: ../../src/wlapplication_messages.cc:67
