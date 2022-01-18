@@ -7,10 +7,12 @@
 -- worker type.
 
 include "tribes/scripting/help/format_help.lua"
+include "tribes/scripting/help/calculations.lua"
 
 --  =======================================================
 --  ************* Main worker help functions *************
 --  =======================================================
+
 
 -- RST
 -- .. function:: worker_help_producers_string(worker_description)
@@ -38,37 +40,9 @@ function worker_help_producers_string(tribe, worker_description)
             result = result .. h2(_"Producer")
             result = result .. dependencies({building, worker_description}, building.descname)
 
-            -- Find out which programs in the building recruit this worker if any
-            local producing_programs = {}
-            for j, program_name in ipairs(building.production_programs) do
-               for worker, amount in pairs(building:recruited_workers(program_name)) do
-                  if (worker_description.name == worker) then
-                     table.insert(producing_programs, program_name)
-                  end
-               end
-            end
+            -- -- Find out which programs in the building recruit this worker if any
 
-            -- Now collect all workers recruited by the filtered programs
-            local recruited_workers_strings = {}
-            local recruited_workers_counters = {}
-            for j, program_name in ipairs(producing_programs) do
-               local recruited_workers_amount = {}
-               recruited_workers_counters[program_name] = 0
-               for worker, amount in pairs(building:recruited_workers(program_name)) do
-                  if (recruited_workers_amount[worker] == nil) then
-                     recruited_workers_amount[worker] = 0
-                  end
-                  recruited_workers_amount[worker] = recruited_workers_amount[worker] + amount
-                  recruited_workers_counters[program_name] = recruited_workers_counters[program_name] + amount
-               end
-               local produced_wares_string = ""
-               for ware, amount in pairs(recruited_workers_amount) do
-               local ware_descr = wl.Game():get_worker_description(ware)
-                  produced_wares_string = produced_wares_string
-                     .. help_ware_amount_line(ware_descr, amount)
-               end
-               recruited_workers_strings[program_name] = produced_wares_string
-            end
+            producing_programs, recruited_workers_counters, recruited_workers_strings = programs_workers_count(tribe, building, worker_description)
 
             -- Now collect the consumed wares for each filtered program and print the program info
             for j, program_name in ipairs(producing_programs) do
@@ -189,7 +163,7 @@ function worker_help_string(tribe, worker_description)
    -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
    local becomes_description = worker_description.becomes
    if (becomes_description) then
-
+      result = result .. h2(_"Experience levels")
       result = result .. help_worker_experience(worker_description, becomes_description)
    end
    -- Soldier properties
