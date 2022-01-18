@@ -82,6 +82,14 @@ descriptions:new_productionsite_type {
             "callworker=collect_coal",
          },
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=log:3",
+            "produce=coal",
+         },
+      },
    },
 
    out_of_resource_notification = {
