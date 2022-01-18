@@ -27,9 +27,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
-"PO-Revision-Date: 2022-01-07 03:21+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"PO-Revision-Date: 2022-01-10 23:32+0000\n"
+"Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -301,8 +301,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Déc"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:94
 #: ../../src/ui_fsmenu/keyboard_options.cc:295
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -316,12 +316,12 @@ msgstr "Menu Principal"
 msgid "Tools"
 msgstr "Outils"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:79
 msgid "Show / Hide"
@@ -511,10 +511,10 @@ msgstr "Information"
 msgid "Click on a field to show information about it"
 msgstr "Cliquez sur un champ pour montrer des informations"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:415
@@ -1432,8 +1432,8 @@ msgid ""
 "location."
 msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte pour la diviser à l'emplacement souhaité. Lorsque vous augmentez la taille de la carte, de nouvelles colonnes / lignes seront insérées à l'est / sud du point sélectionné. Lorsque vous réduisez la carte, le nombre souhaité de colonnes / lignes sera supprimé de l'est / sud de l'emplacement de fractionnement."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -5613,14 +5613,14 @@ msgstr "Appliquer les réglages de défilement"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:383
 msgid "Zoom Map"
-msgstr ""
+msgstr "Zoom carte"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
 #: ../../src/ui_fsmenu/mousewheel_options.cc:391
 msgid "Scroll Map"
-msgstr ""
+msgstr "Faire défiler la carte"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
@@ -5640,23 +5640,23 @@ msgstr "Changer la taille de l'outil de l'éditeur"
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:415
 msgid "Invert scroll direction for map zooming:"
-msgstr ""
+msgstr "Inverser la direction du défilement pour zoomer sur la carte :"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:420
 msgid "Invert scroll direction for tab switching:"
-msgstr ""
+msgstr "Inverser la direction du défilement pour sauter les onglets :"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:425
 msgid "Invert scroll direction for increase/decrease:"
-msgstr ""
+msgstr "Inverser la direction du défilement pour augmenter/réduire :"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:467
 msgid "Scroll Settings Conflict"
-msgstr ""
+msgstr "Les réglages de défilement sont en conflit"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:468
 #, c-format
@@ -5868,7 +5868,7 @@ msgstr "Nombre maximal de sauvegardes automatiques :"
 
 #: ../../src/ui_fsmenu/options.cc:233
 msgid "Compress Widelands data files (maps, replays, and savegames)"
-msgstr ""
+msgstr "Compresse les fichiers de donnés de Widelands (cartes, replays et sauvegardes)"
 
 #: ../../src/ui_fsmenu/options.cc:239
 msgid "Write syncstreams in network games to debug desyncs"
@@ -5930,7 +5930,7 @@ msgstr "Déplacer lorsque le curseur de la souris est près des bords de l'écra
 
 #: ../../src/ui_fsmenu/options.cc:287
 msgid "Invert click-and-drag map movement direction"
-msgstr ""
+msgstr "Inverser la direction de déplacement de la carte par cliquer-glisser"
 
 #: ../../src/ui_fsmenu/options.cc:293
 msgid "Teach me how to play"
@@ -6080,18 +6080,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:55 ../../src/wui/mapdetails.cc:163
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:58 ../../src/wui/mapdetails.cc:166
 msgid "Authors"
 msgstr "Auteurs"
@@ -6145,28 +6145,28 @@ msgstr "Erreur du système de fichier"
 #: ../../src/wlapplication.cc:1278
 #, c-format
 msgid "Empty value of command line parameter: %s"
-msgstr ""
+msgstr "Valeur de ligne de commande vide: %s"
 
 #: ../../src/wlapplication.cc:1283
 #, c-format
 msgid "%s can not be combined with other actions"
-msgstr ""
+msgstr "%s ne peut être combiné avec d'autres actions"
 
 #: ../../src/wlapplication.cc:1439
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
-msgstr ""
+msgstr "Paramètre de ligne de commande inconnu: %s\nIl manque peut être '=' ?"
 
 #: ../../src/wlapplication.cc:1560
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
-msgstr ""
+msgstr "--xres/--yres, --maximized et --fullscreen ne peuvent pas être combinés"
 
 #: ../../src/wlapplication.cc:1577
 #, c-format
 msgid "Unknown command line parameter: %s"
-msgstr ""
+msgstr "Paramètre de ligne de commande inconnu: %s"
 
 #: ../../src/wlapplication.cc:1629
 msgid "Game ended unexpectedly"
@@ -6633,7 +6633,7 @@ msgstr "Messages: Aller à l'endroit"
 
 #: ../../src/wlapplication_options.cc:589
 msgid "Messages: Show All"
-msgstr ""
+msgstr "Messages: Montrer tous"
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show Geologists’ Messages"
@@ -7142,9 +7142,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731
@@ -7802,7 +7802,7 @@ msgstr "Modules Complémentaires:"
 
 #: ../../src/wui/gamedetails.cc:202
 msgid "Game data error:"
-msgstr ""
+msgstr "Erreur dans les donnés du jeu"
 
 #: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"

@@ -563,15 +563,21 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_BACKSPACE:
-			linked_dropdown->delete_last_of_filter();
-			return true;
-		case SDLK_ESCAPE:
-			if (linked_dropdown->is_filtered()) {
-				linked_dropdown->clear_filter();
-			} else {
-				linked_dropdown->set_list_visibility(false);
+			if (linked_dropdown != nullptr) {
+				linked_dropdown->delete_last_of_filter();
+				return true;
 			}
-			return true;
+			return UI::Panel::handle_key(down, code);
+		case SDLK_ESCAPE:
+			if (linked_dropdown != nullptr) {
+				if (linked_dropdown->is_filtered()) {
+					linked_dropdown->clear_filter();
+				} else {
+					linked_dropdown->set_list_visibility(false);
+				}
+				return true;
+			}
+			return UI::Panel::handle_key(down, code);
 		default:
 			break;
 		}
