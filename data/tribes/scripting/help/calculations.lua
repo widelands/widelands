@@ -123,7 +123,7 @@ function programs_workers_count(tribe, building, worker_description)
       end
    end
 
-   -- Now collect all wares produced by the filtered programs
+   -- Now collect all workers recruited by the filtered programs
    local recruited_workers_strings = {}
    local recruited_workers_counters = {}
    for j, program_name in ipairs(producing_programs) do
