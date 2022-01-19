@@ -73,7 +73,7 @@ obj_explore = {
 }
 
 obj_expand = {
-   name = "obj_explore",
+   name = "obj_expand",
    title = _"Expand your teritory",
    number = 1,
    body = objective_text(_"Expand Territory",
