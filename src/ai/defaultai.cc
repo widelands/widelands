@@ -1847,41 +1847,64 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	static std::vector<Widelands::ImmovableFound> immovables;
 	immovables.reserve(50);
 	immovables.clear();
-	// Search in a radius of range
-	map.find_immovables(
-	   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
 
-	// function seems to return duplicates, so we will use serial numbers to filter them out
-	static std::set<uint32_t> unique_serials;
+
+
+	// immovables can occupy more then one field so we need a safeguard for duplicates
+	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
-	for (const Widelands::ImmovableFound& imm_found : immovables) {
-		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
-		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is a duplicate
+	std::set<uint32_t> unique_coords;
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> ps_influence_area(
+	   map, Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2));
+	do {
+
+		if (ps_influence_area.location().field->get_immovable() == nullptr) {
+			continue;
 		}
 
-		if (upcast(Widelands::PlayerImmovable const, player_immovable, &base_immovable)) {
-
-			// TODO(unknown): Only continue if this is an opposing site
-			// allied sites should be counted for military influence
-			if (player_immovable->owner().player_number() != pn) {
-				continue;
-			}
-			// here we identify the buiding (including expected building if constructionsite)
-			// and calculate some statistics about nearby buildings
-			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
-				consider_productionsite_influence(field, imm_found.coords, bo);
-			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
-					consider_productionsite_influence(field, imm_found.coords, bo);
-				}
-			}
+		if (!unique_coords.insert(ps_influence_area.location().hash()).second) {
+			continue;  // position was not inserted in the set, so we saw it before
 		}
-	}
+
+		if (ps_influence_area.location().field->get_owned_by() == pn) {  // NOCOM
+			handle_own_ps(ps_influence_area.location(), field);
+		}
+
+	} while (ps_influence_area.advance(map));
+	printf("%lu immovables found\n", unique_coords.size());
+
+	// // Search in a radius of range
+	// map.find_immovables(
+	//    game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
+
+	// for (const Widelands::ImmovableFound& imm_found : immovables) {
+	// 	const Widelands::BaseImmovable& base_immovable = *imm_found.object;
+	// 	if (!unique_serials.insert(base_immovable.serial()).second) {
+	// 		continue;  // serial was not inserted in the set, so this is a duplicate
+	// 	}
+
+	// 	if (upcast(Widelands::PlayerImmovable const, player_immovable, &base_immovable)) {
+
+	// 		// TODO(unknown): Only continue if this is an opposing site
+	// 		// allied sites should be counted for military influence
+	// 		if (player_immovable->owner().player_number() != pn) {
+	// 			continue;
+	// 		}
+	// 		// here we identify the buiding (including expected building if constructionsite)
+	// 		// and calculate some statistics about nearby buildings
+	// 		if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+	// 			BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+	// 			consider_productionsite_influence(field, imm_found.coords, bo);
+	// 		} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+	// 			const Widelands::BuildingDescr& target_descr = constructionsite->building();
+	// 			if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+	// 				BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+	// 				consider_productionsite_influence(field, imm_found.coords, bo);
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	// Now testing military aspects
 	immovables.clear();
@@ -3735,8 +3758,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 // Re-calculating warehouse to flag distances
 void DefaultAI::check_flag_distances(const Time& gametime) {
+	uint16_t checked_flags = 0;
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
-		uint16_t checked_flags = 0;
 		const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
 		uint32_t highest_distance_set = 0;
 
@@ -3780,7 +3803,7 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 				   endflag->get_position().hash(), current_flag_distance + steps_count, gametime,
 				   this_wh_hash);
 
-				if (highest_distance_set < current_flag_distance + steps_count) {
+				if (updated && highest_distance_set < current_flag_distance + steps_count) {
 					highest_distance_set = current_flag_distance + steps_count;
 				}
 
@@ -3790,10 +3813,12 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 			}
 			remaining_flags.pop();
 		}
+		printf("Highest flag distance set: %d\n", highest_distance_set);
 	}
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
 	flag_warehouse_distance.remove_old_flag(gametime);
+	printf("flags checked: %d\n", checked_flags);
 }
 
 // Here we pick about 25 roads and investigate them. If it is a dead end we dismantle it
@@ -6419,6 +6444,29 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 
 	return prio;
 }
+
+void DefaultAI::handle_own_ps(Widelands::FCoords fcoords,  BuildableField& bf) {
+			Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+				consider_productionsite_influence(bf, fcoords, bo);
+			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+				const Widelands::BuildingDescr& target_descr = constructionsite->building();
+				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+					consider_productionsite_influence(bf, fcoords, bo);
+				}
+			}
+
+	// if (field->get_immovable()->descr().type() <
+	// 	    Widelands::MapObjectType::BUILDING) {
+	// 		printf("Not a building\n");
+	// 		return;
+	// 	}
+	// printf("Building\n");
+
+}
+
 // for buildable field, it considers effect of building of type bo on position coords
 void DefaultAI::consider_productionsite_influence(BuildableField& field,
                                                   Widelands::Coords coords,
