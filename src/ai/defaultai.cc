@@ -1844,9 +1844,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
-	static std::vector<Widelands::ImmovableFound> immovables;
-	immovables.reserve(50);
-	immovables.clear();
+	//static std::vector<Widelands::ImmovableFound> immovables;
+	//immovables.reserve(50);
+	//immovables.clear();
 
 
 
@@ -1854,25 +1854,29 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
-	std::set<uint32_t> unique_coords;
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> ps_influence_area(
 	   map, Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2));
 	do {
 
-		if (ps_influence_area.location().field->get_immovable() == nullptr) {
+		Widelands::BaseImmovable *imm = ps_influence_area.location().field->get_immovable();
+		
+		if (imm == nullptr) {
 			continue;
 		}
 
-		if (!unique_coords.insert(ps_influence_area.location().hash()).second) {
+		if (!unique_serials.insert(imm->serial()).second) { 
 			continue;  // position was not inserted in the set, so we saw it before
 		}
+		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
+			continue;
+		}
 
-		if (ps_influence_area.location().field->get_owned_by() == pn) {  // NOCOM
-			handle_own_ps(ps_influence_area.location(), field);
+		if (ps_influence_area.location().field->get_owned_by() == pn) {
+			handle_own_psites(ps_influence_area.location(), field);
 		}
 
 	} while (ps_influence_area.advance(map));
-	printf("%lu immovables found\n", unique_coords.size());
+	printf("%lu immovables found\n", unique_serials.size());
 
 	// // Search in a radius of range
 	// map.find_immovables(
@@ -1906,11 +1910,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// 	}
 	// }
 
-	// Now testing military aspects
-	immovables.clear();
-	map.find_immovables(game(),
-	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
-	                    &immovables);
 
 	// We are interested in unconnected immovables, but we must be also close to connected ones
 	static bool any_connected_imm = false;
@@ -1919,106 +1918,152 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	any_unconnected_imm = false;
 	unique_serials.clear();
 
-	for (const Widelands::ImmovableFound& imm_found : immovables) {
-		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
 
-		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is duplicate
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> ms_influence_area(
+	   map, Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area));
+	do {
+
+		if (ms_influence_area.location().field->get_immovable() == nullptr) {
+			continue;
 		}
 
-		// testing if immovable is owned by someone else and collecting some statistics
-		if (upcast(Widelands::Building const, building, &base_immovable)) {
+		if (upcast(Widelands::Building const, building, ms_influence_area.location().field->get_immovable())) {
 
-			const Widelands::PlayerNumber bpn = building->owner().player_number();
-			if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
-				assert(!player_statistics.players_in_same_team(bpn, pn));
-				field.enemy_nearby = true;
-				if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-					field.enemy_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-					++field.enemy_military_sites;
-				}
-				if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
-					const Widelands::BuildingDescr& target_descr = constructionsite->building();
-					if (target_descr.type() == Widelands::MapObjectType::MILITARYSITE) {
-						++field.enemy_military_sites;
-					}
-				}
+			if (!unique_serials.insert(building->serial()).second) { 
+				continue;  // position was not inserted in the set, so we saw it before
+			}
 
-				// Warehouses are counted here too as they can host soldiers as well
-				if (upcast(Widelands::Warehouse const, warehouse, building)) {
-					field.enemy_military_presence +=
-					   warehouse->soldier_control()->stationed_soldiers().size();
-					++field.enemy_military_sites;
-					field.enemy_wh_nearby = true;
-					enemy_warehouses.insert(building->get_position().hash());
-				}
+			const Widelands::PlayerNumber field_owner =
+			ms_influence_area.location().field->get_owned_by();
+
+			// Is enemy
+			if (player_statistics.get_is_enemy(field_owner)) {
+				assert(!player_statistics.players_in_same_team(field_owner, pn));
+				handle_enemy_sites(ms_influence_area.location(), field);
 				continue;
-			} else if (bpn != pn) {  // it is an ally
-				assert(!player_statistics.get_is_enemy(bpn));
-				if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-					field.ally_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-				}
+			} else if (field_owner != pn) {
+				// Is Ally
+				assert(!player_statistics.get_is_enemy(field_owner));
+				handle_ally_sites(ms_influence_area.location(), field);
 				continue;
 			}
-
-			// if we are here, the immovable is ours
-			assert(building->owner().player_number() == pn);
-
-			// connected to a warehouse
-			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
-			// ferries
-			bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
-			if (connected) {
-				any_connected_imm = true;
-			}
-
-			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-
-				if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
-					const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
-					const int32_t radius = target_ms_d->get_conquers() + 4;
-
-					if (radius > dist) {
-						field.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-						if (field.coords != imm_found.coords) {
-							field.military_loneliness *= static_cast<double_t>(dist) / radius;
-						}
-						++field.military_in_constr_nearby;
-					}
-				}
-			} else if (!connected) {
-				// we don't care about unconnected constructionsites
-				any_unconnected_imm = true;
-			}
-
-			if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-				const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
-				const int32_t radius = militarysite->descr().get_conquers() + 4;
-
-				if (radius > dist) {
-					field.area_military_capacity +=
-					   militarysite->soldier_control()->max_soldier_capacity();
-					field.own_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-
-					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
-						++field.military_unstationed;
-					} else {
-						++field.military_stationed;
-					}
-
-					if (field.coords != imm_found.coords) {
-						field.military_loneliness *= static_cast<double_t>(dist) / radius;
-					}
-				}
-			} else {
-				++field.own_non_military_nearby;
-			}
+			assert(field_owner == pn);  // It is us
+			
+			handle_own_msites(ms_influence_area.location(), field, any_connected_imm, any_unconnected_imm);
 		}
-	}
+
+	} while (ms_influence_area.advance(map));
+	printf("%lu immovables found\n", unique_serials.size());
+
+
+
+
+	// Now testing military aspects
+	//immovables.clear();
+	//map.find_immovables(game(),
+	//                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
+	//                    &immovables);
+
+	// for (const Widelands::ImmovableFound& imm_found : immovables) {
+	// 	const Widelands::BaseImmovable& base_immovable = *imm_found.object;
+
+	// 	if (!unique_serials.insert(base_immovable.serial()).second) {
+	// 		continue;  // serial was not inserted in the set, so this is duplicate
+	// 	}
+
+	// 	// testing if immovable is owned by someone else and collecting some statistics
+	// 	if (upcast(Widelands::Building const, building, &base_immovable)) {
+
+	// 		const Widelands::PlayerNumber bpn = building->owner().player_number();
+	// 		if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
+	// 			assert(!player_statistics.players_in_same_team(bpn, pn));
+	// 			field.enemy_nearby = true;
+	// 			if (upcast(Widelands::MilitarySite const, militarysite, building)) {
+	// 				field.enemy_military_presence +=
+	// 				   militarysite->soldier_control()->stationed_soldiers().size();
+	// 				++field.enemy_military_sites;
+	// 			}
+	// 			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
+	// 				const Widelands::BuildingDescr& target_descr = constructionsite->building();
+	// 				if (target_descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+	// 					++field.enemy_military_sites;
+	// 				}
+	// 			}
+
+	// 			// Warehouses are counted here too as they can host soldiers as well
+	// 			if (upcast(Widelands::Warehouse const, warehouse, building)) {
+	// 				field.enemy_military_presence +=
+	// 				   warehouse->soldier_control()->stationed_soldiers().size();
+	// 				++field.enemy_military_sites;
+	// 				field.enemy_wh_nearby = true;
+	// 				enemy_warehouses.insert(building->get_position().hash());
+	// 			}
+	// 			continue;
+	// 		} else if (bpn != pn) {  // it is an ally
+	// 			assert(!player_statistics.get_is_enemy(bpn));
+	// 			if (upcast(Widelands::MilitarySite const, militarysite, building)) {
+	// 				field.ally_military_presence +=
+	// 				   militarysite->soldier_control()->stationed_soldiers().size();
+	// 			}
+	// 			continue;
+	// 		}
+
+	// 		// if we are here, the immovable is ours
+	// 		assert(building->owner().player_number() == pn);
+
+	// 		// connected to a warehouse
+	// 		// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// 		// ferries
+	// 		bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
+	// 		if (connected) {
+	// 			any_connected_imm = true;
+	// 		}
+
+	// 		if (upcast(Widelands::ConstructionSite const, constructionsite, building)) { //NOCOM
+	// 			const Widelands::BuildingDescr& target_descr = constructionsite->building();
+
+	// 			if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+	// 				const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
+	// 				const int32_t radius = target_ms_d->get_conquers() + 4;
+
+	// 				if (radius > dist) {
+	// 					field.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
+	// 					if (field.coords != imm_found.coords) {
+	// 						field.military_loneliness *= static_cast<double_t>(dist) / radius;
+	// 					}
+	// 					++field.military_in_constr_nearby;
+	// 				}
+	// 			}
+	// 		} else if (!connected) {
+	// 			// we don't care about unconnected constructionsites
+	// 			any_unconnected_imm = true;
+	// 		}
+
+	// 		if (upcast(Widelands::MilitarySite const, militarysite, building)) {
+	// 			const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
+	// 			const int32_t radius = militarysite->descr().get_conquers() + 4;
+
+	// 			if (radius > dist) {
+	// 				field.area_military_capacity +=
+	// 				   militarysite->soldier_control()->max_soldier_capacity();
+	// 				field.own_military_presence +=
+	// 				   militarysite->soldier_control()->stationed_soldiers().size();
+
+	// 				if (militarysite->soldier_control()->stationed_soldiers().empty()) {
+	// 					++field.military_unstationed;
+	// 				} else {
+	// 					++field.military_stationed;
+	// 				}
+
+	// 				if (field.coords != imm_found.coords) {
+	// 					field.military_loneliness *= static_cast<double_t>(dist) / radius;
+	// 				}
+	// 			}
+	// 		} else {
+	// 			++field.own_non_military_nearby;
+	// 		}
+	// 	}
+	// }
 
 	assert(field.military_loneliness <= 1000);
 
@@ -6445,26 +6490,109 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	return prio;
 }
 
-void DefaultAI::handle_own_ps(Widelands::FCoords fcoords,  BuildableField& bf) {
-			Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
-			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
-				consider_productionsite_influence(bf, fcoords, bo);
-			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
-					consider_productionsite_influence(bf, fcoords, bo);
+void DefaultAI::handle_own_psites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+		BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+		consider_productionsite_influence(bf, fcoords, bo);
+	} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
+		if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+			BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+			consider_productionsite_influence(bf, fcoords, bo);
+		}
+	}
+}
+
+void DefaultAI::handle_enemy_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	bf.enemy_nearby = true;
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		bf.enemy_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+		++bf.enemy_military_sites;
+	}
+	if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
+		if (target_descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+			++bf.enemy_military_sites;
+		}
+	}
+
+	// Warehouses are counted here too as they can host soldiers as well
+	if (upcast(Widelands::Warehouse const, warehouse, player_immovable)) {
+		bf.enemy_military_presence += warehouse->soldier_control()->stationed_soldiers().size();
+		++bf.enemy_military_sites;
+		bf.enemy_wh_nearby = true;
+		enemy_warehouses.insert(fcoords.hash());
+	}
+}
+
+void DefaultAI::handle_ally_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		bf.ally_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+	}
+}
+
+void DefaultAI::handle_own_msites(Widelands::FCoords fcoords,
+                       BuildableField& bf,
+                       bool& any_connected_imm,
+                       bool& any_unconnected_imm) {
+	// connected to a warehouse
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	const Widelands::Map& map = game().map();
+
+	if (upcast(Widelands::Building const, building, player_immovable)) {
+		bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty(); //NOCOM
+		if (connected) {
+			any_connected_imm = true;
+		}
+
+		if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+			const Widelands::BuildingDescr& target_descr = constructionsite->building();
+
+			if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+				const int32_t dist = map.calc_distance(bf.coords, building->get_position());
+				const int32_t radius = target_ms_d->get_conquers() + 4;
+
+				if (radius > dist) {
+					bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
+					if (bf.coords != building->get_position()) {
+						bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+					}
+					++bf.military_in_constr_nearby;
 				}
 			}
+		} else if (!connected) {
+			// we don't care about unconnected constructionsites
+			any_unconnected_imm = true;
+		}
 
-	// if (field->get_immovable()->descr().type() <
-	// 	    Widelands::MapObjectType::BUILDING) {
-	// 		printf("Not a building\n");
-	// 		return;
-	// 	}
-	// printf("Building\n");
+		if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+			const int32_t dist = map.calc_distance(bf.coords, building->get_position());
+			const int32_t radius = militarysite->descr().get_conquers() + 4;
 
+			if (radius > dist) {
+				bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+				bf.own_military_presence +=
+				militarysite->soldier_control()->stationed_soldiers().size();
+
+				if (militarysite->soldier_control()->stationed_soldiers().empty()) {
+					++bf.military_unstationed;
+				} else {
+					++bf.military_stationed;
+				}
+
+				if (bf.coords != building->get_position()) {
+					bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+				}
+			}
+		} else {
+			++bf.own_non_military_nearby;
+		}
+	}
 }
 
 // for buildable field, it considers effect of building of type bo on position coords
