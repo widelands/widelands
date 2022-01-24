@@ -359,6 +359,10 @@ struct ImmovableAttribute {
 struct BuildableField {
 	explicit BuildableField(const Widelands::FCoords& fc);
 
+	// Preventing unintended copy construction (good idea?)
+	BuildableField(const BuildableField& temp_obj) = delete;
+    BuildableField& operator=(const BuildableField& temp_obj) = delete;
+
 	Widelands::FCoords coords;
 
 	Time field_info_expiration;
