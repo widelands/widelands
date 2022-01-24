@@ -19,7 +19,9 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Installing dependencies
-      run: sudo apt-get install gettext transifex-client translate-toolkit appstream desktop-file-utils
+      run: |
+        sudo apt-get update
+        sudo apt-get install gettext transifex-client translate-toolkit appstream desktop-file-utils
     - name: Synchronizing translations
       run: |
         echo "${{ secrets.TXAUTH }}" > ~/.transifexrc
