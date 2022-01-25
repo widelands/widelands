@@ -361,7 +361,7 @@ struct BuildableField {
 
 	// Preventing unintended copy construction (good idea?)
 	BuildableField(const BuildableField& temp_obj) = delete;
-    BuildableField& operator=(const BuildableField& temp_obj) = delete;
+	BuildableField& operator=(const BuildableField& temp_obj) = delete;
 
 	Widelands::FCoords coords;
 

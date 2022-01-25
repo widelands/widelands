@@ -1856,8 +1856,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	unique_serials.clear();
 
 	// The code presumes that the second value is bigger - to be eligible for hollow area
-	assert(kProductionArea + 2<= actual_enemy_check_area); //to handle this better
-
+	assert(kProductionArea + 2 <= actual_enemy_check_area);  // to handle this better
 
 	// First checking lesser circle, doing all possible checks here
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> first_area(
@@ -1897,14 +1896,15 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-
 	// TODO - I was not able to define that hollow area :(
 
-	Widelands::HollowArea<Widelands::Area<Widelands::FCoords>> har(Widelands::Area<Widelands::FCoords>(field.coords,  kProductionArea + 2), actual_enemy_check_area);
+	Widelands::HollowArea<Widelands::Area<Widelands::FCoords>> har(
+	   Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2),
+	   actual_enemy_check_area);
 	Widelands::MapHollowRegion<Widelands::Area<Widelands::FCoords>> second_area(map, har);
 
 	// Checking outer circle, only some check - mostly military aspects
-	//Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
+	// Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
 	//   map, Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area));
 
 	do {
@@ -1929,7 +1929,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
 			handle_enemy_sites(second_area.location(), field);
 			continue;
-		} else if (field_owner != pn) { // Is Ally
+		} else if (field_owner != pn) {  // Is Ally
 			assert(!player_statistics.get_is_enemy(field_owner));
 			handle_ally_sites(second_area.location(), field);
 			continue;
@@ -1940,7 +1940,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (second_area.advance(map));
 
-	
 	assert(field.military_loneliness <= 1000);
 
 	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
@@ -6411,9 +6410,9 @@ void DefaultAI::handle_ally_sites(Widelands::FCoords fcoords, BuildableField& bf
 }
 
 void DefaultAI::handle_own_msites(Widelands::FCoords fcoords,
-                       BuildableField& bf,
-                       bool& any_connected_imm,
-                       bool& any_unconnected_imm) {
+                                  BuildableField& bf,
+                                  bool& any_connected_imm,
+                                  bool& any_unconnected_imm) {
 	// connected to a warehouse
 	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 	// ferries
@@ -6427,9 +6426,8 @@ void DefaultAI::handle_own_msites(Widelands::FCoords fcoords,
 		}
 
 		if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
-			
+
 			const Widelands::BuildingDescr& target_descr = constructionsite->building();
-			
 
 			if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
 				const int32_t dist = map.calc_distance(bf.coords, building->get_position());
@@ -6455,7 +6453,7 @@ void DefaultAI::handle_own_msites(Widelands::FCoords fcoords,
 			if (radius > dist) {
 				bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
 				bf.own_military_presence +=
-				militarysite->soldier_control()->stationed_soldiers().size();
+				   militarysite->soldier_control()->stationed_soldiers().size();
 
 				if (militarysite->soldier_control()->stationed_soldiers().empty()) {
 					++bf.military_unstationed;
