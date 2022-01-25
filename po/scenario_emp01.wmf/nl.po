@@ -5,13 +5,14 @@
 # FvZ, 2020
 # GunChleoc, 2014
 # GunChleoc, 2014
+# R M, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2022-01-18 22:27+0000\n"
+"Last-Translator: R M\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "Blokhuis"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Bouw een blokhuis op het rode huissymbool aan de oostelijke kant van het bos, rechts van het voorlopige hoofdkwartier."
+msgstr "Bouw een blokhuis op het rode huis symbool aan de oostelijke kant van het bos, rechts van het tijdelijke hoofdkwartier."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
@@ -45,7 +46,7 @@ msgstr "Houthakkershuis"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Bouw een houthakkershuis op het rode huis symbool ten zuiden van het voorlopige hoofdkwartier."
+msgstr "Bouw een houthakkershuis op het rode huis symbool ten zuiden van het tijdelijke hoofdkwartier."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -53,7 +54,7 @@ msgstr "Bouw twee houthakkershuizen en een houtzagerij"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr "Bouw twee houthakkershuizen en een houtzagerij"
+msgstr "Twee houthakkershuizen en een houtzagerij"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
@@ -72,7 +73,7 @@ msgstr "Boswachtershuis"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
-msgstr "Bouw een boswachterhuis om de houtbronnen van het eiland te beschermen."
+msgstr "Bouw een boswachterhuis om de beschikbaarheid van hout op het eiland te behouden."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
@@ -89,7 +90,7 @@ msgstr "Bouw een steengroeve in het zuiden om graniet en marmer uit de rotsen te
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Dit zou nuttig kunnen zijn voor latere gebouwen."
+msgstr "Deze kunnen nuttig zijn voor toekomstige gebouwen."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
