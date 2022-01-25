@@ -250,12 +250,15 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Не занятые пиратами земли принадлежат развитому племени с вождём Хьялмаром. "
+"Им хватило времени для того, чтобы собрать армию для защиты земель."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"Это опасное положение дел, нам нужно заняться созданием сильной армии."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -267,12 +270,17 @@ msgid ""
 " our rival in the north is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Сэр, хоть в храбрости наших воинов нет никаких сомнений, наши враги на "
+"севере всё ещё сильнее всех наших воинств вместе взятых. Нужно избегать "
+"сражения, пока мы достаточно не окрепнем."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Наберитесь терпения и примите, что в таком деле нужна сильная армия. У "
+"Тёрвера очень скверная репутация."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the north"
@@ -283,6 +291,8 @@ msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Сэр, у нас дурные вести от разведчиков. Тёрвер расширяет фронт и движется к "
+"нашим границам."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -290,11 +300,15 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"Вечно избегать столкновения невозможно. Но если нам удастся повергнуть "
+"северного врага, у нас будут новые земли и новые ресурсы для укрепления "
+"армий."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
+"Кроме того, это откроет доступ к озеру и возможностью дальнейшей разведки."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
@@ -307,6 +321,9 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Сэр, война с Тёрвером идёт благоприятно, мы побили большую часть его армии. "
+"Тем не менее, он не так прост. Последняя надежда Тёрвера - несколько "
+"кампаний наёмников."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
@@ -318,6 +335,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the north will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Сэр! Теперь, когда мы завоевали земли Тёрвера, мы можем воспользоваться "
+"превосходным доступом к прилегающему к ним большому озеру. Порт на севере "
+"обеспечит нам контакт с другими племенами."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -325,6 +345,8 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"В штабе Тёрвера были найдены чертежи судов. Увы, они на незнакомом нам "
+"языке. Наши мудрецы будут биться над переводом описаний."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
@@ -335,6 +357,8 @@ msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Сэр, наши люди определили изолированную пиратскую караульную. Судя по "
+"заброшенным хижинам, золото должно быть недалеко."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -493,7 +517,7 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
-msgstr ""
+msgstr "Убедитесь, что ваши армии полностью готовы, и действуйте решительно."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
