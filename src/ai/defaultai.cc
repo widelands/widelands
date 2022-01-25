@@ -1900,16 +1900,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// TODO - I was not able to define that hollow area :(
 
-	//Widelands::HollowArea<Widelands::Area<>> har(Widelands::Area<>(field.coords,  kProductionArea + 2), actual_enemy_check_area);
-	//Widelands::MapHollowRegion<Widelands::Area<>> second_area(map, har);
+	Widelands::HollowArea<Widelands::Area<Widelands::FCoords>> har(Widelands::Area<Widelands::FCoords>(field.coords,  kProductionArea + 2), actual_enemy_check_area);
+	Widelands::MapHollowRegion<Widelands::Area<Widelands::FCoords>> second_area(map, har);
 
 	// Checking outer circle, only some check - mostly military aspects
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
-	   map, Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area));
+	//Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
+	//   map, Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area));
 
 	do {
 
-		Widelands::BaseImmovable* imm = first_area.location().field->get_immovable();
+		Widelands::BaseImmovable* imm = second_area.location().field->get_immovable();
 
 		if (imm == nullptr) {
 			continue;
