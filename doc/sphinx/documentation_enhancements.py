@@ -35,11 +35,22 @@ class LuaClass:
         return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
     def get_graphviz_link(self):
-        html_link = 'href="../{folder}/index.html{anchor}",\
-            target="_parent"'.format(
-            folder=self.outfile.replace('.rst', ''),
-            anchor='#{}'.format(self.name.lower())
-        )
+        builder = os.environ.get('SphinxBuilder', '')
+        if builder == 'dirhtml':
+            html_link = 'href="../{folder}/index.html{anchor}",\
+                target="_parent"'.format(
+                folder=self.outfile.replace('.rst', ''),
+                anchor='#{}'.format(self.name.lower())
+            )
+        elif builder == 'html':
+            html_link = 'href="../{}#{}", target="_parent"'.format(
+                self.outfile.replace('.rst', '.html'), self.name.lower())
+        elif builder == 'singlehtml':
+            html_link = 'href="../index.html#{}", target="_parent"'.format(
+                self.name.lower()
+                )
+        else:
+            return 'href=""'
         return html_link
 
     def print_data(self):
@@ -404,7 +415,6 @@ def create_directive(cls_inst):
 
 def add_dependency_graph(rst_data, outfile):
     """Insert a dependency graph to rst_data."""
-
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
     for cls_name in found_cls:
         cls_inst = classes.get_instance(cls_name, outfile)

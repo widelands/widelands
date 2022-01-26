@@ -114,8 +114,16 @@ def extract_rst_from_cpp(inname, outname=None):
     # Add string 'Child of: …'
     output = doc_enh.add_child_of(output, outname)
     if '-graphs' in sys.argv:
-        # Add dependency graph
-        output = doc_enh.add_dependency_graph(output, outname)
+        try:
+            if sys.argv[1] == '-graphs' and sys.argv[2]:
+                # Add dependency graph
+                os.environ['SphinxBuilder'] = sys.argv[2]
+                output = doc_enh.add_dependency_graph(output, outname)
+        except IndexError:
+            print('You must provide the sphinx-builder to make the links in graphs work correctly!')
+            print('Choose a builder out of [html, dirhtml, singlehtml], e.g. run:')
+            print("./extract_rst.py -graphs dirhtml")
+            sys.exit(1)
 
     if output.strip():
         out = sys.stdout
