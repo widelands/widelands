@@ -1899,7 +1899,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// TODO(tibor): I was not able to define that hollow area :(
 
 	Widelands::HollowArea<> har(
-	   Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2),
+	   Widelands::Area<>(map.get_fcoords(field.coords), kProductionArea + 2),
 	   actual_enemy_check_area);
 	Widelands::MapHollowRegion<> second_area(map, har);
 
