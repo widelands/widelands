@@ -1896,7 +1896,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-	// TODO - I was not able to define that hollow area :(
+	// TODO(tibor): I was not able to define that hollow area :(
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2),
