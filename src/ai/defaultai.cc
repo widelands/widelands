@@ -1896,20 +1896,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-	// TODO(tibor): I was not able to define that hollow area :(
 
-	Widelands::HollowArea<> har(
-	   Widelands::Area<>(map.get_fcoords(field.coords), kProductionArea + 2),
-	   actual_enemy_check_area);
-	Widelands::MapHollowRegion<> second_area(map, har);
-
-	// Checking outer circle, only some check - mostly military aspects
-	// Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
-	//   map, Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area));
+ 	Widelands::HollowArea<> har(
+	   Widelands::Area<>(field.coords, actual_enemy_check_area),
+ 	   kProductionArea + 2 );
+ 	Widelands::MapHollowRegion<> second_area(map, har);
 
 	do {
 
-		Widelands::BaseImmovable* imm = second_area.location().field->get_immovable();
+		Widelands::FCoords location = map.get_fcoords(second_area.location());
+		Widelands::BaseImmovable* imm = location.field->get_immovable();
 
 		if (imm == nullptr) {
 			continue;
@@ -1923,20 +1919,20 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			continue;  // position was not inserted in the set, so we saw it before
 		}
 
-		const Widelands::PlayerNumber field_owner = second_area.location().field->get_owned_by();
+		const Widelands::PlayerNumber field_owner = location.field->get_owned_by();
 
 		if (player_statistics.get_is_enemy(field_owner)) {  // Is enemy
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
-			handle_enemy_sites(second_area.location(), field);
+			handle_enemy_sites(location, field);
 			continue;
 		} else if (field_owner != pn) {  // Is Ally
 			assert(!player_statistics.get_is_enemy(field_owner));
-			handle_ally_sites(second_area.location(), field);
+			handle_ally_sites(location, field);
 			continue;
 		}
 		assert(field_owner == pn);  // It is us
 
-		handle_own_msites(second_area.location(), field, any_connected_imm, any_unconnected_imm);
+		handle_own_msites(location, field, any_connected_imm, any_unconnected_imm);
 
 	} while (second_area.advance(map));
 
@@ -3733,12 +3729,11 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 			}
 			remaining_flags.pop();
 		}
-		printf("Highest flag distance set: %d\n", highest_distance_set);
+
 	}
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
 	flag_warehouse_distance.remove_old_flag(gametime);
-	printf("flags checked: %d\n", checked_flags);
 }
 
 // Here we pick about 25 roads and investigate them. If it is a dead end we dismantle it
