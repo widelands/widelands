@@ -1896,11 +1896,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-
- 	Widelands::HollowArea<> har(
-	   Widelands::Area<>(field.coords, actual_enemy_check_area),
- 	   kProductionArea + 2 );
- 	Widelands::MapHollowRegion<> second_area(map, har);
+	Widelands::HollowArea<> har(
+	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
+	Widelands::MapHollowRegion<> second_area(map, har);
 
 	do {
 
@@ -3729,7 +3727,6 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 			}
 			remaining_flags.pop();
 		}
-
 	}
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
