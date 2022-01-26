@@ -1901,7 +1901,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	Widelands::HollowArea<> har(
 	   Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2),
 	   actual_enemy_check_area);
-	Widelands::MapHollowRegion<Widelands::Area<Widelands::FCoords>> second_area(map, har);
+	Widelands::MapHollowRegion<> second_area(map, har);
 
 	// Checking outer circle, only some check - mostly military aspects
 	// Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> second_area(
