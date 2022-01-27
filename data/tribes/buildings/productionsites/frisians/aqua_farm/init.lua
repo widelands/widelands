@@ -82,6 +82,14 @@ descriptions:new_productionsite_type {
             "callworker=fish_in_pond",
          },
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=fruit water:2",
+            "produce=fish",
+         },
+      },
    },
 
    out_of_resource_notification = {
