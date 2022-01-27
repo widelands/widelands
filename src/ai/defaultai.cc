@@ -70,9 +70,9 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = true;
+constexpr bool kPrintStats = false;
 // enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = true;
+constexpr bool kCollectPerfData = false;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
