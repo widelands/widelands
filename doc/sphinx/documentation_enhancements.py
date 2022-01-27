@@ -37,10 +37,10 @@ class LuaClass:
     def get_graphviz_link(self):
         builder = classes.builder
         if builder == 'dirhtml':
-            html_link = 'href="../{folder}/index.html{anchor}",\
+            html_link = 'href="../{folder}/index.html#{anchor}",\
                 target="_parent"'.format(
                 folder=self.outfile.replace('.rst', ''),
-                anchor='#{}'.format(self.name.lower())
+                anchor=self.name.lower()
             )
         elif builder == 'html':
             html_link = 'href="../{}#{}", target="_parent"'.format(
