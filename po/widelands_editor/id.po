@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Febryan 45 Mappers <muhammadfebryan1208@gmail.com>, 2020
+# Yudhi Nata, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-03-18 17:05+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2022-01-13 08:46+0000\n"
+"Last-Translator: Yudhi Nata\n"
 "Language-Team: Indonesian (http://www.transifex.com/widelands/widelands/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,21 +144,21 @@ msgstr "Tips"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
-msgstr ""
+msgstr "Medan"
 
 #: ../../data/scripting/editor/editor_help.lua:88
 msgid "Trees"
-msgstr ""
+msgstr "Pepohonan"
 
 #: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
-msgstr ""
+msgstr "Penyunting Widelands"
 
 #: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
-msgstr ""
+msgstr "Penyunting ini diperuntukkan bagi para pemain yang suka merancang petanya sendiri untuk digunakan di Widelands."
 
 #: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
