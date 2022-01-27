@@ -45,7 +45,7 @@ def make_doc(**kwargs):
                     '-b', kwargs['builder'],
                     '-d', 'build/doctrees',
                     'source',
-                    'build/{}'.format(kwargs.get('builder')),
+                    'build/{}'.format(kwargs['builder']),
                     ])
 
 
