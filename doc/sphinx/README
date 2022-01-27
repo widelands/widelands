@@ -9,7 +9,7 @@ Building the documentation for offline reading
 ----------------------------------------------
 
 Run ``./make.py`` to see your options. Convenient for off-line reading is
-``make html [-graphs]``.
+``./make.py html [-graphs]``.
 
 The option ``-graphs`` adds dependency graphs for each class.
 
