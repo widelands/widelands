@@ -509,6 +509,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
 		drag_start_mouse_y_ = get_y() + get_tborder() + my;
 		grab_mouse(true);
+                clicked();
+                focus();
 	} else if (btn == SDL_BUTTON_RIGHT && !pinned_) {
 		play_click();
 		die();
