@@ -42,7 +42,7 @@ def make_doc(**kwargs):
     )
 
     subprocess.run(['sphinx-build',
-                    '-b', kwargs.get('builder', ''),
+                    '-b', kwargs['builder'],
                     '-d', 'build/doctrees',
                     'source',
                     'build/{}'.format(kwargs.get('builder')),
