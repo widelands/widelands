@@ -41,12 +41,12 @@ def make_doc(**kwargs):
         kwargs['builder'])
     )
 
-    compl_proc = subprocess.run(['sphinx-build',
-                                 '-b', kwargs.get('builder', ''),
-                                 '-d', 'build/doctrees',
-                                 'source',
-                                 'build/{}'.format(kwargs.get('builder')),
-                                 ])
+    subprocess.run(['sphinx-build',
+                    '-b', kwargs.get('builder', ''),
+                    '-d', 'build/doctrees',
+                    'source',
+                    'build/{}'.format(kwargs.get('builder')),
+                    ])
 
 
 def main():
