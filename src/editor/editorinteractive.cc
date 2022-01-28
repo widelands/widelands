@@ -655,8 +655,10 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (buildhelp()) {
 			const auto* overlay =
 			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
+			const float opacity = tools_->current().opacity_for_buildhelp(field.fcoords, ebase);
+
 			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale, opacity);
 			}
 		}
 
