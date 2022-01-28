@@ -345,11 +345,10 @@ void DefaultAI::think() {
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
 
 	if (GameController* const ctrl = game().game_controller()) {
-			verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
-			                  player_->player_number(), jobs_to_run_count, delay_time,
-			                  ctrl->real_speed());
+		verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
+		                  player_->player_number(), jobs_to_run_count, delay_time,
+		                  ctrl->real_speed());
 	}
-
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
 	std::sort(current_task_queue.begin(), current_task_queue.end());
@@ -6404,9 +6403,9 @@ void DefaultAI::consider_ally_sites(Widelands::FCoords fcoords, BuildableField& 
 }
 
 void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
-                                  BuildableField& bf,
-                                  bool& any_connected_imm,
-                                  bool& any_unconnected_imm) {
+                                    BuildableField& bf,
+                                    bool& any_connected_imm,
+                                    bool& any_unconnected_imm) {
 	// connected to a warehouse
 	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 	// ferries
