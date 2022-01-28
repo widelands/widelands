@@ -469,16 +469,14 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 					continue;
 				}
 				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   setting->second));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			} else {
 				auto setting = settings.workers.find(index);
 				if (setting == settings.workers.end()) {
 					continue;
 				}
 				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   setting->second));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			}
 		}
 	}
@@ -848,8 +846,8 @@ void EconomyOptionsWindow::read_targets() {
 						break;
 					}
 				} catch (const Widelands::GameDataError&) {
-					log_warn("Unknown ware or worker '%s' in economy profile '%s'",
-					         name.c_str(), pair.second.c_str());
+					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),
+					         pair.second.c_str());
 				}
 			}
 			predefined_targets_.insert(std::make_pair(pair.second, t));
