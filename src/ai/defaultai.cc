@@ -70,7 +70,8 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = false;
+// also note that some of that stats is printed only in verbose mode
+constexpr bool kEnableStatsPrint = false;
 // enable also the above to print the results of the performance data collection
 constexpr bool kCollectPerfData = false;
 
@@ -343,13 +344,12 @@ void DefaultAI::think() {
 	}
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
 
-	if (kPrintStats) {
-		if (GameController* const ctrl = game().game_controller()) {
+	if (GameController* const ctrl = game().game_controller()) {
 			verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
 			                  player_->player_number(), jobs_to_run_count, delay_time,
 			                  ctrl->real_speed());
-		}
 	}
+
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
 	std::sort(current_task_queue.begin(), current_task_queue.end());
@@ -1139,9 +1139,11 @@ void DefaultAI::late_initialization() {
 	taskPool.push_back(
 	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 60 * 1000)),
 	                                   SchedulerTaskId::kWareReview, 9, "wares review"));
-	taskPool.push_back(
-	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	if (kEnableStatsPrint) {
+		taskPool.push_back(
+		   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+		                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	}
 	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(60 * 1000)),
 	                                                   SchedulerTaskId::kCountMilitaryVacant, 2,
 	                                                   "count military vacant"));
@@ -1879,17 +1881,17 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		const Widelands::PlayerNumber field_owner = first_area.location().field->get_owned_by();
 
 		if (field_owner == pn) {
-			handle_own_psites(first_area.location(), field);
-			handle_own_msites(first_area.location(), field, any_connected_imm, any_unconnected_imm);
+			consider_own_psites(first_area.location(), field);
+			consider_own_msites(first_area.location(), field, any_connected_imm, any_unconnected_imm);
 			continue;
 		} else if (player_statistics.get_is_enemy(field_owner)) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
-			handle_enemy_sites(first_area.location(), field);
+			consider_enemy_sites(first_area.location(), field);
 			continue;
 		} else if (field_owner != pn) {
 			// Is Ally
 			assert(!player_statistics.get_is_enemy(field_owner));
-			handle_ally_sites(first_area.location(), field);
+			consider_ally_sites(first_area.location(), field);
 			continue;
 		}
 		NEVER_HERE();
@@ -1921,16 +1923,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (player_statistics.get_is_enemy(field_owner)) {  // Is enemy
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
-			handle_enemy_sites(location, field);
+			consider_enemy_sites(location, field);
 			continue;
 		} else if (field_owner != pn) {  // Is Ally
 			assert(!player_statistics.get_is_enemy(field_owner));
-			handle_ally_sites(location, field);
+			consider_ally_sites(location, field);
 			continue;
 		}
 		assert(field_owner == pn);  // It is us
 
-		handle_own_msites(location, field, any_connected_imm, any_unconnected_imm);
+		consider_own_msites(location, field, any_connected_imm, any_unconnected_imm);
 
 	} while (second_area.advance(map));
 
@@ -6357,7 +6359,7 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 	return prio;
 }
 
-void DefaultAI::handle_own_psites(Widelands::FCoords fcoords, BuildableField& bf) {
+void DefaultAI::consider_own_psites(Widelands::FCoords fcoords, BuildableField& bf) {
 	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
 	if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 		BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
@@ -6371,7 +6373,7 @@ void DefaultAI::handle_own_psites(Widelands::FCoords fcoords, BuildableField& bf
 	}
 }
 
-void DefaultAI::handle_enemy_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+void DefaultAI::consider_enemy_sites(Widelands::FCoords fcoords, BuildableField& bf) {
 	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
 	bf.enemy_nearby = true;
 	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
@@ -6394,14 +6396,14 @@ void DefaultAI::handle_enemy_sites(Widelands::FCoords fcoords, BuildableField& b
 	}
 }
 
-void DefaultAI::handle_ally_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+void DefaultAI::consider_ally_sites(Widelands::FCoords fcoords, BuildableField& bf) {
 	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
 	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
 		bf.ally_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 	}
 }
 
-void DefaultAI::handle_own_msites(Widelands::FCoords fcoords,
+void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
                                   BuildableField& bf,
                                   bool& any_connected_imm,
                                   bool& any_unconnected_imm) {
@@ -7191,14 +7193,9 @@ uint32_t DefaultAI::msites_built() const {
 // missing materials and counts of different types of buildings.
 // The main purpose of this is when a game creator needs to finetune a map
 // and needs to know what resourcess are missing for which player and so on.
-// By default it is off (see kPrintStats)
+// By default it is off (see kEnablePrintStats)
 // TODO(tiborb): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats(const Time& gametime) {
-
-	if (!kPrintStats) {
-		set_taskpool_task_time(Time(), SchedulerTaskId::kPrintStats);
-		return;
-	}
 
 	Widelands::PlayerNumber const pn = player_number();
 
@@ -7318,13 +7315,16 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  player_statistics.get_modified_player_power(player_number()));
 
 	// 5. printing some performance data
-	log_dbg_time(gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
-	             player_number());
-	for (const auto& task : taskPool) {
-		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
-		             task->call_count, task->total_exec_time_ms / 1000,
-		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
-		             task->max_exec_time_ms / 1000);
+	if (kCollectPerfData) {
+		log_dbg_time(gametime,
+		             "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
+		             player_number());
+		for (const auto& task : taskPool) {
+			log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
+			             task->call_count, task->total_exec_time_ms / 1000,
+			             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
+			             task->max_exec_time_ms / 1000);
+		}
 	}
 }
 
