@@ -1880,7 +1880,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (field_owner == pn) {
 			consider_own_psites(first_area.location(), field);
-			consider_own_msites(first_area.location(), field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
+			consider_own_msites(
+			   first_area.location(), field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
 			continue;
 		} else if (player_statistics.get_is_enemy(field_owner)) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
@@ -1936,8 +1937,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	assert(field.military_loneliness <= 1000);
 
-	if (any_imm_not_connected_to_wh && any_imm_connected_to_wh && field.military_in_constr_nearby == 0) {
-		field.unconnected_nearby = true; //todo(Tibor) - to use it in gen. algorithm
+	if (any_imm_not_connected_to_wh && any_imm_connected_to_wh &&
+	    field.military_in_constr_nearby == 0) {
+		field.unconnected_nearby = true;  // todo(Tibor) - to use it in gen. algorithm
 	}
 
 	// if there is a militarysite on the field, we try to walk to enemy
@@ -6409,59 +6411,57 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
 	const Widelands::Map& map = game().map();
 
-		if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+	if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
 
-			const Widelands::BuildingDescr& target_descr = constructionsite->building();
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
 
-		   if (constructionsite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-			   any_unconnected_imm = true;
-		   } else {
-			   any_connected_imm = true;
-		   }
-
-		   if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
-				const int32_t dist = map.calc_distance(bf.coords, constructionsite->get_position());
-				const int32_t radius = target_ms_d->get_conquers() + 4;
-
-				if (radius > dist) {
-					bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-					if (bf.coords != constructionsite->get_position()) {
-						bf.military_loneliness *= static_cast<double_t>(dist) / radius;
-					}
-					++bf.military_in_constr_nearby;
-				}
-			}
+		if (constructionsite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			any_unconnected_imm = true;
+		} else {
+			any_connected_imm = true;
 		}
 
-		if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
-			const int32_t dist = map.calc_distance(bf.coords, militarysite->get_position());
-			const int32_t radius = militarysite->descr().get_conquers() + 4;
-
-		   if (militarysite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-			   any_unconnected_imm = true;
-		   } else {
-			   any_connected_imm = true;
-		   }
+		if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+			const int32_t dist = map.calc_distance(bf.coords, constructionsite->get_position());
+			const int32_t radius = target_ms_d->get_conquers() + 4;
 
 			if (radius > dist) {
-				bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
-				bf.own_military_presence +=
-				   militarysite->soldier_control()->stationed_soldiers().size();
-
-				if (militarysite->soldier_control()->stationed_soldiers().empty()) {
-					++bf.military_unstationed;
-				} else {
-					++bf.military_stationed;
-				}
-
-				if (bf.coords != militarysite->get_position()) {
+				bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
+				if (bf.coords != constructionsite->get_position()) {
 					bf.military_loneliness *= static_cast<double_t>(dist) / radius;
 				}
+				++bf.military_in_constr_nearby;
 			}
+		}
+	}
+
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		const int32_t dist = map.calc_distance(bf.coords, militarysite->get_position());
+		const int32_t radius = militarysite->descr().get_conquers() + 4;
+
+		if (militarysite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			any_unconnected_imm = true;
 		} else {
-			++bf.own_non_military_nearby;
+			any_connected_imm = true;
 		}
 
+		if (radius > dist) {
+			bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+			bf.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+
+			if (militarysite->soldier_control()->stationed_soldiers().empty()) {
+				++bf.military_unstationed;
+			} else {
+				++bf.military_stationed;
+			}
+
+			if (bf.coords != militarysite->get_position()) {
+				bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+			}
+		}
+	} else {
+		++bf.own_non_military_nearby;
+	}
 }
 
 // for buildable field, it considers effect of building of type bo on position coords
