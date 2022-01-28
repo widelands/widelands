@@ -6,14 +6,15 @@
 # guilherme_puida <guilhermepmoreira00@gmail.com>, 2021
 # GunChleoc, 2014
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# PythonLs, 2022
 # Tiago Henrique <tiagohrm@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-08-26 16:54+0000\n"
-"Last-Translator: guilherme_puida <guilhermepmoreira00@gmail.com>\n"
+"PO-Revision-Date: 2022-01-25 14:13+0000\n"
+"Last-Translator: PythonLs\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +162,7 @@ msgstr "Autocrata"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "A tribo ou time que perder faz com que todos os outros ganhem o jogo! Isso significa que o oponente não pode ter nem um quartel-general, portos ou armazéns faltando "
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -181,13 +182,13 @@ msgstr "Este é um jogo sem fim e sem regras. Nevoeiro de guerra esta desabilita
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Caçador HQ"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "A tribo ou time que achar e destruir todos os quarteis-generais ganha o jogo! Não funciona se começado com a condição sem quartel-general"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -196,17 +197,17 @@ msgstr "Time %i"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:22
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s tem %2$3.0f%% da terra (%3$i de %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:23
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr ""
+msgstr "%1$s tem %2$3.0f%% da terra (%3$i de %4$i)."
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
 #: ../../data/scripting/win_conditions/territorial_functions.lua:29
 msgid "Territory percentage"
-msgstr ""
+msgstr "Porcentagem do território"
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:235
 msgid "You own more than half of the map’s area."
@@ -241,7 +242,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Todo jogador ou time que obter mais da metade da área do mapa, ganha se mantida por 20 minutos. Se o modo pacifico estiver sido selecionado, o jogo acaba se um jogador tem mais terra do que quais quer outro jogador possa obter."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -258,7 +259,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Todo jogador ou time que obter mais da metade da área do mapa, ganha se a liderança for mantida por 20 minutos, ou se depois de 4 horas a liderança de mais terras também for mantida. Se o modo pacifico estiver sido selecionado o jogo acaba se um jogador tem mais terra do que quais quer outro jogador possa obter."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
@@ -274,8 +275,8 @@ msgstr[1] "%i minutos"
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:363
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% hora e %2%"
+msgstr[1] "%1% horas e %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:369
@@ -354,18 +355,18 @@ msgstr "Arvores possuídas"
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i árvore"
+msgstr[1] "%i árvores"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:67
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s tem %2$s até o momento."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s tem %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:94
