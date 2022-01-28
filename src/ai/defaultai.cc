@@ -1845,12 +1845,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
-
 	// We are interested in unconnected immovables, but we must be also close to connected ones
-	static bool any_connected_imm = false;
-	any_connected_imm = false;
-	static bool any_unconnected_imm = false;
-	any_unconnected_imm = false;
+	static bool any_imm_connected_to_wh = false;
+	any_imm_connected_to_wh = false;
+	static bool any_imm_not_connected_to_wh = false;
+	any_imm_not_connected_to_wh = false;
 
 	// immovables can occupy more then one field so we need a safeguard for duplicates
 	std::set<uint32_t> unique_serials;
@@ -1869,19 +1868,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			continue;
 		}
 
-		if (!unique_serials.insert(imm->serial()).second) {
-			continue;  // position was not inserted in the set, so we saw it before
-		}
-
 		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
 			continue;
+		}
+
+		if (!unique_serials.insert(imm->serial()).second) {
+			continue;  // position was not inserted in the set, so we saw it before
 		}
 
 		const Widelands::PlayerNumber field_owner = first_area.location().field->get_owned_by();
 
 		if (field_owner == pn) {
 			consider_own_psites(first_area.location(), field);
-			consider_own_msites(first_area.location(), field, any_connected_imm, any_unconnected_imm);
+			consider_own_msites(first_area.location(), field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
 			continue;
 		} else if (player_statistics.get_is_enemy(field_owner)) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
@@ -1931,14 +1930,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 		assert(field_owner == pn);  // It is us
 
-		consider_own_msites(location, field, any_connected_imm, any_unconnected_imm);
+		consider_own_msites(location, field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
 
 	} while (second_area.advance(map));
 
 	assert(field.military_loneliness <= 1000);
 
-	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
-		field.unconnected_nearby = true;
+	if (any_imm_not_connected_to_wh && any_imm_connected_to_wh && field.military_in_constr_nearby == 0) {
+		field.unconnected_nearby = true; //todo(Tibor) - to use it in gen. algorithm
 	}
 
 	// if there is a militarysite on the field, we try to walk to enemy
@@ -2123,7 +2122,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
                         2 * std::abs(management_data.get_military_number_at(141)) :
                         0;
 	score_parts[56] =
-	   (any_unconnected_imm) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
+	   (any_imm_not_connected_to_wh) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
 	score_parts[57] = 1 * management_data.neuron_pool[18].get_result_safe(
 	                         2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[58] = 3 * management_data.neuron_pool[19].get_result_safe(
@@ -3673,7 +3672,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 // Re-calculating warehouse to flag distances
 void DefaultAI::check_flag_distances(const Time& gametime) {
-	uint16_t checked_flags = 0;
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
 		const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
 		uint32_t highest_distance_set = 0;
@@ -3693,7 +3691,6 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 		// to_be_checked can be set back to true. Because less hoops (fewer flag-to-flag roads) does
 		// not always mean shortest road.
 		while (!remaining_flags.empty()) {
-			++checked_flags;
 			// looking for a node with shortest existing road distance from starting flag and one that
 			// has to be checked Now going over roads leading from this flag
 			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
@@ -6406,42 +6403,45 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
                                     BuildableField& bf,
                                     bool& any_connected_imm,
                                     bool& any_unconnected_imm) {
-	// connected to a warehouse
+	// last two are about being connected to any warehouse
 	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 	// ferries
 	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
 	const Widelands::Map& map = game().map();
 
-	if (upcast(Widelands::Building const, building, player_immovable)) {
-		bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
-		if (connected) {
-			any_connected_imm = true;
-		}
-
 		if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
 
 			const Widelands::BuildingDescr& target_descr = constructionsite->building();
 
-			if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
-				const int32_t dist = map.calc_distance(bf.coords, building->get_position());
+		   if (constructionsite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			   any_unconnected_imm = true;
+		   } else {
+			   any_connected_imm = true;
+		   }
+
+		   if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+				const int32_t dist = map.calc_distance(bf.coords, constructionsite->get_position());
 				const int32_t radius = target_ms_d->get_conquers() + 4;
 
 				if (radius > dist) {
 					bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-					if (bf.coords != building->get_position()) {
+					if (bf.coords != constructionsite->get_position()) {
 						bf.military_loneliness *= static_cast<double_t>(dist) / radius;
 					}
 					++bf.military_in_constr_nearby;
 				}
 			}
-		} else if (!connected) {
-			// we don't care about unconnected constructionsites
-			any_unconnected_imm = true;
 		}
 
 		if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
-			const int32_t dist = map.calc_distance(bf.coords, building->get_position());
+			const int32_t dist = map.calc_distance(bf.coords, militarysite->get_position());
 			const int32_t radius = militarysite->descr().get_conquers() + 4;
+
+		   if (militarysite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			   any_unconnected_imm = true;
+		   } else {
+			   any_connected_imm = true;
+		   }
 
 			if (radius > dist) {
 				bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
@@ -6454,14 +6454,14 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 					++bf.military_stationed;
 				}
 
-				if (bf.coords != building->get_position()) {
+				if (bf.coords != militarysite->get_position()) {
 					bf.military_loneliness *= static_cast<double_t>(dist) / radius;
 				}
 			}
 		} else {
 			++bf.own_non_military_nearby;
 		}
-	}
+
 }
 
 // for buildable field, it considers effect of building of type bo on position coords
