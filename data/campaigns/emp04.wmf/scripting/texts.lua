@@ -121,7 +121,7 @@ obj_deal_with_julia = {
    title=_("Deal with Julia to get the technology"),
    number = 1,
    body = objective_text(_("Diplomacy: Trade or War"),
-      li(_[[Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the goddess in your headquarters or conquer the monastery.]])
+      li(_([[Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the goddess in your headquarters or conquer the monastery.]]))
    ),
 }
 

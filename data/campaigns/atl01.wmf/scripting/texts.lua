@@ -29,7 +29,7 @@ obj_ensure_build_wares_production = {
    title = _("Ensure the supply of building wares"),
    number = 6,
    body = objective_text(_("Supply Building Wares"),
-      p(_[[Supply basic building material for your economy:]]) ..
+      p(_([[Supply basic building material for your economy:]])) ..
       li(_([[Build a quarry]])) ..
       li(_([[Build two woodcutter’s houses]])) ..
       li(_([[Build two forester’s houses]])) ..
@@ -82,7 +82,7 @@ obj_make_heavy_industry_and_mining = {
    title = _("Build industry and mines"),
    number = 5,
    body = objective_text(_("Industry and Mines"),
-      p(_[[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of granite while searching for them.]]) ..
+      p(_([[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine will dig for quartz and diamonds – all of them are precious materials and very rarely found. It will produce a lot of granite while searching for them.]])) ..
       li_arrow(_([[The ores have to be smelted at a smelting works before they can be used. The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]])) ..
       li(_([[Build a mine of each type. Make sure to send geologists to the mountain first.]])) ..
       li(_([[Build a smelting works]])) ..
@@ -106,7 +106,7 @@ obj_make_training_buildings = {
    title = _("Build training sites for soldiers"),
    number = 2,
    body = objective_text(_("Soldier Training Sites"),
-      p(_[[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training sites.]]) ..
+      p(_([[Like all other tribes, the Atlanteans are also able to train soldiers: the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains evasion, health and defense. The items produced by the industry are used to train better soldiers in the two training sites.]])) ..
       li(_([[Build a dungeon and a labyrinth]]))
  )
 }

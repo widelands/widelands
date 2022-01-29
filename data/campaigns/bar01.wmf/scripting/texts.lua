@@ -76,7 +76,7 @@ obj_refine_ores = {
    title = _("Refine your mined resources"),
    number = 1,
    body = objective_text(_("Build a smelting works"),
-      _[[The iron ore your miners dig up is not usable yet – it has to be melted into iron first.]])
+      _([[The iron ore your miners dig up is not usable yet – it has to be melted into iron first.]]))
 }
 
 obj_enhance_buildings = {
@@ -144,7 +144,7 @@ briefing_msg_01 = {
       _([[It’s been months, and we are still hiding where the forests are old and dark.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
-      _[[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]]
+      _([[My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]])
    )
 }
 
@@ -237,7 +237,7 @@ order_msg_ranger = {
       _([[I see you have already built a quarry and two lumberjack’s huts. That is a good beginning if we want to stay here longer.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Khantrukh
-      _[[But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.]]
+      _([[But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Khantrukh
       _([[So, in order to replace the trees we chop down, we should build some ranger’s huts, preferably close to the lumberjack’s huts.]]))
@@ -277,10 +277,10 @@ story_msg3 = {
   title = _("The Other Day"),
   body = thron(_("Thron says thoughtfully…"),
       -- TRANSLATORS: Thron
-      _[[Some time ago, Boldreth came to me. His advice was to move to a place closer to home – to strike at the first sign of my brothers’ forces wavering.]]
+      _([[Some time ago, Boldreth came to me. His advice was to move to a place closer to home – to strike at the first sign of my brothers’ forces wavering.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
-      _[[But when I look over the forests I can still see black smoke rising to the sky. I know – it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause on both sides…]])
+      _([[But when I look over the forests I can still see black smoke rising to the sky. I know – it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause on both sides…]]))
 }
 
 
@@ -291,7 +291,7 @@ story_msg4 = {
       _([[Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror as he told us of the atrocities taking place in Al’thunran.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
-      _[[I hereby renew my oath – I will stop this madness at any cost!]])
+      _([[I hereby renew my oath – I will stop this madness at any cost!]]))
 }
 
 

@@ -13,7 +13,7 @@ intro_south = {
    body = (
       h1(_("Seafaring Tutorial")) ..
       p(_([[Welcome back. In this tutorial, you are going to learn the most important things about seafaring, that is ships, ports, and expedition.]])) ..
-      p(_[[But let me first give you an overview about your territory: here in the south, you have a whole economy with almost everything you need.]])
+      p(_([[But let me first give you an overview about your territory: here in the south, you have a whole economy with almost everything you need.]]))
    ),
    h = 250
 }
@@ -24,8 +24,8 @@ intro_north = {
    title = _("The Northern Part"),
    body = (
       p(_([[Here in the northern part, you only have a goldmine and a warehouse. While the miners are supplied well with food, there is no way to transport the gold ore to our smelting works in the southern part.]])) ..
-      p(_[[We have tried to build a road, but the mountain is too wide and too steep. We therefore have only one possibility: we need to establish a sea lane between these two parts.]]) ..
-      p(_[[But I don’t want to rush you: you have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]])
+      p(_([[We have tried to build a road, but the mountain is too wide and too steep. We therefore have only one possibility: we need to establish a sea lane between these two parts.]])) ..
+      p(_([[But I don’t want to rush you: you have just arrived here and you would probably like to have a closer look at your camp. I will also take a short break and be back soon.]]))
    ),
    h = 350
 }
@@ -35,8 +35,8 @@ tell_about_port = {
    title = _("Ports"),
    body = (
       h1(_("Ports")) ..
-      p(_[[For everything you do on the high seas, you need a port at the shore. Ports are like headquarters: they can store wares, workers and soldiers. The soldiers inside will automatically come out when an enemy attacks the port.]]) ..
-      p(_[[Additionally, ports offer the possibility of transporting wares via ships. When you click on the port you already have, you will notice two additional tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let’s change this!]])
+      p(_([[For everything you do on the high seas, you need a port at the shore. Ports are like headquarters: they can store wares, workers and soldiers. The soldiers inside will automatically come out when an enemy attacks the port.]])) ..
+      p(_([[Additionally, ports offer the possibility of transporting wares via ships. When you click on the port you already have, you will notice two additional tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They are waiting for a ship to transport them to another port. Currently, there are none because we have not yet built a second port. So let’s change this!]]))
    ),
    h = 350
 }
@@ -47,7 +47,7 @@ tell_about_port_building = {
    title = _("Building ports"),
    body = (
       h1(_("How to build a port")) ..
-      p(_[[Ports are big buildings, but they can only be built at special locations: those marked with the]]) ..
+      p(_([[Ports are big buildings, but they can only be built at special locations: those marked with the]])) ..
       li_image("images/wui/overlays/port.png", _([[blue port space icon.]])) ..
       p(_([[Port spaces are set by the map designer, so a map will either contain them or not. They might, however, be hidden under trees or be blocked by surrounding buildings.]])) ..
       p(_([[You might already have noticed that you have such an icon next to your castle.]]))
@@ -62,7 +62,7 @@ obj_build_port = {
       p(_([[You always need a port when you want to transport wares with a ship.]])) ..
       li(_([[Build a port next to your castle, on the blue port space icon.]])) ..
       li_arrow(_([[Ports are built like normal buildings, but are only available on blue port spaces. Just click on a field with the icon and the building menu automatically offers you to build a port.]])) ..
-      li_arrow(_[[Although ports act as warehouses, you should not build more than necessary: they cost quartz, diamonds and gold, which makes them quite expensive.]])
+      li_arrow(_([[Although ports act as warehouses, you should not build more than necessary: they cost quartz, diamonds and gold, which makes them quite expensive.]]))
    )
 }
 
@@ -117,7 +117,7 @@ function shipyard_production(shipname)
       title = _("Shipyard production"),
       body = (
          h1(_("We have enough ships")) ..
-         p((_[[Your second ship, "%1%", is ready now.]]):bformat(shipname)) ..
+         p((_([[Your second ship, "%1%", is ready now.]])):bformat(shipname)) ..
          li_arrow(_([[You need to stop your shipyard when you have enough ships. Otherwise, your shipwright will consume all your logs and spidercloth, producing dozens of ships.]])) ..
          li_image("images/ui_basic/stop.png", _([[This is the icon for stopping production. You will find it in the building window.]]))
       ),
@@ -134,7 +134,7 @@ expedition1 = {
       h1(_("We lack iron")) ..
       p(_([[The second ship might not be finished yet, but we have an urgent problem.]])) ..
       p(_([[As you surely have already noticed, there is no iron in the mountain in the west. We have plenty of coal and gold ore, but without iron ore, we cannot produce any tools.]])) ..
-      p(_[[Although it might take long and be expensive and not without dangers – who knows what monsters live in the sea? – I see no other possibility: we will have to undertake an expedition to the unknown seas.]])
+      p(_([[Although it might take long and be expensive and not without dangers – who knows what monsters live in the sea? – I see no other possibility: we will have to undertake an expedition to the unknown seas.]]))
    ),
    h = 300
 }
@@ -209,9 +209,9 @@ expedition4 = {
    title = _("New colony"),
    body = (
       h1(_("Your colony has been founded")) ..
-      li_object('atlanteans_resi_iron_2', _[[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]]) ..
-      p(_[[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]]) ..
-      p(_[[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]]) ..
+      li_object('atlanteans_resi_iron_2', _([[You’ve lead the expedition to a successful end and founded a new colony. I’ve sent out some geologists – they already report that they’ve found some iron ore.]])) ..
+      p(_([[So far you have learned everything about seafaring: how to build ports and ships and how to send out an expedition. Remember that expeditions are sometimes the fastest way to reach essential resources – and sometimes the only one.]])) ..
+      p(_([[But I want to speak a word of warning. Ports are like headquarters: they can be attacked by a nearby enemy. While your headquarters has soldiers to defend it, your newly built port won’t. You should therefore avoid settling next to an enemy.]])) ..
       p(_([[On this map, there is no enemy to fear. In other games, you should make building one or two military fortifications around your new colonies a priority.]]))
    )
 }
@@ -278,7 +278,7 @@ ferry_3 = {
    title = _("There is more to it…"),
    body = (
       h1(_("Waterways")) ..
-      li_image("images/wui/fieldaction/menu_build_water.png", _[[Unlike ships which travel to any port where they’re needed, ferries have fixed transport routes called waterways. A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
+      li_image("images/wui/fieldaction/menu_build_water.png", _([[Unlike ships which travel to any port where they’re needed, ferries have fixed transport routes called waterways. A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]])) ..
       p(_([[Waterways can be built on the open sea as well as close to the shore where the water is too shallow for big ships. The only rule is that the two triangles directly adjacent to each segment of the waterway have to be water, and the entire path needs to be within your territory.]])) ..
       p(_([[Also note that waterways, unlike roads, may not be built quite as long as you want them to. Every map has a length restriction for waterways. On this map, this is 5 tiles.]])) ..
       p(_([[Always keep in mind that ferries do not transport workers. You can use them to speed up ware transport, but they can never entirely replace roads.]]))
@@ -303,7 +303,7 @@ ferry_5 = {
    body = (
       h1(_("Golden waves")) ..
       p(_([[As you can see, it is not that hard. When you build a waterway, the closest idle ferry will assign itself to it.]])) ..
-      p(_[[Now it’s your turn: Build a gold mine on the mountain in the south and connect it to the main land by building waterways over the streams.]])
+      p(_([[Now it’s your turn: Build a gold mine on the mountain in the south and connect it to the main land by building waterways over the streams.]]))
    )
 }
 
@@ -313,7 +313,7 @@ obj_waterways = {
    number = 1,
    body = objective_text(_("Build a gold mine and waterways"),
       p(_([[Build a gold mine on the mountain in the south, and connect it to the mainland by building waterways over the streams.]])) ..
-      li_arrow(_[[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]]) ..
+      li_arrow(_([[A waterway is built just like a road: You click on a flag near the shore, choose ‘Build a waterway’, and select the path for the waterway just as you would do for a road.]])) ..
       li_arrow(_([[However, each segment of the waterway needs two water triangles next to it.]]))
    )
 }
@@ -325,7 +325,7 @@ ferry_6 = {
       h1(_("About Ferries")) ..
       p(_([[Now there are only a few more things I would like you to keep in mind whenever using ferries.]])) ..
       p(_([[Never forget that these rowboats are too small to carry workers. You can use them as shortcuts for ware transport within parts of your territory, but not to claim regions you can reach neither by road nor by ship. Never cut all your roads between two places connected by waterways unless you are certain no worker will ever have to walk there.]])) ..
-      p(_[[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]])
+      p(_([[And if your waterways present a significant shortcut between your road networks, your economy will tend to send many wares over the waterway. As a waterway can hold only one ferry – unlike roads, which receive a second carrier if they are very busy –, and as they often tend to be rather longer than the two or three fields recommended for roads, there is always a risk of waterways becoming severe bottlenecks in your economy. Try to build several of them in parallel to distribute the strain. If this is not possible, it is in some cases even more efficient not to use waterways.]]))
    ),
    h = 450
 }

@@ -7,7 +7,7 @@ obj_defeat_red = {
    title = _("Defeat Törver"),
    number = 1,
    body = objective_text(_("Defeat the Armies of Törver"),
-      li_image("map:banner_plr_02.png", _[[Törver is the enemy in the north, who is fighting under the red banner.]])
+      li_image("map:banner_plr_02.png", _([[Törver is the enemy in the north, who is fighting under the red banner.]]))
    ),
 }
 
@@ -16,7 +16,7 @@ obj_build_port = {
    title = _("Build a port"),
    number = 1,
    body = objective_text(_("Build a Port in the North"),
-      li_image("tribes/buildings/warehouses/barbarians/port/menu.png", _[[We should build a port in Törver’s former land to be ready to send an expedition as soon as we found out how to build ships.]])
+      li_image("tribes/buildings/warehouses/barbarians/port/menu.png", _([[We should build a port in Törver’s former land to be ready to send an expedition as soon as we found out how to build ships.]]))
    ),
 }
 

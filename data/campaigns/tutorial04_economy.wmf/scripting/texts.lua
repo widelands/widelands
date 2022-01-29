@@ -11,8 +11,8 @@ intro1 = {
    body = (
       h1(_([[Economy]])) ..
       li_image("images/wui/stats/genstats_nrwares.png", _([[Welcome back. In this tutorial, I’ll tell you what you can do to check how well your economy works.]])) ..
-      p(_[[Building your economy up and making it work well and grow is the main part of Widelands. But you can’t control the workers directly – they will follow the general conditions you set.]]) ..
-      p(_[[This is what I’ll show you in this tutorial: what actions can you take to define those general conditions?]])
+      p(_([[Building your economy up and making it work well and grow is the main part of Widelands. But you can’t control the workers directly – they will follow the general conditions you set.]])) ..
+      p(_([[This is what I’ll show you in this tutorial: what actions can you take to define those general conditions?]]))
    ),
    h = 300
 }
@@ -23,7 +23,7 @@ intro2 = {
    title = _("A Peaceful Land"),
    body = (
       li_object("empire_fortress",
-         p(_[[Now about the map: you have settled in a nice valley between two mountains, rich in marble, iron ore and coal. All were hoping for a peaceful life.]]) ..
+         p(_([[Now about the map: you have settled in a nice valley between two mountains, rich in marble, iron ore and coal. All were hoping for a peaceful life.]])) ..
          p(_([[But one day, you discovered a barren wasteland with abandoned buildings in the east. A strange aura came from there, and no one wanted to set foot there. But the border could not be left undefended, and so you constructed three fortresses.]])) ..
          p(_([[You had not been prepared for war, and you have to hurry now to build up an army.]])), plr.color)
    ),
@@ -36,7 +36,7 @@ tavern_burnt_down = {
    body = (
       h1(_([[The Tavern is Burning!]])) ..
       li_object("destroyed_building",
-         _[[Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper accidentally dropped a torch. She is fine, but we could not extinguish the fire in time.]], plr.color)
+         _([[Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper accidentally dropped a torch. She is fine, but we could not extinguish the fire in time.]]), plr.color)
    ),
    w = 300,
    h = 250
@@ -81,10 +81,10 @@ explain_building_stats = {
    body = (
       li_image("images/wui/menus/statistics_buildings.png",
          _([[This is the building statistics window. It shows you all buildings you can own, sorted by their size.]])) ..
-      p(_[[Let me now explain what all those numbers mean:]]) ..
-      li(_[[‘2/1’ below the quarry: This means that you have two quarries, plus another one which is under construction.]]) ..
-      li(_[[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has done any work yet, but they are going to start working soon.]]) ..
-      li(_[[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions – we really need more soldiers.]]) ..
+      p(_([[Let me now explain what all those numbers mean:]])) ..
+      li(_([[‘2/1’ below the quarry: This means that you have two quarries, plus another one which is under construction.]])) ..
+      li(_([[‘0%’: This indicates the average productivity of all buildings of that type. You have just started this game, therefore none of your buildings has done any work yet, but they are going to start working soon.]])) ..
+      li(_([[‘2/4’ below your sentry: For military buildings, the stationed soldiers are shown instead of a productivity. You want to have four soldiers in your sentries, but only two soldiers are stationed in this kind of building. This leaves two vacant positions – we really need more soldiers.]])) ..
       li_arrow(_([[In both cases, the color (green - yellow - red) signals you how good the value is.]])) ..
       li(_([[If you click on a building, you can scroll through the buildings of the selected type.]])) ..
       li(_([[If you don’t have any building of a particular building type, it will be shown greyed out.]])) ..
@@ -167,7 +167,7 @@ position = "topright",
       li_image("images/wui/stats/menu_tab_wares_warehouse.png",
          _([[The third tab shows you the wares that are stored in your headquarters, your warehouses and ports. They are not needed anywhere and are therefore your reserve.]])) ..
       li_image("images/wui/stats/menu_tab_workers_warehouse.png", _([[The fourth tab shows the same thing for workers.]])) ..
-      p(_[[The third tab tells you that there are no rations left in your headquarters – that’s not good!]])
+      p(_([[The third tab tells you that there are no rations left in your headquarters – that’s not good!]]))
    ),
    show_instantly = true,
    h = 250
@@ -233,7 +233,7 @@ build_taverns = {
    body = (
       h1(_([[We need new taverns]])) ..
       li_object("empire_tavern",
-         _[[Now that you have an overview, you should act. I think we should build more than one tavern – two or three are better.]],
+         _([[Now that you have an overview, you should act. I think we should build more than one tavern – two or three are better.]]),
          plr.color)
    )
 }
@@ -254,7 +254,7 @@ ware_encyclopedia = {
    body = (
       h1(_([[How to get help]])) ..
       li_object("empire_soldier",
-         _[[Of course, it is difficult to remember all of my remarks and advice. For example, you might ask yourself: ‘Why do we need rations to get soldiers?’]], plr.color) ..
+         _([[Of course, it is difficult to remember all of my remarks and advice. For example, you might ask yourself: ‘Why do we need rations to get soldiers?’]]), plr.color) ..
       p(_([[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure about your tribe’s needs and abilities and how its buildings and workers operate, you can look it up easily in our tribe-specific in-game help and encyclopedia.]]))
    ),
    h = 450,
@@ -266,7 +266,7 @@ obj_lookup_wares = {
    title=_("Look up which wares are needed to recruit soldiers"),
    number = 1,
    body = objective_text(_("Look up which wares are needed to recruit soldiers"),
-      p(_[[A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited. When you are finished, just close the encyclopedia window.]]) ..
+      p(_([[A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited. When you are finished, just close the encyclopedia window.]])) ..
       li(_([[Use the encyclopedia to find out how to create new soldiers.]])) ..
       li_arrow(_([[Choose the ‘Wares’ tab in the encyclopedia window.]])) ..
       li_arrow(_([[Look up what is needed to produce a helmet and what is needed to produce a wooden spear.]])) ..
@@ -279,7 +279,7 @@ explain_encyclopedia = {
    title = _("Encyclopedia details"),
    body = (
       h1(_([[The Encyclopedia Categories]])) ..
-      p(_[[The encyclopedia has five tabs:]])..
+      p(_([[The encyclopedia has five tabs:]]))..
       div("width=100%", div("float=left padding_r=14 padding_t=5",p(img("images/logos/wl-ico-32.png"))) .. p(_([[The ‘General’ tab contains information about all the basic interface controls for Widelands. Furthermore, you can find tips that are relevant for your tribe there.]]))) ..
       div("width=100%", div("float=left padding_r=18 padding_t=15 padding_b=15 padding_l=4",p(img("images/wui/buildings/menu_tab_wares.png"))) .. p(_([[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]]))) ..
       div("width=100%", div("float=left padding_r=16",p(img("images/wui/buildings/menu_tab_workers.png"))) .. p(_([[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]]))) ..
@@ -319,7 +319,7 @@ building_priority_settings = {
       li_object("empire_marblemine", p(_([[Great. Our taverns have now been built up and are supplying us with rations.]])) ..
          p(_([[At the moment, all mines are supplied with rations. If you want to prioritize a special mine, you simply have to open its window. In the wares tab, behind every ware, you can see a slider.]])) ..
          p(_([[When you move the slider to the blue area on the left side (low priority), the corresponding ware gets delivered less frequently. Red (right side) means that as many wares as possible should be delivered to this building, maybe because it produces something important.]])) ..
-         p(_[[The actual supply state is indicated by varying colors of the ware icons themselves:]]) ..
+         p(_([[The actual supply state is indicated by varying colors of the ware icons themselves:]])) ..
          li(_([[Wares stored in the building are shown in full color.]])) ..
          li(_([[Missing wares are greyed out.]])) ..
          li(_([[Wares not present in the building yet but already being transported there are shown in a darker grey.]])) ..
@@ -484,7 +484,7 @@ economy_settings2 = {
       p(_([[You first have to select one or more wares (you can also left-click and drag). Then you can set the desired target quantity for the selected wares.]])) ..
       p(_([[Most buildings will only produce something when the stock level in your warehouses falls below the target quantity, so you should indicate the reserve you want to stockpile.]])) ..
       li_image(wl.Game():get_ware_description("scythe").icon_name,
-         _[[An example: the default value for scythes is 1. If you build a farm, a carrier will take a scythe and become a farmer. Then there will be no scythes left, but the target quantity is 1, therefore your toolsmith will start producing another one.]]) ..
+         _([[An example: the default value for scythes is 1. If you build a farm, a carrier will take a scythe and become a farmer. Then there will be no scythes left, but the target quantity is 1, therefore your toolsmith will start producing another one.]])) ..
       li_object("empire_farmer",
          _([[If you build two farms, only one of them will start working immediately. The second farm will have to wait for its worker, who will lack a scythe. If you had set the target quantity to 2 before, two scythes would have been available and both farms would have been able to start working right away.]]), plr.color)
    )
@@ -498,7 +498,7 @@ obj_produce_marble_columns = {
       li(_([[To be prepared for additional fortifications, you should produce 20 marble columns.]])) ..
       li_arrow(_([[Your stonemason will not produce marble columns when they are not needed. You have to increase the target quantity.]])) ..
       li_arrow(_([[To do so, click on any flag and choose ‘Configure economy’. In this window, you can decide how many wares of each type you wish to have in stock.]])) ..
-      li_arrow(_[[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]])
+      li_arrow(_([[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]))
    )
 }
 economy_settings3 = {
@@ -506,10 +506,10 @@ economy_settings3 = {
    title = _("Economy options"),
    body = (
       li_image(wl.Game():get_ware_description("iron").icon_name,
-         _[[By changing the target quantity, you can therefore decide which wares/tools your resources (in this case: iron) should be turned into or whether you would like to save your iron and wait until you know what you will need it for.]]) ..
+         _([[By changing the target quantity, you can therefore decide which wares/tools your resources (in this case: iron) should be turned into or whether you would like to save your iron and wait until you know what you will need it for.]])) ..
       p(_([[Only buildings that consume wares care about this setting. Buildings that produce wares for free (e.g. your farms or wells) will always keep working.]])) ..
       li_image(wl.Game():get_ware_description("marble_column").icon_name,
-         _[[Now let’s try it out: the current target quantity for marble columns is 10. Increase it to be prepared in case you will have to build up your fortifications quickly.]])
+         _([[Now let’s try it out: the current target quantity for marble columns is 10. Increase it to be prepared in case you will have to build up your fortifications quickly.]]))
    ),
    h = 500,
 }
@@ -548,7 +548,7 @@ conclusion = {
          p(_([[Great. We now have enough marble columns so that in case of an aggressor, we can build up our fortifications. But I do not think that that will be necessary. So far, no enemy has shown up.]])) ..
          p(_([[I hope I could teach you how you can control the economy in Widelands. There are many options and they can be confusing at first. Even if you’ve only understood a few concepts, you mustn’t give up. Try them out in some games, become familiar with them and experience the possibilities. Then, return to this tutorial and learn the rest!]])), plr.color) ..
       p([[]]) ..
-      p(_[[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]]) ..
+      p(_([[This was the last tutorial I had prepared for you. I’ve now taught you everything I know. There are still secrets hidden in this world even I don’t know about. I will now search for a quiet place to spend my sunset years. If you have still questions, the Widelands community will surely help you. You can find it at:]])) ..
       h1(p("align=center", u("widelands.org"))),
    allow_next_scenario = true,
    h = 450

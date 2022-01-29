@@ -71,11 +71,11 @@ obj_build_food_infrastructure = {
    number = 1,
    body = objective_text(_("Food For Your Miners"),
       li(_([[Build a tavern to produce some food to sustain our miners.]])) ..
-      li_arrow(_[[Of course this means you will need more resources for preparing this food – like fish, meat or bread.]]) ..
+      li_arrow(_([[Of course this means you will need more resources for preparing this food – like fish, meat or bread.]])) ..
       li_arrow(_([[To provide these foodstuffs, you can build a fisher’s house, a hunter’s house, a farm, a mill and a bakery.]])) ..
       li(_([[Build a brewery and a winery to supply the miners with some good and strong drinks.]])) ..
       li_arrow(_([[Maybe you will also need a piggery, a vineyard and some wells.]])) ..
-      li_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
+      li_arrow(_([[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]]))
    ),
 }
 
