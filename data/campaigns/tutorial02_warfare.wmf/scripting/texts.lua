@@ -50,7 +50,7 @@ abilities = {
       h2_image("tribes/workers/atlanteans/soldier/defense_level0.png", _("Defense:")) ..
       -- TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-      p(_[[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by %1%%%. If an attacker with an attack value of 3500 points hits a Barbarian soldier, the Barbarian will lose 3500·%2%%% = %3% health.]]):bformat(soldier.base_defense, (100 - soldier.base_defense), 3500 * (100 - soldier.base_defense) / 100) ..
+      p(_([[The defense is the percentage that is subtracted from the attack value. The Barbarians cannot train in this skill and therefore have always defense level 0, which means that the damage is always reduced by %1%%%. If an attacker with an attack value of 3500 points hits a Barbarian soldier, the Barbarian will lose 3500·%2%%% = %3% health.]])):bformat(soldier.base_defense, (100 - soldier.base_defense), 3500 * (100 - soldier.base_defense) / 100) ..
       h2_image("tribes/workers/barbarians/soldier/evade_level0.png", _("Evade:")) ..
       -- TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
       -- TRANSLATORS: The last two %% after the placeholder are the percent symbol.

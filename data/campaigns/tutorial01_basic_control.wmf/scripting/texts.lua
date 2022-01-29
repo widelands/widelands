@@ -405,7 +405,7 @@ quarry_illegally_destroyed = {
    title = _("You Destroyed the Construction Site!"),
    body = (
       li_object("barbarians_quarry", _([[It seems like you destroyed a construction site for a quarry we wanted to build. Luckily, we still have enough logs left this time, so you can simply build another one.]]), plr.color) ..
-      li_arrow(_[[You can also reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you will have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]])
+      li_arrow(_([[You can also reload the game from a previous savegame. Luckily, these are created from time to time. To do so, you will have to go back to the main menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more careful next time.]]))
    ),
    w = 350,
    h = 250
