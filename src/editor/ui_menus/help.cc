@@ -21,7 +21,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "editor/editorinteractive.h"
-#include "scripting/lua_coroutine.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"

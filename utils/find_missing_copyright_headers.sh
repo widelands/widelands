@@ -26,29 +26,19 @@ do
   printf "\r[%4d] Checking %-80s" $n "$file ..."
   exec 3<"$file"
 
-  mode="normal"
+  iserror=0
   for ((i=0; i < ${#expected_lines[@]}; ++i))
   do
     IFS= read line <&3
-    if [ $i -eq 0 ] && [ "${line:0:2}" = "//" ]
+    result=$(grep -Po "${expected_lines[$i]}" <<< "$line" 2>/dev/null)
+    if ! [ "$result" = "$line" ]
     then
-      mode="dummy"
-    elif [ "$mode" = "dummy" ] && [ -n "$line" ]
-    then
-      mode="error"
+      iserror=1
       break
-    elif [ "$mode" = "normal" ]
-    then
-      result=$(grep -Po "${expected_lines[$i]}" <<< "$line" 2>/dev/null)
-      if ! [ "$result" = "$line" ]
-      then
-        mode="error"
-        break
-      fi
     fi
   done
 
-  if [ $mode = "error" ]
+  if [ $iserror -eq 1 ]
   then
     printf "\nWrong copyright header in %s\n" "$file"
     ((++err))
