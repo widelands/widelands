@@ -185,7 +185,7 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-	enum class ShowHideEntry { kBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+        enum class ShowHideEntry { kBuildingSpaces, kMaximumBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
 
 	static void do_run_editor(EditorInteractive::Init, const std::string&, const std::string&);
 
@@ -206,6 +206,9 @@ private:
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 
+
+	// Toggles the buildhelp for maximum building spaces and calls rebuild_showhide_menu
+	void toggle_maximum_buildhelp();
 	// Show / hide the resources overlays in the mapview
 	void toggle_resources();
 	// Show / hide the immovables in the mapview
@@ -260,10 +263,16 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
-	bool draw_resources_ = true;
-	bool draw_immovables_ = true;
-	bool draw_bobs_ = true;
-	bool draw_grid_ = true;
+        enum DisplayFlags : uint8_t {
+                kNone = 0,
+                kResources = 1,
+                kImmovables = 2,
+                kBobs = 4,
+                kGrid = 8,
+                kMaximumBuildhelp = 16,
+        };
+
+        uint8_t draw_flags_ = kResources | kImmovables | kBobs | kGrid;
 
 	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;

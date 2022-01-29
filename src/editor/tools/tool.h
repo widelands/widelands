@@ -98,14 +98,14 @@ public:
 	// displayed as build help.
 	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                                   const Widelands::EditorGameBase&) {
-		return fcoords.field->maxcaps();
+		return fcoords.field->nodecaps();
 	}
 
-	// Gives the tool the chance to show semi-transparent icons in buildhelp. (For example,
-	// when the field has an object.)
-	virtual float opacity_for_buildhelp(const Widelands::FCoords& fcoords,
+	// Gives the tool the chance to modify the maxcaps to change what will be
+	// displayed as maximum build help.
+	virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                                   const Widelands::EditorGameBase&) {
-		return fcoords.field->nodecaps() != fcoords.field->maxcaps() ? 0.6f : 1.0f;
+                return fcoords.field->maxcaps();
 	}
 
 	virtual bool operates_on_triangles() const {
