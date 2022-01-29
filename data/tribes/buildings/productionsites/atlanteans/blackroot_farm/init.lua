@@ -41,7 +41,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant",
             "call=harvest",
@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-         descname = _"planting blackroot",
+         descname = _("planting blackroot"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -57,7 +57,7 @@ descriptions:new_productionsite_type {
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
-         descname = _"harvesting blackroot",
+         descname = _("harvesting blackroot"),
          actions = {
             "callworker=harvest",
             "sleep=duration:3s"
@@ -66,8 +66,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("atlanteans_building", "The blackroot farmer working at this blackroot farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },

@@ -7,9 +7,9 @@ include(dirname .. "../terrain_affinity.lua")
 wl.Descriptions():new_immovable_type{
    name = "cirrus_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   descname = _ "Cirrus Tree (Old)",
+   descname = _("Cirrus Tree (Old)"),
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   species = _ "Cirrus Tree",
+   species = _("Cirrus Tree"),
    icon = dirname .. "../menu.png",
    size = "small",
 

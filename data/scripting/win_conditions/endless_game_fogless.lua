@@ -12,7 +12,7 @@ local wc_name = "Endless Game (no fog)"
 -- This needs to be exactly like wc_name, but localized, because wc_name
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Endless Game (no fog)")
-local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
+local wc_desc = _("This is an endless game without rules. Fog of war is disabled.")
 local wc_version = 1
 local r = {
    name = wc_name,

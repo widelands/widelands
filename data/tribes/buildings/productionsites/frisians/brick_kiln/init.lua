@@ -68,7 +68,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
-         descname = _"burning bricks",
+         descname = _("burning bricks"),
          actions = {
             "return=skipped unless economy needs brick",
             "consume=granite clay:3 coal",

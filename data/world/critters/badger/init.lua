@@ -23,7 +23,7 @@
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
---             descname = _"Badger",
+--             descname = _("Badger"),
 --
 --    **animation_directory**
 --        *Mandatory*. The location of the animation png files.
@@ -89,7 +89,7 @@
 --
 --    wl.Descriptions():new_critter_type{
 --       name = "badger",
---       descname = _ "Badger",
+--       descname = _("Badger"),
 --       animation_directory = path.dirname(__file__),
 --       programs = {
 --           remove = { "remove" },
@@ -134,7 +134,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_critter_type{
    name = "badger",
-   descname = _ "Badger",
+   descname = _("Badger"),
    icon = dirname .. "menu.png",
    animation_directory = dirname,
    programs = {

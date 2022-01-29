@@ -22,7 +22,7 @@ end
 -- Main script
 local r = {
    rt(fs_color(
-      p_font("align=center", "size=28 color=2F9131", _"Widelands Translators") ..
+      p_font("align=center", "size=28 color=2F9131", _("Widelands Translators")) ..
       list_authors()
    ))
 }

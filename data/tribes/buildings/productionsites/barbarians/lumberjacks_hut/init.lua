@@ -46,7 +46,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-         descname = _"felling trees",
+         descname = _("felling trees"),
          actions = {
             "callworker=harvest",
             "sleep=duration:20s"
@@ -55,8 +55,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Trees",
-      heading = _"Out of Trees",
+      title = _("No Trees"),
+      heading = _("Out of Trees"),
       message = pgettext("barbarians_building", "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."),
       productivity_threshold = 60
    },

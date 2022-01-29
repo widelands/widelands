@@ -35,7 +35,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "sleep=duration:20s",
             "callworker=fetch_water",
@@ -47,8 +47,8 @@ descriptions:new_productionsite_type {
 
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Water",
-      heading = _"Out of Water",
+      title = _("No Water"),
+      heading = _("Out of Water"),
       message = pgettext ("amazons_building", "The carrier working at this water gatherer’s hut can’t find any water in its vicinity."),
       productivity_threshold = 33
    },

@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-         descname = _"mining gold",
+         descname = _("mining gold"),
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=meal wine",
@@ -56,7 +56,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce = {
-         descname = _"mining gold",
+         descname = _("mining gold"),
          actions = {
             "animate=working duration:13s",
             "mine=resource_gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
@@ -74,8 +74,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Gold",
-      heading = _"Main Gold Vein Exhausted",
+      title = _("No Gold"),
+      heading = _("Main Gold Vein Exhausted"),
       message =
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },

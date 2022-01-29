@@ -94,11 +94,11 @@
 --       prefer_heroes = true,
 --
 --       messages = {
---          occupied = _"Your soldiers have occupied your castle.",
---          aggressor = _"Your castle discovered an aggressor.",
---          attack = _"Your castle is under attack.",
---          defeated_enemy = _"The enemy defeated your soldiers at the castle.",
---          defeated_you = _"Your soldiers defeated the enemy at the castle."
+--          occupied = _("Your soldiers have occupied your castle."),
+--          aggressor = _("Your castle discovered an aggressor."),
+--          attack = _("Your castle is under attack."),
+--          defeated_enemy = _("The enemy defeated your soldiers at the castle."),
+--          defeated_you = _("Your soldiers defeated the enemy at the castle.")
 --       },
 --    }
 --
