@@ -35,8 +35,23 @@ class LuaClass:
         return '-\\n'.join(re.findall(r'[A-Z][a-z]*', self.name))
 
     def get_graphviz_link(self):
-        html_link = 'href="../{}#{}", target="_parent"'.format(
-            self.outfile.replace('.rst', '.html'), self.name.lower())
+        builder = classes.builder
+        if builder == 'dirhtml':
+            html_link = 'href="../{folder}/index.html#{anchor}",\
+                target="_parent"'.format(
+                folder=self.outfile.replace('.rst', ''),
+                anchor=self.name.lower()
+            )
+        elif builder == 'html':
+            html_link = 'href="../{}#{}", target="_parent"'.format(
+                self.outfile.replace('.rst', '.html'), self.name.lower()
+            )
+        elif builder == 'singlehtml':
+            html_link = 'href="../index.html#{}", target="_parent"'.format(
+                self.name.lower()
+            )
+        else:
+            return 'href=""'
         return html_link
 
     def print_data(self):
@@ -58,6 +73,7 @@ class LuaClasses:
 
     def __init__(self):
         self.class_list = []
+        self.builder = ''
 
     def add_class(self, name, outfile, parent=None, is_base=False):
         if not is_base and not parent:
@@ -399,15 +415,14 @@ def create_directive(cls_inst):
     return graph_directive
 
 
-def add_dependency_graph(rst_data, outfile):
+def add_dependency_graph(rst_data, outfile, builder):
     """Insert a dependency graph to rst_data."""
-
+    classes.builder = builder
     found_cls = RSTDATA_CLS_RE.findall(rst_data)
     for cls_name in found_cls:
         cls_inst = classes.get_instance(cls_name, outfile)
         directive = create_directive(cls_inst)
         if directive:
-            print("Adding dependency graph for: %s" % cls_inst.long_name)
             repl_str = '.. class:: {}\n\n'.format(cls_name)
             directive_str = '{}\n{}'.format(directive, repl_str)
             rst_data = rst_data.replace(repl_str, directive_str)

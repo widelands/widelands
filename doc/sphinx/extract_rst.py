@@ -7,6 +7,7 @@ import os.path as p
 import re
 import sys
 import documentation_enhancements as doc_enh
+from make import builder_help
 
 ###################
 # inputs, outputs #
@@ -114,8 +115,16 @@ def extract_rst_from_cpp(inname, outname=None):
     # Add string 'Child of: …'
     output = doc_enh.add_child_of(output, outname)
     if '-graphs' in sys.argv:
-        # Add dependency graph
-        output = doc_enh.add_dependency_graph(output, outname)
+        try:
+            builder = sys.argv[2]
+            if sys.argv[1] == '-graphs' and builder:
+                # Add dependency graph
+                output = doc_enh.add_dependency_graph(output, outname, builder)
+        except IndexError:
+            print('You must provide the sphinx-builder to make the links in graphs work correctly!')
+            print('Choose a builder out of', [n for n in builder_help], 'e.g. run:')
+            print("./extract_rst.py -graphs dirhtml")
+            sys.exit(1)
 
     if output.strip():
         out = sys.stdout
