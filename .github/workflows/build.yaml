@@ -207,7 +207,7 @@ jobs:
           - x64
           - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
@@ -233,6 +233,7 @@ jobs:
           ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ steps.prepare.outputs.head }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
+        choco install innosetup
         vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} asio gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
@@ -273,7 +274,7 @@ jobs:
           - x64
           - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
     - name: Installing dependencies
       run: |
@@ -285,8 +286,9 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-asio mingw-w64-$env:archname-icu
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-gcc mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-asio mingw-w64-$env:archname-icu
         # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
+        choco install innosetup
     - name: Checkout
       uses: actions/checkout@v2
       with:
