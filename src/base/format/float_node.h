@@ -87,7 +87,7 @@ struct FloatNode : FormatNode {
 			frac = (rounded - int_part) * precision_multiplier_;
 			fractional = static_cast<int64_t>(frac);
 			if (dynamic_precision_) {
-				while ((fractional % 10 == 0) && (current_precision > 0)) {
+				while ((fractional % 10 == 0) && (current_precision > 1)) {
 					fractional /= 10;
 					--current_precision;
 				}

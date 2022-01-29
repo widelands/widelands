@@ -58,8 +58,8 @@ namespace format_impl {
    width: minimal number of characters
 
    precision:
-      For floating-point, number of digits after the period, printing trailing zeroes.
-      For strings, max number of characters before padding.
+      For floating-point: Number of digits after the period, printing trailing zeroes.
+      For strings: Max number of characters before padding.
       Not allowed for other types.
 
    fmt:
@@ -82,7 +82,8 @@ namespace format_impl {
       - The %p and %P specifiers add the prefix "0x" to the output; %x and %X do not add a prefix.
       - It is not possible to print a floating-point number in scientific exponent notation.
       - If precision is not specified for %f or a floating point number is printed with %N%, then
-        up to 6 decimal places are printed, with trailing zeroes removed.
+        up to 6 decimal places are printed, with trailing zeroes removed. At least one decimal is
+        printed even if it is zero.
 
    The argument that controls localized output has the following effects:
       - Translatable decimal separator for floating point values.
