@@ -194,8 +194,7 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 	case 'b':
 		return std::unique_ptr<AbstractNode>(new BooleanNode(flags, min_width, precision));
 	case 'f':
-		bool dynamic_precision;
-		dynamic_precision = (precision == kInfinitePrecision);
+		const bool dynamic_precision = (precision == kInfinitePrecision);
 		return std::unique_ptr<AbstractNode>(
 		   new FloatNode(flags, min_width, dynamic_precision ? kDefaultFloatPrecision : precision,
 		                 dynamic_precision));
