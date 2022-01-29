@@ -237,6 +237,11 @@ private:
 	void
 	consider_productionsite_influence(BuildableField&, Widelands::Coords, const BuildingObserver&);
 
+	void consider_own_psites(Widelands::FCoords, BuildableField&);
+	void consider_enemy_sites(Widelands::FCoords, BuildableField&);
+	void consider_ally_sites(Widelands::FCoords, BuildableField&);
+	void consider_own_msites(Widelands::FCoords, BuildableField&, bool&, bool&);
+
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(BuildingAttribute);
 	uint32_t count_productionsites_without_buildings();

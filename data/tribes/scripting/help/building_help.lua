@@ -1,4 +1,6 @@
 include "tribes/scripting/help/format_help.lua"
+include "tribes/scripting/help/calculations.lua"
+
 
 -- RST
 -- building_help.lua
@@ -318,8 +320,8 @@ end
 --
 --    Creates the string for the general section in building help
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
@@ -451,11 +453,11 @@ function building_help_general_string(tribe, building_description)
          .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
       result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
       result = result .. inline_header(_"Conquer range:", building_description.conquers)
+      result = result .. inline_header(_"Vision range:", building_description.vision_range)
 
    elseif(building_description.type_name == "trainingsite") then
       result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
    end
-   result = result .. inline_header(_"Vision range:", building_description.vision_range)
    return result
 end
 
@@ -465,8 +467,8 @@ end
 --
 --    The input and output wares of a productionsite
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: an rt string with images describing a chain of ware/building dependencies
 --
@@ -475,10 +477,11 @@ function building_help_dependencies_production(tribe, building_description)
 
    -- Providers
    local hasinput = false
+   local inputs = ""
    for i, ware_description in ipairs(building_description.inputs) do
       hasinput = true
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
-         result = result .. dependencies(
+         inputs = inputs .. dependencies(
             {producer, ware_description},
             _"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
          )
@@ -486,7 +489,7 @@ function building_help_dependencies_production(tribe, building_description)
    end
    if (hasinput) then
       -- TRANSLATORS: Heading in the building help for wares that a building accepts (e.g. wheat for a mill).
-      result =  h3(_"Incoming:") .. result
+      result = h3(_"Incoming:") .. inputs
    end
 
    -- Collected items
@@ -509,21 +512,15 @@ function building_help_dependencies_production(tribe, building_description)
       result = result .. h3(_"Creates:") .. dependencies_creates(tribe, building_description)
    end
 
+   local outgoing = ""
    -- Produced items
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
-      result = result .. h3(_"Produces:")
-      for i, ware_description in ipairs(building_description.output_ware_types) do
-         result = result ..
-            dependencies({building_description, ware_description}, ware_description.descname)
-      end
       for i, worker_description in ipairs(building_description.output_worker_types) do
-         result = result ..
+         outgoing = outgoing ..
             dependencies({building_description, worker_description}, worker_description.descname)
       end
    end
-
    -- Consumers
-   local outgoing = ""
    for i, ware_description in ipairs(building_description.output_ware_types) do
 
       -- Constructionsite isn't listed with the consumers, so we need a special check
@@ -563,8 +560,8 @@ end
 --
 --    Shows the production dependencies for a training site.
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt string with training dependencies information.
 --
@@ -632,13 +629,13 @@ end
 --
 --    Formats the "Building" section in the building help: Enhancing info, costs and space required
 --
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: an rt string describing the building section
 --
 function building_help_building_section(building_description)
    -- TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
-   local result = h2(_"Building")
+   local result = h2(_"Building requirements")
 
    -- Space required
    if (building_description.is_mine) then
@@ -805,19 +802,19 @@ end
 
 
 -- RST
--- .. function:: building_help_crew_string(tribe, building_description)
+-- .. function:: building_help_crew_section(tribe, building_description)
 --
 --    Displays the building's workers with an image and the tool they use
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe
 --                that we are displaying this help for.
 --
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --
 --    :returns: Workers/Crew section of the help file
 --
-function building_help_crew_string(tribe, building_description)
+function building_help_crew_section(tribe, building_description)
    local result = ""
 
    if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then
@@ -869,6 +866,7 @@ function building_help_crew_string(tribe, building_description)
       becomes_description = worker_description.becomes
 
       if (becomes_description) then
+         result = result .. h3(_"Experience levels")
          result = result .. help_worker_experience(worker_description, becomes_description)
       end
    end
@@ -882,21 +880,61 @@ end
 --
 --    Displays the production/performance section with a headline
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --
 --    :returns: rt for the production section
 --
 function building_help_production_section(tribe, building_description)
+   -- Produced items
+   local result = h2(_"Production")
+   if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
+      local checked_programs ={}
+      for i, ware_description in ipairs(building_description.output_ware_types) do
+         programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
+         -- check if the ware is collected (no producing program)
+         if #programs == 0 then
+            result = result .. h3(_"Ware produced:")
+            result = result .. help_ware_amount_line(ware_description, 1)
+            break
+         end
+         for j, program in ipairs(programs) do
+            if (ware_counters[program] > 0) and not checked_programs[program] then
+               if (ware_counters[program] == 1) then
+                  -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
+                  result = result .. h3(_"Ware produced:")
+               else
+                  -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
+                  result = result .. h3(_"Wares produced:")
+               end
+               result = result .. ware_strings[program]
+               result = result .. help_consumed_wares_workers(tribe, building_description, program)
+            end
+         checked_programs[program] = true
+         end
+      end
+      for i, worker_description in ipairs(building_description.output_worker_types) do
+         programs, worker_counters, worker_strings = programs_workers_count(tribe, building_description, worker_description)
+         for j, program in ipairs(programs) do
+            if (worker_counters[program] > 0) and not checked_programs[program] then
+               -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
+               result = result .. h3(_"Workers recruited:")
+               result = result .. worker_strings[program]
+               result = result .. help_consumed_wares_workers(tribe, building_description, program)
+            end
+         checked_programs[program] = true
+         end
+      end
+   end
    local helptexts = building_description:helptexts(tribe.name)
    -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
    local performance = _"Calculation needed"
    if (helptexts["performance"] ~= nil) then
       performance = helptexts["performance"]
    end
-   return h2(_"Production") ..
-     inline_header(_"Performance:", performance)
+   result = result .. inline_header(_"Performance:", performance)
+   return result
 end
 
 
@@ -905,8 +943,8 @@ end
 --
 --    Main function to create a building help string.
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that has this building.
---    :arg building_description: The :class:`LuaBuildingDescription` for the building
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that has this building.
+--    :arg building_description: The :class:`wl.map.BuildingDescription` for the building
 --                               that we are displaying this help for.
 --    :returns: rt of the formatted text
 --
@@ -914,9 +952,9 @@ function building_help(tribe, building_description)
    if (building_description.type_name == "productionsite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_production(tribe, building_description) ..
-         building_help_crew_string(tribe, building_description) ..
-         building_help_building_section(building_description) ..
-         building_help_production_section(tribe, building_description)
+         building_help_crew_section(tribe, building_description) ..
+         building_help_production_section(tribe, building_description) ..
+         building_help_building_section(building_description)
    elseif (building_description.type_name == "militarysite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_building_section(building_description)
@@ -932,7 +970,7 @@ function building_help(tribe, building_description)
    elseif (building_description.type_name == "trainingsite") then
       return building_help_general_string(tribe, building_description) ..
          building_help_dependencies_training(tribe, building_description) ..
-         building_help_crew_string(tribe, building_description) ..
+         building_help_crew_section(tribe, building_description) ..
          building_help_building_section(building_description) ..building_help_production_section(tribe, building_description)
    elseif (building_description.type_name == "constructionsite" or
             building_description.type_name == "dismantlesite") then
