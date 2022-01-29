@@ -139,6 +139,9 @@ function worker_help_string(tribe, worker_description)
    else
       result = img(worker_description.icon_name)
    end
+   if helptexts["note"] ~= nil then
+      result = result .. h2(_"Note") .. p(helptexts["note"])
+   end
 
    if (worker_description.buildable) then
       -- Get the tools for the workers.

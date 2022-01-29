@@ -23,7 +23,13 @@ local result = {
       },
       workers_order = {
          {
-            { name = "atlanteans_trader" }
+            { name = "atlanteans_trader",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+               purpose = pgettext("atlanteans_worker", "Transports wares to share with other players."),
+               note = pgettext("atlanteans_worker", "A trader is a scout who needs a horse to transport the wares.")
+            }
+            }
          }
       },
       wares_order = {
