@@ -5,12 +5,12 @@
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016,2019
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Gontzal M. Pujana <juchuf@gmail.com>, 2018
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2018
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Madkat Here, 2016,2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
