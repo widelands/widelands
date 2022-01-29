@@ -21,6 +21,11 @@ jobs:
       run: |
         python3 utils/validate_json.py data/txts/
         python3 utils/update_authors.py
+    - name: Check for missing copyright headers
+      run: |
+        pushd src
+        ../utils/find_missing_copyright_headers.sh
+        popd
     - name: Check for superfluous includes and forward declarations
       run: |
         pushd src
