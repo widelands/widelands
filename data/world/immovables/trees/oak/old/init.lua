@@ -6,8 +6,8 @@ include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "oak_summer_old",
-   descname = _ "Oak (Old)",
-   species = _ "Oak",
+   descname = _("Oak (Old)"),
+   species = _("Oak"),
    icon = dirname .. "../menu.png",
    size = "small",
 

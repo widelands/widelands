@@ -7,7 +7,7 @@ include(dirname .. "../terrain_affinity.lua")
 wl.Descriptions():new_immovable_type{
    name = "twine_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   descname = _ "Twine Tree (Mature)",
+   descname = _("Twine Tree (Mature)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

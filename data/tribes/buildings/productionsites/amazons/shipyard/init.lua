@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=ship on failure fail",
             "call=ship_preparation",
@@ -57,14 +57,14 @@ descriptions:new_productionsite_type {
       },
       ship = {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
-         descname = _"constructing a ship",
+         descname = _("constructing a ship"),
          actions = {
             "construct=amazons_shipconstruction worker:buildship radius:6",
             "sleep=duration:20s",
          }
       },
       ship_preparation = {
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "sleep=duration:35s",
          }

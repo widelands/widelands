@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         descname = _("quarrying granite"),
          actions = {
             "callworker=cut_granite",
             "sleep=duration:17s500ms"
@@ -53,8 +53,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Rocks",
-      heading = _"Out of Rocks",
+      title = _("No Rocks"),
+      heading = _("Out of Rocks"),
       message = pgettext("barbarians_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
       productivity_threshold = 75
    },

@@ -57,7 +57,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smoke_fish",
             "call=smoke_meat",
@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
+         descname = _("smoking meat"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_meat",
@@ -79,7 +79,7 @@ descriptions:new_productionsite_type {
       -- 2 identical programs for fish to prevent unnecessary skipping penalty
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",
@@ -91,7 +91,7 @@ descriptions:new_productionsite_type {
       },
       smoke_fish_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             -- time total: 60
             "return=skipped unless economy needs smoked_fish",

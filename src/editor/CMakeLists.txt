@@ -121,7 +121,6 @@ wl_library(editor
     logic_widelands_geometry
     map_io
     map_io_map_loader
-    scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     sound

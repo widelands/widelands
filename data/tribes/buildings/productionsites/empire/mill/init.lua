@@ -52,7 +52,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-         descname = _"grinding wheat",
+         descname = _("grinding wheat"),
          actions = {
             "return=skipped unless economy needs flour",
             "consume=wheat",
