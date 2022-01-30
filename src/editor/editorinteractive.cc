@@ -675,18 +675,15 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		// Draw build help for actual building spaces.
-		if (buildhelp() && ((draw_flags_ & kMaximumBuildhelp) == 0) ) {
+		if (buildhelp() && !buildhelp_drawn) {
 			const auto* overlay = get_buildhelp_overlay(nodecaps);
-
 			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
-			}
-		} else if (buildhelp() && nodecaps != maxcaps) {
-                        // If maximum cap buldhelp is also on and is different, draw actual build cap scaled down a bit.
-			const auto* overlay = get_buildhelp_overlay(nodecaps);
-
-			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * 0.9);
+				// If maximum cap buildhelp is also on and is different,
+				// and current space is medium (ie. maximum is big or port),
+				// then scale down a bit to make the maximum more visible.
+				const float scaling = ((draw_flags_ & kMaximumBuildhelp) != 0) &&
+				   ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ? 0.9 : 1.0f;
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
 			}
 		}
 
