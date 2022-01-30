@@ -8,15 +8,10 @@ if you want to build the documentation (modules py-sphinx or similar).
 Building the documentation for offline reading
 ----------------------------------------------
 
-First, extract the embedded documentation from the C++ and Lua code::
-
-   $ cd doc/sphinx/
-   $ ./extract_rst.py [-graphs]
+Run ``./make.py`` to see your options. Convenient for off-line reading is
+``./make.py html [-graphs]``.
 
 The option ``-graphs`` adds dependency graphs for each class.
-
-Then, run ``make`` to see your options. Convenient for off-line reading is
-``make html``.
 
 
 Building the documentation for the webserver

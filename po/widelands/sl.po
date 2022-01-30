@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"POT-Creation-Date: 2022-01-25 02:46+0000\n"
 "PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/widelands/widelands/language/sl/)\n"
@@ -1417,8 +1417,8 @@ msgid ""
 "location."
 msgstr "Izberite novo velikost zemljevida, nato kliknite na zemljevid, da ga razdelite na želeni lokaciji. Pri povečanju velikosti zemljevida bodo novi stolpci/vrstice vstavljene vzhodno/južno od izbrane točke. Ob krčenju zemljevida bo želeno število stolpcev/vrstic odstranjenih na vzhodu/jugu od izbrane točke."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:76
 #: ../../src/ui_basic/dropdown.cc:310 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_basic/dropdown.cc:429 ../../src/ui_basic/dropdown.cc:437
@@ -3143,7 +3143,7 @@ msgstr "Widelands ni uspel uporabiti lokalnega omrežja. Morda na vratih %s teč
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1331
+#: ../../src/scripting/lua_game.cc:1329
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -7187,9 +7187,9 @@ msgstr "Pristanišča"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:710
 #: ../../src/wui/building_statistics_menu.cc:729
 #: ../../src/wui/building_statistics_menu.cc:731

@@ -6,12 +6,12 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Gastón <gastbr@gmail.com>, 2016
 # Javier Mora <morehash@gmail.com>, 2015
-# Gontzal M. Pujana <juchuf@gmail.com>, 2015
+# Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiibakun, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016,2020-2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
