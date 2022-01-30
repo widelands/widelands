@@ -28,7 +28,7 @@ return {
       end
 
       -- TRANSLATORS: A header in the editor help. Terrains preferred by a type of tree.
-      result = vspace(3) .. h3(_"Preferred terrains") .. vspace(3) .. p(result)
+      result = vspace(3) .. h3(_("Preferred terrains")) .. vspace(3) .. p(result)
       pop_textdomain()
       return {
          text = result

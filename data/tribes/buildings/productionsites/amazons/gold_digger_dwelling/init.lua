@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-         descname = _"mining gold",
+         descname = _("mining gold"),
          actions = {
             "return=skipped unless economy needs gold_dust",
             "consume=ration water:5",
@@ -62,8 +62,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Gold",
-      heading = _"Main Gold Vein Exhausted",
+      title = _("No Gold"),
+      heading = _("Main Gold Vein Exhausted"),
       message =
          pgettext("amazons_building", "This gold digger dwelling’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },

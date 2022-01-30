@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_spidercloth",
             "call=produce_tabard",
@@ -59,7 +59,7 @@ descriptions:new_productionsite_type {
       },
       produce_spidercloth = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
-         descname = _"weaving spidercloth",
+         descname = _("weaving spidercloth"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs spidercloth",
@@ -72,7 +72,7 @@ descriptions:new_productionsite_type {
       },
       produce_tabard = {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-         descname = _"tailoring a tabard",
+         descname = _("tailoring a tabard"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard",
@@ -85,7 +85,7 @@ descriptions:new_productionsite_type {
       },
       produce_tabard_golden = {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
-         descname = _"tailoring a golden tabard",
+         descname = _("tailoring a golden tabard"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard_golden",

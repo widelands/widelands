@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
-         descname = _"hardening wood",
+         descname = _("hardening wood"),
          actions = {
             "return=skipped unless economy needs blackwood",
             "consume=log:2",

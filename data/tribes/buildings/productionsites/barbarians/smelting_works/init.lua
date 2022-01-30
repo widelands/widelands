@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
@@ -63,7 +63,7 @@ descriptions:new_productionsite_type {
       -- 2 identical programs for iron to prevent unnecessary skipping penalty
       smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
       },
       smelt_iron_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
-         descname = _"smelting iron",
+         descname = _("smelting iron"),
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
@@ -89,7 +89,7 @@ descriptions:new_productionsite_type {
       },
       smelt_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-         descname = _"smelting gold",
+         descname = _("smelting gold"),
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",

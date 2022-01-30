@@ -6,6 +6,7 @@ test_descr = lunit.TestCase("Gettext Test")
 -- Code takes a different path when textdomain was pushed, so we have 2 variants of each test.
 
 function gettext_calls()
+   -- TODO(Nordfriese): Delete the syntax-only testcases when we enforce optional parentheses everywhere
    assert_equal("foo", _"foo")
    assert_equal("foo", _("foo"))
    assert_equal(_"Carrier", _("Carrier"))

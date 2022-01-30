@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "hardlava",
-   descname = _ "Igneous Rocks",
+   descname = _("Igneous Rocks"),
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "",

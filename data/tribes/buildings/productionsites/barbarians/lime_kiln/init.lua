@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
-         descname = _"mixing grout",
+         descname = _("mixing grout"),
          actions = {
             "return=skipped unless economy needs grout",
             "consume=coal granite:2 water:2",

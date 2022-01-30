@@ -19,7 +19,7 @@ run(function()
    push_textdomain("training_wheels")
 
    local objectives_message = {
-      title = _"Objectives",
+      title = _("Objectives"),
       position = "bottomright",
       h = 280,
       w = 260,
@@ -32,21 +32,21 @@ run(function()
 
    local objectives_message_objective = {
    name = "objectives_message_objective",
-      title = _"Objectives",
+      title = _("Objectives"),
       number = 1,
       body = (
-         objective_text(_"Open the Objectives window",
-         li_image("images/wui/training_wheels_arrow.png", _"Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives.":bformat('o')))
+         objective_text(_("Open the Objectives window"),
+         li_image("images/wui/training_wheels_arrow.png", _("Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives."):bformat('o')))
       )
    }
 
    local obj_initial_close_objectives_window = {
       name = "obj_initial_close_objectives_window",
-      title=_"Close this window",
+      title=_("Close this window"),
       number = 1,
-      body = objective_text(_"Closing this window",
-         li_image("images/wui/menus/objectives.png", _[[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]]) ..
-         li_arrow(_[[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]])
+      body = objective_text(_("Closing this window"),
+         li_image("images/wui/menus/objectives.png", _([[ You can open and close this window by clicking on the ‘Objectives’ button in the toolbar on the bottom of the screen.]])) ..
+         li_arrow(_([[Like any other window, you can also close the ‘Objectives’ window by right-clicking on it.]]))
       )
    }
 
