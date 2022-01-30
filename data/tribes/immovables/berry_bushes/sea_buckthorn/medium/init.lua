@@ -6,7 +6,7 @@ include(dirname .. "../terrain_affinity.lua")
 
 descriptions:new_immovable_type {
    name = "berry_bush_sea_buckthorn_medium",
-   descname = _ "Sea Buckthorn (medium)",
+   descname = _("Sea Buckthorn (medium)"),
    size = "small",
    icon = dirname .. "menu.png",
    terrain_affinity = terrain_affinity,

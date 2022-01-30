@@ -13,7 +13,7 @@ local wc_name = "Endless Game"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Endless Game")
 local wc_version = 1
-local wc_desc = _"This is an endless game without rules."
+local wc_desc = _("This is an endless game without rules.")
 local r = {
    name = wc_name,
    description = wc_desc,

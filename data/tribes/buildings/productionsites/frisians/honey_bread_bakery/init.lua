@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=bake_honey",
             "call=bake_normal",
@@ -64,7 +64,7 @@ descriptions:new_productionsite_type {
       -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
       bake_honey = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-         descname = _"baking honey bread",
+         descname = _("baking honey bread"),
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       },
       bake_honey_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
-         descname = _"baking honey bread",
+         descname = _("baking honey bread"),
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
@@ -86,7 +86,7 @@ descriptions:new_productionsite_type {
       },
       bake_normal = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-         descname = _"baking bread",
+         descname = _("baking bread"),
          actions = {
             "return=skipped unless economy needs bread_frisians",
             "consume=barley water",

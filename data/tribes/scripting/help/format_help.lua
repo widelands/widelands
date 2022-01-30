@@ -52,23 +52,23 @@ function plot_size_line(size, size_only)
    local image = ""
    if (size == "mine") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Mine plot"
+      text = _("Mine plot")
       image = "images/wui/overlays/mine.png"
    elseif (size == "port") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Port plot"
+      text = _("Port plot")
       image = "images/wui/overlays/port.png"
    elseif (size == "small") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Small plot"
+      text = _("Small plot")
       image = "images/wui/overlays/small.png"
    elseif (size == "medium") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Medium plot"
+      text = _("Medium plot")
       image = "images/wui/overlays/medium.png"
    elseif (size == "big") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Big plot"
+      text = _("Big plot")
       image = "images/wui/overlays/big.png"
    else
       return ""
@@ -76,17 +76,16 @@ function plot_size_line(size, size_only)
 
    if (size_only == true) then
       -- TRANSLATORS: Size of a map immovable
-      text = p(join_sentences(font("size=13 color=D1D1D1", _"Size:"), text))
+      text = p(join_sentences(font("size=13 color=D1D1D1", _("Size:")), text))
    else
    -- TRANSLATORS: Space on the map required for building a building there
-      text = p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+      text = p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
    end
 
    return
       div("width=100%",
          div("float=right padding_l=6", p(img(image))) ..
          text
-      )
 end
 
 
@@ -138,7 +137,7 @@ function help_ware_amount_line(ware_description, amount)
       temp_amount = temp_amount - imgperline
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-   result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
+   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, ware_description.descname))) .. result
    return result
 end
 
@@ -154,7 +153,7 @@ end
 function help_worker_experience(worker_description, becomes_description)
    local result = ""
    -- TRANSLATORS: EP = Experience Points
-   local exp_string = _"%s to %s (%s EP)":format(
+   local exp_string = _("%s to %s (%s EP)"):format(
          worker_description.descname,
          becomes_description.descname,
          worker_description.needed_experience
@@ -164,7 +163,7 @@ function help_worker_experience(worker_description, becomes_description)
    becomes_description = worker_description.becomes
    if(becomes_description) then
      -- TRANSLATORS: EP = Experience Points
-      exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+      exp_string = exp_string .. "<br>" .. _("%s to %s (%s EP)"):format(
             worker_description.descname,
             becomes_description.descname,
             worker_description.needed_experience
@@ -229,7 +228,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
             description = wl.Game():get_worker_description(consumed_item)
             consumes_workers = true
          end
-         consumed_itemnames[count] = _"%1$dx %2$s":bformat(amount, description.descname)
+         consumed_itemnames[count] = _("%1$dx %2$s"):bformat(amount, description.descname)
          consumed_images[count] = description.icon_name
          consumed_amount[count] = amount
          count = count + 1
@@ -237,7 +236,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
       end
       local text = localize_list(consumed_itemnames, "or")
       if (countlist > 1) then
-         text = _"%s and":bformat(text)
+         text = _("%s and"):bformat(text)
       end
       local images = ""
       local image_counter = 1

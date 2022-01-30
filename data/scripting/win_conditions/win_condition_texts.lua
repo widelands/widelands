@@ -54,8 +54,8 @@ lost_game = {
 --
 
 won_game_over = {
-  title = _"You won",
-  body = h2(_"You are the winner!")
+  title = _("You won"),
+  body = h2(_("You are the winner!"))
 }
 
 -- RST

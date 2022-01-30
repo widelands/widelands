@@ -67,7 +67,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-         descname = _"weaving cloth",
+         descname = _("weaving cloth"),
          actions = {
             "return=skipped unless economy needs cloth",
             "consume=fur reed",

@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=brew_mead",
             "call=brew_beer",
@@ -64,7 +64,7 @@ descriptions:new_productionsite_type {
       -- 2 identical programs for mead to prevent unnecessary skipping penalty
       brew_mead = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-         descname = _"brewing mead",
+         descname = _("brewing mead"),
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       },
       brew_mead_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-         descname = _"brewing mead",
+         descname = _("brewing mead"),
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
@@ -86,7 +86,7 @@ descriptions:new_productionsite_type {
       },
       brew_beer = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _("brewing beer"),
          actions = {
             "return=skipped unless economy needs beer",
             "consume=barley water",

@@ -33,7 +33,7 @@ function immovable_help_string(tribe, immovable_description)
    local purpose = helptexts["purpose"]
    local image = immovable_description.icon_name
    if purpose ~= nil then
-      result = h2(_"Purpose") ..
+      result = h2(_("Purpose")) ..
          li_object(immovable_description.name, purpose)
    elseif image ~= "" then
       result = img(immovable_description.icon_name)
@@ -52,23 +52,23 @@ function immovable_help_string(tribe, immovable_description)
    local space_required = plot_size_line(immovable_description.size)
 
    if (buildcost ~= "" or space_required ~= "") then
-      result = result .. h2(_"Requirements")
+      result = result .. h2(_("Requirements"))
       if (buildcost ~= "") then
-         result = result .. h3(_"Build cost:") .. buildcost
+         result = result .. h3(_("Build cost:")) .. buildcost
          result = result .. plot_size_line(immovable_description.size)
       else
          result = result .. plot_size_line(immovable_description.size, true)
       end
       if (immovable_description.size == "small") then
-         result = result .. p(_"Workers and animals can walk across fields with this immovable.")
+         result = result .. p(_("Workers and animals can walk across fields with this immovable."))
       else
-         result = result .. p(_"Workers and animals can’t walk across fields with this immovable.")
+         result = result .. p(_("Workers and animals can’t walk across fields with this immovable."))
       end
    end
 
    local becomes_list = immovable_description.becomes
    if (#becomes_list > 0) then
-      result = result .. h2(_"Becomes")
+      result = result .. h2(_("Becomes"))
       for index, target in ipairs(becomes_list) do
          local target_description = nil
          if (wl.Game():immovable_exists(target)) then
@@ -94,7 +94,7 @@ function immovable_help_string(tribe, immovable_description)
    local affinity = immovable_description.terrain_affinity
    if (affinity ~= nil) then
       include "scripting/help.lua"
-      result = result .. h2(_"Preferred Terrains")
+      result = result .. h2(_("Preferred Terrains"))
       result = result .. terrain_affinity_help(immovable_description)
    end
 

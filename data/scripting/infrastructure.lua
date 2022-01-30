@@ -184,9 +184,9 @@ function place_building_in_region(plr, building, fields, gargs)
    end
    plr:send_to_inbox(
       -- TRANSLATORS: Short for "Not enough space"
-      _"No Space",
+      _("No Space"),
       p(_([[Some of your starting buildings didn’t have enough room and weren’t built. You are at a disadvantage with this; consider restarting this map with a fair starting condition.]])),
-      {popup=true, heading=_"Not enough space"}
+      {popup=true, heading=_("Not enough space")}
    )
    pop_textdomain()
 end
@@ -278,11 +278,11 @@ function check_trees_rocks_poor_hamlet(player, sf, warehouse, waretable_rocks, w
    end
    if not has_rocks then
       add_wares_to_warehouse(player, warehouse, waretable_rocks)
-      player:send_to_inbox(_"No rocks nearby", _"There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
+      player:send_to_inbox(_("No rocks nearby"), _("There are no rocks near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
    -- adding exactly one forester
    if not has_trees then
       add_wares_to_warehouse(player, warehouse, waretable_trees)
-      player:send_to_inbox(_"No trees nearby", _"There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy.")
+      player:send_to_inbox(_("No trees nearby"), _("There are no trees near to your starting position. Therefore, you receive extra resources for bootstrapping your economy."))
    end
 end

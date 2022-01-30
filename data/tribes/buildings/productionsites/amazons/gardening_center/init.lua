@@ -51,7 +51,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
-         descname = _"enhancing the fertility of land",
+         descname = _("enhancing the fertility of land"),
          actions = {
             "callworker=check",
             "consume=coal fish",
@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
       },
       terraform = {
          -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
-         descname = _"enhancing the fertility of land",
+         descname = _("enhancing the fertility of land"),
          actions = {
             "callworker=terraform",
             "sleep=duration:8s"

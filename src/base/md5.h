@@ -1,6 +1,4 @@
 /*
- * Thanks to Ulrich Drepper for the md5sum example code
- *
  * Copyright (C) 2002-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -14,10 +12,10 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
+// Thanks to Ulrich Drepper for the md5sum example code.
 
 #ifndef WL_BASE_MD5_H
 #define WL_BASE_MD5_H

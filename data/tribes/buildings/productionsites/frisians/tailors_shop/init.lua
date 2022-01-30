@@ -55,7 +55,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=weave_studded",
             "call=weave_gold",
@@ -64,7 +64,7 @@ descriptions:new_productionsite_type {
       },
       weave_studded = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment because ...
-         descname = _"sewing studded fur garment",
+         descname = _("sewing studded fur garment"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_studded",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
       },
       weave_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment because ...
-         descname = _"sewing golden fur garment",
+         descname = _("sewing golden fur garment"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_golden",

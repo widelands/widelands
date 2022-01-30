@@ -86,7 +86,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "return=skipped unless economy needs coal",
             "consume=ration",
@@ -97,7 +97,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce = {
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "animate=working duration:15s",
             "mine=resource_coal radius:3 yield:50% when_empty:5% experience_on_fail:20%",
@@ -115,8 +115,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Coal",
-      heading = _"Main Coal Vein Exhausted",
+      title = _("No Coal"),
+      heading = _("Main Coal Vein Exhausted"),
       message =
          pgettext("frisians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },

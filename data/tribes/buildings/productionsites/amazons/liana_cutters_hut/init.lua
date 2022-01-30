@@ -36,7 +36,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-         descname = _"cutting lianas",
+         descname = _("cutting lianas"),
          actions = {
             "return=skipped unless economy needs liana",
             "callworker=cut",
@@ -46,8 +46,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
-      title = _"No Trees",
-      heading = _"No Tree to Cut Lianas",
+      title = _("No Trees"),
+      heading = _("No Tree to Cut Lianas"),
       message = pgettext ("amazons_building", "The liana cutter working at this site can’t find any tree in her work area. You should consider dismantling or destroying the building or building a jungle preserver’s hut."),
       productivity_threshold = 33
    },

@@ -57,11 +57,11 @@ run(function()
    push_textdomain("training_wheels")
 
    local msg_click_flag_symbol = {
-      title = _"Flags",
+      title = _("Flags"),
       position = "topright",
       body = (
-         p(_"Your carriers can transport your wares faster if they share the load.") ..
-         li_image("images/wui/overlays/set_flag.png", _"Click on the flag symbol.")
+         p(_("Your carriers can transport your wares faster if they share the load.")) ..
+         li_image("images/wui/overlays/set_flag.png", _("Click on the flag symbol."))
       ),
       h = 120,
       w = 260,
@@ -69,10 +69,10 @@ run(function()
    }
 
    local msg_click_flag_button = {
-      title = _"Flags",
+      title = _("Flags"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_flag.png", _"Click on the flag button.")
+         li_image("images/wui/fieldaction/menu_build_flag.png", _("Click on the flag button."))
       ),
       h = 120,
       w = 260,
@@ -80,11 +80,11 @@ run(function()
    }
 
    local msg_click_more_flags = {
-      title = _"Flags",
+      title = _("Flags"),
       position = "topright",
       body = (
-         li_image("images/wui/overlays/set_flag.png", _"Now check if you can place even more flags on your roads.") ..
-         li("Click ‘OK’ when you’re done.")
+         li_image("images/wui/overlays/set_flag.png", _("Now check if you can place even more flags on your roads.")) ..
+         li(_("Click ‘OK’ when you’re done."))
       ),
       h = 120,
       w = 260,
