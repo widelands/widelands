@@ -84,7 +84,7 @@ run(function()
       position = "topright",
       body = (
          li_image("images/wui/overlays/set_flag.png", _("Now check if you can place even more flags on your roads.")) ..
-         li("Click ‘OK’ when you’re done.")
+         li(_("Click ‘OK’ when you’re done."))
       ),
       h = 120,
       w = 260,

@@ -141,7 +141,7 @@ run(function()
       title = _("Roads"),
       position = "topright",
       body = (
-         li_object(quarry.name, "Click on the flag in front of the building to start placing a road.", player.color)
+         li_object(quarry.name, _("Click on the flag in front of the building to start placing a road."), player.color)
       ),
       h = 120,
       w = 260,
@@ -152,7 +152,7 @@ run(function()
       title = _("Roads"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
+         li_image("images/wui/fieldaction/menu_build_way.png", _("Click on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.")) .. road_steepness_description
       ),
       h = 380,
       w = 260,

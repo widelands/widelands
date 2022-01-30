@@ -138,7 +138,7 @@ run(function()
       title = _("Roads"),
       position = "topright",
       body = (
-         li_object(log_producer.name, "Click on the flag in front of the building to start placing a road.", player.color)
+         li_object(log_producer.name, _("Click on the flag in front of the building to start placing a road."), player.color)
       ),
       h = 120,
       w = 260,
@@ -149,7 +149,7 @@ run(function()
       title = _("Roads"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button, then and click on the indicated flag.") ..
+         li_image("images/wui/fieldaction/menu_build_way.png", _("Click on the ‘Build road’ button, then and click on the indicated flag.")) ..
          li_arrow(explain_control_key)
       ),
       h = 240,
