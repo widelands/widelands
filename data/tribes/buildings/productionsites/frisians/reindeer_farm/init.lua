@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=recruit_deer",
             "call=make_fur",

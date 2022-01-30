@@ -18,15 +18,15 @@ include "scripting/richtext.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 include "scripting/win_conditions/win_condition_texts.lua"
 
-local team_str = _"Team %i"
-local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+local team_str = _("Team %i")
+local wc_has_territory = _("%1$s has %2$3.0f%% of the land (%3$i of %4$i).")
+local wc_had_territory = _("%1$s had %2$3.0f%% of the land (%3$i of %4$i).")
 
 local wc_stats = "Territory percentage"
 -- This needs to be exactly like wc_stats, but localized, because wc_stats
 -- will be used as the key to fetch the translation in C++
 -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
-local wc_stats_i18n = _"Territory percentage"
+local wc_stats_i18n = _("Territory percentage")
 
 -- Used by calculate_territory_points keep track of when the winner changes
 local winning_players = {}
@@ -232,7 +232,7 @@ function winning_status_header()
    push_textdomain("win_conditions")
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
-   local message = p(_"You own more than half of the map’s area.")
+   local message = p(_("You own more than half of the map’s area."))
    message = message .. p(ngettext("Keep it for %i more minute to win the game.",
              "Keep it for %i more minutes to win the game.",
              remaining_minutes))
@@ -261,7 +261,7 @@ function losing_status_header(players)
    end
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
-   local message = p(_"%s owns more than half of the map’s area."):format(winner_name)
+   local message = p(_("%s owns more than half of the map’s area.")):format(winner_name)
    message = message .. p(ngettext("You’ve still got %i minute to prevent a victory.",
              "You’ve still got %i minutes to prevent a victory.",
              remaining_minutes))

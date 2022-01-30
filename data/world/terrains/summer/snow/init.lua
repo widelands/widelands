@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "summer_snow",
-   descname = _ "Snow",
+   descname = _("Snow"),
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

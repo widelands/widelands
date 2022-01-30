@@ -8,9 +8,9 @@ push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Poor Hamlet",
+   descname = _("Poor Hamlet"),
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
-   tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can’t successfully start from this.",
+   tooltip = _("Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can’t successfully start from this."),
    incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
 
    func =  function(player, shared_in_start)
@@ -45,7 +45,7 @@ init = {
       player:conquer(sf, 9)
 
       push_textdomain("tribes")
-      player:send_to_inbox(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+      player:send_to_inbox(_("Be careful"), _("You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created."))
       pop_textdomain()
 
       check_trees_rocks_poor_hamlet(player, sf, "empire_warehouse", {granite = 1}, {log = 1, planks = 1, granite = 1})

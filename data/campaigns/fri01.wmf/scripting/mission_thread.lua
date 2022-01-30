@@ -126,7 +126,7 @@ end
 function backup_autosave()
    while backup_mark.owner ~= p1 do sleep(4273) end
    -- TRANSLATORS: Name of a backup autosave
-   wl.Game():save(_"The Great Stormflood (Backup Autosave)")
+   wl.Game():save(_("The Great Stormflood (Backup Autosave)"))
 end
 
 function stormflood()

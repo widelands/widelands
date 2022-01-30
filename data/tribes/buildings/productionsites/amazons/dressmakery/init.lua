@@ -55,7 +55,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_tunic",
             "call=produce_helmet_wooden",
@@ -70,7 +70,7 @@ descriptions:new_productionsite_type {
       },
       produce_tunic = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
-         descname = _"sewing a tunic",
+         descname = _("sewing a tunic"),
          actions = {
             "return=skipped unless economy needs tunic",
             "consume=rubber rope",
@@ -81,7 +81,7 @@ descriptions:new_productionsite_type {
       },
       produce_armor_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-         descname = _"making a light wooden armor",
+         descname = _("making a light wooden armor"),
          actions = {
             "return=skipped unless economy needs armor_wooden",
             "consume=balsa:2 rope",
@@ -92,7 +92,7 @@ descriptions:new_productionsite_type {
       },
       produce_helmet_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a wooden helmet",
+         descname = _("making a wooden helmet"),
          actions = {
             "return=skipped unless economy needs helmet_wooden",
             "consume=ironwood rubber",
@@ -103,7 +103,7 @@ descriptions:new_productionsite_type {
       },
       produce_warriors_coat = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"sewing a warrior’s coat",
+         descname = _("sewing a warrior’s coat"),
          actions = {
             "return=skipped unless economy needs warriors_coat",
             "consume=ironwood balsa:2 rubber gold",
@@ -114,7 +114,7 @@ descriptions:new_productionsite_type {
       },
       produce_boots_sturdy = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making sturdy boots",
+         descname = _("making sturdy boots"),
          actions = {
             "return=skipped unless economy needs boots_sturdy",
             "consume=rubber balsa",
@@ -125,7 +125,7 @@ descriptions:new_productionsite_type {
       },
       produce_boots_swift = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making swift boots",
+         descname = _("making swift boots"),
          actions = {
             "return=skipped unless economy needs boots_swift",
             "consume=rubber:3",
@@ -136,7 +136,7 @@ descriptions:new_productionsite_type {
       },
       produce_boots_hero = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _"making hero boots",
+         descname = _("making hero boots"),
          actions = {
             "return=skipped unless economy needs boots_hero",
             "consume=rubber:3 gold",
@@ -147,7 +147,7 @@ descriptions:new_productionsite_type {
       },
       produce_vest_padded = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a padded vest",
+         descname = _("making a padded vest"),
          actions = {
             "return=skipped unless economy needs vest_padded",
             "consume=rubber:2 rope:2",
@@ -158,7 +158,7 @@ descriptions:new_productionsite_type {
       },
       produce_protector_padded = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a padded protector",
+         descname = _("making a padded protector"),
          actions = {
             "return=skipped unless economy needs protector_padded",
             "consume=rubber:2 rope:2 balsa gold",

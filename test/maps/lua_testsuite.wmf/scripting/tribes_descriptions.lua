@@ -11,9 +11,9 @@ function test_descr:test_tribe_descr()
 end
 
 function test_descr:test_descname()
-   assert_equal(_"Atlanteans", egbase:get_tribe_description("atlanteans").descname)
-   assert_equal(_"Barbarians", egbase:get_tribe_description("barbarians").descname)
-   assert_equal(_"Empire", egbase:get_tribe_description("empire").descname)
+   assert_equal(_("Atlanteans"), egbase:get_tribe_description("atlanteans").descname)
+   assert_equal(_("Barbarians"), egbase:get_tribe_description("barbarians").descname)
+   assert_equal(_("Empire"), egbase:get_tribe_description("empire").descname)
 end
 
 function test_descr:test_name()
