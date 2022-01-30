@@ -264,7 +264,7 @@ private:
 	std::unique_ptr<EditorHistory> history_;
 
         enum DisplayFlags : uint8_t {
-                kNone = 0,
+                kDisplayNone = 0,
                 kResources = 1,
                 kImmovables = 2,
                 kBobs = 4,
