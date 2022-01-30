@@ -664,12 +664,16 @@ void EditorInteractive::draw(RenderTarget& dst) {
                 const Widelands::NodeCaps nodecaps = tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase);
                 const Widelands::NodeCaps maxcaps = tools_->current().maxcaps_for_buildhelp(field.fcoords, ebase);
 		// Draw build help for maximum building spaces.
+		bool buildhelp_drawn = false;
 		if ((draw_flags_ & kMaximumBuildhelp) != 0) {
 			const auto* overlay = get_buildhelp_overlay(maxcaps);
-
-                        const float opacity = nodecaps == maxcaps ? 1.0f : 0.6f;
-
 			if (overlay != nullptr) {
+				float opacity = 1.0f;
+				if (nodecaps != maxcaps) {
+					opacity = 0.6f;
+				} else {
+					buildhelp_drawn = true;
+				}
 				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale, opacity);
 			}
 		}
@@ -682,7 +686,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				// and current space is medium (ie. maximum is big or port),
 				// then scale down a bit to make the maximum more visible.
 				const float scaling = ((draw_flags_ & kMaximumBuildhelp) != 0) &&
-				   ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ? 0.9 : 1.0f;
+				   ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ? 0.9f : 1.0f;
 				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
 			}
 		}
