@@ -1,8 +1,4 @@
-/* md5.cc - Functions to compute MD5 message digest of files or memory blocks
- * according to the definition of MD5 in RFC 1321 from April 1992.
- *
- * Thanks to Ulrich Drepper for the md5sum example code
- *
+/*
  * Copyright (C) 2002-2022 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -16,9 +12,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
+ */
+
+/* md5.cc - Functions to compute MD5 message digest of files or memory blocks
+ * according to the definition of MD5 in RFC 1321 from April 1992.
+ *
+ * Thanks to Ulrich Drepper for the md5sum example code.
  */
 
 #include "base/md5.h"
