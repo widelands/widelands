@@ -197,7 +197,7 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		return std::unique_ptr<AbstractNode>(
 		   new FloatNode(flags, min_width, dynamic_precision ? kDefaultFloatPrecision : precision,
 		                 dynamic_precision));
-		}
+	}
 	case 'c':
 		if (flags != kNone || min_width != 0 || precision != kInfinitePrecision) {
 			throw wexception("%%c can not have additional specifiers");
