@@ -265,11 +265,11 @@ private:
 
 	// Editor-specific display flags. These add to the ones defined in interactive_base.h
 	enum {
-		dfShowResources = 128,
-		dfShowImmovables = 256,
-		dfShowBobs = 512,
-		dfShowGrid = 1024,
-		dfShowMaximumBuildhelp = 2048
+		dfShowMaximumBuildhelp = 128,
+		dfShowGrid = 256,
+		dfShowImmovables = 512,
+		dfShowBobs = 1024,
+		dfShowResources = 2048,
 	};
 
 	bool cleaning_up_ = false;
