@@ -33,6 +33,7 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "editor/tools/toolhistory_tool.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -47,6 +48,7 @@
 #include "editor/ui_menus/tool_place_immovable_options_menu.h"
 #include "editor/ui_menus/tool_resize_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
+#include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
@@ -351,6 +353,18 @@ void EditorInteractive::add_tool_menu() {
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
 	              _("Click on a field to show information about it"),
 	              shortcut_string_for(KeyboardShortcut::kEditorInfo));
+
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
+	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
+	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
+	              _("Reuse previous tool settings quickly"),
+	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
+        tool_windows_.toolhistory.open_window = [this] {
+		new EditorToolhistoryMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
+	};
+
+
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
@@ -389,6 +403,9 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		break;
 	case ToolMenuEntry::kFieldInfo:
 		select_tool(tools()->info, EditorTool::First);
+		break;
+	case ToolMenuEntry::kToolHistory:
+		tool_windows_.toolhistory.toggle();
 		break;
 	}
 	toolmenu_.toggle();

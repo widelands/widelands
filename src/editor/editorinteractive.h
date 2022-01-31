@@ -35,6 +35,7 @@
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "editor/tools/toolhistory_tool.h"        
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -88,6 +89,7 @@ public:
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
+		EditorHistoryTool tool_history;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -180,7 +182,8 @@ private:
 		kPlayers,
 		kMapOrigin,
 		kMapSize,
-		kFieldInfo
+		kFieldInfo,
+                kToolHistory,
 	};
 
 	// For referencing the items in showhidemenu_
@@ -241,6 +244,7 @@ private:
 		UI::UniqueWindow::Registry resources;
 		UI::UniqueWindow::Registry players;
 		UI::UniqueWindow::Registry resizemap;
+		UI::UniqueWindow::Registry toolhistory;
 	} tool_windows_;
 
 	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
