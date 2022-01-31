@@ -192,13 +192,12 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		return std::unique_ptr<AbstractNode>(new StringNode(flags, min_width, precision));
 	case 'b':
 		return std::unique_ptr<AbstractNode>(new BooleanNode(flags, min_width, precision));
-	case 'f':
-		bool dynamic_precision;  // Initialisation with value is not allowed within a switch case
-		dynamic_precision = (precision == kInfinitePrecision);
+	case 'f': {
+		const bool dynamic_precision = (precision == kInfinitePrecision);
 		return std::unique_ptr<AbstractNode>(
 		   new FloatNode(flags, min_width, dynamic_precision ? kDefaultFloatPrecision : precision,
 		                 dynamic_precision));
-
+		}
 	case 'c':
 		if (flags != kNone || min_width != 0 || precision != kInfinitePrecision) {
 			throw wexception("%%c can not have additional specifiers");
