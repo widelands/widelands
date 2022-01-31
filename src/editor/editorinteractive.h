@@ -263,16 +263,15 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
-        enum DisplayFlags : uint8_t {
-                kDisplayNone = 0,
-                kResources = 1,
-                kImmovables = 2,
-                kBobs = 4,
-                kGrid = 8,
-                kMaximumBuildhelp = 16,
-        };
 
-        uint8_t draw_flags_ = kResources | kImmovables | kBobs | kGrid;
+	// Editor-specific display flags. These add to the ones defined in interactive_base.h
+	enum {
+		dfShowResources = 128,
+		dfShowImmovables = 256,
+		dfShowBobs = 512,
+		dfShowGrid = 1024,
+		dfShowMaximumBuildhelp = 2048
+	};
 
 	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
