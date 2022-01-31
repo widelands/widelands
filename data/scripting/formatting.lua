@@ -9,16 +9,16 @@ function localize_list(items, listtype)
          result = item
       elseif (i == #items) then
          if (listtype == "&") then
-            result = _"%1$s & %2$s":bformat(result, item)
+            result = _("%1$s & %2$s"):bformat(result, item)
          elseif (listtype == "or") then
-            result = _"%1$s or %2$s":bformat(result, item)
+            result = _("%1$s or %2$s"):bformat(result, item)
          elseif (listtype == ",") then
-            result = _"%1$s, %2$s":bformat(result, item)
+            result = _("%1$s, %2$s"):bformat(result, item)
          else
-            result = _"%1$s and %2$s":bformat(result, item)
+            result = _("%1$s and %2$s"):bformat(result, item)
       end
       else
-         result = _"%1$s, %2$s":bformat(result, item)
+         result = _("%1$s, %2$s"):bformat(result, item)
       end
    end
    pop_textdomain()

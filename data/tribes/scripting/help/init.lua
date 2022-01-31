@@ -51,29 +51,29 @@ return {
    func = function(tribename, game_type)
       push_textdomain("tribes_encyclopedia")
       local r = {
-         title = _"Tribal Encyclopedia",
+         title = _("Tribal Encyclopedia"),
          tabs = {
             {
                name = "general",
                -- TRANSLATORS Tab title: General Widelands help
-               title = _"General",
+               title = _("General"),
                icon = "images/logos/wl-ico-32.png",
                entries = {
                   {
                      name = "intro",
-                     title = _"Introduction",
+                     title = _("Introduction"),
                      script = "tribes/scripting/help/introduction.lua",
                      script_parameters = {}
                   },
                   {
                      name = "controls",
-                     title = _"Controls",
+                     title = _("Controls"),
                      script = "tribes/scripting/help/controls.lua",
                      script_parameters = {}
                   },
                   {
                      name = "tips",
-                     title = _"Tips",
+                     title = _("Tips"),
                      script = "tribes/scripting/help/tips.lua",
                      script_parameters = {tribename, game_type}
                   }
@@ -82,28 +82,28 @@ return {
             {
                name = "wares",
                -- TRANSLATORS Tab title: Ware help
-               title = _"Wares",
+               title = _("Wares"),
                icon = "images/wui/buildings/menu_tab_wares.png",
                entries = ware_entries(tribename)
             },
             {
                name = "workers",
                -- TRANSLATORS Tab title: worker help
-               title = _"Workers",
+               title = _("Workers"),
                icon = "images/wui/buildings/menu_tab_workers.png",
                entries = worker_entries(tribename)
             },
             {
                name = "buildings",
                -- TRANSLATORS Tab title: building help
-               title = _"Buildings",
+               title = _("Buildings"),
                icon = "images/wui/stats/genstats_nrbuildings.png",
                entries = building_entries(tribename)
             },
             {
                name = "immovables",
                -- TRANSLATORS Tab title: immovable help
-               title = _"Immovables",
+               title = _("Immovables"),
                icon = "images/wui/encyclopedia_immovables.png",
                entries = immovable_entries(tribename)
             },

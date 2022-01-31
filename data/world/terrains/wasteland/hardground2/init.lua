@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "hardground2",
-   descname = _ "Hard Ground 2",
+   descname = _("Hard Ground 2"),
    is = "arable",
    valid_resources = { "resource_water" },
    default_resource = "resource_water",

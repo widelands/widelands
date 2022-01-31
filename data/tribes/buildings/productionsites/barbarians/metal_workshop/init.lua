@@ -82,7 +82,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_bread_paddle",
             -- firetongs before felling ax to make poor hamlet work without dismantle
@@ -100,7 +100,7 @@ descriptions:new_productionsite_type {
       },
       produce_bread_paddle = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a bread paddle",
+         descname = _("making a bread paddle"),
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
@@ -112,7 +112,7 @@ descriptions:new_productionsite_type {
       },
       produce_felling_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a felling ax because ...
-         descname = _"making a felling ax",
+         descname = _("making a felling ax"),
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=iron log",
@@ -124,7 +124,7 @@ descriptions:new_productionsite_type {
       },
       produce_fire_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-         descname = _"making fire tongs",
+         descname = _("making fire tongs"),
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
@@ -136,7 +136,7 @@ descriptions:new_productionsite_type {
       },
       produce_fishing_rod = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because ...
-         descname = _"making a fishing rod",
+         descname = _("making a fishing rod"),
          actions = {
             "return=skipped unless economy needs fishing_rod",
             "consume=iron log",
@@ -148,7 +148,7 @@ descriptions:new_productionsite_type {
       },
       produce_hammer = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=iron log",
@@ -160,7 +160,7 @@ descriptions:new_productionsite_type {
       },
       produce_hunting_spear = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making a hunting spear",
+         descname = _("making a hunting spear"),
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=iron log",
@@ -172,7 +172,7 @@ descriptions:new_productionsite_type {
       },
       produce_kitchen_tools = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making kitchen tools",
+         descname = _("making kitchen tools"),
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=iron log",
@@ -184,7 +184,7 @@ descriptions:new_productionsite_type {
       },
       produce_pick = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-         descname = _"making a pick",
+         descname = _("making a pick"),
          actions = {
             "return=skipped unless economy needs pick",
             "consume=iron log",
@@ -196,7 +196,7 @@ descriptions:new_productionsite_type {
       },
       produce_scythe = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a scythe",
+         descname = _("making a scythe"),
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=iron log",
@@ -208,7 +208,7 @@ descriptions:new_productionsite_type {
       },
       produce_shovel = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=iron log",

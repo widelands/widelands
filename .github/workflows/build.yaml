@@ -21,6 +21,11 @@ jobs:
       run: |
         python3 utils/validate_json.py data/txts/
         python3 utils/update_authors.py
+    - name: Check for missing copyright headers
+      run: |
+        pushd src
+        ../utils/find_missing_copyright_headers.sh
+        popd
     - name: Check for superfluous includes and forward declarations
       run: |
         pushd src
@@ -102,8 +107,23 @@ jobs:
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
 
+  lua_style:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Prepare documentation examples for parsing
+      run: |
+        pushd doc/sphinx
+        ./extract_rst.py
+        popd
+    - name: Run Lua style checker
+      run: ./utils/lua_style_checker.py
+
   testsuite:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       fail-fast: false
       matrix:
@@ -181,7 +201,7 @@ jobs:
 
   windows-msvc:
     # inspired by https://github.com/lukka/CppCMakeVcpkgTemplate/blob/main/.github/workflows/hosted-pure-workflow.yml
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config:
@@ -191,7 +211,7 @@ jobs:
           - x64
           - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       VCPKG_ROOT: C:\vcpkg
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg/bincache
@@ -217,6 +237,7 @@ jobs:
           ${{ hashFiles( '.github/workflows/build.yaml' ) }}-${{ steps.prepare.outputs.head }}-${{ matrix.arch }}
     - name: Installing dependencies
       run: |
+        choco install innosetup
         vcpkg install --disable-metrics --triplet=${{ env.VCPKG_TARGET_TRIPLET }} asio gettext libpng icu glbinding sdl2 sdl2-ttf sdl2-mixer[libvorbis,libflac,mpg123] sdl2-image[libjpeg-turbo,tiff] graphite2 harfbuzz opusfile libwebp
     - name: Configure MSVC development console
       uses: ilammy/msvc-dev-cmd@v1
@@ -247,7 +268,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-msvc-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   windows:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config:
@@ -257,7 +278,7 @@ jobs:
           - x64
           - x86
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
     - name: Installing dependencies
       run: |
@@ -269,8 +290,9 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-asio mingw-w64-$env:archname-icu
-        pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-gcc mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-asio mingw-w64-$env:archname-icu
+        # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
+        choco install innosetup
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -313,7 +335,7 @@ jobs:
         path: ${{ github.workspace }}\Widelands-${{ github.sha }}-mingw-${{ matrix.config }}-${{ matrix.arch }}.exe
 
   macos:
-    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks]
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
         config:

@@ -31,13 +31,13 @@
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
---            descname = _"Alder (Old)",
+--            descname = _("Alder (Old)"),
 --
 --    **species**
 --        *Mandatory for trees*. `Trees`_ have 4 variants (sapling, pole, mature, and old),
 --        so we will want a simplified translatable display name for the editor help, e.g.::
 --
---            species = _"Alder",
+--            species = _("Alder"),
 --
 --    **editor_category**
 --        *Deprecated*. The category that is used in the editor tools for placing an
@@ -113,7 +113,7 @@
 --
 --    wl.Descriptions():new_immovable_type{
 --       name = "artifact00",
---       descname = _ "Artifact",
+--       descname = _("Artifact"),
 --       animation_directory = dirname
 --       size = "small",
 --       programs = {},
@@ -173,7 +173,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type{
    name = "artifact00",
-   descname = _ "Artifact",
+   descname = _("Artifact"),
    size = "small",
    programs = {},
    animation_directory = dirname,
