@@ -61,7 +61,7 @@ struct FloatNode : FormatNode {
 		size_t current_precision = precision_;
 
 		switch (t) {
-		case ArgType::kFloat:
+		case ArgType::kFloat: {
 			double rounded;
 			double frac;
 
@@ -91,7 +91,7 @@ struct FloatNode : FormatNode {
 					--current_precision;
 				}
 			}
-			break;
+		} break;
 		case ArgType::kSigned:
 			int_part = arg_u.signed_val;
 			if (int_part < 0) {
