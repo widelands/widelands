@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_ax",
             "call=produce_ax_sharp",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax",
@@ -91,7 +91,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_sharp = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-         descname = _"forging a sharp ax",
+         descname = _("forging a sharp ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_sharp",
@@ -106,7 +106,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_broad = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-         descname = _"forging a broad ax",
+         descname = _("forging a broad ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_broad",

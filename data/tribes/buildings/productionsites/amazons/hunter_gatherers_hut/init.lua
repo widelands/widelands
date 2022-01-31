@@ -37,7 +37,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"gathering",
+         descname = _("gathering"),
          actions = {
             "call=hunt",
             "call=fish",
@@ -45,7 +45,7 @@ descriptions:new_productionsite_type {
       },
       hunt = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"gathering meat",
+         descname = _("gathering meat"),
          actions = {
             "callworker=hunt",
             "sleep=duration:34s",
@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
       },
       fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"gathering fish",
+         descname = _("gathering fish"),
          actions = {
             "callworker=fish",
             "sleep=duration:34s",
@@ -62,9 +62,9 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of Game and out of fish" for a resource
-      title = _"No Game, No Fish",
+      title = _("No Game, No Fish"),
       -- TRANSLATORS: "Game" means animals that you can hunt
-      heading = _"Out of Game and Fish",
+      heading = _("Out of Game and Fish"),
       -- TRANSLATORS: "game" means animals that you can hunt
       message = pgettext("amazons_building", "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any game or fish in her work area."),
       productivity_threshold = 33

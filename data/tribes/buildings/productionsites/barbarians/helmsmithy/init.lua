@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_helmet",
             "call=produce_helmet_mask",
@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       },
       produce_helmet = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-         descname = _"forging a helmet",
+         descname = _("forging a helmet"),
          actions = {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
@@ -88,7 +88,7 @@ descriptions:new_productionsite_type {
       },
       produce_helmet_mask = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
-         descname = _"forging a mask",
+         descname = _("forging a mask"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
@@ -101,7 +101,7 @@ descriptions:new_productionsite_type {
       },
       produce_helmet_warhelm = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
-         descname = _"forging a warhelm",
+         descname = _("forging a warhelm"),
          actions = {
             -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",

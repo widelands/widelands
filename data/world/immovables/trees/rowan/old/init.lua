@@ -6,8 +6,8 @@ include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "rowan_summer_old",
-   descname = _ "Rowan (Old)",
-   species = _ "Rowan",
+   descname = _("Rowan (Old)"),
+   species = _("Rowan"),
    icon = dirname .. "../menu.png",
    size = "small",
 

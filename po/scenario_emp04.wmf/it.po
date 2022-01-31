@@ -4,7 +4,7 @@
 # 
 # Translators:
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
-# Guybrush88 <erpizzo@alice.it>, 2021
+# Guybrush88 <erpizzo@alice.it>, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2021\n"
+"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1140,7 +1140,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:652
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:660
 msgid "Saledus asserts his point…"
-msgstr ""
+msgstr "Saledus asserisce il suo punto..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:654
@@ -1313,7 +1313,7 @@ msgstr "Il nemico è vicino"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:745
 msgid "Saledus is alerted…"
-msgstr ""
+msgstr "Saledus è allertato..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:747

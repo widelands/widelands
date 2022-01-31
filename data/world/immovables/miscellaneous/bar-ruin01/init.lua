@@ -4,7 +4,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type{
    name = "bar-ruin01",
-   descname = _ "Ruin",
+   descname = _("Ruin"),
    size = "big",
    programs = {},
    animation_directory = dirname,

@@ -41,7 +41,7 @@
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
---            descname = _"Meadow 1",
+--            descname = _("Meadow 1"),
 --
 --    **editor_category**
 --        *Deprecated*. The category that is used in the editor tools for placing a
@@ -76,7 +76,7 @@
 --        *Deprecated*. Additional custom tooltip entries, e.g.::
 --
 --            tooltips = {
---               _"likes trees",
+--               _("likes trees"),
 --            },
 --
 --    **valid_resources**
@@ -157,7 +157,7 @@
 --
 --    wl.Descriptions():new_terrain_type{
 --       name = "summer_mountain1",
---       descname = _ "Mountain 1",
+--       descname = _("Mountain 1"),
 --       is = "mineable",
 --       valid_resources = { "resource_coal", "resource_iron", "resource_gold", "resource_stones" },
 --       default_resource = "",
@@ -176,7 +176,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "desert_beach",
-   descname = _ "Beach",
+   descname = _("Beach"),
    is = "walkable",
    valid_resources = {},
    default_resource = "",

@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-         descname = _"hunting",
+         descname = _("hunting"),
          actions = {
             "callworker=hunt",
             "sleep=duration:35s"
@@ -63,9 +63,9 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of Game" for a resource
-      title = _"No Game",
+      title = _("No Game"),
       -- TRANSLATORS: "Game" means animals that you can hunt
-      heading = _"Out of Game",
+      heading = _("Out of Game"),
       -- TRANSLATORS: "game" means animals that you can hunt
       message = pgettext("barbarians_building", "The hunter working out of this hunter’s hut can’t find any game in his work area. Remember that you can build a gamekeeper’s hut to release more game into the wild."),
       productivity_threshold = 33

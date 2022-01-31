@@ -55,7 +55,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_s3",
             "call=produce_s4",
@@ -67,7 +67,7 @@ descriptions:new_productionsite_type {
       },
       produce_s3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
-         descname = _"forging a broadsword",
+         descname = _("forging a broadsword"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_broad",
@@ -82,7 +82,7 @@ descriptions:new_productionsite_type {
       },
       produce_s4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
-         descname = _"forging a double-edged sword",
+         descname = _("forging a double-edged sword"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs sword_double",
@@ -97,7 +97,7 @@ descriptions:new_productionsite_type {
       },
       produce_hg = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
-         descname = _"forging a golden helmet",
+         descname = _("forging a golden helmet"),
          actions = {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet_golden",

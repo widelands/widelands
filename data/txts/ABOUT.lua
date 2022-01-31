@@ -4,19 +4,19 @@ push_textdomain("texts")
 
 local r = {
    {
-      name =  _"Readme",
+      name =  _("Readme"),
       script = "txts/README.lua"
    },
    {
-      name =  _"License",
+      name =  _("License"),
       script = "txts/LICENSE.lua"
    },
    {
-      name =  _"Developers",
+      name =  _("Developers"),
       script = "txts/AUTHORS.lua"
    },
    {
-      name =  _"Translators",
+      name =  _("Translators"),
       script = "txts/TRANSLATORS.lua"
    }
 }

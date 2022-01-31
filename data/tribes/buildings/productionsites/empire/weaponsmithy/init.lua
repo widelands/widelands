@@ -63,7 +63,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_spear_wooden",
             "call=produce_spear",
@@ -74,7 +74,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
-         descname = _"forging a wooden spear",
+         descname = _("forging a wooden spear"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
@@ -89,7 +89,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-         descname = _"forging a spear",
+         descname = _("forging a spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
@@ -104,7 +104,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_advanced = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
-         descname = _"forging an advanced spear",
+         descname = _("forging an advanced spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
@@ -119,7 +119,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_heavy = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
-         descname = _"forging a heavy spear",
+         descname = _("forging a heavy spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
@@ -134,7 +134,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_war = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
-         descname = _"forging a war spear",
+         descname = _("forging a war spear"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",

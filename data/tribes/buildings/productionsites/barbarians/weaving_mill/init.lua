@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
-         descname = _"weaving",
+         descname = _("weaving"),
          actions = {
             "sleep=duration:25s",
             "return=skipped unless economy needs cloth",

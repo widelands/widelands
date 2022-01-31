@@ -32,8 +32,8 @@ Example:
 .. code-block:: ini
 
    [global]
-   name=_"Fishy"
-   description=_"Adds the highest amount of fish to every map node that can hold fish."
+   name=_("Fishy")
+   description=_("Adds the highest amount of fish to every map node that can hold fish.")
    author="Nordfriese"
    version="1.0.0"
    category="script"

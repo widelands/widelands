@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
@@ -61,7 +61,7 @@ descriptions:new_productionsite_type {
       },
       plant_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-         descname = _"planting reed",
+         descname = _("planting reed"),
          actions = {
             "callworker=plantreed",
             "sleep=duration:18s"
@@ -69,7 +69,7 @@ descriptions:new_productionsite_type {
       },
       harvest_reed = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-         descname = _"harvesting reed",
+         descname = _("harvesting reed"),
          actions = {
             "callworker=harvestreed",
             "sleep=duration:5s"
@@ -78,8 +78,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("frisians_building", "The reed farmer working at this reed farm has no cleared soil to plant his seeds."),
       productivity_threshold = 20
    },
