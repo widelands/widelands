@@ -63,7 +63,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-         descname = _"making clay",
+         descname = _("making clay"),
          actions = {
 
             "return=skipped unless economy needs clay or economy needs fish or economy needs coal",
@@ -80,8 +80,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- TRANSLATORS: Short for "No Level Ground" for clay pits
-      title = _"No Ground",
-      heading = _"No Level Ground",
+      title = _("No Ground"),
+      heading = _("No Level Ground"),
       message = pgettext ("frisians_building", "The clay digger working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },

@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column because ...
-         descname = _"sculpting a marble column",
+         descname = _("sculpting a marble column"),
          actions = {
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",

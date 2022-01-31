@@ -7,7 +7,7 @@ include(dirname .. "../terrain_affinity.lua")
 wl.Descriptions():new_immovable_type{
    name = "umbrella_red_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   descname = _ "Red Umbrella Tree (Sapling)",
+   descname = _("Red Umbrella Tree (Sapling)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

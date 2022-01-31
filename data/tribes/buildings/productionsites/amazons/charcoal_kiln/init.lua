@@ -47,7 +47,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
-         descname = _"producing charcoal",
+         descname = _("producing charcoal"),
          actions = {
             "return=skipped unless economy needs coal",
             "consume=log:6",

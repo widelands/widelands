@@ -5,7 +5,7 @@ dirname = path.dirname (__file__)
 descriptions:new_immovable_type {
    name = "cocoa_tree_old",
    -- TRANSLATORS:  This is an amazon rare tree.
-   descname = _ "Cocoa Tree (old)",
+   descname = _("Cocoa Tree (old)"),
    size = "small",
    icon = dirname .. "menu_old.png",
    programs = {

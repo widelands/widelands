@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "return=skipped unless economy needs coal",
             "consume=meal",
@@ -63,7 +63,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce = {
-         descname = _"mining coal",
+         descname = _("mining coal"),
          actions = {
             "animate=working duration:7s",
             "mine=resource_coal radius:2 yield:100% when_empty:10% experience_on_fail:2%",
@@ -81,8 +81,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Coal",
-      heading = _"Main Coal Vein Exhausted",
+      title = _("No Coal"),
+      heading = _("Main Coal Vein Exhausted"),
       message =
          pgettext("barbarians_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },

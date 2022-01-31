@@ -12,7 +12,7 @@ from file_utils import read_text_file, find_files
 
 def check_line(filename, lidx, line, print_error=True):
     e = 0
-    for method in ['_', 'gettext']:
+    for method in ['(^|[^A-Za-z0-9_])_', 'gettext']:
         for stringtype in ['"', '\[=*\[']:
             if re.compile(method + ' *' + stringtype).search(line):
                 e = e + 1
@@ -36,6 +36,7 @@ known_clean_lines = [
     '_([==[Hi]==])',
     '_([[Hi %1%]]):bformat("Foo")',
     '_([[Hi %1%]]):bformat(_("Foo"))',
+    '_("_foo_")',
 ]
 
 errors = 0

@@ -8,9 +8,9 @@ push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Struggling Outpost",
+   descname = _("Struggling Outpost"),
    -- TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-   tooltip = _"Start the game with just your headquarters and very few wares for bootstrapping an economy. Warning: the AI can’t successfully start from this.",
+   tooltip = _("Start the game with just your headquarters and very few wares for bootstrapping an economy. Warning: the AI can’t successfully start from this."),
    func =  function(player, shared_in_start)
 
    local sf = wl.Game().map.player_slots[player.number].starting_field
