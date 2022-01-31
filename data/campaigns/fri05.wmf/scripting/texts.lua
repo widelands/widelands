@@ -40,21 +40,21 @@ for i,trade_descr in ipairs(trade) do
 end
 obj_trade = {
    name = "trade",
-   title =_"Trade",
+   title =_("Trade"),
    number = 1,
-   body = objective_text(_"Trade",
-      p(_[[You can not mine resources or quarry rocks on this island. Instead, you can trade local produce against other types of wares.]]) ..
-      p(_[[Any wares stored in a port will be traded. The trade prices are indicated by the following chart.]])
+   body = objective_text(_("Trade"),
+      p(_([[You can not mine resources or quarry rocks on this island. Instead, you can trade local produce against other types of wares.]])) ..
+      p(_([[Any wares stored in a port will be traded. The trade prices are indicated by the following chart.]]))
       .. trade_text
    ),
 }
 
 obj_fight = {
    name = "fight",
-   title =_"Defeat the Invaders",
+   title =_("Defeat the Invaders"),
    number = 1,
-   body = objective_text(_"Defeat Atterdag’s Forces.",
-      li(_[[Destroy all the enemy’s buildings.]])
+   body = objective_text(_("Defeat Atterdag’s Forces."),
+      li(_([[Destroy all the enemy’s buildings.]]))
    ),
 }
 
@@ -63,8 +63,8 @@ obj_fight = {
 -- ==================
 
 intro_1 = {
-   title = _"Introduction",
-   body=claus(_"Welcome back!",
+   title = _("Introduction"),
+   body=claus(_("Welcome back!"),
       -- TRANSLATORS: Claus Lembeck – Introduction 1
       _([[Home at last! I cannot put into words the joy I feel at seeing my homelands again… nor the impatience at being so close and yet so far away.]])
       .. paragraphdivider() ..
@@ -73,8 +73,8 @@ intro_1 = {
 }
 
 intro_2 = {
-   title = _"Introduction",
-   body=claus(_"Welcome back!",
+   title = _("Introduction"),
+   body=claus(_("Welcome back!"),
       -- TRANSLATORS: Claus Lembeck – Introduction 2
       _([[The mood on our ship grew tenser as we approached familiar waters. The joyous laughter and excited anticipation of our return turned into a somber mood as we prepared for battle.]])
       .. paragraphdivider() ..
@@ -83,8 +83,8 @@ intro_2 = {
 }
 
 intro_3 = {
-   title = _"Introduction",
-   body=claus(_"Welcome back!",
+   title = _("Introduction"),
+   body=claus(_("Welcome back!"),
       -- TRANSLATORS: Claus Lembeck – Introduction 3
       _([[We had made one of the most basic mistakes, and we should all be ashamed of being no more careful than a cabin boy. Over the course of the months since we had left Föhr, we had neglected to pay attention to the calendar.]])
       .. paragraphdivider() ..
@@ -93,8 +93,8 @@ intro_3 = {
 }
 
 intro_4 = {
-   title = _"Introduction",
-   body=claus(_"Welcome back!",
+   title = _("Introduction"),
+   body=claus(_("Welcome back!"),
       -- TRANSLATORS: Claus Lembeck – Introduction 4
       _([[The sheerest luck alone saved us. Our ships were barely damaged, not one sailor lost to the waves. I would not believe that anyone could ever be so lucky had I not witnessed it myself. Our unbelievable escape fills me with hope – it is obviously a sign that our perilous endeavour is blessed by the saints.]])
       .. paragraphdivider() ..
@@ -103,43 +103,43 @@ intro_4 = {
 }
 
 intro_5 = {
-   title = _"Greetings",
-   body=ketelsen(_"Welcome to Helgoland!",
+   title = _("Greetings"),
+   body=ketelsen(_("Welcome to Helgoland!"),
       -- TRANSLATORS: Ocke Ketelsen – Introduction 5
       _([[Peace and welcome to Helgoland! Your reputation precedes you, Claus Lembeck, the well-loved lord of Föhr, and Reebaud whom the bards term the Bold and the Brave and the Mighty. I am Ocke Ketelsen, senior alderman of Helgoland, and despite these hard times I am pleased and honoured to receive such illustrious guests.]]))
 }
 
 intro_6 = {
-   title = _"Greetings",
-   body=reebaud(_"Hospitality",
+   title = _("Greetings"),
+   body=reebaud(_("Hospitality"),
       -- TRANSLATORS: Reebaud – Introduction 6
       _([[Peace and thanks for the friendly greeting to you, Ocke Ketelsen! It is a pleasant change not to be forced to go to war against someone on whose island we land. Yet your welcome sounds oddly short. Since your words are so warm, I can only conclude that some other sort of trouble has befallen you. Assuming you don’t mind if I ask and that this question does not appear impertinent, I would like to know if we can help you in any way.]]))
 }
 
 intro_7 = {
-   title = _"Greetings",
-   body=ketelsen(_"Welcome to Helgoland!",
+   title = _("Greetings"),
+   body=ketelsen(_("Welcome to Helgoland!"),
       -- TRANSLATORS: Ocke Ketelsen – Introduction 7
       _([[You are remarkably astute. Indeed we have a problem, and you can see it right over there.]]))
 }
 
 intro_8 = {
-   title = _"Greetings",
-   body=henneke(_"Enemies",
+   title = _("Greetings"),
+   body=henneke(_("Enemies"),
       -- TRANSLATORS: Henneke Lembeck – Introduction 8
       _([[Danes! Does Atterdag’s thirst for conquest reach this far then?]]))
 }
 
 intro_9 = {
-   title = _"Greetings",
-   body=ketelsen(_"Enemies",
+   title = _("Greetings"),
+   body=ketelsen(_("Enemies"),
       -- TRANSLATORS: Ocke Ketelsen – Introduction 9
       _([[It does. I see that you recognize this enemy, and I would be interested in hearing how you met – though I imagine it will not have gone well for them!]]))
 }
 
 intro_10 = {
-   title = _"Greetings",
-   body=claus(_"Enemies",
+   title = _("Greetings"),
+   body=claus(_("Enemies"),
       -- TRANSLATORS: Claus Lembeck – Introduction 10
       _([[This assumption is untrue, to my great chagrin. For the sake of brevity, I will only say that Atterdag invaded Föhr with such a mighty force that I was compelled to leave the island and ask Reebaud to help me reclaim it. In fact, we were sailing to Föhr to drive the invaders out once and for all when a storm blew us off our course and to Helgoland.]])
       .. paragraphdivider() ..
@@ -149,8 +149,8 @@ intro_10 = {
 }
 
 trade_1 = {
-   title = _"War Preparations",
-   body=ketelsen(_"Enemies",
+   title = _("War Preparations"),
+   body=ketelsen(_("Enemies"),
       -- TRANSLATORS: Ocke Ketelsen – Trade 1
       _([[Your enthusiasm warms me as much as your plight engages my sympathy. But the enemies are more powerful than they may appear – they have brought an enormous force of Danish soldiers, and even your mighty soldiers will not be able to defeat them all.]])
       .. paragraphdivider() ..
@@ -159,23 +159,23 @@ trade_1 = {
 }
 
 trade_2 = {
-   title = _"War Preparations",
-   body=henneke(_"Economy",
+   title = _("War Preparations"),
+   body=henneke(_("Economy"),
       -- TRANSLATORS: Henneke Lembeck – Trade 2
       _([[How do you even sustain yourselves here? These rocks look impressive but I don't see how you could quarry them to construct stone houses. I see hardly any trees, and no places where you could mine iron and other minerals! How do you come by?]]))
 }
 
 trade_3 = {
-   title = _"War Preparations",
-   body=ketelsen(_"Trade",
+   title = _("War Preparations"),
+   body=ketelsen(_("Trade"),
       -- TRANSLATORS: Ocke Ketelsen – Trade 3
       _([[By trade. We sell grain, fish, and various other goods to the mainland and buy ores and granite from there. Let’s split out duties according to what each of us does best: You take charge of reorganizing our economy for war and training our people for battle, and I will arrange to import goods in any quantity you require. Simply drop off the wares to sell in the ports and I will take care of the rest. This chart indicates how many goods of which sorts we usually trade.]]))
       .. new_objectives(obj_trade),
 }
 
 getting_started_1 = {
-   title = _"Planning the War",
-   body=reebaud(_"Use the uplands wisely",
+   title = _("Planning the War"),
+   body=reebaud(_("Use the uplands wisely"),
       -- TRANSLATORS: Reebaud – Getting Started 1
       _([[First things first. This town has an excellent defensive position, but it is woefully unguarded. We must plan ahead tactically, because I agree that this battle will not be won quickly.]])
       .. paragraphdivider() ..
@@ -184,8 +184,8 @@ getting_started_1 = {
 }
 
 getting_started_2 = {
-   title = _"Planning the War",
-   body=reebaud(_"Fortify the chokepoint",
+   title = _("Planning the War"),
+   body=reebaud(_("Fortify the chokepoint"),
       -- TRANSLATORS: Reebaud – Getting Started 2
       _([[Our most urgent concern, however, should be to secure this pass near our northernmost port. Our enemy must pass through this chokepoint to reach us, but the same is also true in reverse. If we are careful, we can hold the enemy at this point for a long time until we are ready to launch our countercharge. However, the passage is too narrow to be fortified as easily as the uplands. We must construct as many fortresses tightly together here as possible in order to prevent the enemy from gaining any land. It would be unwise to build anything at all north of the pass, as it would be dangerously exposed.]])
       .. paragraphdivider() ..
@@ -194,8 +194,8 @@ getting_started_2 = {
 }
 
 getting_started_3 = {
-   title = _"Planning the War",
-   body=henneke(_"Wood supply",
+   title = _("Planning the War"),
+   body=henneke(_("Wood supply"),
       -- TRANSLATORS: Henneke Lembeck – Getting Started 3
       _([[As Reebaud points out correctly, the uplands are the best position for new buildings. Besides their strategic value they offer lots of space for construction, of which the lower island is somewhat short.]])
       .. paragraphdivider() ..
@@ -207,8 +207,8 @@ getting_started_3 = {
 }
 
 getting_started_4 = {
-   title = _"Planning the War",
-   body=henneke(_"Long-term strategy",
+   title = _("Planning the War"),
+   body=henneke(_("Long-term strategy"),
       -- TRANSLATORS: Henneke Lembeck – Getting Started 4
       _([[After that, we will need to plan our recruitment and training facilities. We do have a basic food and metal industry, but it seems to have grown haphazardly and will not suffice to meet our needs. We will require more numerous and more advanced sites to provide enough weapons and armour as well as food for our soldiers. Needless to say, a pair of training sites and a barracks are also essential.]])
       .. paragraphdivider() ..
@@ -217,8 +217,8 @@ getting_started_4 = {
 }
 
 getting_started_5 = {
-   title = _"Planning the War",
-   body=claus(_"Diking",
+   title = _("Planning the War"),
+   body=claus(_("Diking"),
       -- TRANSLATORS: Claus Lembeck – Getting Started 5
       _([[The lack of space on Helgoland is indeed a concern. The land would be sufficiently large to train a decent number of soldiers in a reasonable time, but training the armies you believe we will need would take forever! We may need to take some chances, and use superior tactics to compensate for this disadvantage.]])
       .. paragraphdivider() ..
@@ -227,15 +227,15 @@ getting_started_5 = {
 }
 
 getting_started_6 = {
-   title = _"Planning the War",
-   body=ketelsen(_"Good luck!",
+   title = _("Planning the War"),
+   body=ketelsen(_("Good luck!"),
       -- TRANSLATORS: Ocke Ketelsen – Getting Started 6
       _([[I am heartened by your forwardness. Let us all hasten to our separate tasks, and may fortune smile on us!]]))
 }
 
 victory_1 = {
-   title = _"Victory",
-   body=ketelsen(_"Enemy defeated",
+   title = _("Victory"),
+   body=ketelsen(_("Enemy defeated"),
       -- TRANSLATORS: Ocke Ketelsen – Victory 1
       _([[They are defeated! Thank you, thank you for your help. We could never have beaten them by ourselves. Our town did not even sustain any major damage – on the contrary, you have expanded it far beyond its former bounds.]])
       .. paragraphdivider() ..
@@ -244,8 +244,8 @@ victory_1 = {
 }
 
 victory_2 = {
-   title = _"Victory",
-   body=claus(_"Enemy defeated",
+   title = _("Victory"),
+   body=claus(_("Enemy defeated"),
       -- TRANSLATORS: Claus Lembeck – Victory 2
       _([[You are very welcome, Ocke Ketelsen. Do not belittle your own part in this victory though, for we could not have achieved this by ourselves.]])
       .. paragraphdivider() ..
@@ -254,8 +254,8 @@ victory_2 = {
 }
 
 victory_3 = {
-   title = _"Victory",
-   body=ketelsen(_"Know your enemy",
+   title = _("Victory"),
+   body=ketelsen(_("Know your enemy"),
       -- TRANSLATORS: Ocke Ketelsen – Victory 3
       _([[I will do so gladly. Indeed, according to my trade partners Atterdag’s thirst for conquest is limitless. After he has established his presence on Föhr, he has conquered all the other islands in the vicinity as well. Your stronghold on Föhr has always been their only defence to speak of, so once you were gone he seized the entire area with ease.]])
       .. paragraphdivider() ..
@@ -264,8 +264,8 @@ victory_3 = {
 }
 
 victory_4 = {
-   title = _"Victory",
-   body=ketelsen(_"Know your enemy",
+   title = _("Victory"),
+   body=ketelsen(_("Know your enemy"),
       -- TRANSLATORS: Ocke Ketelsen – Victory 3
       _([[There is one more thing. Trade ships attempting to sail well north of the occupied area have been boarded and sunk by pirates. The survivors, however, swear that the pirates were in fact Danish soldiers, and that their ships belong to the Danish fleet.]])
       .. paragraphdivider() ..
@@ -277,11 +277,11 @@ victory_4 = {
 }
 
 victory_5 = {
-   title = _"Victory",
-   body=reebaud(_"Victory!",
+   title = _("Victory"),
+   body=reebaud(_("Victory!"),
       -- TRANSLATORS: Reebaud – Victory 4
       _([[And if we can block it, they will lose their most important trade route! We must try it. We will sail to the Kattegat at once to conquer the strait, and then we’ll raise the people of Föhr and all the other islands in joint rebellion against the invader!]]))
-      .. objective_text(_"Congratulations",
+      .. objective_text(_("Congratulations"),
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    allow_next_scenario = true,
 }
