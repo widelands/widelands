@@ -43,7 +43,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant",
             "call=harvest",
@@ -51,7 +51,7 @@ descriptions:new_productionsite_type {
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
-         descname = _"planting grapevines",
+         descname = _("planting grapevines"),
          actions = {
             "callworker=plant",
             "sleep=duration:5s"
@@ -59,7 +59,7 @@ descriptions:new_productionsite_type {
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
-         descname = _"harvesting grapes",
+         descname = _("harvesting grapes"),
          actions = {
             "callworker=harvest",
             "sleep=duration:5s"
@@ -68,8 +68,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("empire_building", "The vine farmer working at this vineyard has no cleared soil to plant his grapevines."),
       productivity_threshold = 30
    },

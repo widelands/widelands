@@ -193,10 +193,10 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
    push_textdomain("training_wheels")
 
    local msg_road_not_connected = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then on another flag.")
+         li_image("images/wui/fieldaction/menu_build_way.png", _("Click on the flag in front of the building, then on the ‘Build road’ button, then on another flag."))
       ),
       h = 140,
       w = 260,

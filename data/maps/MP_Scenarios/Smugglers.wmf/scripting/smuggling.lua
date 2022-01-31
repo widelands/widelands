@@ -198,13 +198,13 @@ function wait_for_established_route(route_descr)
    )
    for idx,plr in ipairs(game.players) do
       if plr.number ~= receiving_wh.owner.number and plr.number ~= sending_wh.owner.number then
-         send_to_inbox(plr, _"Status", non_team_message, {popup=true})
+         send_to_inbox(plr, _("Status"), non_team_message, {popup=true})
       end
    end
-   send_to_inbox(receiving_wh.owner, _"Status",
+   send_to_inbox(receiving_wh.owner, _("Status"),
       smuggling_route_established_receiver:format(points), {popup=true, field=receiving_wh.fields[1]}
    )
-   send_to_inbox(sending_wh.owner, _"Status",
+   send_to_inbox(sending_wh.owner, _("Status"),
       smuggling_route_established_sender:format(points), {popup=true, field=sending_wh.fields[1]}
    )
 end

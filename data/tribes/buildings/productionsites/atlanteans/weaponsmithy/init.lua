@@ -51,7 +51,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_trident_light",
             "call=produce_trident_long",
@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
       },
       produce_trident_light = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
-         descname = _"forging a light trident",
+         descname = _("forging a light trident"),
          actions = {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs trident_light",
@@ -77,7 +77,7 @@ descriptions:new_productionsite_type {
       },
       produce_trident_long = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
-         descname = _"forging a long trident",
+         descname = _("forging a long trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_long",
@@ -92,7 +92,7 @@ descriptions:new_productionsite_type {
       },
       produce_trident_steel = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
-         descname = _"forging a steel trident",
+         descname = _("forging a steel trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_steel",
@@ -107,7 +107,7 @@ descriptions:new_productionsite_type {
       },
       produce_trident_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
-         descname = _"forging a double trident",
+         descname = _("forging a double trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_double",
@@ -122,7 +122,7 @@ descriptions:new_productionsite_type {
       },
       produce_trident_heavy_double = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
-         descname = _"forging a heavy double trident",
+         descname = _("forging a heavy double trident"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_heavy_double",

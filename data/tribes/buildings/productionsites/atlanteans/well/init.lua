@@ -41,7 +41,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "sleep=duration:20s",
             "animate=working duration:20s",
@@ -52,8 +52,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Water",
-      heading = _"Out of Water",
+      title = _("No Water"),
+      heading = _("Out of Water"),
       message = pgettext("atlanteans_building", "The carrier working at this well can’t find any water in his well."),
       productivity_threshold = 33
    },
