@@ -6,7 +6,7 @@ include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "alder_summer_mature",
-   descname = _ "Alder (Mature)",
+   descname = _("Alder (Mature)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

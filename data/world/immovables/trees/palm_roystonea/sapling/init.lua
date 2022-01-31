@@ -6,7 +6,7 @@ include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_sapling",
-   descname = _ "Roystonea regia Palm (Sapling)",
+   descname = _("Roystonea regia Palm (Sapling)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

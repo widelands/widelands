@@ -31,7 +31,7 @@
 -- **descname**
 --     *Mandatory*. The translatable display name, e.g.::
 --
---         descname = _"Summer",
+--         descname = _("Summer"),
 --
 -- **picture**
 --     *Mandatory*. An image to represent this category in the editor tool's tab, e.g.::
@@ -54,7 +54,7 @@
 --       critters = {
 --          {
 --             name = "critters_herbivores",
---             descname = _"Herbivores",
+--             descname = _("Herbivores"),
 --             picture = "world/critters/sheep/menu.png",
 --             items_per_row = 10,
 --             items = {
@@ -64,7 +64,7 @@
 --          },
 --          {
 --             name = "critters_carnivores",
---             descname = _"Carnivores",
+--             descname = _("Carnivores"),
 --             picture = "world/critters/fox/menu.png",
 --             items_per_row = 10,
 --             items = {
@@ -118,7 +118,7 @@ local result = {
       {
          name = "critters_herbivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
-         descname = _"Herbivores",
+         descname = _("Herbivores"),
          picture = "world/critters/sheep/menu.png",
          items_per_row = 10,
          items = {
@@ -136,7 +136,7 @@ local result = {
       {
          name = "critters_carnivores",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
-         descname = _"Carnivores",
+         descname = _("Carnivores"),
          picture = "world/critters/fox/menu.png",
          items_per_row = 10,
          items = {
@@ -151,7 +151,7 @@ local result = {
       {
          name = "critters_aquatic",
          -- TRANSLATORS: A category in the editor for placing animals on the map.
-         descname = _"Aquatic",
+         descname = _("Aquatic"),
          picture = "world/critters/duck/menu.png",
          items_per_row = 10,
          items = {
@@ -165,7 +165,7 @@ local result = {
       {
          name = "immovables_miscellaneous",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Miscellaneous",
+         descname = _("Miscellaneous"),
          picture = "world/immovables/miscellaneous/ruin5/idle.png",
          items_per_row = 6,
          items = {
@@ -204,7 +204,7 @@ local result = {
       {
          name = "immovables_artifacts",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Artifacts" .. "<br>" .. _ "These immovables are used by the win condition “Artifacts”.",
+         descname = _("Artifacts") .. "<br>" .. _("These immovables are used by the win condition “Artifacts”."),
          picture = "world/immovables/artifacts/artifact00/idle.png",
          items_per_row = 6,
          items = {
@@ -217,7 +217,7 @@ local result = {
       {
          name = "immovables_plants",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Plants",
+         descname = _("Plants"),
          picture = "world/immovables/plants/cactus3/idle.png",
          items_per_row = 8,
          items = {
@@ -239,7 +239,7 @@ local result = {
       {
          name = "immovables_standing_stones",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Standing Stones",
+         descname = _("Standing Stones"),
          picture = "world/immovables/standing_stones/standing_stone4_desert/idle.png",
          items_per_row = 4,
          items = {
@@ -274,7 +274,7 @@ local result = {
       },
       {
          name = "immovables_rocks",
-         descname = _ "Rocks",
+         descname = _("Rocks"),
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
          picture = "world/immovables/rocks/greenland/6/rocks6.png",
          items_per_row = 6,
@@ -311,7 +311,7 @@ local result = {
       {
          name = "immovables_trees_dead",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Dead Trees",
+         descname = _("Dead Trees"),
          picture = "world/immovables/trees/deadtree2/idle.png",
          items_per_row = 8,
          items = {
@@ -327,7 +327,7 @@ local result = {
       {
          name = "immovables_trees_coniferous",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Coniferous Trees",
+         descname = _("Coniferous Trees"),
          picture = "world/immovables/trees/spruce/menu.png",
          items_per_row = 8,
          items = {
@@ -345,7 +345,7 @@ local result = {
       {
          name = "immovables_trees_deciduous",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Deciduous Trees",
+         descname = _("Deciduous Trees"),
          picture = "world/immovables/trees/alder/menu.png",
          items_per_row = 8,
          items = {
@@ -388,7 +388,7 @@ local result = {
       {
          name = "immovables_trees_palm",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Palm Trees",
+         descname = _("Palm Trees"),
          picture = "world/immovables/trees/palm_borassus/menu.png",
          items_per_row = 8,
          items = {
@@ -421,7 +421,7 @@ local result = {
       {
          name = "immovables_trees_wasteland",
          -- TRANSLATORS: A category in the editor for placing immovables on the map.
-         descname = _ "Wasteland Trees",
+         descname = _("Wasteland Trees"),
          picture = "world/immovables/trees/umbrella_red/menu.png",
          items_per_row = 8,
          items = {
@@ -483,7 +483,7 @@ local result = {
       {
          name = "terrains_summer",
          -- TRANSLATORS: A category in the editor for placing terrains on the map.
-         descname = _ "Summer",
+         descname = _("Summer"),
          picture = "world/pics/editor_terrain_category_green.png",
          items_per_row = 6,
          items = {
@@ -512,7 +512,7 @@ local result = {
       {
          name = "terrains_wasteland",
          -- TRANSLATORS: A category in the editor for placing terrains on the map.
-         descname = _ "Wasteland",
+         descname = _("Wasteland"),
          picture = "world/pics/editor_terrain_category_wasteland.png",
          items_per_row = 6,
          items = {
@@ -540,7 +540,7 @@ local result = {
       {
          name = "terrains_winter",
          -- TRANSLATORS: A category in the editor for placing terrains on the map.
-         descname = _ "Winter",
+         descname = _("Winter"),
          picture = "world/pics/editor_terrain_category_winter.png",
          items_per_row = 6,
          items = {
@@ -568,7 +568,7 @@ local result = {
       {
          name = "terrains_desert",
          -- TRANSLATORS: A category in the editor for placing terrains on the map.
-         descname = _ "Desert",
+         descname = _("Desert"),
          picture = "world/pics/editor_terrain_category_desert.png",
          items_per_row = 6,
          items = {

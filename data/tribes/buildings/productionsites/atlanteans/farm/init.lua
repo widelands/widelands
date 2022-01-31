@@ -45,7 +45,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant",
             "call=harvest",
@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-         descname = _"planting corn",
+         descname = _("planting corn"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -61,7 +61,7 @@ descriptions:new_productionsite_type {
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-         descname = _"harvesting corn",
+         descname = _("harvesting corn"),
          actions = {
             "callworker=harvest",
             "sleep=duration:4s"
@@ -70,8 +70,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("atlanteans_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },

@@ -47,7 +47,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
-         descname = _"sawing logs",
+         descname = _("sawing logs"),
          actions = {
             "return=skipped unless economy needs planks",
             "consume=log:2",
