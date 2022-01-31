@@ -261,8 +261,8 @@ emp_5 = {
 function emp_6(cost)
 push_textdomain("scenario_fri03.wmf")
 local r = {
-   title = _"Strangers",
-   body=iniucundus(_"Greetings",
+   title = _("Strangers"),
+   body=iniucundus(_("Greetings"),
       join_sentences(ngettext([[%d piece of gold.]], [[%d pieces of gold.]], cost):bformat(cost),
       -- TRANSLATORS: M. C. Iniucundus – Strangers 6
       _([[I know it seems much, but the Senate did not furnish me with much money for this expedition, so I must admit I am in need of some.]]))
@@ -280,8 +280,8 @@ end
 function emp_7(cost)
 push_textdomain("scenario_fri03.wmf")
 local r = {
-   title = _"Strangers",
-   body=claus(_"Decide",
+   title = _("Strangers"),
+   body=claus(_("Decide"),
       -- TRANSLATORS: Claus Lembeck – Strangers 7
       _([[He seems happy enough to offer us a passage, but the price is exorbitant. We may as well destroy his port and build one of our own. I wonder what would be better…]]))
       .. new_objectives(obj_emp(cost)),
@@ -309,29 +309,29 @@ victory_pay = {
    allow_next_scenario = true,
 }
 timeout_1 = {
-   title = _"You Have Lost",
-   body=iniucundus(_"Goodbye!",
+   title = _("You Have Lost"),
+   body=iniucundus(_("Goodbye!"),
       -- TRANSLATORS: M. C. Iniucundus – lost
       _([[You have taken too long. We must set sail now, and then the storm will not permit you to leave this island. I am sorry for you, but the weather doesn’t wait. Goodbye.]]))
       .. objective_text(_("You Have Lost"),
       _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
 }
 timeout_2 = {
-   title = _"You Have Lost",
-   body=iniucundus(_"Stuck",
+   title = _("You Have Lost"),
+   body=iniucundus(_("Stuck"),
       -- TRANSLATORS: M. C. Iniucundus – lost
       _([[Now see where your foolishness has led us. The storm has broken and we’re all stuck here since you burnt down our port. The gods are just – even though you appear to be more powerful in combat than us, they force you to remain on this island for such a long time that you will never accomplish the objective of your futile journey. Despair in your triumph!]]))
-      .. objective_text(_"You Have Lost",
-      _[[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]]),
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
 }
 lost_port_space_blocked = {
-   title = _"You Have Lost",
-   body=claus(_"Stuck",
+   title = _("You Have Lost"),
+   body=claus(_("Stuck"),
       -- TRANSLATORS: Claus Lembeck – lost
       _([[This is a disaster! We have reached another shore, but another tribe has already settled there. They won’t allow us to land on their coast.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Claus Lembeck – lost
       _([[We were too slow. We dawdled and dallied and this is the result. There is no way forward. None of us will ever see our home again!]]))
-      .. objective_text(_"You Have Lost",
-      _[[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]]),
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
 }
