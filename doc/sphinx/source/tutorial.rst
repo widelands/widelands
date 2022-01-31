@@ -329,7 +329,7 @@ function for this called :meth:`string.bformat` that works just like the
    local world = _("world")                              -- Will print in Gaelic: "saoghal"
    local hello = _("hello")                              -- Will print in Gaelic: "halò"
    -- TRANSLATORS: %1$s = hello, %2$s = world
-   print  (_ "The %1$s is '%2$s'"):bformat(hello, world) -- Will print in Gaelic: "Is 'halò' an saoghal"
+   print  (_("The %1$s is '%2$s'")):bformat(hello, world) -- Will print in Gaelic: "Is 'halò' an saoghal"
 
 
 Numbers in Placeholders

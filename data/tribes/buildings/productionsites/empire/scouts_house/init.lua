@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-         descname = _"scouting",
+         descname = _("scouting"),
          actions = {
             "consume=ration",
             "sleep=duration:30s",
@@ -56,7 +56,7 @@ descriptions:new_productionsite_type {
          }
       },
       targeted_scouting = {
-         descname = _"scouting",
+         descname = _("scouting"),
          actions = {
             "consume=ration",
             "callworker=targeted_scouting"

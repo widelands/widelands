@@ -23,7 +23,7 @@ local wc_desc = _ (
 local wc_points = "Points"
 -- This needs to be exactly like wc_points, but localized, because wc_points
 -- will be used as the key to fetch the translation in C++
-local wc_points_i18n = _"Points"
+local wc_points_i18n = _("Points")
 local r = {
    name = wc_name,
    description = wc_desc,
@@ -62,7 +62,7 @@ local r = {
             end
          end
 
-         descr = descr .. h2((_"Status for %s"):format(plr.name))
+         descr = descr .. h2((_("Status for %s")):format(plr.name))
          local points = 0
          for idx,pair in ipairs(plr.tribe.collectors_points_table) do
             local count = 0
@@ -74,7 +74,7 @@ local r = {
 
             local warename = wl.Game():get_ware_description(pair.ware).descname
             -- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-            descr = descr .. li(_"%1$s (%2$i P) x %3$i = %4$i P"):bformat(
+            descr = descr .. li(_("%1$s (%2$i P) x %3$i = %4$i P")):bformat(
                warename, pair.points, count, lpoints
             )
          end
@@ -101,7 +101,7 @@ local r = {
       push_textdomain("win_conditions")
       for idx, team in ipairs(teams) do
          local points, pstat = _calc_points(team)
-         local message = h1((_"Status for Team %d"):format(idx))
+         local message = h1((_("Status for Team %d")):format(idx))
             .. pstat
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
          msg = msg .. vspace(8) .. message

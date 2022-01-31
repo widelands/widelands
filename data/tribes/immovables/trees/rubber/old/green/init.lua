@@ -8,9 +8,9 @@ include(dirname .. "../spritesheets.lua")
 descriptions:new_immovable_type{
    name = "rubber_amazons_old",
    -- TRANSLATORS:  This is an amazon rare tree.
-   descname = _ "Rubber Tree (Old)",
+   descname = _("Rubber Tree (Old)"),
    -- TRANSLATORS:  This is an amazon rare tree.
-   species = _ "Rubber Tree",
+   species = _("Rubber Tree"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

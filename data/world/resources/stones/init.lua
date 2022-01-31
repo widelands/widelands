@@ -4,7 +4,7 @@ local pics_dir = path.dirname(__file__) .. "../pics/"
 
 wl.Descriptions():new_resource_type{
    name = "resource_stones",
-   descname = _ "Stones",
+   descname = _("Stones"),
    max_amount = 20,
    detectable = true,
    timeout_ms = 300000,

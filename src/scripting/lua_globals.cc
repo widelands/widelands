@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -237,7 +236,7 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 
       .. code-block:: lua
 
-         s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
+         s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
 
       :arg str: text to translate.
       :type str: :class:`string`

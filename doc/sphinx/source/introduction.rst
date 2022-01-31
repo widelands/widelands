@@ -122,7 +122,7 @@ something like this:
 .. code-block:: lua
 
    hooks.custom_statistic = {
-      name = _ "Unchanging statistic",
+      name = _("Unchanging statistic"),
       pic = "map:mycool_stat_picture.png", -- For the menu button
       calculator = function(p)
          -- Calculate the current value for this player

@@ -38,7 +38,7 @@ descriptions:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-         descname = _"felling trees",
+         descname = _("felling trees"),
          actions = {
             "callworker=harvest",
             "sleep=duration:20s"

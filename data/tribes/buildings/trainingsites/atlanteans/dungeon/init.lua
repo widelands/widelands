@@ -162,7 +162,7 @@
 --
 --       programs = {
 --          sleep = {
---             descname = _"sleeping",
+--             descname = _("sleeping"),
 --             actions = {
 --                "sleep=duration:5s",
 --                "return=skipped",
@@ -268,7 +268,7 @@ descriptions:new_trainingsite_type {
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-         descname = _"sleeping",
+         descname = _("sleeping"),
          actions = {
             "sleep=duration:5s",
             "return=skipped",

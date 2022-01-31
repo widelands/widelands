@@ -67,15 +67,15 @@ function watch_hill()
 
          local claimed_for = (game.time - started_claiming) / 1000
          if 5*60 < claimed_for and send_msg == 0 then
-            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"5 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _("5 minutes")))
             send_msg = send_msg + 1
          end
          if 10*60 < claimed_for and send_msg == 1 then
-            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"10 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _("10 minutes")))
             send_msg = send_msg + 1
          end
          if 15*60 < claimed_for and send_msg == 2 then
-            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"15 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _("15 minutes")))
             send_msg = send_msg + 1
          end
          if 20*60 < claimed_for and send_msg == 3 then

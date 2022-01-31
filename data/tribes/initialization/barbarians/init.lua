@@ -7,10 +7,10 @@ push_textdomain("tribes")
 local r = {
    -- Basic information for the Barbarian tribe
    name = "barbarians",
-   author = _"The Widelands Development Team",
+   author = _("The Widelands Development Team"),
    -- TRANSLATORS: This is a tribe name
-   descname = _"Barbarians",
-   tooltip = _"The mighty tribes of the east-lands.",
+   descname = _("Barbarians"),
+   tooltip = _("The mighty tribes of the east-lands."),
    icon = dirname .. "images/icon.png",
    script = dirname .. "units.lua",
 

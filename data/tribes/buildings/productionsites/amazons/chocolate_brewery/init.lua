@@ -52,7 +52,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
-         descname = _"brewing chocolate",
+         descname = _("brewing chocolate"),
          actions = {
             "return=skipped unless economy needs chocolate",
             "consume=water:2 cocoa_beans",

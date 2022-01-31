@@ -22,37 +22,37 @@ run(function()
    push_textdomain("training_wheels")
 
    local msg_open_menu = {
-      title = _"Building Spaces",
+      title = _("Building Spaces"),
       position = "bottomright",
       h = 180,
       w = 260,
       modal = false,
       body = (
-         li_image("images/wui/menus/showhide.png", _"We will want to place buildings so that we can produce wares.") ..
-         p(_"So, let’s find out where we have space for them.") ..
-         li_image("images/wui/training_wheels_arrow.png", _"Click on the ‘Show / Hide’ menu.")
+         li_image("images/wui/menus/showhide.png", _("We will want to place buildings so that we can produce wares.")) ..
+         p(_("So, let’s find out where we have space for them.")) ..
+         li_image("images/wui/training_wheels_arrow.png", _("Click on the ‘Show / Hide’ menu."))
       )
    }
 
    local msg_select_item = {
-      title = _"Building Spaces",
+      title = _("Building Spaces"),
       position = "topright",
       h = 120,
       w = 260,
       modal = false,
       body = (
-         li_image("images/wui/menus/toggle_buildhelp.png", _"Select ‘Show Building Spaces’.")
+         li_image("images/wui/menus/toggle_buildhelp.png", _("Select ‘Show Building Spaces’."))
       )
    }
 
    local msg_finished = {
-      title = _"Building Spaces",
+      title = _("Building Spaces"),
       position = "topright",
       h = 160,
       w = 260,
       body = (
-         li_image("images/wui/overlays/small.png", _"Now we can see where it is possible to place buildings and flags.") ..
-         li("Click ‘OK’ to continue.")
+         li_image("images/wui/overlays/small.png", _("Now we can see where it is possible to place buildings and flags.")) ..
+         li(_("Click ‘OK’ to continue."))
       )
    }
 

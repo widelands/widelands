@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -509,6 +508,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 		drag_start_mouse_x_ = get_x() + get_lborder() + mx;
 		drag_start_mouse_y_ = get_y() + get_tborder() + my;
 		grab_mouse(true);
+		clicked();
+		focus();
 	} else if (btn == SDL_BUTTON_RIGHT && !pinned_) {
 		play_click();
 		die();
