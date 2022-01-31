@@ -47,7 +47,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_fire_tongs",
             "call=produce_hunting_bow",
@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
       },
       produce_bread_paddle = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a bread paddle",
+         descname = _("making a bread paddle"),
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
@@ -77,7 +77,7 @@ descriptions:new_productionsite_type {
       },
       produce_buckets = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets because ...
-         descname = _"making a pair of buckets",
+         descname = _("making a pair of buckets"),
          actions = {
             "return=skipped unless economy needs buckets",
             "consume=iron log",
@@ -89,7 +89,7 @@ descriptions:new_productionsite_type {
       },
       produce_fire_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-         descname = _"making fire tongs",
+         descname = _("making fire tongs"),
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
@@ -101,7 +101,7 @@ descriptions:new_productionsite_type {
       },
       produce_fishing_net = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _"making a fishing net",
+         descname = _("making a fishing net"),
          actions = {
             "return=skipped unless economy needs fishing_net",
             "consume=spidercloth:2",
@@ -113,7 +113,7 @@ descriptions:new_productionsite_type {
       },
       produce_hammer = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=iron log",
@@ -125,7 +125,7 @@ descriptions:new_productionsite_type {
       },
       produce_hook_pole = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-         descname = _"making a hook pole",
+         descname = _("making a hook pole"),
          actions = {
             "return=skipped unless economy needs hook_pole",
             "consume=iron log",
@@ -137,7 +137,7 @@ descriptions:new_productionsite_type {
       },
       produce_hunting_bow = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because ...
-         descname = _"making a hunting bow",
+         descname = _("making a hunting bow"),
          actions = {
             "return=skipped unless economy needs hunting_bow",
             "consume=log spidercloth",
@@ -149,7 +149,7 @@ descriptions:new_productionsite_type {
       },
       produce_milking_tongs = {
          -- TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
-         descname = _"making milking tongs",
+         descname = _("making milking tongs"),
          actions = {
             "return=skipped unless economy needs milking_tongs",
             "consume=iron log",
@@ -161,7 +161,7 @@ descriptions:new_productionsite_type {
       },
       produce_pick = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-         descname = _"making a pick",
+         descname = _("making a pick"),
          actions = {
             "return=skipped unless economy needs pick",
             "consume=iron log",
@@ -173,7 +173,7 @@ descriptions:new_productionsite_type {
       },
       produce_saw = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-         descname = _"making a saw",
+         descname = _("making a saw"),
          actions = {
             "return=skipped unless economy needs saw",
             "consume=iron log",
@@ -185,7 +185,7 @@ descriptions:new_productionsite_type {
       },
       produce_scythe = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a scythe",
+         descname = _("making a scythe"),
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=iron log",
@@ -197,7 +197,7 @@ descriptions:new_productionsite_type {
       },
       produce_shovel = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=iron log",

@@ -6,7 +6,7 @@ include(dirname .. "../terrain_affinity.lua")
 
 wl.Descriptions():new_immovable_type{
    name = "palm_borassus_desert_mature",
-   descname = _ "Borassus Palm (Mature)",
+   descname = _("Borassus Palm (Mature)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

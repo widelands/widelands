@@ -27,7 +27,7 @@ function ware_help_general_string(tribe, ware_description)
    -- TODO(GunChleoc): Split into purpose and note
    local helptexts = ware_description:helptexts(tribe.name)
    if helptexts["purpose"] ~= nil then
-      return h2(_"Purpose") .. li_image(ware_description.icon_name, helptexts["purpose"])
+      return h2(_("Purpose")) .. li_image(ware_description.icon_name, helptexts["purpose"])
    else
       return img(ware_description.icon_name)
    end
@@ -48,7 +48,7 @@ function ware_help_producers_string(tribe, ware_description)
    for i, building in ipairs(ware_description:producers(tribe.name)) do
       if (tribe:has_building(building.name)) then
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
-         result = result .. h2(_"Producer")
+         result = result .. h2(_("Producer"))
          result = result .. dependencies({building, ware_description}, building.descname)
          producing_programs, produced_wares_counters, produced_wares_strings = programs_wares_count(tribe, building, ware_description)
          -- Now collect the consumed wares for each filtered program and print the program info
@@ -57,10 +57,10 @@ function ware_help_producers_string(tribe, ware_description)
             if (produced_wares_counters[program_name] > 0) then
                if (produced_wares_counters[program_name] == 1) then
                   -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-                  result = result .. h3(_"Ware produced:")
+                  result = result .. h3(_("Ware produced:"))
                else
                   -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
-                  result = result .. h3(_"Wares produced:")
+                  result = result .. h3(_("Wares produced:"))
                end
                result = result .. produced_wares_strings[program_name]
             end
@@ -122,10 +122,10 @@ function ware_help_consumers_string(tribe, ware_description)
    if (consumers_amount > 0) then
       if (consumers_amount == 1) then
          -- TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that consumes a ware
-         result = result .. h2(_"Consumer")
+         result = result .. h2(_("Consumer"))
       else
          -- TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that consume a ware
-         result = result .. h2(_"Consumers")
+         result = result .. h2(_("Consumers"))
       end
       if (consumers ~= "") then
          result = result .. consumers_string

@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "summer_steppe_barren",
-   descname = _ "Barren Steppe",
+   descname = _("Barren Steppe"),
    is = "arable",
    valid_resources = {"resource_water"},
    default_resource = "resource_water",

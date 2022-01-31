@@ -4,7 +4,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_critter_type{
    name = "chamois",
-   descname = _ "Chamois",
+   descname = _("Chamois"),
    icon = dirname .. "menu.png",
    animation_directory = dirname,
    programs = {

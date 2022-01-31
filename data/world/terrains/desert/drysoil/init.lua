@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "drysoil",
-   descname = _ "Dry Soil",
+   descname = _("Dry Soil"),
    is = "arable",
    valid_resources = {"resource_water"},
    default_resource = "resource_water",

@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_ax",
             "call=produce_ax_sharp",
@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax",
@@ -81,7 +81,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_sharp = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
-         descname = _"forging a sharp ax",
+         descname = _("forging a sharp ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_sharp",
@@ -96,7 +96,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_broad = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
-         descname = _"forging a broad ax",
+         descname = _("forging a broad ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_broad",
@@ -111,7 +111,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_bronze = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
-         descname = _"forging a bronze ax",
+         descname = _("forging a bronze ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_bronze",
@@ -126,7 +126,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_battle = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
-         descname = _"forging a battle ax",
+         descname = _("forging a battle ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_battle",
@@ -141,7 +141,7 @@ descriptions:new_productionsite_type {
       },
       produce_ax_warriors = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
-         descname = _"forging a warrior’s ax",
+         descname = _("forging a warrior’s ax"),
          actions = {
             -- time total: 57 + 3.6
             "return=skipped unless economy needs ax_warriors",

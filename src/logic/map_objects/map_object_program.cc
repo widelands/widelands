@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -24,7 +23,6 @@
 
 #include "base/log.h"
 #include "base/math.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
 #include "sound/sound_handler.h"
@@ -84,7 +82,7 @@ the tooltips:
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start doing something because ...
-         descname = _"doing something",
+         descname = _("doing something"),
          actions = {
             "call=program_name2",
             "call=program_name3",
@@ -411,7 +409,7 @@ playsound
       -- Production site
      produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
             "return=skipped unless economy needs ax",
             "consume=coal iron",
