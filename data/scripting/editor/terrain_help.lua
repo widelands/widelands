@@ -18,14 +18,14 @@ return {
       -- Resources
       local valid_resources = terrain.valid_resources
       if (#valid_resources > 0) then
-         result = result .. h2(_"Resources")
+         result = result .. h2(_("Resources"))
          if (#valid_resources > 0) then
             if (#valid_resources == 1) then
                -- TRANSLATORS: A header in the editor help if there is 1 valid resource
-               result = result .. h3(_"Valid Resource:")
+               result = result .. h3(_("Valid Resource:"))
             else
                -- TRANSLATORS: A header in the editor help if there is more than 1 valid resource
-               result = result .. h3(_"Valid Resources:")
+               result = result .. h3(_("Valid Resources:"))
             end
 
             for count, resource in pairs(valid_resources) do
@@ -36,9 +36,9 @@ return {
 
          local default_resource = terrain.default_resource
          if (default_resource ~= nil) then
-            result = result .. inline_header(_"Default:",
+            result = result .. inline_header(_("Default:"),
                -- TRANSLATORS: e.g. "5x Water"
-               _"%1%x %2%":bformat(terrain.default_resource_amount, default_resource.descname))
+               _("%1%x %2%"):bformat(terrain.default_resource_amount, default_resource.descname))
          end
       end
 
@@ -52,12 +52,12 @@ return {
       end
 
       -- TRANSLATORS: A header in the editor help
-      result = result .. vspace(3) .. h2(vspace(12) .. _"Probability of trees growing") .. vspace(3)
+      result = result .. vspace(3) .. h2(vspace(12) .. _("Probability of trees growing")) .. vspace(3)
 
       if (tree_string ~="") then
          result = result .. tree_string
       else
-         result = result .. p(_"No trees will grow here.")
+         result = result .. p(_("No trees will grow here."))
       end
 
       pop_textdomain()

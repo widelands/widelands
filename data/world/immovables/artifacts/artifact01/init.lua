@@ -4,7 +4,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type{
    name = "artifact01",
-   descname = _ "Artifact",
+   descname = _("Artifact"),
    size = "small",
    programs = {},
    animation_directory = dirname,

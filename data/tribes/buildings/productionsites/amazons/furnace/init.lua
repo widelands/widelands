@@ -56,7 +56,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-         descname = _"smelting gold",
+         descname = _("smelting gold"),
          actions = {
             -- time total: 72
             "return=skipped unless economy needs gold",

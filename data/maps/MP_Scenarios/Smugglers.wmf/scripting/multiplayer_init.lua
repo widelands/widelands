@@ -75,7 +75,7 @@ end
 
 function setup_statistics_hook()
    hooks.custom_statistic = {
-      name = _"Wares Smuggled",
+      name = _("Wares Smuggled"),
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p)
          return points[p.team]
@@ -101,7 +101,7 @@ function initialize()
    send_to_all_inboxes(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)), welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implementes
-   game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win))))
+   game.players[1]:add_objective("win_conditions", _("Rules"), rt(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win))))
 
    for idx,descr in ipairs(route_descrs) do
       run(wait_for_established_route, descr)

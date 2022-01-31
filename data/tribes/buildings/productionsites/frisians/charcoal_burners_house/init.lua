@@ -57,7 +57,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=erect_stack",
             "call=collect_coal",
@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
       },
       erect_stack = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a charcoal stack because ...
-         descname = _"making a charcoal stack",
+         descname = _("making a charcoal stack"),
          actions = {
             "return=skipped unless economy needs coal",
             "callworker=find_pond",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
       },
       collect_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
-         descname = _"collecting coal",
+         descname = _("collecting coal"),
          actions = {
             "sleep=duration:15s",
             "callworker=collect_coal",
@@ -94,8 +94,8 @@ descriptions:new_productionsite_type {
 
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Ponds",
-      heading = _"Out of Clay Ponds",
+      title = _("No Ponds"),
+      heading = _("Out of Clay Ponds"),
       message = pgettext ("frisians_building", "The charcoal burner working at this charcoal burner’s house can’t find any clay ponds in his work area. Please make sure there is a working clay pit nearby and the charcoal burner’s house is supplied with all needed wares, or consider dismantling or destroying this building."),
       productivity_threshold = 12
    },
