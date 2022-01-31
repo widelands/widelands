@@ -172,6 +172,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	finalize_toolbar();
 
+	set_display_flags(EditorInteractive::dfShowResources
+                          | EditorInteractive::dfShowImmovables
+                          | EditorInteractive::dfShowBobs
+                          | EditorInteractive::dfShowGrid);
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
 #else
@@ -182,10 +186,6 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 		map_clicked(node_and_triangle, false);
 	});
 
-	set_display_flags(EditorInteractive::dfShowResources
-                          | EditorInteractive::dfShowImmovables
-                          | EditorInteractive::dfShowBobs
-                          | EditorInteractive::dfShowGrid);
 
 	initialization_complete();
 }
@@ -782,31 +782,26 @@ bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
 void EditorInteractive::toggle_resources() {
 	set_display_flag(EditorInteractive::dfShowResources,
                          !get_display_flag(EditorInteractive::dfShowResources));
-	//rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_immovables() {
 	set_display_flag(EditorInteractive::dfShowImmovables,
                          !get_display_flag(EditorInteractive::dfShowImmovables));
-	//rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_bobs() {
 	set_display_flag(EditorInteractive::dfShowBobs,
                          !get_display_flag(EditorInteractive::dfShowBobs));
-	//rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_grid() {
 	set_display_flag(EditorInteractive::dfShowGrid,
                          !get_display_flag(EditorInteractive::dfShowGrid));
-	//rebuild_showhide_menu();
 }
 
 void EditorInteractive::toggle_maximum_buildhelp() {
 	set_display_flag(EditorInteractive::dfShowMaximumBuildhelp,
                          !get_display_flag(EditorInteractive::dfShowMaximumBuildhelp));
-	//rebuild_showhide_menu();
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
