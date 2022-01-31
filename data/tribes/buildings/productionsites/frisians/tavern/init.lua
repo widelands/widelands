@@ -84,7 +84,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_malus",
             "call=produce_bonus",
@@ -92,7 +92,7 @@ descriptions:new_productionsite_type {
       },
       produce_malus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"preparing only one ration",
+         descname = _("preparing only one ration"),
          actions = {
             -- time total: 49.5
             "return=skipped unless economy needs ration",
@@ -106,7 +106,7 @@ descriptions:new_productionsite_type {
       },
       produce_bonus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-         descname = _"preparing rations",
+         descname = _("preparing rations"),
          actions = {
             -- time total: 66
             "return=skipped unless economy needs ration",

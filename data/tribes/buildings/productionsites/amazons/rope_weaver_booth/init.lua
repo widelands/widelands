@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
-         descname = _"making a rope",
+         descname = _("making a rope"),
          actions = {
             "consume=liana:2",
             "sleep=duration:20s",

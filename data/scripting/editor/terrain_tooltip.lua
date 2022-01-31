@@ -32,9 +32,9 @@ return {
 
       if (tree_string ~="") then
       -- TRANSLATORS: A header in the editor help
-         result = vspace(3) .. h3(_"Probability of trees growing") .. vspace(3) .. p(tree_string)
+         result = vspace(3) .. h3(_("Probability of trees growing")) .. vspace(3) .. p(tree_string)
       else
-         result = result .. h3(_"No trees will grow here.")
+         result = result .. h3(_("No trees will grow here."))
       end
 
       pop_textdomain()

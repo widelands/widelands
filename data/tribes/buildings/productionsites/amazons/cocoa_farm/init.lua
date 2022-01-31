@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant_cocoa",
             "call=harvest_cocoa",
@@ -52,7 +52,7 @@ descriptions:new_productionsite_type {
       },
       plant_cocoa = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
-         descname = _"planting cocoa",
+         descname = _("planting cocoa"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -60,7 +60,7 @@ descriptions:new_productionsite_type {
       },
       harvest_cocoa = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
-         descname = _"harvesting cocoa",
+         descname = _("harvesting cocoa"),
          actions = {
             "callworker=harvest",
             "sleep=duration:4s"
@@ -69,8 +69,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant her seeds."),
       productivity_threshold = 20
    },

@@ -8,10 +8,10 @@ push_textdomain("tribes")
 local r = {
    -- Basic information for the Atlantean tribe
    name = "atlanteans",
-   author = _"The Widelands Development Team",
+   author = _("The Widelands Development Team"),
    -- TRANSLATORS: This is a tribe name
-   descname = _"Atlanteans",
-   tooltip = _"This tribe is known from the oldest tales. The sons and daughters of Atlantis.",
+   descname = _("Atlanteans"),
+   tooltip = _("This tribe is known from the oldest tales. The sons and daughters of Atlantis."),
    icon = dirname .. "images/icon.png",
    script = dirname .. "units.lua",
 

@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -139,13 +138,7 @@ private:
 
 	bool act_pending_;
 
-	/**
-	 * Store all pairs shortest paths between port docks
-	 *
-	 * Let i < j, then the path from ports_[i] to ports_[j] is stored in
-	 * portpaths_[binom(j,2) + i]
-	 */
-	std::vector<PortPath> portpaths_;
+	std::map<std::pair<Serial, Serial>, PortPath> port_paths_;
 
 	ShippingSchedule schedule_;
 

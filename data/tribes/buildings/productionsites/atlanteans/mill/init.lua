@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_cornmeal",
             "call=produce_blackroot_flour",
@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
       },
       produce_cornmeal = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-         descname = _"grinding corn",
+         descname = _("grinding corn"),
          actions = {
             "return=skipped when site has blackroot and economy needs blackroot_flour and not economy needs cornmeal",
             "return=skipped unless economy needs cornmeal",
@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       },
       produce_blackroot_flour = {
          -- TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
-         descname = _"grinding blackroot",
+         descname = _("grinding blackroot"),
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs blackroot_flour",

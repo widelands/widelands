@@ -38,7 +38,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant_cassava",
             "call=harvest_cassava",
@@ -46,7 +46,7 @@ descriptions:new_productionsite_type {
       },
       plant_cassava = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting cassava because ...
-         descname = _"planting cassava",
+         descname = _("planting cassava"),
          actions = {
             "callworker=plant",
             "sleep=duration:10s"
@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
       },
       harvest_cassava = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting cassava because ...
-         descname = _"harvesting cassava",
+         descname = _("harvesting cassava"),
          actions = {
             "callworker=harvest",
             "sleep=duration:4s",
@@ -63,8 +63,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext ("amazons_building", "The farmer working at this cassava plantation has no cleared soil to plant her seeds."),
       productivity_threshold = 30
    },

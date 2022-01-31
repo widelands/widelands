@@ -22,7 +22,7 @@ local wc_desc = _(
 local wc_trees_owned = "Trees owned"
 -- This needs to be exactly like wc_trees_owned, but localized, because wc_trees_owned
 -- will be used as the key to fetch the translation in C++
-local wc_trees_owned_i18n = _"Trees owned"
+local wc_trees_owned_i18n = _("Trees owned")
 
 local r = {
    name = wc_name,
@@ -64,7 +64,7 @@ local r = {
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
                :format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-         msg = msg .. p(_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
+         msg = msg .. p(_("%1$s has %2$s at the moment.")):bformat(plr.name,trees)
       end
       pop_textdomain()
 
@@ -85,13 +85,13 @@ local r = {
          msg = msg .. vspace(8)
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-         msg = msg ..  p(_"%1$s had %2$s."):bformat(plr.name,trees)
+         msg = msg ..  p(_("%1$s had %2$s.")):bformat(plr.name,trees)
       end
       msg = msg .. vspace(8)
       local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
             :format(playerpoints[points[#points][1].number])
       -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-      msg = msg ..  h3(_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
+      msg = msg ..  h3(_("The winner is %1$s with %2$s.")):bformat(points[#points][1].name, trees)
       pop_textdomain()
 
       local privmsg = ""

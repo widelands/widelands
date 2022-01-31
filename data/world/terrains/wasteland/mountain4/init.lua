@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "wasteland_mountain4",
-   descname = _ "Mountain 4",
+   descname = _("Mountain 4"),
    is = "mineable",
    valid_resources = { "resource_coal", "resource_iron", "resource_gold", "resource_stones" },
    default_resource = "",
