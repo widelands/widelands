@@ -236,7 +236,7 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 
       .. code-block:: lua
 
-         s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
+         s = "<p><br>" .. _("Only this should be translated") .. "<br></p>"
 
       :arg str: text to translate.
       :type str: :class:`string`
