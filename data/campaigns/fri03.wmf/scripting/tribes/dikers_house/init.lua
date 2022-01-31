@@ -52,7 +52,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start diking because ...
-         descname = _"diking",
+         descname = _("diking"),
          actions = {
             "callworker=check",
             "consume=log:3",

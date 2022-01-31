@@ -47,7 +47,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
             "sleep=duration:5s",
             "return=skipped unless economy needs granite",
@@ -58,7 +58,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce = {
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
             "animate=working duration:10s",
             "mine=resource_stones radius:1 yield:100% when_empty:20%",
@@ -76,8 +76,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Granite",
-      heading = _"Main Granite Vein Exhausted",
+      title = _("No Granite"),
+      heading = _("Main Granite Vein Exhausted"),
       message =
          pgettext("amazons_building", "This stone mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },

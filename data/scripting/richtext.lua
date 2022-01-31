@@ -578,7 +578,7 @@ end
 --    appropriate concatenation.
 --
 --    e.g. localize_list({"foo", "bar", "baz"}, "or") will return
---    _"foo, bar or baz"
+--    _("foo, bar or baz")
 --
 --    :arg items:              An array of strings
 --    :arg listtype:           The type of concatenation to use.
@@ -595,16 +595,16 @@ function localize_list(items, listtype)
          result = item
       elseif (i == #items) then
          if (listtype == "&") then
-            result = _"%1$s & %2$s":bformat(result, item)
+            result = _("%1$s & %2$s"):bformat(result, item)
          elseif (listtype == "or") then
-            result = _"%1$s or %2$s":bformat(result, item)
+            result = _("%1$s or %2$s"):bformat(result, item)
          elseif (listtype == ",") then
-            result = _"%1$s, %2$s":bformat(result, item)
+            result = _("%1$s, %2$s"):bformat(result, item)
          else
-            result = _"%1$s and %2$s":bformat(result, item)
+            result = _("%1$s and %2$s"):bformat(result, item)
       end
       else
-         result = _"%1$s, %2$s":bformat(result, item)
+         result = _("%1$s, %2$s"):bformat(result, item)
       end
    end
    pop_textdomain()
@@ -621,25 +621,25 @@ end
 -- ^^^^^^^^^^^^
 -- Here's an example on how these functions and their attributes can be used. The double dot
 -- (``..``) is the LUA string concatenation operator. Note that this example
--- also includes translation markup (the ``_[[Some text]]`` or ``_"Some text"`` function):
+-- also includes translation markup (the ``_([[Some text]])`` or ``_("Some text")`` function):
 --
 -- .. code-block:: lua
 --
 --    include "scripting/richtext.lua"
 --
 --    title = "Text Formatting",
---    body = h1(_[[Normal header]]) ..
---           h1("6699ff", _[[Colored header]]) ..
---           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
---           p("align=center", _[[A centered paragraph, just with a bit more text to show how it looks like.]]) ..
---           li_image("images/wui/menus/statistics.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
---           li(_[[A list item]]) ..
---           li(font("color=6699ff bold=1", _[[Blue and bold]])) ..
---           li_arrow(_[[A list item with an arrow]]) ..
---           p(_[[A more complicated paragraph with ]] ..
---              font("color=ffffff", _[[white text ]]) ..
---              _[[and ]] ..
---              font("italic=1 bold=1", _[[bold italic formatted text.]])
+--    body = h1(_([[Normal header]])) ..
+--           h1("6699ff", _([[Colored header]])) ..
+--           p(_([[Normal paragraph, just with a bit more text to show how it looks like.]])) ..
+--           p("align=center", _([[A centered paragraph, just with a bit more text to show how it looks like.]])) ..
+--           li_image("images/wui/menus/statistics.png", _([[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]])) ..
+--           li(_([[A list item]])) ..
+--           li(font("color=6699ff bold=1", _([[Blue and bold]]))) ..
+--           li_arrow(_([[A list item with an arrow]])) ..
+--           p(_([[A more complicated paragraph with ]]) ..
+--              font("color=ffffff", _([[white text ]])) ..
+--              _([[and ]]) ..
+--              font("italic=1 bold=1", _([[bold italic formatted text.]]))
 --           ),
 --
 --

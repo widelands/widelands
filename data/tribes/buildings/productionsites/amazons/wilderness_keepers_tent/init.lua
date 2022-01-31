@@ -35,7 +35,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=breed",
             "call=release",
@@ -43,7 +43,7 @@ descriptions:new_productionsite_type {
       },
       breed = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"breeding fish",
+         descname = _("breeding fish"),
          actions = {
             "callworker=breed_fish",
             "sleep=duration:52s500ms",
@@ -51,7 +51,7 @@ descriptions:new_productionsite_type {
       },
       release = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"releasing game",
+         descname = _("releasing game"),
          actions = {
             "callworker=release_game",
             "sleep=duration:52s500ms",

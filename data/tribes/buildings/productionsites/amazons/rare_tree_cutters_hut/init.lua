@@ -27,7 +27,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=harvest_balsa",
             "call=harvest_rubber",
@@ -36,7 +36,7 @@ descriptions:new_productionsite_type {
       },
       harvest_balsa = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"harvesting balsa",
+         descname = _("harvesting balsa"),
          actions = {
             -- time total: xx
             "callworker=harvest_balsa",
@@ -45,7 +45,7 @@ descriptions:new_productionsite_type {
       },
       harvest_rubber = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"harvesting rubber",
+         descname = _("harvesting rubber"),
          actions = {
             -- time total: xx
             "callworker=harvest_rubber",
@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
       },
       harvest_ironwood = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"harvesting ironwood",
+         descname = _("harvesting ironwood"),
          actions = {
             -- time total: xx
             "callworker=harvest_ironwood",

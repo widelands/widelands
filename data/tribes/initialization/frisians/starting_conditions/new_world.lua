@@ -8,9 +8,9 @@ push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "New World",
+   descname = _("New World"),
    -- TRANSLATORS: This is the tooltip for the "New World" starting condition
-   tooltip = _"Start the game with seven ships full of wares on the ocean",
+   tooltip = _("Start the game with seven ships full of wares on the ocean"),
    map_tags = {"seafaring"},
    incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
    uses_map_starting_position = false,

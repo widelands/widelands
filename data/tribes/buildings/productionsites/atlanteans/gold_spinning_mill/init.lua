@@ -45,7 +45,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
-         descname = _"spinning gold",
+         descname = _("spinning gold"),
          actions = {
             "return=skipped unless economy needs gold_thread",
             "consume=gold",

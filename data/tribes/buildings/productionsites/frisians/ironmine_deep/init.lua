@@ -60,7 +60,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
-         descname = _"mining iron",
+         descname = _("mining iron"),
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=meal",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce = {
-         descname = _"mining iron",
+         descname = _("mining iron"),
          actions = {
             "animate=working duration:8s700ms",
             "mine=resource_iron radius:3 yield:100% when_empty:10% experience_on_fail:5%",
@@ -94,8 +94,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Iron",
-      heading = _"Main Iron Vein Exhausted",
+      title = _("No Iron"),
+      heading = _("Main Iron Vein Exhausted"),
       message =
          pgettext("frisians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },

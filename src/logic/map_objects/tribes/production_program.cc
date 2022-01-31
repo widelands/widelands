@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -83,7 +82,7 @@ this::
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             <list of actions>
          }
@@ -109,7 +108,7 @@ A program can call another program, for example::
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_ration",
             "call=produce_snack",
@@ -118,14 +117,14 @@ A program can call another program, for example::
       },
       produce_ration = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _("preparing a ration"),
          actions = {
             <list of actions>
          }
       },
       produce_snack = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-         descname = _"preparing a snack",
+         descname = _("preparing a snack"),
          actions = {
             <list of actions>
          }
@@ -137,7 +136,7 @@ A program consists of a sequence of actions. An action is written as
 
    produce_snack = {
       -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-      descname = _"preparing a snack",
+      descname = _("preparing a snack"),
       actions = {
          "return=skipped unless economy needs snack",
          "sleep=duration:2s500ms",
@@ -764,7 +763,7 @@ Calls another program of the same productionsite. Example:
       programs = {
          main = {
             -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-            descname = _"working",
+            descname = _("working"),
             actions = {
                "call=mine_granite on failure fail",
                "call=mine_granite on failure fail",
@@ -773,7 +772,7 @@ Calls another program of the same productionsite. Example:
          },
          mine_granite = {
             -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-            descname = _"quarrying granite",
+            descname = _("quarrying granite"),
             actions = {
                "callworker=cut_granite",
                "sleep=duration:17s500ms"
@@ -781,7 +780,7 @@ Calls another program of the same productionsite. Example:
          },
          mine_marble = {
             -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-            descname = _"quarrying marble",
+            descname = _("quarrying marble"),
             actions = {
                "callworker=cut_marble",
                "sleep=duration:17s500ms"
@@ -1672,7 +1671,7 @@ Example:
 
       upgrade_soldier_attack_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-         descname = _"upgrading soldier attack from level 3 to level 4",
+         descname = _("upgrading soldier attack from level 3 to level 4"),
          actions = {
             -- Fails when there aren't any soldiers with attack level 3
             "checksoldier=soldier:attack level:3",

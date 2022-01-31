@@ -96,7 +96,7 @@
 --       push_textdomain("training_wheels")
 --
 --       local msg_example = {
---          title = _"Example",
+--          title = _("Example"),
 --          position = "topright",
 --          body = (
 --             p("This is an example with a non-modal story message box, so we can let the player do things while we show this message.") ..
@@ -139,33 +139,33 @@ push_textdomain("training_wheels")
 result = {
    welcome = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Welcome",
+      descname = _("Welcome"),
       dependencies = {}
    },
    objectives = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Objectives",
+      descname = _("Objectives"),
       dependencies = { "welcome" }
    },
    -- TODO(GunChleoc): teach map movement before we start building
    building_spaces = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Building Spaces",
+      descname = _("Building Spaces"),
       dependencies = { "objectives" }
    },
    logs = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Logs & Roads",
+      descname = _("Logs & Roads"),
       dependencies = { "objectives" }
    },
    rocks = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Rocks",
+      descname = _("Rocks"),
       dependencies = { "objectives" }
    },
    flags = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Flags",
+      descname = _("Flags"),
       dependencies = { "logs", "rocks" }
    },
 }

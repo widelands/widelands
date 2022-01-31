@@ -112,20 +112,20 @@ run(function()
    -- Define our messages
    push_textdomain("training_wheels")
 
-   local size_description = _"Click on a small, medium or big building space, then select the building from the small buildings tab."
+   local size_description = _("Click on a small, medium or big building space, then select the building from the small buildings tab.")
    if log_producer.size == "medium" then
-      size_description = _"Click on a medium or big building space, then select the building from the medium buildings tab."
+      size_description = _("Click on a medium or big building space, then select the building from the medium buildings tab.")
    elseif log_producer.size == "big" then
-      size_description = _"Click on a big building space, then select the building from the big buildings tab."
+      size_description = _("Click on a big building space, then select the building from the big buildings tab.")
    end
 
-   local explain_control_key = join_sentences(_"If you hold down the ‘Ctrl’ key while clicking on the second flag, this will also place more flags on your road if possible.", _"Your carriers can transport your wares faster if they share the load.")
+   local explain_control_key = join_sentences(_("If you hold down the ‘Ctrl’ key while clicking on the second flag, this will also place more flags on your road if possible."), _("Your carriers can transport your wares faster if they share the load."))
 
    local msg_logs = {
-      title = _"Logs",
+      title = _("Logs"),
       position = "topright",
       body = (
-         p(_"You need to supply your tribe with logs. Please build the following building:") ..
+         p(_("You need to supply your tribe with logs. Please build the following building:")) ..
          li_object(log_producer.name, log_producer.descname, player.color) ..
          li_image("images/wui/overlays/" .. log_producer.size .. ".png", size_description)
       ),
@@ -135,10 +135,10 @@ run(function()
    }
 
    local msg_enter_roadbuilding = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_object(log_producer.name, "Click on the flag in front of the building to start placing a road.", player.color)
+         li_object(log_producer.name, _("Click on the flag in front of the building to start placing a road."), player.color)
       ),
       h = 120,
       w = 260,
@@ -146,10 +146,10 @@ run(function()
    }
 
    local msg_click_roadbutton = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button, then and click on the indicated flag.") ..
+         li_image("images/wui/fieldaction/menu_build_way.png", _("Click on the ‘Build road’ button, then and click on the indicated flag.")) ..
          li_arrow(explain_control_key)
       ),
       h = 240,
@@ -158,12 +158,12 @@ run(function()
    }
 
    local msg_click_road_endflag = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
+         li_object(log_producer.name, _("Click on the building’s button…"), player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(warehouse_immovable.descr.name, _"…then click on the flag in front of the target building.", player.color) ..
+         li_object(warehouse_immovable.descr.name, _("…then click on the flag in front of the target building."), player.color) ..
          li_arrow(explain_control_key)
       ),
       h = 380,
@@ -172,10 +172,10 @@ run(function()
    }
 
    local msg_finished = {
-      title = _"Logs",
+      title = _("Logs"),
       position = "topright",
       body = (
-         li_object(log_producer.name, _"Well done! We will soon start producing logs, which we will need for building more buildings.", player.color)
+         li_object(log_producer.name, _("Well done! We will soon start producing logs, which we will need for building more buildings."), player.color)
       ),
       h = 140,
       w = 260,

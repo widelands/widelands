@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=mine_granite",
             "call=mine_quartz",
@@ -59,7 +59,7 @@ descriptions:new_productionsite_type {
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
             "return=skipped unless economy needs granite",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
@@ -74,7 +74,7 @@ descriptions:new_productionsite_type {
       },
       mine_quartz = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-         descname = _"mining quartz",
+         descname = _("mining quartz"),
          actions = {
             "return=skipped unless economy needs quartz",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
@@ -89,7 +89,7 @@ descriptions:new_productionsite_type {
       },
       mine_diamond = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-         descname = _"mining diamonds",
+         descname = _("mining diamonds"),
          actions = {
             "return=skipped unless economy needs diamond",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
@@ -100,7 +100,7 @@ descriptions:new_productionsite_type {
          }
       },
       a_mine_produce_granite = {
-         descname = _"mining granite",
+         descname = _("mining granite"),
          actions = {
             "animate=working duration:15s",
             "mine=resource_stones radius:4 yield:100% when_empty:5%",
@@ -108,7 +108,7 @@ descriptions:new_productionsite_type {
          }
       },
       a_mine_produce_quartz = {
-         descname = _"mining quartz",
+         descname = _("mining quartz"),
          actions = {
             "animate=working duration:10s",
             "mine=resource_stones radius:4 yield:100% when_empty:5%",
@@ -116,7 +116,7 @@ descriptions:new_productionsite_type {
          }
       },
       a_mine_produce_diamond = {
-         descname = _"mining diamonds",
+         descname = _("mining diamonds"),
          actions = {
             "animate=working duration:25s",
             "mine=resource_stones radius:4 yield:100% when_empty:5%",
@@ -150,8 +150,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Crystals",
-      heading = _"Main Crystal Vein Exhausted",
+      title = _("No Crystals"),
+      heading = _("Main Crystal Vein Exhausted"),
       message =
          pgettext("atlanteans_building", "This crystal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },

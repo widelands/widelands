@@ -69,7 +69,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_4",
             "call=produce_2",
@@ -88,7 +88,7 @@ descriptions:new_productionsite_type {
       },
       produce_1 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
-         descname = _"forging a felling ax",
+         descname = _("forging a felling ax"),
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=log iron",
@@ -99,7 +99,7 @@ descriptions:new_productionsite_type {
       },
       produce_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-         descname = _"forging a pick",
+         descname = _("forging a pick"),
          actions = {
             "return=skipped unless economy needs pick",
             "consume=log iron",
@@ -110,7 +110,7 @@ descriptions:new_productionsite_type {
       },
       produce_3 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a scythe",
+         descname = _("making a scythe"),
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=log iron",
@@ -121,7 +121,7 @@ descriptions:new_productionsite_type {
       },
       produce_4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=log iron",
@@ -132,7 +132,7 @@ descriptions:new_productionsite_type {
       },
       produce_5 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making a basket",
+         descname = _("making a basket"),
          actions = {
             "return=skipped unless economy needs basket",
             "consume=reed log",
@@ -143,7 +143,7 @@ descriptions:new_productionsite_type {
       },
       produce_6 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making a hunting spear",
+         descname = _("making a hunting spear"),
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=log iron",
@@ -154,7 +154,7 @@ descriptions:new_productionsite_type {
       },
       produce_7 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _"making a fishing net",
+         descname = _("making a fishing net"),
          actions = {
             "return=skipped unless economy needs fishing_net",
             "consume=reed:2",
@@ -165,7 +165,7 @@ descriptions:new_productionsite_type {
       },
       produce_8 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making a bread paddle",
+         descname = _("making a bread paddle"),
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=log iron",
@@ -176,7 +176,7 @@ descriptions:new_productionsite_type {
       },
       produce_9 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making kitchen tools",
+         descname = _("making kitchen tools"),
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log iron",
@@ -187,7 +187,7 @@ descriptions:new_productionsite_type {
       },
       produce_10 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=log iron",
@@ -198,7 +198,7 @@ descriptions:new_productionsite_type {
       },
       produce_11 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-         descname = _"making fire tongs",
+         descname = _("making fire tongs"),
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron",
@@ -209,7 +209,7 @@ descriptions:new_productionsite_type {
       },
       produce_12 = {
          -- TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-         descname = _"making needles",
+         descname = _("making needles"),
          actions = {
             "return=skipped unless economy needs needles",
             "consume=iron",

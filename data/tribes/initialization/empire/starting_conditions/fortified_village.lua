@@ -8,9 +8,9 @@ push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _ "Fortified Village",
+   descname = _("Fortified Village"),
    -- TRANSLATORS: This is the tooltip for the "Fortified Village" starting condition
-   tooltip = _"Start the game with a fortified military installation",
+   tooltip = _("Start the game with a fortified military installation"),
    incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
 
    func =  function(plr, shared_in_start)

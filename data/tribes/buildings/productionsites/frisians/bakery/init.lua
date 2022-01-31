@@ -82,7 +82,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-         descname = _"baking bread",
+         descname = _("baking bread"),
          actions = {
             "return=skipped unless economy needs bread_frisians or workers need experience",
             "consume=water barley",
