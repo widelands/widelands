@@ -38,7 +38,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-         descname = _"breeding fish",
+         descname = _("breeding fish"),
          actions = {
             "callworker=breed",
             "sleep=duration:13s500ms"
@@ -48,13 +48,13 @@ descriptions:new_productionsite_type {
 
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fish",
-      heading = _"Out of Fish",
+      title = _("No Fish"),
+      heading = _("Out of Fish"),
       message = pgettext("atlanteans_building", "The fish breeder working out of this fish breeder’s house can’t find any water where he can breed fish in his work area. Remember that you can only regenerate your fish resources if there ever were some fish in the vicinity in the first place."),
       productivity_threshold = 60
    },
    -- Translators: Productivity tooltip for Atlantean fish breeders when all water fields are already full of fish
-   resource_not_needed_message = _"The fishing grounds are full";
+   resource_not_needed_message = _("The fishing grounds are full");
 }
 
 pop_textdomain()

@@ -56,7 +56,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_shovel",
             "call=produce_spear_wooden",
@@ -80,7 +80,7 @@ descriptions:new_productionsite_type {
       },
       produce_shovel = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because ...
-         descname = _"making a shovel",
+         descname = _("making a shovel"),
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=ironwood",
@@ -91,7 +91,7 @@ descriptions:new_productionsite_type {
       },
       produce_felling_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-         descname = _"making a felling ax",
+         descname = _("making a felling ax"),
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=log granite",
@@ -102,7 +102,7 @@ descriptions:new_productionsite_type {
       },
       produce_pick = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-         descname = _"making a pick",
+         descname = _("making a pick"),
          actions = {
             "return=skipped unless economy needs pick",
             "consume=log granite",
@@ -113,7 +113,7 @@ descriptions:new_productionsite_type {
       },
       produce_machete = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"making a machete",
+         descname = _("making a machete"),
          actions = {
             "return=skipped unless economy needs machete",
             "consume=log granite",
@@ -124,7 +124,7 @@ descriptions:new_productionsite_type {
       },
       produce_kitchen_tools = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making kitchen tools",
+         descname = _("making kitchen tools"),
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log granite",
@@ -135,7 +135,7 @@ descriptions:new_productionsite_type {
       },
       produce_hammer = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
-         descname = _"making a hammer",
+         descname = _("making a hammer"),
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=log granite",
@@ -146,7 +146,7 @@ descriptions:new_productionsite_type {
       },
       produce_chisel = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _"making a chisel",
+         descname = _("making a chisel"),
          actions = {
             "return=skipped unless economy needs chisel",
             "consume=granite",
@@ -157,7 +157,7 @@ descriptions:new_productionsite_type {
       },
       produce_needles = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because ...
-         descname = _"making needles",
+         descname = _("making needles"),
          actions = {
             "return=skipped unless economy needs needles",
             "consume=granite",
@@ -168,7 +168,7 @@ descriptions:new_productionsite_type {
       },
       produce_stone_bowl = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a stone bowl",
+         descname = _("making a stone bowl"),
          actions = {
             "return=skipped unless economy needs stone_bowl",
             "consume=granite",
@@ -179,7 +179,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_wooden = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a wooden spear",
+         descname = _("making a wooden spear"),
          actions = {
             "return=skipped unless economy needs spear_wooden",
             "consume=ironwood",
@@ -190,7 +190,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_stone_tipped = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a stone-tipped spear",
+         descname = _("making a stone-tipped spear"),
          actions = {
             "return=skipped unless economy needs spear_stone_tipped",
             "consume=ironwood granite",
@@ -201,7 +201,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_hardened = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a hardened spear",
+         descname = _("making a hardened spear"),
          actions = {
             "return=skipped unless economy needs spear_hardened",
             "consume=ironwood log granite",

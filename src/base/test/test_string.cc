@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -159,6 +158,10 @@ TESTCASE(string_formatting) {
 	check_equal("A123      X", format("A%-9.0fX", 123.456));
 	check_equal("A+123.5   X", format("A%+-9.1fX", 123.456));
 	check_equal("A+00123.46X", format("A%0+9.2fX", 123.456));
+	check_equal("A1.0X", format("A%1%X", 1.0));
+	check_equal("A1.0X", format("A%1%X", 1.0000002));
+	check_equal("A1.0X", format("A%1%X", 0.9999995));
+	check_equal("A1.23X", format("A%1%X", 1.23));
 
 	format_impl::ArgsPair p1, p2;
 	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;

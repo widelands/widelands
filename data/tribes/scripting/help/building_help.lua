@@ -239,7 +239,7 @@ function dependencies_training_food(foods)
       end
       local text = localize_list(food_warenames, "or")
       if (countlist > 1) then
-         text = _"%s and":bformat(text)
+         text = _("%s and"):bformat(text)
       end
       local images = img(food_images[1])
       for k,v in ipairs({table.unpack(food_images,2)}) do
@@ -253,7 +253,7 @@ function dependencies_training_food(foods)
          .. result
    end
    if (result ~= "") then
-      result = h3(_"Food:") .. result
+      result = h3(_("Food:")) .. result
    end
    return result
 end
@@ -304,7 +304,7 @@ function dependencies_training_weapons(weapons, tribename)
          )
    end
    if (result ~= "") then
-      result = h3(_"Equipment:") .. result
+      result = h3(_("Equipment:")) .. result
    end
    return result
 end
@@ -328,12 +328,12 @@ end
 function building_help_general_string(tribe, building_description)
    local helptexts = building_description:helptexts(tribe.name)
    -- TRANSLATORS: Lore helptext for a building - it hasn't been written yet.
-   local lore_text = _"Text needed"
+   local lore_text = _("Text needed")
    if helptexts["lore"] ~= nil then
       lore_text = helptexts["lore"]
    end
    -- TRANSLATORS: Heading for a flavour text in the building help.
-   local result = h2(_"Lore") ..
+   local result = h2(_("Lore")) ..
       li_object(building_description.name, lore_text)
 
    local lore_author = ""
@@ -342,8 +342,8 @@ function building_help_general_string(tribe, building_description)
    end
    result = result .. div("width=100%", p_font("align=right", "size=10 italic=1", lore_author .. vspace(3)))
 
-   result = result .. h2(_"General")
-   result = result .. h3(_"Purpose:")
+   result = result .. h2(_("General"))
+   result = result .. h3(_("Purpose:"))
 
    local representative_resource = nil
    if (building_description.type_name == "productionsite") then
@@ -404,7 +404,7 @@ function building_help_general_string(tribe, building_description)
          end
       end
    else
-      result = result .. p(_"Text needed")
+      result = result .. p(_("Text needed"))
    end
 
    local note = ""
@@ -435,28 +435,28 @@ function building_help_general_string(tribe, building_description)
       note = note .. p(helptexts["note"])
    end
    if note ~= "" then
-      result = result .. h3(_"Note:") .. note
+      result = result .. h3(_("Note:")) .. note
    end
 
    if(building_description.type_name == "productionsite") then
       if(building_description.workarea_radius and building_description.workarea_radius > 0) then
-         result = result .. inline_header(_"Work area radius:", building_description.workarea_radius)
+         result = result .. inline_header(_("Work area radius:"), building_description.workarea_radius)
       end
 
    elseif(building_description.type_name == "warehouse") then
-      result = result .. inline_header(_"Healing:",
+      result = result .. inline_header(_("Healing:"),
          ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
-      result = result .. inline_header(_"Conquer range:", building_description.conquers)
+      result = result .. inline_header(_("Conquer range:"), building_description.conquers)
 
    elseif(building_description.type_name == "militarysite") then
-      result = result .. h3(_"Healing:")
+      result = result .. h3(_("Healing:"))
          .. p(ngettext("Garrisoned soldiers heal %d health point per second.", "Garrisoned soldiers heal %d health points per second.", building_description.heal_per_second):bformat(building_description.heal_per_second))
-      result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
-      result = result .. inline_header(_"Conquer range:", building_description.conquers)
-      result = result .. inline_header(_"Vision range:", building_description.vision_range)
+      result = result .. inline_header(_("Capacity:"), building_description.max_number_of_soldiers)
+      result = result .. inline_header(_("Conquer range:"), building_description.conquers)
+      result = result .. inline_header(_("Vision range:"), building_description.vision_range)
 
    elseif(building_description.type_name == "trainingsite") then
-      result = result .. inline_header(_"Capacity:", building_description.max_number_of_soldiers)
+      result = result .. inline_header(_("Capacity:"), building_description.max_number_of_soldiers)
    end
    return result
 end
@@ -483,13 +483,13 @@ function building_help_dependencies_production(tribe, building_description)
       for j, producer in ipairs(ware_description:producers(tribe.name)) do
          inputs = inputs .. dependencies(
             {producer, ware_description},
-            _"%1$s from: %2$s":bformat(ware_description.descname, producer.descname)
+            _("%1$s from: %2$s"):bformat(ware_description.descname, producer.descname)
          )
       end
    end
    if (hasinput) then
       -- TRANSLATORS: Heading in the building help for wares that a building accepts (e.g. wheat for a mill).
-      result = h3(_"Incoming:") .. inputs
+      result = h3(_("Incoming:")) .. inputs
    end
 
    -- Collected items
@@ -498,9 +498,9 @@ function building_help_dependencies_production(tribe, building_description)
       #building_description.collected_bobs > 0 then
       if (building_description.is_mine) then
          -- TRANSLATORS: This is a verb (The miner mines)
-         result = result .. h3(_"Mines:")
+         result = result .. h3(_("Mines:"))
       else
-         result = result .. h3(_"Collects:")
+         result = result .. h3(_("Collects:"))
       end
       result = result .. dependencies_collects(tribe, building_description)
    end
@@ -509,7 +509,7 @@ function building_help_dependencies_production(tribe, building_description)
    if #building_description.created_immovables > 0 or
       #building_description.created_resources > 0 or
       #building_description.created_bobs > 0 then
-      result = result .. h3(_"Creates:") .. dependencies_creates(tribe, building_description)
+      result = result .. h3(_("Creates:")) .. dependencies_creates(tribe, building_description)
    end
 
    local outgoing = ""
@@ -550,9 +550,9 @@ function building_help_dependencies_production(tribe, building_description)
          end
       end
    end
-   if (outgoing ~= "") then result = result .. h3(_"Outgoing:") .. outgoing end
-   if (result == "") then result = p(_"None") end
-   return h2(_"Dependencies") .. result
+   if (outgoing ~= "") then result = result .. h3(_("Outgoing:")) .. outgoing end
+   if (result == "") then result = p(_("None")) end
+   return h2(_("Dependencies")) .. result
 end
 
 -- RST
@@ -568,10 +568,10 @@ end
 function building_help_dependencies_training(tribe, building_description)
    local result = ""
    if (building_description.max_health and building_description.min_health) then
-      result = result .. h2(_"Health Training")
-      result = result .. p(_"Trains ‘Health’ from %1% up to %2%":
+      result = result .. h2(_("Health Training"))
+      result = result .. p(_("Trains ‘Health’ from %1% up to %2%"):
             bformat(building_description.min_health, building_description.max_health+1))
-      result = result .. h3(_"Soldiers:")
+      result = result .. h3(_("Soldiers:"))
       result = result ..
          dependencies_basic({
             "tribes/workers/" .. tribe.name .. "/soldier/health_level" .. building_description.min_health .. ".png",
@@ -581,11 +581,11 @@ function building_help_dependencies_training(tribe, building_description)
       result = result .. dependencies_training_weapons(building_description.weapons_health, tribe.name)
    end
    if (building_description.max_attack and building_description.min_attack) then
-      result = result .. h2(_"Attack Training")
+      result = result .. h2(_("Attack Training"))
       -- TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are numbers.
-      result = result .. p(_"Trains ‘Attack’ from %1% up to %2%":
+      result = result .. p(_("Trains ‘Attack’ from %1% up to %2%"):
          bformat(building_description.min_attack, building_description.max_attack+1))
-      result = result .. h3(_"Soldiers:") ..
+      result = result .. h3(_("Soldiers:")) ..
          dependencies_basic({
             "tribes/workers/" .. tribe.name .. "/soldier/attack_level" .. building_description.min_attack .. ".png",
             building_description.icon_name,
@@ -594,10 +594,10 @@ function building_help_dependencies_training(tribe, building_description)
       result = result .. dependencies_training_weapons(building_description.weapons_attack, tribe.name)
    end
    if (building_description.max_defense and building_description.min_defense) then
-      result = result .. h2(_"Defense Training")
-      result = result .. p( _"Trains ‘Defense’ from %1% up to %2%":
+      result = result .. h2(_("Defense Training"))
+      result = result .. p( _("Trains ‘Defense’ from %1% up to %2%"):
             bformat(building_description.min_defense, building_description.max_defense+1))
-            result = result .. h3(_"Soldiers:")
+            result = result .. h3(_("Soldiers:"))
       result = result ..
          dependencies_basic({
             "tribes/workers/" .. tribe.name .. "/soldier/defense_level" .. building_description.min_defense .. ".png",
@@ -607,10 +607,10 @@ function building_help_dependencies_training(tribe, building_description)
       result = result .. dependencies_training_weapons(building_description.weapons_defense, tribe.name)
    end
    if (building_description.max_evade and building_description.min_evade) then
-      result = result .. h2(_"Evade Training")
-      result = result .. p( _"Trains ‘Evade’ from %1% up to %2%":
+      result = result .. h2(_("Evade Training"))
+      result = result .. p( _("Trains ‘Evade’ from %1% up to %2%"):
             bformat(building_description.min_evade, building_description.max_evade+1))
-      result = result .. h3(_"Soldiers:")
+      result = result .. h3(_("Soldiers:"))
       result = result ..
          dependencies_basic({
             "tribes/workers/" .. tribe.name .. "/soldier/evade_level" .. building_description.min_evade .. ".png",
@@ -635,7 +635,7 @@ end
 --
 function building_help_building_section(building_description)
    -- TRANSLATORS: This is the header for the "Building" section in the building help, containing size info, buildcost etc.
-   local result = h2(_"Building requirements")
+   local result = h2(_("Building requirements"))
 
    -- Space required
    if (building_description.is_mine) then
@@ -650,16 +650,16 @@ function building_help_building_section(building_description)
    if (building_description.buildable or building_description.enhanced) then
 
       if (building_description.buildable and building_description.enhanced) then
-         result = result .. inline_header(_"Note:",
-            _"This building can either be built directly or obtained by enhancing another building.")
+         result = result .. inline_header(_("Note:"),
+            _("This building can either be built directly or obtained by enhancing another building."))
       end
 
       if (building_description.buildable) then
          -- Build cost
          if (building_description.buildable and building_description.enhanced) then
-            result = result .. h3(_"Direct build cost:")
+            result = result .. h3(_("Direct build cost:"))
          else
-            result = result .. h3(_"Build cost:")
+            result = result .. h3(_("Build cost:"))
          end
          for ware, amount in pairs(building_description.buildcost) do
             local ware_description = wl.Game():get_ware_description(ware)
@@ -670,9 +670,9 @@ function building_help_building_section(building_description)
       if (building_description.enhanced) then
          former_building = building_description.enhanced_from
             if (building_description.buildable) then
-               result = result .. inline_header(_"Or enhanced from:", former_building.descname)
+               result = result .. inline_header(_("Or enhanced from:"), former_building.descname)
             else
-               result = result .. inline_header(_"Enhanced from:", former_building.descname)
+               result = result .. inline_header(_("Enhanced from:"), former_building.descname)
             end
 
          for ware, amount in pairs(building_description.enhancement_cost) do
@@ -681,7 +681,7 @@ function building_help_building_section(building_description)
          end
 
          -- Cumulative cost
-         result = result .. h3(_"Cumulative cost:")
+         result = result .. h3(_("Cumulative cost:"))
          local warescost = {}
          for ware, amount in pairs(building_description.enhancement_cost) do
             if (warescost[ware]) then
@@ -726,20 +726,20 @@ function building_help_building_section(building_description)
                result = result .. help_ware_amount_line(ware_description, amount)
             end
          else
-            result = result .. p(_"Unknown")
+            result = result .. p(_("Unknown"))
          end
 
          -- Dismantle yields
          if (building_description.buildable) then
-            result = result .. h3(_"If built directly, dismantle yields:")
+            result = result .. h3(_("If built directly, dismantle yields:"))
             for ware, amount in pairs(building_description.returns_on_dismantle) do
                local ware_description = wl.Game():get_ware_description(ware)
                result = result .. help_ware_amount_line(ware_description, amount)
             end
-            result = result .. h3(_"If enhanced, dismantle yields:")
+            result = result .. h3(_("If enhanced, dismantle yields:"))
          else
             -- TRANSLATORS: This is a heading for the resources that you will get back when you dismantle a building of this type. What dismantling will give you.
-            result = result .. h3(_"Dismantle yields:")
+            result = result .. h3(_("Dismantle yields:"))
          end
          local warescost = {}
          for ware, amount in pairs(building_description.enhancement_returns_on_dismantle) do
@@ -775,12 +775,12 @@ function building_help_building_section(building_description)
                result = result .. help_ware_amount_line(ware_description, amount)
             end
          else
-            result = result .. p(_"Unknown")
+            result = result .. p(_("Unknown"))
          end
       -- Buildable
       else
          -- Dismantle yields
-         result = result .. h3(_"Dismantle yields:")
+         result = result .. h3(_("Dismantle yields:"))
          for ware, amount in pairs(building_description.returns_on_dismantle) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
@@ -789,7 +789,7 @@ function building_help_building_section(building_description)
 
       -- Can be enhanced to
       if (building_description.enhancement) then
-         result = result .. inline_header(_"Can be enhanced to:", building_description.enhancement.descname)
+         result = result .. inline_header(_("Can be enhanced to:"), building_description.enhancement.descname)
          for ware, amount in pairs(building_description.enhancement.enhancement_cost) do
             local ware_description = wl.Game():get_ware_description(ware)
             result = result .. help_ware_amount_line(ware_description, amount)
@@ -819,7 +819,7 @@ function building_help_crew_section(tribe, building_description)
 
    if(building_description.type_name == "productionsite" or building_description.type_name == "trainingsite") then
 
-      result = result .. h2(_"Workers") .. h3(_"Crew required:")
+      result = result .. h2(_("Workers")) .. h3(_("Crew required:"))
 
       local worker_description = building_description.working_positions[1]
       local becomes_description = nil
@@ -841,7 +841,7 @@ function building_help_crew_section(tribe, building_description)
          if(becomes_description) then
             result = result .. image_line(worker_description.icon_name, 1,
                -- TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-               p(_"%s or better":bformat(worker_description.descname)))
+               p(_("%s or better"):bformat(worker_description.descname)))
          else
             result = result .. image_line(worker_description.icon_name, 1,
                p(worker_description.descname))
@@ -853,10 +853,10 @@ function building_help_crew_section(tribe, building_description)
          if (tool_string ~= "") then
             if (number_of_workers == 1) then
                -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
-               result = result .. h3(_"Worker uses:")
+               result = result .. h3(_("Worker uses:"))
             else
                -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker uses
-               result = result .. h3(_"Workers use:")
+               result = result .. h3(_("Workers use:"))
             end
             result = result .. tool_string
          end
@@ -866,7 +866,7 @@ function building_help_crew_section(tribe, building_description)
       becomes_description = worker_description.becomes
 
       if (becomes_description) then
-         result = result .. h3(_"Experience levels")
+         result = result .. h3(_("Experience levels"))
          result = result .. help_worker_experience(worker_description, becomes_description)
       end
    end
@@ -888,14 +888,14 @@ end
 --
 function building_help_production_section(tribe, building_description)
    -- Produced items
-   local result = h2(_"Production")
+   local result = h2(_("Production"))
    if (building_description.output_ware_types[1] or building_description.output_worker_types[1]) then
       local checked_programs ={}
       for i, ware_description in ipairs(building_description.output_ware_types) do
          programs, ware_counters, ware_strings = programs_wares_count(tribe, building_description, ware_description)
          -- check if the ware is collected (no producing program)
          if #programs == 0 then
-            result = result .. h3(_"Ware produced:")
+            result = result .. h3(_("Ware produced:"))
             result = result .. help_ware_amount_line(ware_description, 1)
             break
          end
@@ -903,10 +903,10 @@ function building_help_production_section(tribe, building_description)
             if (ware_counters[program] > 0) and not checked_programs[program] then
                if (ware_counters[program] == 1) then
                   -- TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
-                  result = result .. h3(_"Ware produced:")
+                  result = result .. h3(_("Ware produced:"))
                else
                   -- TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a productionsite
-                  result = result .. h3(_"Wares produced:")
+                  result = result .. h3(_("Wares produced:"))
                end
                result = result .. ware_strings[program]
                result = result .. help_consumed_wares_workers(tribe, building_description, program)
@@ -919,7 +919,7 @@ function building_help_production_section(tribe, building_description)
          for j, program in ipairs(programs) do
             if (worker_counters[program] > 0) and not checked_programs[program] then
                -- TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a productionsite
-               result = result .. h3(_"Workers recruited:")
+               result = result .. h3(_("Workers recruited:"))
                result = result .. worker_strings[program]
                result = result .. help_consumed_wares_workers(tribe, building_description, program)
             end
@@ -929,11 +929,11 @@ function building_help_production_section(tribe, building_description)
    end
    local helptexts = building_description:helptexts(tribe.name)
    -- TRANSLATORS: Performance helptext for a building - it hasn't been written yet.
-   local performance = _"Calculation needed"
+   local performance = _("Calculation needed")
    if (helptexts["performance"] ~= nil) then
       performance = helptexts["performance"]
    end
-   result = result .. inline_header(_"Performance:", performance)
+   result = result .. inline_header(_("Performance:"), performance)
    return result
 end
 

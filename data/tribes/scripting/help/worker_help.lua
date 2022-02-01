@@ -37,7 +37,7 @@ function worker_help_producers_string(tribe, worker_description)
 
          if (recruits_this) then
             -- TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-            result = result .. h2(_"Producer")
+            result = result .. h2(_("Producer"))
             result = result .. dependencies({building, worker_description}, building.descname)
 
             -- -- Find out which programs in the building recruit this worker if any
@@ -50,10 +50,10 @@ function worker_help_producers_string(tribe, worker_description)
                if (recruited_workers_counters[program_name] > 0) then
                   if (recruited_workers_counters[program_name] == 1) then
                      -- TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
-                     result = result .. h3(_"Worker recruited:")
+                     result = result .. h3(_("Worker recruited:"))
                   else
                      -- TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a productionsite
-                     result = result .. h3(_"Workers recruited:")
+                     result = result .. h3(_("Workers recruited:"))
                   end
                   result = result .. recruited_workers_strings[program_name]
                end
@@ -134,7 +134,7 @@ function worker_help_string(tribe, worker_description)
    local helptexts = worker_description:helptexts(tribe.name)
    local result = ""
    if helptexts["purpose"] ~= nil then
-      result = h2(_"Purpose") ..
+      result = h2(_("Purpose")) ..
          li_image(worker_description.icon_name, helptexts["purpose"])
    else
       result = img(worker_description.icon_name)
@@ -152,7 +152,7 @@ function worker_help_string(tribe, worker_description)
       if (#toolnames > 0) then
          local tool_string = help_tool_string(tribe, toolnames, 1)
          -- TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
-         result = result .. h2(_"Worker uses") .. tool_string
+         result = result .. h2(_("Worker uses")) .. tool_string
       end
    else
       result = result .. worker_help_producers_string(tribe, worker_description)
@@ -163,19 +163,19 @@ function worker_help_string(tribe, worker_description)
    -- TODO(GunChleoc): Add "enhanced from" info in one_tribe branch
    local becomes_description = worker_description.becomes
    if (becomes_description) then
-      result = result .. h2(_"Experience levels")
+      result = result .. h2(_("Experience levels"))
       result = result .. help_worker_experience(worker_description, becomes_description)
    end
    -- Soldier properties
    if (worker_description.type_name == "soldier") then
       -- TRANSLATORS: Soldier levels
-      result = result .. h2(_"Levels")
+      result = result .. h2(_("Levels"))
 
-      result = result .. h3(_"Health")
+      result = result .. h3(_("Health"))
       result = result ..
          li(
             -- TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-            (_"Starts at %1% points."):bformat(worker_description.base_health)) ..
+            (_("Starts at %1% points.")):bformat(worker_description.base_health)) ..
          li(
             -- TRANSLATORS: Soldier health / attack defense / evade points
             ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.health_incr_per_level):bformat(worker_description.health_incr_per_level)) ..
@@ -183,38 +183,38 @@ function worker_help_string(tribe, worker_description)
             -- TRANSLATORS: Soldier health / attack defense / evade level
             ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_health_level):bformat(worker_description.max_health_level))
 
-      result = result .. h3(_"Attack")
+      result = result .. h3(_("Attack"))
       result = result ..
       -- TRANSLATORS: Points are 4 digit numbers.
-         li(_"A random value between %1% and %2% points is added to each attack."):bformat(worker_description.base_min_attack, worker_description.base_max_attack) ..
+         li(_("A random value between %1% and %2% points is added to each attack.")):bformat(worker_description.base_min_attack, worker_description.base_max_attack) ..
 
          li(
             ngettext("Increased by %1% point for each level.", "Increased by %1% points for each level.", worker_description.attack_incr_per_level):bformat(worker_description.attack_incr_per_level)) ..
          li(
             ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_attack_level):bformat(worker_description.max_attack_level))
 
-      result = result .. h3(_"Defense")
+      result = result .. h3(_("Defense"))
       if (worker_description.max_defense_level > 0) then
          result = result ..
             li(
-               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
+               (_("Starts at %d%%.")):bformat(worker_description.base_defense)) ..
             li(
-               (_"Increased by %d%% for each level."):bformat(worker_description.defense_incr_per_level)) ..
+               (_("Increased by %d%% for each level.")):bformat(worker_description.defense_incr_per_level)) ..
             li(
                ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_defense_level):bformat(worker_description.max_defense_level))
       else
          result = result ..
             li(
-               (_"Starts at %d%%."):bformat(worker_description.base_defense)) ..
-            li(_"This soldier cannot be trained in defense.")
+               (_("Starts at %d%%.")):bformat(worker_description.base_defense)) ..
+            li(_("This soldier cannot be trained in defense."))
       end
 
-      result = result .. h3(_"Evade")
+      result = result .. h3(_("Evade"))
       result = result ..
          li(
-            (_"Starts at %d%%."):bformat(worker_description.base_evade)) ..
+            (_("Starts at %d%%.")):bformat(worker_description.base_evade)) ..
          li(
-            (_"Increased by %d%% for each level."):bformat(worker_description.evade_incr_per_level)) ..
+            (_("Increased by %d%% for each level.")):bformat(worker_description.evade_incr_per_level)) ..
          li(
             ngettext("The maximum level is %1%.", "The maximum level is %1%.", worker_description.max_evade_level):bformat(worker_description.max_evade_level))
    end

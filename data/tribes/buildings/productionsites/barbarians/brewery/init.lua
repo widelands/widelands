@@ -35,7 +35,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing strong beer because ...
-         descname = _"brewing strong beer",
+         descname = _("brewing strong beer"),
          actions = {
             "return=skipped unless economy needs beer_strong",
             "consume=water wheat",

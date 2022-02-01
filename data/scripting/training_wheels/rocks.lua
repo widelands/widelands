@@ -112,23 +112,23 @@ run(function()
    -- Define our messages
    push_textdomain("training_wheels")
 
-   local size_description = _"Click on a small, medium or big building space, then select the building from the small buildings tab."
+   local size_description = _("Click on a small, medium or big building space, then select the building from the small buildings tab.")
    if quarry.size == "medium" then
-      size_description = _"Click on a medium or big building space, then select the building from the medium buildings tab."
+      size_description = _("Click on a medium or big building space, then select the building from the medium buildings tab.")
    elseif quarry.size == "big" then
-      size_description = _"Click on a big building space, then select the building from the big buildings tab."
+      size_description = _("Click on a big building space, then select the building from the big buildings tab.")
    end
 
-   local road_steepness_description = p(_"While you do that, check the markers to make the road as flat as possible:") ..
-      li_image("images/wui/overlays/road_building_green.png", _"The terrain is flat here. Your carriers will be very swift on this terrain.") ..
-      li_image("images/wui/overlays/road_building_yellow.png", _"There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.") ..
-      li_image("images/wui/overlays/road_building_red.png", _"The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.")
+   local road_steepness_description = p(_("While you do that, check the markers to make the road as flat as possible:")) ..
+      li_image("images/wui/overlays/road_building_green.png", _("The terrain is flat here. Your carriers will be very swift on this terrain.")) ..
+      li_image("images/wui/overlays/road_building_yellow.png", _("There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.")) ..
+      li_image("images/wui/overlays/road_building_red.png", _("The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial."))
 
    local msg_granite = {
-      title = _"Granite",
+      title = _("Granite"),
       position = "topright",
       body = (
-         p(_"You need to supply your tribe with granite. Please build the following building:") ..
+         p(_("You need to supply your tribe with granite. Please build the following building:")) ..
          li_object(quarry.name, quarry.descname, player.color) ..
          li_image("images/wui/overlays/" .. quarry.size .. ".png", size_description)
       ),
@@ -138,10 +138,10 @@ run(function()
    }
 
    local msg_enter_roadbuilding = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_object(quarry.name, "Click on the flag in front of the building to start placing a road.", player.color)
+         li_object(quarry.name, _("Click on the flag in front of the building to start placing a road."), player.color)
       ),
       h = 120,
       w = 260,
@@ -149,10 +149,10 @@ run(function()
    }
 
    local msg_click_roadbutton = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
+         li_image("images/wui/fieldaction/menu_build_way.png", _("Click on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.")) .. road_steepness_description
       ),
       h = 380,
       w = 260,
@@ -160,12 +160,12 @@ run(function()
    }
 
    local msg_click_road_endflag = {
-      title = _"Roads",
+      title = _("Roads"),
       position = "topright",
       body = (
-         li_object(quarry.name, _"Click on the building’s button…", player.color) ..
+         li_object(quarry.name, _("Click on the building’s button…"), player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(warehouse_immovable.descr.name, _"…then click the colored markers on the map to guide your road until you reach the flag in front of the target building.", player.color) .. road_steepness_description
+         li_object(warehouse_immovable.descr.name, _("…then click the colored markers on the map to guide your road until you reach the flag in front of the target building."), player.color) .. road_steepness_description
       ),
       h = 480,
       w = 260,
@@ -173,10 +173,10 @@ run(function()
    }
 
    local msg_finished = {
-      title = _"Granite",
+      title = _("Granite"),
       position = "topright",
       body = (
-         li_object(quarry.name, _"Well done! We will soon start producing granite, which we will need for building more buildings.", player.color)
+         li_object(quarry.name, _("Well done! We will soon start producing granite, which we will need for building more buildings."), player.color)
       ),
       h = 140,
       w = 260,

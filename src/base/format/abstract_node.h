@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -40,6 +39,9 @@ static const size_t kDigitWidthSpaceLength = strlen(kDigitWidthSpace);
 constexpr int64_t kMaxInt = std::numeric_limits<int64_t>::max();
 constexpr unsigned kInfinitePrecision = std::numeric_limits<unsigned>::max();
 constexpr unsigned kDefaultFloatPrecision = 6;
+
+// Don't use localized + sign for 0.0 if at least the next two digits would also be 0.
+constexpr double kDynamicPrecisionExtra = 0.005;
 
 struct AbstractNode {
 	virtual ~AbstractNode() {

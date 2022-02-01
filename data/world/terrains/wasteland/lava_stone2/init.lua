@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "lava-stone2",
-   descname = _ "Lava Rocks 2",
+   descname = _("Lava Rocks 2"),
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

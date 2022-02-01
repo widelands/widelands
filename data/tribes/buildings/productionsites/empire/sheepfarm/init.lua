@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-         descname = _"breeding sheep",
+         descname = _("breeding sheep"),
          actions = {
             "return=skipped unless economy needs wool",
             "consume=water wheat",
