@@ -1842,18 +1842,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.rangers_nearby = 0;
 	field.space_consumers_nearby = 0;
 	field.supporters_nearby.clear();
-	field.unconnected_nearby = false;
+	field.average_flag_dist_to_wh = 0;
 
 	// collect information about productionsites nearby
-	// We are interested in unconnected immovables, but we must be also close to connected ones
-	static bool any_imm_connected_to_wh = false;
-	any_imm_connected_to_wh = false;
+	// We are interested in unconnected immovables
 	static bool any_imm_not_connected_to_wh = false;
 	any_imm_not_connected_to_wh = false;
 
 	// immovables can occupy more then one field so we need a safeguard for duplicates
 	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
+
+	uint32_t flags_count = 0;
 
 	// The code presumes that the second value is bigger - to be eligible for hollow area
 	assert(kProductionArea + 2 <= actual_enemy_check_area);  // to handle this better
@@ -1866,6 +1866,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (imm == nullptr) {
 			continue;
+		}
+
+		if (imm->descr().type() == Widelands::MapObjectType::FLAG) {
+			if (upcast(Widelands::Flag, flag, imm)) {
+				if (flag->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+					field.average_flag_dist_to_wh += kWhNotReachable;
+					flags_count++;
+				} else {
+					field.average_flag_dist_to_wh += flag_warehouse_distance.get_wh_distance(
+					   first_area.location().hash(), gametime, nullptr);
+					flags_count++;
+				}
+			}
 		}
 
 		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
@@ -1881,7 +1894,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (field_owner == pn) {
 			consider_own_psites(first_area.location(), field);
 			consider_own_msites(
-			   first_area.location(), field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
+			   first_area.location(), field, any_imm_not_connected_to_wh);
 			continue;
 		} else if (player_statistics.get_is_enemy(field_owner)) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
@@ -1896,6 +1909,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		NEVER_HERE();
 
 	} while (first_area.advance(map));
+
+	if (field.average_flag_dist_to_wh == 0) {
+		field.average_flag_dist_to_wh = kWhNotReachable;
+		flags_count = 1;
+	} else {
+		field.average_flag_dist_to_wh /= flags_count;
+	}
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
@@ -1931,16 +1951,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 		assert(field_owner == pn);  // It is us
 
-		consider_own_msites(location, field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
+		consider_own_msites(location, field, any_imm_not_connected_to_wh);
 
 	} while (second_area.advance(map));
 
 	assert(field.military_loneliness <= 1000);
-
-	if (any_imm_not_connected_to_wh && any_imm_connected_to_wh &&
-	    field.military_in_constr_nearby == 0) {
-		field.unconnected_nearby = true;  // todo(Tibor) - to use it in gen. algorithm
-	}
 
 	// if there is a militarysite on the field, we try to walk to enemy
 	field.enemy_accessible_ = false;
@@ -2061,11 +2076,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
 
 		score_parts[30] =
-		   -10 * management_data.neuron_pool[8].get_result_safe(
+		   -20 * management_data.neuron_pool[8].get_result_safe(
 		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
-		score_parts[31] =
-		   -10 * management_data.neuron_pool[31].get_result_safe(
-		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		// score_parts[31] =
+		//    -10 * management_data.neuron_pool[31].get_result_safe(
+		//             3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[32] = -4 * field.military_in_constr_nearby *
 		                  std::abs(management_data.get_military_number_at(82));
 		score_parts[33] = (field.military_in_constr_nearby > 0) ?
@@ -2159,6 +2174,34 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	for (int32_t part : score_parts) {
 		field.military_score_ += part;
 	}
+
+	// Using F-neurons to slightly modify calculated score
+	FNeuron* this_fneuron1 = &management_data.f_neuron_pool[1];
+	FNeuron* this_fneuron2 = &management_data.f_neuron_pool[2];
+	FNeuron* this_fneuron3 = &management_data.f_neuron_pool[3];
+
+	const bool res1 = this_fneuron1->get_result(
+	   field.unowned_buildable_spots_nearby > 5,
+	   field.average_flag_dist_to_wh<20, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
+	   field.enemy_owned_land_nearby > 0);
+
+	const bool res2 = this_fneuron2->get_result(
+	   field.military_in_constr_nearby > 0,
+	   field.average_flag_dist_to_wh<100, any_imm_not_connected_to_wh, flags_count> 5,
+	   field.enemy_owned_land_nearby > 10);
+
+	const bool res3 = this_fneuron3->get_result(
+	   field.unowned_land_nearby > 5,
+	   field.average_flag_dist_to_wh<200, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
+	   field.enemy_owned_land_nearby > 0);
+
+	const int32_t ai_bonus = res1 ? 15 : -15 + res2 ? 15 : -15 + res3 ? 15 : -15; // NOCOM remove this
+
+	field.military_score_ += ai_bonus;
+
+
+
+
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
@@ -2842,6 +2885,14 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		assert(player_);
 		int32_t const maxsize = player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
 
+		// Some buildings needs to consider distance from nearest warehouse
+		// It is non-negative value, and should be deducted from prio for some productionsites
+		const int32_t wh_distance_malus = management_data.neuron_pool[31].get_result_safe(
+		                               bf->average_flag_dist_to_wh / 2, kAbsValue) +
+		                            management_data.neuron_pool[42].get_result_safe(
+		                               bf->average_flag_dist_to_wh / 25, kAbsValue);
+		//printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus, bf->average_flag_dist_to_wh);
+
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
 			if (!bo.buildable(*player_)) {
@@ -2925,6 +2976,17 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				auto same_it = bf->buildings_nearby.find(bo.id);
 				if (same_it != bf->buildings_nearby.end()) {
 					number_of_same_nearby += same_it->second;
+				}
+
+				// Considering distance to a warehouse NOCOM
+				if (!bo.requires_supporters && !bo.inputs.empty()) {
+					prio -= wh_distance_malus;
+
+				}
+				// some "independent" space consumers can be pushed to bigger distance from wh
+				if (bo.is(BuildingAttribute::kSpaceConsumer) && bo.inputs.empty() &&
+				    bo.is(BuildingAttribute::kSpaceConsumer)) {
+					prio += wh_distance_malus;  // push them farer from nearest wh
 				}
 
 				// this can be only a well (as by now)
@@ -3065,6 +3127,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						prio -= bf->water_nearby / 5;
+
+						prio += wh_distance_malus; // place farer from nearest WH
 
 						prio += management_data.neuron_pool[67].get_result_safe(
 						           number_of_supported_producers_nearby * 5, kAbsValue) /
@@ -3399,24 +3463,31 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				if (bf->is_portspace != ExtendedBool::kTrue && bo.is(BuildingAttribute::kPort)) {
 					continue;
 				}
-				prio += bo.primary_priority;
 
-				// iterating over current warehouses and testing a distance
-				// getting distance to nearest warehouse and adding it to a score
-				uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
-				for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-					const uint16_t actual_distance =
-					   map.calc_distance(bf->coords, wh_obs.site->get_position());
-					nearest_distance = std::min(nearest_distance, actual_distance);
+				// Do not build 2 warehouse in the same time
+				if (!bo.is(BuildingAttribute::kPort)) {
+					assert(numof_warehouses_in_const_ == 0);
 				}
-				// but limit to 30
-				const uint16_t max_distance_considered = 30;
-				nearest_distance = std::min(nearest_distance, max_distance_considered);
-				if (nearest_distance < 13) {
-					continue;
-				}
-				prio +=
-				   management_data.neuron_pool[47].get_result_safe(nearest_distance / 2, kAbsValue) / 2;
+
+				prio += bo.primary_priority;
+				prio += wh_distance_malus; // Here it increases priority, more distant is better
+
+				// // iterating over current warehouses and testing a distance
+				// // getting distance to nearest warehouse and adding it to a score
+				// uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
+				// for (const WarehouseSiteObserver& wh_obs : warehousesites) {
+				// 	const uint16_t actual_distance =
+				// 	   map.calc_distance(bf->coords, wh_obs.site->get_position());
+				// 	nearest_distance = std::min(nearest_distance, actual_distance);
+				// }
+				// // but limit to 30
+				// const uint16_t max_distance_considered = 30;
+				// nearest_distance = std::min(nearest_distance, max_distance_considered);
+				// if (nearest_distance < 13) {
+				// 	continue;
+				// }
+				// prio +=
+				//    management_data.neuron_pool[47].get_result_safe(nearest_distance / 2, kAbsValue) / 2;
 
 				prio += bf->own_non_military_nearby * 3;
 
@@ -3438,6 +3509,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				assert(bo.primary_priority > 0 && bo.new_building == BuildingNecessity::kNeeded);
 
 				prio += bo.primary_priority;
+
+				prio -= wh_distance_malus;
 
 				// for spots close to a border
 				if (bf->near_border) {
@@ -3683,9 +3756,8 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 		remaining_flags.push(&wh_obs.site->base_flag());
 		flag_warehouse_distance.set_distance(
 		   wh_obs.site->base_flag().get_position().hash(), 0, gametime, this_wh_hash);
-		uint32_t tmp_wh;
-		assert(flag_warehouse_distance.get_distance(
-		          wh_obs.site->base_flag().get_position().hash(), gametime, &tmp_wh) == 0);
+		assert(flag_warehouse_distance.get_wh_distance(
+		          wh_obs.site->base_flag().get_position().hash(), gametime, nullptr) == 0);
 
 		// Algorithm to walk on roads
 		// All nodes are marked as to_be_checked == true first and once the node is checked it is
@@ -3695,8 +3767,8 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 		while (!remaining_flags.empty()) {
 			// looking for a node with shortest existing road distance from starting flag and one that
 			// has to be checked Now going over roads leading from this flag
-			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
-			   remaining_flags.front()->get_position().hash(), gametime, &tmp_wh);
+			const uint16_t current_flag_distance = flag_warehouse_distance.get_wh_distance(
+			   remaining_flags.front()->get_position().hash(), gametime, nullptr);
 			for (uint8_t i = Widelands::WalkingDir::FIRST_DIRECTION;
 			     i <= Widelands::WalkingDir::LAST_DIRECTION; ++i) {
 				Widelands::Road* const road = remaining_flags.front()->get_road(i);
@@ -3864,8 +3936,6 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	// ferries
 	const bool needs_warehouse = flag.get_economy(Widelands::wwWORKER)->warehouses().empty();
 
-	uint32_t tmp_wh;
-
 	// when deciding if we attempt to build a road from here we use probability
 	uint16_t probability_score = 0;
 	if (flag.nr_of_roads() == 1) {
@@ -3880,7 +3950,7 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	}
 	if (RNG::static_rand(10) == 0) {
 		probability_score +=
-		   flag_warehouse_distance.get_distance(flag_coords_hash, gametime, &tmp_wh);
+		   flag_warehouse_distance.get_wh_distance(flag_coords_hash, gametime, nullptr);
 	}
 
 	if (RNG::static_rand(200) < probability_score) {
@@ -4149,9 +4219,8 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 	// Initializing new object of FlagsForRoads, we will push there all candidate flags
 	// First we dont even know if a road can be built there (from current flag)
 	// Adding also distance of this flag to nearest wh
-	uint32_t tmp_wh;  // This information is not used, but we need it
 	const uint32_t current_flag_dist_to_wh =
-	   flag_warehouse_distance.get_distance(flag.get_position().hash(), gametime, &tmp_wh);
+	   flag_warehouse_distance.get_wh_distance(flag.get_position().hash(), gametime, nullptr);
 
 	FlagCandidates flag_candidates(current_flag_dist_to_wh);
 
@@ -4205,7 +4274,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 			    !flag_warehouse_distance.is_road_prohibited(reachable_coords_hash, gametime)) {
 				flag_candidates.add_flag(
 				   reachable_coords_hash, is_different_economy,
-				   flag_warehouse_distance.get_distance(reachable_coords_hash, gametime, &tmp_wh),
+				   flag_warehouse_distance.get_wh_distance(reachable_coords_hash, gametime, nullptr),
 				   air_distance);
 			}
 		}
@@ -4277,7 +4346,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 		const Widelands::Coords target_coords = Widelands::Coords::unhash(winner->coords_hash);
 
 		// This is to prohibit the flag for some time but with exemption of warehouse
-		if (flag_warehouse_distance.get_distance(winner->coords_hash, gametime, &tmp_wh) > 0) {
+		if (flag_warehouse_distance.get_wh_distance(winner->coords_hash, gametime, nullptr) > 0) {
 			flag_warehouse_distance.set_road_built(winner->coords_hash, gametime);
 		}
 		// and we straight away set distance of future flag
@@ -5267,6 +5336,11 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 
 	if (needed_count <= numof_warehouses_in_const_ + numof_warehouses_) {
 		bo.new_building_overdue = 0;
+		return BuildingNecessity::kForbidden;
+	}
+
+	// Do not allow normal warehouse if another warehouse is in construction
+	if (!bo.is(BuildingAttribute::kPort) && numof_warehouses_in_const_) {
 		return BuildingNecessity::kForbidden;
 	}
 
@@ -6403,7 +6477,6 @@ void DefaultAI::consider_ally_sites(Widelands::FCoords fcoords, BuildableField& 
 
 void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
                                     BuildableField& bf,
-                                    bool& any_connected_imm,
                                     bool& any_unconnected_imm) {
 	// last two are about being connected to any warehouse
 	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
@@ -6417,8 +6490,6 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 
 		if (constructionsite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 			any_unconnected_imm = true;
-		} else {
-			any_connected_imm = true;
 		}
 
 		if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
@@ -6441,8 +6512,6 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 
 		if (militarysite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 			any_unconnected_imm = true;
-		} else {
-			any_connected_imm = true;
 		}
 
 		if (radius > dist) {
@@ -6778,6 +6847,11 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 		}
 		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
 			++numof_warehouses_in_const_;
+			if (!found_on_load) {
+				// recalculate distance ASAP
+				const Time& gametime = game().get_gametime();
+				set_taskpool_task_time(gametime, SchedulerTaskId::kWarehouseFlagDist);
+			}
 		}
 		if (target_bo.type == BuildingObserver::Type::kTrainingsite) {
 			++ts_in_const_count_;
