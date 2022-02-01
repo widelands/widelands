@@ -57,9 +57,9 @@ on_success:
   - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_NEXT_VERSIO%~git(%APPVEYOR_REPO_COMMIT%@%APPVEYOR_REPO_BRANCH%) c:\projects\widelands\utils\win32\innosetup\Widelands.iss
   - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_NEXT_VERSIO%~git(%APPVEYOR_REPO_COMMIT%@%APPVEYOR_REPO_BRANCH%).exe
 
-artifacts:
-  - path: Widelands-$(CONFIGURATION)-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
-    name: Widelands Setup
+# artifacts:
+  # - path: Widelands-$(CONFIGURATION)-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
+    # name: Widelands Setup
 
 platform:
   - x64
