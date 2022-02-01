@@ -48,8 +48,8 @@ build_script:
   - cmd: md build
   - cmd: cd build
   # detect revision
-  # - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  # - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
   - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
   - cmd: "cmake --build ."
 on_success:
