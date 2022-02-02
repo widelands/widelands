@@ -358,7 +358,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      enemy_military_sites(0),
      ally_military_presence(0),
      military_stationed(0),
-	 average_flag_dist_to_wh(kWhFarButReachable),
+     average_flag_dist_to_wh(kWhFarButReachable),
      military_unstationed(0),
      own_non_military_nearby(0),
      defense_msite_allowed(false),
@@ -1374,7 +1374,7 @@ bool FlagWarehouseDistances::FlagInfo::update(const Time& gametime,
 }
 
 uint16_t FlagWarehouseDistances::FlagInfo::get(const Time& gametime, uint32_t* nw) const {
-	if (nw) { // cannot set if this is just nullptr
+	if (nw) {  // cannot set if this is just nullptr
 		*nw = nearest_warehouse;
 	}
 	if (gametime <= expiry_time) {
@@ -1409,8 +1409,8 @@ uint16_t FlagWarehouseDistances::count() const {
 }
 
 int16_t FlagWarehouseDistances::get_wh_distance(const uint32_t flag_coords,
-                                             const Time& gametime,
-                                             uint32_t* nw) {
+                                                const Time& gametime,
+                                                uint32_t* nw) {
 	if (flags_map.count(flag_coords) == 0) {
 		if (nw) {
 			*nw = 0;

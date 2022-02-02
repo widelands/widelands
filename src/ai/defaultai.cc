@@ -1892,8 +1892,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (field_owner == pn) {
 			consider_own_psites(first_area.location(), field);
-			consider_own_msites(
-			   first_area.location(), field, any_imm_not_connected_to_wh);
+			consider_own_msites(first_area.location(), field, any_imm_not_connected_to_wh);
 			continue;
 		} else if (player_statistics.get_is_enemy(field_owner)) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
@@ -2076,10 +2075,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		score_parts[30] =
 		   -0 * management_data.neuron_pool[37].get_result_safe(
-		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		           3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[31] =
-		    -10 * management_data.neuron_pool[31].get_result_safe(
-		             3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		   -10 * management_data.neuron_pool[31].get_result_safe(
+		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[32] = -4 * field.military_in_constr_nearby *
 		                  std::abs(management_data.get_military_number_at(82));
 		score_parts[33] = (field.military_in_constr_nearby > 0) ?
@@ -2181,8 +2180,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	const bool res1 = this_fneuron1->get_result(
 	   field.unowned_buildable_spots_nearby > 5,
-	   field.average_flag_dist_to_wh<20, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
-	   field.enemy_owned_land_nearby > 0);
+	   field
+	      .average_flag_dist_to_wh<20, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
+	                               field.enemy_owned_land_nearby> 0);
 
 	const bool res2 = this_fneuron2->get_result(
 	   field.military_in_constr_nearby > 0,
@@ -2191,16 +2191,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	const bool res3 = this_fneuron3->get_result(
 	   field.unowned_land_nearby > 5,
-	   field.average_flag_dist_to_wh<200, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
-	   field.enemy_owned_land_nearby > 0);
+	   field
+	      .average_flag_dist_to_wh<200, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
+	                               field.enemy_owned_land_nearby> 0);
 
-	const int32_t ai_bonus = res1 ? 15 : -15 + res2 ? 15 : -15 + res3 ? 15 : -15; // NOCOM remove this
+	const int32_t ai_bonus = res1       ? 15 :
+	                         -15 + res2 ? 15 :
+	                         -15 + res3 ? 15 :
+                                         -15;  // NOCOM remove this
 
 	field.military_score_ += ai_bonus;
-
-
-
-
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
@@ -2886,11 +2886,12 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 		// Some buildings needs to consider distance from nearest warehouse
 		// It is non-negative value, and should be deducted from prio for some productionsites
-		const int32_t wh_distance_malus = management_data.neuron_pool[35].get_result_safe(
-		                               bf->average_flag_dist_to_wh, kAbsValue) +
-		                            management_data.neuron_pool[42].get_result_safe(
-		                               bf->average_flag_dist_to_wh / 3, kAbsValue);
-		//printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus, bf->average_flag_dist_to_wh);
+		const int32_t wh_distance_malus =
+		   management_data.neuron_pool[35].get_result_safe(bf->average_flag_dist_to_wh, kAbsValue) +
+		   management_data.neuron_pool[42].get_result_safe(
+		      bf->average_flag_dist_to_wh / 3, kAbsValue);
+		// printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus,
+		// bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
@@ -2980,7 +2981,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				// Considering distance to a warehouse NOCOM
 				if (!bo.requires_supporters && !bo.inputs.empty()) {
 					prio -= wh_distance_malus;
-
 				}
 				// some "independent" space consumers can be pushed to bigger distance from wh
 				if (bo.is(BuildingAttribute::kSpaceConsumer) && bo.inputs.empty() &&
@@ -3127,7 +3127,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						prio -= bf->water_nearby / 5;
 
-						prio += wh_distance_malus; // place farer from nearest WH
+						prio += wh_distance_malus;  // place farer from nearest WH
 
 						prio += management_data.neuron_pool[67].get_result_safe(
 						           number_of_supported_producers_nearby * 5, kAbsValue) /
@@ -3473,7 +3473,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				}
 
 				prio += bo.primary_priority;
-				prio += wh_distance_malus; // Here it increases priority, more distant is better
+				prio += wh_distance_malus;  // Here it increases priority, more distant is better
 
 				// // iterating over current warehouses and testing a distance
 				// // getting distance to nearest warehouse and adding it to a score
@@ -3490,7 +3490,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				// 	continue;
 				// }
 				// prio +=
-				//    management_data.neuron_pool[47].get_result_safe(nearest_distance / 2, kAbsValue) / 2;
+				//    management_data.neuron_pool[47].get_result_safe(nearest_distance / 2, kAbsValue) /
+				//    2;
 
 				prio += bf->own_non_military_nearby * 3;
 

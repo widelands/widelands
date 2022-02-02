@@ -32,13 +32,15 @@ TESTCASE(flag_distance_soft_expiry) {
 	// setting longer distance below soft_expiry time
 	check_equal(fw.set_distance(1, 3, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 4), false);
 	// distance to 3 not updated
-	check_equal(fw.get_wh_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 2);
+	check_equal(
+	   fw.get_wh_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 2);
 	check_equal(tmp_wh, 3);
 
 	// now setting after soft expiry
 	check_equal(fw.set_distance(1, 1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), 6),
 	            true);  // distance set to 1
-	check_equal(fw.get_wh_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 1);
+	check_equal(
+	   fw.get_wh_distance(1, Time(AI::kFlagDistanceExpirationPeriod.get() / 3), &tmp_wh), 1);
 	check_equal(tmp_wh, 6);
 }
 TESTCASE(flag_distance_below_expiry)
@@ -86,7 +88,8 @@ TESTCASE(flag_distance_expiration_extension)
 	check_equal(fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 3), 5), true);
 	check_equal(fw.set_distance(1, 2, Time(AI::kFlagDistanceExpirationPeriod.get() + 10), 5), true);
 	// current expiry_time should be 2*AI::kFlagDistanceExpirationPeriod + 10
-	check_equal(fw.get_wh_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), &tmp_wh), 2);
+	check_equal(
+	   fw.get_wh_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get()), &tmp_wh), 2);
 	check_equal(tmp_wh, 5);
 	check_equal(
 	   fw.get_wh_distance(1, Time(2 * AI::kFlagDistanceExpirationPeriod.get() + 15), &tmp_wh), 500);
