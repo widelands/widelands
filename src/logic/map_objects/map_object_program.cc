@@ -82,7 +82,7 @@ the tooltips:
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start doing something because ...
-         descname = _"doing something",
+         descname = _("doing something"),
          actions = {
             "call=program_name2",
             "call=program_name3",
@@ -409,7 +409,7 @@ playsound
       -- Production site
      produce_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
-         descname = _"forging an ax",
+         descname = _("forging an ax"),
          actions = {
             "return=skipped unless economy needs ax",
             "consume=coal iron",
