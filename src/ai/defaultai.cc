@@ -2075,11 +2075,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
 
 		score_parts[30] =
-		   -20 * management_data.neuron_pool[8].get_result_safe(
+		   -0 * management_data.neuron_pool[37].get_result_safe(
 		            3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
-		// score_parts[31] =
-		//    -10 * management_data.neuron_pool[31].get_result_safe(
-		//             3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
+		score_parts[31] =
+		    -10 * management_data.neuron_pool[31].get_result_safe(
+		             3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[32] = -4 * field.military_in_constr_nearby *
 		                  std::abs(management_data.get_military_number_at(82));
 		score_parts[33] = (field.military_in_constr_nearby > 0) ?
@@ -2129,7 +2129,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   -1 * management_data.neuron_pool[55].get_result_safe(field.ally_military_presence, kAbsValue);
 	score_parts[47] = -1 * management_data.neuron_pool[53].get_result_safe(
 	                          2 * field.ally_military_presence, kAbsValue);
-	score_parts[48] = -2 * management_data.neuron_pool[4].get_result_safe(
+	score_parts[48] = -2 * management_data.neuron_pool[36].get_result_safe(
 	                          (field.area_military_capacity + 4) / 5, kAbsValue);
 	score_parts[49] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
                         -std::abs(management_data.get_military_number_at(81)) :
@@ -2139,7 +2139,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
                         0;
 	score_parts[56] =
 	   (any_imm_not_connected_to_wh) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
-	score_parts[57] = 1 * management_data.neuron_pool[18].get_result_safe(
+	score_parts[57] = 1 * management_data.neuron_pool[38].get_result_safe(
 	                         2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[58] = 3 * management_data.neuron_pool[19].get_result_safe(
 	                         5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
@@ -2886,10 +2886,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 		// Some buildings needs to consider distance from nearest warehouse
 		// It is non-negative value, and should be deducted from prio for some productionsites
-		const int32_t wh_distance_malus = management_data.neuron_pool[31].get_result_safe(
-		                               bf->average_flag_dist_to_wh / 2, kAbsValue) +
+		const int32_t wh_distance_malus = management_data.neuron_pool[35].get_result_safe(
+		                               bf->average_flag_dist_to_wh, kAbsValue) +
 		                            management_data.neuron_pool[42].get_result_safe(
-		                               bf->average_flag_dist_to_wh / 25, kAbsValue);
+		                               bf->average_flag_dist_to_wh / 3, kAbsValue);
 		//printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus, bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
@@ -2984,7 +2984,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				}
 				// some "independent" space consumers can be pushed to bigger distance from wh
 				if (bo.is(BuildingAttribute::kSpaceConsumer) && bo.inputs.empty() &&
-				    bo.is(BuildingAttribute::kSpaceConsumer)) {
+				    !bo.is(BuildingAttribute::kSupportingProducer)) {
 					prio += wh_distance_malus;  // push them farer from nearest wh
 				}
 
@@ -3222,7 +3222,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						if (current_stocklevel < 40) {
-							prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							prio += 5 * management_data.neuron_pool[39].get_result_safe(
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 						// taking into account the vicinity
@@ -3266,7 +3266,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						if (current_stocklevel < 40) {
-							prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							prio += 5 * management_data.neuron_pool[40].get_result_safe(
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
@@ -3308,7 +3308,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						continue;
 					}
 					if (current_stocklevel < 40 && !bo.is(BuildingAttribute::kShipyard)) {
-						prio += 5 * management_data.neuron_pool[23].get_result_safe(
+						prio += 5 * management_data.neuron_pool[41].get_result_safe(
 						               (40 - current_stocklevel) / 2, kAbsValue);
 					}
 					// This considers supporters nearby
@@ -3466,6 +3466,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				// Do not build 2 warehouse in the same time
 				if (!bo.is(BuildingAttribute::kPort)) {
 					assert(numof_warehouses_in_const_ == 0);
+					// Warehouse should not be build too close to another one
+					if (bf->average_flag_dist_to_wh <= 15) {
+						continue;
+					}
 				}
 
 				prio += bo.primary_priority;
@@ -6846,11 +6850,6 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 		}
 		if (target_bo.type == BuildingObserver::Type::kWarehouse) {
 			++numof_warehouses_in_const_;
-			if (!found_on_load) {
-				// recalculate distance ASAP
-				const Time& gametime = game().get_gametime();
-				set_taskpool_task_time(gametime, SchedulerTaskId::kWarehouseFlagDist);
-			}
 		}
 		if (target_bo.type == BuildingObserver::Type::kTrainingsite) {
 			++ts_in_const_count_;
@@ -6945,6 +6944,11 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
+			}
+			if (!found_on_load) {
+				// recalculate distance ASAP
+				const Time& gametime = game().get_gametime();
+				set_taskpool_task_time(gametime, SchedulerTaskId::kWarehouseFlagDist);
 			}
 		}
 	}
