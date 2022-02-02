@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "ice_floes2",
-   descname = _ "Ice Floes 2",
+   descname = _("Ice Floes 2"),
    is = "water",
    valid_resources = {"resource_fish"},
    default_resource = "",

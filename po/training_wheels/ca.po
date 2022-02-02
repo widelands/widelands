@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2020
+# Juanjo, 2022
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Juanjo, 2020\n"
+"Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,6 +47,11 @@ msgstr "Seleccioneu «Mostra espais de construcció»."
 msgid "Now we can see where it is possible to place buildings and flags."
 msgstr "Ara podem veure on es poden construir edificis i banderes."
 
+#: ../../data/scripting/training_wheels/building_spaces.lua:55
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Click ‘OK’ to continue."
+msgstr "Feu clic al botó «D'acord» per continuar."
+
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
 #: ../../data/scripting/training_wheels/flags.lua:72
@@ -73,6 +78,10 @@ msgstr "Feu clic al botó de bandera."
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
 msgstr "Ara comproveu si podeu posar més banderes als camins."
+
+#: ../../data/scripting/training_wheels/flags.lua:87
+msgid "Click ‘OK’ when you’re done."
+msgstr "Feu clic al botó «D'acord» quan hagueu acabat."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -151,6 +160,17 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
 msgstr "Camins"
+
+#: ../../data/scripting/training_wheels/logs.lua:141
+#: ../../data/scripting/training_wheels/rocks.lua:144
+msgid "Click on the flag in front of the building to start placing a road."
+msgstr "Feu clic a la bandera del davant de l'edifici per construir un camí."
+
+#: ../../data/scripting/training_wheels/logs.lua:152
+msgid ""
+"Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr ""
+"Feu clic al botó «Construeix camí» i després feu clic a la bandera indicada."
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -247,6 +267,16 @@ msgid ""
 "building:"
 msgstr ""
 "Heu de subministrar granit al clan. Cal que construïu l'edifici següent:"
+
+#: ../../data/scripting/training_wheels/rocks.lua:155
+msgid ""
+"Click on the ‘Build road’ button. Afterwards, click the colored markers on "
+"the map to guide your road until you reach the flag in front of the target "
+"building."
+msgstr ""
+"Feu clic al botó «Construeix camí». Llavors, feu clic als marcadors de "
+"colors en el mapa per guiar el camí fins que arribeu a la bandera del davant"
+" de l'edifici objectiu."
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

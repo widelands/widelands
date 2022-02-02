@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_ration",
             "call=produce_snack",
@@ -58,7 +58,7 @@ descriptions:new_productionsite_type {
       },
       produce_ration = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"preparing a ration",
+         descname = _("preparing a ration"),
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
@@ -71,7 +71,7 @@ descriptions:new_productionsite_type {
       },
       produce_snack = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-         descname = _"preparing a snack",
+         descname = _("preparing a snack"),
          actions = {
             -- time total: 37
             "return=skipped unless economy needs snack",
@@ -84,7 +84,7 @@ descriptions:new_productionsite_type {
       },
       produce_meal = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-         descname = _"preparing a meal",
+         descname = _("preparing a meal"),
          actions = {
             -- time total: 40
             "return=skipped unless economy needs meal",

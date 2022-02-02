@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_armor_helmet",
             "call=produce_armor",
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
       },
       produce_armor_helmet = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
-         descname = _"forging a helmet",
+         descname = _("forging a helmet"),
          actions = {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs armor_helmet",
@@ -88,7 +88,7 @@ descriptions:new_productionsite_type {
       },
       produce_armor = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
-         descname = _"forging a suit of armor",
+         descname = _("forging a suit of armor"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor",
@@ -100,7 +100,7 @@ descriptions:new_productionsite_type {
       },
       produce_armor_chain = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
-         descname = _"forging a suit of chain armor",
+         descname = _("forging a suit of chain armor"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_chain",
@@ -112,7 +112,7 @@ descriptions:new_productionsite_type {
       },
       produce_armor_gilded = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
-         descname = _"forging a suit of gilded armor",
+         descname = _("forging a suit of gilded armor"),
          actions = {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_gilded",

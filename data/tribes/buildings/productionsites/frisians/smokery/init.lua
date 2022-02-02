@@ -69,7 +69,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
@@ -77,7 +77,7 @@ descriptions:new_productionsite_type {
       },
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
+         descname = _("smoking fish"),
          actions = {
             "return=skipped unless economy needs smoked_fish",
             "consume=fish:2 log",
@@ -88,7 +88,7 @@ descriptions:new_productionsite_type {
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
+         descname = _("smoking meat"),
          actions = {
             "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",

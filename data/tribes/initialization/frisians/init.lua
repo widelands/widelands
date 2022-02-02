@@ -7,9 +7,9 @@ push_textdomain("tribes")
 local r = {
    -- Basic information for the Frisian tribe
    name = "frisians",
-   author = _"The Widelands Development Team",
+   author = _("The Widelands Development Team"),
    -- TRANSLATORS: This is a tribe name
-   descname = _"Frisians",
+   descname = _("Frisians"),
    tooltip = _("The inhabitants of the rough North Sea shore."),
    icon = dirname .. "images/icon.png",
    script = dirname .. "units.lua",

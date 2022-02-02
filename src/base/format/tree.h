@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -58,8 +57,8 @@ namespace format_impl {
    width: minimal number of characters
 
    precision:
-      For floating-point, max number of digits after the period.
-      For strings, max number of characters before padding.
+      For floating-point: Number of digits after the period, printing trailing zeroes.
+      For strings: Max number of characters before padding.
       Not allowed for other types.
 
    fmt:
@@ -81,6 +80,9 @@ namespace format_impl {
       - The %c specifier escapes control characters (0x0 to 0x1F and 0x7F) using caret notation.
       - The %p and %P specifiers add the prefix "0x" to the output; %x and %X do not add a prefix.
       - It is not possible to print a floating-point number in scientific exponent notation.
+      - If precision is not specified for %f or a floating point number is printed with %N%, then
+        up to 6 decimal places are printed, with trailing zeroes removed. At least one decimal is
+        printed even if it is zero.
 
    The argument that controls localized output has the following effects:
       - Translatable decimal separator for floating point values.

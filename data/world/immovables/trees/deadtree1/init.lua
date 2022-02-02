@@ -4,7 +4,7 @@ dirname = path.dirname(__file__)
 
 wl.Descriptions():new_immovable_type{
    name = "deadtree1",
-   descname = _ "Dead Tree",
+   descname = _("Dead Tree"),
    size = "none",
    programs = {
       main = {

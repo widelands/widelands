@@ -207,7 +207,7 @@ function mission_thread()
       o_bring_shovels_1 = add_campaign_objective(obj_bring_shovels_1)
       while not wares_collected_at_field(warehouse, "shovel", 4) do sleep(2027) end
       push_textdomain("map_along_the_river.wmf")
-      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      send_to_inbox(p1, _("Shovels"), li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _("Four shovels for removing the swamps have been collected at the warehouse.")), { field = warehouse, popup = true, })
       pop_textdomain()
       o_bring_shovels_1.done = true
       sleep(180000)
@@ -216,7 +216,7 @@ function mission_thread()
       o_bring_shovels_2 = add_campaign_objective(obj_bring_shovels_2)
       while not wares_collected_at_field(warehouse, "shovel", 4) do sleep(2027) end
       push_textdomain("map_along_the_river.wmf")
-      send_to_inbox(p1, _"Shovels", li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _"Four more shovels for removing the swamps have been collected at the warehouse."), { field = warehouse, popup = true, })
+      send_to_inbox(p1, _("Shovels"), li_image("tribes/buildings/warehouses/barbarians/warehouse/idle_1.png", _("Four more shovels for removing the swamps have been collected at the warehouse.")), { field = warehouse, popup = true, })
       pop_textdomain()
       remove_swamps(p1)
       sleep(198000)

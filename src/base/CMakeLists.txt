@@ -11,6 +11,7 @@ wl_library(base
     format/tree.cc
     format/tree.h
     format/wildcard_node.h
+    format/write_number.h
     i18n.h
     i18n.cc
     multithreading.h

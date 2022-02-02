@@ -22,47 +22,47 @@ end
 -- ===========
 obj_build_blockhouse = {
    name = "build_blockhouse",
-   title=_"Build a blockhouse",
+   title=_("Build a blockhouse"),
    number = 1,
-   body = objective_text(_"Blockhouse",
-      li(_[[Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]])
+   body = objective_text(_("Blockhouse"),
+      li(_([[Build a blockhouse at the red house symbol on the east side of the forests, to the right of your provisional headquarters.]]))
    ),
 }
 
 obj_build_lumberjack = {
    name = "build_lumberjack",
-   title=_"Build a lumberjack’s house",
+   title=_("Build a lumberjack’s house"),
    number = 1,
-   body = objective_text(_"Lumberjack’s House",
-      li(_[[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]])
+   body = objective_text(_("Lumberjack’s House"),
+      li(_([[Build a lumberjack’s house at the red house symbol, south of your provisional headquarters.]]))
    ),
 }
 
 obj_build_sawmill_and_lumberjacks = {
    name = "build_sawmill_and_lumberjacks",
-   title=_"Build 2 lumberjack’s houses and a sawmill",
+   title=_("Build 2 lumberjack’s houses and a sawmill"),
    number = 3,
-   body = objective_text(_"Two Lumberjack’s Houses and a Sawmill",
-      li(_[[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]])
+   body = objective_text(_("Two Lumberjack’s Houses and a Sawmill"),
+      li(_([[Build two more lumberjack’s houses and a sawmill as soon as there is enough space for them.]]))
    ),
 }
 
 obj_build_forester = {
    name = "build_forester",
-   title=_"Build a forester’s house",
+   title=_("Build a forester’s house"),
    number = 1,
-   body = objective_text(_"Forester’s House",
-      li(_[[Build a forester’s house to preserve the wood resources of this island.]])
+   body = objective_text(_("Forester’s House"),
+      li(_([[Build a forester’s house to preserve the wood resources of this island.]]))
    ),
 }
 
 obj_build_quarry = {
    name = "build_quarry",
-   title=_"Build a quarry",
+   title=_("Build a quarry"),
    number = 5,
-   body = objective_text(_"Quarry",
-      li(_[[Build a quarry in the south to cut some granite and marble out of the rocks.]]) ..
-      li_arrow(_[[These might be used for future buildings.]])
+   body = objective_text(_("Quarry"),
+      li(_([[Build a quarry in the south to cut some granite and marble out of the rocks.]])) ..
+      li_arrow(_([[These might be used for future buildings.]]))
    ),
 }
 
@@ -72,8 +72,8 @@ obj_build_quarry = {
 -- Texts to the user
 -- ==================
 diary_page_1 = {
-   title =_ "A Dark Night",
-   body=lutius(_"Diary of Lutius",
+   title =_("A Dark Night"),
+   body=lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
       _([[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monstrous Barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?]])
       .. paragraphdivider() ..
@@ -93,8 +93,8 @@ diary_page_1 = {
 }
 
 diary_page_2 = {
-   title=_"The Rough Sea",
-   body= lutius(_"Diary of Lutius",
+   title=_("The Rough Sea"),
+   body= lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
       _([[It seems as if sailing on the Gulf of Perl was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don’t know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.]])
       .. paragraphdivider() ..
@@ -105,8 +105,8 @@ diary_page_2 = {
 }
 
 diary_page_3 = {
-   title=_"Survivors",
-   body= lutius(_"Diary of Lutius",
+   title=_("Survivors"),
+   body= lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
       _([[Finally, the Gods were with us!]])
       .. paragraphdivider() ..
@@ -120,8 +120,8 @@ diary_page_3 = {
 }
 
 saledus_1 = {
-   title=_"A Foreboding",
-   body= saledus(_"Saledus looks around nervously…",
+   title=_("A Foreboding"),
+   body= saledus(_("Saledus looks around nervously…"),
       -- TRANSLATORS: Saledus
       _([[Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?]])
       .. paragraphdivider() ..
@@ -136,8 +136,8 @@ saledus_1 = {
 
 
 saledus_2 = {
-   title=_"Safe For Now",
-   body= saledus(_"Saledus speaks with a sigh of relief…",
+   title=_("Safe For Now"),
+   body= saledus(_("Saledus speaks with a sigh of relief…"),
       -- TRANSLATORS: Saledus
       _([[Sire, I saw that the construction of the blockhouse was completed, so I have assigned one of my best soldiers to it to keep watch on the desert.]])
       .. paragraphdivider() ..
@@ -147,8 +147,8 @@ saledus_2 = {
 }
 
 amalea_1 = {
-   title=_"Young Amalea",
-   body= amalea(_"Amalea smiles…",
+   title=_("Young Amalea"),
+   body= amalea(_("Amalea smiles…"),
       -- TRANSLATORS: Amalea
       _([[Greetings, Lutius! I just met Saledus outside.]])
       .. paragraphdivider() ..
@@ -162,8 +162,8 @@ amalea_1 = {
 }
 
 amalea_2 = {
-   title=_"Young Amalea",
-   body= amalea(_"Amalea recommends…",
+   title=_("Young Amalea"),
+   body= amalea(_("Amalea recommends…"),
       -- TRANSLATORS: Amalea
       _([[I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he has cleared enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster.]])
       .. paragraphdivider() ..
@@ -174,8 +174,8 @@ amalea_2 = {
 }
 
 amalea_3 = {
-   title=_"Young Amalea",
-   body= amalea(_"Amalea comes in…",
+   title=_("Young Amalea"),
+   body= amalea(_("Amalea comes in…"),
       -- TRANSLATORS: Amalea
       _([[I’ve got two important things to talk about… First the good news:]])
       .. paragraphdivider() ..
@@ -195,8 +195,8 @@ amalea_3 = {
 }
 
 saledus_3 = {
-   title=_"Thinking About the Future",
-   body= saledus(_"Saledus notes…",
+   title=_("Thinking About the Future"),
+   body= saledus(_("Saledus notes…"),
       -- TRANSLATORS: Saledus
       _([[Sire, I just thought about the rocks standing on the south shore of this land. Perhaps we could cut out some useful granite and beautiful marble.]])
       .. paragraphdivider() ..
@@ -207,8 +207,8 @@ saledus_3 = {
 }
 
 saledus_4 = {
-   title=_"A Step Forward",
-   body= saledus(_"Saledus looks excited…",
+   title=_("A Step Forward"),
+   body= saledus(_("Saledus looks excited…"),
       -- TRANSLATORS: Saledus
       _([[Sire, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with granite and beautiful marble.]])
       .. paragraphdivider() ..
@@ -218,8 +218,8 @@ saledus_4 = {
 }
 
 diary_page_4 = {
-   title=_"Mission Complete",
-   body= lutius(_"Diary of Lutius",
+   title=_("Mission Complete"),
+   body= lutius(_("Diary of Lutius"),
       -- TRANSLATORS: Lutius - Diary
       _([[Today I got the message that our ship is completely repaired. At the moment, my people are loading everything onto our newly repaired ship, hoping it will serve us better than last time.]])
       .. paragraphdivider() ..
@@ -228,15 +228,15 @@ diary_page_4 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Lutius - Diary
       _([[I still wonder if we will ever see Fremil again.]]))
-      .. objective_text(_"Victory",
-      _[[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
+      .. objective_text(_("Victory"),
+      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    allow_next_scenario = true,
    posy=1
 }
 
 safe_peninsula = {
-   title=_"Safe Peninsula",
-   body= saledus(_"Saledus speaks:",
+   title=_("Safe Peninsula"),
+   body= saledus(_("Saledus speaks:"),
       -- TRANSLATORS: Saledus
-      _[[Sire, you have made this peninsula a very secure place. Now it’s time to move on!]])
+      _([[Sire, you have made this peninsula a very secure place. Now it’s time to move on!]]))
 }

@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
-         descname = _"raising pigs",
+         descname = _("raising pigs"),
          actions = {
             "return=skipped unless economy needs meat",
             "consume=water wheat",

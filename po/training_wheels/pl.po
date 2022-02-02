@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (https://www.transifex.com/widelands/teams/35159/pl/)\n"
@@ -48,6 +48,11 @@ msgstr "Wybierz 'Pokaż Miejsca na Budynki'."
 msgid "Now we can see where it is possible to place buildings and flags."
 msgstr "Teraz widzimy, gdzie możemy postawić budynki lub flagi."
 
+#: ../../data/scripting/training_wheels/building_spaces.lua:55
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Click ‘OK’ to continue."
+msgstr ""
+
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
 #: ../../data/scripting/training_wheels/flags.lua:72
@@ -75,6 +80,10 @@ msgstr "Kliknij na przycisk flagi."
 msgid "Now check if you can place even more flags on your roads."
 msgstr ""
 "Teraz sprawdź, czy możesz umieścić jeszcze więcej flag na swoich drogach."
+
+#: ../../data/scripting/training_wheels/flags.lua:87
+msgid "Click ‘OK’ when you’re done."
+msgstr ""
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -152,6 +161,16 @@ msgstr "Musisz zaopatrzyć twoje plemię w kłody. Zbuduj następujący budynek:
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
 msgstr "Drogi"
+
+#: ../../data/scripting/training_wheels/logs.lua:141
+#: ../../data/scripting/training_wheels/rocks.lua:144
+msgid "Click on the flag in front of the building to start placing a road."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:152
+msgid ""
+"Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -246,6 +265,13 @@ msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr "Musisz zaopatrzyć twoje plemię w granit. Zbuduj następujący budynek:"
+
+#: ../../data/scripting/training_wheels/rocks.lua:155
+msgid ""
+"Click on the ‘Build road’ button. Afterwards, click the colored markers on "
+"the map to guide your road until you reach the flag in front of the target "
+"building."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
