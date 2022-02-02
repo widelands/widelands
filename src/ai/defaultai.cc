@@ -1867,17 +1867,19 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			continue;
 		}
 
+		const Widelands::PlayerNumber field_owner = first_area.location().field->get_owned_by();
+
+		// Using distance of our and connected flags to calculate avg distance to nearest warehouse
 		if (imm->descr().type() == Widelands::MapObjectType::FLAG) {
-			if (upcast(Widelands::Flag, flag, imm)) {
-				if (flag->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
-					field.average_flag_dist_to_wh += kWhNotReachable;
-					flags_count++;
-				} else {
-					field.average_flag_dist_to_wh += flag_warehouse_distance.get_wh_distance(
-					   first_area.location().hash(), gametime, nullptr);
+			if (field_owner == pn) {
+				const int16_t flag_dist = flag_warehouse_distance.get_wh_distance(
+				   first_area.location().hash(), gametime, nullptr);
+				if (flag_dist != kWhFarButReachable && flag_dist != kWhNotReachable) {
+					field.average_flag_dist_to_wh += flag_dist;
 					flags_count++;
 				}
 			}
+			continue;
 		}
 
 		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
@@ -1887,8 +1889,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (!unique_serials.insert(imm->serial()).second) {
 			continue;  // position was not inserted in the set, so we saw it before
 		}
-
-		const Widelands::PlayerNumber field_owner = first_area.location().field->get_owned_by();
 
 		if (field_owner == pn) {
 			consider_own_psites(first_area.location(), field);
@@ -1908,12 +1908,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-	if (field.average_flag_dist_to_wh == 0) {
-		field.average_flag_dist_to_wh = kWhNotReachable;
-		flags_count = 1;
+	if (flags_count == 0) {
+		field.average_flag_dist_to_wh = 60; // prohibitive
 	} else {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
+	//printf("flags count: %2d, avg: %3d\n", flags_count, field.average_flag_dist_to_wh);
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
@@ -2074,7 +2074,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   management_data.neuron_pool[10].get_result_safe(field.military_loneliness / 50, kAbsValue);
 
 		score_parts[30] =
-		   -0 * management_data.neuron_pool[37].get_result_safe(
+		   -10 * management_data.neuron_pool[37].get_result_safe(
 		           3 * (field.military_in_constr_nearby + field.military_unstationed), kAbsValue);
 		score_parts[31] =
 		   -10 * management_data.neuron_pool[31].get_result_safe(
@@ -2890,8 +2890,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		   management_data.neuron_pool[35].get_result_safe(bf->average_flag_dist_to_wh, kAbsValue) +
 		   management_data.neuron_pool[42].get_result_safe(
 		      bf->average_flag_dist_to_wh / 3, kAbsValue);
-		// printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus,
-		// bf->average_flag_dist_to_wh);
+		//printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus,
+		//bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
