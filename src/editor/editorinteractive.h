@@ -262,16 +262,6 @@ private:
 	std::unique_ptr<Tools> tools_;
 	std::unique_ptr<EditorHistory> history_;
 
-
-	// Editor-specific display flags. These add to the ones defined in interactive_base.h
-	enum {
-		dfShowMaximumBuildhelp = 128,
-		dfShowGrid = 256,
-		dfShowImmovables = 512,
-		dfShowBobs = 1024,
-		dfShowResources = 2048,
-	};
-
 	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
 };
