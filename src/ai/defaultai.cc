@@ -2976,21 +2976,18 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					number_of_same_nearby += same_it->second;
 				}
 
-				// Considering distance to wh for productionsites:
-				// All productionsites in one place
-
-				if (bo.is(BuildingAttribute::kWell) && bo.is(BuildingAttribute::kRanger) &&
+				// Considering distance to wh for various types of productionsites:
+				if (bo.is(BuildingAttribute::kWell) || bo.is(BuildingAttribute::kRanger) ||
 				    bo.is(BuildingAttribute::kHunter)) {
-					prio += wh_distance_malus;
-				} else if (bo.is(
-				              BuildingAttribute::
-				                 kSpaceConsumer)) {  // ??? &&
-					                                  // bo.is(BuildingAttribute::kSupportingProducer))
-					                                  // {
-					prio += wh_distance_malus;
-				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty() &&
-				           !bo.is(BuildingAttribute::kSupportingProducer)) {
-					prio -= wh_distance_malus;  // push them closer from nearest wh
+					prio += wh_distance_malus;  // push farer
+				} else if (bo.is(BuildingAttribute::kRecruitment)) {
+					prio -= wh_distance_malus; // push closer
+				} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
+					; // exclude from this
+				}else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
+					prio += wh_distance_malus;  // push farer
+				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty()) {
+					prio -= wh_distance_malus;  // push closer
 				}
 
 				// this can be only a well (as by now)
