@@ -6920,7 +6920,6 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			}
 			if (!found_on_load) {
 				// recalculate distance ASAP
-				const Time& gametime = game().get_gametime();
 				set_taskpool_task_time(gametime, SchedulerTaskId::kWarehouseFlagDist);
 			}
 		}
