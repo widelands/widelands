@@ -2981,10 +2981,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				    bo.is(BuildingAttribute::kHunter)) {
 					prio += wh_distance_malus;  // push farer
 				} else if (bo.is(BuildingAttribute::kRecruitment)) {
-					prio -= wh_distance_malus; // push closer
+					prio -= wh_distance_malus;  // push closer
 				} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
-					; // exclude from this
-				}else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
+					;  // exclude from this
+				} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 					prio += wh_distance_malus;  // push farer
 				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty()) {
 					prio -= wh_distance_malus;  // push closer
