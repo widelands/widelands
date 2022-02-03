@@ -2982,9 +2982,12 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				if (bo.is(BuildingAttribute::kWell) && bo.is(BuildingAttribute::kRanger) &&
 				    bo.is(BuildingAttribute::kHunter)) {
 					prio += wh_distance_malus;
-				} else if (bo.is(BuildingAttribute::kSpaceConsumer)) { // ??? && bo.is(BuildingAttribute::kSupportingProducer)) {
+				} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // ??? &&
+					                                                     // bo.is(BuildingAttribute::kSupportingProducer))
+					                                                     // {
 					prio += wh_distance_malus;
-				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
+				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty() &&
+				           !bo.is(BuildingAttribute::kSupportingProducer)) {
 					prio -= wh_distance_malus;  // push them closer from nearest wh
 				}
 
