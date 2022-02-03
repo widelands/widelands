@@ -817,8 +817,8 @@ void NetAddons::upload_addon(const std::string& name,
 		relative_path += pair.second;
 		progress(relative_path, state++);
 
-		const auto& content = file_contents.at(pair);
-		write_to_server(content.second.get(), content.first);
+		const auto& data = file_contents.at(pair);
+		write_to_server(data.second.get(), data.first);
 		SDL_Delay(100);  // Give the send buffer time to clear up
 	}
 	progress("", state);
