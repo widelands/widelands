@@ -145,7 +145,7 @@ function dump_eco(plrno, mapname)
 
    traverse_economy(plr, start_flag)
    local folder = mapname
-   local file = ("ecodump_player"..plrno.."_"..plr.tribe_name)
+   local file = ("ecodump_player"..plrno.."-"..plr.tribe_name)
    game:save_campaign_data(folder, file, rv)
 
 end

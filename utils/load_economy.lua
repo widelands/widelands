@@ -81,7 +81,7 @@ end
 
 function load_eco(plrno, tribe, folder)
    plr = game.players[plrno]
-   local file = ("ecodump_player"..plrno.."_"..tribe)
+   local file = ("ecodump_player"..plrno.."-"..tribe)
    local eco = game:read_campaign_data(folder, file)
    -- hq = (tribe.."_headquarters")
    -- plr:place_building(hq, map.player_slots[plrno].starting_field, false, true)
