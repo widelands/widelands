@@ -1908,9 +1908,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	} while (first_area.advance(map));
 
-	if (flags_count == 0) {
-		field.average_flag_dist_to_wh = 60;  // prohibitive
-	} else {
+	if (flags_count > 0) {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
 	// printf("flags count: %2d, avg: %3d\n", flags_count, field.average_flag_dist_to_wh);
@@ -2978,14 +2976,16 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					number_of_same_nearby += same_it->second;
 				}
 
-				// Considering distance to a warehouse NOCOM
-				if (!bo.requires_supporters && !bo.inputs.empty()) {
-					prio -= wh_distance_malus;
-				}
-				// some "independent" space consumers can be pushed to bigger distance from wh
-				if (bo.is(BuildingAttribute::kSpaceConsumer) && bo.inputs.empty() &&
-				    !bo.is(BuildingAttribute::kSupportingProducer)) {
-					prio += wh_distance_malus;  // push them farer from nearest wh
+				// Considering distance to wh for productionsites:
+				// All productionsites in one place
+
+				if (bo.is(BuildingAttribute::kWell) && bo.is(BuildingAttribute::kRanger) &&
+				    bo.is(BuildingAttribute::kHunter)) {
+					prio += wh_distance_malus;
+				} else if (bo.is(BuildingAttribute::kSpaceConsumer)) { // ??? && bo.is(BuildingAttribute::kSupportingProducer)) {
+					prio += wh_distance_malus;
+				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
+					prio -= wh_distance_malus;  // push them closer from nearest wh
 				}
 
 				// this can be only a well (as by now)
@@ -3126,8 +3126,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						prio -= bf->water_nearby / 5;
-
-						prio += wh_distance_malus;  // place farer from nearest WH
 
 						prio += management_data.neuron_pool[67].get_result_safe(
 						           number_of_supported_producers_nearby * 5, kAbsValue) /
@@ -3463,10 +3461,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					continue;
 				}
 
-				// Do not build 2 warehouse in the same time
 				if (!bo.is(BuildingAttribute::kPort)) {
 					assert(numof_warehouses_in_const_ == 0);
-					// Warehouse should not be build too close to another one
+					// New warehouse should not be build too close to another one
 					if (bf->average_flag_dist_to_wh <= 15) {
 						continue;
 					}
