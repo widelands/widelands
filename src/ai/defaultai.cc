@@ -2193,12 +2193,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	      .average_flag_dist_to_wh<200, any_imm_not_connected_to_wh, field.military_in_constr_nearby,
 	                               field.enemy_owned_land_nearby> 0);
 
-	const int32_t ai_bonus = res1       ? 15 :
-	                         -15 + res2 ? 15 :
-	                         -15 + res3 ? 15 :
-                                         -15;  // NOCOM remove this
-
-	field.military_score_ += ai_bonus;
+	field.military_score_ += (res1 ? 15 : -15) + (res2 ? 15 : -15) + (res3 ? 15 : -15);
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
