@@ -790,7 +790,8 @@ void NetAddons::upload_addon(const std::string& name,
 			send += '\n';
 			write_to_server(send);
 
-			file_contents.emplace(DirectoryAndFile(pair.first, file), FileContent(bytes, std::move(complete)));
+			file_contents.emplace(
+			   DirectoryAndFile(pair.first, file), FileContent(bytes, std::move(complete)));
 		}
 	}
 	progress("", state);
