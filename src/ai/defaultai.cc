@@ -3472,24 +3472,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				prio += bo.primary_priority;
 				prio += wh_distance_malus;  // Here it increases priority, more distant is better
 
-				// // iterating over current warehouses and testing a distance
-				// // getting distance to nearest warehouse and adding it to a score
-				// uint16_t nearest_distance = std::numeric_limits<uint16_t>::max();
-				// for (const WarehouseSiteObserver& wh_obs : warehousesites) {
-				// 	const uint16_t actual_distance =
-				// 	   map.calc_distance(bf->coords, wh_obs.site->get_position());
-				// 	nearest_distance = std::min(nearest_distance, actual_distance);
-				// }
-				// // but limit to 30
-				// const uint16_t max_distance_considered = 30;
-				// nearest_distance = std::min(nearest_distance, max_distance_considered);
-				// if (nearest_distance < 13) {
-				// 	continue;
-				// }
-				// prio +=
-				//    management_data.neuron_pool[47].get_result_safe(nearest_distance / 2, kAbsValue) /
-				//    2;
-
 				prio += bf->own_non_military_nearby * 3;
 
 				// dont be close to enemies
