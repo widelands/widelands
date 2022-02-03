@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"PO-Revision-Date: 2022-01-31 02:59+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -59,9 +59,9 @@ msgstr "Làimhseachadh uinneag nan “Amasan”"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
-" You can open and close the ‘Objectives’ window by clicking on the "
+"You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr " ’S urrainn dhut uinneag nan “Amasan” fhosgladh ’s a dhùnadh le briogadh air a’ phutan “Amasan” air a’ bhàr-inneal aig bonn na sgrìn."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -534,9 +534,9 @@ msgstr "Nise, tòisicheamaid air an rathad. Cuimhnich gu bheil sinn ann am modh 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
-" Excellent! To enter road building mode for any flag, left-click on a flag "
+"Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr " Sgoinneil! Gus dol a-steach dhan mhodh togail rathaidean airson bratach sam bith, dèan briogadh clì air a’ bhratach agus tagh an samhla togail rathaidean."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:357
 msgid ""

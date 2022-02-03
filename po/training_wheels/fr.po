@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: Renaud Bouchard, 2021\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -49,6 +49,11 @@ msgstr ""
 "Maintenant nous voyons ou il est possible de placer des bâtiments et des "
 "drapeaux."
 
+#: ../../data/scripting/training_wheels/building_spaces.lua:55
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Click ‘OK’ to continue."
+msgstr ""
+
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
 #: ../../data/scripting/training_wheels/flags.lua:72
@@ -77,6 +82,10 @@ msgid "Now check if you can place even more flags on your roads."
 msgstr ""
 "Maintenant vérifiez si vous pouvez placer encore plus de drapeaux sur vos "
 "routes."
+
+#: ../../data/scripting/training_wheels/flags.lua:87
+msgid "Click ‘OK’ when you’re done."
+msgstr ""
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -157,6 +166,16 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
 msgstr "Routes"
+
+#: ../../data/scripting/training_wheels/logs.lua:141
+#: ../../data/scripting/training_wheels/rocks.lua:144
+msgid "Click on the flag in front of the building to start placing a road."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:152
+msgid ""
+"Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -255,6 +274,13 @@ msgid ""
 msgstr ""
 "Vous avez besoin de fournir du granite à votre tribu. Construisez s'il vous "
 "plait les bâtiments suivants:"
+
+#: ../../data/scripting/training_wheels/rocks.lua:155
+msgid ""
+"Click on the ‘Build road’ button. Afterwards, click the colored markers on "
+"the map to guide your road until you reach the flag in front of the target "
+"building."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
