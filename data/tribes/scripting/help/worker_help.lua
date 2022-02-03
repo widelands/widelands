@@ -140,7 +140,7 @@ function worker_help_string(tribe, worker_description)
       result = img(worker_description.icon_name)
    end
    if helptexts["note"] ~= nil then
-      result = result .. h2(_"Note") .. p(helptexts["note"])
+      result = result .. h2(_("Note")) .. p(helptexts["note"])
    end
 
    if (worker_description.buildable) then

@@ -32,7 +32,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start trading because ...
-         descname = _"trading",
+         descname = _("trading"),
          actions = {
             "call=trade_log",
             "call=trade_coal",
@@ -42,7 +42,7 @@ descriptions:new_productionsite_type {
       },
       trade_log = {
          -- TRANSLATORS: Completed/Skipped/Did not start trading because ...
-         descname = _"trading",
+         descname = _("trading"),
          actions = {
             "callworker=find_pole",
             "return=failed unless site has log:5",
@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
       },
       trade_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start trading because ...
-         descname = _"trading",
+         descname = _("trading"),
          actions = {
             "callworker=find_pole",
             "return=failed unless site has coal:4",
@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
       },
       trade_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start trading because ...
-         descname = _"trading",
+         descname = _("trading"),
          actions = {
             "callworker=find_pole",
             "return=failed unless site has iron:3",
@@ -78,7 +78,7 @@ descriptions:new_productionsite_type {
       },
       trade_gold = {
          -- TRANSLATORS: Completed/Skipped/Did not start trading because ...
-         descname = _"trading",
+         descname = _("trading"),
          actions = {
             "callworker=find_pole",
             "return=failed unless site has gold:2",
