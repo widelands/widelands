@@ -184,7 +184,14 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-        enum class ShowHideEntry { kBuildingSpaces, kMaximumBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kMaximumBuildingSpaces,
+		kGrid,
+		kAnimals,
+		kImmovables,
+		kResources
+	};
 
 	static void do_run_editor(EditorInteractive::Init, const std::string&, const std::string&);
 
