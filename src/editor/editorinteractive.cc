@@ -425,7 +425,8 @@ void EditorInteractive::rebuild_showhide_menu() {
 	 * spaces that will be available if all immovables (trees, rocks, etc.) are removed */
 	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") : _("Show Maximum Building Spaces"),
 	                  ShowHideEntry::kMaximumBuildingSpaces,
-	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false,
+	                  _("Toggle whether to show maximum building spaces that will be available if all immovables (trees, rocks, etc.) are removed"),
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
