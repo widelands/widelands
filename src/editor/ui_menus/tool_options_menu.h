@@ -22,6 +22,7 @@
 #include "editor/editorinteractive.h"
 #include "ui_basic/unique_window.h"
 
+
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry&,
@@ -51,6 +52,10 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	uint32_t vmargin() const {
 		return spacing();
 	}
+
+        virtual void load_values(EditorActionArgs&) {
+        }
+        
 
 private:
 	EditorInteractive& parent_;

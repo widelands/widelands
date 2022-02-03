@@ -18,25 +18,71 @@
 
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
 
+#include <vector>
+
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "editor/tools/history.h"
 #include "editor/tools/tool.h"
 #include "editor/tools/toolhistory_tool.h"
 
-inline EditorInteractive& EditorToolhistoryMenu::eia() const {
+inline EditorInteractive& EditorToolhistoryOptionsMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 /**
  * Create all the buttons etc...
  */
-EditorToolhistoryMenu::EditorToolhistoryMenu(EditorInteractive& parent,
-                                             EditorHistoryTool& history_tool,
-                                       UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &parent, UI::WindowStyle::kWui, "toolhistory_menu", &registry, 250, 30, _("Tool History")),
-     history_tool_(history_tool) {
+EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& parent,
+                                                           EditorHistoryTool& history_tool,
+                                                           UI::UniqueWindow::Registry& registry)
+     : EditorToolOptionsMenu(parent, registry, 350, 100, _("Tool History"), history_tool),
+       history_tool_(history_tool),
+       margin_(4),
+       box_width_(get_inner_w() - 2 * margin_),
+       box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+       list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui) {
+
+	box_.set_size(100, 20);
+	box_.add(&list_);
+        set_center_panel(&box_);
+        rebuild_list();
+
+        list_.clicked.connect([this] {
+                                       // list_.get_selected();
+                                      log_dbg("LIST CLICKED: %s", list_.get_selected().c_str());
+                                      list_item_clicked(list_.get_selected());
+                               });        
 
 	initialization_complete();
 }
 
+void EditorToolhistoryOptionsMenu::list_item_clicked(std::string selected) {
+	EditorActionArgs* args = history_tool_.get_configuration(selected);
+        if (!args) {
+                return;
+        }
+        
+        parent_.restore_tool_configuration(*args);
+        log_dbg("Restored: %s", selected.c_str());
+}
+
+
+void EditorToolhistoryOptionsMenu::rebuild_list() {
+
+        log_dbg("REBUILDING");
+        std::vector<std::string>& actions = history_tool_.get_list();
+
+	list_.clear();
+
+        int count = 0;
+        for (auto it = actions.begin(); it != actions.end(); ++it) {
+                list_.add(*it, *it);
+                
+                count++;
+        }
+}
+
+void EditorToolhistoryOptionsMenu::update() {
+        rebuild_list();
+}

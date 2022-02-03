@@ -19,6 +19,7 @@
 #include "editor/tools/noise_height_tool.h"
 
 #include <cstdlib>
+#include <sstream>
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
@@ -67,4 +68,10 @@ EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& pare
 	EditorActionArgs a(parent);
 	a.interval = interval_;
 	return a;
+}
+
+std::string EditorNoiseHeightTool::format_args_string_impl(EditorInteractive&) {
+        std::ostringstream buf;
+        buf << "noise height: [" << static_cast<int>(interval_.min) << "," << static_cast<int>(interval_.max) << "]";
+        return buf.str();
 }

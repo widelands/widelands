@@ -26,7 +26,7 @@ struct EditorNoiseHeightTool : public EditorTool {
 	explicit EditorNoiseHeightTool(
 	   EditorSetHeightTool& the_set_tool,
 	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
-	   : EditorTool(the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {
+            : EditorTool(the_set_tool, the_set_tool, "noise height"), set_tool_(the_set_tool), interval_(the_interval) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -40,7 +40,8 @@ struct EditorNoiseHeightTool : public EditorTool {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
-
+        std::string format_args_string_impl(EditorInteractive& parent) override;
+        
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_noise_height.png");
 	}

@@ -18,6 +18,8 @@
 
 #include "editor/tools/increase_height_tool.h"
 
+#include <sstream>
+
 #include "editor/editorinteractive.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
@@ -55,3 +57,11 @@ EditorActionArgs EditorIncreaseHeightTool::format_args_impl(EditorInteractive& p
 	a.change_by = change_by_;
 	return a;
 }
+
+std::string EditorIncreaseHeightTool::format_args_string_impl(EditorInteractive&) {
+        std::ostringstream buf;
+        buf << "Increase/decrease height: " << change_by_;
+        return buf.str();
+}
+
+        

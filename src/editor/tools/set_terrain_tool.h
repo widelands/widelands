@@ -23,7 +23,7 @@
 #include "editor/tools/tool.h"
 
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
-	EditorSetTerrainTool() : EditorTool(*this, *this) {
+	EditorSetTerrainTool() : EditorTool(*this, *this, "set terrain") {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -37,6 +37,7 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+        std::string format_args_string_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/ui_basic/fsel.png");

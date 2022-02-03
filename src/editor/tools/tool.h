@@ -26,6 +26,7 @@
 #include "graphic/image.h"
 #include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
+#include "ui_basic/unique_window.h"
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -36,7 +37,10 @@
 class EditorTool {
 public:
 	EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
-	   : second_(second), third_(third), undoable_(uda) {
+           : second_(second), third_(third), undoable_(uda), name_("unnamed") {
+	}
+	EditorTool(EditorTool& second, EditorTool& third, std::string name, bool uda = true)
+           : second_(second), third_(third), undoable_(uda), name_(name) {
 	}
 	virtual ~EditorTool() {
 	}
@@ -72,6 +76,10 @@ public:
 		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl(parent);
 	}
 
+        std::string format_args_string(const ToolIndex i, EditorInteractive& parent) {
+		return (i == First ? *this : i == Second ? second_ : third_).format_args_string_impl(parent);
+	}
+  
 	bool is_undoable() {
 		return undoable_;
 	}
@@ -81,7 +89,12 @@ public:
 	virtual EditorActionArgs format_args_impl(EditorInteractive& parent) {
 		return EditorActionArgs(parent);
 	}
-	virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
+
+        virtual std::string format_args_string_impl(EditorInteractive&) {
+		return this->name_;
+	}
+
+        virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                                  EditorInteractive&,
 	                                  EditorActionArgs*,
 	                                  Widelands::Map*) = 0;
@@ -104,9 +117,14 @@ public:
 		return false;
 	}
 
+	std::string get_name() {
+        	return name_;
+	}
+
 protected:
 	EditorTool &second_, &third_;
 	bool undoable_;
+	std::string name_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(EditorTool);

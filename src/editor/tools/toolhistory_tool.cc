@@ -16,48 +16,54 @@
  *
  */
 
-#include "editor/tools/history_tool.h"
+#include "editor/tools/toolhistory_tool.h"
+
+#include <sstream>
 
 #include "editor/editorinteractive.h"
-#include "logic/widelands_geometry.h"
+#include "editor/tools/action_args.h"
+#include "editor/tools/tool_action.h"
+#include "editor/ui_menus/tool_options_menu.h"
+#include "editor/ui_menus/tool_toolhistory_options_menu.h"        
+#include "ui_basic/unique_window.h"
 
-int32_t EditorHistoryTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                            EditorInteractive& eia,
-                                            EditorActionArgs* args,
-                                            Widelands::Map* map) {
-	args->historyd = map->dump_state(eia.egbase());  // save old state for undo
-	map->history(eia.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
+/// Sets the heights to random values. Changes surrounding nodes if necessary.
+// int32_t EditorHistoryTool::handle_click_impl(const Widelands::NodeAndTriangle<>&,
+//                                                  EditorInteractive&,
+//                                                  EditorActionArgs*,
+//                                                  Widelands::Map*) {
+// 	return 0;
+// }
+        
+        
+bool EditorHistoryTool::add_configuration(EditorTool& primary,
+                                   EditorTool::ToolIndex idx,
+                                   EditorInteractive& parent) {
 
-	// fix for issue #3754 (remove selection markers from deleted fields to prevent a crash)
-	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
-	map->normalize_coords(sel.node);
-	map->normalize_coords(sel.triangle.node);
-	eia.set_sel_pos(sel);
+        EditorActionArgs args = primary.format_args(idx, parent);
+        std::string str = primary.format_args_string(idx, parent);
 
-	eia.map_changed(EditorInteractive::MapWas::kHistoryd);
-
-	return 0;
+	const auto ret = tool_settings_.insert({str, &args});
+        const bool success = ret.second;
+        if (success) {
+                //keys_.push_front(str);
+        }
+        
+        return success;
 }
 
-int32_t EditorHistoryTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>&,
-                                           EditorInteractive& eia,
-                                           EditorActionArgs* args,
-                                           Widelands::Map* map) {
-	map->set_to(eia.egbase(), args->historyd);
 
-	// fix for issue #3754 (same as above)
-	Widelands::NodeAndTriangle<> sel = eia.get_sel_pos();
-	map->normalize_coords(sel.node);
-	map->normalize_coords(sel.triangle.node);
-	eia.set_sel_pos(sel);
+std::vector<std::string>&
+EditorHistoryTool::get_list() {
+        keys_.clear();
+        
+        for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
+                keys_.push_back(it->first);
+        }
 
-	eia.map_changed(EditorInteractive::MapWas::kHistoryd);
-
-	return 0;
+        return keys_;
 }
 
-EditorActionArgs EditorHistoryTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
-	//a.new_map_size = Widelands::Extent(width_, height_);
-	return a;
+EditorActionArgs* EditorHistoryTool::get_configuration(std::string& key) {
+        return tool_settings_[key];
 }

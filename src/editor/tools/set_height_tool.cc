@@ -18,6 +18,8 @@
 
 #include "editor/tools/set_height_tool.h"
 
+#include <sstream>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
@@ -72,4 +74,10 @@ EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive& parent
 	EditorActionArgs a(parent);
 	a.interval = interval_;
 	return a;
+}
+
+std::string EditorSetHeightTool::format_args_string_impl(EditorInteractive&) {
+        std::ostringstream buf;
+        buf << "set height: [" << static_cast<int>(interval_.min) << "," << static_cast<int>(interval_.max) << "]";
+        return buf.str();
 }

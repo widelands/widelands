@@ -16,22 +16,42 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOLHISTORY_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOLHISTORY_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
 
-#include "ui_basic/unique_window.h"
+#include "editor/tools/tool_action.h"
+#include "editor/ui_menus/tool_options_menu.h"
+#include "ui_basic/box.h"
+#include "ui_basic/listselect.h"
+
+
 
 class EditorInteractive;
 struct EditorHistoryTool;
 
-/// The tool history window/menu.
-struct EditorToolhistoryMenu : public UI::UniqueWindow {
-  EditorToolhistoryMenu(EditorInteractive&, EditorHistoryTool&, UI::UniqueWindow::Registry&);
+struct EditorToolhistoryOptionsMenu : public EditorToolOptionsMenu {
+        EditorToolhistoryOptionsMenu(EditorInteractive&, EditorHistoryTool&, UI::UniqueWindow::Registry&);
+
+        uint32_t add_action(EditorTool& tool,
+                            EditorTool::ToolIndex ind,
+                            Widelands::Map& map,
+                            const Widelands::NodeAndTriangle<>& center,
+                            EditorInteractive& parent,
+                            bool draw = false);
+        void update();
 
 private:
 	EditorInteractive& eia() const;
-        EditorHistoryTool &history_tool_;
+        EditorHistoryTool& history_tool_;
+
+        void list_item_clicked(std::string selected);  
+        void rebuild_list();
+
+	int32_t margin_;
+	int32_t box_width_;
+	UI::Box box_;
+        UI::Listselect<std::string> list_;
+
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOLHISTORY_MENU_H
-
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H

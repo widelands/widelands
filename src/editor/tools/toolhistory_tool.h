@@ -16,42 +16,43 @@
  *
  */
 
-#ifndef WL_EDITOR_TOOLS_HISTORY_TOOL_H
-#define WL_EDITOR_TOOLS_HISTORY_TOOL_H
+#ifndef WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H
+#define WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H
+
+#include <map>
+#include <vector>
 
 #include "editor/tools/tool.h"
 
-///  History the map
+
+/// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
 	EditorHistoryTool()
 	   : EditorTool(*this, *this) {
 	}
 
-	/**
-	 * Change the map size
-	 */
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
-
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
-
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
+	                          EditorInteractive&,
+	                          EditorActionArgs*,
+	                          Widelands::Map*) override {
+                return 0;
+        }
+                
+	bool add_configuration(EditorTool&,
+                        EditorTool::ToolIndex,
+                        EditorInteractive& parent);
 
 	const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_history.png");
+		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 
-	bool has_size_one() const override {
-		return true;
-	}
+        std::vector<std::string>& get_list();
+        EditorActionArgs* get_configuration(std::string& key);
 
 private:
+        std::map<std::string, EditorActionArgs*> tool_settings_;
+        std::vector<std::string> keys_;
 
 };
 
-#endif  // end of include guard: WL_EDITOR_TOOLS_HISTORY_TOOL_H
+#endif  // end of include guard: WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H

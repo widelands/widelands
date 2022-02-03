@@ -31,6 +31,8 @@ struct EditorToolNoiseHeightOptionsMenu : public EditorToolOptionsMenu {
 	                                 EditorNoiseHeightTool&,
 	                                 UI::UniqueWindow::Registry&);
 
+        void load_values(EditorActionArgs& args) override;
+        
 private:
 	void update_interval(int32_t lower, int32_t upper);
 	void update_upper();

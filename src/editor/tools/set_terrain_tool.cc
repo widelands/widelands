@@ -18,6 +18,8 @@
 
 #include "editor/tools/set_terrain_tool.h"
 
+#include <sstream>
+
 #include "editor/editorinteractive.h"
 #include "logic/maptriangleregion.h"
 
@@ -90,4 +92,10 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 
 EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
+}
+
+std::string EditorSetTerrainTool::format_args_string_impl(EditorInteractive&) {
+        std::ostringstream buf;
+        buf << "set terrain: TODO";
+        return buf.str();
 }

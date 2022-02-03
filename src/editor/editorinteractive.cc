@@ -33,7 +33,7 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
-#include "editor/tools/toolhistory_tool.h"
+//#include "editor/tools/toolhistory_tool.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -183,6 +183,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
+
+        create_tool_to_window_mapping();
 
 	initialization_complete();
 }
@@ -358,10 +360,10 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
 	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
-	              _("Reuse previous tool settings quickly"),
+	              _("Restore previous tool settings"),
 	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
         tool_windows_.toolhistory.open_window = [this] {
-		new EditorToolhistoryMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
+		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
 	};
 
 
@@ -369,44 +371,55 @@ void EditorInteractive::add_tool_menu() {
 	toolbar()->add(&toolmenu_);
 }
 
+void EditorInteractive::create_tool_to_window_mapping() {
+        tool_to_window_map_.insert({
+                        {&tools()->tool_history, &tool_windows_.toolhistory},
+                        {&tools()->increase_height, &tool_windows_.height},
+                        {&tools()->decrease_height, &tool_windows_.height},
+                        {&tools()->set_height, &tool_windows_.height},
+                        {&tools()->noise_height, &tool_windows_.noiseheight},
+                });
+}
+
+        
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
-	switch (entry) {
-	case ToolMenuEntry::kChangeHeight:
-		tool_windows_.height.toggle();
-		break;
-	case ToolMenuEntry::kRandomHeight:
-		tool_windows_.noiseheight.toggle();
-		break;
-	case ToolMenuEntry::kTerrain:
-		tool_windows_.terrain.toggle();
-		break;
-	case ToolMenuEntry::kImmovables:
-		tool_windows_.immovables.toggle();
-		break;
-	case ToolMenuEntry::kAnimals:
-		tool_windows_.critters.toggle();
-		break;
-	case ToolMenuEntry::kResources:
-		tool_windows_.resources.toggle();
-		break;
-	case ToolMenuEntry::kPortSpace:
-		select_tool(tools()->set_port_space, EditorTool::First);
-		break;
-	case ToolMenuEntry::kPlayers:
-		tool_windows_.players.toggle();
-		break;
-	case ToolMenuEntry::kMapOrigin:
-		select_tool(tools()->set_origin, EditorTool::First);
-		break;
-	case ToolMenuEntry::kMapSize:
-		tool_windows_.resizemap.toggle();
-		break;
-	case ToolMenuEntry::kFieldInfo:
-		select_tool(tools()->info, EditorTool::First);
-		break;
-	case ToolMenuEntry::kToolHistory:
-		tool_windows_.toolhistory.toggle();
-		break;
+        switch (entry) {
+		case ToolMenuEntry::kChangeHeight:
+                        tool_windows_.height.toggle();
+                        break;
+		case ToolMenuEntry::kRandomHeight:
+                        tool_windows_.noiseheight.toggle();
+                        break;
+		case ToolMenuEntry::kTerrain:
+                        tool_windows_.terrain.toggle();
+                        break;
+		case ToolMenuEntry::kImmovables:
+                        tool_windows_.immovables.toggle();
+                        break;
+		case ToolMenuEntry::kAnimals:
+                        tool_windows_.critters.toggle();
+                        break;
+		case ToolMenuEntry::kResources:
+                        tool_windows_.resources.toggle();
+                        break;
+		case ToolMenuEntry::kPortSpace:
+                        select_tool(tools()->set_port_space, EditorTool::First);
+                        break;
+		case ToolMenuEntry::kPlayers:
+                        tool_windows_.players.toggle();
+                        break;
+		case ToolMenuEntry::kMapOrigin:
+                        select_tool(tools()->set_origin, EditorTool::First);
+                        break;
+		case ToolMenuEntry::kMapSize:
+                        tool_windows_.resizemap.toggle();
+                        break;
+		case ToolMenuEntry::kFieldInfo:
+                        select_tool(tools()->info, EditorTool::First);
+                        break;
+		case ToolMenuEntry::kToolHistory:
+                        tool_windows_.toolhistory.toggle();
+                        break;
 	}
 	toolmenu_.toggle();
 }
@@ -583,7 +596,24 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
                                     const bool should_draw) {
 	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
 	                    node_and_triangle, *this, should_draw);
+
+	if ( tools()->tool_history.add_configuration(tools_->current(), tools_->use_tool, *this) ) {
+                update_tool_history_window();
+        } 
+
 	set_need_save(true);
+}
+
+void EditorInteractive::update_tool_history_window() {
+        UI::UniqueWindow* window = get_open_window_for_tool(tools_->tool_history);
+        if (!window) {
+                return;
+        }
+
+        EditorToolhistoryOptionsMenu* toolhistory_window =
+                dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
+        
+        toolhistory_window->update();
 }
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
@@ -1140,4 +1170,36 @@ const std::vector<std::unique_ptr<EditorCategory>>&
 EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
 	assert(editor_categories_.count(type) == 1);
 	return editor_categories_.at(type);
+}
+
+EditorHistory& EditorInteractive::history() {
+        return *history_;
+}
+
+UI::UniqueWindow*
+EditorInteractive::get_open_window_for_tool(EditorTool& tool) {
+        
+        if (&tool == &(tools()->tool_history) && tool_windows_.toolhistory.window) {
+                return tool_windows_.toolhistory.window;
+        }
+
+        log_dbg("ptr: %p ~ %p", dynamic_cast<void*>(&tool), dynamic_cast<void*>(&(tools()->tool_history)));
+
+        log_dbg("count %ld", tool_to_window_map_.count(&tool));
+        assert(tool_to_window_map_.count(&tool) == 1);
+        UI::UniqueWindow::Registry* const window_registry = tool_to_window_map_.at(&tool);
+        
+        return window_registry->window;
+}
+
+
+void EditorInteractive::restore_tool_configuration(EditorActionArgs& args) {
+        EditorTool *tool = &tools()->increase_height;
+        log_dbg("get tools window");
+        UI::UniqueWindow* window = get_open_window_for_tool(*tool);
+        if (!window) {
+          return;
+        }
+
+        dynamic_cast<EditorToolOptionsMenu*>(window)->load_values(args);
 }

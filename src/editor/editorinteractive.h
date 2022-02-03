@@ -35,7 +35,7 @@
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
-#include "editor/tools/toolhistory_tool.h"        
+#include "editor/tools/toolhistory_tool.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -71,7 +71,7 @@ public:
 		using ToolVector = std::vector<EditorTool*>;
 		EditorTool* current_pointer;
 		EditorTool::ToolIndex use_tool;
-		EditorInfoTool info;
+                EditorInfoTool info;
 		EditorSetHeightTool set_height;
 		EditorDecreaseHeightTool decrease_height;
 		EditorIncreaseHeightTool increase_height;
@@ -89,7 +89,7 @@ public:
 		EditorUnsetPortSpaceTool unset_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
-		EditorHistoryTool tool_history;
+                EditorHistoryTool tool_history;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
@@ -159,6 +159,27 @@ public:
 	/// Ensure all world units have been loaded and fill editor categories
 	static void load_world_units(EditorInteractive*, Widelands::EditorGameBase&);
 
+        EditorHistory& history();
+
+        // Returns window for given tool if it's open, otherwise return nullptr
+        UI::UniqueWindow* get_open_window_for_tool(EditorTool& tool);
+
+        void restore_tool_configuration(EditorActionArgs& args);  
+
+	// For referencing the items in toolmenu_
+	enum class ToolWindow {
+		kChangeHeight,
+		kRandomHeight,
+		kTerrain,
+		kImmovables,
+		kAnimals,
+		kResources,
+		kPlayers,
+		kMapSize,
+                kToolHistory,
+	};
+                
+
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
@@ -216,6 +237,9 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
+        void create_tool_to_window_mapping();
+        void update_tool_history_window();
+
 	//  state variables
 	bool need_save_;
 	uint32_t realtime_;
@@ -249,7 +273,7 @@ private:
 
 	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
 	   editor_categories_;
-
+     
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Tools menu on the toolbar
@@ -270,6 +294,10 @@ private:
 
 	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
+
+        // Mapping between tools_ and tool_windows_
+        std::map<EditorTool*, UI::UniqueWindow::Registry*> tool_to_window_map_;
+                
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H
