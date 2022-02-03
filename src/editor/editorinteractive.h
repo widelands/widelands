@@ -205,7 +205,6 @@ private:
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 
-
 	// Toggles the buildhelp for maximum building spaces and calls rebuild_showhide_menu
 	void toggle_maximum_buildhelp();
 	// Show / hide the resources overlays in the mapview
