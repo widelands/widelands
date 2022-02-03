@@ -421,8 +421,8 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
 
-	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether maximum building spaces are
-	 * shown */
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum building
+	 * spaces that will be available if all immovables (trees, rocks, etc.) are removed */
 	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") : _("Show Maximum Building Spaces"),
 	                  ShowHideEntry::kMaximumBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
