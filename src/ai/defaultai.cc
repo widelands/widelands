@@ -2973,13 +2973,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 				// Considering distance to wh for various types of productionsites:
 				if (bo.is(BuildingAttribute::kWell) || bo.is(BuildingAttribute::kRanger) ||
-				    bo.is(BuildingAttribute::kHunter)) {
+				    bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kSpaceConsumer)) {
 					prio += wh_distance_malus;  // push farer
-				} else if (bo.is(BuildingAttribute::kRecruitment)) {
-					prio -= wh_distance_malus;  // push closer
-				} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
-					prio += wh_distance_malus;  // push farer
-				} else if (!bo.inputs.empty() && !bo.ware_outputs.empty() && !bo.requires_supporters) {
+				} else if ((!bo.inputs.empty() && !bo.ware_outputs.empty() &&
+				            !bo.requires_supporters) ||
+				           bo.is(BuildingAttribute::kRecruitment)) {
 					prio -= wh_distance_malus;  // push closer
 				}
 
