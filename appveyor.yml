@@ -35,7 +35,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - appveyor_fix
 
 skip_tags: true
 
