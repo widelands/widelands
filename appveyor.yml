@@ -18,19 +18,16 @@ install:
   - cmd: "set PATH=%MINGWPATH%;C:\\msys64\\usr\\bin;C:\\Program Files (x86)\\Inno Setup 5;%PATH%"
   - cmd: "set CC=%MINGWPATH%\\gcc.exe"
   - cmd: "set CXX=%MINGWPATH%\\g++.exe"
-  # deleting broken repo from mirrorlist
+  # deleting broken repo from mirrorlist (needs to be repeated after first update if needed)
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
   # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   # Update msys2 system (twice, first run does system packages)
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
-  # deleting broken repo from mirrorlist again
-  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.msys\""
-  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw32\""
-  # - cmd: "bash --login -c \"sed -i 7,8d C:/msys64/etc/pacman.d/mirrorlist.mingw64\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-asio mingw-w64-%MINGWSUFFIX%-icu mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
+  # Downgrade incompatible packages to working version
   # - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-libtiff-4.3.0-3-any.pkg.tar.zst\""
 
 shallow_clone: false
@@ -46,19 +43,16 @@ build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
-  # detect revision
-  - cmd: python %APPVEYOR_BUILD_FOLDER%\utils\detect_revision.py > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: set /p WIDELANDS_VERSION_STRING=<%APPVEYOR_BUILD_FOLDER%\WL_RELEASE
+  # detect version
+  - cmd: set /p WIDELANDS_NEXT_VERSION=<%APPVEYOR_BUILD_FOLDER%\NEXT_STABLE_VERSION
+  - cmd: set WIDELANDS_SETUP_NAME=Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_NEXT_VERSION%~git(%APPVEYOR_REPO_COMMIT:~0,7%@%APPVEYOR_REPO_BRANCH%)
+  # finally start the build
   - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
-  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /fWidelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
-  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_VERSION_STRING%.exe
-
-artifacts:
-  - path: Widelands-$(CONFIGURATION)-$(PLATFORM)-$(WIDELANDS_VERSION_STRING).exe
-    name: Widelands Setup
+  - cmd: ISCC /q /o%APPVEYOR_BUILD_FOLDER% /f%WIDELANDS_SETUP_NAME% c:\projects\widelands\utils\win32\innosetup\Widelands.iss
+  - appveyor PushArtifact %APPVEYOR_BUILD_FOLDER%\%WIDELANDS_SETUP_NAME%.exe
 
 platform:
   - x64
