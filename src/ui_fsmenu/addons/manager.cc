@@ -321,8 +321,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
               /** TRANSLATORS: This button allows the user to send a message to the Widelands
                  Development Team */
               _("Contact us…")),
-	server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight)
-{
+     server_name_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kWarning, "", UI::Align::kRight) {
 
 	dev_box_.set_force_scrolling(true);
 	dev_box_.add(
@@ -1279,7 +1278,7 @@ void AddOnsCtrl::layout() {
 		server_name_.get_desired_size(&w, &h);
 		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
-				login_button_.get_y() + (login_button_.get_h() - h) / 2));
+		                              login_button_.get_y() + (login_button_.get_h() - h) / 2));
 	}
 
 	UI::Window::layout();
@@ -1363,20 +1362,24 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 	std::shared_ptr<AddOns::AddOnInfo> remote = find_remote(addon->internal_name);
 	if (remote != nullptr) {
 		if (!AddOns::is_newer_version(remote->version, addon->version)) {
-			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), format(
-					_("The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not newer than the version present on the server (%3$s)."),
-					addon->internal_name, AddOns::version_to_string(addon->version, true), AddOns::version_to_string(remote->version, true)),
-					UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox w(
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			   format(_("The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
+			            "newer than the version present on the server (%3$s)."),
+			          addon->internal_name, AddOns::version_to_string(addon->version, true),
+			          AddOns::version_to_string(remote->version, true)),
+			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
 		}
 		if (remote->category != addon->category) {
-			UI::WLMessageBox w(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), format(
-					_("The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not match the category of the version present on the server (%3$s)."),
-					addon->internal_name,
-					AddOns::kAddOnCategories.at(addon->category).descname(),
-					AddOns::kAddOnCategories.at(remote->category).descname()
-					), UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox w(
+			   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
+			   format(_("The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
+			            "match the category of the version present on the server (%3$s)."),
+			          addon->internal_name, AddOns::kAddOnCategories.at(addon->category).descname(),
+			          AddOns::kAddOnCategories.at(remote->category).descname()),
+			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 			return;
 		}
