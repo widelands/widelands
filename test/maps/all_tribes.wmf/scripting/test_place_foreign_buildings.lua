@@ -3,6 +3,7 @@
 
 -- Run the tests
 run(function()
+   sleep(1000)
    local playernumber = 1
    local player = game.players[playernumber]
 
