@@ -437,7 +437,7 @@ void EditorInteractive::rebuild_showhide_menu() {
 
 	showhidemenu_.add(
 	   /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
-	    *  (trees, * rocks etc.) are shown */
+	    *  (trees, rocks etc.) are shown */
 	   get_display_flag(dfShowImmovables) ? _("Hide Immovables") : _("Show Immovables"),
 	   ShowHideEntry::kImmovables, g_image_cache->get("images/wui/menus/toggle_immovables.png"),
 	   false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables));
