@@ -103,8 +103,8 @@ public:
 	// Gives the tool the chance to modify the maxcaps to change what will be
 	// displayed as maximum build help.
 	virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
-	                                                   const Widelands::EditorGameBase&) {
-                return fcoords.field->maxcaps();
+	                                                  const Widelands::EditorGameBase&) {
+		return fcoords.field->maxcaps();
 	}
 
 	virtual bool operates_on_triangles() const {

@@ -184,7 +184,14 @@ private:
 	};
 
 	// For referencing the items in showhidemenu_
-        enum class ShowHideEntry { kBuildingSpaces, kMaximumBuildingSpaces, kGrid, kAnimals, kImmovables, kResources };
+	enum class ShowHideEntry {
+		kBuildingSpaces,
+		kMaximumBuildingSpaces,
+		kGrid,
+		kAnimals,
+		kImmovables,
+		kResources
+	};
 
 	static void do_run_editor(EditorInteractive::Init, const std::string&, const std::string&);
 
@@ -204,7 +211,6 @@ private:
 	void showhide_menu_selected(ShowHideEntry entry);
 
 	bool player_hears_field(const Widelands::Coords& coords) const override;
-
 
 	// Toggles the buildhelp for maximum building spaces and calls rebuild_showhide_menu
 	void toggle_maximum_buildhelp();
