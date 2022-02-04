@@ -20,6 +20,7 @@
 #define WL_EDITOR_UI_MENUS_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
+#include "editor/tools/tool.h"
 #include "ui_basic/unique_window.h"
 
 
@@ -53,7 +54,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return spacing();
 	}
 
-        virtual void load_values(EditorActionArgs&) {
+        virtual void load_conf(const ToolConf&) {
         }
         
 

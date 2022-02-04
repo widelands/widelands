@@ -31,7 +31,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_to_tool),
 	     change_by_(1),
-	     cur_res_(0) {
+             cur_res_(0) {
 	}
 
 	/***
@@ -78,6 +78,8 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorSetResourcesTool& set_tool() const {
 		return set_tool_;
 	}
+        
+        const ToolID toolId = ToolID::IncreaseResources;
 
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;

@@ -40,7 +40,7 @@ struct EditorNoiseHeightTool : public EditorTool {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
-        std::string format_args_string_impl(EditorInteractive& parent) override;
+        std::string format_conf_string_impl(const ToolConf& conf) override;
         
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_noise_height.png");

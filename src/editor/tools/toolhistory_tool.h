@@ -39,18 +39,21 @@ struct EditorHistoryTool : public EditorTool {
         }
                 
 	bool add_configuration(EditorTool&,
-                        EditorTool::ToolIndex,
-                        EditorInteractive& parent);
+                               EditorTool::ToolIndex,
+                               const ToolConf& conf,                               
+                               EditorInteractive& parent);
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 
-        std::vector<std::string>& get_list();
-        EditorActionArgs* get_configuration(std::string& key);
-
+        const std::vector<std::string>& get_list();
+        const ToolConf* get_configuration_for(const std::string& key);
+        
+        const ToolID toolId = ToolID::ToolHistory;
+        
 private:
-        std::map<std::string, EditorActionArgs*> tool_settings_;
+        std::map<std::string, ToolConf> tool_settings_;
         std::vector<std::string> keys_;
 
 };

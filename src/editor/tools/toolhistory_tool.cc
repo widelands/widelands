@@ -21,7 +21,6 @@
 #include <sstream>
 
 #include "editor/editorinteractive.h"
-#include "editor/tools/action_args.h"
 #include "editor/tools/tool_action.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"        
@@ -37,33 +36,37 @@
         
         
 bool EditorHistoryTool::add_configuration(EditorTool& primary,
-                                   EditorTool::ToolIndex idx,
-                                   EditorInteractive& parent) {
+                                          EditorTool::ToolIndex idx,
+                                          const ToolConf& conf,
+                                          EditorInteractive&) {
 
-        EditorActionArgs args = primary.format_args(idx, parent);
-        std::string str = primary.format_args_string(idx, parent);
+        std::string str = primary.format_conf_string(idx, conf);
 
-	const auto ret = tool_settings_.insert({str, &args});
+	const auto ret = tool_settings_.insert(std::make_pair(str, conf));
         const bool success = ret.second;
-        if (success) {
-                //keys_.push_front(str);
-        }
+
+        log_dbg("added configuration, primary %d, change by %d", static_cast<int>(conf.toolId), conf.change_by);
+        log_dbg("insert success? %i", static_cast<int>(success));
         
         return success;
 }
 
 
-std::vector<std::string>&
+const std::vector<std::string>&
 EditorHistoryTool::get_list() {
         keys_.clear();
         
-        for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
+        for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
                 keys_.push_back(it->first);
         }
 
         return keys_;
 }
 
-EditorActionArgs* EditorHistoryTool::get_configuration(std::string& key) {
-        return tool_settings_[key];
+const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key) {
+        if (tool_settings_.count(key) == 1) {
+                return &tool_settings_[key];
+        }
+
+        return nullptr;
 }

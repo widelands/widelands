@@ -23,10 +23,35 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
+#include "editor/tools/tool_conf.h"
 #include "graphic/image.h"
 #include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/unique_window.h"
+
+enum class ToolID {
+        Unset = 0,
+        Info,
+        SetHeight,
+        IncreaseHeight,
+        DecreaseHeight,
+        NoiseHeight,
+        SetTerrain,
+        DeleteImmovable,
+        PlaceImmovable,
+        SetStartingPos,
+        PlaceCritter,        
+        DeleteCritter,
+        DecreaseResources,
+        SetResources,
+        IncreaseResources,
+        SetPortSpace,
+        UnsetPortSpace,
+        SetOrigin,
+        Resize,
+        ToolHistory
+};
+
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -36,7 +61,8 @@
  */
 class EditorTool {
 public:
-	EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
+
+        EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
            : second_(second), third_(third), undoable_(uda), name_("unnamed") {
 	}
 	EditorTool(EditorTool& second, EditorTool& third, std::string name, bool uda = true)
@@ -76,8 +102,10 @@ public:
 		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl(parent);
 	}
 
-        std::string format_args_string(const ToolIndex i, EditorInteractive& parent) {
-		return (i == First ? *this : i == Second ? second_ : third_).format_args_string_impl(parent);
+        /// Returns a string representing the given configuration
+        std::string format_conf_string(const ToolIndex i, const ToolConf& conf) {
+                assert(conf.toolId == toolId);
+		return (i == First ? *this : i == Second ? second_ : third_).format_conf_string_impl(conf);
 	}
   
 	bool is_undoable() {
@@ -90,7 +118,7 @@ public:
 		return EditorActionArgs(parent);
 	}
 
-        virtual std::string format_args_string_impl(EditorInteractive&) {
+        virtual std::string format_conf_string_impl(const ToolConf&) {
 		return this->name_;
 	}
 
@@ -117,10 +145,24 @@ public:
 		return false;
 	}
 
+        const ToolConf get_configuration(EditorInteractive& base) {
+                ToolConf conf(base, toolId);
+                get_configuration_impl(conf);
+                return conf;
+        }
+
+        virtual void get_configuration_impl(ToolConf&) {
+        }
+        
+        virtual void set_configuration(const ToolConf&) {
+        }
+
 	std::string get_name() {
         	return name_;
 	}
 
+        const ToolID toolId = ToolID::Unset;
+        
 protected:
 	EditorTool &second_, &third_;
 	bool undoable_;
@@ -130,4 +172,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(EditorTool);
 };
 
+
+
+
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_H
+

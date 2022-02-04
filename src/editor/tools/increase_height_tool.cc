@@ -58,10 +58,8 @@ EditorActionArgs EditorIncreaseHeightTool::format_args_impl(EditorInteractive& p
 	return a;
 }
 
-std::string EditorIncreaseHeightTool::format_args_string_impl(EditorInteractive&) {
-        std::ostringstream buf;
-        buf << "Increase/decrease height: " << change_by_;
-        return buf.str();
+std::string EditorIncreaseHeightTool::format_conf_string_impl(const ToolConf& conf) {
+        return format(_("Increase/decrease height: %d, size: %d"), conf.change_by, conf.sel_radius);
 }
 
         

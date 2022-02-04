@@ -94,8 +94,6 @@ EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& paren
 	return EditorTool::format_args_impl(parent);
 }
 
-std::string EditorSetTerrainTool::format_args_string_impl(EditorInteractive&) {
-        std::ostringstream buf;
-        buf << "set terrain: TODO";
-        return buf.str();
+std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) {
+        return format(_("Set terrain: %s, size: %d"), "TODO", conf.sel_radius);
 }

@@ -33,7 +33,6 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
-//#include "editor/tools/toolhistory_tool.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -183,9 +182,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
-
-        create_tool_to_window_mapping();
-
+        
 	initialization_complete();
 }
 
@@ -371,15 +368,6 @@ void EditorInteractive::add_tool_menu() {
 	toolbar()->add(&toolmenu_);
 }
 
-void EditorInteractive::create_tool_to_window_mapping() {
-        tool_to_window_map_.insert({
-                        {&tools()->tool_history, &tool_windows_.toolhistory},
-                        {&tools()->increase_height, &tool_windows_.height},
-                        {&tools()->decrease_height, &tool_windows_.height},
-                        {&tools()->set_height, &tool_windows_.height},
-                        {&tools()->noise_height, &tool_windows_.noiseheight},
-                });
-}
 
         
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
@@ -597,22 +585,29 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
 	                    node_and_triangle, *this, should_draw);
 
-	if ( tools()->tool_history.add_configuration(tools_->current(), tools_->use_tool, *this) ) {
-                update_tool_history_window();
-        } 
+
+        if (tool_settings_changed_) {
+                const ToolConf conf = tools_->current().get_configuration(*this);
+                if ( tools()->tool_history.add_configuration(tools_->current(), tools_->use_tool, conf, *this) ) {
+                        update_tool_history_window();
+                }
+        }
 
 	set_need_save(true);
+        tool_settings_changed_ = false;
 }
 
 void EditorInteractive::update_tool_history_window() {
-        UI::UniqueWindow* window = get_open_window_for_tool(tools_->tool_history);
-        if (!window) {
+        UI::UniqueWindow* window = get_open_window_for_tool(ToolID::ToolHistory);
+        if (window == nullptr) {
+          log_dbg("No open toolhistory window");
                 return;
         }
 
         EditorToolhistoryOptionsMenu* toolhistory_window =
                 dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
-        
+
+        log_dbg("Updating toolhistory");
         toolhistory_window->update();
 }
 
@@ -958,6 +953,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 		unset_sel_picture();
 	}
 	set_sel_triangles(primary.operates_on_triangles());
+        tool_settings_changed_ = true;
 }
 
 void EditorInteractive::run_editor(UI::Panel* error_message_parent,
@@ -1176,30 +1172,73 @@ EditorHistory& EditorInteractive::history() {
         return *history_;
 }
 
-UI::UniqueWindow*
-EditorInteractive::get_open_window_for_tool(EditorTool& tool) {
-        
-        if (&tool == &(tools()->tool_history) && tool_windows_.toolhistory.window) {
-                return tool_windows_.toolhistory.window;
-        }
 
-        log_dbg("ptr: %p ~ %p", dynamic_cast<void*>(&tool), dynamic_cast<void*>(&(tools()->tool_history)));
-
-        log_dbg("count %ld", tool_to_window_map_.count(&tool));
-        assert(tool_to_window_map_.count(&tool) == 1);
-        UI::UniqueWindow::Registry* const window_registry = tool_to_window_map_.at(&tool);
-        
-        return window_registry->window;
-}
-
-
-void EditorInteractive::restore_tool_configuration(EditorActionArgs& args) {
-        EditorTool *tool = &tools()->increase_height;
-        log_dbg("get tools window");
-        UI::UniqueWindow* window = get_open_window_for_tool(*tool);
-        if (!window) {
+/**
+ * 
+ **/
+void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
+        UI::UniqueWindow* window = get_open_window_for_tool(conf.toolId);
+        if (window == nullptr) {
+                log_dbg("No window open for tool %d", static_cast<int>(conf.toolId));
           return;
         }
 
-        dynamic_cast<EditorToolOptionsMenu*>(window)->load_values(args);
+        dynamic_cast<EditorToolOptionsMenu*>(window)->load_conf(conf);
 }
+
+
+/**
+ * Returns open window for the given tool if it has a window and the window is open. 
+ * Otherwises return nullptr.
+ **/
+UI::UniqueWindow*
+EditorInteractive::get_open_window_for_tool(ToolID toolId) {
+        const UI::UniqueWindow::Registry& window_registry = get_window_registry_for_tool(toolId);
+
+        return window_registry.window;
+}
+
+/**
+ * Returns open window for the given tool if it has a window and the window is open. 
+ * Otherwises return nullptr.
+ **/
+UI::UniqueWindow::Registry&
+EditorInteractive::get_window_registry_for_tool(ToolID toolId) {
+
+        switch ( toolId ) {
+        case ToolID::ToolHistory:
+                return tool_windows_.toolhistory;
+        case ToolID::IncreaseHeight:
+        case ToolID::DecreaseHeight:
+        case ToolID::SetHeight:
+                return tool_windows_.height;
+        case ToolID::NoiseHeight:
+                return tool_windows_.noiseheight;
+        case ToolID::SetTerrain:
+                return tool_windows_.terrain;
+        case ToolID::PlaceImmovable:
+                return tool_windows_.immovables;
+        case ToolID::PlaceCritter:
+                return tool_windows_.critters;
+        case ToolID::IncreaseResources:
+        case ToolID::DecreaseResources:
+        case ToolID::SetResources:
+                return tool_windows_.resources;
+        case ToolID::Resize:
+                return tool_windows_.resizemap;
+        case ToolID::Info:
+        case ToolID::DeleteImmovable:
+        case ToolID::SetStartingPos:
+        case ToolID::DeleteCritter:
+        case ToolID::SetPortSpace:
+        case ToolID::UnsetPortSpace:
+        case ToolID::SetOrigin:
+        case ToolID::Unset:                
+                break;
+        }
+
+        log_dbg("ID: %d", static_cast<int>(toolId));
+
+        NEVER_HERE();
+}
+

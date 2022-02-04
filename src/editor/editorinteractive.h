@@ -162,9 +162,9 @@ public:
         EditorHistory& history();
 
         // Returns window for given tool if it's open, otherwise return nullptr
-        UI::UniqueWindow* get_open_window_for_tool(EditorTool& tool);
-
-        void restore_tool_configuration(EditorActionArgs& args);  
+        UI::UniqueWindow* get_open_window_for_tool(ToolID toolId);
+        UI::UniqueWindow::Registry& get_window_registry_for_tool(ToolID toolId);
+        void restore_tool_configuration(const ToolConf& conf);  
 
 	// For referencing the items in toolmenu_
 	enum class ToolWindow {
@@ -237,7 +237,6 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
-        void create_tool_to_window_mapping();
         void update_tool_history_window();
 
 	//  state variables
@@ -297,6 +296,10 @@ private:
 
         // Mapping between tools_ and tool_windows_
         std::map<EditorTool*, UI::UniqueWindow::Registry*> tool_to_window_map_;
+
+        /// Set to true when tool settings are changed in tool window.
+        /// Set to false when the tool is used with the new settings.
+        bool tool_settings_changed_ = true;
                 
 };
 

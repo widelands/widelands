@@ -76,8 +76,6 @@ EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive& parent
 	return a;
 }
 
-std::string EditorSetHeightTool::format_args_string_impl(EditorInteractive&) {
-        std::ostringstream buf;
-        buf << "set height: [" << static_cast<int>(interval_.min) << "," << static_cast<int>(interval_.max) << "]";
-        return buf.str();
+std::string EditorSetHeightTool::format_conf_string_impl(const ToolConf& conf) {
+        return format(_("Set height: %d, size: %d"), conf.interval.min, conf.sel_radius);
 }

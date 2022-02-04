@@ -29,6 +29,7 @@ class BobDescr;
 
 class EditorInteractive;
 struct EditorToolAction;
+enum class ToolID;
 
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
@@ -68,6 +69,9 @@ struct EditorActionArgs {
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 
 	uint32_t refcount;
+
+        ToolID toolId;
+        
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_ACTION_ARGS_H

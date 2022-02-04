@@ -30,6 +30,7 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_tool),
              change_by_(1) {
+                log_dbg("increase height constructor id: %d", static_cast<int>(toolId));
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
@@ -43,7 +44,8 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
-        std::string format_args_string_impl(EditorInteractive& parent) override;
+        
+        std::string format_conf_string_impl(const ToolConf& conf) override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_increase_height.png");
@@ -62,6 +64,16 @@ struct EditorIncreaseHeightTool : public EditorTool {
 	EditorSetHeightTool& set_tool() const {
 		return set_tool_;
 	}
+
+        void get_configuration_impl(ToolConf& conf) override {
+                conf.change_by = change_by_;
+        }
+        void set_configuration(const ToolConf& conf) override {
+                change_by_ = conf.change_by;
+        }
+        
+
+        const ToolID toolId = ToolID::IncreaseHeight;
 
 private:
 	EditorDecreaseHeightTool& decrease_tool_;

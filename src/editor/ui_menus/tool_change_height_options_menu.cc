@@ -91,8 +91,19 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 	select_correct_tool();
 }
 
-void EditorToolChangeHeightOptionsMenu::load_values(EditorActionArgs& args) {
-        change_by_.set_value(args.change_by);
-        set_to_.set_value(args.set_to);
+void EditorToolChangeHeightOptionsMenu::load_conf(const ToolConf& conf) {
+	switch (conf.toolId) {
+	        case ToolID::DecreaseHeight:
+        	case ToolID::IncreaseHeight:
+        	        change_by_.set_value(conf.change_by);
+                        update_change_by();
+	                break;
+	        case ToolID::SetHeight:
+	                set_to_.set_value(conf.set_to);
+                        update_set_to();
+	                break;
+	        default:
+	                NEVER_HERE();
+        }
 }
 
