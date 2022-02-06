@@ -6,9 +6,8 @@ test_descr = lunit.TestCase("Gettext Test")
 -- Code takes a different path when textdomain was pushed, so we have 2 variants of each test.
 
 function gettext_calls()
-   assert_equal("foo", _"foo")
    assert_equal("foo", _("foo"))
-   assert_equal(_"Carrier", _("Carrier"))
+   assert_equal(_("bar"), _("bar"))
 end
 
 function test_descr:test_gettext()

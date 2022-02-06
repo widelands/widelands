@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
-         descname = _"planting bushes",
+         descname = _("planting bushes"),
          actions = {
             "callworker=plant",
             "sleep=duration:21s"

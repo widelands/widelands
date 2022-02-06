@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -32,7 +31,7 @@
 namespace AI {
 
 constexpr int kNormalMutation = 500;  // Almost no mutation
-constexpr int kTrainingMutation = 200;
+constexpr int kTrainingMutation = 250;
 
 constexpr int kMilitaryNumbersPos = 0;
 constexpr int kNeuronsPos = 1;

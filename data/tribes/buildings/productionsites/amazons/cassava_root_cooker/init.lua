@@ -51,14 +51,14 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=produce_bread",
          }
       },
       produce_bread = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-         descname = _"baking bread",
+         descname = _("baking bread"),
          actions = {
             -- time total: 33
             "return=skipped unless economy needs amazons_bread",

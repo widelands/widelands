@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -219,13 +218,7 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 
 	uint32_t old_nrports = ports_.size();
 	ports_.insert(ports_.end(), other->ports_.begin(), other->ports_.end());
-	portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
-
-	for (uint32_t j = 1; j < other->ports_.size(); ++j) {
-		for (uint32_t i = 0; i < j; ++i) {
-			portpath(old_nrports + i, old_nrports + j) = other->portpath(i, j);
-		}
-	}
+	port_paths_.insert(other->port_paths_.begin(), other->port_paths_.end());
 
 	for (uint32_t idx = old_nrports; idx < ports_.size(); ++idx) {
 		ports_[idx]->set_fleet(this);
@@ -236,7 +229,7 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 	}
 
 	other->ports_.clear();
-	other->portpaths_.clear();
+	other->port_paths_.clear();
 	other->remove(egbase);
 
 	update(egbase);
@@ -273,7 +266,7 @@ void ShipFleet::cleanup(EditorGameBase& egbase) {
 			Economy::check_split(base, pd->base_flag(), wwWORKER);
 		}
 	}
-	portpaths_.clear();
+	port_paths_.clear();
 
 	while (!ships_.empty()) {
 		Ship* ship = ships_.back();
@@ -286,14 +279,16 @@ void ShipFleet::cleanup(EditorGameBase& egbase) {
 
 ShipFleet::PortPath& ShipFleet::portpath(uint32_t i, uint32_t j) {
 	assert(i < j);
-
-	return portpaths_[((j - 1) * j) / 2 + i];
+	assert(j < ports_.size());
+	// This creates a default-constructed portpath if it did not yet exist.
+	return port_paths_[std::make_pair(ports_[i]->serial(), ports_[j]->serial())];
 }
 
 const ShipFleet::PortPath& ShipFleet::portpath(uint32_t i, uint32_t j) const {
 	assert(i < j);
-
-	return portpaths_[((j - 1) * j) / 2 + i];
+	assert(j < ports_.size());
+	// This throws an exception if the port path was never computed yet.
+	return port_paths_.at(std::make_pair(ports_[i]->serial(), ports_[j]->serial()));
 }
 
 ShipFleet::PortPath& ShipFleet::portpath_bidir(uint32_t i, uint32_t j, bool& reverse) {
@@ -576,7 +571,6 @@ void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 		}
 	}
 
-	portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
 	if (upcast(Game, g, &egbase)) {
 		schedule_.port_added(*g, *port);
 	}
@@ -584,20 +578,18 @@ void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 }
 
 void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
-	std::vector<PortDock*>::iterator it = std::find(ports_.begin(), ports_.end(), port);
-	if (it != ports_.end()) {
-		uint32_t gap = it - ports_.begin();
-		for (uint32_t i = 0; i < gap; ++i) {
-			portpath(i, gap) = portpath(i, ports_.size() - 1);
+	for (auto it = port_paths_.begin(); it != port_paths_.end();) {
+		if (it->first.first == port->serial() || it->first.second == port->serial()) {
+			it = port_paths_.erase(it);
+		} else {
+			++it;
 		}
-		for (uint32_t i = gap + 1; i < ports_.size() - 1; ++i) {
-			portpath(gap, i) = portpath(i, ports_.size() - 1);
-			if (portpath(gap, i).path) {
-				portpath(gap, i).path->reverse();
-			}
+	}
+	{
+		std::vector<PortDock*>::iterator it = std::find(ports_.begin(), ports_.end(), port);
+		if (it != ports_.end()) {
+			ports_.erase(it);
 		}
-		ports_.erase(it);
-		portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
 	}
 	port->set_fleet(nullptr);
 
@@ -763,8 +755,6 @@ void ShipFleet::Loader::load_pointers() {
 		fleet.ports_.push_back(&map_object_loader.get<PortDock>(temp_port));
 		fleet.ports_.back()->set_fleet(&fleet);
 	}
-
-	fleet.portpaths_.resize((fleet.ports_.size() * (fleet.ports_.size() - 1)) / 2);
 
 	fleet.act_pending_ = save_act_pending;
 

@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -464,13 +463,19 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 		if (display_.ware_selected(index) ||
 		    (!anything_selected && !display_.is_ware_hidden(index))) {
 			if (is_wares) {
+				auto setting = settings.wares.find(index);
+				if (setting == settings.wares.end()) {
+					continue;
+				}
 				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.wares.at(index)));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			} else {
+				auto setting = settings.workers.find(index);
+				if (setting == settings.workers.end()) {
+					continue;
+				}
 				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
-				   game.get_gametime(), player_->player_number(), serial_, index,
-				   settings.workers.at(index)));
+				   game.get_gametime(), player_->player_number(), serial_, index, setting->second));
 			}
 		}
 	}
@@ -827,16 +832,21 @@ void EconomyOptionsWindow::read_targets() {
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
 				const std::string name(v->get_name());
-				const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker =
-				   descriptions_->load_ware_or_worker(name);
-				assert(wareworker.second != Widelands::INVALID_INDEX);
-				switch (wareworker.first) {
-				case Widelands::WareWorker::wwWARE:
-					t.wares.insert(std::make_pair(wareworker.second, v->get_natural()));
-					break;
-				case Widelands::WareWorker::wwWORKER:
-					t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
-					break;
+				try {
+					const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker =
+					   descriptions_->load_ware_or_worker(name);
+					assert(wareworker.second != Widelands::INVALID_INDEX);
+					switch (wareworker.first) {
+					case Widelands::WareWorker::wwWARE:
+						t.wares.insert(std::make_pair(wareworker.second, v->get_natural()));
+						break;
+					case Widelands::WareWorker::wwWORKER:
+						t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
+						break;
+					}
+				} catch (const Widelands::GameDataError&) {
+					log_warn("Unknown ware or worker '%s' in economy profile '%s'", name.c_str(),
+					         pair.second.c_str());
 				}
 			}
 			predefined_targets_.insert(std::make_pair(pair.second, t));

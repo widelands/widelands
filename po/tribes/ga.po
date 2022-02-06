@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-10 04:26+0000\n"
+"POT-Creation-Date: 2022-02-01 02:42+0000\n"
 "PO-Revision-Date: 2022-01-04 02:59+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Irish (http://www.transifex.com/widelands/widelands/language/ga/)\n"
@@ -1281,8 +1281,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1697,6 +1697,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1708,6 +1709,8 @@ msgstr ""
 msgid "making a shovel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1717,6 +1720,7 @@ msgstr ""
 msgid "making a felling ax"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1731,6 +1735,8 @@ msgstr ""
 msgid "making a machete"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1741,6 +1747,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1916,6 +1923,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3559,16 +3567,16 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:89
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:97
 msgid "No Ponds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:98
 msgid "Out of Fish Ponds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -3721,11 +3729,11 @@ msgstr ""
 msgid "collecting coal"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
 msgid "Out of Clay Ponds"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "The charcoal burner working at this charcoal burner’s house can’t find any "
@@ -5248,6 +5256,7 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
+#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5460,10 +5469,10 @@ msgstr[4] ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
-#. descname = _ "Discovery",
+#. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
-#. tooltip = _"Start the game with three ships on the ocean and only a handful
-#. of supplies",
+#. tooltip = _("Start the game with three ships on the ocean and only a
+#. handful of supplies"),
 #. map_tags = {"seafaring"},
 #. incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
 #. uses_map_starting_position = false,

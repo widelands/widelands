@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_terrain_type{
    name = "desert2",
-   descname = _ "Desert 2",
+   descname = _("Desert 2"),
    is = "walkable",
    valid_resources = {},
    default_resource = "",

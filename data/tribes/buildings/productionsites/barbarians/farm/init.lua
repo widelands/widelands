@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
+         descname = _("working"),
          actions = {
             "call=plant",
             "call=harvest",
@@ -70,7 +70,7 @@ descriptions:new_productionsite_type {
       },
       plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-         descname = _"planting wheat",
+         descname = _("planting wheat"),
          actions = {
             "callworker=plant",
             "animate=working duration:7s",
@@ -79,7 +79,7 @@ descriptions:new_productionsite_type {
       },
       harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-         descname = _"harvesting wheat",
+         descname = _("harvesting wheat"),
          actions = {
             "callworker=harvest",
             "animate=working duration:3s",
@@ -89,8 +89,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fields",
-      heading = _"Out of Fields",
+      title = _("No Fields"),
+      heading = _("Out of Fields"),
       message = pgettext("barbarians_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },

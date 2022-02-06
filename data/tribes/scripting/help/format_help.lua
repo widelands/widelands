@@ -51,23 +51,23 @@ function plot_size_line(size)
    local image = ""
    if (size == "mine") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Mine plot"
+      text = _("Mine plot")
       image = "images/wui/overlays/mine.png"
    elseif (size == "port") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Port plot"
+      text = _("Port plot")
       image = "images/wui/overlays/port.png"
    elseif (size == "small") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Small plot"
+      text = _("Small plot")
       image = "images/wui/overlays/small.png"
    elseif (size == "medium") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Medium plot"
+      text = _("Medium plot")
       image = "images/wui/overlays/medium.png"
    elseif (size == "big") then
       -- TRANSLATORS: Space on the map required for building a building there
-      text = _"Big plot"
+      text = _("Big plot")
       image = "images/wui/overlays/big.png"
    else
       return ""
@@ -77,7 +77,7 @@ function plot_size_line(size)
       div("width=100%",
          div("float=right padding_l=6", p(img(image))) ..
          -- TRANSLATORS: Space on the map required for building a building there
-         p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+         p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
       )
 end
 
@@ -114,7 +114,7 @@ end
 --
 --    Displays an amount of wares with name and images
 --
---    :arg ware_description: The :class:`LuaWareDescription` for the ware type to be displayed
+--    :arg ware_description: The :class:`wl.map.WareDescription` for the ware type to be displayed
 --    :arg amount: The amount to show as a number
 --    :returns: image_line for the ware type and amount
 --
@@ -130,7 +130,7 @@ function help_ware_amount_line(ware_description, amount)
       temp_amount = temp_amount - imgperline
    end
    -- TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-   result = image_line(image, temp_amount, p(_"%1$dx %2$s":bformat(amount, ware_description.descname))) .. result
+   result = image_line(image, temp_amount, p(_("%1$dx %2$s"):bformat(amount, ware_description.descname))) .. result
    return result
 end
 
@@ -139,14 +139,14 @@ end
 --
 --    Displays needed experience levels for workers
 --
---    :arg worker_description: The :class:`LuaWorkerDescription` for the lower-level worker
---    :arg becomes_description: The :class:`LuaWorkerDescription` for the higher-level worker
+--    :arg worker_description: The :class:`wl.map.WorkerDescription` for the lower-level worker
+--    :arg becomes_description: The :class:`wl.map.WorkerDescription` for the higher-level worker
 --    :returns: text describing the needed experience
 --
 function help_worker_experience(worker_description, becomes_description)
-   local result = h2(_"Experience levels")
+   local result = ""
    -- TRANSLATORS: EP = Experience Points
-   local exp_string = _"%s to %s (%s EP)":format(
+   local exp_string = _("%s to %s (%s EP)"):format(
          worker_description.descname,
          becomes_description.descname,
          worker_description.needed_experience
@@ -156,7 +156,7 @@ function help_worker_experience(worker_description, becomes_description)
    becomes_description = worker_description.becomes
    if(becomes_description) then
      -- TRANSLATORS: EP = Experience Points
-      exp_string = exp_string .. "<br>" .. _"%s to %s (%s EP)":format(
+      exp_string = exp_string .. "<br>" .. _("%s to %s (%s EP)"):format(
             worker_description.descname,
             becomes_description.descname,
             worker_description.needed_experience
@@ -171,7 +171,7 @@ end
 --
 --    Displays tools with an intro text and images
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that uses the tools
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that uses the tools
 --    :arg toolnames: e.g. {"shovel", "basket"}.
 --    :arg no_of_workers: the number of workers using the tools; for plural formatting.
 --    :returns: image_line for the tools
@@ -190,12 +190,12 @@ end
 
 
 -- RST
--- .. function:: help_consumed_wares_workers(building, program_name)
+-- .. function:: help_consumed_wares_workers(tribe, building, program_name)
 --
 --    Returns information for which wares and workers in which amounts are consumed by a production program.
 --
---    :arg tribe: The :class:`LuaTribeDescription` for the tribe that consumes the ware
---    :arg building: The :class:`LuaBuildingDescription` for the building that runs the program
+--    :arg tribe: The :class:`wl.map.TribeDescription` for the tribe that consumes the ware
+--    :arg building: The :class:`wl.map.BuildingDescription` for the building that runs the program
 --    :arg program_name: The name of the production program that the info is collected for
 --
 --    :returns: A "Ware(s) consumed:" section with image_lines
@@ -221,7 +221,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
             description = wl.Game():get_worker_description(consumed_item)
             consumes_workers = true
          end
-         consumed_itemnames[count] = _"%1$dx %2$s":bformat(amount, description.descname)
+         consumed_itemnames[count] = _("%1$dx %2$s"):bformat(amount, description.descname)
          consumed_images[count] = description.icon_name
          consumed_amount[count] = amount
          count = count + 1
@@ -229,7 +229,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
       end
       local text = localize_list(consumed_itemnames, "or")
       if (countlist > 1) then
-         text = _"%s and":bformat(text)
+         text = _("%s and"):bformat(text)
       end
       local images = ""
       local image_counter = 1

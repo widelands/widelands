@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -740,6 +739,7 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	sync_reset();
+	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -753,6 +753,10 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_running;
 
+	// Immediately progress the game by 1 tick before removing the loader UI
+	// to ensure that there is no black screen in the brief interval between
+	// the initialization and the loading of the initial scripts.
+	think();
 	remove_loader_ui();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0

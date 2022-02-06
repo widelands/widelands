@@ -30,7 +30,7 @@
 --    **descname**
 --        *Mandatory*. The translatable display name, e.g.::
 --
---            descname = _"Coal",
+--            descname = _("Coal"),
 --
 --    **max_amount**
 --        *Mandatory*. The maximum possible amount of this map resource that can
@@ -85,7 +85,7 @@
 --
 --    wl.Descriptions():new_resource_type{
 --       name = "resource_coal",
---       descname = _ "Coal",
+--       descname = _("Coal"),
 --       max_amount = 20,
 --       detectable = true,
 --       timeout_ms = 300000,
@@ -107,7 +107,7 @@ local pics_dir = path.dirname(__file__) .. "../pics/"
 
 wl.Descriptions():new_resource_type{
    name = "resource_coal",
-   descname = _ "Coal",
+   descname = _("Coal"),
    max_amount = 20,
    detectable = true,
    timeout_ms = 300000,

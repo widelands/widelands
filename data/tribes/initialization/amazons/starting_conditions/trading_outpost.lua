@@ -8,9 +8,9 @@ push_textdomain("tribes")
 
 init = {
    -- TRANSLATORS: This is the name of a starting condition
-   descname = _"Trading Outpost",
+   descname = _("Trading Outpost"),
    -- TRANSLATORS: This is the tooltip for the "Trading Outpost" starting condition
-   tooltip = _"If this player runs low on important wares, they will be replenished for free",
+   tooltip = _("If this player runs low on important wares, they will be replenished for free"),
    func = function(player, shared_in_start)
 
       local sf = wl.Game().map.player_slots[player.number].starting_field

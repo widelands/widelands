@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-         descname = _"mining marble",
+         descname = _("mining marble"),
          actions = {
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
@@ -58,7 +58,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce_granite = {
-         descname = _"mining marble",
+         descname = _("mining marble"),
          actions = {
             "animate=working duration:7s800ms",
             "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
@@ -66,7 +66,7 @@ descriptions:new_productionsite_type {
          }
       },
       mine_produce_marble = {
-         descname = _"mining marble",
+         descname = _("mining marble"),
          actions = {
             "animate=working duration:7s800ms",
             "mine=resource_stones radius:2 yield:100% when_empty:5% experience_on_fail:2%",
@@ -84,8 +84,8 @@ descriptions:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Marble",
-      heading = _"Main Marble Vein Exhausted",
+      title = _("No Marble"),
+      heading = _("Main Marble Vein Exhausted"),
       message =
          pgettext("empire_building", "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },

@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -438,6 +437,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_r),
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
+
+   {KeyboardShortcut::kEditorShowhideMaximumBuildhelp,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                         keysym(SDLK_SPACE, KMOD_SHIFT),
+                         "editor_showhide_maximum_buildhelp",
+                         []() { return _("Toggle Maximum Build Spaces"); })},
 
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \

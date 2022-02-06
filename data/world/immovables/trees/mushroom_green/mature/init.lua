@@ -7,7 +7,7 @@ include(dirname .. "../terrain_affinity.lua")
 wl.Descriptions():new_immovable_type{
    name = "mushroom_green_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
-   descname = _ "Green Mushroom Tree (Mature)",
+   descname = _("Green Mushroom Tree (Mature)"),
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {

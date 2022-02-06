@@ -2,7 +2,7 @@ push_textdomain("world")
 
 wl.Descriptions():new_immovable_type{
    name = "fallentree",
-   descname = _ "Felled Tree",
+   descname = _("Felled Tree"),
    animation_directory = path.dirname(__file__),
    size = "none",
    programs = {

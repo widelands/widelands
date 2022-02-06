@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -99,6 +98,13 @@ public:
 	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
 	                                                   const Widelands::EditorGameBase&) {
 		return fcoords.field->nodecaps();
+	}
+
+	// Gives the tool the chance to modify the maxcaps to change what will be
+	// displayed as maximum build help.
+	virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                                  const Widelands::EditorGameBase&) {
+		return fcoords.field->maxcaps();
 	}
 
 	virtual bool operates_on_triangles() const {

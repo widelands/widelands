@@ -77,7 +77,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
-         descname = _"sewing fur garment",
+         descname = _("sewing fur garment"),
          actions = {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs fur_garment or workers need experience",

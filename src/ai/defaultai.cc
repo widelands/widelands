@@ -12,8 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
  *
  */
 
@@ -70,9 +69,10 @@ constexpr int32_t kSpotsEnough = 25;
 constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
-constexpr bool kPrintStats = true;
+// also note that some of that stats is printed only in verbose mode
+constexpr bool kEnableStatsPrint = false;
 // enable also the above to print the results of the performance data collection
-constexpr bool kCollectPerfData = true;
+constexpr bool kCollectPerfData = false;
 
 // for scheduler
 constexpr int kMaxJobs = 4;
@@ -343,12 +343,10 @@ void DefaultAI::think() {
 	}
 	assert(!current_task_queue.empty() && current_task_queue.size() <= jobs_to_run_count);
 
-	if (kPrintStats) {
-		if (GameController* const ctrl = game().game_controller()) {
-			verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
-			                  player_->player_number(), jobs_to_run_count, delay_time,
-			                  ctrl->real_speed());
-		}
+	if (GameController* const ctrl = game().game_controller()) {
+		verb_log_dbg_time(gametime, "Player: %d; Jobs: %d; delay: %d; gamespeed: %d \n",
+		                  player_->player_number(), jobs_to_run_count, delay_time,
+		                  ctrl->real_speed());
 	}
 
 	// Ordering temporary queue so that higher priority (lower number) is on the beginning
@@ -1139,9 +1137,11 @@ void DefaultAI::late_initialization() {
 	taskPool.push_back(
 	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(15 * 60 * 1000)),
 	                                   SchedulerTaskId::kWareReview, 9, "wares review"));
-	taskPool.push_back(
-	   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
-	                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	if (kEnableStatsPrint) {
+		taskPool.push_back(
+		   std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 60 * 1000)),
+		                                   SchedulerTaskId::kPrintStats, 9, "print statistics"));
+	}
 	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(60 * 1000)),
 	                                                   SchedulerTaskId::kCountMilitaryVacant, 2,
 	                                                   "count military vacant"));
@@ -1844,163 +1844,101 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
-	static std::vector<Widelands::ImmovableFound> immovables;
-	immovables.reserve(50);
-	immovables.clear();
-	// Search in a radius of range
-	map.find_immovables(
-	   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2), &immovables);
-
-	// function seems to return duplicates, so we will use serial numbers to filter them out
-	static std::set<uint32_t> unique_serials;
-	unique_serials.clear();
-
-	for (const Widelands::ImmovableFound& imm_found : immovables) {
-		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
-		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is a duplicate
-		}
-
-		if (upcast(Widelands::PlayerImmovable const, player_immovable, &base_immovable)) {
-
-			// TODO(unknown): Only continue if this is an opposing site
-			// allied sites should be counted for military influence
-			if (player_immovable->owner().player_number() != pn) {
-				continue;
-			}
-			// here we identify the buiding (including expected building if constructionsite)
-			// and calculate some statistics about nearby buildings
-			if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-				BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
-				consider_productionsite_influence(field, imm_found.coords, bo);
-			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
-					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
-					consider_productionsite_influence(field, imm_found.coords, bo);
-				}
-			}
-		}
-	}
-
-	// Now testing military aspects
-	immovables.clear();
-	map.find_immovables(game(),
-	                    Widelands::Area<Widelands::FCoords>(field.coords, actual_enemy_check_area),
-	                    &immovables);
-
 	// We are interested in unconnected immovables, but we must be also close to connected ones
-	static bool any_connected_imm = false;
-	any_connected_imm = false;
-	static bool any_unconnected_imm = false;
-	any_unconnected_imm = false;
+	static bool any_imm_connected_to_wh = false;
+	any_imm_connected_to_wh = false;
+	static bool any_imm_not_connected_to_wh = false;
+	any_imm_not_connected_to_wh = false;
+
+	// immovables can occupy more then one field so we need a safeguard for duplicates
+	std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
-	for (const Widelands::ImmovableFound& imm_found : immovables) {
-		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
+	// The code presumes that the second value is bigger - to be eligible for hollow area
+	assert(kProductionArea + 2 <= actual_enemy_check_area);  // to handle this better
 
-		if (!unique_serials.insert(base_immovable.serial()).second) {
-			continue;  // serial was not inserted in the set, so this is duplicate
+	// First checking lesser circle, doing all possible checks here
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> first_area(
+	   map, Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea + 2));
+	do {
+		Widelands::BaseImmovable* imm = first_area.location().field->get_immovable();
+
+		if (imm == nullptr) {
+			continue;
 		}
 
-		// testing if immovable is owned by someone else and collecting some statistics
-		if (upcast(Widelands::Building const, building, &base_immovable)) {
-
-			const Widelands::PlayerNumber bpn = building->owner().player_number();
-			if (player_statistics.get_is_enemy(bpn)) {  // owned by enemy
-				assert(!player_statistics.players_in_same_team(bpn, pn));
-				field.enemy_nearby = true;
-				if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-					field.enemy_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-					++field.enemy_military_sites;
-				}
-				if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
-					const Widelands::BuildingDescr& target_descr = constructionsite->building();
-					if (target_descr.type() == Widelands::MapObjectType::MILITARYSITE) {
-						++field.enemy_military_sites;
-					}
-				}
-
-				// Warehouses are counted here too as they can host soldiers as well
-				if (upcast(Widelands::Warehouse const, warehouse, building)) {
-					field.enemy_military_presence +=
-					   warehouse->soldier_control()->stationed_soldiers().size();
-					++field.enemy_military_sites;
-					field.enemy_wh_nearby = true;
-					enemy_warehouses.insert(building->get_position().hash());
-				}
-				continue;
-			} else if (bpn != pn) {  // it is an ally
-				assert(!player_statistics.get_is_enemy(bpn));
-				if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-					field.ally_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-				}
-				continue;
-			}
-
-			// if we are here, the immovable is ours
-			assert(building->owner().player_number() == pn);
-
-			// connected to a warehouse
-			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
-			// ferries
-			bool connected = !building->get_economy(Widelands::wwWORKER)->warehouses().empty();
-			if (connected) {
-				any_connected_imm = true;
-			}
-
-			if (upcast(Widelands::ConstructionSite const, constructionsite, building)) {
-				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-
-				if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
-					const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
-					const int32_t radius = target_ms_d->get_conquers() + 4;
-
-					if (radius > dist) {
-						field.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
-						if (field.coords != imm_found.coords) {
-							field.military_loneliness *= static_cast<double_t>(dist) / radius;
-						}
-						++field.military_in_constr_nearby;
-					}
-				}
-			} else if (!connected) {
-				// we don't care about unconnected constructionsites
-				any_unconnected_imm = true;
-			}
-
-			if (upcast(Widelands::MilitarySite const, militarysite, building)) {
-				const int32_t dist = map.calc_distance(field.coords, imm_found.coords);
-				const int32_t radius = militarysite->descr().get_conquers() + 4;
-
-				if (radius > dist) {
-					field.area_military_capacity +=
-					   militarysite->soldier_control()->max_soldier_capacity();
-					field.own_military_presence +=
-					   militarysite->soldier_control()->stationed_soldiers().size();
-
-					if (militarysite->soldier_control()->stationed_soldiers().empty()) {
-						++field.military_unstationed;
-					} else {
-						++field.military_stationed;
-					}
-
-					if (field.coords != imm_found.coords) {
-						field.military_loneliness *= static_cast<double_t>(dist) / radius;
-					}
-				}
-			} else {
-				++field.own_non_military_nearby;
-			}
+		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
+			continue;
 		}
-	}
+
+		if (!unique_serials.insert(imm->serial()).second) {
+			continue;  // position was not inserted in the set, so we saw it before
+		}
+
+		const Widelands::PlayerNumber field_owner = first_area.location().field->get_owned_by();
+
+		if (field_owner == pn) {
+			consider_own_psites(first_area.location(), field);
+			consider_own_msites(
+			   first_area.location(), field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
+			continue;
+		} else if (player_statistics.get_is_enemy(field_owner)) {
+			assert(!player_statistics.players_in_same_team(field_owner, pn));
+			consider_enemy_sites(first_area.location(), field);
+			continue;
+		} else if (field_owner != pn) {
+			// Is Ally
+			assert(!player_statistics.get_is_enemy(field_owner));
+			consider_ally_sites(first_area.location(), field);
+			continue;
+		}
+		NEVER_HERE();
+
+	} while (first_area.advance(map));
+
+	Widelands::HollowArea<> har(
+	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
+	Widelands::MapHollowRegion<> second_area(map, har);
+
+	do {
+
+		Widelands::FCoords location = map.get_fcoords(second_area.location());
+		Widelands::BaseImmovable* imm = location.field->get_immovable();
+
+		if (imm == nullptr) {
+			continue;
+		}
+
+		if (imm->descr().type() < Widelands::MapObjectType::BUILDING) {
+			continue;
+		}
+
+		if (!unique_serials.insert(imm->serial()).second) {
+			continue;  // position was not inserted in the set, so we saw it before
+		}
+
+		const Widelands::PlayerNumber field_owner = location.field->get_owned_by();
+
+		if (player_statistics.get_is_enemy(field_owner)) {  // Is enemy
+			assert(!player_statistics.players_in_same_team(field_owner, pn));
+			consider_enemy_sites(location, field);
+			continue;
+		} else if (field_owner != pn) {  // Is Ally
+			assert(!player_statistics.get_is_enemy(field_owner));
+			consider_ally_sites(location, field);
+			continue;
+		}
+		assert(field_owner == pn);  // It is us
+
+		consider_own_msites(location, field, any_imm_connected_to_wh, any_imm_not_connected_to_wh);
+
+	} while (second_area.advance(map));
 
 	assert(field.military_loneliness <= 1000);
 
-	if (any_unconnected_imm && any_connected_imm && field.military_in_constr_nearby == 0) {
-		field.unconnected_nearby = true;
+	if (any_imm_not_connected_to_wh && any_imm_connected_to_wh &&
+	    field.military_in_constr_nearby == 0) {
+		field.unconnected_nearby = true;  // todo(Tibor) - to use it in gen. algorithm
 	}
 
 	// if there is a militarysite on the field, we try to walk to enemy
@@ -2185,7 +2123,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
                         2 * std::abs(management_data.get_military_number_at(141)) :
                         0;
 	score_parts[56] =
-	   (any_unconnected_imm) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
+	   (any_imm_not_connected_to_wh) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
 	score_parts[57] = 1 * management_data.neuron_pool[18].get_result_safe(
 	                         2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[58] = 3 * management_data.neuron_pool[19].get_result_safe(
@@ -3736,7 +3674,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 // Re-calculating warehouse to flag distances
 void DefaultAI::check_flag_distances(const Time& gametime) {
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
-		uint16_t checked_flags = 0;
 		const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
 		uint32_t highest_distance_set = 0;
 
@@ -3755,7 +3692,6 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 		// to_be_checked can be set back to true. Because less hoops (fewer flag-to-flag roads) does
 		// not always mean shortest road.
 		while (!remaining_flags.empty()) {
-			++checked_flags;
 			// looking for a node with shortest existing road distance from starting flag and one that
 			// has to be checked Now going over roads leading from this flag
 			const uint16_t current_flag_distance = flag_warehouse_distance.get_distance(
@@ -3780,7 +3716,7 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 				   endflag->get_position().hash(), current_flag_distance + steps_count, gametime,
 				   this_wh_hash);
 
-				if (highest_distance_set < current_flag_distance + steps_count) {
+				if (updated && highest_distance_set < current_flag_distance + steps_count) {
 					highest_distance_set = current_flag_distance + steps_count;
 				}
 
@@ -6419,6 +6355,114 @@ int32_t DefaultAI::recalc_with_border_range(const BuildableField& bf, int32_t pr
 
 	return prio;
 }
+
+void DefaultAI::consider_own_psites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	if (player_immovable->descr().type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+		BuildingObserver& bo = get_building_observer(player_immovable->descr().name().c_str());
+		consider_productionsite_influence(bf, fcoords, bo);
+	} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
+		if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+			BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+			consider_productionsite_influence(bf, fcoords, bo);
+		}
+	}
+}
+
+void DefaultAI::consider_enemy_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	bf.enemy_nearby = true;
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		bf.enemy_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+		++bf.enemy_military_sites;
+	}
+	if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
+		if (target_descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+			++bf.enemy_military_sites;
+		}
+	}
+
+	// Warehouses are counted here too as they can host soldiers as well
+	if (upcast(Widelands::Warehouse const, warehouse, player_immovable)) {
+		bf.enemy_military_presence += warehouse->soldier_control()->stationed_soldiers().size();
+		++bf.enemy_military_sites;
+		bf.enemy_wh_nearby = true;
+		enemy_warehouses.insert(fcoords.hash());
+	}
+}
+
+void DefaultAI::consider_ally_sites(Widelands::FCoords fcoords, BuildableField& bf) {
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		bf.ally_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+	}
+}
+
+void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
+                                    BuildableField& bf,
+                                    bool& any_connected_imm,
+                                    bool& any_unconnected_imm) {
+	// last two are about being connected to any warehouse
+	// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
+	// ferries
+	Widelands::BaseImmovable* player_immovable = fcoords.field->get_immovable();
+	const Widelands::Map& map = game().map();
+
+	if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
+
+		const Widelands::BuildingDescr& target_descr = constructionsite->building();
+
+		if (constructionsite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			any_unconnected_imm = true;
+		} else {
+			any_connected_imm = true;
+		}
+
+		if (upcast(Widelands::MilitarySiteDescr const, target_ms_d, &target_descr)) {
+			const int32_t dist = map.calc_distance(bf.coords, constructionsite->get_position());
+			const int32_t radius = target_ms_d->get_conquers() + 4;
+
+			if (radius > dist) {
+				bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
+				if (bf.coords != constructionsite->get_position()) {
+					bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+				}
+				++bf.military_in_constr_nearby;
+			}
+		}
+	}
+
+	if (upcast(Widelands::MilitarySite const, militarysite, player_immovable)) {
+		const int32_t dist = map.calc_distance(bf.coords, militarysite->get_position());
+		const int32_t radius = militarysite->descr().get_conquers() + 4;
+
+		if (militarysite->get_economy(Widelands::wwWORKER)->warehouses().empty()) {
+			any_unconnected_imm = true;
+		} else {
+			any_connected_imm = true;
+		}
+
+		if (radius > dist) {
+			bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+			bf.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
+
+			if (militarysite->soldier_control()->stationed_soldiers().empty()) {
+				++bf.military_unstationed;
+			} else {
+				++bf.military_stationed;
+			}
+
+			if (bf.coords != militarysite->get_position()) {
+				bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+			}
+		}
+	} else {
+		++bf.own_non_military_nearby;
+	}
+}
+
 // for buildable field, it considers effect of building of type bo on position coords
 void DefaultAI::consider_productionsite_influence(BuildableField& field,
                                                   Widelands::Coords coords,
@@ -7147,14 +7191,9 @@ uint32_t DefaultAI::msites_built() const {
 // missing materials and counts of different types of buildings.
 // The main purpose of this is when a game creator needs to finetune a map
 // and needs to know what resourcess are missing for which player and so on.
-// By default it is off (see kPrintStats)
+// By default it is off (see kEnablePrintStats)
 // TODO(tiborb): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats(const Time& gametime) {
-
-	if (!kPrintStats) {
-		set_taskpool_task_time(Time(), SchedulerTaskId::kPrintStats);
-		return;
-	}
 
 	Widelands::PlayerNumber const pn = player_number();
 
@@ -7274,13 +7313,16 @@ void DefaultAI::print_stats(const Time& gametime) {
 	                  player_statistics.get_modified_player_power(player_number()));
 
 	// 5. printing some performance data
-	log_dbg_time(gametime, "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
-	             player_number());
-	for (const auto& task : taskPool) {
-		log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
-		             task->call_count, task->total_exec_time_ms / 1000,
-		             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
-		             task->max_exec_time_ms / 1000);
+	if (kCollectPerfData) {
+		log_dbg_time(gametime,
+		             "Player: %d, AI tasks statistics:  call count  ms total   avg     max\n",
+		             player_number());
+		for (const auto& task : taskPool) {
+			log_dbg_time(gametime, "  %-28s:  %6u   %8.0f  %6.0f %7.0f\n", task->descr.c_str(),
+			             task->call_count, task->total_exec_time_ms / 1000,
+			             (task->call_count) ? task->total_exec_time_ms / 1000 / task->call_count : 0,
+			             task->max_exec_time_ms / 1000);
+		}
 	}
 }
 
