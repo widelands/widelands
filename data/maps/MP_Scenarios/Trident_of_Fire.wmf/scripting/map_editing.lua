@@ -125,7 +125,7 @@ function volcano_eruptions()
          local tr = tr_to_erupt:pop_at(1)
          tr:set_ter("lava")
       end
-      
+
       sleep(10*60*1000)
 -- set back all eruptions
       while fields_to_setback.size > 0 do
