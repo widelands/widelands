@@ -67,67 +67,69 @@ function volcano_eruptions()
    while true do
       sleep(80*60*1000)
       local fields_to_erupt = Set:new{}
+      local fields_to_setback = Set:new{}
       local central_field = map:get_field(78,77)
       local region_to_erupt = central_field:region(9,1)
       for a,field in next,region_to_erupt,f do
          if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
-            if field.immovable then field.immovable:remove() end
-            if #field.bobs > 0 then
-               for i, bob in ipairs(field.bobs) do
-                  bob:remove()
+            for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
+               if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
+               if #f.bobs > 0 then
+                  for i, bob in ipairs(f.bobs) do
+                     bob:remove()
+                  end
                end
             end
             fields_to_erupt:add(f_Field:new(field, field.terd, field.terr))
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y),"d")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y), "r")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
+            fields_to_setback:add(f_Field:new(field, field.terd, field.terr))
          end
       end
       local central_field = map:get_field(71,40)
       local region_to_erupt = central_field:region(9,1)
       for a,field in next,region_to_erupt,f do
          if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
-            if field.immovable then field.immovable:remove() end
-            if #field.bobs > 0 then
-               for i, bob in ipairs(field.bobs) do
-                  bob:remove()
+            for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
+               if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
+               if #f.bobs > 0 then
+                  for i, bob in ipairs(f.bobs) do
+                     bob:remove()
+                  end
                end
             end
             fields_to_erupt:add(f_Field:new(field, field.terd, field.terr))
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y),"d")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y), "r")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
+            fields_to_setback:add(f_Field:new(field, field.terd, field.terr))
          end
       end
       local central_field = map:get_field(86,123)
       local region_to_erupt = central_field:region(9,1)
       for a,field in next,region_to_erupt,f do
          if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
-            if field.immovable then field.immovable:remove() end
-            if #field.bobs > 0 then
-               for i, bob in ipairs(field.bobs) do
-                  bob:remove()
+            for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
+               if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
+               if #f.bobs > 0 then
+                  for i, bob in ipairs(f.bobs) do
+                     bob:remove()
+                  end
                end
             end
             fields_to_erupt:add(f_Field:new(field, field.terd, field.terr))
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y),"d")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
-            local tr_to_erupt = Set:new{Triangle:new(map:get_field(field.x,field.y), "r")}
-            local tr = tr_to_erupt:pop_at(1)
-            tr:set_ter("lava")
+            fields_to_setback:add(f_Field:new(field, field.terd, field.terr))
          end
       end
-      sleep(10*60*1000)
--- set back all eruptions
       while fields_to_erupt.size > 0 do
          local ff = fields_to_erupt:pop_at(1)
+         local tr_to_erupt = Set:new{Triangle:new(ff._f,"d")}
+         local tr = tr_to_erupt:pop_at(1)
+         tr:set_ter("lava")
+         local tr_to_erupt = Set:new{Triangle:new(ff._f,"r")}
+         local tr = tr_to_erupt:pop_at(1)
+         tr:set_ter("lava")
+      end
+      
+      sleep(10*60*1000)
+-- set back all eruptions
+      while fields_to_setback.size > 0 do
+         local ff = fields_to_setback:pop_at(1)
          local tr_to_setback = Set:new{Triangle:new(ff._f,"d")}
          local tr = tr_to_setback:pop_at(1)
          tr:set_ter(ff._td)
