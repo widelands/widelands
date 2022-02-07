@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Madkat Here, 2020
-# Gontzal M. Pujana <juchuf@gmail.com>, 2021
+# Thadah D. Denyse <juchuf@gmail.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -49,6 +49,11 @@ msgstr ""
 msgid "Now we can see where it is possible to place buildings and flags."
 msgstr ""
 
+#: ../../data/scripting/training_wheels/building_spaces.lua:55
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Click ‘OK’ to continue."
+msgstr ""
+
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
 #: ../../data/scripting/training_wheels/flags.lua:72
@@ -72,6 +77,10 @@ msgstr "Haz clic en el botón de la bandera."
 
 #: ../../data/scripting/training_wheels/flags.lua:86
 msgid "Now check if you can place even more flags on your roads."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/flags.lua:87
+msgid "Click ‘OK’ when you’re done."
 msgstr ""
 
 #. TRANSLATORS: The title of an in-game teaching objective
@@ -149,6 +158,16 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
 msgstr "Caminos"
+
+#: ../../data/scripting/training_wheels/logs.lua:141
+#: ../../data/scripting/training_wheels/rocks.lua:144
+msgid "Click on the flag in front of the building to start placing a road."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:152
+msgid ""
+"Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -242,6 +261,13 @@ msgid ""
 "building:"
 msgstr ""
 "Necesitas proveer granito a tu tribu. Construye el siguiente edificio:"
+
+#: ../../data/scripting/training_wheels/rocks.lua:155
+msgid ""
+"Click on the ‘Build road’ button. Afterwards, click the colored markers on "
+"the map to guide your road until you reach the flag in front of the target "
+"building."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
