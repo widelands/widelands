@@ -739,6 +739,7 @@ bool Game::run(StartGameType const start_game_type,
 	}
 
 	sync_reset();
+	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want
@@ -752,6 +753,10 @@ bool Game::run(StartGameType const start_game_type,
 
 	state_ = gs_running;
 
+	// Immediately progress the game by 1 tick before removing the loader UI
+	// to ensure that there is no black screen in the brief interval between
+	// the initialization and the loading of the initial scripts.
+	think();
 	remove_loader_ui();
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
