@@ -20,6 +20,7 @@
 #define WL_BASE_FORMAT_NUMBER_NODE_H
 
 #include "base/format/abstract_node.h"
+#include "base/format/write_number.h"
 
 namespace format_impl {
 
@@ -65,117 +66,38 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			                 to_string(t).c_str());
 		}
 
-		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
-			// The easy case: Just start writing.
-			size_t written = 0;
-			if (arg < 0) {
-				if (localize) {
-					for (const char* c = kLocalizedMinusSign; *c; ++c, ++out, ++written) {
-						*out = *c;
-					}
-				} else {
-					*out = '-';
-					++out;
-					++written;
-				}
-			} else if ((flags_ & kNumberSign) != 0) {
-				if (localize && arg == 0) {
-					for (const char* c = kDigitWidthSpace; *c; ++c, ++out, ++written) {
-						*out = *c;
-					}
-				} else {
-					*out = '+';
-					++out;
-					++written;
-				}
-			}
-			if (print0x_) {
-				*out = '0';
-				*(out + 1) = 'x';
-				out += 2;
-				written += 2;
-			}
-
-			if (arg == 0) {
-				*out = '0';
-				++out;
-				++written;
-			} else {
-				size_t nr_digits = 0;
-				for (Number i = (arg < 0 ? -arg : arg); i; ++nr_digits, i /= base_) {
-				}
-
-				Number i = (arg < 0 ? -arg : arg);
-				for (size_t d = nr_digits; d; --d, i /= base_) {
-					static Number digit;
-					digit = (i % base_);
-					if (hexadecimal_ && digit > 9) {
-						*(out + d - 1) = (uppercase_ ? 'A' : 'a') + digit - 10;
-					} else {
-						*(out + d - 1) = '0' + digit;
-					}
-				}
-
-				out += nr_digits;
-				written += nr_digits;
-			}
-
-			if (written < min_width_) {
-				written = min_width_ - written;
-				for (; written; ++out, --written) {
-					*out = ' ';
-				}
-			}
-
-			return out;
+		bool is_negative = false;
+		if (std::is_signed<Number>::value && (arg < 0)) {
+			is_negative = true;
+			arg = -arg;
 		}
-
-		// The more complex case: We want a right-aligned string with a given minimum width,
-		// padded with leading whitespace or zeroes.
-		size_t nr_digits;
-		if (arg == 0) {
-			nr_digits = 1;
-		} else {
-			nr_digits = 0;
-			for (Number i = (arg < 0 ? -arg : arg); i; ++nr_digits, i /= base_) {
-			}
-		}
+		size_t nr_digits = number_of_digits(arg, hexadecimal_);
 
 		size_t required_width = nr_digits;
 		if (print0x_) {
 			required_width += 2;
 		}
-		if (arg < 0 || (flags_ & kNumberSign) != 0) {
-			required_width += localize ? (arg == 0) ? kDigitWidthSpaceLength :
-			                             (arg < 0)  ? kLocalizedMinusSignLength :
-                                                   1 :
-                                      1;
+		if (is_negative || (flags_ & kNumberSign) != 0) {
+			++required_width;
 		}
-		if ((flags_ & kPadWith0) == 0 && required_width < min_width_) {
-			required_width = min_width_ - required_width;
-			for (; required_width; ++out, --required_width) {
+
+		size_t padding = 0;
+		if (min_width_ > required_width) {
+			padding = min_width_ - required_width;
+		}
+
+		// Right aligned, padding with spaces
+		if ((flags_ & (kPadWith0 | kLeftAlign)) == 0) {
+			for (; padding > 0; --padding) {
 				*out = ' ';
+				++out;
 			}
 		}
 
-		if (arg < 0) {
-			if (localize) {
-				for (const char* c = kLocalizedMinusSign; *c; ++c, ++out) {
-					*out = *c;
-				}
-			} else {
-				*out = '-';
-				++out;
-			}
+		if (is_negative) {
+			out = write_minus_sign(out, localize);
 		} else if ((flags_ & kNumberSign) != 0) {
-			if (localize && arg == 0) {
-				for (const char* c = kDigitWidthSpace; *c; ++c, ++out) {
-					*out = *c;
-				}
-			} else {
-				*out = '+';
-				++out;
-			}
+			out = write_forced_plus_sign(out, localize, arg == 0);
 		}
 		if (print0x_) {
 			*out = '0';
@@ -183,29 +105,19 @@ template <typename Number> struct NumberNodeT : FormatNode {
 			out += 2;
 		}
 
-		if ((flags_ & kPadWith0) != 0 && required_width < min_width_) {
-			required_width = min_width_ - required_width;
-			for (; required_width; ++out, --required_width) {
+		if (flags_ & kPadWith0) {
+			for (; padding > 0; --padding) {
 				*out = '0';
+				++out;
 			}
 		}
 
-		if (arg == 0) {
-			*out = '0';
-			++out;
-		} else {
-			Number i = (arg < 0 ? -arg : arg);
-			for (size_t d = nr_digits; d; --d, i /= base_) {
-				static Number digit;
-				digit = (i % base_);
-				if (hexadecimal_ && digit > 9) {
-					*(out + d - 1) = (uppercase_ ? 'A' : 'a') + digit - 10;
-				} else {
-					*(out + d - 1) = '0' + digit;
-				}
-			}
+		out = write_digits(out, arg, nr_digits, hexadecimal_, uppercase_);
 
-			out += nr_digits;
+		// No need to check for left aligned: Other cases already zeroed the padding.
+		for (; padding > 0; --padding) {
+			*out = ' ';
+			++out;
 		}
 
 		return out;
