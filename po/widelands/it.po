@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-01 02:42+0000\n"
+"POT-Creation-Date: 2022-02-04 04:27+0000\n"
 "PO-Revision-Date: 2022-01-07 03:21+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -174,8 +174,7 @@ msgstr "falso"
 msgid "true"
 msgstr "vero"
 
-#: ../../src/base/format/float_node.h:110
-#: ../../src/base/format/float_node.h:152
+#: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
 msgstr ""
@@ -7136,9 +7135,9 @@ msgstr "Porti"
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
