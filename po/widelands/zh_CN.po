@@ -7,15 +7,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # GunChleoc, 2015
+# Jiawei Sun, 2022
 # Roy Luo <1598359376@qq.com>, 2020-2021
 # liulitchi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
-"PO-Revision-Date: 2022-01-07 03:21+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-02-04 04:27+0000\n"
+"PO-Revision-Date: 2022-02-04 03:12+0000\n"
+"Last-Translator: Jiawei Sun\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,8 +167,7 @@ msgstr "错误"
 msgid "true"
 msgstr "正确"
 
-#: ../../src/base/format/float_node.h:110
-#: ../../src/base/format/float_node.h:152
+#: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
 msgstr ""
@@ -993,9 +993,9 @@ msgstr "（没有）"
 msgid "Waterway length limit:"
 msgstr "水路长度限制："
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1417,8 +1417,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -1537,7 +1537,7 @@ msgstr ""
 
 #: ../../src/graphic/gl/initialize.cc:254
 msgid "OpenGL"
-msgstr ""
+msgstr "OpenGL"
 
 #: ../../src/graphic/gl/initialize.cc:301
 msgid "Shading Language"
@@ -1681,13 +1681,13 @@ msgstr "%1$s 和 %2$s: %3$s"
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
+msgstr[0] "%u 缺少插件"
 
 #: ../../src/logic/addons.cc:222
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
+msgstr[0] "%u 错误的插件版本"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:235
@@ -1762,7 +1762,7 @@ msgstr "这个市场收到了新的交易报价。"
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "这个游戏存档是用一个旧版本的Widelands保存的，所以不能够被加载。此外，更高版本的Widelands创建的游戏存档也不能够被加载。"
 
 #: ../../src/logic/generic_save_handler.cc:220
 #: ../../src/logic/generic_save_handler.cc:224
@@ -2294,7 +2294,7 @@ msgstr " 一位地质学家发现了资源。"
 #: ../../src/logic/map_objects/tribes/worker.cc:2064
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "你 %s 找不到回家的路，很可能会死。"
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2069
@@ -3117,19 +3117,19 @@ msgstr "初始颜色"
 #: ../../src/ui_basic/color_chooser.cc:288
 msgctxt "color"
 msgid "R"
-msgstr ""
+msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
 #: ../../src/ui_basic/color_chooser.cc:297
 msgctxt "color"
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
 #: ../../src/ui_basic/color_chooser.cc:306
 msgctxt "color"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../src/ui_basic/color_chooser.cc:316
 msgid "Default Color"
@@ -3160,15 +3160,15 @@ msgstr "未选定"
 
 #: ../../src/ui_basic/dropdown.h:357
 msgid "No matches"
-msgstr ""
+msgstr "没有匹配到对手"
 
 #: ../../src/ui_basic/panel.cc:313
 msgid "Please wait…"
-msgstr ""
+msgstr "请稍候..."
 
 #: ../../src/ui_basic/panel.cc:443
 msgid "Game ending – please wait…"
-msgstr ""
+msgstr "游戏结束 – 请稍候..."
 
 #: ../../src/ui_basic/progresswindow.cc:75
 msgid "Loading…"
@@ -3252,35 +3252,35 @@ msgstr "%1$s(%2$s)"
 
 #: ../../src/ui_fsmenu/about.cc:73
 msgid "Operating System:"
-msgstr ""
+msgstr "操作系统："
 
 #: ../../src/ui_fsmenu/about.cc:75
 msgid "MacOS"
-msgstr ""
+msgstr "MacOS"
 
 #: ../../src/ui_fsmenu/about.cc:77
 msgid "Windows (64 bit)"
-msgstr ""
+msgstr "Windows (64 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:79
 msgid "Windows (32 bit)"
-msgstr ""
+msgstr "Windows (32 bit)"
 
 #: ../../src/ui_fsmenu/about.cc:81
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: ../../src/ui_fsmenu/about.cc:83
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
 
 #: ../../src/ui_fsmenu/about.cc:85
 msgid "Unix"
-msgstr ""
+msgstr "Unix"
 
 #: ../../src/ui_fsmenu/about.cc:87
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../../src/ui_fsmenu/about.cc:90
 msgid "Locale:"
@@ -3292,11 +3292,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:92
 msgid "Configuration File:"
-msgstr ""
+msgstr "配置文件："
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Data Directory:"
-msgstr ""
+msgstr "数据目录："
 
 #: ../../src/ui_fsmenu/about.cc:94
 msgid "Locale Directory:"
@@ -3312,27 +3312,27 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: ../../src/ui_fsmenu/about.cc:132
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "复制技术报告到剪贴板"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
 msgid "Contact Form"
-msgstr ""
+msgstr "联系方式表"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:48
 msgid "Send message"
-msgstr ""
+msgstr "发送消息"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:72
 msgid "Send Message"
-msgstr ""
+msgstr "发送消息"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:73
 msgid "Send this message now?"
-msgstr ""
+msgstr "现在就发送这个消息？"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:83
 #, c-format
@@ -3340,11 +3340,11 @@ msgid ""
 "Unable to submit your enquiry.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "无法提交您的查询。\n错误信息：\n%s"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:91
 msgid "Sent"
-msgstr ""
+msgstr "发送"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:92
 msgid ""
@@ -3355,7 +3355,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "登陆"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:69
 #: ../../src/ui_fsmenu/addons/manager.cc:231
@@ -3375,7 +3375,7 @@ msgstr "为了使用注册帐户，你需要在Widelands的官方网站上注册
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:82
 msgid "Username:"
-msgstr ""
+msgstr "用户名："
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:87
 #: ../../src/ui_fsmenu/login_box.cc:52
@@ -3410,7 +3410,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:96
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "质量尚未评估"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:102
@@ -3420,7 +3420,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:103
 msgid "This add-on may cause major glitches and errors."
-msgstr ""
+msgstr "这个插件可能会导致重大故障和错误。"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:109
@@ -3452,7 +3452,7 @@ msgstr "仅验证"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:173
 msgid "Show only verified add-ons"
-msgstr ""
+msgstr "只显示已验证的插件"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:181
 msgid "Sort by"
@@ -3460,7 +3460,7 @@ msgstr "排序"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:192
 msgid "Minimum quality"
-msgstr ""
+msgstr "最低质量"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:203
 msgid "Choose add-on to upload…"
@@ -3468,7 +3468,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:214
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "上传一张屏幕截图..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:221
 msgid "Understood and confirmed"
@@ -7487,8 +7487,8 @@ msgstr "用选定的AI替换断开连接的游戏玩家并继续进行游戏"
 msgid "AI for the disconnected player"
 msgstr "断开连接的游戏玩家的AI"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
