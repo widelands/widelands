@@ -81,4 +81,13 @@ include "map:scripting/set.lua"
 -- Test Runner
 -- ============
 lunit:run()
-wl.ui.MapView():close()
+
+include "scripting/coroutine.lua"
+if wl.editor then
+   wl.ui.MapView():close()
+else
+   run(function()
+      sleep(1000)
+      wl.ui.MapView():close()
+   end)
+end
