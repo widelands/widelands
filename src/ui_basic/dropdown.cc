@@ -374,7 +374,7 @@ void BaseDropdown::set_enabled(bool on) {
 		push_button_->set_tooltip(on ? tooltip_ : "");
 	}
 	display_button_.set_enabled(on);
-	list_->set_visible(false);
+	set_list_visibility(false);
 }
 
 void BaseDropdown::set_disable_style(UI::ButtonDisableStyle disable_style) {
@@ -416,7 +416,7 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-                               list_->get_selected_name() :
+	                            list_->get_selected_name() :
                                /** TRANSLATORS: Selection in Dropdown menus. */
                                pgettext("dropdown", "Not Selected");
 
@@ -431,7 +431,7 @@ void BaseDropdown::update() {
                                                            tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-                                 list_->get_selected_image() :
+		                           list_->get_selected_image() :
                                  g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip(format(_("%1%: %2%"), label_, name));
 	}
