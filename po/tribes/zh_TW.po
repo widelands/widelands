@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-01 02:42+0000\n"
+"POT-Creation-Date: 2022-02-04 04:27+0000\n"
 "PO-Revision-Date: 2022-01-04 02:59+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
@@ -1283,6 +1283,7 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -5258,7 +5259,6 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
