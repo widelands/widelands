@@ -56,7 +56,7 @@ function world_immovable_entries(tribename)
       end
    end
    for i = #all_immovables, 1, -1 do
-      if tribes_immovables[all_immovables[i].name] then
+      if tribes_immovables[all_immovables[i].name] or all_immovables[i].size == "none" or (not all_immovables[i]:has_attribute("tree") and all_immovables[i].terrain_affinity) then
          table.remove(all_immovables, i);
       end
    end
@@ -127,7 +127,7 @@ return {
             {
                name = "immovables_world",
                -- TRANSLATORS Tab title: world immovable help
-               title = _"World Immovables",
+               title = _("World Immovables"),
                icon = "images/wui/encyclopedia_world.png",
                entries = world_immovable_entries(tribename)
             },

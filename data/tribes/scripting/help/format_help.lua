@@ -84,7 +84,7 @@ function plot_size_line(size, size_only)
 
    return
       div("width=100%",
-         div("float=right padding_l=6", p(img(image))) ..
+         div("float=right padding_l=6", p(img(image)))) ..
          text
 end
 
