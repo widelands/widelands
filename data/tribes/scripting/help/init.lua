@@ -27,8 +27,6 @@ function map_object_entries(tribename, script_filename, map_object_table)
          }
          entries[map_object.descname] = counter
          counter = counter + 1
-      else
-         result[entries[map_object.descname]][r][text] = result[entries[map_object.descname]][r][text] .. "test"
       end
    end
    table.sort(result, compare_by_title)
