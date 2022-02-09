@@ -9,14 +9,27 @@ end
 -- Helper function to return all entries of a certain type for the tribe
 function map_object_entries(tribename, script_filename, map_object_table)
    local result = {}
+   local entries = {}
+   local counter = 1
    for i, map_object in ipairs(map_object_table) do
-      result[i] = {
-         name = map_object.name,
-         title = map_object.descname,
-         icon = map_object.icon_name,
-         script = script_filename,
-         script_parameters = {[1] = tribename, [2] = map_object.name}
-      }
+      -- we need to filter out double entries of amazon trees
+      if not entries[map_object.descname] or not (map_object.type_name == "immovable" and map_object.terrain_affinity) then
+         local t = map_object.descname
+         if map_object.type_name == "immovable" and map_object:has_attribute("tree") then
+            t = map_object.species
+         end
+         result[counter] = {
+            name = map_object.name,
+            title = t,
+            icon = map_object.icon_name,
+            script = script_filename,
+            script_parameters = {[1] = tribename, [2] = map_object.name}
+         }
+         entries[map_object.descname] = counter
+         counter = counter + 1
+      else
+         result[entries[map_object.descname]][r][text] = result[entries[map_object.descname]][r][text] .. "test"
+      end
    end
    table.sort(result, compare_by_title)
    return result

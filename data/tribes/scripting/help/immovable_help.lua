@@ -107,8 +107,12 @@ return {
       push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local immovable_description = wl.Game():get_immovable_description(immovablename)
+      local t = immovable_description.descname
+      if immovable_description:has_attribute("tree") then
+         t = immovable_description.species
+      end
       local r = {
-         title = immovable_description.descname,
+         title = t,
          text = immovable_help_string(tribe, immovable_description)
       }
       pop_textdomain()
