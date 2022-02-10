@@ -3,8 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Tóth András <txa-dev@posteo.hu>, 2021
-# Balázs Bencs, 2022
+# Tóth András <txa-dev@posteo.hu>, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Balázs Bencs, 2022\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +50,7 @@ msgstr "Most már látjuk, hogy hová lehet épületeket és zászlókat elhelye
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr "Kattints az 'OK' gombra a folytatáshoz."
+msgstr "Kattints az „OK” gombra a folytatáshoz!"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -82,7 +81,7 @@ msgstr "Nézd meg, hogy tudsz-e még több zászlót rakni az útjaidra!"
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr "Kattints az 'OK' gombra ha elkészültél.."
+msgstr "Kattints az „OK” gombra ha elkészültél!"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -166,7 +165,7 @@ msgstr "Utak"
 #: ../../data/scripting/training_wheels/logs.lua:141
 #: ../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr "Kattints a zászlóra az épület előtt, hogy elkezdj utat építeni."
+msgstr "Út építéséhez kattints a zászlóra az épület előtt!"
 
 #: ../../data/scripting/training_wheels/logs.lua:152
 msgid ""
