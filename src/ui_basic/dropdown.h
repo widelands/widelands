@@ -315,7 +315,7 @@ public:
 	}
 
 	bool handle_textinput(const std::string& input_text) override {
-		const std::string& lowered_input_text = to_lower(input_text);
+		const std::string lowered_input_text = to_lower(input_text);
 		if (check_hotkey_match(lowered_input_text)) {
 			return true;
 		}
@@ -380,7 +380,7 @@ private:
 		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
-		const HotkeyFunction onShortcutMatch;
+		const HotkeyFunction on_hotkey_match;
 	};
 
 	void save_selected_entry(uint32_t index) override {
@@ -410,10 +410,10 @@ private:
 	bool check_hotkey_match(const std::string& input_text) {
 		for (auto& x : unfiltered_entries) {
 			if (input_text == to_lower(x.hotkey) && is_in_filtered_list(x.value)) {
-				if (x.onShortcutMatch) {
-					x.onShortcutMatch(x.value);
+				if (x.on_hotkey_match) {
+					x.on_hotkey_match(x.value);
 				} else {
-					log_err("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
+					verb_log_dbg("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
 				}
 				return true;
 			}
