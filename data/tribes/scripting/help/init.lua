@@ -131,7 +131,7 @@ return {
             {
                name = "immovables_tribe",
                -- TRANSLATORS Tab title: immovable help
-               title = _("Immovables"),
+               title = _("Tribes Immovables"),
                icon = "images/wui/encyclopedia_immovables.png",
                entries = immovable_entries(tribename)
             },
