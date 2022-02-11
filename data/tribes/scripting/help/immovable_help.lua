@@ -52,11 +52,12 @@ function immovable_help_string(tribe, immovable_description)
    local space_required = plot_size_line(immovable_description.size)
 
    if (buildcost ~= "" or space_required ~= "") then
-      result = result .. h2(_("Requirements"))
       if (buildcost ~= "") then
+         result = result .. h2(_("Requirements"))
          result = result .. h3(_("Build cost:")) .. buildcost
          result = result .. plot_size_line(immovable_description.size)
       else
+         result = result .. h2(_("Size"))
          result = result .. plot_size_line(immovable_description.size, true)
       end
       if (immovable_description.size == "small") then
