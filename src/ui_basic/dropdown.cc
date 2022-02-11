@@ -374,7 +374,7 @@ void BaseDropdown::set_enabled(bool on) {
 		push_button_->set_tooltip(on ? tooltip_ : "");
 	}
 	display_button_.set_enabled(on);
-	list_->set_visible(false);
+	set_list_visibility(false);
 }
 
 void BaseDropdown::set_disable_style(UI::ButtonDisableStyle disable_style) {

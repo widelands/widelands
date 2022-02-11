@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.1~git25657[679ecc3@trident_fixes] (Release)
 
 [global]
 packet_version="1"
+waterway_max_length="0"
 number_of_port_spaces="286"
 
 [port_spaces]
