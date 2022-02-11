@@ -36,7 +36,7 @@ function immovable_help_string(tribe, immovable_description)
       result = h2(_("Purpose")) ..
          li_object(immovable_description.name, purpose)
    elseif image ~= "" then
-      result = img(immovable_description.icon_name)
+      result = vspace(6) .. p(img(immovable_description.icon_name))
    else
       result = result
    end
