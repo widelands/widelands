@@ -91,7 +91,7 @@ std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* building = target_building_.get(iplayer_.egbase());
 	if (building == nullptr) {
-		die();
+		die();  // The target building no longer exists.
 		return {};
 	}
 	std::vector<Widelands::Soldier*> v;
@@ -156,7 +156,7 @@ UI::Button* add_button(AttackWindow* a,
 void AttackWindow::think() {
 	if (!iplayer_.player().is_seeing(iplayer_.egbase().map().get_index(target_coordinates_)) &&
 	    !iplayer_.player().see_all()) {
-		die();
+		die();  // The target building no longer exists.
 	}
 
 	if ((iplayer_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
@@ -314,7 +314,7 @@ void AttackWindow::init_bottombox() {
 	MutexLock m(MutexLock::ID::kObjects);
 	Widelands::Building* building = target_building_.get(iplayer_.egbase());
 	if (building == nullptr) {
-		die();
+		die();  // The target building no longer exists.
 		return;
 	}
 	if (building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
