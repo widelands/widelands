@@ -623,16 +623,16 @@ void Options::update_language_stats() {
 			if (language_entries_.count(parts[0]) == 1) {
 				locale = parts[0];
 			} else {
-                               std::vector<std::string> parts2;
-                                split(parts2, parts[0], {'@'});
-                                if (language_entries_.count(parts2[0]) == 1) {
-                                        locale = parts[0];
-                                } else {
-                                        split(parts, parts2[0], {'_'});
-                                        if (language_entries_.count(parts2[0]) == 1) {
-                                                locale = parts[0];
-                                        }
-                                }
+				std::vector<std::string> parts2;
+				split(parts2, parts[0], {'@'});
+				if (language_entries_.count(parts2[0]) == 1) {
+					locale = parts[0];
+				} else {
+					split(parts, parts2[0], {'_'});
+					if (language_entries_.count(parts2[0]) == 1) {
+						locale = parts[0];
+					}
+				}
 			}
 		}
 
