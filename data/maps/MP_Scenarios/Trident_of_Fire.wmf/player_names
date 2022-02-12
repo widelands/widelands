@@ -1,52 +1,68 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.1~git25657[679ecc3@trident_fixes] (Release)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Player 1"
+name=
 tribe="barbarians"
 ai=
 closeable="true"
+team="0"
+random="false"
 
 [player_2]
-name="Player 2"
+name=
 tribe="empire"
 ai=
 closeable="true"
+team="0"
+random="false"
 
 [player_3]
-name="Player 3"
+name=
 tribe="atlanteans"
 ai=
 closeable="true"
+team="0"
+random="false"
 
 [player_4]
 name="Player A"
 tribe="barbarians"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
 
 [player_5]
 name="Player B"
 tribe="empire"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
 
 [player_6]
 name="Player C"
 tribe="atlanteans"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
 
 [player_7]
 name="Player D"
 tribe="empire"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
 
 [player_8]
 name="Player E"
 tribe="atlanteans"
 ai="normal"
 closeable="false"
+team="0"
+random="false"

@@ -85,7 +85,7 @@ private:
 
 	InteractivePlayer& iplayer_;
 	const Widelands::Map& map_;
-	Widelands::Building& target_building_;
+	Widelands::OPtr<Widelands::Building> target_building_;
 	const Widelands::Coords target_coordinates_;
 
 	// A SoldierPanel is not applicable here as it's keyed to a building and thinks too much

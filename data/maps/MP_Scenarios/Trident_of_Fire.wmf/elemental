@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.1~git25657[679ecc3@trident_fixes] (Release)
 
 [global]
 packet_version="1"
@@ -9,5 +9,6 @@ name=_"Trident of Fire"
 author="Robnick"
 descr=_"In the vicinity of three major volcanoes, six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power will your tribe be able to explore enough resources to compete with its opponents."
 hint=
-tags="balanced,official,seafaring"
 theme="desert"
+tags="balanced,official,seafaring"
+addons=

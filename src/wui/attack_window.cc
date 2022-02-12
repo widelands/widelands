@@ -47,7 +47,7 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      serial_(next_serial_++),
      iplayer_(parent),
      map_(iplayer_.player().egbase().map()),
-     target_building_(target_bld),
+     target_building_(&target_bld),
      target_coordinates_(target_coords),
      lastupdate_(0),
 
@@ -57,7 +57,7 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
-	target_building_.removed.connect([serial](unsigned) {
+	target_bld.removed.connect([serial](unsigned) {
 		auto it = living_attack_windows_.find(serial);
 		if (it != living_attack_windows_.end()) {
 			it->second->die();
@@ -89,16 +89,21 @@ AttackWindow::~AttackWindow() {
 
 std::vector<Widelands::Soldier*> AttackWindow::get_max_attackers() {
 	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::Building* building = target_building_.get(iplayer_.egbase());
+	if (building == nullptr) {
+		die();  // The target building no longer exists.
+		return {};
+	}
 	std::vector<Widelands::Soldier*> v;
 
-	for (Widelands::Coords& coords : target_building_.get_positions(iplayer_.egbase())) {
+	for (Widelands::Coords& coords : building->get_positions(iplayer_.egbase())) {
 		if (iplayer_.player().is_seeing(map_.get_index(coords, map_.get_width()))) {
 			// TODO(Nordfriese): This method decides by itself which soldier remains in the
 			// building. This soldier will not show up in the result vector. Perhaps we should show
 			// all available soldiers, grouped by building, so the player can choose between all
 			// soldiers knowing that at least one of each group will have to stay at home. However,
 			// this could clutter up the screen a lot. Especially if you have many small buildings.
-			iplayer_.get_player()->find_attack_soldiers(target_building_.base_flag(), &v);
+			iplayer_.get_player()->find_attack_soldiers(building->base_flag(), &v);
 			return v;
 		}
 	}
@@ -151,7 +156,7 @@ UI::Button* add_button(AttackWindow* a,
 void AttackWindow::think() {
 	if (!iplayer_.player().is_seeing(iplayer_.egbase().map().get_index(target_coordinates_)) &&
 	    !iplayer_.player().see_all()) {
-		die();
+		die();  // The target building no longer exists.
 	}
 
 	if ((iplayer_.egbase().get_gametime() - lastupdate_) > kUpdateTimeInGametimeMs) {
@@ -306,12 +311,18 @@ void AttackWindow::init_soldier_lists(const std::vector<Widelands::Soldier*>& al
 }
 
 void AttackWindow::init_bottombox() {
-	if (target_building_.descr().type() == Widelands::MapObjectType::MILITARYSITE) {
+	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::Building* building = target_building_.get(iplayer_.egbase());
+	if (building == nullptr) {
+		die();  // The target building no longer exists.
+		return;
+	}
+	if (building->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
 		do_not_conquer_.reset(
 		   new UI::Checkbox(&bottombox_, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
-		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite&>(target_building_)
-		                               .attack_target()
+		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite*>(building)
+		                               ->attack_target()
 		                               ->get_allow_conquer(iplayer_.player_number()));
 		bottombox_.add(do_not_conquer_.get(), UI::Box::Resizing::kAlign, UI::Align::kBottom);
 	}
@@ -331,8 +342,12 @@ void AttackWindow::init_bottombox() {
 
 /** The attack button was pressed. */
 void AttackWindow::act_attack() {
-	iplayer_.game().send_player_enemyflagaction(
-	   target_building_.base_flag(), iplayer_.player_number(), soldiers(), get_allow_conquer());
+	MutexLock m(MutexLock::ID::kObjects);
+	Widelands::Building* building = target_building_.get(iplayer_.egbase());
+	if (building != nullptr) {
+		iplayer_.game().send_player_enemyflagaction(
+		   building->base_flag(), iplayer_.player_number(), soldiers(), get_allow_conquer());
+	}
 	die();
 }
 
