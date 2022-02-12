@@ -608,8 +608,12 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 
 /**
  * Updates the language statistics message according to the currently selected locale.
- * @param include_system_lang We only want to include the system lang if it matches the Widelands
- * locale.
+ *
+ * i18n::get_locale() is parsed,
+ *  this can either be "C"
+ *  or something like "en_EN.UTF-8"
+ *
+ *  See https://en.wikipedia.org/wiki/ISO_639
  */
 void Options::update_language_stats() {
 	int percent = 100;
@@ -619,17 +623,19 @@ void Options::update_language_stats() {
 		// Empty locale means try system locale
 		if (locale.empty()) {
 			std::vector<std::string> parts;
-			split(parts, i18n::get_locale(), {'.'});
+			split(parts, i18n::get_locale(), {'.'});  // split of encoding
 			if (language_entries_.count(parts[0]) == 1) {
 				locale = parts[0];
 			} else {
-				split(parts, parts[0], {'@'});
-				if (language_entries_.count(parts[0]) == 1) {
-					locale = parts[0];
+				std::vector<std::string> parts2;
+				split(parts2, parts[0], {'@'});  // no idea where that @ may come from
+				if (language_entries_.count(parts2[0]) == 1) {
+					locale = parts2[0];
 				} else {
-					split(parts, parts[0], {'_'});
-					if (language_entries_.count(parts[0]) == 1) {
-						locale = parts[0];
+					std::vector<std::string> parts3;
+					split(parts3, parts2[0], {'_'});  // Split of language from Country
+					if (language_entries_.count(parts3[0]) == 1) {
+						locale = parts3[0];
 					}
 				}
 			}
