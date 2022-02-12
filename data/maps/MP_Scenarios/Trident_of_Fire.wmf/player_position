@@ -1,11 +1,11 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.1~git25657[679ecc3@trident_fixes] (Release)
 
 [global]
 packet_version="2"
-player_1="116 40"
-player_2="41 0"
-player_3="139 105"
-player_4="27 126"
+player_1="116 37"
+player_2="26 118"
+player_3="139 101"
+player_4="44 145"
 player_5="120 8"
 player_6="14 54"
 player_7="147 76"
