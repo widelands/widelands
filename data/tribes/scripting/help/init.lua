@@ -9,14 +9,25 @@ end
 -- Helper function to return all entries of a certain type for the tribe
 function map_object_entries(tribename, script_filename, map_object_table)
    local result = {}
+   local entries = {}
+   local counter = 1
    for i, map_object in ipairs(map_object_table) do
-      result[i] = {
-         name = map_object.name,
-         title = map_object.descname,
-         icon = map_object.icon_name,
-         script = script_filename,
-         script_parameters = {[1] = tribename, [2] = map_object.name}
-      }
+      -- we need to filter out double entries of amazon trees
+      if not entries[map_object.descname] or not (map_object.type_name == "immovable" and map_object.terrain_affinity) then
+         local t = map_object.descname
+         if map_object.type_name == "immovable" and map_object:has_attribute("tree") then
+            t = map_object.species
+         end
+         result[counter] = {
+            name = map_object.name,
+            title = t,
+            icon = map_object.icon_name,
+            script = script_filename,
+            script_parameters = {[1] = tribename, [2] = map_object.name}
+         }
+         entries[map_object.descname] = counter
+         counter = counter + 1
+      end
    end
    table.sort(result, compare_by_title)
    return result
@@ -44,6 +55,25 @@ end
 function immovable_entries(tribename)
    local tribe = wl.Game():get_tribe_description(tribename)
    return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", tribe.immovables)
+end
+
+-- Returns help entries for all the immovables of the world that all tribes can use
+function world_immovable_entries(tribename)
+   local all_immovables = wl.Descriptions().immovable_descriptions
+   local tribes_immovables = {}
+   for i, tribe in ipairs(wl.Descriptions().tribes_descriptions) do
+      for i, t_immo in ipairs(tribe.immovables) do
+         tribes_immovables[t_immo.name] = true
+      end
+   end
+   for i = #all_immovables, 1, -1 do
+      if tribes_immovables[all_immovables[i].name] or all_immovables[i].size == "none" or
+      (not all_immovables[i]:has_attribute("tree") and all_immovables[i].terrain_affinity) or
+      all_immovables[i]:has_attribute("field") then
+         table.remove(all_immovables, i);
+      end
+   end
+   return map_object_entries(tribename, "tribes/scripting/help/immovable_help.lua", all_immovables)
 end
 
 -- Main function
@@ -101,11 +131,18 @@ return {
                entries = building_entries(tribename)
             },
             {
-               name = "immovables",
+               name = "immovables_tribe",
                -- TRANSLATORS Tab title: immovable help
-               title = _("Immovables"),
+               title = _("Tribes Immovables"),
                icon = "images/wui/encyclopedia_immovables.png",
                entries = immovable_entries(tribename)
+            },
+            {
+               name = "immovables_world",
+               -- TRANSLATORS Tab title: world immovable help
+               title = _("World Immovables"),
+               icon = "images/wui/encyclopedia_world.png",
+               entries = world_immovable_entries(tribename)
             },
          }
       }
