@@ -101,7 +101,7 @@ function init_human_player(player, f_hq, tribename)
    return true
 end
 
-function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
+function init_AI_player(player, f_hq, f_port, f_vineyard, f_ship, tribename)
    if tribename == "barbarians" then
       player:allow_buildings("all")
 
@@ -129,7 +129,8 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
               shovel = 4,
               snack = 3,
               reed = 24,
-              log = 150,
+              log = 100,
+              blackwood = 20
             },
             workers = {
               barbarians_carrier = 40,
@@ -148,14 +149,9 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
             },
             soldiers = { [{0,0,0,0}] = 45 },
          },
-         { "barbarians_port", f_port.x, f_port.y},
-         { "barbarians_shipyard", f_shipyard.x, f_shipyard.y, inputs = {
-              blackwood = 10,
-              cloth = 4,
-              log = 2,
-            },
-       }
+         { "barbarians_port", f_port.x, f_port.y}
       )
+      player:place_ship(f_ship)
    end
 
    if tribename == "empire" then
@@ -218,15 +214,9 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
             soldiers = { [{0,0,0,0}] = 45 },
          },
          { "empire_port", f_port.x, f_port.y},
-         { "empire_shipyard", f_shipyard.x, f_shipyard.y,
-            inputs = {
-             cloth = 4,
-             log = 2,
-             planks = 10,
-            }
-         },
          { "empire_vineyard", f_vineyard.x, f_vineyard.y}
       )
+      player:place_ship(f_ship)
    end
    if tribename == "atlanteans" then
       player:allow_buildings("all")
@@ -288,13 +278,9 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
          },
          soldiers = { [{0,0,0,0}] = 45 },
          },
-         { "atlanteans_port", f_port.x, f_port.y},
-         { "atlanteans_shipyard", f_shipyard.x, f_shipyard.y, inputs = {
-           planks = 10,
-           spidercloth = 4,
-           log = 2,
-         }}
+         { "atlanteans_port", f_port.x, f_port.y}
       )
+      player:place_ship(f_ship)
    end
    return true
 end

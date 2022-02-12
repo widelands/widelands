@@ -20,6 +20,7 @@
 #define WL_UI_BASIC_DROPDOWN_H
 
 #include <deque>
+#include <functional>
 #include <memory>
 
 #include "base/i18n.h"
@@ -312,61 +313,21 @@ public:
 		restore_filtered_list();
 		select(selected_entry_);
 	}
-	void restore_filtered_list() {
-		clear_filtered_list();
-		for (auto& ee : unfiltered_entries) {
-			add_to_filtered_list(ee.name, ee.value, ee.img, false, ee.tooltip, ee.hotkey);
-		}
-	}
-
-	void save_selected_entry(uint32_t index) override {
-		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
-	}
 
 	bool handle_textinput(const std::string& input_text) override {
+		const std::string lowered_input_text = to_lower(input_text);
+		if (check_hotkey_match(lowered_input_text)) {
+			return true;
+		}
 		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
 			ignore_space_ = false;
 			return true;
 		}
-		update_filter(input_text);
+		update_filter(lowered_input_text);
 		apply_filter();
 		return true;
 	}
-	void update_filter(const std::string& input_text) {
-		current_filter_ = current_filter_.append(to_lower(input_text));
-	}
-
-	void apply_filter() override {
-		clear_filtered_list();
-		add_matching_entries();
-
-		if (filtered_entries.empty()) {
-			add_no_match_entry();
-		}
-		// force list to stay open even if mouse is now away due to smaller
-		// dropdown list because of applied filter
-		set_list_visibility(true);
-	}
-
-	void add_no_match_entry() {
-		// re-add initially selected entry with adapted texts to inform user
-		for (auto& x : unfiltered_entries) {
-			if (x.value == selected_entry_) {
-				const Image* empty_icon =
-				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
-			}
-		}
-	}
-
-	void add_matching_entries() {
-		for (auto& x : unfiltered_entries) {
-			if (to_lower(x.name).find(current_filter_) != std::string::npos) {
-				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
-			}
-		}
-	}
-
+	using HotkeyFunction = std::function<void(Entry)>;
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the value for the entry
@@ -375,14 +336,16 @@ public:
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	/// \param hotkey       a hotkey tip if any
+	/// \param on_hotkey_match       function that is invoked if hotkey was pressed
 	void add(const std::string& name,
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
+	         const std::string& hotkey = std::string(),
+	         const HotkeyFunction& on_hotkey_match = HotkeyFunction()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey});
+		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey, on_hotkey_match});
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
 
@@ -417,12 +380,23 @@ private:
 		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
+		const HotkeyFunction on_hotkey_match;
 	};
 
+	void save_selected_entry(uint32_t index) override {
+		selected_entry_ = index < filtered_entries.size() ? *filtered_entries[index] : Entry{};
+	}
 	void clear_filtered_list() {
 		BaseDropdown::clear();
 		filtered_entries.clear();
 	}
+	void restore_filtered_list() {
+		clear_filtered_list();
+		for (auto& ee : unfiltered_entries) {
+			add_to_filtered_list(ee.name, ee.value, ee.img, false, ee.tooltip, ee.hotkey);
+		}
+	}
+
 	// adds an element to the filtered list which is actually displayed
 	void add_to_filtered_list(const std::string& name,
 	                          Entry value,
@@ -433,6 +407,63 @@ private:
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
+	bool check_hotkey_match(const std::string& input_text) {
+		for (auto& x : unfiltered_entries) {
+			if (input_text == to_lower(x.hotkey) && is_in_filtered_list(x.value)) {
+				if (x.on_hotkey_match) {
+					x.on_hotkey_match(x.value);
+				} else {
+					verb_log_dbg("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	bool is_in_filtered_list(Entry entry) {
+		for (uint32_t i = 0; i < filtered_entries.size(); ++i) {
+			if (entry == *filtered_entries[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	void update_filter(const std::string& input_text) {
+		current_filter_ = current_filter_.append(input_text);
+	}
+
+	void apply_filter() override {
+		clear_filtered_list();
+		add_matching_entries();
+
+		if (filtered_entries.empty()) {
+			add_no_match_entry();
+		}
+		// force list to stay open even if mouse is now away due to smaller
+		// dropdown list because of applied filter
+		set_list_visibility(true);
+	}
+
+	void add_no_match_entry() {
+		// re-add initially selected entry with adapted texts to inform user
+		for (auto& x : unfiltered_entries) {
+			if (x.value == selected_entry_) {
+				const Image* empty_icon =
+				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
+				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
+			}
+		}
+	}
+
+	void add_matching_entries() {
+		for (auto& x : unfiltered_entries) {
+			if (to_lower(x.name).find(current_filter_) != std::string::npos) {
+				add_to_filtered_list(x.name, x.value, x.img, false, x.tooltip, x.hotkey);
+			}
+		}
+	}
+
 	// Contains the currently displayed (maybe filtered) elements. The BaseDropdown registers the
 	// indices only.
 	std::deque<std::unique_ptr<Entry>> filtered_entries;
