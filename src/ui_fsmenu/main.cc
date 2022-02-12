@@ -314,19 +314,21 @@ void MainMenu::set_labels() {
 	multiplayer_.clear();
 	editor_.clear();
 
+	auto shortcut_fn = [this](MenuTarget t) { action(t); };
+
 	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew));
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew), shortcut_fn);
 	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr, false,
 	                  _("Create a new random match"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch));
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch), shortcut_fn);
 	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuCampaign));
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuCampaign), shortcut_fn);
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuTutorial));
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuTutorial), shortcut_fn);
 	singleplayer_.add(_("Load Game"), MenuTarget::kLoadGame, nullptr, false,
 	                  _("Continue a saved game"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoad));
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoad), shortcut_fn);
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
@@ -373,28 +375,28 @@ void MainMenu::set_labels() {
 				          format(_("Saved: %s"),
 				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                    .as_font_tag(newest_singleplayer->savedatestring))),
-				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
+				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying), shortcut_fn);
 			}
 		}
 	}
 
 	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
 	                 _("Join the Widelands lobby"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLobby));
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLobby), shortcut_fn);
 	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
 	                 _("Log in as a registered user"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin));
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin), shortcut_fn);
 	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN));
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN), shortcut_fn);
 
 	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew));
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew), shortcut_fn);
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
 	            _("Create a new random map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom));
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom), shortcut_fn);
 	editor_.add(_("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad));
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad), shortcut_fn);
 
 	{
 		filename_for_continue_editing_ = "";
@@ -430,7 +432,7 @@ void MainMenu::set_labels() {
 			          format(_("Description: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(last_edited->first.description))),
-			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing), shortcut_fn);
 		}
 	}
 
