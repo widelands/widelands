@@ -67,7 +67,9 @@ function world_immovable_entries(tribename)
       end
    end
    for i = #all_immovables, 1, -1 do
-      if tribes_immovables[all_immovables[i].name] or all_immovables[i].size == "none" or (not all_immovables[i]:has_attribute("tree") and all_immovables[i].terrain_affinity) or all_immovables[i]:has_attribute("field") then
+      if tribes_immovables[all_immovables[i].name] or all_immovables[i].size == "none" or
+      (not all_immovables[i]:has_attribute("tree") and all_immovables[i].terrain_affinity) or
+      all_immovables[i]:has_attribute("field") then
          table.remove(all_immovables, i);
       end
    end
