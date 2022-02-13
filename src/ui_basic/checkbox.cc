@@ -92,10 +92,10 @@ void Statebox::layout() {
 			pic_width = pic_graphics_->width();
 		}
 		rendered_text_ = label_text_.empty() ?
-                          nullptr :
+		                    nullptr :
                           UI::g_fh->render(as_richtext_paragraph(
 		                                        label_text_, panel_style_ == PanelStyle::kFsMenu ?
-                                                              UI::FontStyle::kFsMenuLabel :
+		                                                        UI::FontStyle::kFsMenuLabel :
                                                               UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
@@ -207,7 +207,7 @@ void Statebox::handle_mousein(bool const inside) {
 /**
  * Left-click: Toggle checkbox state
  */
-bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool Statebox::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
 		button_clicked();
 		return true;
@@ -215,7 +215,8 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 
-bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Statebox::handle_mousemove(
+   const uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	return true;  // We handle this always by lighting up
 }
 

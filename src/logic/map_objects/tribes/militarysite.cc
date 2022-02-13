@@ -609,8 +609,11 @@ bool MilitarySite::incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier&
 Called when our soldier arrives.
 ===============
 */
-void MilitarySite::request_soldier_callback(
-   Game& game, Request&, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void MilitarySite::request_soldier_callback(Game& game,
+                                            Request& /*unused*/,
+                                            DescriptionIndex /*unused*/,
+                                            Worker* const w,
+                                            PlayerImmovable& target) {
 	MilitarySite& msite = dynamic_cast<MilitarySite&>(target);
 	Soldier& s = dynamic_cast<Soldier&>(*w);
 
@@ -731,18 +734,18 @@ void MilitarySite::update_soldier_request(bool incd) {
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
 		} else                        // military site is full or overfull
-		   if (capacity < stationed)  // player is reducing capacity
-		{
-			drop_least_suited_soldier(false, nullptr);
-		} else  // capacity == stationed size
-		{
-			if (upgrade_soldier_request_ && (!(upgrade_soldier_request_->is_open())) &&
-			    1 == upgrade_soldier_request_->get_count() && (!incd)) {
+			if (capacity < stationed)  // player is reducing capacity
+			{
 				drop_least_suited_soldier(false, nullptr);
-			} else {
-				update_upgrade_soldier_request();
+			} else  // capacity == stationed size
+			{
+				if (upgrade_soldier_request_ && (!(upgrade_soldier_request_->is_open())) &&
+				    1 == upgrade_soldier_request_->get_count() && (!incd)) {
+					drop_least_suited_soldier(false, nullptr);
+				} else {
+					update_upgrade_soldier_request();
+				}
 			}
-		}
 	} else  // not doing upgrade request
 	{
 		if ((capacity != stationed) || (normal_soldier_request_)) {
@@ -858,7 +861,7 @@ void MilitarySite::remove_worker(Worker& w) {
 /**
  * Called by soldiers in the building.
  */
-bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
+bool MilitarySite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (upcast(Soldier, soldier, &worker)) {
 		// Evict soldiers that have returned home if the capacity is too low
 		if (capacity_ < soldier_control_.present_soldiers().size()) {

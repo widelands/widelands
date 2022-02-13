@@ -124,8 +124,8 @@ public:
 	int fertility() const;
 
 	// The terrain which certain workers can transform this terrain into.
-	std::string enhancement(const std::string& category) const;
-	void set_enhancement(const std::string& category, const std::string& terrain);
+	std::string enhancement(const std::string& key) const;
+	void set_enhancement(const std::string& category, const std::string& e);
 
 	void replace_textures(const LuaTable&);
 

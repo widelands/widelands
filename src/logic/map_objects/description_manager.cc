@@ -174,7 +174,8 @@ void DescriptionManager::register_description(const std::string& description_nam
 			              registered_descriptions_.at(description_name).script_path.c_str(),
 			              script_path.c_str());
 			return;
-		} else if (replace) {
+		}
+		if (replace) {
 			verb_log_info("%s: using '%s' instead of '%s'", description_name.c_str(),
 			              script_path.c_str(),
 			              registered_descriptions_.at(description_name).script_path.c_str());
@@ -276,7 +277,7 @@ DescriptionManager::get_attributes(const std::string& description_name) const {
 	       registered_descriptions_.count(description_name) == 1);
 
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).attributes :
+	          registered_scenario_descriptions_.at(description_name).attributes :
              registered_descriptions_.at(description_name).attributes;
 }
 
@@ -285,7 +286,7 @@ DescriptionManager::get_registry_caller_info(const std::string& description_name
 	assert(registered_scenario_descriptions_.count(description_name) == 1 ||
 	       registered_descriptions_.count(description_name) == 1);
 	return registered_scenario_descriptions_.count(description_name) == 1 ?
-             registered_scenario_descriptions_.at(description_name).caller :
+	          registered_scenario_descriptions_.at(description_name).caller :
              registered_descriptions_.at(description_name).caller;
 }
 

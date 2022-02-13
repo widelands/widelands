@@ -49,7 +49,7 @@ std::string GamePreloadPacket::get_localized_win_condition() const {
 	return _(result);
 }
 
-void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
+void GamePreloadPacket::read(FileSystem& fs, Game& /*unused*/, MapObjectLoader* const /*unused*/) {
 	try {
 		Profile prof;
 		prof.read("preload", nullptr, fs);
@@ -107,7 +107,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 	}
 }
 
-void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*unused*/) {
 	Profile prof;
 	Section& s = prof.create_section("global");
 
@@ -139,7 +139,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_string("win_condition", game.get_win_condition_displayname());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
-                                                 game.game_controller()->get_game_type() :
+	                                              game.game_controller()->get_game_type() :
                                                  GameController::GameType::kReplay));
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	s.set_string("active_training_wheel", game.active_training_wheel());

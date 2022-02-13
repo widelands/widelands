@@ -127,7 +127,7 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-             g_style_manager->dropdown_style(panel_style_) :
+	          g_style_manager->dropdown_style(panel_style_) :
              nullptr;
 }
 
@@ -425,7 +425,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		// Now draw pictures
 		if (er.pic) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
-                              get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
@@ -506,7 +506,7 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
+bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t y) {
 	switch (btn) {
 
 	case SDL_BUTTON_LEFT: {
@@ -545,7 +545,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 	}
 }
 
-bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
+bool BaseListselect::handle_mousemove(
+   uint8_t /*state*/, int32_t /*x*/, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 		set_tooltip("");

@@ -491,7 +491,7 @@ bool GameChatPanel::select_recipient() {
 /**
  * The mouse was clicked on this chatbox
  */
-bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus_edit();
 		clicked();

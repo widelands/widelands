@@ -53,7 +53,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			old_world_name_ = s.get_string("world", "");
 			map->set_background_theme(s.get_string(
 			   "theme", old_world_name_.empty() ?
-                        "" :
+			               "" :
                         Map::get_old_world_info_by_old_name(old_world_name_).name.c_str()));
 
 			std::string t = s.get_string("tags", "");
@@ -134,11 +134,14 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 	}
 }
 
-void MapElementalPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
+void MapElementalPacket::read(FileSystem& fs,
+                              EditorGameBase& egbase,
+                              bool /*unused*/,
+                              MapObjectLoader& /*unused*/) {
 	pre_read(fs, egbase.mutable_map());
 }
 
-void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /*unused*/) {
 
 	Profile prof;
 	Section& global_section = prof.create_section("global");

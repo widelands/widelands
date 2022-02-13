@@ -66,7 +66,7 @@ bool IdleWorkerSupply::is_active() const {
 	return true;
 }
 
-SupplyProviders IdleWorkerSupply::provider_type(Game*) const {
+SupplyProviders IdleWorkerSupply::provider_type(Game* /*unused*/) const {
 	return SupplyProviders::kFlagOrRoad;
 }
 
@@ -97,14 +97,14 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game& game, const Request& req) con
 	return 0;
 }
 
-WareInstance& IdleWorkerSupply::launch_ware(Game&, const Request&) {
+WareInstance& IdleWorkerSupply::launch_ware(Game& /*unused*/, const Request& /*unused*/) {
 	throw wexception("IdleWorkerSupply::launch_ware() makes no sense.");
 }
 
 /**
  * No need to explicitly launch the worker.
  */
-Worker& IdleWorkerSupply::launch_worker(Game&, const Request& req) {
+Worker& IdleWorkerSupply::launch_worker(Game& /*unused*/, const Request& req) {
 	if (req.get_type() != wwWORKER) {
 		throw wexception("IdleWorkerSupply: not a worker request");
 	}

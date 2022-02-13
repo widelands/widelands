@@ -211,11 +211,15 @@ TrainingAttribute parse_training_attribute(const std::string& argument) {
 }
 }  // namespace
 
-bool ProductionProgram::Action::get_building_work(Game&, ProductionSite&, Worker&) const {
+bool ProductionProgram::Action::get_building_work(Game& /*unused*/,
+                                                  ProductionSite& /*unused*/,
+                                                  Worker& /*unused*/) const {
 	return false;
 }
 
-void ProductionProgram::Action::building_work_failed(Game&, ProductionSite&, Worker&) const {
+void ProductionProgram::Action::building_work_failed(Game& /*unused*/,
+                                                     ProductionSite& /*unused*/,
+                                                     Worker& /*unused*/) const {
 }
 
 ProductionProgram::Groups
@@ -288,7 +292,7 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(
 		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
-                                        descriptions.load_ware(produceme.first) :
+		                                  descriptions.load_ware(produceme.first) :
                                         descriptions.load_worker(produceme.first);
 
 		result.push_back(std::make_pair(index, read_positive(produceme.second)));
@@ -522,7 +526,7 @@ ProductionProgram::ActReturn::SiteHas::description(const Descriptions& descripti
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
+		                            descriptions.get_ware_descr(entry.first)->descname() :
                                   descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
@@ -545,7 +549,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation(
 	std::vector<std::string> condition_list;
 	for (const auto& entry : group.first) {
 		condition_list.push_back(entry.second == wwWARE ?
-                                  descriptions.get_ware_descr(entry.first)->descname() :
+		                            descriptions.get_ware_descr(entry.first)->descname() :
                                   descriptions.get_worker_descr(entry.first)->descname());
 	}
 	std::string condition = i18n::localize_list(condition_list, i18n::ConcatenateWith::AND);
@@ -572,14 +576,14 @@ bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const Product
 	}
 	return false;
 }
-std::string
-ProductionProgram::ActReturn::WorkersNeedExperience::description(const Descriptions&) const {
+std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(
+   const Descriptions& /*unused*/) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
 	return _("a worker needs experience");
 }
 
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(
-   const Descriptions&) const {
+   const Descriptions& /*unused*/) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
 	return _("the workers need no experience");
 }
@@ -1015,7 +1019,7 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 
 void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
                                                             ProductionSite& psite,
-                                                            Worker&) const {
+                                                            Worker& /*unused*/) const {
 	psite.program_end(game, on_failure_);
 }
 
@@ -1207,7 +1211,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
 				ware_list.push_back(entry.second == wwWARE ?
-                                   tribe.get_ware_descr(entry.first)->descname() :
+				                       tribe.get_ware_descr(entry.first)->descname() :
                                    tribe.get_worker_descr(entry.first)->descname());
 			}
 			std::string ware_string = i18n::localize_list(ware_list, i18n::ConcatenateWith::OR);
@@ -2133,7 +2137,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 
 void ProductionProgram::ActConstruct::building_work_failed(Game& game,
                                                            ProductionSite& psite,
-                                                           Worker&) const {
+                                                           Worker& /*unused*/) const {
 	psite.program_end(game, ProgramResult::kFailed);
 }
 

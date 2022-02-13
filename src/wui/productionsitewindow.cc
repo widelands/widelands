@@ -104,8 +104,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		const std::string workers_heading =
 		   (production_site->descr().nr_working_positions() == 1) ?
-            /** TRANSLATORS: Header in production site window if there is 1 worker */
-            _("Worker") :
+		      /** TRANSLATORS: Header in production site window if there is 1 worker */
+		      _("Worker") :
             /** TRANSLATORS: Header in production site window if there is more than 1 worker. If you
                need plural forms here, please let us know. */
                _("Workers");

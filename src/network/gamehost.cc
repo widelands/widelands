@@ -94,7 +94,9 @@ struct HostChatProvider : public ChatProvider {
 		else if (c.msg.size() > 1 && *c.msg.begin() == '/') {
 
 			// Split up in "cmd" "arg1" "arg2"
-			std::string cmd, arg1, arg2;
+			std::string cmd;
+			std::string arg1;
+			std::string arg2;
 			std::string temp = c.msg.substr(1);  // cut off '/'
 			h->split_command_array(temp, cmd, arg1, arg2);
 			verb_log_info("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
@@ -191,9 +193,8 @@ struct HostChatProvider : public ChatProvider {
 					if (arg1 == kickUser) {
 						h->kick_user(kickClient, kickReason);
 						return;
-					} else {
-						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
+					c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 				}
 				kickUser = "";
 				kickReason = "";
@@ -325,8 +326,7 @@ struct GameHostImpl {
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
-	     promoter(),
-	     net(),
+
 	     game(nullptr),
 	     pseudo_networktime(0),
 	     last_heartbeat(0),
@@ -864,9 +864,8 @@ int32_t GameHost::check_client(const std::string& name) {
 			throw wexception("WARNING: user was found but no client is connected to it!\n");
 		}
 		return client;  // client found
-	} else {
-		return -1;  // no client found
 	}
+	return -1;  // no client found
 }
 
 /**
@@ -1276,11 +1275,11 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 				//  broadcast changes
 				broadcast_setting_player(number);
 				return;
-			} else {
-				log_warn("Attempted to change to out-of-range initialization index %u "
-				         "for player %u.\n",
-				         index, number);
 			}
+			log_warn("Attempted to change to out-of-range initialization index %u "
+			         "for player %u.\n",
+			         index, number);
+
 			return;
 		}
 	}
@@ -1970,7 +1969,7 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) ?
-                           speeds.at(speeds.size() / 2) :
+		                     speeds.at(speeds.size() / 2) :
                            (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {

@@ -443,7 +443,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 // this is called whenever we gain ownership of a Ship
 void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 
-	allships.push_back(ShipObserver());
+	allships.emplace_back();
 	allships.back().ship = &ship;
 	allships.back().island_circ_direction = randomExploreDirection();
 
@@ -602,7 +602,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
-            new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
+		      new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
             possible_directions.at(RNG::static_rand(possible_directions.size()));
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));

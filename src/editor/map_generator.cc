@@ -206,9 +206,9 @@ uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& 
 	double const land_fac = map_info_.landRatio;
 
 	uint8_t res_h = elevation < water_fac ?
-                      water_h :
+	                   water_h :
 	                elevation < water_fac + land_fac ?
-                      water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
+	                   water_h + 1 + ((elevation - water_fac) / land_fac) * (mount_h - water_h) :
                       mount_h + ((elevation - water_fac - land_fac) / (1 - water_fac - land_fac)) *
 	                                (summit_h - mount_h);
 
@@ -277,8 +277,10 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  randomize the values
 
-		uint32_t step_x = std::min(16U, w), step_y = std::min(16U, h);
-		uint32_t max = kAverageElevation, min = kAverageElevation;
+		uint32_t step_x = std::min(16U, w);
+		uint32_t step_y = std::min(16U, h);
+		uint32_t max = kAverageElevation;
+		uint32_t min = kAverageElevation;
 		double ele_fac = 0.15;
 
 		bool end = false;
@@ -572,7 +574,7 @@ DescriptionIndex MapGenerator::figure_out_terrain(const uint32_t* random2,
 	} else if (isDesert) {
 		atp = MapGenAreaInfo::Area::kWasteland;
 		ttp = ttp == MapGenAreaInfo::Terrain::kLandCoast || isDesertOuter ?
-               MapGenAreaInfo::Terrain::kWastelandOuter :
+		         MapGenAreaInfo::Terrain::kWastelandOuter :
                MapGenAreaInfo::Terrain::kWastelandInner;
 	}
 
@@ -698,7 +700,8 @@ bool MapGenerator::create_random_map() {
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
-	uint8_t rows = 1, lines = 1;
+	uint8_t rows = 1;
+	uint8_t lines = 1;
 	if (map_info_.numPlayers > 1) {
 		++lines;
 		if (map_info_.numPlayers > 2) {
@@ -845,8 +848,9 @@ bool MapGenerator::create_random_map() {
 int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	if ((ch == '0') || (ch == 'o') || (ch == 'O')) {
 		return 22;
-	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
-	           (ch == 'J') || (ch == 'j')) {
+	}
+	if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') || (ch == 'J') ||
+	    (ch == 'j')) {
 		return 23;
 	} else if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
@@ -894,7 +898,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 	if (num == 22) {
 		return '0';
-	} else if (num == 23) {
+	}
+	if (num == 23) {
 		return '1';
 	} else if ((0 <= num) && (num < 22)) {
 		char result = num + 'a';

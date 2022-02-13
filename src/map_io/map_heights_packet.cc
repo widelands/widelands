@@ -28,7 +28,10 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
+void MapHeightsPacket::read(FileSystem& fs,
+                            EditorGameBase& egbase,
+                            bool /*unused*/,
+                            MapObjectLoader& /*unused*/) {
 
 	FileRead fr;
 	fr.open(fs, "binary/heights");
@@ -52,7 +55,7 @@ void MapHeightsPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObj
 /*
  * Write Function
  */
-void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&)
+void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /*unused*/)
 
 {
 	FileWrite fw;

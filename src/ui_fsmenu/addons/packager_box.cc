@@ -436,7 +436,7 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 		UI::WLMessageBox mbox(
 		   &main_menu_, UI::WindowStyle::kFsMenu, _("Delete"),
 		   selected_map.empty() ?
-            format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
+		      format(_("Do you really want to delete the directory ‘%s’ and all its contents?"),
 		             select.back()) :
             format(_("Do you really want to delete the map ‘%s’?"), selected_map),
 		   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);

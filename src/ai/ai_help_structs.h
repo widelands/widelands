@@ -475,7 +475,7 @@ struct BuildingObserver {
 
 	int32_t total_count() const;
 	AiModeBuildings aimode_limit_status() const;
-	bool buildable(const Widelands::Player& p);
+	bool buildable(const Widelands::Player& p) const;
 
 	// Convenience functions for is_what
 	bool is(BuildingAttribute) const;
@@ -757,8 +757,8 @@ struct ManagementData {
 		ai_training_mode_ = true;
 	}
 
-	int16_t get_military_number_at(uint8_t);
-	void set_military_number_at(uint8_t, int16_t);
+	int16_t get_military_number_at(uint8_t) const;
+	void set_military_number_at(uint8_t, int16_t) const;
 	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);

@@ -801,15 +801,15 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State*);
-	int get_descname(lua_State*);
-	int get_default_resource(lua_State*);
-	int get_default_resource_amount(lua_State*);
-	int get_fertility(lua_State*);
-	int get_humidity(lua_State*);
-	int get_representative_image(lua_State*);
-	int get_temperature(lua_State*);
-	int get_valid_resources(lua_State*);
+	int get_name(lua_State*) const;
+	int get_descname(lua_State*) const;
+	int get_default_resource(lua_State*) const;
+	int get_default_resource_amount(lua_State*) const;
+	int get_fertility(lua_State*) const;
+	int get_humidity(lua_State*) const;
+	int get_representative_image(lua_State*) const;
+	int get_temperature(lua_State*) const;
+	int get_valid_resources(lua_State*) const;
 
 	/*
 	 * Lua methods
@@ -1537,8 +1537,8 @@ public:
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 	int get___hash(lua_State*);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
-	int get_x(lua_State* L);
-	int get_y(lua_State* L);
+	int get_x(lua_State* L) const;
+	int get_y(lua_State* L) const;
 	int get_viewpoint_x(lua_State* L);
 	int get_viewpoint_y(lua_State* L);
 	int get_height(lua_State* L);
@@ -1571,7 +1571,7 @@ public:
 	 * Lua methods
 	 */
 	CLANG_DIAG_RESERVED_IDENTIFIER_OFF
-	int __tostring(lua_State* L);
+	int __tostring(lua_State* L) const;
 	int __eq(lua_State* L);
 	CLANG_DIAG_RESERVED_IDENTIFIER_ON
 	int region(lua_State* L);
@@ -1618,9 +1618,9 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_tribe_name(lua_State*);
-	int get_name(lua_State*);
-	int get_starting_field(lua_State*);
+	int get_tribe_name(lua_State*) const;
+	int get_name(lua_State*) const;
+	int get_starting_field(lua_State*) const;
 
 	/*
 	 * Lua methods

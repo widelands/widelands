@@ -651,7 +651,7 @@ void LuaPlayerBase::__unpersist(lua_State* L) {
 
       (RO) The number of this Player.
 */
-int LuaPlayerBase::get_number(lua_State* L) {
+int LuaPlayerBase::get_number(lua_State* L) const {
 	lua_pushuint32(L, player_number_);
 	return 1;
 }
@@ -982,7 +982,7 @@ int LuaPlayerBase::place_ship(lua_State* L) {
       :type radius: :class:`integer`
       :returns: :const:`nil`
 */
-int LuaPlayerBase::conquer(lua_State* L) {
+int LuaPlayerBase::conquer(lua_State* L) const {
 	uint32_t radius = 1;
 	if (lua_gettop(L) > 2) {
 		radius = luaL_checkuint32(L, 3);
@@ -1053,7 +1053,7 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameBase& egbase) {
+Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameBase& egbase) const {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}

@@ -322,7 +322,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
-                           nullptr :
+							      nullptr :
                            descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
@@ -430,7 +430,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								   descriptions.safe_building_index(fr.string()));
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
+								                             nullptr :
                                                      descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
@@ -456,7 +456,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-                                                     nullptr :
+								                             nullptr :
                                                      descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
@@ -510,7 +510,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 				                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
 				                         f.vision == VisibleState::kPreviouslySeen ?
-                                                            SavedVisionState::kPreviouslySeen :
+				                                                SavedVisionState::kPreviouslySeen :
                                                             SavedVisionState::kNone);
 				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
@@ -530,7 +530,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			oss << static_cast<char>(f.vision.is_revealed() ? SavedVisionState::kRevealed :
 			                         f.vision.is_hidden()   ? SavedVisionState::kHidden :
 			                         f.vision == VisibleState::kPreviouslySeen ?
-                                                         SavedVisionState::kPreviouslySeen :
+			                                                SavedVisionState::kPreviouslySeen :
                                                          SavedVisionState::kNone);
 			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);

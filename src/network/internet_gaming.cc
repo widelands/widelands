@@ -177,7 +177,8 @@ bool InternetGaming::do_login(bool should_relogin) {
 				}
 
 				return true;
-			} else if (error()) {
+			}
+			if (error()) {
 				return false;
 			}
 		}
@@ -270,7 +271,8 @@ bool InternetGaming::check_password(const std::string& nick,
 				net->send(s);
 				reset();
 				return true;
-			} else if (error()) {
+			}
+			if (error()) {
 				reset();
 				return false;
 			}
@@ -401,7 +403,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			}
 		}
 		return;
-	} else if (cmd == IGPCMD_PING) {
+	}
+	if (cmd == IGPCMD_PING) {
 		// Client received a PING and should immediately PONG as requested
 		SendPacket s;
 		s.string(IGPCMD_PONG);
@@ -420,8 +423,8 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			s.string(crypto::sha1(nonce + authenticator_));
 			net->send(s);
 			return;
-
-		} else if (cmd == IGPCMD_LOGIN) {
+		}
+		if (cmd == IGPCMD_LOGIN) {
 			// Clients request to login was granted
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
@@ -921,7 +924,8 @@ void InternetGaming::send(const std::string& msg) {
 		}
 
 		// Split up in "cmd" "arg"
-		std::string cmd, arg;
+		std::string cmd;
+		std::string arg;
 		std::string temp = msg.substr(1);  // cut off '/'
 		std::string::size_type const space = temp.find(' ');
 		if (space > temp.size()) {
@@ -957,7 +961,8 @@ void InternetGaming::send(const std::string& msg) {
 			m.string(arg);
 			net->send(m);
 			return;
-		} else if (!arg.empty() && cmd == "announce") {
+		}
+		if (!arg.empty() && cmd == "announce") {
 			// send the request to make an announcement
 			SendPacket m;
 			m.string(IGPCMD_ANNOUNCEMENT);

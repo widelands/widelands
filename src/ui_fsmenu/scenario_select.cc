@@ -154,11 +154,9 @@ static std::string resolve_and_fix_cross_file(const std::string& path) {
 	if (colonpos == std::string::npos) {
 		// normal case
 		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
-	} else {
-		// add-on
-		return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
-		                                        path.substr(colonpos + 1));
-	}
+	}  // add-on
+	return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
+	                                        path.substr(colonpos + 1));
 }
 
 bool ScenarioSelect::set_has_selection() {

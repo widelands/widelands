@@ -9,7 +9,14 @@ import sys
 
 # Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
-    '[abseil-string-find-startswith]',
+    # Checks we don't care about and want to suppress permanently
+    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
+    '[llvmlibc-callee-namespace]',
+    '[cert-dcl50-cpp]',  # We need this for our logger
+    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
+    '[modernize-use-trailing-return-type]',
+
+    # Checks we want to clean up sometime
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
     '[bugprone-exception-escape]',
@@ -18,7 +25,6 @@ SUPPRESSED_CHECKS = {
     '[bugprone-not-null-terminated-result]',
     '[bugprone-signed-char-misuse]',
     '[bugprone-too-small-loop-variable]',
-    '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
     '[cert-msc32-c]',
     '[cert-msc51-cpp]',
@@ -46,7 +52,6 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-member-init]',
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
     '[cppcoreguidelines-pro-type-union-access]',
-    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
     '[cppcoreguidelines-special-member-functions]',
     '[fuchsia-default-arguments]',
@@ -65,11 +70,7 @@ SUPPRESSED_CHECKS = {
     '[hicpp-special-member-functions]',
     '[hicpp-uppercase-literal-suffix]',
     '[hicpp-use-auto]',
-    '[hicpp-use-emplace]',
-    '[hicpp-use-equals-default]',
     '[hicpp-vararg]',
-    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
-    '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
     '[misc-non-private-member-variables-in-classes]',
     '[modernize-avoid-c-arrays]',
@@ -78,21 +79,12 @@ SUPPRESSED_CHECKS = {
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
     '[modernize-use-auto]',
-    '[modernize-use-emplace]',
-    '[modernize-use-equals-default]',
-    '[modernize-use-trailing-return-type]',
-    '[performance-no-automatic-move]',
     '[performance-unnecessary-value-param]',
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
-    '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
-    '[readability-inconsistent-declaration-parameter-name]',
-    '[readability-isolate-declaration]',
     '[readability-magic-numbers]',
-    '[readability-make-member-function-const]',
-    '[readability-named-parameter]',
     '[readability-uppercase-literal-suffix]'
 }
 

@@ -250,7 +250,8 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 }
 
 void EconomyOptionsWindow::layout() {
-	int w, h;
+	int w;
+	int h;
 	tabpanel_.get_desired_size(&w, &h);
 	main_box_.set_desired_size(w, h + 78);
 	update_desired_size();
@@ -877,10 +878,10 @@ EconomyOptionsWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapObje
 			return &create(&ib, ib.egbase().mutable_descriptions(), flag,
 			               fr.unsigned_8() > 0 ? Widelands::wwWORKER : Widelands::wwWARE,
 			               ib.can_act(flag.owner().player_number()));
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Economy Options Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Economy Options Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("economy options window: %s", e.what());
 	}

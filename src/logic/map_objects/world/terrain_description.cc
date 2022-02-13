@@ -152,7 +152,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 
 	const std::string default_resource(table.get_string("default_resource"));
 	default_resource_index_ = !default_resource.empty() ?
-                                descriptions.load_resource(default_resource) :
+	                             descriptions.load_resource(default_resource) :
                                 Widelands::INVALID_INDEX;
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
@@ -239,22 +239,22 @@ const std::vector<TerrainDescription::Type> TerrainDescription::get_types() cons
 	std::vector<TerrainDescription::Type> terrain_types;
 
 	if (is_ == Widelands::TerrainDescription::Is::kArable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kArable));
+		terrain_types.emplace_back(TerrainDescription::Is::kArable);
 	}
 	if (is_ & Widelands::TerrainDescription::Is::kWalkable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kWalkable));
+		terrain_types.emplace_back(TerrainDescription::Is::kWalkable);
 	}
 	if (is_ & Widelands::TerrainDescription::Is::kWater) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kWater));
+		terrain_types.emplace_back(TerrainDescription::Is::kWater);
 	}
 	if (is_ & Widelands::TerrainDescription::Is::kUnreachable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kUnreachable));
+		terrain_types.emplace_back(TerrainDescription::Is::kUnreachable);
 	}
 	if (is_ & Widelands::TerrainDescription::Is::kMineable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kMineable));
+		terrain_types.emplace_back(TerrainDescription::Is::kMineable);
 	}
 	if (is_ & Widelands::TerrainDescription::Is::kUnwalkable) {
-		terrain_types.push_back(TerrainDescription::Type(TerrainDescription::Is::kUnwalkable));
+		terrain_types.emplace_back(TerrainDescription::Is::kUnwalkable);
 	}
 	return terrain_types;
 }

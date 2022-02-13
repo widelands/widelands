@@ -80,7 +80,7 @@ MapData::MapData(const std::string& init_filename, const std::string& init_local
              MapData::DisplayType::kMapnamesLocalized) {
 }
 
-bool MapData::compare_names(const MapData& other) {
+bool MapData::compare_names(const MapData& other) const {
 	// The parent directory gets special treatment.
 	if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 		return true;

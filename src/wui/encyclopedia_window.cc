@@ -208,15 +208,14 @@ UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 			log_warn("EncyclopediaWindow::load: could not find a suitable list entry for '%s' in '%s'",
 			         entry_path.c_str(), tab.c_str());
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Encyclopedia", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Encyclopedia", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("encyclopedia: %s", e.what());
 	}
 }
-void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	const std::string tab = tabs_.tabs()[tabs_.active()]->get_name().substr(kTabNamePrefix.size());

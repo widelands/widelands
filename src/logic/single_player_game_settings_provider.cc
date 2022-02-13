@@ -50,15 +50,15 @@ bool SinglePlayerGameSettingsProvider::can_change_player_state(uint8_t number) {
 	return ((!s.scenario) && (number != s.playernum));
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_tribe(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_init(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_init(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
-bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t) {
+bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t /*number*/) {
 	return !s.scenario;
 }
 
@@ -239,11 +239,13 @@ void SinglePlayerGameSettingsProvider::set_player_color(const uint8_t number, co
 	}
 }
 
-void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t, bool) {
+void SinglePlayerGameSettingsProvider::set_player_closeable(uint8_t /*number*/,
+                                                            bool /*closeable*/) {
 	// nothing to do
 }
 
-void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot, Widelands::PlayerNumber) {
+void SinglePlayerGameSettingsProvider::set_player_shared(PlayerSlot /*number*/,
+                                                         Widelands::PlayerNumber /*shared*/) {
 	// nothing to do
 }
 

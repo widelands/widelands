@@ -103,7 +103,7 @@ void MessagePreview::draw(RenderTarget& r) {
 		r.brighten_rect(Recti((w - fraction) / 2, get_h() - kSpacing, fraction, kSpacing), -64);
 	}
 }
-bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
+bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /*x*/, int32_t /*y*/) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
 		if (message_ && message_->position()) {
@@ -285,7 +285,8 @@ void InfoPanel::set_textareas_visibility(bool v) {
 	}
 }
 
-bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
+bool InfoPanel::handle_mousemove(
+   uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	last_mouse_pos_ = Vector2i(x, y);
 
 	switch (display_mode_) {
@@ -315,11 +316,11 @@ bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t
 }
 
 // Consume mouse click/move events on the panel
-bool InfoPanel::handle_mousepress(uint8_t, int32_t x, int32_t y) {
+bool InfoPanel::handle_mousepress(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
 }
-bool InfoPanel::handle_mouserelease(uint8_t, int32_t x, int32_t y) {
+bool InfoPanel::handle_mouserelease(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
 }

@@ -108,15 +108,15 @@ struct GameClientImpl {
 	// Whether disconnect() has been called previously.
 	bool disconnect_called_;
 
-	void send_hello();
-	void send_player_command(Widelands::PlayerCommand*);
+	void send_hello() const;
+	void send_player_command(Widelands::PlayerCommand* /*pc*/) const;
 
 	void run_game(InteractiveGameBase* igb);
 
-	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow&);
+	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow& /*loader*/);
 };
 
-void GameClientImpl::send_hello() {
+void GameClientImpl::send_hello() const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_HELLO);
 	s.unsigned_8(NETWORK_PROTOCOL_VERSION);
@@ -125,7 +125,7 @@ void GameClientImpl::send_hello() {
 	net->send(s);
 }
 
-void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
+void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) const {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
 	s.unsigned_32(game->get_gametime().get());
@@ -403,14 +403,14 @@ const GameSettings& GameClient::settings() {
 	return d->settings;
 }
 
-void GameClient::set_scenario(bool) {
+void GameClient::set_scenario(bool /*set*/) {
 }
 
 bool GameClient::can_change_map() {
 	return false;
 }
 
-bool GameClient::can_change_player_state(uint8_t const) {
+bool GameClient::can_change_player_state(uint8_t const /*number*/) {
 	return false;
 }
 
@@ -422,7 +422,7 @@ bool GameClient::can_change_player_team(uint8_t number) {
 	return (number == d->settings.playernum) && !d->settings.scenario && !d->settings.savegame;
 }
 
-bool GameClient::can_change_player_init(uint8_t) {
+bool GameClient::can_change_player_init(uint8_t /*number*/) {
 	return false;
 }
 
@@ -430,20 +430,26 @@ bool GameClient::can_launch() {
 	return false;
 }
 
-void GameClient::set_player_state(uint8_t, PlayerSettings::State) {
+void GameClient::set_player_state(uint8_t /*number*/, PlayerSettings::State /*unused*/) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_player_ai(uint8_t, const std::string&, bool const /* random_ai */) {
+void GameClient::set_player_ai(uint8_t /*number*/,
+                               const std::string& /*unused*/,
+                               bool const /* random_ai */) {
 	// client is not allowed to do this
 }
 
-void GameClient::next_player_state(uint8_t) {
+void GameClient::next_player_state(uint8_t /*unused*/) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_map(
-   const std::string&, const std::string&, const std::string&, const std::string&, uint32_t, bool) {
+void GameClient::set_map(const std::string& /*mapname*/,
+                         const std::string& /*mapfilename*/,
+                         const std::string& /*map_theme*/,
+                         const std::string& /*map_bg*/,
+                         uint32_t /*maxplayers*/,
+                         bool /*savegame*/) {
 	// client is not allowed to do this
 }
 
@@ -498,7 +504,7 @@ void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_closeable(uint8_t, bool) {
+void GameClient::set_player_closeable(uint8_t /*number*/, bool /*closeable*/) {
 	//  client is not allowed to do this
 }
 
@@ -526,12 +532,12 @@ void GameClient::set_player_init(uint8_t number, uint8_t initialization_index) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_name(uint8_t, const std::string&) {
+void GameClient::set_player_name(uint8_t /*number*/, const std::string& /*unused*/) {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void GameClient::set_player(uint8_t, const PlayerSettings&) {
+void GameClient::set_player(uint8_t /*number*/, const PlayerSettings& /*unused*/) {
 	// do nothing here - the request for a positionchange is send in
 	// set_player_number(uint8_t) to the host.
 }
@@ -556,7 +562,7 @@ std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void GameClient::set_win_condition_script(const std::string&) {
+void GameClient::set_win_condition_script(const std::string& /*wc*/) {
 	// Clients are not allowed to change this
 	NEVER_HERE();
 }
@@ -640,7 +646,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	// This might happen, if a users connects after the game starts.
 	if (number == d->settings.users.size()) {
-		d->settings.users.push_back(UserSettings());
+		d->settings.users.emplace_back();
 	}
 
 	d->settings.users.at(number).name = packet.string();
@@ -733,7 +739,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == name) {
 				found = pair.first->version;
-				new_g_addons.push_back(std::make_pair(pair.first, true));
+				new_g_addons.emplace_back(pair.first, true);
 				break;
 			}
 		}
@@ -758,7 +764,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 		throw AddOnsMismatchException(message);
 	}
 	for (const auto& pair : disabled_installed_addons) {
-		new_g_addons.push_back(std::make_pair(pair.second, false));
+		new_g_addons.emplace_back(pair.second, false);
 	}
 	AddOns::g_addons = new_g_addons;
 }
@@ -766,7 +772,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 /**
  * Give a pong for a ping
  */
-void GameClient::handle_ping(RecvPacket&) {
+void GameClient::handle_ping(RecvPacket& /*unused*/) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PONG);
 	d->net->send(s);
@@ -1005,11 +1011,10 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 					incompatible_wc.insert(w->get_string(key));
 				}
 			}
-			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
+			info.initializations.emplace_back(
 			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
 			   incompatible_wc,
-			   !t->has_key("uses_map_starting_position") ||
-			      t->get_bool("uses_map_starting_position")));
+			   !t->has_key("uses_map_starting_position") || t->get_bool("uses_map_starting_position"));
 		}
 		d->settings.tribes.push_back(info);
 	}
@@ -1091,7 +1096,7 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 /**
  *
  */
-void GameClient::handle_desync(RecvPacket&) {
+void GameClient::handle_desync(RecvPacket& /*unused*/) {
 	log_err("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 	        "information for debugging.\n");
 	if (d->game) {
@@ -1269,15 +1274,14 @@ void GameClient::disconnect(const std::string& reason,
                                           NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
-                                   NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason).c_str() :
                                    NetworkGamingMessages::get_message(reason, arg).c_str());
-		} else {
-			capsule_.menu().show_messagebox(
-			   _("Disconnected"),
-			   format(_("The connection with the host was lost for the following reason:\n%s"),
-			          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
-                                  NetworkGamingMessages::get_message(reason, arg))));
 		}
+		capsule_.menu().show_messagebox(
+		   _("Disconnected"),
+		   format(_("The connection with the host was lost for the following reason:\n%s"),
+		          (arg.empty() ? NetworkGamingMessages::get_message(reason) :
+                               NetworkGamingMessages::get_message(reason, arg))));
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a

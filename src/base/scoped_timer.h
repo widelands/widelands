@@ -31,7 +31,7 @@ class ScopedTimer {
 public:
 	// Takes the output message that will be format()ted with the total time
 	// this object existed (in ms, use %u).
-	explicit ScopedTimer(const std::string& message, bool only_verbose = false);
+	explicit ScopedTimer(const std::string& message, bool v = false);
 
 	~ScopedTimer();
 

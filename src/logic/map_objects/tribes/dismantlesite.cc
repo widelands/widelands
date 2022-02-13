@@ -165,7 +165,7 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);
 		const Buildcost& return_wares = pair.first != first_idx ?
-                                         former_descr->enhancement_returns_on_dismantle() :
+		                                   former_descr->enhancement_returns_on_dismantle() :
                                          former_descr->returns_on_dismantle();
 
 		for (const auto& ware : return_wares) {
@@ -192,7 +192,7 @@ bool DismantleSite::burn_on_destroy() {
 Called by our builder to get instructions.
 ===============
 */
-bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
+bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse

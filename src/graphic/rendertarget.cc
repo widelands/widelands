@@ -85,9 +85,8 @@ bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prev
 		rect_ = newrect;
 
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /**

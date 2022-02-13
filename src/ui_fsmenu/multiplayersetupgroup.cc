@@ -41,7 +41,7 @@ constexpr int kPadding = 4;
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const grand_parent,
 	                       UI::Panel* const parent,
-	                       int32_t const,
+	                       int32_t const /*unused*/,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
@@ -164,7 +164,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 /// Holds the dropdown menus for a player slot
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       int32_t const,
+	                       int32_t const /*unused*/,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
@@ -373,7 +373,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-                settings_->can_change_player_init(id_) :
+		          settings_->can_change_player_init(id_) :
                 settings_->can_change_player_tribe(id_);
 	}
 
@@ -386,7 +386,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-                                            UI::ButtonDisableStyle::kPermpressed :
+		                                      UI::ButtonDisableStyle::kPermpressed :
                                             UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
@@ -647,8 +647,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
                                              UI::Panel* const parent,
                                              int32_t const x,
                                              int32_t const y,
-                                             int32_t const,
-                                             int32_t const,
+                                             int32_t const /*unused*/,
+                                             int32_t const /*unused*/,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, x, y, UI::Box::Horizontal),

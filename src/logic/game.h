@@ -268,7 +268,7 @@ public:
 	void send_player_command(Widelands::PlayerCommand*);
 
 	void send_player_bulldoze(PlayerImmovable&, bool recurse = false);
-	void send_player_dismantle(PlayerImmovable&, bool keep_wares);
+	void send_player_dismantle(PlayerImmovable&, bool kw);
 	void send_player_build(int32_t, const Coords&, DescriptionIndex);
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
@@ -279,7 +279,7 @@ public:
 	void send_player_start_or_cancel_expedition(Building&);
 	void send_player_expedition_config(PortDock&, WareWorker, DescriptionIndex, bool);
 
-	void send_player_enhance_building(Building&, DescriptionIndex, bool keep_wares);
+	void send_player_enhance_building(Building&, DescriptionIndex, bool kw);
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(

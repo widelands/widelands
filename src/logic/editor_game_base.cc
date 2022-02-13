@@ -231,7 +231,7 @@ void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	ibase_.reset(b);
 }
 
-InteractiveGameBase* EditorGameBase::get_igbase() {
+InteractiveGameBase* EditorGameBase::get_igbase() const {
 	return dynamic_cast<InteractiveGameBase*>(get_ibase());
 }
 
@@ -349,7 +349,7 @@ UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::stri
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?
-                          nullptr :
+		                    nullptr :
                           new GameTips(*loader_ui_, registered_game_tips_, all_tribes()));
 	}
 	return *loader_ui_;

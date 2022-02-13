@@ -113,7 +113,7 @@ struct MousewheelHandlerOptions {
 		}
 	}
 
-	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) {
+	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		return (((y && current_sign_y_) || (x && current_sign_x_)) &&
 		        matches_keymod(current_keymod_, modstate));
 	}

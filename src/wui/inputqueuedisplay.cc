@@ -120,22 +120,22 @@ static inline std::string create_tooltip(const bool increase) {
 	   "<p>%s%s%s</p>",
 	   g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	      .as_font_tag(increase ?
-                         /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-                         _("Increase the number of wares you want to be stored here") :
+	                      /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	                      _("Increase the number of wares you want to be stored here") :
                          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
                          _("Decrease the number of wares you want to be stored here")),
 	   as_listitem(increase ?
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Shift to increase all ware types at the same time") :
+	                  /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                     option explanation */
+	                  _("Hold down Shift to increase all ware types at the same time") :
                         /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                            option explanation */
                         _("Hold down Shift to decrease all ware types at the same time"),
 	               UI::FontStyle::kWuiTooltip),
 	   as_listitem(increase ?
-                        /** TRANSLATORS: Button tooltip in in a building's wares input queue -
-                           option explanation */
-                        _("Hold down Ctrl to allow all of this ware") :
+	                  /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                     option explanation */
+	                  _("Hold down Ctrl to allow all of this ware") :
                         /** TRANSLATORS: Button tooltip in in a building's wares input queue -
                            option explanation */
                         _("Hold down Ctrl to allow none of this ware"),
@@ -257,7 +257,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	for (size_t i = 0; i < nr_icons_; ++i) {
 		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
-                                  bld.owner().tribe().get_ware_descr(index_)->icon() :
+		                            bld.owner().tribe().get_ware_descr(index_)->icon() :
                                   bld.owner().tribe().get_worker_descr(index_)->icon());
 		hbox_.add(icons_[i]);
 	}
@@ -332,7 +332,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?
-                  bld.owner().tribe().get_ware_descr(index_)->descname() :
+	               bld.owner().tribe().get_ware_descr(index_)->descname() :
                   bld.owner().tribe().get_worker_descr(index_)->descname());
 
 	if (nr_icons_ == 0) {
@@ -381,7 +381,7 @@ bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, co
 }
 
 bool InputQueueDisplay::handle_mousemove(
-   uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
+   uint8_t /*state*/, const int32_t x, const int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
 }
@@ -403,7 +403,8 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 				change_desired_fill(change);
 			}
 			return true;
-		} else if (has_priority_) {
+		}
+		if (has_priority_) {
 			// Mouse is over priority or collapse button
 			// Can't just use method from Slider, because of the special
 			// meaning of shift to change all input priorities together.
@@ -666,7 +667,7 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		auto calc_xpos = [this](const size_t fill) {
 			return (fill == 0 ? icons_[0]->get_x() :
 			        fill == nr_icons_ ?
-                             icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
+			                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
                              (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
 			                     icons_[fill]->get_x()) /
 			                       2) +

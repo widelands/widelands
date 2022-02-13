@@ -192,7 +192,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 			if (pair.first->internal_name == info->internal_name) {
 				pair.second = !pair.second;
 				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
-                                                          "images/ui_basic/checkbox_checked.png" :
+				                                              "images/ui_basic/checkbox_checked.png" :
                                                           "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				if (pair.first->category == AddOns::AddOnCategory::kTheme) {
@@ -451,17 +451,17 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	   _("Version: %1$s+%2$u"), AddOns::version_to_string(info->version), info->i18n_version));
 	verified_.set_tooltip(
 	   info->internal_name.empty() ?
-         _("Error") :
+	      _("Error") :
 	   info->verified ?
-         _("Verified by the Widelands Development Team") :
+	      _("Verified by the Widelands Development Team") :
          _("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee "
 	        "that it does not contain harmful or offensive content."));
 	quality_.set_tooltip(info->internal_name.empty() ?
-                           _("Error") :
+	                        _("Error") :
                            AddOnQuality::kQualities.at(info->quality)().description);
 	bottom_row_right_.set_tooltip(
 	   info->internal_name.empty() ?
-         "" :
+	      "" :
          format(
 	         "%s<br>%s<br>%s<br>%s<br>%s",
 	         format(ngettext("Total size: %u byte", "Total size: %u bytes", info->total_file_size),
@@ -469,7 +469,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	         format(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
 	         (info->number_of_votes() ?
-                format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+	             format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                      info->average_rating(), info->number_of_votes()) :
                 _("No votes yet")),

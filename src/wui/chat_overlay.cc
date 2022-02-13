@@ -60,7 +60,7 @@ struct ChatOverlay::Impl {
 	void recompute();
 
 private:
-	bool has_chat_provider() {
+	bool has_chat_provider() const {
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
 		return (chat_ != nullptr && chat_->has_been_set());

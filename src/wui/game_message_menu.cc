@@ -676,15 +676,15 @@ UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
 				m.list->multiselect(fr.unsigned_32(), true);
 			}
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Messages Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Messages Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("messages menu: %s", e.what());
 	}
 }
-void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(mode == Mode::kInbox ? 1 : 0);
 	fw.unsigned_8(static_cast<uint8_t>(message_filter_));

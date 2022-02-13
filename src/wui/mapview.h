@@ -201,7 +201,7 @@ private:
 	TimestampedMouse animation_target_mouse() const;
 
 	// Turns 'm' into the corresponding NodeAndTrinangle and calls 'track_selection'.
-	Widelands::NodeAndTriangle<> track_sel(const Vector2i& m);
+	Widelands::NodeAndTriangle<> track_sel(const Vector2i& p);
 
 	Vector2f to_panel(const Vector2f& map_pixel) const;
 	Vector2f to_map(const Vector2i& panel_pixel) const;

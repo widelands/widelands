@@ -98,10 +98,10 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 }
 
 inline void check_string_validity(const std::string& str) {
-	if (str.find(' ') != std::string::npos) {
+	if (contains(str, " ")) {
 		throw WLWarning("", "String '%s' may not contain whitespaces", str.c_str());
 	}
-	if (str.find('\n') != std::string::npos) {
+	if (contains(str, "\n")) {
 		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
 	}
 }
@@ -300,7 +300,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
 }
 
-std::string NetAddons::read_line() {
+std::string NetAddons::read_line() const {
 	std::string line;
 	char c;
 	int n;
@@ -314,7 +314,7 @@ std::string NetAddons::read_line() {
 	return line;
 }
 
-void NetAddons::read_file(const int64_t length, const std::string& out) {
+void NetAddons::read_file(const int64_t length, const std::string& out) const {
 	FileWrite fw;
 	std::unique_ptr<char[]> buffer(new char[length]);
 	int64_t nr_bytes_read = 0;
@@ -792,7 +792,7 @@ void NetAddons::upload_screenshot(const std::string& addon,
                                   const std::string& image,
                                   const std::string& description) {
 	check_string_validity(addon);
-	if (description.find('\n') != std::string::npos) {
+	if (contains(description, "\n")) {
 		throw WLWarning("", "Screenshot descriptions may not contain newlines");
 	}
 	init();

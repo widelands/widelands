@@ -387,19 +387,19 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 	}
 	if (descr.get_isport()) {
 		return BuildingTab::Ports;
-	} else {
-		switch (descr.get_size()) {
-		case Widelands::BaseImmovable::SMALL:
-			return BuildingTab::Small;
-		case Widelands::BaseImmovable::MEDIUM:
-			return BuildingTab::Medium;
-		case Widelands::BaseImmovable::BIG:
-			return BuildingTab::Big;
-		default:
-			throw wexception(
-			   "Building statictics: Found building without a size: %s", descr.name().c_str());
-		}
 	}
+	switch (descr.get_size()) {
+	case Widelands::BaseImmovable::SMALL:
+		return BuildingTab::Small;
+	case Widelands::BaseImmovable::MEDIUM:
+		return BuildingTab::Medium;
+	case Widelands::BaseImmovable::BIG:
+		return BuildingTab::Big;
+	default:
+		throw wexception(
+		   "Building statictics: Found building without a size: %s", descr.name().c_str());
+	}
+
 	NEVER_HERE();
 }
 
@@ -681,9 +681,9 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (percent < low_production_) ? style_.low_color() :
 				   (percent < ((low_production_ < 50) ?
-                              2 * low_production_ :
+				                  2 * low_production_ :
                               low_production_ + ((100 - low_production_) / 2))) ?
-                                             style_.medium_color() :
+				                                 style_.medium_color() :
                                              style_.high_color();
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
@@ -803,21 +803,21 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			m.last_building_index_ = fr.signed_32();
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building statistics menu: %s", e.what());
 	}
 }
-void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(low_production_);
 	fw.unsigned_8(tab_panel_.active());
 	fw.string(
 	   current_building_type_ == Widelands::INVALID_INDEX ?
-         "" :
+	      "" :
          iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }

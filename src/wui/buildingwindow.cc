@@ -270,8 +270,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
-               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-               _("Continue") :
+			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+			      _("Continue") :
                /** TRANSLATORS: Stop/Continue toggle button for production sites. */
                _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });
@@ -683,15 +683,15 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
 			bw.tabs_->activate(fr.unsigned_8());
 			return bw;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Building Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Building Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building window: %s", e.what());
 	}
 }
-void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.signed_32(building_position_.x);
 	fw.signed_32(building_position_.y);

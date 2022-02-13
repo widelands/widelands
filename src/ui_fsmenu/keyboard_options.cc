@@ -258,18 +258,17 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					}
 					b->set_title(generate_title(key));
 					break;
-				} else {
-					UI::WLMessageBox warning(
-					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
-					   as_richtext_paragraph(
-					      format(_("The shortcut you selected (‘%1$s’) is already in use for the "
-					               "following action: ‘%2$s’. Please select a different shortcut "
-					               "or change the conflicting shortcut first."),
-					             shortcut_string_for(c.key, true), to_string(conflict)),
-					      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
-					   UI::WLMessageBox::MBoxType::kOk);
-					warning.run<UI::Panel::Returncodes>();
 				}
+				UI::WLMessageBox warning(
+				   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
+				   as_richtext_paragraph(
+				      format(_("The shortcut you selected (‘%1$s’) is already in use for the "
+				               "following action: ‘%2$s’. Please select a different shortcut "
+				               "or change the conflicting shortcut first."),
+				             shortcut_string_for(c.key, true), to_string(conflict)),
+				      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+				   UI::WLMessageBox::MBoxType::kOk);
+				warning.run<UI::Panel::Returncodes>();
 			}
 			app->enable_handle_key(true);
 		});
@@ -389,7 +388,8 @@ void KeyboardOptions::layout() {
 	if (!is_minimal()) {
 		reset_.set_desired_size(get_w() / 3, kButtonHeight);
 		ok_.set_desired_size(reset_.get_w(), reset_.get_h());
-		int w, h;
+		int w;
+		int h;
 		buttons_box_.get_desired_size(&w, &h);
 		buttons_box_.set_size(get_inner_w(), h);
 		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h - kPadding));
