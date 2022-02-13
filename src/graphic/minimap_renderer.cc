@@ -362,9 +362,8 @@ int scale_map(const Widelands::Map& map, bool zoom) {
 		}
 		if (max > 135) {
 			return 370 / max;
-		} else {
-			return 270 / max;
 		}
+		return 270 / max;
 	}
 	return 1;
 }

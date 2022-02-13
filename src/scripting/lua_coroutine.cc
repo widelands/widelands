@@ -118,7 +118,7 @@ std::string LuaCoroutine::pop_string() {
 	if (!lua_isstring(lua_state_, -1)) {
 		throw LuaError("pop_string(), but no string on the stack.");
 	}
-	const std::string return_value = lua_tostring(lua_state_, -1);
+	std::string return_value = lua_tostring(lua_state_, -1);
 	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return return_value;

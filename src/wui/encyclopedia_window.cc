@@ -85,7 +85,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			                                                      contents_width, contents_height,
 			                                                      UI::PanelStyle::kWui))));
 			lists_.at(tab_name)->selected.connect(
-			   [this, tab_name](unsigned) { entry_selected(tab_name); });
+			   [this, tab_name](unsigned /* index */) { entry_selected(tab_name); });
 
 			contents_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::MultilineTextarea>(

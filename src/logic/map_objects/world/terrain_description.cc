@@ -195,13 +195,13 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 	}
 }
 
-void TerrainDescription::set_enhancement(const std::string& cat, const std::string& e) {
-	if (e == name_) {
+void TerrainDescription::set_enhancement(const std::string& category, const std::string& terrain) {
+	if (terrain == name_) {
 		throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
 	}
 
-	if (e.empty()) {
-		auto it = enhancement_.find(cat);
+	if (terrain.empty()) {
+		auto it = enhancement_.find(category);
 		if (it != enhancement_.end()) {
 			enhancement_.erase(it);
 		}
@@ -209,10 +209,10 @@ void TerrainDescription::set_enhancement(const std::string& cat, const std::stri
 	}
 
 	// Ensure terrain exists and is loaded
-	enhancement_[cat] = e;
-	if (!e.empty()) {
+	enhancement_[category] = terrain;
+	if (!terrain.empty()) {
 		Notifications::publish(
-		   NoteMapObjectDescription(e, NoteMapObjectDescription::LoadType::kObject));
+		   NoteMapObjectDescription(terrain, NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
@@ -312,8 +312,8 @@ int TerrainDescription::fertility() const {
 	return fertility_;
 }
 
-std::string TerrainDescription::enhancement(const std::string& key) const {
-	const auto it = enhancement_.find(key);
+std::string TerrainDescription::enhancement(const std::string& category) const {
+	const auto it = enhancement_.find(category);
 	return it == enhancement_.end() ? "" : it->second;
 }
 

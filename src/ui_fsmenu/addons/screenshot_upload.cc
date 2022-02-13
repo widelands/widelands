@@ -98,7 +98,7 @@ ScreenshotUploadWindow::ScreenshotUploadWindow(AddOnsCtrl& ctrl,
 	}
 
 	images_.selected.connect(
-	   [this](uint32_t) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
+	   [this](uint32_t /* value */) { icon_.set_icon(g_image_cache->get(images_.get_selected())); });
 	cancel_.sigclicked.connect([this]() { die(); });
 	ok_.sigclicked.connect([this, &ctrl, info, remote]() {
 		if (!images_.has_selection() || description_.text().empty()) {

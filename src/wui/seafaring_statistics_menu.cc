@@ -195,8 +195,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	centerviewbtn_.sigclicked.connect([this]() { center_view(); });
 
 	// Configure table
-	table_.selected.connect([this](unsigned) { selected(); });
-	table_.double_clicked.connect([this](unsigned) { double_clicked(); });
+	table_.selected.connect([this](unsigned /* index */) { selected(); });
+	table_.double_clicked.connect([this](unsigned /* index */) { double_clicked(); });
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.add_column(230, pgettext("ship", "Status"));

@@ -680,7 +680,7 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
 	table_.add_column(200, _("Existing Profiles"));
 	update_table();
 
-	table_.selected.connect([this](uint32_t) { table_selection_changed(); });
+	table_.selected.connect([this](uint32_t /* index */) { table_selection_changed(); });
 	profile_name_.changed.connect([this] { update_save_enabled(); });
 	profile_name_.ok.connect([this] { save_profile(); });
 	profile_name_.cancel.connect([this] { die(); });

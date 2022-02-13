@@ -35,7 +35,7 @@
 /// Similar exception type as wexception, but without the debug output.
 /// Intended for normal warnings like "map could not be found".
 struct WLWarning : public std::exception {
-	explicit WLWarning(char const* et, char const* em, ...) PRINTF_FORMAT(3, 4);
+	explicit WLWarning(char const* title, char const* message, ...) PRINTF_FORMAT(3, 4);
 
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.

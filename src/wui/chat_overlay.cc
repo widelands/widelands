@@ -53,7 +53,7 @@ struct ChatOverlay::Impl {
 
 	Impl()
 	   : chat_message_subscriber_(
-	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
+	        Notifications::subscribe<ChatMessage>([this](const ChatMessage& /* msg */) { recompute(); })),
 	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 

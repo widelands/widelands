@@ -71,11 +71,11 @@ std::string filesize_string(const uint32_t bytes) {
 	}
 	if (bytes > 1000000) {
 		return format_l(_("%.2f MB"), (bytes / 1000000.f));
-	} else if (bytes > 1000) {
-		return format_l(_("%.2f kB"), (bytes / 1000.f));
-	} else {
-		return format_l(_("%u bytes"), bytes);
 	}
+	if (bytes > 1000) {
+		return format_l(_("%.2f kB"), (bytes / 1000.f));
+	}
+	return format_l(_("%u bytes"), bytes);
 }
 
 std::string time_string(const std::time_t& time) {
@@ -945,10 +945,10 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 			}
 		}
 	} catch (const std::exception& e) {
-		const std::string title = _("Server Connection Error");
+		std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
-		const std::string bug = _("a networking bug");
-		const std::string err = format(_("Unable to fetch the list of available add-ons from "
+		std::string bug = _("a networking bug");
+		std::string err = format(_("Unable to fetch the list of available add-ons from "
 		                                 "the server!<br>Error Message: %s"),
 		                               e.what());
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
@@ -1367,7 +1367,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [&w, &nr_files](const std::string&, const int64_t l) {
+		   [&w, &nr_files](const std::string& /* unused */, const int64_t l) {
 			   w.progressbar().set_total(l);
 			   nr_files = l;
 		   });
@@ -1484,7 +1484,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [&w, &nr_translations](const std::string&, const int64_t l) {
+		   [&w, &nr_translations](const std::string& /* unused */, const int64_t l) {
 			   nr_translations = l;
 			   w.progressbar().set_total(std::max<int64_t>(l, 1));
 		   });

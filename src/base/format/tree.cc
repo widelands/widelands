@@ -218,9 +218,8 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		}
 		if (*format_string == 'u') {
 			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
-		} else {
-			throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 		}
+		throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 	}
 
 	case 'x':

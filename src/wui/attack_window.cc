@@ -57,7 +57,7 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
-	target_bld.removed.connect([serial](unsigned) {
+	target_bld.removed.connect([serial](unsigned /* index */) {
 		auto it = living_attack_windows_.find(serial);
 		if (it != living_attack_windows_.end()) {
 			it->second->die();

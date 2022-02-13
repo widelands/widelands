@@ -929,7 +929,8 @@ void DefaultAI::late_initialization() {
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
 						break;
-					} else if (attribute.second ==
+					}
+					if (attribute.second ==
 					           Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
@@ -1390,10 +1391,10 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 			buildable_fields.pop_front();
 			continue;
 
-		} else {  // just rotating
-			buildable_fields.push_back(&bf);
-			buildable_fields.pop_front();
 		}
+		// just rotating
+		buildable_fields.push_back(&bf);
+		buildable_fields.pop_front();
 	}
 
 	// Stage #3: update all buildable fields (expired ones of course) up to the limit
@@ -1897,7 +1898,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			assert(!player_statistics.players_in_same_team(field_owner, pn));
 			consider_enemy_sites(first_area.location(), field);
 			continue;
-		} else if (field_owner != pn) {
+		}
+		if (field_owner != pn) {
 			// Is Ally
 			assert(!player_statistics.get_is_enemy(field_owner));
 			consider_ally_sites(first_area.location(), field);
@@ -5097,9 +5099,8 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 		if (site.dismantle_pending_since + Duration(3 * 60 * 1000) < gametime) {
 			stop_site(site);
 			return false;
-		} else {
-			return false;
 		}
+		return false;
 	} else if (site.site->can_start_working()) {
 		set_inputs_to_max(site);
 	} else {
@@ -6264,10 +6265,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (tmp_score > bottom_limit) {
 				// Site is needed, but not right now
 				return BuildingNecessity::kNeededPending;
-			} else {
-				// Not allowed
-				return BuildingNecessity::kForbidden;
 			}
+			// Not allowed
+			return BuildingNecessity::kForbidden;
 
 		} else if (bo.is(BuildingAttribute::kShipyard)) {
 			if (bo.total_count() > 0 ||

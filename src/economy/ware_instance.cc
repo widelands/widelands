@@ -441,12 +441,11 @@ void WareInstance::enter_building(Game& game, Building& building) {
 			update(game);
 		}
 		return;
-
-	} else {
-		// We don't have a transfer, so just enter the building
-		building.receive_ware(game, descr_index_);
-		remove(game);
 	}
+
+	// We don't have a transfer, so just enter the building
+	building.receive_ware(game, descr_index_);
+	remove(game);
 }
 
 /**

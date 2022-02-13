@@ -122,14 +122,14 @@ bool MapData::compare_names(const MapData& other) const {
 	return this_name < other_name;
 }
 
-bool MapData::compare_players(const MapData& other) {
+bool MapData::compare_players(const MapData& other) const {
 	if (nrplayers == other.nrplayers) {
 		return compare_names(other);
 	}
 	return nrplayers < other.nrplayers;
 }
 
-bool MapData::compare_size(const MapData& other) {
+bool MapData::compare_size(const MapData& other) const {
 	if (width == other.width && height == other.height) {
 		return compare_names(other);
 	}

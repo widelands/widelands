@@ -182,7 +182,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			if (message->serial() > 0) {
 				MapObject* mo = game_.objects().get_object(message->serial());
 				mo->removed.connect(
-				   [player, message_id](unsigned) { player->message_object_removed(message_id); });
+				   [player, message_id](unsigned /* serial */) { player->message_object_removed(message_id); });
 			}
 		}
 	}

@@ -114,7 +114,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	hbox_.add(&editbox, UI::Box::Resizing::kFillSpace);
 
 	chat_message_subscriber_ =
-	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
+	   Notifications::subscribe<ChatMessage>([this](const ChatMessage& /* msg */) { recalculate(true); });
 	recalculate(false);
 	layout();
 }

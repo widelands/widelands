@@ -103,8 +103,8 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                                     _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 
 	if (is_tutorial_) {
 		scenario_difficulty_.set_visible(false);

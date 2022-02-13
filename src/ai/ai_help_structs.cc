@@ -409,9 +409,8 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	}
 	if (total_count() == cnt_limit_by_aimode) {
 		return AiModeBuildings::kOnLimit;
-	} else {
-		return AiModeBuildings::kAnotherAllowed;
 	}
+	return AiModeBuildings::kAnotherAllowed;
 }
 bool BuildingObserver::buildable(const Widelands::Player& p) const {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id) &&

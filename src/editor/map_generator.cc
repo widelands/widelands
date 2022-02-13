@@ -852,7 +852,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') || (ch == 'J') ||
 	    (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch <= 'Z') {
+	}
+	if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
@@ -867,7 +868,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= 'a' && ch <= 'z') {
+	}
+	if (ch >= 'a' && ch <= 'z') {
 		char res = ch - 'a';
 		if (ch > 'i') {
 			--res;
@@ -882,7 +884,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= '2' && ch <= '9') {
+	}
+	if (ch >= '2' && ch <= '9') {
 		return 24 + ch - '2';
 	}
 	return -1;
@@ -901,7 +904,8 @@ char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 	}
 	if (num == 23) {
 		return '1';
-	} else if ((0 <= num) && (num < 22)) {
+	}
+	if ((0 <= num) && (num < 22)) {
 		char result = num + 'a';
 		if (result >= 'i') {
 			++result;
@@ -916,11 +920,11 @@ char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 			++result;
 		}
 		return result;
-	} else if ((24 <= num) && (num < 32)) {
-		return (num - 24) + '2';
-	} else {
-		return '?';
 	}
+	if ((24 <= num) && (num < 32)) {
+		return (num - 24) + '2';
+	}
+	return '?';
 }
 
 /**

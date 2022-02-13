@@ -106,7 +106,7 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_number(lua_State* L) const;
+	int get_number(lua_State* L);
 	int get_tribe_name(lua_State* L);
 
 	/*
@@ -120,7 +120,7 @@ public:
 	int place_road(lua_State* L);
 	int place_building(lua_State* L);
 	int place_ship(lua_State* L);
-	int conquer(lua_State* L) const;
+	int conquer(lua_State* L);
 	int get_workers(lua_State* L);
 	int get_wares(lua_State* L);
 
