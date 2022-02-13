@@ -949,8 +949,8 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		std::string bug = _("a networking bug");
 		std::string err = format(_("Unable to fetch the list of available add-ons from "
-		                                 "the server!<br>Error Message: %s"),
-		                               e.what());
+		                           "the server!<br>Error Message: %s"),
+		                         e.what());
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;

@@ -454,7 +454,6 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			verb_log_info(
 			   "InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(), time_str);
 			return;
-
 		}
 		if (cmd == IGPCMD_PWD_OK) {
 			char time_str[kTimeFormatLength];
@@ -462,7 +461,6 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			verb_log_info("InternetGaming: Password check successful at UTC %s", time_str);
 			state_ = LOBBY;
 			return;
-
 		}
 		if (cmd == IGPCMD_ERROR) {
 			std::string errortype = packet.string();
@@ -479,10 +477,9 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 
 		logout();
 		set_error();
-		log_err(
-		   "InternetGaming: Expected a LOGIN, PWD_CHALLENGE or ERROR packet from server, but "
-		   "received command %s. Maybe the metaserver is using a different protocol version?\n",
-		   cmd.c_str());
+		log_err("InternetGaming: Expected a LOGIN, PWD_CHALLENGE or ERROR packet from server, but "
+		        "received command %s. Maybe the metaserver is using a different protocol version?\n",
+		        cmd.c_str());
 		throw WLWarning(
 		   _("Unexpected packet"),
 		   _("Received an unexpected network packet from the metaserver. The metaserver could be "

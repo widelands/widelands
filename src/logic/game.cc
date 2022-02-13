@@ -1047,11 +1047,13 @@ void Game::send_player_start_or_cancel_expedition(Building& building) {
 	   new CmdStartOrCancelExpedition(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_enhance_building(Building& building, DescriptionIndex const id, bool keep_wares) {
+void Game::send_player_enhance_building(Building& building,
+                                        DescriptionIndex const id,
+                                        bool keep_wares) {
 	assert(building.descr().type() == MapObjectType::CONSTRUCTIONSITE ||
 	       building.owner().tribe().has_building(id));
-	send_player_command(
-	   new CmdEnhanceBuilding(get_gametime(), building.owner().player_number(), building, id, keep_wares));
+	send_player_command(new CmdEnhanceBuilding(
+	   get_gametime(), building.owner().player_number(), building, id, keep_wares));
 }
 
 void Game::send_player_evict_worker(Worker& worker) {

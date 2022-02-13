@@ -930,8 +930,7 @@ void DefaultAI::late_initialization() {
 						   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
 						break;
 					}
-					if (attribute.second ==
-					           Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
+					if (attribute.second == Widelands::MapObjectDescr::get_attribute_id("ripe_bush")) {
 						verb_log_dbg_time(
 						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsBerry);
@@ -1390,7 +1389,6 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 			delete &bf;
 			buildable_fields.pop_front();
 			continue;
-
 		}
 		// just rotating
 		buildable_fields.push_back(&bf);
