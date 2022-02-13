@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -341,7 +341,7 @@ msgstr ""
 msgid "Dead Tree"
 msgstr ""
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr ""
 
