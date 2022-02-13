@@ -38,47 +38,62 @@ function image_line(image, count, text)
 end
 
 -- RST
--- .. function:: plot_size_line(size)
+-- .. function:: plot_size_line(size, size_only)
 --
 --    Creates a line describing space required on the map.
 --    Consists of a header colored text, followed by normal text and an image.
 --
 --    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
+--    :arg size_only: size_only key. Optional bool value if size is a space requirement as well.
 --    :returns: header followed by normal text and image if a space is required, or empty string.
 --
-function plot_size_line(size)
+function plot_size_line(size, size_only)
    local text = ""
    local image = ""
-   if (size == "mine") then
-      -- TRANSLATORS: Space on the map required for building a building there
-      text = _("Mine plot")
-      image = "images/wui/overlays/mine.png"
-   elseif (size == "port") then
-      -- TRANSLATORS: Space on the map required for building a building there
-      text = _("Port plot")
-      image = "images/wui/overlays/port.png"
-   elseif (size == "small") then
-      -- TRANSLATORS: Space on the map required for building a building there
-      text = _("Small plot")
-      image = "images/wui/overlays/small.png"
-   elseif (size == "medium") then
-      -- TRANSLATORS: Space on the map required for building a building there
-      text = _("Medium plot")
-      image = "images/wui/overlays/medium.png"
-   elseif (size == "big") then
-      -- TRANSLATORS: Space on the map required for building a building there
-      text = _("Big plot")
-      image = "images/wui/overlays/big.png"
+   if (size_only == true) then
+      if (size == "small") then
+         -- TRANSLATORS: Size of a map immovablee
+         text = _("Small")
+      elseif (size == "medium") then
+         -- TRANSLATORS: Size of a map immovable
+         text = _("Medium")
+      elseif (size == "big") then
+         -- TRANSLATORS: Size of a map immovable
+         text = _("Big")
+      end
+      -- TRANSLATORS: Size of a map immovable
+      if text ~= "" then
+         text = p(font("size=13 color=D1D1D1", text))
+      end
+      return text
    else
-      return ""
-   end
-
-   return
-      div("width=100%",
-         div("float=right padding_l=6", p(img(image))) ..
+      if (size == "mine") then
          -- TRANSLATORS: Space on the map required for building a building there
-         p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
-      )
+         text = _("Mine plot")
+         image = "images/wui/overlays/mine.png"
+      elseif (size == "port") then
+         -- TRANSLATORS: Space on the map required for building a building there
+         text = _("Port plot")
+         image = "images/wui/overlays/port.png"
+      elseif (size == "small") then
+         -- TRANSLATORS: Space on the map required for building a building there
+         text = _("Small plot")
+         image = "images/wui/overlays/small.png"
+      elseif (size == "medium") then
+         -- TRANSLATORS: Space on the map required for building a building there
+         text = _("Medium plot")
+         image = "images/wui/overlays/medium.png"
+      elseif (size == "big") then
+         -- TRANSLATORS: Space on the map required for building a building there
+         text = _("Big plot")
+         image = "images/wui/overlays/big.png"
+      else
+         return ""
+      end
+   -- TRANSLATORS: Space on the map required for building a building there
+      text = p(join_sentences(font("size=13 color=D1D1D1", _("Space required:")), text))
+      return div("width=100%", div("float=right padding_l=6", p(img(image)))) .. text
+   end
 end
 
 
