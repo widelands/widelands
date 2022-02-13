@@ -5099,7 +5099,8 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 			return false;
 		}
 		return false;
-	} else if (site.site->can_start_working()) {
+	}
+	if (site.site->can_start_working()) {
 		set_inputs_to_max(site);
 	} else {
 		set_inputs_to_zero(site);
