@@ -1276,7 +1276,8 @@ void AddOnsCtrl::layout() {
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
-		int w, h;
+		int w;
+		int h;
 		server_name_.get_desired_size(&w, &h);
 		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
