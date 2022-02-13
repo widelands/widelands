@@ -161,13 +161,13 @@ inline const WindowStyleInfo& Window::window_style_info() const {
 }
 inline const FontStyleInfo& Window::title_style() const {
 	return g_style_manager->font_style(window_style_ == WindowStyle::kWui ?
-	                                      FontStyle::kWuiWindowTitle :
+                                         FontStyle::kWuiWindowTitle :
                                          FontStyle::kFsMenuWindowTitle);
 }
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(g_image_cache->get(is_minimal_ ?
-	                                                window_style_info().button_unminimize() :
+                                                   window_style_info().button_unminimize() :
                                                    window_style_info().button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
@@ -343,7 +343,7 @@ void Window::draw_border(RenderTarget& dst) {
 
 	const RGBAColor& focus_color =
 	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
-	      window_style_info().window_border_focused() :
+         window_style_info().window_border_focused() :
          window_style_info().window_border_unfocused();
 
 	{  //  Top border.

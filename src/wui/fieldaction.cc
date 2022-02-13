@@ -340,7 +340,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 
 			const Widelands::BuildingDescr& descr =
 			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
-			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+               dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
                dynamic_cast<const Widelands::Building&>(*mo).descr();
 
 			if (i.descr().collected_by().count(descr.name())) {
@@ -560,7 +560,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
 			if (!((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-			          buildcaps :
+                   buildcaps :
                    max_nodecaps) &
 			      Widelands::BUILDCAPS_MINE)) {
 				continue;
@@ -571,7 +571,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			int32_t size = building_descr->get_size() - Widelands::BaseImmovable::SMALL;
 
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-			         buildcaps :
+                  buildcaps :
                   max_nodecaps) &
 			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
@@ -994,11 +994,11 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
 							colors[t] = mr.location() == t.node || mr.location() == map.br_n(t.node) ||
 							                  mr.location() == (t.t == Widelands::TriangleIndex::D ?
-							                                       map.bl_n(t.node) :
+                                                            map.bl_n(t.node) :
                                                             map.r_n(t.node)) ||
 							                  main_region.count(t) ?
-							               descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
-							               positive ? kOverlapColorPositive : kOverlapColorNegative :
+                                    descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
+                                    positive ? kOverlapColorPositive : kOverlapColorNegative :
                                     kOverlapColorDefault :
                                     kOverlapColorPale;
 						}

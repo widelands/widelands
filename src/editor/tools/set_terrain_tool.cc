@@ -40,7 +40,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 		            radius));
 		do {
 			args->original_terrain_type.push_back((mr.location().t == Widelands::TriangleIndex::D) ?
-			                                         mr.location().node.field->terrain_d() :
+                                                  mr.location().node.field->terrain_d() :
                                                   mr.location().node.field->terrain_r());
 			args->terrain_type.push_back(get_random_enabled());
 		} while (mr.advance(*map));

@@ -1969,7 +1969,7 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) ?
-		                     speeds.at(speeds.size() / 2) :
+                           speeds.at(speeds.size() / 2) :
                            (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {

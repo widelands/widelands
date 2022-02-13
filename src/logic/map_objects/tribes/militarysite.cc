@@ -734,18 +734,18 @@ void MilitarySite::update_soldier_request(bool incd) {
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
 		} else                        // military site is full or overfull
-			if (capacity < stationed)  // player is reducing capacity
-			{
+		   if (capacity < stationed)  // player is reducing capacity
+		{
+			drop_least_suited_soldier(false, nullptr);
+		} else  // capacity == stationed size
+		{
+			if (upgrade_soldier_request_ && (!(upgrade_soldier_request_->is_open())) &&
+			    1 == upgrade_soldier_request_->get_count() && (!incd)) {
 				drop_least_suited_soldier(false, nullptr);
-			} else  // capacity == stationed size
-			{
-				if (upgrade_soldier_request_ && (!(upgrade_soldier_request_->is_open())) &&
-				    1 == upgrade_soldier_request_->get_count() && (!incd)) {
-					drop_least_suited_soldier(false, nullptr);
-				} else {
-					update_upgrade_soldier_request();
-				}
+			} else {
+				update_upgrade_soldier_request();
 			}
+		}
 	} else  // not doing upgrade request
 	{
 		if ((capacity != stationed) || (normal_soldier_request_)) {

@@ -279,7 +279,7 @@ void WarehouseSupply::send_to_storage(Game& /*unused*/, Warehouse* /* wh */) {
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
 	return req.get_type() == wwWORKER ?
-	          warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
+             warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
 	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
                                                                 Warehouse::Match::kCompatible)) :
              wares_.stock(req.get_index());

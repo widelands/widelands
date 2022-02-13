@@ -824,7 +824,7 @@ void RemoteInteractionWindow::update_data() {
 
 	voting_stats_summary_.set_text(
 	   info_->number_of_votes() ?
-	      format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
+         format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
 	               info_->average_rating(), info_->number_of_votes()) :
          _("No votes yet"));
@@ -845,7 +845,7 @@ void RemoteInteractionWindow::update_data() {
 	text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 	           .as_font_tag(
 	              info_->user_comments.empty() ?
-	                 _("No comments yet.") :
+                    _("No comments yet.") :
                     format(ngettext("%u comment:", "%u comments:", info_->user_comments.size()),
 	                        info_->user_comments.size()));
 	text += "</p></rt>";

@@ -99,7 +99,7 @@ void FileViewPanel::layout() {
 	contents_width_ = std::max(0, get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
-	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
+                                     get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
                                      get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 
 	for (size_t i = 0; i < boxes_.size(); ++i) {

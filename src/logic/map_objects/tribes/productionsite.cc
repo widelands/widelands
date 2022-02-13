@@ -411,7 +411,7 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi,
 	throw wexception("%s (%u) has no InputQueue for %s %u: %s", descr().name().c_str(), serial(),
 	                 type == WareWorker::wwWARE ? "ware" : "worker", wi,
 	                 type == WareWorker::wwWARE ?
-	                    owner().tribe().get_ware_descr(wi)->name().c_str() :
+                       owner().tribe().get_ware_descr(wi)->name().c_str() :
                        owner().tribe().get_worker_descr(wi)->name().c_str());
 }
 

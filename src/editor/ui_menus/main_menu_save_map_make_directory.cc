@@ -105,7 +105,7 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
 	                               ends_with(text, kS2MapExtension2, false);
 	ok_button_.set_enabled(is_legal_filename && !has_map_extension);
 	edit_.set_tooltip(is_legal_filename ?
-	                     (has_map_extension ? _("This extension is reserved!") : "") :
+                        (has_map_extension ? _("This extension is reserved!") : "") :
                         illegal_filename_tooltip_);
 	dirname_ = text;
 }

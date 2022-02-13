@@ -431,7 +431,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		return i18n::translate(i->unlocalized_author);
 	};
 	i->icon = g_image_cache->get(fs->file_exists(kAddOnIconFile) ?
-	                                kAddOnDir + FileSystem::file_separator() + name +
+                                   kAddOnDir + FileSystem::file_separator() + name +
 	                                   FileSystem::file_separator() + kAddOnIconFile :
                                    kAddOnCategories.at(i->category).icon);
 

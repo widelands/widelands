@@ -602,7 +602,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Widelands::Direction direction =
 		   !new_teritory_directions.empty() ?
-		      new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
+            new_teritory_directions.at(RNG::static_rand(new_teritory_directions.size())) :
             possible_directions.at(RNG::static_rand(possible_directions.size()));
 		game().send_player_ship_scouting_direction(
 		   *so.ship, static_cast<Widelands::WalkingDir>(direction));

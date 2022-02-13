@@ -681,9 +681,9 @@ void BuildingStatisticsMenu::update() {
 				const RGBColor& color =
 				   (percent < low_production_) ? style_.low_color() :
 				   (percent < ((low_production_ < 50) ?
-				                  2 * low_production_ :
+                              2 * low_production_ :
                               low_production_ + ((100 - low_production_) / 2))) ?
-				                                 style_.medium_color() :
+                                             style_.medium_color() :
                                              style_.high_color();
 
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
@@ -817,7 +817,7 @@ void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*un
 	fw.unsigned_8(tab_panel_.active());
 	fw.string(
 	   current_building_type_ == Widelands::INVALID_INDEX ?
-	      "" :
+         "" :
          iplayer().egbase().descriptions().get_building_descr(current_building_type_)->name());
 	fw.signed_32(last_building_index_);
 }

@@ -92,10 +92,10 @@ void Statebox::layout() {
 			pic_width = pic_graphics_->width();
 		}
 		rendered_text_ = label_text_.empty() ?
-		                    nullptr :
+                          nullptr :
                           UI::g_fh->render(as_richtext_paragraph(
 		                                        label_text_, panel_style_ == PanelStyle::kFsMenu ?
-		                                                        UI::FontStyle::kFsMenuLabel :
+                                                              UI::FontStyle::kFsMenuLabel :
                                                               UI::FontStyle::kWuiLabel),
 		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {

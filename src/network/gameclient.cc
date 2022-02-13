@@ -1274,7 +1274,7 @@ void GameClient::disconnect(const std::string& reason,
                                           NetworkGamingMessages::get_message(reason, arg).c_str());
 			}
 			throw wexception("%s", arg.empty() ?
-			                          NetworkGamingMessages::get_message(reason).c_str() :
+                                   NetworkGamingMessages::get_message(reason).c_str() :
                                    NetworkGamingMessages::get_message(reason, arg).c_str());
 		}
 		capsule_.menu().show_messagebox(

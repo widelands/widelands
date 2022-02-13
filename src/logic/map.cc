@@ -622,13 +622,13 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	if (split_point > new_dimension) {
 		// shrink, origin deleted
 		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
-		          kInvalidCoords :
+                kInvalidCoords :
                 old_coord - split_point + new_dimension;
 	}
 	// shrink, origin preserved
 	return old_coord < split_point ? old_coord :
 	       old_coord < split_point + old_dimension - new_dimension ?
-	                                 kInvalidCoords :
+                                    kInvalidCoords :
                                     old_coord + new_dimension - old_dimension;
 }
 
@@ -2482,10 +2482,10 @@ Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval
 		do {
 			changed = false;
 			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
-			                         0 :
+                                  0 :
                                   height_interval.min - MAX_FIELD_HEIGHT_DIFF;
 			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
-			                         height_interval.max + MAX_FIELD_HEIGHT_DIFF :
+                                  height_interval.max + MAX_FIELD_HEIGHT_DIFF :
                                   MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min) {

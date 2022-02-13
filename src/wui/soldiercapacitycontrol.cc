@@ -117,7 +117,7 @@ void SoldierCapacityControl::click_decrease() {
 	const SoldierControl* soldiers = building_.soldier_control();
 	assert(soldiers);
 	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
-	                           soldiers->min_soldier_capacity() - soldiers->soldier_capacity() :
+                              soldiers->min_soldier_capacity() - soldiers->soldier_capacity() :
                               -1);
 }
 
@@ -125,7 +125,7 @@ void SoldierCapacityControl::click_increase() {
 	const SoldierControl* soldiers = building_.soldier_control();
 	assert(soldiers);
 	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
-	                           soldiers->max_soldier_capacity() - soldiers->soldier_capacity() :
+                              soldiers->max_soldier_capacity() - soldiers->soldier_capacity() :
                               1);
 }
 

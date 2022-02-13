@@ -270,8 +270,8 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			   g_image_cache->get(
 			      (is_stopped ? "images/ui_basic/continue.png" : "images/ui_basic/stop.png")),
 			   is_stopped ?
-			      /** TRANSLATORS: Stop/Continue toggle button for production sites. */
-			      _("Continue") :
+               /** TRANSLATORS: Stop/Continue toggle button for production sites. */
+               _("Continue") :
                /** TRANSLATORS: Stop/Continue toggle button for production sites. */
                _("Stop"));
 			stopbtn->sigclicked.connect([this]() { act_start_stop(); });

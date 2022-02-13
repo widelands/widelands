@@ -561,8 +561,8 @@ unsigned long long RealFSImpl::disk_space() {  // NOLINT
 	ULARGE_INTEGER freeavailable;
 
 	return GetDiskFreeSpaceEx(root_.c_str(), &freeavailable, 0, 0) ?
-	          // If more than 2G free space report that much
-	          freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
+             // If more than 2G free space report that much
+             freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :  // NOLINT
                                       freeavailable.LowPart :
              0;
 #else

@@ -6464,7 +6464,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 		if (!valid_inputs.count(sp.first)) {
 			report_error(L, "<%s> can't be stored in this building: %s!",
 			             sp.first.second == Widelands::wwWARE ?
-			                tribe.get_ware_descr(sp.first.first)->name().c_str() :
+                         tribe.get_ware_descr(sp.first.first)->name().c_str() :
                          tribe.get_worker_descr(sp.first.first)->name().c_str(),
 			             ps->descr().name().c_str());
 		}
@@ -6514,7 +6514,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			break;
 		}
 		lua_pushstring(L, input.second == Widelands::wwWARE ?
-		                     tribe.get_ware_descr(input.first)->name() :
+                           tribe.get_ware_descr(input.first)->name() :
                            tribe.get_worker_descr(input.first)->name());
 		lua_pushuint32(L, cnt);
 		lua_settable(L, -3);

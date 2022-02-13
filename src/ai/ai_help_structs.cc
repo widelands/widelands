@@ -681,7 +681,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
 		DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-		                         DnaParent::kPrimary :
+                               DnaParent::kPrimary :
                                DnaParent::kSecondary;
 
 		switch (dna_donor) {
@@ -700,7 +700,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-		                               DnaParent::kPrimary :
+                                     DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 
 		switch (dna_donor) {
@@ -717,7 +717,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 
 	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = (RNG::static_rand(kSecondParentProbability) > 0) ?
-		                               DnaParent::kPrimary :
+                                     DnaParent::kPrimary :
                                      DnaParent::kSecondary;
 		switch (dna_donor) {
 		case DnaParent::kPrimary:

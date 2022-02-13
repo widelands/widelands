@@ -149,7 +149,7 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	   "<rt><p>%s<br></p><vspace gap=6>%s</rt>",
 	   g_style_manager->font_style(UI::FontStyle::kWuiMessageHeading).as_font_tag(heading),
 	   (is_paragraph(body) || is_div(body) ?
-	       body :
+          body :
           format(
 	          "<p>%s</p>",
 	          g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body)))));

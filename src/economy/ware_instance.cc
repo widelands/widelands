@@ -368,7 +368,7 @@ void WareInstance::update(Game& game) {
 			flag->call_carrier(
 			   game, *this,
 			   dynamic_cast<Building const*>(nextstep) && &nextstep->base_flag() != location ?
-			      &nextstep->base_flag() :
+               &nextstep->base_flag() :
                nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);

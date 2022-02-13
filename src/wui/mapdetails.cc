@@ -158,8 +158,8 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		// Show map information
 		const std::string authors_heading =
 		   (mapdata.authors.get_number() == 1) ?
-		      /** TRANSLATORS: Label in map details if there is 1 author */
-		      _("Author") :
+            /** TRANSLATORS: Label in map details if there is 1 author */
+            _("Author") :
             /** TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
                forms here, please let us know. */
                _("Authors");
