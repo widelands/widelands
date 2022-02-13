@@ -61,7 +61,7 @@ namespace AddOns {
  * repo (widelands/wl_addons_server) in `wl.server.Command`.
  */
 
-constexpr unsigned kCurrentProtocolVersion = 6;
+constexpr unsigned kCurrentProtocolVersion = 7;
 static const std::string kCmdList = "2:CMD_LIST";
 static const std::string kCmdInfo = "2:CMD_INFO";
 static const std::string kCmdDownload = "1:CMD_DOWNLOAD";
@@ -219,6 +219,7 @@ void NetAddons::init(std::string username, std::string password) {
 	write_to_server(send);
 
 	is_admin_ = false;
+	server_descname_ = read_line();
 	if (username.empty()) {
 		check_endofstream();
 	} else {
