@@ -38,6 +38,9 @@ struct NetAddons {
 	bool is_admin() const {
 		return is_admin_;
 	}
+	const std::string& server_descname() const {
+		return server_descname_;
+	}
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<std::string> refresh_remotes(bool all);
@@ -102,6 +105,7 @@ private:
 	int client_socket_;
 	bool is_admin_;
 	size_t cached_remotes_;
+	std::string server_descname_;
 };
 
 }  // namespace AddOns
