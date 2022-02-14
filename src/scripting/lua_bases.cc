@@ -651,7 +651,7 @@ void LuaPlayerBase::__unpersist(lua_State* L) {
 
       (RO) The number of this Player.
 */
-int LuaPlayerBase::get_number(lua_State* L) {
+int LuaPlayerBase::get_number(lua_State* L) {  // NOLINT
 	lua_pushuint32(L, player_number_);
 	return 1;
 }
@@ -661,7 +661,7 @@ int LuaPlayerBase::get_number(lua_State* L) {
 
       (RO) The name of the tribe of this player.
 */
-int LuaPlayerBase::get_tribe_name(lua_State* L) {
+int LuaPlayerBase::get_tribe_name(lua_State* L) {  // NOLINT
 	lua_pushstring(L, get(L, get_egbase(L)).tribe().name());
 	return 1;
 }
@@ -671,7 +671,7 @@ int LuaPlayerBase::get_tribe_name(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
-int LuaPlayerBase::__eq(lua_State* L) {
+int LuaPlayerBase::__eq(lua_State* L) {  // NOLINT
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	const Widelands::Player& me = get(L, egbase);
 	const Widelands::Player& you = (*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
@@ -680,7 +680,7 @@ int LuaPlayerBase::__eq(lua_State* L) {
 	return 1;
 }
 
-int LuaPlayerBase::__tostring(lua_State* L) {
+int LuaPlayerBase::__tostring(lua_State* L) {  // NOLINT
 	const std::string pushme =
 	   format("Player(%i)", static_cast<unsigned int>(get(L, get_egbase(L)).player_number()));
 	lua_pushstring(L, pushme.c_str());
@@ -706,7 +706,7 @@ int LuaPlayerBase::__tostring(lua_State* L) {
       :type force: :class:`boolean`
       :returns: The :class:`~wl.map.Flag` object created or :const:`nil`.
 */
-int LuaPlayerBase::place_flag(lua_State* L) {
+int LuaPlayerBase::place_flag(lua_State* L) {  // NOLINT
 	uint32_t n = lua_gettop(L);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 	bool force = false;
@@ -752,7 +752,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {
       :type force: :class:`boolean`
       :returns: The :class:`~wl.map.Road` created.
 */
-int LuaPlayerBase::place_road(lua_State* L) {
+int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	const Widelands::Map& map = egbase.map();
 
@@ -881,7 +881,7 @@ int LuaPlayerBase::place_road(lua_State* L) {
 
       :returns: The object of the building created.
 */
-int LuaPlayerBase::place_building(lua_State* L) {
+int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT
 	const std::string& name = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	bool constructionsite = false;
@@ -954,7 +954,7 @@ int LuaPlayerBase::place_building(lua_State* L) {
       :returns: The new :class:`~wl.map.Ship` that was created.
 */
 // UNTESTED
-int LuaPlayerBase::place_ship(lua_State* L) {
+int LuaPlayerBase::place_ship(lua_State* L) {  // NOLINT
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 2);
 
 	Widelands::EditorGameBase& egbase = get_egbase(L);
@@ -982,7 +982,7 @@ int LuaPlayerBase::place_ship(lua_State* L) {
       :type radius: :class:`integer`
       :returns: :const:`nil`
 */
-int LuaPlayerBase::conquer(lua_State* L) {
+int LuaPlayerBase::conquer(lua_State* L) {  // NOLINT
 	uint32_t radius = 1;
 	if (lua_gettop(L) > 2) {
 		radius = luaL_checkuint32(L, 3);
@@ -1005,7 +1005,7 @@ int LuaPlayerBase::conquer(lua_State* L) {
       :returns: The number of workers.
 */
 // UNTESTED
-int LuaPlayerBase::get_workers(lua_State* L) {
+int LuaPlayerBase::get_workers(lua_State* L) {  // NOLINT
 	Widelands::Player& player = get(L, get_egbase(L));
 	const std::string workername = luaL_checkstring(L, -1);
 
@@ -1031,7 +1031,7 @@ int LuaPlayerBase::get_workers(lua_State* L) {
       :returns: The number of wares.
 */
 // UNTESTED
-int LuaPlayerBase::get_wares(lua_State* L) {
+int LuaPlayerBase::get_wares(lua_State* L) {  // NOLINT
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& player = get(L, egbase);
 	const std::string warename = luaL_checkstring(L, -1);
@@ -1053,7 +1053,7 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameBase& egbase) {
+Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameBase& egbase) const {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
