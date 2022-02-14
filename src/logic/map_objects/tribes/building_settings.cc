@@ -189,11 +189,11 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 	NEVER_HERE();
 }
 
-void BuildingSettings::read(const Game&, FileRead&) {
+void BuildingSettings::read(const Game& /*unused*/, FileRead& /*unused*/) {
 	// Header was peeled away by load()
 }
 
-void BuildingSettings::save(const Game&, FileWrite& fw) const {
+void BuildingSettings::save(const Game& /*unused*/, FileWrite& fw) const {
 	fw.unsigned_8(kCurrentPacketVersion);
 	fw.c_string(descr_.c_str());
 }
