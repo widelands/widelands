@@ -97,7 +97,7 @@ void Waterway::request_ferry(EditorGameBase& egbase) {
 	fleet->init(egbase, this);
 }
 
-void Waterway::assign_carrier(Carrier& c, uint8_t) {
+void Waterway::assign_carrier(Carrier& c, uint8_t /*unused*/) {
 	if (Ferry* f = ferry_.get(owner().egbase())) {
 		f->set_location(nullptr);
 	}

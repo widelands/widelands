@@ -138,7 +138,7 @@ public:
 	 * This influences how many wares can be in here at maximum.
 	 * @param q The new maximum size.
 	 */
-	void set_max_size(Quantity q);
+	void set_max_size(Quantity size);
 
 	/**
 	 * Change the number of wares that should be available in this queue.
@@ -149,7 +149,7 @@ public:
 	 * pressed the buttons in the gui.
 	 * @param q The maximum number of wares which should be stored here.
 	 */
-	virtual void set_max_fill(Quantity q);
+	virtual void set_max_fill(Quantity size);
 
 	/**
 	 * Change fill status of the queue. This creates or removes wares as required.
@@ -224,7 +224,7 @@ protected:
 	 * @param b The building where the ware or worker arrived at.
 	 */
 	static void
-	request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& b);
+	request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& target);
 
 	/**
 	 * Updates the request.
