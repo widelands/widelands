@@ -48,7 +48,8 @@ SdlTtfFont::~SdlTtfFont() {
 void SdlTtfFont::dimensions(const std::string& txt, int style, uint16_t* gw, uint16_t* gh) {
 	set_style(style);
 
-	int w, h;
+	int w;
+	int h;
 	TTF_SizeUTF8(font_, txt.c_str(), &w, &h);
 
 	if (style & SHADOW) {
@@ -104,7 +105,18 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		// Alpha Blend the Text onto the Shadow. This is really slow, but it is
 		// the only compatible way to do it using SDL 1.2. SDL 2.0 offers more
 		// functionality but is not yet released.
-		uint8_t sr, sg, sb, sa, dr, dg, db, da, outa, outr = 0, outg = 0, outb = 0;
+		uint8_t sr;
+		uint8_t sg;
+		uint8_t sb;
+		uint8_t sa;
+		uint8_t dr;
+		uint8_t dg;
+		uint8_t db;
+		uint8_t da;
+		uint8_t outa;
+		uint8_t outr = 0;
+		uint8_t outg = 0;
+		uint8_t outb = 0;
 		for (int y = 0; y < tsurf->h; ++y) {
 			for (int x = 0; x < tsurf->w; ++x) {
 				size_t sidx = (y * tsurf->pitch + 4 * x) / 4;
