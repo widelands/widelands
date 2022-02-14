@@ -387,9 +387,8 @@ int32_t SpinBox::get_value() const {
 			return sbi_->values.at(sbi_->value);
 		}
 		return -1;
-	} else {
-		return sbi_->value;
 	}
+	return sbi_->value;
 }
 
 /**
