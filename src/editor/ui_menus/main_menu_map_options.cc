@@ -141,7 +141,7 @@ UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size
 		if (dd_index >= team_.size()) {
 			assert(dd_index == team_.size());
 			team_.push_back(Widelands::SuggestedTeam());
-			buttons_.push_back({});
+			buttons_.emplace_back();
 		}
 		team_[dd_index].push_back(player);
 		buttons_[dd_index].push_back(create_button(player));

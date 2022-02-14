@@ -783,7 +783,7 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+bool EditorInteractive::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
