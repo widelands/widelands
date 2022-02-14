@@ -195,8 +195,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 	centerviewbtn_.sigclicked.connect([this]() { center_view(); });
 
 	// Configure table
-	table_.selected.connect([this](unsigned) { selected(); });
-	table_.double_clicked.connect([this](unsigned) { double_clicked(); });
+	table_.selected.connect([this](unsigned /* index */) { selected(); });
+	table_.double_clicked.connect([this](unsigned /* index */) { double_clicked(); });
 	table_.add_column(
 	   0, pgettext("ship", "Name"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.add_column(230, pgettext("ship", "Status"));
@@ -582,15 +582,15 @@ UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.filter_ships(static_cast<ShipFilterStatus>(fr.unsigned_8()));
 			m.table_.select(fr.unsigned_32());
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Seafaring Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("seafaring statistics menu: %s", e.what());
 	}
 }
-void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(static_cast<uint8_t>(ship_filter_));
 	fw.unsigned_32(table_.selection_index());

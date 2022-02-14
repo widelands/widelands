@@ -130,7 +130,7 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 	}
 }
 
-void SavegameTable::set_show_filenames(bool) {
+void SavegameTable::set_show_filenames(bool /*unused*/) {
 	// empty on purpose, must be overridden for tables that support showing/hiding filenames
 }
 

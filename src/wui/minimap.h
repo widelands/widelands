@@ -44,7 +44,7 @@ public:
 		}
 	};
 
-	MiniMap(InteractiveBase& parent, Registry*);
+	MiniMap(InteractiveBase& ibase, Registry*);
 
 	Notifications::Signal<const Vector2f&> warpview;
 
@@ -75,7 +75,7 @@ private:
 	 */
 	struct View : public UI::Panel {
 		View(UI::Panel& parent,
-		     MiniMapLayer* minimap_layers,
+		     MiniMapLayer* flags,
 		     MiniMapType* minimap_type,
 		     int32_t x,
 		     int32_t y,
