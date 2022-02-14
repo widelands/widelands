@@ -1429,9 +1429,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	if (final_score > 0) {
 		bo.primary_priority = final_score * std::abs(management_data.get_military_number_at(79) / 2);
 		return BuildingNecessity::kAllowed;
-	} else {
-		return BuildingNecessity::kForbidden;
 	}
+	return BuildingNecessity::kForbidden;
 }
 
 // This is called when soldier left the trainingsite
