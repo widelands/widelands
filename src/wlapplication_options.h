@@ -140,6 +140,7 @@ enum class KeyboardShortcut : uint16_t {
 	kEditorShowhideImmovables,
 	kEditorShowhideCritters,
 	kEditorShowhideResources,
+	kEditorShowhideMaximumBuildhelp,
 	kEditorToolsize1,
 	kEditorToolsize2,
 	kEditorToolsize3,

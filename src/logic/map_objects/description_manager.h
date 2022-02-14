@@ -37,7 +37,7 @@ namespace Widelands {
 class DescriptionManager {
 public:
 	explicit DescriptionManager(LuaInterface* lua);
-	~DescriptionManager() = default;
+	~DescriptionManager() noexcept(false);
 
 	enum class RegistryCallerType { kDefault, kScenario, kTribeAddon, kWorldAddon };
 	using RegistryCallerInfo = std::pair<RegistryCallerType, std::string /* add-on name */>;

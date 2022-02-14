@@ -438,6 +438,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
 
+   {KeyboardShortcut::kEditorShowhideMaximumBuildhelp,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                         keysym(SDLK_SPACE, KMOD_SHIFT),
+                         "editor_showhide_maximum_buildhelp",
+                         []() { return _("Toggle Maximum Build Spaces"); })},
+
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \

@@ -392,6 +392,7 @@ const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
+   PROP_RO(LuaDescriptions, tribes_descriptions),
    PROP_RO(LuaDescriptions, immovable_descriptions),
    PROP_RO(LuaDescriptions, terrain_descriptions),
    PROP_RO(LuaDescriptions, worker_descriptions),
@@ -420,6 +421,26 @@ void LuaDescriptions::__unpersist(lua_State*) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. attribute:: tribes_descriptions
+
+      Returns a list of all the tribes that are available.
+
+      (RO) a list of :class:`~wl.map.TribeDescription` objects
+*/
+int LuaDescriptions::get_tribes_descriptions(lua_State* L) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	lua_newtable(L);
+	int index = 1;
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_tribes(); ++i) {
+		lua_pushint32(L, index++);
+		to_lua<LuaMaps::LuaTribeDescription>(
+		   L, new LuaMaps::LuaTribeDescription(descriptions.get_tribe_descr(i)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
 /* RST
    .. attribute:: immovable_descriptions

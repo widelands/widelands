@@ -22,31 +22,97 @@
 #include <cstring>
 
 #include "base/format/abstract_node.h"
+#include "base/format/write_number.h"
 
 namespace format_impl {
 
+// We assume that it is a single displayed character, but we allow it to be
+// stored as a multi-byte UTF-8 sequence.
+inline char* write_decimal_separator(char* out, bool localize) {
+	if (localize) {
+		for (const char* dec_sep = pgettext("decimal_separator", "."); *dec_sep; ++dec_sep) {
+			*out = *dec_sep;
+			++out;
+		}
+	} else {
+		*out = '.';
+		++out;
+	}
+	return out;
+}
+
 struct FloatNode : FormatNode {
-	FloatNode(const uint8_t f, const size_t w, const int32_t p) : FormatNode(f, w, p) {
+	FloatNode(const uint8_t f, const size_t w, const int32_t p, bool dyn_prec)
+	   : FormatNode(f, w, p), dynamic_precision_(dyn_prec) {
+		rounding_ = 0.5;
+		precision_multiplier_ = 1.;
+		for (unsigned i = precision_; i > 0; --i) {
+			rounding_ /= 10.;
+			precision_multiplier_ *= 10.;
+		}
+		check_zero_extra_precision_ = kDynamicPrecisionExtra / precision_multiplier_;
 	}
 
 	char* append(char* out, const ArgType t, Argument arg_u, const bool localize) const override {
-		double arg;
+		int64_t int_part;
+		int64_t fractional = 0;
+		bool is_negative = false;
+		bool is_zero = false;
+		size_t current_precision = precision_;
+
 		switch (t) {
-		case ArgType::kFloat:
-			if (arg_u.float_val > kMaxInt || arg_u.float_val < -kMaxInt) {
+		case ArgType::kFloat: {
+			double rounded;
+			double frac;
+
+			if (arg_u.float_val < 0) {
+				is_negative = true;
+				rounded = -arg_u.float_val;
+			} else {
+				rounded = arg_u.float_val;
+			}
+
+			if ((flags_ & kNumberSign) != 0) {
+				is_zero = (rounded < check_zero_extra_precision_);
+				is_negative = is_negative && !is_zero;
+			}
+
+			rounded += rounding_;
+			if (rounded > kMaxInt) {
 				throw wexception("Floating point value too large: %f", arg_u.float_val);
 			}
-			arg = arg_u.float_val;
-			break;
+			int_part = static_cast<int64_t>(rounded);
+
+			frac = (rounded - int_part) * precision_multiplier_;
+			fractional = static_cast<int64_t>(frac);
+			if (dynamic_precision_) {
+				while ((fractional % 10 == 0) && (current_precision > 1)) {
+					fractional /= 10;
+					--current_precision;
+				}
+			}
+		} break;
 		case ArgType::kSigned:
-			arg = arg_u.signed_val;
+			int_part = arg_u.signed_val;
+			if (int_part < 0) {
+				is_negative = true;
+				int_part = -int_part;
+			}
+			is_zero = (int_part == 0);
+			if (dynamic_precision_) {
+				current_precision = 0;
+			}
 			break;
 		case ArgType::kUnsigned:
 		case ArgType::kPointer:
 			if (arg_u.unsigned_val > static_cast<uint64_t>(kMaxInt)) {
 				throw wexception("Unsigned integral value too large: %" PRIu64, arg_u.unsigned_val);
 			}
-			arg = arg_u.unsigned_val;
+			int_part = arg_u.unsigned_val;
+			is_zero = (int_part == 0);
+			if (dynamic_precision_) {
+				current_precision = 0;
+			}
 			break;
 		case ArgType::kNullptr:
 			return append_nullptr_node(out, localize);
@@ -55,195 +121,65 @@ struct FloatNode : FormatNode {
 			   "Wrong argument type: expected float/double, found %s", to_string(t).c_str());
 		}
 
-		double rounding = 0.5;
-		for (unsigned p = precision_; p; --p) {
-			rounding /= 10.;
+		size_t nr_digits_before_decimal = number_of_digits(int_part);
+		size_t required_width =
+		   nr_digits_before_decimal + (current_precision > 0 ? current_precision + 1 : 0);
+		if (is_negative || (flags_ & kNumberSign) != 0) {
+			++required_width;
 		}
-		int64_t as_int;
-		if (arg < 0) {
-			arg -= rounding;
-			as_int = static_cast<int64_t>(-arg);
-		} else {
-			arg += rounding;
-			as_int = static_cast<int64_t>(arg);
+		size_t padding = 0;
+		if (min_width_ > required_width) {
+			padding = min_width_ - required_width;
 		}
 
-		if (min_width_ == 0 || (flags_ & kLeftAlign) != 0) {
-			// The easy case: Just start writing.
-			size_t written = 0;
-			if (arg < 0) {
-				if (localize) {
-					for (const char* c = kLocalizedMinusSign; *c; ++c, ++out, ++written) {
-						*out = *c;
-					}
-				} else {
-					*out = '-';
-					++out;
-					++written;
-				}
-			} else if ((flags_ & kNumberSign) != 0) {
-				*out = '+';
-				++out;
-				++written;
-			}
-
-			if (as_int == 0) {
-				*out = '0';
-				++out;
-				++written;
-			} else {
-				size_t nr_digits = 0;
-				for (int64_t i = as_int; i; ++nr_digits, i /= 10) {
-				}
-
-				int64_t i = as_int;
-				for (size_t d = nr_digits; d; --d, i /= 10) {
-					*(out + d - 1) = '0' + (i % 10);
-				}
-
-				out += nr_digits;
-				written += nr_digits;
-			}
-
-			if (precision_ > 0) {
-				if (localize) {
-					for (const char* decimal_sep = pgettext("decimal_separator", "."); *decimal_sep;
-					     ++decimal_sep, ++out, ++written) {
-						*out = *decimal_sep;
-					}
-				} else {
-					*out = '.';
-					++out;
-					++written;
-				}
-
-				// Now write the decimals
-				double decimal_part = (arg < 0 ? -arg : arg) - as_int;
-				bool any_decimal_written = 0;
-				for (size_t remaining_max_decimals = precision_;
-				     remaining_max_decimals > 0 && decimal_part > 0;
-				     --remaining_max_decimals, ++out, ++written, any_decimal_written = true) {
-					decimal_part *= 10;
-					static int64_t digit;
-					digit = static_cast<int64_t>(decimal_part);
-					*out = '0' + digit;
-					decimal_part -= digit;
-				}
-				if (!any_decimal_written) {
-					*out = '0';
-					++out;
-					++written;
-				}
-			}
-
-			if (written < min_width_) {
-				written = min_width_ - written;
-				for (; written; ++out, --written) {
-					*out = ' ';
-				}
-			}
-
-			return out;
-		}
-
-		// The more complex case: We want a right-aligned string with a given minimum width,
-		// padded with leading whitespace or zeroes.
-		const char* decimal_sep =
-		   precision_ > 0 ? localize ? pgettext("decimal_separator", ".") : "." : "";
-		const size_t decimal_sep_len = strlen(decimal_sep);
-		size_t nr_digits_before_decimal;
-		size_t nr_digits_after_decimal = 0;
-		if (as_int == 0) {
-			nr_digits_before_decimal = 1;
-		} else {
-			nr_digits_before_decimal = 0;
-			for (int64_t i = as_int; i; ++nr_digits_before_decimal, i /= 10) {
-			}
-		}
-		{
-			double decimal_part = (arg < 0 ? -arg : arg) - as_int;
-			for (size_t remaining_max_decimals = precision_;
-			     remaining_max_decimals > 0 && decimal_part > 0;
-			     --remaining_max_decimals, ++nr_digits_after_decimal,
-			            decimal_part = (decimal_part * 10 - static_cast<int64_t>(decimal_part))) {
-			}
-			if (nr_digits_after_decimal == 0 && precision_ > 0) {
-				nr_digits_after_decimal = 1;
-			}
-		}
-
-		size_t required_width = nr_digits_before_decimal + decimal_sep_len + nr_digits_after_decimal;
-		if (arg < 0 || (flags_ & kNumberSign) != 0) {
-			required_width += (localize && arg < 0 ? kLocalizedMinusSignLength : 1);
-		}
-
-		// Start writing
-		if ((flags_ & kPadWith0) == 0 && required_width < min_width_) {
-			required_width = min_width_ - required_width;
-			for (; required_width; ++out, --required_width) {
+		// Right aligned, padding with spaces
+		if ((flags_ & (kPadWith0 | kLeftAlign)) == 0) {
+			for (; padding > 0; --padding) {
 				*out = ' ';
+				++out;
 			}
 		}
 
-		if (arg < 0) {
-			if (localize) {
-				for (const char* c = kLocalizedMinusSign; *c; ++c, ++out) {
-					*out = *c;
-				}
-			} else {
-				*out = '-';
-				++out;
-			}
+		if (is_negative) {
+			out = write_minus_sign(out, localize);
 		} else if ((flags_ & kNumberSign) != 0) {
-			*out = '+';
-			++out;
+			out = write_forced_plus_sign(out, localize, is_zero);
 		}
 
-		if ((flags_ & kPadWith0) != 0 && required_width < min_width_) {
-			required_width = min_width_ - required_width;
-			for (; required_width; ++out, --required_width) {
-				*out = '0';
-			}
-		}
-
-		if (as_int == 0) {
-			*out = '0';
-			++out;
-		} else {
-			int64_t i = as_int;
-			for (size_t d = nr_digits_before_decimal; d; --d, i /= 10) {
-				*(out + d - 1) = '0' + (i % 10);
-			}
-			out += nr_digits_before_decimal;
-		}
-
-		if (precision_ > 0) {
-			for (size_t l = decimal_sep_len; l; --l, ++out, ++decimal_sep) {
-				*out = *decimal_sep;
-			}
-
-			// Now the decimals
-			double decimal_part = (arg < 0 ? -arg : arg) - as_int;
-			bool any_decimal_written = 0;
-			for (size_t remaining_max_decimals = precision_;
-			     remaining_max_decimals > 0 && decimal_part > 0;
-			     --remaining_max_decimals, ++out, any_decimal_written = true) {
-				decimal_part *= 10;
-				static int64_t digit;
-				digit = static_cast<int64_t>(decimal_part);
-				*out = '0' + digit;
-				decimal_part -= digit;
-			}
-			if (!any_decimal_written) {
+		// Pad with zeroes as needed
+		if ((flags_ & kPadWith0) != 0) {
+			for (; padding > 0; --padding) {
 				*out = '0';
 				++out;
 			}
+		}
+
+		// Write the integer part
+		out = write_digits(out, int_part, nr_digits_before_decimal);
+
+		if (current_precision > 0) {
+			out = write_decimal_separator(out, localize);
+
+			// Write the decimals
+			out = write_digits(out, fractional, current_precision);
+		}
+
+		// No need to check for left aligned: Other cases already zeroed the padding.
+		for (; padding > 0; --padding) {
+			*out = ' ';
+			++out;
 		}
 
 		return out;
 	}
 
 	static const FloatNode node_;
+
+private:
+	bool dynamic_precision_;
+	double rounding_;
+	double precision_multiplier_;
+	double check_zero_extra_precision_;
 };
 
 }  // namespace format_impl

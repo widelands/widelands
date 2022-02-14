@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -47,6 +47,11 @@ msgstr "Vyber \"Zobrazit stavební místa\""
 msgid "Now we can see where it is possible to place buildings and flags."
 msgstr "Nyní vidíme, kde lze stavět budovy a vlajky."
 
+#: ../../data/scripting/training_wheels/building_spaces.lua:55
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Click ‘OK’ to continue."
+msgstr ""
+
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
 #: ../../data/scripting/training_wheels/flags.lua:72
@@ -74,6 +79,10 @@ msgid "Now check if you can place even more flags on your roads."
 msgstr ""
 "Teď se podívej, jestli by nebylo možné umístit na tvé cesty ještě nějaké "
 "další vlajky."
+
+#: ../../data/scripting/training_wheels/flags.lua:87
+msgid "Click ‘OK’ when you’re done."
+msgstr ""
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -153,6 +162,16 @@ msgstr ""
 #: ../../data/scripting/training_wheels/rocks.lua:163
 msgid "Roads"
 msgstr "Cesty"
+
+#: ../../data/scripting/training_wheels/logs.lua:141
+#: ../../data/scripting/training_wheels/rocks.lua:144
+msgid "Click on the flag in front of the building to start placing a road."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:152
+msgid ""
+"Click on the ‘Build road’ button, then and click on the indicated flag."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -246,6 +265,13 @@ msgid ""
 msgstr ""
 "Musíme našemu kmeni zajistit přísun žuly. Postav proto prosím následující "
 "budovy:"
+
+#: ../../data/scripting/training_wheels/rocks.lua:155
+msgid ""
+"Click on the ‘Build road’ button. Afterwards, click the colored markers on "
+"the map to guide your road until you reach the flag in front of the target "
+"building."
+msgstr ""
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

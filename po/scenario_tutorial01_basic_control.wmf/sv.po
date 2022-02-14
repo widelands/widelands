@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-08-22 19:27+0000\n"
-"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
+"POT-Creation-Date: 2022-01-31 02:58+0000\n"
+"PO-Revision-Date: 2022-01-31 02:59+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,9 +61,9 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
-" You can open and close the ‘Objectives’ window by clicking on the "
+"You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Du kan öppna och stänga 'Uppdrag'-fönstret genom att klicka på knappen 'Uppdrag' i verktygsraden längst ner på skärmen."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -536,7 +536,7 @@ msgstr "Nu, när det gäller vägen. Kom ihåg att vi är redan i vägbyggnadsl�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:355
 msgid ""
-" Excellent! To enter road building mode for any flag, left-click on a flag "
+"Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
 msgstr ""
 
