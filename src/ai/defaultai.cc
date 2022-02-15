@@ -5646,10 +5646,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				}
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-				tmp_score += 4;
+				tmp_score += 30 + std::abs(management_data.get_military_number_at(142));
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
-				tmp_score -= 2;
+				tmp_score -= 10;
 			}
 
 			if (tmp_score < 0) {
