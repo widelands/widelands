@@ -5650,7 +5650,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				tmp_score += 30 + std::abs(management_data.get_military_number_at(160));
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
-				tmp_score -= 10;
+				tmp_score -= 10 + std::abs(management_data.get_military_number_at(178));
 			}
 
 			if (tmp_score < 0) {
