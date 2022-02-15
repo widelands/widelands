@@ -292,7 +292,7 @@ void InteractivePlayer::add_statistics_menu() {
 
 void InteractivePlayer::rebuild_statistics_menu() {
 	const StatisticsMenuEntry last_selection = statisticsmenu_.has_selection() ?
-	                                              statisticsmenu_.get_selected() :
+                                                 statisticsmenu_.get_selected() :
                                                  StatisticsMenuEntry::kSoldiers;
 
 	statisticsmenu_.clear();
@@ -368,9 +368,9 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	auto shortcut_fn = [this](ShowHideEntry t) { showhide_menu_selected(t); };
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
-	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
-	       * are highlighted */
-	      _("Hide Workarea Overlaps") :
+          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
+           * are highlighted */
+          _("Hide Workarea Overlaps") :
           /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
            * are highlighted */
           _("Show Workarea Overlaps"),

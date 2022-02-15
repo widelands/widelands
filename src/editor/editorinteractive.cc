@@ -701,7 +701,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				const float scaling =
 				   get_display_flag(dfShowMaximumBuildhelp) &&
 				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
-				      0.9f :
+                  0.9f :
                   1.0f;
 				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
 			}
@@ -763,7 +763,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-	                               sel.triangle != get_sel_pos().triangle :
+                                  sel.triangle != get_sel_pos().triangle :
                                   sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_) {
