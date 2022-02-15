@@ -277,27 +277,27 @@ void InteractiveBase::rebuild_mapview_menu() {
 	   mapviewmenu_.has_selection() ? mapviewmenu_.get_selected() : MapviewMenuEntry::kMinimap;
 
 	mapviewmenu_.clear();
-
+	auto shortcut_fn = [this](MapviewMenuEntry t) { mapview_menu_selected(t); };
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap));
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap), shortcut_fn);
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn), shortcut_fn);
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset), shortcut_fn);
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut), shortcut_fn);
 
 	mapviewmenu_.select(last_selection);
 }
@@ -683,17 +683,17 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-                              Widelands::RoadSegment::kNormal :
+				                  Widelands::RoadSegment::kNormal :
                               Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kNormal :
                                Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kNormal :
                                Widelands::RoadSegment::kWaterway;
 				break;
 			default:
@@ -1026,7 +1026,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 
 	road_building_add_overlay();
 	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
-                                         "images/ui_basic/fsel_waterwaybuilding.png" :
+	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
                                          "images/ui_basic/fsel_roadbuilding.png"));
 
 	if (t == RoadBuildingType::kWaterway) {
@@ -1297,7 +1297,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		               kSoundDistanceDivisor;
 
 		distance = (note.priority == kFxMaximumPriority) ?
-                    (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
+		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
                     distance;
 
 		if (distance < kSoundMaxDistance) {
