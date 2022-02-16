@@ -5240,7 +5240,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 		needed_count += numof_warehouses_ + numof_warehouses_in_const_ + 1;
 	} else {
 		needed_count += static_cast<int32_t>(productionsites.size() + mines_.size()) /
-		                   (40 + management_data.get_military_number_at(21) / 10) +
+		                   (50 + management_data.get_military_number_at(21) / 10) +
 		                1;
 	}
 
@@ -5275,7 +5275,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 
 	// So now we know the warehouse here is needed.
 	bo.primary_priority = 1 + (needed_count - numof_warehouses_) *
-	                             std::abs(management_data.get_military_number_at(22) * 20);
+	                             std::abs(management_data.get_military_number_at(22) / 10);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
 	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16));
