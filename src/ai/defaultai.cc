@@ -5613,7 +5613,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// now we find out if the building is needed depending on output stocklevel
 			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
 			const uint8_t stocklevel_threshhold =
-			   20 + std::abs(management_data.get_military_number_at(180));
+			   10 + std::abs(management_data.get_military_number_at(180));
 
 			if (current_stocklevel > stocklevel_threshhold &&
 			    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
@@ -5837,7 +5837,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// Determine whether we need more buildings due to low stocklevel
 			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
 			const uint8_t stocklevel_threshhold =
-			   20 + std::abs(management_data.get_military_number_at(179));
+			   10 + std::abs(management_data.get_military_number_at(179));
 
 			if (current_stocklevel > stocklevel_threshhold &&
 			    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
