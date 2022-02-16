@@ -5545,7 +5545,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher) ||
 		           bo.is(BuildingAttribute::kWell)) {
 
-			bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 25;
+			bo.cnt_target = 1 + static_cast<int32_t>(2 * mines_.size() + 2 * trainingsites.size() + productionsites.size()) / 40;
 
 			if (bo.cnt_under_construction + bo.unoccupied_count > 0) {
 				return BuildingNecessity::kForbidden;
@@ -5609,7 +5609,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			// now we find out if the building is needed depending on output stocklevel
 			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
-			const uint8_t stocklevel_threshhold = std::abs(management_data.get_military_number_at(180));
+			const uint8_t stocklevel_threshhold = 20 + std::abs(management_data.get_military_number_at(180));
 
 			if (current_stocklevel > stocklevel_threshhold &&
 				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
@@ -5824,18 +5824,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (!basic_economy_established) {
 				bo.cnt_target = bo.basic_amount;
 			} else {
-				bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 30;
+				bo.cnt_target = 1 + static_cast<int32_t>(2 * mines_.size() + 2 * trainingsites.size() + productionsites.size()) / 50;
 			}
 			// Determine whether we need more buildings due to low stocklevel
 			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
-			const uint8_t stocklevel_threshhold = std::abs(management_data.get_military_number_at(179));
+			const uint8_t stocklevel_threshhold = 20 + std::abs(management_data.get_military_number_at(179));
 
 			if (current_stocklevel > stocklevel_threshhold &&
 				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
 				bo.cnt_target -= 1;
 			}
 
-			if (current_stocklevel < stocklevel_threshhold / 2) {
+			if (current_stocklevel < stocklevel_threshhold / 2 && bo.cnt_under_construction + bo.unoccupied_count < 2) {
 				bo.cnt_target += 1; // increase target
 				// here we increase primary priority if stock gets low to get higher prio on each field
 				bo.primary_priority += management_data.neuron_pool[41].get_result_safe(
