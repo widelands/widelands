@@ -3157,20 +3157,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						           number_of_supported_producers_nearby * 5, kAbsValue) /
 						        2;
 
-						// now we find out if the supporter is needed depending on output stocklevel
-						// and supported stocklevel
-						const uint32_t combined_stocklevel = (get_stocklevel(bo, gametime));
-
-						if (combined_stocklevel > 50 &&
-						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-							continue;
-						}
-
-						if (combined_stocklevel < 40) {
-							prio += 5 * management_data.neuron_pool[23].get_result_safe(
-							               (40 - combined_stocklevel) / 2, kAbsValue);
-						}
-
 						// taking into account the vicinity
 						prio += number_of_supported_producers_nearby * 10;
 						prio -= number_of_same_nearby * 15;
@@ -3205,18 +3191,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(161)) / 5;
 
-						// now we find out if the supporter is needed depending on stocklevel
-						const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
-
-						if (current_stocklevel > 50 &&
-						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-							continue;
-						}
-
-						if (current_stocklevel < 40) {
-							prio += 5 * management_data.neuron_pool[39].get_result_safe(
-							               (40 - current_stocklevel) / 2, kAbsValue);
-						}
 						// taking into account the vicinity
 						prio += number_of_supported_producers_nearby * 10;
 						prio -= number_of_same_nearby * 8;
@@ -3250,18 +3224,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							prio += (-6 + bf->fish_nearby) / 3;
 						}
 
-						const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
-
-						if (current_stocklevel > 50 &&
-						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-							continue;
-						}
-
-						if (current_stocklevel < 40) {
-							prio += 5 * management_data.neuron_pool[40].get_result_safe(
-							               (40 - current_stocklevel) / 2, kAbsValue);
-						}
-
 						prio += number_of_supported_producers_nearby * 10;
 						prio -= number_of_same_nearby * 20;
 
@@ -3293,16 +3255,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						assert(bo.new_building == BuildingNecessity::kNeeded);
 					}
 
-					// considering neededness depending on stocklevel
-					const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
-					if (current_stocklevel > 50 &&
-					    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-						continue;
-					}
-					if (current_stocklevel < 40 && !bo.is(BuildingAttribute::kShipyard)) {
-						prio += 5 * management_data.neuron_pool[41].get_result_safe(
-						               (40 - current_stocklevel) / 2, kAbsValue);
-					}
 					// This considers supporters nearby
 					prio += management_data.neuron_pool[52].get_result_safe(
 					           number_of_supporters_nearby * 5, kAbsValue) /
@@ -5647,10 +5599,25 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				}
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
-				tmp_score += 30 + std::abs(management_data.get_military_number_at(160));
+				tmp_score += std::abs(management_data.get_military_number_at(160));
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
-				tmp_score -= 10 + std::abs(management_data.get_military_number_at(178));
+				tmp_score -= std::abs(management_data.get_military_number_at(178));
+			}
+
+			// now we find out if the building is needed depending on output stocklevel
+			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
+			const uint8_t stocklevel_threshhold = std::abs(management_data.get_military_number_at(180));
+
+			if (current_stocklevel > stocklevel_threshhold &&
+				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+				tmp_score -= management_data.neuron_pool[26].get_result_safe(
+							   stocklevel_threshhold / 10, kAbsValue) / 5;
+			}
+
+			if (current_stocklevel < stocklevel_threshhold / 2) {
+				tmp_score += management_data.neuron_pool[20].get_result_safe(
+							   (stocklevel_threshhold / 2 - current_stocklevel) / 2, kAbsValue) / 4;
 			}
 
 			if (tmp_score < 0) {
@@ -5660,7 +5627,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					bo.max_needed_preciousness = 1;
 				}
 				bo.primary_priority =
-				   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 2);
+				   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 20);
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.is(BuildingAttribute::kLumberjack)) {
@@ -5857,7 +5824,21 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			} else {
 				bo.cnt_target = 1 + static_cast<int32_t>(mines_.size() + productionsites.size()) / 30;
 			}
+			// Determine whether we need more buildings due to low stocklevel
+			const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
+			const uint8_t stocklevel_threshhold = std::abs(management_data.get_military_number_at(179));
 
+			if (current_stocklevel > stocklevel_threshhold &&
+				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+				bo.cnt_target -= 1;
+			}
+
+			if (current_stocklevel < stocklevel_threshhold / 2) {
+				bo.cnt_target += 1; // increase target
+				// here we increase primary priority if stock gets low to get higher prio on each field
+				bo.primary_priority += management_data.neuron_pool[41].get_result_safe(
+						               (stocklevel_threshhold / 2 - current_stocklevel) / 2, kAbsValue);
+			}
 			if (bo.total_count() > bo.cnt_target + 1) {
 				return BuildingNecessity::kForbidden;
 			}
@@ -6255,6 +6236,22 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                             management_data.get_military_number_at(47) / 10;
 			const int16_t upper_limit =
 			   bottom_limit + std::abs(management_data.get_military_number_at(44) / 3);
+
+			// now we find out if the building is needed depending on output stocklevel
+			// and supported stocklevel if it supports another site
+			const uint32_t combined_stocklevel = (get_stocklevel(bo, gametime));
+
+			if (combined_stocklevel > 50 &&
+				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+				tmp_score -= 5 * management_data.neuron_pool[23].get_result_safe(
+							   (combined_stocklevel) / 5, kAbsValue);
+			}
+
+			if (combined_stocklevel < 40) {
+				tmp_score += 5 * management_data.neuron_pool[24].get_result_safe(
+							   (40 - combined_stocklevel) / 2, kAbsValue);
+			}
+
 
 			if (tmp_score > upper_limit) {
 				// Productionsite is needed
