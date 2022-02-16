@@ -3302,6 +3302,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						if (bo.is(BuildingAttribute::kNeedsBerry)) {
 							prio += std::abs(management_data.get_military_number_at(13)) *
 							        bf->immovables_by_name_nearby[bo.name] / 12;
+							prio += management_data.neuron_pool[39].get_result_safe(
+					           number_of_supporters_nearby * 5, kAbsValue) / 2;
 						}
 						// buildings that need coast and are not considered above e.g. amazons
 						// water_gatherers
