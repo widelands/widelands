@@ -5832,11 +5832,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 			if (current_stocklevel > stocklevel_threshhold &&
 				persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
-				bo.cnt_target -= 1;
+				--bo.cnt_target;
 			}
 
 			if (current_stocklevel < stocklevel_threshhold / 2 && bo.cnt_under_construction + bo.unoccupied_count < 2) {
-				bo.cnt_target += 1; // increase target
+				++bo.cnt_target; // increase target
 				// here we increase primary priority if stock gets low to get higher prio on each field
 				bo.primary_priority += management_data.neuron_pool[41].get_result_safe(
 						               (stocklevel_threshhold / 2 - current_stocklevel) / 2, kAbsValue);
