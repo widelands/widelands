@@ -276,8 +276,8 @@ public:
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
-	/// \param hotkey_fn          function that is invoked with selected value if matching hotkey was pressed
-	/// Text conventions: Title Case for all elements
+	/// \param hotkey_fn          function that is invoked with selected value if matching hotkey was
+	/// pressed Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
 	         const std::string& name,
 	         int32_t x,
