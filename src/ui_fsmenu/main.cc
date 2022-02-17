@@ -118,7 +118,8 @@ MainMenu::MainMenu(const bool skip_init)
                    "",
                    UI::DropdownType::kTextualMenu,
                    UI::PanelStyle::kFsMenu,
-                   UI::ButtonStyle::kFsMenuMenu),
+                   UI::ButtonStyle::kFsMenuMenu,
+                   [this](MenuTarget t) { action(t); }),
      multiplayer_(&vbox1_,
                   "multiplayer",
                   0,
@@ -129,7 +130,8 @@ MainMenu::MainMenu(const bool skip_init)
                   "",
                   UI::DropdownType::kTextualMenu,
                   UI::PanelStyle::kFsMenu,
-                  UI::ButtonStyle::kFsMenuMenu),
+                  UI::ButtonStyle::kFsMenuMenu,
+                  [this](MenuTarget t) { action(t); }),
      replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      editor_(&vbox1_,
              "editor",
@@ -141,7 +143,8 @@ MainMenu::MainMenu(const bool skip_init)
              "",
              UI::DropdownType::kTextualMenu,
              UI::PanelStyle::kFsMenu,
-             UI::ButtonStyle::kFsMenuMenu),
+             UI::ButtonStyle::kFsMenuMenu,
+             [this](MenuTarget t) { action(t); }),
      addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
@@ -285,7 +288,7 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
 					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
-                                          MapData::MapType::kScenario :
+					                           MapData::MapType::kScenario :
                                           MapData::MapType::kNormal;
 					results.push_back(MapEntry(
 					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()));
@@ -314,21 +317,19 @@ void MainMenu::set_labels() {
 	multiplayer_.clear();
 	editor_.clear();
 
-	auto shortcut_fn = [this](MenuTarget t) { action(t); };
-
 	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuNew));
 	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr, false,
 	                  _("Create a new random match"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch));
 	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuCampaign), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuCampaign));
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuTutorial), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuTutorial));
 	singleplayer_.add(_("Load Game"), MenuTarget::kLoadGame, nullptr, false,
 	                  _("Continue a saved game"),
-	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoad), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kMainMenuLoad));
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
@@ -375,28 +376,28 @@ void MainMenu::set_labels() {
 				          format(_("Saved: %s"),
 				                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 				                    .as_font_tag(newest_singleplayer->savedatestring))),
-				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying), shortcut_fn);
+				   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
 			}
 		}
 	}
 
 	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
 	                 _("Join the Widelands lobby"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLobby), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLobby));
 	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
 	                 _("Log in as a registered user"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLogin));
 	multiplayer_.add(_("LAN / Direct IP"), MenuTarget::kLan, nullptr, false,
 	                 _("Play a private online game"),
-	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kMainMenuLAN));
 
 	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew), shortcut_fn);
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew));
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
 	            _("Create a new random map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom), shortcut_fn);
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom));
 	editor_.add(_("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"),
-	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad), shortcut_fn);
+	            shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad));
 
 	{
 		filename_for_continue_editing_ = "";
@@ -432,7 +433,7 @@ void MainMenu::set_labels() {
 			          format(_("Description: %s"),
 			                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			                    .as_font_tag(last_edited->first.description))),
-			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing), shortcut_fn);
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
 		}
 	}
 
@@ -636,7 +637,7 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 
 inline float MainMenu::calc_opacity(const uint32_t time) {
 	return last_image_ == draw_image_ ?
-             1.f :
+	          1.f :
              std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
@@ -727,7 +728,7 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 
 	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+		                         1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
                                1.f;
 		do_draw_image(r, image_pos(*splashscreen_, false), *splashscreen_, opacity);

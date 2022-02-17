@@ -92,9 +92,6 @@ protected:
 
 	void draw_overlay(RenderTarget&) override;
 
-	// Takes the appropriate action when an item in the showhidemenu_ is selected
-	void showhide_menu_selected(ShowHideEntry entry);
-
 public:
 	// All unique menu windows
 	struct GameMenuWindows {
@@ -141,6 +138,8 @@ private:
 
 	// Takes the appropriate action when an item in the mainmenu_ is selected
 	void main_menu_selected(MainMenuEntry entry);
+	// Takes the appropriate action when an item in the showhidemenu_ is selected
+	void showhide_menu_selected(ShowHideEntry entry);
 	// Takes the appropriate action when an item in the gamespeedmenu_ is selected
 	void gamespeed_menu_selected(GameSpeedEntry entry);
 	// Rebuilds the gamespeedmenu_ according to current game settings

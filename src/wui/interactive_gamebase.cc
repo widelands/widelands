@@ -78,7 +78,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    _("Show / Hide"),
                    UI::DropdownType::kPictorialMenu,
                    UI::PanelStyle::kWui,
-                   UI::ButtonStyle::kWuiPrimary),
+                   UI::ButtonStyle::kWuiPrimary,
+                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -93,7 +94,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiPrimary),
+               UI::ButtonStyle::kWuiPrimary,
+               [this](MainMenuEntry t) { main_menu_selected(t); }),
      gamespeedmenu_(toolbar(),
                     "dropdown_menu_gamespeed",
                     0,
@@ -106,7 +108,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     _("Game Speed"),
                     UI::DropdownType::kPictorialMenu,
                     UI::PanelStyle::kWui,
-                    UI::ButtonStyle::kWuiPrimary) {
+                    UI::ButtonStyle::kWuiPrimary,
+                    [this](GameSpeedEntry t) { gamespeed_menu_selected(t); }) {
 	if (chat_provider_ != nullptr) {
 		chat_overlay()->set_chat_provider(*chat_provider_);
 	}
@@ -121,7 +124,6 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-	auto shortcut_fn = [this](MainMenuEntry t) { main_menu_selected(t); };
 #ifndef NDEBUG  //  only in debug builds
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
@@ -145,7 +147,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kInGameSave), shortcut_fn);
+	              shortcut_string_for(KeyboardShortcut::kInGameSave));
 
 	if (!is_multiplayer() && !game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
@@ -154,7 +156,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
 		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
-		              shortcut_string_for(KeyboardShortcut::kInGameLoad), shortcut_fn);
+		              shortcut_string_for(KeyboardShortcut::kInGameLoad));
 	}
 
 	if (!game().list_of_scenarios().empty()) {
@@ -220,20 +222,19 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	const ShowHideEntry last_selection =
 	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 	showhidemenu_.clear();
-	auto shortcut_fn = [this](ShowHideEntry t) { showhide_menu_selected(t); };
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
 
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are shown
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
 	                  g_image_cache->get("images/wui/menus/toggle_census.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -242,7 +243,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                         _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats));
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -251,7 +252,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                         _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers));
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
 	                     /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -260,7 +261,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                         _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings), shortcut_fn);
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings));
 
 	showhidemenu_.select(last_selection);
 }
@@ -303,18 +304,17 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 
 	gamespeedmenu_.clear();
 
-	auto shortcut_fn = [this](GameSpeedEntry t) { gamespeed_menu_selected(t); };
 	gamespeedmenu_.add(_("Speed +"), GameSpeedEntry::kIncrease,
 	                   g_image_cache->get("images/wui/menus/gamespeed_increase.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed + in the game's game speed menu */
 	                   _("Increase the game speed"),
-	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedUp), shortcut_fn);
+	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedUp));
 
 	gamespeedmenu_.add(_("Speed -"), GameSpeedEntry::kDecrease,
 	                   g_image_cache->get("images/wui/menus/gamespeed_decrease.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed - in the game's game speed menu */
 	                   _("Decrease the game speed"),
-	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown), shortcut_fn);
+	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown));
 
 	if (!is_multiplayer()) {
 		if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
@@ -322,13 +322,13 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 			                   g_image_cache->get("images/wui/menus/gamespeed_resume.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Resume the Game"),
-			                   shortcut_string_for(KeyboardShortcut::kInGamePause), shortcut_fn);
+			                   shortcut_string_for(KeyboardShortcut::kInGamePause));
 		} else {
 			gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause,
 			                   g_image_cache->get("images/wui/menus/gamespeed_pause.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Pause the Game"),
-			                   shortcut_string_for(KeyboardShortcut::kInGamePause), shortcut_fn);
+			                   shortcut_string_for(KeyboardShortcut::kInGamePause));
 		}
 	}
 

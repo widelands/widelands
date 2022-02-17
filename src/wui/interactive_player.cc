@@ -180,7 +180,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
-                     UI::ButtonStyle::kWuiPrimary),
+                     UI::ButtonStyle::kWuiPrimary,
+                     [this](StatisticsMenuEntry t) { statistics_menu_selected(t); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
@@ -297,39 +298,37 @@ void InteractivePlayer::rebuild_statistics_menu() {
 
 	statisticsmenu_.clear();
 
-	auto shortcut_fn = [this](StatisticsMenuEntry t) { statistics_menu_selected(t); };
 	if (egbase().map().allows_seafaring()) {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
 		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
-		                    "", shortcut_string_for(KeyboardShortcut::kInGameStatsSeafaring),
-		                    shortcut_fn);
+		                    "", shortcut_string_for(KeyboardShortcut::kInGameStatsSeafaring));
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
 	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsSoldiers), shortcut_fn);
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsSoldiers));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
 	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock), shortcut_fn);
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
 	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsBuildings), shortcut_fn);
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsBuildings));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
 	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares), shortcut_fn);
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
 	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
-	                    shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral), shortcut_fn);
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral));
 
 	statisticsmenu_.select(last_selection);
 }
@@ -365,7 +364,6 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 
 	InteractiveGameBase::rebuild_showhide_menu();
-	auto shortcut_fn = [this](ShowHideEntry t) { showhide_menu_selected(t); };
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
 	      /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
@@ -377,7 +375,7 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
 	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
-	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas), shortcut_fn);
+	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas));
 
 	showhidemenu_.select(last_selection);
 }

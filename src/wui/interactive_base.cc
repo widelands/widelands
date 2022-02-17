@@ -131,7 +131,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
                   UI::PanelStyle::kWui,
-                  UI::ButtonStyle::kWuiPrimary),
+                  UI::ButtonStyle::kWuiPrimary,
+                  [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
      quick_navigation_(&map_view_),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -277,27 +278,27 @@ void InteractiveBase::rebuild_mapview_menu() {
 	   mapviewmenu_.has_selection() ? mapviewmenu_.get_selected() : MapviewMenuEntry::kMinimap;
 
 	mapviewmenu_.clear();
-	auto shortcut_fn = [this](MapviewMenuEntry t) { mapview_menu_selected(t); };
+
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom –"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut), shortcut_fn);
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
 
 	mapviewmenu_.select(last_selection);
 }
