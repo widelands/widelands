@@ -10,12 +10,12 @@
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # tbcrew <light@twobeers.net>, 2021
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
-# Samuele Battarra <battarsa@email.it>, 2020-2021
+# Samuele Battarra, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2021-10-18 18:39+0000\n"
 "Last-Translator: Alen Ciga\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -352,7 +352,7 @@ msgstr "Albero di cirro (Alberello)"
 msgid "Dead Tree"
 msgstr "Albero morto"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr "Albero Caduto"
 

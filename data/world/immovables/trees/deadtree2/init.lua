@@ -13,6 +13,7 @@ wl.Descriptions():new_immovable_type{
       }
    },
    animation_directory = dirname,
+   icon = dirname .. "menu.png",
    animations = {
       idle = {
          hotspot = { 27, 56 },

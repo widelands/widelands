@@ -93,7 +93,7 @@ void RNG::read_state(StreamRead& sr) {
 	state1 = sr.unsigned_32();
 }
 
-void RNG::write_state(StreamWrite& sw) {
+void RNG::write_state(StreamWrite& sw) const {
 	sw.unsigned_32(RNG_SAVE_MAGIC);
 	sw.unsigned_32(state0);
 	sw.unsigned_32(state1);
