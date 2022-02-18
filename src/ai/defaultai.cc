@@ -5633,12 +5633,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (tmp_score < 0) {
 				return BuildingNecessity::kForbidden;
 			}
-      if (bo.max_needed_preciousness <= 0) {
-        bo.max_needed_preciousness = 1;
-      }
-      bo.primary_priority =
-         1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 20);
-      return BuildingNecessity::kNeeded;
+			if (bo.max_needed_preciousness <= 0) {
+				bo.max_needed_preciousness = 1;
+			}
+			bo.primary_priority =
+			   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 20);
+			return BuildingNecessity::kNeeded;
 
 		} else if (bo.is(BuildingAttribute::kLumberjack)) {
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
