@@ -582,20 +582,21 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
 				Widelands::NodeCaps caps;
+                                Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
 					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
                                                               Widelands::CAPS_NONE;
 				} else if (show_port_space) {
-					caps = f->fcoords.field->maxcaps();
+					caps = maxcaps;
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
 						for (const Widelands::BuildingDescr* b :
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
-								caps = f->fcoords.field->maxcaps();
+								caps = maxcaps;
 								opacity *= 2 * kBuildhelpOpacity;
 								break;
 							}
@@ -603,8 +604,20 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 
+                                float scaling = 1.0f;
+                                        
+                                // Draw port space hint if a port could be built here, but current situation doesn't allow it.
+                                if ((maxcaps & Widelands::BUILDCAPS_PORT) && !(caps & Widelands::BUILDCAPS_PORT)) {
+                                        if (const auto* overlay = get_buildhelp_overlay(maxcaps)) {
+                                                blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling, 0.6f * opacity);
+                                        }
+                                        if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
+                                                scaling = 0.9f;
+                                        }
+                                }
+                                
 				if (const auto* overlay = get_buildhelp_overlay(caps)) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling, opacity);
 				}
 			}
 
