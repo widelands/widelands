@@ -71,7 +71,8 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
                                          const bool rethrow_errors) {
 	if (initializer_thread == kNoThread) {
 		throw wexception("NoteThreadSafeFunction::instantiate: initializer thread was not set yet");
-	} else if (is_initializer_thread()) {
+	}
+	if (is_initializer_thread()) {
 		// The initializer thread may run the desired function directly. Publishing
 		// it might result in a deadlock if the caller needs to wait for a result.
 		fn();

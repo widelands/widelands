@@ -358,7 +358,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      enemy_military_sites(0),
      ally_military_presence(0),
      military_stationed(0),
-     unconnected_nearby(false),
+     average_flag_dist_to_wh(kWhFarButReachable),
      military_unstationed(0),
      own_non_military_nearby(0),
      defense_msite_allowed(false),
@@ -1374,11 +1374,13 @@ bool FlagWarehouseDistances::FlagInfo::update(const Time& gametime,
 }
 
 uint16_t FlagWarehouseDistances::FlagInfo::get(const Time& gametime, uint32_t* nw) const {
-	*nw = nearest_warehouse;
+	if (nw) {  // cannot set if this is just nullptr
+		*nw = nearest_warehouse;
+	}
 	if (gametime <= expiry_time) {
 		return distance;
 	}
-	return kFarButReachable;
+	return kWhNotReachable;
 }
 
 void FlagWarehouseDistances::FlagInfo::set_road_built(const Time& gametime) {
@@ -1406,12 +1408,14 @@ uint16_t FlagWarehouseDistances::count() const {
 	return flags_map.size();
 }
 
-int16_t FlagWarehouseDistances::get_distance(const uint32_t flag_coords,
-                                             const Time& gametime,
-                                             uint32_t* nw) {
+int16_t FlagWarehouseDistances::get_wh_distance(const uint32_t flag_coords,
+                                                const Time& gametime,
+                                                uint32_t* nw) {
 	if (flags_map.count(flag_coords) == 0) {
-		*nw = 0;
-		return kFarButReachable;  // this is to discourage to build second road from brand new flag...
+		if (nw) {
+			*nw = 0;
+		}
+		return kWhNotReachable;
 	} else {
 		return flags_map[flag_coords].get(gametime, nw);
 	}
@@ -1465,7 +1469,7 @@ FlagCandidates::Candidate::Candidate(const uint32_t c_hash,
 	different_economy = different_eco;
 	start_flag_dist_to_wh = start_f_dist;
 	flag_to_flag_road_distance = 0;
-	possible_road_distance = kFarButReachable;
+	possible_road_distance = kWhFarButReachable;
 	cand_flag_distance_to_wh = act_dist_to_wh;
 	air_distance = air_dst;
 }
