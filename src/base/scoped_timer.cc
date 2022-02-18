@@ -23,7 +23,8 @@
 #include "base/log.h"
 #include "base/string.h"
 
-ScopedTimer::ScopedTimer(const std::string& message, bool v) : message_(message), only_verbose_(v) {
+ScopedTimer::ScopedTimer(const std::string& message, bool only_verbose)
+   : message_(message), only_verbose_(only_verbose) {
 	startime_ = SDL_GetTicks();
 	lasttime_ = startime_;
 }
