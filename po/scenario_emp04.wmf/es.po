@@ -5,6 +5,7 @@
 # Translators:
 # Walter Benkel <tromaster@gmail.com>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Juano Lemos, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Juano Lemos, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,6 +42,8 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
+"Recuerde revisar los mensajes y las etiquetas de estado del edificio para "
+"edificios improductivos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -194,12 +197,17 @@ msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
+"Para entrenar a un soldado al más alto nivel en un sitio, considere detener "
+"el lugar de entrenamiento hasta que esté completamente equipado con toda la "
+"comida y las armas necesarias."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
+"Para evitar el desperdicio de bienes, reduzca los soldados a entrenar a uno "
+"por sitio."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -207,6 +215,9 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
+"Un sitio siempre preferirá al soldado más adecuado disponible para el "
+"entrenamiento. Asegúrate de no tener a tus soldados medio entrenados "
+"guarnecidos en un edificio militar."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
@@ -1306,6 +1317,9 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Pero estoy muy seguro de que manejarás todo correctamente por ti mismo. Por "
+"supuesto, informaré y asesoraré inmediatamente cada vez que descubra nuevos "
+"problemas."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"

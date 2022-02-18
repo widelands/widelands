@@ -7,7 +7,7 @@ descriptions:new_immovable_type {
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Grapevine (ripe)"),
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "small",
    programs = {
       main = {
          "animate=idle duration:8m20s",

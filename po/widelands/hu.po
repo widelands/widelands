@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-07 02:40+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2022-02-07 18:47+0000\n"
 "Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -290,8 +290,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:294
 #: ../../src/wui/interactive_gamebase.cc:91
@@ -305,12 +305,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:123
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -338,7 +338,7 @@ msgstr "Súgó"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:195
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:391
+#: ../../src/ui_fsmenu/main.cc:393
 msgid "New Map"
 msgstr "Új térkép"
 
@@ -351,7 +351,7 @@ msgstr "Új véletlen térkép"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:210
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:396 ../../src/wlapplication_options.cc:399
+#: ../../src/ui_fsmenu/main.cc:398 ../../src/wlapplication_options.cc:399
 msgid "Load Map"
 msgstr "Térkép betöltése"
 
@@ -500,10 +500,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:416
@@ -822,7 +822,7 @@ msgstr "Szerző: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:283
-#: ../../src/ui_fsmenu/main.cc:430 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:432 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Leírás: %s"
@@ -843,7 +843,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Aktív Bővítmények: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1006 ../../src/wui/encyclopedia_window.cc:144
+#: ../../src/ui_fsmenu/main.cc:1008 ../../src/wui/encyclopedia_window.cc:144
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "Hiba!"
@@ -1169,7 +1169,7 @@ msgstr "Véletlenszerű térkép generálása…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:607
-#: ../../src/ui_fsmenu/main.cc:393
+#: ../../src/ui_fsmenu/main.cc:395
 msgid "Random Map"
 msgstr "Véletlenszerű térkép"
 
@@ -3198,7 +3198,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nincs kiválasztva"
 
-#: ../../src/ui_basic/dropdown.h:357
+#: ../../src/ui_basic/dropdown.h:454
 msgid "No matches"
 msgstr "Nincs találat"
 
@@ -3275,7 +3275,7 @@ msgstr "Rögzítés"
 msgid "Unpin"
 msgstr "Feloldás"
 
-#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:463
+#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:465
 msgid "About Widelands"
 msgstr "A Widelands névjegye"
 
@@ -4195,25 +4195,25 @@ msgid "Directory Tree"
 msgstr "Könyvtárszerkezet"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:273
-#: ../../src/ui_fsmenu/main.cc:420
+#: ../../src/ui_fsmenu/main.cc:422
 #, c-format
 msgid "Name: %s"
 msgstr "Név: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:276
-#: ../../src/ui_fsmenu/main.cc:423 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:425 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Méret: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:279
-#: ../../src/ui_fsmenu/main.cc:425 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:427 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:280
-#: ../../src/ui_fsmenu/main.cc:364 ../../src/ui_fsmenu/main.cc:427
+#: ../../src/ui_fsmenu/main.cc:366 ../../src/ui_fsmenu/main.cc:429
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -5200,7 +5200,7 @@ msgid ""
 "Do you want to load the replay anyway?"
 msgstr "Ez a visszajátszás más Widelands verzióval készült. Elképzelhető, hogy használható, de valószínűbb, hogy kiesik a szinkronból, vagy, hogy be sem lehet tölteni.\n\nKérjük ne jelents semmilyen hibát, amit a megtekintése közben tapasztalsz!\n\nEnnek ellenére is be szeretnéd tölteni a visszajátszást?"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:386
 msgid "Online Game Settings"
 msgstr "Hálózati játék beállításai"
 
@@ -5247,200 +5247,200 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:317
+#: ../../src/ui_fsmenu/main.cc:319
 msgid "Begin a new game"
 msgstr "Új játék indítása"
 
-#: ../../src/ui_fsmenu/main.cc:317 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:218
 msgid "New Game"
 msgstr "Új játék"
 
-#: ../../src/ui_fsmenu/main.cc:319 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:321 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:232
 msgid "New Random Game"
 msgstr "Új véletlen játék"
 
-#: ../../src/ui_fsmenu/main.cc:320
+#: ../../src/ui_fsmenu/main.cc:322
 msgid "Create a new random match"
 msgstr "Egy véletlenszerű új küzdelem indítása"
 
-#: ../../src/ui_fsmenu/main.cc:322 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:242
 msgid "Campaigns"
 msgstr "Hadjáratok"
 
-#: ../../src/ui_fsmenu/main.cc:322
+#: ../../src/ui_fsmenu/main.cc:324
 msgid "Play a campaign"
 msgstr "Hadjárat indítása"
 
-#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:237
+#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:237
 msgid "Tutorials"
 msgstr "Oktatójátékok"
 
-#: ../../src/ui_fsmenu/main.cc:325
+#: ../../src/ui_fsmenu/main.cc:327
 msgid "Play one of our beginners’ tutorials"
 msgstr "A kezdőknek való oktatójátékok egyikének elindítása"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:327 ../../src/wlapplication_options.cc:222
+#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:222
 #: ../../src/wlapplication_options.cc:584
 #: ../../src/wui/game_main_menu_save_game.cc:52
 #: ../../src/wui/interactive_gamebase.cc:155
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/ui_fsmenu/main.cc:328
+#: ../../src/ui_fsmenu/main.cc:330
 msgid "Continue a saved game"
 msgstr "Egy elmentett játék folytatása"
 
-#: ../../src/ui_fsmenu/main.cc:349 ../../src/wlapplication_options.cc:279
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:279
 msgid "Continue Playing"
 msgstr "Játék folytatása"
 
-#: ../../src/ui_fsmenu/main.cc:358
+#: ../../src/ui_fsmenu/main.cc:360
 #, c-format
 msgid "Map: %s"
 msgstr "Térkép: %s"
 
-#: ../../src/ui_fsmenu/main.cc:361
+#: ../../src/ui_fsmenu/main.cc:363
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Játékmód: %s"
 
-#: ../../src/ui_fsmenu/main.cc:367
+#: ../../src/ui_fsmenu/main.cc:369
 #, c-format
 msgid "Gametime: %s"
 msgstr "Játékidő: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:373
+#: ../../src/ui_fsmenu/main.cc:375
 #, c-format
 msgid "Saved: %s"
 msgstr "Mentve: %s"
 
-#: ../../src/ui_fsmenu/main.cc:381
+#: ../../src/ui_fsmenu/main.cc:383
 msgid "Online Game"
 msgstr "Internetes játék"
 
-#: ../../src/ui_fsmenu/main.cc:382
+#: ../../src/ui_fsmenu/main.cc:384
 msgid "Join the Widelands lobby"
 msgstr "Belépés a Widelands internetes előszobába"
 
-#: ../../src/ui_fsmenu/main.cc:385
+#: ../../src/ui_fsmenu/main.cc:387
 msgid "Log in as a registered user"
 msgstr "Bejelentkezés regisztrált felhasználóként"
 
-#: ../../src/ui_fsmenu/main.cc:387 ../../src/wlapplication_options.cc:296
+#: ../../src/ui_fsmenu/main.cc:389 ../../src/wlapplication_options.cc:296
 msgid "LAN / Direct IP"
 msgstr "Helyi hálózat / IP-cím közvetlen megadása"
 
-#: ../../src/ui_fsmenu/main.cc:388
+#: ../../src/ui_fsmenu/main.cc:390
 msgid "Play a private online game"
 msgstr "Zártkörű hálózati játék indítása"
 
-#: ../../src/ui_fsmenu/main.cc:391
+#: ../../src/ui_fsmenu/main.cc:393
 msgid "Create a new empty map"
 msgstr "Új üres térkép létrehozása"
 
-#: ../../src/ui_fsmenu/main.cc:394
+#: ../../src/ui_fsmenu/main.cc:396
 msgid "Create a new random map"
 msgstr "Új véletlenszerű térkép létrehozása"
 
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:398
 msgid "Edit an existing map"
 msgstr "Meglévő térkép szerkesztése"
 
-#: ../../src/ui_fsmenu/main.cc:413 ../../src/wlapplication_options.cc:274
+#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:274
 msgid "Continue Editing"
 msgstr "Szerkesztés folytatása"
 
-#: ../../src/ui_fsmenu/main.cc:437
+#: ../../src/ui_fsmenu/main.cc:439
 msgid "Single Player…"
 msgstr "Egyjátékos…"
 
-#: ../../src/ui_fsmenu/main.cc:438
+#: ../../src/ui_fsmenu/main.cc:440
 msgid "Multiplayer…"
 msgstr "Többjátékos…"
 
-#: ../../src/ui_fsmenu/main.cc:439
+#: ../../src/ui_fsmenu/main.cc:441
 msgid "Editor…"
 msgstr "Térképszerkesztő…"
 
-#: ../../src/ui_fsmenu/main.cc:441
+#: ../../src/ui_fsmenu/main.cc:443
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Egyszemélyes hadjárat vagy szabadon választott játék indítása vagy betöltése"
 
-#: ../../src/ui_fsmenu/main.cc:444
+#: ../../src/ui_fsmenu/main.cc:446
 msgid "Play with your friends over the internet"
 msgstr "Játék a barátaiddal hálózaton keresztül"
 
-#: ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:449
 msgid "Launch the map editor"
 msgstr "A térképszerkesztő megnyitása"
 
-#: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:452 ../../src/wlapplication_options.cc:227
 msgid "Watch Replay"
 msgstr "Visszajátszás megtekintése"
 
-#: ../../src/ui_fsmenu/main.cc:452
+#: ../../src/ui_fsmenu/main.cc:454
 msgid "Watch the replay of an old game"
 msgstr "Egy korábbi játék visszajátszásának megtekintése"
 
-#: ../../src/ui_fsmenu/main.cc:455 ../../src/wlapplication_options.cc:292
+#: ../../src/ui_fsmenu/main.cc:457 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
 msgstr "Bővítmények"
 
-#: ../../src/ui_fsmenu/main.cc:457
+#: ../../src/ui_fsmenu/main.cc:459
 msgid "Install and manage add-ons"
 msgstr "Bővítmények telepítése és kezelése"
 
-#: ../../src/ui_fsmenu/main.cc:459 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:461 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:309
 msgid "Options"
 msgstr "Beállítások"
 
-#: ../../src/ui_fsmenu/main.cc:461
+#: ../../src/ui_fsmenu/main.cc:463
 msgid "Technical and game-related settings"
 msgstr "A játék működésének és használatának beállításai"
 
-#: ../../src/ui_fsmenu/main.cc:465
+#: ../../src/ui_fsmenu/main.cc:467
 msgid "Readme, License, and Credits"
 msgstr "Útmutató, Licensz és Köszönetnyilvánítások"
 
-#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:283
+#: ../../src/ui_fsmenu/main.cc:469 ../../src/wlapplication_options.cc:283
 msgid "Exit Widelands"
 msgstr "Kilépés a Widelandsből"
 
-#: ../../src/ui_fsmenu/main.cc:469
+#: ../../src/ui_fsmenu/main.cc:471
 msgid "Quit the game"
 msgstr "Kilépés a játékból"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:474
+#: ../../src/ui_fsmenu/main.cc:476
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Verzió: %1$s (%2$s)"
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:477
+#: ../../src/ui_fsmenu/main.cc:479
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2%, Widelands fejlesztőcsapat · Licensz: GNU General Public License V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:809
+#: ../../src/ui_fsmenu/main.cc:811
 msgid "Desyncing Add-On Found"
 msgstr "Szinkronizációs hibákat okozó bővítményt találtunk"
 
-#: ../../src/ui_fsmenu/main.cc:810
+#: ../../src/ui_fsmenu/main.cc:812
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Egy bekapcsolt bővítmény szinkronizációs hibákat szokott okozni. Csak akkor folytasd, ha vállalod a kockázatokat!"
 
-#: ../../src/ui_fsmenu/main.cc:910 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:912 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found!"
 msgstr "A törzs nem található!"
 
-#: ../../src/ui_fsmenu/main.cc:911 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:913 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Nem található törzs a data/tribes/initialization/[törzsnév]/init.lua parancsfájlban."
 
@@ -5998,17 +5998,17 @@ msgid "Try system language"
 msgstr "Az operációs rendszer nyelve"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:650
+#: ../../src/ui_fsmenu/options.cc:656
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "A %s fordítás teljes."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:654
+#: ../../src/ui_fsmenu/options.cc:660
 msgid "The translation into %1% is %2%%% complete."
 msgstr "A %1% fordítás %2%%%-os."
 
-#: ../../src/ui_fsmenu/options.cc:666
+#: ../../src/ui_fsmenu/options.cc:672
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Ha segítenél nekünk fordítani, akkor keresd fel ezt az oldalt: %s"
@@ -6091,18 +6091,18 @@ msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lu
 msgid "Tutorial"
 msgstr "Oktatójáték"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Szerző"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Szerzők"
@@ -7017,7 +7017,7 @@ msgstr "Támadás"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
-#: ../../src/wui/attack_window.cc:166
+#: ../../src/wui/attack_window.cc:171
 #: ../../src/wui/constructionsitewindow.cc:525
 #, c-format
 msgid "%u soldier"
@@ -7025,75 +7025,75 @@ msgid_plural "%u soldiers"
 msgstr[0] "%u katona"
 msgstr[1] "%u katona"
 
-#: ../../src/wui/attack_window.cc:244
+#: ../../src/wui/attack_window.cc:249
 msgid "Number of soldiers"
 msgstr "Katonák száma"
 
-#: ../../src/wui/attack_window.cc:250
+#: ../../src/wui/attack_window.cc:255
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
 msgstr "Kevesebb katona küldése. A Ctrl billentyűt lenyomva egyet se."
 
-#: ../../src/wui/attack_window.cc:255
+#: ../../src/wui/attack_window.cc:260
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "Több katona küldése. A Ctrl billentyűt lenyomva a lehető legtöbbet."
 
-#: ../../src/wui/attack_window.cc:259
+#: ../../src/wui/attack_window.cc:264
 msgid "Start attack"
 msgstr "Támadás indítása"
 
-#: ../../src/wui/attack_window.cc:278
+#: ../../src/wui/attack_window.cc:283
 msgid "Attackers:"
 msgstr "Támadók:"
 
-#: ../../src/wui/attack_window.cc:284
+#: ../../src/wui/attack_window.cc:289
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "Az egyes katonákra kattintva eltávolíthatod őket a támadásra küldöttek közül"
 
-#: ../../src/wui/attack_window.cc:286
+#: ../../src/wui/attack_window.cc:291
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "A Ctrl billentyűt lenyomva az összes katona eltávolítása"
 
-#: ../../src/wui/attack_window.cc:287
+#: ../../src/wui/attack_window.cc:292
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "A Shift billentyűt lenyomva a katonák eltávolítása a kiválasztott katonáig"
 
-#: ../../src/wui/attack_window.cc:294
+#: ../../src/wui/attack_window.cc:299
 msgid "Not attacking:"
 msgstr "Nem támadnak:"
 
-#: ../../src/wui/attack_window.cc:299
+#: ../../src/wui/attack_window.cc:304
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "Az egyes katonákra kattintva hozzáadhatod őket a támadásra küldöttekhez"
 
-#: ../../src/wui/attack_window.cc:301
+#: ../../src/wui/attack_window.cc:306
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "A Ctrl billentyűt lenyomva az összes katona hozzáadása"
 
-#: ../../src/wui/attack_window.cc:302
+#: ../../src/wui/attack_window.cc:307
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "A Shift billentyűt lenyomva a katonák hozzáadása a kiválasztott katonáig"
 
-#: ../../src/wui/attack_window.cc:311
+#: ../../src/wui/attack_window.cc:322
 msgid "Destroy target"
 msgstr "A célpont megsemmisítése"
 
-#: ../../src/wui/attack_window.cc:312
+#: ../../src/wui/attack_window.cc:323
 msgid "Destroy the target building instead of conquering it"
 msgstr "Győzelem esetén a katonáid ne foglalják el a megtámadott épületet, hanem rombolják le"
 
-#: ../../src/wui/attack_window.cc:323 ../../src/wui/buildingwindow.cc:389
+#: ../../src/wui/attack_window.cc:334 ../../src/wui/buildingwindow.cc:389
 #: ../../src/wui/fieldaction.cc:498 ../../src/wui/shipwindow.cc:143
 msgid "Show Debug Window"
 msgstr "Hibakereső ablak megjelenítése"
 
-#: ../../src/wui/attack_window.cc:327 ../../src/wui/buildingwindow.cc:405
+#: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:405
 msgid "Center view on this"
 msgstr "Látómező közepébe helyezés"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:426 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:441 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:480
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -7157,9 +7157,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7547,8 +7547,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -8109,8 +8109,8 @@ msgstr "Játék megállítása"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Hajózás"
