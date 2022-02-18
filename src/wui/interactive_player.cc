@@ -605,7 +605,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
                                 float scaling = 1.0f;
-                                        
+
                                 // Draw port space hint if a port could be built here, but current situation doesn't allow it.
                                 if ((maxcaps & Widelands::BUILDCAPS_PORT) && !(caps & Widelands::BUILDCAPS_PORT)) {
                                         if (const auto* overlay = get_buildhelp_overlay(maxcaps)) {
@@ -615,7 +615,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                                 scaling = 0.9f;
                                         }
                                 }
-                                
+
 				if (const auto* overlay = get_buildhelp_overlay(caps)) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling, opacity);
 				}
