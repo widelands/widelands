@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-13 02:42+0000\n"
-"PO-Revision-Date: 2022-02-11 13:10+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2022-02-16 02:44+0000\n"
+"PO-Revision-Date: 2022-02-16 02:45+0000\n"
+"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -604,10 +604,12 @@ msgstr "Карта не была сохранена, вы действитель
 #: ../../src/editor/editorinteractive.cc:987 ../../src/logic/addons.cc:46
 #: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_fsmenu/addons/contact.cc:82
-#: ../../src/ui_fsmenu/addons/manager.cc:1383
-#: ../../src/ui_fsmenu/addons/manager.cc:1429
-#: ../../src/ui_fsmenu/addons/manager.cc:1508
-#: ../../src/ui_fsmenu/addons/manager.cc:1577
+#: ../../src/ui_fsmenu/addons/manager.cc:1363
+#: ../../src/ui_fsmenu/addons/manager.cc:1374
+#: ../../src/ui_fsmenu/addons/manager.cc:1424
+#: ../../src/ui_fsmenu/addons/manager.cc:1470
+#: ../../src/ui_fsmenu/addons/manager.cc:1549
+#: ../../src/ui_fsmenu/addons/manager.cc:1618
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
@@ -723,8 +725,8 @@ msgstr "шахта"
 msgid "port"
 msgstr "порт"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1020,9 +1022,9 @@ msgstr "(ничего)"
 msgid "Waterway length limit:"
 msgstr "Лимит длины водного пути"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -3612,11 +3614,11 @@ msgstr "Запускается упаковщик дополнений"
 msgid "Contact us…"
 msgstr "Наши контакты…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:328
+#: ../../src/ui_fsmenu/addons/manager.cc:329
 msgid "Tools for Add-Ons Developers"
 msgstr "Инструменты разработчика дополнений"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:336
+#: ../../src/ui_fsmenu/addons/manager.cc:337
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -3624,22 +3626,22 @@ msgid ""
 "having to write a single line of code."
 msgstr "Интерактивный упаковщик позволит вам создавать, править и удалять дополнения. Используйте наш редактор карт с графическим интерфейсом для того, чтобы создавать карты и делиться ими с другими игроками без необходимости писать код."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:351
+#: ../../src/ui_fsmenu/addons/manager.cc:352
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "За подробностями о разработке дополнений обращайтесь на %s."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:360
+#: ../../src/ui_fsmenu/addons/manager.cc:361
 msgid "Open Link"
 msgstr "Перейти по ссылке"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:362
+#: ../../src/ui_fsmenu/addons/manager.cc:363
 msgid "Copy Link"
 msgstr "Скопировать ссылку"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:385
+#: ../../src/ui_fsmenu/addons/manager.cc:386
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -3648,7 +3650,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Привет. Вы можете загружать свои дополнения на сервер с целью сделать их доступными для других игроков. По факту загрузки вы соглашаетесь выложить свое творение под лицензией GNU General Public License (GPL) версии 2 (та же лицензия, по которой распространяется Widelands). Для детального ознакомления с лицензией выберите пункт ‘О Widelands’ → ‘Лицензия’ в главном меню."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:392
+#: ../../src/ui_fsmenu/addons/manager.cc:393
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -3656,7 +3658,7 @@ msgid ""
 " stead."
 msgstr "Запрещается публиковать вредоносный и противоправный контент, а также спам. Загружая дополнение, вы расписываетесь в том, что являетесь его автором(-ами) или получили разрешение на публикацию."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:398
+#: ../../src/ui_fsmenu/addons/manager.cc:399
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -3664,7 +3666,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Вам следует прочесть документацию по дополнениям по ссылке ниже, прежде чем отправлять контент. Документация может часто меняться, так что не поленитесь убедиться, что вы следуете всем актуальным рекомендациям."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:404
+#: ../../src/ui_fsmenu/addons/manager.cc:405
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -3672,7 +3674,7 @@ msgid ""
 "profile page frequently."
 msgstr "Команда разработчиков проверит ваше дополнение после загрузки. Если у них возникнут к вам вопросы, они свяжутся с вами через ваш личный кабинет на сайте игры. Пожалуйста, почаще проверяйте ваш почтовый ящик в вашем профиле."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:434
+#: ../../src/ui_fsmenu/addons/manager.cc:435
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -3681,7 +3683,7 @@ msgid ""
 "be happy to help."
 msgstr "Технические трудности? Неоднозначная документация? Что-то еще, вроде снос дополнения или связь с другим разработчиком? Посетите наш форум на %s, опишите ваши потребности, и команда Widelands с радостью вам поможет."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:451
+#: ../../src/ui_fsmenu/addons/manager.cc:452
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -3692,60 +3694,60 @@ msgid ""
 " website user profile page."
 msgstr "Или же вы можете послать сообщение разработчикам, и мы ответим вам по возможности скоро. Сейчас только администратор может читать отправленные таким образом сообщения. Ответы на ваши вопросы могут быть полезны и другим разработчикам. Потому прибегать к этому способу следует только в случае свойственных только лично вам проблем. Наш ответ вы получите в личке вашего профиля на сайте Widelands."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:488
+#: ../../src/ui_fsmenu/addons/manager.cc:489
 msgid "Development"
 msgstr "Разработка"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons/manager.cc:491
+#: ../../src/ui_fsmenu/addons/manager.cc:492
 msgid "Name"
 msgstr "Название"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons/manager.cc:493
+#: ../../src/ui_fsmenu/addons/manager.cc:494
 msgid "Name (descending)"
 msgstr "Название (по убыванию)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:495
+#: ../../src/ui_fsmenu/addons/manager.cc:496
 msgid "Most popular"
 msgstr "Самые популярные"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:497
+#: ../../src/ui_fsmenu/addons/manager.cc:498
 msgid "Least popular"
 msgstr "Наименее популярные"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:499
+#: ../../src/ui_fsmenu/addons/manager.cc:500
 msgid "Most often downloaded"
 msgstr "Частые загрузки"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:501
+#: ../../src/ui_fsmenu/addons/manager.cc:502
 msgid "Least often downloaded"
 msgstr "Редкие загрузки"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:503
+#: ../../src/ui_fsmenu/addons/manager.cc:504
 msgid "Oldest"
 msgstr "Старейшие"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:505
+#: ../../src/ui_fsmenu/addons/manager.cc:506
 msgid "Newest"
 msgstr "Новейшие"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:513
+#: ../../src/ui_fsmenu/addons/manager.cc:514
 msgid "Filter add-ons by name"
 msgstr "Фильтровать дополнения по названию"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:523
+#: ../../src/ui_fsmenu/addons/manager.cc:524
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Переключить категорию '%s'"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:614
+#: ../../src/ui_fsmenu/addons/manager.cc:615
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
@@ -3754,76 +3756,76 @@ msgstr[1] "Вы уверены, что эти %u дополнения нужно
 msgstr[2] "Вы уверены, что эти %u дополнений нужно обновить?"
 msgstr[3] "Вы уверены, что эти %u дополнений нужно обновить?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:620
+#: ../../src/ui_fsmenu/addons/manager.cc:621
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s)  от %3$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:621
+#: ../../src/ui_fsmenu/addons/manager.cc:622
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:393
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:418
 msgid "NOT VERIFIED"
 msgstr "Не проверено"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:621
+#: ../../src/ui_fsmenu/addons/manager.cc:622
 msgid "verified"
 msgstr "Проверено"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:625
+#: ../../src/ui_fsmenu/addons/manager.cc:626
 msgid "Upgrade All"
 msgstr "Обновить всё"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:767
+#: ../../src/ui_fsmenu/addons/manager.cc:765
 msgid "Not logged in"
 msgstr "Гостем"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:768
+#: ../../src/ui_fsmenu/addons/manager.cc:766
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Щелкните, чтобы войти. Тогда вы сможете голосовать и обсуждать дополнения, а также загружать собственные."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:772
+#: ../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Please log in to upload add-ons"
 msgstr "Войдите, чтобы загружать дополнения"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:774
+#: ../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Please log in to upload content"
 msgstr "Войдите, чтобы загружать контент"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:776
+#: ../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Please log in to send an enquiry"
 msgstr "Войдите, чтобы отправить запрос"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:781
+#: ../../src/ui_fsmenu/addons/manager.cc:779
 #, c-format
 msgid "Logged in as %s"
 msgstr "Вошел как %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:781
+#: ../../src/ui_fsmenu/addons/manager.cc:779
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Вошел как %s (администратор)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:782
+#: ../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Click to log out"
 msgstr "Щелкните, чтобы выйти"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:787
+#: ../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Поставьте галочку напротив \"Согласен…\" для загрузки дополнений"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:790
+#: ../../src/ui_fsmenu/addons/manager.cc:788
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Поставьте галочку напротив \"Согласен…\", чтобы загрузить контент"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:817
+#: ../../src/ui_fsmenu/addons/manager.cc:815
 msgid "Server Error"
 msgstr "Ошибка на сервере"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:818
+#: ../../src/ui_fsmenu/addons/manager.cc:816
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -3831,11 +3833,11 @@ msgid ""
 "%s"
 msgstr "Подключение к серверу недоступно.\nОшибка:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:826
+#: ../../src/ui_fsmenu/addons/manager.cc:824
 msgid "Wrong Password"
 msgstr "Неверный пароль"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:827
+#: ../../src/ui_fsmenu/addons/manager.cc:825
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
@@ -3950,28 +3952,42 @@ msgid ""
 "maps from loading."
 msgstr "Дополнения с нарушенными зависимостями могут привести к ошибкам в игре и загрузке карт."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1345
+#: ../../src/ui_fsmenu/addons/manager.cc:1364
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
+"newer than the version present on the server (%3$s)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1375
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
+"match the category of the version present on the server (%3$s)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1386
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:55
 msgid "Upload"
 msgstr "Загрузить"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1346
+#: ../../src/ui_fsmenu/addons/manager.cc:1387
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Вы действительно хотите загрузить дополнение ‘%s’ на сервер?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1354
+#: ../../src/ui_fsmenu/addons/manager.cc:1396
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "‘%s’ загружается…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1361
-#: ../../src/ui_fsmenu/addons/manager.cc:1415
-#: ../../src/ui_fsmenu/addons/manager.cc:1478
+#: ../../src/ui_fsmenu/addons/manager.cc:1403
+#: ../../src/ui_fsmenu/addons/manager.cc:1456
+#: ../../src/ui_fsmenu/addons/manager.cc:1519
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1384
+#: ../../src/ui_fsmenu/addons/manager.cc:1425
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -3980,12 +3996,12 @@ msgid ""
 "%2$s"
 msgstr "Дополнение  ‘%1$s’ не может быть загружено на сервер.\nПричина:\n%2$s "
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1396
+#: ../../src/ui_fsmenu/addons/manager.cc:1437
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Загрузка '%s'..."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1431
+#: ../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3994,7 +4010,7 @@ msgid ""
 "%2$s"
 msgstr "Не удалось загрузить дополнение \"%1$s\" с сервера. Установка/обновление были пропущены.\n\nПричина:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1509
+#: ../../src/ui_fsmenu/addons/manager.cc:1550
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -4003,7 +4019,7 @@ msgid ""
 "%2$s"
 msgstr "Перевод для дополнения ‘%1$s’ не может быть загружен с сервера. Установка/обновление перевода пропущено.\nПричина:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1578
+#: ../../src/ui_fsmenu/addons/manager.cc:1619
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Запрошенное обновление \"%s\" не найдено на сервере."
@@ -6157,18 +6173,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Авторы"
@@ -7225,9 +7241,9 @@ msgstr "Порты"
 msgid "Low productivity:"
 msgstr "Неэффективно: "
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7615,8 +7631,8 @@ msgstr "Замените отключенного игрока выбранны�
 msgid "AI for the disconnected player"
 msgstr "Искусственный Интеллект для отключенного игрока"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:168
 msgid "Exit Game"
@@ -8185,8 +8201,8 @@ msgstr "Приостановить игру"
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "С мореплаванием"
