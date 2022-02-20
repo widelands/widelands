@@ -1537,11 +1537,11 @@ descriptions:new_tribe {
             no_scouting_building_connected = pgettext("atlanteans_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Scout's House 
+            -- TRANSLATORS: Note helptext for an atlantean production site: Scout's House
             note = pgettext("atlanteans_building", "Will need fish an bread to have his meal the Atlantean way"),
-            -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House 
+            -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from you high towers. Sometimes you need someone to find out in person, thats me!"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House 
+            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House
             lore_author = pgettext("atlanteans_building", "A Scout answering a soldier")
          }
       },
@@ -1567,7 +1567,7 @@ descriptions:new_tribe {
             purpose = pgettext("atlanteans_building", "Smokes meat and fish to feed the scouts, miners and to train soldiers in the dungeon and labyrinth."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
             lore = pgettext("atlanteans_building", "We are using pure logs no other ingredients! Which drunken foreigner hatht told you that myth?"),
-            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Smokery 
+            -- TRANSLATORS: Lore author helptext for an atlantean production site:  Smokery
             lore_author = pgettext("atlanteans_building", "Smoker answering some passerby")
 
          }
