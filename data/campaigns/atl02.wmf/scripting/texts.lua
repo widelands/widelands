@@ -140,7 +140,9 @@ defeated = {
       title =_("Defeated!"),
       body = sidolus(_("Sidolus has bad news…"),
          -- TRANSLATORS: Sidolus
-         _([[Aaaargh, Jundlina. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. They have destroyed our last warehouse. Thus we have lost this battle and our people is doomed!]])),
+         _([[Aaaargh, Jundlina. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. They have destroyed our last warehouse. Thus we have lost this battle and our people is doomed!]]))
+         .. objective_text(_("You Have Lost"),
+         _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
       posy=1,
    }
 }
@@ -491,6 +493,18 @@ tribute_started = {
          -- TRANSLATORS: Jundlina
          _([[So I want you to defeat this Empire, but ensure that we will become and remain strong enough to enforce the respect we deserve.]]))
    },
+   {
+      title = _("Keep Delivering"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Strangers, I almost forgot to mention, but it should have been clear anyway.]])
+         .. paragraphdivider() ..
+         -- TRANSLATORS: Kalitath
+         _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
+         .. paragraphdivider() ..
+         -- TRANSLATORS: Kalitath
+         _([[If you fail to deliver everything within 3 hours, we need to assume you are just playing along with us.]]))
+   },
 }
 
 alliance_broken = {
@@ -514,6 +528,34 @@ alliance_broken = {
       body = sidolus(
          -- TRANSLATORS: Sidolus
          _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. Thus, we have lost this battle and our people is doomed!]]))
+         .. objective_text(_("You Have Lost"),
+         _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+   },
+}
+
+alliance_broken_1 = {
+   {
+      title = _("Traitors"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Strangers, you did not deliver the help we needed in time. We are deeply insulted by your treachery.]])
+         .. paragraphdivider() ..
+         -- TRANSLATORS: Kalitath
+         _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
+   },
+   {
+      title = _("Jundlinas Suicide"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
+   },
+   {
+      title = _("Defeated!"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect us from the enemy. We have lost our noble princess. Thus, we have lost this battle and our people is doomed!]]))
+         .. objective_text(_("You Have Lost"),
+         _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
    },
 }
 
@@ -523,5 +565,7 @@ kalitath_dead = {
       body = sidolus(
          -- TRANSLATORS: Sidolus
          _([[Aaaargh. I don’t know how this could have happened, but Satul couldn’t protect our ally from the enemy. He lost his last warehouse and our noble princess perished with him. Thus, we have lost this battle and our people is doomed!]]))
+         .. objective_text(_("You Have Lost"),
+         _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
    },
 }

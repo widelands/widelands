@@ -140,6 +140,51 @@ function uncertain_allies()
    msg_boxes(trading)
    trade = add_campaign_objective(obj_tribute)
    run(patience)
+   run(wares_delivery)
+end
+
+function wares_delivery()
+   local coal = 0
+   local iron = 0
+   local gold = 0
+   local wood = 0
+
+   while not Kalitath.defeated do
+      sleep(5000)
+      local hq = Kalitath:get_buildings("barbarians_headquarters")
+      local delivered_wood = p1:get_produced_wares_count("coin_wood")
+      if (delivered_wood > wood) then
+         if hq and hq[1] then
+            local amount = hq[1]:get_wares("log") + 5
+            hq[1]:set_wares("log", amount)
+            wood = delivered_wood
+         end
+      end
+      local delivered_coal = p1:get_produced_wares_count("coin_copper")
+      if (delivered_coal > coal) then
+         if hq and hq[1] then
+            local amount = hq[1]:get_wares("coal") + 4
+            hq[1]:set_wares("coal", amount)
+            coal = delivered_coal
+         end
+      end
+      local delivered_iron = p1:get_produced_wares_count("coin_silver")
+      if (delivered_iron > iron) then
+         if hq and hq[1] then
+            local amount = hq[1]:get_wares("iron") + 3
+            hq[1]:set_wares("iron", amount)
+            iron = delivered_iron
+         end
+      end
+      local delivered_gold = p1:get_produced_wares_count("coin_gold")
+      if (delivered_gold > gold) then
+         if hq and hq[1] then
+            local amount = hq[1]:get_wares("gold") + 2
+            hq[1]:set_wares("gold", amount)
+            gold = delivered_gold
+         end
+      end
+   end
 end
 
 function patience()
@@ -159,14 +204,19 @@ function patience()
       end
       if count == 4801 then
          msg_boxes(alliance_broken)
-         p1.see_all = true
+         wl.ui.MapView():close()
       end
       sleep(500)
    end
    msg_boxes(tribute_started)
    defeat_maletus = add_campaign_objective(obj_defeat_maletus)
-   while not (p1:get_produced_wares_count("coin_wood") >= penalty * 5 and p1:get_produced_wares_count("coin_copper") >= penalty * 4 and p1:get_produced_wares_count("coin_silver") >= penalty * 3 and p1:get_produced_wares_count("coin_gold") >= penalty * 2) do
+   local end_time = game.time + 10800000 -- 3 hours until timeout
+   while not ((p1:get_produced_wares_count("coin_wood") >= penalty * 5 and p1:get_produced_wares_count("coin_copper") >= penalty * 4 and p1:get_produced_wares_count("coin_silver") >= penalty * 3 and p1:get_produced_wares_count("coin_gold") >= penalty * 2) or Maletus.defeated) do
       sleep(4235)
+      if game.time > end_time then
+         msg_boxes(alliance_broken_1)
+         wl.ui.MapView():close()
+      end
    end
    trade.done = true
 end
@@ -219,7 +269,7 @@ end
 function check_defeat()
    while not p1.defeated do sleep(6000) end
    msg_boxes(defeated)
-   p1.see_all = true
+   wl.ui.MapView():close()
 end
 
 function check_kalitath_defeated()
@@ -230,7 +280,7 @@ function check_kalitath_defeated()
       if Kalitath.defeated then
          defeat = true
          msg_boxes(kalitath_dead)
-         p1.see_all = true
+         wl.ui.MapView():close()
       end
    end
 end
