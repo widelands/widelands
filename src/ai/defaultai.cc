@@ -5543,9 +5543,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			bo.max_needed_preciousness = bo.max_preciousness;
 			return BuildingNecessity::kForced;
-		} else if (bo.prohibited_till > gametime) {  // NOLINT
+		}
+		if (bo.prohibited_till > gametime) {
 			return BuildingNecessity::kForbidden;
-		} else if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher) ||
+		}
+		if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher) ||
 		           bo.is(BuildingAttribute::kWell)) {
 
 			bo.cnt_target = 1 + static_cast<int32_t>(2 * mines_.size() + 2 * trainingsites.size() +
@@ -5640,7 +5642,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 20);
 			return BuildingNecessity::kNeeded;
 
-		} else if (bo.is(BuildingAttribute::kLumberjack)) {
+		}
+		if (bo.is(BuildingAttribute::kLumberjack)) {
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
 				return BuildingNecessity::kForbidden;
 			}
@@ -5664,7 +5667,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			return BuildingNecessity::kAllowed;
 
-		} else if (bo.is(BuildingAttribute::kRanger)) {
+		}
+		if (bo.is(BuildingAttribute::kRanger)) {
 
 			// making sure we have one completed supported lumberjack
 			uint16_t supported_lumberjack_built = 0;
@@ -5812,11 +5816,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kForbidden;
-		} else if (bo.is(BuildingAttribute::kNeedsRocks) &&
+		}
+		if (bo.is(BuildingAttribute::kNeedsRocks) &&
 		           bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
-		} else if (!bo.supported_producers.empty() &&
+		}
+		if (!bo.supported_producers.empty() &&
 		           !bo.is(BuildingAttribute::kSupportingProducer)) {
 			// Pure supporting sites only
 
@@ -5884,7 +5890,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			return BuildingNecessity::kForbidden;
 
-		} else if (bo.is(BuildingAttribute::kBarracks)) {
+		}
+		if (bo.is(BuildingAttribute::kBarracks)) {
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
 				return BuildingNecessity::kForbidden;
 			}
@@ -5904,7 +5911,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_preciousness = 0;
 			return BuildingNecessity::kForbidden;
 
-		} else if (bo.type == BuildingObserver::Type::kMine) {
+		}
+		if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
 			const uint32_t current_stats_threshold =
 			   85 + std::abs(management_data.get_military_number_at(129)) / 10;
@@ -5990,7 +5998,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   tmp_score * std::abs(management_data.get_military_number_at(127) / 5);
 			return BuildingNecessity::kNeeded;
 
-		} else if (bo.max_needed_preciousness > 0) {
+		}
+		if (bo.max_needed_preciousness > 0) {
 
 			// help variable to determine wood availability in the economy
 			const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
@@ -6277,7 +6286,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// Not allowed
 			return BuildingNecessity::kForbidden;
 
-		} else if (bo.is(BuildingAttribute::kShipyard)) {
+		}
+		if (bo.is(BuildingAttribute::kShipyard)) {
 			if (bo.total_count() > 0 ||
 			    (!basic_economy_established &&
 			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
@@ -6295,12 +6305,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kAllowed;
-		} else if (bo.max_needed_preciousness == 0) {
-			return BuildingNecessity::kNotNeeded;
-		} else {
-			return BuildingNecessity::kForbidden;
 		}
-	} else if (purpose == PerfEvaluation::kForDismantle) {  // now for dismantling
+		if (bo.max_needed_preciousness == 0) {
+			return BuildingNecessity::kNotNeeded;
+		}
+		return BuildingNecessity::kForbidden;
+	}
+	if (purpose == PerfEvaluation::kForDismantle) {  // now for dismantling
 		// never dismantle last building (a care should be taken elsewhere)
 		assert(bo.total_count() > 0);
 
