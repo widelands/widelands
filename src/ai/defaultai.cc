@@ -5548,7 +5548,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher) ||
-		           bo.is(BuildingAttribute::kWell)) {
+		    bo.is(BuildingAttribute::kWell)) {
 
 			bo.cnt_target = 1 + static_cast<int32_t>(2 * mines_.size() + 2 * trainingsites.size() +
 			                                         productionsites.size()) /
@@ -5641,7 +5641,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.primary_priority =
 			   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 20);
 			return BuildingNecessity::kNeeded;
-
 		}
 		if (bo.is(BuildingAttribute::kLumberjack)) {
 			if (bo.total_count() > 1 && (bo.cnt_under_construction + bo.unoccupied_count > 0)) {
@@ -5666,7 +5665,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kAllowed;
-
 		}
 		if (bo.is(BuildingAttribute::kRanger)) {
 
@@ -5818,12 +5816,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kForbidden;
 		}
 		if (bo.is(BuildingAttribute::kNeedsRocks) &&
-		           bo.cnt_under_construction + bo.unoccupied_count == 0) {
+		    bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
 		}
-		if (!bo.supported_producers.empty() &&
-		           !bo.is(BuildingAttribute::kSupportingProducer)) {
+		if (!bo.supported_producers.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
 			// Pure supporting sites only
 
 			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
@@ -5889,7 +5886,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kAllowed;
 			}
 			return BuildingNecessity::kForbidden;
-
 		}
 		if (bo.is(BuildingAttribute::kBarracks)) {
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
@@ -5910,7 +5906,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.max_needed_preciousness = 0;
 			bo.max_preciousness = 0;
 			return BuildingNecessity::kForbidden;
-
 		}
 		if (bo.type == BuildingObserver::Type::kMine) {
 			bo.primary_priority = bo.max_needed_preciousness;
@@ -5997,7 +5992,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			bo.primary_priority +=
 			   tmp_score * std::abs(management_data.get_military_number_at(127) / 5);
 			return BuildingNecessity::kNeeded;
-
 		}
 		if (bo.max_needed_preciousness > 0) {
 
@@ -6285,7 +6279,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			// Not allowed
 			return BuildingNecessity::kForbidden;
-
 		}
 		if (bo.is(BuildingAttribute::kShipyard)) {
 			if (bo.total_count() > 0 ||
