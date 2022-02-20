@@ -1419,7 +1419,11 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
             purpose = pgettext("atlanteans_building", "Cuts blocks of granite out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
-            note = pgettext("atlanteans_building", "The quarry needs rocks to cut within the work area.")
+            note = pgettext("atlanteans_building", "The quarry needs rocks to cut within the work area."),
+            -- TRANSLATORS: Note lore for an atlantean production site: Quarry
+            lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid"),
+            -- TRANSLATORS: Note lore_autor for an atlantean production site: Quarry
+            lore_author = pgettext("atlanteans_building", "Priest of Satul asked wy stones are needed for buildings")
          }
       },
       {
@@ -1428,7 +1432,11 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
-            note = pgettext("atlanteans_building", "The woodcutter’s house needs trees to fell within the work area.")
+            note = pgettext("atlanteans_building", "The woodcutter’s house needs trees to fell within the work area."),
+            -- TRANSLATORS: Note lore for an atlantean production site: Woodcutter's House
+            lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An Axe is a tool use by other tribes only."),
+            -- TRANSLATORS: Note lore_autor for an atlantean production site: Woodcutter's House
+            lore_author = pgettext("atlanteans_building", "Altanteans woodcutter asked why saws are use to cut trees")
          }
       },
       {
@@ -1437,7 +1445,14 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
-            note = pgettext("atlanteans_building", "The forester’s house needs free space within the work area to plant the trees.")
+            note = pgettext("atlanteans_building", "The forester’s house needs free space within the work area to plant the trees."),
+            -- TRANSLATORS: Note lore for an atlantean production site: Forester's House
+            lore = pgettext("atlanteans_building", [[‘Only after the last tree has been cut<br>]] ..
+                                          [[Only after the last forrest was devastated<br>]] ..
+                                          [[Only after the last piece of green hase become bare soil<br>]] ..
+                                          [[Then will you find that nature needs to be cared for.’]]),
+            -- TRANSLATORS: Note lore_autor for an atlantean production site: Forester's House
+            lore_author = pgettext("atlanteans_building", "Prophecy of the forrest guild")
          }
       },
       {
@@ -1450,21 +1465,30 @@ descriptions:new_tribe {
                pgettext("atlanteans_building", "The fisher’s house needs water full of fish within the work area."),
                -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 2
                pgettext("atlanteans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
-            }
+            },
+            -- TRANSLATORS: Note lore for an atlantean production site: Fisher's House use some local fise song as you like
+            lore = pgettext("atlanteans_building", [[‘Take your net and com to the sea<br>]] ..
+                                          [[In the earyly moning the moon ya still see<br>]] ..
+                                          [[Collect your catch of fish for us and for you<br>]] ..
+                                          [[And Satul will warm the people of from your do.']]),
+            -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
+            lore_author = pgettext("atlanteans_building", "A Song from the fishers guild")
          }
       },
       {
          name = "atlanteans_fishbreeders_house",
          helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fish Breeder's House
+            purpose = pgettext("building", "Breeds fish."),
+            -- TRANSLATORS: Note helptext for an atlantean production site: Fish Breeder's House
+            note = pgettext("atlanteans_building", "The fish breeder needs open access to the coast."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Fish Breeder's House
             lore = pgettext("atlanteans_building", [[‘Only after the last duck has been shot down<br>]] ..
                                           [[Only after the last deer has been put to death<br>]] ..
                                           [[Only after the last fish has been caught<br>]] ..
                                           [[Then will you find that spiders are not to be eaten.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Fish Breeder's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the fish breeders"),
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fish Breeder's House
-            purpose = pgettext("building", "Breeds fish.")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the fishers guild")
          }
       },
       {
@@ -1474,6 +1498,7 @@ descriptions:new_tribe {
             purpose = pgettext("building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
             note = pgettext("atlanteans_building", "The hunter’s house needs animals to hunt within the work area.")
+	    -- TODO(k.halfmann) MARK == MARK
          }
       },
       {
