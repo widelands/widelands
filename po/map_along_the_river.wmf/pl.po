@@ -24,9 +24,13 @@ msgstr ""
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
 msgstr[0] ""
+"%1% jednostka z %2% została przetransportowana do twojego '%3%' budynku."
 msgstr[1] ""
+"%1% jednostki z %2% zostały przetransportowane do twojego '%3%' budynku."
 msgstr[2] ""
+"%1% jednostek z %2% zostały przetransportowane do twojego '%3%' budynku."
 msgstr[3] ""
+"%1% jednostka z %2% została przetransportowana do twojego '%3%' budynku."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
