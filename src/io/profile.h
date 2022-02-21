@@ -54,7 +54,7 @@ public:
 	friend class Profile;
 
 	struct Value {
-		Value(const std::string& name, const char* const nval);
+		Value(const std::string& nname, const char* const nval);
 		Value(const Value&);
 		Value(Value&& other) noexcept;
 
@@ -161,20 +161,20 @@ public:
 	}
 	void set_string(char const* name, char const* string);
 	void set_string_duplicate(char const* name, char const* string);
-	void set_string(char const* const name, const std::string& value) {
-		set_string(name, value.c_str());
+	void set_string(char const* const name, const std::string& string) {
+		set_string(name, string.c_str());
 	}
-	void set_string_duplicate(char const* const name, const std::string& value) {
-		set_string_duplicate(name, value.c_str());
+	void set_string_duplicate(char const* const name, const std::string& string) {
+		set_string_duplicate(name, string.c_str());
 	}
 
 	void set_translated_string(char const* name, char const* string);
 	void set_translated_string_duplicate(char const* name, char const* string);
-	void set_translated_string(char const* const name, const std::string& value) {
-		set_translated_string(name, value.c_str());
+	void set_translated_string(char const* const name, const std::string& string) {
+		set_translated_string(name, string.c_str());
 	}
-	void set_translated_string_duplicate(char const* const name, const std::string& value) {
-		set_translated_string_duplicate(name, value.c_str());
+	void set_translated_string_duplicate(char const* const name, const std::string& string) {
+		set_translated_string_duplicate(name, string.c_str());
 	}
 
 	/// If a Value with this name already exists, update it with the given
