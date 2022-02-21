@@ -1704,7 +1704,7 @@ descriptions:new_tribe {
             purpose = pgettext("atlanteans_building", "Sows and harvests blackroot."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Blackroot Farm
             lore = pgettext("atlanteans_building", "The secret of Atlantean health and strengts is hidden in these roots. "..
-						   "It`s not spinach, It`s not a carrot, It`s … a secret"),
+                     "It`s not spinach, It`s not a carrot, It`s … a secret"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Blackroot Farm
