@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# Wuzzy <almikes@aol.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
+"Last-Translator: Wuzzy <almikes@aol.com>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,25 +34,25 @@ msgstr "Wir werden Gebäude platzieren wollen, um Waren herstellen zu können."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:32
 msgid "So, let’s find out where we have space for them."
-msgstr "Deshalb lass uns herausfinden wo wir Platz für sie haben."
+msgstr "Deshalb lass uns herausfinden, wo wir Platz für sie haben."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:33
 msgid "Click on the ‘Show / Hide’ menu."
-msgstr "Klicke auf das ‘Anzeigen / Ausblenden’ Menü."
+msgstr "Klicke auf das „Anzeigen / Ausblenden“-Menü."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr "Wähle ‘Bauhilfe anzeigen’."
+msgstr "Wähle „Bauhilfe anzeigen“."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
 msgstr ""
-"Nun können wir sehen wo es möglich ist gebäude und flaggen zu platzieren."
+"Nun können wir sehen, wo es möglich ist, Gebäude und Flaggen zu platzieren."
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr "Klicke auf ‘OK’, um fortzufahren."
+msgstr "Klicke auf „OK“, um fortzufahren."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -84,7 +85,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr "Klicke auf ‘OK’, wenn du fertig bist."
+msgstr "Klicke auf „OK“, wenn du fertig bist."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -101,7 +102,7 @@ msgstr "Aufgaben"
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:158
 msgid "Logs & Roads"
-msgstr "Stämme & Straßen"
+msgstr "Stämme u. Straßen"
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:163
@@ -115,7 +116,7 @@ msgid ""
 "from the small buildings tab."
 msgstr ""
 "Klicke auf einen kleinen, mittleren oder großen Bauplatz, dann wähle das "
-"Gebäude im kleine Gebäude Reiter aus."
+"Gebäude im Reiter für kleine Gebäude aus."
 
 #: ../../data/scripting/training_wheels/logs.lua:117
 #: ../../data/scripting/training_wheels/rocks.lua:117
@@ -124,7 +125,7 @@ msgid ""
 "medium buildings tab."
 msgstr ""
 "Klicke auf einen  mittleren oder großen Bauplatz, dann wähle das Gebäude im "
-"mittlere Gebäude Reiter aus."
+"Reiter für mittlere Gebäude aus."
 
 #: ../../data/scripting/training_wheels/logs.lua:119
 #: ../../data/scripting/training_wheels/rocks.lua:119
@@ -132,15 +133,15 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
-"Klicke auf einen großen Bauplatz, dann wähle das Gebäude im große Gebäude "
-"Reiter aus."
+"Klicke auf einen großen Bauplatz, dann wähle das Gebäude im Reiter für große"
+" Gebäude aus."
 
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
-"Wenn du die ‘STRG’ Taste gedrückt hältst,  wenn du auf die zweite Flagge "
+"Wenn du die „STRG“-Taste gedrückt hältst,  wenn du auf die zweite Flagge "
 "klickst, wird dies weitere Flaggen auf deiner Straße platzieren, wenn "
 "möglich."
 
@@ -175,23 +176,23 @@ msgstr "Klicke auf die Flagge vor dem Gebäude, um den Straßenbau zu beginnen."
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
 msgstr ""
-"Klicke auf den ‘Straßenbau’ Knopf, danach klicke auf die angezeigte Flagge."
+"Klicke auf den „Straßenbau“-Knopf, danach klicke auf die angezeigte Flagge."
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr "Klicke auf die Schaltfläche des Gebäudes…"
+msgstr "Klicke auf die Schaltfläche des Gebäudes …"
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr "…dann klicke auf die Flagge vor dem gewünschten Gebäude."
+msgstr "… dann klicke auf die Flagge vor dem gewünschten Gebäude."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
 "Well done! We will soon start producing logs, which we will need for "
 "building more buildings."
 msgstr ""
-"Gut gemacht! Wir werden in Kürze Stämme produzieren, die wir brauchen um "
+"Gut gemacht! Wir werden in Kürze Stämme produzieren, die wir brauchen, um "
 "mehr Gebäude zu bauen."
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
@@ -204,7 +205,7 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
-"Klicke auf die Schaltfläche wo der Pfeil hinzeigt, oder drücke „%s“ um die "
+"Klicke auf die Schaltfläche wo der Pfeil hinzeigt, oder drücke „%s“, um die "
 "derzeitigen Aufgaben des Spiels anzuzeigen."
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
@@ -220,15 +221,16 @@ msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
-"Du kannst dieses Fenster öffnen und schließen, in dem du auf die ‘Aufgaben’ "
-"Schaltfläche in der Werkzeugleiste am unteren Bildschirmrand klickst."
+"Du kannst dieses Fenster öffnen und schließen, in dem du auf die "
+"„Aufgaben“-Schaltfläche in der Werkzeugleiste am unteren Bildschirmrand "
+"klickst."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
-"Wie jedes andere Fenster kannst du auch das ‘Aufgaben’ Fenster durch einen "
+"Wie jedes andere Fenster kannst du auch das „Aufgaben“-Fenster durch einen "
 "Rechtsklick schließen."
 
 #: ../../data/scripting/training_wheels/rocks.lua:122
@@ -281,7 +283,7 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
-"Klicke auf den ‘Straßenbau’ Knopf. Danach klicke die farbigen Markierungen "
+"Klicke auf den „Straßenbau“-Knopf. Danach klicke die farbigen Markierungen "
 "auf der Karte, um deine Straße zu lenken bis du die Flagge vor dem "
 "gewünschten Gebäude erreichst."
 
@@ -290,7 +292,7 @@ msgid ""
 "…then click the colored markers on the map to guide your road until you "
 "reach the flag in front of the target building."
 msgstr ""
-"…dann klicke die farbigen Markierungen auf der Karte, um deine Straße zu "
+"… dann klicke die farbigen Markierungen auf der Karte, um deine Straße zu "
 "lenken bis du die Flagge vor dem gewünschten Gebäude erreichst."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
@@ -298,8 +300,8 @@ msgid ""
 "Well done! We will soon start producing granite, which we will need for "
 "building more buildings."
 msgstr ""
-"Gut gemacht! Wir werden in Kürze Stein produzieren, den wir brauchen um mehr"
-" Gebäude zu bauen."
+"Gut gemacht! Wir werden in Kürze Stein produzieren, den wir brauchen, um "
+"mehr Gebäude zu bauen."
 
 #: ../../data/scripting/training_wheels/welcome.lua:20
 #: ../../data/scripting/training_wheels/welcome.lua:24
@@ -308,4 +310,4 @@ msgstr "Willkommen bei Widelands!"
 
 #: ../../data/scripting/training_wheels/welcome.lua:25
 msgid "Follow the arrows to learn how to play."
-msgstr "Folge den Pfeilen um zu lernen wie man spielt."
+msgstr "Folge den Pfeilen, um zu lernen wie man spielt."
