@@ -486,20 +486,6 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-inline bool can_show_portspace_hint(const Widelands::Player::Field& player_field) {
-        if (player_field.map_object_descr == nullptr) {
-                return true;
-        }
-
-        if (player_field.is_constructionsite &&
-            player_field.constructionsite->becomes->type() == Widelands::MapObjectType::WAREHOUSE) {
-                return false;
-        } else if (player_field.map_object_descr->type() == Widelands::MapObjectType::WAREHOUSE) {
-                return false;
-        }
-
-        return true;
-}
 
 constexpr float kBuildhelpOpacity = 0.3f;
 
@@ -623,7 +609,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                 // Draw port space hint if a port could be built here, but current situation doesn't allow it.
                                 if (player_field.owner == plr.player_number() &&
                                     (maxcaps & Widelands::BUILDCAPS_PORT) && !(caps & Widelands::BUILDCAPS_PORT) &&
-                                    can_show_portspace_hint(player_field)) {
+                                    player_field.map_object_descr == nullptr) {
 
                                         if (const auto* overlay = get_buildhelp_overlay(maxcaps)) {
                                                 blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling,

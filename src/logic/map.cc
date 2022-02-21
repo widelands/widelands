@@ -1661,7 +1661,7 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 		}
 
 		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) &&
-		    !find_portdock(f, false).empty()) {
+		    !find_portdock(f, !consider_mobs).empty()) {
 			caps |= BUILDCAPS_PORT;
 		}
 
