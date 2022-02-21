@@ -1679,9 +1679,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Horse Farm
             purpose = pgettext("atlanteans_building", "Breeds the strong Atlantean horses for adding them to the transportation system.")
             -- TRANSLATORS: Lore helptext for an atlantean production site: Horse Farm
-            lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need ... I need a horse"),
+            lore = pgettext("atlanteans_building", "I walk all day just back and forth. I need? I need … I need a horse"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Horse Farm
-            lore_author = pgettext("atlanteans_building", "Busy Carrier murmuring to himsself")
+            lore_author = pgettext("atlanteans_building", "Busy carrier murmuring to himself")
 
          }
       },
@@ -1690,6 +1690,10 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Farm
             purpose = pgettext("atlanteans_building", "Sows and harvests corn."),
+            -- TRANSLATORS: Lore helptext for an atlantean production site: Farm
+            lore = pgettext("atlanteans_building", "I use my feet, I use my arm, I'm caring for this farm"),
+            -- TRANSLATORS: Lore author helptext for an atlantean production site: Farm
+            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
             -- TRANSLATORS: Performance helptext for an atlantean production site: Farm
             performance = pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
          }
@@ -1697,8 +1701,13 @@ descriptions:new_tribe {
       {
          name = "atlanteans_blackroot_farm",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Blackroot Farm
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Blackroot Farm https://en.wikipedia.org/wiki/Scorzonera_hispanica
             purpose = pgettext("atlanteans_building", "Sows and harvests blackroot."),
+            -- TRANSLATORS: Lore helptext for an atlantean production site: Blackroot Farm
+            lore = pgettext("atlanteans_building", "The secret of Atlantean health and strengts is hidden in these roots. "..
+						   "It`s not spinach, It`s not a carrot, It`s … a secret"),
+            -- TRANSLATORS: Lore author helptext for an atlantean production site: Blackroot Farm
+            lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner")
             -- TRANSLATORS: Performance helptext for an atlantean production site: Blackroot Farm
             performance = pgettext("atlanteans_building", "The blackroot farmer needs %1% on average to sow and harvest a bundle of blackroot."):bformat(format_minutes_seconds(1, 20))
          }
@@ -1715,6 +1724,11 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
             purpose = pgettext("atlanteans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers.")
+            -- TRANSLATORS: Lore helptext for an atlantean production site: Weaving Mill -- listen to that song please
+            lore = pgettext("atlanteans_building", "Here are the widelands where people may dwell. "..
+                                                   "walking around care that everything's well."),
+            -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
+            lore_author = pgettext("atlanteans_building", "Part of the silkwevers song")
          }
       },
 
