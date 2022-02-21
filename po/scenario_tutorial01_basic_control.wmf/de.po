@@ -2,27 +2,34 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# 11432e78848bb4940138532ffe479e21, 2015
 # Wuzzy <almikes@aol.com>, 2016
 # Elisabeth Jäger, 2016-2018
 # wl-zocker, 2014
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Florian Klappan <transifex@fklappan.de>, 2021
+# GunChleoc, 2016
+# Hybrid Dog, 2016
 # 11432e78848bb4940138532ffe479e21, 2015
+# Leris One, 2021
 # Leris One, 2021
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Hybrid Dog, 2016
 # Raymond Vetter, 2018
+# Raymond Vetter, 2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
 # Elisabeth Jäger, 2015-2016
+# wl-zocker, 2014
 # wl-zocker, 2015-2016
+# Wuzzy <almikes@aol.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
-"PO-Revision-Date: 2022-01-31 08:11+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2022-02-17 14:29+0000\n"
+"Last-Translator: Wuzzy <almikes@aol.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,13 +79,13 @@ msgstr "Handhabung des Aufgabenfensters"
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr "Du kannst das Aufgabenfenster öffnen und schließen, in dem du auf die ‘Aufgaben’ Schaltfläche in der Werkzeugleiste am unteren Bildschirmrand klickst."
+msgstr "Du kannst das Aufgabenfenster öffnen und schließen, in dem du auf die „Aufgaben“-Schaltfläche in der Werkzeugleiste am unteren Bildschirmrand klickst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr "Wie die meisten anderen Fenster kannst du auch das ‘Aufgaben’ Fenster durch einen Rechtsklick schließen."
+msgstr "Wie die meisten anderen Fenster kannst du auch das „Aufgaben“-Fenster durch einen Rechtsklick schließen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -99,7 +106,7 @@ msgstr "Schalte die Bauhilfe ein. Es gibt zwei Möglichkeiten, dies zu tun:"
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr "Drücke %s, um sie umzuschalten, oder wähle  ‘Bauhilfe Anzeigen’ im ‘Anzeigen / Ausblenden’ Menü."
+msgstr "Drücke %s, um sie umzuschalten, oder wähle „Bauhilfe anzeigen” im „Anzeigen / Ausblenden“-Menü."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -219,7 +226,7 @@ msgstr "Nun sieh dir genau an, wie ein Bauarbeiter das Hauptquartier verlässt u
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:145
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr "Errichte eine Flagge, um die Straße zum Holzfäller aufzuteilen."
+msgstr "Errichte eine Flagge, um die Straße zum Holzfäller aufzuteilen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:147
 msgid "Build a Flag on the Road"
@@ -242,7 +249,7 @@ msgstr "Setzte nun eine blaue Flagge in die Mitte der Straße vom Hauptquartier 
 msgid ""
 "To build the flag, click on the yellow flag symbol in between the two blue "
 "flags we just placed and then click on the build flag symbol."
-msgstr "Um die Flagge zu setzen, klicke auf das gelbe Flaggensymbol zwischen den beiden blauen Flaggen und klicke dann auf das ‘Setze Flagge’ Symbol."
+msgstr "Um die Flagge zu setzen, klicke auf das gelbe Flaggensymbol zwischen den beiden blauen Flaggen und klicke dann auf das „Setze eine Flagge“-Symbol."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:156
 msgid "Placing Another Flag"
@@ -299,7 +306,7 @@ msgstr "Diese Schaltfläche schaltet die Anzeige des Arbeitsbereichs des Gebäud
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Close the construction site window when you have seen enough."
-msgstr "Schließe das Baustellenfenster wenn du genug gesehen hast."
+msgstr "Schließe das Baustellenfenster, wenn du genug gesehen hast."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid "Well done! Let’s wait till the hut is finished."
@@ -380,7 +387,7 @@ msgstr "Lerne, die Minikarte zu verwenden"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid "Try moving around by clicking on the minimap"
-msgstr "Versuche die Ansicht zu verändern, in dem du auf die Minikarte klickst."
+msgstr "Versuche die Ansicht zu verändern, in dem du auf die Minikarte klickst"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -392,7 +399,7 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr "Wenn du bereit bist, weiterzumachen, schließe die Minikarte durch die Auswahl von ‘Minikarte Ausblenden’ im ‘Kartenansicht’ Menü, oder durch Drücken der „%s“-Taste. Natürlich funktioniert auch ein Rechtsklick."
+msgstr "Wenn du bereit bist, weiterzumachen, schließe die Minikarte durch die Auswahl von „Minikarte ausblenden“ im „Kartenansicht“-Menü, oder durch Drücken der „%s“-Taste. Natürlich funktioniert auch ein Rechtsklick."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
@@ -406,14 +413,14 @@ msgstr "Die Minikarte benutzen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:274
 msgid "Very good. And now about the minimap. "
-msgstr "Sehr gut. Und nun zur Minikarte."
+msgstr "Sehr gut. Und nun zur Minikarte. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #, lua-format
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr "Du kannst sie öffnen durch die Auswahl von ‘Minikarte Anzeigen’ im ‘Kartenansicht’ Menü unten auf deinem Bildschirm. Oder du nutzt einfach das Tastenkürzel „%s“."
+msgstr "Du kannst sie öffnen durch die Auswahl von „Minikarte anzeigen“ im „Kartenansicht“-Menü unten auf deinem Bildschirm. Oder du nutzt einfach das Tastenkürzel „%s“."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -476,7 +483,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr "Stelle sicher, dass du die Bauhilfe eingeschaltet hast und klicke dann dort auf das Haussymbol, wo du das Gebäude bauen willst und wähle es anschließend im nun erscheinenden Fenster aus, schon wird es platziert. "
+msgstr "Stelle sicher, dass du die Bauhilfe eingeschaltet hast und klicke dann dort auf das Haussymbol, wo du das Gebäude bauen willst und wähle es anschließend im nun erscheinenden Fenster aus, schon wird es platziert."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -513,7 +520,7 @@ msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting the"
 " abort symbol."
-msgstr "Wenn du dich entschließt, jetzt doch keine Straße zu bauen, kannst du den Straßenbau abbrechen, indem du auf die Startflagge und dann das ‘Abbrechen’ Symbol klickst."
+msgstr "Wenn du dich entschließt, jetzt doch keine Straße zu bauen, kannst du den Straßenbau abbrechen, indem du auf die Startflagge und dann das „Abbrechen“-Symbol klickst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:353
@@ -585,7 +592,7 @@ msgstr "Um eine völlig neue Straße zu erbauen, klicke auf die Flagge vor deine
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr "Wenn du STRG oder STRG+UMSCHALT gedrück hältst, während du die Straße fertigstellst, werden automatisch Flaggen platziert."
+msgstr "Wenn du STRG oder STRG+UMSCHALT gedrückt hältst, während du die Straße fertigstellst, werden automatisch Flaggen platziert."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:386
 msgid ""
@@ -637,7 +644,7 @@ msgid ""
 "It seems like you destroyed a construction site for a quarry we wanted to "
 "build. Luckily, we still have enough logs left this time, so you can simply "
 "build another one."
-msgstr "Du hast anscheinend die Baustelle für den Steinbruch, den wir bauen wollten, zerstört. Glücklicherweise haben wir dieses Mal noch genug Stämme übrig, so dass du einfach einen anderen bauen kannst"
+msgstr "Du hast anscheinend die Baustelle für den Steinbruch, den wir bauen wollten, zerstört. Glücklicherweise haben wir dieses Mal noch genug Stämme übrig, so dass du einfach einen anderen bauen kannst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:408
 msgid ""
@@ -692,7 +699,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr "Um die Gebäudenamen anzuzeigen oder auszublenden, kannst du den ‘Gebäudenamen Anzeigen’ / ‘Gebäudenamen Ausblenden’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
+msgstr "Um die Gebäudenamen anzuzeigen oder auszublenden, kannst du den „Gebäudenamen anzeigen“- / „Gebäudenamen Ausblenden“-Eintrag aus dem „Anzeigen / Ausblenden“-Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -709,7 +716,7 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr "Um den Gebäudestatus anzuzeigen oder auszublenden, kannst du den ‘Status Anzeigen’ Eintrag aus dem ‘Anzeigen / Ausblenden’ Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
+msgstr "Um den Gebäudestatus anzuzeigen oder auszublenden, kannst du den „Status anzeigen“-Eintrag aus dem „Anzeigen / Ausblenden“-Menü am unteren Bildschirmrand auswählen, oder die „%s“ Taste auf der Tastatur drücken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -744,7 +751,7 @@ msgstr "Lege nun alle Nachrichten aus dem Posteingang in die Ablage."
 msgid ""
 "Keep clicking the ‘Archive selected message’ button until all messages have "
 "been archived and the list is empty."
-msgstr "Klicke so lange auf die Schaltfläche ‘Ausgewählte Nachricht ablegen’ bis alle Nachrichten in der Ablage sind und die Liste leer ist."
+msgstr "Klicke so lange auf die Schaltfläche „Ausgewählte Nachricht ablegen“, bis alle Nachrichten in der Ablage sind und die Liste leer ist."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:489
 #, lua-format
@@ -811,7 +818,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr "Alle Fenster in Widelands (ausser den Fenstern zur Spielhandlung die ein ‘OK’ zeigen) können durch einen Rechtsklick auf sie geschlossen werden. Einige können außerdem mit den Schaltflächen und Menüs am unteren Bildschirmrand zu- und weggeschaltet werden."
+msgstr "Alle Fenster in Widelands (ausser den Fenstern zur Spielhandlung die ein „OK“ zeigen) können durch einen Rechtsklick auf sie geschlossen werden. Einige können außerdem mit den Schaltflächen und Menüs am unteren Bildschirmrand zu- und weggeschaltet werden."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -979,7 +986,7 @@ msgstr "Klicke auf die Schaltfläche „Hauptmenü“ ganz links in der Leiste u
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:606
 msgid "Then click on the ‘Exit Game’ entry."
-msgstr "Dann klicke auf den ‘Spiel beenden’ Eintrag."
+msgstr "Dann klicke auf den „Spiel beenden“-Eintrag."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:607
 msgid ""
