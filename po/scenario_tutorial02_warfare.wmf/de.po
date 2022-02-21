@@ -3,22 +3,26 @@
 # 
 # Translators:
 # Bamstam, 2015
+# Bamstam, 2015
+# Elisabeth Jäger, 2015
 # Elisabeth Jäger, 2016-2017
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # millimarg, 2015
+# millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
 # Elisabeth Jäger, 2015
+# wl-zocker, 2014-2015
 # wl-zocker, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-06-28 18:09+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2022-02-17 15:00+0000\n"
+"Last-Translator: Wuzzy <almikes@aol.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,7 +308,7 @@ msgstr "Erkunde deine Umgebung"
 msgid ""
 "Large parts of the map haven’t been explored yet. It might be a good idea to"
 " know which direction is best for expanding our empire."
-msgstr "Große Teile der Karte sind bisher nicht erkundet worden. Es könnte eine gute Idee sein, zu wissen in welcher Richtung wir unser Reich am Besten erweitern sollten."
+msgstr "Große Teile der Karte sind bisher nicht erkundet worden. Es könnte eine gute Idee sein, zu wissen, in welcher Richtung wir unser Reich am Besten erweitern sollten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
 msgid ""
@@ -329,7 +333,7 @@ msgstr "Baue eine Kundschafterhütte"
 msgid ""
 "It’s good to know your surroundings. A scout will explore unseen parts of "
 "the map for you."
-msgstr "Es ist gut seine Umgebung zu kennen. Ein Kundschafter wird die verborgenen Teile der Karte für dich erkunden."
+msgstr "Es ist gut, deine Umgebung zu kennen. Ein Kundschafter wird die verborgenen Teile der Karte für dich erkunden."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
 msgid "Build a Scout’s Hut."
@@ -371,7 +375,7 @@ msgstr "Erkunde die Karte"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
 msgid "Wait for the scout to explore unseen areas."
-msgstr "Warte bis der Kundschafter die unentdeckten Gegenden erkundet hat."
+msgstr "Warte, bis der Kundschafter die unentdeckten Gegenden erkundet hat."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
 msgid "Observe your scout."
@@ -525,11 +529,11 @@ msgstr "Reiße ihn ab."
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
-msgstr "Du kannst diese Gelegenheit auch nutzen, um dich mit den anderen Optionen vertraut zu machen: der Helden/Neulinge-Einstellung und der Soldatenkapazität."
+msgstr "Du kannst diese Gelegenheit auch nutzen, um dich mit den anderen Optionen vertraut zu machen: der Helden-/Neulinge-Einstellung und der Soldatenkapazität."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
 msgid "Soldiers, dismissed!"
-msgstr "Soldaten, Wegtreten!"
+msgstr "Soldaten, wegtreten!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
@@ -554,7 +558,7 @@ msgstr "Erweitere deine Festung"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhancing Buildings"
-msgstr "Gebäuden erweitern"
+msgstr "Gebäude erweitern"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid ""
