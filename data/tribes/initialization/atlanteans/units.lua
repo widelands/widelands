@@ -1719,7 +1719,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Spider Farm
             lore = pgettext("atlanteans_building", "No the Spiders are not fed with the corn. We feed it to some fat grashoppers which in turn are digesteed by our spiders."..
                                                    "When put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
-						   "The thread can directly be used by the Weaving Mill. Oh hello here is one of our nice spiders … Hey! why are you running away?"),
+                     "The thread can directly be used by the Weaving Mill. Oh hello here is one of our nice spiders … Hey! why are you running away?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Spider Farm
             lore_author = pgettext("atlanteans_building", "A Spidebreeder showing its Farm")
 
@@ -1807,7 +1807,7 @@ descriptions:new_tribe {
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Iron Mine
             lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungon")
-	 }
+    }
       },
       {
          name = "atlanteans_labyrinth",
