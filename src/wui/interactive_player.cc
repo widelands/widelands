@@ -486,7 +486,6 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-
 constexpr float kBuildhelpOpacity = 0.3f;
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
@@ -660,8 +659,6 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 #endif
 	}
 }
-
-
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
