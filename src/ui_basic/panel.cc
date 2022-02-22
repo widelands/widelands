@@ -370,7 +370,7 @@ int Panel::do_run() {
 	notes_.clear();
 	handled_notes_.clear();
 	subscriber1_ = is_initializer ?
-	                  Notifications::subscribe<NoteThreadSafeFunction>(
+                     Notifications::subscribe<NoteThreadSafeFunction>(
 	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
                      nullptr;
 	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
@@ -1669,7 +1669,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
 		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
-		                                                          UI::FontStyle::kWuiTooltip :
+                                                                UI::FontStyle::kWuiTooltip :
                                                                 UI::FontStyle::kFsTooltip);
 	}
 
