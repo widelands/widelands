@@ -445,7 +445,6 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
-	log_dbg("toggle to %d", !list_->is_visible());
 	set_list_visibility(!list_->is_visible());
 }
 
