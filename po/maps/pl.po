@@ -10,6 +10,7 @@
 # Marcin S <dzidek1003@o2.pl>, 2021
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
+# Pawel <pawcio980@gmail.com>, 2022
 # tombox <wptom@wp.pl>, 2016,2018-2019
 # tombox <wptom@wp.pl>, 2015
 # tombox <wptom@wp.pl>, 2020
@@ -18,8 +19,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2022-02-20 12:13+0000\n"
+"Last-Translator: Pawel <pawcio980@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -282,7 +283,7 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Reebaud i jego plemię żyje szczęśliwie na północy. Międzyczasie kraje które które porzucili są razem ale są pokojowe a stary przyjaciel jest zdesperowany i potrzebuje ich pomocy..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -452,7 +453,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Klejnot Alp, pasmo górskie Dolomitów zostało wpisane na listę światowego dziedzictwa ze względu na swoje nieskazitelne piękno. Ta mapa jest tak wierną, jak rozsądną rekonstrukcją obszaru wyznaczonego przez Cortinę d’Ampezzo na północnym wschodzie i Canazei na południowym zachodzie. Jeśli musisz stoczyć pojedynek na śmierć i życie ze swoimi wrogami, równie dobrze może być to w pięknym miejscu."
 
 #: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
@@ -461,7 +462,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr ""
+msgstr "Góry mają mnóstwo płaskiego terenu. Niestety większość z nich jest pionowa – wykorzystaj mądrze niewielką przestrzeń budowlaną, którą dysponujesz. Forteca u wylotu wąskiej przełęczy może stanowić potężną przeszkodę dla armii wroga – wykorzystaj ukształtowanie terenu na swoją korzyść. Wytnij wszystkie drzewa i rozwijaj się, gdzie tylko możesz – to jedyny sposób, aby znaleźć wszystkie cenne miejsca dla farm."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -679,7 +680,7 @@ msgstr "Cztery plemiona walczą o władzę w tej ponurej krainie. Zasoby rozrzuc
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:8
 msgid "Lesser Ring 1.2"
-msgstr ""
+msgstr "Pomniejszy pierścień 1.2"
 
 #: ../../data/maps/Lesser_Ring.wmf/elemental:10
 msgid ""
@@ -688,7 +689,7 @@ msgid ""
 "from glaciers in the mountains through hills and flatlands into the sea. "
 "Gold is a much rarer resource compared to coal and iron. Different resources"
 " are often found at some distance to each other."
-msgstr ""
+msgstr "8-osobowa mapa o równych szansach z naturalnymi cechami geograficznymi dzielącymi ziemię. Cechy geograficzne mają być nieco realistyczne z rzekami płynącymi z lodowców w górach przez wzgórza i równiny do morza. Złoto jest znacznie rzadszym surowcem w porównaniu z węglem i żelazem. Różne zasoby często znajdują się w pewnej odległości od siebie."
 
 #: ../../data/maps/Long_long_way.wmf/elemental:8
 msgid "Long, long way v2"
@@ -756,7 +757,7 @@ msgid ""
 " of iron to kickstart your economy), so you have to rely on the 5% "
 "production of an empty mine. And you’re still 1 vs 6 (though of course you "
 "can remove some AI players to make it a bit easier). Good luck!"
-msgstr ""
+msgstr "Ta mapa jest przeznaczona dla samodzielnego wyzwania dla bardzo doświadczonych graczy którzy uważają grę 1 vs 6 jako za proste. Niebieski gracz nie ma metalu (poza małymi ilościami żelaza by wystartować twoją ekonomię), więc musisz się opierać na 5% produkcji pustych kopalń. W dodatku nadal jesteś 1 vs 6 (możesz oczywiście usunąć trochę komputerowych graczy by ułatwić sobie rozgrywkę). Powodzenia!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -800,7 +801,7 @@ msgstr "Mistyczny ląd, pełen różnych krajobrazów przecinanych przez liczne 
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:8
 msgid "Along The River"
-msgstr ""
+msgstr "Wzdłuż rzeki"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/elemental:10
 msgid ""
@@ -811,7 +812,7 @@ msgid ""
 "developments of better equipped armies. Tough times are on the brink of "
 "emerging, and you should heed the words of your wise advisors, or fade into "
 "oblivion like the others."
-msgstr ""
+msgstr "Jest to kraina, w której zimą prawie nie widać słońca, a wiosna zasypuje wszelkie wspomnienia przeszłości. Wśród jego mieszkańców narosły dziwne napięcia i wielu samolubnych władców wykorzystało chaos. Przesądni ludzie zdają się nie być przeszkodą w rozwoju lepiej wyposażonych armii. Trudne czasy są na skraju jutra i powinieneś słuchać słów swoich mądrych doradców lub odejść w zapomnienie, jak inni."
 
 #: ../../data/maps/SP_Scenarios/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -827,7 +828,7 @@ msgstr "Stoisz na wyspie z koroną potężnych gór, które mają piękny i pot�
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:9
 msgid "Sandy Passes"
-msgstr ""
+msgstr "Piaszczyste przełęcze"
 
 #: ../../data/maps/Sandy_Passes.wmf/elemental:11
 msgid ""
@@ -1014,7 +1015,7 @@ msgstr "Dużo pięknych, zielonych wysp oczekuje na wystarczająco odważnych, b
 msgid ""
 "Take care not to build your ships in the lagoons. They cannot pass through "
 "the reefs to the main ocean, where your ports are located."
-msgstr ""
+msgstr "Uważaj by nie budować swoich statków na lagunach. Nie mogę one przepłynąć raf by dostać się na główne wody tam gdzie twój port jest zlokalizowany."
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
