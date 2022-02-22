@@ -606,14 +606,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 
                                 float scaling = 1.0f;
+                                bool has_road = f->road_e || f->road_sw || f->road_se;
+                                bool has_object = (player_field.map_object_descr != nullptr);
                                 // Draw port space hint if a port could be built here, but current situation doesn't allow it.
                                 if (player_field.owner == plr.player_number() &&
-                                    (maxcaps & Widelands::BUILDCAPS_PORT) && !(caps & Widelands::BUILDCAPS_PORT) &&
-                                    player_field.map_object_descr == nullptr) {
+                                    (maxcaps & Widelands::BUILDCAPS_PORT) &&
+                                    !(caps & Widelands::BUILDCAPS_PORT) &&
+                                    !f->is_border &&
+                                    !has_road) {
 
                                         if (const auto* overlay = get_buildhelp_overlay(maxcaps)) {
                                                 blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling,
-                                                                   0.4f * opacity);
+                                                                   0.5f * opacity);
                                         }
                                         if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
                                                 scaling = 0.9f;
@@ -623,6 +627,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				if (const auto* overlay = get_buildhelp_overlay(caps)) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling, opacity);
 				}
+
 			}
 
 			// Blit the selection marker.
