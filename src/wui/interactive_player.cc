@@ -615,7 +615,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                     !has_road) {
 
                                         if (const auto* overlay = get_buildhelp_overlay(maxcaps)) {
-                                                blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale * scaling,
+                                                blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
                                                                    0.5f * opacity);
                                         }
                                         if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
