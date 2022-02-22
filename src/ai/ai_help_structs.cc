@@ -31,7 +31,7 @@
 namespace AI {
 
 constexpr int kNormalMutation = 500;  // Almost no mutation
-constexpr int kTrainingMutation = 250;
+constexpr int kTrainingMutation = 200;
 
 constexpr int kMilitaryNumbersPos = 0;
 constexpr int kNeuronsPos = 1;
