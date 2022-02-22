@@ -94,7 +94,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 
 				if (new_slot != UserSettings::none() && settings.savegame && !slotname.empty() &&
 				    slotname != username) {
-					slot_dropdown_.toggle();
+					slot_dropdown_.close();
 					UI::WLMessageBox m(
 					   menu_parent_, UI::WindowStyle::kFsMenu, _("Divergent Player Name"),
 					   format(
@@ -373,7 +373,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-                settings_->can_change_player_init(id_) :
+		          settings_->can_change_player_init(id_) :
                 settings_->can_change_player_tribe(id_);
 	}
 
@@ -386,7 +386,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-                                            UI::ButtonDisableStyle::kPermpressed :
+		                                      UI::ButtonDisableStyle::kPermpressed :
                                             UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {

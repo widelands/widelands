@@ -370,7 +370,7 @@ int Panel::do_run() {
 	notes_.clear();
 	handled_notes_.clear();
 	subscriber1_ = is_initializer ?
-                     Notifications::subscribe<NoteThreadSafeFunction>(
+	                  Notifications::subscribe<NoteThreadSafeFunction>(
 	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
                      nullptr;
 	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
@@ -1033,6 +1033,11 @@ void Panel::set_can_focus(bool const yes) {
 	}
 }
 
+void Panel::disable_sdl_textinput() {
+	if (SDL_IsTextInputActive()) {
+		SDL_StopTextInput();
+	}
+}
 /**
  * Grabs the keyboard focus, if it can,
  * topcaller identifies widget at the beginning of the recursion
@@ -1044,9 +1049,7 @@ void Panel::focus(const bool topcaller) {
 				SDL_StartTextInput();
 			}
 		} else {
-			if (SDL_IsTextInputActive()) {
-				SDL_StopTextInput();
-			}
+			disable_sdl_textinput();
 		}
 		focus_ = nullptr;
 	}
@@ -1108,9 +1111,9 @@ void Panel::play_click() {
 }
 
 /**
- * This needs to be called once after g_soundhandler has been instantiated and before play_click()
- * is called. We do it this way so that we don't have to register the same sound every time we
- * create a new panel.
+ * This needs to be called once after g_soundhandler has been instantiated and before
+ * play_click() is called. We do it this way so that we don't have to register the same sound
+ * every time we create a new panel.
  */
 void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
@@ -1666,7 +1669,7 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
 		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
-                                                                UI::FontStyle::kWuiTooltip :
+		                                                          UI::FontStyle::kWuiTooltip :
                                                                 UI::FontStyle::kFsTooltip);
 	}
 
