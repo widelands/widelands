@@ -2382,12 +2382,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		return false;
 	}
 
-	// Just used for easy checking whether a mine or something else was built.
-	static bool mine = false;
-	mine = false;
-	static uint32_t consumers_nearby_count = 0;
-	consumers_nearby_count = 0;
-
 	const Widelands::Map& map = game().map();
 
 	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
@@ -2437,6 +2431,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// Calculating needness of individual types of buidings (bo.new_building)
 	pre_calculating_needness_of_buildings(gametime);
+
+	static uint32_t consumers_nearby_count = 0;
+	consumers_nearby_count = 0;
 
 	static uint16_t concurent_ms_in_constr_no_enemy = 1;
 	concurent_ms_in_constr_no_enemy = 1;
@@ -3174,7 +3171,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						best_building = &bo;
 						proposed_priority = prio;
 						proposed_coords = mf->coords;
-						mine = true;
 					}
 
 					if (prio > highest_nonmil_prio_) {
@@ -3253,7 +3249,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	}
 
 	// set the type of update that is needed
-	if (mine) {
+	if (best_building->type == BuildingObserver::Type::kMine) {
 		next_mine_construction_due_ = gametime + kBusyMineUpdateInterval;
 	}
 
