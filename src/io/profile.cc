@@ -299,18 +299,16 @@ int32_t Section::get_safe_int(char const* const name) {
 uint32_t Section::get_safe_natural(char const* const name) {
 	if (Value* const v = get_val(name)) {
 		return v->get_natural();
-	} else {
-		throw wexception("[%s]: missing natural key '%s'", get_name(), name);
 	}
+	throw wexception("[%s]: missing natural key '%s'", get_name(), name);
 }
 
 /// Return the positive value of the given key or throw an exception.
 uint32_t Section::get_safe_positive(char const* const name) {
 	if (Value* const v = get_val(name)) {
 		return v->get_positive();
-	} else {
-		throw wexception("[%s]: missing positive key '%s'", get_name(), name);
 	}
+	throw wexception("[%s]: missing positive key '%s'", get_name(), name);
 }
 
 /**
@@ -598,9 +596,8 @@ Section* Profile::get_section(const std::string& name) {
 Section& Profile::get_safe_section(const std::string& name) {
 	if (Section* const s = get_section(name)) {
 		return *s;
-	} else {
-		throw wexception("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());
 	}
+	throw wexception("in \"%s\" section [%s] not found", filename_.c_str(), name.c_str());
 }
 
 /**
