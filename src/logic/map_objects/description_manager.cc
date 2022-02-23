@@ -28,10 +28,18 @@
 #include "scripting/lua_table.h"
 
 namespace Widelands {
+
+static std::vector<DescriptionManager*> description_managers_stack_;
+
 DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
+	description_managers_stack_.push_back(this);
 
 	map_objecttype_subscriber_ = Notifications::subscribe<NoteMapObjectDescription>(
 	   [this](const NoteMapObjectDescription& note) {
+		   if (description_managers_stack_.back() != this) {
+			   verb_log_dbg("DescriptionManager: Ignoring NoteMapObjectDescription");
+			   return;
+		   }
 		   assert(!registered_descriptions_.empty());
 		   switch (note.type) {
 		   case NoteMapObjectDescription::LoadType::kObject:
@@ -48,6 +56,13 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 			   break;
 		   }
 	   });
+}
+
+DescriptionManager::~DescriptionManager() noexcept(false) {
+	if (description_managers_stack_.back() != this) {
+		throw wexception("DescriptionManager stack not in order");
+	}
+	description_managers_stack_.pop_back();
 }
 
 /// Walk given directory and register descriptions

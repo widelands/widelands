@@ -5,20 +5,23 @@
 # Elisabeth Jäger, 2016-2018
 # wl-zocker, 2014
 # GunChleoc, 2018
+# GunChleoc, 2018
+# millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2021
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
+# wl-zocker, 2014
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-11-16 15:47+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2022-02-17 13:57+0000\n"
+"Last-Translator: Wuzzy <almikes@aol.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -438,7 +441,7 @@ msgstr "Bemanne dein Schiff und segle dem Horizont entgegen."
 
 #: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr "Diese Karte kann mit der Siegbedingung ‘Alleinherrscher’ nicht gewonnen werden."
+msgstr "Diese Karte kann mit der Siegbedingung „Alleinherrscher“ nicht gewonnen werden."
 
 #: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"

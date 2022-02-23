@@ -129,7 +129,8 @@ constexpr Duration kOldFlagRemoveTime(5 * 60 * 1000);
 
 constexpr uint32_t kNoField = std::numeric_limits<uint32_t>::max();
 
-constexpr uint16_t kFarButReachable = 1000;
+constexpr uint16_t kWhFarButReachable = 250;
+constexpr uint16_t kWhNotReachable = 500;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, bool const oe);
@@ -413,7 +414,9 @@ struct BuildableField {
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
 	// unconnected buildings nearby
-	bool unconnected_nearby;
+	// bool unconnected_nearby; NOCOM
+	// average_flag_dist_to_wh;
+	uint32_t average_flag_dist_to_wh;
 	int16_t military_unstationed;
 	int16_t own_non_military_nearby;
 	bool defense_msite_allowed;
@@ -475,7 +478,7 @@ struct BuildingObserver {
 
 	int32_t total_count() const;
 	AiModeBuildings aimode_limit_status() const;
-	bool buildable(const Widelands::Player& p);
+	bool buildable(const Widelands::Player& p) const;
 
 	// Convenience functions for is_what
 	bool is(BuildingAttribute) const;
@@ -757,8 +760,8 @@ struct ManagementData {
 		ai_training_mode_ = true;
 	}
 
-	int16_t get_military_number_at(uint8_t);
-	void set_military_number_at(uint8_t, int16_t);
+	int16_t get_military_number_at(uint8_t) const;
+	void set_military_number_at(uint8_t, int16_t) const;
 	MutatingIntensity do_mutate(uint8_t, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
@@ -936,7 +939,7 @@ public:
 	                  uint16_t distance,
 	                  const Time& gametime,
 	                  uint32_t nearest_warehouse);
-	int16_t get_distance(uint32_t flag_coords, const Time& gametime, uint32_t* nw);
+	int16_t get_wh_distance(uint32_t flag_coords, const Time& gametime, uint32_t* nw);
 	void set_road_built(uint32_t coords_hash, const Time& gametime);
 	bool is_road_prohibited(uint32_t coords_hash, const Time& gametime);
 	uint16_t count() const;

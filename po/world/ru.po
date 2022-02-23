@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2021-06-28 03:04+0000\n"
 "Last-Translator: nskdmitry\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -355,7 +355,7 @@ msgstr "Скрутка (молодняк)"
 msgid "Dead Tree"
 msgstr "Сухостой"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr "Срубленное дерево"
 
