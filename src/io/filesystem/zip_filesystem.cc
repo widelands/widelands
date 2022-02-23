@@ -518,7 +518,8 @@ StreamWrite* ZipFilesystem::open_stream_write(const std::string& fname) {
 	return new ZipStreamWrite(zip_file_);
 }
 
-void ZipFilesystem::fs_rename(const std::string&, const std::string&) {
+void ZipFilesystem::fs_rename(const std::string& /* old_name */,
+                              const std::string& /* new_name */) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 

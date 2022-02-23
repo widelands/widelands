@@ -3,7 +3,9 @@
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2016,2018
+# Elisabeth Jäger, 2015
 # Elisabeth Jäger, 2017-2018
+# GunChleoc, 2016
 # GunChleoc, 2016
 # Jonas Jonas <jonas.burger@googlemail.com>, 2019
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
@@ -12,13 +14,14 @@
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
+# Wuzzy <almikes@aol.com>, 2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-03-01 10:35+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2022-02-17 16:17+0000\n"
+"Last-Translator: Wuzzy <almikes@aol.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -297,7 +300,7 @@ msgstr "Schau dir die ersten beiden Reiter des Lagerfensters an. Sie zeigen alle
 msgid ""
 "When you have seen enough, switch back to the third tab (‘Wares in "
 "warehouses’)."
-msgstr "Wenn du genug gesehen hast, wechsle zurück zum dritten Reiter (‘Waren in Lagerhäusern’)."
+msgstr "Wenn du genug gesehen hast, wechsle zurück zum dritten Reiter („Waren in Lagerhäusern“)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:155
 msgid ""
@@ -411,7 +414,7 @@ msgstr "Jetzt, wo du einen Überblick hast, solltest du handeln. Ich denke, wir 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid "Open the in-game help window"
-msgstr "Öffne das Fenster der Hilfe im Spiel."
+msgstr "Öffne das Fenster der Hilfe im Spiel"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
@@ -449,7 +452,7 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr "Wenn du viel gespielt hast, weißt du solche Sachen auswendig. Aber bis dahin oder wenn du dir unsicher über die Bedürfnisse und Fähigkeiten deines Stammes sowie über die Art, wie die eigenen Gebäude und Arbeiter funktionieren, bist, kannst du das einfach in unserer stammspezifischen Hilfe im Spiel und im Stammeslexikon nachsehen. "
+msgstr "Wenn du viel gespielt hast, weißt du solche Sachen auswendig. Aber bis dahin oder wenn du dir unsicher über die Bedürfnisse und Fähigkeiten deines Stammes sowie über die Art, wie die eigenen Gebäude und Arbeiter funktionieren, bist, kannst du das einfach in unserer stammspezifischen Hilfe im Spiel und im Stammeslexikon nachsehen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:268
@@ -649,7 +652,7 @@ msgstr "Die ersten beiden Reiter zeigen dir die Produktion und den Konsum jeder 
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:354
 msgid "When you have seen enough, switch to the third tab (‘Economy health’)."
-msgstr "Wenn du genug gesehen hast, wechsle zum dritten Reiter (‘Wirtschaftszustand’)."
+msgstr "Wenn du genug gesehen hast, wechsle zum dritten Reiter („Wirtschaftszustand“)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:361
 msgid ""
@@ -660,7 +663,7 @@ msgstr "In diesem Fenster kannst du Waren auswählen, um zu sehen, wie ihre Prod
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:362
 msgid ""
 "I’ll continue as soon as you click on the third tab (‘Economy health’)."
-msgstr "Ich werde fortfahren, sobald du auf den dritten Reiter (‘Wirtschaftszustand’) klickst."
+msgstr "Ich werde fortfahren, sobald du auf den dritten Reiter („Wirtschaftszustand“) klickst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:370
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:372
@@ -679,7 +682,7 @@ msgstr "Jetzt probiere es aus. Du kannst die Werte auch mit den beiden vorherige
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:375
 msgid "When you have seen enough, switch to the fourth tab (‘Stock’)."
-msgstr "Wenn du genug gesehen hast, wechsle zum vierten Reiter (‘Lager’)."
+msgstr "Wenn du genug gesehen hast, wechsle zum vierten Reiter („Lager“)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:383
 msgid ""

@@ -215,11 +215,11 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		}
 		if (*format_string == 'd' || *format_string == 'i') {
 			return std::unique_ptr<AbstractNode>(new IntNode(flags, min_width, false, false, false));
-		} else if (*format_string == 'u') {
-			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
-		} else {
-			throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 		}
+		if (*format_string == 'u') {
+			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
+		}
+		throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 	}
 
 	case 'x':

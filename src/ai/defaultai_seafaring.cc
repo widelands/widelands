@@ -443,7 +443,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 // this is called whenever we gain ownership of a Ship
 void DefaultAI::gain_ship(Widelands::Ship& ship, NewShip type) {
 
-	allships.push_back(ShipObserver());
+	allships.emplace_back();
 	allships.back().ship = &ship;
 	allships.back().island_circ_direction = randomExploreDirection();
 
