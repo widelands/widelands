@@ -31,7 +31,7 @@
 namespace AI {
 
 constexpr int kNormalMutation = 500;  // Almost no mutation
-constexpr int kTrainingMutation = 250;
+constexpr int kTrainingMutation = 200;
 
 constexpr int kMilitaryNumbersPos = 0;
 constexpr int kNeuronsPos = 1;
@@ -45,7 +45,7 @@ CheckStepRoadAI::CheckStepRoadAI(Widelands::Player* const pl, uint8_t const mc, 
 bool CheckStepRoadAI::allowed(const Widelands::Map& map,
                               Widelands::FCoords start,
                               Widelands::FCoords end,
-                              int32_t,
+                              int32_t /* direction */,
                               Widelands::CheckStep::StepId const id) const {
 	const uint8_t endcaps = player->get_buildcaps(end);
 
@@ -108,7 +108,7 @@ CheckStepOwnTerritory::CheckStepOwnTerritory(Widelands::Player* const pl,
 bool CheckStepOwnTerritory::allowed(const Widelands::Map& map,
                                     Widelands::FCoords start,
                                     Widelands::FCoords end,
-                                    int32_t,
+                                    int32_t /* direction */,
                                     Widelands::CheckStep::StepId const id) const {
 	const uint8_t endcaps = player->get_buildcaps(end);
 	const uint8_t startcaps = player->get_buildcaps(start);
@@ -147,7 +147,8 @@ bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
 FindNodeEnemy::FindNodeEnemy(Widelands::Player* p, Widelands::Game& g) : player(p), game(g) {
 }
 
-bool FindNodeEnemy::accept(const Widelands::EditorGameBase&, const Widelands::FCoords& fc) const {
+bool FindNodeEnemy::accept(const Widelands::EditorGameBase& /* egbase */,
+                           const Widelands::FCoords& fc) const {
 	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
 }
@@ -159,7 +160,7 @@ FindNodeEnemiesBuilding::FindNodeEnemiesBuilding(Widelands::Player* p, Widelands
    : player(p), game(g) {
 }
 
-bool FindNodeEnemiesBuilding::accept(const Widelands::EditorGameBase&,
+bool FindNodeEnemiesBuilding::accept(const Widelands::EditorGameBase& /* egbase */,
                                      const Widelands::FCoords& fc) const {
 	return (fc.field->get_immovable()) && fc.field->get_owned_by() != 0 &&
 	       player->is_hostile(*game.get_player(fc.field->get_owned_by()));
@@ -172,7 +173,7 @@ FindEnemyNodeWalkable::FindEnemyNodeWalkable(Widelands::Player* p, Widelands::Ga
    : player(p), game(g) {
 }
 
-bool FindEnemyNodeWalkable::accept(const Widelands::EditorGameBase&,
+bool FindEnemyNodeWalkable::accept(const Widelands::EditorGameBase& /* egbase */,
                                    const Widelands::FCoords& fc) const {
 	return ((fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && (fc.field->get_owned_by() > 0) &&
 	        player->is_hostile(*game.get_player(fc.field->get_owned_by())));
@@ -185,7 +186,7 @@ FindNodeAllyOwned::FindNodeAllyOwned(Widelands::Player* p,
    : player(p), game(g), player_number(n) {
 }
 
-bool FindNodeAllyOwned::accept(const Widelands::EditorGameBase&,
+bool FindNodeAllyOwned::accept(const Widelands::EditorGameBase& /* egbase */,
                                const Widelands::FCoords& fc) const {
 	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) && (fc.field->get_owned_by() != 0) &&
 	       (fc.field->get_owned_by() != player_number) &&
@@ -201,7 +202,7 @@ FindNodeUnownedMineable::FindNodeUnownedMineable(Widelands::Player* p,
    : player(p), game(g), ore_type(t) {
 }
 
-bool FindNodeUnownedMineable::accept(const Widelands::EditorGameBase&,
+bool FindNodeUnownedMineable::accept(const Widelands::EditorGameBase& /* egbase */,
                                      const Widelands::FCoords& fc) const {
 	if (ore_type == Widelands::INVALID_INDEX) {
 		return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) &&
@@ -216,7 +217,7 @@ FindNodeUnownedBuildable::FindNodeUnownedBuildable(Widelands::Player* p, Widelan
    : player(p), game(g) {
 }
 
-bool FindNodeUnownedBuildable::accept(const Widelands::EditorGameBase&,
+bool FindNodeUnownedBuildable::accept(const Widelands::EditorGameBase& /* egbase */,
                                       const Widelands::FCoords& fc) const {
 	return ((fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK) ||
 	        (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE)) &&
@@ -228,7 +229,7 @@ FindNodeUnownedWalkable::FindNodeUnownedWalkable(Widelands::Player* p, Widelands
    : player(p), game(g) {
 }
 
-bool FindNodeUnownedWalkable::accept(const Widelands::EditorGameBase&,
+bool FindNodeUnownedWalkable::accept(const Widelands::EditorGameBase& /* egbase */,
                                      const Widelands::FCoords& fc) const {
 	return (fc.field->nodecaps() & Widelands::MOVECAPS_WALK) &&
 	       (fc.field->get_owned_by() == Widelands::neutral());
@@ -240,7 +241,7 @@ FindNodeMineable::FindNodeMineable(Widelands::Game& g, Widelands::DescriptionInd
    : game(g), res(r) {
 }
 
-bool FindNodeMineable::accept(const Widelands::EditorGameBase&,
+bool FindNodeMineable::accept(const Widelands::EditorGameBase& /* egbase */,
                               const Widelands::FCoords& fc) const {
 
 	return (fc.field->nodecaps() & Widelands::BUILDCAPS_MINE) && (fc.field->get_resources() == res);
@@ -267,14 +268,15 @@ bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase,
 	        Widelands::TerrainDescription::Is::kWater);
 }
 
-bool FindNodeOpenWater::accept(const Widelands::EditorGameBase&,
+bool FindNodeOpenWater::accept(const Widelands::EditorGameBase& /* egbase */,
                                const Widelands::FCoords& coord) const {
 	return !(coord.field->nodecaps() & Widelands::MOVECAPS_WALK) &&
 	       (coord.field->nodecaps() & Widelands::MOVECAPS_SWIM);
 }
 
 // FindNodeWithFlagOrRoad
-bool FindNodeWithFlagOrRoad::accept(const Widelands::EditorGameBase&, Widelands::FCoords fc) const {
+bool FindNodeWithFlagOrRoad::accept(const Widelands::EditorGameBase& /* egbase */,
+                                    Widelands::FCoords fc) const {
 	if (upcast(Widelands::PlayerImmovable const, pimm, fc.field->get_immovable())) {
 		return (dynamic_cast<Widelands::Flag const*>(pimm) ||
 		        (dynamic_cast<Widelands::Road const*>(pimm) &&
@@ -304,15 +306,14 @@ uint32_t EventTimeQueue::count(const Time& current_time, const uint32_t addition
 	strip_old(current_time);
 	if (additional_id == std::numeric_limits<uint32_t>::max()) {
 		return queue.size();
-	} else {
-		uint32_t cnt = 0;
-		for (const auto& item : queue) {
-			if (item.second == additional_id) {
-				++cnt;
-			}
-		}
-		return cnt;
 	}
+	uint32_t cnt = 0;
+	for (const auto& item : queue) {
+		if (item.second == additional_id) {
+			++cnt;
+		}
+	}
+	return cnt;
 }
 
 void EventTimeQueue::strip_old(const Time& current_time) {
@@ -382,7 +383,7 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e)
-   : economy(e), dismantle_grace_time(Time()), fields_block_last_time(Time(0)) {
+   : economy(e), fields_block_last_time(Time(0)) {
 }
 
 int32_t BuildingObserver::total_count() const {
@@ -405,13 +406,13 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return AiModeBuildings::kLimitExceeded;
-	} else if (total_count() == cnt_limit_by_aimode) {
-		return AiModeBuildings::kOnLimit;
-	} else {
-		return AiModeBuildings::kAnotherAllowed;
 	}
+	if (total_count() == cnt_limit_by_aimode) {
+		return AiModeBuildings::kOnLimit;
+	}
+	return AiModeBuildings::kAnotherAllowed;
 }
-bool BuildingObserver::buildable(const Widelands::Player& p) {
+bool BuildingObserver::buildable(const Widelands::Player& p) const {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id) &&
 	       p.tribe().has_building(id);
 }
@@ -899,15 +900,15 @@ void ManagementData::copy_persistent_to_local() {
 	       Widelands::Player::AiPersistentState::kNeuronPoolSize);
 	neuron_pool.clear();
 	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
-		neuron_pool.push_back(
-		   Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i], i));
+		neuron_pool.emplace_back(
+		   persistent_data->neuron_weights[i], persistent_data->neuron_functs[i], i);
 	}
 
 	assert(persistent_data->f_neurons.size() ==
 	       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	f_neuron_pool.clear();
 	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
-		f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
+		f_neuron_pool.emplace_back(persistent_data->f_neurons[i], i);
 	}
 
 	assert(persistent_data->magic_numbers.size() ==
@@ -946,13 +947,13 @@ void ManagementData::dump_data(const Widelands::PlayerNumber pn) {
 }
 
 // Querying military number at a possition
-int16_t ManagementData::get_military_number_at(uint8_t pos) {
+int16_t ManagementData::get_military_number_at(uint8_t pos) const {
 	assert(pos < Widelands::Player::AiPersistentState::kMagicNumbersSize);
 	return persistent_data->magic_numbers.at(pos);
 }
 
 // Setting military number (persistent numbers are used also for local use)
-void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
+void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) const {
 	assert(pos < Widelands::Player::AiPersistentState::kMagicNumbersSize);
 	assert(persistent_data->magic_numbers.size() ==
 	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
@@ -1031,7 +1032,7 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
      old_players_power(op),
      old60_players_power(o60p),
      players_casualities(cs),
-     last_time_seen(Time()),
+
      players_land(land),
      old_players_land(oland),
      old60_players_land(o60l) {
@@ -1363,8 +1364,8 @@ bool FlagWarehouseDistances::FlagInfo::update(const Time& gametime,
 		soft_expiry_time = gametime + kFlagDistanceExpirationPeriod / 2;
 		nearest_warehouse = nearest_wh;
 		return true;
-	} else if (new_distance < distance ||
-	           (new_distance == distance && expiry_time < new_expiry_time)) {
+	}
+	if (new_distance < distance || (new_distance == distance && expiry_time < new_expiry_time)) {
 		distance = new_distance;
 		expiry_time = new_expiry_time;
 		nearest_warehouse = nearest_wh;
@@ -1416,9 +1417,8 @@ int16_t FlagWarehouseDistances::get_wh_distance(const uint32_t flag_coords,
 			*nw = 0;
 		}
 		return kWhNotReachable;
-	} else {
-		return flags_map[flag_coords].get(gametime, nw);
 	}
+	return flags_map[flag_coords].get(gametime, nw);
 }
 
 void FlagWarehouseDistances::set_road_built(const uint32_t coords_hash, const Time& gametime) {
@@ -1513,8 +1513,8 @@ void FlagCandidates::add_flag(const uint32_t coords,
                               const bool different_economy,
                               const uint16_t act_dist_to_wh,
                               const uint16_t air_distance) {
-	flags_.push_back(
-	   Candidate(coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh, air_distance));
+	flags_.emplace_back(
+	   coords, different_economy, start_flag_dist_to_wh, act_dist_to_wh, air_distance);
 }
 
 bool FlagCandidates::has_candidate(const uint32_t coords_hash) const {

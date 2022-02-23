@@ -48,12 +48,12 @@ char const* WException::what() const noexcept {
 /*
  * class warning implementation
  */
-WLWarning::WLWarning(char const* const et, char const* const em, ...) : title_(et) {
+WLWarning::WLWarning(char const* const title, char const* const message, ...) : title_(title) {
 	char buffer[512];
 	{
 		va_list va;
-		va_start(va, em);
-		vsnprintf(buffer, sizeof(buffer), em, va);
+		va_start(va, message);
+		vsnprintf(buffer, sizeof(buffer), message, va);
 		va_end(va);
 	}
 	what_ = buffer;
