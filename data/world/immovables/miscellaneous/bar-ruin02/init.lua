@@ -8,6 +8,7 @@ wl.Descriptions():new_immovable_type{
    size = "medium",
    programs = {},
    animation_directory = dirname,
+   icon = dirname .. "menu.png",
    animations = {
       idle = {
          hotspot = { 43, 43 },
