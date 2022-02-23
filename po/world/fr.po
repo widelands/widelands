@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2022-01-05 01:34+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -350,7 +350,7 @@ msgstr "Sapin Cirrus (Jeune pousse)"
 msgid "Dead Tree"
 msgstr "Arbre mort"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr "Arbre au sol"
 

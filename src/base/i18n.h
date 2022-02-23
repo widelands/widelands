@@ -63,7 +63,7 @@ char const* ngettext_wrapper(const char* singular, const char* plural, int n);
 char const* pgettext_wrapper(const char* msgctxt, const char* msgid);
 char const* npgettext_wrapper(const char* msgctxt, const char* singular, const char* plural, int n);
 
-void grab_textdomain(const std::string&, const char* localedir);
+void grab_textdomain(const std::string&, const char* ldir);
 void release_textdomain();
 
 void init_locale();
@@ -105,7 +105,7 @@ enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
  * Localize a list of 'items'. The last 2 items are concatenated with "and" or
  * "or" etc, depending on 'concatenate_with'.
  */
-std::string localize_list(const std::vector<std::string>& items, ConcatenateWith concatenate_with);
+std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype);
 
 /**
  * Joins 2 sentences together. Use this rather than manually concatenating
