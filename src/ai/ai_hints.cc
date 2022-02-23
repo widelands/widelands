@@ -311,7 +311,8 @@ void WareWorkerHints::set_preciousness(const std::string& ware_worker,
 		   "Preciousness of %d is far too high for ware/worker '%s' and tribe '%s'. "
 		   "We recommend not going over %d.",
 		   p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
-	} else if (p > kMaxRecommendedPreciousness) {
+	}
+	if (p > kMaxRecommendedPreciousness) {
 		log_warn("Preciousness of %d is a bit high for ware/worker '%s' and tribe '%s'. We "
 		         "recommend not going over %d.\n",
 		         p, ware_worker.c_str(), tribename.c_str(), kMaxRecommendedPreciousness);
