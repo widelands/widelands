@@ -1426,9 +1426,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
             note = pgettext("atlanteans_building", "The quarry needs rocks to cut within the work area."),
             -- TRANSLATORS: Note lore for an atlantean production site: Quarry
-            lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid"),
+            lore = pgettext("atlanteans_building", "You must not assume Atlanteans will play everything soft, there are hard times we cannot avoid."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Quarry
-            lore_author = pgettext("atlanteans_building", "Priest of Satul asked wy stones are needed for buildings")
+            lore_author = pgettext("atlanteans_building", "Priest of Satul asked why stones are needed for buildings")
          }
       },
       {
@@ -1439,9 +1439,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
             note = pgettext("atlanteans_building", "The woodcutter’s house needs trees to fell within the work area."),
             -- TRANSLATORS: Note lore for an atlantean production site: Woodcutter's House
-            lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An Axe is a tool use by other tribes only."),
+            lore = pgettext("atlanteans_building", "We want to fell trees in a clean and dignified way, therefore we use saws. An ax is a tool used by other tribes only."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Woodcutter's House
-            lore_author = pgettext("atlanteans_building", "Altanteans woodcutter asked why saws are use to cut trees")
+            lore_author = pgettext("atlanteans_building", "Altantean woodcutter asked why saws are used to cut trees")
          }
       },
       {
@@ -1457,7 +1457,7 @@ descriptions:new_tribe {
                                           [[Only after the last piece of green hase become bare soil<br>]] ..
                                           [[Then will you find that nature needs to be cared for.’]]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Forester's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the forrest guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the forest guild")
          }
       },
       {
@@ -1559,22 +1559,22 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
             purpose = pgettext("building", "Saws logs to produce planks."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Sawmill
-            note = pgettext("atlanteans_building", "Will need at least four Woodcutters for a constant supply of planks."),
+            note = pgettext("atlanteans_building", "Will need at least four woodcutters for a constant supply of planks."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Sawmill
-            lore = pgettext("atlanteans_building", "This Vertical Axis design makes operation simple, yet powerfull. Patent pending."),
+            lore = pgettext("atlanteans_building", "This vertical axis design makes operation simple, yet powerful. Patent pending."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Sawmill
-            lore_author = pgettext("atlanteans_building", "The Tom Sawyer answering some imperial dude")
+            lore_author = pgettext("atlanteans_building", "The Tom Sawyer answering an imperial visitor")
          }
       },
       {
          name = "atlanteans_smokery",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Smokery
-            purpose = pgettext("atlanteans_building", "Smokes meat and fish to feed the scouts, miners and to train soldiers in the dungeon and labyrinth."),
+            purpose = pgettext("atlanteans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers in the dungeon and labyrinth."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
-            lore = pgettext("atlanteans_building", "We are using pure logs no other ingredients! Which drunken foreigner hatht told you that myth?"),
+            lore = pgettext("atlanteans_building", "We are using pure logs no other ingredients! Which drunken foreigner hath told you that myth?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Smokery
-            lore_author = pgettext("atlanteans_building", "Smoker answering some passerby")
+            lore_author = pgettext("atlanteans_building", "A Smoker answering some passer-by")
 
          }
       },
@@ -1586,25 +1586,24 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Mill
             note = pgettext("atlanteans_building", "When no cornmeal is required, the mill will try to produce blackroot flour even when there is no demand for it."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Mill
-            lore = pgettext("atlanteans_building", "We invented this Vertical Axis design first, the sawmill just copied our ideas but never aknowledged our claim."),
+            lore = pgettext("atlanteans_building", "We invented this vertical axis design first, the sawmill just copied our ideas but never acknowledged our claim."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Mill
-            lore_author = pgettext("atlanteans_building", "Miller arguing with a Sawyer")
+            lore_author = pgettext("atlanteans_building", "A miller arguing with a sawyer")
          }
       },
       {
          name = "atlanteans_bakery",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
-            purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts, miners and to train soldiers."),
+            purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts and miners and to train soldiers."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Bakery
-            note = pgettext("atlanteans_building", "Will need Cornnmeal and Blackroot flour"),
+            note = pgettext("atlanteans_building", "Will need cornnmeal and blackroot flour"),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
-            lore = pgettext("atlanteans_building", "You cannt compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
-                                                   "It is more nutritious then that paper like bread you find elsewhere. And it its needed for the personal rite "..
-                                                   "of preparing ones meal. May Satul bless you."),
+            lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
+                                                   "It is more nutritious then that paper like bread you find elsewhere. And it is needed for the personal rite "..
+                                                   "of preparing one’s meal. May Satul bless you."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Bakery
-            lore_author = pgettext("atlanteans_building", "Head of the Bakers guild")
-
+            lore_author = pgettext("atlanteans_building", "Head of the bakers´ guild")
          }
       },
       {
@@ -1615,9 +1614,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Charcoal Kiln
             note = pgettext("atlanteans_building", "Build only if you absolutly must produce some coal, or you have tons of logs"),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Charcoal Kiln
-            lore = pgettext("atlanteans_building", "We must admit that this business ist not really ithe Atlantean but in times of need we do whats necessary"),
+            lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way but in times of need we do whatever is necessary."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Charcoal Kiln
-            lore_author = pgettext("atlanteans_building", "a black voice from inside the Charcoal Kiln")
+            lore_author = pgettext("atlanteans_building", "A black voice from inside the charcoal kiln")
 
          }
       },
@@ -1629,7 +1628,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Smelting Works
             lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Smelting Works
-            lore_author = pgettext("atlanteans_building", "A member of the craftsmans guild")
+            lore_author = pgettext("atlanteans_building", "A member of the craftsman´s guild")
          }
       },
       {
@@ -1638,7 +1637,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
             purpose = pgettext("building", "Forges all the tools that your workers need."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Toolsmithy
-            lore = pgettext("atlanteans_building", "People's power working for the benefit of all"),
+            lore = pgettext("atlanteans_building", "People´s power working for the benefit of all"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Toolsmithy
             lore_author = pgettext("atlanteans_building", "Faded sign found on top of this building")
          }
@@ -1649,7 +1648,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Weapon Smithy
             purpose = pgettext("atlanteans_building", "Forges tridents to equip the soldiers and to train their attack in the dungeon."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Weapon Smithy
-            lore = pgettext("atlanteans_building", "You hear that sound of metal stridend? The weapon smith just forged a trident!"),
+            lore = pgettext("atlanteans_building", "You hear that sound of metal strident? The weapon smith just forged a trident!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weapon Smithy
             lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme")
 
@@ -1672,9 +1671,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Barracks
             purpose = pgettext("atlanteans_building", "Equips recruits and trains them as soldiers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Barracks
-            lore = pgettext("atlanteans_building", "See these fine silk tabards and those sharp tridents? This is you way to defend your tribe!"),
+            lore = pgettext("atlanteans_building", "See these fine silk tabards and those sharp tridents? This is your way to defend your tribe!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Barracks
-            lore_author = pgettext("atlanteans_building", "Recruiting Poster")
+            lore_author = pgettext("atlanteans_building", "Recruiting poster")
          }
       },
 
