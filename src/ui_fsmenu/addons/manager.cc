@@ -722,9 +722,6 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
 
-	if (get_config_bool("registered", false)) {
-		set_login(get_config_string("nickname", ""), get_config_string("password_sha1", ""), false);
-	}
 	login_button_.sigclicked.connect([this]() { login_button_clicked(); });
 	update_login_button(&login_button_);
 
