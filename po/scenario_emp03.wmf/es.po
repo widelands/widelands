@@ -7,6 +7,7 @@
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Walter Benkel <tromaster@gmail.com>, 2021
 # Madkat Here, 2021
+# Juano Lemos, 2022
 # 
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Madkat Here, 2021\n"
+"Last-Translator: Juano Lemos, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -679,6 +680,10 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"Entonces, pensemos en esto. Para tejer tela necesitamos un poco de lana de "
+"una granja de ovejas. La granja de ovejas en sí necesita trigo y agua para "
+"funcionar. Entonces, busquemos un espacio para un gran edificio y "
+"construyamos una granja primero."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
