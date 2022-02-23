@@ -43,7 +43,10 @@
 namespace {
 
 // Forward declaration to work around cyclic dependency.
-void sdl_logging_func(void* userdata, int, SDL_LogPriority, const char* message);
+void sdl_logging_func(void* userdata,
+                      int /*unused*/,
+                      SDL_LogPriority /*unused*/,
+                      const char* message);
 
 #ifdef _WIN32
 std::string get_output_directory() {

@@ -64,7 +64,7 @@ std::string locale;
 std::string localedir;
 std::string homedir;
 
-void log_i18n_off(const char*, const char*) {
+void log_i18n_off(const char* /*unused*/, const char* /*unused*/) {
 }
 void log_i18n_on(const char* type, const char* msg) {
 	log_dbg("%s: %s", type, msg);
@@ -128,10 +128,10 @@ GenericTextdomain::GenericTextdomain() : lock_(MutexLock::ID::kI18N) {
 GenericTextdomain::~GenericTextdomain() {
 	release_textdomain();
 }
-Textdomain::Textdomain(const std::string& name) : GenericTextdomain() {
+Textdomain::Textdomain(const std::string& name) {
 	grab_textdomain(name, get_localedir().c_str());
 }
-AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) : GenericTextdomain() {
+AddOnTextdomain::AddOnTextdomain(std::string addon, const int i18n_version) {
 	addon += '.';
 	addon += std::to_string(i18n_version);
 	grab_textdomain(addon, get_addon_locale_dir().c_str());
@@ -152,7 +152,7 @@ void grab_textdomain(const std::string& domain, const char* ldir) {
 	bind_textdomain_codeset(dom, "UTF-8");
 	log_i18n_if_desired_("textdomain", (domain + " @ " + ldir).c_str());
 	textdomain(dom);
-	textdomains.push_back(std::make_pair(dom, ldir));
+	textdomains.emplace_back(dom, ldir);
 }
 
 /**
@@ -341,9 +341,7 @@ void set_locale(const std::string& name) {
 				log_info("using locale %s\n", try_locale.c_str());
 				leave_while = true;
 				break;
-			} else {
-				// log("locale is not working: %s\n", try_locale.c_str());
-			}
+			}  // log("locale is not working: %s\n", try_locale.c_str());
 		}
 		if (leave_while) {
 			break;
