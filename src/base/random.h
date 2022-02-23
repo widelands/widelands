@@ -38,7 +38,7 @@ struct RNG {
 	uint32_t rand();
 
 	void read_state(StreamRead&);
-	void write_state(StreamWrite&);
+	void write_state(StreamWrite&) const;
 
 	static uint32_t static_rand();
 	static inline uint32_t static_rand(const uint32_t exclusive_upper_bound) {

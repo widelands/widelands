@@ -318,7 +318,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				std::fill(std::begin(inputs), std::end(inputs), 0);
 				inputs[0] =
 				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
-				   std::abs(management_data.get_military_number_at(114)) / 10;
+				   std::abs(management_data.get_military_number_at(111)) / 10;
 				inputs[1] =
 				   (observer.second.attack_soldiers_strength - observer.second.defenders_strength) *
 				   std::abs(management_data.get_military_number_at(115)) / 10;
@@ -532,7 +532,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 					}
 				}
 				observer.second.score += (management_data.get_military_number_at(138) +
-				                          management_data.get_military_number_at(159)) /
+				                          management_data.get_military_number_at(173)) /
 				                         8;
 			}
 
@@ -1138,7 +1138,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	// help variable to determine wood availability in the economy
 	const int32_t stocked_wood_level = calculate_stocklevel(tribe_->safe_ware_index("log")) -
 	                                   productionsites.size() * 2 - numof_psites_in_constr +
-	                                   management_data.get_military_number_at(87) / 5;
+	                                   management_data.get_military_number_at(90) / 5;
 
 	static int32_t inputs[4 * kFNeuronBitSize] = {0};
 	// Resetting values as the variable is static
@@ -1429,9 +1429,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, cons
 	if (final_score > 0) {
 		bo.primary_priority = final_score * std::abs(management_data.get_military_number_at(79) / 2);
 		return BuildingNecessity::kAllowed;
-	} else {
-		return BuildingNecessity::kForbidden;
 	}
+	return BuildingNecessity::kForbidden;
 }
 
 // This is called when soldier left the trainingsite
