@@ -127,9 +127,8 @@ char* FileRead::read_line() {
 			++filepos_;
 			if (data_[filepos_] == '\n') {
 				break;
-			} else {
-				throw typename StreamRead::DataError("CR not immediately followed by LF");
 			}
+			throw typename StreamRead::DataError("CR not immediately followed by LF");
 		}
 	}
 	data_[filepos_] = '\0';
