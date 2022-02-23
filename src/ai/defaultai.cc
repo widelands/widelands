@@ -7097,8 +7097,6 @@ void DefaultAI::calculate_target_m_score(const Time& gametime) {
 
 	const Widelands::PlayerNumber pn = player_number();
 
-	
-
 	// helper variable - we need some proportion of free spots vs productionsites
 	// the proportion depends on size of economy
 	// this proportion defines how dense the buildings will be
