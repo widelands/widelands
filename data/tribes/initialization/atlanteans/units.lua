@@ -1836,7 +1836,7 @@ descriptions:new_tribe {
             },
             -- TRANSLATORS: Lore helptext for an atlantean production site: Labyrinth
             lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight."..
-						   "Check the way we train, in this labyrinth they may be right"),
+		     "Check the way we train, in this labyrinth they may be right"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Labyrinth
             lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
          }
@@ -1850,7 +1850,7 @@ descriptions:new_tribe {
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow "..
-						   "button to decrease the capacity. You can also click on a soldier to send him away."),
+                     "button to decrease the capacity. You can also click on a soldier to send him away."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Guardhouse
             lore = pgettext("atlanteans_building", "Hey soldier, even if this is the smallest of our military buildings you still must not sleep all day!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Guardhouse
@@ -1905,10 +1905,10 @@ descriptions:new_tribe {
             purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: High Tower
             note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow "..
-						   "button to decrease the capacity. You can also click on a soldier to send him away."),
+                     "button to decrease the capacity. You can also click on a soldier to send him away."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: High Tower
             lore = pgettext("atlanteans_building", "Beware our mighty high towers! From the topmost spot we can see wide into the "..
-						   "lands and spot the enenmy far away."),
+                     "lands and spot the enenmy far away."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: High Tower
             lore_author = pgettext("atlanteans_building", "Soldier showing of a High Tower")
 
