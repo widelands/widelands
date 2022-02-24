@@ -430,17 +430,17 @@ bool GameClient::can_launch() {
 	return false;
 }
 
-void GameClient::set_player_state(uint8_t /*number*/, PlayerSettings::State /*unused*/) {
+void GameClient::set_player_state(uint8_t /*number*/, PlayerSettings::State /* state */) {
 	// client is not allowed to do this
 }
 
 void GameClient::set_player_ai(uint8_t /*number*/,
-                               const std::string& /*unused*/,
+                               const std::string& /* ai */,
                                bool const /* random_ai */) {
 	// client is not allowed to do this
 }
 
-void GameClient::next_player_state(uint8_t /*unused*/) {
+void GameClient::next_player_state(uint8_t /* state */) {
 	// client is not allowed to do this
 }
 
@@ -532,12 +532,12 @@ void GameClient::set_player_init(uint8_t number, uint8_t initialization_index) {
 	d->net->send(s);
 }
 
-void GameClient::set_player_name(uint8_t /*number*/, const std::string& /*unused*/) {
+void GameClient::set_player_name(uint8_t /*number*/, const std::string& /* name */) {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
 }
 
-void GameClient::set_player(uint8_t /*number*/, const PlayerSettings& /*unused*/) {
+void GameClient::set_player(uint8_t /*number*/, const PlayerSettings& /* settings */) {
 	// do nothing here - the request for a positionchange is send in
 	// set_player_number(uint8_t) to the host.
 }
@@ -772,7 +772,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
 /**
  * Give a pong for a ping
  */
-void GameClient::handle_ping(RecvPacket& /*unused*/) {
+void GameClient::handle_ping(RecvPacket& /* packet */) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PONG);
 	d->net->send(s);
@@ -1096,7 +1096,7 @@ void GameClient::handle_system_message(RecvPacket& packet) {
 /**
  *
  */
-void GameClient::handle_desync(RecvPacket& /*unused*/) {
+void GameClient::handle_desync(RecvPacket& /* packet */) {
 	log_err("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 	        "information for debugging.\n");
 	if (d->game) {
