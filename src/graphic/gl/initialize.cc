@@ -35,7 +35,7 @@ SDL_GLContext initialize(
 #ifdef USE_GLBINDING
    const Trace& trace,
 #else
-   const Trace& /*unused*/,
+   const Trace& /* trace */,
 #endif
    SDL_Window* sdl_window,
    GLint* max_texture_size) {

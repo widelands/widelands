@@ -235,7 +235,7 @@ public:
 	virtual bool is_expanding() const {
 		return false;
 	}
-	virtual void set_w(uint16_t /*unused*/) {
+	virtual void set_w(uint16_t /* w */) {
 	}  // Only, when is_expanding
 
 	virtual const std::vector<Reference> get_references() {
