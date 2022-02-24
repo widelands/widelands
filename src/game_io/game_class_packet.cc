@@ -27,7 +27,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 6;
 
-void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /*unused*/) {
+void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
@@ -57,7 +57,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /*unused
 /*
  * Write Function
  */
-void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*unused*/) {
+void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
