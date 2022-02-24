@@ -164,8 +164,11 @@ void Road::request_carrier(CarrierSlot& slot) {
 /**
  * The carrier has arrived successfully.
  */
-void Road::request_carrier_callback(
-   Game& game, Request& rq, DescriptionIndex /* index */, Worker* const w, PlayerImmovable& target) {
+void Road::request_carrier_callback(Game& game,
+                                    Request& rq,
+                                    DescriptionIndex /* index */,
+                                    Worker* const w,
+                                    PlayerImmovable& target) {
 	assert(w);
 
 	Road& road = dynamic_cast<Road&>(target);

@@ -994,8 +994,11 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
  * This function is called when one of the flag job workers arrives on
  * the flag. Give him his job.
  */
-void Flag::flag_job_request_callback(
-   Game& game, Request& rq, DescriptionIndex /* index */, Worker* const w, PlayerImmovable& target) {
+void Flag::flag_job_request_callback(Game& game,
+                                     Request& rq,
+                                     DescriptionIndex /* index */,
+                                     Worker* const w,
+                                     PlayerImmovable& target) {
 	Flag& flag = dynamic_cast<Flag&>(target);
 
 	assert(w);
