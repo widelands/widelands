@@ -2188,11 +2188,11 @@ const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[
 };
 
 // Only base classes can be persisted.
-void LuaMapObjectDescription::__persist(lua_State* /*unused*/) {
+void LuaMapObjectDescription::__persist(lua_State* /* L */) {
 	NEVER_HERE();
 }
 
-void LuaMapObjectDescription::__unpersist(lua_State* /*unused*/) {
+void LuaMapObjectDescription::__unpersist(lua_State* /* L */) {
 	NEVER_HERE();
 }
 
