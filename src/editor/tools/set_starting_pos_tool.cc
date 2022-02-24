@@ -58,8 +58,8 @@ EditorSetStartingPosTool::EditorSetStartingPosTool() : EditorTool(*this, *this, 
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                    EditorInteractive& /*unused*/,
-                                                    EditorActionArgs* /*unused*/,
+                                                    EditorInteractive& /* eia */,
+                                                    EditorActionArgs* /* args */,
                                                     Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
