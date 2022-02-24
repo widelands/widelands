@@ -104,7 +104,7 @@ class TestingRoute : public Widelands::IRoute {
 public:
 	using Nodes = std::vector<Widelands::RoutingNode*>;
 
-	void init(int32_t /*unused*/) override {
+	void init(int32_t /* cost */) override {
 		nodes.clear();
 	}
 	void insert_as_first(Widelands::RoutingNode* node) override {
@@ -415,7 +415,7 @@ struct ComplexRouterFixture {
 	 */
 	TestingRoutingNode* new_node_w_neighbour(TestingRoutingNode* const d,
 	                                         const Widelands::Coords& pos = Widelands::Coords(0, 0),
-	                                         int32_t /*unused*/ = 1,
+	                                         int32_t /* unused */ = 1,
 	                                         int32_t const waitcost = 0) {
 		TestingRoutingNode* dnew = new TestingRoutingNode(waitcost, pos);
 

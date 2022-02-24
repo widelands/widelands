@@ -275,7 +275,7 @@ void Flag::detach_road(int32_t const dir) {
 /**
  * \return all positions we occupy on the map. For a Flag, this is only one.
  */
-BaseImmovable::PositionList Flag::get_positions(const EditorGameBase& /*unused*/) const {
+BaseImmovable::PositionList Flag::get_positions(const EditorGameBase& /* egbase */) const {
 	PositionList rv;
 	rv.push_back(position_);
 	return rv;
@@ -430,14 +430,14 @@ bool Flag::has_capacity() const {
  *
  * The capacity queue is a simple FIFO queue.
  */
-void Flag::wait_for_capacity(Game& /*unused*/, Worker& bob) {
+void Flag::wait_for_capacity(Game& /* game */, Worker& bob) {
 	capacity_wait_.push_back(&bob);
 }
 
 /**
  * Remove the worker from the list of workers waiting for free capacity.
  */
-void Flag::skip_wait_for_capacity(Game& /*unused*/, Worker& w) {
+void Flag::skip_wait_for_capacity(Game& /* game */, Worker& w) {
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
 	if (it != capacity_wait_.end()) {
@@ -483,7 +483,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
  */
-bool Flag::has_pending_ware(Game& /*unused*/, Flag& dest) {
+bool Flag::has_pending_ware(Game& /* game */, Flag& dest) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		if (!wares_[i].pending) {
 			continue;
@@ -504,7 +504,7 @@ bool Flag::has_pending_ware(Game& /*unused*/, Flag& dest) {
  * ware. Ware with highest transfer priority is chosen.
  * \return true if an ware is actually waiting for the carrier.
  */
-bool Flag::ack_pickup(Game& /*unused*/, Flag& destflag) {
+bool Flag::ack_pickup(Game& /* game */, Flag& destflag) {
 	int32_t highest_pri = -1;
 	int32_t i_pri = -1;
 
@@ -913,7 +913,7 @@ void Flag::destroy(EditorGameBase& egbase) {
 	PlayerImmovable::destroy(egbase);
 }
 
-void Flag::receive_worker(Game& /*unused*/, Worker& /*worker*/) {
+void Flag::receive_worker(Game& /* game */, Worker& /*worker*/) {
 	// Callback when a requested scout arrives.
 	// He knows what to do next by himself, nothing to do for us currently.
 }
@@ -995,7 +995,7 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
  * the flag. Give him his job.
  */
 void Flag::flag_job_request_callback(
-   Game& game, Request& rq, DescriptionIndex /*unused*/, Worker* const w, PlayerImmovable& target) {
+   Game& game, Request& rq, DescriptionIndex /* index */, Worker* const w, PlayerImmovable& target) {
 	Flag& flag = dynamic_cast<Flag&>(target);
 
 	assert(w);

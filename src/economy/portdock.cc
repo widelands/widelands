@@ -96,7 +96,7 @@ bool PortDock::get_passable() const {
 	return true;
 }
 
-PortDock::PositionList PortDock::get_positions(const EditorGameBase& /*unused*/) const {
+PortDock::PositionList PortDock::get_positions(const EditorGameBase& /* egbase */) const {
 	return dockpoints_;
 }
 

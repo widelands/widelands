@@ -485,7 +485,7 @@ void Request::transfer_finish(Game& game, Transfer& t) {
  *
  * Re-open the request.
  */
-void Request::transfer_fail(Game& /*unused*/, Transfer& t) {
+void Request::transfer_fail(Game& /* game */, Transfer& t) {
 	bool const wasopen = is_open();
 
 	t.worker_ = nullptr;

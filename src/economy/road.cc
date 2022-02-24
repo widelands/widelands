@@ -114,7 +114,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 	RoadBase::cleanup(egbase);
 }
 
-void Road::link_into_flags(EditorGameBase& egbase, bool /*unused*/) {
+void Road::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
@@ -165,7 +165,7 @@ void Road::request_carrier(CarrierSlot& slot) {
  * The carrier has arrived successfully.
  */
 void Road::request_carrier_callback(
-   Game& game, Request& rq, DescriptionIndex /*unused*/, Worker* const w, PlayerImmovable& target) {
+   Game& game, Request& rq, DescriptionIndex /* index */, Worker* const w, PlayerImmovable& target) {
 	assert(w);
 
 	Road& road = dynamic_cast<Road&>(target);

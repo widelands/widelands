@@ -59,9 +59,9 @@ struct IdleWareSupply : public Supply {
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
 	void send_to_storage(Game& /*game*/, Warehouse* wh) override;
 
-	uint32_t nr_supplies(const Game& /*unused*/, const Request& /*req*/) const override;
-	WareInstance& launch_ware(Game& /*unused*/, const Request& /*req*/) override;
-	Worker& launch_worker(Game& /*unused*/, const Request& /*unused*/) override;
+	uint32_t nr_supplies(const Game& /* game */, const Request& /* req */) const override;
+	WareInstance& launch_ware(Game& /* game */, const Request& /* req */) override;
+	Worker& launch_worker(Game& /* game */, const Request& /* req */) override;
 
 private:
 	WareInstance& ware_;
@@ -146,7 +146,7 @@ void IdleWareSupply::get_ware_type(WareWorker& type, DescriptionIndex& ware) con
 	ware = ware_.descr_index();
 }
 
-uint32_t IdleWareSupply::nr_supplies(const Game& /*unused*/, const Request& req) const {
+uint32_t IdleWareSupply::nr_supplies(const Game& /* game */, const Request& req) const {
 	if (req.get_type() == wwWARE && req.get_index() == ware_.descr_index()) {
 		return 1;
 	}
@@ -156,7 +156,7 @@ uint32_t IdleWareSupply::nr_supplies(const Game& /*unused*/, const Request& req)
 /**
  * The ware is already "launched", so we only need to return it.
  */
-WareInstance& IdleWareSupply::launch_ware(Game& /*unused*/, const Request& req) {
+WareInstance& IdleWareSupply::launch_ware(Game& /* game */, const Request& req) {
 	if (req.get_type() != wwWARE) {
 		throw wexception("IdleWareSupply::launch_ware : called for non-ware request");
 	}
@@ -168,7 +168,7 @@ WareInstance& IdleWareSupply::launch_ware(Game& /*unused*/, const Request& req) 
 	return ware_;
 }
 
-Worker& IdleWareSupply::launch_worker(Game& /*unused*/, const Request& /*unused*/) {
+Worker& IdleWareSupply::launch_worker(Game& /* game */, const Request& /* req */) {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 

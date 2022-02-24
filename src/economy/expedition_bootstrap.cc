@@ -58,7 +58,7 @@ void ExpeditionBootstrap::check_is_ready(Game& game) {
 
 // static
 void ExpeditionBootstrap::input_callback(
-   Game& game, InputQueue* queue, DescriptionIndex /*unused*/, Worker* /*unused*/, void* data) {
+   Game& game, InputQueue* queue, DescriptionIndex /* index */, Worker* /* worker */, void* data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->check_is_ready(game);
 	// If we ask for several additional items of the same type, it may happen that a

@@ -308,7 +308,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 	sslog("--- port_removed maintenance complete ---\n\n");
 }
 
-void ShippingSchedule::ship_removed(const Game& /*unused*/, Ship* ship) {
+void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 	auto it = plans_.find(ship);
 	assert(it != plans_.end());
 	plans_.erase(it);
