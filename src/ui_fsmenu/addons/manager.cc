@@ -66,11 +66,11 @@ std::string underline_tag(const std::string& text) {
 }
 
 std::string filesize_string(const uint32_t bytes) {
-	if (bytes > 1000000000) {
-		return format_l(_("%.2f GB"), (bytes / 1000000000.f));
+	if (bytes > 1000 * 1000 * 1000) {
+		return format_l(_("%.2f GB"), (bytes / (1000.f * 1000.f * 1000.f)));
 	}
-	if (bytes > 1000000) {
-		return format_l(_("%.2f MB"), (bytes / 1000000.f));
+	if (bytes > 1000 * 1000) {
+		return format_l(_("%.2f MB"), (bytes / (1000.f * 1000.f)));
 	}
 	if (bytes > 1000) {
 		return format_l(_("%.2f kB"), (bytes / 1000.f));
