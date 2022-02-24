@@ -1480,7 +1480,7 @@ descriptions:new_tribe {
             lore = pgettext("atlanteans_building", [[‘Take your net and come to the sea<br>]] ..
                                           [[In the early morning the moon ya still see<br>]] ..
                                           [[Collect ya catch of fish for us and for you<br>]] ..
-					  -- NOCOM / Better text needed: I don't understand the last line 
+                 -- NOCOM / Better text needed: I don't understand the last line
                                           [[And Satul will warm the people of from your do.']]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
             lore_author = pgettext("atlanteans_building", "A song from the fishers guild")
@@ -1836,7 +1836,7 @@ descriptions:new_tribe {
             },
             -- TRANSLATORS: Lore helptext for an atlantean production site: Labyrinth
             lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight."..
-		     "Check the way we train, in this labyrinth they may be right"),
+           "Check the way we train, in this labyrinth they may be right"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Labyrinth
             lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
          }
