@@ -31,7 +31,7 @@ constexpr int32_t kCurrentPacketVersion = 1;
 void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
                                        EditorGameBase& egbase,
                                        bool skip,
-                                       MapObjectLoader& /*unused*/) {
+                                       MapObjectLoader& /* mol */) {
 	if (skip) {
 		return;
 	}
@@ -85,7 +85,7 @@ void MapAllowedWorkerTypesPacket::read(FileSystem& fs,
 
 void MapAllowedWorkerTypesPacket::write(FileSystem& fs,
                                         EditorGameBase& egbase,
-                                        MapObjectSaver& /*unused*/) {
+                                        MapObjectSaver& /* mos */) {
 	Profile prof;
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 

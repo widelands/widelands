@@ -30,8 +30,8 @@ constexpr int32_t kCurrentPacketVersion = 1;
 
 void MapPortSpacesPacket::read(FileSystem& fs,
                                EditorGameBase& egbase,
-                               bool /*unused*/,
-                               MapObjectLoader& /*unused*/) {
+                               bool /* skip */,
+                               MapObjectLoader& /* mol */) {
 	Profile prof;
 	prof.read("port_spaces", nullptr, fs);
 	Section& s1 = prof.get_safe_section("global");
@@ -62,7 +62,7 @@ void MapPortSpacesPacket::read(FileSystem& fs,
 	}
 }
 
-void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /*unused*/)
+void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */)
 
 {
 	const Map& map = egbase.map();

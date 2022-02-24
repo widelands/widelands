@@ -30,8 +30,8 @@ constexpr uint32_t kCurrentPacketVersion = 2;
 
 void MapPlayerPositionPacket::read(FileSystem& fs,
                                    EditorGameBase& egbase,
-                                   bool /*unused*/,
-                                   MapObjectLoader& /*unused*/) {
+                                   bool /* skip */,
+                                   MapObjectLoader& /* mol */) {
 	Profile prof;
 	prof.read("player_position", nullptr, fs);
 	Section& s = prof.get_safe_section("global");
@@ -65,7 +65,7 @@ void MapPlayerPositionPacket::read(FileSystem& fs,
 
 void MapPlayerPositionPacket::write(FileSystem& fs,
                                     EditorGameBase& egbase,
-                                    MapObjectSaver& /*unused*/) {
+                                    MapObjectSaver& /* mos */) {
 	Profile prof;
 	Section& s = prof.create_section("global");
 

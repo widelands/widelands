@@ -38,7 +38,7 @@ constexpr const char* kFilenameTemplate = "player/%u/messages";
 
 void MapPlayersMessagesPacket::read(FileSystem& fs,
                                     EditorGameBase& egbase,
-                                    bool /*unused*/,
+                                    bool /* skip */,
                                     MapObjectLoader& mol)
 
 {

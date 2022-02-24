@@ -30,8 +30,8 @@ constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapHeightsPacket::read(FileSystem& fs,
                             EditorGameBase& egbase,
-                            bool /*unused*/,
-                            MapObjectLoader& /*unused*/) {
+                            bool /* skip */,
+                            MapObjectLoader& /* mol */) {
 
 	FileRead fr;
 	fr.open(fs, "binary/heights");
@@ -55,7 +55,7 @@ void MapHeightsPacket::read(FileSystem& fs,
 /*
  * Write Function
  */
-void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /*unused*/)
+void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */)
 
 {
 	FileWrite fw;
