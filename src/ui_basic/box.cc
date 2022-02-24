@@ -296,7 +296,7 @@ void Box::update_positions() {
 /**
  * Callback for scrollbar movement.
  */
-void Box::scrollbar_moved(int32_t /*unused*/) {
+void Box::scrollbar_moved(int32_t /* movement */) {
 	update_positions();
 }
 

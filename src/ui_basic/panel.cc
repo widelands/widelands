@@ -485,7 +485,7 @@ void Panel::end() {
  * Called when another panel (passed as argument) ends being
  * modal and returns the modal attribute to this panel
  */
-void Panel::become_modal_again(Panel& /*unused*/) {
+void Panel::become_modal_again(Panel& /* prevmodal */) {
 }
 
 /**
@@ -700,13 +700,13 @@ void Panel::on_visibility_changed() {
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
-void Panel::draw(RenderTarget& /*unused*/) {
+void Panel::draw(RenderTarget& /* rt */) {
 }
 
 /**
  * Redraw the panel border.
  */
-void Panel::draw_border(RenderTarget& /*unused*/) {
+void Panel::draw_border(RenderTarget&  rt ) {
 }
 
 std::vector<Recti>
@@ -843,7 +843,7 @@ void Panel::center_mouse() {
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
  */
-void Panel::handle_mousein(bool /*unused*/) {
+void Panel::handle_mousein(bool /* inside */) {
 }
 
 /**
@@ -853,7 +853,7 @@ void Panel::handle_mousein(bool /*unused*/) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t btn, int32_t /*unused*/, int32_t /*unused*/) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t /* x */, int32_t /* y */) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 		clicked();
@@ -868,7 +868,7 @@ bool Panel::handle_mousepress(const uint8_t btn, int32_t /*unused*/, int32_t /*u
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mouserelease(const uint8_t /*unused*/, int32_t /*unused*/, int32_t /*unused*/) {
+bool Panel::handle_mouserelease(const uint8_t /* btn */, int32_t /* x */, int32_t /* y */) {
 	return false;
 }
 
@@ -879,18 +879,18 @@ bool Panel::handle_mouserelease(const uint8_t /*unused*/, int32_t /*unused*/, in
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousewheel(int32_t /*unused*/, int32_t /*unused*/, uint16_t /*unused*/) {
+bool Panel::handle_mousewheel(int32_t /* x */, int32_t /* y */, uint16_t /* modstate */) {
 	return false;
 }
 
 /**
  * Called when the mouse is moved while inside the panel
  */
-bool Panel::handle_mousemove(const uint8_t /*unused*/,
-                             int32_t /*unused*/,
-                             int32_t /*unused*/,
-                             int32_t /*unused*/,
-                             int32_t /*unused*/) {
+bool Panel::handle_mousemove(const uint8_t /* state */,
+                             int32_t /* x */,
+                             int32_t /* y */,
+                             int32_t /* xdiff */,
+                             int32_t /* ydiff */) {
 	return !tooltip_.empty();
 }
 
@@ -1100,7 +1100,7 @@ void Panel::die() {
  * Called on a child's parent just before child is deleted.
  * Overridden in UI::Box
  */
-void Panel::on_death(Panel* /*unused*/) {
+void Panel::on_death(Panel* /* p */) {
 }
 
 /**

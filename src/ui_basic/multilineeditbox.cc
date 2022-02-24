@@ -753,7 +753,7 @@ void MultilineEditbox::Data::scroll_cursor_into_view() {
 /**
  * Callback function called by the scrollbar.
  */
-void MultilineEditbox::scrollpos_changed(int32_t /*unused*/) {
+void MultilineEditbox::scrollpos_changed(int32_t /* pos */) {
 }
 
 /**
