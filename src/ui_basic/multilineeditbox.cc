@@ -130,7 +130,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
      ww_valid(false),
      ww(get_style().font().size(), get_style().font().color(), init_owner.get_w()),
      owner(init_owner) {
-	scrollbar.moved.connect([&o](int32_t a) { o.scrollpos_changed(a); });
+	scrollbar.moved.connect([&init_owner](int32_t a) { init_owner.scrollpos_changed(a); });
 
 	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);
 	scrollbar.set_singlestepsize(lineheight);
