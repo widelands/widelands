@@ -24,10 +24,10 @@
 namespace Widelands {
 
 // Load all images from 'pics/*' in the map.
-void load_map_images(FileSystem& filesystem);
+void load_map_images(FileSystem& fs);
 
 // Copies all images from 'pics/*' in 'old_fs' into the 'new_fs'.
-void save_map_images(FileSystem* new_fs, FileSystem* old_fs);
+void save_map_images(FileSystem* new_fs, FileSystem* map_fs);
 
 }  // namespace Widelands
 

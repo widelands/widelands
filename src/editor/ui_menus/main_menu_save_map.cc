@@ -88,8 +88,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 
 	fill_table();
 
-	table_.selected.connect([this](unsigned) { clicked_item(); });
-	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
+	table_.selected.connect([this](unsigned /* value */) { clicked_item(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { double_clicked_item(); });
 	table_.cancel.connect([this]() { die(); });
 	table_.set_can_focus(true);
 
@@ -108,7 +108,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
-	   [this](const NoteMapOptions&) { update_map_options(); });
+	   [this](const NoteMapOptions& /* note */) { update_map_options(); });
 
 	layout();
 

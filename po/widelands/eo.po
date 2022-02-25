@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-16 02:44+0000\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
 "PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:409
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:407
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -32,7 +32,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:413
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:411
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s aŭ %2$s"
@@ -44,7 +44,7 @@ msgstr "%1$s aŭ %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:417 ../../src/base/i18n.cc:426
+#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
 #: ../../src/logic/addons.cc:197
 #, c-format
 msgid "%1$s, %2$s"
@@ -53,7 +53,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:421
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:419
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s kaj %2$s"
@@ -172,7 +172,7 @@ msgstr ""
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:436
+#: ../../src/base/i18n.cc:434
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr ""
@@ -713,8 +713,8 @@ msgstr "mino"
 msgid "port"
 msgstr "haveno"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
