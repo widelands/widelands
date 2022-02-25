@@ -171,14 +171,12 @@ void LuaGameInterface::read_global_env(FileRead& fr,
 		if (lua_compare(lua_state_, -1, -3, LUA_OPEQ)) {
 			lua_pop(lua_state_, 3);  // S: table key
 			continue;
-		} else {
-			// Make this a global value
-			lua_pop(lua_state_, 1);         // S: table key value globals_table
-			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key
-			lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key value
-			lua_settable(lua_state_, -3);   // S: table key value globals_table
-			lua_pop(lua_state_, 2);         // S: table key
-		}
+		}                               // Make this a global value
+		lua_pop(lua_state_, 1);         // S: table key value globals_table
+		lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key
+		lua_pushvalue(lua_state_, -3);  // S: table key value globals_table key value
+		lua_settable(lua_state_, -3);   // S: table key value globals_table
+		lua_pop(lua_state_, 2);         // S: table key
 	}
 
 	lua_pop(lua_state_, 1);  // pop the table returned by unpersist_object

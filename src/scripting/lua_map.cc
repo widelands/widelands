@@ -736,11 +736,11 @@ std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) {
 	if (p == "heroes") {
 		return Widelands::SoldierPreference::kHeroes;
-	} else if (p == "rookies") {
-		return Widelands::SoldierPreference::kRookies;
-	} else {
-		throw wexception("Invalid soldier preference '%s'", p.c_str());
 	}
+	if (p == "rookies") {
+		return Widelands::SoldierPreference::kRookies;
+	}
+	throw wexception("Invalid soldier preference '%s'", p.c_str());
 }
 
 // Transforms the given warehouse policy to a string which is used by the lua code
@@ -765,42 +765,51 @@ Widelands::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 	std::string str = luaL_checkstring(L, index);
 	if (str == "normal") {
 		return Widelands::StockPolicy::kNormal;
-	} else if (str == "prefer") {
-		return Widelands::StockPolicy::kPrefer;
-	} else if (str == "dontstock") {
-		return Widelands::StockPolicy::kDontStock;
-	} else if (str == "remove") {
-		return Widelands::StockPolicy::kRemove;
-	} else {
-		report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 	}
+	if (str == "prefer") {
+		return Widelands::StockPolicy::kPrefer;
+	}
+	if (str == "dontstock") {
+		return Widelands::StockPolicy::kDontStock;
+	}
+	if (str == "remove") {
+		return Widelands::StockPolicy::kRemove;
+	}
+	report_error(L, "<%s> is no valid warehouse policy!", str.c_str());
 }
 
 Widelands::WarePriority string_to_priority(const std::string& p) {
 	if (p == "normal") {
 		return Widelands::WarePriority::kNormal;
-	} else if (p == "low") {
-		return Widelands::WarePriority::kLow;
-	} else if (p == "very_low") {
-		return Widelands::WarePriority::kVeryLow;
-	} else if (p == "high") {
-		return Widelands::WarePriority::kHigh;
-	} else if (p == "very_high") {
-		return Widelands::WarePriority::kVeryHigh;
-	} else {
-		throw wexception("Invalid ware priority '%s'", p.c_str());
 	}
+	if (p == "low") {
+		return Widelands::WarePriority::kLow;
+	}
+	if (p == "very_low") {
+		return Widelands::WarePriority::kVeryLow;
+	}
+	if (p == "high") {
+		return Widelands::WarePriority::kHigh;
+	}
+	if (p == "very_high") {
+		return Widelands::WarePriority::kVeryHigh;
+	}
+	throw wexception("Invalid ware priority '%s'", p.c_str());
 }
 std::string priority_to_string(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryLow) {
 		return "very_low";
-	} else if (priority == Widelands::WarePriority::kLow) {
+	}
+	if (priority == Widelands::WarePriority::kLow) {
 		return "low";
-	} else if (priority == Widelands::WarePriority::kHigh) {
+	}
+	if (priority == Widelands::WarePriority::kHigh) {
 		return "high";
-	} else if (priority == Widelands::WarePriority::kVeryHigh) {
+	}
+	if (priority == Widelands::WarePriority::kVeryHigh) {
 		return "very_high";
-	} else if (priority == Widelands::WarePriority::kNormal) {
+	}
+	if (priority == Widelands::WarePriority::kNormal) {
 		return "normal";
 	}
 	NEVER_HERE();
@@ -2179,11 +2188,11 @@ const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[
 };
 
 // Only base classes can be persisted.
-void LuaMapObjectDescription::__persist(lua_State*) {
+void LuaMapObjectDescription::__persist(lua_State* /* L */) {
 	NEVER_HERE();
 }
 
-void LuaMapObjectDescription::__unpersist(lua_State*) {
+void LuaMapObjectDescription::__unpersist(lua_State* /* L */) {
 	NEVER_HERE();
 }
 
@@ -4256,7 +4265,7 @@ void LuaTerrainDescription::__unpersist(lua_State* L) {
       (RO) The internal name of this terrain as :class:`string`.
 */
 
-int LuaTerrainDescription::get_name(lua_State* L) {
+int LuaTerrainDescription::get_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get()->name());
 	return 1;
 }
@@ -4267,7 +4276,7 @@ int LuaTerrainDescription::get_name(lua_State* L) {
       (RO) The localized name of this terrain as :class:`string`.
 */
 
-int LuaTerrainDescription::get_descname(lua_State* L) {
+int LuaTerrainDescription::get_descname(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get()->descname());
 	return 1;
 }
@@ -4279,7 +4288,7 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
       terrain, or :const:`nil` if the terrain has no default resource.
 */
 
-int LuaTerrainDescription::get_default_resource(lua_State* L) {
+int LuaTerrainDescription::get_default_resource(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::DescriptionIndex res_index = get()->get_default_resource();
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	if (res_index != Widelands::kNoResource && res_index < descriptions.nr_resources()) {
@@ -4297,7 +4306,8 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {
       (RO) The amount of the default resource provided by this terrain as :class:`integer`.
 */
 
-int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
+int LuaTerrainDescription::get_default_resource_amount(
+   lua_State* L) {  // NOLINT - can not be made const
 	lua_pushinteger(L, get()->get_default_resource_amount());
 	return 1;
 }
@@ -4310,7 +4320,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
       See also: :attr:`ImmovableDescription.terrain_affinity`
 */
 
-int LuaTerrainDescription::get_fertility(lua_State* L) {
+int LuaTerrainDescription::get_fertility(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushuint32(L, get()->fertility());
 	return 1;
 }
@@ -4323,7 +4333,7 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
       See also: :attr:`ImmovableDescription.terrain_affinity`
 */
 
-int LuaTerrainDescription::get_humidity(lua_State* L) {
+int LuaTerrainDescription::get_humidity(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushuint32(L, get()->humidity());
 	return 1;
 }
@@ -4333,7 +4343,8 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {
 
       (RO) The file path to a representative image as :class:`string`.
 */
-int LuaTerrainDescription::get_representative_image(lua_State* L) {
+int LuaTerrainDescription::get_representative_image(
+   lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get()->texture_paths().front());
 	return 1;
 }
@@ -4346,7 +4357,7 @@ int LuaTerrainDescription::get_representative_image(lua_State* L) {
       See also: :attr:`~ImmovableDescription.terrain_affinity`
 */
 
-int LuaTerrainDescription::get_temperature(lua_State* L) {
+int LuaTerrainDescription::get_temperature(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushuint32(L, get()->temperature());
 	return 1;
 }
@@ -4358,7 +4369,7 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
       terrain.
 */
 
-int LuaTerrainDescription::get_valid_resources(lua_State* L) {
+int LuaTerrainDescription::get_valid_resources(lua_State* L) {  // NOLINT - can not be made const
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
@@ -4981,9 +4992,9 @@ int LuaFlag::get_building(lua_State* L) {
 	Widelands::PlayerImmovable* building = f->get_building();
 	if (!building) {
 		return 0;
-	} else {
-		upcasted_map_object_to_lua(L, building);
 	}
+	upcasted_map_object_to_lua(L, building);
+
 	return 1;
 }
 /*
@@ -6508,13 +6519,12 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 		if (return_number) {  // this is the only thing the customer wants to know
 			lua_pushuint32(L, cnt);
 			break;
-		} else {
-			lua_pushstring(L, input.second == Widelands::wwWARE ?
-                              tribe.get_ware_descr(input.first)->name() :
-                              tribe.get_worker_descr(input.first)->name());
-			lua_pushuint32(L, cnt);
-			lua_settable(L, -3);
 		}
+		lua_pushstring(L, input.second == Widelands::wwWARE ?
+                           tribe.get_ware_descr(input.first)->name() :
+                           tribe.get_worker_descr(input.first)->name());
+		lua_pushuint32(L, cnt);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -7700,11 +7710,11 @@ int LuaField::get___hash(lua_State* L) {
 
       (RO) The x/y coordinate of this field
 */
-int LuaField::get_x(lua_State* L) {
+int LuaField::get_x(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushuint32(L, coords_.x);
 	return 1;
 }
-int LuaField::get_y(lua_State* L) {
+int LuaField::get_y(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushuint32(L, coords_.y);
 	return 1;
 }
@@ -7877,9 +7887,9 @@ int LuaField::get_immovable(lua_State* L) {
 
 	if (!bi) {
 		return 0;
-	} else {
-		upcasted_map_object_to_lua(L, bi);
 	}
+	upcasted_map_object_to_lua(L, bi);
+
 	return 1;
 }
 
@@ -8090,9 +8100,8 @@ int LuaField::get_claimers(lua_State* L) {
 
 	std::vector<PlrInfluence> claimers;
 
-	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
-	   claimers.push_back(PlrInfluence(
-	      plr->player_number(), plr->military_influence(map.get_index(coords_, map.get_width()))));
+	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr) claimers.emplace_back(
+	   plr->player_number(), plr->military_influence(map.get_index(coords_, map.get_width())));
 
 	std::stable_sort(claimers.begin(), claimers.end(), sort_claimers);
 
@@ -8122,7 +8131,7 @@ int LuaField::__eq(lua_State* L) {
 	return 1;
 }
 
-int LuaField::__tostring(lua_State* L) {
+int LuaField::__tostring(lua_State* L) {  // NOLINT - can not be made const
 	const std::string pushme = format("Field(%i,%i)", coords_.x, coords_.y);
 	lua_pushstring(L, pushme);
 	return 1;
@@ -8328,7 +8337,7 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
 
       (RO) The name of the tribe suggested for this player in this map.
 */
-int LuaPlayerSlot::get_tribe_name(lua_State* L) {
+int LuaPlayerSlot::get_tribe_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
@@ -8338,7 +8347,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State* L) {
 
       (RO) The name for this player as suggested in this map.
 */
-int LuaPlayerSlot::get_name(lua_State* L) {
+int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
 }
@@ -8351,7 +8360,7 @@ int LuaPlayerSlot::get_name(lua_State* L) {
       field as scenarios and starting conditions are free to place the HQ
       wherever it want. This field is only centered when the game starts.
 */
-int LuaPlayerSlot::get_starting_field(lua_State* L) {
+int LuaPlayerSlot::get_starting_field(lua_State* L) {  // NOLINT - can not be made const
 	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(player_number_)));
 	return 1;
 }
