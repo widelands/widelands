@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-01-04 02:59+0000\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-13 02:43+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -1288,7 +1288,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Manioková kuchyně"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1717,6 +1716,8 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1726,6 +1727,7 @@ msgstr "vyrábění lopaty"
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1770,9 +1772,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1928,7 +1930,6 @@ msgstr "Stan ochránkyně fauny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5261,7 +5262,6 @@ msgstr "Balzovník jihoamerický"
 msgid "Balsa Tree (Pole)"
 msgstr "Balzovník jihoamerický (stromek)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5914,41 +5914,45 @@ msgstr[1] "%1%(+%2%) vojáci"
 msgstr[2] "%1%(+%2%) vojáků"
 msgstr[3] "%1%(+%2%) vojáků"
 
-#: ../../data/tribes/scripting/help/init.lua:54
+#: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
 msgstr "Encyklopedie kmenů"
 
-#: ../../data/tribes/scripting/help/init.lua:59
+#: ../../data/tribes/scripting/help/init.lua:89
 msgid "General"
 msgstr "Obecné"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:94
 msgid "Introduction"
 msgstr "Úvod"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:100
 msgid "Controls"
 msgstr "Ovládání"
 
-#: ../../data/tribes/scripting/help/init.lua:76
+#: ../../data/tribes/scripting/help/init.lua:106
 msgid "Tips"
 msgstr "Tipy"
 
-#: ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/scripting/help/init.lua:115
 msgid "Wares"
 msgstr "Suroviny"
 
-#: ../../data/tribes/scripting/help/init.lua:92
+#: ../../data/tribes/scripting/help/init.lua:122
 msgid "Workers"
 msgstr "Dělníci"
 
-#: ../../data/tribes/scripting/help/init.lua:99
+#: ../../data/tribes/scripting/help/init.lua:129
 msgid "Buildings"
 msgstr "Budovy"
 
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "Pevné předměty"
+#: ../../data/tribes/scripting/help/init.lua:136
+msgid "Tribes Immovables"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:143
+msgid "World Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8

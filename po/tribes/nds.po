@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-01-04 09:32+0000\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-24 20:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1284,7 +1284,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Maniok-Wuddel-Köök"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1713,6 +1712,8 @@ msgstr "Steenwarkeree"
 msgid "making a shovel"
 msgstr "eene Schüppe to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1722,6 +1723,7 @@ msgstr "eene Schüppe to maken"
 msgid "making a felling ax"
 msgstr "eene Boomslager-Ext to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1766,9 +1768,9 @@ msgstr "eenen Klöpper to maken"
 msgid "making a chisel"
 msgstr "eenen Beitel to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1924,7 +1926,6 @@ msgstr "Fauna-Wahrderske-Telt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5257,7 +5258,6 @@ msgstr "Balsaboom"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsaboom (Jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5870,41 +5870,45 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) Soldat"
 msgstr[1] "%1%(+%2%) Soldaten"
 
-#: ../../data/tribes/scripting/help/init.lua:54
+#: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
 msgstr "Tum Naslaan över ’t Volk"
 
-#: ../../data/tribes/scripting/help/init.lua:59
+#: ../../data/tribes/scripting/help/init.lua:89
 msgid "General"
 msgstr "Allgemeen"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:94
 msgid "Introduction"
 msgstr "Inföhren"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:100
 msgid "Controls"
 msgstr "Stüren"
 
-#: ../../data/tribes/scripting/help/init.lua:76
+#: ../../data/tribes/scripting/help/init.lua:106
 msgid "Tips"
 msgstr "Tipps"
 
-#: ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/scripting/help/init.lua:115
 msgid "Wares"
 msgstr "Waren"
 
-#: ../../data/tribes/scripting/help/init.lua:92
+#: ../../data/tribes/scripting/help/init.lua:122
 msgid "Workers"
 msgstr "Arbeiders"
 
-#: ../../data/tribes/scripting/help/init.lua:99
+#: ../../data/tribes/scripting/help/init.lua:129
 msgid "Buildings"
 msgstr "Husen"
 
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "Faste Dingen"
+#: ../../data/tribes/scripting/help/init.lua:136
+msgid "Tribes Immovables"
+msgstr "Faste Dingen (Völker)"
+
+#: ../../data/tribes/scripting/help/init.lua:143
+msgid "World Immovables"
+msgstr "Faste Dingen (Welt)"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8
@@ -7565,7 +7569,7 @@ msgstr "Augustus"
 #: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Azurea Sea"
-msgstr "See"
+msgstr "Azuur-See"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:48
@@ -7673,25 +7677,25 @@ msgstr "Gallus"
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Ianus"
-msgstr "Ianus"
+msgstr "Janus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr "Iulius Caesar"
+msgstr "Julius Caesar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Iuno"
-msgstr "Iuno"
+msgstr "Juno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr "Iupiter"
+msgstr "Jupiter"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90

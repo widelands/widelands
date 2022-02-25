@@ -163,7 +163,8 @@ TESTCASE(string_formatting) {
 	check_equal("A1.0X", format("A%1%X", 0.9999995));
 	check_equal("A1.23X", format("A%1%X", 1.23));
 
-	format_impl::ArgsPair p1, p2;
+	format_impl::ArgsPair p1;
+	format_impl::ArgsPair p2;
 	p1.first = p2.first = format_impl::AbstractNode::ArgType::kString;
 	p1.second.string_val = "World";
 	p2.second.string_val = "Hello";

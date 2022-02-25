@@ -12,15 +12,16 @@
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
 # Niektóry <niektory@gmail.com>, 2020
+# Pawel <pawcio980@gmail.com>, 2022
 # tombox <wptom@wp.pl>, 2019
 # tombox <wptom@wp.pl>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-01-04 02:59+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-15 22:23+0000\n"
+"Last-Translator: Pawel <pawcio980@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -140,37 +141,37 @@ msgstr "Twoi żołnierze odparli atak na twoją wieżę obserwacyjną."
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr ""
+msgstr "Posterunek patrolowy"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr ""
+msgstr "Twoi żołnierze zajęli twój posterunek patrolowy."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
 msgctxt "amazons_building"
 msgid "Your patrol post discovered an aggressor."
-msgstr ""
+msgstr "Twój posterunek patrolowy odkrył agresora."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr ""
+msgstr "Twój posterunek patrolowy jest atakowany."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr ""
+msgstr "Wróg pokonał twoich żołnierzy w posterunku patrolowym."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr ""
+msgstr "Twoi żołnierze pokonali wroga w posterunku patrolowym."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
@@ -1293,7 +1294,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1722,6 +1722,8 @@ msgstr ""
 msgid "making a shovel"
 msgstr "produkcja łopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1731,6 +1733,7 @@ msgstr "produkcja łopaty"
 msgid "making a felling ax"
 msgstr "produkcja topora drwala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1775,9 +1778,9 @@ msgstr "produkcja młotka"
 msgid "making a chisel"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1933,7 +1936,6 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5266,7 +5268,6 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5919,41 +5920,45 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../../data/tribes/scripting/help/init.lua:54
+#: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
 msgstr "Encyklopedia plemion"
 
-#: ../../data/tribes/scripting/help/init.lua:59
+#: ../../data/tribes/scripting/help/init.lua:89
 msgid "General"
 msgstr "Ogólnie"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:94
 msgid "Introduction"
 msgstr "Wstęp"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:100
 msgid "Controls"
 msgstr "Sterowanie"
 
-#: ../../data/tribes/scripting/help/init.lua:76
+#: ../../data/tribes/scripting/help/init.lua:106
 msgid "Tips"
 msgstr "Podpowiedzi"
 
-#: ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/scripting/help/init.lua:115
 msgid "Wares"
 msgstr "Towary"
 
-#: ../../data/tribes/scripting/help/init.lua:92
+#: ../../data/tribes/scripting/help/init.lua:122
 msgid "Workers"
 msgstr "Pracownicy"
 
-#: ../../data/tribes/scripting/help/init.lua:99
+#: ../../data/tribes/scripting/help/init.lua:129
 msgid "Buildings"
 msgstr "Budynki"
 
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "Obiekty nieruchome"
+#: ../../data/tribes/scripting/help/init.lua:136
+msgid "Tribes Immovables"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/init.lua:143
+msgid "World Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8

@@ -8,7 +8,8 @@
 # Elisabeth Jäger, 2016-2018
 # GunChleoc, 2018
 # FIRST AUTHOR <nasenbaer_peter@sourceforge.net>, 2008
-# GunChleoc, 2015
+# GunChleoc, 2015,2018
+# Hybrid Dog, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
@@ -16,15 +17,16 @@
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # Hybrid Dog, 2015
-# wl-zocker, 2015
+# wl-zocker, 2015-2016
 # wl-zocker, 2016
+# Wuzzy <almikes@aol.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-01-04 20:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-22 00:11+0000\n"
+"Last-Translator: Wuzzy <almikes@aol.com>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -114,31 +116,31 @@ msgstr "Beobachtungsturm"
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr "Deine Kriegerinnen haben deinen Überwachungsturm besetzt."
+msgstr "Deine Kriegerinnen haben deinen Beobachtungsturm besetzt."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr "Bei deinem Überwachungsturm wurden Angreifer entdeckt."
+msgstr "Bei deinem Beobachtungsturm wurden Angreifer entdeckt."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
 msgctxt "amazons_building"
 msgid "Your observation tower is under attack."
-msgstr "Dein Überwachungsturm wird angegriffen."
+msgstr "Dein Beobachtungsturm wird angegriffen."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr "Der Feind hat deine Kriegerinnen am Überwachungsturm besiegt."
+msgstr "Der Feind hat deine Kriegerinnen am Beobachtungsturm besiegt."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the observation tower."
-msgstr "Deine Kriegerinnen haben den Feind vor dem Überwachungsturm besiegt."
+msgstr "Deine Kriegerinnen haben den Feind vor dem Beobachtungsturm besiegt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
@@ -1297,7 +1299,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Cassavawurzelküche"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1513,7 +1514,7 @@ msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
 "diminished returns on investment. You should consider dismantling or "
 "destroying it."
-msgstr "Die Hauptader dieser Goldgräberei ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest diese Goldgräberbehausung abreißen oder zerstören."
+msgstr "Die Hauptader dieser Goldgräberei ist erschöpft. Die Produktivität wird stark einbrechen. Du solltest sie abreißen oder zerstören."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
@@ -1611,7 +1612,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Die Lianenschneiderin in dieser Lianenschneiderinnenhütte kann keine Bäume mit Lianen in ihrem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören oder eine Försterhütte bauen."
+msgstr "Die Lianenschneiderin in dieser Lianenschneiderinnenhütte kann keine Bäume mit Lianen in ihrem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen, zerstören oder eine Dschungelbewahrungshütte bauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1726,6 +1727,8 @@ msgstr "Steinwerkstatt"
 msgid "making a shovel"
 msgstr "Das Herstellen einer Schaufel"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1735,6 +1738,7 @@ msgstr "Das Herstellen einer Schaufel"
 msgid "making a felling ax"
 msgstr "Das Herstellen einer Holzfälleraxt"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1779,9 +1783,9 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a chisel"
 msgstr "Das Schleifen eines Meißels"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1927,7 +1931,7 @@ msgctxt "amazons_building"
 msgid ""
 "The carrier working at this water gatherer’s hut can’t find any water in its"
 " vicinity."
-msgstr "Die Trägerin an dieser Wassersammelhütte kann kein offenes Wasser in ihrer Umgebung finden. "
+msgstr "Die Trägerin an dieser Wassersammelhütte kann kein offenes Wasser in ihrer Umgebung finden."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
@@ -1937,7 +1941,6 @@ msgstr "Wildnishüterinnenzelt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -1978,7 +1981,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Die Holzfällerin in dieser Holzfällerinnenhütte kann keine Bäume in ihrem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören oder eine Dschungelbewahrungshütte bauen."
+msgstr "Die Holzfällerin in dieser Holzfällhütte kann keine Bäume in ihrem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen, zerstören oder eine Dschungelbewahrungshütte bauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -5270,7 +5273,6 @@ msgstr "Balsabaum"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsabaum (jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5540,7 +5542,7 @@ msgstr "Entdeckung"
 #: ../../data/tribes/initialization/frisians/starting_conditions/discovery.lua:13
 msgid ""
 "Start the game with three ships on the ocean and only a handful of supplies"
-msgstr "Beginne das Spiel mit drei Schiffen auf dem Ozean und nur einer Hand voll an Gütern."
+msgstr "Beginne das Spiel mit drei Schiffen auf dem Ozean und nur einer Hand voll an Gütern"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5559,7 +5561,7 @@ msgstr "Befestigtes Dorf"
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
 msgid "Start the game with a fortified military installation"
-msgstr "Beginne das Spiel mit einer befestigten Militäranlage."
+msgstr "Beginne das Spiel mit einer befestigten Militäranlage"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:11
@@ -5577,7 +5579,7 @@ msgstr "Hauptquartier"
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
 msgid "Start the game with your headquarters only"
-msgstr "Beginne das Spiel nur mit deinem Hauptquartier."
+msgstr "Beginne das Spiel nur mit deinem Hauptquartier"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/new_world.lua:11
@@ -5672,7 +5674,7 @@ msgstr "Handelsposten"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "Wenn diesem Spieler wichtige Waren ausgehen, werden sie umsonst aufgefüllt."
+msgstr "Wenn diesem Spieler wichtige Waren ausgehen, werden sie umsonst aufgefüllt"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5690,7 +5692,7 @@ msgstr "Dorf"
 #: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
 #: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr "Beginne das Spiel mit einem friedlichen Dorf."
+msgstr "Beginne das Spiel mit einem friedlichen Dorf"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/atlanteans/init.lua:13
@@ -5883,41 +5885,45 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) Krieger"
 msgstr[1] "%1%(+%2%) Krieger"
 
-#: ../../data/tribes/scripting/help/init.lua:54
+#: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
 msgstr "Stammeslexikon"
 
-#: ../../data/tribes/scripting/help/init.lua:59
+#: ../../data/tribes/scripting/help/init.lua:89
 msgid "General"
 msgstr "Allgemein"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:94
 msgid "Introduction"
 msgstr "Einführung"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:100
 msgid "Controls"
 msgstr "Grundlegende Steuerung"
 
-#: ../../data/tribes/scripting/help/init.lua:76
+#: ../../data/tribes/scripting/help/init.lua:106
 msgid "Tips"
 msgstr "Tipps"
 
-#: ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/scripting/help/init.lua:115
 msgid "Wares"
 msgstr "Waren"
 
-#: ../../data/tribes/scripting/help/init.lua:92
+#: ../../data/tribes/scripting/help/init.lua:122
 msgid "Workers"
 msgstr "Arbeiter"
 
-#: ../../data/tribes/scripting/help/init.lua:99
+#: ../../data/tribes/scripting/help/init.lua:129
 msgid "Buildings"
 msgstr "Gebäude"
 
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "Unbewegliche Objekte"
+#: ../../data/tribes/scripting/help/init.lua:136
+msgid "Tribes Immovables"
+msgstr "Unbewegliche Objekte (Stamm)"
+
+#: ../../data/tribes/scripting/help/init.lua:143
+msgid "World Immovables"
+msgstr "Unbewegliche Objekte (Welt)"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8

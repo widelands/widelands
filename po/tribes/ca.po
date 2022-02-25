@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-01-07 16:20+0000\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-15 18:17+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -1284,7 +1284,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Forn de tapioca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1713,6 +1712,8 @@ msgstr "Taller de pedra"
 msgid "making a shovel"
 msgstr "fabricar una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1722,6 +1723,7 @@ msgstr "fabricar una pala"
 msgid "making a felling ax"
 msgstr "fer una destral d'arbres"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1766,9 +1768,9 @@ msgstr "fabricar un martell"
 msgid "making a chisel"
 msgstr "fer un cisell"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1924,7 +1926,6 @@ msgstr "Tenda del cuidador de la jungla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5257,7 +5258,6 @@ msgstr "Arbre balsa"
 msgid "Balsa Tree (Pole)"
 msgstr "Arbre balsa (jove)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5870,41 +5870,45 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldat"
 msgstr[1] "%1% soldats (+%2%)"
 
-#: ../../data/tribes/scripting/help/init.lua:54
+#: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
 msgstr "Enciclopèdia de la cultura"
 
-#: ../../data/tribes/scripting/help/init.lua:59
+#: ../../data/tribes/scripting/help/init.lua:89
 msgid "General"
 msgstr "General"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:94
 msgid "Introduction"
 msgstr "Introducció"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:100
 msgid "Controls"
 msgstr "Controls"
 
-#: ../../data/tribes/scripting/help/init.lua:76
+#: ../../data/tribes/scripting/help/init.lua:106
 msgid "Tips"
 msgstr "Consells"
 
-#: ../../data/tribes/scripting/help/init.lua:85
+#: ../../data/tribes/scripting/help/init.lua:115
 msgid "Wares"
 msgstr "Mercaderies"
 
-#: ../../data/tribes/scripting/help/init.lua:92
+#: ../../data/tribes/scripting/help/init.lua:122
 msgid "Workers"
 msgstr "Treballadors"
 
-#: ../../data/tribes/scripting/help/init.lua:99
+#: ../../data/tribes/scripting/help/init.lua:129
 msgid "Buildings"
 msgstr "Edificis"
 
-#: ../../data/tribes/scripting/help/init.lua:106
-msgid "Immovables"
-msgstr "Inamovibles"
+#: ../../data/tribes/scripting/help/init.lua:136
+msgid "Tribes Immovables"
+msgstr "Inamovibles dels clans"
+
+#: ../../data/tribes/scripting/help/init.lua:143
+msgid "World Immovables"
+msgstr "Inamovibles del món"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/amazons/init.lua:8

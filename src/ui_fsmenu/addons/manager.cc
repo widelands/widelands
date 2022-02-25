@@ -66,15 +66,16 @@ std::string underline_tag(const std::string& text) {
 }
 
 std::string filesize_string(const uint32_t bytes) {
-	if (bytes > 1000000000) {
-		return format_l(_("%.2f GB"), (bytes / 1000000000.f));
-	} else if (bytes > 1000000) {
-		return format_l(_("%.2f MB"), (bytes / 1000000.f));
-	} else if (bytes > 1000) {
-		return format_l(_("%.2f kB"), (bytes / 1000.f));
-	} else {
-		return format_l(_("%u bytes"), bytes);
+	if (bytes > 1000 * 1000 * 1000) {
+		return format_l(_("%.2f GB"), (bytes / (1000.f * 1000.f * 1000.f)));
 	}
+	if (bytes > 1000 * 1000) {
+		return format_l(_("%.2f MB"), (bytes / (1000.f * 1000.f)));
+	}
+	if (bytes > 1000) {
+		return format_l(_("%.2f kB"), (bytes / 1000.f));
+	}
+	return format_l(_("%u bytes"), bytes);
 }
 
 std::string time_string(const std::time_t& time) {
@@ -601,7 +602,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		for (const RemoteAddOnRow* r : browse_) {
 			if (r->upgradeable()) {
 				const bool full_upgrade = r->full_upgrade_possible();
-				upgrades.push_back(std::make_pair(r->info(), full_upgrade));
+				upgrades.emplace_back(r->info(), full_upgrade);
 				if (full_upgrade) {
 					all_verified &= r->info()->verified;
 					++nr_full_updates;
@@ -681,7 +682,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		}
 		const bool state = it->second;
 		it = AddOns::g_addons.erase(it);
-		AddOns::g_addons.push_back(std::make_pair(info, state));
+		AddOns::g_addons.emplace_back(info, state);
 		rebuild(true);
 		focus_installed_addon_row(info);
 	});
@@ -944,12 +945,12 @@ void AddOnsCtrl::refresh_remotes(const bool showall) {
 			}
 		}
 	} catch (const std::exception& e) {
-		const std::string title = _("Server Connection Error");
+		std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
-		const std::string bug = _("a networking bug");
-		const std::string err = format(_("Unable to fetch the list of available add-ons from "
-		                                 "the server!<br>Error Message: %s"),
-		                               e.what());
+		std::string bug = _("a networking bug");
+		std::string err = format(_("Unable to fetch the list of available add-ons from "
+		                           "the server!<br>Error Message: %s"),
+		                         e.what());
 		std::shared_ptr<AddOns::AddOnInfo> i = std::make_shared<AddOns::AddOnInfo>();
 		i->unlocalized_descname = title;
 		i->unlocalized_description = err;
@@ -1200,7 +1201,8 @@ void AddOnsCtrl::update_dependency_errors() {
 					if (a.first->internal_name == previous_requirement) {
 						prev = a.first.get();
 						break;
-					} else if (a.first->internal_name == requirement) {
+					}
+					if (a.first->internal_name == requirement) {
 						next = a.first.get();
 						too_late = true;
 					}
@@ -1271,7 +1273,8 @@ void AddOnsCtrl::layout() {
 
 		login_button_.set_size(get_inner_w() / 3, login_button_.get_h());
 		login_button_.set_pos(Vector2i(get_inner_w() - login_button_.get_w(), 0));
-		int w, h;
+		int w;
+		int h;
 		server_name_.get_desired_size(&w, &h);
 		server_name_.set_size(w, h);
 		server_name_.set_pos(Vector2i(login_button_.get_x() - w - kRowButtonSpacing,
@@ -1407,7 +1410,7 @@ void AddOnsCtrl::upload_addon(std::shared_ptr<AddOns::AddOnInfo> addon) {
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [&w, &nr_files](const std::string&, const int64_t l) {
+		   [&w, &nr_files](const std::string& /* unused */, const int64_t l) {
 			   w.progressbar().set_total(l);
 			   nr_files = l;
 		   });
@@ -1443,7 +1446,8 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 	}
 	g_fs->ensure_directory_exists(kAddOnDir);
 
-	bool need_to_rebuild_texture_atlas = false, enable_theme = false;
+	bool need_to_rebuild_texture_atlas = false;
+	bool enable_theme = false;
 	if (!only_translations) {
 		bool success = false;
 		g_fs->ensure_directory_exists(temp_dir);
@@ -1500,8 +1504,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 		}
 		if (!found) {
 			enable_theme = (remote->category == AddOns::AddOnCategory::kTheme);
-			AddOns::g_addons.push_back(
-			   std::make_pair(AddOns::preload_addon(remote->internal_name), true));
+			AddOns::g_addons.emplace_back(AddOns::preload_addon(remote->internal_name), true);
 		}
 	}
 
@@ -1523,7 +1526,7 @@ void AddOnsCtrl::install_or_upgrade(std::shared_ptr<AddOns::AddOnInfo> remote,
 				   throw OperationCancelledByUserException();
 			   }
 		   },
-		   [&w, &nr_translations](const std::string&, const int64_t l) {
+		   [&w, &nr_translations](const std::string& /* unused */, const int64_t l) {
 			   nr_translations = l;
 			   w.progressbar().set_total(std::max<int64_t>(l, 1));
 		   });
