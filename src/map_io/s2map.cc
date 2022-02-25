@@ -419,7 +419,8 @@ int32_t S2MapLoader::preload_map(bool const scenario, AddOns::AddOnsList* addons
  * Completely loads the map, loads the graphics and places all the objects.
  * From now on the Map* can't be set to another one.
  */
-int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoader::LoadType) {
+int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase,
+                                       MapLoader::LoadType /* type */) {
 	std::string timer_message = "S2MapLoader::load_map_complete() for '";
 	timer_message += map_.get_name();
 	timer_message += "' took %ums";

@@ -78,7 +78,7 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 }
 }  // namespace
 
-[[noreturn]] static void abort_handler(int) {
+[[noreturn]] static void abort_handler(int /* signal */) {
 	throw wexception(_("The engine received a SIGABRT signal which was most likely triggered by a "
 	                   "corrupted savegame. No solution for this bug has been implemented yet. We "
 	                   "are sorry, but this savegame seems to be broken beyond repair."));
@@ -89,7 +89,10 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
  *            PUBLIC IMPLEMENTATION
  * ========================================================================
  */
-void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader& mol) {
+void MapScriptingPacket::read(FileSystem& fs,
+                              EditorGameBase& egbase,
+                              bool /* skip */,
+                              MapObjectLoader& mol) {
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
