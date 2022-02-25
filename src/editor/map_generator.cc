@@ -277,8 +277,10 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  randomize the values
 
-		uint32_t step_x = std::min(16U, w), step_y = std::min(16U, h);
-		uint32_t max = kAverageElevation, min = kAverageElevation;
+		uint32_t step_x = std::min(16U, w);
+		uint32_t step_y = std::min(16U, h);
+		uint32_t max = kAverageElevation;
+		uint32_t min = kAverageElevation;
 		double ele_fac = 0.15;
 
 		bool end = false;
@@ -698,7 +700,8 @@ bool MapGenerator::create_random_map() {
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
-	uint8_t rows = 1, lines = 1;
+	uint8_t rows = 1;
+	uint8_t lines = 1;
 	if (map_info_.numPlayers > 1) {
 		++lines;
 		if (map_info_.numPlayers > 2) {
@@ -845,10 +848,12 @@ bool MapGenerator::create_random_map() {
 int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	if ((ch == '0') || (ch == 'o') || (ch == 'O')) {
 		return 22;
-	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
-	           (ch == 'J') || (ch == 'j')) {
+	}
+	if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') || (ch == 'J') ||
+	    (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch <= 'Z') {
+	}
+	if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
@@ -863,7 +868,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= 'a' && ch <= 'z') {
+	}
+	if (ch >= 'a' && ch <= 'z') {
 		char res = ch - 'a';
 		if (ch > 'i') {
 			--res;
@@ -878,7 +884,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= '2' && ch <= '9') {
+	}
+	if (ch >= '2' && ch <= '9') {
 		return 24 + ch - '2';
 	}
 	return -1;
@@ -894,9 +901,11 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 	if (num == 22) {
 		return '0';
-	} else if (num == 23) {
+	}
+	if (num == 23) {
 		return '1';
-	} else if ((0 <= num) && (num < 22)) {
+	}
+	if ((0 <= num) && (num < 22)) {
 		char result = num + 'a';
 		if (result >= 'i') {
 			++result;
@@ -911,11 +920,11 @@ char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 			++result;
 		}
 		return result;
-	} else if ((24 <= num) && (num < 32)) {
-		return (num - 24) + '2';
-	} else {
-		return '?';
 	}
+	if ((24 <= num) && (num < 32)) {
+		return (num - 24) + '2';
+	}
+	return '?';
 }
 
 /**

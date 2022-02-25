@@ -27,12 +27,12 @@ struct EditorDecreaseHeightTool : public EditorTool {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
+	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
+	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
