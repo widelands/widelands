@@ -70,7 +70,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	explicit Data(MultilineEditbox& /*o*/);
+	explicit Data(MultilineEditbox& init_owner);
 	void refresh_ww();
 
 	void update();
@@ -107,12 +107,12 @@ MultilineEditbox::MultilineEditbox(
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), o.panel_style_),
-     style(o.panel_style_),
+MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
+   : scrollbar(&init_owner, init_owner.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, init_owner.get_h(), init_owner.panel_style_),
+     style(init_owner.panel_style_),
      cursor_pos(0),
-     caret_image_path(o.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-                                                           "images/ui_basic/caret_fs.png"),
+     caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
+                                                                    "images/ui_basic/caret_fs.png"),
      lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
@@ -122,8 +122,8 @@ MultilineEditbox::Data::Data(MultilineEditbox& o)
      selection_start(0),
      selection_end(0),
      ww_valid(false),
-     ww(get_style().font().size(), get_style().font().color(), o.get_w()),
-     owner(o) {
+     ww(get_style().font().size(), get_style().font().color(), init_owner.get_w()),
+     owner(init_owner) {
 	scrollbar.moved.connect([&o](int32_t a) { o.scrollpos_changed(a); });
 
 	scrollbar.set_pagesize(owner.get_h() - 2 * lineheight);

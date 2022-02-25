@@ -706,7 +706,7 @@ void Panel::draw(RenderTarget& /* rt */) {
 /**
  * Redraw the panel border.
  */
-void Panel::draw_border(RenderTarget& rt) {
+void Panel::draw_border(RenderTarget& /* rt */) {
 }
 
 std::vector<Recti>
