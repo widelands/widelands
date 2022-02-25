@@ -33,7 +33,7 @@ GameMapPacket::~GameMapPacket() {
 	delete wml_;
 }
 
-void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
+void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const /* mol */) {
 	if (!fs.file_exists("map") || !fs.is_directory("map")) {
 		throw GameDataError("no map");
 	}
@@ -54,7 +54,7 @@ void GameMapPacket::read_complete(Game& game) {
 	mol_ = wml_->get_map_object_loader();
 }
 
-void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 
 	std::unique_ptr<FileSystem> mapfs(fs.create_sub_file_system("map", FileSystem::DIR));
 
