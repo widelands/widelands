@@ -1393,7 +1393,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean warehouse: Headquarters
             note = pgettext("atlanteans_building", "The headquarters is your main building."),
             -- TRANSLATORS: Note lore for an atlantean production site: Headquarters
-            lore = pgettext("atlanteans_building", "We founde this new colony, now go with Satul and do the best you can do for your tribe."),
+            lore = pgettext("atlanteans_building", "We founded this new colony, now go with Satul and do the best you can do for your tribe."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
             lore_author = pgettext("atlanteans_building", "Priest of Satul inaugurating you as leader of the Atleantean tribe")
 
@@ -1403,9 +1403,14 @@ descriptions:new_tribe {
          name = "atlanteans_warehouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
-            purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools."),
+            purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools. "..
+                    " will help you to stabilize your economy."),
             -- TRANSLATORS: Note lore for an atlantean production site: Warehouse
-            lore = pgettext("atlanteans_building", "This is not a complete headquarters, but it will help you to stabilize your economy.")
+            lore = pgettext("atlanteans_building", "Maybe you think its a boring task to store, count an retreive all this stuff, "..
+						   "But do you really want your carriers to walk all the way to your Headquarters?"),
+            -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
+            lore_author = pgettext("atlanteans_building", "Head of the warehouse")
+
          }
       },
       {
@@ -1418,7 +1423,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note lore for an atlantean production site: Port
             lore = pgettext("atlanteans_building", "This is the building where expeditions will be equipped to boldly go and find new shores."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Port
-            lore_author = pgettext("atlanteans_building", "Priest of Lutas blessing a new Port")
+            lore_author = pgettext("atlanteans_building", "Ostur dedicating a new Port")
          }
       },
 
@@ -1483,7 +1488,7 @@ descriptions:new_tribe {
                  -- NOCOM / Better text needed: I don't understand the last line
                                           [[And Satul will warm the people of from your do.']]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
-            lore_author = pgettext("atlanteans_building", "A song from the fishers guild")
+            lore_author = pgettext("atlanteans_building", "A song from the fisher’s guild")
          }
       },
       {
@@ -1511,7 +1516,7 @@ descriptions:new_tribe {
             note = pgettext("atlanteans_building", "The hunter’s house needs animals to hunt within the work area."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Hunter's House
             lore = pgettext("atlanteans_building", "Sometimes we end up in a region with no fish, so we must hunt, "..
-                                                   "Game will reproduce by itself, if not hunted to much. But yes, fish is our main meal."),
+                                                   "Game will reproduce by itself, if not hunted too much. But yes, fish is our main meal."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Hunter's House
             lore_author = pgettext("atlanteans_building", "Hunter answering a fisher")
          }
@@ -1537,9 +1542,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
-            lore = pgettext("atlanteans_building", "No, this is not Rumpelstiltskin spinning gold from straw, we need real gold"),
+            lore = pgettext("atlanteans_building", "No, this is not Rumpelstiltskin spinning gold from straw, we need real gold."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
-            lore_author = pgettext("atlanteans_building", "Painted on a Gold Spinning mill without supplies.")
+            lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies.")
          }
       },
       {
@@ -1567,9 +1572,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Sawmill
             note = pgettext("atlanteans_building", "Will need at least four woodcutters for a constant supply of planks."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Sawmill
-            lore = pgettext("atlanteans_building", "This vertical axis design makes operation simple, yet powerful. Patent pending."),
+            lore = pgettext("atlanteans_building", "This vertical axis design of our sawmills makes operation simple, yet powerful. Patent pending."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Sawmill
-            lore_author = pgettext("atlanteans_building", "The Tom Sawyer answering an imperial visitor")
+            lore_author = pgettext("atlanteans_building", "Askadus, Inventor")
          }
       },
       {
@@ -1706,7 +1711,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Farm
             lore = pgettext("atlanteans_building", "I use my feet, I use my arm, I’m caring for this farm!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Farm
-            lore_author = pgettext("atlanteans_building", "Atlantean nursery rhyme"),
+            lore_author = pgettext("atlanteans_building", "Atlantean harvesting song"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Farm
             performance = pgettext("atlanteans_building", "The farmer needs %1% on average to sow and harvest a sheaf of corn."):bformat(format_minutes_seconds(1, 20))
          }
@@ -1762,7 +1767,7 @@ descriptions:new_tribe {
             lore = pgettext("atlanteans_building", "Only the pure, white Stones Diamond and Quartz will enlighten our pepole. "..
                                                    "Thus, every major building will need them so the inhabitants may worship Satul to warm them."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Crystal Mine
-            lore_author = pgettext("atlanteans_building", "Part of the Atlantean building instructions")
+            lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture")
          }
       },
       {
