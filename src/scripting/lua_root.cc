@@ -403,10 +403,10 @@ LuaDescriptions::LuaDescriptions(lua_State* /* L */) {
 	// Nothing to do.
 }
 
-void LuaDescriptions::__persist(lua_State*) {
+void LuaDescriptions::__persist(lua_State* /* L */) {
 	// Nothing to be done.
 }
-void LuaDescriptions::__unpersist(lua_State*) {
+void LuaDescriptions::__unpersist(lua_State* /* L */) {
 	// Nothing to be done.
 }
 
@@ -1223,11 +1223,15 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 	}
 }
 
-void LuaDescriptions::do_modify_ship(lua_State* L, const std::string&, const std::string&) {
+void LuaDescriptions::do_modify_ship(lua_State* L,
+                                     const std::string& /* unit_name */,
+                                     const std::string& /* property */) {
 	report_error(L, "modify_unit for ships not yet supported");
 }
 
-void LuaDescriptions::do_modify_critter(lua_State* L, const std::string&, const std::string&) {
+void LuaDescriptions::do_modify_critter(lua_State* L,
+                                        const std::string& /* unit_name */,
+                                        const std::string& /* property */) {
 	report_error(L, "modify_unit for critters not yet supported");
 }
 
@@ -1249,11 +1253,15 @@ void LuaDescriptions::do_modify_terrain(lua_State* L,
 	}
 }
 
-void LuaDescriptions::do_modify_immovable(lua_State* L, const std::string&, const std::string&) {
+void LuaDescriptions::do_modify_immovable(lua_State* L,
+                                          const std::string& /* unit_name */,
+                                          const std::string& /* property */) {
 	report_error(L, "modify_unit for immovables not yet supported");
 }
 
-void LuaDescriptions::do_modify_ware(lua_State* L, const std::string&, const std::string&) {
+void LuaDescriptions::do_modify_ware(lua_State* L,
+                                     const std::string& /* unit_name */,
+                                     const std::string& /* property */) {
 	report_error(L, "modify_unit for wares not yet supported");
 }
 
