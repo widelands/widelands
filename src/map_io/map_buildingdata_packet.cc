@@ -483,7 +483,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			// Consistency checks are in Warehouse::load_finish
 			uint32_t nr_planned_workers = fr.unsigned_32();
 			while (nr_planned_workers--) {
-				warehouse.planned_workers_.push_back(Warehouse::PlannedWorkers());
+				warehouse.planned_workers_.emplace_back();
 				Warehouse::PlannedWorkers& pw = warehouse.planned_workers_.back();
 				pw.index = tribe.safe_worker_index(fr.c_string());
 				pw.amount = fr.unsigned_32();
@@ -675,9 +675,8 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						}
 						found_working_position = true;
 						break;
-					} else {
-						wp += count;
 					}
+					wp += count;
 				}
 
 				if (!found_working_position) {
@@ -711,9 +710,9 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 						}
 						found_working_position = true;
 						break;
-					} else {
-						wp += count;
 					}
+					wp += count;
+
 				end_working_position:;
 				}
 

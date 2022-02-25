@@ -173,8 +173,8 @@ InternetLobby::InternetLobby(MenuCapsule& fsmm,
 	   0, [this](uint32_t a, uint32_t b) { return compare_clienttype(a, b); });
 	clientsonline_table_.double_clicked.connect(
 	   [this](uint32_t a) { return client_doubleclicked(a); });
-	opengames_list_.selected.connect([this](uint32_t) { server_selected(); });
-	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked(); });
+	opengames_list_.selected.connect([this](uint32_t /* value */) { server_selected(); });
+	opengames_list_.double_clicked.connect([this](uint32_t /* value */) { server_doubleclicked(); });
 
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in()) {
