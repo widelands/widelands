@@ -185,9 +185,8 @@ FileSystem* RealFSImpl::make_sub_file_system(const std::string& path) {
 
 	if (fspath.is_directory_) {
 		return new RealFSImpl(fspath);
-	} else {
-		return new ZipFilesystem(fspath);
 	}
+	return new ZipFilesystem(fspath);
 }
 
 /**
@@ -202,9 +201,8 @@ FileSystem* RealFSImpl::create_sub_file_system(const std::string& path, Type con
 	if (fs == FileSystem::DIR) {
 		ensure_directory_exists(path);
 		return new RealFSImpl(fspath);
-	} else {
-		return new ZipFilesystem(fspath);
 	}
+	return new ZipFilesystem(fspath);
 }
 
 /**

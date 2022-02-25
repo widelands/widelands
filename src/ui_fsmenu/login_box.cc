@@ -102,7 +102,7 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
 	b_login_.sigclicked.connect([this]() { clicked_ok(); });
 	b_cancel_.sigclicked.connect([this]() { clicked_back(); });
 	eb_nickname_.changed.connect([this]() { change_playername(); });
-	cb_register_.clickedto.connect([this](bool) { clicked_register(); });
+	cb_register_.clickedto.connect([this](bool /* value */) { clicked_register(); });
 
 	eb_nickname_.set_text(get_config_string("nickname", _("nobody")));
 	cb_register_.set_state(get_config_bool("registered", false));
