@@ -1504,7 +1504,7 @@ descriptions:new_tribe {
                                           [[Only after the last fish has been caught<br>]] ..
                                           [[Then will you find that spiders are not to be eaten.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Fish Breeder's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the fishers guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the fisher’s guild")
          }
       },
       {
@@ -1527,7 +1527,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
             purpose = pgettext("building", "Draws water out of the deep."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Well
-            note = pgettext("atlanteans_building", "I hope you checked this spot with a gelogist."),
+            note = pgettext("atlanteans_building", "I hope you have checked this spot with a geologist."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Well
             lore = pgettext("atlanteans_building", "Well, there is no wellbeing without a well."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Well
@@ -1555,7 +1555,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Scout's House
-            note = pgettext("atlanteans_building", "Will need fish an bread to have his meal the Atlantean way"),
+            note = pgettext("atlanteans_building", "Will need fish and bread to have his meal the Atlantean way"),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, thats me!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House
