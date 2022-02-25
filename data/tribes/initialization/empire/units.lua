@@ -1403,7 +1403,7 @@ descriptions:new_tribe {
          name = "empire_piggery",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Piggery
-            lore = pgettext("empire_building", "‘Quod licet Iovi, non licet porci.’ (What is allowed for Jupiter is not allowed for a pig.)"),
+            lore = pgettext("empire_building", "‘Quod licet Iovi, non licet porco.’ (What is allowed for Jupiter is not allowed for a pig.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Piggery
             lore_author = pgettext(""),
             -- TRANSLATORS: Purpose helptext for an empire production site: Piggery
