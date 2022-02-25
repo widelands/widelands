@@ -180,7 +180,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
-                     UI::ButtonStyle::kWuiPrimary),
+                     UI::ButtonStyle::kWuiPrimary,
+                     [this](StatisticsMenuEntry t) { statistics_menu_selected(t); }),
      grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
@@ -363,7 +364,6 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 
 	InteractiveGameBase::rebuild_showhide_menu();
-
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
           /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps

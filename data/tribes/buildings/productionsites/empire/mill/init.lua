@@ -29,8 +29,8 @@ descriptions:new_productionsite_type {
 
    spritesheets = {
       working = {
-         fps = 25,
-         frames = 20,
+         fps = 15,
+         frames = 19,
          rows = 5,
          columns = 4,
          hotspot = { 41, 87 }

@@ -29,7 +29,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 5;
 
-void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		PlayerNumber const nr_players = game.map().get_nrplayers();
 
@@ -127,7 +127,9 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 /*
  * Write Function
  */
-void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GamePlayerAiPersistentPacket::write(FileSystem& fs,
+                                         Game& game,
+                                         MapObjectSaver* const /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);

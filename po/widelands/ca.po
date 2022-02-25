@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-10 02:39+0000\n"
-"PO-Revision-Date: 2022-02-07 02:41+0000\n"
+"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:409
+#: ../../data/scripting/richtext.lua:598 ../../src/base/i18n.cc:407
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s i %2$s"
@@ -31,7 +31,7 @@ msgstr "%1$s i %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:413
+#: ../../data/scripting/richtext.lua:600 ../../src/base/i18n.cc:411
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s o %2$s"
@@ -43,7 +43,7 @@ msgstr "%1$s o %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
-#: ../../src/base/i18n.cc:417 ../../src/base/i18n.cc:426
+#: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
 #: ../../src/logic/addons.cc:197
 #, c-format
 msgid "%1$s, %2$s"
@@ -52,7 +52,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:421
+#: ../../data/scripting/richtext.lua:604 ../../src/base/i18n.cc:419
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s i %2$s"
@@ -171,7 +171,7 @@ msgstr "."
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
 #. * want to lose the blank space here.
-#: ../../src/base/i18n.cc:436
+#: ../../src/base/i18n.cc:434
 msgctxt "sentence_separator"
 msgid "%1% %2%"
 msgstr "%1% %2%"
@@ -331,7 +331,7 @@ msgstr "Ajuda"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:195
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:391
+#: ../../src/ui_fsmenu/main.cc:393
 msgid "New Map"
 msgstr "Mapa nou"
 
@@ -344,7 +344,7 @@ msgstr "Mapa aleatori nou"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:210
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:396 ../../src/wlapplication_options.cc:399
+#: ../../src/ui_fsmenu/main.cc:398 ../../src/wlapplication_options.cc:399
 msgid "Load Map"
 msgstr "Carrega"
 
@@ -516,17 +516,17 @@ msgstr "Mostra espais de construcció"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:423
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Amaga els espais de construcció grans"
 
 #: ../../src/editor/editorinteractive.cc:424
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Mostra els espais de construcció grans"
 
 #: ../../src/editor/editorinteractive.cc:427
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Mostra/Amaga els espais de construcció grans que estaran disponibles si es treuen tots els inamovibles (arbres, roques, etc.)."
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -591,10 +591,12 @@ msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 #: ../../src/editor/editorinteractive.cc:987 ../../src/logic/addons.cc:46
 #: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_fsmenu/addons/contact.cc:82
-#: ../../src/ui_fsmenu/addons/manager.cc:1383
-#: ../../src/ui_fsmenu/addons/manager.cc:1429
-#: ../../src/ui_fsmenu/addons/manager.cc:1508
-#: ../../src/ui_fsmenu/addons/manager.cc:1577
+#: ../../src/ui_fsmenu/addons/manager.cc:1363
+#: ../../src/ui_fsmenu/addons/manager.cc:1374
+#: ../../src/ui_fsmenu/addons/manager.cc:1424
+#: ../../src/ui_fsmenu/addons/manager.cc:1470
+#: ../../src/ui_fsmenu/addons/manager.cc:1549
+#: ../../src/ui_fsmenu/addons/manager.cc:1618
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
@@ -710,8 +712,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -815,7 +817,7 @@ msgstr "Obra de: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:283
-#: ../../src/ui_fsmenu/main.cc:430 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:432 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Descripció: %s"
@@ -836,7 +838,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Complements activats: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1006 ../../src/wui/encyclopedia_window.cc:144
+#: ../../src/ui_fsmenu/main.cc:1008 ../../src/wui/encyclopedia_window.cc:144
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "S'ha produït un error!"
@@ -1007,9 +1009,9 @@ msgstr "(cap)"
 msgid "Waterway length limit:"
 msgstr "Límit de la llargada de les vies d'aigua:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1162,7 +1164,7 @@ msgstr "S'està generant un mapa aleatori…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:607
-#: ../../src/ui_fsmenu/main.cc:393
+#: ../../src/ui_fsmenu/main.cc:395
 msgid "Random Map"
 msgstr "Mapa aleatori"
 
@@ -1432,8 +1434,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -1771,7 +1773,7 @@ msgstr "El Widelands no ha pogut iniciar la partida perquè el jugador %u no té
 
 #: ../../src/logic/game.cc:742
 msgid "Initializing…"
-msgstr ""
+msgstr "S'està inicialitzant…"
 
 #: ../../src/logic/game.cc:1183
 msgid "Trade Offer"
@@ -3191,7 +3193,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "No seleccionat"
 
-#: ../../src/ui_basic/dropdown.h:357
+#: ../../src/ui_basic/dropdown.h:454
 msgid "No matches"
 msgstr "Sense coincidències"
 
@@ -3268,7 +3270,7 @@ msgstr "Enganxa"
 msgid "Unpin"
 msgstr "Desenganxa"
 
-#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:463
+#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:465
 msgid "About Widelands"
 msgstr "Quant al Widelands"
 
@@ -3563,11 +3565,11 @@ msgstr "Inicia l'empaquetador de complements…"
 msgid "Contact us…"
 msgstr "Contacteu amb nosaltres"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:328
+#: ../../src/ui_fsmenu/addons/manager.cc:329
 msgid "Tools for Add-Ons Developers"
 msgstr "Eines per als desenvolupadors de complements"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:336
+#: ../../src/ui_fsmenu/addons/manager.cc:337
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -3575,22 +3577,22 @@ msgid ""
 "having to write a single line of code."
 msgstr "L'empaquetador interactiu de complements permet crear, editar i esborrar complements. Podeu afegir mapes dissenyats amb l'editor de mapes del Widelands com a complement usant la interfície gràfica i compartir-los amb altres jugadors, sense haver d'escriure ni una sola línia de codi."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:351
+#: ../../src/ui_fsmenu/addons/manager.cc:352
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "Per a més informació sobre com desenvolupar i empaquetar els vostres complements, visiteu %s."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:360
+#: ../../src/ui_fsmenu/addons/manager.cc:361
 msgid "Open Link"
 msgstr "Obre l'enllaç"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:362
+#: ../../src/ui_fsmenu/addons/manager.cc:363
 msgid "Copy Link"
 msgstr "Copia l'enllaç"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:385
+#: ../../src/ui_fsmenu/addons/manager.cc:386
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -3599,7 +3601,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Des d'aquí podeu pujar els vostres complements al servidor perquè els puguin fer servir altres jugadors. Si ho feu, accepteu publicar la vostra creació sota els termes de la llicència GNU General Public License (GPL) versió 2 (la mateixa llicència de distribució del Widelands). Si voleu més informació de la GPL, aneu a «Sobre el Widelands» → «Llicència» des del menú principal."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:392
+#: ../../src/ui_fsmenu/addons/manager.cc:393
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -3607,7 +3609,7 @@ msgid ""
 " stead."
 msgstr "Es prohibeix pujar complements amb brossa o contingut perillós o maliciós. Si pugeu un complement, esteu afirmant que el contingut és de la vostra pròpia creació o que teniu permís de l'autor (o autors) per fer-ho en el seu lloc."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:398
+#: ../../src/ui_fsmenu/addons/manager.cc:399
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -3615,7 +3617,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Cal que hagueu llegit la documentació dels complements de l'enllaç de més avall abans d'enviar el contingut. Com que la documentació pot haver canviat recentment, llegiu-la i assegureu-vos haver-ne seguit les indicacions."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:404
+#: ../../src/ui_fsmenu/addons/manager.cc:405
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -3623,7 +3625,7 @@ msgid ""
 "profile page frequently."
 msgstr "L'equip de desenvolupament del Widelands revisarà el complement al cap de poc temps de pujar-lo. Si hi ha algun dubte, es posaran en contacte amb l'autor via missatge privat al lloc web del Widelands. Reviseu la bústia del correu del vostre usuari sovint."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:434
+#: ../../src/ui_fsmenu/addons/manager.cc:435
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -3632,7 +3634,7 @@ msgid ""
 "be happy to help."
 msgstr "Problemes tècnics? Documentació confusa? Necessiteu accions avançades com esborrar un complement o col·laborar amb un altre dissenyador? Si us plau, visiteu-nos a %s, expliqueu què necessiteu i l'equip de desenvolupament us ajudarà."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:451
+#: ../../src/ui_fsmenu/addons/manager.cc:452
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -3643,136 +3645,136 @@ msgid ""
 " website user profile page."
 msgstr "Alternativament, podeu enviar un missatge a l'equip de desenvolupament del Widelands i mirarem d'ajudar-vos amb la consulta tan aviat com puguem. Només els administradors del servidor poden llegir els missatges que s'envien d'aquesta manera. Com els altres dissenyadors de complements habitualment no poden beneficiar-se de les preguntes i respostes fetes amb aquest mètode, useu-lo només si el vostre dubte no incumbeix a altres persones. Rebreu resposta via correu personal a la pàgina del vostre usuari del lloc web del Widelands."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:488
+#: ../../src/ui_fsmenu/addons/manager.cc:489
 msgid "Development"
 msgstr "Desenvolupament"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons/manager.cc:491
+#: ../../src/ui_fsmenu/addons/manager.cc:492
 msgid "Name"
 msgstr "Nom"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons/manager.cc:493
+#: ../../src/ui_fsmenu/addons/manager.cc:494
 msgid "Name (descending)"
 msgstr "Nom (descendent)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:495
+#: ../../src/ui_fsmenu/addons/manager.cc:496
 msgid "Most popular"
 msgstr "Més populars"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:497
+#: ../../src/ui_fsmenu/addons/manager.cc:498
 msgid "Least popular"
 msgstr "Menys populars"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:499
+#: ../../src/ui_fsmenu/addons/manager.cc:500
 msgid "Most often downloaded"
 msgstr "Complements més baixats"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:501
+#: ../../src/ui_fsmenu/addons/manager.cc:502
 msgid "Least often downloaded"
 msgstr "Complements menys baixats"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:503
+#: ../../src/ui_fsmenu/addons/manager.cc:504
 msgid "Oldest"
 msgstr "Més antic"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:505
+#: ../../src/ui_fsmenu/addons/manager.cc:506
 msgid "Newest"
 msgstr "Més recents"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:513
+#: ../../src/ui_fsmenu/addons/manager.cc:514
 msgid "Filter add-ons by name"
 msgstr "Filtra els complements per nom"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:523
+#: ../../src/ui_fsmenu/addons/manager.cc:524
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Mostra/Amaga la categoria «%s»"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:614
+#: ../../src/ui_fsmenu/addons/manager.cc:615
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Esteu segur que voleu actualitzar %u complement?"
 msgstr[1] "Esteu segur que voleu actualitzar aquests %u complements?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:620
+#: ../../src/ui_fsmenu/addons/manager.cc:621
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) de %3$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:621
+#: ../../src/ui_fsmenu/addons/manager.cc:622
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:393
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:418
 msgid "NOT VERIFIED"
 msgstr "SENSE VERIFICAR"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:621
+#: ../../src/ui_fsmenu/addons/manager.cc:622
 msgid "verified"
 msgstr "verificat"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:625
+#: ../../src/ui_fsmenu/addons/manager.cc:626
 msgid "Upgrade All"
 msgstr "Actualitza'ls tots"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:767
+#: ../../src/ui_fsmenu/addons/manager.cc:765
 msgid "Not logged in"
 msgstr "No heu iniciat sessió"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:768
+#: ../../src/ui_fsmenu/addons/manager.cc:766
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Feu clic per iniciar sessió. Després podreu comentar i votar els complements i pujar els vostres."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:772
+#: ../../src/ui_fsmenu/addons/manager.cc:770
 msgid "Please log in to upload add-ons"
 msgstr "Inicieu sessió per pujar els complements"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:774
+#: ../../src/ui_fsmenu/addons/manager.cc:772
 msgid "Please log in to upload content"
 msgstr "Inicieu sessió per pujar el contingut"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:776
+#: ../../src/ui_fsmenu/addons/manager.cc:774
 msgid "Please log in to send an enquiry"
 msgstr "Si us plau, inicieu sessió per enviar una consulta."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:781
+#: ../../src/ui_fsmenu/addons/manager.cc:779
 #, c-format
 msgid "Logged in as %s"
 msgstr "Sessió iniciada com a %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:781
+#: ../../src/ui_fsmenu/addons/manager.cc:779
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Sessió iniciada com a %s (admin)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:782
+#: ../../src/ui_fsmenu/addons/manager.cc:780
 msgid "Click to log out"
 msgstr "Feu clic per tancar la sessió"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:787
+#: ../../src/ui_fsmenu/addons/manager.cc:785
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Si us plau, marqueu la casella de confirmació per pujar els complements."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:790
+#: ../../src/ui_fsmenu/addons/manager.cc:788
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Si us plau, marqueu la casella de confirmació per pujar el contingut."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:817
+#: ../../src/ui_fsmenu/addons/manager.cc:815
 msgid "Server Error"
 msgstr "Error del servidor"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:818
+#: ../../src/ui_fsmenu/addons/manager.cc:816
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -3780,11 +3782,11 @@ msgid ""
 "%s"
 msgstr "No es pot connectar al servidor.\nMissatge d'error:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:826
+#: ../../src/ui_fsmenu/addons/manager.cc:824
 msgid "Wrong Password"
 msgstr "Contrasenya incorrecta"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:827
+#: ../../src/ui_fsmenu/addons/manager.cc:825
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
@@ -3895,28 +3897,42 @@ msgid ""
 "maps from loading."
 msgstr "Els complements amb errors de dependències poden funcionar incorrectament o que no es puguin carregar algunes partides i mapes."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1345
+#: ../../src/ui_fsmenu/addons/manager.cc:1364
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
+"newer than the version present on the server (%3$s)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1375
+#, c-format
+msgid ""
+"The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
+"match the category of the version present on the server (%3$s)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/manager.cc:1386
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:55
 msgid "Upload"
 msgstr "Puja"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1346
+#: ../../src/ui_fsmenu/addons/manager.cc:1387
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Voleu pujar el complement «%s» al servidor?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1354
+#: ../../src/ui_fsmenu/addons/manager.cc:1396
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "«%s» s'està carregant…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1361
-#: ../../src/ui_fsmenu/addons/manager.cc:1415
-#: ../../src/ui_fsmenu/addons/manager.cc:1478
+#: ../../src/ui_fsmenu/addons/manager.cc:1403
+#: ../../src/ui_fsmenu/addons/manager.cc:1456
+#: ../../src/ui_fsmenu/addons/manager.cc:1519
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1384
+#: ../../src/ui_fsmenu/addons/manager.cc:1425
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -3925,12 +3941,12 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no s'ha pogut pujar al servidor.\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1396
+#: ../../src/ui_fsmenu/addons/manager.cc:1437
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "S'està baixant «%s»…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1431
+#: ../../src/ui_fsmenu/addons/manager.cc:1472
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3939,7 +3955,7 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no es pot baixar del servidor. Es saltarà la instal·lació/actualització d'aquest complement.\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1509
+#: ../../src/ui_fsmenu/addons/manager.cc:1550
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -3948,7 +3964,7 @@ msgid ""
 "%2$s"
 msgstr "Les traduccions del complement «%1$s» no s'han pogut baixar del servidor. Es saltarà la instal·lació/actualització de les traduccions .\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1578
+#: ../../src/ui_fsmenu/addons/manager.cc:1619
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "El complement necessari «%s» no es pot trobar al servidor."
@@ -4188,25 +4204,25 @@ msgid "Directory Tree"
 msgstr "Arbre de carpetes"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:273
-#: ../../src/ui_fsmenu/main.cc:420
+#: ../../src/ui_fsmenu/main.cc:422
 #, c-format
 msgid "Name: %s"
 msgstr "Nom: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:276
-#: ../../src/ui_fsmenu/main.cc:423 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:425 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Mida: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:279
-#: ../../src/ui_fsmenu/main.cc:425 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:427 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:280
-#: ../../src/ui_fsmenu/main.cc:364 ../../src/ui_fsmenu/main.cc:427
+#: ../../src/ui_fsmenu/main.cc:366 ../../src/ui_fsmenu/main.cc:429
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -5193,7 +5209,7 @@ msgid ""
 "Do you want to load the replay anyway?"
 msgstr "La repetició es va crear amb una versió diferent del Widelands. Potser és compatible, però probablement es dessincronitzi o potser no es pugui carregar.\n\nSi us plau, no envieu informes d'error que passin mentre mireu la repetició.\n\nVoleu carregar la repetició igualment?"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:386
 msgid "Online Game Settings"
 msgstr "Configuració de les partides en línia"
 
@@ -5240,200 +5256,200 @@ msgid ""
 "%s"
 msgstr "La partida no es pot crear.\nMissatge d'error:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:317
+#: ../../src/ui_fsmenu/main.cc:319
 msgid "Begin a new game"
 msgstr "Comença una partida nova"
 
-#: ../../src/ui_fsmenu/main.cc:317 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:218
 msgid "New Game"
 msgstr "Partida nova"
 
-#: ../../src/ui_fsmenu/main.cc:319 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:321 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:232
 msgid "New Random Game"
 msgstr "Partida aleatòria nova"
 
-#: ../../src/ui_fsmenu/main.cc:320
+#: ../../src/ui_fsmenu/main.cc:322
 msgid "Create a new random match"
 msgstr "Crea un enfrontament aleatori"
 
-#: ../../src/ui_fsmenu/main.cc:322 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:242
 msgid "Campaigns"
 msgstr "Campanyes"
 
-#: ../../src/ui_fsmenu/main.cc:322
+#: ../../src/ui_fsmenu/main.cc:324
 msgid "Play a campaign"
 msgstr "Juga una campanya"
 
-#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:237
+#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:237
 msgid "Tutorials"
 msgstr "Tutorials"
 
-#: ../../src/ui_fsmenu/main.cc:325
+#: ../../src/ui_fsmenu/main.cc:327
 msgid "Play one of our beginners’ tutorials"
 msgstr "Juga un tutorial per als nouvinguts al Widelands"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:327 ../../src/wlapplication_options.cc:222
+#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:222
 #: ../../src/wlapplication_options.cc:584
 #: ../../src/wui/game_main_menu_save_game.cc:52
 #: ../../src/wui/interactive_gamebase.cc:155
 msgid "Load Game"
 msgstr "Carrega partida"
 
-#: ../../src/ui_fsmenu/main.cc:328
+#: ../../src/ui_fsmenu/main.cc:330
 msgid "Continue a saved game"
 msgstr "Continua una partida desada"
 
-#: ../../src/ui_fsmenu/main.cc:349 ../../src/wlapplication_options.cc:279
+#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:279
 msgid "Continue Playing"
 msgstr "Continua jugant"
 
-#: ../../src/ui_fsmenu/main.cc:358
+#: ../../src/ui_fsmenu/main.cc:360
 #, c-format
 msgid "Map: %s"
 msgstr "Mapa: %s"
 
-#: ../../src/ui_fsmenu/main.cc:361
+#: ../../src/ui_fsmenu/main.cc:363
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Condició de victòria: %s"
 
-#: ../../src/ui_fsmenu/main.cc:367
+#: ../../src/ui_fsmenu/main.cc:369
 #, c-format
 msgid "Gametime: %s"
 msgstr "Temps jugat: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:373
+#: ../../src/ui_fsmenu/main.cc:375
 #, c-format
 msgid "Saved: %s"
 msgstr "Data de desada: %s"
 
-#: ../../src/ui_fsmenu/main.cc:381
+#: ../../src/ui_fsmenu/main.cc:383
 msgid "Online Game"
 msgstr "Partida en línia"
 
-#: ../../src/ui_fsmenu/main.cc:382
+#: ../../src/ui_fsmenu/main.cc:384
 msgid "Join the Widelands lobby"
 msgstr "Entra a la sala d'espera del Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:385
+#: ../../src/ui_fsmenu/main.cc:387
 msgid "Log in as a registered user"
 msgstr "Inicia sessió com a usuari registrat"
 
-#: ../../src/ui_fsmenu/main.cc:387 ../../src/wlapplication_options.cc:296
+#: ../../src/ui_fsmenu/main.cc:389 ../../src/wlapplication_options.cc:296
 msgid "LAN / Direct IP"
 msgstr "LAN / IP Directa"
 
-#: ../../src/ui_fsmenu/main.cc:388
+#: ../../src/ui_fsmenu/main.cc:390
 msgid "Play a private online game"
 msgstr "Juga una partida en línia privada"
 
-#: ../../src/ui_fsmenu/main.cc:391
+#: ../../src/ui_fsmenu/main.cc:393
 msgid "Create a new empty map"
 msgstr "Crea un mapa nou buit"
 
-#: ../../src/ui_fsmenu/main.cc:394
+#: ../../src/ui_fsmenu/main.cc:396
 msgid "Create a new random map"
 msgstr "Crea un mapa aleatori nou"
 
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:398
 msgid "Edit an existing map"
 msgstr "Edita un mapa existent"
 
-#: ../../src/ui_fsmenu/main.cc:413 ../../src/wlapplication_options.cc:274
+#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:274
 msgid "Continue Editing"
 msgstr "Continua editant"
 
-#: ../../src/ui_fsmenu/main.cc:437
+#: ../../src/ui_fsmenu/main.cc:439
 msgid "Single Player…"
 msgstr "Un sol jugador…"
 
-#: ../../src/ui_fsmenu/main.cc:438
+#: ../../src/ui_fsmenu/main.cc:440
 msgid "Multiplayer…"
 msgstr "Multijugador…"
 
-#: ../../src/ui_fsmenu/main.cc:439
+#: ../../src/ui_fsmenu/main.cc:441
 msgid "Editor…"
 msgstr "Editor…"
 
-#: ../../src/ui_fsmenu/main.cc:441
+#: ../../src/ui_fsmenu/main.cc:443
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Comença o carrega una campanya o partida lliure d'un sol jugador"
 
-#: ../../src/ui_fsmenu/main.cc:444
+#: ../../src/ui_fsmenu/main.cc:446
 msgid "Play with your friends over the internet"
 msgstr "Juga amb amics a través d'Internet"
 
-#: ../../src/ui_fsmenu/main.cc:447
+#: ../../src/ui_fsmenu/main.cc:449
 msgid "Launch the map editor"
 msgstr "Inicia l'editor de mapes"
 
-#: ../../src/ui_fsmenu/main.cc:450 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:452 ../../src/wlapplication_options.cc:227
 msgid "Watch Replay"
 msgstr "Mostra repeticions"
 
-#: ../../src/ui_fsmenu/main.cc:452
+#: ../../src/ui_fsmenu/main.cc:454
 msgid "Watch the replay of an old game"
 msgstr "Mira la repetició d'una partida antiga"
 
-#: ../../src/ui_fsmenu/main.cc:455 ../../src/wlapplication_options.cc:292
+#: ../../src/ui_fsmenu/main.cc:457 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
 msgstr "Complements"
 
-#: ../../src/ui_fsmenu/main.cc:457
+#: ../../src/ui_fsmenu/main.cc:459
 msgid "Install and manage add-ons"
 msgstr "Instal·la i configura els complements"
 
-#: ../../src/ui_fsmenu/main.cc:459 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:461 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:309
 msgid "Options"
 msgstr "Opcions"
 
-#: ../../src/ui_fsmenu/main.cc:461
+#: ../../src/ui_fsmenu/main.cc:463
 msgid "Technical and game-related settings"
 msgstr "Configuració tècnica i del joc"
 
-#: ../../src/ui_fsmenu/main.cc:465
+#: ../../src/ui_fsmenu/main.cc:467
 msgid "Readme, License, and Credits"
 msgstr "Llegeix-me, llicència i crèdits"
 
-#: ../../src/ui_fsmenu/main.cc:467 ../../src/wlapplication_options.cc:283
+#: ../../src/ui_fsmenu/main.cc:469 ../../src/wlapplication_options.cc:283
 msgid "Exit Widelands"
 msgstr "Surt del Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:469
+#: ../../src/ui_fsmenu/main.cc:471
 msgid "Quit the game"
 msgstr "Abandona el joc"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:474
+#: ../../src/ui_fsmenu/main.cc:476
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Versió %1$s (%2$s)."
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:477
+#: ../../src/ui_fsmenu/main.cc:479
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% de l'equip de desenvolupament del Widelands sota la Llicència Pública General GNU V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:809
+#: ../../src/ui_fsmenu/main.cc:811
 msgid "Desyncing Add-On Found"
 msgstr "S'ha trobat un complement que causa dessincronitzacions."
 
-#: ../../src/ui_fsmenu/main.cc:810
+#: ../../src/ui_fsmenu/main.cc:812
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Hi ha un complement actiu que causa dessincronitzacions. Continueu si voleu sota la vostra pròpia responsabilitat."
 
-#: ../../src/ui_fsmenu/main.cc:910 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:912 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found!"
 msgstr "No s'ha trobat cap cultura!"
 
-#: ../../src/ui_fsmenu/main.cc:911 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:913 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "No s'ha trobat cap cultura a data/tribes/intialization/[tribename]/init.lua."
 
@@ -5991,17 +6007,17 @@ msgid "Try system language"
 msgstr "Prova l'idioma del sistema"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:650
+#: ../../src/ui_fsmenu/options.cc:656
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "La traducció al %s està completada."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:654
+#: ../../src/ui_fsmenu/options.cc:660
 msgid "The translation into %1% is %2%%% complete."
 msgstr "La traducció al %1% està completada un %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:666
+#: ../../src/ui_fsmenu/options.cc:672
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Si desitgeu ajudar-nos a traduir el Widelands, si us plau visiteu %s."
@@ -6084,18 +6100,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autors"
@@ -6530,7 +6546,7 @@ msgstr "Commuta la visió dels recursos"
 
 #: ../../src/wlapplication_options.cc:445
 msgid "Toggle Maximum Build Spaces"
-msgstr ""
+msgstr "Mostra/Amaga els espais de construcció grans"
 
 #: ../../src/wlapplication_options.cc:452
 #, c-format
@@ -7010,7 +7026,7 @@ msgstr "Atac"
 
 #. * TRANSLATORS: Number of soldiers that should attack. Used in the attack
 #. window.
-#: ../../src/wui/attack_window.cc:166
+#: ../../src/wui/attack_window.cc:171
 #: ../../src/wui/constructionsitewindow.cc:525
 #, c-format
 msgid "%u soldier"
@@ -7018,75 +7034,75 @@ msgid_plural "%u soldiers"
 msgstr[0] "%u soldat"
 msgstr[1] "%u soldats"
 
-#: ../../src/wui/attack_window.cc:244
+#: ../../src/wui/attack_window.cc:249
 msgid "Number of soldiers"
 msgstr "Nombre de soldats"
 
-#: ../../src/wui/attack_window.cc:250
+#: ../../src/wui/attack_window.cc:255
 msgid "Send less soldiers. Hold down Ctrl to send no soldiers"
 msgstr "Envieu menys soldats. Mantingueu premut Ctrl per no enviar-n'hi."
 
-#: ../../src/wui/attack_window.cc:255
+#: ../../src/wui/attack_window.cc:260
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr "Envia més soldats. Mantingueu premuda la tecla Ctrl per enviar-n'hi el màxim possible."
 
-#: ../../src/wui/attack_window.cc:259
+#: ../../src/wui/attack_window.cc:264
 msgid "Start attack"
 msgstr "Inicia atac"
 
-#: ../../src/wui/attack_window.cc:278
+#: ../../src/wui/attack_window.cc:283
 msgid "Attackers:"
 msgstr "Atacants:"
 
-#: ../../src/wui/attack_window.cc:284
+#: ../../src/wui/attack_window.cc:289
 msgid "Click on a soldier to remove him from the list of attackers"
 msgstr "Feu clic en un soldat per treure'l de la llista d'atacants."
 
-#: ../../src/wui/attack_window.cc:286
+#: ../../src/wui/attack_window.cc:291
 msgid "Hold down Ctrl to remove all soldiers from the list"
 msgstr "Mantingueu premuda la tecla Ctrl per treure tots els soldats de la llista."
 
-#: ../../src/wui/attack_window.cc:287
+#: ../../src/wui/attack_window.cc:292
 msgid ""
 "Hold down Shift to remove all soldiers up to the one you’re pointing at"
 msgstr "Mantingueu premuda la tecla Maj per treure tots els soldats de la llista excepte el que esteu senyalant."
 
-#: ../../src/wui/attack_window.cc:294
+#: ../../src/wui/attack_window.cc:299
 msgid "Not attacking:"
 msgstr "Sense atacar:"
 
-#: ../../src/wui/attack_window.cc:299
+#: ../../src/wui/attack_window.cc:304
 msgid "Click on a soldier to add him to the list of attackers"
 msgstr "Feu clic en un soldat per afegir-lo a la llista d'atacants."
 
-#: ../../src/wui/attack_window.cc:301
+#: ../../src/wui/attack_window.cc:306
 msgid "Hold down Ctrl to add all soldiers to the list"
 msgstr "Mantingueu premuda la tecla Ctrl per afegir tots els soldats a la llista."
 
-#: ../../src/wui/attack_window.cc:302
+#: ../../src/wui/attack_window.cc:307
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
 msgstr "Mantingueu premuda la tecla Maj per afegir tots els soldats de la llista excepte el que esteu senyalant."
 
-#: ../../src/wui/attack_window.cc:311
+#: ../../src/wui/attack_window.cc:322
 msgid "Destroy target"
 msgstr "Destrueix l'objectiu"
 
-#: ../../src/wui/attack_window.cc:312
+#: ../../src/wui/attack_window.cc:323
 msgid "Destroy the target building instead of conquering it"
 msgstr "Destrueix l'objectiu en lloc de conquerir-lo."
 
-#: ../../src/wui/attack_window.cc:323 ../../src/wui/buildingwindow.cc:389
+#: ../../src/wui/attack_window.cc:334 ../../src/wui/buildingwindow.cc:389
 #: ../../src/wui/fieldaction.cc:498 ../../src/wui/shipwindow.cc:143
 msgid "Show Debug Window"
 msgstr "Mostra la finestra de depuració"
 
-#: ../../src/wui/attack_window.cc:327 ../../src/wui/buildingwindow.cc:405
+#: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:405
 msgid "Center view on this"
 msgstr "Centra la vista aquí"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:426 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:441 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:480
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -7150,9 +7166,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730

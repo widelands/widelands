@@ -7,6 +7,7 @@
 # Elisabeth Jäger, 2018
 # GunChleoc, 2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Wuzzy <almikes@aol.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Wuzzy <almikes@aol.com>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,7 +107,7 @@ msgstr "Hafenbauplatz"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
 msgstr ""
-"Suche nach einem Haufenbauplatz um wieder Zugang zum Meer zu erhalten."
+"Suche nach einem Haufenbauplatz, um wieder Zugang zum Meer zu erhalten."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
@@ -534,7 +535,7 @@ msgid ""
 " number of marble columns that we request in our basic economy settings."
 msgstr ""
 "Ich habe bemerkt, dass unser Steinmetz endlich seine Arbeit aufgenommen hat."
-" Er wird die Anzahl an Marmorsäulen schneiden, die wir in unseren "
+" Er wird die Anzahl an Marmorsäulen hauen, die wir in unseren "
 "Wirtschaftseinstellungen fordern."
 
 #. TRANSLATORS: Amalea
@@ -546,7 +547,7 @@ msgid ""
 "sufficient for the moment being."
 msgstr ""
 "Das Problem ist, dass wir nicht den gesamten Marmor zu Säulen verarbeiten "
-"können ohne unsere Vorräte zu erschöpfen. Daher sollten wir die Zielmenge "
+"können, ohne unsere Vorräte zu erschöpfen. Daher sollten wir die Zielmenge "
 "für Marmorsäulen in den Wirtschaftseinstellungen runtersetzen. Ich denke, "
 "dass eine Reserve von vier Säulen im Moment reichen sollte."
 

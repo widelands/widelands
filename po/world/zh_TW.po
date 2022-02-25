@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2021-06-28 02:47+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/widelands/widelands/language/zh_TW/)\n"
@@ -344,7 +344,7 @@ msgstr ""
 msgid "Dead Tree"
 msgstr ""
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr ""
 
