@@ -1176,9 +1176,9 @@ descriptions:new_tribe {
       },
 
 --[[ lore template
-            -- TRANSLATORS: Lore helptext for an empire production site: 
+            -- TRANSLATORS: Lore helptext for an empire production site:
             lore = pgettext("empire_building", "‘’ ()"),
-            -- TRANSLATORS: Lore author helptext for an empire production site: 
+            -- TRANSLATORS: Lore author helptext for an empire production site:
             lore_author = pgettext(""),
 ]]--
 
