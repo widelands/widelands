@@ -1407,7 +1407,7 @@ descriptions:new_tribe {
                     " will help you to stabilize your economy."),
             -- TRANSLATORS: Note lore for an atlantean production site: Warehouse
             lore = pgettext("atlanteans_building", "Maybe you think its a boring task to store, count an retreive all this stuff, "..
-						   "But do you really want your carriers to walk all the way to your Headquarters?"),
+                     "But do you really want your carriers to walk all the way to your Headquarters?"),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
             lore_author = pgettext("atlanteans_building", "Head of the warehouse")
 
