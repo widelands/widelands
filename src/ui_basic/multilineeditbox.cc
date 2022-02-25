@@ -108,11 +108,17 @@ MultilineEditbox::MultilineEditbox(
 }
 
 MultilineEditbox::Data::Data(MultilineEditbox& init_owner)
-   : scrollbar(&init_owner, init_owner.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, init_owner.get_h(), init_owner.panel_style_),
+   : scrollbar(&init_owner,
+               init_owner.get_w() - Scrollbar::kSize,
+               0,
+               Scrollbar::kSize,
+               init_owner.get_h(),
+               init_owner.panel_style_),
      style(init_owner.panel_style_),
      cursor_pos(0),
-     caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-                                                                    "images/ui_basic/caret_fs.png"),
+     caret_image_path(init_owner.panel_style_ == PanelStyle::kWui ?
+                         "images/ui_basic/caret_wui.png" :
+                         "images/ui_basic/caret_fs.png"),
      lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
