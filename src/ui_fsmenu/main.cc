@@ -252,7 +252,7 @@ void MainMenu::update_template() {
 	}
 	if (images_.empty()) {
 		log_warn("No main menu backgrounds found, using fallback image");
-		images_.push_back("images/logos/wl-ico-128.png");
+		images_.emplace_back("images/logos/wl-ico-128.png");
 	}
 
 	last_image_ = draw_image_ = RNG::static_rand(images_.size());
@@ -290,8 +290,8 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
                                           MapData::MapType::kScenario :
                                           MapData::MapType::kNormal;
-					results.push_back(MapEntry(
-					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()));
+					results.emplace_back(
+					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version());
 				}
 			} catch (...) {
 				// invalid file – silently ignore
@@ -493,7 +493,7 @@ void MainMenu::set_button_visibility(const bool v) {
 	version_.set_visible(v);
 }
 
-bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
+bool MainMenu::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	if (init_time_ != kNoSplash) {
 		init_time_ = kNoSplash;
 		return true;
@@ -635,7 +635,7 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
 }
 
-inline float MainMenu::calc_opacity(const uint32_t time) {
+inline float MainMenu::calc_opacity(const uint32_t time) const {
 	return last_image_ == draw_image_ ?
              1.f :
              std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
