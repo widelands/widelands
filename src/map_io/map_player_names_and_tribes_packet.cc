@@ -37,7 +37,7 @@ constexpr int32_t kCurrentPacketVersion = 2;
 void MapPlayerNamesAndTribesPacket::read(FileSystem& fs,
                                          EditorGameBase& egbase,
                                          bool const skip,
-                                         MapObjectLoader&) {
+                                         MapObjectLoader& /* mol */) {
 	pre_read(fs, egbase.mutable_map(), skip);
 }
 
@@ -78,7 +78,9 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 	}
 }
 
-void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapPlayerNamesAndTribesPacket::write(FileSystem& fs,
+                                          EditorGameBase& egbase,
+                                          MapObjectSaver& /* mos */) {
 	Profile prof;
 
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);

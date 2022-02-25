@@ -5,9 +5,9 @@
 # Translators:
 # Raymond Vetter, 2017
 # Jonas Richardsen <jonas.richardsen@isdas.de>, 2017
-# Daniel Hahn <giggeler53@gmail.com>, 2018
 # Elisabeth Jäger, 2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Wuzzy <almikes@aol.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Wuzzy <almikes@aol.com>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +36,7 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Reiße alle unproduktiven kleinen Gebäude ab um einige Rohstoffe für neue "
+"Reiße alle unproduktiven kleinen Gebäude ab, um einige Rohstoffe für neue "
 "Gebäude zu bekommen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
@@ -159,7 +159,7 @@ msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
-"Finde das Kloster im Norden um die verbesserte Technologie für deine "
+"Finde das Kloster im Norden, um die verbesserte Technologie für deine "
 "Weizenproduktionskette zu erhalten."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
@@ -230,14 +230,14 @@ msgstr "Werkzeugproduktion"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:145
 msgid "Produce at least ten tools to improve your economy."
-msgstr "Stelle mindestens 10 Werkzeuge her um deine Wirtschaft zu verbessern"
+msgstr "Stelle mindestens 10 Werkzeuge her, um deine Wirtschaft zu verbessern"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
-"Vergiss nicht das du die Produktion in den Wirtschaftseinstellungen anpassen"
-" kannst."
+"Vergiss nicht, dass du die Produktion in den Wirtschaftseinstellungen "
+"anpassen kannst."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:152
 msgid "Recruit new soldiers"

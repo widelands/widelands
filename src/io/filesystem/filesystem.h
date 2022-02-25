@@ -107,7 +107,7 @@ public:
 	static std::string get_working_directory();
 
 	/// Given a filename, return the name with any path stripped off.
-	static const char* fs_filename(const char* n);
+	static const char* fs_filename(const char* p);
 
 	// Everything before the final separator (/ or \) in 'full_path'. The
 	// returned value is either the empty string or ends with a separator.
@@ -117,7 +117,7 @@ public:
 	static std::string filename_ext(const std::string& f);
 
 	/// Given a filename, return the name with any path or extension stripped off.
-	static std::string filename_without_ext(const char* n);
+	static std::string filename_without_ext(const char* p);
 	static std::string get_homedir();
 
 #ifdef USE_XDG

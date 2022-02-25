@@ -146,8 +146,7 @@ TwoColumnsFullNavigationMenu::TwoColumnsFullNavigationMenu(MenuCapsule& fsmm,
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 }
 
-TwoColumnsFullNavigationMenu::~TwoColumnsFullNavigationMenu() {
-}
+TwoColumnsFullNavigationMenu::~TwoColumnsFullNavigationMenu() = default;
 
 void TwoColumnsFullNavigationMenu::layout() {
 	TwoColumnsBasicNavigationMenu::layout();
@@ -209,7 +208,8 @@ MenuCapsule::MenuCapsule(MainMenu& fsmm)
 void MenuCapsule::layout() {
 	UI::Window::layout();
 	if (!is_minimal()) {
-		int dw, dh;
+		int dw;
+		int dh;
 		box_.get_desired_size(&dw, &dh);
 		box_.set_size(dw, dh);
 

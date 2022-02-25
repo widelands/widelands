@@ -220,7 +220,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
 	MainMenu::find_maps("maps/My_Maps", maps_list_);
 
 	my_maps_.selected.connect(
-	   [this](uint32_t) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
+	   [this](uint32_t /* value */) { map_add_.set_enabled(dirstruct_.selection_index() > 0); });
 	map_add_.set_enabled(false);
 	map_delete_.set_enabled(false);
 	dirstruct_.selected.connect([this](uint32_t i) {
