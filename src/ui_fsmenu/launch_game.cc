@@ -294,7 +294,8 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
-					std::string name, desc;
+					std::string name;
+					std::string desc;
 					// Prevent propagation of the textdomain
 					if (t->has_key("textdomain")) {
 						std::unique_ptr<i18n::GenericTextdomain> td(

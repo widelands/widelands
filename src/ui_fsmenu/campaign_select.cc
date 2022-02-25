@@ -38,8 +38,8 @@ CampaignSelect::CampaignSelect(MenuCapsule& fsmm)
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
 	right_column_content_box_.add(&campaign_details_, UI::Box::Resizing::kExpandBoth);

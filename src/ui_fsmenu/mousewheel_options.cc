@@ -103,7 +103,7 @@ inline bool dir_y(const uint8_t dir) {
 	set_mousewheel_option_bool(MousewheelOptionID::option##X, dir_x(dir));                          \
 	set_mousewheel_option_bool(MousewheelOptionID::option##Y, dir_y(dir));
 
-void MousewheelConfigSettings::apply() {
+void MousewheelConfigSettings::apply() const {
 	set_mousewheel_option_bool(MousewheelOptionID::kMapScroll, enable_map_scroll_ != 0);
 	set_mousewheel_keymod(MousewheelOptionID::kMapZoomMod, zoom_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kMapScrollMod, map_scroll_mod_);
