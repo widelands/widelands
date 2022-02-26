@@ -48,14 +48,14 @@ struct ShippingItem {
 	// only interested in the ware if it is the one or the other.
 	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
-	void set_economy(const Game&, Economy* e, WareWorker);
+	void set_economy(const Game&, Economy* e, WareWorker) const;
 	const PortDock* get_destination(Game&) const;
 
 	void remove(EditorGameBase&);
 
 	struct Loader {
 		void load(FileRead& fr);
-		ShippingItem get(MapObjectLoader& mol);
+		ShippingItem get(MapObjectLoader& mol) const;
 
 	private:
 		uint32_t serial_ = 0U;
@@ -71,10 +71,10 @@ private:
 	friend struct ShippingSchedule;
 
 	// Called when a port is reached. The item will act again on its own.
-	void end_shipping(Game&);
+	void end_shipping(Game&) const;
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
-	void set_location(Game&, MapObject* obj);
+	void set_location(Game&, MapObject* obj) const;
 
 	// Updates destination_dock_.
 	void update_destination(Game&, PortDock&);
