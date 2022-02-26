@@ -491,17 +491,17 @@ struct CheckStepBlocked {
 	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(const Map& /*unused*/,
-	             FCoords /*unused*/,
+	bool allowed(const Map& /* map */,
+	             FCoords /* start */,
 	             FCoords end,
-	             int32_t /*unused*/,
-	             CheckStep::StepId /*unused*/) const {
+	             int32_t /* dir */,
+	             CheckStep::StepId /* id */) const {
 		if (end == tracker_.finaldest_) {
 			return true;
 		}
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(const Map& /*unused*/, FCoords /*unused*/) const {
+	bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
 		return true;
 	}
 
@@ -705,7 +705,7 @@ void Bob::start_task_move(Game& game,
 	push_task(game, taskMove, Duration(tdelta));
 }
 
-void Bob::move_update(Game& game, State& /*unused*/) {
+void Bob::move_update(Game& game, State& /* state */) {
 	if (walkend_ <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
@@ -797,7 +797,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const InfoToDraw& /*unused*/,
+               const InfoToDraw& /* info */,
                const Vector2f& field_on_dst,
                const Widelands::Coords& coords,
                const float scale,
@@ -867,7 +867,7 @@ int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool
 	return tdelta;  // yep, we were successful
 }
 
-bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /*unused*/) {
+bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /* commit */) {
 	// Battles always block movement!
 	std::vector<Bob*> soldiers;
 	game.map().find_bobs(game, Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));

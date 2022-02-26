@@ -211,15 +211,15 @@ TrainingAttribute parse_training_attribute(const std::string& argument) {
 }
 }  // namespace
 
-bool ProductionProgram::Action::get_building_work(Game& /*unused*/,
-                                                  ProductionSite& /*unused*/,
-                                                  Worker& /*unused*/) const {
+bool ProductionProgram::Action::get_building_work(Game& /* game */,
+                                                  ProductionSite& /* site */,
+                                                  Worker& /* worker */) const {
 	return false;
 }
 
-void ProductionProgram::Action::building_work_failed(Game& /*unused*/,
-                                                     ProductionSite& /*unused*/,
-                                                     Worker& /*unused*/) const {
+void ProductionProgram::Action::building_work_failed(Game& /* game */,
+                                                     ProductionSite& /* site */,
+                                                     Worker& /* worker */) const {
 }
 
 ProductionProgram::Groups
@@ -577,13 +577,13 @@ bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const Product
 	return false;
 }
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description(
-   const Descriptions& /*unused*/) const {
+   const Descriptions& /* descriptions */) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs experience'. */
 	return _("a worker needs experience");
 }
 
 std::string ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(
-   const Descriptions& /*unused*/) const {
+   const Descriptions& /* descriptions */) const {
 	/** TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers need no experience'. */
 	return _("the workers need no experience");
 }
@@ -1019,7 +1019,7 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 
 void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
                                                             ProductionSite& psite,
-                                                            Worker& /*unused*/) const {
+                                                            Worker& /* worker */) const {
 	psite.program_end(game, on_failure_);
 }
 
@@ -2137,7 +2137,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 
 void ProductionProgram::ActConstruct::building_work_failed(Game& game,
                                                            ProductionSite& psite,
-                                                           Worker& /*unused*/) const {
+                                                           Worker& /* worker */) const {
 	psite.program_end(game, ProgramResult::kFailed);
 }
 

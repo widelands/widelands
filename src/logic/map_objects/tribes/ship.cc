@@ -385,7 +385,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 }
 
 /// updates a ships tasks in expedition mode
-void Ship::ship_update_expedition(Game& game, Bob::State& /*unused*/) {
+void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
 	assert(expedition_);
@@ -861,7 +861,7 @@ void Ship::start_task_expedition(Game& game) {
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scouting_direction(Game& /*unused*/, WalkingDir scouting_direction) {
+void Ship::exp_scouting_direction(Game& /* game */, WalkingDir scouting_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
@@ -906,7 +906,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
 /// direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game& /*unused*/, IslandExploreDirection island_explore_direction) {
+void Ship::exp_explore_island(Game& /* game */, IslandExploreDirection island_explore_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);

@@ -751,7 +751,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	verb_log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
-ResizeHistory Map::dump_state(const EditorGameBase& /*unused*/) const {
+ResizeHistory Map::dump_state(const EditorGameBase& /* egbase */) const {
 	ResizeHistory rh;
 	rh.size.w = width_;
 	rh.size.h = height_;
@@ -1097,7 +1097,7 @@ struct FindBobsCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase& /*unused*/, const FCoords& cur) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
 		for (Bob* bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 			if (list_ && std::find(list_->begin(), list_->end(), bob) != list_->end()) {
 				continue;
@@ -1174,7 +1174,7 @@ struct FindImmovablesCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase& /*unused*/, const FCoords& cur) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
 		BaseImmovable* const imm = cur.field->get_immovable();
 
 		if (!imm) {

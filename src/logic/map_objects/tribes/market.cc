@@ -112,7 +112,7 @@ void Market::worker_arrived_callback(
 }
 
 void Market::ware_arrived_callback(
-   Game& g, InputQueue* /*unused*/, DescriptionIndex /*unused*/, Worker* /*unused*/, void* data) {
+   Game& g, InputQueue* /* queue */, DescriptionIndex /* index */, Worker* /* worker */, void* data) {
 	Market& market = *static_cast<Market*>(data);
 	market.try_launching_batch(&g);
 }

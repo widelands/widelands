@@ -610,8 +610,8 @@ Called when our soldier arrives.
 ===============
 */
 void MilitarySite::request_soldier_callback(Game& game,
-                                            Request& /*unused*/,
-                                            DescriptionIndex /*unused*/,
+                                            Request& /* req */,
+                                            DescriptionIndex /* index */,
                                             Worker* const w,
                                             PlayerImmovable& target) {
 	MilitarySite& msite = dynamic_cast<MilitarySite&>(target);

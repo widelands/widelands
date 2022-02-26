@@ -182,7 +182,7 @@ Access to the wares queues by id
 */
 InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi,
                                          WareWorker const type,
-                                         const Request* /*unused*/) {
+                                         const Request* /* req */) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -695,9 +695,9 @@ Called by InputQueue code when an ware has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback(Game& game,
-                                            InputQueue* /*unused*/,
-                                            DescriptionIndex /*unused*/,
-                                            Worker* /*unused*/,
+                                            InputQueue* /* queue */,
+                                            DescriptionIndex /* index */,
+                                            Worker* /* worker */,
                                             void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 

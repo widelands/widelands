@@ -391,7 +391,7 @@ void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
 }
 
 uint32_t MapObjectDescr::get_animation(const std::string& animname,
-                                       const MapObject* /*unused*/) const {
+                                       const MapObject* /* object */) const {
 	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
 		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
@@ -641,7 +641,7 @@ const Image* MapObject::representative_image() const {
 /**
  * Default implementation
  */
-int32_t MapObject::get_training_attribute(TrainingAttribute /*unused*/) const {
+int32_t MapObject::get_training_attribute(TrainingAttribute /* attr */) const {
 	return -1;
 }
 
@@ -664,7 +664,7 @@ Time MapObject::schedule_act(Game& game, const Duration& tdelta, uint32_t const 
 /**
  * Called when a CMD_ACT triggers.
  */
-void MapObject::act(Game& /*unused*/, uint32_t /*unused*/) {
+void MapObject::act(Game& /* game */, uint32_t /* data */) {
 }
 
 /**
@@ -674,7 +674,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase& /*unused*/) const {
+void MapObject::log_general_info(const EditorGameBase& /* egbase */) const {
 }
 
 const Player& MapObject::owner() const {
@@ -785,7 +785,7 @@ void MapObject::Loader::load_finish() {
 /**
  * Save the MapObject to the given file.
  */
-void MapObject::save(EditorGameBase& /*unused*/, MapObjectSaver& mos, FileWrite& fw) {
+void MapObject::save(EditorGameBase& /* egbase */, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderMapObject);
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 

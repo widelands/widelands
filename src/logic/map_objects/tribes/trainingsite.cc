@@ -767,7 +767,7 @@ void TrainingSite::request_soldier_callback(Game& game,
 #else
                                             Request&,
 #endif
-                                            DescriptionIndex /*unused*/,
+                                            DescriptionIndex /* index */,
                                             Worker* const w,
                                             PlayerImmovable& target) {
 	TrainingSite& tsite = dynamic_cast<TrainingSite&>(target);
@@ -782,7 +782,7 @@ void TrainingSite::request_soldier_callback(Game& game,
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
-void TrainingSite::drop_unupgradable_soldiers(Game& /*unused*/) {
+void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
 	std::vector<Soldier*> droplist;
 
 	for (Soldier* soldier : soldiers_) {
@@ -822,7 +822,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game& /*unused*/) {
  * Drop all the soldiers that can not be upgraded further at this level of resourcing.
  *
  */
-void TrainingSite::drop_stalled_soldiers(Game& /*unused*/) {
+void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 	Soldier* soldier_to_drop = nullptr;
 	uint8_t highest_soldier_level_seen = 0;
 
