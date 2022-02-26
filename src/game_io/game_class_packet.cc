@@ -51,7 +51,8 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 			if (packet_version >= 7) {
 				game.postload_addons_before_loading();
 				for (size_t i = fr.unsigned_32(); i > 0; --i) {
-					Notifications::publish(NoteMapObjectDescription(fr.string(), NoteMapObjectDescription::LoadType::kObject));
+					Notifications::publish(NoteMapObjectDescription(
+					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
 				}
 			} else {
 				game.check_legacy_addons_desync_magic();
