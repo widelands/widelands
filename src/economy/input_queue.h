@@ -223,8 +223,8 @@ protected:
 	 * @param worker The arrived worker or \c nullptr.
 	 * @param target The building where the ware or worker arrived at.
 	 */
-	static void
-	request_callback(Game& game, Request& r, DescriptionIndex index, Worker* worker, PlayerImmovable& target);
+	static void request_callback(
+	   Game& game, Request& r, DescriptionIndex index, Worker* worker, PlayerImmovable& target);
 
 	/**
 	 * Updates the request.
