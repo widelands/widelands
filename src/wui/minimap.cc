@@ -35,8 +35,8 @@ MiniMap::View::View(UI::Panel& parent,
                     MiniMapType* type,
                     int32_t const x,
                     int32_t const y,
-                    uint32_t const /*unused*/,
-                    uint32_t const /*unused*/,
+                    uint32_t const /* w */,
+                    uint32_t const /* h */,
                     InteractiveBase& ibase)
    : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
      ibase_(ibase),
@@ -311,7 +311,7 @@ UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("minimap: %s", e.what());
 	}
 }
-void MiniMap::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void MiniMap::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_32(static_cast<uint32_t>(*view_.minimap_layers_));
 }

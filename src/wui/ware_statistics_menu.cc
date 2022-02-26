@@ -304,7 +304,7 @@ UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("wares statistics menu: %s", e.what());
 	}
 }
-void WareStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void WareStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tab_panel_->active());
 	fw.signed_32(slider_->get_slider().get_value());

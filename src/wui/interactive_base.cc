@@ -742,7 +742,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget& /*unused*/) {
+void InteractiveBase::draw_overlay(RenderTarget& /* rt */) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 

@@ -684,7 +684,7 @@ UI::Window& GameMessageMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("messages menu: %s", e.what());
 	}
 }
-void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void GameMessageMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(mode == Mode::kInbox ? 1 : 0);
 	fw.unsigned_8(static_cast<uint8_t>(message_filter_));

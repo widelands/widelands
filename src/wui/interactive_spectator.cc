@@ -164,10 +164,10 @@ void InteractiveSpectator::exit_btn() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-bool InteractiveSpectator::can_see(Widelands::PlayerNumber /*unused*/) const {
+bool InteractiveSpectator::can_see(Widelands::PlayerNumber /* p */) const {
 	return true;
 }
-bool InteractiveSpectator::can_act(Widelands::PlayerNumber /*unused*/) const {
+bool InteractiveSpectator::can_act(Widelands::PlayerNumber /* p */) const {
 	return false;
 }
 Widelands::PlayerNumber InteractiveSpectator::player_number() const {

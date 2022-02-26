@@ -590,7 +590,7 @@ UI::Window& SeafaringStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("seafaring statistics menu: %s", e.what());
 	}
 }
-void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void SeafaringStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(static_cast<uint8_t>(ship_filter_));
 	fw.unsigned_32(table_.selection_index());

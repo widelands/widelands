@@ -215,7 +215,7 @@ UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("encyclopedia: %s", e.what());
 	}
 }
-void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void EncyclopediaWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	const std::string tab = tabs_.tabs()[tabs_.active()]->get_name().substr(kTabNamePrefix.size());

@@ -318,7 +318,7 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("general statistics menu: %s", e.what());
 	}
 }
-void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(radiogroup_.get_state());
 	for (UI::Button* c : cbs_) {

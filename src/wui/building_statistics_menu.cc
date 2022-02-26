@@ -811,7 +811,7 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("building statistics menu: %s", e.what());
 	}
 }
-void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(low_production_);
 	fw.unsigned_8(tab_panel_.active());

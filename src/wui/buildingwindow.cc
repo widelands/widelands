@@ -691,7 +691,7 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("building window: %s", e.what());
 	}
 }
-void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.signed_32(building_position_.x);
 	fw.signed_32(building_position_.y);

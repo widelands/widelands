@@ -278,7 +278,7 @@ UI::Window& SoldierStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("soldiers statistics menu: %s", e.what());
 	}
 }
-void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tabs_.active());
 }

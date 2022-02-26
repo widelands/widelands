@@ -173,9 +173,9 @@ public:
 	void act_abort_buildwaterway();
 	void act_abort_buildwaterway_and_start_buildroad();
 	void act_removewaterway();
-	void act_build(Widelands::DescriptionIndex /*idx*/);
-	void building_icon_mouse_out(Widelands::DescriptionIndex /*unused*/);
-	void building_icon_mouse_in(Widelands::DescriptionIndex /*idx*/);
+	void act_build(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_out(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_in(Widelands::DescriptionIndex /* idx */);
 	void act_geologist();
 	void act_scout();
 	void act_mark_removal();
@@ -894,7 +894,7 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	reset_mouse_and_die();
 }
 
-void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex /*unused*/) {
+void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex /* idx */) {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
 		showing_workarea_preview_ = false;

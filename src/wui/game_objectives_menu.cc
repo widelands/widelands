@@ -115,7 +115,7 @@ UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
 		throw Widelands::GameDataError("objectives menu: %s", e.what());
 	}
 }
-void GameObjectivesMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /*unused*/) const {
+void GameObjectivesMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_32(list.selection_index());
 }
