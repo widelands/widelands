@@ -137,7 +137,7 @@ private:
 	size_t draw_image_, last_image_;
 	Rectf image_pos(const Image&, bool crop = true);
 	Rectf title_pos();
-	float calc_opacity(uint32_t time);
+	float calc_opacity(uint32_t time) const;
 
 	bool visible_;
 	void set_button_visibility(bool);

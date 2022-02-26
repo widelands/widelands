@@ -103,8 +103,8 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                                     _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 
 	if (is_tutorial_) {
 		scenario_difficulty_.set_visible(false);
@@ -154,11 +154,9 @@ static std::string resolve_and_fix_cross_file(const std::string& path) {
 	if (colonpos == std::string::npos) {
 		// normal case
 		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
-	} else {
-		// add-on
-		return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
-		                                        path.substr(colonpos + 1));
-	}
+	}  // add-on
+	return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
+	                                        path.substr(colonpos + 1));
 }
 
 bool ScenarioSelect::set_has_selection() {

@@ -109,7 +109,7 @@ void Tab::activate() {
 	return parent->activate(id);
 }
 
-bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
+bool Tab::handle_mousepress(uint8_t /*btn*/, int32_t /*x*/, int32_t /*y*/) {
 	play_click();
 	return false;
 }
@@ -262,7 +262,8 @@ void TabPanel::update_desired_size() {
 	// size of contents
 	if (active_ < tabs_.size()) {
 		Panel* const panel = tabs_[active_]->panel;
-		int panelw, panelh = 0;
+		int panelw;
+		int panelh = 0;
 
 		panel->get_desired_size(&panelw, &panelh);
 		// TODO(unknown):  the panel might be bigger -> add a scrollbar in that case
@@ -484,7 +485,8 @@ void TabPanel::handle_mousein(bool inside) {
 /**
  * Update highlighting
  */
-bool TabPanel::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t) {
+bool TabPanel::handle_mousemove(
+   uint8_t /*state*/, int32_t const x, int32_t const y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	size_t hl = find_tab(x, y);
 
 	if (hl != highlight_) {

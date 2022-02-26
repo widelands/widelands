@@ -134,11 +134,14 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 	}
 }
 
-void MapElementalPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapObjectLoader&) {
+void MapElementalPacket::read(FileSystem& fs,
+                              EditorGameBase& egbase,
+                              bool /* skip */,
+                              MapObjectLoader& /* mol */) {
 	pre_read(fs, egbase.mutable_map());
 }
 
-void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& /* mos */) {
 
 	Profile prof;
 	Section& global_section = prof.create_section("global");

@@ -506,7 +506,7 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
+bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t y) {
 	switch (btn) {
 
 	case SDL_BUTTON_LEFT: {
@@ -545,7 +545,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 	}
 }
 
-bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
+bool BaseListselect::handle_mousemove(
+   uint8_t /*state*/, int32_t /*x*/, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 		set_tooltip("");

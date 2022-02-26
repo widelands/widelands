@@ -71,7 +71,7 @@ void FileViewPanel::add_tab_without_script(const std::string& name,
                                            const std::string& title,
                                            Panel* panel,
                                            const std::string& tooltip) {
-	script_paths_.push_back("");
+	script_paths_.emplace_back("");
 	boxes_.push_back(nullptr);
 	textviews_.push_back(nullptr);
 	add(name, title, panel, tooltip);

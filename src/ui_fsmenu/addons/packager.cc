@@ -185,7 +185,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 		pair.second->set_modified_callback([this] { current_addon_edited(); });
 	}
 
-	addons_.selected.connect([this](uint32_t) { addon_selected(); });
+	addons_.selected.connect([this](uint32_t /* value */) { addon_selected(); });
 	addon_new_.sigclicked.connect([this]() { clicked_new_addon(); });
 	addon_delete_.sigclicked.connect([this]() { clicked_delete_addon(); });
 	discard_changes_.sigclicked.connect([this]() { clicked_discard_changes(); });

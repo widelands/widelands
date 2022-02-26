@@ -33,7 +33,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 30;
 
-void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
@@ -133,7 +133,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	}
 }
 
-void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
+void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
