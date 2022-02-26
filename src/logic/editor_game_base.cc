@@ -318,7 +318,16 @@ void EditorGameBase::postload_addons() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 
 	assert(lua_);
+
 	mutable_descriptions()->ensure_tribes_are_registered();
+	if (is_game()) {
+		FileSystem* map_fs = map().filesystem();
+		assert(map_fs != nullptr);
+		if (map_fs->file_exists("scripting/tribes")) {
+			verb_log_info("Game: Reading Scenario Tribes ... ");
+			mutable_descriptions()->register_scenario_tribes(map_fs);
+		}
+	}
 
 	for (const auto& info : enabled_addons_) {
 		if (info->category == AddOns::AddOnCategory::kWorld ||

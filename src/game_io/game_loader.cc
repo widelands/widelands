@@ -106,23 +106,18 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		}
 	}
 
-	verb_log_info("Game: Reading Game Class Data ... ");
-	{
-		GameClassPacket p;
-		p.read(fs_, game_);
-	}
-
+	// This creates the map filesystem, giving us access to scenario-specific registries.
 	verb_log_info("Game: Reading Map Data ... ");
 	GameMapPacket map_packet;
 	map_packet.read(fs_, game_);
 
-	// This has to be loaded after the map packet so that the map's filesystem will exist.
-	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
-	// to load them as early as possible here.
-	FileSystem* map_fs = game_.map().filesystem();
-	if (map_fs->file_exists("scripting/tribes")) {
-		verb_log_info("Game: Reading Scenario Tribes ... ");
-		game_.mutable_descriptions()->register_scenario_tribes(map_fs);
+	// This will load the descriptions in the correct order.
+	// By now, all units must have been registered.
+	// Do not request a description to be loaded before this call.
+	verb_log_info("Game: Reading Game Class Data ... ");
+	{
+		GameClassPacket p;
+		p.read(fs_, game_);
 	}
 
 	verb_log_info("Game: Reading Player Info ...\n");
