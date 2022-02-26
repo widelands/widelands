@@ -44,8 +44,8 @@ struct UniqueWindow : public Window {
 		// Triggered when the window closes
 		Notifications::Signal<> closed;
 
-		void create();
-		void destroy();
+		void create() const;
+		void destroy() const;
 		void toggle();
 
 		int32_t x, y;

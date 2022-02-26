@@ -114,7 +114,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 	RoadBase::cleanup(egbase);
 }
 
-void Road::link_into_flags(EditorGameBase& egbase, bool) {
+void Road::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
@@ -164,8 +164,11 @@ void Road::request_carrier(CarrierSlot& slot) {
 /**
  * The carrier has arrived successfully.
  */
-void Road::request_carrier_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void Road::request_carrier_callback(Game& game,
+                                    Request& rq,
+                                    DescriptionIndex /* index */,
+                                    Worker* const w,
+                                    PlayerImmovable& target) {
 	assert(w);
 
 	Road& road = dynamic_cast<Road&>(target);
@@ -408,7 +411,8 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 		return false;
 	}
 
-	FCoords fr, fd;
+	FCoords fr;
+	FCoords fd;
 	switch (dir) {
 	case WALK_SW:
 		fd = field;
