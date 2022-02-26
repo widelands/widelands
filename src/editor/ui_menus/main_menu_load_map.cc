@@ -33,8 +33,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
    : MainMenuLoadOrSaveMap(parent, registry, "load_map_menu", _("Load Map"), true) {
 	set_current_directory(curdir_);
 
-	table_.selected.connect([this](unsigned) { entry_selected(); });
-	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
+	table_.selected.connect([this](unsigned /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });

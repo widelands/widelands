@@ -56,7 +56,7 @@ struct MousewheelConfigSettings {
 	uint8_t value_invert_, tab_invert_, zoom_invert_;
 
 	void read();
-	void apply();
+	void apply() const;
 
 	MousewheelConfigSettings() {
 		read();

@@ -60,7 +60,7 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) {
+void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
@@ -73,7 +73,7 @@ void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) {
 	}
 }
 
-void ShippingItem::set_location(Game& game, MapObject* obj) {
+void ShippingItem::set_location(Game& game, MapObject* obj) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
@@ -93,7 +93,7 @@ void ShippingItem::set_location(Game& game, MapObject* obj) {
 	}
 }
 
-void ShippingItem::end_shipping(Game& game) {
+void ShippingItem::end_shipping(Game& game) const {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
@@ -158,7 +158,7 @@ void ShippingItem::Loader::load(FileRead& fr) {
 	}
 }
 
-ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) {
+ShippingItem ShippingItem::Loader::get(MapObjectLoader& mol) const {
 	ShippingItem it;
 	if (serial_ != 0) {
 		it.object_ = &mol.get<MapObject>(serial_);
