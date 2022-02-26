@@ -308,7 +308,7 @@ void ShippingSchedule::port_removed(Game& game, PortDock* dock) {
 	sslog("--- port_removed maintenance complete ---\n\n");
 }
 
-void ShippingSchedule::ship_removed(const Game&, Ship* ship) {
+void ShippingSchedule::ship_removed(const Game& /* game */, Ship* ship) {
 	auto it = plans_.find(ship);
 	assert(it != plans_.end());
 	plans_.erase(it);
@@ -1377,7 +1377,7 @@ Duration ShippingSchedule::update(Game& game) {
 						fleet_.get_path(*ppp.start, *ppp.end, path);
 						game.map().calc_cost(path, &d, nullptr);
 						assert(d >= 0);
-						plan.second.push_back(SchedulingState(ppp.end, false, Duration(d)));
+						plan.second.emplace_back(ppp.end, false, Duration(d));
 					}
 				} else if (index_of_start < 0 && index_of_end < 0 &&
 				           indices_near_start.count(plan.second.size() - 1)) {
@@ -1399,14 +1399,14 @@ Duration ShippingSchedule::update(Game& game) {
 					fleet_.get_path(*plan.second.back().dock.get(game), *ppp.start, path);
 					game.map().calc_cost(path, &d, nullptr);
 					assert(d >= 0);
-					plan.second.push_back(SchedulingState(ppp.start, false, Duration(d)));
+					plan.second.emplace_back(ppp.start, false, Duration(d));
 					plan.second.back().load_there[ppp.end] = take;
 					// b
 					d = -1;
 					fleet_.get_path(*ppp.start, *ppp.end, path);
 					game.map().calc_cost(path, &d, nullptr);
 					assert(d >= 0);
-					plan.second.push_back(SchedulingState(ppp.end, false, Duration(d)));
+					plan.second.emplace_back(ppp.end, false, Duration(d));
 				} else if (index_of_start < 0 && index_of_end > 0 &&
 				           indices_near_start.count(index_of_end - 1)) {
 					if (expedition >= 0 && expedition < index_of_end) {
@@ -1521,7 +1521,7 @@ Duration ShippingSchedule::update(Game& game) {
 				return;
 			}
 		}
-		s.push_back(std::make_pair(pd, 1));
+		s.emplace_back(pd, 1);
 	};
 	for (auto& plan : plans_) {
 		if (plan.second.empty()) {
