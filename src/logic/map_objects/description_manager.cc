@@ -246,6 +246,7 @@ void DescriptionManager::load_description(const std::string& description_name) {
 	}
 
 	// Load it - scenario descriptions take precedence
+	load_order_.push_back(description_name);
 	const RegisteredObject* object = nullptr;
 
 	if (registered_scenario_descriptions_.count(description_name)) {

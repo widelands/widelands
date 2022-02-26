@@ -104,17 +104,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 				                    AddOns::version_to_string(requirement.second).c_str());
 			}
 		}
-
-		// Actually apply changes – but only if anything did change, otherwise this may crash
-		// TODO(Nordfriese): This needs to be done here already to prevent the
-		// GamePlayerInfoPacket from crashing in the case that we are loading
-		// a savegame and any player's tribe is receiving a new ware from an
-		// add-on's postload.lua. It would be much better to load only the
-		// tribes that are being played, but this would require rewriting
-		// the GamePlayerInfoPacket so that we know *all* tribes in the game
-		// *before* loading any ware statistics. Do this when we next break
-		// savegame compatibility completely.
-		game_.check_addons_desync_magic();
 	}
 
 	verb_log_info("Game: Reading Game Class Data ... ");

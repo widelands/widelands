@@ -22,10 +22,11 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -45,6 +46,15 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 				for (size_t i = fr.unsigned_32(); i; --i) {
 					game.list_of_scenarios_.push_back(fr.string());
 				}
+			}
+
+			if (packet_version >= 7) {
+				game.postload_addons_before_loading();
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					Notifications::publish(NoteMapObjectDescription(fr.string(), NoteMapObjectDescription::LoadType::kObject));
+				}
+			} else {
+				game.check_legacy_addons_desync_magic();
 			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
@@ -77,6 +87,11 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 
 	fw.unsigned_32(game.list_of_scenarios_.size());
 	for (const std::string& s : game.list_of_scenarios_) {
+		fw.string(s);
+	}
+
+	fw.unsigned_32(game.descriptions().load_order().size());
+	for (const std::string& s : game.descriptions().load_order()) {
 		fw.string(s);
 	}
 

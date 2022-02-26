@@ -318,7 +318,7 @@ void EditorGameBase::postload_addons() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 
 	assert(lua_);
-	assert(descriptions_);
+	mutable_descriptions()->ensure_tribes_are_registered();
 
 	for (const auto& info : enabled_addons_) {
 		if (info->category == AddOns::AddOnCategory::kWorld ||

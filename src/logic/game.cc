@@ -138,7 +138,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
-     did_check_addons_desync_magic_(false),
+     did_postload_addons_before_loading_(false),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -217,26 +217,18 @@ void Game::save_syncstream(bool const save) {
 	syncwrapper_.syncstreamsave_ = save;
 }
 
-void Game::check_addons_desync_magic() {
-	if (did_check_addons_desync_magic_) {
-		postload_addons();
+void Game::postload_addons_before_loading() {
+	if (did_postload_addons_before_loading_) {
 		return;
 	}
-	did_check_addons_desync_magic_ = true;
+	did_postload_addons_before_loading_ = true;
 
-	// TODO(Nordfriese): Minimal-invasive fix for a very evil desync. The problem is:
-	// - We load only the tribes actually being played when starting a game.
-	// - With some add-ons, it is necessary to load *all* tribes during loading the replay.
-	// - This results in different load orders, so the same item may have a different
-	//   DescriptionIndex in the replay than in the original game. In particular, it
-	//   may happen that the index of A is smaller than B's in the original game but
-	//   greater than B's in the replay.
-	// The simple (and ugly) solution is to load all tribes in the original game if
-	// we know that we'll need to do this in the replay as well. We thus get the
-	// same load order – at the cost of a much longer loading time, so this is not
-	// suited as a long-term solution. In the long run, it would probably be best
-	// to get rid of `DescriptionIndex` entirely in favour of `std::string`.
+	delete_world_and_tribes();
+	postload_addons();
+}
 
+// TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
+void Game::check_legacy_addons_desync_magic() {
 	bool needed = false;
 	for (const auto& a : enabled_addons()) {
 		if (a->category == AddOns::AddOnCategory::kWorld ||
@@ -249,11 +241,16 @@ void Game::check_addons_desync_magic() {
 		return;
 	}
 
+	did_postload_addons_before_loading_ = true;
+	did_postload_addons_ = false;
+
 	delete_world_and_tribes();
 	descriptions();
+
 	// Cyclic dependency. Can and must be gotten rid of when fixing the above TO-DO.
 	EditorInteractive::load_world_units(nullptr, *this);
 	load_all_tribes();
+
 	postload_addons();
 }
 
@@ -323,7 +320,7 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
-	check_addons_desync_magic();
+	postload_addons();
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -587,7 +584,7 @@ bool Game::run(StartGameType const start_game_type,
                bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
-	check_addons_desync_magic();
+	postload_addons();
 
 	replay_ = replay;
 	postload();
@@ -868,7 +865,7 @@ void Game::cleanup_for_load() {
 void Game::full_cleanup() {
 	EditorGameBase::full_cleanup();
 
-	did_check_addons_desync_magic_ = false;
+	did_postload_addons_before_loading_ = false;
 	ctrl_.reset();
 	replaywriter_.reset();
 	writereplay_ = true;  // Not using `set_write_replay()` on purpose.
