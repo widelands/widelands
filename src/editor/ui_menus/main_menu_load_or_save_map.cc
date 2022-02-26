@@ -104,7 +104,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
-	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
+	const bool locale_is_en = i18n::get_locale() == "en" || starts_with(i18n::get_locale(), "en_");
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
 	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"),
 	                  MapData::DisplayType::kMapnames, nullptr, locale_is_en);
@@ -206,7 +206,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 					maptype = MapData::MapType::kSettlers2;
 				}
 
-				maps_data_.push_back(MapData(map, mapfilename, maptype, display_type));
+				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&

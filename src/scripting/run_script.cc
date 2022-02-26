@@ -35,7 +35,7 @@ std::string get_file_content(FileSystem* fs, const std::string& filename) {
 	}
 	size_t length;
 	void* input_data = fs->load(filename, length);
-	const std::string data(static_cast<char*>(input_data));
+	std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);
 	return data;
