@@ -277,7 +277,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	return b;
 }
 
-bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
+bool BuildingDescr::suitability(const Map& /* map */, const FCoords& fc) const {
 	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
                    size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
                                                                        fc.field->maxcaps()) &
@@ -622,7 +622,9 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const, const Request*) {
+InputQueue& Building::inputqueue(DescriptionIndex const wi,
+                                 WareWorker const /* type */,
+                                 const Request* /* req */) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -635,7 +637,7 @@ signal).
 Return false if there's nothing to be done.
 ===============
 */
-bool Building::get_building_work(Game&, Worker& worker, bool) {
+bool Building::get_building_work(Game& /* game */, Worker& worker, bool /* success */) {
 	throw wexception("MO(%u): get_building_work() for unknown worker %u", serial(), worker.serial());
 }
 
@@ -681,7 +683,7 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
  *
  * \see Building::leave_check_and_wait()
  */
-void Building::leave_skip(Game&, Worker& w) {
+void Building::leave_skip(Game& /* game */, Worker& w) {
 	LeaveQueue::iterator const it = std::find(leave_queue_.begin(), leave_queue_.end(), &w);
 
 	if (it != leave_queue_.end()) {
@@ -861,7 +863,7 @@ void Building::remove_worker(Worker& worker) {
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
 }
 
-void Building::notify_worker_evicted(Game& game, Worker&) {
+void Building::notify_worker_evicted(Game& game, Worker& /* worker */) {
 	// If the building was working, we do not tell it to cancel – it'll notice by itself soon –
 	// but we already change the animation so it won't look strange
 	start_animation(game, descr().get_unoccupied_animation());
