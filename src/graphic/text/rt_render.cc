@@ -112,7 +112,7 @@ public:
 	FontCache() = default;
 	~FontCache();
 
-	IFont& get_font(NodeStyle* style);
+	IFont& get_font(NodeStyle* ns);
 
 private:
 	struct FontDescr {
@@ -235,7 +235,7 @@ public:
 	virtual bool is_expanding() const {
 		return false;
 	}
-	virtual void set_w(uint16_t) {
+	virtual void set_w(uint16_t /* w */) {
 	}  // Only, when is_expanding
 
 	virtual const std::vector<Reference> get_references() {
@@ -312,7 +312,7 @@ public:
 	}
 	virtual ~Layout() = default;
 
-	uint16_t height() {
+	uint16_t height() const {
 		return h_;
 	}
 	uint16_t
@@ -321,7 +321,7 @@ public:
 private:
 	bool calculate_line_width(uint16_t* x, uint16_t* w, uint16_t lineheight);
 	uint16_t fit_line(uint16_t w,
-	                  const Borders&,
+	                  const Borders& /*p*/,
 	                  std::vector<std::shared_ptr<RenderNode>>* rv,
 	                  bool trim_spaces);
 
@@ -613,7 +613,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
  */
 class TextNode : public RenderNode {
 public:
-	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
+	TextNode(FontCache& font, NodeStyle& /*ns*/, const std::string& txt);
 	~TextNode() override = default;
 
 	std::string debug_info() const override {
@@ -709,7 +709,7 @@ public:
 		return "ft";
 	}
 
-	std::shared_ptr<UI::RenderedText> render(TextureCache*) override;
+	std::shared_ptr<UI::RenderedText> render(TextureCache* /*texture_cache*/) override;
 
 	bool is_expanding() const override {
 		return is_expanding_;
@@ -1110,7 +1110,7 @@ public:
 
 	virtual void enter() {
 	}
-	virtual void emit_nodes(std::vector<std::shared_ptr<RenderNode>>&);
+	virtual void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& /*nodes*/);
 
 private:
 	void make_text_nodes(const std::string& txt,
@@ -1505,7 +1505,8 @@ public:
 	 * previous line when their final position is calculated in Layout::fit_nodes().
 	 */
 	void enter() override {
-		Borders padding, margin;
+		Borders padding;
+		Borders margin;
 
 		handle_unique_attributes();
 		const AttrMap& a = tag_.attrs();
