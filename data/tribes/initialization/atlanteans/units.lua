@@ -1423,7 +1423,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note lore for an atlantean production site: Port
             lore = pgettext("atlanteans_building", "This is the building where expeditions will be equipped to boldly go and find new shores."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Port
-            lore_author = pgettext("atlanteans_building", "Ostur dedicating a new Port")
+            lore_author = pgettext("atlanteans_building", "Ostur the designer of the new Expedition ship class, during the opening of a new Port")
          }
       },
 
@@ -1467,7 +1467,7 @@ descriptions:new_tribe {
                                           [[Only after the last piece of green has become bare soil<br>]] ..
                                           [[Then will you find that nature needs to be cared for.’]]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Forester's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the forest guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the foresters’ guild")
          }
       },
       {
@@ -1484,9 +1484,8 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note lore for an atlantean production site: Fisher's House use some local fise song as you like
             lore = pgettext("atlanteans_building", [[‘Take your net and come to the sea<br>]] ..
                                           [[In the early morning the moon ya still see<br>]] ..
-                                          [[Collect ya catch of fish for us and for you<br>]] ..
-                 -- NOCOM / Better text needed: I don't understand the last line
-                                          [[And Satul will warm the people of from your do.']]),
+                                          [[Collect ya catch by net or by spear,.<br>]] ..
+                                          [[and don't forget to give Satul his share.']]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
             lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild")
          }
@@ -1504,7 +1503,7 @@ descriptions:new_tribe {
                                           [[Only after the last fish has been caught<br>]] ..
                                           [[Then will you find that spiders are not to be eaten.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Fish Breeder's House
-            lore_author = pgettext("atlanteans_building", "Prophecy of the fisher’s guild")
+            lore_author = pgettext("atlanteans_building", "Prophecy of the fish breeders")
          }
       },
       {
@@ -1542,7 +1541,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
-            lore = pgettext("atlanteans_building", "No, this is not Rumpelstiltskin spinning gold from straw, we need real gold."),
+            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw, we need real gold."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
             lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies.")
          }
