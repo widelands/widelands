@@ -28,7 +28,6 @@
 #include "wui/maptable.h"
 
 using Widelands::Map;
-class GameController;
 struct GameSettingsProvider;
 
 namespace FsMenu {
