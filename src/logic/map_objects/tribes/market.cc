@@ -111,7 +111,11 @@ void Market::worker_arrived_callback(
 	NEVER_HERE();  // We should have found and handled a match by now.
 }
 
-void Market::ware_arrived_callback(Game& g, InputQueue*, DescriptionIndex, Worker*, void* data) {
+void Market::ware_arrived_callback(Game& g,
+                                   InputQueue* /* queue */,
+                                   DescriptionIndex /* index */,
+                                   Worker* /* worker */,
+                                   void* data) {
 	Market& market = *static_cast<Market*>(data);
 	market.try_launching_batch(&g);
 }

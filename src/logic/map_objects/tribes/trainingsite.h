@@ -233,7 +233,7 @@ private:
 		Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
-		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
 
 	private:
 		TrainingSite* const training_site_;

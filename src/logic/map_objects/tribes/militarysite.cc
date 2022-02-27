@@ -609,8 +609,11 @@ bool MilitarySite::incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier&
 Called when our soldier arrives.
 ===============
 */
-void MilitarySite::request_soldier_callback(
-   Game& game, Request&, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void MilitarySite::request_soldier_callback(Game& game,
+                                            Request& /* req */,
+                                            DescriptionIndex /* index */,
+                                            Worker* const w,
+                                            PlayerImmovable& target) {
 	MilitarySite& msite = dynamic_cast<MilitarySite&>(target);
 	Soldier& s = dynamic_cast<Soldier&>(*w);
 
@@ -858,7 +861,7 @@ void MilitarySite::remove_worker(Worker& w) {
 /**
  * Called by soldiers in the building.
  */
-bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
+bool MilitarySite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (upcast(Soldier, soldier, &worker)) {
 		// Evict soldiers that have returned home if the capacity is too low
 		if (capacity_ < soldier_control_.present_soldiers().size()) {

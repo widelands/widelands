@@ -209,7 +209,7 @@ public:
 		return player_manager_.get();
 	}
 
-	InteractiveGameBase* get_igbase();
+	InteractiveGameBase* get_igbase() const;
 
 	// Returns the tribe and world descriptions.
 	const Descriptions& descriptions() const;

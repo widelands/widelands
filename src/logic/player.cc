@@ -417,7 +417,7 @@ void Player::show_watch_window(Game& game, Bob& b) {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const Message* message) {
+void Player::play_message_sound(const Message* message) const {
 	if (g_sh->is_sound_enabled(SoundType::kMessage)) {
 		FxId fx;
 		switch (message->type()) {
@@ -442,11 +442,11 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// MapObject connection
 	if (message->serial() > 0) {
 		MapObject* mo = egbase().objects().get_object(message->serial());
-		mo->removed.connect([this, id](unsigned) { message_object_removed(id); });
+		mo->removed.connect([this, id](unsigned /* serial */) { message_object_removed(id); });
 		if (mo->descr().type() >= MapObjectType::BUILDING) {
 			upcast(Building, site, mo);
 			assert(site != nullptr);
-			site->muted.connect([this, id](unsigned) { message_object_removed(id); });
+			site->muted.connect([this, id](unsigned /* serial */) { message_object_removed(id); });
 		}
 	}
 
@@ -829,7 +829,7 @@ Bulldoze the given road, waterway, flag or building.
 */
 void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 	std::vector<OPtr<PlayerImmovable>> bulldozelist;
-	bulldozelist.push_back(&imm);
+	bulldozelist.emplace_back(&imm);
 
 	while (!bulldozelist.empty()) {
 		PlayerImmovable* immovable = bulldozelist.back().get(egbase());
@@ -854,7 +854,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 			//  Now imm and building are dangling reference/pointer! Do not use!
 
 			if (recurse && flag.is_dead_end()) {
-				bulldozelist.push_back(&flag);
+				bulldozelist.emplace_back(&flag);
 			}
 		} else if (upcast(Flag, flag, immovable)) {
 			if (Building* const flagbuilding = flag->get_building()) {
@@ -888,7 +888,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
 						if (primary_other.is_dead_end()) {
-							bulldozelist.push_back(&primary_other);
+							bulldozelist.emplace_back(&primary_other);
 						}
 					}
 				}
@@ -913,12 +913,12 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 
 				OPtr<Flag> endcopy = &end;
 				if (start.is_dead_end()) {
-					bulldozelist.push_back(&start);
+					bulldozelist.emplace_back(&start);
 				}
 				// At this point, end may have become dangling
 				if (Flag* pend = endcopy.get(egbase())) {
 					if (pend->is_dead_end()) {
-						bulldozelist.push_back(&end);
+						bulldozelist.emplace_back(&end);
 					}
 				}
 			}
@@ -1661,7 +1661,8 @@ void Player::sample_statistics() {
 	assert(worker_stocks_.size() == tribe().workers().size());
 
 	// Calculate stocks
-	std::map<DescriptionIndex, Quantity> ware_stocks, worker_stocks;
+	std::map<DescriptionIndex, Quantity> ware_stocks;
+	std::map<DescriptionIndex, Quantity> worker_stocks;
 	for (DescriptionIndex idx : tribe().wares()) {
 		ware_stocks.insert(std::make_pair(idx, 0U));
 	}
