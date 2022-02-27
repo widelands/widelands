@@ -190,7 +190,7 @@ public:
 	}
 
 	// Read helptext from Lua table
-	void load_helptexts(MapObjectDescr*, const LuaTable&) const;
+	void load_helptexts(MapObjectDescr* descr, const LuaTable& table) const;
 
 	// Make sure that everything is there and that dependencies are calculated.
 	// This needs to be called exactly once during postloading.
