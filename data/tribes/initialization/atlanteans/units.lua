@@ -1406,7 +1406,7 @@ descriptions:new_tribe {
             purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools. "..
                     " will help you to stabilize your economy."),
             -- TRANSLATORS: Note lore for an atlantean production site: Warehouse
-            lore = pgettext("atlanteans_building", "Maybe you think it’s  a boring task to store, count and retrieve all this stuff, "..
+            lore = pgettext("atlanteans_building", "Maybe you think it’s a boring task to store, count and retrieve all this stuff, "..
                      "but do you really want your carriers to walk all the way to your Headquarters?"),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
             lore_author = pgettext("atlanteans_building", "Head of the warehouse")
@@ -1637,7 +1637,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Smelting Works
             purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Smelting Works
-            lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals"),
+            lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Smelting Works
             lore_author = pgettext("atlanteans_building", "A member of the craftsman’s guild")
          }
@@ -1764,7 +1764,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Crystal Mine
             purpose = pgettext("atlanteans_building", "Carves precious (and normal) stones out of the rock in mountain terrain."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Crystal Mine
-            lore = pgettext("atlanteans_building", "Only the pure, white Stones Diamond and Quartz will enlighten our pepole. "..
+            lore = pgettext("atlanteans_building", "Only the pure, white stones Diamond and Quartz will enlighten our people. "..
                                                    "Thus, every major building will need them so the inhabitants may worship Satul to warm them."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Crystal Mine
             lore_author = pgettext("atlanteans_building", "First part of the Atlantean almanach on architecture")
