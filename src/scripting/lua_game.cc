@@ -538,11 +538,11 @@ int LuaPlayer::message_box(lua_State* L) {
 	if (is_modal) {
 		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
 		                                                        luaL_checkstring(L, 3), posx, posy, w,
-		                                                        h, allow_next_scenario));
+                                                                h, true, allow_next_scenario));
 		mb->run<UI::Panel::Returncodes>();
 	} else {
 		new StoryMessageBox(&game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
-		                    w, h, allow_next_scenario);
+                            w, h, false, allow_next_scenario);
 	}
 
 	return 1;

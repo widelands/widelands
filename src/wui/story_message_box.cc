@@ -38,6 +38,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const y,
                                  uint32_t const w,
                                  uint32_t const h,
+                                 bool modal,
                                  bool allow_next_scenario)
    : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
      main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
@@ -90,9 +91,11 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
-	button_box_.add_inf_space();
-	button_box_.add(&ok_);
-	button_box_.add_inf_space();
+    if (modal) {
+        button_box_.add_inf_space();
+        button_box_.add(&ok_);
+        button_box_.add_inf_space();
+    }
 
 	if (allow_next_scenario) {  // End of game
 		button_box_.add(&main_menu_);
