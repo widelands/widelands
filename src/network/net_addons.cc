@@ -98,10 +98,10 @@ inline int portable_read(const int socket, char* buffer, const size_t length) {
 }
 
 inline void check_string_validity(const std::string& str) {
-	if (str.find(' ') != std::string::npos) {
+	if (contains(str, " ")) {
 		throw WLWarning("", "String '%s' may not contain whitespaces", str.c_str());
 	}
-	if (str.find('\n') != std::string::npos) {
+	if (contains(str, "\n")) {
 		throw WLWarning("", "String '%s' may not contain newlines", str.c_str());
 	}
 }
@@ -301,7 +301,7 @@ void NetAddons::write_to_server(const char* send, const size_t length) {
 	throw WLWarning("", "Connection interrupted (%s). Reason: %s", strerror(errno), message.c_str());
 }
 
-std::string NetAddons::read_line() {
+std::string NetAddons::read_line() const {
 	std::string line;
 	char c;
 	int n;
@@ -315,7 +315,7 @@ std::string NetAddons::read_line() {
 	return line;
 }
 
-void NetAddons::read_file(const int64_t length, const std::string& out) {
+void NetAddons::read_file(const int64_t length, const std::string& out) const {
 	FileWrite fw;
 	std::unique_ptr<char[]> buffer(new char[length]);
 	int64_t nr_bytes_read = 0;
@@ -411,13 +411,13 @@ AddOnInfo NetAddons::fetch_one_remote(const std::string& name) {
 	AddOnInfo a;
 	a.internal_name = name;
 	a.unlocalized_descname = read_line();
-	const std::string localized_descname = read_line();
+	std::string localized_descname = read_line();
 	a.descname = [localized_descname]() { return localized_descname; };
 	a.unlocalized_description = read_line();
-	const std::string localized_description = read_line();
+	std::string localized_description = read_line();
 	a.description = [localized_description]() { return localized_description; };
 	a.unlocalized_author = read_line();
-	const std::string localized_author = read_line();
+	std::string localized_author = read_line();
 	a.author = [localized_author]() { return localized_author; };
 
 	{
@@ -793,7 +793,7 @@ void NetAddons::upload_screenshot(const std::string& addon,
                                   const std::string& image,
                                   const std::string& description) {
 	check_string_validity(addon);
-	if (description.find('\n') != std::string::npos) {
+	if (contains(description, "\n")) {
 		throw WLWarning("", "Screenshot descriptions may not contain newlines");
 	}
 	init();
@@ -847,7 +847,7 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		std::string temp_dirname =
 		   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
 		g_fs->ensure_directory_exists(temp_dirname);
-		const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
+		std::string output = temp_dirname + FileSystem::file_separator() + screenie;
 
 		const std::string checksum = read_line();
 		const int64_t filesize = math::to_int(read_line());

@@ -56,13 +56,13 @@ struct NetAddons {
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
 	// The filename of the created MO files is guaranteed to be in the format
 	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	void download_i18n(const std::string& addon,
+	void download_i18n(const std::string& name,
 	                   const std::string& directory,
 	                   const CallbackFn& progress,
 	                   const CallbackFn& init_fn);
 
 	// Download the given screenshot for the given add-on
-	std::string download_screenshot(const std::string& addon, const std::string& screenie);
+	std::string download_screenshot(const std::string& name, const std::string& screenie);
 
 	// How the user voted the add-on (1-10). Returns 0 for not voted, <0 for access denied.
 	int get_vote(const std::string& addon);
@@ -73,7 +73,7 @@ struct NetAddons {
 	void comment(const AddOnInfo& addon, const std::string& message, const size_t* index_to_edit);
 
 	void
-	upload_addon(const std::string& addon, const CallbackFn& progress, const CallbackFn& init_fn);
+	upload_addon(const std::string& name, const CallbackFn& progress, const CallbackFn& init_fn);
 	void upload_screenshot(const std::string& addon,
 	                       const std::string& image,
 	                       const std::string& description);
@@ -93,8 +93,8 @@ private:
 	void quit_connection();
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
-	std::string read_line();
-	void read_file(int64_t length, const std::string& out);
+	std::string read_line() const;
+	void read_file(int64_t length, const std::string& out) const;
 	void check_endofstream();
 	void write_to_server(const std::string&);
 	void write_to_server(const char*, size_t);
