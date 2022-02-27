@@ -91,11 +91,11 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	main_box_.add(&textarea_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
-    if (modal) {
-        button_box_.add_inf_space();
-        button_box_.add(&ok_);
-        button_box_.add_inf_space();
-    }
+	if (modal) {
+		button_box_.add_inf_space();
+		button_box_.add(&ok_);
+		button_box_.add_inf_space();
+	}
 
 	if (allow_next_scenario) {  // End of game
 		button_box_.add(&main_menu_);
@@ -122,7 +122,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	move_inside_parent();
 	textarea_.focus();
 
-	if (!is_modal()) {
+	if (!modal) {
 		resume_game();
 	}
 
