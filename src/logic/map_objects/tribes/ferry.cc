@@ -68,7 +68,7 @@ void Ferry::start_task_unemployed(Game& game) {
 
 constexpr Duration kUnemployedLifetime(1000 * 60 * 10);  // 10 minutes
 
-void Ferry::unemployed_update(Game& game, State&) {
+void Ferry::unemployed_update(Game& game, State& /* state */) {
 	if (!get_signal().empty()) {
 		molog(
 		   game.get_gametime(), "[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
@@ -178,7 +178,7 @@ void Ferry::start_task_row(Game& game, const Waterway& ww) {
 	send_signal(game, "row");
 }
 
-void Ferry::row_update(Game& game, State&) {
+void Ferry::row_update(Game& game, State& /* state */) {
 	if (!destination_) {
 		return pop_task(game);
 	}

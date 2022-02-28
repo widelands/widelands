@@ -142,7 +142,7 @@ struct CheckStepFerry {
 	}
 
 	bool allowed(
-	   const Map&, const FCoords& start, const FCoords& end, int32_t dir, CheckStep::StepId) const;
+	   const Map&, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
 
 private:

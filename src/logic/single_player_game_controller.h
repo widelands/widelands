@@ -36,9 +36,8 @@ public:
 	void set_desired_speed(uint32_t speed) override;
 	bool is_paused() override;
 	void set_paused(bool paused) override;
-	void report_result(uint8_t player,
-	                   Widelands::PlayerEndResult result,
-	                   const std::string& info) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
 
 private:
 	Widelands::Game& game_;
