@@ -4306,8 +4306,8 @@ int LuaTerrainDescription::get_default_resource(lua_State* L) {  // NOLINT - can
       (RO) The amount of the default resource provided by this terrain as :class:`integer`.
 */
 
-int LuaTerrainDescription::get_default_resource_amount(
-   lua_State* L) {  // NOLINT - can not be made const
+int LuaTerrainDescription::get_default_resource_amount(  // NOLINT - can not be made const
+   lua_State* L) {
 	lua_pushinteger(L, get()->get_default_resource_amount());
 	return 1;
 }
@@ -4343,8 +4343,8 @@ int LuaTerrainDescription::get_humidity(lua_State* L) {  // NOLINT - can not be 
 
       (RO) The file path to a representative image as :class:`string`.
 */
-int LuaTerrainDescription::get_representative_image(
-   lua_State* L) {  // NOLINT - can not be made const
+int LuaTerrainDescription::get_representative_image(  // NOLINT - can not be made const
+   lua_State* L) {
 	lua_pushstring(L, get()->texture_paths().front());
 	return 1;
 }

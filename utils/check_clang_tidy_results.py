@@ -9,12 +9,18 @@ import sys
 
 # Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
-    # Checks we don't care about and want to suppress permanently
+    # TODO(Nordfriese): Investigate which android-* and fuchsia-* checks we want to enable
+    # (currently they're all excluded in the clang-tidy invokation)
+
+    # Checks we strictly need and cannot clean up for the time being
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
-    '[llvmlibc-callee-namespace]',
     '[cert-dcl50-cpp]',  # We need this for our logger
     '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[hicpp-vararg]',
+
+    # Checks that probably do not make sense for us
+    # (up for discussion; see https://github.com/widelands/widelands/discussions/5262)
+    '[llvmlibc-callee-namespace]',
     '[modernize-use-trailing-return-type]',
     '[cppcoreguidelines-avoid-c-arrays]',
     '[hicpp-avoid-c-arrays]',
@@ -33,7 +39,6 @@ SUPPRESSED_CHECKS = {
     '[cppcoreguidelines-pro-type-const-cast]',
     '[cppcoreguidelines-pro-type-reinterpret-cast]',
     '[cppcoreguidelines-pro-type-union-access]',
-    '[fuchsia-default-arguments]',
     '[google-default-arguments]',
     '[hicpp-uppercase-literal-suffix]',
     '[readability-uppercase-literal-suffix]',
@@ -41,10 +46,8 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-auto]',
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
-    '[fuchsia-overloaded-operator]',
 
-    # Checks we want to clean up sometime
-    '[android-cloexec-fopen]',
+    # Checks we probably want to clean up sometime (discussible; see link above)
     '[boost-use-to-string]',
     '[bugprone-exception-escape]',
     '[bugprone-macro-parentheses]',
