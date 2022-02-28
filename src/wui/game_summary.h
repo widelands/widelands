@@ -43,7 +43,7 @@ private:
 	void fill_data();
 	void stop_clicked();
 	void continue_clicked();
-	void player_selected(uint32_t idx);
+	void player_selected(uint32_t entry_index);
 	std::string parse_player_info(const std::string& info);
 	bool compare_status(uint32_t, uint32_t) const;
 

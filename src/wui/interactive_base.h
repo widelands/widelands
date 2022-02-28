@@ -247,7 +247,7 @@ protected:
 	                               bool bind_default_toggle = false);
 
 	void hide_minimap();
-	void resize_minimap();
+	void resize_minimap() const;
 
 	void mainview_move();
 
@@ -334,7 +334,7 @@ protected:
 
 	ChatProvider* chat_provider_;
 
-	void broadcast_cheating_message();
+	void broadcast_cheating_message() const;
 
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
