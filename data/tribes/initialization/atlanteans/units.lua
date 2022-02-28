@@ -1423,7 +1423,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note lore for an atlantean production site: Port
             lore = pgettext("atlanteans_building", "This is the building where expeditions will be equipped to boldly go and find new shores."),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Port
-            lore_author = pgettext("atlanteans_building", "Ostur the designer of the new Expedition ship class, during the opening of a new Port")
+            lore_author = pgettext("atlanteans_building", "Ostur, the designer of the new Expedition ship class, during the opening of a new Port")
          }
       },
 
