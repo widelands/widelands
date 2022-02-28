@@ -802,7 +802,8 @@ void normalize_numpad(SDL_Keysym& keysym) {
 		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
 			keysym.sym = keysym.sym - SDLK_KP_1 + SDLK_1;
 			return;
-		} if (keysym.sym == SDLK_KP_0) {
+		}
+		if (keysym.sym == SDLK_KP_0) {
 			keysym.sym = SDLK_0;
 			return;
 		} else if (keysym.sym == SDLK_KP_PERIOD) {

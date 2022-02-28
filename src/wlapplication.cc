@@ -349,8 +349,7 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
-   : 
-     game_type_(GameType::kNone),
+   : game_type_(GameType::kNone),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
@@ -551,7 +550,8 @@ static void init_one_player_from_template(unsigned p,
 		}
 		settings->set_player_state(p, PlayerSettings::State::kClosed);
 		return;  // No need to configure closed player
-	} if (human) {
+	}
+	if (human) {
 		settings->set_player_state(p, PlayerSettings::State::kHuman);
 	} else {
 		std::string ai = player_section.get_string("ai", "normal");
@@ -1240,17 +1240,18 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 				                     kSavegameExtension)) {
 					commandline_["loadgame"] = opt;
 					continue;
-				} if (opt.size() > kReplayExtension.size() &&
-				           0 == opt.compare(opt.size() - kReplayExtension.size(),
-				                            kReplayExtension.size(), kReplayExtension)) {
+				}
+				if (opt.size() > kReplayExtension.size() &&
+				    0 == opt.compare(opt.size() - kReplayExtension.size(), kReplayExtension.size(),
+				                     kReplayExtension)) {
 					commandline_["replay"] = opt;
 					continue;
 				}
 			}
 			commandline_["error"] = opt;
 			break;
-		} 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
-	
+		}
+		opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 
 		// Look if this option has a value
 		std::string::size_type const pos = opt.find('=');
@@ -1382,8 +1383,8 @@ void WLApplication::handle_commandline_parameters() {
 					if (err.empty()) {
 						found = true;
 						break;
-					} 						wrong_candidates.emplace_back(datadir_, err);
-				
+					}
+					wrong_candidates.emplace_back(datadir_, err);
 				}
 			}
 		}
@@ -1559,7 +1560,8 @@ void WLApplication::handle_commandline_parameters() {
 	if (exclusives > 2) {
 		throw ParameterError(CmdLineVerbosity::None,
 		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
-	} if (exclusives > 0) {
+	}
+	if (exclusives > 0) {
 		set_config_bool("maximized", false);
 		set_config_bool("fullscreen", false);
 	}

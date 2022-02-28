@@ -256,8 +256,8 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 		fxs_[type].insert(
 		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
-	} 		return fx_ids_[type].at(fx_path);
-
+	}
+	return fx_ids_[type].at(fx_path);
 }
 
 /**
