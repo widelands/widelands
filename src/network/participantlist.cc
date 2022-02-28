@@ -245,16 +245,14 @@ int32_t ParticipantList::participant_to_playerindex(int16_t participant) const {
 			assert(participant >= 0);
 		}
 		NEVER_HERE();
-	} else {
-		// Human user
+	}  // Human user
 
-		// No useful result possible for spectators or semi-connected users
-		assert(participant_to_user(participant).position <= UserSettings::highest_playernum());
+	// No useful result possible for spectators or semi-connected users
+	assert(participant_to_user(participant).position <= UserSettings::highest_playernum());
 
-		// .position is the index within settings_->players and also
-		// as .position+1 the index inside game_->player_manager()
-		return participant_to_user(participant).position;
-	}
+	// .position is the index within settings_->players and also
+	// as .position+1 the index inside game_->player_manager()
+	return participant_to_user(participant).position;
 }
 
 const Widelands::Player* ParticipantList::participant_to_player(int16_t participant) const {

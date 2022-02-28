@@ -43,7 +43,7 @@ class PartiallyFinishedBuilding : public Building {
 	friend class LuaMaps::LuaDismantleSite;
 
 public:
-	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
+	explicit PartiallyFinishedBuilding(const BuildingDescr& gdescr);
 
 	virtual void set_building(const BuildingDescr&);
 
