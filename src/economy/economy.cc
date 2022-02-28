@@ -151,7 +151,7 @@ void Economy::check_split(Flag& f1, Flag& f2, WareWorker type) {
 		return;
 	}
 
-	e->split_checks_.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
+	e->split_checks_.emplace_back(OPtr<Flag>(&f1), OPtr<Flag>(&f2));
 	e->rebalance_supply();  // the real split-checking is done during rebalance
 }
 
@@ -206,7 +206,8 @@ void Economy::check_splits() {
 			if (!current) {
 				split(reachable);
 				break;
-			} else if (current == f2) {
+			}
+			if (current == f2) {
 				break;
 			}
 			reachable.insert(&current->base_flag());
@@ -517,21 +518,18 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 			}
 		}
 		return true;
-	} else {
-		// Target quantity is set to 0, we need to check if there is an open request.
-		// For soldier requests, do not recruit new rookies if only heroes are needed.
-		const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
-		for (const Request* req : requests_) {
-			if (req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
-			    req->is_open() &&
-			    (!is_soldier ||
-			     req->get_requirements().check(soldier_prototype(
-			        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
-				return true;
-			}
+	}  // Target quantity is set to 0, we need to check if there is an open request.
+	// For soldier requests, do not recruit new rookies if only heroes are needed.
+	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
+	for (const Request* req : requests_) {
+		if (req->get_type() == type_ && req->get_index() == ware_or_worker_type && req->is_open() &&
+		    (!is_soldier ||
+		     req->get_requirements().check(soldier_prototype(
+		        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
+			return true;
 		}
-		return false;
 	}
+	return false;
 }
 
 bool Economy::has_building(const DescriptionIndex di) const {
@@ -688,7 +686,8 @@ void Economy::start_request_timer(const Duration& delta) {
 Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost) {
 	assert(req.is_open());
 
-	Route buf_route0, buf_route1;
+	Route buf_route0;
+	Route buf_route1;
 	Supply* best_supply = nullptr;
 	Route* best_route = nullptr;
 	int32_t best_cost = -1;

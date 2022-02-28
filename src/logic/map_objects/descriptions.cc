@@ -652,7 +652,7 @@ void Descriptions::set_old_world_name(const std::string& name) {
 }
 
 void Descriptions::add_immovable_relation(const std::string& a, const std::string& b) {
-	immovable_relations_.push_back(std::make_pair(a, b));
+	immovable_relations_.emplace_back(a, b);
 }
 void Descriptions::postload_immovable_relations() {
 	for (const auto& pair : immovable_relations_) {

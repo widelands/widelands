@@ -133,7 +133,8 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			ts.skip_ws();
 		}
 
-		size_t line = ts.line(), col = ts.col();
+		size_t line = ts.line();
+		size_t col = ts.col();
 		std::string text = ts.till_any("<");
 		if (!text.empty()) {
 			if (!tc.text_allowed) {

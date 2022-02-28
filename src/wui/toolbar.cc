@@ -36,7 +36,8 @@ void MainToolbar::change_imageset(const ToolbarImageset& images) {
 
 void MainToolbar::finalize() {
 	// Set box size and get minimum height
-	int box_width, height;
+	int box_width;
+	int height;
 	box.get_desired_size(&box_width, &height);
 	box.set_size(box_width, height);
 

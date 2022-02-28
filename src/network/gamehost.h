@@ -119,9 +119,8 @@ public:
 	                         std::string& arg1,
 	                         std::string& arg2);
 
-	void report_result(uint8_t player,
-	                   Widelands::PlayerEndResult result,
-	                   const std::string& info) override;
+	void
+	report_result(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string& info) override;
 
 	void force_pause() {
 		forced_pause_ = true;
@@ -165,7 +164,7 @@ private:
 	void handle_changetribe(const Client& client, RecvPacket& r);
 	void handle_changeshared(const Client& client, RecvPacket& r);
 	void handle_changeteam(const Client& client, RecvPacket& r);
-	void handle_changecolor(const Client& client, RecvPacket& r);
+	void handle_changecolor(const Client& client, RecvPacket& packet);
 	void handle_changeinit(const Client& client, RecvPacket& r);
 	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
@@ -177,9 +176,9 @@ private:
 	void handle_file_part(Client& client, RecvPacket& r);
 	void handle_system_message(RecvPacket&);
 
-	void handle_packet(uint32_t i, RecvPacket&);
+	void handle_packet(uint32_t client_num, RecvPacket&);
 	void handle_network();
-	void send_file_part(NetHostInterface::ConnectionId client_sock_id, uint32_t part);
+	void send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part);
 
 	void check_hung_clients();
 	void broadcast_real_speed(uint32_t speed);

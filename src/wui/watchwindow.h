@@ -36,7 +36,7 @@ struct WatchWindow : public UI::Window {
 	            int32_t y,
 	            uint32_t w,
 	            uint32_t h,
-	            bool single_window_ = false);
+	            bool init_single_window = false);
 	~WatchWindow() override;
 
 	Notifications::Signal<const Vector2f&> warp_mainview;
