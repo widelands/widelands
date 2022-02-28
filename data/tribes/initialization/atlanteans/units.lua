@@ -1541,7 +1541,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
-            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw, we need real gold."),
+            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw  –  we need real gold."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
             lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies.")
          }
@@ -1558,7 +1558,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, that’s me!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House
-            lore_author = pgettext("atlanteans_building", "A Scout answering a soldier")
+            lore_author = pgettext("atlanteans_building", "A scout answering a soldier")
          }
       },
 
