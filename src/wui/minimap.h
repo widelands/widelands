@@ -44,7 +44,7 @@ public:
 		}
 	};
 
-	MiniMap(InteractiveBase& ibase, Registry*);
+	MiniMap(InteractiveBase& ibase, Registry* registry);
 
 	Notifications::Signal<const Vector2f&> warpview;
 
@@ -58,7 +58,7 @@ public:
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kMinimap;
 	}
-	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	void save(FileWrite& fw, Widelands::MapObjectSaver& mos) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
