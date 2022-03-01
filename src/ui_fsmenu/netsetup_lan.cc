@@ -187,7 +187,7 @@ void NetSetupLAN::clicked_ok() {
 	}
 }
 
-void NetSetupLAN::game_selected(uint32_t) {
+void NetSetupLAN::game_selected(uint32_t /* index */) {
 	if (table_.has_selection()) {
 		if (const NetOpenGame* const game = table_.get_selected()) {
 			hostname_.set_text(game->info.hostname);
@@ -196,7 +196,7 @@ void NetSetupLAN::game_selected(uint32_t) {
 	}
 }
 
-void NetSetupLAN::game_doubleclicked(uint32_t) {
+void NetSetupLAN::game_doubleclicked(uint32_t /* index */) {
 	assert(table_.has_selection());
 	const NetOpenGame* const game = table_.get_selected();
 	// Only join games that are open
@@ -237,7 +237,7 @@ void NetSetupLAN::game_opened(const NetOpenGame* game) {
 	update_game_info(table_.add(game), game->info);
 }
 
-void NetSetupLAN::game_closed(const NetOpenGame*) {
+void NetSetupLAN::game_closed(const NetOpenGame* /* game */) {
 }
 
 void NetSetupLAN::game_updated(const NetOpenGame* game) {

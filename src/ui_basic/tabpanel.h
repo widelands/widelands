@@ -54,8 +54,8 @@ struct Tab : public NamedPanel {
 	    const std::string& name,
 	    const std::string& title,
 	    const Image* pic,
-	    const std::string& gtooltip,
-	    Panel* gpanel);
+	    const std::string& tooltip_text,
+	    Panel* contents);
 
 	bool active();
 	void activate();
@@ -146,7 +146,7 @@ private:
 	                 const std::string& title,
 	                 const Image* pic,
 	                 const std::string& tooltip,
-	                 Panel* contents);
+	                 Panel* panel);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;

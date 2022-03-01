@@ -979,7 +979,9 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
 	const Descriptions& descriptions = game.descriptions();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
-	FCoords tln, ln, trn;
+	FCoords tln;
+	FCoords ln;
+	FCoords trn;
 	game.map().get_tln(f, &tln);
 	game.map().get_trn(f, &trn);
 	game.map().get_ln(f, &ln);
@@ -1039,7 +1041,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action& a) {
  *
  */
 // TODO(GunChleoc): Savegame compatibility, remove after v1.0.
-bool Worker::run_buildferry(Game& game, State& state, const Action&) {
+bool Worker::run_buildferry(Game& game, State& state, const Action& /* action */) {
 	game.create_worker(get_position(), owner_.load()->tribe().ferry(), owner_);
 	++state.ivar1;
 	schedule_act(game, Duration(10));
@@ -1049,7 +1051,7 @@ bool Worker::run_buildferry(Game& game, State& state, const Action&) {
 /**
  * Simply remove the currently selected object - make no fuss about it.
  */
-bool Worker::run_removeobject(Game& game, State& state, const Action&) {
+bool Worker::run_removeobject(Game& game, State& state, const Action& /* action */) {
 	if (MapObject* const obj = state.objvar1.get(game)) {
 		obj->remove(game);
 		state.objvar1 = nullptr;
@@ -1083,7 +1085,7 @@ bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
  * Check resources at the current position, and plant a marker object when
  * possible.
  */
-bool Worker::run_findresources(Game& game, State& state, const Action&) {
+bool Worker::run_findresources(Game& game, State& state, const Action& /* action */) {
 	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const Descriptions& descriptions = game.descriptions();
@@ -2222,7 +2224,9 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 	return start_task_idle(game, descr().get_animation("idle", this), 1000);
 }
 
-void Worker::gowarehouse_signalimmediate(Game&, State& /* state */, const std::string& signal) {
+void Worker::gowarehouse_signalimmediate(Game& /* game */,
+                                         State& /* state */,
+                                         const std::string& signal) {
 	if (signal == "transfer") {
 		// We are assigned a transfer, make sure our supply disappears immediately
 		// Otherwise, we might receive two transfers in a row.
@@ -2231,7 +2235,7 @@ void Worker::gowarehouse_signalimmediate(Game&, State& /* state */, const std::s
 	}
 }
 
-void Worker::gowarehouse_pop(Game&, State&) {
+void Worker::gowarehouse_pop(Game& /* game */, State& /* state */) {
 	delete supply_;
 	supply_ = nullptr;
 
@@ -2255,7 +2259,7 @@ void Worker::start_task_dropoff(Game& game, WareInstance& ware) {
 	push_task(game, taskDropoff);
 }
 
-void Worker::dropoff_update(Game& game, State&) {
+void Worker::dropoff_update(Game& game, State& /* state */) {
 	std::string signal = get_signal();
 
 	if (!signal.empty()) {
@@ -2336,7 +2340,7 @@ void Worker::start_task_releaserecruit(Game& game, const Worker& recruit) {
 	return schedule_act(game, Duration(5000));
 }
 
-void Worker::releaserecruit_update(Game& game, State&) {
+void Worker::releaserecruit_update(Game& game, State& /* state */) {
 	molog(game.get_gametime(), "\t...done releasing recruit\n");
 	return pop_task(game);
 }
@@ -2476,7 +2480,7 @@ bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
 	return true;
 }
 
-void Worker::waitforcapacity_update(Game& game, State&) {
+void Worker::waitforcapacity_update(Game& game, State& /* state */) {
 	std::string signal = get_signal();
 
 	if (!signal.empty()) {
@@ -3278,7 +3282,7 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
-                  const InfoToDraw&,
+                  const InfoToDraw& /*info_to_draw*/,
                   const Vector2f& field_on_dst,
                   const Widelands::Coords& coords,
                   const float scale,

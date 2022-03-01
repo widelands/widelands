@@ -275,7 +275,7 @@ void Flag::detach_road(int32_t const dir) {
 /**
  * \return all positions we occupy on the map. For a Flag, this is only one.
  */
-BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
+BaseImmovable::PositionList Flag::get_positions(const EditorGameBase& /* egbase */) const {
 	PositionList rv;
 	rv.push_back(position_);
 	return rv;
@@ -334,7 +334,7 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 	}
 	return nullptr;
 }
-Road* Flag::get_road(Flag& flag) {
+Road* Flag::get_road(Flag& flag) const {
 	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		if (Road* const road = get_road(i)) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
@@ -430,14 +430,14 @@ bool Flag::has_capacity() const {
  *
  * The capacity queue is a simple FIFO queue.
  */
-void Flag::wait_for_capacity(Game&, Worker& bob) {
+void Flag::wait_for_capacity(Game& /* game */, Worker& bob) {
 	capacity_wait_.push_back(&bob);
 }
 
 /**
  * Remove the worker from the list of workers waiting for free capacity.
  */
-void Flag::skip_wait_for_capacity(Game&, Worker& w) {
+void Flag::skip_wait_for_capacity(Game& /* game */, Worker& w) {
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
 	if (it != capacity_wait_.end()) {
@@ -483,7 +483,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
  */
-bool Flag::has_pending_ware(Game&, Flag& dest) {
+bool Flag::has_pending_ware(Game& /* game */, Flag& dest) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		if (!wares_[i].pending) {
 			continue;
@@ -504,7 +504,7 @@ bool Flag::has_pending_ware(Game&, Flag& dest) {
  * ware. Ware with highest transfer priority is chosen.
  * \return true if an ware is actually waiting for the carrier.
  */
-bool Flag::ack_pickup(Game&, Flag& destflag) {
+bool Flag::ack_pickup(Game& /* game */, Flag& destflag) {
 	int32_t highest_pri = -1;
 	int32_t i_pri = -1;
 
@@ -869,7 +869,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 }
 
 void Flag::draw(const Time& gametime,
-                const InfoToDraw,
+                const InfoToDraw /*info_to_draw*/,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
                 float scale,
@@ -913,7 +913,7 @@ void Flag::destroy(EditorGameBase& egbase) {
 	PlayerImmovable::destroy(egbase);
 }
 
-void Flag::receive_worker(Game&, Worker&) {
+void Flag::receive_worker(Game& /* game */, Worker& /*worker*/) {
 	// Callback when a requested scout arrives.
 	// He knows what to do next by himself, nothing to do for us currently.
 }
@@ -926,7 +926,7 @@ void Flag::do_schedule_act(Game& game, const Duration& d) {
 	schedule_act(game, d);
 }
 
-void Flag::act(Game& game, uint32_t) {
+void Flag::act(Game& game, uint32_t /*data*/) {
 	assert(act_pending_);
 	act_pending_ = false;
 
@@ -994,8 +994,11 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
  * This function is called when one of the flag job workers arrives on
  * the flag. Give him his job.
  */
-void Flag::flag_job_request_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void Flag::flag_job_request_callback(Game& game,
+                                     Request& rq,
+                                     DescriptionIndex /* index */,
+                                     Worker* const w,
+                                     PlayerImmovable& target) {
 	Flag& flag = dynamic_cast<Flag&>(target);
 
 	assert(w);

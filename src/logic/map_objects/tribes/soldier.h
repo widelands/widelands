@@ -244,7 +244,7 @@ public:
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
 	          const InfoToDraw& info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) const override;

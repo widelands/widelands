@@ -1970,8 +1970,7 @@ CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade&
    : PlayerCommand(time, pn), trade_(trade) {
 }
 
-CmdProposeTrade::CmdProposeTrade() {
-}
+CmdProposeTrade::CmdProposeTrade() = default;
 
 void CmdProposeTrade::execute(Game& game) {
 	Player* plr = game.get_player(sender());

@@ -28,7 +28,7 @@ public:
 	}
 	~HostGameSettingsProvider() override = default;
 
-	void set_scenario(bool const set) override;
+	void set_scenario(bool const is_scenario) override;
 
 	const GameSettings& settings() override;
 
@@ -47,7 +47,7 @@ public:
 	                     bool const savegame) override;
 
 	void set_player_state(uint8_t const number, PlayerSettings::State state) override;
-	void set_player_ai(uint8_t const number, const std::string& ai, bool const random_ai) override;
+	void set_player_ai(uint8_t const number, const std::string& name, bool const random_ai) override;
 	void
 	set_player_tribe(uint8_t const number, const std::string& tribe, bool random_tribe) override;
 	void set_player_init(uint8_t const number, uint8_t const index) override;

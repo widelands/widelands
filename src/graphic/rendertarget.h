@@ -75,7 +75,7 @@ public:
 
 	void blitrect(const Vector2i& dst,
 	              const Image* image,
-	              const Recti& src,
+	              const Recti& rectangle,
 	              BlendMode blend_mode = BlendMode::UseAlpha);
 
 	// Blits the 'source_rect' from 'image' into the

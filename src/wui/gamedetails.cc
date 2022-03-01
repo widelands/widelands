@@ -188,7 +188,7 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 
 	std::string filename = gamedata.filename;
 	// Remove first directory from filename. This will be the save/ or replays/ folder
-	assert(filename.find('/') != std::string::npos);
+	assert(contains(filename, "/"));
 	filename.erase(0, filename.find('/') + 1);
 	assert(!filename.empty());
 	description =

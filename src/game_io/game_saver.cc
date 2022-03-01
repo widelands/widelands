@@ -63,7 +63,7 @@ void GameSaver::save() {
 	verb_log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
 	{
 		GameClassPacket p;
-		p.write(fs_, game_, nullptr);
+		p.write(fs_, game_);
 	}
 
 	verb_log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");

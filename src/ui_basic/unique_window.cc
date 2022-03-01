@@ -30,7 +30,7 @@ UniqueWindow IMPLEMENTATION
 /**
  * Creates the window, if it does not exist.
  */
-void UniqueWindow::Registry::create() {
+void UniqueWindow::Registry::create() const {
 	if (!window) {
 		open_window();
 	} else {
@@ -44,7 +44,7 @@ void UniqueWindow::Registry::create() {
 /**
  * Destroys the window, if it exists.
  */
-void UniqueWindow::Registry::destroy() {
+void UniqueWindow::Registry::destroy() const {
 	if (window) {
 		window->die();
 	}
