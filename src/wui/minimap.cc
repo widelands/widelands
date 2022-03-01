@@ -122,29 +122,24 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	// Six buttons need at least 120 pixels.
-	return view_.get_w() < 120 ? 3 : 6;
-}
-inline uint32_t MiniMap::number_of_button_rows() const {
-	// Use two rows if there are less than 120 pixels available.
-	return view_.get_w() < 120 ? 2 : 1;
-}
+constexpr int kNumberOfButtons = 6;
 inline uint32_t MiniMap::but_w() const {
-	return view_.get_w() / number_of_buttons_per_row();
+	return view_.get_w() / kNumberOfButtons;
 }
-inline uint32_t MiniMap::but_h() const {
+inline uint32_t MiniMap::but_h() {
 	return 20;
 }
 MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
    : UI::UniqueWindow(&ibase, UI::WindowStyle::kWui, "minimap", registry, 0, 0, _("Map")),
      ibase_(ibase),
-     view_(*this, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
+     verticalbox(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     buttonbox(&verticalbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     view_(verticalbox, &registry->minimap_layers, &registry->minimap_type, 0, 0, 0, 0, ibase),
 
-     button_terrn(this,
+     button_terrn(&buttonbox,
                   "terrain",
-                  but_w() * 0,
-                  view_.get_h() + but_h() * 0,
+                  0,
+                  0,
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -152,10 +147,10 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Terrain"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_owner(this,
+     button_owner(&buttonbox,
                   "owner",
-                  but_w() * 1,
-                  view_.get_h() + but_h() * 0,
+                  0,
+                  0,
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -163,10 +158,10 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Owner"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_flags(this,
+     button_flags(&buttonbox,
                   "flags",
-                  but_w() * 2,
-                  view_.get_h() + but_h() * 0,
+                  0,
+                  0,
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -174,10 +169,10 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Flags"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_roads(this,
+     button_roads(&buttonbox,
                   "roads",
-                  but_w() * 0,
-                  view_.get_h() + but_h() * 1,
+                  0,
+                  0,
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -185,10 +180,10 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Roads"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_bldns(this,
+     button_bldns(&buttonbox,
                   "buildings",
-                  but_w() * 1,
-                  view_.get_h() + but_h() * 1,
+                  0,
+                  0,
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -196,10 +191,10 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Buildings"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
-     button_zoom(this,
+     button_zoom(&buttonbox,
                  "zoom",
-                 but_w() * 2,
-                 view_.get_h() + but_h() * 1,
+                 0,
+                 0,
                  but_w(),
                  but_h(),
                  UI::ButtonStyle::kWuiSecondary,
@@ -213,7 +208,14 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
-
+	verticalbox.add(&view_, UI::Box::Resizing::kExpandBoth);
+	verticalbox.add(&buttonbox, UI::Box::Resizing::kFullSize);
+	buttonbox.add(&button_terrn, UI::Box::Resizing::kFillSpace);
+	buttonbox.add(&button_owner, UI::Box::Resizing::kFillSpace);
+	buttonbox.add(&button_flags, UI::Box::Resizing::kFillSpace);
+	buttonbox.add(&button_roads, UI::Box::Resizing::kFillSpace);
+	buttonbox.add(&button_bldns, UI::Box::Resizing::kFillSpace);
+	buttonbox.add(&button_zoom, UI::Box::Resizing::kFillSpace);
 	check_boundaries();
 
 	if (get_usedefaultpos()) {
@@ -228,6 +230,12 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	initialization_complete();
 }
 
+void MiniMap::layout() {
+	UniqueWindow::layout();
+	verticalbox.set_size(get_inner_w(), get_inner_h());
+	buttonbox.set_max_size(verticalbox.get_w(), but_h());
+}
+
 void MiniMap::toggle(MiniMapLayer const button) {
 	*view_.minimap_layers_ = MiniMapLayer(*view_.minimap_layers_ ^ button);
 	// Redraw the entire minimap when changing layers - this looks nicer.
@@ -240,25 +248,8 @@ void MiniMap::toggle(MiniMapLayer const button) {
 
 void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
-	// Read number of rows after the zoom.
-	const uint32_t rows = number_of_button_rows();
-	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
-	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
-	button_terrn.set_size(but_w(), but_h());
-	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h()));
-	button_owner.set_size(but_w(), but_h());
-	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
-	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(
-	   Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
-	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(
-	   Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
-	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(
-	   Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
-	button_zoom.set_size(but_w(), but_h());
-	button_zoom.set_enabled(view_.can_zoom());
+	set_inner_size(view_.get_w(), view_.get_h() + but_h());
+	layout();
 
 	move_inside_parent();
 }

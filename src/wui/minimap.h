@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "graphic/minimap_renderer.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
@@ -60,6 +61,9 @@ public:
 	}
 	void save(FileWrite& fw, Widelands::MapObjectSaver& mos) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&);
+
+protected:
+	void layout() override;
 
 private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
@@ -115,12 +119,12 @@ private:
 		MiniMapType* minimap_type_;
 	};
 
-	uint32_t number_of_buttons_per_row() const;
-	uint32_t number_of_button_rows() const;
 	uint32_t but_w() const;
-	uint32_t but_h() const;
+	static uint32_t but_h();
 
 	InteractiveBase& ibase_;
+	UI::Box verticalbox;
+	UI::Box buttonbox;
 	View view_;
 	UI::Button button_terrn;
 	UI::Button button_owner;
