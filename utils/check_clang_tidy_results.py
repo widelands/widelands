@@ -9,8 +9,45 @@ import sys
 
 # Checks list: https://clang.llvm.org/extra/clang-tidy/checks/list.html
 SUPPRESSED_CHECKS = {
-    '[abseil-string-find-startswith]',
-    '[android-cloexec-fopen]',
+    # TODO(Nordfriese): Investigate which android-* and fuchsia-* checks we want to enable
+    # (currently they're all excluded in the clang-tidy invokation)
+
+    # Checks we strictly need and cannot clean up for the time being
+    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
+    '[cert-dcl50-cpp]',  # We need this for our logger
+    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
+    '[hicpp-vararg]',
+
+    # Checks that probably do not make sense for us
+    # (up for discussion; see https://github.com/widelands/widelands/discussions/5262)
+    '[llvmlibc-callee-namespace]',
+    '[modernize-use-trailing-return-type]',
+    '[cppcoreguidelines-avoid-c-arrays]',
+    '[hicpp-avoid-c-arrays]',
+    '[modernize-avoid-c-arrays]',
+    '[cppcoreguidelines-avoid-goto]',
+    '[hicpp-avoid-goto]',
+    '[cppcoreguidelines-no-malloc]',
+    '[hicpp-no-malloc]',
+    '[cppcoreguidelines-non-private-member-variables-in-classes]',
+    '[misc-non-private-member-variables-in-classes]',
+    '[cppcoreguidelines-owning-memory]',
+    '[cppcoreguidelines-pro-bounds-array-to-pointer-decay]',
+    '[hicpp-no-array-decay]',
+    '[cppcoreguidelines-pro-bounds-constant-array-index]',
+    '[cppcoreguidelines-pro-bounds-pointer-arithmetic]',
+    '[cppcoreguidelines-pro-type-const-cast]',
+    '[cppcoreguidelines-pro-type-reinterpret-cast]',
+    '[cppcoreguidelines-pro-type-union-access]',
+    '[google-default-arguments]',
+    '[hicpp-uppercase-literal-suffix]',
+    '[readability-uppercase-literal-suffix]',
+    '[hicpp-use-auto]',
+    '[modernize-use-auto]',
+    '[modernize-raw-string-literal]',
+    '[modernize-return-braced-init-list]',
+
+    # Checks we probably want to clean up sometime (discussible; see link above)
     '[boost-use-to-string]',
     '[bugprone-exception-escape]',
     '[bugprone-macro-parentheses]',
@@ -18,7 +55,6 @@ SUPPRESSED_CHECKS = {
     '[bugprone-not-null-terminated-result]',
     '[bugprone-signed-char-misuse]',
     '[bugprone-too-small-loop-variable]',
-    '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
     '[cert-msc32-c]',
     '[cert-msc51-cpp]',
@@ -30,70 +66,29 @@ SUPPRESSED_CHECKS = {
     '[clang-analyzer-optin.cplusplus.UninitializedObject]',
     '[clang-analyzer-optin.cplusplus.VirtualCall]',
     '[clang-diagnostic-documentation-unknown-command]',
-    '[cppcoreguidelines-avoid-c-arrays]',
-    '[cppcoreguidelines-avoid-goto]',
     '[cppcoreguidelines-avoid-magic-numbers]',
     '[cppcoreguidelines-init-variables]',
     '[cppcoreguidelines-macro-usage]',
     '[cppcoreguidelines-narrowing-conversions]',
-    '[cppcoreguidelines-no-malloc]',
-    '[cppcoreguidelines-non-private-member-variables-in-classes]',
-    '[cppcoreguidelines-owning-memory]',
-    '[cppcoreguidelines-pro-bounds-array-to-pointer-decay]',
-    '[cppcoreguidelines-pro-bounds-constant-array-index]',
-    '[cppcoreguidelines-pro-bounds-pointer-arithmetic]',
-    '[cppcoreguidelines-pro-type-const-cast]',
     '[cppcoreguidelines-pro-type-member-init]',
-    '[cppcoreguidelines-pro-type-reinterpret-cast]',
-    '[cppcoreguidelines-pro-type-union-access]',
-    '[cppcoreguidelines-pro-type-vararg]',  # We need this for our logger
     '[cppcoreguidelines-slicing]',
     '[cppcoreguidelines-special-member-functions]',
-    '[fuchsia-default-arguments]',
-    '[fuchsia-overloaded-operator]',
-    '[google-default-arguments]',
     '[google-readability-function-size]',
     '[google-runtime-references]',
-    '[hicpp-avoid-c-arrays]',
-    '[hicpp-avoid-goto]',
     '[hicpp-function-size]',
     '[hicpp-member-init]',
     '[hicpp-multiway-paths-covered]',
-    '[hicpp-no-array-decay]',
-    '[hicpp-no-malloc]',
     '[hicpp-signed-bitwise]',
     '[hicpp-special-member-functions]',
-    '[hicpp-uppercase-literal-suffix]',
-    '[hicpp-use-auto]',
-    '[hicpp-use-emplace]',
-    '[hicpp-use-equals-default]',
-    '[hicpp-vararg]',
-    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
-    '[llvmlibc-callee-namespace]',
     '[misc-macro-parentheses]',
-    '[misc-non-private-member-variables-in-classes]',
-    '[modernize-avoid-c-arrays]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
-    '[modernize-raw-string-literal]',
-    '[modernize-return-braced-init-list]',
-    '[modernize-use-auto]',
-    '[modernize-use-emplace]',
-    '[modernize-use-equals-default]',
-    '[modernize-use-trailing-return-type]',
-    '[performance-no-automatic-move]',
     '[performance-unnecessary-value-param]',
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
-    '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
-    '[readability-inconsistent-declaration-parameter-name]',
-    '[readability-isolate-declaration]',
-    '[readability-magic-numbers]',
-    '[readability-make-member-function-const]',
-    '[readability-named-parameter]',
-    '[readability-uppercase-literal-suffix]'
+    '[readability-magic-numbers]'
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')

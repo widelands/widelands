@@ -199,7 +199,7 @@ public:
 		std::function<std::string()> descname;
 	};
 	static const std::vector<OldWorldInfo> kOldWorldNames;
-	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& old_name);
+	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& new_name);
 	static const OldWorldInfo& get_old_world_info_by_old_name(const std::string& old_name);
 
 	using PortSpacesSet = std::set<Coords>;
@@ -625,8 +625,8 @@ protected:
 	void calculate_minimum_required_widelands_version(bool is_post_one_world);
 
 private:
-	void recalc_border(const FCoords&);
-	void recalc_brightness(const FCoords&);
+	void recalc_border(const FCoords&) const;
+	void recalc_brightness(const FCoords&) const;
 	void recalc_nodecaps_pass1(const EditorGameBase&, const FCoords&);
 	void recalc_nodecaps_pass2(const EditorGameBase&, const FCoords& f);
 	NodeCaps
@@ -635,7 +635,7 @@ private:
 	                             const FCoords&,
 	                             bool consider_mobs = true,
 	                             NodeCaps initcaps = CAPS_NONE) const;
-	void check_neighbour_heights(FCoords, uint32_t& radius);
+	void check_neighbour_heights(FCoords, uint32_t& area);
 	int calc_buildsize(const EditorGameBase&,
 	                   const FCoords& f,
 	                   bool avoidnature,

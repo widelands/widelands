@@ -33,7 +33,7 @@ FindNodeAnd::Subfunctor::Subfunctor(const FindNode& init_findfield, bool const i
 }
 
 void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
-	subfunctors.push_back(Subfunctor(findfield, negate));
+	subfunctors.emplace_back(findfield, negate);
 }
 
 bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) const {
@@ -45,7 +45,7 @@ bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) con
 	return true;
 }
 
-bool FindNodeCaps::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeCaps::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 
 	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK)) {
@@ -120,7 +120,7 @@ bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coor
 	      .empty());
 }
 
-bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeImmovableSize::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	int32_t size = BaseImmovable::NONE;
 
 	if (BaseImmovable* const imm = coord.field->get_immovable()) {
@@ -141,14 +141,15 @@ bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) 
 	}
 }
 
-bool FindNodeImmovableAttribute::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeImmovableAttribute::accept(const EditorGameBase& /* egbase */,
+                                        const FCoords& coord) const {
 	if (BaseImmovable* const imm = coord.field->get_immovable()) {
 		return imm->has_attribute(attribute);
 	}
 	return false;
 }
 
-bool FindNodeResource::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeResource::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	return resource == coord.field->get_resources() && coord.field->get_resources_amount();
 }
 

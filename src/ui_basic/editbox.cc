@@ -190,7 +190,7 @@ void EditBox::set_font_scale(float scale) {
 /**
  * The mouse was clicked on this editbox
  */
-bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
+bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		reset_selection();
 		set_caret_to_cursor_pos(x);
@@ -478,7 +478,8 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	return false;
 }
 void EditBox::copy_selected_text() {
-	uint32_t start, end;
+	uint32_t start;
+	uint32_t end;
 	calculate_selection_boundaries(start, end);
 
 	auto nr_characters = end - start;
@@ -498,7 +499,8 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 }
 
 void EditBox::delete_selected_text() {
-	uint32_t start, end;
+	uint32_t start;
+	uint32_t end;
 	calculate_selection_boundaries(start, end);
 	uint32_t nbytes = end - start;
 	m_->text.erase(start, nbytes);
@@ -643,7 +645,8 @@ void EditBox::highlight_selection(RenderTarget& dst,
                                   const Vector2i& point,
                                   const uint16_t fontheight) {
 
-	uint32_t start, end;
+	uint32_t start;
+	uint32_t end;
 	calculate_selection_boundaries(start, end);
 	auto nr_characters = end - start;
 

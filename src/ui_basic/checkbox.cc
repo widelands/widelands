@@ -207,7 +207,7 @@ void Statebox::handle_mousein(bool const inside) {
 /**
  * Left-click: Toggle checkbox state
  */
-bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool Statebox::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
 		button_clicked();
 		return true;
@@ -215,7 +215,8 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 
-bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Statebox::handle_mousemove(
+   const uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	return true;  // We handle this always by lighting up
 }
 

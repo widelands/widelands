@@ -180,8 +180,9 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue&
-ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
+InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi,
+                                         WareWorker const type,
+                                         const Request* /* req */) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -594,7 +595,7 @@ bool ConstructionSite::fetch_from_flag(Game& game) {
 Called by our builder to get instructions.
 ===============
 */
-bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
+bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -693,8 +694,11 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 Called by InputQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(
-   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
+void ConstructionSite::wares_queue_callback(Game& game,
+                                            InputQueue* /* queue */,
+                                            DescriptionIndex /* index */,
+                                            Worker* /* worker */,
+                                            void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_) {

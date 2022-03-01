@@ -46,22 +46,22 @@ namespace Widelands {
  */
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
-	explicit IdleWareSupply(WareInstance&);
+	explicit IdleWareSupply(WareInstance& /*ware*/);
 	~IdleWareSupply() override;
 
-	void set_economy(Economy*);
+	void set_economy(Economy* /*e*/);
 
 	//  implementation of Supply
-	PlayerImmovable* get_position(Game&) override;
+	PlayerImmovable* get_position(Game& /*game*/) override;
 	bool is_active() const override;
-	SupplyProviders provider_type(Game*) const override;
+	SupplyProviders provider_type(Game* /*game*/) const override;
 	bool has_storage() const override;
 	void get_ware_type(WareWorker& type, DescriptionIndex& ware) const override;
-	void send_to_storage(Game&, Warehouse* wh) override;
+	void send_to_storage(Game& /*game*/, Warehouse* wh) override;
 
-	uint32_t nr_supplies(const Game&, const Request&) const override;
-	WareInstance& launch_ware(Game&, const Request&) override;
-	Worker& launch_worker(Game&, const Request&) override;
+	uint32_t nr_supplies(const Game& /* game */, const Request& /* req */) const override;
+	WareInstance& launch_ware(Game& /* game */, const Request& /* req */) override;
+	Worker& launch_worker(Game& /* game */, const Request& /* req */) override;
 
 private:
 	WareInstance& ware_;
@@ -146,7 +146,7 @@ void IdleWareSupply::get_ware_type(WareWorker& type, DescriptionIndex& ware) con
 	ware = ware_.descr_index();
 }
 
-uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
+uint32_t IdleWareSupply::nr_supplies(const Game& /* game */, const Request& req) const {
 	if (req.get_type() == wwWARE && req.get_index() == ware_.descr_index()) {
 		return 1;
 	}
@@ -156,7 +156,7 @@ uint32_t IdleWareSupply::nr_supplies(const Game&, const Request& req) const {
 /**
  * The ware is already "launched", so we only need to return it.
  */
-WareInstance& IdleWareSupply::launch_ware(Game&, const Request& req) {
+WareInstance& IdleWareSupply::launch_ware(Game& /* game */, const Request& req) {
 	if (req.get_type() != wwWARE) {
 		throw wexception("IdleWareSupply::launch_ware : called for non-ware request");
 	}
@@ -168,7 +168,7 @@ WareInstance& IdleWareSupply::launch_ware(Game&, const Request& req) {
 	return ware_;
 }
 
-Worker& IdleWareSupply::launch_worker(Game&, const Request&) {
+Worker& IdleWareSupply::launch_worker(Game& /* game */, const Request& /* req */) {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
@@ -285,7 +285,7 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 /**
  * Handle delayed updates.
  */
-void WareInstance::act(Game& game, uint32_t) {
+void WareInstance::act(Game& game, uint32_t /*data*/) {
 	update(game);
 }
 
@@ -356,13 +356,12 @@ void WareInstance::update(Game& game) {
 			if (success) {
 				t->has_finished();
 				return;
-			} else {
-				t->has_failed();
-
-				cancel_moving();
-				update(game);
-				return;
 			}
+			t->has_failed();
+
+			cancel_moving();
+			update(game);
+			return;
 		}
 
 		if (upcast(Flag, flag, location)) {
@@ -426,28 +425,27 @@ void WareInstance::enter_building(Game& game, Building& building) {
 			   serial(), descr_->name().c_str(), building.serial(), building.descr().name().c_str(),
 			   building.get_position().x, building.get_position().y, nextstep->serial(),
 			   nextstep->descr().name().c_str());
-		} else {
-			Transfer* t = transfer_;
-
-			transfer_ = nullptr;
-			transfer_nextstep_ = nullptr;
-
-			t->has_failed();
-			cancel_moving();
-
-			if (building.descr().type() == MapObjectType::WAREHOUSE) {
-				building.receive_ware(game, descr_index_);
-				remove(game);
-			} else {
-				update(game);
-			}
-			return;
 		}
-	} else {
-		// We don't have a transfer, so just enter the building
-		building.receive_ware(game, descr_index_);
-		remove(game);
+		Transfer* t = transfer_;
+
+		transfer_ = nullptr;
+		transfer_nextstep_ = nullptr;
+
+		t->has_failed();
+		cancel_moving();
+
+		if (building.descr().type() == MapObjectType::WAREHOUSE) {
+			building.receive_ware(game, descr_index_);
+			remove(game);
+		} else {
+			update(game);
+		}
+		return;
 	}
+
+	// We don't have a transfer, so just enter the building
+	building.receive_ware(game, descr_index_);
+	remove(game);
 }
 
 /**
@@ -605,9 +603,9 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase, MapObjectLoader& m
 			loader->load(fr);
 
 			return loader.release();
-		} else {
-			throw UnhandledVersionError("WareInstance", packet_version, kCurrentPacketVersion);
 		}
+		throw UnhandledVersionError("WareInstance", packet_version, kCurrentPacketVersion);
+
 	} catch (const std::exception& e) {
 		throw wexception("WareInstance: %s", e.what());
 	}

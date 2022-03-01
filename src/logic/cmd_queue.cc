@@ -142,7 +142,7 @@ void GameLogicCommand::write(FileWrite& fw,
 #else
                              EditorGameBase&,
 #endif
-                             MapObjectSaver&) {
+                             MapObjectSaver& /* mos */) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write duetime
@@ -155,7 +155,7 @@ void GameLogicCommand::write(FileWrite& fw,
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader&) {
+void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& /* mol */) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {

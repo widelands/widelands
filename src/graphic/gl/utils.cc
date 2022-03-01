@@ -86,7 +86,7 @@ public:
 	}
 
 	// Compiles 'source'. Throws an exception on error.
-	void compile(const char* source);
+	void compile(const char* source) const;
 
 private:
 	const GLenum type_;
@@ -107,7 +107,7 @@ Shader::~Shader() {
 	}
 }
 
-void Shader::compile(const char* source) {
+void Shader::compile(const char* source) const {
 	glShaderSource(shader_object_, 1, &source, nullptr);
 
 	glCompileShader(shader_object_);

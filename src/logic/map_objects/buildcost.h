@@ -40,7 +40,7 @@ struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 	Quantity total() const;
 
 	void save(FileWrite& fw, const TribeDescr& tribe) const;
-	void load(FileRead& fw, const TribeDescr& tribe);
+	void load(FileRead& fr, const TribeDescr& tribe);
 };
 
 }  // namespace Widelands

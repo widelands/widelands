@@ -76,7 +76,7 @@ Remove this critter
 
 ==============================
 */
-bool Critter::run_remove(Game& game, State& state, const CritterAction&) {
+bool Critter::run_remove(Game& game, State& state, const CritterAction& /* action */) {
 	++state.ivar1;
 	// Bye, bye cruel world
 	schedule_destroy(game);

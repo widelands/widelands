@@ -231,7 +231,7 @@ void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	ibase_.reset(b);
 }
 
-InteractiveGameBase* EditorGameBase::get_igbase() {
+InteractiveGameBase* EditorGameBase::get_igbase() const {
 	return dynamic_cast<InteractiveGameBase*>(get_ibase());
 }
 

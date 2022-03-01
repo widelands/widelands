@@ -322,10 +322,9 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 			assert(w);
 			w->set_current_view(fr.unsigned_8(), false);
 			return *w;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Watchwindow", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Watchwindow", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("watchwindow: %s", e.what());
 	}
