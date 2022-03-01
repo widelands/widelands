@@ -2410,7 +2410,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
-	// updating this stats will be needed later on
+	// Updating statistics of free spots, it will be needed later on
 	update_avail_spots_stat();
 
 	// Now we will calculate two scores used to build militarysites
@@ -2419,7 +2419,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	// And also update some other info about needed spots
 	calculate_target_m_score(gametime);
 
-	// iterate over rangers and set wood policy
+	// Iterate over rangers and set wood policy
 	set_rangers_policy(gametime);
 
 	// Testing big military buildings, whether all critical construction
@@ -7065,7 +7065,7 @@ Widelands::PlayerNumber DefaultAI::get_land_owner(const Widelands::Map& map,
 }
 
 void DefaultAI::update_avail_spots_stat() {
-	// updating statistics in spots_avail
+	// Updating number of available spots per to BUILDCAPS (in spots_avail)
 	for (int32_t i = 0; i < 4; ++i) {
 		spots_avail.at(i) = 0;
 	}
@@ -7250,11 +7250,6 @@ void DefaultAI::calculate_target_m_score(const Time& gametime) {
 	const bool increase_least_score_limit =
 	   (increase_score_limit_score > management_data.get_military_number_at(45) / 5);
 
-	// static uint16_t concurent_ms_in_constr_no_enemy = 1;
-	// *concurent_ms_in_constr_no_enemy = 1;
-	// static uint16_t concurent_ms_in_constr_enemy_nearby = 2;
-	// concurent_ms_in_constr_enemy_nearby = 2;
-
 	// resetting highest_nonmil_prio_ so it can be recalculated anew
 	highest_nonmil_prio_ = 0;
 
@@ -7319,7 +7314,7 @@ void DefaultAI::calculate_target_m_score(const Time& gametime) {
 }
 
 void DefaultAI::set_rangers_policy(const Time& gametime) {
-	// we must calculate wood policy for each type of rangers
+	// We must calculate wood policy for each type of rangers
 	for (BuildingObserver& bo : rangers_) {
 		// stocked level of supported wares (only lowest counts) is to be in some proportion to
 		// productionsites and constructionsites (this proportion is bit artifical, or we can say
@@ -7348,9 +7343,9 @@ void DefaultAI::set_rangers_policy(const Time& gametime) {
 }
 
 void DefaultAI::check_critical_material_of_ms() {
-	// testing big military buildings, whether critical construction
+	// Testing big military buildings, whether critical construction
 	// material is available (at least in amount of
-	// 2/3 of default target amount)
+	// 2/3 of default target amount). Setting build_material_shortage accordingly
 	for (BuildingObserver& bo : buildings_) {
 		if (!bo.buildable(*player_)) {
 			continue;
@@ -7393,10 +7388,10 @@ void DefaultAI::check_critical_material_of_ms() {
 }
 
 void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
-	// Calculating actual neededness
+	// Calculating actual neededness for every building type
 	for (BuildingObserver& bo : buildings_) {
 		// we check if a previously not buildable Building of the basic economy is buildable again
-		// If so and we don't have basic economy achieved we add readd it to basic buildings list
+		// If so and we don't have basic economy achieved we add it to basic buildings list
 		// This should only happen in scenarios via scripting
 		if (!basic_economy_established && bo.basic_amount > static_cast<uint32_t>(bo.total_count()) &&
 		    bo.buildable(*player_)) {
