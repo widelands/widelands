@@ -49,8 +49,8 @@ private:
 	bool player_hears_field(const Widelands::Coords& coords) const override;
 
 	void exit_btn();
-	bool can_see(Widelands::PlayerNumber) const override;
-	bool can_act(Widelands::PlayerNumber) const override;
+	bool can_see(Widelands::PlayerNumber p) const override;
+	bool can_act(Widelands::PlayerNumber p) const override;
 	Widelands::PlayerNumber player_number() const override;
 	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 };

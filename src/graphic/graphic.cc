@@ -136,7 +136,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	rebuild_texture_atlas();
 }
 
-void Graphic::rebuild_texture_atlas() {
+void Graphic::rebuild_texture_atlas() const {
 	verb_log_info("Rebuilding texture atlas");
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
@@ -210,7 +210,8 @@ void Graphic::resolution_changed() {
 	int old_w = screen_ ? screen_->width() : 0;
 	int old_h = screen_ ? screen_->height() : 0;
 
-	int new_w, new_h;
+	int new_w;
+	int new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
 	if (old_w == new_w && old_h == new_h) {
@@ -294,7 +295,8 @@ void Graphic::refresh() {
 	if (!fullscreen()) {
 		// Set the window to our preferred size if it goes out of sync.
 		// Not sure if this is still needed, leaving it just in case.
-		int true_width, true_height;
+		int true_width;
+		int true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {

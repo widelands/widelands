@@ -62,8 +62,8 @@ public:
 	AddOns::AddOnRequirements required_addons;
 
 	SavegameData();
-	explicit SavegameData(const std::string& filename);
-	SavegameData(const std::string& filename, const SavegameType& type);
+	explicit SavegameData(const std::string& fname);
+	SavegameData(const std::string& fname, const SavegameType& type);
 	static SavegameData create_parent_dir(const std::string& current_dir);
 	static SavegameData create_sub_dir(const std::string& directory);
 
