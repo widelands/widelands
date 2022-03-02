@@ -37,7 +37,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	map_objecttype_subscriber_ = Notifications::subscribe<NoteMapObjectDescription>(
 	   [this](const NoteMapObjectDescription& note) {
 		   if (description_managers_stack_.back() != this) {
-			   verb_log_dbg("DescriptionManager: Ignoring NoteMapObjectDescription");
+			   // Not meant for us
 			   return;
 		   }
 		   assert(!registered_descriptions_.empty());

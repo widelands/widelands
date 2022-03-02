@@ -322,8 +322,8 @@ void EditorGameBase::postload_addons() {
 	mutable_descriptions()->ensure_tribes_are_registered();
 	if (is_game()) {
 		FileSystem* map_fs = map().filesystem();
-		assert(map_fs != nullptr);
-		if (map_fs->file_exists("scripting/tribes")) {
+		// In new random matches, map_fs may be nullptr
+		if (map_fs != nullptr && map_fs->file_exists("scripting/tribes")) {
 			verb_log_info("Game: Reading Scenario Tribes ... ");
 			mutable_descriptions()->register_scenario_tribes(map_fs);
 		}
