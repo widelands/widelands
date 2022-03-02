@@ -320,7 +320,6 @@ bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_sce
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
-	postload_addons();
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -330,6 +329,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		assert(maploader);
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
+
+	postload_addons();
+	did_postload_addons_before_loading_ = true;
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;

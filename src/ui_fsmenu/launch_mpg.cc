@@ -136,7 +136,7 @@ void LaunchMPG::win_condition_selected() {
  */
 void LaunchMPG::clicked_select_map() {
 	if (settings_.can_change_map()) {
-		new MapSelect(get_capsule(), this, &settings_, ctrl_, game_);
+		new MapSelect(get_capsule(), this, &settings_, ctrl_, std::make_shared<Widelands::Game>());
 	}
 }
 
