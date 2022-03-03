@@ -133,7 +133,7 @@ private:
 		                    int32_t min_w);
 
 		void set_economy(Widelands::Serial serial);
-		void change_target(int amount);
+		void change_target(int delta);
 		void toggle_infinite();
 		void reset_target();
 		void update_desired_size() override;

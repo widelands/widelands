@@ -104,11 +104,11 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionI
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel(UI::Panel* parent,
 	                    uint32_t width,
-	                    InteractiveBase&,
-	                    Widelands::Warehouse&,
+	                    InteractiveBase& /*ib*/,
+	                    Widelands::Warehouse& /*wh*/,
 	                    Widelands::WareWorker type);
 
-	void set_policy(Widelands::StockPolicy);
+	void set_policy(Widelands::StockPolicy /*newpolicy*/);
 	void change_real_fill(int32_t delta);
 
 private:

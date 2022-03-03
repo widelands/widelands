@@ -52,15 +52,15 @@ struct ChatOverlay::Impl {
 	FxId new_message_;
 
 	Impl()
-	   : chat_message_subscriber_(
-	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
+	   : chat_message_subscriber_(Notifications::subscribe<ChatMessage>(
+	        [this](const ChatMessage& /* msg */) { recompute(); })),
 	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 
 	void recompute();
 
 private:
-	bool has_chat_provider() {
+	bool has_chat_provider() const {
 		// The chat provider might not have been assigned a specific subclass,
 		// e.g. if there was an exception thrown.
 		return (chat_ != nullptr && chat_->has_been_set());

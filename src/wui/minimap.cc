@@ -35,8 +35,8 @@ MiniMap::View::View(UI::Panel& parent,
                     MiniMapType* type,
                     int32_t const x,
                     int32_t const y,
-                    uint32_t const,
-                    uint32_t const,
+                    uint32_t const /* w */,
+                    uint32_t const /* h */,
                     InteractiveBase& ibase)
    : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
      ibase_(ibase),
@@ -221,7 +221,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	}
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
+	   [this](const GraphicResolutionChanged& /* note */) { check_boundaries(); });
 
 	update_button_permpressed();
 
@@ -304,14 +304,14 @@ UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 			m.resize();
 			m.update_button_permpressed();
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError("Minimap", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Minimap", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("minimap: %s", e.what());
 	}
 }
-void MiniMap::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void MiniMap::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_32(static_cast<uint32_t>(*view_.minimap_layers_));
 }

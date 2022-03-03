@@ -115,13 +115,13 @@ void WaresQueue::set_filled(Quantity filled) {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void WaresQueue::write_child(FileWrite& fw, Game&, MapObjectSaver&) {
+void WaresQueue::write_child(FileWrite& fw, Game& /*g*/, MapObjectSaver& /*s*/) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	fw.signed_32(filled_);
 }
 
-void WaresQueue::read_child(FileRead& fr, Game&, MapObjectLoader&) {
+void WaresQueue::read_child(FileRead& fr, Game& /*g*/, MapObjectLoader& /*mol*/) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {

@@ -23,7 +23,8 @@
 #include "ai/computer_player.h"
 #include "base/random.h"
 
-void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSettings::State state) {
+void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id,
+                                                    PlayerSettings::State state) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -32,7 +33,7 @@ void NetworkPlayerSettingsBackend::set_player_state(PlayerSlot id, PlayerSetting
 
 void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
                                                  const std::string& name,
-                                                 bool random_ai) {
+                                                 bool random_ai) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -53,7 +54,8 @@ void NetworkPlayerSettingsBackend::set_player_ai(PlayerSlot id,
 	}
 }
 
-void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::string& tribename) {
+void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id,
+                                                    const std::string& tribename) const {
 	const GameSettings& settings = s->settings();
 	if (id >= settings.players.size() || tribename.empty()) {
 		return;
@@ -65,7 +67,7 @@ void NetworkPlayerSettingsBackend::set_player_tribe(PlayerSlot id, const std::st
 
 /// Set the shared in player for the given id
 void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
-                                                     Widelands::PlayerNumber shared) {
+                                                     Widelands::PlayerNumber shared) const {
 	const GameSettings& settings = s->settings();
 	if (id >= settings.players.size() || shared > settings.players.size()) {
 		return;
@@ -76,7 +78,8 @@ void NetworkPlayerSettingsBackend::set_player_shared(PlayerSlot id,
 }
 
 /// Sets the initialization for the player slot (Headquarters, Fortified Village etc.)
-void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id, uint8_t initialization_index) {
+void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id,
+                                                   uint8_t initialization_index) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -84,7 +87,8 @@ void NetworkPlayerSettingsBackend::set_player_init(PlayerSlot id, uint8_t initia
 }
 
 /// Sets the team for the player slot
-void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::TeamNumber team) {
+void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id,
+                                                   Widelands::TeamNumber team) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}
@@ -92,7 +96,7 @@ void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::Tea
 }
 
 /// Sets the colo for the player slot
-void NetworkPlayerSettingsBackend::set_player_color(PlayerSlot id, const RGBColor& c) {
+void NetworkPlayerSettingsBackend::set_player_color(PlayerSlot id, const RGBColor& c) const {
 	if (id >= s->settings().players.size()) {
 		return;
 	}

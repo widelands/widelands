@@ -186,7 +186,7 @@ bool RoadBase::init(EditorGameBase& egbase) {
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void RoadBase::link_into_flags(EditorGameBase& egbase, bool) {
+void RoadBase::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 	assert(path_.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -229,17 +229,17 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
  */
-void RoadBase::presplit(Game& game, Coords) {
+void RoadBase::presplit(Game& game, Coords /* c */) {
 	unmark_map(game);
 }
 
-void RoadBase::postsplit(Game&, Flag&) {
+void RoadBase::postsplit(Game& /* game */, Flag& /* flag */) {
 }
 
-void RoadBase::assign_carrier(Carrier&, uint8_t) {
+void RoadBase::assign_carrier(Carrier& /* carrier */, uint8_t /* slot */) {
 }
 
-bool RoadBase::notify_ware(Game&, FlagId) {
+bool RoadBase::notify_ware(Game& /* game */, FlagId /* flag */) {
 	return false;
 }
 

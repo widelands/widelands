@@ -682,7 +682,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
-void ShipFleet::act(Game& game, uint32_t) {
+void ShipFleet::act(Game& game, uint32_t /*data*/) {
 	assert(act_pending_);
 	act_pending_ = false;
 

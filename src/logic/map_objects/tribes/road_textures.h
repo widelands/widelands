@@ -34,9 +34,9 @@ public:
 	const Image& get_waterway_texture(const Widelands::Coords& coords, int direction) const;
 
 	// Adds a new road texture.
-	void add_normal_road_texture(const Image* texture);
-	void add_busy_road_texture(const Image* texture);
-	void add_waterway_texture(const Image* texture);
+	void add_normal_road_texture(const Image* image);
+	void add_busy_road_texture(const Image* image);
+	void add_waterway_texture(const Image* image);
 
 private:
 	std::vector<const Image*> normal_textures_;

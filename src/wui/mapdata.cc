@@ -80,7 +80,7 @@ MapData::MapData(const std::string& init_filename, const std::string& init_local
              MapData::DisplayType::kMapnamesLocalized) {
 }
 
-bool MapData::compare_names(const MapData& other) {
+bool MapData::compare_names(const MapData& other) const {
 	// The parent directory gets special treatment.
 	if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 		return true;
@@ -122,14 +122,14 @@ bool MapData::compare_names(const MapData& other) {
 	return this_name < other_name;
 }
 
-bool MapData::compare_players(const MapData& other) {
+bool MapData::compare_players(const MapData& other) const {
 	if (nrplayers == other.nrplayers) {
 		return compare_names(other);
 	}
 	return nrplayers < other.nrplayers;
 }
 
-bool MapData::compare_size(const MapData& other) {
+bool MapData::compare_size(const MapData& other) const {
 	if (width == other.width && height == other.height) {
 		return compare_names(other);
 	}

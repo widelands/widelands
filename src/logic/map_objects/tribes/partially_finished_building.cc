@@ -116,7 +116,7 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 Issue a request for the builder.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder(Game&) {
+void PartiallyFinishedBuilding::request_builder(Game& /* game */) {
 	assert(!builder_.is_set() && !builder_request_);
 
 	builder_request_ = new Request(*this, owner().tribe().builder(),
@@ -199,8 +199,11 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 Called by transfer code when the builder has arrived on site.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void PartiallyFinishedBuilding::request_builder_callback(Game& game,
+                                                         Request& rq,
+                                                         DescriptionIndex /* index */,
+                                                         Worker* const w,
+                                                         PlayerImmovable& target) {
 	assert(w);
 
 	PartiallyFinishedBuilding& b = dynamic_cast<PartiallyFinishedBuilding&>(target);

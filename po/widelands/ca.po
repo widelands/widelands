@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-22 02:41+0000\n"
+"POT-Creation-Date: 2022-02-28 02:45+0000\n"
 "PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -44,7 +44,7 @@ msgstr "%1$s o %2$s"
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:602 ../../data/scripting/richtext.lua:607
 #: ../../src/base/i18n.cc:415 ../../src/base/i18n.cc:424
-#: ../../src/logic/addons.cc:197
+#: ../../src/logic/addons.cc:198
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -283,11 +283,11 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
-#: ../../src/ui_fsmenu/keyboard_options.cc:294
-#: ../../src/wui/interactive_gamebase.cc:91
+#: ../../src/ui_fsmenu/keyboard_options.cc:293
+#: ../../src/wui/interactive_gamebase.cc:92
 #: ../../src/wui/story_message_box.cc:73
 msgid "Main Menu"
 msgstr "Menú principal"
@@ -298,98 +298,98 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
-#: ../../src/editor/editorinteractive.cc:123
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
+#: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
 msgstr "Mostra/Oculta"
 
-#: ../../src/editor/editorinteractive.cc:136
+#: ../../src/editor/editorinteractive.cc:138
 msgid "Tool size"
 msgstr "Mida d'eines"
 
-#: ../../src/editor/editorinteractive.cc:151
+#: ../../src/editor/editorinteractive.cc:153
 #: ../../src/wlapplication_options.cc:403
 msgid "Undo"
 msgstr "Desfés"
 
-#: ../../src/editor/editorinteractive.cc:155
+#: ../../src/editor/editorinteractive.cc:157
 #: ../../src/wlapplication_options.cc:407
 msgid "Redo"
 msgstr "Refés"
 
-#: ../../src/editor/editorinteractive.cc:166
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:225
+#: ../../src/editor/editorinteractive.cc:168
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:226
 msgid "Help"
 msgstr "Ajuda"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:195
+#: ../../src/editor/editorinteractive.cc:197
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
-#: ../../src/ui_fsmenu/main.cc:393
+#: ../../src/ui_fsmenu/main.cc:394
 msgid "New Map"
 msgstr "Mapa nou"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:203
+#: ../../src/editor/editorinteractive.cc:205
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
 msgid "New Random Map"
 msgstr "Mapa aleatori nou"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:210
+#: ../../src/editor/editorinteractive.cc:212
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
-#: ../../src/ui_fsmenu/main.cc:398 ../../src/wlapplication_options.cc:399
+#: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:399
 msgid "Load Map"
 msgstr "Carrega"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:218
+#: ../../src/editor/editorinteractive.cc:220
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../src/wlapplication_options.cc:395
 msgid "Save Map"
 msgstr "Desa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:226
+#: ../../src/editor/editorinteractive.cc:228
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 msgid "Map Options"
 msgstr "Opcions del mapa"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:232
 msgid "Exit Editor"
 msgstr "Surt de l'editor"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:266
+#: ../../src/editor/editorinteractive.cc:268
 msgid "Change height"
 msgstr "Canvia l'alçada"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:269
+#: ../../src/editor/editorinteractive.cc:271
 msgid "Change the terrain height"
 msgstr "Canvia l'alçada del terreny"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:275
+#: ../../src/editor/editorinteractive.cc:277
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
 msgstr "Alçada aleatòria"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:278
+#: ../../src/editor/editorinteractive.cc:280
 msgid "Set the terrain height to random values"
 msgstr "Estableix l'alçada del terreny a valors aleatoris"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:284
+#: ../../src/editor/editorinteractive.cc:286
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 #: ../../src/wui/minimap.cc:152
@@ -397,35 +397,35 @@ msgid "Terrain"
 msgstr "Terreny"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:287
+#: ../../src/editor/editorinteractive.cc:289
 msgid "Change the map’s terrain"
 msgstr "Canvia el terreny del mapa"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:294
+#: ../../src/editor/editorinteractive.cc:296
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:178
 msgid "Immovables"
 msgstr "Inamovibles"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:297
+#: ../../src/editor/editorinteractive.cc:299
 msgid "Add or remove immovables"
 msgstr "Afegeix o treu inamovibles"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:303
+#: ../../src/editor/editorinteractive.cc:305
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
 msgstr "Animals"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:306
+#: ../../src/editor/editorinteractive.cc:308
 msgid "Add or remove animals"
 msgstr "Afegeix o treu animals"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:313
+#: ../../src/editor/editorinteractive.cc:315
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -435,78 +435,78 @@ msgid "Resources"
 msgstr "Recursos"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:316
+#: ../../src/editor/editorinteractive.cc:318
 msgid "Set or change resources"
 msgstr "Estableix o canvia recursos"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:319
+#: ../../src/editor/editorinteractive.cc:321
 msgid "Port spaces"
 msgstr "Zones portuàries"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:322
+#: ../../src/editor/editorinteractive.cc:324
 msgid "Add or remove port spaces"
 msgstr "Afegeix o treu zones portuàries"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:328
+#: ../../src/editor/editorinteractive.cc:331
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:677
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:149
 msgid "Players"
 msgstr "Jugadors"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:331
+#: ../../src/editor/editorinteractive.cc:334
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Establiu el nombre de jugadors i els seus noms, clans i posicions inicials."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:335
+#: ../../src/editor/editorinteractive.cc:338
 msgid "Map origin"
 msgstr "Origen del mapa"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:338
+#: ../../src/editor/editorinteractive.cc:341
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Trieu la posició que tindrà coordenades (0,0). Aquest lloc serà el punt de dalt a l'esquerra del minimapa."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:345
+#: ../../src/editor/editorinteractive.cc:348
 msgid "Map size"
 msgstr "Mida del mapa"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:348
+#: ../../src/editor/editorinteractive.cc:351
 msgid "Change the map’s size"
 msgstr "Canvia la mida del mapa"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:351
+#: ../../src/editor/editorinteractive.cc:354
 msgid "Information"
 msgstr "Informació"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:354
+#: ../../src/editor/editorinteractive.cc:357
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
-#. building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:416
-#: ../../src/wui/interactive_gamebase.cc:226
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. building spaces are
+#. * shown
+#: ../../src/editor/editorinteractive.cc:419
+#: ../../src/wui/interactive_gamebase.cc:227
 msgid "Hide Building Spaces"
 msgstr "Amaga els espais de construcció"
 
-#: ../../src/editor/editorinteractive.cc:416
+#: ../../src/editor/editorinteractive.cc:419
 #: ../../src/ui_fsmenu/options.cc:243
-#: ../../src/wui/interactive_gamebase.cc:226
+#: ../../src/wui/interactive_gamebase.cc:227
 msgid "Show Building Spaces"
 msgstr "Mostra espais de construcció"
 
@@ -514,15 +514,15 @@ msgstr "Mostra espais de construcció"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:423
+#: ../../src/editor/editorinteractive.cc:426
 msgid "Hide Maximum Building Spaces"
 msgstr "Amaga els espais de construcció grans"
 
-#: ../../src/editor/editorinteractive.cc:424
+#: ../../src/editor/editorinteractive.cc:427
 msgid "Show Maximum Building Spaces"
 msgstr "Mostra els espais de construcció grans"
 
-#: ../../src/editor/editorinteractive.cc:427
+#: ../../src/editor/editorinteractive.cc:430
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -530,73 +530,73 @@ msgstr "Mostra/Amaga els espais de construcció grans que estaran disponibles si
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:433
+#: ../../src/editor/editorinteractive.cc:436
 msgid "Hide Grid"
 msgstr "Amaga la graella"
 
-#: ../../src/editor/editorinteractive.cc:433
+#: ../../src/editor/editorinteractive.cc:436
 msgid "Show Grid"
 msgstr "Mostra la graella"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:441
+#: ../../src/editor/editorinteractive.cc:444
 msgid "Hide Immovables"
 msgstr "Amaga els inamovibles"
 
-#: ../../src/editor/editorinteractive.cc:441
+#: ../../src/editor/editorinteractive.cc:444
 msgid "Show Immovables"
 msgstr "Mostra els inamovibles"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:446
+#: ../../src/editor/editorinteractive.cc:449
 msgid "Hide Animals"
 msgstr "Amaga els animals"
 
-#: ../../src/editor/editorinteractive.cc:446
+#: ../../src/editor/editorinteractive.cc:449
 msgid "Show Animals"
 msgstr "Mostra els animals"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Hide Resources"
 msgstr "Amaga els recursos"
 
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Show Resources"
 msgstr "Mostra recursos"
 
-#: ../../src/editor/editorinteractive.cc:495
+#: ../../src/editor/editorinteractive.cc:498
 msgid "Unsupported Format"
 msgstr "Format no compatible"
 
-#: ../../src/editor/editorinteractive.cc:496 ../../src/wlapplication.cc:774
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:774
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "El Widelands no ha trobat el fitxer «%s». El format sembla ser incompatible."
 
-#: ../../src/editor/editorinteractive.cc:570
+#: ../../src/editor/editorinteractive.cc:573
 msgid "Unsaved Map"
 msgstr "Mapa sense guardar"
 
-#: ../../src/editor/editorinteractive.cc:571
+#: ../../src/editor/editorinteractive.cc:574
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 
-#: ../../src/editor/editorinteractive.cc:987 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
 #: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
 #: ../../src/ui_fsmenu/addons/contact.cc:82
-#: ../../src/ui_fsmenu/addons/manager.cc:1363
-#: ../../src/ui_fsmenu/addons/manager.cc:1374
-#: ../../src/ui_fsmenu/addons/manager.cc:1424
-#: ../../src/ui_fsmenu/addons/manager.cc:1470
-#: ../../src/ui_fsmenu/addons/manager.cc:1549
-#: ../../src/ui_fsmenu/addons/manager.cc:1618
+#: ../../src/ui_fsmenu/addons/manager.cc:1366
+#: ../../src/ui_fsmenu/addons/manager.cc:1377
+#: ../../src/ui_fsmenu/addons/manager.cc:1427
+#: ../../src/ui_fsmenu/addons/manager.cc:1474
+#: ../../src/ui_fsmenu/addons/manager.cc:1552
+#: ../../src/ui_fsmenu/addons/manager.cc:1621
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
@@ -604,12 +604,12 @@ msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:454
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
-#: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:231
+#: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
 #: ../../src/wlapplication.cc:1613
 msgid "Error"
 msgstr "S'ha produït un error."
 
-#: ../../src/editor/editorinteractive.cc:989 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1615
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -620,13 +620,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "S'ha produït un error i el missatge d'error és:\n\n%1$s\n\nSi us plau, informeu de l'error per ajudar a millorar el Widelands. Trobareu missatges relacionats a la sortida estàndard (stdout.txt en Windows). Esteu usant la versió %2$s (%3$s).\nAfegiu aquesta informació a l'informe."
 
-#: ../../src/editor/editorinteractive.cc:1023
+#: ../../src/editor/editorinteractive.cc:1026
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "S'està creant el mapa «%s»…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1047
+#: ../../src/editor/editorinteractive.cc:1050
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -635,7 +635,7 @@ msgid "No Name"
 msgstr "Sense nom"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1050
+#: ../../src/editor/editorinteractive.cc:1053
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -643,11 +643,11 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: ../../src/editor/editorinteractive.cc:1074
+#: ../../src/editor/editorinteractive.cc:1077
 msgid "Loading world…"
 msgstr "S'està carregant el món…"
 
-#: ../../src/editor/map_generator.cc:749
+#: ../../src/editor/map_generator.cc:752
 msgid "Random Player"
 msgstr "Jugador aleatori"
 
@@ -817,7 +817,7 @@ msgstr "Obra de: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:244
 #: ../../src/ui_fsmenu/addons/packager_box.cc:283
-#: ../../src/ui_fsmenu/main.cc:432 ../../src/ui_fsmenu/mapdetailsbox.cc:124
+#: ../../src/ui_fsmenu/main.cc:433 ../../src/ui_fsmenu/mapdetailsbox.cc:124
 #, c-format
 msgid "Description: %s"
 msgstr "Descripció: %s"
@@ -838,7 +838,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Complements activats: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1008 ../../src/wui/encyclopedia_window.cc:144
+#: ../../src/ui_fsmenu/main.cc:1009 ../../src/wui/encyclopedia_window.cc:144
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "S'ha produït un error!"
@@ -884,10 +884,10 @@ msgstr "Mostra"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:60
 #: ../../src/editor/ui_menus/player_menu.cc:78
-#: ../../src/ui_basic/color_chooser.cc:261
-#: ../../src/ui_basic/messagebox.cc:107 ../../src/ui_basic/text_prompt.cc:46
+#: ../../src/ui_basic/color_chooser.cc:263
+#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_basic/text_prompt.cc:46
 #: ../../src/ui_fsmenu/addons/login_box.cc:53
-#: ../../src/ui_fsmenu/addons/manager.cc:257
+#: ../../src/ui_fsmenu/addons/manager.cc:258
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:458
@@ -907,8 +907,8 @@ msgstr "D'acord"
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:68
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:755
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:68
-#: ../../src/ui_basic/color_chooser.cc:270
-#: ../../src/ui_basic/messagebox.cc:116 ../../src/ui_basic/text_prompt.cc:55
+#: ../../src/ui_basic/color_chooser.cc:272
+#: ../../src/ui_basic/messagebox.cc:117 ../../src/ui_basic/text_prompt.cc:55
 #: ../../src/ui_fsmenu/addons/contact.cc:56
 #: ../../src/ui_fsmenu/addons/login_box.cc:61
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
@@ -1009,9 +1009,9 @@ msgstr "(cap)"
 msgid "Waterway length limit:"
 msgstr "Límit de la llargada de les vies d'aigua:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1113,7 +1113,7 @@ msgstr "Muntanyes:"
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:167
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:417
-#: ../../src/ui_basic/spinbox.cc:417
+#: ../../src/ui_basic/spinbox.cc:416
 #, c-format
 msgid "%i %%"
 msgstr "%i %%"
@@ -1164,7 +1164,7 @@ msgstr "S'està generant un mapa aleatori…"
 #. editor.
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:580
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:607
-#: ../../src/ui_fsmenu/main.cc:395
+#: ../../src/ui_fsmenu/main.cc:396
 msgid "Random Map"
 msgstr "Mapa aleatori"
 
@@ -1191,7 +1191,7 @@ msgid ""
 msgstr "Aquest mapa ha sigut generat automàticament pel generador de mapes aleatoris del Widelands."
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/network/gamehost.cc:1632
+#: ../../src/network/gamehost.cc:1631
 #, c-format
 msgid "Computer %u"
 msgstr "IA %u"
@@ -1311,7 +1311,7 @@ msgstr "Nombre de jugadors"
 #: ../../src/editor/ui_menus/player_menu.cc:288
 #: ../../src/logic/single_player_game_settings_provider.cc:110
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:65
-#: ../../src/map_io/map_player_names_and_tribes_packet.cc:97
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:99
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:185
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
@@ -1478,12 +1478,12 @@ msgstr "Cua d'ordres"
 #: ../../src/game_io/game_loader.cc:173 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:387
 #: ../../src/wlapplication_options.cc:528
-#: ../../src/wui/interactive_player.cc:216
+#: ../../src/wui/interactive_player.cc:217
 #: ../../src/wui/interactive_player.cc:454
 msgid "Messages"
 msgstr "Missatges"
 
-#: ../../src/game_io/game_loader.cc:190
+#: ../../src/game_io/game_loader.cc:191
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:202
 msgid "Finishing"
 msgstr "S'està acabant."
@@ -1531,15 +1531,15 @@ msgstr "El Widelands no funciona perquè no ha pogut detectar la versió de l'Op
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:215
-#: ../../src/graphic/gl/initialize.cc:235
+#: ../../src/graphic/gl/initialize.cc:216
+#: ../../src/graphic/gl/initialize.cc:236
 msgid "Widelands won’t work because your graphics driver is too old."
 msgstr "El Widelands no funciona perquè els controladors gràfics de la màquina són antics."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:218
+#: ../../src/graphic/gl/initialize.cc:219
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
 msgstr "La versió de %1$u ha de ser %2$u.%3$u o superior."
@@ -1547,16 +1547,16 @@ msgstr "La versió de %1$u ha de ser %2$u.%3$u o superior."
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
 #. Font support is limited here, so do not use advanced typography *
-#: ../../src/graphic/gl/initialize.cc:238
+#: ../../src/graphic/gl/initialize.cc:239
 #, c-format
 msgid "The %1$s needs to be version %2$u.%3$u or newer."
 msgstr "La versió de %1$s ha de ser %2$u.%3$u o superior."
 
-#: ../../src/graphic/gl/initialize.cc:254
+#: ../../src/graphic/gl/initialize.cc:255
 msgid "OpenGL"
 msgstr "OpenGL"
 
-#: ../../src/graphic/gl/initialize.cc:301
+#: ../../src/graphic/gl/initialize.cc:302
 msgid "Shading Language"
 msgstr "Llenguatge de tonalitats"
 
@@ -1662,31 +1662,31 @@ msgstr "Sense conflictes"
 msgid "%1$s (expected version %2$s, found %3$s)"
 msgstr "%1$s (s'esperava la versió %2$s i es disposa la %3$s)"
 
-#: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:214
+#: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:215
 #, c-format
 msgid "%1$s, %2$s (expected version %3$s, found %4$s)"
 msgstr "%1$s, %2$s (la versió esperada és %3$s, però s'ha trobat la versió %4$s)"
 
-#: ../../src/logic/addons.cc:185
+#: ../../src/logic/addons.cc:186
 #, c-format
 msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] "%1$u complement amb una versió incorrecta: %2$s"
 msgstr[1] "%1$u complements amb una versió incorrecta: %2$s"
 
-#: ../../src/logic/addons.cc:200
+#: ../../src/logic/addons.cc:201
 #, c-format
 msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] "Fa falta %1$u complement: %2$s"
 msgstr[1] "Fan falta %1$u complements: %2$s"
 
-#: ../../src/logic/addons.cc:208
+#: ../../src/logic/addons.cc:209
 #, c-format
 msgid "%s (missing)"
 msgstr "%s (fa falta)"
 
-#: ../../src/logic/addons.cc:210
+#: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (missing)"
 msgstr "%1$s, %2$s (fan falta)"
@@ -1711,11 +1711,11 @@ msgstr[0] "%u complement amb versió incorrecta"
 msgstr[1] "%u complements amb versió incorrecta"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
-#: ../../src/logic/addons.cc:235
+#: ../../src/logic/addons.cc:233
 msgid "None"
 msgstr "Cap"
 
-#: ../../src/logic/addons.cc:239
+#: ../../src/logic/addons.cc:237
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
 msgstr "%1$s<br>· %2$s (versió %3$s)"
@@ -1775,11 +1775,11 @@ msgstr "El Widelands no ha pogut iniciar la partida perquè el jugador %u no té
 msgid "Initializing…"
 msgstr "S'està inicialitzant…"
 
-#: ../../src/logic/game.cc:1183
+#: ../../src/logic/game.cc:1185
 msgid "Trade Offer"
 msgstr "Oferta de canvi"
 
-#: ../../src/logic/game.cc:1185
+#: ../../src/logic/game.cc:1187
 msgid "This market has received a new trade offer."
 msgstr "Aquest mercat ha rebut una oferta de canvi nova."
 
@@ -1927,19 +1927,19 @@ msgstr[0] "%1% soldat (+%2%)"
 msgstr[1] "%1% soldats (+%2%)"
 
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:948
+#: ../../src/logic/map_objects/tribes/militarysite.cc:951
 msgctxt "building"
 msgid "Attack!"
 msgstr "Ens ataquen!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:948
+#: ../../src/logic/map_objects/tribes/militarysite.cc:951
 msgid "You are under attack"
 msgstr "T'estan atacant"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:457
+#: ../../src/logic/map_objects/tribes/production_program.cc:461
 #, c-format
 msgid "the economy needs the ware ‘%s’"
 msgstr "necessitem %s"
@@ -1947,7 +1947,7 @@ msgstr "necessitem %s"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
 #. * ware '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:464
+#: ../../src/logic/map_objects/tribes/production_program.cc:468
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
 msgstr "no fa falta «%s»"
@@ -1955,14 +1955,14 @@ msgstr "no fa falta «%s»"
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
 #. * '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:476
+#: ../../src/logic/map_objects/tribes/production_program.cc:480
 #, c-format
 msgid "the economy needs the worker ‘%s’"
 msgstr "necessitem el treballador %s"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
-#: ../../src/logic/map_objects/tribes/production_program.cc:485
+#: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
 msgstr "no necessitem %s"
@@ -1983,36 +1983,36 @@ msgstr "no necessitem %s"
 #. Ox":
 #. * TRANSLATORS:    %1$i = "2"
 #. * TRANSLATORS:    %2$s = "Ox"
-#: ../../src/logic/map_objects/tribes/production_program.cc:534
-#: ../../src/logic/map_objects/tribes/production_program.cc:557
-#: ../../src/logic/map_objects/tribes/production_program.cc:1223
-#: ../../src/logic/map_objects/tribes/production_program.cc:1328
-#: ../../src/logic/map_objects/tribes/production_program.cc:1410
+#: ../../src/logic/map_objects/tribes/production_program.cc:538
+#: ../../src/logic/map_objects/tribes/production_program.cc:561
+#: ../../src/logic/map_objects/tribes/production_program.cc:1227
+#: ../../src/logic/map_objects/tribes/production_program.cc:1332
+#: ../../src/logic/map_objects/tribes/production_program.cc:1414
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$i unitats de %2$s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:539
+#: ../../src/logic/map_objects/tribes/production_program.cc:543
 #, c-format
 msgid "the building has the following wares: %s"
 msgstr "l'edifici té els següents béns: %s"
 
 #. * TRANSLATORS: %s is a list of wares
-#: ../../src/logic/map_objects/tribes/production_program.cc:562
+#: ../../src/logic/map_objects/tribes/production_program.cc:566
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
 msgstr "l'edifici no té els següents béns: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:578
+#: ../../src/logic/map_objects/tribes/production_program.cc:582
 msgid "a worker needs experience"
 msgstr "un treballador necessita experiència"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
-#: ../../src/logic/map_objects/tribes/production_program.cc:584
+#: ../../src/logic/map_objects/tribes/production_program.cc:588
 msgid "the workers need no experience"
 msgstr "no els cal experiència als treballadors"
 
@@ -2029,21 +2029,21 @@ msgstr "no els cal experiència als treballadors"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:714
-#: ../../src/logic/map_objects/tribes/production_program.cc:1245
+#: ../../src/logic/map_objects/tribes/production_program.cc:718
+#: ../../src/logic/map_objects/tribes/production_program.cc:1249
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "No pot %1$s, ja que %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:720
+#: ../../src/logic/map_objects/tribes/production_program.cc:724
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Ha completat %1$s, ja que %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware '%s'"
-#: ../../src/logic/map_objects/tribes/production_program.cc:725
-#: ../../src/logic/map_objects/tribes/production_program.cc:730
+#: ../../src/logic/map_objects/tribes/production_program.cc:729
+#: ../../src/logic/map_objects/tribes/production_program.cc:734
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "No cal %1$s, ja que %2$s"
@@ -2052,7 +2052,7 @@ msgstr "No cal %1$s, ja que %2$s"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:1232
+#: ../../src/logic/map_objects/tribes/production_program.cc:1236
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -2062,7 +2062,7 @@ msgstr[1] "fan falta «%s»"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1337
+#: ../../src/logic/map_objects/tribes/production_program.cc:1341
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2072,14 +2072,14 @@ msgstr[1] "S'han produït %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1419
+#: ../../src/logic/map_objects/tribes/production_program.cc:1423
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "S'ha contractat %s"
 msgstr[1] "S'han contractat %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1845
+#: ../../src/logic/map_objects/tribes/production_program.cc:1849
 msgid "No soldier found for this training level!"
 msgstr "No s'ha trobat cap soldat per entrenar aquest nivell."
 
@@ -2087,7 +2087,7 @@ msgstr "No s'ha trobat cap soldat per entrenar aquest nivell."
 #. description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to
 #. level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1886
+#: ../../src/logic/map_objects/tribes/production_program.cc:1890
 #, c-format
 msgid "Completed %s"
 msgstr "Ha completat %s"
@@ -2149,35 +2149,35 @@ msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un vaixell d'expedició ha arribat a la costa i espera ordres."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:675
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "New port construction site is gone"
 msgstr "La zona portuària nova s'ha esfumat"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:675
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "Port Lost!"
 msgstr "Hem perdut un port!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:676
+#: ../../src/logic/map_objects/tribes/ship.cc:675
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "La descàrrega de béns ha fallat. L'expedició s'ha cancel·lat."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:857
+#: ../../src/logic/map_objects/tribes/ship.cc:856
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedició"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:857
+#: ../../src/logic/map_objects/tribes/ship.cc:856
 msgid "Expedition Ready"
 msgstr "Expedició preparada"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:858
+#: ../../src/logic/map_objects/tribes/ship.cc:857
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un vaixell espera l'ordre de començar l'expedició."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:1018
+#: ../../src/logic/map_objects/tribes/ship.cc:1017
 #: ../../src/wui/seafaring_statistics_menu.cc:238
 msgctxt "ship_state"
 msgid "Shipping"
@@ -2186,7 +2186,7 @@ msgstr "Està embarcant"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:1021
+#: ../../src/logic/map_objects/tribes/ship.cc:1020
 #: ../../src/wui/seafaring_statistics_menu.cc:236
 msgctxt "ship_state"
 msgid "Empty"
@@ -2194,7 +2194,7 @@ msgstr "Buit"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1025
+#: ../../src/logic/map_objects/tribes/ship.cc:1024
 #: ../../src/wui/seafaring_statistics_menu.cc:240
 msgctxt "ship_state"
 msgid "Waiting"
@@ -2202,14 +2202,14 @@ msgstr "Està a l'espera"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1029
+#: ../../src/logic/map_objects/tribes/ship.cc:1028
 #: ../../src/wui/seafaring_statistics_menu.cc:242
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Està explorant"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1033
+#: ../../src/logic/map_objects/tribes/ship.cc:1032
 #: ../../src/wui/seafaring_statistics_menu.cc:244
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -2218,13 +2218,13 @@ msgstr "S'ha trobat una zona portuària"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1038
+#: ../../src/logic/map_objects/tribes/ship.cc:1037
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1512
-#: ../../src/logic/map_objects/tribes/soldier.cc:1516
+#: ../../src/logic/map_objects/tribes/soldier.cc:1513
+#: ../../src/logic/map_objects/tribes/soldier.cc:1517
 msgid "Logic error"
 msgstr "Error lògic"
 
@@ -2241,7 +2241,7 @@ msgstr "Vaixells"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:151
-#: ../../src/wui/interactive_player.cc:323
+#: ../../src/wui/interactive_player.cc:324
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2263,7 +2263,7 @@ msgstr "Treballadors"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:147
-#: ../../src/wui/interactive_player.cc:318 ../../src/wui/minimap.cc:196
+#: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "Edificis"
 
@@ -2319,23 +2319,23 @@ msgstr "Vies d'aigua destruïdes"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Cal destruir una via d'aigua per deixar espai al nou edifici portuari."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1110
+#: ../../src/logic/map_objects/tribes/worker.cc:1112
 msgid "A geologist found resources."
 msgstr "Un geòleg ha trobat recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2064
+#: ../../src/logic/map_objects/tribes/worker.cc:2066
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2069
+#: ../../src/logic/map_objects/tribes/worker.cc:2071
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr "Treballador"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2070
+#: ../../src/logic/map_objects/tribes/worker.cc:2072
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
@@ -2375,7 +2375,7 @@ msgstr "Un nom de mapa no és vàlid:\n%s"
 msgid "This objective has no description."
 msgstr "Aquest objectiu no disposa de descripció."
 
-#: ../../src/logic/player.cc:1936
+#: ../../src/logic/player.cc:1937
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -2503,7 +2503,7 @@ msgstr "Scripts"
 #: ../../src/map_io/widelands_map_loader.cc:405
 #: ../../src/wlapplication_options.cc:524
 #: ../../src/wui/game_objectives_menu.cc:41
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:209
 msgid "Objectives"
 msgstr "Objectius"
 
@@ -2523,11 +2523,11 @@ msgid ""
 "are sorry, but this savegame seems to be broken beyond repair."
 msgstr "El programa ha rebut un senyal SIGABRT produït probablement per una desada corrupta. Encara no s'ha implementat una solució per a aquest error. Ho lamentem, però aquesta partida no sembla que es pugui reparar."
 
-#: ../../src/map_io/s2map.cc:427 ../../src/map_io/widelands_map_loader.cc:182
+#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
 msgid "Loading map…"
 msgstr "S'està carregant el mapa…"
 
-#: ../../src/map_io/s2map.cc:469
+#: ../../src/map_io/s2map.cc:470
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa del Settlers II de Bluebyte. Sense comentari definit!"
 
@@ -2577,139 +2577,139 @@ msgid ""
 " you tried to connect."
 msgstr "El Widelands no ha pogut establir una connexió amb l'adreça donada. O bé el servidor no estava en funcionament al port indicat o bé el servidor s'ha tancat quan us hi heu intentat connectar."
 
-#: ../../src/network/gameclient.cc:750
+#: ../../src/network/gameclient.cc:756
 #, c-format
 msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] "S'ha detectat %u incompatibilitat de complements:\n"
 msgstr[1] "S'han detectat %u incompatibilitats de complements:\n"
 
-#: ../../src/network/gameclient.cc:752
+#: ../../src/network/gameclient.cc:758
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ required by host not found"
 msgstr "%1$s\n· No s'ha trobat el fitxer «%2$s» que necessita l'hoste."
 
-#: ../../src/network/gameclient.cc:755
+#: ../../src/network/gameclient.cc:761
 #, c-format
 msgid ""
 "%1$s\n"
 "· ‘%2$s’ installed at version %3$s but host uses version %4$s"
 msgstr "%1$s\n· La versió instal·lada de «%2$s» és la %3$s, però l'hoste usa la versió %4$s."
 
-#: ../../src/network/gameclient.cc:926
+#: ../../src/network/gameclient.cc:932
 msgid "/me ’s file failed md5 checksumming."
 msgstr "La suma md5 del fitxer de /me ha fallat."
 
-#: ../../src/network/gameclient.cc:968
+#: ../../src/network/gameclient.cc:974
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr "/me ha comprovat el fitxer rebut. Encara que la suma md5 és correcta, el fitxer no es pot manipular."
 
-#: ../../src/network/gameclient.cc:1276
+#: ../../src/network/gameclient.cc:1281
 msgid "Disconnected"
 msgstr "Desconnectat"
 
-#: ../../src/network/gameclient.cc:1277
+#: ../../src/network/gameclient.cc:1282
 #, c-format
 msgid ""
 "The connection with the host was lost for the following reason:\n"
 "%s"
 msgstr "La connexió amb l'hoste s'ha perdut a causa de:\n%s"
 
-#: ../../src/network/gamehost.cc:116
+#: ../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
 msgstr "Les ordres disponibles per l'amfitrió són:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:118
+#: ../../src/network/gamehost.cc:120
 msgid "/help  -  Shows this help"
 msgstr "/help  -  Mostra aquesta ajuda"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:120
+#: ../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <msg>  -  Envia un missatge de xat com anunci (xat del sistema)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:122
+#: ../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <name> <reason> - Avisar a l'usuari <name> per <reason>."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:124
+#: ../../src/network/gamehost.cc:126
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <name> <reason>  -  Expulsa l'usuari <name> per <reason>."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:126
+#: ../../src/network/gamehost.cc:128
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            -  Posa la partida en pausa a la força."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:128
+#: ../../src/network/gamehost.cc:130
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        -  Retorna la partida a la velocitat normal."
 
-#: ../../src/network/gamehost.cc:134
+#: ../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Ús incorrecte. Hauria de ser: /announce <message>"
 
-#: ../../src/network/gamehost.cc:146
+#: ../../src/network/gamehost.cc:148
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Ús incorrecte. Hauria de ser: /warn <name> <reason>"
 
-#: ../../src/network/gamehost.cc:150 ../../src/network/gamehost.cc:174
+#: ../../src/network/gamehost.cc:152 ../../src/network/gamehost.cc:176
 #, c-format
 msgid "The client %s could not be found."
 msgstr "No s'ha trobat el client %s."
 
-#: ../../src/network/gamehost.cc:161
+#: ../../src/network/gamehost.cc:163
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Ús incorrecte. Hauria de ser: /kick <name> <reason>"
 
-#: ../../src/network/gamehost.cc:172
+#: ../../src/network/gamehost.cc:174
 msgid "You can not kick yourself!"
 msgstr "No podeu expulsar-vos a vós mateix!"
 
-#: ../../src/network/gamehost.cc:177
+#: ../../src/network/gamehost.cc:179
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Esteu segur d'expulsar a %s?"
 
-#: ../../src/network/gamehost.cc:178
+#: ../../src/network/gamehost.cc:180
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "La raó és: %s"
 
-#: ../../src/network/gamehost.cc:179
+#: ../../src/network/gamehost.cc:181
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Si és que sí: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:187
+#: ../../src/network/gamehost.cc:189
 msgid "Kick acknowledgement cancelled: No name given!"
 msgstr "Expulsió cancel·lada: no s'ha donat cap nom."
 
-#: ../../src/network/gamehost.cc:189
+#: ../../src/network/gamehost.cc:191
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Ús incorrecte. Hauria de ser: /ack_kick <name> "
 
-#: ../../src/network/gamehost.cc:195
+#: ../../src/network/gamehost.cc:197
 msgid "Kick acknowledgement cancelled: Wrong name given!"
 msgstr "Expulsió cancel·lada: s'ha donat un nom incorrecte."
 
-#: ../../src/network/gamehost.cc:205
+#: ../../src/network/gamehost.cc:206
 msgid "Pause was already forced - game should be paused."
 msgstr "Ja s'ha forçat la pausa: la partida hauria d'estar aturada."
 
-#: ../../src/network/gamehost.cc:215
+#: ../../src/network/gamehost.cc:216
 msgid "There is no forced pause - nothing to end."
 msgstr "No hi ha pausa forçada: no es pot posar en pausa res."
 
-#: ../../src/network/gamehost.cc:224
+#: ../../src/network/gamehost.cc:225
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Ordre no vàlida. Escriviu /help per obtenir la llista d'ordres vàlides."
 
@@ -2733,7 +2733,7 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "El Widelands no ha pogut iniciar el servidor.\nProbablement algun altre procés està fent servir el port."
 
-#: ../../src/network/gamehost.cc:1879
+#: ../../src/network/gamehost.cc:1878
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2751,163 +2751,163 @@ msgstr "El Widelands no pot establir la connexió a l'adreça donada.\nO bé no 
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "Els usuaris d'IRC probablement no reaccionaran als missatges."
 
-#: ../../src/network/internet_gaming.cc:213
+#: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Èxit reconnectant-se al metaservidor!"
 
-#: ../../src/network/internet_gaming.cc:335
+#: ../../src/network/internet_gaming.cc:337
 #: ../../src/network/network_gaming_messages.cc:126
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Alguna cosa ha sortit malament: %s"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:429
 msgid "Welcome to the Widelands Metaserver!"
 msgstr "Us donem la benvinguda al metaservidor del Widelands!"
 
-#: ../../src/network/internet_gaming.cc:430
+#: ../../src/network/internet_gaming.cc:433
 #, c-format
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
 msgstr "Heu entrat com a «%s», ja que el nom que heu demanat està reservat o bé ja s'està usant."
 
-#: ../../src/network/internet_gaming.cc:442
+#: ../../src/network/internet_gaming.cc:445
 msgid "Our forums can be found at:"
 msgstr "Els fòrums els trobareu en:"
 
-#: ../../src/network/internet_gaming.cc:444
+#: ../../src/network/internet_gaming.cc:447
 msgid "For reporting bugs, visit:"
 msgstr "Per informar d'errors, visiteu:"
 
-#: ../../src/network/internet_gaming.cc:467
+#: ../../src/network/internet_gaming.cc:470
 msgid "Mixed up"
 msgstr "Confós"
 
-#: ../../src/network/internet_gaming.cc:467
+#: ../../src/network/internet_gaming.cc:470
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "El metaservidor ha enviat un missatge d'error estrany durant la connexió"
 
-#: ../../src/network/internet_gaming.cc:482
+#: ../../src/network/internet_gaming.cc:484
 msgid "Unexpected packet"
 msgstr "Paquet d'informació inesperat"
 
-#: ../../src/network/internet_gaming.cc:483
+#: ../../src/network/internet_gaming.cc:485
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "S'ha rebut un paquet de xarxa inesperat des del metaservidor . El metaservidor pot estar emprant una versió diferent del protocol de xarxa. Si l'error continua produint-se, proveu d'actualitzar el programa."
 
-#: ../../src/network/internet_gaming.cc:494
+#: ../../src/network/internet_gaming.cc:495
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AVÍS: S'ha rebut l'ordre %s, tot i que no estem en estat de connexió (CONNECTING state)."
 
-#: ../../src/network/internet_gaming.cc:502
+#: ../../src/network/internet_gaming.cc:503
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "El desfasament temporal del servidor és d'%d segon."
 msgstr[1] "El desfasament temporal del servidor és de %d segons."
 
-#: ../../src/network/internet_gaming.cc:516
+#: ../../src/network/internet_gaming.cc:517
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Missatge de xat invàlid, del tipus «%s»."
 
-#: ../../src/network/internet_gaming.cc:516
+#: ../../src/network/internet_gaming.cc:517
 msgid "Invalid message type"
 msgstr "Tipus de missatge invàlid"
 
-#: ../../src/network/internet_gaming.cc:556
+#: ../../src/network/internet_gaming.cc:557
 #, c-format
 msgid "The game %s is now available"
 msgstr "La partida %s ara està disponible"
 
-#: ../../src/network/internet_gaming.cc:566
+#: ../../src/network/internet_gaming.cc:567
 #, c-format
 msgid "The game %s has been closed"
 msgstr "La partida %s s'ha tancat"
 
-#: ../../src/network/internet_gaming.cc:605
+#: ../../src/network/internet_gaming.cc:606
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s s'ha unit a la sala d'espera"
 
-#: ../../src/network/internet_gaming.cc:616
+#: ../../src/network/internet_gaming.cc:617
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s ha abandonat la sala d'espera"
 
-#: ../../src/network/internet_gaming.cc:673
+#: ../../src/network/internet_gaming.cc:674
 msgid "Chat message could not be sent."
 msgstr "No s'ha pogut enviar el missatge de xat."
 
-#: ../../src/network/internet_gaming.cc:681
+#: ../../src/network/internet_gaming.cc:682
 msgid "Command could not be executed."
 msgstr "L'ordre no s'ha pogut executar."
 
-#: ../../src/network/internet_gaming.cc:699
+#: ../../src/network/internet_gaming.cc:700
 #, c-format
 msgid "ERROR: %s"
 msgstr "Error: %s"
 
-#: ../../src/network/internet_gaming.cc:702
+#: ../../src/network/internet_gaming.cc:703
 msgid "An unexpected error message has been received about command %1%: %2%"
 msgstr "S'ha rebut un missatge d'error inesperat sobre l'ordre %1%: %2%"
 
-#: ../../src/network/internet_gaming.cc:713
+#: ../../src/network/internet_gaming.cc:714
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "S'ha rebut una ordre desconeguda del metaservidor: %s"
 
-#: ../../src/network/internet_gaming.cc:866
+#: ../../src/network/internet_gaming.cc:867
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "No s'ha pogut enviar el missatge perquè no esteu connectats al metaservidor."
 
-#: ../../src/network/internet_gaming.cc:886
-#: ../../src/network/internet_gaming.cc:894
+#: ../../src/network/internet_gaming.cc:887
+#: ../../src/network/internet_gaming.cc:895
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "No s'ha pogut enviar el missatge. Era un missatge privat?"
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:910
 msgid "Supported admin commands:"
 msgstr "Ordres d'administrador suportades:"
 
-#: ../../src/network/internet_gaming.cc:910
+#: ../../src/network/internet_gaming.cc:911
 msgid "/motd <msg> - Set a permanent greeting message"
 msgstr "/motd <msg> - Estableix el missatge de salutació permanent."
 
-#: ../../src/network/internet_gaming.cc:911
+#: ../../src/network/internet_gaming.cc:912
 msgid "/announce <msg> - Send a one time system message"
 msgstr "/announce <msg> - Envia un sol cop un missatge de sistema."
 
-#: ../../src/network/internet_gaming.cc:914
+#: ../../src/network/internet_gaming.cc:915
 msgid "/warn <user> <msg> - Send a private system message to the given user"
 msgstr "/warn <user> <msg> - Envia un missatge de sistema privat a l'usuari indicat."
 
-#: ../../src/network/internet_gaming.cc:917
+#: ../../src/network/internet_gaming.cc:918
 msgid "/kick <user|game> - Remove the given user or game from the metaserver"
 msgstr "/kick <user|game> - Expulsa l'usuari o la partida indicat del metaservidor."
 
-#: ../../src/network/internet_gaming.cc:919
+#: ../../src/network/internet_gaming.cc:920
 msgid "/ban <user> - Ban a user for 24 hours from the metaserver"
 msgstr "/ban <user> - Expulsa un usuari durant 24 hores del metaservidor."
 
-#: ../../src/network/internet_gaming.cc:996
+#: ../../src/network/internet_gaming.cc:999
 msgid "Conversion error"
 msgstr "Error de conversió"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:999
+#: ../../src/network/internet_gaming.cc:1002
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "No s'ha pogut determinar el valor vertader de «%s»."
 
-#: ../../src/network/internet_gaming.cc:1023
+#: ../../src/network/internet_gaming.cc:1026
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Desconegut"
@@ -3140,45 +3140,45 @@ msgstr "El Widelands no ha pogut usar la xarxa local. Potser algun altre procés
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
-#: ../../src/ui_basic/color_chooser.cc:243
+#: ../../src/ui_basic/color_chooser.cc:245
 msgid "Choose Color…"
 msgstr "Escolliu color…"
 
-#: ../../src/ui_basic/color_chooser.cc:279
+#: ../../src/ui_basic/color_chooser.cc:281
 msgid "Initial Color"
 msgstr "Color inicial"
 
 #. * TRANSLATORS: First letter of the word "Red"
-#: ../../src/ui_basic/color_chooser.cc:288
+#: ../../src/ui_basic/color_chooser.cc:290
 msgctxt "color"
 msgid "R"
 msgstr "R"
 
 #. * TRANSLATORS: First letter of the word "Green"
-#: ../../src/ui_basic/color_chooser.cc:297
+#: ../../src/ui_basic/color_chooser.cc:299
 msgctxt "color"
 msgid "G"
 msgstr "G"
 
 #. * TRANSLATORS: First letter of the word "Blue"
-#: ../../src/ui_basic/color_chooser.cc:306
+#: ../../src/ui_basic/color_chooser.cc:308
 msgctxt "color"
 msgid "B"
 msgstr "B"
 
-#: ../../src/ui_basic/color_chooser.cc:316
+#: ../../src/ui_basic/color_chooser.cc:318
 msgid "Default Color"
 msgstr "Color per defecte"
 
-#: ../../src/ui_basic/color_chooser.cc:327
+#: ../../src/ui_basic/color_chooser.cc:329
 msgid "Red"
 msgstr "Roig"
 
-#: ../../src/ui_basic/color_chooser.cc:339
+#: ../../src/ui_basic/color_chooser.cc:341
 msgid "Green"
 msgstr "Verd"
 
-#: ../../src/ui_basic/color_chooser.cc:351
+#: ../../src/ui_basic/color_chooser.cc:353
 msgid "Blue"
 msgstr "Blau"
 
@@ -3193,7 +3193,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "No seleccionat"
 
-#: ../../src/ui_basic/dropdown.h:454
+#: ../../src/ui_basic/dropdown.h:455
 msgid "No matches"
 msgstr "Sense coincidències"
 
@@ -3226,7 +3226,7 @@ msgid "Increase the value by 10"
 msgstr "Augmenta'n el valor en 10"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:408
+#: ../../src/ui_basic/spinbox.cc:407
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3234,7 +3234,7 @@ msgstr[0] "%d minut"
 msgstr[1] "%d minuts"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:411
+#: ../../src/ui_basic/spinbox.cc:410
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -3242,7 +3242,7 @@ msgstr[0] "%d píxel"
 msgstr[1] "%d píxels"
 
 #. * TRANSLATORS: A spinbox unit
-#: ../../src/ui_basic/spinbox.cc:414
+#: ../../src/ui_basic/spinbox.cc:413
 #, c-format
 msgid "%d field"
 msgid_plural "%d fields"
@@ -3270,7 +3270,7 @@ msgstr "Enganxa"
 msgid "Unpin"
 msgstr "Desenganxa"
 
-#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:465
+#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:466
 msgid "About Widelands"
 msgstr "Quant al Widelands"
 
@@ -3283,7 +3283,7 @@ msgid "Version:"
 msgstr "Versió:"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:532
+#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:533
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -3396,7 +3396,7 @@ msgid "Login"
 msgstr "Inicia sessió"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:69
-#: ../../src/ui_fsmenu/addons/manager.cc:231
+#: ../../src/ui_fsmenu/addons/manager.cc:232
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:183
 #: ../../src/ui_fsmenu/training_wheel_options.cc:119
 msgid "Reset"
@@ -3425,151 +3425,151 @@ msgstr "Contrasenya:"
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:72
+#: ../../src/ui_fsmenu/addons/manager.cc:73
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:74
+#: ../../src/ui_fsmenu/addons/manager.cc:76
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:76
+#: ../../src/ui_fsmenu/addons/manager.cc:78
 #, c-format
 msgid "%u bytes"
 msgstr "%u bytes"
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../src/ui_fsmenu/addons/manager.cc:96
+#: ../../src/ui_fsmenu/addons/manager.cc:97
 msgctxt "quality"
 msgid "Any"
 msgstr "Qualsevol"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:96
+#: ../../src/ui_fsmenu/addons/manager.cc:97
 msgid "Quality not yet evaluated"
 msgstr "Encara no se n'ha avaluat la qualitat."
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../src/ui_fsmenu/addons/manager.cc:102
+#: ../../src/ui_fsmenu/addons/manager.cc:103
 msgctxt "quality"
 msgid "Poor"
 msgstr "Pobra"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:103
+#: ../../src/ui_fsmenu/addons/manager.cc:104
 msgid "This add-on may cause major glitches and errors."
 msgstr "Aquest complement pot provocar errors en les partides."
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../src/ui_fsmenu/addons/manager.cc:109
+#: ../../src/ui_fsmenu/addons/manager.cc:110
 msgctxt "quality"
 msgid "Good"
 msgstr "Bona"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:109
+#: ../../src/ui_fsmenu/addons/manager.cc:110
 msgid "This add-on works as advertised."
 msgstr "Aquest complement funciona tal com indica la descripció."
 
 #. * TRANSLATORS: This is an add-on code quality rating
-#: ../../src/ui_fsmenu/addons/manager.cc:114
+#: ../../src/ui_fsmenu/addons/manager.cc:115
 msgctxt "quality"
 msgid "Excellent"
 msgstr "Excel·lent"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:115
+#: ../../src/ui_fsmenu/addons/manager.cc:116
 msgid "This add-on has been decorated for its remarkably high quality."
 msgstr "Aquest complement té una qualitat altament remarcable."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:127
+#: ../../src/ui_fsmenu/addons/manager.cc:128
 msgid "Add-On Manager"
 msgstr "Complements"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:172
+#: ../../src/ui_fsmenu/addons/manager.cc:173
 msgid "Verified only"
 msgstr "Només els verificats"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:173
+#: ../../src/ui_fsmenu/addons/manager.cc:174
 msgid "Show only verified add-ons"
 msgstr "Mostra només els complements verificats."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:181
+#: ../../src/ui_fsmenu/addons/manager.cc:182
 msgid "Sort by"
 msgstr "Ordena per"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:192
+#: ../../src/ui_fsmenu/addons/manager.cc:193
 msgid "Minimum quality"
 msgstr "Qualitat mínima"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:203
+#: ../../src/ui_fsmenu/addons/manager.cc:204
 msgid "Choose add-on to upload…"
 msgstr "Escolliu quin complement pujar…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:214
+#: ../../src/ui_fsmenu/addons/manager.cc:215
 msgid "Upload a screenshot…"
 msgstr "Puja una captura de pantalla"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:221
+#: ../../src/ui_fsmenu/addons/manager.cc:222
 msgid "Understood and confirmed"
 msgstr "Entès i confirmat"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:222
+#: ../../src/ui_fsmenu/addons/manager.cc:223
 msgid ""
 "By ticking this checkbox, you confirm that you have read and agree to the "
 "above terms."
 msgstr "Seleccionant aquesta casella, confirmeu que heu llegit i esteu d'acord amb els termes anteriors."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:232
+#: ../../src/ui_fsmenu/addons/manager.cc:233
 msgid "Reset the filters"
 msgstr "Reinicia els filtres"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:248
+#: ../../src/ui_fsmenu/addons/manager.cc:249
 msgid "Refresh"
 msgstr "Actualitza la llista"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:249
+#: ../../src/ui_fsmenu/addons/manager.cc:250
 msgid "Refresh the list of add-ons available from the server"
 msgstr "Actualitza la llista de complements des del servidor."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:266
+#: ../../src/ui_fsmenu/addons/manager.cc:267
 msgid "Fix dependencies…"
 msgstr "Arregla les dependències…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:267
+#: ../../src/ui_fsmenu/addons/manager.cc:268
 msgid "Try to automatically fix the dependency errors"
 msgstr "Intenta fixar automàticament els errors de dependències"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:277
+#: ../../src/ui_fsmenu/addons/manager.cc:278
 msgid "Move selected add-on to top"
 msgstr "Mou el complement seleccionat a dalt de tot"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:286
+#: ../../src/ui_fsmenu/addons/manager.cc:287
 msgid "Move selected add-on one step up"
 msgstr "Mou el complement seleccionat una posició amunt"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:295
+#: ../../src/ui_fsmenu/addons/manager.cc:296
 msgid "Move selected add-on one step down"
 msgstr "Mou el complement seleccionat una posició avall"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:304
+#: ../../src/ui_fsmenu/addons/manager.cc:305
 msgid "Move selected add-on to bottom"
 msgstr "Mou el complement seleccionat a baix de tot"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:312
+#: ../../src/ui_fsmenu/addons/manager.cc:313
 msgid "Launch the add-ons packager…"
 msgstr "Inicia l'empaquetador de complements…"
 
 #. * TRANSLATORS: This button allows the user to send a message to the
 #. Widelands
 #. Development Team
-#: ../../src/ui_fsmenu/addons/manager.cc:323
+#: ../../src/ui_fsmenu/addons/manager.cc:324
 msgid "Contact us…"
 msgstr "Contacteu amb nosaltres"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:329
+#: ../../src/ui_fsmenu/addons/manager.cc:330
 msgid "Tools for Add-Ons Developers"
 msgstr "Eines per als desenvolupadors de complements"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:337
+#: ../../src/ui_fsmenu/addons/manager.cc:338
 msgid ""
 "The interactive add-ons packager allows you to create, edit, and delete add-"
 "ons. You can bundle maps designed with the Widelands Map Editor as an add-on"
@@ -3577,22 +3577,22 @@ msgid ""
 "having to write a single line of code."
 msgstr "L'empaquetador interactiu de complements permet crear, editar i esborrar complements. Podeu afegir mapes dissenyats amb l'editor de mapes del Widelands com a complement usant la interfície gràfica i compartir-los amb altres jugadors, sense haver d'escriure ni una sola línia de codi."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:352
+#: ../../src/ui_fsmenu/addons/manager.cc:353
 #, c-format
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
 msgstr "Per a més informació sobre com desenvolupar i empaquetar els vostres complements, visiteu %s."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:361
+#: ../../src/ui_fsmenu/addons/manager.cc:362
 msgid "Open Link"
 msgstr "Obre l'enllaç"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:363
+#: ../../src/ui_fsmenu/addons/manager.cc:364
 msgid "Copy Link"
 msgstr "Copia l'enllaç"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:386
+#: ../../src/ui_fsmenu/addons/manager.cc:387
 msgid ""
 "Here, you can upload your add-ons to the server to make them available to "
 "other players. By uploading, you agree to publish your creation under the "
@@ -3601,7 +3601,7 @@ msgid ""
 "GPL, please refer to ‘About Widelands’ → ‘License’ in the main menu."
 msgstr "Des d'aquí podeu pujar els vostres complements al servidor perquè els puguin fer servir altres jugadors. Si ho feu, accepteu publicar la vostra creació sota els termes de la llicència GNU General Public License (GPL) versió 2 (la mateixa llicència de distribució del Widelands). Si voleu més informació de la GPL, aneu a «Sobre el Widelands» → «Llicència» des del menú principal."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:393
+#: ../../src/ui_fsmenu/addons/manager.cc:394
 msgid ""
 "It is forbidden to upload add-ons containing harmful or malicious content or"
 " spam. By uploading an add-on, you assert that the add-on is of your own "
@@ -3609,7 +3609,7 @@ msgid ""
 " stead."
 msgstr "Es prohibeix pujar complements amb brossa o contingut perillós o maliciós. Si pugeu un complement, esteu afirmant que el contingut és de la vostra pròpia creació o que teniu permís de l'autor (o autors) per fer-ho en el seu lloc."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:399
+#: ../../src/ui_fsmenu/addons/manager.cc:400
 msgid ""
 "You are required to have read the add-ons documentation under the link given"
 " further above before submitting content. Since the documentation is subject"
@@ -3617,7 +3617,7 @@ msgid ""
 "followed all guidelines stated there."
 msgstr "Cal que hagueu llegit la documentació dels complements de l'enllaç de més avall abans d'enviar el contingut. Com que la documentació pot haver canviat recentment, llegiu-la i assegureu-vos haver-ne seguit les indicacions."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:405
+#: ../../src/ui_fsmenu/addons/manager.cc:406
 msgid ""
 "The Widelands Development Team will review your add-on soon after uploading."
 " In case they have further inquiries, they will contact you via a PM on the "
@@ -3625,7 +3625,7 @@ msgid ""
 "profile page frequently."
 msgstr "L'equip de desenvolupament del Widelands revisarà el complement al cap de poc temps de pujar-lo. Si hi ha algun dubte, es posaran en contacte amb l'autor via missatge privat al lloc web del Widelands. Reviseu la bústia del correu del vostre usuari sovint."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:435
+#: ../../src/ui_fsmenu/addons/manager.cc:436
 #, c-format
 msgid ""
 "Technical problems? Unclear documentation? Advanced needs such as deletion "
@@ -3634,7 +3634,7 @@ msgid ""
 "be happy to help."
 msgstr "Problemes tècnics? Documentació confusa? Necessiteu accions avançades com esborrar un complement o col·laborar amb un altre dissenyador? Si us plau, visiteu-nos a %s, expliqueu què necessiteu i l'equip de desenvolupament us ajudarà."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:452
+#: ../../src/ui_fsmenu/addons/manager.cc:453
 msgid ""
 "Alternatively you can also send a message to the Widelands Development Team "
 "and we’ll try to help you with your enquiry as soon as we can. Only the "
@@ -3645,136 +3645,136 @@ msgid ""
 " website user profile page."
 msgstr "Alternativament, podeu enviar un missatge a l'equip de desenvolupament del Widelands i mirarem d'ajudar-vos amb la consulta tan aviat com puguem. Només els administradors del servidor poden llegir els missatges que s'envien d'aquesta manera. Com els altres dissenyadors de complements habitualment no poden beneficiar-se de les preguntes i respostes fetes amb aquest mètode, useu-lo només si el vostre dubte no incumbeix a altres persones. Rebreu resposta via correu personal a la pàgina del vostre usuari del lloc web del Widelands."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:489
+#: ../../src/ui_fsmenu/addons/manager.cc:490
 msgid "Development"
 msgstr "Desenvolupament"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons/manager.cc:492
+#: ../../src/ui_fsmenu/addons/manager.cc:493
 msgid "Name"
 msgstr "Nom"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons/manager.cc:494
+#: ../../src/ui_fsmenu/addons/manager.cc:495
 msgid "Name (descending)"
 msgstr "Nom (descendent)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:496
+#: ../../src/ui_fsmenu/addons/manager.cc:497
 msgid "Most popular"
 msgstr "Més populars"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons/manager.cc:498
+#: ../../src/ui_fsmenu/addons/manager.cc:499
 msgid "Least popular"
 msgstr "Menys populars"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:500
+#: ../../src/ui_fsmenu/addons/manager.cc:501
 msgid "Most often downloaded"
 msgstr "Complements més baixats"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons/manager.cc:502
+#: ../../src/ui_fsmenu/addons/manager.cc:503
 msgid "Least often downloaded"
 msgstr "Complements menys baixats"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:504
+#: ../../src/ui_fsmenu/addons/manager.cc:505
 msgid "Oldest"
 msgstr "Més antic"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons/manager.cc:506
+#: ../../src/ui_fsmenu/addons/manager.cc:507
 msgid "Newest"
 msgstr "Més recents"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:514
+#: ../../src/ui_fsmenu/addons/manager.cc:515
 msgid "Filter add-ons by name"
 msgstr "Filtra els complements per nom"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:524
+#: ../../src/ui_fsmenu/addons/manager.cc:525
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Mostra/Amaga la categoria «%s»"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:615
+#: ../../src/ui_fsmenu/addons/manager.cc:616
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] "Esteu segur que voleu actualitzar %u complement?"
 msgstr[1] "Esteu segur que voleu actualitzar aquests %u complements?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:621
+#: ../../src/ui_fsmenu/addons/manager.cc:622
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) de %3$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:622
+#: ../../src/ui_fsmenu/addons/manager.cc:623
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:393
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:418
 msgid "NOT VERIFIED"
 msgstr "SENSE VERIFICAR"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:622
+#: ../../src/ui_fsmenu/addons/manager.cc:623
 msgid "verified"
 msgstr "verificat"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:626
+#: ../../src/ui_fsmenu/addons/manager.cc:627
 msgid "Upgrade All"
 msgstr "Actualitza'ls tots"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:765
+#: ../../src/ui_fsmenu/addons/manager.cc:766
 msgid "Not logged in"
 msgstr "No heu iniciat sessió"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:766
+#: ../../src/ui_fsmenu/addons/manager.cc:767
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
 msgstr "Feu clic per iniciar sessió. Després podreu comentar i votar els complements i pujar els vostres."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:770
+#: ../../src/ui_fsmenu/addons/manager.cc:771
 msgid "Please log in to upload add-ons"
 msgstr "Inicieu sessió per pujar els complements"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:772
+#: ../../src/ui_fsmenu/addons/manager.cc:773
 msgid "Please log in to upload content"
 msgstr "Inicieu sessió per pujar el contingut"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:774
+#: ../../src/ui_fsmenu/addons/manager.cc:775
 msgid "Please log in to send an enquiry"
 msgstr "Si us plau, inicieu sessió per enviar una consulta."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:779
+#: ../../src/ui_fsmenu/addons/manager.cc:780
 #, c-format
 msgid "Logged in as %s"
 msgstr "Sessió iniciada com a %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:779
+#: ../../src/ui_fsmenu/addons/manager.cc:780
 #, c-format
 msgid "Logged in as %s (admin)"
 msgstr "Sessió iniciada com a %s (admin)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:780
+#: ../../src/ui_fsmenu/addons/manager.cc:781
 msgid "Click to log out"
 msgstr "Feu clic per tancar la sessió"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:785
+#: ../../src/ui_fsmenu/addons/manager.cc:786
 msgid "Please tick the confirmation checkbox to upload add-ons"
 msgstr "Si us plau, marqueu la casella de confirmació per pujar els complements."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:788
+#: ../../src/ui_fsmenu/addons/manager.cc:789
 msgid "Please tick the confirmation checkbox to upload content"
 msgstr "Si us plau, marqueu la casella de confirmació per pujar el contingut."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:815
+#: ../../src/ui_fsmenu/addons/manager.cc:816
 msgid "Server Error"
 msgstr "Error del servidor"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:816
+#: ../../src/ui_fsmenu/addons/manager.cc:817
 #, c-format
 msgid ""
 "Unable to connect to the server.\n"
@@ -3782,101 +3782,101 @@ msgid ""
 "%s"
 msgstr "No es pot connectar al servidor.\nMissatge d'error:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:824
+#: ../../src/ui_fsmenu/addons/manager.cc:825
 msgid "Wrong Password"
 msgstr "Contrasenya incorrecta"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:825
+#: ../../src/ui_fsmenu/addons/manager.cc:826
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
 msgstr "El nom d'usuari o la contrasenya no són vàlids:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:921
+#: ../../src/ui_fsmenu/addons/manager.cc:922
 #, c-format
 msgid "Fetching add-ons (%.1f%%)"
 msgstr "S'estan carregant els complements (%.1f%%)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:924
+#: ../../src/ui_fsmenu/addons/manager.cc:925
 msgid "Connecting to the server…"
 msgstr "S'està connectant al servidor…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:947
+#: ../../src/ui_fsmenu/addons/manager.cc:948
 msgid "Server Connection Error"
 msgstr "S'ha produït un error de connexió amb el servidor."
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons/manager.cc:949
+#: ../../src/ui_fsmenu/addons/manager.cc:950
 msgid "a networking bug"
 msgstr "un error de la xarxa"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:950
+#: ../../src/ui_fsmenu/addons/manager.cc:951
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "No es pot aconseguir la llista de complements disponibles del servidor. <br> Missatge d'error: %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1040
+#: ../../src/ui_fsmenu/addons/manager.cc:1041
 #, c-format
 msgid "Installed (%u)"
 msgstr "Instal·lat (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1118
+#: ../../src/ui_fsmenu/addons/manager.cc:1119
 msgid "Browse"
 msgstr "Navega"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1118
+#: ../../src/ui_fsmenu/addons/manager.cc:1119
 #, c-format
 msgid "Browse (%u)"
 msgstr "Navega (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1128
+#: ../../src/ui_fsmenu/addons/manager.cc:1129
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Actualitza'ls tots (%u)"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1131
+#: ../../src/ui_fsmenu/addons/manager.cc:1132
 msgid "No upgrades are available for your installed add-ons"
 msgstr "No hi ha actualitzacions disponibles pels complements que teniu instal·lats."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1133
+#: ../../src/ui_fsmenu/addons/manager.cc:1134
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] "Actualitzeu %u complement:"
 msgstr[1] "Actualitzeu els següents %u complements:"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1138
+#: ../../src/ui_fsmenu/addons/manager.cc:1139
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1174
+#: ../../src/ui_fsmenu/addons/manager.cc:1175
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· «%1$s» necessita «%2$s» i no es pot trobar."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1178
+#: ../../src/ui_fsmenu/addons/manager.cc:1179
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· «%1$s» necessita «%2$s» i està desactivat."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1185
+#: ../../src/ui_fsmenu/addons/manager.cc:1186
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· «%1$s» necessita «%2$s», que està per sota d'aquest complement."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1212
+#: ../../src/ui_fsmenu/addons/manager.cc:1214
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· «%1$s» necessita primer «%2$s» i després «%3$s», però estan en ordre invers."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1227
+#: ../../src/ui_fsmenu/addons/manager.cc:1229
 #, c-format
 msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
@@ -3884,55 +3884,55 @@ msgid ""
 "%s"
 msgstr "Un complement actiu és defectuós. No es poden iniciar partides amb la configuració actual.\nMissatge d'error:\n%s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1244
+#: ../../src/ui_fsmenu/addons/manager.cc:1246
 #, c-format
 msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] "%u error de dependències"
 msgstr[1] "%u errors de dependències"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1246
+#: ../../src/ui_fsmenu/addons/manager.cc:1248
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Els complements amb errors de dependències poden funcionar incorrectament o que no es puguin carregar algunes partides i mapes."
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1364
+#: ../../src/ui_fsmenu/addons/manager.cc:1367
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1375
+#: ../../src/ui_fsmenu/addons/manager.cc:1378
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1386
+#: ../../src/ui_fsmenu/addons/manager.cc:1389
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:55
 msgid "Upload"
 msgstr "Puja"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1387
+#: ../../src/ui_fsmenu/addons/manager.cc:1390
 #, c-format
 msgid "Do you really want to upload the add-on ‘%s’ to the server?"
 msgstr "Voleu pujar el complement «%s» al servidor?"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1396
+#: ../../src/ui_fsmenu/addons/manager.cc:1399
 #, c-format
 msgid "Uploading ‘%s’…"
 msgstr "«%s» s'està carregant…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1403
-#: ../../src/ui_fsmenu/addons/manager.cc:1456
-#: ../../src/ui_fsmenu/addons/manager.cc:1519
+#: ../../src/ui_fsmenu/addons/manager.cc:1406
+#: ../../src/ui_fsmenu/addons/manager.cc:1460
+#: ../../src/ui_fsmenu/addons/manager.cc:1522
 msgid "%1% / %2%"
 msgstr "%1% / %2%"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1425
+#: ../../src/ui_fsmenu/addons/manager.cc:1428
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be uploaded to the server.\n"
@@ -3941,12 +3941,12 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no s'ha pogut pujar al servidor.\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1437
+#: ../../src/ui_fsmenu/addons/manager.cc:1440
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "S'està baixant «%s»…"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1472
+#: ../../src/ui_fsmenu/addons/manager.cc:1476
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3955,7 +3955,7 @@ msgid ""
 "%2$s"
 msgstr "El complement «%1$s» no es pot baixar del servidor. Es saltarà la instal·lació/actualització d'aquest complement.\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1550
+#: ../../src/ui_fsmenu/addons/manager.cc:1553
 #, c-format
 msgid ""
 "The translations for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations will be skipped.\n"
@@ -3964,7 +3964,7 @@ msgid ""
 "%2$s"
 msgstr "Les traduccions del complement «%1$s» no s'han pogut baixar del servidor. Es saltarà la instal·lació/actualització de les traduccions .\n\nMissatge d'error:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons/manager.cc:1619
+#: ../../src/ui_fsmenu/addons/manager.cc:1622
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "El complement necessari «%s» no es pot trobar al servidor."
@@ -4204,25 +4204,25 @@ msgid "Directory Tree"
 msgstr "Arbre de carpetes"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:273
-#: ../../src/ui_fsmenu/main.cc:422
+#: ../../src/ui_fsmenu/main.cc:423
 #, c-format
 msgid "Name: %s"
 msgstr "Nom: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:276
-#: ../../src/ui_fsmenu/main.cc:425 ../../src/ui_fsmenu/mapdetailsbox.cc:112
+#: ../../src/ui_fsmenu/main.cc:426 ../../src/ui_fsmenu/mapdetailsbox.cc:112
 #, c-format
 msgid "Size: %s"
 msgstr "Mida: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:279
-#: ../../src/ui_fsmenu/main.cc:427 ../../src/ui_fsmenu/mapdetailsbox.cc:114
+#: ../../src/ui_fsmenu/main.cc:428 ../../src/ui_fsmenu/mapdetailsbox.cc:114
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:280
-#: ../../src/ui_fsmenu/main.cc:366 ../../src/ui_fsmenu/main.cc:429
+#: ../../src/ui_fsmenu/main.cc:367 ../../src/ui_fsmenu/main.cc:430
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:119
 #, c-format
 msgid "Players: %s"
@@ -4924,7 +4924,7 @@ msgid "Version"
 msgstr "Versió"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:171
-#: ../../src/ui_fsmenu/keyboard_options.cc:296
+#: ../../src/ui_fsmenu/keyboard_options.cc:295
 msgid "Game"
 msgstr "Partida"
 
@@ -5002,21 +5002,21 @@ msgid ""
 msgstr "La drecera que heu seleccionat («%1$s») ja s'usa per a l'acció «%2$s». Si us plau seleccioneu una altra drecera o canvieu abans la de l'altra acció."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/ui_fsmenu/keyboard_options.cc:293
-#: ../../src/wui/interactive_player.cc:328
+#: ../../src/ui_fsmenu/keyboard_options.cc:292
+#: ../../src/wui/interactive_player.cc:329
 msgid "General"
 msgstr "General"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:295
+#: ../../src/ui_fsmenu/keyboard_options.cc:294
 #: ../../src/wlapplication_options.cc:254
 msgid "Editor"
 msgstr "Editor"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:299
+#: ../../src/ui_fsmenu/keyboard_options.cc:298
 msgid "Fastplace"
 msgstr "Posaràpìd"
 
-#: ../../src/ui_fsmenu/keyboard_options.cc:301
+#: ../../src/ui_fsmenu/keyboard_options.cc:300
 msgid "Mouse Scrolling"
 msgstr "Roda del ratolí"
 
@@ -5110,7 +5110,7 @@ msgstr "Carrega una partida"
 msgid "The game is a saved game – the win condition was set before."
 msgstr "La partida ja estava desada: la condició de victòria ja està establerta."
 
-#: ../../src/ui_fsmenu/launch_game.cc:319
+#: ../../src/ui_fsmenu/launch_game.cc:320
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map ‘%s’ could not be "
@@ -5209,7 +5209,7 @@ msgid ""
 "Do you want to load the replay anyway?"
 msgstr "La repetició es va crear amb una versió diferent del Widelands. Potser és compatible, però probablement es dessincronitzi o potser no es pugui carregar.\n\nSi us plau, no envieu informes d'error que passin mentre mireu la repetició.\n\nVoleu carregar la repetició igualment?"
 
-#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:386
+#: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:387
 msgid "Online Game Settings"
 msgstr "Configuració de les partides en línia"
 
@@ -5248,7 +5248,7 @@ msgstr "Introduïu un nom d'usuari vàlid. Aquest valor només pot tenir lletres
 msgid "Please enter your password!"
 msgstr "Escolliu una contrasenya."
 
-#: ../../src/ui_fsmenu/main.cc:232
+#: ../../src/ui_fsmenu/main.cc:235
 #, c-format
 msgid ""
 "Unable to create a Game instance!\n"
@@ -5256,200 +5256,200 @@ msgid ""
 "%s"
 msgstr "La partida no es pot crear.\nMissatge d'error:\n%s"
 
-#: ../../src/ui_fsmenu/main.cc:319
+#: ../../src/ui_fsmenu/main.cc:320
 msgid "Begin a new game"
 msgstr "Comença una partida nova"
 
-#: ../../src/ui_fsmenu/main.cc:319 ../../src/wlapplication_options.cc:218
+#: ../../src/ui_fsmenu/main.cc:320 ../../src/wlapplication_options.cc:218
 msgid "New Game"
 msgstr "Partida nova"
 
-#: ../../src/ui_fsmenu/main.cc:321 ../../src/ui_fsmenu/random_game.cc:29
+#: ../../src/ui_fsmenu/main.cc:322 ../../src/ui_fsmenu/random_game.cc:29
 #: ../../src/wlapplication_options.cc:232
 msgid "New Random Game"
 msgstr "Partida aleatòria nova"
 
-#: ../../src/ui_fsmenu/main.cc:322
+#: ../../src/ui_fsmenu/main.cc:323
 msgid "Create a new random match"
 msgstr "Crea un enfrontament aleatori"
 
-#: ../../src/ui_fsmenu/main.cc:324 ../../src/wlapplication_options.cc:242
+#: ../../src/ui_fsmenu/main.cc:325 ../../src/wlapplication_options.cc:242
 msgid "Campaigns"
 msgstr "Campanyes"
 
-#: ../../src/ui_fsmenu/main.cc:324
+#: ../../src/ui_fsmenu/main.cc:325
 msgid "Play a campaign"
 msgstr "Juga una campanya"
 
-#: ../../src/ui_fsmenu/main.cc:326 ../../src/wlapplication_options.cc:237
+#: ../../src/ui_fsmenu/main.cc:327 ../../src/wlapplication_options.cc:237
 msgid "Tutorials"
 msgstr "Tutorials"
 
-#: ../../src/ui_fsmenu/main.cc:327
+#: ../../src/ui_fsmenu/main.cc:328
 msgid "Play one of our beginners’ tutorials"
 msgstr "Juga un tutorial per als nouvinguts al Widelands"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/ui_fsmenu/main.cc:329 ../../src/wlapplication_options.cc:222
+#: ../../src/ui_fsmenu/main.cc:330 ../../src/wlapplication_options.cc:222
 #: ../../src/wlapplication_options.cc:584
 #: ../../src/wui/game_main_menu_save_game.cc:52
-#: ../../src/wui/interactive_gamebase.cc:155
+#: ../../src/wui/interactive_gamebase.cc:157
 msgid "Load Game"
 msgstr "Carrega partida"
 
-#: ../../src/ui_fsmenu/main.cc:330
+#: ../../src/ui_fsmenu/main.cc:331
 msgid "Continue a saved game"
 msgstr "Continua una partida desada"
 
-#: ../../src/ui_fsmenu/main.cc:351 ../../src/wlapplication_options.cc:279
+#: ../../src/ui_fsmenu/main.cc:352 ../../src/wlapplication_options.cc:279
 msgid "Continue Playing"
 msgstr "Continua jugant"
 
-#: ../../src/ui_fsmenu/main.cc:360
+#: ../../src/ui_fsmenu/main.cc:361
 #, c-format
 msgid "Map: %s"
 msgstr "Mapa: %s"
 
-#: ../../src/ui_fsmenu/main.cc:363
+#: ../../src/ui_fsmenu/main.cc:364
 #, c-format
 msgid "Win Condition: %s"
 msgstr "Condició de victòria: %s"
 
-#: ../../src/ui_fsmenu/main.cc:369
+#: ../../src/ui_fsmenu/main.cc:370
 #, c-format
 msgid "Gametime: %s"
 msgstr "Temps jugat: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. * 10:30'
-#: ../../src/ui_fsmenu/main.cc:375
+#: ../../src/ui_fsmenu/main.cc:376
 #, c-format
 msgid "Saved: %s"
 msgstr "Data de desada: %s"
 
-#: ../../src/ui_fsmenu/main.cc:383
+#: ../../src/ui_fsmenu/main.cc:384
 msgid "Online Game"
 msgstr "Partida en línia"
 
-#: ../../src/ui_fsmenu/main.cc:384
+#: ../../src/ui_fsmenu/main.cc:385
 msgid "Join the Widelands lobby"
 msgstr "Entra a la sala d'espera del Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:387
+#: ../../src/ui_fsmenu/main.cc:388
 msgid "Log in as a registered user"
 msgstr "Inicia sessió com a usuari registrat"
 
-#: ../../src/ui_fsmenu/main.cc:389 ../../src/wlapplication_options.cc:296
+#: ../../src/ui_fsmenu/main.cc:390 ../../src/wlapplication_options.cc:296
 msgid "LAN / Direct IP"
 msgstr "LAN / IP Directa"
 
-#: ../../src/ui_fsmenu/main.cc:390
+#: ../../src/ui_fsmenu/main.cc:391
 msgid "Play a private online game"
 msgstr "Juga una partida en línia privada"
 
-#: ../../src/ui_fsmenu/main.cc:393
+#: ../../src/ui_fsmenu/main.cc:394
 msgid "Create a new empty map"
 msgstr "Crea un mapa nou buit"
 
-#: ../../src/ui_fsmenu/main.cc:396
+#: ../../src/ui_fsmenu/main.cc:397
 msgid "Create a new random map"
 msgstr "Crea un mapa aleatori nou"
 
-#: ../../src/ui_fsmenu/main.cc:398
+#: ../../src/ui_fsmenu/main.cc:399
 msgid "Edit an existing map"
 msgstr "Edita un mapa existent"
 
-#: ../../src/ui_fsmenu/main.cc:415 ../../src/wlapplication_options.cc:274
+#: ../../src/ui_fsmenu/main.cc:416 ../../src/wlapplication_options.cc:274
 msgid "Continue Editing"
 msgstr "Continua editant"
 
-#: ../../src/ui_fsmenu/main.cc:439
+#: ../../src/ui_fsmenu/main.cc:440
 msgid "Single Player…"
 msgstr "Un sol jugador…"
 
-#: ../../src/ui_fsmenu/main.cc:440
+#: ../../src/ui_fsmenu/main.cc:441
 msgid "Multiplayer…"
 msgstr "Multijugador…"
 
-#: ../../src/ui_fsmenu/main.cc:441
+#: ../../src/ui_fsmenu/main.cc:442
 msgid "Editor…"
 msgstr "Editor…"
 
-#: ../../src/ui_fsmenu/main.cc:443
+#: ../../src/ui_fsmenu/main.cc:444
 msgid "Begin or load a single-player campaign or free game"
 msgstr "Comença o carrega una campanya o partida lliure d'un sol jugador"
 
-#: ../../src/ui_fsmenu/main.cc:446
+#: ../../src/ui_fsmenu/main.cc:447
 msgid "Play with your friends over the internet"
 msgstr "Juga amb amics a través d'Internet"
 
-#: ../../src/ui_fsmenu/main.cc:449
+#: ../../src/ui_fsmenu/main.cc:450
 msgid "Launch the map editor"
 msgstr "Inicia l'editor de mapes"
 
-#: ../../src/ui_fsmenu/main.cc:452 ../../src/wlapplication_options.cc:227
+#: ../../src/ui_fsmenu/main.cc:453 ../../src/wlapplication_options.cc:227
 msgid "Watch Replay"
 msgstr "Mostra repeticions"
 
-#: ../../src/ui_fsmenu/main.cc:454
+#: ../../src/ui_fsmenu/main.cc:455
 msgid "Watch the replay of an old game"
 msgstr "Mira la repetició d'una partida antiga"
 
-#: ../../src/ui_fsmenu/main.cc:457 ../../src/wlapplication_options.cc:292
+#: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
 msgstr "Complements"
 
-#: ../../src/ui_fsmenu/main.cc:459
+#: ../../src/ui_fsmenu/main.cc:460
 msgid "Install and manage add-ons"
 msgstr "Instal·la i configura els complements"
 
-#: ../../src/ui_fsmenu/main.cc:461 ../../src/ui_fsmenu/options.cc:86
+#: ../../src/ui_fsmenu/main.cc:462 ../../src/ui_fsmenu/options.cc:86
 #: ../../src/wlapplication_options.cc:309
 msgid "Options"
 msgstr "Opcions"
 
-#: ../../src/ui_fsmenu/main.cc:463
+#: ../../src/ui_fsmenu/main.cc:464
 msgid "Technical and game-related settings"
 msgstr "Configuració tècnica i del joc"
 
-#: ../../src/ui_fsmenu/main.cc:467
+#: ../../src/ui_fsmenu/main.cc:468
 msgid "Readme, License, and Credits"
 msgstr "Llegeix-me, llicència i crèdits"
 
-#: ../../src/ui_fsmenu/main.cc:469 ../../src/wlapplication_options.cc:283
+#: ../../src/ui_fsmenu/main.cc:470 ../../src/wlapplication_options.cc:283
 msgid "Exit Widelands"
 msgstr "Surt del Widelands"
 
-#: ../../src/ui_fsmenu/main.cc:471
+#: ../../src/ui_fsmenu/main.cc:472
 msgid "Quit the game"
 msgstr "Abandona el joc"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
-#: ../../src/ui_fsmenu/main.cc:476
+#: ../../src/ui_fsmenu/main.cc:477
 #, c-format
 msgid "Version %1$s (%2$s)"
 msgstr "Versió %1$s (%2$s)."
 
 #. * TRANSLATORS: Placeholders are the copyright years
-#: ../../src/ui_fsmenu/main.cc:479
+#: ../../src/ui_fsmenu/main.cc:480
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
 msgstr "(C) %1%-%2% de l'equip de desenvolupament del Widelands sota la Llicència Pública General GNU V2.0"
 
-#: ../../src/ui_fsmenu/main.cc:811
+#: ../../src/ui_fsmenu/main.cc:812
 msgid "Desyncing Add-On Found"
 msgstr "S'ha trobat un complement que causa dessincronitzacions."
 
-#: ../../src/ui_fsmenu/main.cc:812
+#: ../../src/ui_fsmenu/main.cc:813
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Hi ha un complement actiu que causa dessincronitzacions. Continueu si voleu sota la vostra pròpia responsabilitat."
 
-#: ../../src/ui_fsmenu/main.cc:912 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:913 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found!"
 msgstr "No s'ha trobat cap cultura!"
 
-#: ../../src/ui_fsmenu/main.cc:913 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:914 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "No s'ha trobat cap cultura a data/tribes/intialization/[tribename]/init.lua."
 
@@ -5895,22 +5895,22 @@ msgid "Write syncstreams in network games to debug desyncs"
 msgstr "Inclou els fluxos de sincronització en partides en xarxa per depurar possibles errors"
 
 #: ../../src/ui_fsmenu/options.cc:244
-#: ../../src/wui/interactive_gamebase.cc:233
+#: ../../src/wui/interactive_gamebase.cc:234
 msgid "Show Census"
 msgstr "Mostra el cens"
 
 #: ../../src/ui_fsmenu/options.cc:245
-#: ../../src/wui/interactive_gamebase.cc:242
+#: ../../src/wui/interactive_gamebase.cc:243
 msgid "Show Status"
 msgstr "Mostra l'estat"
 
 #: ../../src/ui_fsmenu/options.cc:247
-#: ../../src/wui/interactive_gamebase.cc:251
+#: ../../src/wui/interactive_gamebase.cc:252
 msgid "Show Soldier Levels"
 msgstr "Mostra els nivells dels soldats"
 
 #: ../../src/ui_fsmenu/options.cc:248
-#: ../../src/wui/interactive_gamebase.cc:260
+#: ../../src/wui/interactive_gamebase.cc:261
 msgid "Show Buildings"
 msgstr "Mostra els edificis"
 
@@ -6091,7 +6091,7 @@ msgstr "Nom de l'escenari"
 msgid "#"
 msgstr "#"
 
-#: ../../src/ui_fsmenu/scenario_select.cc:264
+#: ../../src/ui_fsmenu/scenario_select.cc:262
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
 msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
@@ -6631,7 +6631,7 @@ msgid "Reset Game Speed"
 msgstr "Restableix la velocitat de la partida"
 
 #: ../../src/wlapplication_options.cc:567
-#: ../../src/wui/interactive_gamebase.cc:326
+#: ../../src/wui/interactive_gamebase.cc:327
 msgid "Pause"
 msgstr "Posa en pausa"
 
@@ -6640,14 +6640,14 @@ msgid "Scroll to Starting Field"
 msgstr "Vés al camp inicial"
 
 #: ../../src/wlapplication_options.cc:576 ../../src/wui/game_chat_menu.cc:54
-#: ../../src/wui/interactive_gamebase.cc:366
+#: ../../src/wui/interactive_gamebase.cc:367
 msgid "Chat"
 msgstr "Xat"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wlapplication_options.cc:580
 #: ../../src/wui/game_main_menu_save_game.cc:52
-#: ../../src/wui/interactive_gamebase.cc:146
+#: ../../src/wui/interactive_gamebase.cc:148
 msgid "Save Game"
 msgstr "Guarda la partida"
 
@@ -7511,7 +7511,7 @@ msgstr "Construeix vies d'aigua"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_chat_menu.cc:61
-#: ../../src/wui/interactive_gamebase.cc:127
+#: ../../src/wui/interactive_gamebase.cc:129
 msgid "Script Console"
 msgstr "Consola de scripts"
 
@@ -7556,10 +7556,10 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
-#: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:168
+#: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
 msgstr "Surt del joc"
 
@@ -7697,7 +7697,7 @@ msgstr "Arxiva el missatge seleccionat"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_options_sound_menu.cc:34
-#: ../../src/wui/interactive_gamebase.cc:137
+#: ../../src/wui/interactive_gamebase.cc:139
 msgid "Sound Options"
 msgstr "Opcions de so"
 
@@ -7973,44 +7973,44 @@ msgid "Map View"
 msgstr "Vista del mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Hide Minimap"
 msgstr "Amaga el minimapa"
 
-#: ../../src/wui/interactive_base.cc:282
+#: ../../src/wui/interactive_base.cc:283
 msgid "Show Minimap"
 msgstr "Mostra el minimapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:288
+#: ../../src/wui/interactive_base.cc:289
 msgid "Zoom +"
 msgstr "Apropa la vista"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:293
+#: ../../src/wui/interactive_base.cc:294
 msgid "Reset zoom"
 msgstr "Restableix el zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:298
+#: ../../src/wui/interactive_base.cc:299
 msgid "Zoom –"
 msgstr "Allunya la vista"
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:728
 #, c-format
 msgid "Road length: %u"
 msgstr "Llargada del camí: %u"
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Llargada de la via d'aigua: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1538
 msgid "Failed saving screenshot!"
 msgstr "No s'ha pogut desar la captura de pantalla."
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1542
 msgid "Screenshot saved"
 msgstr "S'ha desat la captura de pantalla."
 
@@ -8024,91 +8024,91 @@ msgstr "%1$u.%2$u×"
 msgid "PAUSE"
 msgstr "EN PAUSA"
 
-#: ../../src/wui/interactive_gamebase.cc:92
+#: ../../src/wui/interactive_gamebase.cc:93
 msgctxt "hotkey"
 msgid "Esc"
 msgstr "Escapament"
 
 #. * TRANSLATORS: Title for a menu button in the game. This menu will show
 #. options o increase/decrease the gamespeed, and to pause the game
-#: ../../src/wui/interactive_gamebase.cc:106
+#: ../../src/wui/interactive_gamebase.cc:108
 msgid "Game Speed"
 msgstr "Velocitat de la partida"
 
 #. * TRANSLATORS: Tooltip for Script Console in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:130
+#: ../../src/wui/interactive_gamebase.cc:132
 msgctxt "hotkey"
 msgid "Ctrl+Shift+Space"
 msgstr "Ctrl + Maj + Espai"
 
 #. * TRANSLATORS: Tooltip for Sound Options in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:140
+#: ../../src/wui/interactive_gamebase.cc:142
 msgid "Set sound effect and music options"
 msgstr "Canvia les opcions d'efectes de so i música"
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wui/interactive_gamebase.cc:162
-#: ../../src/wui/interactive_gamebase.cc:190
+#: ../../src/wui/interactive_gamebase.cc:164
+#: ../../src/wui/interactive_gamebase.cc:192
 msgid "Restart Scenario"
 msgstr "Reinicia l'escenari"
 
-#: ../../src/wui/interactive_gamebase.cc:191
+#: ../../src/wui/interactive_gamebase.cc:193
 msgid "Are you sure you wish to restart this scenario?"
 msgstr "Segur que voleu reiniciar aquest escenari?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
-#: ../../src/wui/interactive_gamebase.cc:233
+#: ../../src/wui/interactive_gamebase.cc:234
 msgid "Hide Census"
 msgstr "Amaga el cens"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
-#: ../../src/wui/interactive_gamebase.cc:241
+#: ../../src/wui/interactive_gamebase.cc:242
 msgid "Hide Status"
 msgstr "Amaga l'estat"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
-#: ../../src/wui/interactive_gamebase.cc:250
+#: ../../src/wui/interactive_gamebase.cc:251
 msgid "Hide Soldier Levels"
 msgstr "Amaga els nivells dels soldats"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
-#: ../../src/wui/interactive_gamebase.cc:259
+#: ../../src/wui/interactive_gamebase.cc:260
 msgid "Hide Buildings"
 msgstr "Amaga els edificis"
 
-#: ../../src/wui/interactive_gamebase.cc:306
+#: ../../src/wui/interactive_gamebase.cc:307
 msgid "Speed +"
 msgstr "Augmenta la velocitat"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:309
+#: ../../src/wui/interactive_gamebase.cc:310
 msgid "Increase the game speed"
 msgstr "Incrementa la velocitat de la partida"
 
-#: ../../src/wui/interactive_gamebase.cc:312
+#: ../../src/wui/interactive_gamebase.cc:313
 msgid "Speed -"
 msgstr "Redueix la velocitat"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:315
+#: ../../src/wui/interactive_gamebase.cc:316
 msgid "Decrease the game speed"
 msgstr "Redueix la velocitat de la partida"
 
-#: ../../src/wui/interactive_gamebase.cc:320
+#: ../../src/wui/interactive_gamebase.cc:321
 msgid "Resume"
 msgstr "Reprèn"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:323
+#: ../../src/wui/interactive_gamebase.cc:324
 msgid "Resume the Game"
 msgstr "Reprèn la partida"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
-#: ../../src/wui/interactive_gamebase.cc:329
+#: ../../src/wui/interactive_gamebase.cc:330
 msgid "Pause the Game"
 msgstr "Posa la partida en pausa"
 
@@ -8118,20 +8118,20 @@ msgstr "Posa la partida en pausa"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:302 ../../src/wui/map_tags.cc:37
+#. * TRANSLATORS: An entry in the game's statistics menu
+#: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegació"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:308
+#: ../../src/wui/interactive_player.cc:309
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Soldats"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:313 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:154 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Estoc"

@@ -35,7 +35,7 @@ SDL_GLContext initialize(
 #ifdef USE_GLBINDING
    const Trace& trace,
 #else
-   const Trace&,
+   const Trace& /* trace */,
 #endif
    SDL_Window* sdl_window,
    GLint* max_texture_size) {
@@ -195,7 +195,8 @@ SDL_GLContext initialize(
 		std::vector<std::string> version_vector;
 		split(version_vector, version_string, {'.', ' '});
 		if (version_vector.size() >= 2) {
-			int major_version = 0, minor_version = 0;
+			int major_version = 0;
+			int minor_version = 0;
 			try {
 				major_version = std::stoi(version_vector[0]);
 				minor_version = std::stoi(version_vector[1]);
