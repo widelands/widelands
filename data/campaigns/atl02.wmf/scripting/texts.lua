@@ -45,7 +45,7 @@ obj_basic_infrastructure = {
    title = _("Ensure the supply of build wares"),
    number = 4,
    body = objective_text(_("Establish Basic Production Chain"),
-   p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]])))
+   p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around us. Find the balance.]])))
 }
 
 obj_tools = {
@@ -172,7 +172,7 @@ initial_messages = {
          _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
+         _([[Last night however, we sighted a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
       h=500,
    },
    {
@@ -255,7 +255,7 @@ spidercloth_2 = {
       title = _("Jundlina Acknowledges"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately now.]]))
+         _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately.]]))
    }
 }
 
@@ -437,7 +437,7 @@ trading = {
       title = _("Sidolus Agrees"),
       body = sidolus(
          -- TRANSLATORS: sidolus
-         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this barbarian.]])
+         _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarian.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: sidolus
          _([[I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
@@ -478,7 +478,7 @@ tribute_started = {
          _([[Strangers, we have received the first batch of wares. So we may finally trust you.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[However, our enemy in the north is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
+         _([[However, our enemy in the North is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[They name themselves an Empire, and their leader is called Maletus. I want you to train your soldiers and help us defeat his lousy Empire.]]))
@@ -488,7 +488,7 @@ tribute_started = {
       title = _("Be Vigilant!"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[May Satul warm you, Sidolus. Our ally now has gained some trust, but we shouldn't trust to much in them.]])
+         _([[May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we shouldn’t trust them too much.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[So I want you to defeat this Empire, but ensure that we will become and remain strong enough to enforce the respect we deserve.]]))
@@ -503,7 +503,7 @@ tribute_started = {
          _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[If you fail to deliver everything within 3 hours, we need to assume you are just playing along with us.]]))
+         _([[If you fail to deliver everything within three hours, we need to assume you are just playing along with us.]]))
    },
 }
 
@@ -518,7 +518,7 @@ alliance_broken = {
          _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
    },
    {
-      title = _("Jundlinas Suicide"),
+      title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
@@ -544,7 +544,7 @@ alliance_broken_1 = {
          _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
    },
    {
-      title = _("Jundlinas Suicide"),
+      title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
