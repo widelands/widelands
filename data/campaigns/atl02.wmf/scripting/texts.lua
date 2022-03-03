@@ -45,7 +45,7 @@ obj_basic_infrastructure = {
    title = _("Ensure the supply of build wares"),
    number = 4,
    body = objective_text(_("Establish Basic Production Chain"),
-   p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around you. Find the balance.]])))
+   p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around us. Find the balance.]])))
 }
 
 obj_tools = {
