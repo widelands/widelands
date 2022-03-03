@@ -503,7 +503,7 @@ tribute_started = {
          _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[If you fail to deliver everything within 3 hours, we need to assume you are just playing along with us.]]))
+         _([[If you fail to deliver everything within three hours, we need to assume you are just playing along with us.]]))
    },
 }
 
