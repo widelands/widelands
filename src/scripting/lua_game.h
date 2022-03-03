@@ -131,7 +131,7 @@ public:
 	~LuaObjective() override {
 	}
 
-	explicit LuaObjective(const Widelands::Objective& n);
+	explicit LuaObjective(const Widelands::Objective& o);
 	LuaObjective() = default;
 	explicit LuaObjective(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
@@ -212,7 +212,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::Player& get_plr(lua_State* L, const Widelands::Game& game);
+	Widelands::Player& get_plr(lua_State* L, const Widelands::Game& game) const;
 	const Widelands::Message& get(lua_State* L, Widelands::Game& game);
 };
 

@@ -568,7 +568,7 @@ struct CmdSetInputMaxFill : public PlayerCommand {
 	                   PlayerImmovable&,
 	                   DescriptionIndex,
 	                   WareWorker,
-	                   uint32_t maxfill,
+	                   uint32_t max_fill,
 	                   bool cs);
 
 	// Write these commands to a file (for savegames)
@@ -598,7 +598,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	CmdChangeTargetQuantity(const Time& duetime,
 	                        PlayerNumber sender,
 	                        uint32_t economy,
-	                        DescriptionIndex index);
+	                        DescriptionIndex init_ware_type);
 
 	//  Write/Read these commands to/from a file (for savegames).
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -627,7 +627,7 @@ struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWareTargetQuantity(const Time& duetime,
 	                         PlayerNumber sender,
 	                         uint32_t economy,
-	                         DescriptionIndex index,
+	                         DescriptionIndex init_ware_type,
 	                         uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).
@@ -653,7 +653,7 @@ struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity(const Time& duetime,
 	                           PlayerNumber sender,
 	                           uint32_t economy,
-	                           DescriptionIndex index,
+	                           DescriptionIndex init_ware_type,
 	                           uint32_t permanent);
 
 	//  Write/Read these commands to/from a file (for savegames).

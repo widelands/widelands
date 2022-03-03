@@ -869,7 +869,8 @@ removeobject
          "return"
       }
 */
-void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
+void WorkerProgram::parse_removeobject(Worker::Action* act,
+                                       const std::vector<std::string>& /* cmd */) {
 	act->function = &Worker::run_removeobject;
 	if (!needed_attributes_.empty()) {
 		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());

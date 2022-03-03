@@ -134,9 +134,9 @@ private:
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
-	bool incorporate_upgraded_soldier(EditorGameBase& game, Soldier& s);
+	bool incorporate_upgraded_soldier(EditorGameBase& egbase, Soldier& s);
 	Soldier* find_least_suited_soldier();
-	bool drop_least_suited_soldier(bool new_has_arrived, Soldier* s);
+	bool drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier* newguy);
 
 private:
 	// We can be attacked if we have stationed soldiers.
@@ -175,7 +175,7 @@ private:
 		Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
-		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
 
 	private:
 		MilitarySite* const military_site_;

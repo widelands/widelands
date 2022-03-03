@@ -1551,7 +1551,7 @@ int LuaInboxMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) {
+Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) const {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}

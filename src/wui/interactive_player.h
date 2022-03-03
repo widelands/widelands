@@ -81,7 +81,7 @@ public:
 		return auto_roadbuild_mode_;
 	}
 
-	void popup_message(Widelands::MessageId, const Widelands::Message&);
+	void popup_message(Widelands::MessageId, const Widelands::Message&) const;
 
 	/** Open an attack box for the building at the given position, if applicable. */
 	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);

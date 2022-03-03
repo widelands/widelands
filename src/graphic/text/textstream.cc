@@ -154,9 +154,8 @@ std::string TextStream::parse_string() {
 		std::string rv = till_any(delim);
 		consume(1);
 		return rv;
-	} else {
-		return till_any(" \t>");
 	}
+	return till_any(" \t>");
 }
 
 /*
