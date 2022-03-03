@@ -488,7 +488,7 @@ tribute_started = {
       title = _("Be Vigilant!"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[May Satul warm you, Sidolus. Our ally now has gained some trust, but we shouldn't trust to much in them.]])
+         _([[May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we shouldn’t trust them too much.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[So I want you to defeat this Empire, but ensure that we will become and remain strong enough to enforce the respect we deserve.]]))
