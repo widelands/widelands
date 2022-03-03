@@ -131,6 +131,22 @@ obj_defeat_maletus = {
    p(_([[We need to finish the Empire off to have a chance to build a new home.]])))
 }
 
+obj_build_temple = {
+   name = "obj_build_temple",
+   title = _("Build a temple to worship Satul"),
+   number = 1,
+   body = objective_text(_("Build Temple For Satul"),
+   p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])))
+}
+
+obj_defeat_kalitath = {
+   name = "obj_defeat_kalitath",
+   title = _("Defeat Kalitath"),
+   number = 1,
+   body = objective_text(_("Defeat Kalitath"),
+   p(_([[Now its time to finish off this annoying Barbarian. He has molested us far too long for now.]])))
+}
+
 -- =======================================================================
 --                                  Texts
 -- =======================================================================

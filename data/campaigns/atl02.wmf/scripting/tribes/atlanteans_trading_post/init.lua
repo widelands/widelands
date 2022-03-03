@@ -1,4 +1,4 @@
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlantean_trading_post/"
+dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/"
 
 push_textdomain("scenario_atl02.wmf")
 
@@ -90,3 +90,5 @@ descriptions:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

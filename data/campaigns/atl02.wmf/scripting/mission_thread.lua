@@ -225,6 +225,23 @@ function maletus_defeated()
    while not Maletus.defeated do sleep(6000) end
    defeat_maletus.done = true
    msg_boxes(maletus_defeated)
+   msg_boxes(maletus_defeated_2)
+   temple = add_campaign_objective(obj_build_temple)
+   run(final)
+end
+
+function final()
+   while not check_for_buildings(p1, {
+      atlanteans_temple_of_satul = 1,
+   }) do sleep(3731) end
+   temple.done = true
+   while count_workers_in_warehouses("atlanteans_priest") < 2 and not check_for_buildings(p1, {
+      atlanteans_scout_house_1 = 1,
+   })do sleep(2323) end
+   msg_boxes(princess_back)
+   defeat_kalitath = add_campaign_objective(obj_defeat_kalitath)
+   while not Kalitath.defeated do sleep(6000) end
+   msg_boxes(victory)
 end
 
 function infrastructure()
@@ -274,7 +291,7 @@ end
 
 function check_kalitath_defeated()
    defeat = p1.defeated == true
-   while not defeat or trade.done == true do
+   while not defeat or maletus_defeated.done == true do
       sleep(6000)
       defeat = p1.defeated == true
       if Kalitath.defeated then

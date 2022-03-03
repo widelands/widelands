@@ -20,6 +20,13 @@ local result = {
                purpose = pgettext("building", "Explores unknown territory.")
             }
          },
+         {
+            name = "atlanteans_temple_of_satul",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean production site: Temple of Satul
+               purpose = pgettext("atlanteans_building", "A big and expensive temple to worship Satul and consecrate priests.")
+            }
+         },
       },
       workers_order = {
          {
@@ -28,6 +35,13 @@ local result = {
                -- TRANSLATORS: Purpose helptext for an atlantean worker: Trader
                purpose = pgettext("atlanteans_worker", "Transports wares to share with other players."),
                note = pgettext("atlanteans_worker", "A trader is a scout who needs a horse to transport the wares.")
+            }
+            },
+            { name = "atlanteans_priest",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+               purpose = pgettext("atlanteans_worker", "Worships Satul."),
+               note = pgettext("atlanteans_worker", "Priest are needed to make Satul show his might.")
             }
             }
          }
