@@ -172,7 +172,7 @@ initial_messages = {
          _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god. ]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
+         _([[Last night however, we sighted a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
       h=500,
    },
    {
