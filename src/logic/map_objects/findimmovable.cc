@@ -27,7 +27,7 @@
 namespace Widelands {
 
 struct FindImmovableAlwaysTrueImpl {
-	bool accept(const BaseImmovable&) const {
+	bool accept(const BaseImmovable& /* immovable */) const {
 		return true;
 	}
 };

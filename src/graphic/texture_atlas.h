@@ -62,7 +62,7 @@ public:
 	// their memory) in the order they have been added by 'add'.
 	void pack(int max_dimension,
 	          std::vector<std::unique_ptr<Texture>>* texture_atlases,
-	          std::vector<PackedTexture>* textures);
+	          std::vector<PackedTexture>* pack_info);
 
 private:
 	struct Node {
@@ -97,7 +97,7 @@ private:
 	std::unique_ptr<Texture> pack_as_many_as_possible(const int max_dimension,
 	                                                  const int texture_atlas_index,
 	                                                  std::vector<PackedTexture>* pack_info);
-	static Node* find_node(Node* root, int w, int h);
+	static Node* find_node(Node* node, int w, int h);
 
 	int next_index_;
 

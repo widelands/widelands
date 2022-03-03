@@ -63,9 +63,8 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else {
-		return 0;
 	}
+	return 0;
 }
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
@@ -94,9 +93,8 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else {
-		return 0;
 	}
+	return 0;
 }
 
 EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {

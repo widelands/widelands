@@ -240,11 +240,9 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 		// No more deliverable wares. Walk out to the flag.
 		return start_task_move(
 		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
-	} else {
-		//  tough luck, the building has disappeared
-		molog(game.get_gametime(), "[Carrier]: Building disappeared while in building.\n");
-		set_location(nullptr);
-	}
+	}  //  tough luck, the building has disappeared
+	molog(game.get_gametime(), "[Carrier]: Building disappeared while in building.\n");
+	set_location(nullptr);
 }
 
 /**
@@ -474,7 +472,8 @@ int32_t Carrier::find_closest_flag(const Game& game) {
 	CoordPath startpath(map, dynamic_cast<RoadBase&>(*get_location(game)).get_path());
 
 	CoordPath endpath;
-	int32_t startcost, endcost;
+	int32_t startcost;
+	int32_t endcost;
 	int32_t curidx = startpath.get_index(get_position());
 
 	// Apparently, we're in a building

@@ -152,7 +152,7 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
-bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
@@ -164,10 +164,10 @@ void InteractiveSpectator::exit_btn() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_see(Widelands::PlayerNumber /* p */) const {
 	return true;
 }
-bool InteractiveSpectator::can_act(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_act(Widelands::PlayerNumber /* p */) const {
 	return false;
 }
 Widelands::PlayerNumber InteractiveSpectator::player_number() const {

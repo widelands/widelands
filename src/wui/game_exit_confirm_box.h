@@ -27,7 +27,7 @@
  */
 class GameExitConfirmBox : public UI::WLMessageBox {
 public:
-	GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb);
+	GameExitConfirmBox(UI::Panel& parent, InteractiveGameBase& i);
 	GameExitConfirmBox(UI::Panel& parent,
 	                   InteractiveGameBase& gb,
 	                   const std::string& title,

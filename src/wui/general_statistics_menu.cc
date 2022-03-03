@@ -85,7 +85,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	// Is there a hook dataset?
 	ndatasets_ = NR_BASE_DATASETS;
 	std::unique_ptr<LuaTable> hook = game_.lua().get_hook("custom_statistic");
-	std::string cs_name, cs_pic;
+	std::string cs_name;
+	std::string cs_pic;
 	if (hook) {
 		i18n::Textdomain td("win_conditions");
 		hook->do_not_warn_about_unaccessed_keys();
@@ -311,15 +312,15 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			m.slider_->get_slider().set_value(fr.signed_32());
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "General Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "General Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("general statistics menu: %s", e.what());
 	}
 }
-void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(radiogroup_.get_state());
 	for (UI::Button* c : cbs_) {

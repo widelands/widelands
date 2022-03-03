@@ -64,7 +64,7 @@ struct SoldierPanel : UI::Panel {
 	}
 
 	void think() override;
-	void draw(RenderTarget&) override;
+	void draw(RenderTarget& /*dst*/) override;
 
 	void set_mouseover(const SoldierFn& fn);
 	void set_click(const SoldierFn& fn);

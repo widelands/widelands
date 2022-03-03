@@ -348,7 +348,7 @@ void Button::handle_mousein(bool const inside) {
 /**
  * Update the pressed status of the button
  */
-bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -364,7 +364,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	return true;
 }
 
-bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mouserelease(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -385,7 +385,8 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	return false;
 }
 
-bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Button::handle_mousemove(
+   const uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	return true;  // We handle this always by lighting up
 }
 

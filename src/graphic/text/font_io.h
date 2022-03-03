@@ -26,7 +26,7 @@ namespace RT {
 class IFont;
 
 // Loads the font 'face' at the given 'point_size' from the g_fs.
-IFont* load_font(const std::string& face, int point_size);
+IFont* load_font(const std::string& face, int ptsize);
 
 }  // namespace RT
 

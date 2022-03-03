@@ -40,11 +40,11 @@ struct Console : public ChatProvider, public Handler {
 
 	~Console() override = default;
 
-	void cmdHelp(const std::vector<std::string>&) {
+	void cmdHelp(const std::vector<std::string>& /* args */) {
 		write("Use 'ls' to list all available commands.");
 	}
 
-	void cmdLs(const std::vector<std::string>&) {
+	void cmdLs(const std::vector<std::string>& /* args */) {
 		for (const auto& command : commands) {
 			write(command.first);
 		}

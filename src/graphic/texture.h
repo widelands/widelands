@@ -78,7 +78,7 @@ public:
 
 private:
 	// Configures OpenGL to draw to this surface.
-	void setup_gl();
+	void setup_gl() const;
 	void init(uint16_t w, uint16_t h);
 
 	// Implements surface.
