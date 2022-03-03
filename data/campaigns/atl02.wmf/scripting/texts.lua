@@ -255,7 +255,7 @@ spidercloth_2 = {
       title = _("Jundlina Acknowledges"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately now.]]))
+         _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately.]]))
    }
 }
 
