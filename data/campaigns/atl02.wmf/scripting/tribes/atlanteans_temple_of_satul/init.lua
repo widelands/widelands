@@ -1,4 +1,4 @@
-dirname = "campaigns/atl02.wmf/scripting/tribes/atlantean_temple_of_satul/"
+dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/"
 
 push_textdomain("scenario_atl02.wmf")
 
@@ -31,6 +31,8 @@ descriptions:new_productionsite_type {
          hotspot = { 47, 47 },
       }
    },
+
+   aihints = {},
 
    working_positions = {
       atlanteans_carrier = 1
