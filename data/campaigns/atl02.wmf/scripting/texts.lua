@@ -478,7 +478,7 @@ tribute_started = {
          _([[Strangers, we have received the first batch of wares. So we may finally trust you.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[However, our enemy in the north is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
+         _([[However, our enemy in the North is very strong. I am afraid that without significant help from your side we might lose the war despite any help in terms of wares you might provide.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[They name themselves an Empire, and their leader is called Maletus. I want you to train your soldiers and help us defeat his lousy Empire.]]))
