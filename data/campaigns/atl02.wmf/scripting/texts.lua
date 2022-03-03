@@ -544,7 +544,7 @@ alliance_broken_1 = {
          _([[At least your princess will make a reasonable slave, if we survive the battle with our enemy.]]))
    },
    {
-      title = _("Jundlinas Suicide"),
+      title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
