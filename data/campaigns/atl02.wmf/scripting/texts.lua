@@ -153,23 +153,23 @@ initial_messages = {
       title = _("The princess’s memoir"),
       body = jundlina(_("Jundlina writes her diary"),
          -- TRANSLATORS: Jundlina - Diary
-         _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design. ]])
+         _([[Our escape from the cursed island was a close one: we managed to load three ships and make our escape, but the currents of the sinking island tested our new ships and their design.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[And one failed the test: the last days of loading was done in chaos and without much planning and so one of our ships ended up carrying most of the heavy wares in our possession. ]])
+         _([[And one failed the test: the last days of loading was done in chaos and without much planning and so one of our ships ended up carrying most of the heavy wares in our possession.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
          _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[All of us were fiercely afraid. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts. ]])),
+         _([[All of us were fiercely afraid. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
       h=500,
    },
    {
       title = _("New hope"),
       body = jundlina(_("Jundlina continues"),
          -- TRANSLATORS: Jundlina - Diary
-         _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god. ]])
+         _([[Many weeks have passed and we did only see small islands not suitable for habitation and without any sign of being blessed by Satul, the fire god.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
          _([[Last night however, we made out a new island. We saw smoke hovering over it. The black comes from the fiery mountain in the north of the island, the grey however comes from settlers.]])),
@@ -179,10 +179,10 @@ initial_messages = {
       title = _("Planning for the future"),
       body = jundlina(_("Jundlina concludes"),
          -- TRANSLATORS: Jundlina - Diary
-         _([[At least the east side of the island is inhabited, that much is certain. We do not know if the people there are friends or foes. We do not even know what tribe they might be from. ]])
+         _([[At least the east side of the island is inhabited, that much is certain. We do not know if the people there are friends or foes. We do not even know what tribe they might be from.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[The only thing we know for sure is that they cannot be Atlanteans, for no ship of ours has sailed as far as we did for centuries. I can only hope they are friendly. ]])
+         _([[The only thing we know for sure is that they cannot be Atlanteans, for no ship of ours has sailed as far as we did for centuries. I can only hope they are friendly.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
          _([[We have not much water left; our food is running low; we lost all our tools and most of our building materials with the third ship. We can’t afford to sail any further, and we need to try to settle on this island.]]))
@@ -212,10 +212,10 @@ initial_messages1= {
       title = _("Jundlina gives orders"),
       body = jundlina(_("Jundlina orders"),
          -- TRANSLATORS: Jundlina
-         _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us. ]])
+         _([[Let’s also explore this island and expand our territory. But we need to be careful. We should build at least one tower so that we can see potential enemies before they see us.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
-         _([[But we need to be cautious using the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down. ]])
+         _([[But we need to be cautious using the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
