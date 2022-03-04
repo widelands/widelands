@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-25 08:00+0000\n"
+"POT-Creation-Date: 2022-03-01 03:05+0000\n"
 "PO-Revision-Date: 2022-02-13 02:43+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -1716,6 +1716,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de Piedra"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1727,6 +1728,8 @@ msgstr "Taller de Piedra"
 msgid "making a shovel"
 msgstr "fabricando una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1736,6 +1739,7 @@ msgstr "fabricando una pala"
 msgid "making a felling ax"
 msgstr "la fabricación del hacha de talar"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1750,6 +1754,8 @@ msgstr "fabricando un pico"
 msgid "making a machete"
 msgstr "fabricando un machete"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1760,6 +1766,7 @@ msgstr "fabricando un machete"
 msgid "making kitchen tools"
 msgstr "fabricando utensilios de cocina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1935,7 +1942,6 @@ msgstr "Cabaña de Guarda de Naturaleza\n\n "
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5270,7 +5276,6 @@ msgstr "Balsa (Joven)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5467,6 +5472,7 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) guerrera"
 msgstr[1] "%1%(+%2%) guerreras"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

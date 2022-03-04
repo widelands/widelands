@@ -63,9 +63,9 @@ public:
 	static MapData create_directory(const std::string& directory);
 
 	// Sorting functions to order by different categories.
-	bool compare_names(const MapData& other);
-	bool compare_players(const MapData& other);
-	bool compare_size(const MapData& other);
+	bool compare_names(const MapData& other) const;
+	bool compare_players(const MapData& other) const;
+	bool compare_size(const MapData& other) const;
 
 	std::string filename;
 	std::string name;

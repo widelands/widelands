@@ -235,11 +235,10 @@ std::deque<MapView::TimestampedMouse> plan_mouse_transition(const MapView::Times
 	plan.push_back(start);
 	for (int i = 1; i < kNumKeyFrames - 2; i++) {
 		float dt = (kShortAnimationMs / kNumKeyFrames) * i;
-		plan.push_back(MapView::TimestampedMouse(
-		   static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt)));
+		plan.emplace_back(static_cast<uint32_t>(std::lround(start.t + dt)), mouse_t.value(dt));
 	}
-	plan.push_back(MapView::TimestampedMouse(
-	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>()));
+	plan.emplace_back(
+	   static_cast<uint32_t>(std::lround(start.t + kShortAnimationMs)), target.cast<float>());
 	return plan;
 }
 
@@ -512,7 +511,7 @@ bool MapView::handle_mousepress(uint8_t const btn, int32_t const x, int32_t cons
 	return false;
 }
 
-bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool MapView::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_RIGHT && dragging_) {
 		stop_dragging();
 		return true;
