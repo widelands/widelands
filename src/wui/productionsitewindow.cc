@@ -137,7 +137,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			worker_caps_->add(worker_xp_increase_);
 			worker_caps_->add_space(kButtonSize);
 			worker_type_->set_enabled(false);
-			worker_table_->selected.connect([this](uint32_t) { worker_table_selection_changed(); });
+			worker_table_->selected.connect(
+			   [this](uint32_t /* index */) { worker_table_selection_changed(); });
 			worker_type_->selected.connect([this]() { worker_table_dropdown_clicked(); });
 			worker_xp_decrease_->sigclicked.connect([this]() { worker_table_xp_clicked(-1); });
 			worker_xp_increase_->sigclicked.connect([this]() { worker_table_xp_clicked(1); });

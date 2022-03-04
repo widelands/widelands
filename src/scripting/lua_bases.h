@@ -127,7 +127,7 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&);
+	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&) const;
 
 protected:
 	inline Widelands::PlayerNumber player_number() {

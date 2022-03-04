@@ -379,7 +379,7 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 }
 
 void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
-                                                  const std::string& basename) {
+                                                  const std::string& basename) const {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
@@ -390,7 +390,8 @@ void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
 	}
 }
 
-uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject*) const {
+uint32_t MapObjectDescr::get_animation(const std::string& animname,
+                                       const MapObject* /* object */) const {
 	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
 		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
@@ -428,7 +429,7 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 	return nullptr;
 }
 
-void MapObjectDescr::check_representative_image() {
+void MapObjectDescr::check_representative_image() const {
 	if (representative_image() == nullptr) {
 		throw Widelands::GameDataError(
 		   "The %s %s has no representative image. Does it have an \"idle\" animation?",
@@ -640,7 +641,7 @@ const Image* MapObject::representative_image() const {
 /**
  * Default implementation
  */
-int32_t MapObject::get_training_attribute(TrainingAttribute) const {
+int32_t MapObject::get_training_attribute(TrainingAttribute /* attr */) const {
 	return -1;
 }
 
@@ -663,7 +664,7 @@ Time MapObject::schedule_act(Game& game, const Duration& tdelta, uint32_t const 
 /**
  * Called when a CMD_ACT triggers.
  */
-void MapObject::act(Game&, uint32_t) {
+void MapObject::act(Game& /* game */, uint32_t /* data */) {
 }
 
 /**
@@ -673,7 +674,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase&) const {
+void MapObject::log_general_info(const EditorGameBase& /* egbase */) const {
 }
 
 const Player& MapObject::owner() const {
@@ -784,7 +785,7 @@ void MapObject::Loader::load_finish() {
 /**
  * Save the MapObject to the given file.
  */
-void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
+void MapObject::save(EditorGameBase& /* egbase */, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderMapObject);
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 

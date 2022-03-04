@@ -38,7 +38,7 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 			args->old_immovable_types.push_back(immovable->descr().name());
 			immovable->remove(eia.egbase());  //  Delete no buildings or stuff.
 		} else {
-			args->old_immovable_types.push_back("");
+			args->old_immovable_types.emplace_back("");
 		}
 	} while (mr.advance(*map));
 	return mr.radius() + 2;

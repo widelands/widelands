@@ -123,8 +123,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	ok_.sigclicked.connect([this]() { ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
-	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
-	load_or_save_.table().double_clicked.connect([this](unsigned) { ok(); });
+	load_or_save_.table().selected.connect([this](unsigned /* index */) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned /* index */) { ok(); });
 	load_or_save_.table().cancel.connect([this]() { die(); });
 
 	load_or_save_.fill_table();
