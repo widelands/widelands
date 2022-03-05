@@ -162,7 +162,7 @@ void StoryMessageBox::clicked_main_menu() {
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT) {
+	if (btn == SDL_BUTTON_RIGHT && is_modal()) {
 		return true;
 	}
 
