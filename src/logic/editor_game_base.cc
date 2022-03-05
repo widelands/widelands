@@ -343,6 +343,7 @@ void EditorGameBase::postload_addons() {
 
 	// Postload all tribes. We can do this only now to ensure that any changes
 	// made by add-ons are taken into account when computing dependency chains.
+	verb_log_info("Postloading tribes...");
 	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
 	}

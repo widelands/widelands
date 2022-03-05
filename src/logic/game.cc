@@ -222,9 +222,7 @@ void Game::postload_addons_before_loading() {
 		return;
 	}
 	did_postload_addons_before_loading_ = true;
-
 	delete_world_and_tribes();
-	postload_addons();
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
@@ -330,9 +328,6 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
-	postload_addons();
-	did_postload_addons_before_loading_ = true;
-
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
@@ -360,6 +355,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		get_player(shared.at(n).shared_in)
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
+
+	postload_addons();
+	did_postload_addons_before_loading_ = true;
 
 	if (!settings.mapfilename.empty()) {
 		assert(maploader);
@@ -586,16 +584,11 @@ bool Game::run(StartGameType const start_game_type,
                bool replay,
                const std::string& prefix_for_replays) {
 	assert(has_loader_ui());
-	postload_addons();
 
 	replay_ = replay;
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
-
-	if (start_game_type != StartGameType::kSaveGame) {
-		postload_addons();
-	}
 
 	if (start_game_type != StartGameType::kSaveGame) {
 		// Check whether we need to disable replays because of add-ons.
@@ -736,6 +729,8 @@ bool Game::run(StartGameType const start_game_type,
 			syncwrapper_.start_dump(fname);
 		}
 	}
+
+	postload_addons();
 
 	sync_reset();
 	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
