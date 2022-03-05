@@ -2,7 +2,7 @@ dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
 -- Test that replacing a ware works
 
-descriptions:new_ware_type {
+wl.Descriptions():new_ware_type {
    name = "ax_sharp",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Replaced Ware"),

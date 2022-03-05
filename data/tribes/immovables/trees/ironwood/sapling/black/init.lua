@@ -5,7 +5,7 @@ dirname = path.dirname(__file__) .. "../"
 include(dirname .. "../terrain_affinity.lua")
 include(dirname .. "../spritesheets.lua")
 
-descriptions:new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "ironwood_black_amazons_sapling",
    -- TRANSLATORS:  This is an amazon rare tree.
    descname = _("Ironwood Tree (Sapling)"),

@@ -32,7 +32,7 @@
 
 -- dirname = path.dirname(__file__)
 
--- descriptions:new_worker_type {
+-- wl.Descriptions():new_worker_type {
    -- name = "empire_fisher",
    -- -- TRANSLATORS: This is a worker name used in lists of workers
    -- descname = pgettext("empire_worker", "Fisher"),
@@ -98,7 +98,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_worker_type {
+wl.Descriptions():new_worker_type {
    name = "atlanteans_armorsmith",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Armorsmith"),

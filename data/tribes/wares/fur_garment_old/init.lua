@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_ware_type {
+wl.Descriptions():new_ware_type {
    name = "fur_garment_old",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Old Fur Garment"),

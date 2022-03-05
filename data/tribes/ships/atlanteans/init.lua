@@ -51,7 +51,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    descriptions:new_ship_type {
+--    wl.Descriptions():new_ship_type {
 --       name = "atlanteans_ship",
 --       descname = pgettext("atlanteans_ship", "Ship"),
 --       animation_directory = dirname,
@@ -95,7 +95,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_ship_type {
+wl.Descriptions():new_ship_type {
    name = "atlanteans_ship",
    -- TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
    descname = pgettext("atlanteans_ship", "Ship"),
