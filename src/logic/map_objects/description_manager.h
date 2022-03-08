@@ -75,7 +75,10 @@ public:
 	/// Mark a description as having been loaded
 	void mark_loading_done(const std::string& description_name);
 
-	/** The order in which all units have been loaded. */
+	/**
+	 * The exact order in which all units have been loaded, e.g.
+	 * {"barbarians", "barbarians_ship", "barbarians_well", ...}.
+	 */
 	const std::vector<std::string>& load_order() const {
 		return load_order_;
 	}
