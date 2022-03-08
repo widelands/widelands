@@ -49,8 +49,17 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 			}
 
 			if (packet_version >= 7) {
+				/* This design is the fix for bug #4786. The order in which units are loaded is
+				 * stored in the savegame to allow recreating it exactly during loading without
+				 * having to always load all tribes. Otherwise, we'd get desyncs because the
+				 * dynamic load order is different during loading from starting a new game.
+				 */
 				game.postload_addons_before_loading();
 				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					/* This tells the descriptions manager to actually load the description
+					 * with the given name, e.g. "barbarians" or "frisians_well".
+					 * Takes care of legacy lookup and skipping already loaded units.
+					 */
 					Notifications::publish(NoteMapObjectDescription(
 					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
 				}
