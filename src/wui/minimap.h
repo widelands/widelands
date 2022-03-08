@@ -127,6 +127,7 @@ private:
 	UI::Button button_flags;
 	UI::Button button_roads;
 	UI::Button button_bldns;
+	UI::Button button_ships;
 	UI::Button button_zoom;
 };
 

@@ -122,13 +122,14 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
+constexpr int kNumberOfButtons = 7;
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
 	// Six buttons need at least 120 pixels.
-	return view_.get_w() < 120 ? 3 : 6;
+	return view_.get_w() < kNumberOfButtons * 20 ? 3 : 7;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
 	// Use two rows if there are less than 120 pixels available.
-	return view_.get_w() < 120 ? 2 : 1;
+	return view_.get_w() < kNumberOfButtons * 20 ? 3 : 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -196,9 +197,20 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   _("Buildings"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
+     button_ships(this,
+                  "ships",
+                  but_w() * 2,
+                  view_.get_h() + but_h() * 1,
+                  but_w(),
+                  but_h(),
+                  UI::ButtonStyle::kWuiSecondary,
+                  g_image_cache->get("images/wui/minimap/button_bldns.png"),
+                  _("Ships"),
+                  UI::Button::VisualState::kRaised,
+                  UI::Button::ImageMode::kUnscaled),
      button_zoom(this,
                  "zoom",
-                 but_w() * 2,
+                 but_w() * 3,
                  view_.get_h() + but_h() * 1,
                  but_w(),
                  but_h(),
@@ -212,6 +224,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 	button_flags.sigclicked.connect([this]() { toggle(MiniMapLayer::Flag); });
 	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
 	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
+	button_ships.sigclicked.connect([this]() { toggle(MiniMapLayer::Ship); });
 	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
@@ -242,6 +255,7 @@ void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
 	// Read number of rows after the zoom.
 	const uint32_t rows = number_of_button_rows();
+	const uint32_t height_offset = rows == 3 ? 1 : 0;
 	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
@@ -250,14 +264,22 @@ void MiniMap::resize() {
 	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
 	button_flags.set_size(but_w(), but_h());
 	button_roads.set_pos(
-	   Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
+	   Vector2i(but_w() * (3 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_roads.set_size(but_w(), but_h());
 	button_bldns.set_pos(
-	   Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
+	   Vector2i(but_w() * (4 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(
-	   Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
-	button_zoom.set_size(but_w(), but_h());
+	button_ships.set_pos(
+	   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+	button_ships.set_size(but_w(), but_h());
+	if (rows == 3) {
+		button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
+		button_zoom.set_size(view_.get_w(), but_h());
+	} else {
+		button_zoom.set_pos(
+		   Vector2i(but_w() * (6 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+		button_zoom.set_size(but_w(), but_h());
+	}
 	button_zoom.set_enabled(view_.can_zoom());
 
 	move_inside_parent();
@@ -269,6 +291,7 @@ void MiniMap::update_button_permpressed() {
 	button_flags.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Flag);
 	button_roads.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Road);
 	button_bldns.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Building);
+	button_ships.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Ship);
 	button_zoom.set_perm_pressed(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
 }
 
