@@ -223,6 +223,7 @@ void Game::postload_addons_before_loading() {
 	}
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
+	mutable_descriptions()->ensure_tribes_are_registered();
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
