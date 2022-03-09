@@ -224,6 +224,7 @@ void Game::postload_addons_before_loading() {
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
 	mutable_descriptions()->ensure_tribes_are_registered();
+	postload_addons();
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
@@ -329,6 +330,9 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
+	postload_addons();
+	did_postload_addons_before_loading_ = true;
+
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
@@ -356,9 +360,6 @@ void Game::init_newgame(const GameSettings& settings) {
 		get_player(shared.at(n).shared_in)
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
-
-	postload_addons();
-	did_postload_addons_before_loading_ = true;
 
 	if (!settings.mapfilename.empty()) {
 		assert(maploader);
