@@ -204,7 +204,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_image_cache->get("images/wui/minimap/button_bldns.png"),
+                  g_image_cache->get("images/wui/ship/ship_scout_se.png"),
                   _("Ships"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -313,7 +313,7 @@ bool MiniMap::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return true;
 }
 
-constexpr uint16_t kCurrentPacketVersion = 1;
+constexpr uint16_t kCurrentPacketVersion = 2;
 UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
