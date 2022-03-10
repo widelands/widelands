@@ -385,7 +385,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 }
 
 /// updates a ships tasks in expedition mode
-void Ship::ship_update_expedition(Game& game, Bob::State&) {
+void Ship::ship_update_expedition(Game& game, Bob::State& /* state */) {
 	Map* map = game.mutable_map();
 
 	assert(expedition_);
@@ -605,25 +605,24 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 			start_task_idle(game, descr().main_animation(), kShipInterval);
 			return;
-		} else {  // scouting towards a specific direction
-			if (exp_dir_swimmable(expedition_->scouting_direction)) {
-				// the scouting direction is still free to move
-				state.ivar1 = 1;
-				start_task_move(game, expedition_->scouting_direction, descr().get_sail_anims(), false);
-				return;
-			}
-			// coast reached
-			set_ship_state_and_notify(
-			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-			start_task_idle(game, descr().main_animation(), kShipInterval);
-			// Send a message to the player, that a new coast was reached
-			send_message(game,
-			             /** TRANSLATORS: A ship has discovered land */
-			             _("Land Ahoy!"), _("Coast Reached"),
-			             _("An expedition ship reached a coast and is waiting for further commands."),
-			             "images/wui/ship/ship_scout_ne.png");
+		}  // scouting towards a specific direction
+		if (exp_dir_swimmable(expedition_->scouting_direction)) {
+			// the scouting direction is still free to move
+			state.ivar1 = 1;
+			start_task_move(game, expedition_->scouting_direction, descr().get_sail_anims(), false);
 			return;
 		}
+		// coast reached
+		set_ship_state_and_notify(
+		   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+		start_task_idle(game, descr().main_animation(), kShipInterval);
+		// Send a message to the player, that a new coast was reached
+		send_message(game,
+		             /** TRANSLATORS: A ship has discovered land */
+		             _("Land Ahoy!"), _("Coast Reached"),
+		             _("An expedition ship reached a coast and is waiting for further commands."),
+		             "images/wui/ship/ship_scout_ne.png");
+		return;
 	}
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
@@ -862,7 +861,7 @@ void Ship::start_task_expedition(Game& game) {
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scouting_direction(Game&, WalkingDir scouting_direction) {
+void Ship::exp_scouting_direction(Game& /* game */, WalkingDir scouting_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);
@@ -907,7 +906,7 @@ void Ship::exp_construct_port(Game& game, const Coords& c) {
 /// Initializes / changes the direction the island exploration in @arg island_explore_direction
 /// direction
 /// @note only called via player command
-void Ship::exp_explore_island(Game&, IslandExploreDirection island_explore_direction) {
+void Ship::exp_explore_island(Game& /* game */, IslandExploreDirection island_explore_direction) {
 	assert(expedition_);
 	set_ship_state_and_notify(
 	   ShipStates::kExpeditionScouting, NoteShip::Action::kDestinationChanged);

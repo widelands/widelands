@@ -121,7 +121,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		}
 	});
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
+	   [this](const GraphicResolutionChanged& /* note */) { layout(); });
 
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.

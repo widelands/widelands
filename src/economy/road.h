@@ -76,7 +76,7 @@ struct Road : public RoadBase {
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
 	void add_to_wallet(int32_t sum);
-	void pay_for_road(Game& game, uint8_t wares_count);
+	void pay_for_road(Game& game, uint8_t queue_length);
 	void pay_for_building();
 
 	void set_economy(Economy*, WareWorker) override;

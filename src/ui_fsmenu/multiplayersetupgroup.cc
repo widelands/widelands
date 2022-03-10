@@ -41,7 +41,7 @@ constexpr int kPadding = 4;
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup(UI::Panel* const grand_parent,
 	                       UI::Panel* const parent,
-	                       int32_t const,
+	                       int32_t const /* w */,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
@@ -164,7 +164,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 /// Holds the dropdown menus for a player slot
 struct MultiPlayerPlayerGroup : public UI::Box {
 	MultiPlayerPlayerGroup(UI::Panel* const parent,
-	                       int32_t const,
+	                       int32_t const /* w */,
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
@@ -647,8 +647,8 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const launchgame,
                                              UI::Panel* const parent,
                                              int32_t const x,
                                              int32_t const y,
-                                             int32_t const,
-                                             int32_t const,
+                                             int32_t const /* w */,
+                                             int32_t const /* h */,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, x, y, UI::Box::Horizontal),

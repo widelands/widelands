@@ -31,7 +31,7 @@ constexpr uint16_t kCurrentPacketVersion = 1;
 void MapNodeOwnershipPacket::read(FileSystem& fs,
                                   EditorGameBase& egbase,
                                   bool const skip,
-                                  MapObjectLoader&)
+                                  MapObjectLoader& /* mol */)
 
 {
 	if (skip) {
@@ -64,7 +64,9 @@ void MapNodeOwnershipPacket::read(FileSystem& fs,
 	}
 }
 
-void MapNodeOwnershipPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapNodeOwnershipPacket::write(FileSystem& fs,
+                                   EditorGameBase& egbase,
+                                   MapObjectSaver& /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
