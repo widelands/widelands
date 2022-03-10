@@ -411,6 +411,51 @@ maletus_defeated = {
    }
 }
 
+maletus_defeated_2 = {
+   {
+      title = _("Empire Defeated"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+   },
+   {
+      title = _("Jundlina Cheers"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
+   }
+}
+
+princess_back = {
+   {
+      title = _("Empire Defeated"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+   },
+   {
+      title = _("Jundlina Cheers"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
+   }
+}
+
+victory = {
+   {
+      allow_next_scenario = true,
+      title = _("Jundlina is Relieved"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[Praise Satul, we have founded a new home. I deeply regret I was weak in my belief. May Satul guide me better in the future.]])
+         .. paragraphdivider() ..
+         -- TRANSLATORS: Jundlina
+         _([[Now it is time to celebrate but I expect we can’t relax long. We need to build up our society and our capability to explore the seas again.]]))
+         .. objective_text(_("Congratulations"),
+      _([[You have won this mission. Continue with the next one or keep playing for as long as you like.]]))
+   }
+}
+
 tribute = {
    {
       title = _("Tribute Demand"),
