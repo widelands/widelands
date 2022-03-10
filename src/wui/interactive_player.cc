@@ -603,7 +603,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 						}
 					}
 				}
-                                
+
                                 const auto* overlay = get_buildhelp_overlay(caps);
 				if (overlay) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
@@ -627,7 +627,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                                 blit_field_overlay(dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2),
                                                                    scale, opacity);
                                         }
-                                        
+
                                 }
 			}
 
