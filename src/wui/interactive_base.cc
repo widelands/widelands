@@ -307,18 +307,21 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 	switch (entry) {
 	case MapviewMenuEntry::kMinimap: {
 		toggle_minimap();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kDecreaseZoom: {
 		map_view()->decrease_zoom();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kIncreaseZoom: {
 		map_view()->increase_zoom();
+		mapviewmenu_.toggle();
 	} break;
 	case MapviewMenuEntry::kResetZoom: {
 		map_view()->reset_zoom();
+		mapviewmenu_.toggle();
 	} break;
 	}
-	mapviewmenu_.close();
 }
 
 const InteractiveBase::BuildhelpOverlay*
@@ -680,17 +683,17 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-                              Widelands::RoadSegment::kNormal :
+				                  Widelands::RoadSegment::kNormal :
                               Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kNormal :
                                Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
+				                   Widelands::RoadSegment::kNormal :
                                Widelands::RoadSegment::kWaterway;
 				break;
 			default:
@@ -1023,7 +1026,7 @@ void InteractiveBase::start_build_road(Coords road_start,
 
 	road_building_add_overlay();
 	set_sel_picture(g_image_cache->get(t == RoadBuildingType::kWaterway ?
-                                         "images/ui_basic/fsel_waterwaybuilding.png" :
+	                                      "images/ui_basic/fsel_waterwaybuilding.png" :
                                          "images/ui_basic/fsel_roadbuilding.png"));
 
 	if (t == RoadBuildingType::kWaterway) {
@@ -1294,7 +1297,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		               kSoundDistanceDivisor;
 
 		distance = (note.priority == kFxMaximumPriority) ?
-                    (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
+		              (math::clamp(distance, 0, kSoundMaxDistance) / 2) :
                     distance;
 
 		if (distance < kSoundMaxDistance) {
