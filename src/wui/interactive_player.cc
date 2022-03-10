@@ -622,7 +622,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                         if (overlay != nullptr) {
                                                 blit_field_overlay(dst, *f,
                                                                    pic, Vector2i(0, overlay->hotspot.y - pic->height() / 2),
-                                                                   scale * 0.8, opacity);
+                                                                   scale * 0.8f, opacity);
                                         } else {
                                                 blit_field_overlay(dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2),
                                                                    scale, opacity);
