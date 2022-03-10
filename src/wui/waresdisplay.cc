@@ -81,7 +81,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	curware_.set_text(_("Stock"));
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { recalc_desired_size(true); });
+	   [this](const GraphicResolutionChanged& /* note */) { recalc_desired_size(true); });
 
 	recalc_desired_size(false);
 }
@@ -141,7 +141,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	}
 }
 
-bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
+bool AbstractWaresDisplay::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
 
 	curware_.set_fixed_width(get_inner_w());
@@ -516,7 +517,7 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
 }
 
 std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
-	const std::string text = WaresDisplay::info_for_ware(di);
+	std::string text = WaresDisplay::info_for_ware(di);
 	if (solid_icon_backgrounds_) {
 		return text;
 	}

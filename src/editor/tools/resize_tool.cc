@@ -39,10 +39,11 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
 	return 0;
 }
 
-int32_t EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>&,
-                                           EditorInteractive& eia,
-                                           EditorActionArgs* args,
-                                           Widelands::Map* map) {
+int32_t
+EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* node */,
+                                   EditorInteractive& eia,
+                                   EditorActionArgs* args,
+                                   Widelands::Map* map) {
 	map->set_to(eia.egbase(), args->resized);
 
 	// fix for issue #3754 (same as above)

@@ -243,7 +243,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 #endif
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
-	   [this](const NoteMapOptions&) { rebuild_statistics_menu(); });
+	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
@@ -663,7 +663,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
-                                      const Widelands::Message& message) {
+                                      const Widelands::Message& message) const {
 	// Fix a race condition that happens only in the testsuite
 	MutexLock m(MutexLock::ID::kObjects);
 

@@ -96,7 +96,7 @@ bool PortDock::get_passable() const {
 	return true;
 }
 
-PortDock::PositionList PortDock::get_positions(const EditorGameBase&) const {
+PortDock::PositionList PortDock::get_positions(const EditorGameBase& /* egbase */) const {
 	return dockpoints_;
 }
 
@@ -241,7 +241,7 @@ void PortDock::add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours) {
  * The given @p ware enters the dock, waiting to be transported away.
  */
 void PortDock::add_shippingitem(Game& game, WareInstance& ware) {
-	waiting_.push_back(ShippingItem(ware));
+	waiting_.emplace_back(ware);
 	ware.set_location(game, this);
 	ware.update(game);
 	fleet_->update(game);
@@ -265,7 +265,7 @@ void PortDock::update_shippingitem(Game& game, const WareInstance& ware) {
  * The given @p worker enters the dock, waiting to be transported away.
  */
 void PortDock::add_shippingitem(Game& game, Worker& worker) {
-	waiting_.push_back(ShippingItem(worker));
+	waiting_.emplace_back(worker);
 	worker.set_location(this);
 	update_shippingitem(game, worker);
 	fleet_->update(game);

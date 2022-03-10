@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-19 02:42+0000\n"
-"PO-Revision-Date: 2022-02-13 09:03+0000\n"
+"POT-Creation-Date: 2022-03-07 03:01+0000\n"
+"PO-Revision-Date: 2022-02-26 19:31+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1701,7 +1701,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Steenwarkeree"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1722,7 +1721,6 @@ msgstr "eene Schüppe to maken"
 msgid "making a felling ax"
 msgstr "eene Boomslager-Ext to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1747,7 +1745,6 @@ msgstr "eene Mest to maken"
 msgid "making kitchen tools"
 msgstr "Besteck to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -5257,6 +5254,7 @@ msgstr "Balsaboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -7566,7 +7564,7 @@ msgstr "Augustus"
 #: ../../data/tribes/ships/empire/init.lua:46
 msgctxt "shipname"
 msgid "Azurea Sea"
-msgstr "See"
+msgstr "Azuur-See"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:48
@@ -7674,25 +7672,25 @@ msgstr "Gallus"
 #: ../../data/tribes/ships/empire/init.lua:82
 msgctxt "shipname"
 msgid "Ianus"
-msgstr "Ianus"
+msgstr "Janus"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:84
 msgctxt "shipname"
 msgid "Iulius Caesar"
-msgstr "Iulius Caesar"
+msgstr "Julius Caesar"
 
 #. TRANSLATORS: This Empire ship is named after a Roman goddess
 #: ../../data/tribes/ships/empire/init.lua:86
 msgctxt "shipname"
 msgid "Iuno"
-msgstr "Iuno"
+msgstr "Juno"
 
 #. TRANSLATORS: This Empire ship is named after a Roman god
 #: ../../data/tribes/ships/empire/init.lua:88
 msgctxt "shipname"
 msgid "Iupiter"
-msgstr "Iupiter"
+msgstr "Jupiter"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:90
@@ -7836,7 +7834,7 @@ msgstr "Thyrrenia"
 #: ../../data/tribes/ships/empire/init.lua:136
 msgctxt "shipname"
 msgid "Tiberius"
-msgstr "Tiberius"
+msgstr "Tiber"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:138
@@ -7848,7 +7846,7 @@ msgstr "Titus"
 #: ../../data/tribes/ships/empire/init.lua:140
 msgctxt "shipname"
 msgid "Traianus"
-msgstr "Traianus"
+msgstr "Trajan"
 
 #. TRANSLATORS: This is an Empire ship name
 #: ../../data/tribes/ships/empire/init.lua:142

@@ -38,6 +38,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const y,
                                  uint32_t const w,
                                  uint32_t const h,
+                                 bool modal,
                                  bool allow_next_scenario)
    : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
      main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
@@ -109,6 +110,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	} else {  // Normal message box, which has only the OK button
 		next_scenario_.set_visible(false);
 		main_menu_.set_visible(false);
+		button_box_.set_visible(modal);
 	}
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -119,7 +121,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	move_inside_parent();
 	textarea_.focus();
 
-	if (!is_modal()) {
+	if (!modal) {
 		resume_game();
 	}
 
@@ -160,7 +162,7 @@ void StoryMessageBox::clicked_main_menu() {
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
-	if (btn == SDL_BUTTON_RIGHT) {
+	if (btn == SDL_BUTTON_RIGHT && is_modal()) {
 		return true;
 	}
 

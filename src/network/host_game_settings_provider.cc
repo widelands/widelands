@@ -37,7 +37,8 @@ bool HostGameSettingsProvider::can_change_player_state(uint8_t const number) {
 	}
 	if (host_settings.savegame) {
 		return host_settings.players.at(number).state != PlayerSettings::State::kClosed;
-	} else if (host_settings.scenario) {
+	}
+	if (host_settings.scenario) {
 		return host_settings.players.at(number).state != PlayerSettings::State::kComputer;
 	}
 	return true;

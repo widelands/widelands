@@ -19,6 +19,7 @@
 #ifndef WL_UI_FSMENU_MAPSELECT_H
 #define WL_UI_FSMENU_MAPSELECT_H
 
+#include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -27,7 +28,6 @@
 #include "wui/maptable.h"
 
 using Widelands::Map;
-class GameController;
 struct GameSettingsProvider;
 
 namespace FsMenu {
@@ -71,6 +71,7 @@ private:
 
 	UI::Box checkboxes_;
 
+	Widelands::Game game_for_preview_;
 	MapTable table_;
 	MapDetails map_details_;
 

@@ -33,9 +33,8 @@ int get_ip_version(const asio::ip::tcp::acceptor& acceptor) {
 	assert(acceptor.is_open());
 	if (acceptor.local_endpoint().protocol() == asio::ip::tcp::v4()) {
 		return 4;
-	} else {
-		return 6;
 	}
+	return 6;
 }
 }  // namespace
 
@@ -43,10 +42,9 @@ std::unique_ptr<NetHost> NetHost::listen(const uint16_t port) {
 	std::unique_ptr<NetHost> ptr(new NetHost(port));
 	if (ptr->is_listening()) {
 		return ptr;
-	} else {
-		ptr.reset();
-		return ptr;
 	}
+	ptr.reset();
+	return ptr;
 }
 
 NetHost::~NetHost() {
@@ -147,7 +145,9 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet, NetPriority 
 	clients_.at(id)->send(priority, packet);
 }
 
-void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority) {
+void NetHost::send(const std::vector<ConnectionId>& ids,
+                   const SendPacket& packet,
+                   NetPriority /*priority*/) {
 	for (ConnectionId id : ids) {
 		send(id, packet);
 	}

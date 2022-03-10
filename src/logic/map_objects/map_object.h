@@ -112,7 +112,7 @@ protected:
 
 	/// Sets the directional animations in 'anims' with the animations
 	/// '&lt;basename&gt;_(ne|e|se|sw|w|nw)'.
-	void assign_directional_animation(DirAnimations* anims, const std::string& basename);
+	void assign_directional_animation(DirAnimations* anims, const std::string& basename) const;
 
 private:
 	void add_animations(const LuaTable& table,
@@ -120,7 +120,7 @@ private:
 	                    Animation::Type anim_type);
 
 	/// Throws an exception if the MapObjectDescr has no representative image
-	void check_representative_image();
+	void check_representative_image() const;
 
 	using Anims = std::map<std::string, uint32_t>;
 

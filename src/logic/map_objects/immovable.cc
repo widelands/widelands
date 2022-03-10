@@ -330,7 +330,7 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      growth_delay_(0) {
 }
 
-BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) const {
+BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase& /* egbase */) const {
 	PositionList rv;
 
 	rv.push_back(position_);
@@ -895,7 +895,7 @@ void PlayerImmovable::cleanup(EditorGameBase& egbase) {
  * We are the destination of the given ware's transfer, which is not associated
  * with any request.
  */
-void PlayerImmovable::receive_ware(Game&, DescriptionIndex ware) {
+void PlayerImmovable::receive_ware(Game& /* game */, DescriptionIndex ware) {
 	throw wexception("MO(%u): Received a ware(%u), do not know what to do with it", serial(), ware);
 }
 
@@ -903,7 +903,7 @@ void PlayerImmovable::receive_ware(Game&, DescriptionIndex ware) {
  * We are the destination of the given worker's transfer, which is not
  * associated with any request.
  */
-void PlayerImmovable::receive_worker(Game&, Worker& worker) {
+void PlayerImmovable::receive_worker(Game& /* game */, Worker& worker) {
 	throw wexception(
 	   "MO(%u): Received a worker(%u), do not know what to do with it", serial(), worker.serial());
 }

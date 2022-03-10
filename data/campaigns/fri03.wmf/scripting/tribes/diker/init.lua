@@ -2,7 +2,7 @@ dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri03.wmf")
 
-descriptions:new_worker_type {
+wl.Descriptions():new_worker_type {
    name = "frisians_diker",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Diker"),

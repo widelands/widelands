@@ -28,7 +28,7 @@
 --
 --    push_textdomain("tribes")
 --
---    descriptions:new_carrier_type {
+--    wl.Descriptions():new_carrier_type {
 --       name = "atlanteans_carrier",
 --       descname = pgettext("atlanteans_worker", "Carrier"),
 --       animation_directory = dirname,
@@ -70,7 +70,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_carrier_type {
+wl.Descriptions():new_carrier_type {
    name = "atlanteans_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Carrier"),

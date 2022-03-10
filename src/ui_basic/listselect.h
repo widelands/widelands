@@ -62,7 +62,7 @@ struct BaseListselect : public Panel {
 	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	 */
 	void add(const std::string& name,
-	         uint32_t value,
+	         uint32_t entry,
 	         const Image* pic,
 	         const bool select_this,
 	         const std::string& tooltip_text,
@@ -70,7 +70,7 @@ struct BaseListselect : public Panel {
 	         const unsigned indent);
 
 	void remove(uint32_t);
-	void remove(const char* name);
+	void remove(const char* str);
 
 	uint32_t size() const {
 		return entry_records_.size();

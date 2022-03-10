@@ -113,17 +113,17 @@ struct MousewheelHandlerOptions {
 		}
 	}
 
-	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) {
+	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		return (((y && current_sign_y_) || (x && current_sign_x_)) &&
 		        matches_keymod(current_keymod_, modstate));
 	}
-	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) {
+	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return (x * current_sign_x_ + y * current_sign_y_);
 		}
 		return 0;
 	}
-	Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) {
+	Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return Vector2i(x * current_sign_x_, y * current_sign_y_);
 		}

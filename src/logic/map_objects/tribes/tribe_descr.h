@@ -190,7 +190,7 @@ public:
 	}
 
 	// Read helptext from Lua table
-	void load_helptexts(MapObjectDescr*, const LuaTable&);
+	void load_helptexts(MapObjectDescr* descr, const LuaTable& table) const;
 
 	// Make sure that everything is there and that dependencies are calculated.
 	// This needs to be called exactly once during postloading.
@@ -206,12 +206,13 @@ private:
 	void load_buildings(const LuaTable& table, Descriptions& descriptions);
 
 	// Helper function for adding a special worker type (carriers etc.)
-	DescriptionIndex add_special_worker(const std::string& workername, Descriptions& descriptions);
+	DescriptionIndex add_special_worker(const std::string& workername,
+	                                    Descriptions& descriptions) const;
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname,
-	                                      Descriptions& descriptions);
+	                                      Descriptions& descriptions) const;
 	// Helper function to calculate trainingsites proportions for the AI
-	void calculate_trainingsites_proportions(const Descriptions& descriptions);
+	void calculate_trainingsites_proportions(const Descriptions& descriptions) const;
 
 	void process_productionsites(Descriptions& descriptions);
 
