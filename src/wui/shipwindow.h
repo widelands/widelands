@@ -35,7 +35,7 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
+	ShipWindow(InteractiveBase& ib, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kShipWindow;

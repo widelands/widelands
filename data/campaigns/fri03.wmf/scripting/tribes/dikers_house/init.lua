@@ -2,7 +2,7 @@ dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri03.wmf")
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "frisians_dikers_house",
    descname = pgettext("frisians_building", "Diker’s House"),
    icon = dirname .. "menu.png",

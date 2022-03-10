@@ -85,7 +85,7 @@ CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
    : Command(dt), callback_(std::move(cb)) {
 }
 
-void CmdNetCheckSync::execute(Widelands::Game&) {
+void CmdNetCheckSync::execute(Widelands::Game& /* game */) {
 	callback_();
 }
 

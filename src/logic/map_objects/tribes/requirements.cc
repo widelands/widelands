@@ -185,13 +185,16 @@ bool RequireAttribute::check(const MapObject& obj) const {
 	return value >= min && value <= max;
 }
 
-void RequireAttribute::write(FileWrite& fw, EditorGameBase&, MapObjectSaver&) const {
+void RequireAttribute::write(FileWrite& fw,
+                             EditorGameBase& /* egbase */,
+                             MapObjectSaver& /* mos */) const {
 	fw.unsigned_8(static_cast<uint8_t>(at));
 	fw.signed_32(min);
 	fw.signed_32(max);
 }
 
-static Requirements read_attribute(FileRead& fr, EditorGameBase&, MapObjectLoader&) {
+static Requirements
+read_attribute(FileRead& fr, EditorGameBase& /* egbase */, MapObjectLoader& /* mol */) {
 	// Get the training attribute and check if it is a valid enum member
 	// We use a temp value, because the static_cast to the enum might be undefined.
 	uint8_t temp_at = fr.unsigned_8();

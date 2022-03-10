@@ -234,7 +234,7 @@ public:
 	          float scale,
 	          RenderTarget* dst) override;
 
-	void switch_program(Game& game, const std::string& programname);
+	void switch_program(Game& game, const std::string& program_name);
 	bool construct_ware(Game& game, DescriptionIndex index);
 	bool construct_remaining_buildcost(Game& game, Buildcost* buildcost);
 

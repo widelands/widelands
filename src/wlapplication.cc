@@ -126,7 +126,7 @@ namespace {
  * Shut the hardware down: stop graphics mode, stop sound handler
  */
 #ifndef _WIN32
-void terminate(int) {
+void terminate(int /*unused*/) {
 	// The logger can already be shut down, so we use cout
 	std::cout
 	   << "Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
@@ -184,7 +184,9 @@ bool extract_creation_day(const std::string& path, tm* tfile) {
 	const std::string filename = FileSystem::fs_filename(path.c_str());
 	memset(tfile, 0, sizeof(tm));
 
-	int64_t day, month, year;
+	int64_t day;
+	int64_t month;
+	int64_t year;
 	if (!to_long(filename.substr(8, 2), &day)) {
 		return false;
 	}
@@ -347,8 +349,7 @@ WLApplication* WLApplication::get(int const argc, char const** argv) {
  * \param argv Array of command line arguments
  */
 WLApplication::WLApplication(int const argc, char const* const* const argv)
-   : commandline_(std::map<std::string, std::string>()),
-     game_type_(GameType::kNone),
+   : game_type_(GameType::kNone),
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
@@ -508,8 +509,8 @@ void WLApplication::initialize_g_addons() {
 					if (g_fs->file_exists(path)) {
 						try {
 							found.insert(name);
-							AddOns::g_addons.push_back(std::make_pair(
-							   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
+							AddOns::g_addons.emplace_back(
+							   AddOns::preload_addon(name), substring.substr(colonpos) == ":true");
 						} catch (const std::exception& e) {
 							log_warn("Not loading add-on '%s' (%s)", name.c_str(), e.what());
 						}
@@ -528,7 +529,7 @@ void WLApplication::initialize_g_addons() {
 			if (!found.count(addon_name) &&
 			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
 				try {
-					AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
+					AddOns::g_addons.emplace_back(AddOns::preload_addon(addon_name), false);
 				} catch (const std::exception& e) {
 					log_warn("Not loading add-on '%s' (%s)", addon_name.c_str(), e.what());
 				}
@@ -549,7 +550,8 @@ static void init_one_player_from_template(unsigned p,
 		}
 		settings->set_player_state(p, PlayerSettings::State::kClosed);
 		return;  // No need to configure closed player
-	} else if (human) {
+	}
+	if (human) {
 		settings->set_player_state(p, PlayerSettings::State::kHuman);
 	} else {
 		std::string ai = player_section.get_string("ai", "normal");
@@ -627,7 +629,7 @@ void WLApplication::init_and_run_game_from_template() {
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first->internal_name == name) {
 				found = true;
-				new_g_addons.push_back(std::make_pair(pair.first, true));
+				new_g_addons.emplace_back(pair.first, true);
 				break;
 			}
 		}
@@ -756,10 +758,12 @@ void WLApplication::run() {
 		}
 	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;
-		std::string title, message;
+		std::string title;
+		std::string message;
 		try {
 			if (game_type_ == GameType::kReplay) {
-				std::string map_theme, map_bg;
+				std::string map_theme;
+				std::string map_bg;
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
 				game.set_write_replay(false);
@@ -1236,18 +1240,18 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 				                     kSavegameExtension)) {
 					commandline_["loadgame"] = opt;
 					continue;
-				} else if (opt.size() > kReplayExtension.size() &&
-				           0 == opt.compare(opt.size() - kReplayExtension.size(),
-				                            kReplayExtension.size(), kReplayExtension)) {
+				}
+				if (opt.size() > kReplayExtension.size() &&
+				    0 == opt.compare(opt.size() - kReplayExtension.size(), kReplayExtension.size(),
+				                     kReplayExtension)) {
 					commandline_["replay"] = opt;
 					continue;
 				}
 			}
 			commandline_["error"] = opt;
 			break;
-		} else {
-			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
+		opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 
 		// Look if this option has a value
 		std::string::size_type const pos = opt.find('=');
@@ -1379,9 +1383,8 @@ void WLApplication::handle_commandline_parameters() {
 					if (err.empty()) {
 						found = true;
 						break;
-					} else {
-						wrong_candidates.emplace_back(datadir_, err);
 					}
+					wrong_candidates.emplace_back(datadir_, err);
 				}
 			}
 		}
@@ -1557,7 +1560,8 @@ void WLApplication::handle_commandline_parameters() {
 	if (exclusives > 2) {
 		throw ParameterError(CmdLineVerbosity::None,
 		                     _("--xres/--yres, --maximized and --fullscreen can not be combined"));
-	} else if (exclusives > 0) {
+	}
+	if (exclusives > 0) {
 		set_config_bool("maximized", false);
 		set_config_bool("fullscreen", false);
 	}

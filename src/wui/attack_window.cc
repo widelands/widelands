@@ -57,7 +57,7 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
-	target_bld.removed.connect([serial](unsigned) {
+	target_bld.removed.connect([serial](unsigned /* index */) {
 		auto it = living_attack_windows_.find(serial);
 		if (it != living_attack_windows_.end()) {
 			it->second->die();
@@ -431,12 +431,12 @@ bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int
 	return true;
 }
 
-void AttackWindow::ListOfSoldiers::handle_mousein(bool) {
+void AttackWindow::ListOfSoldiers::handle_mousein(bool /*inside*/) {
 	set_tooltip(std::string());
 }
 
 bool AttackWindow::ListOfSoldiers::handle_mousemove(
-   uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
+   uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
 		                   soldier->get_health_level(), soldier->descr().get_max_health_level(),
@@ -553,10 +553,10 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 			}
 
 			return *a;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Attack Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Attack Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("attack window: %s", e.what());
 	}
