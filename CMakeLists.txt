@@ -548,15 +548,16 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
-
-install(
-  DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/locale/
-  DESTINATION ${WL_INSTALL_DATADIR}/locale
-  CONFIGURATIONS Debug;Release;None
-  COMPONENT CoreLanguageFiles
-)
+if(OPTION_BUILD_TRANSLATIONS)
+  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
+  install(
+    DIRECTORY
+      ${CMAKE_CURRENT_BINARY_DIR}/locale/
+    DESTINATION ${WL_INSTALL_DATADIR}/locale
+    CONFIGURATIONS Debug;Release;None
+    COMPONENT CoreLanguageFiles
+  )
+endif(OPTION_BUILD_TRANSLATIONS)
 
 if (UNIX AND NOT APPLE)
   add_subdirectory(xdg)
