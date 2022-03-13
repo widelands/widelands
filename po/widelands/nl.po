@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-04 02:56+0000\n"
+"POT-Creation-Date: 2022-03-10 02:58+0000\n"
 "PO-Revision-Date: 2022-02-16 12:41+0000\n"
 "Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
@@ -293,7 +293,7 @@ msgstr "dec."
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
@@ -903,7 +903,7 @@ msgstr "Beeldscherm"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "OK"
 
@@ -1439,8 +1439,8 @@ msgid ""
 "location."
 msgstr "Selecteer het nieuwe formaat van de kaart, klik dan op de kaart om deze te splitsen op de gewenste locatie. Wanneer de kaart wordt vergroot, zullen nieuwe kolommen/rijen worden ingevoegd ten oosten/zuiden van het geselcteerde punt. Wanneer de kaart wordt verkleind, wordt het gewenste aantal kolommen/rijen verwijderd ten oosten/zuiden van de splitsingslocatie."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -4845,7 +4845,7 @@ msgstr "Kies een Veldtocht"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "Keer terug naar het hoofdmenu"
 
@@ -8123,8 +8123,8 @@ msgstr "Spel Pauzeren"
 msgid "Statistics"
 msgstr "Statistieken"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Zeevaart"
@@ -8931,15 +8931,15 @@ msgstr "Goederen in magazijnen"
 msgid "Workers in warehouses"
 msgstr "Werkers in magazijnen"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "Volgende Missie"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "Begin nu met de volgende missie"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "Ga door met het spelen van deze missie"
 

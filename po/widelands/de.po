@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-04 02:56+0000\n"
+"POT-Creation-Date: 2022-03-10 02:58+0000\n"
 "PO-Revision-Date: 2022-02-17 16:18+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -314,7 +314,7 @@ msgstr "Dez"
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
@@ -924,7 +924,7 @@ msgstr "Anzeige"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "OK"
 
@@ -1460,8 +1460,8 @@ msgid ""
 "location."
 msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der gewählten Position zu ändern. Wenn die Karte vergrößert wird, werden neue Spalten und Zeilen im Osten und Süden des gewählten Punktes angefügt. Wenn die Karte verkleinert wird, wird die gewünschte Anzahl der Spalten und Zeilen von Osten und Süden des Trennungspunktes gelöscht."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -4866,7 +4866,7 @@ msgstr "Kampagne wählen"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "Zurück zum Hauptmenü"
 
@@ -8144,8 +8144,8 @@ msgstr "Spiel pausieren"
 msgid "Statistics"
 msgstr "Statistiken"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seefahrt"
@@ -8952,15 +8952,15 @@ msgstr "Waren in Lagerhäusern"
 msgid "Workers in warehouses"
 msgstr "Arbeiter in Lagerhäusern"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "Nächste Mission"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "Starte die nächste Mission jetzt"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "Setze die Mission fort"
 
