@@ -538,11 +538,11 @@ int LuaPlayer::message_box(lua_State* L) {
 	if (is_modal) {
 		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(&game, coords, luaL_checkstring(L, 2),
 		                                                        luaL_checkstring(L, 3), posx, posy, w,
-		                                                        h, allow_next_scenario));
+		                                                        h, is_modal, allow_next_scenario));
 		mb->run<UI::Panel::Returncodes>();
 	} else {
 		new StoryMessageBox(&game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy,
-		                    w, h, allow_next_scenario);
+		                    w, h, is_modal, allow_next_scenario);
 	}
 
 	return 1;
@@ -1532,7 +1532,7 @@ int LuaInboxMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) {
+Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) const {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}

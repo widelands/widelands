@@ -110,7 +110,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiPrimary),
+               UI::ButtonStyle::kWuiPrimary,
+               [this](ToolMenuEntry t) { tool_menu_selected(t); }),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -123,7 +124,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    _("Show / Hide"),
                    UI::DropdownType::kPictorialMenu,
                    UI::PanelStyle::kWui,
-                   UI::ButtonStyle::kWuiPrimary),
+                   UI::ButtonStyle::kWuiPrimary,
+                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
@@ -324,6 +326,7 @@ void EditorInteractive::add_tool_menu() {
 	tool_windows_.players.open_window = [this] {
 		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
 	};
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
@@ -783,7 +786,7 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+bool EditorInteractive::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 

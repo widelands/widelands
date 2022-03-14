@@ -381,7 +381,7 @@ bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, co
 }
 
 bool InputQueueDisplay::handle_mousemove(
-   uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
+   uint8_t /*state*/, const int32_t x, const int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
 }
@@ -403,7 +403,8 @@ bool InputQueueDisplay::handle_mousewheel(int32_t x, int32_t y, uint16_t modstat
 				change_desired_fill(change);
 			}
 			return true;
-		} else if (has_priority_) {
+		}
+		if (has_priority_) {
 			// Mouse is over priority or collapse button
 			// Can't just use method from Slider, because of the special
 			// meaning of shift to change all input priorities together.

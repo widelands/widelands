@@ -280,7 +280,7 @@
 --       max_evade = 2,
 --    }
 --
---    descriptions:new_soldier_type {
+--    wl.Descriptions():new_soldier_type {
 --       name = "atlanteans_soldier",
 --       descname = pgettext("atlanteans_worker", "Soldier"),
 --       animation_directory = dirname,
@@ -468,7 +468,7 @@ all_levels_atl = {
    max_evade = 2,
 }
 
-descriptions:new_soldier_type {
+wl.Descriptions():new_soldier_type {
    name = "atlanteans_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Soldier"),

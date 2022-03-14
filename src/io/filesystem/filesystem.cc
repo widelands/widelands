@@ -461,7 +461,7 @@ std::string FileSystem::canonicalize_name(const std::string& path) const {
 				continue;
 			}
 			// Remove double dot and the preceding component (if any)
-			else if (*str == '.' && *(str + 1) == '\0') {
+			if (*str == '.' && *(str + 1) == '\0') {
 				if (i != components.begin()) {
 #ifdef _WIN32
 					// On windows don't remove driveletter in this error condition
@@ -534,9 +534,8 @@ std::string FileSystem::filename_ext(const std::string& f) {
 
 	if (std::string::npos == ext_start) {
 		return "";
-	} else {
-		return f.substr(ext_start);
 	}
+	return f.substr(ext_start);
 }
 
 std::string FileSystem::filename_without_ext(const char* const p) {

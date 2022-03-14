@@ -122,9 +122,9 @@ CoordPath::CoordPath(const Map& map, const Path& path) {
 
 /// After which step does the node appear in this path?
 /// \return -1 if node is not part of this path.
-int32_t CoordPath::get_index(const Coords& c) const {
+int32_t CoordPath::get_index(const Coords& field) const {
 	for (uint32_t i = 0; i < coords_.size(); ++i) {
-		if (coords_[i] == c) {
+		if (coords_[i] == field) {
 			return i;
 		}
 	}

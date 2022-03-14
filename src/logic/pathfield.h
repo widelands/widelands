@@ -78,7 +78,7 @@ struct PathfieldManager {
 	std::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(const std::shared_ptr<Pathfields>& pf);
+	void clear(const std::shared_ptr<Pathfields>& pf) const;
 
 	using List = std::vector<std::shared_ptr<Pathfields>>;
 

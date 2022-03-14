@@ -49,14 +49,14 @@ protected:
 private:
 	void layout() override;
 
-	void game_selected(uint32_t);
-	void game_doubleclicked(uint32_t);
+	void game_selected(uint32_t index);
+	void game_doubleclicked(uint32_t index);
 
 	static void discovery_callback(int32_t, NetOpenGame const*, void*);
 
-	void game_opened(NetOpenGame const*);
-	void game_closed(NetOpenGame const*);
-	void game_updated(NetOpenGame const*);
+	void game_opened(NetOpenGame const* game);
+	void game_closed(NetOpenGame const* game);
+	void game_updated(NetOpenGame const* game);
 
 	void update_game_info(UI::Table<const NetOpenGame* const>::EntryRecord&, const NetGameInfo&);
 

@@ -72,7 +72,7 @@ private:
 
 	void cb_changed_to(int32_t);
 	void radiogroup_changed(int32_t);
-	void show_or_hide_plot(int32_t playernumber, bool show);
+	void show_or_hide_plot(int32_t id, bool show);
 	void save_state_to_registry();
 };
 

@@ -4,7 +4,7 @@ dirname = path.dirname (__file__)
 
 include(dirname .. "../terrain_affinity.lua")
 
-descriptions:new_immovable_type {
+wl.Descriptions():new_immovable_type {
    name = "berry_bush_stink_tree_ripe",
    descname = _("Stink Shepherd’s Tree (ripe)"),
    size = "small",

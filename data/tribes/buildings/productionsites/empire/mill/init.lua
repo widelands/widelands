@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "empire_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Mill"),
@@ -29,8 +29,8 @@ descriptions:new_productionsite_type {
 
    spritesheets = {
       working = {
-         fps = 25,
-         frames = 20,
+         fps = 15,
+         frames = 19,
          rows = 5,
          columns = 4,
          hotspot = { 41, 87 }

@@ -84,16 +84,16 @@ void FieldInfoWindow::add_caps_info(std::string& buf) const {
 
 	case Widelands::BUILDCAPS_SMALL: {
 		/** TRANSLATORS: Editor terrain property: small building plot */
-		caps_strings.push_back(_("small"));
+		caps_strings.emplace_back(_("small"));
 	} break;
 
 	case Widelands::BUILDCAPS_MEDIUM: {
 		/** TRANSLATORS: Editor terrain property: medium building plot */
-		caps_strings.push_back(_("medium"));
+		caps_strings.emplace_back(_("medium"));
 	} break;
 	case Widelands::BUILDCAPS_BIG: {
 		/** TRANSLATORS: Editor terrain property: big building plot */
-		caps_strings.push_back(_("big"));
+		caps_strings.emplace_back(_("big"));
 	} break;
 	default:
 		break;
@@ -101,23 +101,23 @@ void FieldInfoWindow::add_caps_info(std::string& buf) const {
 
 	if (caps & Widelands::BUILDCAPS_FLAG) {
 		/** TRANSLATORS: Editor terrain property: space for a flag */
-		caps_strings.push_back(_("flag"));
+		caps_strings.emplace_back(_("flag"));
 	}
 	if (caps & Widelands::BUILDCAPS_MINE) {
 		/** TRANSLATORS: Editor terrain property: mine building plot */
-		caps_strings.push_back(_("mine"));
+		caps_strings.emplace_back(_("mine"));
 	}
 	if (caps & Widelands::BUILDCAPS_PORT) {
 		/** TRANSLATORS: Editor terrain property: port space */
-		caps_strings.push_back(_("port"));
+		caps_strings.emplace_back(_("port"));
 	}
 	if (caps & Widelands::MOVECAPS_WALK) {
 		/** TRANSLATORS: Editor terrain property: units can walk on this terrain */
-		caps_strings.push_back(_("walkable"));
+		caps_strings.emplace_back(_("walkable"));
 	}
 	if (caps & Widelands::MOVECAPS_SWIM) {
 		/** TRANSLATORS: Editor terrain property: units can swim on this terrain (fish, ships) */
-		caps_strings.push_back(_("swimmable"));
+		caps_strings.emplace_back(_("swimmable"));
 	}
 
 	buf += as_listitem(
@@ -145,7 +145,7 @@ void FieldInfoWindow::add_terrain_info(std::string& buf) const {
 
 	std::vector<std::string> terrain_is_strings;
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter->get_types()) {
-		terrain_is_strings.push_back(terrain_type.descname);
+		terrain_is_strings.emplace_back(terrain_type.descname);
 	}
 
 	buf += as_listitem(
