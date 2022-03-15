@@ -609,7 +609,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
 				}
 
-                                // Draw port space hint if a port could be built here, but current situation doesn't allow it.
+                                // Draw port space hint if a port could be built here, but current situation doesn't 
+                                // allow it.
                                 bool has_road = player_field.r_e || player_field.r_sw || player_field.r_se;
                                 bool has_object = (f->fcoords.field->get_immovable() != nullptr);
                                 if ((maxcaps & Widelands::BUILDCAPS_PORT) &&
@@ -619,10 +620,14 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                     !has_object) {
 
                                         const Image* pic = g_image_cache->get("images/wui/overlays/port_hint.png");
-                                        if (overlay != nullptr) {
+                                        if (overlay != nullptr && (caps & Widelands::BUILDCAPS_BUILDINGMASK)) {
                                                 blit_field_overlay(dst, *f,
-                                                                   pic, Vector2i(0, overlay->hotspot.y - pic->height() / 2),
-                                                                   scale * 0.8f, opacity);
+                                                                   pic, Vector2i(0, 0),
+                                                                   scale, opacity);
+                                        } else if (overlay != nullptr && (caps & Widelands::BUILDCAPS_FLAG)) {
+                                                blit_field_overlay(dst, *f,
+                                                                   pic, Vector2i(5, overlay->hotspot.y - pic->height() / 2),
+                                                                   scale, opacity);
                                         } else {
                                                 blit_field_overlay(dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2),
                                                                    scale, opacity);
