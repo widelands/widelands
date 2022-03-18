@@ -447,6 +447,10 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Сир, в результате наших нападений на пиратов они начали объединятся с "
+"пиратами из других племен. Они могут восстановить большую часть своей ранее "
+"утраченной силы. Наши истощающиеся ресурсы могут стать проблемой с таким "
+"могущественным врагом под боком."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -472,6 +476,9 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Сир, после длительного изучения и исследования наши мудрецы наконец-то "
+"расшифровали необычный язык в записях Törver, которые мы нашли в его штабе. "
+"Теперь мы можем строить верфи."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
@@ -483,6 +490,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Сир, один из наших разведчиков был схвачен пиратами и доставлен на их "
+"остров. Он единственный человек, который знает путь через болото к Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -490,6 +499,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Согласно донесениям нашего рыбака, он заперт в укреплении на острове. Нам "
+"следует использовать знания о постройке кораблей, которое мы получили от "
+"Törver, чтобы построить флот и атаковать их позиции."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -501,6 +513,8 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Сир, наши солдаты захватили остров и освободили разведчика. Оказывается, "
+"пираты оставили большое количество золота, пива и оружия на острове."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
