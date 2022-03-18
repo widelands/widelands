@@ -1482,8 +1482,8 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note lore for an atlantean production site: Fisher's House use some local fise song as you like
             lore = pgettext("atlanteans_building", [[‘Take your net and come to the sea<br>]] ..
                                           [[In the early morning the moon ya still see<br>]] ..
-                                          [[Collect ya catch by net or by spear,.<br>]] ..
-                                          [[and don't forget to give Satul his share.']]),
+                                          [[Collect ya catch by net or by spear,<br>]] ..
+                                          [[and don’t forget to give Satul his share.’]]),
             -- TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's House
             lore_author = pgettext("atlanteans_building", "A song from the fishers’ guild")
          }
@@ -1608,7 +1608,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("atlanteans_building", "Will need cornnmeal and blackroot flour"),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
-                                                   "It is more nutritious then that paper-like you find elsewhere. And it is needed for the personal rite "..
+                                                   "It is more nutritious then that paper-like bread you find elsewhere. And it is needed for the personal rite "..
                                                    "of preparing one’s meal. May Satul bless you."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Bakery
             lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild")
@@ -1720,7 +1720,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("atlanteans_building", "Sows and harvests blackroot."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Blackroot Farm
             lore = pgettext("atlanteans_building", "The secret of Atlantean health and strength is hidden in these roots. "..
-                     "It’s not spinach, it’s not a carrot, it’s … a secret"),
+                     "It’s not spinach, it’s not a carrot, it’s … a secret."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Blackroot Farm
             lore_author = pgettext("atlanteans_building", "Blackroot farmer asked by a foreigner"),
             -- TRANSLATORS: Performance helptext for an atlantean production site: Blackroot Farm
@@ -1733,9 +1733,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Spider Farm
             purpose = pgettext("building", "Breeds spiders for silk."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Spider Farm
-            lore = pgettext("atlanteans_building", "No, the spiders are not fed with corn. We feed it to fat grasshoppers, which in turn are digested by our spiders."..
+            lore = pgettext("atlanteans_building", "No, the spiders are not fed with corn. We feed it to fat grasshoppers, which in turn are digested by our spiders. "..
                                                    "We put them on a special device to gain the spider silk once a day. There is no need to spin this again. " ..
-                     "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! why are you running away?"),
+                     "The thread can directly be used by the weaving mill. Oh hello, here is one of our nice spiders … Hey! Why are you running away?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Spider Farm
             lore_author = pgettext("atlanteans_building", "A spider breeder showing his farm")
 
@@ -1748,7 +1748,7 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("atlanteans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Weaving Mill -- listen to that song please
             lore = pgettext("atlanteans_building", "Here are the widelands where people may dwell, "..
-                                                   "walking around care that everything’s well."),
+                                                   "walking around caring everything’s well."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
          }
@@ -1837,7 +1837,7 @@ wl.Descriptions():new_tribe {
                pgettext("atlanteans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
             -- TRANSLATORS: Lore helptext for an atlantean production site: Labyrinth
-            lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight."..
+            lore = pgettext("atlanteans_building", "Our enemies claim: we have a ruddy twisted way to fight. "..
            "Check the way we train, in this labyrinth they may be right."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Labyrinth
             lore_author = pgettext("atlanteans_building", "Atlantean hero after first contact with a real enemy")
@@ -1910,9 +1910,9 @@ wl.Descriptions():new_tribe {
                      "button to decrease the capacity. You can also click on a soldier to send him away."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: High Tower
             lore = pgettext("atlanteans_building", "Beware our mighty high towers! From the topmost spot we can see wide into the "..
-                     "lands and spot the enenmy far away."),
+                     "lands and spot the enemy far away."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: High Tower
-            lore_author = pgettext("atlanteans_building", "Soldier showing of a High Tower")
+            lore_author = pgettext("atlanteans_building", "Soldier showing off a High Tower")
 
          }
       },
@@ -1927,7 +1927,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Castle
             lore = pgettext("atlanteans_building", "Sometimes even we Atlanteans need to use brute force, but we always play it wisely."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Castle
-            lore_author = pgettext("atlanteans_building", "Wisdom of the fight by the warriors’ guild.")
+            lore_author = pgettext("atlanteans_building", "‘Wisdom of the Fight’ by the warriors’ guild")
          }
       },
 
