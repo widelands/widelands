@@ -62,7 +62,6 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
-	void toggle_mainmenu();
 	void rebuild_main_menu();
 
 protected:

@@ -86,7 +86,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    descriptions:new_trainingsite_type {
+--    wl.Descriptions():new_trainingsite_type {
 --       name = "empire_arena",
 --       descname = pgettext("empire_building", "Arena"),
 --       icon = dirname .. "menu.png",
@@ -199,7 +199,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_trainingsite_type {
+wl.Descriptions():new_trainingsite_type {
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Dungeon"),

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-28 02:45+0000\n"
+"POT-Creation-Date: 2022-03-13 02:44+0000\n"
 "PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -292,7 +292,7 @@ msgstr "12월"
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "기본 차림표"
 
@@ -577,7 +577,7 @@ msgstr "자원 표시"
 msgid "Unsupported Format"
 msgstr "지원되지 않는 형식"
 
-#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:774
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:778
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -609,11 +609,11 @@ msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1617
 msgid "Error"
 msgstr "오류"
 
-#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1619
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -902,7 +902,7 @@ msgstr "표시"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "확인"
 
@@ -921,7 +921,7 @@ msgstr "확인"
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
 #: ../../src/ui_fsmenu/training_wheel_options.cc:108
-#: ../../src/wui/economy_options_window.cc:677
+#: ../../src/wui/economy_options_window.cc:678
 #: ../../src/wui/game_main_menu_save_game.cc:85
 msgid "Cancel"
 msgstr "취소"
@@ -950,7 +950,7 @@ msgstr "제거할 선수를 누르십시오"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:437
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
-#: ../../src/wui/economy_options_window.cc:678
+#: ../../src/wui/economy_options_window.cc:679
 #: ../../src/wui/load_or_save_game.cc:51
 msgid "Delete"
 msgstr "삭제"
@@ -2232,7 +2232,7 @@ msgstr "배들"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:151
+#: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:324
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2244,7 +2244,7 @@ msgstr "물품"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2254,7 +2254,7 @@ msgstr "일꾼들"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
-#: ../../src/wui/general_statistics_menu.cc:147
+#: ../../src/wui/general_statistics_menu.cc:148
 #: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "건물"
@@ -2553,7 +2553,7 @@ msgid "Checking map"
 msgstr "지도를 검사하고 있음"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:724
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:726
 msgid "Preparing game…"
 msgstr "놀이를 준비하고 있음…"
 
@@ -4814,7 +4814,7 @@ msgstr "캠페인을 선택"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "기본 차림표로 복귀"
 
@@ -5188,7 +5188,7 @@ msgid "Online Game Settings"
 msgstr "통신 놀이 설정"
 
 #: ../../src/ui_fsmenu/login_box.cc:44
-#: ../../src/wui/economy_options_window.cc:676
+#: ../../src/wui/economy_options_window.cc:677
 msgid "Save"
 msgstr "저장"
 
@@ -5204,7 +5204,7 @@ msgstr "별명:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "아무도 없음"
 
@@ -5468,7 +5468,7 @@ msgstr "선택된 지도가 없습니다"
 msgid "(no map)"
 msgstr "(지도 없음)"
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose Map"
 msgstr "지도를 선택"
 
@@ -6118,59 +6118,59 @@ msgid "Unmark All"
 msgstr "모두 자국 표시 해제"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
-#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:781 ../../src/wlapplication.cc:785
+#: ../../src/wlapplication.cc:790 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "오류 메시지:"
 
-#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:216
+#: ../../src/wlapplication.cc:782 ../../src/wui/mapdetails.cc:216
 msgid "Game data error"
 msgstr "게임 데이터 오류"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:784
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "와이드랜드가 \"%s\" 파일을 찾을 수 없습니다."
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:786
 msgid "File system error"
 msgstr "파일 시스템 오류"
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1281
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "명령 줄 매개 변수의 빈 값: %s"
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1286
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s 은 다른 작업과 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1438
+#: ../../src/wlapplication.cc:1441
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "알 수 없는 명령 줄 매개 변수: %s\n혹시 '='가 없는 건 아닌가요?"
 
-#: ../../src/wlapplication.cc:1559
+#: ../../src/wlapplication.cc:1562
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized 과 --fullscreen 은 결합할 수 없습니다"
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1580
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "알 수 없는 명령 줄 매개 변수: %s"
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Game ended unexpectedly"
 msgstr "놀이가 예기치 않게 종료되었습니다"
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Unexpected error during the game"
 msgstr "게임 중 예상치 못한 오류가 발생"
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6184,7 +6184,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "놀이 중에 오류가 발생했습니다. 오류 메시지는 다음과 같습니다:\n\n%1$s\n\n이 문제를 보고하여 와이드랜드 개선에 도움을 주십시오. 표준 출력 (윈도우즈에서는 stdout.txt) 에서 관련 메시지를 찾을 수 있습니다. 빌드 %2$s (%3$s)를 사용 중입니다.\n\n이 정보를 보고서에 추가하십시오.\n\n와이드랜드가 긴급 저장 놀이를 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기와 계속 놀기는 것이 종종 가능합니다."
 
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6194,11 +6194,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "다음과 같은 이유로 게임이 예기치 않게 종료되었습니다:\n\n%s\n\n와이드랜드가 긴급 저장 게임을 만들도록 하겠습니까? 항상 그런 것은 아니지만 불러오기하고 계속 플레이하는 것이 가능합니다."
 
-#: ../../src/wlapplication.cc:1666
+#: ../../src/wlapplication.cc:1670
 msgid "Emergency save failed"
 msgstr "긴급 저장 실패"
 
-#: ../../src/wlapplication.cc:1667
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6553,7 +6553,7 @@ msgid "General Statistics"
 msgstr "일반 통계"
 
 #: ../../src/wlapplication_options.cc:500
-#: ../../src/wui/ware_statistics_menu.cc:104
+#: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "물품 통계"
 
@@ -6703,229 +6703,229 @@ msgstr "주요 지형물 #%d를 설정"
 msgid "Go To Landmark #%d"
 msgstr "주요 지형물 #%d로 이동"
 
-#: ../../src/wlapplication_options.cc:920
+#: ../../src/wlapplication_options.cc:922
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "쉬프트"
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "알트"
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "CMD"
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:931
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:935
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:942
+#: ../../src/wlapplication_options.cc:944
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:955
+#: ../../src/wlapplication_options.cc:957
 msgctxt "hotkey"
 msgid "Space"
 msgstr "공백"
 
-#: ../../src/wlapplication_options.cc:957
+#: ../../src/wlapplication_options.cc:959
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "엔터"
 
-#: ../../src/wlapplication_options.cc:959
+#: ../../src/wlapplication_options.cc:961
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "탈출"
 
-#: ../../src/wlapplication_options.cc:961
+#: ../../src/wlapplication_options.cc:963
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "탭"
 
-#: ../../src/wlapplication_options.cc:963
+#: ../../src/wlapplication_options.cc:965
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "차림표"
 
-#: ../../src/wlapplication_options.cc:965
+#: ../../src/wlapplication_options.cc:967
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "일시 중지"
 
-#: ../../src/wlapplication_options.cc:967
+#: ../../src/wlapplication_options.cc:969
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "페이지 업"
 
-#: ../../src/wlapplication_options.cc:969
+#: ../../src/wlapplication_options.cc:971
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "페이지 다운"
 
-#: ../../src/wlapplication_options.cc:971
+#: ../../src/wlapplication_options.cc:973
 msgctxt "hotkey"
 msgid "Home"
 msgstr "홈"
 
-#: ../../src/wlapplication_options.cc:973
+#: ../../src/wlapplication_options.cc:975
 msgctxt "hotkey"
 msgid "End"
 msgstr "엔드"
 
-#: ../../src/wlapplication_options.cc:975
+#: ../../src/wlapplication_options.cc:977
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "왼쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:977
+#: ../../src/wlapplication_options.cc:979
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "오른쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:979
+#: ../../src/wlapplication_options.cc:981
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "위쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:981
+#: ../../src/wlapplication_options.cc:983
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "아래쪽 화살 키"
 
-#: ../../src/wlapplication_options.cc:983
+#: ../../src/wlapplication_options.cc:985
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "인서트"
 
-#: ../../src/wlapplication_options.cc:985
+#: ../../src/wlapplication_options.cc:987
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "딜리트"
 
-#: ../../src/wlapplication_options.cc:987
+#: ../../src/wlapplication_options.cc:989
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "백스페이스"
 
-#: ../../src/wlapplication_options.cc:989
+#: ../../src/wlapplication_options.cc:991
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "캡스 록"
 
-#: ../../src/wlapplication_options.cc:991
+#: ../../src/wlapplication_options.cc:993
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "넘 록"
 
-#: ../../src/wlapplication_options.cc:993
+#: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "스크롤 록"
 
-#: ../../src/wlapplication_options.cc:995
+#: ../../src/wlapplication_options.cc:997
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "키패드 1"
 
-#: ../../src/wlapplication_options.cc:997
+#: ../../src/wlapplication_options.cc:999
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "키패드 2"
 
-#: ../../src/wlapplication_options.cc:999
+#: ../../src/wlapplication_options.cc:1001
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "키패드 3"
 
-#: ../../src/wlapplication_options.cc:1001
+#: ../../src/wlapplication_options.cc:1003
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "키패드 4"
 
-#: ../../src/wlapplication_options.cc:1003
+#: ../../src/wlapplication_options.cc:1005
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "키패드 5"
 
-#: ../../src/wlapplication_options.cc:1005
+#: ../../src/wlapplication_options.cc:1007
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "키패드 6"
 
-#: ../../src/wlapplication_options.cc:1007
+#: ../../src/wlapplication_options.cc:1009
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "키패드 7"
 
-#: ../../src/wlapplication_options.cc:1009
+#: ../../src/wlapplication_options.cc:1011
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "키패드 8"
 
-#: ../../src/wlapplication_options.cc:1011
+#: ../../src/wlapplication_options.cc:1013
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "키패드 9"
 
-#: ../../src/wlapplication_options.cc:1013
+#: ../../src/wlapplication_options.cc:1015
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "키패드 0"
 
-#: ../../src/wlapplication_options.cc:1015
+#: ../../src/wlapplication_options.cc:1017
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "키패드 ."
 
-#: ../../src/wlapplication_options.cc:1017
+#: ../../src/wlapplication_options.cc:1019
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "키패드 +"
 
-#: ../../src/wlapplication_options.cc:1019
+#: ../../src/wlapplication_options.cc:1021
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "키패드 -"
 
-#: ../../src/wlapplication_options.cc:1021
+#: ../../src/wlapplication_options.cc:1023
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "키패드 *"
 
-#: ../../src/wlapplication_options.cc:1023
+#: ../../src/wlapplication_options.cc:1025
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "키패드 /"
 
-#: ../../src/wlapplication_options.cc:1025
+#: ../../src/wlapplication_options.cc:1027
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "키패드 엔터"
 
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1036
 msgid "(disabled)"
 msgstr ""
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1037 ../../src/wui/waresdisplay.cc:556
+#: ../../src/wlapplication_options.cc:1039 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:1062
+#: ../../src/wlapplication_options.cc:1064
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -7145,7 +7145,7 @@ msgstr "낮은 생산성:"
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7326,43 +7326,43 @@ msgid "Save target settings"
 msgstr "대상 설정을 저장"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:308
+#: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
 msgstr "∞"
 
-#: ../../src/wui/economy_options_window.cc:577
+#: ../../src/wui/economy_options_window.cc:578
 msgid "The profile name cannot be empty"
 msgstr "프로필 이름은 비워 둘 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:578
+#: ../../src/wui/economy_options_window.cc:579
 msgid "The default profile cannot be overwritten"
 msgstr "기본 프로필을 덮어 쓸 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:582
 msgid "Save the profile under this name"
 msgstr "이 이름으로 프로필을 저장하십시오"
 
-#: ../../src/wui/economy_options_window.cc:593
+#: ../../src/wui/economy_options_window.cc:594
 msgid "The predefined profiles cannot be deleted"
 msgstr "미리 정의된 프로파일은 삭제할 수 없습니다"
 
-#: ../../src/wui/economy_options_window.cc:596
+#: ../../src/wui/economy_options_window.cc:597
 msgid "Delete the selected profiles"
 msgstr "선택한 프로파일을 삭제합니다"
 
-#: ../../src/wui/economy_options_window.cc:618
+#: ../../src/wui/economy_options_window.cc:619
 msgid "Overwrite?"
 msgstr "덮어쓰겠습니까?"
 
-#: ../../src/wui/economy_options_window.cc:619
+#: ../../src/wui/economy_options_window.cc:620
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "이 이름을 가진 프로파일이 이미 있습니다. 교체하겠습니까?"
 
-#: ../../src/wui/economy_options_window.cc:669
+#: ../../src/wui/economy_options_window.cc:670
 msgid "Save Profile"
 msgstr "프로필 저장"
 
-#: ../../src/wui/economy_options_window.cc:679
+#: ../../src/wui/economy_options_window.cc:680
 msgid "Existing Profiles"
 msgstr "이미 있는 프로필"
 
@@ -7529,8 +7529,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7797,35 +7797,35 @@ msgstr "추가 기능:"
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:136
+#: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"
 msgstr "땅"
 
-#: ../../src/wui/general_statistics_menu.cc:157
+#: ../../src/wui/general_statistics_menu.cc:158
 msgid "Productivity"
 msgstr "생산성"
 
-#: ../../src/wui/general_statistics_menu.cc:162
+#: ../../src/wui/general_statistics_menu.cc:163
 msgid "Casualties"
 msgstr "피해"
 
-#: ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/wui/general_statistics_menu.cc:167
 msgid "Kills"
 msgstr "살해"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings lost"
 msgstr "군사 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Military buildings defeated"
 msgstr "군사 건물 파괴"
 
-#: ../../src/wui/general_statistics_menu.cc:182
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Civilian buildings lost"
 msgstr "민간 건물 잃음"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military"
 msgstr "군사"
 
@@ -7849,19 +7849,19 @@ msgstr "판을 아래쪽으로 이동"
 msgid "Move panel to top"
 msgstr "판을 위쪽으로 이동"
 
-#: ../../src/wui/info_panel.cc:388
+#: ../../src/wui/info_panel.cc:389
 msgid "Cheat mode enabled"
 msgstr "치트 모드 사용 설정됨"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:439
+#: ../../src/wui/info_panel.cc:440
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "%1$s · %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:444
+#: ../../src/wui/info_panel.cc:445
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "%1$s · %2$s · %3$s"
@@ -7928,11 +7928,11 @@ msgstr "물품을 제거"
 msgid "Add ware"
 msgstr "물품을 추가"
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "제어를 숨김"
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "제어를 표시"
 
@@ -8101,7 +8101,7 @@ msgstr "군인"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:154 ../../src/wui/waresdisplay.cc:81
+#: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "재고"
 
@@ -8280,14 +8280,14 @@ msgid "Zoom"
 msgstr "배율"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:103
+#: ../../src/wui/plot_area.cc:102
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
 msgstr[0] "%1%일"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:106
+#: ../../src/wui/plot_area.cc:105
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -8295,26 +8295,26 @@ msgstr[0] "%1%시"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:109
+#: ../../src/wui/plot_area.cc:108
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
 msgstr[0] "%1%분"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:122
+#: ../../src/wui/plot_area.cc:121
 msgctxt "unit_generic"
 msgid "days"
 msgstr "일"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:125
+#: ../../src/wui/plot_area.cc:124
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "시간"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:128
+#: ../../src/wui/plot_area.cc:127
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "분"
@@ -8364,16 +8364,16 @@ msgstr "경험치를 -1  줄임"
 msgid "Increase experience by 1"
 msgstr "경험치를 +1 늘림"
 
-#: ../../src/wui/productionsitewindow.cc:151
+#: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
 msgstr "선택된 일꾼을 해고합니다"
 
-#: ../../src/wui/productionsitewindow.cc:245
+#: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
 msgstr "(오는 중)"
 
-#: ../../src/wui/productionsitewindow.cc:245
-#: ../../src/wui/productionsitewindow.cc:307
+#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:308
 msgid "(vacant)"
 msgstr "(공석)"
 
@@ -8887,15 +8887,15 @@ msgstr "창고에 있는 물품들"
 msgid "Workers in warehouses"
 msgstr "창고에 있는 일꾼들"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "다음 임무"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "지금 다음 임무를 시작"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "이 임무를 계속 수행"
 
@@ -8908,15 +8908,15 @@ msgstr "추천한 편"
 msgid "Soldiers in training"
 msgstr "훈련중인 군인들"
 
-#: ../../src/wui/ware_statistics_menu.cc:134
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
 msgstr "생산"
 
-#: ../../src/wui/ware_statistics_menu.cc:141
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Consumption"
 msgstr "소모"
 
-#: ../../src/wui/ware_statistics_menu.cc:148
+#: ../../src/wui/ware_statistics_menu.cc:149
 msgid "Economy health"
 msgstr "경제 활력"
 
@@ -8952,29 +8952,29 @@ msgstr "배타기를 기다리는 일꾼들"
 msgid "Expedition"
 msgstr "탐험"
 
-#: ../../src/wui/waresdisplay.cc:550
+#: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:552
+#: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:553
+#: ../../src/wui/waresdisplay.cc:554
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:595
+#: ../../src/wui/waresdisplay.cc:596
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:598
+#: ../../src/wui/waresdisplay.cc:599
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -8982,7 +8982,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:601
+#: ../../src/wui/waresdisplay.cc:602
 msgid "%1%G"
 msgstr "%1%G"
 
