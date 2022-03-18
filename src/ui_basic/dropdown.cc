@@ -71,8 +71,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                        w,
                     // Height only to fit the button, so we can use this in Box layout.
                     base_height(button_dimension, style)),
-     ignore_space_(false),
-     was_open_already_(false),
      id_(next_id_++),
      max_list_items_(max_list_items),
      max_list_height_(std::numeric_limits<uint32_t>::max()),
@@ -461,10 +459,10 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
-		was_open_already_ = true;
 		enable_textinput();
 		list_->move_to_top();
 		focus();
+
 		Notifications::publish(NoteDropdown(id_));
 		if (move_mouse) {
 			set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
@@ -529,7 +527,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;
 		case SDLK_SPACE:
 			if (!is_expanded()) {
-				ignore_space_ = was_open_already_;
 				set_list_visibility(true);
 				return true;
 			}
@@ -554,6 +551,7 @@ bool BaseDropdown::is_filtered() {
 }
 void BaseDropdown::disable_textinput() {
 	set_handle_textinput(false);
+	disable_sdl_textinput();
 }
 
 void BaseDropdown::enable_textinput() {
