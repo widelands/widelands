@@ -1,6 +1,6 @@
 dirname = "test/maps/plain.wmf/" .. path.dirname(__file__)
 
-descriptions:new_worker_type {
+wl.Descriptions():new_worker_type {
    msgctxt = "barbarians_worker",
    name = "barbarians_file_animation",
    -- TRANSLATORS: This is a worker name used in lists of workers

@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-01 03:05+0000\n"
+"POT-Creation-Date: 2022-03-13 02:44+0000\n"
 "PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -301,7 +301,7 @@ msgstr "Дек"
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Главное меню"
 
@@ -911,7 +911,7 @@ msgstr "Экран"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "OK"
 
@@ -1449,8 +1449,8 @@ msgid ""
 "location."
 msgstr "Выберите размер карты, затем кликните по желательному местоположению. При увеличении ширины/высоты карты будут прирастать расстояния на восток/юг от выбранной точки. При укорачивании карты будут сокращаться расстояния на восток/юг, убирая число гексов."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -4913,7 +4913,7 @@ msgstr "Выбрать кампанию"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "Вернуться в главное меню"
 
@@ -6173,18 +6173,18 @@ msgstr "Неверный путь к файлу в campaigns.lua из tutorials.
 msgid "Tutorial"
 msgstr "Обучение"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Автор"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Авторы"
@@ -9025,15 +9025,15 @@ msgstr "Товары на складах"
 msgid "Workers in warehouses"
 msgstr "Работники на складах"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "Следующая миссия"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "Сейчас начнется следующая миссия"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "Продолжить выполнять миссию"
 

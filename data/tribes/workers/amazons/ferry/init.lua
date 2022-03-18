@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
-descriptions:new_ferry_type {
+wl.Descriptions():new_ferry_type {
    name = "amazons_ferry",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Ferry"),

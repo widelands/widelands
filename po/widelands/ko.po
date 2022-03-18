@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-01 03:05+0000\n"
+"POT-Creation-Date: 2022-03-13 02:44+0000\n"
 "PO-Revision-Date: 2022-02-16 02:45+0000\n"
 "Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -292,7 +292,7 @@ msgstr "12월"
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "기본 차림표"
 
@@ -902,7 +902,7 @@ msgstr "표시"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "확인"
 
@@ -1437,8 +1437,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
@@ -4814,7 +4814,7 @@ msgstr "캠페인을 선택"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "기본 차림표로 복귀"
 
@@ -6074,18 +6074,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "제작자들"
@@ -8887,15 +8887,15 @@ msgstr "창고에 있는 물품들"
 msgid "Workers in warehouses"
 msgstr "창고에 있는 일꾼들"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "다음 임무"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "지금 다음 임무를 시작"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "이 임무를 계속 수행"
 
