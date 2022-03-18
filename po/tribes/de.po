@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Wuzzy <almikes@aol.com>, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
 # Andreas Berger <andreas@berger-ecommerce.com>, 2020
 # GunChleoc, 2015
 # Elisabeth Jäger, 2016-2018
@@ -19,14 +19,14 @@
 # Hybrid Dog, 2015
 # wl-zocker, 2015-2016
 # wl-zocker, 2016
-# Wuzzy <almikes@aol.com>, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-28 02:45+0000\n"
+"POT-Creation-Date: 2022-03-13 02:44+0000\n"
 "PO-Revision-Date: 2022-02-22 00:11+0000\n"
-"Last-Translator: Wuzzy <almikes@aol.com>\n"
+"Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1301,7 +1301,6 @@ msgstr "Cassavawurzelküche"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1728,8 +1727,6 @@ msgstr "Steinwerkstatt"
 msgid "making a shovel"
 msgstr "Das Herstellen einer Schaufel"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1942,6 +1939,7 @@ msgstr "Wildnishüterinnenzelt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5274,7 +5272,6 @@ msgstr "Balsabaum"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsabaum (jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
