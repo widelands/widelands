@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "frisians_dikers_house",
    descname = pgettext("frisians_building", "Diker’s House"),
    icon = dirname .. "menu.png",
