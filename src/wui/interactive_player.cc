@@ -182,7 +182,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary,
                      [this](StatisticsMenuEntry t) { statistics_menu_selected(t); }),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
+     portspace_hint_pic_(g_image_cache->get("images/wui/overlays/port_hint.png"))
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
      training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr)
@@ -618,8 +619,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
                                     f->fcoords.field->is_interior(plr.player_number()) &&
                                     !has_road &&
                                     !has_object) {
-
-                                        const Image* pic = g_image_cache->get("images/wui/overlays/port_hint.png");
+                                        const Image* pic = portspace_hint_pic_;
                                         if (overlay != nullptr && (caps & Widelands::BUILDCAPS_BUILDINGMASK)) {
                                                 blit_field_overlay(dst, *f,
                                                                    pic, Vector2i(0, 0),
