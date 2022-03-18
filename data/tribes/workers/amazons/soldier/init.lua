@@ -14,7 +14,7 @@ all_levels_ama = {
    max_evade = 3,
 }
 
-descriptions:new_soldier_type {
+wl.Descriptions():new_soldier_type {
    name = "amazons_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Soldier"),
