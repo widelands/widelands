@@ -610,7 +610,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
 				}
 
-                                // Draw port space hint if a port could be built here, but current situation doesn't 
+                                // Draw port space hint if a port could be built here, but current situation doesn't
                                 // allow it.
                                 bool has_road = player_field.r_e || player_field.r_sw || player_field.r_se;
                                 bool has_object = (f->fcoords.field->get_immovable() != nullptr);
