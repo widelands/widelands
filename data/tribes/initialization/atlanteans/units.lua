@@ -1539,7 +1539,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
-            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw  –  we need real gold."),
+            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw. We need real gold. What kind of fairy tale did you get that idea from?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
             lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies.")
          }
@@ -1569,9 +1569,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Sawmill
             note = pgettext("atlanteans_building", "Will need at least four woodcutters for a constant supply of planks."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Sawmill
-            lore = pgettext("atlanteans_building", "This vertical axis design of our sawmills makes operation simple, yet powerful. Patent pending."),
+            lore = pgettext("atlanteans_building", "The design of our sawmills makes operation simple, yet powerful. Patent pending."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Sawmill
-            lore_author = pgettext("atlanteans_building", "Askadus, Inventor")
+            lore_author = pgettext("atlanteans_building", "Askadus, Inventor of the vertical axis windmill")
          }
       },
       {
