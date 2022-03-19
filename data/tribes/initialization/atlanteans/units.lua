@@ -1608,7 +1608,7 @@ wl.Descriptions():new_tribe {
             note = pgettext("atlanteans_building", "Will need cornnmeal and blackroot flour"),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
-                                                   "It is more nutritious then that paper-like bread you find elsewhere. And it is needed for the personal rite "..
+                                                   "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
                                                    "of preparing one’s meal. May Satul bless you."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Bakery
             lore_author = pgettext("atlanteans_building", "Head of the bakers’ guild")
@@ -1824,7 +1824,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Dungeon
             lore = pgettext("atlanteans_building", "Make our enemies feel the pain, so enter here to gain your train!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Dungeon
-            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungon")
+            lore_author = pgettext("atlanteans_building", "Engraving on the entrance to the dungeon")
     }
       },
       {
