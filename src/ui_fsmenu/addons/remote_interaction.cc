@@ -946,6 +946,7 @@ void RemoteInteractionWindow::update_current_vote_on_demand() {
 void RemoteInteractionWindow::login_changed() {
 	current_vote_ = -1;
 	update_current_vote_on_demand();
+
 	if (parent_.username().empty()) {
 		write_comment_.set_enabled(false);
 		write_comment_.set_tooltip(_("Please log in to comment"));
@@ -957,6 +958,9 @@ void RemoteInteractionWindow::login_changed() {
 		own_voting_.set_enabled(true);
 		own_voting_.set_tooltip("");
 	}
+
+	admin_action_.set_visible(parent_.net().is_admin());
+
 	for (auto& cr : comment_rows_) {
 		cr->update_edit_enabled();
 	}
