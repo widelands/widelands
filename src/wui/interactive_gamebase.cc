@@ -480,7 +480,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		InteractiveGameBase::toggle_mainmenu();
+		mainmenu_.toggle();
 		return true;
 	}
 
@@ -599,10 +599,6 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::toggle_mainmenu() {
-	mainmenu_.toggle();
 }
 
 /**
