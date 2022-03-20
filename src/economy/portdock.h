@@ -74,7 +74,7 @@ class PortDock : public PlayerImmovable {
 public:
 	const PortdockDescr& descr() const;
 
-	explicit PortDock(Warehouse* warehouse);
+	explicit PortDock(Warehouse* wh);
 	~PortDock() override;
 
 	void add_position(Widelands::Coords where);

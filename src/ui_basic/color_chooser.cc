@@ -189,7 +189,9 @@ private:
 		dst.blit(Vector2i(x, y), &selector_);
 	}
 	void draw_selection_cursors(RenderTarget& dst) {
-		unsigned x = 0, y = 0, a = 0;
+		unsigned x = 0;
+		unsigned y = 0;
+		unsigned a = 0;
 		switch (sidebar_attribute_) {
 		case ColorAttribute::kRed:
 			x = chooser_.get_color().g;

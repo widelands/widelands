@@ -95,7 +95,8 @@ std::unique_ptr<Texture> TextureAtlas::pack_as_many_as_possible(
 		root = std::move(new_root);
 	};
 
-	std::vector<Block> packed, not_packed;
+	std::vector<Block> packed;
+	std::vector<Block> not_packed;
 	for (Block& block : blocks_) {
 		const int block_width = block.texture->width() + kPadding;
 		const int block_height = block.texture->height() + kPadding;

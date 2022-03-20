@@ -373,21 +373,21 @@ void InteractiveGameBase::add_chat_ui() {
 	};
 }
 
-void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
 	}
 }
 
-void InteractiveGameBase::reset_gamespeed() {
+void InteractiveGameBase::reset_gamespeed() const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		ctrl->set_desired_speed(kSpeedDefault);
 	}
@@ -480,7 +480,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		InteractiveGameBase::toggle_mainmenu();
+		mainmenu_.toggle();
 		return true;
 	}
 
@@ -599,10 +599,6 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::toggle_mainmenu() {
-	mainmenu_.toggle();
 }
 
 /**

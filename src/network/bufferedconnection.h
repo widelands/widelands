@@ -171,17 +171,17 @@ public:
 	 * Receive a string.
 	 * \warning Calling this method is only safe when peek_string() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 * \param out The variable to write the value to.
+	 * \param str The variable to write the value to.
 	 */
-	void receive(std::string* out);
+	void receive(std::string* str);
 
 	/**
 	 * Receive a RecvPacket.
 	 * \warning Calling this method is only safe when peek_recvpacket() returned \c true.
 	 *          Otherwise the behavior of this method is undefined.
-	 * \param out The variable to write the value to.
+	 * \param packet The variable to write the value to.
 	 */
-	void receive(RecvPacket* out);
+	void receive(RecvPacket* packet);
 
 	// Temporary method, will be removed when display of RTT measurements are implemented.
 	// Removes a message from type kRoundTripTimeResponse from the buffer.

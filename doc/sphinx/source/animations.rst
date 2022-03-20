@@ -312,7 +312,7 @@ For example, attacking towards the west can be defined like this:
       max_evade = 0,
    }
 
-   descriptions:new_soldier_type {
+   wl.Descriptions():new_soldier_type {
       name = "fancytribe_soldier",
       ...
 

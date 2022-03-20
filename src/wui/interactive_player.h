@@ -81,7 +81,7 @@ public:
 		return auto_roadbuild_mode_;
 	}
 
-	void popup_message(Widelands::MessageId, const Widelands::Message&);
+	void popup_message(Widelands::MessageId, const Widelands::Message&) const;
 
 	/** Open an attack box for the building at the given position, if applicable. */
 	UI::Window* show_attack_window(const Widelands::Coords&, bool fastclick);
@@ -127,6 +127,7 @@ public:
 
 private:
 	const Image* grid_marker_pic_;
+	const Image* portspace_hint_pic_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Arrow image for indicating a position for training wheels

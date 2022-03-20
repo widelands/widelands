@@ -24,22 +24,22 @@ Example for ``init.lua``:
 
    push_textdomain("tribes")
 
-   descriptions:new_immovable_type {
+   wl.Descriptions():new_immovable_type {
       name = "berry_bush_blueberry_tiny",
       ...
    }
 
-   descriptions:new_immovable_type {
+   wl.Descriptions():new_immovable_type {
       name = "berry_bush_blueberry_small",
       ...
    }
 
-   descriptions:new_immovable_type {
+   wl.Descriptions():new_immovable_type {
       name = "berry_bush_blueberry_medium",
       ...
    }
 
-   descriptions:new_immovable_type {
+   wl.Descriptions():new_immovable_type {
       name = "berry_bush_blueberry_ripe",
       ...
    }

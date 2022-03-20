@@ -106,7 +106,7 @@ protected:
 	void bar_pressed(int32_t pointer, int32_t ofs);
 
 private:
-	void send_value_changed();
+	void send_value_changed() const;
 	void set_highlighted(bool highlighted);
 
 public:
@@ -227,7 +227,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t w,
 	               const uint32_t h,
 	               const std::vector<std::string>& labels_in,
-	               uint32_t value_,
+	               uint32_t init_value,
 	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
 	               const uint32_t cursor_size = 20,

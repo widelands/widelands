@@ -62,7 +62,7 @@ public:
 	// luminance, then all values are multiplied with blend.
 	void draw_monochrome(const Rectf& gl_dest_rect,
 	                     const float z_value,
-	                     const BlitData& blit_source,
+	                     const BlitData& texture,
 	                     const RGBAColor& blend);
 
 	// Draws a bunch of items at once.

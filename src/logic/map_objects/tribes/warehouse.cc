@@ -253,7 +253,7 @@ void WarehouseSupply::remove_workers(DescriptionIndex const id, uint32_t const c
 }
 
 /// Return the position of the Supply, i.e. the owning Warehouse.
-PlayerImmovable* WarehouseSupply::get_position(Game&) {
+PlayerImmovable* WarehouseSupply::get_position(Game& /* game */) {
 	return warehouse_;
 }
 
@@ -261,7 +261,7 @@ PlayerImmovable* WarehouseSupply::get_position(Game&) {
 bool WarehouseSupply::is_active() const {
 	return false;
 }
-SupplyProviders WarehouseSupply::provider_type(Game*) const {
+SupplyProviders WarehouseSupply::provider_type(Game* /* game */) const {
 	return SupplyProviders::kWarehouse;
 }
 
@@ -273,7 +273,7 @@ void WarehouseSupply::get_ware_type(WareWorker& /* type */, DescriptionIndex& /*
 	throw wexception("WarehouseSupply::get_ware_type: calling this is nonsensical");
 }
 
-void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
+void WarehouseSupply::send_to_storage(Game& /* game */, Warehouse* /* wh */) {
 	throw wexception("WarehouseSupply::send_to_storage: should never be called");
 }
 
@@ -359,7 +359,7 @@ void Warehouse::SoldierControl::set_soldier_capacity(Quantity /* capacity */) {
 	throw wexception("Not implemented for a Warehouse!");
 }
 
-void Warehouse::SoldierControl::drop_soldier(Soldier&) {
+void Warehouse::SoldierControl::drop_soldier(Soldier& /* soldier */) {
 	throw wexception("Not implemented for a Warehouse!");
 }
 
@@ -1080,8 +1080,11 @@ void Warehouse::incorporate_ware(EditorGameBase& egbase, WareInstance* ware) {
 }
 
 /// Called when a transfer for one of the idle Requests completes.
-void Warehouse::request_cb(
-   Game& game, Request&, DescriptionIndex const ware, Worker* const w, PlayerImmovable& target) {
+void Warehouse::request_cb(Game& game,
+                           Request& /* req */,
+                           DescriptionIndex const ware,
+                           Worker* const w,
+                           PlayerImmovable& target) {
 	Warehouse& wh = dynamic_cast<Warehouse&>(target);
 
 	if (w) {
@@ -1114,7 +1117,7 @@ Building& WarehouseDescr::create_object() const {
 	return *new Warehouse(*this);
 }
 
-bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
+bool Warehouse::can_create_worker(Game& /* game */, DescriptionIndex const worker) const {
 	assert(owner().tribe().has_worker(worker));
 
 	if (!(worker < supply_->get_workers().get_nrwareids())) {
@@ -1254,7 +1257,7 @@ void Warehouse::plan_workers(Game& game, DescriptionIndex index, Quantity amount
 			return;
 		}
 
-		planned_workers_.push_back(PlannedWorkers());
+		planned_workers_.emplace_back();
 		pw = &planned_workers_.back();
 		pw->index = index;
 		pw->amount = 0;

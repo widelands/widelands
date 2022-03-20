@@ -86,7 +86,7 @@ public:
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
 	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
 	/// This function is safe for map/savegame compatibility.
-	DescriptionIndex safe_resource_index(const std::string& warename) const;
+	DescriptionIndex safe_resource_index(const std::string& resourcename) const;
 	/// Returns the index for 'shipname' and throws an exception if the ship can't be found.
 	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_ship_index(const std::string& shipname) const;

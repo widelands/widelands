@@ -4,6 +4,7 @@
 # 
 # Translators:
 # nskdmitry, 2022
+# Владимир Шевцов, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: nskdmitry, 2022\n"
+"Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,10 +24,10 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1% единица из %2% была доставлена к вашему ‘%3%’ строению."
+msgstr[1] "%1% единицы из %2% были доставлены к вашему ‘%3%’ строению."
+msgstr[2] "%1% единиц из %2% были доставлены к вашему ‘%3%’ строению."
+msgstr[3] "%1% единиц из %2% были доставлены к вашему ‘%3%’ строению."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -367,6 +368,10 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Однако, нам стоит быть на чеку, если мы хотим захватить караульную. Там "
+"могут быть еще вражеские постройки, которых отсюда не видно, а пираты "
+"известны как очень хорошие бойцы. Прежде чем мы продолжим,  лучше всего "
+"сформировать здесь сильное военное присутствие."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
@@ -378,6 +383,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Сир, мы нашли 25 единиц золотой руды внутри пиратской сторожки. Они могли "
+"быть забраны из жилища золотодобытчиков неподалеку. Эта золотая руда будет "
+"доставлена в наш главный штаб."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -386,6 +394,10 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Чтобы продолжить наше успешное освоение этой территории, нам следует "
+"построить склад в направлении юго-запада от караульной, тем самым закрепив "
+"наше расширение. Есть хорошее место под постройку, всего лишь в трех шагах "
+"от караульной."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -399,6 +411,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Сир, сезон дождей привел к появлению болот вдоль ручья до самого востока и "
+"мы не можем пересечь их. Они должны быть осушены, прежде чем мы продвинемся "
+"дальше. Если вы доставите достаточно лопат в новый склад, то волонтеры "
+"разберутся с болотами."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -406,6 +422,9 @@ msgid ""
 "we will not have removed the swamps before the next wet season. If you bring"
 " more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Сир, все лопаты были розданы, но если мы продолжим в том же темпе, то  не "
+"удалим все болота до следующего сезона дождей. Мы задействуем больше "
+"волонтеров, если вы доставите больше  лопат к новому складу."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -413,6 +432,8 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Сир, теперь, когда мы имеем доступ к пиратскому убежищу, мы должны его "
+"завоевать и прикончить их. Возможно, там внутри скрыто еще больше сокровищ."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
@@ -423,6 +444,8 @@ msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Сир, мы победили пиратов. Они прятали какое-то количество золота в их "
+"последнем бастионе, которое уже было переправлено в наш главный штаб"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
@@ -435,6 +458,10 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Сир, в результате наших нападений на пиратов они начали объединятся с "
+"пиратами из других племен. Они могут восстановить большую часть своей ранее "
+"утраченной силы. Наши истощающиеся ресурсы могут стать проблемой с таким "
+"могущественным врагом под боком."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -446,6 +473,9 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Сир, благодаря нашим успешным попыткам оттеснить пиратов, многие из них "
+"разбежались и уплыли на малых лодках. Неизвестно, в каком направлении они "
+"ушли."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -457,6 +487,9 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Сир, после длительного изучения и исследования наши мудрецы наконец-то "
+"расшифровали необычный язык в записях Törver, которые мы нашли в его штабе. "
+"Теперь мы можем строить верфи."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
@@ -468,6 +501,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Сир, один из наших разведчиков был схвачен пиратами и доставлен на их "
+"остров. Он единственный человек, который знает путь через болото к Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -475,6 +510,9 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Согласно донесениям нашего рыбака, он заперт в укреплении на острове. Нам "
+"следует использовать знания о постройке кораблей, которое мы получили от "
+"Törver, чтобы построить флот и атаковать их позиции."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
@@ -486,6 +524,8 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Сир, наши солдаты захватили остров и освободили разведчика. Оказывается, "
+"пираты оставили большое количество золота, пива и оружия на острове."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
@@ -496,12 +536,16 @@ msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Сир, наш разведчик вернулся на нашу территорию и указал нам путь через "
+"болота к Hjalmar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Он подметил, что мы также можем продвигаться вдоль другой стороны горы, в "
+"случае если здесь потерпим неудачу, но это будет намного труднее сделать."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
@@ -513,6 +557,9 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Сир, мы почти одолели все армии и сейчас приближаемся к нашему последнему "
+"врагу. Они давно поджидали нас и будут готовы к самой тяжелой битве за всю "
+"их жизнь."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""

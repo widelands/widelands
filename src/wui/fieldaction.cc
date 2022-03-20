@@ -62,7 +62,7 @@ struct BuildGrid : public UI::IconGrid {
 	Notifications::Signal<Widelands::DescriptionIndex> buildmouseout;
 	Notifications::Signal<Widelands::DescriptionIndex> buildmousein;
 
-	void add(Widelands::DescriptionIndex);
+	void add(Widelands::DescriptionIndex /*id*/);
 
 private:
 	void click_slot(int32_t idx);
@@ -173,9 +173,9 @@ public:
 	void act_abort_buildwaterway();
 	void act_abort_buildwaterway_and_start_buildroad();
 	void act_removewaterway();
-	void act_build(Widelands::DescriptionIndex);
-	void building_icon_mouse_out(Widelands::DescriptionIndex);
-	void building_icon_mouse_in(Widelands::DescriptionIndex);
+	void act_build(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_out(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_in(Widelands::DescriptionIndex /* idx */);
 	void act_geologist();
 	void act_scout();
 	void act_mark_removal();
@@ -186,7 +186,7 @@ private:
 	                 const char* picname,
 	                 UI::Panel* panel,
 	                 const std::string& tooltip_text = "");
-	UI::Button& add_button(UI::Box*,
+	UI::Button& add_button(UI::Box* /*box*/,
 	                       const char* name,
 	                       const char* picname,
 	                       void (FieldActionWindow::*fn)(),
@@ -894,7 +894,7 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	reset_mouse_and_die();
 }
 
-void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
+void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex /* idx */) {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
 		showing_workarea_preview_ = false;
