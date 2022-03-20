@@ -122,14 +122,15 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-constexpr int kNumberOfButtons = 7;
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	// Six buttons need at least 120 pixels.
-	return view_.get_w() < kNumberOfButtons * 20 ? 3 : 7;
+	const int kNumberOfButtons = (ibase_.egbase().map().allows_seafaring() ? 7 : 6);
+	return view_.get_w() < kNumberOfButtons * 20 ? 3 : kNumberOfButtons;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
-	// Use two rows if there are less than 120 pixels available.
-	return view_.get_w() < kNumberOfButtons * 20 ? 3 : 1;
+	// Use multi row layout if there is not enough width.
+	const bool seafaring = ibase_.egbase().map().allows_seafaring();
+	const int kNumberOfButtons = (seafaring ? 7 : 6);
+	return view_.get_w() < kNumberOfButtons * 20 ? (seafaring ? 3 : 2) : 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -200,7 +201,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
      button_ships(this,
                   "ships",
                   but_w() * 2,
-                  view_.get_h() + but_h() * 1,
+                  view_.get_h() + but_h(),
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
@@ -255,7 +256,11 @@ void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
 	// Read number of rows after the zoom.
 	const uint32_t rows = number_of_button_rows();
-	const uint32_t height_offset = rows == 3 ? 1 : 0;
+	const bool seafaring = ibase_.egbase().map().allows_seafaring();
+	uint32_t height_offset = 0;
+	if (rows == 3 || (rows == 2 && !seafaring)) {
+		height_offset = 1;
+	}
 	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
@@ -272,15 +277,23 @@ void MiniMap::resize() {
 	button_ships.set_pos(
 	   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 	button_ships.set_size(but_w(), but_h());
-	if (rows == 3) {
-		button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
-		button_zoom.set_size(view_.get_w(), but_h());
+	if (seafaring) {
+		if (rows == 3) {
+			button_zoom.set_pos(Vector2i(but_w() * 0, view_.get_h() + 2 * but_h()));
+			button_zoom.set_size(view_.get_w(), but_h());
+		} else {
+			button_zoom.set_pos(
+			   Vector2i(but_w() * (6 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+			button_zoom.set_size(but_w(), but_h());
+		}
 	} else {
 		button_zoom.set_pos(
-		   Vector2i(but_w() * (6 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
+		   Vector2i(but_w() * (5 - 3 * height_offset), view_.get_h() + but_h() * height_offset));
 		button_zoom.set_size(but_w(), but_h());
 	}
 	button_zoom.set_enabled(view_.can_zoom());
+
+	button_ships.set_visible(ibase_.egbase().map().allows_seafaring());
 
 	move_inside_parent();
 }
@@ -313,7 +326,7 @@ bool MiniMap::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return true;
 }
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& MiniMap::load(FileRead& fr, InteractiveBase& ib) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
