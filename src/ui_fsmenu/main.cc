@@ -856,12 +856,14 @@ void MainMenu::action(const MenuTarget t) {
 		}
 		break;
 
-	case MenuTarget::kNewGame:
+	case MenuTarget::kNewGame: {
 		if (Widelands::Game* g = create_safe_game()) {
 			menu_capsule_.clear_content();
-			new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr, *g);
+			new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
+			              std::shared_ptr<Widelands::Game>(g));
 		}
 		break;
+	}
 
 	case MenuTarget::kRandomGame:
 		menu_capsule_.clear_content();

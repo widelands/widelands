@@ -75,6 +75,14 @@ public:
 	/// Mark a description as having been loaded
 	void mark_loading_done(const std::string& description_name);
 
+	/**
+	 * The exact order in which all units have been loaded, e.g.
+	 * {"barbarians", "barbarians_ship", "barbarians_well", ...}.
+	 */
+	const std::vector<std::string>& load_order() const {
+		return load_order_;
+	}
+
 	struct NoteMapObjectDescriptionTypeCheck {
 		CAN_BE_SENT_AS_NOTE(NoteId::MapObjectDescriptionTypeCheck)
 
@@ -103,6 +111,9 @@ private:
 		const std::vector<std::string> attributes;
 		const RegistryCallerInfo caller;
 	};
+
+	// The order in which all units have been loaded.
+	std::vector<std::string> load_order_;
 
 	/// A list of all available map object descriptions as <name, init script path>
 	std::map<std::string, RegisteredObject> registered_descriptions_;
