@@ -318,7 +318,16 @@ void EditorGameBase::postload_addons() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 
 	assert(lua_);
-	assert(descriptions_);
+
+	mutable_descriptions()->ensure_tribes_are_registered();
+	if (is_game()) {
+		FileSystem* map_fs = map().filesystem();
+		// In new random matches, map_fs may be nullptr
+		if (map_fs != nullptr && map_fs->file_exists("scripting/tribes")) {
+			verb_log_info("Game: Reading Scenario Tribes ... ");
+			mutable_descriptions()->register_scenario_tribes(map_fs);
+		}
+	}
 
 	for (const auto& info : enabled_addons_) {
 		if (info->category == AddOns::AddOnCategory::kWorld ||
@@ -334,6 +343,7 @@ void EditorGameBase::postload_addons() {
 
 	// Postload all tribes. We can do this only now to ensure that any changes
 	// made by add-ons are taken into account when computing dependency chains.
+	verb_log_info("Postloading tribes...");
 	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
 	}

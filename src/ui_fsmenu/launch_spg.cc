@@ -36,7 +36,7 @@ namespace FsMenu {
 
 LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
-                     Widelands::Game& g,
+                     std::shared_ptr<Widelands::Game> g,
                      const MapData* mapdata,
                      const bool scenario)
    : LaunchGame(fsmm, settings, nullptr, !mapdata, false),
@@ -67,7 +67,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 void LaunchSPG::update() {
 	peaceful_.set_state(settings_.is_peaceful_mode());
 	if (preconfigured_) {
-		map_details_.update(&settings_, *game_.mutable_map());
+		map_details_.update(&settings_, *game_->mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
@@ -144,32 +144,32 @@ void LaunchSPG::clicked_ok() {
 	Widelands::PlayerNumber playernumber = 1;
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
-	game_.set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	try {
 		if (sp->settings().scenario) {  // scenario
-			game_.run_splayer_scenario_direct({sp->get_map()}, "");
+			game_->run_splayer_scenario_direct({sp->get_map()}, "");
 		} else {  // normal singleplayer
 			playernumber = sp->settings().playernum + 1;
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
-			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
+			game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
-			game_.create_loader_ui(
+			game_->create_loader_ui(
 			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			game_.set_game_controller(
-			   std::make_shared<SinglePlayerGameController>(game_, true, playernumber));
-			game_.init_newgame(sp->settings());
-			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+			game_->set_game_controller(
+			   std::make_shared<SinglePlayerGameController>(*game_, true, playernumber));
+			game_->init_newgame(sp->settings());
+			game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(&capsule_.menu(), game_, e.what(), playernumber);
+		WLApplication::emergency_save(&capsule_.menu(), *game_, e.what(), playernumber);
 	}
 
 	return_to_main_menu();

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-28 02:45+0000\n"
-"PO-Revision-Date: 2022-02-16 02:45+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-03-16 02:57+0000\n"
+"PO-Revision-Date: 2015-02-02 13:35+0000\n"
+"Last-Translator: Matevž Jekovec <matevz.jekovec@gmail.com>, 2020-2021\n"
 "Language-Team: Slovenian (http://www.transifex.com/widelands/widelands/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -283,12 +283,12 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Glavni meni"
 
@@ -298,12 +298,12 @@ msgstr "Glavni meni"
 msgid "Tools"
 msgstr "Orodja"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -493,10 +493,10 @@ msgstr "Informacije"
 msgid "Click on a field to show information about it"
 msgstr "Kliknite na polje za prikaz informacij o njem"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -573,7 +573,7 @@ msgstr "Pokaži surovine"
 msgid "Unsupported Format"
 msgstr "Nepodprt format"
 
-#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:774
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:778
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -605,11 +605,11 @@ msgstr "Zemljevid ni shranjen. Ali res želite končati?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1617
 msgid "Error"
 msgstr "Napaka"
 
-#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1619
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -898,7 +898,7 @@ msgstr "Prikaz"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "V redu"
 
@@ -917,7 +917,7 @@ msgstr "V redu"
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
 #: ../../src/ui_fsmenu/training_wheel_options.cc:108
-#: ../../src/wui/economy_options_window.cc:677
+#: ../../src/wui/economy_options_window.cc:678
 #: ../../src/wui/game_main_menu_save_game.cc:85
 msgid "Cancel"
 msgstr "Prekliči"
@@ -946,7 +946,7 @@ msgstr "Kliknite na igralca za njegovo odstranitev"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:437
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
-#: ../../src/wui/economy_options_window.cc:678
+#: ../../src/wui/economy_options_window.cc:679
 #: ../../src/wui/load_or_save_game.cc:51
 msgid "Delete"
 msgstr "Zbriši"
@@ -2264,7 +2264,7 @@ msgstr "Ladje"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:151
+#: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:324
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2276,7 +2276,7 @@ msgstr "Dobrine"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2286,7 +2286,7 @@ msgstr "Delavci"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
-#: ../../src/wui/general_statistics_menu.cc:147
+#: ../../src/wui/general_statistics_menu.cc:148
 #: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "Zgradbe"
@@ -2585,7 +2585,7 @@ msgid "Checking map"
 msgstr "Preverjanje zemljevida"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:724
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:726
 msgid "Preparing game…"
 msgstr "Pripravljam igro ..."
 
@@ -4900,7 +4900,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "Nazaj na glavni meni"
 
@@ -5274,7 +5274,7 @@ msgid "Online Game Settings"
 msgstr "Nastavitve omrežne igre"
 
 #: ../../src/ui_fsmenu/login_box.cc:44
-#: ../../src/wui/economy_options_window.cc:676
+#: ../../src/wui/economy_options_window.cc:677
 msgid "Save"
 msgstr "Shrani"
 
@@ -5290,7 +5290,7 @@ msgstr "Vzdevek:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "nihče"
 
@@ -5554,7 +5554,7 @@ msgstr "Ni izbranega zemljevida"
 msgid "(no map)"
 msgstr "(ni zemljevida)"
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose Map"
 msgstr ""
 
@@ -6160,18 +6160,18 @@ msgstr "Neveljavna pot do datoteke v campaigns.lua od tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Vaja"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Avtor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Avtorji"
@@ -6204,59 +6204,59 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
-#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:781 ../../src/wlapplication.cc:785
+#: ../../src/wlapplication.cc:790 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "Sporočilo napake:"
 
-#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:216
+#: ../../src/wlapplication.cc:782 ../../src/wui/mapdetails.cc:216
 msgid "Game data error"
 msgstr "Napaka v podatkih igre"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:784
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:786
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1281
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1286
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1438
+#: ../../src/wlapplication.cc:1441
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1559
+#: ../../src/wlapplication.cc:1562
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1580
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6270,7 +6270,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6280,11 +6280,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1666
+#: ../../src/wlapplication.cc:1670
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1667
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6639,7 +6639,7 @@ msgid "General Statistics"
 msgstr "Splošna statistika"
 
 #: ../../src/wlapplication_options.cc:500
-#: ../../src/wui/ware_statistics_menu.cc:104
+#: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Statistika blaga"
 
@@ -6789,229 +6789,229 @@ msgstr ""
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:920
+#: ../../src/wlapplication_options.cc:922
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:931
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:935
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:942
+#: ../../src/wlapplication_options.cc:944
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:955
+#: ../../src/wlapplication_options.cc:957
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:957
+#: ../../src/wlapplication_options.cc:959
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:959
+#: ../../src/wlapplication_options.cc:961
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:961
+#: ../../src/wlapplication_options.cc:963
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:963
+#: ../../src/wlapplication_options.cc:965
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:965
+#: ../../src/wlapplication_options.cc:967
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:967
+#: ../../src/wlapplication_options.cc:969
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:969
+#: ../../src/wlapplication_options.cc:971
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:971
+#: ../../src/wlapplication_options.cc:973
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:973
+#: ../../src/wlapplication_options.cc:975
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:975
+#: ../../src/wlapplication_options.cc:977
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:977
+#: ../../src/wlapplication_options.cc:979
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:979
+#: ../../src/wlapplication_options.cc:981
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:981
+#: ../../src/wlapplication_options.cc:983
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:983
+#: ../../src/wlapplication_options.cc:985
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:985
+#: ../../src/wlapplication_options.cc:987
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:987
+#: ../../src/wlapplication_options.cc:989
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:989
+#: ../../src/wlapplication_options.cc:991
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:991
+#: ../../src/wlapplication_options.cc:993
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:993
+#: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:995
+#: ../../src/wlapplication_options.cc:997
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:997
+#: ../../src/wlapplication_options.cc:999
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:999
+#: ../../src/wlapplication_options.cc:1001
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1001
+#: ../../src/wlapplication_options.cc:1003
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1003
+#: ../../src/wlapplication_options.cc:1005
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1005
+#: ../../src/wlapplication_options.cc:1007
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1007
+#: ../../src/wlapplication_options.cc:1009
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1009
+#: ../../src/wlapplication_options.cc:1011
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1011
+#: ../../src/wlapplication_options.cc:1013
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1013
+#: ../../src/wlapplication_options.cc:1015
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1015
+#: ../../src/wlapplication_options.cc:1017
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1017
+#: ../../src/wlapplication_options.cc:1019
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1019
+#: ../../src/wlapplication_options.cc:1021
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1021
+#: ../../src/wlapplication_options.cc:1023
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1023
+#: ../../src/wlapplication_options.cc:1025
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1025
+#: ../../src/wlapplication_options.cc:1027
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1036
 msgid "(disabled)"
 msgstr ""
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1037 ../../src/wui/waresdisplay.cc:556
+#: ../../src/wlapplication_options.cc:1039 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1062
+#: ../../src/wlapplication_options.cc:1064
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -7228,13 +7228,13 @@ msgstr "Pristanišča"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7415,43 +7415,43 @@ msgid "Save target settings"
 msgstr "Shrani nastavitve cilja"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:308
+#: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
 msgstr "∞"
 
-#: ../../src/wui/economy_options_window.cc:577
+#: ../../src/wui/economy_options_window.cc:578
 msgid "The profile name cannot be empty"
 msgstr "Ime profila ne more biti prazno"
 
-#: ../../src/wui/economy_options_window.cc:578
+#: ../../src/wui/economy_options_window.cc:579
 msgid "The default profile cannot be overwritten"
 msgstr "Privzet profil ne more biti prepisan"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:582
 msgid "Save the profile under this name"
 msgstr "Shrani profil pod tem imenom"
 
-#: ../../src/wui/economy_options_window.cc:593
+#: ../../src/wui/economy_options_window.cc:594
 msgid "The predefined profiles cannot be deleted"
 msgstr "Prednastavljeni profili ne morejo biti zbrisani"
 
-#: ../../src/wui/economy_options_window.cc:596
+#: ../../src/wui/economy_options_window.cc:597
 msgid "Delete the selected profiles"
 msgstr "Zbriši izbran profil"
 
-#: ../../src/wui/economy_options_window.cc:618
+#: ../../src/wui/economy_options_window.cc:619
 msgid "Overwrite?"
 msgstr "Prepišem?"
 
-#: ../../src/wui/economy_options_window.cc:619
+#: ../../src/wui/economy_options_window.cc:620
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "Profil s tem imenom že obstaja. Ali ga želite zamenjati?"
 
-#: ../../src/wui/economy_options_window.cc:669
+#: ../../src/wui/economy_options_window.cc:670
 msgid "Save Profile"
 msgstr "Shrani profil"
 
-#: ../../src/wui/economy_options_window.cc:679
+#: ../../src/wui/economy_options_window.cc:680
 msgid "Existing Profiles"
 msgstr "Obstoječi profili"
 
@@ -7898,35 +7898,35 @@ msgstr ""
 msgid "Game data error:"
 msgstr ""
 
-#: ../../src/wui/general_statistics_menu.cc:136
+#: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"
 msgstr "Kopno"
 
-#: ../../src/wui/general_statistics_menu.cc:157
+#: ../../src/wui/general_statistics_menu.cc:158
 msgid "Productivity"
 msgstr "Storilnost"
 
-#: ../../src/wui/general_statistics_menu.cc:162
+#: ../../src/wui/general_statistics_menu.cc:163
 msgid "Casualties"
 msgstr "Žrtve"
 
-#: ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/wui/general_statistics_menu.cc:167
 msgid "Kills"
 msgstr "Ubitih nasprotnikovih vojakov"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings lost"
 msgstr "Zgubljenih vojaških zgradb"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Military buildings defeated"
 msgstr "Premaganih vojaških zgradb"
 
-#: ../../src/wui/general_statistics_menu.cc:182
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Civilian buildings lost"
 msgstr "Zgubljenih civilnih zgradb"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military"
 msgstr "Vojska"
 
@@ -7950,19 +7950,19 @@ msgstr ""
 msgid "Move panel to top"
 msgstr ""
 
-#: ../../src/wui/info_panel.cc:388
+#: ../../src/wui/info_panel.cc:389
 msgid "Cheat mode enabled"
 msgstr ""
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:439
+#: ../../src/wui/info_panel.cc:440
 #, c-format
 msgid "%1$s · %2$s"
 msgstr ""
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:444
+#: ../../src/wui/info_panel.cc:445
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr ""
@@ -8029,11 +8029,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr ""
 
@@ -8188,8 +8188,8 @@ msgstr "Začasno ustavi igro"
 msgid "Statistics"
 msgstr "Statistika"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Pomorstvo"
@@ -8202,7 +8202,7 @@ msgstr "Vojaki"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:154 ../../src/wui/waresdisplay.cc:81
+#: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Zaloga"
 
@@ -8384,7 +8384,7 @@ msgid "Zoom"
 msgstr "Povečava"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:103
+#: ../../src/wui/plot_area.cc:102
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
@@ -8394,7 +8394,7 @@ msgstr[2] "%1% d"
 msgstr[3] "%1% d"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:106
+#: ../../src/wui/plot_area.cc:105
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -8405,7 +8405,7 @@ msgstr[3] "%1% h"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:109
+#: ../../src/wui/plot_area.cc:108
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
@@ -8415,19 +8415,19 @@ msgstr[2] "%1% m"
 msgstr[3] "%1% m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:122
+#: ../../src/wui/plot_area.cc:121
 msgctxt "unit_generic"
 msgid "days"
 msgstr "dnevi"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:125
+#: ../../src/wui/plot_area.cc:124
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "ure"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:128
+#: ../../src/wui/plot_area.cc:127
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minute"
@@ -8477,16 +8477,16 @@ msgstr ""
 msgid "Increase experience by 1"
 msgstr ""
 
-#: ../../src/wui/productionsitewindow.cc:151
+#: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
 msgstr "Prekini zaposlitev izbranega delavca"
 
-#: ../../src/wui/productionsitewindow.cc:245
+#: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
 msgstr "(prihaja)"
 
-#: ../../src/wui/productionsitewindow.cc:245
-#: ../../src/wui/productionsitewindow.cc:307
+#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:308
 msgid "(vacant)"
 msgstr "(prosto)"
 
@@ -9012,15 +9012,15 @@ msgstr "Blago v skladiščih"
 msgid "Workers in warehouses"
 msgstr "Delavci v skladiščih"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr ""
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr ""
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr ""
 
@@ -9033,15 +9033,15 @@ msgstr "Predlagane ekipe"
 msgid "Soldiers in training"
 msgstr "Vojaki na urjenju"
 
-#: ../../src/wui/ware_statistics_menu.cc:134
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
 msgstr "Proizvodnja"
 
-#: ../../src/wui/ware_statistics_menu.cc:141
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Consumption"
 msgstr "Poraba"
 
-#: ../../src/wui/ware_statistics_menu.cc:148
+#: ../../src/wui/ware_statistics_menu.cc:149
 msgid "Economy health"
 msgstr "Zdravje gospodarstva"
 
@@ -9077,29 +9077,29 @@ msgstr "Delavec, ki čaka na vkrcanje"
 msgid "Expedition"
 msgstr "Odprava"
 
-#: ../../src/wui/waresdisplay.cc:550
+#: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
 msgstr ""
 
-#: ../../src/wui/waresdisplay.cc:552
+#: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
 msgstr ""
 
-#: ../../src/wui/waresdisplay.cc:553
+#: ../../src/wui/waresdisplay.cc:554
 msgid "="
 msgstr ""
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:595
+#: ../../src/wui/waresdisplay.cc:596
 msgid "%1%k"
 msgstr "%1% k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:598
+#: ../../src/wui/waresdisplay.cc:599
 msgid "%1%M"
 msgstr "%1% M"
 
@@ -9107,7 +9107,7 @@ msgstr "%1% M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:601
+#: ../../src/wui/waresdisplay.cc:602
 msgid "%1%G"
 msgstr "%1% G"
 

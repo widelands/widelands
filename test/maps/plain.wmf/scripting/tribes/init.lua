@@ -1,5 +1,3 @@
-descriptions = wl.Descriptions()
-
 -- ===================================
 --    Campaign Specific Data
 -- ===================================

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-01 03:05+0000\n"
+"POT-Creation-Date: 2022-03-19 04:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -265,7 +265,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
+#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1366
 #: ../../src/ui_fsmenu/addons/manager.cc:1377
@@ -864,7 +864,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr ""
 
@@ -1390,11 +1390,11 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
-#: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
+#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
+#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -3102,18 +3102,18 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.cc:114
+#: ../../src/ui_basic/dropdown.cc:112
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr ""
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:421
+#: ../../src/ui_basic/dropdown.cc:419
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.h:455
+#: ../../src/ui_basic/dropdown.h:447
 msgid "No matches"
 msgstr ""
 
@@ -4759,7 +4759,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:38 ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr ""
 
@@ -7461,8 +7461,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7892,21 +7892,21 @@ msgstr ""
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:728
+#: ../../src/wui/interactive_base.cc:727
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:730
+#: ../../src/wui/interactive_base.cc:729
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1538
+#: ../../src/wui/interactive_base.cc:1537
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1542
+#: ../../src/wui/interactive_base.cc:1541
 msgid "Screenshot saved"
 msgstr ""
 
@@ -8014,8 +8014,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
@@ -8803,15 +8803,15 @@ msgstr ""
 msgid "Workers in warehouses"
 msgstr ""
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr ""
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr ""
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr ""
 

@@ -227,6 +227,9 @@ public:
 	}
 	const AllTribes& all_tribes() const;
 
+protected:
+	bool did_postload_addons_;
+
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -272,7 +275,6 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	bool did_postload_addons_;
 	Time gametime_;
 	ObjectManager objects_;
 

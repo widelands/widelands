@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # Roy Luo <1598359376@qq.com>, 2021
-# liulitchi <xingzuo88@qq.com>, 2021
+# 柳离枝 <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-04-29 12:06+0000\n"
-"Last-Translator: liulitchi <xingzuo88@qq.com>\n"
+"PO-Revision-Date: 2015-02-03 14:55+0000\n"
+"Last-Translator: 柳离枝 <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

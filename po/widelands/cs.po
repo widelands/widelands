@@ -8,16 +8,16 @@
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Zlopez <michal.konecny@psmail.xyz>, 2021
-# Zlopez <michal.konecny@psmail.xyz>, 2021
+# Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-28 02:45+0000\n"
-"PO-Revision-Date: 2022-02-16 02:45+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-03-16 02:57+0000\n"
+"PO-Revision-Date: 2015-02-02 13:35+0000\n"
+"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,7 +171,7 @@ msgstr "ano"
 #: ../../src/base/format/float_node.h:33
 msgctxt "decimal_separator"
 msgid "."
-msgstr ""
+msgstr ","
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -288,12 +288,12 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
-#: ../../src/wui/story_message_box.cc:73
+#: ../../src/wui/story_message_box.cc:74
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
@@ -303,12 +303,12 @@ msgstr "Hlavní nabídka"
 msgid "Tools"
 msgstr "Nástroje"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -498,10 +498,10 @@ msgstr "Informace"
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -521,17 +521,17 @@ msgstr "Zobrazit stavební místa"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:426
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Skrýt největší stavební místa"
 
 #: ../../src/editor/editorinteractive.cc:427
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Zobrazit největší stavební místa"
 
 #: ../../src/editor/editorinteractive.cc:430
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Přepnout zobrazení pro největší dostupná stavební místa, pokud budou odstraněny všechny pevné předměty (stromy, skály atd.)"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -578,7 +578,7 @@ msgstr "Zobrazit suroviny"
 msgid "Unsupported Format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:774
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:778
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -610,11 +610,11 @@ msgstr "Mapa nebyla uložena, opravdu chceš ukončit editor?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:460
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1613
+#: ../../src/wlapplication.cc:1617
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1615
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1619
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -787,7 +787,7 @@ msgstr "Lodě: %s"
 #: ../../src/editor/ui_menus/field_info_window.cc:222
 msgctxt "resources"
 msgid "%1%× %2%"
-msgstr ""
+msgstr "%1%× %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
@@ -804,7 +804,7 @@ msgstr "Jméno: %s"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:233
 msgid "Size: %1% × %2%"
-msgstr ""
+msgstr "Velikost: %1% × %2%"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:237
 #, c-format
@@ -865,7 +865,7 @@ msgstr "Scénáře pro hry více hráčů"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:183
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Scénáře pro hru jednoho hráče"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:84
@@ -903,7 +903,7 @@ msgstr "Zobrazení"
 #: ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:154
 #: ../../src/wui/game_main_menu_save_game.cc:86
-#: ../../src/wui/story_message_box.cc:54
+#: ../../src/wui/story_message_box.cc:55
 msgid "OK"
 msgstr "OK"
 
@@ -922,7 +922,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
 #: ../../src/ui_fsmenu/training_wheel_options.cc:108
-#: ../../src/wui/economy_options_window.cc:677
+#: ../../src/wui/economy_options_window.cc:678
 #: ../../src/wui/game_main_menu_save_game.cc:85
 msgid "Cancel"
 msgstr "Zrušit"
@@ -951,7 +951,7 @@ msgstr "Klikni na hráče pro odebrání"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:437
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
-#: ../../src/wui/economy_options_window.cc:678
+#: ../../src/wui/economy_options_window.cc:679
 #: ../../src/wui/load_or_save_game.cc:51
 msgid "Delete"
 msgstr "Smazat"
@@ -1788,7 +1788,7 @@ msgstr "Widelands nemůže zahájit hru, protože hráč %u nemá určenou vých
 
 #: ../../src/logic/game.cc:742
 msgid "Initializing…"
-msgstr ""
+msgstr "Příprava..."
 
 #: ../../src/logic/game.cc:1185
 msgid "Trade Offer"
@@ -2269,7 +2269,7 @@ msgstr "Lodě"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
-#: ../../src/wui/general_statistics_menu.cc:151
+#: ../../src/wui/general_statistics_menu.cc:152
 #: ../../src/wui/interactive_player.cc:324
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
@@ -2281,7 +2281,7 @@ msgstr "Suroviny"
 #. need plural forms here, please let us know.
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
 #: ../../src/wui/economy_options_window.cc:77
-#: ../../src/wui/general_statistics_menu.cc:142
+#: ../../src/wui/general_statistics_menu.cc:143
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
@@ -2291,7 +2291,7 @@ msgstr "Dělníci"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
-#: ../../src/wui/general_statistics_menu.cc:147
+#: ../../src/wui/general_statistics_menu.cc:148
 #: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:196
 msgid "Buildings"
 msgstr "Budovy"
@@ -2590,7 +2590,7 @@ msgid "Checking map"
 msgstr "Ověřování mapy"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:724
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:726
 msgid "Preparing game…"
 msgstr "Příprava hry…"
 
@@ -3949,14 +3949,14 @@ msgstr "Rozšíření, která způsobují chyby závislostí, nemusí pracovat s
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr ""
+msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože verze (%2$s) je starší než verze dostupná na serveru (%3$s)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr ""
+msgstr "Rozšíření \"%1$s\" nemůže být nahráno, protože kategorie této verze (%2$s) není stejná jako kategorie verze dostupné na serveru (%3$s)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1389
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:55
@@ -4224,7 +4224,7 @@ msgstr "Neplatný znak '%c'"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:69
 #, c-format
 msgid "Filename may not contain ‘%s’"
-msgstr ""
+msgstr "Název souboru nesmí obsahovat \"%s\""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:148
 msgid "Add selected map"
@@ -4295,7 +4295,7 @@ msgid ""
 "The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr ""
+msgstr "Mapa \"%s\" není adresář. Prosím, zvaž vypnutí možnosti \"Komprimovat datové soubory Widelands\" v nabídce nastavení a znovuuložení mapy v editoru.\n\nPřeješ si i přesto mapu přidat?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 msgid "New Directory"
@@ -4488,18 +4488,18 @@ msgstr "Komentář obsahuje neplatný richtext:"
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:382
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Priorita:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
 msgctxt "tx"
 msgid "Resource Name:"
-msgstr ""
+msgstr "Název zdroje:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:396
 msgctxt "tx"
 msgid "Categories (whitespace-separated; characters only):"
-msgstr ""
+msgstr "Kategorie (oddělené bílými znaky; pouze písmena):"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:403
 msgid "This may take several minutes. Please be patient."
@@ -4508,17 +4508,17 @@ msgstr "Prosím strpení, tohle může trvat několik minut."
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:408
 msgctxt "priority"
 msgid "Low"
-msgstr ""
+msgstr "Nízká"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
 msgctxt "priority"
 msgid "Normal"
-msgstr ""
+msgstr "Normální"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "High"
-msgstr ""
+msgstr "Vysoká"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
 msgid "Please explain why you are deleting this add-on."
@@ -4584,19 +4584,19 @@ msgstr "Snímky obrazovky (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 msgid "Change verification status"
-msgstr ""
+msgstr "Změnit stav ověření"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
 msgid "Change quality rating"
-msgstr ""
+msgstr "Změnit hodnocení kvality"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
 msgid "Change sync-safety status"
-msgstr ""
+msgstr "Změnit stav bezpečnosti synchronizace"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
 msgid "Configure Transifex integration"
-msgstr ""
+msgstr "Nastavit integraci s Transifex"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
 #, c-format
@@ -4905,7 +4905,7 @@ msgstr "Zvolit kampaň"
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:79
 #: ../../src/ui_fsmenu/scenario_select.cc:102
-#: ../../src/wui/story_message_box.cc:74
+#: ../../src/wui/story_message_box.cc:75
 msgid "Return to the main menu"
 msgstr "Návrat do hlavní nabídky"
 
@@ -5279,7 +5279,7 @@ msgid "Online Game Settings"
 msgstr "Nastavení online hry"
 
 #: ../../src/ui_fsmenu/login_box.cc:44
-#: ../../src/wui/economy_options_window.cc:676
+#: ../../src/wui/economy_options_window.cc:677
 msgid "Save"
 msgstr "Uložit"
 
@@ -5295,7 +5295,7 @@ msgstr "Přezdívka:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:651
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:653
 msgid "nobody"
 msgstr "bezejména"
 
@@ -5559,7 +5559,7 @@ msgstr "Nevybrána žádná mapa"
 msgid "(no map)"
 msgstr "(žádná mapa)"
 
-#: ../../src/ui_fsmenu/mapselect.cc:49
+#: ../../src/ui_fsmenu/mapselect.cc:48
 msgid "Choose Map"
 msgstr "Výběr mapy"
 
@@ -5953,7 +5953,7 @@ msgstr "Maximální počet automaticky uložených pozic:"
 
 #: ../../src/ui_fsmenu/options.cc:232
 msgid "Compress Widelands data files (maps, replays, and savegames)"
-msgstr ""
+msgstr "Komprimovat datové soubory Widelands (mapy, záznamy a uložené hry)"
 
 #: ../../src/ui_fsmenu/options.cc:238
 msgid "Write syncstreams in network games to debug desyncs"
@@ -6165,18 +6165,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autoři"
@@ -6209,59 +6209,59 @@ msgid "Unmark All"
 msgstr "Zrušit označení"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:777 ../../src/wlapplication.cc:781
-#: ../../src/wlapplication.cc:786 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:781 ../../src/wlapplication.cc:785
+#: ../../src/wlapplication.cc:790 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "Chybová zpráva:"
 
-#: ../../src/wlapplication.cc:778 ../../src/wui/mapdetails.cc:216
+#: ../../src/wlapplication.cc:782 ../../src/wui/mapdetails.cc:216
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:780
+#: ../../src/wlapplication.cc:784
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Hře Widelands se nepodařilo nalézt soubor \"%s\"."
 
-#: ../../src/wlapplication.cc:782
+#: ../../src/wlapplication.cc:786
 msgid "File system error"
 msgstr "Chyba systému souborů"
 
-#: ../../src/wlapplication.cc:1277
+#: ../../src/wlapplication.cc:1281
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Prázdná hodnota parametru: %s"
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1286
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s nemůže být kombinováno s dalšími akcemi"
 
-#: ../../src/wlapplication.cc:1438
+#: ../../src/wlapplication.cc:1441
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Neznámý parameter: %s\nMožná chybí '='?"
 
-#: ../../src/wlapplication.cc:1559
+#: ../../src/wlapplication.cc:1562
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized a --fullscreen nejdou kombinovat"
 
-#: ../../src/wlapplication.cc:1576
+#: ../../src/wlapplication.cc:1580
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Neznámý parameter: %s"
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Game ended unexpectedly"
 msgstr "Hra byla neočekávaně ukončena"
 
-#: ../../src/wlapplication.cc:1628
+#: ../../src/wlapplication.cc:1632
 msgid "Unexpected error during the game"
 msgstr "V průběhu hry se vyskytla neočekávaná chyba"
 
-#: ../../src/wlapplication.cc:1631
+#: ../../src/wlapplication.cc:1635
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6275,7 +6275,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "V průběhu hry se vyskytla chyba. Chybová hláška:\n\n%1$s\n\nProsím nahlas tento problém, aby mohl být odstraněn. Doprovodné informace lze nalézt ve standardním výstupu (stdout.txt pro Windows). Používáš verzi build %2$s (%3$s).\n\nProsím uveď tuto informaci v hlášení.\n\nPřeješ si, aby se hra Widelands pokusila o nouzové uložení? Často (bohužel ne vždy) je pak možné hru nově nahrát a pokračovat v ní."
 
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6285,11 +6285,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hra byla neočekávaně ukončena:\n\n%s\n\nMá být proveden pokus o nouzové uložení hry? Nouzové uložení nemusí být vždy úspěšné."
 
-#: ../../src/wlapplication.cc:1666
+#: ../../src/wlapplication.cc:1670
 msgid "Emergency save failed"
 msgstr "Nouzové ukládání selhalo"
 
-#: ../../src/wlapplication.cc:1667
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6299,195 +6299,195 @@ msgstr "Omlouváme se, ale z následujícího důvodu nebylo možné nouzové ul
 
 #: ../../src/wlapplication_options.cc:163
 msgid "Warehouse"
-msgstr ""
+msgstr "Sklad"
 
 #: ../../src/wlapplication_options.cc:164
 msgid "Port"
-msgstr ""
+msgstr "Přístav"
 
 #: ../../src/wlapplication_options.cc:165
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Malé cvičiště"
 
 #: ../../src/wlapplication_options.cc:166
 msgid "Major Training Site"
-msgstr ""
+msgstr "Velké cvičiště"
 
 #: ../../src/wlapplication_options.cc:167
 msgid "Primary Small Military Site"
-msgstr ""
+msgstr "Hlavní malý vojenský objekt"
 
 #: ../../src/wlapplication_options.cc:168
 msgid "Secondary Small Military Site"
-msgstr ""
+msgstr "Vedlejší malý vojenský objekt"
 
 #: ../../src/wlapplication_options.cc:169
 msgid "Primary Medium Military Site"
-msgstr ""
+msgstr "Hlavní střední vojenský objekt"
 
 #: ../../src/wlapplication_options.cc:170
 msgid "Secondary Medium Military Site"
-msgstr ""
+msgstr "Vedlejší střední vojenský objekt"
 
 #: ../../src/wlapplication_options.cc:171
 msgid "Tower"
-msgstr ""
+msgstr "Věž"
 
 #: ../../src/wlapplication_options.cc:172
 msgid "Fortress"
-msgstr ""
+msgstr "Pevnost"
 
 #: ../../src/wlapplication_options.cc:173
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Domek dřevorubce"
 
 #: ../../src/wlapplication_options.cc:174
 msgid "Forester’s House"
-msgstr ""
+msgstr "Domek lesníka"
 
 #: ../../src/wlapplication_options.cc:175
 msgid "Quarry"
-msgstr ""
+msgstr "Lom"
 
 #: ../../src/wlapplication_options.cc:176
 msgid "Primary Building Materials Industry"
-msgstr ""
+msgstr "Hlavní stavba materiálového hospodářství"
 
 #: ../../src/wlapplication_options.cc:177
 msgid "Secondary Building Materials Industry"
-msgstr ""
+msgstr "Vedlejší stavba materiálového hospodářství"
 
 #: ../../src/wlapplication_options.cc:178
 msgid "Tertiary Building Materials Industry"
-msgstr ""
+msgstr "Terciární stavba materiálového hospodářství"
 
 #: ../../src/wlapplication_options.cc:179
 msgid "Fishing"
-msgstr ""
+msgstr "Rybaření"
 
 #: ../../src/wlapplication_options.cc:180
 msgid "Hunting"
-msgstr ""
+msgstr "Lov"
 
 #: ../../src/wlapplication_options.cc:181
 msgid "Fish/Meat Replenishing"
-msgstr ""
+msgstr "Obnovení masa/ryb"
 
 #: ../../src/wlapplication_options.cc:182
 msgid "Well"
-msgstr ""
+msgstr "Studna"
 
 #: ../../src/wlapplication_options.cc:183
 msgid "Primary Farm"
-msgstr ""
+msgstr "Hlavní statek"
 
 #: ../../src/wlapplication_options.cc:184
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Vedlejší statek"
 
 #: ../../src/wlapplication_options.cc:185
 msgid "Mill"
-msgstr ""
+msgstr "Mlýn"
 
 #: ../../src/wlapplication_options.cc:186
 msgid "Bakery"
-msgstr ""
+msgstr "Pekárna"
 
 #: ../../src/wlapplication_options.cc:187
 msgid "Brewery"
-msgstr ""
+msgstr "Pivovar"
 
 #: ../../src/wlapplication_options.cc:188
 msgid "Smokery"
-msgstr ""
+msgstr "Udírna"
 
 #: ../../src/wlapplication_options.cc:189
 msgid "Tavern"
-msgstr ""
+msgstr "Hospoda"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Ore Smelting"
-msgstr ""
+msgstr "Slévání rudy"
 
 #: ../../src/wlapplication_options.cc:191
 msgid "Tool Smithy"
-msgstr ""
+msgstr "Kovárna"
 
 #: ../../src/wlapplication_options.cc:192
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Zbrojířství"
 
 #: ../../src/wlapplication_options.cc:193
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Platnéřství"
 
 #: ../../src/wlapplication_options.cc:194
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Tkalcovna"
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Shipyard"
-msgstr ""
+msgstr "Loděnice"
 
 #: ../../src/wlapplication_options.cc:196
 msgid "Ferry Yard"
-msgstr ""
+msgstr "Převoznictví"
 
 #: ../../src/wlapplication_options.cc:197
 msgid "Scouting"
-msgstr ""
+msgstr "Průzkum"
 
 #: ../../src/wlapplication_options.cc:198
 msgid "Barracks"
-msgstr ""
+msgstr "Kasárna"
 
 #: ../../src/wlapplication_options.cc:199
 msgid "Second Carrier"
-msgstr ""
+msgstr "Druhý nosič"
 
 #: ../../src/wlapplication_options.cc:200
 msgid "Charcoal"
-msgstr ""
+msgstr "Dřevěné uhlí"
 
 #: ../../src/wlapplication_options.cc:201
 msgid "Stone Mine"
-msgstr ""
+msgstr "Důl na kámen"
 
 #: ../../src/wlapplication_options.cc:202
 msgid "Coal Mine"
-msgstr ""
+msgstr "Důl na uhlí"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Iron Mine"
-msgstr ""
+msgstr "Důl na železo"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Gold Mine"
-msgstr ""
+msgstr "Důl na zlato"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Agricultural Producer"
-msgstr ""
+msgstr "Zemědělský producent"
 
 #: ../../src/wlapplication_options.cc:206
 msgid "Primary Agricultural Consumer"
-msgstr ""
+msgstr "Hlavní zemědělský konzument"
 
 #: ../../src/wlapplication_options.cc:207
 msgid "Secondary Agricultural Consumer"
-msgstr ""
+msgstr "Vedlejší zemědělský konzument"
 
 #: ../../src/wlapplication_options.cc:208
 msgid "Alternative Industry"
-msgstr ""
+msgstr "Alternativní hospodářství"
 
 #: ../../src/wlapplication_options.cc:209
 msgid "Industry Support"
-msgstr ""
+msgstr "Podpora hospodářství"
 
 #: ../../src/wlapplication_options.cc:210
 msgid "Terraforming"
-msgstr ""
+msgstr "Úprava terénu"
 
 #: ../../src/wlapplication_options.cc:246
 msgid "Singleplayer"
@@ -6611,7 +6611,7 @@ msgstr "Přepnout zobrazení surovin"
 
 #: ../../src/wlapplication_options.cc:445
 msgid "Toggle Maximum Build Spaces"
-msgstr ""
+msgstr "Přepnout největší stavební místa"
 
 #: ../../src/wlapplication_options.cc:452
 #, c-format
@@ -6644,7 +6644,7 @@ msgid "General Statistics"
 msgstr "Obecné statistiky"
 
 #: ../../src/wlapplication_options.cc:500
-#: ../../src/wui/ware_statistics_menu.cc:104
+#: ../../src/wui/ware_statistics_menu.cc:105
 msgid "Ware Statistics"
 msgstr "Statistiky surovin"
 
@@ -6722,7 +6722,7 @@ msgstr "Zprávy: Jít na pozici"
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show All"
-msgstr ""
+msgstr "Zprávy: Zobrazit vše"
 
 #: ../../src/wlapplication_options.cc:599
 msgid "Messages: Show Geologists’ Messages"
@@ -6794,229 +6794,229 @@ msgstr "Nastavit pozici č.%d"
 msgid "Go To Landmark #%d"
 msgstr "Jít na pozici č.%d"
 
-#: ../../src/wlapplication_options.cc:920
+#: ../../src/wlapplication_options.cc:922
 msgctxt "hotkey"
 msgid "Shift"
 msgstr "Shift"
 
-#: ../../src/wlapplication_options.cc:923
+#: ../../src/wlapplication_options.cc:925
 msgctxt "hotkey"
 msgid "Alt"
 msgstr "Alt"
 
-#: ../../src/wlapplication_options.cc:927
+#: ../../src/wlapplication_options.cc:929
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr "Cmd"
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:931
 msgctxt "hotkey"
 msgid "GUI"
 msgstr "GUI"
 
-#: ../../src/wlapplication_options.cc:933
+#: ../../src/wlapplication_options.cc:935
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr "Ctrl"
 
-#: ../../src/wlapplication_options.cc:942
+#: ../../src/wlapplication_options.cc:944
 #, c-format
 msgid "%1$s+%2$s"
 msgstr "%1$s+%2$s"
 
-#: ../../src/wlapplication_options.cc:955
+#: ../../src/wlapplication_options.cc:957
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Mezerník"
 
-#: ../../src/wlapplication_options.cc:957
+#: ../../src/wlapplication_options.cc:959
 msgctxt "hotkey"
 msgid "Enter"
 msgstr "Enter"
 
-#: ../../src/wlapplication_options.cc:959
+#: ../../src/wlapplication_options.cc:961
 msgctxt "hotkey"
 msgid "Escape"
 msgstr "Escape"
 
-#: ../../src/wlapplication_options.cc:961
+#: ../../src/wlapplication_options.cc:963
 msgctxt "hotkey"
 msgid "Tab"
 msgstr "Tab"
 
-#: ../../src/wlapplication_options.cc:963
+#: ../../src/wlapplication_options.cc:965
 msgctxt "hotkey"
 msgid "Menu"
 msgstr "Menu"
 
-#: ../../src/wlapplication_options.cc:965
+#: ../../src/wlapplication_options.cc:967
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pause"
 
-#: ../../src/wlapplication_options.cc:967
+#: ../../src/wlapplication_options.cc:969
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../src/wlapplication_options.cc:969
+#: ../../src/wlapplication_options.cc:971
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
-#: ../../src/wlapplication_options.cc:971
+#: ../../src/wlapplication_options.cc:973
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
-#: ../../src/wlapplication_options.cc:973
+#: ../../src/wlapplication_options.cc:975
 msgctxt "hotkey"
 msgid "End"
 msgstr "End"
 
-#: ../../src/wlapplication_options.cc:975
+#: ../../src/wlapplication_options.cc:977
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr "Klávesa vlevo"
 
-#: ../../src/wlapplication_options.cc:977
+#: ../../src/wlapplication_options.cc:979
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr "Klávesa vpravo"
 
-#: ../../src/wlapplication_options.cc:979
+#: ../../src/wlapplication_options.cc:981
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr "Klávesa nahoru"
 
-#: ../../src/wlapplication_options.cc:981
+#: ../../src/wlapplication_options.cc:983
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr "Klávesa dolů"
 
-#: ../../src/wlapplication_options.cc:983
+#: ../../src/wlapplication_options.cc:985
 msgctxt "hotkey"
 msgid "Insert"
 msgstr "Insert"
 
-#: ../../src/wlapplication_options.cc:985
+#: ../../src/wlapplication_options.cc:987
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
 
-#: ../../src/wlapplication_options.cc:987
+#: ../../src/wlapplication_options.cc:989
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr "Backspace"
 
-#: ../../src/wlapplication_options.cc:989
+#: ../../src/wlapplication_options.cc:991
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: ../../src/wlapplication_options.cc:991
+#: ../../src/wlapplication_options.cc:993
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr "Numpad Lock"
 
-#: ../../src/wlapplication_options.cc:993
+#: ../../src/wlapplication_options.cc:995
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: ../../src/wlapplication_options.cc:995
+#: ../../src/wlapplication_options.cc:997
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr "Keypad 1"
 
-#: ../../src/wlapplication_options.cc:997
+#: ../../src/wlapplication_options.cc:999
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr "Keypad 2"
 
-#: ../../src/wlapplication_options.cc:999
+#: ../../src/wlapplication_options.cc:1001
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr "Keypad 3"
 
-#: ../../src/wlapplication_options.cc:1001
+#: ../../src/wlapplication_options.cc:1003
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr "Keypad 4"
 
-#: ../../src/wlapplication_options.cc:1003
+#: ../../src/wlapplication_options.cc:1005
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr "Keypad 5"
 
-#: ../../src/wlapplication_options.cc:1005
+#: ../../src/wlapplication_options.cc:1007
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr "Keypad 6"
 
-#: ../../src/wlapplication_options.cc:1007
+#: ../../src/wlapplication_options.cc:1009
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr "Keypad 7"
 
-#: ../../src/wlapplication_options.cc:1009
+#: ../../src/wlapplication_options.cc:1011
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr "Keypad 8"
 
-#: ../../src/wlapplication_options.cc:1011
+#: ../../src/wlapplication_options.cc:1013
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr "Keypad 9"
 
-#: ../../src/wlapplication_options.cc:1013
+#: ../../src/wlapplication_options.cc:1015
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr "Keypad 0"
 
-#: ../../src/wlapplication_options.cc:1015
+#: ../../src/wlapplication_options.cc:1017
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr "Keypad ."
 
-#: ../../src/wlapplication_options.cc:1017
+#: ../../src/wlapplication_options.cc:1019
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr "Keypad +"
 
-#: ../../src/wlapplication_options.cc:1019
+#: ../../src/wlapplication_options.cc:1021
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr "Keypad -"
 
-#: ../../src/wlapplication_options.cc:1021
+#: ../../src/wlapplication_options.cc:1023
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr "Keypad *"
 
-#: ../../src/wlapplication_options.cc:1023
+#: ../../src/wlapplication_options.cc:1025
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr "Keypad /"
 
-#: ../../src/wlapplication_options.cc:1025
+#: ../../src/wlapplication_options.cc:1027
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr "Keypad Enter"
 
-#: ../../src/wlapplication_options.cc:1034
+#: ../../src/wlapplication_options.cc:1036
 msgid "(disabled)"
-msgstr ""
+msgstr "(neaktivní)"
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1037 ../../src/wui/waresdisplay.cc:556
+#: ../../src/wlapplication_options.cc:1039 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr "%1$s%2$s"
 
-#: ../../src/wlapplication_options.cc:1062
+#: ../../src/wlapplication_options.cc:1064
 #, c-format
 msgid "Fastplace #%i"
 msgstr "Rychlé umístění #%i"
@@ -7233,13 +7233,13 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
-#: ../../src/wui/productionsitewindow.cc:233
+#: ../../src/wui/productionsitewindow.cc:234
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
@@ -7420,43 +7420,43 @@ msgid "Save target settings"
 msgstr "Uložit nastavené cíle"
 
 #. * TRANSLATORS: Infinite number of wares or workers
-#: ../../src/wui/economy_options_window.cc:308
+#: ../../src/wui/economy_options_window.cc:309
 msgid "∞"
 msgstr "∞"
 
-#: ../../src/wui/economy_options_window.cc:577
+#: ../../src/wui/economy_options_window.cc:578
 msgid "The profile name cannot be empty"
 msgstr "Název profilu nesmí zůstat prázdný"
 
-#: ../../src/wui/economy_options_window.cc:578
+#: ../../src/wui/economy_options_window.cc:579
 msgid "The default profile cannot be overwritten"
 msgstr "Výchozí profil nelze přepsat"
 
-#: ../../src/wui/economy_options_window.cc:581
+#: ../../src/wui/economy_options_window.cc:582
 msgid "Save the profile under this name"
 msgstr "Ulož profil pod tímto jménem"
 
-#: ../../src/wui/economy_options_window.cc:593
+#: ../../src/wui/economy_options_window.cc:594
 msgid "The predefined profiles cannot be deleted"
 msgstr "Předdefinované profily nelze smazat"
 
-#: ../../src/wui/economy_options_window.cc:596
+#: ../../src/wui/economy_options_window.cc:597
 msgid "Delete the selected profiles"
 msgstr "Smaž vybrané profily"
 
-#: ../../src/wui/economy_options_window.cc:618
+#: ../../src/wui/economy_options_window.cc:619
 msgid "Overwrite?"
 msgstr "Přepsat?"
 
-#: ../../src/wui/economy_options_window.cc:619
+#: ../../src/wui/economy_options_window.cc:620
 msgid "A profile with this name already exists. Do you wish to replace it?"
 msgstr "Profil s tímto jménem již existuje. Přeješ si ho nahradit?"
 
-#: ../../src/wui/economy_options_window.cc:669
+#: ../../src/wui/economy_options_window.cc:670
 msgid "Save Profile"
 msgstr "Uložit profil"
 
-#: ../../src/wui/economy_options_window.cc:679
+#: ../../src/wui/economy_options_window.cc:680
 msgid "Existing Profiles"
 msgstr "Existující profily"
 
@@ -7833,7 +7833,7 @@ msgstr "Vítězí %s!"
 #: ../../src/wui/game_summary.cc:252
 #, c-format
 msgid "Team %u won!"
-msgstr ""
+msgstr "Tým %u vyhrál!"
 
 #: ../../src/wui/game_summary.cc:310
 msgid "Score"
@@ -7903,35 +7903,35 @@ msgstr "Rozšíření:"
 msgid "Game data error:"
 msgstr "Chyba herních dat:"
 
-#: ../../src/wui/general_statistics_menu.cc:136
+#: ../../src/wui/general_statistics_menu.cc:137
 msgid "Land"
 msgstr "Země"
 
-#: ../../src/wui/general_statistics_menu.cc:157
+#: ../../src/wui/general_statistics_menu.cc:158
 msgid "Productivity"
 msgstr "Produktivita"
 
-#: ../../src/wui/general_statistics_menu.cc:162
+#: ../../src/wui/general_statistics_menu.cc:163
 msgid "Casualties"
 msgstr "Ztráty"
 
-#: ../../src/wui/general_statistics_menu.cc:166
+#: ../../src/wui/general_statistics_menu.cc:167
 msgid "Kills"
 msgstr "Zabití"
 
-#: ../../src/wui/general_statistics_menu.cc:172
+#: ../../src/wui/general_statistics_menu.cc:173
 msgid "Military buildings lost"
 msgstr "Ztracené vojenské budovy"
 
-#: ../../src/wui/general_statistics_menu.cc:177
+#: ../../src/wui/general_statistics_menu.cc:178
 msgid "Military buildings defeated"
 msgstr "Dobyté vojenské budovy"
 
-#: ../../src/wui/general_statistics_menu.cc:182
+#: ../../src/wui/general_statistics_menu.cc:183
 msgid "Civilian buildings lost"
 msgstr "Ztracené civilní budovy"
 
-#: ../../src/wui/general_statistics_menu.cc:187
+#: ../../src/wui/general_statistics_menu.cc:188
 msgid "Military"
 msgstr "Armáda"
 
@@ -7955,19 +7955,19 @@ msgstr "Přenést níže"
 msgid "Move panel to top"
 msgstr "Přenést výše"
 
-#: ../../src/wui/info_panel.cc:388
+#: ../../src/wui/info_panel.cc:389
 msgid "Cheat mode enabled"
 msgstr "Umožněno obcházení pravidel hry (Cheat mode)"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
-#: ../../src/wui/info_panel.cc:439
+#: ../../src/wui/info_panel.cc:440
 #, c-format
 msgid "%1$s · %2$s"
 msgstr "Herní čas: %1$s · Místní čas: %2$s"
 
 #. * TRANSLATORS: Gametime · Realtime · Gamespeed
-#: ../../src/wui/info_panel.cc:444
+#: ../../src/wui/info_panel.cc:445
 #, c-format
 msgid "%1$s · %2$s · %3$s"
 msgstr "Herní čas: %1$s · Místní čas: %2$s · %3$s"
@@ -8034,11 +8034,11 @@ msgstr "Odebrat surovinu"
 msgid "Add ware"
 msgstr "Přidat surovinu"
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Hide controls"
 msgstr "Skrýt nastavení"
 
-#: ../../src/wui/inputqueuedisplay.cc:630
+#: ../../src/wui/inputqueuedisplay.cc:631
 msgid "Show controls"
 msgstr "Zobrazit nastavení"
 
@@ -8093,7 +8093,7 @@ msgstr "Snímek obrazovky uložen"
 #: ../../src/wui/interactive_gamebase.cc:53
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../src/wui/interactive_gamebase.cc:55
 msgid "PAUSE"
@@ -8193,8 +8193,8 @@ msgstr "Pozastavit hru"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Námořní"
@@ -8207,7 +8207,7 @@ msgstr "Vojenské"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:40
-#: ../../src/wui/ware_statistics_menu.cc:154 ../../src/wui/waresdisplay.cc:81
+#: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Zásoby"
 
@@ -8389,7 +8389,7 @@ msgid "Zoom"
 msgstr "Přiblížení"
 
 #. * TRANSLATORS: day(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:103
+#: ../../src/wui/plot_area.cc:102
 msgctxt "unit_narrow"
 msgid "%1%d"
 msgid_plural "%1%d"
@@ -8399,7 +8399,7 @@ msgstr[2] "%1%d"
 msgstr[3] "%1%d"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
-#: ../../src/wui/plot_area.cc:106
+#: ../../src/wui/plot_area.cc:105
 msgctxt "unit_narrow"
 msgid "%1%h"
 msgid_plural "%1%h"
@@ -8410,7 +8410,7 @@ msgstr[3] "%1%h"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
-#: ../../src/wui/plot_area.cc:109
+#: ../../src/wui/plot_area.cc:108
 msgctxt "unit_narrow"
 msgid "%1%m"
 msgid_plural "%1%m"
@@ -8420,19 +8420,19 @@ msgstr[2] "%1%m"
 msgstr[3] "%1%m"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:122
+#: ../../src/wui/plot_area.cc:121
 msgctxt "unit_generic"
 msgid "days"
 msgstr "dny"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:125
+#: ../../src/wui/plot_area.cc:124
 msgctxt "unit_generic"
 msgid "hours"
 msgstr "hodiny"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
-#: ../../src/wui/plot_area.cc:128
+#: ../../src/wui/plot_area.cc:127
 msgctxt "unit_generic"
 msgid "minutes"
 msgstr "minuty"
@@ -8482,16 +8482,16 @@ msgstr "Snížit zkušenost o 1"
 msgid "Increase experience by 1"
 msgstr "Zvýšit zkušenost o 1"
 
-#: ../../src/wui/productionsitewindow.cc:151
+#: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
 msgstr "Ukončit zaměstnání zvoleného dělníka"
 
-#: ../../src/wui/productionsitewindow.cc:245
+#: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
 msgstr "(na cestě)"
 
-#: ../../src/wui/productionsitewindow.cc:245
-#: ../../src/wui/productionsitewindow.cc:307
+#: ../../src/wui/productionsitewindow.cc:246
+#: ../../src/wui/productionsitewindow.cc:308
 msgid "(vacant)"
 msgstr "(neobsazeno)"
 
@@ -8923,7 +8923,7 @@ msgstr "Změna hlasitosti. Kliknutí spustí ukázku."
 
 #: ../../src/wui/sound_options.cc:137
 msgid "Play your own music in-game"
-msgstr ""
+msgstr "Přehraj ve hře vlastní muziku"
 
 #: ../../src/wui/sound_options.cc:139
 msgid ""
@@ -8931,7 +8931,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr ""
+msgstr "Ve hře si můžeš přehrát svoji vlastní hudbu umístěním hudebních souborů do ‘<Widelands Home Directory>/music/custom_XX.*’ (kde XX je sekvence dvouciferných čísel začínající od 00). Podporované formáty souborů jsou ‘.mp3’ a ‘.ogg’."
 
 #: ../../src/wui/sound_options.cc:146
 msgctxt "sound_options"
@@ -9017,15 +9017,15 @@ msgstr "Suroviny ve skladu"
 msgid "Workers in warehouses"
 msgstr "Dělníci ve skladu"
 
-#: ../../src/wui/story_message_box.cc:62
+#: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
 msgstr "Další mise"
 
-#: ../../src/wui/story_message_box.cc:63
+#: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
 msgstr "Začít hrát další misi"
 
-#: ../../src/wui/story_message_box.cc:108
+#: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
 msgstr "Pokračovat ve hraní této mise"
 
@@ -9038,15 +9038,15 @@ msgstr "Navrhované týmy"
 msgid "Soldiers in training"
 msgstr "Vojáci ve výcviku"
 
-#: ../../src/wui/ware_statistics_menu.cc:134
+#: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
 msgstr "Výroba"
 
-#: ../../src/wui/ware_statistics_menu.cc:141
+#: ../../src/wui/ware_statistics_menu.cc:142
 msgid "Consumption"
 msgstr "Spotřeba"
 
-#: ../../src/wui/ware_statistics_menu.cc:148
+#: ../../src/wui/ware_statistics_menu.cc:149
 msgid "Economy health"
 msgstr "Zdraví hospodářství"
 
@@ -9082,29 +9082,29 @@ msgstr "Dělníci čekající na nalodění"
 msgid "Expedition"
 msgstr "Výprava"
 
-#: ../../src/wui/waresdisplay.cc:550
+#: ../../src/wui/waresdisplay.cc:551
 msgid "↓"
 msgstr "↓"
 
-#: ../../src/wui/waresdisplay.cc:552
+#: ../../src/wui/waresdisplay.cc:553
 msgid "↑"
 msgstr "↑"
 
-#: ../../src/wui/waresdisplay.cc:553
+#: ../../src/wui/waresdisplay.cc:554
 msgid "="
 msgstr "="
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:595
+#: ../../src/wui/waresdisplay.cc:596
 msgid "%1%k"
 msgstr "%1%k"
 
 #. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:598
+#: ../../src/wui/waresdisplay.cc:599
 msgid "%1%M"
 msgstr "%1%M"
 
@@ -9112,7 +9112,7 @@ msgstr "%1%M"
 #. 5,000,000,000).
 #. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
 #. whitespace.
-#: ../../src/wui/waresdisplay.cc:601
+#: ../../src/wui/waresdisplay.cc:602
 msgid "%1%G"
 msgstr "%1%G"
 
