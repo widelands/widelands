@@ -4832,7 +4832,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 	assert(needed_count >= 0 &&
 	       needed_count <= (static_cast<uint16_t>(productionsites.size() + mines_.size()) / 10) + 2);
 
-	if (static_cast<unsigned long>(player_statistics.any_enemy_seen_lately(gametime)) +
+	if (static_cast<uint64_t>(player_statistics.any_enemy_seen_lately(gametime)) +
 	       (productionsites.size() + mines_.size()) >
 	    10) {
 		++needed_count;
