@@ -39,7 +39,7 @@ inline std::string safe_richtext_message(std::string body) {
 }
 
 void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const bool local) {
-	if (!(SDL_GetModState() & KMOD_CTRL)) {
+	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   safe_richtext_message(
@@ -341,7 +341,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u"),
               filesize_string(info->total_file_size),
               info->download_count,
-              (info->number_of_votes() ? format_l("%.2f", info->average_rating()) : "–"),
+              (info->number_of_votes() != 0u ? format_l("%.2f", info->average_rating()) : "–"),
               info->user_comments.size(),
               info->screenshots.size()),
         UI::Align::kRight),
@@ -378,7 +378,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, false); });
 	install_.sigclicked.connect([ctrl, this]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
-		if (!info_->verified || !(SDL_GetModState() & KMOD_CTRL)) {
+		if (!info_->verified || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   safe_richtext_message(format(
@@ -402,7 +402,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		ctrl->rebuild(true);
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
-		if (!info->verified || !(SDL_GetModState() & KMOD_CTRL)) {
+		if (!info->verified || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
 			   safe_richtext_message(
@@ -468,7 +468,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	                info->total_file_size),
 	         format(
 	            ngettext("%u download", "%u downloads", info->download_count), info->download_count),
-	         (info->number_of_votes() ?
+	         (info->number_of_votes() != 0u ?
                 format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                               "Average rating: %1$.3f (%2$u votes)", info->number_of_votes()),
 	                      info->average_rating(), info->number_of_votes()) :
