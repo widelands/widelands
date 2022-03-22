@@ -352,7 +352,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 		log_warn("Theme '%s' not found", arg.c_str());
 		FALLS_THROUGH;
 	case UpdateThemeAction::kAutodetect:
-		if (!previously_enabled) {
+		if (previously_enabled == nullptr) {
 			set_config_string("theme", "");
 			set_template_dir("");
 			return;
@@ -413,7 +413,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->unlocalized_description = s.get_safe_untranslated_string("description");
 	i->unlocalized_author = s.get_safe_untranslated_string("author");
 	i->version = string_to_version(s.get_safe_string("version"));
-	i->i18n_version = i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0;
+	i->i18n_version = i18n_section != nullptr ? i18n_section->get_natural(name.c_str(), 0) : 0;
 	i->category = get_category(s.get_safe_string("category"));
 	i->sync_safe = s.get_bool("sync_safe", false);
 	i->min_wl_version = s.get_string("min_wl_version", "");

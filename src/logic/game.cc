@@ -644,7 +644,7 @@ bool Game::run(StartGameType const start_game_type,
 			}
 		}
 
-		if (ipl) {
+		if (ipl != nullptr) {
 			// Scroll map to starting position for new games.
 			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
 			// InteractiveGameBase::start() for multiplayer.
@@ -660,9 +660,9 @@ bool Game::run(StartGameType const start_game_type,
 		iterate_player_numbers(p, nr_players) {
 			const Player* const plr = get_player(p);
 			const std::string no_name;
-			const std::string& player_tribe = plr ? plr->tribe().name() : no_name;
-			const std::string& player_name = plr ? plr->get_name() : no_name;
-			const std::string& player_ai = plr ? plr->get_ai() : no_name;
+			const std::string& player_tribe = plr != nullptr ? plr->tribe().name() : no_name;
+			const std::string& player_name = plr != nullptr ? plr->get_name() : no_name;
+			const std::string& player_ai = plr != nullptr ? plr->get_ai() : no_name;
 			mutable_map()->set_scenario_player_tribe(p, player_tribe);
 			mutable_map()->set_scenario_player_name(p, player_name);
 			mutable_map()->set_scenario_player_ai(p, player_ai);
@@ -1303,7 +1303,7 @@ void Game::sample_statistics() {
 		}
 
 		// Now, walk the bobs
-		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob()) {
+		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 			if (upcast(Soldier const, s, b)) {
 				miltary_strength[s->owner().player_number() - 1] +=
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
@@ -1346,7 +1346,7 @@ void Game::sample_statistics() {
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[i]) {
+		if (productivity[i] != 0u) {
 			productivity[i] /= nr_production_sites[i];
 		}
 	}

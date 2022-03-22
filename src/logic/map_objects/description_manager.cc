@@ -250,9 +250,9 @@ void DescriptionManager::load_description(const std::string& description_name) {
 	load_order_.push_back(description_name);
 	const RegisteredObject* object = nullptr;
 
-	if (registered_scenario_descriptions_.count(description_name)) {
+	if (registered_scenario_descriptions_.count(description_name) != 0u) {
 		object = &registered_scenario_descriptions_.at(description_name);
-	} else if (registered_descriptions_.count(description_name)) {
+	} else if (registered_descriptions_.count(description_name) != 0u) {
 		object = &registered_descriptions_.at(description_name);
 	} else {
 		throw GameDataError("DescriptionManager::load_description: Object '%s' was not registered",
