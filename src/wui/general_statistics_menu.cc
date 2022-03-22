@@ -96,7 +96,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
 		const Widelands::Player* p = parent.game().get_player(i + 1);
-		const RGBColor& color = p ? p->get_playercolor() :
+		const RGBColor& color = p != nullptr ? p->get_playercolor() :
                                   // The plot is always invisible if this player doesn't
                                   // exist, but we need to assign a color anyway
                                   kPlayerColors[i];
@@ -114,7 +114,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		if (hook) {
 			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
 		}
-		if (game_.get_player(i + 1)) {  // Show area plot
+		if (game_.get_player(i + 1) != nullptr) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
 		}
 	}
@@ -259,7 +259,7 @@ void GeneralStatisticsMenu::save_state_to_registry() {
 		Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game_) {
 			my_registry_->selected_players[p - 1] =
-			   !cbs_[p - 1] || cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
+			   (cbs_[p - 1] == nullptr) || cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
 }
@@ -283,7 +283,7 @@ void GeneralStatisticsMenu::show_or_hide_plot(const int32_t id, const bool show)
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size = game_.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i) {
-		if (cbs_[i]) {
+		if (cbs_[i] != nullptr) {
 			plot_.show_plot(
 			   i * ndatasets_ + id, cbs_[i]->style() == UI::Button::VisualState::kPermpressed);
 			plot_.show_plot(i * ndatasets_ + selected_information_, false);
@@ -304,7 +304,7 @@ UI::Window& GeneralStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			GeneralStatisticsMenu& m = dynamic_cast<GeneralStatisticsMenu&>(*r.window);
 			m.radiogroup_.set_state(fr.unsigned_8(), true);
 			for (unsigned i = 0; i < kMaxPlayers; ++i) {
-				if (fr.unsigned_8()) {
+				if (fr.unsigned_8() != 0u) {
 					m.cb_changed_to(i + 1);
 				}
 			}
@@ -323,7 +323,7 @@ void GeneralStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mo
 	fw.unsigned_8(radiogroup_.get_state());
 	for (UI::Button* c : cbs_) {
 		// The saved value indicates whether we explicitly need to toggle this button
-		fw.unsigned_8((c && c->style() != UI::Button::VisualState::kPermpressed) ? 1 : 0);
+		fw.unsigned_8(((c != nullptr) && c->style() != UI::Button::VisualState::kPermpressed) ? 1 : 0);
 	}
 	fw.signed_32(slider_->get_slider().get_value());
 }

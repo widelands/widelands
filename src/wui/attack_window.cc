@@ -363,12 +363,12 @@ void AttackWindow::act_debug() {
 
 void AttackWindow::send_less_soldiers() {
 	assert(soldiers_slider_.get());
-	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? 0 :
+	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ? 0 :
                                                                  soldiers_slider_->get_value() - 1);
 }
 
 void AttackWindow::send_more_soldiers() {
-	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? soldiers_slider_->get_max_value() :
+	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ? soldiers_slider_->get_max_value() :
                                                                  soldiers_slider_->get_value() + 1);
 }
 
@@ -401,20 +401,20 @@ AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
 }
 
 bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT || !other_) {
+	if (btn != SDL_BUTTON_LEFT || (other_ == nullptr)) {
 		return UI::Panel::handle_mousepress(btn, x, y);
 	}
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		for (const auto& s : get_soldiers()) {
 			remove(s);
 			other_->add(s);
 		}
 	} else {
 		const Widelands::Soldier* soldier = soldier_at(x, y);
-		if (!soldier) {
+		if (soldier == nullptr) {
 			return UI::Panel::handle_mousepress(btn, x, y);
 		}
-		if (SDL_GetModState() & KMOD_SHIFT) {
+		if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 			for (const auto& s : get_soldiers()) {
 				remove(s);
 				other_->add(s);
@@ -546,7 +546,7 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 				a->attacking_soldiers_->remove(s);
 				a->remaining_soldiers_->add(s);
 			}
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
 				a->remaining_soldiers_->remove(s);
 				a->attacking_soldiers_->add(s);

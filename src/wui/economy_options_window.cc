@@ -151,7 +151,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(Panel* parent,
 			   return;
 		   }
 		   read_targets();
-		   if (save_profile_dialog_) {
+		   if (save_profile_dialog_ != nullptr) {
 			   save_profile_dialog_->update_table();
 		   }
 	   });
@@ -170,7 +170,7 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	if (Widelands::Economy* e_wo = player_->get_economy(worker_serial_)) {
 		e_wo->set_options_window(nullptr);
 	}
-	if (save_profile_dialog_) {
+	if (save_profile_dialog_ != nullptr) {
 		save_profile_dialog_->unset_parent();
 	}
 }
@@ -183,7 +183,7 @@ EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
 	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
 	EconomyOptionsWindow* window_open = nullptr;
-	if (ware_economy->get_options_window()) {
+	if (ware_economy->get_options_window() != nullptr) {
 		EconomyOptionsWindow& window =
 		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
 		window_open = &window;
@@ -193,7 +193,7 @@ EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
 		}
 		window.move_to_top();
 	}
-	if (worker_economy->get_options_window()) {
+	if (worker_economy->get_options_window() != nullptr) {
 		EconomyOptionsWindow& window =
 		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
 		window_open = &window;
@@ -203,7 +203,7 @@ EconomyOptionsWindow& EconomyOptionsWindow::create(Panel* parent,
 		}
 		window.move_to_top();
 	}
-	if (window_open) {
+	if (window_open != nullptr) {
 		return *window_open;
 	}
 	return *new EconomyOptionsWindow(
@@ -228,7 +228,7 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 	Widelands::Serial* serial = note.old_economy == ware_serial_   ? &ware_serial_ :
 	                            note.old_economy == worker_serial_ ? &worker_serial_ :
                                                                     nullptr;
-	if (serial) {
+	if (serial != nullptr) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
 			*serial = note.new_economy;
@@ -366,7 +366,7 @@ void EconomyOptionsWindow::reset_target() {
 
 void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (!economy) {
+	if (economy == nullptr) {
 		return die();
 	}
 	assert(economy->type() == type_);
@@ -414,7 +414,7 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 		return;
 	}
 	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (!economy) {
+	if (economy == nullptr) {
 		return die();
 	}
 	assert(economy->type() == type_);
@@ -486,8 +486,8 @@ constexpr Duration kThinkInterval(200);
 
 void EconomyOptionsWindow::think() {
 	const Time& time = player_->egbase().get_gametime();
-	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(ware_serial_) ||
-	    !player_->get_economy(worker_serial_)) {
+	if (time - time_last_thought_ < kThinkInterval || (player_->get_economy(ware_serial_) == nullptr) ||
+	    (player_->get_economy(worker_serial_) == nullptr)) {
 		// If our economy has been deleted, die() was already called, no need to do anything
 		return;
 	}
@@ -652,7 +652,7 @@ void EconomyOptionsWindow::SaveProfileWindow::unset_parent() {
 }
 
 void EconomyOptionsWindow::SaveProfileWindow::think() {
-	if (!economy_options_) {
+	if (economy_options_ == nullptr) {
 		die();
 	}
 	UI::Window::think();
@@ -706,13 +706,13 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
 }
 
 EconomyOptionsWindow::SaveProfileWindow::~SaveProfileWindow() {
-	if (economy_options_) {
+	if (economy_options_ != nullptr) {
 		economy_options_->close_save_profile_window();
 	}
 }
 
 void EconomyOptionsWindow::create_target() {
-	if (save_profile_dialog_) {
+	if (save_profile_dialog_ != nullptr) {
 		// Already open
 		return;
 	}
@@ -822,7 +822,7 @@ void EconomyOptionsWindow::read_targets() {
 	profile.read(complete_filename.c_str());
 
 	Section* global_section = profile.get_section(kDefaultEconomyProfile);
-	if (global_section) {
+	if (global_section != nullptr) {
 		std::map<std::string, std::string> serials;
 		while (Section::Value* v = global_section->get_next_val()) {
 			serials.insert(std::make_pair(v->get_name(), v->get_string()));
@@ -890,17 +890,17 @@ void EconomyOptionsWindow::save(FileWrite& fw, Widelands::MapObjectSaver& mos) c
 	fw.unsigned_16(kCurrentPacketVersion);
 	Widelands::Economy* e_wa = player_->get_economy(ware_serial_);
 	Widelands::Economy* e_wo = player_->get_economy(worker_serial_);
-	if (!e_wa || !e_wo) {
+	if ((e_wa == nullptr) || (e_wo == nullptr)) {
 		fw.unsigned_32(0);
 		return;
 	}
 	Widelands::Flag* f = e_wa->get_arbitrary_flag(e_wo);
-	if (!f) {
+	if (f == nullptr) {
 		log_warn("EconomyOptionsWindow::save: No flag exists in both economies (%u & %u)",
 		         ware_serial_, worker_serial_);
 		f = e_wa->get_arbitrary_flag();
 	}
-	if (!f) {
+	if (f == nullptr) {
 		fw.unsigned_32(0);
 		return;
 	}
