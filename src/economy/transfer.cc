@@ -211,7 +211,8 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 		// special rule to get wares into buildings
 		if ((ware_ != nullptr) && route_.get_nrsteps() == 1) {
-			if ((destination != nullptr) && destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
+			if ((destination != nullptr) &&
+			    destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;

@@ -329,7 +329,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 				if (carrier == w) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
-						if ((new_slot.carrier.get(game) == nullptr) && (new_slot.carrier_request == nullptr) &&
+						if ((new_slot.carrier.get(game) == nullptr) &&
+						    (new_slot.carrier_request == nullptr) &&
 						    new_slot.carrier_type_id == old_slot.carrier_type_id) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
@@ -442,9 +443,9 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 		NEVER_HERE();
 	}
 	return ((egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
-	        TerrainDescription::Is::kUnwalkable) != 0) &&
+	         TerrainDescription::Is::kUnwalkable) != 0) &&
 	       ((egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
-	        TerrainDescription::Is::kUnwalkable) != 0);
+	         TerrainDescription::Is::kUnwalkable) != 0);
 }
 
 /**
@@ -517,7 +518,8 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
-			if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) && slot.carrier_type_id > 0) {
+			if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) &&
+			    slot.carrier_type_id > 0) {
 				request_carrier(slot);
 			}
 		}

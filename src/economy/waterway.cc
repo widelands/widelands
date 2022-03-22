@@ -228,7 +228,8 @@ void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	RoadBase::log_general_info(egbase);
 
 	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) != nullptr ? ferry_.serial() : 0);
-	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_.get(egbase) != nullptr ? fleet_.serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n",
+	      fleet_.get(egbase) != nullptr ? fleet_.serial() : 0);
 }
 
 }  // namespace Widelands
