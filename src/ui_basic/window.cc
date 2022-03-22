@@ -209,7 +209,7 @@ void Window::set_center_panel(Panel* panel) {
  * Update the window's desired size based on its center panel.
  */
 void Window::update_desired_size() {
-	if (center_panel_ && !is_minimal_) {
+	if ((center_panel_ != nullptr) && !is_minimal_) {
 		int innerw;
 		int innerh = 0;
 		center_panel_->get_desired_size(&innerw, &innerh);
@@ -223,7 +223,7 @@ void Window::update_desired_size() {
  * so that it fills the window entirely (the latter only if not minimized).
  */
 void Window::layout() {
-	if (center_panel_ && !is_minimal_) {
+	if ((center_panel_ != nullptr) && !is_minimal_) {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
@@ -252,11 +252,11 @@ void Window::move_out_of_the_way() {
  * Moves the mouse to the child panel that is activated as fast click panel
  */
 void Window::warp_mouse_to_fastclick_panel() {
-	if (fastclick_panel_) {
+	if (fastclick_panel_ != nullptr) {
 		Vector2i pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
 		UI::Panel* p = fastclick_panel_;
 
-		while (p->get_parent() && p != this) {
+		while ((p->get_parent() != nullptr) && p != this) {
 			pt = p->to_parent(pt);
 			p = p->get_parent();
 		}
@@ -342,7 +342,7 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	const RGBAColor& focus_color =
-	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
+	   ((get_parent() != nullptr) && get_parent()->focused_child() == this) || is_modal() ?
          window_style_info().window_border_focused() :
          window_style_info().window_border_unfocused();
 
@@ -499,7 +499,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < kVerticalBorderThickness) ||
+	if ((((SDL_GetModState() & KMOD_CTRL) != 0) && btn == SDL_BUTTON_LEFT && my < kVerticalBorderThickness) ||
 	    btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
@@ -684,7 +684,7 @@ bool Window::handle_mousemove(
 				const int32_t right = left + w;
 				const int32_t bot = top + h;
 
-				for (const Panel* snap_target = parent->get_first_child(); snap_target;
+				for (const Panel* snap_target = parent->get_first_child(); snap_target != nullptr;
 				     snap_target = snap_target->get_next_sibling()) {
 					if (snap_target != this && snap_target->is_snap_target()) {
 						int32_t const other_left = snap_target->get_x();
