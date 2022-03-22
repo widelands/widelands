@@ -659,12 +659,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
-					fw.string(field->dismantlesite.building != nullptr ? field->dismantlesite.building->name() :
-                                                         "dismantlesite");
+					fw.string(field->dismantlesite.building != nullptr ?
+                            field->dismantlesite.building->name() :
+                            "dismantlesite");
 					fw.unsigned_32(field->dismantlesite.progress);
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
-					fw.string(field->constructionsite->was != nullptr ? field->constructionsite->was->name() : "");
+					fw.string(field->constructionsite->was != nullptr ?
+                            field->constructionsite->was->name() :
+                            "");
 
 					fw.unsigned_32(field->constructionsite->intermediates.size());
 					for (const BuildingDescr* d : field->constructionsite->intermediates) {

@@ -1088,7 +1088,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			   map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
 			do {
 				if ((map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
-				    Widelands::BUILDCAPS_BIG) != 0) {
+				     Widelands::BUILDCAPS_BIG) != 0) {
 					map_.set_starting_pos(p, mr.location());
 					fixed = true;
 					break;
