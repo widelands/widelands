@@ -123,7 +123,7 @@ void MapScriptingPacket::read(FileSystem& fs,
 void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// Write any scenario scripting files in the map's basic scripting dir
 	FileSystem* map_fs = egbase.map().filesystem();
-	if (map_fs) {
+	if (map_fs != nullptr) {
 		write_lua_dir(fs, map_fs, "scripting");
 		// Write any custom scenario tribe entities
 		if (map_fs->file_exists("scripting/tribes")) {

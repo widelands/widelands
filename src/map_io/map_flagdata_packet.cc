@@ -84,7 +84,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 						uint32_t const wares_filled = fr.unsigned_32();
 						flag.ware_filled_ = wares_filled;
 						for (uint32_t i = 0; i < wares_filled; ++i) {
-							flag.wares_[i].pending = fr.unsigned_8();
+							flag.wares_[i].pending = (fr.unsigned_8() != 0u);
 							flag.wares_[i].priority = fr.signed_32();
 							uint32_t const ware_serial = fr.unsigned_32();
 							try {
@@ -136,7 +136,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							FlagJob f;
 							f.type = packet_version < 6 ? FlagJob::Type::kGeologist :
                                                    static_cast<FlagJob::Type>(fr.unsigned_8());
-							if (fr.unsigned_8()) {
+							if (fr.unsigned_8() != 0u) {
 								f.request = new Request(flag, 0, Flag::flag_job_request_callback, wwWORKER);
 								f.request->read(fr, dynamic_cast<Game&>(egbase), mol);
 							} else {
@@ -146,7 +146,7 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							flag.flag_jobs_.push_back(f);
 						}
 
-						flag.act_pending_ = packet_version >= 6 && fr.unsigned_8();
+						flag.act_pending_ = packet_version >= 6 && (fr.unsigned_8() != 0u);
 
 						mol.mark_object_as_loaded(flag);
 					}
@@ -190,7 +190,7 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			fw.unsigned_32(flag->ware_filled_);
 
 			for (int32_t i = 0; i < flag->ware_filled_; ++i) {
-				fw.unsigned_8(flag->wares_[i].pending);
+				fw.unsigned_8(static_cast<uint8_t>(flag->wares_[i].pending));
 				fw.signed_32(flag->wares_[i].priority);
 				assert(mos.is_object_known(*flag->wares_[i].ware));
 				fw.unsigned_32(mos.get_object_file_index(*flag->wares_[i].ware));
@@ -223,7 +223,7 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			fw.unsigned_16(flag->flag_jobs_.size());
 			for (const FlagJob& job : flag->flag_jobs_) {
 				fw.unsigned_8(static_cast<uint8_t>(job.type));
-				if (job.request) {
+				if (job.request != nullptr) {
 					fw.unsigned_8(1);
 					job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
 				} else {
