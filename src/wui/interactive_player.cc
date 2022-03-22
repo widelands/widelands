@@ -612,9 +612,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 				// Draw port space hint if a port could be built here, but current situation doesn't
 				// allow it.
-				bool has_road = (player_field.r_e != 0u) || (player_field.r_sw != 0u) || (player_field.r_se != 0u);
+				bool has_road =
+				   (player_field.r_e != 0u) || (player_field.r_sw != 0u) || (player_field.r_se != 0u);
 				bool has_object = (f->fcoords.field->get_immovable() != nullptr);
-				if (((maxcaps & Widelands::BUILDCAPS_PORT) != 0) && ((caps & Widelands::BUILDCAPS_PORT) == 0) &&
+				if (((maxcaps & Widelands::BUILDCAPS_PORT) != 0) &&
+				    ((caps & Widelands::BUILDCAPS_PORT) == 0) &&
 				    f->fcoords.field->is_interior(plr.player_number()) && !has_road && !has_object) {
 					const Image* pic = portspace_hint_pic_;
 					if (overlay != nullptr && ((caps & Widelands::BUILDCAPS_BUILDINGMASK) != 0)) {

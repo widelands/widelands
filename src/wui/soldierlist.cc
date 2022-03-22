@@ -207,7 +207,7 @@ void SoldierPanel::think() {
 		}
 
 		while ((icon.row != 0u) && (row_occupancy[icon.row] >= kMaxColumns ||
-		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
+		                            icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
 			icon.row--;
 		}
 

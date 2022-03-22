@@ -217,10 +217,10 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                kButtonSize,
                0,
                4,
-               has_priority_ ?
-                  priority_to_index(settings_ != nullptr ? settings_->ware_queues.at(index_).priority :
-                                                bld.get_priority(type_, index_)) :
-                  2,
+               has_priority_ ? priority_to_index(settings_ != nullptr ?
+                                                    settings_->ware_queues.at(index_).priority :
+                                                    bld.get_priority(type_, index_)) :
+                               2,
                UI::SliderStyle::kWuiLight,
                "",
                kButtonSize,
@@ -228,7 +228,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
      slider_was_moved_(nullptr),
      collapsed_(false),
-     nr_icons_(queue_ != nullptr                       ? queue_->get_max_size() :
+     nr_icons_(queue_ != nullptr            ? queue_->get_max_size() :
                type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
                                               settings_->ware_queues.at(index_).max_fill),
      icons_(nr_icons_, nullptr),
@@ -448,7 +448,8 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 		return;
 	}
 
-	const unsigned desired_fill = queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned desired_fill =
+	   queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
 	const unsigned max_fill = queue_ != nullptr ? queue_->get_max_size() : get_setting()->max_fill;
 	assert(desired_fill <= max_fill);
 
@@ -515,7 +516,8 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 		return;
 	}
 
-	const unsigned desired_fill = queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned desired_fill =
+	   queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
 	const unsigned max_fill = queue_ != nullptr ? queue_->get_max_size() : get_setting()->max_fill;
 	assert(desired_fill <= max_fill);
 	new_fill = std::min(new_fill, max_fill);
@@ -571,8 +573,8 @@ void InputQueueDisplay::set_collapsed(const bool c) {
 inline Widelands::ProductionsiteSettings::InputQueueSetting*
 InputQueueDisplay::get_setting() const {
 	return settings_ != nullptr ? type_ == Widelands::wwWARE ? &settings_->ware_queues.at(index_) :
-                                                   &settings_->worker_queues.at(index_) :
-                      nullptr;
+                                                              &settings_->worker_queues.at(index_) :
+                                 nullptr;
 }
 
 static const RGBAColor kColorComing(127, 127, 127, 191);
@@ -661,7 +663,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	// Draw max fill indicator
 	if (!show_only_) {
 		assert(nr_icons_ > 0);
-		const unsigned desired_fill = queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
+		const unsigned desired_fill =
+		   queue_ != nullptr ? queue_->get_max_fill() : get_setting()->desired_fill;
 		assert(desired_fill <= nr_icons_);
 
 		auto calc_xpos = [this](const size_t fill) {
@@ -689,8 +692,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw priority indicator
 	if (has_priority_ && collapsed_) {
-		const size_t p =
-		   priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) : get_setting()->priority);
+		const size_t p = priority_to_index(queue_ != nullptr ? b->get_priority(type_, index_) :
+                                                             get_setting()->priority);
 		const int w = kButtonSize / 5;
 		const int x = hbox_.get_x() + collapse_.get_x() - w;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);

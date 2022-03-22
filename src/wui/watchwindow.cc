@@ -188,7 +188,8 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if ((ipl != nullptr) && !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
+		if ((ipl != nullptr) &&
+		    !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {

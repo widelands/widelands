@@ -65,7 +65,8 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !id_ || (owner_.message_queue_ == nullptr) || (owner_.message_queue_->count(id_.value()) != 0u);
+	return !id_ || (owner_.message_queue_ == nullptr) ||
+	       (owner_.message_queue_->count(id_.value()) != 0u);
 }
 
 void MessagePreview::think() {
@@ -465,7 +466,8 @@ void InfoPanel::think() {
 		message_queue_ = &iplayer_->player().messages();
 	}
 
-	while ((message_queue_ != nullptr) && *last_message_id_ != message_queue_->current_message_id()) {
+	while ((message_queue_ != nullptr) &&
+	       *last_message_id_ != message_queue_->current_message_id()) {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
 		if (message_queue_->count(last_message_id_->value()) != 0u) {
 			push_message(

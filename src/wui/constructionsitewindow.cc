@@ -271,7 +271,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 					game_->send_player_militarysite_set_soldier_preference(
 					   *construction_site_.get(ibase()->egbase()),
 					   state != 0 ? Widelands::SoldierPreference::kRookies :
-                          Widelands::SoldierPreference::kHeroes);
+                               Widelands::SoldierPreference::kHeroes);
 				} else {
 					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 				}

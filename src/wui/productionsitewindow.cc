@@ -350,8 +350,9 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 	   ps->working_positions()->at(selected_index).worker.get(ibase()->egbase());
 
 	const Widelands::DescriptionIndex current =
-	   worker != nullptr ? ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
-               Widelands::INVALID_INDEX;
+	   worker != nullptr ?
+         ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
+         Widelands::INVALID_INDEX;
 	if (current == selected) {
 		return;
 	}

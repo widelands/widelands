@@ -317,7 +317,8 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown));
 
 	if (!is_multiplayer()) {
-		if ((get_game()->game_controller() != nullptr) && get_game()->game_controller()->is_paused()) {
+		if ((get_game()->game_controller() != nullptr) &&
+		    get_game()->game_controller()->is_paused()) {
 			gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause,
 			                   g_image_cache->get("images/wui/menus/gamespeed_resume.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
@@ -340,14 +341,14 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	case GameSpeedEntry::kIncrease: {
 		increase_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                          kSpeedDefault);
+                                                                 kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
 		decrease_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
 		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
-                                                          kSpeedDefault);
+                                                                 kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;

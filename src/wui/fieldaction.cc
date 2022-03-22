@@ -414,7 +414,8 @@ void FieldActionWindow::add_buttons_auto() {
 
 				Building* const building = flag->get_building();
 
-				if ((building == nullptr) || ((building->get_playercaps() & Building::PCap_Bulldoze) != 0u)) {
+				if ((building == nullptr) ||
+				    ((building->get_playercaps() & Building::PCap_Bulldoze) != 0u)) {
 					add_button(buildbox, "rip_flag", kImgButtonRipFlag, &FieldActionWindow::act_ripflag,
 					           _("Destroy this flag"));
 				}
@@ -465,7 +466,7 @@ void FieldActionWindow::add_buttons_auto() {
 
 			// Add house building
 			if ((player_ != nullptr) && (((nodecaps & Widelands::BUILDCAPS_SIZEMASK) != 0) ||
-			                ((nodecaps & Widelands::BUILDCAPS_MINE) != 0))) {
+			                             ((nodecaps & Widelands::BUILDCAPS_MINE) != 0))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
@@ -553,16 +554,17 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !((node_.field->get_immovable() != nullptr) && node_.field->get_immovable()->has_attribute(
-		                                         building_descr->get_built_over_immovable()))) {
+		    !((node_.field->get_immovable() != nullptr) &&
+		      node_.field->get_immovable()->has_attribute(
+		         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
 			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                   buildcaps :
-                   max_nodecaps) &
-			      Widelands::BUILDCAPS_MINE) == 0) {
+                  buildcaps :
+                  max_nodecaps) &
+			     Widelands::BUILDCAPS_MINE) == 0) {
 				continue;
 			}
 
@@ -1071,8 +1073,9 @@ void show_field_action(InteractiveBase* const ibase,
 				w.add_buttons_road(target != ibase->get_build_road_start() &&
 				                   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			} else {
-				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
-				                       ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
+				w.add_buttons_waterway(
+				   target != ibase->get_build_road_start() &&
+				   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			}
 			w.init();
 			return;

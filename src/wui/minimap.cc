@@ -84,7 +84,8 @@ bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 
 	dynamic_cast<MiniMap&>(*get_parent())
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
-	                                       *minimap_type_, (*minimap_layers_ & MiniMapLayer::Zoom2) != 0));
+	                                       *minimap_type_,
+	                                       (*minimap_layers_ & MiniMapLayer::Zoom2) != 0));
 	return true;
 }
 
