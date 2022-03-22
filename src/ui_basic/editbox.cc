@@ -270,7 +270,8 @@ int EditBox::calculate_text_width(int pos) const {
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && (SDL_HasClipboardText() != 0u)) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) &&
+		    (SDL_HasClipboardText() != 0u)) {
 			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
 			}

@@ -742,9 +742,10 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			}
 		}
 		for (const Recti& r : focus_overlay_rects()) {
-			dst.fill_rect(
-			   r, focus_ != nullptr ? g_style_manager->semi_focused_color() : g_style_manager->focused_color(),
-			   BlendMode::Default);
+			dst.fill_rect(r,
+			              focus_ != nullptr ? g_style_manager->semi_focused_color() :
+                                           g_style_manager->focused_color(),
+			              BlendMode::Default);
 		}
 	}
 }
@@ -814,7 +815,8 @@ void Panel::do_think() {
  * Get mouse position relative to this panel
  */
 Vector2i Panel::get_mouse_position() const {
-	return (parent_ != nullptr ? parent_->get_mouse_position() : WLApplication::get()->get_mouse_position()) -
+	return (parent_ != nullptr ? parent_->get_mouse_position() :
+                                WLApplication::get()->get_mouse_position()) -
 	       Vector2i(get_x() + get_lborder(), get_y() + get_tborder());
 }
 
@@ -1285,7 +1287,8 @@ void Panel::do_mousein(bool const inside) {
 
 	if (tooltip_accessibility_mode()) {
 		if (inside && tooltip_panel_ != this &&
-		    ((tooltip_panel_ == nullptr) || tooltip_fixed_pos_ == Vector2i::invalid()) && !tooltip().empty()) {
+		    ((tooltip_panel_ == nullptr) || tooltip_fixed_pos_ == Vector2i::invalid()) &&
+		    !tooltip().empty()) {
 			tooltip_panel_ = this;
 			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
 		} else if (!inside && tooltip_panel_ == this && tooltip_fixed_pos_ == Vector2i::invalid()) {

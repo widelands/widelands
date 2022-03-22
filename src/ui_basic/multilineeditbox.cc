@@ -380,7 +380,8 @@ void MultilineEditbox::set_caret_pos(const size_t caret) const {
  */
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && (SDL_HasClipboardText() != 0u)) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) &&
+		    (SDL_HasClipboardText() != 0u)) {
 			if (d_->mode == Data::Mode::kSelection) {
 				delete_selected_text();
 			}
