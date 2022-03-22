@@ -70,16 +70,19 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		    (f.field->get_immovable() != nullptr)) {
 			const Widelands::MapObjectType type = f.field->get_immovable()->descr().type();
 			if ((((layers & MiniMapLayer::Flag) != 0) && type == Widelands::MapObjectType::FLAG) ||
-			    (((layers & MiniMapLayer::Building) != 0) && type >= Widelands::MapObjectType::BUILDING)) {
+			    (((layers & MiniMapLayer::Building) != 0) &&
+			     type >= Widelands::MapObjectType::BUILDING)) {
 				color = kWhite;
-			} else if (((layers & MiniMapLayer::Road) != 0) && type >= Widelands::MapObjectType::ROADBASE &&
+			} else if (((layers & MiniMapLayer::Road) != 0) &&
+			           type >= Widelands::MapObjectType::ROADBASE &&
 			           type <= Widelands::MapObjectType::WATERWAY) {
 				color = blend_color(color, kWhite);
 			}
 		}
 
 		if (((layers & MiniMapLayer::Ship) != 0) && (f.field->get_first_bob() != nullptr)) {
-			for (Widelands::Bob* bob = f.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+			for (Widelands::Bob* bob = f.field->get_first_bob(); bob != nullptr;
+			     bob = bob->get_next_bob()) {
 				if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
 					color = kWhite;
 					break;

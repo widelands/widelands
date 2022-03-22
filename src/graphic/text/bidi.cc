@@ -620,7 +620,8 @@ std::string make_ligatures(const char* input) {
 				for (int k = i - 2; k >= 0 && (kArabicDiacritics.count(previous) != 0u); --k) {
 					previous = parseme.charAt(k);
 				}
-				for (int k = i + 2; k < (parseme.length() - 1) && (kArabicDiacritics.count(next) != 0u); ++k) {
+				for (int k = i + 2; k < (parseme.length() - 1) && (kArabicDiacritics.count(next) != 0u);
+				     ++k) {
 					next = parseme.charAt(k);
 				}
 
