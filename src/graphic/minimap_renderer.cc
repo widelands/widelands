@@ -78,6 +78,15 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			}
 		}
 
+		if ((layers & MiniMapLayer::Ship) && f.field->get_first_bob()) {
+			for (Widelands::Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+				if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
+					color = kWhite;
+					break;
+				}
+			}
+		}
+
 		if (layers & MiniMapLayer::StartingPositions) {
 			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;

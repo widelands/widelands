@@ -6,7 +6,7 @@
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # Jonas Jonas <jonas.burger@googlemail.com>, 2016
-# Klaus Halfmann <klaus.halfmann@arcor.de>, 2016
+# Klaus Halfmann <klaus.halfmann@arcor.de>, 2016,2022
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2022-02-21 20:38+0000\n"
-"Last-Translator: Wuzzy <almikes@aol.com>\n"
+"PO-Revision-Date: 2015-02-03 14:29+0000\n"
+"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2016,2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,7 @@ msgstr "Die Insel ist riesig und so lange wir nicht wissen, ob wir hier alleine 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr "Baue Militärgebäude, um dein Gebiet zu vergrößern"
+msgstr "Baue Militärgebäude, um dein Gebiet zu erweitern"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
@@ -90,7 +90,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Nahrung ist für Minen und Ausbildungsstätten sehr wichtig. Errichte eine gut arbeitende Nahrungsproduktion, indem du mindestens einen Bauernhof, einen Dunkelrübenhof und eine Mühle baust. Die beiden Mehlsorten werden zusammen mit Wasser aus einem Brunnen in der Bäckerei zu Brot verarbeitet, also baue auch eine Bäckerei und einen Brunnen."
+msgstr "Nahrung ist für Minen und Ausbildungsstätten sehr wichtig. Errichte eine gut funktionierende Nahrungsproduktion, indem du mindestens einen Bauernhof, einen Dunkelrübenhof und eine Mühle baust. Die beiden Mehlsorten werden zusammen mit Wasser aus einem Brunnen in der Bäckerei zu Brot gebacken, also baue auch eine Bäckerei und einen Brunnen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -120,7 +120,7 @@ msgstr "Baue eine Bäckerei, um Brot aus Maismehl, Dunkelrübenmehl und Wasser z
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
-msgstr "Baue ein Jagdhaus, um rohes Fleisch zu bekommen"
+msgstr "Baue ein Jagdhaus, um rohes Fleisch zu erjagen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
@@ -237,7 +237,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Wie alle anderen Stämme können auch die Atlanter ihre Soldaten ausbilden: Das Verlies bildet den Angriff aus – die Hauptfähigkeit der Atlanter – und das Labyrinth bildet die Verteidigung und das Ausweichen aus und verbessert die Lebenspunkte. Die Waren, die von der Industrie hergestellt werden, werden für die Ausbildung der Soldaten in diesen beiden Gebäuden verwendet."
+msgstr "Wie alle anderen Stämme können auch die Atlanter ihre Soldaten ausbilden: Das Verlies bildet den Angriff aus – die Hauptfähigkeit der Atlanter – und das Labyrinth bildet die Verteidigung und das Ausweichen aus und verbessert die Lebenspunkte. Die Waren, die von den Schmieden hergestellt werden, werden für die Ausbildung der Soldaten in diesen beiden Gebäuden verwendet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
@@ -739,7 +739,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Ich habe eine Einladung von Sidolus erhalten. Der erste Ausbildungstag im neu gebauten Labyrinth wird morgen sein. Das Verlies ist auch fertig und wird bald seine Arbeit aufnehmen. Ich freue mich schon auf morgen; ich bin sehr gespannt darauf zu sehen, wie unsere Soldaten ausgebildet werden, und ich frage mich, ob die zusätzliche Belastung sie davon abhält, die Zivilbevölkerung zu schikanieren."
+msgstr "Ich habe eine Einladung von Sidolus erhalten. Der erste Ausbildungstag im neu gebauten Labyrinth wird morgen stattfinden. Das Verlies ist auch fertig und wird bald seine Arbeit aufnehmen. Ich freue mich schon auf morgen; ich bin sehr gespannt zu sehen, wie unsere Soldaten ausgebildet werden. Ich denke, die zusätzliche Belastung wird sie davon abhalten, die Zivilbevölkerung zu schikanieren."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"

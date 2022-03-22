@@ -317,7 +317,6 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		map_view()->increase_zoom();
 		mapviewmenu_.toggle();
 	} break;
-
 	case MapviewMenuEntry::kResetZoom: {
 		map_view()->reset_zoom();
 		mapviewmenu_.toggle();
