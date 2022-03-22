@@ -1676,7 +1676,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 
-	if (d->game == nullptr) {  // just in case we allow connection of spectators/players after game start
+	if (d->game ==
+	    nullptr) {  // just in case we allow connection of spectators/players after game start
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
@@ -1870,7 +1871,8 @@ void GameHost::check_hung_clients() {
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
 					d->clients.at(i).lastdelta = 0;
-				} else if (time_t deltanow = static_cast<time_t>(time(nullptr) - d->clients.at(i).hung_since > 60)) {
+				} else if (time_t deltanow =
+				              static_cast<time_t>(time(nullptr) - d->clients.at(i).hung_since > 60)) {
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
@@ -2391,7 +2393,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_PEACEFUL_MODE:
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:
-		if (d->game == nullptr) {  // not expected while game is in progress -> something is wrong here
+		if (d->game ==
+		    nullptr) {  // not expected while game is in progress -> something is wrong here
 			log_err("[Host]: Unexpected command %u while in game\n", cmd);
 			throw DisconnectException(
 			   "NO_ACCESS_TO_SERVER");  // TODO(k.halfmann): better use "UNEXPECTED_COMMAND" ?
