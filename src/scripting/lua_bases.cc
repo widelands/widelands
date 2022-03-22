@@ -145,7 +145,7 @@ int LuaEditorGameBase::get_players(lua_State* L) {
 	uint32_t idx = 1;
 	for (Widelands::PlayerNumber i = 1; i <= kMaxPlayers; i++) {
 		Widelands::Player* rv = egbase.get_player(i);
-		if (!rv) {
+		if (rv == nullptr) {
 			continue;
 		}
 
@@ -203,7 +203,7 @@ int LuaEditorGameBase::immovable_exists(lua_State* L) {
 	Notifications::publish(Widelands::NoteMapObjectDescription(
 	   immovable_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
 	lua_pushboolean(
-	   L, get_egbase(L).descriptions().immovable_index(immovable_name) != Widelands::INVALID_INDEX);
+	   L, static_cast<int>(get_egbase(L).descriptions().immovable_index(immovable_name) != Widelands::INVALID_INDEX));
 	return 1;
 }
 
@@ -532,7 +532,7 @@ static void push_table_recursively(lua_State* L,
 		const std::string type = type_section->get_string(key_key);
 
 		if (type == "boolean") {
-			lua_pushboolean(L, data_section->get_bool(key_key));
+			lua_pushboolean(L, static_cast<int>(data_section->get_bool(key_key)));
 		} else if (type == "number") {
 			lua_pushinteger(L, data_section->get_int(key_key));
 		} else if (type == "string") {
@@ -676,7 +676,7 @@ int LuaPlayerBase::__eq(lua_State* L) {  // NOLINT - can not be made const
 	const Widelands::Player& me = get(L, egbase);
 	const Widelands::Player& you = (*get_base_user_class<LuaPlayerBase>(L, 2))->get(L, egbase);
 
-	lua_pushboolean(L, (me.player_number() == you.player_number()));
+	lua_pushboolean(L, static_cast<int>(me.player_number() == you.player_number()));
 	return 1;
 }
 
@@ -717,7 +717,7 @@ int LuaPlayerBase::place_flag(lua_State* L) {  // NOLINT - can not be made const
 	Widelands::Flag* f;
 	if (!force) {
 		f = get(L, get_egbase(L)).build_flag(c->fcoords(L));
-		if (!f) {
+		if (f == nullptr) {
 			report_error(L, "Couldn't build flag!");
 		}
 	} else {
@@ -822,12 +822,12 @@ int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
 		}
 	} else {
 		Widelands::BaseImmovable* bi = map.get_immovable(current);
-		if (!bi || bi->descr().type() != Widelands::MapObjectType::FLAG) {
-			if (!get(L, egbase).build_flag(current)) {
+		if ((bi == nullptr) || bi->descr().type() != Widelands::MapObjectType::FLAG) {
+			if (get(L, egbase).build_flag(current) == nullptr) {
 				report_error(L, "Could not place end flag!");
 			}
 		}
-		if (bi && bi == starting_flag) {
+		if ((bi != nullptr) && bi == starting_flag) {
 			report_error(L, "Cannot build a closed loop!");
 		}
 
@@ -836,7 +836,7 @@ int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
 		} else {
 			Widelands::Road* road = get(L, egbase).build_road(path);
 			if (roadtype == "busy") {
-				if (road) {
+				if (road != nullptr) {
 					road->set_busy(egbase, true);
 				}
 			} else if (roadtype != "normal") {
@@ -848,7 +848,7 @@ int LuaPlayerBase::place_road(lua_State* L) {  // NOLINT - can not be made const
 		}
 	}
 
-	if (!r) {
+	if (r == nullptr) {
 		report_error(L, "Error while creating Road. May be: something is in "
 		                "the way or you do not own the territory where you want to build "
 		                "the road");
@@ -926,7 +926,7 @@ int LuaPlayerBase::place_building(lua_State* L) {  // NOLINT - can not be made c
 		} else {
 			b = player.build(c->coords(), building_index, constructionsite, former_buildings);
 		}
-		if (!b) {
+		if (b == nullptr) {
 			const std::string tempname(force ? constructionsite ? "force constructionsite" :
                                                                "force building" :
                                             "place building");
@@ -1058,7 +1058,7 @@ Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameB
 		report_error(L, "Illegal player number %i", player_number_);
 	}
 	Widelands::Player* rv = egbase.get_player(player_number_);
-	if (!rv) {
+	if (rv == nullptr) {
 		report_error(L, "Player with the number %i does not exist", player_number_);
 	}
 	return *rv;
