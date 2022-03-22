@@ -299,7 +299,8 @@ int LuaPlayer::get_see_all(lua_State* const L) {
       (RW) Whether the player may take additional items onto expeditions.
 */
 int LuaPlayer::get_allow_additional_expedition_items(lua_State* L) {
-	lua_pushboolean(L, static_cast<int>(get(L, get_egbase(L)).additional_expedition_items_allowed()));
+	lua_pushboolean(
+	   L, static_cast<int>(get(L, get_egbase(L)).additional_expedition_items_allowed()));
 	return 1;
 }
 int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
@@ -581,7 +582,8 @@ int LuaPlayer::seen_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, static_cast<int>(get(L, egbase).get_vision(i) != Widelands::VisibleState::kUnexplored));
+	lua_pushboolean(
+	   L, static_cast<int>(get(L, egbase).get_vision(i) != Widelands::VisibleState::kUnexplored));
 	return 1;
 }
 
@@ -1076,7 +1078,8 @@ int LuaPlayer::get_produced_wares_count(lua_State* L) {
       :rtype: :class:`boolean`
 */
 int LuaPlayer::is_attack_forbidden(lua_State* L) {
-	lua_pushboolean(L, static_cast<int>(get(L, get_egbase(L)).is_attack_forbidden(luaL_checkinteger(L, 2))));
+	lua_pushboolean(
+	   L, static_cast<int>(get(L, get_egbase(L)).is_attack_forbidden(luaL_checkinteger(L, 2))));
 	return 1;
 }
 
@@ -1354,7 +1357,7 @@ int LuaObjective::__eq(lua_State* L) {
 	   objectives.find((*get_user_class<LuaObjective>(L, 2))->name_);
 
 	lua_pushboolean(L, static_cast<int>((me != objectives.end() && other != objectives.end()) &&
-	                      (me->second->name() == other->second->name())));
+	                                    (me->second->name() == other->second->name())));
 	return 1;
 }
 
@@ -1523,7 +1526,8 @@ int LuaInboxMessage::get_icon_name(lua_State* L) {
  ==========================================================
  */
 int LuaInboxMessage::__eq(lua_State* L) {
-	lua_pushboolean(L, static_cast<int>(message_id_ == (*get_user_class<LuaInboxMessage>(L, 2))->message_id_));
+	lua_pushboolean(
+	   L, static_cast<int>(message_id_ == (*get_user_class<LuaInboxMessage>(L, 2))->message_id_));
 	return 1;
 }
 
