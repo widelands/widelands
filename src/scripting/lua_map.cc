@@ -8030,9 +8030,8 @@ int LuaField::get_owner(lua_State* L) {
 */
 int LuaField::get_buildable(lua_State* L) {
 	const Widelands::NodeCaps caps = fcoords(L).field->nodecaps();
-	const bool is_buildable =
-	   ((caps & Widelands::BUILDCAPS_FLAG) != 0) ||
-	   ((caps & Widelands::BUILDCAPS_BUILDINGMASK) != 0);
+	const bool is_buildable = ((caps & Widelands::BUILDCAPS_FLAG) != 0) ||
+	                          ((caps & Widelands::BUILDCAPS_BUILDINGMASK) != 0);
 	lua_pushboolean(L, static_cast<int>(is_buildable));
 	return 1;
 }
