@@ -98,8 +98,8 @@ LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
 		if (ifa->ifa_addr == nullptr) {
 			continue;
 		}
-		if (!(ifa->ifa_flags & IFF_LOOPBACK) && !(ifa->ifa_flags & IFF_BROADCAST) &&
-		    !(ifa->ifa_flags & IFF_MULTICAST)) {
+		if (((ifa->ifa_flags & IFF_LOOPBACK) == 0u) && ((ifa->ifa_flags & IFF_BROADCAST) == 0u) &&
+		    ((ifa->ifa_flags & IFF_MULTICAST) == 0u)) {
 			continue;
 		}
 		switch (ifa->ifa_addr->sa_family) {
@@ -419,7 +419,7 @@ void LanGamePromoter::run() {
 
 		verb_log_info("Received %s packet from %s", magic, addr.ip.to_string().c_str());
 
-		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
+		if ((strncmp(magic, "QUERY", 6) == 0) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
 				report_network_error();
 			}
@@ -470,7 +470,7 @@ void LanGameFinder::run() {
 		}
 
 		// Make sure that the callback function has been set before we do any callbacks
-		if (!callback) {
+		if (callback == nullptr) {
 			continue;
 		}
 
