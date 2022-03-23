@@ -838,7 +838,8 @@ inline std::shared_ptr<AddOns::AddOnInfo> AddOnsCtrl::selected_installed_addon()
 	return dynamic_cast<InstalledAddOnRow&>(*installed_addons_box_.focused_child()).info();
 }
 void AddOnsCtrl::focus_installed_addon_row(std::shared_ptr<AddOns::AddOnInfo> info) {
-	for (UI::Panel* p = installed_addons_box_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
+	for (UI::Panel* p = installed_addons_box_.get_first_child(); p != nullptr;
+	     p = p->get_next_sibling()) {
 		if (dynamic_cast<InstalledAddOnRow&>(*p).info()->internal_name == info->internal_name) {
 			p->focus();
 			return;
