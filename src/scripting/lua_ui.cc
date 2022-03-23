@@ -273,7 +273,7 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	UI::Panel* cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
 	Vector2i cp = Vector2i::zero();
-	while ((cur != nullptr) && cur != panel_) {
+	while (cur != nullptr && cur != panel_) {
 		cp += cur->to_parent(Vector2i::zero());
 		cur = cur->get_parent();
 	}

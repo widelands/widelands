@@ -645,7 +645,7 @@ int do_set_soldiers(lua_State* L,
 
 		int d = sp.second - cur;
 		if (d < 0) {
-			while (d != 0) {
+			while (d < 0) {
 				for (Widelands::Soldier* s : sc->stationed_soldiers()) {
 					SoldierMapDescr is(s->get_health_level(), s->get_attack_level(),
 					                   s->get_defense_level(), s->get_evade_level());
@@ -659,7 +659,7 @@ int do_set_soldiers(lua_State* L,
 				}
 			}
 		} else if (d > 0) {
-			for (; d != 0; --d) {
+			for (; d > 0; --d) {
 				Widelands::Soldier& soldier = dynamic_cast<Widelands::Soldier&>(
 				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
@@ -1592,7 +1592,7 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 	const Widelands::Map& map = game->map();
 
 	std::vector<LuaMaps::LuaField*> result;
-	for (uint32_t i = luaL_checkuint32(L, 2); i != 0u;) {
+	for (uint32_t i = luaL_checkuint32(L, 2); i > 0;) {
 		const uint32_t x = game->logic_rand() % map.get_width();
 		const uint32_t y = game->logic_rand() % map.get_height();
 		Widelands::Coords field(x, y);
@@ -7432,7 +7432,7 @@ int LuaShip::make_expedition(lua_State* L) {
 	}
 
 	for (auto& pair : workers_to_create) {
-		for (; pair.second != 0u; --pair.second) {
+		for (; pair.second > 0; --pair.second) {
 			ship->add_item(*game, Widelands::ShippingItem(tribe.get_worker_descr(pair.first)
 			                                                 ->create(*game, ship->get_owner(),
 			                                                          nullptr, ship->get_position())));
@@ -7851,7 +7851,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 	Widelands::DescriptionIndex res = c.field->get_resources();
 	auto amount = luaL_checkint32(L, -1);
 	const Widelands::ResourceDescription* resDesc = egbase.descriptions().get_resource_descr(res);
-	Widelands::ResourceAmount max_amount = resDesc != nullptr ? resDesc->max_amount() : 0;
+	Widelands::ResourceAmount max_amount = (resDesc != nullptr) ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
@@ -8031,9 +8031,8 @@ int LuaField::get_owner(lua_State* L) {
 int LuaField::get_buildable(lua_State* L) {
 	const Widelands::NodeCaps caps = fcoords(L).field->nodecaps();
 	const bool is_buildable =
-	   ((caps & Widelands::BUILDCAPS_FLAG) != 0) || ((caps & Widelands::BUILDCAPS_SMALL) != 0) ||
-	   ((caps & Widelands::BUILDCAPS_MEDIUM) != 0) || ((caps & Widelands::BUILDCAPS_BIG) != 0) ||
-	   ((caps & Widelands::BUILDCAPS_MINE) != 0);
+	   ((caps & Widelands::BUILDCAPS_FLAG) != 0) ||
+	   ((caps & Widelands::BUILDCAPS_BUILDINGMASK) != 0);
 	lua_pushboolean(L, static_cast<int>(is_buildable));
 	return 1;
 }
