@@ -573,7 +573,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
-		refresh_remotes((SDL_GetModState() & KMOD_CTRL) != 0);
+		refresh_remotes(matches_keymod(SDL_GetModState(), KMOD_CTRL));
 		tabs_.activate(1);
 	});
 	tabs_.sigclicked.connect([this]() {
@@ -610,7 +610,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 			}
 		}
 		assert(!upgrades.empty());
-		if (nr_full_updates > 0 && (!all_verified || ((SDL_GetModState() & KMOD_CTRL) == 0))) {
+		if (nr_full_updates > 0 && (!all_verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL))) {
 			// We ask for confirmation only for real upgrades. i18n-only upgrades are done silently.
 			std::string text = format(
 			   ngettext("Are you certain that you want to upgrade this %u add-on?",
