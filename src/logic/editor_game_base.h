@@ -209,7 +209,7 @@ public:
 		return player_manager_.get();
 	}
 
-	InteractiveGameBase* get_igbase();
+	InteractiveGameBase* get_igbase() const;
 
 	// Returns the tribe and world descriptions.
 	const Descriptions& descriptions() const;
@@ -226,6 +226,9 @@ public:
 		return enabled_addons_;
 	}
 	const AllTribes& all_tribes() const;
+
+protected:
+	bool did_postload_addons_;
 
 private:
 	/// Common function for create_critter and create_ship.
@@ -272,7 +275,6 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	bool did_postload_addons_;
 	Time gametime_;
 	ObjectManager objects_;
 

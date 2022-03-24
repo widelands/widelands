@@ -78,6 +78,15 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 			}
 		}
 
+		if ((layers & MiniMapLayer::Ship) && f.field->get_first_bob()) {
+			for (Widelands::Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+				if (bob->descr().type() == Widelands::MapObjectType::SHIP) {
+					color = kWhite;
+					break;
+				}
+			}
+		}
+
 		if (layers & MiniMapLayer::StartingPositions) {
 			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;
@@ -359,11 +368,11 @@ int scale_map(const Widelands::Map& map, bool zoom) {
 	if (max <= 270) {
 		if (zoom) {
 			return 540 / max;
-		} else if (max > 135) {
-			return 370 / max;
-		} else {
-			return 270 / max;
 		}
+		if (max > 135) {
+			return 370 / max;
+		}
+		return 270 / max;
 	}
 	return 1;
 }

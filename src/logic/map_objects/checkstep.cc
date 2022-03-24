@@ -36,10 +36,14 @@ CheckStep::CheckStep() : capsule(always_false().capsule) {
 }
 
 struct CheckStepAlwaysFalse {
-	bool allowed(const Map&, const FCoords&, const FCoords&, int32_t, CheckStep::StepId) const {
+	bool allowed(const Map& /* map */,
+	             const FCoords& /* start */,
+	             const FCoords& /* end */,
+	             int32_t /* dir */,
+	             CheckStep::StepId /* id */) const {
 		return false;
 	}
-	bool reachable_dest(const Map&, const FCoords&) const {
+	bool reachable_dest(const Map& /* map */, const FCoords& /* dest */) const {
 		return false;
 	}
 };
@@ -80,8 +84,11 @@ bool CheckStepAnd::reachable_dest(const Map& map, const FCoords& dest) const {
 CheckStepDefault
 ===============
 */
-bool CheckStepDefault::allowed(
-   const Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId) const {
+bool CheckStepDefault::allowed(const Map& /* map */,
+                               const FCoords& start,
+                               const FCoords& end,
+                               int32_t /* dir */,
+                               CheckStep::StepId /* id */) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
 	if (endcaps & movecaps_) {
@@ -114,8 +121,11 @@ bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const
 CheckStepFerry
 ===============
 */
-bool CheckStepFerry::allowed(
-   const Map& map, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const {
+bool CheckStepFerry::allowed(const Map& map,
+                             const FCoords& from,
+                             const FCoords& to,
+                             int32_t dir,
+                             CheckStep::StepId /* id */) const {
 	if (!(to.field->nodecaps() & MOVECAPS_WALK) && !(to.field->nodecaps() & MOVECAPS_SWIM)) {
 		// can't swim on lava
 		return false;
@@ -124,7 +134,8 @@ bool CheckStepFerry::allowed(
 		// open water
 		return true;
 	}
-	FCoords fd, fr;
+	FCoords fd;
+	FCoords fr;
 	switch (dir) {
 	case WALK_NE:
 		fd = to;
@@ -176,10 +187,10 @@ bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
 CheckStepWalkOn
 ===============
 */
-bool CheckStepWalkOn::allowed(const Map&,
+bool CheckStepWalkOn::allowed(const Map& /* map */,
                               const FCoords& start,
                               const FCoords& end,
-                              int32_t,
+                              int32_t /* dir */,
                               CheckStep::StepId const id) const {
 	NodeCaps const startcaps = start.field->nodecaps();
 	NodeCaps const endcaps = end.field->nodecaps();
@@ -207,7 +218,7 @@ bool CheckStepWalkOn::allowed(const Map&,
 	return false;
 }
 
-bool CheckStepWalkOn::reachable_dest(const Map&, FCoords) const {
+bool CheckStepWalkOn::reachable_dest(const Map& /* map */, FCoords /* dest */) const {
 	// Don't bother solving this.
 	return true;
 }
@@ -215,7 +226,7 @@ bool CheckStepWalkOn::reachable_dest(const Map&, FCoords) const {
 bool CheckStepRoad::allowed(const Map& map,
                             const FCoords& start,
                             const FCoords& end,
-                            int32_t,
+                            int32_t /* dir */,
                             CheckStep::StepId const id) const {
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
@@ -254,12 +265,15 @@ bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	return true;
 }
 
-bool CheckStepLimited::allowed(
-   const Map&, const FCoords&, const FCoords& end, int32_t, CheckStep::StepId) const {
+bool CheckStepLimited::allowed(const Map& /* map */,
+                               const FCoords& /* start */,
+                               const FCoords& end,
+                               int32_t /* dir */,
+                               CheckStep::StepId /* id */) const {
 	return allowed_locations_.find(end) != allowed_locations_.end();
 }
 
-bool CheckStepLimited::reachable_dest(const Map&, FCoords) const {
+bool CheckStepLimited::reachable_dest(const Map& /* map */, FCoords /* dest */) const {
 	return true;
 }
 }  // namespace Widelands

@@ -147,7 +147,7 @@ Map::~Map() {
 	cleanup();
 }
 
-void Map::recalc_border(const FCoords& fc) {
+void Map::recalc_border(const FCoords& fc) const {
 	if (const PlayerNumber owner = fc.field->get_owned_by()) {
 		//  A node that is owned by a player and has a neighbour that is not owned
 		//  by that player is a border node.
@@ -235,7 +235,8 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 void Map::recalc_default_resources(const Descriptions& descriptions) {
 	for (int16_t y = 0; y < height_; ++y) {
 		for (int16_t x = 0; x < width_; ++x) {
-			FCoords f, f1;
+			FCoords f;
+			FCoords f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
 			if (f.field->get_resources() != Widelands::kNoResource ||
@@ -750,14 +751,14 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	verb_log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
-ResizeHistory Map::dump_state(const EditorGameBase&) const {
+ResizeHistory Map::dump_state(const EditorGameBase& /* egbase */) const {
 	ResizeHistory rh;
 	rh.size.w = width_;
 	rh.size.h = height_;
 	rh.port_spaces = port_spaces_;
 	rh.starting_positions = starting_pos_;
 	for (MapIndex i = max_index(); i; --i) {
-		rh.fields.push_back(FieldData(operator[](i - 1)));
+		rh.fields.emplace_back(operator[](i - 1));
 	}
 	return rh;
 }
@@ -1096,7 +1097,7 @@ struct FindBobsCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase&, const FCoords& cur) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
 		for (Bob* bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 			if (list_ && std::find(list_->begin(), list_->end(), bob) != list_->end()) {
 				continue;
@@ -1173,7 +1174,7 @@ struct FindImmovablesCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase&, const FCoords& cur) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
 		BaseImmovable* const imm = cur.field->get_immovable();
 
 		if (!imm) {
@@ -1367,8 +1368,13 @@ dependencies.
 Fetch the slopes to neighbours and call the actual logic in Field
 ===============
 */
-void Map::recalc_brightness(const FCoords& f) {
-	int32_t left, right, top_left, top_right, bottom_left, bottom_right;
+void Map::recalc_brightness(const FCoords& f) const {
+	int32_t left;
+	int32_t right;
+	int32_t top_left;
+	int32_t top_right;
+	int32_t bottom_left;
+	int32_t bottom_right;
 	Field::Height const height = f.field->get_height();
 
 	{
@@ -1661,7 +1667,7 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 		}
 
 		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) &&
-		    !find_portdock(f, false).empty()) {
+		    !find_portdock(f, !consider_mobs).empty()) {
 			caps |= BUILDCAPS_PORT;
 		}
 
@@ -1892,7 +1898,8 @@ uint32_t Map::calc_distance(const Coords& a, const Coords& b) const {
 	// towards b
 	// Hint: (~a.y & 1) is 1 for even rows, 0 for odd rows.
 	// This means we round UP for even rows, and we round DOWN for odd rows.
-	int32_t lx, rx;
+	int32_t lx;
+	int32_t rx;
 
 	lx = a.x - ((dist + (~a.y & 1)) >> 1);  // div 2
 	rx = lx + dist;

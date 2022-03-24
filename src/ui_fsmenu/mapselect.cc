@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -45,17 +44,18 @@ MapSelect::MapSelect(MenuCapsule& m,
                      LaunchMPG* mpg,
                      GameSettingsProvider* const settings,
                      GameController* const ctrl,
-                     Widelands::Game& g)
+                     std::shared_ptr<Widelands::Game> for_preview)
    : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
      parent_screen_(mpg),
+     game_for_preview_(for_preview),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, g),
+     map_details_(
+        &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
-     game_(g),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
@@ -68,8 +68,8 @@ MapSelect::MapSelect(MenuCapsule& m,
 		back_.set_tooltip(_("Return to the single player menu"));
 	}
 
-	table_.selected.connect([this](uint32_t) { entry_selected(); });
-	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
+	table_.selected.connect([this](uint32_t /* value */) { entry_selected(); });
+	table_.double_clicked.connect([this](uint32_t /* value */) { clicked_ok(); });
 	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
 	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
@@ -151,7 +151,7 @@ MapSelect::MapSelect(MenuCapsule& m,
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 
-	cb_dont_localize_mapnames_->changedto.connect([this](unsigned) { fill_table(); });
+	cb_dont_localize_mapnames_->changedto.connect([this](unsigned /* value */) { fill_table(); });
 
 	for (size_t i = 0; i < tags_checkboxes_.size(); ++i) {
 		tags_checkboxes_.at(i)->changedto.connect([this, i](bool b) { tagbox_changed(i, b); });
@@ -173,9 +173,10 @@ MapSelect::MapSelect(MenuCapsule& m,
 }
 
 MapSelect::~MapSelect() {
+	if (game_for_preview_) {
+		game_for_preview_->cleanup_objects();
+	}
 	if (!parent_screen_) {
-		game_.cleanup_objects();
-		delete &game_;
 		delete settings_;
 	}
 }
@@ -238,7 +239,7 @@ void MapSelect::clicked_ok() {
 		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		new LaunchSPG(get_capsule(), *settings_, std::make_shared<Widelands::Game>(), get_map(),
 		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }

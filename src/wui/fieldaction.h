@@ -28,7 +28,7 @@ class Player;
 class InteractiveBase;
 
 // fieldaction.cc
-void show_field_action(InteractiveBase* parent,
+void show_field_action(InteractiveBase* ibase,
                        Widelands::Player* player,
                        UI::UniqueWindow::Registry* registry);
 

@@ -5,6 +5,7 @@
 # Translators:
 # Viktor S <awsswa59@gmail.com>, 2020
 # nskdmitry, 2022
+# Владимир Шевцов, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: nskdmitry, 2022\n"
+"Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -272,6 +273,9 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Щелкните по кнопке \"Построить дорогу\". После этого, щелкайте по цветным "
+"меткам на карте, чтобы проложить вашу дорогу, до тех пор, пока вы не "
+"достигните флага напротив нужного строения"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

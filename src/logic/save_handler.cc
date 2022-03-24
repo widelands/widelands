@@ -48,7 +48,7 @@ SaveHandler::SaveHandler()
      number_of_rolls_(5) {
 }
 
-bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) {
+bool SaveHandler::roll_save_files(const std::string& filename, std::string* const error) const {
 	int32_t rolls = 0;
 	std::string filename_previous;
 
@@ -109,7 +109,7 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
  *
  * @return true if game should be saved at next think().
  */
-bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
+bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) const {
 	// Perhaps save is due now?
 	if (autosave_interval_in_ms_ <= 0 || next_save_realtime_ > realtime) {
 		return false;  // no autosave or not due, yet

@@ -38,20 +38,20 @@ JSON::Array* Element::add_array(const std::string& key) {
 }
 
 void Element::add_bool(const std::string& key, bool value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Boolean(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Boolean(value)));
 }
 
 void Element::add_double(const std::string& key, double value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Double(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Double(value)));
 }
 void Element::add_int(const std::string& key, int value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Int(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Int(value)));
 }
 void Element::add_empty(const std::string& key) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Empty())));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::Empty()));
 }
 void Element::add_string(const std::string& key, const std::string& value) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::String(value))));
+	values_.emplace_back(key, std::unique_ptr<JSON::Value>(new JSON::String(value)));
 }
 
 void Element::write_to_file(FileSystem& fs, const std::string& filename) const {

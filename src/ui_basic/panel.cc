@@ -465,7 +465,7 @@ int Panel::do_run() {
 /**
  * \return \c true if this is the currently modal panel
  */
-bool Panel::is_modal() {
+bool Panel::is_modal() const {
 	return running_;
 }
 
@@ -485,7 +485,7 @@ void Panel::end() {
  * Called when another panel (passed as argument) ends being
  * modal and returns the modal attribute to this panel
  */
-void Panel::become_modal_again(Panel&) {
+void Panel::become_modal_again(Panel& /* prevmodal */) {
 }
 
 /**
@@ -700,17 +700,17 @@ void Panel::on_visibility_changed() {
  * Redraw the panel. Note that all drawing coordinates are relative to the
  * inner area: you cannot overwrite the panel border in this function.
  */
-void Panel::draw(RenderTarget&) {
+void Panel::draw(RenderTarget& /* rt */) {
 }
 
 /**
  * Redraw the panel border.
  */
-void Panel::draw_border(RenderTarget&) {
+void Panel::draw_border(RenderTarget& /* rt */) {
 }
 
 std::vector<Recti>
-Panel::focus_overlay_rects(const int off_x, const int off_y, const int strength_diff) {
+Panel::focus_overlay_rects(const int off_x, const int off_y, const int strength_diff) const {
 	const int f = g_style_manager->focus_border_thickness() + strength_diff;
 	const int16_t w = get_w();
 	const int16_t h = get_h();
@@ -755,7 +755,7 @@ void Panel::draw_overlay(RenderTarget& dst) {
 void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
 	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
 }
-void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
+void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) const {
 	if (info.image() != nullptr) {
 		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
 		dst.tile(rect, info.image(), Vector2i(get_x(), get_y()));
@@ -843,7 +843,7 @@ void Panel::center_mouse() {
  * position received in handle_mousemove may be negative while the mouse is
  * still inside the panel as far as handle_mousein is concerned.
  */
-void Panel::handle_mousein(bool) {
+void Panel::handle_mousein(bool /* inside */) {
 }
 
 /**
@@ -853,7 +853,7 @@ void Panel::handle_mousein(bool) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t /* x */, int32_t /* y */) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 		clicked();
@@ -868,7 +868,7 @@ bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t) {
+bool Panel::handle_mouserelease(const uint8_t /* btn */, int32_t /* x */, int32_t /* y */) {
 	return false;
 }
 
@@ -879,14 +879,18 @@ bool Panel::handle_mouserelease(const uint8_t, int32_t, int32_t) {
  *
  * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousewheel(int32_t, int32_t, uint16_t) {
+bool Panel::handle_mousewheel(int32_t /* x */, int32_t /* y */, uint16_t /* modstate */) {
 	return false;
 }
 
 /**
  * Called when the mouse is moved while inside the panel
  */
-bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Panel::handle_mousemove(const uint8_t /* state */,
+                             int32_t /* x */,
+                             int32_t /* y */,
+                             int32_t /* xdiff */,
+                             int32_t /* ydiff */) {
 	return !tooltip_.empty();
 }
 
@@ -1033,6 +1037,11 @@ void Panel::set_can_focus(bool const yes) {
 	}
 }
 
+void Panel::disable_sdl_textinput() {
+	if (SDL_IsTextInputActive()) {
+		SDL_StopTextInput();
+	}
+}
 /**
  * Grabs the keyboard focus, if it can,
  * topcaller identifies widget at the beginning of the recursion
@@ -1044,9 +1053,7 @@ void Panel::focus(const bool topcaller) {
 				SDL_StartTextInput();
 			}
 		} else {
-			if (SDL_IsTextInputActive()) {
-				SDL_StopTextInput();
-			}
+			disable_sdl_textinput();
 		}
 		focus_ = nullptr;
 	}
@@ -1096,7 +1103,7 @@ void Panel::die() {
  * Called on a child's parent just before child is deleted.
  * Overridden in UI::Box
  */
-void Panel::on_death(Panel*) {
+void Panel::on_death(Panel* /* p */) {
 }
 
 /**
@@ -1108,9 +1115,9 @@ void Panel::play_click() {
 }
 
 /**
- * This needs to be called once after g_soundhandler has been instantiated and before play_click()
- * is called. We do it this way so that we don't have to register the same sound every time we
- * create a new panel.
+ * This needs to be called once after g_soundhandler has been instantiated and before
+ * play_click() is called. We do it this way so that we don't have to register the same sound
+ * every time we create a new panel.
  */
 void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");

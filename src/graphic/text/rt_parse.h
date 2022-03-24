@@ -54,10 +54,10 @@ public:
 	void add_attribute(const std::string& name, Attr* a);
 
 	// Returns the attribute with 'name' or throws an error if it is not found.
-	const Attr& operator[](const std::string& name) const;
+	const Attr& operator[](const std::string& s) const;
 
 	// Returns true if 'name' is a known attribute.
-	bool has(const std::string& name) const;
+	bool has(const std::string& s) const;
 
 private:
 	std::map<std::string, std::unique_ptr<Attr>> attrs_;

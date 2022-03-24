@@ -48,7 +48,7 @@ public:
 	/**
 	 * The declaration of a callback function which can be registered to get notified
 	 * when wares or workers arrive at the building and should be added to the queue.
-	 * @param game The game the queue is part of.
+	 * @param g The game the queue is part of.
 	 * @param q The \c InputQueue the ware or worker should be added to.
 	 * @param ware The index of the ware or worker which arrived.
 	 * @param worker The worker which arrived, if the queue is a WorkersQueue.
@@ -129,16 +129,16 @@ public:
 	/**
 	 * Add the wares in this queue to the given economy (used in accounting).
 	 * Implementing classes have to set the economy of the potential request.
-	 * @param The economy to add the wares or workers to.
+	 * @param e The economy to add the wares or workers to.
 	 */
 	virtual void add_to_economy(Economy& e) = 0;
 
 	/**
 	 * Change size of the queue.
 	 * This influences how many wares can be in here at maximum.
-	 * @param q The new maximum size.
+	 * @param size The new maximum size.
 	 */
-	void set_max_size(Quantity q);
+	void set_max_size(Quantity size);
 
 	/**
 	 * Change the number of wares that should be available in this queue.
@@ -147,9 +147,9 @@ public:
 	 * but if there are more wares than that in the queue, they will not get
 	 * lost (the building should drop them). This is the method called when the player
 	 * pressed the buttons in the gui.
-	 * @param q The maximum number of wares which should be stored here.
+	 * @param size The maximum number of wares which should be stored here.
 	 */
-	virtual void set_max_fill(Quantity q);
+	virtual void set_max_fill(Quantity size);
 
 	/**
 	 * Change fill status of the queue. This creates or removes wares as required.
@@ -164,9 +164,9 @@ public:
 	 * is consuming at full speed.
 	 *
 	 * This interval is merely a hint for the Supply/Request balancing code.
-	 * @param i The interval in ms.
+	 * @param time The interval in ms.
 	 */
-	void set_consume_interval(const Duration&);
+	void set_consume_interval(const Duration& time);
 
 	/**
 	 * Returns the player owning the building containing this queue.
@@ -186,7 +186,7 @@ public:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
-	void read(FileRead& f, Game& g, MapObjectLoader& mol);
+	void read(FileRead& fr, Game& game, MapObjectLoader& mol);
 
 	/**
 	 * Writes the state of this class.
@@ -194,7 +194,7 @@ public:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving. Required to pass to Request::write().
 	 */
-	void write(FileWrite& w, Game& g, MapObjectSaver& s);
+	void write(FileWrite& fw, Game& game, MapObjectSaver& mos);
 
 protected:
 	/**
@@ -217,14 +217,14 @@ protected:
 	/**
 	 * Called when an item arrives at the owning building.
 	 * Most likely only one of \c i or \c w will be valid.
-	 * @param g The game the queue is part of.
+	 * @param game The game the queue is part of.
 	 * @param r The request for the ware or worker.
-	 * @param i The index of the arrived ware or worker.
-	 * @param w The arrived worker or \c nullptr.
-	 * @param b The building where the ware or worker arrived at.
+	 * @param index The index of the arrived ware or worker.
+	 * @param worker The arrived worker or \c nullptr.
+	 * @param target The building where the ware or worker arrived at.
 	 */
-	static void
-	request_callback(Game& g, Request& r, DescriptionIndex i, Worker* w, PlayerImmovable& b);
+	static void request_callback(
+	   Game& game, Request& r, DescriptionIndex index, Worker* worker, PlayerImmovable& target);
 
 	/**
 	 * Updates the request.
@@ -247,7 +247,7 @@ protected:
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the loading.
 	 */
-	virtual void read_child(FileRead& f, Game& g, MapObjectLoader& mol) = 0;
+	virtual void read_child(FileRead& fr, Game& game, MapObjectLoader& mol) = 0;
 
 	/**
 	 * Writes the state of the subclass.
@@ -255,7 +255,7 @@ protected:
 	 * @param game The game this queue is part of.
 	 * @param mos The game/map saver that handles the saving.
 	 */
-	virtual void write_child(FileWrite& w, Game& g, MapObjectSaver& s) = 0;
+	virtual void write_child(FileWrite& fw, Game& game, MapObjectSaver& s) = 0;
 
 	/// The building this queue is part of.
 	PlayerImmovable& owner_;

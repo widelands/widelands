@@ -39,7 +39,7 @@ void show_dismantle_confirm(InteractivePlayer& player, Widelands::Building& buil
 void show_enhance_confirm(InteractivePlayer& player,
                           Widelands::Building& building,
                           const Widelands::DescriptionIndex& id,
-                          bool still_under_construction = false);
+                          bool constructionsite = false);
 
 // Ship confirm windows
 void show_ship_sink_confirm(InteractivePlayer& player, Widelands::Ship& ship);

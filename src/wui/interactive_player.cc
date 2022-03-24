@@ -182,7 +182,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary,
                      [this](StatisticsMenuEntry t) { statistics_menu_selected(t); }),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
+     portspace_hint_pic_(g_image_cache->get("images/wui/overlays/port_hint.png"))
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
      training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr)
@@ -243,7 +244,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 #endif
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
-	   [this](const NoteMapOptions&) { rebuild_statistics_menu(); });
+	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
@@ -582,20 +583,21 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
 				Widelands::NodeCaps caps;
+				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
 					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
                                                               Widelands::CAPS_NONE;
 				} else if (show_port_space) {
-					caps = f->fcoords.field->maxcaps();
+					caps = maxcaps;
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
 						for (const Widelands::BuildingDescr* b :
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
-								caps = f->fcoords.field->maxcaps();
+								caps = maxcaps;
 								opacity *= 2 * kBuildhelpOpacity;
 								break;
 							}
@@ -603,8 +605,28 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 
-				if (const auto* overlay = get_buildhelp_overlay(caps)) {
+				const auto* overlay = get_buildhelp_overlay(caps);
+				if (overlay) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
+				}
+
+				// Draw port space hint if a port could be built here, but current situation doesn't
+				// allow it.
+				bool has_road = player_field.r_e || player_field.r_sw || player_field.r_se;
+				bool has_object = (f->fcoords.field->get_immovable() != nullptr);
+				if ((maxcaps & Widelands::BUILDCAPS_PORT) && !(caps & Widelands::BUILDCAPS_PORT) &&
+				    f->fcoords.field->is_interior(plr.player_number()) && !has_road && !has_object) {
+					const Image* pic = portspace_hint_pic_;
+					if (overlay != nullptr && (caps & Widelands::BUILDCAPS_BUILDINGMASK)) {
+						blit_field_overlay(dst, *f, pic, Vector2i(0, 0), scale, opacity);
+					} else if (overlay != nullptr && (caps & Widelands::BUILDCAPS_FLAG)) {
+						blit_field_overlay(dst, *f, pic,
+						                   Vector2i(5, overlay->hotspot.y - pic->height() / 2), scale,
+						                   opacity);
+					} else {
+						blit_field_overlay(
+						   dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, opacity);
+					}
 				}
 			}
 
@@ -640,7 +662,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
-                                      const Widelands::Message& message) {
+                                      const Widelands::Message& message) const {
 	// Fix a race condition that happens only in the testsuite
 	MutexLock m(MutexLock::ID::kObjects);
 

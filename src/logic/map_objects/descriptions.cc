@@ -529,17 +529,22 @@ void Descriptions::add_tribe(const LuaTable& table) {
 	description_manager_->mark_loading_done(name);
 }
 
+void Descriptions::ensure_tribes_are_registered() {
+	if (tribes_have_been_registered_) {
+		return;
+	}
+	description_manager_->register_directory(
+	   "tribes", g_fs,
+	   DescriptionManager::RegistryCallerInfo(
+	      DescriptionManager::RegistryCallerType::kDefault, std::string()));
+	tribes_have_been_registered_ = true;
+}
+
 DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	try {
 		// Register tribes on demand for better performance during mapselect, for the editor and for
 		// the website tools
-		if (!tribes_have_been_registered_) {
-			description_manager_->register_directory(
-			   "tribes", g_fs,
-			   DescriptionManager::RegistryCallerInfo(
-			      DescriptionManager::RegistryCallerType::kDefault, std::string()));
-			tribes_have_been_registered_ = true;
-		}
+		ensure_tribes_are_registered();
 		description_manager_->load_description(tribename);
 	} catch (WException& e) {
 		throw GameDataError("Error while loading tribe '%s': %s", tribename.c_str(), e.what());
@@ -652,7 +657,7 @@ void Descriptions::set_old_world_name(const std::string& name) {
 }
 
 void Descriptions::add_immovable_relation(const std::string& a, const std::string& b) {
-	immovable_relations_.push_back(std::make_pair(a, b));
+	immovable_relations_.emplace_back(a, b);
 }
 void Descriptions::postload_immovable_relations() {
 	for (const auto& pair : immovable_relations_) {

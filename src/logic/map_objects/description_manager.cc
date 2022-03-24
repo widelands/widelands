@@ -37,7 +37,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	map_objecttype_subscriber_ = Notifications::subscribe<NoteMapObjectDescription>(
 	   [this](const NoteMapObjectDescription& note) {
 		   if (description_managers_stack_.back() != this) {
-			   verb_log_dbg("DescriptionManager: Ignoring NoteMapObjectDescription");
+			   // Not meant for us
 			   return;
 		   }
 		   assert(!registered_descriptions_.empty());
@@ -174,7 +174,8 @@ void DescriptionManager::register_description(const std::string& description_nam
 			              registered_descriptions_.at(description_name).script_path.c_str(),
 			              script_path.c_str());
 			return;
-		} else if (replace) {
+		}
+		if (replace) {
 			verb_log_info("%s: using '%s' instead of '%s'", description_name.c_str(),
 			              script_path.c_str(),
 			              registered_descriptions_.at(description_name).script_path.c_str());
@@ -246,6 +247,7 @@ void DescriptionManager::load_description(const std::string& description_name) {
 	}
 
 	// Load it - scenario descriptions take precedence
+	load_order_.push_back(description_name);
 	const RegisteredObject* object = nullptr;
 
 	if (registered_scenario_descriptions_.count(description_name)) {

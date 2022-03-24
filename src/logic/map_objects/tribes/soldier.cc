@@ -511,7 +511,8 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
 	}
 
 	bool moving = false;
-	Vector2f spos = field_on_dst, epos = field_on_dst;
+	Vector2f spos = field_on_dst;
+	Vector2f epos = field_on_dst;
 
 	const float triangle_width = kTriangleWidth * scale;
 	switch (combat_walking_) {
@@ -803,7 +804,7 @@ void Soldier::init_auto_task(Game& game) {
 struct FindNodeOwned {
 	explicit FindNodeOwned(PlayerNumber owner) : owner_(owner) {
 	}
-	bool accept(const EditorGameBase&, const FCoords& coords) const {
+	bool accept(const EditorGameBase& /* egbase */, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == owner_);
 	}
 
@@ -1064,7 +1065,7 @@ void Soldier::attack_update(Game& game, State& state) {
                                   10));
 }
 
-void Soldier::attack_pop(Game& game, State&) {
+void Soldier::attack_pop(Game& game, State& /* state */) {
 	if (battle_) {
 		battle_->cancel(game, *this);
 	}
@@ -1277,7 +1278,7 @@ void Soldier::defense_update(Game& game, State& state) {
 			// Soldiers can not go over enemy land when defending.
 			if ((soldier->can_be_challenged()) && (f.get_owned_by() == get_owner()->player_number())) {
 				uint32_t thisDist = game.map().calc_distance(get_position(), soldier->get_position());
-				targets.push_back(SoldierDistance(soldier, thisDist));
+				targets.emplace_back(soldier, thisDist);
 			}
 		}
 	}
@@ -1312,7 +1313,7 @@ void Soldier::defense_update(Game& game, State& state) {
 	return start_task_idle(game, descr().get_animation("idle", this), 250);
 }
 
-void Soldier::defense_pop(Game& game, State&) {
+void Soldier::defense_pop(Game& game, State& /* state */) {
 	if (battle_) {
 		battle_->cancel(game, *this);
 	}
@@ -1352,7 +1353,7 @@ void Soldier::start_task_move_in_battle(Game& game, CombatWalkingDir dir) {
 	set_animation(game, descr().get_animation(mapdir == WALK_E ? "walk_e" : "walk_w", this));
 }
 
-void Soldier::move_in_battle_update(Game& game, State&) {
+void Soldier::move_in_battle_update(Game& game, State& /* state */) {
 	if (game.get_gametime() >= combat_walkend_) {
 		switch (combat_walking_) {
 		case CD_NONE:
@@ -1402,7 +1403,7 @@ void Soldier::start_task_battle(Game& game) {
 	push_task(game, taskBattle);
 }
 
-void Soldier::battle_update(Game& game, State&) {
+void Soldier::battle_update(Game& game, State& /* state */) {
 	std::string signal = get_signal();
 	molog(game.get_gametime(), "[battle] update for player %u's soldier: signal = \"%s\"\n",
 	      owner().player_number(), signal.c_str());
@@ -1548,7 +1549,7 @@ void Soldier::battle_update(Game& game, State&) {
 	battle_->get_battle_work(game, *this);
 }
 
-void Soldier::battle_pop(Game& game, State&) {
+void Soldier::battle_pop(Game& game, State& /* state */) {
 	if (battle_) {
 		battle_->cancel(game, *this);
 	}
@@ -1586,7 +1587,7 @@ void Soldier::die_update(Game& game, State& state) {
 	return pop_task(game);
 }
 
-void Soldier::die_pop(Game& game, State&) {
+void Soldier::die_pop(Game& game, State& /* state */) {
 	// Destroy the soldier!
 	molog(game.get_gametime(), "[die] soldier %u has died\n", serial());
 	schedule_destroy(game);

@@ -42,7 +42,7 @@ struct IconGrid : public Panel {
 	void* get_data(int32_t idx);
 
 private:
-	void clicked_button(uint32_t);
+	void clicked_button(uint32_t) const;
 
 	struct Item {
 		void* data;

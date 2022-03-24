@@ -425,10 +425,9 @@ UI::Window& ShipWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapOb
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			return ib.show_ship_window(&mol.get<Widelands::Ship>(fr.unsigned_32()));
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Ship Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Ship Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("ship window: %s", e.what());
 	}

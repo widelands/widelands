@@ -137,13 +137,11 @@ std::string as_mapobject_message(const std::string& image,
 		   "<div width=*><p>%s</p></div>",
 		   width, image_type, image, player_color->hex_value(),
 		   g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt));
-	} else {
-		return format(
-		   "<div padding_r=10><p><img width=%d %s=%s></p></div>"
-		   "<div width=*><p>%s</p></div>",
-		   width, image_type, image,
-		   g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt));
 	}
+	return format("<div padding_r=10><p><img width=%d %s=%s></p></div>"
+	              "<div width=*><p>%s</p></div>",
+	              width, image_type, image,
+	              g_style_manager->font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(txt));
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {

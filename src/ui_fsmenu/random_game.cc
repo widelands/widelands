@@ -120,7 +120,7 @@ void RandomGame::clicked_ok() {
 	if (menu_.do_generate_map(*game_, nullptr, settings_.get())) {
 		game_->remove_loader_ui();
 		progress_window_ = nullptr;
-		new LaunchSPG(capsule_, *settings_, *game_, nullptr, false);
+		new LaunchSPG(capsule_, *settings_, game_, nullptr, false);
 	} else {
 		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();

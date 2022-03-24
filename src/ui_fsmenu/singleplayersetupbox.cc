@@ -31,7 +31,7 @@ namespace FsMenu {
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              LaunchGame& lg,
-                                                             int32_t const,
+                                                             int32_t const /* w */,
                                                              int32_t const h,
                                                              PlayerSlot id,
                                                              GameSettingsProvider* const settings)
