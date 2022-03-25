@@ -72,7 +72,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
-					const WareWorker type = fr.unsigned_8() != 0u ? wwWORKER : wwWARE;
+					const WareWorker type = (fr.unsigned_8() != 0) ? wwWORKER : wwWARE;
 					const uint32_t serial = fr.unsigned_32();
 					const MapObject& mo = mol->get<MapObject>(serial);
 					if (upcast(const Flag, flag, &mo)) {

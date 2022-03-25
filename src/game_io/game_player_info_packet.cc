@@ -95,7 +95,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 
 					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 					if (packet_version >= 24) {
-						for (size_t j = fr.unsigned_32(); j != 0u; --j) {
+						for (size_t j = fr.unsigned_32(); j > 0; --j) {
 							player->muted_building_types_.insert(fr.unsigned_32());
 						}
 					}
