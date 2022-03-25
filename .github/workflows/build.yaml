@@ -186,7 +186,7 @@ jobs:
         mkdir build
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
-        make -k -j$(nproc)
+        make -k -j$(nproc) VERBOSE=1
         cd ..
     - name: Website Binaries
       run: |
@@ -251,7 +251,7 @@ jobs:
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
-        } 
+        }
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE

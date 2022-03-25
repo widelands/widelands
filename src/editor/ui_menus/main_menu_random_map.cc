@@ -491,7 +491,7 @@ void MainMenuNewRandomMapPanel::select_terrains_distribution() {
 bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbase,
                                                 EditorInteractive* eia,
                                                 SinglePlayerGameSettingsProvider* sp) {
-	if (ok_button_) {
+	if (ok_button_ != nullptr) {
 		ok_button_->set_enabled(false);
 		cancel_button_->set_enabled(false);
 	}
@@ -506,7 +506,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	// map currently. And if add-ons modify the default units, they may no longer satisfy
 	// the map generator's assumptions. It is probably safer to just disable them all.
 
-	if (eia) {
+	if (eia != nullptr) {
 		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
 		eia->cleanup_for_load();
 
@@ -569,7 +569,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 
 	map->recalc_whole_map(egbase);
 	map->set_background_theme(map_info.world_name);
-	if (eia) {
+	if (eia != nullptr) {
 		eia->map_changed(EditorInteractive::MapWas::kReplaced);
 		egbase.remove_loader_ui();
 
@@ -623,7 +623,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);
 			}
-		} else if (ok_button_) {
+		} else if (ok_button_ != nullptr) {
 			ok_button_->set_enabled(true);
 			cancel_button_->set_enabled(true);
 		}
@@ -644,7 +644,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 	}
 
 	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
-		if (ok_button_) {
+		if (ok_button_ != nullptr) {
 			ok_button_->set_enabled(false);
 		}
 	} else {
@@ -676,7 +676,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 		// Update other values in UI as well
 		button_clicked(ButtonId::kNone);
 
-		if (ok_button_) {
+		if (ok_button_ != nullptr) {
 			ok_button_->set_enabled(true);
 		}
 	}
@@ -701,14 +701,14 @@ void MainMenuNewRandomMapPanel::nr_edit_box_changed() {
 
 			map_id_edit_.set_text(id_string);
 
-			if (ok_button_) {
+			if (ok_button_ != nullptr) {
 				ok_button_->set_enabled(true);
 			}
-		} else if (ok_button_) {
+		} else if (ok_button_ != nullptr) {
 			ok_button_->set_enabled(false);
 		}
 	} catch (...) {
-		if (ok_button_) {
+		if (ok_button_ != nullptr) {
 			ok_button_->set_enabled(false);
 		}
 	}

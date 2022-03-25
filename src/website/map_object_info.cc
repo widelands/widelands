@@ -42,7 +42,7 @@ std::string get_helptext(const Widelands::MapObjectDescr& mo, const Widelands::T
 		return "";
 	}
 	const std::map<std::string, std::string>& helptexts = mo.get_helptexts(tribe.name());
-	if (helptexts.count("purpose")) {
+	if (helptexts.count("purpose") != 0u) {
 		return helptexts.at("purpose");
 	}
 	return "";
