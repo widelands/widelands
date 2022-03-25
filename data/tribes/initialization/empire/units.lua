@@ -1217,7 +1217,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an empire production site: Forester's House
             lore = pgettext("empire_building", "‘Vivat, crescat, floreat!’ (Live, grow, and bloom!)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Forester's House
-            lore_author = pgettext("Blessing from Goddess Ceres"),
+            lore_author = pgettext("Blessing from the god Silvanus"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an empire production site: Forester's House
