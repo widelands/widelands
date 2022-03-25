@@ -537,13 +537,11 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Remove old and move newly compiled files
   move_built_files () {
     rm  -f ../VERSION || true
-    rm  -f ../widelands || true
 
     rm  -f ../wl_map_object_info || true
     rm  -f ../wl_map_info || true
 
     cp VERSION ../VERSION
-    mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
         mv ../build/src/website/wl_create_spritesheet ../wl_create_spritesheet

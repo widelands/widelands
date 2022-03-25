@@ -72,7 +72,6 @@ When compiling has finished, you can call Widelands with
 
 ~~~~
 cd ..
-mv build/src/widelands .
 ./widelands
 ~~~~
 

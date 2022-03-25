@@ -39,7 +39,7 @@ if (WIN32)
 			COMMAND rc
 				/fo ${WIN32_ICON_O}
 				${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)	
+		)
 	else()
 		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
 			COMMAND ${MINGW_PREFIX}windres
@@ -47,7 +47,7 @@ if (WIN32)
 				-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
 		)
 	endif()
-	
+
   wl_binary(widelands
     WIN32
     SRCS
@@ -68,6 +68,8 @@ else()
       build_info
   )
 endif()
+
+set_target_properties(widelands PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 add_subdirectory(ai)
 add_subdirectory(base)
