@@ -1716,7 +1716,7 @@ wl.Descriptions():new_tribe {
          name = "empire_castle",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire military site: Castle
-            lore = pgettext("empire_building", "‘Ceterum censeo Al’thunran delenda est!’ (Furthermore, I think that Al’thunran must be destroyed!)"),
+            lore = pgettext("empire_building", "‘Ceterum autem censeo Althunranam esse delendam!’ (Furthermore, I think that Al’thunran must be destroyed!)"),
             -- TRANSLATORS: Lore author helptext for an empire military site: Castle
             lore_author = pgettext("Saledus in the Senate, urging final victory over the Barbarians"),
             -- TRANSLATORS: Purpose helptext for an empire military site: Castle
