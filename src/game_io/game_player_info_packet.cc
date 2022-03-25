@@ -42,8 +42,8 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
-				if (fr.unsigned_8()) {
-					bool const see_all = fr.unsigned_8();
+				if (fr.unsigned_8() != 0u) {
+					bool const see_all = fr.unsigned_8() != 0u;
 
 					int32_t const plnum = fr.unsigned_8();
 					if (plnum < 1 || kMaxPlayers < plnum) {
@@ -72,7 +72,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 					player->set_ai(fr.c_string());
 
 					if (packet_version >= 30) {
-						player->set_random_tribe(fr.unsigned_8());
+						player->set_random_tribe(fr.unsigned_8() != 0u);
 					}
 
 					if (packet_version >= 23) {
@@ -95,19 +95,19 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* 
 
 					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 					if (packet_version >= 24) {
-						for (size_t j = fr.unsigned_32(); j; --j) {
+						for (size_t j = fr.unsigned_32(); j > 0; --j) {
 							player->muted_building_types_.insert(fr.unsigned_32());
 						}
 					}
 					if (packet_version >= 25) {
-						player->is_picking_custom_starting_position_ = fr.unsigned_8();
+						player->is_picking_custom_starting_position_ = (fr.unsigned_8() != 0u);
 						player->initialization_index_ = fr.unsigned_8();
 					}
 					if (packet_version >= 26) {
-						player->allow_additional_expedition_items_ = fr.unsigned_8();
+						player->allow_additional_expedition_items_ = (fr.unsigned_8() != 0u);
 					}
 					if (packet_version >= 27) {
-						player->hidden_from_general_statistics_ = fr.unsigned_8();
+						player->hidden_from_general_statistics_ = (fr.unsigned_8() != 0u);
 					}
 				}
 			}
@@ -144,7 +144,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver* /* 
 	iterate_players_existing_const(p, nr_players, game, plr) {
 		fw.unsigned_8(1);  // Player is in game.
 
-		fw.unsigned_8(plr->see_all_);
+		fw.unsigned_8(static_cast<uint8_t>(plr->see_all_));
 
 		fw.unsigned_8(plr->player_number_);
 		fw.unsigned_8(plr->get_playercolor().r);

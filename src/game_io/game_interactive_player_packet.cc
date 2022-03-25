@@ -48,14 +48,14 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				throw GameDataError("Invalid player number: %i.", player_number);
 			}
 
-			if (!game.get_player(player_number)) {
+			if (game.get_player(player_number) == nullptr) {
 				// This happens if the player, that saved the game, was a spectator
 				// and the slot for player 1 was not used in the game.
 				// So now we try to create an InteractivePlayer object for another
 				// player instead.
 				const PlayerNumber max = game.map().get_nrplayers();
 				for (player_number = 1; player_number <= max; ++player_number) {
-					if (game.get_player(player_number)) {
+					if (game.get_player(player_number) != nullptr) {
 						break;
 					}
 				}
@@ -80,7 +80,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 #endif
 				ibase->set_display_flags(display_flags);
 			}
-			if (ipl) {
+			if (ipl != nullptr) {
 				ipl->set_player_number(player_number);
 			}
 
@@ -104,13 +104,13 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						uint32_t serial = fr.unsigned_32();
 						int16_t x = fr.signed_16();
 						int16_t y = fr.signed_16();
-						if (ipl) {
+						if (ipl != nullptr) {
 							ipl->get_expedition_port_spaces().emplace(
 							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
 						}
 					}
 				}
-				if (packet_version >= 6 && fr.unsigned_8() && ipl) {
+				if (packet_version >= 6 && (fr.unsigned_8() != 0u) && (ipl != nullptr)) {
 					ibase->load_windows(fr, *mol);
 				}
 			}
@@ -135,7 +135,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	InteractivePlayer* const iplayer = game.get_ipl();
 
 	// Player number
-	fw.unsigned_8(iplayer ? iplayer->player_number() : 1);
+	fw.unsigned_8(iplayer != nullptr ? iplayer->player_number() : 1);
 
 	if (ibase != nullptr) {
 		const Vector2f center = ibase->map_view()->view_area().rect().center();
@@ -160,7 +160,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 			fw.float_32(landmarks[i].view.zoom);
 		}
 
-		if (iplayer) {
+		if (iplayer != nullptr) {
 			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
 			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
 				fw.unsigned_32(mos->get_object_file_index(*pair.first.get(game)));
@@ -172,7 +172,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 		}
 	}
 
-	if (iplayer) {
+	if (iplayer != nullptr) {
 		fw.unsigned_8(1);
 		iplayer->save_windows(fw, *mos);
 	} else {

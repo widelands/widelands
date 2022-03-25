@@ -43,7 +43,7 @@ bool write_expedition_ship_economy(Economy* economy,
                                    MapObjectSaver* const mos) {
 	for (Field const* field = &map[0]; field < &map[map.max_index()]; ++field) {
 		Bob* bob = field->get_first_bob();
-		while (bob) {
+		while (bob != nullptr) {
 			if (upcast(Ship const, ship, bob)) {
 				if (ship->get_economy(economy->type()) == economy) {
 					fw->unsigned_32(mos->get_object_file_index(*ship));
@@ -72,7 +72,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
-					const WareWorker type = fr.unsigned_8() ? wwWORKER : wwWARE;
+					const WareWorker type = (fr.unsigned_8() != 0) ? wwWORKER : wwWARE;
 					const uint32_t serial = fr.unsigned_32();
 					const MapObject& mo = mol->get<MapObject>(serial);
 					if (upcast(const Flag, flag, &mo)) {
