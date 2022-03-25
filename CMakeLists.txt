@@ -279,36 +279,36 @@ endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   set(warn_disable_flags
-  "-Weverything"
+    "-Weverything"
 
-  # Disabled warnings that are overly verbose right now or just do not make sense.
-  "-Wno-c++98-compat"
-  "-Wno-c++98-compat-pedantic"
-  "-Wno-conversion"
-  "-Wno-exit-time-destructors"
-  "-Wno-global-constructors"
-  "-Wno-padded"
-  "-Wno-sign-conversion"
-  "-Wno-missing-noreturn"
+    # Disabled warnings that are overly verbose right now or just do not make sense.
+    "-Wno-c++98-compat"
+    "-Wno-c++98-compat-pedantic"
+    "-Wno-conversion"
+    "-Wno-exit-time-destructors"
+    "-Wno-global-constructors"
+    "-Wno-padded"
+    "-Wno-sign-conversion"
+    "-Wno-missing-noreturn"
 
-  # It is impossible to write code that both GCC and Clang will like,
-  # so we have to switch off the warning for one of them.
-  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
-  "-Wno-switch-enum"
+    # It is impossible to write code that both GCC and Clang will like,
+    # so we have to switch off the warning for one of them.
+    # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+    "-Wno-switch-enum"
 
-  # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
-  "-Wno-weak-vtables"
-  "-Wno-unreachable-code"
-  "-Wno-documentation"
-  "-Qunused-arguments"
-  "-Wint-to-void-pointer-cast"
+    # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
+    "-Wno-weak-vtables"
+    "-Wno-unreachable-code"
+    "-Wno-documentation"
+    "-Qunused-arguments"
+    "-Wint-to-void-pointer-cast"
   )
   foreach(flag IN LISTS warn_disable_flags)
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
   endforeach()
 
   if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 3.8)
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
   endif()
 elseif(MSVC)
   # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/
@@ -333,30 +333,30 @@ else()
   endif()
 
   set(warn_flags
-  "-Wall"
-  "-Wpedantic"
-  "-Wdeprecated-declarations"
-  "-Wextra"
-  "-Wformat"
-  "-Wformat-nonliteral"
-  "-Wformat-security"
-  "-Wformat-y2k"
-  "-Winit-self"
-  "-Winvalid-pch"
-  "-Wlogical-op"
-  "-Wmissing-include-dirs"
-  "-Wno-undef"
-  "-Wold-style-cast"
-  "-Woverlength-strings"
-  "-Wpacked"
-  "-Wpointer-arith"
-  "-Wsign-promo"
-  "-Wsync-nand"
-  "-Wtrampolines"
-  "-Wundef"
-  "-Wunused"
-  "-Wunused-macros"
-  "-fno-elide-constructors" # Detect invalid constexpr initialization
+    "-Wall"
+    "-Wpedantic"
+    "-Wdeprecated-declarations"
+    "-Wextra"
+    "-Wformat"
+    "-Wformat-nonliteral"
+    "-Wformat-security"
+    "-Wformat-y2k"
+    "-Winit-self"
+    "-Winvalid-pch"
+    "-Wlogical-op"
+    "-Wmissing-include-dirs"
+    "-Wno-undef"
+    "-Wold-style-cast"
+    "-Woverlength-strings"
+    "-Wpacked"
+    "-Wpointer-arith"
+    "-Wsign-promo"
+    "-Wsync-nand"
+    "-Wtrampolines"
+    "-Wundef"
+    "-Wunused"
+    "-Wunused-macros"
+    "-fno-elide-constructors" # Detect invalid constexpr initialization
   )
   foreach(flag IN LISTS warn_flags)
     wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
