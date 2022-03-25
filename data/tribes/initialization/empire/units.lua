@@ -1189,7 +1189,7 @@ wl.Descriptions():new_tribe {
          name = "empire_quarry",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Quarry
-            lore = pgettext("empire_building", "‘Lapides at ædificium.’ (Stones for Buildings.)"),
+            lore = pgettext("empire_building", "‘Lapides pro ædificia.’ (Stones for buildings.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Quarry
             lore_author = pgettext("Handbook of the imperial economy"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Quarry
