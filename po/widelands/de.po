@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-16 02:57+0000\n"
+"POT-Creation-Date: 2022-03-22 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>, 2018\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -350,7 +350,7 @@ msgid "Redo"
 msgstr "Wiederherstellen"
 
 #: ../../src/editor/editorinteractive.cc:168
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:227
 msgid "Help"
 msgstr "Hilfe"
 
@@ -418,7 +418,7 @@ msgstr "Setze die Geländehöhe auf einen Zufallswert"
 #: ../../src/editor/editorinteractive.cc:286
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
-#: ../../src/wui/minimap.cc:152
+#: ../../src/wui/minimap.cc:154
 msgid "Terrain"
 msgstr "Gelände"
 
@@ -615,7 +615,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:361 ../../src/ui_basic/dropdown.cc:363
+#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1366
 #: ../../src/ui_fsmenu/addons/manager.cc:1377
@@ -813,7 +813,7 @@ msgstr "%1%× %2%"
 #: ../../src/editor/ui_menus/field_info_window.cc:229
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:158
 #: ../../src/ui_fsmenu/netsetup_lan.cc:131 ../../src/wui/mapdetails.cc:136
-#: ../../src/wui/minimap.cc:140
+#: ../../src/wui/minimap.cc:142
 msgid "Map"
 msgstr "Karte"
 
@@ -864,7 +864,7 @@ msgid "Enabled Add-Ons: %s"
 msgstr "Aktivierte Erweiterungen: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
-#: ../../src/ui_fsmenu/main.cc:1009 ../../src/wui/encyclopedia_window.cc:144
+#: ../../src/ui_fsmenu/main.cc:1011 ../../src/wui/encyclopedia_window.cc:144
 #: ../../src/wui/tribal_encyclopedia.cc:55
 msgid "Error!"
 msgstr "Fehler!"
@@ -1035,9 +1035,9 @@ msgstr "(kein)"
 msgid "Waterway length limit:"
 msgstr "Maximale Wasserweglänge:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1463,8 +1463,8 @@ msgstr "Wähle die neue Kartengröße, dann klicke in die Karte um sie an der ge
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:309 ../../src/ui_basic/dropdown.cc:361
-#: ../../src/ui_basic/dropdown.cc:428 ../../src/ui_basic/dropdown.cc:436
+#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
+#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -1489,27 +1489,27 @@ msgstr "Lade Spiel: %1$s (%2$u/%3$d)"
 msgid "Elemental data"
 msgstr "Elementare Spieldaten"
 
-#: ../../src/game_io/game_loader.cc:151 ../../src/game_io/game_saver.cc:82
+#: ../../src/game_io/game_loader.cc:135 ../../src/game_io/game_saver.cc:82
 msgid "Economies"
 msgstr "Wirtschaften"
 
-#: ../../src/game_io/game_loader.cc:158 ../../src/game_io/game_saver.cc:89
+#: ../../src/game_io/game_loader.cc:142 ../../src/game_io/game_saver.cc:89
 msgid "AI"
 msgstr "KI"
 
-#: ../../src/game_io/game_loader.cc:165 ../../src/game_io/game_saver.cc:96
+#: ../../src/game_io/game_loader.cc:149 ../../src/game_io/game_saver.cc:96
 msgid "Command queue"
 msgstr "Befehlsspeicher"
 
-#: ../../src/game_io/game_loader.cc:173 ../../src/map_io/map_saver.cc:147
+#: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:387
 #: ../../src/wlapplication_options.cc:528
-#: ../../src/wui/interactive_player.cc:217
-#: ../../src/wui/interactive_player.cc:454
+#: ../../src/wui/interactive_player.cc:218
+#: ../../src/wui/interactive_player.cc:455
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: ../../src/game_io/game_loader.cc:191
+#: ../../src/game_io/game_loader.cc:175
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:202
 msgid "Finishing"
 msgstr "Abschließen"
@@ -1755,15 +1755,15 @@ msgstr "Erzeuge Spieler %d …"
 msgid "Postloading world and tribes…"
 msgstr "Lade Welt und Stämme nach …"
 
-#: ../../src/logic/editor_game_base.cc:559
+#: ../../src/logic/editor_game_base.cc:569
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Bereinigen zum Laden: Kartenobjekte (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:565
+#: ../../src/logic/editor_game_base.cc:575
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Bereinigen zum Laden: Spieler (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:568
+#: ../../src/logic/editor_game_base.cc:578
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Bereinigen zum Laden: Karte (3/3)"
 
@@ -1772,40 +1772,40 @@ msgstr "Bereinigen zum Laden: Karte (3/3)"
 msgid "Not set"
 msgstr "Nicht festgelegt"
 
-#: ../../src/logic/game.cc:283 ../../src/logic/game.cc:328
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:324
+#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:477
 msgid "Preloading map…"
 msgstr "Lese Teile der Karte …"
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:377
 msgid "Initializing game…"
 msgstr "Spiel wird initialisiert …"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:626
+#: ../../src/logic/game.cc:620
 msgid "Creating player infrastructure…"
 msgstr "Erzeuge Spielerinfrastruktur …"
 
-#: ../../src/logic/game.cc:643 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:637 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Fehlende Ausgangsposition"
 
-#: ../../src/logic/game.cc:644 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keine Ausgangsposition besitzt.\nDu kannst manuell mit dem Widelands-Editor eine Ausgangsposition setzen, um das Problem zu lösen."
 
-#: ../../src/logic/game.cc:742
+#: ../../src/logic/game.cc:738
 msgid "Initializing…"
 msgstr "Spiel wird initialisiert …"
 
-#: ../../src/logic/game.cc:1185
+#: ../../src/logic/game.cc:1181
 msgid "Trade Offer"
 msgstr "Handelsangebot"
 
-#: ../../src/logic/game.cc:1187
+#: ../../src/logic/game.cc:1183
 msgid "This market has received a new trade offer."
 msgstr "Dieser Markt hat ein neues Handelsangebot erhalten."
 
@@ -2260,6 +2260,7 @@ msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Lade %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:174
+#: ../../src/wui/minimap.cc:209
 msgid "Ships"
 msgstr "Schiffe"
 
@@ -2267,7 +2268,7 @@ msgstr "Schiffe"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:152
-#: ../../src/wui/interactive_player.cc:324
+#: ../../src/wui/interactive_player.cc:325
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2289,7 +2290,7 @@ msgstr "Arbeiter"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:148
-#: ../../src/wui/interactive_player.cc:319 ../../src/wui/minimap.cc:196
+#: ../../src/wui/interactive_player.cc:320 ../../src/wui/minimap.cc:198
 msgid "Buildings"
 msgstr "Gebäude"
 
@@ -2480,7 +2481,7 @@ msgid "Building restrictions"
 msgstr "Gebäudebeschränkungen"
 
 #: ../../src/map_io/map_saver.cc:200
-#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:174
+#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:176
 msgid "Flags"
 msgstr "Flaggen"
 
@@ -2529,7 +2530,7 @@ msgstr "Skripting"
 #: ../../src/map_io/widelands_map_loader.cc:405
 #: ../../src/wlapplication_options.cc:524
 #: ../../src/wui/game_objectives_menu.cc:41
-#: ../../src/wui/interactive_player.cc:209
+#: ../../src/wui/interactive_player.cc:210
 msgid "Objectives"
 msgstr "Aufgaben"
 
@@ -3208,18 +3209,18 @@ msgstr "Grün"
 msgid "Blue"
 msgstr "Blau"
 
-#: ../../src/ui_basic/dropdown.cc:114
+#: ../../src/ui_basic/dropdown.cc:112
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Wähle Element"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:421
+#: ../../src/ui_basic/dropdown.cc:419
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nicht ausgewählt"
 
-#: ../../src/ui_basic/dropdown.h:455
+#: ../../src/ui_basic/dropdown.h:447
 msgid "No matches"
 msgstr "Keine Treffer"
 
@@ -4629,11 +4630,11 @@ msgstr "%1$u / %2$u"
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr "Das Bildschirmfoto konnte nicht vom Server geladen werden."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:951
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
 msgid "Please log in to comment"
 msgstr "Zum Kommentieren bitte einloggen"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:953
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
 msgid "Please log in to vote"
 msgstr "Zum Bewerten bitte einloggen"
 
@@ -5029,7 +5030,7 @@ msgstr "Der ausgewählte Tastaturbefehl  („%1$s“) ist bereits vergeben für 
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:329
+#: ../../src/wui/interactive_player.cc:330
 msgid "General"
 msgstr "Allgemein"
 
@@ -5471,11 +5472,11 @@ msgstr "Desynchronisierende Erweiterung Gefunden"
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
 msgstr "Eine aktivierte Erweiterung verursacht bekanntermaßen Desynchronisationen. Mach auf eigenes Risiko weiter."
 
-#: ../../src/ui_fsmenu/main.cc:913 ../../src/ui_fsmenu/netsetup_lan.cc:324
+#: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found!"
 msgstr "Keine Stammesdaten gefunden!"
 
-#: ../../src/ui_fsmenu/main.cc:914 ../../src/ui_fsmenu/netsetup_lan.cc:325
+#: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
 msgstr "Keine Stammesdaten in data/tribes/initialization/[tribename]/init.lua gefunden."
 
@@ -5543,11 +5544,11 @@ msgstr "Offiziell & Inoffiziell"
 msgid "Any Teams"
 msgstr "Beliebige Teams"
 
-#: ../../src/ui_fsmenu/mapselect.cc:460
+#: ../../src/ui_fsmenu/mapselect.cc:461
 msgid "Balanced & Unbalanced"
 msgstr "Ausgewogen & Unausgewogen"
 
-#: ../../src/ui_fsmenu/mapselect.cc:465
+#: ../../src/ui_fsmenu/mapselect.cc:466
 msgctxt "balancing"
 msgid "Unspecified"
 msgstr "Unspezifiziert"
@@ -5943,7 +5944,7 @@ msgstr "Gebäude anzeigen"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:374
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:375
 msgid "Show Workarea Overlaps"
 msgstr "Arbeitsbereichüberlappung anzeigen"
 
@@ -6126,18 +6127,18 @@ msgstr "Falscher Pfad zur Datei in „campaigns.lua“ aus „tutorials.lua“: 
 msgid "Tutorial"
 msgstr "Einführungsspiel"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autoren"
@@ -7582,8 +7583,8 @@ msgstr "Ersetze den Spieler durch die ausgewählte KI und setze das Spiel fort"
 msgid "AI for the disconnected player"
 msgstr "Ersatz-KI für den Spieler"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8022,21 +8023,21 @@ msgstr "Zoom zurücksetzen"
 msgid "Zoom –"
 msgstr "Vergrößerung –"
 
-#: ../../src/wui/interactive_base.cc:728
+#: ../../src/wui/interactive_base.cc:727
 #, c-format
 msgid "Road length: %u"
 msgstr "Straßenlänge: %u"
 
-#: ../../src/wui/interactive_base.cc:730
+#: ../../src/wui/interactive_base.cc:729
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Wasserwegelänge: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1538
+#: ../../src/wui/interactive_base.cc:1537
 msgid "Failed saving screenshot!"
 msgstr "Konnte Bildschirmfoto nicht speichern!"
 
-#: ../../src/wui/interactive_base.cc:1542
+#: ../../src/wui/interactive_base.cc:1541
 msgid "Screenshot saved"
 msgstr "Bildschirmfoto gespeichert"
 
@@ -8144,20 +8145,20 @@ msgstr "Spiel pausieren"
 msgid "Statistics"
 msgstr "Statistiken"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:303 ../../src/wui/map_tags.cc:37
+#. * TRANSLATORS: An entry in the game's statistics menu
+#: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seefahrt"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:309
+#: ../../src/wui/interactive_player.cc:310
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Soldaten"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:314 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:315 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Lager"
@@ -8165,17 +8166,17 @@ msgstr "Lager"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:371
+#: ../../src/wui/interactive_player.cc:372
 msgid "Hide Workarea Overlaps"
 msgstr "Arbeitsbereichüberlappung ausblenden"
 
-#: ../../src/wui/interactive_player.cc:377
+#: ../../src/wui/interactive_player.cc:378
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Schalte die Anzeige von überlappenden Arbeitsbereichen bei der Platzierung von Baustellen um"
 
-#: ../../src/wui/interactive_player.cc:459
+#: ../../src/wui/interactive_player.cc:460
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -8325,15 +8326,15 @@ msgstr "Die Größe der Karte (Breite x Höhe)"
 msgid "Map Name"
 msgstr "Kartenname"
 
-#: ../../src/wui/minimap.cc:163
+#: ../../src/wui/minimap.cc:165
 msgid "Owner"
 msgstr "Besitzer"
 
-#: ../../src/wui/minimap.cc:185
+#: ../../src/wui/minimap.cc:187
 msgid "Roads"
 msgstr "Straßen"
 
-#: ../../src/wui/minimap.cc:207
+#: ../../src/wui/minimap.cc:220
 msgid "Zoom"
 msgstr "Vergrößerung"
 
