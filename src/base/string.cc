@@ -22,7 +22,7 @@
 
 std::string to_lower(const std::string& str) {
 	std::string s;
-	for (const char* c = str.c_str(); *c; ++c) {
+	for (const char* c = str.c_str(); *c != 0; ++c) {
 		s.push_back(tolower(*c));
 	}
 	return s;
@@ -31,7 +31,7 @@ std::string to_lower(const std::string& str) {
 bool iequals(const std::string& str1, const std::string& str2) {
 	const char* a = str1.c_str();
 	const char* b = str2.c_str();
-	for (; *a && *b; ++a, ++b) {
+	for (; (*a != 0) && (*b != 0); ++a, ++b) {
 		if (tolower(*a) != tolower(*b)) {
 			return false;
 		}
@@ -42,7 +42,7 @@ bool iequals(const std::string& str1, const std::string& str2) {
 bool starts_with(const std::string& str, const std::string& test, const bool case_sensitive) {
 	const char* a = str.c_str();
 	const char* b = test.c_str();
-	for (; *a && *b; ++a, ++b) {
+	for (; (*a != 0) && (*b != 0); ++a, ++b) {
 		if (case_sensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) {
 			return false;
 		}
@@ -54,13 +54,13 @@ bool ends_with(const std::string& str, const std::string& test, const bool case_
 	const char* a = str.c_str();
 	size_t len_a = 0;
 	// Go to the end of the `str` string
-	for (; *a; ++a, ++len_a) {
+	for (; *a != 0; ++a, ++len_a) {
 	}
 
 	// Go to the end of the `test` string
 	const char* b = test.c_str();
 	size_t len_b = 0;
-	for (; *b; ++b) {
+	for (; *b != 0; ++b) {
 		++len_b;
 		if (len_b > len_a) {
 			return false;
@@ -68,7 +68,7 @@ bool ends_with(const std::string& str, const std::string& test, const bool case_
 	}
 
 	// Step back, one char at a time
-	for (; len_b; --len_b) {
+	for (; len_b != 0u; --len_b) {
 		--b;
 		--a;
 		if (case_sensitive ? (*a != *b) : (tolower(*a) != tolower(*b))) {
@@ -83,8 +83,8 @@ void split(std::vector<std::string>& result, const std::string& str, const std::
 	result.clear();
 	std::string cur;
 
-	for (const char* c = str.c_str(); *c; ++c) {
-		if (set.count(*c)) {
+	for (const char* c = str.c_str(); *c != 0; ++c) {
+		if (set.count(*c) != 0u) {
 			result.push_back(cur);
 			cur.clear();
 		} else {

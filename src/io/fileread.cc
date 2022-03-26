@@ -24,7 +24,7 @@ FileRead::FileRead() : data_(nullptr), length_(0) {
 }
 
 FileRead::~FileRead() {
-	if (data_) {
+	if (data_ != nullptr) {
 		close();
 	}
 }
@@ -100,7 +100,7 @@ char* FileRead::c_string(const Pos& pos) {
 		throw FileBoundaryExceeded();
 	}
 	char* const result = data_ + i;
-	for (char* p = result; *p; ++p, ++i) {
+	for (char* p = result; *p != 0; ++p, ++i) {
 	}
 	++i;                      //  beyond the null
 	if (i > (length_ + 1)) {  // allow EOF as end marker for string
@@ -121,7 +121,7 @@ char* FileRead::read_line() {
 		return nullptr;
 	}
 	char* result = data_ + filepos_;
-	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_) {
+	for (; (data_[filepos_] != 0) && data_[filepos_] != '\n'; ++filepos_) {
 		if (data_[filepos_] == '\r') {
 			data_[filepos_] = '\0';
 			++filepos_;
