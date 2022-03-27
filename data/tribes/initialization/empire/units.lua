@@ -1634,7 +1634,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an empire training site: Training Camp
             lore = pgettext("empire_building", "‘Fortes fortuna adiuvat.’ (Fortune helps the strong.)"),
             -- TRANSLATORS: Lore author helptext for an empire training site: Training Camp
-            lore_author = pgettext("???"),
+            lore_author = pgettext("Trainer to soldiers who questioned the need for higher level training"),
                -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 1
                pgettext("empire_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
                -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 2
