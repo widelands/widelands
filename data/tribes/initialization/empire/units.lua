@@ -1313,6 +1313,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_bakery",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire production site: Bakery
+            lore = pgettext("empire_building", "‘Non est de sacco tanta farina tuo.’ (There’s not this much flour in your sack.)"),
+            -- TRANSLATORS: Lore author helptext for an empire production site: Bakery
+            lore_author = pgettext("A baker accusing another of theft"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Bakery
             purpose = pgettext("empire_building", "Bakes bread for soldiers and miners alike."),
             -- TRANSLATORS: Performance helptext for an empire production site: Bakery
