@@ -826,8 +826,8 @@ void ManagementData::mutate(const uint8_t pn) {
 		}
 		for (auto& item : neuron_pool) {
 
-			const MutatingIntensity mutating_intensity = do_mutate(
-			   preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
+			const MutatingIntensity mutating_intensity =
+			   do_mutate(preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = item.get_weight();
