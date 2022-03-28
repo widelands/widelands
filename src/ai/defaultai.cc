@@ -2044,11 +2044,11 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 
 		score_parts[24] =
-		   (field.unowned_land_nearby) != 0u ?
+		   (field.unowned_land_nearby != 0) ?
             management_data.neuron_pool[25].get_result_safe(field.water_nearby / 2, kAbsValue) :
             0;
 		score_parts[25] =
-		   (field.unowned_land_nearby) != 0u ?
+		   (field.unowned_land_nearby != 0) ?
             management_data.neuron_pool[27].get_result_safe(
 		         std::max(field.immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
 		                  field.immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
@@ -2058,7 +2058,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		if (resource_necessity_water_needed_) {
 			score_parts[26] =
-			   (field.unowned_land_nearby) != 0u ?
+			   (field.unowned_land_nearby != 0) ?
                management_data.neuron_pool[15].get_result_safe(field.water_nearby, kAbsValue) :
                0;
 			score_parts[27] =
@@ -2066,7 +2066,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			   management_data.neuron_pool[17].get_result_safe(field.distant_water, kAbsValue) / 100;
 		}
 		score_parts[28] =
-		   (field.unowned_land_nearby) != 0u ?
+		   (field.unowned_land_nearby != 0) ?
             management_data.neuron_pool[33].get_result_safe(field.water_nearby, kAbsValue) :
             0;
 		score_parts[29] =
@@ -2113,7 +2113,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	score_parts[42] =
-	   (field.unowned_land_nearby) != 0u ?
+	   (field.unowned_land_nearby != 0) ?
          management_data.neuron_pool[18].get_result_safe(field.own_non_military_nearby, kAbsValue) :
          0;
 
@@ -2122,7 +2122,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[44] =
 	   management_data.neuron_pool[12].get_result_safe(field.unowned_mines_spots_nearby, kAbsValue);
 	score_parts[45] =
-	   (field.unowned_land_nearby) != 0u ?
+	   (field.unowned_land_nearby != 0) ?
          field.military_loneliness * std::abs(management_data.get_military_number_at(53)) / 800 :
          0;
 
@@ -2144,7 +2144,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                         2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[58] = 3 * management_data.neuron_pool[19].get_result_safe(
 	                         5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
-	score_parts[59] = (field.unowned_portspace_vicinity_nearby) != 0u ?
+	score_parts[59] = (field.unowned_portspace_vicinity_nearby != 0) ?
                         10 * std::abs(management_data.get_military_number_at(31)) :
                         0;
 	score_parts[60] = 3 * management_data.neuron_pool[21].get_result_safe(

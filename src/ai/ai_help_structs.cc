@@ -738,9 +738,9 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const AiType type)
 	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 }
 // Decides if mutation takes place and how intensive it will be
-MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
+MutatingIntensity ManagementData::do_mutate(const bool is_preferred,
                                             const int16_t mutation_probability) {
-	if (is_preferred > 0) {
+	if (is_preferred) {
 		return MutatingIntensity::kAgressive;
 	}
 	if (RNG::static_rand(mutation_probability) == 0) {
@@ -802,7 +802,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 
 			const MutatingIntensity mutating_intensity =
-			   do_mutate(static_cast<uint8_t>(preferred_numbers.count(i) > 0), mutation_intensity);
+			   do_mutate(preferred_numbers.count(i) > 0, mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = get_military_number_at(i);
@@ -827,7 +827,7 @@ void ManagementData::mutate(const uint8_t pn) {
 		for (auto& item : neuron_pool) {
 
 			const MutatingIntensity mutating_intensity = do_mutate(
-			   static_cast<uint8_t>(preferred_neurons.count(item.get_id()) > 0), mutation_intensity);
+			   preferred_neurons.count(item.get_id()) > 0, mutation_intensity);
 
 			if (mutating_intensity != MutatingIntensity::kNo) {
 				const int16_t old_value = item.get_weight();
