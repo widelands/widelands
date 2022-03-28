@@ -310,7 +310,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 			game_.reset(new Widelands::Game());
 			game_->create_loader_ui({}, false, "", "", this);
 			game_->load_all_tribes();
-			game_->postload_addons();
+			game_->postload_addons(true);
 
 			init_fastplace_default_shortcuts();
 
