@@ -674,7 +674,7 @@ void BuildingStatisticsMenu::update() {
 
 		if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
 		    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
@@ -700,7 +700,7 @@ void BuildingStatisticsMenu::update() {
 				label_unproductive_.set_text(_("Low productivity:"));
 			}
 		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				const RGBColor& color =
 				   (total_stationed_soldiers < total_soldier_capacity / 2) ? style_.low_color() :
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
