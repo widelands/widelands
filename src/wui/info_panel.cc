@@ -65,7 +65,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !id_ || (owner_.message_queue_ == nullptr) ||
+	return !(id_.operator bool()) || (owner_.message_queue_ == nullptr) ||
 	       (owner_.message_queue_->count(id_.value()) != 0u);
 }
 
@@ -104,10 +104,10 @@ void MessagePreview::draw(RenderTarget& r) {
 		r.brighten_rect(Recti((w - fraction) / 2, get_h() - kSpacing, fraction, kSpacing), -64);
 	}
 }
-bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /*x*/, int32_t /*y*/) {
+bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if ((message_ != nullptr) && message_->position()) {
+		if ((message_ != nullptr) && (message_->position().operator bool())) {
 			owner_.ibase_.map_view()->scroll_to_field(
 			   message_->position(), MapView::Transition::Smooth);
 		}

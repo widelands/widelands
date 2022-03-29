@@ -165,7 +165,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      last_building_index_(0),
      last_building_type_(Widelands::INVALID_INDEX),
      lastupdate_(0),
-     was_minimized_(0u),
+     was_minimized_(false),
      has_selection_(false),
      nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
@@ -588,13 +588,13 @@ void BuildingStatisticsMenu::think() {
 	// Update statistics
 	const Time& gametime = iplayer().game().get_gametime();
 
-	if ((was_minimized_ != 0u) || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_building_list();
 		update();
 		lastupdate_ = gametime;
 	}
 	// Make sure we don't have a delay with displaying labels when we restore the window.
-	was_minimized_ = static_cast<uint32_t>(is_minimal());
+	was_minimized_ = is_minimal();
 }
 
 /*
