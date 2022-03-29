@@ -184,12 +184,12 @@ std::vector<Recti> Button::focus_overlay_rects() {
 void Button::draw(RenderTarget& dst) {
 	const bool is_flat =
 	   (enabled_ && visual_state_ == VisualState::kFlat) ||
-	   (!enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat) != 0));
+	   (!enabled_ && ((disable_style_ & ButtonDisableStyle::kFlat) != 0));
 	const bool is_permpressed =
 	   (enabled_ && visual_state_ == VisualState::kPermpressed) ||
-	   (!enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed) != 0));
+	   (!enabled_ && ((disable_style_ & ButtonDisableStyle::kPermpressed) != 0));
 	const bool is_monochrome =
-	   !enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome) != 0);
+	   !enabled_ && ((disable_style_ & ButtonDisableStyle::kMonochrome) != 0);
 
 	const UI::TextPanelStyleInfo& style_to_use =
 	   is_monochrome ? button_style().disabled() : button_style().enabled();
