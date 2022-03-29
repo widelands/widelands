@@ -225,7 +225,7 @@ void Game::postload_addons_before_loading() {
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
 	mutable_descriptions()->ensure_tribes_are_registered();
-	postload_addons();
+	postload_addons(false);
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
@@ -252,7 +252,7 @@ void Game::check_legacy_addons_desync_magic() {
 	EditorInteractive::load_world_units(nullptr, *this);
 	load_all_tribes();
 
-	postload_addons();
+	postload_addons(true);
 }
 
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
@@ -331,7 +331,7 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
-	postload_addons();
+	postload_addons(false);
 	did_postload_addons_before_loading_ = true;
 
 	std::vector<PlayerSettings> shared;
@@ -448,7 +448,7 @@ void Game::init_savegame(const GameSettings& settings) {
 
 		// Discover the links between resources and geologist flags,
 		// dependencies of productionsites etc.
-		postload_addons();
+		postload_addons(true);
 
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -497,7 +497,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(ipl);
 
 		gl.load_game();
-		postload_addons();
+		postload_addons(true);
 
 		ipl->info_panel_fast_forward_message_queue();
 	}
@@ -733,7 +733,7 @@ bool Game::run(StartGameType const start_game_type,
 		}
 	}
 
-	postload_addons();
+	postload_addons(true);
 
 	sync_reset();
 	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));

@@ -51,12 +51,12 @@ void initialize() {
 
 // Cleanup before program end
 void cleanup() {
-	if (g_gr) {
+	if (g_gr != nullptr) {
 		delete g_gr;
 		g_gr = nullptr;
 	}
 
-	if (g_fs) {
+	if (g_fs != nullptr) {
 		delete g_fs;
 		g_fs = nullptr;
 	}

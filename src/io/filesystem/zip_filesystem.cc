@@ -62,7 +62,7 @@ void ZipFilesystem::ZipFile::open_for_zip() {
 	close();
 
 	write_handle_ = zipOpen(path_.c_str(), APPEND_STATUS_ADDINZIP);
-	if (!write_handle_) {
+	if (write_handle_ == nullptr) {
 		//  Couldn't open for append, so create new.
 		write_handle_ = zipOpen(path_.c_str(), APPEND_STATUS_CREATE);
 	}
@@ -78,7 +78,7 @@ void ZipFilesystem::ZipFile::open_for_unzip() {
 	close();
 
 	read_handle_ = unzOpen(path_.c_str());
-	if (!read_handle_) {
+	if (read_handle_ == nullptr) {
 		throw FileTypeError("ZipFilesystem::open_for_unzip", path_, "not a .zip file");
 	}
 
@@ -423,7 +423,7 @@ void* ZipFilesystem::load(const std::string& fname, size_t& length) {
 	unzCloseCurrentFile(zip_file_->read_handle());
 
 	void* const result = malloc(totallen + 1);
-	if (!result) {
+	if (result == nullptr) {
 		throw std::bad_alloc();
 	}
 	unzOpenCurrentFile(zip_file_->read_handle());

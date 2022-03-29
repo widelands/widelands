@@ -75,7 +75,7 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	const MapGenBobCategory* bobCategory = landResource.get_bob_category(terrType);
 
-	if (!bobCategory) {  //  no bobs defined here...
+	if (bobCategory == nullptr) {  //  no bobs defined here...
 		return;
 	}
 
@@ -95,14 +95,14 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	// Set bob according to bob area
 
-	if (set_immovable && (num = bobCategory->num_immovables())) {
+	if (set_immovable && ((num = bobCategory->num_immovables()) != 0u)) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
-	if (set_moveable && (num = bobCategory->num_critters())) {
+	if (set_moveable && ((num = bobCategory->num_critters()) != 0u)) {
 		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
@@ -268,7 +268,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 		for (uint32_t x = 0; x < w; x += 16) {
 			for (uint32_t y = 0; y < h; y += 16) {
 				values[x + y * w] = rng.rand();
-				if (x % 32 || y % 32) {
+				if (((x % 32) != 0u) || ((y % 32) != 0u)) {
 					values[x + y * w] += kAverageElevation;
 					values[x + y * w] /= 2;
 				}
@@ -640,7 +640,7 @@ bool MapGenerator::create_random_map() {
 		//  current node.
 
 		//  ... Treat "even" and "uneven" row numbers differently
-		uint32_t const x_dec = fc.y % 2 == 0;
+		uint32_t const x_dec = static_cast<uint32_t>(fc.y % 2 == 0);
 
 		uint32_t right_x = fc.x + 1;
 		uint32_t lower_y = fc.y + 1;
@@ -978,7 +978,7 @@ bool UniqueRandomMapInfo::set_from_id_string(UniqueRandomMapInfo& mapInfo_out,
 	}
 
 	//  check if xxor was right
-	if (nums[kMapIdDigits - 1]) {
+	if (nums[kMapIdDigits - 1] != 0) {
 		return false;
 	}
 
@@ -1017,7 +1017,7 @@ bool UniqueRandomMapInfo::set_from_id_string(UniqueRandomMapInfo& mapInfo_out,
 	//  Number of players
 	mapInfo_out.numPlayers = nums[12];
 	//  Island mode
-	mapInfo_out.islandMode = nums[13];
+	mapInfo_out.islandMode = (nums[13] != 0);
 
 	// World name hash
 	uint16_t world_name_hash = (nums[14]) | (nums[15] << 5) | (nums[16] << 10) | (nums[17] << 15);
