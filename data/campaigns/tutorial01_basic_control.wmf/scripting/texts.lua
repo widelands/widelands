@@ -26,8 +26,6 @@ initial_message_01 = {
    title = _("Welcome to the Widelands Tutorial!"),
    body = (
       h1(_("Welcome to Widelands!")) ..
-      li_image("images/logos/wl-ico-64.png",
-         _([[Widelands is a slow-paced build-up strategy game with an emphasis on construction rather than destruction.]])) ..
       li_arrow(_([[You will be guided through this tutorial by objectives.]]))
    )
 }
@@ -61,9 +59,9 @@ initial_message_02 = {
    body = (
       h1(_("Let’s dive right in!")) ..
       li_image("tribes/initialization/barbarians/images/icon.png",
-         _([[There are five different tribes in Widelands: the Barbarians, the Empire, the Atlanteans, the Frisians and the Amazons. All tribes have different economies, strengths, and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]])) ..
-      li_object("barbarians_headquarters", _([[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the initial wares will not last forever, so you must make sure to replenish them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]]), plr.color) ..
-      p(_([[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’.]])) ..
+         _([[In this tutorial we will play the Barbarians tribe.]])) ..
+      li_object("barbarians_headquarters", _([[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters stores wares, workers and soldiers. Logs and granite are the most important wares early in the game, and are also required later to construct most buildings. Let’s make sure that we do not run out of logs by building a lumberjack's hut.]]), plr.color) ..
+      p(_([[To find a nice place for it, we can activate ‘Show Building Spaces’.]])) ..
       li(_([[I’ll show you where the menu is and where to show and hide the building spaces.]]))
    )
 }
