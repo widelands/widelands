@@ -43,7 +43,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 
 			game.list_of_scenarios_.clear();
 			if (packet_version >= 6) {
-				for (size_t i = fr.unsigned_32(); i; --i) {
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
 					game.list_of_scenarios_.push_back(fr.string());
 				}
 			}
@@ -63,6 +63,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 					Notifications::publish(NoteMapObjectDescription(
 					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
 				}
+				game.postload_tribes();
 			} else {
 				game.check_legacy_addons_desync_magic();
 			}

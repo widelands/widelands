@@ -65,7 +65,7 @@ bool NumberGlob::next(std::string* s) {
 	}
 
 	*s = template_;
-	if (max_) {
+	if (max_ != 0u) {
 		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
@@ -191,7 +191,7 @@ static int L_list_directory(lua_State* L) {
    :returns: ``true`` if the given path is a directory.
 */
 static int L_is_directory(lua_State* L) {
-	lua_pushboolean(L, g_fs->is_directory(luaL_checkstring(L, -1)));
+	lua_pushboolean(L, static_cast<int>(g_fs->is_directory(luaL_checkstring(L, -1))));
 	return 1;
 }
 
@@ -206,7 +206,7 @@ static int L_is_directory(lua_State* L) {
    :returns: ``true`` if the given path is a file or directory.
 */
 static int L_file_exists(lua_State* L) {
-	lua_pushboolean(L, g_fs->file_exists(luaL_checkstring(L, -1)));
+	lua_pushboolean(L, static_cast<int>(g_fs->file_exists(luaL_checkstring(L, -1))));
 	return 1;
 }
 
