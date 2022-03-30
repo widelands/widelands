@@ -1,1 +1,6 @@
 lua.png Copyright © 1998 Lua.org. Graphic design by Alexandre Nakonechnyj.
+
+gamespeed.png
+CC-BY 2.0 https://creativecommons.org/licenses/by/2.0
+by John Carmichael
+modified from the original at https://www.flickr.com/photos/jlcarmichael/3486451724
