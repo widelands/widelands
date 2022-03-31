@@ -62,7 +62,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				const TribeDescr& tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
-				if (game) {
+				if (game != nullptr) {
 					for (DescriptionIndex i = 0; i < game->descriptions().nr_buildings(); ++i) {
 						player->allow_building_type(i, false);
 					}
