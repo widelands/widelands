@@ -123,7 +123,7 @@ void find_former_buildings(const Descriptions& descriptions,
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		for (DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
+		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
 			const BuildingDescr* building_descr = descriptions.get_building_descr(i);
 			if (building_descr->enhancement() == oldest_idx) {
 				former_buildings->insert(former_buildings->begin(), std::make_pair(i, true));
@@ -221,7 +221,7 @@ void Player::create_default_infrastructure() {
 		game.enqueue_command(new CmdLuaCoroutine(game.get_gametime(), std::move(cr)));
 
 		// Check if other starting positions are shared in and initialize them as well
-		for (uint8_t n = 0; n < further_shared_in_player_.size(); ++n) {
+		for (size_t n = 0; n < further_shared_in_player_.size(); ++n) {
 			Coords const further_pos = map.get_starting_pos(further_shared_in_player_.at(n));
 
 			// Run the corresponding script

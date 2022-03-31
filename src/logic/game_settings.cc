@@ -36,7 +36,7 @@ Widelands::PlayerNumber GameSettings::find_shared(const PlayerSlot slot) const {
 		return result;
 	}
 	result = 1;
-	for (; result <= players.size(); ++result) {
+	for (; result <= static_cast<Widelands::PlayerNumber>(players.size()); ++result) {
 		if (PlayerSettings::can_be_shared(players.at(result - 1).state) && (result - 1) != slot) {
 			break;
 		}

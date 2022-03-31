@@ -14,6 +14,9 @@ on:
   # For other branches without an open PR, we also run fix_formatting.py, but
   # we do not push anything, only signal the code quality by exiting 0 or 1.
   push:
+    paths-ignore:
+    - '.github/workflows/codeql-analysis.yml'
+
 jobs:
   run_formatting:
     name: Run fix_formatting.py

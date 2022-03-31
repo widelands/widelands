@@ -125,7 +125,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		const UserSettings& user_setting = settings.users.at(id_);
 
 		slot_dropdown_.clear();
-		for (PlayerSlot slot = 0; slot < settings.players.size(); ++slot) {
+		for (size_t slot = 0; slot < settings.players.size(); ++slot) {
 			if (settings.players.at(slot).state == PlayerSettings::State::kHuman ||
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
 				slot_dropdown_.add(format(_("Player %u"), static_cast<unsigned int>(slot + 1)), slot,
@@ -559,7 +559,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 #ifndef NDEBUG
 		const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
 #endif
-		for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
+		for (size_t t = 1; t <= settings.players.size() / 2; ++t) {
 			assert(t < no_of_team_colors);
 			team_dropdown_.add(format(_("Team %d"), static_cast<unsigned int>(t)), t,
 			                   playercolor_image(kTeamColors[t], "images/players/team.png"));
@@ -603,7 +603,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		// Trigger update for the other players for shared_in mode when slots open and close
 		if (last_state_ != player_setting.state) {
 			last_state_ = player_setting.state;
-			for (PlayerSlot slot = 0; slot < settings_->settings().players.size(); ++slot) {
+			for (size_t slot = 0; slot < settings_->settings().players.size(); ++slot) {
 				if (slot != id_) {
 					n->set_player_state(slot, settings.players[slot].state);
 				}
@@ -716,7 +716,7 @@ void MultiPlayerSetupGroup::update_players() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	for (PlayerSlot i = multi_player_player_groups_.size(); i < number_of_players; ++i) {
+	for (size_t i = multi_player_player_groups_.size(); i < number_of_players; ++i) {
 		multi_player_player_groups_.push_back(new MultiPlayerPlayerGroup(
 		   &scrollable_playerbox_, playerbox_.get_w() - UI::Scrollbar::kSize, buth_, i, settings_,
 		   npsb_.get()));

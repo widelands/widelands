@@ -167,7 +167,7 @@ void SinglePlayerSetupBox::update() {
 
 	assert(!settings.tribes.empty());
 
-	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
+	for (size_t i = active_player_groups_.size(); i < number_of_players; ++i) {
 		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
 		   &scrollable_playerbox_, launch_game_, 0, standard_height_, i, settings_));
 		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);

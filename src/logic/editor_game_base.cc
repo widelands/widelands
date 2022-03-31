@@ -353,7 +353,7 @@ void EditorGameBase::postload_tribes() {
 	did_postload_tribes_ = true;
 
 	verb_log_info("Postloading tribes...");
-	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
+	for (size_t i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
 	}
 	descriptions_->finalize_loading();

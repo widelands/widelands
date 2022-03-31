@@ -379,7 +379,7 @@ void SinglePlayerTeamDropdown::rebuild() {
 #ifndef NDEBUG
 	const size_t no_of_team_colors = sizeof(kTeamColors) / sizeof(kTeamColors[0]);
 #endif
-	for (Widelands::TeamNumber t = 1; t <= settings.players.size() / 2; ++t) {
+	for (size_t t = 1; t <= settings.players.size() / 2; ++t) {
 		assert(t < no_of_team_colors);
 		dropdown_.add(format(_("Team %d"), static_cast<unsigned int>(t)), t,
 		              playercolor_image(kTeamColors[t], "images/players/team.png"));

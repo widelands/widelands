@@ -739,7 +739,7 @@ void GameHost::send(ChatMessage msg) {
 					// The host is (one of the) spectators
 					recipients.insert(-2);
 				}
-				for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
+				for (size_t i = 0; i < d->settings.users.size(); ++i) {
 					const UserSettings& user = d->settings.users.at(i);
 					if (user.position != UserSettings::none()) {
 						continue;
@@ -841,7 +841,7 @@ int32_t GameHost::check_client(const std::string& name) {
 	}
 
 	// Search for the client
-	uint16_t i = 0;
+	size_t i = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		const UserSettings& user = d->settings.users.at(i);
 		if (user.position == UserSettings::not_connected()) {
@@ -1000,7 +1000,7 @@ void GameHost::set_map(const std::string& mapname,
 	// Drop players not matching map any longer
 	while (oldplayers > maxplayers) {
 		--oldplayers;
-		for (uint16_t i = 1; i < d->settings.users.size(); ++i) {
+		for (size_t i = 1; i < d->settings.users.size(); ++i) {
 			if (d->settings.users.at(i).position == oldplayers) {
 				d->settings.users.at(i).position = UserSettings::none();
 
@@ -1068,7 +1068,7 @@ void GameHost::set_map(const std::string& mapname,
 
 	// Assign players from savegame
 	if (d->settings.savegame) {
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+		for (size_t i = 0; i < d->settings.players.size(); ++i) {
 			const PlayerSettings& p = d->settings.players.at(i);
 			if (p.tribe.empty()) {
 				// Closed slot
@@ -1078,7 +1078,7 @@ void GameHost::set_map(const std::string& mapname,
 			std::stringstream playerstream(p.name);
 			std::string user_part;
 			while (getline(playerstream, user_part, ' ')) {
-				for (uint8_t usernum = 0; usernum < d->settings.users.size(); ++usernum) {
+				for (size_t usernum = 0; usernum < d->settings.users.size(); ++usernum) {
 					const std::string& username = d->settings.users.at(usernum).name;
 
 					if (user_part == username) {
@@ -1146,7 +1146,7 @@ void GameHost::set_player_state(uint8_t const number,
 			d->settings.users.at(0).position = UserSettings::none();
 			d->settings.playernum = UserSettings::none();
 		}
-		for (uint8_t i = 1; i < d->settings.users.size(); ++i) {
+		for (size_t i = 1; i < d->settings.users.size(); ++i) {
 			if (d->settings.users.at(i).position == number) {
 				d->settings.users.at(i).position = UserSettings::none();
 				if (host) {  //  Did host send the user to lobby?
@@ -1156,7 +1156,7 @@ void GameHost::set_player_state(uint8_t const number,
 				//  for local settings
 				for (std::vector<Client>::iterator j = d->clients.begin();; ++j) {
 					assert(j != d->clients.end());
-					if (j->usernum == i) {
+					if (static_cast<size_t>(j->usernum) == i) {
 						j->playernum = UserSettings::none();
 						break;
 					}
@@ -1565,7 +1565,7 @@ void GameHost::broadcast_setting_player(uint8_t const number) {
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
 	packet.unsigned_8(d->settings.players.size());
-	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
 		write_setting_player(packet, i);
 	}
 }
@@ -1794,7 +1794,7 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 
 	// Check if there is an unoccupied player left and if, assign.
 	// Assign the slot with the same username for savegames
-	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
 		const PlayerSettings& p = d->settings.players.at(i);
 		if (p.state == PlayerSettings::State::kOpen &&
 		    (!d->settings.savegame || p.name == effective_name)) {

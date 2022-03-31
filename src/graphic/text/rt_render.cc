@@ -1147,7 +1147,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 
 			// We only know if the spacer goes to the left or right after having a look at the current
 			// word.
-			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+			for (uint32_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
 				spacer_nodes.push_back(
 				   std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
@@ -1192,7 +1192,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 		while (ts.pos() < txt.size()) {
 			std::size_t cpos = ts.pos();
 			ts.skip_ws();
-			for (uint16_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
+			for (uint32_t ws_indx = 0; ws_indx < ts.pos() - cpos; ws_indx++) {
 				nodes.push_back(std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 			word = ts.till_any_or_end(" \t\n\r");

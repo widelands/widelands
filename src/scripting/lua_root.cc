@@ -450,7 +450,7 @@ int LuaDescriptions::get_tribes_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
-	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_tribes(); ++i) {
+	for (size_t i = 0; i < descriptions.nr_tribes(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaTribeDescription>(
 		   L, new LuaMaps::LuaTribeDescription(descriptions.get_tribe_descr(i)));
@@ -470,7 +470,7 @@ int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
-	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_immovables(); ++i) {
+	for (size_t i = 0; i < descriptions.nr_immovables(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaImmovableDescription>(
 		   L, new LuaMaps::LuaImmovableDescription(descriptions.get_immovable_descr(i)));

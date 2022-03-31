@@ -382,11 +382,11 @@ void AbstractWaresDisplay::relayout_icons_order_coords() {
 	                                           (kWareMenuPicHeight + vgap_ + kWareMenuInfoSize));
 
 	int16_t column_index_to_apply = 0;
-	for (int16_t column_index = 0; column_index < column_number; ++column_index) {
+	for (int column_index = 0; column_index < column_number; ++column_index) {
 		const std::vector<Widelands::DescriptionIndex>& column = icons_order().at(column_index);
 		const int row_number = column.size();
 		int16_t row_index_to_apply = 0;
-		for (int16_t row_index = 0; row_index < row_number; ++row_index) {
+		for (int row_index = 0; row_index < row_number; ++row_index) {
 			order_coords_.emplace(
 			   column.at(row_index), Widelands::Coords(column_index_to_apply, row_index_to_apply));
 			++row_index_to_apply;

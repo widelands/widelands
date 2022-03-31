@@ -348,7 +348,7 @@ void LaunchMPG::load_previous_playerdata() {
 	saved_settings.set_map(
 	   settings_.settings().mapname, "", "", "", settings_.settings().players.size(), true);
 
-	for (uint8_t i = 1; i <= settings_.settings().players.size(); ++i) {
+	for (size_t i = 1; i <= settings_.settings().players.size(); ++i) {
 		Section* s = prof.get_section(format("player_%u", static_cast<unsigned int>(i)));
 		if (s == nullptr) {
 			// Due to asynchronous notifications, the client can crash on savegame change when number

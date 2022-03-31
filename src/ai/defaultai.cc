@@ -789,7 +789,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			for (const auto& temp_position : prod.working_positions()) {
-				for (uint8_t i = 0; i < temp_position.second; i++) {
+				for (size_t i = 0; i < temp_position.second; i++) {
 					bo.positions.push_back(temp_position.first);
 				}
 			}
@@ -3377,7 +3377,7 @@ bool DefaultAI::dismantle_dead_ends() {
 	bool road_dismantled = false;
 	const uint16_t stepping = roads.size() / 25 + 1;
 
-	for (uint16_t i = 0; i < roads.size(); i += stepping) {
+	for (size_t i = 0; i < roads.size(); i += stepping) {
 		const Widelands::Flag& roadstartflag = roads[i]->get_flag(Widelands::RoadBase::FlagStart);
 		const Widelands::Flag& roadendflag = roads[i]->get_flag(Widelands::RoadBase::FlagEnd);
 
@@ -3590,7 +3590,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		wares_on_road = roadstartflag.current_wares() + roadendflag.current_wares();
 	} else {
 		// We count wares only on inner flags
-		for (uint16_t k = 1; k < full_road.size() - 1; ++k) {
+		for (size_t k = 1; k < full_road.size() - 1; ++k) {
 			wares_on_road += full_road[k]->current_wares();
 		}
 	}
@@ -4142,7 +4142,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// First we check if we must release an experienced worker
 	// iterate over all working positions of the actual productionsite
-	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+	for (uint32_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 		// get the pointer to the worker assigned to the actual position
 		const Widelands::Worker* cw = site.site->working_positions()->at(i).worker.get(game());
 		if (cw != nullptr) {  // a worker is assigned to the position
@@ -4710,7 +4710,7 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	}
 
 	// First we check if we must release an experienced worker
-	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+	for (uint32_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 		const Widelands::Worker* cw = site.site->working_positions()->at(i).worker.get(game());
 		if (cw != nullptr) {
 			Widelands::DescriptionIndex current_worker = cw->descr().worker_index();
@@ -4749,7 +4749,7 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	// mine elsewhere
 	if (site.built_time + Duration(15 * 60 * 1000) < gametime) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
-			for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
+			for (uint32_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 				const Widelands::Worker* cw = site.site->working_positions()->at(i).worker.get(game());
 				if (cw != nullptr) {
 					game().send_player_evict_worker(
@@ -4931,7 +4931,8 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 	                             std::abs(management_data.get_military_number_at(22) / 10);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
-	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16));
+	   bo.new_building_overdue *
+	   static_cast<int32_t>(std::abs(management_data.get_military_number_at(16)));
 	if (bo.is(BuildingAttribute::kPort) && spots_ < kSpotsTooLittle) {
 		bo.primary_priority += std::abs(management_data.get_military_number_at(152)) * 10;
 	}
@@ -5050,13 +5051,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		if (!basic_economy_established) {
 			return BuildingNecessity::kForbidden;
 		}
-		const uint16_t min_roads_count =
-		   40 + std::abs(management_data.get_military_number_at(33)) / 2;
+		const int32_t min_roads_count = 40 + std::abs(management_data.get_military_number_at(33)) / 2;
 		if (static_cast<int>(roads.size()) < min_roads_count * (1 + bo.total_count())) {
 			return BuildingNecessity::kForbidden;
 		}
-		bo.primary_priority += (roads.size() - min_roads_count * (1 + bo.total_count())) *
-		                       (2 + std::abs(management_data.get_military_number_at(143)) / 5);
+		bo.primary_priority +=
+		   (static_cast<int>(roads.size()) - min_roads_count * (1 + bo.total_count())) *
+		   (2 + std::abs(management_data.get_military_number_at(143)) / 5);
 		return BuildingNecessity::kNeeded;
 	}
 

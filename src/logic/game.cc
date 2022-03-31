@@ -356,7 +356,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	}
 
 	// Add shared in starting positions
-	for (uint8_t n = 0; n < shared.size(); ++n) {
+	for (size_t n = 0; n < shared.size(); ++n) {
 		// This player's starting position is used in another (shared) kingdom
 		get_player(shared.at(n).shared_in)
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
@@ -451,7 +451,7 @@ void Game::init_savegame(const GameSettings& settings) {
 		postload_addons();
 
 		// Players might have selected a different AI type
-		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+		for (size_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];
 			if (playersettings.state == PlayerSettings::State::kComputer) {
 				get_player(i + 1)->set_ai(playersettings.ai);

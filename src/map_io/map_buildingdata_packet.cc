@@ -282,14 +282,14 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 			try {
 				uint16_t size = fr.unsigned_16();
 				pfb.consume_wares_.resize(size);
-				for (uint16_t i = 0; i < pfb.consume_wares_.size(); ++i) {
+				for (size_t i = 0; i < pfb.consume_wares_.size(); ++i) {
 					pfb.consume_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
 					pfb.consume_wares_[i]->read(fr, game, mol);
 				}
 
 				size = fr.unsigned_16();
 				pfb.dropout_wares_.resize(size);
-				for (uint16_t i = 0; i < pfb.dropout_wares_.size(); ++i) {
+				for (size_t i = 0; i < pfb.dropout_wares_.size(); ++i) {
 					pfb.dropout_wares_[i] = new WaresQueue(pfb, INVALID_INDEX, 0);
 					pfb.dropout_wares_[i]->read(fr, game, mol);
 				}

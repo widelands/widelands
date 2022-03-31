@@ -567,7 +567,7 @@ bool FNeuron::get_position(const uint8_t pos) {
 	return core.test(pos);
 }
 
-// Returning numerical value of FNeuron. Used for saving and priting into log
+// Returning numerical value of FNeuron. Used for saving and printing to log
 uint32_t FNeuron::get_int() {
 	return core.to_ulong();
 }

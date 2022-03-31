@@ -394,7 +394,7 @@ void BufferedConnection::ignore_rtt_response() {
 
 	bool data_complete = peek.uint8_t(&length_list);
 	// Each list element consists of three uint8_t
-	for (uint8_t i = 0; i < length_list * 3; i++) {
+	for (int i = 0; i < length_list * 3; i++) {
 		data_complete = data_complete && peek.uint8_t();
 	}
 	if (!data_complete) {
@@ -405,7 +405,7 @@ void BufferedConnection::ignore_rtt_response() {
 	// Packet completely in buffer, fetch it and ignore it
 	receive(&cmd);  // Cmd
 	receive(&tmp);  // Length
-	for (uint8_t i = 0; i < length_list * 3; i++) {
+	for (int i = 0; i < length_list * 3; i++) {
 		receive(&tmp);  // Parts of the list. See relay_protocol.h
 	}
 }

@@ -1025,7 +1025,7 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
  */
 void GameClient::handle_setting_allplayers(RecvPacket& packet) {
 	d->settings.players.resize(packet.unsigned_8());
-	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
 		receive_one_player(i, packet);
 	}
 	// Map changes are finished here
