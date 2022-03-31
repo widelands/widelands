@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-19 04:07+0000\n"
+"POT-Creation-Date: 2022-03-28 03:10+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1290,6 +1290,7 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Maniókafőzde"
 
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1718,8 +1719,6 @@ msgstr "Kőfaragó műhely"
 msgid "making a shovel"
 msgstr "Lapát készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -5264,7 +5263,6 @@ msgstr "Balzafa"
 msgid "Balsa Tree (Pole)"
 msgstr "Balzafa (közepes)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5463,7 +5461,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) katona"
 msgstr[1] "%1%(+%2%) katona"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

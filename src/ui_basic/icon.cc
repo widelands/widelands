@@ -59,7 +59,7 @@ void Icon::set_no_frame() {
 }
 
 void Icon::draw(RenderTarget& dst) {
-	if (pic_) {
+	if (pic_ != nullptr) {
 		const int available_width = draw_frame_ ? get_w() - 2 : get_w();
 		const int available_height = draw_frame_ ? get_h() - 2 : get_h();
 		const float scale =

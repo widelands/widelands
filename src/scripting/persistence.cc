@@ -230,13 +230,13 @@ uint32_t persist_object(lua_State* L, FileWrite& fw, Widelands::MapObjectSaver& 
 	add_iterator_function_to_not_persist(L, "ipairs", i++);
 
 	// And finally the globals.
-	for (int j = 0; kPersistentGlobals[j]; ++j) {
+	for (int j = 0; kPersistentGlobals[j] != nullptr; ++j) {
 		add_object_to_not_persist(L, kPersistentGlobals[j], i++);
 	}
 
 	// The next few lines make eris error messages much more useful, but make
 	// eris much slower too. Only enable if you need more debug information.
-	lua_pushboolean(L, true);
+	lua_pushboolean(L, 1);
 	eris_set_setting(L, "path", lua_gettop(L));
 	lua_pop(L, 1);
 
@@ -272,7 +272,7 @@ void unpersist_object(lua_State* L, FileRead& fr, Widelands::MapObjectLoader& mo
 	add_iterator_function_to_not_unpersist(L, "pairs", i++);
 	add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
-	for (int j = 0; kPersistentGlobals[j]; ++j) {
+	for (int j = 0; kPersistentGlobals[j] != nullptr; ++j) {
 		add_object_to_not_unpersist(L, kPersistentGlobals[j], i++);
 	}
 
