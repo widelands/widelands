@@ -205,7 +205,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 		}
 
 		// if flag is defined it is a good target
-		if (flag) {
+		if (flag != nullptr) {
 
 			// Site is still there but not visible for us
 			if (!is_visible) {
@@ -253,19 +253,19 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 			observer.second.score = 0;
 			const uint16_t enemys_power = player_statistics.get_modified_player_power(owner_number);
 			uint16_t my_to_enemy_power_ratio = 100;
-			if (enemys_power) {
+			if (enemys_power != 0u) {
 				my_to_enemy_power_ratio = my_power * 100 / enemys_power;
 			}
 			if (observer.second.attack_soldiers_strength > 0 &&
 			    !player_statistics.players_in_same_team(pn, owner_number) &&
 			    (my_to_enemy_power_ratio > treshold_ratio)) {
 				uint16_t enemys_power_growth = 10;
-				if (player_statistics.get_old60_player_land(owner_number)) {
+				if (player_statistics.get_old60_player_land(owner_number) != 0u) {
 					enemys_power_growth = player_statistics.get_player_power(owner_number) * 100 /
 					                      player_statistics.get_old60_player_land(owner_number);
 				}
 				uint16_t own_power_growth = 10;
-				if (player_statistics.get_old60_player_land(pn)) {
+				if (player_statistics.get_old60_player_land(pn) != 0u) {
 					own_power_growth = player_statistics.get_player_power(pn) * 100 /
 					                   player_statistics.get_old60_player_land(pn);
 				}
@@ -989,10 +989,10 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	const int32_t enemy_military_capacity = std::max<int32_t>(
 	   {bf.enemy_military_presence,
 	    bf.enemy_military_sites * (1 + std::abs(management_data.get_military_number_at(77) / 20)),
-	    (bf.enemy_owned_land_nearby) ?
+	    (bf.enemy_owned_land_nearby) != 0u ?
           4 + std::abs(management_data.get_military_number_at(99) / 20) :
           0});
-	if (bf.enemy_owned_land_nearby) {
+	if (bf.enemy_owned_land_nearby != 0u) {
 		if (bf.military_score_ < std::abs(management_data.get_military_number_at(91) * 10) &&
 		    bf.area_military_capacity - static_cast<int16_t>(total_capacity) -
 		          std::abs(management_data.get_military_number_at(84) / 10) >
@@ -1030,7 +1030,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 		}
 	} else if (should_be_dismantled && can_be_dismantled) {
 		changed = true;
-		if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
+		if ((ms->get_playercaps() & Widelands::Building::PCap_Dismantle) != 0u) {
 			game().send_player_dismantle(*ms, true);
 			military_last_dismantle_ = game().get_gametime();
 		} else {

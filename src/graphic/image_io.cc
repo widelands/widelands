@@ -62,7 +62,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 
 	FileRead fr;
 	bool found;
-	if (fs) {
+	if (fs != nullptr) {
 		found = fr.try_open(*fs, fname);
 	} else {
 		found = fr.try_open(*g_fs, fname);
@@ -73,7 +73,7 @@ SDL_Surface* load_image_as_sdl_surface(const std::string& fname, FileSystem* fs)
 	}
 
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.data(0), fr.get_size()), 1);
-	if (!sdlsurf) {
+	if (sdlsurf == nullptr) {
 		throw ImageLoadingError(fname, IMG_GetError());
 	}
 	return sdlsurf;
@@ -83,12 +83,12 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
-	if (!png_ptr) {
+	if (png_ptr == nullptr) {
 		throw wexception("save_to_png: could not create png struct");
 	}
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
-	if (!info_ptr) {
+	if (info_ptr == nullptr) {
 		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(nullptr));
 		throw wexception("save_to_png: could not create png info struct");
 	}

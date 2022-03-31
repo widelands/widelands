@@ -175,30 +175,30 @@ void FieldDebugWindow::think() {
 		              static_cast<unsigned int>(coords_.field->get_height()),
 		              static_cast<unsigned int>(owner));
 
-		if (owner) {
+		if (owner != 0u) {
 			Widelands::NodeCaps const buildcaps = egbase.player(owner).get_buildcaps(coords_);
-			if (buildcaps & Widelands::BUILDCAPS_BIG) {
+			if ((buildcaps & Widelands::BUILDCAPS_BIG) != 0) {
 				str += "  can build big building\n";
-			} else if (buildcaps & Widelands::BUILDCAPS_MEDIUM) {
+			} else if ((buildcaps & Widelands::BUILDCAPS_MEDIUM) != 0) {
 				str += "  can build medium building\n";
-			} else if (buildcaps & Widelands::BUILDCAPS_SMALL) {
+			} else if ((buildcaps & Widelands::BUILDCAPS_SMALL) != 0) {
 				str += "  can build small building\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_FLAG) {
+			if ((buildcaps & Widelands::BUILDCAPS_FLAG) != 0) {
 				str += "  can place flag\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_MINE) {
+			if ((buildcaps & Widelands::BUILDCAPS_MINE) != 0) {
 				str += "  can build mine\n";
 			}
-			if (buildcaps & Widelands::BUILDCAPS_PORT) {
+			if ((buildcaps & Widelands::BUILDCAPS_PORT) != 0) {
 				str += "  can build port\n";
 			}
 		}
 	}
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_WALK) {
+	if ((coords_.field->nodecaps() & Widelands::MOVECAPS_WALK) != 0) {
 		str += "is walkable\n";
 	}
-	if (coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM) {
+	if ((coords_.field->nodecaps() & Widelands::MOVECAPS_SWIM) != 0) {
 		str += "is swimmable\n";
 	}
 	Widelands::MapIndex const i = coords_.field - &map_[0];
@@ -239,7 +239,7 @@ void FieldDebugWindow::think() {
 			str += "  never seen\n";
 		} else if (!vision.is_visible()) {
 			std::string animation_name = "(no animation)";
-			if (player_field.map_object_descr) {
+			if (player_field.map_object_descr != nullptr) {
 				animation_name = "(seen an animation)";
 			}
 			str += format("  last seen at %u:\n"
@@ -305,7 +305,7 @@ void FieldDebugWindow::think() {
 		for (std::vector<Widelands::Bob*>::iterator bob_iter = bobs.begin(); bob_iter != bobs.end();
 		     ++bob_iter) {
 
-			if ((*bob_iter) && mo && (*bob_iter)->serial() == mo->serial()) {
+			if (((*bob_iter) != nullptr) && (mo != nullptr) && (*bob_iter)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;
