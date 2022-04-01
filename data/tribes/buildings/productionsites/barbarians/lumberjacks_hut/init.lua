@@ -16,6 +16,16 @@ wl.Descriptions():new_productionsite_type {
       log = 2
    },
 
+   enhancement = {
+      name = "barbarians_rangers_hut",
+      enhancement_cost = {
+         log = 3
+      },
+      enhancement_return_on_dismantle = {
+         log = 2
+      }
+   },
+
    animation_directory = dirname,
    animations = {
       idle = {
