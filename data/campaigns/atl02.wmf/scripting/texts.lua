@@ -136,7 +136,16 @@ obj_build_temple = {
    title = _("Build a temple to worship Satul"),
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
-   p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])))
+   p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]]))
+   p(_([[And we need to have a scout house to not loose track of what is going on at the barbarians territory.]])))
+}
+
+obj_worship = {
+   name = "obj_worship",
+   title = _("Worship Satul and train priests"),
+   number = 1,
+   body = objective_text(_("Worship Satul"),
+   p(_([[Now we need to worship Satul and train at least 2 priests.]])))
 }
 
 obj_defeat_kalitath = {
@@ -471,6 +480,23 @@ heretics_again = {
       body = sidolus(
          -- TRANSLATORS: Sidolus
          _([[May Satul warm you Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satuls power we shopuld keep an eye on our princess and this barbarian. As we should stop our traders deliveries to not waste any wares to this barbarian anymore, I want you to ensure we have a scout out there to gather information.]]))
+         .. new_objectives(obj_build_temple),
+   },
+}
+
+temple_completed = {
+   {
+      title = _("Worship Satul"),
+      body = loftomor(
+         -- TRANSLATORS: Loftomor
+         _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and training our priests.]]))
+   }, 
+   {
+      title = _("Build Temple"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you,  Loftomor. Thank you for building such a gret temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
+         .. new_objectives(obj_worship),
    },
 }
 
@@ -486,6 +512,7 @@ princess_back = {
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
+         .. new_objectives(obj_defeat_kalitath),
    }
 }
 

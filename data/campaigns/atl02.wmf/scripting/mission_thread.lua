@@ -233,6 +233,8 @@ function maletus_defeated()
       end
       msg_boxes(maletus_defeated_3)
    end
+   sleep(5000)
+   msg_boxes(heretics_again)
    temple = add_campaign_objective(obj_build_temple)
    run(final)
 end
@@ -240,11 +242,13 @@ end
 function final()
    while not check_for_buildings(p1, {
       atlanteans_temple_of_satul = 1,
-   }) do sleep(3731) end
-   temple.done = true
-   while count_workers_in_warehouses("atlanteans_priest") < 2 and not check_for_buildings(p1, {
       atlanteans_scout_house_1 = 1,
-   })do sleep(2323) end
+   })  do sleep(3731) end
+   temple.done = true
+   msg_boxes(temple_completed)
+   priests = add_campaign_objective(obj_worship)
+   while count_workers_in_warehouses("atlanteans_priest") < 2 do sleep(2323) end
+   priests.done = true
    msg_boxes(princess_back)
    defeat_kalitath = add_campaign_objective(obj_defeat_kalitath)
    while not Kalitath.defeated do sleep(6000) end
