@@ -401,14 +401,20 @@ maletus_defeated = {
       title = _("Empire Defeated"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+         _([[May Satul warm you, Kalitath! We have defeated the troops of the Empire in the north and delivered all the wares you demanded. Now we expect our princess to return home.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Kalitath Appreciates Efforts"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, this is very good news. I appreciate what your people has done. But your princess and I already made plans for our common future on this island. She will explain it to you.]]))
+   },
+   {
+      title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
-   }
+         _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
+   },
 }
 
 maletus_defeated_2 = {
@@ -416,14 +422,56 @@ maletus_defeated_2 = {
       title = _("Empire Defeated"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+         _([[May Satul warm you, Kalitath! We have defeated the troops of the Empire in the north. Now we expect our princess to return home.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Kalitath Appreciates Efforts"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, this is very good news. I appreciate what your people has done. However don’t forget to fulfill your tribute within time. Afterwards we might talk about your princess.]]))
+   },
+}
+
+maletus_defeated_3 = {
+   {
+      title = _("Tribute Delivered"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Kalitath! We have delivered all the wares you demanded. Now we expect our princess to return home.]]))
+   },
+   {
+      title = _("Kalitath Acknowledges"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, we appreciate this. But your princess and I already made plans for our common future on this island. She will explain it to you.]]))
+   },
+   {
+      title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
-   }
+         _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
+   },
+}
+
+heretics_again = {
+   {
+      title = _("Heretics!"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm us all. Our princess has been confused in her prisonship by this barbarian. But I will never worship any barbarian god. I can’t imagine how we could change her mind though.]]))
+   },
+   {
+      title = _("Attracting Satuls Help"),
+      body = loftomor(
+         -- TRANSLATORS: Loftomor
+         _([[Sidolus, I agree we should not bow in front of any other god then Satul. But we might need the gods help in this case. So I suggest to build a temple and worship satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the barbarians and our princess.]]))
+   },
+   {
+      title = _("Build Temple"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satuls power we shopuld keep an eye on our princess and this barbarian. As we should stop our traders deliveries to not waste any wares to this barbarian anymore, I want you to ensure we have a scout out there to gather information.]]))
+   },
 }
 
 princess_back = {

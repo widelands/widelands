@@ -52,7 +52,7 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = pgettext("atlanteans_building", "recruiting soldier"),
+         descname = pgettext("atlanteans_building", "recruiting priest"),
          actions = {
             "consume=tabard_golden gold:4 diamond:4 quartz:4 smoked_fish:2 smoked_meat:2 atlanteans_bread:2 atlanteans_carrier",
             "sleep=duration:120s",

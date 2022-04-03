@@ -224,8 +224,15 @@ end
 function maletus_defeated()
    while not Maletus.defeated do sleep(6000) end
    defeat_maletus.done = true
-   msg_boxes(maletus_defeated)
-   msg_boxes(maletus_defeated_2)
+   if trade.done == true then
+      msg_boxes(maletus_defeated)
+   else 
+      msg_boxes(maletus_defeated_2)
+      while not trade.done == true do
+         sleep(3333)
+      end
+      msg_boxes(maletus_defeated_3)
+   end
    temple = add_campaign_objective(obj_build_temple)
    run(final)
 end
