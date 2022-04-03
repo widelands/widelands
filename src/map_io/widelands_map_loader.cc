@@ -81,7 +81,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, AddOns::AddOnsList*
 		elemental_data_packet.pre_read(*fs_, &map_);
 		old_world_name_ = elemental_data_packet.old_world_name();
 
-		if (addons) {
+		if (addons != nullptr) {
 			// first, clear all world add-ons…
 			for (auto it = addons->begin(); it != addons->end();) {
 				if ((*it)->category == AddOns::AddOnCategory::kWorld) {
@@ -421,7 +421,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	set_progress_message(_("Checking map"), is_editor ? 9 : 23);
 	if (!is_editor) {
-		if (mol_->get_nr_unloaded_objects()) {
+		if (mol_->get_nr_unloaded_objects() != 0) {
 			log_warn("There are %i unloaded objects. This is a bug, please "
 			         "consider committing!\n",
 			         mol_->get_nr_unloaded_objects());

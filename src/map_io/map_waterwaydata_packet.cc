@@ -95,11 +95,11 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 					ww.cost_[0] = fr.unsigned_32();
 					ww.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps) {
+					if (nr_steps == 0u) {
 						throw GameDataError("nr_steps = 0");
 					}
 					Path p(ww.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i) {
+					for (Path::StepVector::size_type i = nr_steps; i != 0u; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
@@ -186,9 +186,9 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				}
 
 				FerryFleet* fleet = r->fleet_.get(egbase);
-				fw.unsigned_32(fleet ? mos.get_object_file_index(*fleet) : 0);
+				fw.unsigned_32(fleet != nullptr ? mos.get_object_file_index(*fleet) : 0);
 				Ferry* ferry = r->ferry_.get(egbase);
-				fw.unsigned_32(ferry ? mos.get_object_file_index(*ferry) : 0);
+				fw.unsigned_32(ferry != nullptr ? mos.get_object_file_index(*ferry) : 0);
 
 				mos.mark_object_as_saved(*r);
 			}

@@ -194,8 +194,8 @@ FontSets::FontSets() {
 
 		for (const std::string& filename : files) {  // Begin scan locales directory
 			char const* const path = filename.c_str();
-			if (!strcmp(FileSystem::fs_filename(path), ".") ||
-			    !strcmp(FileSystem::fs_filename(path), "..") || !g_fs->is_directory(path)) {
+			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
+			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || !g_fs->is_directory(path)) {
 				continue;
 			}
 

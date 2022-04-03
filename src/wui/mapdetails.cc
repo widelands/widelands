@@ -203,7 +203,8 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
 				try {
-					if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+					if (ml != nullptr &&
+					    0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
 						minimap_cache_[last_map_] = draw_minimap(
 						   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);

@@ -320,7 +320,8 @@ MapView::MapView(
      map_(map),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false),
-     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
+     edge_scrolling_((parent != nullptr) &&
+                     (parent->get_parent() == nullptr) /* not in watch windows */ &&
                      get_config_bool("edge_scrolling", false)),
      invert_movement_(get_config_bool("invert_movement", false)),
      is_scrolling_x_(0),
@@ -530,7 +531,7 @@ bool MapView::handle_mousemove(
 	last_mouse_pos_.y = y;
 
 	if (dragging_) {
-		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
+		if ((state & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0) {
 			pan_by(Vector2i(invert_movement_ ? -xdiff : xdiff, invert_movement_ ? -ydiff : ydiff),
 			       Transition::Jump);
 		} else {
@@ -569,9 +570,9 @@ void MapView::think() {
 			return;
 		}
 
-		const int16_t speed = (SDL_GetModState() & KMOD_CTRL)  ? kEdgeScrollingSpeedFast :
-		                      (SDL_GetModState() & KMOD_SHIFT) ? kEdgeScrollingSpeedSlow :
-                                                               kEdgeScrollingSpeedNormal;
+		const int16_t speed = (SDL_GetModState() & KMOD_CTRL) != 0  ? kEdgeScrollingSpeedFast :
+		                      (SDL_GetModState() & KMOD_SHIFT) != 0 ? kEdgeScrollingSpeedSlow :
+                                                                    kEdgeScrollingSpeedNormal;
 		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
 	}
 }
@@ -591,7 +592,7 @@ bool MapView::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	}
 
 	int32_t zoom_step = get_mousewheel_change(MousewheelHandlerConfigID::kZoom, x, y, modstate);
-	if (zoom_step) {
+	if (zoom_step != 0) {
 		if (is_animating()) {
 			return true;
 		}
@@ -687,7 +688,7 @@ bool MapView::scroll_map() {
 	const bool kRIGHT = get_key_state(SDL_GetScancodeFromKey(SDLK_RIGHT));
 
 	// numpad keys
-	const bool kNumlockOff = !(SDL_GetModState() & KMOD_NUM);
+	const bool kNumlockOff = (SDL_GetModState() & KMOD_NUM) == 0;
 #define kNP(x)                                                                                     \
 	const bool kNP##x = kNumlockOff && get_key_state(SDL_GetScancodeFromKey(SDLK_KP_##x));
 	kNP(1) kNP(2) kNP(3) kNP(4) kNP(6) kNP(7) kNP(8) kNP(9)
@@ -701,10 +702,10 @@ bool MapView::scroll_map() {
 	uint16_t scroll_distance_y = yres / 8;
 
 	SDL_Keymod modstate = SDL_GetModState();
-	if (modstate & KMOD_CTRL) {
+	if ((modstate & KMOD_CTRL) != 0) {
 		scroll_distance_x = xres - scroll_distance_x;
 		scroll_distance_y = yres - scroll_distance_y;
-	} else if (modstate & KMOD_SHIFT) {
+	} else if ((modstate & KMOD_SHIFT) != 0) {
 		scroll_distance_x = std::min(kTriangleWidth / view_.zoom, scroll_distance_x / 3.f);
 		scroll_distance_y = std::min(kTriangleHeight / view_.zoom, scroll_distance_y / 3.f);
 	}

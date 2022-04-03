@@ -149,7 +149,7 @@ uint32_t MapObjectSaver::get_object_file_index(const MapObject& obj) {
  * Returns the file index of the given object, or zero for null pointers.
  */
 uint32_t MapObjectSaver::get_object_file_index_or_zero(const MapObject* obj) {
-	if (obj) {
+	if (obj != nullptr) {
 		return get_object_file_index(*obj);
 	}
 	return 0;

@@ -306,7 +306,7 @@ ColorChooser::ColorChooser(Panel* parent,
                s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
                /** TRANSLATORS: First letter of the word "Blue" */
                pgettext("color", "B")),
-     button_default_(default_color ?
+     button_default_(default_color != nullptr ?
                         new Button(&buttonsbox_,
                                    "default_color",
                                    0,
@@ -360,7 +360,7 @@ ColorChooser::ColorChooser(Panel* parent,
 	buttonsbox_.add_space(kSpacing);
 	buttonsbox_.add(&button_init_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);
-	if (button_default_) {
+	if (button_default_ != nullptr) {
 		buttonsbox_.add(button_default_, UI::Box::Resizing::kExpandBoth);
 		buttonsbox_.add_space(kSpacing);
 		button_default_->sigclicked.connect([this, default_color]() { set_color(*default_color); });
