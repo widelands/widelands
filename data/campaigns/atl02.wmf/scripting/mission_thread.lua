@@ -226,7 +226,7 @@ function maletus_defeated()
    defeat_maletus.done = true
    if trade.done == true then
       msg_boxes(maletus_defeated)
-   else 
+   else
       msg_boxes(maletus_defeated_2)
       while not trade.done == true do
          sleep(3333)
