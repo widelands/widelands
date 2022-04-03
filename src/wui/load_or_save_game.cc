@@ -30,7 +30,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave,
                                UI::Panel* table_parent,
                                UI::Panel* delete_button_parent)
-   : table_box_(new UI::Box(table_parent ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
+   : table_box_(new UI::Box(
+        table_parent != nullptr ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description
@@ -39,16 +40,16 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
         style,
         filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
         g),
-     delete_(
-        new UI::Button(delete_button_parent ? delete_button_parent : game_details()->button_box(),
-                       "delete",
-                       0,
-                       0,
-                       0,
-                       0,
-                       style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                          UI::ButtonStyle::kWuiSecondary,
-                       _("Delete"))),
+     delete_(new UI::Button(
+        delete_button_parent != nullptr ? delete_button_parent : game_details()->button_box(),
+        "delete",
+        0,
+        0,
+        0,
+        0,
+        style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                           UI::ButtonStyle::kWuiSecondary,
+        _("Delete"))),
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
@@ -85,7 +86,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	                           [this](uint32_t a, uint32_t b) { return compare_map_name(a, b); });
 
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
-	if (!delete_button_parent) {
+	if (delete_button_parent == nullptr) {
 		game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	}
 	delete_->set_enabled(false);

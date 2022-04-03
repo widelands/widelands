@@ -242,7 +242,7 @@ void MapSaver::save() {
 		}
 
 		// DATA PACKETS
-		if (mos_->get_nr_flags()) {
+		if (mos_->get_nr_flags() != 0u) {
 			verb_log_info_time(egbase_.get_gametime(), "Writing Flagdata Data ... ");
 			set_progress_message(_("Flag details"), 14);
 			{
@@ -251,7 +251,7 @@ void MapSaver::save() {
 			}
 		}
 
-		if (mos_->get_nr_roads()) {
+		if (mos_->get_nr_roads() != 0u) {
 			verb_log_info_time(egbase_.get_gametime(), "Writing Roaddata Data ... ");
 			set_progress_message(_("Road and waterway details"), 15);
 			{
@@ -260,7 +260,7 @@ void MapSaver::save() {
 			}
 		}
 
-		if (mos_->get_nr_waterways()) {
+		if (mos_->get_nr_waterways() != 0u) {
 			verb_log_info_time(egbase_.get_gametime(), "Writing Waterwaydata Data ... ");
 			{
 				MapWaterwaydataPacket p;
@@ -268,7 +268,7 @@ void MapSaver::save() {
 			}
 		}
 
-		if (mos_->get_nr_buildings()) {
+		if (mos_->get_nr_buildings() != 0u) {
 			verb_log_info_time(egbase_.get_gametime(), "Writing Buildingdata Data ... ");
 			set_progress_message(_("Building details"), 16);
 			{

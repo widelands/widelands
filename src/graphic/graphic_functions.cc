@@ -36,7 +36,7 @@ void draw_game_tip(RenderTarget& rt,
 	const int h = pic_background.height();
 	Vector2i pt(bounds.x + (bounds.w - w) / 2, bounds.y + (bounds.h - h) / 2);
 
-	for (; opacity; --opacity) {
+	for (; opacity != 0u; --opacity) {
 		rt.blit(pt, &pic_background);
 	}
 

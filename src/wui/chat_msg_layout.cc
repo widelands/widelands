@@ -52,7 +52,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 
 	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
-		if (sanitized.compare(0, 3, "/me")) {
+		if (sanitized.compare(0, 3, "/me") != 0) {
 			message = as_playercolor(
 			             chat_message.playern, format("%s @%s: ", sender_escaped, recipient_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
@@ -64,7 +64,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		}
 	} else {
 		// Normal messages handling
-		if (!sanitized.compare(0, 3, "/me")) {
+		if (sanitized.compare(0, 3, "/me") == 0) {
 			message = as_playercolor(chat_message.playern,
 			                         (chat_message.sender.empty() ? "***" : sender_escaped)) +
 			          g_style_manager->font_style(UI::FontStyle::kChatMessage)

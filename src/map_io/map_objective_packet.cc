@@ -45,7 +45,7 @@ void read_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 				try {
 					std::unique_ptr<Objective> objective(new Objective(name));
 					Map::Objectives* objectives = egbase.mutable_map()->mutable_objectives();
-					if (objectives->count(name)) {
+					if (objectives->count(name) != 0u) {
 						throw GameDataError("duplicated");
 					}
 					objective->set_descname(s->get_string("name", name));
