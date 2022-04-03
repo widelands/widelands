@@ -495,23 +495,29 @@ temple_completed = {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you,  Loftomor. Thank you for building such a gret temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
+         _([[May Satul warm you, Loftomor. Thank you for building such a gret temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
          .. new_objectives(obj_worship),
    },
 }
 
 princess_back = {
    {
-      title = _("Empire Defeated"),
+      title = _("Jundlina Arrives"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The sign of his might and the fear in the barbarians’ faces suddenly made me recognise the truth again. I was wrong about peace and coexistence, as it would have meant knightship forever. And this is not what Atlanteans are made for.]]))
+   },
+      {
+      title = _("Sidolus Relieved"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! We have defeated the troops of the Empire in the north. Now we should be able to establish a new home on this island.]]))
+         _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and faith Satul. How come the Barbarians let you go.]]))
    },
    {
       title = _("Jundlina Cheers"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, this is very good news. I will immediately talk to our Barbarian ally to determine how to divide the land we have won.]]))
+         _([[Sidolus, they did not let me go, I met our scout and he managed to sneak me out, as I realized, they still kept me for hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way then to defeat them to live here in peace.]]))
          .. new_objectives(obj_defeat_kalitath),
    }
 }
