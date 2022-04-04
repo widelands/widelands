@@ -142,10 +142,10 @@ obj_build_temple = {
 
 obj_worship = {
    name = "obj_worship",
-   title = _("Worship Satul and train priests"),
+   title = _("Worship Satul and consecrate priests"),
    number = 1,
    body = objective_text(_("Worship Satul"),
-   p(_([[Now we need to worship Satul and train at least 2 priests.]])))
+   p(_([[Now we need to worship Satul and consecrate at least 2 priests.]])))
 }
 
 obj_defeat_kalitath = {
@@ -489,7 +489,7 @@ temple_completed = {
       title = _("Worship Satul"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and training our priests.]]))
+         _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and consecrating our priests.]]))
    }, 
    {
       title = _("Build Temple"),

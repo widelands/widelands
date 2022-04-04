@@ -234,6 +234,7 @@ function maletus_defeated()
       msg_boxes(maletus_defeated_3)
    end
    sleep(5000)
+   p1:allow_buildings("atlanteans_temple_of_satul")
    msg_boxes(heretics_again)
    temple = add_campaign_objective(obj_build_temple)
    run(final)
@@ -250,6 +251,8 @@ function final()
    while count_workers_in_warehouses("atlanteans_priest") < 2 do sleep(2323) end
    priests.done = true
    msg_boxes(princess_back)
+   p1:set_attack_forbidden(3, false)
+   Kalitath:set_attack_forbidden(1, false)
    defeat_kalitath = add_campaign_objective(obj_defeat_kalitath)
    while not Kalitath.defeated do sleep(6000) end
    msg_boxes(victory)
