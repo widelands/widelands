@@ -442,6 +442,12 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
 
+   {KeyboardShortcut::kEditorShowhideMaximumBuildhelp,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                         keysym(SDLK_SPACE, KMOD_SHIFT),
+                         "editor_showhide_maximum_buildhelp",
+                         []() { return _("Toggle Maximum Build Spaces"); })},
+
 #define EDITOR_TOOLSIZE(radius, key)                                                               \
 	{                                                                                               \
 		KeyboardShortcut::kEditorToolsize##radius,                                                   \
@@ -800,10 +806,12 @@ void normalize_numpad(SDL_Keysym& keysym) {
 		if (keysym.sym >= SDLK_KP_1 && keysym.sym <= SDLK_KP_9) {
 			keysym.sym = keysym.sym - SDLK_KP_1 + SDLK_1;
 			return;
-		} else if (keysym.sym == SDLK_KP_0) {
+		}
+		if (keysym.sym == SDLK_KP_0) {
 			keysym.sym = SDLK_0;
 			return;
-		} else if (keysym.sym == SDLK_KP_PERIOD) {
+		}
+		if (keysym.sym == SDLK_KP_PERIOD) {
 			keysym.sym = SDLK_PERIOD;
 			return;
 		}
@@ -915,20 +923,20 @@ std::string keymod_string_for(const uint16_t modstate, const bool rt_escape) {
 	i18n::Textdomain textdomain("widelands");
 	std::vector<std::string> mods;
 	if (modstate & KMOD_SHIFT) {
-		mods.push_back(pgettext("hotkey", "Shift"));
+		mods.emplace_back(pgettext("hotkey", "Shift"));
 	}
 	if (modstate & KMOD_ALT) {
-		mods.push_back(pgettext("hotkey", "Alt"));
+		mods.emplace_back(pgettext("hotkey", "Alt"));
 	}
 	if (modstate & KMOD_GUI) {
 #ifdef __APPLE__
 		mods.push_back(pgettext("hotkey", "Cmd"));
 #else
-		mods.push_back(pgettext("hotkey", "GUI"));
+		mods.emplace_back(pgettext("hotkey", "GUI"));
 #endif
 	}
 	if (modstate & KMOD_CTRL) {
-		mods.push_back(pgettext("hotkey", "Ctrl"));
+		mods.emplace_back(pgettext("hotkey", "Ctrl"));
 	}
 
 	std::string result;

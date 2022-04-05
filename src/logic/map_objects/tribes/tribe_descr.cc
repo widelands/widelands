@@ -90,7 +90,7 @@ void walk_immovables(Widelands::DescriptionIndex index,
 
 namespace Widelands {
 
-void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) {
+void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) const {
 	std::map<std::string, std::string> helptexts;
 	if (table.has_key("helptexts")) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
@@ -260,7 +260,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			if (!has_ware(descriptions.safe_ware_index(ware))) {
 				throw GameDataError("Collectors: Tribe does not use ware '%s'", ware.c_str());
 			}
-			collectors_points_table_.push_back(std::make_pair(ware, t->get_int("points")));
+			collectors_points_table_.emplace_back(ware, t->get_int("points"));
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -789,7 +789,7 @@ ToolbarImageset* TribeDescr::toolbar_image_set() const {
  */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername,
-                                                Descriptions& descriptions) {
+                                                Descriptions& descriptions) const {
 	try {
 		DescriptionIndex worker = descriptions.load_worker(workername);
 		if (!has_worker(worker)) {
@@ -802,7 +802,7 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername,
 }
 
 DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname,
-                                                  Descriptions& descriptions) {
+                                                  Descriptions& descriptions) const {
 	try {
 		DescriptionIndex building = descriptions.load_building(buildingname);
 		if (!has_building(building)) {
@@ -848,7 +848,7 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) {
+void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) const {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;

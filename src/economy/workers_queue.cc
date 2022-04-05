@@ -93,7 +93,7 @@ void WorkersQueue::entered(
 	update();
 }
 
-void WorkersQueue::remove_from_economy(Economy&) {
+void WorkersQueue::remove_from_economy(Economy& /*e*/) {
 	if (index_ != INVALID_INDEX) {
 		if (request_) {
 			request_.reset();
@@ -186,7 +186,7 @@ Worker* WorkersQueue::extract_worker() {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
+void WorkersQueue::write_child(FileWrite& fw, Game& /*g*/, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 	// Store references to the workers
 	fw.unsigned_32(workers_.size());
@@ -196,7 +196,7 @@ void WorkersQueue::write_child(FileWrite& fw, Game&, MapObjectSaver& mos) {
 	}
 }
 
-void WorkersQueue::read_child(FileRead& fr, Game&, MapObjectLoader& mol) {
+void WorkersQueue::read_child(FileRead& fr, Game& /*g*/, MapObjectLoader& mol) {
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {

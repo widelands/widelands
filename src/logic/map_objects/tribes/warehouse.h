@@ -230,7 +230,7 @@ private:
 		Quantity soldier_capacity() const override;
 		void set_soldier_capacity(Quantity capacity) override;
 		void drop_soldier(Soldier&) override;
-		int incorporate_soldier(EditorGameBase& game, Soldier& s) override;
+		int incorporate_soldier(EditorGameBase& egbase, Soldier& s) override;
 		int outcorporate_soldier(Soldier&) override;
 
 	private:
@@ -260,7 +260,7 @@ private:
 	void init_portdock(EditorGameBase& egbase);
 
 	/// Initializes the container sizes for the owner's tribe.
-	void init_containers(const Player& owner);
+	void init_containers(const Player& player);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means

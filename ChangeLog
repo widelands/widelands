@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git 7c0a3e7](https://github.com/widelands/widelands/commit/7c0a3e7242e37ca74696d75f0f72db7db678c151)
+## post-1.0 until [git fd78eeb](https://github.com/widelands/widelands/commit/fd78eeb809aee7f781c4a79706fdd085162c4941)
 
 ### Animations, Icons and Overlays
 
@@ -9,6 +9,9 @@
 - Spritesheet cleanup & campaigns (#4974)
 - Updated barbarian barracks graphics by DragonAtma (#4977)
 - Spritesheets fixes and cleanups (#5049)
+- Upscaled Splashscreen (#5183)
+- Optimize images with PNGQuant (#5204)
+- Fix pause and jump in empire mill animation (#5270)
 
 
 ### Sounds and Music
@@ -21,7 +24,19 @@
 
 - Emp02: Allow sheep farm and weaving mill with barracks (#5048)
 - Add "Along the river" scenario (#5062)
-
+- Trident of Fire Fixes (#5198)
+    - Fix player detection and slot usage
+    - Fix shipyard wasting a ware and therefore not providing a ship for AI
+    - Fixes workerpart of #2933
+    - Fixed flooding and foresting functions
+    - Changed the map slightly to fix #3878
+    - Fixed starting position
+    - Changed Player positions for balance
+    - Fixed accessibility of volcano craters
+    - Fixed lua volcano scripting
+    - No remains of lava after eruption is gone
+    - Rocks are not removed by lava anymore
+    - For each lava field a region of radius 1 is considered for removal
 
 ### Scripting
 
@@ -40,6 +55,8 @@
 - Extend productionsite/worker program failure handling (#5146)
     - Allow specifying `callworker` failure handling method
     - Allow suppressing sending out-of-resource notifications in programs
+- Decouple Registries (#5169)
+- Add script to check for optional Lua parentheses (#4787, #5225, #5226)
 
 
 ### Maps
@@ -69,6 +86,8 @@
 - Update Add-Ons Manager for Protocol Version 5 (#5039)
 - Speed up add-on remote interaction window (#5076)
 - Add-Ons Protocol Version 6 (#5092)
+- Show server name and check add-on version before upload (#5234)
+- Disable add-ons manager autoconnect and autologin (#5245)
 
 
 ### Saveloading
@@ -94,6 +113,26 @@
     - Changed the documentation of the commandline option --auto_speed
     - Added some debug log
 - Adding performance statistics for AI tasks (#5156)
+- AI improvements - change of scoring, training (#5168)
+- Update_all_bfCheck bf redesign (#5171)
+- Introducing limit for fields to be updated (#5173)
+    - Introducing limit for fields to be updated
+    - Increasing number of checked unusable fields
+    - Adding expiration info, increasing max fields to check
+- Training of AI (#5213)
+- AI: Update bf redesign (#5216): Perfomance improvement of buildable fields check in AI code
+- Considering distance to warehouse when starting new buildings (#5229)
+    - Malus variable introduced
+    - Considering only connected flags
+    - Training
+- Misc AI Fixes (#5263)
+    - Fix basic_amount handling of wells, hunters and fishers
+    - Deduplicated magic numbers
+    - Made the well necessity more generic algorithm susceptible
+    - Moved detection of neededness by stocklevel to the appropriate part of the code
+    - Tried to delay first warehouse a bit
+    - Prioritized fruit collectors if supporter nearby
+    - Insert a safeguard bonus for basic wells
 
 
 ### Gameplay
@@ -109,6 +148,9 @@
 - Remove messages of muted buildings (#5109)
 - Fix worker reordering stack overflow (#5125)
 - Remove messages when muting building via "mute all" (#5130)
+- Fix Port Paths Reordering On Port Removal (#5154)
+- Check for unknown wares/workers when loading economy profiles (#5215)
+- Ensure Notifications only reach the topmost DescriptionManager (#5184)
 
 
 ### User Interface
@@ -143,6 +185,13 @@
 - Use `unique_ptr` for settings box in construction site window (#5116)
 - Hide Empty Input Queue Displays (#5139)
 - Protect map object drawing with a mutex (#5147)
+- Fix spacing in warehouse window soldiers tab (#5185)
+- Fix `nullptr` dereference in `BaseListselect::handle_key()` (#5212)
+- Window Clicking Behaviour Fixes (#5219): Fix clicking a window not changing tool in editor. Also make the window focused.
+- Keep progress window open until game is ready (#5191)
+- Use correct mechanism to hide dropdown list (#5237)
+- Enable Hotkeys in Dropdowns (#5238)
+- Fix Race Condition in Attack Window (#5235)
 
 
 ### Internationalization
@@ -160,23 +209,51 @@
 - Fix Transifex String Issues (#5072)
 - Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
 - Properly format `size_t` type printf placeholder (#5096)
+- Tx String and CLI Help Fixes (#5179)
+- More Stringfixes (#5190)
+- Fix unhealthy usage of `split` in language menu (#5241)
 
 
 ### Help and Documentation
 
 - Fix documentation wl (#4920)
 - Add theme image `ending.png` to themes documentation (#4945)
+- Lua doc enhancements (#4984)
+- Add produced wares and workers to productionsites encyclopedia (#5205)
+    - Pulled out code and first working solution
+    - Use visionrange only for militarysites
+    - Fixed documentation for ware_help.lua
+    - Added example fix failure for documentation
+    - Fixed documentation for format_help
+    - Added recuited workers part to Production section
+    - Fixed charcoal burner  and aqua farm help with dummy program
+- Fixed links for documentations svg-images (#5209)
+- World immovables in encyclopedia (#5077)
+    - Made all tribes available for lua
+    - Corrected grapevine size to small to be consistent with other tribe immovables
+    - Changed "Space required:" to "Size:" and added a walkability hint
+    - Cleared the list of world immovables of all immovables with size "none"
+    - Display only one entry per treetype
+    - Filter amazon tree doublettes
+    - Use species as title for trees
+    - Added menu icons for dead and felled tree to be shown as image
+    - Cleared tribes immovables that are fields from world immovables regardless of addon status
+    - Fixed Size text for immovables
+    - Fixed amazons resi menu icon size
 
 
 ### Editor
 
 - Editor toolsize menu: use spinbox instead of custom dialog (#4990)
 - Add offset to editor info windows (#5145)
+- Editor: Add toggle maximum building spaces option (#5220)
+    - Convert all show/hide toggles to use display flags
 
 
 ### Graphics Engine
 
 - Catch crash when preloading minimap (#5021)
+- Fix a texture deletion from wrong thread (#5174)
 
 
 ### Networking
@@ -184,6 +261,7 @@
 - Break mutex deadlock in GameClient (#4948)
 - Fix game client deletion crash (#4970)
 - Keep GameController pointer alive for template game (#5128)
+- Replace Boost::Asio → Asio (#5164)
 
 
 ### Build System
@@ -228,7 +306,13 @@
 - GitHub MSVC CI Action (#5132)
 - Replace Boost UUID, Boost SHA1, and `std::rand` (#5124)
 - Deploy build artifacts to automated pre-release (#5143)
-- Replace `boost::format` (#5118, #5163)
+- Replace `boost::format` (#5118, #5163, #5178, #5207)
+- Remove `graphic_text_layout` dependency from `io_filesystem` (#5161)
+- Resolve MSVC warnings (#5157)
+- Fix older g++ optimization segfaults (#5176)
+- Fix -O3/-O2 typos (#5187)
+- Dependencies: Asio include handling & Solus support (#5182)
+- Don't require Homebrew to be installed at `/usr/local` (#5208)
 
 
 ### Other Issues
@@ -240,6 +324,8 @@
 - Set Windows logging dir in all website main functions (#4973)
 - Continue parsing commandline without datadir (#5134)
 - Allow using `--script` with `--new_game_from_template` (#5153)
+- Extend copyright script to update year in all files (#5188)
+- Add check for missing copyright headers (#5223)
 
 
 

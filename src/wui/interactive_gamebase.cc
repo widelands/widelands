@@ -78,7 +78,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    _("Show / Hide"),
                    UI::DropdownType::kPictorialMenu,
                    UI::PanelStyle::kWui,
-                   UI::ButtonStyle::kWuiPrimary),
+                   UI::ButtonStyle::kWuiPrimary,
+                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      mainmenu_(toolbar(),
                "dropdown_menu_main",
                0,
@@ -93,7 +94,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiPrimary),
+               UI::ButtonStyle::kWuiPrimary,
+               [this](MainMenuEntry t) { main_menu_selected(t); }),
      gamespeedmenu_(toolbar(),
                     "dropdown_menu_gamespeed",
                     0,
@@ -106,7 +108,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     _("Game Speed"),
                     UI::DropdownType::kPictorialMenu,
                     UI::PanelStyle::kWui,
-                    UI::ButtonStyle::kWuiPrimary) {
+                    UI::ButtonStyle::kWuiPrimary,
+                    [this](GameSpeedEntry t) { gamespeed_menu_selected(t); }) {
 	if (chat_provider_ != nullptr) {
 		chat_overlay()->set_chat_provider(*chat_provider_);
 	}
@@ -121,7 +124,6 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::rebuild_main_menu() {
 	mainmenu_.clear();
-
 #ifndef NDEBUG  //  only in debug builds
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
@@ -220,7 +222,6 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	const ShowHideEntry last_selection =
 	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 	showhidemenu_.clear();
-
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
@@ -372,21 +373,21 @@ void InteractiveGameBase::add_chat_ui() {
 	};
 }
 
-void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
 	}
 }
 
-void InteractiveGameBase::reset_gamespeed() {
+void InteractiveGameBase::reset_gamespeed() const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		ctrl->set_desired_speed(kSpeedDefault);
 	}
@@ -479,7 +480,7 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		InteractiveGameBase::toggle_mainmenu();
+		mainmenu_.toggle();
 		return true;
 	}
 
@@ -598,10 +599,6 @@ void InteractiveGameBase::start() {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::toggle_mainmenu() {
-	mainmenu_.toggle();
 }
 
 /**

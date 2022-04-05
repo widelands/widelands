@@ -49,7 +49,7 @@ std::string GamePreloadPacket::get_localized_win_condition() const {
 	return _(result);
 }
 
-void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
+void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* const /* mol */) {
 	try {
 		Profile prof;
 		prof.read("preload", nullptr, fs);
@@ -107,7 +107,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 	}
 }
 
-void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 	Profile prof;
 	Section& s = prof.create_section("global");
 

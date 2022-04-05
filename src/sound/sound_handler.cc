@@ -144,7 +144,9 @@ SoundHandler::~SoundHandler() {
 	songs_.clear();
 	fxs_.clear();
 
-	int numtimesopened, frequency, channels;
+	int numtimesopened;
+	int frequency;
+	int channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
@@ -254,9 +256,8 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 		fxs_[type].insert(
 		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
-	} else {
-		return fx_ids_[type].at(fx_path);
 	}
+	return fx_ids_[type].at(fx_path);
 }
 
 /**

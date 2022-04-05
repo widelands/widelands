@@ -111,7 +111,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
-               UI::ButtonStyle::kWuiPrimary),
+               UI::ButtonStyle::kWuiPrimary,
+               [this](ToolMenuEntry t) { tool_menu_selected(t); }),
      showhidemenu_(toolbar(),
                    "dropdown_menu_showhide",
                    0,
@@ -124,7 +125,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    _("Show / Hide"),
                    UI::DropdownType::kPictorialMenu,
                    UI::PanelStyle::kWui,
-                   UI::ButtonStyle::kWuiPrimary),
+                   UI::ButtonStyle::kWuiPrimary,
+                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(e.map())),
@@ -173,6 +175,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	finalize_toolbar();
 
+	set_display_flags(EditorInteractive::dfShowResources | EditorInteractive::dfShowImmovables |
+	                  EditorInteractive::dfShowBobs | EditorInteractive::dfShowGrid);
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
 #else
@@ -323,6 +327,7 @@ void EditorInteractive::add_tool_menu() {
 	tool_windows_.players.open_window = [this] {
 		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
 	};
+
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
@@ -434,26 +439,38 @@ void EditorInteractive::rebuild_showhide_menu() {
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
 
+	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
+	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
+	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") :
+                                                                _("Show Maximum Building Spaces"),
+	                  ShowHideEntry::kMaximumBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
+	                  _("Toggle whether to show maximum building spaces that will be available if "
+	                    "all immovables (trees, rocks, etc.) are removed"),
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp));
+
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
-	showhidemenu_.add(draw_grid_ ? _("Hide Grid") : _("Show Grid"), ShowHideEntry::kGrid,
+	showhidemenu_.add(get_display_flag(dfShowGrid) ? _("Hide Grid") : _("Show Grid"),
+	                  ShowHideEntry::kGrid,
 	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid));
 
-	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees,
-	 * rocks etc.) are shown */
-	showhidemenu_.add(draw_immovables_ ? _("Hide Immovables") : _("Show Immovables"),
-	                  ShowHideEntry::kImmovables,
-	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables));
+	showhidemenu_.add(
+	   /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
+	    *  (trees, rocks etc.) are shown */
+	   get_display_flag(dfShowImmovables) ? _("Hide Immovables") : _("Show Immovables"),
+	   ShowHideEntry::kImmovables, g_image_cache->get("images/wui/menus/toggle_immovables.png"),
+	   false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
-	showhidemenu_.add(draw_bobs_ ? _("Hide Animals") : _("Show Animals"), ShowHideEntry::kAnimals,
+	showhidemenu_.add(get_display_flag(dfShowBobs) ? _("Hide Animals") : _("Show Animals"),
+	                  ShowHideEntry::kAnimals,
 	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
-	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
+	showhidemenu_.add(get_display_flag(dfShowResources) ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
 	                  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "",
 	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources));
@@ -465,6 +482,9 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 	switch (entry) {
 	case ShowHideEntry::kBuildingSpaces: {
 		toggle_buildhelp();
+	} break;
+	case ShowHideEntry::kMaximumBuildingSpaces: {
+		toggle_maximum_buildhelp();
 	} break;
 	case ShowHideEntry::kGrid: {
 		toggle_grid();
@@ -627,7 +647,8 @@ bool EditorInteractive::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 
 void EditorInteractive::draw(RenderTarget& dst) {
 	const auto& ebase = egbase();
-	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
+	auto* fields_to_draw =
+	   map_view()->draw_terrain(ebase, nullptr, Workareas(), get_display_flag(dfShowGrid), &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
 	const Time& gametime = ebase.get_gametime();
@@ -663,7 +684,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
-		if (draw_immovables_) {
+		if (get_display_flag(dfShowImmovables)) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
 				imm->draw(
@@ -671,7 +692,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		if (draw_bobs_) {
+		if (get_display_flag(dfShowBobs)) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
 				bob->draw(
@@ -681,7 +702,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 
 		// Draw resource overlay.
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
-		if (draw_resources_ && amount > 0) {
+		if (get_display_flag(dfShowResources) && amount > 0) {
 			const std::string& immname = ebase.descriptions()
 			                                .get_resource_descr(field.fcoords.field->get_resources())
 			                                ->editor_image(amount);
@@ -692,12 +713,38 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		// Draw build help.
-		if (buildhelp()) {
-			const auto* overlay =
-			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
+		const Widelands::NodeCaps nodecaps =
+		   tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase);
+		const Widelands::NodeCaps maxcaps =
+		   tools_->current().maxcaps_for_buildhelp(field.fcoords, ebase);
+		// Draw build help for maximum building spaces.
+		bool buildhelp_drawn = false;
+		if (get_display_flag(dfShowMaximumBuildhelp)) {
+			const auto* overlay = get_buildhelp_overlay(maxcaps);
 			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
+				float opacity = 1.0f;
+				if (nodecaps != maxcaps) {
+					opacity = 0.6f;
+				} else {
+					buildhelp_drawn = true;
+				}
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale, opacity);
+			}
+		}
+
+		// Draw build help for actual building spaces.
+		if (buildhelp() && !buildhelp_drawn) {
+			const auto* overlay = get_buildhelp_overlay(nodecaps);
+			if (overlay != nullptr) {
+				// If maximum cap buildhelp is also on and is different,
+				// and current space is medium (ie. maximum is big or port),
+				// then scale down a bit to make the maximum more visible.
+				const float scaling =
+				   get_display_flag(dfShowMaximumBuildhelp) &&
+				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
+                  0.9f :
+                  1.0f;
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
 			}
 		}
 
@@ -781,28 +828,33 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+bool EditorInteractive::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
 void EditorInteractive::toggle_resources() {
-	draw_resources_ = !draw_resources_;
-	rebuild_showhide_menu();
+	set_display_flag(
+	   EditorInteractive::dfShowResources, !get_display_flag(EditorInteractive::dfShowResources));
 }
 
 void EditorInteractive::toggle_immovables() {
-	draw_immovables_ = !draw_immovables_;
-	rebuild_showhide_menu();
+	set_display_flag(
+	   EditorInteractive::dfShowImmovables, !get_display_flag(EditorInteractive::dfShowImmovables));
 }
 
 void EditorInteractive::toggle_bobs() {
-	draw_bobs_ = !draw_bobs_;
-	rebuild_showhide_menu();
+	set_display_flag(
+	   EditorInteractive::dfShowBobs, !get_display_flag(EditorInteractive::dfShowBobs));
 }
 
 void EditorInteractive::toggle_grid() {
-	draw_grid_ = !draw_grid_;
-	rebuild_showhide_menu();
+	set_display_flag(
+	   EditorInteractive::dfShowGrid, !get_display_flag(EditorInteractive::dfShowGrid));
+}
+
+void EditorInteractive::toggle_maximum_buildhelp() {
+	set_display_flag(EditorInteractive::dfShowMaximumBuildhelp,
+	                 !get_display_flag(EditorInteractive::dfShowMaximumBuildhelp));
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -849,6 +901,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorShowhideResources, code)) {
 			toggle_resources();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideMaximumBuildhelp, code)) {
+			toggle_maximum_buildhelp();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kEditorUndo, code)) {

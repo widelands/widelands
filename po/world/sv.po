@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-07 03:20+0000\n"
-"PO-Revision-Date: 2021-08-22 19:20+0000\n"
-"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>\n"
+"POT-Creation-Date: 2022-02-13 02:42+0000\n"
+"PO-Revision-Date: 2015-02-02 13:54+0000\n"
+"Last-Translator: Frida Bäcklund <frida.sofia.backlund@gmail.com>, 2021\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,7 +347,7 @@ msgstr "Pelarkaktus (planta)"
 msgid "Dead Tree"
 msgstr "Dött träd"
 
-#: ../../data/world/immovables/trees/fallentree/init.lua:5
+#: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
 msgstr "Fällt träd"
 

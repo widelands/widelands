@@ -192,6 +192,11 @@ private:
 	std::chrono::high_resolution_clock::time_point time_point;
 
 	bool construct_building(const Time&);
+	void update_avail_spots_stat();
+	void calculate_target_m_score(const Time&);
+	void set_rangers_policy(const Time&);
+	void check_critical_material_of_ms();
+	void pre_calculating_needness_of_buildings(const Time&);
 
 	// all road management is invoked by function improve_roads()
 	// if needed it calls create_shortcut_road() with a flag from which
@@ -238,7 +243,7 @@ private:
 	void consider_own_psites(Widelands::FCoords, BuildableField&);
 	void consider_enemy_sites(Widelands::FCoords, BuildableField&);
 	void consider_ally_sites(Widelands::FCoords, BuildableField&);
-	void consider_own_msites(Widelands::FCoords, BuildableField&, bool&, bool&);
+	void consider_own_msites(Widelands::FCoords, BuildableField&, bool&);
 
 	EconomyObserver* get_economy_observer(Widelands::Economy&);
 	uint8_t count_buildings_with_attribute(BuildingAttribute);

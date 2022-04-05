@@ -131,7 +131,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
                   UI::PanelStyle::kWui,
-                  UI::ButtonStyle::kWuiPrimary),
+                  UI::ButtonStyle::kWuiPrimary,
+                  [this](MapviewMenuEntry t) { mapview_menu_selected(t); }),
      quick_navigation_(&map_view_),
      workareas_cache_(nullptr),
      egbase_(the_egbase),
@@ -316,7 +317,6 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		map_view()->increase_zoom();
 		mapviewmenu_.toggle();
 	} break;
-
 	case MapviewMenuEntry::kResetZoom: {
 		map_view()->reset_zoom();
 		mapviewmenu_.toggle();
@@ -741,7 +741,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget&) {
+void InteractiveBase::draw_overlay(RenderTarget& /* rt */) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 
@@ -847,7 +847,7 @@ void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
 }
 
-void InteractiveBase::resize_minimap() {
+void InteractiveBase::resize_minimap() const {
 	if (MiniMap* const minimap = minimap_registry_.get_window()) {
 		minimap->check_boundaries();
 	}
@@ -1514,7 +1514,7 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	return *registry.window;
 }
 
-void InteractiveBase::broadcast_cheating_message() {
+void InteractiveBase::broadcast_cheating_message() const {
 	if (!get_game()) {
 		return;  // Editor
 	}

@@ -33,7 +33,7 @@ char Tree::buffer_[Tree::kBufferSize];
 const CharNode CharNode::node_;
 const StringNode StringNode::node_(kNone, 0, kInfinitePrecision);
 const BooleanNode BooleanNode::node_(kNone, 0, kInfinitePrecision);
-const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision);
+const FloatNode FloatNode::node_(kNone, 0, kDefaultFloatPrecision, true);
 const UintNode pointer_node_(kNone, 0, true, true, false);
 
 std::string to_string(const AbstractNode::ArgType t) {
@@ -192,10 +192,12 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		return std::unique_ptr<AbstractNode>(new StringNode(flags, min_width, precision));
 	case 'b':
 		return std::unique_ptr<AbstractNode>(new BooleanNode(flags, min_width, precision));
-	case 'f':
-		return std::unique_ptr<AbstractNode>(new FloatNode(
-		   flags, min_width, precision == kInfinitePrecision ? kDefaultFloatPrecision : precision));
-
+	case 'f': {
+		const bool dynamic_precision = (precision == kInfinitePrecision);
+		return std::unique_ptr<AbstractNode>(
+		   new FloatNode(flags, min_width, dynamic_precision ? kDefaultFloatPrecision : precision,
+		                 dynamic_precision));
+	}
 	case 'c':
 		if (flags != kNone || min_width != 0 || precision != kInfinitePrecision) {
 			throw wexception("%%c can not have additional specifiers");
@@ -213,11 +215,11 @@ inline std::unique_ptr<AbstractNode> Tree::parse_type_spec(const char*& format_s
 		}
 		if (*format_string == 'd' || *format_string == 'i') {
 			return std::unique_ptr<AbstractNode>(new IntNode(flags, min_width, false, false, false));
-		} else if (*format_string == 'u') {
-			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
-		} else {
-			throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 		}
+		if (*format_string == 'u') {
+			return std::unique_ptr<AbstractNode>(new UintNode(flags, min_width, false, false, false));
+		}
+		throw wexception("invalid format type character '%c' after '%%l'", *format_string);
 	}
 
 	case 'x':

@@ -178,7 +178,8 @@ void Textarea::expand() {
 	int32_t y = get_y();
 
 	update_desired_size();
-	int w, h = 0;
+	int w;
+	int h = 0;
 	get_desired_size(&w, &h);
 
 	switch (align_) {

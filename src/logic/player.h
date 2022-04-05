@@ -99,7 +99,7 @@ public:
 
 	/// Indicates that the object linked to the message has been removed
 	/// from the game. This implementation deletes the message.
-	void message_object_removed(MessageId mid) const;
+	void message_object_removed(MessageId message_id) const;
 
 	void set_message_status(const MessageId& id, Message::Status const status) {
 		get_messages()->set_message_status(id, status);
@@ -533,7 +533,7 @@ public:
 
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
-	                              uint32_t max = std::numeric_limits<uint32_t>::max());
+	                              uint32_t nr_wanted = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction(const Flag&,
 	                     PlayerNumber attacker,
 	                     const std::vector<Widelands::Soldier*>&,
@@ -662,7 +662,7 @@ private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message* message);
+	void play_message_sound(const Message* message) const;
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
 	/// Called when a node becomes seen, stops being seen or has changed. Discovers the node and
