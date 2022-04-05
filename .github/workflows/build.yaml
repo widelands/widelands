@@ -5,12 +5,8 @@ concurrency:
 on:
   pull_request:
     types: [ opened, reopened, synchronize ]
-    paths-ignore:
-    - '.github/workflows/codeql-analysis.yml'
   push:
     branches: [ master ]
-    paths-ignore:
-    - '.github/workflows/codeql-analysis.yml'
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
