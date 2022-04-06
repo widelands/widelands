@@ -1,0 +1,45 @@
+name: AppImage Build
+on:
+  push:
+    branches: [ latest ]
+jobs:
+
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-18.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    # Runs a single command using the runners shell
+    - name: Install required dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
+
+    # Runs a set of commands using the runners shell
+    - name: Download building tools
+      run: |
+        wget -nv -c https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+        chmod +x linuxdeploy-x86_64.AppImage
+        wget -q https://github.com/TheAssassin/pyuploadtool/releases/download/continuous/pyuploadtool-x86_64.AppImage
+        chmod +x pyuploadtool-x86_64.AppImage
+    - name: Configure and build
+      run: |
+        cmake -B build \
+          -DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
+          -DWL_INSTALL_BINDIR=games \
+          -DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
+          -DWL_INSTALL_PREFIX=/usr \
+          -DOPTION_USE_GLBINDING:BOOL=OFF \
+          -DOPTION_ASAN=OFF \
+          -DCMAKE_BUILD_TYPE=Release
+        make DESTDIR=$PWD/AppDir -j$(($(nproc) - 1)) -C build install
+    - name: Create AppImage
+      run: |
+        ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/games/widelands \
+          --icon-file=./data/images/logos/wl-ico-32.png --icon-filename=widelands.png \
+          --create-desktop-file --appdir $PWD/AppDir --output appimage
+        ./pyuploadtool-x86_64.AppImage widelands*AppImage
