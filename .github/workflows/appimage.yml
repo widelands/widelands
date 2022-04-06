@@ -11,8 +11,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v2
-      with:
-        submodules: true
     # Runs a single command using the runners shell
     - name: Install required dependencies
       run: |
