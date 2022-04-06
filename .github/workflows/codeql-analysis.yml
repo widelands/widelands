@@ -52,7 +52,7 @@ jobs:
     # Run manually so multiple cores can be specified
     - name: Configure and build
       run: |
-        cmake -B ./build OPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TESTS=ON
+        cmake -B ./build -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TESTS=ON
         make -C build -j$(($(nproc) - 1))
 
     - name: Perform CodeQL Analysis
