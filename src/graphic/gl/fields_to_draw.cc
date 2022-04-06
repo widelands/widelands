@@ -111,8 +111,8 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	assert(h_ > 0);
 
 	// Ensure that there is enough memory for the resize operation
-	uint32_t dimension = w_ * h_;
-	const uint32_t max_dimension = fields_.max_size();
+	size_t dimension = static_cast<size_t>(w_) * h_;
+	const size_t max_dimension = fields_.max_size();
 	if (dimension > max_dimension) {
 		log_warn_time(egbase.get_gametime(),
 		              "Not enough memory allocated to redraw the whole map!\nWe recommend that you "
