@@ -27,7 +27,14 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
+        if [ "${{ matrix.language }}" = "cpp" ]; then
+          sudo apt-get -y install \
+            cmake g++ gcc gettext libasio-dev libglew-dev \
+            libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev  \
+            libsdl2-ttf-dev python3 zlib1g-dev
+        else
+          sudo apt-get -y install python3
+        fi
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -53,7 +60,12 @@ jobs:
     - name: Configure and build
       run: |
         mkdir build && cd build
-        cmake .. -DOPTION_BUILD_TRANSLATIONS=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WEBSITE_TOOLS=ON -DOPTION_BUILD_TESTS=ON
+        cmake ..  \
+          -DOPTION_BUILD_TRANSLATIONS=OFF  \
+          -DOPTION_BUILD_CODECHECK=OFF  \
+          -DOPTION_BUILD_WEBSITE_TOOLS=ON \
+          -DOPTION_BUILD_TESTS=ON \
+          -DOPTION_ASAN=OFF
         make -j$(($(nproc) - 1))
 
     - name: Perform CodeQL Analysis
