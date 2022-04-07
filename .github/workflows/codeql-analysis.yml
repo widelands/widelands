@@ -50,23 +50,23 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    #- name: Autobuild
-      #uses: github/codeql-action/autobuild@v1
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
 
     # Run manually so multiple cores can be specified
-    - name: Configure and build
-      run: |
-        mkdir build && cd build
-        cmake ..  \
-          -DOPTION_BUILD_TRANSLATIONS=OFF  \
-          -DOPTION_BUILD_CODECHECK=OFF  \
-          -DOPTION_BUILD_WEBSITE_TOOLS=ON \
-          -DOPTION_BUILD_TESTS=ON \
-          -DOPTION_ASAN=OFF
-        make -j$(($(nproc) - 1))
+    #- name: Configure and build
+      #run: |
+        #mkdir build && cd build
+        #cmake ..  \
+          #-DOPTION_BUILD_TRANSLATIONS=OFF  \
+          #-DOPTION_BUILD_CODECHECK=OFF  \
+          #-DOPTION_BUILD_WEBSITE_TOOLS=ON \
+          #-DOPTION_BUILD_TESTS=ON \
+          #-DOPTION_ASAN=OFF
+        #make -j$(($(nproc) - 1))
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
