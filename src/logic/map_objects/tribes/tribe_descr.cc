@@ -976,7 +976,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 	}
 
 	// Now that we have gathered all resources we can use, verify the resource indicators
-	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources(); resource_index++) {
+	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources();
+	     resource_index++) {
 		const ResourceDescription* res = descriptions.get_resource_descr(resource_index);
 		if (res->detectable() && uses_resource(res->name())) {
 			// This function will throw an exception if this tribe doesn't
