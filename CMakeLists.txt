@@ -554,6 +554,13 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
+# To override this, use '-DWL_INSTALL_BINDIR=<absolute path>' when configuring or change
+# 'CMAKE_INSTALL_PREFIX'.
+# Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
+# and don't specify '-DWL_INSTALL_BINDIR' when configuring.
+# Note: by default, 'CMAKE_INSTALL_PREFIX' equals "/usr/local".
+set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+
 if(OPTION_BUILD_TRANSLATIONS)
   set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
   install(
