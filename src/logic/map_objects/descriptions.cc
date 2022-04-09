@@ -152,22 +152,22 @@ const DescriptionMaintainer<WorkerDescr>& Descriptions::workers() const {
 	return *workers_;
 }
 
-size_t Descriptions::nr_buildings() const {
+uint16_t Descriptions::nr_buildings() const {
 	return buildings_->size();
 }
-size_t Descriptions::nr_critters() const {
+uint16_t Descriptions::nr_critters() const {
 	return critters_->size();
 }
 size_t Descriptions::nr_immovables() const {
 	return immovables_->size();
 }
-size_t Descriptions::nr_resources() const {
+uint16_t Descriptions::nr_resources() const {
 	return resources_->size();
 }
 size_t Descriptions::nr_terrains() const {
 	return terrains_->size();
 }
-size_t Descriptions::nr_tribes() const {
+uint16_t Descriptions::nr_tribes() const {
 	return tribes_->size();
 }
 size_t Descriptions::nr_wares() const {

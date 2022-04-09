@@ -88,7 +88,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	// Add resource buttons
 	resources_box_.add_inf_space();
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
-	for (size_t i = 0; i < descriptions.nr_resources(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
 		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
 		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),

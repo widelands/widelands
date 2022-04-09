@@ -976,7 +976,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 	}
 
 	// Now that we have gathered all resources we can use, verify the resource indicators
-	for (size_t resource_index = 0; resource_index < descriptions.nr_resources(); resource_index++) {
+	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources(); resource_index++) {
 		const ResourceDescription* res = descriptions.get_resource_descr(resource_index);
 		if (res->detectable() && uses_resource(res->name())) {
 			// This function will throw an exception if this tribe doesn't
@@ -1014,7 +1014,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			} break;
 			case MapObjectType::BOB: {
 				// We only support critters here, because no other bobs are collected so far
-				for (size_t i = 0; i < descriptions.nr_critters(); ++i) {
+				for (DescriptionIndex i = 0; i < descriptions.nr_critters(); ++i) {
 					const CritterDescr* critter = descriptions.get_critter_descr(i);
 					if (critter->has_attribute(attribute_id)) {
 						prod->add_collected_bob(critter->name());

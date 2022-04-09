@@ -55,12 +55,12 @@ public:
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
 	const DescriptionMaintainer<WorkerDescr>& workers() const;
 
-	size_t nr_buildings() const;
-	size_t nr_critters() const;
+	uint16_t nr_buildings() const;
+	uint16_t nr_critters() const;
 	size_t nr_immovables() const;
 	size_t nr_terrains() const;
-	size_t nr_tribes() const;
-	size_t nr_resources() const;
+	uint16_t nr_tribes() const;
+	uint16_t nr_resources() const;
 	size_t nr_wares() const;
 	size_t nr_workers() const;
 
