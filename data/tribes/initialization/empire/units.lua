@@ -1516,11 +1516,11 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_marblemine",
          helptexts = {
-            purpose = {
             -- TRANSLATORS: Lore helptext for an empire production site: Marble Mine
             lore = pgettext("empire_building", "‘In vento scribit lædens, in marmore læsus.’ (He who offends writes in the wind, the offended on marble.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Marble Mine
             lore_author = pgettext("empire_building", "???"),
+            purpose = {
                -- TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
                pgettext("empire_building", "Carves marble and granite out of the rock in mountain terrain.")
             }
@@ -1642,11 +1642,11 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_trainingcamp",
          helptexts = {
-            purpose = {
             -- TRANSLATORS: Lore helptext for an empire training site: Training Camp
             lore = pgettext("empire_building", "‘Fortes fortuna adiuvat.’ (Fortune helps the strong.)"),
             -- TRANSLATORS: Lore author helptext for an empire training site: Training Camp
             lore_author = pgettext("empire_building", "Trainer to soldiers who questioned the need for higher level training"),
+            purpose = {
                -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 1
                pgettext("empire_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
                -- TRANSLATORS: Purpose helptext for an empire training site: Training Camp, part 2
