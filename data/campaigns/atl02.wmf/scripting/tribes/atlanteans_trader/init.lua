@@ -49,14 +49,21 @@ descriptions:new_worker_type {
       }
    },
 
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 4, 22 }
+         fps = 10,
+         frames = 1,
+         rows = 1,
+         columns = 1,
+         hotspot = { 36, 44 }
       },
       walk = {
-         hotspot = { 9, 25 },
          fps = 10,
-         directional = true
+         frames = 10,
+         rows = 2,
+         columns = 5,
+         directional = true,
+         hotspot = { 36, 44 }
       },
    }
 }
