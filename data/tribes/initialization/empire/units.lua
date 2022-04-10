@@ -1265,7 +1265,7 @@ wl.Descriptions():new_tribe {
          name = "empire_scouts_house",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Scout's House
-            lore = pgettext("empire_building", "‘Chat’Karuth ante portas!’ (Chat’Karuth at the gates!)"),
+            lore = pgettext("empire_building", "‘Ciatkaruthus ante portas!’ (Chat’Karuth at the gates!)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Scout's House
             lore_author = pgettext("empire_building", "A belated scout’s report"),
             no_scouting_building_connected = pgettext("empire_building", "You need to connect this flag to a scout’s house before you can send a scout here."),
