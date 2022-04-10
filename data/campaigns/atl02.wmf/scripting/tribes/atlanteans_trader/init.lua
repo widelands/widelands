@@ -51,7 +51,6 @@ wl.Descriptions():new_worker_type {
 
    spritesheets = {
       idle = {
-         fps = 10,
          frames = 1,
          rows = 1,
          columns = 1,
