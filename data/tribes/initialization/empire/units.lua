@@ -1290,9 +1290,9 @@ wl.Descriptions():new_tribe {
          name = "empire_sawmill",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Sawmill
-            lore = pgettext("empire_building", "‘Veni vidi serram duceret’ (I came, I saw, and pulled the saw)"),
+            lore = pgettext("empire_building", "‘Nihil agit serra nisi mota ab arte.’ (The saw does nothing except when moved by art.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sawmill
-            lore_author = pgettext("empire_building", "A carpenter starting to work"),
+            lore_author = pgettext("empire_building", "Motto of the Carpenters' Guild"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Sawmill
             purpose = pgettext("building", "Saws logs to produce planks.")
          }
@@ -1374,6 +1374,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_inn",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire production site: Inn
+            lore = pgettext("empire_building", "‘In cena dapibus plena te mente refrena.’ (A meal full of dishes restrains your mind.)"),
+            -- TRANSLATORS: Lore author helptext for an empire production site: Inn
+            lore_author = pgettext("empire_building", "Warning from a master miner to an apprentice"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Inn
             purpose = pgettext("empire_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines."),
             -- TRANSLATORS: Performance helptext for an empire production site: Inn
@@ -1536,6 +1540,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_coalmine",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire production site: Coal Mine
+            lore = pgettext("empire_building", "‘Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, et dum resolvitur, cinerea.’ (Coal is revived from the dead, it turns from black to red, creates embers, and as it falls apart, it becomes ashes.)"),
+            -- TRANSLATORS: Lore author helptext for an empire production site: Coal Mine
+            lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
          }
@@ -1543,6 +1551,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_coalmine_deep",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire production site: Deep Coal Mine
+            lore = pgettext("empire_building", "‘Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie, cum unumquodque horum sit ignis.’ (For there are more types of fire: for coal and flame are different, and the lighting type; all of them are fire.)"),
+            -- TRANSLATORS: Lore author helptext for an empire production site: Deep Coal Mine
+            lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
          }
@@ -1675,6 +1687,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_outpost",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire military site: Outpost
+            lore = pgettext("empire_building", "‘Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra.’ (Two were stationed on the other side of the city than the camp: one over the river, the other by the river above the camp.)"),
+            -- TRANSLATORS: Lore author helptext for an empire military site: Outpost
+            lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire military site: Outpost
             purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Outpost
@@ -1738,6 +1754,10 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_ferry_yard",
          helptexts = {
+            -- TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
+            lore = pgettext("empire_building", "‘I'm not Charon, this is not the Styx, Cerberus doesn't guard the other side, but I still can't take any living creature across the river.’"),
+            -- TRANSLATORS: Lore author helptext for an empire production site: Ferry Yard
+            lore_author = pgettext("empire_building", "Complaint of the lone ferryman"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
             purpose = pgettext("building", "Builds ferries."),
             -- TRANSLATORS: Note helptext for an empire production site: Ferry Yard
