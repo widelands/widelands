@@ -490,7 +490,7 @@ temple_completed = {
       body = loftomor(
          -- TRANSLATORS: Loftomor
          _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and consecrating our priests.]]))
-   }, 
+   },
    {
       title = _("Build Temple"),
       body = sidolus(
