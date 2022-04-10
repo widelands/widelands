@@ -131,7 +131,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 
 	build_wares_tab(construction_site);
 
-	if (construction_site->get_settings()) {
+	if (construction_site->get_settings() != nullptr) {
 		build_settings_tab(construction_site);
 	}
 
@@ -213,7 +213,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			settings_box->add_space(8);
 			cs_soldier_capacity_->changed.connect([this]() {
-				if (game_) {
+				if (game_ != nullptr) {
 					game_->send_player_change_soldier_capacity(
 					   *construction_site_.get(ibase()->egbase()), cs_soldier_capacity_->get_current());
 				} else {
@@ -225,7 +225,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		                               _("Stopped"), _("Stop this building’s work after completion"));
 		cs_stopped_->clickedto.connect([this, ps](bool stop) {
 			if (stop != ps->stopped) {
-				if (game_) {
+				if (game_ != nullptr) {
 					game_->send_player_start_stop_building(*construction_site_.get(ibase()->egbase()));
 				} else {
 					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -243,7 +243,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		settings_box->add(cs_soldier_capacity_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		settings_box->add_space(8);
 		cs_soldier_capacity_->changed.connect([this]() {
-			if (game_) {
+			if (game_ != nullptr) {
 				game_->send_player_change_soldier_capacity(
 				   *construction_site_.get(ibase()->egbase()), cs_soldier_capacity_->get_current());
 			} else {
@@ -267,11 +267,11 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
 		if (can_act) {
 			cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-				if (game_) {
+				if (game_ != nullptr) {
 					game_->send_player_militarysite_set_soldier_preference(
 					   *construction_site_.get(ibase()->egbase()),
-					   state ? Widelands::SoldierPreference::kRookies :
-                          Widelands::SoldierPreference::kHeroes);
+					   state != 0 ? Widelands::SoldierPreference::kRookies :
+                               Widelands::SoldierPreference::kHeroes);
 				} else {
 					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
 				}
@@ -337,7 +337,7 @@ void ConstructionSiteWindow::build_settings_tab(Widelands::ConstructionSite* con
 			   _("Start an expedition from this port after completion"));
 			cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 				if (launch != ws->launch_expedition) {
-					if (game_) {
+					if (game_ != nullptr) {
 						game_->send_player_start_or_cancel_expedition(
 						   *construction_site_.get(ibase()->egbase()));
 					} else {
@@ -370,7 +370,7 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	if (ww == Widelands::wwWARE) {
 		for (const auto& pair : ws->ware_preferences) {
 			if (cs_warehouse_wares_->ware_selected(pair.first)) {
-				if (game_) {
+				if (game_ != nullptr) {
 					game_->send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWARE, pair.first, p);
 				} else {
@@ -381,7 +381,7 @@ void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::
 	} else {
 		for (const auto& pair : ws->worker_preferences) {
 			if (cs_warehouse_workers_->ware_selected(pair.first)) {
-				if (game_) {
+				if (game_ != nullptr) {
 					game_->send_player_set_stock_policy(
 					   *construction_site, Widelands::wwWORKER, pair.first, p);
 				} else {
@@ -425,7 +425,7 @@ void ConstructionSiteWindow::think() {
 		cs_soldier_capacity_->refresh(ms->desired_capacity, ms->max_capacity, can_act);
 		cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1, false);
 	} else if (upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings())) {
-		if (cs_launch_expedition_) {
+		if (cs_launch_expedition_ != nullptr) {
 			cs_launch_expedition_->set_state(ws->launch_expedition);
 		}
 #ifndef NDEBUG

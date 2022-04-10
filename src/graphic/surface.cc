@@ -107,7 +107,7 @@ void Surface::fill_rect(const Rectf& rc, const RGBAColor& clr, BlendMode blend_m
 }
 
 void Surface::brighten_rect(const Rectf& rc, const int32_t factor) {
-	if (!factor) {
+	if (factor == 0) {
 		return;
 	}
 
