@@ -2,7 +2,7 @@ dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/"
 
 push_textdomain("scenario_atl02.wmf")
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "atlanteans_trading_post",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Trading Post"),

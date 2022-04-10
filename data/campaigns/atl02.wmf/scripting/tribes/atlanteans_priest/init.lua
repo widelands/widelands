@@ -2,7 +2,7 @@ push_textdomain("scenario_atl02.wmf")
 
 dirname = "campaigns/atl02.wmf/scripting/tribes/atlanteans_priest/"
 
-descriptions:new_worker_type {
+wl.Descriptions():new_worker_type {
    name = "atlanteans_priest",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Priest"),
