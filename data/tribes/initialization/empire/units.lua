@@ -1420,9 +1420,9 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_armorsmithy",
             -- TRANSLATORS: Lore helptext for an empire production site: Armorsmithy
-            lore = pgettext("empire_building", "‘Exiit ex lucis, cum quingentis fere scutis.’ (He came out of the light with about five hundred shields.)"),
+            lore = pgettext("empire_building", "‘Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens, atque catenosi crepitant per corpora panni.’ (They enjoy their great armor under their capes, tightly woven from rings, rattling through the cloth.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Armorsmithy
-            lore_author = pgettext("empire_building", "History of the Empire, Part III – the turn of the Battle of ???"),
+            lore_author = pgettext("empire_building", "An armorsmith teaching an apprentice"),
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire production site: Armor Smithy
             purpose = pgettext("empire_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
