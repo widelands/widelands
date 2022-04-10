@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -869,6 +869,6 @@ msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automa
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Sünd uns’ künstelken Spelers to dröge? Besöök uns’ Internett-Sied up %s un treff anner Spelers, mit de du över ’t Internett spölen kannst."
+msgstr ""

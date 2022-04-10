@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-04 03:14+0000\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -723,8 +723,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1757,40 +1757,40 @@ msgstr "Pulizia per caricamento: Mappa (3/3)"
 msgid "Not set"
 msgstr "Non impostato"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:324
-#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:325
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "Pre-caricamento mappa..."
 
-#: ../../src/logic/game.cc:377
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr "Inizializzazione partita..."
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:620
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr "Creazione infrastrutture del giocatore..."
 
-#: ../../src/logic/game.cc:637 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Posizione iniziale mancante"
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands non ha potuto avviare il gioco, perché il giocatore %u non ha una posizione di partenza.\nPuoi aggiungere manualmente una posizione di partenza con l'editor di Widelands, in modo da risolvere questo problema."
 
-#: ../../src/logic/game.cc:738
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1181
+#: ../../src/logic/game.cc:1182
 msgid "Trade Offer"
 msgstr "Offerta Commerciale"
 
-#: ../../src/logic/game.cc:1183
+#: ../../src/logic/game.cc:1184
 msgid "This market has received a new trade offer."
 msgstr "Questo mercato ha ricevuto una nuova offerta commerciale."
 
@@ -7178,9 +7178,9 @@ msgstr "Porti"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8130,8 +8130,8 @@ msgstr "Metti in pausa la partita"
 msgid "Statistics"
 msgstr "Statistiche"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Viaggiare in mare"

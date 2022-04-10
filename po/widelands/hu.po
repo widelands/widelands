@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-04 03:14+0000\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -719,8 +719,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1753,40 +1753,40 @@ msgstr "Elrendezés betöltéshez: Térkép (3/3)"
 msgid "Not set"
 msgstr "Nincs beállítva"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:324
-#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:325
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "Térkép előtöltése…"
 
-#: ../../src/logic/game.cc:377
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr "Játék előkészítése…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:620
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr "Infrastruktúra létrehozása…"
 
-#: ../../src/logic/game.cc:637 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Hiányzó kezdőpont"
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő helye.\nA hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a játékosnak a szerkesztőben."
 
-#: ../../src/logic/game.cc:738
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr "Játék indítása…"
 
-#: ../../src/logic/game.cc:1181
+#: ../../src/logic/game.cc:1182
 msgid "Trade Offer"
 msgstr "Kereskedelmi ajánlat"
 
-#: ../../src/logic/game.cc:1183
+#: ../../src/logic/game.cc:1184
 msgid "This market has received a new trade offer."
 msgstr "Ez a piac egy új kereskedelmi ajánlatot kapott."
 
@@ -7174,9 +7174,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8126,8 +8126,8 @@ msgstr "Játék megállítása"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Hajózás"
