@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-31 03:06+0000\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -1437,8 +1437,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1745,40 +1745,40 @@ msgstr "불러오기 위해 정리작업: 지도 (3/3)"
 msgid "Not set"
 msgstr "설정되지 않음"
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:324
-#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:325
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "지도를 먼저 불러오고 있음…"
 
-#: ../../src/logic/game.cc:377
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr "놀이를 초기화하고 있음…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:620
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr "선수의 사회 기반 시설을 만들고 있음…"
 
-#: ../../src/logic/game.cc:637 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "시작 위치를 찾을 수 없음"
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "와이드랜드는 선수 %u의 시작 위치가 없어서 게임을 시작할 수가 없습니다.\n이 문제를 해결하려면 와이드랜드 편집기에서 시작 위치를 수동으로 추가해야 합니다."
 
-#: ../../src/logic/game.cc:738
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1181
+#: ../../src/logic/game.cc:1182
 msgid "Trade Offer"
 msgstr "거래 제안"
 
-#: ../../src/logic/game.cc:1183
+#: ../../src/logic/game.cc:1184
 msgid "This market has received a new trade offer."
 msgstr "이 시장은 새로운 무역 제안을 받았습니다."
 
@@ -6075,18 +6075,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "제작자들"
@@ -7530,8 +7530,8 @@ msgstr "연결이 끊긴 선수를 선택된 인공지능으로 바꾸고 게임
 msgid "AI for the disconnected player"
 msgstr "연결이 끊어진 선수의 인공지능"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8088,8 +8088,8 @@ msgstr "놀이를 일시정지"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "항해"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-03-31 03:06+0000\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
 "Language-Team: English (United States) (http://www.transifex.com/widelands/widelands/language/en_US/)\n"
@@ -1431,8 +1431,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1743,40 +1743,40 @@ msgstr ""
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:280 ../../src/logic/game.cc:324
-#: ../../src/logic/game.cc:423 ../../src/logic/game.cc:477
+#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:325
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:377
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:620
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:637 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:738
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1181
+#: ../../src/logic/game.cc:1182
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1183
+#: ../../src/logic/game.cc:1184
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -6098,18 +6098,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
@@ -7554,8 +7554,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8116,8 +8116,8 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
