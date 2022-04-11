@@ -1156,7 +1156,9 @@ wl.Descriptions():new_tribe {
          name = "empire_warehouse",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire warehouse: Warehouse
-            lore = pgettext("empire_building", "‘Bis dat, qui cito dat, nil dat, qui munera tardat.’<br>(Who gives promptly, gives twice, who gives late, gives nothing.)"),
+            lore = pgettext("empire_building",
+               "‘Bis dat, qui cito dat, nil dat, qui munera tardat.’<br>"..
+               "(Who gives promptly, gives twice, who gives late, gives nothing.)"),
             -- TRANSLATORS: Lore author helptext for an empire warehouse: Warehouse
             lore_author = pgettext("empire_building", "Proverb written over the doors of a warehouse"),
             -- TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
@@ -1182,7 +1184,9 @@ wl.Descriptions():new_tribe {
          name = "empire_quarry",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Quarry
-            lore = pgettext("empire_building", "‘Non relinquetur hic lapis super lapidem qui non destruatur.’<br>(There shall not be left here a stone upon a stone that shall not be destroyed.)"),
+            lore = pgettext("empire_building",
+               "‘Non relinquetur hic lapis super lapidem qui non destruatur.’<br>"..
+               "(There shall not be left here a stone upon a stone that shall not be destroyed.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Quarry
             lore_author = pgettext("empire_building", "Not much of a foretelling, when there is a quarry nearby"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Quarry
@@ -1283,7 +1287,8 @@ wl.Descriptions():new_tribe {
          name = "empire_sawmill",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Sawmill
-            lore = pgettext("empire_building", "‘Nihil agit serra nisi mota ab arte.’<br>(The saw does nothing except when moved by art.)"),
+            lore = pgettext("empire_building",
+               "‘Nihil agit serra nisi mota ab arte.’<br>(The saw does nothing except when moved by art.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sawmill
             lore_author = pgettext("empire_building", "Motto of the Carpenters' Guild"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Sawmill
@@ -1307,7 +1312,8 @@ wl.Descriptions():new_tribe {
          name = "empire_bakery",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Bakery
-            lore = pgettext("empire_building", "‘Non est de sacco tanta farina tuo.’<br>(There’s not this much flour in your sack.)"),
+            lore = pgettext("empire_building",
+               "‘Non est de sacco tanta farina tuo.’<br>(There’s not this much flour in your sack.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Bakery
             lore_author = pgettext("empire_building", "A baker accusing another of theft"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Bakery
@@ -1320,7 +1326,9 @@ wl.Descriptions():new_tribe {
          name = "empire_brewery",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Empire Brewery. Literal translation: stomp the earth with free feet
-            lore = pgettext("empire_building", "‘Nunc est bibendum, nunc pede libero pulsanda tellus!’<br>(Now it’s time to drink! Now it’s time to dance freely!)"),
+            lore = pgettext("empire_building",
+               "‘Nunc est bibendum, nunc pede libero pulsanda tellus!’<br>"..
+               "(Now it’s time to drink! Now it’s time to dance freely!)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Brewery
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Brewery
@@ -1355,7 +1363,8 @@ wl.Descriptions():new_tribe {
          name = "empire_tavern",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Tavern
-            lore = pgettext("empire_building", "‘Esse oportet ut vivas, non vivere ut edas.’<br>(We eat to live, not live to eat.)"),
+            lore = pgettext("empire_building",
+               "‘Esse oportet ut vivas, non vivere ut edas.’<br>(We eat to live, not live to eat.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Tavern
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Tavern
@@ -1368,7 +1377,8 @@ wl.Descriptions():new_tribe {
          name = "empire_inn",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Inn
-            lore = pgettext("empire_building", "‘In cena dapibus plena te mente refrena.’<br>(A meal full of dishes restrains your mind.)"),
+            lore = pgettext("empire_building",
+               "‘In cena dapibus plena te mente refrena.’<br>(A meal full of dishes restrains your mind.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Inn
             lore_author = pgettext("empire_building", "Warning from a master miner to an apprentice"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Inn
@@ -1381,7 +1391,8 @@ wl.Descriptions():new_tribe {
          name = "empire_charcoal_kiln",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Charcoal Kiln
-            lore = pgettext("empire_building", "‘Creta an carbone notandi?’<br>(Are they to be marked with chalk or charcoal?)"),
+            lore = pgettext("empire_building",
+               "‘Creta an carbone notandi?’<br>(Are they to be marked with chalk or charcoal?)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Charcoal Kiln
             lore_author = pgettext("empire_building", "I.e. judge whether they are good or bad"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
@@ -1392,7 +1403,8 @@ wl.Descriptions():new_tribe {
          name = "empire_smelting_works",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Smelting Works
-            lore = pgettext("empire_building", "‘Ignis aurum probat, miseria fortes viros.’<br>(Fire tests gold, adversity [tests] brave men.)"),
+            lore = pgettext("empire_building",
+               "‘Ignis aurum probat, miseria fortes viros.’<br>(Fire tests gold, adversity [tests] brave men.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Smelting Works
             lore_author = pgettext("empire_building", "Saledus on the importance of experienced soldiers"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
@@ -1403,7 +1415,8 @@ wl.Descriptions():new_tribe {
          name = "empire_toolsmithy",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Toolsmithy
-            lore = pgettext("empire_building", "‘Faber est suæ quisque fortunæ.’<br>(Each man is the maker of his own fortune.)"),
+            lore = pgettext("empire_building",
+               "‘Faber est suæ quisque fortunæ.’<br>(Each man is the maker of his own fortune.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Toolsmithy
             lore_author = pgettext("empire_building", "But the toolsmith makes the tools for all of them"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
@@ -1414,7 +1427,11 @@ wl.Descriptions():new_tribe {
          name = "empire_armorsmithy",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Armorsmithy
-            lore = pgettext("empire_building", "‘Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens, atque catenosi crepitant per corpora panni.’<br>(They enjoy their great armor under their capes, tightly woven from rings, rattling through the cloth.)"),
+            lore = pgettext("empire_building",
+               "‘Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens,"..
+               " atque catenosi crepitant per corpora panni.’<br>"..
+               "(They enjoy their great armors under their capes, tightly woven from rings, rattling"..
+               " through the cloth.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Armorsmithy
             lore_author = pgettext("empire_building", "An armorsmith teaching an apprentice"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Armor Smithy
@@ -1425,7 +1442,8 @@ wl.Descriptions():new_tribe {
          name = "empire_barracks",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Barracks
-            lore = pgettext("empire_building", "‘Non muri, sed viri sunt præsidium oppidorum.’<br>(Not walls but men protect the towns.)"),
+            lore = pgettext("empire_building",
+               "‘Non muri, sed viri sunt præsidium oppidorum.’<br>(Not walls but men protect the towns.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Barracks
             lore_author = pgettext("empire_building", "Argument in the Senate for increasing recruitment"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Barracks
@@ -1449,7 +1467,11 @@ wl.Descriptions():new_tribe {
          name = "empire_farm",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Farm
-            lore = pgettext("empire_building", "‘Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt dum agellum suum arat’<br>(Lutius had already removed himself from public affairs, he was living in the countryside, and the ambassadors of the senate found him while he was plowing his land.)"),
+            lore = pgettext("empire_building",
+               "‘Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt"..
+               " dum agellum suum arat’<br>"..
+               "(Lutius had already removed himself from public affairs, he was living in the countryside,"..
+               " and the ambassadors of the senate found him while he was plowing his land.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Farm
             lore_author = pgettext("empire_building", "History of the Empire, Part VII"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Farm
@@ -1462,7 +1484,8 @@ wl.Descriptions():new_tribe {
          name = "empire_piggery",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Piggery
-            lore = pgettext("empire_building", "‘Quod licet Iovi, non licet porcis.’<br>(What is allowed for Jupiter is not allowed for pigs.)"),
+            lore = pgettext("empire_building",
+               "‘Quod licet Iovi, non licet porcis.’<br>(What is allowed for Jupiter is not allowed for pigs.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Piggery
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Piggery
@@ -1497,7 +1520,8 @@ wl.Descriptions():new_tribe {
          name = "empire_weaponsmithy",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Weapon Smithy
-            lore = pgettext("empire_building", "‘Ignis calorem suum etiam in ferro tenet.’<br>(The fire keeps its heat even in the iron.)"),
+            lore = pgettext("empire_building",
+               "‘Ignis calorem suum etiam in ferro tenet.’<br>(The fire keeps its heat even in the iron.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Weapon Smithy
             lore_author = pgettext("empire_building", "Motto of the Weaponsmiths’ Guild"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Weapon Smithy
@@ -1510,7 +1534,9 @@ wl.Descriptions():new_tribe {
          name = "empire_marblemine",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Marble Mine
-            lore = pgettext("empire_building", "‘In vento scribit lædens, in marmore læsus.’<br>(He who offends writes in the wind, the offended on marble.)"),
+            lore = pgettext("empire_building",
+               "‘In vento scribit lædens, in marmore læsus.’<br>"..
+               "(He who offends writes in the wind, the offended on marble.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Marble Mine
             lore_author = pgettext("empire_building", "???"),
             purpose = {
@@ -1523,7 +1549,9 @@ wl.Descriptions():new_tribe {
          name = "empire_marblemine_deep",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Deep Marble Mine
-            lore = pgettext("empire_building", "‘Urbem lateritiam invenit, marmoream reliquit.’<br>(He found a city of brick, and left it one of marble.)"),
+            lore = pgettext("empire_building",
+               "‘Urbem lateritiam invenit, marmoream reliquit.’<br>"..
+               "(He found a city of brick, and left it one of marble.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Marble Mine
             lore_author = pgettext("empire_building", "History of the Empire, Part VI on the return of Lutius to Fremil"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Marble Mine
@@ -1534,7 +1562,11 @@ wl.Descriptions():new_tribe {
          name = "empire_coalmine",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Coal Mine
-            lore = pgettext("empire_building", "‘Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, et dum resolvitur, cinerea.’<br>(Coal is revived from the dead, it turns from black to red, creates embers, and as it falls apart, it becomes ashes.)"),
+            lore = pgettext("empire_building",
+               "‘Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat,"..
+               " et dum resolvitur, cinerea.’<br>"..
+               "(Coal is revived from the dead, it turns from black to red, creates embers,"..
+               " and as it falls apart, it becomes ashes.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Coal Mine
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
@@ -1545,7 +1577,11 @@ wl.Descriptions():new_tribe {
          name = "empire_coalmine_deep",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Deep Coal Mine
-            lore = pgettext("empire_building", "‘Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie, cum unumquodque horum sit ignis.’<br>(For there are more types of fire: for coal and flame are different, and the lighting type; all of them are fire.)"),
+            lore = pgettext("empire_building",
+               "‘Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie,"..
+               " cum unumquodque horum sit ignis.’<br>"..
+               "(For there are more types of fire: for coal and flame are different, and the lighting type;"..
+               " all of them are fire.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Coal Mine
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
@@ -1567,7 +1603,8 @@ wl.Descriptions():new_tribe {
          name = "empire_ironmine_deep",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Deep Iron Mine
-            lore = pgettext("empire_building", "‘Ferreus assiduo consumitur annulus usu.’<br>(By constant use an iron ring is worn away.)"),
+            lore = pgettext("empire_building",
+               "‘Ferreus assiduo consumitur annulus usu.’<br>(By constant use an iron ring is worn away.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Iron Mine
             lore_author = pgettext("empire_building", "Amalea on the importance of always looking for more resources"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
@@ -1578,7 +1615,8 @@ wl.Descriptions():new_tribe {
          name = "empire_goldmine",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Gold Mine
-            lore = pgettext("empire_building", "‘Aurum irrepertum et sic melius situm.’<br>(Gold discovered and all the better for being so.)"),
+            lore = pgettext("empire_building",
+               "‘Aurum irrepertum et sic melius situm.’<br>(Gold discovered and all the better for being so.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Gold Mine
             lore_author = pgettext("empire_building", "Amalea receiving the first geologist report of gold on the small island"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
@@ -1589,7 +1627,8 @@ wl.Descriptions():new_tribe {
          name = "empire_goldmine_deep",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Deep Gold Mine
-            lore = pgettext("empire_building", "‘Formidinem mortis vicit aurum.’<br>(Gold has conquered the fear of death.)"),
+            lore = pgettext("empire_building",
+               "‘Formidinem mortis vicit aurum.’<br>(Gold has conquered the fear of death.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Gold Mine
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
@@ -1602,7 +1641,11 @@ wl.Descriptions():new_tribe {
          name = "empire_arena",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire training site: Arena
-            lore = pgettext("empire_building", "‘Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat, panem et circenses.’<br>([The People of the Empire] who once handed out all [power], now restrains itself and anxiously hopes for just two things: bread and games.)"),
+            lore = pgettext("empire_building",
+               "‘Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat,"..
+               " panem et circenses.’<br>"..
+               "([The People of the Empire] who once handed out all [power], now restrains itself"..
+               " and anxiously hopes for just two things: bread and games.)"),
             -- TRANSLATORS: Lore author helptext for an empire training site: Arena
             lore_author = pgettext("empire_building", "History of the Empire, Part X – the decline"),
             purpose = {
@@ -1619,7 +1662,8 @@ wl.Descriptions():new_tribe {
          name = "empire_colosseum",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire training site: Colosseum
-            lore = pgettext("empire_building", "‘Ave Cæsar! Morituri te salutant!’<br>(Hail Cæsar! Those who are about to die greet you!)"),
+            lore = pgettext("empire_building",
+               "‘Ave Cæsar! Morituri te salutant!’<br>(Hail Cæsar! Those who are about to die greet you!)"),
             -- TRANSLATORS: Lore author helptext for an empire training site: Colosseum
             lore_author = pgettext("empire_building", "Greeting from the gladiators to the emperor"),
             purpose = {
@@ -1681,7 +1725,10 @@ wl.Descriptions():new_tribe {
          name = "empire_outpost",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire military site: Outpost
-            lore = pgettext("empire_building", "‘Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra.’<br>(Two were stationed on the other side of the city than the camp: one over the river, the other by the river above the camp.)"),
+            lore = pgettext("empire_building",
+               "‘Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra.’<br>"..
+               "(Two were stationed on the other side of the city than the camp: one over the river, the other by"..
+               " the river above the camp.)"),
             -- TRANSLATORS: Lore author helptext for an empire military site: Outpost
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire military site: Outpost
@@ -1720,7 +1767,8 @@ wl.Descriptions():new_tribe {
          name = "empire_fortress",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Fortress
-            lore = pgettext("empire_building", "‘Si vis pacem, para bellum.’<br>(If you want peace, prepare for war.)"),
+            lore = pgettext("empire_building",
+               "‘Si vis pacem, para bellum.’<br>(If you want peace, prepare for war.)"),
             -- TRANSLATORS: Lore author helptext for an empire military site: Fortress
             lore_author = pgettext("empire_building", "???"),
             -- TRANSLATORS: Purpose helptext for an empire military site: Fortress
@@ -1733,7 +1781,9 @@ wl.Descriptions():new_tribe {
          name = "empire_castle",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire military site: Castle
-            lore = pgettext("empire_building", "‘Ceterum autem censeo Althunranam esse delendam!’<br>(Furthermore, I think that Al’thunran must be destroyed!)"),
+            lore = pgettext("empire_building",
+               "‘Ceterum autem censeo Althunranam esse delendam!’<br>"..
+               "(Furthermore, I think that Al’thunran must be destroyed!)"),
             -- TRANSLATORS: Lore author helptext for an empire military site: Castle
             lore_author = pgettext("empire_building", "Saledus in the Senate, urging final victory over the Barbarians"),
             -- TRANSLATORS: Purpose helptext for an empire military site: Castle
@@ -1748,7 +1798,9 @@ wl.Descriptions():new_tribe {
          name = "empire_ferry_yard",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
-            lore = pgettext("empire_building", "‘I'm not Charon, this is not the Styx, Cerberus doesn't guard the other side, but I still can't take any living creature across the river.’"),
+            lore = pgettext("empire_building",
+               "‘I'm not Charon, this is not the Styx, Cerberus doesn't guard the other side,"..
+               " but I still can't take any living creature across the river.’"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Ferry Yard
             lore_author = pgettext("empire_building", "Complaint of the lone ferryman"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
@@ -1761,7 +1813,8 @@ wl.Descriptions():new_tribe {
          name = "empire_shipyard",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an empire production site: Shipyard
-            lore = pgettext("empire_building", "‘Uni navi ne committas omnia.’<br>(Don’t put everything on the same ship.)"),
+            lore = pgettext("empire_building",
+               "‘Uni navi ne committas omnia.’<br>(Don’t put everything on the same ship.)"),
             -- TRANSLATORS: Lore author helptext for an empire production site: Shipyard
             lore_author = pgettext("empire_building", "A shipwright lamenting when he was instructed to stop working"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Shipyard
