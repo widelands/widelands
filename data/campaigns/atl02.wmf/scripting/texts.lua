@@ -243,7 +243,7 @@ initial_messages1= {
          _([[But we need to be cautious using the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
-         _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
+         _([[This will take more time, but we can reuse some of its materials. Also, I want a scout deployed and exploring at all times.]]))
          .. new_objectives(obj_explore)
          .. new_objectives(obj_expand),
       h=500,
