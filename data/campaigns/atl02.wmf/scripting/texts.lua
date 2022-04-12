@@ -137,7 +137,7 @@ obj_build_temple = {
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
    p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
-   p(_([[And we need to have a scout house to not loose track of what is going on at the barbarians territory.]])))
+   p(_([[And we need to have a scout house to not lose track of what is going on at the barbarians territory.]])))
 }
 
 obj_worship = {
@@ -187,7 +187,7 @@ initial_messages = {
          _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[All of us were fiercely afraid. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
+         _([[All of us were fiercely afraid. We expected the other ships to be sunken as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
       h=500,
    },
    {
@@ -221,7 +221,7 @@ initial_messages1= {
       title = _("Jundlina gives orders"),
       body = jundlina(_("Jundlina decides"),
          -- TRANSLATORS: Jundlina
-         _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will provide us with good tools in no time.]]))
+         _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will quickly provide us with good tools.]]))
          .. new_objectives(obj_tools),
       h=500,
    },
@@ -243,7 +243,7 @@ initial_messages1= {
          _([[But we need to be cautious using the stones and other precious material. When we no longer need a building, we will dismantle it instead of burning it down.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
-         _([[This will take more time, but we can reuse some of its materials. Also, I want a scout out and exploring at all times.]]))
+         _([[This will take more time, but we can reuse some of its materials. Also, I want a scout deployed and exploring at all times.]]))
          .. new_objectives(obj_explore)
          .. new_objectives(obj_expand),
       h=500,
