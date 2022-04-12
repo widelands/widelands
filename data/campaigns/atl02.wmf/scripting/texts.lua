@@ -153,7 +153,7 @@ obj_defeat_kalitath = {
    title = _("Defeat Kalitath"),
    number = 1,
    body = objective_text(_("Defeat Kalitath"),
-   p(_([[Now its time to finish off this annoying Barbarian. He has molested us far too long for now.]])))
+   p(_([[Now it’s time to finish off this annoying Barbarian. He has molested us far too long now.]])))
 }
 
 -- =======================================================================
@@ -210,7 +210,7 @@ initial_messages = {
          _([[The only thing we know for sure is that they cannot be Atlanteans, for no ship of ours has sailed as far as we did for centuries. I can only hope they are friendly.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[We have not much water left; our food is running low; we lost all our tools and most of our building materials with the third ship. We can’t afford to sail any further, and we need to try to settle on this island.]]))
+         _([[We have not much water left; our food is running low; we lost all our tools and most of our building materials with the third ship. We can’t afford to sail any further, and we must attempt to settle on this island.]]))
          .. new_objectives(obj_find_port),
       h=500,
    },
