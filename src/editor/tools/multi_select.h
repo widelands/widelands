@@ -70,6 +70,22 @@ struct MultiSelect {
 		return i - 1;
 	}
 
+        void disable_all() {
+		int32_t i = 0;
+		int32_t j = nr_enabled_;
+		while (j) {
+			if (is_enabled(i)) {
+                                enable(i, false);
+				--j;
+                        }
+			++i;
+		}
+        }
+
+        int32_t count() const {
+                return enabled_.size();
+        }
+
 private:
 	int32_t nr_enabled_;
 	std::vector<bool> enabled_;

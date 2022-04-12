@@ -49,15 +49,18 @@ struct EditorDecreaseHeightTool : public EditorTool {
 		change_by_ = n;
 	}
 
-        void get_configuration_impl(ToolConf& conf) override {
+        void save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.change_by = change_by_;
         }
-        void set_configuration(const ToolConf& conf) override {
+        void load_configuration(const ToolConf& conf) override {
                 change_by_ = conf.change_by;
         }
-        std::string format_conf_string_impl(const ToolConf& conf) override;        
+        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;        
 
-        const ToolID toolId = ToolID::DecreaseHeight;
+        ToolID get_tool_id() override {
+                return ToolID::DecreaseHeight;
+        }
+
 
 private:
 	int32_t change_by_;

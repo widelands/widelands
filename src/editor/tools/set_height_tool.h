@@ -39,7 +39,6 @@ struct EditorSetHeightTool : public EditorTool {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
-        std::string format_conf_string_impl(const ToolConf& conf) override;
         
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
@@ -52,15 +51,19 @@ struct EditorSetHeightTool : public EditorTool {
 		interval_ = i;
 	}
 
-        void get_configuration_impl(ToolConf& conf) override {
+        ToolID get_tool_id() override {
+                return ToolID::SetHeight;
+        }
+
+        void save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.interval = interval_;
         }
-        void set_configuration(const ToolConf& conf) override {
+        void load_configuration(const ToolConf& conf) override {
                 interval_ = conf.interval;
         }
         
+        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
 
-        const ToolID toolId = ToolID::SetHeight;
         
 private:
 	Widelands::HeightInterval interval_;

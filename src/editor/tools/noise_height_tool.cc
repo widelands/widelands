@@ -70,7 +70,7 @@ EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& pare
 	return a;
 }
 
-std::string EditorNoiseHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorNoiseHeightTool::format_conf_string_impl(EditorInteractive&, const ToolConf& conf) {
         std::ostringstream buf;
         buf << "noise height: [" << static_cast<int>(conf.interval.min) << "," << static_cast<int>(conf.interval.max) << "]";
         return buf.str();

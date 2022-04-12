@@ -42,6 +42,14 @@ struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_place_critter.png");
 	}
+
+        ToolID get_tool_id() override {
+                return ToolID::PlaceCritter;
+        }
+
+        void save_configuration_impl(ToolConf& conf, EditorInteractive& parent) override;
+        void load_configuration(const ToolConf& conf) override;
+        std::string format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) override;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_CRITTER_TOOL_H

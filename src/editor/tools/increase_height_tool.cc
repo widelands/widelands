@@ -58,8 +58,6 @@ EditorActionArgs EditorIncreaseHeightTool::format_args_impl(EditorInteractive& p
 	return a;
 }
 
-std::string EditorIncreaseHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorIncreaseHeightTool::format_conf_string_impl(EditorInteractive&, const ToolConf& conf) {
         return format(_("Increase/decrease height: %d, size: %d"), conf.change_by, conf.sel_radius);
 }
-
-        

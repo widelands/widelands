@@ -49,13 +49,7 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
         rebuild_list();
 
         list_.clicked.connect([this] {
-                                       // list_.get_selected();
-                                      log_dbg("LIST CLICKED: %s", list_.get_selected().c_str());
                                       list_item_clicked(list_.get_selected());
-                               });        
-
-        list_.selected.connect([this] (uint32_t num) {
-                                      log_dbg("LIST SELECTED: %d", num);
                                });        
 
 	initialization_complete();
@@ -66,15 +60,12 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string selected)
         if (conf == nullptr) {
                 return;
         }
-        log_dbg("Restoring: %d, (changeby: %d)", static_cast<int>((*conf).toolId), (*conf).change_by);
         eia().restore_tool_configuration(*conf);
         log_dbg("Restored: %s", selected.c_str());
 }
 
 
 void EditorToolhistoryOptionsMenu::rebuild_list() {
-
-        log_dbg("REBUILDING");
         const std::vector<std::string>& actions = history_tool_.get_list();
 
 	list_.clear();

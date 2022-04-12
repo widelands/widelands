@@ -33,6 +33,7 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "editor/tools/tool_conf.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -186,7 +187,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
-        
+
 	initialization_complete();
 }
 
@@ -374,7 +375,7 @@ void EditorInteractive::add_tool_menu() {
 }
 
 
-        
+
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
         switch (entry) {
 		case ToolMenuEntry::kChangeHeight:
@@ -602,13 +603,20 @@ void EditorInteractive::exit() {
 
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
-	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
+
+        EditorTool& current_tool = tools_->current();
+        EditorTool::ToolIndex subtool_idx = tools_->use_tool;
+
+	history_->do_action(current_tool, subtool_idx, *egbase().mutable_map(),
 	                    node_and_triangle, *this, should_draw);
 
 
         if (tool_settings_changed_) {
-                const ToolConf conf = tools_->current().get_configuration(*this);
-                if ( tools()->tool_history.add_configuration(tools_->current(), tools_->use_tool, conf, *this) ) {
+                ToolConf conf;
+                current_tool.save_configuration(conf, *this);
+                conf.sel_radius = get_sel_radius();
+                std::string name = current_tool.format_conf_string(subtool_idx, conf, *this);
+                if (tools()->tool_history.add_configuration(name, conf)) {
                         update_tool_history_window();
                 }
         }
@@ -620,14 +628,12 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 void EditorInteractive::update_tool_history_window() {
         UI::UniqueWindow* window = get_open_window_for_tool(ToolID::ToolHistory);
         if (window == nullptr) {
-          log_dbg("No open toolhistory window");
                 return;
         }
 
         EditorToolhistoryOptionsMenu* toolhistory_window =
                 dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
 
-        log_dbg("Updating toolhistory");
         toolhistory_window->update();
 }
 
@@ -1230,38 +1236,39 @@ EditorHistory& EditorInteractive::history() {
 
 
 /**
- * 
+ *
  **/
 void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
-        UI::UniqueWindow* window = get_open_window_for_tool(conf.toolId);
-        if (window == nullptr) {
-                log_dbg("No window open for tool %d", static_cast<int>(conf.toolId));
-          return;
-        }
+        EditorTool& tool = tools_->current();
+        tool.load_configuration(conf);
+        set_sel_radius_and_update_menu(conf.sel_radius);        
 
-        dynamic_cast<EditorToolOptionsMenu*>(window)->load_conf(conf);
+        
+        UI::UniqueWindow* window = get_open_window_for_tool(conf.tool_id);
+        if (window != nullptr) {
+                dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
+        }
 }
 
 
 /**
- * Returns open window for the given tool if it has a window and the window is open. 
- * Otherwises return nullptr.
+ * Returns open window for the given tool if it has a window and the window is open.
+ * Otherwise returns nullptr.
  **/
 UI::UniqueWindow*
-EditorInteractive::get_open_window_for_tool(ToolID toolId) {
-        const UI::UniqueWindow::Registry& window_registry = get_window_registry_for_tool(toolId);
+EditorInteractive::get_open_window_for_tool(ToolID tool_id) {
+        const UI::UniqueWindow::Registry& window_registry = get_window_registry_for_tool(tool_id);
 
         return window_registry.window;
 }
 
 /**
- * Returns open window for the given tool if it has a window and the window is open. 
- * Otherwises return nullptr.
+ * Returns window registry for tool id.
  **/
 UI::UniqueWindow::Registry&
-EditorInteractive::get_window_registry_for_tool(ToolID toolId) {
+EditorInteractive::get_window_registry_for_tool(ToolID tool_id) {
 
-        switch ( toolId ) {
+        switch (tool_id) {
         case ToolID::ToolHistory:
                 return tool_windows_.toolhistory;
         case ToolID::IncreaseHeight:
@@ -1289,12 +1296,11 @@ EditorInteractive::get_window_registry_for_tool(ToolID toolId) {
         case ToolID::SetPortSpace:
         case ToolID::UnsetPortSpace:
         case ToolID::SetOrigin:
-        case ToolID::Unset:                
+        case ToolID::Unset:
                 break;
         }
 
-        log_dbg("ID: %d", static_cast<int>(toolId));
+        log_dbg("ID: %d", static_cast<int>(tool_id));
 
         NEVER_HERE();
 }
-

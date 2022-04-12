@@ -23,31 +23,19 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool_action.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "editor/ui_menus/tool_toolhistory_options_menu.h"        
+#include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "ui_basic/unique_window.h"
 
-/// Sets the heights to random values. Changes surrounding nodes if necessary.
-// int32_t EditorHistoryTool::handle_click_impl(const Widelands::NodeAndTriangle<>&,
-//                                                  EditorInteractive&,
-//                                                  EditorActionArgs*,
-//                                                  Widelands::Map*) {
-// 	return 0;
-// }
-        
-        
-bool EditorHistoryTool::add_configuration(EditorTool& primary,
-                                          EditorTool::ToolIndex idx,
-                                          const ToolConf& conf,
-                                          EditorInteractive&) {
 
-        std::string str = primary.format_conf_string(idx, conf);
+bool EditorHistoryTool::add_configuration(const std::string& name, const ToolConf& conf) {
 
-	const auto ret = tool_settings_.insert(std::make_pair(str, conf));
+
+
+	const auto ret = tool_settings_.insert(std::make_pair(name, conf));
         const bool success = ret.second;
 
-        log_dbg("added configuration, primary %d, change by %d", static_cast<int>(conf.toolId), conf.change_by);
-        log_dbg("insert success? %i", static_cast<int>(success));
-        
+        log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool_id), name.c_str());
+
         return success;
 }
 
@@ -55,7 +43,7 @@ bool EditorHistoryTool::add_configuration(EditorTool& primary,
 const std::vector<std::string>&
 EditorHistoryTool::get_list() {
         keys_.clear();
-        
+
         for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
                 keys_.push_back(it->first);
         }

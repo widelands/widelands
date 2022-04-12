@@ -100,3 +100,42 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {
 	return EditorTool::format_args_impl(parent);
 }
+
+
+std::string EditorPlaceCritterTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
+        const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+        const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions = descriptions.critters();
+
+	std::string buf;
+	constexpr int max_string_size = 100;
+	int j = get_nr_enabled();
+	for (int i = 0; j && buf.size() < max_string_size; ++i) {
+		if (is_enabled(i)) {
+			if (j < get_nr_enabled()) {
+				buf += " | ";
+			}
+			buf += critter_descriptions.get(i).descname();
+			--j;
+		}
+	}
+
+        return format(_("Place critter: %s; size: %d"), buf, conf.sel_radius);
+}
+
+void EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
+        for (int i = 0; i < count(); i++) {
+                if (is_enabled(i)) {
+                        conf.bob_types.push_back(i);
+                }
+        }
+}
+
+
+void EditorPlaceCritterTool::load_configuration(const ToolConf& conf) {
+        disable_all();
+        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.bob_types.begin();
+        while (p != conf.bob_types.end()) {
+                enable(*p, true);
+                ++p;
+        }
+}

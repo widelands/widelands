@@ -91,19 +91,8 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 	select_correct_tool();
 }
 
-void EditorToolChangeHeightOptionsMenu::load_conf(const ToolConf& conf) {
-	switch (conf.toolId) {
-	        case ToolID::DecreaseHeight:
-        	case ToolID::IncreaseHeight:
-        	        change_by_.set_value(conf.change_by);
-                        update_change_by();
-	                break;
-	        case ToolID::SetHeight:
-	                set_to_.set_value(conf.set_to);
-                        update_set_to();
-	                break;
-	        default:
-	                NEVER_HERE();
-        }
+void EditorToolChangeHeightOptionsMenu::update_window() {
+        change_by_.set_value(increase_tool_.get_change_by());
+        set_to_.set_value(increase_tool_.set_tool().get_interval().min);
 }
 

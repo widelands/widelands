@@ -37,11 +37,9 @@ struct EditorHistoryTool : public EditorTool {
 	                          Widelands::Map*) override {
                 return 0;
         }
-                
-	bool add_configuration(EditorTool&,
-                               EditorTool::ToolIndex,
-                               const ToolConf& conf,                               
-                               EditorInteractive& parent);
+
+	bool add_configuration(const std::string& name,
+                               const ToolConf& conf);
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
@@ -49,9 +47,9 @@ struct EditorHistoryTool : public EditorTool {
 
         const std::vector<std::string>& get_list();
         const ToolConf* get_configuration_for(const std::string& key);
-        
-        const ToolID toolId = ToolID::ToolHistory;
-        
+
+        const ToolID tool_id = ToolID::ToolHistory;
+
 private:
         std::map<std::string, ToolConf> tool_settings_;
         std::vector<std::string> keys_;

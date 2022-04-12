@@ -76,6 +76,6 @@ EditorActionArgs EditorSetHeightTool::format_args_impl(EditorInteractive& parent
 	return a;
 }
 
-std::string EditorSetHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorSetHeightTool::format_conf_string_impl(EditorInteractive&, const ToolConf& conf) {
         return format(_("Set height: %d, size: %d"), conf.interval.min, conf.sel_radius);
 }

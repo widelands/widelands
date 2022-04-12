@@ -19,22 +19,26 @@
 #ifndef WL_EDITOR_TOOLS_TOOL_CONF_H
 #define WL_EDITOR_TOOLS_TOOL_CONF_H
 
-#include "editor/tools/tool.h"
+#include <list>
+#include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
+
+enum class ToolID;
 
 struct ToolConf {
         ToolConf();
-	ToolConf(EditorInteractive& base, ToolID toolId);
-        
-        ToolID toolId;
+	ToolConf(const ToolConf&) = default;
+	ToolConf& operator=(const ToolConf&) = default;
+
+        ToolID tool_id;
 	uint32_t sel_radius;
-  
+
         int32_t change_by;
 	Widelands::ResourceAmount set_to;
         Widelands::HeightInterval interval;
         std::list<Widelands::DescriptionIndex> terrain_types;
         std::list<Widelands::DescriptionIndex> immovable_types;
-        std::list<const Widelands::BobDescr*> bob_types;
+        std::list<Widelands::DescriptionIndex> bob_types;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

@@ -54,7 +54,10 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return spacing();
 	}
 
-        virtual void load_conf(const ToolConf&) {
+        /**
+         * Update window options to match tool settings
+         */
+        virtual void update_window() {
         }
         
 

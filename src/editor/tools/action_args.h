@@ -70,7 +70,7 @@ struct EditorActionArgs {
 
 	uint32_t refcount;
 
-        ToolID toolId;
+        ToolID tool_id;
         
 };
 

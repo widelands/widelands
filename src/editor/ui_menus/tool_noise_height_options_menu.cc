@@ -146,7 +146,7 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 }
 
 
-void EditorToolNoiseHeightOptionsMenu::load_conf(const ToolConf& conf) {
-        lower_.set_value(conf.interval.min);
-        upper_.set_value(conf.interval.max);
+void EditorToolNoiseHeightOptionsMenu::update_window() {
+        lower_.set_value(noise_tool_.get_interval().min);
+        upper_.set_value(noise_tool_.get_interval().max);
 }

@@ -21,6 +21,7 @@
 #include <sstream>
 
 #include "editor/editorinteractive.h"
+#include "logic/map_objects/world/terrain_description.h"
 #include "logic/maptriangleregion.h"
 
 using Widelands::TCoords;
@@ -93,6 +94,40 @@ EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& paren
 	return EditorTool::format_args_impl(parent);
 }
 
-std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) {
-        return format(_("Set terrain: %s, size: %d"), "TODO", conf.sel_radius);
+std::string EditorSetTerrainTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
+        const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+        const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions = descriptions.terrains();
+
+	std::string buf;
+	constexpr int max_string_size = 100;
+	int j = get_nr_enabled();
+	for (int i = 0; j && buf.size() < max_string_size; ++i) {
+		if (is_enabled(i)) {
+			if (j < get_nr_enabled()) {
+				buf += " | ";
+			}
+			buf += terrain_descriptions.get(i).descname();
+			--j;
+		}
+	}
+
+        return format(_("Set terrain: %s; size: %d"), buf, conf.sel_radius + 1);
+}
+
+void EditorSetTerrainTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
+        for (int i = 0; i < count(); i++) {
+                if (is_enabled(i)) {
+                        conf.terrain_types.push_back(i);
+                }
+        }
+}
+
+
+void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
+        disable_all();
+        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.terrain_types.begin();
+        while (p != conf.terrain_types.end()) {
+                enable(*p, true);
+                ++p;
+        }
 }

@@ -40,7 +40,7 @@ enum class ToolID {
         DeleteImmovable,
         PlaceImmovable,
         SetStartingPos,
-        PlaceCritter,        
+        PlaceCritter,
         DeleteCritter,
         DecreaseResources,
         SetResources,
@@ -49,8 +49,9 @@ enum class ToolID {
         UnsetPortSpace,
         SetOrigin,
         Resize,
-        ToolHistory
+        ToolHistory,
 };
+
 
 
 /**
@@ -103,11 +104,11 @@ public:
 	}
 
         /// Returns a string representing the given configuration
-        std::string format_conf_string(const ToolIndex i, const ToolConf& conf) {
-                assert(conf.toolId == toolId);
-		return (i == First ? *this : i == Second ? second_ : third_).format_conf_string_impl(conf);
+        std::string format_conf_string(const ToolIndex i, const ToolConf& conf, EditorInteractive& parent) {
+                assert(conf.tool_id == get_tool_id());
+		return (i == First ? *this : i == Second ? second_ : third_).format_conf_string_impl(parent, conf);
 	}
-  
+
 	bool is_undoable() {
 		return undoable_;
 	}
@@ -118,8 +119,8 @@ public:
 		return EditorActionArgs(parent);
 	}
 
-        virtual std::string format_conf_string_impl(const ToolConf&) {
-		return this->name_;
+        virtual std::string format_conf_string_impl(EditorInteractive&, const ToolConf&) {
+		return name_;
 	}
 
         virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
@@ -152,24 +153,25 @@ public:
 		return false;
 	}
 
-        const ToolConf get_configuration(EditorInteractive& base) {
-                ToolConf conf(base, toolId);
-                get_configuration_impl(conf);
-                return conf;
+        void save_configuration(ToolConf& conf, EditorInteractive& base) {
+                conf.tool_id = get_tool_id();
+                save_configuration_impl(conf, base);
         }
 
-        virtual void get_configuration_impl(ToolConf&) {
+        virtual void save_configuration_impl(ToolConf&, EditorInteractive&) {
         }
-        
-        virtual void set_configuration(const ToolConf&) {
+
+        virtual void load_configuration(const ToolConf&) {
         }
 
 	std::string get_name() {
         	return name_;
 	}
 
-        const ToolID toolId = ToolID::Unset;
-        
+        virtual ToolID get_tool_id() {
+                return ToolID::Unset;
+        }
+
 protected:
 	EditorTool &second_, &third_;
 	bool undoable_;
@@ -183,4 +185,3 @@ private:
 
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_H
-
