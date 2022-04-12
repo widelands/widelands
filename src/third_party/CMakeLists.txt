@@ -1,22 +1,18 @@
 include(FindPkgConfig)
-set(MINIZIP_FOUND TRUE)
 if(PKG_CONFIG_FOUND)
-    pkg_check_modules(MINIZIP minizip)
-    # add the target library and include dirs MINIZIP_LIBRARIES and MINIZIP_INCLUDE_DIRS and MINIZIP_CFLAGS (if necessary)
-    # https://cmake.org/cmake/help/latest/module/FindPkgConfig.html?highlight=pkgconfig
+  pkg_check_modules(MINIZIP minizip)
 endif()
 
-#if(NOT MINIZIP_FOUND)
-if(MINIZIP_FOUND) # use even if found because it hasn't been added yet
-    wl_library(third_party_minizip
-      THIRD_PARTY
-      SRCS
-        minizip/ioapi.h
-        minizip/unzip.cc
-        minizip/unzip.h
-        minizip/zip.h
-      USES_ZLIB
-    )
+if(NOT MINIZIP_FOUND)
+  wl_library(MINIZIP_STATIC_LIBRARIES
+    THIRD_PARTY
+    SRCS
+      minizip/ioapi.h
+      minizip/unzip.cc
+      minizip/unzip.h
+      minizip/zip.h
+    USES_ZLIB
+  )
 endif()
 
 wl_library(third_party_sha1
