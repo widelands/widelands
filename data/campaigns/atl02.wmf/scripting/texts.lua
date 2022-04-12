@@ -187,7 +187,7 @@ initial_messages = {
          _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[All of us were fiercely afraid. We expected the other ships to be drowned as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
+         _([[All of us were fiercely afraid. We expected the other ships to be sunken as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
       h=500,
    },
    {
