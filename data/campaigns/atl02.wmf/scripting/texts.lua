@@ -405,7 +405,7 @@ mining_established_2 = {
    }
 }
 
-maletus_defeated = {
+maletus_defeated_1 = {
    {
       title = _("Empire Defeated"),
       body = sidolus(

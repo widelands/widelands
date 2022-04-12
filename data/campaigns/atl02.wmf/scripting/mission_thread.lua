@@ -225,7 +225,7 @@ function maletus_defeated()
    while not Maletus.defeated do sleep(6000) end
    defeat_maletus.done = true
    if trade.done == true then
-      msg_boxes(maletus_defeated)
+      msg_boxes(maletus_defeated_1)
    else
       msg_boxes(maletus_defeated_2)
       while not trade.done == true do
@@ -305,7 +305,7 @@ end
 
 function check_kalitath_defeated()
    defeat = p1.defeated == true
-   while not defeat or maletus_defeated.done == true do
+   while not defeat or defeat_maletus.done == true do
       sleep(6000)
       defeat = p1.defeated == true
       if Kalitath.defeated then
