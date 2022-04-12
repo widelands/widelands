@@ -221,7 +221,7 @@ initial_messages1= {
       title = _("Jundlina gives orders"),
       body = jundlina(_("Jundlina decides"),
          -- TRANSLATORS: Jundlina
-         _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will provide us with good tools in no time.]]))
+         _([[As we founded a port here, we can now plan our settlement. We still have plenty of iron ore, so a toolsmithy and a smelting works will quickly provide us with good tools.]]))
          .. new_objectives(obj_tools),
       h=500,
    },
