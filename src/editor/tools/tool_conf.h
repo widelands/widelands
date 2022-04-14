@@ -23,14 +23,14 @@
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 
-enum class ToolID;
+class EditorTool;
 
 struct ToolConf {
         ToolConf();
 	ToolConf(const ToolConf&) = default;
 	ToolConf& operator=(const ToolConf&) = default;
 
-        ToolID tool_id;
+        EditorTool* tool;
 	uint32_t sel_radius;
 
         int32_t change_by;
@@ -38,7 +38,7 @@ struct ToolConf {
         Widelands::HeightInterval interval;
         std::list<Widelands::DescriptionIndex> terrain_types;
         std::list<Widelands::DescriptionIndex> immovable_types;
-        std::list<Widelands::DescriptionIndex> bob_types;
+        std::list<Widelands::DescriptionIndex> critter_types;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

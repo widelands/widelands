@@ -611,9 +611,15 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 	                    node_and_triangle, *this, should_draw);
 
 
-        if (tool_settings_changed_) {
-                ToolConf conf;
-                current_tool.save_configuration(conf, *this);
+	set_need_save(true);
+
+        if (!tool_settings_changed_) {
+                return;
+        }
+
+        ToolConf conf;
+        if (current_tool.save_configuration(conf, *this)) {
+
                 conf.sel_radius = get_sel_radius();
                 std::string name = current_tool.format_conf_string(subtool_idx, conf, *this);
                 if (tools()->tool_history.add_configuration(name, conf)) {
@@ -621,7 +627,6 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
                 }
         }
 
-	set_need_save(true);
         tool_settings_changed_ = false;
 }
 
@@ -1239,12 +1244,14 @@ EditorHistory& EditorInteractive::history() {
  *
  **/
 void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
-        EditorTool& tool = tools_->current();
-        tool.load_configuration(conf);
-        set_sel_radius_and_update_menu(conf.sel_radius);        
+        assert(conf.tool != nullptr);
 
-        
-        UI::UniqueWindow* window = get_open_window_for_tool(conf.tool_id);
+        EditorTool& tool = *conf.tool;
+        tool.load_configuration(conf);
+        select_tool(tool, EditorTool::First);
+        set_sel_radius_and_update_menu(conf.sel_radius);
+
+        UI::UniqueWindow* window = get_open_window_for_tool(tool.get_tool_id());
         if (window != nullptr) {
                 dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
         }
@@ -1303,4 +1310,10 @@ EditorInteractive::get_window_registry_for_tool(ToolID tool_id) {
         log_dbg("ID: %d", static_cast<int>(tool_id));
 
         NEVER_HERE();
+}
+
+
+void EditorInteractive::set_sel_radius(const uint32_t n) {
+        InteractiveBase::set_sel_radius(n);
+        tool_settings_changed_ = true;
 }

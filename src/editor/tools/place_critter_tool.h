@@ -47,7 +47,7 @@ struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
                 return ToolID::PlaceCritter;
         }
 
-        void save_configuration_impl(ToolConf& conf, EditorInteractive& parent) override;
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive& parent) override;
         void load_configuration(const ToolConf& conf) override;
         std::string format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) override;
 };

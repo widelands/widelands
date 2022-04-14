@@ -122,19 +122,28 @@ std::string EditorPlaceCritterTool::format_conf_string_impl(EditorInteractive& p
         return format(_("Place critter: %s; size: %d"), buf, conf.sel_radius);
 }
 
-void EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
-        for (int i = 0; i < count(); i++) {
+bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
+	int j = get_nr_enabled();
+
+        if (j == 0) {
+                return false;
+        }
+
+	for (int i = 0; j; ++i) {
                 if (is_enabled(i)) {
-                        conf.bob_types.push_back(i);
+                        conf.critter_types.push_back(i);
+                        --j;
                 }
         }
+
+        return true;
 }
 
 
 void EditorPlaceCritterTool::load_configuration(const ToolConf& conf) {
         disable_all();
-        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.bob_types.begin();
-        while (p != conf.bob_types.end()) {
+        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.critter_types.begin();
+        while (p != conf.critter_types.end()) {
                 enable(*p, true);
                 ++p;
         }

@@ -115,19 +115,28 @@ std::string EditorPlaceImmovableTool::format_conf_string_impl(EditorInteractive&
         return format(_("Place immovable: %s; size: %d"), buf, conf.sel_radius);
 }
 
-void EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
-        for (int i = 0; i < count(); i++) {
+bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
+	int j = get_nr_enabled();
+
+        if (j == 0) {
+                return false;
+        }
+
+	for (int i = 0; j; ++i) {
                 if (is_enabled(i)) {
-                        conf.bob_types.push_back(i);
+                        conf.immovable_types.push_back(i);
+                        --j;
                 }
         }
+
+        return true;
 }
 
 
 void EditorPlaceImmovableTool::load_configuration(const ToolConf& conf) {
         disable_all();
-        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.bob_types.begin();
-        while (p != conf.bob_types.end()) {
+        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.immovable_types.begin();
+        while (p != conf.immovable_types.end()) {
                 enable(*p, true);
                 ++p;
         }

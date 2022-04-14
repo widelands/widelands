@@ -105,7 +105,7 @@ public:
 
         /// Returns a string representing the given configuration
         std::string format_conf_string(const ToolIndex i, const ToolConf& conf, EditorInteractive& parent) {
-                assert(conf.tool_id == get_tool_id());
+                assert(conf.tool == this);
 		return (i == First ? *this : i == Second ? second_ : third_).format_conf_string_impl(parent, conf);
 	}
 
@@ -153,12 +153,14 @@ public:
 		return false;
 	}
 
-        void save_configuration(ToolConf& conf, EditorInteractive& base) {
-                conf.tool_id = get_tool_id();
-                save_configuration_impl(conf, base);
+        bool save_configuration(ToolConf& conf, EditorInteractive& base) {
+                conf.tool = this;
+                return save_configuration_impl(conf, base);
         }
 
-        virtual void save_configuration_impl(ToolConf&, EditorInteractive&) {
+        // Returns false if didn't save anything
+        virtual bool save_configuration_impl(ToolConf&, EditorInteractive&) {
+                return false;
         }
 
         virtual void load_configuration(const ToolConf&) {

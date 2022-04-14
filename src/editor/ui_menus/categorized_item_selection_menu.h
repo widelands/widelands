@@ -188,16 +188,16 @@ void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_label() {
 
 template <typename DescriptionType, typename ToolType>
 void CategorizedItemSelectionMenu<DescriptionType, ToolType>::update_selection() {
-        protect_against_recursive_select_ = true;        
+        protect_against_recursive_select_ = true;
 
         const int32_t size = checkboxes_.size();
         for (int32_t i = 0; i < size; i++) {
                 checkboxes_[i]->set_state(tool_->is_enabled(i));
-        }                
-        
+        }
+
         update_label();
 
-        protect_against_recursive_select_ = false;        
+        protect_against_recursive_select_ = false;
 }
 
 

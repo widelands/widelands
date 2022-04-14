@@ -114,6 +114,7 @@ public:
 
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
+  	void set_sel_radius(uint32_t) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 	void stop_painting();
 
@@ -164,7 +165,7 @@ public:
         // Returns window for given tool if it's open, otherwise return nullptr
         UI::UniqueWindow* get_open_window_for_tool(ToolID toolId);
         UI::UniqueWindow::Registry& get_window_registry_for_tool(ToolID toolId);
-        void restore_tool_configuration(const ToolConf& conf);  
+        void restore_tool_configuration(const ToolConf& conf);
 
 	// For referencing the items in toolmenu_
 	enum class ToolWindow {
@@ -178,7 +179,7 @@ public:
 		kMapSize,
                 kToolHistory,
 	};
-                
+
 
 private:
 	// For referencing the items in mainmenu_
@@ -281,7 +282,7 @@ private:
 
 	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
 	   editor_categories_;
-     
+
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Tools menu on the toolbar
@@ -304,7 +305,7 @@ private:
         /// Set to true when tool settings are changed in tool window.
         /// Set to false when the tool is used with the new settings.
         bool tool_settings_changed_ = true;
-                
+
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

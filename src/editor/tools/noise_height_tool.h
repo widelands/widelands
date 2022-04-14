@@ -56,6 +56,13 @@ struct EditorNoiseHeightTool : public EditorTool {
 		return set_tool_;
 	}
 
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+                conf.interval = interval_;
+                return true;
+        }
+        void load_configuration(const ToolConf& conf) override {
+                interval_ = conf.interval;
+        }
         std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
 
 private:

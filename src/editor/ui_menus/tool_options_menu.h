@@ -59,7 +59,7 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
          */
         virtual void update_window() {
         }
-        
+
 
 private:
 	EditorInteractive& parent_;

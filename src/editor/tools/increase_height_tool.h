@@ -66,8 +66,9 @@ struct EditorIncreaseHeightTool : public EditorTool {
                 return ToolID::IncreaseHeight;
         }
 
-        void save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.change_by = change_by_;
+                return true;
         }
         void load_configuration(const ToolConf& conf) override {
                 change_by_ = conf.change_by;

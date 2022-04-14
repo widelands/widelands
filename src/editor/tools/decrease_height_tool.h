@@ -37,7 +37,7 @@ struct EditorDecreaseHeightTool : public EditorTool {
 	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
-        
+
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor//fsel_editor_decrease_height.png");
 	}
@@ -49,13 +49,14 @@ struct EditorDecreaseHeightTool : public EditorTool {
 		change_by_ = n;
 	}
 
-        void save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.change_by = change_by_;
+                return true;
         }
         void load_configuration(const ToolConf& conf) override {
                 change_by_ = conf.change_by;
         }
-        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;        
+        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
 
         ToolID get_tool_id() override {
                 return ToolID::DecreaseHeight;

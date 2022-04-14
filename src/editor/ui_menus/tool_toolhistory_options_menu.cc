@@ -36,7 +36,7 @@ inline EditorInteractive& EditorToolhistoryOptionsMenu::eia() const {
 EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& parent,
                                                            EditorHistoryTool& history_tool,
                                                            UI::UniqueWindow::Registry& registry)
-     : EditorToolOptionsMenu(parent, registry, 350, 100, _("Tool History"), history_tool),
+     : EditorToolOptionsMenu(parent, registry, 500, 100, _("Tool History"), history_tool),
        history_tool_(history_tool),
        margin_(4),
        box_width_(get_inner_w() - 2 * margin_),
@@ -50,19 +50,28 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 
         list_.clicked.connect([this] {
                                       list_item_clicked(list_.get_selected());
-                               });        
+                               });
 
 	initialization_complete();
 }
 
+
 void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string selected) {
-	const ToolConf* conf = history_tool_.get_configuration_for(selected);
-        if (conf == nullptr) {
-                return;
+
+        if (SDL_GetModState() & KMOD_CTRL) {
+                history_tool_.remove_configuration(selected);
+                rebuild_list();
+        } else if (SDL_GetModState() & KMOD_SHIFT) {
+
+        } else {
+                const ToolConf* conf = history_tool_.get_configuration_for(selected);
+                assert(conf != nullptr);
+                eia().restore_tool_configuration(*conf);
+                log_dbg("Restored: %s", selected.c_str());
         }
-        eia().restore_tool_configuration(*conf);
-        log_dbg("Restored: %s", selected.c_str());
+
 }
+
 
 
 void EditorToolhistoryOptionsMenu::rebuild_list() {
@@ -73,7 +82,7 @@ void EditorToolhistoryOptionsMenu::rebuild_list() {
         int count = 0;
         for (auto it = actions.begin(); it != actions.end(); ++it) {
                 list_.add(*it, *it);
-                
+
                 count++;
         }
 }

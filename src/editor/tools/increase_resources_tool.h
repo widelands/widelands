@@ -78,7 +78,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorSetResourcesTool& set_tool() const {
 		return set_tool_;
 	}
-        
+
         const ToolID tool_id = ToolID::IncreaseResources;
 
 private:

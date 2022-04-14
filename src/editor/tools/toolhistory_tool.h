@@ -47,8 +47,11 @@ struct EditorHistoryTool : public EditorTool {
 
         const std::vector<std::string>& get_list();
         const ToolConf* get_configuration_for(const std::string& key);
+        void remove_configuration(const std::string& key);
 
-        const ToolID tool_id = ToolID::ToolHistory;
+        ToolID get_tool_id() override {
+                return ToolID::ToolHistory;
+        }
 
 private:
         std::map<std::string, ToolConf> tool_settings_;

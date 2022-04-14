@@ -114,12 +114,21 @@ std::string EditorSetTerrainTool::format_conf_string_impl(EditorInteractive& par
         return format(_("Set terrain: %s; size: %d"), buf, conf.sel_radius + 1);
 }
 
-void EditorSetTerrainTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
-        for (int i = 0; i < count(); i++) {
+bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf, EditorInteractive&) {
+	int j = get_nr_enabled();
+
+        if (j == 0) {
+                return false;
+        }
+
+	for (int i = 0; j; ++i) {
                 if (is_enabled(i)) {
                         conf.terrain_types.push_back(i);
+                        --j;
                 }
         }
+
+        return true;
 }
 
 

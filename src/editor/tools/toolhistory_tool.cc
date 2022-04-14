@@ -34,7 +34,7 @@ bool EditorHistoryTool::add_configuration(const std::string& name, const ToolCon
 	const auto ret = tool_settings_.insert(std::make_pair(name, conf));
         const bool success = ret.second;
 
-        log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool_id), name.c_str());
+        log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_tool_id()), name.c_str());
 
         return success;
 }
@@ -57,4 +57,8 @@ const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key)
         }
 
         return nullptr;
+}
+
+void EditorHistoryTool::remove_configuration(const std::string& key) {
+        tool_settings_.erase(key);
 }

@@ -49,10 +49,10 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
                 return ToolID::SetTerrain;
         }
 
-        void save_configuration_impl(ToolConf& conf, EditorInteractive&) override;
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override;
         void load_configuration(const ToolConf& conf) override;
         std::string format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) override;
-        
+
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H
