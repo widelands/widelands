@@ -19,10 +19,17 @@
 #ifndef WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H
 #define WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H
 
-#include <map>
+#include <list>
 #include <vector>
 
 #include "editor/tools/tool.h"
+
+struct ListItem {
+        ListItem(std::string key, ToolConf data) : key(key), data(data) {}
+        std::string key;
+        ToolConf data;
+        bool sticky;
+};
 
 
 /// History of previously used tool settings
@@ -54,9 +61,10 @@ struct EditorHistoryTool : public EditorTool {
         }
 
 private:
-        std::map<std::string, ToolConf> tool_settings_;
+        std::list<ListItem>::iterator find_item(const std::string& key);        
+        std::list<ListItem> tool_settings_;
         std::vector<std::string> keys_;
-
+        const unsigned int MAX_SIZE = 15;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H

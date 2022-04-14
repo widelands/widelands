@@ -27,38 +27,58 @@
 #include "ui_basic/unique_window.h"
 
 
-bool EditorHistoryTool::add_configuration(const std::string& name, const ToolConf& conf) {
+bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf& conf) {
 
+        ListItem item(key, conf);
 
+        if (find_item(key) != tool_settings_.end()) {
+                return false;
+        }
+        
+	tool_settings_.push_front(item);
+        log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_tool_id()), key.c_str());
 
-	const auto ret = tool_settings_.insert(std::make_pair(name, conf));
-        const bool success = ret.second;
+        if (tool_settings_.size() > static_cast<long unsigned int>(MAX_SIZE)) {
+                //truncate();
+        }
 
-        log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_tool_id()), name.c_str());
-
-        return success;
+        return true;
 }
 
 
 const std::vector<std::string>&
 EditorHistoryTool::get_list() {
         keys_.clear();
-
-        for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
-                keys_.push_back(it->first);
+        
+        for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
+                keys_.push_back(it->key);
         }
 
         return keys_;
 }
 
 const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key) {
-        if (tool_settings_.count(key) == 1) {
-                return &tool_settings_[key];
+        auto it = find_item(key);
+        if (it != tool_settings_.end()) {
+                return &it->data;
         }
 
         return nullptr;
 }
 
 void EditorHistoryTool::remove_configuration(const std::string& key) {
-        tool_settings_.erase(key);
+        auto it = find_item(key);
+        if (it != tool_settings_.end()) {
+                tool_settings_.erase(it);
+        }
+}
+
+std::list<ListItem>::iterator EditorHistoryTool::find_item(const std::string& key) {
+        for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
+                if (it->key == key) {
+                        return it;
+                }
+        }
+
+        return tool_settings_.end();
 }
