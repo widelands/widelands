@@ -39,25 +39,23 @@ bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf
         log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_tool_id()), key.c_str());
 
         if (tool_settings_.size() > static_cast<long unsigned int>(MAX_SIZE)) {
-                //truncate();
+                truncate();
         }
 
         return true;
 }
 
-
-const std::vector<std::string>&
-EditorHistoryTool::get_list() {
-        keys_.clear();
-        
-        for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
-                keys_.push_back(it->key);
-        }
-
-        return keys_;
+std::list<ListItem>::iterator EditorHistoryTool::begin() {
+        return tool_settings_.begin();
 }
 
+std::list<ListItem>::iterator EditorHistoryTool::end() {
+        return tool_settings_.end();
+}
+
+
 const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key) {
+        log_dbg("get conf for %s", key.c_str());
         auto it = find_item(key);
         if (it != tool_settings_.end()) {
                 return &it->data;
@@ -73,6 +71,13 @@ void EditorHistoryTool::remove_configuration(const std::string& key) {
         }
 }
 
+void EditorHistoryTool::toggle_sticky(const std::string& key) {
+        auto it = find_item(key);
+        if (it != tool_settings_.end()) {
+                it->sticky = !it->sticky;
+        }
+}
+
 std::list<ListItem>::iterator EditorHistoryTool::find_item(const std::string& key) {
         for (auto it = tool_settings_.begin(); it != tool_settings_.end(); ++it) {
                 if (it->key == key) {
@@ -81,4 +86,20 @@ std::list<ListItem>::iterator EditorHistoryTool::find_item(const std::string& ke
         }
 
         return tool_settings_.end();
+}
+
+
+void EditorHistoryTool::truncate() {
+        int count = tool_settings_.size();
+        if (count <= MAX_SIZE) {
+                return;
+        }
+        
+        for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
+                if (count > MAX_SIZE && !it->sticky) {
+                        // remove last
+                        tool_settings_.erase((++it).base());
+                        count--;
+                }
+        }
 }

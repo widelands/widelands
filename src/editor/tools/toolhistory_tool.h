@@ -25,7 +25,7 @@
 #include "editor/tools/tool.h"
 
 struct ListItem {
-        ListItem(std::string key, ToolConf data) : key(key), data(data) {}
+        ListItem(std::string key, ToolConf data) : key(key), data(data), sticky(false) {}
         std::string key;
         ToolConf data;
         bool sticky;
@@ -37,6 +37,8 @@ struct EditorHistoryTool : public EditorTool {
 	EditorHistoryTool()
 	   : EditorTool(*this, *this) {
 	}
+
+        
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                          EditorInteractive&,
@@ -60,11 +62,17 @@ struct EditorHistoryTool : public EditorTool {
                 return ToolID::ToolHistory;
         }
 
+        void toggle_sticky(const std::string& key);
+        std::list<ListItem>::iterator begin();
+        std::list<ListItem>::iterator end();
+        
+
 private:
-        std::list<ListItem>::iterator find_item(const std::string& key);        
+        std::list<ListItem>::iterator find_item(const std::string& key);
+        void truncate();
         std::list<ListItem> tool_settings_;
         std::vector<std::string> keys_;
-        const unsigned int MAX_SIZE = 15;
+        const int MAX_SIZE = 3;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H

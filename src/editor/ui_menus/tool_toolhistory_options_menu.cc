@@ -62,7 +62,8 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string selected)
                 history_tool_.remove_configuration(selected);
                 rebuild_list();
         } else if (SDL_GetModState() & KMOD_SHIFT) {
-
+                history_tool_.toggle_sticky(selected);
+                rebuild_list();
         } else {
                 const ToolConf* conf = history_tool_.get_configuration_for(selected);
                 assert(conf != nullptr);
@@ -73,15 +74,16 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string selected)
 }
 
 
-
 void EditorToolhistoryOptionsMenu::rebuild_list() {
-        const std::vector<std::string>& actions = history_tool_.get_list();
-
 	list_.clear();
 
         int count = 0;
-        for (auto it = actions.begin(); it != actions.end(); ++it) {
-                list_.add(*it, *it);
+        for (auto it = history_tool_.begin(); it != history_tool_.end(); ++it) {
+                if (it->sticky) {
+                        list_.add("+ " + it->key, it->key);
+                } else {
+                        list_.add(it->key, it->key);
+                }
 
                 count++;
         }
