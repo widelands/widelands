@@ -1246,7 +1246,7 @@ EditorHistory& EditorInteractive::history() {
 void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
         assert(conf.tool != nullptr);
 
-        EditorTool& primary = *conf.primary;        
+        EditorTool& primary = *conf.primary;
         EditorTool& tool = *conf.tool;
         primary.load_configuration(conf);
         select_tool(primary, EditorTool::First);
@@ -1296,8 +1296,6 @@ EditorInteractive::get_registry_for_window(WindowID window_id) {
         case WindowID::Unset:
                 break;
         }
-
-        log_dbg("ID: %d", static_cast<int>(window_id));
 
         NEVER_HERE();
 }

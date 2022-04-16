@@ -34,7 +34,7 @@ bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf
         if (find_item(key) != tool_settings_.end()) {
                 return false;
         }
-        
+
 	tool_settings_.push_front(item);
         log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_window_id()), key.c_str());
 
@@ -55,7 +55,6 @@ std::list<ListItem>::iterator EditorHistoryTool::end() {
 
 
 const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key) {
-        log_dbg("get conf for %s", key.c_str());
         auto it = find_item(key);
         if (it != tool_settings_.end()) {
                 return &it->data;
@@ -94,7 +93,7 @@ void EditorHistoryTool::truncate() {
         if (count <= MAX_SIZE) {
                 return;
         }
-        
+
         for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
                 if (count > MAX_SIZE && !it->sticky) {
                         // remove last

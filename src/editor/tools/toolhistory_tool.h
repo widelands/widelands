@@ -38,7 +38,7 @@ struct EditorHistoryTool : public EditorTool {
 	   : EditorTool(*this, *this) {
 	}
 
-        
+
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
 	                          EditorInteractive&,
@@ -65,7 +65,7 @@ struct EditorHistoryTool : public EditorTool {
         void toggle_sticky(const std::string& key);
         std::list<ListItem>::iterator begin();
         std::list<ListItem>::iterator end();
-        
+
 
 private:
         std::list<ListItem>::iterator find_item(const std::string& key);

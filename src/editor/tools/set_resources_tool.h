@@ -70,7 +70,7 @@ struct EditorSetResourcesTool : public EditorTool {
         WindowID get_window_id() override {
                 return WindowID::ChangeResources;
         }
-        
+
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.resource = cur_res_;
                 conf.set_to = set_to_;

@@ -37,7 +37,7 @@ enum class WindowID {
         NoiseHeight,
         Critters,
         Immovables,
-        Resize,        
+        Resize,
         ToolHistory,
 };
 
