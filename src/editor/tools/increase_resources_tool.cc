@@ -73,3 +73,12 @@ EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive
 	a.current_resource = cur_res_;
 	return a;
 }
+
+std::string EditorIncreaseResourcesTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
+        std::string resource = parent.egbase()
+           .descriptions()
+           .get_resource_descr(cur_res_)
+           ->descname();
+           
+        return format(_("Increase/decrease %s: %d; size: %d"), resource, conf.change_by, conf.sel_radius + 1);
+}

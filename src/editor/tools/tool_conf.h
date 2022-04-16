@@ -30,7 +30,9 @@ struct ToolConf {
 	ToolConf(const ToolConf&) = default;
 	ToolConf& operator=(const ToolConf&) = default;
 
+        EditorTool* primary;
         EditorTool* tool;
+
 	uint32_t sel_radius;
 
         int32_t change_by;
@@ -39,6 +41,7 @@ struct ToolConf {
         std::list<Widelands::DescriptionIndex> terrain_types;
         std::list<Widelands::DescriptionIndex> immovable_types;
         std::list<Widelands::DescriptionIndex> critter_types;
+        Widelands::DescriptionIndex resource;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

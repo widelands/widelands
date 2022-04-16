@@ -79,7 +79,26 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 		return set_tool_;
 	}
 
-        const ToolID tool_id = ToolID::IncreaseResources;
+        ToolID get_tool_id() override {
+                return ToolID::IncreaseResources;
+        }
+
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+                conf.resource = cur_res_;
+                conf.change_by = change_by_;
+                return true;
+        }
+        void load_configuration(const ToolConf& conf) override {
+                // Resource type needs to load for all subtools, because the window refresh
+                // doesn't know which subtools configuration changed.
+                cur_res_ = conf.resource;
+                if (conf.tool == this) {
+                        change_by_ = conf.change_by;
+                }
+                decrease_tool_.load_configuration(conf);
+                set_tool_.load_configuration(conf);
+        }
+        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
 
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;

@@ -56,6 +56,10 @@ struct EditorNoiseHeightTool : public EditorTool {
 		return set_tool_;
 	}
 
+        ToolID get_tool_id() override {
+                return ToolID::NoiseHeight;
+        }
+
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
                 conf.interval = interval_;
                 return true;

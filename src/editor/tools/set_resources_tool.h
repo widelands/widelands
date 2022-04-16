@@ -67,6 +67,23 @@ struct EditorSetResourcesTool : public EditorTool {
 		cur_res_ = res;
 	}
 
+        ToolID get_tool_id() override {
+                return ToolID::SetResources;
+        }
+        
+        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+                conf.resource = cur_res_;
+                conf.set_to = set_to_;
+                return true;
+        }
+        void load_configuration(const ToolConf& conf) override {
+                cur_res_ = conf.resource;
+                if (conf.tool == this) {
+                        set_to_ = conf.set_to;
+                }
+        }
+        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
+
 private:
 	Widelands::DescriptionIndex cur_res_;
 	Widelands::ResourceAmount set_to_;

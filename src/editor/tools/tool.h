@@ -103,12 +103,6 @@ public:
 		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl(parent);
 	}
 
-        /// Returns a string representing the given configuration
-        std::string format_conf_string(const ToolIndex i, const ToolConf& conf, EditorInteractive& parent) {
-                assert(conf.tool == this);
-		return (i == First ? *this : i == Second ? second_ : third_).format_conf_string_impl(parent, conf);
-	}
-
 	bool is_undoable() {
 		return undoable_;
 	}
@@ -153,9 +147,14 @@ public:
 		return false;
 	}
 
-        bool save_configuration(ToolConf& conf, EditorInteractive& base) {
-                conf.tool = this;
-                return save_configuration_impl(conf, base);
+        virtual ToolID get_tool_id() {
+                return ToolID::Unset;
+        }
+
+        bool save_configuration(const ToolIndex i, ToolConf& conf, EditorInteractive& base) {
+                conf.primary = this;
+                conf.tool = (i == First ? this : i == Second ? &second_ : &third_);
+                return conf.tool->save_configuration_impl(conf, base);
         }
 
         // Returns false if didn't save anything
@@ -170,9 +169,13 @@ public:
         	return name_;
 	}
 
-        virtual ToolID get_tool_id() {
-                return ToolID::Unset;
-        }
+        /// Returns a string representing the given configuration
+        std::string format_conf_string(const ToolConf& conf, EditorInteractive& parent) {
+                assert(conf.tool == this);
+		return this->format_conf_string_impl(parent, conf);
+	}
+
+
 
 protected:
 	EditorTool &second_, &third_;

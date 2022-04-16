@@ -92,3 +92,11 @@ Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
 	}
 	return Widelands::NodeCaps::CAPS_NONE;
 }
+
+std::string EditorSetResourcesTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
+        std::string resource = parent.egbase()
+           .descriptions()
+           .get_resource_descr(cur_res_)
+           ->descname();
+        return format(_("Set resource %s: %d; size: %d"), resource, static_cast<int>(conf.set_to), conf.sel_radius + 1);
+}
