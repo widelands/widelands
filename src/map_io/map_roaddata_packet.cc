@@ -97,11 +97,11 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.cost_[0] = fr.unsigned_32();
 					road.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
-					if (!nr_steps) {
+					if (nr_steps == 0u) {
 						throw GameDataError("nr_steps = 0");
 					}
 					Path p(road.flags_[0]->get_position());
-					for (Path::StepVector::size_type i = nr_steps; i; --i) {
+					for (Path::StepVector::size_type i = nr_steps; i != 0u; --i) {
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
@@ -116,7 +116,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					road.link_into_flags(game, true);
 
 					uint32_t const count = fr.unsigned_32();
-					if (!count) {
+					if (count == 0u) {
 						throw GameDataError("no carrier slot");
 					}
 
@@ -135,7 +135,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							carrier = nullptr;
 						}
 
-						if (fr.unsigned_8()) {
+						if (fr.unsigned_8() != 0u) {
 							(carrier_request =
 							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
 							   ->read(fr, game, mol);
@@ -149,7 +149,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 						assert(!road.carrier_slots_[i].carrier.get(egbase));
 						road.carrier_slots_[i].carrier = carrier;
-						if (carrier || carrier_request) {
+						if ((carrier != nullptr) || (carrier_request != nullptr)) {
 							delete road.carrier_slots_[i].carrier_request;
 							road.carrier_slots_[i].carrier_request = carrier_request;
 						}
@@ -220,7 +220,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 						fw.unsigned_32(0);
 					}
 
-					if (temp_slot.carrier_request) {
+					if (temp_slot.carrier_request != nullptr) {
 						fw.unsigned_8(1);
 						temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
 					} else {

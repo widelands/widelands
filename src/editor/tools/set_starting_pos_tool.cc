@@ -65,7 +65,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTria
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
 	assert(center.node.y < map->get_height());
-	if (current_player_) {
+	if (current_player_ != 0) {
 		if (map->get_nrplayers() < current_player_) {
 			//  Mmh, my current player is not valid. Maybe the user has loaded a
 			//  new map while this tool was active. We set the new player to a

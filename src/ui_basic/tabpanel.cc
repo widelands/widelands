@@ -144,14 +144,14 @@ inline const UI::PanelStyleInfo& TabPanel::background_style() const {
 std::vector<Recti> TabPanel::focus_overlay_rects() {
 	const int f = g_style_manager->focus_border_thickness();
 	const Tab* tab = active_ < tabs_.size() ? tabs_[active_] : nullptr;
-	const int16_t w = tab ? tab->get_w() : get_w();
-	const int16_t h = tab ? tab->get_h() : kTabPanelButtonHeight;
+	const int16_t w = tab != nullptr ? tab->get_w() : get_w();
+	const int16_t h = tab != nullptr ? tab->get_h() : kTabPanelButtonHeight;
 	if (w < 2 * f || h < 2 * f) {
 		return {Recti(0, 0, get_w(), kTabPanelButtonHeight)};
 	}
 
-	const int16_t x = tab ? tab->get_x() : 0;
-	const int16_t y = tab ? tab->get_y() : 0;
+	const int16_t x = tab != nullptr ? tab->get_x() : 0;
+	const int16_t y = tab != nullptr ? tab->get_y() : 0;
 	return {Recti(x, y, w, f), Recti(x, y + f, f, h - f), Recti(x + w - f, y + f, f, h - f)};
 }
 
@@ -174,7 +174,7 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		uint32_t selected_idx = active();
 		const uint32_t max = tabs_.size() - 1;
 
-		if ((code.mod & KMOD_CTRL) && (code.sym >= SDLK_1 && code.sym <= SDLK_9)) {
+		if (((code.mod & KMOD_CTRL) != 0) && (code.sym >= SDLK_1 && code.sym <= SDLK_9)) {
 			// Keys CTRL + 1-9 directly address the 1st through 9th item in tabpanels with less than 10
 			// tabs
 			if (max < 9) {
@@ -191,8 +191,8 @@ bool TabPanel::handle_key(bool down, SDL_Keysym code) {
 		} else {
 			switch (code.sym) {
 			case SDLK_TAB:
-				if (code.mod & KMOD_CTRL) {
-					if (code.mod & KMOD_SHIFT) {
+				if ((code.mod & KMOD_CTRL) != 0) {
+					if ((code.mod & KMOD_SHIFT) != 0) {
 						if (selected_idx > 0) {
 							--selected_idx;
 						} else {

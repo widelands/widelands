@@ -45,7 +45,7 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		}
 
 		if ((mr.location().field->get_resources() == args->current_resource ||
-		     !mr.location().field->get_resources_amount()) &&
+		     (mr.location().field->get_resources_amount() == 0u)) &&
 		    map->is_resource_valid(descriptions, mr.location(), args->current_resource) &&
 		    mr.location().field->get_resources_amount() != max_amount) {
 

@@ -31,7 +31,7 @@ SavegameDeleter::SavegameDeleter(UI::Panel* parent, UI::WindowStyle s)
 }
 
 bool SavegameDeleter::delete_savegames(const std::vector<SavegameData>& to_be_deleted) const {
-	bool do_delete = SDL_GetModState() & KMOD_CTRL;
+	bool do_delete = (SDL_GetModState() & KMOD_CTRL) != 0;
 	if (!do_delete) {
 		do_delete = show_confirmation_window(to_be_deleted);
 	}
