@@ -66,6 +66,11 @@ struct EditorResizeTool : public EditorTool {
 		return height_;
 	}
 
+        WindowID get_window_id() override {
+                return WindowID::Resize;
+        }
+        
+
 private:
 	uint32_t width_;
 	uint32_t height_;

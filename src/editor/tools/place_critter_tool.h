@@ -43,8 +43,8 @@ struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
 		return g_image_cache->get("images/wui/editor/fsel_editor_place_critter.png");
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::PlaceCritter;
+        WindowID get_window_id() override {
+                return WindowID::Critters;
         }
 
         bool save_configuration_impl(ToolConf& conf, EditorInteractive& parent) override;

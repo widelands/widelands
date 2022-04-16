@@ -29,26 +29,15 @@
 #include "logic/widelands_geometry.h"
 #include "ui_basic/unique_window.h"
 
-enum class ToolID {
+enum class WindowID {
         Unset = 0,
-        Info,
-        SetHeight,
-        IncreaseHeight,
-        DecreaseHeight,
+        ChangeHeight,
+        ChangeResources,
+        Terrain,
         NoiseHeight,
-        SetTerrain,
-        DeleteImmovable,
-        PlaceImmovable,
-        SetStartingPos,
-        PlaceCritter,
-        DeleteCritter,
-        DecreaseResources,
-        SetResources,
-        IncreaseResources,
-        SetPortSpace,
-        UnsetPortSpace,
-        SetOrigin,
-        Resize,
+        Critters,
+        Immovables,
+        Resize,        
         ToolHistory,
 };
 
@@ -147,8 +136,8 @@ public:
 		return false;
 	}
 
-        virtual ToolID get_tool_id() {
-                return ToolID::Unset;
+        virtual WindowID get_window_id() {
+                return WindowID::Unset;
         }
 
         bool save_configuration(const ToolIndex i, ToolConf& conf, EditorInteractive& base) {

@@ -29,7 +29,7 @@ class BobDescr;
 
 class EditorInteractive;
 struct EditorToolAction;
-enum class ToolID;
+enum class WindowID;
 
 /// Class to save important and changeable properties of classes needed for actions
 // Implementations in editor_history.cc
@@ -70,7 +70,7 @@ struct EditorActionArgs {
 
 	uint32_t refcount;
 
-        ToolID tool_id;
+        WindowID window_id;
 
 };
 

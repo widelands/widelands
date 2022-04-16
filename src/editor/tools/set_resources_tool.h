@@ -67,8 +67,8 @@ struct EditorSetResourcesTool : public EditorTool {
 		cur_res_ = res;
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::SetResources;
+        WindowID get_window_id() override {
+                return WindowID::ChangeResources;
         }
         
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {

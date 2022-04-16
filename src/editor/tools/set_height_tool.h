@@ -51,8 +51,8 @@ struct EditorSetHeightTool : public EditorTool {
 		interval_ = i;
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::SetHeight;
+        WindowID get_window_id() override {
+                return WindowID::ChangeHeight;
         }
 
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {

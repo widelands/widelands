@@ -45,8 +45,8 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 		return true;
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::SetTerrain;
+        WindowID get_window_id() override {
+                return WindowID::Terrain;
         }
 
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override;

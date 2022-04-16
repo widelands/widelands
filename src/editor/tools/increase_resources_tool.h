@@ -79,8 +79,8 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 		return set_tool_;
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::IncreaseResources;
+        WindowID get_window_id() override {
+                return WindowID::ChangeResources;
         }
 
         bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {

@@ -45,8 +45,8 @@ struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
 		return g_image_cache->get("images/wui/editor/fsel_editor_place_immovable.png");
 	}
 
-        ToolID get_tool_id() override {
-                return ToolID::PlaceImmovable;
+        WindowID get_window_id() override {
+                return WindowID::Immovables;
         }
 
         bool save_configuration_impl(ToolConf& conf, EditorInteractive& parent) override;

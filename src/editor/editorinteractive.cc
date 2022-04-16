@@ -631,7 +631,7 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 }
 
 void EditorInteractive::update_tool_history_window() {
-        UI::UniqueWindow* window = get_open_window_for_tool(ToolID::ToolHistory);
+        UI::UniqueWindow* window = get_open_tool_window(WindowID::ToolHistory);
         if (window == nullptr) {
                 return;
         }
@@ -1252,7 +1252,7 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
         select_tool(primary, EditorTool::First);
         set_sel_radius_and_update_menu(conf.sel_radius);
 
-        UI::UniqueWindow* window = get_open_window_for_tool(tool.get_tool_id());
+        UI::UniqueWindow* window = get_open_tool_window(tool.get_window_id());
         if (window != nullptr) {
                 dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
         }
@@ -1260,55 +1260,44 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 
 
 /**
- * Returns open window for the given tool if it has a window and the window is open.
+ * Returns open window for the given window id, if the window is open.
  * Otherwise returns nullptr.
  **/
 UI::UniqueWindow*
-EditorInteractive::get_open_window_for_tool(ToolID tool_id) {
-        const UI::UniqueWindow::Registry& window_registry = get_window_registry_for_tool(tool_id);
+EditorInteractive::get_open_tool_window(WindowID window_id) {
+        const UI::UniqueWindow::Registry& window_registry = get_registry_for_window(window_id);
 
         return window_registry.window;
 }
 
 /**
- * Returns window registry for tool id.
+ * Returns window registry for window id.
  **/
 UI::UniqueWindow::Registry&
-EditorInteractive::get_window_registry_for_tool(ToolID tool_id) {
+EditorInteractive::get_registry_for_window(WindowID window_id) {
 
-        switch (tool_id) {
-        case ToolID::ToolHistory:
+        switch (window_id) {
+        case WindowID::ToolHistory:
                 return tool_windows_.toolhistory;
-        case ToolID::IncreaseHeight:
-        case ToolID::DecreaseHeight:
-        case ToolID::SetHeight:
+        case WindowID::ChangeHeight:
                 return tool_windows_.height;
-        case ToolID::NoiseHeight:
+        case WindowID::NoiseHeight:
                 return tool_windows_.noiseheight;
-        case ToolID::SetTerrain:
+        case WindowID::Terrain:
                 return tool_windows_.terrain;
-        case ToolID::PlaceImmovable:
+        case WindowID::Immovables:
                 return tool_windows_.immovables;
-        case ToolID::PlaceCritter:
+        case WindowID::Critters:
                 return tool_windows_.critters;
-        case ToolID::IncreaseResources:
-        case ToolID::DecreaseResources:
-        case ToolID::SetResources:
+        case WindowID::ChangeResources:
                 return tool_windows_.resources;
-        case ToolID::Resize:
+        case WindowID::Resize:
                 return tool_windows_.resizemap;
-        case ToolID::Info:
-        case ToolID::DeleteImmovable:
-        case ToolID::SetStartingPos:
-        case ToolID::DeleteCritter:
-        case ToolID::SetPortSpace:
-        case ToolID::UnsetPortSpace:
-        case ToolID::SetOrigin:
-        case ToolID::Unset:
+        case WindowID::Unset:
                 break;
         }
 
-        log_dbg("ID: %d", static_cast<int>(tool_id));
+        log_dbg("ID: %d", static_cast<int>(window_id));
 
         NEVER_HERE();
 }

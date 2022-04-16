@@ -58,8 +58,8 @@ struct EditorHistoryTool : public EditorTool {
         const ToolConf* get_configuration_for(const std::string& key);
         void remove_configuration(const std::string& key);
 
-        ToolID get_tool_id() override {
-                return ToolID::ToolHistory;
+        WindowID get_window_id() override {
+                return WindowID::ToolHistory;
         }
 
         void toggle_sticky(const std::string& key);

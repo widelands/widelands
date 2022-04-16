@@ -163,23 +163,9 @@ public:
         EditorHistory& history();
 
         // Returns window for given tool if it's open, otherwise return nullptr
-        UI::UniqueWindow* get_open_window_for_tool(ToolID toolId);
-        UI::UniqueWindow::Registry& get_window_registry_for_tool(ToolID toolId);
+        UI::UniqueWindow* get_open_tool_window(WindowID windowId);
+        UI::UniqueWindow::Registry& get_registry_for_window(WindowID windowId);
         void restore_tool_configuration(const ToolConf& conf);
-
-	// For referencing the items in toolmenu_
-	enum class ToolWindow {
-		kChangeHeight,
-		kRandomHeight,
-		kTerrain,
-		kImmovables,
-		kAnimals,
-		kResources,
-		kPlayers,
-		kMapSize,
-                kToolHistory,
-	};
-
 
 private:
 	// For referencing the items in mainmenu_
