@@ -183,11 +183,12 @@ constexpr int32_t kSignIncreaseRight = -1;
 constexpr int32_t kSignIncreaseUp = 1;
 constexpr int32_t kSignNextRight = -1;
 constexpr int32_t kSignNextDown = -1;
-constexpr int32_t kSignScroll = -1;
+constexpr int32_t kSignScrollRight = 1;
+constexpr int32_t kSignScrollUp = -1;
 
 static const Sign2D kDefaultSignValue(kSignIncreaseRight, kSignIncreaseUp);
 static const Sign2D kDefaultSignMove(kSignNextRight, kSignNextDown);
-static const Sign2D kDefaultSignScroll(kSignScroll, kSignScroll);
+static const Sign2D kDefaultSignScroll(kSignScrollRight, kSignScrollUp);
 
 static std::map<MousewheelHandlerConfigID, MousewheelHandlerOptions> mousewheel_handlers = {
    {MousewheelHandlerConfigID::kChangeValue,
