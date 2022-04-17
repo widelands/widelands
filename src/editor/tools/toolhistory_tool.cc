@@ -35,7 +35,7 @@ bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf
                 return false;
         }
 
-	tool_settings_.push_front(item);
+	tool_settings_.push_back(item);
         log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_window_id()), key.c_str());
 
         if (tool_settings_.size() > static_cast<long unsigned int>(MAX_SIZE)) {
@@ -94,11 +94,14 @@ void EditorHistoryTool::truncate() {
                 return;
         }
 
-        for (auto it = tool_settings_.rbegin(); it != tool_settings_.rend(); ++it) {
+        auto it = tool_settings_.begin();
+        while (it != tool_settings_.end()) {
+                // remove first non sticky
                 if (count > MAX_SIZE && !it->sticky) {
-                        // remove last
-                        tool_settings_.erase((++it).base());
+                        it = tool_settings_.erase(it);
                         count--;
+                } else {
+                        it++;
                 }
         }
 }
