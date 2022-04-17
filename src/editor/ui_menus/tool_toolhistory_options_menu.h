@@ -45,7 +45,7 @@ private:
 	EditorInteractive& eia() const;
         EditorHistoryTool& history_tool_;
 
-        void list_item_clicked(std::string selected);
+        void list_item_clicked(const std::string& selected);
         void rebuild_list();
 
 	int32_t margin_;

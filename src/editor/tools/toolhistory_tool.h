@@ -47,7 +47,7 @@ struct EditorHistoryTool : public EditorTool {
                 return 0;
         }
 
-	bool add_configuration(const std::string& name,
+	bool add_configuration(const std::string& key,
                                const ToolConf& conf);
 
 	const Image* get_sel_impl() const override {

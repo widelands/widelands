@@ -38,7 +38,7 @@ bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf
 	tool_settings_.push_back(item);
         log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.tool->get_window_id()), key.c_str());
 
-        if (tool_settings_.size() > static_cast<long unsigned int>(MAX_SIZE)) {
+        if (tool_settings_.size() > static_cast<uint64_t>(MAX_SIZE)) {
                 truncate();
         }
 

@@ -161,7 +161,7 @@ public:
         /// Returns a string representing the given configuration
         std::string format_conf_string(const ToolConf& conf, EditorInteractive& parent) {
                 assert(conf.tool == this);
-		return this->format_conf_string_impl(parent, conf);
+		return format_conf_string_impl(parent, conf);
 	}
 
 

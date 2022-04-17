@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2002-2022 by the Widelands Development Team
  *
@@ -70,7 +71,7 @@ EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& pare
 	return a;
 }
 
-std::string EditorNoiseHeightTool::format_conf_string_impl(EditorInteractive&, const ToolConf& conf) {
-        return format(_("Noise height: %d..%d; size: %d"),
+std::string EditorNoiseHeightTool::format_conf_string_impl(EditorInteractive& /*parent*/, const ToolConf& conf) {
+        return format(_("Noise height: %1d..%2d; size: %3d"),
                       static_cast<int>(conf.interval.min), static_cast<int>(conf.interval.max), conf.sel_radius + 1);
 }

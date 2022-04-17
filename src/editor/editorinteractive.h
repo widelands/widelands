@@ -163,8 +163,8 @@ public:
         EditorHistory& history();
 
         // Returns window for given tool if it's open, otherwise return nullptr
-        UI::UniqueWindow* get_open_tool_window(WindowID windowId);
-        UI::UniqueWindow::Registry& get_registry_for_window(WindowID windowId);
+        UI::UniqueWindow* get_open_tool_window(WindowID window_id);
+        UI::UniqueWindow::Registry& get_registry_for_window(WindowID window_id);
         void restore_tool_configuration(const ToolConf& conf);
 
 private:

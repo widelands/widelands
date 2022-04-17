@@ -76,5 +76,5 @@ std::string EditorDecreaseResourcesTool::format_conf_string_impl(EditorInteracti
            .get_resource_descr(cur_res_)
            ->descname();
 
-        return format(_("Increase/decrease %s: %d; size: %d"), resource, conf.change_by, conf.sel_radius + 1);
+        return format(_("Increase/decrease %1s: %2d; size: %3d"), resource, conf.change_by, conf.sel_radius + 1);
 }

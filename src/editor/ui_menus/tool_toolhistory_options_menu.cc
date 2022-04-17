@@ -56,7 +56,7 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 }
 
 
-void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string selected) {
+void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected) {
 
         if (SDL_GetModState() & KMOD_CTRL) {
                 history_tool_.remove_configuration(selected);
@@ -78,11 +78,11 @@ void EditorToolhistoryOptionsMenu::rebuild_list() {
 	list_.clear();
 
         int count = 0;
-        for (auto it = history_tool_.begin(); it != history_tool_.end(); ++it) {
-                if (it->sticky) {
-                        list_.add("+ " + it->key, it->key);
+        for (const auto& it: history_tool_) {
+                if (it.sticky) {
+                        list_.add("!" + it.key, it.key);
                 } else {
-                        list_.add(it->key, it->key);
+                        list_.add(it.key, it.key);
                 }
 
                 count++;
