@@ -21,8 +21,6 @@
 #include <sstream>
 
 #include "editor/editorinteractive.h"
-#include "editor/tools/tool_action.h"
-#include "editor/ui_menus/tool_options_menu.h"
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "ui_basic/unique_window.h"
 

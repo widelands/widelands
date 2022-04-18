@@ -27,7 +27,6 @@
 #include "graphic/image.h"
 #include "logic/editor_game_base.h"
 #include "logic/widelands_geometry.h"
-#include "ui_basic/unique_window.h"
 
 enum class WindowID {
         Unset = 0,
