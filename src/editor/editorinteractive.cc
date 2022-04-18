@@ -926,6 +926,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			history_->redo_action();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kEditorToolHistory, code)) {
+                        tool_windows_.toolhistory.toggle();
+			return true;
+		}
 
 		for (int i = 0; i < 10; ++i) {
 			if (matches_shortcut(static_cast<KeyboardShortcut>(
