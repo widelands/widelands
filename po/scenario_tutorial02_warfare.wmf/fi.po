@@ -6,6 +6,7 @@
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# heidi.wenger, 2022
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
 # Jukka Pakarinen, 2016-2020
 msgid ""
@@ -13,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2015-02-03 14:47+0000\n"
+"Last-Translator: heidi.wenger, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +178,7 @@ msgstr "Rakenne taisteluareena. Se on iso rakennus."
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Koska rakentaminen vieä aikaa, voit muuttaa pelinopeutta käyttäen vipuja %1$s ja %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
@@ -285,7 +286,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Pidäthän mielessä, että jokainen Widelands-heimo omaa yksilöllisen tapansa koulutuksessa, joten rakennukset ja tarvikkeet ovat erilaisia. Lisäksi, kykytasoja ei voida mielekkäästi vertailla: keisarillisella sotilaalla lähtöhyökkäys on %1% asteessa 0, kun taas barbaarisotilaalla samalla tasolla hyökkäyslähtö on vain %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
@@ -343,7 +344,7 @@ msgstr "Valmiina!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Hyvää työtä! Lähettisi maja on rakennettu. Samalla kun lähettimme lähenee, opetellaanpa hänestä hiukan lisää."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -456,7 +457,7 @@ msgstr "Jos haluat lähettää jonkun sotilaan pois, voit yksinkertaisesti vain 
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Annahan kun kuvailen mitä numerot tuossa tilanyörissä merkitsevät. Tuo nyöri voi sisältää korkeintaan kolme numeroa, kuten ‘1 (+5) sotilas (+2)’."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""

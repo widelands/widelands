@@ -44,18 +44,18 @@ MapSelect::MapSelect(MenuCapsule& m,
                      LaunchMPG* mpg,
                      GameSettingsProvider* const settings,
                      GameController* const ctrl,
-                     Widelands::Game& g)
+                     std::shared_ptr<Widelands::Game> for_preview)
    : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
      parent_screen_(mpg),
+     game_for_preview_(for_preview),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(
-        &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, game_for_preview_),
+        &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
-     game_(g),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
@@ -173,9 +173,10 @@ MapSelect::MapSelect(MenuCapsule& m,
 }
 
 MapSelect::~MapSelect() {
+	if (game_for_preview_) {
+		game_for_preview_->cleanup_objects();
+	}
 	if (!parent_screen_) {
-		game_.cleanup_objects();
-		delete &game_;
 		delete settings_;
 	}
 }
@@ -238,7 +239,7 @@ void MapSelect::clicked_ok() {
 		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		new LaunchSPG(get_capsule(), *settings_, std::make_shared<Widelands::Game>(), get_map(),
 		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }

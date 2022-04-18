@@ -3,7 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,9 +78,9 @@ msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
-"Wir sollten in Törvers ehemaligem Land einen Hafen bauen, um bereit zu sein "
-"Expeditionen zu senden, sobald wir herausgefunden haben wie man Schiffe "
-"baut."
+"Wir sollten in Törvers ehemaligem Land einen Hafen bauen, um für "
+"Expeditionen bereit zu sein, sobald wir herausgefunden haben wie man Schiffe"
+" baut."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
@@ -103,7 +104,7 @@ msgstr "Lagerhaus bauen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr "Baue ein Lagerhaus in der Nähe des Piratenwachpostens"
+msgstr "Baue ein Lagerhaus nahe dem Piratenwachposten"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -111,9 +112,9 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
-"Baue ein Lagerhaus nah bei dem eroberten Piratenwachposten am Bach. Wir "
-"werden es als Basis für weitere Erkundungen benötigen. Außerdem können wir "
-"es gebrauchen, um das Gold zu lagern, das wir aus den umliegenden Hügeln "
+"Baue ein Lagerhaus nahe dem eroberten Piratenwachposten am Bach. Wir werden "
+"es als Basis für weitere Erkundungen benötigen. Außerdem können wir es "
+"gebrauchen, um das Gold zu lagern, das wir aus den umliegenden Hügeln "
 "fördern werden."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
@@ -129,14 +130,14 @@ msgstr "Bringe vier Schaufeln zum neuen Lagerhaus"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
 msgstr ""
-"Sie werden an ein paar Freiwillige ausgegeben, um die Sümpfe trocken zu "
+"Sie werden an ein paar Freiwillige ausghändigt, um die Sümpfe trocken zu "
 "legen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
 msgstr ""
-"Sie werden an zusätzliche Freiwillige ausgegeben, um die Sümpfe trocken zu "
+"Sie werden an weitere Freiwillige ausgegeben, um die Sümpfe trocken zu "
 "legen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
@@ -154,7 +155,7 @@ msgid ""
 "under the grey banner."
 msgstr ""
 "Befreie unsere Nachbarschaft von der Bedrohung durch die Piraten. Die "
-"Piraten kämpfen unter einem grauen Banner."
+"Piraten kämpfen unter dem grauen Banner."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
@@ -174,7 +175,7 @@ msgstr "Besiege Hjalmar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr "Besiege die Armeen von Hjalmar"
+msgstr "Besiege Hjalmars Armeen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
@@ -190,7 +191,7 @@ msgstr "Besiege Runar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr "Besiege die Armeen von Runar"
+msgstr "Besiege Runars Armeen "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
@@ -224,11 +225,12 @@ msgstr "Euer Berater"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr "Entlang des Flusses"
+msgstr "Den Fluss entlang"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
-msgstr "Herr, lasst mich euch über die umliegenden Stämme informieren."
+msgstr ""
+"Mein Gebieter, lasst mich euch über die umliegenden Stämme informieren."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -238,7 +240,7 @@ msgid ""
 msgstr ""
 "Von Norden werden wir durch ein kriegslüsternes Volk bedroht, geführt vom "
 "Kriegsherrn Törver, das seine Armeen schnell aufrüstet. Sie werden bald zu "
-"stark geworden sein, um besiegt zu werden. "
+"stark sein, um besiegt zu werden. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -247,8 +249,8 @@ msgid ""
 "tribes."
 msgstr ""
 "Ein großes Gebiet im Nordosten wird von einer wilden Horde von losgelassenen"
-" Piraten gequält, die vom verrückten Arvid geführt werden. Ihre Gegenwart "
-"blockiert unseren Zugang zu anderen Völkern."
+" Piraten drangasliert, die vom verrückten Arvid geführt werden. Sie hindern "
+"uns am Zugang zu den anderen Völkern."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -275,8 +277,8 @@ msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
-"Die Situation sieht sehr gefährlich aus, und mein Rat ist, unsere "
-"Anstrengungen darauf zu richten, eine starke Armee aufzubauen."
+"Die Situation sieht sehr gefährlich aus. Ich rate euch eine starke Armee "
+"aufzubauen. Es wird einige Anstrengungen erfordern."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
@@ -322,13 +324,13 @@ msgid ""
 msgstr ""
 "Wir können den Angriff auf ihre Armeen nicht ewig vermeiden. Wenn wir es "
 "schaffen unseren nördlichen Feind zu besiegen, werden wir unser Gebiet "
-"vergrößern und mehr Rohstoffe finden, um unsere Armeen zu verstärken."
+"vergrößern und weitere Rohstoffe finden, um unsere Armeen zu verstärken."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
-"Wir können dann auch Ihren Zugang zum See nutzen um noch weitere Länder zu "
+"Wir können dann auch Ihren Zugang zum See nutzen um weitere Länder zu "
 "erkunden."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
@@ -357,10 +359,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the north will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
-"Herr, nachdem wir das Land von Törver erobert haben, können wir Gebrauch von"
-" ihrem exzellenten Zugang zum benachbarten großen See machen. Ein Hafen im "
-"Norden wird uns bessere Möglichkeiten bieten in Kontakt mit anderen Stämmen "
-"zu treten."
+"Herr, nachdem wir das Land von Törver erobert haben, haben wie einen "
+"exzellenten Zugang zum benachbarten großen See. Ein Hafen im Norden wird uns"
+" bessere Möglichkeiten bieten in Kontakt mit anderen Stämmen zu treten."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -375,15 +376,15 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr "Die Suche nach Gold"
+msgstr "Suche nach Gold"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
-"Herr, unsere Leute haben einen isolierten Piratenwachposten lokalisiert. Die"
-" verlassenen Hütten erzeugen den Eindruck, dass es dort in der Nähe Gold "
+"Herr, unsere Leute haben einen isolierten Piratenwachposten gefunden. Die "
+"verlassenen Hütten erzeugen den Eindruck, dass es dort in der Nähe Gold "
 "gibt."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
@@ -393,11 +394,11 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
-"Wir sollten in jedem Fall aber vorsichtig sein, wenn wir den Wachposten "
-"erobern wollen. Es könnte dort mehr feindliche Gebäude geben, die immer noch"
-" ausser Sichtweite sind, und die Piraten sind dafür bekannt sehr gute "
-"Kämpfer zu sein. Es ist das Beste zunächst eine starke militärische Präsenz "
-"hier aufzubauen, bevor wir es angehen."
+"Wir sollten in jedem Fall vorsichtig sein, wenn wir den Wachposten erobern "
+"wollen. Es könnte dort mehr feindliche Gebäude geben, die noch außer "
+"Sichtweite sind, und die Piraten sind bekanntlich sehr gute Kämpfer. Es ist "
+"das Beste zunächst eine starke militärische Präsenz hier aufzubauen, bevor "
+"wir es angehen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
@@ -411,7 +412,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben 25 Einheiten Golderz im Piratenwachposten gefunden. Sie "
 "könnten von den Goldgräberhütten in der Nähe geplündert worden sein. Dieses "
-"Golderz wird in unser Hauptquartier gebracht werden. "
+"Golderz wird jetzt in unser Hauptquartier gebracht. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -420,7 +421,7 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
-"Mit unserem erfolgreichen Vordringen in diese Gegend sollten wir den Bau "
+"Nach unserem erfolgreichen Vormarsch in diese Gegend sollten wir den Bau "
 "eines Lagerhauses direkt im Südwesten des Wachpostens erwägen, um diese "
 "Gegend weiter zu erkunden. Es gibt einen guten Bauplatz nur drei Schritte "
 "entfernt vom Wachposten. "
@@ -532,7 +533,7 @@ msgid ""
 msgstr ""
 "Herr, einer unserer Kundschafter wurde von den Piraten gefangen genommen und"
 " zu ihrer Insel gebracht. Er ist die einzige Person, die den Weg durch die "
-"Sümpfe in Richtung von Hjalmar kennt."
+"Sümpfe in Hjalmars Richtung kennt."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -620,4 +621,4 @@ msgstr ""
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr "Euer Name wird für immer erinnert werden."
+msgstr "Man wird sich ewig eurer erinnern."

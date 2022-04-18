@@ -34,7 +34,7 @@ Factory& get_factory(lua_State* const L) {
 	Factory* fac = static_cast<Factory*>(lua_touserdata(L, -1));
 	lua_pop(L, 1);  // pop this userdata
 
-	if (!fac) {
+	if (fac == nullptr) {
 		throw LuaError("\"factory\" field was nil, which should be impossible!");
 	}
 

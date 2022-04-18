@@ -109,7 +109,7 @@ void TerrainProgram::draw(
 		// Down triangle.
 		if (field.bln_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
-			   player && !player->see_all() ?
+			   (player != nullptr) && !player->see_all() ?
                player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().d :
                field.fcoords.field->terrain_d();
 			const Vector2f texture_offset =
@@ -122,7 +122,7 @@ void TerrainProgram::draw(
 		// Right triangle.
 		if (field.rn_index != FieldsToDraw::kInvalidIndex) {
 			const Widelands::DescriptionIndex terrain =
-			   player && !player->see_all() ?
+			   (player != nullptr) && !player->see_all() ?
                player->fields()[player->egbase().map().get_index(field.fcoords)].terrains.load().r :
                field.fcoords.field->terrain_r();
 			const Vector2f texture_offset =

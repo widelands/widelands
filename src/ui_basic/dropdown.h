@@ -142,6 +142,8 @@ public:
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
 	/// keyboard navigation.
 	void toggle();
+	/// Toggle the list closed if the dropdown is currently expanded.
+	void close();
 
 	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
@@ -202,10 +204,6 @@ protected:
 
 	std::string current_filter_;
 
-	/// needed for filter workaround (handle_key/handle_textinput with space key)
-	bool ignore_space_;
-	bool was_open_already_;
-
 private:
 	static void layout_if_alive(int);
 	void layout() override;
@@ -218,8 +216,6 @@ private:
 	/// Toggles the dropdown list on and off and sends a notification if the list is visible
 	/// afterwards.
 	void toggle_list();
-	/// Toggle the list closed if the dropdown is currently expanded.
-	void close();
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
@@ -321,10 +317,6 @@ public:
 	bool handle_textinput(const std::string& input_text) override {
 		const std::string lowered_input_text = to_lower(input_text);
 		if (check_hotkey_match(lowered_input_text)) {
-			return true;
-		}
-		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
-			ignore_space_ = false;
 			return true;
 		}
 		update_filter(lowered_input_text);
@@ -452,7 +444,7 @@ private:
 			if (x.value == selected_entry_) {
 				const Image* empty_icon =
 				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
+				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"));
 			}
 		}
 	}

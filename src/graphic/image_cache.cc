@@ -29,7 +29,7 @@
 ImageCache* g_image_cache;
 
 bool ImageCache::has(const std::string& hash) const {
-	return images_.count(hash);
+	return images_.count(hash) != 0u;
 }
 
 const Image* ImageCache::insert(const std::string& hash, std::unique_ptr<const Image> image) {

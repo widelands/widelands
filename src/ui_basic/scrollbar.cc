@@ -266,7 +266,7 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		pic = pic_plus_;
 	}
 
-	if (pic) {
+	if (pic != nullptr) {
 		double image_scale = std::min(1., std::min(static_cast<double>(r.w - 4) / pic->width(),
 		                                           static_cast<double>(r.h - 4) / pic->height()));
 		int blit_width = image_scale * pic->width();

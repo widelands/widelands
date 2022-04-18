@@ -43,7 +43,8 @@ void Element::add_bool(const std::string& key, bool value) {
 
 void Element::add_double(const std::string& key, double value) {
 	if (key.empty()) {
-		keyless_values_.push_back(std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value)));
+		keyless_values_.push_back(
+		   std::unique_ptr<LuaTree::Value>(new LuaTree::Boolean(value != 0.0)));
 	} else {
 		values_.push_back(
 		   std::unique_ptr<KeyValuePair>(new KeyValuePair(key, new LuaTree::Double(value))));
