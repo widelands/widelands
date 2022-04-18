@@ -72,6 +72,6 @@ EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& pare
 }
 
 std::string EditorNoiseHeightTool::format_conf_string_impl(EditorInteractive& /*parent*/, const ToolConf& conf) {
-        return format(_("Noise height: %1d..%2d; size: %3d"),
+        return format(_("Noise height: %1$d..%2$d; size: %3$d"),
                       static_cast<int>(conf.interval.min), static_cast<int>(conf.interval.max), conf.sel_radius + 1);
 }

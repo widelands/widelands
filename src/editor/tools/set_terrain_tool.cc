@@ -111,7 +111,7 @@ std::string EditorSetTerrainTool::format_conf_string_impl(EditorInteractive& par
 		}
 	}
 
-        return format(_("Set terrain: %1s; size: %2d"), buf, conf.sel_radius + 1);
+        return format(_("Set terrain: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 
 bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf, EditorInteractive& /*parent*/) {

@@ -98,5 +98,5 @@ std::string EditorSetResourcesTool::format_conf_string_impl(EditorInteractive& p
            .descriptions()
            .get_resource_descr(cur_res_)
            ->descname();
-        return format(_("Set resource %s: %d; size: %d"), resource, static_cast<int>(conf.set_to), conf.sel_radius + 1);
+        return format(_("Set resource %1$s: %2$d; size: %3$d"), resource, static_cast<int>(conf.set_to), conf.sel_radius + 1);
 }

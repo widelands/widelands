@@ -119,7 +119,7 @@ std::string EditorPlaceCritterTool::format_conf_string_impl(EditorInteractive& p
 		}
 	}
 
-        return format(_("Place critter: %1s; size: %2d"), buf, conf.sel_radius + 1);
+        return format(_("Place critter: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 
 bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf, EditorInteractive& /*parent*/) {

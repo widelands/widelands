@@ -112,7 +112,7 @@ std::string EditorPlaceImmovableTool::format_conf_string_impl(EditorInteractive&
 		}
 	}
 
-        return format(_("Place immovable: %1s; size: %2d"), buf, conf.sel_radius + 1);
+        return format(_("Place immovable: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 
 bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf, EditorInteractive& /*parent*/) {
