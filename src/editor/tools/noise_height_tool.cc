@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2002-2022 by the Widelands Development Team
  *

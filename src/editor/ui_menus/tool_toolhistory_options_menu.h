@@ -21,7 +21,6 @@
 
 #include "editor/tools/tool_action.h"
 #include "editor/ui_menus/tool_options_menu.h"
-#include "notifications/signal.h"
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 
