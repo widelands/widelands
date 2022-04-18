@@ -36,7 +36,7 @@ struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 	                                  UI::UniqueWindow::Registry&);
 	~EditorToolPlaceCritterOptionsMenu() override = default;
 
-        void update_window();
+        void update_window() override;
 
 private:
 	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>>

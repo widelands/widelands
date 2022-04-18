@@ -34,7 +34,7 @@ struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 	                                UI::UniqueWindow::Registry&);
 	~EditorToolSetTerrainOptionsMenu() override = default;
 
-        void update_window();
+        void update_window() override;
 
 private:
 	std::unique_ptr<
