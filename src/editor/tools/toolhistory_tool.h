@@ -25,7 +25,7 @@
 #include "editor/tools/tool.h"
 
 struct ListItem {
-        ListItem(std::string key, ToolConf data) : key(key), data(data), sticky(false) {}
+        ListItem(const std::string& text, ToolConf conf) : key(text), data(conf), sticky(false) {}
         std::string key;
         ToolConf data;
         bool sticky;
