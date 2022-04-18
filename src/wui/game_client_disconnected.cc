@@ -158,7 +158,7 @@ void GameClientDisconnected::clicked_continue() {
 }
 
 void GameClientDisconnected::clicked_exit_game() {
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		GameExitConfirmBox* gecb = new GameExitConfirmBox(*get_parent(), *igb_);

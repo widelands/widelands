@@ -239,6 +239,7 @@ void Game::check_legacy_addons_desync_magic() {
 		}
 	}
 	if (!needed) {
+		postload_addons(true);
 		return;
 	}
 

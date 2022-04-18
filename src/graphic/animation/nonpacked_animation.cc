@@ -224,7 +224,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	   dynamic_cast<const NonPackedMipMapEntry&>(mipmap_entry(1.0f));
 	assert(!mipmap.image_files.empty());
 	const std::string& image_filename = mipmap.image_files[representative_frame()];
-	const Image* image = (mipmap.has_playercolor_masks && clr) ?
+	const Image* image = (mipmap.has_playercolor_masks && (clr != nullptr)) ?
                            playercolor_image(*clr, image_filename) :
                            g_image_cache->get(image_filename);
 

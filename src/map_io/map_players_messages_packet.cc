@@ -100,9 +100,9 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					Message::Status status = Message::Status::kArchived;  //  default status
 					if (char const* const status_string = s->get_string("status")) {
 						try {
-							if (!strcmp(status_string, "new")) {
+							if (strcmp(status_string, "new") == 0) {
 								status = Message::Status::kNew;
-							} else if (!strcmp(status_string, "read")) {
+							} else if (strcmp(status_string, "read") == 0) {
 								status = Message::Status::kRead;
 							} else {
 								throw GameDataError(
@@ -181,7 +181,7 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 			case Message::Status::kArchived:  //  The default status. Do not write.
 				break;
 			}
-			if (message.serial()) {
+			if (message.serial() != 0u) {
 				const MapObject* mo = egbase.objects().get_object(message.serial());
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int("serial", fileindex);

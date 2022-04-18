@@ -39,7 +39,7 @@ Radiobutton::Radiobutton(Panel* const parent,
  * Unlink the radiobutton from its group
  */
 Radiobutton::~Radiobutton() {
-	for (Radiobutton** pp = &group_.buttons_; *pp; pp = &(*pp)->nextbtn_) {
+	for (Radiobutton** pp = &group_.buttons_; *pp != nullptr; pp = &(*pp)->nextbtn_) {
 		if (*pp == this) {
 			*pp = nextbtn_;
 			break;
@@ -81,7 +81,7 @@ Radiogroup::~Radiogroup() {
 	// This is a false positive.
 	// The reason is that the variable will be reassigned in the destructor of the deleted child.
 	// This is very uncommon behavior and bad style, but will be non trivial to fix.
-	while (buttons_) {
+	while (buttons_ != nullptr) {
 		delete buttons_;
 	}
 }
@@ -99,7 +99,7 @@ int32_t Radiogroup::add_button(Panel* const parent,
 	++highestid_;
 	Radiobutton* btn = new Radiobutton(parent, s, p, pic, *this, highestid_);
 	btn->set_tooltip(tooltip);
-	if (ret_btn) {
+	if (ret_btn != nullptr) {
 		(*ret_btn) = btn;
 	}
 	return highestid_;
@@ -119,7 +119,7 @@ void Radiogroup::set_state(int32_t const state, const bool send_signal) {
 		return;
 	}
 
-	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_) {
+	for (Radiobutton* btn = buttons_; btn != nullptr; btn = btn->nextbtn_) {
 		btn->set_state(btn->id_ == state);
 	}
 	state_ = state;
@@ -133,7 +133,7 @@ void Radiogroup::set_state(int32_t const state, const bool send_signal) {
  * Disable this radiogroup
  */
 void Radiogroup::set_enabled(bool st) {
-	for (Radiobutton* btn = buttons_; btn; btn = btn->nextbtn_) {
+	for (Radiobutton* btn = buttons_; btn != nullptr; btn = btn->nextbtn_) {
 		btn->set_enabled(st);
 	}
 }
