@@ -334,13 +334,13 @@ allies = {
       title = _("Allies?"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina! We have made contact with the foreigners. They are in big trouble as they are in war with a mighty tribe in the north. They ask us for support.]]))
+         _([[May Satul warm you, Jundlina! We have made contact with the foreigners. They are in big trouble as they are at war with a mighty tribe in the north. They ask us for support.]]))
    },
    {
       title = _("Jundlina Cheers"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, as we could need any ally we can get we should help them. Let’s see what we can do for them. However we should improve our own military strength to become independent of others.]]))
+         _([[Sidolus, as we could need any ally we can get, we should help them. Let’s see what we can do for them. However we should improve our own military strength to become independent of others.]]))
    }
 }
 
@@ -395,13 +395,13 @@ mining_established_2 = {
       title = _("Mining Established"),
       body = loftomor(
          -- TRANSLATORS: loftomor
-         _([[Sidolus, may Satul warm you! Another issue solved. We have found some resources and build a mine of each type.]]))
+         _([[Sidolus, may Satul warm you! Another issue solved. We have found some resources and built a mine of each type.]]))
    },
    {
       title = _("Sidolus is Excited"),
       body = sidolus(
          -- TRANSLATORS: Jundlina
-         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to built up bakeries and smokeries and all buildings to supply them.]]))
+         _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to build up bakeries and smokeries and all buildings to supply them.]]))
    }
 }
 
@@ -495,7 +495,7 @@ temple_completed = {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Loftomor. Thank you for building such a gret temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
+         _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
          .. new_objectives(obj_worship),
    },
 }
