@@ -7,6 +7,7 @@
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Benedikt Straub <benedikt-straub@web.de>, 2021
+# Boese Kaiser, 2022
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
@@ -27,9 +28,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-04-16 03:04+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2022\n"
+"Last-Translator: Boese Kaiser, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -300,8 +301,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Déc"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -315,12 +316,12 @@ msgstr "Menu Principal"
 msgid "Tools"
 msgstr "Outils"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -403,7 +404,7 @@ msgstr "Hauteur aléatoire"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:280
 msgid "Set the terrain height to random values"
-msgstr "Définis la hauteur du terrain sur des valeurs aléatoires"
+msgstr "Définis la hauteur du terrain aléatoirement"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:286
@@ -510,10 +511,10 @@ msgstr "Information"
 msgid "Click on a field to show information about it"
 msgstr "Cliquez sur un champ pour montrer des informations"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -1451,8 +1452,8 @@ msgid ""
 "location."
 msgstr "Sélectionnez la nouvelle taille de la carte, puis cliquez sur la carte pour la diviser à l'emplacement souhaité. Lorsque vous augmentez la taille de la carte, de nouvelles colonnes / lignes seront insérées à l'est / sud du point sélectionné. Lorsque vous réduisez la carte, le nombre souhaité de colonnes / lignes sera supprimé de l'est / sud de l'emplacement de fractionnement."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -5415,7 +5416,7 @@ msgstr "Regarder le replay d'une vieille partie"
 
 #: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
-msgstr "Ajouts"
+msgstr "Modules"
 
 #: ../../src/ui_fsmenu/main.cc:460
 msgid "Install and manage add-ons"
@@ -5533,7 +5534,7 @@ msgstr "Officiel & Unofficiel"
 #. * etc.
 #: ../../src/ui_fsmenu/mapselect.cc:115
 msgid "Any Teams"
-msgstr "N'importe qu'elle équipe"
+msgstr "N'importe quelle équipe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:461
 msgid "Balanced & Unbalanced"
@@ -6118,18 +6119,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Auteurs"
@@ -6998,7 +6999,7 @@ msgstr "Conservez les marchandises"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr " Toutes les marchandises laissées dans le bâtiment seront abandonnées par le constructeur, ce qui augmentera le temps de démontage"
+msgstr " Toutes les marchandises laissées dans le bâtiment seront évacuées par le constructeur, ce qui augmentera le temps de démontage"
 
 #: ../../src/wui/actionconfirm.cc:302
 msgid "Enhance building?"
@@ -7018,7 +7019,7 @@ msgstr "Soyez précautionneux si l' ennemi est proche !"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr "Toutes les marchandises laissées dans le bâtiment seront abandonnées par le constructeur, ce qui augmentera le temps d'amélioration"
+msgstr "Toutes les marchandises laissées dans le bâtiment seront évacuées par le constructeur, ce qui augmentera le temps d'amélioration"
 
 #: ../../src/wui/actionconfirm.cc:366
 msgid "Sink the ship?"
@@ -7184,9 +7185,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7574,8 +7575,8 @@ msgstr "Remplacer le joueur déconnecté par l'AI sélectionnée et continuer à
 msgid "AI for the disconnected player"
 msgstr "AI pour le client déconnecté "
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
