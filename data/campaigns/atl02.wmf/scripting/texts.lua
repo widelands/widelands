@@ -460,6 +460,12 @@ maletus_defeated_3 = {
          -- TRANSLATORS: Jundlina
          _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
    },
+   {
+      title = _("Kalitath Demands"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, now follow the orders of your princess. Meanwhile we might decide that we will need some of the land conquered by you for our common future. So we will simply take your military buildings with our forces. Naturally you won’t have the right to do the same, for the sake of your princess.]]))
+   },
 }
 
 heretics_again = {
@@ -497,6 +503,15 @@ temple_completed = {
          -- TRANSLATORS: Sidolus
          _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
          .. new_objectives(obj_worship),
+   },
+}
+
+priests_consecrated = {
+   {
+      title = _("May Satul Warm Us"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satuls pleasure. May he warm us and show his might to our princess and these barbaric tribe.]]))
    },
 }
 

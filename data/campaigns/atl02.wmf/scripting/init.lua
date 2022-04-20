@@ -8,12 +8,13 @@ include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
+include "scripting/set.lua"
 
 
 -- ===================
 -- Constants & Config
 -- ===================
-set_textdomain("scenario_atl02.wmf")
+push_textdomain("scenario_atl02.wmf")
 
 game = wl.Game()
 map = game.map
@@ -76,3 +77,4 @@ end
 
 -- starting conditions are included later in the intro
 include "map:scripting/mission_thread.lua"
+include "map:scripting/map_editing.lua"

@@ -61,4 +61,4 @@
    sf = map.player_slots[3].starting_field
    Kalitath:place_flag(sf.brn,true)
    create_economy_for_plr_3()
-   map:place_immovable("barbarians_trade_pole", map:get_field(112,150), "tribes")
+   map:place_immovable("barbarians_trade_pole", map:get_field(112,150))
