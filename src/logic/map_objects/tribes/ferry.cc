@@ -166,7 +166,7 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 }
 
 bool Ferry::unemployed() {
-	return (get_state(taskUnemployed) != nullptr) && !destination_;
+	return (get_state(taskUnemployed) != nullptr) && (destination_ == nullptr);
 }
 
 const Bob::Task Ferry::taskRow = {
