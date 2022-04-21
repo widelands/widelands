@@ -361,7 +361,7 @@ void EditorInteractive::add_tool_menu() {
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
-	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
+	              g_image_cache->get("images/wui/editor/fsel_editor_toolhistory.png"), false,
 	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
 	              _("Restore previous tool settings"),
 	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
