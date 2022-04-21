@@ -1214,7 +1214,8 @@ void ProductionSite::update_actual_statistics(Duration duration, const bool prod
 		duration = kStatsDurationCap;
 	}
 	const Duration past_duration = kStatsEntireDuration - duration;
-	actual_percent_ = (actual_percent_ * past_duration.get() + static_cast<unsigned int>(produced) * duration.get() * 1000) /
+	actual_percent_ = (actual_percent_ * past_duration.get() +
+	                   static_cast<unsigned int>(produced) * duration.get() * 1000) /
 	                  kStatsEntireDuration.get();
 	assert(actual_percent_ <= 1000);  // be sure we do not go above 100%
 }

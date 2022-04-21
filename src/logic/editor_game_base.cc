@@ -793,7 +793,8 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			PlayerNumber best_player;
-			if ((preferred_player != 0u) && (player(preferred_player).military_influence(index) != 0u)) {
+			if ((preferred_player != 0u) &&
+			    (player(preferred_player).military_influence(index) != 0u)) {
 				best_player = preferred_player;
 			} else {
 				best_player = neutral_when_no_influence ? 0 : player_area.player_number;

@@ -1434,7 +1434,7 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return r != nullptr ? portdock_->expedition_bootstrap()->inputqueue(*r) :
-              portdock_->expedition_bootstrap()->inputqueue(index, type, false);
+                         portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {

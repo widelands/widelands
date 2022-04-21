@@ -256,8 +256,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// attacker will be the first_ when first_strikes_ = false and
 	// attacker will be second_ when first_strikes_ = true
 	molog(game.get_gametime(), "[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
-	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is, static_cast<int>(first_strikes_),
-	      static_cast<int>(last_attack_hits_));
+	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is,
+	      static_cast<int>(first_strikes_), static_cast<int>(last_attack_hits_));
 
 	bool shorten_animation = false;
 	if (this_soldier_is == 1) {

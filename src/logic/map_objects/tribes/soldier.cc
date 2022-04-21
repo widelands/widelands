@@ -1080,8 +1080,8 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 
 	bool accept(Bob* const bob) const override {
 		if (upcast(Soldier, soldier, bob)) {
-			return (soldier->get_current_health() != 0u) && soldier->is_attacking_player(game, player) &&
-			       soldier->owner().is_hostile(player);
+			return (soldier->get_current_health() != 0u) &&
+			       soldier->is_attacking_player(game, player) && soldier->owner().is_hostile(player);
 		}
 		return false;
 	}
@@ -1505,7 +1505,8 @@ void Soldier::battle_update(Game& game, State& /* state */) {
 				   (immovable_position != nullptr ? immovable_position->descr().descname() : ("no")),
 				   opponent.descr().descname(), opponent.serial(),
 				   static_cast<unsigned int>(opponent.owner().player_number()), dest.x, dest.y,
-				   (immovable_dest != nullptr ? immovable_dest->descr().descname() : ("no")), descr().descname());
+				   (immovable_dest != nullptr ? immovable_dest->descr().descname() : ("no")),
+				   descr().descname());
 				get_owner()->add_message(
 				   game, std::unique_ptr<Message>(
 				            new Message(Message::Type::kGameLogic, game.get_gametime(),
@@ -1619,12 +1620,13 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 	}
 
 	if ((attackdefense == nullptr) || (((attackdefense->ivar1 & CF_RETREAT_WHEN_INJURED) != 0) &&
-	                       get_retreat_health() > get_current_health())) {
+	                                   get_retreat_health() > get_current_health())) {
 		// Retreating or non-combatant soldiers act like normal bobs
 		return Bob::check_node_blocked(game, field, commit);
 	}
 
-	if ((field.field->get_immovable() != nullptr) && field.field->get_immovable() == get_location(game)) {
+	if ((field.field->get_immovable() != nullptr) &&
+	    field.field->get_immovable() == get_location(game)) {
 		if (commit) {
 			send_space_signals(game);
 		}

@@ -126,7 +126,8 @@ bool CheckStepFerry::allowed(const Map& map,
                              const FCoords& to,
                              int32_t dir,
                              CheckStep::StepId /* id */) const {
-	if (((to.field->nodecaps() & MOVECAPS_WALK) == 0) && ((to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
+	if (((to.field->nodecaps() & MOVECAPS_WALK) == 0) &&
+	    ((to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
 		// can't swim on lava
 		return false;
 	}
@@ -162,9 +163,9 @@ bool CheckStepFerry::allowed(const Map& map,
 	}
 	const Descriptions& descriptions = egbase_.descriptions();
 	return ((descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &
-	        TerrainDescription::Is::kWater) != 0) &&
+	         TerrainDescription::Is::kWater) != 0) &&
 	       ((descriptions.get_terrain_descr(fr.field->terrain_r())->get_is() &
-	        TerrainDescription::Is::kWater) != 0);
+	         TerrainDescription::Is::kWater) != 0);
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
@@ -232,7 +233,8 @@ bool CheckStepRoad::allowed(const Map& map,
 
 	// Calculate cost and passability
 	if (((endcaps & movecaps_) == 0) &&
-	    !(((endcaps & MOVECAPS_WALK) != 0) && ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) != 0))) {
+	    !(((endcaps & MOVECAPS_WALK) != 0) &&
+	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) != 0))) {
 		return false;
 	}
 

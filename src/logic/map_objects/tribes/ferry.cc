@@ -110,7 +110,7 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 		molog(game.get_gametime(), "[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
 		if (map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
-		                                   FindImmovableType(MapObjectType::FLAG)) == 0u) {
+		                                  FindImmovableType(MapObjectType::FLAG)) == 0u) {
 			molog(game.get_gametime(), "[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
 		} else {
@@ -119,7 +119,8 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 					if (flag->get_owner() == get_owner()) {
 						if (flag->has_capacity()) {
 							Path path(pos);
-							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game)) != 0) {
+							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game)) !=
+							    0) {
 								molog(game.get_gametime(), "[unemployed]: moving to nearby flag\n");
 								return start_task_movepath(
 								   game, path, descr().get_right_walk_anims(true, this));
