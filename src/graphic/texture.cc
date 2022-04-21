@@ -115,7 +115,7 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || width() != surface->w || height() != surface->h ||
+	if ((surface->format->palette != nullptr) || width() != surface->w || height() != surface->h ||
 	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(width(), height());
 		assert(converted);

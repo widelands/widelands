@@ -153,11 +153,11 @@ int LuaPanel::get_dropdowns(lua_State* L) {
       (RO) An :class:`array` of all visible tabs inside this Panel.
 */
 static void put_all_tabs_into_table(lua_State* L, UI::Panel* g) {
-	if (!g) {
+	if (g == nullptr) {
 		return;
 	}
 
-	for (UI::Panel* f = g->get_first_child(); f; f = f->get_next_sibling()) {
+	for (UI::Panel* f = g->get_first_child(); f != nullptr; f = f->get_next_sibling()) {
 		put_all_tabs_into_table(L, f);
 
 		if (upcast(UI::TabPanel, t, f)) {
@@ -273,12 +273,12 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	UI::Panel* cur = (*get_base_user_class<LuaPanel>(L, 2))->panel_;
 
 	Vector2i cp = Vector2i::zero();
-	while (cur && cur != panel_) {
+	while (cur != nullptr && cur != panel_) {
 		cp += cur->to_parent(Vector2i::zero());
 		cur = cur->get_parent();
 	}
 
-	if (!cur) {
+	if (cur == nullptr) {
 		report_error(L, "Widget is not a descendant!");
 	}
 
@@ -433,7 +433,7 @@ int LuaDropdown::get_name(lua_State* L) {
       (RO) True if the dropdown's list is currently expanded.
 */
 int LuaDropdown::get_expanded(lua_State* L) {
-	lua_pushboolean(L, get()->is_expanded());
+	lua_pushboolean(L, static_cast<int>(get()->is_expanded()));
 	return 1;
 }
 
@@ -608,7 +608,7 @@ int LuaTab::get_name(lua_State* L) {
       (RO) Is this the currently active tab in this window?
 */
 int LuaTab::get_active(lua_State* L) {
-	lua_pushboolean(L, get()->active());
+	lua_pushboolean(L, static_cast<int>(get()->active()));
 	return 1;
 }
 
@@ -759,7 +759,7 @@ int LuaMapView::get_center_map_pixel(lua_State* L) {
       (RW) True if the buildhelp is show, false otherwise.
 */
 int LuaMapView::get_buildhelp(lua_State* L) {
-	lua_pushboolean(L, get()->buildhelp());
+	lua_pushboolean(L, static_cast<int>(get()->buildhelp()));
 	return 1;
 }
 int LuaMapView::set_buildhelp(lua_State* L) {
@@ -773,7 +773,7 @@ int LuaMapView::set_buildhelp(lua_State* L) {
       (RW) True if the census strings are shown on buildings, false otherwise
 */
 int LuaMapView::get_census(lua_State* L) {
-	lua_pushboolean(L, get()->get_display_flag(InteractiveBase::dfShowCensus));
+	lua_pushboolean(L, static_cast<int>(get()->get_display_flag(InteractiveBase::dfShowCensus)));
 	return 1;
 }
 int LuaMapView::set_census(lua_State* L) {
@@ -788,7 +788,7 @@ int LuaMapView::set_census(lua_State* L) {
       otherwise
 */
 int LuaMapView::get_statistics(lua_State* L) {
-	lua_pushboolean(L, get()->get_display_flag(InteractiveBase::dfShowStatistics));
+	lua_pushboolean(L, static_cast<int>(get()->get_display_flag(InteractiveBase::dfShowStatistics)));
 	return 1;
 }
 int LuaMapView::set_statistics(lua_State* L) {
@@ -802,7 +802,7 @@ int LuaMapView::set_statistics(lua_State* L) {
       (RO) Is the player currently in road/waterway building mode?
 */
 int LuaMapView::get_is_building_road(lua_State* L) {
-	lua_pushboolean(L, get()->in_road_building_mode());
+	lua_pushboolean(L, static_cast<int>(get()->in_road_building_mode()));
 	return 1;
 }
 
@@ -814,9 +814,9 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
 	InteractivePlayer* ipl = get_game(L).get_ipl();
 	if (ipl == nullptr) {
-		lua_pushboolean(L, false);
+		lua_pushboolean(L, 0);
 	} else {
-		lua_pushboolean(L, ipl->auto_roadbuild_mode());
+		lua_pushboolean(L, static_cast<int>(ipl->auto_roadbuild_mode()));
 	}
 	return 1;
 }
@@ -827,7 +827,7 @@ int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
       (RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
-	lua_pushboolean(L, get()->map_view()->is_animating());
+	lua_pushboolean(L, static_cast<int>(get()->map_view()->is_animating()));
 	return 1;
 }
 
@@ -962,8 +962,8 @@ int LuaMapView::scroll_to_field(lua_State* L) {
       :type field: :class:`wl.map.Field`
 */
 int LuaMapView::is_visible(lua_State* L) {
-	lua_pushboolean(L, get()->map_view()->view_area().contains(
-	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords()));
+	lua_pushboolean(L, static_cast<int>(get()->map_view()->view_area().contains(
+	                      (*get_user_class<LuaMaps::LuaField>(L, 2))->coords())));
 	return 1;
 }
 
@@ -1034,7 +1034,7 @@ static int L_set_user_input_allowed(lua_State* L) {
    :rtype: :class:`boolean`
 */
 static int L_get_user_input_allowed(lua_State* L) {
-	lua_pushboolean(L, UI::Panel::allow_user_input());
+	lua_pushboolean(L, static_cast<int>(UI::Panel::allow_user_input()));
 	return 1;
 }
 

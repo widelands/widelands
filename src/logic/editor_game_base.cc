@@ -69,6 +69,7 @@ initialization
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : did_postload_addons_(false),
+     did_postload_tribes_(false),
      gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
      lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
@@ -309,7 +310,7 @@ void EditorGameBase::postload() {
 	assert(descriptions_);
 }
 
-void EditorGameBase::postload_addons() {
+void EditorGameBase::postload_addons(bool also_postload_tribes) {
 	if (did_postload_addons_) {
 		return;
 	}
@@ -341,8 +342,17 @@ void EditorGameBase::postload_addons() {
 		}
 	}
 
-	// Postload all tribes. We can do this only now to ensure that any changes
-	// made by add-ons are taken into account when computing dependency chains.
+	if (also_postload_tribes) {
+		postload_tribes();
+	}
+}
+
+void EditorGameBase::postload_tribes() {
+	if (did_postload_tribes_) {
+		return;
+	}
+	did_postload_tribes_ = true;
+
 	verb_log_info("Postloading tribes...");
 	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
@@ -586,6 +596,7 @@ void EditorGameBase::full_cleanup() {
 	cleanup_for_load();
 	enabled_addons().clear();
 	did_postload_addons_ = false;
+	did_postload_tribes_ = false;
 	descriptions_.reset(nullptr);
 	gametime_ = Time(0);
 	// See the comment about `lua_` in the ctor
