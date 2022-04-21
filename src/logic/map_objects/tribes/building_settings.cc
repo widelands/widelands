@@ -204,7 +204,7 @@ void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
 			desired_capacity = fr.unsigned_32();
-			prefer_heroes = fr.unsigned_8();
+			prefer_heroes = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "MilitarysiteSettings", packet_version, kCurrentPacketVersionMilitarysite);
@@ -227,7 +227,7 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
-			stopped = fr.unsigned_8();
+			stopped = (fr.unsigned_8() != 0u);
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
@@ -312,7 +312,7 @@ void WarehouseSettings::read(const Game& game, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionWarehouse) {
-			launch_expedition = fr.unsigned_8();
+			launch_expedition = (fr.unsigned_8() != 0u);
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {

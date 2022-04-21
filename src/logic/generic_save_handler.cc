@@ -41,7 +41,7 @@ uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
 	}
 	uint32_t error_uint = static_cast<uint32_t>(err);
 	for (uint32_t index = 0; index < maxErrors_; index++) {
-		if (error_uint & 1) {
+		if ((error_uint & 1) != 0u) {
 			return index;
 		}
 		error_uint >>= 1;
@@ -206,7 +206,7 @@ std::string GenericSaveHandler::error_message(GenericSaveHandler::Error error_ma
 	uint32_t error_uint = static_cast<uint32_t>(error_mask) & static_cast<uint32_t>(error_);
 	std::string err_msg;
 	for (uint32_t index = 0; index < maxErrors_; index++) {
-		if ((error_uint >> index) & 1) {
+		if (((error_uint >> index) & 1) != 0u) {
 			err_msg += error_msg_[index];
 		}
 	}

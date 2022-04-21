@@ -166,7 +166,7 @@ ReplayReader::~ReplayReader() {
  * or 0 if there are no remaining commands before the given time.
  */
 Command* ReplayReader::get_next_command(const Time& time) {
-	if (!cmdlog_) {
+	if (cmdlog_ == nullptr) {
 		return nullptr;
 	}
 
