@@ -24,8 +24,8 @@
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "unzip.h"
-#include "minizip/zip.h"
+#include <unzip.h>
+#include <zip.h>
 
 class ZipFilesystem : public FileSystem {
 public:
