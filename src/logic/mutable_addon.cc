@@ -293,7 +293,7 @@ size_t MapsAddon::do_recursively_create_filesystem_structure(const std::string& 
 	size_t result = 0;
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
-		if (all_dirnames) {
+		if (all_dirnames != nullptr) {
 			all_dirnames->insert(pair.first);
 		}
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;

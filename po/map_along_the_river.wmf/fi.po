@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Oi Suomi On! <oisuomion@protonmail.com>, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,78 +23,82 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% yksikköä määrästä %2% on tuotu ‘%3%’ rakennukseesi."
+msgstr[1] "%1% yksikköä määrästä %2% on tuotu ‘%3%’ rakennukseesi."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "Transport"
-msgstr ""
+msgstr "Kuljetus"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
-msgstr ""
+msgstr "Neljä lapiota poistamaan soita on noudettu varastolla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid "Shovels"
-msgstr ""
+msgstr "Lapiot"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
-msgstr ""
+msgstr "Neljä lapiota lisää soiden poistamista varten noudettu varastolla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:7
 msgid "Defeat Törver"
-msgstr ""
+msgstr "Päihitä Törver"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:9
 msgid "Defeat the Armies of Törver"
-msgstr ""
+msgstr "Päihitä Törverin armeijat"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the north, who is fighting under the red banner."
-msgstr ""
+msgstr "Törver on vihollinen pohjoisessa, joka taistelee punatunnuksen alla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
-msgstr ""
+msgstr "Rakenna satama"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:18
 msgid "Build a Port in the North"
-msgstr ""
+msgstr "Rakenna satana pohjoisessa"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:19
 msgid ""
 "We should build a port in Törver’s former land to be ready to send an "
 "expedition as soon as we found out how to build ships."
 msgstr ""
+"Meidän tulisi rakentaa satama Törverin entiselle maalle ollaksemme valmiita "
+"lähettämään tutkimusryhmän heti kun selvitämme miten rakentaa laivoja."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:25
 msgid "Conquer pirate sentry"
-msgstr ""
+msgstr "Valloita merirosvovartiosto"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:27
 msgid "Conquer the Pirate Sentry"
-msgstr ""
+msgstr "Valloita merirosvovartiosto"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:28
 msgid ""
 "Conquer the pirate sentry near the brook to the east. Hopefully we will find"
 " out what happened to the gold in this area."
 msgstr ""
+"Valloita merirosvovartiosto lähellä idässä sijaitsevaa puroa. Toivon mukaan "
+"saamme tietää mitä tämän alueen kullalle tapahtui."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:34
 msgid "Build warehouse"
-msgstr ""
+msgstr "Rakenna varasto"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:36
 msgid "Build a Warehouse near the Pirate Sentry"
-msgstr ""
+msgstr "Rakenna varasto lähelle merirosvovartiostoa"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:37
 msgid ""
@@ -98,80 +106,90 @@ msgid ""
 "will need it as a basis for further exploration. Furthermore we could use it"
 " to store some gold that we will mine from the surrounding hills."
 msgstr ""
+"Rakenna varasto lähelle valloitettua merirosvovartiostoa puron lähettyvillä."
+" Tarvitsemme sen lähtökohdaksi lisätutkimusten partioinneille. Tämän lisäksi"
+" voisimme käyttää sitä kullan varastointiin jota louhimme ympäröiviltä "
+"kukkuloilta."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:43
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:52
 msgid "Bring shovels"
-msgstr ""
+msgstr "Toimita lapiot"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:45
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:54
 msgid "Bring Four Shovels to the new Warehouse"
-msgstr ""
+msgstr "Vie neljä lapiota uuteen varastorakennukseen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:46
 msgid "They will be handed out to some volunteers for drying up the swamps."
-msgstr ""
+msgstr "Nämä ojennetaan joillekin vapaaehtoisille kuivattamaan soita."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:55
 msgid ""
 "They will be handed out to additional volunteers for drying up the swamps."
-msgstr ""
+msgstr "Nämä ojennetaan joillekin vapaaehtoisille kuivattamaan soita."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:61
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:93
 msgid "Defeat the pirates"
-msgstr ""
+msgstr "Päihitä merirosvot"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:63
 msgid "Defeat the Pirates"
-msgstr ""
+msgstr "Päihitä merirosvot"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:64
 msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
+"Vapauta naapurustomme merirosvojen piinalta. Merirosvot taistelevat harmaan "
+"tunnuksen alla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr ""
+msgstr "Vapauta lähettimme merirosvoilta"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr ""
+msgstr "Valloita saarella sijaitseva linnake"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr ""
+msgstr "Tässä paikassa lähettiämme pidetään vankina."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
-msgstr ""
+msgstr "Päihitä Hjalmar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr ""
+msgstr "Päihitä Hjalmarin armeijat"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
 msgstr ""
+"Hjalmar on vihollinen pohjoisessa entisistä merirosvoista, joka taistelee "
+"vihreän tunnuksen alla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
-msgstr ""
+msgstr "Päihitä Runar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr ""
+msgstr "Päihitä Runarin armeijat"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
 msgstr ""
+"Runar on vihollinen kaakossa entisistä merirosvoista, joka taistelee vihreän"
+" tunnuksen alla."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
@@ -193,15 +211,16 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr ""
+msgstr "Neuvonantajasi"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr ""
+msgstr "Jokea pitkin"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
 msgstr ""
+"Herra, annahan kun tuon tietoosi asioita ympäröiviin heimoihin liittyen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -209,6 +228,9 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Pohjoisesta meitä vaarantaa riidanhaluinen heimo, jota johtaa sotaherra "
+"Törver, ja joka rakentaa armeijoitaan nopeaan tahtii. Heistä voi piakkoin "
+"tulla liian voimakkaita voittaa."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -216,6 +238,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"Suuri alue koillisessa on vapaasti toimivan villin merirosvojoukkion "
+"piinaama, heidän johtajansa on mielipuolinen Arvid. Heidän läsnäolonsa "
+"tukkii tiemme muiden heimojen luokse.  "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -223,6 +248,10 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Joen toisella puolella siintää vauras tarunomaisen kuninkaan Runar:in maa. "
+"Olemme olleet hänen kanssaan sodassa aiemmin aikana ennen kuin merirosvot "
+"pitivät hallussaan itäistä aluetta. Hänen mahtinsa perustuu laajalle "
+"teollisuudelle sekä isoihin armeijoihin. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
@@ -230,16 +259,21 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Alue merirosvoista edespäin kuuluu kehittyneelle heimolle jota johtaa "
+"päällikkönsä Hjalmar. Heillä on ollut runsaasti aikaa valmistella ja "
+"rakentaa armeijoitaan. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"Tilanne vaikuttaa varsin vaaralliselta ja neuvoni onkin että kohdentaisimme "
+"ponnistuksemme kohti vahvan armeijan rakentamista. "
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
-msgstr ""
+msgstr "Pohjoinen vihollisemme"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
@@ -247,22 +281,31 @@ msgid ""
 " our rival in the north is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+"Herra, vaikkakin sotilaamme ovatkin valmiita kohtaamaan minkä tahansa "
+"vihollisen ilman pelon häivääkään, vastustajamme pohjoisessa on edelleenkin "
+"voimallisempi kuin kaikki omat armeijamme yhdistettynä. Olisi viisasta "
+"välttää yhteenottoa kunnes saavutamme kyvyn heidän lyömiseensä."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Ole maltillinen ja tunnista vahvan armeijan olevan ehdoton edellytys tässä "
+"tilanteessa. Törver omaa erittäin huonon maineen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the north"
-msgstr ""
+msgstr "Uhka pohjoisesta"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Herra, olemme ottaneet vastaan hälyttävän viestin yhdeltä "
+"tutkimusmatkailijoistamme. Törver laajentaa etulinjaansa ja lähestyy "
+"alueitamme."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -270,15 +313,20 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"Emme voi välttää hyökkäystä heidän armeijoitaan vastaan ikuisesti. Jos "
+"kykenemme päihittämään tämän pohjoisen vihollisemme, saamme laajennettua "
+"omaa aluettamme, löytääksemme myös lisää voimavaroja vahvistamaan "
+"armeijoitamme."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
+"Voimme sitten käyttää myös heidän reittiään järvelle lisämaata tutkiaksemme."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr ""
+msgstr "Hyvällä tiellä"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
@@ -287,10 +335,14 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Herra, taistelu Törverin kanssa edistyy loisteliaasti ja olemmekin jo "
+"lyöneet hänen vahvimman armeijaosastonsa. Tätä vihollista ei kuitenkaan "
+"päihitetä helposti. Törver on epätoivonsa sanelemana kutsunut paikalle "
+"kovaksi keitettyjä palkkasotureita."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
-msgstr ""
+msgstr "Suurjärvi"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""

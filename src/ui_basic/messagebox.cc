@@ -39,8 +39,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
                            Align align)
    : Window(parent, s, "message_box", 0, 0, 20, 20, caption), type_(type) {
 	// Calculate textarea dimensions depending on text size
-	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
-	const int outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
+	const int outerwidth = parent != nullptr ? parent->get_inner_w() : g_gr->get_xres();
+	const int outerheight = parent != nullptr ? parent->get_inner_h() : g_gr->get_yres();
 
 	const int button_w = 120;
 	const int minwidth = 3.5 * button_w;

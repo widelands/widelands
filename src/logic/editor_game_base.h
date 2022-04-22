@@ -112,7 +112,8 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void postload_addons();
+	void postload_addons(bool also_postload_tribes);
+	void postload_tribes();
 	virtual void cleanup_for_load();
 	virtual void full_cleanup();
 	void delete_world_and_tribes();
@@ -229,6 +230,7 @@ public:
 
 protected:
 	bool did_postload_addons_;
+	bool did_postload_tribes_;
 
 private:
 	/// Common function for create_critter and create_ship.

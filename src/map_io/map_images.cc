@@ -40,7 +40,7 @@ void load_map_images(FileSystem& fs) {
 }
 
 void save_map_images(FileSystem* new_fs, FileSystem* map_fs) {
-	if (!map_fs || !map_fs->file_exists("pics") || !map_fs->is_directory("pics")) {
+	if ((map_fs == nullptr) || !map_fs->file_exists("pics") || !map_fs->is_directory("pics")) {
 		return;
 	}
 	new_fs->ensure_directory_exists("pics");

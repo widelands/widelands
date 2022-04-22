@@ -128,7 +128,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						    saved_vision == VisibleState::kPreviouslySeen) {
 							f.vision = Vision(VisibleState::kPreviouslySeen);
 						}
-						if (revealed_fields.count(m)) {
+						if (revealed_fields.count(m) != 0u) {
 							f.vision.set_revealed(true);
 							assert(f.vision.is_revealed());
 						}
@@ -325,7 +325,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
                            nullptr :
                            descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
-							for (uint32_t j = fr.unsigned_32(); j; --j) {
+							for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 								field->constructionsite->intermediates.push_back(
 								   descriptions.get_building_descr(
 								      descriptions.safe_building_index(fr.string())));
@@ -352,15 +352,15 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 		} else if (packet_version >= 1 && packet_version <= 2) {
 			// TODO(Nordfriese): Savegame compatibility, remove after v1.0
-			for (uint8_t i = fr.unsigned_8(); i; --i) {
+			for (uint8_t i = fr.unsigned_8(); i != 0u; --i) {
 				Player& player = *egbase.get_player(fr.unsigned_8());
 
 				std::set<MapIndex> revealed_fields = {};
-				for (uint32_t j = fr.unsigned_32(); j; --j) {
+				for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 					revealed_fields.insert(fr.unsigned_32());
 				}
 
-				for (MapIndex m = map.max_index(); m; --m) {
+				for (MapIndex m = map.max_index(); m != 0u; --m) {
 					Player::Field& f = player.fields_[m - 1];
 
 					f.owner = fr.unsigned_8();
@@ -370,7 +370,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					    saved_vision == VisibleState::kPreviouslySeen) {
 						f.vision = Vision(VisibleState::kPreviouslySeen);
 					}
-					if (revealed_fields.count(m - 1)) {
+					if (revealed_fields.count(m - 1) != 0u) {
 						f.vision.set_revealed(true);
 					}
 
@@ -393,10 +393,10 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					f.r_se = static_cast<RoadSegment>(fr.unsigned_8());
 					f.r_sw = static_cast<RoadSegment>(fr.unsigned_8());
 
-					f.border = fr.unsigned_8();
-					f.border_r = fr.unsigned_8();
-					f.border_br = fr.unsigned_8();
-					f.border_bl = fr.unsigned_8();
+					f.border = (fr.unsigned_8() != 0u);
+					f.border_r = (fr.unsigned_8() != 0u);
+					f.border_br = (fr.unsigned_8() != 0u);
+					f.border_bl = (fr.unsigned_8() != 0u);
 
 					std::string descr = fr.string();
 					if (descr.empty()) {
@@ -434,7 +434,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
                                                      descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
-								for (uint32_t j = fr.unsigned_32(); j; --j) {
+								for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 									f.constructionsite->intermediates.push_back(
 									   descriptions.get_building_descr(
 									      descriptions.safe_building_index(fr.string())));
@@ -460,7 +460,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
                                                      descriptions.get_building_descr(
 								                                descriptions.safe_building_index(descr));
 
-								for (uint32_t j = fr.unsigned_32(); j; --j) {
+								for (uint32_t j = fr.unsigned_32(); j != 0u; --j) {
 									f.constructionsite->intermediates.push_back(
 									   descriptions.get_building_descr(
 									      descriptions.safe_building_index(fr.string())));
@@ -653,18 +653,21 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 		// Map objects
 		for (const auto& field : seen_fields) {
-			if (field->map_object_descr) {
+			if (field->map_object_descr != nullptr) {
 				fw.string(field->map_object_descr->name());
 
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
-					fw.string(field->dismantlesite.building ? field->dismantlesite.building->name() :
-                                                         "dismantlesite");
+					fw.string(field->dismantlesite.building != nullptr ?
+                            field->dismantlesite.building->name() :
+                            "dismantlesite");
 					fw.unsigned_32(field->dismantlesite.progress);
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
-					fw.string(field->constructionsite->was ? field->constructionsite->was->name() : "");
+					fw.string(field->constructionsite->was != nullptr ?
+                            field->constructionsite->was->name() :
+                            "");
 
 					fw.unsigned_32(field->constructionsite->intermediates.size());
 					for (const BuildingDescr* d : field->constructionsite->intermediates) {

@@ -54,7 +54,7 @@ void find_images(const std::string& directory,
 			find_images(filename, images, ordered_images);
 			continue;
 		}
-		if (is_image(filename) && !images->count(filename)) {
+		if (is_image(filename) && (images->count(filename) == 0u)) {
 			images->insert(filename);
 			ordered_images->push_back(filename);
 		}

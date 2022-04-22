@@ -37,7 +37,7 @@ std::string get_backtrace() {
 	void* stack[BACKTRACE_STACKSIZE];
 	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
 	char** const list = backtrace_symbols(stack, size);
-	for (char* const* it = list; size; --size, ++it) {
+	for (char* const* it = list; size != 0u; --size, ++it) {
 		result += *it;
 		result += '\n';
 	}

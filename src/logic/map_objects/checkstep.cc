@@ -91,21 +91,21 @@ bool CheckStepDefault::allowed(const Map& /* map */,
                                CheckStep::StepId /* id */) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
-	if (endcaps & movecaps_) {
+	if ((endcaps & movecaps_) != 0) {
 		return true;
 	}
 
 	// Swimming bobs are allowed to move from a water field to a shore field
 	NodeCaps const startcaps = start.field->nodecaps();
 
-	return (endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM);
+	return ((endcaps & MOVECAPS_WALK) != 0) && ((startcaps & movecaps_ & MOVECAPS_SWIM) != 0);
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & movecaps_)) {
-		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
+	if ((caps & movecaps_) == 0) {
+		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {
@@ -126,11 +126,12 @@ bool CheckStepFerry::allowed(const Map& map,
                              const FCoords& to,
                              int32_t dir,
                              CheckStep::StepId /* id */) const {
-	if (!(to.field->nodecaps() & MOVECAPS_WALK) && !(to.field->nodecaps() & MOVECAPS_SWIM)) {
+	if (((to.field->nodecaps() & MOVECAPS_WALK) == 0) &&
+	    ((to.field->nodecaps() & MOVECAPS_SWIM) == 0)) {
 		// can't swim on lava
 		return false;
 	}
-	if (MOVECAPS_SWIM & (from.field->nodecaps() | to.field->nodecaps())) {
+	if ((MOVECAPS_SWIM & (from.field->nodecaps() | to.field->nodecaps())) != 0) {
 		// open water
 		return true;
 	}
@@ -161,17 +162,17 @@ bool CheckStepFerry::allowed(const Map& map,
 		break;
 	}
 	const Descriptions& descriptions = egbase_.descriptions();
-	return (descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &
-	        TerrainDescription::Is::kWater) &&
-	       (descriptions.get_terrain_descr(fr.field->terrain_r())->get_is() &
-	        TerrainDescription::Is::kWater);
+	return ((descriptions.get_terrain_descr(fd.field->terrain_d())->get_is() &
+	         TerrainDescription::Is::kWater) != 0) &&
+	       ((descriptions.get_terrain_descr(fr.field->terrain_r())->get_is() &
+	         TerrainDescription::Is::kWater) != 0);
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
-	if (dest.field->nodecaps() & MOVECAPS_SWIM) {
+	if ((dest.field->nodecaps() & MOVECAPS_SWIM) != 0) {
 		return true;
 	}
-	if (!(dest.field->nodecaps() & MOVECAPS_WALK)) {
+	if ((dest.field->nodecaps() & MOVECAPS_WALK) == 0) {
 		return false;
 	}
 	for (int i = 1; i <= 6; ++i) {
@@ -197,10 +198,10 @@ bool CheckStepWalkOn::allowed(const Map& /* map */,
 
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
 	//  then back onto a walkable node.
-	if (!onlyend_ && id != CheckStep::stepFirst && !(startcaps & movecaps_)) {
+	if (!onlyend_ && id != CheckStep::stepFirst && ((startcaps & movecaps_) == 0)) {
 		return false;
 	}
-	if (endcaps & movecaps_) {
+	if ((endcaps & movecaps_) != 0) {
 		return true;
 	}
 
@@ -211,7 +212,7 @@ bool CheckStepWalkOn::allowed(const Map& /* map */,
 	}
 
 	// If the previous field was walkable, we can move onto this one
-	if (startcaps & movecaps_) {
+	if ((startcaps & movecaps_) != 0) {
 		return true;
 	}
 
@@ -231,8 +232,9 @@ bool CheckStepRoad::allowed(const Map& map,
 	uint8_t const endcaps = player_.get_buildcaps(end);
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps_) &&
-	    !((endcaps & MOVECAPS_WALK) && (player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM))) {
+	if (((endcaps & movecaps_) == 0) &&
+	    !(((endcaps & MOVECAPS_WALK) != 0) &&
+	      ((player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM) != 0))) {
 		return false;
 	}
 
@@ -243,8 +245,8 @@ bool CheckStepRoad::allowed(const Map& map,
 				return false;
 			}
 
-			return dynamic_cast<Flag const*>(imm) ||
-			       (dynamic_cast<Road const*>(imm) && (endcaps & BUILDCAPS_FLAG));
+			return (dynamic_cast<Flag const*>(imm) != nullptr) ||
+			       ((dynamic_cast<Road const*>(imm) != nullptr) && ((endcaps & BUILDCAPS_FLAG) != 0));
 		}
 	}
 	return true;
@@ -253,8 +255,8 @@ bool CheckStepRoad::allowed(const Map& map,
 bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
-	if (!(caps & movecaps_)) {
-		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
+	if ((caps & movecaps_) == 0) {
+		if (!(((movecaps_ & MOVECAPS_SWIM) != 0) && ((caps & MOVECAPS_WALK) != 0))) {
 			return false;
 		}
 		if (!map.can_reach_by_water(dest)) {

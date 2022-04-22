@@ -6,6 +6,7 @@
 # GunChleoc, 2018
 # Jukka Pakarinen, 2019
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# heidi.wenger, 2022
 # 
 msgid ""
 msgstr ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
+"Last-Translator: heidi.wenger, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -668,6 +669,10 @@ msgid ""
 "farm. The sheep farm itself needs wheat and water to work. So, let’s find a "
 "space for a big building and build a farm first."
 msgstr ""
+"No niin, kelataanpa tämä asia lävitse. Kutoaksemme vaatteen me tarvitsemme "
+"villaa lammastilalta. Lammastila itse tarvitsee vehnää ja vettä toimiakseen."
+" Joten, etsitään alue suurelle rakennukselle ja rakentakaamme siihen ensinnä"
+" tila."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
@@ -678,6 +683,12 @@ msgid ""
 "our wool for weaving cloth. But for the moment being, let’s start by "
 "producing a reasonable amount of wheat."
 msgstr ""
+"Kun tarpeeksi vehnää on tuotettu, voimme purkaa tuon tilan ja rakentaa "
+"lammastilan tuottaaksemme villaa. Kun lammastila aloittaa toimintansa, "
+"voisimme kartoittaa alueen tai vapauttaa sitä keskikokoista rakennusta "
+"varten rakentaaksemme kudontaan myllyn, joka sitten hyödyntää villaamme "
+"kutoakseen vaatekangasta. Nyt kuitenkin tällä välin, aloitetaan tuottamalla "
+"tarpeellinen määrä vehnää. "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
@@ -686,6 +697,10 @@ msgid ""
 "not have a target quantity for wheat, because the farmer does not need other"
 " wares to produce it. All we have to do is watch our stock of wheat grow."
 msgstr ""
+"Luulsin että 50 lyhdettä vehnää on tarpeeksi alkajaisiksi. Meillä ei ole "
+"kohdemäärää vehnälle, koska maanviljelijällä ei ole hallussaan muita "
+"tarvikkeita tuottaakseen sitä. Meidän tarvitsee vain katsoa vehnäsatomme "
+"kasvamista."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
@@ -807,6 +822,10 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is built."
 msgstr ""
+"Salve Lutius. Jutustellessani kaikille urheille rakentajillemme, he "
+"kertoivat minulle että he joutuvat käyttämään kaiken jäljellä olevan kullan "
+"rakentaakseen satamaa. Joten, meillä ei ole yhtään kultaa jäljellä sataman "
+"valmistuttua. "
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
