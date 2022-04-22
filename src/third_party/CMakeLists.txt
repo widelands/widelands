@@ -13,6 +13,11 @@ if(NOT MINIZIP_FOUND)
       minizip/zip.h
     USES_ZLIB
   )
+  wl_include_directories(io_filesystem "minizip")
+else()
+  wl_include_directories(io_filesystem ${MINIZIP_INCLUDE_DIRS})
+  target_link_libraries(io_filesystem ${MINIZIP_STATIC_LINK_LIBRARIES})
+  target_compile_options(io_filesystem SYSTEM PUBLIC ${MINIZIP_CFLAGS})
 endif()
 
 wl_library(third_party_sha1
