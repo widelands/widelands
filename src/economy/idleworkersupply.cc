@@ -53,7 +53,10 @@ void IdleWorkerSupply::set_economy(Economy* const e) {
 		if (economy_ != nullptr) {
 			economy_->remove_supply(*this);
 		}
-		if ((economy_ = e) != nullptr) {
+
+		economy_ = e;
+
+		if (economy_ != nullptr) {
 			economy_->add_supply(*this);
 		}
 	}
