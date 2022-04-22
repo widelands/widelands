@@ -36,8 +36,7 @@
  * Cross-platform entry point for SDL applications.
  */
 int main(int argc, char* argv[]) {
-	std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
-	          << std::endl;
+	std::cout << "This is Widelands Version " << build_id() << " " << build_type() << std::endl;
 
 	WLApplication* g_app = nullptr;
 	try {
@@ -63,7 +62,7 @@ int main(int argc, char* argv[]) {
 		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
 		          << "') in outermost handler!\nThe exception said: " << e.what()
 		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-		          << '(' << build_type() << ')' << ".\n"
+		          << ' ' << build_type() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
 		delete g_app;
@@ -73,7 +72,7 @@ int main(int argc, char* argv[]) {
 		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
 		          << "') in outermost handler!\nThe exception said: " << e.what()
 		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-		          << '(' << build_type() << ')' << ".\n"
+		          << ' ' << build_type() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
 		delete g_app;
