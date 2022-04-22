@@ -121,13 +121,13 @@ WorkerProgram::WorkerProgram(const std::string& init_name,
 			Worker::Action act;
 			uint32_t mapidx;
 
-			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
+			for (mapidx = 0; parsemap_[mapidx].name != nullptr; ++mapidx) {
 				if (parseinput.name == parsemap_[mapidx].name) {
 					break;
 				}
 			}
 
-			if (!parsemap_[mapidx].name) {
+			if (parsemap_[mapidx].name == nullptr) {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
