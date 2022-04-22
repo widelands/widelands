@@ -4,7 +4,7 @@ if(PKG_CONFIG_FOUND)
 endif()
 
 if(NOT MINIZIP_FOUND)
-  wl_library(MINIZIP_STATIC_LIBRARIES
+  wl_library(third_party_minizip
     THIRD_PARTY
     SRCS
       minizip/ioapi.h
@@ -13,7 +13,7 @@ if(NOT MINIZIP_FOUND)
       minizip/zip.h
     USES_ZLIB
   )
-  wl_include_directories(io_filesystem "minizip")
+  wl_include_directories(io_filesystem "./minizip")
 else()
   wl_include_directories(io_filesystem ${MINIZIP_INCLUDE_DIRS})
   target_link_libraries(io_filesystem ${MINIZIP_STATIC_LINK_LIBRARIES})

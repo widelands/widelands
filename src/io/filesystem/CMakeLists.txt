@@ -17,7 +17,7 @@ wl_library(io_filesystem
     base_exceptions
     base_macros
     io_stream
-    ${MINIZIP_STATIC_LIBRARIES}
+    third_party_minizip
 )
 
 wl_library(io_filesystem_illegal_filename_check
