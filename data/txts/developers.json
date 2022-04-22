@@ -6,7 +6,8 @@
 			"entries":[
 				{
 					"members":[
-						"GunChleoc (Since 2016)",
+						"Benedikt Straub (Nordfriese) (Since 2022)",
+						"GunChleoc (2016 – 2022)",
 						"Holger Rapp (SirVer) (2001 – 2016)"
 					]
 				}
@@ -29,9 +30,15 @@
 					]
 				},
 				{
-					"subheading": "Sound",
+					"subheading": "Scripting",
 					"members":[
-						"Jan Bruns (solatis)"
+						"Stephan Lutz (hessenfarmer)"
+					]
+				},
+				{
+					"subheading": "Sound",
+					"translate":[
+						"vacant"
 					]
 				},
 				{
