@@ -937,7 +937,8 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		   map, Widelands::Area<Widelands::FCoords>(
 		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
-			if (player_->is_seeing(map.get_index(mr.location()))) {
+			if (player_->is_seeing(map.get_index(mr.location())) &&
+			    player_->player_number() == mr.location().field->get_owned_by()) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					const Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
@@ -990,19 +991,27 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 					if (wa_radius == 0) {
 						continue;
 					}
+					if (overlapping_workareas_.count(mr.location()) != 0) {
+						// mr.advance() may reach the same location several times during an iteration,
+						// but we only want the workarea once
+						continue;
+					}
 					if (map.calc_distance(node_, mr.location()) <= workarea_radius + wa_radius) {
 						std::map<Widelands::TCoords<>, uint32_t> colors;
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
-							colors[t] = mr.location() == t.node || mr.location() == map.br_n(t.node) ||
-							                  mr.location() == (t.t == Widelands::TriangleIndex::D ?
-                                                            map.bl_n(t.node) :
-                                                            map.r_n(t.node)) ||
-							                  (main_region.count(t) != 0u) ?
-                                    descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
-                                    positive ? kOverlapColorPositive : kOverlapColorNegative :
-                                    kOverlapColorDefault :
-                                    kOverlapColorPale;
+							Widelands::Coords coords =
+							   (t.t == Widelands::TriangleIndex::D) ? map.bl_n(t.node) : map.r_n(t.node);
+							if (mr.location() == t.node || mr.location() == map.br_n(t.node) ||
+							    mr.location() == coords || main_region.count(t) != 0u) {
+								if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+									colors[t] = positive ? kOverlapColorPositive : kOverlapColorNegative;
+								} else {
+									colors[t] = kOverlapColorDefault;
+								}
+							} else {
+								colors[t] = kOverlapColorPale;
+							}
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());
