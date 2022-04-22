@@ -39,7 +39,7 @@ inline std::string safe_richtext_message(std::string body) {
 }
 
 void uninstall(AddOnsCtrl* ctrl, std::shared_ptr<AddOns::AddOnInfo> info, const bool local) {
-	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+	if (!matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   safe_richtext_message(
@@ -378,7 +378,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	uninstall_.sigclicked.connect([ctrl, this]() { uninstall(ctrl, info_, false); });
 	install_.sigclicked.connect([ctrl, this]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
-		if (!info_->verified || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
+		if (!info_->verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Install"),
 			   safe_richtext_message(format(
@@ -402,7 +402,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		ctrl->rebuild(true);
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
-		if (!info->verified || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
+		if (!info->verified || !matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
 			UI::WLMessageBox w(
 			   &ctrl->get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Upgrade"),
 			   safe_richtext_message(
