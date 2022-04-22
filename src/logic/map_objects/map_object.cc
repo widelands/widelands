@@ -227,11 +227,11 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered() const {
 }
 
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
-	if (!serial_) {
+	if (serial_ == 0u) {
 		return nullptr;
 	}
 	MapObject* const obj = egbase.objects().get_object(serial_);
-	if (!obj) {
+	if (obj == nullptr) {
 		serial_ = 0;
 	}
 	return obj;
@@ -242,7 +242,7 @@ MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
 // that is pointed to.
 // That is, a 'const ObjectPointer' behaves like a 'ObjectPointer * const'.
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) const {
-	return serial_ ? egbase.objects().get_object(serial_) : nullptr;
+	return serial_ != 0u ? egbase.objects().get_object(serial_) : nullptr;
 }
 
 /*
@@ -593,7 +593,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
+	if ((info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics)) == 0) {
 		return;
 	}
 
@@ -617,12 +617,12 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	std::shared_ptr<const UI::RenderedText> rendered_census =
 	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if (info_to_draw & InfoToDraw::kCensus) {
+	if ((info_to_draw & InfoToDraw::kCensus) != 0) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	// Draw statistics if we want them, they are available and they fill fit
-	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
+	if (((info_to_draw & InfoToDraw::kStatistics) != 0) && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
 		   g_style_manager->building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
@@ -635,7 +635,8 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 }
 
 const Image* MapObject::representative_image() const {
-	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
+	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
+                                                                nullptr);
 }
 
 /**
@@ -688,7 +689,7 @@ const Player& MapObject::owner() const {
  * Prints a log message prepended by the object's serial number.
  */
 void MapObject::molog(const Time& gametime, char const* fmt, ...) const {
-	if (!g_verbose && !logsink_) {
+	if (!g_verbose && (logsink_ == nullptr)) {
 		return;
 	}
 
@@ -699,7 +700,7 @@ void MapObject::molog(const Time& gametime, char const* fmt, ...) const {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (logsink_) {
+	if (logsink_ != nullptr) {
 		logsink_->log(buffer);
 	}
 
@@ -747,7 +748,7 @@ void MapObject::Loader::load(FileRead& fr) {
 
 		if (packet_version >= 2) {
 			MapObject& obj = *get_object();
-			obj.reserved_by_worker_ = fr.unsigned_8();
+			obj.reserved_by_worker_ = (fr.unsigned_8() != 0u);
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());
@@ -790,7 +791,7 @@ void MapObject::save(EditorGameBase& /* egbase */, MapObjectSaver& mos, FileWrit
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
-	fw.unsigned_8(reserved_by_worker_);
+	fw.unsigned_8(static_cast<uint8_t>(reserved_by_worker_));
 }
 
 }  // namespace Widelands

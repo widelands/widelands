@@ -120,7 +120,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table,
 		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
 	}
 
-	for (DescriptionIndex di = descriptions.nr_terrains(); di; --di) {
+	for (DescriptionIndex di = descriptions.nr_terrains(); di != 0u; --di) {
 		const TerrainDescription* t = descriptions.get_terrain_descr(di - 1);
 		if (t->dither_layer_ == dither_layer_) {
 			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(),
@@ -241,19 +241,19 @@ const std::vector<TerrainDescription::Type> TerrainDescription::get_types() cons
 	if (is_ == Widelands::TerrainDescription::Is::kArable) {
 		terrain_types.emplace_back(TerrainDescription::Is::kArable);
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kWalkable) {
+	if ((is_ & Widelands::TerrainDescription::Is::kWalkable) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kWalkable);
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kWater) {
+	if ((is_ & Widelands::TerrainDescription::Is::kWater) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kWater);
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kUnreachable) {
+	if ((is_ & Widelands::TerrainDescription::Is::kUnreachable) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kUnreachable);
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kMineable) {
+	if ((is_ & Widelands::TerrainDescription::Is::kMineable) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kMineable);
 	}
-	if (is_ & Widelands::TerrainDescription::Is::kUnwalkable) {
+	if ((is_ & Widelands::TerrainDescription::Is::kUnwalkable) != 0) {
 		terrain_types.emplace_back(TerrainDescription::Is::kUnwalkable);
 	}
 	return terrain_types;

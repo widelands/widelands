@@ -218,7 +218,7 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	                           const FieldsToDraw::Field& field,
 	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
-		if (triangle_colors.count(Widelands::TCoords<>(field.fcoords, triangle_index))) {
+		if (triangle_colors.count(Widelands::TCoords<>(field.fcoords, triangle_index)) != 0u) {
 			color = triangle_colors.at(Widelands::TCoords<>(field.fcoords, triangle_index));
 		}
 		if (color.a > 0) {
