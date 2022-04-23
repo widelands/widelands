@@ -27,6 +27,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/addons/manager.h"
 #include "ui_fsmenu/addons/remote_interaction.h"
+#include "wlapplication_options.h"
 
 namespace FsMenu {
 namespace AddOnsUI {
