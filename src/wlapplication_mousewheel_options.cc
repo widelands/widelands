@@ -38,10 +38,10 @@ private:
 
 public:
 	static inline MousewheelOption create_mod(std::string n, uint16_t def) {
-		return MousewheelOption(n, MousewheelOptionType::kBool, def);
+		return MousewheelOption(n, MousewheelOptionType::kKeymod, def);
 	}
 	static inline MousewheelOption create_bool(std::string n, bool def) {
-		return MousewheelOption(n, MousewheelOptionType::kKeymod, def ? 1 : 0);
+		return MousewheelOption(n, MousewheelOptionType::kBool, def ? 1 : 0);
 	}
 
 	bool get_bool() const {
