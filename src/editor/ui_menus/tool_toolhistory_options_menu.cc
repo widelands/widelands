@@ -42,7 +42,7 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
        box_width_(get_inner_w() - 2 * margin_),
        box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
        list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui) {
-        
+
 	box_.set_size(100, 20);
 	box_.add(&list_);
         /** TRANSLATORS: Help tooltip in tool history window. */
