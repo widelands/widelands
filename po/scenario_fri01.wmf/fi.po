@@ -5,6 +5,7 @@
 # Translators:
 # Jukka Pakarinen, 2020
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# heidi.wenger, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
+"Last-Translator: heidi.wenger, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1125,13 +1126,31 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"Lähes unohdin tässä kiireessä – milloin sitten rantaudummekaan, tulemme "
+"tarvitsemaan rakennusaineksia päästäksemme alkuun, sekä sotilaita turvaamaan"
+" ja laajentamaan uutta asutustamme. Jopa lastauksen jälkeen, laivassa "
+"pitäisi olla tarpeeksi vapaata tilaa uusille tarvikkeille ja työntekijöille."
+" Tämän päälle, tilaa riittänee enintään %d sotilaalle, mikäli ketään ei "
+"haittaa vieri vieressä oleminen. Lähetetäänpä hiukan tarvikkeita sekä "
+"parhaat miehemme satamaan rakentamisen tullessa päätökseensä, "
+"valmistautumaan lähtöön kun nostamme purjeet! "
 msgstr[1] ""
+"Lähes unohdin tässä kiireessä – milloin sitten rantaudummekaan, tulemme "
+"tarvitsemaan rakennusaineksia päästäksemme alkuun, sekä sotilaita turvaamaan"
+" ja laajentamaan uutta asutustamme. Jopa lastauksen jälkeen, laivassa "
+"pitäisi olla tarpeeksi vapaata tilaa uusille tarvikkeille ja työntekijöille."
+" Tämän päälle, tilaa riittänee %dsotilaalle, mikäli ketään ei haittaa vieri "
+"vieressä oleminen. Lähetetäänpä hiukan tarvikkeita sekä parhaat miehemme "
+"satamaan sen valmistuttua, valmistautumaan lähtöön kun nostamme purjeet! "
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
+"Kaikki tarvikkeet ja työntekijät jotka ovat tutkimusmatkalle mukaan "
+"lastatut, kuten myös jotkut sotilaista satamassa, viedään seuraavaan "
+"asetelmaan."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"

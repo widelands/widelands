@@ -224,7 +224,7 @@ void Game::postload_addons_before_loading() {
 	did_postload_addons_before_loading_ = true;
 	delete_world_and_tribes();
 	mutable_descriptions()->ensure_tribes_are_registered();
-	postload_addons();
+	postload_addons(false);
 }
 
 // TODO(Nordfriese): Needed for v1.0 savegame compatibility, remove after v1.1
@@ -238,6 +238,7 @@ void Game::check_legacy_addons_desync_magic() {
 		}
 	}
 	if (!needed) {
+		postload_addons(true);
 		return;
 	}
 
@@ -251,7 +252,7 @@ void Game::check_legacy_addons_desync_magic() {
 	EditorInteractive::load_world_units(nullptr, *this);
 	load_all_tribes();
 
-	postload_addons();
+	postload_addons(true);
 }
 
 bool Game::run_splayer_scenario_direct(const std::list<std::string>& list_of_scenarios,
@@ -330,7 +331,7 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
-	postload_addons();
+	postload_addons(false);
 	did_postload_addons_before_loading_ = true;
 
 	std::vector<PlayerSettings> shared;
@@ -447,7 +448,7 @@ void Game::init_savegame(const GameSettings& settings) {
 
 		// Discover the links between resources and geologist flags,
 		// dependencies of productionsites etc.
-		postload_addons();
+		postload_addons(true);
 
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
@@ -496,7 +497,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(ipl);
 
 		gl.load_game();
-		postload_addons();
+		postload_addons(true);
 
 		ipl->info_panel_fast_forward_message_queue();
 	}
@@ -644,7 +645,7 @@ bool Game::run(StartGameType const start_game_type,
 			}
 		}
 
-		if (ipl) {
+		if (ipl != nullptr) {
 			// Scroll map to starting position for new games.
 			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
 			// InteractiveGameBase::start() for multiplayer.
@@ -660,9 +661,9 @@ bool Game::run(StartGameType const start_game_type,
 		iterate_player_numbers(p, nr_players) {
 			const Player* const plr = get_player(p);
 			const std::string no_name;
-			const std::string& player_tribe = plr ? plr->tribe().name() : no_name;
-			const std::string& player_name = plr ? plr->get_name() : no_name;
-			const std::string& player_ai = plr ? plr->get_ai() : no_name;
+			const std::string& player_tribe = plr != nullptr ? plr->tribe().name() : no_name;
+			const std::string& player_name = plr != nullptr ? plr->get_name() : no_name;
+			const std::string& player_ai = plr != nullptr ? plr->get_ai() : no_name;
 			mutable_map()->set_scenario_player_tribe(p, player_tribe);
 			mutable_map()->set_scenario_player_name(p, player_name);
 			mutable_map()->set_scenario_player_ai(p, player_ai);
@@ -732,7 +733,7 @@ bool Game::run(StartGameType const start_game_type,
 		}
 	}
 
-	postload_addons();
+	postload_addons(true);
 
 	sync_reset();
 	Notifications::publish(UI::NoteLoadingMessage(_("Initializing…")));
@@ -1303,7 +1304,7 @@ void Game::sample_statistics() {
 		}
 
 		// Now, walk the bobs
-		for (Bob const* b = fc.field->get_first_bob(); b; b = b->get_next_bob()) {
+		for (Bob const* b = fc.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 			if (upcast(Soldier const, s, b)) {
 				miltary_strength[s->owner().player_number() - 1] +=
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
@@ -1346,7 +1347,7 @@ void Game::sample_statistics() {
 
 	// Now, divide the statistics
 	for (uint32_t i = 0; i < map().get_nrplayers(); ++i) {
-		if (productivity[i]) {
+		if (productivity[i] != 0u) {
 			productivity[i] /= nr_production_sites[i];
 		}
 	}

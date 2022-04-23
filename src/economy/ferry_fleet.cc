@@ -217,7 +217,7 @@ uint32_t FerryFleet::count_unattended_waterways() const {
 
 // Returns true of this waterway has a ferry or a ferry is on the way there
 bool FerryFleet::has_ferry(const Waterway& ww) const {
-	if (ww.get_ferry().get(owner().egbase())) {
+	if (ww.get_ferry().get(owner().egbase()) != nullptr) {
 		return true;
 	}
 	assert(ww.get_fleet().get(owner().egbase()) == this);
@@ -255,7 +255,7 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 	assert(std::count(ferries_.begin(), ferries_.end(), ferry) == 0);
 	ferry->set_fleet(nullptr);
 
-	if (ferry->get_location(egbase)) {
+	if (ferry->get_location(egbase) != nullptr) {
 		update(egbase);
 	}
 
@@ -439,7 +439,7 @@ void FerryFleet::Loader::load(FileRead& fr) {
 
 	FerryFleet& fleet = get<FerryFleet>();
 
-	fleet.act_pending_ = fr.unsigned_8();
+	fleet.act_pending_ = (fr.unsigned_8() != 0u);
 
 	const uint32_t nrferries = fr.unsigned_32();
 	ferries_.resize(nrferries);
@@ -485,13 +485,13 @@ MapObject::Loader* FerryFleet::load(EditorGameBase& egbase, MapObjectLoader& mol
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
-			if (!owner_number || owner_number > egbase.map().get_nrplayers()) {
+			if ((owner_number == 0u) || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
 			}
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner) {
+			if (owner == nullptr) {
 				throw GameDataError("owning player %u does not exist", owner_number);
 			}
 

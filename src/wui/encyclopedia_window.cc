@@ -194,7 +194,7 @@ UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 
 			const std::string entry_path = fr.string();
 			std::vector<std::string> entry_params;
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				entry_params.push_back(fr.string());
 			}
 			const size_t nr_entries = m.lists_.at(tab)->size();

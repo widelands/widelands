@@ -42,7 +42,8 @@ function starting_infos()
    sleep(1000)
 
    -- Welcome and teach objectives
-   objective_to_explain_objectives = campaign_message_with_objective(initial_message_01, obj_initial_close_objectives_window)
+   campaign_message_box(initial_message_01, 200)
+   objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
 
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end

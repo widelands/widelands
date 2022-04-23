@@ -75,7 +75,7 @@ bool SaveHandler::roll_save_files(const std::string& filename, std::string* cons
 			} catch (const FileError& e) {
 				log_warn(
 				   "Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
-				if (error) {
+				if (error != nullptr) {
 					*error = format(
 					   "Autosave: Unable to delete file %s: %s\n", filename_previous.c_str(), e.what());
 				}
@@ -260,7 +260,7 @@ bool SaveHandler::save_game(Widelands::Game& game,
 		return true;
 	}
 
-	if (error_str) {
+	if (error_str != nullptr) {
 		*error_str = gsh.error_message();
 	}
 	return false;

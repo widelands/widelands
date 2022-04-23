@@ -140,7 +140,7 @@ MapObjectProgram::read_int(const std::string& input, int min_value, int64_t max_
 	char* endp;
 	int64_t const value = strtol(input.c_str(), &endp, 0);
 	result = value;
-	if (*endp || static_cast<int64_t>(result) != value) {
+	if ((*endp != 0) || static_cast<int64_t>(result) != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
 	if (value < min_value) {

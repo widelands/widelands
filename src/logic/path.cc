@@ -86,7 +86,7 @@ void Path::load(FileRead& fr, const Map& map) {
 			start_ = end_ = read_coords_32(&fr, map.extent());
 			path_.clear();
 			uint32_t steps = fr.unsigned_32();
-			while (steps--) {
+			while ((steps--) != 0u) {
 				append(map, read_direction_8(&fr));
 			}
 		} else {

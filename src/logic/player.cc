@@ -281,12 +281,12 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
 	}
 
 	const Widelands::Field& neighbour = map[map.br_n(c)];
-	if (neighbour.get_owned_by() != 0 || !(neighbour.nodecaps() & BUILDCAPS_FLAG)) {
+	if (neighbour.get_owned_by() != 0 || ((neighbour.nodecaps() & BUILDCAPS_FLAG) == 0)) {
 		return false;
 	}
 
 	bool is_starting_position = false;
-	for (unsigned p = map.get_nrplayers(); p; --p) {
+	for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
 		if (map.get_starting_pos(p) == c) {
 			is_starting_position = true;
 			break;
@@ -298,10 +298,10 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
 		unsigned obstacles_nearby = 0;
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(f, 4));
 		do {
-			if (mr.location().field->get_owned_by()) {
+			if (mr.location().field->get_owned_by() != 0u) {
 				return false;
 			}
-			if (!(mr.location().field->nodecaps() & BUILDCAPS_FLAG)) {
+			if ((mr.location().field->nodecaps() & BUILDCAPS_FLAG) == 0) {
 				++obstacles_nearby;
 				if (obstacles_nearby > 3) {
 					return false;
@@ -313,7 +313,7 @@ bool Player::get_starting_position_suitability(const Coords& c) const {
 	// Check for enemy players nearby
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(f, kMinSpaceAroundPlayers));
 	do {
-		if (mr.location().field->get_owned_by()) {
+		if (mr.location().field->get_owned_by() != 0u) {
 			return false;
 		}
 	} while (mr.advance(map));
@@ -336,7 +336,7 @@ void Player::set_team_number(TeamNumber team) {
  * each other.
  */
 bool Player::is_hostile(const Player& other) const {
-	return &other != this && (!team_number_ || team_number_ != other.team_number_) &&
+	return &other != this && ((team_number_ == 0u) || team_number_ != other.team_number_) &&
 	       !is_attack_forbidden(other.player_number());
 }
 
@@ -388,7 +388,7 @@ void Player::update_team_players() {
 	team_players_ = {};
 
 	// …and tell our new allies to note us
-	if (team_number_) {
+	if (team_number_ != 0u) {
 		for (PlayerNumber p = 1; p <= kMaxPlayers; ++p) {
 			if (p != player_number()) {
 				if (Player* player = egbase().get_player(p)) {
@@ -484,7 +484,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 void Player::message_object_removed(MessageId message_id) const {
 	// Send delete command
 	upcast(Game, game, &egbase_);
-	if (!game) {
+	if (game == nullptr) {
 		return;
 	}
 
@@ -515,8 +515,8 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 
 	if (!fc.field->is_interior(player_number_)) {
 		buildcaps = 0;
-	} else if (buildcaps & BUILDCAPS_BUILDINGMASK) {  // Check if a building's flag can't be build
-		                                               // due to ownership
+	} else if ((buildcaps & BUILDCAPS_BUILDINGMASK) != 0) {  // Check if a building's flag can't be
+		                                                      // build due to ownership
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
 		if (!flagcoords.field->is_interior(player_number_)) {
@@ -542,7 +542,7 @@ NodeCaps Player::get_buildcaps(const FCoords& fc) const {
 Flag* Player::build_flag(const Coords& c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
-	if (buildcaps & BUILDCAPS_FLAG) {
+	if ((buildcaps & BUILDCAPS_FLAG) != 0) {
 		return new Flag(egbase(), this, c);
 	}
 	return nullptr;
@@ -556,8 +556,9 @@ Flag& Player::force_flag(const FCoords& c) {
 			if (existing_flag->get_owner() == this) {
 				return *existing_flag;
 			}
-		} else if (!dynamic_cast<RoadBase const*>(immovable)) {  //  A road or waterway is OK
-			immovable->remove(egbase());                          //  Make room for the flag.
+		} else if (dynamic_cast<RoadBase const*>(immovable) ==
+		           nullptr) {            //  A road or waterway is OK
+			immovable->remove(egbase());  //  Make room for the flag.
 		}
 	}
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(c, 1));
@@ -598,7 +599,7 @@ Road* Player::build_road(const Path& path) {
 						return nullptr;
 					}
 				}
-				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
+				if ((get_buildcaps(fc) & MOVECAPS_WALK) == 0) {
 					log_warn_time(
 					   egbase().get_gametime(), "%i: building road, unwalkable\n", player_number());
 					return nullptr;
@@ -769,7 +770,7 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 	}
 
 	if (descr.get_built_over_immovable() != INVALID_INDEX &&
-	    !(fc.field->get_immovable() &&
+	    !((fc.field->get_immovable() != nullptr) &&
 	      fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
 		return false;
 	}
@@ -778,20 +779,20 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
                                  get_buildcaps(fc) :
                                  map.get_max_nodecaps(egbase(), fc);
 	if (descr.get_ismine()) {
-		if (!(buildcaps & BUILDCAPS_MINE)) {
+		if ((buildcaps & BUILDCAPS_MINE) == 0) {
 			return false;
 		}
 	} else {
 		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1) {
 			return false;
 		}
-		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT)) {
+		if (descr.get_isport() && ((buildcaps & BUILDCAPS_PORT) == 0)) {
 			return false;
 		}
 	}
 
-	return (get_buildcaps(brn) & BUILDCAPS_FLAG) ||
-	       (brn.field->get_immovable() &&
+	return ((get_buildcaps(brn) & BUILDCAPS_FLAG) != 0) ||
+	       ((brn.field->get_immovable() != nullptr) &&
 	        brn.field->get_immovable()->descr().type() == MapObjectType::FLAG);
 }
 
@@ -834,7 +835,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 	while (!bulldozelist.empty()) {
 		PlayerImmovable* immovable = bulldozelist.back().get(egbase());
 		bulldozelist.pop_back();
-		if (!immovable) {
+		if (immovable == nullptr) {
 			continue;
 		}
 
@@ -845,7 +846,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 
 		// Destroy, after extended security check
 		if (upcast(Building, building, immovable)) {
-			if (!(building->get_playercaps() & Building::PCap_Bulldoze)) {
+			if ((building->get_playercaps() & Building::PCap_Bulldoze) == 0u) {
 				return;
 			}
 
@@ -858,7 +859,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 			}
 		} else if (upcast(Flag, flag, immovable)) {
 			if (Building* const flagbuilding = flag->get_building()) {
-				if (!(flagbuilding->get_playercaps() & Building::PCap_Bulldoze)) {
+				if ((flagbuilding->get_playercaps() & Building::PCap_Bulldoze) == 0u) {
 					log_warn_time(egbase().get_gametime(),
 					              "Player trying to rip flag (%u) with undestroyable "
 					              "building (%u)\n",
@@ -869,9 +870,9 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 
 			OPtr<Flag> flagcopy = flag;
 			if (recurse) {
-				for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id) {
+				for (uint8_t primary_road_id = 6; primary_road_id != 0u; --primary_road_id) {
 					// Recursive bulldoze calls may cause flag to disappear
-					if (!flagcopy.get(egbase())) {
+					if (flagcopy.get(egbase()) == nullptr) {
 						return;
 					}
 
@@ -895,7 +896,7 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 			}
 
 			// Recursive bulldoze calls may cause flag to disappear
-			if (flagcopy.get(egbase())) {
+			if (flagcopy.get(egbase()) != nullptr) {
 				flag->destroy(egbase());
 			}
 		} else if (upcast(RoadBase, road, immovable)) {
@@ -1004,7 +1005,7 @@ void Player::enhance_or_dismantle(Building* building,
 		if (upcast(Warehouse, wh, building)) {
 			workers = wh->get_incorporated_workers();
 			if (keep_wares) {
-				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di; --di) {
+				for (DescriptionIndex di = wh->get_wares().get_nrwareids(); di != 0u; --di) {
 					wares[di - 1] = wh->get_wares().stock(di - 1);
 				}
 				if (PortDock* pd = wh->get_portdock()) {
@@ -1221,7 +1222,7 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
                                       uint32_t nr_wanted) {
 	uint32_t count = 0;
 
-	if (soldiers) {
+	if (soldiers != nullptr) {
 		soldiers->clear();
 	}
 
@@ -1245,12 +1246,12 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken = std::min(nr_wanted, nr_present - nr_staying);
-			if (soldiers) {
+			if (soldiers != nullptr) {
 				soldiers->insert(soldiers->end(), present.begin(), present.begin() + nr_taken);
 			}
 			count += nr_taken;
 			nr_wanted -= nr_taken;
-			if (!nr_wanted) {
+			if (nr_wanted == 0u) {
 				break;
 			}
 		}
@@ -1783,7 +1784,7 @@ Player::BuildingStatsVector* Player::get_mutable_building_statistics(const Descr
 void Player::update_building_statistics(Building& building, NoteImmovable::Ownership ownership) {
 	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string& building_name =
-	   constructionsite ? constructionsite->building().name() : building.descr().name();
+	   constructionsite != nullptr ? constructionsite->building().name() : building.descr().name();
 
 	const size_t nr_buildings = egbase().descriptions().nr_buildings();
 
@@ -1797,7 +1798,7 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;
-		new_building.is_constructionsite = constructionsite;
+		new_building.is_constructionsite = (constructionsite != nullptr);
 		new_building.pos = building.get_position();
 		stat.push_back(new_building);
 	} else {
