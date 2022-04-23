@@ -19,12 +19,11 @@
 #ifndef WL_UI_BASIC_WINDOW_H
 #define WL_UI_BASIC_WINDOW_H
 
-#include "ui_basic/button.h"
-
 #include <memory>
 
 #include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/styles/window_style.h"
+#include "ui_basic/button.h"
 
 namespace UI {
 /**

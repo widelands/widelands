@@ -19,9 +19,9 @@
 #ifndef WL_MAP_IO_COORDS_PROFILE_H
 #define WL_MAP_IO_COORDS_PROFILE_H
 
-#include "logic/widelands_geometry.h"
-
 #include <string>
+
+#include "logic/widelands_geometry.h"
 
 class Section;
 

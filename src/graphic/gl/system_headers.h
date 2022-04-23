@@ -19,8 +19,6 @@
 #ifndef WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 #define WL_GRAPHIC_GL_SYSTEM_HEADERS_H
 
-#include "base/macros.h"
-
 // This includes the correct OpenGL headers for us. Use this
 // instead of including any system OpenGL headers yourself.
 
