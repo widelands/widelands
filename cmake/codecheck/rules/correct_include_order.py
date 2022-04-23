@@ -84,7 +84,7 @@ class EvalMatches(object):
 
         if blocks:  # Widelands includes.
             for lineno, delimiter, header in blocks[0]:
-            	# Header from eris is the only one allowed with hpp extension
+                # Header from eris is the only one allowed with hpp extension
                 if (not header.endswith('lua.hpp') and not header.endswith('.h')) or delimiter != '"':
                     errors.append(
                         (fn, lineno, 'This include block must contain all Widelands includes and must come last.'))
