@@ -84,7 +84,7 @@ add_subdirectory(game_io)
 add_subdirectory(graphic)
 
 add_subdirectory(io)
-if(MINIZIP_FOUND)
+if(MINIZIP_STATIC_LIBRARIES)
   wl_include_directories(io_filesystem ${MINIZIP_INCLUDE_DIRS})
   # target_link_libraries(io_filesystem PUBLIC ${MINIZIP_LIBRARIES})
   target_compile_options(io_filesystem SYSTEM PUBLIC ${MINIZIP_CFLAGS})

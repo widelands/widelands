@@ -1,9 +1,9 @@
 add_subdirectory(test)
 
-if(NOT MINIZIP_FOUND)
-  set(minizip_depends third_party_minizip)
-else()
+if(MINIZIP_STATIC_LIBRARIES)
   set(minizip_depends ${MINIZIP_LIBRARIES})
+else()
+  set(minizip_depends third_party_minizip)
 endif()
 
 set(io_filesystem_depends

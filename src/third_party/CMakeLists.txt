@@ -1,5 +1,5 @@
 
-if (NOT MINIZIP_FOUND)
+if (NOT MINIZIP_STATIC_LIBRARIES)
   wl_library(third_party_minizip
     THIRD_PARTY
     SRCS
