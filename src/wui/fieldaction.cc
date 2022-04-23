@@ -937,8 +937,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		   map, Widelands::Area<Widelands::FCoords>(
 		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
-			if (player_->is_seeing(map.get_index(mr.location())) &&
-			    player_->player_number() == mr.location().field->get_owned_by()) {
+			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					const Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
@@ -947,18 +946,21 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 					}
 					const Widelands::BuildingDescr* d = nullptr;
 					bool positive = false;  // unused default value to make g++ happy
+					bool is_milsite_or_whouse = descr.type() == Widelands::MapObjectType::MILITARYSITE ||
+					                            descr.type() == Widelands::MapObjectType::WAREHOUSE;
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
 						assert(d);
-						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
-						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
-						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
-						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
-						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
-						     d->type() != Widelands::MapObjectType::MILITARYSITE &&
-						     d->type() != Widelands::MapObjectType::WAREHOUSE)) {
+						if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
+						    (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
+						     imm->get_owner() != player_ ||
+						     !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
+						         .highlight_overlapping_workarea_for(d->name(), &positive))) {
+							continue;
+						} else if (is_milsite_or_whouse &&
+						           d->type() != Widelands::MapObjectType::MILITARYSITE &&
+						           d->type() != Widelands::MapObjectType::WAREHOUSE) {
 							continue;
 						}
 					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
@@ -968,8 +970,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						        .highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
 							continue;
 						}
-					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
-					           descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+					} else if (is_milsite_or_whouse) {
 						if (imm_type != Widelands::MapObjectType::MILITARYSITE &&
 						    imm_type != Widelands::MapObjectType::WAREHOUSE) {
 							continue;
