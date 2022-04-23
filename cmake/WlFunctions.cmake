@@ -6,7 +6,9 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_ATOMIC
+    USES_ICU
     USES_INTL
+    USES_MINIZIP
     USES_OPENGL
     USES_PNG
     USES_SDL2
@@ -14,7 +16,6 @@ macro(_parse_common_args ARGS)
     USES_SDL2_MIXER
     USES_SDL2_TTF
     USES_ZLIB
-    USES_ICU
   )
   set(ONE_VALUE_ARG )
   set(MULTI_VALUE_ARGS SRCS DEPENDS)
@@ -75,6 +76,16 @@ macro(_common_compile_tasks)
     # src/ is the base for all of our includes. The binary one is for generated files.
     wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src)
     wl_include_directories(${NAME} ${CMAKE_BINARY_DIR}/src)
+    if(MINIZIP_STATIC_LIBRARIES)
+      wl_include_directories(${NAME} ${MINIZIP_INCLUDE_DIRS})
+      target_compile_options(${NAME} SYSTEM PUBLIC ${MINIZIP_CFLAGS})
+    else()
+      wl_include_directories(${NAME} ${CMAKE_SOURCE_DIR}/src/third_party/minizip)
+    endif()
+  endif()
+
+  if(ARG_USES_MINIZIP)
+      target_link_libraries(${NAME} minizip)
   endif()
 
   if(ARG_USES_ATOMIC AND NOT APPLE AND ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
