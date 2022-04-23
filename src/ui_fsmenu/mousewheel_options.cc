@@ -265,7 +265,7 @@ void KeymodAndDirBox::check_dir() {
 	}
 }
 bool KeymodAndDirBox::conflicts(uint16_t keymod, uint8_t dir) {
-	return (dir & *dir_) && (matches_keymod(keymod, *keymod_));
+	return ((dir & *dir_) != 0) && (matches_keymod(keymod, *keymod_));
 }
 bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 	for (KeymodAndDirBox* other : shared_scope_list_) {

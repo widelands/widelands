@@ -57,7 +57,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			// Send message only to open player slots
 			Player* recipient = game.get_player(i);
-			if (recipient) {
+			if (recipient != nullptr) {
 				std::unique_ptr<Message> msg(new Widelands::Message(
 				   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
 				   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", error_message));
