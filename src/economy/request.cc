@@ -76,14 +76,14 @@ Request::Request(PlayerImmovable& init_target,
 		   "creating worker request with index %u, but the worker for this index doesn't exist",
 		   index);
 	}
-	if (economy_) {
+	if (economy_ != nullptr) {
 		economy_->add_request(*this);
 	}
 }
 
 Request::~Request() {
 	// Remove from the economy
-	if (is_open() && economy_) {
+	if (is_open() && (economy_ != nullptr)) {
 		economy_->remove_request(*this);
 	}
 
@@ -130,7 +130,7 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
-			if (economy_) {
+			if (economy_ != nullptr) {
 				economy_->remove_request(*this);
 			}
 			economy_ = target_.get_economy(type_);
@@ -164,7 +164,7 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 						throw wexception("transfer target %u is neither ware nor worker", obj->serial());
 					}
 
-					if (!transfer) {
+					if (transfer == nullptr) {
 						log_warn(
 						   "loading request, transferred object %u has no transfer\n", obj->serial());
 					} else {
@@ -216,10 +216,10 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 
 	fw.unsigned_16(transfers_.size());  //  Write number of current transfers.
 	for (const Transfer* trans : transfers_) {
-		if (trans->ware_) {  //  write ware/worker
+		if (trans->ware_ != nullptr) {  //  write ware/worker
 			assert(mos.is_object_known(*trans->ware_));
 			fw.unsigned_32(mos.get_object_file_index(*trans->ware_));
-		} else if (trans->worker_) {
+		} else if (trans->worker_ != nullptr) {
 			assert(mos.is_object_known(*trans->worker_));
 			fw.unsigned_32(mos.get_object_file_index(*trans->worker_));
 		}
@@ -249,7 +249,7 @@ Time Request::get_base_required_time(const EditorGameBase& egbase, uint32_t cons
 	}
 	const Time& curtime = egbase.get_gametime();
 
-	if (!nr || required_interval_.get() == 0) {
+	if ((nr == 0u) || required_interval_.get() == 0) {
 		return required_time_;
 	}
 
@@ -282,8 +282,8 @@ constexpr Duration kBlacklistDurationAfterEvict(18000);
 uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
 	const WarePriority& priority =
-	   (target_building_ ? target_building_->get_priority(get_type(), get_index()) :
-                          WarePriority::kNormal);
+	   (target_building_ != nullptr ? target_building_->get_priority(get_type(), get_index()) :
+                                     WarePriority::kNormal);
 
 	// Workaround for bug #4809 Kicking a worker let him go the building where he was kicked off
 	const Time& cur_time = economy_->owner().egbase().get_gametime();
@@ -304,8 +304,8 @@ uint32_t Request::get_priority(const int32_t cost) const {
 		return 0;
 	}
 
-	const uint32_t req_time =
-	   (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
+	const uint32_t req_time = (target_constructionsite_ != nullptr ? get_required_time().get() :
+                                                                    get_last_request_time().get());
 	return
 	   // Linear scaling of request priority depending on
 	   // the building's user-specified ware priority.
@@ -325,7 +325,7 @@ uint32_t Request::get_priority(const int32_t cost) const {
  * normalized on a scale from 0 (lowest) to Flag::kMaxTransferPriority (highest).
  */
 uint32_t Request::get_normalized_transfer_priority() const {
-	if (!target_building_) {
+	if (target_building_ == nullptr) {
 		return 0;
 	}
 
@@ -355,11 +355,11 @@ uint32_t Request::get_normalized_transfer_priority() const {
  */
 void Request::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_ && is_open()) {
+		if ((economy_ != nullptr) && is_open()) {
 			economy_->remove_request(*this);
 		}
 		economy_ = e;
-		if (economy_ && is_open()) {
+		if ((economy_ != nullptr) && is_open()) {
 			economy_->add_request(*this);
 		}
 	}
@@ -381,7 +381,7 @@ void Request::set_count(uint32_t const count) {
 	}
 
 	// Update the economy
-	if (economy_) {
+	if (economy_ != nullptr) {
 		if (wasopen && !is_open()) {
 			economy_->remove_request(*this);
 		} else if (!wasopen && is_open()) {
@@ -461,7 +461,7 @@ void Request::start_transfer(Game& game, Supply& supp) {
 void Request::transfer_finish(Game& game, Transfer& t) {
 	Worker* const w = t.worker_;
 
-	if (t.ware_) {
+	if (t.ware_ != nullptr) {
 		t.ware_->destroy(game);
 	}
 

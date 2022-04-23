@@ -569,7 +569,7 @@ std::string ProductionProgram::ActReturn::SiteHas::description_negation(
 
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const ProductionSite& ps) const {
 	const std::vector<ProductionSite::WorkingPosition>& wp = ps.working_positions_;
-	for (uint32_t i = ps.descr().nr_working_positions(); i;) {
+	for (uint32_t i = ps.descr().nr_working_positions(); i != 0u;) {
 		if (wp.at(--i).worker.get(ps.get_owner()->egbase())->needs_experience()) {
 			return true;
 		}
@@ -1007,7 +1007,7 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 	ProductionSite::State& state = psite.top_state();
 	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
-		if (state.flags & ProductionSite::State::StateFlags::kStateFlagHasExtraData) {
+		if ((state.flags & ProductionSite::State::StateFlags::kStateFlagHasExtraData) != 0u) {
 			worker.top_state().objvar1 = state.objvar;
 		}
 		state.phase = ProgramResult::kFailed;
@@ -1064,7 +1064,8 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_.get() ? duration_ : Duration(0), ps.top_state().phase);
+	return ps.program_step(
+	   game, duration_.get() != 0u ? duration_ : Duration(0), ps.top_state().phase);
 }
 
 /* RST
@@ -1079,8 +1080,8 @@ ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argume
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, parameters.animation);
-	return ps.program_step(
-	   game, parameters.duration.get() ? parameters.duration : Duration(0), ps.top_state().phase);
+	return ps.program_step(game, parameters.duration.get() != 0u ? parameters.duration : Duration(0),
+	                       ps.top_state().phase);
 }
 
 /* RST
@@ -1576,10 +1577,10 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 
 	//  how much is dug
 	unsigned dug_percentage = math::k100PercentAsInt;
-	if (totalstart) {
+	if (totalstart != 0u) {
 		dug_percentage = (totalstart - totalres) * math::k100PercentAsInt / totalstart;
 	}
-	if (!totalres) {
+	if (totalres == 0u) {
 		dug_percentage = math::k100PercentAsInt;
 	}
 
@@ -1997,7 +1998,7 @@ const ImmovableDescr&
 ProductionProgram::ActConstruct::get_construction_descr(const Descriptions& descriptions) const {
 	const ImmovableDescr* descr =
 	   descriptions.get_immovable_descr(descriptions.immovable_index(objectname));
-	if (!descr) {
+	if (descr == nullptr) {
 		throw wexception("ActConstruct: immovable '%s' does not exist", objectname.c_str());
 	}
 
@@ -2029,7 +2030,8 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	std::vector<ImmovableFound> immovables;
 	CheckStepWalkOn cstep(MOVECAPS_WALK, true);
 	Area<FCoords> area(map.get_fcoords(psite.get_position()), radius);
-	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
+	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr)) !=
+	    0u) {
 		state.objvar = immovables[0].object;
 
 		psite.working_positions_.at(psite.main_worker_)
@@ -2044,7 +2046,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	// 10 is custom value to make sure the "water" is at least 10 nodes big
 	fna.add(FindNodeShore(10));
 	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone));
-	if (map.find_reachable_fields(game, area, &fields, cstep, fna)) {
+	if (map.find_reachable_fields(game, area, &fields, cstep, fna) != 0u) {
 		// Testing received fields to get one with less immovables nearby
 		Coords best_coords = fields.back();  // Just to initialize it
 		uint32_t best_score = std::numeric_limits<uint32_t>::max();
@@ -2094,7 +2096,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	WaresQueue* wq = nullptr;
 
 	Immovable* construction = dynamic_cast<Immovable*>(state.objvar.get(game));
-	if (construction) {
+	if (construction != nullptr) {
 		if (!construction->construct_remaining_buildcost(game, &remaining)) {
 			psite.molog(game.get_gametime(), "construct: immovable %u not under construction",
 			            construction->serial());
@@ -2114,7 +2116,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 		}
 	}
 
-	if (!wq) {
+	if (wq == nullptr) {
 		psite.program_end(game, ProgramResult::kFailed);
 		return false;
 	}

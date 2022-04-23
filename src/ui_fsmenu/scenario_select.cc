@@ -43,7 +43,8 @@ namespace FsMenu {
  * lets the user choose one.
  */
 ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
-   : TwoColumnsFullNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
+   : TwoColumnsFullNavigationMenu(
+        fsmm, camp != nullptr ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
@@ -195,7 +196,7 @@ void ScenarioSelect::clicked_ok() {
 				next.push_back(resolve_and_fix_cross_file(s.path));
 			}
 		};
-		if (campaign_) {
+		if (campaign_ != nullptr) {
 			for (const auto& s : campaign_->scenarios) {
 				resolve(*s);
 			}
