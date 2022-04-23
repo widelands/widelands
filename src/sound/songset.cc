@@ -99,7 +99,8 @@ Mix_Music* Songset::get_song(uint32_t random) {
 
 	// Then open the new song
 	if (fr_.try_open(*g_fs, filename)) {
-		if ((rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size())) == nullptr) {
+		rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size());
+		if (rwops_ == nullptr) {
 			fr_.close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}

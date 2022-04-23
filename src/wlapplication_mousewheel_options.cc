@@ -31,8 +31,17 @@ struct MousewheelOption {
 	const MousewheelOptionType type_;
 	const uint16_t default_;
 
+private:
 	MousewheelOption(std::string n, MousewheelOptionType t, uint16_t def)
 	   : internal_name_(n), type_(t), default_(def) {
+	}
+
+public:
+	static inline MousewheelOption create_mod(std::string n, uint16_t def) {
+		return MousewheelOption(n, MousewheelOptionType::kBool, def);
+	}
+	static inline MousewheelOption create_bool(std::string n, bool def) {
+		return MousewheelOption(n, MousewheelOptionType::kKeymod, def ? 1 : 0);
 	}
 
 	bool get_bool() const {
@@ -133,47 +142,47 @@ struct MousewheelHandlerOptions {
 
 static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options = {
    {MousewheelOptionID::kUIChangeValueInvertX,
-    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("change_value_x_invert", false)},
    {MousewheelOptionID::kUIChangeValueInvertY,
-    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("change_value_y_invert", false)},
 
    {MousewheelOptionID::kUITabInvertX,
-    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("tabpanel_x_invert", false)},
    {MousewheelOptionID::kUITabInvertY,
-    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("tabpanel_y_invert", false)},
 
    {MousewheelOptionID::kMapZoomMod,
-    MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
+    MousewheelOption::create_mod("zoom_modifier", KMOD_NONE)},
    {MousewheelOptionID::kMapZoomX,  //
-    MousewheelOption("zoom_x", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("zoom_x", true)},
    {MousewheelOptionID::kMapZoomY,  //
-    MousewheelOption("zoom_y", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("zoom_y", true)},
    {MousewheelOptionID::kMapZoomInvertX,
-    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("zoom_x_invert", false)},
    {MousewheelOptionID::kMapZoomInvertY,
-    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_bool("zoom_y_invert", false)},
 
    {MousewheelOptionID::kMapScrollMod,
-    MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
-   {MousewheelOptionID::kMapScroll, MousewheelOption("move_map", MousewheelOptionType::kBool, 0u)},
+    MousewheelOption::create_mod("move_map_modifier", KMOD_NONE)},
+   {MousewheelOptionID::kMapScroll, MousewheelOption::create_bool("move_map", false)},
 
    {MousewheelOptionID::kGameSpeedMod,
-    MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
+    MousewheelOption::create_mod("gamespeed_modifier", KMOD_ALT)},
    {MousewheelOptionID::kGameSpeedX,
-    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("gamespeed_x", true)},
    {MousewheelOptionID::kGameSpeedY,
-    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("gamespeed_y", true)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
-    MousewheelOption("editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
+    MousewheelOption::create_mod("editor_toolsize_modifier", KMOD_ALT)},
    {MousewheelOptionID::kEditorToolsizeX,
-    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("editor_toolsize_x", true)},
    {MousewheelOptionID::kEditorToolsizeY,
-    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, 1u)},
+    MousewheelOption::create_bool("editor_toolsize_y", true)},
 
-   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, 1u)},
-   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, 0u)},
-   {MousewheelOptionID::kNoMod, MousewheelOption("", MousewheelOptionType::kKeymod, KMOD_NONE)},
+   {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
+   {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
+   {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
 
 };
 
