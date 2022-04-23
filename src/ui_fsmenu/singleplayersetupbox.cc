@@ -84,7 +84,7 @@ void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_eleme
 
 void SinglePlayerActivePlayerGroup::choose_color() {
 	Panel* p = this;
-	while (p->get_parent()) {
+	while (p->get_parent() != nullptr) {
 		p = p->get_parent();
 	}
 

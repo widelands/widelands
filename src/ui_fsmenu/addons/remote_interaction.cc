@@ -561,9 +561,9 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 
 void AdminDialog::think() {
 	UI::Window::think();
-	if (text_) {
+	if (text_ != nullptr) {
 		ok_.set_enabled(!text_->get_text().empty());
-	} else if (txsettings_) {
+	} else if (txsettings_ != nullptr) {
 		ok_.set_enabled(txsettings_->ok_enabled());
 	}
 }
@@ -739,7 +739,7 @@ RemoteInteractionWindow::RemoteInteractionWindow(AddOnsCtrl& parent,
 	box_votes_.add_space(kRowButtonSpacing);
 
 	tabs_.add("comments", "", &box_comments_);
-	if (nr_screenshots_) {
+	if (nr_screenshots_ != 0) {
 		tabs_.add(
 		   "screenshots", format(_("Screenshots (%u)"), info_->screenshots.size()), &box_screenies_);
 		tabs_.sigclicked.connect([this]() {
@@ -823,7 +823,7 @@ void RemoteInteractionWindow::update_data() {
 	(*tabs_.tabs().rbegin())->set_title(format(_("Votes (%u)"), info_->number_of_votes()));
 
 	voting_stats_summary_.set_text(
-	   info_->number_of_votes() ?
+	   info_->number_of_votes() != 0u ?
          format_l(ngettext("Average rating: %1$.3f (%2$u vote)",
 	                        "Average rating: %1$.3f (%2$u votes)", info_->number_of_votes()),
 	               info_->average_rating(), info_->number_of_votes()) :
@@ -899,7 +899,7 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 	screenshot_descr_.set_text(it->second);
 	screenshot_.set_tooltip("");
 
-	if (screenshot_cache_[current_screenshot_]) {
+	if (screenshot_cache_[current_screenshot_] != nullptr) {
 		screenshot_.set_icon(screenshot_cache_[current_screenshot_]);
 		return;
 	}
@@ -924,7 +924,7 @@ void RemoteInteractionWindow::next_screenshot(int8_t delta) {
 		image = g_image_cache->get(cached->second);
 	}
 
-	if (image) {
+	if (image != nullptr) {
 		screenshot_.set_icon(image);
 		screenshot_cache_[current_screenshot_] = image;
 	} else {
