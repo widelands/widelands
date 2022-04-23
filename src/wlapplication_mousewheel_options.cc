@@ -146,21 +146,16 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kUIChangeValueInvertY,
     MousewheelOption::create_bool("change_value_y_invert", false)},
 
-   {MousewheelOptionID::kUITabInvertX,
-    MousewheelOption::create_bool("tabpanel_x_invert", false)},
-   {MousewheelOptionID::kUITabInvertY,
-    MousewheelOption::create_bool("tabpanel_y_invert", false)},
+   {MousewheelOptionID::kUITabInvertX, MousewheelOption::create_bool("tabpanel_x_invert", false)},
+   {MousewheelOptionID::kUITabInvertY, MousewheelOption::create_bool("tabpanel_y_invert", false)},
 
-   {MousewheelOptionID::kMapZoomMod,
-    MousewheelOption::create_mod("zoom_modifier", KMOD_NONE)},
+   {MousewheelOptionID::kMapZoomMod, MousewheelOption::create_mod("zoom_modifier", KMOD_NONE)},
    {MousewheelOptionID::kMapZoomX,  //
     MousewheelOption::create_bool("zoom_x", true)},
    {MousewheelOptionID::kMapZoomY,  //
     MousewheelOption::create_bool("zoom_y", true)},
-   {MousewheelOptionID::kMapZoomInvertX,
-    MousewheelOption::create_bool("zoom_x_invert", false)},
-   {MousewheelOptionID::kMapZoomInvertY,
-    MousewheelOption::create_bool("zoom_y_invert", false)},
+   {MousewheelOptionID::kMapZoomInvertX, MousewheelOption::create_bool("zoom_x_invert", false)},
+   {MousewheelOptionID::kMapZoomInvertY, MousewheelOption::create_bool("zoom_y_invert", false)},
 
    {MousewheelOptionID::kMapScrollMod,
     MousewheelOption::create_mod("move_map_modifier", KMOD_NONE)},
@@ -168,17 +163,13 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
 
    {MousewheelOptionID::kGameSpeedMod,
     MousewheelOption::create_mod("gamespeed_modifier", KMOD_ALT)},
-   {MousewheelOptionID::kGameSpeedX,
-    MousewheelOption::create_bool("gamespeed_x", true)},
-   {MousewheelOptionID::kGameSpeedY,
-    MousewheelOption::create_bool("gamespeed_y", true)},
+   {MousewheelOptionID::kGameSpeedX, MousewheelOption::create_bool("gamespeed_x", true)},
+   {MousewheelOptionID::kGameSpeedY, MousewheelOption::create_bool("gamespeed_y", true)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
     MousewheelOption::create_mod("editor_toolsize_modifier", KMOD_ALT)},
-   {MousewheelOptionID::kEditorToolsizeX,
-    MousewheelOption::create_bool("editor_toolsize_x", true)},
-   {MousewheelOptionID::kEditorToolsizeY,
-    MousewheelOption::create_bool("editor_toolsize_y", true)},
+   {MousewheelOptionID::kEditorToolsizeX, MousewheelOption::create_bool("editor_toolsize_x", true)},
+   {MousewheelOptionID::kEditorToolsizeY, MousewheelOption::create_bool("editor_toolsize_y", true)},
 
    {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
