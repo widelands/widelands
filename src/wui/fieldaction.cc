@@ -939,7 +939,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
-					const Widelands::MapObjectType imm_type = imm->descr().type();
+					Widelands::MapObjectType imm_type = imm->descr().type();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
 						// We are not interested in trees and pebbles
 						continue;
@@ -952,18 +952,9 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
 						assert(d);
-						if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
-						    (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
-						     imm->get_owner() != player_ ||
-						     !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						         .highlight_overlapping_workarea_for(d->name(), &positive))) {
-							continue;
-						} else if (is_milsite_or_whouse &&
-						           d->type() != Widelands::MapObjectType::MILITARYSITE &&
-						           d->type() != Widelands::MapObjectType::WAREHOUSE) {
-							continue;
-						}
-					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+						imm_type = d->type();
+					}
+					if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
 						    imm->get_owner() != player_ ||
 						    !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
