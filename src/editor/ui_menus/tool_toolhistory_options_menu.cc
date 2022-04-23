@@ -80,7 +80,7 @@ void EditorToolhistoryOptionsMenu::rebuild_list() {
         int count = 0;
         for (const auto& it: history_tool_) {
                 if (it.sticky) {
-                        list_.add("!" + it.key, it.key);
+                        list_.add(it.key, it.key, g_image_cache->get("images/wui/editor/sticky_list_item.png"));
                 } else {
                         list_.add(it.key, it.key);
                 }
