@@ -1,15 +1,21 @@
 add_subdirectory(test)
 
+if(NOT MINIZIP_FOUND)
+  set(minizip_depends third_party_minizip)
+else()
+  set(minizip_depends ${MINIZIP_LIBRARIES})
+endif()
+
 set(io_filesystem_depends
-      base
-      base_exceptions
-      base_macros
-      io_stream
+  base
+  base_exceptions
+  base_macros
+  io_stream
+  ${minizip_depends}
 )
 
-if (NOT MINIZIP_FOUND)
-  set(io_filesystem_depends ${io_filesystem_depends} third_party_minizip)
-endif()
+message(STATUS ${io_filesystem_depends})
+
 wl_library(io_filesystem
   SRCS
     disk_filesystem.cc

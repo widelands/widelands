@@ -39,7 +39,7 @@ if (WIN32)
 			COMMAND rc
 				/fo ${WIN32_ICON_O}
 				${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)	
+		)
 	else()
 		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
 			COMMAND ${MINGW_PREFIX}windres
@@ -47,7 +47,7 @@ if (WIN32)
 				-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
 		)
 	endif()
-	
+
   wl_binary(widelands
     WIN32
     SRCS
@@ -69,6 +69,12 @@ else()
   )
 endif()
 
+include(FindPkgConfig)
+if(PKG_CONFIG_FOUND)
+  pkg_check_modules(MINIZIP minizip)
+endif()
+
+add_subdirectory(third_party)
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
@@ -76,14 +82,24 @@ add_subdirectory(economy)
 add_subdirectory(editor)
 add_subdirectory(game_io)
 add_subdirectory(graphic)
+
 add_subdirectory(io)
+if(MINIZIP_FOUND)
+  wl_include_directories(io_filesystem ${MINIZIP_INCLUDE_DIRS})
+  # target_link_libraries(io_filesystem PUBLIC ${MINIZIP_LIBRARIES})
+  target_compile_options(io_filesystem SYSTEM PUBLIC ${MINIZIP_CFLAGS})
+  message(STATUS "Using installed minizip libraries")
+else()
+  wl_include_directories(io_filesystem "./third_party/minizip")
+endif()
+
 add_subdirectory(logic)
 add_subdirectory(map_io)
 add_subdirectory(network)
 add_subdirectory(notifications)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-add_subdirectory(third_party)
+
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 if (OPTION_BUILD_WEBSITE_TOOLS)
