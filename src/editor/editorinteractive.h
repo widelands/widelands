@@ -106,10 +106,10 @@ public:
 
 	enum class Init {
 		kLoadMapDirectly,  // load the given map file, then run the given script if any
-		kDefault,          // create new empty map
-		kNew,              // show New Map window
-		kRandom,           // show Random Map window
-		kLoad              // show Load Map window
+		kDefault,	  // create new empty map
+		kNew,	      // show New Map window
+		kRandom,	   // show Random Map window
+		kLoad	      // show Load Map window
 	};
 	static void run_editor(UI::Panel* error_message_parent,
 			       EditorInteractive::Init,
@@ -125,7 +125,7 @@ public:
 
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
-  	void set_sel_radius(uint32_t) override;
+	void set_sel_radius(uint32_t) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 	void stop_painting();
 
