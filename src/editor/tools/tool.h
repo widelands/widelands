@@ -29,15 +29,15 @@
 #include "logic/widelands_geometry.h"
 
 enum class WindowID {
-        Unset = 0,
-        ChangeHeight,
-        ChangeResources,
-        Terrain,
-        NoiseHeight,
-        Critters,
-        Immovables,
-        Resize,
-        ToolHistory,
+	Unset = 0,
+	ChangeHeight,
+	ChangeResources,
+	Terrain,
+	NoiseHeight,
+	Critters,
+	Immovables,
+	Resize,
+	ToolHistory,
 };
 
 
@@ -50,116 +50,116 @@ enum class WindowID {
 class EditorTool {
 public:
 
-        EditorTool(EditorInteractive& parent, EditorTool& second, EditorTool& third, bool uda = true)
-          : parent_(parent), second_(second), third_(third), undoable_(uda) {
-        }
-        virtual ~EditorTool() {
-        }
+	EditorTool(EditorInteractive& parent, EditorTool& second, EditorTool& third, bool uda = true)
+	  : parent_(parent), second_(second), third_(third), undoable_(uda) {
+	}
+	virtual ~EditorTool() {
+	}
 
-        enum ToolIndex { First, Second, Third };
-        int32_t handle_click(ToolIndex i,
-                             const Widelands::NodeAndTriangle<>& center,
-                             EditorActionArgs* args,
-                             Widelands::Map* map) {
-                return (i == First  ? *this :
-                        i == Second ? second_ :
-                            third_)
-                   .handle_click_impl(center, args, map);
-        }
+	enum ToolIndex { First, Second, Third };
+	int32_t handle_click(ToolIndex i,
+			     const Widelands::NodeAndTriangle<>& center,
+			     EditorActionArgs* args,
+			     Widelands::Map* map) {
+		return (i == First  ? *this :
+			i == Second ? second_ :
+			    third_)
+		   .handle_click_impl(center, args, map);
+	}
 
-        int32_t handle_undo(ToolIndex i,
-                            const Widelands::NodeAndTriangle<>& center,
-                            EditorActionArgs* args,
-                            Widelands::Map* map) {
-                return (i == First  ? *this :
-                        i == Second ? second_ :
-                            third_)
-                   .handle_undo_impl(center, args, map);
-        }
+	int32_t handle_undo(ToolIndex i,
+			    const Widelands::NodeAndTriangle<>& center,
+			    EditorActionArgs* args,
+			    Widelands::Map* map) {
+		return (i == First  ? *this :
+			i == Second ? second_ :
+			    third_)
+		   .handle_undo_impl(center, args, map);
+	}
 
-        const Image* get_sel(const ToolIndex i) {
-                return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
-        }
+	const Image* get_sel(const ToolIndex i) {
+		return (i == First ? *this : i == Second ? second_ : third_).get_sel_impl();
+	}
 
-        EditorActionArgs format_args(const ToolIndex i) {
-                return (i == First ? *this : i == Second ? second_ : third_).format_args_impl();
-        }
+	EditorActionArgs format_args(const ToolIndex i) {
+		return (i == First ? *this : i == Second ? second_ : third_).format_args_impl();
+	}
 
-        bool is_undoable() {
-                return undoable_;
-        }
-        virtual bool has_size_one() const {
-                return false;
-        }
-        virtual EditorActionArgs format_args_impl() {
-                return EditorActionArgs(parent_);
-        }
+	bool is_undoable() {
+		return undoable_;
+	}
+	virtual bool has_size_one() const {
+		return false;
+	}
+	virtual EditorActionArgs format_args_impl() {
+		return EditorActionArgs(parent_);
+	}
 
-        virtual std::string format_conf_string_impl(const ToolConf&) {
-                return "";
-        }
+	virtual std::string format_conf_string_impl(const ToolConf&) {
+		return "";
+	}
 
-        virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-                                          EditorActionArgs*,
-                                          Widelands::Map*) = 0;
-        virtual int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>&,
-                                         EditorActionArgs*,
-                                         Widelands::Map*) {
-                return 0;
-        }  // non unduable tools don't need to implement this.
-        virtual const Image* get_sel_impl() const = 0;
+	virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
+					  EditorActionArgs*,
+					  Widelands::Map*) = 0;
+	virtual int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>&,
+					 EditorActionArgs*,
+					 Widelands::Map*) {
+		return 0;
+	}  // non unduable tools don't need to implement this.
+	virtual const Image* get_sel_impl() const = 0;
 
-        // Gives the tool the chance to modify the nodecaps to change what will be
-        // displayed as build help.
-        virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-                                                           const Widelands::EditorGameBase&) {
-                return fcoords.field->nodecaps();
-        }
+	// Gives the tool the chance to modify the nodecaps to change what will be
+	// displayed as build help.
+	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+							   const Widelands::EditorGameBase&) {
+		return fcoords.field->nodecaps();
+	}
 
-        // Gives the tool the chance to modify the maxcaps to change what will be
-        // displayed as maximum build help.
-        virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
-                                                          const Widelands::EditorGameBase&) {
-                return fcoords.field->maxcaps();
-        }
+	// Gives the tool the chance to modify the maxcaps to change what will be
+	// displayed as maximum build help.
+	virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
+							  const Widelands::EditorGameBase&) {
+		return fcoords.field->maxcaps();
+	}
 
-        virtual bool operates_on_triangles() const {
-                return false;
-        }
+	virtual bool operates_on_triangles() const {
+		return false;
+	}
 
-        virtual WindowID get_window_id() {
-                return WindowID::Unset;
-        }
+	virtual WindowID get_window_id() {
+		return WindowID::Unset;
+	}
 
-        bool save_configuration(const ToolIndex i, ToolConf& conf) {
-                conf.primary = this;
-                conf.tool = (i == First ? this : i == Second ? &second_ : &third_);
-                return conf.tool->save_configuration_impl(conf);
-        }
+	bool save_configuration(const ToolIndex i, ToolConf& conf) {
+		conf.primary = this;
+		conf.tool = (i == First ? this : i == Second ? &second_ : &third_);
+		return conf.tool->save_configuration_impl(conf);
+	}
 
-        // Returns false if didn't save anything
-        virtual bool save_configuration_impl(ToolConf&) {
-                return false;
-        }
+	// Returns false if didn't save anything
+	virtual bool save_configuration_impl(ToolConf&) {
+		return false;
+	}
 
-        virtual void load_configuration(const ToolConf&) {
-        }
+	virtual void load_configuration(const ToolConf&) {
+	}
 
-        /// Returns a string representing the given configuration
-        std::string format_conf_string(const ToolConf& conf) {
-                assert(conf.tool == this);
-                return format_conf_string_impl(conf);
-        }
+	/// Returns a string representing the given configuration
+	std::string format_conf_string(const ToolConf& conf) {
+		assert(conf.tool == this);
+		return format_conf_string_impl(conf);
+	}
 
 
 
 protected:
-        EditorInteractive& parent_;
-        EditorTool &second_, &third_;
-        bool undoable_;
+	EditorInteractive& parent_;
+	EditorTool &second_, &third_;
+	bool undoable_;
 
 private:
-        DISALLOW_COPY_AND_ASSIGN(EditorTool);
+	DISALLOW_COPY_AND_ASSIGN(EditorTool);
 };
 
 

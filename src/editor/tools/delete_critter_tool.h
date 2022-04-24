@@ -23,22 +23,22 @@
 
 /// Deletes critter from the map.
 struct EditorDeleteCritterTool : public EditorTool {
-        EditorDeleteCritterTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
-        }
+	EditorDeleteCritterTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	}
 
-        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                  EditorActionArgs* args,
-                                  Widelands::Map* map) override;
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+				  EditorActionArgs* args,
+				  Widelands::Map* map) override;
 
-        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-                                 EditorActionArgs* args,
-                                 Widelands::Map* map) override;
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+				 EditorActionArgs* args,
+				 Widelands::Map* map) override;
 
-        EditorActionArgs format_args_impl() override;
+	EditorActionArgs format_args_impl() override;
 
-        const Image* get_sel_impl() const override {
-                return g_image_cache->get("images/wui/editor/fsel_editor_delete.png");
-        }
+	const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor/fsel_editor_delete.png");
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DELETE_CRITTER_TOOL_H

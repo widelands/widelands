@@ -31,28 +31,28 @@
  * Do all tool action you want to make "undoable" using this class.
  */
 struct EditorHistory {
-        EditorHistory(EditorInteractive& parent, UI::Button& undo, UI::Button& redo)
-           : parent_(parent), undo_button_(undo), redo_button_(redo), draw_tool_(parent) {
-        }
+	EditorHistory(EditorInteractive& parent, UI::Button& undo, UI::Button& redo)
+	   : parent_(parent), undo_button_(undo), redo_button_(redo), draw_tool_(parent) {
+	}
 
-        uint32_t do_action(EditorTool& tool,
-                           EditorTool::ToolIndex ind,
-                           Widelands::Map& map,
-                           const Widelands::NodeAndTriangle<>& center,
-                           bool draw = false);
-        uint32_t undo_action();
-        uint32_t redo_action();
+	uint32_t do_action(EditorTool& tool,
+			   EditorTool::ToolIndex ind,
+			   Widelands::Map& map,
+			   const Widelands::NodeAndTriangle<>& center,
+			   bool draw = false);
+	uint32_t undo_action();
+	uint32_t redo_action();
 
 private:
-        EditorInteractive& parent_;
+	EditorInteractive& parent_;
 
-        UI::Button& undo_button_;
-        UI::Button& redo_button_;
+	UI::Button& undo_button_;
+	UI::Button& redo_button_;
 
-        EditorDrawTool draw_tool_;
+	EditorDrawTool draw_tool_;
 
-        std::deque<EditorToolAction> undo_stack_;
-        std::deque<EditorToolAction> redo_stack_;
+	std::deque<EditorToolAction> undo_stack_;
+	std::deque<EditorToolAction> redo_stack_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_HISTORY_H

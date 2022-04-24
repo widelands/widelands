@@ -37,11 +37,11 @@ struct EditorToolAction {
 	EditorActionArgs* args;
 
 	EditorToolAction(EditorTool& t,
-	                 uint32_t ind,
-	                 Widelands::Map& m,
-	                 Widelands::NodeAndTriangle<> c,
-	                 EditorInteractive& p,
-	                 const EditorActionArgs& nargs)
+			 uint32_t ind,
+			 Widelands::Map& m,
+			 Widelands::NodeAndTriangle<> c,
+			 EditorInteractive& p,
+			 const EditorActionArgs& nargs)
 	   : tool(t), i(ind), map(m), center(c), parent(p) {
 		args = new EditorActionArgs(parent);
 		*args = nargs;

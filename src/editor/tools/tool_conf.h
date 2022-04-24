@@ -26,22 +26,22 @@
 class EditorTool;
 
 struct ToolConf {
-        ToolConf();
+	ToolConf();
 	ToolConf(const ToolConf&) = default;
 	ToolConf& operator=(const ToolConf&) = default;
 
-        EditorTool* primary;
-        EditorTool* tool;
+	EditorTool* primary;
+	EditorTool* tool;
 
 	uint32_t sel_radius;
 
-        int32_t change_by;
+	int32_t change_by;
 	Widelands::ResourceAmount set_to;
-        Widelands::HeightInterval interval;
-        std::list<Widelands::DescriptionIndex> terrain_types;
-        std::list<Widelands::DescriptionIndex> immovable_types;
-        std::list<Widelands::DescriptionIndex> critter_types;
-        Widelands::DescriptionIndex resource;
+	Widelands::HeightInterval interval;
+	std::list<Widelands::DescriptionIndex> terrain_types;
+	std::list<Widelands::DescriptionIndex> immovable_types;
+	std::list<Widelands::DescriptionIndex> critter_types;
+	Widelands::DescriptionIndex resource;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_CONF_H

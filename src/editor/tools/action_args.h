@@ -70,7 +70,7 @@ struct EditorActionArgs {
 
 	uint32_t refcount;
 
-        WindowID window_id;
+	WindowID window_id;
 
 };
 
