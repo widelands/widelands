@@ -106,10 +106,10 @@ public:
 
 	enum class Init {
 		kLoadMapDirectly,  // load the given map file, then run the given script if any
-		kDefault,	  // create new empty map
-		kNew,	      // show New Map window
-		kRandom,	   // show Random Map window
-		kLoad	      // show Load Map window
+		kDefault,          // create new empty map
+		kNew,              // show New Map window
+		kRandom,           // show Random Map window
+		kLoad              // show Load Map window
 	};
 	static void run_editor(UI::Panel* error_message_parent,
 			       EditorInteractive::Init,
