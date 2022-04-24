@@ -68,11 +68,11 @@ Transfer::Transfer(Game& game, Worker& w)
  * Cleanup.
  */
 Transfer::~Transfer() {
-	if (worker_) {
+	if (worker_ != nullptr) {
 		assert(!ware_);
 
 		worker_->cancel_task_transfer(game_);
-	} else if (ware_) {
+	} else if (ware_ != nullptr) {
 		ware_->cancel_transfer(game_);
 	}
 }
@@ -119,15 +119,15 @@ PlayerImmovable* Transfer::get_destination(Game& g) {
  */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& success) {
 	assert((worker_ == nullptr) ^ (ware_ == nullptr));
-	const WareWorker type = worker_ ? wwWORKER : wwWARE;
-	if (!location || !location->get_economy(type)) {
+	const WareWorker type = worker_ != nullptr ? wwWORKER : wwWARE;
+	if ((location == nullptr) || (location->get_economy(type) == nullptr)) {
 		tlog("no location or economy -> fail\n");
 		success = false;
 		return nullptr;
 	}
 
 	PlayerImmovable* destination = destination_.get(location->get_economy(type)->owner().egbase());
-	if (!destination || destination->get_economy(type) != location->get_economy(type)) {
+	if ((destination == nullptr) || destination->get_economy(type) != location->get_economy(type)) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return nullptr;
@@ -189,13 +189,13 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 			if (location == wh) {
 				return pd;
 			}
-			if (location == &curflag || ware_) {
+			if (location == &curflag || (ware_ != nullptr)) {
 				return wh;
 			}
 			return &curflag;
 		}
 
-		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
+		if ((ware_ != nullptr) && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
 			if (nextflag.get_roadbase(nextnextflag) == nullptr) {
 				assert(nextflag.get_building());
@@ -206,12 +206,13 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 	}
 
 	// Now decide where we want to go
-	if (location && location->descr().type() == Widelands::MapObjectType::FLAG) {
+	if ((location != nullptr) && location->descr().type() == Widelands::MapObjectType::FLAG) {
 		assert(&route_.get_flag(game_, 0) == location);
 
 		// special rule to get wares into buildings
-		if (ware_ && route_.get_nrsteps() == 1) {
-			if (destination && destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
+		if ((ware_ != nullptr) && route_.get_nrsteps() == 1) {
+			if ((destination != nullptr) &&
+			    destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;
@@ -234,12 +235,12 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
  * The caller might be destroyed, too.
  */
 void Transfer::has_finished() {
-	if (request_) {
+	if (request_ != nullptr) {
 		request_->transfer_finish(game_, *this);
 	} else {
 		PlayerImmovable* destination = destination_.get(game_);
 		assert(destination);
-		if (worker_) {
+		if (worker_ != nullptr) {
 			destination->receive_worker(game_, *worker_);
 			worker_ = nullptr;
 		} else {
@@ -257,7 +258,7 @@ void Transfer::has_finished() {
  * This Transfer object will be deleted.
  */
 void Transfer::has_failed() {
-	if (request_) {
+	if (request_ != nullptr) {
 		request_->transfer_fail(game_, *this);
 	} else {
 		delete this;
@@ -277,10 +278,10 @@ void Transfer::tlog(char const* const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (worker_) {
+	if (worker_ != nullptr) {
 		id = 'W';
 		serial = worker_->serial();
-	} else if (ware_) {
+	} else if (ware_ != nullptr) {
 		id = 'I';
 		serial = ware_->serial();
 	} else {
@@ -315,7 +316,7 @@ void Transfer::read(FileRead& fr, Transfer::ReadData& rd) {
 }
 
 void Transfer::read_pointers(MapObjectLoader& mol, const Widelands::Transfer::ReadData& rd) {
-	if (rd.destination) {
+	if (rd.destination != 0u) {
 		destination_ = &mol.get<PlayerImmovable>(rd.destination);
 	}
 }
