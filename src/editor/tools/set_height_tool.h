@@ -25,7 +25,7 @@
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool() : EditorTool(*this, *this, "set height"), interval_(10, 10) {
+	EditorSetHeightTool() : EditorTool(*this, *this), interval_(10, 10) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

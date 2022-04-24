@@ -52,10 +52,7 @@ class EditorTool {
 public:
 
         EditorTool(EditorTool& second, EditorTool& third, bool uda = true)
-           : second_(second), third_(third), undoable_(uda), name_("unnamed") {
-	}
-	EditorTool(EditorTool& second, EditorTool& third, std::string name, bool uda = true)
-           : second_(second), third_(third), undoable_(uda), name_(name) {
+           : second_(second), third_(third), undoable_(uda) {
 	}
 	virtual ~EditorTool() {
 	}
@@ -102,7 +99,7 @@ public:
 	}
 
         virtual std::string format_conf_string_impl(EditorInteractive&, const ToolConf&) {
-		return name_;
+		return "";
 	}
 
         virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,

@@ -24,7 +24,7 @@
 
 /// Places critters on the map.
 struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
-        explicit EditorPlaceCritterTool(EditorDeleteCritterTool& tool) : EditorTool(tool, tool, "place critter") {
+        explicit EditorPlaceCritterTool(EditorDeleteCritterTool& tool) : EditorTool(tool, tool) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

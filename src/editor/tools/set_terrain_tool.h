@@ -23,7 +23,7 @@
 #include "editor/tools/tool.h"
 
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
-	EditorSetTerrainTool() : EditorTool(*this, *this, "set terrain") {
+	EditorSetTerrainTool() : EditorTool(*this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

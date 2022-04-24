@@ -26,7 +26,7 @@
  * This places immovables on the map
  */
 struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
-	explicit EditorPlaceImmovableTool(EditorDeleteImmovableTool& tool) : EditorTool(tool, tool, "place immovable") {
+	explicit EditorPlaceImmovableTool(EditorDeleteImmovableTool& tool) : EditorTool(tool, tool) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,

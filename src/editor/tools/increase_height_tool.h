@@ -26,7 +26,7 @@
 struct EditorIncreaseHeightTool : public EditorTool {
 	EditorIncreaseHeightTool(EditorDecreaseHeightTool& the_decrease_tool,
 	                         EditorSetHeightTool& the_set_tool)
-          : EditorTool(the_decrease_tool, the_set_tool, "increase height"),
+          : EditorTool(the_decrease_tool, the_set_tool),
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_tool),
              change_by_(1) {
