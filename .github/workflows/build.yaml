@@ -179,14 +179,13 @@ jobs:
         then
           export CC="/usr/bin/${{ matrix.compiler }}"  # clang-10
           export CXX="${CC/clang/clang++}"             # clang++-10
-          export OPTION_FORCE_EMBEDDED_MINIZIP = "-DOPTION_FORCE_EMBEDDED_MINIZIP=ON"
         else
           export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
           export CC="${CXX/g++/gcc}"                   # gcc-10
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF" ${OPTION_FORCE_EMBEDDED_MINIZIP}
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc) VERBOSE=1
         cd ..
     - name: Website Binaries
