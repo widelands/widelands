@@ -30,112 +30,112 @@
  * and places this on the current field
  */
 int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                    EditorActionArgs* args,
-                                                    Widelands::Map* map) {
-        const int32_t radius = args->sel_radius;
-        if (get_nr_enabled() == 0) {
-                return radius;
-        }
-        Widelands::EditorGameBase& egbase = parent_.egbase();
-        if (args->old_immovable_types.empty()) {
-                Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-                   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
-                do {
-                        const Widelands::BaseImmovable* im = mr.location().field->get_immovable();
-                        args->old_immovable_types.push_back((im != nullptr ? im->descr().name() : ""));
-                        args->new_immovable_types.push_back(get_random_enabled());
-                } while (mr.advance(*map));
-        }
+						    EditorActionArgs* args,
+						    Widelands::Map* map) {
+	const int32_t radius = args->sel_radius;
+	if (get_nr_enabled() == 0) {
+		return radius;
+	}
+	Widelands::EditorGameBase& egbase = parent_.egbase();
+	if (args->old_immovable_types.empty()) {
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
+		do {
+			const Widelands::BaseImmovable* im = mr.location().field->get_immovable();
+			args->old_immovable_types.push_back((im != nullptr ? im->descr().name() : ""));
+			args->new_immovable_types.push_back(get_random_enabled());
+		} while (mr.advance(*map));
+	}
 
-        if (!args->new_immovable_types.empty()) {
-                Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-                   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
-                std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
-                do {
-                        if ((mr.location().field->get_immovable() == nullptr) &&
-                            ((mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK) != 0)) {
-                                egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
-                        }
-                        ++i;
-                } while (mr.advance(*map));
-        }
-        return radius + 2;
+	if (!args->new_immovable_types.empty()) {
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
+		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
+		do {
+			if ((mr.location().field->get_immovable() == nullptr) &&
+			    ((mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK) != 0)) {
+				egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
+			}
+			++i;
+		} while (mr.advance(*map));
+	}
+	return radius + 2;
 }
 
 int32_t EditorPlaceImmovableTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
    EditorActionArgs* args,
    Widelands::Map* map) {
-        const int32_t radius = args->sel_radius;
-        if (args->old_immovable_types.empty()) {
-                return radius;
-        }
+	const int32_t radius = args->sel_radius;
+	if (args->old_immovable_types.empty()) {
+		return radius;
+	}
 
-        Widelands::EditorGameBase& egbase = parent_.egbase();
-        Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-           *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
-        std::list<std::string>::iterator i = args->old_immovable_types.begin();
-        do {
-                if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
-                        immovable->remove(egbase);
-                }
-                if (!i->empty()) {
-                        egbase.create_immovable_with_name(
-                           mr.location(), *i, nullptr /* owner */, nullptr /* former_building_descr */);
-                }
-                ++i;
-        } while (mr.advance(*map));
-        return radius + 2;
+	Widelands::EditorGameBase& egbase = parent_.egbase();
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
+	std::list<std::string>::iterator i = args->old_immovable_types.begin();
+	do {
+		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
+			immovable->remove(egbase);
+		}
+		if (!i->empty()) {
+			egbase.create_immovable_with_name(
+			   mr.location(), *i, nullptr /* owner */, nullptr /* former_building_descr */);
+		}
+		++i;
+	} while (mr.advance(*map));
+	return radius + 2;
 }
 
 EditorActionArgs EditorPlaceImmovableTool::format_args_impl() {
-        return EditorTool::format_args_impl();
+	return EditorTool::format_args_impl();
 }
 
 
 std::string EditorPlaceImmovableTool::format_conf_string_impl(const ToolConf& conf) {
-        const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
-        const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions = descriptions.immovables();
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
+	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions = descriptions.immovables();
 
-        std::string buf;
-        constexpr int max_string_size = 100;
-        int j = get_nr_enabled();
-        for (int i = 0; j && buf.size() < max_string_size; ++i) {
-                if (is_enabled(i)) {
-                        if (j < get_nr_enabled()) {
-                                buf += " | ";
-                        }
-                        buf += immovable_descriptions.get(i).descname();
-                        --j;
-                }
-        }
+	std::string buf;
+	constexpr int max_string_size = 100;
+	int j = get_nr_enabled();
+	for (int i = 0; j && buf.size() < max_string_size; ++i) {
+		if (is_enabled(i)) {
+			if (j < get_nr_enabled()) {
+				buf += " | ";
+			}
+			buf += immovable_descriptions.get(i).descname();
+			--j;
+		}
+	}
 
-        return format(_("Place immovable: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
+	return format(_("Place immovable: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 
 bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {
-        int j = get_nr_enabled();
+	int j = get_nr_enabled();
 
-        if (j == 0) {
-                return false;
-        }
+	if (j == 0) {
+		return false;
+	}
 
-        for (int i = 0; j; ++i) {
-                if (is_enabled(i)) {
-                        conf.immovable_types.push_back(i);
-                        --j;
-                }
-        }
+	for (int i = 0; j; ++i) {
+		if (is_enabled(i)) {
+			conf.immovable_types.push_back(i);
+			--j;
+		}
+	}
 
-        return true;
+	return true;
 }
 
 
 void EditorPlaceImmovableTool::load_configuration(const ToolConf& conf) {
-        disable_all();
-        std::list<Widelands::DescriptionIndex>::const_iterator p = conf.immovable_types.begin();
-        while (p != conf.immovable_types.end()) {
-                enable(*p, true);
-                ++p;
-        }
+	disable_all();
+	std::list<Widelands::DescriptionIndex>::const_iterator p = conf.immovable_types.begin();
+	while (p != conf.immovable_types.end()) {
+		enable(*p, true);
+		++p;
+	}
 }

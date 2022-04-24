@@ -23,26 +23,26 @@
 
 /// Sets the starting position of players.
 struct EditorSetOriginTool : public EditorTool {
-        EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
-        }
+	EditorSetOriginTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+	}
 
-        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                  EditorActionArgs* args,
-                                  Widelands::Map* map) override;
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+				  EditorActionArgs* args,
+				  Widelands::Map* map) override;
 
-        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-                                 EditorActionArgs* args,
-                                 Widelands::Map* map) override;
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+				 EditorActionArgs* args,
+				 Widelands::Map* map) override;
 
-        EditorActionArgs format_args_impl() override;
+	EditorActionArgs format_args_impl() override;
 
-        const Image* get_sel_impl() const override {
-                return g_image_cache->get("images/ui_basic/fsel.png");
-        }
+	const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/ui_basic/fsel.png");
+	}
 
-        bool has_size_one() const override {
-                return true;
-        }
+	bool has_size_one() const override {
+		return true;
+	}
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_ORIGIN_TOOL_H

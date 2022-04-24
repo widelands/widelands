@@ -25,53 +25,53 @@
 #include "editor/tools/tool.h"
 
 struct ListItem {
-        ListItem(const std::string& text, ToolConf conf) : key(text), data(conf), sticky(false) {}
-        std::string key;
-        ToolConf data;
-        bool sticky;
+	ListItem(const std::string& text, ToolConf conf) : key(text), data(conf), sticky(false) {}
+	std::string key;
+	ToolConf data;
+	bool sticky;
 };
 
 
 /// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
-        EditorHistoryTool(EditorInteractive& parent)
-           : EditorTool(parent, *this, *this) {
-        }
+	EditorHistoryTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this) {
+	}
 
 
 
-        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-                                  EditorActionArgs*,
-                                  Widelands::Map*) override {
-                return 0;
-        }
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
+				  EditorActionArgs*,
+				  Widelands::Map*) override {
+		return 0;
+	}
 
-        bool add_configuration(const std::string& key,
-                               const ToolConf& conf);
+	bool add_configuration(const std::string& key,
+			       const ToolConf& conf);
 
-        const Image* get_sel_impl() const override {
-                return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
-        }
+	const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
+	}
 
-        const std::vector<std::string>& get_list();
-        const ToolConf* get_configuration_for(const std::string& key);
-        void remove_configuration(const std::string& key);
+	const std::vector<std::string>& get_list();
+	const ToolConf* get_configuration_for(const std::string& key);
+	void remove_configuration(const std::string& key);
 
-        WindowID get_window_id() override {
-                return WindowID::ToolHistory;
-        }
+	WindowID get_window_id() override {
+		return WindowID::ToolHistory;
+	}
 
-        void toggle_sticky(const std::string& key);
-        std::list<ListItem>::iterator begin();
-        std::list<ListItem>::iterator end();
+	void toggle_sticky(const std::string& key);
+	std::list<ListItem>::iterator begin();
+	std::list<ListItem>::iterator end();
 
 
 private:
-        std::list<ListItem>::iterator find_item(const std::string& key);
-        void truncate();
-        std::list<ListItem> tool_settings_;
-        std::vector<std::string> keys_;
-        const int MAX_SIZE = 15;
+	std::list<ListItem>::iterator find_item(const std::string& key);
+	void truncate();
+	std::list<ListItem> tool_settings_;
+	std::vector<std::string> keys_;
+	const int MAX_SIZE = 15;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H

@@ -24,60 +24,60 @@
 
 ///  Increases the height of a field by a value.
 struct EditorIncreaseHeightTool : public EditorTool {
-        EditorIncreaseHeightTool(EditorInteractive& parent,
-                                 EditorDecreaseHeightTool& the_decrease_tool,
-                                 EditorSetHeightTool& the_set_tool)
-          : EditorTool(parent, the_decrease_tool, the_set_tool),
-             decrease_tool_(the_decrease_tool),
-             set_tool_(the_set_tool),
-             change_by_(1) {
-        }
+	EditorIncreaseHeightTool(EditorInteractive& parent,
+				 EditorDecreaseHeightTool& the_decrease_tool,
+				 EditorSetHeightTool& the_set_tool)
+	  : EditorTool(parent, the_decrease_tool, the_set_tool),
+	     decrease_tool_(the_decrease_tool),
+	     set_tool_(the_set_tool),
+	     change_by_(1) {
+	}
 
-        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                  EditorActionArgs* args,
-                                  Widelands::Map* map) override;
+	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+				  EditorActionArgs* args,
+				  Widelands::Map* map) override;
 
-        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-                                 EditorActionArgs* args,
-                                 Widelands::Map* map) override;
+	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+				 EditorActionArgs* args,
+				 Widelands::Map* map) override;
 
-        EditorActionArgs format_args_impl() override;
+	EditorActionArgs format_args_impl() override;
 
-        const Image* get_sel_impl() const override {
-                return g_image_cache->get("images/wui/editor/fsel_editor_increase_height.png");
-        }
+	const Image* get_sel_impl() const override {
+		return g_image_cache->get("images/wui/editor/fsel_editor_increase_height.png");
+	}
 
-        int32_t get_change_by() const {
-                return change_by_;
-        }
-        void set_change_by(const int32_t n) {
-                change_by_ = n;
-        }
+	int32_t get_change_by() const {
+		return change_by_;
+	}
+	void set_change_by(const int32_t n) {
+		change_by_ = n;
+	}
 
-        EditorDecreaseHeightTool& decrease_tool() const {
-                return decrease_tool_;
-        }
-        EditorSetHeightTool& set_tool() const {
-                return set_tool_;
-        }
+	EditorDecreaseHeightTool& decrease_tool() const {
+		return decrease_tool_;
+	}
+	EditorSetHeightTool& set_tool() const {
+		return set_tool_;
+	}
 
-        WindowID get_window_id() override {
-                return WindowID::ChangeHeight;
-        }
+	WindowID get_window_id() override {
+		return WindowID::ChangeHeight;
+	}
 
-        bool save_configuration_impl(ToolConf& conf) override {
-                conf.change_by = change_by_;
-                return true;
-        }
-        void load_configuration(const ToolConf& conf) override {
-                change_by_ = conf.change_by;
-        }
-        std::string format_conf_string_impl(const ToolConf& conf) override;
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.change_by = change_by_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		change_by_ = conf.change_by;
+	}
+	std::string format_conf_string_impl(const ToolConf& conf) override;
 
 private:
-        EditorDecreaseHeightTool& decrease_tool_;
-        EditorSetHeightTool& set_tool_;
-        int32_t change_by_;
+	EditorDecreaseHeightTool& decrease_tool_;
+	EditorSetHeightTool& set_tool_;
+	int32_t change_by_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INCREASE_HEIGHT_TOOL_H

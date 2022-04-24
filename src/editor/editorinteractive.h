@@ -57,14 +57,14 @@ public:
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     info(parent),
-                     set_height(parent),
-                     decrease_height(parent),
+		     set_height(parent),
+		     decrease_height(parent),
 		     increase_height(parent, decrease_height, set_height),
 		     noise_height(parent, set_height),
 		     set_terrain(parent),
 		     delete_immovable(parent),
 		     place_immovable(parent, delete_immovable),
-                     set_starting_pos(parent),
+		     set_starting_pos(parent),
 		     delete_critter(parent),
 		     place_critter(parent, delete_critter),
 		     decrease_resources(parent),
@@ -74,7 +74,7 @@ public:
 		     set_port_space(parent, unset_port_space),
 		     set_origin(parent),
 		     resize(parent, map.get_width(), map.get_height()),
-                     tool_history(parent) {
+		     tool_history(parent) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -82,7 +82,7 @@ public:
 		using ToolVector = std::vector<EditorTool*>;
 		EditorTool* current_pointer;
 		EditorTool::ToolIndex use_tool;
-                EditorInfoTool info;
+		EditorInfoTool info;
 		EditorSetHeightTool set_height;
 		EditorDecreaseHeightTool decrease_height;
 		EditorIncreaseHeightTool increase_height;
@@ -100,21 +100,21 @@ public:
 		EditorSetPortSpaceTool set_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
-                EditorHistoryTool tool_history;
+		EditorHistoryTool tool_history;
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
 	enum class Init {
 		kLoadMapDirectly,  // load the given map file, then run the given script if any
-		kDefault,          // create new empty map
-		kNew,              // show New Map window
-		kRandom,           // show Random Map window
-		kLoad              // show Load Map window
+		kDefault,	  // create new empty map
+		kNew,	      // show New Map window
+		kRandom,	   // show Random Map window
+		kLoad	      // show Load Map window
 	};
 	static void run_editor(UI::Panel* error_message_parent,
-	                       EditorInteractive::Init,
-	                       const std::string& filename = "",
-	                       const std::string& script_to_run = "");
+			       EditorInteractive::Init,
+			       const std::string& filename = "",
+			       const std::string& script_to_run = "");
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;
@@ -125,7 +125,7 @@ public:
 
 	void map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle, bool draw);
 	void set_sel_pos(Widelands::NodeAndTriangle<>) override;
-  	void set_sel_radius(uint32_t) override;
+	void set_sel_radius(uint32_t) override;
 	void set_sel_radius_and_update_menu(uint32_t);
 	void stop_painting();
 
@@ -162,7 +162,7 @@ public:
 	void map_changed(const MapWas& action);
 
 	// Access to the tools.
-        Tools* tools();
+	Tools* tools();
 
 	/// Access to the editor categories
 	const std::vector<std::unique_ptr<EditorCategory>>&
@@ -171,12 +171,12 @@ public:
 	/// Ensure all world units have been loaded and fill editor categories
 	static void load_world_units(EditorInteractive*, Widelands::EditorGameBase&);
 
-        EditorHistory& history();
+	EditorHistory& history();
 
-        // Returns window for given tool if it's open, otherwise return nullptr
-        UI::UniqueWindow* get_open_tool_window(WindowID window_id);
-        UI::UniqueWindow::Registry& get_registry_for_window(WindowID window_id);
-        void restore_tool_configuration(const ToolConf& conf);
+	// Returns window for given tool if it's open, otherwise return nullptr
+	UI::UniqueWindow* get_open_tool_window(WindowID window_id);
+	UI::UniqueWindow::Registry& get_registry_for_window(WindowID window_id);
+	void restore_tool_configuration(const ToolConf& conf);
 
 private:
 	// For referencing the items in mainmenu_
@@ -202,7 +202,7 @@ private:
 		kMapOrigin,
 		kMapSize,
 		kFieldInfo,
-                kToolHistory,
+		kToolHistory,
 	};
 
 	// For referencing the items in showhidemenu_
@@ -244,7 +244,7 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
-        void update_tool_history_window();
+	void update_tool_history_window();
 
 	//  state variables
 	bool need_save_;
@@ -296,12 +296,12 @@ private:
 	bool cleaning_up_ = false;
 	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
 
-        // Mapping between tools_ and tool_windows_
-        std::map<EditorTool*, UI::UniqueWindow::Registry*> tool_to_window_map_;
+	// Mapping between tools_ and tool_windows_
+	std::map<EditorTool*, UI::UniqueWindow::Registry*> tool_to_window_map_;
 
-        /// Set to true when tool settings are changed in tool window.
-        /// Set to false when the tool is used with the new settings.
-        bool tool_settings_changed_ = true;
+	/// Set to true when tool settings are changed in tool window.
+	/// Set to false when the tool is used with the new settings.
+	bool tool_settings_changed_ = true;
 
 };
 
