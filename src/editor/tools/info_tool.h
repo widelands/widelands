@@ -25,28 +25,27 @@
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool() : EditorTool(*this, *this, false), number_of_open_windows_(0) {
-	}
+        EditorInfoTool(EditorInteractive& parent) : EditorTool(parent, *this, *this, false), number_of_open_windows_(0) {
+        }
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& parent,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                  EditorActionArgs* args,
+                                  Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
-	}
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
+        }
 
-	bool has_size_one() const override {
-		return true;
-	}
+        bool has_size_one() const override {
+                return true;
+        }
 
 private:
-	int16_t number_of_open_windows_;
-	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
-	   cached_subscribers_opened_;
-	std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
-	   cached_subscribers_closed_;
+        int16_t number_of_open_windows_;
+        std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+           cached_subscribers_opened_;
+        std::map<Widelands::Coords, std::unique_ptr<Notifications::Signal<>::SignalSubscriber>>
+           cached_subscribers_closed_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_INFO_TOOL_H

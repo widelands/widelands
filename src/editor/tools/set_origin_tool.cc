@@ -21,35 +21,33 @@
 #include "editor/editorinteractive.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                               EditorInteractive& eia,
                                                EditorActionArgs* /* args */,
                                                Widelands::Map* map) {
-	map->set_origin(center.node);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
-	return 0;
+        map->set_origin(center.node);
+        parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+        parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+        return 0;
 }
 
 int32_t
 EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                      EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {
-	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
+        Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
 
-	// Because of the triangle design of map, y is changed by an odd number.
-	// The x must be syncronized with the y when coordinate pair is applied
-	// and also when undoing an action like here.
-	if ((nc.y % 2) != 0) {
-		nc.x = nc.x - 1;
-	}
-	map->normalize_coords(nc);
-	map->set_origin(nc);
-	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
-	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
-	return 0;
+        // Because of the triangle design of map, y is changed by an odd number.
+        // The x must be syncronized with the y when coordinate pair is applied
+        // and also when undoing an action like here.
+        if ((nc.y % 2) != 0) {
+                nc.x = nc.x - 1;
+        }
+        map->normalize_coords(nc);
+        map->set_origin(nc);
+        parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
+        parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
+        return 0;
 }
 
-EditorActionArgs EditorSetOriginTool::format_args_impl(EditorInteractive& eia) {
-	return EditorTool::format_args_impl(eia);
+EditorActionArgs EditorSetOriginTool::format_args_impl() {
+        return EditorTool::format_args_impl();
 }

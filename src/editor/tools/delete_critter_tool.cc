@@ -28,35 +28,33 @@
  */
 int32_t EditorDeleteCritterTool::handle_click_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	const int32_t radius = args->sel_radius;
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
+        const int32_t radius = args->sel_radius;
+        Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+           *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 
-	do {
-		if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
-			args->old_bob_type.push_back(&bob->descr());
-			bob->remove(eia.egbase());
-		} else {
-			args->old_bob_type.push_back(nullptr);
-		}
-	} while (mr.advance(*map));
-	return radius + 2;
+        do {
+                if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
+                        args->old_bob_type.push_back(&bob->descr());
+                        bob->remove(parent_.egbase());
+                } else {
+                        args->old_bob_type.push_back(nullptr);
+                }
+        } while (mr.advance(*map));
+        return radius + 2;
 }
 
 int32_t EditorDeleteCritterTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
 
-	uint32_t ret = parent.tools()->place_critter.handle_undo_impl(center, parent, args, map);
-	args->old_bob_type.clear();
-	return ret;
+        uint32_t ret = parent_.tools()->place_critter.handle_undo_impl(center, args, map);
+        args->old_bob_type.clear();
+        return ret;
 }
 
-EditorActionArgs EditorDeleteCritterTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDeleteCritterTool::format_args_impl() {
+        return EditorTool::format_args_impl();
 }

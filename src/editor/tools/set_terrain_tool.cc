@@ -27,101 +27,99 @@
 using Widelands::TCoords;
 
 int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                EditorInteractive& eia,
                                                 EditorActionArgs* args,
                                                 Widelands::Map* map) {
-	assert(center.triangle.t == Widelands::TriangleIndex::D ||
-	       center.triangle.t == Widelands::TriangleIndex::R);
-	uint16_t const radius = args->sel_radius;
-	int32_t max = 0;
+        assert(center.triangle.t == Widelands::TriangleIndex::D ||
+               center.triangle.t == Widelands::TriangleIndex::R);
+        uint16_t const radius = args->sel_radius;
+        int32_t max = 0;
 
-	if ((get_nr_enabled() != 0) && args->terrain_type.empty()) {
-		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
-		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-		            radius));
-		do {
-			args->original_terrain_type.push_back((mr.location().t == Widelands::TriangleIndex::D) ?
+        if ((get_nr_enabled() != 0) && args->terrain_type.empty()) {
+                Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
+                   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
+                            TCoords<Widelands::FCoords>(
+                               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+                            radius));
+                do {
+                        args->original_terrain_type.push_back((mr.location().t == Widelands::TriangleIndex::D) ?
                                                   mr.location().node.field->terrain_d() :
                                                   mr.location().node.field->terrain_r());
-			args->terrain_type.push_back(get_random_enabled());
-		} while (mr.advance(*map));
-	}
+                        args->terrain_type.push_back(get_random_enabled());
+                } while (mr.advance(*map));
+        }
 
-	if (!args->terrain_type.empty()) {
-		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
-		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-		            radius));
-		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
-		do {
-			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
-			++i;
-		} while (mr.advance(*map));
-	}
-	return radius + max;
+        if (!args->terrain_type.empty()) {
+                Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
+                   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
+                            TCoords<Widelands::FCoords>(
+                               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+                            radius));
+                std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
+                do {
+                        max = std::max(max, map->change_terrain(parent_.egbase(), mr.location(), *i));
+                        ++i;
+                } while (mr.advance(*map));
+        }
+        return radius + max;
 }
 
 int32_t
 EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                       EditorInteractive& eia,
                                        EditorActionArgs* args,
                                        Widelands::Map* map) {
-	assert(center.triangle.t == Widelands::TriangleIndex::D ||
-	       center.triangle.t == Widelands::TriangleIndex::R);
-	uint16_t const radius = args->sel_radius;
-	if (!args->terrain_type.empty()) {
-		int32_t max = 0;
-		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
-		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-		            TCoords<Widelands::FCoords>(
-		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-		            radius));
+        assert(center.triangle.t == Widelands::TriangleIndex::D ||
+               center.triangle.t == Widelands::TriangleIndex::R);
+        uint16_t const radius = args->sel_radius;
+        if (!args->terrain_type.empty()) {
+                int32_t max = 0;
+                Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
+                   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
+                            TCoords<Widelands::FCoords>(
+                               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+                            radius));
 
-		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
-		do {
-			max = std::max(max, map->change_terrain(eia.egbase(), mr.location(), *i));
-			++i;
-		} while (mr.advance(*map));
-		return radius + max;
-	}
-	return radius;
+                std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
+                do {
+                        max = std::max(max, map->change_terrain(parent_.egbase(), mr.location(), *i));
+                        ++i;
+                } while (mr.advance(*map));
+                return radius + max;
+        }
+        return radius;
 }
 
-EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorSetTerrainTool::format_args_impl() {
+        return EditorTool::format_args_impl();
 }
 
-std::string EditorSetTerrainTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
-        const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) {
+        const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
         const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions = descriptions.terrains();
 
-	std::string buf;
-	constexpr int max_string_size = 100;
-	int j = get_nr_enabled();
-	for (int i = 0; j && buf.size() < max_string_size; ++i) {
-		if (is_enabled(i)) {
-			if (j < get_nr_enabled()) {
-				buf += " | ";
-			}
-			buf += terrain_descriptions.get(i).descname();
-			--j;
-		}
-	}
+        std::string buf;
+        constexpr int max_string_size = 100;
+        int j = get_nr_enabled();
+        for (int i = 0; j && buf.size() < max_string_size; ++i) {
+                if (is_enabled(i)) {
+                        if (j < get_nr_enabled()) {
+                                buf += " | ";
+                        }
+                        buf += terrain_descriptions.get(i).descname();
+                        --j;
+                }
+        }
 
         return format(_("Set terrain: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 
-bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf, EditorInteractive& /*parent*/) {
-	int j = get_nr_enabled();
+bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
+        int j = get_nr_enabled();
 
         if (j == 0) {
                 return false;
         }
 
-	for (int i = 0; j; ++i) {
+        for (int i = 0; j; ++i) {
                 if (is_enabled(i)) {
                         conf.terrain_types.push_back(i);
                         --j;

@@ -25,37 +25,36 @@
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool() : EditorTool(*this, *this), interval_(10, 10) {
-	}
+        EditorSetHeightTool(EditorInteractive& parent)
+           : EditorTool(parent, *this, *this), interval_(10, 10) {
+        }
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                  EditorActionArgs* args,
+                                  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& eia,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
+        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                 EditorActionArgs* args,
+                                 Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+        EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
-	}
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
+        }
 
-	Widelands::HeightInterval get_interval() const {
-		return interval_;
-	}
-	void set_interval(const Widelands::HeightInterval& i) {
-		interval_ = i;
-	}
+        Widelands::HeightInterval get_interval() const {
+                return interval_;
+        }
+        void set_interval(const Widelands::HeightInterval& i) {
+                interval_ = i;
+        }
 
         WindowID get_window_id() override {
                 return WindowID::ChangeHeight;
         }
 
-        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+        bool save_configuration_impl(ToolConf& conf) override {
                 conf.interval = interval_;
                 return true;
         }
@@ -63,11 +62,11 @@ struct EditorSetHeightTool : public EditorTool {
                 interval_ = conf.interval;
         }
 
-        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
+        std::string format_conf_string_impl(const ToolConf& conf) override;
 
 
 private:
-	Widelands::HeightInterval interval_;
+        Widelands::HeightInterval interval_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_HEIGHT_TOOL_H

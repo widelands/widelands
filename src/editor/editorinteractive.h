@@ -53,17 +53,28 @@ std::string editor_splash_image();
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		explicit Tools(const Widelands::Map& map)
+		explicit Tools(EditorInteractive& parent, const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
-		     increase_height(decrease_height, set_height),
-		     noise_height(set_height),
-		     place_immovable(delete_immovable),
-		     place_critter(delete_critter),
-		     increase_resources(decrease_resources, set_resources),
-		     set_port_space(unset_port_space),
-		     set_origin(),
-		     resize(map.get_width(), map.get_height()) {
+		     info(parent),
+                     set_height(parent),
+                     decrease_height(parent),
+		     increase_height(parent, decrease_height, set_height),
+		     noise_height(parent, set_height),
+		     set_terrain(parent),
+		     delete_immovable(parent),
+		     place_immovable(parent, delete_immovable),
+                     set_starting_pos(parent),
+		     delete_critter(parent),
+		     place_critter(parent, delete_critter),
+		     decrease_resources(parent),
+		     set_resources(parent),
+		     increase_resources(parent, decrease_resources, set_resources),
+		     unset_port_space(parent),
+		     set_port_space(parent, unset_port_space),
+		     set_origin(parent),
+		     resize(parent, map.get_width(), map.get_height()),
+                     tool_history(parent) {
 		}
 		EditorTool& current() const {
 			return *current_pointer;
@@ -85,8 +96,8 @@ public:
 		EditorDecreaseResourcesTool decrease_resources;
 		EditorSetResourcesTool set_resources;
 		EditorIncreaseResourcesTool increase_resources;
-		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
+		EditorSetPortSpaceTool set_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
                 EditorHistoryTool tool_history;
@@ -151,7 +162,7 @@ public:
 	void map_changed(const MapWas& action);
 
 	// Access to the tools.
-	Tools* tools();
+        Tools* tools();
 
 	/// Access to the editor categories
 	const std::vector<std::unique_ptr<EditorCategory>>&

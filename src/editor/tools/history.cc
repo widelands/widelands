@@ -38,90 +38,89 @@ EditorActionArgs::EditorActionArgs(EditorInteractive& base)
 }
 
 EditorActionArgs::~EditorActionArgs() {
-	while (!draw_actions.empty()) {
-		delete draw_actions.back();
-		draw_actions.pop_back();
-	}
-	new_bob_type.clear();
-	old_bob_type.clear();
-	new_immovable_types.clear();
-	old_immovable_types.clear();
-	original_resource.clear();
-	original_heights.clear();
-	original_terrain_type.clear();
-	terrain_type.clear();
+        while (!draw_actions.empty()) {
+                delete draw_actions.back();
+                draw_actions.pop_back();
+        }
+        new_bob_type.clear();
+        old_bob_type.clear();
+        new_immovable_types.clear();
+        old_immovable_types.clear();
+        original_resource.clear();
+        original_heights.clear();
+        original_terrain_type.clear();
+        terrain_type.clear();
 }
 
 // === EditorHistory === //
 
 uint32_t EditorHistory::undo_action() {
-	if (undo_stack_.empty()) {
-		return 0;
-	}
+        if (undo_stack_.empty()) {
+                return 0;
+        }
 
-	EditorToolAction uac = undo_stack_.front();
-	undo_stack_.pop_front();
-	redo_stack_.push_front(uac);
+        EditorToolAction uac = undo_stack_.front();
+        undo_stack_.pop_front();
+        redo_stack_.push_front(uac);
 
-	undo_button_.set_enabled(!undo_stack_.empty());
-	redo_button_.set_enabled(true);
+        undo_button_.set_enabled(!undo_stack_.empty());
+        redo_button_.set_enabled(true);
 
-	return uac.tool.handle_undo(
-	   static_cast<EditorTool::ToolIndex>(uac.i), uac.center, uac.parent, uac.args, &(uac.map));
+        return uac.tool.handle_undo(
+           static_cast<EditorTool::ToolIndex>(uac.i), uac.center, uac.args, &(uac.map));
 }
 
 uint32_t EditorHistory::redo_action() {
-	if (redo_stack_.empty()) {
-		return 0;
-	}
+        if (redo_stack_.empty()) {
+                return 0;
+        }
 
-	EditorToolAction rac = redo_stack_.front();
-	redo_stack_.pop_front();
-	undo_stack_.push_front(rac);
+        EditorToolAction rac = redo_stack_.front();
+        redo_stack_.pop_front();
+        undo_stack_.push_front(rac);
 
-	undo_button_.set_enabled(true);
-	redo_button_.set_enabled(!redo_stack_.empty());
+        undo_button_.set_enabled(true);
+        redo_button_.set_enabled(!redo_stack_.empty());
 
-	return rac.tool.handle_click(
-	   static_cast<EditorTool::ToolIndex>(rac.i), rac.center, rac.parent, rac.args, &(rac.map));
+        return rac.tool.handle_click(
+           static_cast<EditorTool::ToolIndex>(rac.i), rac.center, rac.args, &(rac.map));
 }
 
 uint32_t EditorHistory::do_action(EditorTool& tool,
                                   EditorTool::ToolIndex ind,
                                   Widelands::Map& map,
                                   const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                  EditorInteractive& parent,
                                   bool draw) {
-	EditorToolAction ac(
-	   tool, static_cast<uint32_t>(ind), map, center, parent, tool.format_args(ind, parent));
-	if (draw && tool.is_undoable()) {
-		if (undo_stack_.empty() ||
-		    undo_stack_.front().tool.get_sel_impl() != draw_tool_.get_sel_impl()) {
-			EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent,
-			                    draw_tool_.format_args(EditorTool::First, parent));
+        EditorToolAction ac(
+           tool, static_cast<uint32_t>(ind), map, center, parent_, tool.format_args(ind));
+        if (draw && tool.is_undoable()) {
+                if (undo_stack_.empty() ||
+                    undo_stack_.front().tool.get_sel_impl() != draw_tool_.get_sel_impl()) {
+                        EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent_,
+                                            draw_tool_.format_args(EditorTool::First));
 
-			if (!undo_stack_.empty()) {
-				draw_tool_.add_action(undo_stack_.front(), *da.args);
-				undo_stack_.pop_front();
-			}
+                        if (!undo_stack_.empty()) {
+                                draw_tool_.add_action(undo_stack_.front(), *da.args);
+                                undo_stack_.pop_front();
+                        }
 
-			redo_stack_.clear();
-			undo_stack_.push_front(da);
-			undo_button_.set_enabled(true);
-			redo_button_.set_enabled(false);
-		}
-		dynamic_cast<EditorDrawTool*>(&(undo_stack_.front().tool))
-		   ->add_action(ac, *undo_stack_.front().args);
-	} else if (tool.is_undoable()) {
-		redo_stack_.clear();
-		undo_stack_.push_front(ac);
-		undo_button_.set_enabled(true);
-		redo_button_.set_enabled(false);
-		if (undo_stack_.size() > kMaximumUndoActions) {
-			for (size_t i = 0; i < kTooManyUndoActionsDeleteBatch; ++i) {
-				undo_stack_.pop_back();
-			}
-		}
-	}
-	return tool.handle_click(ind, center, parent, ac.args, &map);
+                        redo_stack_.clear();
+                        undo_stack_.push_front(da);
+                        undo_button_.set_enabled(true);
+                        redo_button_.set_enabled(false);
+                }
+                dynamic_cast<EditorDrawTool*>(&(undo_stack_.front().tool))
+                   ->add_action(ac, *undo_stack_.front().args);
+        } else if (tool.is_undoable()) {
+                redo_stack_.clear();
+                undo_stack_.push_front(ac);
+                undo_button_.set_enabled(true);
+                redo_button_.set_enabled(false);
+                if (undo_stack_.size() > kMaximumUndoActions) {
+                        for (size_t i = 0; i < kTooManyUndoActionsDeleteBatch; ++i) {
+                                undo_stack_.pop_back();
+                        }
+                }
+        }
+        return tool.handle_click(ind, center, ac.args, &map);
 }

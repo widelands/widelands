@@ -34,25 +34,24 @@ struct ListItem {
 
 /// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
-	EditorHistoryTool()
-	   : EditorTool(*this, *this) {
-	}
+        EditorHistoryTool(EditorInteractive& parent)
+           : EditorTool(parent, *this, *this) {
+        }
 
 
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-	                          EditorInteractive&,
-	                          EditorActionArgs*,
-	                          Widelands::Map*) override {
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
+                                  EditorActionArgs*,
+                                  Widelands::Map*) override {
                 return 0;
         }
 
-	bool add_configuration(const std::string& key,
+        bool add_configuration(const std::string& key,
                                const ToolConf& conf);
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
-	}
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
+        }
 
         const std::vector<std::string>& get_list();
         const ToolConf* get_configuration_for(const std::string& key);

@@ -30,47 +30,45 @@
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                 EditorInteractive& eia,
                                                  EditorActionArgs* args,
                                                  Widelands::Map* map) {
-	if (args->original_heights.empty()) {
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-		   *map, Widelands::Area<Widelands::FCoords>(
-		            map->get_fcoords(center.node),
-		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
-		do {
-			args->original_heights.push_back(mr.location().field->get_height());
-		} while (mr.advance(*map));
-	}
+        if (args->original_heights.empty()) {
+                Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+                   *map, Widelands::Area<Widelands::FCoords>(
+                            map->get_fcoords(center.node),
+                            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+                do {
+                        args->original_heights.push_back(mr.location().field->get_height());
+                } while (mr.advance(*map));
+        }
 
-	uint32_t max = 0;
+        uint32_t max = 0;
 
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	do {
-		max = std::max(
-		   max, map->set_height(eia.egbase(), mr.location(),
-		                        args->interval.min +
-		                           RNG::static_rand(args->interval.max - args->interval.min + 1)));
-	} while (mr.advance(*map));
-	return mr.radius() + max;
+        Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+           *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
+        do {
+                max = std::max(
+                   max, map->set_height(parent_.egbase(), mr.location(),
+                                        args->interval.min +
+                                           RNG::static_rand(args->interval.max - args->interval.min + 1)));
+        } while (mr.advance(*map));
+        return mr.radius() + max;
 }
 
 int32_t
 EditorNoiseHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                        EditorInteractive& parent,
                                         EditorActionArgs* args,
                                         Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(center, parent, args, map);
+        return set_tool_.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
-	a.interval = interval_;
-	return a;
+EditorActionArgs EditorNoiseHeightTool::format_args_impl() {
+        EditorActionArgs a(parent_);
+        a.interval = interval_;
+        return a;
 }
 
-std::string EditorNoiseHeightTool::format_conf_string_impl(EditorInteractive& /*parent*/, const ToolConf& conf) {
+std::string EditorNoiseHeightTool::format_conf_string_impl(const ToolConf& conf) {
         return format(_("Noise height: %1$d..%2$d; size: %3$d"),
                       static_cast<int>(conf.interval.min), static_cast<int>(conf.interval.max), conf.sel_radius + 1);
 }

@@ -26,56 +26,54 @@
 #include "logic/mapregion.h"
 
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                       EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
-	const Widelands::Descriptions& descriptions = eia.egbase().descriptions();
-	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
-	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
-	do {
-		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
-		Widelands::ResourceAmount max_amount =
-		   args->current_resource != Widelands::kNoResource ?
+        const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
+        Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+           *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
+        do {
+                Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
+                Widelands::ResourceAmount max_amount =
+                   args->current_resource != Widelands::kNoResource ?
             descriptions.get_resource_descr(args->current_resource)->max_amount() :
             0;
 
-		amount += args->change_by;
-		if (amount > max_amount) {
-			amount = max_amount;
-		}
+                amount += args->change_by;
+                if (amount > max_amount) {
+                        amount = max_amount;
+                }
 
-		if ((mr.location().field->get_resources() == args->current_resource ||
-		     (mr.location().field->get_resources_amount() == 0u)) &&
-		    map->is_resource_valid(descriptions, mr.location(), args->current_resource) &&
-		    mr.location().field->get_resources_amount() != max_amount) {
+                if ((mr.location().field->get_resources() == args->current_resource ||
+                     (mr.location().field->get_resources_amount() == 0u)) &&
+                    map->is_resource_valid(descriptions, mr.location(), args->current_resource) &&
+                    mr.location().field->get_resources_amount() != max_amount) {
 
-			args->original_resource.push_back(
-			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
-			                                   mr.location().field->get_resources_amount()});
+                        args->original_resource.push_back(
+                           EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
+                                                           mr.location().field->get_resources_amount()});
 
-			map->initialize_resources(mr.location(), args->current_resource, amount);
-		}
-	} while (mr.advance(*map));
-	return mr.radius();
+                        map->initialize_resources(mr.location(), args->current_resource, amount);
+                }
+        } while (mr.advance(*map));
+        return mr.radius();
 }
 
 int32_t EditorIncreaseResourcesTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(center, parent, args, map);
+        return set_tool_.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorIncreaseResourcesTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
-	a.change_by = change_by_;
-	a.current_resource = cur_res_;
-	return a;
+EditorActionArgs EditorIncreaseResourcesTool::format_args_impl() {
+        EditorActionArgs a(parent_);
+        a.change_by = change_by_;
+        a.current_resource = cur_res_;
+        return a;
 }
 
-std::string EditorIncreaseResourcesTool::format_conf_string_impl(EditorInteractive& parent, const ToolConf& conf) {
-        std::string resource = parent.egbase()
+std::string EditorIncreaseResourcesTool::format_conf_string_impl(const ToolConf& conf) {
+        std::string resource = parent_.egbase()
            .descriptions()
            .get_resource_descr(cur_res_)
            ->descname();

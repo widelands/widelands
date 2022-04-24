@@ -24,35 +24,35 @@
 constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                          EditorInteractive& parent,
                                           EditorActionArgs* /* args */,
                                           Widelands::Map* map) {
 
-	parent.stop_painting();
+        parent_.stop_painting();
 
-	Widelands::Field& f = (*map)[center.node];
-	Widelands::Field& tf = (*map)[center.triangle.node];
-	const Widelands::Coords& coords = center.node;
+        Widelands::Field& f = (*map)[center.node];
+        Widelands::Field& tf = (*map)[center.triangle.node];
+        const Widelands::Coords& coords = center.node;
+        EditorInteractive& parent = parent_;
 
-	UI::UniqueWindow::Registry& registry =
-	   parent.unique_windows().get_registry(format("fieldinfo_%d_%d", coords.x, coords.y));
+        UI::UniqueWindow::Registry& registry =
+           parent_.unique_windows().get_registry(format("fieldinfo_%d_%d", coords.x, coords.y));
 
-	registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
-		// if window reaches bottom right corner, start from top left corner again
-		int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
-		int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
-		int offset_factor = number_of_open_windows_ % std::min(a, b);
-		int offset = offset_factor * kOffset;
+        registry.open_window = [this, &parent, &registry, &center, &f, &tf, map]() {
+                // if window reaches bottom right corner, start from top left corner again
+                int a = (parent.get_inner_w() - FieldInfoWindow::total_width) / kOffset;
+                int b = (parent.get_inner_h() - FieldInfoWindow::total_height) / kOffset;
+                int offset_factor = number_of_open_windows_ % std::min(a, b);
+                int offset = offset_factor * kOffset;
 
-		new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
-	};
+                new FieldInfoWindow(parent, registry, offset, offset, center, f, tf, map);
+        };
 
-	cached_subscribers_opened_[coords] =
-	   registry.opened.subscribe([this]() { ++number_of_open_windows_; });
+        cached_subscribers_opened_[coords] =
+           registry.opened.subscribe([this]() { ++number_of_open_windows_; });
 
-	cached_subscribers_closed_[coords] =
-	   registry.closed.subscribe([this]() { --number_of_open_windows_; });
+        cached_subscribers_closed_[coords] =
+           registry.closed.subscribe([this]() { --number_of_open_windows_; });
 
-	registry.create();
-	return 0;
+        registry.create();
+        return 0;
 }

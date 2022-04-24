@@ -22,50 +22,50 @@
 #include "editor/tools/set_resources_tool.h"
 #include "editor/tools/tool.h"
 
+class EditorInteractive;
+
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool() : EditorTool(*this, *this), cur_res_(0), change_by_(1) {
-	}
+        EditorDecreaseResourcesTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
+        }
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                  EditorActionArgs* args,
+                                  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
+        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                 EditorActionArgs* args,
+                                 Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+        EditorActionArgs format_args_impl() override;
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get("images/wui/editor/fsel_editor_decrease_resources.png");
-	}
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get("images/wui/editor/fsel_editor_decrease_resources.png");
+        }
 
-	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-	                                           const Widelands::EditorGameBase& egbase) override {
-		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
-	}
+        Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                   const Widelands::EditorGameBase& egbase) override {
+                return resource_tools_nodecaps(fcoords, egbase, cur_res_);
+        }
 
-	int32_t get_change_by() const {
-		return change_by_;
-	}
-	void set_change_by(const int32_t n) {
-		change_by_ = n;
-	}
-	Widelands::DescriptionIndex get_cur_res() const {
-		return cur_res_;
-	}
-	void set_cur_res(Widelands::DescriptionIndex const res) {
-		cur_res_ = res;
-	}
+        int32_t get_change_by() const {
+                return change_by_;
+        }
+        void set_change_by(const int32_t n) {
+                change_by_ = n;
+        }
+        Widelands::DescriptionIndex get_cur_res() const {
+                return cur_res_;
+        }
+        void set_cur_res(Widelands::DescriptionIndex const res) {
+                cur_res_ = res;
+        }
 
         WindowID get_window_id() override {
                 return WindowID::ChangeResources;
         }
 
-        bool save_configuration_impl(ToolConf& conf, EditorInteractive&) override {
+        bool save_configuration_impl(ToolConf& conf) override {
                 conf.resource = cur_res_;
                 conf.change_by = change_by_;
                 return true;
@@ -76,11 +76,11 @@ struct EditorDecreaseResourcesTool : public EditorTool {
                         change_by_ = conf.change_by;
                 }
         }
-        std::string format_conf_string_impl(EditorInteractive&, const ToolConf& conf) override;
+        std::string format_conf_string_impl(const ToolConf& conf) override;
 
 private:
-	Widelands::DescriptionIndex cur_res_;
-	int32_t change_by_;
+        Widelands::DescriptionIndex cur_res_;
+        int32_t change_by_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_DECREASE_RESOURCES_TOOL_H

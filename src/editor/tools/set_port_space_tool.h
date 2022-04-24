@@ -27,45 +27,41 @@
 /// Unsets a buildspace for ports.
 class EditorUnsetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorUnsetPortSpaceTool();
+        explicit EditorUnsetPortSpaceTool(EditorInteractive& parent);
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                  EditorActionArgs* args,
+                                  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
+        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                 EditorActionArgs* args,
+                                 Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get(FSEL_EUPS_FILENAME);
-	}
-	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-	                                           const Widelands::EditorGameBase& egbase) override;
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get(FSEL_EUPS_FILENAME);
+        }
+        Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                   const Widelands::EditorGameBase& egbase) override;
 };
 
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
+        explicit EditorSetPortSpaceTool(EditorInteractive& parent, EditorUnsetPortSpaceTool&);
 
-	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
-	                          EditorActionArgs* args,
-	                          Widelands::Map* map) override;
+        int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
+                                  EditorActionArgs* args,
+                                  Widelands::Map* map) override;
 
-	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
-	                         EditorActionArgs* args,
-	                         Widelands::Map* map) override;
+        int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
+                                 EditorActionArgs* args,
+                                 Widelands::Map* map) override;
 
-	const Image* get_sel_impl() const override {
-		return g_image_cache->get(FSEL_ESPS_FILENAME);
-	}
-	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-	                                           const Widelands::EditorGameBase& egbase) override;
+        const Image* get_sel_impl() const override {
+                return g_image_cache->get(FSEL_ESPS_FILENAME);
+        }
+        Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+                                                   const Widelands::EditorGameBase& egbase) override;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H
