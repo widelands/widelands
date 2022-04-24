@@ -1236,7 +1236,7 @@ wl.Descriptions():new_tribe {
                _("There shall not be left here a stone upon a stone that shall not be destroyed.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Quarry
-            lore_author = pgettext("empire_building", "Not much of a foretelling, when there is a quarry nearby"),
+            lore_author = pgettext("empire_building", "An enthusiastic stonemason arriving to a new quarry"),
             -- TRANSLATORS: Purpose helptext for an empire production site: Quarry
             purpose = pgettext("empire_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
             -- TRANSLATORS: Note helptext for an empire production site: Quarry
