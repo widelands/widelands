@@ -6,7 +6,8 @@ push_textdomain("tribes_encyclopedia")
 include "tribes/scripting/help/time_strings.lua"
 
 -- For lore texts
-quote_with_translation_format = _("‘%1%’<br>(%2%)")
+-- TRANSLATORS: Format string for a latin quote and its translation
+quote_with_translation_format = pgettext("empire_lore", "‘%1%’<br>(%2%)")
 function latin_lore(latin, translation)
    return quote_with_translation_format:bformat(latin, translation)
 end
