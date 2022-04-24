@@ -7,7 +7,7 @@ import os
 class EvalMatches(object):
     _include_regexp = re.compile(r'^#include *([<"])([^">]+)[>"]')
     _incguard_regexp = re.compile(r'^#ifndef WL_.*_H')
-    _ifdef_regexp = re.compile(r'^#ifn?def.*')
+    _ifdef_regexp = re.compile(r'^#if(n?def.*)?')
     _endif_regexp = re.compile(r'^#endif.*')
 
     def __call__(self, lines, fn):
