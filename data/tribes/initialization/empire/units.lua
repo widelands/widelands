@@ -1136,12 +1136,19 @@ wl.Descriptions():new_tribe {
          name = "empire_headquarters",
          helptexts = {
             lore = latin_lore(
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Adaptation of a classical Latin quote meaning:
+               --    "All roads lead to Fremil."
+               _("Omnes viæ ducunt Fremilem."),
                -- TRANSLATORS: Lore helptext for an empire warehouse: Headquarters
-               "Omnes viæ ducunt Fremilem.",
-               "All roads lead to Fremil."
+               --    Translation for the adapted classical Latin quote:
+               --    "Omnes viæ ducunt Fremilem."
+               _("All roads lead to Fremil.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters
-            lore_author = pgettext("empire_building", "Proverb signifying the glory of the Empire and its capital"),
+            lore_author = pgettext("empire_building",
+               "Proverb signifying the glory of the Empire and its capital"
+            ),
             -- TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
             purpose = pgettext("empire_building", "Accommodation for your people. Also stores your wares and tools."),
             -- TRANSLATORS: Note helptext for an empire warehouse: Headquarters
@@ -1151,10 +1158,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_headquarters_shipwreck",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire warehouse: Headquarters Shipwreck
             lore = latin_lore(
-               "Commune naufragium omnibus est consolatio.",
-               "A shipwreck that is common to all is a consolation."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "A shipwreck that is common to all is a consolation."
+               _("Commune naufragium omnibus est consolatio."),
+               -- TRANSLATORS: Lore helptext for an empire warehouse: Headquarters Shipwreck
+               --    Translation for the classical Latin quote:
+               --    "Commune naufragium omnibus est consolatio."
+               _("A shipwreck that is common to all is a consolation.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters Shipwreck
             lore_author = pgettext("empire_building", "Lutius after stranding on an uncharted island"),
@@ -1167,10 +1179,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_warehouse",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire warehouse: Warehouse
             lore = latin_lore(
-               "Bis dat, qui cito dat, nil dat, qui munera tardat.",
-               "Who gives promptly, gives twice, who gives late, gives nothing."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Who gives promptly, gives twice, who gives late, gives nothing."
+               _("Bis dat, qui cito dat, nil dat, qui munera tardat."),
+               -- TRANSLATORS: Lore helptext for an empire warehouse: Warehouse
+               --    Translation for the classical Latin quote:
+               --    "Bis dat, qui cito dat, nil dat, qui munera tardat."
+               _("Who gives promptly, gives twice, who gives late, gives nothing.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire warehouse: Warehouse
             lore_author = pgettext("empire_building", "Proverb written over the doors of a warehouse"),
@@ -1181,10 +1198,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_port",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire warehouse: Port
             lore = latin_lore(
-               "Navigare necesse est.",
-               "To sail is necessary."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "To sail is necessary."
+               _("Navigare necesse est."),
+               -- TRANSLATORS: Lore helptext for an empire warehouse: Port
+               --    Translation for the classical Latin quote:
+               --    "Navigare necesse est."
+               _("To sail is necessary.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire warehouse: Port
             lore_author = pgettext("empire_building",
@@ -1202,10 +1224,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_quarry",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Quarry
             lore = latin_lore(
-               "Non relinquetur hic lapis super lapidem qui non destruatur.",
-               "There shall not be left here a stone upon a stone that shall not be destroyed."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "There shall not be left here a stone upon a stone that shall not be destroyed."
+               _("Non relinquetur hic lapis super lapidem qui non destruatur."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Quarry
+               --    Translation for the classical Latin quote:
+               --    "Non relinquetur hic lapis super lapidem qui non destruatur."
+               _("There shall not be left here a stone upon a stone that shall not be destroyed.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Quarry
             lore_author = pgettext("empire_building", "Not much of a foretelling, when there is a quarry nearby"),
@@ -1218,10 +1245,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_lumberjacks_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Lumberjack's House
             lore = latin_lore(
-               "In silvam non ligna feras.",
-               "Don’t carry logs to the forest."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Don’t carry logs to the forest."
+               _("In silvam non ligna feras."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Lumberjack's House
+               --    Translation for the classical Latin quote:
+               --    "In silvam non ligna feras."
+               _("Don’t carry logs to the forest.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Lumberjack's House
             lore_author = pgettext("empire_building", "A carrier to a lumberjack who lost his way home"),
@@ -1234,10 +1266,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_foresters_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Forester's House
             lore = latin_lore(
-               "Vivat, crescat, floreat!",
-               "Live, grow, and bloom!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Live, grow, and bloom!"
+               _("Vivat, crescat, floreat!"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Forester's House
+               --    Translation for the classical Latin quote:
+               --    "Vivat, crescat, floreat!"
+               _("Live, grow, and bloom!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Forester's House
             lore_author = pgettext("empire_building", "Blessing from the god Silvanus"),
@@ -1250,10 +1287,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_fishers_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site:  Fisher's House
             lore = latin_lore(
-               "Piscis primum a capite foetet",
-               "The fish stinks first at the head."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The fish stinks first at the head."
+               _("Piscis primum a capite foetet"),
+               -- TRANSLATORS: Lore helptext for an empire production site:  Fisher's House
+               --    Translation for the classical Latin quote:
+               --    "Piscis primum a capite foetet"
+               _("The fish stinks first at the head.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Fisher's House
             lore_author = pgettext("empire_building", "A fisherman criticising the Grand Master of the Fishermans’ Guild"),
@@ -1266,10 +1308,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_hunters_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Hunter's House
             lore = latin_lore(
-               "Venator venatus insidiatur.",
-               "The hunter lies in ambush for the game."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Latin quote meaning:
+               --    "The hunter lies in ambush for the game."
+               _("Venator venatus insidiatur."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Hunter's House
+               --    Translation for the Latin quote:
+               --    "Venator venatus insidiatur."
+               _("The hunter lies in ambush for the game.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Hunter's House
             lore_author = pgettext("empire_building", "Caption on an imperial relief showing a hunter"),
@@ -1282,10 +1329,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_well",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Well
             lore = latin_lore(
-               "Gratius ex ipso fonte bibuntur aquæ.",
-               "It is more pleasing to drink water from the spring itself."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "It is more pleasing to drink water from the spring itself."
+               _("Gratius ex ipso fonte bibuntur aquæ."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Well
+               --    Translation for the classical Latin quote:
+               --    "Gratius ex ipso fonte bibuntur aquæ."
+               _("It is more pleasing to drink water from the spring itself.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Well
             lore_author = pgettext("empire_building", "Imperial proverb"),
@@ -1296,10 +1348,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_scouts_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Scout's House
             lore = latin_lore(
-               "Ciatkaruthus ante portas!",
-               "Chat’Karuth at the gates!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Adaptation of a classical Latin quote meaning:
+               --    "Chat’Karuth at the gates!"
+               _("Ciatkaruthus ante portas!"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Scout's House
+               --    Translation for the adapted classical Latin quote:
+               --    "Ciatkaruthus ante portas!"
+               _("Chat’Karuth at the gates!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Scout's House
             lore_author = pgettext("empire_building", "A belated scout’s report"),
@@ -1313,10 +1370,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_stonemasons_house",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Stonemason's House
             lore = latin_lore(
-               "Mens agitat molem.",
-               "The mind moves boulders."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The mind moves boulders."
+               _("Mens agitat molem."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Stonemason's House
+               --    Translation for the classical Latin quote:
+               --    "Mens agitat molem."
+               _("The mind moves boulders.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Stonemason's House
             lore_author = pgettext("empire_building", "Motto of the Stonemasons’ Guild"),
@@ -1327,10 +1389,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_sawmill",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Sawmill
             lore = latin_lore(
-               "Nihil agit serra nisi mota ab arte.",
-               "The saw does nothing except when moved by art."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The saw does nothing except when moved by art."
+               _("Nihil agit serra nisi mota ab arte."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Sawmill
+               --    Translation for the classical Latin quote:
+               --    "Nihil agit serra nisi mota ab arte."
+               _("The saw does nothing except when moved by art.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sawmill
             lore_author = pgettext("empire_building", "Motto of the Carpenters’ Guild"),
@@ -1341,10 +1408,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_mill",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Mill
             lore = latin_lore(
-               "Sero molunt deorum molæ.",
-               "The mills of the gods grind slowly."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The mills of the gods grind slowly."
+               _("Sero molunt deorum molæ."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Mill
+               --    Translation for the classical Latin quote:
+               --    "Sero molunt deorum molæ."
+               _("The mills of the gods grind slowly.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Mill
             lore_author = pgettext("empire_building", "Proverb often cited by millers to impatient customers"),
@@ -1357,10 +1429,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_bakery",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Bakery
             lore = latin_lore(
-               "Non est de sacco tanta farina tuo.",
-               "There’s not this much flour in your sack."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "There’s not this much flour in your sack."
+               _("Non est de sacco tanta farina tuo."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Bakery
+               --    Translation for the classical Latin quote:
+               --    "Non est de sacco tanta farina tuo."
+               _("There’s not this much flour in your sack.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Bakery
             lore_author = pgettext("empire_building", "A baker accusing another of theft"),
@@ -1373,11 +1450,16 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_brewery",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Empire Brewery.
-            --              Literal translation: stomp the earth with free feet
             lore = latin_lore(
-               "Nunc est bibendum, nunc pede libero pulsanda tellus!",
-               "Now it’s time to drink! Now it’s time to dance freely!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Now it’s time to drink! Now it’s time to dance freely!"
+               _("Nunc est bibendum, nunc pede libero pulsanda tellus!"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Empire Brewery.
+               --    Translation for the classical Latin quote:
+               --    "Nunc est bibendum, nunc pede libero pulsanda tellus!"
+               --    Literal translation of the second half is "stomp the earth with free feet"
+               _("Now it’s time to drink! Now it’s time to dance freely!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Brewery
             lore_author = pgettext("empire_building", "Imperial drinking song"),
@@ -1390,12 +1472,17 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_vineyard",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Vineyard
-            --              "bush" (ivy in the original) refers to the ivy leaves
-            --              used for advertising by places selling wine
             lore = latin_lore(
-               "Vino vendibili hedera non opus est.",
-               "Good wine needs no bush."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Good wine needs no bush." (meaning no advertising)
+               _("Vino vendibili hedera non opus est."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Vineyard
+               --    Translation for the classical Latin quote:
+               --    "Vino vendibili hedera non opus est."
+               --    Bush (ivy in the original) refers to the ivy leaves used for advertising
+               --    by places selling wine
+               _("Good wine needs no bush.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Vineyard
             lore_author = pgettext("empire_building", "A proud vine farmer boasting"),
@@ -1406,10 +1493,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_winery",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Winery
             lore = latin_lore(
-               "In vino veritas.",
-               "In wine there is truth."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "In wine there is truth."
+               _("In vino veritas."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Winery
+               --    Translation for the classical Latin quote:
+               --    "In vino veritas."
+               _("In wine there is truth.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Winery
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
@@ -1420,10 +1512,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_tavern",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Tavern
             lore = latin_lore(
-               "Esse oportet ut vivas, non vivere ut edas.",
-               "We eat to live, not live to eat."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "We eat to live, not live to eat."
+               _("Esse oportet ut vivas, non vivere ut edas."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Tavern
+               --    Translation for the classical Latin quote:
+               --    "Esse oportet ut vivas, non vivere ut edas."
+               _("We eat to live, not live to eat.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Tavern
             lore_author = pgettext("empire_building", "Warning to a gluttonous miner"),
@@ -1436,10 +1533,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_inn",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Inn
             lore = latin_lore(
-               "In cena dapibus plena te mente refrena.",
-               "A meal full of dishes restrains your mind."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "A meal full of dishes restrains your mind."
+               _("In cena dapibus plena te mente refrena."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Inn
+               --    Translation for the classical Latin quote:
+               --    "In cena dapibus plena te mente refrena."
+               _("A meal full of dishes restrains your mind.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Inn
             lore_author = pgettext("empire_building", "Warning from a master miner to an apprentice"),
@@ -1452,10 +1554,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_charcoal_kiln",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Charcoal Kiln
             lore = latin_lore(
-               "Creta an carbone notandi?",
-               "Are they to be marked with chalk or charcoal?"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Are they to be marked with chalk or charcoal?"
+               _("Creta an carbone notandi?"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Charcoal Kiln
+               --    Translation for the classical Latin quote:
+               --    "Creta an carbone notandi?"
+               _("Are they to be marked with chalk or charcoal?")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Charcoal Kiln
             lore_author = pgettext("empire_building",
@@ -1468,10 +1575,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_smelting_works",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Smelting Works
             lore = latin_lore(
-               "Video ferrum ex isdem tenebris esse prolatum, quibus aurum.",
-               "I see that iron was produced from the same darkness as gold."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "I see that iron was produced from the same darkness as gold."
+               _("Video ferrum ex isdem tenebris esse prolatum, quibus aurum."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Smelting Works
+               --    Translation for the classical Latin quote:
+               --    "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
+               _("I see that iron was produced from the same darkness as gold.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Smelting Works
             lore_author = pgettext("empire_building", "Amalea after inspecting a smelting works"),
@@ -1482,10 +1594,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_toolsmithy",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Toolsmithy
             lore = latin_lore(
-               "Faber est suæ quisque fortunæ.",
-               "Each man is the maker of his own fortune."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Each man is the maker of his own fortune."
+               _("Faber est suæ quisque fortunæ."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Toolsmithy
+               --    Translation for the classical Latin quote:
+               --    "Faber est suæ quisque fortunæ."
+               _("Each man is the maker of his own fortune.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Toolsmithy
             lore_author = pgettext("empire_building", "Imperial proverb quoted in a toolsmith's advertising"),
@@ -1496,12 +1613,19 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_armorsmithy",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Armorsmithy
             lore = latin_lore(
-               "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens,"..
-               " atque catenosi crepitant per corpora panni.",
-               "They enjoy their great armors under their capes, tightly woven from rings, rattling"..
-               " through the cloth."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "They enjoy their great armors under their capes, tightly woven from rings, rattling
+               --     through the cloth."
+               _("Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens,"..
+                 " atque catenosi crepitant per corpora panni."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Armorsmithy
+               --    Translation for the classical Latin quote:
+               --    "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens,
+               --     atque catenosi crepitant per corpora panni."
+               _("They enjoy their great armors under their capes, tightly woven from rings, rattling"..
+                 " through the cloth.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Armorsmithy
             lore_author = pgettext("empire_building", "An armorsmith teaching an apprentice"),
@@ -1512,10 +1636,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_barracks",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Barracks
             lore = latin_lore(
-               "Non muri, sed viri sunt præsidium oppidorum.",
-               "Not walls but men protect the towns."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Not walls but men protect the towns."
+               _("Non muri, sed viri sunt præsidium oppidorum."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Barracks
+               --    Translation for the classical Latin quote:
+               --    "Non muri, sed viri sunt præsidium oppidorum."
+               _("Not walls but men protect the towns.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Barracks
             lore_author = pgettext("empire_building", "Argument in the Senate for increasing recruitment"),
@@ -1528,10 +1657,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_donkeyfarm",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Donkey Farm
             lore = latin_lore(
-               "Asinus stramen mavult quam aurum.",
-               "A donkey prefers straw to gold."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "A donkey prefers straw to gold."
+               _("Asinus stramen mavult quam aurum."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Donkey Farm
+               --    Translation for the classical Latin quote:
+               --    "Asinus stramen mavult quam aurum."
+               _("A donkey prefers straw to gold.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Donkey Farm
             lore_author = pgettext("empire_building", "A donkey breeder during a shortage of wheat"),
@@ -1542,12 +1676,19 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_farm",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Farm
             lore = latin_lore(
-               "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt"..
-               " dum agellum suum arat",
-               "Lutius had already removed himself from public affairs, he was living in the countryside,"..
-               " and the ambassadors of the senate found him while he was plowing his land."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Adaptation of a classical Latin quote meaning:
+               --    "Lutius had already removed himself from public affairs, he was living in the countryside,
+               --     and the ambassadors of the senate found him while he was plowing his land."
+               _("Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt"..
+                 " dum agellum suum arat"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Farm
+               --    Translation for the adapted classical Latin quote:
+               --    "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt
+               --     dum agellum suum arat"
+               _("Lutius had already removed himself from public affairs, he was living in the countryside,"..
+                 " and the ambassadors of the senate found him while he was plowing his land.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Farm
             lore_author = pgettext("empire_building", "History of the Empire, Part VII"),
@@ -1560,10 +1701,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_piggery",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Piggery
             lore = latin_lore(
-               "Sus vero quid habet præter escam?",
-               "What does the pig really have other than meat?"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "What does the pig really have other than meat?"
+               _("Sus vero quid habet præter escam?"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Piggery
+               --    Translation for the classical Latin quote:
+               --    "Sus vero quid habet præter escam?"
+               _("What does the pig really have other than meat?")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Piggery
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
@@ -1576,10 +1722,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_sheepfarm",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Sheep Farm
             lore = latin_lore(
-               "Conari agnum eripere lupo.",
-               "Try to rescue a lamb from a wolf."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Try to rescue a lamb from a wolf."
+               _("Conari agnum eripere lupo."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Sheep Farm
+               --    Translation for the classical Latin quote:
+               --    "Conari agnum eripere lupo."
+               _("Try to rescue a lamb from a wolf.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sheep Farm
             lore_author = pgettext("empire_building", "Imperial proverb for trying the impossible"),
@@ -1590,10 +1741,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_weaving_mill",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Weaving Mill
             lore = latin_lore(
-               "Vestis virum reddit.",
-               "Clothes make a man."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Clothes make a man."
+               _("Vestis virum reddit."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Weaving Mill
+               --    Translation for the classical Latin quote:
+               --    "Vestis virum reddit."
+               _("Clothes make a man.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Weaving Mill
             lore_author = pgettext("empire_building", "Motto of the Weavers’ Guild"),
@@ -1604,10 +1760,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_weaponsmithy",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Weapon Smithy
             lore = latin_lore(
-               "Ignis calorem suum etiam in ferro tenet.",
-               "The fire keeps its heat even in the iron."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The fire keeps its heat even in the iron."
+               _("Ignis calorem suum etiam in ferro tenet."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Weapon Smithy
+               --    Translation for the classical Latin quote:
+               --    "Ignis calorem suum etiam in ferro tenet."
+               _("The fire keeps its heat even in the iron.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Weapon Smithy
             lore_author = pgettext("empire_building", "Motto of the Weaponsmiths’ Guild"),
@@ -1620,10 +1781,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_marblemine",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Marble Mine
             lore = latin_lore(
-               "In vento scribit lædens, in marmore læsus.",
-               "He who hurts writes in the wind, he who is hurt in marble."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "He who hurts writes in the wind, he who is hurt in marble."
+               _("In vento scribit lædens, in marmore læsus."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Marble Mine
+               --    Translation for the classical Latin quote:
+               --    "In vento scribit lædens, in marmore læsus."
+               _("He who hurts writes in the wind, he who is hurt in marble.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Marble Mine
             lore_author = pgettext("empire_building", "Imperial proverb"),
@@ -1636,10 +1802,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_marblemine_deep",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Deep Marble Mine
             lore = latin_lore(
-               "Urbem lateritiam invenit, marmoream reliquit.",
-               "He found a city of brick, and left it one of marble."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "He found a city of brick, and left it one of marble."
+               _("Urbem lateritiam invenit, marmoream reliquit."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Deep Marble Mine
+               --    Translation for the classical Latin quote:
+               --    "Urbem lateritiam invenit, marmoream reliquit."
+               _("He found a city of brick, and left it one of marble.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Marble Mine
             lore_author = pgettext("empire_building",
@@ -1652,12 +1823,19 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_coalmine",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Coal Mine
             lore = latin_lore(
-               "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat,"..
-               " et dum resolvitur, cinerea.",
-               "Coal is revived from the dead, it turns from black to red, creates embers,"..
-               " and as it falls apart, it becomes ashes."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Coal is revived from the dead, it turns from black to red, creates embers,
+               --     and as it falls apart, it becomes ashes."
+               _("Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat,"..
+                 " et dum resolvitur, cinerea."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Coal Mine
+               --    Translation for the classical Latin quote:
+               --    "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat,
+               --     et dum resolvitur, cinerea."
+               _("Coal is revived from the dead, it turns from black to red, creates embers,"..
+                 " and as it falls apart, it becomes ashes.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Coal Mine
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
@@ -1668,12 +1846,19 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_coalmine_deep",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Deep Coal Mine
             lore = latin_lore(
-               "Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie,"..
-               " cum unumquodque horum sit ignis.",
-               "For there are more types of fire: for coal and flame are different, and the type"..
-               " that gives light, all of them are fire."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "For there are more types of fire: for coal and flame are different, and the type
+               --     that gives light, all of them are fire."
+               _("Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie,"..
+                 " cum unumquodque horum sit ignis."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Deep Coal Mine
+               --    Translation for the classical Latin quote:
+               --    "Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie,
+               --     cum unumquodque horum sit ignis."
+               _("For there are more types of fire: for coal and flame are different, and the type"..
+                 " that gives light, all of them are fire.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Coal Mine
             lore_author = pgettext("empire_building", "Excerpt from the Encyclopædia Imperica"),
@@ -1684,10 +1869,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_ironmine",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Iron Mine
             lore = latin_lore(
-               "Ferrum ferro acuitur.",
-               "Iron is sharpened by iron."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Iron is sharpened by iron."
+               _("Ferrum ferro acuitur."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Iron Mine
+               --    Translation for the classical Latin quote:
+               --    "Ferrum ferro acuitur."
+               _("Iron is sharpened by iron.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Iron Mine
             lore_author = pgettext("empire_building", "A proverb that is vehemently disputed by iron miners"),
@@ -1698,10 +1888,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_ironmine_deep",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Deep Iron Mine
             lore = latin_lore(
-               "Ferreus assiduo consumitur annulus usu.",
-               "By constant use an iron ring is worn away."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "By constant use an iron ring is worn away."
+               _("Ferreus assiduo consumitur annulus usu."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Deep Iron Mine
+               --    Translation for the classical Latin quote:
+               --    "Ferreus assiduo consumitur annulus usu."
+               _("By constant use an iron ring is worn away.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Iron Mine
             lore_author = pgettext("empire_building",
@@ -1714,10 +1909,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_goldmine",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Gold Mine
             lore = latin_lore(
-               "Aurum irrepertum et sic melius situm.",
-               "Gold discovered and all the better for being so."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Gold discovered and all the better for being so."
+               _("Aurum irrepertum et sic melius situm."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Gold Mine
+               --    Translation for the classical Latin quote:
+               --    "Aurum irrepertum et sic melius situm."
+               _("Gold discovered and all the better for being so.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Gold Mine
             lore_author = pgettext("empire_building",
@@ -1730,10 +1930,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_goldmine_deep",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Deep Gold Mine
             lore = latin_lore(
-               "Formidinem mortis vicit aurum.",
-               "Gold has conquered the fear of death."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Gold has conquered the fear of death."
+               _("Formidinem mortis vicit aurum."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Deep Gold Mine
+               --    Translation for the classical Latin quote:
+               --    "Formidinem mortis vicit aurum."
+               _("Gold has conquered the fear of death.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Deep Gold Mine
             lore_author = pgettext("empire_building",
@@ -1748,12 +1953,19 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_arena",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire training site: Arena
             lore = latin_lore(
-               "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat,"..
-               " panem et circenses.",
-               "[The People of the Empire] who once handed out all [power], now restrains itself"..
-               " and anxiously hopes for just two things: bread and games."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "[The People of the Empire] who once handed out all [power], now restrains itself
+               --     and anxiously hopes for just two things: bread and games."
+               _("Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat,"..
+                 " panem et circenses."),
+               -- TRANSLATORS: Lore helptext for an empire training site: Arena
+               --    Translation for the classical Latin quote:
+               --    "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat,
+               --     panem et circenses."
+               _("[The People of the Empire] who once handed out all [power], now restrains itself"..
+                 " and anxiously hopes for just two things: bread and games.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire training site: Arena
             lore_author = pgettext("empire_building", "History of the Empire, Part X – the decline"),
@@ -1770,10 +1982,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_colosseum",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire training site: Colosseum
             lore = latin_lore(
-               "Ave Cæsar! Morituri te salutant!",
-               "Hail Cæsar! Those who are about to die greet you!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Hail Cæsar! Those who are about to die greet you!"
+               _("Ave Cæsar! Morituri te salutant!"),
+               -- TRANSLATORS: Lore helptext for an empire training site: Colosseum
+               --    Translation for the classical Latin quote:
+               --    "Ave Cæsar! Morituri te salutant!"
+               _("Hail Cæsar! Those who are about to die greet you!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire training site: Colosseum
             lore_author = pgettext("empire_building", "Greeting from the gladiators to the emperor"),
@@ -1790,10 +2007,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_trainingcamp",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire training site: Training Camp
             lore = latin_lore(
-               "Fortes fortuna adiuvat.",
-               "Fortune helps the strong."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Fortune helps the strong."
+               _("Fortes fortuna adiuvat."),
+               -- TRANSLATORS: Lore helptext for an empire training site: Training Camp
+               --    Translation for the classical Latin quote:
+               --    "Fortes fortuna adiuvat."
+               _("Fortune helps the strong.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire training site: Training Camp
             lore_author = pgettext("empire_building",
@@ -1814,10 +2036,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_blockhouse",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire military site: Blockhouse
             lore = latin_lore(
-               "Aquila non captat muscas.",
-               "An eagle doesn’t catch flies."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "An eagle doesn’t catch flies."
+               _("Aquila non captat muscas."),
+               -- TRANSLATORS: Lore helptext for an empire military site: Blockhouse
+               --    Translation for the classical Latin quote:
+               --    "Aquila non captat muscas."
+               _("An eagle doesn’t catch flies.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Blockhouse
             lore_author = pgettext("empire_building",
@@ -1833,10 +2060,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_sentry",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Sentry
             lore = latin_lore(
-               "Quis custodiet ipsos custodes?",
-               "Who watches the watchmen?"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Who watches the watchmen?"
+               _("Quis custodiet ipsos custodes?"),
+               -- TRANSLATORS: Lore helptext for an empire production site: Sentry
+               --    Translation for the classical Latin quote:
+               --    "Quis custodiet ipsos custodes?"
+               _("Who watches the watchmen?")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sentry
             --              (the limes was the border defence system of fortifications of the Roman Empire)
@@ -1852,11 +2084,17 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_outpost",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire military site: Outpost
             lore = latin_lore(
-               "Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra.",
-               "Two were stationed on the other side of the city than the camp: one over the river, the other by"..
-               " the river above the camp."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Two were stationed on the other side of the city than the camp: one over the river, the other by
+               --     the river above the camp."
+               _("Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra."),
+               -- TRANSLATORS: Lore helptext for an empire military site: Outpost
+               --    Translation for the classical Latin quote:
+               --    "Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra."
+               _("Two were stationed on the other side of the city than the camp: one over the river, the other by"..
+                 " the river above the camp.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Outpost
             lore_author = pgettext("empire_building",
@@ -1871,10 +2109,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_barrier",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire military site: Barrier
             lore = latin_lore(
-               "Alea iacta est!",
-               "The die is cast!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "The die is cast!"
+               _("Alea iacta est!"),
+               -- TRANSLATORS: Lore helptext for an empire military site: Barrier
+               --    Translation for the classical Latin quote:
+               --    "Alea iacta est!"
+               _("The die is cast!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Barrier
             lore_author = pgettext("empire_building",
@@ -1890,15 +2133,20 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_tower",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire military site: Tower
             lore = latin_lore(
-               "Veni, Vidi, Vici!",
-               "I came, I saw, I conquered!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "I came, I saw, I conquered!"
+               _("Veni, Vidi, Vici!"),
+               -- TRANSLATORS: Lore helptext for an empire military site: Tower
+               --    Translation for the classical Latin quote:
+               --    "Veni, Vidi, Vici!"
+               _("I came, I saw, I conquered!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Tower
             lore_author = pgettext("empire_building",
-               "General Claudius Cæcus Cessus reporting a quick victory over the Barbarians thanks to good "..
-               "reconnaissance provided by the towers on the border"
+               "General Claudius Cæcus Cessus reporting a quick victory over the Barbarians thanks to "..
+               "the superior vision of a tower"
             ),
             -- TRANSLATORS: Purpose helptext for an empire military site: Tower
             purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
@@ -1909,10 +2157,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_fortress",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Fortress
             lore = latin_lore(
-               "Si vis pacem, para bellum.",
-               "If you want peace, prepare for war."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "If you want peace, prepare for war."
+               _("Si vis pacem, para bellum."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Fortress
+               --    Translation for the classical Latin quote:
+               --    "Si vis pacem, para bellum."
+               _("If you want peace, prepare for war.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Fortress
             lore_author = pgettext("empire_building", "Saledus arguing with Amalea"),
@@ -1925,10 +2178,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_castle",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire military site: Castle
             lore = latin_lore(
-               "Ceterum autem censeo Althunranam esse delendam!",
-               "Furthermore, I think that Al’thunran must be destroyed!"
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Adaptation of a classical Latin quote meaning:
+               --    "Furthermore, I think that Al’thunran must be destroyed!"
+               _("Ceterum autem censeo Althunranam esse delendam!"),
+               -- TRANSLATORS: Lore helptext for an empire military site: Castle
+               --    Translation for the adapted classical Latin quote:
+               --    "Ceterum autem censeo Althunranam esse delendam!"
+               _("Furthermore, I think that Al’thunran must be destroyed!")
             ),
             -- TRANSLATORS: Lore author helptext for an empire military site: Castle
             lore_author = pgettext("empire_building",
@@ -1945,10 +2203,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_ferry_yard",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
             lore = latin_lore(
-               "Non terretur fluminibus, qui maria transiit.",
-               "Who crossed seas does not fear rivers."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Who crossed seas does not fear rivers."
+               _("Non terretur fluminibus, qui maria transiit."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
+               --    Translation for the classical Latin quote:
+               --    "Non terretur fluminibus, qui maria transiit."
+               _("Who crossed seas does not fear rivers.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Ferry Yard
             lore_author = pgettext("empire_building",
@@ -1963,10 +2226,15 @@ wl.Descriptions():new_tribe {
       {
          name = "empire_shipyard",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an empire production site: Shipyard
             lore = latin_lore(
-               "Uni navi ne committas omnia.",
-               "Don’t put everything on the same ship."
+               -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
+               --    Classical Latin quote meaning:
+               --    "Don’t put everything on the same ship."
+               _("Uni navi ne committas omnia."),
+               -- TRANSLATORS: Lore helptext for an empire production site: Shipyard
+               --    Translation for the classical Latin quote:
+               --    "Uni navi ne committas omnia."
+               _("Don’t put everything on the same ship.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Shipyard
             lore_author = pgettext("empire_building",
