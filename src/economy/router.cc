@@ -33,7 +33,7 @@ Router::Router(const ResetCycleFn& reset) : reset_(reset), mpf_cycle(0) {
 
 uint32_t Router::assign_cycle() {
 	++mpf_cycle;
-	if (!mpf_cycle) {  // reset all cycle fields
+	if (mpf_cycle == 0u) {  // reset all cycle fields
 		reset_();
 		++mpf_cycle;
 	}
@@ -80,7 +80,7 @@ bool Router::find_route(RoutingNode& start,
 
 		if (current == &end) {
 			// found our goal
-			if (route) {
+			if (route != nullptr) {
 				astar.routeto(end, *route);
 			}
 			return true;

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-16 03:04+0000\n"
+"POT-Creation-Date: 2022-04-22 03:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -975,8 +975,8 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
-#. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
 #. * TRANSLATORS: Map Options: Waterways are disabled
+#. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1807,7 +1807,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:502
+#: ../../src/logic/map_objects/immovable.cc:503
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
@@ -1924,9 +1924,9 @@ msgstr ""
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:538
 #: ../../src/logic/map_objects/tribes/production_program.cc:561
-#: ../../src/logic/map_objects/tribes/production_program.cc:1227
-#: ../../src/logic/map_objects/tribes/production_program.cc:1332
-#: ../../src/logic/map_objects/tribes/production_program.cc:1414
+#: ../../src/logic/map_objects/tribes/production_program.cc:1228
+#: ../../src/logic/map_objects/tribes/production_program.cc:1333
+#: ../../src/logic/map_objects/tribes/production_program.cc:1415
 #, c-format
 msgid "%1$ix %2$s"
 msgstr ""
@@ -1964,7 +1964,7 @@ msgstr ""
 #.
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:718
-#: ../../src/logic/map_objects/tribes/production_program.cc:1249
+#: ../../src/logic/map_objects/tribes/production_program.cc:1250
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr ""
@@ -1985,7 +1985,7 @@ msgstr ""
 #. * TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
 #.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1236
+#: ../../src/logic/map_objects/tribes/production_program.cc:1237
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1994,7 +1994,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1341
+#: ../../src/logic/map_objects/tribes/production_program.cc:1342
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -2003,20 +2003,20 @@ msgstr[1] ""
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1423
+#: ../../src/logic/map_objects/tribes/production_program.cc:1424
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1849
+#: ../../src/logic/map_objects/tribes/production_program.cc:1850
 msgid "No soldier found for this training level!"
 msgstr ""
 
 #. * TRANSLATORS: Success message of a trainingsite '%s' stands for the description of the
 #. * training program, e.g. Completed upgrading soldier evade from level 0 to level 1
-#: ../../src/logic/map_objects/tribes/production_program.cc:1890
+#: ../../src/logic/map_objects/tribes/production_program.cc:1891
 #, c-format
 msgid "Completed %s"
 msgstr ""
@@ -2146,8 +2146,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1513
-#: ../../src/logic/map_objects/tribes/soldier.cc:1517
+#: ../../src/logic/map_objects/tribes/soldier.cc:1514
+#: ../../src/logic/map_objects/tribes/soldier.cc:1518
 msgid "Logic error"
 msgstr ""
 
@@ -2238,23 +2238,23 @@ msgstr ""
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1112
+#: ../../src/logic/map_objects/tribes/worker.cc:1114
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2066
+#: ../../src/logic/map_objects/tribes/worker.cc:2068
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2071
+#: ../../src/logic/map_objects/tribes/worker.cc:2073
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2072
+#: ../../src/logic/map_objects/tribes/worker.cc:2074
 msgid "Worker got lost!"
 msgstr ""
 
@@ -2294,7 +2294,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1937
+#: ../../src/logic/player.cc:1938
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -6013,16 +6013,16 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1 author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
@@ -7076,9 +7076,9 @@ msgstr ""
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730

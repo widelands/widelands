@@ -7,6 +7,7 @@
 # Atanase Albaran, 2021
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Benedikt Straub <benedikt-straub@web.de>, 2021
+# Boese Kaiser, 2022
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # C138, 2020
 # Christophe Quintard <christophe.quintard@gmail.com>, 2019
@@ -27,9 +28,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-13 03:16+0000\n"
+"POT-Creation-Date: 2022-04-19 03:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2022\n"
+"Last-Translator: Boese Kaiser, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -403,7 +404,7 @@ msgstr "Hauteur aléatoire"
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:280
 msgid "Set the terrain height to random values"
-msgstr "Définis la hauteur du terrain sur des valeurs aléatoires"
+msgstr "Définis la hauteur du terrain aléatoirement"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:286
@@ -1026,9 +1027,9 @@ msgstr "(aucun)"
 msgid "Waterway length limit:"
 msgstr "Longueur limite des voies navigables"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -5415,7 +5416,7 @@ msgstr "Regarder le replay d'une vieille partie"
 
 #: ../../src/ui_fsmenu/main.cc:458 ../../src/wlapplication_options.cc:292
 msgid "Add-Ons"
-msgstr "Ajouts"
+msgstr "Modules"
 
 #: ../../src/ui_fsmenu/main.cc:460
 msgid "Install and manage add-ons"
@@ -5533,7 +5534,7 @@ msgstr "Officiel & Unofficiel"
 #. * etc.
 #: ../../src/ui_fsmenu/mapselect.cc:115
 msgid "Any Teams"
-msgstr "N'importe qu'elle équipe"
+msgstr "N'importe quelle équipe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:461
 msgid "Balanced & Unbalanced"
@@ -6118,18 +6119,18 @@ msgstr "Chemin de fichier tutorial.lua invalide dans campaigns.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriel"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Auteur"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Auteurs"
@@ -6998,7 +6999,7 @@ msgstr "Conservez les marchandises"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the dismantling time"
-msgstr " Toutes les marchandises laissées dans le bâtiment seront abandonnées par le constructeur, ce qui augmentera le temps de démontage"
+msgstr " Toutes les marchandises laissées dans le bâtiment seront évacuées par le constructeur, ce qui augmentera le temps de démontage"
 
 #: ../../src/wui/actionconfirm.cc:302
 msgid "Enhance building?"
@@ -7018,7 +7019,7 @@ msgstr "Soyez précautionneux si l' ennemi est proche !"
 msgid ""
 "Any wares left in the building will be dropped out by the builder, "
 "increasing the enhancing time"
-msgstr "Toutes les marchandises laissées dans le bâtiment seront abandonnées par le constructeur, ce qui augmentera le temps d'amélioration"
+msgstr "Toutes les marchandises laissées dans le bâtiment seront évacuées par le constructeur, ce qui augmentera le temps d'amélioration"
 
 #: ../../src/wui/actionconfirm.cc:366
 msgid "Sink the ship?"
@@ -7184,9 +7185,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivité faible :"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8136,8 +8137,8 @@ msgstr "Mettre le jeu en pause"
 msgid "Statistics"
 msgstr "Statistiques"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Affaires maritimes"

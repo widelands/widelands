@@ -245,7 +245,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 		if (!immovable_previously_found) {
 			// Must be done first, because the immovable will be gone the moment the building is placed
 			const FCoords f = egbase.map().get_fcoords(pos);
-			if (f.field->get_immovable() &&
+			if ((f.field->get_immovable() != nullptr) &&
 			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
 				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
 				assert(imm);
@@ -278,12 +278,13 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 }
 
 bool BuildingDescr::suitability(const Map& /* map */, const FCoords& fc) const {
-	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-                   size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
-                                                                       fc.field->maxcaps()) &
-	                          Widelands::BUILDCAPS_SIZEMASK)) &&
+	return ((mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
+                    static_cast<int>(
+	                    size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
+                                                                           fc.field->maxcaps()) &
+	                              Widelands::BUILDCAPS_SIZEMASK))) != 0) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
-	        (fc.field->get_immovable() &&
+	        ((fc.field->get_immovable() != nullptr) &&
 	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
 }
 
@@ -326,7 +327,7 @@ uint32_t BuildingDescr::get_conquers() const {
  * building.
  */
 uint32_t BuildingDescr::vision_range() const {
-	return vision_range_ ? vision_range_ : get_conquers() + 4;
+	return vision_range_ != 0u ? vision_range_ : get_conquers() + 4;
 }
 
 /*
@@ -390,7 +391,7 @@ void Building::load_finish(EditorGameBase& egbase) {
 		}
 
 		Bob::State const* const state = worker.get_state(Worker::taskLeavebuilding);
-		if (!state) {
+		if (state == nullptr) {
 			log_warn("worker %u is in the leave queue of building %u but "
 			         "does not have a leavebuilding task! Removing from queue.\n",
 			         worker.serial(), serial());
@@ -482,7 +483,7 @@ bool Building::init(EditorGameBase& egbase) {
 	map.get_brn(position_, &neighb);
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
-		if (!flag) {
+		if (flag == nullptr) {
 			flag = new Flag(egbase, get_owner(), neighb);
 		}
 		flag_ = flag;
@@ -513,9 +514,9 @@ bool Building::init(EditorGameBase& egbase) {
 void Building::cleanup(EditorGameBase& egbase) {
 	set_seeing(false);
 
-	if (defeating_player_) {
+	if (defeating_player_ != 0u) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
-		if (descr().get_conquers()) {
+		if (descr().get_conquers() != 0u) {
 			get_owner()->count_msite_lost();
 			defeating_player->count_msite_defeated();
 		} else {
@@ -708,7 +709,7 @@ void Building::act(Game& game, uint32_t const data) {
 
 			leave_queue_.erase(leave_queue_.begin());
 
-			if (worker) {
+			if (worker != nullptr) {
 				leave_allow_ = worker;
 
 				if (worker->wakeup_leave_building(game, *this)) {
@@ -754,8 +755,8 @@ void Building::draw(const Time& gametime,
                     RenderTarget* dst) {
 	const Time t((gametime - animstart_).get());
 
-	if (was_immovable_) {
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if (was_immovable_ != nullptr) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
 			                    &get_owner()->get_playercolor());
 		} else {
@@ -764,7 +765,7 @@ void Building::draw(const Time& gametime,
 		}
 	}
 
-	if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
 		dst->blit_animation(
@@ -786,8 +787,9 @@ void Building::draw_info(const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const float scale,
                          RenderTarget* dst) {
-	const std::string statistics_string =
-	   (info_to_draw & InfoToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	const std::string statistics_string = (info_to_draw & InfoToDraw::kStatistics) != 0 ?
+                                            info_string(InfoStringFormat::kStatistics) :
+                                            "";
 	do_draw_info(info_to_draw, info_string(InfoStringFormat::kCensus), statistics_string,
 	             point_on_dst, scale, dst);
 }
@@ -812,7 +814,7 @@ void Building::set_priority(const WareWorker type,
                             const WarePriority& new_priority) {
 	if (type == wwWARE) {
 		// WarePriority is not default-constructible, so no [] access :(
-		if (ware_priorities_.count(ware_index)) {
+		if (ware_priorities_.count(ware_index) != 0u) {
 			ware_priorities_.at(ware_index) = new_priority;
 		} else {
 			ware_priorities_.emplace(ware_index, new_priority);

@@ -72,7 +72,7 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      did_postload_tribes_(false),
      gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
-     lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
+     lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
      loader_ui_(nullptr),
@@ -137,7 +137,7 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
-	if (!map_.filesystem()) {
+	if (map_.filesystem() == nullptr) {
 		return;
 	}
 
@@ -427,7 +427,7 @@ EditorGameBase::warp_constructionsite(const Coords& c,
 	const TribeDescr& tribe = plr->tribe();
 	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
 	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
-	if (settings) {
+	if (settings != nullptr) {
 		b.apply_settings(*settings);
 	}
 	b.add_dropout_wares(preserved_wares);
@@ -708,7 +708,7 @@ void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const ne
 		return;
 	}
 
-	if (old_owner) {
+	if (old_owner != 0u) {
 		Notifications::publish(
 		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::LOST, get_player(old_owner)));
 	}
@@ -720,7 +720,7 @@ void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const ne
 	// longer owned.
 	inform_players_about_ownership(fc.field - &first_field, new_owner);
 
-	if (new_owner) {
+	if (new_owner != 0u) {
 		Notifications::publish(
 		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::GAINED, get_player(new_owner)));
 	}
@@ -781,19 +781,20 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  adds the influence
 			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
-			if (owner && !conquer_guarded_location_by_superior_influence) {
+			if ((owner != 0u) && !conquer_guarded_location_by_superior_influence) {
 				new_influence_modified = 1;
 			}
-			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
+			if ((owner == 0u) || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (!(conquering_player->military_influence(index) -= influence) &&
+		} else if (((conquering_player->military_influence(index) -= influence) == 0u) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			PlayerNumber best_player;
-			if (preferred_player && player(preferred_player).military_influence(index)) {
+			if ((preferred_player != 0u) &&
+			    (player(preferred_player).military_influence(index) != 0u)) {
 				best_player = preferred_player;
 			} else {
 				best_player = neutral_when_no_influence ? 0 : player_area.player_number;
@@ -860,7 +861,7 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 				flag_building->set_defeating_player(area.player_number);
 			}
 		}
-		if (game) {
+		if (game != nullptr) {
 			temp_imm->schedule_destroy(*game);
 		} else {
 			temp_imm->remove(*this);

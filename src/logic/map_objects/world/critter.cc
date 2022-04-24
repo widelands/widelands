@@ -266,7 +266,7 @@ void Critter::roam_update(Game& game, State& state) {
 	uint32_t idle_time_min = 1000;
 	uint32_t idle_time_rnd = kCritterMaxIdleTime;
 
-	if (state.ivar1) {
+	if (state.ivar1 != 0) {
 		state.ivar1 = 0;
 		// lots of magic numbers for reasonable weighting of various nearby animals
 		uint32_t roaming_dist = 24;
@@ -326,7 +326,7 @@ void Critter::roam_update(Game& game, State& state) {
 
 	std::vector<Critter*> candidates_for_eating;
 	bool can_eat_immovable = false;
-	if (descr().is_herbivore() && get_position().field->get_immovable()) {
+	if (descr().is_herbivore() && (get_position().field->get_immovable() != nullptr)) {
 		for (uint32_t a : descr().food_plants()) {
 			if (get_position().field->get_immovable()->descr().has_attribute(a)) {
 				can_eat_immovable = true;
@@ -340,7 +340,7 @@ void Critter::roam_update(Game& game, State& state) {
 	bool foundme = false;
 	std::vector<Critter*> all_critters_on_field;
 	all_critters_on_field.push_back(this);  // not caught by the following loop
-	for (Bob* b = get_position().field->get_first_bob(); b; b = b->get_next_bob()) {
+	for (Bob* b = get_position().field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 		assert(b);
 		if (b == this) {
 			assert(!foundme);

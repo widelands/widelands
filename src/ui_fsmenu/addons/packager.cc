@@ -215,7 +215,7 @@ bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
 void AddOnsPackager::layout() {
 	UI::Window::layout();
 	AddOns::MutableAddOn* selected = get_selected();
-	if (selected) {
+	if (selected != nullptr) {
 		addon_boxes_[selected->get_category()]->set_header_align(
 		   box_right_subbox_header_box_left_.get_w());
 	}
@@ -264,14 +264,14 @@ inline AddOns::MutableAddOn* AddOnsPackager::get_selected() {
 void AddOnsPackager::addon_selected() {
 	AddOns::MutableAddOn* selected = get_selected();
 
-	addon_delete_.set_enabled(selected);
+	addon_delete_.set_enabled(selected != nullptr);
 	box_right_subbox_header_hbox_.set_visible(false);
 	for (auto&& pair : addon_boxes_) {
 		pair.second->set_visible(false);
 	}
 	box_right_addon_specific_.clear();
 
-	if (!selected) {
+	if (selected == nullptr) {
 		return;
 	}
 
