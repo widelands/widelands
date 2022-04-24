@@ -22,8 +22,6 @@
 #include "editor/tools/set_resources_tool.h"
 #include "editor/tools/tool.h"
 
-class EditorInteractive;
-
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
         EditorDecreaseResourcesTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {

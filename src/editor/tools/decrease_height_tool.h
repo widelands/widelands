@@ -21,8 +21,6 @@
 
 #include "editor/tools/tool.h"
 
-class EditorInteractive;
-
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
         EditorDecreaseHeightTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), change_by_(1) {

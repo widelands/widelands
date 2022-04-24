@@ -22,8 +22,6 @@
 #include "editor/tools/multi_select.h"
 #include "editor/tools/tool.h"
 
-class EditorInteractive;
-
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
         EditorSetTerrainTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
         }

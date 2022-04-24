@@ -22,8 +22,6 @@
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/set_height_tool.h"
 
-class EditorInteractive;
-
 ///  Increases the height of a field by a value.
 struct EditorIncreaseHeightTool : public EditorTool {
         EditorIncreaseHeightTool(EditorInteractive& parent,

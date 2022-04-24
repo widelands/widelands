@@ -25,8 +25,6 @@
 #include "editor/tools/tool.h"
 #include "ui_basic/button.h"
 
-class EditorInteractive;
-
 /**
  * The all actions done with an editor tool are saved on a stack to
  * provide undo / redo functionality.
