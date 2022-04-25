@@ -22,10 +22,13 @@ wl.Descriptions():new_productionsite_type {
       marble_column = 1
    },
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 82, 74 },
+         directory = dirname,
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 93, 86 },
       },
    },
 

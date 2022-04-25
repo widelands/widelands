@@ -34,10 +34,13 @@ wl.Descriptions():new_militarysite_type {
       marble = 1
    },
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 57, 77 }
+         directory = dirname,
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 60, 78 }
       }
    },
 

@@ -19,10 +19,13 @@ wl.Descriptions():new_militarysite_type {
       planks = 1
    },
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 37, 60 }
+         directory = dirname,
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 38, 62 }
       }
    },
 

@@ -9,10 +9,13 @@ wl.Descriptions():new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 94, 106 }
+         directory = dirname,
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 98, 114 }
       }
    },
 

@@ -22,12 +22,32 @@ wl.Descriptions():new_productionsite_type {
       cloth = 1
    },
 
-   -- TODO(Nordfriese): Make animations
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 50, 63 },
-      }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 55, 56 },
+      },
+      build = {
+         frames = 4,
+         columns = 4,
+         rows = 1,
+         hotspot = { 55, 56 },
+      },
+      unoccupied = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 55, 56 },
+      },
+      working = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 55, 56 },
+      },
    },
 
    aihints = {},
