@@ -99,7 +99,7 @@ std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) 
 	std::string buf;
 	constexpr int max_string_size = 100;
 	int j = get_nr_enabled();
-	for (int i = 0; j && buf.size() < max_string_size; ++i) {
+	for (int i = 0; j > 0 && buf.size() < max_string_size; ++i) {
 		if (is_enabled(i)) {
 			if (j < get_nr_enabled()) {
 				buf += " | ";
@@ -119,7 +119,7 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 		return false;
 	}
 
-	for (int i = 0; j; ++i) {
+	for (int i = 0; j > 0; ++i) {
 		if (is_enabled(i)) {
 			conf.terrain_types.push_back(i);
 			--j;

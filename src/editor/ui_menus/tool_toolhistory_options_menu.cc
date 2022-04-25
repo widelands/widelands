@@ -60,10 +60,10 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 
 void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected) {
 
-        if (SDL_GetModState() & KMOD_CTRL) {
+        if ((SDL_GetModState() & KMOD_CTRL) != 0) {
                 history_tool_.remove_configuration(selected);
                 rebuild_list();
-        } else if (SDL_GetModState() & KMOD_SHIFT) {
+        } else if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
                 history_tool_.toggle_sticky(selected);
                 rebuild_list();
         } else {
