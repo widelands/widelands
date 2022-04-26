@@ -209,6 +209,7 @@
 - Show port space hint in buildhelp (#5267)
 - Ships on minimap (#5297)
 - No hotkey for empty dropdown entry (#5320)
+- Fix Sound Options Panel Styling (#5372)
 
 
 ### Internationalization
@@ -261,6 +262,7 @@
     - Fixed amazons resi menu icon size
 - Atlantean Lore (#5271)
 - `tips/singleplayer.lua`: Reduce use of "Our" (#5349)
+- Add Empire Lore Texts (#5285)
 
 
 ### Editor
@@ -318,7 +320,7 @@
 - `appdata.xml`: Add leading `~` to release names as necessary to force proper ordering (#5102)
 - Deprecate Boost (#5101)
 - Refactor String Assembly / Boost Format (#5081)
-- Clean some more clang-tidy checks (#5108, #5131, #5289)
+- Clean some more clang-tidy checks (#5108, #5131, #5289, #5319)
 - Resolve thread sanitizer issues (#5114)
     - Increased thread safety using atomic member variables
     - New compile option to build with TSan
