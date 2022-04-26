@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master ]
+    branches: [ master, appimage ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -381,6 +381,7 @@ jobs:
         config:
           - Release
         os:
+          # Must run on the oldest still-supported Ubuntu LTS release
           - ubuntu-18.04
         compiler:
           - clang-10
