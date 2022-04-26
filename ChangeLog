@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git fd78eeb](https://github.com/widelands/widelands/commit/fd78eeb809aee7f781c4a79706fdd085162c4941)
+## post-1.0 until [git 0621ce2](https://github.com/widelands/widelands/commit/0621ce2fe1a3825ae6669a424a700de5312fb84f)
 
 ### Animations, Icons and Overlays
 
@@ -37,6 +37,9 @@
     - No remains of lava after eruption is gone
     - Rocks are not removed by lava anymore
     - For each lava field a region of radius 1 is considered for removal
+- Basic control tutorial: only show first object once (#5338)
+- Fix legacy scenario units load order (#5350)
+
 
 ### Scripting
 
@@ -57,6 +60,7 @@
     - Allow suppressing sending out-of-resource notifications in programs
 - Decouple Registries (#5169)
 - Add script to check for optional Lua parentheses (#4787, #5225, #5226)
+- Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
 
 
 ### Maps
@@ -88,6 +92,11 @@
 - Add-Ons Protocol Version 6 (#5092)
 - Show server name and check add-on version before upload (#5234)
 - Disable add-ons manager autoconnect and autologin (#5245)
+- Update Add-On Upload to Command Version 2 (#5231)
+- Fix Add-Ons Admin Menu Visibility (#5266)
+- Refactor Add-Ons Postloading (#5286)
+- Fix tribes postloading again and add regression test (#5323)
+- v1.0 backwards compatibility for world/tribe add-ons (#5353)
 
 
 ### Saveloading
@@ -119,7 +128,7 @@
     - Introducing limit for fields to be updated
     - Increasing number of checked unusable fields
     - Adding expiration info, increasing max fields to check
-- Training of AI (#5213)
+- Training of AI (#5213, #5278)
 - AI: Update bf redesign (#5216): Perfomance improvement of buildable fields check in AI code
 - Considering distance to warehouse when starting new buildings (#5229)
     - Malus variable introduced
@@ -133,6 +142,8 @@
     - Tried to delay first warehouse a bit
     - Prioritized fruit collectors if supporter nearby
     - Insert a safeguard bonus for basic wells
+- Fixing wrong initialization of AI `last_seen_time` (#5284)
+- Refactoring of `construct_building` (#5282)
 
 
 ### Gameplay
@@ -192,6 +203,13 @@
 - Use correct mechanism to hide dropdown list (#5237)
 - Enable Hotkeys in Dropdowns (#5238)
 - Fix Race Condition in Attack Window (#5235)
+- Dropdown shortcuts for ingame and editor (#5261)
+- Remove OK button in non-modal story boxes (#5292)
+- Fix texthandling for dropdowns (#5281)
+- Show port space hint in buildhelp (#5267)
+- Ships on minimap (#5297)
+- No hotkey for empty dropdown entry (#5320)
+- Fix Sound Options Panel Styling (#5372)
 
 
 ### Internationalization
@@ -212,6 +230,8 @@
 - Tx String and CLI Help Fixes (#5179)
 - More Stringfixes (#5190)
 - Fix unhealthy usage of `split` in language menu (#5241)
+- Skip installing locales when translations are disabled (#5302)
+- Tut01 String Fix (#5327)
 
 
 ### Help and Documentation
@@ -240,6 +260,9 @@
     - Cleared tribes immovables that are fields from world immovables regardless of addon status
     - Fixed Size text for immovables
     - Fixed amazons resi menu icon size
+- Atlantean Lore (#5271)
+- `tips/singleplayer.lua`: Reduce use of "Our" (#5349)
+- Add Empire Lore Texts (#5285)
 
 
 ### Editor
@@ -254,6 +277,7 @@
 
 - Catch crash when preloading minimap (#5021)
 - Fix a texture deletion from wrong thread (#5174)
+- Fix linking the OpenGL library (#5299)
 
 
 ### Networking
@@ -262,6 +286,7 @@
 - Fix game client deletion crash (#4970)
 - Keep GameController pointer alive for template game (#5128)
 - Replace Boost::Asio → Asio (#5164)
+- Fix Description Index Misordering from UI Code (#5288)
 
 
 ### Build System
@@ -295,7 +320,7 @@
 - `appdata.xml`: Add leading `~` to release names as necessary to force proper ordering (#5102)
 - Deprecate Boost (#5101)
 - Refactor String Assembly / Boost Format (#5081)
-- Clean some more clang-tidy checks (#5108, #5131)
+- Clean some more clang-tidy checks (#5108, #5131, #5289, #5319)
 - Resolve thread sanitizer issues (#5114)
     - Increased thread safety using atomic member variables
     - New compile option to build with TSan
@@ -313,6 +338,7 @@
 - Fix -O3/-O2 typos (#5187)
 - Dependencies: Asio include handling & Solus support (#5182)
 - Don't require Homebrew to be installed at `/usr/local` (#5208)
+- CMakeLists.txt: Use a list for many build flags (#5328)
 
 
 ### Other Issues
