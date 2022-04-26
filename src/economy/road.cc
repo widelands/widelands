@@ -65,7 +65,7 @@ Road::~Road() {
 }
 
 bool Road::init(EditorGameBase& egbase) {
-	if (get_owner()) {  // Skip during loading
+	if (get_owner() != nullptr) {  // Skip during loading
 		const size_t nr_slots = owner().tribe().carriers().size();
 		for (size_t i = 0; i < nr_slots; ++i) {
 			carrier_slots_.emplace_back();
@@ -124,7 +124,7 @@ void Road::link_into_flags(EditorGameBase& egbase, bool /* loading */) {
 				// This happens after a road split. Tell the carrier what's going on.
 				carrier->set_location(this);
 				carrier->update_task_road(*game);
-			} else if (!slot.carrier_request && (slot.carrier_type_id == 0 || busy_)) {
+			} else if ((slot.carrier_request == nullptr) && (slot.carrier_type_id == 0 || busy_)) {
 				// Normal carriers are requested at once, second carriers only for busy roads
 				request_carrier(slot);
 			}
@@ -143,7 +143,7 @@ void Road::set_economy(Economy* const e, WareWorker type) {
 	RoadBase::set_economy(e, type);
 	if (type == wwWORKER) {
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (slot.carrier_request) {
+			if (slot.carrier_request != nullptr) {
 				slot.carrier_request->set_economy(e);
 			}
 		}
@@ -307,7 +307,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0) {
 			const MapObject* mo = map.get_immovable(w->get_position());
-			if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+			if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start()) {
@@ -329,7 +329,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 				if (carrier == w) {
 					old_slot.carrier = nullptr;
 					for (CarrierSlot& new_slot : newroad.carrier_slots_) {
-						if (!new_slot.carrier.get(game) && !new_slot.carrier_request &&
+						if ((new_slot.carrier.get(game) == nullptr) &&
+						    (new_slot.carrier_request == nullptr) &&
 						    new_slot.carrier_type_id == old_slot.carrier_type_id) {
 							upcast(Carrier, new_carrier, w);
 							new_slot.carrier = new_carrier;
@@ -358,7 +359,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	for (CarrierSlot& slot : carrier_slots_) {
-		if (!slot.carrier.get(game) && !slot.carrier_request &&
+		if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) &&
 		    (slot.carrier_type_id == 0 || busy_)) {
 			request_carrier(slot);
 		}
@@ -441,10 +442,10 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 	default:
 		NEVER_HERE();
 	}
-	return (egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
-	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
-	        TerrainDescription::Is::kUnwalkable);
+	return ((egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
+	         TerrainDescription::Is::kUnwalkable) != 0) &&
+	       ((egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
+	         TerrainDescription::Is::kUnwalkable) != 0);
 }
 
 /**
@@ -517,7 +518,8 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
-			if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type_id > 0) {
+			if ((slot.carrier.get(game) == nullptr) && (slot.carrier_request == nullptr) &&
+			    slot.carrier_type_id > 0) {
 				request_carrier(slot);
 			}
 		}

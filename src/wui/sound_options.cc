@@ -65,10 +65,7 @@ public:
 	             /** TRANSLATORS: Tooltip for volume slider in sound options */
 	             _("Changes the volume. Click to hear a sample."),
 	             kCursorWidth),
-	     enable_(this,
-	             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
-	             Vector2i::zero(),
-	             title),
+	     enable_(this, panel_style_, Vector2i::zero(), title),
 	     type_(type),
 	     fx_(representative_fx) {
 		set_inner_spacing(kSpacing);
@@ -132,7 +129,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
              UI::Box::Vertical),
      custom_songset_(
         this,
-        UI::PanelStyle::kFsMenu,
+        panel_style_,
         {0, 0},
         _("Play your own music in-game"),
         richtext_escape(
