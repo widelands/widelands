@@ -19,8 +19,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"translate":[
-						"vacant"
+					"members":[
+						"Tóth András (tothxa)"
 					]
 				},
 				{
@@ -425,7 +425,8 @@
 				{
 					"subheading": "Sound",
 					"members":[
-						"Yannick Warnier"
+						"Yannick Warnier",
+						"Jan Bruns (solatis)"
 					]
 				},
 				{
