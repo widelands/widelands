@@ -19,12 +19,10 @@
 #ifndef WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
-#include "base/macros.h"
 #include <memory>
-CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 #include <unzip.h>
 #include <zip.h>
-CLANG_DIAG_RESERVED_IDENTIFIER_ON
+
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
