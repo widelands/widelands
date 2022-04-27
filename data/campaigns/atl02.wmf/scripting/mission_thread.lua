@@ -239,7 +239,7 @@ function maletus_defeated()
    end
    Kalitath:set_attack_forbidden(1, false)
    sleep(5000)
-   p1:allow_buildings("atlanteans_temple_of_satul")
+   p1:allow_buildings{"atlanteans_temple_of_satul"}
    msg_boxes(heretics_again)
    temple = add_campaign_objective(obj_build_temple)
    run(final)
