@@ -1258,6 +1258,7 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
 	if (window != nullptr) {
 		dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
+                window->focus();
 	}
 }
 
