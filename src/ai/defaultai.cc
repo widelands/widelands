@@ -1365,7 +1365,7 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 	}
 
 	verb_log_dbg_time(gametime,
-	                  " first round: %2d of %3llu fields updated. Fields unupdated: Spec: %d, Mid: "
+	                  " first round: %2d of %3" PRIuS " fields updated. Fields unupdated: Spec: %d, Mid: "
 	                  "%d, Big: %d. Invalid "
 	                  "fields found: %3d\n",
 	                  updated_fields_count, buildable_fields.size(),
