@@ -1256,6 +1256,13 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 	set_sel_radius_and_update_menu(conf.sel_radius);
 
 	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
+	if (window == nullptr) {
+                UI::UniqueWindow::Registry& registry = get_registry_for_window(primary.get_window_id());
+                registry.create();
+
+                window = get_open_tool_window(primary.get_window_id());
+        }
+
 	if (window != nullptr) {
 		dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
                 window->focus();
