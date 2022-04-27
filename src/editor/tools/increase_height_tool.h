@@ -67,10 +67,12 @@ struct EditorIncreaseHeightTool : public EditorTool {
 
 	bool save_configuration_impl(ToolConf& conf) override {
 		conf.change_by = change_by_;
+                set_tool_.save_configuration_impl(conf);
 		return true;
 	}
 	void load_configuration(const ToolConf& conf) override {
 		change_by_ = conf.change_by;
+                set_tool_.load_configuration(conf);
 	}
 	std::string format_conf_string_impl(const ToolConf& conf) override;
 

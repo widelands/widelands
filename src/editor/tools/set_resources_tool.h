@@ -76,9 +76,7 @@ struct EditorSetResourcesTool : public EditorTool {
 	}
 	void load_configuration(const ToolConf& conf) override {
 		cur_res_ = conf.resource;
-		if (conf.tool == this) {
-			set_to_ = conf.set_to;
-		}
+                set_to_ = conf.set_to;
 	}
 	std::string format_conf_string_impl(const ToolConf& conf) override;
 

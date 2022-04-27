@@ -618,10 +618,10 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 	}
 
 	ToolConf conf;
-	if (current_tool.save_configuration(subtool_idx, conf)) {
+	if (current_tool.save_configuration(conf)) {
 
 		conf.sel_radius = get_sel_radius();
-		std::string name = conf.tool->format_conf_string(conf);
+		std::string name = conf.primary->format_conf_string(conf);
 		if (tools()->tool_history.add_configuration(name, conf)) {
 			update_tool_history_window();
 		}
@@ -1248,15 +1248,14 @@ EditorHistory& EditorInteractive::history() {
  *
  **/
 void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
-	assert(conf.tool != nullptr);
+	assert(conf.primary != nullptr);
 
 	EditorTool& primary = *conf.primary;
-	EditorTool& tool = *conf.tool;
 	primary.load_configuration(conf);
 	select_tool(primary, EditorTool::First);
 	set_sel_radius_and_update_menu(conf.sel_radius);
 
-	UI::UniqueWindow* window = get_open_tool_window(tool.get_window_id());
+	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
 	if (window != nullptr) {
 		dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
 	}

@@ -31,7 +31,6 @@ struct ToolConf {
 	ToolConf& operator=(const ToolConf&) = default;
 
 	EditorTool* primary;
-	EditorTool* tool;
 
 	uint32_t sel_radius;
 

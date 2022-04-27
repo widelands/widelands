@@ -70,9 +70,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 	void load_configuration(const ToolConf& conf) override {
 		cur_res_ = conf.resource;
-		if (conf.tool == this) {
-			change_by_ = conf.change_by;
-		}
+                change_by_ = conf.change_by;
 	}
 	std::string format_conf_string_impl(const ToolConf& conf) override;
 

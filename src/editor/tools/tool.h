@@ -131,10 +131,9 @@ public:
 		return WindowID::Unset;
 	}
 
-	bool save_configuration(const ToolIndex i, ToolConf& conf) {
+	bool save_configuration(ToolConf& conf) {
 		conf.primary = this;
-		conf.tool = (i == First ? this : i == Second ? &second_ : &third_);
-		return conf.tool->save_configuration_impl(conf);
+		return conf.primary->save_configuration_impl(conf);
 	}
 
 	// Returns false if didn't save anything
@@ -147,7 +146,7 @@ public:
 
 	/// Returns a string representing the given configuration
 	std::string format_conf_string(const ToolConf& conf) {
-		assert(conf.tool == this);
+		assert(conf.primary == this);
 		return format_conf_string_impl(conf);
 	}
 

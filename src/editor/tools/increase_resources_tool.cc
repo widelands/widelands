@@ -78,5 +78,6 @@ std::string EditorIncreaseResourcesTool::format_conf_string_impl(const ToolConf&
 	   .get_resource_descr(cur_res_)
 	   ->descname();
 
-	return format(_("Increase/decrease %1$s: %2$d; size: %3$d"), resource, conf.change_by, conf.sel_radius + 1);
+	return format(_("%1$s: increase/decrease: %2$d, set to %3$d; size: %4$d"),
+                      resource, conf.change_by, static_cast<int>(conf.set_to), conf.sel_radius + 1);
 }
