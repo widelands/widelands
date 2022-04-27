@@ -1364,14 +1364,14 @@ void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 		}
 	}
 
-	verb_log_dbg_time(gametime,
-	                  " first round: %2d of %3" PRIuS " fields updated. Fields unupdated: Spec: %d, Mid: "
-	                  "%d, Big: %d. Invalid "
-	                  "fields found: %3d\n",
-	                  updated_fields_count, buildable_fields.size(),
-	                  special_fields_to_prefer[kSpecialFieldPos],
-	                  special_fields_to_prefer[kMediumlFieldPos],
-	                  special_fields_to_prefer[kBigFieldPos], invalidated_bf_count);
+	verb_log_dbg_time(
+	   gametime,
+	   " first round: %2d of %3" PRIuS " fields updated. Fields unupdated: Spec: %d, Mid: "
+	   "%d, Big: %d. Invalid "
+	   "fields found: %3d\n",
+	   updated_fields_count, buildable_fields.size(), special_fields_to_prefer[kSpecialFieldPos],
+	   special_fields_to_prefer[kMediumlFieldPos], special_fields_to_prefer[kBigFieldPos],
+	   invalidated_bf_count);
 
 	// Stage #2: get rid of invalid files / and rotate the deque
 	// Must be signed, to avoid underflow
