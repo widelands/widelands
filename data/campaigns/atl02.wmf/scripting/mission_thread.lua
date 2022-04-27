@@ -26,7 +26,7 @@ function mining()
       atlanteans_goldmine = 1
    }) do sleep(3731) end
    mining.done = true
-   if explore.done == true then
+   if Kalitath:is_attack_forbidden(1) == true then
       msg_boxes(mining_established_2)
    else
       msg_boxes(mining_established_1)
@@ -49,7 +49,11 @@ function spidercloth()
       atlanteans_weaving_mill = 1,
    }) do sleep(3731) end
    cloth.done = true
-   msg_boxes(spidercloth_3)
+   if Kalitath:is_attack_forbidden(1) then
+      msg_boxes(spidercloth_3a)
+   else
+      msg_boxes(spidercloth_3)
+   end
 end
 
 function enemy()
@@ -127,10 +131,12 @@ end
 
 function uncertain_allies()
    p1:set_attack_forbidden(3, true)
-   Kalitath:set_attack_forbidden(1, true)
    run(check_kalitath_defeated)
    sleep(60000)
    msg_boxes(tribute)
+   Kalitath:set_attack_forbidden(1, true)
+   trade = add_campaign_objective(obj_tribute)
+   run(patience)
    reveal_concentric(p1, map:get_field(112,150), 5, 500)
    trading_post = add_campaign_objective(obj_trading_post)
    while not check_for_buildings(p1, {
@@ -138,8 +144,6 @@ function uncertain_allies()
    }) do sleep(3731) end
    trading_post.done = true
    msg_boxes(trading)
-   trade = add_campaign_objective(obj_tribute)
-   run(patience)
    run(wares_delivery)
 end
 

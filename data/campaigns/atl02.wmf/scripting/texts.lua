@@ -81,7 +81,7 @@ obj_expand = {
 }
 
 obj_spidercloth = {
-   name = "obj_spidercloth_production",
+   name = "obj_spidercloth",
    title = _("Build a spider farm and a weaving mill"),
    number = 2,
    body = objective_text(_("Spidercloth Production"),
@@ -265,7 +265,7 @@ spidercloth_1 = {
        body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand the urgency. We need to build a complete spidercloth production instantly.]]))
-         .. new_objectives(obj_spidercloth_production)
+         .. new_objectives(obj_spidercloth)
    }
 }
 
@@ -295,6 +295,21 @@ spidercloth_3 = {
       title = _("Jundlina Cheers"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
+         _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers’ guild!]]))
+   }
+}
+
+spidercloth_3a = {
+   {
+      title = _("Opol Seeks Out Sidolus"),
+      body = opol(
+         -- TRANSLATORS: Opol
+         _([[Sidolus, may Satul warm you! The weaving mill and spider farm are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]))
+   },
+   {
+      title = _("Sidolus Cheers"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
          _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers’ guild!]]))
    }
 }
@@ -400,7 +415,7 @@ mining_established_2 = {
    {
       title = _("Sidolus is Excited"),
       body = sidolus(
-         -- TRANSLATORS: Jundlina
+         -- TRANSLATORS: Sidolus
          _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to build up bakeries and smokeries and all buildings to supply them.]]))
    }
 }
@@ -564,6 +579,7 @@ tribute = {
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[Oh, and I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our war plannings.]]))
+         .. new_objectives(obj_tribute)
    },
    {
       title = _("Pitfall!"),
@@ -598,7 +614,6 @@ trading = {
          .. paragraphdivider() ..
          -- TRANSLATORS: sidolus
          _([[I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
-         .. new_objectives(obj_tribute)
    }
 }
 
@@ -660,7 +675,7 @@ tribute_started = {
          _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[If you fail to deliver everything within three hours, we need to assume you are just playing along with us.]]))
+         _([[If you fail to deliver everything within three hours, we need to assume you are just playing along with us. So keep an eye on the time as we will not give any further warning.]]))
    },
 }
 
