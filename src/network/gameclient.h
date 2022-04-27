@@ -106,6 +106,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
+	int32_t get_win_condition_duration() override;
+	void set_win_condition_duration(int32_t duration) override;
 
 	void set_peaceful_mode(bool peace) override;
 	bool is_peaceful_mode() override;

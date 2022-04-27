@@ -1399,6 +1399,16 @@ void GameHost::set_win_condition_script(const std::string& wc) {
 	broadcast(packet);
 }
 
+void GameHost::set_win_condition_duration(const int32_t duration) {
+	d->settings.win_condition_duration = duration;
+
+	// Broadcast changes
+	SendPacket packet;
+	packet.unsigned_8(NETCMD_WIN_CONDITION_DURATION);
+	packet.signed_32(duration);
+	broadcast(packet);
+}
+
 void GameHost::set_peaceful_mode(bool peace) {
 	d->settings.peaceful = peace;
 
@@ -1777,6 +1787,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_WIN_CONDITION);
 	packet.string(d->settings.win_condition_script);
+	d->net->send(client.sock_id, packet);
+
+	packet.reset();
+	packet.unsigned_8(NETCMD_WIN_CONDITION_DURATION);
+	packet.signed_32(d->settings.win_condition_duration);
 	d->net->send(client.sock_id, packet);
 
 	packet.reset();
@@ -2390,6 +2405,7 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_SETTING_MAP:
 	case NETCMD_SETTING_PLAYER:
 	case NETCMD_WIN_CONDITION:
+	case NETCMD_WIN_CONDITION_DURATION:
 	case NETCMD_PEACEFUL_MODE:
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:

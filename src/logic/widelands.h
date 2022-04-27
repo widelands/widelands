@@ -28,6 +28,8 @@ namespace Widelands {
 //  Type definitions for the game logic.
 using MilitaryInfluence = uint16_t;
 
+constexpr int32_t kDefaultWinConditionDuration = 4 * 60;
+
 /// 5 bits used, so 0 .. 31
 /// Data type must match kMaxPlayers in graphics/playercolor.h
 using PlayerNumber = uint8_t;

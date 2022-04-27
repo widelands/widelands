@@ -61,6 +61,8 @@ public:
 
 	std::string get_win_condition_script() override;
 	void set_win_condition_script(const std::string& wc) override;
+	int32_t get_win_condition_duration() override;
+	void set_win_condition_duration(int32_t duration) override;
 
 	void set_peaceful_mode(bool peace) override;
 	bool is_peaceful_mode() override;

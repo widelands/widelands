@@ -562,7 +562,16 @@ std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
 
-void GameClient::set_win_condition_script(const std::string& /*wc*/) {
+int32_t GameClient::get_win_condition_duration() {
+	return d->settings.win_condition_duration;
+}
+
+void GameClient::set_win_condition_script(const std::string& /* wc */) {
+	// Clients are not allowed to change this
+	NEVER_HERE();
+}
+
+void GameClient::set_win_condition_duration(const int32_t /* duration */) {
 	// Clients are not allowed to change this
 	NEVER_HERE();
 }
@@ -1164,6 +1173,9 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	} break;
 	case NETCMD_WIN_CONDITION:
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
+		break;
+	case NETCMD_WIN_CONDITION_DURATION:
+		d->settings.win_condition_duration = packet.signed_32();
 		break;
 	case NETCMD_PEACEFUL_MODE:
 		d->settings.peaceful = (packet.unsigned_8() != 0u);

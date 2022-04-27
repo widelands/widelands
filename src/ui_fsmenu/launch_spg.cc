@@ -113,7 +113,8 @@ void LaunchSPG::win_condition_selected() {
 
 		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
 		t->do_not_warn_about_unaccessed_keys();
-		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
+		win_condition_duration_.set_visible(t->has_key("configurable_time") && t->get_bool("configurable_time"));
+		peaceful_mode_forbidden_ = t->has_key("peaceful_mode_allowed") && !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
 		player_setup_.update();
 	}

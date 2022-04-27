@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 9;
+constexpr uint16_t kCurrentPacketVersion = 10;
 constexpr const char* kMinimapFilename = "minimap.png";
 
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
@@ -73,6 +73,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 #endif
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
+			// TODO(Nordfriese): Savegame compatibility
+			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration : s.get_safe_int("win_condition_duration"));
 			number_of_players_ = s.get_safe_int("player_amount");
 			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {
@@ -137,6 +139,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const 
 	s.set_string("background", map.get_background());
 	s.set_string("theme", map.get_background_theme());
 	s.set_string("win_condition", game.get_win_condition_displayname());
+	s.set_int("win_condition_duration", game.get_win_condition_duration());
 	s.set_int("savetimestamp", static_cast<uint32_t>(time(nullptr)));
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
                                                  game.game_controller()->get_game_type() :

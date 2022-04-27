@@ -119,6 +119,7 @@ struct GameSettings {
 	GameSettings()
 	   : playernum(0),
 	     usernum(0),
+	     win_condition_duration(Widelands::kDefaultWinConditionDuration),
 	     scenario(false),
 	     multiplayer(false),
 	     savegame(false),
@@ -176,6 +177,8 @@ struct GameSettings {
 	std::string win_condition_script;
 	/// An ordered list of all win condition script files.
 	std::vector<std::string> win_condition_scripts;
+	/// User-configured win condition time limit, in minutes.
+	int32_t win_condition_duration;
 
 	/// Is map a scenario
 	bool scenario;
@@ -252,6 +255,8 @@ struct GameSettingsProvider {
 	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
 	virtual void set_win_condition_script(const std::string& wc) = 0;
 	virtual std::string get_win_condition_script() = 0;
+	virtual void set_win_condition_duration(int32_t duration) = 0;
+	virtual int32_t get_win_condition_duration() = 0;
 
 	virtual void set_peaceful_mode(bool peace) = 0;
 	virtual bool is_peaceful_mode() = 0;

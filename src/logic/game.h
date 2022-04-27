@@ -331,6 +331,7 @@ public:
 
 	const std::string& get_win_condition_displayname() const;
 	void set_win_condition_displayname(const std::string& name);
+	int32_t get_win_condition_duration() const;
 
 	bool is_replay() const {
 		return replay_;
@@ -452,6 +453,8 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+
+	int32_t win_condition_duration_;
 
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;

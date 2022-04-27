@@ -184,6 +184,14 @@ void HostGameSettingsProvider::set_win_condition_script(const std::string& wc) {
 	host_->set_win_condition_script(wc);
 }
 
+int32_t HostGameSettingsProvider::get_win_condition_duration() {
+	return host_->settings().win_condition_duration;
+}
+
+void HostGameSettingsProvider::set_win_condition_duration(const int32_t duration) {
+	host_->set_win_condition_duration(duration);
+}
+
 void HostGameSettingsProvider::set_peaceful_mode(bool peace) {
 	host_->set_peaceful_mode(peace);
 }

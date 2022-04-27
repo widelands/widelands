@@ -184,14 +184,14 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 
 	sbi_->button_plus->sigclicked.connect([this]() {
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0 && type_ != Type::kExponential) {
 			set_value(sbi_->max);
 		} else {
 			change_value(sbi_->step_size);
 		}
 	});
 	sbi_->button_minus->sigclicked.connect([this]() {
-		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0 && type_ != Type::kExponential) {
 			set_value(sbi_->min);
 		} else {
 			change_value(-sbi_->step_size);
@@ -340,7 +340,22 @@ void SpinBox::set_unit_width(uint32_t width) {
  * private function called by spinbox buttons to in-/decrease the value
  */
 void SpinBox::change_value(int32_t const value) {
-	set_value(value + sbi_->value);
+	assert(value != 0);
+	if (type_ == Type::kExponential) {
+		if (value > 0) {
+			int32_t new_val = sbi_->value * value;
+			if (new_val <= sbi_->max) {
+				set_value(new_val);
+			}
+		} else {
+			int32_t new_val = sbi_->value / -value;
+			if (new_val >= sbi_->min) {
+				set_value(new_val);
+			}
+		}
+	} else {
+		set_value(value + sbi_->value);
+	}
 	changed();
 }
 
@@ -402,20 +417,62 @@ void SpinBox::add_replacement(int32_t value, const std::string& text) {
 
 const std::string SpinBox::unit_text(int32_t value) const {
 	switch (sbi_->unit) {
-	case (Units::kMinutes):
-		/** TRANSLATORS: A spinbox unit */
-		return format(ngettext("%d minute", "%d minutes", value), value);
-	case (Units::kPixels):
+	case Units::kPixels:
 		/** TRANSLATORS: A spinbox unit */
 		return format(ngettext("%d pixel", "%d pixels", value), value);
-	case (Units::kFields):
+
+	case Units::kFields:
 		/** TRANSLATORS: A spinbox unit */
 		return format(ngettext("%d field", "%d fields", value), value);
-	case (Units::kPercent):
+
+	case Units::kPercent:
 		/** TRANSLATORS: A spinbox unit */
 		return format(_("%i %%"), value);
-	case (Units::kNone):
+
+	case Units::kNone:
 		return format("%d", value);
+
+	case Units::kMinutes: {
+		int32_t days = 0;
+		int32_t hours = 0;
+		if (value >= 60 * 24) {
+			days = value / (60 * 24);
+			value -= days * 60 * 24;
+		}
+		if (value >= 60) {
+			hours = value / 60;
+			value -= hours * 60;
+		}
+
+		/** TRANSLATORS: A spinbox unit */
+		std::string str_minutes = format(ngettext("%d minute", "%d minutes", value), value);
+		if (days == 0 && hours == 0) {
+			return str_minutes;
+		}
+
+		/** TRANSLATORS: A spinbox unit */
+		std::string str_hours = format(ngettext("%d hour", "%d hours", hours), hours);
+		if (days == 0) {
+			if (value == 0) {
+				return str_hours;
+			}
+			/** TRANSLATORS: 2 hours and 10 minutes */
+			return format("%1$s and %2$s", str_hours, str_minutes);
+		}
+
+		/** TRANSLATORS: A spinbox unit */
+		std::string str_days = format(ngettext("%d day", "%d days", days), days);
+		if (hours == 0 && value == 0) {
+			return str_hours;
+		}
+		if (hours == 0 || value == 0) {
+			/** TRANSLATORS: 2 days and 3 hours */
+			return format("%1$s and %2$s", str_days, hours == 0 ? str_minutes : str_hours);
+		}
+
+		/** TRANSLATORS: 2 days, 3 hours, and 40 minutes */
+		return format("%1$s, %2$s, and %3$s", str_days, str_hours, str_minutes);
+	}
 	}
 	NEVER_HERE();
 }

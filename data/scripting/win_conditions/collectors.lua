@@ -18,7 +18,7 @@ local wc_descname = _("Collectors")
 local wc_version = 2
 local wc_desc = _ (
    "You get points for precious wares in your warehouses. The player with " ..
-   "the highest number of wares at the end of 4 hours wins the game."
+   "the highest number of wares at the configured time limit wins the game."
 )
 local wc_points = "Points"
 -- This needs to be exactly like wc_points, but localized, because wc_points
@@ -27,16 +27,18 @@ local wc_points_i18n = _("Points")
 local r = {
    name = wc_name,
    description = wc_desc,
+   configurable_time = true,
    peaceful_mode_allowed = true,
    func = function()
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
 
-   -- set the maximum game time of 4 hours
-   local max_time = 4 * 60
-
    local game = wl.Game()
+
+   -- set the maximum game time of 4 hours
+   local max_time = game.win_condition_duration
+
    local plrs = wl.Game().players
    local teams = {}
    for idx,plr in ipairs(plrs) do
