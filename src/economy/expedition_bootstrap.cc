@@ -336,7 +336,7 @@ void ExpeditionBootstrap::load(
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
 			wq->read(fr, game, mol);
-			bool removable = packet_version >= 8 ? fr.unsigned_8() : 0 != 0;
+			bool removable = (packet_version >= 8) && (fr.unsigned_8() != 0);
 			wq->set_callback(input_callback, this);
 
 			if (wq->get_index() == INVALID_INDEX) {
