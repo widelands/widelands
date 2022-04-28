@@ -20,12 +20,12 @@
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
 #include <memory>
+#include <unzip.h>
+#include <zip.h>
 
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "third_party/minizip/unzip.h"
-#include "third_party/minizip/zip.h"
 
 class ZipFilesystem : public FileSystem {
 public:
