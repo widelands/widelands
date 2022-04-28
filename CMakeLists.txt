@@ -13,6 +13,7 @@ option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
+option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
