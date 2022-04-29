@@ -613,7 +613,7 @@ trading = {
          _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarian.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: sidolus
-         _([[I think we should start with the wood deliveries as we could afford them the easiest. But we need to find more metals.]]))
+         _([[I think we should start with the deliveries we could afford the easiest. But we need to find more metals for sure.]]))
    }
 }
 
