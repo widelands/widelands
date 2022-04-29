@@ -221,7 +221,7 @@ function patience()
    end
    msg_boxes(tribute_started)
    defeat_maletus = add_campaign_objective(obj_defeat_maletus)
-   local end_time = game.time + 10800000 -- 3 hours until timeout
+   local end_time = game.time + 12600000 -- 3,5 hours until timeout
    while not ((p1:get_produced_wares_count("coin_wood") >= penalty * 5 and p1:get_produced_wares_count("coin_copper") >= penalty * 4 and p1:get_produced_wares_count("coin_silver") >= penalty * 3 and p1:get_produced_wares_count("coin_gold") >= penalty * 2) or Maletus.defeated) do
       sleep(4235)
       if game.time > end_time then
