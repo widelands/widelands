@@ -20,6 +20,10 @@ local wc_desc = _ (
    "You get points for precious wares in your warehouses. The player with " ..
    "the highest number of wares at the configured time limit wins the game."
 )
+local wc_desc_placeholder = _(
+   "You get points for precious wares in your warehouses. The player with " ..
+   "the highest number of wares after %s wins the game."
+)
 local wc_points = "Points"
 -- This needs to be exactly like wc_points, but localized, because wc_points
 -- will be used as the key to fetch the translation in C++
@@ -31,13 +35,13 @@ local r = {
    peaceful_mode_allowed = true,
    func = function()
 
-   -- set the objective with the game type for all players
-   broadcast_objective("win_condition", wc_descname, wc_desc)
-
    local game = wl.Game()
 
    -- set the maximum game time of 4 hours
    local max_time = game.win_condition_duration
+
+   -- set the objective with the game type for all players
+   broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
 
    local plrs = wl.Game().players
    local teams = {}

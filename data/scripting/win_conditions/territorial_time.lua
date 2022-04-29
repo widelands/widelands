@@ -28,6 +28,14 @@ local wc_desc = _ (
    "If the peaceful mode is selected, the game ends if one player has more " ..
    "land than any other player could gain."
 )
+local wc_desc_placeholder = _(
+   "Each player or team tries to obtain more than half of the map’s " ..
+   "area. The winner will be the player or the team that is able to keep " ..
+   "that area for at least 20 minutes, or the one with the most territory " ..
+   "after %s, whichever comes first. " ..
+   "If the peaceful mode is selected, the game ends if one player has more " ..
+   "land than any other player could gain."
+)
 
 local r = {
    name = wc_name,
@@ -41,11 +49,11 @@ local r = {
       local game = wl.Game()
       local plrs = wl.Game().players
 
-      -- set the objective with the game type for all players
-      broadcast_objective("win_condition", wc_descname, wc_desc)
-
       -- variables to track the maximum 4 hours of gametime
       local max_time = game.win_condition_duration
+
+      -- set the objective with the game type for all players
+      broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
 
       local function _send_state(remaining_time, plrs, show_popup)
          push_textdomain("win_conditions")
