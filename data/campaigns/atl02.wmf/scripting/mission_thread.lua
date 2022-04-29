@@ -200,13 +200,13 @@ function patience()
          trade_started = true
       end
       count = count + 1
-      if count == 2401 then
+      if count == 3601 then
          trade.done = true
          msg_boxes(tribute_not_started)
          trade = add_campaign_objective(obj_tribute2)
          penalty = 2
       end
-      if count == 4801 then
+      if count == 6001 then
          msg_boxes(alliance_broken)
          wl.ui.MapView():close()
       end
