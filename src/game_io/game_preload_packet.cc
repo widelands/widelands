@@ -74,7 +74,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* 
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			// TODO(Nordfriese): Savegame compatibility
-			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration : s.get_safe_int("win_condition_duration"));
+			win_condition_duration_ = (packet_version < 10 ? kDefaultWinConditionDuration :
+                                                          s.get_safe_int("win_condition_duration"));
 			number_of_players_ = s.get_safe_int("player_amount");
 			version_ = s.get_safe_string("widelands_version");
 			if (fs.file_exists(kMinimapFilename)) {

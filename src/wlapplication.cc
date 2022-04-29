@@ -676,7 +676,8 @@ void WLApplication::init_and_run_game_from_template() {
 			script += wc_name;
 		}
 		settings->set_win_condition_script(script);
-		settings->set_win_condition_duration(section.get_int("win_condition_duration", Widelands::kDefaultWinConditionDuration));
+		settings->set_win_condition_duration(
+		   section.get_int("win_condition_duration", Widelands::kDefaultWinConditionDuration));
 	}
 
 	{
