@@ -205,6 +205,13 @@ function patience()
          msg_boxes(tribute_not_started)
          trade = add_campaign_objective(obj_tribute2)
          penalty = 2
+         local port = p1:get_buildings("atlanteans_port")
+         if port and port[1] then
+            port[1].flag.ware_economy:set_target_quantity("coin_wood", 5 * penalty)
+            port[1].flag.ware_economy:set_target_quantity("coin_copper", 4 * penalty)
+            port[1].flag.ware_economy:set_target_quantity("coin_silver", 3 * penalty)
+            port[1].flag.ware_economy:set_target_quantity("coin_gold", 2 * penalty)
+         end
       end
       if count == 6001 then
          msg_boxes(alliance_broken)
