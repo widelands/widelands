@@ -42,7 +42,7 @@ obj_find_port = {
 
 obj_basic_infrastructure = {
    name = "obj_basic_infrastructure",
-   title = _("Ensure the supply of build wares"),
+   title = _("Ensure the supply of construction materials"),
    number = 4,
    body = objective_text(_("Establish Basic Production Chain"),
    p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around us. Find the balance.]])))
@@ -69,7 +69,7 @@ obj_explore = {
    title = _("Explore the surroundings"),
    number = 1,
    body = objective_text(_("Explore Your Surroundings"),
-   p(_([[We are fairly sure that we are not alone on the island. We do not know if the others on this island are friends or foes, so we need to tread carefully. Explore the island by building at least one habitat for a scout.]])))
+   p(_([[We are fairly sure that we are not alone on the island. We do not know if the others on this island are friends or foes, so we need to tread carefully. Explore the island by building at least one house for a scout.]])))
 }
 
 obj_expand = {
@@ -77,7 +77,7 @@ obj_expand = {
    title = _("Expand your teritory"),
    number = 1,
    body = objective_text(_("Expand Territory"),
-   p(_([[As our settlement is going to grow up, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for its larger view range.]])))
+   p(_([[As our settlement is growing, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for its larger view range.]])))
 }
 
 obj_spidercloth = {
@@ -137,7 +137,7 @@ obj_build_temple = {
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
    p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
-   p(_([[And we need to have a scout house to not lose track of what is going on at the barbarians territory.]])))
+   p(_([[And we need to have a scout’s house to not lose track of what is going on at the Barbarians’ territory.]])))
 }
 
 obj_worship = {
@@ -145,7 +145,7 @@ obj_worship = {
    title = _("Worship Satul and consecrate priests"),
    number = 1,
    body = objective_text(_("Worship Satul"),
-   p(_([[Now we need to worship Satul and consecrate at least 2 priests.]])))
+   p(_([[Now we need to worship Satul and consecrate at least two priests.]])))
 }
 
 obj_defeat_kalitath = {
@@ -437,7 +437,7 @@ maletus_defeated_1 = {
       title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
+         _([[Sidolus, during my stay with the Barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the Empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the Barbarians. This includes learning about their gods and preparing to worship them.]]))
    },
 }
 
@@ -488,19 +488,19 @@ heretics_again = {
       title = _("Heretics!"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our princess has been confused in her prisonship by this barbarian. But I will never worship any barbarian god. I can’t imagine how we could change her mind though.]]))
+         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarian god. I can’t imagine how we could change her mind though.]]))
    },
    {
-      title = _("Attracting Satuls Help"),
+      title = _("Attracting Satul’s Help"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[Sidolus, I agree we should not bow in front of any other god then Satul. But we might need the gods help in this case. So I suggest to build a temple and worship satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the barbarians and our princess.]]))
+         _([[Sidolus, I agree we should not bow in front of any other god than Satul. But we might need the god’s help in this case. So I suggest to build a temple and worship Satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the Barbarians and our princess.]]))
    },
    {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satuls power we shopuld keep an eye on our princess and this barbarian. As we should stop our traders deliveries to not waste any wares to this barbarian anymore, I want you to ensure we have a scout out there to gather information.]]))
+         _([[May Satul warm you, Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satul’s power we should keep an eye on our princess and this Barbarian. As we should stop our trader’s deliveries to not waste any wares to this Barbarian any more, I want you to ensure we have a scout out there to gather information.]]))
          .. new_objectives(obj_build_temple),
    },
 }
@@ -526,7 +526,7 @@ priests_consecrated = {
       title = _("May Satul Warm Us"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satuls pleasure. May he warm us and show his might to our princess and these barbaric tribe.]]))
+         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satul’s pleasure. May he warm us and show his might to our princess and this barbaric tribe.]]))
    },
 }
 
@@ -535,19 +535,19 @@ princess_back = {
       title = _("Jundlina Arrives"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The sign of his might and the fear in the barbarians’ faces suddenly made me recognise the truth again. I was wrong about peace and coexistence, as it would have meant knightship forever. And this is not what Atlanteans are made for.]]))
+         _([[May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The sign of his might and the fear in the Barbarians’ faces suddenly made me recognise the truth again. I was wrong about peace and coexistence, as it would have meant servitude forever. And this is not what Atlanteans are made for.]]))
    },
       {
       title = _("Sidolus Relieved"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and faith Satul. How come the Barbarians let you go.]]))
+         _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and be faithful to Satul. How come the Barbarians let you go?]]))
    },
    {
       title = _("Jundlina Cheers"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, they did not let me go, I met our scout and he managed to sneak me out, as I realized, they still kept me for hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way then to defeat them to live here in peace.]]))
+         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way than to defeat them to live here in peace.]]))
          .. new_objectives(obj_defeat_kalitath),
    }
 }
@@ -575,7 +575,7 @@ tribute = {
          _([[Strangers, we need to receive some sign of your good intentions. If you are really on our side, you should send us some gold and a couple of other wares on a regular basis.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
+         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[Oh, and I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our war plannings.]]))
@@ -594,7 +594,7 @@ tribute = {
          _([[Sidolus, I agree with you. However I think we have no choice, so we need to obey this demand. It is your obligation now to run our small people until I come back.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
-         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal and logs.]]))
+         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal, and logs.]]))
          .. new_objectives(obj_trading_post)
    }
 }
