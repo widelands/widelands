@@ -145,7 +145,7 @@ obj_worship = {
    title = _("Worship Satul and consecrate priests"),
    number = 1,
    body = objective_text(_("Worship Satul"),
-   p(_([[Now we need to worship Satul and consecrate at least 2 priests.]])))
+   p(_([[Now we need to worship Satul and consecrate at least two priests.]])))
 }
 
 obj_defeat_kalitath = {
