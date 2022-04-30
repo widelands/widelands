@@ -437,7 +437,7 @@ maletus_defeated_1 = {
       title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
+         _([[Sidolus, during my stay with the Barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the Empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the Barbarians. This includes learning about their gods and preparing to worship them.]]))
    },
 }
 
