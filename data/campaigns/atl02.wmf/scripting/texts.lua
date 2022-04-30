@@ -491,7 +491,7 @@ heretics_again = {
          _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarian god. I can’t imagine how we could change her mind though.]]))
    },
    {
-      title = _("Attracting Satuls Help"),
+      title = _("Attracting Satul’s Help"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
          _([[Sidolus, I agree we should not bow in front of any other god then Satul. But we might need the gods help in this case. So I suggest to build a temple and worship satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the barbarians and our princess.]]))
