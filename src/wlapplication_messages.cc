@@ -245,15 +245,14 @@ bool is_parameter(const std::string& name) {
 /**
  * Print usage information
  */
-void show_usage(const std::string& build_id,
-                const std::string& build_type,
+void show_usage(const std::string& build_info,
                 CmdLineVerbosity verbosity) {
 	i18n::Textdomain textdomain("widelands_console");
 
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << format(_("This is Widelands Version %s"), format("%s %s", build_id, build_type))
+	          << format(_("This is Widelands Version %s"), format("%s", build_info))
 	          << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {
