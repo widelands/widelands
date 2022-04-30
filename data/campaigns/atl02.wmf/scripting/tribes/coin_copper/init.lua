@@ -8,9 +8,9 @@ wl.Descriptions():new_ware_type {
    descname = pgettext("ware", "Copper Coin"),
    icon = dirname .. "menu.png",
 
+   animation_directory = dirname,
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle.png"),
          hotspot = { 10, 17 },
       },
    }
