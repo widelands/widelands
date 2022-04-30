@@ -494,7 +494,7 @@ heretics_again = {
       title = _("Attracting Satul’s Help"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[Sidolus, I agree we should not bow in front of any other god then Satul. But we might need the gods help in this case. So I suggest to build a temple and worship satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the barbarians and our princess.]]))
+         _([[Sidolus, I agree we should not bow in front of any other god than Satul. But we might need the god’s help in this case. So I suggest to build a temple and worship Satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the Barbarians and our princess.]]))
    },
    {
       title = _("Build Temple"),
