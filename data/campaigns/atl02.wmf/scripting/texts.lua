@@ -69,7 +69,7 @@ obj_explore = {
    title = _("Explore the surroundings"),
    number = 1,
    body = objective_text(_("Explore Your Surroundings"),
-   p(_([[We are fairly sure that we are not alone on the island. We do not know if the others on this island are friends or foes, so we need to tread carefully. Explore the island by building at least one habitat for a scout.]])))
+   p(_([[We are fairly sure that we are not alone on the island. We do not know if the others on this island are friends or foes, so we need to tread carefully. Explore the island by building at least one house for a scout.]])))
 }
 
 obj_expand = {
