@@ -488,7 +488,7 @@ heretics_again = {
       title = _("Heretics!"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm us all. Our princess has been confused in her prisonship by this barbarian. But I will never worship any barbarian god. I can’t imagine how we could change her mind though.]]))
+         _([[May Satul warm us all. Our princess has been confused in her imprisonment by this Barbarian. But I will never worship any Barbarian god. I can’t imagine how we could change her mind though.]]))
    },
    {
       title = _("Attracting Satuls Help"),
