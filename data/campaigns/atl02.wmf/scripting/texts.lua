@@ -526,7 +526,7 @@ priests_consecrated = {
       title = _("May Satul Warm Us"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satuls pleasure. May he warm us and show his might to our princess and these barbaric tribe.]]))
+         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satul’s pleasure. May he warm us and show his might to our princess and this barbaric tribe.]]))
    },
 }
 
