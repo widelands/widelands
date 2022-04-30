@@ -535,7 +535,7 @@ princess_back = {
       title = _("Jundlina Arrives"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The sign of his might and the fear in the barbarians’ faces suddenly made me recognise the truth again. I was wrong about peace and coexistence, as it would have meant knightship forever. And this is not what Atlanteans are made for.]]))
+         _([[May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The sign of his might and the fear in the Barbarians’ faces suddenly made me recognise the truth again. I was wrong about peace and coexistence, as it would have meant servitude forever. And this is not what Atlanteans are made for.]]))
    },
       {
       title = _("Sidolus Relieved"),
