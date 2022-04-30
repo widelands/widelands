@@ -594,7 +594,7 @@ tribute = {
          _([[Sidolus, I agree with you. However I think we have no choice, so we need to obey this demand. It is your obligation now to run our small people until I come back.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
-         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal and logs.]]))
+         _([[First you need to upgrade our scout’s house to a trading post. Then you need to send the demanded tributes of gold, iron, coal, and logs.]]))
          .. new_objectives(obj_trading_post)
    }
 }
