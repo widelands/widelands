@@ -42,7 +42,7 @@ obj_find_port = {
 
 obj_basic_infrastructure = {
    name = "obj_basic_infrastructure",
-   title = _("Ensure the supply of build wares"),
+   title = _("Ensure the supply of construction materials"),
    number = 4,
    body = objective_text(_("Establish Basic Production Chain"),
    p(_([[We will need at least a quarry, a few woodcutters, and a sawmill. A forester might or might not be needed depending on how fast the trees are growing around us. Find the balance.]])))
