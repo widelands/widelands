@@ -541,7 +541,7 @@ princess_back = {
       title = _("Sidolus Relieved"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and faith Satul. How come the Barbarians let you go.]]))
+         _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and be faithful to Satul. How come the Barbarians let you go?]]))
    },
    {
       title = _("Jundlina Cheers"),
