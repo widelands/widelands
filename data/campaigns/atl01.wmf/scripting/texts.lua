@@ -309,6 +309,21 @@ heavy_industry_story = {
    },
 }
 
+hint_for_toolsmith = {
+   {
+      title = _("Loftomor Reports"),
+      body = loftomor(
+         -- TRANSLATORS: Loftomor
+         _([[May Satul warm you, Jundlina! We have completed a toolsmithy and now our toolsmiths will produce new tools in an instant.]]))
+   },
+   {
+      title = _("Jundlina Reminds"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[May Satul warm you as well, Loftomor. That is good news to hear. However please remember that our toolsmiths need to be equipped wit a saw. Making tools is an art for us, requiring a precise tool like a saw, not a brutal hammer like for the other tribes.]]))
+   }
+}
+
 barracks_story = {
    {
       title = _("Jundlina Writes a Letter"),
