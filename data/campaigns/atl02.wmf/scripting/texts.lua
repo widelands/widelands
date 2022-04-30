@@ -500,7 +500,7 @@ heretics_again = {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satuls power we shopuld keep an eye on our princess and this barbarian. As we should stop our traders deliveries to not waste any wares to this barbarian anymore, I want you to ensure we have a scout out there to gather information.]]))
+         _([[May Satul warm you, Loftomor. This is a very good idea indeed. So I task you to build a temple worth worshipping our god. Until we are ready to beg for Satul’s power we should keep an eye on our princess and this Barbarian. As we should stop our trader’s deliveries to not waste any wares to this Barbarian any more, I want you to ensure we have a scout out there to gather information.]]))
          .. new_objectives(obj_build_temple),
    },
 }
