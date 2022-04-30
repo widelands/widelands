@@ -575,7 +575,7 @@ tribute = {
          _([[Strangers, we need to receive some sign of your good intentions. If you are really on our side, you should send us some gold and a couple of other wares on a regular basis.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 coal, 9 iron and 4 gold.]])
+         _([[We are only interested in wares that can be used to forge weapons. I mean real weapons like our axes, and not the sort of toothpicks you use. So feel free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[Oh, and I almost forgot this one. We demand to have your princess in our headquarters as well to coordinate our war plannings.]]))
