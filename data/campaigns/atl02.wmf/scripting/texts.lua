@@ -137,7 +137,7 @@ obj_build_temple = {
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
    p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
-   p(_([[And we need to have a scout house to not lose track of what is going on at the barbarians territory.]])))
+   p(_([[And we need to have a scout’s house to not lose track of what is going on at the Barbarians’ territory.]])))
 }
 
 obj_worship = {
