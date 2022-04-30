@@ -475,7 +475,7 @@ scenario_won = {
          -- TRANSLATORS: Jundlina
          _([[I expect a long journey, but we will find the land of Satul in the end. This is what I promised my people. And myself.]]))
          .. objective_text(_("Congratulations"),
-      _([[You have won this mission. Continue with the next one or keep playing for as long as you like.]]))
+      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]))
    }
 }
 

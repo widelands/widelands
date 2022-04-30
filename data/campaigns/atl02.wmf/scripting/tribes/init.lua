@@ -51,22 +51,38 @@ local result = {
             {
                name= "coin_wood",
                default_target_quantity = 5,
-               preciousness = 1
+               preciousness = 1,
+               helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean ware: Wooden Coin
+               purpose = pgettext("atlanteans_ware", "A wooden coin, received as reward for delivering five logs.")
+               }
             },
             {
                name= "coin_copper",
                default_target_quantity = 4,
-               preciousness = 1
+               preciousness = 1,
+               helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean ware: Copper Coin
+               purpose = pgettext("atlanteans_building", "A coin made of copper, received as reward for delivering four lumps of coal.")
+               }
             },
             {
                name= "coin_silver",
                default_target_quantity = 3,
-               preciousness = 1
+               preciousness = 1,
+               helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean ware: Silver Coin
+               purpose = pgettext("atlanteans_building", "A silver coin, received as reward for delivering three iron ingots.")
+               }
             },
             {
                name= "coin_gold",
                default_target_quantity = 2,
-               preciousness = 1
+               preciousness = 1,
+               helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean ware: Golden Coin
+               purpose = pgettext("atlanteans_building", "A golden coin, received as reward for delivering two bars of gold.")
+               }
             }
          },
       }

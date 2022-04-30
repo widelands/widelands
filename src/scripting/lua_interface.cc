@@ -59,7 +59,7 @@ LuaInterface::LuaInterface() {
 	open_lua_library(lua_state_, LUA_MATHLIBNAME, luaopen_math, true);
 	open_lua_library(lua_state_, LUA_DBLIBNAME, luaopen_debug, true);
 	open_lua_library(lua_state_, LUA_COLIBNAME, luaopen_coroutine, true);
-	open_lua_library(lua_state_, LUA_IOLIBNAME, luaopen_io, true);
+	// open_lua_library(lua_state_, LUA_IOLIBNAME, luaopen_io, true);
 
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are

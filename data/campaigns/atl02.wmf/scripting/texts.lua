@@ -86,7 +86,7 @@ obj_spidercloth = {
    number = 2,
    body = objective_text(_("Spidercloth Production"),
       p(_([[We need some spidercloth urgently as we are running out of it. It is therefore essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth, not forgetting the construction sites.]])) ..
-      p(_([[Afterwards we need to construct a farm under all circumstances, as it needs spidercloth to be built. Additionally, we need a spiderfarm and a weaving mill. Later on, a gold spinning mill would be helpful as well.]])))
+      p(_([[Afterwards we need to construct a farm under all circumstances, as it needs spidercloth to be built. Additionally, we need a spiderfarm and a weaving mill.]])))
 }
 
 obj_trading_post = {
@@ -439,6 +439,12 @@ maletus_defeated_1 = {
          -- TRANSLATORS: Jundlina
          _([[Sidolus, during my stay with the Barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the Empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the Barbarians. This includes learning about their gods and preparing to worship them.]]))
    },
+   {
+      title = _("Kalitath Demands"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, now follow the orders of your princess. Meanwhile we might decide that we will need some of the land conquered by you for our common future. So we will simply take your military buildings with our forces. Naturally you won’t have the right to do the same, for the sake of your princess.]]))
+   },
 }
 
 maletus_defeated_2 = {
@@ -473,7 +479,7 @@ maletus_defeated_3 = {
       title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, during my stay at the barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the barbarians. This includes learning about their gods and prepare to worship them.]]))
+         _([[Sidolus, during my stay with the Barbarians I learned a lot about their hospitality and bravery. They really impressed me and their warriors and gods seemed to be very strong in the battle against the Empire. Especially their leader Kalitath made a very good host and I started to think about uniting our tribes to make for a peaceful future on this island. So I want you to prepare our people for a marriage and peaceful coexistence with the Barbarians. This includes learning about their gods and preparing to worship them.]]))
    },
    {
       title = _("Kalitath Demands"),
@@ -547,7 +553,7 @@ princess_back = {
       title = _("Jundlina Cheers"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way than to defeat them to live here in peace.]]))
+         _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
          .. new_objectives(obj_defeat_kalitath),
    }
 }
@@ -563,7 +569,7 @@ victory = {
          -- TRANSLATORS: Jundlina
          _([[Now it is time to celebrate but I expect we can’t relax long. We need to build up our society and our capability to explore the seas again.]]))
          .. objective_text(_("Congratulations"),
-      _([[You have won this mission. Continue with the next one or keep playing for as long as you like.]]))
+      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]))
    }
 }
 
