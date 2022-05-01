@@ -1989,6 +1989,9 @@ void GameHost::update_network_speed() {
  */
 void GameHost::request_sync_reports() {
 	assert(!d->syncreport_pending);
+	if (!d->game->is_loaded()) {
+		return;
+	}
 
 	d->syncreport_pending = true;
 	d->syncreport_arrived = false;
