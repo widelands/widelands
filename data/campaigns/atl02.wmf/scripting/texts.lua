@@ -100,7 +100,7 @@ obj_trading_post = {
 obj_tribute = {
    name = "obj_tribute",
    title = _("Pay all tributes to Kalitath"),
-   number = 1,
+   number = 4,
    body = objective_text(_("Send Trader To Kalitath"),
    p(_([[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]])) ..
    p(_([[The following batches need to be delivered:]])) ..
@@ -113,7 +113,7 @@ obj_tribute = {
 obj_tribute2 = {
    name = "obj_tribute2",
    title = _("Pay all tributes to Kalitath"),
-   number = 1,
+   number = 4,
    body = objective_text(_("Send Trader To Kalitath"),
    p(_([[We need to send the wares to Kalitath with our trader. He will pick them up as soon as a batch is ready in his trading post.]])) ..
    p(_([[The following batches need to be delivered:]])) ..
@@ -244,8 +244,7 @@ initial_messages1= {
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina
          _([[This will take more time, but we can reuse some of its materials. Also, I want a scout deployed and exploring at all times.]]))
-         .. new_objectives(obj_explore)
-         .. new_objectives(obj_expand),
+         .. new_objectives(obj_explore, obj_expand),
       h=500,
    },
 } -- end of initial messages.
