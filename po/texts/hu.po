@@ -8,7 +8,7 @@
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2017,2019-2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -875,4 +875,4 @@ msgstr "Ha a játék összeomlana, ne aggódj!\nA játék automatikusan mentésr
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "A mesterséges intelligencia ellen játszani túl unalmas? Látogasd meg weblapunkat a %s címen, ismerd meg a többi játékost, és játssz az Interneten!"
