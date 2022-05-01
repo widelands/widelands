@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-25 03:27+0000\n"
+"POT-Creation-Date: 2022-04-28 04:21+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -37,15 +37,15 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:87
 #: ../../data/tribes/initialization/atlanteans/units.lua:401
 #: ../../data/tribes/initialization/barbarians/units.lua:110
-#: ../../data/tribes/initialization/empire/units.lua:111
+#: ../../data/tribes/initialization/empire/units.lua:118
 #: ../../data/tribes/initialization/frisians/units.lua:97
 msgctxt "ware"
 msgid ""
@@ -62,15 +62,15 @@ msgid ""
 "logs to produce charcoal."
 msgstr "Die Holzfällerinnen der Amazonen fällen die Bäume und Dschungelbewahrerinnen pflanzen sie. Die resultierenden Stämme werden von der Steinschnitzerin verwendet. Auch die Köhlerei braucht Stämme, um Holzkohle herzustellen."
 
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:100
 #: ../../data/tribes/initialization/atlanteans/units.lua:389
 #: ../../data/tribes/initialization/barbarians/units.lua:98
-#: ../../data/tribes/initialization/empire/units.lua:99
+#: ../../data/tribes/initialization/empire/units.lua:106
 #: ../../data/tribes/initialization/frisians/units.lua:110
 msgctxt "ware"
 msgid "Granite is a basic building material."
@@ -122,15 +122,15 @@ msgid ""
 "construct buildings and ships."
 msgstr "Dieses Seil wird aus Lianen gemacht. Es wird für Rüstungsbekleidung verwendet und, um Gebäude und Schiffe zu konstruieren."
 
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:168
 #: ../../data/tribes/initialization/atlanteans/units.lua:487
 #: ../../data/tribes/initialization/barbarians/units.lua:180
-#: ../../data/tribes/initialization/empire/units.lua:180
+#: ../../data/tribes/initialization/empire/units.lua:187
 #: ../../data/tribes/initialization/frisians/units.lua:177
 msgctxt "ware"
 msgid "Water is the essence of life!"
@@ -262,13 +262,13 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "Spitzhacken werden von Steinhauerinnen verwendet, um Stein aus Felsen oder in Minen zu hauen."
 
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:312
 #: ../../data/tribes/initialization/barbarians/units.lua:343
-#: ../../data/tribes/initialization/empire/units.lua:368
+#: ../../data/tribes/initialization/empire/units.lua:375
 #: ../../data/tribes/initialization/frisians/units.lua:407
 msgctxt "ware"
 msgid "The felling ax is the tool to chop down trees."
@@ -280,15 +280,15 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr "Sie wird von der Holzfällerin benutzt und von der Steinschnitzerin hergestellt."
 
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:325
 #: ../../data/tribes/initialization/atlanteans/units.lua:650
 #: ../../data/tribes/initialization/barbarians/units.lua:356
-#: ../../data/tribes/initialization/empire/units.lua:390
+#: ../../data/tribes/initialization/empire/units.lua:397
 #: ../../data/tribes/initialization/frisians/units.lua:420
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
@@ -302,15 +302,15 @@ msgid ""
 "use them. They are produced by the stone carver."
 msgstr "Daher werden sie von Dschungelbewahrerinnen, Cassavawurzelpflanzerinnen und Kakaopflanzerinnen verwendet. Sie werden von der Steinschnitzerin hergestellt."
 
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:338
 #: ../../data/tribes/initialization/atlanteans/units.lua:663
 #: ../../data/tribes/initialization/barbarians/units.lua:369
-#: ../../data/tribes/initialization/empire/units.lua:403
+#: ../../data/tribes/initialization/empire/units.lua:410
 #: ../../data/tribes/initialization/frisians/units.lua:433
 msgctxt "ware"
 msgid "The hammer is an essential tool."
@@ -637,40 +637,40 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr "Erkundet unbekanntes Gebiet."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
-#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
-#. TRANSLATORS: Helptext for a frisian immovable: Ashes
-#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
+#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
+#. TRANSLATORS: Helptext for a frisian immovable: Ashes
+#. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:756
 #: ../../data/tribes/initialization/amazons/units.lua:763
 #: ../../data/tribes/initialization/atlanteans/units.lua:1100
 #: ../../data/tribes/initialization/atlanteans/units.lua:1177
 #: ../../data/tribes/initialization/barbarians/units.lua:801
 #: ../../data/tribes/initialization/barbarians/units.lua:808
-#: ../../data/tribes/initialization/empire/units.lua:850
 #: ../../data/tribes/initialization/empire/units.lua:857
+#: ../../data/tribes/initialization/empire/units.lua:864
 #: ../../data/tribes/initialization/frisians/units.lua:896
 #: ../../data/tribes/initialization/frisians/units.lua:903
 msgid "The remains of a destroyed building."
 msgstr "Die Überreste eines zerstörten Gebäudes."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #: ../../data/tribes/initialization/amazons/units.lua:770
 #: ../../data/tribes/initialization/atlanteans/units.lua:1294
 #: ../../data/tribes/initialization/barbarians/units.lua:988
-#: ../../data/tribes/initialization/empire/units.lua:1037
+#: ../../data/tribes/initialization/empire/units.lua:1044
 #: ../../data/tribes/initialization/frisians/units.lua:1415
 msgid "The remains of an old tree."
 msgstr "Die Überreste eines alten Baums."
@@ -777,27 +777,27 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr "Dieser Kautschukbaum ist reif, um Kautschuk durch eine Meisterholzfällerin zu schlagen. Andere Stämme können ihn als normalen Stamm fällen."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1113
 #: ../../data/tribes/initialization/atlanteans/units.lua:1107
 #: ../../data/tribes/initialization/atlanteans/units.lua:1142
 #: ../../data/tribes/initialization/barbarians/units.lua:815
-#: ../../data/tribes/initialization/empire/units.lua:864
+#: ../../data/tribes/initialization/empire/units.lua:871
 #: ../../data/tribes/initialization/frisians/units.lua:1162
 msgid "This field has just been planted."
 msgstr "Dieses Feld wurde eben erst bepflanzt."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1120
 #: ../../data/tribes/initialization/amazons/units.lua:1127
 #: ../../data/tribes/initialization/atlanteans/units.lua:1114
@@ -806,38 +806,38 @@ msgstr "Dieses Feld wurde eben erst bepflanzt."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1156
 #: ../../data/tribes/initialization/barbarians/units.lua:822
 #: ../../data/tribes/initialization/barbarians/units.lua:829
-#: ../../data/tribes/initialization/empire/units.lua:871
 #: ../../data/tribes/initialization/empire/units.lua:878
+#: ../../data/tribes/initialization/empire/units.lua:885
 #: ../../data/tribes/initialization/frisians/units.lua:1169
 msgid "This field is growing."
 msgstr "Die Pflanzen auf diesem Feld wachsen."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1134
 #: ../../data/tribes/initialization/atlanteans/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1163
 #: ../../data/tribes/initialization/barbarians/units.lua:836
-#: ../../data/tribes/initialization/empire/units.lua:885
+#: ../../data/tribes/initialization/empire/units.lua:892
 #: ../../data/tribes/initialization/frisians/units.lua:1183
 msgid "This field is ready for harvesting."
 msgstr "Dieses Feld ist erntereif."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
+#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
-#. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1141
 #: ../../data/tribes/initialization/atlanteans/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1170
 #: ../../data/tribes/initialization/barbarians/units.lua:843
-#: ../../data/tribes/initialization/empire/units.lua:892
+#: ../../data/tribes/initialization/empire/units.lua:899
 #: ../../data/tribes/initialization/frisians/units.lua:1190
 msgid "This field has been harvested."
 msgstr "Dieses Feld wurde abgeerntet."
@@ -862,15 +862,15 @@ msgstr "Dieser Kakaobaum ist ausgewachsen."
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr "Die Bohnen an diesem Kakaobaum sind erntereif."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
-#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
+#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
+#. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1176
 #: ../../data/tribes/initialization/atlanteans/units.lua:1184
 #: ../../data/tribes/initialization/barbarians/units.lua:878
-#: ../../data/tribes/initialization/empire/units.lua:927
+#: ../../data/tribes/initialization/empire/units.lua:934
 #: ../../data/tribes/initialization/frisians/units.lua:1260
 msgid "There are no resources in the ground here."
 msgstr "Hier gibt es keine Rohstoffe im Boden."
@@ -883,15 +883,15 @@ msgid ""
 "digger dwellings."
 msgstr "Goldadern enthalten Goldstaub, der in einer Goldgräberei aus dem Geröll gewaschen werden kann."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1186
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
 #: ../../data/tribes/initialization/barbarians/units.lua:917
-#: ../../data/tribes/initialization/empire/units.lua:966
+#: ../../data/tribes/initialization/empire/units.lua:973
 #: ../../data/tribes/initialization/frisians/units.lua:1299
 msgid "There is only a little bit of gold here."
 msgstr "Hier gibt es nur wenig Gold."
@@ -903,46 +903,46 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr "Stein ist ein grundlegendes Baumaterial und kann von einer Steinmine gefördert werden."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1197
 #: ../../data/tribes/initialization/barbarians/units.lua:928
 #: ../../data/tribes/initialization/frisians/units.lua:1310
 msgid "There is only a little bit of granite here."
 msgstr "Hier gibt es nur wenig Stein."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1208
 #: ../../data/tribes/initialization/atlanteans/units.lua:1267
 #: ../../data/tribes/initialization/barbarians/units.lua:961
-#: ../../data/tribes/initialization/empire/units.lua:1010
+#: ../../data/tribes/initialization/empire/units.lua:1017
 #: ../../data/tribes/initialization/frisians/units.lua:1343
 msgid "There is a lot of gold here."
 msgstr "Hier gibt es viel Gold."
 
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1219
 #: ../../data/tribes/initialization/barbarians/units.lua:972
 #: ../../data/tribes/initialization/frisians/units.lua:1354
 msgid "There is a lot of granite here."
 msgstr "Hier gibt es viel Stein."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1227
 #: ../../data/tribes/initialization/atlanteans/units.lua:1286
 #: ../../data/tribes/initialization/barbarians/units.lua:980
-#: ../../data/tribes/initialization/empire/units.lua:1029
+#: ../../data/tribes/initialization/empire/units.lua:1036
 #: ../../data/tribes/initialization/frisians/units.lua:1362
 msgid "A ship is being constructed at this site."
 msgstr "Hier wird ein Schiff gebaut."
@@ -1554,87 +1554,87 @@ msgid ""
 "between ports."
 msgstr "Baut Schiffe zur Kolonisierung anderer Länder und zum Warentransport zwischen den Häfen."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1613
 #: ../../data/tribes/initialization/atlanteans/units.lua:1972
 #: ../../data/tribes/initialization/barbarians/units.lua:1788
-#: ../../data/tribes/initialization/empire/units.lua:1573
+#: ../../data/tribes/initialization/empire/units.lua:2254
 #: ../../data/tribes/initialization/frisians/units.lua:2161
 msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "„Verfluche nicht den Bauarbeiter, dem das Baumaterial fehlt.“"
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
-#. Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
+#. Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1615
 #: ../../data/tribes/initialization/atlanteans/units.lua:1974
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
-#: ../../data/tribes/initialization/empire/units.lua:1575
+#: ../../data/tribes/initialization/empire/units.lua:2256
 #: ../../data/tribes/initialization/frisians/units.lua:2163
 msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "Sprichwort, gemeinhin benutzt für unmögliche Aufgaben aller Art"
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1617
 #: ../../data/tribes/initialization/atlanteans/units.lua:1976
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
-#: ../../data/tribes/initialization/empire/units.lua:1577
+#: ../../data/tribes/initialization/empire/units.lua:2258
 #: ../../data/tribes/initialization/frisians/units.lua:2165
 msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Ein neues Gebäude wird auf dieser Baustelle gebaut."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1624
 #: ../../data/tribes/initialization/atlanteans/units.lua:1983
 #: ../../data/tribes/initialization/barbarians/units.lua:1799
-#: ../../data/tribes/initialization/empire/units.lua:1584
+#: ../../data/tribes/initialization/empire/units.lua:2265
 #: ../../data/tribes/initialization/frisians/units.lua:2172
 msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "„Neue Wege entstehen, wenn man bereit ist, Altvertrautes abzureißen.“"
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1626
 #: ../../data/tribes/initialization/atlanteans/units.lua:1985
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
-#: ../../data/tribes/initialization/empire/units.lua:1586
+#: ../../data/tribes/initialization/empire/units.lua:2267
 #: ../../data/tribes/initialization/frisians/units.lua:2174
 msgctxt "building"
 msgid "Proverb"
 msgstr "Sprichwort"
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1628
 #: ../../data/tribes/initialization/atlanteans/units.lua:1987
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
-#: ../../data/tribes/initialization/empire/units.lua:1588
+#: ../../data/tribes/initialization/empire/units.lua:2269
 #: ../../data/tribes/initialization/frisians/units.lua:2176
 msgctxt "building"
 msgid ""
@@ -1689,7 +1689,7 @@ msgstr "Atlanter nutzen Stämme auch als das Ausgangsmaterial für Bretter, die 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:414
-#: ../../data/tribes/initialization/empire/units.lua:124
+#: ../../data/tribes/initialization/empire/units.lua:131
 msgctxt "ware"
 msgid "Planks are an important building material."
 msgstr "Bretter sind ein wichtiges Baumaterial."
@@ -1743,12 +1743,12 @@ msgid ""
 msgstr "Da die Atlanter Fisch nicht roh mögen, wird er üblicherweise in einer Räucherei geräuchert, um ihn genießbar zu machen."
 
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:466
 #: ../../data/tribes/initialization/barbarians/units.lua:168
-#: ../../data/tribes/initialization/empire/units.lua:168
+#: ../../data/tribes/initialization/empire/units.lua:175
 #: ../../data/tribes/initialization/frisians/units.lua:250
 msgctxt "ware"
 msgid ""
@@ -1839,11 +1839,11 @@ msgid ""
 msgstr "Diese wunderbaren Diamanten werden beim Bau einiger besonderer Gebäude verwendet. Sie werden in der Kristallmine abgebaut."
 
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:564
 #: ../../data/tribes/initialization/barbarians/units.lua:266
-#: ../../data/tribes/initialization/empire/units.lua:291
+#: ../../data/tribes/initialization/empire/units.lua:298
 msgctxt "ware"
 msgid ""
 "Coal is mined in coal mines or produced out of logs by a charcoal kiln."
@@ -1858,12 +1858,12 @@ msgid ""
 msgstr "Die atlantischen Feuer in Hochöfen, Rüstungs- und Waffenschmieden werden mit Kohle geheizt."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:577
 #: ../../data/tribes/initialization/barbarians/units.lua:279
-#: ../../data/tribes/initialization/empire/units.lua:304
+#: ../../data/tribes/initialization/empire/units.lua:311
 #: ../../data/tribes/initialization/frisians/units.lua:319
 msgctxt "default_ware"
 msgid "Iron ore is mined in iron mines."
@@ -1876,12 +1876,12 @@ msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr "Es wird in einem Hochofen geschmolzen, um Eisen zu erhalten."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:590
 #: ../../data/tribes/initialization/barbarians/units.lua:292
-#: ../../data/tribes/initialization/empire/units.lua:317
+#: ../../data/tribes/initialization/empire/units.lua:324
 #: ../../data/tribes/initialization/frisians/units.lua:332
 msgctxt "ware"
 msgid "Iron is smelted out of iron ores."
@@ -1896,12 +1896,12 @@ msgid ""
 msgstr "Es wird in Hochöfen gewonnen und in der Rüstungs- und Waffenschmiede sowie beim Werkzeugmacher verwendet."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:603
 #: ../../data/tribes/initialization/barbarians/units.lua:305
-#: ../../data/tribes/initialization/empire/units.lua:330
+#: ../../data/tribes/initialization/empire/units.lua:337
 #: ../../data/tribes/initialization/frisians/units.lua:345
 msgctxt "ware"
 msgid "Gold ore is mined in a gold mine."
@@ -1916,12 +1916,12 @@ msgid ""
 msgstr "Im Hochofen wird es zu Gold verhüttet, welches für einige große Gebäude und zur Herstellung von Waffen und Rüstungen benötigt wird."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:616
 #: ../../data/tribes/initialization/barbarians/units.lua:318
-#: ../../data/tribes/initialization/empire/units.lua:343
+#: ../../data/tribes/initialization/empire/units.lua:350
 #: ../../data/tribes/initialization/frisians/units.lua:358
 msgctxt "ware"
 msgid ""
@@ -2004,12 +2004,12 @@ msgid ""
 msgstr "Diese Hakenstange wird vom Räucherer verwendet, um das das Fleisch und den Fisch oben in der Räucherei aufzuhängen. Sie wird vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:721
 #: ../../data/tribes/initialization/barbarians/units.lua:408
-#: ../../data/tribes/initialization/empire/units.lua:442
+#: ../../data/tribes/initialization/empire/units.lua:449
 #: ../../data/tribes/initialization/frisians/units.lua:468
 msgctxt "ware"
 msgid "The scythe is the tool of the farmers."
@@ -2022,12 +2022,12 @@ msgid "Scythes are produced by the toolsmith."
 msgstr "Sensen werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:734
 #: ../../data/tribes/initialization/barbarians/units.lua:421
-#: ../../data/tribes/initialization/empire/units.lua:455
+#: ../../data/tribes/initialization/empire/units.lua:462
 #: ../../data/tribes/initialization/frisians/units.lua:481
 msgctxt "ware"
 msgid "The bread paddle is the tool of the baker, each baker needs one."
@@ -2040,12 +2040,12 @@ msgid "Bread paddles are produced by the toolsmith."
 msgstr "Brotschieber werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:747
 #: ../../data/tribes/initialization/barbarians/units.lua:443
-#: ../../data/tribes/initialization/empire/units.lua:486
+#: ../../data/tribes/initialization/empire/units.lua:493
 #: ../../data/tribes/initialization/frisians/units.lua:503
 msgctxt "ware"
 msgid "Fire tongs are the tools for smelting ores."
@@ -2339,78 +2339,78 @@ msgid ""
 msgstr "Kundschafter wie Kundigund, der Erkunder, erkunden das unerkundete Gebiet auf kundige Weise."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1191
 #: ../../data/tribes/initialization/barbarians/units.lua:885
-#: ../../data/tribes/initialization/empire/units.lua:934
+#: ../../data/tribes/initialization/empire/units.lua:941
 #: ../../data/tribes/initialization/frisians/units.lua:1267
 msgid "There is water in the ground here that can be pulled up by a well."
 msgstr "Hier gibt es Wasser im Boden, das von einem Brunnen hochgeholt werden kann."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1199
 #: ../../data/tribes/initialization/atlanteans/units.lua:1243
 #: ../../data/tribes/initialization/barbarians/units.lua:893
 #: ../../data/tribes/initialization/barbarians/units.lua:937
-#: ../../data/tribes/initialization/empire/units.lua:942
-#: ../../data/tribes/initialization/empire/units.lua:986
+#: ../../data/tribes/initialization/empire/units.lua:949
+#: ../../data/tribes/initialization/empire/units.lua:993
 #: ../../data/tribes/initialization/frisians/units.lua:1275
 #: ../../data/tribes/initialization/frisians/units.lua:1319
 msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr "Kohleadern enthalten Kohle, die von Kohleminen gefördert werden kann."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1201
 #: ../../data/tribes/initialization/barbarians/units.lua:895
-#: ../../data/tribes/initialization/empire/units.lua:944
+#: ../../data/tribes/initialization/empire/units.lua:951
 #: ../../data/tribes/initialization/frisians/units.lua:1277
 msgid "There is only a little bit of coal here."
 msgstr "Hier gibt es nur wenig Kohle."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1210
 #: ../../data/tribes/initialization/atlanteans/units.lua:1254
 #: ../../data/tribes/initialization/barbarians/units.lua:904
 #: ../../data/tribes/initialization/barbarians/units.lua:948
-#: ../../data/tribes/initialization/empire/units.lua:953
-#: ../../data/tribes/initialization/empire/units.lua:997
+#: ../../data/tribes/initialization/empire/units.lua:960
+#: ../../data/tribes/initialization/empire/units.lua:1004
 #: ../../data/tribes/initialization/frisians/units.lua:1286
 #: ../../data/tribes/initialization/frisians/units.lua:1330
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr "Eisenadern enthalten Eisenerz, das von Eisenerzminen gefördert werden kann."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/barbarians/units.lua:906
-#: ../../data/tribes/initialization/empire/units.lua:955
+#: ../../data/tribes/initialization/empire/units.lua:962
 #: ../../data/tribes/initialization/frisians/units.lua:1288
 msgid "There is only a little bit of iron here."
 msgstr "Hier gibt es nur wenig Eisen."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1221
 #: ../../data/tribes/initialization/atlanteans/units.lua:1265
 #: ../../data/tribes/initialization/barbarians/units.lua:915
 #: ../../data/tribes/initialization/barbarians/units.lua:959
-#: ../../data/tribes/initialization/empire/units.lua:964
-#: ../../data/tribes/initialization/empire/units.lua:1008
+#: ../../data/tribes/initialization/empire/units.lua:971
+#: ../../data/tribes/initialization/empire/units.lua:1015
 #: ../../data/tribes/initialization/frisians/units.lua:1297
 #: ../../data/tribes/initialization/frisians/units.lua:1341
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
@@ -2430,23 +2430,23 @@ msgid "There are only a few precious stones here."
 msgstr "Hier gibt es nur wenig wertvolles Gestein."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1245
 #: ../../data/tribes/initialization/barbarians/units.lua:939
-#: ../../data/tribes/initialization/empire/units.lua:988
+#: ../../data/tribes/initialization/empire/units.lua:995
 #: ../../data/tribes/initialization/frisians/units.lua:1321
 msgid "There is a lot of coal here."
 msgstr "Hier gibt es viel Kohle."
 
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1256
 #: ../../data/tribes/initialization/barbarians/units.lua:950
-#: ../../data/tribes/initialization/empire/units.lua:999
+#: ../../data/tribes/initialization/empire/units.lua:1006
 #: ../../data/tribes/initialization/frisians/units.lua:1332
 msgid "There is a lot of iron here."
 msgstr "Hier gibt es viel Eisen."
@@ -2462,6 +2462,16 @@ msgstr "Hier gibt es viel wertvolles Gestein."
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Blackroot Field
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
+#. Ironwood Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
+#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
@@ -2473,16 +2483,6 @@ msgstr "Hier gibt es viel wertvolles Gestein."
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Blackroot Field
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians:
-#. Ironwood Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
 #. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1301
 #: ../../data/tribes/initialization/atlanteans/units.lua:1308
@@ -2508,7 +2508,6 @@ msgstr "Hier gibt es viel wertvolles Gestein."
 #: ../../data/tribes/initialization/barbarians/units.lua:1058
 #: ../../data/tribes/initialization/barbarians/units.lua:1065
 #: ../../data/tribes/initialization/barbarians/units.lua:1072
-#: ../../data/tribes/initialization/empire/units.lua:1044
 #: ../../data/tribes/initialization/empire/units.lua:1051
 #: ../../data/tribes/initialization/empire/units.lua:1058
 #: ../../data/tribes/initialization/empire/units.lua:1065
@@ -2520,6 +2519,7 @@ msgstr "Hier gibt es viel wertvolles Gestein."
 #: ../../data/tribes/initialization/empire/units.lua:1107
 #: ../../data/tribes/initialization/empire/units.lua:1114
 #: ../../data/tribes/initialization/empire/units.lua:1121
+#: ../../data/tribes/initialization/empire/units.lua:1128
 #: ../../data/tribes/initialization/frisians/units.lua:1422
 #: ../../data/tribes/initialization/frisians/units.lua:1429
 #: ../../data/tribes/initialization/frisians/units.lua:1436
@@ -2645,15 +2645,15 @@ msgstr "Priester von Satul, auf die Frage, warum man Steine für Gebäude benöt
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
+#. Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
-#. Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1446
 #: ../../data/tribes/initialization/barbarians/units.lua:1151
-#: ../../data/tribes/initialization/empire/units.lua:1178
+#: ../../data/tribes/initialization/empire/units.lua:1262
 #: ../../data/tribes/initialization/frisians/units.lua:1557
 msgctxt "building"
 msgid "Fells trees in the surrounding area and processes them into logs."
@@ -2683,14 +2683,14 @@ msgstr "Holzfäller der Atlanter zum Gebrauch von Sägen"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1459
 #: ../../data/tribes/initialization/barbarians/units.lua:1167
-#: ../../data/tribes/initialization/empire/units.lua:1187
+#: ../../data/tribes/initialization/empire/units.lua:1283
 #: ../../data/tribes/initialization/frisians/units.lua:1570
 msgctxt "building"
 msgid "Plants trees in the surrounding area."
@@ -2793,13 +2793,13 @@ msgid "Prophecy of the fish breeders"
 msgstr "Weissagung der Fischzüchter"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1511
 #: ../../data/tribes/initialization/barbarians/units.lua:1197
-#: ../../data/tribes/initialization/empire/units.lua:1205
+#: ../../data/tribes/initialization/empire/units.lua:1325
 #: ../../data/tribes/initialization/frisians/units.lua:1581
 msgctxt "building"
 msgid "Hunts animals to produce meat."
@@ -2827,12 +2827,12 @@ msgid "Hunter answering a fisher"
 msgstr "Ein Jäger, der einem Fischer antwortet"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1525
 #: ../../data/tribes/initialization/barbarians/units.lua:1225
-#: ../../data/tribes/initialization/empire/units.lua:1214
+#: ../../data/tribes/initialization/empire/units.lua:1346
 #: ../../data/tribes/initialization/frisians/units.lua:1624
 msgctxt "building"
 msgid "Draws water out of the deep."
@@ -2896,13 +2896,13 @@ msgid ""
 msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden, bevor du einen Kundschafter hierher senden kannst."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #: ../../data/tribes/initialization/atlanteans/units.lua:1553
 #: ../../data/tribes/initialization/barbarians/units.lua:1239
-#: ../../data/tribes/initialization/empire/units.lua:1222
+#: ../../data/tribes/initialization/empire/units.lua:1366
 #: ../../data/tribes/initialization/frisians/units.lua:1722
 msgctxt "building"
 msgid "Explores unknown territory."
@@ -2932,7 +2932,7 @@ msgstr "Ein Kundschafter einem Soldaten antwortend"
 #. TRANSLATORS: Purpose helptext for an empire production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1568
-#: ../../data/tribes/initialization/empire/units.lua:1238
+#: ../../data/tribes/initialization/empire/units.lua:1406
 msgctxt "building"
 msgid "Saws logs to produce planks."
 msgstr "Zersägt Stämme, um Bretter herzustellen."
@@ -3040,16 +3040,16 @@ msgid "Head of the bakers’ guild"
 msgstr "Der Vorsitzende der Bäckergilde"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
+#. Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1621
 #: ../../data/tribes/initialization/barbarians/units.lua:1374
-#: ../../data/tribes/initialization/empire/units.lua:1304
+#: ../../data/tribes/initialization/empire/units.lua:1573
 #: ../../data/tribes/initialization/frisians/units.lua:1648
 #: ../../data/tribes/initialization/frisians/units.lua:1831
 msgctxt "building"
@@ -3080,13 +3080,13 @@ msgid "A black voice from inside the charcoal kiln"
 msgstr "Eine dunkle Stimme aus der Köhlerei"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
-#. Works
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
+#. Works
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
 #. Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1635
 #: ../../data/tribes/initialization/barbarians/units.lua:1386
-#: ../../data/tribes/initialization/empire/units.lua:1311
+#: ../../data/tribes/initialization/empire/units.lua:1592
 msgctxt "building"
 msgid "Smelts iron ore into iron and gold ore into gold."
 msgstr "Verhüttet Eisenerz zu Eisen und Golderz zu Gold."
@@ -3107,12 +3107,12 @@ msgid "A member of the craftsman’s guild"
 msgstr "Ein Mitglied der Handwerkergilde"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Metal
 #. Workshop
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1646
 #: ../../data/tribes/initialization/barbarians/units.lua:1397
-#: ../../data/tribes/initialization/empire/units.lua:1318
+#: ../../data/tribes/initialization/empire/units.lua:1611
 msgctxt "building"
 msgid "Forges all the tools that your workers need."
 msgstr "Stellt alle Werkzeuge her, die deine Arbeiter brauchen."
@@ -3347,18 +3347,18 @@ msgstr "Erster Teil des Architekturalmanachs der Atlanter"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1774
 #: ../../data/tribes/initialization/barbarians/units.lua:1526
 #: ../../data/tribes/initialization/barbarians/units.lua:1541
 #: ../../data/tribes/initialization/barbarians/units.lua:1556
-#: ../../data/tribes/initialization/empire/units.lua:1405
-#: ../../data/tribes/initialization/empire/units.lua:1412
+#: ../../data/tribes/initialization/empire/units.lua:1844
+#: ../../data/tribes/initialization/empire/units.lua:1867
 #: ../../data/tribes/initialization/frisians/units.lua:1986
 #: ../../data/tribes/initialization/frisians/units.lua:1995
 msgctxt "building"
@@ -3387,20 +3387,20 @@ msgstr "Lied der Gilde der Bergleute"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1788
 #: ../../data/tribes/initialization/barbarians/units.lua:1569
 #: ../../data/tribes/initialization/barbarians/units.lua:1582
 #: ../../data/tribes/initialization/barbarians/units.lua:1595
-#: ../../data/tribes/initialization/empire/units.lua:1419
-#: ../../data/tribes/initialization/empire/units.lua:1426
+#: ../../data/tribes/initialization/empire/units.lua:1886
+#: ../../data/tribes/initialization/empire/units.lua:1907
 #: ../../data/tribes/initialization/frisians/units.lua:2004
 #: ../../data/tribes/initialization/frisians/units.lua:2013
 msgctxt "building"
@@ -3409,18 +3409,18 @@ msgstr "Fördert Eisenerz aus bergigem Gelände."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1802
 #: ../../data/tribes/initialization/barbarians/units.lua:1608
 #: ../../data/tribes/initialization/barbarians/units.lua:1621
 #: ../../data/tribes/initialization/barbarians/units.lua:1634
-#: ../../data/tribes/initialization/empire/units.lua:1433
-#: ../../data/tribes/initialization/empire/units.lua:1440
+#: ../../data/tribes/initialization/empire/units.lua:1928
+#: ../../data/tribes/initialization/empire/units.lua:1949
 #: ../../data/tribes/initialization/frisians/units.lua:2022
 #: ../../data/tribes/initialization/frisians/units.lua:2031
 msgctxt "building"
@@ -3616,12 +3616,12 @@ msgid "‘Wisdom of the Fight’ by the warriors’ guild"
 msgstr "‘Weisheit des Kampfes’ der Soldatenkameradschaft"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1939
 #: ../../data/tribes/initialization/barbarians/units.lua:1753
-#: ../../data/tribes/initialization/empire/units.lua:1555
+#: ../../data/tribes/initialization/empire/units.lua:2222
 #: ../../data/tribes/initialization/frisians/units.lua:2126
 msgctxt "building"
 msgid "Builds ferries."
@@ -3649,12 +3649,12 @@ msgid "Traditional song of the ferrymen"
 msgstr "Traditionelles Lied der Fährleute"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
+#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
-#. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1955
 #: ../../data/tribes/initialization/barbarians/units.lua:1767
-#: ../../data/tribes/initialization/empire/units.lua:1564
+#: ../../data/tribes/initialization/empire/units.lua:2245
 #: ../../data/tribes/initialization/frisians/units.lua:2139
 msgctxt "building"
 msgid ""
@@ -3780,7 +3780,7 @@ msgstr "Die Barbaren benötigen Wasser in der Bäckerei, der Kleinbrauerei und d
 #. TRANSLATORS: Helptext for an empire ware: Wheat, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Wheat, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:192
-#: ../../data/tribes/initialization/empire/units.lua:192
+#: ../../data/tribes/initialization/empire/units.lua:199
 msgctxt "ware"
 msgid "Wheat is essential for survival."
 msgstr "Weizen ist überlebenswichtig."
@@ -3822,10 +3822,10 @@ msgid ""
 msgstr "Nur dieses Bier ist gut genug für die Krieger in der Arena. Man sagt, die ganze Kraft der Barbaren liege darin. Starkbier hilft die Ausweichfertigkeiten der Krieger von Stufe 0 über Stufe 1 bis zur Stufe 2 auszubilden. Starkbier wird außerdem in Gaststätten für das Zubereiten von Mahlzeiten benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:232
-#: ../../data/tribes/initialization/empire/units.lua:248
+#: ../../data/tribes/initialization/empire/units.lua:255
 #: ../../data/tribes/initialization/frisians/units.lua:281
 msgctxt "ware"
 msgid ""
@@ -3938,7 +3938,7 @@ msgstr "Er wird von Geologen, Bauarbeitern, Schmieden und Helmschmieden gebrauch
 #. TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Fishing Rod, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:382
-#: ../../data/tribes/initialization/empire/units.lua:416
+#: ../../data/tribes/initialization/empire/units.lua:423
 msgctxt "ware"
 msgid "Fishing rods are needed by fishers to catch fish."
 msgstr "Angeln werden vom Fischer benutzt, um Fische zu fangen."
@@ -3953,10 +3953,10 @@ msgid ""
 msgstr "Sie gehören zu den grundlegenden Werkzeugen, die in einer Werkzeugschmiede hergestellt werden (aber nicht mehr, wenn diese zu einer Axt- oder Waffenschmiede erweitert wurde)."
 
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:395
-#: ../../data/tribes/initialization/empire/units.lua:429
+#: ../../data/tribes/initialization/empire/units.lua:436
 #: ../../data/tribes/initialization/frisians/units.lua:455
 msgctxt "ware"
 msgid ""
@@ -4282,23 +4282,23 @@ msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Kundschafter wie Kundigund, der Erkunder, erkunden das unerkundete Gebiet auf kundige Weise."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:850
 #: ../../data/tribes/initialization/frisians/units.lua:1232
 msgid "This reed field has just been planted."
 msgstr "Dieses Reetfeld wurde eben erst bepflanzt."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:857
 #: ../../data/tribes/initialization/barbarians/units.lua:864
 #: ../../data/tribes/initialization/frisians/units.lua:1239
 msgid "This reed field is growing."
 msgstr "Dieses Reetfeld wächst."
 
-#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Reed Field
+#. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/barbarians/units.lua:871
 #: ../../data/tribes/initialization/frisians/units.lua:1253
 msgid "This reed field is ready for harvesting."
@@ -4815,7 +4815,7 @@ msgstr "Erste Strophe des Trinkliedes „So ist der Barbar“"
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Brewery
 #: ../../data/tribes/initialization/barbarians/units.lua:1323
-#: ../../data/tribes/initialization/empire/units.lua:1263
+#: ../../data/tribes/initialization/empire/units.lua:1468
 msgctxt "building"
 msgid "Produces beer to keep the miners strong and happy."
 msgstr "Stellt Bier her, um die Bergleute bei Laune zu halten."
@@ -4833,10 +4833,10 @@ msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr "Menü der Taverne „De alde Bronzeaxt“"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Tavern
-#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+#. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1334
-#: ../../data/tribes/initialization/empire/units.lua:1286
+#: ../../data/tribes/initialization/empire/units.lua:1529
 #: ../../data/tribes/initialization/frisians/units.lua:1905
 msgctxt "building"
 msgid "Prepares rations to feed the scouts and miners."
@@ -5102,7 +5102,7 @@ msgstr "Zeile aus dem Erntelied „Reichtum der Felder“"
 #. TRANSLATORS: Purpose helptext for an empire production site: Farm
 #. TRANSLATORS: Purpose helptext for production site: Farm
 #: ../../data/tribes/initialization/barbarians/units.lua:1477
-#: ../../data/tribes/initialization/empire/units.lua:1348
+#: ../../data/tribes/initialization/empire/units.lua:1697
 msgctxt "building"
 msgid "Sows and harvests wheat."
 msgstr "Sät und erntet Weizen."
@@ -5528,10 +5528,10 @@ msgid ""
 msgstr "Colintan, Architekt der Zitadelle von Adlen,<br>bei der Eröffnungsrede"
 
 #. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
-#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #. TRANSLATORS: Note helptext for production site: Ferry Yard
+#. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
-#: ../../data/tribes/initialization/empire/units.lua:1557
+#: ../../data/tribes/initialization/empire/units.lua:2224
 #: ../../data/tribes/initialization/frisians/units.lua:2128
 msgctxt "building"
 msgid "Needs water nearby."
@@ -5597,14 +5597,20 @@ msgctxt "barbarians"
 msgid "Workers are coming"
 msgstr "Arbeiter kommen"
 
+#. TRANSLATORS: Format string for a latin quote and its translation
+#: ../../data/tribes/initialization/empire/units.lua:10
+msgctxt "empire_lore"
+msgid "‘%1%’<br>(%2%)"
+msgstr "‘%1%’<br>(%2%)"
+
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 2
-#: ../../data/tribes/initialization/empire/units.lua:101
+#: ../../data/tribes/initialization/empire/units.lua:108
 msgctxt "empire_ware"
 msgid "The Empire produces granite blocks in quarries and marble mines."
 msgstr "Das Imperium stellt Steinblöcke in Steinbrüchen und Marmorminen her."
 
 #. TRANSLATORS: Helptext for an empire ware: Log, part 2
-#: ../../data/tribes/initialization/empire/units.lua:113
+#: ../../data/tribes/initialization/empire/units.lua:120
 msgctxt "empire_ware"
 msgid ""
 "Imperial lumberjacks fell the trees; foresters take care of the supply of "
@@ -5613,25 +5619,25 @@ msgid ""
 msgstr "Beim Imperium werden die Bäume von einem Holzfäller gefällt; Förster kümmern sich um den Baumnachwuchs. Stämme werden auch in der Köhlerei, dem Werkzeugmacher und dem Sägewerk verwendet."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 2
-#: ../../data/tribes/initialization/empire/units.lua:126
+#: ../../data/tribes/initialization/empire/units.lua:133
 msgctxt "empire_ware"
 msgid "They are produced out of logs by the sawmill."
 msgstr "Sie werden im Sägewerk hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 3
-#: ../../data/tribes/initialization/empire/units.lua:128
+#: ../../data/tribes/initialization/empire/units.lua:135
 msgctxt "empire_ware"
 msgid "They are also used by the weapon smithy."
 msgstr "Sie werden auch in der Waffenschmiede benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Wool
-#: ../../data/tribes/initialization/empire/units.lua:138
+#: ../../data/tribes/initialization/empire/units.lua:145
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr "Wolle ist das Haar von Schafen. Webereien verwenden es, um Stoff herzustellen."
 
 #. TRANSLATORS: Helptext for an empire ware: Cloth
-#: ../../data/tribes/initialization/empire/units.lua:147
+#: ../../data/tribes/initialization/empire/units.lua:154
 msgctxt "empire_ware"
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor"
@@ -5639,7 +5645,7 @@ msgid ""
 msgstr "Stoff wird für den Bau verschiedener Gebäude und in Rüstungsschmieden benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Fish
-#: ../../data/tribes/initialization/empire/units.lua:158
+#: ../../data/tribes/initialization/empire/units.lua:165
 msgctxt "empire_ware"
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
@@ -5647,7 +5653,7 @@ msgid ""
 msgstr "Neben Brot und Fleisch ist auch Fisch Nahrungsmittel für das Imperium. Fisch wird in Tavernen, Wirtshäuser und Ausbildungsstätten (Arena, Kolosseum, Ausbildungslager) gebraucht."
 
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 2
-#: ../../data/tribes/initialization/empire/units.lua:170
+#: ../../data/tribes/initialization/empire/units.lua:177
 msgctxt "empire_ware"
 msgid ""
 "Meat can also be obtained as pork from piggeries. It is used in the inns and"
@@ -5656,7 +5662,7 @@ msgid ""
 msgstr "Fleisch kann außerdem als Schweinefleisch von der Schweinezucht kommen. Es wird in Tavernen und Wirtshäusern verwendet, um Essen für Bergleute zuzubereiten, und wird in Ausbildungsstätten (Ausbildungslager, Arena, Kolosseum) benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Water, part 2
-#: ../../data/tribes/initialization/empire/units.lua:182
+#: ../../data/tribes/initialization/empire/units.lua:189
 msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
@@ -5664,7 +5670,7 @@ msgid ""
 msgstr "Wasser wird in Bäckereien und Brauereien benötigt. Auch Eselfarmen, Schäfereien und Schweinezuchten müssen mit Wasser versorgt werden."
 
 #. TRANSLATORS: Helptext for an empire ware: Wheat, part 2
-#: ../../data/tribes/initialization/empire/units.lua:194
+#: ../../data/tribes/initialization/empire/units.lua:201
 msgctxt "empire_ware"
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
@@ -5672,7 +5678,7 @@ msgid ""
 msgstr "Weizen wird auf Bauernhöfen angebaut und von Mühlen und Brauereien benötigt. Auch Eselfarmen, Schäfereien und Schweinezuchten müssen mit Weizen versorgt werden."
 
 #. TRANSLATORS: Helptext for an empire ware: Flour
-#: ../../data/tribes/initialization/empire/units.lua:204
+#: ../../data/tribes/initialization/empire/units.lua:211
 msgctxt "empire_ware"
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
@@ -5680,7 +5686,7 @@ msgid ""
 msgstr "Mehl wird in der Mühle aus Weizen hergestellt und wird von der Bäckerei benötigt, um köstliches Brot für das Imperium zu backen."
 
 #. TRANSLATORS: Helptext for an empire ware: Bread
-#: ../../data/tribes/initialization/empire/units.lua:213
+#: ../../data/tribes/initialization/empire/units.lua:220
 msgctxt "empire_ware"
 msgid ""
 "The bakers of the Empire make really tasty bread out of flour and water. It "
@@ -5689,7 +5695,7 @@ msgid ""
 msgstr "Die Bäcker des Imperiums machen aus Mehl und Wasser wirklich köstliches Brot. Es wird in Tavernen und Wirtshäusern verwendet, um Rationen und Mahlzeiten zuzubereiten. Brot wird auch in den Ausbildungsstätten (Ausbildungslager, Arena, Kolosseum) benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Beer
-#: ../../data/tribes/initialization/empire/units.lua:222
+#: ../../data/tribes/initialization/empire/units.lua:229
 msgctxt "empire_ware"
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by"
@@ -5697,7 +5703,7 @@ msgid ""
 msgstr "Dieses Bier wird in Brauerein aus Weizen und Wasser gebraut. Es wird von Bergleuten in Kohle- und Eisenerzminen benötigt."
 
 #. TRANSLATORS: Helptext for an empire ware: Grape
-#: ../../data/tribes/initialization/empire/units.lua:230
+#: ../../data/tribes/initialization/empire/units.lua:237
 msgctxt "empire_ware"
 msgid ""
 "These grapes are the base for a tasty wine. They are harvested in a vineyard"
@@ -5705,7 +5711,7 @@ msgid ""
 msgstr "Diese Weintrauben sind die Grundlage für einen fruchtigen Wein. Sie werden in einem Weinberg geerntet und in einer Weinkellerei gekeltert."
 
 #. TRANSLATORS: Helptext for an empire ware: Wine
-#: ../../data/tribes/initialization/empire/units.lua:238
+#: ../../data/tribes/initialization/empire/units.lua:245
 msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
@@ -5713,13 +5719,13 @@ msgid ""
 msgstr "Dieser köstliche Wein wird von den Bergleuten in Marmor- und Goldminen benötigt. Er wird in Weinkellereien hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Ration, part 2
-#: ../../data/tribes/initialization/empire/units.lua:250
+#: ../../data/tribes/initialization/empire/units.lua:257
 msgctxt "empire_ware"
 msgid "Rations are produced in a tavern out of fish or meat or bread."
 msgstr "Rationen werden in einer Taverne aus Fisch, Fleisch oder Brot hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Meal
-#: ../../data/tribes/initialization/empire/units.lua:260
+#: ../../data/tribes/initialization/empire/units.lua:267
 msgctxt "empire_ware"
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
@@ -5727,7 +5733,7 @@ msgid ""
 msgstr "Eine richtige Mahlzeit wird in Wirtshäusern aus Brot und Fleisch/Fisch zubereitet. Die Bergleute in tiefen Minen werden damit versorgt."
 
 #. TRANSLATORS: Helptext for an empire ware: Marble
-#: ../../data/tribes/initialization/empire/units.lua:272
+#: ../../data/tribes/initialization/empire/units.lua:279
 msgctxt "empire_ware"
 msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
@@ -5736,7 +5742,7 @@ msgid ""
 msgstr "Marmor ist der wunderschöne Stein, welcher aus dem Berg geschnitten oder in Steinbrüchen abgebaut wird. Marmor wird als Baumaterial verwendet oder beim Steinmetz zu Marmorsäulen geformt."
 
 #. TRANSLATORS: Helptext for an empire ware: Marble Column
-#: ../../data/tribes/initialization/empire/units.lua:281
+#: ../../data/tribes/initialization/empire/units.lua:288
 msgctxt "empire_ware"
 msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
@@ -5745,7 +5751,7 @@ msgid ""
 msgstr "Marmorsäulen repräsentieren die hohe Kultur des Imperiums, sodass sie für beinahe jedes größere Gebäude benötigt werden. Sie werden vom Steinmetz aus Marmor geformt."
 
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 2
-#: ../../data/tribes/initialization/empire/units.lua:293
+#: ../../data/tribes/initialization/empire/units.lua:300
 msgctxt "empire_ware"
 msgid ""
 "The fires of the Empire smelting works, armor smithies and weapon smithies "
@@ -5753,13 +5759,13 @@ msgid ""
 msgstr "Die Feuer in Hochöfen, Rüstungs- und Waffenschmieden des Imperiums werden normalerweise mit Kohle geheizt."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 2
-#: ../../data/tribes/initialization/empire/units.lua:306
+#: ../../data/tribes/initialization/empire/units.lua:313
 msgctxt "empire_ware"
 msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr "Es wird in einem Hochofen geschmolzen, um Eisen zu erhalten."
 
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 2
-#: ../../data/tribes/initialization/empire/units.lua:319
+#: ../../data/tribes/initialization/empire/units.lua:326
 msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Weapons, armor and tools are made of "
@@ -5767,7 +5773,7 @@ msgid ""
 msgstr "Es wird in Hochöfen gewonnen. Waffen, Rüstungen und Werkzeuge werden aus Eisen hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 2
-#: ../../data/tribes/initialization/empire/units.lua:332
+#: ../../data/tribes/initialization/empire/units.lua:339
 msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
@@ -5775,7 +5781,7 @@ msgid ""
 msgstr "Im Hochofen wird es zu Gold verhüttet, welches für einige große Gebäude und zur Herstellung von Waffen und Rüstungen benötigt wird."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 2
-#: ../../data/tribes/initialization/empire/units.lua:345
+#: ../../data/tribes/initialization/empire/units.lua:352
 msgctxt "empire_ware"
 msgid ""
 "It is produced by the smelting works. Armor and weapons are embellished with"
@@ -5783,7 +5789,7 @@ msgid ""
 msgstr "Es wird im Hochofen erzeugt. Rüstungen und Waffen werden in der Rüstungs- und Waffenschmiede mit Gold verziert."
 
 #. TRANSLATORS: Helptext for an empire ware: Pick
-#: ../../data/tribes/initialization/empire/units.lua:358
+#: ../../data/tribes/initialization/empire/units.lua:365
 msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
@@ -5791,19 +5797,19 @@ msgid ""
 msgstr "Spitzhacken werden von Steinmetzen und Bergleuten verwendet. Sie werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 2
-#: ../../data/tribes/initialization/empire/units.lua:370
+#: ../../data/tribes/initialization/empire/units.lua:377
 msgctxt "empire_ware"
 msgid "Felling axes are used by lumberjacks and produced by the toolsmithy."
 msgstr "Holzfälleräxte werden von Holzfällern benutzt und in der Schmiede hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Saw
-#: ../../data/tribes/initialization/empire/units.lua:380
+#: ../../data/tribes/initialization/empire/units.lua:387
 msgctxt "empire_ware"
 msgid "This saw is needed by the carpenter. It is produced by the toolsmith."
 msgstr "Diese Säge wird vom Zimmermann benötigt. Sie wird vom Werkzeuchmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 2
-#: ../../data/tribes/initialization/empire/units.lua:392
+#: ../../data/tribes/initialization/empire/units.lua:399
 msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
@@ -5811,7 +5817,7 @@ msgid ""
 msgstr "Daher werden sie vom Förster und vom Winzer benötigt. Sie werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 2
-#: ../../data/tribes/initialization/empire/units.lua:405
+#: ../../data/tribes/initialization/empire/units.lua:412
 msgctxt "empire_ware"
 msgid ""
 "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make "
@@ -5820,26 +5826,26 @@ msgstr "Er wird von Geologen, Bauarbeitern, Waffen- und Rüstungsschmieden gebra
 
 #. TRANSLATORS: Helptext for an empire ware: Fishing Rod, part 2
 #. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 2
-#: ../../data/tribes/initialization/empire/units.lua:418
-#: ../../data/tribes/initialization/empire/units.lua:431
+#: ../../data/tribes/initialization/empire/units.lua:425
+#: ../../data/tribes/initialization/empire/units.lua:438
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
 msgstr "Sie werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
-#: ../../data/tribes/initialization/empire/units.lua:444
+#: ../../data/tribes/initialization/empire/units.lua:451
 msgctxt "empire_ware"
 msgid "Scythes are produced by the toolsmith."
 msgstr "Sensen werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 2
-#: ../../data/tribes/initialization/empire/units.lua:457
+#: ../../data/tribes/initialization/empire/units.lua:464
 msgctxt "empire_ware"
 msgid "Bread paddles are produced by the toolsmith."
 msgstr "Brotschieber werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Basket
-#: ../../data/tribes/initialization/empire/units.lua:467
+#: ../../data/tribes/initialization/empire/units.lua:474
 msgctxt "empire_ware"
 msgid ""
 "This basket is needed by the vine farmer for harvesting the grapes. It is "
@@ -5847,7 +5853,7 @@ msgid ""
 msgstr "Diese Körbe werden von den Winzern zum Ernten der Trauben benötigt. Sie werden vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Kitchen Tools
-#: ../../data/tribes/initialization/empire/units.lua:476
+#: ../../data/tribes/initialization/empire/units.lua:483
 msgctxt "empire_ware"
 msgid ""
 "Kitchen tools are needed for preparing rations and meals. They are produced "
@@ -5855,13 +5861,13 @@ msgid ""
 msgstr "Küchengeräte werden benötigt, um Rationen und Mahlzeiten zuzubereiten. Sie werden in Werkzeugschmieden hergestellt und in Tavernen und Wirtshäusern verwendet."
 
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 2
-#: ../../data/tribes/initialization/empire/units.lua:488
+#: ../../data/tribes/initialization/empire/units.lua:495
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
 msgstr "Sie werden am Hochofen benutzt und vom Werkzeugmacher hergestellt."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
-#: ../../data/tribes/initialization/empire/units.lua:501
+#: ../../data/tribes/initialization/empire/units.lua:508
 msgctxt "empire_ware"
 msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
@@ -5870,7 +5876,7 @@ msgid ""
 msgstr "Dieser Holzspeer ist die Grundwaffe des imperialen Militärsystems. Sie wird in Waffenschmieden hergestellt. Zusammen mit dem Helm ist sie die Ausrüstung für junge Soldaten."
 
 #. TRANSLATORS: Helptext for an empire ware: Spear
-#: ../../data/tribes/initialization/empire/units.lua:510
+#: ../../data/tribes/initialization/empire/units.lua:517
 msgctxt "empire_ware"
 msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
@@ -5879,7 +5885,7 @@ msgid ""
 msgstr "Dieser Speer hat eine Eisenspitze. Er wird in Waffenschmieden hergestellt und im Ausbildungslager – zusammen mit Nahrung – benötigt, um die Soldaten im Angriff von Stufe 0 auf Stufe 1 auszubilden."
 
 #. TRANSLATORS: Helptext for an empire ware: Advanced Spear
-#: ../../data/tribes/initialization/empire/units.lua:519
+#: ../../data/tribes/initialization/empire/units.lua:526
 msgctxt "empire_ware"
 msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
@@ -5888,7 +5894,7 @@ msgid ""
 msgstr "Dies ist ein verbesserter Speer mit Stahlspitze. Er wird in der Waffenschmiede hergestellt und im Ausbildungslager – zusammen mit Nahrung – benötigt, um die Soldaten im Angriff von Stufe 1 auf Stufe 2 auszubilden."
 
 #. TRANSLATORS: Helptext for an empire ware: Heavy Spear
-#: ../../data/tribes/initialization/empire/units.lua:528
+#: ../../data/tribes/initialization/empire/units.lua:535
 msgctxt "empire_ware"
 msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
@@ -5897,7 +5903,7 @@ msgid ""
 msgstr "Dies ist der stärkste Speer mit einer Stahlspitze und einer kleinen Klinge. Er wird in Waffenschmieden hergestellt und im Ausbildungslager – zusammen mit Nahrung – benötigt, um die Soldaten im Angriff von Stufe 2 auf Stufe 3 auszubilden."
 
 #. TRANSLATORS: Helptext for an empire ware: War Spear
-#: ../../data/tribes/initialization/empire/units.lua:537
+#: ../../data/tribes/initialization/empire/units.lua:544
 msgctxt "empire_ware"
 msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
@@ -5906,7 +5912,7 @@ msgid ""
 msgstr "Dies ist die beste und schärfste Waffe die der imperiale Waffenschmied für die Soldaten herstellt. Sie wird im Ausbildungslager – zusammen mit Nahrung – benötigt, um die Soldaten im Angriff von Stufe 3 auf Stufe 4 auszubilden."
 
 #. TRANSLATORS: Helptext for an empire ware: Helmet
-#: ../../data/tribes/initialization/empire/units.lua:546
+#: ../../data/tribes/initialization/empire/units.lua:553
 msgctxt "empire_ware"
 msgid ""
 "The helmet is the basic defense of a warrior. It is produced in an armor "
@@ -5916,7 +5922,7 @@ msgid ""
 msgstr "Der Helm ist die Grundverteidigung eines Kriegers. Er wird in Rüstungsschmieden hergestellt. Zusammen mit einem Holzspeer ist er die Grundausrüstung für junge Soldaten. Helme werden auch in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 0 auf 1 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an empire ware: Armor
-#: ../../data/tribes/initialization/empire/units.lua:555
+#: ../../data/tribes/initialization/empire/units.lua:562
 msgctxt "empire_ware"
 msgid ""
 "Basic armor for Empire soldiers. It is produced in the armor smithy and used"
@@ -5925,7 +5931,7 @@ msgid ""
 msgstr "Die Grundrüstung für Soldaten des Imperiums. Er wird in der Rüstungsschmiede hergestellt und im Ausbildungslager – zusammen mit Nahrung – verwendet, um die Lebenspunkte der Soldaten von Stufe 1 auf 2 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an empire ware: Chain Armor
-#: ../../data/tribes/initialization/empire/units.lua:564
+#: ../../data/tribes/initialization/empire/units.lua:571
 msgctxt "empire_ware"
 msgid ""
 "The chain armor is a medium armor for Empire soldiers. It is produced in an "
@@ -5934,7 +5940,7 @@ msgid ""
 msgstr "Das Kettenhemd ist die mittlere Rüstung der imperialen Soldaten. Es wird in Rüstungsschmieden hergestellt und im Ausbildungslager – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 2 auf 3 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an empire ware: Gilded Armor
-#: ../../data/tribes/initialization/empire/units.lua:573
+#: ../../data/tribes/initialization/empire/units.lua:580
 msgctxt "empire_ware"
 msgid ""
 "The gilded armor is the strongest armor an Empire soldier can have. It is "
@@ -5943,19 +5949,19 @@ msgid ""
 msgstr "Der Goldharnisch ist die stärkste Rüstung, die für imperiale Soldaten existiert. Er wird in Rüstungsschmieden hergestellt und in Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte der Soldaten von Stufe 3 auf 4 zu erhöhen."
 
 #. TRANSLATORS: Helptext for an empire worker: Carrier
-#: ../../data/tribes/initialization/empire/units.lua:588
+#: ../../data/tribes/initialization/empire/units.lua:595
 msgctxt "empire_worker"
 msgid "Carries items along your roads."
 msgstr "Transportiert Waren auf deinen Straßen."
 
 #. TRANSLATORS: Helptext for an empire worker: Ferry
-#: ../../data/tribes/initialization/empire/units.lua:595
+#: ../../data/tribes/initialization/empire/units.lua:602
 msgctxt "empire_worker"
 msgid "Ships wares across narrow rivers."
 msgstr "Transportiert Waren über schmale Flüsse."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey
-#: ../../data/tribes/initialization/empire/units.lua:604
+#: ../../data/tribes/initialization/empire/units.lua:611
 msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
@@ -5963,7 +5969,7 @@ msgid ""
 msgstr "Esel helfen dabei, Gegenstände entlang ausgelasteter Straßen zu transportieren. Sie werden in einer Eselfarm großgezogen."
 
 #. TRANSLATORS: Helptext for an empire worker: Donkey Breeder
-#: ../../data/tribes/initialization/empire/units.lua:611
+#: ../../data/tribes/initialization/empire/units.lua:618
 msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
@@ -5971,233 +5977,276 @@ msgid ""
 msgstr "Züchtet kluge und hilfreiche Esel, die beim Transport der Waren helfen."
 
 #. TRANSLATORS: Helptext for an empire worker: Stonemason
-#: ../../data/tribes/initialization/empire/units.lua:621
+#: ../../data/tribes/initialization/empire/units.lua:628
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
 msgstr "Bricht Stein und Marmor aus den Felsen in der Umgebung."
 
 #. TRANSLATORS: Helptext for an empire worker: Carpenter
-#: ../../data/tribes/initialization/empire/units.lua:628
+#: ../../data/tribes/initialization/empire/units.lua:635
 msgctxt "empire_worker"
 msgid "Works in the sawmill."
 msgstr "Arbeitet im Sägewerk."
 
 #. TRANSLATORS: Helptext for an empire worker: Lumberjack
-#: ../../data/tribes/initialization/empire/units.lua:635
+#: ../../data/tribes/initialization/empire/units.lua:642
 msgctxt "empire_worker"
 msgid "Fells trees."
 msgstr "Fällt Bäume."
 
 #. TRANSLATORS: Helptext for an empire worker: Forester
-#: ../../data/tribes/initialization/empire/units.lua:642
+#: ../../data/tribes/initialization/empire/units.lua:649
 msgctxt "empire_worker"
 msgid "Plants trees."
 msgstr "Pflanzt Bäume."
 
 #. TRANSLATORS: Helptext for an empire worker: Builder
-#: ../../data/tribes/initialization/empire/units.lua:649
+#: ../../data/tribes/initialization/empire/units.lua:656
 msgctxt "empire_worker"
 msgid "Works at construction sites to raise new buildings."
 msgstr "Arbeitet auf Baustellen, um Gebäude zu bauen."
 
 #. TRANSLATORS: Helptext for an empire worker: Shepherd
-#: ../../data/tribes/initialization/empire/units.lua:656
+#: ../../data/tribes/initialization/empire/units.lua:663
 msgctxt "empire_worker"
 msgid "Keeping sheep."
 msgstr "Hütet Schafe."
 
 #. TRANSLATORS: Helptext for an empire worker: Weaver
-#: ../../data/tribes/initialization/empire/units.lua:663
+#: ../../data/tribes/initialization/empire/units.lua:670
 msgctxt "empire_worker"
 msgid "Produces cloth for ships and soldiers."
 msgstr "Webt Stoff für Schiffe und Soldaten."
 
 #. TRANSLATORS: Helptext for an empire worker: Shipwright
-#: ../../data/tribes/initialization/empire/units.lua:670
+#: ../../data/tribes/initialization/empire/units.lua:677
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
 msgstr "Arbeitet in der Werft und baut neue Schiffe."
 
 #. TRANSLATORS: Helptext for an empire worker: Fisher
-#: ../../data/tribes/initialization/empire/units.lua:680
+#: ../../data/tribes/initialization/empire/units.lua:687
 msgctxt "empire_worker"
 msgid "Catches fish in the sea."
 msgstr "Fängt Fisch im Meer."
 
 #. TRANSLATORS: Helptext for an empire worker: Hunter
-#: ../../data/tribes/initialization/empire/units.lua:687
+#: ../../data/tribes/initialization/empire/units.lua:694
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
 msgstr "Der Jäger bringt gutes Fleisch zu den Siedlern."
 
 #. TRANSLATORS: Helptext for an empire worker: Farmer
-#: ../../data/tribes/initialization/empire/units.lua:694
+#: ../../data/tribes/initialization/empire/units.lua:701
 msgctxt "empire_worker"
 msgid "Plants fields."
 msgstr "Bestellt Felder."
 
 #. TRANSLATORS: Helptext for an empire worker: Miller
-#: ../../data/tribes/initialization/empire/units.lua:701
+#: ../../data/tribes/initialization/empire/units.lua:708
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
 msgstr "Mahlt Weizen zu Mehl."
 
 #. TRANSLATORS: Helptext for an empire worker: Baker
-#: ../../data/tribes/initialization/empire/units.lua:708
+#: ../../data/tribes/initialization/empire/units.lua:715
 msgctxt "empire_worker"
 msgid "Bakes bread for workers."
 msgstr "Bäckt Brot für Arbeiter."
 
 #. TRANSLATORS: Helptext for an empire worker: Brewer
-#: ../../data/tribes/initialization/empire/units.lua:715
+#: ../../data/tribes/initialization/empire/units.lua:722
 msgctxt "empire_worker"
 msgid "Produces beer."
 msgstr "Braut Bier."
 
 #. TRANSLATORS: Helptext for an empire worker: Vine Farmer
-#: ../../data/tribes/initialization/empire/units.lua:722
+#: ../../data/tribes/initialization/empire/units.lua:729
 msgctxt "empire_worker"
 msgid "Grows grapevines."
 msgstr "Pflanzt Weinreben."
 
 #. TRANSLATORS: Helptext for an empire worker: Vintner
-#: ../../data/tribes/initialization/empire/units.lua:729
+#: ../../data/tribes/initialization/empire/units.lua:736
 msgctxt "empire_worker"
 msgid "Produces wine."
 msgstr "Stellt Wein her."
 
 #. TRANSLATORS: Helptext for an empire worker: Pig Breeder
-#: ../../data/tribes/initialization/empire/units.lua:736
+#: ../../data/tribes/initialization/empire/units.lua:743
 msgctxt "empire_worker"
 msgid "Breeds pigs."
 msgstr "Züchtet Schweine."
 
 #. TRANSLATORS: Helptext for an empire worker: Innkeeper
-#: ../../data/tribes/initialization/empire/units.lua:743
+#: ../../data/tribes/initialization/empire/units.lua:750
 msgctxt "empire_worker"
 msgid "Produces food for miners."
 msgstr "Stellt Nahrung für die Bergleute her."
 
 #. TRANSLATORS: Helptext for an empire worker: Geologist
-#: ../../data/tribes/initialization/empire/units.lua:753
+#: ../../data/tribes/initialization/empire/units.lua:760
 msgctxt "empire_worker"
 msgid "Discovers resources for mining."
 msgstr "Sucht Rohstoffe zum Schürfen."
 
 #. TRANSLATORS: Helptext for an empire worker: Miner
 #. TRANSLATORS: Helptext for an empire worker: Master Miner
-#: ../../data/tribes/initialization/empire/units.lua:760
 #: ../../data/tribes/initialization/empire/units.lua:767
+#: ../../data/tribes/initialization/empire/units.lua:774
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
 msgstr "Arbeitet tief in den Minen, um Kohle, Eisen, Gold oder Marmor zu schürfen."
 
 #. TRANSLATORS: Helptext for an empire worker: Charcoal Burner
-#: ../../data/tribes/initialization/empire/units.lua:774
+#: ../../data/tribes/initialization/empire/units.lua:781
 msgctxt "empire_worker"
 msgid "Burns coal."
 msgstr "Brennt Kohle."
 
 #. TRANSLATORS: Helptext for an empire worker: Smelter
-#: ../../data/tribes/initialization/empire/units.lua:781
+#: ../../data/tribes/initialization/empire/units.lua:788
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
 msgstr "Verhüttet Erze zu Metall."
 
 #. TRANSLATORS: Helptext for an empire worker: Toolsmith
-#: ../../data/tribes/initialization/empire/units.lua:791
+#: ../../data/tribes/initialization/empire/units.lua:798
 msgctxt "empire_worker"
 msgid "Produces tools for the workers."
 msgstr "Schmiedet Werkzeuge für Arbeiter."
 
 #. TRANSLATORS: Helptext for an empire worker: Recruit
-#: ../../data/tribes/initialization/empire/units.lua:801
+#: ../../data/tribes/initialization/empire/units.lua:808
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
 msgstr "Begierig, ein Soldat zu werden und seinen Stamm zu verteidigen!"
 
 #. TRANSLATORS: Helptext for an empire worker: Soldier
-#: ../../data/tribes/initialization/empire/units.lua:810
+#: ../../data/tribes/initialization/empire/units.lua:817
 msgctxt "empire_worker"
 msgid "Defend and Conquer!"
 msgstr "Verteidige und erobere!"
 
 #. TRANSLATORS: Helptext for an empire worker: Trainer
-#: ../../data/tribes/initialization/empire/units.lua:817
+#: ../../data/tribes/initialization/empire/units.lua:824
 msgctxt "empire_worker"
 msgid "Trains the soldiers."
 msgstr "Bildet die Soldaten aus."
 
 #. TRANSLATORS: Helptext for an empire worker: Weaponsmith
-#: ../../data/tribes/initialization/empire/units.lua:824
+#: ../../data/tribes/initialization/empire/units.lua:831
 msgctxt "empire_worker"
 msgid "Produces weapons for the soldiers."
 msgstr "Schmiedet Waffen für Soldaten."
 
 #. TRANSLATORS: Helptext for an empire worker: Armorsmith
-#: ../../data/tribes/initialization/empire/units.lua:831
+#: ../../data/tribes/initialization/empire/units.lua:838
 msgctxt "empire_worker"
 msgid "Produces armor for the soldiers."
 msgstr "Schmiedet Rüstungen für die Soldaten."
 
 #. TRANSLATORS: Helptext for an empire worker: Scout
-#: ../../data/tribes/initialization/empire/units.lua:838
+#: ../../data/tribes/initialization/empire/units.lua:845
 msgctxt "empire_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr "Kundschafter wie Kundigund, der Erkunder, erkunden das unerkundete Gebiet auf kundige Weise."
 
 #. TRANSLATORS: Helptext for an empire immovable: Grapevine
-#: ../../data/tribes/initialization/empire/units.lua:899
+#: ../../data/tribes/initialization/empire/units.lua:906
 msgid "This grapevine has just been planted."
 msgstr "Diese Weinreben wurden eben erst angepflanzt."
 
 #. TRANSLATORS: Helptext for an empire immovable: Grapevine
-#: ../../data/tribes/initialization/empire/units.lua:906
 #: ../../data/tribes/initialization/empire/units.lua:913
+#: ../../data/tribes/initialization/empire/units.lua:920
 msgid "This grapevine is growing."
 msgstr "Diese Weinreben wachsen."
 
 #. TRANSLATORS: Helptext for an empire immovable: Grapevine
 #. TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
-#: ../../data/tribes/initialization/empire/units.lua:920
+#: ../../data/tribes/initialization/empire/units.lua:927
 #: ../../data/tribes/initialization/frisians/units.lua:1407
 msgid "This grapevine is ready for harvesting."
 msgstr "Diese Weinreben sind bereit für die Lese."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 1
-#: ../../data/tribes/initialization/empire/units.lua:975
-#: ../../data/tribes/initialization/empire/units.lua:1019
+#: ../../data/tribes/initialization/empire/units.lua:982
+#: ../../data/tribes/initialization/empire/units.lua:1026
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
 msgstr "Marmor ist ein grundlegendes Baumaterial und kann von einer Marmormine gefördert werden. Ebenso fördert diese Mine Stein."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
-#: ../../data/tribes/initialization/empire/units.lua:977
+#: ../../data/tribes/initialization/empire/units.lua:984
 msgid "There is only a little bit of marble here."
 msgstr "Hier gibt es nur wenig Marmor."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 2
-#: ../../data/tribes/initialization/empire/units.lua:1021
+#: ../../data/tribes/initialization/empire/units.lua:1028
 msgid "There is a lot of marble here."
 msgstr "Hier gibt es viel Marmor."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Adaptation of a classical Latin quote meaning:
+#. "All roads lead to Fremil."
+#: ../../data/tribes/initialization/empire/units.lua:1143
+msgid "Omnes viæ ducunt Fremilem."
+msgstr "Omnes viæ ducunt Fremilem."
+
+#. TRANSLATORS: Lore helptext for an empire warehouse: Headquarters
+#. Translation for the adapted classical Latin quote:
+#. "Omnes viæ ducunt Fremilem."
+#: ../../data/tribes/initialization/empire/units.lua:1147
+msgid "All roads lead to Fremil."
+msgstr "Alle Wege führen nach Fremil."
+
+#. TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters
+#: ../../data/tribes/initialization/empire/units.lua:1151
+msgctxt "empire_building"
+msgid "Proverb signifying the glory of the Empire and its capital"
+msgstr "Sprichwort, das den Ruhm des Imperiums und seiner Hauptstadt preist"
+
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
-#: ../../data/tribes/initialization/empire/units.lua:1133
+#: ../../data/tribes/initialization/empire/units.lua:1154
 msgctxt "empire_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr "Die Unterkunft deines Volkes. Hier werden auch deine Waren und Werkzeuge gelagert."
 
 #. TRANSLATORS: Note helptext for an empire warehouse: Headquarters
-#: ../../data/tribes/initialization/empire/units.lua:1135
+#: ../../data/tribes/initialization/empire/units.lua:1156
 msgctxt "empire_building"
 msgid "The headquarters is your main building."
 msgstr "Das Hauptquartier ist dein Hauptgebäude."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "A shipwreck that is common to all is a consolation."
+#: ../../data/tribes/initialization/empire/units.lua:1166
+msgid "Commune naufragium omnibus est consolatio."
+msgstr "Commune naufragium omnibus est consolatio."
+
+#. TRANSLATORS: Lore helptext for an empire warehouse: Headquarters Shipwreck
+#. Translation for the classical Latin quote:
+#. "Commune naufragium omnibus est consolatio."
+#: ../../data/tribes/initialization/empire/units.lua:1170
+msgid "A shipwreck that is common to all is a consolation."
+msgstr "Ein Schiffbruch, der alle betrifft, spendet Trost."
+
+#. TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters
+#. Shipwreck
+#: ../../data/tribes/initialization/empire/units.lua:1173
+msgctxt "empire_building"
+msgid "Lutius after stranding on an uncharted island"
+msgstr "Lutius, nachdem er auf einer unbekannten Insel strandete"
+
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
 #. Shipwreck
-#: ../../data/tribes/initialization/empire/units.lua:1142
+#: ../../data/tribes/initialization/empire/units.lua:1175
 msgctxt "empire_building"
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
@@ -6205,21 +6254,65 @@ msgid ""
 msgstr "Obwohl dieses Schiff gestrandet ist, dient es immer noch als Unterkunft für dein Volk. Hier werden auch deine Waren und Werkzeuge gelagert."
 
 #. TRANSLATORS: Note helptext for an empire warehouse: Headquarters Shipwreck
-#: ../../data/tribes/initialization/empire/units.lua:1144
+#: ../../data/tribes/initialization/empire/units.lua:1177
 msgctxt "empire_building"
 msgid "The headquarters shipwreck is your main building."
 msgstr "Das Schiffswrack-Hauptquartier ist dein Hauptgebäude."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Who gives promptly, gives twice, who gives late, gives nothing."
+#: ../../data/tribes/initialization/empire/units.lua:1187
+msgid "Bis dat, qui cito dat, nil dat, qui munera tardat."
+msgstr "Bis dat, qui cito dat, nil dat, qui munera tardat."
+
+#. TRANSLATORS: Lore helptext for an empire warehouse: Warehouse
+#. Translation for the classical Latin quote:
+#. "Bis dat, qui cito dat, nil dat, qui munera tardat."
+#: ../../data/tribes/initialization/empire/units.lua:1191
+msgid "Who gives promptly, gives twice, who gives late, gives nothing."
+msgstr "Wer schnell gibt, gibt doppelt, wer spät gibt gibt nichts."
+
+#. TRANSLATORS: Lore author helptext for an empire warehouse: Warehouse
+#: ../../data/tribes/initialization/empire/units.lua:1194
+msgctxt "empire_building"
+msgid "Proverb written over the doors of a warehouse"
+msgstr "Sprichwort über der Tür eines Lagerhauses"
+
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
-#: ../../data/tribes/initialization/empire/units.lua:1151
+#: ../../data/tribes/initialization/empire/units.lua:1196
 msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr "Deine Arbeiter und Soldaten finden hier Unterschlupf. Ebenso werden auch deine Waren und Werkzeuge hier gelagert."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "To sail is necessary."
+#: ../../data/tribes/initialization/empire/units.lua:1206
+msgid "Navigare necesse est."
+msgstr "Navigare necesse est."
+
+#. TRANSLATORS: Lore helptext for an empire warehouse: Port
+#. Translation for the classical Latin quote:
+#. "Navigare necesse est."
+#: ../../data/tribes/initialization/empire/units.lua:1210
+msgid "To sail is necessary."
+msgstr "Seefahrt ist notwendig."
+
+#. TRANSLATORS: Lore author helptext for an empire warehouse: Port
+#: ../../data/tribes/initialization/empire/units.lua:1214
+msgctxt "empire_building"
+msgid ""
+"Admiral Litus Marius Exsiccatus, sending out the fleet to break the naval "
+"blockade during the First Atlantean War"
+msgstr "Admiral Litus Marius Exsiccatus, bei der Aussendung der Flotte zum Brechen der Blockade im ersten atlantischen Krieg"
+
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
-#: ../../data/tribes/initialization/empire/units.lua:1158
+#: ../../data/tribes/initialization/empire/units.lua:1218
 msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
@@ -6227,122 +6320,482 @@ msgid ""
 msgstr "Dient als Basis zur Kolonisierung anderer Länder und zum Handel. Lagert außerdem deine Waren, Werkzeuge und Soldaten ein."
 
 #. TRANSLATORS: Note helptext for an empire warehouse: Port
-#: ../../data/tribes/initialization/empire/units.lua:1160
+#: ../../data/tribes/initialization/empire/units.lua:1220
 msgctxt "empire_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
 msgstr "Genauso wie das Hauptquartier kann auch ein Hafen von einem Feind angegriffen und zerstört werden. Es empfiehlt sich ein paar Soldaten zu seinem Schutz zu senden."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "There shall not be left here a stone upon a stone that shall not be
+#. destroyed."
+#: ../../data/tribes/initialization/empire/units.lua:1232
+msgid "Non relinquetur hic lapis super lapidem qui non destruatur."
+msgstr "Non relinquetur hic lapis super lapidem qui non destruatur."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Quarry
+#. Translation for the classical Latin quote:
+#. "Non relinquetur hic lapis super lapidem qui non destruatur."
+#: ../../data/tribes/initialization/empire/units.lua:1236
+msgid ""
+"There shall not be left here a stone upon a stone that shall not be "
+"destroyed."
+msgstr "Es soll hier kein Stein auf dem anderen bleiben, der nicht zerstört wird."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Quarry
+#: ../../data/tribes/initialization/empire/units.lua:1239
+msgctxt "empire_building"
+msgid "An enthusiastic stonemason arriving to a new quarry"
+msgstr "Ein enthusiastischer Steinmetz bei der Ankunft in einem neuen Steinbruch"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Quarry
-#: ../../data/tribes/initialization/empire/units.lua:1169
+#: ../../data/tribes/initialization/empire/units.lua:1241
 msgctxt "empire_building"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
 msgstr "Schneidet Stein und Marmor aus den Felsen in der Umgebung."
 
 #. TRANSLATORS: Note helptext for an empire production site: Quarry
-#: ../../data/tribes/initialization/empire/units.lua:1171
+#: ../../data/tribes/initialization/empire/units.lua:1243
 msgctxt "empire_building"
 msgid "The quarry needs rocks to cut within the work area."
 msgstr "Der Steinbruch braucht Felsen innerhalb seines Arbeitsbereichs."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Don’t carry logs to the forest."
+#: ../../data/tribes/initialization/empire/units.lua:1253
+msgid "In silvam non ligna feras."
+msgstr "In silvam non ligna feras."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Lumberjack's
+#. House
+#. Translation for the classical Latin quote:
+#. "In silvam non ligna feras."
+#: ../../data/tribes/initialization/empire/units.lua:1257
+msgid "Don’t carry logs to the forest."
+msgstr "Trage keine Stämme in den Wald."
+
+#. TRANSLATORS: Lore author helptext for an empire production site:
+#. Lumberjack's House
+#: ../../data/tribes/initialization/empire/units.lua:1260
+msgctxt "empire_building"
+msgid "A carrier to a lumberjack who lost his way home"
+msgstr "Ein Träger zu einem Holzfäller, der sich verlaufen hatte"
+
 #. TRANSLATORS: Note helptext for an empire production site: Lumberjack's
 #. House
-#: ../../data/tribes/initialization/empire/units.lua:1180
+#: ../../data/tribes/initialization/empire/units.lua:1264
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr "Das Holzfällerhaus braucht Bäume innerhalb seines Arbeitsbereichs."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Live, grow, and bloom!"
+#: ../../data/tribes/initialization/empire/units.lua:1274
+msgid "Vivat, crescat, floreat!"
+msgstr "Vivat, crescat, floreat!"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Forester's House
+#. Translation for the classical Latin quote:
+#. "Vivat, crescat, floreat!"
+#: ../../data/tribes/initialization/empire/units.lua:1278
+msgid "Live, grow, and bloom!"
+msgstr "Lebe, wachse und blühe!"
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Forester's
+#. House
+#: ../../data/tribes/initialization/empire/units.lua:1281
+msgctxt "empire_building"
+msgid "Blessing from the god Silvanus"
+msgstr "Segen des Gottes Silvanus"
+
 #. TRANSLATORS: Note helptext for an empire production site: Forester's House
-#: ../../data/tribes/initialization/empire/units.lua:1189
+#: ../../data/tribes/initialization/empire/units.lua:1285
 msgctxt "empire_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr "Das Forsthaus braucht freien Raum innerhalb seines Arbeitsbereichs, um Bäume zu pflanzen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The fish stinks first at the head."
+#: ../../data/tribes/initialization/empire/units.lua:1295
+msgid "Piscis primum a capite foetet"
+msgstr "Piscis primum a capite foetet"
+
+#. TRANSLATORS: Lore helptext for an empire production site:  Fisher's House
+#. Translation for the classical Latin quote:
+#. "Piscis primum a capite foetet"
+#: ../../data/tribes/initialization/empire/units.lua:1299
+msgid "The fish stinks first at the head."
+msgstr "Der Fisch stinkt vom Kopf her."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Fisher's
+#. House
+#: ../../data/tribes/initialization/empire/units.lua:1302
+msgctxt "empire_building"
+msgid "A fisherman criticising the Grand Master of the Fishermans’ Guild"
+msgstr "EIn Fischer, der den Vorsitzenden der Fischergilde kritisiert"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Fisher's House
-#: ../../data/tribes/initialization/empire/units.lua:1196
+#: ../../data/tribes/initialization/empire/units.lua:1304
 msgctxt "empire_building"
 msgid "Fishes on the coast near the fisher’s house."
 msgstr "Fischt an der Küste in der Nähe des Fischerhauses."
 
 #. TRANSLATORS: Note helptext for an empire production site: Fisher's House
-#: ../../data/tribes/initialization/empire/units.lua:1198
+#: ../../data/tribes/initialization/empire/units.lua:1306
 msgctxt "empire_building"
 msgid "The fisher’s house needs water full of fish within the work area."
 msgstr "Das Fischerhaus braucht Wasser mit Fischen innerhalb seines Arbeitsbereichs."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Latin quote meaning:
+#. "The hunter lies in ambush for the game."
+#: ../../data/tribes/initialization/empire/units.lua:1316
+msgid "Venator venatus insidiatur."
+msgstr "Venator venatus insidiatur."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Hunter's House
+#. Translation for the Latin quote:
+#. "Venator venatus insidiatur."
+#: ../../data/tribes/initialization/empire/units.lua:1320
+msgid "The hunter lies in ambush for the game."
+msgstr "Der Jäger liegt auf der Lauer nach Wild."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Hunter's
+#. House
+#: ../../data/tribes/initialization/empire/units.lua:1323
+msgctxt "empire_building"
+msgid "Caption on an imperial relief showing a hunter"
+msgstr "Inschrift eines Jagdszenenreliefs des Imperiums"
+
 #. TRANSLATORS: Note helptext for an empire production site: Hunter's House
-#: ../../data/tribes/initialization/empire/units.lua:1207
+#: ../../data/tribes/initialization/empire/units.lua:1327
 msgctxt "empire_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr "Das Jagdhaus braucht Tiere innerhalb seines Arbeitsberechs."
 
-#: ../../data/tribes/initialization/empire/units.lua:1220
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "It is more pleasing to drink water from the spring itself."
+#: ../../data/tribes/initialization/empire/units.lua:1337
+msgid "Gratius ex ipso fonte bibuntur aquæ."
+msgstr "Gratius ex ipso fonte bibuntur aquæ."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Well
+#. Translation for the classical Latin quote:
+#. "Gratius ex ipso fonte bibuntur aquæ."
+#: ../../data/tribes/initialization/empire/units.lua:1341
+msgid "It is more pleasing to drink water from the spring itself."
+msgstr "Es ist erfrischender, Wasser direkt aus der Quelle zu trinken."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Well
+#. TRANSLATORS: Lore author helptext for an empire production site: Marble
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1344
+#: ../../data/tribes/initialization/empire/units.lua:1796
+msgctxt "empire_building"
+msgid "Imperial proverb"
+msgstr "Sprichwort des Imperiums"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Adaptation of a classical Latin quote meaning:
+#. "Chat’Karuth at the gates!"
+#: ../../data/tribes/initialization/empire/units.lua:1356
+msgid "Ciatkaruthus ante portas!"
+msgstr "Ciatkaruthus ante portas!"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Scout's House
+#. Translation for the adapted classical Latin quote:
+#. "Ciatkaruthus ante portas!"
+#: ../../data/tribes/initialization/empire/units.lua:1360
+msgid "Chat’Karuth at the gates!"
+msgstr "Chat’Karuth vor den Toren!"
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Scout's
+#. House
+#: ../../data/tribes/initialization/empire/units.lua:1363
+msgctxt "empire_building"
+msgid "A belated scout’s report"
+msgstr "Bericht eines verspäteten Kundschafters"
+
+#: ../../data/tribes/initialization/empire/units.lua:1364
 msgctxt "empire_building"
 msgid ""
 "You need to connect this flag to a scout’s house before you can send a scout"
 " here."
 msgstr "Du musst diese Flagge mit einem Kundschafterhaus verbinden, bevor du einen Kundschafter hierher senden kannst."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The mind moves boulders."
+#: ../../data/tribes/initialization/empire/units.lua:1378
+msgid "Mens agitat molem."
+msgstr "Mens agitat molem."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Stonemason's
+#. House
+#. Translation for the classical Latin quote:
+#. "Mens agitat molem."
+#: ../../data/tribes/initialization/empire/units.lua:1382
+msgid "The mind moves boulders."
+msgstr "Der Geist bewegt Felsen."
+
+#. TRANSLATORS: Lore author helptext for an empire production site:
+#. Stonemason's House
+#: ../../data/tribes/initialization/empire/units.lua:1385
+msgctxt "empire_building"
+msgid "Motto of the Stonemasons’ Guild"
+msgstr "Wahlspruch der Steinmetzgilde"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Stonemason's
 #. House
-#: ../../data/tribes/initialization/empire/units.lua:1231
+#: ../../data/tribes/initialization/empire/units.lua:1387
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
 msgstr "Gestaltet Säulen aus Marmor."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The saw does nothing except when moved by art."
+#: ../../data/tribes/initialization/empire/units.lua:1397
+msgid "Nihil agit serra nisi mota ab arte."
+msgstr "Nihil agit serra nisi mota ab arte."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Sawmill
+#. Translation for the classical Latin quote:
+#. "Nihil agit serra nisi mota ab arte."
+#: ../../data/tribes/initialization/empire/units.lua:1401
+msgid "The saw does nothing except when moved by art."
+msgstr "Die Säge nützt nichts, wenn sie nicht kunstvoll bewegt wird."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Sawmill
+#: ../../data/tribes/initialization/empire/units.lua:1404
+msgctxt "empire_building"
+msgid "Motto of the Carpenters’ Guild"
+msgstr "Wahlspruch der Zimmermannsgilde"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The mills of the gods grind slowly."
+#: ../../data/tribes/initialization/empire/units.lua:1416
+msgid "Sero molunt deorum molæ."
+msgstr "Sero molunt deorum molæ."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Mill
+#. Translation for the classical Latin quote:
+#. "Sero molunt deorum molæ."
+#: ../../data/tribes/initialization/empire/units.lua:1420
+msgid "The mills of the gods grind slowly."
+msgstr "Die Mühlen der Götter mahlen langsam."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Mill
+#: ../../data/tribes/initialization/empire/units.lua:1423
+msgctxt "empire_building"
+msgid "Proverb often cited by millers to impatient customers"
+msgstr "Oft von Müllern gegenüber ungeduldigen Kunden gebrauchtes Sprichwort "
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
-#: ../../data/tribes/initialization/empire/units.lua:1245
+#: ../../data/tribes/initialization/empire/units.lua:1425
 msgctxt "building"
 msgid "Grinds wheat to produce flour."
 msgstr "Mahlt Weizen zu Mehl."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Mill
-#: ../../data/tribes/initialization/empire/units.lua:1247
+#: ../../data/tribes/initialization/empire/units.lua:1427
 msgctxt "empire_building"
 msgid "The miller needs %1% on average to grind wheat into a sack of flour."
 msgstr "Der Müller braucht durchschnittlich %1%, um Weizen für einen Sack Mehl zu mahlen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "There’s not this much flour in your sack."
+#: ../../data/tribes/initialization/empire/units.lua:1437
+msgid "Non est de sacco tanta farina tuo."
+msgstr "Non est de sacco tanta farina tuo."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Bakery
+#. Translation for the classical Latin quote:
+#. "Non est de sacco tanta farina tuo."
+#: ../../data/tribes/initialization/empire/units.lua:1441
+msgid "There’s not this much flour in your sack."
+msgstr "Da ist nicht viel Mehl in deinem Sack."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Bakery
+#: ../../data/tribes/initialization/empire/units.lua:1444
+msgctxt "empire_building"
+msgid "A baker accusing another of theft"
+msgstr "Ein Bäcker, der einen anderen des Diebstahls bezichtigt"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Bakery
-#: ../../data/tribes/initialization/empire/units.lua:1254
+#: ../../data/tribes/initialization/empire/units.lua:1446
 msgctxt "empire_building"
 msgid "Bakes bread for soldiers and miners alike."
 msgstr "Bäckt Brot sowohl für Soldaten als auch für Bergleute."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Bakery
-#: ../../data/tribes/initialization/empire/units.lua:1256
+#: ../../data/tribes/initialization/empire/units.lua:1448
 msgctxt "empire_building"
 msgid "The baker needs %1% on average to bake a loaf of bread."
 msgstr "Der Bäcker benötigt durchschnittlich %1%, um einen Laib Brot zu backen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Now it’s time to drink! Now it’s time to dance freely!"
+#: ../../data/tribes/initialization/empire/units.lua:1458
+msgid "Nunc est bibendum, nunc pede libero pulsanda tellus!"
+msgstr "Nunc est bibendum, nunc pede libero pulsanda tellus!"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Empire Brewery.
+#. Translation for the classical Latin quote:
+#. "Nunc est bibendum, nunc pede libero pulsanda tellus!"
+#. Literal translation of the second half is "stomp the earth with free feet"
+#: ../../data/tribes/initialization/empire/units.lua:1463
+msgid "Now it’s time to drink! Now it’s time to dance freely!"
+msgstr "Nun ist es Zeit zu trinken! Nun ist es Zeit mit nackten Füßen zu tanzen!"
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Brewery
+#: ../../data/tribes/initialization/empire/units.lua:1466
+msgctxt "empire_building"
+msgid "Imperial drinking song"
+msgstr "Trinklied des Imperiums"
+
 #. TRANSLATORS: Performance helptext for an empire production site: Brewery
-#: ../../data/tribes/initialization/empire/units.lua:1265
+#: ../../data/tribes/initialization/empire/units.lua:1470
 msgctxt "empire_building"
 msgid "The brewer needs %1% on average to brew a vat of beer."
 msgstr "Der Brauer benötigt durchschnittlich %1%, um ein Fass Bier zu brauen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Good wine needs no bush." (meaning no advertising)
+#: ../../data/tribes/initialization/empire/units.lua:1480
+msgid "Vino vendibili hedera non opus est."
+msgstr "Vino vendibili hedera non opus est."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Vineyard
+#. Translation for the classical Latin quote:
+#. "Vino vendibili hedera non opus est."
+#. Bush (ivy in the original) refers to the ivy leaves used for advertising
+#. by places selling wine
+#: ../../data/tribes/initialization/empire/units.lua:1486
+msgid "Good wine needs no bush."
+msgstr "Guter Wein braucht kein Zeichen."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Vineyard
+#: ../../data/tribes/initialization/empire/units.lua:1489
+msgctxt "empire_building"
+msgid "A proud vine farmer boasting"
+msgstr "Prahlerei eines stolzen Winzers"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Vineyard
-#: ../../data/tribes/initialization/empire/units.lua:1272
+#: ../../data/tribes/initialization/empire/units.lua:1491
 msgctxt "empire_building"
 msgid "Plants grapevines and harvests grapes."
 msgstr "Pflanzt Reben und erntet Trauben."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "In wine there is truth."
+#: ../../data/tribes/initialization/empire/units.lua:1501
+msgid "In vino veritas."
+msgstr "In vino veritas."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Winery
+#. Translation for the classical Latin quote:
+#. "In vino veritas."
+#: ../../data/tribes/initialization/empire/units.lua:1505
+msgid "In wine there is truth."
+msgstr "Im Wein liegt Wahrheit."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Winery
+#. TRANSLATORS: Lore author helptext for an empire production site: Piggery
+#. TRANSLATORS: Lore author helptext for an empire production site: Coal Mine
+#. TRANSLATORS: Lore author helptext for an empire production site: Deep Coal
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1508
+#: ../../data/tribes/initialization/empire/units.lua:1716
+#: ../../data/tribes/initialization/empire/units.lua:1842
+#: ../../data/tribes/initialization/empire/units.lua:1865
+msgctxt "empire_building"
+msgid "Excerpt from the Encyclopædia Imperica"
+msgstr "Auszug aus der Encyclopædia Imperica"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Winery
-#: ../../data/tribes/initialization/empire/units.lua:1279
+#: ../../data/tribes/initialization/empire/units.lua:1510
 msgctxt "empire_building"
 msgid "Produces wine."
 msgstr "Stellt Wein her."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "We eat to live, not live to eat."
+#: ../../data/tribes/initialization/empire/units.lua:1520
+msgid "Esse oportet ut vivas, non vivere ut edas."
+msgstr "Esse oportet ut vivas, non vivere ut edas."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Tavern
+#. Translation for the classical Latin quote:
+#. "Esse oportet ut vivas, non vivere ut edas."
+#: ../../data/tribes/initialization/empire/units.lua:1524
+msgid "We eat to live, not live to eat."
+msgstr "Wir essen um zu leben, wir leben nicht um zu essen."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Tavern
+#: ../../data/tribes/initialization/empire/units.lua:1527
+msgctxt "empire_building"
+msgid "Warning to a gluttonous miner"
+msgstr "Warnung für einen gefräßigen Bergmann"
+
 #. TRANSLATORS: Performance helptext for an empire production site: Tavern
-#: ../../data/tribes/initialization/empire/units.lua:1288
+#: ../../data/tribes/initialization/empire/units.lua:1531
 msgctxt "empire_building"
 msgid "The innkeeper needs %1% on average to prepare a ration."
 msgstr "Der Wirt benötigt durchschnittlich %1%, um eine Ration zuzubereiten."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "A meal full of dishes restrains your mind."
+#: ../../data/tribes/initialization/empire/units.lua:1541
+msgid "In cena dapibus plena te mente refrena."
+msgstr "In cena dapibus plena te mente refrena."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Inn
+#. Translation for the classical Latin quote:
+#. "In cena dapibus plena te mente refrena."
+#: ../../data/tribes/initialization/empire/units.lua:1545
+msgid "A meal full of dishes restrains your mind."
+msgstr "Ein opulentes Mahl beschränkt deinen Geist."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Inn
+#: ../../data/tribes/initialization/empire/units.lua:1548
+msgctxt "empire_building"
+msgid "Warning from a master miner to an apprentice"
+msgstr "Warnung eines Bergwerksmeisters an einen Lehrling"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Inn
-#: ../../data/tribes/initialization/empire/units.lua:1295
+#: ../../data/tribes/initialization/empire/units.lua:1550
 msgctxt "empire_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
@@ -6350,7 +6803,7 @@ msgid ""
 msgstr "Bereitet Rationen für Kundschafter sowie Rationen und Mahlzeiten für Bergleute in allen Minen zu."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Inn
-#: ../../data/tribes/initialization/empire/units.lua:1297
+#: ../../data/tribes/initialization/empire/units.lua:1552
 msgctxt "empire_building"
 msgid ""
 "The innkeeper needs %1% on average to prepare a ration and a meal. If the "
@@ -6358,80 +6811,526 @@ msgid ""
 " ration or one meal."
 msgstr "Der Wirt braucht durchschnittlich %1%, um eine Ration und eine Mahlzeit zuzubereiten. Wenn nur eins von beiden benötigt wird, bereitet der Wirt eine Ration oder eine Mahlzeit in durchschnittlich %2% zu."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Are they to be marked with chalk or charcoal?"
+#: ../../data/tribes/initialization/empire/units.lua:1562
+msgid "Creta an carbone notandi?"
+msgstr "Creta an carbone notandi?"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Charcoal Kiln
+#. Translation for the classical Latin quote:
+#. "Creta an carbone notandi?"
+#: ../../data/tribes/initialization/empire/units.lua:1566
+msgid "Are they to be marked with chalk or charcoal?"
+msgstr "Sollen sie mit Kreide oder Holzkohle gezeichnet werden?"
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Charcoal
+#. Kiln
+#: ../../data/tribes/initialization/empire/units.lua:1570
+msgctxt "empire_building"
+msgid "Imperial proverb meaning to judge whether they are good or bad"
+msgstr "Sprichwort des Imperiums zur Unterscheidung ob etwas gut oder schlecht ist"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "I see that iron was produced from the same darkness as gold."
+#: ../../data/tribes/initialization/empire/units.lua:1583
+msgid "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
+msgstr "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Smelting Works
+#. Translation for the classical Latin quote:
+#. "Video ferrum ex isdem tenebris esse prolatum, quibus aurum."
+#: ../../data/tribes/initialization/empire/units.lua:1587
+msgid "I see that iron was produced from the same darkness as gold."
+msgstr "Ich sehe, dass Eisen aus der selben Dunkelheit wie Gold entsteht."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Smelting
+#. Works
+#: ../../data/tribes/initialization/empire/units.lua:1590
+msgctxt "empire_building"
+msgid "Amalea after inspecting a smelting works"
+msgstr "Amalea bei der Inspektion eines Hochofens"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Each man is the maker of his own fortune."
+#: ../../data/tribes/initialization/empire/units.lua:1602
+msgid "Faber est suæ quisque fortunæ."
+msgstr "Faber est suæ quisque fortunæ."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Toolsmithy
+#. Translation for the classical Latin quote:
+#. "Faber est suæ quisque fortunæ."
+#: ../../data/tribes/initialization/empire/units.lua:1606
+msgid "Each man is the maker of his own fortune."
+msgstr "Jeder ist seines Glückes Schmied."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Toolsmithy
+#: ../../data/tribes/initialization/empire/units.lua:1609
+msgctxt "empire_building"
+msgid "Imperial proverb quoted in a toolsmith's advertising"
+msgstr "In der Werbung eines Werkzeugmachers zitiertes Sprichwort des Imperiums"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "They enjoy their great armors under their capes, tightly woven from rings,
+#. rattling
+#. through the cloth."
+#: ../../data/tribes/initialization/empire/units.lua:1622
+msgid ""
+"Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus"
+" hærens, atque catenosi crepitant per corpora panni."
+msgstr "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas circulus hærens, atque catenosi crepitant per corpora panni."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Armorsmithy
+#. Translation for the classical Latin quote:
+#. "Hi loricarum vasto sub tegmine gaudent, intexit creber sibimet quas
+#. circulus hærens,
+#. atque catenosi crepitant per corpora panni."
+#: ../../data/tribes/initialization/empire/units.lua:1628
+msgid ""
+"They enjoy their great armors under their capes, tightly woven from rings, "
+"rattling through the cloth."
+msgstr "Sie genießen ihre starken Rüstungen unter ihren Umhängen, dicht gewoben aus Ringen, die unter dem Stoff rasseln."
+
+#. TRANSLATORS: Lore author helptext for an empire production site:
+#. Armorsmithy
+#: ../../data/tribes/initialization/empire/units.lua:1632
+msgctxt "empire_building"
+msgid "An armorsmith teaching an apprentice"
+msgstr "Ein Rüstungsschmied in der Ausbildung eines Lehrlings"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Armor Smithy
-#: ../../data/tribes/initialization/empire/units.lua:1325
+#: ../../data/tribes/initialization/empire/units.lua:1634
 msgctxt "empire_building"
 msgid ""
 "Forges armor and helmets that are used for training soldiers’ health in the "
 "training camp."
 msgstr "Schmiedet Rüstungen und Helme, die zur Lebenspunkteverbesserung im Ausbildungslager benötigt werden."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Not walls but men protect the towns."
+#: ../../data/tribes/initialization/empire/units.lua:1644
+msgid "Non muri, sed viri sunt præsidium oppidorum."
+msgstr "Non muri, sed viri sunt præsidium oppidorum."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Barracks
+#. Translation for the classical Latin quote:
+#. "Non muri, sed viri sunt præsidium oppidorum."
+#: ../../data/tribes/initialization/empire/units.lua:1648
+msgid "Not walls but men protect the towns."
+msgstr "Nicht Mauern sondern Männer beschützen die Städte."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Barracks
+#: ../../data/tribes/initialization/empire/units.lua:1651
+msgctxt "empire_building"
+msgid "Argument in the Senate for increasing recruitment"
+msgstr "Debatte im Senat zur Erhöhung der Rekrutierung "
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Barracks
-#: ../../data/tribes/initialization/empire/units.lua:1332
+#: ../../data/tribes/initialization/empire/units.lua:1653
 msgctxt "empire_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Bewaffnet Rekruten und bildet sie zu Soldaten aus."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "A donkey prefers straw to gold."
+#: ../../data/tribes/initialization/empire/units.lua:1665
+msgid "Asinus stramen mavult quam aurum."
+msgstr "Asinus stramen mavult quam aurum."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Donkey Farm
+#. Translation for the classical Latin quote:
+#. "Asinus stramen mavult quam aurum."
+#: ../../data/tribes/initialization/empire/units.lua:1669
+msgid "A donkey prefers straw to gold."
+msgstr "Esel bevorzugen Stroh statt Gold."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Donkey
+#. Farm
+#: ../../data/tribes/initialization/empire/units.lua:1672
+msgctxt "empire_building"
+msgid "A donkey breeder during a shortage of wheat"
+msgstr "Ein Eselzüchter während einer Weizenknappheit"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Donkey Farm
-#: ../../data/tribes/initialization/empire/units.lua:1341
+#: ../../data/tribes/initialization/empire/units.lua:1674
 msgctxt "empire_building"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
 msgstr "Züchtet kluge und hilfreiche Esel, die beim Transport der Waren helfen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Adaptation of a classical Latin quote meaning:
+#. "Lutius had already removed himself from public affairs, he was living in
+#. the countryside,
+#. and the ambassadors of the senate found him while he was plowing his land."
+#: ../../data/tribes/initialization/empire/units.lua:1685
+msgid ""
+"Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati "
+"eum invenerunt dum agellum suum arat"
+msgstr "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt dum agellum suum arat"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Farm
+#. Translation for the adapted classical Latin quote:
+#. "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus
+#. legati eum invenerunt
+#. dum agellum suum arat"
+#: ../../data/tribes/initialization/empire/units.lua:1691
+msgid ""
+"Lutius had already removed himself from public affairs, he was living in the"
+" countryside, and the ambassadors of the senate found him while he was "
+"plowing his land."
+msgstr "Lutius hatte sich bereits aus der Öffentlichkeit zurückgezogen; Er lebte auf dem Land und der Botschafter des Senats fand ihn sein Land pflügend."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Farm
+#: ../../data/tribes/initialization/empire/units.lua:1695
+msgctxt "empire_building"
+msgid "History of the Empire, Part VII"
+msgstr "Geschichte des Imperiums, Teil VII"
+
 #. TRANSLATORS: Performance helptext for an empire production site: Farm
-#: ../../data/tribes/initialization/empire/units.lua:1350
+#: ../../data/tribes/initialization/empire/units.lua:1699
 msgctxt "empire_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of wheat."
 msgstr "Der Bauer braucht zur Produktion von Weizen, von der Saat bis zur Ernte, durchschnittlich %1%."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "What does the pig really have other than meat?"
+#: ../../data/tribes/initialization/empire/units.lua:1709
+msgid "Sus vero quid habet præter escam?"
+msgstr "Sus vero quid habet præter escam?"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Piggery
+#. Translation for the classical Latin quote:
+#. "Sus vero quid habet præter escam?"
+#: ../../data/tribes/initialization/empire/units.lua:1713
+msgid "What does the pig really have other than meat?"
+msgstr "Was hat das Schwein schon außer Fleich?"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Piggery
-#: ../../data/tribes/initialization/empire/units.lua:1357
+#: ../../data/tribes/initialization/empire/units.lua:1718
 msgctxt "empire_building"
 msgid "Breeds pigs for their meat."
 msgstr "Züchtet Schweine für ihr Fleisch."
 
 #. TRANSLATORS: Performance helptext for an empire production site: Piggery
-#: ../../data/tribes/initialization/empire/units.lua:1359
+#: ../../data/tribes/initialization/empire/units.lua:1720
 msgctxt "empire_building"
 msgid "The pig breeder needs %1% on average to raise and slaughter a pig."
 msgstr "Der Schweinezüchter braucht durchschnittlich %1%, um ein Schwein aufzuziehen und zu schlachten."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Try to rescue a lamb from a wolf."
+#: ../../data/tribes/initialization/empire/units.lua:1730
+msgid "Conari agnum eripere lupo."
+msgstr "Conari agnum eripere lupo."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Sheep Farm
+#. Translation for the classical Latin quote:
+#. "Conari agnum eripere lupo."
+#: ../../data/tribes/initialization/empire/units.lua:1734
+msgid "Try to rescue a lamb from a wolf."
+msgstr "Versuche ein Lamm vor dem Wolf zu retten."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Sheep Farm
+#: ../../data/tribes/initialization/empire/units.lua:1737
+msgctxt "empire_building"
+msgid "Imperial proverb for trying the impossible"
+msgstr "Sprichwort des Imperiums das Unmögliche zu versuchen"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Sheep Farm
-#: ../../data/tribes/initialization/empire/units.lua:1366
+#: ../../data/tribes/initialization/empire/units.lua:1739
 msgctxt "empire_building"
 msgid "Keeps sheep for their wool."
 msgstr "Hält Schafe für deren Wolle."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Clothes make a man."
+#: ../../data/tribes/initialization/empire/units.lua:1749
+msgid "Vestis virum reddit."
+msgstr "Vestis virum reddit."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Weaving Mill
+#. Translation for the classical Latin quote:
+#. "Vestis virum reddit."
+#: ../../data/tribes/initialization/empire/units.lua:1753
+msgid "Clothes make a man."
+msgstr "Kleider machen Leute."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Weaving
+#. Mill
+#: ../../data/tribes/initialization/empire/units.lua:1756
+msgctxt "empire_building"
+msgid "Motto of the Weavers’ Guild"
+msgstr "Wahlspruch der Webergilde"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Weaving Mill
-#: ../../data/tribes/initialization/empire/units.lua:1373
+#: ../../data/tribes/initialization/empire/units.lua:1758
 msgctxt "empire_building"
 msgid "Weaves cloth out of wool."
 msgstr "Webt Stoff aus Wolle."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The fire keeps its heat even in the iron."
+#: ../../data/tribes/initialization/empire/units.lua:1768
+msgid "Ignis calorem suum etiam in ferro tenet."
+msgstr "Ignis calorem suum etiam in ferro tenet."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Weapon Smithy
+#. Translation for the classical Latin quote:
+#. "Ignis calorem suum etiam in ferro tenet."
+#: ../../data/tribes/initialization/empire/units.lua:1772
+msgid "The fire keeps its heat even in the iron."
+msgstr "Das Feuer behält seine Hitze auch im Eisen."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Weapon
+#. Smithy
+#: ../../data/tribes/initialization/empire/units.lua:1775
+msgctxt "empire_building"
+msgid "Motto of the Weaponsmiths’ Guild"
+msgstr "Wahlspruch der Gilde der Waffenschmiede"
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Weapon Smithy
-#: ../../data/tribes/initialization/empire/units.lua:1380
+#: ../../data/tribes/initialization/empire/units.lua:1777
 msgctxt "empire_building"
 msgid ""
 "Forges spears to equip the soldiers and to train their attack in the "
 "training camp."
 msgstr "Schmiedet Speere, um die Soldaten auszustatten und ihren Angriff im Ausbildungslager auszubilden."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "He who hurts writes in the wind, he who is hurt in marble."
+#: ../../data/tribes/initialization/empire/units.lua:1789
+msgid "In vento scribit lædens, in marmore læsus."
+msgstr "In vento scribit lædens, in marmore læsus."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Marble Mine
+#. Translation for the classical Latin quote:
+#. "In vento scribit lædens, in marmore læsus."
+#: ../../data/tribes/initialization/empire/units.lua:1793
+msgid "He who hurts writes in the wind, he who is hurt in marble."
+msgstr "Wer verletzt schreibt in den Wind, wer verletzt wird schreibt in Marmor."
+
 #. TRANSLATORS: Purpose helptext for an empire production site: Marble Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Marble
 #. Mine
-#: ../../data/tribes/initialization/empire/units.lua:1390
-#: ../../data/tribes/initialization/empire/units.lua:1398
+#: ../../data/tribes/initialization/empire/units.lua:1799
+#: ../../data/tribes/initialization/empire/units.lua:1821
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
 msgstr "Schlägt Marmor und Stein aus den Granitvorkommen in den Bergen."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "He found a city of brick, and left it one of marble."
+#: ../../data/tribes/initialization/empire/units.lua:1810
+msgid "Urbem lateritiam invenit, marmoream reliquit."
+msgstr "Urbem lateritiam invenit, marmoream reliquit."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Deep Marble Mine
+#. Translation for the classical Latin quote:
+#. "Urbem lateritiam invenit, marmoream reliquit."
+#: ../../data/tribes/initialization/empire/units.lua:1814
+msgid "He found a city of brick, and left it one of marble."
+msgstr "Er fand eine Stadt aus Ziegeln und hinterließ eine aus Marmor."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Deep
+#. Marble Mine
+#: ../../data/tribes/initialization/empire/units.lua:1818
+msgctxt "empire_building"
+msgid "History of the Empire, Part VI on the return of Lutius to Fremil"
+msgstr "Geschichte de Imperiums, Teil VI, zur Rückkehr von Lutius nach Fremil"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Coal is revived from the dead, it turns from black to red, creates embers,
+#. and as it falls apart, it becomes ashes."
+#: ../../data/tribes/initialization/empire/units.lua:1832
+msgid ""
+"Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, "
+"et dum resolvitur, cinerea."
+msgstr "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas generat, et dum resolvitur, cinerea."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Coal Mine
+#. Translation for the classical Latin quote:
+#. "Carbo de mortuo reviviscit, de nigro in ruborem vertitur, favillas
+#. generat,
+#. et dum resolvitur, cinerea."
+#: ../../data/tribes/initialization/empire/units.lua:1838
+msgid ""
+"Coal is revived from the dead, it turns from black to red, creates embers, "
+"and as it falls apart, it becomes ashes."
+msgstr "Kohle wird vom Tod wiederbelebt, sie wird von schwarz zu rot, erschafft Glut, und wenn sie zerfällt, wird sie zu Asche."
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "For there are more types of fire: for coal and flame are different, and
+#. the type
+#. that gives light, all of them are fire."
+#: ../../data/tribes/initialization/empire/units.lua:1855
+msgid ""
+"Non enim est una species ignis: nam diversum est carbo et flamma, et lux "
+"specie, cum unumquodque horum sit ignis."
+msgstr "Non enim est una species ignis: nam diversum est carbo et flamma, et lux specie, cum unumquodque horum sit ignis."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Deep Coal Mine
+#. Translation for the classical Latin quote:
+#. "Non enim est una species ignis: nam diversum est carbo et flamma, et lux
+#. specie,
+#. cum unumquodque horum sit ignis."
+#: ../../data/tribes/initialization/empire/units.lua:1861
+msgid ""
+"For there are more types of fire: for coal and flame are different, and the "
+"type that gives light, all of them are fire."
+msgstr "Es gibt verschiedene Arten von Feuer: wo Kohle und Flamme sich unterscheiden, und die Art die Licht spendet, alle sind Feuer."
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Iron is sharpened by iron."
+#: ../../data/tribes/initialization/empire/units.lua:1877
+msgid "Ferrum ferro acuitur."
+msgstr "Ferrum ferro acuitur."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Iron Mine
+#. Translation for the classical Latin quote:
+#. "Ferrum ferro acuitur."
+#: ../../data/tribes/initialization/empire/units.lua:1881
+msgid "Iron is sharpened by iron."
+msgstr "Eisen wird durch Eisen geschärft."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Iron Mine
+#: ../../data/tribes/initialization/empire/units.lua:1884
+msgctxt "empire_building"
+msgid "A proverb that is vehemently disputed by iron miners"
+msgstr "Ein Sprichwort, welches unter Bergleuten vehement diskutiert wird"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "By constant use an iron ring is worn away."
+#: ../../data/tribes/initialization/empire/units.lua:1896
+msgid "Ferreus assiduo consumitur annulus usu."
+msgstr "Ferreus assiduo consumitur annulus usu."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Deep Iron Mine
+#. Translation for the classical Latin quote:
+#. "Ferreus assiduo consumitur annulus usu."
+#: ../../data/tribes/initialization/empire/units.lua:1900
+msgid "By constant use an iron ring is worn away."
+msgstr "Steter Gebrauch nutzt auch einen eisernen Ring ab."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Deep Iron
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1904
+msgctxt "empire_building"
+msgid "Amalea on the importance of always looking for more resources"
+msgstr "Amalea zur Wichtigkeit der Entdeckung neuer Rohstoffe"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Gold discovered and all the better for being so."
+#: ../../data/tribes/initialization/empire/units.lua:1917
+msgid "Aurum irrepertum et sic melius situm."
+msgstr "Aurum irrepertum et sic melius situm."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Gold Mine
+#. Translation for the classical Latin quote:
+#. "Aurum irrepertum et sic melius situm."
+#: ../../data/tribes/initialization/empire/units.lua:1921
+msgid "Gold discovered and all the better for being so."
+msgstr "Gold wurde entdeckt und es ist besser, dass es so ist."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Gold Mine
+#: ../../data/tribes/initialization/empire/units.lua:1925
+msgctxt "empire_building"
+msgid ""
+"Amalea receiving the first geologist report of gold on the small island"
+msgstr "Amalea beim Empfang des ersten Geologenberichts über Gold auf der kleinen Insel"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Gold has conquered the fear of death."
+#: ../../data/tribes/initialization/empire/units.lua:1938
+msgid "Formidinem mortis vicit aurum."
+msgstr "Formidinem mortis vicit aurum."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Deep Gold Mine
+#. Translation for the classical Latin quote:
+#. "Formidinem mortis vicit aurum."
+#: ../../data/tribes/initialization/empire/units.lua:1942
+msgid "Gold has conquered the fear of death."
+msgstr "Gold hat die Furcht vor dem Tod erobert."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Deep Gold
+#. Mine
+#: ../../data/tribes/initialization/empire/units.lua:1946
+msgctxt "empire_building"
+msgid "General Trepidus Egenus Attenuatus on motivating soldiers"
+msgstr "General Trepidus Egenus Attenuatus über die Motivation von Soldaten"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "[The People of the Empire] who once handed out all [power], now restrains
+#. itself
+#. and anxiously hopes for just two things: bread and games."
+#: ../../data/tribes/initialization/empire/units.lua:1962
+msgid ""
+"Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius "
+"optat, panem et circenses."
+msgstr "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius optat, panem et circenses."
+
+#. TRANSLATORS: Lore helptext for an empire training site: Arena
+#. Translation for the classical Latin quote:
+#. "Qui dabat olim […] omnia, nunc se continet atque duas tantum res anxius
+#. optat,
+#. panem et circenses."
+#: ../../data/tribes/initialization/empire/units.lua:1968
+msgid ""
+"[The People of the Empire] who once handed out all [power], now restrains "
+"itself and anxiously hopes for just two things: bread and games."
+msgstr "[Das Volk des Imperiums], das einst alle [Macht] gab, beschränkt sich nun selbst und hofft ängstlich auf zwei Dinge: Brot und Spiele."
+
+#. TRANSLATORS: Lore author helptext for an empire training site: Arena
+#: ../../data/tribes/initialization/empire/units.lua:1972
+msgctxt "empire_building"
+msgid "History of the Empire, Part X – the decline"
+msgstr "Geschichte des Imperiums, Teil X – der Niedergang"
+
 #. TRANSLATORS: Purpose helptext for an empire training site: Arena, part 1
 #. TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part
 #. 1
-#: ../../data/tribes/initialization/empire/units.lua:1450
-#: ../../data/tribes/initialization/empire/units.lua:1463
+#: ../../data/tribes/initialization/empire/units.lua:1975
+#: ../../data/tribes/initialization/empire/units.lua:2000
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Evade’."
 msgstr "Bildet Soldaten im „Ausweichen“ aus."
@@ -6439,8 +7338,8 @@ msgstr "Bildet Soldaten im „Ausweichen“ aus."
 #. TRANSLATORS: Purpose helptext for an empire training site: Arena, part 2
 #. TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part
 #. 2
-#: ../../data/tribes/initialization/empire/units.lua:1452
-#: ../../data/tribes/initialization/empire/units.lua:1465
+#: ../../data/tribes/initialization/empire/units.lua:1977
+#: ../../data/tribes/initialization/empire/units.lua:2002
 msgctxt "empire_building"
 msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
@@ -6450,28 +7349,94 @@ msgstr "„Ausweichen“ erhöht die Wahrscheinlichkeit, dass der Soldat nicht v
 #. TRANSLATORS: Note helptext for an empire training site: Arena
 #. TRANSLATORS: Note helptext for an empire training site: Colosseum
 #. TRANSLATORS: Note helptext for an empire training site: Training Camp
-#: ../../data/tribes/initialization/empire/units.lua:1455
-#: ../../data/tribes/initialization/empire/units.lua:1468
-#: ../../data/tribes/initialization/empire/units.lua:1481
+#: ../../data/tribes/initialization/empire/units.lua:1980
+#: ../../data/tribes/initialization/empire/units.lua:2005
+#: ../../data/tribes/initialization/empire/units.lua:2032
 msgctxt "empire_building"
 msgid ""
 "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the "
 "level with which they came."
 msgstr "Imperiale Soldaten können nicht in „Verteidigung“ ausgebildet werden und bleiben auf der niedrigsten Stufe."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Hail Cæsar! Those who are about to die greet you!"
+#: ../../data/tribes/initialization/empire/units.lua:1990
+msgid "Ave Cæsar! Morituri te salutant!"
+msgstr "Ave Cæsar! Morituri te salutant!"
+
+#. TRANSLATORS: Lore helptext for an empire training site: Colosseum
+#. Translation for the classical Latin quote:
+#. "Ave Cæsar! Morituri te salutant!"
+#: ../../data/tribes/initialization/empire/units.lua:1994
+msgid "Hail Cæsar! Those who are about to die greet you!"
+msgstr "Heil Cæsar! Die Todgeweihten grüßen dich!"
+
+#. TRANSLATORS: Lore author helptext for an empire training site: Colosseum
+#: ../../data/tribes/initialization/empire/units.lua:1997
+msgctxt "empire_building"
+msgid "Greeting from the gladiators to the emperor"
+msgstr "Gruß der Gladiatoren an den Imperator"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Fortune helps the strong."
+#: ../../data/tribes/initialization/empire/units.lua:2015
+msgid "Fortes fortuna adiuvat."
+msgstr "Fortes fortuna adiuvat."
+
+#. TRANSLATORS: Lore helptext for an empire training site: Training Camp
+#. Translation for the classical Latin quote:
+#. "Fortes fortuna adiuvat."
+#: ../../data/tribes/initialization/empire/units.lua:2019
+msgid "Fortune helps the strong."
+msgstr "Glück hilft den Starken."
+
+#. TRANSLATORS: Lore author helptext for an empire training site: Training
+#. Camp
+#: ../../data/tribes/initialization/empire/units.lua:2023
+msgctxt "empire_building"
+msgid "Trainer to soldiers who questioned the need for higher level training"
+msgstr "Ausbilder zu Soldaten, die die Notwendigkeit der Ausbildung in Frage stellten"
+
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 1
-#: ../../data/tribes/initialization/empire/units.lua:1476
+#: ../../data/tribes/initialization/empire/units.lua:2027
 msgctxt "empire_building"
 msgid "Trains soldiers in ‘Attack’ and in ‘Health’."
 msgstr "Bildet Soldaten im „Angriff“ aus und verbessert die „Lebenspunkte“."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Training Camp,
 #. part 2
-#: ../../data/tribes/initialization/empire/units.lua:1478
+#: ../../data/tribes/initialization/empire/units.lua:2029
 msgctxt "empire_building"
 msgid "Equips the soldiers with all necessary weapons and armor parts."
 msgstr "Stattet die Soldaten mit allen nötigen Waffen und Rüstungsgegenständen aus."
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "An eagle doesn’t catch flies."
+#: ../../data/tribes/initialization/empire/units.lua:2044
+msgid "Aquila non captat muscas."
+msgstr "Aquila non captat muscas."
+
+#. TRANSLATORS: Lore helptext for an empire military site: Blockhouse
+#. Translation for the classical Latin quote:
+#. "Aquila non captat muscas."
+#: ../../data/tribes/initialization/empire/units.lua:2048
+msgid "An eagle doesn’t catch flies."
+msgstr "Der Adler fängt keine Fliegen."
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Blockhouse
+#: ../../data/tribes/initialization/empire/units.lua:2052
+msgctxt "empire_building"
+msgid ""
+"General Passerus Claudius Pedestrus on why he didn’t order the destruction "
+"of a rebel Blockhouse"
+msgstr "General Passerus Claudius Pedestrus, dazu, warum er nicht die Zerstörung einer Rebellenbaracke anordnete"
 
 #. TRANSLATORS: Purpose helptext for an empire military site: Blockhouse
 #. TRANSLATORS: Purpose helptext for an empire military site: Sentry
@@ -6480,13 +7445,13 @@ msgstr "Stattet die Soldaten mit allen nötigen Waffen und Rüstungsgegenstände
 #. TRANSLATORS: Purpose helptext for an empire military site: Tower
 #. TRANSLATORS: Purpose helptext for an empire military site: Fortress
 #. TRANSLATORS: Purpose helptext for an empire military site: Castle
-#: ../../data/tribes/initialization/empire/units.lua:1490
-#: ../../data/tribes/initialization/empire/units.lua:1499
-#: ../../data/tribes/initialization/empire/units.lua:1508
-#: ../../data/tribes/initialization/empire/units.lua:1517
-#: ../../data/tribes/initialization/empire/units.lua:1526
-#: ../../data/tribes/initialization/empire/units.lua:1535
-#: ../../data/tribes/initialization/empire/units.lua:1544
+#: ../../data/tribes/initialization/empire/units.lua:2056
+#: ../../data/tribes/initialization/empire/units.lua:2080
+#: ../../data/tribes/initialization/empire/units.lua:2105
+#: ../../data/tribes/initialization/empire/units.lua:2129
+#: ../../data/tribes/initialization/empire/units.lua:2153
+#: ../../data/tribes/initialization/empire/units.lua:2174
+#: ../../data/tribes/initialization/empire/units.lua:2197
 msgctxt "empire_building"
 msgid "Garrisons soldiers to expand your territory."
 msgstr "Beherbergt Soldaten, um dein Gebiet zu erweitern."
@@ -6498,13 +7463,13 @@ msgstr "Beherbergt Soldaten, um dein Gebiet zu erweitern."
 #. TRANSLATORS: Note helptext for an empire military site: Tower
 #. TRANSLATORS: Note helptext for an empire military site: Fortress
 #. TRANSLATORS: Note helptext for an empire military site: Castle
-#: ../../data/tribes/initialization/empire/units.lua:1492
-#: ../../data/tribes/initialization/empire/units.lua:1501
-#: ../../data/tribes/initialization/empire/units.lua:1510
-#: ../../data/tribes/initialization/empire/units.lua:1519
-#: ../../data/tribes/initialization/empire/units.lua:1528
-#: ../../data/tribes/initialization/empire/units.lua:1537
-#: ../../data/tribes/initialization/empire/units.lua:1546
+#: ../../data/tribes/initialization/empire/units.lua:2058
+#: ../../data/tribes/initialization/empire/units.lua:2082
+#: ../../data/tribes/initialization/empire/units.lua:2107
+#: ../../data/tribes/initialization/empire/units.lua:2131
+#: ../../data/tribes/initialization/empire/units.lua:2155
+#: ../../data/tribes/initialization/empire/units.lua:2176
+#: ../../data/tribes/initialization/empire/units.lua:2199
 msgctxt "empire_building"
 msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
@@ -6512,30 +7477,214 @@ msgid ""
 "send him away."
 msgstr "Wenn du nur wenige Soldaten hast, die neue Militärgebäude besetzen können, benutze die Schaltfläche mit dem nach unten zeigenden Pfeil, um die Kapazität in diesem Gebäude zu verringern. Du kannst auch auf einen Soldaten klicken, um ihn wegzuschicken (er wird, wenn möglich, ersetzt werden)."
 
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Who watches the watchmen?"
+#: ../../data/tribes/initialization/empire/units.lua:2068
+msgid "Quis custodiet ipsos custodes?"
+msgstr "Quis custodiet ipsos custodes?"
+
+#. TRANSLATORS: Lore helptext for an empire production site: Sentry
+#. Translation for the classical Latin quote:
+#. "Quis custodiet ipsos custodes?"
+#: ../../data/tribes/initialization/empire/units.lua:2072
+msgid "Who watches the watchmen?"
+msgstr "Wer bewacht die Wächter?"
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Sentry
+#. (the limes was the border defence system of fortifications of the Roman
+#. Empire)
+#: ../../data/tribes/initialization/empire/units.lua:2077
+msgctxt "empire_building"
+msgid ""
+"Saledus warning Lutius that sentries are not adequate protection for the "
+"limes"
+msgstr "Saledus Warnung an Lutius, dass Wachposten kein ausreichender Schutz der Grenze sind"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Two were stationed on the other side of the city than the camp: one over
+#. the river, the other by
+#. the river above the camp."
+#: ../../data/tribes/initialization/empire/units.lua:2093
+msgid ""
+"Binæ contra urbem a castris station erant, una ultra flumen, altera eis "
+"flumen supra castra."
+msgstr "Binæ contra urbem a castris station erant, una ultra flumen, altera eis flumen supra castra."
+
+#. TRANSLATORS: Lore helptext for an empire military site: Outpost
+#. Translation for the classical Latin quote:
+#. "Binæ contra urbem a castris station erant, una ultra flumen, altera eis
+#. flumen supra castra."
+#: ../../data/tribes/initialization/empire/units.lua:2097
+msgid ""
+"Two were stationed on the other side of the city than the camp: one over the"
+" river, the other by the river above the camp."
+msgstr "Zwei waren auf der anderen Seite der Stadt entfernt des Lagers platziert: Einer über den Fluss, der andere am Fluss über dem Lager."
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Outpost
+#: ../../data/tribes/initialization/empire/units.lua:2102
+msgctxt "empire_building"
+msgid ""
+"History of the Empire, Part III, preparation for the battle of Uliginosium"
+msgstr "Geschichte des Imperiums, Part III, Vorbereitung der Schlacht von Uliginosium"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "The die is cast!"
+#: ../../data/tribes/initialization/empire/units.lua:2117
+msgid "Alea iacta est!"
+msgstr "Alea iacta est!"
+
+#. TRANSLATORS: Lore helptext for an empire military site: Barrier
+#. Translation for the classical Latin quote:
+#. "Alea iacta est!"
+#: ../../data/tribes/initialization/empire/units.lua:2121
+msgid "The die is cast!"
+msgstr "Der Würfel ist gefallen!"
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Barrier
+#: ../../data/tribes/initialization/empire/units.lua:2125
+msgctxt "empire_building"
+msgid ""
+"Rebel general Certus Ignavus Fidelius upon entering the limits of Fremil to "
+"overthrow the government"
+msgstr "Rebellengeneral Certus Ignavus Fidelius vor dem Ünerswchreiten der Grenze zu Fremil um die Regierung zu stürzen"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "I came, I saw, I conquered!"
+#: ../../data/tribes/initialization/empire/units.lua:2141
+msgid "Veni, Vidi, Vici!"
+msgstr "Veni, Vidi, Vici!"
+
+#. TRANSLATORS: Lore helptext for an empire military site: Tower
+#. Translation for the classical Latin quote:
+#. "Veni, Vidi, Vici!"
+#: ../../data/tribes/initialization/empire/units.lua:2145
+msgid "I came, I saw, I conquered!"
+msgstr "Ich kam, ich sah, ich eroberte!"
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Tower
+#: ../../data/tribes/initialization/empire/units.lua:2149
+msgctxt "empire_building"
+msgid ""
+"General Claudius Cæcus Cessus reporting a quick victory over the Barbarians "
+"thanks to the superior vision of a tower"
+msgstr "General Claudius Cæcus Cessus, einen schnellen Sieg über die Barbaren aufgrund der überlegenen Sichtweite eines Wachturms berichtend"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "If you want peace, prepare for war."
+#: ../../data/tribes/initialization/empire/units.lua:2165
+msgid "Si vis pacem, para bellum."
+msgstr "Si vis pacem, para bellum."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Fortress
+#. Translation for the classical Latin quote:
+#. "Si vis pacem, para bellum."
+#: ../../data/tribes/initialization/empire/units.lua:2169
+msgid "If you want peace, prepare for war."
+msgstr "Wenn du Frieden willst, bereite dich auf den Krieg vor."
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Fortress
+#: ../../data/tribes/initialization/empire/units.lua:2172
+msgctxt "empire_building"
+msgid "Saledus arguing with Amalea"
+msgstr "Saledus im Disput mit Amalea"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Adaptation of a classical Latin quote meaning:
+#. "Furthermore, I think that Al’thunran must be destroyed!"
+#: ../../data/tribes/initialization/empire/units.lua:2186
+msgid "Ceterum autem censeo Althunranam esse delendam!"
+msgstr "Ceterum autem censeo Althunranam esse delendam!"
+
+#. TRANSLATORS: Lore helptext for an empire military site: Castle
+#. Translation for the adapted classical Latin quote:
+#. "Ceterum autem censeo Althunranam esse delendam!"
+#: ../../data/tribes/initialization/empire/units.lua:2190
+msgid "Furthermore, I think that Al’thunran must be destroyed!"
+msgstr "Im Übrigen denke ich, dass Al’thunran zerstört werden muss!"
+
+#. TRANSLATORS: Lore author helptext for an empire military site: Castle
+#: ../../data/tribes/initialization/empire/units.lua:2194
+msgctxt "empire_building"
+msgid "Saledus in the Senate, urging final victory over the Barbarians"
+msgstr "Saledus im Senat, auf den finalen Sieg gegen die Barbaren drängend"
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Who crossed seas does not fear rivers."
+#: ../../data/tribes/initialization/empire/units.lua:2211
+msgid "Non terretur fluminibus, qui maria transiit."
+msgstr "Non terretur fluminibus, qui maria transiit."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Ferry Yard
+#. Translation for the classical Latin quote:
+#. "Non terretur fluminibus, qui maria transiit."
+#: ../../data/tribes/initialization/empire/units.lua:2215
+msgid "Who crossed seas does not fear rivers."
+msgstr "Wer die Meere durckreuzte, fürchtet keinen Fluss."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Ferry Yard
+#: ../../data/tribes/initialization/empire/units.lua:2219
+msgctxt "empire_building"
+msgid "Amalea on the need for ferries after the reconstruction of Fremil"
+msgstr "Amalea zur Notwendigkeit von Fähren nach dem Wiederaufbau von Fremil."
+
+#. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
+#. fonts.
+#. Classical Latin quote meaning:
+#. "Don’t put everything on the same ship."
+#: ../../data/tribes/initialization/empire/units.lua:2234
+msgid "Uni navi ne committas omnia."
+msgstr "Uni navi ne committas omnia."
+
+#. TRANSLATORS: Lore helptext for an empire production site: Shipyard
+#. Translation for the classical Latin quote:
+#. "Uni navi ne committas omnia."
+#: ../../data/tribes/initialization/empire/units.lua:2238
+msgid "Don’t put everything on the same ship."
+msgstr "Packt nicht alles auf das gleiche Schiff."
+
+#. TRANSLATORS: Lore author helptext for an empire production site: Shipyard
+#: ../../data/tribes/initialization/empire/units.lua:2242
+msgctxt "empire_building"
+msgid "A shipwright lamenting when he was instructed to stop working"
+msgstr "Ein Schiffbauer, der sich über den Befehl zur Einstellung der Arbeit beschwert"
+
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. missing
-#: ../../data/tribes/initialization/empire/units.lua:1596
+#: ../../data/tribes/initialization/empire/units.lua:2277
 msgctxt "empire"
 msgid "Worker missing"
 msgstr "Ein Arbeiter fehlt"
 
 #. TRANSLATORS: Productivity label on an empire building if there is 1 worker
 #. coming
-#: ../../data/tribes/initialization/empire/units.lua:1598
+#: ../../data/tribes/initialization/empire/units.lua:2279
 msgctxt "empire"
 msgid "Worker is coming"
 msgstr "Arbeiter kommt"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker missing. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/empire/units.lua:1600
+#: ../../data/tribes/initialization/empire/units.lua:2281
 msgctxt "empire"
 msgid "Workers missing"
 msgstr "Arbeiter fehlen"
 
 #. TRANSLATORS: Productivity label on an empire building if there is more than
 #. 1 worker coming. If you need plural forms here, please let us know.
-#: ../../data/tribes/initialization/empire/units.lua:1602
+#: ../../data/tribes/initialization/empire/units.lua:2283
 msgctxt "empire"
 msgid "Workers are coming"
 msgstr "Arbeiter kommen"
@@ -9267,8 +10416,8 @@ msgstr "Einzelspieler"
 msgid "Multiplayer"
 msgstr "Mehrspieler"
 
-#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:51
 #: ../../data/tribes/scripting/help/worker_help.lua:40
 msgid "Producer"
