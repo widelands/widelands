@@ -141,11 +141,10 @@ function mission_thread()
    run(hurry_up)
    if campaign_data.payment then run(warn_empire_expansion) end
    while true do
-      sleep(1000)
       for x=0,map.width - 1 do
+         sleep(50)
          for y=0,map.height - 1 do
             f = map:get_field(x,y)
-            sleep(5)
             local p1c = false
             local p2c = false
             local p4c = false

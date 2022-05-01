@@ -1,8 +1,8 @@
-push_textdomain("tribes")
+push_textdomain("scenario_fri04.wmf")
 
-dirname = "tribes/buildings/warehouses/empire/port/"
+dirname = "campaigns/fri04.wmf/" .. path.dirname (__file__)
 
-descriptions:new_warehouse_type {
+wl.Descriptions():new_warehouse_type {
    name = "empire_port_large",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Port"),
@@ -11,11 +11,14 @@ descriptions:new_warehouse_type {
    destructible = false,
    map_check = {"seafaring"},
 
-   animations = {
+   animation_directory = dirname,
+   spritesheets = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 74, 96 },
-         fps = 10
+         fps = 10,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 74, 96 }
       },
    },
 
