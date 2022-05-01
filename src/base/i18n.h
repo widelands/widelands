@@ -22,6 +22,9 @@
 #include <string>
 #include <vector>
 
+#include "base/macros.h"
+#include "base/multithreading.h"
+#include "config.h"
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
 
 // prevent defining sprintf / snprintf / vsnprintf to libintl_sprintf / libintl_snprintf /
@@ -35,10 +38,6 @@
 #ifdef vsnprintf
 #undef vsnprintf
 #endif
-
-#include "base/macros.h"
-#include "base/multithreading.h"
-#include "config.h"
 
 /// Some macros to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)
