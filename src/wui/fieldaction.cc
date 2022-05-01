@@ -940,6 +940,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
 					Widelands::MapObjectType imm_type = imm->descr().type();
+					std::string imm_name = imm->descr().name();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
 						// We are not interested in trees and pebbles
 						continue;
@@ -953,12 +954,13 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						d = cs->get_info().becomes;
 						assert(d);
 						imm_type = d->type();
+						imm_name = d->name();
 					}
 					if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
 						    imm->get_owner() != player_ ||
 						    !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						        .highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
+						        .highlight_overlapping_workarea_for(imm_name, &positive)) {
 							continue;
 						}
 					} else if (is_milsite_or_whouse) {
