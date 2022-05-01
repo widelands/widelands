@@ -19,9 +19,9 @@
 #ifndef WL_UI_BASIC_EDITBOX_H
 #define WL_UI_BASIC_EDITBOX_H
 
-#include <base/scoped_timer.h>
 #include <memory>
 
+#include "base/scoped_timer.h"
 #include "ui_basic/panel.h"
 
 #define CHAT_HISTORY_SIZE 5

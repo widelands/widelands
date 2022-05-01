@@ -224,7 +224,7 @@ def main():
             full_path = os.path.join(dirpath, filename)
             hits = []
 
-            if filename.endswith('.h'):
+            if filename.endswith('.h') or filename.endswith('.hpp'):
                 hits = check_file(full_path, False)
                 forward_declarations = check_forward_declarations(full_path)
                 if forward_declarations:

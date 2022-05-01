@@ -20,6 +20,7 @@
 #define WL_IO_FILESYSTEM_ZIP_FILESYSTEM_H
 
 #include <memory>
+
 #include <unzip.h>
 #include <zip.h>
 

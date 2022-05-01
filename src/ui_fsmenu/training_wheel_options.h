@@ -20,12 +20,12 @@
 #ifndef WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 #define WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 
+#include <memory>
+#include <set>
+
 #include "logic/training_wheels.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/window.h"
-
-#include <memory>
-#include <set>
 
 class LuaInterface;
 
