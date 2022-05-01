@@ -820,7 +820,7 @@ void Profile::write(char const* const filename,
 	FileWrite fw;
 
 	fw.print_f(
-	   "# Automatically created by Widelands %s (%s)\n", build_id().c_str(), build_type().c_str());
+	   "# Automatically created by Widelands %s\n", build_ver_details().c_str());
 
 	if (comment != nullptr) {
 		fw.print_f("# %s\n", comment);

@@ -474,7 +474,7 @@ void MainMenu::set_labels() {
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
-	   format(_("Version %1$s (%2$s)"), build_id(), build_type()));
+	   format(_("Version %1$s"), build_ver_details()));
 	copyright_.set_text(
 	   /** TRANSLATORS: Placeholders are the copyright years */
 	   format(_("(C) %1%-%2% by the Widelands Development Team · Licensed under "
