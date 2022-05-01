@@ -301,7 +301,7 @@ wl.Descriptions():new_tribe {
    military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
-      frontier = { hotspot = {3, 12} },
+      frontier = { hotspot = {6, 18} },
       bridge_normal_e = { hotspot = {-2, 11} },
       bridge_busy_e = { hotspot = {-2, 11} },
       bridge_normal_se = { hotspot = {5, 2} },
@@ -313,9 +313,9 @@ wl.Descriptions():new_tribe {
       flag = {
          fps = 10,
          frames = 15,
-         rows = 5,
-         columns = 3,
-         hotspot = { 11, 35 }
+         columns = 8,
+         rows = 2,
+         hotspot = { 12, 37 }
       },
    },
 
