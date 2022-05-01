@@ -128,6 +128,10 @@ public:
 		return evade_.images[level];
 	}
 
+	uint16_t get_max_anim_height() const {
+		return max_anim_height_;
+	}
+
 	uint32_t get_rand_anim(Game& game, const std::string& name, const Soldier* soldier) const;
 
 	const DirAnimations& get_right_walk_anims(bool const ware, Worker* w) const override;
@@ -165,6 +169,8 @@ private:
 	SoldierAnimationsList evade_success_e_name_;
 	SoldierAnimationsList evade_failure_e_name_;
 	SoldierAnimationsList die_e_name_;
+
+	uint16_t max_anim_height_;
 
 	// We can have per-level walking and idle anims
 	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for

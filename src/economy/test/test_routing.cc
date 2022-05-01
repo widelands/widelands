@@ -83,8 +83,9 @@ void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() const {
-	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
-	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
+	bool integers_zero = (mpf_cycle_ware == 0u) && (mpf_realcost_ware == 0) &&
+	                     (mpf_estimate_ware == 0) && (mpf_cycle_worker == 0u) &&
+	                     (mpf_realcost_worker == 0) && (mpf_estimate_worker == 0);
 	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
 
 	return pointers_zero && integers_zero;
@@ -250,11 +251,11 @@ struct SimpleRouterFixture {
 	 * cycle wraps around.
 	 */
 	void reset() const {
-		if (d0) {
+		if (d0 != nullptr) {
 			d0->reset_path_finding_cycle(Widelands::wwWARE);
 			d0->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
-		if (d1) {
+		if (d1 != nullptr) {
 			d1->reset_path_finding_cycle(Widelands::wwWARE);
 			d1->reset_path_finding_cycle(Widelands::wwWORKER);
 		}

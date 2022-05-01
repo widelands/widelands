@@ -123,7 +123,7 @@ AllTribes get_all_tribeinfos(const AddOns::AddOnsList* addons_to_consider) {
 
 	const AddOns::AddOnsList* addons;
 	AddOns::AddOnsList enabled_tribe_addons;
-	if (addons_to_consider) {
+	if (addons_to_consider != nullptr) {
 		addons = addons_to_consider;
 	} else {
 		for (auto& pair : AddOns::g_addons) {

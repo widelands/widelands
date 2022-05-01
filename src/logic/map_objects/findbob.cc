@@ -30,8 +30,9 @@ bool FindBobAttribute::accept(Bob* const bob) const {
 
 bool FindBobEnemySoldier::accept(Bob* const imm) const {
 	if (upcast(Soldier, soldier, imm)) {
-		if (soldier->is_on_battlefield() && (!player || soldier->owner().is_hostile(*player)) &&
-		    soldier->get_current_health()) {
+		if (soldier->is_on_battlefield() &&
+		    ((player == nullptr) || soldier->owner().is_hostile(*player)) &&
+		    (soldier->get_current_health() != 0u)) {
 			return true;
 		}
 	}

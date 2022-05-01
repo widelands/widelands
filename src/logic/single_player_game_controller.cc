@@ -70,7 +70,7 @@ void SinglePlayerGameController::think() {
 			if (p > computerplayers_.size()) {
 				computerplayers_.resize(p);
 			}
-			if (!computerplayers_[p - 1]) {
+			if (computerplayers_[p - 1] == nullptr) {
 				computerplayers_[p - 1] =
 				   AI::ComputerPlayer::get_implementation(plr->get_ai())->instantiate(game_, p);
 			}
