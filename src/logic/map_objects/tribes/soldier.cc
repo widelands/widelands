@@ -99,7 +99,8 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
-     evade_(table.get_table("evade")) {
+     evade_(table.get_table("evade")),
+     max_anim_height_(0) {
 
 	// Battle animations
 	// attack_success_*-> soldier is attacking and hit his opponent
@@ -308,9 +309,11 @@ Bob& SoldierDescr::create_object() const {
 void SoldierDescr::add_battle_animation(std::unique_ptr<LuaTable> table,
                                         SoldierAnimationsList* result) {
 	for (const std::string& anim_name : table->keys<std::string>()) {
-		if (!is_animation_known(anim_name)) {
-			throw GameDataError("Trying to add unknown battle animation: %s", anim_name.c_str());
-		}
+		// Store maximum height to prevent bobbing of the level icon
+		uint32_t anim = get_animation(anim_name, nullptr);
+		max_anim_height_ =
+		   std::max(max_anim_height_,
+		            static_cast<uint16_t>(g_animation_manager->get_animation(anim).height()));
 		result->emplace(anim_name, SoldierLevelRange(*table->get_table(anim_name)));
 	}
 }
@@ -572,9 +575,8 @@ void Soldier::draw(const EditorGameBase& game,
 
 	const Vector2f point_on_dst = calc_drawpos(game, field_on_dst, scale);
 	draw_info_icon(
-	   point_on_dst.cast<int>() -
-	      Vector2i(0, (g_animation_manager->get_animation(get_current_anim()).height() - 7) * scale),
-	   scale, InfoMode::kWalkingAround, info_to_draw, dst);
+	   point_on_dst.cast<int>() - Vector2i(0, (descr().get_max_anim_height() - 7) * scale), scale,
+	   InfoMode::kWalkingAround, info_to_draw, dst);
 	draw_inner(game, point_on_dst, coords, scale, dst);
 }
 
