@@ -25,8 +25,11 @@
 #include "editor/tools/tool.h"
 
 struct ListItem {
-	ListItem(const std::string& text, ToolConf conf) : key(text), data(conf), sticky(false) {}
-	std::string key;
+	ListItem(const std::string& k, const std::string& t, ToolConf conf)
+           : key(k), title(t), data(conf), sticky(false) {
+        }
+        std::string key;         ///< Non-locale-dependent description
+        std::string title;       ///< Locale-dependent description
 	ToolConf data;
 	bool sticky;
 };
@@ -46,8 +49,7 @@ struct EditorHistoryTool : public EditorTool {
 		return 0;
 	}
 
-	bool add_configuration(const std::string& key,
-			       const ToolConf& conf);
+	bool add_configuration(const ToolConf& conf);
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");

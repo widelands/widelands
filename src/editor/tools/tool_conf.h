@@ -30,6 +30,9 @@ struct ToolConf {
 	ToolConf(const ToolConf&) = default;
 	ToolConf& operator=(const ToolConf&) = default;
 
+        /// Returns a description of the conf's content in non-locale-dependent form.
+        std::string to_key() const;
+
 	EditorTool* primary;
 
 	uint32_t sel_radius;
@@ -37,9 +40,7 @@ struct ToolConf {
 	int32_t change_by;
 	Widelands::ResourceAmount set_to;
 	Widelands::HeightInterval interval;
-	std::list<Widelands::DescriptionIndex> terrain_types;
-	std::list<Widelands::DescriptionIndex> immovable_types;
-	std::list<Widelands::DescriptionIndex> critter_types;
+	std::list<Widelands::DescriptionIndex> map_obj_types;
 	Widelands::DescriptionIndex resource;
 };
 

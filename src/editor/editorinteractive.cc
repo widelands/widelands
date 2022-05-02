@@ -621,8 +621,7 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 	if (current_tool.save_configuration(conf)) {
 
 		conf.sel_radius = get_sel_radius();
-		std::string name = conf.primary->format_conf_string(conf);
-		if (tools()->tool_history.add_configuration(name, conf)) {
+		if (tools()->tool_history.add_configuration(conf)) {
 			update_tool_history_window();
 		}
 	}

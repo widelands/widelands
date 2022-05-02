@@ -121,7 +121,7 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 
 	for (int i = 0; j > 0; ++i) {
 		if (is_enabled(i)) {
-			conf.terrain_types.push_back(i);
+			conf.map_obj_types.push_back(i);
 			--j;
 		}
 	}
@@ -132,9 +132,8 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 
 void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
 	disable_all();
-	std::list<Widelands::DescriptionIndex>::const_iterator p = conf.terrain_types.begin();
-	while (p != conf.terrain_types.end()) {
+	for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
+             p != conf.map_obj_types.end(); p++) {
 		enable(*p, true);
-		++p;
 	}
 }

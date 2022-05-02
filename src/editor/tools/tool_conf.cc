@@ -18,10 +18,26 @@
 
 #include "editor/tools/tool_conf.h"
 
+#include "editor/editorinteractive.h"
+
 ToolConf::ToolConf()
   : primary(nullptr),
     sel_radius(0),
     change_by(0),
     set_to(0),
     interval(0, 0) {
+}
+
+std::string ToolConf::to_key() const {
+	std::string buf;
+	constexpr int max_string_size = 100;
+
+	for (std::list<Widelands::DescriptionIndex>::const_iterator p = map_obj_types.begin();
+             p != map_obj_types.end() && buf.size() < max_string_size; p++) {
+                buf += format("%d ", static_cast<int>(*p));
+	}
+
+        return format("tool:%d, size:%d, change_by:%d, interval:%d..%d, map_objs:%s",
+                      static_cast<int>(primary->get_window_id()), sel_radius, change_by,
+                      static_cast<int>(interval.min), static_cast<int>(interval.max), buf);
 }

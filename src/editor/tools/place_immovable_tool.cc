@@ -122,7 +122,7 @@ bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {
 
 	for (int i = 0; j > 0; ++i) {
 		if (is_enabled(i)) {
-			conf.immovable_types.push_back(i);
+			conf.map_obj_types.push_back(i);
 			--j;
 		}
 	}
@@ -133,8 +133,8 @@ bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {
 
 void EditorPlaceImmovableTool::load_configuration(const ToolConf& conf) {
 	disable_all();
-	std::list<Widelands::DescriptionIndex>::const_iterator p = conf.immovable_types.begin();
-	while (p != conf.immovable_types.end()) {
+	std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
+	while (p != conf.map_obj_types.end()) {
 		enable(*p, true);
 		++p;
 	}

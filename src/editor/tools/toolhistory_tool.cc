@@ -25,16 +25,20 @@
 #include "ui_basic/unique_window.h"
 
 
-bool EditorHistoryTool::add_configuration(const std::string& key, const ToolConf& conf) {
+bool EditorHistoryTool::add_configuration(const ToolConf& conf) {
 
-	ListItem item(key, conf);
+        std::string key = conf.to_key();
+        std::string title = conf.primary->format_conf_string(conf);
+
+        ListItem item(key, title, conf);
 
 	if (find_item(key) != tool_settings_.end()) {
 		return false;
 	}
 
 	tool_settings_.push_back(item);
-	log_dbg("Added configuration for tool %d: %s", static_cast<int>(conf.primary->get_window_id()), key.c_str());
+	log_dbg("Added configuration for tool %d: %s title:%s", static_cast<int>(conf.primary->get_window_id()),
+                key.c_str(), title.c_str());
 
 	if (tool_settings_.size() > static_cast<uint64_t>(MAX_SIZE)) {
 		truncate();
