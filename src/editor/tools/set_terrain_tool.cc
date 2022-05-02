@@ -92,7 +92,7 @@ EditorActionArgs EditorSetTerrainTool::format_args_impl() {
 	return EditorTool::format_args_impl();
 }
 
-std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions = descriptions.terrains();
 
@@ -108,6 +108,7 @@ std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) 
                 buf += terrain_descriptions.get(*p).descname();
 	}
 
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Set terrain: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 

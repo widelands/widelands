@@ -74,6 +74,7 @@ EditorActionArgs EditorSetHeightTool::format_args_impl() {
 	return a;
 }
 
-std::string EditorSetHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorSetHeightTool::format_conf_description_impl(const ToolConf& conf) {
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Set height: %1$d; size: %2$d"), conf.interval.min, conf.sel_radius + 1);
 }

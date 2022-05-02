@@ -95,7 +95,7 @@ public:
 		return EditorActionArgs(parent_);
 	}
 
-	virtual std::string format_conf_string_impl(const ToolConf&) {
+	virtual std::string format_conf_description_impl(const ToolConf&) {
 		return "";
 	}
 
@@ -145,9 +145,9 @@ public:
 	}
 
 	/// Returns a string representing the given configuration
-	std::string format_conf_string(const ToolConf& conf) {
+	std::string format_conf_description(const ToolConf& conf) {
 		assert(conf.primary == this);
-		return format_conf_string_impl(conf);
+		return format_conf_description_impl(conf);
 	}
 
 

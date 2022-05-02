@@ -73,6 +73,7 @@ EditorActionArgs EditorDecreaseHeightTool::format_args_impl() {
 }
 
 
-std::string EditorDecreaseHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorDecreaseHeightTool::format_conf_description_impl(const ToolConf& conf) {
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Increase/decrease height: %1$d; size: %2$d"), conf.change_by, conf.sel_radius + 1);
 }

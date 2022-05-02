@@ -100,7 +100,7 @@ EditorActionArgs EditorPlaceCritterTool::format_args_impl() {
 }
 
 
-std::string EditorPlaceCritterTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions = descriptions.critters();
 
@@ -116,6 +116,7 @@ std::string EditorPlaceCritterTool::format_conf_string_impl(const ToolConf& conf
                 buf += critter_descriptions.get(*p).descname();
 	}
 
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Place critter: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 

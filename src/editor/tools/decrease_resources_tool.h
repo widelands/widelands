@@ -72,7 +72,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 		cur_res_ = conf.resource;
                 change_by_ = conf.change_by;
 	}
-	std::string format_conf_string_impl(const ToolConf& conf) override;
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 
 private:
 	Widelands::DescriptionIndex cur_res_;

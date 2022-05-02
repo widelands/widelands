@@ -24,7 +24,7 @@
 bool EditorHistoryTool::add_configuration(const ToolConf& conf) {
 
         std::string key = conf.to_key();
-        std::string title = conf.primary->format_conf_string(conf);
+        std::string title = conf.primary->format_conf_description(conf);
 
         ListItem item(key, title, conf);
 

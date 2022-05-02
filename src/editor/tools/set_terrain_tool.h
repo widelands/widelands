@@ -49,7 +49,7 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 
 	bool save_configuration_impl(ToolConf& conf) override;
 	void load_configuration(const ToolConf& conf) override;
-	std::string format_conf_string_impl(const ToolConf& conf) override;
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 
 };
 

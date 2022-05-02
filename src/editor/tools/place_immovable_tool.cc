@@ -93,7 +93,7 @@ EditorActionArgs EditorPlaceImmovableTool::format_args_impl() {
 }
 
 
-std::string EditorPlaceImmovableTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorPlaceImmovableTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions = descriptions.immovables();
 
@@ -109,6 +109,7 @@ std::string EditorPlaceImmovableTool::format_conf_string_impl(const ToolConf& co
                 buf += immovable_descriptions.get(*p).descname();
 	}
 
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Place immovable: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
 }
 

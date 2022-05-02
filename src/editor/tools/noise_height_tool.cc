@@ -68,7 +68,8 @@ EditorActionArgs EditorNoiseHeightTool::format_args_impl() {
 	return a;
 }
 
-std::string EditorNoiseHeightTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorNoiseHeightTool::format_conf_description_impl(const ToolConf& conf) {
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Noise height: %1$d..%2$d; size: %3$d"),
 		      static_cast<int>(conf.interval.min), static_cast<int>(conf.interval.max), conf.sel_radius + 1);
 }

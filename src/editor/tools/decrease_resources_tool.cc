@@ -68,11 +68,12 @@ EditorActionArgs EditorDecreaseResourcesTool::format_args_impl() {
 	return a;
 }
 
-std::string EditorDecreaseResourcesTool::format_conf_string_impl(const ToolConf& conf) {
+std::string EditorDecreaseResourcesTool::format_conf_description_impl(const ToolConf& conf) {
 	std::string resource = parent_.egbase()
 	   .descriptions()
 	   .get_resource_descr(cur_res_)
 	   ->descname();
 
+        /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Increase/decrease %1$s: %2$d; size: %3$d"), resource, conf.change_by, conf.sel_radius + 1);
 }

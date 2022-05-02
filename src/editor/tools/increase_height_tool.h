@@ -74,7 +74,7 @@ struct EditorIncreaseHeightTool : public EditorTool {
 		change_by_ = conf.change_by;
                 set_tool_.load_configuration(conf);
 	}
-	std::string format_conf_string_impl(const ToolConf& conf) override;
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 
 private:
 	EditorDecreaseHeightTool& decrease_tool_;

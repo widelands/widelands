@@ -48,7 +48,7 @@ struct EditorPlaceCritterTool : public EditorTool, public MultiSelect {
 
 	bool save_configuration_impl(ToolConf& conf) override;
 	void load_configuration(const ToolConf& conf) override;
-	std::string format_conf_string_impl(const ToolConf& conf) override;
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_PLACE_CRITTER_TOOL_H
