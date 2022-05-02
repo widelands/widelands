@@ -29,7 +29,7 @@ wl.Descriptions():new_productionsite_type {
          hotspot = { 53, 61 },
       },
       empty = {
-         hotspot = { 50, 56 },
+         hotspot = { 53, 61 },
       },
    },
 
