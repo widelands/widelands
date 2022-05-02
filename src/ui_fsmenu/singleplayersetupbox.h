@@ -20,13 +20,13 @@
 #define WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
 
 #include <memory>
-#include <ui_basic/textarea.h>
 #include <vector>
 
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
+#include "ui_basic/textarea.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
 
 namespace FsMenu {
