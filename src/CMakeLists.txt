@@ -69,10 +69,11 @@ else()
   )
 endif()
 
-# unset these two if they are cached
-unset(MINIZIP_FOUND)
-set(MINIZIP_STATIC_LIBRARIES "")
-if(NOT OPTION_FORCE_EMBEDDED_MINIZIP)
+if(OPTION_FORCE_EMBEDDED_MINIZIP)
+    # unset these two if they are cached
+    unset(MINIZIP_FOUND)
+    set(MINIZIP_STATIC_LIBRARIES "")
+else()
    # If pkg-config is ever needed to find other libraries, move the include outside the if() block
   include(FindPkgConfig)
   if(PKG_CONFIG_FOUND)
