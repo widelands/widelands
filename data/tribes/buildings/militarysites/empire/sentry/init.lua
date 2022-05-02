@@ -25,7 +25,7 @@ wl.Descriptions():new_militarysite_type {
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 38, 62 }
+         hotspot = { 38, 61 }
       }
    },
 
