@@ -98,15 +98,14 @@ std::string EditorSetTerrainTool::format_conf_string_impl(const ToolConf& conf) 
 
 	std::string buf;
 	constexpr int max_string_size = 100;
-	int j = get_nr_enabled();
-	for (int i = 0; j > 0 && buf.size() < max_string_size; ++i) {
-		if (is_enabled(i)) {
-			if (j < get_nr_enabled()) {
-				buf += " | ";
-			}
-			buf += terrain_descriptions.get(i).descname();
-			--j;
-		}
+        auto first = conf.map_obj_types.begin();
+
+        for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
+             p != conf.map_obj_types.end() && buf.size() < max_string_size; p++) {
+                if (p != first) {
+                        buf += " | ";
+                }
+                buf += terrain_descriptions.get(*p).descname();
 	}
 
 	return format(_("Set terrain: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
