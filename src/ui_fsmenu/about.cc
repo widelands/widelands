@@ -68,8 +68,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 			std::string label, localized_label, value, localized_value;
 		};
 		const std::vector<ContentT> content = {
-		   {"Version:", _("Version:"), format("%1$s", build_ver_details()),
-		    format(_("%1$s (%2$s)"), build_id(), build_type())},
+		   {"Version:", _("Version:"), build_ver_details(), format(_("%1$s"), build_ver_details())},
 		   {"Operating System:", _("Operating System:"),
 #if defined(__APPLE__) || defined(__MACH__)
 		    "MacOS", _("MacOS")
