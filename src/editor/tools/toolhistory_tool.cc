@@ -18,12 +18,8 @@
 
 #include "editor/tools/toolhistory_tool.h"
 
-#include <sstream>
-
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
-#include "ui_basic/unique_window.h"
-
 
 bool EditorHistoryTool::add_configuration(const ToolConf& conf) {
 
