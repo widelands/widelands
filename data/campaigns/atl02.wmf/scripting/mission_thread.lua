@@ -255,7 +255,7 @@ end
 function final()
    while not check_for_buildings(p1, {
       atlanteans_temple_of_satul = 1,
-      atlanteans_scouts_house_1 = 1,
+      atlanteans_scouts_house1 = 1,
    })  do sleep(3731) end
    temple.done = true
    msg_boxes(temple_completed)
