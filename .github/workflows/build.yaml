@@ -187,12 +187,8 @@ jobs:
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc) VERBOSE=1
-        # We don't need to test the install/uninstall for each job so we're just
-        # arbitrarily selecting gcc-10
-        if [ "$CXX" = "gcc++-10" ]; then
-          make DESTDIR=$PWD/test_install install
-          make DESTDIR=$PWD/test_install uninstall
-        fi
+        make DESTDIR=$PWD/test_install install
+        make DESTDIR=$PWD/test_install uninstall
         cd ..
     - name: Website Binaries
       run: |
