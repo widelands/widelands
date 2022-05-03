@@ -44,7 +44,7 @@ obj_defeat_amz = {
 }
 obj_defeat_emp = {
    name = "defeat_emp",
-   title=_("Defeat the empire"),
+   title=_("Defeat the Empire"),
    number = 1,
    body = objective_text(_("Defeat the Imperial Legate"),
       li(_([[Defeat Marcus Caius Iniucundus.]]))
@@ -109,7 +109,7 @@ amz_2 = {
    title =_("Strangers"),
    body=amazon(_("Trespassers"),
       -- TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language well, but she does manage to convey her meaning.
-      _([[We – amazons. You – strangers. Land – here – own – we. You – trespassers. You – enemies. We – you – all – make – dead!!]]))
+      _([[We – Amazons. You – strangers. Land – here – own – we. You – trespassers. You – enemies. We – you – all – make – dead!!]]))
 }
 amz_3 = {
    title =_("Strangers"),
@@ -162,7 +162,7 @@ reebaud_7 = {
    title =_("An Old Friend"),
    body=reebaud(_("Met up at last"),
       -- TRANSLATORS: Reebaud – Reebaud 7
-      _([[Had you arrived a week earlier, I would have agreed to your request instantly. Now, however, a spot of bother has appeared on the horizon. I mean this quite literally; foreigners have come from far away and seek to drive us out and take over our lands as we ourselves did, driven by need, seize them from the hostile people who lived here. Warlike barbarians, and an imperial scallywag named Murilius who made the most outrageous demands. We defeated them all, and believed to have found peace at last. And for four long years, life was peaceful indeed.]]))
+      _([[Had you arrived a week earlier, I would have agreed to your request instantly. Now, however, a spot of bother has appeared on the horizon. I mean this quite literally; foreigners have come from far away and seek to drive us out and take over our lands as we ourselves did, driven by need, seize them from the hostile people who lived here. Warlike Barbarians, and an imperial scallywag named Murilius who made the most outrageous demands. We defeated them all, and believed to have found peace at last. And for four long years, life was peaceful indeed.]]))
 }
 reebaud_8a = {
    title =_("An Old Friend"),
