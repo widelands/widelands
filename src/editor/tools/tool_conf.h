@@ -20,6 +20,8 @@
 #define WL_EDITOR_TOOLS_TOOL_CONF_H
 
 #include <list>
+#include <string>
+
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
 

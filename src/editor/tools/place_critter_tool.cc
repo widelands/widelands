@@ -140,9 +140,7 @@ bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {
 
 void EditorPlaceCritterTool::load_configuration(const ToolConf& conf) {
 	disable_all();
-	std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
-	while (p != conf.map_obj_types.end()) {
-		enable(*p, true);
-		++p;
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		enable(idx, true);
 	}
 }

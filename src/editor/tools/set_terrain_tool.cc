@@ -132,8 +132,7 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 
 void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
 	disable_all();
-	for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
-             p != conf.map_obj_types.end(); p++) {
-		enable(*p, true);
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		enable(idx, true);
 	}
 }
