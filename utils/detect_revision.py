@@ -65,8 +65,8 @@ def detect_git_revision():
             ['git', 'rev-parse', '--abbrev-ref', 'HEAD'], cwd=base_path)
         git_abbrev = stdout.rstrip()
         if git_count and git_revnum and git_abbrev:
-            # 1.0~git34567[abc0123@master]
-            return '%s~git%s[%s@%s]' % (next_stable_version, git_count, git_revnum, git_abbrev)
+            # 1.0~git34567 (abc0123@master)
+            return '%s~git%s (%s@%s)' % (next_stable_version, git_count, git_revnum, git_abbrev)
     except Exception as e:
         pass
     return None
