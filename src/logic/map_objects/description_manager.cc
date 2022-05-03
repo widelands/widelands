@@ -59,7 +59,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	   });
 }
 
-DescriptionManager::~DescriptionManager() noexcept(false) {
+DescriptionManager::~DescriptionManager() {
 	auto it = std::find(description_managers_stack_.begin(), description_managers_stack_.end(), this);
 	assert(it != description_managers_stack_.end());
 	description_managers_stack_.erase(it);
