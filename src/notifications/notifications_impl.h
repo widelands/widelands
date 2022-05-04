@@ -19,13 +19,13 @@
 #ifndef WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 #define WL_NOTIFICATIONS_NOTIFICATIONS_IMPL_H
 
-#include "base/macros.h"
-
 #include <algorithm>
 #include <cassert>
 #include <list>
 #include <memory>
 #include <unordered_map>
+
+#include "base/macros.h"
 
 namespace Notifications {
 

@@ -4,6 +4,7 @@
 # Translators:
 # Aina Vaipoissa <vaippaheppu@gmail.com>, 2020
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-03-25 02:57+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,19 +48,19 @@ msgstr "Tervetuloa Widelandsiin!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands on rauhallisesti etenevä rakenteluun keskittyvä strategiapeli, jossa pääpaino on uuden luomisella tuhoamisen sijaan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Tämä opetuspeli etenee tavoitteittain."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Tavoitteet ja niiden käsittely"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "'Tavoitteet'-ikkunan käsittely"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
@@ -71,12 +72,12 @@ msgstr ""
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Kuten useimmat muutkin ikkunat, voit sulkea sen myös hiiren oikealla näppäimellä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Kun olet saavuttanut tavoitteen, se poistuu listasta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -85,7 +86,7 @@ msgstr "Näytä rakennuspaikat"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Aktivoi 'Näytä rakennuspaikat'. Voit tehdä tämän kahdella tavalla:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
@@ -138,7 +139,7 @@ msgstr "Puunhakkaajan mökille täytyy etsiä sopiva paikka. Helpoiten se löyty
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Näytän mistä valikko löytyy ja miten näyttää ja piilottaa rakennuspaikat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -321,11 +322,11 @@ msgstr "Erinomaista! Puunhakkaajan mökki on valmistunut. Puunhakkaaja voi nyt a
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Näkymän liikuttaminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Liikuta näkymää"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -804,7 +805,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Kaikki ruudut Widelandsissä (lukuunottamatta 'OK'-viestin näyttäviä tarinankerrontaruutuja) voi sulkea hiiren oikealla näppäimellä. Jotkin ruudut voi myös kytkeä päälle/pois pelin alareunasta löytyvien painikkeiden ja valikoiden kautta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -817,7 +818,7 @@ msgstr "Ikkunoiden sulkeminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Hienoa. Nyt meidän on keskityttävä toisiin asioihin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
