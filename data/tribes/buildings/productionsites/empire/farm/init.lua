@@ -28,7 +28,7 @@ wl.Descriptions():new_productionsite_type {
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 93, 86 },
+         hotspot = { 89, 82 },
       },
    },
 
