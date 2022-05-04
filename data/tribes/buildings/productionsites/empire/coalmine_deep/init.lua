@@ -16,20 +16,20 @@ wl.Descriptions():new_productionsite_type {
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 52, 67 },
+         hotspot = { 51, 66 },
       },
       empty = {
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 52, 67 }
+         hotspot = { 51, 66 }
       },
       working = {
          fps = 10,
          frames = 10,
          columns = 10,
          rows = 1,
-         hotspot = { 52, 67 }
+         hotspot = { 51, 66 }
       },
    },
 
