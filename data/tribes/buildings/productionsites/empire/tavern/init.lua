@@ -39,14 +39,14 @@ wl.Descriptions():new_productionsite_type {
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 48, 56 },
+         hotspot = { 46, 55 },
       },
       working = {
          basename = "idle", -- TODO(GunChleoc): No animation yet.
          frames = 1,
          columns = 1,
          rows = 1,
-         hotspot = { 48, 56 },
+         hotspot = { 46, 55 },
       },
    },
 
