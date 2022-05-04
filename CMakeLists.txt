@@ -91,7 +91,7 @@ wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 # Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
 # and don't specify '-DWL_INSTALL_BINDIR' when configuring.
 # Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
-set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+wl_set_if_unset(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
