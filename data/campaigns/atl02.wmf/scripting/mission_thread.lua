@@ -319,15 +319,12 @@ function check_defeat()
 end
 
 function check_kalitath_defeated()
-   defeat = p1.defeated == true
-   while not defeat or defeat_maletus.done == true do
-      sleep(6000)
-      defeat = p1.defeated == true
+   while not (p1.defeated or Maletus.defeated) do
       if Kalitath.defeated then
-         defeat = true
          msg_boxes(kalitath_dead)
          wl.ui.MapView():close()
       end
+      sleep(6000)
    end
 end
 
