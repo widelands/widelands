@@ -383,7 +383,7 @@ void InfoPanel::set_fps_string(const bool show,
 		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
 	} else {
-		const std::string text = format("%5.1f fps (avg: %5.1f fps)", fps, average);
+		const std::string text = format("%05.1f fps (avg: %05.1f fps)", fps, average);
 		// The FPS string overlaps with the coords string at low resolution.
 		// Therefore abbreviate it if the available width is less than an arbitrary threshold.
 		if (cheating) {
