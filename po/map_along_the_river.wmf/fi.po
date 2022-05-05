@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Oi Suomi On! <oisuomion@protonmail.com>, 2022
+# Atte Timonen, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
-"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2022\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -350,6 +351,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the north will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Herra, nyt kun olemme valloittaneet Törverin maat, voimme hyödyntää heidän "
+"erinomaista yhteyttä viereiselle suurjärvelle. Satama pohjoisessa antaa "
+"meille paremmat mahdollisuudet luoda yhteyksiä muihin heimoihin."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -357,16 +361,21 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Löysimme Törverin päämajasta papereita jotka opastavat laivanrakennuksen "
+"saloihin. Valitettavasti nämä tekstit on kirjoitettu meille tuntemattomalla "
+"kielellä. Kylänviisaamme tekevät parhaansa niiden kääntämiseksi."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr ""
+msgstr "Etsitään kultaa"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Herra, miehemme ovat paikallistaneet yksittäisen vihollisen "
+"merirosvovartioston. Hylätyt majat kielivät läheltä löytyvän kultaa."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
@@ -375,10 +384,14 @@ msgid ""
 "to be very good fighters. It is best to establish a strong military presence"
 " here before we proceed."
 msgstr ""
+"Meidän pitää olla varovaisia mikäli aiomme valloittaa vartioston. Lähistöllä"
+" saattaa olla lisää vihollisen rakennuksia jotka eivät vielä ole näkyvissä, "
+"ja merirosvot ovat tunnetusti hyviä taistelemaan. Meidän on syytä vahvistaa "
+"sotilaallista läsnäoloamme ennen kuin etenemme."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:70
 msgid "Found a treasure"
-msgstr ""
+msgstr "Aarre löydetty"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:71
 msgid ""
@@ -386,6 +399,9 @@ msgid ""
 "have been looted from the gold diggers’ huts nearby. This gold ore will be "
 "transported to our headquarters."
 msgstr ""
+"Herra, löysimme 25 yksikköä kultamalmia merirosvovartioston uumenista. Ne on"
+" varmaankin ryövätty läheisistä kullankaivajien majoista. Tämä kultamalmi "
+"siirretään päämajaamme."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -394,11 +410,14 @@ msgid ""
 "this area. There is a good building spot only three steps away from the "
 "sentry."
 msgstr ""
+"Onnistuneen laajentumisemme myötä meidän olisi hyvä rakentaa varasto "
+"vartiostosta lounaaseen, jotta voimme tutkia tätä aluetta pidemmälle. Hyvä "
+"paikka rakennukselle löytyy kolmen askeleen päässä vartiostosta."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
 msgid "Removing the swamps"
-msgstr ""
+msgstr "Soiden raivaaminen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:80
 msgid ""
@@ -407,6 +426,10 @@ msgid ""
 "continue. If you bring enough shovels to the new warehouse then volunteers "
 "will remove the swamps."
 msgstr ""
+"Herra, sadekausi synnytti suoalueita puroa pitkin itään emmekä pääse "
+"kulkemaan niiden läpi. Suot täytyy raivata ennen kuin voimme jatkaa matkaa. "
+"Vapaaehtoiset voivat raivata suot, jos vain toimitatte riittävästi lapioita "
+"uudelle varastolle."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:87
 msgid ""
@@ -414,6 +437,9 @@ msgid ""
 "we will not have removed the swamps before the next wet season. If you bring"
 " more shovels to the new warehouse then more volunteers will join in."
 msgstr ""
+"Herra, kaikki lapiot on jo jaettu mutta jos jatkamme tätä tahtia ei soiden "
+"raivaamisesta tule valmista ennen seuraavaa sadekautta. Jos toimitatte lisää"
+" lapioita uudelle varastolle saamme lisää vapaaehtoisia mukaan."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -421,20 +447,25 @@ msgid ""
 "and finish them off. Maybe there are even more treasures hidden in their "
 "territory."
 msgstr ""
+"Herra, nyt kun meillä on pääsy merirosvojen piilopaikkaan, meidän olisi "
+"syytä valloittaa se ja kukistaa heidät lopullisesti. Kenties heidän "
+"alueellaan on enemmänkin aarteita piilotettuna."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
-msgstr ""
+msgstr "Merirosvot päihitettiin."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:101
 msgid ""
 "Sire, we have defeated the pirates. They have hidden some gold in their last"
 " bastion which is now being transferred to our headquarters."
 msgstr ""
+"Herrä, olemme päihittäneet merirosvot. Siirrämme päämajaamme kultavarantoja "
+"joita he piilottivat viimeiseen linnakkeeseensa."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:106
 msgid "Pirates are regrouping"
-msgstr ""
+msgstr "Merirosvot ryhmittyvät uudelleen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:107
 msgid ""
@@ -443,10 +474,14 @@ msgid ""
 "lost strength. Our dwindling resources can become a problem with such a "
 "mighty enemy in front of us."
 msgstr ""
+"Herra, hyökkäystemme johdosta merirosvot ovat alkaneet yhdistää voimiaan "
+"muiden heimojen merirosvojen kanssa. He saattavat onnistua palauttamaan "
+"aiemmin menettämänsä vahvuudet. Hupenevat voimavaramme voivat muodostua "
+"ongelmaksi tällaisen mahtavan vihollisen edessä."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
-msgstr ""
+msgstr "Merirosvot karkumatkalla"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:113
 msgid ""
@@ -454,10 +489,13 @@ msgid ""
 "them have fled and moved away in small boats. It is unknown in which "
 "direction they have escaped."
 msgstr ""
+"Herra, olemme onnistuneet yrityksissämme häätää merirosvot. Monet heistä "
+"pakenivat pienillä veneillä, mutta emme tiedä mihin suuntaan he lopulta "
+"karkasivat."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
-msgstr ""
+msgstr "Laivatelakoiden rakentamistaito"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:119
 msgid ""
@@ -465,10 +503,13 @@ msgid ""
 "decipher the strange language in Törver’s descriptions that we had found in "
 "his headquarters. From now on we are able to build shipyards."
 msgstr ""
+"Herra, pitkän tutkimustyön tuloksena kylänviisaamme ovat lopultakin "
+"onnistuneet tulkitsemaan Törverin päämajasta löydetyt tekstit. Nyt pystymme "
+"rakentamaan laivatelakoita."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:124
 msgid "Our scout has been captured"
-msgstr ""
+msgstr "Tiedustelijamme on jäänyt vangiksi"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:125
 msgid ""
@@ -476,6 +517,8 @@ msgid ""
 "their island. He is the only person who knows the way through the swamps "
 "towards Hjalmar."
 msgstr ""
+"Herra, merirosvot vangitsivat yhden tiedustelijoistamme ja veivät hänet "
+"saarelleen. Hän on ainoa joka tietää reitin soiden läpi Hjalmarin maille."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:127
 msgid ""
@@ -483,10 +526,13 @@ msgid ""
 "We should use the knowledge about shipbuilding that we took from Törver to "
 "build ships and attack their positions."
 msgstr ""
+"Kalastajiemme mukaan hänet on teljetty saarella olevaan linnakkeeseen. "
+"Meidän on hyödynnettävä Törveriltä hankkimaamme tietämystä "
+"laivanrakennuksesta ja rakennettava laivoja hyökätäksemme rosvojen asemiin."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:133
 msgid "Island conquered"
-msgstr ""
+msgstr "Saari vallattu"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:134
 msgid ""
@@ -494,26 +540,33 @@ msgid ""
 "It turns out that the pirates have left a large amount of gold, beer, and "
 "weapons on the island."
 msgstr ""
+"Herra, sotilaamme valtasivat saaren ja onnistuivat vapauttamaan "
+"tiedustelijamme. Kävi ilmi, että merirosvot ovat jättäneet saarelle suuret "
+"määrät kultaa, olutta ja aseita."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
-msgstr ""
+msgstr "Tiedustelija palaa"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:140
 msgid ""
 "Sire, our scout has returned to our territory, and he has shown us the road "
 "through the swamps towards Hjalmar."
 msgstr ""
+"Herra, tiedustelijamme on palannut maillemme, ja hän löysi meille tien "
+"soiden läpi Hjalmarin maita kohti."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:142
 msgid ""
 "He noticed that we can also move along the other side of the mountain, in "
 "case we might fail here, but it will be much more difficult to do."
 msgstr ""
+"Hän havaitsi että voimme edetä myös vuoren toista puolta mikäli "
+"epäonnistumme täällä, mutta se tulee olemaan paljon vaikeampi tie."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:148
 msgid "The last frontier"
-msgstr ""
+msgstr "Viimeinen rintama"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:149
 msgid ""
@@ -521,19 +574,24 @@ msgid ""
 "final enemy. They have been expecting us for a long time and will be "
 "prepared for the heaviest battle in their lifetime."
 msgstr ""
+"Herra, olemme päihittäneet melkein kaikki vihollisarmeijat ja lähestymme nyt"
+" viimeistä vihollistamme. He ovat odottaneet meitä jo pitkään ja ovat "
+"valmistautuneet elinaikansa rankimpaan taisteluun."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:151
 msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
+"Varmista että armeijamme ovat täysissä voimissaan ja toimi sitten "
+"päättäväisesti."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
-msgstr ""
+msgstr "Voitto!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:158
 msgid "Sire, my congratulations!"
-msgstr ""
+msgstr "Herra, onnitteluni!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:160
 msgid ""
@@ -541,7 +599,10 @@ msgid ""
 " conquered our rivalling tribes, but you have also captured the hearts of "
 "your loving people."
 msgstr ""
+"Olet suorittanut kaikki tavoitteet ja päihittänyt kaikki vihollisemme. Et "
+"ainoastaan valloittanut kilpailevia heimoja, vaan sait myös rakastavan "
+"kansasi sydämet puolellesi."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:162
 msgid "Your name will be remembered forever."
-msgstr ""
+msgstr "Nimesi jää muistiin ikuisiksi ajoiksi."
