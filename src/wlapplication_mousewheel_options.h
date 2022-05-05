@@ -48,8 +48,9 @@ enum class MousewheelOptionID : uint16_t {
 	kEditorToolsizeMod,
 	kEditorToolsizeX,
 	kEditorToolsizeY,
+	kWorkaroundInvertedX,
 
-	k_End = kEditorToolsizeY,
+	k_End = kWorkaroundInvertedX,
 
 	kAlwaysOn,
 	kDisabled,
