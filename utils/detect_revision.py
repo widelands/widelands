@@ -101,8 +101,8 @@ def detect_bzr_revision():
             commit_message = b.repository.get_revision(
                 b.last_revision()).message
             git_hash = extract_git_hash(commit_message)
-            # 1.0~bzr9876[abc0123@trunk]
-            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+            # 1.0~bzr9876 (abc0123@trunk)
+            return '{nsv}~bzr{revno} ({git_hash}@{nick})'.format(
                 nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
         except:
             return None
@@ -116,8 +116,8 @@ def detect_bzr_revision():
             nick = run_bzr(['nick'])
             commit_message = run_bzr(['log', '--limit=1', '--short'])
             git_hash = extract_git_hash(commit_message)
-            # 1.0~bzr9876[abc0123@trunk]
-            return '{nsv}~bzr{revno}[{git_hash}@{nick}]'.format(
+            # 1.0~bzr9876 (abc0123@trunk)
+            return '{nsv}~bzr{revno} ({git_hash}@{nick})'.format(
                 nsv=next_stable_version, revno=revno, git_hash=git_hash, nick=nick)
         except (OSError, subprocess.CalledProcessError, IndexError):
             return None
