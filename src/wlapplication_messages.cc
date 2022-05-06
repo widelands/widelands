@@ -251,8 +251,7 @@ void show_usage(const std::string& build_ver_details, CmdLineVerbosity verbosity
 	std::cout << std::string(kIndent + kTextWidth, '=')
 	          << std::endl
 	          /** TRANSLATORS: %s = version information */
-	          << format(_("This is Widelands version %s"), build_ver_details)
-	          << std::endl;
+	          << format(_("This is Widelands version %s"), build_ver_details) << std::endl;
 
 	if (verbosity != CmdLineVerbosity::None) {
 		std::string indent_string = std::string(kIndent, ' ');
