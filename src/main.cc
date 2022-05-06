@@ -36,7 +36,7 @@
  * Cross-platform entry point for SDL applications.
  */
 int main(int argc, char* argv[]) {
-	std::cout << "This is Widelands Version " << build_ver_details() << std::endl;
+	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 
 	WLApplication* g_app = nullptr;
 	try {
