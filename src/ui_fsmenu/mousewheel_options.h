@@ -25,6 +25,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 
@@ -54,6 +55,13 @@ struct MousewheelConfigSettings {
 	// different for zoom direction, and for converting scroll
 	// direction to movement in the orthogonal direction.
 	uint8_t value_invert_, tab_invert_, zoom_invert_;
+
+	// Earlier SDL versions on Linux with X11 reported X scrolling
+	// events with inverted sign. This option allows it to be
+	// worked around.
+	// TODO(tothxa): For 1.2: Try to detect if the current system is
+	//    affected and set this automatically (needs user feedback)
+	bool inverted_x_;
 
 	void read();
 	void apply() const;
@@ -160,6 +168,7 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
+	UI::Checkbox inverted_x_checkbox_;
 	ScrollOptionsButtonBox button_box_;
 };
 

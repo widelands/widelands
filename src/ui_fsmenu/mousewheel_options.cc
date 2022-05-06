@@ -87,6 +87,7 @@ void MousewheelConfigSettings::read() {
 	value_invert_ = READ_DIR(kUIChangeValueInvert);
 	tab_invert_ = READ_DIR(kUITabInvert);
 	zoom_invert_ = READ_DIR(kMapZoomInvert);
+	inverted_x_ = get_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX);
 }
 
 #undef READ_MOD
@@ -115,6 +116,7 @@ void MousewheelConfigSettings::apply() const {
 	APPLY_DIR(kUIChangeValueInvert, value_invert_)
 	APPLY_DIR(kUITabInvert, tab_invert_)
 	APPLY_DIR(kMapZoomInvert, zoom_invert_)
+	set_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX, inverted_x_);
 
 	update_mousewheel_settings();
 }
@@ -423,6 +425,14 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
+     inverted_x_checkbox_(
+           this,
+           UI::PanelStyle::kFsMenu,
+           Vector2i::zero(),
+           _("Fix inverted horizontal scrolling"),
+           _("Work around SDL bug in some configurations that causes horizontal scroll to be "
+             "inverted."),
+           0),
      button_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
@@ -432,6 +442,11 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&zoom_invert_box_);
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
+	add_space(kDividerSpace);
+	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
+	inverted_x_checkbox_.changed.connect(
+	   [this]() { settings_.inverted_x_ = inverted_x_checkbox_.get_state(); });
+	add(&inverted_x_checkbox_);
 	add_space(kDividerSpace);
 	add(&button_box_);
 }
@@ -446,6 +461,7 @@ void MousewheelOptionsDialog::update_settings() {
 	zoom_invert_box_.update_sel();
 	tab_invert_box_.update_sel();
 	value_invert_box_.update_sel();
+	inverted_x_checkbox_.set_state(settings_.inverted_x_);
 }
 void MousewheelOptionsDialog::apply_settings() {
 	settings_.apply();
