@@ -36,7 +36,8 @@ std::string ToolConf::to_key() const {
                 buf += format("%d ", static_cast<int>(*p));
 	}
 
-        return format("tool:%d, change_by:%d, interval:%d..%d, map_objs:%s",
+        return format("tool:%d, change_by:%d, interval:%d..%d, map_objs:%s, resource:%d, set_to:%d",
                       static_cast<int>(primary->get_window_id()), change_by,
-                      static_cast<int>(interval.min), static_cast<int>(interval.max), buf);
+                      static_cast<int>(interval.min), static_cast<int>(interval.max), buf,
+                      static_cast<int>(resource), static_cast<int>(set_to));
 }
