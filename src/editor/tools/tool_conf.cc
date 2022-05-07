@@ -22,7 +22,6 @@
 
 ToolConf::ToolConf()
   : primary(nullptr),
-    sel_radius(0),
     change_by(0),
     set_to(0),
     interval(0, 0) {
@@ -37,7 +36,7 @@ std::string ToolConf::to_key() const {
                 buf += format("%d ", static_cast<int>(*p));
 	}
 
-        return format("tool:%d, size:%d, change_by:%d, interval:%d..%d, map_objs:%s",
-                      static_cast<int>(primary->get_window_id()), sel_radius, change_by,
+        return format("tool:%d, change_by:%d, interval:%d..%d, map_objs:%s",
+                      static_cast<int>(primary->get_window_id()), change_by,
                       static_cast<int>(interval.min), static_cast<int>(interval.max), buf);
 }

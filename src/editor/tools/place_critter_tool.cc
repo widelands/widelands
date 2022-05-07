@@ -117,7 +117,7 @@ std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf&
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Place critter: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
+	return format(_("Critter: %1$s"), buf);
 }
 
 bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {

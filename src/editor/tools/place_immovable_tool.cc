@@ -110,7 +110,7 @@ std::string EditorPlaceImmovableTool::format_conf_description_impl(const ToolCon
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Place immovable: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
+	return format(_("Immovable: %1$s"), buf);
 }
 
 bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {

@@ -70,7 +70,6 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected
                 const ToolConf* conf = history_tool_.get_configuration_for(selected);
                 assert(conf != nullptr);
                 eia().restore_tool_configuration(*conf);
-                log_dbg("Restored: %s", selected.c_str());
         }
 
 }

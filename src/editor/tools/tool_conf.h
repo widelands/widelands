@@ -37,8 +37,6 @@ struct ToolConf {
 
 	EditorTool* primary;
 
-	uint32_t sel_radius;
-
 	int32_t change_by;
 	Widelands::ResourceAmount set_to;
 	Widelands::HeightInterval interval;

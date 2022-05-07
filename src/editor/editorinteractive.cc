@@ -619,8 +619,6 @@ void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and
 
 	ToolConf conf;
 	if (current_tool.save_configuration(conf)) {
-
-		conf.sel_radius = get_sel_radius();
 		if (tools()->tool_history.add_configuration(conf)) {
 			update_tool_history_window();
 		}
@@ -1252,7 +1250,6 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 	EditorTool& primary = *conf.primary;
 	primary.load_configuration(conf);
 	select_tool(primary, EditorTool::First);
-	set_sel_radius_and_update_menu(conf.sel_radius);
 
 	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
 	if (window == nullptr) {

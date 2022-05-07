@@ -90,13 +90,3 @@ Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
 	}
 	return Widelands::NodeCaps::CAPS_NONE;
 }
-
-std::string EditorSetResourcesTool::format_conf_description_impl(const ToolConf& conf) {
-	std::string resource = parent_.egbase()
-	   .descriptions()
-	   .get_resource_descr(cur_res_)
-	   ->descname();
-
-        /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Set resource %1$s: %2$d; size: %3$d"), resource, static_cast<int>(conf.set_to), conf.sel_radius + 1);
-}

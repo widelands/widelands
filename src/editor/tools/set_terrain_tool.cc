@@ -109,7 +109,7 @@ std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& c
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Set terrain: %1$s; size: %2$d"), buf, conf.sel_radius + 1);
+	return format(_("Terrain: %1$s"), buf);
 }
 
 bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
