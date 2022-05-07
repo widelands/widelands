@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # heidi.wenger, 2022
-# Jukka Pakarinen, 2016-2017,2019
+# Jukka Pakarinen, 2016-2017,2019,2022
 # Markus <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007,2015
 # Teppo Mäenpää <teppo@runbox.com>, 2020
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: heidi.wenger, 2022\n"
+"Last-Translator: Jukka Pakarinen, 2016-2017,2019,2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -376,27 +376,27 @@ msgstr "Lehtikuusi (Taimi)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/mature/init.lua:10
 msgid "Liana Tree (Mature)"
-msgstr "Liaani Puu (Täysikasvuinen)"
+msgstr "Liaanipuu (Täysikasvuinen)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/old/init.lua:10
 msgid "Liana Tree (Old)"
-msgstr "Liaani Puu (Vanha)"
+msgstr "Liaanipuu (Vanha)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
-msgstr "Liaani Puu"
+msgstr "Liaanipuu"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/pole/init.lua:10
 msgid "Liana Tree (Pole)"
-msgstr "Liaani Puu (Nuori)"
+msgstr "Liaanipuu (Nuori)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/sapling/init.lua:10
 msgid "Liana Tree (Sapling)"
-msgstr "Liaani Puu (Taimi)"
+msgstr "Liaanipuu (Taimi)"
 
 #: ../../data/world/immovables/trees/maple/mature/init.lua:9
 msgid "Maple (Mature)"

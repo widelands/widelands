@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Doruk Tufan, 2022
 # Erdoğan Şahin, 2016
 # GunChleoc, 2016
 # Recep Hasanbaş <swarfhell@gmail.com>, 2015
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: GunChleoc, 2016\n"
+"Last-Translator: Doruk Tufan, 2022\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,7 +59,7 @@ msgstr "Sansar"
 
 #: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
-msgstr ""
+msgstr "Alageyik"
 
 #: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
@@ -89,7 +90,7 @@ msgstr "Kurt"
 #: ../../data/world/immovables/artifacts/artifact02/init.lua:7
 #: ../../data/world/immovables/artifacts/artifact03/init.lua:7
 msgid "Artifact"
-msgstr ""
+msgstr "Eser"
 
 #: ../../data/world/immovables/miscellaneous/bar-ruin00/init.lua:7
 #: ../../data/world/immovables/miscellaneous/bar-ruin01/init.lua:7
@@ -124,7 +125,7 @@ msgstr "Çakıl"
 #: ../../data/world/immovables/miscellaneous/ruin4/init.lua:7
 #: ../../data/world/immovables/miscellaneous/ruin5/init.lua:7
 msgid "Tombstone"
-msgstr ""
+msgstr "Mezar taşı"
 
 #: ../../data/world/immovables/miscellaneous/skeleton1/init.lua:7
 #: ../../data/world/immovables/miscellaneous/skeleton3/init.lua:7
@@ -171,42 +172,42 @@ msgstr "Çim"
 #: ../../data/world/immovables/rocks/greenland/1/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/1/init.lua:7
 msgid "Rocks 1"
-msgstr ""
+msgstr "Kaya 1"
 
 #: ../../data/world/immovables/rocks/blackland/2/init.lua:7
 #: ../../data/world/immovables/rocks/desert/2/init.lua:7
 #: ../../data/world/immovables/rocks/greenland/2/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/2/init.lua:7
 msgid "Rocks 2"
-msgstr ""
+msgstr "Kaya 2"
 
 #: ../../data/world/immovables/rocks/blackland/3/init.lua:7
 #: ../../data/world/immovables/rocks/desert/3/init.lua:7
 #: ../../data/world/immovables/rocks/greenland/3/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/3/init.lua:7
 msgid "Rocks 3"
-msgstr ""
+msgstr "Kaya 3"
 
 #: ../../data/world/immovables/rocks/blackland/4/init.lua:7
 #: ../../data/world/immovables/rocks/desert/4/init.lua:7
 #: ../../data/world/immovables/rocks/greenland/4/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/4/init.lua:7
 msgid "Rocks 4"
-msgstr ""
+msgstr "Kaya 4"
 
 #: ../../data/world/immovables/rocks/blackland/5/init.lua:7
 #: ../../data/world/immovables/rocks/desert/5/init.lua:7
 #: ../../data/world/immovables/rocks/greenland/5/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/5/init.lua:7
 msgid "Rocks 5"
-msgstr ""
+msgstr "Kaya 5"
 
 #: ../../data/world/immovables/rocks/blackland/6/init.lua:7
 #: ../../data/world/immovables/rocks/desert/6/init.lua:7
 #: ../../data/world/immovables/rocks/greenland/6/init.lua:7
 #: ../../data/world/immovables/rocks/winterland/6/init.lua:7
 msgid "Rocks 6"
-msgstr ""
+msgstr "Kaya 6"
 
 #: ../../data/world/immovables/standing_stones/standing_stone1_desert/init.lua:7
 #: ../../data/world/immovables/standing_stones/standing_stone1_summer/init.lua:7
@@ -243,7 +244,7 @@ msgstr "Akağaç (Yaşlı)"
 
 #: ../../data/world/immovables/trees/alder/old/init.lua:10
 msgid "Alder"
-msgstr ""
+msgstr "Akağaç"
 
 #: ../../data/world/immovables/trees/alder/pole/init.lua:9
 msgid "Alder (Pole)"
@@ -263,7 +264,7 @@ msgstr "Toz ağacı (Yaşlı)"
 
 #: ../../data/world/immovables/trees/aspen/old/init.lua:10
 msgid "Aspen"
-msgstr ""
+msgstr "Toz ağacı"
 
 #: ../../data/world/immovables/trees/aspen/pole/init.lua:9
 msgid "Aspen (Pole)"
@@ -283,7 +284,7 @@ msgstr "Gürgen (Yaşlı)"
 
 #: ../../data/world/immovables/trees/beech/old/init.lua:10
 msgid "Beech"
-msgstr ""
+msgstr "Gürgen"
 
 #: ../../data/world/immovables/trees/beech/pole/init.lua:9
 msgid "Beech (Pole)"
@@ -303,7 +304,7 @@ msgstr "Huş ağacı (Yaşlı)"
 
 #: ../../data/world/immovables/trees/birch/old/init.lua:10
 msgid "Birch"
-msgstr ""
+msgstr "Huş ağacı"
 
 #: ../../data/world/immovables/trees/birch/pole/init.lua:9
 msgid "Birch (Pole)"
@@ -326,7 +327,7 @@ msgstr "Tüybulut Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/old/init.lua:12
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Tüybulut ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/pole/init.lua:10
@@ -349,7 +350,7 @@ msgstr "Ölü Ağaç"
 
 #: ../../data/world/immovables/trees/fallentree/init.lua:7
 msgid "Felled Tree"
-msgstr ""
+msgstr "Ölü ağaç"
 
 #: ../../data/world/immovables/trees/larch/mature/init.lua:9
 msgid "Larch (Mature)"
@@ -361,7 +362,7 @@ msgstr "Karaçam (Yaşlı)"
 
 #: ../../data/world/immovables/trees/larch/old/init.lua:10
 msgid "Larch"
-msgstr ""
+msgstr "Karaçam"
 
 #: ../../data/world/immovables/trees/larch/pole/init.lua:9
 msgid "Larch (Pole)"
@@ -384,7 +385,7 @@ msgstr "Sarmaşık Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/old/init.lua:12
 msgid "Liana Tree"
-msgstr ""
+msgstr "Sarmaşık ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/pole/init.lua:10
@@ -406,7 +407,7 @@ msgstr "Akçaağaç (Yaşlı)"
 
 #: ../../data/world/immovables/trees/maple/old/init.lua:10
 msgid "Maple"
-msgstr ""
+msgstr "Akçaağaç"
 
 #: ../../data/world/immovables/trees/maple/pole/init.lua:9
 msgid "Maple (Pole)"
@@ -429,7 +430,7 @@ msgstr "Koyu Mantar Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/old/init.lua:12
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Koyu Mantar Ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/pole/init.lua:10
@@ -454,7 +455,7 @@ msgstr "Yeşil Mantar Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/old/init.lua:12
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Yeşil Mantar Ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/pole/init.lua:10
@@ -479,7 +480,7 @@ msgstr "Kırmızı Mantar Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/old/init.lua:12
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Kırmızı Mantar Ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/pole/init.lua:10
@@ -521,7 +522,7 @@ msgstr "Palmira Palmiyesi (Yaşlı)"
 
 #: ../../data/world/immovables/trees/palm_borassus/old/init.lua:10
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Palmira Palmiyesi"
 
 #: ../../data/world/immovables/trees/palm_borassus/pole/init.lua:9
 msgid "Borassus Palm (Pole)"
@@ -541,7 +542,7 @@ msgstr "Hindistan Cevizi Palmiyesi (Yaşlı)"
 
 #: ../../data/world/immovables/trees/palm_coconut/old/init.lua:10
 msgid "Coconut Palm"
-msgstr ""
+msgstr "Hindistan Cevizi Palmiyesi"
 
 #: ../../data/world/immovables/trees/palm_coconut/pole/init.lua:9
 msgid "Coconut Palm (Pole)"
@@ -561,7 +562,7 @@ msgstr "Hurma Palmiyesi (Yaşlı)"
 
 #: ../../data/world/immovables/trees/palm_date/old/init.lua:10
 msgid "Date Palm"
-msgstr ""
+msgstr "Hurma Palmiyesi"
 
 #: ../../data/world/immovables/trees/palm_date/pole/init.lua:9
 msgid "Date Palm (Pole)"
@@ -581,7 +582,7 @@ msgstr "Palmiye Yağı (Yaşlı)"
 
 #: ../../data/world/immovables/trees/palm_oil/old/init.lua:10
 msgid "Oil Palm"
-msgstr ""
+msgstr "Palmiye Yağı"
 
 #: ../../data/world/immovables/trees/palm_oil/pole/init.lua:9
 msgid "Oil Palm (Pole)"
@@ -601,7 +602,7 @@ msgstr "Tek çenekli Palmiye (Yaşlı)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/old/init.lua:10
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Tek çenekli Palmiye"
 
 #: ../../data/world/immovables/trees/palm_roystonea/pole/init.lua:9
 msgid "Roystonea regia Palm (Pole)"
@@ -621,7 +622,7 @@ msgstr "Üvez (Yaşlı)"
 
 #: ../../data/world/immovables/trees/rowan/old/init.lua:10
 msgid "Rowan"
-msgstr ""
+msgstr "Üvez"
 
 #: ../../data/world/immovables/trees/rowan/pole/init.lua:9
 msgid "Rowan (Pole)"
@@ -641,7 +642,7 @@ msgstr "Alaçam (Yaşlı)"
 
 #: ../../data/world/immovables/trees/spruce/old/init.lua:10
 msgid "Spruce"
-msgstr ""
+msgstr "Alaçam"
 
 #: ../../data/world/immovables/trees/spruce/pole/init.lua:9
 msgid "Spruce (Pole)"
@@ -664,7 +665,7 @@ msgstr "Sarık Ağaç (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/old/init.lua:12
 msgid "Twine Tree"
-msgstr ""
+msgstr "Sarık Ağaç"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/pole/init.lua:10
@@ -689,7 +690,7 @@ msgstr "Şemsiye Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/old/init.lua:12
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Şemsiye Ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/pole/init.lua:10
@@ -714,7 +715,7 @@ msgstr "Kırmızı Şemsiye Ağacı (Yaşlı)"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/old/init.lua:12
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Kırmızı Şemsiye Ağacı"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/pole/init.lua:10
@@ -729,17 +730,17 @@ msgstr "Kırmızı Şemsiye Ağacı (Fidan)"
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:121
 msgid "Herbivores"
-msgstr ""
+msgstr "Otoburlar"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:139
 msgid "Carnivores"
-msgstr ""
+msgstr "Etoburlar"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:154
 msgid "Aquatic"
-msgstr ""
+msgstr "Sucul"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:168
@@ -749,11 +750,11 @@ msgstr "Çeşitli"
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:207
 msgid "Artifacts"
-msgstr ""
+msgstr "Eserler"
 
 #: ../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr ""
+msgstr "“Eserler” zaferi için bu taşınamazlar kullanılır."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:220
@@ -767,7 +768,7 @@ msgstr "Duran Kayalar"
 
 #: ../../data/world/init.lua:277
 msgid "Rocks"
-msgstr ""
+msgstr "Kayalar"
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
@@ -875,14 +876,14 @@ msgstr "Kuru Toprak"
 #: ../../data/world/terrains/wasteland/forested_mountain1/init.lua:5
 #: ../../data/world/terrains/winter/forested_mountain1/init.lua:5
 msgid "Forested Mountain 1"
-msgstr ""
+msgstr "Ormanlı Dağ 1"
 
 #: ../../data/world/terrains/desert/forested_mountain2/init.lua:5
 #: ../../data/world/terrains/summer/forested_mountain2/init.lua:5
 #: ../../data/world/terrains/wasteland/forested_mountain2/init.lua:5
 #: ../../data/world/terrains/winter/forested_mountain2/init.lua:5
 msgid "Forested Mountain 2"
-msgstr ""
+msgstr "Ormanlı Dağ 2"
 
 #: ../../data/world/terrains/desert/highmountainmeadow/init.lua:5
 msgid "High Mountain Meadow"
@@ -965,27 +966,27 @@ msgstr "Bataklık"
 
 #: ../../data/world/terrains/wasteland/ashes1/init.lua:5
 msgid "Ashes 1"
-msgstr ""
+msgstr "Küller 1"
 
 #: ../../data/world/terrains/wasteland/ashes2/init.lua:5
 msgid "Ashes 2"
-msgstr ""
+msgstr "Küller 2"
 
 #: ../../data/world/terrains/wasteland/hardground1/init.lua:5
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Sert zemin 1"
 
 #: ../../data/world/terrains/wasteland/hardground2/init.lua:5
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Sert zemin 2"
 
 #: ../../data/world/terrains/wasteland/hardground3/init.lua:5
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Sert zemin 3"
 
 #: ../../data/world/terrains/wasteland/hardground4/init.lua:5
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Sert zemin 4"
 
 #: ../../data/world/terrains/wasteland/hardlava/init.lua:5
 msgid "Igneous Rocks"
@@ -993,11 +994,11 @@ msgstr "Volkanik Taş"
 
 #: ../../data/world/terrains/wasteland/lava_stone1/init.lua:5
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Volkanik Kayalar 1"
 
 #: ../../data/world/terrains/wasteland/lava_stone2/init.lua:5
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Volkanik Kayalar 2"
 
 #: ../../data/world/terrains/winter/ice/init.lua:5
 msgid "Ice"
@@ -1013,19 +1014,19 @@ msgstr "Buz Kütleleri 2"
 
 #: ../../data/world/terrains/winter/taiga1/init.lua:5
 msgid "Taiga 1"
-msgstr ""
+msgstr "Tayga 1"
 
 #: ../../data/world/terrains/winter/taiga2/init.lua:5
 msgid "Taiga 2"
-msgstr ""
+msgstr "Tayga 2"
 
 #: ../../data/world/terrains/winter/taiga3/init.lua:5
 msgid "Taiga 3"
-msgstr ""
+msgstr "Tayga 3"
 
 #: ../../data/world/terrains/winter/tundra/init.lua:5
 msgid "Tundra"
-msgstr ""
+msgstr "Tundura"
 
 #: ../../data/world/terrains/winter/tundra_taiga/init.lua:5
 msgid "Tundra Taiga"

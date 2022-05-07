@@ -14,9 +14,8 @@ override_dh_auto_configure:
 	CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" CPPFLAGS="$(CPPFLAGS)" CXXFLAGS="$(CXXFLAGS)" \
 	  dh_auto_configure -Scmake -- \
 		-DWL_INSTALL_BASEDIR=/usr/share/games/widelands \
-		-DWL_INSTALL_BINDIR=games \
 		-DWL_INSTALL_DATADIR=/usr/share/games/widelands/data \
-		-DWL_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DOPTION_USE_GLBINDING:BOOL=OFF \
 		-DOPTION_ASAN=OFF \
 		-DCMAKE_BUILD_TYPE=Release
@@ -57,11 +56,7 @@ override_dh_auto_install:
 	# mv debian/tmp/usr/widelands debian/tmp/usr/games
 
 	# TODO(GunChleoc): wl_render_richtext is currently unmaintained
-	# Move the main binary to the right location (no idea why it's misplaced)
-	mkdir debian/tmp/usr/games
-	for b in wl_map_info wl_map_object_info widelands wl_create_spritesheet ; do \
-	  mv debian/tmp/usr/$${b} debian/tmp/usr/games ;\
-	done
+
 	# Take care of the logo
 	for size in 16 32 48 64 128 ; do \
 	  mkdir -p debian/tmp/usr/share/icons/hicolor/$${size}x$${size}/apps ; \

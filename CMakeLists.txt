@@ -13,6 +13,7 @@ option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
+option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
@@ -84,6 +85,13 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 # below the directory where the executable is in. Also on Linux.
 # Packagers (or people using make install) have to set this variable to an absolute path.
 wl_set_if_unset(WL_INSTALL_DATADIR "./data")
+
+# To override this, use '-DWL_INSTALL_BINDIR=<absolute path>' when configuring or change
+# 'CMAKE_INSTALL_PREFIX'.
+# Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
+# and don't specify '-DWL_INSTALL_BINDIR' when configuring.
+# Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
+set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
