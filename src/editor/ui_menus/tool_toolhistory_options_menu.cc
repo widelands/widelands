@@ -46,7 +46,7 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 	box_.set_size(100, 20);
 	box_.add(&list_);
         /** TRANSLATORS: Help tooltip in tool history window. */
-        box_.set_tooltip(_("Click to select, Ctrl + Click to delete, and Shift + Click to pin an item."));
+        box_.set_tooltip(_("Click to select, Shfit + Click to delete, and Ctrl + Click to pin an item."));
         set_center_panel(&box_);
         rebuild_list();
 
@@ -60,10 +60,10 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 
 void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected) {
 
-        if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+        if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
                 history_tool_.remove_configuration(selected);
                 rebuild_list();
-        } else if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
+        } else if ((SDL_GetModState() & KMOD_CTRL) != 0) {
                 history_tool_.toggle_sticky(selected);
                 rebuild_list();
         } else {
