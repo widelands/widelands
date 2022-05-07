@@ -45,6 +45,7 @@ private:
         EditorHistoryTool& history_tool_;
 
         void list_item_clicked(const std::string& selected);
+        std::string make_tooltip(const ToolConf &conf);
         void rebuild_list();
 
 	int32_t margin_;

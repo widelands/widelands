@@ -25,6 +25,10 @@
 #include "editor/tools/history.h"
 #include "editor/tools/tool.h"
 #include "editor/tools/toolhistory_tool.h"
+#include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/immovable.h"
+#include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/terrain_description.h"
 
 inline EditorInteractive& EditorToolhistoryOptionsMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -45,8 +49,6 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 
 	box_.set_size(100, 20);
 	box_.add(&list_);
-        /** TRANSLATORS: Help tooltip in tool history window. */
-        box_.set_tooltip(_("Click to select, Shfit + Click to delete, and Ctrl + Click to pin an item."));
         set_center_panel(&box_);
         rebuild_list();
 
@@ -75,15 +77,50 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected
 }
 
 
+std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf &conf) {
+	LuaInterface* lua = &eia().egbase().lua();
+        std::unique_ptr<LuaTable> table(lua->run_script("scripting/editor/toolhistory_tooltip.lua"));
+        std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+        const Widelands::Descriptions& descriptions = eia().egbase().descriptions();
+
+        if (conf.primary->get_window_id() == WindowID::Terrain) {
+                cr->push_arg("terrain");
+                for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+                        const Widelands::TerrainDescription* descr = descriptions.get_terrain_descr(idx);
+        		cr->push_arg(descr->name());
+        	}
+        } else if (conf.primary->get_window_id() == WindowID::Critters) {
+                cr->push_arg("critter");
+                for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+                        const Widelands::CritterDescr* descr = descriptions.get_critter_descr(idx);
+        		cr->push_arg(descr->name());
+        	}
+        } else if (conf.primary->get_window_id() == WindowID::Immovables) {
+                cr->push_arg("immovable");
+                for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+                        const Widelands::ImmovableDescr* descr = descriptions.get_immovable_descr(idx);
+        		cr->push_arg(descr->name());
+        	}
+        }
+
+        cr->resume();
+
+        return cr->pop_table()->get_string("text");
+}
+
 void EditorToolhistoryOptionsMenu::rebuild_list() {
 	list_.clear();
 
+
+
         int count = 0;
         for (const auto& it: history_tool_) {
+                const ToolConf* conf = history_tool_.get_configuration_for(it.key);
+                std::string tooltip = make_tooltip(*conf);
                 if (it.sticky) {
                         list_.add(it.title, it.key, g_image_cache->get("images/wui/editor/sticky_list_item.png"));
                 } else {
-                        list_.add(it.title, it.key);
+                        list_.add(it.title, it.key, nullptr, false, tooltip);
                 }
 
                 count++;
