@@ -1,6 +1,6 @@
 -- RST
 -- toolhistory_tooltip.lua
--- ----------------
+-- -----------------------
 --
 -- This script returns a compact formatted entry for toolhistory list tooltips in the editor.
 -- Pass map object type ("terrain", "critter", or "immovable") followed by the internal names of
