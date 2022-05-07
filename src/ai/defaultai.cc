@@ -4018,8 +4018,10 @@ bool DefaultAI::check_economies() {
 		get_economy_observer(flag.economy(Widelands::wwWORKER))->flags.push_back(&flag);
 	}
 
+	size_t eco_size = economies.size();
+	size_t obs_idx = 0;
 	for (std::deque<EconomyObserver*>::iterator obs_iter = economies.begin();
-	     obs_iter != economies.end(); ++obs_iter) {
+	     obs_iter != economies.end(); ++obs_iter, ++obs_idx) {
 		// check if any flag has changed its economy
 		std::deque<Widelands::Flag const*>& fl = (*obs_iter)->flags;
 
@@ -4029,6 +4031,15 @@ bool DefaultAI::check_economies() {
 				get_economy_observer((*j)->economy(Widelands::wwWORKER))->flags.push_back(*j);
 				// and erase from this economy's observer
 				j = fl.erase(j);
+				if (eco_size != economies.size()) {
+					// economies was modified, so obs_iter is invalid now.
+					// Restore it to the last position
+					eco_size++;
+					obs_idx++;
+					assert(eco_size == economies.size());
+					obs_iter = economies.begin();
+					std::advance(obs_iter, obs_idx);
+				}
 			} else {
 				++j;
 			}
