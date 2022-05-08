@@ -18,6 +18,7 @@
 
 #include "editor/ui_menus/tool_toolhistory_options_menu.h"
 
+#include <memory>
 #include <vector>
 
 #include "base/i18n.h"
@@ -111,14 +112,13 @@ std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf &conf) {
 void EditorToolhistoryOptionsMenu::rebuild_list() {
 	list_.clear();
 
-
-
         int count = 0;
         for (const auto& it: history_tool_) {
                 const ToolConf* conf = history_tool_.get_configuration_for(it.key);
                 std::string tooltip = make_tooltip(*conf);
                 if (it.sticky) {
-                        list_.add(it.title, it.key, g_image_cache->get("images/wui/editor/sticky_list_item.png"));
+                        list_.add(it.title, it.key, g_image_cache->get("images/wui/editor/sticky_list_item.png"),
+                                  false, tooltip);
                 } else {
                         list_.add(it.title, it.key, nullptr, false, tooltip);
                 }

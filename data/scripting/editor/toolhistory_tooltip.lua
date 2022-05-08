@@ -25,12 +25,10 @@ return {
             result = result .. img_object(name) ..space(2)
 
          end
-
       end
 
-
       -- TRANSLATORS: Help tooltip in tool history window.
-      tooltip = vspace(3) .. _("Click to restore, Shfit + Click to delete, and Ctrl + Click to pin an item.")
+      local tooltip = vspace(3) .. _("Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item.")
 
       if result ~= "" then
          -- TRANSLATORS: Help tooltip header in tool history window.
