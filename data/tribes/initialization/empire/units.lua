@@ -1,3 +1,5 @@
+descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
+
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1683,11 +1685,11 @@ wl.Descriptions():new_tribe {
                --    "Lutius had already removed himself from public affairs, he was living in the countryside,
                --     and the ambassadors of the senate found him while he was plowing his land."
                _("Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt"..
-                 " dum agellum suum arat"),
+                 " dum agellum suum arat."),
                -- TRANSLATORS: Lore helptext for an empire production site: Farm
                --    Translation for the adapted classical Latin quote:
                --    "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt
-               --     dum agellum suum arat"
+               --     dum agellum suum arat."
                _("Lutius had already removed himself from public affairs, he was living in the countryside,"..
                  " and the ambassadors of the senate found him while he was plowing his land.")
             ),

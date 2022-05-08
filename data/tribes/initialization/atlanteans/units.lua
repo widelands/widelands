@@ -289,6 +289,8 @@
 --   The helptexts are then joined by the engine.
 --   In our example, we will get *"If all needed wares are delivered in time, this building can produce each type of ax in about 57 seconds on average. All three weapons take the same time for making, but the required raw materials vary."*
 
+descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
+
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -1402,7 +1404,7 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
             purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools. "..
-                    " will help you to stabilize your economy."),
+                    "It will help you to stabilize your economy."),
             -- TRANSLATORS: Note lore for an atlantean production site: Warehouse
             lore = pgettext("atlanteans_building", "Maybe you think it’s a boring task to store, count and retrieve all this stuff, "..
                      "but do you really want your carriers to walk all the way to your Headquarters?"),
@@ -1539,9 +1541,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Gold Spinning Mill
             note = pgettext("atlanteans_building", "Do not build until you have a steady gold supply."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning Mill
-            lore = pgettext("atlanteans_building", "No, we can’t spin goldthread from straw. We need real gold. What kind of fairy tale did you get that idea from?"),
+            lore = pgettext("atlanteans_building", "No, we can’t spin gold thread from straw. We need real gold. What kind of fairy tale did you get that idea from?"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Spinning Mill
-            lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies.")
+            lore_author = pgettext("atlanteans_building", "Painted on a gold spinning mill without supplies")
          }
       },
       {
@@ -1552,7 +1554,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Scout's House
             purpose = pgettext("building", "Explores unknown territory."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Scout's House
-            note = pgettext("atlanteans_building", "Will need fish and bread to have his meal the Atlantean way"),
+            note = pgettext("atlanteans_building", "Will need fish and bread to have his meal the Atlantean way."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
             lore = pgettext("atlanteans_building", "You do not see everything from your high towers. Sometimes you need someone to find out in person, that’s me!"),
             -- TRANSLATORS: Lore author helptext for an atlantean production site:  Scout's House
@@ -1605,7 +1607,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
             purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts and miners and to train soldiers."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Bakery
-            note = pgettext("atlanteans_building", "Will need cornnmeal and blackroot flour"),
+            note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour"),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
@@ -1636,7 +1638,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Smelting Works
             lore = pgettext("atlanteans_building", "We learned the smelting from our forefathers, a basic craftsmanship taming the fire and the ore into pure metals."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Smelting Works
-            lore_author = pgettext("atlanteans_building", "A member of the craftsman’s guild")
+            lore_author = pgettext("atlanteans_building", "A member of the smelters’ guild")
          }
       },
       {
@@ -1896,7 +1898,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Lore helptext for an atlantean production site: Tower
             lore = pgettext("atlanteans_building", "All the other tribes envy us for our towers, elegant outside, comfortable inside, still perfect for defense."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Tower
-            lore_author = pgettext("atlanteans_building", "Soldier handing over his duties to a younger one.")
+            lore_author = pgettext("atlanteans_building", "Soldier handing over his duties to a younger one")
 
          }
       },

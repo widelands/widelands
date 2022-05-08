@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-01 03:54+0000\n"
+"POT-Creation-Date: 2022-05-04 03:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -289,8 +289,8 @@ msgstr "Mar"
 msgid "Dec"
 msgstr "Jou"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -304,12 +304,12 @@ msgstr "Päävalikko"
 msgid "Tools"
 msgstr "Työkalut"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -499,10 +499,10 @@ msgstr "Tietoa"
 msgid "Click on a field to show information about it"
 msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -522,17 +522,17 @@ msgstr "Näytä rakennuspaikat"
 #. etc.) are removed
 #: ../../src/editor/editorinteractive.cc:426
 msgid "Hide Maximum Building Spaces"
-msgstr ""
+msgstr "Piilota suurimmat rakennuspaikat"
 
 #: ../../src/editor/editorinteractive.cc:427
 msgid "Show Maximum Building Spaces"
-msgstr ""
+msgstr "Näytä suurimmat rakennuspaikat"
 
 #: ../../src/editor/editorinteractive.cc:430
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
-msgstr ""
+msgstr "Kytke näytetäänkö suurimmat mahdolliset rakennuspaikat jotka ovat saatavilla jos kaikki kiinteät kappaleet (puut, kivet, yms.) poistetaan"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
@@ -624,7 +624,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Virhe tapahtui. Virheviesti on: \n\n%1$s\n\nOlisitko ystävällinen ja kertoisit meille tästä vikatilanteesta ja auttaisit meitä parantamaan Widelandsia. Ongelmaan liittyvät tulosteet löydät vakiotulosteesta (Windowsilla tiedostosta stdout.txt). Käytössäsi on Widelandsin ohjelmistoversio %2$s (%3$s).\nLiitäthän nämä tiedot virheraporttiisi."
 
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
@@ -651,7 +651,7 @@ msgstr "Tuntematon"
 
 #: ../../src/editor/editorinteractive.cc:1077
 msgid "Loading world…"
-msgstr "Lataan maailmaa..."
+msgstr "Ladataan maailmaa..."
 
 #: ../../src/editor/map_generator.cc:752
 msgid "Random Player"
@@ -831,7 +831,7 @@ msgstr "Kuvaus: %s"
 #. * TRANSLATORS: No add-ons enabled
 #: ../../src/editor/ui_menus/field_info_window.cc:251
 msgid "(none)"
-msgstr ""
+msgstr "(ei mitään)"
 
 #: ../../src/editor/ui_menus/field_info_window.cc:258
 #, c-format
@@ -841,7 +841,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/field_info_window.cc:262
 #, c-format
 msgid "Enabled Add-Ons: %s"
-msgstr ""
+msgstr "Käytössä olevat laajennukset: %s"
 
 #: ../../src/editor/ui_menus/help.cc:36 ../../src/ui_fsmenu/login_box.cc:238
 #: ../../src/ui_fsmenu/main.cc:1011 ../../src/wui/encyclopedia_window.cc:144
@@ -866,7 +866,7 @@ msgstr "Moninpeliskenaarioita"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:82
 #: ../../src/wui/mapdata.cc:183
 msgid "Singleplayer Scenarios"
-msgstr ""
+msgstr "Yksinpeliskenaariot"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:84
@@ -884,7 +884,7 @@ msgstr "Nykyinen hakemisto: %s"
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:68
 msgid "Display"
-msgstr ""
+msgstr "Näyttö"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:79
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:250
@@ -930,23 +930,23 @@ msgstr "Peruuta"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:108
 msgid "File names"
-msgstr ""
+msgstr "Tiedostonimet"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:109
 msgid "Map names"
-msgstr ""
+msgstr "Karttojen nimet"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:109
 msgid "Original map names"
-msgstr ""
+msgstr "Alkuperäiset karttojen nimet"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:113
 msgid "Translated map names"
-msgstr ""
+msgstr "Käännetyt karttojen nimet"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Klikkaa pelaajaa poistaaksesi"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/ui_fsmenu/addons/packager_box.cc:437
@@ -959,7 +959,7 @@ msgstr "Poista"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:62
 msgid "Delete this suggested team lineup"
-msgstr ""
+msgstr "Poista tämä ehdotettu kokoonpano"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/addons/packager.cc:76
@@ -978,11 +978,11 @@ msgstr "Teema"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:333
 msgid "Add lineup"
-msgstr ""
+msgstr "Lisää kokoonpano"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:334
 msgid "Add another suggested team lineup"
-msgstr ""
+msgstr "Lisää toinen ehdotettu kokoonpano"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:354
 msgid "Map name:"
@@ -1098,7 +1098,7 @@ msgstr "Ilmasto"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:108
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Maastotyyppien jakauma"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:128
 msgid "Water:"
@@ -1139,7 +1139,7 @@ msgstr "Kartan tunniste:"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:209
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:243
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:239
@@ -1189,7 +1189,7 @@ msgstr "Kartta on luotu. Tarkista viellä kahdesti pelaajien aloituspaikat varmi
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:608
 msgid "The Widelands Random Map Generator"
-msgstr ""
+msgstr "Widelandsin satunnaiskarttageneraattori"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:610
 msgid ""
@@ -1461,7 +1461,7 @@ msgstr "Nykyinen koko:"
 #: ../../src/game_io/game_loader.cc:69
 #, c-format
 msgid "Loading game: %1$s (%2$u/%3$d)"
-msgstr "Lataan peliä:%1$s(%2$u/%3$d)"
+msgstr "Ladataan peliä:%1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
 #: ../../src/map_io/map_saver.cc:101
@@ -1548,7 +1548,7 @@ msgstr "Widelands ei käynisty, koska näytönohjain tai sen ajuri on liian vanh
 #: ../../src/graphic/gl/initialize.cc:219
 #, c-format
 msgid "The %1$u version needs to be version %2$u.%3$u or newer."
-msgstr ""
+msgstr "%1$u täytyy olla versiota %2$u.%3$u tai uudempi."
 
 #. * TRANSLATORS: Basic error message when we can't handle the graphics
 #. driver.
@@ -1648,11 +1648,11 @@ msgstr "Kampanja"
 
 #: ../../src/logic/addons.cc:59
 msgid "Win Condition"
-msgstr ""
+msgstr "Voittoehto"
 
 #: ../../src/logic/addons.cc:61
 msgid "Starting Condition"
-msgstr ""
+msgstr "Aloitusasemat"
 
 #: ../../src/logic/addons.cc:104
 #, c-format
@@ -1661,12 +1661,12 @@ msgstr ""
 
 #: ../../src/logic/addons.cc:171
 msgid "No conflicts"
-msgstr ""
+msgstr "Ei ristiriitoja"
 
 #: ../../src/logic/addons.cc:176
 #, c-format
 msgid "%1$s (expected version %2$s, found %3$s)"
-msgstr ""
+msgstr "%1$s (odotettu versio %2$s, löytyi %3$s)"
 
 #: ../../src/logic/addons.cc:179 ../../src/logic/addons.cc:215
 #, c-format
@@ -1695,36 +1695,36 @@ msgstr "%s (puuttuu)"
 #: ../../src/logic/addons.cc:211
 #, c-format
 msgid "%1$s, %2$s (missing)"
-msgstr ""
+msgstr "%1$s, %2$s (puuttuu)"
 
 #: ../../src/logic/addons.cc:219
 #, c-format
 msgid "%1$s and %2$s: %3$s"
-msgstr ""
+msgstr "%1$s ja%2$s: %3$s"
 
 #: ../../src/logic/addons.cc:220
 #, c-format
 msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u puuttuva laajennus"
+msgstr[1] "%u puuttuvaa laajennusta"
 
 #: ../../src/logic/addons.cc:222
 #, c-format
 msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%ulaajennus on väärää versiota"
+msgstr[1] "%ulaajennusta jotka ovat väärää versiota"
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:233
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: ../../src/logic/addons.cc:237
 #, c-format
 msgid "%1$s<br>· %2$s (version %3$s)"
-msgstr ""
+msgstr "%1$s<br>· %2$s (versio %3$s)"
 
 #: ../../src/logic/editor_game_base.cc:252
 #, c-format
@@ -1733,19 +1733,19 @@ msgstr "Luodaan pelaajaa %d..."
 
 #: ../../src/logic/editor_game_base.cc:319
 msgid "Postloading world and tribes…"
-msgstr ""
+msgstr "Jälkiladataan maailmaa ja heimoja..."
 
 #: ../../src/logic/editor_game_base.cc:579
 msgid "Cleaning up for loading: Map objects (1/3)"
-msgstr "Siivoan lataamista varten: Karttakohteet (1/3)"
+msgstr "Siivotaan lataamista varten: Karttakohteet (1/3)"
 
 #: ../../src/logic/editor_game_base.cc:585
 msgid "Cleaning up for loading: Players (2/3)"
-msgstr "Siivoan lataamista varten: Pelaajat (2/3)"
+msgstr "Siivotaan lataamista varten: Pelaajat (2/3)"
 
 #: ../../src/logic/editor_game_base.cc:588
 msgid "Cleaning up for loading: Map (3/3)"
-msgstr "Siivoan lataamista varten: Kartta (3/3)"
+msgstr "Siivotaan lataamista varten: Kartta (3/3)"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:152
@@ -1779,7 +1779,7 @@ msgstr "Widelands ei voinut aloittaa peliä, koska pelaajalla %u ei ole aloituss
 
 #: ../../src/logic/game.cc:739
 msgid "Initializing…"
-msgstr ""
+msgstr "Alustetaan..."
 
 #: ../../src/logic/game.cc:1182
 msgid "Trade Offer"
@@ -1793,7 +1793,7 @@ msgstr "Tälle torille on saapunut uusi vaihtotarjous."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it’s a new version that can’t be handled yet."
-msgstr ""
+msgstr "Tämä peli tallennettiin vanhemmalla WIdelandsin versiolla eikä sitä voida enää ladata, tai se on uudemmasta versiosta jota ei osata käsitellä."
 
 #: ../../src/logic/generic_save_handler.cc:220
 #: ../../src/logic/generic_save_handler.cc:224
@@ -1911,8 +1911,8 @@ msgstr[1] "%1% sotilasta (+%2%)"
 #: ../../src/logic/map_objects/tribes/militarysite.cc:425
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -2237,7 +2237,7 @@ msgstr "Logiikkavirhe"
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Loading %1%: %2% (%3%/%4%)"
-msgstr "Lataan %1%: %2% (%3%/%4%)"
+msgstr "Ladataan %1%: %2% (%3%/%4%)"
 
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:174
 #: ../../src/wui/minimap.cc:210
@@ -2316,15 +2316,15 @@ msgstr "Uusi varastorakennus käytettävissä."
 #. * available)
 #: ../../src/logic/map_objects/tribes/warehouse.cc:643
 msgid "Waterway"
-msgstr ""
+msgstr "Vesiväylä"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:644
 msgid "Waterway destroyed"
-msgstr ""
+msgstr "Vesiväylä tuhottu"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:645
 msgid "A waterway had to be destroyed to make room for your new port dock."
-msgstr ""
+msgstr "Vesiväylä oli tuhottava uuden telakan tieltä"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1114
 msgid "A geologist found resources."
@@ -2333,7 +2333,7 @@ msgstr "Geologi löysi kaivettavaa."
 #: ../../src/logic/map_objects/tribes/worker.cc:2068
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Sinun %s ei löydä reittiä kotiin ja todennäköisesti kuolee."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
 #: ../../src/logic/map_objects/tribes/worker.cc:2073
@@ -2541,7 +2541,7 @@ msgstr "Kartta on Bluebyten Settlers II -muotoinen. Kommenttia ei ole määritel
 #: ../../src/map_io/widelands_map_loader.cc:195
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
-msgstr "Lataan karttaa: %1$s(%2$u/%3$d)"
+msgstr "Ladataan karttaa: %1$s(%2$u/%3$d)"
 
 #: ../../src/map_io/widelands_map_loader.cc:290
 msgid "Territories"
@@ -2617,7 +2617,7 @@ msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-
 
 #: ../../src/network/gameclient.cc:1281
 msgid "Disconnected"
-msgstr ""
+msgstr "Yhteys katkaistu"
 
 #: ../../src/network/gameclient.cc:1282
 #, c-format
@@ -2777,7 +2777,7 @@ msgstr "Tervetuloa Widelandsin Metaserverille!"
 msgid ""
 "You have been logged in as ‘%s’ since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Sinut on kirjattu sisään nimellä '%s' sillä pyytämäsi nimi on jo käytössä tai varattu."
 
 #: ../../src/network/internet_gaming.cc:445
 msgid "Our forums can be found at:"
@@ -3127,7 +3127,7 @@ msgstr "Asiakas %1$s ei ole vastannut yli %2$s."
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Client %s is cheating!"
-msgstr ""
+msgstr "Asiakas %s huijaa! "
 
 #: ../../src/network/network_lan_promotion.cc:357
 msgid "Failed to use the local network!"
@@ -3149,11 +3149,11 @@ msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/color_chooser.cc:245
 msgid "Choose Color…"
-msgstr ""
+msgstr "Valitse väri..."
 
 #: ../../src/ui_basic/color_chooser.cc:281
 msgid "Initial Color"
-msgstr ""
+msgstr "Alustava väri"
 
 #. * TRANSLATORS: First letter of the word "Red"
 #: ../../src/ui_basic/color_chooser.cc:290
@@ -3175,7 +3175,7 @@ msgstr ""
 
 #: ../../src/ui_basic/color_chooser.cc:318
 msgid "Default Color"
-msgstr ""
+msgstr "Oletusväri"
 
 #: ../../src/ui_basic/color_chooser.cc:329
 msgid "Red"
@@ -3283,7 +3283,7 @@ msgstr "Tietoa Widelandsista"
 
 #: ../../src/ui_fsmenu/about.cc:57 ../../src/ui_fsmenu/about.cc:62
 msgid "Lua Error"
-msgstr ""
+msgstr "Lua-virhe"
 
 #: ../../src/ui_fsmenu/about.cc:71 ../../src/ui_fsmenu/addons/packager.cc:144
 msgid "Version:"
@@ -3333,11 +3333,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:91
 msgid "Home Directory:"
-msgstr ""
+msgstr "Kotihakemisto:"
 
 #: ../../src/ui_fsmenu/about.cc:92
 msgid "Configuration File:"
-msgstr ""
+msgstr "Asetustiedosto:"
 
 #: ../../src/ui_fsmenu/about.cc:93
 msgid "Data Directory:"
@@ -3353,19 +3353,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:102 ../../src/ui_fsmenu/about.cc:149
 msgid "Technical Info"
-msgstr ""
+msgstr "Tekniset tiedot"
 
 #: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy"
-msgstr ""
+msgstr "Kopio"
 
 #: ../../src/ui_fsmenu/about.cc:132
 msgid "Copy the technical report to the clipboard"
-msgstr ""
+msgstr "Kopioi tekninen raportti leikepöydälle"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
 msgid "Contact Form"
-msgstr ""
+msgstr "Yhteyslomake"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:48
 msgid "Send message"
@@ -3373,7 +3373,7 @@ msgstr "Lähetä viesti"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:72
 msgid "Send Message"
-msgstr ""
+msgstr "Lähetä viesti"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:73
 msgid "Send this message now?"
@@ -3396,11 +3396,11 @@ msgid ""
 "Your message has been sent to the Widelands Development Team, and we will "
 "respond as soon as we can. Don’t forget to check your website inbox "
 "frequently."
-msgstr ""
+msgstr "Viestisi on lähetetty Widelandsin kehitystiimille ja vastaamme niin pian kuin voimme. Älä unohda tarkastaa verkkosivun postilaatikkoasi usein."
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Kirjaudu"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:69
 #: ../../src/ui_fsmenu/addons/manager.cc:232
@@ -3420,7 +3420,7 @@ msgstr "Rekisteröidyn tunnuksen käyttäminen edellyttää  Widelandsin verkkos
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:82
 msgid "Username:"
-msgstr ""
+msgstr "Käyttäjänimi:"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:87
 #: ../../src/ui_fsmenu/login_box.cc:52
@@ -3451,11 +3451,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:97
 msgctxt "quality"
 msgid "Any"
-msgstr ""
+msgstr "Mikä tahansa"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:97
 msgid "Quality not yet evaluated"
-msgstr ""
+msgstr "Laatua ei ole vielä arvioitu"
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:103
@@ -3509,11 +3509,11 @@ msgstr "Vähimmäislaatu"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:204
 msgid "Choose add-on to upload…"
-msgstr ""
+msgstr "Lataa laajennus..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:215
 msgid "Upload a screenshot…"
-msgstr ""
+msgstr "Lataa kuvakaappaus..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:222
 msgid "Understood and confirmed"
@@ -3527,15 +3527,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:233
 msgid "Reset the filters"
-msgstr ""
+msgstr "Nollaa suodattimet"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:249
 msgid "Refresh"
-msgstr ""
+msgstr "Päivitä"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:250
 msgid "Refresh the list of add-ons available from the server"
-msgstr ""
+msgstr "Päivitä laajennukset palvelimelta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:267
 msgid "Fix dependencies…"
@@ -3543,7 +3543,7 @@ msgstr "Korjaa riippuvuudet..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:268
 msgid "Try to automatically fix the dependency errors"
-msgstr ""
+msgstr "Yritä korjata riippuvuusongelmat automaattisesti"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:278
 msgid "Move selected add-on to top"
@@ -3589,7 +3589,7 @@ msgstr ""
 msgid ""
 "For more information regarding how to develop and package your own add-ons, "
 "please visit %s."
-msgstr ""
+msgstr "Lisää tietoja laajennusten kehittämisestä ja paketoinnista löydät osoitteesta %s."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
 msgid "Open Link"
@@ -3597,7 +3597,7 @@ msgstr "Avaa linkki"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:364
 msgid "Copy Link"
-msgstr ""
+msgstr "Kopioi linkki"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:387
 msgid ""
@@ -3654,7 +3654,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:490
 msgid "Development"
-msgstr ""
+msgstr "Kehitys"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
 #: ../../src/ui_fsmenu/addons/manager.cc:493
@@ -3709,8 +3709,8 @@ msgstr "Kytke kategoria '%s' päälle/pois"
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Haluatko varmasti päivittää tämän %ulaajennuksen?"
+msgstr[1] "Haluatko varmasti päivittää nämä %u laajennusta?"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:622
 #, c-format
@@ -3741,7 +3741,7 @@ msgstr "Ei kirjaantuneena sisään"
 msgid ""
 "Click to log in. You can then comment and vote on add-ons and upload your "
 "own add-ons."
-msgstr ""
+msgstr "Klikkaa kirjautuaksesi sisään. Voit sitten kommentoida ja äänestää laajennuksia sekä ladata omiasi palvelimelle."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:771
 msgid "Please log in to upload add-ons"
@@ -3763,11 +3763,11 @@ msgstr "Kirjautuneena käyttäjänä %s"
 #: ../../src/ui_fsmenu/addons/manager.cc:780
 #, c-format
 msgid "Logged in as %s (admin)"
-msgstr ""
+msgstr "Kirjautunut käyttäjänä %s (admin)"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:781
 msgid "Click to log out"
-msgstr ""
+msgstr "Klikkaa kirjautuaksesi ulos"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:786
 msgid "Please tick the confirmation checkbox to upload add-ons"
@@ -3779,7 +3779,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:816
 msgid "Server Error"
-msgstr ""
+msgstr "Palvelinvirhe"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:817
 #, c-format
@@ -3791,14 +3791,14 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:825
 msgid "Wrong Password"
-msgstr ""
+msgstr "Väärä salasana"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:826
 #, c-format
 msgid ""
 "The entered username or password is invalid:\n"
 "%s"
-msgstr ""
+msgstr "Käyttäjätunnus tai salasana ei kelpaa:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:923
 #, c-format
@@ -3807,17 +3807,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:926
 msgid "Connecting to the server…"
-msgstr ""
+msgstr "Muodostaa yhteyttä palvelimelle..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:949
 msgid "Server Connection Error"
-msgstr ""
+msgstr "Palvelimen yhteysvirhe"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
 #: ../../src/ui_fsmenu/addons/manager.cc:951
 msgid "a networking bug"
-msgstr ""
+msgstr "verkkovirhe"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:952
 #, c-format
@@ -3889,7 +3889,7 @@ msgid ""
 "An enabled add-on is defective. No games can be started with the current configuration.\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Käytössä oleva laajennus on viallinen. Pelejä ei voida käynnistää nykyisellä konfiguraatiolla.\nVirheviesti:\n%s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1247
 #, c-format
@@ -3902,26 +3902,26 @@ msgstr[1] "%u Riippuvuusvirhettä"
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
-msgstr ""
+msgstr "Riippuvuusvirheitä sisältävät laajennukset saattavat toimia väärin tai estää pelejä ja karttoja latautumasta."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1368
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its version (%2$s) is not "
 "newer than the version present on the server (%3$s)."
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voida ladata koska sen versio (%2$s) ei ole uudempi kuin palvelimella oleva nykyinen versio (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1379
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be uploaded because its category (%2$s) does not "
 "match the category of the version present on the server (%3$s)."
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voida ladata koska sen kategoria (%2$s) ei täsmää palvelimella olevan katekogrian kanssa (%3$s)."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1390
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:55
 msgid "Upload"
-msgstr ""
+msgstr "Lataa"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1391
 #, c-format
@@ -3931,7 +3931,7 @@ msgstr "Haluatko ladata laajennuksen ‘%s’ palvelimelle?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1400
 #, c-format
 msgid "Uploading ‘%s’…"
-msgstr ""
+msgstr "Ladataan '%s'..."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1407
 #: ../../src/ui_fsmenu/addons/manager.cc:1461
@@ -3946,12 +3946,12 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voitu ladata palvelimelle.\n\nVirheviesti:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1441
 #, c-format
 msgid "Downloading ‘%s’…"
-msgstr ""
+msgstr "Ladataan ‘%s’…"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1477
 #, c-format
@@ -3960,7 +3960,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%2$s"
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voitu ladata palvelimelta. Laajennuksen asentaminen/päivittäminen sivuutetaan.\n\nVirheviesti:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1554
 #, c-format
@@ -3974,11 +3974,11 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1623
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
-msgstr ""
+msgstr "Edellytettyä laajennusta '%s' ei löytynyt palvelimelta."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:50
 msgid "Add-Ons Packager"
-msgstr ""
+msgstr "Laajennusten paketoija"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:77
 msgid "New add-on"
@@ -4008,15 +4008,15 @@ msgstr "Kirjoitetaan laajennuksia..."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:115
 msgid "Please be patient while your changes are written."
-msgstr ""
+msgstr "Odota, muutoksiasi kirjoitetaan."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:134
 msgid "Name:"
-msgstr ""
+msgstr "Nimi:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:139
 msgid "Author:"
-msgstr ""
+msgstr "Tekijä:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:313
 msgid "New Add-On"
@@ -4024,7 +4024,7 @@ msgstr "Uusi laajennus"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:314
 msgid "Enter the name for the new add-on."
-msgstr ""
+msgstr "Anna uuden laajennuksen nimi."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:316
 msgid "Category"
@@ -4037,7 +4037,7 @@ msgstr "Kategoria"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:417
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "Invalid Name"
-msgstr ""
+msgstr "Epäkelpo nimi"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:338
 #: ../../src/ui_fsmenu/addons/packager_box.cc:403
@@ -4050,13 +4050,13 @@ msgstr "Nimi ei kelpaa. Syy: %s\n\nValitse toinen nimi."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:353
 msgid "An add-on with this internal name already exists."
-msgstr ""
+msgstr "Samaa sisäistä nimeä käyttävä laajennus on jo olemassa."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:358
 msgid ""
 "An add-on with this internal name was deleted recently. Please commit your "
 "changes before using this name again."
-msgstr ""
+msgstr "Tällä sisäisellä nimellä luotu laajennus poistettiin hiljattain. Tee muutoksesi pysyviksi ennen kuin käytät tätä nimeä uudelleen."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:384
 msgid "Delete Add-on"
@@ -4073,7 +4073,7 @@ msgid ""
 "Do you really want to delete the local add-on ‘%s’?\n"
 "\n"
 "Note that this add-on can not be downloaded again from the server."
-msgstr ""
+msgstr "Haluatko varmasti poistaa paikallisen laajennuksen ‘%s’?\n\nHuomioi että tätä laajennusta ei voida ladata uudelleen palvelimelta."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:408
 #, c-format
@@ -4083,8 +4083,8 @@ msgid ""
 msgid_plural ""
 "If you quit the packager now, all changes to the following %u add-ons will "
 "be discarded."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Jos poistut paketoijasta nyt, kaikki muutokset seuraavaan 1%u laajennukseen hylätään."
+msgstr[1] "Jos poistut paketoijasta nyt, kaikki muutokset seuraaviin %u laajennukseen hylätään."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:417
 #: ../../src/ui_fsmenu/addons/packager.cc:444
@@ -4097,12 +4097,12 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:420
 msgid "Quit Packager"
-msgstr ""
+msgstr "Poistu paketoijasta"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:435
 #, c-format
 msgid "Do you really want to discard all changes to the add-on ‘%s’?"
-msgstr ""
+msgstr "Haluatko varmasti hylätä kaikki laajennukseen '%s' tehdyt muutokset?"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:439
 #, c-format
@@ -4114,7 +4114,7 @@ msgstr[1] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:448
 msgid "Discard Changes"
-msgstr ""
+msgstr "Hylkää muutokset"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:460
 #, c-format
@@ -4135,36 +4135,36 @@ msgstr[1] ""
 msgid ""
 "Warning: If you manually edited any files in this add-on, your changes may "
 "be overwritten!"
-msgstr ""
+msgstr "Varoitus: Jos muokkasit mitään tämän laajennuksen tiedostoja käsin, muutoksesi voidaan ylikirjoittaa!"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:476
 msgid "Confirm Saving"
-msgstr ""
+msgstr "Vahvista tallentaminen"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:530
 msgid "Invalid Version"
-msgstr ""
+msgstr "Epäkelpo versio"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:531
 #, c-format
 msgid ""
 "‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved."
-msgstr ""
+msgstr "‘%1$s’ ei ole kelpo versiomerkkijono. Laajennusta ‘%2$s’ ei tallenneta."
 
 #: ../../src/ui_fsmenu/addons/packager.cc:540
 msgid "Error Writing Addon"
-msgstr ""
+msgstr "Virhe kirjoitettaessa laajennusta"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:541
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ can not be saved to disk:\n"
 "%2$s"
-msgstr ""
+msgstr "Laajennusta ‘%1$s’ ei voida tallentaa levylle:\n%2$s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:56
 msgid "Invalid filename"
-msgstr ""
+msgstr "Epäkelpo tiedostonimi"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:59
 msgid "Name too long"
@@ -4173,7 +4173,7 @@ msgstr "Liian pitkä nimi"
 #: ../../src/ui_fsmenu/addons/packager_box.cc:64
 #, c-format
 msgid "Invalid character ‘%c’"
-msgstr ""
+msgstr "Virheellinen merkki '%c'"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:69
 #, c-format
@@ -4208,7 +4208,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:200
 msgid "Directory Tree"
-msgstr ""
+msgstr "Hakemistopuu"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:273
 #: ../../src/ui_fsmenu/main.cc:423
@@ -4237,11 +4237,11 @@ msgstr "Pelaajia: %s"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:311
 msgid "Top-level directory"
-msgstr ""
+msgstr "Ylätason hakemisto"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:372
 msgid "Zipped Map"
-msgstr ""
+msgstr "Zip-pakattu kartta"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:373
 #, c-format
@@ -4249,7 +4249,7 @@ msgid ""
 "The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
 "\n"
 "Do you want to add this map anyway?"
-msgstr ""
+msgstr "Kartta '%s' ei ole hakemisto. Harkitse asetuksen ‘Pakkaa Widelandsin datatiedostot’ käytöstä poistoa ja kartan uudelleen tallentamista editorissa.\n\nHaluatko lisätä tämän kartan siitä huolimatta?"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:389
 msgid "New Directory"
@@ -4265,7 +4265,7 @@ msgid ""
 "Directories may not use the extension ‘%s’.\n"
 "\n"
 "Please choose a different name."
-msgstr ""
+msgstr "Hakemistot eivät voi käyttää päätettä ‘%s’.\n\nValitse toinen nimi."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:423
 msgid "A directory with this name already exists."
@@ -4295,7 +4295,7 @@ msgstr "Vaikeustaso:"
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:523
 msgid "The campaigns difficulty. One word."
-msgstr ""
+msgstr "Kampanjan vaikeusaste yhdellä sanalla."
 
 #: ../../src/ui_fsmenu/addons/packager_box.cc:524
 msgid "Short description, which will be appended to the difficulty."
@@ -4303,7 +4303,7 @@ msgstr "Lyhyt kuvaus, joka lisätään vaikeustasoon."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:65
 msgid "Edit…"
-msgstr ""
+msgstr "Muokkaa..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:90
 msgid "Are you sure you want to delete this comment?"
@@ -4384,7 +4384,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:247
 msgid "Tiny"
-msgstr ""
+msgstr "Pikkuruinen"
 
 #. * TRANSLATORS: Short for Small text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:251
@@ -4394,7 +4394,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:251
 msgid "Small"
-msgstr ""
+msgstr "Pieni"
 
 #. * TRANSLATORS: Short for Medium text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:255
@@ -4410,7 +4410,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:259
 msgid "Large"
-msgstr ""
+msgstr "Suuri"
 
 #. * TRANSLATORS: Short for Huge text markup
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:263
@@ -4420,7 +4420,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:263
 msgid "Huge"
-msgstr ""
+msgstr "Jättimäinen"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:294
 #, c-format
@@ -4429,7 +4429,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%s"
-msgstr ""
+msgstr "Kommenttia ei voitu lähettää.\n\nVirheviesti:\n%s"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:312
 msgid "Preview:"
@@ -4437,42 +4437,42 @@ msgstr "Esikatselu:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:337
 msgid "The comment contains invalid richtext markup:"
-msgstr ""
+msgstr "Kommentti sisältää kelvotonta richtext-merkkausta:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:382
 msgctxt "tx"
 msgid "Priority:"
-msgstr ""
+msgstr "Prioriteetti:"
 
 #. * TRANSLATORS: "Resource" here refers to the name of a translation unit
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:390
 msgctxt "tx"
 msgid "Resource Name:"
-msgstr ""
+msgstr "Resurssin nimi:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:396
 msgctxt "tx"
 msgid "Categories (whitespace-separated; characters only):"
-msgstr ""
+msgstr "Kategoriat (välein eroteltu, vain kirjaimia):"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:403
 msgid "This may take several minutes. Please be patient."
-msgstr ""
+msgstr "Tässä voi kestää useita minuutteja. Odota kärsivällisesti."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:408
 msgctxt "priority"
 msgid "Low"
-msgstr ""
+msgstr "Matala"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:409
 msgctxt "priority"
 msgid "Normal"
-msgstr ""
+msgstr "Tavallinen"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:410
 msgctxt "priority"
 msgid "High"
-msgstr ""
+msgstr "Korkea"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
 msgid "Please explain why you are deleting this add-on."
@@ -4481,28 +4481,28 @@ msgstr "Kerro miksi poistat tämän laajennuksen."
 #. * TRANSLATORS: This add-on has not yet been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
 msgid "Unchecked"
-msgstr ""
+msgstr "Tarkistamaton"
 
 #. * TRANSLATORS: This add-on has been verified
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:419
 msgid "Verified"
-msgstr ""
+msgstr "Varmistettu"
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 msgid "Desyncs"
-msgstr ""
+msgstr "Aiheuttaa tahdistusvirheitä"
 
 #. * TRANSLATORS: This add-on will not cause desyncs
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
 msgid "Sync-safe"
-msgstr ""
+msgstr "Tahdistusturvallinen"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:615
 msgid "Your vote"
-msgstr ""
+msgstr "Äänesi"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:639
 msgid "Next screenshot"
@@ -4518,11 +4518,11 @@ msgstr "Kirjoita kommentti..."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
 msgid "Administrator actions"
-msgstr ""
+msgstr "Pääkäyttäjän toimet"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:673
 msgid "Not voted"
-msgstr ""
+msgstr "Ei äänestetty"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
 #, c-format
@@ -4538,7 +4538,7 @@ msgstr "Kuvakaappaukset (%u)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 msgid "Change verification status"
-msgstr ""
+msgstr "Muuta varmistuksen tilaa"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
 msgid "Change quality rating"
@@ -4546,11 +4546,11 @@ msgstr "Muuta laatuluokitusta"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
 msgid "Change sync-safety status"
-msgstr ""
+msgstr "Vaihda tahdistusturvallisuuden tilaa"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
 msgid "Configure Transifex integration"
-msgstr ""
+msgstr "Määritä Transifexin liittäminen"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
 #, c-format
@@ -4567,8 +4567,8 @@ msgstr "Äänet (%u)"
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Keskimääräinen arvosana: %1$.3f (%2$u ääni)"
+msgstr[1] "Keskimääräinen arvosana: %1$.3f (%2$u ääntä)"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
@@ -4599,7 +4599,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
-msgstr ""
+msgstr "‘%1$s’ kommentoi versiota %2$s:"
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:898
 #, c-format
@@ -4608,7 +4608,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:934
 msgid "This screenshot could not be fetched from the server due to an error."
-msgstr ""
+msgstr "Virhe haettaessa kuvakaappausta palvelimelta."
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
 msgid "Please log in to comment"
@@ -4653,7 +4653,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:97
 msgid ""
 "This add-on is known to cause desyncs in multiplayer games and replays."
-msgstr ""
+msgstr "Tämä laajennus tunnetusti aiheuttaa tahdistusvirheitä moninpeleissä ja uusinnoissa."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:103
 #, c-format
@@ -4668,7 +4668,7 @@ msgstr "Vaatii enintään Widelands-version %s."
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:107
 #, c-format
 msgid "Requires a Widelands version of at least %1$s and at most %2$s."
-msgstr ""
+msgstr "Vaatii vähintään Widelands-version %1$s ja enintään %2$s."
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:150
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:198
@@ -4712,14 +4712,14 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:449
 #, c-format
 msgid "Category: %s"
-msgstr ""
+msgstr "Kategoria: %s"
 
 #. * TRANSLATORS: (MajorVersion)+(MinorVersion)
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:216
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:452
 #, c-format
 msgid "Version: %1$s+%2$u"
-msgstr ""
+msgstr "Versio: %1$s+%2$u"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:273
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:384
@@ -4733,7 +4733,7 @@ msgstr "Päivitä"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:300
 msgid "Comments and Votes"
-msgstr ""
+msgstr "Kommentit ja äänet"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments ·
@@ -4746,7 +4746,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:369
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
-msgstr ""
+msgstr "Tekijältä %1$s (%2$s:n lataama)"
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:386
 #, c-format
@@ -4773,7 +4773,7 @@ msgid ""
 "Available version: %5$s\n"
 "Category: %6$s\n"
 "%7$s"
-msgstr ""
+msgstr "Oletko varma että haluat päivittää tämän laajennuksen?\n\n%1$s\ntekijältä %2$s\n%3$s\nAsennettu versio: %4$s\nSaatavilla oleva versio: %5$s\nKategoria: %6$s\n%7$s "
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:457
 msgid "Verified by the Widelands Development Team"
@@ -4816,7 +4816,7 @@ msgstr[1] "%u kuvakaappausta"
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:42
 #, c-format
 msgid "Upload Screenshot for ‘%s’"
-msgstr ""
+msgstr "Lataa kuvakaappaus '%s':lle"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:95
@@ -4829,7 +4829,7 @@ msgstr "Kuvaus"
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:108
 msgid "Uploading…"
-msgstr ""
+msgstr "Ladataan..."
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:125
 #, c-format
@@ -4838,7 +4838,7 @@ msgid ""
 "\n"
 "Error Message:\n"
 "%3$s"
-msgstr ""
+msgstr "Kuvakaappausta ‘%1$s’ laajennukselle ‘%2$s’ ei voitu ladata palvelimelle.\n\nVirheviesti:\n%3$s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:33
 msgid "Choose Campaign"
@@ -4975,7 +4975,7 @@ msgstr "Paina uutta pikanäppäintä tai sulje tämä ikkuna peruuttaaksesi."
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:132
 msgid "(unused)"
-msgstr ""
+msgstr "(käyttämätön)"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:210
 msgid "Edit Keyboard And Mouse Actions"
@@ -4983,11 +4983,11 @@ msgstr "Muokkaa näppäimistö- ja hiiritoimintoja"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:221
 msgid "Reset all"
-msgstr ""
+msgstr "Nollaa kaikki"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:222
 msgid "Reset all to defaults"
-msgstr ""
+msgstr "Nollaa kaikki oletusasetuksille"
 
 #. * TRANSLATORS: This is a button label for a keyboard shortcut in the form
 #. "Action: Key"
@@ -4998,7 +4998,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:263
 msgid "Keyboard Shortcut Conflict"
-msgstr ""
+msgstr "Pikanäppäinristiriita"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:265
 #, c-format
@@ -5006,7 +5006,7 @@ msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
 "action: ‘%2$s’. Please select a different shortcut or change the conflicting"
 " shortcut first."
-msgstr ""
+msgstr "Valitsemasi pikanäppäin (‘%1$s’) on jo käytössä toiminnolle ‘%2$s’. Valitse toinen pikanäppäin tai vaihda ristiriidassa olevan toiminnon pikanäppäin ensin toiseen."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
@@ -5017,7 +5017,7 @@ msgstr "Yleistä"
 #: ../../src/ui_fsmenu/keyboard_options.cc:294
 #: ../../src/wlapplication_options.cc:254
 msgid "Editor"
-msgstr ""
+msgstr "Editori"
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:298
 msgid "Fastplace"
@@ -5025,11 +5025,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/keyboard_options.cc:300
 msgid "Mouse Scrolling"
-msgstr ""
+msgstr "Hiiren vieritys"
 
 #: ../../src/ui_fsmenu/launch_game.cc:42
 msgid "Launch Game"
-msgstr ""
+msgstr "Käynnistä peli"
 
 #: ../../src/ui_fsmenu/launch_game.cc:52
 msgid "Configure this game"
@@ -5038,7 +5038,7 @@ msgstr "Pelin konfigurointi"
 #: ../../src/ui_fsmenu/launch_game.cc:64
 msgid ""
 "An enabled add-on is known to cause desyncs. No replay will be written."
-msgstr ""
+msgstr "Käytössä on laajennus joka voi aiheuttaa tahdistusvirheitä. Uusintaa ei tallenneta."
 
 #: ../../src/ui_fsmenu/launch_game.cc:79
 msgid "Peaceful mode"
@@ -5078,15 +5078,15 @@ msgstr "Kiellä taistelut pelaajien välillä"
 
 #: ../../src/ui_fsmenu/launch_game.cc:221
 msgid "All selected starting conditions ignore the map’s starting positions"
-msgstr ""
+msgstr "Kaikki valitut aloitusehdot sivuuttavat kartan aloitussijainnit"
 
 #: ../../src/ui_fsmenu/launch_game.cc:226
 msgid "The starting positions are set by the scenario"
-msgstr ""
+msgstr "Aloitussijainnit on asetettu skenaariossa"
 
 #: ../../src/ui_fsmenu/launch_game.cc:228
 msgid "The starting positions are set by the saved game"
-msgstr ""
+msgstr "Aloitussijainnit on määritelty tallennuksessa"
 
 #: ../../src/ui_fsmenu/launch_game.cc:231
 msgid ""
@@ -5168,7 +5168,7 @@ msgstr "Valittua tiedostoa ei löydy. Jollei se siirry automaattisesti sinulle, 
 #: ../../src/ui_fsmenu/launch_mpg.cc:293
 #, c-format
 msgid "Unable to load the win condition script file ‘%s’."
-msgstr ""
+msgstr "Ei pystytty lataamaan voittoehtojen skriptitiedostoa ‘%s’."
 
 #. * TRANSLATORS: This is a heading for a help window
 #: ../../src/ui_fsmenu/launch_mpg.cc:420
@@ -5177,11 +5177,11 @@ msgstr "Moninpeli asetukset"
 
 #: ../../src/ui_fsmenu/loadgame.cc:42
 msgid "Choose Game"
-msgstr ""
+msgstr "Valitse peli"
 
 #: ../../src/ui_fsmenu/loadgame.cc:42
 msgid "Choose Replay"
-msgstr ""
+msgstr "Valitse uusinta"
 
 #: ../../src/ui_fsmenu/loadgame.cc:65
 msgid "Show Filenames"
@@ -5261,7 +5261,7 @@ msgid ""
 "Unable to create a Game instance!\n"
 "Error message:\n"
 "%s"
-msgstr ""
+msgstr "Ei pystytty luomaan peliä!\n\nVirheviesti:\n%s"
 
 #: ../../src/ui_fsmenu/main.cc:320
 msgid "Begin a new game"
@@ -5340,7 +5340,7 @@ msgstr "Verkkopeli"
 
 #: ../../src/ui_fsmenu/main.cc:385
 msgid "Join the Widelands lobby"
-msgstr ""
+msgstr "Liity Widelandsin aulaan"
 
 #: ../../src/ui_fsmenu/main.cc:388
 msgid "Log in as a registered user"
@@ -5352,7 +5352,7 @@ msgstr "LAN / Suora IP-osoite -peli"
 
 #: ../../src/ui_fsmenu/main.cc:391
 msgid "Play a private online game"
-msgstr ""
+msgstr "Pelaa yksityinen verkkopeli"
 
 #: ../../src/ui_fsmenu/main.cc:394
 msgid "Create a new empty map"
@@ -5384,7 +5384,7 @@ msgstr "Editori..."
 
 #: ../../src/ui_fsmenu/main.cc:444
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "Aloita tai lataa yksinpelikampanja tai vapaamuotoinen peli"
 
 #: ../../src/ui_fsmenu/main.cc:447
 msgid "Play with your friends over the internet"
@@ -5450,7 +5450,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:813
 msgid "An enabled add-on is known to cause desyncs. Proceed at your own risk."
-msgstr ""
+msgstr "Käytössä oleva laajennus tunnetusti aiheuttaa tahdistusvirheitä. Etene omalla vastuullasi."
 
 #: ../../src/ui_fsmenu/main.cc:915 ../../src/ui_fsmenu/netsetup_lan.cc:324
 msgid "No tribes found!"
@@ -5458,12 +5458,12 @@ msgstr "Heimoja ei löytynyt!"
 
 #: ../../src/ui_fsmenu/main.cc:916 ../../src/ui_fsmenu/netsetup_lan.cc:325
 msgid "No tribes found in data/tribes/initialization/[tribename]/init.lua."
-msgstr ""
+msgstr "Heimoja ei löytynyt tiedostosta data/tribes/initialization/[tribename]/init.lua."
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:38
 #, c-format
 msgid "invalid tribe ‘%s’"
-msgstr ""
+msgstr "Epäkelpo heimo '%s'"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:51
 msgid "Saved Players"
@@ -5472,13 +5472,13 @@ msgstr "Tallennetut Pelaajat"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:58
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Pelaaja %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:81
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Pelaaja %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:107
 msgid "Map Details"
@@ -5561,13 +5561,13 @@ msgstr "Vaakavieritys"
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:63
 msgid "Any scroll"
-msgstr ""
+msgstr "Mikä tahansa vieritys"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:144
 msgid "(plain)"
-msgstr ""
+msgstr "(pelkkä)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:198
@@ -5595,7 +5595,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:274
 msgid "Scroll Setting Conflict"
-msgstr ""
+msgstr "Vieritysasetusten ristiriita"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
@@ -5609,17 +5609,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:337
 msgid "Reset Scrolling"
-msgstr ""
+msgstr "Nollaa vierittäminen"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:338
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
-msgstr ""
+msgstr "Nollaa vieritysasetukset tavalliselle rullahiirelle tarkoitetuille vakioarvoille"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:347
 msgid "Set for Touchpad"
-msgstr ""
+msgstr "Aseta kosketuslevylle"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:348
 msgid ""
@@ -5629,11 +5629,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:358
 msgid "Apply Scrolling"
-msgstr ""
+msgstr "Aseta vieritys"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:359
 msgid "Apply scroll settings"
-msgstr ""
+msgstr "Aseta vieritysasetukset"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
@@ -5667,30 +5667,30 @@ msgstr "Vaihda editorin työkalukokoa"
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:414
 msgid "Invert scroll direction for map zooming:"
-msgstr ""
+msgstr "Päinvastainen vierityssuunta kartan kohdentamiselle:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:419
 msgid "Invert scroll direction for tab switching:"
-msgstr ""
+msgstr "Päinvastainen vierityssuunta välilehtien vaihtamiselle:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
 #: ../../src/ui_fsmenu/mousewheel_options.cc:424
 msgid "Invert scroll direction for increase/decrease:"
-msgstr ""
+msgstr "Päinvastainen vierityssuunta lisäämiselle/vähentämiselle:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:466
 msgid "Scroll Settings Conflict"
-msgstr ""
+msgstr "Vieritysasetusten ristiriita"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:467
 #, c-format
 msgid ""
 "‘%1$s’ or ‘%2$s’ conflicts with the recommended settings. Change the "
 "conflicting setting(s) too?"
-msgstr ""
+msgstr "‘%1$s’ tai ‘%2$s’ ovat ristiriidassa suositeltujen asetusten kanssa. Vaihdetaanko myös ristiriitaiset asetukset?"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:56
 msgid "Role"
@@ -5698,13 +5698,13 @@ msgstr "Rooli"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:99
 msgid "Divergent Player Name"
-msgstr ""
+msgstr "Eriävä pelaajan nimi"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:101
 msgid ""
 "The player name of the selected slot (%1%) does not match your own (%2%). "
 "Are you sure that you want to occupy this slot?"
-msgstr ""
+msgstr "Valitun pelipaikan pelaajan nimi (%1%) ei täsmää oman nimesi kanssa (%2%). Haluatko varmasti käyttää tätä pelipaikkaa?"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:137
 msgid "Spectator"
@@ -5823,7 +5823,7 @@ msgstr "Tuntematon"
 msgid ""
 "Enter a valid nickname. This value may contain only English letters, "
 "numbers, and @ . + - _ characters and must not be \"team\"."
-msgstr ""
+msgstr "Anna kelpo nimimerkki. Tämä saa sisältää vain englanninkielisiä kirjaimia, numeroita, ja @ . + - _ merkkejä eikä se saa olla \"team\"."
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:301
 msgid "Invalid Address"
@@ -5904,12 +5904,12 @@ msgstr "Tallenna syncstream-aputiedostoja verkkopeliongelmien tutkimista varten"
 #: ../../src/ui_fsmenu/options.cc:244
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Show Census"
-msgstr "Näytä Rakennusten Nimet"
+msgstr "Näytä rakennusten nimet"
 
 #: ../../src/ui_fsmenu/options.cc:245
 #: ../../src/wui/interactive_gamebase.cc:243
 msgid "Show Status"
-msgstr "Näytä tila"
+msgstr "Näytä rakennusten tila"
 
 #: ../../src/ui_fsmenu/options.cc:247
 #: ../../src/wui/interactive_gamebase.cc:252
@@ -5957,7 +5957,7 @@ msgstr "Vieritä kun osoitin on lähellä ruudun reunaa"
 
 #: ../../src/ui_fsmenu/options.cc:286
 msgid "Invert click-and-drag map movement direction"
-msgstr "Käännä kartan liikesuunta päinvastaiseksi klikkaa-ja-raahaa -toiminnossa."
+msgstr "Käännä kartan liikesuunta päinvastaiseksi klikkaa-ja-raahaa -toiminnossa"
 
 #: ../../src/ui_fsmenu/options.cc:292
 msgid "Teach me how to play"
@@ -5987,7 +5987,7 @@ msgstr "Uudet pelit"
 
 #: ../../src/ui_fsmenu/options.cc:322
 msgid "In-Game"
-msgstr ""
+msgstr "Pelinsisäiset"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:420
@@ -6002,7 +6002,7 @@ msgstr "Koko ruutu"
 #. * TRANSLATORS: Entry in the window size dropdown
 #: ../../src/ui_fsmenu/options.cc:475
 msgid "Maximized"
-msgstr ""
+msgstr "Maksimoitu"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 × 600
 #: ../../src/ui_fsmenu/options.cc:491 ../../src/ui_fsmenu/options.cc:499
@@ -6035,7 +6035,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the World, Tribes, and Script categories are disabled "
 "in random matches."
-msgstr ""
+msgstr "Satunnaiskarttageneraattori on edelleen beta-vaiheessa. Kartat joita se generoi ovat yleensä – mutta ei aina – hyvin pelikelpoja. Merenkäynti ja maamerkit eivät ole tuettuja. Laajennukset kategorioille World, Tribes, ja Script ovat poissa käytöstä satunnaiskarttapeleissä."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -6050,11 +6050,11 @@ msgstr "Satunnaiskarttageneraattori epäonnistui sopivan kartan luomisessa. Täl
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Valitse skenaario"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Valitse tutoriaali"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:85
 msgid "Pick a tutorial from the list, then hit “OK”."
@@ -6107,18 +6107,18 @@ msgstr "Viallinen tutorials.lua polku tiedostolla campaigns.conf: %s"
 msgid "Tutorial"
 msgstr "Opetuspeli"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Tekijä"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Tekijät"
@@ -6126,7 +6126,7 @@ msgstr "Tekijät"
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "You"
-msgstr ""
+msgstr "Sinä"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:42
@@ -6138,7 +6138,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/training_wheel_options.cc:65
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr ""
+msgstr "Opetustavoitteet"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
@@ -6215,7 +6215,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Virhe pelin aikana. Virheviesti on:\n\n%1$s\n\nOlisitko ystävällinen ja kertoisit meille tästä vikatilanteesta ja auttaisit meitä parantamaan Widelandsia. Ongelmaan liittyvät tulosteet löydät vakiotulosteesta (Windowsilla tiedostosta stdout.txt). Käytössäsi on Widelandsin ohjelmistoversio %2$s (%3$s).\n\nLiitäthän nämä tiedot virheraporttiisi.\n\nHaluatko Widelandsin yrittävän hätätallennuksen luomista? Se on usein – joskaan ei aina – mahdollista ladata ja jatkaa peliä siitä mihin jäätiin."
 
 #: ../../src/wlapplication.cc:1645
 #, c-format
@@ -6225,7 +6225,7 @@ msgid ""
 "%s\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Peli päättyi odottamatta seuraavasta syystä:\n\n%s\n\nHaluatko Widelandsin yrittävän hätätallennuksen luomista? Se on usein – joskaan ei aina – mahdollista ladata ja jatkaa peliä siitä mihin jäätiin."
 
 #: ../../src/wlapplication.cc:1671
 msgid "Emergency save failed"
@@ -6249,27 +6249,27 @@ msgstr "Portti"
 
 #: ../../src/wlapplication_options.cc:165
 msgid "Minor Training Site"
-msgstr ""
+msgstr "Pieni harjoittelualue"
 
 #: ../../src/wlapplication_options.cc:166
 msgid "Major Training Site"
-msgstr ""
+msgstr "Suuri harjoittelualue"
 
 #: ../../src/wlapplication_options.cc:167
 msgid "Primary Small Military Site"
-msgstr ""
+msgstr "Ensisijainen pieni sotilasalue"
 
 #: ../../src/wlapplication_options.cc:168
 msgid "Secondary Small Military Site"
-msgstr ""
+msgstr "Toissijainen pieni sotilasalue"
 
 #: ../../src/wlapplication_options.cc:169
 msgid "Primary Medium Military Site"
-msgstr ""
+msgstr "Ensisijainen keskikokoinen sotilasalue"
 
 #: ../../src/wlapplication_options.cc:170
 msgid "Secondary Medium Military Site"
-msgstr ""
+msgstr "Toissijainen keskikokoinen sotilasalue"
 
 #: ../../src/wlapplication_options.cc:171
 msgid "Tower"
@@ -6277,19 +6277,19 @@ msgstr "Torni"
 
 #: ../../src/wlapplication_options.cc:172
 msgid "Fortress"
-msgstr ""
+msgstr "Linnoitus"
 
 #: ../../src/wlapplication_options.cc:173
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Puunhakkaajan talo"
 
 #: ../../src/wlapplication_options.cc:174
 msgid "Forester’s House"
-msgstr ""
+msgstr "Metsänhoitajan talo"
 
 #: ../../src/wlapplication_options.cc:175
 msgid "Quarry"
-msgstr ""
+msgstr "Louhos"
 
 #: ../../src/wlapplication_options.cc:176
 msgid "Primary Building Materials Industry"
@@ -6305,11 +6305,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:179
 msgid "Fishing"
-msgstr ""
+msgstr "Kalastus"
 
 #: ../../src/wlapplication_options.cc:180
 msgid "Hunting"
-msgstr ""
+msgstr "Metsästys"
 
 #: ../../src/wlapplication_options.cc:181
 msgid "Fish/Meat Replenishing"
@@ -6317,35 +6317,35 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:182
 msgid "Well"
-msgstr ""
+msgstr "Kaivo"
 
 #: ../../src/wlapplication_options.cc:183
 msgid "Primary Farm"
-msgstr ""
+msgstr "Ensisijainen maatila"
 
 #: ../../src/wlapplication_options.cc:184
 msgid "Secondary Farm"
-msgstr ""
+msgstr "Toissijainen maatila"
 
 #: ../../src/wlapplication_options.cc:185
 msgid "Mill"
-msgstr ""
+msgstr "Mylly"
 
 #: ../../src/wlapplication_options.cc:186
 msgid "Bakery"
-msgstr ""
+msgstr "Leipomo"
 
 #: ../../src/wlapplication_options.cc:187
 msgid "Brewery"
-msgstr ""
+msgstr "Panimo"
 
 #: ../../src/wlapplication_options.cc:188
 msgid "Smokery"
-msgstr ""
+msgstr "Savustamo"
 
 #: ../../src/wlapplication_options.cc:189
 msgid "Tavern"
-msgstr ""
+msgstr "Kestikievari"
 
 #: ../../src/wlapplication_options.cc:190
 msgid "Ore Smelting"
@@ -6369,7 +6369,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:195
 msgid "Shipyard"
-msgstr ""
+msgstr "Telakka"
 
 #: ../../src/wlapplication_options.cc:196
 msgid "Ferry Yard"
@@ -6377,11 +6377,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:197
 msgid "Scouting"
-msgstr ""
+msgstr "Tiedustelu"
 
 #: ../../src/wlapplication_options.cc:198
 msgid "Barracks"
-msgstr ""
+msgstr "Kasarmi"
 
 #: ../../src/wlapplication_options.cc:199
 msgid "Second Carrier"
@@ -6389,23 +6389,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:200
 msgid "Charcoal"
-msgstr ""
+msgstr "Hiili"
 
 #: ../../src/wlapplication_options.cc:201
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kivikaivos"
 
 #: ../../src/wlapplication_options.cc:202
 msgid "Coal Mine"
-msgstr ""
+msgstr "Hiilikaivos"
 
 #: ../../src/wlapplication_options.cc:203
 msgid "Iron Mine"
-msgstr ""
+msgstr "Rautakaivos"
 
 #: ../../src/wlapplication_options.cc:204
 msgid "Gold Mine"
-msgstr ""
+msgstr "Kultakaivos"
 
 #: ../../src/wlapplication_options.cc:205
 msgid "Agricultural Producer"
@@ -6437,23 +6437,23 @@ msgstr "Yksinpeli"
 
 #: ../../src/wlapplication_options.cc:250
 msgid "Multiplayer"
-msgstr ""
+msgstr "Moninpeli"
 
 #: ../../src/wlapplication_options.cc:259
 msgid "Editor – Load Map"
-msgstr ""
+msgstr "Editori – Lataa kartta"
 
 #: ../../src/wlapplication_options.cc:264
 msgid "Editor – New Map"
-msgstr ""
+msgstr "Editori – Uusi kartta"
 
 #: ../../src/wlapplication_options.cc:269
 msgid "Editor – New Random Map"
-msgstr ""
+msgstr "Editori – Uusi satunnainen kartta"
 
 #: ../../src/wlapplication_options.cc:287
 msgid "About"
-msgstr ""
+msgstr "Tietoja"
 
 #: ../../src/wlapplication_options.cc:304
 msgid "Internet Login"
@@ -6461,27 +6461,27 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:315
 msgid "Toggle Building Spaces"
-msgstr ""
+msgstr "Kytke rakennuspaikat"
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Kytke pienkartta"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Opas"
 
 #: ../../src/wlapplication_options.cc:329
 msgid "Cut Text"
-msgstr ""
+msgstr "Leikkaa tekstiä"
 
 #: ../../src/wlapplication_options.cc:333
 msgid "Copy Text"
-msgstr ""
+msgstr "Kopioi tekstiä"
 
 #: ../../src/wlapplication_options.cc:337
 msgid "Paste Text"
-msgstr ""
+msgstr "Liitä tekstiä"
 
 #: ../../src/wlapplication_options.cc:341
 msgid "Select All"
@@ -6489,7 +6489,7 @@ msgstr "Valitse Kaikki"
 
 #: ../../src/wlapplication_options.cc:346
 msgid "Delete Item"
-msgstr ""
+msgstr "Poista kohde"
 
 #: ../../src/wlapplication_options.cc:351
 msgid "Tooltip Accessibility Mode Key"
@@ -6497,7 +6497,7 @@ msgstr "Vihjetekstien esteettömyystilan näppäin"
 
 #: ../../src/wlapplication_options.cc:356
 msgid "Toggle Fullscreen"
-msgstr ""
+msgstr "Kytke kokoruudun tila"
 
 #: ../../src/wlapplication_options.cc:361
 msgid "Take Screenshot"
@@ -6525,7 +6525,7 @@ msgstr "Hyppää edelliseen kohteeseen"
 
 #: ../../src/wlapplication_options.cc:391
 msgid "Menu"
-msgstr ""
+msgstr "Valikko"
 
 #: ../../src/wlapplication_options.cc:415
 msgid "Info Tool"
@@ -6533,23 +6533,23 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:419
 msgid "Players Menu"
-msgstr ""
+msgstr "Pelaajavalikko"
 
 #: ../../src/wlapplication_options.cc:424
 msgid "Toggle Grid"
-msgstr ""
+msgstr "Kytke ruudukko"
 
 #: ../../src/wlapplication_options.cc:429
 msgid "Toggle Immovables"
-msgstr ""
+msgstr "Kytke kiinteät esineet"
 
 #: ../../src/wlapplication_options.cc:434
 msgid "Toggle Animals"
-msgstr ""
+msgstr "Kytke eläimet"
 
 #: ../../src/wlapplication_options.cc:439
 msgid "Toggle Resources"
-msgstr ""
+msgstr "Kytke resurssit"
 
 #: ../../src/wlapplication_options.cc:445
 msgid "Toggle Maximum Build Spaces"
@@ -6558,7 +6558,7 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:452
 #, c-format
 msgid "Set Toolsize to %d"
-msgstr ""
+msgstr "Aseta työkalun kooksi %d"
 
 #: ../../src/wlapplication_options.cc:470
 msgid "Toggle Census"
@@ -6570,11 +6570,11 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:480
 msgid "Toggle Soldier Levels"
-msgstr ""
+msgstr "Kytke sotilaiden tasot"
 
 #: ../../src/wlapplication_options.cc:485
 msgid "Toggle Buildings Visibility"
-msgstr ""
+msgstr "Kytke rakennusten näkyvyys"
 
 #: ../../src/wlapplication_options.cc:490
 msgid "Toggle Overlapping Workareas"
@@ -6597,12 +6597,12 @@ msgstr "Rakennustilastot"
 
 #: ../../src/wlapplication_options.cc:510
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Varaston tila"
 
 #: ../../src/wlapplication_options.cc:515
 #: ../../src/wui/soldier_statistics_menu.cc:131
 msgid "Soldier Statistics"
-msgstr ""
+msgstr "Sotilastilastot"
 
 #: ../../src/wlapplication_options.cc:520
 #: ../../src/wui/seafaring_statistics_menu.cc:49
@@ -6611,31 +6611,31 @@ msgstr "Merenkulkutilastot"
 
 #: ../../src/wlapplication_options.cc:533
 msgid "Decrease Game Speed by 1×"
-msgstr ""
+msgstr "Vähennä pelinopeutta 1×"
 
 #: ../../src/wlapplication_options.cc:538
 msgid "Decrease Game Speed by 0.25×"
-msgstr ""
+msgstr "Vähennä pelinopeutta 0.25×"
 
 #: ../../src/wlapplication_options.cc:543
 msgid "Decrease Game Speed by 10×"
-msgstr ""
+msgstr "Vähennä pelinopeutta 10×"
 
 #: ../../src/wlapplication_options.cc:548
 msgid "Increase Game Speed by 1×"
-msgstr ""
+msgstr "Lisää pelinopeutta 1×"
 
 #: ../../src/wlapplication_options.cc:553
 msgid "Increase Game Speed by 0.25×"
-msgstr ""
+msgstr "Lisää pelinopeutta 0.25×"
 
 #: ../../src/wlapplication_options.cc:558
 msgid "Increase Game Speed by 10×"
-msgstr ""
+msgstr "Lisää pelinopeutta 10×"
 
 #: ../../src/wlapplication_options.cc:563
 msgid "Reset Game Speed"
-msgstr ""
+msgstr "Nollaa pelinopeus"
 
 #: ../../src/wlapplication_options.cc:567
 #: ../../src/wui/interactive_gamebase.cc:328
@@ -6660,67 +6660,67 @@ msgstr "Tallenna peli"
 
 #: ../../src/wlapplication_options.cc:589
 msgid "Messages: Go to Location"
-msgstr ""
+msgstr "Viestit: Mene sijaintiin"
 
 #: ../../src/wlapplication_options.cc:594
 msgid "Messages: Show All"
-msgstr ""
+msgstr "Viestit: Näytä kaikki"
 
 #: ../../src/wlapplication_options.cc:599
 msgid "Messages: Show Geologists’ Messages"
-msgstr ""
+msgstr "Viestit: Näytä geologien viestit"
 
 #: ../../src/wlapplication_options.cc:604
 msgid "Messages: Show Economy Messages"
-msgstr ""
+msgstr "Viestit: Näytä talousviestit"
 
 #: ../../src/wlapplication_options.cc:609
 msgid "Messages: Show Seafaring Messages"
-msgstr ""
+msgstr "Viestit: Näytä merenkäynnin viestit"
 
 #: ../../src/wlapplication_options.cc:614
 msgid "Messages: Show Military Messages"
-msgstr ""
+msgstr "Viestit: Näytä sodankäynnin viestit"
 
 #: ../../src/wlapplication_options.cc:619
 msgid "Messages: Show Scenario Messages"
-msgstr ""
+msgstr "Viestit: Näytä skenaarioviestit"
 
 #: ../../src/wlapplication_options.cc:624
 msgid "Seafaring: Go to Ship"
-msgstr ""
+msgstr "Merenkäynti: Mene laivalle"
 
 #: ../../src/wlapplication_options.cc:629
 msgid "Seafaring: Watch Ship"
-msgstr ""
+msgstr "Merenkäynti: Seuraa laivaa"
 
 #: ../../src/wlapplication_options.cc:634
 msgid "Seafaring: Open Ship Window"
-msgstr ""
+msgstr "Merenkäynti: Avaa laivaikkuna"
 
 #: ../../src/wlapplication_options.cc:639
 msgid "Seafaring: Open Ship Window And Go to Ship"
-msgstr ""
+msgstr "Merenkäynti: Avaa laivaikkuna ja mene laivalle"
 
 #: ../../src/wlapplication_options.cc:644
 msgid "Seafaring: Show All Ships"
-msgstr ""
+msgstr "Merenkäynti: Näytä kaikki laivat"
 
 #: ../../src/wlapplication_options.cc:649
 msgid "Seafaring: Show Idle Ships"
-msgstr ""
+msgstr "Merenkäynti: Näytä toimettomat laivat"
 
 #: ../../src/wlapplication_options.cc:654
 msgid "Seafaring: Show Transport Ships"
-msgstr ""
+msgstr "Merenkäynti: Näytä kuljetuslaivat"
 
 #: ../../src/wlapplication_options.cc:659
 msgid "Seafaring: Show Waiting Expeditions"
-msgstr ""
+msgstr "Merenkäynti: Näytä odottavat tutkimusmatkat"
 
 #: ../../src/wlapplication_options.cc:664
 msgid "Seafaring: Show Scouting Expeditions"
-msgstr ""
+msgstr "Merenkäynti: Näytä tutkimusmatkat"
 
 #: ../../src/wlapplication_options.cc:669
 msgid "Seafaring: Show Expeditions with Port Spaces"
@@ -6729,12 +6729,12 @@ msgstr ""
 #: ../../src/wlapplication_options.cc:674
 #, c-format
 msgid "Set Landmark #%d"
-msgstr ""
+msgstr "Aseta maamerkki #%d"
 
 #: ../../src/wlapplication_options.cc:679
 #, c-format
 msgid "Go To Landmark #%d"
-msgstr ""
+msgstr "Mene maamerkille #%d"
 
 #: ../../src/wlapplication_options.cc:922
 msgctxt "hotkey"
@@ -7093,7 +7093,7 @@ msgstr "pidä SHIFT-painike pohjassa lisätäksesi kaikki aiemmat sotilaat"
 
 #: ../../src/wui/attack_window.cc:322
 msgid "Destroy target"
-msgstr ""
+msgstr "Tuhoa kohde"
 
 #: ../../src/wui/attack_window.cc:323
 msgid "Destroy the target building instead of conquering it"
@@ -7117,7 +7117,7 @@ msgstr "HP: %1$u/%2$u AT: %3$u/%4$u DE: %5$u/%6$u EV: %7$u/%8$u"
 
 #: ../../src/wui/building_statistics_menu.cc:65
 msgid "(no building selected)"
-msgstr ""
+msgstr "(ei rakennusta valittuna)"
 
 #: ../../src/wui/building_statistics_menu.cc:70
 msgid "Owned:"
@@ -7125,11 +7125,11 @@ msgstr "Omistaja:"
 
 #: ../../src/wui/building_statistics_menu.cc:75
 msgid "Under construction:"
-msgstr ""
+msgstr "Rakennusvaiheessa:"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Low productivity threshold:"
-msgstr ""
+msgstr "Matalan tuottavuuden kynnys:"
 
 #: ../../src/wui/building_statistics_menu.cc:102
 #: ../../src/wui/building_statistics_menu.cc:121
@@ -7147,7 +7147,7 @@ msgstr "Näytä seuraava rakennus"
 msgid ""
 "Buildings will be considered unproductive if their productivity falls below "
 "this percentage"
-msgstr ""
+msgstr "Rakennuksia pidetään tuottamattomina, jos niiden tuottavuus laskee tämän prosenttiosuuden alle"
 
 #: ../../src/wui/building_statistics_menu.cc:336
 msgid "Small buildings"
@@ -7171,7 +7171,7 @@ msgstr "Satamat"
 
 #: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low productivity:"
-msgstr ""
+msgstr "Matala tuottavuus:"
 
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
@@ -7186,11 +7186,11 @@ msgstr "%1%/%2%"
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
 #: ../../src/wui/building_statistics_menu.cc:719
 msgid "Lacking soldiers:"
-msgstr ""
+msgstr "Vajaamiehityksellä:"
 
 #: ../../src/wui/buildingwindow.cc:200
 msgid "Muted – click to unmute"
-msgstr ""
+msgstr "Mykistetty – klikkaa poistaaksesi mykistyksen"
 
 #: ../../src/wui/buildingwindow.cc:201
 msgid "Mute this building’s messages"
@@ -7198,7 +7198,7 @@ msgstr "Mykistä tämän rakennuksen viestit"
 
 #: ../../src/wui/buildingwindow.cc:206
 msgid "All buildings of this type are muted – click to unmute"
-msgstr ""
+msgstr "Kaikki tämäntyyppiset rakennukset on mykistetty  – klikkaa poistaaksesi mykistyksen"
 
 #: ../../src/wui/buildingwindow.cc:210
 msgid "Mute all buildings of this type"
@@ -7237,7 +7237,7 @@ msgstr "Saadaan:"
 
 #: ../../src/wui/buildingwindow.cc:398
 msgid "Watch the scout"
-msgstr ""
+msgstr "Seuraa tiedustelijaa"
 
 #: ../../src/wui/buildingwindow.cc:636
 msgid "Hide work area"
@@ -7319,7 +7319,7 @@ msgstr "Sovellettavat asetukset valmistumisen jälkeen"
 #: ../../src/wui/soldiercapacitycontrol.cc:71
 msgid ""
 "Decrease capacity. Hold down Ctrl to set the capacity to the lowest value"
-msgstr "Pienennä kapasiteettia. Pido CTRL-painike pohjassa minimoidaksesi kapasitetin"
+msgstr "Pienennä kapasiteettia. Pidä CTRL-painike pohjassa minimoidaksesi kapasiteetin"
 
 #: ../../src/wui/constructionsitewindow.cc:465
 #: ../../src/wui/soldiercapacitycontrol.cc:80
@@ -7422,11 +7422,11 @@ msgstr "Toiminto"
 
 #: ../../src/wui/fieldaction.cc:380
 msgid "Marked for removal by a worker – click to unmark"
-msgstr ""
+msgstr "Merkattu työntekijän poistettavaksi – Klikkaa poistaaksesi merkki"
 
 #: ../../src/wui/fieldaction.cc:381 ../../src/wui/fieldaction.cc:388
 msgid "Immovable Actions"
-msgstr ""
+msgstr "Kiinteät toiminnot"
 
 #: ../../src/wui/fieldaction.cc:387
 msgid "Mark this immovable for timely removal by a suited worker"
@@ -7446,7 +7446,7 @@ msgstr "Poista tämä lippu"
 
 #: ../../src/wui/fieldaction.cc:427
 msgid "Configure this flag’s economy"
-msgstr ""
+msgstr "Aseta tämän lipun talousvalinnat"
 
 #: ../../src/wui/fieldaction.cc:430
 msgid "Send geologist to explore site"
@@ -7524,15 +7524,15 @@ msgstr "Komentopääte"
 
 #: ../../src/wui/game_chat_panel.cc:62
 msgid "Recipient"
-msgstr ""
+msgstr "Vastaanottaja"
 
 #: ../../src/wui/game_chat_panel.cc:361 ../../src/wui/game_chat_panel.cc:485
 msgid "Unknown Recipient"
-msgstr ""
+msgstr "Tuntematon vastaanottaja"
 
 #: ../../src/wui/game_chat_panel.cc:430
 msgid "All"
-msgstr ""
+msgstr "Kaikki"
 
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:47
@@ -7563,8 +7563,8 @@ msgstr "Korvaa poistunut pelaaja tekoälyllä ja jatka pelaamista"
 msgid "AI for the disconnected player"
 msgstr "Poistuneen pelaajan korvaava tekoäly"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7769,7 +7769,7 @@ msgstr "%s voitti!"
 #: ../../src/wui/game_summary.cc:252
 #, c-format
 msgid "Team %u won!"
-msgstr ""
+msgstr "Joukkue %u voitti!"
 
 #: ../../src/wui/game_summary.cc:310
 msgid "Score"
@@ -7785,16 +7785,16 @@ msgstr "Pisteet"
 #, c-format
 msgid "%d file"
 msgid_plural "%d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%dtiedosto"
+msgstr[1] "%d tiedostoa"
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
 #: ../../src/wui/gamedetails.cc:122
 msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valittu %1% hakemisto ja %2%:"
+msgstr[1] "Valittu %1% hakemistoa ja %2%:"
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Directory Name:"
@@ -7829,7 +7829,7 @@ msgstr "Tavoite:"
 
 #: ../../src/wui/gamedetails.cc:187 ../../src/wui/mapdetails.cc:184
 msgid "Add-Ons:"
-msgstr ""
+msgstr "Laajennukset:"
 
 #: ../../src/wui/gamedetails.cc:201
 msgid "Game data error:"
@@ -7873,11 +7873,11 @@ msgstr "Infopaneelin näkyvyys"
 
 #: ../../src/wui/info_panel.cc:200
 msgid "Follow mouse"
-msgstr ""
+msgstr "Seuraa osoitinta"
 
 #: ../../src/wui/info_panel.cc:205
 msgid "Hide"
-msgstr ""
+msgstr "Piilota"
 
 #: ../../src/wui/info_panel.cc:210
 msgid "Move panel to bottom"
@@ -7889,7 +7889,7 @@ msgstr "Siirrä paneeli yläreunaan"
 
 #: ../../src/wui/info_panel.cc:390
 msgid "Cheat mode enabled"
-msgstr ""
+msgstr "Huijaustila päällä"
 
 #. * TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime
 #. · Gamespeed)
@@ -7906,33 +7906,33 @@ msgstr ""
 
 #: ../../src/wui/inputqueuedisplay.cc:70
 msgid "Priority: Very Low"
-msgstr ""
+msgstr "Prioriteetti: erittäin matala"
 
 #: ../../src/wui/inputqueuedisplay.cc:72
 msgid "Priority: Low"
-msgstr ""
+msgstr "Prioriteetti: matala"
 
 #: ../../src/wui/inputqueuedisplay.cc:74
 msgid "Priority: Normal"
-msgstr ""
+msgstr "Prioriteetti: normaali"
 
 #: ../../src/wui/inputqueuedisplay.cc:76
 msgid "Priority: High"
-msgstr ""
+msgstr "Prioriteetti: korkea"
 
 #: ../../src/wui/inputqueuedisplay.cc:78
 msgid "Priority: Very High"
-msgstr ""
+msgstr "Prioriteetti: erittäin korkea"
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:124
 msgid "Increase the number of wares you want to be stored here"
-msgstr "Kasvata tänne varastoitavien tarvikkeide määrää."
+msgstr "Kasvata tänne varastoitavien tarvikkeiden määrää."
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue
 #: ../../src/wui/inputqueuedisplay.cc:126
 msgid "Decrease the number of wares you want to be stored here"
-msgstr "Vähennä tänne varastoitavien tuotteiden määrää."
+msgstr "Vähennä tänne varastoitavien tarvikkeiden määrää."
 
 #. * TRANSLATORS: Button tooltip in in a building's wares input queue -
 #. option explanation
@@ -7956,23 +7956,23 @@ msgstr "Pidä CTRL-painike pohjassa maksimoidaksesi tämän tarvikkeen määrän
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:141
 msgid "Hold down Ctrl to allow none of this ware"
-msgstr "Paina CTRL-painiketta nollataksesti tarvikkeiden määrän"
+msgstr "Pidä CTRL-painike pohjassa nollataksesi tarvikkeiden määrän"
 
 #: ../../src/wui/inputqueuedisplay.cc:193
 msgid "Remove ware"
-msgstr ""
+msgstr "Poista tarvike"
 
 #: ../../src/wui/inputqueuedisplay.cc:202
 msgid "Add ware"
-msgstr ""
+msgstr "Lisää tarvike"
 
 #: ../../src/wui/inputqueuedisplay.cc:633
 msgid "Hide controls"
-msgstr ""
+msgstr "Piilota säätimet"
 
 #: ../../src/wui/inputqueuedisplay.cc:633
 msgid "Show controls"
-msgstr ""
+msgstr "Näytä säätimet"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:131
@@ -8011,15 +8011,15 @@ msgstr "Tien pituus: %u"
 #: ../../src/wui/interactive_base.cc:729
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
-msgstr ""
+msgstr "Vesiväylän pituus: %1$u/%2$u "
 
 #: ../../src/wui/interactive_base.cc:1537
 msgid "Failed saving screenshot!"
-msgstr ""
+msgstr "Kuvakaappauksen tallentaminen epäonnistui!"
 
 #: ../../src/wui/interactive_base.cc:1541
 msgid "Screenshot saved"
-msgstr ""
+msgstr "Kuvakaappaus tallennettu"
 
 #. * TRANSLATORS: This is a game speed value
 #: ../../src/wui/interactive_gamebase.cc:53
@@ -8057,23 +8057,23 @@ msgstr "Aseta ääniefekti- ja musiikkivalinnat"
 #: ../../src/wui/interactive_gamebase.cc:164
 #: ../../src/wui/interactive_gamebase.cc:192
 msgid "Restart Scenario"
-msgstr ""
+msgstr "Aloita skenaario alusta"
 
 #: ../../src/wui/interactive_gamebase.cc:193
 msgid "Are you sure you wish to restart this scenario?"
-msgstr ""
+msgstr "Oletko varma että haluat aloittaa skenaarion alusta?"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building names are shown
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Hide Census"
-msgstr "Piilota Rakennusten Nimet"
+msgstr "Piilota rakennusten nimet"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
 #: ../../src/wui/interactive_gamebase.cc:242
 msgid "Hide Status"
-msgstr ""
+msgstr "Piilota rakennusten tila"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
@@ -8085,7 +8085,7 @@ msgstr "Piilota Sotilaiden Tasot"
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:260
 msgid "Hide Buildings"
-msgstr "Piilota Rakennukset"
+msgstr "Piilota rakennukset"
 
 #: ../../src/wui/interactive_gamebase.cc:307
 msgid "Speed +"
@@ -8125,8 +8125,8 @@ msgstr "Pysäytä Peli"
 msgid "Statistics"
 msgstr "Tilastot"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Merenkäynti"
@@ -8400,11 +8400,11 @@ msgstr "Seuraava taso"
 
 #: ../../src/wui/productionsitewindow.cc:130
 msgid "Decrease experience by 1"
-msgstr ""
+msgstr "Vähennä kokemusta yhdellä"
 
 #: ../../src/wui/productionsitewindow.cc:133
 msgid "Increase experience by 1"
-msgstr ""
+msgstr "Lisää kokemusta yhdellä"
 
 #: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
@@ -8698,7 +8698,7 @@ msgstr "Näytä kaikki laivat"
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:509
 msgid "Show empty ships"
-msgstr ""
+msgstr "Näytä tyhjät laivat"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:513
@@ -8787,33 +8787,33 @@ msgstr "Tutkimusmatkaa ei voi keskeyttää, koska ei ole satamaa, johon laiva vo
 #: ../../src/wui/soldier_statistics_menu.cc:164
 #, c-format
 msgid "Health: %u"
-msgstr ""
+msgstr "Terveys: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:73
 #: ../../src/wui/soldier_statistics_menu.cc:179
 #, c-format
 msgid "Attack: %u"
-msgstr ""
+msgstr "Hyökkäys: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:74
 #: ../../src/wui/soldier_statistics_menu.cc:194
 #, c-format
 msgid "Defense: %u"
-msgstr ""
+msgstr "Puolustus: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:75
 #: ../../src/wui/soldier_statistics_menu.cc:209
 #, c-format
 msgid "Evade: %u"
-msgstr ""
+msgstr "Väistely: %u"
 
 #: ../../src/wui/soldier_statistics_menu.cc:135
 msgid "Overview"
-msgstr ""
+msgstr "Yleiskuva"
 
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
-msgstr ""
+msgstr "Ominaisuuksittain"
 
 #: ../../src/wui/soldier_statistics_menu.cc:238
 #: ../../src/wui/soldier_statistics_menu.cc:244
@@ -8847,7 +8847,7 @@ msgid ""
 "‘<Widelands Home Directory>/music/custom_XX.*’ (where ‘XX’ are sequential "
 "two-digit numbers starting with 00). Supported file formats are ‘.mp3’ and "
 "‘.ogg’."
-msgstr "Voit toistaa omaa musiikkiasi pelin sisällä laittamalla omat musiikkitiedostosi kohteeseen '<Widelands Home Directory>/music/custom_XX.*' (missä XX ovat peräkkäisiä kaksinumeroisia lukuja 00:sta alkaen). Tuetut tiedostomuodot ovat '.mp3' ja '.ogg'."
+msgstr "Voit toistaa omaa musiikkiasi pelin sisällä laittamalla omat musiikkitiedostosi hakemistoon '<Widelands Home Directory>/music/custom_XX.*' (missä XX ovat peräkkäisiä kaksinumeroisia lukuja 00:sta alkaen). Tuetut tiedostomuodot ovat '.mp3' ja '.ogg'."
 
 #: ../../src/wui/sound_options.cc:143
 msgctxt "sound_options"
@@ -8857,7 +8857,7 @@ msgstr "Musiikki"
 #: ../../src/wui/sound_options.cc:145
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr "Chattiviestit"
+msgstr "Chat-viestit"
 
 #: ../../src/wui/sound_options.cc:148
 msgctxt "sound_options"
@@ -8891,23 +8891,23 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
-msgstr ""
+msgstr "Vertaa varastoituja määriä talouden tavoitetasoihin"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Red:"
-msgstr ""
+msgstr "Punainen:"
 
 #: ../../src/wui/stock_menu.cc:59
 msgid "Stock is lower than the target"
-msgstr ""
+msgstr "Varastotaso on tavoitetta matalampi"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Yellow:"
-msgstr ""
+msgstr "Keltainen:"
 
 #: ../../src/wui/stock_menu.cc:63
 msgid "Stock is equal to the target"
-msgstr ""
+msgstr "Varastotaso on tavoitetasolla"
 
 #: ../../src/wui/stock_menu.cc:66
 msgid "Green:"
@@ -8915,7 +8915,7 @@ msgstr ""
 
 #: ../../src/wui/stock_menu.cc:67
 msgid "Stock is higher than the target"
-msgstr ""
+msgstr "Varastotaso on tavoitetta korkeampi"
 
 #: ../../src/wui/stock_menu.cc:71
 msgid "Wares (total)"
@@ -8935,15 +8935,15 @@ msgstr "Työläiset varastoissa"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Seuraava tehtävä"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "Aloita seuraava tehtävä nyt"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Jatka tämän tehtävän pelaamista"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:84
@@ -8968,19 +8968,19 @@ msgstr "Talouden kunto"
 
 #: ../../src/wui/warehousewindow.cc:157
 msgid "Remove 10 wares"
-msgstr ""
+msgstr "Poista 10 tarviketta"
 
 #: ../../src/wui/warehousewindow.cc:164
 msgid "Remove a ware"
-msgstr ""
+msgstr "Poista tarvike"
 
 #: ../../src/wui/warehousewindow.cc:171
 msgid "Add a ware"
-msgstr ""
+msgstr "Lisää tarvike"
 
 #: ../../src/wui/warehousewindow.cc:178
 msgid "Add 10 wares"
-msgstr ""
+msgstr "Lisää 10 tarviketta"
 
 #: ../../src/wui/warehousewindow.cc:189
 msgid "Configure this building’s economy"

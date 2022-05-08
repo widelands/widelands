@@ -243,7 +243,7 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:139
 msgid "Allow diagonal scrolling with the numeric keypad."
-msgstr ""
+msgstr "Salli vaakavierittäminen numeronäppäimistöltä."
 
 #: ../../src/wlapplication_messages.cc:140
 msgid "Display system time in the info panel."
@@ -356,11 +356,11 @@ msgstr ""
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "Whether to grab the mouse input."
-msgstr ""
+msgstr "Kaapataanko hiiren syöte."
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Whether to use the mouse cursor provided by SDL."
-msgstr ""
+msgstr "Käytetäänkö SDL-kirjaston tarjoamaa hiiren osoitinta."
 
 #: ../../src/wlapplication_messages.cc:190
 msgid "Whether to use sticky tooltips."
@@ -382,7 +382,7 @@ msgstr "Sisäisen ikkunointijärjestelmän asetukset:"
 
 #: ../../src/wlapplication_messages.cc:199
 msgid "Whether automatic map movements should be animated."
-msgstr ""
+msgstr "Animoidaanko automaattiset kartan liikkeet."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:202
