@@ -41,7 +41,7 @@ inline EditorInteractive& EditorToolhistoryOptionsMenu::eia() const {
 EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& parent,
                                                            EditorHistoryTool& history_tool,
                                                            UI::UniqueWindow::Registry& registry)
-     : EditorToolOptionsMenu(parent, registry, 500, 100, _("Tool History"), history_tool),
+     : EditorToolOptionsMenu(parent, registry, 370, 100, _("Tool History"), history_tool),
        history_tool_(history_tool),
        margin_(4),
        box_width_(get_inner_w() - 2 * margin_),

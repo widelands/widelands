@@ -57,7 +57,7 @@ EditorActionArgs EditorIncreaseHeightTool::format_args_impl() {
 }
 
 std::string EditorIncreaseHeightTool::format_conf_description_impl(const ToolConf& conf) {
-        /** TRANSLATORS: An entry in the tool history list. */
-        return format(_("Height: increase/decrease %1$d, set height %2$d"),
+        /** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and decrease. */
+        return format(_("Height: inc./dec. %1$d, set to %2$d"),
                       conf.change_by, conf.interval.min);
 }
