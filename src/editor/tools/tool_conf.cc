@@ -24,7 +24,8 @@ ToolConf::ToolConf()
   : primary(nullptr),
     change_by(0),
     set_to(0),
-    interval(0, 0) {
+    interval(0, 0),
+    resource(0) {
 }
 
 std::string ToolConf::to_key() const {
