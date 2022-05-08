@@ -101,7 +101,10 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 void StockMenu::layout() {
 	UI::UniqueWindow::layout();
 	if (!is_minimal()) {
-		int w1, w2, h1, h2;
+		int w1;
+		int w2;
+		int h1;
+		int h2;
 		solid_icon_backgrounds_.get_desired_size(&w1, &h1);
 		tabs_.get_desired_size(&w2, &h2);
 		main_box_.set_size(w2, h1 + h2);
@@ -165,18 +168,17 @@ UI::Window& StockMenu::load(FileRead& fr, InteractiveBase& ib) {
 			StockMenu& sm = dynamic_cast<StockMenu&>(*r.window);
 
 			sm.tabs_.activate(fr.unsigned_8());
-			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8());
+			sm.solid_icon_backgrounds_.set_state(fr.unsigned_8() != 0u);
 
 			return sm;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Stock Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Stock Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("stock menu: %s", e.what());
 	}
 }
-void StockMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void StockMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tabs_.active());
 	fw.unsigned_8(solid_icon_backgrounds_.get_state() ? 1 : 0);

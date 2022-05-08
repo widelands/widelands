@@ -50,7 +50,7 @@ void PartiallyFinishedBuilding::set_building(const BuildingDescr& building_descr
 }
 
 void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
-	if (builder_request_) {
+	if (builder_request_ != nullptr) {
 		delete builder_request_;
 		builder_request_ = nullptr;
 	}
@@ -97,11 +97,11 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 	Building::set_economy(e, type);
-	if (builder_request_ && type == builder_request_->get_type()) {
+	if ((builder_request_ != nullptr) && type == builder_request_->get_type()) {
 		builder_request_->set_economy(e);
 	}
 
-	if (e && type == wwWARE) {
+	if ((e != nullptr) && type == wwWARE) {
 		for (WaresQueue* temp_ware : dropout_wares_) {
 			temp_ware->add_to_economy(*e);
 		}
@@ -116,7 +116,7 @@ void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 Issue a request for the builder.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder(Game&) {
+void PartiallyFinishedBuilding::request_builder(Game& /* game */) {
 	assert(!builder_.is_set() && !builder_request_);
 
 	builder_request_ = new Request(*this, owner().tribe().builder(),
@@ -183,7 +183,7 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 	}
 	thisstep = (thisstep << 16) / ts;
 	uint32_t total = (thisstep + (work_completed_ << 16));
-	if (work_steps_) {
+	if (work_steps_ != 0u) {
 		total /= work_steps_;
 	}
 
@@ -199,8 +199,11 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 Called by transfer code when the builder has arrived on site.
 ===============
 */
-void PartiallyFinishedBuilding::request_builder_callback(
-   Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
+void PartiallyFinishedBuilding::request_builder_callback(Game& game,
+                                                         Request& rq,
+                                                         DescriptionIndex /* index */,
+                                                         Worker* const w,
+                                                         PlayerImmovable& target) {
 	assert(w);
 
 	PartiallyFinishedBuilding& b = dynamic_cast<PartiallyFinishedBuilding&>(target);

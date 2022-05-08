@@ -617,10 +617,11 @@ std::string make_ligatures(const char* input) {
 		} else if (kArabicFinalChars.count(c) == 1) {  // All Arabic characters have a final form
 			try {
 				// Skip diacritics for position analysis
-				for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
+				for (int k = i - 2; k >= 0 && (kArabicDiacritics.count(previous) != 0u); --k) {
 					previous = parseme.charAt(k);
 				}
-				for (int k = i + 2; k < (parseme.length() - 1) && kArabicDiacritics.count(next); ++k) {
+				for (int k = i + 2; k < (parseme.length() - 1) && (kArabicDiacritics.count(next) != 0u);
+				     ++k) {
 					next = parseme.charAt(k);
 				}
 
@@ -631,7 +632,7 @@ std::string make_ligatures(const char* input) {
 					--i;
 					previous = (i > 0) ? parseme.charAt(i - 1) : not_a_character;
 					// Skip diacritics for position analysis
-					for (int k = i - 2; k >= 0 && kArabicDiacritics.count(previous); --k) {
+					for (int k = i - 2; k >= 0 && (kArabicDiacritics.count(previous) != 0u); --k) {
 						previous = parseme.charAt(k);
 					}
 				}

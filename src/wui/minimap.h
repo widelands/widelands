@@ -44,7 +44,7 @@ public:
 		}
 	};
 
-	MiniMap(InteractiveBase& parent, Registry*);
+	MiniMap(InteractiveBase& ibase, Registry* registry);
 
 	Notifications::Signal<const Vector2f&> warpview;
 
@@ -58,7 +58,7 @@ public:
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kMinimap;
 	}
-	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	void save(FileWrite& fw, Widelands::MapObjectSaver& mos) const override;
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
@@ -75,7 +75,7 @@ private:
 	 */
 	struct View : public UI::Panel {
 		View(UI::Panel& parent,
-		     MiniMapLayer* minimap_layers,
+		     MiniMapLayer* flags,
 		     MiniMapType* minimap_type,
 		     int32_t x,
 		     int32_t y,
@@ -127,6 +127,7 @@ private:
 	UI::Button button_flags;
 	UI::Button button_roads;
 	UI::Button button_bldns;
+	UI::Button button_ships;
 	UI::Button button_zoom;
 };
 

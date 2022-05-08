@@ -64,7 +64,7 @@ void unreference_coroutine(lua_State* L, uint32_t idx) {
 
 LuaCoroutine::LuaCoroutine(lua_State* ms)
    : lua_state_(ms), idx_(LUA_REFNIL), ninput_args_(0), nreturn_values_(0) {
-	if (lua_state_) {
+	if (lua_state_ != nullptr) {
 		idx_ = reference_coroutine(lua_state_);
 	}
 }
@@ -112,23 +112,23 @@ void LuaCoroutine::push_arg(const int number) {
 }
 
 std::string LuaCoroutine::pop_string() {
-	if (!nreturn_values_) {
+	if (nreturn_values_ == 0u) {
 		return "";
 	}
-	if (!lua_isstring(lua_state_, -1)) {
+	if (lua_isstring(lua_state_, -1) == 0) {
 		throw LuaError("pop_string(), but no string on the stack.");
 	}
-	const std::string return_value = lua_tostring(lua_state_, -1);
+	std::string return_value = lua_tostring(lua_state_, -1);
 	lua_pop(lua_state_, 1);
 	--nreturn_values_;
 	return return_value;
 }
 
 uint32_t LuaCoroutine::pop_uint32() {
-	if (!nreturn_values_) {
+	if (nreturn_values_ == 0u) {
 		return 0;
 	}
-	if (!lua_isinteger(lua_state_, -1)) {
+	if (lua_isinteger(lua_state_, -1) == 0) {
 		throw LuaError("pop_uint32(), but no integer on the stack.");
 	}
 	const uint32_t return_value = luaL_checkuint32(lua_state_, -1);
@@ -139,7 +139,7 @@ uint32_t LuaCoroutine::pop_uint32() {
 
 std::unique_ptr<LuaTable> LuaCoroutine::pop_table() {
 	std::unique_ptr<LuaTable> result(nullptr);
-	if (!nreturn_values_) {
+	if (nreturn_values_ == 0u) {
 		return result;
 	}
 	result.reset(new LuaTable(lua_state_));

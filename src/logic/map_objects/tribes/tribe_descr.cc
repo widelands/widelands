@@ -90,7 +90,7 @@ void walk_immovables(Widelands::DescriptionIndex index,
 
 namespace Widelands {
 
-void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) {
+void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) const {
 	std::map<std::string, std::string> helptexts;
 	if (table.has_key("helptexts")) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
@@ -260,7 +260,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			if (!has_ware(descriptions.safe_ware_index(ware))) {
 				throw GameDataError("Collectors: Tribe does not use ware '%s'", ware.c_str());
 			}
-			collectors_points_table_.push_back(std::make_pair(ware, t->get_int("points")));
+			collectors_points_table_.emplace_back(ware, t->get_int("points"));
 		}
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -747,7 +747,7 @@ Find the best matching indicator for the given amount.
 */
 DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* const res,
                                                     const ResourceAmount amount) const {
-	if (!res || !amount) {
+	if ((res == nullptr) || (amount == 0u)) {
 		auto list = resource_indicators_.find("");
 		if (list == resource_indicators_.end() || list->second.empty()) {
 			throw GameDataError("Tribe '%s' has no indicator for no resources!", name_.c_str());
@@ -789,7 +789,7 @@ ToolbarImageset* TribeDescr::toolbar_image_set() const {
  */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername,
-                                                Descriptions& descriptions) {
+                                                Descriptions& descriptions) const {
 	try {
 		DescriptionIndex worker = descriptions.load_worker(workername);
 		if (!has_worker(worker)) {
@@ -802,7 +802,7 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername,
 }
 
 DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname,
-                                                  Descriptions& descriptions) {
+                                                  Descriptions& descriptions) const {
 	try {
 		DescriptionIndex building = descriptions.load_building(buildingname);
 		if (!has_building(building)) {
@@ -848,7 +848,7 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) {
+void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) const {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
@@ -987,7 +987,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 					const ImmovableDescr& immovable_descr = all_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
 						prod->add_needed_immovable(immovable_descr.name());
-						if (prod->collected_attributes().count(attribinfo)) {
+						if (prod->collected_attributes().count(attribinfo) != 0u) {
 							prod->add_collected_immovable(immovable_descr.name());
 						}
 						const_cast<ImmovableDescr&>(immovable_descr)
@@ -1117,7 +1117,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 
 		// Sites that create a bob should not overlap sites that create the same bob
 		for (const std::string& item : prod->created_bobs()) {
-			if (creators.count(item)) {
+			if (creators.count(item) != 0u) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					prod->add_competing_productionsite(creator->name());
 					creator->add_competing_productionsite(prod->name());
@@ -1128,7 +1128,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const std::string& item : prod->needed_immovables()) {
 			// Sites that collect immovables and sites of other types that create immovables for them
 			// should overlap each other
-			if (creators.count(item)) {
+			if (creators.count(item) != 0u) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
@@ -1137,7 +1137,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect immovables should not overlap sites that collect the same immovable
-			if (collectors.count(item)) {
+			if (collectors.count(item) != 0u) {
 				for (const ProductionSiteDescr* collector : collectors.at(item)) {
 					prod->add_competing_productionsite(collector->name());
 				}
@@ -1146,7 +1146,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const std::string& item : prod->collected_bobs()) {
 			// Sites that collect bobs and sites of other types that create bobs for them should
 			// overlap each other
-			if (creators.count(item)) {
+			if (creators.count(item) != 0u) {
 				for (ProductionSiteDescr* creator : creators.at(item)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
@@ -1155,7 +1155,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect bobs should not overlap sites that collect the same bob
-			if (collectors.count(item)) {
+			if (collectors.count(item) != 0u) {
 				for (const ProductionSiteDescr* collector : collectors.at(item)) {
 					prod->add_competing_productionsite(collector->name());
 				}
@@ -1164,7 +1164,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const auto& item : prod->collected_resources()) {
 			// Sites that collect resources and sites of other types that create resources for them
 			// should overlap each other
-			if (creators.count(item.first)) {
+			if (creators.count(item.first) != 0u) {
 				for (ProductionSiteDescr* creator : creators.at(item.first)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
@@ -1173,7 +1173,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
-			if (collectors.count(item.first)) {
+			if (collectors.count(item.first) != 0u) {
 				for (const ProductionSiteDescr* collector : collectors.at(item.first)) {
 					prod->add_competing_productionsite(collector->name());
 				}

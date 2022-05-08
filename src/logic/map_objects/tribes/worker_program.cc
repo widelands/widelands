@@ -121,13 +121,13 @@ WorkerProgram::WorkerProgram(const std::string& init_name,
 			Worker::Action act;
 			uint32_t mapidx;
 
-			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
+			for (mapidx = 0; parsemap_[mapidx].name != nullptr; ++mapidx) {
 				if (parseinput.name == parsemap_[mapidx].name) {
 					break;
 				}
 			}
 
-			if (!parsemap_[mapidx].name) {
+			if (parsemap_[mapidx].name == nullptr) {
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
@@ -869,7 +869,8 @@ removeobject
          "return"
       }
 */
-void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
+void WorkerProgram::parse_removeobject(Worker::Action* act,
+                                       const std::vector<std::string>& /* cmd */) {
 	act->function = &Worker::run_removeobject;
 	if (!needed_attributes_.empty()) {
 		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());

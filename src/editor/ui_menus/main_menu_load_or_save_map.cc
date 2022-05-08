@@ -104,7 +104,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	table_and_details_box_.add(&map_details_box_, UI::Box::Resizing::kFullSize);
 	map_details_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
-	const bool locale_is_en = i18n::get_locale() == "en" || i18n::get_locale().find("en_") == 0;
+	const bool locale_is_en = i18n::get_locale() == "en" || starts_with(i18n::get_locale(), "en_");
 	display_mode_.add(_("File names"), MapData::DisplayType::kFilenames);
 	display_mode_.add(locale_is_en ? _("Map names") : _("Original map names"),
 	                  MapData::DisplayType::kMapnames, nullptr, locale_is_en);
@@ -191,29 +191,29 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			try {
 				ml->preload_map(true, nullptr);
 
-				if (!map.get_width() || !map.get_height()) {
+				if ((map.get_width() == 0) || (map.get_height() == 0)) {
 					continue;
 				}
 
 				MapData::MapType maptype;
 
-				if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-				    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+				if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
+				    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
 					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())) {
+				} else if (dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get()) != nullptr) {
 					maptype = MapData::MapType::kNormal;
 				} else {
 					maptype = MapData::MapType::kSettlers2;
 				}
 
-				maps_data_.push_back(MapData(map, mapfilename, maptype, display_type));
+				maps_data_.emplace_back(map, mapfilename, maptype, display_type);
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&
 		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
 			maps_data_.push_back(MapData::create_directory(mapfilename));

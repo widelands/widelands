@@ -42,7 +42,7 @@ public:
 private:
 	AddOns::AddOnsGuard guard_;
 	MainMenuNewRandomMapPanel menu_;
-	std::unique_ptr<Widelands::Game> game_;
+	std::shared_ptr<Widelands::Game> game_;
 	std::unique_ptr<SinglePlayerGameSettingsProvider> settings_;
 	UI::Icon icon_;
 	UI::ProgressWindow* progress_window_;  // not owned

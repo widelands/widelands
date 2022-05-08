@@ -101,7 +101,7 @@ Bob::Bob(const BobDescr& init_descr)
  * Cleanup an object. Removes map links
  */
 Bob::~Bob() {
-	if (position_.field) {
+	if (position_.field != nullptr) {
 		molog(owner().egbase().get_gametime(), "Bob::~Bob: pos_.field != 0, cleanup() not called!\n");
 		abort();
 	}
@@ -134,10 +134,10 @@ void Bob::cleanup(EditorGameBase& egbase) {
 
 	set_owner(nullptr);  // implicitly remove ourselves from owner's map
 
-	if (position_.field) {
+	if (position_.field != nullptr) {
 		position_.field = nullptr;
 		*linkpprev_ = linknext_;
-		if (linknext_) {
+		if (linknext_ != nullptr) {
 			linknext_->linkpprev_ = linkpprev_;
 		}
 	}
@@ -237,7 +237,7 @@ void Bob::push_task(Game& game, const Task& task, const Duration& tdelta) {
 	assert(!task.unique || !get_state(task));
 	assert(in_act_ || stack_.empty());
 
-	stack_.push_back(State(&task));
+	stack_.emplace_back(&task);
 	schedule_act(game, tdelta);
 }
 
@@ -247,7 +247,7 @@ void Bob::push_task(Game& game, const Task& task, const Duration& tdelta) {
 void Bob::do_pop_task(Game& game) {
 	State& state = top_state();
 
-	if (state.task->pop) {
+	if (state.task->pop != nullptr) {
 		(this->*state.task->pop)(game, state);
 	}
 
@@ -328,7 +328,7 @@ void Bob::send_signal(Game& game, char const* const sig) {
 	assert(*sig);  //  use set_signal() for signal removal
 
 	for (State& state : stack_) {
-		if (state.task->signal_immediate) {
+		if (state.task->signal_immediate != nullptr) {
 			(this->*state.task->signal_immediate)(game, state, sig);
 		}
 	}
@@ -385,7 +385,7 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 }
 
 void Bob::idle_update(Game& game, State& state) {
-	if (!state.ivar1 || !get_signal().empty()) {
+	if ((state.ivar1 == 0) || !get_signal().empty()) {
 		return pop_task(game);
 	}
 
@@ -399,7 +399,7 @@ void Bob::idle_update(Game& game, State& state) {
 }
 
 bool Bob::is_idle() const {
-	return get_state(taskIdle);
+	return get_state(taskIdle) != nullptr;
 }
 
 /**
@@ -491,13 +491,17 @@ struct CheckStepBlocked {
 	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(const Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
+	bool allowed(const Map& /* map */,
+	             FCoords /* start */,
+	             FCoords end,
+	             int32_t /* dir */,
+	             CheckStep::StepId /* id */) const {
 		if (end == tracker_.finaldest_) {
 			return true;
 		}
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(const Map&, FCoords) const {
+	bool reachable_dest(const Map& /* map */, FCoords /* pos */) const {
 		return true;
 	}
 
@@ -539,13 +543,13 @@ bool Bob::start_task_movepath(Game& game,
 
 	const Map& map = game.map();
 	if (map.findpath(position_, dest, persist, path, cstep) < 0) {
-		if (!tracker.nrblocked_) {
+		if (tracker.nrblocked_ == 0) {
 			return false;
 		}
 
 		tracker.unblock();
 		if (map.findpath(position_, dest, persist, path, cstep) < 0) {
-			if (!tracker.nrblocked_) {
+			if (tracker.nrblocked_ == 0) {
 				return false;
 			}
 
@@ -636,7 +640,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	assert(state.ivar1 >= 0);
 	Path const* const path = state.path;
 
-	if (!path) {
+	if (path == nullptr) {
 		// probably success; this can happen when loading a game
 		// that contains a zero-length path.
 		return pop_task(game);
@@ -671,8 +675,9 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove = (state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
-	                                    path->get_nsteps());
+	bool forcemove =
+	   ((state.ivar2 != 0) &&
+	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -701,7 +706,7 @@ void Bob::start_task_move(Game& game,
 	push_task(game, taskMove, Duration(tdelta));
 }
 
-void Bob::move_update(Game& game, State&) {
+void Bob::move_update(Game& game, State& /* state */) {
 	if (walkend_ <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
@@ -770,7 +775,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		break;
 	}
 
-	if (start.field) {
+	if (start.field != nullptr) {
 		spos.y += end.field->get_height() * kHeightFactor * scale;
 		spos.y -= start.field->get_height() * kHeightFactor * scale;
 
@@ -793,12 +798,12 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const InfoToDraw&,
+               const InfoToDraw& /* info */,
                const Vector2f& field_on_dst,
                const Widelands::Coords& coords,
                const float scale,
                RenderTarget* dst) const {
-	if (!anim_) {
+	if (anim_ == 0u) {
 		return;
 	}
 	auto* const bob_owner = get_owner();
@@ -863,7 +868,7 @@ int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool
 	return tdelta;  // yep, we were successful
 }
 
-bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
+bool Bob::check_node_blocked(Game& game, const FCoords& field, bool /* commit */) {
 	// Battles always block movement!
 	std::vector<Bob*> soldiers;
 	game.map().find_bobs(game, Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
@@ -871,7 +876,7 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
 	if (!soldiers.empty()) {
 		for (Bob* temp_bob : soldiers) {
 			upcast(Soldier, soldier, temp_bob);
-			if (soldier->get_battle()) {
+			if (soldier->get_battle() != nullptr) {
 				return true;
 			}
 		}
@@ -886,11 +891,11 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
  * This will update the owner's viewing area.
  */
 void Bob::set_owner(Player* const player) {
-	if (owner_ && position_.field) {
+	if ((owner_ != nullptr) && (position_.field != nullptr)) {
 		owner_.load()->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 	owner_ = player;
-	if (owner_ && position_.field) {
+	if ((owner_ != nullptr) && (position_.field != nullptr)) {
 		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 }
@@ -904,9 +909,9 @@ void Bob::set_owner(Player* const player) {
 void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	FCoords oldposition = position_;
 
-	if (position_.field) {
+	if (position_.field != nullptr) {
 		*linkpprev_ = linknext_;
-		if (linknext_) {
+		if (linknext_ != nullptr) {
 			linknext_->linkpprev_ = linkpprev_;
 		}
 	}
@@ -915,14 +920,14 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 
 	linknext_ = position_.field->bobs;
 	linkpprev_ = &position_.field->bobs;
-	if (linknext_) {
+	if (linknext_ != nullptr) {
 		linknext_->linkpprev_ = &linknext_;
 	}
 	*linkpprev_ = this;
 
-	if (owner_) {
+	if (owner_ != nullptr) {
 		owner_.load()->see_area(Area<FCoords>(get_position(), descr().vision_range()));
-		if (oldposition.field) {
+		if (oldposition.field != nullptr) {
 			owner_.load()->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
 		}
 	}
@@ -952,7 +957,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 	molog(egbase.get_gametime(), "ActID: %i\n", actid_);
 	molog(egbase.get_gametime(), "ActScheduled: %s\n", actscheduled_ ? "true" : "false");
 	molog(egbase.get_gametime(), "Animation: %s\n",
-	      anim_ ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
+	      anim_ != 0u ? descr().get_animation_name(anim_).c_str() : "\\<none\\>");
 
 	molog(egbase.get_gametime(), "AnimStart: %i\n", animstart_.get());
 	molog(egbase.get_gametime(), "WalkingDir: %i\n", walking_);
@@ -985,7 +990,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) const {
 		FORMAT_WARNINGS_OFF
 		molog(egbase.get_gametime(), "\n* path: %p\n", stack_[i].path);
 		FORMAT_WARNINGS_ON
-		if (stack_[i].path) {
+		if (stack_[i].path != nullptr) {
 			const Path& path = *stack_[i].path;
 			molog(egbase.get_gametime(), "** Path length: %" PRIuS "\n", path.get_nsteps());
 			molog(
@@ -1030,7 +1035,7 @@ void Bob::Loader::load(FileRead& fr) {
 				}
 
 				Player* owner = egbase().get_player(owner_number);
-				if (!owner) {
+				if (owner == nullptr) {
 					throw GameDataError("owning player %u does not exist", owner_number);
 				}
 
@@ -1053,7 +1058,7 @@ void Bob::Loader::load(FileRead& fr) {
 
 			bob.animstart_ = Time(fr);
 			bob.walking_ = static_cast<WalkingDir>(read_direction_8_allow_null(&fr));
-			if (bob.walking_) {
+			if (bob.walking_ != 0u) {
 				bob.walkstart_ = Time(fr);
 				bob.walkend_ = Time(fr);
 			}
@@ -1076,7 +1081,7 @@ void Bob::Loader::load(FileRead& fr) {
 				state.svar1 = fr.c_string();
 				state.coords = read_coords_32_allow_null(&fr, egbase().map().extent());
 
-				if (fr.unsigned_8()) {
+				if (fr.unsigned_8() != 0u) {
 					uint32_t anims[6];
 					for (uint32_t& anim : anims) {
 						std::string dir_animname = fr.c_string();
@@ -1094,12 +1099,12 @@ void Bob::Loader::load(FileRead& fr) {
 					   DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 				}
 
-				if (fr.unsigned_8()) {
+				if (fr.unsigned_8() != 0u) {
 					state.path = new Path;
 					state.path->load(fr, egbase().map());
 				}
 
-				if (fr.unsigned_8()) {
+				if (fr.unsigned_8() != 0u) {
 					state.route = new Route;
 					state.route->load(loadstate.route, fr);
 				}
@@ -1125,10 +1130,10 @@ void Bob::Loader::load_pointers() {
 		State& state = bob.stack_[i];
 		LoadState& loadstate = states[i];
 
-		if (loadstate.objvar1) {
+		if (loadstate.objvar1 != 0u) {
 			state.objvar1 = &mol().get<MapObject>(loadstate.objvar1);
 		}
-		if (state.route) {
+		if (state.route != nullptr) {
 			state.route->load_pointers(loadstate.route, mol());
 		}
 	}
@@ -1173,15 +1178,15 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(kCurrentPacketVersion);
 
 	const Widelands::Player* const owner = owner_.load();
-	fw.unsigned_8(owner ? owner->player_number() : 0);
+	fw.unsigned_8(owner != nullptr ? owner->player_number() : 0);
 	write_coords_32(&fw, position_);
 
 	// linkprev_ and linknext_ are recreated automatically
 
-	fw.c_string(anim_ ? descr().get_animation_name(anim_) : "");
+	fw.c_string(anim_ != 0u ? descr().get_animation_name(anim_) : "");
 	animstart_.save(fw);
 	write_direction_8_allow_null(&fw, walking_);
-	if (walking_) {
+	if (walking_ != 0u) {
 		walkstart_.save(fw);
 		walkend_.save(fw);
 	}
@@ -1213,21 +1218,21 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 			fw.unsigned_8(0);
 		}
 
-		if (state.path) {
+		if (state.path != nullptr) {
 			fw.unsigned_8(1);
 			state.path->save(fw);
 		} else {
 			fw.unsigned_8(0);
 		}
 
-		if (state.route) {
+		if (state.route != nullptr) {
 			fw.unsigned_8(1);
 			state.route->save(fw, eg, mos);
 		} else {
 			fw.unsigned_8(0);
 		}
 
-		fw.c_string(state.program ? state.program->name() : "");
+		fw.c_string(state.program != nullptr ? state.program->name() : "");
 	}
 }
 }  // namespace Widelands

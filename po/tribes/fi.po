@@ -2,9 +2,10 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2020
+# Jukka Pakarinen, 2016-2020,2022
 # Markus <markus@hallfors.com>, 2015
 # Markus <markus@hallfors.com>, 2021
 # Max, 2015
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-22 02:41+0000\n"
-"PO-Revision-Date: 2022-02-13 02:43+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-05-04 03:37+0000\n"
+"PO-Revision-Date: 2015-11-03 18:55+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgstr "Linnoitus"
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
@@ -65,25 +66,25 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Linnoitus"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Vihollisia linnoituksesi mailla."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:63
 msgctxt "amazons_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Sota raivoaa linnoituksellasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:65
@@ -101,7 +102,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Observation Tower"
-msgstr ""
+msgstr "Tarkkailutorni"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
@@ -287,7 +288,7 @@ msgstr "Linna"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnasi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
@@ -359,7 +360,7 @@ msgstr "Vartiotupa"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet vartiotupasi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
@@ -719,7 +720,7 @@ msgstr "Vahtitupa"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet vahtitupasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
@@ -755,7 +756,7 @@ msgstr "Linna"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
@@ -899,7 +900,7 @@ msgstr "Torni"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:52
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet tornisi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:54
@@ -935,7 +936,7 @@ msgstr "Linnoitus"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
@@ -1290,8 +1291,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1742,7 +1743,7 @@ msgstr "tekee hakkua"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr ""
+msgstr "tekee viidakkoveistä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1772,11 +1773,11 @@ msgstr "tekee vasaraa"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "tekee talttaa"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1792,7 +1793,7 @@ msgstr ""
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr ""
+msgstr "tekee puukeihästä"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -2168,7 +2169,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "veneveistämö"
+msgstr "Veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -5115,7 +5116,7 @@ msgstr "orastava ruoikko"
 #: ../../data/tribes/immovables/resi/frisians/gold_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Gold"
-msgstr "hieman kultaa"
+msgstr "Hieman kultaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/gold_2/init.lua:8
@@ -5160,7 +5161,7 @@ msgstr "Runsaasti käyttökelpoista kiveä"
 #: ../../data/tribes/immovables/resi/frisians/coal_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Coal"
-msgstr "hieman hiiltä"
+msgstr "Hieman hiiltä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_2/init.lua:8
@@ -5178,7 +5179,7 @@ msgstr "Runsaasti hiiltä"
 #: ../../data/tribes/immovables/resi/frisians/iron_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Iron"
-msgstr "hieman rautaa"
+msgstr "Hieman rautaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/iron_2/init.lua:8
@@ -5264,8 +5265,8 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS: This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5296,7 +5297,7 @@ msgstr ""
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Kuollut puu"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5440,8 +5441,8 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5459,8 +5460,8 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5609,7 +5610,7 @@ msgstr "Kurja Kyläpahanen"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Aloita peli ainoastaan varastolla ja tyhjähköllä taloudella. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5623,7 +5624,7 @@ msgstr "Ole varovainen"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Sinulla on talouden aloittamiseen vain tismalleen tarvitsemasi tarvikkeet jokaista tarvitsemaasi työkalua kohden. Varmista ettet luo tarpeettomia työkaluja."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5665,7 +5666,7 @@ msgstr "Kauppa-asema"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "Jos pelaajalta loppuvat tärkät tuotteet, ne korvautuvat itsestään"
+msgstr "Jos pelaajalta loppuvat tärkeät tuotteet, ne korvautuvat itsestään"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5710,8 +5711,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5729,8 +5730,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5764,8 +5765,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5801,16 +5802,16 @@ msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5828,8 +5829,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5854,8 +5855,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5873,8 +5874,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
@@ -8372,7 +8373,7 @@ msgstr "Vanha Turkisvaate"
 #: ../../data/tribes/wares/fur_garment_studded/init.lua:8
 msgctxt "ware"
 msgid "Studded Fur Garment"
-msgstr "Niitoitettu Turkisvaate"
+msgstr "Niitattu Turkisvaate"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold/init.lua:8
@@ -8938,7 +8939,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Tiedustelija"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8

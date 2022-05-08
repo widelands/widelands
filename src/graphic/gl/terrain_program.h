@@ -52,7 +52,7 @@ private:
 	void gl_draw(int gl_texture, float texture_w, float texture_h, float z_value);
 
 	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
-	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_coordinates);
+	void add_vertex(const FieldsToDraw::Field& field, const Vector2f& texture_offset);
 
 	// The program used for drawing the terrain.
 	Gl::Program gl_program_;

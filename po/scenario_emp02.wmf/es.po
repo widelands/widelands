@@ -10,14 +10,14 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2015-02-03 14:45+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

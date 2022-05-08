@@ -3,9 +3,11 @@
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# heidi.wenger, 2022
 # Joonas Tamminen <hippimunqqi@gmail.com>, 2015
 # Jukka Pakarinen, 2016-2020
 msgid ""
@@ -13,8 +15,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-06-28 02:47+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2015-02-03 14:47+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -148,7 +150,7 @@ msgid ""
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
 "during their workout, this building needs a lot of food and strong beer. In "
 "a real game, you should have a good infrastructure before you build it."
-msgstr "Yksi harjoittelupaikoista on taisteluareena. Se on iso ja kallis rakennus ja se kouluttaa sotulaita väistämisessä. Koska sotilaan tulevat hyvin nälkäisiksi harjoittelun aikana, rakennus tarvitsee paljon ruokaa ja vahvaa olutta. Oikeassa pelissä sinulla tulee olla hyvä infrastruktuuri ennenkuin rakennat sen."
+msgstr "Yksi harjoittelupaikoista on taisteluareena. Se on iso ja kallis rakennus ja se kouluttaa sotilaita väistämisessä. Koska sotilaat tulevat hyvin nälkäisiksi harjoittelun aikana, rakennus tarvitsee paljon ruokaa ja vahvaa olutta. Oikeassa pelissä sinulla tulee olla hyvä infrastruktuuri ennenkuin rakennat sen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
@@ -167,21 +169,21 @@ msgstr "Taisteluareena"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
-msgstr "Rakenne taisteluareena"
+msgstr "Rakenna taisteluareena"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid "Build a battle arena. It is a big building."
-msgstr "Rakenne taisteluareena. Se on iso rakennus."
+msgstr "Rakenna taisteluareena. Se on iso rakennus."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using %1$s and %2$s."
-msgstr ""
+msgstr "Koska rakentaminen vie aikaa, voit muuttaa pelinopeutta käyttäen näppäimiä %1$s ja %2$s."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
-msgstr "Taisteluareena On Rakennettu"
+msgstr "Taisteluareena on rakennettu"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
@@ -205,13 +207,13 @@ msgstr "Saadaksesi lisätietoja voit katsoa rakennuksen ohjeruutua, joka löytyy
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
-msgstr "Oppiaksesi kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa heidän kuvakkeita. Niitä on muutettu punaisilla täplillä:"
+msgstr "Saadaksesi selville kuinka pitkälle sotilaasi ovat edistyneet harjoittelussa, voit katsoa niiden kuvakkeita. Niitä on muutettu punaisilla täplillä:"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
-msgstr "Punaisten täplien puuttuminen tarkoittaa ettei sotilasta ole koulutettu. joten hänen taso on 0. Kaikilla sinun uusilla alokkailla on niin."
+msgstr "Punaisten täplien puuttuminen tarkoittaa ettei sotilasta ole koulutettu, joten hänen tasonsa on 0. Kaikki uudet alokkaat aloittavat näin."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
@@ -223,7 +225,7 @@ msgstr "Jokaista onnistunutta koulutusta kohden sotilaasi vahvistuu. Se osoiteta
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr "Kun sotilaasi on saavuttanut korkeimman mahdollisesn tason (tässä tapauksessa tason 2), se osoitetaan valkoisella taustavärillä."
+msgstr "Kun sotilaasi on saavuttanut korkeimman mahdollisen tason (tässä tapauksessa tason 2), se osoitetaan valkoisella taustavärillä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
@@ -256,20 +258,20 @@ msgid ""
 "The battle arena only trains the soldiers in evade. To get the strongest "
 "possible soldier, you also need to build a training camp, which trains them "
 "in attack and health."
-msgstr "Taisteluareena opettaa vain västämään. Saadaksesi mahdollisimman vahvan sotilaan, sinun täytyy myös rakentaa harjoitusleiri, joka kouluttaa heille hyökkäystä ja terveyttä."
+msgstr "Taisteluareena opettaa vain väistämään. Saadaksesi mahdollisimman vahvan sotilaan, sinun täytyy myös rakentaa harjoitusleiri, joka kouluttaa heille hyökkäystä ja terveyttä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:122
 msgid ""
 "Great, our training camp has now been finished, too. Now nothing will hinder"
 " us from getting the strongest warriors the world has ever seen."
-msgstr "Hienoa, myös harjoitusleirimme on nyt valmistunut. Nyt mikään ei meitä enää estele saamasta vahvimpia taistelijoita mitä maailmassa on koskaan nähty."
+msgstr "Hienoa, myös harjoitusleirimme on nyt valmistunut. Nyt mikään ei enää estä meitä saamasta vahvimpia taistelijoita mitä maailmassa on koskaan nähty."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:123
 msgid ""
 "To train in the training camp, our soldiers need food like in the battle "
 "arena, but no strong beer. Instead, they need different axes for attack "
 "training and helmets for health training."
-msgstr "Sotilaat tarvitsevat ruokaa kouluttautuaksee harjoitusleirillä, kuten taisteluareenalla, mutta ei vahvaa olutta. Sen sijaan he tarvitsevat erilaisia kirveitä hyökkäyskoulutuksessa ja haarniskoja terveyskoulutuksessa."
+msgstr "Sotilaat tarvitsevat ruokaa kouluttautuakseen harjoitusleirillä, kuten taisteluareenalla, mutta ei vahvaa olutta. Sen sijaan he tarvitsevat erilaisia kirveitä hyökkäyskoulutuksessa ja kypäriä terveyskoulutuksessa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:124
 msgid ""
@@ -285,7 +287,7 @@ msgid ""
 "ability levels cannot be compared: an Imperial soldier has a base attack of "
 "%1% at level 0, while a Barbarian soldier at the same level only has a base "
 "attack of %2%."
-msgstr ""
+msgstr "Pidäthän mielessä, että jokainen Widelands-heimo omaa yksilöllisen tapansa koulutuksessa, joten rakennukset ja tarvikkeet ovat erilaisia. Lisäksi, kykytasoja ei voida mielekkäästi vertailla: keisarillisella sotilaalla lähtöhyökkäys on %1% asteessa 0, kun taas barbaarisotilaalla samalla tasolla hyökkäyslähtö on vain %2%."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
@@ -307,7 +309,7 @@ msgid ""
 "You can try your luck and expand randomly, but this is risky. A safer way is"
 " to use a scout to explore unseen parts of the map. What if he finds "
 "mountains overflowing with gold?"
-msgstr "Voit kokeilla onneasia ja laajentaa satunnaiseen suuntaan, mutta se on riskialtista. Turvallisin tapa on käyttää tiedustelijaa tutkimattomien kartan alueiden tutkimiseen. Mitäpä jos se löytääkin vuoren, joka pursuaa kultaa?"
+msgstr "Voit kokeilla onneasi ja laajentaa satunnaiseen suuntaan, mutta se on riskialtista. Turvallisin tapa on käyttää tiedustelijaa tutkimattomien kartan alueiden tutkimiseen. Mitäpä jos se löytääkin vuoren, joka pursuaa kultaa?"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
 msgid "We will need a scout’s hut to start exploring. It is a small building."
@@ -343,7 +345,7 @@ msgstr "Valmiina!"
 msgid ""
 "Well done! Your scout’s hut has been built. While our scout is moving in, "
 "let’s learn a little bit more about him."
-msgstr ""
+msgstr "Hyvää työtä! Lähettisi maja on rakennettu. Samalla kun lähettimme lähenee, opetellaanpa hänestä hiukan lisää."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
 msgid ""
@@ -375,7 +377,7 @@ msgstr "Tarkkaile tiedustelijaasi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
 msgid "Scout made progress"
-msgstr "Tiedustelija edistyy"
+msgstr "Tiedustelija etenee"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
 msgid "New horizons?"
@@ -389,13 +391,13 @@ msgstr "Kuten näet, tiedustelija voi mennä melko kauas. Hyvä uutinen on ettei
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
 msgid "You can use the minimap to see the exploration’s progress."
-msgstr "Voi käyttää pienkarttaa nähdäksesi tutkimusmatkan edistymisen."
+msgstr "Voit käyttää pienkarttaa seurataksesi tutkimusmatkan edistymistä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
 msgid ""
 "Don’t forget that scouting is hard work and as such cannot be done without "
 "provision of food."
-msgstr "Älä unohda, että titkiminen on rankkaa työtä ja sitä ei voi tehdä ilman muonavarastoa."
+msgstr "Älä unohda, että tutkiminen on rankkaa työtä ja sitä ei voi tehdä ilman muonavarastoa."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
@@ -427,7 +429,7 @@ msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Kun olet laajentamassa ei-kenenkään-maalle, voit tehdä rakennuksia etusijassa alokkaille. Kun suunnittelet hyökäystä, lähetä ammattisotilaita sille alueelle. Valloitetuissa rakennuksissa suositaan aina ammattisotilaita."
+msgstr "Kun olet laajentamassa ei-kenenkään-maalle, voit tehdä rakennuksia etusijassa alokkaille. Kun suunnittelet hyökkäystä, lähetä ammattisotilaita sille alueelle. Valloitetuissa rakennuksissa suositaan aina ammattisotilaita."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Soldier capacity"
@@ -444,7 +446,7 @@ msgid ""
 " buttons to decrease or increase the desired number of soldiers. Every "
 "building has a maximum capacity. In case of the barrier, it is five, for "
 "example."
-msgstr "On toinenkin tapa kontrolloida sotilasrakennuksien vahvuutta: sotilaiden sijoittamismäärällä. Paina vain nuolipainikkeita pienentääksesi tai suurentaaksesi haluaman sotilasmäärän verran. Jokaisella rakennuksella on maksimi kapasiteetti. Esimerkiksi rajalinnakkeen tapauksessa se on viisi."
+msgstr "Sotilasrakennuksien vahvuutta voidaan säädellä myös sotilaiden sijoittamismäärällä. Paina vain nuolipainikkeita pienentääksesi tai suurentaaksesi halutun sotilasmäärän verran. Jokaisella rakennuksella on maksimikapasiteetti, esimerkiksi rajalinnakkeeseen mahtuu viisi sotilasta."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
@@ -456,7 +458,7 @@ msgstr "Jos haluat lähettää jonkun sotilaan pois, voit yksinkertaisesti vain 
 msgid ""
 "Let me also describe what the numbers in the status string mean. This string"
 " can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
-msgstr ""
+msgstr "Annahan kun kuvailen mitä numerot tuossa tilanyörissä merkitsevät. Tuo nyöri voi sisältää korkeintaan kolme numeroa, kuten ‘1 (+5) sotilas (+2)’."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
@@ -470,14 +472,14 @@ msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
-msgstr "Toinen numero kertoo kuinka monta muuta sotilasta rakenunksessa oleskelee, mutta ovat tällä hetkellä ulkona. Viisi sotilasta mahdollisesti on hyökkäämässä kohti vihollista. He palaavat sitten kun ovat onnistuneet."
+msgstr "Toinen numero kertoo kuinka monta muuta sotilasta rakennuksessa oleskelee, mutta jotka ovat tällä hetkellä ulkona. Viisi sotilasta on mahdollisesti hyökkäämässä kohti vihollista. He palaavat sitten kun ovat onnistuneet."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Kolmas numero ilmaisee puuttuvat sotilaat. Toivot kahdeksan sotilaan (1 + 5 + 2) olevan paikalla, kaksi saattaa olla kuollut. Ne korvataa uusilla sotilailla vastatosta, mikäli se on mahdollista."
+msgstr "Kolmas numero ilmaisee puuttuvat sotilaat. Kahdeksasta (1 + 5 + 2) paikalle toivotusta sotilaasta kaksi saattaa olla kuollut. Ne korvataan reserviläisillä varastosta, mikäli se on mahdollista."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
@@ -504,13 +506,13 @@ msgid ""
 " be hidden under the fog of war. You should therefore only dismantle "
 "military buildings deep inside your territory where you are safe from "
 "enemies."
-msgstr "Kuinka hyvänsä, sotilasrakennuksen tuhoamiseen liittyy aina riski: maa on silti sinun, mutta se ei ole enää suojassa. Mikä tahansa vihollinen, joka rakentaa oman sotilasrakennuksen voi ottaa sen maa-alueen haltuunsa ilman taistelua ja saa rakennuksesi syttymään tuleen. Myöhemmin jotkin maa-alueet voivat peittyä sodan aiheuttamaan usvaan. Siksi sinun tulisi vain purkaa sotilasrakennuksia syvällä alueesi sisällä, missä olet turvassa vihollisilta."
+msgstr "Kuinka hyvänsä, sotilasrakennuksen tuhoamiseen liittyy aina riski: maa on edelleen sinun, mutta se ei ole enää suojassa. Vihollinen, joka rakentaa oman sotilasrakennuksen lähelle voi ottaa maa-alueesi haltuun ilman taistelua ja saa rakennuksesi syttymään tuleen. Lisäksi jotkin maa-alueet voivat nyt peittyä sodan usvan alle. Siksi sinun tulisi purkaa sotilasrakennuksia vain syvällä alueesi sisällä, missä olet turvassa vihollisilta."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
-msgstr "Oletko nähnyt vartiomlkkiäsi? Koska se ei voi sisältää monia sotilaita ja on vahvemman rajalinnakkeen vieressä, se on melko hyödytön."
+msgstr "Oletko nähnyt vartiomökkiäsi? Koska se ei voi majoittaa montaa sotilasta ja on vahvemman rajalinnakkeen vieressä, se on melko hyödytön."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
@@ -529,7 +531,7 @@ msgstr "Sotilaat, voitte mennä!"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
-msgstr "Pura sinun vartiomökki luoteessa"
+msgstr "Pura vartiomökkisi luoteessa"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
@@ -541,12 +543,12 @@ msgstr "Voit kontrolloida sotilaiden sijoitettua määrää sota-asemalla nuolip
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
-msgstr "Pura sinun vartiomökki luoteessa, rajalinnakkeen vieressä."
+msgstr "Pura vartiomökkisi luoteessa, rajalinnakkeen vieressä."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid "Enhance Your Fortress"
-msgstr "Laajenna Sinun Linnoitusta"
+msgstr "Laajenna linnoitustasi"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhancing Buildings"
@@ -557,20 +559,20 @@ msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
-msgstr "Hyvin tehty. Nyt tiedät kuinka vetää sotilaasi takaisin paikoista, jossa en heitä enää tarvitse. On aika kertoa kuinka vahvistaa etulinjaasi."
+msgstr "Hyvin tehty. Nyt tiedät kuinka vetää sotilaat takaisin paikoista, jossa heitä ei enää tarvita. On aika kertoa kuinka vahvistaa etulinjaasi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
-msgstr "Linnoituksesi on jo melko vahva ja valloittaa paljon tilaa. Mutta on olemassa vielä suurempi rakennus: kastelliksi."
+msgstr "Linnoituksesi on jo melko vahva ja valtaa paljon alaa. Mutta on olemassa vieläkin mahtavampi rakennus: kastelli."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
-msgstr "Kastelleja ei voi suoraan rakentaa. Sen sijaan sinun täytyy tehdä ensin linnoitus ja sitten laajentaa se kastelliksi. Tehdäksesi sellaisen klikkaa linnoitusta ja sitten valitse 'Laajenna Kastelliksi' painike."
+msgstr "Kastelleja ei voi suoraan rakentaa. Sen sijaan sinun täytyy rakentaa ensin linnoitus ja sitten laajentaa se kastelliksi. Tehdäksesi sellaisen klikkaa linnoitusta ja sitten valitse 'Laajenna Kastelliksi' painike."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
@@ -614,21 +616,21 @@ msgid ""
 "they took away a part of our land? And our lumberjack has now lost his place"
 " of work. This is what I was talking about. Let’s take our land back and "
 "defeat the enemy!"
-msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mikä tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maastamme? Ja meidän puunhakkaaja on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaampas maamme takaisin ja kukistetaan vihollinen."
+msgstr "Loistavaa työtä, kastelli on valmistunut. Mutta mitäs tuo on? Vihollisheimo on asettunut aivan viereemme sillä aikaa kun kastellimme oli rakenteilla! Näetkö kuinka he kaappasivat osan maistamme? Ja puunhakkaajamme on nyt menettänyt työpaikkansa. Tämä on juuri sitä mistä puhuin. Otetaanpas maamme takaisin ja kukistetaan vihollinen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
-msgstr "Hyökätäksesi rakennukseen, klikkaa sen ovien päällä, valitse kuinka monta sotilasta haluat lähettää ja klikkaa 'Hyökkäys' painiketta."
+msgstr "Hyökätäksesi rakennukseen, klikkaa sen ovia, valitse kuinka monta sotilasta haluat lähettää ja klikkaa 'Hyökkäys' painiketta."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
-msgstr "Sotilaasi saapuvat lähistöllä olevista sotilasrakennuksista. Kuten myös vastustajat tulevat kaikista lähellä olevista vihollisen sotilasrakennuksista ja pysäyttää joukkosi."
+msgstr "Sotilaasi lähtevät matkaan lähistöllä olevista sotilasrakennuksista. Samoin vastustajasi lähestyvät lähellä olevista vihollisen sotilasrakennuksista ja kohtaavat joukkosi."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid ""
@@ -651,7 +653,7 @@ msgstr "Kukista läheinen vihollinen."
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:281
 msgid "Conclusion"
-msgstr "Johtopäätös"
+msgstr "Yhteenveto"
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
 msgid ""

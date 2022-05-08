@@ -234,7 +234,7 @@ const Image* SpriteSheetAnimation::representative_image(const RGBColor* clr) con
 
 	Texture* rv = new Texture(w, h);
 	Rectf rect(Vector2f::zero(), w, h);
-	if (mipmap.has_playercolor_masks && clr) {
+	if (mipmap.has_playercolor_masks && (clr != nullptr)) {
 		rv->fill_rect(rect, RGBAColor(0, 0, 0, 0));
 		rv->blit_blended(rect, *mipmap.sheet, *mipmap.playercolor_mask_sheet,
 		                 Rectf(column * w, row * h, w, h), *clr);

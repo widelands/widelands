@@ -32,11 +32,11 @@ struct EditorSetOriginTool : public EditorTool {
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
+	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl(EditorInteractive& eia) override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/ui_basic/fsel.png");

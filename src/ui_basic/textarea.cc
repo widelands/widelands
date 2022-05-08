@@ -67,7 +67,8 @@ Textarea::Textarea(
 }
 
 inline const FontStyleInfo& Textarea::font_style() const {
-	return font_style_override_ ? *font_style_override_ : g_style_manager->font_style(font_style_);
+	return font_style_override_ != nullptr ? *font_style_override_ :
+                                            g_style_manager->font_style(font_style_);
 }
 
 void Textarea::set_style(const FontStyle style) {
@@ -178,7 +179,8 @@ void Textarea::expand() {
 	int32_t y = get_y();
 
 	update_desired_size();
-	int w, h = 0;
+	int w;
+	int h = 0;
 	get_desired_size(&w, &h);
 
 	switch (align_) {

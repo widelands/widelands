@@ -52,7 +52,7 @@ CmdQueue::~CmdQueue() {
 // Note: Order of destruction of Items is not guaranteed
 void CmdQueue::flush() {
 	uint32_t cbucket = 0;
-	while (ncmds_ && cbucket < kCommandQueueBucketSize) {
+	while ((ncmds_ != 0u) && cbucket < kCommandQueueBucketSize) {
 		std::priority_queue<CmdItem>& current_cmds = cmds_[cbucket];
 
 		while (!current_cmds.empty()) {
@@ -78,7 +78,7 @@ void CmdQueue::enqueue(Command* const cmd) {
 	if (upcast(PlayerCommand, plcmd, cmd)) {
 		ci.category = cat_playercommand;
 		ci.serial = plcmd->cmdserial();
-	} else if (dynamic_cast<GameLogicCommand*>(cmd)) {
+	} else if (dynamic_cast<GameLogicCommand*>(cmd) != nullptr) {
 		ci.category = cat_gamelogic;
 		ci.serial = nextserial_++;
 	} else {
@@ -112,7 +112,7 @@ void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
 			--ncmds_;
 			assert(game_time_var == c.duetime());
 
-			if (dynamic_cast<GameLogicCommand*>(&c)) {
+			if (dynamic_cast<GameLogicCommand*>(&c) != nullptr) {
 				StreamWrite& ss = game_.syncstream();
 				ss.unsigned_8(SyncEntry::kRunQueue);
 				ss.unsigned_32(c.duetime().get());
@@ -142,7 +142,7 @@ void GameLogicCommand::write(FileWrite& fw,
 #else
                              EditorGameBase&,
 #endif
-                             MapObjectSaver&) {
+                             MapObjectSaver& /* mos */) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Write duetime
@@ -155,7 +155,7 @@ void GameLogicCommand::write(FileWrite& fw,
  *
  * \note This function must be called by deriving objects that override it.
  */
-void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader&) {
+void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& /* mol */) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {

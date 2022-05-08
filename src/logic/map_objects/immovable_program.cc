@@ -144,10 +144,10 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(
-	   game, Duration(parameters.duration.get() ? 1 + game.logic_rand() % parameters.duration.get() +
-	                                                 game.logic_rand() % parameters.duration.get() :
-                                                 0));
+	immovable.program_step(game, Duration(parameters.duration.get() != 0u ?
+                                            1 + game.logic_rand() % parameters.duration.get() +
+	                                            game.logic_rand() % parameters.duration.get() :
+                                            0));
 }
 
 /* RST
@@ -499,13 +499,13 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 			fringe_size += 6;
 		} while (game.logic_rand() % math::k100PercentAsInt < probability_);
 
-		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
+		for (uint32_t n = game.logic_rand() % fringe_size; n != 0u; --n) {
 			mr.advance(map);
 		}
 
 		const FCoords new_location = map.get_fcoords(mr.location());
-		if (!new_location.field->get_immovable() &&
-		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
+		if ((new_location.field->get_immovable() == nullptr) &&
+		    ((new_location.field->nodecaps() & MOVECAPS_WALK) != 0) &&
 		    (game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 		       probability_to_grow(
 		          descr.terrain_affinity(), new_location, map, game.descriptions().terrains())) {
@@ -613,7 +613,7 @@ ActConstructData* ActConstructData::load(FileRead& fr, const Immovable& imm) {
 
 void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 	ActConstructData* d = imm.get_action_data<ActConstructData>();
-	if (!d) {
+	if (d == nullptr) {
 		// First execution
 		d = new ActConstructData;
 		imm.set_action_data(d);
@@ -635,7 +635,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 			totaldelivered += addme.second;
 		}
 
-		if (!totaldelivered) {
+		if (totaldelivered == 0u) {
 			imm.remove(g);
 			return;
 		}

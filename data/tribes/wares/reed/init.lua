@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_ware_type {
+wl.Descriptions():new_ware_type {
    name = "reed",
    -- TRANSLATORS: This is a ware name used in lists of wares. Used for thatching roofs and as a fiber for weaving cloth, fishing nets etc.
    descname = pgettext("ware", "Reed"),

@@ -8,16 +8,16 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-07 07:24+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -875,6 +875,6 @@ msgstr "Wenn das Spiel abstürzt, mach dir keine Sorgen! Das Spiel speichert aut
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Unsere Computerspieler sind zu langweilig? Besuche unsere Webseite unter %s und spiele mit anderen Spielern online."
+msgstr "Sind die Computerspieler zu langweilig? Besuche unsere Webseite unter %s und spiele mit anderen Spielern online."

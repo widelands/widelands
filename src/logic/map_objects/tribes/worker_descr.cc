@@ -102,7 +102,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
 		for (std::string program_name : programs_table->keys<std::string>()) {
 			program_name = to_lower(program_name);
-			if (programs_.count(program_name)) {
+			if (programs_.count(program_name) != 0u) {
 				throw GameDataError("Program '%s' has already been declared for worker '%s'",
 				                    program_name.c_str(), name().c_str());
 			}

@@ -299,7 +299,7 @@ void set_locale(const std::string& name) {
 	} else {
 		alt_str = lang;
 		// otherwise, try alternatives.
-		if (kAlternatives.count(lang)) {
+		if (kAlternatives.count(lang) != 0u) {
 			alt_str = kAlternatives.at(lang);
 		}
 	}
@@ -336,7 +336,7 @@ void set_locale(const std::string& name) {
 		for (char const* encoding : encodings) {
 			std::string try_locale = base_locale + encoding;
 			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
-			if (res) {
+			if (res != nullptr) {
 				locale = try_locale;
 				log_info("using locale %s\n", try_locale.c_str());
 				leave_while = true;

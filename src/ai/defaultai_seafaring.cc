@@ -229,7 +229,7 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-	    persistent_data->no_more_expeditions == kFalse && ship_free && basic_economy_established) {
+	    !persistent_data->no_more_expeditions && ship_free && basic_economy_established) {
 
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
@@ -407,7 +407,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime)
 		                  so.ship->get_position().y);
 
 		// In case there is no port left to get back to, continue exploring
-		if (!so.ship->get_fleet() || !so.ship->get_fleet()->has_ports()) {
+		if ((so.ship->get_fleet() == nullptr) || !so.ship->get_fleet()->has_ports()) {
 			verb_log_dbg_time(
 			   gametime, "%d: %s at %3dx%3d: END OF EXPEDITION without port, continue exploring\n", pn,
 			   so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
@@ -569,7 +569,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 
 		for (int8_t i = 0; i < 30; ++i) {
 			map.get_neighbour(tmp_coords, dir, &tmp_coords);
-			if (!(map.get_fcoords(tmp_coords).field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
+			if ((map.get_fcoords(tmp_coords).field->nodecaps() & Widelands::MOVECAPS_SWIM) == 0) {
 				break;
 			}
 			if (i <= 4) {  // Four fields from the ship is too close for "open sea"

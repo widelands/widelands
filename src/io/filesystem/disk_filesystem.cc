@@ -139,7 +139,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 	}
 	std::set<std::string> results;
 
-	if (glob(buf.c_str(), 0, nullptr, &gl)) {
+	if (glob(buf.c_str(), 0, nullptr, &gl) != 0) {
 		return results;
 	}
 
@@ -381,7 +381,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 	try {
 		file = fopen(fullname.c_str(), "rb");
-		if (!file) {
+		if (file == nullptr) {
 			throw FileError("RealFSImpl::load", fullname, "could not open file for reading");
 		}
 
@@ -402,14 +402,14 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1);  //  TODO(unknown): memory leak!
-		if (!data) {
+		if (data == nullptr) {
 			throw wexception(
 			   "RealFSImpl::load: memory allocation failed for reading file %s (%s) with size %" PRIuS
 			   "",
 			   fname.c_str(), fullname.c_str(), size);
 		}
 		int result = fread(data, size, 1, file);
-		if (size && (result != 1)) {
+		if ((size != 0u) && (result != 1)) {
 			throw wexception("RealFSImpl::load: read failed for %s (%s) with size %" PRIuS "",
 			                 fname.c_str(), fullname.c_str(), size);
 		}
@@ -420,10 +420,10 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 		length = size;
 	} catch (...) {
-		if (file) {
+		if (file != nullptr) {
 			fclose(file);
 		}
-		if (data) {
+		if (data != nullptr) {
 			free(data);
 		}
 		throw;
@@ -448,14 +448,14 @@ void RealFSImpl::write(const std::string& fname,
 	fullname = canonicalize_name(fname);
 
 	FILE* const f = fopen(fullname.c_str(), append ? "a" : "wb");
-	if (!f) {
+	if (f == nullptr) {
 		throw FileError("RealFSImpl::write", fullname, "could not open file for writing");
 	}
 
 	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
 
-	if (length && c != 1) {  // data might be 0 blocks long
+	if ((length != 0u) && c != 1) {  // data might be 0 blocks long
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 	}
 }
@@ -481,7 +481,7 @@ namespace {
 
 struct RealFSStreamRead : public StreamRead {
 	explicit RealFSStreamRead(const std::string& fname) : file_(fopen(fname.c_str(), "rb")) {
-		if (!file_) {
+		if (file_ == nullptr) {
 			throw FileError(
 			   "RealFSStreamRead::RealFSStreamRead", fname, "could not open file for reading");
 		}
@@ -496,7 +496,7 @@ struct RealFSStreamRead : public StreamRead {
 	}
 
 	bool end_of_file() const override {
-		return feof(file_);
+		return feof(file_) != 0;
 	}
 
 private:
@@ -521,7 +521,7 @@ namespace {
 struct RealFSStreamWrite : public StreamWrite {
 	explicit RealFSStreamWrite(const std::string& fname) : filename_(fname) {
 		file_ = fopen(fname.c_str(), "wb");
-		if (!file_) {
+		if (file_ == nullptr) {
 			throw FileError(
 			   "RealFSStreamWrite::RealFSStreamWrite", fname, "could not open file for writing");
 		}

@@ -26,13 +26,13 @@ struct NetworkPlayerSettingsBackend {
 	explicit NetworkPlayerSettingsBackend(GameSettingsProvider* const settings) : s(settings) {
 	}
 
-	void set_player_state(PlayerSlot id, PlayerSettings::State state);
-	void set_player_ai(PlayerSlot id, const std::string& name, bool random_ai);
-	void set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared);
-	void set_player_tribe(PlayerSlot id, const std::string& tribename);
-	void set_player_init(PlayerSlot id, uint8_t initialization_index);
-	void set_player_team(PlayerSlot id, Widelands::TeamNumber team);
-	void set_player_color(PlayerSlot id, const RGBColor& team);
+	void set_player_state(PlayerSlot id, PlayerSettings::State state) const;
+	void set_player_ai(PlayerSlot id, const std::string& name, bool random_ai) const;
+	void set_player_shared(PlayerSlot id, Widelands::PlayerNumber shared) const;
+	void set_player_tribe(PlayerSlot id, const std::string& tribename) const;
+	void set_player_init(PlayerSlot id, uint8_t initialization_index) const;
+	void set_player_team(PlayerSlot id, Widelands::TeamNumber team) const;
+	void set_player_color(PlayerSlot id, const RGBColor& c) const;
 
 	GameSettingsProvider* const s;
 };

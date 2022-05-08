@@ -22,10 +22,11 @@
 #include "io/filewrite.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -42,9 +43,29 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 
 			game.list_of_scenarios_.clear();
 			if (packet_version >= 6) {
-				for (size_t i = fr.unsigned_32(); i; --i) {
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
 					game.list_of_scenarios_.push_back(fr.string());
 				}
+			}
+
+			if (packet_version >= 7) {
+				/* This design is the fix for bug #4786. The order in which units are loaded is
+				 * stored in the savegame to allow recreating it exactly during loading without
+				 * having to always load all tribes. Otherwise, we'd get desyncs because the
+				 * dynamic load order is different during loading from starting a new game.
+				 */
+				game.postload_addons_before_loading();
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					/* This tells the descriptions manager to actually load the description
+					 * with the given name, e.g. "barbarians" or "frisians_well".
+					 * Takes care of legacy lookup and skipping already loaded units.
+					 */
+					Notifications::publish(NoteMapObjectDescription(
+					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
+				}
+				game.postload_tribes();
+			} else {
+				game.check_legacy_addons_desync_magic();
 			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
@@ -77,6 +98,11 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 
 	fw.unsigned_32(game.list_of_scenarios_.size());
 	for (const std::string& s : game.list_of_scenarios_) {
+		fw.string(s);
+	}
+
+	fw.unsigned_32(game.descriptions().load_order().size());
+	for (const std::string& s : game.descriptions().load_order()) {
 		fw.string(s);
 	}
 

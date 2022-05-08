@@ -91,14 +91,14 @@ RandomGame::~RandomGame() {
 	if (game_ != nullptr) {
 		game_->cleanup_objects();
 	}
-	if (progress_window_) {
+	if (progress_window_ != nullptr) {
 		game_->release_loader_ui();
 		progress_window_ = nullptr;
 	}
 }
 
 void RandomGame::reactivated() {
-	if (!progress_window_) {
+	if (progress_window_ == nullptr) {
 		progress_window_ =
 		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
 		progress_window_->set_visible(false);
@@ -107,7 +107,7 @@ void RandomGame::reactivated() {
 
 void RandomGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
-	if (progress_window_) {
+	if (progress_window_ != nullptr) {
 		progress_window_->set_size(capsule_.get_inner_w(), capsule_.get_inner_h());
 	}
 }
@@ -120,7 +120,7 @@ void RandomGame::clicked_ok() {
 	if (menu_.do_generate_map(*game_, nullptr, settings_.get())) {
 		game_->remove_loader_ui();
 		progress_window_ = nullptr;
-		new LaunchSPG(capsule_, *settings_, *game_, nullptr, false);
+		new LaunchSPG(capsule_, *settings_, game_, nullptr, false);
 	} else {
 		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();

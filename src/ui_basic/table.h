@@ -196,7 +196,7 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
-	void set_column_tooltip(uint8_t col, const std::string& tooltip);
+	void set_column_tooltip(uint8_t col, const std::string& text);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
 	size_t number_of_columns() const;
@@ -220,7 +220,7 @@ public:
 	void remove(uint32_t);
 	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
+	EntryRecord& add(void* entry = nullptr, bool const do_select = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -301,7 +301,7 @@ public:
 	bool handle_tooltip() override;
 
 private:
-	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
+	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b) const;
 	bool sort_helper(uint32_t a, uint32_t b);
 	void reposition_scrollbar();
 	size_t find_resizable_column_idx();
@@ -344,7 +344,7 @@ private:
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
-	void set_scrollpos(int32_t pos);
+	void set_scrollpos(int32_t i);
 	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
 	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };

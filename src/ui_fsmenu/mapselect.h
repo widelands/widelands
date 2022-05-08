@@ -19,6 +19,9 @@
 #ifndef WL_UI_FSMENU_MAPSELECT_H
 #define WL_UI_FSMENU_MAPSELECT_H
 
+#include <memory>
+
+#include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -27,7 +30,6 @@
 #include "wui/maptable.h"
 
 using Widelands::Map;
-class GameController;
 struct GameSettingsProvider;
 
 namespace FsMenu {
@@ -43,7 +45,7 @@ public:
 	          LaunchMPG* /* nullptr for single player */,
 	          GameSettingsProvider*,
 	          GameController*,
-	          Widelands::Game&);
+	          std::shared_ptr<Widelands::Game> for_preview);
 	~MapSelect() override;
 
 	MapData const* get_map() const;
@@ -69,6 +71,8 @@ private:
 	void clear_filter();
 	void rebuild_balancing_dropdown();
 
+	std::shared_ptr<Widelands::Game> game_for_preview_;
+
 	UI::Box checkboxes_;
 
 	MapTable table_;
@@ -79,7 +83,6 @@ private:
 	const std::string basedir_;
 	std::string curdir_;
 
-	Widelands::Game& game_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 

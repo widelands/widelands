@@ -123,12 +123,12 @@ AddOnVersion string_to_version(std::string input) {
 	NEVER_HERE();
 }
 
-bool is_newer_version(const AddOnVersion& a, const AddOnVersion& b) {
-	const size_t s_a = a.size();
-	const size_t s_b = b.size();
+bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare) {
+	const size_t s_a = base.size();
+	const size_t s_b = compare.size();
 	for (size_t i = 0; i < s_a && i < s_b; ++i) {
-		if (a[i] != b[i]) {
-			return a[i] < b[i];
+		if (base[i] != compare[i]) {
+			return base[i] < compare[i];
 		}
 	}
 	return s_a < s_b;
@@ -169,63 +169,61 @@ static AddOnConflict check_requirements_conflicts(const AddOnRequirements& requi
 	if (addons_missing.empty()) {
 		if (addons_wrong_version.empty()) {
 			return std::make_pair(_("No conflicts"), false);
-		} else {
-			std::string list;
-			for (const auto& a : addons_wrong_version) {
-				if (list.empty()) {
-					list = format(_("%1$s (expected version %2$s, found %3$s)"), a.first,
-					              version_to_string(a.second.second), version_to_string(a.second.first));
-				} else {
-					list = format(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
-					              version_to_string(a.second.second), version_to_string(a.second.first));
-				}
-			}
-			// Wrong versions might work, so do not forbid loading
-			return std::make_pair(
-			   format(ngettext("%1$u add-on with wrong version: %2$s",
-			                   "%1$u add-ons with wrong version: %2$s", addons_wrong_version.size()),
-			          addons_wrong_version.size(), list),
-			   false);
 		}
-	} else {
-		if (addons_wrong_version.empty()) {
-			std::string list;
-			for (const std::string& a : addons_missing) {
-				if (list.empty()) {
-					list = a;
-				} else {
-					list = format(_("%1$s, %2$s"), list, a);
-				}
-			}
-			return std::make_pair(format(ngettext("%1$u missing add-on: %2$s",
-			                                      "%1$u missing add-ons: %2$s", addons_missing.size()),
-			                             addons_missing.size(), list),
-			                      true);
-		} else {
-			std::string list;
-			for (const std::string& a : addons_missing) {
-				if (list.empty()) {
-					list = format(_("%s (missing)"), a);
-				} else {
-					list = format(_("%1$s, %2$s (missing)"), list, a);
-				}
-			}
-			for (const auto& a : addons_wrong_version) {
+		std::string list;
+		for (const auto& a : addons_wrong_version) {
+			if (list.empty()) {
+				list = format(_("%1$s (expected version %2$s, found %3$s)"), a.first,
+				              version_to_string(a.second.second), version_to_string(a.second.first));
+			} else {
 				list = format(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
 				              version_to_string(a.second.second), version_to_string(a.second.first));
 			}
-			return std::make_pair(
-			   format(
-			      _("%1$s and %2$s: %3$s"),
-			      format(ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size()),
-			             addons_missing.size()),
-			      format(ngettext("%u add-on with wrong version", "%u add-ons with wrong version",
-			                      addons_missing.size()),
-			             addons_missing.size()),
-			      list),
-			   true);
+		}
+
+		// Wrong versions might work, so do not forbid loading
+		return std::make_pair(
+		   format(ngettext("%1$u add-on with wrong version: %2$s",
+		                   "%1$u add-ons with wrong version: %2$s", addons_wrong_version.size()),
+		          addons_wrong_version.size(), list),
+		   false);
+	}
+
+	if (addons_wrong_version.empty()) {
+		std::string list;
+		for (const std::string& a : addons_missing) {
+			if (list.empty()) {
+				list = a;
+			} else {
+				list = format(_("%1$s, %2$s"), list, a);
+			}
+		}
+		return std::make_pair(format(ngettext("%1$u missing add-on: %2$s",
+		                                      "%1$u missing add-ons: %2$s", addons_missing.size()),
+		                             addons_missing.size(), list),
+		                      true);
+	}
+	std::string list;
+	for (const std::string& a : addons_missing) {
+		if (list.empty()) {
+			list = format(_("%s (missing)"), a);
+		} else {
+			list = format(_("%1$s, %2$s (missing)"), list, a);
 		}
 	}
+	for (const auto& a : addons_wrong_version) {
+		list = format(_("%1$s, %2$s (expected version %3$s, found %4$s)"), list, a.first,
+		              version_to_string(a.second.second), version_to_string(a.second.first));
+	}
+	return std::make_pair(
+	   format(_("%1$s and %2$s: %3$s"),
+	          format(ngettext("%u missing add-on", "%u missing add-ons", addons_missing.size()),
+	                 addons_missing.size()),
+	          format(ngettext("%u add-on with wrong version", "%u add-ons with wrong version",
+	                          addons_missing.size()),
+	                 addons_missing.size()),
+	          list),
+	   true);
 }
 
 AddOnConflict check_requirements(const AddOnRequirements& required_addons) {
@@ -273,7 +271,8 @@ uint32_t AddOnInfo::number_of_votes() const {
 	return total;
 }
 double AddOnInfo::average_rating() const {
-	double total = 0, sum = 0;
+	double total = 0;
+	double sum = 0;
 	for (uint8_t i = 1; i <= kMaxRating; ++i) {
 		total += votes[i - 1];
 		sum += votes[i - 1] * i;
@@ -353,7 +352,7 @@ void update_ui_theme(const UpdateThemeAction action, std::string arg) {
 		log_warn("Theme '%s' not found", arg.c_str());
 		FALLS_THROUGH;
 	case UpdateThemeAction::kAutodetect:
-		if (!previously_enabled) {
+		if (previously_enabled == nullptr) {
 			set_config_string("theme", "");
 			set_template_dir("");
 			return;
@@ -414,7 +413,7 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 	i->unlocalized_description = s.get_safe_untranslated_string("description");
 	i->unlocalized_author = s.get_safe_untranslated_string("author");
 	i->version = string_to_version(s.get_safe_string("version"));
-	i->i18n_version = i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0;
+	i->i18n_version = i18n_section != nullptr ? i18n_section->get_natural(name.c_str(), 0) : 0;
 	i->category = get_category(s.get_safe_string("category"));
 	i->sync_safe = s.get_bool("sync_safe", false);
 	i->min_wl_version = s.get_string("min_wl_version", "");
@@ -448,10 +447,9 @@ std::shared_ptr<AddOnInfo> preload_addon(const std::string& name) {
 		if (commapos == std::string::npos) {
 			i->requirements.push_back(req);
 			break;
-		} else {
-			i->requirements.push_back(req.substr(0, commapos));
-			req = req.substr(commapos + 1);
 		}
+		i->requirements.push_back(req.substr(0, commapos));
+		req = req.substr(commapos + 1);
 	}
 
 	return pointer;

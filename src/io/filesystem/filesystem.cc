@@ -100,7 +100,7 @@ bool NumberGlob::next(std::string* s) {
 	}
 
 	*s = template_;
-	if (max_) {
+	if (max_ != 0u) {
 		replace_last(*s, to_replace_, format(format_, current_));
 	}
 	++current_;
@@ -122,7 +122,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	if (path_size == root_size) {
 		return path == root_;
 	}
-	if (path.compare(0, root_.size(), root_)) {
+	if (path.compare(0, root_.size(), root_) != 0) {
 		return false;
 	}
 
@@ -187,7 +187,7 @@ std::string FileSystem::get_working_directory() {
 #else
 	char* const result = getcwd(cwd, PATH_MAX);
 #endif
-	if (!result) {
+	if (result == nullptr) {
 		throw FileError("FileSystem::get_working_directory()", "widelands", "can not run getcwd");
 	}
 
@@ -539,7 +539,7 @@ std::string FileSystem::filename_ext(const std::string& f) {
 }
 
 std::string FileSystem::filename_without_ext(const char* const p) {
-	std::string fname(p ? FileSystem::fs_filename(p) : "");
+	std::string fname(p != nullptr ? FileSystem::fs_filename(p) : "");
 	std::string ext(FileSystem::filename_ext(fname));
 	return fname.substr(0, fname.length() - ext.length());
 }

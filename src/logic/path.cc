@@ -86,7 +86,7 @@ void Path::load(FileRead& fr, const Map& map) {
 			start_ = end_ = read_coords_32(&fr, map.extent());
 			path_.clear();
 			uint32_t steps = fr.unsigned_32();
-			while (steps--) {
+			while ((steps--) != 0u) {
 				append(map, read_direction_8(&fr));
 			}
 		} else {
@@ -122,9 +122,9 @@ CoordPath::CoordPath(const Map& map, const Path& path) {
 
 /// After which step does the node appear in this path?
 /// \return -1 if node is not part of this path.
-int32_t CoordPath::get_index(const Coords& c) const {
+int32_t CoordPath::get_index(const Coords& field) const {
 	for (uint32_t i = 0; i < coords_.size(); ++i) {
-		if (coords_[i] == c) {
+		if (coords_[i] == field) {
 			return i;
 		}
 	}

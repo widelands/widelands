@@ -88,7 +88,7 @@ struct FontStyleInfo {
 	bool shadow() const;
 
 private:
-	static Face string_to_face(const std::string& face_);
+	static Face string_to_face(const std::string& init_face);
 	const std::string face_to_string() const;
 
 	Face face_;

@@ -89,11 +89,11 @@ using Widelands::MapObject;
 using Widelands::TCoords;
 
 int caps_to_buildhelp(const Widelands::NodeCaps caps) {
-	if (caps & Widelands::BUILDCAPS_MINE) {
+	if ((caps & Widelands::BUILDCAPS_MINE) != 0) {
 		return Widelands::Field::Buildhelp_Mine;
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
-		if (caps & Widelands::BUILDCAPS_PORT) {
+		if ((caps & Widelands::BUILDCAPS_PORT) != 0) {
 			return Widelands::Field::Buildhelp_Port;
 		}
 		return Widelands::Field::Buildhelp_Big;
@@ -104,7 +104,7 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
 		return Widelands::Field::Buildhelp_Small;
 	}
-	if (caps & Widelands::BUILDCAPS_FLAG) {
+	if ((caps & Widelands::BUILDCAPS_FLAG) != 0) {
 		return Widelands::Field::Buildhelp_Flag;
 	}
 	return Widelands::Field::Buildhelp_None;
@@ -188,6 +188,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   map_view_.set_size(message.new_width, message.new_height);
+		   map_view_.pan_by(Vector2i((message.old_width - message.new_width) / 2,
+		                             (message.old_height - message.new_height) / 2),
+		                    MapView::Transition::Jump);
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   info_panel_.layout();
@@ -317,7 +320,6 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 		map_view()->increase_zoom();
 		mapviewmenu_.toggle();
 	} break;
-
 	case MapviewMenuEntry::kResetZoom: {
 		map_view()->reset_zoom();
 		mapviewmenu_.toggle();
@@ -338,7 +340,7 @@ bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords,
                                            const Widelands::Map* map) const {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 
-	if (!map) {
+	if (map == nullptr) {
 		for (const auto& preview : workarea_previews_) {
 			if (preview->coords == coords) {
 				return true;
@@ -398,7 +400,7 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 	const auto display_flags = get_display_flags();
 	InfoToDraw info_to_draw = InfoToDraw::kNone;
 
-	if (display_flags & InteractiveBase::dfShowBuildings) {
+	if ((display_flags & InteractiveBase::dfShowBuildings) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kShowBuildings;
 	}
 
@@ -406,13 +408,13 @@ InfoToDraw InteractiveBase::get_info_to_draw(bool show) const {
 		return info_to_draw;
 	}
 
-	if (display_flags & InteractiveBase::dfShowCensus) {
+	if ((display_flags & InteractiveBase::dfShowCensus) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kCensus;
 	}
-	if (display_flags & InteractiveBase::dfShowStatistics) {
+	if ((display_flags & InteractiveBase::dfShowStatistics) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kStatistics;
 	}
-	if (display_flags & InteractiveBase::dfShowSoldierLevels) {
+	if ((display_flags & InteractiveBase::dfShowSoldierLevels) != 0u) {
 		info_to_draw = info_to_draw | InfoToDraw::kSoldierLevels;
 	}
 
@@ -446,7 +448,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	                  UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
-	if (window) {
+	if (window != nullptr) {
 		window->opened.connect([button] { button->set_perm_pressed(true); });
 		window->closed.connect([button] { button->set_perm_pressed(false); });
 
@@ -657,7 +659,7 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
 
 	for (auto it = workarea_previews_.begin(); it != workarea_previews_.end(); ++it) {
-		if (it->get()->coords == coords && (is_additional ^ it->get()->data.empty())) {
+		if (it->get()->coords == coords && ((is_additional ^ it->get()->data.empty()) != 0)) {
 			workarea_previews_.erase(it);
 			workareas_cache_.reset(nullptr);
 			return;
@@ -742,7 +744,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget&) {
+void InteractiveBase::draw_overlay(RenderTarget& /* rt */) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 
@@ -819,7 +821,7 @@ void InteractiveBase::mainview_move() {
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
-	if (!minimap_registry_.window) {
+	if (minimap_registry_.window == nullptr) {
 		// Don't store the MiniMap pointer, we can access it via 'minimap_registry_.get_window()'.
 		// A MiniMap is a UniqueWindow, its parent will delete it.
 		new MiniMap(*this, &minimap_registry_);
@@ -848,7 +850,7 @@ void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
 }
 
-void InteractiveBase::resize_minimap() {
+void InteractiveBase::resize_minimap() const {
 	if (MiniMap* const minimap = minimap_registry_.get_window()) {
 		minimap->check_boundaries();
 	}
@@ -882,7 +884,7 @@ Get and set one individual flag of the display flags.
 ===============
 */
 bool InteractiveBase::get_display_flag(uint32_t const flag) const {
-	return display_flags_ & flag;
+	return (display_flags_ & flag) != 0u;
 }
 
 void InteractiveBase::set_display_flag(uint32_t const flag, bool const on) {
@@ -916,7 +918,7 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 
 				const int32_t x = fr.signed_32();
 				const int32_t y = fr.signed_32();
-				const bool pin = fr.unsigned_8();
+				const bool pin = fr.unsigned_8() != 0u;
 				UI::Window* w = nullptr;
 
 				switch (type) {
@@ -970,7 +972,7 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					   "Invalid panel save type %u", static_cast<unsigned>(type));
 				}
 
-				if (w) {
+				if (w != nullptr) {
 					w->set_pinned(pin);
 					w->set_pos(Vector2i(x, y));
 					w->move_inside_parent();  // In case the game was loaded at a smaller resolution.
@@ -987,7 +989,7 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 
 void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionUniqueWindows);
-	for (UI::Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
 		const UI::Panel::SaveType t = child->save_type();
 		if (t != UI::Panel::SaveType::kNone) {
 			fw.unsigned_8(static_cast<uint8_t>(t));
@@ -1002,7 +1004,7 @@ void InteractiveBase::save_windows(FileWrite& fw, Widelands::MapObjectSaver& mos
 
 void InteractiveBase::cleanup_for_load() {
 	std::set<UI::Panel*> panels_to_kill;
-	for (UI::Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+	for (UI::Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
 		if (dynamic_cast<UI::Window*>(child) != nullptr) {
 			panels_to_kill.insert(child);
 		}
@@ -1123,11 +1125,11 @@ void InteractiveBase::finish_build_road() {
 		log_warn_time(egbase().get_gametime(),
 		              "Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
 		              length, egbase().map().get_waterway_max_length());
-	} else if (length) {
+	} else if (length != 0u) {
 		upcast(Game, g, &egbase());
 
 		// Build the path as requested
-		if (g) {
+		if (g != nullptr) {
 			if (road_building_mode_->type == RoadBuildingType::kWaterway) {
 				g->send_player_build_waterway(
 				   road_building_mode_->player, *new Widelands::Path(road_building_mode_->path));
@@ -1147,7 +1149,7 @@ void InteractiveBase::finish_build_road() {
 			}
 		}
 
-		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
+		if (allow_user_input() && ((SDL_GetModState() & KMOD_CTRL) != 0)) {
 			//  place flags
 			const Map& map = egbase().map();
 			const std::vector<Coords>& c_vector = road_building_mode_->path.get_coords();
@@ -1155,14 +1157,14 @@ void InteractiveBase::finish_build_road() {
 			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
 
 			auto place_flag = [this, g](const Widelands::FCoords& coords) {
-				if (g) {
+				if (g != nullptr) {
 					g->send_player_build_flag(road_building_mode_->player, coords);
 				} else {
 					egbase().get_player(road_building_mode_->player)->build_flag(coords);
 				}
 			};
 
-			if (SDL_GetModState() & KMOD_SHIFT) {
+			if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 				//  start to end
 				for (std::vector<Coords>::const_iterator it = first; it <= last; ++it) {
 					place_flag(map.get_fcoords(*it));
@@ -1373,16 +1375,16 @@ void InteractiveBase::road_building_add_overlay() {
 			if (!next_to && road_building_mode_->path.get_nsteps() >= map.get_waterway_max_length()) {
 				continue;  // exceeds length limit
 			}
-		} else if (!(caps & Widelands::MOVECAPS_WALK)) {
+		} else if ((caps & Widelands::MOVECAPS_WALK) == 0) {
 			continue;  // need to be able to walk there
 		}
 
 		//  can't build on robusts
 		const Widelands::BaseImmovable* imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
-		    (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-		       (dynamic_cast<const Widelands::RoadBase*>(imm) &&
-		        (caps & Widelands::BUILDCAPS_FLAG))))) {
+		if ((imm != nullptr) && imm->get_size() >= Widelands::BaseImmovable::SMALL &&
+		    (!((dynamic_cast<const Widelands::Flag*>(imm) != nullptr) ||
+		       ((dynamic_cast<const Widelands::RoadBase*>(imm) != nullptr) &&
+		        ((caps & Widelands::BUILDCAPS_FLAG) != 0))))) {
 			continue;
 		}
 		if (road_building_mode_->path.get_index(neighb) >= 0) {
@@ -1515,13 +1517,13 @@ UI::UniqueWindow& InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	return *registry.window;
 }
 
-void InteractiveBase::broadcast_cheating_message() {
-	if (!get_game()) {
+void InteractiveBase::broadcast_cheating_message() const {
+	if (get_game() == nullptr) {
 		return;  // Editor
 	}
 	if (upcast(GameHost, h, game().game_controller())) {
 		h->send_system_message_code(
-		   "CHEAT", player_number() ? game().player(player_number()).get_name() : "");
+		   "CHEAT", player_number() != 0u ? game().player(player_number()).get_name() : "");
 	} else if (upcast(GameClient, c, game().game_controller())) {
 		c->send_cheating_info();
 	}
@@ -1559,14 +1561,14 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
 		case SDLK_SPACE:
-			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
+			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
 				GameChatMenu::create_script_console(
 				   this, debugconsole_, *DebugConsole::get_chat_provider());
 				return true;
 			}
 			break;
 		case SDLK_BACKSPACE:
-			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
+			if (((code.mod & KMOD_CTRL) != 0) && ((code.mod & KMOD_SHIFT) != 0)) {
 				if (cheat_mode_enabled_) {
 					cheat_mode_enabled_ = false;
 				} else if (!omnipotent()) {
@@ -1618,7 +1620,7 @@ void InteractiveBase::cmd_map_object(const std::vector<std::string>& args) {
 	uint32_t serial = stoul(args[1]);
 	MapObject* obj = egbase().objects().get_object(serial);
 
-	if (!obj) {
+	if (obj == nullptr) {
 		DebugConsole::write(format("No MapObject with serial number %1%", serial));
 		return;
 	}

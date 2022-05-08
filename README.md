@@ -106,10 +106,12 @@ Note that CMake options are prefixed with `-D`. These are the available options:
 | `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
 | `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
 | `CMAKE_INSTALL_PREFIX` | A directory | See [CMake documentation](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) | Define the target directory for the "install" target, e.g. `-DCMAKE_INSTALL_PREFIX=~/widelands-install`. |
+| `WL_INSTALL_BINDIR` | A directory | `${CMAKE_INSTALL_PREFIX}/games` | Define the destination of executables files (if installing) |
 | `WL_VERSION` | A version string | Autodetected from git/bzr, or set by adding a `VERSION` file | Define the Widelands version |
 | `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
 | `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
 | `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
+| `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
 
 #### make/ninja targets
 
@@ -133,7 +135,7 @@ The master branch and open pull requests will be formatted automatically by a Gi
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
-In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommened that you create a personal access token for our formatting action:
+In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommended that you create a personal access token for our formatting action:
 1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter (use e.g. "Widelands Formatting Bot"). Copy the token's hash.
 2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its value must be the hash of the token you just created.
 

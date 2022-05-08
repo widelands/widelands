@@ -112,7 +112,8 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void postload_addons();
+	void postload_addons(bool also_postload_tribes);
+	void postload_tribes();
 	virtual void cleanup_for_load();
 	virtual void full_cleanup();
 	void delete_world_and_tribes();
@@ -209,7 +210,7 @@ public:
 		return player_manager_.get();
 	}
 
-	InteractiveGameBase* get_igbase();
+	InteractiveGameBase* get_igbase() const;
 
 	// Returns the tribe and world descriptions.
 	const Descriptions& descriptions() const;
@@ -226,6 +227,10 @@ public:
 		return enabled_addons_;
 	}
 	const AllTribes& all_tribes() const;
+
+protected:
+	bool did_postload_addons_;
+	bool did_postload_tribes_;
 
 private:
 	/// Common function for create_critter and create_ship.
@@ -272,7 +277,6 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	bool did_postload_addons_;
 	Time gametime_;
 	ObjectManager objects_;
 

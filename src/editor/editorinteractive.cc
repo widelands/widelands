@@ -544,7 +544,7 @@ void EditorInteractive::start() {
 		// do nothing.
 	}
 	map_changed(MapWas::kReplaced);
-	if (registry_to_open_) {
+	if (registry_to_open_ != nullptr) {
 		registry_to_open_->create();
 		registry_to_open_ = nullptr;
 	}
@@ -567,7 +567,7 @@ void EditorInteractive::think() {
 
 void EditorInteractive::exit() {
 	if (need_save_) {
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
@@ -651,7 +651,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		if (get_display_flag(dfShowBobs)) {
-			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
 				bob->draw(
 				   ebase, InfoToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
@@ -731,7 +731,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				const FieldsToDraw::Field& brn = fields_to_draw->at(field.brn_index);
 				const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
 				if (selected_triangles.count(
-				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
+				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R)) != 0u) {
 					const Vector2i tripos((field.rendertarget_pixel.x + rn.rendertarget_pixel.x +
 					                       brn.rendertarget_pixel.x) /
 					                         3,
@@ -743,7 +743,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
 				}
 				if (selected_triangles.count(
-				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
+				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) != 0u) {
 					const Vector2i tripos((field.rendertarget_pixel.x + bln.rendertarget_pixel.x +
 					                       brn.rendertarget_pixel.x) /
 					                         3,
@@ -786,7 +786,7 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
-bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+bool EditorInteractive::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
@@ -980,7 +980,7 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		        "  FATAL EXCEPTION in editor: %s\n"
 		        "##############################\n",
 		        e.what());
-		if (!error_message_parent) {
+		if (error_message_parent == nullptr) {
 			return;
 		}
 		// Note: We don't necessarily want a bug report here, but the wording must
@@ -1026,7 +1026,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		Notifications::publish(UI::NoteLoadingMessage(format(_("Loading map “%s”…"), filename)));
 		eia.load(filename);
 
-		egbase.postload_addons();
+		egbase.postload_addons(true);
 		egbase.postload();
 		eia.start();
 		if (!script_to_run.empty()) {
@@ -1041,7 +1041,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
 		}
 
-		egbase.postload_addons();
+		egbase.postload_addons(true);
 		egbase.postload();
 
 		egbase.mutable_map()->create_empty_map(
@@ -1080,7 +1080,7 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	verb_log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums", true);
 
-	if (eia) {
+	if (eia != nullptr) {
 		// In order to ensure that items created by add-ons are properly
 		// removed from the editor's object selection menus, we clear
 		// and repopulate these menus every time the world is reloaded.
@@ -1097,7 +1097,7 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 			// Category because it will load all the map objects we are interested in
 			std::unique_ptr<EditorCategory> c(
 			   new EditorCategory(*category_table, type, *descriptions));
-			if (eia) {
+			if (eia != nullptr) {
 				eia->editor_categories_[type].push_back(std::move(c));
 			}
 		}
@@ -1148,7 +1148,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		show_buildhelp(true);
 
 		// Close all windows.
-		for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
+		for (Panel* child = get_first_child(); child != nullptr; child = child->get_next_sibling()) {
 			if (dynamic_cast<UI::Window*>(child) != nullptr) {
 				child->die();
 			}

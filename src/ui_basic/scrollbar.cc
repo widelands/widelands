@@ -266,7 +266,7 @@ void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
 		pic = pic_plus_;
 	}
 
-	if (pic) {
+	if (pic != nullptr) {
 		double image_scale = std::min(1., std::min(static_cast<double>(r.w - 4) / pic->width(),
 		                                           static_cast<double>(r.h - 4) / pic->height()));
 		int blit_width = image_scale * pic->width();
@@ -447,7 +447,7 @@ bool Scrollbar::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	}
 	return result;
 }
-bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	bool result = false;
 
 	switch (btn) {
@@ -468,7 +468,8 @@ bool Scrollbar::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 /**
  * Move the knob while pressed.
  */
-bool Scrollbar::handle_mousemove(uint8_t, int32_t const mx, int32_t const my, int32_t, int32_t) {
+bool Scrollbar::handle_mousemove(
+   uint8_t /*state*/, int32_t const mx, int32_t const my, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (pressed_ == Area::Knob) {
 		set_knob_pos((horizontal_ ? mx : my) - knob_grabdelta_);
 	}
