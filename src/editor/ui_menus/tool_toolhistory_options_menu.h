@@ -31,13 +31,6 @@ struct EditorHistoryTool;
 
 struct EditorToolhistoryOptionsMenu : public EditorToolOptionsMenu {
         EditorToolhistoryOptionsMenu(EditorInteractive&, EditorHistoryTool&, UI::UniqueWindow::Registry&);
-
-        uint32_t add_action(EditorTool& tool,
-                            EditorTool::ToolIndex ind,
-                            Widelands::Map& map,
-                            const Widelands::NodeAndTriangle<>& center,
-                            EditorInteractive& parent,
-                            bool draw = false);
         void update();
 
 private:
@@ -45,7 +38,7 @@ private:
         EditorHistoryTool& history_tool_;
 
         void list_item_clicked(const std::string& selected);
-        std::string make_tooltip(const ToolConf &conf);
+        std::string make_tooltip(const ToolConf &conf, const std::string& title);
         void rebuild_list();
 
 	int32_t margin_;

@@ -51,11 +51,12 @@ EditorToolhistoryOptionsMenu::EditorToolhistoryOptionsMenu(EditorInteractive& pa
 	box_.set_size(100, 20);
 	box_.add(&list_);
         set_center_panel(&box_);
-        rebuild_list();
 
         list_.clicked.connect([this] {
                                       list_item_clicked(list_.get_selected());
                                });
+
+        update();
 
 	initialization_complete();
 }
@@ -65,10 +66,10 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected
 
         if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
                 history_tool_.remove_configuration(selected);
-                rebuild_list();
+                update();
         } else if ((SDL_GetModState() & KMOD_CTRL) != 0) {
                 history_tool_.toggle_sticky(selected);
-                rebuild_list();
+                update();
         } else {
                 const ToolConf* conf = history_tool_.get_configuration_for(selected);
                 assert(conf != nullptr);
@@ -78,7 +79,7 @@ void EditorToolhistoryOptionsMenu::list_item_clicked(const std::string& selected
 }
 
 
-std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf &conf) {
+std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf &conf, const std::string& title) {
 	LuaInterface* lua = &eia().egbase().lua();
         std::unique_ptr<LuaTable> table(lua->run_script("scripting/editor/toolhistory_tooltip.lua"));
         std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
@@ -106,16 +107,19 @@ std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf &conf) {
 
         cr->resume();
 
-        return cr->pop_table()->get_string("text");
+        // TRANSLATORS: Help tooltip in tool history window.
+        std::string help = _("Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item.");
+
+        return help + "<vspace gap=1>" + title + cr->pop_table()->get_string("text");
 }
 
-void EditorToolhistoryOptionsMenu::rebuild_list() {
+void EditorToolhistoryOptionsMenu::update() {
 	list_.clear();
 
         int count = 0;
         for (const auto& it: history_tool_) {
                 const ToolConf* conf = history_tool_.get_configuration_for(it.key);
-                std::string tooltip = make_tooltip(*conf);
+                std::string tooltip = make_tooltip(*conf, it.title);
                 if (it.sticky) {
                         list_.add(it.title, it.key, g_image_cache->get("images/wui/editor/sticky_list_item.png"),
                                   false, tooltip);
@@ -125,8 +129,4 @@ void EditorToolhistoryOptionsMenu::rebuild_list() {
 
                 count++;
         }
-}
-
-void EditorToolhistoryOptionsMenu::update() {
-        rebuild_list();
 }

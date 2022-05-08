@@ -27,18 +27,14 @@ return {
          end
       end
 
-      -- TRANSLATORS: Help tooltip in tool history window.
-      local tooltip = vspace(3) .. _("Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item.")
-
       if result ~= "" then
-         -- TRANSLATORS: Help tooltip header in tool history window.
-         tooltip = tooltip .. h3(_("Selection")) .. vspace(3) .. p(result)
+         result = p(result)
       end
 
       pop_textdomain()
 
       return {
-         text = tooltip
+         text = result
       }
    end
 }
