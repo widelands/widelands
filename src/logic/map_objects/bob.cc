@@ -191,7 +191,7 @@ void Bob::do_act(Game& game) {
 	if (cap == stack_.size()) {
 		// preallocate one element to keep references to task and top_state
 		// valid during update which may add a task to the stack
-		stack_.reserve(cap+1);
+		stack_.reserve(cap + 1);
 	}
 	in_act_ = true;
 
