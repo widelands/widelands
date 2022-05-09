@@ -206,8 +206,8 @@ void MainMenuSaveMap::update_map_options() {
 
 	const std::string old_name = map_details_.name();
 
-	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
+	if (((map.scenario_types() & Widelands::Map::MP_SCENARIO) != 0u) ||
+	    ((map.scenario_types() & Widelands::Map::SP_SCENARIO) != 0u)) {
 		maptype = MapData::MapType::kScenario;
 	} else {
 		maptype = MapData::MapType::kNormal;

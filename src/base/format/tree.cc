@@ -309,7 +309,7 @@ Tree::Tree(const char* format_string) : format_nodes_count_(0) {
 		}
 
 		assert(format_nodes_by_index_.size() == format_nodes_count_);
-		for (unsigned i = format_nodes_count_; i; --i) {
+		for (unsigned i = format_nodes_count_; i != 0u; --i) {
 			if (format_nodes_by_index_[format_nodes_count_ - i] == nullptr) {
 				throw wexception("index %u is unused", format_nodes_count_ - i + 1);
 			}

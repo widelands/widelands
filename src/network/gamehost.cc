@@ -408,7 +408,7 @@ GameHost::GameHost(FsMenu::MenuCapsule* c,
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
-	if (capsule_) {
+	if (capsule_ != nullptr) {
 		run();
 	}
 }
@@ -529,7 +529,7 @@ void GameHost::run_callback() {
 	game_->set_auto_speed(get_config_bool("auto_speed", false));
 	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
 
-	if (capsule_) {
+	if (capsule_ != nullptr) {
 		capsule_->set_visible(false);
 	}
 	uint8_t player_number = 1;
@@ -597,7 +597,7 @@ void GameHost::run_callback() {
 		clear_computer_players();
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu* parent =
-		   capsule_ ? &capsule_->menu() : nullptr;  // make includes script happy
+		   capsule_ != nullptr ? &capsule_->menu() : nullptr;  // make includes script happy
 		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
 		clear_computer_players();
 
@@ -623,7 +623,7 @@ void GameHost::think() {
 		pending_player_commands_.pop_front();
 	}
 
-	if (d->game) {
+	if (d->game != nullptr) {
 		uint32_t curtime = SDL_GetTicks();
 		int32_t delta = curtime - d->lastframe;
 		d->lastframe = curtime;
@@ -945,7 +945,7 @@ bool GameHost::can_launch() {
 	if (d->settings.players.empty()) {
 		return false;
 	}
-	if (d->game) {
+	if (d->game != nullptr) {
 		return false;
 	}
 
@@ -1558,7 +1558,7 @@ void GameHost::broadcast_setting_player(uint8_t const number) {
 	packet.unsigned_8(number);
 	write_setting_player(packet, number);
 	broadcast(packet);
-	if (d && d->chat.participants_) {
+	if ((d != nullptr) && (d->chat.participants_ != nullptr)) {
 		d->chat.participants_->participants_updated();
 	}
 }
@@ -1584,7 +1584,7 @@ void GameHost::broadcast_setting_user(uint32_t const number) {
 	packet.unsigned_32(number);
 	write_setting_user(packet, number);
 	broadcast(packet);
-	if (d && d->chat.participants_) {
+	if ((d != nullptr) && (d->chat.participants_ != nullptr)) {
 		d->chat.participants_->participants_updated();
 	}
 }
@@ -1676,7 +1676,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	// The client gets its own initial data set.
 	client.playernum = UserSettings::none();
 
-	if (!d->game) {  // just in case we allow connection of spectators/players after game start
+	if (d->game ==
+	    nullptr) {  // just in case we allow connection of spectators/players after game start
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			if (d->settings.users[i].position == UserSettings::not_connected()) {
 				client.usernum = i;
@@ -1870,7 +1871,8 @@ void GameHost::check_hung_clients() {
 				if (d->clients.at(i).hung_since == 0) {
 					d->clients.at(i).hung_since = time(nullptr);
 					d->clients.at(i).lastdelta = 0;
-				} else if (time_t deltanow = time(nullptr) - d->clients.at(i).hung_since > 60) {
+				} else if (time_t deltanow =
+				              static_cast<time_t>(time(nullptr) - d->clients.at(i).hung_since > 60)) {
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
@@ -1886,7 +1888,7 @@ void GameHost::check_hung_clients() {
 	}
 
 	if (!d->waiting) {
-		if (nrhung) {
+		if (nrhung != 0) {
 			verb_log_info("[Host]: %i clients hung. Entering wait mode", nrhung);
 
 			// Brake and wait
@@ -1968,7 +1970,7 @@ void GameHost::update_network_speed() {
 			}
 		}
 
-		d->networkspeed = (speeds.size() % 2) ?
+		d->networkspeed = (speeds.size() % 2) != 0u ?
                            speeds.at(speeds.size() / 2) :
                            (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
@@ -1987,6 +1989,9 @@ void GameHost::update_network_speed() {
  */
 void GameHost::request_sync_reports() {
 	assert(!d->syncreport_pending);
+	if (!d->game->is_loaded()) {
+		return;
+	}
 
 	d->syncreport_pending = true;
 	d->syncreport_arrived = false;
@@ -2169,7 +2174,7 @@ void GameHost::handle_hello(uint32_t const client_num,
                             RecvPacket& r) {
 	// Now we wait for the client to say Hi in the right language,
 	// unless the game has already started
-	if (d->game) {
+	if (d->game != nullptr) {
 		throw DisconnectException("GAME_ALREADY_STARTED");
 	}
 	if (cmd != NETCMD_HELLO) {
@@ -2189,13 +2194,13 @@ void GameHost::handle_hello(uint32_t const client_num,
 void GameHost::handle_changetribe(const Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
-	if (!d->game) {
+	if (d->game == nullptr) {
 		uint8_t num = r.unsigned_8();
 		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
 		}
 		std::string tribe = r.string();
-		bool random_tribe = r.unsigned_8();
+		bool random_tribe = r.unsigned_8() != 0u;
 		set_player_tribe(num, tribe, random_tribe);
 	}
 }
@@ -2204,7 +2209,7 @@ void GameHost::handle_changetribe(const Client& client, RecvPacket& r) {
 void GameHost::handle_changeshared(const Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
-	if (!d->game) {
+	if (d->game == nullptr) {
 		uint8_t num = r.unsigned_8();
 		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
@@ -2214,7 +2219,7 @@ void GameHost::handle_changeshared(const Client& client, RecvPacket& r) {
 }
 
 void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		uint8_t num = r.unsigned_8();
 		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
@@ -2224,7 +2229,7 @@ void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
 }
 
 void GameHost::handle_changecolor(const Client& client, RecvPacket& packet) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		const uint8_t num = packet.unsigned_8();
 		if (num != client.playernum) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
@@ -2237,7 +2242,7 @@ void GameHost::handle_changecolor(const Client& client, RecvPacket& packet) {
 }
 
 void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
 		// sending when a player changes slot. So, keeping the access to the client off for now.
 		// Would be nice to have though.
@@ -2250,21 +2255,21 @@ void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
 }
 
 void GameHost::handle_changeposition(const Client& client, RecvPacket& r) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		uint8_t const pos = r.unsigned_8();
 		switch_to_player(client.usernum, pos);
 	}
 }
 
 void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		throw DisconnectException("TIME_SENT_NOT_READY");
 	}
 	receive_client_time(client_num, Time(r.unsigned_32()));
 }
 
 void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
-	if (!d->game) {
+	if (d->game == nullptr) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
 	Time time(r.unsigned_32());
@@ -2279,7 +2284,7 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
-	if (!d->game || !d->syncreport_pending || client.syncreport_arrived) {
+	if ((d->game == nullptr) || !d->syncreport_pending || client.syncreport_arrived) {
 		throw DisconnectException("UNEXPECTED_SYNC_REP");
 	}
 	Time time(r.unsigned_32());
@@ -2391,7 +2396,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 	case NETCMD_PEACEFUL_MODE:
 	case NETCMD_CUSTOM_STARTING_POSITIONS:
 	case NETCMD_LAUNCH:
-		if (!d->game) {  // not expected while game is in progress -> something is wrong here
+		if (d->game ==
+		    nullptr) {  // not expected while game is in progress -> something is wrong here
 			log_err("[Host]: Unexpected command %u while in game\n", cmd);
 			throw DisconnectException(
 			   "NO_ACCESS_TO_SERVER");  // TODO(k.halfmann): better use "UNEXPECTED_COMMAND" ?
@@ -2463,7 +2469,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 
 	for (const UserSettings& setting : d->settings.users) {
 		if (setting.position == number) {
-			if (!d->game) {
+			if (d->game == nullptr) {
 				remove_player_name(number, name);
 			}
 			return;
@@ -2548,7 +2554,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 		client.sock_id = 0;
 	}
 
-	if (d->game) {
+	if (d->game != nullptr) {
 		check_hung_clients();
 	}
 }

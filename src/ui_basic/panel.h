@@ -401,6 +401,13 @@ protected:
 		}
 	}
 
+	/*
+	 * Only call when you know what you are doing.
+	 * Usually, you can rely on our focus() mechanism to activate/deactivate text handling
+	 * but there might be corner cases where disabling text input specifically is needed.
+	 */
+	void disable_sdl_textinput();
+
 	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
 	// textinput (do_textinput).
 	void set_handle_keypresses(bool const on) {

@@ -41,7 +41,7 @@ void Coords::reorigin(Coords new_origin, const Extent& extent) {
 			y += extent.h;
 		}
 		y -= new_origin.y;
-		if ((y & 1) && (new_origin.y & 1) && ++new_origin.x == extent.w) {
+		if (((y & 1) != 0) && ((new_origin.y & 1) != 0) && ++new_origin.x == extent.w) {
 			new_origin.x = 0;
 		}
 		if (x < new_origin.x) {

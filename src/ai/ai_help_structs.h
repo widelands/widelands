@@ -762,7 +762,7 @@ struct ManagementData {
 
 	int16_t get_military_number_at(uint8_t) const;
 	void set_military_number_at(uint8_t, int16_t) const;
-	MutatingIntensity do_mutate(uint8_t, int16_t);
+	MutatingIntensity do_mutate(bool, int16_t);
 	int8_t shift_weight_value(int8_t, bool = true);
 	void test_consistency(bool = false);
 

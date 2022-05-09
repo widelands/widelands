@@ -10,16 +10,16 @@
 # GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2018
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021-2022
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-31 02:58+0000\n"
-"PO-Revision-Date: 2022-02-07 20:17+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>\n"
+"POT-Creation-Date: 2022-03-25 02:57+0000\n"
+"PO-Revision-Date: 2015-02-03 14:46+0000\n"
+"Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,9 +115,9 @@ msgstr "Kezdjünk is rögtön bele!"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:64
 msgid ""
 "There are five different tribes in Widelands: the Barbarians, the Empire, "
-"the Atlanteans, the Frisians and the Amazons. All tribes have a different "
-"economy, strength and weaknesses, but the general gameplay is the same for "
-"all. We will play the Barbarians for now."
+"the Atlanteans, the Frisians and the Amazons. All tribes have different "
+"economies, strengths, and weaknesses, but the general gameplay is the same "
+"for all. We will play the Barbarians for now."
 msgstr "Öt különböző törzs található a Widelandsben: barbárok, birodalmiak, atlantisziak, frízek és amazonok. Minden törzsnek eltérő gazdasága, erősségei és gyengéi vannak, de az általános játékmenet mindegyiknél megegyezik. Most a barbárokat mutatjuk be."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65

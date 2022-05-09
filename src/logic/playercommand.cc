@@ -187,7 +187,7 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
-			if (!egbase.get_player(sender_)) {
+			if (egbase.get_player(sender_) == nullptr) {
 				throw GameDataError("player %u does not exist", sender_);
 			}
 			cmdserial_ = fr.unsigned_32();
@@ -205,7 +205,7 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 CmdBulldoze::CmdBulldoze(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()),
      serial(des.unsigned_32()),
-     recurse(des.unsigned_8()) {
+     recurse(des.unsigned_8() != 0u) {
 }
 
 void CmdBulldoze::execute(Game& game) {
@@ -217,7 +217,7 @@ void CmdBulldoze::execute(Game& game) {
 void CmdBulldoze::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial);
-	ser.unsigned_8(recurse);
+	ser.unsigned_8(static_cast<uint8_t>(recurse));
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdBulldoze = 2;
@@ -228,7 +228,7 @@ void CmdBulldoze::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mo
 		if (packet_version == kCurrentPacketVersionCmdBulldoze) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PlayerImmovable>(fr.unsigned_32(), mol);
-			recurse = 2 <= packet_version ? fr.unsigned_8() : false;
+			recurse = (fr.unsigned_8() != 0);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBulldoze", packet_version, kCurrentPacketVersionCmdBulldoze);
@@ -244,7 +244,7 @@ void CmdBulldoze::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& m
 	PlayerCommand::write(fw, egbase, mos);
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
-	fw.unsigned_8(recurse);
+	fw.unsigned_8(static_cast<uint8_t>(recurse));
 }
 
 /*** class Cmd_Build ***/
@@ -751,7 +751,7 @@ CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des)
 	serial = des.unsigned_32();
 	type = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
 	index = des.unsigned_32();
-	add = des.unsigned_8();
+	add = (des.unsigned_8() != 0u);
 }
 
 void CmdExpeditionConfig::execute(Game& game) {
@@ -780,7 +780,7 @@ void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
 			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
 			index = fr.unsigned_32();
-			add = fr.unsigned_8();
+			add = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdExpeditionConfig", packet_version, kCurrentPacketVersionCmdExpeditionConfig);
@@ -804,7 +804,7 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	bi_ = des.unsigned_16();
-	keep_wares_ = des.unsigned_8();
+	keep_wares_ = (des.unsigned_8() != 0u);
 }
 
 void CmdEnhanceBuilding::execute(Game& game) {
@@ -834,7 +834,7 @@ void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			bi_ = fr.unsigned_16();
-			keep_wares_ = fr.unsigned_8();
+			keep_wares_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnhanceBuilding", packet_version, kCurrentPacketVersionCmdEnhanceBuilding);
@@ -855,7 +855,7 @@ void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
-	keep_wares_ = des.unsigned_8();
+	keep_wares_ = (des.unsigned_8() != 0u);
 }
 
 void CmdDismantleBuilding::execute(Game& game) {
@@ -878,7 +878,7 @@ void CmdDismantleBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectL
 		if (packet_version == kCurrentPacketVersionDismantleBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			keep_wares_ = fr.unsigned_8();
+			keep_wares_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdDismantleBuilding", packet_version, kCurrentPacketVersionDismantleBuilding);
@@ -905,7 +905,7 @@ CmdEvictWorker::CmdEvictWorker(StreamRead& des) : PlayerCommand(Time(0), des.uns
 
 void CmdEvictWorker::execute(Game& game) {
 	upcast(Worker, worker, game.objects().get_object(serial));
-	if (worker && worker->owner().player_number() == sender()) {
+	if ((worker != nullptr) && worker->owner().player_number() == sender()) {
 		worker->evict(game);
 	}
 }
@@ -950,7 +950,7 @@ CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
 
 void CmdShipScoutDirection::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
 		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
@@ -1013,7 +1013,7 @@ CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
 
 void CmdShipConstructPort::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
 		if (ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			log_warn_time(game.get_gametime(),
 			              " %1d:ship on %3dx%3d received build port command but "
@@ -1072,7 +1072,7 @@ CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
 
 void CmdShipExploreIsland::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
 		if (!(ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionWaiting ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionPortspaceFound ||
 		      ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting)) {
@@ -1132,7 +1132,7 @@ CmdShipSink::CmdShipSink(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_
 
 void CmdShipSink::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
 		ship->sink_ship(game);
 	}
 }
@@ -1176,7 +1176,7 @@ CmdShipCancelExpedition::CmdShipCancelExpedition(StreamRead& des)
 
 void CmdShipCancelExpedition::execute(Game& game) {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_owner()->player_number() == sender()) {
+	if ((ship != nullptr) && ship->get_owner()->player_number() == sender()) {
 		ship->exp_cancel(game);
 	}
 }
@@ -1272,7 +1272,7 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			type_ = WareWorker(fr.unsigned_8());
 			index_ = fr.signed_32();
 			priority_ = WarePriority(fr);
-			is_constructionsite_setting_ = fr.unsigned_8();
+			is_constructionsite_setting_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetWarePriority", packet_version, kCurrentPacketVersionCmdSetWarePriority);
@@ -1289,7 +1289,7 @@ CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
      type_(WareWorker(des.unsigned_8())),
      index_(des.signed_32()),
      priority_(des),
-     is_constructionsite_setting_(des.unsigned_8()) {
+     is_constructionsite_setting_(des.unsigned_8() != 0u) {
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
@@ -1391,7 +1391,7 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 				type_ = wwWORKER;
 			}
 			max_fill_ = fr.unsigned_32();
-			is_constructionsite_setting_ = fr.unsigned_8();
+			is_constructionsite_setting_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdSetInputMaxFill", packet_version, kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1410,7 +1410,7 @@ CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(Time(0),
 		type_ = wwWORKER;
 	}
 	max_fill_ = des.unsigned_32();
-	is_constructionsite_setting_ = des.unsigned_8();
+	is_constructionsite_setting_ = (des.unsigned_8() != 0u);
 }
 
 void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
@@ -1749,7 +1749,7 @@ CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(Time(0),
 	for (uint32_t i = 0; i < number; ++i) {
 		soldiers_.push_back(des.unsigned_32());
 	}
-	allow_conquer_ = des.unsigned_8();
+	allow_conquer_ = (des.unsigned_8() != 0u);
 }
 
 void CmdEnemyFlagAction::execute(Game& game) {
@@ -1826,7 +1826,7 @@ void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 					soldiers_.push_back(s->serial());
 				}
 			}
-			allow_conquer_ = packet_version < 5 || fr.unsigned_8();
+			allow_conquer_ = packet_version < 5 || (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
@@ -1970,7 +1970,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 
 CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	warehouse_ = des.unsigned_32();
-	isworker_ = des.unsigned_8();
+	isworker_ = (des.unsigned_8() != 0u);
 	ware_ = DescriptionIndex(des.unsigned_8());
 	policy_ = static_cast<StockPolicy>(des.unsigned_8());
 }
@@ -1978,7 +1978,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(Time(0), d
 void CmdSetStockPolicy::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(warehouse_);
-	ser.unsigned_8(isworker_);
+	ser.unsigned_8(static_cast<uint8_t>(isworker_));
 	ser.unsigned_8(ware_);
 	ser.unsigned_8(static_cast<uint8_t>(policy_));
 }
@@ -1991,7 +1991,7 @@ void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 		if (packet_version == kCurrentPacketVersionCmdSetStockPolicy) {
 			PlayerCommand::read(fr, egbase, mol);
 			warehouse_ = fr.unsigned_32();
-			isworker_ = fr.unsigned_8();
+			isworker_ = (fr.unsigned_8() != 0u);
 			ware_ = DescriptionIndex(fr.unsigned_8());
 			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
@@ -2007,7 +2007,7 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(kCurrentPacketVersionCmdSetStockPolicy);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(warehouse_);
-	fw.unsigned_8(isworker_);
+	fw.unsigned_8(static_cast<uint8_t>(isworker_));
 	fw.unsigned_8(ware_);
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
@@ -2098,7 +2098,7 @@ void CmdToggleMuteMessages::execute(Game& game) {
 CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	building_ = des.unsigned_32();
-	all_ = des.unsigned_8();
+	all_ = (des.unsigned_8() != 0u);
 }
 
 void CmdToggleMuteMessages::serialize(StreamWrite& ser) {
@@ -2115,7 +2115,7 @@ void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
 			PlayerCommand::read(fr, egbase, mol);
 			building_ = fr.unsigned_32();
-			all_ = fr.unsigned_8();
+			all_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError(
 			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
@@ -2129,7 +2129,7 @@ void CmdToggleMuteMessages::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	fw.unsigned_8(kCurrentPacketVersionCmdToggleMuteMessages);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(building_)));
-	fw.unsigned_8(all_);
+	fw.unsigned_8(static_cast<uint8_t>(all_));
 }
 
 // CmdMarkMapObjectForRemoval
@@ -2142,7 +2142,7 @@ void CmdMarkMapObjectForRemoval::execute(Game& game) {
 CmdMarkMapObjectForRemoval::CmdMarkMapObjectForRemoval(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()) {
 	object_ = des.unsigned_32();
-	mark_ = des.unsigned_8();
+	mark_ = (des.unsigned_8() != 0u);
 }
 
 void CmdMarkMapObjectForRemoval::serialize(StreamWrite& ser) {
@@ -2159,7 +2159,7 @@ void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapO
 		if (packet_version == kCurrentPacketVersionCmdMarkMapObjectForRemoval) {
 			PlayerCommand::read(fr, egbase, mol);
 			object_ = fr.unsigned_32();
-			mark_ = fr.unsigned_8();
+			mark_ = (fr.unsigned_8() != 0u);
 		} else {
 			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
 			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);
@@ -2173,7 +2173,7 @@ void CmdMarkMapObjectForRemoval::write(FileWrite& fw, EditorGameBase& egbase, Ma
 	fw.unsigned_8(kCurrentPacketVersionCmdMarkMapObjectForRemoval);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(object_)));
-	fw.unsigned_8(mark_);
+	fw.unsigned_8(static_cast<uint8_t>(mark_));
 }
 
 // CmdPickCustomStartingPosition

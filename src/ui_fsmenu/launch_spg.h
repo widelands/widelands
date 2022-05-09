@@ -36,7 +36,7 @@ class LaunchSPG : public LaunchGame {
 public:
 	LaunchSPG(MenuCapsule&,
 	          GameSettingsProvider&,
-	          Widelands::Game&,
+	          std::shared_ptr<Widelands::Game>,
 	          const MapData* /* nullptr for preconfigured games */,
 	          bool scenario);
 	~LaunchSPG() override = default;
@@ -60,7 +60,7 @@ private:
 	void update();
 	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
-	Widelands::Game& game_;
+	std::shared_ptr<Widelands::Game> game_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

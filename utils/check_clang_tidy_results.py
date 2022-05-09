@@ -87,7 +87,6 @@ SUPPRESSED_CHECKS = {
     '[readability-const-return-type]',
     '[readability-convert-member-functions-to-static]',
     '[readability-function-size]',
-    '[readability-implicit-bool-conversion]',
     '[readability-magic-numbers]'
 }
 

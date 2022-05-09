@@ -87,10 +87,13 @@ IdleWareSupply::~IdleWareSupply() {
  */
 void IdleWareSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_) {
+		if (economy_ != nullptr) {
 			economy_->remove_supply(*this);
 		}
-		if ((economy_ = e)) {
+
+		economy_ = e;
+
+		if (economy_ != nullptr) {
 			economy_->add_supply(*this);
 		}
 	}
@@ -126,7 +129,7 @@ bool IdleWareSupply::is_active() const {
 
 SupplyProviders IdleWareSupply::provider_type(Game* game) const {
 	MapObject* const loc = ware_.get_location(*game);
-	if (loc && loc->descr().type() == MapObjectType::SHIP) {
+	if ((loc != nullptr) && loc->descr().type() == MapObjectType::SHIP) {
 		return SupplyProviders::kShip;
 	}
 	if (upcast(Worker, worker, loc)) {
@@ -227,7 +230,7 @@ void WareInstance::set_economy(Economy* const e) {
 		return;
 	}
 
-	if (economy_) {
+	if (economy_ != nullptr) {
 		economy_->remove_wares_or_workers(descr_index_, 1);
 	}
 
@@ -236,7 +239,7 @@ void WareInstance::set_economy(Economy* const e) {
 		supply_->set_economy(e);
 	}
 
-	if (economy_) {
+	if (economy_ != nullptr) {
 		economy_->add_wares_or_workers(descr_index_, 1);
 	}
 }
@@ -255,7 +258,7 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 
 	location_ = location;
 
-	if (location) {
+	if (location != nullptr) {
 		Economy* eco = nullptr;
 
 		if (upcast(Flag const, flag, location)) {
@@ -270,7 +273,7 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 			throw wexception("WareInstance delivered to bad location %u", location->serial());
 		}
 
-		if (oldlocation && get_economy()) {
+		if ((oldlocation != nullptr) && (get_economy() != nullptr)) {
 			if (get_economy() != eco) {
 				throw wexception("WareInstance::set_location() implies change of economy");
 			}
@@ -302,19 +305,19 @@ void WareInstance::act(Game& game, uint32_t /*data*/) {
  *       \ref update().
  */
 void WareInstance::update(Game& game) {
-	if (!descr_) {  // Upsy, we're not even initialized. Happens on load
+	if (descr_ == nullptr) {  // Upsy, we're not even initialized. Happens on load
 		return;
 	}
 
 	MapObject* const loc = location_.get(game);
 
 	// Reset our state if we're not on location or outside an economy
-	if (!get_economy()) {
+	if (get_economy() == nullptr) {
 		cancel_moving();
 		return;
 	}
 
-	if (!loc) {
+	if (loc == nullptr) {
 		// Before dying, output as much information as we can.
 		log_general_info(game);
 
@@ -323,7 +326,7 @@ void WareInstance::update(Game& game) {
 	}
 
 	// Update whether we have a Supply or not
-	if (!transfer_ || !transfer_->get_request()) {
+	if ((transfer_ == nullptr) || (transfer_->get_request() == nullptr)) {
 		if (supply_ == nullptr) {
 			supply_.reset(new IdleWareSupply(*this));
 		}
@@ -332,10 +335,10 @@ void WareInstance::update(Game& game) {
 	}
 
 	// Deal with transfers
-	if (transfer_) {
+	if (transfer_ != nullptr) {
 		upcast(PlayerImmovable, location, loc);
 
-		if (!location) {
+		if (location == nullptr) {
 			return;  // wait
 		}
 
@@ -343,7 +346,7 @@ void WareInstance::update(Game& game) {
 		PlayerImmovable* const nextstep = transfer_->get_next_step(location, success);
 		transfer_nextstep_ = nextstep;
 
-		if (!nextstep) {
+		if (nextstep == nullptr) {
 			if (upcast(Flag, flag, location)) {
 				flag->call_carrier(game, *this, nullptr);
 			}
@@ -365,11 +368,11 @@ void WareInstance::update(Game& game) {
 		}
 
 		if (upcast(Flag, flag, location)) {
-			flag->call_carrier(
-			   game, *this,
-			   dynamic_cast<Building const*>(nextstep) && &nextstep->base_flag() != location ?
-               &nextstep->base_flag() :
-               nextstep);
+			flag->call_carrier(game, *this,
+			                   (dynamic_cast<Building const*>(nextstep) != nullptr) &&
+			                         &nextstep->base_flag() != location ?
+                               &nextstep->base_flag() :
+                               nextstep);
 		} else if (upcast(PortDock, pd, location)) {
 			pd->update_shippingitem(game, *this);
 		} else {
@@ -383,7 +386,7 @@ void WareInstance::update(Game& game) {
  * Called by a worker when it carries the ware into the given building.
  */
 void WareInstance::enter_building(Game& game, Building& building) {
-	if (transfer_) {
+	if (transfer_ != nullptr) {
 		if (transfer_->get_destination(game) == &building) {
 			Transfer* t = transfer_;
 
@@ -458,7 +461,7 @@ void WareInstance::set_transfer(Game& game, Transfer& t) {
 	transfer_nextstep_ = nullptr;
 
 	// Reset current transfer
-	if (transfer_) {
+	if (transfer_ != nullptr) {
 		transfer_->has_failed();
 		transfer_ = nullptr;
 	}
@@ -489,7 +492,7 @@ void WareInstance::cancel_transfer(Game& game) {
  * We are moving when there's a transfer, it's that simple.
  */
 bool WareInstance::is_moving() const {
-	return transfer_;
+	return transfer_ != nullptr;
 }
 
 /**
@@ -499,7 +502,7 @@ bool WareInstance::is_moving() const {
 void WareInstance::cancel_moving() {
 	molog(Time(), "cancel_moving");
 
-	if (transfer_) {
+	if (transfer_ != nullptr) {
 		transfer_->has_failed();
 		transfer_ = nullptr;
 		transfer_nextstep_ = nullptr;
@@ -511,7 +514,8 @@ void WareInstance::cancel_moving() {
  * has been completed successfully.
  */
 PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
-	return transfer_ ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
+	return transfer_ != nullptr ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) :
+                                 nullptr;
 }
 
 void WareInstance::log_general_info(const EditorGameBase& egbase) const {
@@ -537,7 +541,7 @@ void WareInstance::Loader::load(FileRead& fr) {
 	WareInstance& ware = get<WareInstance>();
 	location_ = fr.unsigned_32();
 	transfer_nextstep_ = fr.unsigned_32();
-	if (fr.unsigned_8()) {
+	if (fr.unsigned_8() != 0u) {
 		ware.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), ware);
 		ware.transfer_->read(fr, transfer_);
 	}
@@ -551,13 +555,13 @@ void WareInstance::Loader::load_pointers() {
 	// There is a race condition where a ware may lose its location and be scheduled
 	// for removal via the update callback, but the game is saved just before the
 	// removal. This is why we allow a null location on load.
-	if (location_) {
+	if (location_ != 0u) {
 		ware.set_location(egbase(), &mol().get<MapObject>(location_));
 	}
-	if (transfer_nextstep_) {
+	if (transfer_nextstep_ != 0u) {
 		ware.transfer_nextstep_ = &mol().get<MapObject>(transfer_nextstep_);
 	}
-	if (ware.transfer_) {
+	if (ware.transfer_ != nullptr) {
 		ware.transfer_->read_pointers(mol(), transfer_);
 	}
 }
@@ -566,7 +570,7 @@ void WareInstance::Loader::load_finish() {
 	MapObject::Loader::load_finish();
 
 	WareInstance& ware = get<WareInstance>();
-	if (!ware.transfer_ || !ware.transfer_->get_request()) {
+	if ((ware.transfer_ == nullptr) || (ware.transfer_->get_request() == nullptr)) {
 		if (!ware.supply_) {
 			ware.supply_.reset(new IdleWareSupply(ware));
 		}
@@ -582,7 +586,7 @@ void WareInstance::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& 
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(location_.get(egbase)));
 	fw.unsigned_32(mos.get_object_file_index_or_zero(transfer_nextstep_.get(egbase)));
-	if (transfer_) {
+	if (transfer_ != nullptr) {
 		fw.unsigned_8(1);
 		transfer_->write(mos, fw);
 	} else {

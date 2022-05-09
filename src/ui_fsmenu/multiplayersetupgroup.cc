@@ -503,13 +503,13 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 				bool matches_tags = true;
 				for (const std::string& tag : addme.required_map_tags) {
-					if (!tags.count(tag)) {
+					if (tags.count(tag) == 0u) {
 						matches_tags = false;
 						break;
 					}
 				}
-				if (matches_tags &&
-				    !addme.incompatible_win_conditions.count(settings_->get_win_condition_script())) {
+				if (matches_tags && (addme.incompatible_win_conditions.count(
+				                        settings_->get_win_condition_script()) == 0u)) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
 					                   i == player_setting.initialization_index, _(addme.tooltip));
 				}
@@ -531,7 +531,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 	void set_color() {
 		Panel* p = this;
-		while (p->get_parent()) {
+		while (p->get_parent() != nullptr) {
 			p = p->get_parent();
 		}
 		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color,

@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2018,2020
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-11-16 02:41+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"PO-Revision-Date: 2015-02-02 13:53+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,14 +272,14 @@ msgstr "Reebaud heimoineen on saapunut Pohjoiseen. Mutta heidän vastaanottonsa 
 
 #: ../../data/campaigns/fri03.wmf/elemental:8
 msgid "Friends in Need"
-msgstr ""
+msgstr "Ystävät avuntarpeessa"
 
 #: ../../data/campaigns/fri03.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr ""
+msgstr "Reebaud heimoineen asuu tyytyväisinä pohjolassa. Sillä välin taakse jääneissä maissa on kaikkea muuta kuin rauhallista, ja vanha ystävä on epätoivoisesti avun tarpeessa..."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -353,7 +354,7 @@ msgstr "pbuczny@gmail.com – editoija Nordfriese"
 
 #: ../../data/maps/Astoria_2.R.wmf/elemental:10
 msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
+msgstr "Pitkä, taloudellinen peli kauniilla maaperällä. Kokeile kaikkia pelaajia!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -489,7 +490,7 @@ msgstr ""
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Jättimäinen Euroopan kartta. Sininen = Ruotsi, Punainen = Italia, Keltainen = Espanja, Vihreä = Turkki, Musta = Venäjä, Oranssi = Englanti, Purppura = Ranska, Valkoinen = Puola"
 
 #: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
@@ -522,7 +523,7 @@ msgstr "Nämä ovat kauniita suomalaisia maita, jotka ovat järviä, jokia, muin
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr "Keltaisella pelaajalla on paljon helpompi aloituspaikka kuin kahdell muulla; tämä kartta on sopiva 1v2."
+msgstr "Keltaisella pelaajalla on paljon helpompi aloituspaikka kuin kahdella muulla; tämä kartta on sopiva 1v2."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"

@@ -44,11 +44,11 @@ void Songset::add_songs(const std::vector<std::string>& files) {
 Songset::~Songset() {
 	songs_.clear();
 
-	if (m_) {
+	if (m_ != nullptr) {
 		Mix_FreeMusic(m_);
 	}
 
-	if (rwops_) {
+	if (rwops_ != nullptr) {
 		SDL_FreeRW(rwops_);
 		fr_.close();
 	}
@@ -86,12 +86,12 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	filename = songs_.at(current_song_);
 
 	// First, close the previous song and remove it from memory
-	if (m_) {
+	if (m_ != nullptr) {
 		Mix_FreeMusic(m_);
 		m_ = nullptr;
 	}
 
-	if (rwops_) {
+	if (rwops_ != nullptr) {
 		SDL_FreeRW(rwops_);
 		rwops_ = nullptr;
 		fr_.close();
@@ -99,7 +99,8 @@ Mix_Music* Songset::get_song(uint32_t random) {
 
 	// Then open the new song
 	if (fr_.try_open(*g_fs, filename)) {
-		if (!(rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size()))) {
+		rwops_ = SDL_RWFromMem(fr_.data(0), fr_.get_size());
+		if (rwops_ == nullptr) {
 			fr_.close();  // fr_ should be Open iff rwops_ != 0
 			return nullptr;
 		}
@@ -107,11 +108,11 @@ Mix_Music* Songset::get_song(uint32_t random) {
 		return nullptr;
 	}
 
-	if (rwops_) {
+	if (rwops_ != nullptr) {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
 	}
 
-	if (m_) {
+	if (m_ != nullptr) {
 		log_info("Songset: Loaded song \"%s\"\n", filename.c_str());
 	} else {
 		log_err("Songset: Loading song \"%s\" failed!\n", filename.c_str());

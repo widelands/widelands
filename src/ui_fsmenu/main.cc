@@ -346,7 +346,7 @@ void MainMenu::set_labels() {
 					newest_singleplayer = &data;
 				}
 			}
-			if (newest_singleplayer) {
+			if (newest_singleplayer != nullptr) {
 				filename_for_continue_playing_ = newest_singleplayer->filename;
 				singleplayer_.add(
 				   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
@@ -410,7 +410,7 @@ void MainMenu::set_labels() {
 				last_edited = &m;
 			}
 		}
-		if (last_edited) {
+		if (last_edited != nullptr) {
 			filename_for_continue_editing_ = last_edited->first.filename;
 			editor_.add(
 			   _("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
@@ -505,7 +505,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	// Forward all keys to the open window if there is one
 	bool has_open_window = false;
 	for (UI::UniqueWindow::Registry* r : {&r_login_, &r_about_, &r_addons_}) {
-		if (r->window) {
+		if (r->window != nullptr) {
 			has_open_window = true;
 			if (r->window->handle_key(down, code)) {
 				return true;
@@ -614,7 +614,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			show_internet_login();
 			return true;
 		}
-		if (code.sym == SDLK_BACKSPACE && (code.mod & (KMOD_CTRL | KMOD_SHIFT))) {
+		if (code.sym == SDLK_BACKSPACE && ((code.mod & (KMOD_CTRL | KMOD_SHIFT)) != 0)) {
 			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
@@ -777,7 +777,7 @@ void MainMenu::layout() {
 	vbox2_.set_size((box_rect_.w - padding_) / 2, box_rect_.h);
 
 	// Tell child windows to update their size if necessary
-	for (UI::Panel* p = get_first_child(); p; p = p->get_next_sibling()) {
+	for (UI::Panel* p = get_first_child(); p != nullptr; p = p->get_next_sibling()) {
 		if (upcast(UI::Window, w, p)) {
 			if (w->window_layout_id() == UI::Window::WindowLayoutID::kNone) {
 				continue;
@@ -856,12 +856,14 @@ void MainMenu::action(const MenuTarget t) {
 		}
 		break;
 
-	case MenuTarget::kNewGame:
+	case MenuTarget::kNewGame: {
 		if (Widelands::Game* g = create_safe_game()) {
 			menu_capsule_.clear_content();
-			new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr, *g);
+			new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
+			              std::shared_ptr<Widelands::Game>(g));
 		}
 		break;
+	}
 
 	case MenuTarget::kRandomGame:
 		menu_capsule_.clear_content();

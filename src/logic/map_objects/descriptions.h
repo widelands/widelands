@@ -181,6 +181,9 @@ public:
 	std::pair<bool, DescriptionIndex>
 	load_building_or_immovable(const std::string& objectname) const;
 
+	/** Register the tribes if they have not been registered yet. */
+	void ensure_tribes_are_registered();
+
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
 
@@ -189,6 +192,11 @@ public:
 
 	const AllTribes& all_tribes() const {
 		return all_tribes_;
+	}
+
+	/** The order in which all units have been loaded. */
+	const std::vector<std::string>& load_order() const {
+		return description_manager_->load_order();
 	}
 
 	void add_immovable_relation(const std::string&, const std::string&);

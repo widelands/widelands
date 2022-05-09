@@ -92,11 +92,11 @@ bool Battle::init(EditorGameBase& egbase) {
 }
 
 void Battle::cleanup(EditorGameBase& egbase) {
-	if (first_) {
+	if (first_ != nullptr) {
 		first_->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		first_ = nullptr;
 	}
-	if (second_) {
+	if (second_ != nullptr) {
 		second_->set_battle(dynamic_cast<Game&>(egbase), nullptr);
 		second_ = nullptr;
 	}
@@ -122,7 +122,7 @@ void Battle::cancel(Game& game, Soldier& soldier) {
 }
 
 bool Battle::locked(const Game& game) {
-	if (!first_ || !second_) {
+	if ((first_ == nullptr) || (second_ == nullptr)) {
 		return false;
 	}
 	if (game.get_gametime() - creationtime_ < Duration(1000)) {
@@ -172,7 +172,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	std::string what_anim;
 
 	// Apply pending damage
-	if (damage_ && oneReadyToFight) {
+	if ((damage_ != 0u) && oneReadyToFight) {
 		// Current attacker is last defender, so damage goes to current attacker
 		if (first_strikes_) {
 			first_->damage(damage_);
@@ -192,7 +192,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		return schedule_destroy(game);
 	}
 
-	if (!first_ || !second_) {
+	if ((first_ == nullptr) || (second_ == nullptr)) {
 		return soldier.skip_act();
 	}
 
@@ -256,8 +256,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// attacker will be the first_ when first_strikes_ = false and
 	// attacker will be second_ when first_strikes_ = true
 	molog(game.get_gametime(), "[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
-	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is, first_strikes_,
-	      last_attack_hits_);
+	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is,
+	      static_cast<int>(first_strikes_), static_cast<int>(last_attack_hits_));
 
 	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
@@ -349,7 +349,7 @@ void Battle::Loader::load(FileRead& fr) {
 
 	battle.creationtime_ = Time(fr);
 	battle.readyflags_ = fr.unsigned_8();
-	battle.first_strikes_ = fr.unsigned_8();
+	battle.first_strikes_ = (fr.unsigned_8() != 0u);
 	battle.damage_ = fr.unsigned_32();
 	first_ = fr.unsigned_32();
 	second_ = fr.unsigned_32();
@@ -359,14 +359,14 @@ void Battle::Loader::load_pointers() {
 	Battle& battle = get<Battle>();
 	try {
 		MapObject::Loader::load_pointers();
-		if (first_) {
+		if (first_ != 0u) {
 			try {
 				battle.first_ = &mol().get<Soldier>(first_);
 			} catch (const WException& e) {
 				throw wexception("soldier 1 (%u): %s", first_, e.what());
 			}
 		}
-		if (second_) {
+		if (second_ != 0u) {
 			try {
 				battle.second_ = &mol().get<Soldier>(second_);
 			} catch (const WException& e) {
@@ -386,12 +386,12 @@ void Battle::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	creationtime_.save(fw);
 	fw.unsigned_8(readyflags_);
-	fw.unsigned_8(first_strikes_);
+	fw.unsigned_8(static_cast<uint8_t>(first_strikes_));
 	fw.unsigned_32(damage_);
 
 	// And now, the serials of the soldiers !
-	fw.unsigned_32(first_ ? mos.get_object_file_index(*first_) : 0);
-	fw.unsigned_32(second_ ? mos.get_object_file_index(*second_) : 0);
+	fw.unsigned_32(first_ != nullptr ? mos.get_object_file_index(*first_) : 0);
+	fw.unsigned_32(second_ != nullptr ? mos.get_object_file_index(*second_) : 0);
 }
 
 MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {

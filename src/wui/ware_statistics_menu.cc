@@ -243,7 +243,8 @@ void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what
 
 static bool layouting = false;
 void WareStatisticsMenu::layout() {
-	if (layouting || !tab_panel_ || !display_ || !slider_ || !main_box_) {
+	if (layouting || (tab_panel_ == nullptr) || (display_ == nullptr) || (slider_ == nullptr) ||
+	    (main_box_ == nullptr)) {
 		return;
 	}
 	layouting = true;
@@ -292,7 +293,7 @@ UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			WareStatisticsMenu& m = dynamic_cast<WareStatisticsMenu&>(*r.window);
 			m.tab_panel_->activate(fr.unsigned_8());
 			m.slider_->get_slider().set_value(fr.signed_32());
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				m.display_->select_ware(ib.egbase().descriptions().safe_ware_index(fr.string()));
 			}
 			return m;

@@ -50,10 +50,13 @@ IdleWorkerSupply::~IdleWorkerSupply() {
  */
 void IdleWorkerSupply::set_economy(Economy* const e) {
 	if (economy_ != e) {
-		if (economy_) {
+		if (economy_ != nullptr) {
 			economy_->remove_supply(*this);
 		}
-		if ((economy_ = e)) {
+
+		economy_ = e;
+
+		if (economy_ != nullptr) {
 			economy_->add_supply(*this);
 		}
 	}
@@ -71,7 +74,7 @@ SupplyProviders IdleWorkerSupply::provider_type(Game* /* game */) const {
 }
 
 bool IdleWorkerSupply::has_storage() const {
-	return worker_.get_transfer();
+	return worker_.get_transfer() != nullptr;
 }
 
 void IdleWorkerSupply::get_ware_type(WareWorker& type, DescriptionIndex& ware) const {
@@ -91,7 +94,7 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game& game, const Request& req) con
 	if (req.get_type() == wwWORKER &&
 	    (req.get_index() == worker_.descr().worker_index() ||
 	     (!req.get_exact_match() && worker_.descr().can_act_as(req.get_index()))) &&
-	    !worker_.get_carried_ware(game) && req.get_requirements().check(worker_)) {
+	    (worker_.get_carried_ware(game) == nullptr) && req.get_requirements().check(worker_)) {
 		return 1;
 	}
 	return 0;

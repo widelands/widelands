@@ -61,11 +61,11 @@ void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
-			if (serial) {
+			if (serial != 0u) {
 				flag_ = &mol.get<Flag>(serial);
 			}
 			timerid_ = fr.unsigned_32();
-			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
+			type_ = fr.unsigned_8() != 0u ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);

@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Jukka Pakarinen, 2020
+# heidi.wenger, 2022
+# Atte Timonen, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Jukka Pakarinen, 2020\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +24,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr ""
+msgstr "Huomaute"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -30,10 +32,10 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
-"Näyttä siltä ette tole suorittanut loppuun edellistä komennusta. Voit silti "
-"pelata tätä skenaariota, mutta tulet olemaan epäedullisessa asemassa. "
-"Suosittelen sinua suorittamaan ensin edellisen komennuksen ja sen jälkeen "
-"aloitamaan tämän komennuksen."
+"Näyttää siltä ettet ole suorittanut loppuun edellistä komennusta. Voit silti"
+" pelata tätä skenaariota, mutta tulet olemaan epäedullisessa asemassa. "
+"Suosittelen sinua suorittamaan edellisen komennuksen loppuun ennen tämän "
+"komennuksen aloittamista."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -173,7 +175,7 @@ msgstr "20 × Rauta"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "20 × Gold Ore"
-msgstr ""
+msgstr "20 × kultaista malmia"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "10 × Gold"
@@ -295,6 +297,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Aloin uskomaan että matka ei loppuisi milloinkaan. Minulla ei ole mitään "
+"havaintoa kuinka kauan olimme merillä, ankarien myrskyjen heittelemänä... "
+"Ilmeisesti kuukausia."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
@@ -305,6 +310,12 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Myrskyt pitivät laivaa tiukassa otteessa läpi matkamme. Tuskin oli "
+"päivääkään jona emme olisi aatelleet että kyseessä on viimeisemme. Olimme "
+"pakoitetut pudottamaan kallisarvoisia metalleja yli laidan joita olimme "
+"ottaneet mukaamme, vakauttaaksemme laivaa, tuntiessamme kuten että se olisi "
+"tähdellinen uhraus jumalille antamaan meille toivoa elää vielä muutama tunti"
+" pidempään. "
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -314,6 +325,11 @@ msgid ""
 "ocean when it became evident that they had been corroded by the sea salt so "
 "much that we could never again mine anything with them."
 msgstr ""
+"Ne muutamat työkalut jotka onnistuimme pelastamaan Langeness:ilta eivät "
+"mukautuneet hyvin. Kaivostyöläisten hakut osoittautuivat erityisen "
+"haavoittuviksi, ja meidän olikin pakko heivata ne mereen käydessä selväksi, "
+"että ne olivat syöpyneet meren suolasta niin paljon että niillä ei olisi "
+"louhittu enää koskaan yhtikäs mitään."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -1071,6 +1087,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet suorittanut tämän tehtävän. Voit jatkaa pelaamista mikäli haluat, "
+"muutoin siirry seuraavaan tehtävään."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/init.lua:13
@@ -1079,9 +1097,11 @@ msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
 msgstr ""
+"Työntekijäsi ja sotilaasi löytävät suojapaikan tästä. Tässä säilötään myös "
+"tarvikkeita ja työkalujasi."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri02.wmf/scripting/tribes/warehouse/init.lua:8
 msgctxt "frisians_building"
 msgid "Empire Warehouse"
-msgstr ""
+msgstr "Imperiumivarasto"

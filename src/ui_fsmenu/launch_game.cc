@@ -110,10 +110,10 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
-	if (choose_map_) {
+	if (choose_map_ != nullptr) {
 		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
 	}
-	if (choose_savegame_) {
+	if (choose_savegame_ != nullptr) {
 		choose_savegame_->sigclicked.connect([this]() { clicked_select_savegame(); });
 	}
 	ok_.set_title(_("Start game"));
@@ -128,7 +128,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 }
 
 LaunchGame::~LaunchGame() {
-	if (ctrl_) {
+	if (ctrl_ != nullptr) {
 		ctrl_->game_setup_aborted();
 	}
 }
@@ -145,11 +145,11 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
-	if (choose_map_) {
+	if (choose_map_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
 		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
 	}
-	if (choose_savegame_) {
+	if (choose_savegame_ != nullptr) {
 		right_column_content_box_.add_space(3 * kPadding);
 		right_column_content_box_.add(choose_savegame_, UI::Box::Resizing::kFullSize);
 	}
@@ -337,7 +337,7 @@ LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
 		// Skip this win condition if the map doesn't have all the required tags
 		if (t->has_key("map_tags")) {
 			for (const std::string& map_tag : t->get_table("map_tags")->array_entries<std::string>()) {
-				if (!tags.count(map_tag)) {
+				if (tags.count(map_tag) == 0u) {
 					is_usable = false;
 					break;
 				}
