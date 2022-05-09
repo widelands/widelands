@@ -51,7 +51,7 @@ bool Ferry::init(EditorGameBase& egbase) {
 }
 
 void Ferry::cleanup(EditorGameBase& e) {
-	if (fleet_) {
+	if (fleet_ != nullptr) {
 		fleet_->remove_ferry(e, this);
 	}
 	Carrier::cleanup(e);
@@ -109,8 +109,8 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 		}
 		molog(game.get_gametime(), "[unemployed]: trying to find a flag\n");
 		std::vector<ImmovableFound> flags;
-		if (!map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
-		                                   FindImmovableType(MapObjectType::FLAG))) {
+		if (map.find_reachable_immovables(game, Area<FCoords>(pos, 4), &flags, CheckStepFerry(game),
+		                                  FindImmovableType(MapObjectType::FLAG)) == 0u) {
 			molog(game.get_gametime(), "[unemployed]: no flag found at all\n");
 			// Fall through to the selection of a random nearby location
 		} else {
@@ -119,7 +119,8 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 					if (flag->get_owner() == get_owner()) {
 						if (flag->has_capacity()) {
 							Path path(pos);
-							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game))) {
+							if (map.findpath(pos, flag->get_position(), 0, path, CheckStepFerry(game)) !=
+							    0) {
 								molog(game.get_gametime(), "[unemployed]: moving to nearby flag\n");
 								return start_task_movepath(
 								   game, path, descr().get_right_walk_anims(true, this));
@@ -137,11 +138,11 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 	}
 
 	bool move = true;
-	if (!(pos.field->nodecaps() & MOVECAPS_SWIM)) {
+	if ((pos.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 		molog(game.get_gametime(), "[unemployed]: we are on shore\n");
-	} else if (pos.field->get_immovable()) {
+	} else if (pos.field->get_immovable() != nullptr) {
 		molog(game.get_gametime(), "[unemployed]: we are on location\n");
-	} else if (pos.field->get_first_bob()->get_next_bob()) {
+	} else if (pos.field->get_first_bob()->get_next_bob() != nullptr) {
 		molog(game.get_gametime(), "[unemployed]: we are on another bob\n");
 	} else {
 		move = false;
@@ -152,7 +153,7 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 		// row at most and how hard we'll try to find a nice new location.
 		Path path(pos);
 		for (uint8_t i = 0; i < 5; i++) {
-			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game))) {
+			if (map.findpath(pos, game.random_location(pos, 2), 0, path, CheckStepFerry(game)) != 0) {
 				return start_task_movepath(
 				   game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 			}
@@ -165,7 +166,7 @@ void Ferry::unemployed_update(Game& game, State& /* state */) {
 }
 
 bool Ferry::unemployed() {
-	return get_state(taskUnemployed) && !destination_;
+	return (get_state(taskUnemployed) != nullptr) && (destination_ == nullptr);
 }
 
 const Bob::Task Ferry::taskRow = {
@@ -220,7 +221,7 @@ void Ferry::row_update(Game& game, State& /* state */) {
 	}
 
 	Path path(pos);
-	if (!map.findpath(pos, *destination_, 0, path, CheckStepFerry(game))) {
+	if (map.findpath(pos, *destination_, 0, path, CheckStepFerry(game)) == 0) {
 		molog(game.get_gametime(),
 		      "[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
 		      get_position().x, get_position().y, destination_->x, destination_->y);
@@ -274,7 +275,7 @@ Waterway* Ferry::get_destination(const Game& game) const {
 void Ferry::set_destination(Game& game, Waterway* ww) {
 	destination_.reset(nullptr);
 	set_location(nullptr);
-	if (ww) {
+	if (ww != nullptr) {
 		start_task_row(game, *ww);
 	} else {
 		send_signal(game, "cancel");
@@ -310,7 +311,7 @@ void Ferry::Loader::load(FileRead& fr) {
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			Ferry& ferry = get<Ferry>();
-			if (fr.unsigned_8()) {
+			if (fr.unsigned_8() != 0u) {
 				int16_t dest_x = fr.signed_16();
 				int16_t dest_y = fr.signed_16();
 				ferry.destination_.reset(new Coords(dest_x, dest_y));

@@ -242,7 +242,7 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
 		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
 			iq.first->remove_from_economy(*e);
 		}
-		if (new_economy) {
+		if (new_economy != nullptr) {
 			iq.first->add_to_economy(*new_economy);
 		}
 	}
@@ -315,7 +315,7 @@ void ExpeditionBootstrap::load(
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
-				const bool removable = fr.unsigned_8();
+				const bool removable = fr.unsigned_8() != 0u;
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {
@@ -336,7 +336,7 @@ void ExpeditionBootstrap::load(
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
 			wq->read(fr, game, mol);
-			bool removable = packet_version >= 8 ? fr.unsigned_8() : false;
+			bool removable = (packet_version >= 8) && (fr.unsigned_8() != 0);
 			wq->set_callback(input_callback, this);
 
 			if (wq->get_index() == INVALID_INDEX) {

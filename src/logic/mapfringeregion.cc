@@ -25,7 +25,7 @@ namespace Widelands {
 template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 	switch (phase_) {
 	case 0:
-		if (area_.radius) {
+		if (area_.radius != 0u) {
 			remaining_in_phase_ = area_.radius;
 			phase_ = 6;
 			// Fallthrough
@@ -59,13 +59,13 @@ template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;
 	}
-	return phase_;
+	return phase_ != 0u;
 }
 
 template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 	switch (phase_) {
 	case 0:
-		if (area_.radius) {
+		if (area_.radius != 0u) {
 			remaining_in_phase_ = area_.radius;
 			phase_ = 6;
 			// Fallthrough
@@ -99,6 +99,6 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 		remaining_in_phase_ = area_.radius;
 		--phase_;
 	}
-	return phase_;
+	return phase_ != 0u;
 }
 }  // namespace Widelands

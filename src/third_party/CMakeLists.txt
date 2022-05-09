@@ -1,12 +1,16 @@
-wl_library(third_party_minizip
-  THIRD_PARTY
-  SRCS
-    minizip/ioapi.h
-    minizip/unzip.cc
-    minizip/unzip.h
-    minizip/zip.h
-  USES_ZLIB
-)
+
+if (NOT MINIZIP_STATIC_LIBRARIES)
+  wl_library(third_party_minizip
+    THIRD_PARTY
+    SRCS
+      minizip/ioapi.h
+      minizip/unzip.cc
+      minizip/unzip.h
+      minizip/zip.h
+    USES_ZLIB
+  )
+  message(STATUS "Using embedded minizip libraries")
+endif()
 
 wl_library(third_party_sha1
   THIRD_PARTY

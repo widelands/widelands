@@ -10,7 +10,7 @@
 # GunChleoc, 2014,2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016-2018
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021-2022
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -118,7 +118,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Öt különböző törzs található a Widelandsben: barbárok, birodalmiak, atlantisziak, frízek és amazonok. Minden törzsnek eltérő gazdasága, erősségei és gyengéi vannak, de az általános játékmenet mindegyiknél megegyezik. Most a barbárokat mutatjuk be."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
