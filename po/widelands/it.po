@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-25 03:27+0000\n"
+"POT-Creation-Date: 2022-05-04 03:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -1445,8 +1445,8 @@ msgid ""
 "location."
 msgstr "Seleziona la nuova dimensione della mappa, quindi fai click sul punto dove vuoi effettuare la modifica. Quando si aumenta la dimensione della mappa, verranno inserite nuove colonne/righe a est/sud del punto selezionato. Quando si riduce la dimensione della mappa, il numero di colonne/righe indicato verrà rimosso da est/sud del punto indicato."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2234,8 +2234,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Sta fondando una colonia"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1514
-#: ../../src/logic/map_objects/tribes/soldier.cc:1518
+#: ../../src/logic/map_objects/tribes/soldier.cc:1516
+#: ../../src/logic/map_objects/tribes/soldier.cc:1520
 msgid "Logic error"
 msgstr "Errore logico"
 
@@ -7568,8 +7568,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8130,8 +8130,8 @@ msgstr "Metti in pausa la partita"
 msgid "Statistics"
 msgstr "Statistiche"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Viaggiare in mare"

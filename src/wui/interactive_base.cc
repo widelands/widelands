@@ -188,6 +188,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   map_view_.set_size(message.new_width, message.new_height);
+		   map_view_.pan_by(Vector2i((message.old_width - message.new_width) / 2,
+		                             (message.old_height - message.new_height) / 2),
+		                    MapView::Transition::Jump);
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   info_panel_.layout();

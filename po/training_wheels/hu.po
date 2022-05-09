@@ -170,7 +170,7 @@ msgstr "Út építéséhez kattints a zászlóra az épület előtt!"
 #: ../../data/scripting/training_wheels/logs.lua:152
 msgid ""
 "Click on the ‘Build road’ button, then and click on the indicated flag."
-msgstr ""
+msgstr "Kattints az „Út építése” gombra, azután kattints a jelzett zászlóra!"
 
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
@@ -272,6 +272,9 @@ msgid ""
 "the map to guide your road until you reach the flag in front of the target "
 "building."
 msgstr ""
+"Kattints az „Út építése” gombra, azután kattints sorban a térképen a színes "
+"jelölőkre az útvonal kijelöléséhez, amíg el nem érsz a célépület előtti "
+"zászlóig!"
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

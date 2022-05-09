@@ -20,7 +20,6 @@
 #define WL_WUI_WATCHWINDOW_H
 
 #include "logic/widelands_geometry.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 #include "wui/mapview.h"

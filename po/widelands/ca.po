@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-25 03:27+0000\n"
+"POT-Creation-Date: 2022-05-04 03:37+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1434,8 +1434,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2223,8 +2223,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1514
-#: ../../src/logic/map_objects/tribes/soldier.cc:1518
+#: ../../src/logic/map_objects/tribes/soldier.cc:1516
+#: ../../src/logic/map_objects/tribes/soldier.cc:1520
 msgid "Logic error"
 msgstr "Error lògic"
 
@@ -2953,7 +2953,7 @@ msgstr "La connexió al metaservidor s'ha perdut."
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Metaserver did not answer"
-msgstr "El metaservidor no ha contestat"
+msgstr "El metaservidor no ha respost"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -3116,7 +3116,7 @@ msgstr "El jugador «%s» ha estat derrotat i s'ha convertit en un espectador."
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
-msgstr "El client %1$s no ha contestat des de fa més de %2$s."
+msgstr "El client %1$s no ha respost des de fa més de %2$s."
 
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
@@ -5296,7 +5296,7 @@ msgstr "Juga un tutorial per als nouvinguts al Widelands"
 #: ../../src/wui/game_main_menu_save_game.cc:52
 #: ../../src/wui/interactive_gamebase.cc:157
 msgid "Load Game"
-msgstr "Carrega partida"
+msgstr "Carrega una partida"
 
 #: ../../src/ui_fsmenu/main.cc:331
 msgid "Continue a saved game"
@@ -7557,12 +7557,12 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
-msgstr "Surt del joc"
+msgstr "Surt de la partida"
 
 #. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 #. will be used as replacement for a disconnected player
@@ -8119,8 +8119,8 @@ msgstr "Posa la partida en pausa"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegació"

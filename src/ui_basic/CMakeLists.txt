@@ -70,6 +70,7 @@ wl_library(ui_basic
     base_geometry
     base_macros
     base_random
+    base_scoped_timer
     base_utf8
     graphic
     graphic_align

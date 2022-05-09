@@ -86,6 +86,13 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 # Packagers (or people using make install) have to set this variable to an absolute path.
 wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 
+# To override this, use '-DWL_INSTALL_BINDIR=<absolute path>' when configuring or change
+# 'CMAKE_INSTALL_PREFIX'.
+# Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
+# and don't specify '-DWL_INSTALL_BINDIR' when configuring.
+# Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
+set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
     message(FATAL_ERROR "Widelands needs GCC >= 4.8 to compile.")
@@ -555,13 +562,6 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-# To override this, use '-DWL_INSTALL_BINDIR=<absolute path>' when configuring or change
-# 'CMAKE_INSTALL_PREFIX'.
-# Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
-# and don't specify '-DWL_INSTALL_BINDIR' when configuring.
-# Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
-set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
-
 if(OPTION_BUILD_TRANSLATIONS)
   set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
   install(
@@ -576,3 +576,16 @@ endif(OPTION_BUILD_TRANSLATIONS)
 if (UNIX AND NOT APPLE)
   add_subdirectory(xdg)
 endif (UNIX AND NOT APPLE)
+
+# uninstall target
+# see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
+if(NOT TARGET uninstall)
+  configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+  add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
+endif()
+
