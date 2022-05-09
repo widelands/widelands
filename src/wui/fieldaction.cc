@@ -62,7 +62,7 @@ struct BuildGrid : public UI::IconGrid {
 	Notifications::Signal<Widelands::DescriptionIndex> buildmouseout;
 	Notifications::Signal<Widelands::DescriptionIndex> buildmousein;
 
-	void add(Widelands::DescriptionIndex);
+	void add(Widelands::DescriptionIndex /*id*/);
 
 private:
 	void click_slot(int32_t idx);
@@ -173,9 +173,9 @@ public:
 	void act_abort_buildwaterway();
 	void act_abort_buildwaterway_and_start_buildroad();
 	void act_removewaterway();
-	void act_build(Widelands::DescriptionIndex);
-	void building_icon_mouse_out(Widelands::DescriptionIndex);
-	void building_icon_mouse_in(Widelands::DescriptionIndex);
+	void act_build(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_out(Widelands::DescriptionIndex /* idx */);
+	void building_icon_mouse_in(Widelands::DescriptionIndex /* idx */);
 	void act_geologist();
 	void act_scout();
 	void act_mark_removal();
@@ -186,7 +186,7 @@ private:
 	                 const char* picname,
 	                 UI::Panel* panel,
 	                 const std::string& tooltip_text = "");
-	UI::Button& add_button(UI::Box*,
+	UI::Button& add_button(UI::Box* /*box*/,
 	                       const char* name,
 	                       const char* picname,
 	                       void (FieldActionWindow::*fn)(),
@@ -289,7 +289,7 @@ void FieldActionWindow::think() {
 			}
 		}
 	}
-	if (player_ && !player_->is_seeing(node_.field - &ibase().egbase().map()[0]) &&
+	if ((player_ != nullptr) && !player_->is_seeing(node_.field - &ibase().egbase().map()[0]) &&
 	    !player_->see_all()) {
 		die();
 	}
@@ -343,7 +343,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
                dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
                dynamic_cast<const Widelands::Building&>(*mo).descr();
 
-			if (i.descr().collected_by().count(descr.name())) {
+			if (i.descr().collected_by().count(descr.name()) != 0u) {
 				upcast(const Widelands::Building, b, mo);
 				assert(b);
 				assert(!descr.workarea_info().empty());
@@ -394,9 +394,9 @@ void FieldActionWindow::add_buttons_auto() {
 
 	const Widelands::PlayerNumber owner = node_.field->get_owned_by();
 
-	if (!igbase || igbase->can_see(owner)) {
+	if ((igbase == nullptr) || igbase->can_see(owner)) {
 		Widelands::BaseImmovable* const imm = map_.get_immovable(node_);
-		const bool can_act = igbase ? igbase->can_act(owner) : true;
+		const bool can_act = igbase != nullptr ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
 		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
@@ -414,7 +414,8 @@ void FieldActionWindow::add_buttons_auto() {
 
 				Building* const building = flag->get_building();
 
-				if (!building || (building->get_playercaps() & Building::PCap_Bulldoze)) {
+				if ((building == nullptr) ||
+				    ((building->get_playercaps() & Building::PCap_Bulldoze) != 0u)) {
 					add_button(buildbox, "rip_flag", kImgButtonRipFlag, &FieldActionWindow::act_ripflag,
 					           _("Destroy this flag"));
 				}
@@ -460,27 +461,27 @@ void FieldActionWindow::add_buttons_auto() {
 				}
 			}
 		} else {
-			const int32_t buildcaps = player_ ? player_->get_buildcaps(node_) : 0;
+			const int32_t buildcaps = player_ != nullptr ? player_->get_buildcaps(node_) : 0;
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if (player_ && ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			                (nodecaps & Widelands::BUILDCAPS_MINE))) {
+			if ((player_ != nullptr) && (((nodecaps & Widelands::BUILDCAPS_SIZEMASK) != 0) ||
+			                             ((nodecaps & Widelands::BUILDCAPS_MINE) != 0))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
 			// Add build actions
-			if (buildcaps & Widelands::BUILDCAPS_FLAG) {
+			if ((buildcaps & Widelands::BUILDCAPS_FLAG) != 0) {
 				add_button(buildbox, "build_flag", kImgButtonBuildFlag,
 				           &FieldActionWindow::act_buildflag, _("Place a flag"));
 			}
 
-			if (can_act && dynamic_cast<const Widelands::Road*>(imm)) {
+			if (can_act && (dynamic_cast<const Widelands::Road*>(imm) != nullptr)) {
 				add_button(buildbox, "destroy_road", kImgButtonRemoveRoad,
 				           &FieldActionWindow::act_removeroad, _("Destroy a road"));
 			}
 
-			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm)) {
+			if (can_act && (dynamic_cast<const Widelands::Waterway*>(imm) != nullptr)) {
 				add_button(buildbox, "destroy_waterway", kImgButtonRemoveWaterway,
 				           &FieldActionWindow::act_removewaterway, _("Destroy a waterway"));
 			}
@@ -499,7 +500,7 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 
 	// Add tabs
-	if (buildbox && buildbox->get_nritems()) {
+	if ((buildbox != nullptr) && (buildbox->get_nritems() != 0)) {
 		add_tab("roads", kImgTabBuildroad, buildbox, _("Build road"));
 	}
 
@@ -512,7 +513,7 @@ Add buttons for house building.
 ===============
 */
 void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecaps) {
-	if (!player_) {
+	if (player_ == nullptr) {
 		return;
 	}
 	const Widelands::FCoords brn = map_.br_n(node_);
@@ -520,9 +521,9 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 	    !brn.field->is_interior(player_->player_number())) {
 		return;
 	}
-	if (!(brn.field->get_immovable() &&
+	if (!((brn.field->get_immovable() != nullptr) &&
 	      brn.field->get_immovable()->descr().type() == Widelands::MapObjectType::FLAG) &&
-	    !(player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG)) {
+	    ((player_->get_buildcaps(brn) & Widelands::BUILDCAPS_FLAG) == 0)) {
 		return;
 	}
 	BuildGrid* bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
@@ -553,16 +554,17 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
-		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
-		                                         building_descr->get_built_over_immovable()))) {
+		    !((node_.field->get_immovable() != nullptr) &&
+		      node_.field->get_immovable()->has_attribute(
+		         building_descr->get_built_over_immovable()))) {
 			continue;
 		}
 		// Figure out if we can build it here, and in which tab it belongs
 		if (building_descr->get_ismine()) {
-			if (!((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
-                   buildcaps :
-                   max_nodecaps) &
-			      Widelands::BUILDCAPS_MINE)) {
+			if (((building_descr->get_built_over_immovable() == Widelands::INVALID_INDEX ?
+                  buildcaps :
+                  max_nodecaps) &
+			     Widelands::BUILDCAPS_MINE) == 0) {
 				continue;
 			}
 
@@ -576,7 +578,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			     Widelands::BUILDCAPS_SIZEMASK) < size + 1) {
 				continue;
 			}
-			if (building_descr->get_isport() && !(buildcaps & Widelands::BUILDCAPS_PORT)) {
+			if (building_descr->get_isport() && ((buildcaps & Widelands::BUILDCAPS_PORT) == 0)) {
 				continue;
 			}
 			if (building_descr->get_size() >= Widelands::BaseImmovable::BIG &&
@@ -594,7 +596,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		}
 
 		// Allocate the tab's grid if necessary
-		if (!*ppgrid) {
+		if (*ppgrid == nullptr) {
 			*ppgrid = new BuildGrid(&tabpanel_, player_, 0, 0, 5);
 			(*ppgrid)->buildclicked.connect([this](Widelands::DescriptionIndex i) { act_build(i); });
 			(*ppgrid)->buildmouseout.connect(
@@ -610,14 +612,14 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 	// Add all necessary tabs
 	for (int32_t i = 0; i < 4; ++i) {
-		if (bbg_house[i]) {
+		if (bbg_house[i] != nullptr) {
 			tabpanel_.activate(best_tab_ =
 			                      add_tab(name_tab_build[i], pic_tab_buildhouse[i], bbg_house[i],
 			                              i18n::translate(tooltip_tab_build[i])));
 		}
 	}
 
-	if (bbg_mine) {
+	if (bbg_mine != nullptr) {
 		tabpanel_.activate(best_tab_ =
 		                      add_tab("mines", kImgTabBuildmine, bbg_mine, _("Build mines")));
 	}
@@ -736,7 +738,7 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag() {
 	upcast(Game, game, &ibase().egbase());
-	if (game) {
+	if (game != nullptr) {
 		game->send_player_build_flag(player_->player_number(), node_);
 	} else {
 		player_->build_flag(node_);
@@ -744,7 +746,7 @@ void FieldActionWindow::act_buildflag() {
 
 	if (ibase().in_road_building_mode()) {
 		ibase().finish_build_road();
-	} else if (game) {
+	} else if (game != nullptr) {
 		upcast(InteractivePlayer, iaplayer, &ibase());
 		iaplayer->set_flag_to_connect(node_);
 	}
@@ -776,9 +778,9 @@ void FieldActionWindow::act_ripflag() {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	if (upcast(Widelands::Flag, flag, node_.field->get_immovable())) {
-		const bool ctrl_pressed = SDL_GetModState() & KMOD_CTRL;
+		const bool ctrl_pressed = (SDL_GetModState() & KMOD_CTRL) != 0;
 		if (Building* const building = flag->get_building()) {
-			if (building->get_playercaps() & Building::PCap_Bulldoze) {
+			if ((building->get_playercaps() & Building::PCap_Bulldoze) != 0u) {
 				if (ctrl_pressed) {
 					game->send_player_bulldoze(*flag, ctrl_pressed);
 				} else {
@@ -866,7 +868,7 @@ void FieldActionWindow::act_removeroad() {
 	Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (upcast(Widelands::Road, road, egbase.map().get_immovable(node_))) {
 		upcast(Game, game, &ibase().egbase());
-		game->send_player_bulldoze(*road, SDL_GetModState() & KMOD_CTRL);
+		game->send_player_bulldoze(*road, (SDL_GetModState() & KMOD_CTRL) != 0);
 	}
 	reset_mouse_and_die();
 }
@@ -875,7 +877,7 @@ void FieldActionWindow::act_removewaterway() {
 	Widelands::EditorGameBase& egbase = ibase().egbase();
 	if (upcast(Widelands::Waterway, waterway, egbase.map().get_immovable(node_))) {
 		upcast(Game, game, &ibase().egbase());
-		game->send_player_bulldoze(*waterway, SDL_GetModState() & KMOD_CTRL);
+		game->send_player_bulldoze(*waterway, (SDL_GetModState() & KMOD_CTRL) != 0);
 	}
 	reset_mouse_and_die();
 }
@@ -894,7 +896,7 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	reset_mouse_and_die();
 }
 
-void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
+void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex /* idx */) {
 	if (showing_workarea_preview_) {
 		ibase().hide_workarea(node_, false);
 		showing_workarea_preview_ = false;
@@ -937,36 +939,31 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
-					const Widelands::MapObjectType imm_type = imm->descr().type();
+					Widelands::MapObjectType imm_type = imm->descr().type();
+					std::string imm_name = imm->descr().name();
 					if (imm_type < Widelands::MapObjectType::BUILDING) {
 						// We are not interested in trees and pebbles
 						continue;
 					}
 					const Widelands::BuildingDescr* d = nullptr;
 					bool positive = false;  // unused default value to make g++ happy
+					bool is_milsite_or_whouse = descr.type() == Widelands::MapObjectType::MILITARYSITE ||
+					                            descr.type() == Widelands::MapObjectType::WAREHOUSE;
 					if (imm_type == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 						upcast(Widelands::ConstructionSite, cs, imm);
 						d = cs->get_info().becomes;
 						assert(d);
-						if ((descr.type() == Widelands::MapObjectType::PRODUCTIONSITE &&
-						     (d->type() != Widelands::MapObjectType::PRODUCTIONSITE ||
-						      !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						          .highlight_overlapping_workarea_for(d->name(), &positive))) ||
-						    ((descr.type() == Widelands::MapObjectType::MILITARYSITE ||
-						      descr.type() == Widelands::MapObjectType::WAREHOUSE) &&
-						     d->type() != Widelands::MapObjectType::MILITARYSITE &&
-						     d->type() != Widelands::MapObjectType::WAREHOUSE)) {
-							continue;
-						}
-					} else if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+						imm_type = d->type();
+						imm_name = d->name();
+					}
+					if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 						if (imm_type != Widelands::MapObjectType::PRODUCTIONSITE ||
 						    imm->get_owner() != player_ ||
 						    !dynamic_cast<const Widelands::ProductionSiteDescr&>(descr)
-						        .highlight_overlapping_workarea_for(imm->descr().name(), &positive)) {
+						        .highlight_overlapping_workarea_for(imm_name, &positive)) {
 							continue;
 						}
-					} else if (descr.type() == Widelands::MapObjectType::WAREHOUSE ||
-					           descr.type() == Widelands::MapObjectType::MILITARYSITE) {
+					} else if (is_milsite_or_whouse) {
 						if (imm_type != Widelands::MapObjectType::MILITARYSITE &&
 						    imm_type != Widelands::MapObjectType::WAREHOUSE) {
 							continue;
@@ -977,7 +974,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 						// Don't count big buildings more than once
 						continue;
 					}
-					if (!d) {
+					if (d == nullptr) {
 						d = &bld->descr();
 					}
 					const WorkareaInfo& wa = d->workarea_info();
@@ -988,19 +985,27 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 					if (wa_radius == 0) {
 						continue;
 					}
+					if (overlapping_workareas_.count(mr.location()) != 0) {
+						// mr.advance() may reach the same location several times during an iteration,
+						// but we only want the workarea once
+						continue;
+					}
 					if (map.calc_distance(node_, mr.location()) <= workarea_radius + wa_radius) {
 						std::map<Widelands::TCoords<>, uint32_t> colors;
 						for (const Widelands::TCoords<>& t : map.triangles_in_region(
 						        map.to_set(Widelands::Area<>(mr.location(), wa_radius)))) {
-							colors[t] = mr.location() == t.node || mr.location() == map.br_n(t.node) ||
-							                  mr.location() == (t.t == Widelands::TriangleIndex::D ?
-                                                            map.bl_n(t.node) :
-                                                            map.r_n(t.node)) ||
-							                  main_region.count(t) ?
-                                    descr.type() == Widelands::MapObjectType::PRODUCTIONSITE ?
-                                    positive ? kOverlapColorPositive : kOverlapColorNegative :
-                                    kOverlapColorDefault :
-                                    kOverlapColorPale;
+							Widelands::Coords coords =
+							   (t.t == Widelands::TriangleIndex::D) ? map.bl_n(t.node) : map.r_n(t.node);
+							if (mr.location() == t.node || mr.location() == map.br_n(t.node) ||
+							    mr.location() == coords || main_region.count(t) != 0u) {
+								if (descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+									colors[t] = positive ? kOverlapColorPositive : kOverlapColorNegative;
+								} else {
+									colors[t] = kOverlapColorDefault;
+								}
+							} else {
+								colors[t] = kOverlapColorPale;
+							}
 						}
 						ibase().show_workarea(wa, mr.location(), colors);
 						overlapping_workareas_.insert(mr.location());
@@ -1069,10 +1074,11 @@ void show_field_action(InteractiveBase* const ibase,
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
 				w.add_buttons_road(target != ibase->get_build_road_start() &&
-				                   (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+				                   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			} else {
-				w.add_buttons_waterway(target != ibase->get_build_road_start() &&
-				                       (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
+				w.add_buttons_waterway(
+				   target != ibase->get_build_road_start() &&
+				   ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0));
 			}
 			w.init();
 			return;
@@ -1099,7 +1105,7 @@ void show_field_action(InteractiveBase* const ibase,
 				finish = true;
 			} else if (i->descr().type() == Widelands::MapObjectType::ROAD ||
 			           i->descr().type() == Widelands::MapObjectType::WATERWAY) {
-				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
+				if ((player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) != 0) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);
 					finish = true;

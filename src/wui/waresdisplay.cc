@@ -81,7 +81,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 	curware_.set_text(_("Stock"));
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { recalc_desired_size(true); });
+	   [this](const GraphicResolutionChanged& /* note */) { recalc_desired_size(true); });
 
 	recalc_desired_size(false);
 }
@@ -131,9 +131,9 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 		// TODO(GunChleoc): Window::on_resolution_changed_note can't shift these properly due to the
 		// changing dimensions.
 		UI::Panel* p = this;
-		while (p->get_parent()) {
+		while (p->get_parent() != nullptr) {
 			p = p->get_parent();
-			if (dynamic_cast<UI::Window*>(p)) {
+			if (dynamic_cast<UI::Window*>(p) != nullptr) {
 				p->layout();
 				return;
 			}
@@ -141,7 +141,8 @@ void AbstractWaresDisplay::recalc_desired_size(bool relayout) {
 	}
 }
 
-bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
+bool AbstractWaresDisplay::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	const Widelands::DescriptionIndex index = ware_at_point(x, y);
 
 	curware_.set_fixed_width(get_inner_w());
@@ -153,7 +154,7 @@ bool AbstractWaresDisplay::handle_mousemove(uint8_t state, int32_t x, int32_t y,
 	if (selection_anchor_ != Widelands::INVALID_INDEX) {
 		// Ensure mouse button is still pressed as some
 		// mouse release events do not reach us
-		if (state ^ SDL_BUTTON_LMASK) {
+		if ((state ^ SDL_BUTTON_LMASK) != 0) {
 			// TODO(unknown): We should call another function that will not pass that events
 			// to our Panel superclass
 			handle_mouserelease(SDL_BUTTON_LEFT, x, y);
@@ -516,7 +517,7 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
 }
 
 std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionIndex di) {
-	const std::string text = WaresDisplay::info_for_ware(di);
+	std::string text = WaresDisplay::info_for_ware(di);
 	if (solid_icon_backgrounds_) {
 		return text;
 	}
@@ -534,7 +535,7 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
                                              *player_.get_worker_stock_statistics(di);
 	const size_t nr_entries = history.size();
 
-	if (!nr_entries) {
+	if (nr_entries == 0u) {
 		// No records yet
 		return text;
 	}
@@ -601,7 +602,7 @@ static const char* unit_suffixes[] = {
    _("%1%G")};
 std::string get_amount_string(uint32_t amount, bool cutoff1k) {
 	uint8_t size = 0;
-	while (amount >= (size || cutoff1k ? 1000 : 10000)) {
+	while (amount >= ((size != 0u) || cutoff1k ? 1000 : 10000)) {
 		amount /= 1000;
 		size++;
 	}

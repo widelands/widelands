@@ -117,7 +117,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		gl.preload_game(gpdp);
 		game.set_win_condition_displayname(gpdp.get_win_condition());
 		gl.load_game();
-		game.postload_addons();
+		game.postload_addons(true);
 	}
 
 	if (!g_fs->file_exists(filename)) {
@@ -166,7 +166,7 @@ ReplayReader::~ReplayReader() {
  * or 0 if there are no remaining commands before the given time.
  */
 Command* ReplayReader::get_next_command(const Time& time) {
-	if (!cmdlog_) {
+	if (cmdlog_ == nullptr) {
 		return nullptr;
 	}
 

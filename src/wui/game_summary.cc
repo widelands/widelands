@@ -192,7 +192,7 @@ void GameSummaryScreen::fill_data() {
 
 	for (uintptr_t i = 0; i < players_status.size(); i++) {
 		Widelands::PlayerEndStatus pes = players_status.at(i);
-		if (ipl && pes.player == ipl->player_number()) {
+		if ((ipl != nullptr) && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.result == Widelands::PlayerEndResult::kWon;
 			current_player_position = i;

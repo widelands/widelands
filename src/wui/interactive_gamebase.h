@@ -62,7 +62,6 @@ public:
 	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
-	void toggle_mainmenu();
 	void rebuild_main_menu();
 
 protected:
@@ -146,13 +145,13 @@ private:
 	void rebuild_gamespeed_menu();
 
 	// Increases the gamespeed
-	void increase_gamespeed(uint16_t speed);
+	void increase_gamespeed(uint16_t speed) const;
 	// Decreases the gamespeed
-	void decrease_gamespeed(uint16_t speed);
+	void decrease_gamespeed(uint16_t speed) const;
 	// Pauses / Unpauses the game and calls rebuild_gamespeed_menu
 	void toggle_game_paused();
 	// Resets the speed to 1x
-	void reset_gamespeed();
+	void reset_gamespeed() const;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;

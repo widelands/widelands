@@ -39,7 +39,7 @@ if (WIN32)
 			COMMAND rc
 				/fo ${WIN32_ICON_O}
 				${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)	
+		)
 	else()
 		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
 			COMMAND ${MINGW_PREFIX}windres
@@ -47,7 +47,7 @@ if (WIN32)
 				-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
 		)
 	endif()
-	
+
   wl_binary(widelands
     WIN32
     SRCS
@@ -69,6 +69,19 @@ else()
   )
 endif()
 
+if(OPTION_FORCE_EMBEDDED_MINIZIP)
+    # unset these two if they are cached
+    unset(MINIZIP_FOUND)
+    set(MINIZIP_STATIC_LIBRARIES "")
+else()
+   # If pkg-config is ever needed to find other libraries, move the include outside the if() block
+  include(FindPkgConfig)
+  if(PKG_CONFIG_FOUND)
+    pkg_check_modules(MINIZIP minizip)
+  endif()
+endif()
+
+add_subdirectory(third_party)
 add_subdirectory(ai)
 add_subdirectory(base)
 add_subdirectory(chat)
@@ -83,7 +96,6 @@ add_subdirectory(network)
 add_subdirectory(notifications)
 add_subdirectory(scripting)
 add_subdirectory(sound)
-add_subdirectory(third_party)
 add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 if (OPTION_BUILD_WEBSITE_TOOLS)

@@ -66,7 +66,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 								tq.permanent = permanent;
 								tq.last_modified = Time(last_modified);
 							}
-						} else if (other_eco) {
+						} else if (other_eco != nullptr) {
 							i = tribe.worker_index(type_name);
 							if (tribe.has_worker(i)) {
 								if (tribe.get_worker_descr(i)->default_target_quantity() == kInvalidWare) {
@@ -124,7 +124,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 				throw GameDataError("target quantities: %s", e.what());
 			}
 			eco_->request_timerid_ = fr.unsigned_32();
-			if (other_eco) {
+			if (other_eco != nullptr) {
 				other_eco->request_timerid_ = eco_->request_timerid_;
 			}
 		} else {

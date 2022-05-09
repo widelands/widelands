@@ -193,7 +193,7 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
                                  std::vector<SavegameData>& loaded_games) const {
 	// Add subdirectory to the list
 	const char* fs_filename = FileSystem::fs_filename(gamefilename.c_str());
-	if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+	if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 		return;
 	}
 	loaded_games.push_back(SavegameData::create_sub_dir(gamefilename));
@@ -202,7 +202,7 @@ void SavegameLoader::add_sub_dir(const std::string& gamefilename,
 ReplayLoader::ReplayLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool ReplayLoader::is_valid_gametype(const SavegameData&) const {
+bool ReplayLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
 	return true;  // TODO(jmoerschbach): why?? what is the purpose of
 	              // GameController::GameType::kReplay? return gamedata.is_replay(); <-- should be
 	              // this, right?!
@@ -232,6 +232,6 @@ bool SinglePlayerLoader::is_valid_gametype(const SavegameData& gamedata) const {
 EverythingLoader::EverythingLoader(Widelands::Game& game) : SavegameLoader(game) {
 }
 
-bool EverythingLoader::is_valid_gametype(const SavegameData&) const {
+bool EverythingLoader::is_valid_gametype(const SavegameData& /*gamedata*/) const {
 	return true;
 }

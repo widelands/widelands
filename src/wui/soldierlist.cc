@@ -64,7 +64,7 @@ struct SoldierPanel : UI::Panel {
 	}
 
 	void think() override;
-	void draw(RenderTarget&) override;
+	void draw(RenderTarget& /*dst*/) override;
 
 	void set_mouseover(const SoldierFn& fn);
 	void set_click(const SoldierFn& fn);
@@ -173,7 +173,7 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn& fn) {
 
 void SoldierPanel::think() {
 	Widelands::Building* b = building_.get(egbase_);
-	if (!b) {
+	if (b == nullptr) {
 		return;
 	}
 
@@ -189,7 +189,7 @@ void SoldierPanel::think() {
 	for (uint32_t idx = 0; idx < icons_.size(); ++idx) {
 		Icon& icon = icons_[idx];
 		Soldier* soldier = icon.soldier.get(egbase());
-		if (soldier) {
+		if (soldier != nullptr) {
 			std::vector<Soldier*>::iterator it =
 			   std::find(soldierlist.begin(), soldierlist.end(), soldier);
 			if (it != soldierlist.end()) {
@@ -199,15 +199,15 @@ void SoldierPanel::think() {
 			}
 		}
 
-		if (!soldier) {
+		if (soldier == nullptr) {
 			icons_.erase(icons_.begin() + idx);
 			idx--;
 			changes = true;
 			continue;
 		}
 
-		while (icon.row && (row_occupancy[icon.row] >= kMaxColumns ||
-		                    icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
+		while ((icon.row != 0u) && (row_occupancy[icon.row] >= kMaxColumns ||
+		                            icon.row * kMaxColumns + row_occupancy[icon.row] >= capacity)) {
 			icon.row--;
 		}
 
@@ -288,7 +288,7 @@ void SoldierPanel::think() {
 
 void SoldierPanel::draw(RenderTarget& dst) {
 	Widelands::Building* b = building_.get(egbase_);
-	if (!b) {
+	if (b == nullptr) {
 		return;
 	}
 
@@ -296,10 +296,10 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	uint32_t capacity = b->soldier_control()->soldier_capacity();
 	uint32_t fullrows = capacity / kMaxColumns;
 
-	if (fullrows) {
+	if (fullrows != 0u) {
 		dst.fill_rect(Recti(0, 0, get_w(), icon_height_ * fullrows), RGBAColor(0, 0, 0, 0));
 	}
-	if (capacity % kMaxColumns) {
+	if ((capacity % kMaxColumns) != 0u) {
 		dst.fill_rect(
 		   Recti(0, icon_height_ * fullrows, icon_width_ * (capacity % kMaxColumns), icon_height_),
 		   RGBAColor(0, 0, 0, 0));
@@ -308,7 +308,7 @@ void SoldierPanel::draw(RenderTarget& dst) {
 	// Draw icons
 	for (const Icon& icon : icons_) {
 		const Soldier* soldier = icon.soldier.get(egbase());
-		if (!soldier) {
+		if (soldier == nullptr) {
 			continue;
 		}
 
@@ -435,7 +435,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();
-		while (button) {
+		while (button != nullptr) {
 			buttons->add(button);
 			button = button->next_button();
 		}
@@ -472,7 +472,7 @@ void SoldierList::think() {
 }
 
 void SoldierList::mouseover(const Soldier* soldier) {
-	if (!soldier) {
+	if (soldier == nullptr) {
 		infotext_.set_text(_("Click soldier to send away"));
 		return;
 	}

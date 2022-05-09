@@ -30,7 +30,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    descriptions:new_constructionsite_type {
+--    wl.Descriptions():new_constructionsite_type {
 --       name = "constructionsite",
 --       descname = pgettext("building", "Construction Site"),
 --       animation_directory = dirname,
@@ -55,7 +55,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_constructionsite_type {
+wl.Descriptions():new_constructionsite_type {
    name = "constructionsite",
    -- TRANSLATORS: This is a name used in lists of buildings for buildings under construction
    descname = pgettext("building", "Construction Site"),

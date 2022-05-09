@@ -54,14 +54,14 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
                PanelStyle::kFsMenu /* unused */,
                0,
                0,
-               parent ? parent->get_inner_w() : g_gr->get_xres(),
-               parent ? parent->get_inner_h() : g_gr->get_yres()),
+               parent != nullptr ? parent->get_inner_w() : g_gr->get_xres(),
+               parent != nullptr ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme) {
 	// As long as this window exists and is visible, no tooltips will be drawn.
 	set_hide_all_overlays();
 
-	if (!parent) {
+	if (parent == nullptr) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 		   [this](const GraphicResolutionChanged& message) {
 			   set_size(message.new_width, message.new_height);

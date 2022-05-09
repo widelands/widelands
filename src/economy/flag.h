@@ -82,7 +82,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
 	Flag(EditorGameBase&,
-	     Player* owner,
+	     Player* owning_player,
 	     const Coords&,
 	     Economy* ware_economy = nullptr,
 	     Economy* worker_economy = nullptr);
@@ -135,7 +135,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void detach_road(int32_t dir);
 
 	RoadBase* get_roadbase(Flag&);
-	Road* get_road(Flag&);
+	Road* get_road(Flag&) const;
 
 	bool is_dead_end() const;
 
@@ -182,7 +182,7 @@ protected:
 
 	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
-	          const Vector2f& point_on_dst,
+	          const Vector2f& field_on_dst,
 	          const Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;

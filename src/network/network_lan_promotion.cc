@@ -41,10 +41,9 @@ int get_ip_version(const asio::ip::address& addr) {
 	assert(!addr.is_unspecified());
 	if (addr.is_v4()) {
 		return 4;
-	} else {
-		assert(addr.is_v6());
-		return 6;
 	}
+	assert(addr.is_v6());
+	return 6;
 }
 
 /**
@@ -55,10 +54,9 @@ int get_ip_version(const asio::ip::address& addr) {
 int get_ip_version(const asio::ip::udp& version) {
 	if (version == asio::ip::udp::v4()) {
 		return 4;
-	} else {
-		assert(version == asio::ip::udp::v6());
-		return 6;
 	}
+	assert(version == asio::ip::udp::v6());
+	return 6;
 }
 }  // namespace
 
@@ -77,7 +75,7 @@ int get_ip_version(const asio::ip::udp& version) {
  * On Apple we have to specify the interface, forcing us to send our message over all interfaces we
  * can find.
  */
-LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6(io_service) {
+LanBase::LanBase(uint16_t port) : socket_v4(io_service), socket_v6(io_service) {
 
 #ifndef _WIN32
 	// Iterate over all interfaces. If they support IPv4, store the broadcast-address
@@ -87,8 +85,10 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 	// Adapted example out of "man getifaddrs"
 	// TODO(Notabilis): I don't like this part. But asio is not able to iterate over
 	// the local IPs and interfaces at this time. If they ever add it, replace this code
-	struct ifaddrs *ifaddr, *ifa;
-	int s, n;
+	struct ifaddrs* ifaddr;
+	struct ifaddrs* ifa;
+	int s;
+	int n;
 	char host[NI_MAXHOST];
 	if (getifaddrs(&ifaddr) == -1) {
 		perror("getifaddrs");
@@ -98,8 +98,8 @@ LanBase::LanBase(uint16_t port) : io_service(), socket_v4(io_service), socket_v6
 		if (ifa->ifa_addr == nullptr) {
 			continue;
 		}
-		if (!(ifa->ifa_flags & IFF_LOOPBACK) && !(ifa->ifa_flags & IFF_BROADCAST) &&
-		    !(ifa->ifa_flags & IFF_MULTICAST)) {
+		if (((ifa->ifa_flags & IFF_LOOPBACK) == 0u) && ((ifa->ifa_flags & IFF_BROADCAST) == 0u) &&
+		    ((ifa->ifa_flags & IFF_MULTICAST) == 0u)) {
 			continue;
 		}
 		switch (ifa->ifa_addr->sa_family) {
@@ -419,7 +419,7 @@ void LanGamePromoter::run() {
 
 		verb_log_info("Received %s packet from %s", magic, addr.ip.to_string().c_str());
 
-		if (!strncmp(magic, "QUERY", 6) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
+		if ((strncmp(magic, "QUERY", 6) == 0) && magic[6] == LAN_PROMOTION_PROTOCOL_VERSION) {
 			if (!send(&gameinfo, sizeof(gameinfo), addr)) {
 				report_network_error();
 			}
@@ -470,7 +470,7 @@ void LanGameFinder::run() {
 		}
 
 		// Make sure that the callback function has been set before we do any callbacks
-		if (!callback) {
+		if (callback == nullptr) {
 			continue;
 		}
 

@@ -191,8 +191,8 @@ void BuildingWindow::think() {
 		caps_setup_ = true;
 	}
 
-	if (mute_this_) {
-		if (!mute_all_) {
+	if (mute_this_ != nullptr) {
+		if (mute_all_ == nullptr) {
 			NEVER_HERE();
 		}
 		mute_this_->set_pic(
@@ -286,10 +286,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}  // upcast to productionsite
 
 		upcast(Widelands::ConstructionSite, cs, building);
-		if ((capscache_ & Widelands::Building::PCap_Enhancable) ||
-		    (cs && cs->get_info().becomes->enhancement() != Widelands::INVALID_INDEX)) {
+		if (((capscache_ & Widelands::Building::PCap_Enhancable) != 0u) ||
+		    ((cs != nullptr) && cs->get_info().becomes->enhancement() != Widelands::INVALID_INDEX)) {
 			const Widelands::DescriptionIndex& enhancement =
-			   cs ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
+			   cs != nullptr ? cs->get_info().becomes->enhancement() : building->descr().enhancement();
 			const Widelands::TribeDescr& tribe = owner.tribe();
 			if (owner.is_building_type_allowed(enhancement) &&
 			    owner.tribe().has_building(enhancement)) {
@@ -307,13 +307,13 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 
 				//  button id = building id
 				enhancebtn->sigclicked.connect(
-				   [this, enhancement, cs] { act_enhance(enhancement, cs); });
+				   [this, enhancement, cs] { act_enhance(enhancement, cs != nullptr); });
 				capsbuttons->add(enhancebtn);
 				requires_destruction_separator = true;
 			}
 		}
 
-		if (capscache_ & Widelands::Building::PCap_Bulldoze) {
+		if ((capscache_ & Widelands::Building::PCap_Bulldoze) != 0u) {
 			UI::Button* destroybtn =
 			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get(kImgBulldoze), _("Destroy"));
@@ -323,7 +323,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			requires_destruction_separator = true;
 		}
 
-		if (capscache_ & Widelands::Building::PCap_Dismantle) {
+		if ((capscache_ & Widelands::Building::PCap_Dismantle) != 0u) {
 			if (building->descr().can_be_dismantled()) {
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
@@ -446,8 +446,8 @@ void BuildingWindow::act_bulldoze() {
 		return;
 	}
 
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Bulldoze) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		if ((building->get_playercaps() & Widelands::Building::PCap_Bulldoze) != 0u) {
 			game_->send_player_bulldoze(*building);
 		}
 	} else if (upcast(InteractivePlayer, ipl, ibase())) {
@@ -462,9 +462,9 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
-			if (game_) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		if ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) != 0u) {
+			if (game_ != nullptr) {
 				game_->send_player_dismantle(*building, (SDL_GetModState() & KMOD_SHIFT) == 0);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -488,7 +488,7 @@ void BuildingWindow::act_start_stop() {
 	}
 
 	if (building->descr().type() >= Widelands::MapObjectType::PRODUCTIONSITE) {
-		if (game_) {
+		if (game_ != nullptr) {
 			game_->send_player_start_stop_building(*building);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -508,9 +508,9 @@ void BuildingWindow::act_start_or_cancel_expedition() {
 	}
 
 	if (upcast(Widelands::Warehouse const, warehouse, building)) {
-		if (warehouse->get_portdock()) {
+		if (warehouse->get_portdock() != nullptr) {
 			expeditionbtn_->set_enabled(false);
-			if (game_) {
+			if (game_ != nullptr) {
 				game_->send_player_start_or_cancel_expedition(*building);
 			} else {
 				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -536,8 +536,8 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 	if (csite) {
 		upcast(Widelands::ConstructionSite, construction_site, building);
 		assert(construction_site);
-		if (SDL_GetModState() & KMOD_CTRL) {
-			if (game_) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+			if (game_ != nullptr) {
 				game_->send_player_enhance_building(*construction_site,
 				                                    construction_site->building().enhancement(),
 				                                    (SDL_GetModState() & KMOD_SHIFT) == 0);
@@ -551,9 +551,9 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 		return;
 	}
 
-	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Enhancable) {
-			if (game_) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
+		if ((building->get_playercaps() & Widelands::Building::PCap_Enhancable) != 0u) {
+			if (game_ != nullptr) {
 				game_->send_player_enhance_building(
 				   *building, id, (SDL_GetModState() & KMOD_SHIFT) == 0);
 			} else {
@@ -567,7 +567,7 @@ void BuildingWindow::act_enhance(Widelands::DescriptionIndex id, bool csite) {
 
 void BuildingWindow::act_mute(bool all) {
 	if (Widelands::Building* building = building_.get(parent_->egbase())) {
-		if (game_) {
+		if (game_ != nullptr) {
 			game_->send_player_toggle_mute(*building, all);
 		} else {
 			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
@@ -631,7 +631,7 @@ void BuildingWindow::hide_workarea(bool configure_button) {
  * Sets the perpressed_ state and the tooltip.
  */
 void BuildingWindow::configure_workarea_button() {
-	if (toggle_workarea_) {
+	if (toggle_workarea_ != nullptr) {
 		if (showing_workarea_) {
 			toggle_workarea_->set_tooltip(_("Hide work area"));
 			toggle_workarea_->set_perm_pressed(true);
@@ -678,20 +678,20 @@ UI::Window& BuildingWindow::load(FileRead& fr, InteractiveBase& ib) {
 		if (packet_version == kCurrentPacketVersion) {
 			const int32_t x = fr.signed_32();
 			const int32_t y = fr.signed_32();
-			const bool workarea = fr.unsigned_8();
+			const bool workarea = fr.unsigned_8() != 0u;
 			BuildingWindow& bw = dynamic_cast<BuildingWindow&>(
 			   *ib.show_building_window(Widelands::Coords(x, y), true, workarea));
 			bw.tabs_->activate(fr.unsigned_8());
 			return bw;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Building Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Building Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building window: %s", e.what());
 	}
 }
-void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void BuildingWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.signed_32(building_position_.x);
 	fw.signed_32(building_position_.y);

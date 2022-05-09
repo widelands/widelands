@@ -144,7 +144,9 @@ SoundHandler::~SoundHandler() {
 	songs_.clear();
 	fxs_.clear();
 
-	int numtimesopened, frequency, channels;
+	int numtimesopened;
+	int frequency;
+	int channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log_info("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n", numtimesopened,
@@ -169,7 +171,7 @@ SoundHandler::~SoundHandler() {
 		Mix_CloseAudio();
 	}
 
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_DestroyMutex(fx_lock_);
 		fx_lock_ = nullptr;
 	}
@@ -254,9 +256,8 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 		fxs_[type].insert(
 		   std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 		return new_id;
-	} else {
-		return fx_ids_[type].at(fx_path);
 	}
+	return fx_ids_[type].at(fx_path);
 }
 
 /**
@@ -427,7 +428,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
 		return;
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		change_music(songset_name, kMinimumMusicFade);
 	}
 
@@ -454,7 +455,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 		return;
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
 }
@@ -481,7 +482,7 @@ void SoundHandler::change_music(const std::string& songset_name, int const fadeo
 		}
 	}
 
-	if (Mix_PlayingMusic()) {
+	if (Mix_PlayingMusic() != 0) {
 		stop_music(fadeout_ms);
 	} else {
 		start_music(current_songset_);
@@ -534,7 +535,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-			if (!Mix_PlayingMusic()) {
+			if (Mix_PlayingMusic() == 0) {
 				start_music(current_songset_);
 			}
 		} else {
@@ -611,14 +612,14 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
 /// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both
 /// from callbacks or from the main thread.
 void SoundHandler::lock_fx() {
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_LockMutex(fx_lock_);
 	}
 }
 
 /// Release the SDL mutex
 void SoundHandler::release_fx_lock() {
-	if (fx_lock_) {
+	if (fx_lock_ != nullptr) {
 		SDL_UnlockMutex(fx_lock_);
 	}
 }

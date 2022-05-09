@@ -188,7 +188,8 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
+		if ((ipl != nullptr) &&
+		    !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
@@ -225,7 +226,7 @@ void WatchWindow::follow(Widelands::Bob* bob) {
  */
 void WatchWindow::do_follow() {
 	Widelands::Game& g = game();
-	if (views_[cur_index_].tracking.get(g)) {
+	if (views_[cur_index_].tracking.get(g) != nullptr) {
 		views_[cur_index_].tracking = nullptr;
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
@@ -242,7 +243,7 @@ void WatchWindow::do_follow() {
 		                           .node),
 		        2);
 		     area.radius <= 32; area.radius *= 2) {
-			if (map.find_bobs(g, area, &bobs)) {
+			if (map.find_bobs(g, area, &bobs) != 0u) {
 				break;
 			}
 		}
@@ -255,8 +256,8 @@ void WatchWindow::do_follow() {
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);
 			const float dist = MapviewPixelFunctions::calc_pix_distance(map, p, center_map_pixel);
 			InteractivePlayer* ipl = game().get_ipl();
-			if ((!closest || closest_dist > dist) &&
-			    (!ipl ||
+			if (((closest == nullptr) || closest_dist > dist) &&
+			    ((ipl == nullptr) ||
 			     ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width())))) {
 				closest = bob;
 				closest_dist = dist;
@@ -306,7 +307,7 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			WatchWindow* w = nullptr;
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				WatchWindow* ww =
 				   show_watch_window(dynamic_cast<InteractiveGameBase&>(ib), Widelands::Coords(0, 0));
 				assert(ww != nullptr);
@@ -322,10 +323,9 @@ UI::Window& WatchWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapO
 			assert(w);
 			w->set_current_view(fr.unsigned_8(), false);
 			return *w;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Watchwindow", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Watchwindow", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("watchwindow: %s", e.what());
 	}
@@ -351,7 +351,7 @@ Open a watch window.
 */
 WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coords& coords) {
 	if (get_config_bool("single_watchwin", false)) {
-		if (!g_watch_window) {
+		if (g_watch_window == nullptr) {
 			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, true);
 		}
 		g_watch_window->add_view(coords);

@@ -116,11 +116,11 @@ struct StepEvalFindShipFleet {
 	}
 	int32_t stepcost(
 	   Map& /* map */, FCoords from, int32_t fromcost, WalkingDir /* dir */, FCoords to) const {
-		if (!(to.field->nodecaps() & (MOVECAPS_SWIM | MOVECAPS_WALK))) {
+		if ((to.field->nodecaps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == 0) {
 			return -1;
 		}
 
-		if (!(from.field->nodecaps() & MOVECAPS_SWIM)) {
+		if ((from.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			// We are allowed to land on and leave the shore,
 			// but not in the middle of a path
 			if (fromcost > 0) {
@@ -462,7 +462,7 @@ struct StepEvalFindPorts {
 
 	int32_t stepcost(
 	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
-		if (!(to.field->nodecaps() & MOVECAPS_SWIM)) {
+		if ((to.field->nodecaps() & MOVECAPS_SWIM) == 0) {
 			return -1;
 		}
 		return map.calc_bidi_cost(from, dir);
@@ -509,7 +509,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable* imm = cur.field->get_immovable();
-		if (!imm || imm->descr().type() != MapObjectType::PORTDOCK) {
+		if ((imm == nullptr) || imm->descr().type() != MapObjectType::PORTDOCK) {
 			continue;
 		}
 
@@ -518,7 +518,7 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 				continue;
 			}
 
-			if (pd->get_fleet() && pd->get_fleet() != this) {
+			if ((pd->get_fleet() != nullptr) && pd->get_fleet() != this) {
 				log_err_time(egbase.get_gametime(),
 				             "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
@@ -667,7 +667,7 @@ PortDock* ShipFleet::get_arbitrary_dock() const {
  * Trigger an update of ship scheduling
  */
 void ShipFleet::update(EditorGameBase& egbase) {
-	if (act_pending_ || !serial()) {
+	if (act_pending_ || (serial() == 0u)) {
 		return;
 	}
 
@@ -682,7 +682,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
-void ShipFleet::act(Game& game, uint32_t) {
+void ShipFleet::act(Game& game, uint32_t /*data*/) {
 	assert(act_pending_);
 	act_pending_ = false;
 
@@ -732,7 +732,7 @@ void ShipFleet::Loader::load(FileRead& fr) {
 		ports_[i] = fr.unsigned_32();
 	}
 
-	fleet.act_pending_ = fr.unsigned_8();
+	fleet.act_pending_ = (fr.unsigned_8() != 0u);
 	fleet.schedule_.load(fr);
 }
 
@@ -784,13 +784,13 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
-			if (!owner_number || owner_number > egbase.map().get_nrplayers()) {
+			if ((owner_number == 0u) || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
 			}
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner) {
+			if (owner == nullptr) {
 				throw GameDataError("owning player %u does not exist", owner_number);
 			}
 			loader->init(egbase, mol, *(new ShipFleet(owner)));
@@ -822,7 +822,7 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		fw.unsigned_32(mos.get_object_file_index(*temp_port));
 	}
 
-	fw.unsigned_8(act_pending_);
+	fw.unsigned_8(static_cast<uint8_t>(act_pending_));
 
 	schedule_.save(egbase, mos, fw);
 }

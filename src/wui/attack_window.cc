@@ -57,7 +57,7 @@ AttackWindow::AttackWindow(InteractivePlayer& parent,
      bottombox_(&mainbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal) {
 	const unsigned serial = serial_;
 	living_attack_windows_[serial] = this;
-	target_bld.removed.connect([serial](unsigned) {
+	target_bld.removed.connect([serial](unsigned /* index */) {
 		auto it = living_attack_windows_.find(serial);
 		if (it != living_attack_windows_.end()) {
 			it->second->die();
@@ -363,13 +363,14 @@ void AttackWindow::act_debug() {
 
 void AttackWindow::send_less_soldiers() {
 	assert(soldiers_slider_.get());
-	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? 0 :
-                                                                 soldiers_slider_->get_value() - 1);
+	soldiers_slider_->set_value(
+	   (SDL_GetModState() & KMOD_CTRL) != 0 ? 0 : soldiers_slider_->get_value() - 1);
 }
 
 void AttackWindow::send_more_soldiers() {
-	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) ? soldiers_slider_->get_max_value() :
-                                                                 soldiers_slider_->get_value() + 1);
+	soldiers_slider_->set_value((SDL_GetModState() & KMOD_CTRL) != 0 ?
+                                  soldiers_slider_->get_max_value() :
+                                  soldiers_slider_->get_value() + 1);
 }
 
 size_t AttackWindow::count_soldiers() const {
@@ -401,20 +402,20 @@ AttackWindow::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
 }
 
 bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT || !other_) {
+	if (btn != SDL_BUTTON_LEFT || (other_ == nullptr)) {
 		return UI::Panel::handle_mousepress(btn, x, y);
 	}
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		for (const auto& s : get_soldiers()) {
 			remove(s);
 			other_->add(s);
 		}
 	} else {
 		const Widelands::Soldier* soldier = soldier_at(x, y);
-		if (!soldier) {
+		if (soldier == nullptr) {
 			return UI::Panel::handle_mousepress(btn, x, y);
 		}
-		if (SDL_GetModState() & KMOD_SHIFT) {
+		if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 			for (const auto& s : get_soldiers()) {
 				remove(s);
 				other_->add(s);
@@ -431,12 +432,12 @@ bool AttackWindow::ListOfSoldiers::handle_mousepress(uint8_t btn, int32_t x, int
 	return true;
 }
 
-void AttackWindow::ListOfSoldiers::handle_mousein(bool) {
+void AttackWindow::ListOfSoldiers::handle_mousein(bool /*inside*/) {
 	set_tooltip(std::string());
 }
 
 bool AttackWindow::ListOfSoldiers::handle_mousemove(
-   uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
+   uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (const Widelands::Soldier* soldier = soldier_at(x, y)) {
 		set_tooltip(format(_("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
 		                   soldier->get_health_level(), soldier->descr().get_max_health_level(),
@@ -546,17 +547,17 @@ UI::Window& AttackWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::Map
 				a->attacking_soldiers_->remove(s);
 				a->remaining_soldiers_->add(s);
 			}
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				const Widelands::Soldier* s = &mol.get<Widelands::Soldier>(fr.unsigned_32());
 				a->remaining_soldiers_->remove(s);
 				a->attacking_soldiers_->add(s);
 			}
 
 			return *a;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Attack Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Attack Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("attack window: %s", e.what());
 	}

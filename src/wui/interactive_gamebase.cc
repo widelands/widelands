@@ -48,7 +48,7 @@
 namespace {
 
 std::string speed_string(int const speed) {
-	if (speed) {
+	if (speed != 0) {
 		/** TRANSLATORS: This is a game speed value */
 		return format(_("%1$u.%2$u×"), (speed / 1000), (speed / 100 % 10));
 	}
@@ -184,7 +184,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		menu_windows_.savegame.toggle();
 	} break;
 	case MainMenuEntry::kRestartScenario: {
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			game().set_next_game_to_load(game().list_of_scenarios().front());
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
@@ -201,7 +201,7 @@ void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 		}
 		break;
 	case MainMenuEntry::kExitGame: {
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			new GameExitConfirmBox(*this, *this);
@@ -317,7 +317,8 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown));
 
 	if (!is_multiplayer()) {
-		if (get_game()->game_controller() && get_game()->game_controller()->is_paused()) {
+		if ((get_game()->game_controller() != nullptr) &&
+		    get_game()->game_controller()->is_paused()) {
 			gamespeedmenu_.add(_("Resume"), GameSpeedEntry::kPause,
 			                   g_image_cache->get("images/wui/menus/gamespeed_resume.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
@@ -338,16 +339,16 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	switch (entry) {
 	case GameSpeedEntry::kIncrease: {
-		increase_gamespeed(SDL_GetModState() & KMOD_SHIFT ? kSpeedSlow :
-		                   SDL_GetModState() & KMOD_CTRL  ? kSpeedFast :
-                                                          kSpeedDefault);
+		increase_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
+		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
+                                                                 kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
 	case GameSpeedEntry::kDecrease: {
-		decrease_gamespeed(SDL_GetModState() & KMOD_SHIFT ? kSpeedSlow :
-		                   SDL_GetModState() & KMOD_CTRL  ? kSpeedFast :
-                                                          kSpeedDefault);
+		decrease_gamespeed((SDL_GetModState() & KMOD_SHIFT) != 0 ? kSpeedSlow :
+		                   (SDL_GetModState() & KMOD_CTRL) != 0  ? kSpeedFast :
+                                                                 kSpeedDefault);
 		// Keep the window open so that the player can click this multiple times
 		gamespeedmenu_.toggle();
 	} break;
@@ -367,27 +368,27 @@ void InteractiveGameBase::add_chat_ui() {
 	      _("Chat"), shortcut_string_for(KeyboardShortcut::kInGameChat), UI::PanelStyle::kWui),
 	   &chat_, true);
 	chat_.open_window = [this] {
-		if (chat_provider_) {
+		if (chat_provider_ != nullptr) {
 			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 		}
 	};
 }
 
-void InteractiveGameBase::increase_gamespeed(uint16_t speed) {
+void InteractiveGameBase::increase_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed + speed);
 	}
 }
 
-void InteractiveGameBase::decrease_gamespeed(uint16_t speed) {
+void InteractiveGameBase::decrease_gamespeed(uint16_t speed) const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		uint32_t const current_speed = ctrl->desired_speed();
 		ctrl->set_desired_speed(current_speed > speed ? current_speed - speed : 0);
 	}
 }
 
-void InteractiveGameBase::reset_gamespeed() {
+void InteractiveGameBase::reset_gamespeed() const {
 	if (GameController* const ctrl = get_game()->game_controller()) {
 		ctrl->set_desired_speed(kSpeedDefault);
 	}
@@ -472,15 +473,15 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 		new GameMainMenuSaveGame(*this, menu_windows_.loadgame, GameMainMenuSaveGame::Type::kLoad);
 		return true;
 	}
-	if (chat_provider_ && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {
-		if (!chat_.window) {
+	if ((chat_provider_ != nullptr) && matches_shortcut(KeyboardShortcut::kInGameChat, code)) {
+		if (chat_.window == nullptr) {
 			GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 		}
 		return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 	}
 
 	if (code.sym == SDLK_ESCAPE) {
-		InteractiveGameBase::toggle_mainmenu();
+		mainmenu_.toggle();
 		return true;
 	}
 
@@ -589,20 +590,16 @@ void InteractiveGameBase::start() {
 		if (pln == 0) {
 			// Spectator, use the view of the first viable player
 			for (pln = 1; pln <= max; ++pln) {
-				if (game().get_player(pln)) {
+				if (game().get_player(pln) != nullptr) {
 					break;
 				}
 			}
 		}
 		// Adding a check, just in case there was no viable player found for spectator
-		if (game().get_player(pln)) {
+		if (game().get_player(pln) != nullptr) {
 			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
 		}
 	}
-}
-
-void InteractiveGameBase::toggle_mainmenu() {
-	mainmenu_.toggle();
 }
 
 /**
@@ -613,12 +610,12 @@ bool InteractiveGameBase::try_show_ship_window() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
+	if ((area.field->nodecaps() & Widelands::MOVECAPS_SWIM) == 0) {
 		return false;
 	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip())) {
+	if (map.find_bobs(egbase(), area, &ships, Widelands::FindBobShip()) != 0u) {
 		for (Widelands::Bob* ship : ships) {
 			if (can_see(ship->owner().player_number())) {
 				// FindBobShip should have returned only ships
@@ -634,7 +631,7 @@ bool InteractiveGameBase::try_show_ship_window() {
 void InteractiveGameBase::show_game_summary() {
 	NoteThreadSafeFunction::instantiate(
 	   [this]() {
-		   if (game_summary_.window) {
+		   if (game_summary_.window != nullptr) {
 			   game_summary_.window->set_visible(true);
 			   game_summary_.window->think();
 			   return;
@@ -646,7 +643,7 @@ void InteractiveGameBase::show_game_summary() {
 
 bool InteractiveGameBase::show_game_client_disconnected() {
 	assert(dynamic_cast<GameHost*>(get_game()->game_controller()) != nullptr);
-	if (!client_disconnected_.window) {
+	if (client_disconnected_.window == nullptr) {
 		if (upcast(GameHost, host, get_game()->game_controller())) {
 			new GameClientDisconnected(this, client_disconnected_, host);
 			return true;

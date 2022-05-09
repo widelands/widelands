@@ -62,7 +62,7 @@ bool is_valid_header(const S2MapDescrHeader& header) {
 	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
 		return false;
 	}
-	if (header.name[19]) {
+	if (header.name[19] != 0) {
 		return false;
 	}
 	if (header.w <= 0 || header.h <= 0) {
@@ -74,7 +74,7 @@ bool is_valid_header(const S2MapDescrHeader& header) {
 	if (header.nplayers < 0 || header.nplayers > 7) {
 		return false;
 	}
-	if (header.author[19]) {
+	if (header.author[19] != 0) {
 		return false;
 	}
 	return true;
@@ -375,7 +375,7 @@ int32_t S2MapLoader::preload_map(bool const scenario, AddOns::AddOnsList* addons
 
 	// s2 maps don't have world add-ons
 	// (UNTESTED because I don't have an s2 map to test this with)
-	if (addons) {
+	if (addons != nullptr) {
 		for (auto it = addons->begin(); it != addons->end();) {
 			if ((*it)->category == AddOns::AddOnCategory::kWorld) {
 				it = addons->erase(it);
@@ -522,7 +522,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			if (c & 0x40) {
+			if ((c & 0x40) != 0) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
 			f->set_terrain_d(terrain_converter.lookup(worldtype_, c & 0x1f));
@@ -542,7 +542,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			// https://settlers2.net/documentation/world-map-file-format-wldswd/
-			if (c & 0x40) {
+			if ((c & 0x40) != 0) {
 				port_spaces_to_set_.insert(Widelands::Coords(x, y));
 			}
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
@@ -740,7 +740,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			Widelands::DescriptionIndex nres = 0;
-			if (*res) {
+			if (*res != 0) {
 				try {
 					nres = descriptions->load_resource(res);
 				} catch (const WException&) {
@@ -1080,15 +1080,15 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		}
 		Widelands::FCoords fpos = map_.get_fcoords(starting_pos);
 
-		if (!(map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG)) {
+		if ((map_.get_max_nodecaps(egbase, fpos) & Widelands::BUILDCAPS_BIG) == 0) {
 			log_warn("wrong size - trying to fix it: ");
 			bool fixed = false;
 
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 			   map_, Widelands::Area<Widelands::FCoords>(fpos, 3));
 			do {
-				if (map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
-				    Widelands::BUILDCAPS_BIG) {
+				if ((map_.get_max_nodecaps(egbase, const_cast<Widelands::FCoords&>(mr.location())) &
+				     Widelands::BUILDCAPS_BIG) != 0) {
 					map_.set_starting_pos(p, mr.location());
 					fixed = true;
 					break;

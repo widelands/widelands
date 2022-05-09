@@ -2,7 +2,9 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
+# heidi.wenger, 2022
 # Jukka Pakarinen, 2016-2020
 # Markus <markus@hallfors.com>, 2015
 # Teppo Mäenpää <teppo@runbox.com>, 2020
@@ -11,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-02-28 12:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2015-02-03 14:48+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +28,7 @@ msgstr "Merenkäynti"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr "Merenkäynti opetuspeli"
+msgstr "Merenkäynnin opetuspeli"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
@@ -38,7 +40,7 @@ msgstr "Tervetuloa takaisin. Tässä opetuspelissä opit kaikkein tärkeimmät a
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Mutta ensin annan sinulle yleiskuvan sinun alueestasi: etelässä sinulla on kokonainen talous melkein kaikella mitä tarvitset."
+msgstr "Mutta ensin annan sinulle yleiskuvan alueestasi: etelässä sinulla on talouskokonaisuus melkein kaikella mitä tarvitset."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
@@ -49,7 +51,7 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Pohjoisessa sinulla on ainoastaan kultakaivos ja varasto. Samaan aikaan, kun kaivosmiehille toimitetaan mukavasti ruokaa, ei ole tapaa kuljettaa kultamalmia eteläosan sulattamoon."
+msgstr "Pohjoisessa sinulla on ainoastaan kultakaivos ja varasto. Vaikka kaivosmiehille saadaankin toimitettua mukavasti ruokaa, ei kultamalmin kuljettamiseksi eteläosan sulattamoon ole keinoa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
@@ -63,7 +65,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "En halua sinun kuitenkaan kiirehtivän: olet juuri saapunut tänne ja mahdollisesti halluat katsoa hieman tarkemmin leiriäsi. Pidän itsekin lyhyen tauon ja palaan pian takaisin."
+msgstr "En halua sinun kuitenkaan kiirehtivän: olet juuri saapunut tänne ja mahdollisesti haluat katsoa hieman tarkemmin leiriäsi. Pidän itsekin lyhyen tauon ja palaan pian takaisin."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -327,37 +329,37 @@ msgstr "Aloita tutkimusmatka mistä tahansa satamastasi."
 #. TRANSLATORS: This refers to a memory game
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
 msgid "I packed my bag and in it I put …"
-msgstr ""
+msgstr "Pakkasin laukkuni ja sen sisälle laitan ..."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Additional Items"
-msgstr ""
+msgstr "Lisätavarat"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr ""
+msgstr "Voi olla hyödyllistä ottaa hiukan enemmän tarvikkeita mukaamme kuin ainoastaan ne, joiden avulla rakennamme uuden sataman. Täten voimme aloittaa uusien rakennusten pystyttämisen heti kun itse sataman rakentaminen on saatu valmiiksi. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr ""
+msgstr "Voit ottaa jonkin verran lisää tarvikkeita, sotilaita, tai työntekijötä mukaan tutkimusmatkallesi. Voit määrittää ne täyttämällä tyhjät lokerot päätarvikkeiden alapuolella rakentaaksesi sataman. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr ""
+msgstr "Napsauta vain tyhjien lokeroiden päällä ja sen jälkeen rullaa luetteloa valitaksesi lisäesineen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr ""
+msgstr "Kokeilepa tätä nyt. Pieni pallukka vihreänä, keltaisena, tai punaisena kertoo sinulle josko esine on saapunut, vasta matkalla tai ei vielä saatavilla, tässä järjestyksessä."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
@@ -542,7 +544,7 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr ""
+msgstr "Katsohan tätä laaksoa kaukana etelässä. Olemme löytäneet vuoren jossa on kultaa ja louhisimme siitä myös malmia. Ongelma on, että vesivirtaukset jotka erottavat sen ja pääasutuksemme ovat liian leveitä rakentaaksemme niiden yli siltoja päästäksemme toiselle puolelle. Tiereittiemme kautta pääsy merkitsisi pitkiä kiertoja, hidastaen suuresti tarvikkeiden toimittamista sinne."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:258
 msgid "Rowboats & Ferry Yards"
@@ -659,11 +661,11 @@ msgstr "Lauttareitti perustetaan kuten tiekin: Napsauta lippua, valitse \"tee la
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr ""
+msgstr "Jokainen vesitien osa tarvitsee, kuitenkin, kaksi vesikolmiota viereensä. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:323
 msgid "Conclusion"
-msgstr "Johtopäätös"
+msgstr "Yhteenveto"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:325
 msgid "About Ferries"

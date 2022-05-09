@@ -35,13 +35,13 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = eia.egbase();
-	if (get_nr_enabled() && args->old_bob_type.empty()) {
+	if ((get_nr_enabled() != 0) && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
 		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 		do {
 			Widelands::Bob* const mbob = mr.location().field->get_first_bob();
-			args->old_bob_type.push_back((mbob ? &mbob->descr() : nullptr));
+			args->old_bob_type.push_back((mbob != nullptr ? &mbob->descr() : nullptr));
 			args->new_bob_type.push_back(dynamic_cast<const Widelands::BobDescr*>(
 			   egbase.descriptions().get_critter_descr(get_random_enabled())));
 		} while (mr.advance(*map));
@@ -54,7 +54,7 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 		std::list<const Widelands::BobDescr*>::iterator i = args->new_bob_type.begin();
 		do {
 			const Widelands::BobDescr& descr = *(*i);
-			if (mr.location().field->nodecaps() & descr.movecaps()) {
+			if ((mr.location().field->nodecaps() & descr.movecaps()) != 0u) {
 				if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 					bob->remove(egbase);  //  There is already a bob. Remove it.
 				}
@@ -63,9 +63,8 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else {
-		return 0;
 	}
+	return 0;
 }
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
@@ -80,9 +79,9 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 		   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 		std::list<const Widelands::BobDescr*>::iterator i = args->old_bob_type.begin();
 		do {
-			if (*i) {
+			if (*i != nullptr) {
 				const Widelands::BobDescr& descr = *(*i);
-				if (mr.location().field->nodecaps() & descr.movecaps()) {
+				if ((mr.location().field->nodecaps() & descr.movecaps()) != 0u) {
 					if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 						bob->remove(egbase);  //  There is already a bob. Remove it.
 					}
@@ -94,9 +93,8 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else {
-		return 0;
 	}
+	return 0;
 }
 
 EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {

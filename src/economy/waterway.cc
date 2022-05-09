@@ -79,7 +79,7 @@ void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 
 bool Waterway::notify_ware(Game& game, FlagId flag) {
 	Ferry* f = ferry_.get(game);
-	return f && f->notify_ware(game, flag);
+	return (f != nullptr) && f->notify_ware(game, flag);
 }
 
 void Waterway::remove_worker(Worker& w) {
@@ -97,7 +97,7 @@ void Waterway::request_ferry(EditorGameBase& egbase) {
 	fleet->init(egbase, this);
 }
 
-void Waterway::assign_carrier(Carrier& c, uint8_t) {
+void Waterway::assign_carrier(Carrier& c, uint8_t /* slot */) {
 	if (Ferry* f = ferry_.get(owner().egbase())) {
 		f->set_location(nullptr);
 	}
@@ -109,7 +109,7 @@ void Waterway::set_fleet(FerryFleet* fleet) {
 		return;
 	}
 	FerryFleet* old_fleet = fleet_.get(get_owner()->egbase());
-	if (old_fleet && fleet) {
+	if ((old_fleet != nullptr) && (fleet != nullptr)) {
 		// Only if the new fleet is non-null, to avoid problems in end-of-game cleanup
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			old_fleet->cancel_ferry_request(*game, this);
@@ -227,8 +227,9 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	RoadBase::log_general_info(egbase);
 
-	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) ? ferry_.serial() : 0);
-	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_.get(egbase) ? fleet_.serial() : 0);
+	molog(egbase.get_gametime(), "Ferry %u\n", ferry_.get(egbase) != nullptr ? ferry_.serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n",
+	      fleet_.get(egbase) != nullptr ? fleet_.serial() : 0);
 }
 
 }  // namespace Widelands

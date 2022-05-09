@@ -5,6 +5,7 @@
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
+# Boese Kaiser, 2022
 # C138, 2021
 # David D, 2018,2021
 # GunChleoc, 2016
@@ -25,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-22 02:41+0000\n"
-"PO-Revision-Date: 2022-02-17 14:21+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2022-05-04 03:37+0000\n"
+"PO-Revision-Date: 2015-11-03 18:55+0000\n"
+"Last-Translator: Boese Kaiser, 2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1300,8 +1301,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Cuisinier de racines de Manioc"
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1613,7 +1614,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "Le coupeur de liane qui travaille sur ce site ne trouve plus d'arbres dans sa zone d'activité. Vous devriez envisager de démanteler ou détruire le bâtiment, ou de construire une hutte de garde-jungle."
+msgstr "La coupeuse de liane qui travaille sur ce site ne trouve plus d'arbres dans sa zone d'activité. Vous devriez envisager de démanteler ou détruire le bâtiment, ou de construire une hutte de garde-jungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1784,9 +1785,9 @@ msgstr "construit un marteau"
 msgid "making a chisel"
 msgstr "Fabrique un ciseau"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1982,7 +1983,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "Le bûcheron travaillant dans cette hutte ne trouve plus d'arbres dans sa zone d'activité. Vous devriez envisager de démanteler ou détruire ce bâtiment, ou de construire une maison de garde-jungle."
+msgstr "La bûcheronne travaillant dans cette hutte ne trouve plus d'arbres dans sa zone d'activité. Vous devriez envisager de démanteler ou détruire ce bâtiment, ou de construire une maison de garde-jungle."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -5274,8 +5275,8 @@ msgstr "Arbre de balsa"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsa (Arbuste)"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS: This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5607,7 +5608,7 @@ msgstr "Commencez le jeu avec sept navires pleins de marchandises sur l'océan"
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
 msgid "Poor Hamlet"
-msgstr "Pauvre Hamlet"
+msgstr "Pauvre Hameau"
 
 #. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
 #. condition
@@ -5633,7 +5634,7 @@ msgstr "Soyez prudent"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr "Vous avez seulement une marchandise pour chaque outil dont vous aurez besoin pour démarrer votre économie. Assurez vous qu'aucun outil inutile ne soit produit."
+msgstr "Vous avez exactement les ressources pour chaque outil dont vous aurez besoin pour démarrer votre économie. Assurez vous qu'aucun outil inutile ne soit produit."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5642,7 +5643,7 @@ msgstr "Vous avez seulement une marchandise pour chaque outil dont vous aurez be
 #: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
 msgid "Struggling Outpost"
-msgstr "Avant-poste luttant"
+msgstr "Avant-poste en difficulté"
 
 #. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:13

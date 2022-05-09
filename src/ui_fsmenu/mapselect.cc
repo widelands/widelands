@@ -24,7 +24,6 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -45,17 +44,18 @@ MapSelect::MapSelect(MenuCapsule& m,
                      LaunchMPG* mpg,
                      GameSettingsProvider* const settings,
                      GameController* const ctrl,
-                     Widelands::Game& g)
+                     std::shared_ptr<Widelands::Game> for_preview)
    : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
      parent_screen_(mpg),
+     game_for_preview_(for_preview),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, g),
+     map_details_(
+        &right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, *game_for_preview_),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
-     game_(g),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
@@ -173,9 +173,10 @@ MapSelect::MapSelect(MenuCapsule& m,
 }
 
 MapSelect::~MapSelect() {
-	if (!parent_screen_) {
-		game_.cleanup_objects();
-		delete &game_;
+	if (game_for_preview_) {
+		game_for_preview_->cleanup_objects();
+	}
+	if (parent_screen_ == nullptr) {
 		delete settings_;
 	}
 }
@@ -183,7 +184,7 @@ MapSelect::~MapSelect() {
 void MapSelect::think() {
 	TwoColumnsFullNavigationMenu::think();
 
-	if (ctrl_) {
+	if (ctrl_ != nullptr) {
 		ctrl_->think();
 	}
 
@@ -216,7 +217,7 @@ MapData const* MapSelect::get_map() const {
 }
 
 void MapSelect::clicked_back() {
-	if (parent_screen_) {
+	if (parent_screen_ != nullptr) {
 		parent_screen_->clicked_select_map_callback(nullptr, false);
 	}
 	die();
@@ -228,17 +229,17 @@ void MapSelect::clicked_ok() {
 	}
 	const MapData& mapdata = maps_data_[table_.get_selected()];
 
-	if (!mapdata.width) {
+	if (mapdata.width == 0u) {
 		curdir_ = mapdata.filename;
 		fill_table();
 	} else if (!ok_.enabled()) {
 		return;
-	} else if (parent_screen_) {
+	} else if (parent_screen_ != nullptr) {
 		parent_screen_->clicked_select_map_callback(
 		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		new LaunchSPG(get_capsule(), *settings_, std::make_shared<Widelands::Game>(), get_map(),
 		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }
@@ -320,14 +321,14 @@ void MapSelect::fill_table() {
 				map.set_filename(mapfilename);
 				ml->preload_map(true, nullptr);
 
-				if (!map.get_width() || !map.get_height()) {
+				if ((map.get_width() == 0) || (map.get_height() == 0)) {
 					continue;
 				}
 
 				MapData::MapType maptype;
-				if (map.scenario_types() & scenario_types_) {
+				if ((map.scenario_types() & scenario_types_) != 0u) {
 					maptype = MapData::MapType::kScenario;
-				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get())) {
+				} else if (dynamic_cast<WidelandsMapLoader*>(ml.get()) != nullptr) {
 					maptype = MapData::MapType::kNormal;
 				} else {
 					maptype = MapData::MapType::kSettlers2;
@@ -351,7 +352,7 @@ void MapSelect::fill_table() {
 						if (selected_tag == "official") {
 							has_all_tags &= mapdata.tags.count("official") > 0;
 						} else {
-							has_all_tags &= !mapdata.tags.count("official");
+							has_all_tags &= mapdata.tags.count("official") == 0u;
 						}
 					}
 				}
@@ -359,17 +360,19 @@ void MapSelect::fill_table() {
 					const std::string selected_tag = balancing_tags_dropdown_->get_selected();
 					if (!selected_tag.empty()) {
 						if (selected_tag == "unspecified") {
-							has_all_tags &= !mapdata.tags.count("balanced");
-							has_all_tags &= !mapdata.tags.count("unbalanced");
+							has_all_tags &= mapdata.tags.count("balanced") == 0u;
+							has_all_tags &= mapdata.tags.count("unbalanced") == 0u;
 						} else {
 							has_all_tags &= mapdata.tags.count(selected_tag) > 0;
 						}
 					}
 				}
 				// Backwards compatibility
-				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
+				if ((mapdata.tags.count("balanced") == 0u) &&
+				    (mapdata.tags.count("unbalanced") == 0u)) {
 					unspecified_balancing_found = true;
-				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
+				} else if ((mapdata.tags.count("balanced") != 0u) &&
+				           (mapdata.tags.count("unbalanced") != 0u)) {
 					log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
 					         "packet\n",
 					         mapfilename.c_str());
@@ -392,7 +395,7 @@ void MapSelect::fill_table() {
 		} else if (g_fs->is_directory(mapfilename) && !g_fs->list_directory(mapfilename).empty()) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
+			if ((strcmp(fs_filename, ".") == 0) || (strcmp(fs_filename, "..") == 0)) {
 				continue;
 			}
 			maps_data_.push_back(MapData::create_directory(mapfilename));

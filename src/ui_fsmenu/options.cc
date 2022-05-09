@@ -449,12 +449,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 #endif
 
 	// New Game options
-	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
-	show_census_.set_state(opt.display_flags & InteractiveBase::dfShowCensus);
-	show_statistics_.set_state(opt.display_flags & InteractiveBase::dfShowStatistics);
-	show_soldier_levels_.set_state(opt.display_flags & InteractiveBase::dfShowSoldierLevels);
-	show_buildings_.set_state(opt.display_flags & InteractiveBase::dfShowBuildings);
-	show_workarea_overlap_.set_state(opt.display_flags & InteractiveBase::dfShowWorkareaOverlap);
+	show_buildhelp_.set_state((opt.display_flags & InteractiveBase::dfShowBuildhelp) != 0);
+	show_census_.set_state((opt.display_flags & InteractiveBase::dfShowCensus) != 0);
+	show_statistics_.set_state((opt.display_flags & InteractiveBase::dfShowStatistics) != 0);
+	show_soldier_levels_.set_state((opt.display_flags & InteractiveBase::dfShowSoldierLevels) != 0);
+	show_buildings_.set_state((opt.display_flags & InteractiveBase::dfShowBuildings) != 0);
+	show_workarea_overlap_.set_state((opt.display_flags & InteractiveBase::dfShowWorkareaOverlap) !=
+	                                 0);
 
 	// Language options
 	add_languages_to_list(opt.language);
@@ -569,8 +570,8 @@ void Options::add_languages_to_list(const std::string& current_locale) {
 
 		for (const std::string& localename : files) {  // Begin scan locales directory
 			const char* path = localename.c_str();
-			if (!strcmp(FileSystem::fs_filename(path), ".") ||
-			    !strcmp(FileSystem::fs_filename(path), "..") || !fs->is_directory(path)) {
+			if ((strcmp(FileSystem::fs_filename(path), ".") == 0) ||
+			    (strcmp(FileSystem::fs_filename(path), "..") == 0) || !fs->is_directory(path)) {
 				continue;
 			}
 

@@ -78,7 +78,8 @@ public:
 	   : AbstractWaresDisplay(
 	        parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
 	     color_map_(color_map) {
-		int w, h;
+		int w;
+		int h;
 		get_desired_size(&w, &h);
 		set_size(w, h);
 	}
@@ -242,13 +243,19 @@ void WareStatisticsMenu::cb_changed_to(Widelands::DescriptionIndex id, bool what
 
 static bool layouting = false;
 void WareStatisticsMenu::layout() {
-	if (layouting || !tab_panel_ || !display_ || !slider_ || !main_box_) {
+	if (layouting || (tab_panel_ == nullptr) || (display_ == nullptr) || (slider_ == nullptr) ||
+	    (main_box_ == nullptr)) {
 		return;
 	}
 	layouting = true;
 
 	display_->set_hgap(3, false);
-	int w1, h1, w2, h2, w3, h3;
+	int w1;
+	int h1;
+	int w2;
+	int h2;
+	int w3;
+	int h3;
 	tab_panel_->get_desired_size(&w1, &h1);
 	display_->get_desired_size(&w2, &h2);
 	slider_->get_desired_size(&w3, &h3);
@@ -286,19 +293,19 @@ UI::Window& WareStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			WareStatisticsMenu& m = dynamic_cast<WareStatisticsMenu&>(*r.window);
 			m.tab_panel_->activate(fr.unsigned_8());
 			m.slider_->get_slider().set_value(fr.signed_32());
-			for (size_t i = fr.unsigned_32(); i; --i) {
+			for (size_t i = fr.unsigned_32(); i != 0u; --i) {
 				m.display_->select_ware(ib.egbase().descriptions().safe_ware_index(fr.string()));
 			}
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Wares Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Wares Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("wares statistics menu: %s", e.what());
 	}
 }
-void WareStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void WareStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tab_panel_->active());
 	fw.signed_32(slider_->get_slider().get_value());

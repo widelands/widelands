@@ -183,12 +183,14 @@ std::vector<Recti> Button::focus_overlay_rects() {
  */
 void Button::draw(RenderTarget& dst) {
 	const bool is_flat = (enabled_ && visual_state_ == VisualState::kFlat) ||
-	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
+	                     (!enabled_ &&
+	                      // Needs explicit cast to int to make clang-tidy happy.
+	                      (static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat) != 0));
 	const bool is_permpressed =
 	   (enabled_ && visual_state_ == VisualState::kPermpressed) ||
-	   (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed));
+	   (!enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kPermpressed) != 0));
 	const bool is_monochrome =
-	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
+	   !enabled_ && (static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome) != 0);
 
 	const UI::TextPanelStyleInfo& style_to_use =
 	   is_monochrome ? button_style().disabled() : button_style().enabled();
@@ -201,7 +203,7 @@ void Button::draw(RenderTarget& dst) {
 	}
 
 	//  If we've got a picture, draw it centered
-	if (title_image_) {
+	if (title_image_ != nullptr) {
 		if (image_mode_ == UI::Button::ImageMode::kUnscaled) {
 			if (!is_monochrome) {
 				dst.blit(Vector2i((get_w() - static_cast<int32_t>(title_image_->width())) / 2,
@@ -348,7 +350,7 @@ void Button::handle_mousein(bool const inside) {
 /**
  * Update the pressed status of the button
  */
-bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -364,7 +366,7 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	return true;
 }
 
-bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
+bool Button::handle_mouserelease(uint8_t const btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -385,7 +387,8 @@ bool Button::handle_mouserelease(uint8_t const btn, int32_t, int32_t) {
 	return false;
 }
 
-bool Button::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Button::handle_mousemove(
+   const uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	return true;  // We handle this always by lighting up
 }
 

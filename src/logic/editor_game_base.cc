@@ -69,9 +69,10 @@ initialization
 */
 EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : did_postload_addons_(false),
+     did_postload_tribes_(false),
      gametime_(0),
      // TODO(SirVer): this is sooo ugly, I can't say
-     lua_(lua_interface ? lua_interface : new LuaEditorInterface(this)),
+     lua_(lua_interface != nullptr ? lua_interface : new LuaEditorInterface(this)),
      player_manager_(new PlayersManager(*this)),
      ibase_(nullptr),
      loader_ui_(nullptr),
@@ -136,7 +137,7 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
-	if (!map_.filesystem()) {
+	if (map_.filesystem() == nullptr) {
 		return;
 	}
 
@@ -231,7 +232,7 @@ void EditorGameBase::set_ibase(InteractiveBase* const b) {
 	ibase_.reset(b);
 }
 
-InteractiveGameBase* EditorGameBase::get_igbase() {
+InteractiveGameBase* EditorGameBase::get_igbase() const {
 	return dynamic_cast<InteractiveGameBase*>(get_ibase());
 }
 
@@ -309,7 +310,7 @@ void EditorGameBase::postload() {
 	assert(descriptions_);
 }
 
-void EditorGameBase::postload_addons() {
+void EditorGameBase::postload_addons(bool also_postload_tribes) {
 	if (did_postload_addons_) {
 		return;
 	}
@@ -318,7 +319,16 @@ void EditorGameBase::postload_addons() {
 	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 
 	assert(lua_);
-	assert(descriptions_);
+
+	mutable_descriptions()->ensure_tribes_are_registered();
+	if (is_game()) {
+		FileSystem* map_fs = map().filesystem();
+		// In new random matches, map_fs may be nullptr
+		if (map_fs != nullptr && map_fs->file_exists("scripting/tribes")) {
+			verb_log_info("Game: Reading Scenario Tribes ... ");
+			mutable_descriptions()->register_scenario_tribes(map_fs);
+		}
+	}
 
 	for (const auto& info : enabled_addons_) {
 		if (info->category == AddOns::AddOnCategory::kWorld ||
@@ -332,8 +342,18 @@ void EditorGameBase::postload_addons() {
 		}
 	}
 
-	// Postload all tribes. We can do this only now to ensure that any changes
-	// made by add-ons are taken into account when computing dependency chains.
+	if (also_postload_tribes) {
+		postload_tribes();
+	}
+}
+
+void EditorGameBase::postload_tribes() {
+	if (did_postload_tribes_) {
+		return;
+	}
+	did_postload_tribes_ = true;
+
+	verb_log_info("Postloading tribes...");
 	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
 		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
 	}
@@ -407,7 +427,7 @@ EditorGameBase::warp_constructionsite(const Coords& c,
 	const TribeDescr& tribe = plr->tribe();
 	ConstructionSite& b = dynamic_cast<ConstructionSite&>(
 	   tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings));
-	if (settings) {
+	if (settings != nullptr) {
 		b.apply_settings(*settings);
 	}
 	b.add_dropout_wares(preserved_wares);
@@ -576,6 +596,7 @@ void EditorGameBase::full_cleanup() {
 	cleanup_for_load();
 	enabled_addons().clear();
 	did_postload_addons_ = false;
+	did_postload_tribes_ = false;
 	descriptions_.reset(nullptr);
 	gametime_ = Time(0);
 	// See the comment about `lua_` in the ctor
@@ -687,7 +708,7 @@ void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const ne
 		return;
 	}
 
-	if (old_owner) {
+	if (old_owner != 0u) {
 		Notifications::publish(
 		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::LOST, get_player(old_owner)));
 	}
@@ -699,7 +720,7 @@ void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const ne
 	// longer owned.
 	inform_players_about_ownership(fc.field - &first_field, new_owner);
 
-	if (new_owner) {
+	if (new_owner != 0u) {
 		Notifications::publish(
 		   NoteFieldPossession(fc, NoteFieldPossession::Ownership::GAINED, get_player(new_owner)));
 	}
@@ -760,19 +781,20 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 			//  adds the influence
 			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
-			if (owner && !conquer_guarded_location_by_superior_influence) {
+			if ((owner != 0u) && !conquer_guarded_location_by_superior_influence) {
 				new_influence_modified = 1;
 			}
-			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
+			if ((owner == 0u) || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (!(conquering_player->military_influence(index) -= influence) &&
+		} else if (((conquering_player->military_influence(index) -= influence) == 0u) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
 			//  so, transfer the ownership to that player.
 			PlayerNumber best_player;
-			if (preferred_player && player(preferred_player).military_influence(index)) {
+			if ((preferred_player != 0u) &&
+			    (player(preferred_player).military_influence(index) != 0u)) {
 				best_player = preferred_player;
 			} else {
 				best_player = neutral_when_no_influence ? 0 : player_area.player_number;
@@ -839,7 +861,7 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 				flag_building->set_defeating_player(area.player_number);
 			}
 		}
-		if (game) {
+		if (game != nullptr) {
 			temp_imm->schedule_destroy(*game);
 		} else {
 			temp_imm->remove(*this);

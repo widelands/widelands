@@ -209,8 +209,9 @@ void Window::set_center_panel(Panel* panel) {
  * Update the window's desired size based on its center panel.
  */
 void Window::update_desired_size() {
-	if (center_panel_ && !is_minimal_) {
-		int innerw, innerh = 0;
+	if ((center_panel_ != nullptr) && !is_minimal_) {
+		int innerw;
+		int innerh = 0;
 		center_panel_->get_desired_size(&innerw, &innerh);
 		set_desired_size(
 		   innerw + get_lborder() + get_rborder(), innerh + get_tborder() + get_bborder());
@@ -222,7 +223,7 @@ void Window::update_desired_size() {
  * so that it fills the window entirely (the latter only if not minimized).
  */
 void Window::layout() {
-	if (center_panel_ && !is_minimal_) {
+	if ((center_panel_ != nullptr) && !is_minimal_) {
 		center_panel_->set_pos(Vector2i::zero());
 		center_panel_->set_size(get_inner_w(), get_inner_h());
 	}
@@ -251,11 +252,11 @@ void Window::move_out_of_the_way() {
  * Moves the mouse to the child panel that is activated as fast click panel
  */
 void Window::warp_mouse_to_fastclick_panel() {
-	if (fastclick_panel_) {
+	if (fastclick_panel_ != nullptr) {
 		Vector2i pt(fastclick_panel_->get_w() / 2, fastclick_panel_->get_h() / 2);
 		UI::Panel* p = fastclick_panel_;
 
-		while (p->get_parent() && p != this) {
+		while ((p->get_parent() != nullptr) && p != this) {
 			pt = p->to_parent(pt);
 			p = p->get_parent();
 		}
@@ -341,7 +342,7 @@ void Window::draw_border(RenderTarget& dst) {
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - kHorizontalBorderMiddleLength;
 
 	const RGBAColor& focus_color =
-	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
+	   ((get_parent() != nullptr) && get_parent()->focused_child() == this) || is_modal() ?
          window_style_info().window_border_focused() :
          window_style_info().window_border_unfocused();
 
@@ -498,7 +499,8 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 	//  TODO(unknown): This code is erroneous. It checks the current key state. What it
 	//  needs is the key state at the time the mouse was clicked. See the
 	//  usage comment for get_key_state.
-	if ((SDL_GetModState() & KMOD_CTRL && btn == SDL_BUTTON_LEFT && my < kVerticalBorderThickness) ||
+	if ((((SDL_GetModState() & KMOD_CTRL) != 0) && btn == SDL_BUTTON_LEFT &&
+	     my < kVerticalBorderThickness) ||
 	    btn == SDL_BUTTON_MIDDLE) {
 		is_minimal() ? restore() : minimize();
 	} else if (btn == SDL_BUTTON_LEFT) {
@@ -517,7 +519,7 @@ bool Window::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
 
 	return true;
 }
-bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool Window::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT) {
 		grab_mouse(false);
 		dragging_ = false;
@@ -532,7 +534,7 @@ bool Window::handle_tooltip() {
 	return true;
 }
 
-bool Window::handle_mousewheel(int32_t, int32_t, uint16_t) {
+bool Window::handle_mousewheel(int32_t /*x*/, int32_t /*y*/, uint16_t /*modstate*/) {
 	// Mouse wheel events should not propagate to objects below us, so we claim
 	// that they have been handled.
 	return true;
@@ -588,7 +590,8 @@ void Window::restore() {
 }
 void Window::minimize() {
 	assert(!is_minimal_);
-	int32_t y = get_y(), x = get_x();
+	int32_t y = get_y();
+	int32_t x = get_x();
 	if (y < 0) {
 		y = 0;  //  Move into the screen
 	}
@@ -605,13 +608,15 @@ void Window::minimize() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't fully dragged out of the screen.
  */
-bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, int32_t) {
+bool Window::handle_mousemove(
+   const uint8_t /*state*/, int32_t mx, int32_t my, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	if (dragging_) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;
 		const int32_t mouse_y = get_y() + get_tborder() + my;
 		int32_t left = drag_start_win_x_ + mouse_x - drag_start_mouse_x_;
 		int32_t top = drag_start_win_y_ + mouse_y - drag_start_mouse_y_;
-		int32_t new_left = left, new_top = top;
+		int32_t new_left = left;
+		int32_t new_top = top;
 
 		if (const Panel* const parent = get_parent()) {
 			const int32_t w = get_w();
@@ -677,9 +682,10 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 
 			{  //  Snap to other Panels.
 				const bool SOWO = parent->get_snap_windows_only_when_overlapping();
-				const int32_t right = left + w, bot = top + h;
+				const int32_t right = left + w;
+				const int32_t bot = top + h;
 
-				for (const Panel* snap_target = parent->get_first_child(); snap_target;
+				for (const Panel* snap_target = parent->get_first_child(); snap_target != nullptr;
 				     snap_target = snap_target->get_next_sibling()) {
 					if (snap_target != this && snap_target->is_snap_target()) {
 						int32_t const other_left = snap_target->get_x();

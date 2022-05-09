@@ -65,7 +65,8 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !id_ || !owner_.message_queue_ || owner_.message_queue_->count(id_.value());
+	return !(id_.operator bool()) || (owner_.message_queue_ == nullptr) ||
+	       (owner_.message_queue_->count(id_.value()) != 0u);
 }
 
 void MessagePreview::think() {
@@ -83,11 +84,11 @@ void MessagePreview::draw(RenderTarget& r) {
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
-	if (owner_.index_of(this) % 2) {
+	if ((owner_.index_of(this) % 2) != 0u) {
 		r.brighten_rect(Recti(0, 0, get_w(), get_h()), 16);
 	}
 
-	if (message_ && message_->icon()) {
+	if ((message_ != nullptr) && (message_->icon() != nullptr)) {
 		r.blit(
 		   Vector2i(get_w() - message_->icon()->width(), (get_h() - message_->icon()->height()) / 2),
 		   message_->icon());
@@ -103,10 +104,10 @@ void MessagePreview::draw(RenderTarget& r) {
 		r.brighten_rect(Recti((w - fraction) / 2, get_h() - kSpacing, fraction, kSpacing), -64);
 	}
 }
-bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
+bool MessagePreview::handle_mousepress(const uint8_t button, int32_t /* x */, int32_t /* y */) {
 	switch (button) {
 	case SDL_BUTTON_LEFT:  // center view
-		if (message_ && message_->position()) {
+		if ((message_ != nullptr) && (message_->position().operator bool())) {
 			owner_.ibase_.map_view()->scroll_to_field(
 			   message_->position(), MapView::Transition::Smooth);
 		}
@@ -115,7 +116,7 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
 		owner_.pop_message(this);
 		break;
 	case SDL_BUTTON_RIGHT: {  // open message menu
-		if (owner_.iplayer_ && message_) {
+		if ((owner_.iplayer_ != nullptr) && (message_ != nullptr)) {
 			owner_.iplayer_->popup_message(id_, *message_);
 		}
 		break;
@@ -178,10 +179,10 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
      draw_real_time_(get_config_bool("game_clock", true)) {
 	text_fps_.set_handle_mouse(true);
 	int mode = get_config_int("toolbar_pos", 0);
-	on_top_ = mode & DisplayMode::kCmdSwap;
-	if (mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) {
+	on_top_ = ((mode & DisplayMode::kCmdSwap) != 0);
+	if ((mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) != 0) {
 		display_mode_ = DisplayMode::kOnMouse_Visible;
-	} else if (mode & DisplayMode::kMinimized) {
+	} else if ((mode & DisplayMode::kMinimized) != 0) {
 		display_mode_ = DisplayMode::kMinimized;
 	} else {
 		display_mode_ = DisplayMode::kPinned;
@@ -280,12 +281,13 @@ void InfoPanel::set_textareas_visibility(bool v) {
 	for (UI::Textarea* t : {&text_time_speed_, &text_fps_, &text_coords_}) {
 		t->set_visible(v);
 	}
-	if (toolbar_) {
+	if (toolbar_ != nullptr) {
 		toolbar_->draw_background = !v;
 	}
 }
 
-bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
+bool InfoPanel::handle_mousemove(
+   uint8_t /*state*/, int32_t x, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	last_mouse_pos_ = Vector2i(x, y);
 
 	switch (display_mode_) {
@@ -315,11 +317,11 @@ bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t
 }
 
 // Consume mouse click/move events on the panel
-bool InfoPanel::handle_mousepress(uint8_t, int32_t x, int32_t y) {
+bool InfoPanel::handle_mousepress(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
 }
-bool InfoPanel::handle_mouserelease(uint8_t, int32_t x, int32_t y) {
+bool InfoPanel::handle_mouserelease(uint8_t /*btn*/, int32_t x, int32_t y) {
 	last_mouse_pos_ = Vector2i(x, y);
 	return is_mouse_over_panel();
 }
@@ -460,13 +462,14 @@ void InfoPanel::think() {
 		last_message_id_.reset(new Widelands::MessageId());
 		iplayer_ = dynamic_cast<InteractivePlayer*>(&ibase_);
 	}
-	if (iplayer_ && !message_queue_) {
+	if ((iplayer_ != nullptr) && (message_queue_ == nullptr)) {
 		message_queue_ = &iplayer_->player().messages();
 	}
 
-	while (message_queue_ && *last_message_id_ != message_queue_->current_message_id()) {
+	while ((message_queue_ != nullptr) &&
+	       *last_message_id_ != message_queue_->current_message_id()) {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
-		if (message_queue_->count(last_message_id_->value())) {
+		if (message_queue_->count(last_message_id_->value()) != 0u) {
 			push_message(
 			   new MessagePreview(this, (*message_queue_)[*last_message_id_], *last_message_id_));
 		}
@@ -479,7 +482,7 @@ void InfoPanel::think() {
 }
 
 void InfoPanel::layout() {
-	if (!toolbar_) {
+	if (toolbar_ == nullptr) {
 		// Not yet initialized
 		return;
 	}

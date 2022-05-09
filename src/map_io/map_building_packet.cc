@@ -61,7 +61,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 			FCoords c;
 			for (c.y = 0; c.y < height; ++c.y) {
 				for (c.x = 0; c.x < width; ++c.x) {
-					if (fr.unsigned_8()) {
+					if (fr.unsigned_8() != 0u) {
 						PlayerNumber const p = fr.unsigned_8();
 						Serial const serial = fr.unsigned_32();
 						char const* const name = fr.c_string();
@@ -78,9 +78,10 @@ void MapBuildingPacket::read(FileSystem& fs,
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite
 							if (!tribe.has_building(index) &&
-							    !(bd && bd->type() == MapObjectType::MILITARYSITE)) {
+							    !((bd != nullptr) && bd->type() == MapObjectType::MILITARYSITE)) {
 								throw GameDataError("tribe %s does not define building type \"%s\"",
-								                    tribe.name().c_str(), bd ? bd->name().c_str() : name);
+								                    tribe.name().c_str(),
+								                    bd != nullptr ? bd->name().c_str() : name);
 							}
 
 							//  Now, create this Building, take extra special care for
@@ -129,7 +130,7 @@ void MapBuildingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 	Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
-		if (building && building->get_position() == fc) {
+		if ((building != nullptr) && building->get_position() == fc) {
 			//  We only write Buildings.
 			//  Buildings can life on only one main position.
 			assert(!mos.is_object_known(*building));

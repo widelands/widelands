@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -14,8 +15,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-03-02 12:22+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
+"PO-Revision-Date: 2015-02-03 14:55+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +62,7 @@ msgstr "Joukkueesi löysi uuden maamerkin."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:85
 msgid "You found a new artifact."
-msgstr ""
+msgstr "Löysit uuden maamerkin"
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:89
@@ -74,7 +75,7 @@ msgstr "Vihollinen ryöväsi maamerkkisi."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:91
 msgid "One of your artifacts was stolen by an enemy."
-msgstr ""
+msgstr "Vihollinen ryöväsi maamerkkisi."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:95
@@ -87,7 +88,7 @@ msgstr "Otit haltuusi vastustajan maamerkin."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr ""
+msgstr "Otit haltuusi vastustajan maamerkin."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -163,7 +164,7 @@ msgstr "Yksinvaltias"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr ""
+msgstr "Heimo tai joukkue joka kukistaa kaikki muut voittaa pelin! Tämä tarkoittaa että vastustajilla ei ole enää paamajoja, satamia tai varastoja jäljellä."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -183,13 +184,13 @@ msgstr "Tämä on loppumaton peli ilman sääntöjä. Sotasumu on poissa päält
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:16
 msgid "HQ Hunter"
-msgstr ""
+msgstr "Päämaja-jahti"
 
 #: ../../data/scripting/win_conditions/hq_hunter.lua:18
 msgid ""
 "The tribe or team that can find and destroy all other headquarters wins the "
 "game! Does not work with starting conditions without headquarters."
-msgstr ""
+msgstr "Heimo tai joukkue joka löytää ja tuhoaa kaikki muut päämajat voittaa pelin! Ei toimi jos pelin alkuasetelmaan ei kuulu päämajoja."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:21
 #, lua-format
@@ -260,7 +261,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Kukin pelaaja tai joukkue pyrkii hallitsemaan yli puolta kartan maapinta-alasta. Pelaaja tai joukkue, jopa pitää enintä osaa hallussan 20 minuutin ajan, voittaa. Jos pelataan rauhallisessa pelitilassa, peli päättyy kun jollakin pelaajalla on hallussaan enemmän maata kuin mitä kukaan muu pystyy valtaamaan. Jos kukaan ei onnistu tähän 4 tunnissa, eniten maata hallussaan pitävä voittaa."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

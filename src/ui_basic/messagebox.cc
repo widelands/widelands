@@ -39,8 +39,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
                            Align align)
    : Window(parent, s, "message_box", 0, 0, 20, 20, caption), type_(type) {
 	// Calculate textarea dimensions depending on text size
-	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
-	const int outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
+	const int outerwidth = parent != nullptr ? parent->get_inner_w() : g_gr->get_xres();
+	const int outerheight = parent != nullptr ? parent->get_inner_h() : g_gr->get_yres();
 
 	const int button_w = 120;
 	const int minwidth = 3.5 * button_w;
@@ -54,7 +54,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	   s == WindowStyle::kWui ? UI::FontStyle::kWuiLabel : UI::FontStyle::kFsMenuLabel;
 
 	const int margin = 5;
-	int width, height = 0;
+	int width;
+	int height = 0;
 	try {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
 		   g_fh->render(is_richtext(text) ? text : as_richtext_paragraph(text, font_style), maxwidth);
@@ -130,7 +131,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
  * Clicking the right mouse button inside the window acts like pressing
  * Ok or No, depending on the message box type.
  */
-bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t /*mx*/, int32_t /*my*/) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		if (type_ == MBoxType::kOk) {
@@ -142,7 +143,7 @@ bool WLMessageBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	return true;
 }
 
-bool WLMessageBox::handle_mouserelease(const uint8_t, int32_t, int32_t) {
+bool WLMessageBox::handle_mouserelease(const uint8_t /*btn*/, int32_t /*mx*/, int32_t /*my*/) {
 	return true;
 }
 

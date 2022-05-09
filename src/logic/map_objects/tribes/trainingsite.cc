@@ -466,7 +466,7 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 		soldier->set_location_initially(*this);
 		assert(!soldier->get_state());  //  Should be newly created.
 
-		if (game) {
+		if (game != nullptr) {
 			soldier->start_task_idle(*game, 0, -1);
 		}
 	}
@@ -483,7 +483,7 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 void TrainingSite::set_economy(Economy* e, WareWorker type) {
 	ProductionSite::set_economy(e, type);
 
-	if (soldier_request_ && type == soldier_request_->get_type()) {
+	if ((soldier_request_ != nullptr) && type == soldier_request_->get_type()) {
 		soldier_request_->set_economy(e);
 	}
 }
@@ -530,7 +530,7 @@ void TrainingSite::remove_worker(Worker& w) {
 		if (it != soldiers_.end()) {
 			soldiers_.erase(it);
 
-			if (game) {
+			if (game != nullptr) {
 				schedule_act(*game, Duration(100));
 			}
 		}
@@ -548,7 +548,7 @@ void TrainingSite::remove_worker(Worker& w) {
  * somebody shows up.
  */
 void TrainingSite::update_soldier_request(bool did_incorporate) {
-	Game* game = get_owner() ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
+	Game* game = get_owner() != nullptr ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
 	Duration dynamic_timeout = acceptance_threshold_timeout;
@@ -585,7 +585,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		repeated_layoff_inc_ = true;
 	}
 
-	const Time& timeofgame = game ? game->get_gametime() : Time(0);
+	const Time& timeofgame = game != nullptr ? game->get_gametime() : Time(0);
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
 		// If type of desired recruits has been changed, the request is rebuild after incorporate
@@ -608,7 +608,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		}
 		request_open_since_ = timeofgame;
 	}
-	if (soldier_request_ && need_more_soldiers) {
+	if ((soldier_request_ != nullptr) && need_more_soldiers) {
 		if ((!requesting_weak_trainees_) && (!limit_upper_bound)) {
 			// If requesting strong folks, the acceptance time can sometimes grow unbearable large
 			// without this.
@@ -649,13 +649,13 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		}
 	}
 
-	if (!soldier_request_) {
+	if (soldier_request_ == nullptr) {
 		rebuild_request = need_more_soldiers;
 	}
 
 	if (rebuild_request) {
 		// I've changed my acceptance criteria
-		if (soldier_request_) {
+		if (soldier_request_ != nullptr) {
 			delete soldier_request_;
 			soldier_request_ = nullptr;
 		}
@@ -736,7 +736,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			                        std::numeric_limits<uint8_t>::max() - 1));
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
-			if (game) {
+			if (game != nullptr) {
 				schedule_act(*game, dynamic_timeout + Duration(1));
 			}
 		} else {
@@ -767,7 +767,7 @@ void TrainingSite::request_soldier_callback(Game& game,
 #else
                                             Request&,
 #endif
-                                            DescriptionIndex,
+                                            DescriptionIndex /* index */,
                                             Worker* const w,
                                             PlayerImmovable& target) {
 	TrainingSite& tsite = dynamic_cast<TrainingSite&>(target);
@@ -782,7 +782,7 @@ void TrainingSite::request_soldier_callback(Game& game,
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
-void TrainingSite::drop_unupgradable_soldiers(Game&) {
+void TrainingSite::drop_unupgradable_soldiers(Game& /* game */) {
 	std::vector<Soldier*> droplist;
 
 	for (Soldier* soldier : soldiers_) {
@@ -822,7 +822,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game&) {
  * Drop all the soldiers that can not be upgraded further at this level of resourcing.
  *
  */
-void TrainingSite::drop_stalled_soldiers(Game&) {
+void TrainingSite::drop_stalled_soldiers(Game& /* game */) {
 	Soldier* soldier_to_drop = nullptr;
 	uint8_t highest_soldier_level_seen = 0;
 
@@ -927,7 +927,7 @@ void TrainingSite::program_end(Game& game, ProgramResult const result) {
 	// function were run
 	bool leftover_soldiers_check = true;
 
-	if (current_upgrade_) {
+	if (current_upgrade_ != nullptr) {
 		if (result_ == ProgramResult::kCompleted) {
 			drop_unupgradable_soldiers(game);
 			leftover_soldiers_check = false;
@@ -1154,7 +1154,7 @@ void TrainingSite::training_successful(TrainingAttribute type, uint32_t level) {
 void TrainingSite::training_done() {
 	for (auto& fail_and_presence : training_failure_count_) {
 		// If a soldier is present at this training level and site is running, deteoriate
-		if (fail_and_presence.second.second && (!is_stopped())) {
+		if ((fail_and_presence.second.second != 0u) && (!is_stopped())) {
 			fail_and_presence.second.first++;
 			fail_and_presence.second.second = 0;
 		} else if (0 < fail_and_presence.second.first) {  // If no soldier, let's become optimistic

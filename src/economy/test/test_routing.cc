@@ -59,7 +59,8 @@ public:
 		return position_;
 	}
 
-	void get_neighbours(Widelands::WareWorker type, Widelands::RoutingNodeNeighbours&) override;
+	void get_neighbours(Widelands::WareWorker type,
+	                    Widelands::RoutingNodeNeighbours& /*n*/) override;
 
 	// test functionality
 	bool all_members_zeroed() const;
@@ -82,8 +83,9 @@ void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() const {
-	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
-	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
+	bool integers_zero = (mpf_cycle_ware == 0u) && (mpf_realcost_ware == 0) &&
+	                     (mpf_estimate_ware == 0) && (mpf_cycle_worker == 0u) &&
+	                     (mpf_realcost_worker == 0) && (mpf_estimate_worker == 0);
 	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
 
 	return pointers_zero && integers_zero;
@@ -103,7 +105,7 @@ class TestingRoute : public Widelands::IRoute {
 public:
 	using Nodes = std::vector<Widelands::RoutingNode*>;
 
-	void init(int32_t) override {
+	void init(int32_t /* cost */) override {
 		nodes.clear();
 	}
 	void insert_as_first(Widelands::RoutingNode* node) override {
@@ -248,12 +250,12 @@ struct SimpleRouterFixture {
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
 	 * cycle wraps around.
 	 */
-	void reset() {
-		if (d0) {
+	void reset() const {
+		if (d0 != nullptr) {
 			d0->reset_path_finding_cycle(Widelands::wwWARE);
 			d0->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
-		if (d1) {
+		if (d1 != nullptr) {
 			d1->reset_path_finding_cycle(Widelands::wwWARE);
 			d1->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
@@ -414,7 +416,7 @@ struct ComplexRouterFixture {
 	 */
 	TestingRoutingNode* new_node_w_neighbour(TestingRoutingNode* const d,
 	                                         const Widelands::Coords& pos = Widelands::Coords(0, 0),
-	                                         int32_t = 1,
+	                                         int32_t /* unused */ = 1,
 	                                         int32_t const waitcost = 0) {
 		TestingRoutingNode* dnew = new TestingRoutingNode(waitcost, pos);
 

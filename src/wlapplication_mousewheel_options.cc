@@ -31,8 +31,17 @@ struct MousewheelOption {
 	const MousewheelOptionType type_;
 	const uint16_t default_;
 
+private:
 	MousewheelOption(std::string n, MousewheelOptionType t, uint16_t def)
 	   : internal_name_(n), type_(t), default_(def) {
+	}
+
+public:
+	static inline MousewheelOption create_mod(std::string n, uint16_t def) {
+		return MousewheelOption(n, MousewheelOptionType::kKeymod, def);
+	}
+	static inline MousewheelOption create_bool(std::string n, bool def) {
+		return MousewheelOption(n, MousewheelOptionType::kBool, def ? 1 : 0);
 	}
 
 	bool get_bool() const {
@@ -113,17 +122,17 @@ struct MousewheelHandlerOptions {
 		}
 	}
 
-	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) {
-		return (((y && current_sign_y_) || (x && current_sign_x_)) &&
+	bool can_handle(const int32_t x, const int32_t y, const uint16_t modstate) const {
+		return ((((y != 0) && (current_sign_y_ != 0)) || ((x != 0) && (current_sign_x_ != 0))) &&
 		        matches_keymod(current_keymod_, modstate));
 	}
-	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) {
+	int32_t get_change(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return (x * current_sign_x_ + y * current_sign_y_);
 		}
 		return 0;
 	}
-	Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) {
+	Vector2i get_change_2D(const int32_t x, const int32_t y, const uint16_t modstate) const {
 		if (can_handle(x, y, modstate)) {
 			return Vector2i(x * current_sign_x_, y * current_sign_y_);
 		}
@@ -133,48 +142,38 @@ struct MousewheelHandlerOptions {
 
 static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options = {
    {MousewheelOptionID::kUIChangeValueInvertX,
-    MousewheelOption("change_value_x_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption::create_bool("change_value_x_invert", false)},
    {MousewheelOptionID::kUIChangeValueInvertY,
-    MousewheelOption("change_value_y_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption::create_bool("change_value_y_invert", false)},
 
-   {MousewheelOptionID::kUITabInvertX,
-    MousewheelOption("tabpanel_x_invert", MousewheelOptionType::kBool, false)},
-   {MousewheelOptionID::kUITabInvertY,
-    MousewheelOption("tabpanel_y_invert", MousewheelOptionType::kBool, false)},
+   {MousewheelOptionID::kUITabInvertX, MousewheelOption::create_bool("tabpanel_x_invert", false)},
+   {MousewheelOptionID::kUITabInvertY, MousewheelOption::create_bool("tabpanel_y_invert", false)},
 
-   {MousewheelOptionID::kMapZoomMod,
-    MousewheelOption("zoom_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
+   {MousewheelOptionID::kMapZoomMod, MousewheelOption::create_mod("zoom_modifier", KMOD_NONE)},
    {MousewheelOptionID::kMapZoomX,  //
-    MousewheelOption("zoom_x", MousewheelOptionType::kBool, true)},
+    MousewheelOption::create_bool("zoom_x", true)},
    {MousewheelOptionID::kMapZoomY,  //
-    MousewheelOption("zoom_y", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kMapZoomInvertX,
-    MousewheelOption("zoom_x_invert", MousewheelOptionType::kBool, false)},
-   {MousewheelOptionID::kMapZoomInvertY,
-    MousewheelOption("zoom_y_invert", MousewheelOptionType::kBool, false)},
+    MousewheelOption::create_bool("zoom_y", true)},
+   {MousewheelOptionID::kMapZoomInvertX, MousewheelOption::create_bool("zoom_x_invert", false)},
+   {MousewheelOptionID::kMapZoomInvertY, MousewheelOption::create_bool("zoom_y_invert", false)},
 
    {MousewheelOptionID::kMapScrollMod,
-    MousewheelOption("move_map_modifier", MousewheelOptionType::kKeymod, KMOD_NONE)},
-   {MousewheelOptionID::kMapScroll,
-    MousewheelOption("move_map", MousewheelOptionType::kBool, false)},
+    MousewheelOption::create_mod("move_map_modifier", KMOD_NONE)},
+   {MousewheelOptionID::kMapScroll, MousewheelOption::create_bool("move_map", false)},
 
    {MousewheelOptionID::kGameSpeedMod,
-    MousewheelOption("gamespeed_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
-   {MousewheelOptionID::kGameSpeedX,
-    MousewheelOption("gamespeed_x", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kGameSpeedY,
-    MousewheelOption("gamespeed_y", MousewheelOptionType::kBool, true)},
+    MousewheelOption::create_mod("gamespeed_modifier", KMOD_ALT)},
+   {MousewheelOptionID::kGameSpeedX, MousewheelOption::create_bool("gamespeed_x", true)},
+   {MousewheelOptionID::kGameSpeedY, MousewheelOption::create_bool("gamespeed_y", true)},
 
    {MousewheelOptionID::kEditorToolsizeMod,
-    MousewheelOption("editor_toolsize_modifier", MousewheelOptionType::kKeymod, KMOD_ALT)},
-   {MousewheelOptionID::kEditorToolsizeX,
-    MousewheelOption("editor_toolsize_x", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kEditorToolsizeY,
-    MousewheelOption("editor_toolsize_y", MousewheelOptionType::kBool, true)},
+    MousewheelOption::create_mod("editor_toolsize_modifier", KMOD_ALT)},
+   {MousewheelOptionID::kEditorToolsizeX, MousewheelOption::create_bool("editor_toolsize_x", true)},
+   {MousewheelOptionID::kEditorToolsizeY, MousewheelOption::create_bool("editor_toolsize_y", true)},
 
-   {MousewheelOptionID::kAlwaysOn, MousewheelOption("", MousewheelOptionType::kBool, true)},
-   {MousewheelOptionID::kDisabled, MousewheelOption("", MousewheelOptionType::kBool, false)},
-   {MousewheelOptionID::kNoMod, MousewheelOption("", MousewheelOptionType::kKeymod, KMOD_NONE)},
+   {MousewheelOptionID::kAlwaysOn, MousewheelOption::create_bool("", true)},
+   {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
+   {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
 
 };
 

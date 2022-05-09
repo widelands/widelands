@@ -214,7 +214,8 @@ public:
 #endif
 
 	void postload() override;
-	void check_addons_desync_magic();
+	void postload_addons_before_loading();
+	void check_legacy_addons_desync_magic();
 
 	void think() override;
 
@@ -364,9 +365,9 @@ public:
 	void cancel_trade(int trade_id);
 
 private:
-	void sync_reset();
+	bool did_postload_addons_before_loading_;
 
-	bool did_check_addons_desync_magic_;
+	void sync_reset();
 
 	MD5Checksum<StreamWrite> synchash_;
 

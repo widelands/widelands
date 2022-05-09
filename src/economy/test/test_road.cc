@@ -27,7 +27,7 @@
 /* Helper classes */
 /******************/
 struct TestingFlag : public Widelands::Flag {
-	TestingFlag(Widelands::EditorGameBase&, const Widelands::Coords& c) {
+	TestingFlag(Widelands::EditorGameBase& /* egbase */, const Widelands::Coords& c) {
 		set_flag_position(c);
 	}
 };

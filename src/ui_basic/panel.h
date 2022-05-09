@@ -133,7 +133,7 @@ public:
 		return_code_ = static_cast<int>(code);
 	}
 
-	bool is_modal();
+	bool is_modal() const;
 
 	virtual void start();
 	virtual void end();
@@ -401,6 +401,13 @@ protected:
 		}
 	}
 
+	/*
+	 * Only call when you know what you are doing.
+	 * Usually, you can rely on our focus() mechanism to activate/deactivate text handling
+	 * but there might be corner cases where disabling text input specifically is needed.
+	 */
+	void disable_sdl_textinput();
+
 	// If this is set to 'true', this panel ad its children will never receive keypresses (do_key) or
 	// textinput (do_textinput).
 	void set_handle_keypresses(bool const on) {
@@ -425,7 +432,7 @@ protected:
 	static bool
 	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
-	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&) const;
 
 	// called after the template directory was changed
 	virtual void update_template() {
@@ -437,7 +444,7 @@ protected:
 
 	virtual std::vector<Recti> focus_overlay_rects();
 	// Convenience functions for overriding focus_overlay_rects()
-	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff);
+	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff) const;
 
 	// Wait until the current logic frame has ended
 	void wait_for_current_logic_frame();

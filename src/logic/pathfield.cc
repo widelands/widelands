@@ -42,7 +42,7 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 	for (std::shared_ptr<Pathfields>& pathfield : list_) {
 		if (pathfield.use_count() == 1) {
 			++pathfield->cycle;
-			if (!pathfield->cycle) {
+			if (pathfield->cycle == 0u) {
 				clear(pathfield);
 			}
 			return pathfield;
@@ -59,7 +59,7 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 	return pf;
 }
 
-void PathfieldManager::clear(const std::shared_ptr<Pathfields>& pf) {
+void PathfieldManager::clear(const std::shared_ptr<Pathfields>& pf) const {
 	for (uint32_t i = 0; i < nrfields_; ++i) {
 		pf->fields[i].cycle = 0;
 	}

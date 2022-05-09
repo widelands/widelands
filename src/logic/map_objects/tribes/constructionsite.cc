@@ -75,7 +75,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	push_animation(becomes, &animations, &total_frames);
 
 	uint32_t frame_index =
-	   totaltime.get() ?
+	   totaltime.get() != 0u ?
          std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
          0;
 	uint32_t animation_index = 0;
@@ -108,7 +108,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		// series
 		animation_id = animations[animation_index - 1].first;
 		time = Time(kFrameLength * (animations[animation_index - 1].second - 1));
-	} else if (was) {
+	} else if (was != nullptr) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
 		animation_id = was->get_unoccupied_animation();
@@ -122,7 +122,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime.get() * total_frames;
-	if (totaltime.get()) {
+	if (totaltime.get() != 0u) {
 		percent /= totaltime.get();
 	}
 	percent -= 100 * frame_index;
@@ -180,8 +180,9 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue&
-ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
+InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi,
+                                         WareWorker const type,
+                                         const Request* /* req */) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -232,7 +233,7 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 			}
 		}
 	}
-	if (!buildcost) {
+	if (buildcost == nullptr) {
 		buildcost = &building_->buildcost();
 	}
 	assert(buildcost);
@@ -380,7 +381,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		   },
 		   false);
 
-	} else if (was_immovable_ && work_completed_ <= 0) {
+	} else if ((was_immovable_ != nullptr) && work_completed_ <= 0) {
 		// Reinstate the former immovable
 		for (const auto& pair : old_buildings_) {
 			// 'false' means that this was built on top of an immovable
@@ -429,7 +430,7 @@ void ConstructionSite::enhance(const Game& game) {
 
 	size_t new_index = 0;
 	for (const auto& pair : buildcost) {
-		if (new_ware_types.count(pair.first)) {
+		if (new_ware_types.count(pair.first) != 0u) {
 			WaresQueue& wq = *(consume_wares_[old_size + new_index] =
 			                      new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
@@ -556,8 +557,8 @@ bool ConstructionSite::burn_on_destroy() {
 	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
 	}
-	return work_completed_ ||
-	       (!was_immovable_ && info_.intermediates.size() < old_buildings_.size());
+	return (work_completed_ != 0u) ||
+	       ((was_immovable_ == nullptr) && info_.intermediates.size() < old_buildings_.size());
 }
 
 void ConstructionSite::add_additional_ware(DescriptionIndex di) {
@@ -594,7 +595,7 @@ bool ConstructionSite::fetch_from_flag(Game& game) {
 Called by our builder to get instructions.
 ===============
 */
-bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
+bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -603,7 +604,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		return true;
 	}
 
-	if (!work_steps_) {         //  Happens for building without buildcost.
+	if (work_steps_ == 0u) {    //  Happens for building without buildcost.
 		schedule_destroy(game);  //  Complete the building immediately.
 	}
 
@@ -627,7 +628,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	}
 
 	// Fetch wares from flag
-	if (fetchfromflag_) {
+	if (fetchfromflag_ != 0) {
 		--fetchfromflag_;
 		builder_idle_ = false;
 		worker.start_task_fetchfromflag(game);
@@ -636,7 +637,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 	// Drop all the wares that are too much out to the flag.
 	for (WaresQueue* q : dropout_wares_) {
-		if (q->get_filled()) {
+		if (q->get_filled() != 0u) {
 			q->set_filled(q->get_filled() - 1);
 			q->set_max_size(q->get_max_size() - 1);
 			const WareDescr& wd = *owner().tribe().get_ware_descr(q->get_index());
@@ -660,7 +661,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 	// Check if we've got wares to consume
 	if (work_completed_ < work_steps_) {
 		for (WaresQueue* wq : consume_wares_) {
-			if (!wq->get_filled()) {
+			if (wq->get_filled() == 0u) {
 				continue;
 			}
 
@@ -693,8 +694,11 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 Called by InputQueue code when an ware has arrived
 ===============
 */
-void ConstructionSite::wares_queue_callback(
-   Game& game, InputQueue*, DescriptionIndex, Worker*, void* const data) {
+void ConstructionSite::wares_queue_callback(Game& game,
+                                            InputQueue* /* queue */,
+                                            DescriptionIndex /* index */,
+                                            Worker* /* worker */,
+                                            void* const data) {
 	ConstructionSite& cs = *static_cast<ConstructionSite*>(data);
 
 	if (!cs.working_) {
@@ -727,8 +731,8 @@ void ConstructionSite::draw(const Time& gametime,
                             RenderTarget* dst) {
 	Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	if (was_immovable_) {
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if (was_immovable_ != nullptr) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
@@ -737,7 +741,7 @@ void ConstructionSite::draw(const Time& gametime,
 		}
 	} else {
 		// Draw the construction site marker
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
@@ -757,8 +761,8 @@ void ConstructionSite::draw(const Time& gametime,
 		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
 	}
 
-	info_.draw(
-	   point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings), player_color, dst);
+	info_.draw(point_on_dst, coords, scale, (info_to_draw & InfoToDraw::kShowBuildings) != 0,
+	           player_color, dst);
 
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);

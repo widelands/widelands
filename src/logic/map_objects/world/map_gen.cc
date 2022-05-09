@@ -331,7 +331,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const Descriptions& descriptions) 
 		     land_resources->array_entries<std::unique_ptr<LuaTable>>()) {
 			entry->get_string(
 			   "name");  // name is only for debugging really. Touch it so LuaTable will not complain.
-			land_resources_.push_back(MapGenLandResource(*entry, *this));
+			land_resources_.emplace_back(*entry, *this);
 		}
 	}
 
