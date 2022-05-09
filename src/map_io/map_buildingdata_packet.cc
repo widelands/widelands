@@ -805,7 +805,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			}
 
 			// TODO(Nordfriese): Savegame compatibility
-			productionsite.infinite_production_ = packet_version >= 10 && fr.unsigned_8();
+			productionsite.infinite_production_ = packet_version >= 10 && fr.unsigned_8() > 0;
 
 			productionsite.actual_percent_ = fr.unsigned_32();
 			productionsite.statistics_string_on_changed_statistics_ = fr.c_string();

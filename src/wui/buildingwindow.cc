@@ -526,7 +526,7 @@ void BuildingWindow::act_produce_infinite() {
 	}
 
 	if (building->descr().type() >= Widelands::MapObjectType::PRODUCTIONSITE) {
-		if (game_) {
+		if (game_ != nullptr) {
 			game_->send_player_toggle_infinite_production(*building);
 		} else {
 			Widelands::ProductionSite& ps = dynamic_cast<Widelands::ProductionSite&>(*building);
