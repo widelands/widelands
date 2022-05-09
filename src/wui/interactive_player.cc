@@ -479,7 +479,7 @@ void InteractivePlayer::think() {
 
 	// Pop up diplomacy confirmation windows for new actions affecting us
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
-		if (pda.other == player_number() && !handled_diplomacy_actions_.count(&pda)) {
+		if (pda.other == player_number() && handled_diplomacy_actions_.count(&pda) == 0) {
 			handled_diplomacy_actions_.insert(&pda);
 			new DiplomacyConfirmWindow(*this, pda);
 		}

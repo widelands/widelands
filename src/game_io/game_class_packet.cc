@@ -68,10 +68,10 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 				game.check_legacy_addons_desync_magic();
 			}
 
-			game.diplomacy_allowed_ = (packet_version < 8 || fr.unsigned_8());
+			game.diplomacy_allowed_ = (packet_version < 8 || fr.unsigned_8() > 0);
 			game.pending_diplomacy_actions_.clear();
 			if (packet_version >= 8) {
-				for (size_t i = fr.unsigned_32(); i; --i) {
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
 					const PlayerNumber p1 = fr.unsigned_8();
 					const DiplomacyAction a = static_cast<DiplomacyAction>(fr.unsigned_8());
 					const PlayerNumber p2 = fr.unsigned_8();

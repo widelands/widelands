@@ -251,7 +251,7 @@ int LuaGame::get_scenario_difficulty(lua_State* L) {
       (RW) Whether players are allowed to change teams and resign.
 */
 int LuaGame::get_allow_diplomacy(lua_State* L) {
-	lua_pushboolean(L, get_game(L).diplomacy_allowed());
+	lua_pushboolean(L, static_cast<int>(get_game(L).diplomacy_allowed()));
 	return 1;
 }
 int LuaGame::set_allow_diplomacy(lua_State* L) {

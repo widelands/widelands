@@ -302,9 +302,9 @@ void GameObjectivesMenu::update_diplomacy_details() {
 	}
 
 	const unsigned own_team = iplayer_.egbase().player(iplayer_.player_number()).team_number();
-	const bool has_result = players_with_result.count(iplayer_.player_number());
+	const bool has_result = players_with_result.count(iplayer_.player_number()) > 0;
 	for (auto& pair : diplomacy_buttons_) {
-		if (has_result || players_with_result.count(pair.first)) {
+		if (has_result || players_with_result.count(pair.first) > 0) {
 			// Ignore players who are no longer playing
 			pair.second.first->set_enabled(false);
 			pair.second.second->set_enabled(false);

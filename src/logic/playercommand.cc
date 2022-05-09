@@ -2229,7 +2229,7 @@ void CmdDiplomacy::execute(Game& game) {
 							teams.insert(player->team_number());
 						}
 						for (TeamNumber t = 1;; ++t) {
-							if (teams.count(t)) {
+							if (teams.count(t) > 0) {
 								continue;
 							}
 							other->set_team_number(t);

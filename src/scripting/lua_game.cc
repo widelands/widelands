@@ -204,11 +204,11 @@ int LuaPlayer::get_defeated(lua_State* L) {
 int LuaPlayer::get_resigned(lua_State* L) {
 	for (const auto& s : get_egbase(L).player_manager()->get_players_end_status()) {
 		if (s.player == player_number() && s.result == Widelands::PlayerEndResult::kResigned) {
-			lua_pushboolean(L, true);
+			lua_pushboolean(L, 1);
 			return 1;
 		}
 	}
-	lua_pushboolean(L, false);
+	lua_pushboolean(L, 0);
 	return 1;
 }
 
