@@ -9,12 +9,10 @@ Standards-Version: 3.9.8
 Build-Depends: debhelper (>= 9),
   cmake,
   doxygen,
-#  This package isn't available in older Ubuntu releases.
-#  As long as we support 14.04, we build using the embedded one.
-#  libminizip-dev,
   libasio-dev,
   libglew-dev,
   libicu-dev,
+  libminizip-dev,
   libpng-dev,
   libsdl2-dev,
   libsdl2-image-dev,
