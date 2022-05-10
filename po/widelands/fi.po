@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-04 03:37+0000\n"
+"POT-Creation-Date: 2022-05-07 03:13+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -289,8 +289,8 @@ msgstr "Mar"
 msgid "Dec"
 msgstr "Jou"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -304,12 +304,12 @@ msgstr "Päävalikko"
 msgid "Tools"
 msgstr "Työkalut"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -499,10 +499,10 @@ msgstr "Tietoa"
 msgid "Click on a field to show information about it"
 msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -629,7 +629,7 @@ msgstr "Virhe tapahtui. Virheviesti on: \n\n%1$s\n\nOlisitko ystävällinen ja k
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
 msgid "Loading map “%s”…"
-msgstr "Lataan karttaa \"%s\"…"
+msgstr "Ladataan karttaa \"%s\"…"
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:1050
@@ -1015,9 +1015,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr "Lauttereitin enimmäispituus:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1826,7 +1826,7 @@ msgstr "Virhe kirjoitettaessa dataa tiedostoon ‘%s’!"
 
 #: ../../src/logic/generic_save_handler.cc:246
 msgid "Saved file may be corrupt!"
-msgstr "Tallennettu tiedosto saattaa olla korruptoitunut!"
+msgstr "Tallennustiedosto saattaa olla korruptoitunut!"
 
 #: ../../src/logic/generic_save_handler.cc:253
 #, c-format
@@ -1940,7 +1940,7 @@ msgstr "Hyökkäys!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:951
 msgid "You are under attack"
-msgstr "Olet hyökkäyksen alla"
+msgstr "Olet hyökkäyksen kohteena"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1956,7 +1956,7 @@ msgstr "talous tarvitsee tarviketta ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:468
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "talous ei kaipaa tarviketta '%s'"
+msgstr "tarvikkeelle '%s' ei ole kysyntää"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1971,7 +1971,7 @@ msgstr "talous tarvitsee työntekijää '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "talous ei tarvitse työtekijää '%s'"
+msgstr "talous ei tarvitse työntekijää '%s'"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2039,7 +2039,7 @@ msgstr "työntekijät eivät tarvitse kokemusta"
 #: ../../src/logic/map_objects/tribes/production_program.cc:1250
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr "Väliin jätetty %1$s, koska %2$s"
+msgstr " %1$s jätetty väliin, koska %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware '%s'"
 #: ../../src/logic/map_objects/tribes/production_program.cc:724
@@ -2073,7 +2073,7 @@ msgstr[1] "%s puuttuvat"
 msgid "Produced %s"
 msgid_plural "Produced %s"
 msgstr[0] "Tuotettu %s"
-msgstr[1] "Tuotettu %s"
+msgstr[1] "%s tuotettu"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2263,7 +2263,7 @@ msgstr "Tuotteet"
 #: ../../src/wui/productionsitewindow.cc:111
 #: ../../src/wui/warehousewindow.cc:268
 msgid "Workers"
-msgstr "Työläislista"
+msgstr "Työläiset"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
@@ -2532,7 +2532,7 @@ msgstr ""
 
 #: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
 msgid "Loading map…"
-msgstr "Lataan karttaa…"
+msgstr "Ladataan karttaa…"
 
 #: ../../src/map_io/s2map.cc:470
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2781,11 +2781,11 @@ msgstr "Sinut on kirjattu sisään nimellä '%s' sillä pyytämäsi nimi on jo k
 
 #: ../../src/network/internet_gaming.cc:445
 msgid "Our forums can be found at:"
-msgstr "Meidän keskustelupalstat:"
+msgstr "Keskustelupalstamme:"
 
 #: ../../src/network/internet_gaming.cc:447
 msgid "For reporting bugs, visit:"
-msgstr "Vikojen raporttointi:"
+msgstr "Vikailmoitukset:"
 
 #: ../../src/network/internet_gaming.cc:470
 msgid "Mixed up"
@@ -2941,7 +2941,7 @@ msgstr "Käyttämääsi protokollan versiota ei tueta!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid "You are already logged in!"
-msgstr "Olet jo kirjautuneena!"
+msgstr "Olet jo kirjautunut!"
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid ""
@@ -3214,7 +3214,7 @@ msgstr "Peli loppuu – odota..."
 
 #: ../../src/ui_basic/progresswindow.cc:75
 msgid "Loading…"
-msgstr "Lataa…"
+msgstr "Ladataan…"
 
 #: ../../src/ui_basic/spinbox.cc:133
 msgid "Decrease the value"
@@ -3493,11 +3493,11 @@ msgstr "Laajennusten hallinta"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:173
 msgid "Verified only"
-msgstr "Vain verifioidut"
+msgstr "Vain varmistetut"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:174
 msgid "Show only verified add-ons"
-msgstr "Näytä vain verifioidut laajennukset"
+msgstr "Näytä vain varmistetut laajennukset"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:182
 msgid "Sort by"
@@ -4858,7 +4858,7 @@ msgstr "Pelaa tämä kampanja"
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 msgid "Diff."
-msgstr "Taso."
+msgstr "Taso"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Tribe Name"
@@ -5847,7 +5847,7 @@ msgstr "Ikkunan Koko"
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab Input"
-msgstr "Kaappaa Syöte"
+msgstr "Kaappaa syöte"
 
 #: ../../src/ui_fsmenu/options.cc:135
 msgid "Use system mouse cursor"
@@ -5941,7 +5941,7 @@ msgstr "Käytä läpinäkyvää taustaa pelin chat-keskusteluissa"
 #. * TRANSLATORS: and it also lets you jump to it on the map.
 #: ../../src/ui_fsmenu/options.cc:270
 msgid "Use single watchwindow mode"
-msgstr "Käytä yhtä katso-ikkuna muotoa"
+msgstr "Käytä yhden tarkkailunäkymäikkunan tilaa"
 
 #: ../../src/ui_fsmenu/options.cc:274
 msgid "Display system time in the info panel"
@@ -5979,7 +5979,7 @@ msgstr "Ääni"
 
 #: ../../src/ui_fsmenu/options.cc:320
 msgid "Saving"
-msgstr "Tallentaa"
+msgstr "Tallennus"
 
 #: ../../src/ui_fsmenu/options.cc:321
 msgid "New Games"
@@ -7163,7 +7163,7 @@ msgstr "Isot rakennukset"
 
 #: ../../src/wui/building_statistics_menu.cc:342
 msgid "Mines"
-msgstr "Kaivoksia"
+msgstr "Kaivokset"
 
 #: ../../src/wui/building_statistics_menu.cc:344
 msgid "Ports"
@@ -7282,7 +7282,7 @@ msgstr "Suosi alokkaita"
 #: ../../src/wui/constructionsitewindow.cc:295
 #: ../../src/wui/warehousewindow.cc:149
 msgid "Normal policy"
-msgstr "Tavallinen politiikka"
+msgstr "Tavallinen varastointikäytäntö"
 
 #: ../../src/wui/constructionsitewindow.cc:299
 #: ../../src/wui/warehousewindow.cc:150
@@ -7563,8 +7563,8 @@ msgstr "Korvaa poistunut pelaaja tekoälyllä ja jatka pelaamista"
 msgid "AI for the disconnected player"
 msgstr "Poistuneen pelaajan korvaava tekoäly"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7586,7 +7586,7 @@ msgstr "Debug-kenttä"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
 msgid "Exit Game Confirmation"
-msgstr "Varmasti pois pelistä"
+msgstr "Vahvista poistuminen"
 
 #: ../../src/wui/game_exit_confirm_box.cc:28
 msgid "Are you sure you wish to exit this game?"
@@ -7604,7 +7604,7 @@ msgstr "Saapuneet viestit"
 
 #: ../../src/wui/game_message_menu.cc:68
 msgid "Title"
-msgstr "Titteli"
+msgstr "Otsikko"
 
 #: ../../src/wui/game_message_menu.cc:69
 msgctxt "message"
@@ -8161,7 +8161,7 @@ msgstr "Näytä/piilota työalue kartalla"
 msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u uusi viesti"
-msgstr[1] "%u uusia viestejä"
+msgstr[1] "%u uutta viestiä"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:153
@@ -8188,7 +8188,7 @@ msgstr "Poista nämä pelit"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:29
 msgid "Official"
-msgstr "Virallinen"
+msgstr "Viralliset"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:31
@@ -8228,7 +8228,7 @@ msgstr "1v1"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:49
 msgid "Teams of 2"
-msgstr "Kanden pelaajan joukkueet"
+msgstr "Kahden pelaajan joukkueet"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:51
@@ -8887,7 +8887,7 @@ msgstr "Äänet poistettu käytöstä joko ääniajurin ongelman vuoksi tai kosk
 #. lower than the economy target setting. Very little space is available.
 #: ../../src/wui/stock_menu.cc:52
 msgid "Evaluate"
-msgstr ""
+msgstr "Vertaile"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Compare stocked amounts to economy target quantities"
@@ -8952,7 +8952,7 @@ msgstr "Ehdotetut Joukkueet"
 
 #: ../../src/wui/trainingsitewindow.cc:45
 msgid "Soldiers in training"
-msgstr "Harjoituksessa olevat sotilaat"
+msgstr "Harjoittelemassa olevat sotilaat"
 
 #: ../../src/wui/ware_statistics_menu.cc:135
 msgid "Production"
