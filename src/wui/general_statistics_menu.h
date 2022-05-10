@@ -38,7 +38,7 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 		Registry()
 		   : UI::UniqueWindow::Registry(),
 		     selected_information(0),
-		     selected_players(true, kMaxPlayers),
+		     selected_players(kMaxPlayers, true),
 		     time(WuiPlotArea::TIME_GAME) {
 		}
 
