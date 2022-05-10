@@ -9,9 +9,9 @@ wl.Descriptions():new_militarysite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
          frames = 1,
          columns = 1,
          rows = 1,

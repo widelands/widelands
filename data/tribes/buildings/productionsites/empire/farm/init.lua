@@ -22,9 +22,9 @@ wl.Descriptions():new_productionsite_type {
       marble_column = 1
    },
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
          frames = 1,
          columns = 1,
          rows = 1,

@@ -34,9 +34,9 @@ wl.Descriptions():new_militarysite_type {
       marble = 1
    },
 
+   animation_directory = dirname,
    spritesheets = {
       idle = {
-         directory = dirname,
          frames = 1,
          columns = 1,
          rows = 1,
