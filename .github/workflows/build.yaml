@@ -191,7 +191,7 @@ jobs:
       run: |
         cd build
         TEST_INSTALL_DIR="${PWD}/test_install"
-        make DESTDIR=${TEST_INSTALL_DIR} install
+        make -j$(nproc) DESTDIR=${TEST_INSTALL_DIR} install
         make DESTDIR=${TEST_INSTALL_DIR} uninstall
         test ! -d ${TEST_INSTALL_DIR}
     - name: Website Binaries
