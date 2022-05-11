@@ -21,7 +21,7 @@ wl.Descriptions():new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 53, 60 },
+         hotspot = { 60, 68 },
       },
    },
 
@@ -29,9 +29,9 @@ wl.Descriptions():new_productionsite_type {
       working = {
          fps = 25,
          frames = 19,
-         rows = 5,
-         columns = 4,
-         hotspot = { 53, 60 }
+         columns = 10,
+         rows = 2,
+         hotspot = { 60, 68 },
       },
    },
 
