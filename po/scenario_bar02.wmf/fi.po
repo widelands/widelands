@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# Atte Timonen, 2022
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2019
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:36+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -218,7 +219,7 @@ msgstr "Rakenna asetuotantoketju"
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 msgid "Build a helm smithy"
-msgstr "Rakenna haarniskapaja"
+msgstr "Rakenna kypäräpaja"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:135
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
@@ -287,7 +288,7 @@ msgid ""
 " is the first war leader to leave Al’thunran, thus leaving his side weak and"
 " vulnerable. As my scouts report, he has set foot on the lower grounds "
 "around the capital, securing the outer fortification rings."
-msgstr "Partion tuomat uutiset eivät ole hyviä. Vakoojamme kertovat, että sotaheimot käyvät vieläkin taisteluja, mutta jotkut vanhimmat sotilaat ja heimopäälliköt ovat jo väsyneet järjettömään sotaan. Kalitath Kun:n poika on ensimmäinen sotapäällikkö joka lähti Al’thunran:sta jolloin hänen asemansa jäi haavoittuvaksi. Tiedustelijani kertovat että hän on asettunut alaville maille pääkaupungin ympärille varmistaen uloimmmat linnoitusrenkaat."
+msgstr "Partiomme tuomat uutiset eivät ole hyviä. Vakoojamme kertovat, että sotaheimot käyvät vieläkin taisteluja, mutta osa vanhimmista sotilaista ja heimopäälliköistä ovat jo väsyneet järjettömään sotaan. Kalitath, Kunin poika on ensimmäinen sotapäällikkö joka lähti Al’thunran:sta jolloin hänen asemansa jäi haavoittuvaksi. Tiedustelijani kertovat että hän on asettunut alaville maille pääkaupungin ympärille varmistaen uloimmmat linnoitusrenkaat."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:175
 msgid "Doubts"
@@ -306,7 +307,7 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr "Thron haluaa uskoa että Kalitath on väsynyt sotimiseen ja voisi liittyä meihin kun marssimme palauttamaan lain ja järjestyksen Al’thunran:iin. En kuitenkaan usko tätä. Kalitath on yhden armeijamme mahtavimman kenraalin poika ja hänen perheensä ei koskaan pitänyt ajatuksesta alistua Chat’Karuthin lipun alle. Miksi hänen tulisi marssia poikansa kanssa saadakseen takaisin perintönsä ja valtaistuimen?"
+msgstr "Thron haluaa uskoa että Kalitath on väsynyt sotimiseen ja voisi liittyä meihin kun marssimme palauttamaan lain ja järjestyksen Al’thunraniin. En kuitenkaan usko tätä. Kalitath on yhden armeijamme mahtavimman kenraalin poika ja hänen perheensä ei koskaan pitänyt ajatuksesta alistua Chat’Karuthin lipun alle. Miksi hänen tulisi marssia poikansa kanssa saadakseen takaisin perintönsä ja valtaistuimen?"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:183
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:199
@@ -342,7 +343,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr "Sotajoukkojeni rajalinja on levittäytynyt metsien laitamille. Meillä on takanamme pitkä ja kylmä talvi puhumattakaan lukemattomista kilometreistä. Rakentamamme linnoitus Ondunin ympärille varmistaa meille nopean sotilaiden ja tarvikkeiden saatavuuden. Kunhan Al’thunran on hallussani, nämä kaksi kaupunkia tullaan yhdistämään toisiinsa hyvällä ja puolustuskykyisellä infrastruktuurilla. Silti toivon etten tulisi kulkemaan tämän tehtävän aikana yksin, toivon Kalitathin, Kunin pojan seuraavan kutsuani."
+msgstr "Sotajoukkojeni rajalinja on levittäytynyt metsien laitamille. Meillä on takanamme pitkä ja kylmä talvi puhumattakaan lukemattomista kilometreistä. Rakentamamme linnoitus Ondunin ympärille varmistaa meille nopean sotilaiden ja tarvikkeiden saatavuuden. Kunhan Al’thunran on hallussani, nämä kaksi kaupunkia yhdistetään toisiinsa hyvällä ja puolustuskykyisellä infrastruktuurilla. Silti toivon etten kulkisi tämän tehtävän aikana yksin, toivon Kalitathin, Kunin pojan seuraavan kutsuani."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:218
@@ -508,7 +509,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr "Olen juuri puhunut meidän partiomme johtajan kanssa. Hän kertoi minulle, että he löysivät vuoristoa alueemme koillis- ja itäpuolelta. Pienellä onnella tämä voisi avata uuden mahdollisuuden miehiemm uudelle aseistamiseksi, koska niin kauan kuin muistan, useimmat vuoret Al’thunranista länteen sisältävät hiiltä ja jonkin verran metallimalmeja."
+msgstr "Puhuin juuri partiomme johtajan kanssa. Hän kertoi minulle, että he löysivät vuoristoa alueemme koillis- ja itäpuolelta. Pienellä onnella tämä voisi mahdollistaa miehiemme uudelleen aseistamisen, koska niin kauan kuin muistan useimmat vuoret Al’thunranista länteen sisältävät hiiltä ja jonkin verran metallimalmeja."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid "Mining Economy Completed"
@@ -535,7 +536,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr "Boldreth ja minä tutkimme juuri aluettamme kolmoisvuorten ympäriltä. Yksi suuri strateginen ongelma tuolla alueella näyttäisi olevan, että siellä on kaksi suurempaa taivalta – keskimmäisen vuoren pohjoinen ja eteläinen reitti. Niitä taipaleita on melko hankala hallita ja siksi näyttää siltä, että meillä on vain yksi tapa turvata vuoret vihollisilta: meidän täytyy rakentaa linnoitus vuorien itäpuolelle."
+msgstr "Boldreth ja minä tutkimme juuri aluettamme kolmoisvuorten ympäriltä. Yksi suuri strateginen ongelma alueella näyttäisi olevan siellä olevat kaksi suurempaa taivalta – keskimmäisen vuoren pohjoinen ja eteläinen reitti. Niitä taipaleita on melko hankala hallita ja siksi näyttäisi että voimme turvata vuoret vihollisilta vain yhdellä tavalla: meidän on rakennettava linnoitus vuorten itäpuolelle."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid "Fortress Completed"
@@ -548,7 +549,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr "Vihdoinkin! Linnoitus on juuri valmistunut, joten siirtokuntamme sisääntulo pitäisi olla nyt turvattu. Tulevaisuutta ajatellen meidän kannattaisi harkita joidenkin lisälinnoituksien rakentamista taipaleille, kuten rajalinnoituksien ja tornien rakentamista, mutta toistaiseksi voimme hiukan hengästää."
+msgstr "Vihdoinkin! Linnoitus on juuri valmistunut, joten siirtokuntamme sisäänkäynnin pitäisi olla nyt turvattu. Tulevaisuutta ajatellen meidän kannattaisi harkita lisälinnoitusten rakentamista taipaleille, kuten rajalinnoitusten ja tornien rakentamista, mutta toistaiseksi voimme hiukan hengähtää."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
 msgid "Enhanced Economy and Training"
@@ -560,7 +561,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr "Kaivostaloutemme näyttää toimivan hyvin, mikä on hyvä uutinen! Siitä huolimatta on paljon miehiä ja naisia, jotka odottavat hallillamme saadakseen jotain tekemistä, joten he voivat auttaa sotilaitamme valmistautumaan sodan tuloon."
+msgstr "Kaivostaloutemme näyttää toimivan hyvin, mikä on hyvä uutinen! Kuitenkin monet miehistämme ja naisistamme ovat päämajassamme toimettomina vailla tekemistä, joten he saavat luvan auttaa sotilaitamme valmistautumaan sodan tuloon."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
@@ -572,7 +573,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr "Geologimme löysi reilusti lisää rautamalmiesiintymiä, hiiltä ja jopa kultaa. Meidän pitäisi laajentaa meidän nykyisiä kaivoksia heti kun kaivostyöntekijämme ovat kokeneempia. Meidän pitäisi rakentaa lisää kaivoksia, isompi ruokainfrastuktuuri toimittaimaan miehillemme aina sopivaa ruokaa ja myöhemmin prosessointitalous. Mitta se ei ole vielä kaikki mitä tarvitsemme – useimmat sotilaistamme ovat melko nuoria eikä heillä ole hyviä aseita tai ole hyvin koulutettuja. Meidän pitäisi rakentaa koulutuspaikkoja valmistellaksemme heidät tuleviin tehtäviin."
+msgstr "Geologimme löysivät reilusti lisää rautamalmiesiintymiä, hiiltä ja jopa kultaa. Meidän pitäisi laajentaa nykyisiä kaivoksiamme kunhan kaivostyöntekijämme ovat kokeneempia. Meidän pitäisi rakentaa lisää kaivoksia, suurempi ruokainfrastuktuuri toimittamaan miehillemme aina sopivaa ruokaa ja myöhemmin prosessointitalous. Mutta ei siinä vielä kaikki – useimmat sotilaistamme ovat melko nuoria eikä heillä ole hyviä aseita tai hyvää koulutusta. Meidän pitäisi rakentaa koulutuskeskuksia valmistaaksemme heitä tuleviin tehtäviin."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:328
@@ -581,7 +582,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr "Veljeni ja heidän sotilaat kuolivat ja jättivät tulipaloja ja tuhoa vain jälkeensä. Kaiken sen tuhon seasta en kyennyt löytämään yhtään tavallista kansanmiestä tai -naista ja siksi toivonkin, että he ovat paenneet tältä julmalta taistelukentältä ja aloittaneet paremman elämän jossakin muualla."
+msgstr "Veljeni ja heidän sotilaansa ovat kuolleet ja he jättivät vain tulipaloja ja tuhoa jälkeensä. Kaiken sen tuhon seasta en löytänyt yhtäkään tavallista kansanmiestä tai -naista, voin vain toivoa että he pakenivat tältä julmalta taistelukentältä ja aloittivat paremman elämän jossakin muualla."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
@@ -592,7 +593,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr "Mitään ei ole jäljellä tuosta muistamastani vanhasta kauneudesta, vain vanhan pääkaupungin tuhot.  En olettanut enää näkeväni Al’thunranin vanhaa kauneutta – se oli vain muutama kuukausi sitten, jolloin ihmettelin tulisinko koskaan edes astumaan jalalloillani sinne uudestaan. Nyt vanha kaupunki on taas käsissäni enkä tule arkailemaan sen uudelleen rakentamista niillä taidoilla, joita kansalaisillamme on. En malta odottaa, että näkisin sen uudelleen, sen vanhassa kauneudessaan."
+msgstr "Mitään ei ole jäljellä muistamastani vanhasta kauneudesta, vanha pääkaupunki on raunioina. Olen surullinen mutta myös helpottunut. En olettanut enää näkeväni Al’thunranin vanhaa kauneutta – vain muutama kuukausi sitten mietin tulisinko koskaan edes astumaan jalallani sinne uudestaan. Nyt kaupunki on taas käsissäni enkä epäröi rakentaa sitä uudelleen kansalaistemme mahdilla. Tuskin maltan odottaa, että pääsen näkemään sen uudelleen vanhassa kauneudessaan."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
 msgid "Victory"
