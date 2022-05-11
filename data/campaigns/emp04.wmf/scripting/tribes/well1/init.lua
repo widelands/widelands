@@ -21,11 +21,11 @@ wl.Descriptions():new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 43, 43 },
+         hotspot = { 39, 57 },
       },
       working = {
          basename = "idle", -- TODO(hessenfarmer): No animation yet.
-         hotspot = { 43, 43 },
+         hotspot = { 39, 57 },
       },
    },
 
