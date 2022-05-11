@@ -19,10 +19,10 @@ wl.Descriptions():new_immovable_type {
    spritesheets = {
       idle = {
          fps = 10,
-         frames = 5,
-         rows = 3,
-         columns = 2,
-         hotspot = { 40, 57 }
+         frames = 10,
+         columns = 10,
+         rows = 1,
+         hotspot = { 43, 60 }
       },
    }
 }

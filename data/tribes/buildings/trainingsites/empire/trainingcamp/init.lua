@@ -27,9 +27,12 @@ wl.Descriptions():new_trainingsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 82, 105 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 87, 113 }
       }
    },
 
