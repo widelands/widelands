@@ -88,7 +88,7 @@ FieldData::FieldData(const Field& field)
 	} else {
 		immovable = "";
 	}
-	for (Bob* bob = field.get_first_bob(); bob; bob = bob->get_next_bob()) {
+	for (Bob* bob = field.get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
 		bobs.push_back(bob->descr().name());
 	}
 }
@@ -112,7 +112,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return b && b->descr().type() == MapObjectType::CRITTER;
+	return (b != nullptr) && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -147,7 +147,7 @@ Map::~Map() {
 	cleanup();
 }
 
-void Map::recalc_border(const FCoords& fc) {
+void Map::recalc_border(const FCoords& fc) const {
 	if (const PlayerNumber owner = fc.field->get_owned_by()) {
 		//  A node that is owned by a player and has a neighbour that is not owned
 		//  by that player is a border node.
@@ -235,11 +235,12 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 void Map::recalc_default_resources(const Descriptions& descriptions) {
 	for (int16_t y = 0; y < height_; ++y) {
 		for (int16_t x = 0; x < width_; ++x) {
-			FCoords f, f1;
+			FCoords f;
+			FCoords f1;
 			f = get_fcoords(Coords(x, y));
 			//  only on unset nodes
 			if (f.field->get_resources() != Widelands::kNoResource ||
-			    f.field->get_resources_amount()) {
+			    (f.field->get_resources_amount() != 0u)) {
 				continue;
 			}
 			std::map<int32_t, int32_t> m;
@@ -265,7 +266,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
 				const DescriptionIndex resr = terr->get_default_resource();
 				const ResourceAmount default_amount = terr->get_default_resource_amount();
-				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -276,7 +278,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
 				const DescriptionIndex resd = terd->get_default_resource();
 				const ResourceAmount default_amount = terd->get_default_resource_amount();
-				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -290,7 +293,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
 				const DescriptionIndex resd = terd->get_default_resource();
 				const ResourceAmount default_amount = terd->get_default_resource_amount();
-				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				if (((terd->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -304,7 +308,8 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
 				const DescriptionIndex resr = terr->get_default_resource();
 				const ResourceAmount default_amount = terr->get_default_resource_amount();
-				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				if (((terr->get_is() & TerrainDescription::Is::kUnwalkable) != 0) &&
+				    default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -324,7 +329,7 @@ void Map::recalc_default_resources(const Descriptions& descriptions) {
 			}
 			amount /= 6;
 
-			if (res == -1 || res == INVALID_INDEX || res == Widelands::kNoResource || !amount) {
+			if (res == -1 || res == INVALID_INDEX || res == Widelands::kNoResource || (amount == 0u)) {
 				clear_resources(f);
 			} else {
 				initialize_resources(f, res, amount);
@@ -378,10 +383,10 @@ size_t Map::count_all_conquerable_fields() {
 			if ((fcoords.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
 				radius = 9;
 				inner_radius = 7;
-			} else if (fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) {
+			} else if ((fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) != 0) {
 				radius = 7;
 				inner_radius = 5;
-			} else if (fcoords.field->maxcaps() & BUILDCAPS_SMALL) {
+			} else if ((fcoords.field->maxcaps() & BUILDCAPS_SMALL) != 0) {
 				radius = 5;
 			}
 
@@ -395,7 +400,7 @@ size_t Map::count_all_conquerable_fields() {
 
 					// We do the caps check first, because the comparison is faster than the container
 					// check
-					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
+					if (((fcoords.field->maxcaps() & MOVECAPS_WALK) != 0) &&
 					    (valuable_fields_.count(fcoords) == 0)) {
 						valuable_fields_.insert(fcoords);
 						coords_to_check.insert(fcoords);
@@ -436,7 +441,7 @@ size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
 
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
-		if (!(field.nodecaps() & caps)) {
+		if ((field.nodecaps() & caps) == 0) {
 			valuable_fields_.insert(get_fcoords(field));
 		}
 	}
@@ -542,7 +547,7 @@ void Map::set_origin(const Coords& new_origin) {
 
 	const size_t field_size = width_ * height_;
 
-	for (uint8_t i = get_nrplayers(); i;) {
+	for (uint8_t i = get_nrplayers(); i != 0u;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
@@ -576,7 +581,7 @@ void Map::set_origin(const Coords& new_origin) {
 				immovable->position_ = c;
 			}
 			bool is_first_bob = true;
-			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+			for (Bob* bob = c.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
@@ -667,7 +672,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	Field::Terrains default_terrains;
 	default_terrains.r = 0;
 	default_terrains.d = 0;
-	for (MapIndex index = w * h; index; --index) {
+	for (MapIndex index = w * h; index != 0u; --index) {
 		if (!was_created[index - 1]) {
 			Field& field = new_fields[index - 1];
 			field.set_height(10);
@@ -741,7 +746,7 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 			if (Bob* b = f.get_first_bob()) {
 				b->linkpprev_ = &f.bobs;
 			}
-			for (Bob* b = f.get_first_bob(); b; b = b->get_next_bob()) {
+			for (Bob* b = f.get_first_bob(); b != nullptr; b = b->get_next_bob()) {
 				b->position_ = fc;
 			}
 		}
@@ -750,14 +755,14 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 	verb_log_info("Map was resized to %d×%d\n", width_, height_);
 }
 
-ResizeHistory Map::dump_state(const EditorGameBase&) const {
+ResizeHistory Map::dump_state(const EditorGameBase& /* egbase */) const {
 	ResizeHistory rh;
 	rh.size.w = width_;
 	rh.size.h = height_;
 	rh.port_spaces = port_spaces_;
 	rh.starting_positions = starting_pos_;
-	for (MapIndex i = max_index(); i; --i) {
-		rh.fields.push_back(FieldData(operator[](i - 1)));
+	for (MapIndex i = max_index(); i != 0u; --i) {
+		rh.fields.emplace_back(operator[](i - 1));
 	}
 	return rh;
 }
@@ -789,7 +794,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	starting_pos_ = rh.starting_positions;
 
 	// First pass: Initialize all fields with the saved basic data
-	for (MapIndex i = max_index(); i; --i) {
+	for (MapIndex i = max_index(); i != 0u; --i) {
 		const FieldData& fd = rh.fields.front();
 		Field& f = fields_[i - 1];
 		f.set_terrains(fd.terrains);
@@ -803,7 +808,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 	recalc_whole_map(egbase);
 
 	// Second pass: Re-create desired map objects
-	for (MapIndex i = max_index(); i; --i) {
+	for (MapIndex i = max_index(); i != 0u; --i) {
 		const FieldData& fd = backup.front();
 		FCoords fc = get_fcoords(operator[](i - 1));
 		if (!fd.immovable.empty()) {
@@ -940,7 +945,7 @@ Could happen multiple times in the map editor.
 ===============
 */
 void Map::set_nrplayers(PlayerNumber const nrplayers) {
-	if (!nrplayers) {
+	if (nrplayers == 0u) {
 		nrplayers_ = 0;
 		return;
 	}
@@ -1096,14 +1101,14 @@ struct FindBobsCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase&, const FCoords& cur) {
-		for (Bob* bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-			if (list_ && std::find(list_->begin(), list_->end(), bob) != list_->end()) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
+		for (Bob* bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
+			if ((list_ != nullptr) && std::find(list_->begin(), list_->end(), bob) != list_->end()) {
 				continue;
 			}
 
 			if (functor_.accept(bob)) {
-				if (list_) {
+				if (list_ != nullptr) {
 					list_->push_back(bob);
 				}
 				++found_;
@@ -1173,15 +1178,15 @@ struct FindImmovablesCallback {
 	   : list_(list), functor_(functor), found_(0) {
 	}
 
-	void operator()(const EditorGameBase&, const FCoords& cur) {
+	void operator()(const EditorGameBase& /* egbase */, const FCoords& cur) {
 		BaseImmovable* const imm = cur.field->get_immovable();
 
-		if (!imm) {
+		if (imm == nullptr) {
 			return;
 		}
 
 		if (functor_.accept(*imm)) {
-			if (list_) {
+			if (list_ != nullptr) {
 				ImmovableFound imf;
 				imf.object = imm;
 				imf.coords = cur;
@@ -1281,7 +1286,7 @@ struct FindNodesCallback {
 
 	void operator()(const EditorGameBase& egbase, const FCoords& cur) {
 		if (functor_.accept(egbase, cur)) {
-			if (list_) {
+			if (list_ != nullptr) {
 				list_->push_back(cur);
 			}
 			++found_;
@@ -1367,8 +1372,13 @@ dependencies.
 Fetch the slopes to neighbours and call the actual logic in Field
 ===============
 */
-void Map::recalc_brightness(const FCoords& f) {
-	int32_t left, right, top_left, top_right, bottom_left, bottom_right;
+void Map::recalc_brightness(const FCoords& f) const {
+	int32_t left;
+	int32_t right;
+	int32_t top_left;
+	int32_t top_right;
+	int32_t bottom_left;
+	int32_t bottom_right;
 	Field::Height const height = f.field->get_height();
 
 	{
@@ -1443,60 +1453,60 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	uint8_t cnt_water = 0;
 	uint8_t cnt_unreachable = 0;
 
-	if (tr_d_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((tr_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
-	if (tl_r_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((tl_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
-	if (tl_d_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((tl_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
-	if (l_r_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((l_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
-	if (f_d_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((f_d_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
-	if (f_r_terrain_is & TerrainDescription::Is::kUnwalkable) {
+	if ((f_r_terrain_is & TerrainDescription::Is::kUnwalkable) != 0) {
 		++cnt_unwalkable;
 	}
 
-	if (tr_d_terrain_is & TerrainDescription::Is::kWater) {
+	if ((tr_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
-	if (tl_r_terrain_is & TerrainDescription::Is::kWater) {
+	if ((tl_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
-	if (tl_d_terrain_is & TerrainDescription::Is::kWater) {
+	if ((tl_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
-	if (l_r_terrain_is & TerrainDescription::Is::kWater) {
+	if ((l_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
-	if (f_d_terrain_is & TerrainDescription::Is::kWater) {
+	if ((f_d_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
-	if (f_r_terrain_is & TerrainDescription::Is::kWater) {
+	if ((f_r_terrain_is & TerrainDescription::Is::kWater) != 0) {
 		++cnt_water;
 	}
 
-	if (tr_d_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((tr_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
-	if (tl_r_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((tl_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
-	if (tl_d_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((tl_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
-	if (l_r_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((l_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
-	if (f_d_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((f_d_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
-	if (f_r_terrain_is & TerrainDescription::Is::kUnreachable) {
+	if ((f_r_terrain_is & TerrainDescription::Is::kUnreachable) != 0) {
 		++cnt_unreachable;
 	}
 
@@ -1515,7 +1525,7 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 
 	// 2c) [OVERRIDE] If any of the neighbouring triangles is really "bad" (such
 	// as lava), we can neither walk nor swim to this node.
-	if (cnt_unreachable) {
+	if (cnt_unreachable != 0u) {
 		caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
 	}
 
@@ -1526,7 +1536,8 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 		//  3) General buildability check: if a "robust" MapObject is on this node
 		//  we cannot build anything on it. Exception: we can build flags on roads and waterways.
 		if (BaseImmovable* const imm = get_immovable(f)) {
-			if (!dynamic_cast<RoadBase const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
+			if ((dynamic_cast<RoadBase const*>(imm) == nullptr) &&
+			    imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable()) {
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
@@ -1539,10 +1550,10 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	//  4) Flags
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
-	if (caps & MOVECAPS_WALK) {
+	if ((caps & MOVECAPS_WALK) != 0) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
-		                                     FindImmovableType(MapObjectType::FLAG))) {
+		if (consider_mobs && (find_immovables(egbase, Area<FCoords>(f, 1), nullptr,
+		                                      FindImmovableType(MapObjectType::FLAG)) != 0u)) {
 			return static_cast<NodeCaps>(caps);
 		}
 		caps |= BUILDCAPS_FLAG;
@@ -1576,13 +1587,13 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 	// NOTE  maximum possible NodeCaps for this FCoord
 	const FCoords br = br_n(f);
 	if (consider_mobs) {
-		if (!(br.field->caps & BUILDCAPS_FLAG) &&
-		    (!br.field->get_immovable() ||
+		if (((br.field->caps & BUILDCAPS_FLAG) == 0) &&
+		    ((br.field->get_immovable() == nullptr) ||
 		     br.field->get_immovable()->descr().type() != MapObjectType::FLAG)) {
 			return static_cast<NodeCaps>(caps);
 		}
 	} else {
-		if (!(calc_nodecaps_pass1(egbase, br, false) & BUILDCAPS_FLAG)) {
+		if ((calc_nodecaps_pass1(egbase, br, false) & BUILDCAPS_FLAG) == 0) {
 			return static_cast<NodeCaps>(caps);
 		}
 	}
@@ -1661,7 +1672,7 @@ NodeCaps Map::calc_nodecaps_pass2(const EditorGameBase& egbase,
 		}
 
 		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) &&
-		    !find_portdock(f, false).empty()) {
+		    !find_portdock(f, !consider_mobs).empty()) {
 			caps |= BUILDCAPS_PORT;
 		}
 
@@ -1687,7 +1698,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
                         bool consider_mobs,
                         NodeCaps initcaps) const {
 	if (consider_mobs) {
-		if (!(f.field->get_caps() & MOVECAPS_WALK)) {
+		if ((f.field->get_caps() & MOVECAPS_WALK) == 0) {
 			return BaseImmovable::NONE;
 		}
 		if (BaseImmovable const* const immovable = get_immovable(f)) {
@@ -1695,7 +1706,7 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 				return BaseImmovable::NONE;
 			}
 		}
-	} else if (!(initcaps & MOVECAPS_WALK)) {
+	} else if ((initcaps & MOVECAPS_WALK) == 0) {
 		return BaseImmovable::NONE;
 	}
 
@@ -1716,21 +1727,22 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
 	for (const TerrainDescription::Is& is : terrains) {
-		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
+		if (((is & TerrainDescription::Is::kWater) != 0) ||
+		    ((is & TerrainDescription::Is::kUnwalkable) != 0)) {
 			return BaseImmovable::NONE;
 		}
-		if (is & TerrainDescription::Is::kMineable) {
+		if ((is & TerrainDescription::Is::kMineable) != 0) {
 			++cnt_mineable;
 		}
-		if (is & TerrainDescription::Is::kWalkable) {
+		if ((is & TerrainDescription::Is::kWalkable) != 0) {
 			++cnt_walkable;
 		}
 	}
 
-	if (ismine) {
+	if (ismine != nullptr) {
 		*ismine = (cnt_mineable == 6);
 	}
-	if ((cnt_mineable && cnt_mineable < 6) || cnt_walkable) {
+	if (((cnt_mineable != 0u) && cnt_mineable < 6) || (cnt_walkable != 0u)) {
 		return BaseImmovable::NONE;
 	}
 
@@ -1765,13 +1777,13 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
  * a description of the directions in which to walk from the starting point.
  */
 bool Map::is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>& dirs) const {
-	if (!(start.field->maxcaps() & MOVECAPS_WALK)) {
+	if ((start.field->maxcaps() & MOVECAPS_WALK) == 0) {
 		return false;
 	}
 	FCoords f = start;
 	for (const WalkingDir& dir : dirs) {
 		f = get_neighbour(f, dir);
-		if (!(f.field->maxcaps() & MOVECAPS_WALK)) {
+		if ((f.field->maxcaps() & MOVECAPS_WALK) == 0) {
 			return false;
 		}
 	}
@@ -1792,7 +1804,7 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 	std::vector<Coords> portdock;
 	for (uint32_t i = 0; i < 16; ++i) {
 		if (force) {
-			if (f.field->maxcaps() & MOVECAPS_SWIM) {
+			if ((f.field->maxcaps() & MOVECAPS_SWIM) != 0) {
 				return {f};
 			}
 		} else {
@@ -1800,7 +1812,7 @@ std::vector<Coords> Map::find_portdock(const Coords& c, bool force) const {
 			   (f.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM;
 
 			// Any immovable here? (especially another portdock)
-			if (is_good_water && f.field->get_immovable()) {
+			if (is_good_water && (f.field->get_immovable() != nullptr)) {
 				is_good_water = false;
 			}
 
@@ -1839,7 +1851,7 @@ bool Map::is_port_space_allowed(const EditorGameBase& egbase, const FCoords& fc)
 
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(const Coords& c) const {
-	return port_spaces_.count(c);
+	return port_spaces_.count(c) != 0u;
 }
 
 bool Map::set_port_space(const EditorGameBase& egbase,
@@ -1892,7 +1904,8 @@ uint32_t Map::calc_distance(const Coords& a, const Coords& b) const {
 	// towards b
 	// Hint: (~a.y & 1) is 1 for even rows, 0 for odd rows.
 	// This means we round UP for even rows, and we round DOWN for odd rows.
-	int32_t lx, rx;
+	int32_t lx;
+	int32_t rx;
 
 	lx = a.x - ((dist + (~a.y & 1)) >> 1);  // div 2
 	rx = lx + dist;
@@ -2033,10 +2046,10 @@ with the cost of walking in said direction.
 void Map::calc_cost(const Path& path, int32_t* const forward, int32_t* const backward) const {
 	Coords coords = path.get_start();
 
-	if (forward) {
+	if (forward != nullptr) {
 		*forward = 0;
 	}
-	if (backward) {
+	if (backward != nullptr) {
 		*backward = 0;
 	}
 
@@ -2044,11 +2057,11 @@ void Map::calc_cost(const Path& path, int32_t* const forward, int32_t* const bac
 	for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 		const Direction dir = path[i];
 
-		if (forward) {
+		if (forward != nullptr) {
 			*forward += calc_cost(coords, dir);
 		}
 		get_neighbour(coords, dir, &coords);
-		if (backward) {
+		if (backward != nullptr) {
 			*backward += calc_cost(coords, get_reverse_dir(dir));
 		}
 	}
@@ -2187,7 +2200,7 @@ int32_t Map::findpath(Coords instart,
 		return -1;
 	}
 
-	if (!persist) {
+	if (persist == 0) {
 		upper_cost_limit = 0;
 	} else {
 		// assume flat terrain
@@ -2215,7 +2228,7 @@ int32_t Map::findpath(Coords instart,
 		cur.field = fields_.get() + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
-		if (upper_cost_limit && curpf->real_cost > upper_cost_limit) {
+		if ((upper_cost_limit != 0) && curpf->real_cost > upper_cost_limit) {
 			break;  // upper cost limit reached, give up
 		}
 		if (cur == end) {
@@ -2225,10 +2238,10 @@ int32_t Map::findpath(Coords instart,
 		// avoid bias by using different orders when pathfinding
 		static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
 		static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-		int8_t const* direction = ((cur.x + cur.y) & 1) ? order1 : order2;
+		int8_t const* direction = ((cur.x + cur.y) & 1) != 0 ? order1 : order2;
 
 		// Check all the 6 neighbours
-		for (uint32_t i = 6; i; i--, direction++) {
+		for (uint32_t i = 6; i != 0u; i--, direction++) {
 			FCoords neighb;
 			int32_t cost;
 
@@ -2249,15 +2262,15 @@ int32_t Map::findpath(Coords instart,
 			}
 
 			// Calculate cost
-			cost = curpf->real_cost + ((flags & fpBidiCost) ? calc_bidi_cost(cur, *direction) :
-                                                           calc_cost(cur, *direction));
+			cost = curpf->real_cost + ((flags & fpBidiCost) != 0u ? calc_bidi_cost(cur, *direction) :
+                                                                 calc_cost(cur, *direction));
 
 			// If required (indicated by caps_sensitivity) we increase the path costs
 			// if the path is just crossing a field with building capabilities
 			if (caps_sensitivity > 0) {
 				int32_t buildcaps_score = neighb.field->get_caps() & BUILDCAPS_SIZEMASK;
-				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
-				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) ? 9 : 0;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) != 0 ? 1 : 0;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) != 0 ? 9 : 0;
 				cost += buildcaps_score * caps_sensitivity;
 			}
 
@@ -2299,17 +2312,17 @@ int32_t Map::findpath(Coords instart,
 bool Map::can_reach_by_water(const Coords& field) const {
 	FCoords fc = get_fcoords(field);
 
-	if (fc.field->nodecaps() & MOVECAPS_SWIM) {
+	if ((fc.field->nodecaps() & MOVECAPS_SWIM) != 0) {
 		return true;
 	}
-	if (!(fc.field->nodecaps() & MOVECAPS_WALK)) {
+	if ((fc.field->nodecaps() & MOVECAPS_WALK) == 0) {
 		return false;
 	}
 
 	FCoords neighb;
 
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		if (get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM) {
+		if ((get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM) != 0) {
 			return true;
 		}
 	}
@@ -2363,22 +2376,28 @@ bool Map::is_resource_valid(const Widelands::Descriptions& descriptions,
 	int32_t count = 0;
 
 	//  this field
-	count += descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres);
-	count += descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres);
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres));
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	get_neighbour(c, Widelands::WALK_NW, &f1);
-	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
-	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
 
 	//  top right neigbour
 	get_neighbour(c, Widelands::WALK_NE, &f1);
-	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres));
 
 	//  left neighbour
 	get_neighbour(c, Widelands::WALK_W, &f1);
-	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
+	count += static_cast<int>(
+	   descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres));
 
 	return count > 1;
 }
@@ -2653,13 +2672,13 @@ std::set<Coords> Map::to_set(Area<Coords> area) const {
 std::set<TCoords<Coords>> Map::triangles_in_region(std::set<Coords> area) const {
 	std::set<TCoords<Coords>> result;
 	for (const Coords& c : area) {
-		if (!area.count(br_n(c))) {
+		if (area.count(br_n(c)) == 0u) {
 			continue;
 		}
-		if (area.count(r_n(c))) {
+		if (area.count(r_n(c)) != 0u) {
 			result.insert(TCoords<Coords>(c, TriangleIndex::R));
 		}
-		if (area.count(bl_n(c))) {
+		if (area.count(bl_n(c)) != 0u) {
 			result.insert(TCoords<Coords>(c, TriangleIndex::D));
 		}
 	}

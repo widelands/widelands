@@ -50,7 +50,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    descriptions:new_immovable_type {
+--    wl.Descriptions():new_immovable_type {
 --       name = "ashes",
 --       descname = pgettext("immovable", "Ashes"),
 --       anmation_directory = dirname,
@@ -76,7 +76,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_immovable_type {
+wl.Descriptions():new_immovable_type {
    name = "ashes",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ashes"),
@@ -89,10 +89,13 @@ descriptions:new_immovable_type {
       }
    },
 
-   animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 40, 39 },
+         directory = dirname,
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 43, 60 },
       },
    }
 }

@@ -136,7 +136,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	rebuild_texture_atlas();
 }
 
-void Graphic::rebuild_texture_atlas() {
+void Graphic::rebuild_texture_atlas() const {
 	verb_log_info("Rebuilding texture atlas");
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
@@ -149,11 +149,11 @@ Graphic::~Graphic() {
 	g_animation_manager = nullptr;
 	delete g_image_cache;
 	g_image_cache = nullptr;
-	if (sdl_window_) {
+	if (sdl_window_ != nullptr) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;
 	}
-	if (gl_context_) {
+	if (gl_context_ != nullptr) {
 		SDL_GL_DeleteContext(gl_context_);
 		gl_context_ = nullptr;
 	}
@@ -210,7 +210,8 @@ void Graphic::resolution_changed() {
 	int old_w = screen_ ? screen_->width() : 0;
 	int old_h = screen_ ? screen_->height() : 0;
 
-	int new_w, new_h;
+	int new_w;
+	int new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
 
 	if (old_w == new_w && old_h == new_h) {
@@ -242,7 +243,7 @@ int Graphic::max_texture_size_for_font_rendering() const {
 
 bool Graphic::maximized() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	return flags & SDL_WINDOW_MAXIMIZED;
+	return (flags & SDL_WINDOW_MAXIMIZED) != 0u;
 }
 
 void Graphic::set_maximized(const bool to_maximize) {
@@ -263,7 +264,8 @@ void Graphic::set_maximized(const bool to_maximize) {
 
 bool Graphic::fullscreen() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
-	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
+	return ((flags & SDL_WINDOW_FULLSCREEN) != 0u) ||
+	       ((flags & SDL_WINDOW_FULLSCREEN_DESKTOP) != 0u);
 }
 
 void Graphic::set_fullscreen(const bool value) {
@@ -294,7 +296,8 @@ void Graphic::refresh() {
 	if (!fullscreen()) {
 		// Set the window to our preferred size if it goes out of sync.
 		// Not sure if this is still needed, leaving it just in case.
-		int true_width, true_height;
+		int true_width;
+		int true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
 
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {

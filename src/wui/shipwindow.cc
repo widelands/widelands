@@ -230,7 +230,7 @@ void ShipWindow::think() {
 	}
 	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship->get_destination());
+	btn_destination_->set_enabled(ship->get_destination() != nullptr);
 	btn_sink_->set_enabled(can_act);
 
 	display_->clear();
@@ -240,10 +240,10 @@ void ShipWindow::think() {
 		Widelands::Worker* worker;
 		item.get(ibase_.egbase(), &ware, &worker);
 
-		if (ware) {
+		if (ware != nullptr) {
 			display_->add(false, ware->descr_index());
 		}
-		if (worker) {
+		if (worker != nullptr) {
 			display_->add(true, worker->descr().worker_index());
 		}
 	}
@@ -323,7 +323,7 @@ void ShipWindow::act_sink() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		if (Widelands::Game* game = ibase_.get_game()) {
 			game->send_player_sink_ship(*ship);
 		} else {
@@ -349,7 +349,7 @@ void ShipWindow::act_cancel_expedition() {
 	if (ship == nullptr) {
 		return;
 	}
-	if (SDL_GetModState() & KMOD_CTRL) {
+	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		if (Widelands::Game* game = ibase_.get_game()) {
 			game->send_player_cancel_expedition_ship(*ship);
 		} else {
@@ -425,10 +425,9 @@ UI::Window& ShipWindow::load(FileRead& fr, InteractiveBase& ib, Widelands::MapOb
 		const uint16_t packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
 			return ib.show_ship_window(&mol.get<Widelands::Ship>(fr.unsigned_32()));
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Ship Window", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError("Ship Window", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("ship window: %s", e.what());
 	}

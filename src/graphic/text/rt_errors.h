@@ -19,9 +19,9 @@
 #ifndef WL_GRAPHIC_TEXT_RT_ERRORS_H
 #define WL_GRAPHIC_TEXT_RT_ERRORS_H
 
-#include "base/wexception.h"
-
 #include <exception>
+
+#include "base/wexception.h"
 
 namespace RT {
 

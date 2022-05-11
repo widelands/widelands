@@ -29,7 +29,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 5;
 
-void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
+void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
 		PlayerNumber const nr_players = game.map().get_nrplayers();
 
@@ -41,12 +41,12 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				// Make sure that all containers are reset properly etc.
 				player->ai_data.initialize();
 				// Contains Genetic algorithm data
-				player->ai_data.initialized = fr.unsigned_8();
+				player->ai_data.initialized = (fr.unsigned_8() != 0u);
 				player->ai_data.colony_scan_area = fr.unsigned_32();
 				player->ai_data.trees_around_cutters = fr.unsigned_32();
 				player->ai_data.expedition_start_time = Time(fr);
 				player->ai_data.ships_utilization = fr.unsigned_16();
-				player->ai_data.no_more_expeditions = fr.unsigned_8();
+				player->ai_data.no_more_expeditions = (fr.unsigned_8() != 0u);
 				player->ai_data.last_attacked_player = fr.signed_16();
 				player->ai_data.least_military_score = fr.unsigned_32();
 				player->ai_data.target_military_score = fr.unsigned_32();
@@ -127,7 +127,9 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 /*
  * Write Function
  */
-void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GamePlayerAiPersistentPacket::write(FileSystem& fs,
+                                         Game& game,
+                                         MapObjectSaver* const /* mos */) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);

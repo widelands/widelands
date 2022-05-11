@@ -100,7 +100,7 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTria
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		//  check if field is valid
-		if (port_tool_nodecaps(mr.location(), *map)) {
+		if (port_tool_nodecaps(mr.location(), *map) != 0u) {
 			map->set_port_space(eia.egbase(), mr.location(), false);
 			Widelands::Area<Widelands::FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(eia.egbase(), a);

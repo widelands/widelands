@@ -163,7 +163,7 @@ bool NetSetupLAN::get_host_address(NetAddress* addr) {
 	for (uint32_t i = 0; i < table_.size(); ++i) {
 		const NetOpenGame& game = *table_[i];
 
-		if (!strcmp(game.info.hostname, host.c_str())) {
+		if (strcmp(game.info.hostname, host.c_str()) == 0) {
 			*addr = game.address;
 			return true;
 		}
@@ -187,7 +187,7 @@ void NetSetupLAN::clicked_ok() {
 	}
 }
 
-void NetSetupLAN::game_selected(uint32_t) {
+void NetSetupLAN::game_selected(uint32_t /* index */) {
 	if (table_.has_selection()) {
 		if (const NetOpenGame* const game = table_.get_selected()) {
 			hostname_.set_text(game->info.hostname);
@@ -196,7 +196,7 @@ void NetSetupLAN::game_selected(uint32_t) {
 	}
 }
 
-void NetSetupLAN::game_doubleclicked(uint32_t) {
+void NetSetupLAN::game_doubleclicked(uint32_t /* index */) {
 	assert(table_.has_selection());
 	const NetOpenGame* const game = table_.get_selected();
 	// Only join games that are open
@@ -215,7 +215,7 @@ void NetSetupLAN::update_game_info(UI::Table<NetOpenGame const* const>::EntryRec
 		// unable to set the correct textdomain for add-on maps, even if we have
 		// installed the add-on ourself. Let's just hope it's an official map.
 		i18n::Textdomain td("maps");
-		er.set_string(1, info.map[0] ? i18n::translate(info.map) : "");
+		er.set_string(1, info.map[0] != 0 ? i18n::translate(info.map) : "");
 	}
 
 	er.set_disabled(info.state != LAN_GAME_OPEN);
@@ -237,7 +237,7 @@ void NetSetupLAN::game_opened(const NetOpenGame* game) {
 	update_game_info(table_.add(game), game->info);
 }
 
-void NetSetupLAN::game_closed(const NetOpenGame*) {
+void NetSetupLAN::game_closed(const NetOpenGame* /* game */) {
 }
 
 void NetSetupLAN::game_updated(const NetOpenGame* game) {

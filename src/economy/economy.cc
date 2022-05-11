@@ -108,7 +108,7 @@ Flag* Economy::get_arbitrary_flag(const Economy* other) {
 		return nullptr;
 	}
 
-	if (!other) {
+	if (other == nullptr) {
 		return flags_[0];
 	}
 
@@ -147,11 +147,11 @@ void Economy::check_split(Flag& f1, Flag& f2, WareWorker type) {
 
 	Economy* e = f1.get_economy(type);
 	// No economy in the editor.
-	if (!e) {
+	if (e == nullptr) {
 		return;
 	}
 
-	e->split_checks_.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
+	e->split_checks_.emplace_back(OPtr<Flag>(&f1), OPtr<Flag>(&f2));
 	e->rebalance_supply();  // the real split-checking is done during rebalance
 }
 
@@ -162,11 +162,11 @@ void Economy::check_splits() {
 		Flag* f2 = split_checks_.back().second.get(egbase);
 		split_checks_.pop_back();
 
-		if (!f1 || !f2) {
-			if (!f1 && !f2) {
+		if ((f1 == nullptr) || (f2 == nullptr)) {
+			if ((f1 == nullptr) && (f2 == nullptr)) {
 				continue;
 			}
-			if (!f1) {
+			if (f1 == nullptr) {
 				f1 = f2;
 			}
 			if (f1->get_economy(type_) != this) {
@@ -203,10 +203,11 @@ void Economy::check_splits() {
 
 		for (;;) {
 			RoutingNode* current = astar.step();
-			if (!current) {
+			if (current == nullptr) {
 				split(reachable);
 				break;
-			} else if (current == f2) {
+			}
+			if (current == f2) {
 				break;
 			}
 			reachable.insert(&current->base_flag());
@@ -257,7 +258,7 @@ Warehouse* Economy::find_closest_warehouse(Flag& start,
 	astar.push(start);
 
 	while (RoutingNode* current = astar.step()) {
-		if (cost_cutoff &&
+		if ((cost_cutoff != 0u) &&
 		    (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) >
 		       static_cast<int32_t>(cost_cutoff)) {
 			return nullptr;
@@ -266,7 +267,7 @@ Warehouse* Economy::find_closest_warehouse(Flag& start,
 		Flag& flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
 			if (!acceptfn || acceptfn(*warehouse)) {
-				if (route) {
+				if (route != nullptr) {
 					astar.routeto(flag, *route);
 				}
 				return warehouse;
@@ -375,7 +376,7 @@ void Economy::add_wares_or_workers(DescriptionIndex const id,
                                    Economy* other_economy) {
 	wares_or_workers_.add(id, count);
 	start_request_timer();
-	if (other_economy) {
+	if (other_economy != nullptr) {
 		assert(other_economy->type() != type_);
 		other_economy->start_request_timer();
 	}
@@ -493,7 +494,7 @@ std::unique_ptr<Worker> Economy::soldier_prototype_(nullptr);
 // static
 Worker& Economy::soldier_prototype(const WorkerDescr* d) {
 	if (!soldier_prototype_) {
-		if (!d) {
+		if (d == nullptr) {
 			throw wexception("soldier_prototype_ not initialized and no SoldierDescr provided");
 		}
 		assert(d->type() == MapObjectType::SOLDIER);
@@ -517,21 +518,18 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 			}
 		}
 		return true;
-	} else {
-		// Target quantity is set to 0, we need to check if there is an open request.
-		// For soldier requests, do not recruit new rookies if only heroes are needed.
-		const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
-		for (const Request* req : requests_) {
-			if (req->get_type() == type_ && req->get_index() == ware_or_worker_type &&
-			    req->is_open() &&
-			    (!is_soldier ||
-			     req->get_requirements().check(soldier_prototype(
-			        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
-				return true;
-			}
+	}  // Target quantity is set to 0, we need to check if there is an open request.
+	// For soldier requests, do not recruit new rookies if only heroes are needed.
+	const bool is_soldier = type_ == wwWORKER && ware_or_worker_type == owner().tribe().soldier();
+	for (const Request* req : requests_) {
+		if (req->get_type() == type_ && req->get_index() == ware_or_worker_type && req->is_open() &&
+		    (!is_soldier ||
+		     req->get_requirements().check(soldier_prototype(
+		        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
+			return true;
 		}
-		return false;
 	}
+	return false;
 }
 
 bool Economy::has_building(const DescriptionIndex di) const {
@@ -624,11 +622,11 @@ void Economy::merge(Economy& e) {
 
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
-	if (e.get_options_window() && !get_options_window()) {
+	if ((e.get_options_window() != nullptr) && (get_options_window() == nullptr)) {
 		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
-	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i;) {
+	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i != 0u;) {
 		assert(i == e.get_nrflags());
 
 		Flag& flag = *e.flags_[0];
@@ -688,7 +686,8 @@ void Economy::start_request_timer(const Duration& delta) {
 Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost) {
 	assert(req.is_open());
 
-	Route buf_route0, buf_route1;
+	Route buf_route0;
+	Route buf_route1;
 	Supply* best_supply = nullptr;
 	Route* best_route = nullptr;
 	int32_t best_cost = -1;
@@ -700,7 +699,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		Supply& supp = supplies_[i];
 
 		// Just skip if supply does not provide required ware
-		if (!supp.nr_supplies(game, req)) {
+		if (supp.nr_supplies(game, req) == 0u) {
 			continue;
 		}
 
@@ -733,7 +732,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		// will be cleared by find_route()
 
 		if (!find_route(supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
-			if (!best_route) {
+			if (best_route == nullptr) {
 				log_err_time(
 				   game.get_gametime(),
 				   "Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A "
@@ -756,7 +755,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		best_cost = route->get_totalcost();
 	}
 
-	if (!best_route) {
+	if (best_route == nullptr) {
 		return nullptr;
 	}
 
@@ -817,7 +816,7 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		int32_t cost;  // estimated time in milliseconds to fulfill Request
 		Supply* const supp = find_best_supply(game, req, cost);
 
-		if (!supp) {
+		if (supp == nullptr) {
 			continue;
 		}
 
@@ -867,8 +866,8 @@ void Economy::balance_requestsupply(Game& game) {
 
 		rsps.queue.pop();
 
-		if (!rsp.request || !rsp.supply || !has_request(*rsp.request) ||
-		    !rsp.supply->nr_supplies(game, *rsp.request) ||
+		if ((rsp.request == nullptr) || (rsp.supply == nullptr) || !has_request(*rsp.request) ||
+		    (rsp.supply->nr_supplies(game, *rsp.request) == 0u) ||
 		    (!first_priority_is_0 && rsp.priority == 0)) {
 			rsps.nexttimer = 200;
 			continue;
@@ -878,7 +877,7 @@ void Economy::balance_requestsupply(Game& game) {
 		rsp.request->set_last_request_time(game.get_gametime());
 
 		//  for multiple wares
-		if (rsp.request && has_request(*rsp.request)) {
+		if ((rsp.request != nullptr) && has_request(*rsp.request)) {
 			rsps.nexttimer = 200;
 		}
 	}
@@ -963,7 +962,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 			wh->create_worker(game, index);
 			--open_requests.begin()->second;
 			--total_demand;
-			if (!open_requests.begin()->second) {
+			if (open_requests.begin()->second == 0u) {
 				open_requests.erase(open_requests.begin());
 			}
 			if (total_demand == 0) {
@@ -1114,7 +1113,7 @@ void Economy::handle_active_supplies(Game& game) {
 
 		// We either have one preferred warehouse picked up or walk on roads to find nearest one
 		Warehouse* wh = nullptr;
-		if (preferred_wh) {
+		if (preferred_wh != nullptr) {
 			wh = preferred_wh;
 		} else {
 			wh = find_closest_warehouse(
@@ -1123,7 +1122,7 @@ void Economy::handle_active_supplies(Game& game) {
 				   return accept_warehouse_if_policy(w, type_, ware, StockPolicy::kNormal);
 			   });
 		}
-		if (!wh) {
+		if (wh == nullptr) {
 			log_warn_time(game.get_gametime(), "Warning: Economy::handle_active_supplies "
 			                                   "didn't find warehouse\n");
 			return;

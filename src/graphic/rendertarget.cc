@@ -72,10 +72,10 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs) {
 	Rectf newrect_f = rc.cast<float>();
 	if (clip(newrect_f)) {
-		if (previous) {
+		if (previous != nullptr) {
 			*previous = rect_;
 		}
-		if (prevofs) {
+		if (prevofs != nullptr) {
 			*prevofs = offset_;
 		}
 
@@ -85,9 +85,8 @@ bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prev
 		rect_ = newrect;
 
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /**
@@ -185,15 +184,16 @@ void RenderTarget::blit_monochrome(const Vector2i& dst,
  */
 void RenderTarget::blitrect(const Vector2i& dst,
                             const Image* image,
-                            const Recti& gsrcrc,
+                            const Recti& rectangle,
                             BlendMode blend_mode) {
-	assert(0 <= gsrcrc.x);
-	assert(0 <= gsrcrc.y);
+	assert(0 <= rectangle.x);
+	assert(0 <= rectangle.y);
 
 	// We want to use the given srcrc, but we must make sure that we are not
 	// blitting outside of the boundaries of 'image'.
-	Rectf source_rect(gsrcrc.x, gsrcrc.y, std::min<int32_t>(image->width() - gsrcrc.x, gsrcrc.w),
-	                  std::min<int32_t>(image->height() - gsrcrc.y, gsrcrc.h));
+	Rectf source_rect(rectangle.x, rectangle.y,
+	                  std::min<int32_t>(image->width() - rectangle.x, rectangle.w),
+	                  std::min<int32_t>(image->height() - rectangle.y, rectangle.h));
 	Rectf destination_rect(dst.x, dst.y, source_rect.w, source_rect.h);
 
 	if (to_surface_geometry(&destination_rect, &source_rect)) {
@@ -373,7 +373,7 @@ bool RenderTarget::clip(Rectf& r) const {
 	r.x += rect_.x;
 	r.y += rect_.y;
 
-	return r.w && r.h;
+	return (r.w != 0.0f) && (r.h != 0.0f);
 }
 
 /**

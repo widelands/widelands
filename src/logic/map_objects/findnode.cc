@@ -33,7 +33,7 @@ FindNodeAnd::Subfunctor::Subfunctor(const FindNode& init_findfield, bool const i
 }
 
 void FindNodeAnd::add(const FindNode& findfield, bool const negate) {
-	subfunctors.push_back(Subfunctor(findfield, negate));
+	subfunctors.emplace_back(findfield, negate);
 }
 
 bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) const {
@@ -45,13 +45,13 @@ bool FindNodeAnd::accept(const EditorGameBase& egbase, const FCoords& coord) con
 	return true;
 }
 
-bool FindNodeCaps::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeCaps::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	NodeCaps nodecaps = coord.field->nodecaps();
 
 	if ((nodecaps & BUILDCAPS_SIZEMASK) < (mincaps & BUILDCAPS_SIZEMASK)) {
 		return false;
 	}
-	if ((mincaps & ~BUILDCAPS_SIZEMASK) & ~(nodecaps & ~BUILDCAPS_SIZEMASK)) {
+	if (((mincaps & ~BUILDCAPS_SIZEMASK) & ~(nodecaps & ~BUILDCAPS_SIZEMASK)) != 0) {
 		return false;
 	}
 	return true;
@@ -68,11 +68,11 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 
 	switch (size) {
 	case sizeBuild:
-		return nodecaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE);
+		return (nodecaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE)) != 0;
 	case sizeMine:
-		return nodecaps & BUILDCAPS_MINE;
+		return (nodecaps & BUILDCAPS_MINE) != 0;
 	case sizePort:
-		return nodecaps & BUILDCAPS_PORT;
+		return (nodecaps & BUILDCAPS_PORT) != 0;
 	case sizeSmall:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
 	case sizeMedium:
@@ -81,18 +81,18 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeSwim: {
 		const Descriptions& world = egbase.descriptions();
-		return (world.get_terrain_descr(coord.field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) ||
-		       (world.get_terrain_descr(coord.field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater) ||
-		       (world.get_terrain_descr(map.tl_n(coord).field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) ||
-		       (world.get_terrain_descr(map.tl_n(coord).field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater) ||
-		       (world.get_terrain_descr(map.tr_n(coord).field->terrain_d())->get_is() &
-		        TerrainDescription::Is::kWater) ||
-		       (world.get_terrain_descr(map.l_n(coord).field->terrain_r())->get_is() &
-		        TerrainDescription::Is::kWater);
+		return ((world.get_terrain_descr(coord.field->terrain_d())->get_is() &
+		         TerrainDescription::Is::kWater) != 0) ||
+		       ((world.get_terrain_descr(coord.field->terrain_r())->get_is() &
+		         TerrainDescription::Is::kWater) != 0) ||
+		       ((world.get_terrain_descr(map.tl_n(coord).field->terrain_d())->get_is() &
+		         TerrainDescription::Is::kWater) != 0) ||
+		       ((world.get_terrain_descr(map.tl_n(coord).field->terrain_r())->get_is() &
+		         TerrainDescription::Is::kWater) != 0) ||
+		       ((world.get_terrain_descr(map.tr_n(coord).field->terrain_d())->get_is() &
+		         TerrainDescription::Is::kWater) != 0) ||
+		       ((world.get_terrain_descr(map.l_n(coord).field->terrain_r())->get_is() &
+		         TerrainDescription::Is::kWater) != 0);
 	}
 	case sizeAny:
 		return true;
@@ -120,7 +120,7 @@ bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coor
 	      .empty());
 }
 
-bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeImmovableSize::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
 	int32_t size = BaseImmovable::NONE;
 
 	if (BaseImmovable* const imm = coord.field->get_immovable()) {
@@ -129,27 +129,28 @@ bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) 
 
 	switch (size) {
 	case BaseImmovable::NONE:
-		return sizes & sizeNone;
+		return (sizes & sizeNone) != 0u;
 	case BaseImmovable::SMALL:
-		return sizes & sizeSmall;
+		return (sizes & sizeSmall) != 0u;
 	case BaseImmovable::MEDIUM:
-		return sizes & sizeMedium;
+		return (sizes & sizeMedium) != 0u;
 	case BaseImmovable::BIG:
-		return sizes & sizeBig;
+		return (sizes & sizeBig) != 0u;
 	default:
 		throw wexception("FindNodeImmovableSize: bad size = %i", size);
 	}
 }
 
-bool FindNodeImmovableAttribute::accept(const EditorGameBase&, const FCoords& coord) const {
+bool FindNodeImmovableAttribute::accept(const EditorGameBase& /* egbase */,
+                                        const FCoords& coord) const {
 	if (BaseImmovable* const imm = coord.field->get_immovable()) {
 		return imm->has_attribute(attribute);
 	}
 	return false;
 }
 
-bool FindNodeResource::accept(const EditorGameBase&, const FCoords& coord) const {
-	return resource == coord.field->get_resources() && coord.field->get_resources_amount();
+bool FindNodeResource::accept(const EditorGameBase& /* egbase */, const FCoords& coord) const {
+	return resource == coord.field->get_resources() && (coord.field->get_resources_amount() != 0u);
 }
 
 bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoords& coord) const {
@@ -193,7 +194,7 @@ bool FindNodeResourceBreedable::accept(const EditorGameBase& egbase, const FCoor
 }
 
 bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) const {
-	if (!(coords.field->nodecaps() & MOVECAPS_WALK)) {
+	if ((coords.field->nodecaps() & MOVECAPS_WALK) == 0) {
 		return false;
 	}
 
@@ -218,7 +219,7 @@ bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) 
 				continue;
 			}
 
-			if (neighb.field->nodecaps() & MOVECAPS_SWIM) {
+			if ((neighb.field->nodecaps() & MOVECAPS_SWIM) != 0) {
 				// This is new node, that is swimmable
 				accepted_nodes.insert(neighb.hash());
 				// But also neighbours must be processed in next iterations

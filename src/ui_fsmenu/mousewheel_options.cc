@@ -103,7 +103,7 @@ inline bool dir_y(const uint8_t dir) {
 	set_mousewheel_option_bool(MousewheelOptionID::option##X, dir_x(dir));                          \
 	set_mousewheel_option_bool(MousewheelOptionID::option##Y, dir_y(dir));
 
-void MousewheelConfigSettings::apply() {
+void MousewheelConfigSettings::apply() const {
 	set_mousewheel_option_bool(MousewheelOptionID::kMapScroll, enable_map_scroll_ != 0);
 	set_mousewheel_keymod(MousewheelOptionID::kMapZoomMod, zoom_mod_);
 	set_mousewheel_keymod(MousewheelOptionID::kMapScrollMod, map_scroll_mod_);
@@ -265,7 +265,7 @@ void KeymodAndDirBox::check_dir() {
 	}
 }
 bool KeymodAndDirBox::conflicts(uint16_t keymod, uint8_t dir) {
-	return (dir & *dir_) && (matches_keymod(keymod, *keymod_));
+	return ((dir & *dir_) != 0) && (matches_keymod(keymod, *keymod_));
 }
 bool KeymodAndDirBox::check_available(uint16_t keymod, uint8_t dir) {
 	for (KeymodAndDirBox* other : shared_scope_list_) {

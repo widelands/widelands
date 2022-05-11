@@ -31,7 +31,7 @@ namespace FsMenu {
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              LaunchGame& lg,
-                                                             int32_t const,
+                                                             int32_t const /* w */,
                                                              int32_t const h,
                                                              PlayerSlot id,
                                                              GameSettingsProvider* const settings)
@@ -84,7 +84,7 @@ void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_eleme
 
 void SinglePlayerActivePlayerGroup::choose_color() {
 	Panel* p = this;
-	while (p->get_parent()) {
+	while (p->get_parent() != nullptr) {
 		p = p->get_parent();
 	}
 

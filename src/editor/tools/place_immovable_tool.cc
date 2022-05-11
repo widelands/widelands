@@ -34,7 +34,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
                                                     EditorActionArgs* args,
                                                     Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
-	if (!get_nr_enabled()) {
+	if (get_nr_enabled() == 0) {
 		return radius;
 	}
 	Widelands::EditorGameBase& egbase = eia.egbase();
@@ -43,7 +43,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 		do {
 			const Widelands::BaseImmovable* im = mr.location().field->get_immovable();
-			args->old_immovable_types.push_back((im ? im->descr().name() : ""));
+			args->old_immovable_types.push_back((im != nullptr ? im->descr().name() : ""));
 			args->new_immovable_types.push_back(get_random_enabled());
 		} while (mr.advance(*map));
 	}
@@ -53,8 +53,8 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->new_immovable_types.begin();
 		do {
-			if (!mr.location().field->get_immovable() &&
-			    (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK)) {
+			if ((mr.location().field->get_immovable() == nullptr) &&
+			    ((mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK) != 0)) {
 				egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
 			}
 			++i;

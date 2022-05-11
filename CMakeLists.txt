@@ -13,6 +13,7 @@ option(OPTION_BUILD_TESTS "Build tests" ON)
 option(OPTION_BUILD_CODECHECK "Build codecheck" ON)
 option(OPTION_BUILD_WINSTATIC "Build a static linked .exe on windows" OFF)
 option(OPTION_TSAN "Build with ThreadSanitizer" OFF)
+option(OPTION_FORCE_EMBEDDED_MINIZIP "Use embedded minizip sources" OFF)
 option(USE_XDG "Follow XDG-Basedir specification" ON) # Enabled by default
 
 # Absolute path reference for submodules
@@ -84,6 +85,13 @@ wl_set_if_unset(WL_INSTALL_BASEDIR ".")
 # below the directory where the executable is in. Also on Linux.
 # Packagers (or people using make install) have to set this variable to an absolute path.
 wl_set_if_unset(WL_INSTALL_DATADIR "./data")
+
+# To override this, use '-DWL_INSTALL_BINDIR=<absolute path>' when configuring or change
+# 'CMAKE_INSTALL_PREFIX'.
+# Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
+# and don't specify '-DWL_INSTALL_BINDIR' when configuring.
+# Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
+set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
@@ -272,40 +280,43 @@ endif()
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
-   link_libraries("GL")
+   link_libraries(OpenGL::GL)
    add_compile_definitions(WL_USE_GLVND)
    message(STATUS "Adding linker flags for GLVND.")
 endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")
+  set(warn_disable_flags
+    "-Weverything"
 
-  # Disabled warnings that are overly verbose right now or just do not make sense.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-c++98-compat")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-c++98-compat-pedantic")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-exit-time-destructors")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-global-constructors")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-padded")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-sign-conversion")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-missing-noreturn")
+    # Disabled warnings that are overly verbose right now or just do not make sense.
+    "-Wno-c++98-compat"
+    "-Wno-c++98-compat-pedantic"
+    "-Wno-conversion"
+    "-Wno-exit-time-destructors"
+    "-Wno-global-constructors"
+    "-Wno-padded"
+    "-Wno-sign-conversion"
+    "-Wno-missing-noreturn"
 
-  # It is impossible to write code that both GCC and Clang will like,
-  # so we have to switch off the warning for one of them.
-  # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-switch-enum")
+    # It is impossible to write code that both GCC and Clang will like,
+    # so we have to switch off the warning for one of them.
+    # http://clang-developers.42468.n3.nabble.com/Question-on-Wswitch-enum-td4025927.html
+    "-Wno-switch-enum"
 
-  # TODO(sirver): weak-vtables should be enabled, but leads to lot of errors right now.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-weak-vtables")
+    # TODO(sirver: weak-vtables should be enabled, but leads to lot of errors right now.
+    "-Wno-weak-vtables"
+    "-Wno-unreachable-code"
+    "-Wno-documentation"
+    "-Qunused-arguments"
+    "-Wint-to-void-pointer-cast"
+  )
+  foreach(flag IN LISTS warn_disable_flags)
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
+  endforeach()
 
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-unreachable-code")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-documentation")
-
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Qunused-arguments")
-
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wint-to-void-pointer-cast")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 3.8)
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winconsistent-missing-override")
   endif()
 elseif(MSVC)
   # https://docs.microsoft.com/en-us/cpp/error-messages/compiler-warnings/
@@ -329,32 +340,35 @@ else()
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wredundant-decls")
   endif()
 
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wall")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpedantic")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wdeprecated-declarations")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wextra")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat-nonliteral")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat-security")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wformat-y2k")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winit-self")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Winvalid-pch")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wlogical-op")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wmissing-include-dirs")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-undef")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wold-style-cast")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Woverlength-strings")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpacked")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wpointer-arith")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsign-promo")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wsync-nand")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wtrampolines")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wundef")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused")
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wunused-macros")
-
-  # Detect invalid constexpr initialization
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-fno-elide-constructors")
+  set(warn_flags
+    "-Wall"
+    "-Wpedantic"
+    "-Wdeprecated-declarations"
+    "-Wextra"
+    "-Wformat"
+    "-Wformat-nonliteral"
+    "-Wformat-security"
+    "-Wformat-y2k"
+    "-Winit-self"
+    "-Winvalid-pch"
+    "-Wlogical-op"
+    "-Wmissing-include-dirs"
+    "-Wno-undef"
+    "-Wold-style-cast"
+    "-Woverlength-strings"
+    "-Wpacked"
+    "-Wpointer-arith"
+    "-Wsign-promo"
+    "-Wsync-nand"
+    "-Wtrampolines"
+    "-Wundef"
+    "-Wunused"
+    "-Wunused-macros"
+    "-fno-elide-constructors" # Detect invalid constexpr initialization
+  )
+  foreach(flag IN LISTS warn_flags)
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS ${flag})
+  endforeach()
 endif()
 
 if(NOT MSVC)
@@ -548,16 +562,30 @@ install(
   PATTERN "CMakeLists.txt" EXCLUDE
 )
 
-set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
-
-install(
-  DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/locale/
-  DESTINATION ${WL_INSTALL_DATADIR}/locale
-  CONFIGURATIONS Debug;Release;None
-  COMPONENT CoreLanguageFiles
-)
+if(OPTION_BUILD_TRANSLATIONS)
+  set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${WL_INSTALL_DATADIR}/locale)
+  install(
+    DIRECTORY
+      ${CMAKE_CURRENT_BINARY_DIR}/locale/
+    DESTINATION ${WL_INSTALL_DATADIR}/locale
+    CONFIGURATIONS Debug;Release;None
+    COMPONENT CoreLanguageFiles
+  )
+endif(OPTION_BUILD_TRANSLATIONS)
 
 if (UNIX AND NOT APPLE)
   add_subdirectory(xdg)
 endif (UNIX AND NOT APPLE)
+
+# uninstall target
+# see https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#can-i-do-make-uninstall-with-cmake
+if(NOT TARGET uninstall)
+  configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+  add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake/cmake_uninstall.cmake)
+endif()
+

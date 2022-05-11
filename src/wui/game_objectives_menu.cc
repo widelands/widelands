@@ -107,15 +107,15 @@ UI::Window& GameObjectivesMenu::load(FileRead& fr, InteractiveBase& ib) {
 			m.think();  // Fills the list
 			m.list.select(fr.unsigned_32());
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Objectives Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Objectives Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("objectives menu: %s", e.what());
 	}
 }
-void GameObjectivesMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void GameObjectivesMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_32(list.selection_index());
 }

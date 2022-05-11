@@ -167,7 +167,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa libminizip-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -186,8 +186,14 @@ jobs:
         mkdir build
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
-        make -k -j$(nproc)
-        cd ..
+        make -k -j$(nproc) VERBOSE=1
+    - name: Make install/uninstall
+      run: |
+        cd build
+        TEST_INSTALL_DIR="${PWD}/test_install"
+        make -j$(nproc) DESTDIR=${TEST_INSTALL_DIR} install
+        make -j$(nproc) DESTDIR=${TEST_INSTALL_DIR} uninstall
+        test ! -d ${TEST_INSTALL_DIR}
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
@@ -247,11 +253,11 @@ jobs:
       run: |
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON
+        cmake.exe -G "NMake Makefiles" .. -DVCPKG_TARGET_TRIPLET=${{ env.VCPKG_TARGET_TRIPLET }} -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DOPTION_BUILD_WINSTATIC=ON -DOPTION_USE_GLBINDING=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
         nmake
         if ("${{ matrix.config }}" -Match "Release") {
           strip -sv ./src/widelands.exe
-        } 
+        }
     - name: InnoSetup
       run: |
         cd $env:GITHUB_WORKSPACE
@@ -309,7 +315,7 @@ jobs:
         $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON
+        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
         cmake.exe --build .
         strip -sv ./src/widelands.exe
     - name: InnoSetup

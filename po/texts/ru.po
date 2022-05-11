@@ -11,6 +11,7 @@
 # Viktor S <awsswa59@gmail.com>, 2018-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015,2018
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
+# Владимир Шевцов, 2022
 # bcd998a534fa92d05529385de8735da7_84390ba <27ce5340b01d4cdb2226fa37a41159b9_403942>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2017-2019
@@ -19,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-27 15:18+0000\n"
-"Last-Translator: nskdmitry\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -879,6 +880,6 @@ msgstr "Не беспокойтесь, если игра вдруг полете
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Наши компьютерные игроки слишком скучные? Посетите наш сайт по адресу %s, чтобы познакомиться с другими игроками для игры онлайн."
+msgstr "Надоело играть против компьютера? Посети наш сайт %s и встреть живого оппонента для игры онлайн."

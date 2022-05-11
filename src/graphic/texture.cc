@@ -115,7 +115,7 @@ Texture::Texture(SDL_Surface* surface, bool intensity) : owns_texture_(false) {
 	// use freetype directly we might be able to avoid that.
 	uint8_t bpp = surface->format->BytesPerPixel;
 
-	if (surface->format->palette || width() != surface->w || height() != surface->h ||
+	if ((surface->format->palette != nullptr) || width() != surface->w || height() != surface->h ||
 	    (bpp != 3 && bpp != 4) || is_bgr_surface(*surface->format)) {
 		SDL_Surface* converted = empty_sdl_surface(width(), height());
 		assert(converted);
@@ -256,7 +256,7 @@ void Texture::set_pixel(uint16_t x, uint16_t y, const RGBAColor& color) {
 	*(reinterpret_cast<uint32_t*>(data)) = packed_color;
 }
 
-void Texture::setup_gl() {
+void Texture::setup_gl() const {
 	assert(blit_data_.texture_id != 0);
 	Gl::State::instance().bind_framebuffer(GlFramebuffer::instance().id(), blit_data_.texture_id);
 	glViewport(0, 0, width(), height());

@@ -49,7 +49,7 @@ void PlayersManager::remove_player(PlayerNumber plnum) {
 	assert(plnum <= kMaxPlayers);
 
 	Player*& p = players_[plnum - 1];
-	if (p) {
+	if (p != nullptr) {
 		delete p;
 		p = nullptr;
 		if (plnum <= UserSettings::highest_playernum()) {
@@ -68,7 +68,7 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 	assert(player_number <= kMaxPlayers);
 
 	Player*& p = players_[player_number - 1];
-	if (p) {
+	if (p != nullptr) {
 		delete p;
 		if (player_number <= UserSettings::highest_playernum()) {
 			number_of_players_--;
@@ -100,7 +100,7 @@ void PlayersManager::add_player_end_status(const PlayerEndStatus& status) {
 		return;
 	}
 
-	if (egbase_.get_igbase()) {
+	if (egbase_.get_igbase() != nullptr) {
 		egbase_.get_igbase()->show_game_summary();
 	}
 }

@@ -2,7 +2,7 @@ push_textdomain("scenario_fri03.wmf")
 
 dirname = "campaigns/fri03.wmf/" .. path.dirname (__file__)
 
-descriptions:new_warehouse_type {
+wl.Descriptions():new_warehouse_type {
    name = "empire_port_large",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Port"),
@@ -16,9 +16,9 @@ descriptions:new_warehouse_type {
       idle = {
          fps = 10,
          frames = 20,
-         rows = 5,
-         columns = 4,
-         hotspot = { 74, 96 }
+         columns = 10,
+         rows = 2,
+         hotspot = { 87, 116 }
       },
    },
 

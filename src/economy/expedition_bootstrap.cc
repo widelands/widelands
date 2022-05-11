@@ -58,7 +58,7 @@ void ExpeditionBootstrap::check_is_ready(Game& game) {
 
 // static
 void ExpeditionBootstrap::input_callback(
-   Game& game, InputQueue* queue, DescriptionIndex, Worker*, void* data) {
+   Game& game, InputQueue* queue, DescriptionIndex /* index */, Worker* /* worker */, void* data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->check_is_ready(game);
 	// If we ask for several additional items of the same type, it may happen that a
@@ -146,30 +146,28 @@ void ExpeditionBootstrap::demand_additional_item(Game& game,
 			wq = new WorkersQueue(*portdock_->get_warehouse(), di, 1);
 		}
 		wq->set_callback(input_callback, this);
-		queues_.push_back(std::make_pair(std::unique_ptr<InputQueue>(wq), true));
+		queues_.emplace_back(std::unique_ptr<InputQueue>(wq), true);
 		return check_is_ready(game);
-	} else {
-		// Remove the last matching additional queue
-		for (auto it = queues_.end(); it != queues_.begin();) {
-			--it;
-			if (it->second && it->first->get_type() == ww && it->first->get_index() == di) {
-				Warehouse* const warehouse = portdock_->get_warehouse();
-				if (it->first->get_type() == wwWARE) {
-					warehouse->insert_wares(it->first->get_index(), it->first->get_filled());
-				} else {
-					assert(it->first->get_type() == wwWORKER);
-					WorkersQueue* wq = dynamic_cast<WorkersQueue*>(it->first.get());
-					while (wq->get_filled() > 0) {
-						warehouse->incorporate_worker(game, wq->extract_worker());
-					}
+	}  // Remove the last matching additional queue
+	for (auto it = queues_.end(); it != queues_.begin();) {
+		--it;
+		if (it->second && it->first->get_type() == ww && it->first->get_index() == di) {
+			Warehouse* const warehouse = portdock_->get_warehouse();
+			if (it->first->get_type() == wwWARE) {
+				warehouse->insert_wares(it->first->get_index(), it->first->get_filled());
+			} else {
+				assert(it->first->get_type() == wwWORKER);
+				WorkersQueue* wq = dynamic_cast<WorkersQueue*>(it->first.get());
+				while (wq->get_filled() > 0) {
+					warehouse->incorporate_worker(game, wq->extract_worker());
 				}
-				it->first->cleanup();
-				queues_.erase(it);
-				return check_is_ready(game);
 			}
+			it->first->cleanup();
+			queues_.erase(it);
+			return check_is_ready(game);
 		}
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
@@ -244,7 +242,7 @@ void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
 		if (Economy* e = type == wwWARE ? ware_economy_ : worker_economy_) {
 			iq.first->remove_from_economy(*e);
 		}
-		if (new_economy) {
+		if (new_economy != nullptr) {
 			iq.first->add_to_economy(*new_economy);
 		}
 	}
@@ -317,7 +315,7 @@ void ExpeditionBootstrap::load(
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);
-				const bool removable = fr.unsigned_8();
+				const bool removable = fr.unsigned_8() != 0u;
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {
@@ -338,7 +336,7 @@ void ExpeditionBootstrap::load(
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
 			wq->read(fr, game, mol);
-			bool removable = packet_version >= 8 ? fr.unsigned_8() : false;
+			bool removable = (packet_version >= 8) && (fr.unsigned_8() != 0);
 			wq->set_callback(input_callback, this);
 
 			if (wq->get_index() == INVALID_INDEX) {
@@ -346,7 +344,7 @@ void ExpeditionBootstrap::load(
 			} else if (removable) {
 				additional_queues.push_back(wq);
 			} else {
-				queues_.push_back(std::make_pair(std::unique_ptr<InputQueue>(wq), false));
+				queues_.emplace_back(std::unique_ptr<InputQueue>(wq), false);
 			}
 		}
 		// Append worker queues to the end

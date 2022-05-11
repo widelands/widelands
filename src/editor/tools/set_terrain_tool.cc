@@ -32,7 +32,7 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 	uint16_t const radius = args->sel_radius;
 	int32_t max = 0;
 
-	if (get_nr_enabled() && args->terrain_type.empty()) {
+	if ((get_nr_enabled() != 0) && args->terrain_type.empty()) {
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
 		            TCoords<Widelands::FCoords>(
@@ -83,9 +83,8 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 			++i;
 		} while (mr.advance(*map));
 		return radius + max;
-	} else {
-		return radius;
 	}
+	return radius;
 }
 
 EditorActionArgs EditorSetTerrainTool::format_args_impl(EditorInteractive& parent) {

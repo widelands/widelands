@@ -84,8 +84,8 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		ok_.set_tooltip(_("Load this game"));
 	}
 
-	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
-	load_or_save_.table().double_clicked.connect([this](unsigned) { clicked_ok(); });
+	load_or_save_.table().selected.connect([this](unsigned /* value */) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned /* value */) { clicked_ok(); });
 
 	if (is_replay_) {
 		show_filenames_->changed.connect([this]() { toggle_filenames(); });

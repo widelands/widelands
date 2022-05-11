@@ -136,12 +136,12 @@ void LaunchMPG::win_condition_selected() {
  */
 void LaunchMPG::clicked_select_map() {
 	if (settings_.can_change_map()) {
-		new MapSelect(get_capsule(), this, &settings_, ctrl_, game_);
+		new MapSelect(get_capsule(), this, &settings_, ctrl_, std::make_shared<Widelands::Game>());
 	}
 }
 
 void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scenario) {
-	if (!map) {
+	if (map == nullptr) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		settings_.set_scenario(false);
 		return;
@@ -232,7 +232,7 @@ void LaunchMPG::clicked_ok() {
 }
 
 void LaunchMPG::think() {
-	if (ctrl_) {
+	if (ctrl_ != nullptr) {
 		ctrl_->think();
 	}
 	refresh();

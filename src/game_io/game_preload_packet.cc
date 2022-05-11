@@ -49,7 +49,7 @@ std::string GamePreloadPacket::get_localized_win_condition() const {
 	return _(result);
 }
 
-void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
+void GamePreloadPacket::read(FileSystem& fs, Game& /* game */, MapObjectLoader* const /* mol */) {
 	try {
 		Profile prof;
 		prof.read("preload", nullptr, fs);
@@ -107,7 +107,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 	}
 }
 
-void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
+void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /* mos */) {
 	Profile prof;
 	Section& s = prof.create_section("global");
 
@@ -120,13 +120,13 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	const Map& map = game.map();
 	s.set_string("mapname", map.get_name());  // Name of map
 
-	if (ipl) {
+	if (ipl != nullptr) {
 		// player that saved the game.
 		s.set_int("player_nr", ipl->player_number());
 	} else {
 		// Pretend that the first player saved the game
 		for (Widelands::PlayerNumber p = 1; p <= map.get_nrplayers(); ++p) {
-			if (game.get_player(p)) {
+			if (game.get_player(p) != nullptr) {
 				s.set_int("player_nr", p);
 				break;
 			}

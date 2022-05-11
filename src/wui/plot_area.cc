@@ -85,15 +85,14 @@ Units get_suggested_unit(uint32_t game_time, bool is_generic = false) {
 			return Units::kHourGeneric;
 		}
 		return Units::kMinutesGeneric;
-	} else {
-		if (game_time > 4 * kDays) {
-			return Units::kDayNarrow;
-		}
-		if (game_time > 4 * kHours) {
-			return Units::kHourNarrow;
-		}
-		return Units::kMinutesNarrow;
 	}
+	if (game_time > 4 * kDays) {
+		return Units::kDayNarrow;
+	}
+	if (game_time > 4 * kHours) {
+		return Units::kHourNarrow;
+	}
+	return Units::kMinutesNarrow;
 }
 
 std::string get_value_with_unit(Units unit, int value) {
@@ -196,7 +195,8 @@ void draw_diagram(uint32_t time_ms,
                   RenderTarget& dst) {
 	const RGBColor& axis_line_color = g_style_manager->statistics_plot_style().axis_line_color();
 
-	uint32_t how_many_ticks, max_x;
+	uint32_t how_many_ticks;
+	uint32_t max_x;
 
 	Units unit = get_suggested_unit(time_ms, true);
 	max_x = ms_to_unit(unit, time_ms);
@@ -356,7 +356,7 @@ std::vector<std::string> WuiPlotArea::get_labels() const {
 		Units unit = get_suggested_unit(time_in_ms[i], false);
 		labels.push_back(get_value_with_unit(unit, ms_to_unit(unit, time_in_ms[i])));
 	}
-	labels.push_back(_("game"));
+	labels.emplace_back(_("game"));
 	return labels;
 }
 
@@ -495,7 +495,7 @@ void WuiPlotArea::draw(RenderTarget& dst) {
 		update();
 		needs_update_ = false;
 	}
-	if (highest_scale_) {
+	if (highest_scale_ != 0u) {
 		draw_plot(dst, get_inner_h() - kSpaceBottom, std::to_string(highest_scale_), highest_scale_);
 	}
 	// Print the 0

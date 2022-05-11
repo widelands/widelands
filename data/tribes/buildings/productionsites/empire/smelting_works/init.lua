@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "empire_smelting_works",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Smelting Works"),
@@ -20,25 +20,25 @@ descriptions:new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
-      idle = {
-         hotspot = { 39, 53 },
-      },
-   },
-
    spritesheets = {
+      idle = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 48, 60 },
+      },
       build = {
          frames = 4,
-         rows = 2,
-         columns = 2,
-         hotspot = { 39, 53 }
+         columns = 4,
+         rows = 1,
+         hotspot = { 48, 60 },
       },
       working = {
          fps = 5,
          frames = 20,
-         rows = 5,
-         columns = 4,
-         hotspot = { 39, 53 }
+         columns = 10,
+         rows = 2,
+         hotspot = { 48, 60 },
       },
    },
 

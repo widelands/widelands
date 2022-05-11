@@ -2,7 +2,7 @@ dirname = "campaigns/fri02.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_fri02.wmf")
 
-descriptions:new_warehouse_type {
+wl.Descriptions():new_warehouse_type {
    name = "frisians_warehouse_empire",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Empire Warehouse"),
@@ -12,7 +12,7 @@ descriptions:new_warehouse_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 58, 55 },
+         hotspot = { 58, 58 },
       },
    },
 

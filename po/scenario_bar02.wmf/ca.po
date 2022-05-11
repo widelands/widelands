@@ -3,15 +3,15 @@
 # 
 # Translators:
 # Juanjo, 2015
-# Juanjo, 2015-2019
+# Juanjo, 2015-2019,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"PO-Revision-Date: 2015-02-03 14:36+0000\n"
+"Last-Translator: Juanjo, 2015-2019,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -362,7 +362,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr "He enviat homes a reunir-se amb en Kalitath a la seva fortalesa. Ha fet una barricada a l'antiga entrada principal de la ciutat i prova de muntar un setge al voltant de l'Al'thunran. No deixarà que entri ni surti ningú de la ciutat mentre duri el setge. Fins ara, no ha contestat els meus missatges. Però el temps que ha passat esperant resposta no ha estat en va. Entrenaré més els soldats i em prepararé per a la batalla."
+msgstr "He enviat homes a reunir-se amb en Kalitath a la seva fortalesa. Ha fet una barricada a l'antiga entrada principal de la ciutat i prova de muntar un setge al voltant de l'Al'thunran. No deixarà que entri ni surti ningú de la ciutat mentre duri el setge. Fins ara, no ha respost els meus missatges. Però el temps que ha passat esperant resposta no ha estat en va. Entrenaré més els soldats i em prepararé per a la batalla."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 msgid "Your Loyal Companion"

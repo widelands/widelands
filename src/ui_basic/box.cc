@@ -36,8 +36,8 @@ Box::Box(Panel* const parent,
          uint32_t const inner_spacing)
    : Panel(parent, s, x, y, 0, 0),
 
-     max_x_(max_x ? max_x : g_gr->get_xres()),
-     max_y_(max_y ? max_y : g_gr->get_yres()),
+     max_x_(max_x != 0 ? max_x : g_gr->get_xres()),
+     max_y_(max_y != 0 ? max_y : g_gr->get_yres()),
 
      scrolling_(false),
      force_scrolling_(false),
@@ -116,7 +116,8 @@ void Box::update_desired_size() {
 	int spacing = -1 * inner_spacing_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth = 0, breadth = 0;
+		int depth = 0;
+		int breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
@@ -177,7 +178,8 @@ void Box::layout() {
 	int spacing = -1 * inner_spacing_;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, unused = 0;
+		int depth;
+		int unused = 0;
 		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
 		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
@@ -201,7 +203,10 @@ void Box::layout() {
 	}
 
 	if (needscrollbar) {
-		int32_t sb_x, sb_y, sb_w, sb_h;
+		int32_t sb_x;
+		int32_t sb_y;
+		int32_t sb_w;
+		int32_t sb_h;
 		int32_t pagesize;
 		if (orientation_ == Horizontal) {
 			sb_x = 0;
@@ -270,7 +275,8 @@ void Box::update_positions() {
 	}
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth = 0;
+		int depth;
+		int breadth = 0;
 		get_item_size(idx, &depth, &breadth);
 
 		if (items_[idx].type == Item::ItemPanel) {
@@ -290,7 +296,7 @@ void Box::update_positions() {
 /**
  * Callback for scrollbar movement.
  */
-void Box::scrollbar_moved(int32_t) {
+void Box::scrollbar_moved(int32_t /* movement */) {
 	update_positions();
 }
 
@@ -434,7 +440,8 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 
 	switch (it.type) {
 	case Item::ItemPanel: {
-		int32_t breadth, maxbreadth = 0;
+		int32_t breadth;
+		int32_t maxbreadth = 0;
 
 		if (orientation_ == Horizontal) {
 			breadth = it.u.panel.panel->get_inner_h();

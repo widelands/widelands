@@ -141,7 +141,7 @@ UI::Dropdown<Widelands::PlayerNumber>* SuggestedTeamsEntry::create_dropdown(size
 		if (dd_index >= team_.size()) {
 			assert(dd_index == team_.size());
 			team_.push_back(Widelands::SuggestedTeam());
-			buttons_.push_back({});
+			buttons_.emplace_back();
 		}
 		team_[dd_index].push_back(player);
 		buttons_[dd_index].push_back(create_button(player));
@@ -515,7 +515,7 @@ void MainMenuMapOptions::update() {
 		tag.second->set_state(tags.count(tag.first) > 0);
 	}
 
-	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
+	balancing_dropdown_.select(tags.count("balanced") != 0u ? "balanced" : "unbalanced");
 
 	theme_dropdown_.select(map.get_background_theme());
 	if (!theme_dropdown_.has_selection()) {

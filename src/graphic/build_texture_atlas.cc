@@ -54,7 +54,7 @@ void find_images(const std::string& directory,
 			find_images(filename, images, ordered_images);
 			continue;
 		}
-		if (is_image(filename) && !images->count(filename)) {
+		if (is_image(filename) && (images->count(filename) == 0u)) {
 			images->insert(filename);
 			ordered_images->push_back(filename);
 		}
@@ -81,7 +81,7 @@ pack_images(const std::vector<std::string>& filenames,
 	for (const auto& filename : filenames) {
 		std::unique_ptr<Texture> image;
 		if (should_be_packed(filename, &image)) {
-			to_be_packed.push_back(std::make_pair(filename, std::move(image)));
+			to_be_packed.emplace_back(filename, std::move(image));
 		}
 	}
 

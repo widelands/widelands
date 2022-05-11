@@ -82,7 +82,7 @@ void InputQueue::request_callback(Game& game,
 
 	iq.entered(index, worker);
 
-	if (iq.callback_fn_) {
+	if (iq.callback_fn_ != nullptr) {
 		(*iq.callback_fn_)(game, &iq, index, worker, iq.callback_data_);
 	}
 }
@@ -148,7 +148,7 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
 			consume_interval_ = Duration(fr);
-			if (fr.unsigned_8()) {
+			if (fr.unsigned_8() != 0u) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
 				request_->read(fr, game, mol);
 			} else {
@@ -160,7 +160,7 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		if (owner_.get_economy(type_)) {
+		if (owner_.get_economy(type_) != nullptr) {
 			add_to_economy(*owner_.get_economy(type_));
 		}
 	} catch (const GameDataError& e) {

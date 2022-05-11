@@ -351,9 +351,12 @@ void WordWrap::draw(RenderTarget& dst,
 		return;
 	}
 
-	uint32_t caretline, caretpos;
-	uint32_t selection_start_line, selection_start_x;
-	uint32_t selection_end_line, selection_end_x;
+	uint32_t caretline;
+	uint32_t caretpos;
+	uint32_t selection_start_line;
+	uint32_t selection_start_x;
+	uint32_t selection_end_line;
+	uint32_t selection_end_x;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
 	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);

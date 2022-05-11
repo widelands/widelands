@@ -2,7 +2,7 @@ dirname = "campaigns/emp04.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_emp04.wmf")
 
-descriptions:new_trainingsite_type {
+wl.Descriptions():new_trainingsite_type {
    name = "empire_trainingcamp1",
    descname = pgettext("empire_building", "Training Camp"),
    icon = dirname .. "menu.png",
@@ -28,7 +28,7 @@ descriptions:new_trainingsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 82, 105 }
+         hotspot = { 87, 113 }
       }
    },
 

@@ -203,7 +203,7 @@ void Slider::draw_cursor(
 /**
  * \brief Send an event when the slider is moved by used.
  */
-void Slider::send_value_changed() {
+void Slider::send_value_changed() const {
 	changed();
 	changedto(value_);
 }
@@ -312,7 +312,7 @@ void Slider::handle_mousein(bool inside) {
  *
  * Update pressed status.
  */
-bool Slider::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
+bool Slider::handle_mouserelease(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn != SDL_BUTTON_LEFT) {
 		return false;
 	}
@@ -473,7 +473,7 @@ void HorizontalSlider::draw(RenderTarget& dst) {
  * \param y The new Y position of mouse pointer.
  */
 bool HorizontalSlider::handle_mousemove(
-   uint8_t, int32_t const x, int32_t const y, int32_t, int32_t) {
+   uint8_t /*state*/, int32_t const x, int32_t const y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	cursor_moved(x, x, y);
 	return true;
 }
@@ -541,7 +541,8 @@ void VerticalSlider::draw(RenderTarget& dst) {
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
  */
-bool VerticalSlider::handle_mousemove(uint8_t, int32_t const x, int32_t const y, int32_t, int32_t) {
+bool VerticalSlider::handle_mousemove(
+   uint8_t /*state*/, int32_t const x, int32_t const y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	cursor_moved(y, x, y);
 	return true;
 }

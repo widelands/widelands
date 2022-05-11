@@ -101,7 +101,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  const Widelands::Player& player,
                                  RenderTarget* dst) {
 	MutexLock m(MutexLock::ID::kObjects);
-	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 	     bob = bob->get_next_bob()) {
 		bob->draw(egbase, filter_info_to_draw(info_to_draw, bob, player), field.rendertarget_pixel,
 		          field.fcoords, scale, dst);
@@ -122,12 +122,12 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		// this is a building therefore we either draw unoccupied or idle animation
 		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
 			player_field.constructionsite->draw(field.rendertarget_pixel, field.fcoords, scale,
-			                                    (info_to_draw & InfoToDraw::kShowBuildings),
+			                                    (info_to_draw & InfoToDraw::kShowBuildings) != 0,
 			                                    field.owner->get_playercolor(), dst);
 		} else {
 			const RGBColor* player_color;
 			float opacity;
-			if (info_to_draw & InfoToDraw::kShowBuildings) {
+			if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 				player_color = &field.owner->get_playercolor();
 				opacity = 1.0f;
 			} else {
@@ -137,7 +137,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
 			    // TODO(Nordfriese): `building` can only be nullptr in savegame
 			    // compatibility cases – remove that check after v1.0
-			    player_field.dismantlesite.building) {
+			    (player_field.dismantlesite.building != nullptr)) {
 				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
 				                    player_field.dismantlesite.building->get_unoccupied_animation(),
 				                    Time(0), player_color, opacity,
@@ -180,8 +180,10 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
-                     UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
+                     UI::ButtonStyle::kWuiPrimary,
+                     [this](StatisticsMenuEntry t) { statistics_menu_selected(t); }),
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
+     portspace_hint_pic_(g_image_cache->get("images/wui/overlays/port_hint.png"))
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
      training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr)
@@ -242,7 +244,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 #endif
 
 	map_options_subscriber_ = Notifications::subscribe<NoteMapOptions>(
-	   [this](const NoteMapOptions&) { rebuild_statistics_menu(); });
+	   [this](const NoteMapOptions& /* note */) { rebuild_statistics_menu(); });
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
 		   if (note.ship->owner().player_number() == player_number() &&
@@ -363,7 +365,6 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	   showhidemenu_.has_selection() ? showhidemenu_.get_selected() : ShowHideEntry::kBuildingSpaces;
 
 	InteractiveGameBase::rebuild_showhide_menu();
-
 	showhidemenu_.add(
 	   get_display_flag(dfShowWorkareaOverlap) ?
           /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether workarea overlaps
@@ -467,7 +468,7 @@ void InteractivePlayer::think() {
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
 		Widelands::Ship* ship = it->first.get(egbase());
-		if (!ship ||
+		if ((ship == nullptr) ||
 		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			expedition_port_spaces_.erase(it);
 			// If another port space also needs removing, we'll take care of it in the next frame
@@ -558,7 +559,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		const bool suited_as_starting_pos =
 		   picking_starting_pos && plr.get_starting_position_suitability(f->fcoords);
 		if (suited_as_starting_pos) {
-			for (unsigned p = map.get_nrplayers(); p; --p) {
+			for (unsigned p = map.get_nrplayers(); p != 0u; --p) {
 				if (map.get_starting_pos(p) == f->fcoords) {
 					const Image* player_image =
 					   playercolor_image(p - 1, "images/players/player_position.png");
@@ -582,20 +583,21 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
 				Widelands::NodeCaps caps;
+				Widelands::NodeCaps maxcaps = f->fcoords.field->maxcaps();
 				float opacity =
 				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
 					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
                                                               Widelands::CAPS_NONE;
 				} else if (show_port_space) {
-					caps = f->fcoords.field->maxcaps();
+					caps = maxcaps;
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
-					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
+					if ((caps & Widelands::BUILDCAPS_SIZEMASK) == 0) {
 						for (const Widelands::BuildingDescr* b :
 						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
-								caps = f->fcoords.field->maxcaps();
+								caps = maxcaps;
 								opacity *= 2 * kBuildhelpOpacity;
 								break;
 							}
@@ -603,8 +605,30 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 
-				if (const auto* overlay = get_buildhelp_overlay(caps)) {
+				const auto* overlay = get_buildhelp_overlay(caps);
+				if (overlay != nullptr) {
 					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
+				}
+
+				// Draw port space hint if a port could be built here, but current situation doesn't
+				// allow it.
+				bool has_road =
+				   (player_field.r_e != 0u) || (player_field.r_sw != 0u) || (player_field.r_se != 0u);
+				bool has_object = (f->fcoords.field->get_immovable() != nullptr);
+				if (((maxcaps & Widelands::BUILDCAPS_PORT) != 0) &&
+				    ((caps & Widelands::BUILDCAPS_PORT) == 0) &&
+				    f->fcoords.field->is_interior(plr.player_number()) && !has_road && !has_object) {
+					const Image* pic = portspace_hint_pic_;
+					if (overlay != nullptr && ((caps & Widelands::BUILDCAPS_BUILDINGMASK) != 0)) {
+						blit_field_overlay(dst, *f, pic, Vector2i(0, 0), scale, opacity);
+					} else if (overlay != nullptr && ((caps & Widelands::BUILDCAPS_FLAG) != 0)) {
+						blit_field_overlay(dst, *f, pic,
+						                   Vector2i(5, overlay->hotspot.y - pic->height() / 2), scale,
+						                   opacity);
+					} else {
+						blit_field_overlay(
+						   dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, opacity);
+					}
 				}
 			}
 
@@ -640,7 +664,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
-                                      const Widelands::Message& message) {
+                                      const Widelands::Message& message) const {
 	// Fix a race condition that happens only in the testsuite
 	MutexLock m(MutexLock::ID::kObjects);
 
@@ -696,7 +720,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 				return;
 			}
 		}
-		if (show_attack_window(node_and_triangle.node, true)) {
+		if (show_attack_window(node_and_triangle.node, true) != nullptr) {
 			return;
 		}
 
@@ -852,7 +876,7 @@ void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	}
 
 	int const n = stoi(args[1]);
-	if (n < 1 || n > kMaxPlayers || !game().get_player(n)) {
+	if (n < 1 || n > kMaxPlayers || (game().get_player(n) == nullptr)) {
 		DebugConsole::write(format("Player #%d does not exist.", n));
 		return;
 	}

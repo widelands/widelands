@@ -71,8 +71,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                        w,
                     // Height only to fit the button, so we can use this in Box layout.
                     base_height(button_dimension, style)),
-     ignore_space_(false),
-     was_open_already_(false),
      id_(next_id_++),
      max_list_items_(max_list_items),
      max_list_height_(std::numeric_limits<uint32_t>::max()),
@@ -123,12 +121,12 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		}
 	});
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
+	   [this](const GraphicResolutionChanged& /* note */) { layout(); });
 
 	assert(max_list_items_ > 0);
 	// Hook into highest parent that we can get so that we can drop down outside the panel.
 	UI::Panel* list_parent = &display_button_;
-	while (list_parent->get_parent()) {
+	while (list_parent->get_parent() != nullptr) {
 		list_parent = list_parent->get_parent();
 	}
 	list_ =
@@ -156,7 +154,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		clear_filter();
 	});
 
-	if (push_button_) {
+	if (push_button_ != nullptr) {
 		push_button_->set_can_focus(false);
 	}
 	display_button_.set_can_focus(false);
@@ -181,7 +179,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 BaseDropdown::~BaseDropdown() {
 	// The list needs to be able to drop outside of windows, so it won't close with the window.
 	// So, we tell it to die.
-	if (list_) {
+	if (list_ != nullptr) {
 		list_->set_linked_dropdown(nullptr);
 		list_->die();
 	}
@@ -216,7 +214,7 @@ std::vector<Recti> BaseDropdown::focus_overlay_rects() {
  * descendant of the modal panel).
  */
 UI::Panel* BaseDropdown::get_open_dropdown() {
-	return list_ && list_->is_visible() ? list_ : nullptr;
+	return (list_ != nullptr) && list_->is_visible() ? list_ : nullptr;
 }
 
 void BaseDropdown::layout() {
@@ -232,7 +230,7 @@ void BaseDropdown::layout() {
 	UI::Panel* parent = &display_button_;
 	int new_list_x = display_button_.get_x();
 	int new_list_y = display_button_.get_y();
-	while (parent->get_parent()) {
+	while (parent->get_parent() != nullptr) {
 		parent = parent->get_parent();
 		new_list_x += parent->get_x() + parent->get_lborder();
 		new_list_y += parent->get_y() + parent->get_tborder();
@@ -352,7 +350,7 @@ void BaseDropdown::set_image(const Image* image) {
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
-	if (push_button_) {
+	if (push_button_ != nullptr) {
 		push_button_->set_tooltip(push_button_->enabled() ? tooltip_ : "");
 	}
 }
@@ -461,10 +459,10 @@ void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {
 	}
 	list_->set_visible(open);
 	if (list_->is_visible()) {
-		was_open_already_ = true;
 		enable_textinput();
 		list_->move_to_top();
 		focus();
+
 		Notifications::publish(NoteDropdown(id_));
 		if (move_mouse) {
 			set_mouse_pos(Vector2i(display_button_.get_x() + (display_button_.get_w() * 3 / 5),
@@ -529,7 +527,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 			break;
 		case SDLK_SPACE:
 			if (!is_expanded()) {
-				ignore_space_ = was_open_already_;
 				set_list_visibility(true);
 				return true;
 			}
@@ -554,6 +551,7 @@ bool BaseDropdown::is_filtered() {
 }
 void BaseDropdown::disable_textinput() {
 	set_handle_textinput(false);
+	disable_sdl_textinput();
 }
 
 void BaseDropdown::enable_textinput() {

@@ -111,7 +111,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 				}
 			}
 
-			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
+			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob != nullptr;
 			     bob = bob->get_next_bob()) {
 				bob->draw(the_game, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
 			}
@@ -152,7 +152,7 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
-bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords& /*coords*/) const {
 	return true;
 }
 
@@ -164,10 +164,10 @@ void InteractiveSpectator::exit_btn() {
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
 
-bool InteractiveSpectator::can_see(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_see(Widelands::PlayerNumber /* p */) const {
 	return true;
 }
-bool InteractiveSpectator::can_act(Widelands::PlayerNumber) const {
+bool InteractiveSpectator::can_act(Widelands::PlayerNumber /* p */) const {
 	return false;
 }
 Widelands::PlayerNumber InteractiveSpectator::player_number() const {
@@ -180,7 +180,7 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
 	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
-	if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
+	if ((mo != nullptr) && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}

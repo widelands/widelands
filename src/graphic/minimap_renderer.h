@@ -38,6 +38,7 @@ enum class MiniMapLayer {
 	Zoom2 = 32,
 	ViewWindow = 64,
 	StartingPositions = 128,
+	Ship = 256,
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.
@@ -77,7 +78,7 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Widelands::Player* player,
                                       const Rectf& view_area,
-                                      const MiniMapType& map_draw_type,
+                                      const MiniMapType& minimap_type,
                                       MiniMapLayer layers);
 
 // Create an empty minimap texture.
@@ -103,7 +104,7 @@ void draw_minimap_static(Texture& texture,
 std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
                                             const Widelands::EditorGameBase& egbase,
                                             const Rectf& view_area,
-                                            const MiniMapType& map_draw_type,
+                                            const MiniMapType& minimap_type,
                                             MiniMapLayer layers);
 
 // Find an even multiplier to fit the map into 300px

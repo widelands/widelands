@@ -42,7 +42,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 			UI::Box* hbox3 = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			for (unsigned attack = 0; attack <= max_attack_; ++attack) {
 				for (unsigned evade = 0; evade <= max_evade_; ++evade) {
-					if (attack || evade) {
+					if ((attack != 0u) || (evade != 0u)) {
 						hbox1->add_space(8);
 						hbox2->add_space(8);
 						hbox3->add_space(8);
@@ -84,7 +84,7 @@ SoldierStatisticsPanel::SoldierStatisticsPanel(UI::Panel& parent,
 					icon4->set_handle_mouse(true);
 				}
 			}
-			if (health || defense) {
+			if ((health != 0u) || (defense != 0u)) {
 				add_space(8);
 			}
 			add(hbox1, UI::Box::Resizing::kFullSize);
@@ -108,7 +108,7 @@ void SoldierStatisticsPanel::update() {
 			for (unsigned a = 0; a <= max_attack_; ++a) {
 				for (unsigned e = 0; e <= max_evade_; ++e) {
 					const uint32_t nr = counting_function_(h, a, d, e);
-					labels_all_[index]->set_text(nr ? get_amount_string(nr, true) : "");
+					labels_all_[index]->set_text(nr != 0u ? get_amount_string(nr, true) : "");
 					labels_all_[index]->set_tooltip(std::to_string(nr));
 					for (uint8_t i = 0; i < 4; ++i) {
 						icons_all_[index * 4 + i]->set_grey_out(nr == 0);
@@ -270,15 +270,15 @@ UI::Window& SoldierStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			SoldierStatisticsMenu& m = dynamic_cast<SoldierStatisticsMenu&>(*r.window);
 			m.tabs_.activate(fr.unsigned_8());
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Soldiers Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Soldiers Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("soldiers statistics menu: %s", e.what());
 	}
 }
-void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void SoldierStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(tabs_.active());
 }

@@ -6,6 +6,7 @@
 # Elisabeth Jäger, 2016,2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Klaus Halfmann <klaus.halfmann@arcor.de>, 2022
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
@@ -16,8 +17,8 @@ msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-03-20 21:19+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"PO-Revision-Date: 2015-02-03 14:55+0000\n"
+"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +90,7 @@ msgstr "Dein Team hat ein Artefakt von einem Feind gestohlen."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:97
 msgid "You stole an artifact from an enemy."
-msgstr "Du hast ein Artefakt von einem Feind gestohlen."
+msgstr "Du hast ein Artefakt des Feindes gestohlen."
 
 #: ../../data/scripting/win_conditions/artifacts.lua:180
 msgid "Overview:"
@@ -122,7 +123,7 @@ msgstr "Sammler"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Du erhältst Punkte für alle wertvollen Waren, die in deinen Lagerhäusern eingelagert sind. Der Spieler, der nach vier Stunden die höchste Punktzahl erreicht hat, gewinnt das Spiel."
+msgstr "Du erhältst Punkte für alle wertvollen Waren, die in deinen Lagerhäusern eingelagert sind. Der Spieler, der nach 4 Stunden die höchste Punktzahl erreicht hat, gewinnt das Spiel."
 
 #: ../../data/scripting/win_conditions/collectors.lua:26
 msgid "Points"
@@ -165,7 +166,7 @@ msgstr "Alleinherrscher"
 msgid ""
 "The tribe or team that can defeat all others wins the game! This means the "
 "opponents do not have any headquarters, ports or warehouses left."
-msgstr "Der Stamm oder das Team, das alle anderen besiegt, gewinnt das Spiel! Das bedeutet, dass die Gegner kein Hauptquartier, keinen Hafen und kein Lagerhaus mehr übrig haben."
+msgstr "Der Stamm oder das Team, das alle anderen besiegt, gewinnt das Spiel! Das bedeutet, dass die Gegner kein Hauptquartier, keine Häfen und keine Lagerhäuser mehr übrig haben."
 
 #: ../../data/scripting/win_conditions/endless_game.lua:14
 msgid "Endless Game"
@@ -249,7 +250,7 @@ msgstr "Jeder Spieler bzw. jedes Team versucht, mehr als die Hälfte der Kartenf
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
-msgstr "Momentan besitzt keine Fraktion mehr als die Hälfte der Kartenfläche."
+msgstr "Momentan besetzt keine Fraktion mehr als die Hälfte der Karte."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"

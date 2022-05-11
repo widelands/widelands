@@ -192,7 +192,7 @@ void Table<void*>::clear() {
 	}
 	entry_records_.clear();
 
-	if (scrollbar_) {
+	if (scrollbar_ != nullptr) {
 		scrollbar_->set_steps(1);
 	}
 	scrollpos_ = 0;
@@ -214,7 +214,8 @@ void Table<void*>::fit_height(uint32_t entries) {
 	if (entries == 0) {
 		entries = size();
 	}
-	int tablewidth, tableheight = 0;
+	int tablewidth;
+	int tableheight = 0;
 	get_desired_size(&tablewidth, &tableheight);
 	tableheight = headerheight_ + 2 + get_lineheight() * entries;
 	set_desired_size(tablewidth, tableheight);
@@ -264,7 +265,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 
-		if (idx == selection_ || multiselect_.count(idx)) {
+		if (idx == selection_ || (multiselect_.count(idx) != 0u)) {
 			assert(2 <= get_eff_w());
 			dst.brighten_rect(Recti(1, y, get_eff_w() - 2, lineheight_), -ms_darken_value);
 		}
@@ -488,7 +489,7 @@ bool Table<void*>::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y) {
+bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t /*x*/, int32_t const y) {
 	if (get_can_focus()) {
 		focus();
 	}
@@ -511,7 +512,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
 		}
 
 		// Check if doubleclicked
-		if (!(SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) &&
+		if (((SDL_GetModState() & (KMOD_CTRL | KMOD_SHIFT)) == 0) &&
 		    time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
 		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
@@ -572,7 +573,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
-		if (SDL_GetModState() & KMOD_SHIFT) {
+		if ((SDL_GetModState() & KMOD_SHIFT) != 0) {
 			multiselect_.clear();
 			if (has_selection()) {
 				const uint32_t last_selected = selection_index();
@@ -588,7 +589,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 			}
 		} else {
 			// Single selection without Ctrl
-			if (!(SDL_GetModState() & KMOD_CTRL)) {
+			if ((SDL_GetModState() & KMOD_CTRL) == 0) {
 				multiselect_.clear();
 			}
 			select(toggle_entry(row));
@@ -601,7 +602,7 @@ void Table<void*>::multiselect(uint32_t row, bool force) {
 
 // Scroll to the given item. Out of range items will be corrected automatically.
 void Table<void*>::scroll_to_item(int32_t item) {
-	if (scrollbar_) {
+	if (scrollbar_ != nullptr) {
 		// Correct out of range items
 		if (item < 0) {
 			item = 0;
@@ -625,17 +626,16 @@ void Table<void*>::scroll_to_item(int32_t item) {
  */
 uint32_t Table<void*>::toggle_entry(uint32_t row) {
 	assert(is_multiselect_);
-	if (multiselect_.count(row)) {
+	if (multiselect_.count(row) != 0u) {
 		multiselect_.erase(row);
 		// Find last selection
 		if (multiselect_.empty()) {
 			return no_selection_index();
 		}
 		return *multiselect_.lower_bound(0);
-	} else {
-		multiselect_.insert(row);
-		return row;
 	}
+	multiselect_.insert(row);
+	return row;
 }
 
 /**
@@ -735,19 +735,17 @@ size_t Table<void*>::find_resizable_column_idx() {
 
 	if (flexible_column_idx_ < columns_.size()) {
 		return flexible_column_idx_;
-	} else {
-		// Use the widest column
-		size_t widest_column_idx = 0;
-		uint32_t widest_width = columns_[0].width;
-		for (size_t i = 1; i < columns_.size(); ++i) {
-			const uint32_t width = columns_[i].width;
-			if (width > widest_width) {
-				widest_width = width;
-				widest_column_idx = i;
-			}
+	}  // Use the widest column
+	size_t widest_column_idx = 0;
+	uint32_t widest_width = columns_[0].width;
+	for (size_t i = 1; i < columns_.size(); ++i) {
+		const uint32_t width = columns_[i].width;
+		if (width > widest_width) {
+			widest_width = width;
+			widest_column_idx = i;
 		}
-		return widest_column_idx;
 	}
+	return widest_column_idx;
 }
 
 int Table<void*>::total_columns_width() {
@@ -839,12 +837,13 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	}
 }
 
-bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
+bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) const {
 	const EntryRecord& ea = get_record(a);
 	const EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
-bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {
+bool Table<void*>::handle_mousemove(
+   uint8_t /*state*/, int32_t /*x*/, int32_t /*y*/, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	// needed to activate tooltip rendering without providing tooltiptext to parent (panel) class
 	return true;
 }

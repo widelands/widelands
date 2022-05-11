@@ -2,8 +2,10 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
+# heidi.wenger, 2022
 # Jukka Pakarinen, 2016-2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor.transifex@sahtor.net>, 2015
@@ -12,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
-"PO-Revision-Date: 2021-10-07 04:31+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"PO-Revision-Date: 2015-02-03 14:50+0000\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -204,7 +206,7 @@ msgstr "Kääntäjät"
 
 #: ../../data/txts/developers.lua:3
 msgid "Add-Ons"
-msgstr ""
+msgstr "Lisäosat"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
@@ -328,7 +330,7 @@ msgstr "ZetaOS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you’ve done)"
-msgstr ""
+msgstr "ja monia, monia muita lisää (kiitokset kaikesta mitä olet tehnyt)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
@@ -426,7 +428,7 @@ msgstr "Pienkartta päälle/pois"
 #: ../../data/txts/help/common_helptexts.lua:84
 #: ../../data/txts/help/common_helptexts.lua:93
 msgid "%1% / %2%"
-msgstr ""
+msgstr "%1% / %2%"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -517,66 +519,66 @@ msgstr "Oikealla sivustalla on tiedot valitusta kartasta tai pelitallenteesta. K
 msgid ""
 "Amazons love trees. Build enough jungle preserver’s huts to have enough of "
 "them."
-msgstr ""
+msgstr "Amatsoonit rakastavat puita. Rakenna tarpeeksi viidakonsuojelijoiden majoja jotta niitä tulee olemaan tarpeeksi."
 
 #: ../../data/txts/tips/amazons.lua:8
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Harvinaismetsät ovat amatsonitalouden selkäranka. Rakenna harvinaisia puuistutuksia istuttaaksesi erikoispuita näihin metsiin."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
 "Rare trees are cut by experienced woodcutters in woodcutter’s huts enhanced "
 "to rare tree cutter’s huts. But they stop cutting normal trees. Plan their "
 "locations in advance."
-msgstr ""
+msgstr "Harvinaisten puiden kaatamisesta vastaavat kokeneet metsurit metsureiden majoissa jotka hioontuvat harvinaispuumetsureiden majoiksi. Täten he lakkaavat kaatamasta tavallisia puita. Suunnittele heidän sijaintinsa etukäteen."
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr ""
+msgstr "Ruoka kuivatetaan hiilitulilla. Varmista näiden vakaa jatkuva toimitus."
 
 #: ../../data/txts/tips/amazons.lua:20
 msgid ""
 "Liana cutters harvest lianas from nearby trees, but trees are not harmed in "
 "this process."
-msgstr ""
+msgstr "Lianakaatajat korjaavat lianasatoa lähellä olevista puista, mutta puita ei vahingoiteta tässä toimituksessa."
 
 #: ../../data/txts/tips/amazons.lua:24
 msgid ""
 "Water is life for the Amazons. Water gatherers perform an important service "
 "to their tribe."
-msgstr ""
+msgstr "Amatsoonien elämänvesi. Vedenkerääjät suorittavat tärkeää palvelusta heimolleen."
 
 #: ../../data/txts/tips/amazons.lua:28
 msgid ""
 "Panning for gold requires a steady stream of water, better sourced as close "
 "as possible for efficiency and freshness."
-msgstr ""
+msgstr "Kullan vaskaus vaatii vakaan vesivirran, täten parhaimmillaan tehokkuuden ja tuoreuden suhteen. "
 
 #: ../../data/txts/tips/amazons.lua:32
 msgid ""
 "Wilderness keepers ensure fresh game for hunting and fish for fishing. Game "
 "is only released near trees uninhabited by sentries."
-msgstr ""
+msgstr "Eränkävijät varmistavat ja turvaavat tuoreen riistan metsästykseen ja kalaa kalastukseen. Avut vapautetaan ainoastaan lähellä puita ja ilman vartijoiden asutusta. "
 
 #: ../../data/txts/tips/amazons.lua:36
 msgid ""
 "Rare wood stock levels are monitored by rare tree plantations, and jungle "
 "masters will plant according to economic requirements."
-msgstr ""
+msgstr "Harvinaispuiden määrää valvotaan harvinaispuiden istuttamoissa, ja viidakkomestarit istuttavat aina taloudellisten vaatimusten mukaisesti."
 
 #: ../../data/txts/tips/amazons.lua:40
 msgid ""
 "Ropes are essential for ensuring sound buildings, sewing sturdy clothing, "
 "and lashing canoes together to form ships."
-msgstr ""
+msgstr "Köydet ovat elintärkeitä turvaamaan kelvollisia rakennuksia, kestävien asusteiden neulontaa ja kanoottien sitomista laivojen muodostamiseen."
 
 #: ../../data/txts/tips/amazons.lua:43
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr ""
+msgstr "Viidakkomestarit oppivat taitonsa työskennellessään viidakonsuojelijoina ennen työskentelyään puutarhakeskuksissa tai harvinaispuuistutuksilla."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -653,13 +655,13 @@ msgstr "Saat toisen vaihtoehtoisen työkalun käyttöösi pitämällä ALT-näpp
 msgid ""
 "The keys %1% allow you to directly set the size of the selected area around "
 "your mouse cursor."
-msgstr ""
+msgstr "Avaimet %1% mahdollistavat suoran aluekoon määrittämisen ja asettamisen jonka valitset hiiren osoittimella."
 
 #: ../../data/txts/tips/editor.lua:32
 msgid ""
 "%1% behaves like in normal games: It switches if building spaces are shown "
 "on or off."
-msgstr ""
+msgstr "%1% käyttäytyy kuten yleensäkin perinteisissä peleissä: se vaihtaa tilan näytetäänkö rakennustiloja vaiko ei."
 
 #: ../../data/txts/tips/editor.lua:36
 msgid ""
@@ -746,7 +748,7 @@ msgid ""
 "Use the priority sliders in building windows to adjust delivery of a "
 "specific ware. Holding down Shift while clicking will adjust all wares at "
 "once."
-msgstr ""
+msgstr "Käytä ensisijaisuusliukuria rakennusten ikkunoissa säätääksesi tietyn tarvikkeen toimitusta. Shift-näppäimen alhaallapito samalla kun napsautat hiirellä säätää kaikkia tarvikkeita kerralla."
 
 #: ../../data/txts/tips/general_game.lua:36
 msgid ""
@@ -758,7 +760,7 @@ msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muuta talouden asetuksi
 msgid ""
 "Manage your messages more efficiently: press ‘%1%’ to access the messages "
 "window, then use ‘%2%’ for Go To, and the ‘%3%’ key to archive messages."
-msgstr ""
+msgstr "Hallitse viestejäsi tehokkaammin: paina ‘%1%’ asioidaksesi viesti-ikkunassa, ja sitten käytä ‘%2%’ Mennäksesi johonkin kohteeseen, ja ‘%3%’ näppäintä arkistoidaksesi viestejä."
 
 #: ../../data/txts/tips/general_game.lua:45
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -785,7 +787,7 @@ msgstr "Jos tunnet olevasi rohkea, pidä CTRL-näppäintä pohjassa saat sivuute
 #: ../../data/txts/tips/general_game.lua:61
 #, lua-format
 msgid "Press ‘%s’ to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Paina ‘%s’ muuttaaksesi pikaisesti varantojesi näyttämistilaa."
 
 #: ../../data/txts/tips/general_game.lua:65
 msgid ""
@@ -802,19 +804,19 @@ msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella
 #: ../../data/txts/tips/general_game.lua:73
 msgid ""
 "Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom."
-msgstr ""
+msgstr "Kohdenna hiiren rullan avulla sisään/ulos tai %1%/%2%. paina %3% nollataksesi kohdennuksen."
 
 #: ../../data/txts/tips/general_game.lua:80
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr ""
+msgstr "Käytä ‘%1$s’ ja ‘%2$s’ näppäimiä hyppiäksesi nopeasti viimeksi vierailtujen määränpäiden välillä."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr ""
+msgstr "Nopeuta tai hidasta peliä näillä %1%/%2%. Käytä %3%/%4% pikamuutokselle; %5%/%6% säätää nopeutta jouhevasti."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
@@ -824,7 +826,7 @@ msgstr "Nuolinäppäimet"
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + nuolinäppäimet"
 
 #: ../../data/txts/tips/general_game.lua:94
 msgid ""
@@ -834,7 +836,7 @@ msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä.
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift-vaihtonäppäin + nuolinäppäimet"
 
 #: ../../data/txts/tips/general_game.lua:98
 msgid ""
@@ -866,12 +868,12 @@ msgstr "Jos laitat viestin alkuu '@name', vain nimimerkki name näkee kirjoittam
 msgid ""
 "If the game should crash, don’t worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "Mikäli peli joskus kaatuu, älä huoli! Peli tallentuu itsestään taustalla joten voit jälkeenpäin ladata itsesi takaisin siihen mihin jäit."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
 #, lua-format
 msgid ""
-"Our computer players are too boring? Visit our website at %s and meet other "
+"Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Ovatko tietokonevastustajamme liian tylsiä? Vieraile verkkosivuillamme osoitteessa %s ja tapaa muita pelaajia pelataksesi verkossa."
+msgstr "Ovatko tietokonepelaajat liian tylsiä? Käy verkkosivuillamme osoitteessa %s ja löydä peliseuraa."

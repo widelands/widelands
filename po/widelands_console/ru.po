@@ -11,14 +11,15 @@
 # Viktor S <awsswa59@gmail.com>, 2018,2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
+# Владимир Шевцов, 2022
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
-"PO-Revision-Date: 2022-02-11 12:26+0000\n"
-"Last-Translator: nskdmitry\n"
+"PO-Revision-Date: 2015-02-03 14:54+0000\n"
+"Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +94,7 @@ msgstr "FILENAME"
 msgid ""
 "Create a new game directly with the settings configured in the given file. "
 "An example can be found in `%s`."
-msgstr ""
+msgstr "Создать новую игру напрямую  с настройками, установленными в данном файле. Пример можно найти в '%s '."
 
 #: ../../src/wlapplication_messages.cc:78
 msgid "Start the map `FILENAME` directly as a singleplayer scenario."
@@ -243,7 +244,7 @@ msgstr "[true|false*]"
 
 #: ../../src/wlapplication_messages.cc:136
 msgid "Invert click-and-drag map movement direction."
-msgstr ""
+msgstr "Обратить движение карты при click-and-drag(шелчке и перетаскивании)"
 
 #: ../../src/wlapplication_messages.cc:139
 msgid "Allow diagonal scrolling with the numeric keypad."
@@ -255,7 +256,7 @@ msgstr "Показывать системное время на информац
 
 #: ../../src/wlapplication_messages.cc:141
 msgid "Use single watchwindow mode."
-msgstr ""
+msgstr "Используйте режим одиночного окна наблюдения."
 
 #: ../../src/wlapplication_messages.cc:143
 msgid "Show in-game chat with transparent background."
@@ -263,7 +264,7 @@ msgstr "Показывать внутри-игровой чат на прозр�
 
 #: ../../src/wlapplication_messages.cc:144
 msgid "Bitmask to set the toolbar location and mode."
-msgstr ""
+msgstr "Битовая маска для установки местоположения и режима панели инструментов."
 
 #: ../../src/wlapplication_messages.cc:146
 msgid "Networking:"
@@ -275,7 +276,7 @@ msgstr "Сеть:"
 #. players.
 #: ../../src/wlapplication_messages.cc:154
 msgid "Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr "Создавайте файлы дампа syncstream, чтобы облегчить отладку сетевых игр."
 
 #: ../../src/wlapplication_messages.cc:155
 msgid "Connect to a different metaserver for internet gaming."
@@ -304,11 +305,11 @@ msgstr "Имя автора карты."
 
 #: ../../src/wlapplication_messages.cc:163
 msgid "The last host connected to."
-msgstr ""
+msgstr "Последний подключенный хост."
 
 #: ../../src/wlapplication_messages.cc:165
 msgid "Whether the used metaserver login is for a registered user."
-msgstr ""
+msgstr "Используется ли вход на метасервер для зарегистрированного пользователя."
 
 #: ../../src/wlapplication_messages.cc:166
 msgid "The hashed password for online logins."
@@ -320,11 +321,11 @@ msgstr "IP"
 
 #: ../../src/wlapplication_messages.cc:168
 msgid "Connect to a different server address from the add-ons manager."
-msgstr ""
+msgstr "Подключитесь к другому адресу сервера из менеджера дополнений."
 
 #: ../../src/wlapplication_messages.cc:170
 msgid "Connect to a different server port from the add-ons manager."
-msgstr ""
+msgstr "Подключитесь к другому порту сервера из менеджера дополнений."
 
 #: ../../src/wlapplication_messages.cc:173
 msgid "Graphic options:"
@@ -332,11 +333,11 @@ msgstr "Настройки графики:"
 
 #: ../../src/wlapplication_messages.cc:174
 msgid "Whether to use the whole display for the game screen."
-msgstr ""
+msgstr "Использовать ли весь дисплей для игрового экрана."
 
 #: ../../src/wlapplication_messages.cc:175
 msgid "Whether to start the game in a maximized window."
-msgstr ""
+msgstr "Запускать ли игру в развернутом окне."
 
 #. * TRANSLATORS: A placeholder for window width
 #: ../../src/wlapplication_messages.cc:179
@@ -346,7 +347,7 @@ msgstr "x"
 #. * TRANSLATORS: `x` references a window width placeholder
 #: ../../src/wlapplication_messages.cc:181
 msgid "Width `x` of the window in pixel."
-msgstr ""
+msgstr "Ширина 'x' окна в пикселях."
 
 #. * TRANSLATORS: A placeholder for window height
 #: ../../src/wlapplication_messages.cc:184
@@ -356,24 +357,24 @@ msgstr "y"
 #. * TRANSLATORS: `y` references a window height placeholder
 #: ../../src/wlapplication_messages.cc:186
 msgid "Height `y` of the window in pixel."
-msgstr ""
+msgstr "Высота 'y'  окна в пикселях."
 
 #: ../../src/wlapplication_messages.cc:187
 msgid "Whether to grab the mouse input."
-msgstr ""
+msgstr "Следует ли захватывать ввод мыши."
 
 #: ../../src/wlapplication_messages.cc:188
 msgid "Whether to use the mouse cursor provided by SDL."
-msgstr ""
+msgstr "Использовать ли курсор мыши, предоставляемый SDL"
 
 #: ../../src/wlapplication_messages.cc:190
 msgid "Whether to use sticky tooltips."
-msgstr ""
+msgstr "Использовать ли липкие всплывающие подсказки."
 
 #. * TRANSLATORS: `n` references a numerical placeholder
 #: ../../src/wlapplication_messages.cc:194
 msgid "Maximal optical framerate `n` of the game."
-msgstr ""
+msgstr "Максимальная оптическая частота кадров 'n' в игре."
 
 #: ../../src/wlapplication_messages.cc:196
 msgid ""

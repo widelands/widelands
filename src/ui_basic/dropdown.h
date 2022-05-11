@@ -142,6 +142,8 @@ public:
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
 	/// keyboard navigation.
 	void toggle();
+	/// Toggle the list closed if the dropdown is currently expanded.
+	void close();
 
 	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
@@ -202,10 +204,6 @@ protected:
 
 	std::string current_filter_;
 
-	/// needed for filter workaround (handle_key/handle_textinput with space key)
-	bool ignore_space_;
-	bool was_open_already_;
-
 private:
 	static void layout_if_alive(int);
 	void layout() override;
@@ -218,8 +216,6 @@ private:
 	/// Toggles the dropdown list on and off and sends a notification if the list is visible
 	/// afterwards.
 	void toggle_list();
-	/// Toggle the list closed if the dropdown is currently expanded.
-	void close();
 
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
@@ -263,6 +259,7 @@ private:
 /// A dropdown menu that lets the user select a value of the datatype 'Entry'.
 template <typename Entry> class Dropdown : public BaseDropdown {
 public:
+	using HotkeyFunction = std::function<void(Entry)>;
 	/// \param parent             the parent panel
 	/// \param name               a name so that we can reference the dropdown via Lua
 	/// \param x                  the x-position within 'parent'
@@ -275,7 +272,8 @@ public:
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
-	/// Text conventions: Title Case for all elements
+	/// \param hotkey_fn          function that is invoked with selected value if matching hotkey was
+	/// pressed Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
 	         const std::string& name,
 	         int32_t x,
@@ -286,7 +284,8 @@ public:
 	         const std::string& label,
 	         const DropdownType type,
 	         PanelStyle style,
-	         ButtonStyle button_style)
+	         ButtonStyle button_style,
+	         const HotkeyFunction& hotkey_fn = HotkeyFunction())
 	   : BaseDropdown(parent,
 	                  name,
 	                  x,
@@ -297,7 +296,8 @@ public:
 	                  label,
 	                  type,
 	                  style,
-	                  button_style) {
+	                  button_style),
+	     hotkey_fn_(hotkey_fn) {
 	}
 	~Dropdown() override {
 		filtered_entries.clear();
@@ -319,15 +319,11 @@ public:
 		if (check_hotkey_match(lowered_input_text)) {
 			return true;
 		}
-		if (ignore_space_ && !input_text.empty() && input_text.front() == ' ') {
-			ignore_space_ = false;
-			return true;
-		}
 		update_filter(lowered_input_text);
 		apply_filter();
 		return true;
 	}
-	using HotkeyFunction = std::function<void(Entry)>;
+
 	/// Add an element to the list
 	/// \param name         the display name of the entry
 	/// \param value        the value for the entry
@@ -336,16 +332,14 @@ public:
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
 	/// \param hotkey       a hotkey tip if any
-	/// \param on_hotkey_match       function that is invoked if hotkey was pressed
 	void add(const std::string& name,
 	         Entry value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string(),
-	         const HotkeyFunction& on_hotkey_match = HotkeyFunction()) {
+	         const std::string& hotkey = std::string()) {
 		filtered_entries.push_back(std::unique_ptr<Entry>(new Entry(value)));
-		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey, on_hotkey_match});
+		unfiltered_entries.push_back({name, value, pic, tooltip_text, hotkey});
 		BaseDropdown::add(name, size(), pic, select_this, tooltip_text, hotkey);
 	}
 
@@ -380,7 +374,6 @@ private:
 		const Image* img;
 		const std::string tooltip;
 		const std::string hotkey;
-		const HotkeyFunction on_hotkey_match;
 	};
 
 	void save_selected_entry(uint32_t index) override {
@@ -410,8 +403,8 @@ private:
 	bool check_hotkey_match(const std::string& input_text) {
 		for (auto& x : unfiltered_entries) {
 			if (input_text == to_lower(x.hotkey) && is_in_filtered_list(x.value)) {
-				if (x.on_hotkey_match) {
-					x.on_hotkey_match(x.value);
+				if (hotkey_fn_) {
+					hotkey_fn_(x.value);
 				} else {
 					verb_log_dbg("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
 				}
@@ -451,7 +444,7 @@ private:
 			if (x.value == selected_entry_) {
 				const Image* empty_icon =
 				   x.img == nullptr ? nullptr : g_image_cache->get("images/wui/editor/no_ware.png");
-				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"), x.hotkey);
+				add_to_filtered_list("", x.value, empty_icon, false, _("No matches"));
 			}
 		}
 	}
@@ -472,6 +465,7 @@ private:
 	// remember the initial selected element to select it again
 	// when filter yields no matches
 	Entry selected_entry_{};
+	const HotkeyFunction hotkey_fn_;
 };
 
 }  // namespace UI

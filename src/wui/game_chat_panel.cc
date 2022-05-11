@@ -113,8 +113,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	hbox_.add(&editbox, UI::Box::Resizing::kFillSpace);
 
-	chat_message_subscriber_ =
-	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
+	chat_message_subscriber_ = Notifications::subscribe<ChatMessage>(
+	   [this](const ChatMessage& /* msg */) { recalculate(true); });
 	recalculate(false);
 	layout();
 }
@@ -133,7 +133,7 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 		return false;
 	}
 
-	if (!down || code.sym != SDLK_SPACE || !(SDL_GetModState() & KMOD_CTRL)) {
+	if (!down || code.sym != SDLK_SPACE || ((SDL_GetModState() & KMOD_CTRL) == 0)) {
 		return false;
 	}
 
@@ -491,7 +491,7 @@ bool GameChatPanel::select_recipient() {
 /**
  * The mouse was clicked on this chatbox
  */
-bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool GameChatPanel::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t /*y*/) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus_edit();
 		clicked();

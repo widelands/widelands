@@ -40,7 +40,7 @@ static std::string tribe_of(const GameSettings& game_settings, const PlayerSetti
 
 static std::string assemble_infotext_for_savegame(const GameSettings& game_settings) {
 	std::string infotext_fmt = "<rt>%s<vspace gap=28><p>";
-	for (unsigned i = game_settings.players.size(); i; --i) {
+	for (unsigned i = game_settings.players.size(); i > 0u; --i) {
 		infotext_fmt += "%s";
 		infotext_fmt += i > 1 ? "<br>" : "</p></rt>";
 	}
@@ -61,7 +61,7 @@ static std::string assemble_infotext_for_savegame(const GameSettings& game_setti
 
 		// Check if this is a list of names, or just one name:
 		std::string name;
-		if (current_player.name.compare(0, 1, " ")) {
+		if (current_player.name.compare(0, 1, " ") != 0) {
 			name = current_player.name;
 		} else {
 			std::string temp = current_player.name;

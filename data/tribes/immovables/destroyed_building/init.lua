@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_immovable_type {
+wl.Descriptions():new_immovable_type {
    name = "destroyed_building",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Destroyed building"),
@@ -19,10 +19,10 @@ descriptions:new_immovable_type {
    spritesheets = {
       idle = {
          fps = 10,
-         frames = 5,
-         rows = 3,
-         columns = 2,
-         hotspot = { 40, 57 }
+         frames = 10,
+         columns = 10,
+         rows = 1,
+         hotspot = { 43, 60 }
       },
    }
 }

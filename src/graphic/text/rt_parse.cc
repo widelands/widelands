@@ -72,7 +72,7 @@ const Attr& AttrMap::operator[](const std::string& s) const {
 }
 
 bool AttrMap::has(const std::string& s) const {
-	return attrs_.count(s);
+	return attrs_.count(s) != 0u;
 }
 
 const std::string& Tag::name() const {
@@ -115,7 +115,7 @@ void Tag::parse_closing_tag(TextStream& ts) {
 
 void Tag::parse_attribute(TextStream& ts, std::unordered_set<std::string>& allowed_attrs) {
 	std::string aname = ts.till_any("=");
-	if (!allowed_attrs.count(aname)) {
+	if (allowed_attrs.count(aname) == 0u) {
 		const std::string error_info = format("an allowed attribute for '%s' tag", name_);
 		throw SyntaxErrorImpl(ts.line(), ts.col(), error_info, aname, ts.peek(100));
 	}
@@ -133,7 +133,8 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			ts.skip_ws();
 		}
 
-		size_t line = ts.line(), col = ts.col();
+		size_t line = ts.line();
+		size_t col = ts.col();
 		std::string text = ts.till_any("<");
 		if (!text.empty()) {
 			if (!tc.text_allowed) {
@@ -152,10 +153,10 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 		col = ts.col();
 		size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
-		if (!tc.allowed_children.count(child->name())) {
+		if (tc.allowed_children.count(child->name()) == 0u) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
-		if (!allowed_tags.empty() && !allowed_tags.count(child->name())) {
+		if (!allowed_tags.empty() && (allowed_tags.count(child->name()) == 0u)) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
 		}
 

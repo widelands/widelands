@@ -387,19 +387,19 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 	}
 	if (descr.get_isport()) {
 		return BuildingTab::Ports;
-	} else {
-		switch (descr.get_size()) {
-		case Widelands::BaseImmovable::SMALL:
-			return BuildingTab::Small;
-		case Widelands::BaseImmovable::MEDIUM:
-			return BuildingTab::Medium;
-		case Widelands::BaseImmovable::BIG:
-			return BuildingTab::Big;
-		default:
-			throw wexception(
-			   "Building statictics: Found building without a size: %s", descr.name().c_str());
-		}
 	}
+	switch (descr.get_size()) {
+	case Widelands::BaseImmovable::SMALL:
+		return BuildingTab::Small;
+	case Widelands::BaseImmovable::MEDIUM:
+		return BuildingTab::Medium;
+	case Widelands::BaseImmovable::BIG:
+		return BuildingTab::Big;
+	default:
+		throw wexception(
+		   "Building statictics: Found building without a size: %s", descr.name().c_str());
+	}
+
 	NEVER_HERE();
 }
 
@@ -674,7 +674,7 @@ void BuildingStatisticsMenu::update() {
 
 		if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
 		    building.type() == Widelands::MapObjectType::TRAININGSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
@@ -700,7 +700,7 @@ void BuildingStatisticsMenu::update() {
 				label_unproductive_.set_text(_("Low productivity:"));
 			}
 		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
-			if (nr_owned) {
+			if (nr_owned != 0u) {
 				const RGBColor& color =
 				   (total_stationed_soldiers < total_soldier_capacity / 2) ? style_.low_color() :
 				   (total_stationed_soldiers < total_soldier_capacity)     ? style_.medium_color() :
@@ -803,15 +803,15 @@ UI::Window& BuildingStatisticsMenu::load(FileRead& fr, InteractiveBase& ib) {
 			}
 			m.last_building_index_ = fr.signed_32();
 			return m;
-		} else {
-			throw Widelands::UnhandledVersionError(
-			   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
 		}
+		throw Widelands::UnhandledVersionError(
+		   "Building Statistics Menu", packet_version, kCurrentPacketVersion);
+
 	} catch (const WException& e) {
 		throw Widelands::GameDataError("building statistics menu: %s", e.what());
 	}
 }
-void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver&) const {
+void BuildingStatisticsMenu::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
 	fw.unsigned_16(kCurrentPacketVersion);
 	fw.unsigned_8(low_production_);
 	fw.unsigned_8(tab_panel_.active());

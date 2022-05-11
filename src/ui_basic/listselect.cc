@@ -117,7 +117,7 @@ BaseListselect::BaseListselect(Panel* const parent,
  */
 BaseListselect::~BaseListselect() {
 	clear();
-	if (linked_dropdown) {
+	if (linked_dropdown != nullptr) {
 		linked_dropdown->notify_list_deleted();
 	}
 }
@@ -164,7 +164,7 @@ void BaseListselect::add(const std::string& name,
 	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, table_style());
 
 	int entry_height = lineheight_;
-	if (pic) {
+	if (pic != nullptr) {
 		int w = pic->width();
 		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
@@ -324,7 +324,7 @@ int BaseListselect::calculate_desired_width() {
 		txt_width += widest_hotkey_;
 	}
 
-	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+	const int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 	const int old_width = get_w();
 	return txt_width + picw + 8 + old_width - get_eff_w();
 }
@@ -420,10 +420,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 			}
 		}
 
-		int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
+		int picw = max_pic_width_ != 0 ? max_pic_width_ + 10 : 0;
 
 		// Now draw pictures
-		if (er.pic) {
+		if (er.pic != nullptr) {
 			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
                               get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
                               kIndentStrength * er.indent + 1,
@@ -506,7 +506,7 @@ bool BaseListselect::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) 
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
+bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t /*x*/, int32_t y) {
 	switch (btn) {
 
 	case SDL_BUTTON_LEFT: {
@@ -545,7 +545,8 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 	}
 }
 
-bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int32_t) {
+bool BaseListselect::handle_mousemove(
+   uint8_t /*state*/, int32_t /*x*/, int32_t y, int32_t /*xdiff*/, int32_t /*ydiff*/) {
 	y = (y + scrollpos_) / get_lineheight();
 	if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 		set_tooltip("");
@@ -656,7 +657,7 @@ void BaseListselect::remove(const uint32_t i) {
  */
 void BaseListselect::remove(const char* const str) {
 	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
-		if (!strcmp(entry_records_[i]->name.c_str(), str)) {
+		if (strcmp(entry_records_[i]->name.c_str(), str) == 0) {
 			remove(i);
 			return;
 		}

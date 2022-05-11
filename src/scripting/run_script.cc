@@ -27,7 +27,7 @@ namespace {
 
 // Reads the 'filename' from the 'fs' and returns its content.
 std::string get_file_content(FileSystem* fs, const std::string& filename) {
-	if (!fs || !fs->file_exists(filename)) {
+	if ((fs == nullptr) || !fs->file_exists(filename)) {
 		throw LuaScriptNotExistingError(filename);
 	}
 	if (fs->is_directory(filename)) {
@@ -35,7 +35,7 @@ std::string get_file_content(FileSystem* fs, const std::string& filename) {
 	}
 	size_t length;
 	void* input_data = fs->load(filename, length);
-	const std::string data(static_cast<char*>(input_data));
+	std::string data(static_cast<char*>(input_data));
 	// make sure the input_data is freed
 	free(input_data);
 	return data;
@@ -84,7 +84,7 @@ run_string_as_script(lua_State* L, const std::string& identifier, const std::str
 }  // namespace
 
 int check_return_value_for_errors(lua_State* L, int rv) {
-	if (rv) {
+	if (rv != 0) {
 		const std::string err = luaL_checkstring(L, -1);
 		lua_pop(L, 1);
 		throw LuaError(err);

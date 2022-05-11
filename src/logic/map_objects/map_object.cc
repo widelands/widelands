@@ -227,11 +227,11 @@ std::vector<Serial> ObjectManager::all_object_serials_ordered() const {
 }
 
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
-	if (!serial_) {
+	if (serial_ == 0u) {
 		return nullptr;
 	}
 	MapObject* const obj = egbase.objects().get_object(serial_);
-	if (!obj) {
+	if (obj == nullptr) {
 		serial_ = 0;
 	}
 	return obj;
@@ -242,7 +242,7 @@ MapObject* ObjectPointer::get(const EditorGameBase& egbase) {
 // that is pointed to.
 // That is, a 'const ObjectPointer' behaves like a 'ObjectPointer * const'.
 MapObject* ObjectPointer::get(const EditorGameBase& egbase) const {
-	return serial_ ? egbase.objects().get_object(serial_) : nullptr;
+	return serial_ != 0u ? egbase.objects().get_object(serial_) : nullptr;
 }
 
 /*
@@ -379,7 +379,7 @@ void MapObjectDescr::add_animations(const LuaTable& table,
 }
 
 void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
-                                                  const std::string& basename) {
+                                                  const std::string& basename) const {
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		const std::string anim_name = basename + animation_direction_names[dir - 1];
 		try {
@@ -390,7 +390,8 @@ void MapObjectDescr::assign_directional_animation(DirAnimations* anims,
 	}
 }
 
-uint32_t MapObjectDescr::get_animation(const std::string& animname, const MapObject*) const {
+uint32_t MapObjectDescr::get_animation(const std::string& animname,
+                                       const MapObject* /* object */) const {
 	std::map<std::string, uint32_t>::const_iterator it = anims_.find(animname);
 	if (it == anims_.end()) {
 		throw GameDataError("Unknown animation: %s for %s", animname.c_str(), name().c_str());
@@ -428,7 +429,7 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 	return nullptr;
 }
 
-void MapObjectDescr::check_representative_image() {
+void MapObjectDescr::check_representative_image() const {
 	if (representative_image() == nullptr) {
 		throw Widelands::GameDataError(
 		   "The %s %s has no representative image. Does it have an \"idle\" animation?",
@@ -592,7 +593,7 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
                              const Vector2f& field_on_dst,
                              float scale,
                              RenderTarget* dst) const {
-	if (!(info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics))) {
+	if ((info_to_draw & (InfoToDraw::kCensus | InfoToDraw::kStatistics)) == 0) {
 		return;
 	}
 
@@ -616,12 +617,12 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	std::shared_ptr<const UI::RenderedText> rendered_census =
 	   UI::g_fh->render(as_richtext_paragraph(census, census_font, UI::Align::kCenter), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if (info_to_draw & InfoToDraw::kCensus) {
+	if ((info_to_draw & InfoToDraw::kCensus) != 0) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
 	// Draw statistics if we want them, they are available and they fill fit
-	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
+	if (((info_to_draw & InfoToDraw::kStatistics) != 0) && !statictics.empty() && scale >= 0.5f) {
 		UI::FontStyleInfo statistics_font(
 		   g_style_manager->building_statistics_style().statistics_font());
 		statistics_font.set_size(scale * statistics_font.size());
@@ -634,13 +635,14 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 }
 
 const Image* MapObject::representative_image() const {
-	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
+	return descr().representative_image(get_owner() != nullptr ? &get_owner()->get_playercolor() :
+                                                                nullptr);
 }
 
 /**
  * Default implementation
  */
-int32_t MapObject::get_training_attribute(TrainingAttribute) const {
+int32_t MapObject::get_training_attribute(TrainingAttribute /* attr */) const {
 	return -1;
 }
 
@@ -663,7 +665,7 @@ Time MapObject::schedule_act(Game& game, const Duration& tdelta, uint32_t const 
 /**
  * Called when a CMD_ACT triggers.
  */
-void MapObject::act(Game&, uint32_t) {
+void MapObject::act(Game& /* game */, uint32_t /* data */) {
 }
 
 /**
@@ -673,7 +675,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase&) const {
+void MapObject::log_general_info(const EditorGameBase& /* egbase */) const {
 }
 
 const Player& MapObject::owner() const {
@@ -687,7 +689,7 @@ const Player& MapObject::owner() const {
  * Prints a log message prepended by the object's serial number.
  */
 void MapObject::molog(const Time& gametime, char const* fmt, ...) const {
-	if (!g_verbose && !logsink_) {
+	if (!g_verbose && (logsink_ == nullptr)) {
 		return;
 	}
 
@@ -698,7 +700,7 @@ void MapObject::molog(const Time& gametime, char const* fmt, ...) const {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (logsink_) {
+	if (logsink_ != nullptr) {
 		logsink_->log(buffer);
 	}
 
@@ -746,7 +748,7 @@ void MapObject::Loader::load(FileRead& fr) {
 
 		if (packet_version >= 2) {
 			MapObject& obj = *get_object();
-			obj.reserved_by_worker_ = fr.unsigned_8();
+			obj.reserved_by_worker_ = (fr.unsigned_8() != 0u);
 		}
 	} catch (const WException& e) {
 		throw wexception("map object: %s", e.what());
@@ -784,12 +786,12 @@ void MapObject::Loader::load_finish() {
 /**
  * Save the MapObject to the given file.
  */
-void MapObject::save(EditorGameBase&, MapObjectSaver& mos, FileWrite& fw) {
+void MapObject::save(EditorGameBase& /* egbase */, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderMapObject);
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
 	fw.unsigned_32(mos.get_object_file_index(*this));
-	fw.unsigned_8(reserved_by_worker_);
+	fw.unsigned_8(static_cast<uint8_t>(reserved_by_worker_));
 }
 
 }  // namespace Widelands

@@ -6,7 +6,8 @@ import os
 
 class EvalMatches(object):
     _include_regexp = re.compile(r'^#include *([<"])([^">]+)[>"]')
-    _ifdef_regexp = re.compile(r'^#ifn?def.*')
+    _incguard_regexp = re.compile(r'^#ifndef WL_.*_H')
+    _ifdef_regexp = re.compile(r'^#if(n?def.*)?')
     _endif_regexp = re.compile(r'^#endif.*')
 
     def __call__(self, lines, fn):
@@ -17,7 +18,7 @@ class EvalMatches(object):
         seen_includes = set()
         inside_ifdefs = 0
         for lineno, line in enumerate(lines, 1):
-            if self._ifdef_regexp.match(line):
+            if self._ifdef_regexp.match(line) and not self._incguard_regexp.match(line):
                 inside_ifdefs += 1
             elif self._endif_regexp.match(line):
                 inside_ifdefs -= 1
@@ -83,7 +84,8 @@ class EvalMatches(object):
 
         if blocks:  # Widelands includes.
             for lineno, delimiter, header in blocks[0]:
-                if not header.endswith('.h') or delimiter != '"':
+                # Header from eris is the only one allowed with hpp extension
+                if (not header.endswith('lua.hpp') and not header.endswith('.h')) or delimiter != '"':
                     errors.append(
                         (fn, lineno, 'This include block must contain all Widelands includes and must come last.'))
                     return errors

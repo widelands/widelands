@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
+# Atte Timonen, 2022
 # GunChleoc, 2016
-# GunChleoc, 2014
-# Jukka Pakarinen, 2016-2020
+# GunChleoc, 2014,2016
+# Jukka Pakarinen, 2016-2020,2022
 # Markus <markus@hallfors.com>, 2015
-# Markus <markus@hallfors.com>, 2021
+# Markus <markus@hallfors.com>, 2015,2021
 # Max, 2015
+# Oi Suomi On! <oisuomion@protonmail.com>, 2022
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 # Teppo Mäenpää <teppo@runbox.com>, 2015-2017,2020
@@ -15,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-02-16 02:44+0000\n"
-"PO-Revision-Date: 2022-02-13 02:43+0000\n"
-"Last-Translator: Widelands Bunnybot <widelandsofficial@googlemail.com>\n"
+"POT-Creation-Date: 2022-05-07 03:13+0000\n"
+"PO-Revision-Date: 2015-11-03 18:55+0000\n"
+"Last-Translator: Oi Suomi On! <oisuomion@protonmail.com>, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,139 +38,139 @@ msgstr "Linnoitus"
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortification."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
 msgctxt "amazons_building"
 msgid "Your fortification discovered an aggressor."
-msgstr ""
+msgstr "Linnoituksesi havaitsi uhkaajan."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:36
 msgctxt "amazons_building"
 msgid "Your fortification is under attack."
-msgstr ""
+msgstr "Linnoitustasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:38
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortification."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi linnoituksella."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:40
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortification."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen linnoituksella."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
 msgctxt "amazons_building"
 msgid "Fortress"
-msgstr ""
+msgstr "Linnoitus"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
 msgctxt "amazons_building"
 msgid "Your fortress discovered an aggressor."
-msgstr ""
+msgstr "Vihollisia linnoituksesi mailla."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:63
 msgctxt "amazons_building"
 msgid "Your fortress is under attack."
-msgstr ""
+msgstr "Sota raivoaa linnoituksellasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:65
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the fortress."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi linnoituksella."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:67
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the fortress."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen linnoituksella."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
 msgctxt "amazons_building"
 msgid "Observation Tower"
-msgstr ""
+msgstr "Tarkkailutorni"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your observation tower."
-msgstr ""
+msgstr "Sotilaasi pitävät hallussaan tarkkailutorniasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
 msgctxt "amazons_building"
 msgid "Your observation tower discovered an aggressor."
-msgstr ""
+msgstr "Tarkkailutornisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:34
 msgctxt "amazons_building"
 msgid "Your observation tower is under attack."
-msgstr ""
+msgstr "Tarkkailutorniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:36
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the observation tower."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi tarkkailutornilla."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:38
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the observation tower."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen tarkkailutornilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
 msgctxt "amazons_building"
 msgid "Patrol Post"
-msgstr ""
+msgstr "Partiotolppa"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your patrol post."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun partiotolppasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
 msgctxt "amazons_building"
 msgid "Your patrol post discovered an aggressor."
-msgstr ""
+msgstr "Partiotolppasi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:43
 msgctxt "amazons_building"
 msgid "Your patrol post is under attack."
-msgstr ""
+msgstr "Partiotolppaasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:45
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the patrol post."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi partiotolpalla."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:47
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the patrol post."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen partiotolpalla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
@@ -179,103 +182,103 @@ msgstr "Torni"
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Sotilaasi ottivat haltuun tornisi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
 msgctxt "amazons_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Tornisi havaitsi hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:62
 msgctxt "amazons_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Torniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:64
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi tornilla."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:66
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen tornilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
 msgctxt "amazons_building"
 msgid "Treetop Sentry"
-msgstr ""
+msgstr "Puunlatvavartiosto"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your treetop sentry."
-msgstr ""
+msgstr "Sotilaasi ottivat haltuun puunlatvavartiosi"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
 msgctxt "amazons_building"
 msgid "Your treetop sentry discovered an aggressor."
-msgstr ""
+msgstr "Puunlatvavartiosi havaitsi hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:45
 msgctxt "amazons_building"
 msgid "Your treetop sentry is under attack."
-msgstr ""
+msgstr "Puunlatvavartiotasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:47
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the treetop sentry."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi puunlatvavartiostollasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:49
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the treetop sentry."
-msgstr ""
+msgstr "Sotilaasi päihitti vihollisen puunlatvavartiostolla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
 msgctxt "amazons_building"
 msgid "Warriors’ Dwelling"
-msgstr ""
+msgstr "Soturin sija"
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
 msgid "Your soldiers have occupied your warriors’ dwelling."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun soturin sijasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:44
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling discovered an aggressor."
-msgstr ""
+msgstr "Soturin sijasi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:46
 msgctxt "amazons_building"
 msgid "Your warriors’ dwelling is under attack."
-msgstr ""
+msgstr "Soturin sijaasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:48
 msgctxt "amazons_building"
 msgid "The enemy defeated your soldiers at the warriors’ dwelling."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi soturin sijallasi."
 
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:50
 msgctxt "amazons_building"
 msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen soturin sijalla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -287,31 +290,31 @@ msgstr "Linna"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:153
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnasi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:155
 msgctxt "atlanteans_building"
 msgid "Your castle discovered an aggressor."
-msgstr ""
+msgstr "Linnasi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:157
 msgctxt "atlanteans_building"
 msgid "Your castle is under attack."
-msgstr ""
+msgstr "Linnaasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:159
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the castle."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi linnalla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:161
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen linnalla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:8
@@ -323,31 +326,31 @@ msgstr "Linnake"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhall."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun vartiosalisi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhall discovered an aggressor."
-msgstr ""
+msgstr "Vartiosalisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:46
 msgctxt "atlanteans_building"
 msgid "Your guardhall is under attack."
-msgstr ""
+msgstr "Vartiosaliasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:48
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhall."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi vartiosalilla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:50
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhall."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen vartiosalilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:8
@@ -359,31 +362,31 @@ msgstr "Vartiotupa"
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your guardhouse."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet vartiotupasi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:42
 msgctxt "atlanteans_building"
 msgid "Your guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Vartiotalosi havaitsi hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:44
 msgctxt "atlanteans_building"
 msgid "Your guardhouse is under attack."
-msgstr ""
+msgstr "Vartiotaloasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:46
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the guardhouse."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi vartiotalolla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:48
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the guardhouse."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen vartiotalolla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:8
@@ -395,31 +398,31 @@ msgstr "Torni"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun tornisi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
 msgctxt "atlanteans_building"
 msgid "Your tower discovered an aggressor."
-msgstr ""
+msgstr "Tornisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:61
 msgctxt "atlanteans_building"
 msgid "Your tower is under attack."
-msgstr ""
+msgstr "Torniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:63
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the tower."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi tornilla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:65
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the tower."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen tornilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -431,31 +434,31 @@ msgstr "Suurtorni"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:29
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your high tower."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun korkean tornisi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:31
 msgctxt "atlanteans_building"
 msgid "Your high tower discovered an aggressor."
-msgstr ""
+msgstr "Korkea tornisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:33
 msgctxt "atlanteans_building"
 msgid "Your high tower is under attack."
-msgstr ""
+msgstr "Korkeaa torniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:35
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the high tower."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi korkealla tornilla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the high tower."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen korkealla tornilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:8
@@ -467,31 +470,31 @@ msgstr "Pieni torni"
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgctxt "atlanteans_building"
 msgid "Your soldiers have occupied your small tower."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun pikkutornisi."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:43
 msgctxt "atlanteans_building"
 msgid "Your small tower discovered an aggressor."
-msgstr ""
+msgstr "Pikkutornisi on havainnut hyökkääjän."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:45
 msgctxt "atlanteans_building"
 msgid "Your small tower is under attack."
-msgstr ""
+msgstr "Pikkutorniasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:47
 msgctxt "atlanteans_building"
 msgid "The enemy defeated your soldiers at the small tower."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi pikkutornilla."
 
 #. TRANSLATORS: Message sent by an Atlantean military site
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:49
 msgctxt "atlanteans_building"
 msgid "Your soldiers defeated the enemy at the small tower."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen pikkutornilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:8
@@ -503,31 +506,31 @@ msgstr "Rajalinnake"
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:52
 msgctxt "barbarians_building"
 msgid "Your soldiers have occupied your barrier."
-msgstr ""
+msgstr "Sotilaasi ovat ottaneet haltuun muurisi."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:54
 msgctxt "barbarians_building"
 msgid "Your barrier discovered an aggressor."
-msgstr ""
+msgstr "Muurillasi on havaittu hyökkääjä."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:56
 msgctxt "barbarians_building"
 msgid "Your barrier is under attack."
-msgstr ""
+msgstr "Muuritustasi vastaan hyökätään."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:58
 msgctxt "barbarians_building"
 msgid "The enemy defeated your soldiers at the barrier."
-msgstr ""
+msgstr "Vihollinen päihitti sotilaasi muurilla."
 
 #. TRANSLATORS: Message sent by a Barbarian military site
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:60
 msgctxt "barbarians_building"
 msgid "Your soldiers defeated the enemy at the barrier."
-msgstr ""
+msgstr "Sotilaasi päihittivät vihollisen muurilla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:8
@@ -719,7 +722,7 @@ msgstr "Vahtitupa"
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet vahtitupasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
@@ -755,7 +758,7 @@ msgstr "Linna"
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
@@ -827,7 +830,7 @@ msgstr "Etuvartioasema"
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:56
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet etuvartioasemasi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:58
@@ -899,7 +902,7 @@ msgstr "Torni"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:52
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet tornisi."
 
 #. TRANSLATORS: Message sent by an Empire military site
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:54
@@ -935,7 +938,7 @@ msgstr "Linnoitus"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
 msgctxt "frisians_building"
 msgid "Your soldiers have occupied your fortress."
-msgstr ""
+msgstr "Sotilaasi ovat miehittäneet linnoituksesi."
 
 #. TRANSLATORS: Message sent by a Frisian military site
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
@@ -1292,50 +1295,49 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
 msgid "baking bread"
-msgstr "leipoo leipää"
+msgstr "Leivän leivonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
 msgctxt "amazons_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Miilu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
 #: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
 msgid "producing charcoal"
-msgstr ""
+msgstr "Hiilen tuotto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
 msgctxt "amazons_building"
 msgid "Chocolate Brewery"
-msgstr ""
+msgstr "Kaakaokeittämö"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
 #: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
 msgid "brewing chocolate"
-msgstr ""
+msgstr "Kaakaon keitto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
 msgctxt "amazons_building"
 msgid "Cocoa Farm"
-msgstr ""
+msgstr "Kaakaofarmi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:55
 msgid "planting cocoa"
-msgstr ""
+msgstr "Kaakaon istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:63
 msgid "harvesting cocoa"
-msgstr ""
+msgstr "Kaakaosadon korjuu"
 
 #: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:74
 msgctxt "amazons_building"
@@ -1354,7 +1356,7 @@ msgstr ""
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
 msgid "sewing a tunic"
-msgstr ""
+msgstr "Tunikan ompelu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
@@ -1364,7 +1366,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
 msgid "making a wooden helmet"
-msgstr ""
+msgstr "Puukypärän teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
@@ -1421,7 +1423,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
 msgid "preparing a ration"
-msgstr "valmistaa ruoka-annosta"
+msgstr "Ruoka-annoksen valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
@@ -1436,7 +1438,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:117
 msgid "smelting gold"
-msgstr "sulattaa kultaa"
+msgstr "Kullan sulatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
@@ -1474,7 +1476,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
 msgid "mining gold"
-msgstr "louhii kultaa"
+msgstr "kullan louhinta"
 
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:82
@@ -1556,7 +1558,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/initiation_site/init.lua:60
 msgctxt "amazons_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "Sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
@@ -1571,7 +1573,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:52
 msgid "planting trees"
-msgstr "istuttaa puita"
+msgstr "Puiden istutus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
@@ -1699,7 +1701,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
 msgid "constructing a ship"
-msgstr "rakentaa laivaa"
+msgstr "Laivanrakennus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
@@ -1717,10 +1719,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making a shovel"
-msgstr "tekee lapiota"
+msgstr "Lapion teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1728,7 +1728,7 @@ msgstr "tekee lapiota"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
 msgid "making a felling ax"
-msgstr "tekee kaatokirvestä"
+msgstr "Kaatokirveen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
@@ -1738,12 +1738,12 @@ msgstr "tekee kaatokirvestä"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
 msgid "making a pick"
-msgstr "tekee hakkua"
+msgstr "Hakun teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
 msgid "making a machete"
-msgstr ""
+msgstr "Viidakkoveitsen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1755,7 +1755,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:179
 msgid "making kitchen tools"
-msgstr "tekee keittiövälineitä"
+msgstr "Keittiövälineiden teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
@@ -1767,13 +1767,13 @@ msgstr "tekee keittiövälineitä"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making a hammer"
-msgstr "tekee vasaraa"
+msgstr "Vasaran teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "Taltan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
@@ -1781,31 +1781,31 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
-msgstr "valmistaa neuloja"
+msgstr "Neulojen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
 msgid "making a stone bowl"
-msgstr ""
+msgstr "Kivimaljan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
 msgid "making a wooden spear"
-msgstr ""
+msgstr "Puukeihään teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
 msgid "making a stone-tipped spear"
-msgstr ""
+msgstr "Kivikärkisen keihään teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
 msgid "making a hardened spear"
-msgstr ""
+msgstr "Vahvistetun keihään teko"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
@@ -1816,7 +1816,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:34
 msgid "cutting granite"
-msgstr ""
+msgstr "Graniitin leikkuu"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
@@ -1845,7 +1845,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
 msgctxt "amazons_building"
 msgid "Stone Mine"
-msgstr ""
+msgstr "Kivikaivos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
@@ -1861,7 +1861,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:80
 msgid "mining granite"
-msgstr "louhii kiveä"
+msgstr "kiven louhinta"
 
 #: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:90
@@ -1931,13 +1931,13 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
 msgid "breeding fish"
-msgstr "kasvattaa kaloja"
+msgstr "Kalojen kasvatus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:54
@@ -1957,7 +1957,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:37
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:50
 msgid "felling trees"
-msgstr "kaataa puuta"
+msgstr "Puuunkaato"
 
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
@@ -1985,13 +1985,13 @@ msgstr "Haarniskapaja"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:222
 msgid "forging a steel shield"
-msgstr "valmistaa kilvestä"
+msgstr "Kilven valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced shield
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:234
 msgid "forging an advanced shield"
-msgstr "valmistaa ritarikilpeä"
+msgstr "Ritarikilven valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:8
@@ -2003,7 +2003,7 @@ msgstr "Leipomo"
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:57
 msgctxt "atlanteans_building"
 msgid "baking bread"
-msgstr "leivän leipominen"
+msgstr "leivän leivonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:8
@@ -2015,7 +2015,7 @@ msgstr "Kasarmi"
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:56
 msgctxt "atlanteans_building"
 msgid "recruiting soldier"
-msgstr "palkkaa sotilaan"
+msgstr "Sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:8
@@ -2026,13 +2026,13 @@ msgstr "Mustajuuriviljelmä"
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:52
 msgid "planting blackroot"
-msgstr "istuttaa mustajuurta"
+msgstr "Mustajuuren istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:60
 msgid "harvesting blackroot"
-msgstr "korjaa mustajuurisatoa"
+msgstr "Mustajuurisadon korjuu"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
 msgctxt "atlanteans_building"
@@ -2053,7 +2053,7 @@ msgstr "Miilu"
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:68
 msgid "producing coal"
-msgstr "valmistaa hiiltä"
+msgstr "Hiilen valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:8
@@ -2079,7 +2079,7 @@ msgstr "Hiilikaivos"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:79
 msgid "mining coal"
-msgstr "kaivaa hiiltä"
+msgstr "Hiilen kaivuu"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:102
@@ -2120,13 +2120,13 @@ msgstr "Kidekaivos"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:111
 msgid "mining quartz"
-msgstr "louhii kvartsia"
+msgstr "Kvartsin louhinta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:119
 msgid "mining diamonds"
-msgstr "louhii timantteja"
+msgstr "Timanttien louhinta"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:153
 msgid "No Crystals"
@@ -2152,12 +2152,12 @@ msgstr "Maatila"
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:56
 msgid "planting corn"
-msgstr "istuttaa maissia"
+msgstr "Maissin istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
 msgid "harvesting corn"
-msgstr "korjaan maissia"
+msgstr "Maissin korjuu"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
@@ -2169,7 +2169,7 @@ msgstr "Maanviljelijällä ei ole viljelyskelpoista maata käytössään."
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Ferry Yard"
-msgstr "veneveistämö"
+msgstr "Veneveistämö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:8
@@ -2219,7 +2219,7 @@ msgstr "Kalastajatorppa"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:53
 msgid "fishing"
-msgstr "kalastaa"
+msgstr "Kalastus"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
 msgctxt "atlanteans_building"
@@ -2244,7 +2244,7 @@ msgstr "Kultarihmankehrääjä"
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:48
 msgid "spinning gold"
-msgstr "kehrää kultalankaa"
+msgstr "Kultalangan kehräys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:8
@@ -2269,7 +2269,7 @@ msgstr "Hevostila"
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:49
 msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr "hevosten kasvatus"
+msgstr "Hevosten kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:8
@@ -2283,7 +2283,7 @@ msgstr "Metsästäjän Mökki"
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:39
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:52
 msgid "hunting"
-msgstr "metsästää"
+msgstr "Metsästys"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
@@ -2330,7 +2330,7 @@ msgstr "Rautakaivos"
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:79
 msgid "mining iron"
-msgstr "louhii rautamalmia"
+msgstr "rautamalmin louhinta"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:86
@@ -2370,12 +2370,12 @@ msgstr "Mylly"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
 msgid "grinding corn"
-msgstr "jauhaa maissia"
+msgstr "Maissin jauhanta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
-msgstr "jauhaa mustajuurta"
+msgstr "Mustajuuren jauhanta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:8
@@ -2389,7 +2389,7 @@ msgstr "Kivilouhos"
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:50
 msgid "quarrying granite"
-msgstr "hakkaa kiviä"
+msgstr "Kivien hakkaus"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
 msgctxt "atlanteans_building"
@@ -2408,7 +2408,7 @@ msgstr "Saha"
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:50
 msgid "sawing logs"
-msgstr "sahaa tukkeja"
+msgstr "Tukkien sahaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:8
@@ -2438,7 +2438,7 @@ msgstr "Sulattamo"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:104
 msgid "smelting iron"
-msgstr "sulattaa rautaa"
+msgstr "Raudan sulatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:8
@@ -2450,14 +2450,14 @@ msgstr "Savustamo"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:91
 msgid "smoking meat"
-msgstr "savustaa lihaa"
+msgstr "Lihan savustus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:94
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:80
 msgid "smoking fish"
-msgstr "savustaa kalaa"
+msgstr "Kalan savustus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:8
@@ -2478,13 +2478,13 @@ msgstr "Työkaluseppä"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:92
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
 msgid "making a bread paddle"
-msgstr "tekee leipälapiota"
+msgstr "Leipälapion teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:80
 msgid "making a pair of buckets"
-msgstr "tekee ämpäriparia"
+msgstr "Ämpäriparin teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
@@ -2492,37 +2492,37 @@ msgstr "tekee ämpäriparia"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:201
 msgid "making fire tongs"
-msgstr "tekee pihtejä"
+msgstr "Pihtien teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:157
 msgid "making a fishing net"
-msgstr "tekee kalastusverkkoa"
+msgstr "Kalastusverkon teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:128
 msgid "making a hook pole"
-msgstr "tekee savustusvarrasta"
+msgstr "Savustusvartaan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:140
 msgid "making a hunting bow"
-msgstr "tekee metsästysjousta"
+msgstr "Metsästysjousen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:152
 msgid "making milking tongs"
-msgstr "tekee hämähäkinlypsupihtejä"
+msgstr "Hämähäkinlypsypihtien teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:176
 msgid "making a saw"
-msgstr "tekee sahaa"
+msgstr "Sahan teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
@@ -2530,7 +2530,7 @@ msgstr "tekee sahaa"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:188
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:113
 msgid "making a scythe"
-msgstr "tekee viikatetta"
+msgstr "Viikatteen teko"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:8
@@ -2542,31 +2542,31 @@ msgstr "Asepaja"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:65
 msgid "forging a light trident"
-msgstr "valmistaa kevyttä atrainta"
+msgstr "Kevyen atraimen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long trident because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:80
 msgid "forging a long trident"
-msgstr "valmistaa pitkää atrainta"
+msgstr "Pitkän atraimen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:95
 msgid "forging a steel trident"
-msgstr "valmistaa teräsatrainta"
+msgstr "Teräsatraimen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:110
 msgid "forging a double trident"
-msgstr "valmistaa kaksipäistä atrainta"
+msgstr "Kaksipäisen atraimen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:125
 msgid "forging a heavy double trident"
-msgstr "valmistaa raskasta kaksipääatrainta"
+msgstr "Raskaan kaksipääatraimen valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:8
@@ -2583,13 +2583,13 @@ msgstr "kutoo hämähäkinsilkkiä"
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:75
 msgid "tailoring a tabard"
-msgstr "räätälöi asetakkia"
+msgstr "Asetakin räätälöinti"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:88
 msgid "tailoring a golden tabard"
-msgstr "räätälöi kultaista taisteluasua"
+msgstr "Kultaisen taisteluasun räätälöinti"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:8
@@ -2626,19 +2626,19 @@ msgstr "Kirvespaja"
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:79
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:69
 msgid "forging an ax"
-msgstr "valmistaa kirvestä"
+msgstr "Kirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:84
 msgid "forging a sharp ax"
-msgstr "valmistaa terävää kirvestä"
+msgstr "Terävän kirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:109
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:99
 msgid "forging a broad ax"
-msgstr "valmistaa leveää kirvestä"
+msgstr "Leveän kirveen valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:8
@@ -2662,7 +2662,7 @@ msgstr "Kasarmi"
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:54
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
-msgstr "palkkaa sotilaan"
+msgstr "Sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:8
@@ -2674,14 +2674,14 @@ msgstr "Majatalo"
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:83
 msgid "preparing a snack"
-msgstr "valmistaa välipalaa"
+msgstr "Välipalan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:87
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:80
 msgid "preparing a meal"
-msgstr "valmistaa tuhtia ateriaa"
+msgstr "Tuhdin aterian valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:8
@@ -2693,7 +2693,7 @@ msgstr "Panimo"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/brewery/init.lua:38
 msgid "brewing strong beer"
-msgstr "panee vahvaa olutta"
+msgstr "Vahvan oluen pano"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:8
@@ -2705,7 +2705,7 @@ msgstr "Karjatila"
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:49
 msgctxt "barbarians_building"
 msgid "rearing cattle"
-msgstr "karjan kasvatus"
+msgstr "Karjan kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:8
@@ -2757,13 +2757,13 @@ msgstr "Maatila"
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:55
 msgid "planting wheat"
-msgstr "istuttaa vehnää"
+msgstr "Vehnän istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
 msgid "harvesting wheat"
-msgstr "pui vehnää"
+msgstr "Vehnän puinti"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
@@ -2855,17 +2855,17 @@ msgstr "Kypäräpaja"
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:123
 msgid "forging a helmet"
-msgstr "valmistaa kypärää"
+msgstr "Kypärän valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:91
 msgid "forging a mask"
-msgstr "valmistaa naamaria"
+msgstr "Naamarin valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:104
 msgid "forging a warhelm"
-msgstr "valmistaa sotakypärää"
+msgstr "Sotakypärän valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:8
@@ -2931,7 +2931,7 @@ msgstr "Kalkinpolttouuni"
 #. TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:52
 msgid "mixing grout"
-msgstr "sekoittaa laastia"
+msgstr "Laastin sekoitus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:8
@@ -2958,7 +2958,7 @@ msgstr "Metallipaja"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:139
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:116
 msgid "making a fishing rod"
-msgstr "tekee onkea"
+msgstr "Ongen teko"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
@@ -2966,7 +2966,7 @@ msgstr "tekee onkea"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:146
 msgid "making a hunting spear"
-msgstr "tekee metsästyskeihästä"
+msgstr "Metsästyskeihään teko"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:8
@@ -2980,7 +2980,7 @@ msgstr "Pienpanimo"
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:89
 msgid "brewing beer"
-msgstr "panee"
+msgstr "Oluen pano"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:8
@@ -3010,13 +3010,13 @@ msgstr "Ruokotarha"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:48
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:64
 msgid "planting reed"
-msgstr "istuttaa ruoikon"
+msgstr "Ruoikon istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:72
 msgid "harvesting reed"
-msgstr "korjaa ruoikon"
+msgstr "Ruoikon korjaus"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
 msgctxt "barbarians_building"
@@ -3059,19 +3059,19 @@ msgstr "Asetehdas"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:114
 msgid "forging a bronze ax"
-msgstr "valmistaa pronssikirvestä"
+msgstr "Pronssikirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:129
 msgid "forging a battle ax"
-msgstr "valmistaa taistelukirvestä"
+msgstr "Taistelukirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:144
 msgid "forging a warrior’s ax"
-msgstr "valmistaa sotakirvestä"
+msgstr "Sotakirveen valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:8
@@ -3083,7 +3083,7 @@ msgstr "Kutomo"
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:52
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:63
 msgid "weaving"
-msgstr "kutoo"
+msgstr "Kudonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:8
@@ -3105,7 +3105,7 @@ msgstr "Puunkovettamo"
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:65
 msgid "hardening wood"
-msgstr "lämpökäsittelee puuta"
+msgstr "Puun lämpökäsittely"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:8
@@ -3117,19 +3117,19 @@ msgstr "Haarniskapaja"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
 msgid "forging a suit of armor"
-msgstr "valmistaa ketjupanssaria"
+msgstr "Panssarin valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
 msgid "forging a suit of chain armor"
-msgstr "valmistaa ketjupanssaria"
+msgstr "Ketjupanssarin valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
 msgid "forging a suit of gilded armor"
-msgstr "valmistaa levyhaarniskaa"
+msgstr "Levyhaarniskan valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:8
@@ -3141,7 +3141,7 @@ msgstr "Leipomo"
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:64
 msgctxt "empire_building"
 msgid "baking bread"
-msgstr "levän leipominen"
+msgstr "levän leivonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:8
@@ -3153,7 +3153,7 @@ msgstr "Kasarmi"
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:57
 msgctxt "empire_building"
 msgid "recruiting soldier"
-msgstr "palkkaa sotilaan"
+msgstr "Sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:8
@@ -3204,7 +3204,7 @@ msgstr "Aasitalli"
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:49
 msgctxt "empire_building"
 msgid "rearing donkeys"
-msgstr "aasien kasvatus"
+msgstr "Aasien kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:8
@@ -3344,7 +3344,7 @@ msgstr "Marmorikaivos"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:69
 msgid "mining marble"
-msgstr "louhii marmoria"
+msgstr "Marmorin louhinta"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:140
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
@@ -3387,7 +3387,7 @@ msgstr "Mylly"
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:55
 msgid "grinding wheat"
-msgstr "jauhaa vehnää"
+msgstr "Vehnän jauhanta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:8
@@ -3398,7 +3398,7 @@ msgstr "Sikala"
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
 #: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:51
 msgid "raising pigs"
-msgstr "kasvattaa possuja"
+msgstr "Possujen kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:8
@@ -3409,7 +3409,7 @@ msgstr "Kivilouhos"
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:57
 msgid "quarrying marble"
-msgstr "hakkaa marmoria"
+msgstr "Marmorin hakkaus"
 
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
 msgctxt "empire_building"
@@ -3438,7 +3438,7 @@ msgstr "Lammastila"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
 msgid "breeding sheep"
-msgstr "kasvattaa lampaita"
+msgstr "Lampaiden kasvatus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:8
@@ -3462,7 +3462,7 @@ msgstr "Marmoriveistämö"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:51
 msgid "sculpting a marble column"
-msgstr "veistää marmoripylvään"
+msgstr "Marmoripylvään veisto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:8
@@ -3480,7 +3480,7 @@ msgstr "Työkaluseppä"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:135
 msgid "making a basket"
-msgstr "tekee koria"
+msgstr "Korin teko"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:8
@@ -3492,13 +3492,13 @@ msgstr "Viinitarha"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:54
 msgid "planting grapevines"
-msgstr "istuttaa viiniköynnöksiä"
+msgstr "Viiniköynnösten istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:62
 msgid "harvesting grapes"
-msgstr "korjaa satoa viiniköynnöksistä"
+msgstr "Viinirypälesadon korjuu"
 
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgctxt "empire_building"
@@ -3517,30 +3517,30 @@ msgstr "Asepaja"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:77
 msgid "forging a wooden spear"
-msgstr "valmistaa puukeihästä"
+msgstr "Puukeihään valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
 msgid "forging a spear"
-msgstr "valmistaa keihästä"
+msgstr "Keihään valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
 msgid "forging an advanced spear"
-msgstr "valmistaa kehittynyttä keihästä"
+msgstr "Kehittyneen keihään valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:122
 msgid "forging a heavy spear"
-msgstr "valmistaa raskasta keihästä"
+msgstr "Raskaan keihään valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:137
 msgid "forging a war spear"
-msgstr "valmistaa sotakeihästä"
+msgstr "Sotakeihään valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:8
@@ -3568,7 +3568,7 @@ msgstr "Viinikellari"
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:53
 msgid "making wine"
-msgstr "käyttää viiniä"
+msgstr "viinin käyttö"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:8
@@ -3604,19 +3604,19 @@ msgstr "Suuri Haarniskapaja"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:70
 msgid "forging a broadsword"
-msgstr "valmistaa leveää miekkaa"
+msgstr "Leveän miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
 msgid "forging a double-edged sword"
-msgstr "valmistaa kaksiteräistä miekkaa"
+msgstr "Kaksiteräisen miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:100
 msgid "forging a golden helmet"
-msgstr "valmistaa kultaista kypärää"
+msgstr "Kultaisen kypärän valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:8
@@ -3628,13 +3628,13 @@ msgstr "Pieni Haarniskapaja"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:93
 msgid "forging a short sword"
-msgstr "valmistaa lyhyttä miekkaa"
+msgstr "Lyhyen miekan valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:108
 msgid "forging a long sword"
-msgstr "valmistaa pitkää miekkaa"
+msgstr "Pitkän miekan valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:8
@@ -3652,7 +3652,7 @@ msgstr "Kasarmi"
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:72
 msgctxt "frisians_building"
 msgid "recruiting soldier"
-msgstr "palkkaa sotilaan"
+msgstr "Sotilaan palkkaus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:8
@@ -3685,7 +3685,7 @@ msgstr "Marjatarha"
 #. TRANSLATORS: Completed/Skipped/Did not start planting bushes because ...
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:53
 msgid "planting bushes"
-msgstr "istuttaa pensaita"
+msgstr "Pensaiden istutus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:8
@@ -3697,12 +3697,12 @@ msgstr "Sepän paja"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:91
 msgid "forging a felling ax"
-msgstr "valmistaa kaatokirvestä"
+msgstr "Kaatokirveen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:102
 msgid "forging a pick"
-msgstr "valmistaa hakkua"
+msgstr "Hakun valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:8
@@ -3719,7 +3719,7 @@ msgstr "Tiiliuuni"
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:71
 msgid "burning bricks"
-msgstr "polttaa tiiliä"
+msgstr "Tiilien poltto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:8
@@ -3731,12 +3731,12 @@ msgstr "Miilu"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:68
 msgid "making a charcoal stack"
-msgstr "hiillyttää  puuta"
+msgstr "Puun hiillytys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:79
 msgid "collecting coal"
-msgstr "kerää puuta"
+msgstr "Puun keräys"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
 msgid "Out of Clay Ponds"
@@ -3766,7 +3766,7 @@ msgstr "Savikaivanto"
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:66
 msgid "making clay"
-msgstr "tekee savea"
+msgstr "Saven teko"
 
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:83
@@ -3821,7 +3821,7 @@ msgstr "Hedelmänkerääjän Mökki"
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:53
 msgid "gathering berries"
-msgstr "kerää marjoja"
+msgstr "Marjojen keräys"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgid "No Bushes"
@@ -3854,12 +3854,12 @@ msgstr "Maatila"
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:81
 msgid "planting barley"
-msgstr "istuttaa ohraa"
+msgstr "Ohran istutus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
 msgid "harvesting barley"
-msgstr "korjaa ohrasatoa"
+msgstr "Ohrasadon korjuu"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
 msgctxt "frisians_building"
@@ -3935,7 +3935,7 @@ msgstr "Hunajaleipäleipomo"
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:67
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:78
 msgid "baking honey bread"
-msgstr "leipoo hunajaleipää"
+msgstr "Hunajaleivän leivonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:8
@@ -3988,7 +3988,7 @@ msgstr "Simapanimo"
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:67
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:78
 msgid "brewing mead"
-msgstr "panee simaa"
+msgstr "Siman pano"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:8
@@ -4012,20 +4012,20 @@ msgstr "Kierrätyskeskus"
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:94
 msgctxt "frisians_building"
 msgid "recycling fur"
-msgstr "kierrättää turkin"
+msgstr "Turkin kierrätys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:105
 msgctxt "frisians_building"
 msgid "recycling iron"
-msgstr "kierrättää raudan"
+msgstr "Raudan kierrätys"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:116
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
-msgstr "kierrättää raudan ja kullan"
+msgstr "Raudan ja kullan kierrätys"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:8
@@ -4050,14 +4050,14 @@ msgstr "Poronhoitoalue"
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:81
 msgctxt "frisians_building"
 msgid "rearing reindeer"
-msgstr "kasvattaa poroja"
+msgstr "Porojen kasvatus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start producing fur because ...
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:92
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:103
 msgctxt "frisians_building"
 msgid "producing fur"
-msgstr "tuottaa turkin"
+msgstr "Turkin tuotto"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:8
@@ -4101,7 +4101,7 @@ msgstr "Ompeluhuone"
 #. TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/init.lua:80
 msgid "sewing fur garment"
-msgstr "ompelee turkisvaatteen"
+msgstr "Turkisvaatteen ompelu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:8
@@ -4125,13 +4125,13 @@ msgstr "Räätälin Puoti"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:67
 msgid "sewing studded fur garment"
-msgstr "ompelee niitoitetun turkisvaatteen"
+msgstr "Niitoitetun turkisvaatteen ompelu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:79
 msgid "sewing golden fur garment"
-msgstr "ompelee kultaisen turkisvaatteen"
+msgstr "Kultaisen turkisvaatteen ompelu"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:8
@@ -4143,12 +4143,12 @@ msgstr "Krouvi"
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:95
 msgid "preparing only one ration"
-msgstr "valmistaa vain yhden ruoka-annoksen"
+msgstr "Vain yhden ruoka-annoksen valmistus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:109
 msgid "preparing rations"
-msgstr "valmistaa ruoka-annoksia"
+msgstr "Ruoka-annosten valmistus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
@@ -4159,7 +4159,7 @@ msgstr "Kutomo"
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
 msgid "weaving cloth"
-msgstr "kutoo kangasta"
+msgstr "Kankaan kudonta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:8
@@ -5116,7 +5116,7 @@ msgstr "orastava ruoikko"
 #: ../../data/tribes/immovables/resi/frisians/gold_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Gold"
-msgstr "hieman kultaa"
+msgstr "Hieman kultaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/amazons/gold_2/init.lua:8
@@ -5161,7 +5161,7 @@ msgstr "Runsaasti käyttökelpoista kiveä"
 #: ../../data/tribes/immovables/resi/frisians/coal_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Coal"
-msgstr "hieman hiiltä"
+msgstr "Hieman hiiltä"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/coal_2/init.lua:8
@@ -5179,7 +5179,7 @@ msgstr "Runsaasti hiiltä"
 #: ../../data/tribes/immovables/resi/frisians/iron_1/init.lua:8
 msgctxt "resource_indicator"
 msgid "Some Iron"
-msgstr "hieman rautaa"
+msgstr "Hieman rautaa"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/iron_2/init.lua:8
@@ -5265,8 +5265,8 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5297,7 +5297,7 @@ msgstr ""
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
-msgstr ""
+msgstr "Kuollut puu"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/ironwood/mature/black/init.lua:11
@@ -5433,16 +5433,16 @@ msgstr ""
 msgctxt "amazons_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
 msgctxt "amazons_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5451,8 +5451,8 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilasta (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5460,10 +5460,9 @@ msgstr[1] ""
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -5610,7 +5609,7 @@ msgstr "Kurja Kyläpahanen"
 msgid ""
 "Start the game with just a warehouse and the bare minimum for bootstrapping "
 "an economy. Warning: the AI can’t successfully start from this."
-msgstr ""
+msgstr "Aloita peli ainoastaan varastolla ja tyhjähköllä taloudella. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti."
 
 #: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:43
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
@@ -5624,7 +5623,7 @@ msgstr "Ole varovainen"
 msgid ""
 "You only have exactly the wares for each tool you will need to start your "
 "economy. Make sure no unneeded tool is created."
-msgstr ""
+msgstr "Sinulla on talouden aloittamiseen vain tismalleen tarvitsemasi tarvikkeet jokaista tarvitsemaasi työkalua kohden. Varmista ettet luo tarpeettomia työkaluja."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
@@ -5645,7 +5644,7 @@ msgid ""
 "Start the game with just your headquarters and very few wares for "
 "bootstrapping an economy. Warning: the AI can’t successfully start from "
 "this."
-msgstr ""
+msgstr "Aloita peli ainoastaan päämajalla ja tyhjähköllä taloudella. Varoitus: Tekoäly ei pysty aloittamaan tätä menestyksellisesti."
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
@@ -5666,7 +5665,7 @@ msgstr "Kauppa-asema"
 msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
-msgstr "Jos pelaajalta loppuvat tärkät tuotteet, ne korvautuvat itsestään"
+msgstr "Jos pelaajalta loppuvat tärkeät tuotteet, ne korvautuvat itsestään"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
@@ -5703,16 +5702,16 @@ msgstr "Tämä heimo tunnetaan jo vanhimmista taruista: Atlantiksen pojat ja tyt
 msgctxt "atlanteans_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5721,8 +5720,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilasta (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5730,8 +5729,8 @@ msgstr[1] ""
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5757,16 +5756,16 @@ msgstr "Itäisten maiden mahtavat heimot."
 msgctxt "barbarians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5775,8 +5774,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilasta (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5784,8 +5783,8 @@ msgstr[1] ""
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5802,16 +5801,16 @@ msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5820,8 +5819,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilasta (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5829,8 +5828,8 @@ msgstr[1] ""
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5847,16 +5846,16 @@ msgstr "Pohjoisen Meren karun rannikon asukkaat."
 msgctxt "frisians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas (+%2%)"
+msgstr[1] "%1% sotilasta (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% sotilas"
+msgstr[1] "%1% sotilasta"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5865,8 +5864,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas (+%3%)"
+msgstr[1] "%1%(+%2%) sotilasta (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5874,8 +5873,8 @@ msgstr[1] ""
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1%(+%2%) sotilas"
+msgstr[1] "%1%(+%2%) sotilasta"
 
 #: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
@@ -8373,7 +8372,7 @@ msgstr "Vanha Turkisvaate"
 #: ../../data/tribes/wares/fur_garment_studded/init.lua:8
 msgctxt "ware"
 msgid "Studded Fur Garment"
-msgstr "Niitoitettu Turkisvaate"
+msgstr "Niitattu Turkisvaate"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold/init.lua:8
@@ -8939,7 +8938,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/scout/init.lua:8
 msgctxt "amazons_worker"
 msgid "Scout"
-msgstr ""
+msgstr "Tiedustelija"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/shipwright/init.lua:8
@@ -8951,7 +8950,7 @@ msgstr ""
 #: ../../data/tribes/workers/amazons/soldier/init.lua:20
 msgctxt "amazons_worker"
 msgid "Soldier"
-msgstr ""
+msgstr "Sotilas"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8

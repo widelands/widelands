@@ -21,11 +21,12 @@
 
 #include <memory>
 
+#include <unzip.h>
+#include <zip.h>
+
 #include "io/filesystem/filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
-#include "third_party/minizip/unzip.h"
-#include "third_party/minizip/zip.h"
 
 class ZipFilesystem : public FileSystem {
 public:
@@ -48,10 +49,10 @@ public:
 	StreamRead* open_stream_read(const std::string& fname) override;
 	StreamWrite* open_stream_write(const std::string& fname) override;
 
-	FileSystem* make_sub_file_system(const std::string& fs_dirname) override;
-	FileSystem* create_sub_file_system(const std::string& fs_dirname, Type) override;
-	void fs_unlink(const std::string& fs_filename) override;
-	void fs_rename(const std::string&, const std::string&) override;
+	FileSystem* make_sub_file_system(const std::string& path) override;
+	FileSystem* create_sub_file_system(const std::string& path, Type type) override;
+	void fs_unlink(const std::string& filename) override;
+	void fs_rename(const std::string& old_name, const std::string& new_name) override;
 
 	unsigned long long disk_space() override;  // NOLINT
 

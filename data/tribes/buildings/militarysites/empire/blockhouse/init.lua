@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_militarysite_type {
+wl.Descriptions():new_militarysite_type {
    name = "empire_blockhouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Blockhouse"),
@@ -29,9 +29,12 @@ descriptions:new_militarysite_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 37, 58 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 39, 61 }
       }
    },
 

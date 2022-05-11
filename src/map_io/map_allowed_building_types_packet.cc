@@ -33,7 +33,7 @@ constexpr int32_t kCurrentPacketVersion = 1;
 void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
                                          EditorGameBase& egbase,
                                          bool const skip,
-                                         MapObjectLoader&) {
+                                         MapObjectLoader& /* mol */) {
 	if (skip) {
 		return;
 	}
@@ -62,7 +62,7 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 				const TribeDescr& tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
-				if (game) {
+				if (game != nullptr) {
 					for (DescriptionIndex i = 0; i < game->descriptions().nr_buildings(); ++i) {
 						player->allow_building_type(i, false);
 					}
@@ -95,7 +95,9 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 	}
 }
 
-void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver&) {
+void MapAllowedBuildingTypesPacket::write(FileSystem& fs,
+                                          EditorGameBase& egbase,
+                                          MapObjectSaver& /* mos */) {
 	Profile prof;
 	prof.create_section("global").set_int("packet_version", kCurrentPacketVersion);
 

@@ -86,7 +86,7 @@ public:
 	}
 
 	// Compiles 'source'. Throws an exception on error.
-	void compile(const char* source);
+	void compile(const char* source) const;
 
 private:
 	const GLenum type_;
@@ -96,24 +96,24 @@ private:
 };
 
 Shader::Shader(GLenum type) : type_(type), shader_object_(glCreateShader(type)) {
-	if (!shader_object_) {
+	if (shader_object_ == 0u) {
 		throw wexception("Could not create %s shader.", shader_to_string(type).c_str());
 	}
 }
 
 Shader::~Shader() {
-	if (shader_object_) {
+	if (shader_object_ != 0u) {
 		glDeleteShader(shader_object_);
 	}
 }
 
-void Shader::compile(const char* source) {
+void Shader::compile(const char* source) const {
 	glShaderSource(shader_object_, 1, &source, nullptr);
 
 	glCompileShader(shader_object_);
 	GLint compiled;
 	glGetShaderiv(shader_object_, GL_COMPILE_STATUS, &compiled);
-	if (!compiled) {
+	if (compiled == 0) {
 		GLint infoLen = 0;
 		glGetShaderiv(shader_object_, GL_INFO_LOG_LENGTH, &infoLen);
 		if (infoLen > 1) {
@@ -130,13 +130,13 @@ void Shader::compile(const char* source) {
 }
 
 Program::Program() : program_object_(glCreateProgram()) {
-	if (!program_object_) {
+	if (program_object_ == 0u) {
 		throw wexception("Could not create GL program.");
 	}
 }
 
 Program::~Program() {
-	if (program_object_) {
+	if (program_object_ != 0u) {
 		glDeleteProgram(program_object_);
 	}
 }
@@ -158,7 +158,7 @@ void Program::build(const std::string& program_name) {
 	// Check the link status
 	GLint linked;
 	glGetProgramiv(program_object_, GL_LINK_STATUS, &linked);
-	if (!linked) {
+	if (linked == 0) {
 		GLint infoLen = 0;
 		glGetProgramiv(program_object_, GL_INFO_LOG_LENGTH, &infoLen);
 
@@ -242,12 +242,12 @@ void State::bind_framebuffer(const GLuint framebuffer, const GLuint texture) {
 
 void State::enable_vertex_attrib_array(std::unordered_set<GLint> entries) {
 	for (const auto e : entries) {
-		if (!enabled_attrib_arrays_.count(e)) {
+		if (enabled_attrib_arrays_.count(e) == 0u) {
 			glEnableVertexAttribArray(e);
 		}
 	}
 	for (const auto e : enabled_attrib_arrays_) {
-		if (!entries.count(e)) {
+		if (entries.count(e) == 0u) {
 			glDisableVertexAttribArray(e);
 		}
 	}

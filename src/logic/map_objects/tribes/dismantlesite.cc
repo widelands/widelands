@@ -95,7 +95,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
 void DismantleSite::cleanup(EditorGameBase& egbase) {
 	PartiallyFinishedBuilding::cleanup(egbase);
 
-	if (was_immovable_ && work_completed_ >= work_steps_) {
+	if ((was_immovable_ != nullptr) && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
 			// 'false' means that this was built on top of an immovable, so we reinstate that immovable
@@ -192,7 +192,7 @@ bool DismantleSite::burn_on_destroy() {
 Called by our builder to get instructions.
 ===============
 */
-bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
+bool DismantleSite::get_building_work(Game& game, Worker& worker, bool /*success*/) {
 	if (&worker != builder_.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
@@ -207,7 +207,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		for (size_t i = next_dropout_index_; i != next_dropout_index_ || first_round;
 		     i = (i + 1) % nr_dropout_queues, first_round = false) {
 			WaresQueue& q = *dropout_wares_[i];
-			if (q.get_filled()) {
+			if (q.get_filled() != 0u) {
 				q.set_filled(q.get_filled() - 1);
 				q.set_max_size(q.get_max_size() - 1);
 				const WareDescr& wd = *owner().tribe().get_ware_descr(q.get_index());
@@ -220,7 +220,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		}
 	}
 
-	if (!work_steps_) {
+	if (work_steps_ == 0u) {
 		// Happens for building without buildcost. Complete the building immediately.
 		schedule_destroy(game);
 	}
@@ -230,7 +230,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
-			if (!wq->get_filled()) {
+			if (wq->get_filled() == 0u) {
 				continue;
 			}
 
@@ -282,8 +282,8 @@ void DismantleSite::draw(const Time& gametime,
 	const Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
-	if (was_immovable_) {
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if (was_immovable_ != nullptr) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, coords, scale, was_immovable_->main_animation(), tanim, &player_color);
 		} else {
@@ -292,7 +292,7 @@ void DismantleSite::draw(const Time& gametime,
 		}
 	} else {
 		// Draw the construction site marker
-		if (info_to_draw & InfoToDraw::kShowBuildings) {
+		if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 			dst->blit_animation(
 			   point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 		} else {
@@ -302,7 +302,7 @@ void DismantleSite::draw(const Time& gametime,
 	}
 
 	// Blit bottom part of the animation according to dismantle progress
-	if (info_to_draw & InfoToDraw::kShowBuildings) {
+	if ((info_to_draw & InfoToDraw::kShowBuildings) != 0) {
 		dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
 		                    &player_color, 1.f, 100 - ((get_built_per64k() * 100) >> 16));
 	} else {

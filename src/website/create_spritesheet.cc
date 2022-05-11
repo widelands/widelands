@@ -188,7 +188,7 @@ void write_animation_spritesheets(Widelands::EditorGameBase& egbase,
 		descr = descriptions.get_immovable_descr(descriptions.immovable_index(map_object_name));
 	} else if (descriptions.ship_exists(descriptions.ship_index(map_object_name))) {
 		descr = descriptions.get_ship_descr(descriptions.ship_index(map_object_name));
-	} else if (descriptions.get_critter_descr(map_object_name)) {
+	} else if (descriptions.get_critter_descr(map_object_name) != nullptr) {
 		descr = descriptions.get_critter_descr(map_object_name);
 	} else {
 		// Frontier and flag animations need special treatment

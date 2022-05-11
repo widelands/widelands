@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-descriptions:new_warehouse_type {
+wl.Descriptions():new_warehouse_type {
    name = "empire_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Warehouse"),
@@ -24,9 +24,12 @@ descriptions:new_warehouse_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 58, 55 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 58, 58 }
       }
    },
 

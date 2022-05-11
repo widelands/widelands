@@ -93,6 +93,9 @@
 #define FORMAT_WARNINGS_ON GCC_DIAG_ON("-Wformat")
 #endif
 
+// Couldn't we use `check_cxx_compiler_flag` in the cmake file instead?
+// https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html
+
 // Older clang versions don't have "-Wreserved-identifier" either
 #define CLANG_DIAG_RESERVED_IDENTIFIER_OFF
 #define CLANG_DIAG_RESERVED_IDENTIFIER_ON

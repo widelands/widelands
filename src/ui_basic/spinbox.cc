@@ -152,14 +152,14 @@ SpinBox::SpinBox(Panel* const parent,
 		sbi_->button_ten_plus->set_can_focus(false);
 
 		sbi_->button_ten_plus->sigclicked.connect([this]() {
-			if (SDL_GetModState() & KMOD_CTRL) {
+			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 				set_value(sbi_->max);
 			} else {
 				change_value(sbi_->big_step_size);
 			}
 		});
 		sbi_->button_ten_minus->sigclicked.connect([this]() {
-			if (SDL_GetModState() & KMOD_CTRL) {
+			if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 				set_value(sbi_->min);
 			} else {
 				change_value(-sbi_->big_step_size);
@@ -184,14 +184,14 @@ SpinBox::SpinBox(Panel* const parent,
 	}
 
 	sbi_->button_plus->sigclicked.connect([this]() {
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			set_value(sbi_->max);
 		} else {
 			change_value(sbi_->step_size);
 		}
 	});
 	sbi_->button_minus->sigclicked.connect([this]() {
-		if (SDL_GetModState() & KMOD_CTRL) {
+		if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 			set_value(sbi_->min);
 		} else {
 			change_value(-sbi_->step_size);
@@ -245,10 +245,10 @@ bool SpinBox::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	if (change == 0) {
 		return false;
 	}
-	if ((change > 0) && (sbi_->button_plus)) {
+	if ((change > 0) && ((sbi_->button_plus) != nullptr)) {
 		change_value(change * sbi_->step_size);
 	}
-	if ((change < 0) && (sbi_->button_minus)) {
+	if ((change < 0) && ((sbi_->button_minus) != nullptr)) {
 		change_value(change * sbi_->step_size);
 	}
 	return true;
@@ -387,9 +387,8 @@ int32_t SpinBox::get_value() const {
 			return sbi_->values.at(sbi_->value);
 		}
 		return -1;
-	} else {
-		return sbi_->value;
 	}
+	return sbi_->value;
 }
 
 /**

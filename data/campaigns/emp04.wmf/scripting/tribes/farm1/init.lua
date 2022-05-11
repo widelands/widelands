@@ -2,7 +2,7 @@ dirname = "campaigns/emp04.wmf/" .. path.dirname (__file__)
 
 push_textdomain("scenario_emp04.wmf")
 
-descriptions:new_productionsite_type {
+wl.Descriptions():new_productionsite_type {
    name = "empire_farm1",
    descname = pgettext("empire_building", "Farm"),
    icon = dirname .. "menu.png",
@@ -26,7 +26,7 @@ descriptions:new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 82, 74 },
+         hotspot = { 89, 82 },
       },
    },
 

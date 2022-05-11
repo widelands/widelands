@@ -142,7 +142,7 @@ private:
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;
 	/// Whether the window was minimized the last time that think() was executed
-	uint32_t was_minimized_;
+	bool was_minimized_;
 
 	/// Whether a building has been selected
 	bool has_selection_;

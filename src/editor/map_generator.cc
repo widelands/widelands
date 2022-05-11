@@ -75,7 +75,7 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	const MapGenBobCategory* bobCategory = landResource.get_bob_category(terrType);
 
-	if (!bobCategory) {  //  no bobs defined here...
+	if (bobCategory == nullptr) {  //  no bobs defined here...
 		return;
 	}
 
@@ -95,14 +95,14 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 
 	// Set bob according to bob area
 
-	if (set_immovable && (num = bobCategory->num_immovables())) {
+	if (set_immovable && ((num = bobCategory->num_immovables()) != 0u)) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
 		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
-	if (set_moveable && (num = bobCategory->num_critters())) {
+	if (set_moveable && ((num = bobCategory->num_critters()) != 0u)) {
 		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
@@ -268,7 +268,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 		for (uint32_t x = 0; x < w; x += 16) {
 			for (uint32_t y = 0; y < h; y += 16) {
 				values[x + y * w] = rng.rand();
-				if (x % 32 || y % 32) {
+				if (((x % 32) != 0u) || ((y % 32) != 0u)) {
 					values[x + y * w] += kAverageElevation;
 					values[x + y * w] /= 2;
 				}
@@ -277,8 +277,10 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  randomize the values
 
-		uint32_t step_x = std::min(16U, w), step_y = std::min(16U, h);
-		uint32_t max = kAverageElevation, min = kAverageElevation;
+		uint32_t step_x = std::min(16U, w);
+		uint32_t step_y = std::min(16U, h);
+		uint32_t max = kAverageElevation;
+		uint32_t min = kAverageElevation;
 		double ele_fac = 0.15;
 
 		bool end = false;
@@ -638,7 +640,7 @@ bool MapGenerator::create_random_map() {
 		//  current node.
 
 		//  ... Treat "even" and "uneven" row numbers differently
-		uint32_t const x_dec = fc.y % 2 == 0;
+		uint32_t const x_dec = static_cast<uint32_t>(fc.y % 2 == 0);
 
 		uint32_t right_x = fc.x + 1;
 		uint32_t lower_y = fc.y + 1;
@@ -698,7 +700,8 @@ bool MapGenerator::create_random_map() {
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
-	uint8_t rows = 1, lines = 1;
+	uint8_t rows = 1;
+	uint8_t lines = 1;
 	if (map_info_.numPlayers > 1) {
 		++lines;
 		if (map_info_.numPlayers > 2) {
@@ -845,10 +848,12 @@ bool MapGenerator::create_random_map() {
 int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	if ((ch == '0') || (ch == 'o') || (ch == 'O')) {
 		return 22;
-	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
-	           (ch == 'J') || (ch == 'j')) {
+	}
+	if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') || (ch == 'J') ||
+	    (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch <= 'Z') {
+	}
+	if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
@@ -863,7 +868,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= 'a' && ch <= 'z') {
+	}
+	if (ch >= 'a' && ch <= 'z') {
 		char res = ch - 'a';
 		if (ch > 'i') {
 			--res;
@@ -878,7 +884,8 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 			--res;
 		}
 		return res;
-	} else if (ch >= '2' && ch <= '9') {
+	}
+	if (ch >= '2' && ch <= '9') {
 		return 24 + ch - '2';
 	}
 	return -1;
@@ -894,9 +901,11 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 	if (num == 22) {
 		return '0';
-	} else if (num == 23) {
+	}
+	if (num == 23) {
 		return '1';
-	} else if ((0 <= num) && (num < 22)) {
+	}
+	if ((0 <= num) && (num < 22)) {
 		char result = num + 'a';
 		if (result >= 'i') {
 			++result;
@@ -911,11 +920,11 @@ char UniqueRandomMapInfo::map_id_number_to_char(int32_t const num) {
 			++result;
 		}
 		return result;
-	} else if ((24 <= num) && (num < 32)) {
-		return (num - 24) + '2';
-	} else {
-		return '?';
 	}
+	if ((24 <= num) && (num < 32)) {
+		return (num - 24) + '2';
+	}
+	return '?';
 }
 
 /**
@@ -969,7 +978,7 @@ bool UniqueRandomMapInfo::set_from_id_string(UniqueRandomMapInfo& mapInfo_out,
 	}
 
 	//  check if xxor was right
-	if (nums[kMapIdDigits - 1]) {
+	if (nums[kMapIdDigits - 1] != 0) {
 		return false;
 	}
 
@@ -1008,7 +1017,7 @@ bool UniqueRandomMapInfo::set_from_id_string(UniqueRandomMapInfo& mapInfo_out,
 	//  Number of players
 	mapInfo_out.numPlayers = nums[12];
 	//  Island mode
-	mapInfo_out.islandMode = nums[13];
+	mapInfo_out.islandMode = (nums[13] != 0);
 
 	// World name hash
 	uint16_t world_name_hash = (nums[14]) | (nums[15] << 5) | (nums[16] << 10) | (nums[17] << 15);
