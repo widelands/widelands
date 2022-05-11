@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021
+# Atte Timonen, 2022
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2017,2019
 msgid ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,7 +193,7 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr "Näyttää siltä kuin olisimme rantautuneet koko tämän kaukaisen saaren ainoan palmunpuun alle. Pelkäämpä ettemme löydä apua, jota tarvitsemme laivan valmistelemiseen ajoissa."
+msgstr "Näyttää siltä kuin olisimme rantautuneet koko tämän kaukaisen saaren ainoan palmunpuun alle. Pelkäänpä ettemme löydä apua, jota tarvitsemme laivan valmistelemiseen ajoissa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
@@ -208,7 +209,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "Herrani, pelkäänpä ettemme ole turvassa täällä vieraalla maalla. Kuka tietää millaisia kauheita olentoja elääkään tämän metsässä takana, tuolla suunnaatomalla aavikolla? Mitä jos nuo olennot tulevatkin metsään ja odottavat hetkeä hyökätäkseen kimppuumme?"
+msgstr "Herrani, pelkäänpä ettemme ole turvassa täällä vieraalla maalla. Kuka tietää millaisia kauheita olentoja elääkään tämän metsän takana, tuolla suunnattomalla aavikolla? Mitä jos nuo olennot tulevatkin metsään ja odottavat oikeaa hetkeä hyökätäkseen kimppuumme?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
@@ -216,7 +217,7 @@ msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
-msgstr "No, ehkäpä pelkoni on harhaa, mutta ei voi olla väärin pitää metsää hieman silmällä – jotta voisimme olla varmoja, että havaitsemme mahdolliset viholliset ennen kuin he näkevät meidät."
+msgstr "No, kenties pelkoni on turhaa, mutta ei voi olla väärin pitää metsää hieman silmällä – jotta voisimme olla varmoja, että havaitsemme mahdolliset viholliset ennen kuin he näkevät meidät."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
@@ -298,7 +299,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Mutta valitettavasti tukit ovat käyttökelvottomia laivamme korjaamisessa – meidän täytyy sahata niistä lautoja, joita tarvitsemme jokaisessa laivassa ja myös kaikissa rakennuksissa. Meidän täytyy siis rakentaa saha – heti kun sille on tilaa."
+msgstr "Mutta valitettavasti tukit ovat käyttökelvottomia laivamme korjaamisessa – meidän täytyy sahata niistä lautoja, joita tarvitsemme kaikissa laivoissa ja rakennuksissa. Meidän täytyy siis rakentaa saha – heti kun sille on tilaa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"

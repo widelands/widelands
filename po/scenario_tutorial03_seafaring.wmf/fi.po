@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # heidi.wenger, 2022
 # Jukka Pakarinen, 2016-2020
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: heidi.wenger, 2022\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +28,7 @@ msgstr "Merenkäynti"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
-msgstr "Merenkäynti opetuspeli"
+msgstr "Merenkäynnin opetuspeli"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
@@ -39,7 +40,7 @@ msgstr "Tervetuloa takaisin. Tässä opetuspelissä opit kaikkein tärkeimmät a
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Mutta ensin annan sinulle yleiskuvan sinun alueestasi: etelässä sinulla on kokonainen talous melkein kaikella mitä tarvitset."
+msgstr "Mutta ensin annan sinulle yleiskuvan alueestasi: etelässä sinulla on talouskokonaisuus melkein kaikella mitä tarvitset."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
@@ -50,7 +51,7 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Pohjoisessa sinulla on ainoastaan kultakaivos ja varasto. Samaan aikaan, kun kaivosmiehille toimitetaan mukavasti ruokaa, ei ole tapaa kuljettaa kultamalmia eteläosan sulattamoon."
+msgstr "Pohjoisessa sinulla on ainoastaan kultakaivos ja varasto. Vaikka kaivosmiehille saadaankin toimitettua mukavasti ruokaa, ei kultamalmin kuljettamiseksi eteläosan sulattamoon ole keinoa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
@@ -64,7 +65,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "En halua sinun kuitenkaan kiirehtivän: olet juuri saapunut tänne ja mahdollisesti halluat katsoa hieman tarkemmin leiriäsi. Pidän itsekin lyhyen tauon ja palaan pian takaisin."
+msgstr "En halua sinun kuitenkaan kiirehtivän: olet juuri saapunut tänne ja mahdollisesti haluat katsoa hieman tarkemmin leiriäsi. Pidän itsekin lyhyen tauon ja palaan pian takaisin."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -664,7 +665,7 @@ msgstr "Jokainen vesitien osa tarvitsee, kuitenkin, kaksi vesikolmiota viereens�
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:323
 msgid "Conclusion"
-msgstr "Johtopäätös"
+msgstr "Yhteenveto"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:325
 msgid "About Ferries"
