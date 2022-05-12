@@ -131,15 +131,13 @@ jobs:
           - Release
           - Debug
         os:
-          - ubuntu-20.04
+          - ubuntu-22.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-12
-          - clang-11
-          - clang-7
-          - clang-6.0
+          - clang-14
+          - clang-13
+          - g++-12
           - g++-11
-          - g++-10
         include:
           # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-5
@@ -153,6 +151,18 @@ jobs:
             config: Debug
           - compiler: g++-6
             os: ubuntu-18.04
+            config: Release
+          - compiler: clang-6.0
+            os: ubuntu-20.04
+            config: Debug
+          - compiler: clang-6.0
+            os: ubuntu-20.04
+            config: Release
+          - compiler: clang-7
+            os: ubuntu-20.04
+            config: Debug
+          - compiler: clang-7
+            os: ubuntu-20.04
             config: Release
     runs-on: ${{ matrix.os }}
     env:
