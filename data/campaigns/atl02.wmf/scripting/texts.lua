@@ -77,7 +77,7 @@ obj_expand = {
    title = _("Expand your territory"),
    number = 1,
    body = objective_text(_("Expand Territory"),
-   p(_([[As our settlement is growing, we will need more space for all buildings. Expand our territory by building military buildings. Build at least one tower for its larger view range.]])))
+   p(_([[As our settlement is growing, we will need more space for all buildings. Expand our territory by building military buildings. Build some guardhouses and at least one tower for its larger view range.]])))
 }
 
 obj_spidercloth = {
