@@ -187,13 +187,13 @@ jobs:
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="ON" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc) VERBOSE=1
-    - name: Make install/uninstall
+    - name: Make install
       run: |
         cd build
         TEST_INSTALL_DIR="${PWD}/test_install"
         make -j$(nproc) DESTDIR=${TEST_INSTALL_DIR} install
-        make DESTDIR=${TEST_INSTALL_DIR} uninstall
-        test ! -d ${TEST_INSTALL_DIR}
+        # make DESTDIR=${TEST_INSTALL_DIR} uninstall
+        # test ! -d ${TEST_INSTALL_DIR}
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
