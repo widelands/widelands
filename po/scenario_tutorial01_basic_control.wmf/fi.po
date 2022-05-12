@@ -4,6 +4,7 @@
 # Translators:
 # Aina Vaipoissa <vaippaheppu@gmail.com>, 2020
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
@@ -15,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-03-25 02:57+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020-2021\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,36 +48,36 @@ msgstr "Tervetuloa Widelandsiin!"
 msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction."
-msgstr ""
+msgstr "Widelands on rauhallisesti etenevä rakenteluun keskittyvä strategiapeli, jossa pääpaino on uuden luomisella tuhoamisen sijaan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:31
 msgid "You will be guided through this tutorial by objectives."
-msgstr ""
+msgstr "Tämä opetuspeli etenee tavoite kerrallaan."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:37
 msgid "Objectives and how to handle them"
-msgstr ""
+msgstr "Tavoitteet ja niiden käsittely"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:39
 msgid "Handling of the ‘Objectives’ window"
-msgstr ""
+msgstr "'Tavoitteet'-ikkunan käsittely"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
 "You can open and close the ‘Objectives’ window by clicking on the "
 "‘Objectives’ button in the toolbar on the bottom of the screen."
-msgstr ""
+msgstr "Voit avata ja sulkea 'Tavoitteet'-ikkunan klikkaamalla 'Tavoitteet'-painiketta ruudun alalaidan työkalupalkista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
 "Like most other windows, you can also close the window by right-clicking on "
 "it."
-msgstr ""
+msgstr "Kuten useimmat muutkin ikkunat, voit sulkea sen myös hiiren oikealla näppäimellä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "When you have accomplished an objective, it will disappear from the list."
-msgstr ""
+msgstr "Kun olet saavuttanut tavoitteen, se poistuu listasta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:48
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:50
@@ -85,14 +86,14 @@ msgstr "Näytä rakennuspaikat"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Activate ‘Show Building Spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Aktivoi 'Näytä rakennuspaikat'. Voit tehdä tämän kahdella tavalla:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 #, lua-format
 msgid ""
 "Press %s to toggle them, or select ‘Show Building Spaces’ in the ‘Show / "
 "Hide’ menu."
-msgstr ""
+msgstr "Paina %s kytkeäksesi ne päälle, tai valitse 'Näytä rakennuspaikat' 'Näytä / Piilota'-valikosta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Show the building spaces now."
@@ -114,7 +115,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Widelandsissa on viisi eri heimoa: Barbaarit, Keisarikunta, Atlantislaiset, Vapaamieliset ja Amazonit. Kaikilla heimoilla on omanlaisensa talousrakenne, sekä omat vahvuudet ja heikkoudet. Perusluonteeltaan peli on kuitenkin samanlainen kaikilla heimoilla pelattaessa. Keskitytään tällä erää barbaareihin. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -126,7 +127,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr ""
+msgstr "Yleensä sinulla on pelin alussa yksi päärakennus. Se on tuo suuri rakennus jonka edessä on sininen lippu. Päärakennus varastoi tarvikkeita, työläisiä ja sotilaita. Joitain tarvikkeita tarvitaan talojen rakentamiseksi, toisia taas toisten tarvikkaiden valmistamiseksi. Aloitusvarannot eivät tietenkään riitä ikuisesti, joten sinun täytyy varmistaa korvaavien tarvikkeiden valmistaminen. Alkupelissä tärkeimpiä tarvikkeita ovat perusrakennustarvikkeet kuten tukit ja graniitti. Huolehditaan ensiksi etteivät tukit pääse loppumaan kesken. Sitä varten tarvitsemme puunhakkaajan ja sopivan mökin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -138,7 +139,7 @@ msgstr "Puunhakkaajan mökille täytyy etsiä sopiva paikka. Helpoiten se löyty
 msgid ""
 "I’ll show you where the menu is and where to show and hide the building "
 "spaces."
-msgstr ""
+msgstr "Näytän mistä valikko löytyy ja miten näyttää ja piilottaa rakennuspaikat."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
@@ -156,7 +157,7 @@ msgid ""
 " connect it with a road. There is a sweet spot for a lumberjack right next "
 "to those trees. I’ll describe the steps I will take and then demonstrate "
 "them."
-msgstr ""
+msgstr "Noinhan se käy. Seuraavaksi opastan miten puunhakkaajan mökki tehdään ja yhdistetään tieverkostoon. Noiden puiden vieressä näyttäisi olevan oikein otollinen paikka. Kerron ensiksi mitä tarkalleen täytyy tehdä, ja näytän sen sitten ruudulla."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:98
 msgid "Building the Lumberjack"
@@ -166,13 +167,13 @@ msgstr "Puunhakkaajan mökin rakentaminen"
 msgid ""
 "First, I’ll left-click on the symbol where I want the lumberjack’s hut to be"
 " built. A window will appear where I can choose between buildings."
-msgstr ""
+msgstr "Ensiksi, klikkaan vasemmalla painikkeella rakennuksen kuvaketta siinä kohtaa mihin haluan puunhakkaajan mökin rakentaa. Tämä avaa ikkunan jossa voin valita eri rakennusten välillä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:103
 msgid ""
 "The lumberjack’s hut is a small building, so I will then go on to select the"
 " small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr ""
+msgstr "Puunhakkaajan mökki on pieni rakennus, joten valitsen valikosta pienten rakennusten välilehden. Sitten valitsen puunhakkaajan mökin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:121
@@ -302,11 +303,11 @@ msgstr "Hienosti tehty! Sitten odotellaan mökin valmistumista."
 msgid ""
 "If you want things to go faster, simply use the %1$s key on your keyboard to"
 " increase the game speed. You can use %2$s to make the game slower again."
-msgstr ""
+msgstr "Jos haluat pelin etenevän nopeammin, käytä %1$s-näppäintä lisätäksesi kierroksia ja kasvattaaksesi pelinopeutta. Näppäimellä %2$s voit vastaavasti hidastaa tahtia.  "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:218
 msgid "Change is rapid with %1$s/%2$s and smooth with %3$s/%4$s."
-msgstr ""
+msgstr "Muutos on nopeaa näppäimillä %1$s/%2$s ja jouhevaa näppäimillä %3$s/%4$s."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:225
 msgid "The Lumberjack’s Hut is Done"
@@ -321,11 +322,11 @@ msgstr "Erinomaista! Puunhakkaajan mökki on valmistunut. Puunhakkaaja voi nyt a
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid "Moving the View"
-msgstr ""
+msgstr "Näkymän liikuttaminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Move your view"
-msgstr ""
+msgstr "Liikuta näkymää"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
@@ -385,12 +386,12 @@ msgid ""
 "When you are ready to continue, close the minimap by selecting ‘Hide "
 "Minimap’ in the ‘Map View’ menu or by pressing ‘%s’. Of course, a right-"
 "click also works."
-msgstr ""
+msgstr "Kun olet valmis jatkamaan, sulje pienkartta valitsemalla 'Sulje pienkartta' 'Karttanäkymä'-valikosta tai painamalla '%s'. Tietysti ikkunan voi sulkea myös hiiren oikealla painikkeella."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:270
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:285
 msgid "Moving Your View"
-msgstr "Liikuttaa Näkymääsi"
+msgstr "Näkymän liikuttaminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:287
@@ -406,7 +407,7 @@ msgstr "Loistavaa! Ja nyt hiukan asiaa pienkartasta."
 msgid ""
 "You can open it by selecting the ‘Show Minimap’ entry in the ‘Map View’ menu"
 " at the bottom of the screen or simply by using the keyboard shortcut ‘%s’."
-msgstr ""
+msgstr "Voit avata sen valitsemalla 'Näytä Pienkartta' ruudun alalaidan 'Karttanäkymä'-valikosta tai käyttämällä pikanäppäintä '%s'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid "I will open it for you."
@@ -447,13 +448,13 @@ msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press ‘%s’ for that)."
-msgstr ""
+msgstr "Kivilouhos on pieni rakennus kuten puunhakkaajan mökki. Siispä voit rakentaa sen mille tahansa paikalle jolla näytetään punainen, keltainen tai vihreä rakennus kun rakennuspaikkojen näyttäminen on käytössä (Paina '%s' toiminnon kytkemiseksi)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Paina vain mitä tahansa kuvaketta kivikkojen vieressä, valitse pieni rakennus -välilehti avautuvasta ruudusta, sitten paina kivilouhos-kuvaketta."
+msgstr "Paina vain mitä tahansa rakennuskuvaketta kivikkojen vieressä, valitse pieni rakennus -välilehti avautuvasta ruudusta, ja paina sitten kivilouhos-kuvaketta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "How to Build a Quarry"
@@ -469,7 +470,7 @@ msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
 "space where you want the building to be, choose it from the window that "
 "appears, and it is placed."
-msgstr ""
+msgstr "Varmista että rakennuspaikkojen näyttäminen on kytketty päälle. Sitten vain klikkaat kohtaa johon haluat rakennuksen sijoittaa, valitset avautuvasta ikkunasta kivilouhoksen, ja se on siinä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:325
 msgid ""
@@ -499,7 +500,7 @@ msgstr "Ja viimeisimpänä, keltainen lippukuvake sallii vain liput."
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr "Jos sijoitat jotakin jollekin alueelle, ympäröiville alueille saattaa jäädä vähemmän tilaa rakennuksille, joten valitse alueesi harkiten."
+msgstr "Kun sijoitat jotain jollekin alueelle, ympäröiville alueille saattaa jäädä vähemmän tilaa rakennuksille, joten valitse alueesi harkiten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:334
 msgid ""
@@ -540,7 +541,7 @@ msgstr "Muistathan: olemme jo tienrakennustilassa aloitettuasi kivilouhoksen rak
 msgid ""
 "Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select the road building symbol."
-msgstr ""
+msgstr "Loistavaa! Voit siirtyä tienrakennustilaan mistä tahansa lipusta klikkaamalla sitä hiiren vasemmalla painikkeella ja valitsemalla tien rakentamisen kuvakkeen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:357
 msgid ""
@@ -565,7 +566,7 @@ msgstr "Yhdistä rakennustyömaasi"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
 "Connect your quarry construction site to your headquarters with a road."
-msgstr ""
+msgstr "Yhdistä kivilouhoksen rakennustyömaa päärakennukseesi tiellä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -608,7 +609,7 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr "Huomioi kallistukset, kun sijoitat teitä ja käytä niitä eduksesi. Yritä myös pitää tiesi niiin lyhyinä kuin mahdollista ja aina muista asettaa niin paljon lippuja kuin mahdollista tieosioille tasataksesi niiden kuormaa."
+msgstr "Huomioi kallistukset, kun sijoitat teitä ja käytä niitä eduksesi. Yritä myös pitää tiesi niiin lyhyinä kuin mahdollista ja muista aina asettaa niin paljon lippuja kuin mahdollista tieosioille tasataksesi niiden kuormaa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:396
 msgid "Quarry not Connected"
@@ -619,7 +620,7 @@ msgid ""
 "Your workers do not like to walk across country. You have to build a road "
 "from your headquarters to the construction site so that carriers can "
 "transport wares."
-msgstr ""
+msgstr "Työläisesi eivät pidä maaston poikki kävelemisestä. Sinun täytyy rakentaa tie päämajaltasi rakennustyömaalle jotta kantajat voivat kuljettaa tarvikkeita."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:405
 msgid "You Destroyed the Construction Site!"
@@ -664,20 +665,20 @@ msgstr "Rakenna toinen kivilouhos"
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr "Kivikkoja on useita, joten kannattaa harkita toisen kivilouhoksen rakentamista. Se nopeuttaa graniitin tuotantoa."
+msgstr "Kivikkoja on useita, joten kannattaa harkita toisen kivilouhoksen rakentamista. Se nopeuttaa graniitin lohkomista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Status"
-msgstr ""
+msgstr "Rakennusten nimet ja tuotannon tila"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr ""
+msgstr "Samalla kun odottelemme, näytän pikaisesti toisen kätevän toiminnon. Välillä on vaikeaa erottaa rakennuksia toisistaan. Widelandsissä on toiminto 'Näytä rakennusten nimet' rakennusten nimien näyttämiseksi rakennusten päällä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -685,7 +686,7 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Näyttääksesi rakennusten nimet voit valita 'Näytä rakennusten nimet' / 'Piilota rakennusten nimet' alareunan 'Näytä / Piilota'-valikosta, tai käyttää pikanäppäintä '%s'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
@@ -694,7 +695,7 @@ msgstr "Laitan nyt rakennusten nimet näkymään."
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
 msgid "Show the building status"
-msgstr ""
+msgstr "Näytä rakennusten tila"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:453
 #, lua-format
@@ -702,7 +703,7 @@ msgid ""
 "In order to show or hide the building status labels, you can select the "
 "‘Show Status’ entry from the ‘Show / Hide’ menu on the bottom, or press the "
 "‘%s’ key on the keyboard."
-msgstr ""
+msgstr "Näyttääksesi rakennusten tilat voit valita 'Näytä rakennusten tilat' / 'Piilota rakennusten tilat' alareunan 'Näytä / Piilota'-valikosta, tai käyttää pikanäppäintä '%s'."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:460
 msgid ""
@@ -715,7 +716,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr ""
+msgstr "Rakennusten nimien lisäksi voit aktivoida niille myös tilastokentät. Ne näyttävät tietoja rakennusten tuottavuudesta ja rakennustyömaiden edistymisestä."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -744,7 +745,7 @@ msgstr "Jatka ‘Arkistoi valittu viesti’ napin painamista kunnes kaikki viest
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press %s to select them all."
-msgstr ""
+msgstr "Voit myös pitää pohjassa Ctrl- tai Shift-näppäintä valitaksesi useita viestejä, tai painaa %s valitaksesi ne kaikki. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:490
 #, lua-format
@@ -752,7 +753,7 @@ msgid ""
 "You can toggle the message window by pressing ‘%s’ or clicking the second "
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically."
-msgstr ""
+msgstr "Voit vaihtaa viesti-ikkunan näkymistä painamalla '%s' tai klikkaamalla toista nappia oikealta ikkunan alareunasta. Uusin viesti merkataan automaattisesti."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:491
 msgid ""
@@ -804,7 +805,7 @@ msgid ""
 "All windows in Widelands (except story message windows showing ‘OK’) can be "
 "closed by right-clicking into them. Some windows can also be toggled with "
 "the buttons and menus at the very bottom of the screen."
-msgstr ""
+msgstr "Kaikki ruudut Widelandsissä (lukuunottamatta 'OK'-viestin näyttäviä tarinankerrontaruutuja) voi sulkea hiiren oikealla näppäimellä. Jotkin ruudut voi myös kytkeä päälle/pois pelin alareunasta löytyvien painikkeiden ja valikoiden kautta."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:512
 msgid "Close the messages window now by right-clicking into it."
@@ -817,7 +818,7 @@ msgstr "Ikkunoiden sulkeminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:520
 msgid "Excellent. Now we need to focus on other things."
-msgstr ""
+msgstr "Hienoa. Nyt meidän on keskityttävä toisiin asioihin."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""
@@ -881,14 +882,14 @@ msgstr "Kasvata aluettasi"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:567
 msgid ""
 "Build a military building on your border. Choose the one you like most."
-msgstr ""
+msgstr "Rakenna sotilasrakennus rajallesi. Valitse se joka miellyttää eniten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:568
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build a bigger "
 "military building."
-msgstr ""
+msgstr "Vartiomökki on ainoa sotilasrakennus joka mahtuu pienelle rakennuspaikalle. Jos puunhakkaajasi on tehnyt riittävästi tilaa, voit rakentaa myös isomman sotilasrakennuksen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:569
 msgid ""
@@ -920,7 +921,7 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "Laajentaminen on niinkin yksinkertaista kuin sotilasrakennuksen rakentaminen alueen reunalle. Barbaareilla on kokoelma erilaisia sotarakennuksia, vartiomökkejä, rajalinnoja, torneja, linnoituksia ja kastelleja. Mitä isompi rakennus, sitä kalliimpi se on rakentaa, mutta sitä enemmän maata se valloittaa ympäriltään ja sitä enemmän sotilaita sinne voidaan sijoittaa. Rakennusten näkemä alue myös vaihtelee: tornillisista rakennuksista näkee kauemmaksi kuin muista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:578
 msgid ""
@@ -930,22 +931,22 @@ msgstr "Heti kun sotilasrakennus on miehitetty, se laajentaa maa-aluettasi. Kerr
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:583
 msgid "Military Site Occupied"
-msgstr "Sota-aseman asuttaminen"
+msgstr "Sotilasrakennuksen miehittäminen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:585
 msgid "Your territory has just grown!"
-msgstr "Alueesi on juuri kasvanut!"
+msgstr "Alueesi on juuri laajentunut!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:587
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr "Hienoa! Näetkö kuinka alueesi on kasvanut sotilaiden mentyä sotilasrakennuksesi sisälle?"
+msgstr "Hienoa! Näetkö kuinka alueesi on laajentunut sotilaiden mentyä sotilasrakennuksesi sisälle?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:598
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:600
 msgid "Conclusion"
-msgstr "Johtopäätös"
+msgstr "Yhteenveto"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:602
 msgid ""

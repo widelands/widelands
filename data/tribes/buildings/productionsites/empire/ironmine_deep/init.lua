@@ -10,22 +10,26 @@ wl.Descriptions():new_productionsite_type {
    size = "mine",
 
    animation_directory = dirname,
-   animations = {
-      idle = {
-         hotspot = { 49, 61 },
-      },
-      empty = {
-         hotspot = { 49, 61 },
-      },
-   },
 
    spritesheets = {
+      idle = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 66 },
+      },
+      empty = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 51, 66 }
+      },
       working = {
          fps = 10,
          frames = 10,
-         rows = 4,
-         columns = 3,
-         hotspot = { 49, 61 }
+         columns = 10,
+         rows = 1,
+         hotspot = { 51, 66 }
       },
    },
 
