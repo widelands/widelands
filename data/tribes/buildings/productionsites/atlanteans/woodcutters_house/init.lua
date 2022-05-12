@@ -21,7 +21,7 @@ wl.Descriptions():new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 37, 44 },
+         hotspot = { 42, 48 },
       },
    },
 
