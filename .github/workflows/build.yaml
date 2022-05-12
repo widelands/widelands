@@ -408,14 +408,16 @@ jobs:
         fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="OFF" -DOPTION_BUILD_TESTS="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_INSTALL_PREFIX=/usr/bin -DWL_INSTALL_BASEDIR=. -DWL_INSTALL_BINDIR=. -DWL_INSTALL_DATADIR=.
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="OFF" -DOPTION_BUILD_TESTS="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_INSTALL_PREFIX=/usr/bin -DWL_INSTALL_BASEDIR=/usr/share/widelands -DWL_INSTALL_BINDIR=/usr/bin -DWL_INSTALL_DATADIR=../share/widelands
         make -k -j$(nproc) install DESTDIR=../AppDir
         popd
+        mv AppDir/usr/bin/share/* AppDir/usr/share
+        rmdir AppDir/usr/bin/share
     - name: Build AppImage
       run: |
         wget -nv -c https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
         chmod +x linuxdeploy-x86_64.AppImage
-        ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --icon-file AppDir/usr/bin/images/logos/wl-ico-32.png --icon-filename org.widelands.Widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
+        ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
