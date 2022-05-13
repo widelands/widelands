@@ -29,9 +29,12 @@ wl.Descriptions():new_militarysite_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 37, 58 }
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 39, 61 }
       }
    },
 

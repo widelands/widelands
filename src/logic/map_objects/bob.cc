@@ -187,6 +187,12 @@ void Bob::do_act(Game& game) {
 	assert(!in_act_);
 	assert(!stack_.empty());
 
+	size_t cap = stack_.capacity();
+	if (cap == stack_.size()) {
+		// preallocate one element to keep references to task and top_state
+		// valid during update which may add a task to the stack
+		stack_.reserve(cap + 1);
+	}
 	in_act_ = true;
 
 	const Task& task = *top_state().task;

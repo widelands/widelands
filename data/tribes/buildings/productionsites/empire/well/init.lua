@@ -20,13 +20,19 @@ wl.Descriptions():new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
+   spritesheets = {
       idle = {
-         hotspot = { 43, 43 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 39, 57 },
       },
       working = {
          basename = "idle", -- TODO(GunChleoc): No animation yet.
-         hotspot = { 43, 43 },
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 39, 57 },
       },
    },
 
