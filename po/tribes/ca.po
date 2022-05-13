@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-28 04:21+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1284,8 +1284,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Forn de tapioca"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1700,7 +1700,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de pedra"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1735,8 +1734,6 @@ msgstr "fabricar un pic"
 msgid "making a machete"
 msgstr "fer un matxet"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1747,7 +1744,6 @@ msgstr "fer un matxet"
 msgid "making kitchen tools"
 msgstr "fabricar estris de cuina"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1765,9 +1761,9 @@ msgstr "fabricar un martell"
 msgid "making a chisel"
 msgstr "fer un cisell"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1921,7 +1917,6 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tenda del cuidador de la jungla"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
@@ -2023,7 +2018,7 @@ msgstr "plantant negrarrel"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:60
 msgid "harvesting blackroot"
-msgstr "recol·lectant la negrarrel"
+msgstr "recol·lectar la negrarrel"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
 msgctxt "atlanteans_building"
@@ -2148,7 +2143,7 @@ msgstr "plantant panís"
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:64
 msgid "harvesting corn"
-msgstr "recol·lectant el panís"
+msgstr "recol·lectar el panís"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:75
 msgctxt "atlanteans_building"
@@ -2754,7 +2749,7 @@ msgstr "plantant blat"
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
 msgid "harvesting wheat"
-msgstr "recol·lectant el blat"
+msgstr "recol·lectar el blat"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:94
 msgctxt "barbarians_building"
@@ -3007,7 +3002,7 @@ msgstr "plantant juncs"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:56
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:72
 msgid "harvesting reed"
-msgstr "recol·lectant els juncs"
+msgstr "recol·lectar els juncs"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:67
 msgctxt "barbarians_building"
@@ -3489,7 +3484,7 @@ msgstr "plantant ceps"
 #. ...
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:62
 msgid "harvesting grapes"
-msgstr "veremant"
+msgstr "veremar"
 
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
 msgctxt "empire_building"
@@ -4977,7 +4972,7 @@ msgstr "Camp de mandioca (madura)"
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr "Camp de mandioca (petit)"
+msgstr "Camp de mandioca (jove)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
@@ -5393,7 +5388,7 @@ msgstr "Camp de blat (madur)"
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr "Camp de blat (petit)"
+msgstr "Camp de blat (jove)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:8
@@ -5455,7 +5450,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldat"
 msgstr[1] "%1%(+%2%) soldats"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -8455,7 +8449,7 @@ msgstr "Mel"
 #: ../../data/tribes/wares/honey_bread/init.lua:8
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr "Pa dolç mel"
+msgstr "Pa dolç amb mel"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:8

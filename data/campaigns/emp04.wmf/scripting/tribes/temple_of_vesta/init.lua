@@ -19,7 +19,7 @@ wl.Descriptions():new_warehouse_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 58, 55 }
+         hotspot = { 58, 58 }
       }
    },
 

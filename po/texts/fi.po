@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
+# Atte Timonen, 2022
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # heidi.wenger, 2022
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: heidi.wenger, 2022\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -302,6 +303,10 @@ msgstr "Muut"
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
 msgstr "Paketoijat"
+
+#: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
@@ -815,7 +820,7 @@ msgstr "Käytä ‘%1$s’ ja ‘%2$s’ näppäimiä hyppiäksesi nopeasti viim
 msgid ""
 "Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; "
 "%5%/%6% will adjust speed smoothly."
-msgstr "Nopeuta tai hidasta peliä näillä %1%/%2%. Käytä %3%/%4% pikamuutokselle; %5%/%6% säätää nopeutta jouhevasti."
+msgstr "Nopeuta tai hidasta peliä näppäimillä %1%/%2%. Käytä %3%/%4% pikamuutokselle; %5%/%6% säätää nopeutta jouhevasti."
 
 #: ../../data/txts/tips/general_game.lua:94
 msgctxt "hotkey"
@@ -875,4 +880,4 @@ msgstr "Mikäli peli joskus kaatuu, älä huoli! Peli tallentuu itsestään taus
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Ovatko tietokonepelaajat liian tylsiä? Käy verkkosivuillamme osoitteessa %s ja löydä peliseuraa."

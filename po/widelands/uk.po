@@ -9,13 +9,14 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Yan Kevych <yankevych@gmail.com>, 2019
+# Кловн, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-28 04:21+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yan Kevych <yankevych@gmail.com>, 2019\n"
+"Last-Translator: Кловн, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/widelands/widelands/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,14 +71,14 @@ msgstr ""
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:187
 msgid "No Space"
-msgstr ""
+msgstr "Нема місця"
 
 #: ../../data/scripting/infrastructure.lua:188
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
-msgstr ""
+msgstr "Деякі з ваших початкових будівель не мали достатньо місця і не були побудовані. Ви в невигідному становищі; розгляньте можливість перезапуску цієї карти з правильними початковими умовами."
 
 #: ../../data/scripting/infrastructure.lua:189
 msgid "Not enough space"
@@ -85,23 +86,23 @@ msgstr "Недостатньо місця"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Поблизу немає каменів"
 
 #: ../../data/scripting/infrastructure.lua:281
 msgid ""
 "There are no rocks near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Поблизу вашого стартового положення немає каменів. Таким чином, ви отримуєте додаткові ресурси для запуску вашої економіки."
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid "No trees nearby"
-msgstr ""
+msgstr "Поблизу немає дерев"
 
 #: ../../data/scripting/infrastructure.lua:286
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
-msgstr ""
+msgstr "Поблизу вашого стартового положення немає дерев. Таким чином, ви отримуєте додаткові ресурси для запуску вашої економіки."
 
 #: ../../data/scripting/messages.lua:66 ../../data/scripting/messages.lua:68
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:113
@@ -110,11 +111,11 @@ msgstr "Стан"
 
 #: ../../data/scripting/messages.lua:257
 msgid "New Objective"
-msgstr ""
+msgstr "Нове завдання"
 
 #: ../../data/scripting/messages.lua:259
 msgid "New Objectives"
-msgstr ""
+msgstr "Нові цілі"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -135,22 +136,22 @@ msgstr "“%s”"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:359
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:206
 msgid "No AI"
-msgstr ""
+msgstr "Без ШІ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:96
 msgid "Normal AI"
-msgstr ""
+msgstr "Нормальний ШІ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:111
 msgid "Weak AI"
-msgstr ""
+msgstr "Слабкий ШІ"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:126
 msgid "Very Weak AI"
-msgstr ""
+msgstr "Дуже слабкий ШІ"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -286,8 +287,8 @@ msgstr "лис"
 msgid "Dec"
 msgstr "гру"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -301,16 +302,16 @@ msgstr "Головне меню"
 msgid "Tools"
 msgstr "Сервіс"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
-msgstr ""
+msgstr "Показ. / Схов."
 
 #: ../../src/editor/editorinteractive.cc:138
 msgid "Tool size"
@@ -319,12 +320,12 @@ msgstr "Розмір інструменту"
 #: ../../src/editor/editorinteractive.cc:153
 #: ../../src/wlapplication_options.cc:403
 msgid "Undo"
-msgstr ""
+msgstr "Відмінити"
 
 #: ../../src/editor/editorinteractive.cc:157
 #: ../../src/wlapplication_options.cc:407
 msgid "Redo"
-msgstr ""
+msgstr "Відновити"
 
 #: ../../src/editor/editorinteractive.cc:168
 #: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:227
@@ -378,18 +379,18 @@ msgstr "Змінити висоту"
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
 #: ../../src/editor/editorinteractive.cc:271
 msgid "Change the terrain height"
-msgstr ""
+msgstr "Змінити висоту місцевості"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:277
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
-msgstr ""
+msgstr "Випадкова висота"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:280
 msgid "Set the terrain height to random values"
-msgstr ""
+msgstr "Встановити висоту місцевості на випадкові значення"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:286
@@ -402,7 +403,7 @@ msgstr "Місцевість"
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
 #: ../../src/editor/editorinteractive.cc:289
 msgid "Change the map’s terrain"
-msgstr ""
+msgstr "Змінити місцевість карти"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:296
@@ -420,12 +421,12 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:305
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
-msgstr ""
+msgstr "Тварини"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:308
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Додати або видалити тварин"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:315
@@ -440,12 +441,12 @@ msgstr "Ресурси"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:318
 msgid "Set or change resources"
-msgstr ""
+msgstr "Встановити або змінити ресурси"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:321
 msgid "Port spaces"
-msgstr ""
+msgstr "Місця для порта"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
 #: ../../src/editor/editorinteractive.cc:324
@@ -462,44 +463,44 @@ msgstr "Гравці"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:334
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Встановіть кількість гравців та їх імена, племена та вихідні позиції"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:338
 msgid "Map origin"
-msgstr ""
+msgstr "Походження карти"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:341
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr ""
+msgstr "Встановіть позицію, яка матиме координати (0, 0). Це буде верхній лівий кут згенерованої міні-карти."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:348
 msgid "Map size"
-msgstr ""
+msgstr "Розмір карти"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:351
 msgid "Change the map’s size"
-msgstr ""
+msgstr "Змінити розмір карти"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:354
 msgid "Information"
-msgstr ""
+msgstr "Інформація"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:357
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Натисніть на поле, щоб показати інформацію про нього"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -715,8 +716,8 @@ msgstr "шахта"
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1012,9 +1013,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1439,8 +1440,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2250,8 +2251,8 @@ msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1514
-#: ../../src/logic/map_objects/tribes/soldier.cc:1518
+#: ../../src/logic/map_objects/tribes/soldier.cc:1516
+#: ../../src/logic/map_objects/tribes/soldier.cc:1520
 msgid "Logic error"
 msgstr ""
 
@@ -7622,8 +7623,8 @@ msgstr ""
 msgid "AI for the disconnected player"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8047,44 +8048,44 @@ msgid "Map View"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Hide Minimap"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Show Minimap"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:289
+#: ../../src/wui/interactive_base.cc:292
 msgid "Zoom +"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:294
+#: ../../src/wui/interactive_base.cc:297
 msgid "Reset zoom"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:299
+#: ../../src/wui/interactive_base.cc:302
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1540
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Screenshot saved"
 msgstr ""
 
@@ -8192,8 +8193,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Статистика"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
