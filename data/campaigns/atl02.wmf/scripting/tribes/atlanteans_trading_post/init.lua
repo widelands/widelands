@@ -13,7 +13,7 @@ wl.Descriptions():new_productionsite_type {
 
    animations = {
       idle = {
-         hotspot = { 50, 56 },
+         hotspot = { 60, 59 },
       },
    },
    aihints = {},
