@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: FIRST AUTHOR <EMAIL@ADDRESS>, 2012\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/widelands/widelands/language/nn/)\n"
@@ -296,6 +296,10 @@ msgstr "Anna"
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
 msgstr "Pakkarar"
+
+#: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"

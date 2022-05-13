@@ -1,3 +1,5 @@
+descriptions = wl.Descriptions() -- TODO(matthiakl): only for savegame compatibility with 1.0, do not use.
+
 image_dirname = path.dirname(__file__) .. "images/"
 
 push_textdomain("tribes_encyclopedia")
@@ -17,7 +19,6 @@ wl.Descriptions():new_tribe {
    military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
-      frontier = { hotspot = {1, 19} },
       bridge_normal_e = { hotspot = {-2, 12} },
       bridge_busy_e = { hotspot = {-2, 12} },
       bridge_normal_se = { hotspot = {5, 2} },
@@ -26,12 +27,18 @@ wl.Descriptions():new_tribe {
       bridge_busy_sw = { hotspot = {36, 3} }
    },
    spritesheets = {
+      frontier = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 6, 19 }
+      },
       flag = {
          fps = 10,
          frames = 16,
-         rows = 4,
-         columns = 4,
-         hotspot = { 11, 35 }
+         columns = 8,
+         rows = 2,
+         hotspot = { 12, 40 }
       },
    },
 
@@ -1683,11 +1690,11 @@ wl.Descriptions():new_tribe {
                --    "Lutius had already removed himself from public affairs, he was living in the countryside,
                --     and the ambassadors of the senate found him while he was plowing his land."
                _("Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt"..
-                 " dum agellum suum arat"),
+                 " dum agellum suum arat."),
                -- TRANSLATORS: Lore helptext for an empire production site: Farm
                --    Translation for the adapted classical Latin quote:
                --    "Lutius iam a publicis negotiis se removerat, ruri vivebat et senatus legati eum invenerunt
-               --     dum agellum suum arat"
+               --     dum agellum suum arat."
                _("Lutius had already removed himself from public affairs, he was living in the countryside,"..
                  " and the ambassadors of the senate found him while he was plowing his land.")
             ),

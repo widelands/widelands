@@ -15,6 +15,9 @@ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.desktop     DEST
 #install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.appdata.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${XDG_APPLICATION_ID}.appdata.xml DESTINATION ${CMAKE_INSTALL_PREFIX}/share/metainfo)
 
+# TODO: check for privileges
+# If 'make install' was run without superuser privileges, the user will get a "permission denied" error
+# when 'gtk-update-icon-cache' is executed
 find_program(GTK_UPDATE_ICON_CACHE NAMES gtk-update-icon-cache)
 if (GTK_UPDATE_ICON_CACHE)
   #install(CODE "execute_process (COMMAND ${GTK_UPDATE_ICON_CACHE} -t -f ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor ||: )")
