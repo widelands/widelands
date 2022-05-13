@@ -32,17 +32,17 @@ wl.Descriptions():new_productionsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 41, 87 },
+         hotspot = { 44, 90 },
       },
    },
 
    spritesheets = {
       working = {
-         fps = 25,
-         frames = 20,
-         rows = 5,
-         columns = 4,
-         hotspot = { 41, 87 }
+         fps = 15,
+         frames = 19,
+         columns = 10,
+         rows = 2,
+         hotspot = { 44, 90 }
       },
    },
 

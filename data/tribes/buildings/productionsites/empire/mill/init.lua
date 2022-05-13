@@ -21,19 +21,31 @@ wl.Descriptions():new_productionsite_type {
    },
 
    animation_directory = dirname,
-   animations = {
-      idle = {
-         hotspot = { 41, 87 },
-      },
-   },
-
    spritesheets = {
+      idle = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 44, 90 },
+      },
+      build = {
+         frames = 2,
+         columns = 2,
+         rows = 1,
+         hotspot = { 44, 90 },
+      },
+      unoccupied = {
+         frames = 1,
+         columns = 1,
+         rows = 1,
+         hotspot = { 44, 90 },
+      },
       working = {
          fps = 15,
          frames = 19,
-         rows = 5,
-         columns = 4,
-         hotspot = { 41, 87 }
+         columns = 10,
+         rows = 2,
+         hotspot = { 44, 90 },
       },
    },
 
