@@ -5,6 +5,7 @@
 # Translators:
 # Jukka Pakarinen, 2020
 # Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
+# Atte Timonen, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021\n"
+"Last-Translator: Atte Timonen, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,6 +42,8 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
+"Muista tarkistaa viestit ja rakennusten tilat tuottamattomien rakennusten "
+"löytämiseksi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -61,6 +64,9 @@ msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
+"Varmista ettei tieverkostossamme ole enempää kuin kolme umpikujaa (lippuja "
+"joille vie vain yksi tie) ja eikä enempää kuin yksi lippu johon yhdistyy "
+"enemmän kuin neljä tietä."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid "Click on one of the farms"
@@ -189,12 +195,17 @@ msgid ""
 "To train a soldier to the highest level in one site, consider stopping the "
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
+"Kouluttaaksesi sotilaan korkeimmalle tasolle yhdellä harjoittelupaikalla, "
+"harkitse sen pysäyttämistä kunnes siellä on kaikki tarvittavat ruoka ja "
+"aseet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
 msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
+"Estääksesi tarvikkeiden meneminen harakoille, vähennä koulutettavien "
+"sotilaiden määrä yhteen paikkaa kohti."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -202,6 +213,9 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
+"Harjoittelupaikka suosii koulutukseen aina parasta sopivaa saatavilla olevaa"
+" sotilasta. Varmista etteivät osittain koulutetut sotilaasi ole "
+"miehittämässä sotilasrakennusta."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:142
 msgid "Produce at least 10 tools"
@@ -246,7 +260,7 @@ msgstr "Estä barbaarien tunkeutuminen omalle alueellesi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "Build 2 charcoal kilns"
-msgstr ""
+msgstr "Rakenna 2 miilua"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:172
 msgid "Build Two Charcoal Kilns"
@@ -582,6 +596,9 @@ msgid ""
 "need to closely monitor them when we are able to supply them. Until then we "
 "shouldn’t do anything with them."
 msgstr ""
+"Muista rakennuksista emme oikein osaa vielä sanoa toimivatko ne tehokkaasti."
+" Meidän on katsottava tarkkaan ovatko niiden toimitusketjut riittävän "
+"hyvässä kunnossa, ennen sitä niihin ei kannata koskea."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:323
@@ -611,6 +628,8 @@ msgid ""
 "Brother, I’m really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Veljeni, olen todella huolissani sillä minun on taas toimitettava huonoja "
+"uutisia. Kuten näet, maatilamme eivät tuota mitään emmekä voi purkaa niitä."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:336
@@ -1120,6 +1139,9 @@ msgid ""
 "wine. We found the additional wares while we were taking stock recently. "
 "Maybe the goddess Vesta is still supporting us."
 msgstr ""
+"Terve Lutius, en tiedä miten, mutta meille on lahjoitettu vähän olutta ja "
+"viiniä. Löysimme ne vähän aikaa sitten penkoessamme varastoa. Ehkä Jumalatar"
+" Vesta on vielä puolellamme."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea Analyzes the Economy"
@@ -1145,6 +1167,8 @@ msgstr ""
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
+"Meidän kannattanee perehtyä tähän ongelmaan ja avata yhden maatilan "
+"rakennusruutu."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea’s Restrictions"
@@ -1219,6 +1243,9 @@ msgid ""
 "Oh no Lutius, I don’t know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Voi ei Lutius, en tiedä miten tämä on mahdollista, mutta barbaarit ovat "
+"ryöstäneet päämajamme. Olemme siis hävinneet tämän taistelun ja koko "
+"keisarikuntamme!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:591
 msgid "Amalea reports our headquarters lost…"
@@ -1231,6 +1258,8 @@ msgid ""
 "have destroyed our headquarters. So, we can’t deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Voi ei, Lutius! En tiedä miten tämä on mahdollista, mutta barbaarit ovat "
+"tuhonneet päämajamme. Emme siis voi toimittaa Julialle enää tavaraa."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
@@ -1248,14 +1277,17 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"Voi ei, Lutius! En tiedä miten tämä on mahdollista, mutta barbaarit ovat "
+"tuhonneet viimeisen varastomme. Olemme siis hävinneet tämän taistelun ja "
+"koko keisarikuntamme!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
-msgstr ""
+msgstr "Amalea kiireessä"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr ""
+msgstr "Amalea on todella kiireinen..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612
@@ -1264,6 +1296,9 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
+"Veljeni, kuten näet moni asia on pielessä tässä taloudessa. Minulla on kädet"
+" täynnä töitä tilanteen tutkimisessa, joten en ehdi antamaan niin "
+"yksityiskohtaisia neuvoja kuin yleensä."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:615
@@ -1272,6 +1307,8 @@ msgid ""
 "yourself. Of course I will report and advise immediately whenever I discover"
 " new problems."
 msgstr ""
+"Mutta olen varma että sinä hallitset tilanteen hyvin itsekin. Toki raportoin"
+" ja annan neuvoja heti kun havaitsen uusia ongelmia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Saledus looks very relaxed…"
@@ -1311,8 +1348,8 @@ msgid ""
 "The problem is however that the gods won’t be amused if we destroy one of "
 "their temples. And you never know what this could lead to."
 msgstr ""
-"Ongelma on siinä ettei jumalat katso sitä hyvällä, jos tuhoamme yhden heidän"
-" temppeleistä. Ja sitä ei koskaan tiedä mitä siitä voisi seurata. "
+"Ongelma vain on, etteivät jumalat katso sitä hyvällä jos tuhoamme yhden "
+"heidän temppeleistään. Ja sitä ei koskaan tiedä mitä siitä voisi seurata. "
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:643
 msgid "Easy Victory"
@@ -1399,7 +1436,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Perhaps we should train them further in the arena as well."
-msgstr ""
+msgstr "Ehkäpä meidän pitäisi kouluttaa heidät pidemmälle areenalla."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:684
 msgid "Training is Needed"
@@ -1592,7 +1629,7 @@ msgid ""
 msgstr ""
 "Terve, Lutius! Jos haluat auttaa meitä, sinun pitää ensin palvoa "
 "jumalatartamme Vestaa. Sen vuoksi toimita 35 vehnänippua ja 15 amforallista "
-"viini valmitellaksesi hänelle arvoisensa uhrauksen."
+"viiniä valmitellaksesi hänelle arvoisensa uhrauksen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:768
 msgid "May The Gods Bless You"
@@ -1637,59 +1674,59 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:7
 msgctxt "empire_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Panimo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/brewery1/init.lua:55
 msgctxt "empire_building"
 msgid "brewing beer"
-msgstr ""
+msgstr "Oluen paneminen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr ""
+msgstr "Maatila"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:42
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:42
 msgctxt "empire_building"
 msgid "working"
-msgstr ""
+msgstr "Työskentelee"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:49
 msgctxt "empire_building"
 msgid "planting wheat"
-msgstr ""
+msgstr "Vehnän istutus"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:56
 msgctxt "empire_building"
 msgid "harvesting wheat"
-msgstr ""
+msgstr "Vehnän korjuu"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:64
 msgctxt "empire_building"
 msgid "No Fields"
-msgstr ""
+msgstr "Ei peltoja"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:65
 msgctxt "empire_building"
 msgid "Out of Fields"
-msgstr ""
+msgstr "Ei peltoja"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/farm1/init.lua:66
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "Tämän maatilan maanviljelijällä ei ole peltoa viljeltäväksi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Metsänhoitajan talo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:36
 msgctxt "empire_building"
 msgid "planting trees"
-msgstr ""
+msgstr "Puiden istutus"
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Brewery
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:98
@@ -1733,6 +1770,7 @@ msgstr "Kaataa puita lähialueella ja tekee niistä tukkeja."
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr ""
+"Puunhakkaajan mökki tarvitsee työskentelyalueella puita kaadettavaksi."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:130
@@ -1784,22 +1822,22 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Puunhakkaajan mökki"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:37
 msgctxt "empire_building"
 msgid "felling trees"
-msgstr ""
+msgstr "Puunkaato"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:45
 msgctxt "empire_building"
 msgid "No Trees"
-msgstr ""
+msgstr "Ei puita"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:46
 msgctxt "empire_building"
 msgid "Out of Trees"
-msgstr ""
+msgstr "Ei puita"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:47
 msgctxt "empire_building"
@@ -1808,102 +1846,104 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
+"Puunhakkaaja ei löydä puita lähistöltään. Pura mökki tai rakenna "
+"metsänhoitajan maja lähistölle."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr ""
+msgstr "Mylly"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/mill1/init.lua:62
 msgctxt "empire_building"
 msgid "grinding wheat"
-msgstr ""
+msgstr "Vehnän jauhanta"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/temple_of_vesta/init.lua:8
 msgctxt "empire_building"
 msgid "Temple of Vesta"
-msgstr ""
+msgstr "Vestan temppeli"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr ""
+msgstr "Harjoitusleiri"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
 msgid "sleeping"
-msgstr ""
+msgstr "tauolla"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "sotilaan hyökkäystaidon korotus tasolta 0 tasolle 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "sotilaan hyökkäystaidon korotus tasolta 1 tasolle 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "sotilaan hyökkäystaidon korotus tasolta 2 tasolle 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "sotilaan hyökkäystaidon korotus tasolta 3 tasolle 4"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "sotilaan terveyden korotus tasolta 0 tasolle 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "sotilaan terveyden korotus tasolta 1 tasolle 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:151
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "sotilaan terveyden korotus tasolta 2 tasolle 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:161
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "sotilaan terveyden korotus tasolta 3 tasolle 4"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:177
 msgctxt "empire_building"
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Ei sotilaita koulutettavaksi!"
 
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr ""
+msgstr "Kaivo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:52
 msgctxt "empire_building"
 msgid "No Water"
-msgstr ""
+msgstr "Kuivaa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:53
 msgctxt "empire_building"
 msgid "Out of Water"
-msgstr ""
+msgstr "Vesi lopussa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "Tällä kaivolla työskentelevä kantaja ei löydä kaivostaan vettä."

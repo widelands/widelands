@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-07 03:13+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -1010,9 +1010,9 @@ msgstr "(chan eil gin)"
 msgid "Waterway length limit:"
 msgstr "Slighe aiseig as fhaide:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1437,8 +1437,8 @@ msgid ""
 "location."
 msgstr "Tagh meud a’ mhapa is briog air a’ mhapa an uairsin ’ga sgoltadh air an ionad a thogras tu. Ma mheudaicheas tu am mapa, thèid colbhan ’s ràghan ùra a chur a-steach gu ear-dheas air an ionad a thaghas tu. Nuair a chrùbas tu am mapa, thèid an àireamh de cholbhan ’s ràghan a thagh thu a thoirt air falbh gu ear-dheas o ionad an sgoiltidh."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -7230,9 +7230,9 @@ msgstr "Puirt"
 msgid "Low productivity:"
 msgstr "Cinneasachadh gann:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8045,44 +8045,44 @@ msgid "Map View"
 msgstr "Sealladh a’ mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Hide Minimap"
 msgstr "Falaich am meanbh-mhapa"
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Show Minimap"
 msgstr "Seall am meanbh-mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:289
+#: ../../src/wui/interactive_base.cc:292
 msgid "Zoom +"
 msgstr "Sùm +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:294
+#: ../../src/wui/interactive_base.cc:297
 msgid "Reset zoom"
 msgstr "Ath-shuidhich an sùm"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:299
+#: ../../src/wui/interactive_base.cc:302
 msgid "Zoom –"
 msgstr "Sùm −"
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Road length: %u"
 msgstr "Faid an rathaid: %u"
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Faid na slighe aiseig: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1540
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Screenshot saved"
 msgstr ""
 

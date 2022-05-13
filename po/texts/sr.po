@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Serbian (http://www.transifex.com/widelands/widelands/language/sr/)\n"
@@ -294,6 +294,10 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "Scripting"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
