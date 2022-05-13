@@ -111,7 +111,8 @@ struct MousewheelHandlerOptions {
 	void update_settings() {
 		current_keymod_ = get_mousewheel_keymod(keymod_id_);
 		if (get_mousewheel_option_bool(use_x_)) {
-			current_sign_x_ = default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
+			current_sign_x_ =
+			   default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
 			   (get_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX) ? -1 : 1);
 		} else {
 			current_sign_x_ = 0;

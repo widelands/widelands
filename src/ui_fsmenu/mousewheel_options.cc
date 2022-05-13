@@ -426,13 +426,13 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
      inverted_x_checkbox_(
-           this,
-           UI::PanelStyle::kFsMenu,
-           Vector2i::zero(),
-           _("Fix inverted horizontal scrolling"),
-           _("Work around SDL bug in some configurations that causes horizontal scroll to be "
-             "inverted."),
-           0),
+        this,
+        UI::PanelStyle::kFsMenu,
+        Vector2i::zero(),
+        _("Fix inverted horizontal scrolling"),
+        _("Work around SDL bug in some configurations that causes horizontal scroll to be "
+          "inverted."),
+        0),
      button_box_(this) {
 	add(&zoom_box_);
 	add(&mapscroll_box_);
