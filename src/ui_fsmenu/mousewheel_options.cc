@@ -87,7 +87,7 @@ void MousewheelConfigSettings::read() {
 	value_invert_ = READ_DIR(kUIChangeValueInvert);
 	tab_invert_ = READ_DIR(kUITabInvert);
 	zoom_invert_ = READ_DIR(kMapZoomInvert);
-	inverted_x_ = get_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX);
+	inverted_x_ = get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX);
 }
 
 #undef READ_MOD
@@ -116,7 +116,7 @@ void MousewheelConfigSettings::apply() const {
 	APPLY_DIR(kUIChangeValueInvert, value_invert_)
 	APPLY_DIR(kUITabInvert, tab_invert_)
 	APPLY_DIR(kMapZoomInvert, zoom_invert_)
-	set_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX, inverted_x_);
+	set_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX, inverted_x_);
 
 	update_mousewheel_settings();
 }
@@ -430,8 +430,9 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         UI::PanelStyle::kFsMenu,
         Vector2i::zero(),
         _("Fix inverted horizontal scrolling"),
-        _("Work around SDL bug in some configurations that causes horizontal scroll to be "
-          "inverted."),
+        _("An SDL bug in some configurations causes horizontal scroll to be inverted. "
+          "We try to detect them, but if we got it wrong, you can fix it here. "
+          "Please report if you need to turn this on, so that we can improve the detection."),
         0),
      button_box_(this) {
 	add(&zoom_box_);
@@ -444,8 +445,12 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&value_invert_box_);
 	add_space(kDividerSpace);
 	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
-	inverted_x_checkbox_.changed.connect(
-	   [this]() { settings_.inverted_x_ = inverted_x_checkbox_.get_state(); });
+	inverted_x_checkbox_.changed.connect( [this]() {
+		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
+		if (settings_.inverted_x_) {
+			ask_feedback();
+		}
+	});
 	add(&inverted_x_checkbox_);
 	add_space(kDividerSpace);
 	add(&button_box_);
@@ -531,6 +536,18 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		value_invert_box_.set_width(w_hbox);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
+}
+
+// Remind user to send feedback
+void MousewheelOptionsDialog::ask_feedback() {
+	UI::WLMessageBox message(
+	   &get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Please help us improve detection"),
+	   as_richtext_paragraph(
+	      _("If turning on this fix solves your problem, then please report your configuration in the "
+	        "forum or a bug report on GitHub."),
+	      UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
+	   UI::WLMessageBox::MBoxType::kOk);
+	message.run<UI::Panel::Returncodes>();
 }
 
 }  // namespace FsMenu

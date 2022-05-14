@@ -113,7 +113,8 @@ struct MousewheelHandlerOptions {
 		if (get_mousewheel_option_bool(use_x_)) {
 			current_sign_x_ =
 			   default_sign_x_ * (get_mousewheel_option_bool(invert_x_) ? -1 : 1) *
-			   (get_mousewheel_option_bool(MousewheelOptionID::kWorkaroundInvertedX) ? -1 : 1);
+			   (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected) !=
+			    get_mousewheel_option_bool(MousewheelOptionID::kOverrideInvertedX) ? -1 : 1);
 		} else {
 			current_sign_x_ = 0;
 		}
@@ -177,8 +178,10 @@ static const std::map<MousewheelOptionID, MousewheelOption> mousewheel_options =
    {MousewheelOptionID::kDisabled, MousewheelOption::create_bool("", false)},
    {MousewheelOptionID::kNoMod, MousewheelOption::create_mod("", KMOD_NONE)},
 
-   {MousewheelOptionID::kWorkaroundInvertedX,  //
-    MousewheelOption::create_bool("workaround_inverted_x", false)},
+   {MousewheelOptionID::kInvertedXDetected,  //
+    MousewheelOption::create_bool("last_autoinvert_x", false)},
+   {MousewheelOptionID::kOverrideInvertedX,  //
+    MousewheelOption::create_bool("override_inverted_x_detection", false)},
 };
 
 // Default signs

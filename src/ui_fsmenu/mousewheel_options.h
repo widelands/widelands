@@ -56,11 +56,11 @@ struct MousewheelConfigSettings {
 	// direction to movement in the orthogonal direction.
 	uint8_t value_invert_, tab_invert_, zoom_invert_;
 
-	// Earlier SDL versions on Linux with X11 reported X scrolling
-	// events with inverted sign. This option allows it to be
-	// worked around.
-	// TODO(tothxa): For 1.2: Try to detect if the current system is
-	//    affected and set this automatically (needs user feedback)
+	// Earlier SDL versions on Linux reported X scrolling events
+	// with inverted sign. We try to detect known buggy versions,
+	// but if we get it wrong, this option allows it to be overridden.
+	// TODO(tothxa): Consider removing this if there are no reports
+	// of wrong detections for a release cycle
 	bool inverted_x_;
 
 	void read();
@@ -170,6 +170,8 @@ private:
 	InvertDirBox value_invert_box_;
 	UI::Checkbox inverted_x_checkbox_;
 	ScrollOptionsButtonBox button_box_;
+
+	void ask_feedback();
 };
 
 }  // namespace FsMenu
