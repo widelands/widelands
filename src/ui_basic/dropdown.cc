@@ -551,7 +551,6 @@ bool BaseDropdown::is_filtered() {
 }
 void BaseDropdown::disable_textinput() {
 	set_handle_textinput(false);
-	disable_sdl_textinput();
 }
 
 void BaseDropdown::enable_textinput() {
