@@ -35,14 +35,12 @@ jobs:
   codecheck:
     runs-on: ubuntu-latest
     steps:
-    - name: Installing dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Installing dependencies
+      run: sh ./.github/scripts/install_deps.sh
     - name: Test
       run: |
         ./cmake/codecheck/run_tests.py
@@ -84,14 +82,12 @@ jobs:
   clang_tidy:
     runs-on: ubuntu-latest
     steps:
-    - name: Installing dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev clang-tidy python-yaml -y
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Installing dependencies
+      run: sh ./.github/scripts/install_deps.sh
     - name: Check
       # To run a single check, call:
       # python3 ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* > ../clang-tidy.log
@@ -173,18 +169,16 @@ jobs:
       # memory leaks checking in the testsuite for now.
       ASAN_OPTIONS: 'detect_leaks=0'
       LSAN_OPTIONS: 'suppressions=${{ github.workspace }}/asan_3rd_party_leaks'
+      CXX: '${{ matrix.compiler }}'
     steps:
-    - name: Installing dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libasio-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python3 zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa libminizip-dev -y
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Installing dependencies
+      run: sh ./.github/scripts/install_deps.sh
     - name: Compile
       run: |
-        CXX="${{ matrix.compiler }}"
         if [ "${CXX:0:1}" == "c" ]
         then
           export CC="/usr/bin/${{ matrix.compiler }}"  # clang-10
