@@ -194,15 +194,18 @@ void Panel::logic_thread() {
 
 		if ((m != nullptr) && ((m->flags_ & pf_logic_think) != 0u)) {
 			LogicThreadState lock_if_free = LogicThreadState::kFree;
-			if (m->logic_thread_locked_.compare_exchange_strong(lock_if_free, LogicThreadState::kLocked)) {
+			if (m->logic_thread_locked_.compare_exchange_strong(
+			       lock_if_free, LogicThreadState::kLocked)) {
 				MutexLock lock(MutexLock::ID::kLogicFrame);
 
 				m->game_logic_think();  // actual game logic
 				LogicThreadState free_if_locked = LogicThreadState::kLocked;
-				m->logic_thread_locked_.compare_exchange_strong(free_if_locked, LogicThreadState::kFree);
+				m->logic_thread_locked_.compare_exchange_strong(
+				   free_if_locked, LogicThreadState::kFree);
 			}
 			LogicThreadState end_if_end_requested = LogicThreadState::kEndingRequested;
-			m->logic_thread_locked_.compare_exchange_strong(end_if_end_requested, LogicThreadState::kEndingConfirmed);
+			m->logic_thread_locked_.compare_exchange_strong(
+			   end_if_end_requested, LogicThreadState::kEndingConfirmed);
 		}
 
 		// Always sleep a bit because another thread might want to lock our mutex
