@@ -374,14 +374,10 @@ endif()
 if(NOT MSVC)
   # Turn some warnings into errors.
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    # Silence some false positives on g++
-    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0)
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
-    elseif(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 12.0)
-      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=maybe-uninitialized")
-    endif()
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+    # Silence some false positives on older g++
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
   endif()
   if (APPLE)  # Our Mac CI needs these
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
