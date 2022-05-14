@@ -154,6 +154,9 @@ protected:
 	const FontStyleInfo& title_style() const;
 
 	virtual void on_resolution_changed_note(const GraphicResolutionChanged& note);
+        void set_can_be_pinned(bool value) const {
+                button_pin_->set_enabled(value);
+        }
 
 private:
 	bool is_minimal_;
