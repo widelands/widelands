@@ -110,7 +110,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 	resolution_changed();
 
-	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
+	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_ver_details()).c_str());
 	set_icon(sdl_window_);
 
 	SDL_GL_SwapWindow(sdl_window_);

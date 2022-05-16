@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-07 03:13+0000\n"
+"POT-Creation-Date: 2022-05-13 03:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -8045,44 +8045,44 @@ msgid "Map View"
 msgstr "Sealladh a’ mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Hide Minimap"
 msgstr "Falaich am meanbh-mhapa"
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Show Minimap"
 msgstr "Seall am meanbh-mhapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:289
+#: ../../src/wui/interactive_base.cc:292
 msgid "Zoom +"
 msgstr "Sùm +"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:294
+#: ../../src/wui/interactive_base.cc:297
 msgid "Reset zoom"
 msgstr "Ath-shuidhich an sùm"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:299
+#: ../../src/wui/interactive_base.cc:302
 msgid "Zoom –"
 msgstr "Sùm −"
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Road length: %u"
 msgstr "Faid an rathaid: %u"
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "Faid na slighe aiseig: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1540
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Screenshot saved"
 msgstr ""
 
@@ -8190,8 +8190,8 @@ msgstr "Cuir an geama ’na stad"
 msgid "Statistics"
 msgstr "Stadastaireachd"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seòladaireachd"
