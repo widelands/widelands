@@ -170,8 +170,6 @@ private:
 	InvertDirBox value_invert_box_;
 	UI::Checkbox inverted_x_checkbox_;
 	ScrollOptionsButtonBox button_box_;
-
-	void ask_feedback();
 };
 
 }  // namespace FsMenu

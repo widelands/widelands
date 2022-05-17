@@ -447,9 +447,6 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
 	inverted_x_checkbox_.changed.connect([this]() {
 		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
-		if (settings_.inverted_x_) {
-			ask_feedback();
-		}
 	});
 	add(&inverted_x_checkbox_);
 	add_space(kDividerSpace);
@@ -536,18 +533,6 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		value_invert_box_.set_width(w_hbox);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
-}
-
-// Remind user to send feedback
-void MousewheelOptionsDialog::ask_feedback() {
-	UI::WLMessageBox message(&get_topmost_forefather(), UI::WindowStyle::kFsMenu,
-	                         _("Please help us improve detection"),
-	                         as_richtext_paragraph(_("If turning on this fix solves your problem, "
-	                                                 "then please report your configuration in the "
-	                                                 "forum or a bug report on GitHub."),
-	                                               UI::FontStyle::kFsMenuLabel, UI::Align::kCenter),
-	                         UI::WLMessageBox::MBoxType::kOk);
-	message.run<UI::Panel::Returncodes>();
 }
 
 }  // namespace FsMenu
