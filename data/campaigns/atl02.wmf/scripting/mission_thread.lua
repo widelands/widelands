@@ -259,10 +259,10 @@ function final()
    })  do sleep(3731) end
    temple.done = true
    msg_boxes(temple_completed)
-   priests = add_campaign_objective(obj_worship)
-   while count_workers_in_warehouses("atlanteans_priest") < 2 do sleep(2323) end
-   priests.done = true
-   msg_boxes(priests_consecrated)
+   priestesses = add_campaign_objective(obj_worship)
+   while count_workers_in_warehouses("atlanteans_priestess") < 2 do sleep(2323) end
+   priestesses.done = true
+   msg_boxes(priestesses_consecrated)
    sleep(1000)
    run(volcano_eruptions)
    sleep(5000)

@@ -137,15 +137,16 @@ obj_build_temple = {
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
    p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
+   p(_([[Don’t forget that the initiates who will serve Satul to become his priestesses need golden tabards and diamonds.]])) ..
    p(_([[And we need to have a scout’s house to not lose track of what is going on at the Barbarians’ territory.]])))
 }
 
 obj_worship = {
    name = "obj_worship",
-   title = _("Worship Satul and consecrate priests"),
+   title = _("Worship Satul and consecrate priestesses"),
    number = 1,
    body = objective_text(_("Worship Satul"),
-   p(_([[Now we need to worship Satul and consecrate at least two priests.]])))
+   p(_([[Now we need to worship Satul and consecrate at least two priestesses.]])))
 }
 
 obj_defeat_kalitath = {
@@ -499,7 +500,7 @@ heretics_again = {
       title = _("Attracting Satul’s Help"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[Sidolus, I agree we should not bow in front of any other god than Satul. But we might need the god’s help in this case. So I suggest to build a temple and worship Satul with exquisite sacrifices. By this we could inaugurate some priests, who might beg Satul to show his powers to the Barbarians and our princess.]]))
+         _([[Sidolus, I agree we should not bow in front of any other god than Satul. But we might need the god’s help in this case. So I suggest to build a temple and worship Satul with exquisite sacrifices. By this we could inaugurate some priestesses, who might beg Satul to show his powers to the Barbarians and our princess.]]))
    },
    {
       title = _("Build Temple"),
@@ -515,23 +516,23 @@ temple_completed = {
       title = _("Worship Satul"),
       body = loftomor(
          -- TRANSLATORS: Loftomor
-         _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and consecrating our priests.]]))
+         _([[May Satul warm you, Sidolus! My builders just completed the temple for Satul. Now we can start worshipping him and consecrating our priestesses.]]))
    },
    {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget some golden tabards for the priests.]]))
+         _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices.]]))
          .. new_objectives(obj_worship),
    },
 }
 
-priests_consecrated = {
+priestesses_consecrated = {
    {
       title = _("May Satul Warm Us"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[Our priests have been consecrated, and we sacrificed our finest goods for Satul’s pleasure. May he warm us and show his might to our princess and this barbaric tribe.]]))
+         _([[Our priestesses have been consecrated, and we sacrificed our finest goods for Satul’s pleasure. May he warm us and show his might to our princess and this barbaric tribe.]]))
    },
 }
 

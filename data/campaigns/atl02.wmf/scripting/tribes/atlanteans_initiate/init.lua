@@ -15,7 +15,7 @@ wl.Descriptions():new_worker_type {
       tabard_golden = 1,
       diamond = 1
    },
- 
+
    spritesheets = {
       idle = {
          frames = 1,
