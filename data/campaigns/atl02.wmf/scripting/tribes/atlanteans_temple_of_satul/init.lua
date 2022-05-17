@@ -53,7 +53,7 @@ wl.Descriptions():new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because ...
          descname = pgettext("atlanteans_building", "consecrating priestess"),
          actions = {
-            "consume=gold:4 diamond:4 quartz:4 smoked_fish:2,smoked_meat:2 atlanteans_bread:2 atlanteans_initiate",
+            "consume=gold:4 diamond:4 quartz:4 smoked_fish,smoked_meat:2 atlanteans_bread:2 atlanteans_initiate",
             "sleep=duration:120s",
             "recruit=atlanteans_priestess"
          }

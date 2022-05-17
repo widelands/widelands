@@ -137,7 +137,6 @@ obj_build_temple = {
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
    p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
-   p(_([[Don’t forget that the initiates who will serve Satul to become his priestesses need golden tabards and diamonds.]])) ..
    p(_([[And we need to have a scout’s house to not lose track of what is going on at the Barbarians’ territory.]])))
 }
 
@@ -522,7 +521,7 @@ temple_completed = {
       title = _("Build Temple"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices.]]))
+         _([[May Satul warm you, Loftomor. Thank you for building such a great temple. Now we need to bring food and our most precious wares to the temple to make for satisfying sacrifices. And don’t forget that the initiates who will serve Satul to become his priestesses need golden tabards and diamonds.]]))
          .. new_objectives(obj_worship),
    },
 }
