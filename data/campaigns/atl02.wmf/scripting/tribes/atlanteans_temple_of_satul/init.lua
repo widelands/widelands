@@ -35,28 +35,27 @@ wl.Descriptions():new_productionsite_type {
    aihints = {},
 
    working_positions = {
-      atlanteans_carrier = 1
+      atlanteans_initiate = 2
    },
 
    inputs = {
       { name = "gold", amount = 4 },
       { name = "diamond", amount = 4 },
       { name = "quartz", amount = 4 },
-      { name = "tabard_golden", amount = 1 },
       { name = "smoked_fish", amount = 2 },
       { name = "smoked_meat", amount = 2 },
       { name = "atlanteans_bread", amount = 2 },
-      { name = "atlanteans_carrier", amount = 1 }
+      { name = "atlanteans_initiate", amount = 1 }
    },
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-         descname = pgettext("atlanteans_building", "recruiting priest"),
+         -- TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because ...
+         descname = pgettext("atlanteans_building", "consecrating priestess"),
          actions = {
-            "consume=tabard_golden gold:4 diamond:4 quartz:4 smoked_fish:2 smoked_meat:2 atlanteans_bread:2 atlanteans_carrier",
+            "consume=gold:4 diamond:4 quartz:4 smoked_fish:2,smoked_meat:2 atlanteans_bread:2 atlanteans_initiate",
             "sleep=duration:120s",
-            "recruit=atlanteans_priest"
+            "recruit=atlanteans_priestess"
          }
       },
    }

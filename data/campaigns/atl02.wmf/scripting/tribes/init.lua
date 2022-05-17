@@ -24,7 +24,7 @@ local result = {
             name = "atlanteans_temple_of_satul",
             helptexts = {
                -- TRANSLATORS: Purpose helptext for an atlantean production site: Temple of Satul
-               purpose = pgettext("atlanteans_building", "A big and expensive temple to worship Satul and consecrate priests.")
+               purpose = pgettext("atlanteans_building", "A big and expensive temple to worship Satul and consecrate priestesses.")
             }
          },
       },
@@ -37,11 +37,18 @@ local result = {
                note = pgettext("atlanteans_worker", "A trader is a scout who needs a horse to transport the wares.")
             }
             },
-            { name = "atlanteans_priest",
+            { name = "atlanteans_initiate",
             helptexts = {
-               -- TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+               -- TRANSLATORS: Purpose helptext for an atlantean worker: Satul's Initiate
+               purpose = pgettext("atlanteans_worker", "Takes care of the Temple of Satul."),
+               note = pgettext("atlanteans_worker", "Initiates take care of the Temple of Satul while they are learning to become priestesses.")
+            }
+            },
+            { name = "atlanteans_priestess",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for an atlantean worker: Priestess
                purpose = pgettext("atlanteans_worker", "Worships Satul."),
-               note = pgettext("atlanteans_worker", "Priest are needed to make Satul show his might.")
+               note = pgettext("atlanteans_worker", "Priestesses are needed to make Satul show his might.")
             }
             }
          }
