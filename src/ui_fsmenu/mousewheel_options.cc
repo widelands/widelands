@@ -445,9 +445,8 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&value_invert_box_);
 	add_space(kDividerSpace);
 	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
-	inverted_x_checkbox_.changed.connect([this]() {
-		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
-	});
+	inverted_x_checkbox_.changed.connect(
+	   [this]() { settings_.inverted_x_ = inverted_x_checkbox_.get_state(); });
 	add(&inverted_x_checkbox_);
 	add_space(kDividerSpace);
 	add(&button_box_);
