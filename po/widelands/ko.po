@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-07 03:13+0000\n"
+"POT-Creation-Date: 2022-05-13 03:59+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -7943,44 +7943,44 @@ msgid "Map View"
 msgstr "지도 보기"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Hide Minimap"
 msgstr "작은 지도 숨김"
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Show Minimap"
 msgstr "작은 지도 표시"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:289
+#: ../../src/wui/interactive_base.cc:292
 msgid "Zoom +"
 msgstr "확대"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:294
+#: ../../src/wui/interactive_base.cc:297
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:299
+#: ../../src/wui/interactive_base.cc:302
 msgid "Zoom –"
 msgstr "축소"
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Road length: %u"
 msgstr "땅길 길이: %u"
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr "물길 길이: %1$u/%2$u"
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1540
 msgid "Failed saving screenshot!"
 msgstr "화면 갈무리를 저장하지 못했습니다!"
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Screenshot saved"
 msgstr "화면 갈무리가 저장됨"
 
@@ -8088,8 +8088,8 @@ msgstr "놀이를 일시정지"
 msgid "Statistics"
 msgstr "통계"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "항해"

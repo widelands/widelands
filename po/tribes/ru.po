@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-07 03:13+0000\n"
+"POT-Creation-Date: 2022-05-13 03:59+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -685,31 +685,31 @@ msgid "Barrier"
 msgstr "Форпост"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:42
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
 msgstr "Гарнизон заступил на службу в форпост."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:44
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
 msgstr "Вражеские силы в районе форпоста."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:46
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
 msgstr "Форпост атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:48
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
 msgstr "Вечная память павшим у форпоста."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:50
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
 msgstr "Слава победителям! Форпост - наш!"
@@ -721,31 +721,31 @@ msgid "Blockhouse"
 msgstr "Блокгауз"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
 msgstr "Гарнизон заступил на службу в блокгауз."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
 msgstr "Вражеские силы в районе блокгауза."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:51
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:54
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
 msgstr "Блокгауз атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:53
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:56
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
 msgstr "Вечная память павшим у блокгауза."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:58
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
 msgstr "Слава победителям! Блокгауз - наш!"
@@ -757,31 +757,31 @@ msgid "Castle"
 msgstr "Замок"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:31
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
 msgstr "Гарнизон заступил на службу в замок."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
 msgstr "Вражеские силы в районе замке."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:32
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:35
 msgctxt "empire_building"
 msgid "Your castle is under attack."
 msgstr "Замок атакован."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:34
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:37
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
 msgstr "Вечная память павшим у замка."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:36
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:39
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
 msgstr "Слава победителям! Замок - наш!"
@@ -793,31 +793,31 @@ msgid "Fortress"
 msgstr "Крепость"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:72
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr "Гарнизон заступил на службу в крепость."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:74
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your fortress discovered an aggressor."
 msgstr "Вражеские силы в районе крепости."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:76
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:77
 msgctxt "empire_building"
 msgid "Your fortress is under attack."
 msgstr "Крепость атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:78
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr "Вечная память павшим в битве у крепости."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:80
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr "Слава победителям! Крепость - наша!"
@@ -829,31 +829,31 @@ msgid "Outpost"
 msgstr "Застава"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:56
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:59
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr "Гарнизон заступил на службу в заставу."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:58
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:61
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
 msgstr "Вражеские силы в районе заставы."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:60
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:63
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
 msgstr "Застава атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:62
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:65
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr "Вечная память павшим в битве за заставу."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:64
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:67
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "Слава победителям! Застава - наша!"
@@ -865,31 +865,31 @@ msgid "Sentry"
 msgstr "Караульная"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:42
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
 msgstr "Гарнизон заступил на службу в караульную."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:44
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:47
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
 msgstr "Вражеские силы в районе караульной."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:46
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
 msgstr "Караульная атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:48
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
 msgstr "Вечная память павшим при караульной."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
 msgstr "Слава победителям! Караульная - наша!"
@@ -901,31 +901,31 @@ msgid "Tower"
 msgstr "Башня"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:52
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
 msgstr "Гарнизон заступил на службу в башню."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:54
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
 msgstr "Вражеские силы в районе башни."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:56
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:57
 msgctxt "empire_building"
 msgid "Your tower is under attack."
 msgstr "Башня атакована."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:58
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:59
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr "Вечная память сражавшимся за башню."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:60
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:61
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr "Слава победителям! Башня - наша!"
@@ -1184,7 +1184,7 @@ msgstr "Плантация маниоки"
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:53
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:48
-#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
@@ -1209,19 +1209,19 @@ msgstr "Плантация маниоки"
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:40
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:36
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:39
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:87
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:50
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:46
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:42
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:58
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:82
@@ -1262,8 +1262,8 @@ msgstr "собирает маниоку"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgid "No Fields"
@@ -1275,8 +1275,8 @@ msgstr "Нет полей"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:93
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgid "Out of Fields"
@@ -1421,8 +1421,8 @@ msgstr "Продуктовый склад"
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:48
-#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
 msgid "preparing a ration"
 msgstr "готовит паёк"
@@ -1470,10 +1470,10 @@ msgstr "Жилище золотодобытчика"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
@@ -1485,8 +1485,8 @@ msgstr "добывает золото"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:83
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:98
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:81
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
 msgid "No Gold"
@@ -1497,8 +1497,8 @@ msgstr "Нет золота"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
 msgid "Main Gold Vein Exhausted"
@@ -1572,7 +1572,7 @@ msgstr "Хижина хранителя джунглей"
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:52
 msgid "planting trees"
 msgstr "сажает деревья"
@@ -1593,7 +1593,7 @@ msgstr "срезает лианы"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:59
 msgid "No Trees"
 msgstr "Нет деревьев"
@@ -1700,7 +1700,7 @@ msgstr "Верфь"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:60
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
 msgid "constructing a ship"
 msgstr "строит корабль"
@@ -1718,17 +1718,19 @@ msgstr "Каменотесный цех"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:206
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making a shovel"
 msgstr "делает лопату"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
 msgid "making a felling ax"
 msgstr "делает топор дровосека"
 
@@ -1738,7 +1740,7 @@ msgstr "делает топор дровосека"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
 msgid "making a pick"
 msgstr "делает кирку"
 
@@ -1754,7 +1756,7 @@ msgstr "кует мачете"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:179
 msgid "making kitchen tools"
 msgstr "делает кухонную утварь"
@@ -1766,7 +1768,7 @@ msgstr "делает кухонную утварь"
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making a hammer"
 msgstr "делает молоток"
@@ -1823,7 +1825,7 @@ msgstr "колит гранитные глыбы"
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:59
 msgid "No Rocks"
 msgstr "Нет скал"
@@ -1831,7 +1833,7 @@ msgstr "Нет скал"
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "Out of Rocks"
 msgstr "Больше нет скал"
@@ -1856,8 +1858,8 @@ msgstr "Гранитная шахта"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:110
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
@@ -1907,7 +1909,7 @@ msgstr "Хижина водовоза"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgid "No Water"
 msgstr "Нет воды"
@@ -1915,7 +1917,7 @@ msgstr "Нет воды"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "Out of Water"
 msgstr "Больше нет воды"
@@ -1956,7 +1958,7 @@ msgstr "Хижина лесоруба"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:37
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:50
 msgid "felling trees"
 msgstr "рубит деревья"
@@ -1964,7 +1966,7 @@ msgstr "рубит деревья"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:47
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
 msgid "Out of Trees"
 msgstr "Больше нет деревьев"
@@ -2052,7 +2054,7 @@ msgstr "Печь углежога"
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:68
 msgid "producing coal"
 msgstr "производит уголь"
@@ -2072,10 +2074,10 @@ msgstr "Угольная шахта"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
@@ -2087,8 +2089,8 @@ msgstr "добывает уголь"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:102
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
 msgid "No Coal"
@@ -2098,8 +2100,8 @@ msgstr "Нет угля"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:85
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
 msgid "Main Coal Vein Exhausted"
@@ -2182,7 +2184,7 @@ msgstr "Домик рыбовода"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
 msgid "No Fish"
 msgstr "Нет рыбы"
@@ -2190,7 +2192,7 @@ msgstr "Нет рыбы"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
 msgid "Out of Fish"
 msgstr "Больше нет рыбы"
@@ -2217,7 +2219,7 @@ msgstr "Домик рыболова"
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:40
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:53
 msgid "fishing"
@@ -2282,14 +2284,14 @@ msgstr "Домик охотника"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:39
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:52
 msgid "hunting"
 msgstr "охотится"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:70
 msgid "No Game"
 msgstr "Нет дичи"
@@ -2297,7 +2299,7 @@ msgstr "Нет дичи"
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:72
 msgid "Out of Game"
 msgstr "Больше нет дичи"
@@ -2324,10 +2326,10 @@ msgstr "Железный рудник"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:79
@@ -2338,8 +2340,8 @@ msgstr "добывает железо"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
 msgid "No Iron"
@@ -2349,8 +2351,8 @@ msgstr "Нет железа"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:85
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
 msgid "Main Iron Vein Exhausted"
@@ -2388,7 +2390,7 @@ msgstr "Каменоломня"
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:50
 msgid "quarrying granite"
 msgstr "добывает гранит"
@@ -2408,7 +2410,7 @@ msgstr "Лесопилка"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:56
 msgid "sawing logs"
 msgstr "пилит бревна"
 
@@ -2477,7 +2479,7 @@ msgstr "Инструментальная мастерская"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:103
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
 msgid "making a bread paddle"
 msgstr "делает садник для выпечки"
@@ -2491,7 +2493,7 @@ msgstr "делает пару ведер"
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:127
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:201
 msgid "making fire tongs"
 msgstr "делает клещи"
@@ -2522,14 +2524,14 @@ msgstr "делает доильные щипцы"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:176
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:182
 msgid "making a saw"
 msgstr "делает пилу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:199
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:113
 msgid "making a scythe"
 msgstr "делает косу"
@@ -2680,7 +2682,7 @@ msgstr "готовит закуску"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:87
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:67
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:80
 msgid "preparing a meal"
 msgstr "готовит обед"
@@ -2757,13 +2759,13 @@ msgstr "Ферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "сажает пшеницу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "собирает пшеницу"
 
@@ -2854,7 +2856,7 @@ msgstr "Шлемная мастерская"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:123
 msgid "forging a helmet"
 msgstr "куёт шлем"
@@ -2958,14 +2960,14 @@ msgstr "Кузница"
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:139
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
 msgid "making a fishing rod"
 msgstr "делает удочку"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:163
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:146
 msgid "making a hunting spear"
 msgstr "делает охотничье копьё"
@@ -2978,7 +2980,7 @@ msgstr "Малая пивоварня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:89
 msgid "brewing beer"
@@ -3117,19 +3119,19 @@ msgstr "Бронная"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:94
 msgid "forging a suit of armor"
 msgstr "куёт комплект доспехов"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
 msgid "forging a suit of chain armor"
 msgstr "куёт комплект кольчужной брони"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:118
 msgid "forging a suit of gilded armor"
 msgstr "куёт комплект позолоченых доспехов"
 
@@ -3175,7 +3177,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Угольная шахта"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3188,7 +3190,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Глубокая угольная шахта"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3203,7 +3205,7 @@ msgid "Donkey Farm"
 msgstr "Ослиная ферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:55
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "разводит ослов"
@@ -3214,7 +3216,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Ферма"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3232,7 +3234,7 @@ msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Домик рыболова"
 
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3251,7 +3253,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Золотая шахта"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:101
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3264,7 +3266,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Глубокая золотая шахта"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3279,7 +3281,7 @@ msgid "Hunter’s House"
 msgstr "Домик охотника"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3298,7 +3300,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Железный рудник"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3311,7 +3313,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Глубокий железный рудник"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3325,7 +3327,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Домик дровосека"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:51
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -3340,25 +3342,25 @@ msgid "Marble Mine"
 msgstr "Мраморная шахта"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:73
 msgid "mining marble"
 msgstr "добывает мрамор"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:140
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:144
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:91
 msgid "No Marble"
 msgstr "Нет мрамора"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:141
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:145
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:92
 msgid "Main Marble Vein Exhausted"
 msgstr "Главная мраморная жила истощена"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:143
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:147
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3372,7 +3374,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Глубокая мраморная шахта"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:94
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3387,7 +3389,7 @@ msgid "Mill"
 msgstr "Мельница"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:67
 msgid "grinding wheat"
 msgstr "размалывает пшеницу"
 
@@ -3398,7 +3400,7 @@ msgid "Piggery"
 msgstr "Свиноферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
-#: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:57
 msgid "raising pigs"
 msgstr "выращивает свиней"
 
@@ -3409,11 +3411,11 @@ msgid "Quarry"
 msgstr "Каменоломня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
 msgid "quarrying marble"
 msgstr "добывает мрамор"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:71
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3438,7 +3440,7 @@ msgid "Sheep Farm"
 msgstr "Овцеферма"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:57
 msgid "breeding sheep"
 msgstr "разводит овец"
 
@@ -3462,7 +3464,7 @@ msgstr "Домик камнетеса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
 msgstr "создаёт мраморную колонну"
 
@@ -3479,7 +3481,7 @@ msgid "Toolsmithy"
 msgstr "Инструментальная мастерская"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:135
 msgid "making a basket"
 msgstr "делает корзину"
@@ -3492,17 +3494,17 @@ msgstr "Виноградник"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:57
 msgid "planting grapevines"
 msgstr "Сажает виноградную лозу"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:65
 msgid "harvesting grapes"
 msgstr "собирает виноград"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -3517,30 +3519,30 @@ msgstr "Оружейная"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:83
 msgid "forging a wooden spear"
 msgstr "куёт деревянное копье"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:98
 msgid "forging a spear"
 msgstr "куёт копье"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:113
 msgid "forging an advanced spear"
 msgstr "куёт улучшенное копье"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:122
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:128
 msgid "forging a heavy spear"
 msgstr "куёт тяжелое копьё"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:137
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:143
 msgid "forging a war spear"
 msgstr "куёт боевое копьё"
 
@@ -3556,7 +3558,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "Носильщик, работающий у этого колодца, не может найти воду в нем."
@@ -3568,7 +3570,7 @@ msgid "Winery"
 msgstr "Винодельня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
-#: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:59
 msgid "making wine"
 msgstr "делает вино"
 
@@ -4202,8 +4204,8 @@ msgstr "Тренировочный полигон"
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:46
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:49
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
 msgid "sleeping"
@@ -4468,15 +4470,15 @@ msgstr "Арена"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:54
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:57
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "повышает уклонение солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:215
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "Нет солдат для тренировки!"
@@ -4484,8 +4486,8 @@ msgstr "Нет солдат для тренировки!"
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:90
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:217
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr "Нет солдат для этого уровня тренировки!"
@@ -4497,7 +4499,7 @@ msgid "Colosseum"
 msgstr "Колизей"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:70
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "повышает уклонение солдата с 1 до 2 уровня"
@@ -4509,49 +4511,49 @@ msgid "Training Camp"
 msgstr "Тренировочный лагерь"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:99
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "повышает атаку солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:113
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "повышает атаку солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "повышает атаку солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "повышает атаку солдата с 3 до 4 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:152
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:155
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "повышает здоровье солдата с 0 до 1 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:168
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "повышает здоровье солдата с 1 до 2 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "повышает здоровье солдата с 2 до 3 уровня"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:196
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "повышает здоровье солдата с 3 до 4 уровня"
@@ -5473,6 +5475,7 @@ msgstr[1] "%1%(+%2%) солдата"
 msgstr[2] "%1%(+%2%) солдат"
 msgstr[3] "%1%(+%2%) солдатов"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

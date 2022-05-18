@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Markus <markus@hallfors.com>, 2021
+# LINUX SAUNA, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Markus <markus@hallfors.com>, 2021\n"
+"Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,7 +56,7 @@ msgstr "Maksa tai taistele"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:52
 msgid "Pay the Empire or Destroy Their Port"
-msgstr ""
+msgstr "Maksa imperiumille taikka tuhoa heidän satamansa"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 #, lua-format
@@ -66,7 +67,11 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
+"Kerää %d kultaharkko pohjoisimmassa satamassasi saavuttaaksesi kulun Marcus "
+"Caius Iniucundus:ista."
 msgstr[1] ""
+"Kerää %d kultaharkkoa pohjoisimmassa satamassasi saavuttaaksesi kulun Marcus"
+" Caius Iniucundus:ista."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:56
 msgid ""
@@ -81,6 +86,8 @@ msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
 msgstr ""
+"Kaikki sotilaat jotka ovat läsnä Pohjoissaarella lähtiessäsi liittyvät "
+"seuraasi."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:58
 msgid "You have two hours to accomplish this objective."
@@ -100,6 +107,9 @@ msgid ""
 "We have been sailing North for weeks until we reached this shore. Not one of"
 " my numerous seamaps gives me the information what lies beyond this point."
 msgstr ""
+"Olemme matkanneet merellä viikkoja kunnes saavutimme nämä rannat. Yksikään "
+"useista merikartoistani ei anna tietoja siitä mikä meitä kohtaa tämän "
+"pisteen tuolla puolen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:74
@@ -107,6 +117,9 @@ msgid ""
 "Only one thing is certain: We must find a port space on the northern coast "
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
+"Vain yksi asia on varmaa: meidän täytyy löytää tila satamalle tämän "
+"maavyöhykkeen pohjoisrannikolta käynnistääksemme tutkimusretken sekä "
+"jatkaaksemme merenkulkua pohjoiseen. "
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:77
@@ -115,6 +128,10 @@ msgid ""
 "idleness pains me as I imagine Atterdag gleefully trampling the green "
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
+"Haluan löytää vanhan ystäväni Reebaud:in niin pian kuin suinkin mahdollista."
+" Jok'ikinen minuutti tekemättömyyttä aiheuttaa kipua samalla kun kuvittelen "
+"Atterdag:in riemukkaasti tallomassa Föhr:ini vihreitä suomaita "
+"pelkurijalkansa alla... Pidetään kiirettä."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:91
@@ -135,6 +152,9 @@ msgid ""
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
 msgstr ""
+"Vaan annathan minulle anteeksi. En ole vielä edes esittäytynyt. Olen Claus "
+"Lembeck, ritari joka hallitsee Föhr:in saarta... tai no, hallitsin, ennen "
+"kuin minut pakoitettiin valtaajan toimesta pois. "
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:88
@@ -142,6 +162,9 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
+"Saari kukoisti ollessani vallassa, alamaiseni rakastivat sekä kunnioittivat "
+"minua. He jopa rakensivat minulle uuden linnan lahjaksi. Sitten saapui "
+"Atterdag."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
@@ -152,6 +175,12 @@ msgid ""
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
 msgstr ""
+"Atterdag! Tuo tanskalaisen imperiumin kuningas ja veriviholliseni. Avustin "
+"sisämaan herttuoita monasti heidän puolustautuessaan tuon miehen "
+"sodanjanoista valloitusviettiä vastaan, ja monasti saimme hänet perääntymään"
+" mailtamme. Mutta kahdeksan viikkoa sitten hän rantautui liittolaistensa ja "
+"suuren hyvinkoulutetun armeijansa kanssa omalle saarelleni, Föhr:iin, "
+"tavoitteenaan valtaus."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -163,6 +192,13 @@ msgid ""
 "son Henneke and a few of my closest followers while Atterdag now calls Föhr "
 "another piece of his growing empire."
 msgstr ""
+"Ja katkerana minun täytyy myöntää - hän onnistui. Taistelu jatkui viisi ja "
+"vielä kolmekymmentä päivää, ja jokainen aamu sekä ilta alati uusi laiva "
+"saapui Tanskasta mukanaan yhä lisää sotilasjoukkoja. Kuinka olin voinut "
+"kuvitella pärjätäkseni moisia kertoimia vastaan? Lopulta ei minulla ollut "
+"muuta mahdollisuutta kuin paeta Henneke-poikani kanssa mukanamme läheisimmät"
+" seuralaisemme, ja nyt Atterdag:in kutsuessa Föhr:iä yhdeksi lisäosaksi "
+"kasvavaa imperiumiaan."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:103
@@ -189,6 +225,13 @@ msgid ""
 "toying with us. No, if I am to stand a chance of winning against him I need "
 "to find a greater force to aid my cause."
 msgstr ""
+"On selvää, että yksin en voi toivoa päihittäväni tätä arkkivihollista. "
+"Eivätkä myöskään he, joiden kanssa taistelin rinta rinnan ne monet kerrat "
+"voisi asiassa auttaa, nähtyämme kuinka koville jouduimme jok'ikinen kerta "
+"saadaksemme Atterdag:in perääntymään; tämä viimeisin hyökkäyksensä todisti "
+"ettei hän ollut aiemmin todella yrittänytkään voittaa, vaan vasta nyt. "
+"Leikitteli kanssamme tuo pentele. Ei, mikäli haikailen voittomahdollisuuksia"
+" häntä vastaan tarvitsen suuremman voiman apuun."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:112
@@ -198,6 +241,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
+"Ja moista voimaa nyt etsinkin. Reebaud, pienen mutta väkevän friisiläis-"
+"yhteisön päällikkö jonka kanssa joskus ystävystyin; hänen koppava ylpeytensä"
+" sekä huima taistelutaitonsa ovat verrattomat maailman kaikissa tunnetuissa "
+"kolkissa. Hän jos joku kykenee nousemaan Atterdag:ia vastaan."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:118
@@ -208,6 +255,12 @@ msgid ""
 "settle before. The bravery for so bold an undertaking is also something I "
 "would expect from nobody but him."
 msgstr ""
+"Mennessäni pyytämään häneltä apua sain kuitenkin pettyä karvaasti. Hän "
+"miehistöineen eivät enää asukaan Pohjois-Friisiassa vaan ovat tehneet "
+"valintansa löytää uuden asutuspaikan kaukana pohjoisessa johon yhdetkään "
+"ihmiset eivät ole ennen uskaltautuneet asettua. Tuollainen urhoollisuus ja "
+"hanke on niin ikään jotakin mitä en voisi odottaa keneltäkään muulta kuin "
+"häneltä."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -217,6 +270,11 @@ msgid ""
 "Reebaud, and convince him to send soldiers with me to free my dear Föhr from"
 " the evil Dane."
 msgstr ""
+"Se on juurikin tuo urhoollisuus jota meidän tulisi jäljentää, sillä ei ole "
+"kuin yksi toimintamalli jota voimme noudattaa. Meidän pitää tehdä pitkä "
+"kulku meren sylissä pohjoiseen löytääksemme vanhan ystäväni Reebaud:in, "
+"vakuuttaaksemme hänet lähettämään sotilaita kanssani vapauttamaan armas "
+"Föhr:ini tuolta ilkeältä tanskalaiselta. "
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
@@ -225,11 +283,11 @@ msgstr "Emme saa epäonnistua. Kansani tulevaisuus riippuu minusta."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:128
 msgid "Diking"
-msgstr ""
+msgstr "Patoaminen"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:129
 msgid "Gaining Land"
-msgstr ""
+msgstr "Maan hankinta"
 
 #. TRANSLATORS: Claus Lembeck – Diker
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:131
@@ -240,10 +298,16 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
+"Tämä saari on hiukan liian pieni ja kouriva minun makuuni. Kansani "
+"keskuudessa on suuren kokemuksen omaava patoaja, ja hän on ehdottanut "
+"joidenkin puuparrujen käyttöä rakentaaksemme aallonmurtajia, jotka "
+"mahdollistavat meidän vallata hiukan lisämaa-alaa mereltä. Se tulee olemaan "
+"hidasta ja kallista työtä, ja toivon mukaan emme jää tälle saarelle "
+"pidemmäksi toviksi, mutta ainahan voimme ottaa sen harkintaan. "
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:135
 msgid "Port Space Found"
-msgstr ""
+msgstr "Satamatila löytynyt"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:136
 msgid "One step closer to the North"
@@ -258,14 +322,19 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"Sotilaani ovat ilmoittaneet löytäneensä satamatilaa! Nyt voimme sitten "
+"kyseisen rakentaa aloittaaksemme tutkimusmatkat. On kuitenkin selvää, että "
+"meidän pitää ensiksi rakentaa kokonainen merenkulkutalous, kera laivatelakan"
+" ja kudontamyllyn. Mutta ethän tuhlaa liikaa aikaa hioaksesi talouttamme – "
+"eniten merkitsee nopea pääsy pohjoiseen. "
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:141
 msgid "A Strange Island"
-msgstr ""
+msgstr "Omituinen saari"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:142
 msgid "An apprehension"
-msgstr ""
+msgstr "Levottomuus"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -278,6 +347,14 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
+"Olemme rantautuneet omituiselle saarelle. Maan kamara on kovaa, mustaa ja "
+"jyrkkää. Ilma haisee palaneelle. Ranta on tuhkanväristä, hiekka itse tuntuu "
+"pahansuovalta, ikään kuin Iku-Turso olisi läsnä sen alla, odottaen "
+"nielaistakseen minkä tahansa elollisen olennon joka tänne erehtyy. Tuskin "
+"kykenen asettelemaan tätä levottomuuttani sanoiksi. En tiedä mitä pelättävää"
+" täällä on, mutta meidän on oltava alati valppaita mikäli kohtaamme jotakin "
+"aavistellun kaltaista. Toivottavasti saavutamme saaren vastakkaisen puolen "
+"piakkoin. "
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:154
@@ -293,7 +370,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:260
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:275
 msgid "Strangers"
-msgstr ""
+msgstr "Muukalaiset"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:149
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:230
@@ -306,6 +383,8 @@ msgid ""
 "Our soldiers have sighted strangers. Their buildings do not look like any I "
 "have seen before. I wonder who they are."
 msgstr ""
+"Sotilaamme ovat havainneet muukalaisia. Heidän rakennuksensa eivät muistuta "
+"mitään sellaista jota olen ennen nähnyt. Keitäpä mahtavat olla."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:155
 msgid "Who are you?"
@@ -318,6 +397,10 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
+"Olkaatte tervehdityt, ulkomaalaiset! Olen Angadthur, tämän ihmeellisen "
+"saaren kuningas, itse tarunhohtoisen Alt-land-is -ajanjakson kuninkaan "
+"Ajanthul Ensimmäisen jälkeläinen. Olkaatte tervetulleita, mikäli alatte "
+"ystäviksemme! "
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:173
@@ -332,6 +415,10 @@ msgid ""
 "years ago to seek out a new home in the far North. If I may ask, have you "
 "heard of him before, and can you tell us where to find him?"
 msgstr ""
+"Rauhaa, kuningas Angadthur! Olen Claus Lembeck, ja tämä on poikani Henneke. "
+"Etsimme vanhaa ystävääni Reebaud:ia joka jätti maamme useita vuosia sitten "
+"etsiäkseen uutta kotipaikkaa kaukana pohjoisessa. Jos voinen kysyä, oletko "
+"kuullut hänestä ennen, ja mistä voisimme löytää hänet?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:179
@@ -355,6 +442,9 @@ msgid ""
 "all. Very well, I’ll ask properly: Do you know where we can find my friend "
 "Reebaud?"
 msgstr ""
+"Se on vertauskuva jota pidetään hyvän käytöksen merkkinä ihmistemme "
+"keskuudessa, siinä kaikki. No hyvä, kysynkin aivan suoraan: tiedätkö mistä "
+"voimme löytää ystäväni Reebaud:in?"
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:181
@@ -365,6 +455,11 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
+"Olen pahoillani mutta joudun aiheuttamaan sinulle pettymyksen, Herra "
+"Lembeck, en ole kuullut tuota nimeä ennen, enkä voi täten tarjota hänestä "
+"tietojakaan. Mitä tulee aikeeseesi matkata pohjoiseen – pelkäänpä että on "
+"olemassa vain yksi sopiva kohde satamalle tällä saarella sen lisäksi mille "
+"rantauduitte, ja se sijaitsee suoraan palatsini alla."
 
 #. TRANSLATORS: Angadthur – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:184
@@ -375,6 +470,11 @@ msgid ""
 "and therefore I promise I will pray to the gods to bless your journey if you"
 " do succeed."
 msgstr ""
+"Ja kuten asiat ovat, sotilaani ovat lopen kyllästyneitä koska mitään ei "
+"tapahdu milloinkaan. Järjestäkäämme voimainkoitos, vaiko mitä mieltä olet? "
+"Voit lähettää sotilaasi koettaakseen tuhota palatsini. Olen vakuuttunut "
+"siitä, että sinulla ei ole mahdollisuuden häivääkään, ja täten lupaan "
+"rukoilla jumalia siunatakseen matkasi mikäli onnistut."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:288
@@ -394,12 +494,16 @@ msgid ""
 "gods. You have most certainly deserved your victory. I congratulate you and "
 "wish you well for your voyage. May Satul keep you safe!"
 msgstr ""
+"Olet ohittanut parhaan vartijani ja polttanut palatsini maan tasalle, pidin "
+"tätä mahdottomana. Lienet erittäin voimallinen, jumalten suosima. Olet "
+"todellakin ansainnut voittosi. Onnitteluni ja hyvää matkaa seikkailuissasi. "
+"Antakoon Satul sinulle turvan!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:208
 msgid "In the Ice Desert"
-msgstr ""
+msgstr "Jäisessä erämaassa"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:202
@@ -413,6 +517,9 @@ msgid ""
 "such a thing even exists. But I doubt anybody could live here; I fear we "
 "will not discover anything useful on this island."
 msgstr ""
+"Olemme lähestymässä pohjoista. Mikä jäinen aavikko! En tiennyt moista olevan"
+" olemassakaan. Vaikea uskoa kenenkään kykenevän elämään täällä; pelkäänpä "
+"että emme löydä tältä saarelta mitään hyödyllistä."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:204
@@ -425,7 +532,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:209
 msgid "Port space found"
-msgstr ""
+msgstr "Tila satamalle löydetty"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:211
@@ -433,6 +540,8 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
+"Olemme löytäneet tilan satamalle saarelta. Nyt voimme jättää tämän kylmän ja"
+" karun jääaavikon taaksemme ja jatkaa merenkulkuamme."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:215
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:221
@@ -451,6 +560,9 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
+"Kyllä, tämä näyttää enemmän siltä mikä kuva minulla oli pohjoisesta. Niityt "
+"vihertävät edelleen, mutta lumipälvet suurenevat ja suurenevat mitä "
+"pohjoisemmaksi näemme."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:224
@@ -458,6 +570,8 @@ msgid ""
 "It does look good, but it might be just another island. Let’s continue "
 "travelling quickly."
 msgstr ""
+"Hyvältähän tuo näyttää, mutta se voi olla vain yksi saari lisää. Jatkakaamme"
+" matkaa rivakasti."
 
 #. TRANSLATORS: Henneke Lembeck – Strangers 1
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:232
@@ -465,10 +579,13 @@ msgid ""
 "Our soldiers have sighted strangers again. I wonder whether they are similar"
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
+"Sotilaamme ovat havainneet uudemman kerran muukalaisia. Ovatkohan he "
+"samankaltaisia omituiseen kuninkaaseen nähden joka onnitteli meitä "
+"palatsinsa tuhoamisesta."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:236
 msgid "No troubles, please"
-msgstr ""
+msgstr "Emme kaipaa ongelmia, kiitos"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 2
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:238
@@ -477,11 +594,14 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
+"Tervehdys, muukalaiset! Olen Marcus Caius Iniucundus, imperiumin legaatti. "
+"Onko tämä teidän saarenne? Olemme vain ohikulkumatkalla, toivottavasti ette "
+"pahastu. Emme kaipaa ongelmia."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:242
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:254
 msgid "Travellers"
-msgstr ""
+msgstr "Matkaajat"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:244
@@ -491,6 +611,11 @@ msgid ""
 "getting around a lot. Have you heard news of my old friend Reebaud? I only "
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
+"Rauhaa, Herra Iniucundus! Olen Claus Lembeck, ja tämä on poikani Henneke. "
+"Olemme niin ikään vain ohikulkumatkalla. Sanot olevasi legaatti? Taidat "
+"kulkea paljon. Oletko kuullut mahdollisesti uutisia vamnhasta ystävästäni "
+"Reebaud:ista? Tiedän ainoastaan sen, että hän elää pohjoisessa, tietäisitkö "
+"mistä voisimme löytää hänet?"
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 4
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:250
@@ -501,6 +626,12 @@ msgid ""
 " from the Capital. We are currently preparing a ship to set sail. We can "
 "take you with us if you wish, provided you can pay for the passage."
 msgstr ""
+"Minua miellyttää kuulla että haluat rauhaa. Olen pahoillani, mutta en ole "
+"kuullut nimeä Reebaud ennen. Jos haluat mennä pohjoiseen, kuitenkin, meillä "
+"on sama määränpää, sillä se on juurikin kohde johon olemme matkustamassa "
+"virallisilla asioilla pääkaupungin puolesta. Olemme juurikin varustamassa "
+"laivaa lähtöön. Voimme ottaa teidät mukaamme mikäli niin haluatte, ottaen "
+"huomioon kuitenkin maksukykynne kulusta."
 
 #. TRANSLATORS: Claus Lembeck – Strangers 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:256
@@ -508,13 +639,15 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
+"Kiitämme tarjouksesta! Mikä on pyytämänne hinta? Ja, mikäli ette pahastu kun"
+" kysyn, saisinko tietää millä asioilla tarkalleen liikutte?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:262
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d kultahippua."
+msgstr[1] "%d kultahippua."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:264
@@ -522,6 +655,9 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
+"Tiedän että se vaikuttaa paljolta, mutta senaatti ei varustanut minua "
+"isollakaan rahalla tähän tutkimusmatkaan, joten myönnän tarvitsevani "
+"varallisuutta."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:267
@@ -534,6 +670,13 @@ msgid ""
 " this task, for I have a good chance of being appointed Proconsule in his "
 "stead if I succeed."
 msgstr ""
+"Matkani tarkoitus on etsiä pohjoismaiden provinssin prokonsuli, joka on "
+"kieltäytynyt maksamasta verojaan jo useita vuosia. Tehtäväni on antaa tälle "
+"Murilius-henkilölle kannustetta, ja mikäli ilmenee että hän ei maksanut "
+"ollen lähinnä ahne, eikä ahdingossa, palautan miehen takaisin pääkaupunkiin "
+"raudoissa. Täytyy kyllä sanoa, että olen hyvinkin iloinen suorittaessani "
+"tätä tehtävää, sillä voi olla että minusta tulee seuraava prokonsuli hänen "
+"tilalleen mikäli onnistun."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:270
@@ -546,10 +689,17 @@ msgid ""
 "whoever is still on the island after that time will not leave it anytime "
 "soon."
 msgstr ""
+"Mutta takaisin aiheeseen kulkusi tiimoille. On vain yksi paikka tämän saaren"
+" pohjoisrannikolla johon satama voidaan rakentaa. Joten sinulla ei todella "
+"ole vaihtoehtoa maksaa matkasta kaleerissani. Mutta tähtitieteilijäni "
+"ilmoittavat että kaamea myrsky on nousemassa joka tekee meren "
+"kulkukelvottomaksi pitkäksi aikaa. Meidän pitää nostaa purjeet kahden tunnin"
+" sisällä, ja kuka tahansa saarella sitten vielä onkin tuolloin, ei tule "
+"pääsemään pois aivan pian. "
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:276
 msgid "Decide"
-msgstr ""
+msgstr "Päätä"
 
 #. TRANSLATORS: Claus Lembeck – Strangers 7
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:278
@@ -558,6 +708,9 @@ msgid ""
 " may as well destroy his port and build one of our own. I wonder what would "
 "be better…"
 msgstr ""
+"Hän vaikuttaa iloiselta tarjotessaan meille kulun, mutta hinta on suolainen."
+" Voisimme yhtä hyvin tuhota hänen satamansa rakentaaksemme omamme tilalle. "
+"Olisikohan vielä muita parempia vaihtoehtoja..."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:293
@@ -577,6 +730,11 @@ msgid ""
 "no news of Reebaud, I am confident that we will find him soon. Then he will "
 "grant us aid, and I will reconquer Föhr from the usurper Atterdag!"
 msgstr ""
+"Olemme vallanneet sataman! Rakennammekin jo laivaa, ja sitten, pääsemme "
+"vihdoinkin matkaamaan kohti tuota varsinaista pohjoista. Vaikkakaan emme ole"
+" edelleenkään kuulleet uutisia Reebaud:ista, olen vakuuttunut hänen "
+"löytymisestään. Tämän jälkeen hän myöntää meille apunsa ja minä tulen "
+"valloittamaan Föhr:in takaisin kaappaaja Atterdag:ilta."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:298
@@ -584,6 +742,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet suorittanut tämän tehtävän päätökseensä. Voit halutessasi jatkaa "
+"pelaamista, muussa tapauksessa siirry seuraavaan tehtävään."
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:296
@@ -591,6 +751,8 @@ msgid ""
 "You have paid for the passage with pure gold. Now it is only right that you "
 "get it. Our ship is ready, you may embark!"
 msgstr ""
+"Maksoit matkasta puhtaassa kullassa. Nyt on vain oikein että saat sen. "
+"Laivamme on valmis, lähtöön siis!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:302
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:306
@@ -599,7 +761,7 @@ msgstr "Hävisit"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303
 msgid "Goodbye!"
-msgstr ""
+msgstr "Hyvästi!"
 
 #. TRANSLATORS: M. C. Iniucundus – victory
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:305
@@ -608,28 +770,34 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
+"Tuhlasit aikaa liian pitkään. Meidän tulee lähteä matkaan nyt heti, ja "
+"myrskyn takia et voi poistua tältä saarelta. Olen pahoillani sinun "
+"puolestasi, mutta säätilat eivät odota. Hyvästi."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:307
 msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Olet epäonnistunut etkä voi jatkaa enää pelaamista. Olkoon sinulla "
+"suotuisampi onni ensi kerralla koettaessasi uudelleen tätä asetelmaa. "
+"Napsauta OK palataksesi päävalikkoon."
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Patoaja"
 
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Patoajan talo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/dikers_house/init.lua:55
 msgid "diking"
-msgstr ""
+msgstr "patoaminen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
@@ -642,12 +810,13 @@ msgstr "Satama"
 msgctxt "frisians_building"
 msgid "Constructs breakwaters nearby to gain new land from the sea."
 msgstr ""
+"Rakentaa aallonmurtajia lähistölle jotta saavutetaan lisämaata mereltä."
 
 #. TRANSLATORS: Purpose helptext for a frisian worker: Diker
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:18
 msgctxt "frisians_worker"
 msgid "Constructs breakwaters to gain new land from the sea."
-msgstr ""
+msgstr "Rakentaa aallonmurtajia jotta saavutetaan lisämaata mereltä."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/init.lua:27
@@ -656,3 +825,6 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Toimii tukikohtana ylimerellisten asuttamistehtävien ja kaupankäynnin "
+"tiimoilla. Toimii myös säilytyspaikkana sotilaille, tarvikkeille ja "
+"työkaluille. "
