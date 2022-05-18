@@ -129,12 +129,14 @@ jobs:
         compiler: [clang-14, clang-13, g++-12, g++-11]
         include:
           # Some compilers need an older ubuntu version to run correctly
-          - compiler: [g++-5, g++-6]
+          - compiler: g++-5
             os: ubuntu-18.04
-            config: [Debug, Release]
-          - compiler: [clang-6.0, clang-7]
+          - compiler: g++-6
+            os: ubuntu-18.04
+          - compiler: clang-6.0
             os: ubuntu-20.04
-            config: [Debug, Release]
+          - compiler: clang-7
+            os: ubuntu-20.04
     runs-on: ${{ matrix.os }}
     env:
       SDL_VIDEODRIVER: 'x11'
