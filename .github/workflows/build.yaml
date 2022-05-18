@@ -123,43 +123,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - Release
-          - Debug
-        os:
-          - ubuntu-22.04
-        compiler:
-          # We test the two newest and the two oldest versions of each of the two compilers
-          - clang-14
-          - clang-13
-          - g++-12
-          - g++-11
+        # We test the two newest and the two oldest versions of each of the two compilers
+        config: [Debug, Release]
+        os: [ubuntu-22.04]
+        compiler: [clang-14, clang-13, g++-12, g++-11]
         include:
           # Some compilers need an older ubuntu version to run correctly
-          - compiler: g++-5
+          - compiler: [g++-5, g++-6]
             os: ubuntu-18.04
-            config: Debug
-          - compiler: g++-5
-            os: ubuntu-18.04
-            config: Release
-          - compiler: g++-6
-            os: ubuntu-18.04
-            config: Debug
-          - compiler: g++-6
-            os: ubuntu-18.04
-            config: Release
-          - compiler: clang-6.0
+            config: [Debug, Release]
+          - compiler: [clang-6.0, clang-7]
             os: ubuntu-20.04
-            config: Debug
-          - compiler: clang-6.0
-            os: ubuntu-20.04
-            config: Release
-          - compiler: clang-7
-            os: ubuntu-20.04
-            config: Debug
-          - compiler: clang-7
-            os: ubuntu-20.04
-            config: Release
+            config: [Debug, Release]
     runs-on: ${{ matrix.os }}
     env:
       SDL_VIDEODRIVER: 'x11'
@@ -214,12 +189,8 @@ jobs:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
-        config:
-          - Release
-          - Debug
-        arch:
-          - x64
-          - x86
+        config: [Debug, Release]
+        arch: [x64, x86]
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MSVC)
     runs-on: windows-2022
     env:
@@ -281,12 +252,8 @@ jobs:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
-        config:
-          - Release
-          - Debug
-        arch:
-          - x64
-          - x86
+        config: [Debug, Release]
+        arch: [x64, x86]
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-2022
     steps:
@@ -348,11 +315,8 @@ jobs:
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
-        config:
-          - release
-          - debug
-        compiler:
-          - clang
+        config: [debug, release]
+        compiler: [clang]
     name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
     runs-on: macos-11
     steps:
