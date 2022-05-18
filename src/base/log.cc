@@ -82,8 +82,7 @@ public:
 		std::cout.rdbuf(stdout_.rdbuf());
 		std::cerr.rdbuf(stderr_.rdbuf());
 		// Repeat version info so that we'll have it available in the log file too
-		std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
-		          << std::endl;
+		std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 		stdout_.flush();
 	}
 
