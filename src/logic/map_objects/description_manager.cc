@@ -20,6 +20,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <list>
 #include <memory>
 
 #include "base/log.h"
@@ -29,7 +30,7 @@
 
 namespace Widelands {
 
-static std::vector<DescriptionManager*> description_managers_stack_;
+static std::list<DescriptionManager*> description_managers_stack_;
 
 DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	description_managers_stack_.push_back(this);
@@ -58,11 +59,11 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	   });
 }
 
-DescriptionManager::~DescriptionManager() noexcept(false) {
-	if (description_managers_stack_.back() != this) {
-		throw wexception("DescriptionManager stack not in order");
-	}
-	description_managers_stack_.pop_back();
+DescriptionManager::~DescriptionManager() {
+	auto it =
+	   std::find(description_managers_stack_.begin(), description_managers_stack_.end(), this);
+	assert(it != description_managers_stack_.end());
+	description_managers_stack_.erase(it);
 }
 
 /// Walk given directory and register descriptions
