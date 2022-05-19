@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include <SDL.h>
 #include <SDL_clipboard.h>
 
 #include "base/i18n.h"
@@ -30,6 +31,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication.h"
+#include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {
@@ -67,7 +69,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		struct ContentT {
 			std::string label, localized_label, value, localized_value;
 		};
-		const std::vector<ContentT> content = {
+		std::vector<ContentT> content = {
 		   {"Version:", _("Version:"), build_ver_details(), ""},
 		   {"Operating System:", _("Operating System:"),
 #if defined(__APPLE__) || defined(__MACH__)
@@ -86,6 +88,9 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		    "Unknown", _("Unknown")
 #endif
 		   },
+		   {"Compiled with SDL version:", _("Compiled with SDL version:"),
+		    format("%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL), ""},
+		   {"SDL video driver:", _("SDL video driver:"), std::string(SDL_GetCurrentVideoDriver()), ""},
 		   {"Locale:", _("Locale:"), i18n::get_locale(), ""},
 		   {"Home Directory:", _("Home Directory:"), i18n::get_homedir(), ""},
 		   {"Configuration File:", _("Configuration File:"), get_config_file(), ""},
@@ -93,6 +98,22 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		   {"Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), ""},
 		   {"Executable Directory:", _("Executable Directory:"), get_executable_directory(false), ""},
 		};
+
+		// Do this first so we don't have to check position
+		if (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected)) {
+			content.insert(std::next(content.begin(), 4),
+			               {"SDL horizontal scroll:", _("SDL horizontal scroll:"),
+			                "assuming inverted", _("assuming inverted")});
+		}
+
+		SDL_version sdl_current = {0, 0, 0};
+		SDL_GetVersion(&sdl_current);
+		if (sdl_current.major != SDL_MAJOR_VERSION || sdl_current.minor != SDL_MINOR_VERSION ||
+		    sdl_current.patch != SDL_PATCHLEVEL) {
+			content.insert(std::next(content.begin(), 3), {"Using SDL version:", _("Using SDL version:"),
+			   format("%d.%d.%d", sdl_current.major, sdl_current.minor, sdl_current.patch), ""});
+		}
+
 		const bool mirror = UI::g_fh->fontset()->is_rtl();
 		UI::Box* infobox = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 		infobox->add_space(kSpacing);
