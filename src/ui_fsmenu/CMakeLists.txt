@@ -68,6 +68,8 @@ wl_library(ui_fsmenu
     singleplayerdropdown.h
     singleplayersetupbox.cc
     singleplayersetupbox.h
+    tech_info.cc
+    tech_info.h
     training_wheel_options.cc
     training_wheel_options.h
   DEPENDS
