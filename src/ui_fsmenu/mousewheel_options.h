@@ -28,6 +28,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 namespace FsMenu {
 
@@ -143,6 +144,10 @@ private:
 	UI::Button apply_button_;
 };
 
+struct InvertedScrollFeedbackWindow : public UI::Window {
+	explicit InvertedScrollFeedbackWindow(UI::Panel* parent);
+};
+
 /**********************************************************/
 
 // Main dialog box
@@ -168,7 +173,9 @@ private:
 	InvertDirBox zoom_invert_box_;
 	InvertDirBox tab_invert_box_;
 	InvertDirBox value_invert_box_;
+	UI::Box horiz_override_box_;
 	UI::Checkbox inverted_x_checkbox_;
+	UI::Button feedback_button_;
 	ScrollOptionsButtonBox button_box_;
 };
 

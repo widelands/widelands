@@ -30,7 +30,9 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 #include "ui_fsmenu/menu.h"
+#include "ui_fsmenu/tech_info.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
@@ -425,8 +427,10 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
         /** TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease: Vertical" */
         _("Invert scroll direction for increase/decrease:"),
         &(settings_.value_invert_)),
+     horiz_override_box_(
+        this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, kButtonSize, kPadding),
      inverted_x_checkbox_(
-        this,
+        &horiz_override_box_,
         UI::PanelStyle::kFsMenu,
         Vector2i::zero(),
         _("Fix inverted horizontal scrolling"),
@@ -434,7 +438,32 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
           "We try to detect them, but if we got it wrong, you can fix it here. "
           "Please report if you need to turn this on, so that we can improve the detection."),
         0),
+     feedback_button_(
+        &horiz_override_box_,
+        std::string(),
+        0,
+        0,
+        0,
+        0,
+        UI::ButtonStyle::kFsMenuSecondary,
+        _("Send feedback"),
+        ""),
      button_box_(this) {
+	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
+	inverted_x_checkbox_.changed.connect(
+	   [this]() {
+		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
+		feedback_button_.set_enabled(settings_.inverted_x_);
+	});
+	feedback_button_.set_enabled(settings_.inverted_x_);
+	feedback_button_.sigclicked.connect([this]() {
+		InvertedScrollFeedbackWindow feedback_window(&(this->get_topmost_forefather()));
+		feedback_window.run<UI::Panel::Returncodes>();
+	});
+	horiz_override_box_.add(&inverted_x_checkbox_);
+	horiz_override_box_.add_inf_space();
+	horiz_override_box_.add(&feedback_button_);
+
 	add(&zoom_box_);
 	add(&mapscroll_box_);
 	add(&speed_box_);
@@ -444,10 +473,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	add(&tab_invert_box_);
 	add(&value_invert_box_);
 	add_space(kDividerSpace);
-	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
-	inverted_x_checkbox_.changed.connect(
-	   [this]() { settings_.inverted_x_ = inverted_x_checkbox_.get_state(); });
-	add(&inverted_x_checkbox_);
+	add(&horiz_override_box_);
 	add_space(kDividerSpace);
 	add(&button_box_);
 }
@@ -530,8 +556,28 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		zoom_invert_box_.set_width(w_hbox);
 		tab_invert_box_.set_width(w_hbox);
 		value_invert_box_.set_width(w_hbox);
+		horiz_override_box_.set_desired_size(w_hbox, kButtonSize);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
+}
+
+/***** End of MousewheelOptionsDialog members *****/
+
+// Help users give feedback when inverted horizontal scrolling detection is wrong
+InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
+   : UI::Window(
+     parent,
+     UI::WindowStyle::kFsMenu,
+     "inverted_scroll_feedback",
+     0,
+     0,
+     400,
+     400,
+     _("Send Feedback for Inverted Horizontal Scrolling")) {
+	do_not_layout_on_resolution_change();
+	TechInfoBox infobox(this);
+	layout();
+	initialization_complete();
 }
 
 }  // namespace FsMenu
