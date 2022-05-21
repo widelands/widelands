@@ -55,7 +55,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		log_err("%s", err.what());
 	}
 
-	TechInfoBox* infobox = new TechInfoBox(&tabs_);
+	TechInfoBox* infobox = new TechInfoBox(&tabs_, TechInfoBox::Type::kAbout);
 	tabs_.add_tab_without_script("info", _("Technical Info"), infobox);
 
 	close_.sigclicked.connect([this]() { die(); });

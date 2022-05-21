@@ -52,6 +52,8 @@ wl_library(ui_fsmenu
     menu.cc
     mousewheel_options.cc
     mousewheel_options.h
+    mousewheel_report.cc
+    mousewheel_report.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
     netsetup_lan.cc

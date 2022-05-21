@@ -30,9 +30,8 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
 #include "ui_fsmenu/menu.h"
-#include "ui_fsmenu/tech_info.h"
+#include "ui_fsmenu/mousewheel_report.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
 
@@ -559,25 +558,6 @@ void MousewheelOptionsDialog::set_size(int w, int h) {
 		horiz_override_box_.set_desired_size(w_hbox, kButtonSize);
 		button_box_.set_size(w_hbox, kButtonSize);
 	}
-}
-
-/***** End of MousewheelOptionsDialog members *****/
-
-// Help users give feedback when inverted horizontal scrolling detection is wrong
-InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
-   : UI::Window(
-     parent,
-     UI::WindowStyle::kFsMenu,
-     "inverted_scroll_feedback",
-     0,
-     0,
-     400,
-     400,
-     _("Send Feedback for Inverted Horizontal Scrolling")) {
-	do_not_layout_on_resolution_change();
-	TechInfoBox infobox(this);
-	layout();
-	initialization_complete();
 }
 
 }  // namespace FsMenu

@@ -16,21 +16,30 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_TECH_INFO_H
-#define WL_UI_FSMENU_TECH_INFO_H
-
-#include <memory>
+#ifndef WL_UI_FSMENU_MOUSEWHEEL_REPORT_H
+#define WL_UI_FSMENU_MOUSEWHEEL_REPORT_H
 
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/tech_info.h"
 
 namespace FsMenu {
 
-struct TechInfoBox : public UI::Box {
-	enum class Type { kAbout, kMousewheelReport };
+struct InvertedScrollFeedbackWindow : public UI::Window {
+	explicit InvertedScrollFeedbackWindow(UI::Panel* parent);
 
-	explicit TechInfoBox(UI::Panel* parent, TechInfoBox::Type t);
+private:
+	UI::Box content_;
+	UI::MultilineTextarea header_;
+	UI::Button url_button_;
+	TechInfoBox infobox_;
+	UI::Button close_;
 };
+
+void url_button_action();
 
 }  // namespace FsMenu
 
-#endif  // end of include guard: WL_UI_FSMENU_TECH_INFO_H
+#endif  // end of include guard: WL_UI_FSMENU_MOUSEWHEEL_REPORT_H

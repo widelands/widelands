@@ -28,7 +28,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
 
 namespace FsMenu {
 
@@ -142,10 +141,6 @@ private:
 	UI::Button reset_button_;
 	UI::Button touchpad_button_;
 	UI::Button apply_button_;
-};
-
-struct InvertedScrollFeedbackWindow : public UI::Window {
-	explicit InvertedScrollFeedbackWindow(UI::Panel* parent);
 };
 
 /**********************************************************/
