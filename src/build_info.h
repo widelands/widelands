@@ -34,4 +34,8 @@ const std::string& build_id();
 /// or to a default value)
 const std::string& build_type();
 
+/// \return the build id and type as one complete string, which is set
+/// during compile time (either manually or to a default value)
+const std::string& build_ver_details();
+
 #endif  // end of include guard: WL_BUILD_INFO_H
