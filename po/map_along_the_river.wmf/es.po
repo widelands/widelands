@@ -58,7 +58,7 @@ msgstr "Derrota al ejército de los Törver"
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:10
 msgid ""
 "Törver is the enemy in the north, who is fighting under the red banner."
-msgstr "Los Törver son el enemigo del norte, pelean bajo el estandarte rojo."
+msgstr "Los Törver son el enemigo del norte y pelean bajo el estandarte rojo."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:16
 msgid "Build a port"
@@ -143,46 +143,51 @@ msgid ""
 "Free our neighbourhood from the pirate menace. The pirates are fighting "
 "under the grey banner."
 msgstr ""
+"Acaba con la amenaza pirata. Ellos pelean con bajo el estandarte gris."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:70
 msgid "Free our scout from the pirates"
-msgstr ""
+msgstr "Libera a nuestro explorador de los piratas"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:72
 msgid "Conquer the Stronghold on the Island"
-msgstr ""
+msgstr "Conquista la fortaleza de la isla"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:73
 msgid "This is where the scout is held captive."
-msgstr ""
+msgstr "Aquí es donde tienen a nuestro explorador."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:79
 msgid "Defeat Hjalmar"
-msgstr ""
+msgstr "¡Derrota a los Hjalmar!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:81
 msgid "Defeat the Armies of Hjalmar"
-msgstr ""
+msgstr "Derrota al ejército de los Hjalmar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:82
 msgid ""
 "Hjalmar is the enemy north of the former pirates, who is fighting under the "
 "green banner."
 msgstr ""
+"Los Hjalmar es el enemigo al norte de los territorio pirata y pelean bajo en"
+" estandarte verde."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:88
 msgid "Defeat Runar"
-msgstr ""
+msgstr "¡Derrota a los Runar!"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr ""
+msgstr "Derrota al ejército de los Ronar."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
 "Runar is the enemy south-east of the former pirates, who is fighting under "
 "the yellow banner."
 msgstr ""
+"Los Runar son los enemigos al sudeste de los antiguos territorios piratas. "
+"Ellos pelean bajo el estandarte amarillo."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:10
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:26
@@ -204,15 +209,15 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:147
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:156
 msgid "Your Advisor"
-msgstr ""
+msgstr "Tu consejero"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:11
 msgid "Along the River"
-msgstr ""
+msgstr "Junto al río"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:12
 msgid "Sire, let me inform you about the surrounding tribes."
-msgstr ""
+msgstr "Mi señor, permítame informarle sobre las tribus que nos rodean."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:14
 msgid ""
@@ -220,6 +225,8 @@ msgid ""
 "Törver, that is rapidly building up its armies. They may soon have become "
 "too strong to be defeated."
 msgstr ""
+"Al norte hay una tribu muy peligrosa liderada por Törver, su jefe. Su "
+"ejército crece muy rápido y pronto serán invencibles."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -227,6 +234,9 @@ msgid ""
 "pirates, led by their insane Arvid. Their presence blocks our ways to other "
 "tribes."
 msgstr ""
+"En una basta área al noreste se encuentra una horda salvaje de terribles "
+"piratas, liderados por Arvid, el Loco. Su presencia allí bloquea el paso "
+"hacia las otras tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:18
 msgid ""
@@ -234,6 +244,10 @@ msgid ""
 "have been in war with him before the pirates occupied the eastern area. His "
 "strength is based on his vast industry and large armies."
 msgstr ""
+"Más allá del río se encuentra la próspera tierra del misterioso rey Runar. "
+"Hemos estado en guerra con ellos desde antes de que los piratas ocuparan las"
+" tierras del este. Su fuerza se recide en su gran industria y su inmenso "
+"ejército."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:20
 msgid ""
