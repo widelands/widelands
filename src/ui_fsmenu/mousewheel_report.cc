@@ -37,15 +37,15 @@ static constexpr int kReportWindowHeight = 500;
 constexpr const char* const kReportURL = "https://github.com/widelands/widelands/discussions/5367";
 
 #if SDL_VERSION_ATLEAST(2, 0, 14)
-	const std::string url_button_text = gettext_noop("Open Link");
-	void url_button_action() {
-		SDL_OpenURL(kReportURL);
-	}
+const std::string url_button_text = gettext_noop("Open Link");
+void url_button_action() {
+	SDL_OpenURL(kReportURL);
+}
 #else
-	const std::string url_button_text = gettext_noop("Copy Link");
-	void url_button_action() {
-		SDL_SetClipboardText(kReportURL);
-	}
+const std::string url_button_text = gettext_noop("Copy Link");
+void url_button_action() {
+	SDL_SetClipboardText(kReportURL);
+}
 #endif
 
 // Help users give feedback when inverted horizontal scrolling detection is wrong
@@ -59,15 +59,25 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                 kReportWindowHeight,
                 _("Send Feedback for Inverted Horizontal Scrolling")),
      content_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     header_(&content_, 0, 0, kReportWindowWidth, 0, UI::PanelStyle::kFsMenu,
-             format("<rt><p>%1$s</p></rt>",
-                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
-                /** TRANSLATORS: %s is a URL */
-                format(_("Please report at %s that horizontal scroll direction is inverted with "
-                         " your configuration. Please include the below technical information."),
-                       format("<font underline=true>%s</font>", kReportURL)))),
-                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     url_button_(&content_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _(url_button_text)),
+     header_(
+        &content_,
+        0,
+        0,
+        kReportWindowWidth,
+        0,
+        UI::PanelStyle::kFsMenu,
+        format(
+           "<rt><p>%1$s</p></rt>",
+           g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+              .as_font_tag(
+                 /** TRANSLATORS: %s is a URL */
+                 format(_("Please report at %s that horizontal scroll direction is inverted with "
+                          " your configuration. Please include the below technical information."),
+                        format("<font underline=true>%s</font>", kReportURL)))),
+        UI::Align::kLeft,
+        UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     url_button_(
+        &content_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _(url_button_text)),
      infobox_(&content_, TechInfoBox::Type::kMousewheelReport),
      close_(&content_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
 	do_not_layout_on_resolution_change();

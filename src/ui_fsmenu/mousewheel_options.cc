@@ -437,20 +437,18 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
           "We try to detect them, but if we got it wrong, you can fix it here. "
           "Please report if you need to turn this on, so that we can improve the detection."),
         0),
-     feedback_button_(
-        &horiz_override_box_,
-        std::string(),
-        0,
-        0,
-        0,
-        0,
-        UI::ButtonStyle::kFsMenuSecondary,
-        _("Send feedback"),
-        ""),
+     feedback_button_(&horiz_override_box_,
+                      std::string(),
+                      0,
+                      0,
+                      0,
+                      0,
+                      UI::ButtonStyle::kFsMenuSecondary,
+                      _("Send feedback"),
+                      ""),
      button_box_(this) {
 	inverted_x_checkbox_.set_state(settings_.inverted_x_, false);
-	inverted_x_checkbox_.changed.connect(
-	   [this]() {
+	inverted_x_checkbox_.changed.connect([this]() {
 		settings_.inverted_x_ = inverted_x_checkbox_.get_state();
 		feedback_button_.set_enabled(settings_.inverted_x_);
 	});

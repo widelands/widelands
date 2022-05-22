@@ -41,44 +41,45 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	};
 	std::vector<ContentT> content;
 
-#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({ a, b, c, d }));
+#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({a, b, c, d}));
 
 	ADD_CONTENT("Version:", _("Version:"), build_ver_details(), "");
 
 	const std::string os =
 #if defined(__APPLE__) || defined(__MACH__)
-		gettext_noop("MacOS");
+	   gettext_noop("MacOS");
 #elif defined(_WIN64)
-		gettext_noop("Windows (64 bit)");
+	   gettext_noop("Windows (64 bit)");
 #elif defined(_WIN32)
-		gettext_noop("Windows (32 bit)");
+	   gettext_noop("Windows (32 bit)");
 #elif defined(__linux__)
-		gettext_noop("Linux");
+	   gettext_noop("Linux");
 #elif defined(__FreeBSD__)
-		gettext_noop("FreeBSD");
+	   gettext_noop("FreeBSD");
 #elif defined(__unix) || defined(__unix__)
-		gettext_noop("Unix");
+	   gettext_noop("Unix");
 #else
-		gettext_noop("Unknown");
+	   gettext_noop("Unknown");
 #endif
 	ADD_CONTENT("Operating System:", _("Operating System:"), os, _(os));
 	ADD_CONTENT("Compiled with SDL version:", _("Compiled with SDL version:"),
-	    format("%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL), "");
+	            format("%d.%d.%d", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL), "");
 
 	SDL_version sdl_current = {0, 0, 0};
 	SDL_GetVersion(&sdl_current);
 	if (sdl_current.major != SDL_MAJOR_VERSION || sdl_current.minor != SDL_MINOR_VERSION ||
 	    sdl_current.patch != SDL_PATCHLEVEL) {
 		ADD_CONTENT("Using SDL version:", _("Using SDL version:"),
-		   format("%d.%d.%d", sdl_current.major, sdl_current.minor, sdl_current.patch), "");
+		            format("%d.%d.%d", sdl_current.major, sdl_current.minor, sdl_current.patch), "");
 	}
 
-	ADD_CONTENT("SDL video driver:", _("SDL video driver:"), std::string(SDL_GetCurrentVideoDriver()), "");
+	ADD_CONTENT(
+	   "SDL video driver:", _("SDL video driver:"), std::string(SDL_GetCurrentVideoDriver()), "");
 
 	// Doesn't hurt if we report it in About too
 	if (get_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected)) {
-		ADD_CONTENT("SDL horizontal scroll:", _("SDL horizontal scroll:"),
-		                "assuming inverted", _("assuming inverted"));
+		ADD_CONTENT("SDL horizontal scroll:", _("SDL horizontal scroll:"), "assuming inverted",
+		            _("assuming inverted"));
 	}
 
 	if (t != TechInfoBox::Type::kMousewheelReport) {
@@ -87,7 +88,8 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		ADD_CONTENT("Configuration File:", _("Configuration File:"), get_config_file(), "");
 		ADD_CONTENT("Data Directory:", _("Data Directory:"), WLApplication::get()->get_datadir(), "");
 		ADD_CONTENT("Locale Directory:", _("Locale Directory:"), i18n::get_localedir(), "");
-		ADD_CONTENT("Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "");
+		ADD_CONTENT(
+		   "Executable Directory:", _("Executable Directory:"), get_executable_directory(false), "");
 	}
 
 /**** Done filling content *****/
@@ -117,16 +119,15 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		   new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
 		                    c.localized_label, UI::mirror_alignment(UI::Align::kLeft, mirror)),
 		   UI::Box::Resizing::kExpandBoth);
-		vbox2->add(new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu,
-		                            UI::FontStyle::kFsMenuInfoPanelParagraph,
-		                            c.localized_value.empty() ? c.value : c.localized_value,
-		                            UI::mirror_alignment(UI::Align::kRight, mirror)),
-		           UI::Box::Resizing::kExpandBoth);
+		vbox2->add(
+		   new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph,
+		                    c.localized_value.empty() ? c.value : c.localized_value,
+		                    UI::mirror_alignment(UI::Align::kRight, mirror)),
+		   UI::Box::Resizing::kExpandBoth);
 	}
 
-	UI::Button* copy =
-	   new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"),
-	                  _("Copy the technical report to the clipboard"));
+	UI::Button* copy = new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+	                                  _("Copy"), _("Copy the technical report to the clipboard"));
 	copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
 
 	hbox1->add_space(kSpacing);
