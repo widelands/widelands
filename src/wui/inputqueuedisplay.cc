@@ -286,7 +286,11 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	if (can_act_) {
 		collapse_.sigclicked.connect([this]() {
 			const bool c = !collapsed_;
-			recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
+			recurse([c](InputQueueDisplay& i) {
+				if (i.can_act_) {
+					i.set_collapsed(c);
+				}
+			});
 		});
 
 		b_decrease_desired_fill_.sigclicked.connect([this]() {

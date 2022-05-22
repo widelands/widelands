@@ -84,8 +84,8 @@ public:
 		EditorDecreaseResourcesTool decrease_resources;
 		EditorSetResourcesTool set_resources;
 		EditorIncreaseResourcesTool increase_resources;
-		EditorSetPortSpaceTool set_port_space;
 		EditorUnsetPortSpaceTool unset_port_space;
+		EditorSetPortSpaceTool set_port_space;
 		EditorSetOriginTool set_origin;
 		EditorResizeTool resize;
 	};

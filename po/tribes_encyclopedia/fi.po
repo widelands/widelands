@@ -8,6 +8,7 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2020
+# LINUX SAUNA, 2022
 # Markus <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-13 03:59+0000\n"
+"POT-Creation-Date: 2022-05-19 03:48+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
-"Last-Translator: Atte Timonen, 2022\n"
+"Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,9 +30,9 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:89
 #: ../../data/tribes/initialization/atlanteans/units.lua:403
 #: ../../data/tribes/initialization/barbarians/units.lua:112
@@ -50,13 +51,13 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr ""
+msgstr "Amatsonin metsurit kaatoivat puut ja viidakonsuojelijat istuttavat ne. Kivenveistäjä käyttää näitä tuotettuja parruja. Hiilestäjä myös tarvitsee parruja tuottaakseen hiiltä."
 
 #. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:102
 #: ../../data/tribes/initialization/atlanteans/units.lua:391
 #: ../../data/tribes/initialization/barbarians/units.lua:100
@@ -72,7 +73,7 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making tools and weapons as well. It is produced"
 " by the stonecutters and in stone mines."
-msgstr ""
+msgstr "Amatsoonit käyttävät graniittia työstääkseen työkaluja sekä myös aseita. Sitä tuottavat kivenleikkaajat ja kivilouhimot. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:115
@@ -80,7 +81,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr ""
+msgstr "Balsapuu on tärkeä rakennusraaka-aine. Sitä käytetään myös kevythaarniskojen valmistuksessa. Balsapuita kaataa kokenut metsuri."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ironwood
 #: ../../data/tribes/initialization/amazons/units.lua:126
@@ -88,7 +89,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr ""
+msgstr "Tämä erittäin kova puu on kivenkovaa ja sitä käytetään useiden rakennusten, työkalujen ja aseiden rakentamisessa. Tämän puun kaadon hoitaa kokenut metsuri."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rubber
 #: ../../data/tribes/initialization/amazons/units.lua:137
@@ -96,13 +97,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr ""
+msgstr "Kumi on tärkeä raaka-aine sotureiden suojavarusteiden ja kenkien valmistamiseen. Kumipuita keräävät kokeneet metsurit."
 
 #. TRANSLATORS: Helptext for an amazon ware: Liana
 #: ../../data/tribes/initialization/amazons/units.lua:147
 msgctxt "amazons_ware"
 msgid "Lianas grow on trees. Very durable ropes are made out of them."
-msgstr ""
+msgstr "Liaaneita kasvaa puissa. Niistä valmistetaan erittäin kestäviä köysiä."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rope
 #: ../../data/tribes/initialization/amazons/units.lua:157
@@ -110,13 +111,13 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr ""
+msgstr "Tämä köysi valmistetaan liaaneista. Käytetään suojavarusteisiin ja rakennusten sekä laivojen rakentamiseen."
 
 #. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:170
 #: ../../data/tribes/initialization/atlanteans/units.lua:489
 #: ../../data/tribes/initialization/barbarians/units.lua:182
@@ -132,7 +133,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "Vettä käyttävät cassavajuuren keittäjä, suklaatehdas, kullankaivaja sekä tapiiritila. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Cassava Root
 #: ../../data/tribes/initialization/amazons/units.lua:182
@@ -141,7 +142,7 @@ msgid ""
 "Cassava roots are a special kind of root produced at cassava plantations. "
 "The Amazons like their strong taste for making bread and they also feed "
 "their tapirs with them."
-msgstr ""
+msgstr "Cassavajuuret ovat erityislaatuista juuristoa jota tuotetaan cassavan istutustiloilla. Amatsonit pitävät sen voimakkaasta mausta tehdäkseen leipää. He ruokkivat niillä myös tapiirinsa."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
 #: ../../data/tribes/initialization/amazons/units.lua:192
@@ -149,7 +150,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr ""
+msgstr "Kaakaopavut kerää kaakaonviljelijä kaakaopuista. Niitä käytetään suklaan tuotantoon."
 
 #. TRANSLATORS: Helptext for an amazon ware: Bread
 #: ../../data/tribes/initialization/amazons/units.lua:203
@@ -158,14 +159,14 @@ msgid ""
 "This tasty bread is made in cassava root cookeries out of cassava root and "
 "water. It is the basic ingredient of a ration that is made by a food "
 "preserver. Soldiers like it too."
-msgstr ""
+msgstr "Tämä makoisa leipä valmistetaan cassavajuurileipomoissa cassavajuuresta ja vedestä. Se on säännöstelyn perus raaka-aine jonka valmistaa ruoantuottaja. Myös sotilaat pitävät tästä leivästä. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Chocolate
 #: ../../data/tribes/initialization/amazons/units.lua:214
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr ""
+msgstr "Suklaata valmistetaan suklaatehtaalla ja sitä käyttävät sotilaat."
 
 #. TRANSLATORS: Helptext for an amazon ware: Fish
 #: ../../data/tribes/initialization/amazons/units.lua:224
@@ -175,7 +176,7 @@ msgid ""
 "the food preserver to prepare rations for the workers digging for gold dust "
 "and granite. It is also consumed at the training sites (training glade and "
 "warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Kala on yksi kahdesta ruoan päävarannosta Amatsonilla. Sitä käyttää ruoanjalostaja valmistaakseen annoksia työläisille jotka kaivavat kultahippusia ja graniittia. Sitä kulutetaan myös koulutuskohteissa (sotureiden kokoontumisissa) ja uusien sotilaiden koulutuksenaikaisena ravintona."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:234
@@ -183,7 +184,7 @@ msgctxt "ware"
 msgid ""
 "Meat contains a lot of energy, and it is obtained from wild game taken by "
 "hunter-gatherers."
-msgstr ""
+msgstr "Liha sisältää reilusti energiaa ja jonka hankinnasta vastaavat metsästäjä-keräilijät villiriistasta."
 
 #. TRANSLATORS: Helptext for an amazon ware: Meat, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:236
@@ -192,7 +193,7 @@ msgid ""
 "Meat is used by the food preserver to prepare rations for the workers "
 "digging for gold dust and granite. It is also consumed at the training sites"
 " (training glade and warriors’ gathering) and for recruiting new soldiers."
-msgstr ""
+msgstr "Lihaa käyttää ruoanjalostaja valmistaakseen annoksia työläisille jotka kaivavat kultahippuja ja graniittia. Sitä hyödynnetään myös koulutuskeskuksissa (koulutusaukean soturikokoontuminen) sekä uusien sotilaiden koulutuksen aikana."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:247
@@ -200,7 +201,7 @@ msgctxt "amazons_ware"
 msgid ""
 "A small bite to keep the workers digging for gold dust and granite strong "
 "and working. The scout also consumes rations on her scouting trips."
-msgstr ""
+msgstr "Pieni huikopala joka pitää kultahippuja ja graniittia kaivavat työntekijät vahvoina ja työssään. Lähetti kuluttaa annoksia niin ikään tiedustelumatkoillaan."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:249
@@ -208,13 +209,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Rations are produced by the food preserver out of fish or meat and bread. "
 "They are dried using a charcoal fire."
-msgstr ""
+msgstr "Annokset valmistelee ruoanjalostaja kalasta tai punaisesta lihasta ja leivästä. Nämä kuivatetaan käyttäen tulihiiltä. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:263
 msgctxt "amazons_ware"
 msgid "Gold dust is washed in a gold digger dwelling."
-msgstr ""
+msgstr "Kultahiput huuhdotaan esiin kullankaivajan sijalla."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:265
@@ -222,13 +223,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce armor."
-msgstr ""
+msgstr "Sulatusuuniin kautta saalis muuntuu juoksevaksi kullaksi jota käyteään kallisarvoisena rakennusaineena sekä suojusten valmistukseen."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:276
 msgctxt "amazons_ware"
 msgid "Gold is the most valuable of all metals."
-msgstr ""
+msgstr "Kulta on kaikista metalleista arvokkain."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:278
@@ -236,7 +237,7 @@ msgctxt "amazons_ware"
 msgid ""
 "It is smelted out of gold dust by the furnace and used by the dressmaker and"
 " for special buildings."
-msgstr ""
+msgstr "Sulatusuuniin kautta saalis muuntuu juoksevaksi kullaksi ja sen käyttää puvuntekijä. Toinen käyttökohde ovat erityisrakennukset."
 
 #. TRANSLATORS: Helptext for an amazon ware: Charcoal, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:289
@@ -244,13 +245,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Charcoal is produced out of logs by a charcoal burner. The Amazons use "
 "charcoal for drying their food and for smelting gold."
-msgstr ""
+msgstr "Hiiltä saadaan tukeista hiilenpolttajan työstämänä. Amatsonit käyttävät hiiltä kuivattaakseen ruokaansa tai kullansulatukseen."
 
 #. TRANSLATORS: Helptext for an amazon ware: Pick
 #: ../../data/tribes/initialization/amazons/units.lua:303
 msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
-msgstr ""
+msgstr "Hakkuja käyttävät kivenleikkaajat leikatakseen kivistä graniittia tai muuten louhoksilla. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
@@ -268,13 +269,13 @@ msgstr "Kaatokirves on työkalu puiden kaatamiseen."
 #: ../../data/tribes/initialization/amazons/units.lua:316
 msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
-msgstr ""
+msgstr "Sitä käyttää metsuri ja tuottaja on kivenveistäjä."
 
 #. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:327
 #: ../../data/tribes/initialization/atlanteans/units.lua:652
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -290,13 +291,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
 "use them. They are produced by the stone carver."
-msgstr ""
+msgstr "Täten siis viidakonsuojelijat, cassava- ja kaakaonviljelijät käyttävät niitä. Tuottaja on kivenveistäjä."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:340
 #: ../../data/tribes/initialization/atlanteans/units.lua:665
 #: ../../data/tribes/initialization/barbarians/units.lua:371
@@ -313,13 +314,13 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "Maakerrostieteilijät, yleisrakentajat, laivanrakentajat ja kivenveistäjät tarvitsevat kaikki vasaraa. Varmista että näitä on alati jonkin verran varastossa! Vasaroita tuottaa kivenveistäjä. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Machete
 #: ../../data/tribes/initialization/amazons/units.lua:353
 msgctxt "amazons_ware"
 msgid "The machete is the tool of the liana cutters."
-msgstr ""
+msgstr "Viidakkoveitsi on liaaninleikkaajien työkalu."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:364
@@ -328,19 +329,19 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr ""
+msgstr "Tämä keihäs on Amatsoni-armeijajärjestelmässä perusase. Kivenveistäjä tuottaa niitä. Viitan kanssa se on lähtökohta nuorille sotilaille. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:366
 msgctxt "amazons_ware"
 msgid "It is used by the amazon hunter-gatherers as well."
-msgstr ""
+msgstr "Sitä käyttävät amatsoni-metsästäjä-keräilijät niin ikään."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:377
 msgctxt "ware"
 msgid "The chisel is an essential tool."
-msgstr ""
+msgstr "Taltta on välttämätön työkalu."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:379
@@ -348,7 +349,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Kivenveistäjät tarvitsevat taltan. Varmista että sinulla on alati joitakin varastossa! Talttoja valmistavat itse kivenveistäjät."
 
 #. TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
 #: ../../data/tribes/initialization/amazons/units.lua:390
@@ -357,7 +358,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, baking cassava bread and "
 "brewing chocolate. Be sure to have a stone carver to produce this basic "
 "tool."
-msgstr ""
+msgstr "Keittiötarvikkeita tarvitaan annosten valmistamiseen, cassavaleivän leipomiseen sekä suklaan työstämiseen. Varmista että työväestössäsi on kivenveistäjä tuottamassa näitä perustarvikkeita."
 
 #. TRANSLATORS: Helptext for an amazon ware: Needles
 #: ../../data/tribes/initialization/amazons/units.lua:401
@@ -365,13 +366,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Needles are used by dressmakers to make dresses, boots and armor for the "
 "soldiers."
-msgstr ""
+msgstr "Neuloja käyttävät puvuntekijät valmistaakseen pukuja, saappaita ja suojuksia sotilaille."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Bowl
 #: ../../data/tribes/initialization/amazons/units.lua:412
 msgctxt "amazons_ware"
 msgid "Stone bowls are used to wash gold and to smelt gold dust."
-msgstr ""
+msgstr "Kivikulhoja käytetään kullanhuuhdonnassa ja kultahippujen sulatuksessa."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Tipped Spear
 #: ../../data/tribes/initialization/amazons/units.lua:426
@@ -380,7 +381,7 @@ msgid ""
 "This spear has a stone spike. It is produced in a stone workshop and used in"
 " a warriors’ gathering – together with food – to train soldiers from attack "
 "level 0 to attack level 1."
-msgstr ""
+msgstr "Tässä keihäässä on kiviteräpiikki. Sitä tuotetaan kivipajassa ja käytetään sotureiden kokoontumisissa – ruoan ohella – kouluttamaan sotilaita hyökkäyksen tasolta 0 hyökkäyksen tasolle 1. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Hardened Spear
 #: ../../data/tribes/initialization/amazons/units.lua:437
@@ -389,7 +390,7 @@ msgid ""
 "This is a hardened spear with a stone tip. It is produced in a stone "
 "workshop and used in a warriors’ gathering – together with food – to train "
 "soldiers from attack level 1 to level 2."
-msgstr ""
+msgstr "Tämä on karkaistu keihäs jossa kiviteräpää. Sitä tuotetaan kivipajassa ja käytetään sotureiden kokoontumisissa – ruoan ohella – kouluttamaan sotilaita hyökkäyksen tasolta 01 hyökkäyksen tasolle 2. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Armor
 #: ../../data/tribes/initialization/amazons/units.lua:448
@@ -398,7 +399,7 @@ msgid ""
 "This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
 " It is produced by a dressmaker and used in a training glade – together with"
 " food – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Tämä kevyt puuhaarniska on osa amatsoonisotilaiden perusvarustusta. Näitä tuottaa puvuntekijä ja niitä käytetään koulutusaukealla – yhdessä ruoan kera – koulutukseen jossa sotilaat siirtyvät terveystasolta 0 terveystasolle 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wodden Helmet
 #: ../../data/tribes/initialization/amazons/units.lua:459
@@ -407,7 +408,7 @@ msgid ""
 "A wooden helmet is a basic piece of equipment for protecting soldiers. It is"
 " produced by the dressmaker and used to train soldiers from health level 1 "
 "to level 2."
-msgstr ""
+msgstr "Puukypärä on perusvaruste sotilaiden suojelemiseksi. Niitä tuottaa puvuntekijä ja käytetään sotilaiden kouluttamiseksi terveystasolta 1 terveystasolle 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Warrior's Coat
 #: ../../data/tribes/initialization/amazons/units.lua:470
@@ -415,7 +416,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Ordinary tunics can be decorated and reinforced with gold and wood chunks. "
 "Such tunics are the best armor."
-msgstr ""
+msgstr "Tavanomaiset viitat voidaan koristaa ja vahvistaa kulta- ja puulisäyksin. Moiset viitat toimivat myös parhaimmiston suojuksena."
 
 #. TRANSLATORS: Helptext for an amazon ware: Tunic
 #: ../../data/tribes/initialization/amazons/units.lua:481
@@ -423,7 +424,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber can be bound into a tunic, which is used as basic armor. All new "
 "soldiers are clothed in a tunic."
-msgstr ""
+msgstr "Kumia voidaan liittää viittaan, joka tuo perussuojaustason. Kaikki uudet sotilaat puetaan viittaan."
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Vest
 #: ../../data/tribes/initialization/amazons/units.lua:492
@@ -431,7 +432,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded vests are light but durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 0 to level 1."
-msgstr ""
+msgstr "Topatut liivit ovat kevyitä mutta kestäviä suojuksena. Niitä valmistaa puvuntekijä ja niitä käytetään sotilaiden kouluttamiseen puolustautumistasolta 0 tasolle 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Protector
 #: ../../data/tribes/initialization/amazons/units.lua:503
@@ -439,7 +440,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded protectors are strong and durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 1 to level 2."
-msgstr ""
+msgstr "Topatut suojukset ovat väkeviä ja kestäviä panssarina. Niitä valmistaa puvuntekijä ja niitä käytetään sotilaiden kouluttamiseen puolustautumistasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Sturdy Boots
 #: ../../data/tribes/initialization/amazons/units.lua:514
@@ -448,7 +449,7 @@ msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
 "feet. They are produced by the dressmaker and used to train soldiers’ evade "
 "from level 0 to level 1."
-msgstr ""
+msgstr "Tanakat saappaat ovat erinomaisia jalkineita sotilaille jotta olisivat jalan nopeampia. Niitä valmistaa puvuntekijä ja ne liittyvät sotilaiden kouluttamiseen väistötaidossa tasolta 0 tasolle 1. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Swift Boots
 #: ../../data/tribes/initialization/amazons/units.lua:525
@@ -457,7 +458,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr ""
+msgstr "Pikasaappaat ovat kevyitä ja kestäviä jalkineita sotilaille ollakseen nopeampia kulkien jalan. Näitä tuottaa puvuntekijä ja niitä käytetään sotilaiden koulutuksessa siirtymään väistötaidossa tasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hero Boots
 #: ../../data/tribes/initialization/amazons/units.lua:536
@@ -465,19 +466,19 @@ msgctxt "amazons_ware"
 msgid ""
 "Hero boots! The only suitable footwear for a real hero. They are produced by"
 " the dressmaker and used to train soldiers’ evade from level 2 to level 3."
-msgstr ""
+msgstr "Urhosaappaat! Ainoat soveltuvat jalkineet todelliselle sankarille. Näitä tuottaa puvuntekijä ja ovat käytössä koulutuksessa joka saattaa sotilaita väistötaidossa tasolta 2 tasolle 3."
 
 #. TRANSLATORS: Helptext for an amazon worker: Carrier
 #: ../../data/tribes/initialization/amazons/units.lua:553
 msgctxt "amazons_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Kuljettaa hyödykkeitä teitäsi pitkin."
 
 #. TRANSLATORS: Helptext for an amazon worker: Ferry
 #: ../../data/tribes/initialization/amazons/units.lua:560
 msgctxt "amazons_worker"
 msgid "Ships wares across narrow rivers."
-msgstr ""
+msgstr "Laivan tarvikkeita halki kapeiden jokien."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir
 #: ../../data/tribes/initialization/amazons/units.lua:569
@@ -485,97 +486,97 @@ msgctxt "amazons_worker"
 msgid ""
 "Tapirs help to carry items along busy roads. They are reared in a tapir "
 "farm."
-msgstr ""
+msgstr "Tapiirit auttavat kantamaan esineitä pitkin ruuhkaisia teitä. Nämä valjastetaan tapiiritilalla."
 
 #. TRANSLATORS: Helptext for an amazon worker: Tapir Breeder
 #: ../../data/tribes/initialization/amazons/units.lua:576
 msgctxt "amazons_worker"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Siittää tapiireja lisätäkseen niitä kuljetusjärjestelmään."
 
 #. TRANSLATORS: Helptext for an amazon worker: Stonecutter
 #: ../../data/tribes/initialization/amazons/units.lua:586
 msgctxt "amazons_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikkaa graniittilohkareita kivistä jotka ovat näköpiirissä."
 
 #. TRANSLATORS: Helptext for an amazon worker: Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:593
 msgctxt "amazons_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "Kaataa puita."
 
 #. TRANSLATORS: Helptext for an amazon worker: Master Woodcutter
 #: ../../data/tribes/initialization/amazons/units.lua:600
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
-msgstr ""
+msgstr "Niittää erityispuita: keloja, kumia ja balsaa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Jungle Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:607
 msgctxt "amazons_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "Istuttaa puita."
 
 #. TRANSLATORS: Helptext for an amazon worker: Jungle Master
 #: ../../data/tribes/initialization/amazons/units.lua:614
 msgctxt "amazons_worker"
 msgid "Plants special trees: ironwood, rubber and balsa."
-msgstr ""
+msgstr "Istuttaa erityispuita: keloja, kumia ja balsaa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Liana Cutter
 #: ../../data/tribes/initialization/amazons/units.lua:621
 msgctxt "amazons_worker"
 msgid "Cuts lianas from trees."
-msgstr ""
+msgstr "Leikkaa liaaneja puista."
 
 #. TRANSLATORS: Helptext for an amazon worker: Builder
 #: ../../data/tribes/initialization/amazons/units.lua:628
 msgctxt "amazons_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Työskentelee rakennustyömaalla kohottaakseen uusia rakennuksia."
 
 #. TRANSLATORS: Helptext for an amazon worker: Shipwright
 #: ../../data/tribes/initialization/amazons/units.lua:635
 msgctxt "amazons_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Työskentelee laivatelakalla valmistaen uusia laivoja."
 
 #. TRANSLATORS: Helptext for an amazon worker: Hunter-Gatherer
 #: ../../data/tribes/initialization/amazons/units.lua:645
 msgctxt "amazons_worker"
 msgid "The hunter-gatherer gets fresh fish and raw meat for the tribe."
-msgstr ""
+msgstr "Metsästäjä-kerääjä hankkii heimolle tuoretta kalaa sekä raakaa lihaa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
 #: ../../data/tribes/initialization/amazons/units.lua:652
 msgctxt "amazons_worker"
 msgid "Grows cassava."
-msgstr ""
+msgstr "Kasvattaa cassavaa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Cocoa Farmer
 #: ../../data/tribes/initialization/amazons/units.lua:659
 msgctxt "amazons_worker"
 msgid "Grows cocoa."
-msgstr ""
+msgstr "Kasvattaa kaakaota"
 
 #. TRANSLATORS: Helptext for an amazon worker: Cook
 #: ../../data/tribes/initialization/amazons/units.lua:666
 msgctxt "amazons_worker"
 msgid "Prepares rations, bakes cassava bread and brews chocolate."
-msgstr ""
+msgstr "Valmistaa annokset, leipoo cassavaleivät ja tekee sulkaata."
 
 #. TRANSLATORS: Helptext for an amazon worker: Wilderness Keeper
 #: ../../data/tribes/initialization/amazons/units.lua:673
 msgctxt "amazons_worker"
 msgid "Breeds game or fish."
-msgstr ""
+msgstr "Siittää riistaa tai kalaa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Geologist
 #: ../../data/tribes/initialization/amazons/units.lua:683
 msgctxt "amazons_worker"
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Etsii löytääkseen kohteita kaivostyötä varten."
 
 #. TRANSLATORS: Helptext for an amazon worker: Gold Digger
 #: ../../data/tribes/initialization/amazons/units.lua:690
@@ -583,60 +584,60 @@ msgctxt "amazons_worker"
 msgid ""
 "Works hard in the gold dwellings in mountains to obtain gold by washing it "
 "from gravel."
-msgstr ""
+msgstr "Työskentelee ankarasti kultahavaintoelueilla vuorilla saadakseen kultaa huuhtoen sitä sorasta."
 
 #. TRANSLATORS: Helptext for an amazon worker: Charcoal Burner
 #: ../../data/tribes/initialization/amazons/units.lua:697
 msgctxt "amazons_worker"
 msgid "Burns logs to produce charcoal."
-msgstr ""
+msgstr "Polttaa tukkeja tuottaakseen hiiltä."
 
 #. TRANSLATORS: Helptext for an amazon worker: Gold Smelter
 #: ../../data/tribes/initialization/amazons/units.lua:704
 msgctxt "amazons_worker"
 msgid "Smelts gold at furnaces."
-msgstr ""
+msgstr "Sulattaa kultaa sulatusuuneilla."
 
 #. TRANSLATORS: Helptext for an amazon worker: Stone Carver
 #: ../../data/tribes/initialization/amazons/units.lua:714
 msgctxt "amazons_worker"
 msgid "Produces spears for soldiers and tools for workers."
-msgstr ""
+msgstr "Tuottaa sotilaille keihäitä ja työkaluja työläisille."
 
 #. TRANSLATORS: Helptext for an amazon worker: Soldier
 #: ../../data/tribes/initialization/amazons/units.lua:726
 msgctxt "amazons_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Puolusta ja valloita!"
 
 #. TRANSLATORS: Helptext for an amazon worker: Trainer
 #: ../../data/tribes/initialization/amazons/units.lua:733
 msgctxt "amazons_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Kouluttaa sotilaat."
 
 #. TRANSLATORS: Helptext for an amazon worker: Dressmaker
 #: ../../data/tribes/initialization/amazons/units.lua:740
 msgctxt "amazons_worker"
 msgid "Produces all kinds of dresses, boots and armor."
-msgstr ""
+msgstr "Tuottaa monenkaltaisia pukuja, saappaita ja haarniskoja."
 
 #. TRANSLATORS: Helptext for an amazon worker: Scout
 #: ../../data/tribes/initialization/amazons/units.lua:747
 msgctxt "amazons_worker"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Tutkii tuntemattomia alueita."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
-#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
 #. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an atlantean immovable: Ashes
+#. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:758
 #: ../../data/tribes/initialization/amazons/units.lua:765
 #: ../../data/tribes/initialization/atlanteans/units.lua:1102
@@ -653,17 +654,17 @@ msgstr "Tuhotun rakennuksen jäänteet."
 #. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
+#. Tree
 #: ../../data/tribes/initialization/amazons/units.lua:772
 #: ../../data/tribes/initialization/atlanteans/units.lua:1296
 #: ../../data/tribes/initialization/barbarians/units.lua:990
 #: ../../data/tribes/initialization/empire/units.lua:1051
 #: ../../data/tribes/initialization/frisians/units.lua:1417
 msgid "The remains of an old tree."
-msgstr ""
+msgstr "Vanhan puun jäännökset."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:779
@@ -671,7 +672,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:835
 #: ../../data/tribes/initialization/amazons/units.lua:863
 msgid "This balsa tree has just been planted."
-msgstr ""
+msgstr "Tämä balsapuu on juuri istutettu."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:786
@@ -679,7 +680,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:842
 #: ../../data/tribes/initialization/amazons/units.lua:870
 msgid "This balsa tree is growing."
-msgstr ""
+msgstr "Tämä balsapuu kasvaa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:793
@@ -687,7 +688,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:849
 #: ../../data/tribes/initialization/amazons/units.lua:877
 msgid "This balsa tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Tämä balsapuu on kasvanut täyteen mittaansa. Siitä voidaan kerätä liaaneja."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Balsa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:800
@@ -697,7 +698,7 @@ msgstr ""
 msgid ""
 "This balsa tree is ready for harvesting balsa wood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tämä balsapuu on valmis hyödynnettäväksi mestarimetsurin toimesta. Muut heimot voivat hyödyntää sen tavanomaisten tukkien suhteen."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:891
@@ -705,7 +706,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:947
 #: ../../data/tribes/initialization/amazons/units.lua:975
 msgid "This ironwood tree has just been planted."
-msgstr ""
+msgstr "Tämä kelopuu on juuri istutettu kasvamaan."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:898
@@ -713,7 +714,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:954
 #: ../../data/tribes/initialization/amazons/units.lua:982
 msgid "This ironwood tree is growing."
-msgstr ""
+msgstr "Tämä kelopuu kasvaa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:905
@@ -721,7 +722,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:961
 #: ../../data/tribes/initialization/amazons/units.lua:989
 msgid "This ironwood tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Tämä kelopuu on kasvanut täyteen mittaansa. Siitä voidaan kerätä nyt liaaneja."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ironwood Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:912
@@ -731,7 +732,7 @@ msgstr ""
 msgid ""
 "This ironwood tree is ready for harvesting ironwood by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tämä kelopuu on valmis mestarimetsurin hyödynnettäväksi. Muut heimot voivat hyödyntää sen perinteisten tukkien suhteen."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:1003
@@ -739,7 +740,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1059
 #: ../../data/tribes/initialization/amazons/units.lua:1087
 msgid "This rubber tree has just been planted."
-msgstr ""
+msgstr "Tämä kumipuu on juuri istutettu."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:1010
@@ -747,7 +748,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1066
 #: ../../data/tribes/initialization/amazons/units.lua:1094
 msgid "This rubber tree is growing."
-msgstr ""
+msgstr "Tämä kumipuu kasvaa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1017
@@ -755,7 +756,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1073
 #: ../../data/tribes/initialization/amazons/units.lua:1101
 msgid "This rubber tree is fully grown. Lianas can be gathered from it."
-msgstr ""
+msgstr "Tämä kumipuu on kasvanut täyteen mittaansa. Siitä voidaan kerätä nyt liaaneja."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1024
@@ -765,14 +766,14 @@ msgstr ""
 msgid ""
 "This rubber tree is ready for harvesting rubber by a master woodcutter. "
 "Other tribes can harvest it for normal logs."
-msgstr ""
+msgstr "Tämä kumipuu on valmis mestarimetsurin hyödynnettäväksi. Muut heimot voivat hyödyntää sen perinteisten tukkien suhteen."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
-#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #: ../../data/tribes/initialization/amazons/units.lua:1115
 #: ../../data/tribes/initialization/atlanteans/units.lua:1109
 #: ../../data/tribes/initialization/atlanteans/units.lua:1144
@@ -784,10 +785,10 @@ msgstr "Tämä pelto on juuri istutettu."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
-#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #: ../../data/tribes/initialization/amazons/units.lua:1122
 #: ../../data/tribes/initialization/amazons/units.lua:1129
 #: ../../data/tribes/initialization/atlanteans/units.lua:1116
@@ -804,10 +805,10 @@ msgstr "Tämän pellon sato kasvaa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
-#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #: ../../data/tribes/initialization/amazons/units.lua:1136
 #: ../../data/tribes/initialization/atlanteans/units.lua:1130
 #: ../../data/tribes/initialization/atlanteans/units.lua:1165
@@ -819,10 +820,10 @@ msgstr "Tämän pellon sato on valmis korjattavaksi."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
-#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
-#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+#. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #: ../../data/tribes/initialization/amazons/units.lua:1143
 #: ../../data/tribes/initialization/atlanteans/units.lua:1137
 #: ../../data/tribes/initialization/atlanteans/units.lua:1172
@@ -835,28 +836,28 @@ msgstr "Tämän pellon sato on jo korjattu."
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Sapling
 #: ../../data/tribes/initialization/amazons/units.lua:1150
 msgid "This cocoa tree has just been planted."
-msgstr ""
+msgstr "Tämä kaakaopuu on juuri istutettu."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:1157
 msgid "This cocoa tree is growing."
-msgstr ""
+msgstr "Tämä kaakaopuu kasvaa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1164
 msgid "This cocoa tree is fully grown."
-msgstr ""
+msgstr "Tämä kaakaopuu on kasvanut täyteen mittaansa."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1171
 msgid "The beans on this cocoa tree are ready for harvesting."
-msgstr ""
+msgstr "Pavut tässä kaakaopuussa ovat kypsiä poimittavaksi."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
-#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
+#. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1178
 #: ../../data/tribes/initialization/atlanteans/units.lua:1186
 #: ../../data/tribes/initialization/barbarians/units.lua:880
@@ -871,13 +872,13 @@ msgstr "Täältä ei löydy mitään kiintoisaa."
 msgid ""
 "Gold veins contain gold ore that can be washed from the gravel at gold "
 "digger dwellings."
-msgstr ""
+msgstr "Kultasuonet sisältävät kultamalmia jota voidaan huuhtoa sorasta kullankaivajien alueilla."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1188
 #: ../../data/tribes/initialization/atlanteans/units.lua:1225
 #: ../../data/tribes/initialization/barbarians/units.lua:919
@@ -891,7 +892,7 @@ msgstr "Täältä löytyy hippunen kultaa."
 #: ../../data/tribes/initialization/amazons/units.lua:1219
 msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
-msgstr ""
+msgstr "Graniitti on perus rakennusaines ja sitä voidaan kaivaa ylös kivilouhoksella."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
@@ -904,9 +905,9 @@ msgstr "Täällä on vain vähän graniittia."
 
 #. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1210
 #: ../../data/tribes/initialization/atlanteans/units.lua:1269
 #: ../../data/tribes/initialization/barbarians/units.lua:963
@@ -926,9 +927,9 @@ msgstr "Täältä löytyy runsaasti graniittia."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1229
 #: ../../data/tribes/initialization/atlanteans/units.lua:1288
 #: ../../data/tribes/initialization/barbarians/units.lua:982
@@ -941,13 +942,13 @@ msgstr "Laivaa ollaan rakentamassa tällä paikalla."
 #: ../../data/tribes/initialization/amazons/units.lua:1241
 msgctxt "amazons_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
-msgstr ""
+msgstr "Majoitus väellesi. Varastoi myös tarvikkeitasi ja työkalujasi."
 
 #. TRANSLATORS: Note helptext for an amazon warehouse: Headquarters
 #: ../../data/tribes/initialization/amazons/units.lua:1243
 msgctxt "amazons_building"
 msgid "The headquarters is your main building."
-msgstr ""
+msgstr "Päämaja on myös päärakennuksesi."
 
 #. TRANSLATORS: Purpose helptext for an amazon warehouse: Warehouse
 #: ../../data/tribes/initialization/amazons/units.lua:1250
@@ -955,7 +956,7 @@ msgctxt "amazons_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Työläisesi sekä sotilaasi asustavat täällä. Varastoi myös tarvikkeitasi ja työkalujasi."
 
 #. TRANSLATORS: Purpose helptext for an amazon warehouse: Port
 #: ../../data/tribes/initialization/amazons/units.lua:1257
@@ -963,7 +964,7 @@ msgctxt "amazons_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr ""
+msgstr "Toimii tukikohtana ylimerellisten asuttamistehtävien ja kaupankäynnin tiimoilla. Myös säilytyspaikka sotilaille, tarvikkeille ja työkaluille. "
 
 #. TRANSLATORS: Note helptext for an amazon warehouse: Port
 #: ../../data/tribes/initialization/amazons/units.lua:1259
@@ -971,40 +972,40 @@ msgctxt "amazons_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen toimesta tuhota. On suositeltavaa lähettää sotilaita puolustamaan sitä."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stonecutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1269
 msgctxt "amazons_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikkaa raakagraniittia lähialueen kivikosta."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Stonecutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1271
 msgctxt "amazons_building"
 msgid "The stonecutter’s hut needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kivenleikkaajan mökki tarvitsee kiviä leikattavaksi työskentelyalueella."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Woodcutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1278
 msgctxt "amazons_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr ""
+msgstr "Kaataa puita lähialueella ja tekee niistä tukkeja."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Woodcutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1280
 msgctxt "amazons_building"
 msgid "The woodcutter’s hut needs trees to fell within the work area."
-msgstr ""
+msgstr "Metsurin mökki tarvitsee työskentelyalueella puita kaadettavaksi."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Jungle
 #. Preserver's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1287
 msgctxt "amazons_building"
 msgid "Plants trees in the surrounding area."
-msgstr ""
+msgstr "Istuttaa puita lähiympäristöön."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Jungle
 #. Preserver's Hut
@@ -1013,14 +1014,14 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver’s hut needs free space within the work area to plant "
 "the trees."
-msgstr ""
+msgstr "Viidakonsuojelijan maja tarvitsee työskentelyalueella vapaata tilaa puiden istuttamiseen."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Hunter-
 #. Gatherer's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1296
 msgctxt "amazons_building"
 msgid "Hunts animals to produce meat. Catches fish in the waters."
-msgstr ""
+msgstr "Metsästää eläimiä lihantuotantoon. Saalistaa kalaa vesialueilla."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's
 #. Hut
@@ -1029,7 +1030,7 @@ msgctxt "amazons_building"
 msgid ""
 "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the "
 "work area."
-msgstr ""
+msgstr "Metsästäjä-keräilijän maja tarvitsee metsästettäviä eläimiä tai kalaa työskentelyalueella."
 
 #: ../../data/tribes/initialization/amazons/units.lua:1300
 #: ../../data/tribes/initialization/amazons/units.lua:1316
@@ -1101,7 +1102,7 @@ msgstr[1] "%d sekuntia"
 #, lua-format
 msgctxt "amazons_building"
 msgid "The hunter-gatherer pauses %s before going to work again."
-msgstr ""
+msgstr "Metsästäjä-keräilijä pitää taukoa %s ennen kuin jatkaa taas työskentelyä."
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Liana
 #. Cutter's Hut
@@ -1111,21 +1112,21 @@ msgid ""
 "‘Sunlight smiled upon us and our Ancestors while we worked to clear liana "
 "from the trees. I was not as efficient as my aunt and sisters, and so I "
 "learned to ply rope.’"
-msgstr ""
+msgstr "‘Aurinko hymyili meille ja esivanhemmillemme samalla kun kitkimme puista liaaneja. En ollut aivan yhtä tehokas kuten tätini ja siskoni, joten opinkin tekemään köyttä.’"
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Liana
 #. Cutter's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1310
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, recollecting her early years as a liana cutter."
-msgstr ""
+msgstr "Rouva Sävelkutoja muisteli aikaisia vuosiaan liaaninkatkojana."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Liana Cutter's
 #. Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1312
 msgctxt "amazons_building"
 msgid "Home of the liana cutter who cuts lianas for making ropes."
-msgstr ""
+msgstr "Liaaninleikkaajan koti joka siis katkoo liaaneja tehdäkseen köyttä."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Liana Cutter's
 #. Hut
@@ -1134,7 +1135,7 @@ msgctxt "amazons_building"
 msgid ""
 "The liana cutter harvests liana from fully matured trees within the work "
 "area which are not being used as lookouts."
-msgstr ""
+msgstr "Liaaninleikkaaja kerää liaaneja täysin kypsään ikään kerenneistä puista jotka työalueelta löytyvät ja jotka eivät ole käytössä tähystämöinä."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Liana
 #. Cutter's Hut
@@ -1142,14 +1143,14 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The liana cutter rests %s before going to work again."
-msgstr ""
+msgstr "Liaaninleikkaaja lepää %s ennen työnsä jatkamista."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Water
 #. Gatherer's Hut
 #: ../../data/tribes/initialization/amazons/units.lua:1323
 msgctxt "amazons_building"
 msgid "Draws water out of the rivers and lakes."
-msgstr ""
+msgstr "Kantaa vettä talteen joista ja järvistä."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Water Gatherer's
 #. Hut
@@ -1158,7 +1159,7 @@ msgctxt "amazons_building"
 msgid ""
 "The water gatherer’s hut needs open water within the work area. Your workers"
 " cannot dig up water from the ground!"
-msgstr ""
+msgstr "Vedenkerääjän majan työalueella tarvitaan vapaita vedenlähteitä. Työläisesi eivät voi kaivaa vettä maaperästä! "
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree
 #. Cutter's Hut
@@ -1167,14 +1168,14 @@ msgctxt "amazons_building"
 msgid ""
 "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and "
 "rubber."
-msgstr ""
+msgstr "Hyödyntää ympäröivän alueen harvinaisia puita. Toimittaa sitten keloa, balsaa ja kumia."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Wilderness
 #. Keeper's Tent
 #: ../../data/tribes/initialization/amazons/units.lua:1339
 msgctxt "amazons_building"
 msgid "Breeds fish and game to renew food resources."
-msgstr ""
+msgstr "Siitostaa kalaa ja riistaa elvyttääkseen ruokavarantoja."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Wilderness
 #. Keeper's Tent
@@ -1183,7 +1184,7 @@ msgctxt "amazons_building"
 msgid ""
 "The wilderness keeper will only release new game at a nearby tree which is "
 "not being used as a lookout."
-msgstr ""
+msgstr "Eränkävijä vapauttaa uutta riistaa vain lähettyvillä olevalta puulta joka ei ole käytössä tähystämönä."
 
 #: ../../data/tribes/initialization/amazons/units.lua:1347
 msgctxt "amazons_building"
@@ -1196,7 +1197,7 @@ msgstr "Sinun on yhdistettävä tämä lippu tiedustelijan taloon ennen kuin voi
 #: ../../data/tribes/initialization/amazons/units.lua:1349
 msgctxt "amazons_building"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "Tutkii tuntemattomia alueita."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Scout's
 #. Hut
@@ -1204,7 +1205,7 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The scout pauses %s before going to work again."
-msgstr ""
+msgstr "Tiedustelija pitää taukoa %s ennen kuin jatkaa jälleen työskentelyä."
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Rope
 #. Weaver's Booth
@@ -1214,27 +1215,27 @@ msgid ""
 "‘My mother taught me to ply the ropes from Liana, how to choose the "
 "strongest cuttings and parts of the harvest, how to trim away flaws. I bless"
 " her wisdom in every length I use.’"
-msgstr ""
+msgstr "‘Äitini opetti minut sitomaan köyttä liaaneista, miten valita sadon vahvimmat leikkeet ja osat, miten karsia haitakkeet. Olen siunattu hänen viisaudestaan jokaisella käyttämälläni hetkellä.’"
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Rope
 #. Weaver's Booth
 #: ../../data/tribes/initialization/amazons/units.lua:1362
 msgctxt "amazons_building"
 msgid "Mistress WeaverSong, reflecting on training."
-msgstr ""
+msgstr "Rouva Sävelkutoja, heijastellen koulutustaan."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver's
 #. Booth
 #: ../../data/tribes/initialization/amazons/units.lua:1364
 msgctxt "amazons_building"
 msgid "Makes ropes from lianas."
-msgstr ""
+msgstr "Valmistaa liaaneista köysiä."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Furnace
 #: ../../data/tribes/initialization/amazons/units.lua:1371
 msgctxt "amazons_building"
 msgid "Smelts gold dust into gold ingots using charcoal."
-msgstr ""
+msgstr "Sulattaa kultahippuja kultaharkoiksi käyttäen tulihiiltä."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Furnace
 #: ../../data/tribes/initialization/amazons/units.lua:1373
@@ -1243,7 +1244,7 @@ msgctxt "amazons_building"
 msgid ""
 "The furnace can produce one gold ingot in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Sulatusuuni voi tuottaa yhden kultaharkon ajassa %s keskimäärin mikäli toimitus on vakaata. "
 
 #. TRANSLATORS: Lore for helptext an amazon production site: Rare Tree
 #. Plantation
@@ -1252,14 +1253,14 @@ msgctxt "amazons_building"
 msgid ""
 "‘If properly harvested, cured and stored, ironwood becomes almost "
 "indestructible, and will not rust in damp conditions.’"
-msgstr ""
+msgstr "‘Mikäli sato on korjattu, käsitelty ja varastoitu oikeaoppisesti, kelopuusta tulee lähes tuhoutumattoman vahvaa, eikä ruostu kosteissa olosuhteissa.’"
 
 #. TRANSLATORS: Lore author helptext for an amazon production site: Rare Tree
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1382
 msgctxt "amazons_building"
 msgid "Jungle Master Abacaxis"
-msgstr ""
+msgstr "Viidakkoisäntä Abacaxis"
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree
 #. Plantation
@@ -1268,7 +1269,7 @@ msgctxt "amazons_building"
 msgid ""
 "Plants rare trees which are needed by the Amazons, like balsa, rubber and "
 "ironwood."
-msgstr ""
+msgstr "Istuttaa harvinaisia puita joita amatsoonit tarvitsevat, kuten balsaa, kumipuuta ja kelopuuta."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Rare Tree
 #. Plantation
@@ -1277,13 +1278,13 @@ msgctxt "amazons_building"
 msgid ""
 "Rare trees are planted according to the economy requirements. Keep roads "
 "connected to rare tree plantations so they adhere to economy targets."
-msgstr ""
+msgstr "Harvinaisia puita istutetaan taloustilanteen mukaisesti. Pidä tiet yhteydessä harvinaispuuviljelmille jotta ne palvelevat taloudellisia kohteitaan."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Workshop
 #: ../../data/tribes/initialization/amazons/units.lua:1393
 msgctxt "amazons_building"
 msgid "Makes tools and spears for our soldiers."
-msgstr ""
+msgstr "Valmistaa työkaluja sekä keihäitä sotilaillemme."
 
 #. TRANSLATORS: Lore for helptext an amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1400
@@ -1291,7 +1292,7 @@ msgctxt "amazons_building"
 msgid ""
 "‘A skilled maker crafts garments of unsurpassed defence,<br> with each "
 "stitch imbued with conscious intent.’"
-msgstr ""
+msgstr "‘Taitava tekijä punoo ylittämättömän puolustuksen tarjoavia kankaita,<br> jossa jokainen ommel omaa tarkan tarkoituksen.’"
 
 #. TRANSLATORS: Lore author helptext for an amazon production site:
 #. Dressmakery
@@ -1300,19 +1301,19 @@ msgctxt "amazons_building"
 msgid ""
 "Dressmakers’ ethos, adapted from the traditional verse ‘Mother Jungle’s "
 "wisdom: Song of the Conscientious.’"
-msgstr ""
+msgstr "Puvuntekijän tavan henki, otettu perinteisestä laulusta ‘Äiti viidakon viisaus; Tunnollisten laulu.’ "
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
 #: ../../data/tribes/initialization/amazons/units.lua:1404
 msgctxt "amazons_building"
 msgid "Sews all dresses, boots and armor for our soldiers."
-msgstr ""
+msgstr "Kutoo kaikki puvut, saappaat ja haarniskat sotilaillemme."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Charcoal Kiln
 #: ../../data/tribes/initialization/amazons/units.lua:1411
 msgctxt "amazons_building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Polttaa kaadettuja puita puuhiiliksi."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Charcoal
 #. Kiln
@@ -1320,21 +1321,21 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The charcoal kiln needs %s on average to produce one lump of coal."
-msgstr ""
+msgstr "Miilu tarvitsee keskimäärin %s tuottaakseen yhden hiilipökäleen."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cassava Root
 #. Cooker
 #: ../../data/tribes/initialization/amazons/units.lua:1420
 msgctxt "amazons_building"
 msgid "Bakes bread from cassava root."
-msgstr ""
+msgstr "Leipoo leipää cassavajuuresta."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Chocolate
 #. Brewery
 #: ../../data/tribes/initialization/amazons/units.lua:1427
 msgctxt "amazons_building"
 msgid "Brews chocolate for soldier training."
-msgstr ""
+msgstr "Valmistaa suklaata jota käytetään sotilaiden koulutuksen ohessa."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Chocolate
 #. Brewery
@@ -1343,7 +1344,7 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The chocolate brewery needs %s on average to brew one mug of chocolate."
-msgstr ""
+msgstr "Suklaatehdas tarvitsee keskimäärin %s tuottaakseen yhden kupillisen suklaata."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:1436
@@ -1351,7 +1352,7 @@ msgctxt "amazons_building"
 msgid ""
 "Prepares rations to feed the scouts and the workers digging for gold dust "
 "and granite."
-msgstr ""
+msgstr "Valmistaa annokset ruokkiakseen lähetit sekä työläiset jotka kaivavat kultahippusia ja graniittia."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Food
 #. Preserver
@@ -1361,14 +1362,14 @@ msgctxt "amazons_building"
 msgid ""
 "The food preserver can produce one ration in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "Ruoanjalostaja tuottaa yhden annoksen ajassa %s mikäli toimius on vakaata."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Initiation
 #. Site
 #: ../../data/tribes/initialization/amazons/units.lua:1445
 msgctxt "amazons_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Varustaa, värvää ja kouluttaa heistä sotilaita."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Initiation
 #. Site
@@ -1376,14 +1377,14 @@ msgstr ""
 #, lua-format
 msgctxt "amazons_building"
 msgid "The initiation site needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "Aloituspaikka tarvitsee keskimäärin %s yhden sotilaan värväämiseen."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gardening
 #. Center
 #: ../../data/tribes/initialization/amazons/units.lua:1454
 msgctxt "amazons_building"
 msgid "Enhances the fertility of the landscape for trees."
-msgstr ""
+msgstr "Parantaa ympäristön puiden hedelmällisyyttä. "
 
 #. TRANSLATORS: Note helptext for an amazon production site: Gardening Center
 #: ../../data/tribes/initialization/amazons/units.lua:1456
@@ -1391,26 +1392,26 @@ msgctxt "amazons_building"
 msgid ""
 "Only a Jungle Master has the necessary experience to coax more growth from "
 "land."
-msgstr ""
+msgstr "Vain Viidakkoisännällä on vaadittava kokemus keinotella lisää kasvustoa maaperästä."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1465
 msgctxt "amazons_building"
 msgid "Breeds tapirs for adding them to the transportation system."
-msgstr ""
+msgstr "Siittää tapiireja lisätäkseen niitä kuljetusjärjestelmään."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Tapir Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1467
 msgctxt "amazons_building"
 msgid "Tapirs help to prevent traffic jams on highly used roads."
-msgstr ""
+msgstr "Tapiirit auttavat estämään liikenneruuhkia paljon käytetyillä teillä."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cassava
 #. Plantation
 #: ../../data/tribes/initialization/amazons/units.lua:1474
 msgctxt "amazons_building"
 msgid "Sows and harvests cassava."
-msgstr ""
+msgstr "Kylvää ja niittää cassavaa."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cassava
 #. Plantation
@@ -1418,25 +1419,25 @@ msgstr ""
 msgctxt "amazons_building"
 msgid ""
 "The cassava plantation needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "Cassavaistuttamo tarvitsee työalueella aukeaa tilaa siementen istutukseen."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1483
 msgctxt "amazons_building"
 msgid "Cultivates cocoa that is needed to brew chocolate drinks."
-msgstr ""
+msgstr "Jalostaa kaakaota jota tarvitaan suklaajuomien valmistamiseen."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Cocoa Farm
 #: ../../data/tribes/initialization/amazons/units.lua:1485
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training amazon soldiers."
-msgstr ""
+msgstr "Suklaa on elintärkeä raaka-aine amatsonisotilaiden koulutuksessa."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1494
 msgctxt "amazons_building"
 msgid "Digs granite out of the ground in mountain terrain."
-msgstr ""
+msgstr "Kaivaa graniittia maasta vuoristoisessa maastossa."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1496
@@ -1445,14 +1446,14 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of granite in %s on average if the "
 "supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "Kivilouhimo voi tuottaa yhden laatan graniittia keskimäärin ajassa %s mikäli toimitus annosten suhteen on vakaata ja louhos ei ole loppuunkäytetty."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gold Digger
 #. Dwelling
 #: ../../data/tribes/initialization/amazons/units.lua:1503
 msgctxt "amazons_building"
 msgid "Washes gold dust out of the ground in mountain terrain."
-msgstr ""
+msgstr "Huuhtoo kultahippusia maaperästä vuoristoisella alueella."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Warriors’
 #. Gathering
@@ -1461,7 +1462,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Attack up to level 2. Equips the soldiers with all "
 "necessary weapons."
-msgstr ""
+msgstr "Kouluttaa sotilaat hyökkäystaidossa tasolle 2. Varustaa sotilaat kaikin tarvittavin asein."
 
 #. TRANSLATORS: Note helptext for an amazon training site: Warriors’ Gathering
 #. TRANSLATORS: Note helptext for an amazon training site: Training Glade
@@ -1469,7 +1470,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1523
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train properly."
-msgstr ""
+msgstr "Amatsonisotilaat tarvitsevat suklaata harjoitellakseen asianmukaisesti."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Training Glade
 #: ../../data/tribes/initialization/amazons/units.lua:1521
@@ -1477,7 +1478,7 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Evade, Defense and Health. Equips the soldiers with all "
 "necessary equipment and armor parts."
-msgstr ""
+msgstr "Kouluttaa sotilaat väistötaidossa, puolustautumisessa ja terveyden ylläpidossa. Varustaa sotilaat kaikin tarvituin varustein ja haarniskan osin. "
 
 #. TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
@@ -1497,7 +1498,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:1586
 msgctxt "amazons_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Varustaa sotilaat laajentamaan maa-aluettasi."
 
 #. TRANSLATORS: Note helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Note helptext for an amazon military site: Warriors’ Dwelling
@@ -1516,25 +1517,25 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send her away."
-msgstr ""
+msgstr "Mikäli sinulla on pulaa sotilaista miehittää uusia kasarmialueita, käytä alaspäin nuolipainiketta pienentääksesi kantovastetta. Voit myös napsauttaa sotilasta lähettääksesi hänet pois."
 
 #. TRANSLATORS: Note helptext for an amazon military site: Treetop Sentry
 #: ../../data/tribes/initialization/amazons/units.lua:1543
 msgctxt "amazons_building"
 msgid "You can only build this building on top of a tree."
-msgstr ""
+msgstr "Voit rakentaa tämän rakenteen ainoastaan puun latvastoon."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Ferry Yard
 #: ../../data/tribes/initialization/amazons/units.lua:1597
 msgctxt "amazons_building"
 msgid "Builds ferries."
-msgstr ""
+msgstr "Rakentaa lauttoja."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Ferry Yard
 #: ../../data/tribes/initialization/amazons/units.lua:1599
 msgctxt "amazons_building"
 msgid "Needs water nearby."
-msgstr ""
+msgstr "Tarvitsee lähellä olevaa vettä."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Shipyard
 #: ../../data/tribes/initialization/amazons/units.lua:1606
@@ -1542,13 +1543,13 @@ msgctxt "amazons_building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr ""
+msgstr "Rakentaa laivoja, joita käytetään merentakaisten alueiden asuttamiseen ja satamien väliseen kaupankäyntiin."
 
 #. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
-#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1615
 #: ../../data/tribes/initialization/atlanteans/units.lua:1974
 #: ../../data/tribes/initialization/barbarians/units.lua:1790
@@ -1561,10 +1562,10 @@ msgstr "‘Älä herjaa rakentajaa, jolla on rakennusmateriaalit vähissä.’"
 #. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
-#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
-#. Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Construction
+#. Site
 #: ../../data/tribes/initialization/amazons/units.lua:1617
 #: ../../data/tribes/initialization/atlanteans/units.lua:1976
 #: ../../data/tribes/initialization/barbarians/units.lua:1792
@@ -1576,9 +1577,9 @@ msgstr "Laajasti käytetty sananlasku mahdottomiin tehtäviin"
 
 #. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
-#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1619
 #: ../../data/tribes/initialization/atlanteans/units.lua:1978
 #: ../../data/tribes/initialization/barbarians/units.lua:1794
@@ -1590,9 +1591,9 @@ msgstr "Uutta rakennusta rakennetaan tällä rakennustyömaalla."
 
 #. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1626
 #: ../../data/tribes/initialization/atlanteans/units.lua:1985
 #: ../../data/tribes/initialization/barbarians/units.lua:1801
@@ -1604,9 +1605,9 @@ msgstr "‘Uusia reittejä ilmestyy, kun olet valmis purkamaan vanhoja.’"
 
 #. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1628
 #: ../../data/tribes/initialization/atlanteans/units.lua:1987
 #: ../../data/tribes/initialization/barbarians/units.lua:1803
@@ -1618,9 +1619,9 @@ msgstr "Sananlasku"
 
 #. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1630
 #: ../../data/tribes/initialization/atlanteans/units.lua:1989
 #: ../../data/tribes/initialization/barbarians/units.lua:1805
@@ -1676,8 +1677,8 @@ msgid ""
 "the smokery also need logs for their work."
 msgstr "Atlantislaiset käyttävät kaadettuja puita myös tehdessään lautoja, joita tarvitaan melkein kaikissa rakennuksissa. Lukuun ottamatta sahaa, miilua, työkalupajaa ja savustamoa kaadettuja puita tarvitaan myös heidän työssä."
 
-#. TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
 #. TRANSLATORS: Helptext for an empire ware: Planks, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Planks, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:416
 #: ../../data/tribes/initialization/empire/units.lua:138
 msgctxt "ware"
@@ -1688,7 +1689,7 @@ msgstr "Laudat ovat tärkeä rakennusmateriaali."
 #: ../../data/tribes/initialization/atlanteans/units.lua:418
 msgctxt "atlanteans_ware"
 msgid "They are produced out of logs by the sawmill."
-msgstr ""
+msgstr "Niitä tuotetaan kaadetuista tukeista sahalla."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Planks, part 3
 #: ../../data/tribes/initialization/atlanteans/units.lua:420
@@ -1733,9 +1734,9 @@ msgid ""
 msgstr "Yksikään Atlantislainen ei pidä raa'asta kalasta, sen savustaminen savustamossa on kaikkein yleisin tapa tehdä siitä syötävää."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:468
 #: ../../data/tribes/initialization/barbarians/units.lua:170
 #: ../../data/tribes/initialization/empire/units.lua:182
@@ -1829,8 +1830,8 @@ msgid ""
 msgstr "Näitä upeita timantteja käytetään joissakin hienoissa rakennuksissa. Niitä louhitaan kidekaivoksesta."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Coal, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:566
 #: ../../data/tribes/initialization/barbarians/units.lua:268
 #: ../../data/tribes/initialization/empire/units.lua:305
@@ -1848,9 +1849,9 @@ msgid ""
 msgstr "Atlantiksen sulattamojen tulissa, haarniskapajat ja asepajat tarvitsevat yleensä hiiltä."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:579
 #: ../../data/tribes/initialization/barbarians/units.lua:281
 #: ../../data/tribes/initialization/empire/units.lua:318
@@ -1866,9 +1867,9 @@ msgid "It is smelted in a smelting works to retrieve the iron."
 msgstr "Sitä tulatetaan sulattamoissa raudan saamiseksi."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #. TRANSLATORS: Helptext for an empire ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:592
 #: ../../data/tribes/initialization/barbarians/units.lua:294
 #: ../../data/tribes/initialization/empire/units.lua:331
@@ -1886,9 +1887,9 @@ msgid ""
 msgstr "Sitä tuotetaan sulattamoissa ja käyttää työkalupaja, haarniskapaja ja asepaja."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:605
 #: ../../data/tribes/initialization/barbarians/units.lua:307
 #: ../../data/tribes/initialization/empire/units.lua:344
@@ -1906,9 +1907,9 @@ msgid ""
 msgstr "Sulatetaan sulattamossa, jossa se muuttuu kullaksi, jota käytetään arvokkaana rakennusmateriaalina ja aseiden ja haarniskojen valmistamiseen."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:618
 #: ../../data/tribes/initialization/barbarians/units.lua:320
 #: ../../data/tribes/initialization/empire/units.lua:357
@@ -1994,9 +1995,9 @@ msgid ""
 msgstr "Savustusvarrasta käytetään savustamossa kaikkien lihojen ja kalojen ripustamiseen savustamon kattoon. Sen valmistaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:723
 #: ../../data/tribes/initialization/barbarians/units.lua:410
 #: ../../data/tribes/initialization/empire/units.lua:456
@@ -2012,9 +2013,9 @@ msgid "Scythes are produced by the toolsmith."
 msgstr "Viikatteita tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:736
 #: ../../data/tribes/initialization/barbarians/units.lua:423
 #: ../../data/tribes/initialization/empire/units.lua:469
@@ -2030,9 +2031,9 @@ msgid "Bread paddles are produced by the toolsmith."
 msgstr "Leipälapioita tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:749
 #: ../../data/tribes/initialization/barbarians/units.lua:445
 #: ../../data/tribes/initialization/empire/units.lua:500
@@ -2329,9 +2330,9 @@ msgid ""
 msgstr "Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita tiedustelun malliin."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Water
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #. TRANSLATORS: Helptext for an empire resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1193
 #: ../../data/tribes/initialization/barbarians/units.lua:887
 #: ../../data/tribes/initialization/empire/units.lua:948
@@ -2340,9 +2341,9 @@ msgid "There is water in the ground here that can be pulled up by a well."
 msgstr "Maan alla on vettä. Tässä on siis kaivopaikka."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1201
 #: ../../data/tribes/initialization/atlanteans/units.lua:1245
 #: ../../data/tribes/initialization/barbarians/units.lua:895
@@ -2355,9 +2356,9 @@ msgid "Coal veins contain coal that can be dug up by coal mines."
 msgstr "Hiiliesiintymistä saa hiiltä, kun esiintymän läheisyydessä on toimiva hiilikaivos."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1203
 #: ../../data/tribes/initialization/barbarians/units.lua:897
 #: ../../data/tribes/initialization/empire/units.lua:958
@@ -2366,9 +2367,9 @@ msgid "There is only a little bit of coal here."
 msgstr "Täällä on hieman hiiltä."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/atlanteans/units.lua:1256
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -2381,9 +2382,9 @@ msgid "Iron veins contain iron ore that can be dug up by iron mines."
 msgstr "Rautaesiintymistä saa rautamalmia, kun esiintymän läheisyydessä on toimiva rautakaivos."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1214
 #: ../../data/tribes/initialization/barbarians/units.lua:908
 #: ../../data/tribes/initialization/empire/units.lua:969
@@ -2392,9 +2393,9 @@ msgid "There is only a little bit of iron here."
 msgstr "Täällä on rahtunen rautaa."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1223
 #: ../../data/tribes/initialization/atlanteans/units.lua:1267
 #: ../../data/tribes/initialization/barbarians/units.lua:917
@@ -2420,9 +2421,9 @@ msgid "There are only a few precious stones here."
 msgstr "Täältä löytyy jokunen arvokivi."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1247
 #: ../../data/tribes/initialization/barbarians/units.lua:941
 #: ../../data/tribes/initialization/empire/units.lua:1002
@@ -2431,9 +2432,9 @@ msgid "There is a lot of coal here."
 msgstr "Täällä on runsaasti hiiltä."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1258
 #: ../../data/tribes/initialization/barbarians/units.lua:952
 #: ../../data/tribes/initialization/empire/units.lua:1013
@@ -2456,12 +2457,6 @@ msgstr "Täältä löytyy runsaasti arvokiviä."
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Rubber
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
-#. Ironwood Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber
-#. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood
 #. Tree
@@ -2473,6 +2468,12 @@ msgstr "Täältä löytyy runsaasti arvokiviä."
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Balsa
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans:
+#. Ironwood Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber
 #. Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1303
 #: ../../data/tribes/initialization/atlanteans/units.lua:1310
@@ -2524,7 +2525,7 @@ msgstr "Täältä löytyy runsaasti arvokiviä."
 #: ../../data/tribes/initialization/frisians/units.lua:1501
 msgid ""
 "This tree is only planted by the amazon tribe but can be harvested for logs."
-msgstr ""
+msgstr "Tätä puuta istuttaa ainoastaan amatsoniheimo mutta voidaan kaataa tavanomaisiksi tukeiksi."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1392
@@ -2544,13 +2545,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We founded this new colony, now go with Satul and do the best you can do for"
 " your tribe."
-msgstr ""
+msgstr "Löysimme tämän uuden siirtomaan, menehän nyt Satul:in kanssa ja tee parhaasi heimosi puolesta."
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1398
 msgctxt "atlanteans_building"
 msgid "Priest of Satul inaugurating you as leader of the Atleantean tribe"
-msgstr ""
+msgstr "Satul:in pappi vihkii sinut Atlantealaisen heimon johtajaksi"
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
 #: ../../data/tribes/initialization/atlanteans/units.lua:1406
@@ -2558,7 +2559,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools. It will help you to stabilize your economy."
-msgstr ""
+msgstr "Työläisesi sekä sotilaasi saavat tästä sijan. Varastoi myös tarvikkeitasi ja työkalujasi. Auttaa sinua vakauttamaan talouttasi."
 
 #. TRANSLATORS: Note lore for an atlantean production site: Warehouse
 #: ../../data/tribes/initialization/atlanteans/units.lua:1409
@@ -2567,13 +2568,13 @@ msgid ""
 "Maybe you think it’s a boring task to store, count and retrieve all this "
 "stuff, but do you really want your carriers to walk all the way to your "
 "Headquarters?"
-msgstr ""
+msgstr "Saatat ounastella että on tylsistyttävää varastoida, laskea ja noutaa kaikkea tätä kamaa, mutta haluatko todella kuljettajiesi kävelevän koko pitkän matkan päämajallesi? "
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Headquarters
 #: ../../data/tribes/initialization/atlanteans/units.lua:1412
 msgctxt "atlanteans_building"
 msgid "Head of the warehouse"
-msgstr ""
+msgstr "Varaston pää"
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1420
@@ -2589,7 +2590,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen toimesta tuhota. On suositeltavaa lähettää sotilaita puolustamaan sitä."
 
 #. TRANSLATORS: Note lore for an atlantean production site: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1424
@@ -2597,7 +2598,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "This is the building where expeditions will be equipped to boldly go and "
 "find new shores."
-msgstr ""
+msgstr "Tämä on se rakennus jossa tutkimusmatkailut varustetaan mennäksemme rohkeasti löytämään uusia rantoja."
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1426
@@ -2605,7 +2606,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Ostur, the designer of the new Expedition ship class, during the opening of "
 "a new Port"
-msgstr ""
+msgstr "Ostur, uuden Tutkimusmatkaluokan aluksen suunnittelija, uuden sataman avaamisen aikana"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
 #: ../../data/tribes/initialization/atlanteans/units.lua:1435
@@ -2625,22 +2626,22 @@ msgctxt "atlanteans_building"
 msgid ""
 "You must not assume Atlanteans will play everything soft, there are hard "
 "times we cannot avoid."
-msgstr ""
+msgstr "Sinun ei tule olettaa atlantealaisten pelaavan kaiken suhteen pehmeästi, on tuleman ankaria aikoja joita emme voi välttää."
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Quarry
 #: ../../data/tribes/initialization/atlanteans/units.lua:1441
 msgctxt "atlanteans_building"
 msgid "Priest of Satul asked why stones are needed for buildings"
-msgstr ""
+msgstr "Satul:in pappi kysyi kiviä tarvitaan rakennuksia varten"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s
 #. Hut
-#. TRANSLATORS: Purpose helptext for an atlantean production site:
-#. Woodcutter's House
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
 #. House
+#. TRANSLATORS: Purpose helptext for an atlantean production site:
+#. Woodcutter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1448
 #: ../../data/tribes/initialization/barbarians/units.lua:1153
 #: ../../data/tribes/initialization/empire/units.lua:1269
@@ -2662,21 +2663,21 @@ msgctxt "atlanteans_building"
 msgid ""
 "We want to fell trees in a clean and dignified way, therefore we use saws. "
 "An ax is a tool used by other tribes only."
-msgstr ""
+msgstr "Haluamme kaataa puita puhtain ja kunnioittavin tavoin, täten käytämme sahoja. Ainoastaan jotlin toiset heimot käyttävät tapparaa."
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Woodcutter's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1454
 msgctxt "atlanteans_building"
 msgid "Atlantean woodcutter asked why saws are used to cut trees"
-msgstr ""
+msgstr "Atlantealainen metsuri kysyi miksi käytetään sahoja puiden kaatamiseen "
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
-#. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
+#. House
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1461
 #: ../../data/tribes/initialization/barbarians/units.lua:1169
@@ -2702,14 +2703,14 @@ msgid ""
 "‘Only after the last tree has been cut<br>Only after the last forest was "
 "devastated<br>Only after the last piece of green has become bare "
 "soil<br>Then will you find that nature needs to be cared for.’"
-msgstr ""
+msgstr "‘Kun viimeinen puu on kaadettu<br>Kun viimeinen metsä on pilattu<br>Kun viimeinen viheriö muuttuu mullaksi<br>Huomaat, että luonnosta tulee huolehtia.’"
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1470
 msgctxt "atlanteans_building"
 msgid "Prophecy of the foresters’ guild"
-msgstr ""
+msgstr "Metsäläisten killan ennustus"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Fisher's
 #. House
@@ -2742,14 +2743,14 @@ msgid ""
 "‘Take your net and come to the sea<br>In the early morning the moon ya still"
 " see<br>Collect ya catch by net or by spear,<br>and don’t forget to give "
 "Satul his share.’"
-msgstr ""
+msgstr "‘Ota verkkosi ja tule merelle<br>Aikaisin aamulla näet kuun hohteen<br>Korjaa saaliisi talteen verkolla tahi keihäällä,<br>äläkä unohda Saul:ille hänen osuuttaan antaa.’"
 
 #. TRANSLATORS: Note lore_autor for an atlantean production site: Fisher's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1490
 msgctxt "atlanteans_building"
 msgid "A song from the fishers’ guild"
-msgstr ""
+msgstr "Kalastajakillan laulu"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Fish
 #. Breeder's House
@@ -2763,7 +2764,7 @@ msgstr "Kasvattaa kaloja."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1499
 msgctxt "atlanteans_building"
 msgid "The fish breeder needs open access to the coast."
-msgstr ""
+msgstr "Kalansiitostaja tarvitsee rannikolle vapaan kulun."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Fish Breeder's
 #. House
@@ -2780,13 +2781,13 @@ msgstr "‘Kun viimeinen ankka on ammuttu<br>Kun viimeinen peura on kaadettu<br>
 #: ../../data/tribes/initialization/atlanteans/units.lua:1506
 msgctxt "atlanteans_building"
 msgid "Prophecy of the fish breeders"
-msgstr ""
+msgstr "Kalansiitostajien ennustus"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
-#. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
+#. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1513
 #: ../../data/tribes/initialization/barbarians/units.lua:1199
 #: ../../data/tribes/initialization/empire/units.lua:1332
@@ -2807,19 +2808,19 @@ msgctxt "atlanteans_building"
 msgid ""
 "Sometimes we end up in a region with no fish, so we must hunt. Game will "
 "reproduce by itself, if not hunted too much. But yes, fish is our main meal."
-msgstr ""
+msgstr "Silloin tällöin päädymme alueelle missä ei kalaa ole, joten meidän on metsästettävä. Riistahan lisääntyy itsestään, kunhan emme metsästä liiaksi. Mutta kyllä vain; kala on pääruokamme."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Hunter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1520
 msgctxt "atlanteans_building"
 msgid "Hunter answering a fisher"
-msgstr ""
+msgstr "Metsästäjä vastaa kalastajalle"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Well
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #. TRANSLATORS: Purpose helptext for an empire production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1527
 #: ../../data/tribes/initialization/barbarians/units.lua:1227
 #: ../../data/tribes/initialization/empire/units.lua:1353
@@ -2832,19 +2833,19 @@ msgstr "Nostaa vettä maan uumenista."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1529
 msgctxt "atlanteans_building"
 msgid "I hope you have checked this spot with a geologist."
-msgstr ""
+msgstr "Toivon mukaan olet tarkistanut tämän kohteen maakerrostieteilijän kanssa."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1531
 msgctxt "atlanteans_building"
 msgid "Well, there is no wellbeing without a well."
-msgstr ""
+msgstr "Tuota, hyvinvointia ei ole ilman kaivoa."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1533
 msgctxt "atlanteans_building"
 msgid "Water carrier muttering to himself"
-msgstr ""
+msgstr "Vedenkerääjä mutisee itsekseen."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold
 #. Spinning Mill
@@ -2858,7 +2859,7 @@ msgstr "Kehrää kultalankaa kullasta."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1542
 msgctxt "atlanteans_building"
 msgid "Do not build until you have a steady gold supply."
-msgstr ""
+msgstr "Älä rakenna ennen kuin sinulla on vakaa kullantoimitus."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Gold Spinning
 #. Mill
@@ -2867,14 +2868,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "No, we can’t spin gold thread from straw. We need real gold. What kind of "
 "fairy tale did you get that idea from?"
-msgstr ""
+msgstr "Ei, emme voi taikoa kultaa oljenkorren kullankellasta. Tarvitsemme aitoa kultaa. Saitko tämän pälähdyksen päähäsi mahdollisesti jostakin sadusta?"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Gold
 #. Spinning Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1546
 msgctxt "atlanteans_building"
 msgid "Painted on a gold spinning mill without supplies"
-msgstr ""
+msgstr "Maalattu kultahyrräiseen myllyyn ilman tarvikkeita"
 
 #. TRANSLATORS: Special helptext for an atlantean production site: Scout's
 #. House without road connection
@@ -2886,10 +2887,10 @@ msgid ""
 msgstr "Sinun on yhdistettävä tämä lippu tiedustelijan taloon ennen kuin voit lähettää tiedustelijan tänne."
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
-#. House
 #. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
+#. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1555
 #: ../../data/tribes/initialization/barbarians/units.lua:1241
 #: ../../data/tribes/initialization/empire/units.lua:1373
@@ -2902,7 +2903,7 @@ msgstr "Tutkii tuntematonta aluetta."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1557
 msgctxt "atlanteans_building"
 msgid "Will need fish and bread to have his meal the Atlantean way."
-msgstr ""
+msgstr "Tarvitsemme kalaa ja leipää aterioidaksemme atlantealaiseen tapaan."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site:  Scout's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1559
@@ -2910,17 +2911,17 @@ msgctxt "atlanteans_building"
 msgid ""
 "You do not see everything from your high towers. Sometimes you need someone "
 "to find out in person, that’s me!"
-msgstr ""
+msgstr "Et voi nähdä kaikkea korkeista torneistasi. Ajoittain tarvitset henkilön selvittämään asiaan, tämä henkilö on minä!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Scout's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1561
 msgctxt "atlanteans_building"
 msgid "A scout answering a soldier"
-msgstr ""
+msgstr "Lähetti vastaa sotilaalle"
 
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #. TRANSLATORS: Purpose helptext for an empire production site: Sawmill
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1570
 #: ../../data/tribes/initialization/empire/units.lua:1413
 msgctxt "building"
@@ -2931,7 +2932,7 @@ msgstr "Sahaa puuta tuottaakseen lautoja."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1572
 msgctxt "atlanteans_building"
 msgid "Will need at least four woodcutters for a constant supply of planks."
-msgstr ""
+msgstr "Tarvitsemme vähintään neljä metsuria jotka tuottavat jatkuvalla syötöllä lankkuja."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site:  Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1574
@@ -2939,14 +2940,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "The design of our sawmills makes operation simple, yet powerful. Patent "
 "pending."
-msgstr ""
+msgstr "Sahojemme suunnittelumalli tekee toiminnan yksinkertaiseksi, mutta väkeväksi. Patenttirekisteri kutsuu."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Sawmill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1576
 msgctxt "atlanteans_building"
 msgid "Askadus, Inventor of the vertical axis windmill"
-msgstr ""
+msgstr "Askadus, pystysuuntaisen tuulimyllyn keksijä."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Smokery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1583
@@ -2954,7 +2955,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Smokes meat and fish to feed the scouts and miners and to train soldiers in "
 "the dungeon and labyrinth."
-msgstr ""
+msgstr "Savustaa lihaa ja kalaa ruokkiakseen lähetit ja kaivostyöläiset sekä kouluttaakseen sotilaat tyrmässä ja jatulintarhassa."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site:  Smokery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1585
@@ -2962,14 +2963,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "We are using pure logs, no other ingredients! Which drunken foreigner hath "
 "told you that myth?"
-msgstr ""
+msgstr "Käytämme puhtaita tukkeja, emme muita raaka-aineita! Kuka kumman kännikala ulkomailta on sinulle moisia myyttejä haastellut? "
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Smokery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1587
 msgctxt "atlanteans_building"
 msgid "A Smoker answering a passer-by"
-msgstr ""
+msgstr "Savustaja vastaa ohikulkijalle."
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1595
@@ -2993,13 +2994,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "We invented this vertical axis design first, the sawmill just copied our "
 "ideas but never acknowledged our claim."
-msgstr ""
+msgstr "Me keksimme tämän pystysuunnan mallin ensinnä, saha vain jäljensi ideamme mutta ei koskaan antanut meille tunnustusta."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1601
 msgctxt "atlanteans_building"
 msgid "Miller arguing with a sawyer"
-msgstr ""
+msgstr "Mylläri väittelee sahurin kanssa"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1608
@@ -3011,7 +3012,7 @@ msgstr "Leipoo leipää ruokkiakseen tiedustelijoita ja kaivostyöläisiä sekä
 #: ../../data/tribes/initialization/atlanteans/units.lua:1610
 msgctxt "atlanteans_building"
 msgid "Will need cornmeal and blackroot flour"
-msgstr ""
+msgstr "Tarvitsemme maissia ja mustajuurijauhoa"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1612
@@ -3021,22 +3022,22 @@ msgid ""
 "recipe was inherited for generations. It is more nutritious than that paper-"
 "like bread you find elsewhere. And it is needed for the personal rite of "
 "preparing one’s meal. May Satul bless you."
-msgstr ""
+msgstr "Emme voi verrata leipäämme mihinkään jota noilla toisilla heimoilla on. Tämä resepti on kulkenut suvussa sukupolvien ajan. Se on ravitsevampaa kuin tuo paperinomainen leipä jota muualta löytyy. Ja tarvitaanhan sitä henkilökohtaiseen vakuuttamiseen kun valmistetaan kunnon ateriaa. Satul sinua siunatkoon."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Bakery
 #: ../../data/tribes/initialization/atlanteans/units.lua:1616
 msgctxt "atlanteans_building"
 msgid "Head of the bakers’ guild"
-msgstr ""
+msgstr "Leipurikillan pää"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal
-#. Kiln
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
 #. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
+#. Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1623
 #: ../../data/tribes/initialization/barbarians/units.lua:1376
 #: ../../data/tribes/initialization/empire/units.lua:1580
@@ -3052,7 +3053,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Build only if you absolutely must produce some coal, or you have a very "
 "large amount of logs"
-msgstr ""
+msgstr "Tuota hiiltä vain, mikäli aivan pakko on, taikka jos sinulla on erittäin paljon tukkeja."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Charcoal Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1627
@@ -3060,20 +3061,20 @@ msgctxt "atlanteans_building"
 msgid ""
 "We must admit that this business is not really the Atlantean way, but in "
 "times of need we do what’s necessary."
-msgstr ""
+msgstr "Täytyy kyllä myöntää että tämä liiketoimi ei todella ole atlantelainen tapa, mutta kun tarve vaatii, teemme mitä täytyy."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Charcoal Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1629
 msgctxt "atlanteans_building"
 msgid "A black voice from inside the charcoal kiln"
-msgstr ""
+msgstr "Musta ääni haastelee miilun sisältä"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Smelting
 #. Works
+#. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Smelting
 #. Works
-#. TRANSLATORS: Purpose helptext for an empire production site: Smelting Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1637
 #: ../../data/tribes/initialization/barbarians/units.lua:1388
 #: ../../data/tribes/initialization/empire/units.lua:1599
@@ -3087,19 +3088,19 @@ msgctxt "atlanteans_building"
 msgid ""
 "We learned the smelting from our forefathers, a basic craftsmanship taming "
 "the fire and the ore into pure metals."
-msgstr ""
+msgstr "Opimme sulatuksen esi-isiltämme, perustaito tulen kesyttämiseen ja malmin puhtaaksi metalliksi jalostamiseen."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Smelting Works
 #: ../../data/tribes/initialization/atlanteans/units.lua:1641
 msgctxt "atlanteans_building"
 msgid "A member of the smelters’ guild"
-msgstr ""
+msgstr "Sulattajakillan jäsen"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Metal
 #. Workshop
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #. TRANSLATORS: Purpose helptext for an empire production site: Toolsmithy
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1648
 #: ../../data/tribes/initialization/barbarians/units.lua:1399
 #: ../../data/tribes/initialization/empire/units.lua:1618
@@ -3111,14 +3112,14 @@ msgstr "Takoo kaikki työkalut, joita työntekijäsi tarvitsevat."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1650
 msgctxt "atlanteans_building"
 msgid "People’s power working for the benefit of all"
-msgstr ""
+msgstr "Kansanvoima toiminnassa kaikkien eduksi"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Toolsmithy
 #: ../../data/tribes/initialization/atlanteans/units.lua:1652
 msgctxt "atlanteans_building"
 msgid "Faded sign found on top of this building"
-msgstr ""
+msgstr "Haalistunut kyltti joka löytyi tämän rakennuksen yläkerrasta"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Weapon
 #. Smithy
@@ -3135,7 +3136,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "You hear that sound of metal strident? The weapon smith just forged a "
 "trident!"
-msgstr ""
+msgstr "Kuuletko tuon kimakan metallisen äänen? Aseseppä takoi juuri atraimen!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Weapon
 #. Smithy
@@ -3145,7 +3146,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1678
 msgctxt "atlanteans_building"
 msgid "Atlantean nursery rhyme"
-msgstr ""
+msgstr "Atlantealainen lastenloru"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Armor
 #. Smithy
@@ -3163,7 +3164,7 @@ msgid ""
 "‘She twists and tweaks the steel with might<br>that soldiers may therewith "
 "once fight<br>most skillful foes, whose lethal lance<br>from this their "
 "armour off will glance!’"
-msgstr ""
+msgstr "‘Hän kääntää ja vääntää terästä voimalla<br>jotta sotilaat voivat taistella avulla oivalla<br>taitavimmatkin viholliset tappavine peitsineen<br>tämän avulla suojuksensa pian näet lävistäneen!’"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1685
@@ -3177,14 +3178,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "See these fine silk tabards and those sharp tridents? This is your way to "
 "defend your tribe!"
-msgstr ""
+msgstr "Näethän nämä silkkipukimet ja nuo terävät atraimet? Tähän tapaan sinun tulee heimoasi puolustaa!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Barracks
 #: ../../data/tribes/initialization/atlanteans/units.lua:1689
 msgctxt "atlanteans_building"
 msgid "Recruiting poster"
-msgstr ""
+msgstr "Värväysjuliste"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Horse Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1698
@@ -3198,14 +3199,14 @@ msgstr "Kasvattaa vahvoja Atlansislaisia hevosia tavaroiden kuljetusavuksi."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1700
 msgctxt "atlanteans_building"
 msgid "I walk all day just back and forth. I need? I need … I need a horse!"
-msgstr ""
+msgstr "Kävelen kaiken päivää ees ja taas. Mitäpä ma tarvitsen? Tarvitsen ... Ma tarvitsen hevoisen!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Horse
 #. Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1702
 msgctxt "atlanteans_building"
 msgid "Busy carrier murmuring to himself"
-msgstr ""
+msgstr "Kiireinen toimittaja mutisee itsekseen"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1709
@@ -3217,13 +3218,13 @@ msgstr "Istuttaa ja korjata maissia."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1711
 msgctxt "atlanteans_building"
 msgid "I use my feet, I use my arm, I’m caring for this farm!"
-msgstr ""
+msgstr "Käytän jalkaa, käytän kättä, välitän maatilasta tästä!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1713
 msgctxt "atlanteans_building"
 msgid "Atlantean harvesting song"
-msgstr ""
+msgstr "Atlantealainen sadonkorjuulaulu"
 
 #. TRANSLATORS: Performance helptext for an atlantean production site: Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1715
@@ -3244,14 +3245,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "The secret of Atlantean health and strength is hidden in these roots. It’s "
 "not spinach, it’s not a carrot, it’s … a secret."
-msgstr ""
+msgstr "Atlantelaisen terveyden ja väkevyyden salaisuus piilee näissä juurissa. Se ei ole pinaattia, se ei ole porkkanaa, se on ... salaisuus."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Blackroot Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1727
 msgctxt "atlanteans_building"
 msgid "Blackroot farmer asked by a foreigner"
-msgstr ""
+msgstr "Ulkomaalainen kysyy mustajuuriviljelijältä"
 
 #. TRANSLATORS: Performance helptext for an atlantean production site:
 #. Blackroot Farm
@@ -3277,14 +3278,14 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr ""
+msgstr "Ei, hämähäkkejä ei ruokita maissilla. Sitä me annamme heinäsirkoille pulskistumaan, jotka sitten päätyvät hämähäkeillemme. Laitamme ne erityislaitteeseen saadaksemme hämähäkkisilkkiä kerran päivässä. Ei tarvetta pyöräyttää toista kertaa. Kudontamylly voi käyttää langan suoraan. Heipä hei, tässäpä on yksi mukavista hämähäkseistämme ... Hei! Miksipä karkuun juokset? "
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Spider
 #. Farm
 #: ../../data/tribes/initialization/atlanteans/units.lua:1742
 msgctxt "atlanteans_building"
 msgid "A spider breeder showing his farm"
-msgstr ""
+msgstr "Hämähäkkisiitostaja näyttää tilaansa"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Weaving
 #. Mill
@@ -3302,14 +3303,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Here are the widelands where people may dwell, walking around caring "
 "everything’s well."
-msgstr ""
+msgstr "Tässä ovat laajamaat joissa ihmiset voivat käydä, kävellen pitkin poikin ja välittäen katsoa; kaikki on hyvin täällä."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Weaving
 #. Mill
 #: ../../data/tribes/initialization/atlanteans/units.lua:1755
 msgctxt "atlanteans_building"
 msgid "Part of the silkweavers’ song"
-msgstr ""
+msgstr "Osanen silkinkutojan laulusta"
 
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Crystal
 #. Mine
@@ -3317,7 +3318,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "Carves precious (and normal) stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Veistää arvokiviä (sekä tavanomaisia) kivistä joita on vuoristomaastossa."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Crystal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1766
@@ -3326,23 +3327,23 @@ msgid ""
 "Only the pure, white stones Diamond and Quartz will enlighten our people. "
 "Thus, every major building will need them so the inhabitants may worship "
 "Satul to warm them."
-msgstr ""
+msgstr "Vain puhtaat, valkokivet timantti ja kvartsi valaisevat meidän omaa väkeämme. Täten, jokainen merkittävä rakennus tarvitsee niitä jotta asukkaat voivat ylistää Satul:ia lämmittämään heitä."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Crystal
 #. Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1769
 msgctxt "atlanteans_building"
 msgid "First part of the Atlantean almanach on architecture"
-msgstr ""
+msgstr "Atlantealaisen vuosikirjan ensimmäinen osa koskien arkkitehtuuria."
 
 #. TRANSLATORS: Purpose helptext for production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1776
 #: ../../data/tribes/initialization/barbarians/units.lua:1528
 #: ../../data/tribes/initialization/barbarians/units.lua:1543
@@ -3363,7 +3364,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "‘Way down here in this deep mine<br>where the sun it dare not shine,<br>I "
 "sweat and toil till day is done,<br>but I’ll be back with morning come.’"
-msgstr ""
+msgstr "‘Täällä alhaalla syvässä kaivoksessa<br>johon aurinko ei ilkeä paistaa,<br>hikoilen ja rehkin kunnes päivä on ohi,<br>mutta palaan jälleen kun aamu on tosi.’"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:  Coal
 #. Mine
@@ -3373,18 +3374,18 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1797
 msgctxt "atlanteans_building"
 msgid "Song from the miners’ guild"
-msgstr ""
+msgstr "Kaivostyöläisten killan laulu"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1790
 #: ../../data/tribes/initialization/barbarians/units.lua:1571
 #: ../../data/tribes/initialization/barbarians/units.lua:1584
@@ -3400,11 +3401,11 @@ msgstr "Kaivaa rautamalmia maasta vuoristoisessa maastossa."
 #. TRANSLATORS: Purpose helptext for production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1804
 #: ../../data/tribes/initialization/barbarians/units.lua:1610
 #: ../../data/tribes/initialization/barbarians/units.lua:1623
@@ -3424,14 +3425,14 @@ msgid ""
 "‘Way down here in these golden grounds<br>with stones above us the thousand "
 "pounds.<br>I dig in the dust until I see the spark,<br>The golden ore I find"
 " in the dark.’"
-msgstr ""
+msgstr "‘Täällä alhaalla täällä kultaisella kamaralla<br>kera kivien jotka jotka painavat tuhat kiloa.<br>Kaivan pölyn keskellä kunnes kipunan näen,<br>kultaisen malmin pimeässä löydän täten.’"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Gold
 #. Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1811
 msgctxt "atlanteans_building"
 msgid "Miner’s prayer"
-msgstr ""
+msgstr "Kaivostyöläisen rukous"
 
 #. TRANSLATORS: Purpose helptext for an atlantean training site: Dungeon, part
 #. 1
@@ -3454,13 +3455,13 @@ msgstr "Varustaa sotilaat kaikilla välttämättömillä aseilla ja haarniskanos
 #: ../../data/tribes/initialization/atlanteans/units.lua:1827
 msgctxt "atlanteans_building"
 msgid "Make our enemies feel the pain, so enter here to gain your train!"
-msgstr ""
+msgstr "Laittakaamme vihollisemme kipua tuntemaan, käykäät täst' sisään; saatte oppitunnin jota ette tule unohtamaan!"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Dungeon
 #: ../../data/tribes/initialization/atlanteans/units.lua:1829
 msgctxt "atlanteans_building"
 msgid "Engraving on the entrance to the dungeon"
-msgstr ""
+msgstr "Tyrmän sisäänkäynnillä oleva kaiverrus"
 
 #. TRANSLATORS: Purpose helptext for an atlantean training site: Labyrinth,
 #. part 1
@@ -3475,14 +3476,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Our enemies claim: we have a ruddy twisted way to fight. Check the way we "
 "train, in this labyrinth they may be right."
-msgstr ""
+msgstr "Vihollisemme väittävät: omaamme kirotun kieroutuneen tavan taistella. Selvää sit' ottakaa miten harjoittelemme, tässä labyrintissa he voivat oikeassa olla."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Labyrinth
 #: ../../data/tribes/initialization/atlanteans/units.lua:1845
 msgctxt "atlanteans_building"
 msgid "Atlantean hero after first contact with a real enemy"
-msgstr ""
+msgstr "Atlantealainen sankari ensi kosketuksen jälkeen vihollisen kanssa"
 
 #. TRANSLATORS: Purpose helptext for an atlantean military site: Guardhouse
 #. TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
@@ -3498,7 +3499,7 @@ msgstr ""
 #: ../../data/tribes/initialization/atlanteans/units.lua:1925
 msgctxt "atlanteans_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Varustaa sotilaat laajentamaan maa-aluettasi."
 
 #. TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
 #. TRANSLATORS: Note helptext for an atlantean military site: Guardhall
@@ -3517,7 +3518,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Jos sinulla on pulaa sotilaista sotarakennuksen miehittämiseksi, käytä alaspäin nuolipainiketta pienentääksesi kapasiteettia. Voit myös klikata sotilasta lähettääksesi hänet pois."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Guardhouse
 #: ../../data/tribes/initialization/atlanteans/units.lua:1859
@@ -3525,27 +3526,27 @@ msgctxt "atlanteans_building"
 msgid ""
 "Hey soldier, even if this is the smallest of our military buildings you "
 "still must not sleep all day!"
-msgstr ""
+msgstr "Hei sotilas, vaikkakin tämä on varuskuntamme rakennuksista pienin, et siltikään voi nukkua koko päivää! "
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Guardhouse
 #: ../../data/tribes/initialization/atlanteans/units.lua:1861
 msgctxt "atlanteans_building"
 msgid "Officer visiting a remote guardhouse"
-msgstr ""
+msgstr "Virkailija vierailemassa syrjäisellä vartiotalolla"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Guardhall
 #: ../../data/tribes/initialization/atlanteans/units.lua:1872
 msgctxt "atlanteans_building"
 msgid "In this hall we praise the fight, Satul will warm us day and night."
-msgstr ""
+msgstr "Tässä tilassa me taistelua ylistämme näin, Satul lämmittää meidät päivin ja öin."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Guardhall
 #: ../../data/tribes/initialization/atlanteans/units.lua:1874
 msgctxt "atlanteans_building"
 msgid "Scribbling on the wall of a guardhall"
-msgstr ""
+msgstr "Vartiosalin seinässä oleva tuherrus"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Small Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1885
@@ -3553,14 +3554,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "With three soldiers we can achieve an optimal balance between military power"
 " and building cost."
-msgstr ""
+msgstr "Kolmella sotilaalla voimme saavuttaa parhaan mahdollisen tasapainon asevoimien ja rakennuskustannusten välillä."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Small
 #. Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1887
 msgctxt "atlanteans_building"
 msgid "Notes on the building instructions"
-msgstr ""
+msgstr "Huomautuksia rakennusohjeistuksissa"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1899
@@ -3568,13 +3569,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "All the other tribes envy us for our towers, elegant outside, comfortable "
 "inside, still perfect for defense."
-msgstr ""
+msgstr "Kaikki muut heimot kadehtivat meitä torneistamme, joissa tyylikäs julkisivu, mukava sisäpuoli, ja silti täydellisiä puolustukseen."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1901
 msgctxt "atlanteans_building"
 msgid "Soldier handing over his duties to a younger one"
-msgstr ""
+msgstr "Sotilas ojentaa vastuutehtävänsä nuoremmalle jatkajalle"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: High Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1914
@@ -3582,14 +3583,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "Beware our mighty high towers! From the topmost spot we can see wide into "
 "the lands and spot the enemy far away."
-msgstr ""
+msgstr "Varokaa mahdikkaita korkeatornejamme! Ylimmästä kohdasta naemme maille laajalti ja havaitsemme vihollisen kaukaa.  "
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: High
 #. Tower
 #: ../../data/tribes/initialization/atlanteans/units.lua:1917
 msgctxt "atlanteans_building"
 msgid "Soldier showing off a High Tower"
-msgstr ""
+msgstr "Sotilas esittelee korkeaa tornia"
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Castle
 #: ../../data/tribes/initialization/atlanteans/units.lua:1930
@@ -3597,18 +3598,18 @@ msgctxt "atlanteans_building"
 msgid ""
 "Sometimes even we Atlanteans need to use brute force, but we always play it "
 "wisely."
-msgstr ""
+msgstr "Joskus jopa meidän atlantealaisten tarvitsee käyttää raakaa voimaa, mutta toimimme niin tehdessämme aina viisauden johdattamana."
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Castle
 #: ../../data/tribes/initialization/atlanteans/units.lua:1932
 msgctxt "atlanteans_building"
 msgid "‘Wisdom of the Fight’ by the warriors’ guild"
-msgstr ""
+msgstr "‘Viisaus taistelussa’ jonka on tehnyt sotureiden kilta"
 
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1941
 #: ../../data/tribes/initialization/barbarians/units.lua:1755
 #: ../../data/tribes/initialization/empire/units.lua:2229
@@ -3621,7 +3622,7 @@ msgstr "Rakentaa lauttoja."
 #: ../../data/tribes/initialization/atlanteans/units.lua:1943
 msgctxt "building"
 msgid "Needs water nearby. Be aware ferries carry wares only, no workers."
-msgstr ""
+msgstr "Tarvitsee lähellä olevaa vettä. Olethan tietoinen, että lautat kuljettavat vain tarvikkeita, eivät työläisiä."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1945
@@ -3629,19 +3630,19 @@ msgctxt "atlanteans_building"
 msgid ""
 "‘Row, row, row your boat,<br>gently ’long the shore.<br>steadily steadily "
 "steadily steadily<br>bring the wares ashore.’"
-msgstr ""
+msgstr "‘Souda, souda, souda, souda venhettäsi,<br>lempeästi rantaviivaa pitkin.<br>vakaasti, vakaasti, vakaasti, vakaasti<br>nyt tarvikkeet jo rannan saavuttivatkin.’"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Ferry
 #. Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1950
 msgctxt "atlanteans_building"
 msgid "Traditional song of the ferrymen"
-msgstr ""
+msgstr "Lauttureiden perinteinen laulu"
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
-#. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1957
 #: ../../data/tribes/initialization/barbarians/units.lua:1769
 #: ../../data/tribes/initialization/empire/units.lua:2252
@@ -3658,14 +3659,14 @@ msgctxt "atlanteans_building"
 msgid ""
 "‘Soon may the wellerman come,<br>to bring us bread and smoked fish.<br>We "
 "set sail for a faraway shore<br>we praise Satul the best we wish.’"
-msgstr ""
+msgstr "‘Pian saapuu merimies,<br>tuo meille leipää ja savustettua kalaa.<br>Nostamme purjeet ja matkaamme kohti kaukasta rantaa<br>ylistämme Satul:ia toivoen parastaan.’"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site:
 #. Shipyard -- not directly stolen from the wellerman song
 #: ../../data/tribes/initialization/atlanteans/units.lua:1964
 msgctxt "atlanteans_building"
 msgid "Transcript from oral tradition"
-msgstr ""
+msgstr "Kirjailtu suullisesta perinteestä"
 
 #. TRANSLATORS: Productivity label on an atlantean building if there is 1
 #. worker missing
@@ -4070,7 +4071,7 @@ msgid ""
 "A mask is an enhanced armor for Barbarian soldiers. It is produced in the "
 "helm smithy and used in the training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
-msgstr ""
+msgstr "Naamio on Barbaarisotilaiden paranneltu kasvopanssari. Sitä tuotetaan kypäräpajassa ja käytetään harjoitusleirillä – yhdessä ruoan kanssa – sotilaiden kouluttamiseksi terveystasolta 1 tasolle 2."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Warhelm
 #: ../../data/tribes/initialization/barbarians/units.lua:532
@@ -4079,7 +4080,7 @@ msgid ""
 "This is the most enhanced Barbarian armor. It is produced in a helm smithy "
 "and used in a training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
-msgstr ""
+msgstr "Tämä on kaikkein parannelluin barbaaripanssari. Sitä tuotetaan kypäräpajassa ja käytetään harjoitusleirillä – yhdessä ruoan kanssa  – sotilaiden kouluttamiseksi terveystasolta 2 tasolle 3."
 
 #. TRANSLATORS: Helptext for a barbarian worker: Carrier
 #: ../../data/tribes/initialization/barbarians/units.lua:548
@@ -4354,7 +4355,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Työläisesi sekä sotilaasi asustavat täällä. Varastoi myös tarvikkeitasi ja työkalujasi."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Port
 #: ../../data/tribes/initialization/barbarians/units.lua:1119
@@ -4385,7 +4386,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen toimesta tuhota. On suositeltavaa lähettää sotilaita puolustamaan sitä."
 
 #. TRANSLATORS: Lore helptext for a barbarian production site: Quarry
 #: ../../data/tribes/initialization/barbarians/units.lua:1134
@@ -4553,7 +4554,7 @@ msgstr "Metsästäjä pitää taukoa %s ennen kuin jatkaa taas työskentelyä."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "‘Hän pitää eläimistä ja niiden kasvattamisesta <br> kuten me pidämme niiden laittamisesta ruoaksi syödäksemme ne.’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -4588,7 +4589,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21ˢᵗ year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Baardi Sigurdin kirjoittama laulu, kun ensimmäiset pisarat tippuivat Suuren kuivuuden jälkeen Chat’Karuthin aikakaudella vuonna 21."
 
 #. TRANSLATORS: Performance helptext for a barbarian production site: Well
 #: ../../data/tribes/initialization/barbarians/units.lua:1229
@@ -5028,7 +5029,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘Don’t ask what your tribe can do for you, ask what you can do for your "
 "tribe!’"
-msgstr ""
+msgstr "‘Älä kysy mitä heimosi voisi tehdä sinulle, kysy mitä sinä voit tehdä heimollesi!’"
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
 #: ../../data/tribes/initialization/barbarians/units.lua:1450
@@ -5451,7 +5452,7 @@ msgstr "Boldreth,<br>hänen ollessa nuori sotilas"
 #: ../../data/tribes/initialization/barbarians/units.lua:1744
 msgctxt "barbarians_building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Varustaa sotilaat laajentamaan maa-aluettasi."
 
 #. TRANSLATORS: Note helptext for a barbarian military site: Sentry
 #. TRANSLATORS: Note helptext for a barbarian military site: Barrier
@@ -5468,7 +5469,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Jos sinulla on pulaa sotilaista sotarakennuksen miehittämiseksi, käytä alaspäin nuolipainiketta pienentääksesi kapasiteettia. Voit myös klikata sotilasta lähettääksesi hänet pois."
 
 #. TRANSLATORS: Lore helptext for a barbarian military site: Barrier
 #: ../../data/tribes/initialization/barbarians/units.lua:1700
@@ -5591,7 +5592,7 @@ msgstr "Työläiset ovat matkalla"
 #: ../../data/tribes/initialization/empire/units.lua:12
 msgctxt "empire_lore"
 msgid "‘%1%’<br>(%2%)"
-msgstr ""
+msgstr "‘%1%’<br>(%2%)"
 
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 2
 #: ../../data/tribes/initialization/empire/units.lua:115
@@ -5820,7 +5821,7 @@ msgstr "Kaikki geologit, rakentajat, asesepät ja haarniskasepät tarvitsevat va
 #: ../../data/tribes/initialization/empire/units.lua:445
 msgctxt "empire_ware"
 msgid "They are produced by the toolsmith."
-msgstr ""
+msgstr "Niitä tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for an empire ware: Scythe, part 2
 #: ../../data/tribes/initialization/empire/units.lua:458
@@ -5854,7 +5855,7 @@ msgstr "Keittiövälineitä tarvitaan ruoka-annoksien ja aterioiden varmistamise
 #: ../../data/tribes/initialization/empire/units.lua:502
 msgctxt "empire_ware"
 msgid "They are used in the smelting works and produced by the toolsmith."
-msgstr ""
+msgstr "Niitä käytetään sulattamossa ja niitä tuottaa työkaluseppä."
 
 #. TRANSLATORS: Helptext for an empire ware: Wooden Spear
 #: ../../data/tribes/initialization/empire/units.lua:515
@@ -6185,20 +6186,20 @@ msgstr "Täältä löytyy runsaasti marmoria."
 #. "All roads lead to Fremil."
 #: ../../data/tribes/initialization/empire/units.lua:1150
 msgid "Omnes viæ ducunt Fremilem."
-msgstr ""
+msgstr "Omnes viæ ducunt Fremilem."
 
 #. TRANSLATORS: Lore helptext for an empire warehouse: Headquarters
 #. Translation for the adapted classical Latin quote:
 #. "Omnes viæ ducunt Fremilem."
 #: ../../data/tribes/initialization/empire/units.lua:1154
 msgid "All roads lead to Fremil."
-msgstr ""
+msgstr "Kaikki tiet vievät Fremil:iin."
 
 #. TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters
 #: ../../data/tribes/initialization/empire/units.lua:1158
 msgctxt "empire_building"
 msgid "Proverb signifying the glory of the Empire and its capital"
-msgstr ""
+msgstr "Sananlasku joka ilmentää imperiumin ja sen pääkaupungin kunniaa"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
 #: ../../data/tribes/initialization/empire/units.lua:1161
@@ -6218,21 +6219,21 @@ msgstr "Päämaja on tukesi ja turvasi."
 #. "A shipwreck that is common to all is a consolation."
 #: ../../data/tribes/initialization/empire/units.lua:1173
 msgid "Commune naufragium omnibus est consolatio."
-msgstr ""
+msgstr "Commune naufragium omnibus est consolatio."
 
 #. TRANSLATORS: Lore helptext for an empire warehouse: Headquarters Shipwreck
 #. Translation for the classical Latin quote:
 #. "Commune naufragium omnibus est consolatio."
 #: ../../data/tribes/initialization/empire/units.lua:1177
 msgid "A shipwreck that is common to all is a consolation."
-msgstr ""
+msgstr "Haaksirikko joka on tavanomaisen tunnettu kaikille on lohdutus"
 
 #. TRANSLATORS: Lore author helptext for an empire warehouse: Headquarters
 #. Shipwreck
 #: ../../data/tribes/initialization/empire/units.lua:1180
 msgctxt "empire_building"
 msgid "Lutius after stranding on an uncharted island"
-msgstr ""
+msgstr "Lutius sen jälkeen kun jäi hylätyksi tuntemattomalle saarelle"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Headquarters
 #. Shipwreck
@@ -6255,20 +6256,20 @@ msgstr "Päämaja on tukesi ja turvasi."
 #. "Who gives promptly, gives twice, who gives late, gives nothing."
 #: ../../data/tribes/initialization/empire/units.lua:1194
 msgid "Bis dat, qui cito dat, nil dat, qui munera tardat."
-msgstr ""
+msgstr "Bis dat, qui cito dat, nil dat, qui munera tardat."
 
 #. TRANSLATORS: Lore helptext for an empire warehouse: Warehouse
 #. Translation for the classical Latin quote:
 #. "Bis dat, qui cito dat, nil dat, qui munera tardat."
 #: ../../data/tribes/initialization/empire/units.lua:1198
 msgid "Who gives promptly, gives twice, who gives late, gives nothing."
-msgstr ""
+msgstr "Joka antaa joutuisasi, antaa myös kahdesti, joka antaa myöhään, ei oikeasti anna mitään."
 
 #. TRANSLATORS: Lore author helptext for an empire warehouse: Warehouse
 #: ../../data/tribes/initialization/empire/units.lua:1201
 msgctxt "empire_building"
 msgid "Proverb written over the doors of a warehouse"
-msgstr ""
+msgstr "Sanonta joka on kirjoitettu varastotalon ovien ylle"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
 #: ../../data/tribes/initialization/empire/units.lua:1203
@@ -6276,7 +6277,7 @@ msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Työntekijäsi ja sotilaasi löytävät suojapaikan tästä. Tässä säilötään myös tarvikkeita ja työkalujasi."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -6284,14 +6285,14 @@ msgstr ""
 #. "To sail is necessary."
 #: ../../data/tribes/initialization/empire/units.lua:1213
 msgid "Navigare necesse est."
-msgstr ""
+msgstr "Navigare necesse est."
 
 #. TRANSLATORS: Lore helptext for an empire warehouse: Port
 #. Translation for the classical Latin quote:
 #. "Navigare necesse est."
 #: ../../data/tribes/initialization/empire/units.lua:1217
 msgid "To sail is necessary."
-msgstr ""
+msgstr "Kaikki muu on turhaa paitsi purjehdus."
 
 #. TRANSLATORS: Lore author helptext for an empire warehouse: Port
 #: ../../data/tribes/initialization/empire/units.lua:1221
@@ -6299,7 +6300,7 @@ msgctxt "empire_building"
 msgid ""
 "Admiral Litus Marius Exsiccatus, sending out the fleet to break the naval "
 "blockade during the First Atlantean War"
-msgstr ""
+msgstr "Amiraali Litus Marius Exsiccatus, lähettäessä laivaston murtamaan merisulun ensimmäisen atlantealaisen sodan aikana"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/tribes/initialization/empire/units.lua:1225
@@ -6315,7 +6316,7 @@ msgctxt "empire_building"
 msgid ""
 "Similar to the Headquarters a Port can be attacked and destroyed by an "
 "enemy. It is recommendable to send soldiers to defend it."
-msgstr ""
+msgstr "Kuten Päämajaan, satamaan voidaan hyökätä ja se voidaan vihollisen toimesta tuhota. On suositeltavaa lähettää sotilaita puolustamaan sitä."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -6324,7 +6325,7 @@ msgstr ""
 #. destroyed."
 #: ../../data/tribes/initialization/empire/units.lua:1239
 msgid "Non relinquetur hic lapis super lapidem qui non destruatur."
-msgstr ""
+msgstr "Non relinquetur hic lapis super lapidem qui non destruatur."
 
 #. TRANSLATORS: Lore helptext for an empire production site: Quarry
 #. Translation for the classical Latin quote:
