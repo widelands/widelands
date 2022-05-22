@@ -3,12 +3,12 @@ function volcano_eruptions()
    local fields_to_setback = Set:new{}
    local central_field = map:get_field(133,47)
    local region_to_erupt = central_field:region(17)
-   for a,field in next,region_to_erupt,f do
+   for a,field in ipairs(region_to_erupt) do
       if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
          for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
             if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
             if #f.bobs > 0 then
-               for i, bob in ipairs(f.bobs) do
+               for j, bob in ipairs(f.bobs) do
                   bob:remove()
                end
             end
@@ -32,12 +32,12 @@ function volcano_eruptions()
 
    local central_field = map:get_field(120,18)
    local region_to_erupt = central_field:region(14)
-   for a,field in next,region_to_erupt,f do
+   for a,field in ipairs(region_to_erupt) do
       if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
          for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
             if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
             if #f.bobs > 0 then
-               for i, bob in ipairs(f.bobs) do
+               for j, bob in ipairs(f.bobs) do
                   bob:remove()
                end
             end
@@ -62,12 +62,12 @@ function volcano_eruptions()
 
    local central_field = map:get_field(163,128)
    local region_to_erupt = central_field:region(11)
-   for a,field in next,region_to_erupt,f do
+   for a,field in ipairs(region_to_erupt) do
       if math.max(math.abs(field.x-central_field.x),math.abs(field.y-central_field.y)) < 6 or ((field.x -field.y) % 6 < 2) or ((field.x +field.y) % 6 < 2) then
          for i, f in ipairs(map:get_field(field.x, field.y):region(1)) do
             if f.immovable and not f.immovable:has_attribute("rocks") then f.immovable:remove() end
             if #f.bobs > 0 then
-               for i, bob in ipairs(f.bobs) do
+               for j, bob in ipairs(f.bobs) do
                   bob:remove()
                end
             end
