@@ -41,7 +41,7 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	};
 	std::vector<ContentT> content;
 
-#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({a, b, c, d}));
+#define ADD_CONTENT(a, b, c, d) content.emplace_back(ContentT({a, b, c, d}))
 
 	ADD_CONTENT("Version:", _("Version:"), build_ver_details(), "");
 
