@@ -230,7 +230,7 @@ function patience()
       end
    end
    trade.done = true
-   if defeat_maletus.done == false
+   if defeat_maletus.done == false then
       msg_boxes(maletus_defeated_1a)
    end
 end
