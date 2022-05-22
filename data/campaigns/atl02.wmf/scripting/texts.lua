@@ -424,13 +424,13 @@ maletus_defeated_1 = {
       title = _("Empire Defeated"),
       body = sidolus(
          -- TRANSLATORS: Sidolus
-         _([[May Satul warm you, Kalitath! We have defeated the troops of the Empire in the north and delivered all the wares you demanded. Now we expect our princess to return home.]]))
+         _([[May Satul warm you, Kalitath! We have defeated the troops of the Empire in the north. Now we expect our princess to return home.]]))
    },
    {
       title = _("Kalitath Appreciates Efforts"),
       body = kalitath(
          -- TRANSLATORS: Kalitath
-         _([[Sidolus, this is very good news. I appreciate what your people has done. But your princess and I already made plans for our common future on this island. She will explain it to you.]]))
+         _([[Sidolus, we appreciate this. But your princess and I already made plans for our common future on this island. She will explain it to you.]]))
    },
    {
       title = _("Jundlina Explains"),
@@ -443,6 +443,21 @@ maletus_defeated_1 = {
       body = kalitath(
          -- TRANSLATORS: Kalitath
          _([[Sidolus, now follow the orders of your princess. Meanwhile we might decide that we will need some of the land conquered by you for our common future. So we will simply take your military buildings with our forces. Naturally you won’t have the right to do the same, for the sake of your princess.]]))
+   },
+}
+
+maletus_defeated_1a = {
+   {
+      title = _("Tribute Delivered"),
+      body = sidolus(
+         -- TRANSLATORS: Sidolus
+         _([[May Satul warm you, Kalitath! We have delivered all the wares you demanded. Now we expect our princess to return home.]]))
+   },
+   {
+      title = _("Kalitath Appreciates Efforts"),
+      body = kalitath(
+         -- TRANSLATORS: Kalitath
+         _([[Sidolus, this is very good news. I appreciate what your people has done. However don’t forget to help us defeat the troops of Maletus. Afterwards we might talk about your princess.]]))
    },
 }
 

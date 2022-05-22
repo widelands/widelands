@@ -230,6 +230,9 @@ function patience()
       end
    end
    trade.done = true
+   if defeat_maletus.done == false
+      msg_boxes(maletus_defeated_1a)
+   end
 end
 
 function maletus_defeated()
@@ -240,7 +243,7 @@ function maletus_defeated()
    else
       msg_boxes(maletus_defeated_2)
       while not trade.done == true do
-         sleep(3333)
+         sleep(1333)
       end
       msg_boxes(maletus_defeated_3)
    end
