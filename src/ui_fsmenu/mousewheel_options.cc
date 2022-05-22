@@ -454,7 +454,7 @@ MousewheelOptionsDialog::MousewheelOptionsDialog(UI::Panel* parent)
 	});
 	feedback_button_.set_enabled(settings_.inverted_x_);
 	feedback_button_.sigclicked.connect([this]() {
-		InvertedScrollFeedbackWindow feedback_window(&(this->get_topmost_forefather()));
+		InvertedScrollFeedbackWindow feedback_window(&(get_topmost_forefather()));
 		feedback_window.run<UI::Panel::Returncodes>();
 	});
 	horiz_override_box_.add(&inverted_x_checkbox_);

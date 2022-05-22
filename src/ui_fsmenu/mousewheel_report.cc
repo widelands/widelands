@@ -71,8 +71,10 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(
                  /** TRANSLATORS: %s is a URL */
-                 format(_("Please report at %s that horizontal scroll direction is inverted with "
-                          " your configuration. Please include the below technical information."),
+                 format(_("Please help us improve the detection of inverted horizontal scrolling."
+                          " To do so, please report at %s that horizontal scroll direction is"
+                          " wrong with your configuration. Please include the below technical"
+                          " information."),
                         format("<font underline=true>%s</font>", kReportURL)))),
         UI::Align::kLeft,
         UI::MultilineTextarea::ScrollMode::kNoScrolling),
