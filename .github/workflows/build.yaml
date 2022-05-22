@@ -379,10 +379,10 @@ jobs:
       VERSION: "${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}"
       CXX: '${{ matrix.compiler }}'
     steps:
-    - name: Installing dependencies
-      run: sh ./.github/scripts/install_deps.sh
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Installing dependencies
+      run: sh ./.github/scripts/install_deps.sh
     - name: Compile
       run: |
         if [ "${CXX:0:1}" == "c" ]
