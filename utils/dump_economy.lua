@@ -10,7 +10,7 @@
 
 -- arg:mapname 
 --    is a string for the folder in .widelands/campaigns/ where the file will be stored
---    it should be choossen according the map/sccenario
+--    it should be chosen according the map/scenario
 --    the name of the file will be e.g. ecodump_player1_tribename.wcd
 
 --
