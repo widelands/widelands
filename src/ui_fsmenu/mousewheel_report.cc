@@ -31,8 +31,8 @@
 
 namespace FsMenu {
 
-static constexpr int ReportWindowWidth = 650;
-static constexpr int ReportWindowHeight = 500;
+static constexpr int kReportWindowWidth = 650;
+static constexpr int kReportWindowHeight = 500;
 
 constexpr const char* const kReportURL = "https://github.com/widelands/widelands/discussions/5367";
 
@@ -55,17 +55,18 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
                 "inverted_scroll_feedback",
                 0,
                 0,
-                ReportWindowWidth,
-                ReportWindowHeight,
+                kReportWindowWidth,
+                kReportWindowHeight,
                 _("Send Feedback for Inverted Horizontal Scrolling")),
      content_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     header_(&content_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu,
+     header_(&content_, 0, 0, kReportWindowWidth, 0, UI::PanelStyle::kFsMenu,
              format("<rt><p>%1$s</p></rt>",
                 g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(
                 /** TRANSLATORS: %s is a URL */
                 format(_("Please report at %s that horizontal scroll direction is inverted with "
                          " your configuration. Please include the below technical information."),
-                       format("<font underline=true>%s</font>", kReportURL))))),
+                       format("<font underline=true>%s</font>", kReportURL)))),
+                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
      url_button_(&content_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _(url_button_text)),
      infobox_(&content_, TechInfoBox::Type::kMousewheelReport),
      close_(&content_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
@@ -74,16 +75,22 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
 	url_button_.sigclicked.connect(url_button_action);
 	close_.sigclicked.connect([this]() { die(); });
 
-	content_.add(&header_, UI::Box::Resizing::kExpandBoth);
+	content_.add_inf_space();
+	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	content_.add_space(kPadding);
 	content_.add(&url_button_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	// TechInfoBox has enough padding
-	content_.add(&infobox_, UI::Box::Resizing::kExpandBoth);
-	// TechInfoBox has enough padding
+	content_.add_inf_space();
+	content_.add(&infobox_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	content_.add_inf_space();
 	content_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	content_.add_space(kPadding);
 
+	int32_t min_w = std::min(get_lborder() + infobox_.get_w() + get_rborder(), parent->get_w());
+	if (get_w() < min_w) {
+		set_size(min_w, get_h());
+	}
 	content_.set_size(get_inner_w(), get_inner_h());
+	header_.set_size(content_.get_inner_w(), 0);
 	layout();
 	center_to_parent();
 	initialization_complete();
