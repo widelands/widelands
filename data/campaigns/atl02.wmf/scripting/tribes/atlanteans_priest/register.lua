@@ -1,3 +1,0 @@
-return {
-   atlanteans_priest = {},
-}
