@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-13 03:59+0000\n"
+"POT-Creation-Date: 2022-05-19 03:48+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -296,8 +296,8 @@ msgstr "lis"
 msgid "Dec"
 msgstr "gru"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -311,12 +311,12 @@ msgstr "Menu główne"
 msgid "Tools"
 msgstr "Narzędzia"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -506,10 +506,10 @@ msgstr "Informacja"
 msgid "Click on a field to show information about it"
 msgstr "Kliknij pole, by pokazać informacje o nim"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -629,9 +629,9 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Wystąpił błąd. Wiadomość o błędzie:\n\n%1$s\n\nProsimy o zgłoszenie błędu, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windows). Używasz wersji %2$s (%3$s).\nProsimy o dodanie tej informacji do zgłoszenia."
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
@@ -725,8 +725,8 @@ msgstr "kopalnia"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1449,8 +1449,8 @@ msgid ""
 "location."
 msgstr "Wybierz nowy rozmiar mapy, po czym kliknij na mapę, aby podzielić ją w wybranym miejscu. Przy powiększaniu mapy nowe kolumny/rzędy zostaną wstawione na wschód/południe od wybranego punktu. Przy zmniejszaniu mapy odpowiednia ilość kolumn/rzędów zostanie usunięta na wschód/południe od wybranego punktu."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2429,7 +2429,7 @@ msgid ""
 "The replay has desynced and the game was paused.\n"
 "You are probably watching a replay created with another version of Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
@@ -3332,77 +3332,71 @@ msgstr "Błąd skryptu Lua"
 msgid "Version:"
 msgstr "Wersja:"
 
-#. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:534
-#, c-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
-
-#: ../../src/ui_fsmenu/about.cc:73
+#: ../../src/ui_fsmenu/about.cc:72
 msgid "Operating System:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:75
+#: ../../src/ui_fsmenu/about.cc:74
 msgid "MacOS"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:77
+#: ../../src/ui_fsmenu/about.cc:76
 msgid "Windows (64 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:79
+#: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (32 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:81
+#: ../../src/ui_fsmenu/about.cc:80
 msgid "Linux"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:83
+#: ../../src/ui_fsmenu/about.cc:82
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:85
+#: ../../src/ui_fsmenu/about.cc:84
 msgid "Unix"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:87
+#: ../../src/ui_fsmenu/about.cc:86
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:90
+#: ../../src/ui_fsmenu/about.cc:89
 msgid "Locale:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:91
+#: ../../src/ui_fsmenu/about.cc:90
 msgid "Home Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:92
+#: ../../src/ui_fsmenu/about.cc:91
 msgid "Configuration File:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:93
+#: ../../src/ui_fsmenu/about.cc:92
 msgid "Data Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:94
+#: ../../src/ui_fsmenu/about.cc:93
 msgid "Locale Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:95
+#: ../../src/ui_fsmenu/about.cc:94
 msgid "Executable Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:102 ../../src/ui_fsmenu/about.cc:149
+#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
 msgid "Technical Info"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:131
+#: ../../src/ui_fsmenu/about.cc:130
 msgid "Copy"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:132
+#: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy the technical report to the clipboard"
 msgstr ""
 
@@ -5498,11 +5492,11 @@ msgstr "Wyjdź z Widelands"
 msgid "Quit the game"
 msgstr "Wyjdź z gry"
 
-#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
-msgid "Version %1$s (%2$s)"
-msgstr "Wersja %1$s (%2$s)"
+msgid "Version %1$s"
+msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -6174,18 +6168,18 @@ msgstr "Błędna ścieżka do pliku w campaigns.lua z tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Samouczek"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autorzy"
@@ -6277,12 +6271,12 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Wystąpił błąd. Wiadomość o błędzie:\n\n%1$s\n\nProsimy o zgłoszenie błędu, by pomóc nam ulepszać Widelands. Informacje o błędzie znajdziesz na standardowym wyjściu (stdout.txt na Windows). Używasz wersji %2$s (%3$s).\nProsimy o dodanie tej informacji do zgłoszenia.\nCzy chcesz, aby Widelands spróbowało utworzyć awaryjny stan gry? Często – choć nie zawsze – można go załadować i kontynuować grę."
+msgstr ""
 
 #: ../../src/wlapplication.cc:1645
 #, c-format
@@ -7242,9 +7236,9 @@ msgstr "Porty"
 msgid "Low productivity:"
 msgstr "Niska produktywność:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7632,8 +7626,8 @@ msgstr "Zastąp odłączonego gracza wybraną SI i kontynuuj grę"
 msgid "AI for the disconnected player"
 msgstr "SI dla rozłączonego gracza"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8043,11 +8037,11 @@ msgstr "Usuń towar"
 msgid "Add ware"
 msgstr "Dodaj towar"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Hide controls"
 msgstr "Ukryj sterowanie"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Show controls"
 msgstr "Pokaż sterowanie"
 
@@ -8195,6 +8189,12 @@ msgstr "Wznów Grę"
 #: ../../src/wui/interactive_gamebase.cc:331
 msgid "Pause the Game"
 msgstr "Zatrzymaj Grę"
+
+#. * TRANSLATORS: actual_speed (desired_speed)
+#: ../../src/wui/interactive_gamebase.cc:534
+#, c-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:180
