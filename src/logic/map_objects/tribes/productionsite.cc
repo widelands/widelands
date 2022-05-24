@@ -332,7 +332,8 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 		if (vacant) {
 			// Check if this worker can be built directly
-			const WorkerDescr& d = *owner().egbase().descriptions().get_worker_descr(worker_descr_it->first);
+			const WorkerDescr& d =
+			   *owner().egbase().descriptions().get_worker_descr(worker_descr_it->first);
 			if (d.is_buildable() || d.has_demand_check()) {
 				++nr_requests;
 			} else {
@@ -351,8 +352,9 @@ void ProductionSite::update_statistics_string(std::string* s) {
 
 	if (nr_xp_requests > 0) {
 		*s = StyleManager::color_tag(
-		   (nr_xp_requests == 1 ? owner().tribe().get_productionsite_experienced_worker_missing_string() :
-                                owner().tribe().get_productionsite_experienced_workers_missing_string()),
+		   (nr_xp_requests == 1 ?
+             owner().tribe().get_productionsite_experienced_worker_missing_string() :
+             owner().tribe().get_productionsite_experienced_workers_missing_string()),
 		   g_style_manager->building_statistics_style().low_color());
 		return;
 	}

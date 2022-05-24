@@ -251,13 +251,15 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
-		load_productionsite_string(
-		   productionsite_experienced_worker_missing_, "productionsite_experienced_worker_missing",
-		   /** TRANSLATORS: Productivity label on a building if there is 1 experienced worker missing. */
-		   _("Master missing"));
+		load_productionsite_string(productionsite_experienced_worker_missing_,
+		                           "productionsite_experienced_worker_missing",
+		                           /** TRANSLATORS: Productivity label on a building if there is 1
+		                              experienced worker missing. */
+		                           _("Master missing"));
 		load_productionsite_string(
 		   productionsite_experienced_workers_missing_, "productionsite_experienced_workers_missing",
-		   /** TRANSLATORS: Productivity label on a building if there is more than 1 experienced worker missing. If you need plural forms here, please let us know. */
+		   /** TRANSLATORS: Productivity label on a building if there is more than 1 experienced
+		      worker missing. If you need plural forms here, please let us know. */
 		   _("Masters missing"));
 
 		std::unique_ptr<LuaTable> collectors_points_table =

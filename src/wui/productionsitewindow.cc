@@ -243,8 +243,9 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 		} else if (request != nullptr) {
 			const Widelands::WorkerDescr* desc =
 			   production_site->owner().tribe().get_worker_descr(request->get_index());
-			er.set_picture(0, desc->icon(), format(_("%1$s (%2$s)"),
-				request->is_open() ? _("vacant") : _("coming"), desc->descname()));
+			er.set_picture(0, desc->icon(),
+			               format(_("%1$s (%2$s)"), request->is_open() ? _("vacant") : _("coming"),
+			                      desc->descname()));
 
 			er.set_string(1, "");
 			er.set_string(2, "");
