@@ -181,6 +181,12 @@ public:
 	const std::string& get_productionsite_workers_coming_string() const {
 		return productionsite_workers_coming_;
 	}
+	const std::string& get_productionsite_experienced_worker_missing_string() const {
+		return productionsite_experienced_worker_missing_;
+	}
+	const std::string& get_productionsite_experienced_workers_missing_string() const {
+		return productionsite_experienced_workers_missing_;
+	}
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
@@ -262,7 +268,8 @@ private:
 	std::vector<std::pair<std::string, int>> collectors_points_table_;
 
 	std::string productionsite_worker_missing_, productionsite_workers_missing_,
-	   productionsite_worker_coming_, productionsite_workers_coming_;
+	   productionsite_worker_coming_, productionsite_workers_coming_,
+	   productionsite_experienced_worker_missing_, productionsite_experienced_workers_missing_;
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
