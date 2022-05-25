@@ -241,12 +241,13 @@ function maletus_defeated()
    if trade.done == true then
       msg_boxes(maletus_defeated_1)
    else
-      msg_boxes(maletus_defeated_2)
+      msg_boxes(maletus_defeated_2a)
       while not trade.done == true do
          sleep(1333)
       end
-      msg_boxes(maletus_defeated_3)
+      msg_boxes(maletus_defeated_2)
    end
+   msg_boxes(maletus_defeated_3)
    Kalitath:set_attack_forbidden(1, false)
    sleep(5000)
    p1:allow_buildings{"atlanteans_temple_of_satul"}
