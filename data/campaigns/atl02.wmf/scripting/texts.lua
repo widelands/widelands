@@ -321,7 +321,7 @@ enemy_1 = {
          _([[May Satul warm you, Jundlina! I have some disturbing news. We have sighted land governed by foreigners, but we do not yet know what to expect from them.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina is Concerned"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, I agree this is very concerning. We need to find out more. Hopefully our scout will get us some information soon.]]))
@@ -336,7 +336,7 @@ enemy_1a = {
          _([[May Satul warm you, Jundlina! I have some disturbing news. We have sighted land governed by foreigners, but we do not yet know what to expect from them.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina is Concerned"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, I agree this is very concerning. We need to find out more. We definitely need to send out a scout to gather some information.]]))
@@ -351,7 +351,7 @@ allies = {
          _([[May Satul warm you, Jundlina! We have made contact with the foreigners. They are in big trouble as they are at war with a mighty tribe in the north. They ask us for support.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina is Cautious"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, as we could need any ally we can get, we should help them. Let’s see what we can do for them. However we should improve our own military strength to become independent of others.]]))
@@ -549,7 +549,7 @@ princess_back = {
          _([[May Satul warm you, Jundlina. I am glad you are here again. I hope we may trust you, as much as you will trust and be faithful to Satul. How come the Barbarians let you go?]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina Explains"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, they did not let me go. I met our scout and he managed to sneak me out, as I realized they still kept me hostage after I expressed some concerns about our previous agreement. So we need to settle the barbarian issue now and forever on this island. There is no other way to live here in peace than to defeat them.]]))
