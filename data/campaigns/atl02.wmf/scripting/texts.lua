@@ -351,7 +351,7 @@ allies = {
          _([[May Satul warm you, Jundlina! We have made contact with the foreigners. They are in big trouble as they are at war with a mighty tribe in the north. They ask us for support.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina is Cautious"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, as we could need any ally we can get, we should help them. Let’s see what we can do for them. However we should improve our own military strength to become independent of others.]]))
