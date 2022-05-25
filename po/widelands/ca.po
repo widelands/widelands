@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-19 03:48+0000\n"
+"POT-Creation-Date: 2022-05-22 03:25+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -283,8 +283,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -298,12 +298,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -493,10 +493,10 @@ msgstr "Informació"
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -3453,7 +3453,7 @@ msgstr "Pobra"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:104
 msgid "This add-on may cause major glitches and errors."
-msgstr "Aquest complement pot provocar errors en les partides."
+msgstr "Aquest complement pot provocar errors a les partides."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:110
@@ -5892,7 +5892,7 @@ msgstr "Inclou els fluxos de sincronització en partides en xarxa per depurar po
 #: ../../src/ui_fsmenu/options.cc:244
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Show Census"
-msgstr "Mostra el cens"
+msgstr "Mostra els noms dels edificis"
 
 #: ../../src/ui_fsmenu/options.cc:245
 #: ../../src/wui/interactive_gamebase.cc:243
@@ -6550,7 +6550,7 @@ msgstr "Estableix la mida de l'eina a %d"
 
 #: ../../src/wlapplication_options.cc:470
 msgid "Toggle Census"
-msgstr "Commuta la finestra del cens"
+msgstr "Mostra/Amaga els noms dels edificis"
 
 #: ../../src/wlapplication_options.cc:475
 msgid "Toggle Status Labels"
@@ -7109,7 +7109,7 @@ msgstr "(no hi ha cap edifici seleccionat)"
 
 #: ../../src/wui/building_statistics_menu.cc:70
 msgid "Owned:"
-msgstr "Propietari:"
+msgstr "Construïts:"
 
 #: ../../src/wui/building_statistics_menu.cc:75
 msgid "Under construction:"
@@ -7161,9 +7161,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7490,7 +7490,7 @@ msgstr "Cancel·la el camí i construeix una via d'aigua"
 
 #: ../../src/wui/fieldaction.cc:653
 msgid "Build roads"
-msgstr "Construeix camí"
+msgstr "Accions de camí"
 
 #: ../../src/wui/fieldaction.cc:665
 msgid "Cancel waterway"
@@ -7551,8 +7551,8 @@ msgstr "Reemplaceu el jugador desconnectat amb la IA seleccionada i continua jug
 msgid "AI for the disconnected player"
 msgstr "IA pel jugador deconnectat"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7613,12 +7613,12 @@ msgstr "Hora"
 #: ../../src/wui/game_message_menu.cc:114
 #: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
-msgstr "Mostra el fitxer"
+msgstr "Mostra l'arxiu"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:122
 msgid "Center main mapview on location"
-msgstr "Centra la vista principal en la posició"
+msgstr "Centra la vista principal a la posició"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
@@ -8055,7 +8055,7 @@ msgstr "Segur que voleu reiniciar aquest escenari?"
 #. building names are shown
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Hide Census"
-msgstr "Amaga el cens"
+msgstr "Amaga els noms dels edificis"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
@@ -8119,8 +8119,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegació"
@@ -8154,8 +8154,8 @@ msgstr "Mostra o no si les àrees de treball se sobreposen quan se situa un nou 
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] "%u nou missatge"
-msgstr[1] "%u nous missatges"
+msgstr[0] "%u missatge nou"
+msgstr[1] "%u missatges nous"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:153
@@ -8402,7 +8402,7 @@ msgstr "Augmenta l'experiència en 1"
 
 #: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
-msgstr "Finalitzar l'assignació del treballador en aquest edifici."
+msgstr "Fes fora aquest treballador de l'edifici"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
