@@ -336,7 +336,7 @@ enemy_1a = {
          _([[May Satul warm you, Jundlina! I have some disturbing news. We have sighted land governed by foreigners, but we do not yet know what to expect from them.]]))
    },
    {
-      title = _("Jundlina Cheers"),
+      title = _("Jundlina is Concerned"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
          _([[Sidolus, I agree this is very concerning. We need to find out more. We definitely need to send out a scout to gather some information.]]))
