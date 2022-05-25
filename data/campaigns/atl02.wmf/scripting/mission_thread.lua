@@ -266,9 +266,9 @@ function final()
    while count_workers_in_warehouses("atlanteans_priestess") < 2 do sleep(2323) end
    priestesses.done = true
    msg_boxes(priestesses_consecrated)
-   sleep(1000)
+   sleep(2000)
    run(volcano_eruptions)
-   sleep(5000)
+   sleep(30000)
    msg_boxes(princess_back)
    p1:set_attack_forbidden(3, false)
    defeat_kalitath = add_campaign_objective(obj_defeat_kalitath)
