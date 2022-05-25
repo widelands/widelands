@@ -1,4 +1,4 @@
-# Automatically created by Widelands 1.0~git24923[de6c28e@static_link] (Release)
+# Automatically created by Widelands 1.1~git25765 (7c75652@master) Release
 
 [global]
 packet_version="2"
@@ -8,15 +8,21 @@ name="Atlanteans"
 tribe="atlanteans"
 ai=
 closeable="false"
+team="0"
+random="false"
 
 [player_2]
 name="Maletus"
 tribe="empire"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
 
 [player_3]
 name="Kalitath"
 tribe="barbarians"
 ai="normal"
 closeable="false"
+team="0"
+random="false"
