@@ -414,8 +414,8 @@ jobs:
   dev_release:
     name: Automated development pre-release
 # TODO enable before merging
-#    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
-    if: ${{ github.repository == 'matthiakl/widelands' }}
+#    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
+    if: ${{ github.repository == 'matthiakl/widelands' && always() }}
     needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
