@@ -24,19 +24,15 @@ jobs:
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
     - name: Installing dependencies
       run: |
-        sudo apt-get update
         if [ "${{ matrix.language }}" = "cpp" ]; then
-          sudo apt-get -y install \
-            cmake g++ gcc gettext libasio-dev libglew-dev \
-            libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev  \
-            libsdl2-ttf-dev python3 zlib1g-dev
+          sh ./.github/scripts/install_deps.sh
         else
           sudo apt-get -y install python3
         fi
-    - name: Checkout repository
-      uses: actions/checkout@v3
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
