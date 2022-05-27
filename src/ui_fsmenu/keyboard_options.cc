@@ -96,7 +96,7 @@ protected:
 	UI::Box box_;
 
 	void create_fastplace_dropdowns(const Widelands::Game& game, const int height) {
-		for (size_t t = 0; t < game.descriptions().nr_tribes(); ++t) {
+		for (Widelands::DescriptionIndex t = 0; t < game.descriptions().nr_tribes(); ++t) {
 			const Widelands::TribeDescr* tribe = game.descriptions().get_tribe_descr(t);
 			const auto iterator = fastplace.find(tribe->name());
 			const std::string selection = (iterator == fastplace.end() ? "" : iterator->second);
@@ -351,7 +351,7 @@ KeyboardOptions::get_default_fastplace_shortcuts(const KeyboardShortcut id) cons
 	assert(key.compare(0, kFastplaceGroupPrefix.size(), kFastplaceGroupPrefix) == 0);
 	key.erase(0, kFastplaceGroupPrefix.size());
 	std::map<std::string, std::string> values;
-	for (size_t t = 0; t < game_->descriptions().nr_tribes(); ++t) {
+	for (Widelands::DescriptionIndex t = 0; t < game_->descriptions().nr_tribes(); ++t) {
 		const Widelands::TribeDescr* tribe = game_->descriptions().get_tribe_descr(t);
 		const auto it = tribe->fastplace_defaults().find(key);
 		if (it != tribe->fastplace_defaults().end()) {
@@ -366,7 +366,7 @@ void KeyboardOptions::init_fastplace_default_shortcuts() {
 	assert(game_);
 	std::map<std::string /* key */, std::map<std::string /* tribe */, std::string /* building */>>
 	   fp;
-	for (size_t t = 0; t < game_->descriptions().nr_tribes(); ++t) {
+	for (Widelands::DescriptionIndex t = 0; t < game_->descriptions().nr_tribes(); ++t) {
 		const Widelands::TribeDescr* tribe = game_->descriptions().get_tribe_descr(t);
 		for (const auto& pair : tribe->fastplace_defaults()) {
 			fp[kFastplaceGroupPrefix + pair.first][tribe->name()] = pair.second;

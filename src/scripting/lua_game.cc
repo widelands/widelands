@@ -158,7 +158,7 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	const Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (size_t i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
 		const Widelands::BuildingDescr* building_descr = egbase.descriptions().get_building_descr(i);
 		lua_pushstring(L, building_descr->name().c_str());
 		lua_pushboolean(L, static_cast<int>(player.is_building_type_allowed(i)));
@@ -1137,7 +1137,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 		// Only act on buildings that the tribe has or could conquer
 		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
-		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
+		for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_buildings(); ++i) {
 			const Widelands::DescriptionIndex& building_index =
 			   static_cast<Widelands::DescriptionIndex>(i);
 			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);

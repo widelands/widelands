@@ -180,7 +180,7 @@ void MapSaver::save() {
 
 		//  allowed building types
 		iterate_players_existing_const(plnum, nr_players, egbase_, player) {
-			for (size_t i = 0; i < egbase_.descriptions().nr_buildings(); ++i) {
+			for (DescriptionIndex i = 0; i < egbase_.descriptions().nr_buildings(); ++i) {
 				if (!player->is_building_type_allowed(i)) {
 					verb_log_info_time(
 					   egbase_.get_gametime(), "Writing Allowed Building Types Data ... ");

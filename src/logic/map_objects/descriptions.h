@@ -57,12 +57,12 @@ public:
 
 	uint16_t nr_buildings() const;
 	uint16_t nr_critters() const;
-	size_t nr_immovables() const;
-	size_t nr_terrains() const;
+	uint16_t nr_immovables() const;
+	uint16_t nr_terrains() const;
 	uint16_t nr_tribes() const;
 	uint16_t nr_resources() const;
-	size_t nr_wares() const;
-	size_t nr_workers() const;
+	uint16_t nr_wares() const;
+	uint16_t nr_workers() const;
 
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(DescriptionIndex index) const;

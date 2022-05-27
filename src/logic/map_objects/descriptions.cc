@@ -158,22 +158,22 @@ uint16_t Descriptions::nr_buildings() const {
 uint16_t Descriptions::nr_critters() const {
 	return critters_->size();
 }
-size_t Descriptions::nr_immovables() const {
+uint16_t Descriptions::nr_immovables() const {
 	return immovables_->size();
 }
 uint16_t Descriptions::nr_resources() const {
 	return resources_->size();
 }
-size_t Descriptions::nr_terrains() const {
+uint16_t Descriptions::nr_terrains() const {
 	return terrains_->size();
 }
 uint16_t Descriptions::nr_tribes() const {
 	return tribes_->size();
 }
-size_t Descriptions::nr_wares() const {
+uint16_t Descriptions::nr_wares() const {
 	return wares_->size();
 }
-size_t Descriptions::nr_workers() const {
+uint16_t Descriptions::nr_workers() const {
 	return workers_->size();
 }
 
