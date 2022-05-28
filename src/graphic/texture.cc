@@ -158,8 +158,12 @@ Texture::Texture(const GLuint texture, const Recti& subrect, int parent_w, int p
 
 Texture::~Texture() {
 	if (owns_texture_) {
-		assert(is_initializer_thread());
-		Gl::State::instance().delete_texture(blit_data_.texture_id);
+		if (is_initializer_thread()) {
+			Gl::State::instance().delete_texture(blit_data_.texture_id);
+		} else {
+			NoteThreadSafeFunction::instantiate(
+			   [this]() { Gl::State::instance().delete_texture(blit_data_.texture_id); }, false);
+		}
 	}
 }
 
