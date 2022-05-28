@@ -256,16 +256,21 @@ msgid ""
 " chieftain Hjalmar. They have had a long time of preparement to build up "
 "their deterring armies."
 msgstr ""
+"Más allá de los piratas, están los territorios de una tribu muy desarrollada"
+" comandada por el poderoso Hjalmar. Han pasado mucho tiempo preparando y "
+"fortaleciendo su formidable ejército."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:22
 msgid ""
 "The situation looks quite perilous and my advice is that we direct our "
 "efforts towards building up a strong army."
 msgstr ""
+"La situación es un tanto peligrosa. Por eso le aconsejo enfocarnos en tener "
+"un ejército fuerte."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:27
 msgid "Our northern enemy"
-msgstr ""
+msgstr "El enemigo del norte"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:28
 msgid ""
@@ -273,22 +278,31 @@ msgid ""
 " our rival in the north is still stronger than all our armies combined. We "
 "should avoid a conflict until we are able to defeat them."
 msgstr ""
+" Mi señor, aunque nuestros valorosos hombres están preparados para enfrentar"
+" cualquier enermigo sin temor, el enemigo del norte es mucho más fuerte que "
+"nuestro ejército. Debemos evitar un conflicto directo hasta que podamos "
+"vencerlos."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:30
 msgid ""
 "Be patient and recognize that a strong army is indispensable in this "
 "situation. Törver has a very bad reputation."
 msgstr ""
+"Es tiempo de ser pacientes y reconocer que en este momento necesitamos un "
+"ejército fuerte. Törver tiene muy mala reputación."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:35
 msgid "Peril from the north"
-msgstr ""
+msgstr "El peligro del norte"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:36
 msgid ""
 "Sire, we received an alarming message from one of our explorers. Törver is "
 "expanding his front line and approaching our territory."
 msgstr ""
+"Mi señor, uno de nuestros exploradores ha llegado con un mensaje "
+"preocupante. Törver ha expandido su frontera y se acerca a nuestro "
+"territorio."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -296,15 +310,19 @@ msgid ""
 "northern enemy, we will enlarge our territory and find more resources to "
 "strengthen our armies."
 msgstr ""
+"No podremos evitarlos por siempre. Si logramos conquistar a nuestro enemigo "
+"del norte, tendremos los recursos suficientes para fortalecer nuestro "
+"ejército."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:40
 msgid ""
 "We can then also use their access to the lake in order to explore more land."
 msgstr ""
+"Podríamos también usar el paso por el lago para explorar más territorios."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:46
 msgid "On the good way"
-msgstr ""
+msgstr "Por el buen camino"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:47
 msgid ""
