@@ -343,6 +343,10 @@ std::vector<Soldier*> Warehouse::SoldierControl::stationed_soldiers() const {
 	return present_soldiers();
 }
 
+std::vector<Soldier*> Warehouse::SoldierControl::associated_soldiers() const {
+	return stationed_soldiers();
+}
+
 Quantity Warehouse::SoldierControl::min_soldier_capacity() const {
 	return 0;
 }
