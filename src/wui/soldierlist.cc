@@ -276,7 +276,8 @@ void SoldierPanel::think() {
 		uint32_t health = soldier->get_current_health();
 		bool present = b->is_present(*soldier);
 
-		if (health != icon.cache_health || level != icon.cache_level || present != icon.cache_is_present) {
+		if (health != icon.cache_health || level != icon.cache_level ||
+		    present != icon.cache_is_present) {
 			icon.cache_level = level;
 			icon.cache_health = health;
 			icon.cache_is_present = present;
