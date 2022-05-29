@@ -275,8 +275,8 @@ msgid ""
 "building."
 msgstr ""
 "Feu clic al botó «Construeix camí». Llavors, feu clic als marcadors de "
-"colors en el mapa per guiar el camí fins que arribeu a la bandera del davant"
-" de l'edifici objectiu."
+"colors del mapa per guiar el camí fins que arribeu a la bandera del davant "
+"de l'edifici objectiu."
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""

@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid "Usage:"
@@ -39,7 +39,7 @@ msgstr "widelands <option0>=<value0> ... <optionN>=<valueN>"
 
 #: ../../src/wlapplication_messages.cc:52
 msgid "widelands <save.wgf>/<replay.wrpl>"
-msgstr ""
+msgstr "widelands <save.wgf>/<replay.wrpl>"
 
 #: ../../src/wlapplication_messages.cc:54
 #: ../../src/wlapplication_messages.cc:56
@@ -69,7 +69,7 @@ msgstr "Utilisez le Dossier spécifié pour les fichiers locaux de Widelands."
 
 #: ../../src/wlapplication_messages.cc:66
 msgid "Use the specified locale."
-msgstr ""
+msgstr "Utiliser les paramètres régionaux spécifiés"
 
 #. * TRANSLATORS: The … is not used on purpose to increase readability on
 #. monospaced terminals
@@ -335,7 +335,7 @@ msgstr "Options graphiques :"
 
 #: ../../src/wlapplication_messages.cc:174
 msgid "Whether to use the whole display for the game screen."
-msgstr ""
+msgstr "Utiliser l'écran entier pour afficher le jeu"
 
 #: ../../src/wlapplication_messages.cc:175
 msgid "Whether to start the game in a maximized window."
