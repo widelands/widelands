@@ -632,7 +632,7 @@ msgid ""
 "created from time to time. To do so, you will have to go back to the main "
 "menu and choose ‘Single Player’ → ‘Load Game’. And please be a bit more "
 "careful next time."
-msgstr "Podeu recarregar la partida des d'alguna desada anterior. Afortunadament, es creen desades automàtiques cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega partida». I sigues una mica més curós el proper cop."
+msgstr "Podeu recarregar la partida des d'alguna desada anterior. Afortunadament, es creen desades automàtiques cada cert interval de temps. Per fer-ho, torneu al menú principal i escolliu «Un jugador» → «Carrega una partida». I sigueu una mica més curós el proper cop."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:416
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:418
@@ -664,14 +664,14 @@ msgstr "Quan hi ha moltes roques, podeu considerar construir una altra pedrera. 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid "Census and Status"
-msgstr "Cens i estat"
+msgstr "Noms dels edificis i estat"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "While we wait, I’ll quickly show you another useful feature. It is sometimes"
 " hard to tell all the buildings apart. Widelands offers a feature to show "
 "label texts called the ‘census’ over the buildings."
-msgstr "Mentre esperem, us mostraré ràpidament una opció molt útil. Les obres en construcció i molts edificis són pareguts i costa distingir-los. El Widelands té una opció per mostrar etiquetes amb el nom dels edificis. S'anomena «cens»."
+msgstr "Mentre esperem, us mostraré ràpidament una opció molt útil. Les obres en construcció i molts edificis són pareguts i costa distingir-los. El Widelands té una opció per mostrar etiquetes amb el nom dels edificis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 #, lua-format
@@ -679,11 +679,11 @@ msgid ""
 "In order to show or hide the building census labels, you can select the "
 "‘Show Census’ / ‘Hide Census’ entry from the ‘Show / Hide’ menu on the "
 "bottom, or press the ‘%s’ key on the keyboard."
-msgstr "Per tal de mostrar o amagar les etiquetes de cens de construcció, podeu seleccionar l'entrada «Mostra/Amaga cens» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
+msgstr "Per tal de mostrar o amagar les etiquetes dels noms dels edificis de construcció, podeu seleccionar l'entrada «Mostra/Amaga els noms dels edificis» del menú «Mostra/Amaga» que hi ha a la part inferior de la pantalla. També podeu prémer la tecla «%s»."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:441
 msgid "Let me enable the census for you."
-msgstr "Deixeu-me activar-vos el cens."
+msgstr "Deixeu-me mostrar-vos els noms dels edificis."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:452
@@ -709,7 +709,7 @@ msgid ""
 "In addition to the buildings’ census, you can also activate status labels on"
 " them. This will display information about the productivity of buildings or "
 "the progress of construction sites."
-msgstr "A més a més del cens dels edificis, també podeu activar les etiquetes d'estat. Mostren informació de la productivitat dels edificis o del progrés de construcció."
+msgstr "A més a més dels noms dels edificis, també podeu activar les etiquetes d'estat. Mostren informació de la productivitat dels edificis o del progrés de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:471
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
@@ -862,7 +862,7 @@ msgstr "Han arribat missatges!"
 msgid ""
 "You received some messages. See how the button at the bottom of the screen "
 "has changed appearance?"
-msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d'aparença perquè hi ha nous missatges que encara no heu llegit."
+msgstr "Heu rebut alguns missatges. El botó de la part de baix ha canviat d'aparença perquè hi ha missatges nous que encara no heu llegit."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:564
 msgid "Expand your territory"
