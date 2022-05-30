@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-01 03:54+0000\n"
+"POT-Creation-Date: 2022-05-25 03:36+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -617,7 +617,7 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
 msgstr ""
 
@@ -713,8 +713,8 @@ msgstr "mina"
 msgid "port"
 msgstr "porta"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1024,6 +1024,7 @@ msgid "%u Player"
 msgid_plural "%u Players"
 msgstr[0] "%u Jogador"
 msgstr[1] "%u Jogadores"
+msgstr[2] "%u Jogadores"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:432
 msgid "Suggested Teams:"
@@ -1435,8 +1436,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1674,6 +1675,7 @@ msgid "%1$u add-on with wrong version: %2$s"
 msgid_plural "%1$u add-ons with wrong version: %2$s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/logic/addons.cc:201
 #, c-format
@@ -1681,6 +1683,7 @@ msgid "%1$u missing add-on: %2$s"
 msgid_plural "%1$u missing add-ons: %2$s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/logic/addons.cc:209
 #, c-format
@@ -1703,6 +1706,7 @@ msgid "%u missing add-on"
 msgid_plural "%u missing add-ons"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/logic/addons.cc:222
 #, c-format
@@ -1710,6 +1714,7 @@ msgid "%u add-on with wrong version"
 msgid_plural "%u add-ons with wrong version"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #. * TRANSLATORS: This map or savegame uses no add-ons
 #: ../../src/logic/addons.cc:233
@@ -1901,6 +1906,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
+msgstr[2] "%1% soldados (+%2%)"
 
 #. * TRANSLATORS: Number of soldiers stationed at a militarysite.
 #: ../../src/logic/map_objects/tribes/militarysite.cc:425
@@ -1908,6 +1914,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently open soldier slots in the building. %3% is the maximum number of
@@ -1917,6 +1924,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
 msgstr[1] "%1%(+%2%) soldados (+%3%)"
+msgstr[2] "%1%(+%2%) soldados (+%3%)"
 
 #. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
 #. currently
@@ -1926,6 +1934,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
+msgstr[2] "%1%(+%2%) soldados"
 
 #. * TRANSLATORS: Militarysite is being attacked
 #: ../../src/logic/map_objects/tribes/militarysite.cc:951
@@ -2059,6 +2068,7 @@ msgid "%s is missing"
 msgid_plural "%s are missing"
 msgstr[0] "falta %s"
 msgstr[1] "faltam %s"
+msgstr[2] "faltam %s"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
@@ -2069,6 +2079,7 @@ msgid "Produced %s"
 msgid_plural "Produced %s"
 msgstr[0] "Produzi %s"
 msgstr[1] "Produzi %s"
+msgstr[2] "Produzi %s"
 
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
@@ -2079,6 +2090,7 @@ msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Recrutou %s"
 msgstr[1] "Recrutou %s"
+msgstr[2] "Recrutou %s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:1850
 msgid "No soldier found for this training level!"
@@ -2393,7 +2405,7 @@ msgid ""
 "The replay has desynced and the game was paused.\n"
 "You are probably watching a replay created with another version of Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
 msgstr ""
 
@@ -2585,6 +2597,7 @@ msgid "%u add-on mismatch detected:\n"
 msgid_plural "%u add-on mismatches detected:\n"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/network/gameclient.cc:758
 #, c-format
@@ -2741,6 +2754,7 @@ msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li segundo"
 msgstr[1] "%li segundos"
+msgstr[2] "%li segundos"
 
 #: ../../src/network/internet_gaming.cc:113
 msgid ""
@@ -2813,6 +2827,7 @@ msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "O atraso do Servidor é de %d segundo."
 msgstr[1] "O atraso do Servidor é de %d segundos."
+msgstr[2] "O atraso do Servidor é de %d segundos."
 
 #: ../../src/network/internet_gaming.cc:517
 #, c-format
@@ -3234,6 +3249,7 @@ msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
 msgstr[1] "%d minutos"
+msgstr[2] "%d minutos"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:410
@@ -3242,6 +3258,7 @@ msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d pixel"
 msgstr[1] "%d píxeis"
+msgstr[2] "%d píxeis"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:413
@@ -3250,6 +3267,7 @@ msgid "%d field"
 msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:49
 #: ../../src/wui/watchwindow.cc:76
@@ -3284,77 +3302,71 @@ msgstr ""
 msgid "Version:"
 msgstr ""
 
-#. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:534
-#, c-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
-
-#: ../../src/ui_fsmenu/about.cc:73
+#: ../../src/ui_fsmenu/about.cc:72
 msgid "Operating System:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:75
+#: ../../src/ui_fsmenu/about.cc:74
 msgid "MacOS"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:77
+#: ../../src/ui_fsmenu/about.cc:76
 msgid "Windows (64 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:79
+#: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (32 bit)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:81
+#: ../../src/ui_fsmenu/about.cc:80
 msgid "Linux"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:83
+#: ../../src/ui_fsmenu/about.cc:82
 msgid "FreeBSD"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:85
+#: ../../src/ui_fsmenu/about.cc:84
 msgid "Unix"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:87
+#: ../../src/ui_fsmenu/about.cc:86
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:90
+#: ../../src/ui_fsmenu/about.cc:89
 msgid "Locale:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:91
+#: ../../src/ui_fsmenu/about.cc:90
 msgid "Home Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:92
+#: ../../src/ui_fsmenu/about.cc:91
 msgid "Configuration File:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:93
+#: ../../src/ui_fsmenu/about.cc:92
 msgid "Data Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:94
+#: ../../src/ui_fsmenu/about.cc:93
 msgid "Locale Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:95
+#: ../../src/ui_fsmenu/about.cc:94
 msgid "Executable Directory:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:102 ../../src/ui_fsmenu/about.cc:149
+#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
 msgid "Technical Info"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:131
+#: ../../src/ui_fsmenu/about.cc:130
 msgid "Copy"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:132
+#: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy the technical report to the clipboard"
 msgstr ""
 
@@ -3706,6 +3718,7 @@ msgid "Are you certain that you want to upgrade this %u add-on?"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:622
 #, c-format
@@ -3850,6 +3863,7 @@ msgid "Upgrade the following %u add-on:"
 msgid_plural "Upgrade the following %u add-ons:"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1140
 #, c-format
@@ -3892,6 +3906,7 @@ msgid "%u Dependency Error"
 msgid_plural "%u Dependency Errors"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:1249
 msgid ""
@@ -4080,6 +4095,7 @@ msgid_plural ""
 "be discarded."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:417
 #: ../../src/ui_fsmenu/addons/packager.cc:444
@@ -4106,6 +4122,7 @@ msgid_plural ""
 "Do you really want to discard all changes to the following %u add-ons?"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:448
 msgid "Discard Changes"
@@ -4125,6 +4142,7 @@ msgid_plural ""
 "disk?"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:473
 msgid ""
@@ -4564,6 +4582,7 @@ msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
@@ -4580,6 +4599,7 @@ msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:860
 #, c-format
@@ -4786,6 +4806,7 @@ msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:471
 #, c-format
@@ -4793,6 +4814,7 @@ msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:477
 #, c-format
@@ -4800,6 +4822,7 @@ msgid "%u comment"
 msgid_plural "%u comments"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:479
 #, c-format
@@ -4807,6 +4830,7 @@ msgid "%u screenshot"
 msgid_plural "%u screenshots"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:42
 #, c-format
@@ -5426,11 +5450,11 @@ msgstr "Sair do Widelands"
 msgid "Quit the game"
 msgstr ""
 
-#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
-msgid "Version %1$s (%2$s)"
-msgstr "Versão %1$s (%2$s)"
+msgid "Version %1$s"
+msgstr ""
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -6205,7 +6229,7 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
@@ -7035,6 +7059,7 @@ msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u soldado"
 msgstr[1] "%u soldados"
+msgstr[2] "%u soldados"
 
 #: ../../src/wui/attack_window.cc:249
 msgid "Number of soldiers"
@@ -7168,9 +7193,9 @@ msgstr "Portos"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7558,8 +7583,8 @@ msgstr "Substituir o jogador desconectado pelo AI selecionado e continuar a joga
 msgid "AI for the disconnected player"
 msgstr "AI para o jogador desconectado"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7675,6 +7700,7 @@ msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "Restaurar a %d mensagem selecionada"
 msgstr[1] "Restaurar as %d mensagens selecionadas"
+msgstr[2] "Restaurar as %d mensagens selecionadas"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:633
@@ -7691,6 +7717,7 @@ msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "Arquivar a %d mensagem selecionada"
 msgstr[1] "Arquivar as %d mensagens selecionadas"
+msgstr[2] "Arquivar as %d mensagens selecionadas"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:648
@@ -7782,6 +7809,7 @@ msgid "%d file"
 msgid_plural "%d files"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #. * TRANSLATORS: %1% = number of selected directories, %2% = number of
 #. selected files
@@ -7790,6 +7818,7 @@ msgid "Selected %1% directory and %2%:"
 msgid_plural "Selected %1% directories and %2%:"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../src/wui/gamedetails.cc:140
 msgid "Directory Name:"
@@ -7961,11 +7990,11 @@ msgstr ""
 msgid "Add ware"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Hide controls"
 msgstr ""
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Show controls"
 msgstr ""
 
@@ -7975,44 +8004,44 @@ msgid "Map View"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Hide Minimap"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:283
+#: ../../src/wui/interactive_base.cc:286
 msgid "Show Minimap"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:289
+#: ../../src/wui/interactive_base.cc:292
 msgid "Zoom +"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:294
+#: ../../src/wui/interactive_base.cc:297
 msgid "Reset zoom"
 msgstr "Reiniciar zoom"
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:299
+#: ../../src/wui/interactive_base.cc:302
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:727
+#: ../../src/wui/interactive_base.cc:730
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:729
+#: ../../src/wui/interactive_base.cc:732
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1537
+#: ../../src/wui/interactive_base.cc:1540
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1541
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Screenshot saved"
 msgstr ""
 
@@ -8114,6 +8143,12 @@ msgstr ""
 msgid "Pause the Game"
 msgstr ""
 
+#. * TRANSLATORS: actual_speed (desired_speed)
+#: ../../src/wui/interactive_gamebase.cc:534
+#, c-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:44
@@ -8157,6 +8192,7 @@ msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u nova mensagem"
 msgstr[1] "%u novas mensagens"
+msgstr[2] "%u novas mensagens"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:153
@@ -8320,6 +8356,7 @@ msgid "%1%d"
 msgid_plural "%1%d"
 msgstr[0] "%1%D"
 msgstr[1] "%1%D"
+msgstr[2] "%1%D"
 
 #. * TRANSLATORS: hour(s). Keep this as short as possible. Used in statistics.
 #: ../../src/wui/plot_area.cc:105
@@ -8328,6 +8365,7 @@ msgid "%1%h"
 msgid_plural "%1%h"
 msgstr[0] "%1%H"
 msgstr[1] "%1%H"
+msgstr[2] "%1%H"
 
 #. * TRANSLATORS: minute(s). Keep this as short as possible. Used in
 #. statistics.
@@ -8337,6 +8375,7 @@ msgid "%1%m"
 msgid_plural "%1%m"
 msgstr[0] "%1%M"
 msgstr[1] "%1%M"
+msgstr[2] "%1%M"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:121
@@ -8434,6 +8473,7 @@ msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] "Queres mesmo apagar este %d jogo?"
 msgstr[1] "Queres mesmo apagar estes %d jogos?"
+msgstr[2] "Queres mesmo apagar estes %d jogos?"
 
 #: ../../src/wui/savegamedeleter.cc:96
 msgid "Error Deleting File!"
@@ -8456,6 +8496,7 @@ msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
 msgstr[0] "Não foi possível apagar %d jogo."
 msgstr[1] "Não foi possível apagar %d jogos."
+msgstr[2] "Não foi possível apagar %d jogos."
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "Do you really want to delete this replay?"
@@ -8469,6 +8510,7 @@ msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] "Queres mesmo apagar esta %d repetição?"
 msgstr[1] "Queres mesmo apagar estas %d repetições?"
+msgstr[2] "Queres mesmo apagar estas %d repetições?"
 
 #: ../../src/wui/savegamedeleter.cc:137
 msgid "The replay could not be deleted."
@@ -8483,6 +8525,7 @@ msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
 msgstr[0] "Não foi possível apagar %d repetição."
 msgstr[1] "Não foi possível apagar %d repetições."
+msgstr[2] "Não foi possível apagar %d repetições."
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
