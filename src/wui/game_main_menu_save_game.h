@@ -85,8 +85,7 @@ private:
 
 	std::string curdir_;
 	const std::string illegal_filename_tooltip_;
-
-	UI::Panel::ModalGuard modal_;
+        UI::Panel::ModalGuard modal_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
