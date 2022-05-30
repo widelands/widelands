@@ -21,8 +21,6 @@
 #include "base/test.h"
 #include "notifications/notifications.h"
 
-TEST_EXECUTABLE(notifications, true)
-
 struct SimpleNote {
 	CAN_BE_SENT_AS_NOTE(100)
 
