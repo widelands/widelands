@@ -143,8 +143,6 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	set_thinks(false);
 	layout();
 
-	set_can_be_pinned(false);
-
 	initialization_complete();
 }
 
