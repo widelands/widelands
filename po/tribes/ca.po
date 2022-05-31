@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-25 03:36+0000\n"
+"POT-Creation-Date: 2022-05-28 03:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1701,7 +1701,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de pedra"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1713,17 +1712,17 @@ msgstr "Taller de pedra"
 msgid "making a shovel"
 msgstr "fabricar una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
 msgid "making a felling ax"
 msgstr "fer una destral d'arbres"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1736,8 +1735,6 @@ msgstr "fabricar un pic"
 msgid "making a machete"
 msgstr "fer un matxet"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1748,7 +1745,6 @@ msgstr "fer un matxet"
 msgid "making kitchen tools"
 msgstr "fabricar estris de cuina"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1922,8 +1918,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Tenda del cuidador de la jungla"
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3828,7 +3824,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "El cultivador de baies que viu aquí no pot trobar arbustos amb baies a la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de baies o desmantellar o destruir aquest edifici."
+msgstr "El cultivador de baies que viu aquí no pot trobar arbustos de baies a la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de baies o desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -3840,17 +3836,17 @@ msgstr "Sala de begudes"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Masoveria de civada"
+msgstr "Masoveria d'ordi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:81
 msgid "planting barley"
-msgstr "plantar civada"
+msgstr "plantar ordi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
 msgid "harvesting barley"
-msgstr "recol·lectar civada"
+msgstr "recol·lectar ordi"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
 msgctxt "frisians_building"
@@ -4755,31 +4751,31 @@ msgstr "Cendres"
 #: ../../data/tribes/immovables/barleyfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
-msgstr "Camp de civada (recol·lectat)"
+msgstr "Camp d'ordi (recol·lectat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (medium)"
-msgstr "Camp de civada (civada per madurar)"
+msgstr "Camp d'ordi (ordi per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr "Camp de civada (civada madurada)"
+msgstr "Camp d'ordi (ordi madurat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (small)"
-msgstr "Camp de civada (jove)"
+msgstr "Camp d'ordi (jove)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr "Camp de civada (molt jove)"
+msgstr "Camp d'ordi (molt jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
@@ -5256,8 +5252,8 @@ msgstr "Arbre balsa"
 msgid "Balsa Tree (Pole)"
 msgstr "Arbre balsa (jove)"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS: This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5454,7 +5450,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldat"
 msgstr[1] "%1%(+%2%) soldats"
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -8130,13 +8125,13 @@ msgstr "Fusta de balsa"
 #: ../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr "Civada"
+msgstr "Ordi"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:8
 msgctxt "ware"
 msgid "Basket"
-msgstr "Cistella"
+msgstr "Cistell"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/beer/init.lua:8
