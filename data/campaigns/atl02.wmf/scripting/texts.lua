@@ -305,7 +305,7 @@ function spidercloth_2(leader)
    return r
 end
 
-function spidercloth_3(leader) 
+function spidercloth_3(leader)
    r = {
       {
          -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
