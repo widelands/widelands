@@ -26,6 +26,8 @@ Maletus = game.players[2]
 -- global variables and functions
 -- =================
 
+leader = 1 -- 1 = Jundlina, 2 = Sidolus
+
 include "map:scripting/texts.lua"
 include "map:scripting/init_Kalitath.lua"
 include "map:scripting/init_Maletus.lua"

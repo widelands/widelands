@@ -12,7 +12,7 @@ function iron()
       atlanteans_toolsmithy = 1,
    }) do sleep(3731) end
    tools.done = true
-   msg_boxes(tools_available)
+   msg_boxes(tools_available(leader))
    run(mining)
    --Kalitath:set_attack_forbidden(2, false)
    --Maletus:set_attack_forbidden(3, false)
@@ -26,21 +26,17 @@ function mining()
       atlanteans_goldmine = 1
    }) do sleep(3731) end
    mining.done = true
-   if Kalitath:is_attack_forbidden(1) == true then
-      msg_boxes(mining_established_2)
-   else
-      msg_boxes(mining_established_1)
-   end
+   msg_boxes(mining_established(leader))
 end
 
 function spidercloth()
    sleep(300000) -- sleep until the second ship is unloaded
    while count_in_warehouses("spidercloth") > 2 do sleep(2323) end
    local cloth = add_campaign_objective(obj_spidercloth)
-   msg_boxes(spidercloth_1)
+   msg_boxes(spidercloth_1(leader))
 
    if #p1:get_buildings("atlanteans_farm") < 1 then
-      msg_boxes(spidercloth_2)
+      msg_boxes(spidercloth_2(leader))
    end
 
    while not check_for_buildings(p1, {
@@ -49,11 +45,7 @@ function spidercloth()
       atlanteans_weaving_mill = 1,
    }) do sleep(3731) end
    cloth.done = true
-   if Kalitath:is_attack_forbidden(1) then
-      msg_boxes(spidercloth_3a)
-   else
-      msg_boxes(spidercloth_3)
-   end
+   msg_boxes(spidercloth_3(leader))
 end
 
 function enemy()
@@ -135,6 +127,7 @@ function uncertain_allies()
    sleep(60000)
    msg_boxes(tribute)
    Kalitath:set_attack_forbidden(1, true)
+   leader = 2
    trade = add_campaign_objective(obj_tribute)
    run(patience)
    reveal_concentric(p1, map:get_field(112,150), 5, 500)
@@ -215,6 +208,7 @@ function patience()
       end
       if count == 6001 then
          msg_boxes(alliance_broken)
+         msg_boxes(suicide)
          wl.ui.MapView():close()
       end
       sleep(500)
@@ -226,6 +220,7 @@ function patience()
       sleep(4235)
       if game.time > end_time then
          msg_boxes(alliance_broken_1)
+         msg_boxes(suicide)
          wl.ui.MapView():close()
       end
    end
@@ -284,7 +279,7 @@ function infrastructure()
       atlanteans_sawmill = 1,
    }) do sleep(3731) end
    basic_infrastructure.done = true
-   msg_boxes(infrastructure_1)
+   msg_boxes(infrastructure_1(leader))
 end
 
 function intro()
