@@ -558,4 +558,8 @@ void BaseDropdown::enable_textinput() {
 	set_handle_textinput(true);
 }
 
+std::string BaseDropdown::get_filter_text() {
+        return current_filter_;
+}
+
 }  // namespace UI
