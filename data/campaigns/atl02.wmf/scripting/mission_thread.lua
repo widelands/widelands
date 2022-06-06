@@ -269,6 +269,7 @@ function final()
    p1:set_attack_forbidden(3, false)
    defeat_kalitath = add_campaign_objective(obj_defeat_kalitath)
    while not Kalitath.defeated do sleep(6000) end
+   defeat_kalitath.done = true
    msg_boxes(victory)
 end
 
