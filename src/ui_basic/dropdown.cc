@@ -19,6 +19,7 @@
 #include "ui_basic/dropdown.h"
 
 #include "base/i18n.h"
+#include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -542,8 +543,13 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {
-		current_filter_.pop_back();
-		apply_filter();
+                size_t pos = current_filter_.size() - 1;
+                while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
+                        pos--;
+                }
+
+                current_filter_.erase(pos);
+                apply_filter();
 	}
 }
 bool BaseDropdown::is_filtered() {
