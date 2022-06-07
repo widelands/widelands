@@ -2035,9 +2035,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[64] = (field.enemy_wh_nearby) ?
                            std::abs(management_data.get_military_number_at(135)) :
                            -std::abs(management_data.get_military_number_at(135));
-		score_parts[70] =
-		   management_data.neuron_pool[32].get_result_safe(field.future_military_loneliness / 50, kAbsValue);
-
+		score_parts[70] = management_data.neuron_pool[32].get_result_safe(
+		   field.future_military_loneliness / 50, kAbsValue);
 
 	} else {  // for expansion or inner land
 
@@ -2108,9 +2107,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		    spots_avail.at(Widelands::BUILDCAPS_BIG) <= 2) {
 			score_parts[65] = -10 * std::abs(management_data.get_military_number_at(54));
 		}
-		score_parts[71] =
-		   management_data.neuron_pool[43].get_result_safe(field.future_military_loneliness / 50, kAbsValue);
-
+		score_parts[71] = management_data.neuron_pool[43].get_result_safe(
+		   field.future_military_loneliness / 50, kAbsValue);
 	}
 
 	// common inputs
@@ -2181,9 +2179,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   (field.unowned_mines_spots_nearby == 0 && mine_fields_stat.count_types() <= 4) ?
          -std::abs(management_data.get_military_number_at(159)) :
          0;
-		
-	score_parts[69] =
-		   management_data.neuron_pool[30].get_result_safe(field.future_military_loneliness / 50, kAbsValue);
+
+	score_parts[69] = management_data.neuron_pool[30].get_result_safe(
+	   field.future_military_loneliness / 50, kAbsValue);
 
 	for (int32_t part : score_parts) {
 		field.military_score_ += part;
