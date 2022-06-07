@@ -1008,14 +1008,14 @@ msgstr "Fins ara, sembla que cap pregària ha funcionat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
-msgstr "Una aldea amiga se us ha unit!"
+msgstr "Una vila amiga se us ha unit!"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr "Hem trobat una aldea amb gent amistosa i productiva, impressionats per les nostres riqueses, tecnologies i forces."
+msgstr "Hem trobat una vila amb gent amistosa i productiva, impressionats per les nostres riqueses, tecnologies i forces."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531
