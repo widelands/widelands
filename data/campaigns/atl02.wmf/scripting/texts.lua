@@ -266,7 +266,7 @@ function spidercloth_1(leader)
    r = {
       {
          -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
-         title = _("Opol Visits %s"):bformat(name[leader]),
+         title = _("Opol Reports Serious Shortages"),
          body = opol(
             -- TRANSLATORS: Opol (placeholder is the name of the current leader)
             _([[May Satul warm you, %s. As the highest weaver of the guild I have bad news for you. I just realized that we are running out of spidercloth. This is a most perilous case, for as you know, spidercloth is needed for many buildings.]]):bformat(name[leader])
@@ -309,7 +309,7 @@ function spidercloth_3(leader)
    r = {
       {
          -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
-         title = _("Opol Seeks Out %s"):bformat(name[leader]),
+         title = _("Opol Reports Success"),
          body = opol(
             -- TRANSLATORS: Opol (placeholder is the name of the current leader)
             _([[%s, may Satul warm you! The weaving mill and spider farm are complete and the weavers’ guild can start their work again. I promise we will deliver the finest cloth and some tabards soon. Maybe we can build a gold spinning mill later on to make better tabards as well.]]):bformat(name[leader]))
