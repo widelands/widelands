@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-01 04:16+0000\n"
+"POT-Creation-Date: 2022-06-04 03:26+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1704,6 +1704,7 @@ msgstr "Taller de pedra"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1712,9 +1713,9 @@ msgstr "Taller de pedra"
 msgid "making a shovel"
 msgstr "fabricar una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
@@ -1723,6 +1724,7 @@ msgstr "fer una destral d'arbres"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1735,9 +1737,9 @@ msgstr "fabricar un pic"
 msgid "making a machete"
 msgstr "fer un matxet"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
@@ -1748,6 +1750,7 @@ msgstr "fabricar estris de cuina"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1762,9 +1765,9 @@ msgstr "fabricar un martell"
 msgid "making a chisel"
 msgstr "fer un cisell"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1920,7 +1923,6 @@ msgstr "Tenda del cuidador de la jungla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2571,13 +2573,13 @@ msgstr "teixir tela de seda d'aranya"
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:75
 msgid "tailoring a tabard"
-msgstr "confeccionant un tabard"
+msgstr "confeccionar un tabard"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:88
 msgid "tailoring a golden tabard"
-msgstr "confeccionant un tabard daurat"
+msgstr "confeccionar un tabard daurat"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:8
@@ -5532,7 +5534,7 @@ msgstr "Comenceu la partida amb tres vaixells amb uns quants recursos enmig de l
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
 msgid "Fortified Village"
-msgstr "Aldea fortificada"
+msgstr "Vila fortificada"
 
 #. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
 #. condition
