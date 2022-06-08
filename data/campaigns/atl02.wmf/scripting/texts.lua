@@ -263,6 +263,7 @@ initial_messages1 = {
 } -- end of initial messages.
 
 function spidercloth_1(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
@@ -283,10 +284,12 @@ function spidercloth_1(leader)
             .. new_objectives(obj_spidercloth)
       }
    }
+   pop_textdomain()
    return r
 end
 
 function spidercloth_2(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          title = _("Opol Makes A Point"),
@@ -302,10 +305,12 @@ function spidercloth_2(leader)
             _([[I see the risk, Opol. Thank you for reporting. We will build a farm immediately.]]))
       }
    }
+   pop_textdomain()
    return r
 end
 
 function spidercloth_3(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
@@ -322,6 +327,7 @@ function spidercloth_3(leader)
             _([[This is good news indeed, Opol. You may go back to your work now, and may Satul warm you and the weavers’ guild!]]))
       }
    }
+   pop_textdomain()
    return r
 end
 
@@ -371,6 +377,7 @@ allies = {
 }
 
 function infrastructure_1(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          title = _("Building Material Ensured"),
@@ -385,10 +392,12 @@ function infrastructure_1(leader)
             _([[This is good news indeed, Loftomor. Now we can consider constructing more sophisticated buildings to enlarge our economy. Please advise whenever you feel we are missing necessary buildings.]]))
       }
    }
+   pop_textdomain()
    return r
 end
 
 function tools_available(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          title = _("Tool Supply Ensured"),
@@ -404,10 +413,12 @@ function tools_available(leader)
             .. new_objectives(obj_mining)
       }
    }
+   pop_textdomain()
    return r
 end
 
 function mining_established(leader)
+   push_textdomain("scenario_atl02.wmf")
    r = {
       {
          title = _("Mining Established"),
@@ -422,6 +433,7 @@ function mining_established(leader)
             _([[Well done, Loftomor, well done. May Satul warm our strong and brave miners. But now we need to ensure we can feed them. We need to build up bakeries and smokeries and all buildings to supply them.]]))
       }
    }
+   pop_textdomain()
    return r
 end
 
