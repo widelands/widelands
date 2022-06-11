@@ -629,7 +629,7 @@ trading = {
    {
       title = _("Trading Post Built"),
       body = loftomor(
-         -- TRANSLATORS: loftomor
+         -- TRANSLATORS: Loftomor
          _([[Sidolus, may Satul warm you! We have finished the new trading post. I hope this will allow Jundlina to return to us soon.]]))
    },
    {
