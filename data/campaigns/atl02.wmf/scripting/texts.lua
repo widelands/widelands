@@ -279,7 +279,7 @@ function spidercloth_1(leader)
           -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
           title = _("%s Replies"):bformat(name[leader]),
           body = current_leader(leader,
-            -- TRANSLATORS: either Jundlina or Sidolus depending who is in chargea
+            -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
             _([[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand the urgency. We need to build a complete spidercloth production instantly.]]))
             .. new_objectives(obj_spidercloth)
       }
