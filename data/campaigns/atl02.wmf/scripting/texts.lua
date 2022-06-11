@@ -386,6 +386,7 @@ function infrastructure_1(leader)
             _([[May Satul warm you, %s! We have finished our supply of building materials.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Cheers"):bformat(name[leader]),
          body = current_leader(leader,
             -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
