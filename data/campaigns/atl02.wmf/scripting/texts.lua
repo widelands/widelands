@@ -425,7 +425,7 @@ function mining_established(leader)
       {
          title = _("Mining Established"),
          body = loftomor(
-            -- TRANSLATORS: loftomor (placeholder is the name of the current leader)
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[%s, may Satul warm you! Another issue solved. We have found some resources and built a mine of each type.]]):bformat(name[leader]))
       },
       {
