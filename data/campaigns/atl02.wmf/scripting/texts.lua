@@ -382,7 +382,7 @@ function infrastructure_1(leader)
       {
          title = _("Building Material Ensured"),
          body = loftomor(
-            -- TRANSLATORS: loftomor
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[May Satul warm you, %s! We have finished our supply of building materials.]]):bformat(name[leader]))
       },
       {
