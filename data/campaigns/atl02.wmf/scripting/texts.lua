@@ -635,7 +635,7 @@ trading = {
    {
       title = _("Sidolus Agrees"),
       body = sidolus(_("Sidolus"),
-         -- TRANSLATORS: sidolus
+         -- TRANSLATORS: Sidolus
          _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarian.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: sidolus
