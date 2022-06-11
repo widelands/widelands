@@ -429,6 +429,7 @@ function mining_established(leader)
             _([[%s, may Satul warm you! Another issue solved. We have found some resources and built a mine of each type.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Is Excited"):bformat(name[leader]),
          body = current_leader(leader,
                -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
