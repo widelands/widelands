@@ -543,13 +543,13 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {
-                size_t pos = current_filter_.size() - 1;
-                while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
-                        pos--;
-                }
+		size_t pos = current_filter_.size() - 1;
+		while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
+			pos--;
+		}
 
-                current_filter_.erase(pos);
-                apply_filter();
+		current_filter_.erase(pos);
+		apply_filter();
 	}
 }
 bool BaseDropdown::is_filtered() {
@@ -565,7 +565,7 @@ void BaseDropdown::enable_textinput() {
 }
 
 std::string BaseDropdown::get_filter_text() {
-        return current_filter_;
+	return current_filter_;
 }
 
 }  // namespace UI

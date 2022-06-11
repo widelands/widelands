@@ -168,7 +168,7 @@ public:
 
 	bool is_filtered();
 
-        std::string get_filter_text();
+	std::string get_filter_text();
 
 protected:
 	/// Add an element to the list
