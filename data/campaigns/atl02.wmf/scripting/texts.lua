@@ -197,7 +197,7 @@ initial_messages = {
          _([[And one failed the test: the last days of loading was done in chaos and without much planning and so one of our ships ended up carrying most of the heavy wares in our possession.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
+         _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas’ forces and we lost most men and all wares it carried.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
          _([[All of us were fiercely afraid. We expected the other ships to be sunken as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
@@ -279,7 +279,7 @@ function spidercloth_1(leader)
           -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
           title = _("%s Replies"):bformat(name[leader]),
           body = current_leader(leader,
-            -- TRANSLATORS: either Jundlina or Sidolus depending who is in chargea
+            -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
             _([[May Satul warm you too, Opol. I wanted to delay production of spidercloth, but I understand the urgency. We need to build a complete spidercloth production instantly.]]))
             .. new_objectives(obj_spidercloth)
       }
@@ -382,10 +382,11 @@ function infrastructure_1(leader)
       {
          title = _("Building Material Ensured"),
          body = loftomor(
-            -- TRANSLATORS: loftomor
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[May Satul warm you, %s! We have finished our supply of building materials.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Cheers"):bformat(name[leader]),
          body = current_leader(leader,
             -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
@@ -402,10 +403,11 @@ function tools_available(leader)
       {
          title = _("Tool Supply Ensured"),
          body = loftomor(
-            -- TRANSLATORS: loftomor (placeholder is the name of the current leader)
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[%s, may Satul warm you! We have made some progress in building up our tool industry.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Enchanted"):bformat(name[leader]),
          body = current_leader(leader,
             -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
@@ -423,10 +425,11 @@ function mining_established(leader)
       {
          title = _("Mining Established"),
          body = loftomor(
-            -- TRANSLATORS: loftomor (placeholder is the name of the current leader)
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[%s, may Satul warm you! Another issue solved. We have found some resources and built a mine of each type.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Is Excited"):bformat(name[leader]),
          body = current_leader(leader,
                -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
@@ -626,16 +629,16 @@ trading = {
    {
       title = _("Trading Post Built"),
       body = loftomor(
-         -- TRANSLATORS: loftomor
+         -- TRANSLATORS: Loftomor
          _([[Sidolus, may Satul warm you! We have finished the new trading post. I hope this will allow Jundlina to return to us soon.]]))
    },
    {
       title = _("Sidolus Agrees"),
       body = sidolus(_("Sidolus"),
-         -- TRANSLATORS: sidolus
+         -- TRANSLATORS: Sidolus
          _([[Well done, Loftomor, well done. May Satul warm our princess and our whole people. Now we need to begin sending goods to this Barbarian.]])
          .. paragraphdivider() ..
-         -- TRANSLATORS: sidolus
+         -- TRANSLATORS: Sidolus
          _([[I think we should start with the deliveries we could afford the easiest. But we need to find more metals for sure.]]))
    }
 }
@@ -695,7 +698,7 @@ tribute_started = {
          _([[Strangers, I almost forgot to mention, but it should have been clear anyway.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
+         _([[We are in urgent need of your supply, so hurry up with your deliveries.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[If you fail to deliver everything within three and a half hours, we need to assume you are just playing along with us. So keep an eye on the time as we will not give any further warning.]]))
@@ -731,7 +734,7 @@ suicide = {
       title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
+         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
    },
    {
       title = _("Defeated!"),
