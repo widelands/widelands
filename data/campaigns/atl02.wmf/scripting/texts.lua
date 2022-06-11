@@ -734,7 +734,7 @@ suicide = {
       title = _("Jundlina’s Suicide"),
       body = jundlina(_("Jundlina"),
          -- TRANSLATORS: Jundlina
-         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me then be your slave. May Satul avenge my sacrifice.]]))
+         _([[Barbarian, I am an Atlantean princess and I will never go into slavery. I have prepared myself for this eventuality and will rather die from the poison I carry with me than be your slave. May Satul avenge my sacrifice.]]))
    },
    {
       title = _("Defeated!"),
