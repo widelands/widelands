@@ -698,7 +698,7 @@ tribute_started = {
          _([[Strangers, I almost forgot to mention, but it should have been clear anyway.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
-         _([[We are in urgent need of your supply, so please hurry up with your deliveries.]])
+         _([[We are in urgent need of your supply, so hurry up with your deliveries.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Kalitath
          _([[If you fail to deliver everything within three and a half hours, we need to assume you are just playing along with us. So keep an eye on the time as we will not give any further warning.]]))
