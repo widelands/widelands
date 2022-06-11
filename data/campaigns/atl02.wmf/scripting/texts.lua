@@ -197,7 +197,7 @@ initial_messages = {
          _([[And one failed the test: the last days of loading was done in chaos and without much planning and so one of our ships ended up carrying most of the heavy wares in our possession.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
-         _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas forces and we lost most men and all wares it carried.]])
+         _([[The heavy weight plus the strong current was too much for the ship and it was pulled below the sea level by Lutas’ forces and we lost most men and all wares it carried.]])
          .. paragraphdivider() ..
          -- TRANSLATORS: Jundlina - Diary
          _([[All of us were fiercely afraid. We expected the other ships to be sunken as well, but they persisted. We escaped the island and began our smooth sailing to other coasts.]])),
