@@ -407,6 +407,7 @@ function tools_available(leader)
             _([[%s, may Satul warm you! We have made some progress in building up our tool industry.]]):bformat(name[leader]))
       },
       {
+         -- TRANSLATORS: placeholder is the name of the current leader (either Jundlina or Sidolus)
          title = _("%s Enchanted"):bformat(name[leader]),
          body = current_leader(leader,
             -- TRANSLATORS: either Jundlina or Sidolus depending who is in charge
