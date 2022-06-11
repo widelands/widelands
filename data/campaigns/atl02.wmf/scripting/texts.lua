@@ -403,7 +403,7 @@ function tools_available(leader)
       {
          title = _("Tool Supply Ensured"),
          body = loftomor(
-            -- TRANSLATORS: loftomor (placeholder is the name of the current leader)
+            -- TRANSLATORS: Loftomor (placeholder is the name of the current leader)
             _([[%s, may Satul warm you! We have made some progress in building up our tool industry.]]):bformat(name[leader]))
       },
       {
