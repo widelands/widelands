@@ -398,6 +398,7 @@ struct BuildableField {
 	uint8_t rangers_nearby;
 	// to manage the military better following variables exists:
 	// future soldier capacity of own nearby militarysites:
+	int16_t area_military_capacity;
 	int16_t future_area_military_capacity;
 	// distance to near buldings:
 	int16_t military_loneliness;

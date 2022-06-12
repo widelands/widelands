@@ -1823,6 +1823,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// resetting a bunch of values for the field
 	field.ally_military_presence = 0;
+	field.area_military_capacity = 0;
 	field.future_area_military_capacity = 0;
 	field.consumers_nearby.clear();
 	field.consumers_nearby.resize(wares.size());
@@ -6118,6 +6119,7 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 		}
 
 		if (radius > dist) {
+			bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
 			bf.future_area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
 			bf.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 
