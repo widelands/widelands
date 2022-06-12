@@ -355,7 +355,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      ground_water(1),
      space_consumers_nearby(0),
      rangers_nearby(0),
-     area_military_capacity(0),
+     future_area_military_capacity(0),
      military_loneliness(1000),
      military_in_constr_nearby(0),
      own_military_presence(0),
@@ -372,6 +372,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      portspace_nearby(ExtendedBool::kUnset),
      max_buildcap_nearby(0),
      last_resources_check_time(0),
+	 // the higher the most important the side/field is
      military_score_(0),
      inland(false),
      local_soldier_capacity(0),
