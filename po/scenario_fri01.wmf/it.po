@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
@@ -990,6 +990,7 @@ msgid_plural ""
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""

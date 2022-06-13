@@ -373,7 +373,7 @@ endif()
 
 if(NOT MSVC)
   # Turn some warnings into errors.
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 12.0))
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)))
     # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
     # TODO(Nordfriese): As soon as a new g++ version fixes the bug, reenable -Werror for the working version.
     message(WARNING "This compiler is known to cause false-positive warnings.")
