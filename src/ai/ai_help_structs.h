@@ -401,6 +401,7 @@ struct BuildableField {
 	int16_t area_military_capacity;
 	// distance to near buldings:
 	int16_t military_loneliness;
+	int16_t future_military_loneliness;
 	// count of military buildings in construction
 	// when making decision on new mulitary buildings it considers also
 	// unowned fields and mines, but this information is not quite correct as there
