@@ -4,7 +4,7 @@
 # Translators:
 # GunChleoc, 2016
 # Juanjo, 2015
-# Juanjo, 2015-2020
+# Juanjo, 2015-2020,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Juanjo, 2015-2020\n"
+"Last-Translator: Juanjo, 2015-2020,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -269,7 +269,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Per tal de cridar un geòleg perquè busqui aigua, cliqueu en una bandera en l'àrea que vulgueu buscar aigua i llavors cliqueu el botó d'enviar el geòleg a explorar el lloc."
+msgstr "Per tal de cridar un geòleg perquè busqui aigua, cliqueu en una bandera a l'àrea que vulgueu buscar aigua i llavors cliqueu el botó d'enviar el geòleg a explorar el lloc."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -344,7 +344,7 @@ msgstr "Els meus guerrers cacen tot el dia i descansen desperts a la nit, escolt
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr "Podem veure com les furioses flames engoleixen Al'thunran des d'aquí, a milles de distància."
+msgstr "Es veu com les flames engoleixen Al'thunran des d'aquí, a milles de distància."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
@@ -1008,14 +1008,14 @@ msgstr "Fins ara, sembla que cap pregària ha funcionat."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "A friendly village has joined us!"
-msgstr "Una aldea amiga se us ha unit!"
+msgstr "Una vila amiga se us ha unit!"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:528
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr "Hem trobat una aldea amb gent amistosa i productiva, impressionats per les nostres riqueses, tecnologies i forces."
+msgstr "Hem trobat una vila amb gent amistosa i productiva, impressionats per les nostres riqueses, tecnologies i forces."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:531

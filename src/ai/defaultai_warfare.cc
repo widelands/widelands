@@ -981,9 +981,9 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	militarysites.front().understaffed = 0;
 
 	const bool can_be_dismantled =
-	   (current_soldiers == 1 ||
-	    militarysites.front().built_time + Duration(10 * 60 * 1000) < gametime) &&
-	   bf.military_loneliness < 1000 - 2 * std::abs(management_data.get_military_number_at(14));
+	   (bf.own_military_presence - current_soldiers > 0 || bf.military_unstationed > 2) &&
+	   militarysites.front().built_time + Duration(10 * 60 * 1000) < gametime &&
+	   bf.military_loneliness < 1000 - 10 * std::abs(management_data.get_military_number_at(14));
 
 	bool should_be_dismantled = false;
 	const int32_t enemy_military_capacity = std::max<int32_t>(

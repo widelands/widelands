@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-16 03:13+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -589,7 +589,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "El mapa no s'ha guardat. Esteu segur que voleu sortir?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:360 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
@@ -712,8 +712,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1437,8 +1437,8 @@ msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
-#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
+#: ../../src/ui_basic/dropdown.cc:308 ../../src/ui_basic/dropdown.cc:360
+#: ../../src/ui_basic/dropdown.cc:427 ../../src/ui_basic/dropdown.cc:435
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -3183,18 +3183,18 @@ msgstr "Verd"
 msgid "Blue"
 msgstr "Blau"
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Seleccioneu un element"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:419
+#: ../../src/ui_basic/dropdown.cc:420
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "No seleccionat"
 
-#: ../../src/ui_basic/dropdown.h:447
+#: ../../src/ui_basic/dropdown.h:449
 msgid "No matches"
 msgstr "Sense coincidències"
 
@@ -3453,7 +3453,7 @@ msgstr "Pobra"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:104
 msgid "This add-on may cause major glitches and errors."
-msgstr "Aquest complement pot provocar errors en les partides."
+msgstr "Aquest complement pot provocar errors a les partides."
 
 #. * TRANSLATORS: This is an add-on code quality rating
 #: ../../src/ui_fsmenu/addons/manager.cc:110
@@ -5892,7 +5892,7 @@ msgstr "Inclou els fluxos de sincronització en partides en xarxa per depurar po
 #: ../../src/ui_fsmenu/options.cc:244
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Show Census"
-msgstr "Mostra el cens"
+msgstr "Mostra els noms dels edificis"
 
 #: ../../src/ui_fsmenu/options.cc:245
 #: ../../src/wui/interactive_gamebase.cc:243
@@ -6023,7 +6023,7 @@ msgid ""
 "usually – but not always – well playable. Seafaring and artifacts are not "
 "supported. Add-ons of the World, Tribes, and Script categories are disabled "
 "in random matches."
-msgstr "El generador de mapes aleatoris encara està en fase beta. A vegades, els mapes que genera són jugables, però no sempre. La navegació i els artefactes d'aquests mapes encara no estan tinguts en compte correctament. Els complements de les categories de món, tribus i de script estan desactivats en partides aleatòries."
+msgstr "El generador de mapes aleatoris encara està en fase beta. A vegades, els mapes que genera són jugables, però no sempre. La navegació i els artefactes d'aquests mapes encara no es tenen en compte correctament. Els complements de les categories de món, tribus i de script en partides aleatòries estan desactivats."
 
 #: ../../src/ui_fsmenu/random_game.cc:127
 msgid "Map Generation Error"
@@ -6095,18 +6095,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autors"
@@ -6550,7 +6550,7 @@ msgstr "Estableix la mida de l'eina a %d"
 
 #: ../../src/wlapplication_options.cc:470
 msgid "Toggle Census"
-msgstr "Commuta la finestra del cens"
+msgstr "Mostra/Amaga els noms dels edificis"
 
 #: ../../src/wlapplication_options.cc:475
 msgid "Toggle Status Labels"
@@ -7109,7 +7109,7 @@ msgstr "(no hi ha cap edifici seleccionat)"
 
 #: ../../src/wui/building_statistics_menu.cc:70
 msgid "Owned:"
-msgstr "Propietari:"
+msgstr "Construïts:"
 
 #: ../../src/wui/building_statistics_menu.cc:75
 msgid "Under construction:"
@@ -7161,9 +7161,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7490,7 +7490,7 @@ msgstr "Cancel·la el camí i construeix una via d'aigua"
 
 #: ../../src/wui/fieldaction.cc:653
 msgid "Build roads"
-msgstr "Construeix camí"
+msgstr "Accions de camí"
 
 #: ../../src/wui/fieldaction.cc:665
 msgid "Cancel waterway"
@@ -7613,12 +7613,12 @@ msgstr "Hora"
 #: ../../src/wui/game_message_menu.cc:114
 #: ../../src/wui/game_message_menu.cc:605
 msgid "Show Archive"
-msgstr "Mostra el fitxer"
+msgstr "Mostra l'arxiu"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:122
 msgid "Center main mapview on location"
-msgstr "Centra la vista principal en la posició"
+msgstr "Centra la vista principal a la posició"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
@@ -7954,11 +7954,11 @@ msgstr "Treu un bé"
 msgid "Add ware"
 msgstr "Afegeix un bé"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Hide controls"
 msgstr "Amaga els controls"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Show controls"
 msgstr "Mostra els controls"
 
@@ -8055,7 +8055,7 @@ msgstr "Segur que voleu reiniciar aquest escenari?"
 #. building names are shown
 #: ../../src/wui/interactive_gamebase.cc:234
 msgid "Hide Census"
-msgstr "Amaga el cens"
+msgstr "Amaga els noms dels edificis"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * building status labels are shown
@@ -8154,8 +8154,8 @@ msgstr "Mostra o no si les àrees de treball se sobreposen quan se situa un nou 
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] "%u nou missatge"
-msgstr[1] "%u nous missatges"
+msgstr[0] "%u missatge nou"
+msgstr[1] "%u missatges nous"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:153
@@ -8402,7 +8402,7 @@ msgstr "Augmenta l'experiència en 1"
 
 #: ../../src/wui/productionsitewindow.cc:152
 msgid "Terminate the employment of the selected worker"
-msgstr "Finalitzar l'assignació del treballador en aquest edifici."
+msgstr "Fes fora aquest treballador de l'edifici"
 
 #: ../../src/wui/productionsitewindow.cc:246
 msgid "(coming)"
