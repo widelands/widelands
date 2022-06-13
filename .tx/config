@@ -49,6 +49,12 @@ source_file = po/scenario_atl01.wmf/scenario_atl01.wmf.pot
 source_lang = en
 type = PO
 
+[widelands.scenario_atl02]
+file_filter = po/scenario_atl02.wmf/<lang>.po
+source_file = po/scenario_atl02.wmf/scenario_atl02.wmf.pot
+source_lang = en
+type = PO
+
 [widelands.scenario_bar01]
 file_filter = po/scenario_bar01.wmf/<lang>.po
 source_file = po/scenario_bar01.wmf/scenario_bar01.wmf.pot
