@@ -474,6 +474,13 @@ void BaseListselect::draw(RenderTarget& dst) {
 			er.rendered_hotkey->draw(dst, hotkey_point, Recti(0, 0, maxw - widest_text_, lineheight),
 			                         UI::Align::kLeft, RenderedText::CropMode::kSelf);
 		}
+
+		// Highlight text of current filter
+		Recti highlight_rect = get_highlight_rect(er.name, text_point.x, y);
+		if (highlight_rect.w != 0) {
+			dst.brighten_rect(highlight_rect, -ms_darken_value * 2);
+		}
+
 		y += get_lineheight();
 		++idx;
 	}
@@ -663,4 +670,35 @@ void BaseListselect::remove(const char* const str) {
 		}
 	}
 }
+
+Recti BaseListselect::get_highlight_rect(const std::string& text, int x, int y) {
+
+	if (linked_dropdown == nullptr) {
+		return Recti();
+	}
+
+	std::string text2 = std::string(text);
+	// UI::g_fh::render ignores spaces at the beginning and end of a string.
+	replace_all(text2, " ", "_");
+
+	std::string filter = linked_dropdown->get_filter_text();
+	replace_all(filter, " ", "_");
+
+	std::size_t start = to_lower(text2).find(filter);
+	if (start == std::string::npos) {
+		return Recti();
+	}
+
+	std::shared_ptr<const UI::RenderedText> rendered_start = UI::g_fh->render(
+	   as_richtext_paragraph(richtext_escape(text2.substr(0, start)), table_style().enabled()));
+
+	std::shared_ptr<const UI::RenderedText> rendered_substring =
+	   UI::g_fh->render(as_richtext_paragraph(
+	      richtext_escape(text2.substr(start, filter.length())), table_style().enabled()));
+
+	Recti highlight_rect(x + rendered_start->width(), y, rendered_substring->width(), lineheight_);
+
+	return highlight_rect;
+}
+
 }  // namespace UI

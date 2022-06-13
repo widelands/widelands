@@ -13,7 +13,7 @@
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # nicolas jardin <niko472006@sfr.fr>, 2016
 # Renaud Bouchard, 2015-2022
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020,2022
 # syl_, 2016
 # zecas <jjorge@free.fr>, 2020
 msgid ""
@@ -22,13 +22,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-03-25 02:57+0000\n"
 "PO-Revision-Date: 2015-02-03 14:46+0000\n"
-"Last-Translator: Renaud Bouchard, 2015-2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020,2022\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:10
 msgid "Nice And Easy Does It All the Time"
@@ -121,7 +121,7 @@ msgid ""
 "the Atlanteans, the Frisians and the Amazons. All tribes have different "
 "economies, strengths, and weaknesses, but the general gameplay is the same "
 "for all. We will play the Barbarians for now."
-msgstr ""
+msgstr "Il y a cinq différentes tribus dans Widelands: Les Barbares, L'Empire, les Atlantes, les Frisons et les Amazones. Toutes les tribus ont une économie différente, des forces et des faiblesses, mais la jouabilité générale est la même pour tous. Nous jouerons avec les Barbares pour le moment."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""

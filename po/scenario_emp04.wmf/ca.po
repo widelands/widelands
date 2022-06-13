@@ -4,7 +4,7 @@
 # 
 # Translators:
 # GunChleoc, 2018
-# Juanjo, 2021
+# Juanjo, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Juanjo, 2021\n"
+"Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1845,7 +1845,7 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
-"El llenyataire d'aquesta casa no pot trobar més arbres en la seva àrea de "
+"El llenyataire d'aquesta casa no pot trobar més arbres a la seva àrea de "
 "treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una "
 "casa de guarda forestal."
 

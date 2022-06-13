@@ -18,6 +18,7 @@
 
 #include "wui/mapviewpixelfunctions.h"
 
+#include <cassert>
 #include <cstdlib>
 
 #include "base/vector.h"
@@ -259,6 +260,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Widelands::Map& map, uint32_
  */
 void MapviewPixelFunctions::normalize_pix(const Widelands::Map& map, Vector2f* p) {
 	const float map_end_screen_x = get_map_end_screen_x(map);
+	assert(map_end_screen_x > 0);
 	while (p->x >= map_end_screen_x) {
 		p->x -= map_end_screen_x;
 	}
@@ -266,6 +268,7 @@ void MapviewPixelFunctions::normalize_pix(const Widelands::Map& map, Vector2f* p
 		p->x += map_end_screen_x;
 	}
 	const float map_end_screen_y = get_map_end_screen_y(map);
+	assert(map_end_screen_y > 0);
 	while (p->y >= map_end_screen_y) {
 		p->y -= map_end_screen_y;
 	}

@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-16 03:13+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -1295,7 +1295,6 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1778,9 +1777,9 @@ msgstr "sta producendo un martello"
 msgid "making a chisel"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1936,7 +1935,6 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5424,12 +5422,11 @@ msgstr "Il team di sviluppo di Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
-msgid "Amazons (experimental)"
-msgstr "Amazzoni (tribù sperimentale)"
+msgid "Amazons"
+msgstr ""
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
-msgid ""
-"The people of the amazonian jungle. This tribe is still under development."
+msgid "The people of the amazonian jungle."
 msgstr ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
@@ -5440,6 +5437,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldato (+%2%)"
 msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
@@ -5448,6 +5446,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldato"
 msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5458,6 +5457,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldato (+%3%)"
 msgstr[1] "%1%(+%2%) soldati (+%3%)"
+msgstr[2] "%1%(+%2%) soldati (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5467,6 +5467,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldato"
 msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+%2%) soldati"
 
 #. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
@@ -5710,6 +5711,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldato (+%2%)"
 msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
@@ -5718,6 +5720,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldato"
 msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5728,6 +5731,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldato (+%3%)"
 msgstr[1] "%1%(+%2%) soldati (+%3%)"
+msgstr[2] "%1%(+%2%) soldati (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5737,6 +5741,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldato"
 msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+%2%) soldati"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5764,6 +5769,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldato (+%2%)"
 msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
@@ -5772,6 +5778,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldato"
 msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5782,6 +5789,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldato (+%3%)"
 msgstr[1] "%1%(+%2%) soldati (+%3%)"
+msgstr[2] "%1%(+%2%) soldati (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5791,6 +5799,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldato"
 msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+%2%) soldati"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5809,6 +5818,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldato (+%2%)"
 msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
@@ -5817,6 +5827,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldato"
 msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5827,6 +5838,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldato (+%3%)"
 msgstr[1] "%1%(+%2%) soldati (+%3%)"
+msgstr[2] "%1%(+%2%) soldati (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5836,6 +5848,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldato"
 msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+%2%) soldati"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5854,6 +5867,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldato (+%2%)"
 msgstr[1] "%1% soldati (+%2%)"
+msgstr[2] "%1% soldati (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
@@ -5862,6 +5876,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldato"
 msgstr[1] "%1% soldati"
+msgstr[2] "%1% soldati"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5872,6 +5887,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldato (+%3%)"
 msgstr[1] "%1%(+%2%) soldati (+%3%)"
+msgstr[2] "%1%(+%2%) soldati (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5881,6 +5897,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldato"
 msgstr[1] "%1%(+%2%) soldati"
+msgstr[2] "%1%(+%2%) soldati"
 
 #: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
