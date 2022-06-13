@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:78
 msgid "Wares Smuggled"
@@ -36,6 +36,7 @@ msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] "%i punto"
 msgstr[1] "%i puntos"
+msgstr[2] "%i puntos"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
