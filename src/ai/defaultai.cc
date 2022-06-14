@@ -6120,7 +6120,8 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 
 		if (radius > dist) {
 			bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
-			bf.future_area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+			bf.future_area_military_capacity +=
+			   militarysite->soldier_control()->max_soldier_capacity();
 			bf.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 
 			if (militarysite->soldier_control()->stationed_soldiers().empty()) {
