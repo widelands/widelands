@@ -1,0 +1,14 @@
+# Automatically created by Widelands 1.1~git25770 (196b24a@master) Release
+
+[global]
+packet_version="1"
+map_w="176"
+map_h="176"
+nr_players="3"
+name=_"Struggling For a New Home Again"
+author="SirVer,Nasenbaer,hessenfarmer"
+descr=_"After the quick escape from the drowning island, the Atlanteans around Jundlina are faced with new challenges."
+hint=
+background="campaigns/atl02.wmf/pics/background.jpg"
+tags="seafaring"
+addons=
