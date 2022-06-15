@@ -414,9 +414,9 @@ void BaseDropdown::update() {
 	}
 
 	const std::string name = list_->has_selection() ?
-	                            list_->get_selected_name() :
-	                            /** TRANSLATORS: Selection in Dropdown menus. */
-	                            pgettext("dropdown", "Not Selected");
+                               list_->get_selected_name() :
+                               /** TRANSLATORS: Selection in Dropdown menus. */
+                               pgettext("dropdown", "Not Selected");
 
 	if (type_ != DropdownType::kPictorial) {
 		if (label_.empty()) {
@@ -426,11 +426,11 @@ void BaseDropdown::update() {
 			display_button_.set_title(format(_("%1%: %2%"), label_, name));
 		}
 		display_button_.set_tooltip(list_->has_selection() ? list_->get_selected_tooltip() :
-		                                                     tooltip_);
+                                                           tooltip_);
 	} else {
 		display_button_.set_pic(list_->has_selection() ?
-		                           list_->get_selected_image() :
-		                           g_image_cache->get("images/ui_basic/different.png"));
+                                 list_->get_selected_image() :
+                                 g_image_cache->get("images/ui_basic/different.png"));
 		display_button_.set_tooltip(format(_("%1%: %2%"), label_, name));
 	}
 }
