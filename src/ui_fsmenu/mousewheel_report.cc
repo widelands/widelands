@@ -33,6 +33,7 @@ namespace FsMenu {
 
 static constexpr int kReportWindowWidth = 650;
 static constexpr int kReportWindowHeight = 500;
+constexpr int16_t kSpacing = 8;
 
 constexpr const char* const kReportURL = "https://github.com/widelands/widelands/discussions/5367";
 
@@ -87,15 +88,15 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
 	url_button_.sigclicked.connect(url_button_action);
 	close_.sigclicked.connect([this]() { die(); });
 
-	content_.add_inf_space();
-	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	content_.add_space(kPadding);
-	content_.add(&url_button_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	content_.add_space(3 * kSpacing);
+	content_.add(&header_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	content_.add_space(3 * kSpacing);
+	content_.add(&url_button_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_.add_inf_space();
 	content_.add(&infobox_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	content_.add_inf_space();
 	content_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	content_.add_space(kPadding);
+	content_.add_space(kSpacing);
 
 	int32_t min_w = std::min(get_lborder() + infobox_.get_w() + get_rborder(), parent->get_w());
 	if (get_w() < min_w) {
@@ -103,6 +104,11 @@ InvertedScrollFeedbackWindow::InvertedScrollFeedbackWindow(UI::Panel* parent)
 	}
 	content_.set_size(get_inner_w(), get_inner_h());
 	header_.set_size(content_.get_inner_w(), 0);
+	Vector2i ub_pos = url_button_.get_pos();
+	ub_pos.x = (content_.get_inner_w() - url_button_.get_w()) / 3;
+	url_button_.set_pos(ub_pos);
+	url_button_.set_size(content_.get_inner_w() - 2 * ub_pos.x, url_button_.get_h());
+	infobox_.set_size(content_.get_inner_w(), infobox_.get_h());
 	layout();
 	center_to_parent();
 	initialization_complete();
