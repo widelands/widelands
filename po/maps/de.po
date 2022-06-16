@@ -10,7 +10,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Tino Miegel <tino.miegel@gmail.com>, 2016\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018,2020-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,13 +41,13 @@ msgstr "Nach der Landung auf einer mysteriösen Insel nahe Atlantis versuchen di
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Erneuter Kampf um eine neue Heimat"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Nach der schnellen Flucht von der versinkenden Insel müssen sich die Atlanter um Jundlina neuen Herausforderungen stellen."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
