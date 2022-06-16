@@ -4,7 +4,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Juanjo, 2015
-# Juanjo, 2015-2020
+# Juanjo, 2015-2020,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Juanjo, 2015-2020\n"
+"Last-Translator: Juanjo, 2015-2020,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -661,18 +661,18 @@ msgstr "Ho he tingut en compte, Sidolus. Crec que ja és hora. Serà la nostra p
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "En Loftomor informa"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Que en Satul us doni abric, Jundlina! Hem completar un taller d'eines i ara els nostres treballadors en produiran de noves a l'instant."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "La Jundlina recorda"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -681,7 +681,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped wit a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Que en Satul també us doni abric, Loftomor. Són bones notícies d'escoltar. No obstant, recordeu que els nostres fabricants d'eines necessiten que se'ls hi proporcioni una serra. Fer eines és un art per nosaltres i es necessita una eina precisa com una serra, no pas un martell brutal com usen altres cultures."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -939,7 +939,7 @@ msgstr "Felicitats"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Heu completat aquesta missió. Podeu continuar jugant si voleu, altrament continueu amb la següent missió."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.

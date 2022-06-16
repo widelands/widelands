@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014
 # GunChleoc, 2014
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -661,18 +661,18 @@ msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomoor mellt"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Satuul sall Jo warmen, Jundlin’. Wi hebben eene Warktüügsmee beschickt un uns' Warktüügsmidden worden nu bannig fix nejes Warktüüg produzeren."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlin’ mahnt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -681,7 +681,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped wit a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Satuul sall Jo ok warmen, Loftomoor. Dat is eene gode Naricht. Vergeet man bidde nich, dat uns' Warktüügsmidden mit eener Saag utstaffeert worden mutten. Warktüüg to maken is för uns eene Kunst, för wat man sülk een akkeraates Warktüüg as eene Saag bruukt, un nich eenen rugen Klöpper as anner Völkers."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -939,7 +939,7 @@ msgstr "Glückwunsk"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du hest deese Rutfödderung ofsloten. Wenn du willst, kannst du wiederspölen, anners de token Rutfödderung anfangen."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
