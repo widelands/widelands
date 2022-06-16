@@ -38,9 +38,15 @@ TechInfoLine::TechInfoLine(UI::Panel* parent,
                            std::string value,
                            bool right_to_left)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     label_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading, label,
+     label_(this,
+            UI::PanelStyle::kFsMenu,
+            UI::FontStyle::kFsMenuInfoPanelHeading,
+            label,
             UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
-     value_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph, value,
+     value_(this,
+            UI::PanelStyle::kFsMenu,
+            UI::FontStyle::kFsMenuInfoPanelParagraph,
+            value,
             UI::mirror_alignment(UI::Align::kRight, right_to_left)) {
 	add_space(kSpacing);
 	add(right_to_left ? &value_ : &label_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
@@ -126,16 +132,15 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		report += "  \n";
 
 		add_space(kSpacing);
-		add(new TechInfoLine(this,
-                                     c.localized_label,
-                                     c.localized_value.empty() ? c.value : c.localized_value,
-                                     mirror),
-                    UI::Box::Resizing::kFullSize);
+		add(new TechInfoLine(this, c.localized_label,
+		                     c.localized_value.empty() ? c.value : c.localized_value, mirror),
+		    UI::Box::Resizing::kFullSize);
 	}
 
 	UI::Box* buttonbox = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
-	UI::Button* copy = new UI::Button(buttonbox, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
-	                                  _("Copy"), _("Copy the technical report to the clipboard"));
+	UI::Button* copy =
+	   new UI::Button(buttonbox, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy"),
+	                  _("Copy the technical report to the clipboard"));
 	copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
 
 	buttonbox->add_inf_space();

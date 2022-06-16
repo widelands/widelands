@@ -29,6 +29,7 @@ namespace FsMenu {
 class TechInfoLine : public UI::Box {
 	UI::Textarea label_;
 	UI::Textarea value_;
+
 public:
 	TechInfoLine(UI::Panel* parent, std::string label, std::string value, bool right_to_left);
 };
