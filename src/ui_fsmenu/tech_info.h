@@ -22,8 +22,16 @@
 #include <memory>
 
 #include "ui_basic/box.h"
+#include "ui_basic/textarea.h"
 
 namespace FsMenu {
+
+class TechInfoLine : public UI::Box {
+	UI::Textarea label_;
+	UI::Textarea value_;
+public:
+	TechInfoLine(UI::Panel* parent, std::string label, std::string value, bool right_to_left);
+};
 
 struct TechInfoBox : public UI::Box {
 	enum class Type { kAbout, kMousewheelReport };

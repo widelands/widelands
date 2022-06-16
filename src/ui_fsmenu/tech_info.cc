@@ -25,7 +25,6 @@
 #include "build_info.h"
 #include "graphic/font_handler.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "wlapplication.h"
 #include "wlapplication_mousewheel_options.h"
 #include "wlapplication_options.h"
@@ -33,6 +32,22 @@
 namespace FsMenu {
 
 constexpr int16_t kSpacing = 8;
+
+TechInfoLine::TechInfoLine(UI::Panel* parent,
+                           std::string label,
+                           std::string value,
+                           bool right_to_left)
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     label_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading, label,
+            UI::mirror_alignment(UI::Align::kLeft, right_to_left)),
+     value_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph, value,
+            UI::mirror_alignment(UI::Align::kRight, right_to_left)) {
+	add_space(kSpacing);
+	add(right_to_left ? &value_ : &label_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	add_inf_space();
+	add(right_to_left ? &label_ : &value_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	add_space(kSpacing);
+}
 
 TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical) {
@@ -102,10 +117,6 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 	    UI::Box::Resizing::kFullSize);
 	add_space(2 * kSpacing);
 
-	UI::Box* hbox1 = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
-	UI::Box* hbox2 = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
-	UI::Box* vbox1 = new UI::Box(hbox1, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-	UI::Box* vbox2 = new UI::Box(hbox1, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 	std::string report;
 	for (const ContentT& c : content) {
 		report += "> ";
@@ -113,36 +124,26 @@ TechInfoBox::TechInfoBox(UI::Panel* parent, TechInfoBox::Type t)
 		report += ' ';
 		report += c.value;
 		report += "  \n";
-		vbox1->add_space(kSpacing);
-		vbox2->add_space(kSpacing);
-		vbox1->add(
-		   new UI::Textarea(vbox1, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-		                    c.localized_label, UI::mirror_alignment(UI::Align::kLeft, mirror)),
-		   UI::Box::Resizing::kExpandBoth);
-		vbox2->add(
-		   new UI::Textarea(vbox2, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph,
-		                    c.localized_value.empty() ? c.value : c.localized_value,
-		                    UI::mirror_alignment(UI::Align::kRight, mirror)),
-		   UI::Box::Resizing::kExpandBoth);
+
+		add_space(kSpacing);
+		add(new TechInfoLine(this,
+                                     c.localized_label,
+                                     c.localized_value.empty() ? c.value : c.localized_value,
+                                     mirror),
+                    UI::Box::Resizing::kFullSize);
 	}
 
-	UI::Button* copy = new UI::Button(hbox2, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+	UI::Box* buttonbox = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+	UI::Button* copy = new UI::Button(buttonbox, "copy", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
 	                                  _("Copy"), _("Copy the technical report to the clipboard"));
 	copy->sigclicked.connect([report]() { SDL_SetClipboardText(report.c_str()); });
 
-	hbox1->add_space(kSpacing);
-	hbox1->add(mirror ? vbox2 : vbox1, UI::Box::Resizing::kExpandBoth);
-	hbox1->add_inf_space();
-	hbox1->add(mirror ? vbox1 : vbox2, UI::Box::Resizing::kExpandBoth);
-	hbox1->add_space(kSpacing);
+	buttonbox->add_inf_space();
+	buttonbox->add(copy, UI::Box::Resizing::kExpandBoth);
+	buttonbox->add_inf_space();
 
-	hbox2->add_inf_space();
-	hbox2->add(copy, UI::Box::Resizing::kExpandBoth);
-	hbox2->add_inf_space();
-
-	add(hbox1, UI::Box::Resizing::kFullSize);
 	add_space(3 * kSpacing);
-	add(hbox2, UI::Box::Resizing::kFullSize);
+	add(buttonbox, UI::Box::Resizing::kFullSize);
 }
 
 }  // namespace FsMenu
