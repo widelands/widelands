@@ -6,8 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    # TODO: remove appimage branch before merging
-    branches: [ master, appimage ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -366,8 +365,7 @@ jobs:
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
 
   appimage:
-# TODO enable before merging
-#    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
     needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
     strategy:
       matrix:
@@ -413,9 +411,7 @@ jobs:
 
   dev_release:
     name: Automated development pre-release
-# TODO enable before merging
-#    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
-    if: ${{ github.repository == 'matthiakl/widelands' && always() }}
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
     needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
@@ -460,7 +456,7 @@ jobs:
           if [ "$latest" != "$GITHUB_SHA" ]
           then
             echo "The master branch ($GITHUB_REF) was updated from '$GITHUB_SHA' to '$latest', cancel"
-            # TODO restore before merging exit 1
+            exit 1
           fi
       - name: Updating latest pre-release
         # Creates a new pre-release with the "latest" tag and all gathered artifacts.
