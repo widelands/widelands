@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-06-13 06:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -596,7 +596,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:360 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
@@ -623,9 +623,9 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
+msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
@@ -1016,9 +1016,9 @@ msgstr "(nincs)"
 msgid "Waterway length limit:"
 msgstr "Víziutak megengedett hossza:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1444,8 +1444,8 @@ msgstr "Válaszd ki a térkép új méretét, és kattints a térképen a felosz
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
-#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
+#: ../../src/ui_basic/dropdown.cc:308 ../../src/ui_basic/dropdown.cc:360
+#: ../../src/ui_basic/dropdown.cc:427 ../../src/ui_basic/dropdown.cc:435
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -2399,9 +2399,9 @@ msgid ""
 "The replay has desynced and the game was paused.\n"
 "You are probably watching a replay created with another version of Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "A visszajátszás kiesett a szinkronból, ezért le lett állítva.\nValószínűleg a Widelands eltérő verziójával készült visszajátszást nézel, ami nem támogatott.\n\nA Widelands verziója: %1$s (%2$s). Ha biztos vagy benne, hogy a visszajátszás ugyanezzel a verzióval készült, kérjük jelentsd a hibát.\nKérjük csatold a hibabejelentéshez a standard kimeneten található kapcsolódó üzeneteket. (Windowson az stdout.txt-ben találod.)"
+msgstr "A visszajátszás kiesett a szinkronból, ezért le lett állítva.\nValószínűleg a Widelands eltérő verziójával készült visszajátszást nézel, ami nem támogatott.\n\nA Widelands verziója: %1$s. Ha biztos vagy benne, hogy a visszajátszás ugyanezzel a verzióval készült, kérjük jelentsd a hibát.\nKérjük csatold a hibabejelentéshez a standard kimeneten található kapcsolódó üzeneteket. (Windowson az stdout.txt-ben találod.)"
 
 #: ../../src/logic/replay_game_controller.cc:106
 msgid "End of Replay"
@@ -3190,18 +3190,18 @@ msgstr "Zöld"
 msgid "Blue"
 msgstr "Kék"
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Kiválasztás"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:419
+#: ../../src/ui_basic/dropdown.cc:420
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nincs kiválasztva"
 
-#: ../../src/ui_basic/dropdown.h:447
+#: ../../src/ui_basic/dropdown.h:449
 msgid "No matches"
 msgstr "Nincs találat"
 
@@ -3290,77 +3290,71 @@ msgstr "Lua Hiba"
 msgid "Version:"
 msgstr "Verzió:"
 
-#. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:534
-#, c-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
-
-#: ../../src/ui_fsmenu/about.cc:73
+#: ../../src/ui_fsmenu/about.cc:72
 msgid "Operating System:"
 msgstr "Operációs rendszer:"
 
-#: ../../src/ui_fsmenu/about.cc:75
+#: ../../src/ui_fsmenu/about.cc:74
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/about.cc:77
+#: ../../src/ui_fsmenu/about.cc:76
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bites)"
 
-#: ../../src/ui_fsmenu/about.cc:79
+#: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bites)"
 
-#: ../../src/ui_fsmenu/about.cc:81
+#: ../../src/ui_fsmenu/about.cc:80
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/about.cc:83
+#: ../../src/ui_fsmenu/about.cc:82
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/about.cc:85
+#: ../../src/ui_fsmenu/about.cc:84
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/about.cc:87
+#: ../../src/ui_fsmenu/about.cc:86
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/ui_fsmenu/about.cc:90
+#: ../../src/ui_fsmenu/about.cc:89
 msgid "Locale:"
 msgstr "Nyelv:"
 
-#: ../../src/ui_fsmenu/about.cc:91
+#: ../../src/ui_fsmenu/about.cc:90
 msgid "Home Directory:"
 msgstr "Saját Widelands könyvtár:"
 
-#: ../../src/ui_fsmenu/about.cc:92
+#: ../../src/ui_fsmenu/about.cc:91
 msgid "Configuration File:"
 msgstr "Beállító fájl:"
 
-#: ../../src/ui_fsmenu/about.cc:93
+#: ../../src/ui_fsmenu/about.cc:92
 msgid "Data Directory:"
 msgstr "Adatfájlok helye:"
 
-#: ../../src/ui_fsmenu/about.cc:94
+#: ../../src/ui_fsmenu/about.cc:93
 msgid "Locale Directory:"
 msgstr "Fordítások helye:"
 
-#: ../../src/ui_fsmenu/about.cc:95
+#: ../../src/ui_fsmenu/about.cc:94
 msgid "Executable Directory:"
 msgstr "Program helye:"
 
-#: ../../src/ui_fsmenu/about.cc:102 ../../src/ui_fsmenu/about.cc:149
+#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
 msgid "Technical Info"
 msgstr "Műszaki információk"
 
-#: ../../src/ui_fsmenu/about.cc:131
+#: ../../src/ui_fsmenu/about.cc:130
 msgid "Copy"
 msgstr "Másolás"
 
-#: ../../src/ui_fsmenu/about.cc:132
+#: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy the technical report to the clipboard"
 msgstr "Műszaki információk másolása a vágólapra"
 
@@ -5432,11 +5426,11 @@ msgstr "Kilépés a Widelandsből"
 msgid "Quit the game"
 msgstr "Kilépés a játékból"
 
-#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
-msgid "Version %1$s (%2$s)"
-msgstr "Verzió: %1$s (%2$s)"
+msgid "Version %1$s"
+msgstr "%1$s verzió"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -6211,12 +6205,12 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s (%3$s) verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
+msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
 #: ../../src/wlapplication.cc:1645
 #, c-format
@@ -7174,9 +7168,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7967,11 +7961,11 @@ msgstr "Áru eltávolítása"
 msgid "Add ware"
 msgstr "Áru hozzáadása"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Hide controls"
 msgstr "Vezérlők elrejtése"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Show controls"
 msgstr "Vezérlők megjelenítése"
 
@@ -8120,14 +8114,20 @@ msgstr "Játék folytatása"
 msgid "Pause the Game"
 msgstr "Játék megállítása"
 
+#. * TRANSLATORS: actual_speed (desired_speed)
+#: ../../src/wui/interactive_gamebase.cc:534
+#, c-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:44
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Hajózás"

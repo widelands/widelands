@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-10 03:01+0000\n"
+"POT-Creation-Date: 2022-06-13 06:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -591,7 +591,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "De Kaart is nich sekert worden. Willst du würrelk ofbreken?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:360 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
@@ -618,9 +618,9 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr "Een Fehler is uptreden. De Fehler-Naricht is:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s (%3$s).\nBidde föög deese Informatioon to de Fehler-Mellen hento."
+msgstr "Een Fehler is uptreden. De Fehler-Naricht is:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\nBidde föög deese Informatioon to de Fehler-Mellen hento."
 
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
@@ -1011,9 +1011,9 @@ msgstr "(keens)"
 msgid "Waterway length limit:"
 msgstr "Hoogste Priel-Längde:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:56
 msgid "Disabled"
@@ -1439,8 +1439,8 @@ msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wün
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
-#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
+#: ../../src/ui_basic/dropdown.cc:308 ../../src/ui_basic/dropdown.cc:360
+#: ../../src/ui_basic/dropdown.cc:427 ../../src/ui_basic/dropdown.cc:435
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -2394,9 +2394,9 @@ msgid ""
 "The replay has desynced and the game was paused.\n"
 "You are probably watching a replay created with another version of Widelands, which is not supported.\n"
 "\n"
-"If you are certain that the replay was created with the same version of Widelands, %1$s (%2$s), please report this problem as a bug.\n"
+"If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr "Dat Upteken hett sik verschuven un dat Speel is anhollt worden.\nDu kiekst wahrschienelk een Upteken an, wat mit eener anner Versioon vun Widelands maakt worden is. Dat word nich unnerstütt.\n\nWenn du di seker büst, dat dat Upteken mit de sülve Versioon vun Widelands, %1$s (%2$s), maakt worden is, bidde melle deeses Probleem. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Bidde föög deese Informatioon to de Fehler-Mellen hento."
+msgstr "Dat Upteken hett sik verschuven un dat Speel is anhollt worden.\nDu kiekst wahrschienelk een Upteken an, wat mit eener anner Versioon vun Widelands maakt worden is. Dat word nich unnerstütt.\n\nWenn du di seker büst, dat dat Upteken mit de sülve Versioon vun Widelands, %1$s, maakt worden is, bidde melle deeses Probleem. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Bidde föög deese Informatioon to de Fehler-Mellen hento."
 
 #: ../../src/logic/replay_game_controller.cc:106
 msgid "End of Replay"
@@ -3185,18 +3185,18 @@ msgstr "Gröön"
 msgid "Blue"
 msgstr "Blau"
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Ding utkören"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:419
+#: ../../src/ui_basic/dropdown.cc:420
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nich utköort"
 
-#: ../../src/ui_basic/dropdown.h:447
+#: ../../src/ui_basic/dropdown.h:449
 msgid "No matches"
 msgstr "Nix funnen"
 
@@ -3285,77 +3285,71 @@ msgstr "Lua-Fehler"
 msgid "Version:"
 msgstr "Versioon:"
 
-#. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/ui_fsmenu/about.cc:72 ../../src/wui/interactive_gamebase.cc:534
-#, c-format
-msgid "%1$s (%2$s)"
-msgstr "%1$s (%2$s)"
-
-#: ../../src/ui_fsmenu/about.cc:73
+#: ../../src/ui_fsmenu/about.cc:72
 msgid "Operating System:"
 msgstr "Bedrievssysteem:"
 
-#: ../../src/ui_fsmenu/about.cc:75
+#: ../../src/ui_fsmenu/about.cc:74
 msgid "MacOS"
 msgstr "MacOS"
 
-#: ../../src/ui_fsmenu/about.cc:77
+#: ../../src/ui_fsmenu/about.cc:76
 msgid "Windows (64 bit)"
 msgstr "Windows (64 bit)"
 
-#: ../../src/ui_fsmenu/about.cc:79
+#: ../../src/ui_fsmenu/about.cc:78
 msgid "Windows (32 bit)"
 msgstr "Windows (32 bit)"
 
-#: ../../src/ui_fsmenu/about.cc:81
+#: ../../src/ui_fsmenu/about.cc:80
 msgid "Linux"
 msgstr "Linux"
 
-#: ../../src/ui_fsmenu/about.cc:83
+#: ../../src/ui_fsmenu/about.cc:82
 msgid "FreeBSD"
 msgstr "FreeBSD"
 
-#: ../../src/ui_fsmenu/about.cc:85
+#: ../../src/ui_fsmenu/about.cc:84
 msgid "Unix"
 msgstr "Unix"
 
-#: ../../src/ui_fsmenu/about.cc:87
+#: ../../src/ui_fsmenu/about.cc:86
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/ui_fsmenu/about.cc:90
+#: ../../src/ui_fsmenu/about.cc:89
 msgid "Locale:"
 msgstr "Spraak:"
 
-#: ../../src/ui_fsmenu/about.cc:91
+#: ../../src/ui_fsmenu/about.cc:90
 msgid "Home Directory:"
 msgstr "Heemverteeknis:"
 
-#: ../../src/ui_fsmenu/about.cc:92
+#: ../../src/ui_fsmenu/about.cc:91
 msgid "Configuration File:"
 msgstr "Instellens-Datei:"
 
-#: ../../src/ui_fsmenu/about.cc:93
+#: ../../src/ui_fsmenu/about.cc:92
 msgid "Data Directory:"
 msgstr "Dateiverteeknis:"
 
-#: ../../src/ui_fsmenu/about.cc:94
+#: ../../src/ui_fsmenu/about.cc:93
 msgid "Locale Directory:"
 msgstr "Spraakverteeknis:"
 
-#: ../../src/ui_fsmenu/about.cc:95
+#: ../../src/ui_fsmenu/about.cc:94
 msgid "Executable Directory:"
 msgstr "Utföhrensverteeknis:"
 
-#: ../../src/ui_fsmenu/about.cc:102 ../../src/ui_fsmenu/about.cc:149
+#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
 msgid "Technical Info"
 msgstr "Technisk Informatioon"
 
-#: ../../src/ui_fsmenu/about.cc:131
+#: ../../src/ui_fsmenu/about.cc:130
 msgid "Copy"
 msgstr "Koperen"
 
-#: ../../src/ui_fsmenu/about.cc:132
+#: ../../src/ui_fsmenu/about.cc:131
 msgid "Copy the technical report to the clipboard"
 msgstr "De technisk Listen koperen"
 
@@ -5427,11 +5421,11 @@ msgstr "Widelands verlaten"
 msgid "Quit the game"
 msgstr "Dat Speel verlaten"
 
-#. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
+#. * TRANSLATORS: %1$s = version string and build type  ("Debug" or "Release")
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
-msgid "Version %1$s (%2$s)"
-msgstr "Versioon %1$s (%2$s)"
+msgid "Version %1$s"
+msgstr "Versioon %1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -6206,12 +6200,12 @@ msgid ""
 "\n"
 "%1$s\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "\n"
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s (%3$s).\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
+msgstr "Bi’m Spölen is een Fehler uptreden. De Fehler seggt:\n\n%1$s\n\nBidde melle deeses Probleem, daarmit wi Widelands beter maken könen. Du finnst wichtige Mellungen in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %2$s.\n\nBidde föög deese Informatioon to de Fehler-Mellen hento.\n\nSall Widelands versöken, dat Speel in deesem Noodfall to sekern? Mennigmaal – aver nich alltieden – kann man dat laden un wiederspölen."
 
 #: ../../src/wlapplication.cc:1645
 #, c-format
@@ -7169,9 +7163,9 @@ msgstr "Muden"
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7962,11 +7956,11 @@ msgstr "Waar wegdoon"
 msgid "Add ware"
 msgstr "Waar hentofögen"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Hide controls"
 msgstr "Stüren verbargen"
 
-#: ../../src/wui/inputqueuedisplay.cc:633
+#: ../../src/wui/inputqueuedisplay.cc:637
 msgid "Show controls"
 msgstr "Stüren wiesen"
 
@@ -8115,14 +8109,20 @@ msgstr "Wiederspölen"
 msgid "Pause the Game"
 msgstr "Dat Speel anhollen"
 
+#. * TRANSLATORS: actual_speed (desired_speed)
+#: ../../src/wui/interactive_gamebase.cc:534
+#, c-format
+msgid "%1$s (%2$s)"
+msgstr "%1$s (%2$s)"
+
 #. * TRANSLATORS: Title for the statistics menu button in the game
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:44
 msgid "Statistics"
 msgstr "Tahlen över alls"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seefahrt"

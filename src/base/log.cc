@@ -177,7 +177,7 @@ void do_log(const LogType type, const Time& gametime, const char* const fmt, ...
 	assert(logger != nullptr);
 
 	// message type and timestamp
-	char buffer_prefix[32];
+	char buffer_prefix[256];
 	{
 		uint32_t t = gametime.is_valid() ? gametime.get() : SDL_GetTicks();
 		const uint32_t hours = t / (1000 * 60 * 60);
