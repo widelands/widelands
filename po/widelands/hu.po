@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-19 03:48+0000\n"
+"POT-Creation-Date: 2022-06-13 06:29+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -290,8 +290,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -305,12 +305,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -500,10 +500,10 @@ msgstr "Információ"
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -596,7 +596,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
+#: ../../src/ui_basic/dropdown.cc:360 ../../src/ui_basic/dropdown.cc:362
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
@@ -625,7 +625,7 @@ msgid ""
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using version %2$s.\n"
 "Please add this information to your report."
-msgstr ""
+msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
 #: ../../src/editor/editorinteractive.cc:1026
 #, c-format
@@ -719,8 +719,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1444,8 +1444,8 @@ msgstr "Válaszd ki a térkép új méretét, és kattints a térképen a felosz
 #. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
-#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
+#: ../../src/ui_basic/dropdown.cc:308 ../../src/ui_basic/dropdown.cc:360
+#: ../../src/ui_basic/dropdown.cc:427 ../../src/ui_basic/dropdown.cc:435
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -2401,7 +2401,7 @@ msgid ""
 "\n"
 "If you are certain that the replay was created with the same version of Widelands, %1$s, please report this problem as a bug.\n"
 "You will find related messages in the standard output (stdout.txt on Windows). Please add this information to your report."
-msgstr ""
+msgstr "A visszajátszás kiesett a szinkronból, ezért le lett állítva.\nValószínűleg a Widelands eltérő verziójával készült visszajátszást nézel, ami nem támogatott.\n\nA Widelands verziója: %1$s. Ha biztos vagy benne, hogy a visszajátszás ugyanezzel a verzióval készült, kérjük jelentsd a hibát.\nKérjük csatold a hibabejelentéshez a standard kimeneten található kapcsolódó üzeneteket. (Windowson az stdout.txt-ben találod.)"
 
 #: ../../src/logic/replay_game_controller.cc:106
 msgid "End of Replay"
@@ -3190,18 +3190,18 @@ msgstr "Zöld"
 msgid "Blue"
 msgstr "Kék"
 
-#: ../../src/ui_basic/dropdown.cc:112
+#: ../../src/ui_basic/dropdown.cc:113
 msgctxt "dropdown"
 msgid "Select Item"
 msgstr "Kiválasztás"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:419
+#: ../../src/ui_basic/dropdown.cc:420
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nincs kiválasztva"
 
-#: ../../src/ui_basic/dropdown.h:447
+#: ../../src/ui_basic/dropdown.h:449
 msgid "No matches"
 msgstr "Nincs találat"
 
@@ -5430,7 +5430,7 @@ msgstr "Kilépés a játékból"
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
 msgid "Version %1$s"
-msgstr ""
+msgstr "%1$s verzió"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -6102,18 +6102,18 @@ msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lu
 msgid "Tutorial"
 msgstr "Oktatójáték"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Szerző"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Szerzők"
@@ -6210,7 +6210,7 @@ msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
-msgstr ""
+msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
 #: ../../src/wlapplication.cc:1645
 #, c-format
@@ -7168,9 +7168,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7558,8 +7558,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"

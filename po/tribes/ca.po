@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-19 03:48+0000\n"
+"POT-Creation-Date: 2022-06-13 06:29+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -1147,7 +1147,7 @@ msgstr "Obra en construcció"
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:58
 msgctxt "building"
 msgid "Dismantle Site"
-msgstr "Desmantellar l'obra"
+msgstr "Edifici en desmantellament"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_plantation/init.lua:8
@@ -1597,7 +1597,7 @@ msgid ""
 "The liana cutter working at this site can’t find any tree in her work area. "
 "You should consider dismantling or destroying the building or building a "
 "jungle preserver’s hut."
-msgstr "La talladora de lianes que viu en aquesta cabana no pot trobar més lianes en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de la conservadora de la jungla."
+msgstr "La talladora de lianes que viu en aquesta cabana no pot trobar més lianes a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de la conservadora de la jungla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
@@ -1712,9 +1712,9 @@ msgstr "Taller de pedra"
 msgid "making a shovel"
 msgstr "fabricar una pala"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
@@ -1736,9 +1736,9 @@ msgstr "fabricar un pic"
 msgid "making a machete"
 msgstr "fer un matxet"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
@@ -1764,9 +1764,9 @@ msgstr "fabricar un martell"
 msgid "making a chisel"
 msgstr "fer un cisell"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1922,6 +1922,7 @@ msgstr "Tenda del cuidador de la jungla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -1962,7 +1963,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s hut can’t find any trees in her "
 "work area. You should consider dismantling or destroying the building or "
 "building a jungle preserver’s hut."
-msgstr "La llenyataire d'aquesta cabana no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de la conservadora de jungla."
+msgstr "La llenyataire d'aquesta cabana no pot trobar més arbres a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de la conservadora de jungla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:170
@@ -2216,7 +2217,7 @@ msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area. Remember that you can increase the number of existing fish by "
 "building a fish breeder’s house."
-msgstr "El pescador d'aquesta casa no pot trobar més peix en la seva àrea de treball. Recordeu que es pot construir una casa de criador de peixos per introduir peixos a l'ecosistema."
+msgstr "El pescador d'aquesta casa no pot trobar més peix a la seva àrea de treball. Recordeu que es pot construir una casa de criador de peixos per introduir peixos a l'ecosistema."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:8
@@ -2572,13 +2573,13 @@ msgstr "teixir tela de seda d'aranya"
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:75
 msgid "tailoring a tabard"
-msgstr "confeccionant un tabard"
+msgstr "confeccionar un tabard"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:88
 msgid "tailoring a golden tabard"
-msgstr "confeccionant un tabard daurat"
+msgstr "confeccionar un tabard daurat"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:8
@@ -2603,7 +2604,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El llenyataire d'aquesta casa no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
+msgstr "El llenyataire d'aquesta casa no pot trobar més arbres a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -2869,7 +2870,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "El caçador d'aquesta cabana no pot trobar més peces de caça en la seva àrea de treball. Recordeu que es pot construir una cabana de guarda de caça per introduir nous animals a l'ecosistema."
+msgstr "El caçador d'aquesta cabana no pot trobar més peces de caça a la seva àrea de treball. Recordeu que es pot construir una cabana de guarda de caça per introduir nous animals a l'ecosistema."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:8
@@ -2934,7 +2935,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "El llenyataire d'aquesta cabana no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de guarda forestal."
+msgstr "El llenyataire d'aquesta cabana no pot trobar més arbres a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una cabana de guarda forestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -3318,7 +3319,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El llenyataire d'aquesta casa no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
+msgstr "El llenyataire d'aquesta casa no pot trobar més arbres a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
@@ -3581,7 +3582,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "El pescador que treballa en aquesta granja aqüícola no pot trobar estanys de peixos en la seva àrea de treball. Si us plau, assegureu-vos que hi ha una fossa de fang en funcionament a prop i que la granja aqüícola té tots els béns necessaris, o bé considereu desmantellar o destruir aquest edifici."
+msgstr "El pescador que treballa en aquesta granja aqüícola no pot trobar estanys de peixos a la seva àrea de treball. Si us plau, assegureu-vos que hi ha una fossa de fang en funcionament a prop i que la granja aqüícola té tots els béns necessaris, o bé considereu desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:8
@@ -3663,7 +3664,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "L'apicultor que viu aquí no pot trobar camps de flors o arbustos per treballar en la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de blat o de baies prop, o desmantellar o destruir aquest edifici."
+msgstr "L'apicultor que viu aquí no pot trobar camps de flors o arbustos per treballar a la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de blat o de baies prop, o desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3738,7 +3739,7 @@ msgid ""
 "clay ponds in his work area. Please make sure there is a working clay pit "
 "nearby and the charcoal burner’s house is supplied with all needed wares, or"
 " consider dismantling or destroying this building."
-msgstr "El carboner que treballa en aquesta casa no pot trobar estanys de fang en la seva àrea de treball. Si us plau, assegureu-vos que hi ha una fossa de fang en funcionament a prop i que la casa del carboner té tots els béns necessaris, o bé considereu desmantellar o destruir aquest edifici."
+msgstr "El carboner que treballa en aquesta casa no pot trobar estanys de fang a la seva àrea de treball. Si us plau, assegureu-vos que hi ha una fossa de fang en funcionament a prop i que la casa del carboner té tots els béns necessaris, o bé considereu desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:8
@@ -3826,7 +3827,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "El cultivador de baies que viu aquí no pot trobar arbustos amb baies en la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de baies o desmantellar o destruir aquest edifici."
+msgstr "El cultivador de baies que viu aquí no pot trobar arbustos de baies a la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de baies o desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -3838,17 +3839,17 @@ msgstr "Sala de begudes"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:8
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Masoveria de civada"
+msgstr "Masoveria d'ordi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:81
 msgid "planting barley"
-msgstr "plantar civada"
+msgstr "plantar ordi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
 msgid "harvesting barley"
-msgstr "recol·lectar civada"
+msgstr "recol·lectar ordi"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
 msgctxt "frisians_building"
@@ -4173,7 +4174,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "El llenyataire d'aquesta casa no pot trobar més arbres en la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
+msgstr "El llenyataire d'aquesta casa no pot trobar més arbres a la seva àrea de treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una casa de guarda forestal."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
@@ -4753,31 +4754,31 @@ msgstr "Cendres"
 #: ../../data/tribes/immovables/barleyfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
-msgstr "Camp de civada (recol·lectat)"
+msgstr "Camp d'ordi (recol·lectat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (medium)"
-msgstr "Camp de civada (civada per madurar)"
+msgstr "Camp d'ordi (ordi per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr "Camp de civada (civada madurada)"
+msgstr "Camp d'ordi (ordi madurat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (small)"
-msgstr "Camp de civada (jove)"
+msgstr "Camp d'ordi (jove)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr "Camp de civada (molt jove)"
+msgstr "Camp d'ordi (molt jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/medium/init.lua:9
 msgid "Blueberry Bush (medium)"
@@ -4797,7 +4798,7 @@ msgstr "Nabinera (molt jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/medium/init.lua:9
 msgid "Black Currant (medium)"
-msgstr "Riber negre (baies per madurar)"
+msgstr " Riber negre (baies per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/ripe/init.lua:9
 msgid "Black Currant (ripe)"
@@ -5256,7 +5257,6 @@ msgstr "Arbre balsa (jove)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5409,13 +5409,12 @@ msgstr "L'equip de desenvolupament del Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
-msgid "Amazons (experimental)"
-msgstr "Amazones (en desenvolupament)"
+msgid "Amazons"
+msgstr "Amazones"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
-msgid ""
-"The people of the amazonian jungle. This tribe is still under development."
-msgstr "La gent de les selves amazòniques. Aquesta cultura encara està en desenvolupament."
+msgid "The people of the amazonian jungle."
+msgstr "La gent de la jungla amazònica."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5533,7 +5532,7 @@ msgstr "Comenceu la partida amb tres vaixells amb uns quants recursos enmig de l
 #: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
 msgid "Fortified Village"
-msgstr "Aldea fortificada"
+msgstr "Vila fortificada"
 
 #. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
 #. condition
@@ -8129,13 +8128,13 @@ msgstr "Fusta de balsa"
 #: ../../data/tribes/wares/barley/init.lua:8
 msgctxt "ware"
 msgid "Barley"
-msgstr "Civada"
+msgstr "Ordi"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/basket/init.lua:8
 msgctxt "ware"
 msgid "Basket"
-msgstr "Cistella"
+msgstr "Cistell"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/beer/init.lua:8

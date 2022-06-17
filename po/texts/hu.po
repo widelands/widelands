@@ -305,7 +305,7 @@ msgstr "Csomagkészítők"
 
 #: ../../data/txts/developers.lua:3
 msgid "Scripting"
-msgstr ""
+msgstr "Parancsfájlok"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
@@ -337,7 +337,7 @@ msgstr "és nagyon sokan mások (köszönünk minden segítséget)"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr "nincs munkás"
+msgstr "betöltetlen pozíció"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"

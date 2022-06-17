@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-19 03:48+0000\n"
+"POT-Creation-Date: 2022-06-13 06:29+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1712,9 +1712,9 @@ msgstr "Steenwarkeree"
 msgid "making a shovel"
 msgstr "eene Schüppe to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
@@ -1736,9 +1736,9 @@ msgstr "eene Pickhack to maken"
 msgid "making a machete"
 msgstr "eene Mest to maken"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
@@ -1764,9 +1764,9 @@ msgstr "eenen Klöpper to maken"
 msgid "making a chisel"
 msgstr "eenen Beitel to maken"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1922,6 +1922,7 @@ msgstr "Fauna-Wahrderske-Telt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3663,7 +3664,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "De Imker dat warkt bi deese Imkeree hett keene Felden of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
+msgstr "De Imker dat warkt bi deese Imkeree hett keene Ackers of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -4957,31 +4958,31 @@ msgstr "Swartwuddels-Acker (ganz lütt)"
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (harvested)"
-msgstr "Maniok-Feld (arnt)"
+msgstr "Maniok-Acker (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (medium)"
-msgstr "Maniok-Feld (middel)"
+msgstr "Maniok-Acker (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (ripe)"
-msgstr "Maniok-Feld (riep)"
+msgstr "Maniok-Acker (riep)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/small/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (small)"
-msgstr "Maniok-Feld (lütt)"
+msgstr "Maniok-Acker (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Field (tiny)"
-msgstr "Maniok-Feld (ganz lütt)"
+msgstr "Maniok-Acker (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -5256,7 +5257,6 @@ msgstr "Balsaboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5409,13 +5409,12 @@ msgstr "De Widelands Entwickeln-Klottje"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
-msgid "Amazons (experimental)"
-msgstr "Amazonen (noch nich stevig)"
+msgid "Amazons"
+msgstr "Amazonen"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
-msgid ""
-"The people of the amazonian jungle. This tribe is still under development."
-msgstr "De Lüü vun de amazoonsk Walden. Deeses Volk word noch entwickelt."
+msgid "The people of the amazonian jungle."
+msgstr "De Lüü vun de amazoonsk Walden."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.

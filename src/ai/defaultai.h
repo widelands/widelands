@@ -186,7 +186,6 @@ private:
 	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Time&);
 	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
 	void sort_task_pool();
-	// void sort_by_priority(); NOCOM
 	void set_taskpool_task_time(const Time&, SchedulerTaskId);
 	const Time& get_taskpool_task_time(SchedulerTaskId);
 	std::chrono::high_resolution_clock::time_point time_point;

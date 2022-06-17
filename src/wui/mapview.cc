@@ -482,7 +482,7 @@ const MapView::View& MapView::view() const {
 }
 
 void MapView::pan_by(Vector2i delta_pixels, const Transition& transition) {
-	if (is_animating()) {
+	if (is_animating() || map_.get_width() == 0 || map_.get_height() == 0) {
 		return;
 	}
 	set_view({view_.viewpoint + delta_pixels.cast<float>() * view_.zoom, view_.zoom}, transition);
