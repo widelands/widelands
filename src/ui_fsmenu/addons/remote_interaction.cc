@@ -559,8 +559,8 @@ void AdminDialog::ok() {
 		parent_.rebuild(false);
 		die();
 	} catch (const std::exception& e) {
-		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"),
-		                   e.what(), UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox m(&get_topmost_forefather(), UI::WindowStyle::kFsMenu, _("Error"), e.what(),
+		                   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}
 }
