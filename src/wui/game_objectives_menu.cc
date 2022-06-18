@@ -24,10 +24,6 @@
 #include "logic/playersmanager.h"
 #include "wui/interactive_player.h"
 
-constexpr int16_t kSpacing = 4;
-constexpr int16_t kRowSize = 32;
-constexpr int16_t kButtonWidth = 128;
-
 GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
