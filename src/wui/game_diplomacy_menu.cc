@@ -109,14 +109,9 @@ void DiplomacyConfirmWindow::die() {
 }
 
 GameDiplomacyMenu::GameDiplomacyMenu(InteractivePlayer& parent,
-                                       UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent,
-                      UI::WindowStyle::kWui,
-                      "diplomacy",
-                      &registry,
-                      300,
-                      200,
-                      _("Diplomacy")),
+                                     UI::UniqueWindow::Registry& registry)
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "diplomacy", &registry, 300, 200, _("Diplomacy")),
      iplayer_(parent),
      diplomacy_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      hbox_(&diplomacy_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),

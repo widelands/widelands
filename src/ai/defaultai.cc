@@ -276,10 +276,10 @@ void DefaultAI::think() {
 			const bool accept = RNG::static_rand(1) == 0;
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
-                                         (accept ? Widelands::DiplomacyAction::kAcceptInvite :
-                                         Widelands::DiplomacyAction::kRefuseInvite) :
-                                         (accept ? Widelands::DiplomacyAction::kAcceptJoin :
-                                         Widelands::DiplomacyAction::kRefuseJoin)),
+                                          (accept ? Widelands::DiplomacyAction::kAcceptInvite :
+                                                    Widelands::DiplomacyAction::kRefuseInvite) :
+                                          (accept ? Widelands::DiplomacyAction::kAcceptJoin :
+                                                    Widelands::DiplomacyAction::kRefuseJoin)),
 			                             pda.sender);
 		}
 	}

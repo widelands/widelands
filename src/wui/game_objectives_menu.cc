@@ -30,13 +30,8 @@ constexpr int16_t kButtonWidth = 128;
 
 GameObjectivesMenu::GameObjectivesMenu(InteractivePlayer& parent,
                                        UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent,
-                      UI::WindowStyle::kWui,
-                      "objectives",
-                      &registry,
-                      300,
-                      200,
-                      _("Objectives")),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "objectives", &registry, 300, 200, _("Objectives")),
      iplayer_(parent),
      objective_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      objective_list_(&objective_box_, 0, 0, 550, 180, UI::PanelStyle::kWui),
