@@ -271,12 +271,15 @@ void DefaultAI::think() {
 	}
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == player_number()) {
-			// TODO(Nordfriese): The AI just accepts everything now.
+			// TODO(Nordfriese): The AI just makes a random choice every time.
 			// In the future, make a strategic decision here.
+			const bool accept = RNG::static_rand(1) == 0;
 			game().send_player_diplomacy(pda.other,
-			                             pda.action == Widelands::DiplomacyAction::kInvite ?
-                                         Widelands::DiplomacyAction::kAcceptInvite :
-                                         Widelands::DiplomacyAction::kAcceptJoin,
+			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
+                                         (accept ? Widelands::DiplomacyAction::kAcceptInvite :
+                                         Widelands::DiplomacyAction::kRefuseInvite) :
+                                         (accept ? Widelands::DiplomacyAction::kAcceptJoin :
+                                         Widelands::DiplomacyAction::kRefuseJoin)),
 			                             pda.sender);
 		}
 	}
