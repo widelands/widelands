@@ -273,7 +273,7 @@ void DefaultAI::think() {
 		if (pda.other == player_number()) {
 			// TODO(Nordfriese): The AI just makes a random choice every time.
 			// In the future, make a strategic decision here.
-			const bool accept = RNG::static_rand(1) == 0;
+			const bool accept = RNG::static_rand(5) == 0;
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
                                           (accept ? Widelands::DiplomacyAction::kAcceptInvite :
