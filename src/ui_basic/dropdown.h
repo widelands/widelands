@@ -320,7 +320,7 @@ public:
 
 	bool handle_textinput(const std::string& input_text) override {
 		const std::string lowered_input_text = to_lower(input_text);
-		if (check_hotkey_match(lowered_input_text)) {
+		if (current_filter_.empty() && check_hotkey_match(lowered_input_text)) {
 			return true;
 		}
 		update_filter(lowered_input_text);
