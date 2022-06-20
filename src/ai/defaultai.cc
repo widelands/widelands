@@ -91,6 +91,7 @@ constexpr Duration DefaultAI::kExpeditionMaxDuration;
 constexpr Duration DefaultAI::kShipCheckInterval;
 constexpr Duration DefaultAI::kCampaignDuration;
 constexpr Duration DefaultAI::kTrainingSitesCheckInterval;
+constexpr Duration DefaultAI::kDiplomacyInterval;
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
@@ -268,20 +269,6 @@ void DefaultAI::think() {
 			              static_cast<unsigned>(player_number()));
 		}
 		return;
-	}
-	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
-		if (pda.other == player_number()) {
-			// TODO(Nordfriese): The AI just makes a random choice every time.
-			// In the future, make a strategic decision here.
-			const bool accept = RNG::static_rand(5) == 0;
-			game().send_player_diplomacy(pda.other,
-			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
-                                          (accept ? Widelands::DiplomacyAction::kAcceptInvite :
-                                                    Widelands::DiplomacyAction::kRefuseInvite) :
-                                          (accept ? Widelands::DiplomacyAction::kAcceptJoin :
-                                                    Widelands::DiplomacyAction::kRefuseJoin)),
-			                             pda.sender);
-		}
 	}
 
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
@@ -573,6 +560,10 @@ void DefaultAI::think() {
 			check_flag_distances(gametime);
 			set_taskpool_task_time(
 			   gametime + kFlagWarehouseUpdInterval, SchedulerTaskId::kWarehouseFlagDist);
+			break;
+		case SchedulerTaskId::kDiplomacy:
+			diplomacy_actions(gametime);
+			set_taskpool_task_time(gametime + kDiplomacyInterval, SchedulerTaskId::kDiplomacy);
 			break;
 		case SchedulerTaskId::kUnset:
 			NEVER_HERE();
@@ -1173,6 +1164,10 @@ void DefaultAI::late_initialization() {
 	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(10 * 1000)),
 	                                                   SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                                   "flag warehouse Update"));
+
+	taskPool.push_back(std::make_shared<SchedulerTask>(std::max<Time>(gametime, Time(40 * 1000)),
+	                                                   SchedulerTaskId::kDiplomacy, 7,
+	                                                   "diplomacy actions"));
 
 	const Widelands::Map& map = game().map();
 
@@ -3347,6 +3342,34 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 	// Now let do some lazy pruning - remove the flags that were not updated for long
 	flag_warehouse_distance.remove_old_flag(gametime);
+}
+
+// Dealing with diplomacy actions
+void DefaultAI::diplomacy_actions(const Time& gametime) {
+	
+	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
+		if (pda.other == player_number()) {
+			// TODO(Nordfriese): The AI just makes a random choice every time.
+			// In the future, make more strategic decision here. Add asking for alliance
+			bool accept = RNG::static_rand(5) == 0;
+			// don't accept any diplomacy for the first 10 + x minutes to avoid click races for allies
+			accept = accept && gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
+			// only accept if asking player is stronger (based on mil power and land)
+			accept = accept && 
+					  player_statistics.get_player_power(pda.sender) *
+					  (player_statistics.get_player_land(pda.sender) / 100) >
+					  player_statistics.get_player_power(player_number()) *
+					  (player_statistics.get_player_land(player_number()) /100);
+
+			game().send_player_diplomacy(pda.other,
+			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
+                                          (accept ? Widelands::DiplomacyAction::kAcceptInvite :
+                                                    Widelands::DiplomacyAction::kRefuseInvite) :
+                                          (accept ? Widelands::DiplomacyAction::kAcceptJoin :
+                                                    Widelands::DiplomacyAction::kRefuseJoin)),
+			                             pda.sender);
+		}
+	}
 }
 
 // Here we pick about 25 roads and investigate them. If it is a dead end we dismantle it
