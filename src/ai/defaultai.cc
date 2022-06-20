@@ -3356,9 +3356,9 @@ void DefaultAI::diplomacy_actions(const Time& gametime) {
 			accept &= gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
 			// only accept if asking player is stronger (based on mil power and land)
 			accept &= player_statistics.get_player_power(pda.sender) *
-					  (player_statistics.get_player_land(pda.sender) / 100) >
-					  player_statistics.get_player_power(player_number()) *
-					  (player_statistics.get_player_land(player_number()) /100);
+			             (player_statistics.get_player_land(pda.sender) / 100) >
+			          player_statistics.get_player_power(player_number()) *
+			             (player_statistics.get_player_land(player_number()) / 100);
 
 			game().send_player_diplomacy(pda.other,
 			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
