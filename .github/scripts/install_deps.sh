@@ -26,6 +26,12 @@ if [ "${GITHUB_JOB}" = "testsuite" ]; then
     xserver-xorg-video-all"
 fi
 
+if [ "${GITHUB_JOB}" = "appimage" ]; then
+  ADD_PKG_LIST="
+    ${CXX} \
+    git"
+fi
+
 sudo apt-get update
 sudo apt-get install -y \
   cmake \

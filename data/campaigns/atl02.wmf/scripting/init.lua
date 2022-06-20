@@ -17,6 +17,7 @@ include "scripting/set.lua"
 push_textdomain("scenario_atl02.wmf")
 
 game = wl.Game()
+game.allow_diplomacy = false
 map = game.map
 p1 = game.players[1]
 Kalitath = game.players[3]
