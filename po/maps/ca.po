@@ -32,13 +32,13 @@ msgstr "Després d'arribar a una estranya illa propera a l'Atlàntida, els atlan
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Lluitant de nou per una nova llar"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Després d'escapar de pressa de l'illa que s'enfonsava, els atlants i la Jundlina s'enfronten a nous reptes."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"

@@ -14,6 +14,7 @@ p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
 p3 = wl.Game().players[3]
 p4 = wl.Game().players[4]
+wl.Game().allow_diplomacy = false
 
 include "map:scripting/texts.lua"
 include "map:scripting/initial_conditions.lua"

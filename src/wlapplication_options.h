@@ -159,6 +159,7 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameChat,
 	kInGameMessages,
 	kInGameObjectives,
+	kInGameDiplomacy,
 	kInGameShowhideCensus,
 	kInGameShowhideStats,
 	kInGameShowhideSoldiers,

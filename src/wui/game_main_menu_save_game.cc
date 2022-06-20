@@ -86,7 +86,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir),
-     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystemHelper::illegal_filename_tooltip()),
+     modal_(*this) {
 	filename_box_.set_visible(type_ == Type::kSave);
 
 	layout();

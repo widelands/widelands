@@ -151,7 +151,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
 		set_value();
-		close();
 		clear_filter();
 	});
 
@@ -441,6 +440,7 @@ void BaseDropdown::set_value() {
 		current_selection_ = list_->selection_index();
 		save_selected_entry(current_selection_);
 		update();
+		close();
 		selected();
 	}
 }
