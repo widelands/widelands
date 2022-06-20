@@ -364,10 +364,55 @@ jobs:
         name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 11 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
 
+  appimage:
+    if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' }}
+    needs: [clang_tidy, documentation, codecheck, misc_sanity_checks, lua_style]
+    strategy:
+      matrix:
+        config: [Debug, Release]
+        compiler: [clang-10]
+    # Must run on the oldest still-supported Ubuntu LTS release
+    runs-on: ubuntu-18.04
+    env:
+      VERSION: "${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}"
+      CXX: '${{ matrix.compiler }}'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Installing dependencies
+      run: sh ./.github/scripts/install_deps.sh
+    - name: Compile
+      run: |
+        if [ "${CXX:0:1}" == "c" ]
+        then
+          export CC="/usr/bin/${{ matrix.compiler }}"  # clang-10
+          export CXX="${CC/clang/clang++}"             # clang++-10
+        else
+          export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
+          export CC="${CXX/g++/gcc}"                   # gcc-10
+        fi
+        mkdir build
+        pushd build
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_WEBSITE_TOOLS="OFF" -DOPTION_BUILD_TESTS="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_INSTALL_PREFIX=/usr/bin -DWL_INSTALL_BASEDIR=/usr/share/widelands -DWL_INSTALL_BINDIR=/usr/bin -DWL_INSTALL_DATADIR=../share/widelands
+        make -k -j$(nproc) install DESTDIR=../AppDir
+        popd
+        mv AppDir/usr/bin/share/* AppDir/usr/share
+        rmdir AppDir/usr/bin/share
+    - name: Build AppImage
+      run: |
+        wget -nv -c https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+        chmod +x linuxdeploy-x86_64.AppImage
+        ./linuxdeploy-x86_64.AppImage --executable AppDir/usr/bin/widelands --desktop-file xdg/org.widelands.Widelands.desktop --appdir AppDir --output appimage
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} Linux AppImage
+        path: ${{ github.workspace }}/Widelands-${{ env.VERSION }}-x86_64.AppImage
+
   dev_release:
     name: Automated development pre-release
     if: ${{ github.repository == 'widelands/widelands' && github.ref == 'refs/heads/master' && always() }}
-    needs: [windows, windows-msvc, macos]
+    needs: [windows, windows-msvc, macos, appimage]
     runs-on: "ubuntu-latest"
     steps:
       - name: Download artifacts
@@ -425,6 +470,7 @@ jobs:
           files: |
             */Widelands-daily-*.exe
             */Widelands-daily-*.dmg
+            */Widelands-daily-*.AppImage
             */Widelands-daily-*.md5
             artifacts.list
       - name: Update Release Body

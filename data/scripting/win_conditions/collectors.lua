@@ -44,14 +44,17 @@ local r = {
    broadcast_objective("win_condition", wc_descname, wc_desc_placeholder:bformat(format_remaining_raw_time(max_time)))
 
    local plrs = wl.Game().players
+   local function _gather_teams(plrs)
    local teams = {}
-   for idx,plr in ipairs(plrs) do
-      if (plr.team ~= 0) then
-         if (teams[plr.team] == nil) then
-            teams[plr.team] = {}
+      for idx,plr in ipairs(plrs) do
+         if (plr.team ~= 0) then
+            if (teams[plr.team] == nil) then
+               teams[plr.team] = {}
+            end
+            table.insert(teams[plr.team], plr)
          end
-         table.insert(teams[plr.team], plr)
       end
+      return teams
    end
 
    -- Calculate the momentary points for a list of players
@@ -105,7 +108,7 @@ local r = {
       end
       -- Team points
       push_textdomain("win_conditions")
-      for idx, team in ipairs(teams) do
+      for idx, team in ipairs(_gather_teams(plrs)) do
          local points, pstat = _calc_points(team)
          local message = h1((_("Status for Team %d")):format(idx))
             .. pstat
@@ -120,6 +123,7 @@ local r = {
    local function _game_over(plrs)
       local points = {}
       local win_points = 0
+      local teams = _gather_teams(plrs)
       for idx,plr in ipairs(plrs) do
          local player_points, pstat = _calc_points({plr})
          if (plr.team == 0) then

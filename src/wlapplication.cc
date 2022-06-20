@@ -23,6 +23,7 @@
 #include <csignal>
 #endif
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <memory>
 #include <regex>
@@ -409,6 +410,28 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
 		exit(2);
+	}
+
+	// Try to detect configurations with inverted horizontal scroll
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
+	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
+	SDL_GetVersion(&sdl_ver);
+	bool sdl_scroll_x_bug = false;
+
+	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
+	if (sdl_ver.major == 2 && sdl_ver.minor == 0) {
+		if (std::strcmp(sdl_video, "x11") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 18;
+		} else if (std::strcmp(sdl_video, "wayland") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 20;
+		}
+	}
+	if (sdl_scroll_x_bug) {
+		log_info("Inverting horizontal mousewheel scrolling for SDL %d.%d.%d with %s\n",
+		         sdl_ver.major, sdl_ver.minor, sdl_ver.patch, sdl_video);
+		set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, true);
+		update_mousewheel_settings();
 	}
 
 	g_gr = new Graphic();

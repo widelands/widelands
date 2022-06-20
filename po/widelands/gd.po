@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-06-16 03:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015-2021\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
@@ -590,7 +590,7 @@ msgid "The map has not been saved, do you really want to quit?"
 msgstr "Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson fàgail?"
 
 #: ../../src/editor/editorinteractive.cc:990 ../../src/logic/addons.cc:46
-#: ../../src/ui_basic/dropdown.cc:360 ../../src/ui_basic/dropdown.cc:362
+#: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
 #: ../../src/ui_fsmenu/addons/manager.cc:1378
@@ -1240,7 +1240,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Thachair mearachd nuair a bha sinn a’ cruthachadh a’ phasgain “%s”."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:267
+#: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tha faidhle air a bheil “%s” ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
@@ -1437,11 +1437,11 @@ msgid ""
 "location."
 msgstr "Tagh meud a’ mhapa is briog air a’ mhapa an uairsin ’ga sgoltadh air an ionad a thogras tu. Ma mheudaicheas tu am mapa, thèid colbhan ’s ràghan ùra a chur a-steach gu ear-dheas air an ionad a thaghas tu. Nuair a chrùbas tu am mapa, thèid an àireamh de cholbhan ’s ràghan a thagh thu a thoirt air falbh gu ear-dheas o ionad an sgoiltidh."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
-#: ../../src/ui_basic/dropdown.cc:308 ../../src/ui_basic/dropdown.cc:360
-#: ../../src/ui_basic/dropdown.cc:427 ../../src/ui_basic/dropdown.cc:435
+#: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
+#: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:349
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:197
 msgid "%1%: %2%"
@@ -2436,12 +2436,12 @@ msgid "Saving game…"
 msgstr "A’ sàbhaladh a’ gheama…"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:319
+#: ../../src/wui/game_main_menu_save_game.cc:320
 msgid "Saving failed!"
 msgstr "Dh’fhàillig leis an t-sàbhaladh!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:302
+#: ../../src/wui/game_main_menu_save_game.cc:303
 msgid "Game saved"
 msgstr "Chaidh an geama a shàbhaladh"
 
@@ -3220,12 +3220,12 @@ msgid "Select Item"
 msgstr "Tagh nì"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
-#: ../../src/ui_basic/dropdown.cc:420
+#: ../../src/ui_basic/dropdown.cc:419
 msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Cha deach nì a thaghadh"
 
-#: ../../src/ui_basic/dropdown.h:449
+#: ../../src/ui_basic/dropdown.h:450
 msgid "No matches"
 msgstr ""
 
@@ -7224,9 +7224,9 @@ msgstr "Puirt"
 msgid "Low productivity:"
 msgstr "Cinneasachadh gann:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7614,8 +7614,8 @@ msgstr "Cuir an IF a chaidh a thaghadh an àite a’ chluicheadair a dh’fhalbh
 msgid "AI for the disconnected player"
 msgstr "IF dhan chluicheadair a dh’fhalbh"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7643,8 +7643,8 @@ msgstr "Dearbh an fhàgail"
 msgid "Are you sure you wish to exit this game?"
 msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo fhàgail?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:269
-#: ../../src/wui/game_main_menu_save_game.cc:309
+#: ../../src/wui/game_main_menu_save_game.cc:270
+#: ../../src/wui/game_main_menu_save_game.cc:310
 msgid "Error Saving Game!"
 msgstr "Mearachd le sàbhaladh a’ gheama!"
 

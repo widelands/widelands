@@ -60,6 +60,7 @@
 #include "wui/encyclopedia_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
@@ -951,6 +952,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kObjectives:
 					w = &GameObjectivesMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kDiplomacy:
+					w = &GameDiplomacyMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kMessages:
 					w = &GameMessageMenu::load(fr, *this);
