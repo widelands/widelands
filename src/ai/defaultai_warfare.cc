@@ -981,7 +981,7 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	militarysites.front().understaffed = 0;
 
 	const bool can_be_dismantled =
-	   military_last_dismantle_ + Duration(45 * 1000) < gametime &&
+	   military_last_dismantle_ + Duration(30 * 1000) < gametime &&
 	   (bf.own_military_presence - current_soldiers > 0 || bf.military_unstationed > 2) &&
 	   militarysites.front().built_time + Duration(10 * 60 * 1000) < gametime &&
 	   bf.military_loneliness < 1000 - 10 * std::abs(management_data.get_military_number_at(14));
@@ -1004,13 +1004,13 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	// We calculate the score - if positive, site will be dismounted
 	// We starting with positive number, most modificators are decreasing th score
 	int32_t dismantle_score = 3 * management_data.get_military_number_at(91) / 2 + 100;
-	dismantle_score -= 2 * management_data.neuron_pool[13].get_result_safe(
-	                          bf.enemy_owned_land_nearby / 2, kAbsValue);
+	dismantle_score -= 3 * management_data.neuron_pool[13].get_result_safe(
+	                          bf.enemy_owned_land_nearby / 10, kAbsValue);
 	dismantle_score -= (bf.enemy_owned_land_nearby > 0) ?
                          std::abs(management_data.get_military_number_at(77)) :
                          -std::abs(management_data.get_military_number_at(77));
 	dismantle_score -=
-	   management_data.neuron_pool[14].get_result_safe(bf.unowned_land_nearby / 2, kAbsValue);
+	   management_data.neuron_pool[14].get_result_safe(bf.unowned_land_nearby / 10, kAbsValue);
 	dismantle_score -= (bf.unowned_land_nearby > 0) ?
                          std::abs(management_data.get_military_number_at(99)) :
                          -std::abs(management_data.get_military_number_at(99));
@@ -1027,9 +1027,9 @@ bool DefaultAI::check_militarysites(const Time& gametime) {
 	// dismantle_score -= management_data.neuron_pool[30].get_result_safe( // NOCOM uncomment this
 	//	                        bf.future_military_loneliness, kAbsValue);
 	if (soldier_status_ == SoldiersStatus::kBadShortage) {
-		dismantle_score += 2 * std::abs(management_data.get_military_number_at(77));
+		dismantle_score += 2 * std::abs(management_data.get_military_number_at(24));
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
-		dismantle_score += std::abs(management_data.get_military_number_at(77));
+		dismantle_score += std::abs(management_data.get_military_number_at(24));
 	}
 	dismantle_score -=
 	   management_data.neuron_pool[45].get_result_safe(bf.military_score_ / 50, kAbsValue);
