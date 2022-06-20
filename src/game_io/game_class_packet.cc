@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 7;
+constexpr uint16_t kCurrentPacketVersion = 8;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol */) {
 	try {
@@ -67,6 +67,17 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 			} else {
 				game.check_legacy_addons_desync_magic();
 			}
+
+			game.diplomacy_allowed_ = (packet_version < 8 || fr.unsigned_8() > 0);
+			game.pending_diplomacy_actions_.clear();
+			if (packet_version >= 8) {
+				for (size_t i = fr.unsigned_32(); i > 0; --i) {
+					const PlayerNumber p1 = fr.unsigned_8();
+					const DiplomacyAction a = static_cast<DiplomacyAction>(fr.unsigned_8());
+					const PlayerNumber p2 = fr.unsigned_8();
+					game.pending_diplomacy_actions_.emplace_back(p1, a, p2);
+				}
+			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -104,6 +115,14 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const /*
 	fw.unsigned_32(game.descriptions().load_order().size());
 	for (const std::string& s : game.descriptions().load_order()) {
 		fw.string(s);
+	}
+
+	fw.unsigned_8(game.diplomacy_allowed_ ? 1 : 0);
+	fw.unsigned_32(game.pending_diplomacy_actions_.size());
+	for (const auto& a : game.pending_diplomacy_actions_) {
+		fw.unsigned_8(a.sender);
+		fw.unsigned_8(static_cast<uint8_t>(a.action));
+		fw.unsigned_8(a.other);
 	}
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.

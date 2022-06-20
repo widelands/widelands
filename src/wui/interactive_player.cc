@@ -42,6 +42,7 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/general_statistics_menu.h"
@@ -210,7 +211,14 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	                      _("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives),
 	                      UI::PanelStyle::kWui),
 	                   &objectives_, true);
-	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
+	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
+
+	add_toolbar_button("wui/menus/diplomacy", "diplomacy",
+	                   as_tooltip_text_with_hotkey(
+	                      _("Diplomacy"), shortcut_string_for(KeyboardShortcut::kInGameDiplomacy),
+	                      UI::PanelStyle::kWui),
+	                   &diplomacy_, true);
+	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 
 	toggle_message_menu_ =
 	   add_toolbar_button("wui/menus/message_old", "messages",
@@ -473,6 +481,14 @@ void InteractivePlayer::think() {
 			expedition_port_spaces_.erase(it);
 			// If another port space also needs removing, we'll take care of it in the next frame
 			return;
+		}
+	}
+
+	// Pop up diplomacy confirmation windows for new actions affecting us
+	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
+		if (pda.other == player_number() && handled_diplomacy_actions_.count(&pda) == 0) {
+			handled_diplomacy_actions_.insert(&pda);
+			new DiplomacyConfirmWindow(*this, pda);
 		}
 	}
 }
@@ -791,6 +807,10 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
 			objectives_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameDiplomacy, code)) {
+			diplomacy_.toggle();
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {

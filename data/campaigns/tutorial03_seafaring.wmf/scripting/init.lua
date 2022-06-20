@@ -15,6 +15,7 @@ include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
 sf = map.player_slots[1].starting_field
 second_port_field = map:get_field(37, 27)
 shipyard_tip = map:get_field(37, 41)
