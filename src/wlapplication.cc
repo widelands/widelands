@@ -23,6 +23,7 @@
 #include <csignal>
 #endif
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <memory>
 #include <regex>
@@ -409,6 +410,28 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 		// too frequent failures
 		log_err("Failed to initialize SDL, no valid video driver: %s", SDL_GetError());
 		exit(2);
+	}
+
+	// Try to detect configurations with inverted horizontal scroll
+	const char* sdl_video = SDL_GetCurrentVideoDriver();
+	assert(sdl_video != nullptr);
+	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
+	SDL_GetVersion(&sdl_ver);
+	bool sdl_scroll_x_bug = false;
+
+	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
+	if (sdl_ver.major == 2 && sdl_ver.minor == 0) {
+		if (std::strcmp(sdl_video, "x11") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 18;
+		} else if (std::strcmp(sdl_video, "wayland") == 0) {
+			sdl_scroll_x_bug = sdl_ver.patch < 20;
+		}
+	}
+	if (sdl_scroll_x_bug) {
+		log_info("Inverting horizontal mousewheel scrolling for SDL %d.%d.%d with %s\n",
+		         sdl_ver.major, sdl_ver.minor, sdl_ver.patch, sdl_video);
+		set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, true);
+		update_mousewheel_settings();
 	}
 
 	g_gr = new Graphic();
@@ -1603,9 +1626,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	if (ask_for_bug_report) {
 		log_err("  Please report this problem to help us improve Widelands.\n"
 		        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
-		        "  You are using build %s (%s).\n"
+		        "  You are using version %s.\n"
 		        "  Please add this information to your report.\n",
-		        build_id().c_str(), build_type().c_str());
+		        build_ver_details().c_str());
 	}
 	log_err("  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
@@ -1619,9 +1642,9 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		   format(
 		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
 		        "this problem to help us improve Widelands. You will find related messages in the "
-		        "standard output (stdout.txt on Windows). You are using build %2$s "
-		        "(%3$s).\nPlease add this information to your report."),
-		      error, build_id(), build_type()),
+		        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
+		        "Please add this information to your report."),
+		      error, build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return;
@@ -1635,12 +1658,12 @@ void WLApplication::emergency_save(UI::Panel* panel,
             format(
 		         _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
 		           "this problem to help us improve Widelands. You will find related messages in the "
-		           "standard output (stdout.txt on Windows). You are using build %2$s "
-		           "(%3$s).\n\nPlease add this information to your report.\n\nWould you like "
+		           "standard output (stdout.txt on Windows). You are using version %2$s.\n\n"
+		           "Please add this information to your report.\n\nWould you like "
 		           "Widelands "
 		           "to attempt to create an emergency savegame? It is often – though not always – "
 		           "possible to load it and continue playing."),
-		         error, build_id(), build_type()) :
+		         error, build_ver_details()) :
             format(
 		         _("The game ended unexpectedly for the following reason:\n\n%s\n\nWould you like "
 		           "Widelands to attempt to create an emergency savegame? It is often – though not "

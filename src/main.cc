@@ -36,8 +36,7 @@
  * Cross-platform entry point for SDL applications.
  */
 int main(int argc, char* argv[]) {
-	std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
-	          << std::endl;
+	std::cout << "This is Widelands version " << build_ver_details() << std::endl;
 
 	WLApplication* g_app = nullptr;
 	try {
@@ -50,7 +49,7 @@ int main(int argc, char* argv[]) {
 		return 0;
 	} catch (const ParameterError& e) {
 		//  handle wrong commandline parameters
-		show_usage(build_id(), build_type(), e.level_);
+		show_usage(build_ver_details(), e.level_);
 		if (e.what()[0] != 0) {
 			std::cerr << std::string(60, '=') << std::endl << std::endl << e.what() << std::endl;
 		}
@@ -62,8 +61,8 @@ int main(int argc, char* argv[]) {
 	catch (const WException& e) {
 		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
 		          << "') in outermost handler!\nThe exception said: " << e.what()
-		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-		          << '(' << build_type() << ')' << ".\n"
+		          << "\n\nThis should not happen. Please file a bug report on version "
+		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
 		delete g_app;
@@ -72,8 +71,8 @@ int main(int argc, char* argv[]) {
 	} catch (const std::exception& e) {
 		std::cerr << "\nCaught exception (of type '" << typeid(e).name()
 		          << "') in outermost handler!\nThe exception said: " << e.what()
-		          << "\n\nThis should not happen. Please file a bug report on version " << build_id()
-		          << '(' << build_type() << ')' << ".\n"
+		          << "\n\nThis should not happen. Please file a bug report on version "
+		          << build_ver_details() << ".\n"
 		          << "and remember to specify your operating system.\n\n"
 		          << std::flush;
 		delete g_app;

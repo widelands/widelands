@@ -269,6 +269,20 @@ void DefaultAI::think() {
 		}
 		return;
 	}
+	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
+		if (pda.other == player_number()) {
+			// TODO(Nordfriese): The AI just makes a random choice every time.
+			// In the future, make a strategic decision here.
+			const bool accept = RNG::static_rand(5) == 0;
+			game().send_player_diplomacy(pda.other,
+			                             (pda.action == Widelands::DiplomacyAction::kInvite ?
+                                          (accept ? Widelands::DiplomacyAction::kAcceptInvite :
+                                                    Widelands::DiplomacyAction::kRefuseInvite) :
+                                          (accept ? Widelands::DiplomacyAction::kAcceptJoin :
+                                                    Widelands::DiplomacyAction::kRefuseJoin)),
+			                             pda.sender);
+		}
+	}
 
 	SchedulerTaskId due_task = SchedulerTaskId::kUnset;
 
@@ -1831,6 +1845,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.enemy_wh_nearby = false;
 	field.military_in_constr_nearby = 0;
 	field.military_loneliness = 1000;
+	field.future_military_loneliness = 1000;
 	field.military_stationed = 0;
 	field.military_unstationed = 0;
 	field.own_military_presence = 0;
@@ -1956,6 +1971,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	} while (second_area.advance(map));
 
 	assert(field.military_loneliness <= 1000);
+	assert(field.future_military_loneliness <= 1000);
 
 	// if there is a militarysite on the field, we try to walk to enemy
 	field.enemy_accessible_ = false;
@@ -1983,7 +1999,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.inland = true;
 	}
 
-	const uint8_t score_parts_size = 69;
+	const uint8_t score_parts_size = 72;
 	int32_t score_parts[score_parts_size] = {0};
 	if (field.enemy_owned_land_nearby != 0u) {
 		score_parts[0] = 3 * management_data.neuron_pool[73].get_result_safe(
@@ -2033,6 +2049,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		score_parts[64] = (field.enemy_wh_nearby) ?
                            std::abs(management_data.get_military_number_at(135)) :
                            -std::abs(management_data.get_military_number_at(135));
+		score_parts[70] = management_data.neuron_pool[32].get_result_safe(
+		   field.future_military_loneliness / 50, kAbsValue);
 
 	} else {  // for expansion or inner land
 
@@ -2103,6 +2121,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		    spots_avail.at(Widelands::BUILDCAPS_BIG) <= 2) {
 			score_parts[65] = -10 * std::abs(management_data.get_military_number_at(54));
 		}
+		score_parts[71] = management_data.neuron_pool[43].get_result_safe(
+		   field.future_military_loneliness / 50, kAbsValue);
 	}
 
 	// common inputs
@@ -2138,7 +2158,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[49] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
                         -std::abs(management_data.get_military_number_at(81)) :
                         0;
-	score_parts[55] = (field.military_loneliness < 10) ?
+	score_parts[55] = (field.military_loneliness < 50) ?
                         2 * std::abs(management_data.get_military_number_at(141)) :
                         0;
 	score_parts[56] =
@@ -2173,6 +2193,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   (field.unowned_mines_spots_nearby == 0 && mine_fields_stat.count_types() <= 4) ?
          -std::abs(management_data.get_military_number_at(159)) :
          0;
+
+	score_parts[69] = management_data.neuron_pool[30].get_result_safe(
+	   field.future_military_loneliness / 50, kAbsValue);
 
 	for (int32_t part : score_parts) {
 		field.military_score_ += part;
@@ -4018,6 +4041,7 @@ bool DefaultAI::check_economies() {
 		get_economy_observer(flag.economy(Widelands::wwWORKER))->flags.push_back(&flag);
 	}
 
+	size_t eco_size = economies.size();
 	for (std::deque<EconomyObserver*>::iterator obs_iter = economies.begin();
 	     obs_iter != economies.end(); ++obs_iter) {
 		// check if any flag has changed its economy
@@ -4029,6 +4053,10 @@ bool DefaultAI::check_economies() {
 				get_economy_observer((*j)->economy(Widelands::wwWORKER))->flags.push_back(*j);
 				// and erase from this economy's observer
 				j = fl.erase(j);
+				if (eco_size != economies.size()) {
+					// economies was modified, so obs_iter is invalid now.
+					return true;
+				}
 			} else {
 				++j;
 			}
@@ -6088,7 +6116,7 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 			if (radius > dist) {
 				bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
 				if (bf.coords != constructionsite->get_position()) {
-					bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+					bf.future_military_loneliness *= static_cast<double_t>(dist) / radius;
 				}
 				++bf.military_in_constr_nearby;
 			}
@@ -6115,6 +6143,7 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 
 			if (bf.coords != militarysite->get_position()) {
 				bf.military_loneliness *= static_cast<double_t>(dist) / radius;
+				bf.future_military_loneliness *= static_cast<double_t>(dist) / radius;
 			}
 		}
 	} else {

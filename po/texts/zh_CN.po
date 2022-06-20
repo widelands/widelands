@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -297,6 +297,10 @@ msgstr "其他"
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
 msgstr "游戏程序集成打包"
+
+#: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"

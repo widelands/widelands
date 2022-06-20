@@ -168,6 +168,8 @@ public:
 
 	bool is_filtered();
 
+	std::string get_filter_text();
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry
@@ -211,7 +213,8 @@ private:
 	/// Updates the buttons
 	void update();
 
-	/// Updates the title and tooltip of the display button and triggers a 'selected' signal.
+	/// Updates the title and tooltip of the display button, closes the dropdown and triggers a
+	/// 'selected' signal.
 	void set_value();
 	/// Toggles the dropdown list on and off and sends a notification if the list is visible
 	/// afterwards.

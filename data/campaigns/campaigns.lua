@@ -98,6 +98,7 @@ return {
          description = _("When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."),
          scenarios = {
             "atl01.wmf",
+            "atl02.wmf",
             "dummy.wmf"
          }
       },

@@ -91,7 +91,7 @@ wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 # Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
 # and don't specify '-DWL_INSTALL_BINDIR' when configuring.
 # Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
-set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+wl_set_if_unset(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
@@ -373,7 +373,13 @@ endif()
 
 if(NOT MSVC)
   # Turn some warnings into errors.
-  wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)))
+    # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
+    # TODO(Nordfriese): As soon as a new g++ version fixes the bug, reenable -Werror for the working version.
+    message(WARNING "This compiler is known to cause false-positive warnings.")
+  else()
+    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
+  endif()
   if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
     # Silence some false positives on older g++
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
