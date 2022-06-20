@@ -355,7 +355,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      ground_water(1),
      space_consumers_nearby(0),
      rangers_nearby(0),
-	 area_military_capacity(0),
+     area_military_capacity(0),
      future_area_military_capacity(0),
      military_loneliness(1000),
      future_military_loneliness(1000),
