@@ -3346,17 +3346,16 @@ void DefaultAI::check_flag_distances(const Time& gametime) {
 
 // Dealing with diplomacy actions
 void DefaultAI::diplomacy_actions(const Time& gametime) {
-	
+
 	for (const Widelands::Game::PendingDiplomacyAction& pda : game().pending_diplomacy_actions()) {
 		if (pda.other == player_number()) {
 			// TODO(Nordfriese): The AI just makes a random choice every time.
 			// In the future, make more strategic decision here. Add asking for alliance
 			bool accept = RNG::static_rand(5) == 0;
 			// don't accept any diplomacy for the first 10 + x minutes to avoid click races for allies
-			accept = accept && gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
+			accept &= gametime > Time((10 + RNG::static_rand(10)) * 60 * 1000);
 			// only accept if asking player is stronger (based on mil power and land)
-			accept = accept && 
-					  player_statistics.get_player_power(pda.sender) *
+			accept &= player_statistics.get_player_power(pda.sender) *
 					  (player_statistics.get_player_land(pda.sender) / 100) >
 					  player_statistics.get_player_power(player_number()) *
 					  (player_statistics.get_player_land(player_number()) /100);
