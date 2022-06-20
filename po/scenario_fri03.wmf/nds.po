@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2021
+# Benedikt Straub <benedikt-straub@web.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,7 +171,7 @@ msgid ""
 msgstr ""
 "Atterdag! De König vun dat Däänsk Riek, un mien sworen Feind. Mennigmaal "
 "hebb ick de Herzogen up de Höövdland bistahn, as se sik tegen sien Dörst vör"
-" Krieg un Innehmen wehrt hebben. un meestens hebben wi hüm ok manntjet. Aver"
+" Krieg un Innehmen wehrt hebben, un meestens hebben wi hüm ok manntjet. Aver"
 " vör acht Weken is he mit een paar vun sienen Fründen up miener eegen Insel."
 " Föhr, lannt, un hett versöcht, ’t intonehmen."
 

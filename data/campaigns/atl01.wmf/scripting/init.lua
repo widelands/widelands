@@ -24,6 +24,8 @@ p1 = game.players[1]
 first_tower_field = map:get_field(94, 149)
 second_tower_field = map:get_field(79, 150)
 
+game.allow_diplomacy = false
+
 -- =================
 -- global variables
 -- =================
