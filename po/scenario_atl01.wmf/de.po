@@ -10,7 +10,7 @@
 # millimarg, 2015
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Venatrix, 2015
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2014-2015
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: Klaus Halfmann <klaus.halfmann@arcor.de>, 2016,2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -138,7 +138,7 @@ msgstr "Baue zwei Räuchereien, um rohes Fleisch und Fisch zu räuchern"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"
-msgstr "Baue eine Spinnenfarm und eine Weberei"
+msgstr "Baue eine Spinnenzucht und eine Weberei"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Spidercloth Production"
@@ -151,7 +151,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Die Weber stellen Spinnenstoff und Wappenröcke in der Weberei her. Spinnenstoff wird zum Bau einiger Gebäude und zur Herstellung von Kleidung benötigt, wohingegen Wappenröcke die Uniformen der Soldaten sind. Die Weberei benötigt Goldgarn und Spinnenseide als Ausgangsmaterial. Spinnenseide wird in der Spinnenfarm und Goldgarn in der Goldspinnerei aus Gold hergestellt."
+msgstr "Die Weber stellen Spinnenstoff und Wappenröcke in der Weberei her. Spinnenstoff wird zum Bau einiger Gebäude und zur Herstellung von Kleidung benötigt, wohingegen Wappenröcke die Uniformen der Soldaten sind. Die Weberei benötigt Goldgarn und Spinnenseide als Ausgangsmaterial. Spinnenseide wird in der Spinnenzucht und Goldgarn in der Goldspinnerei aus Gold hergestellt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
@@ -159,7 +159,7 @@ msgstr "Baue eine Weberei"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Build a spider farm"
-msgstr "Baue eine Spinnenfarm"
+msgstr "Baue eine Spinnenzucht"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
@@ -186,7 +186,7 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Die Erze müssen in einem Hochofen verhüttet werden, bevor sie verwendet werden können. Die verhütteten Waren werden dann in der Waffenschmiede, der Rüstungsschmiede und vom Werkzeugmacher verarbeitet."
+msgstr "Die Erze müssen in einem Hochofen verhüttet werden, bevor sie verwendet werden können. Die verhütteten Waren werden dann in der Waffenschmiede, der Rüstungsschmiede und der Werkzeugmacherei verarbeitet."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
@@ -204,7 +204,7 @@ msgstr "Baue eine Rüstungsschmiede und eine Waffenschmiede"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
-msgstr "Baue eine Werkzeugschmiede"
+msgstr "Baue eine Werkzeugmacherei"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
@@ -603,7 +603,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Möge Satul Euch wämen, Jundlina. Mein Name ist Opol, und ich bin der höchste Weber der Gilde, die Atlantis und Lutas mit Euch verlassen hat. Ich komme in der Tat mir traurigen Neuigkeiten: Wir haben keinen Spinnenstoff mehr. Wir konnten kein einziges Stück in unseren Lagerhäusern finden. Könntet Ihr nicht der Webergilde helfen und den Bau einer Weberei und einer Spinnenfarm in Auftrag geben? Die Spinnen liefern die feinste Seide und wir werden daraus den besten Spinnenstoff herstellen."
+msgstr "Möge Satul Euch wämen, Jundlina. Mein Name ist Opol, und ich bin der höchste Weber der Gilde, die Atlantis und Lutas mit Euch verlassen hat. Ich komme in der Tat mir traurigen Neuigkeiten: Wir haben keinen Spinnenstoff mehr. Wir konnten kein einziges Stück in unseren Lagerhäusern finden. Könntet Ihr nicht der Webergilde helfen und den Bau einer Weberei und einer Spinnenzucht in Auftrag geben? Die Spinnen liefern die feinste Seide und wir werden daraus den besten Spinnenstoff herstellen."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -620,7 +620,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Möge Satul auch Euch wärmen, Opol. Ich wollte mit der Produktion von Spinnenstoff noch etwas warten, aber ich verstehe Eure Eile. Euer Vorschlag klingt gut, ich werde eine Weberei und eine Spinnenfarm bauen. Ich werde auch eine Goldspinnerei bauen, damit die Goldenen Wappenröcke ihrem Namen auch gerecht werden."
+msgstr "Möge Satul auch Euch wärmen, Opol. Ich wollte mit der Produktion von Spinnenstoff noch etwas warten, aber ich verstehe Eure Eile. Euer Vorschlag klingt gut, ich werde eine Weberei und eine Spinnenzucht bauen. Ich werde auch eine Goldspinnerei bauen, damit die Goldenen Wappenröcke ihrem Namen auch gerecht werden."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
@@ -633,7 +633,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr "Möge Satul Euch wärmen, Jundlina! Die Weberei, die Goldspinnerei und die Spinnenfarm sind fertig und nehmen soeben ihre Arbeit auf. Die Webergilde ist sehr dankbar für Eure Unterstützung. Wir werden unser Wort halten und schon bald den ersten Wappenrock liefern."
+msgstr "Möge Satul Euch wärmen, Jundlina! Die Weberei, die Goldspinnerei und die Spinnenzucht sind fertig und nehmen soeben ihre Arbeit auf. Die Webergilde ist sehr dankbar für Eure Unterstützung. Wir werden unser Wort halten und schon bald den ersten Wappenrock liefern."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
@@ -655,7 +655,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Möge Satul Euch wärmen, Jundlina! Habt Ihr schon darüber nachgedacht, in den Bergen um uns herum nach Rohstoffen zu suchen? Uns fehlt es an Bergkristallen und Diamanten für unsere Gebäude. Mehr Eisen, Gold und vor allem Kohle könnten wir auch gebrauchen. Wenn wir einen ausreichenden Vorrat dieser Rohstoffe finden könnten, können wir mit der Produktion von Waffen und Werkzeuge beginnen; das würde sehr helfen. Natürlich brauchen wir auch einen Hochofen, eine Waffen- und Rüstungsschmiede und einen Werkzeugmacher. Und vielleicht noch mehr."
+msgstr "Möge Satul Euch wärmen, Jundlina! Habt Ihr schon darüber nachgedacht, in den Bergen um uns herum nach Rohstoffen zu suchen? Uns fehlt es an Bergkristallen und Diamanten für unsere Gebäude. Mehr Eisen, Gold und vor allem Kohle könnten wir auch gebrauchen. Wenn wir einen ausreichenden Vorrat dieser Rohstoffe finden könnten, können wir mit der Produktion von Waffen und Werkzeuge beginnen; das würde sehr helfen. Natürlich brauchen wir auch einen Hochofen, eine Waffen- und Rüstungsschmiede und eine Werkzeugmacherei. Und vielleicht noch mehr."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -670,18 +670,18 @@ msgstr "Das habe ich in Betracht gezogen, Sidolus. Ich denke, es wird Zeit. Wir 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor berichtet"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Möge Satul Euch wärmen, Jundlina! Wir haben eine Werkzeugmacherei fertiggestellt und jetzt werden unsere Werkzeugmacher im Nu neue Werkzeuge herstellen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlina erinnert"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -690,7 +690,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped wit a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Möge Satul auch euch wärmen, Loftomor. Das sind wirklich gute Nachrichten. Aber bitte berücksichtige, dass unsere Werkzeugmacher mit einer Säge ausgerüstet werden müssen. Die Herstellung von Werkzeugen ist eine Kunst für uns, die ein präzises Werkzeug wie eine Säge erfordert und keinen brutalen Hammer wie bei anderen Stämmen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -948,7 +948,7 @@ msgstr "Herzlichen Glückwunsch!"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Du hast diese Mission vollendet. Du kannst, falls du möchtest, weiterspielen, ansonsten fahre mit der nächsten Mission fort."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
