@@ -70,6 +70,37 @@ struct NoteThreadSafeFunctionHandled {
 	}
 };
 
+/**
+ * THREADSAFE is a convenience wrapper macro around NoteThreadSafeFunction::instantiate
+ * with a non-void return value. It calls the given function F with the given parameters
+ * in the initializer thread, and returns the return value of F implicitly converted to R.
+ *
+ * For an overloaded function F, you need to use THREADSAFE_T with the explicit signature S of F.
+ * For a function with the declaration
+ *     int foo (double bar, const std::string& baz)
+ * the signature would be
+ *     int(*)(double, const std::string&)
+ *
+ * With newer standards than c++11 this could be done so much more elegantly. Solution based on
+ * https://stackoverflow.com/a/36492736 and https://stackoverflow.com/a/37912463
+ */
+#define THREADSAFE_T(R, S, F, ...) multithreading_impl::wrapper<R, S, F>(__VA_ARGS__)
+#define THREADSAFE(R, F, ...) THREADSAFE(R, decltype(&F), F, __VA_ARGS__)
+namespace multithreading_impl {
+template <typename F, F f> struct WrapperImpl;
+template <typename R, typename... Args, R (*f)(Args...)> struct WrapperImpl<R (*)(Args...), f> {
+	static R wrap(Args... args) {
+		R result;
+		NoteThreadSafeFunction::instantiate(
+		   [&result, &args...]() { result = f(args...); }, true, true);
+		return result;
+	}
+};
+template <typename R, typename F, F f, typename... Args> R wrapper(Args... args) {
+	return WrapperImpl<F, f>::wrap(args...);
+}
+}  // namespace multithreading_impl
+
 /* Ensures that critical pieces of code are executed by only one thread at a time.
  * More precisely: If n pieces of code C1,…,Cn are structured like this:
  *    {

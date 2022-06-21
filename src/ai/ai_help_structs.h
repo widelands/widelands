@@ -107,6 +107,7 @@ enum class SchedulerTaskId : uint8_t {
 	kManagementUpdate,
 	kUpdateStats,
 	kWarehouseFlagDist,
+	kDiplomacy,
 	kUnset
 };
 

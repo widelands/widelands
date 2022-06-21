@@ -51,6 +51,15 @@ enum class MousewheelOptionID : uint16_t {
 
 	k_End = kEditorToolsizeY,
 
+	// This is used in update_mousewheel_settings() during the initialisation
+	// of WLApplication before SDL_Init() and the actual detection afterwards,
+	// so it cannot be stored in WLApplication
+	kInvertedXDetected,
+
+	// And this is the user override if we get the detection wrong
+	// After k_End, so this will not be reset with the rest in the options dialog
+	kOverrideInvertedX,
+
 	kAlwaysOn,
 	kDisabled,
 	kNoMod
