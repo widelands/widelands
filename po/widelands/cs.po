@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-16 03:38+0000\n"
+"POT-Creation-Date: 2022-06-19 03:56+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -288,8 +288,8 @@ msgstr "listopad"
 msgid "Dec"
 msgstr "prosinec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -303,12 +303,12 @@ msgstr "Hlavní nabídka"
 msgid "Tools"
 msgstr "Nástroje"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -498,10 +498,10 @@ msgstr "Informace"
 msgid "Click on a field to show information about it"
 msgstr "Kliknutím na pole mapy se zobrazí jeho popis"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -578,7 +578,7 @@ msgstr "Zobrazit suroviny"
 msgid "Unsupported Format"
 msgstr "Nepodporovaný formát"
 
-#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:778
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:801
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -610,11 +610,11 @@ msgstr "Mapa nebyla uložena, opravdu chceš ukončit editor?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1618
+#: ../../src/wlapplication.cc:1641
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1620
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -717,8 +717,8 @@ msgstr "důlní místo"
 msgid "port"
 msgstr "přístav"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1018,7 +1018,7 @@ msgstr "Limit pro délku vodní cesty:"
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
-#: ../../src/ui_fsmenu/mousewheel_options.cc:56
+#: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
 msgstr "Neaktivní"
 
@@ -2591,7 +2591,7 @@ msgid "Checking map"
 msgstr "Ověřování mapy"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:726
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:749
 msgid "Preparing game…"
 msgstr "Příprava hry…"
 
@@ -3291,8 +3291,8 @@ msgstr[1] "%d pole"
 msgstr[2] "%d polí"
 msgstr[3] "%d polí"
 
-#: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:49
-#: ../../src/wui/watchwindow.cc:76
+#: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:41
+#: ../../src/ui_fsmenu/mousewheel_report.cc:85 ../../src/wui/watchwindow.cc:76
 msgid "Close"
 msgstr "Zavřít"
 
@@ -3312,85 +3312,17 @@ msgstr "Připnout"
 msgid "Unpin"
 msgstr "Odepnout"
 
-#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:466
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:466
 msgid "About Widelands"
 msgstr "O Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:57 ../../src/ui_fsmenu/about.cc:62
+#: ../../src/ui_fsmenu/about.cc:49 ../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
 msgstr "Chyba Lua"
 
-#: ../../src/ui_fsmenu/about.cc:71 ../../src/ui_fsmenu/addons/packager.cc:144
-msgid "Version:"
-msgstr "Verze:"
-
-#: ../../src/ui_fsmenu/about.cc:72
-msgid "Operating System:"
-msgstr "Operační systém:"
-
-#: ../../src/ui_fsmenu/about.cc:74
-msgid "MacOS"
-msgstr "MacOS"
-
-#: ../../src/ui_fsmenu/about.cc:76
-msgid "Windows (64 bit)"
-msgstr "Windows (64 bit)"
-
-#: ../../src/ui_fsmenu/about.cc:78
-msgid "Windows (32 bit)"
-msgstr "Windows (32 bit)"
-
-#: ../../src/ui_fsmenu/about.cc:80
-msgid "Linux"
-msgstr "Linux"
-
-#: ../../src/ui_fsmenu/about.cc:82
-msgid "FreeBSD"
-msgstr "FreeBSD"
-
-#: ../../src/ui_fsmenu/about.cc:84
-msgid "Unix"
-msgstr "Unix"
-
-#: ../../src/ui_fsmenu/about.cc:86
-msgid "Unknown"
-msgstr "Neznámý"
-
-#: ../../src/ui_fsmenu/about.cc:89
-msgid "Locale:"
-msgstr "Jazyk:"
-
-#: ../../src/ui_fsmenu/about.cc:90
-msgid "Home Directory:"
-msgstr "Domovský adresář:"
-
-#: ../../src/ui_fsmenu/about.cc:91
-msgid "Configuration File:"
-msgstr "Konfigurační soubor:"
-
-#: ../../src/ui_fsmenu/about.cc:92
-msgid "Data Directory:"
-msgstr "Datový adresář:"
-
-#: ../../src/ui_fsmenu/about.cc:93
-msgid "Locale Directory:"
-msgstr "Jazykový adresář:"
-
-#: ../../src/ui_fsmenu/about.cc:94
-msgid "Executable Directory:"
-msgstr "Adresář se spustitelnými soubory:"
-
-#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:122
 msgid "Technical Info"
 msgstr "Technické údaje"
-
-#: ../../src/ui_fsmenu/about.cc:130
-msgid "Copy"
-msgstr "Kopírovat"
-
-#: ../../src/ui_fsmenu/about.cc:131
-msgid "Copy the technical report to the clipboard"
-msgstr "Zkopírovat technické údaje do schránky"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
 msgid "Contact Form"
@@ -3621,10 +3553,12 @@ msgid ""
 msgstr "Více informací o vytváření a publikování vlastních rozšíření lze nalézt na %s."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
+#: ../../src/ui_fsmenu/mousewheel_report.cc:41
 msgid "Open Link"
 msgstr "Otevřít odkaz"
 
 #: ../../src/ui_fsmenu/addons/manager.cc:364
+#: ../../src/ui_fsmenu/mousewheel_report.cc:46
 msgid "Copy Link"
 msgstr "Zkopírovat odkaz"
 
@@ -4052,6 +3986,11 @@ msgstr "Jméno:"
 #: ../../src/ui_fsmenu/addons/packager.cc:139
 msgid "Author:"
 msgstr "Autor:"
+
+#: ../../src/ui_fsmenu/addons/packager.cc:144
+#: ../../src/ui_fsmenu/tech_info.cc:67
+msgid "Version:"
+msgstr "Verze:"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:313
 msgid "New Add-On"
@@ -5290,7 +5229,7 @@ msgstr "Přezdívka:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:653
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
 msgid "nobody"
 msgstr "bezejména"
 
@@ -5600,150 +5539,178 @@ msgid "Close window"
 msgstr "Zavřít okno"
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
-#: ../../src/ui_fsmenu/mousewheel_options.cc:58
+#: ../../src/ui_fsmenu/mousewheel_options.cc:59
 msgid "Vertical scroll"
 msgstr "Vertikální posun"
 
 #. * TRANSLATORS: e.g. Ctrl+Horizontal scroll
-#: ../../src/ui_fsmenu/mousewheel_options.cc:60
+#: ../../src/ui_fsmenu/mousewheel_options.cc:61
 msgid "Horizontal scroll"
 msgstr "Horizontální posun"
 
 #. * TRANSLATORS: Used when a function works with either vertical or
 #. horizontal scrolling.
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:63
+#: ../../src/ui_fsmenu/mousewheel_options.cc:64
 msgid "Any scroll"
 msgstr "Jakýkoli posun"
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:144
+#: ../../src/ui_fsmenu/mousewheel_options.cc:147
 msgid "(plain)"
 msgstr "(bez klávesy)"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:198
+#: ../../src/ui_fsmenu/mousewheel_options.cc:201
 msgid "Neither"
 msgstr "Žádný"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:200
+#: ../../src/ui_fsmenu/mousewheel_options.cc:203
 msgid "Vertical"
 msgstr "Vertikální"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:202
+#: ../../src/ui_fsmenu/mousewheel_options.cc:205
 msgid "Horizontal"
 msgstr "Horizontální"
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:204
+#: ../../src/ui_fsmenu/mousewheel_options.cc:207
 msgid "Both"
 msgstr "Oba"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:217
+#: ../../src/ui_fsmenu/mousewheel_options.cc:220
 msgid "%1%:"
 msgstr "%1%:"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:274
+#: ../../src/ui_fsmenu/mousewheel_options.cc:277
 msgid "Scroll Setting Conflict"
 msgstr "Konflikt v nastavení posunu"
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
 #. %3 is the name of the conflicting function.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:279
+#: ../../src/ui_fsmenu/mousewheel_options.cc:282
 #, c-format
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
 msgstr "'%1$s%2$s' má konflikt s '%3$s'. Prosím vyber jinou kombinaci nebo změň nejprve konfliktní nastavení."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:337
+#: ../../src/ui_fsmenu/mousewheel_options.cc:340
 msgid "Reset Scrolling"
 msgstr "Resetovat posuny"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:338
+#: ../../src/ui_fsmenu/mousewheel_options.cc:341
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
 msgstr "Resetuje nastavení posunů na doporučené výchozí pro standardní myš s jedním kolečkem"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:347
+#: ../../src/ui_fsmenu/mousewheel_options.cc:350
 msgid "Set for Touchpad"
 msgstr "Nastavit pro touchpad"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:348
+#: ../../src/ui_fsmenu/mousewheel_options.cc:351
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
 msgstr "Nastaví 'Přibližování mapy' a 'Posun mapy' na doporučené nastavení pro touchpad nebo jiné zařízení, které dokáže posouvat jak horizontálně, tak vertikálně."
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:358
+#: ../../src/ui_fsmenu/mousewheel_options.cc:361
 msgid "Apply Scrolling"
 msgstr "Aplikovat posuny"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:359
+#: ../../src/ui_fsmenu/mousewheel_options.cc:362
 msgid "Apply scroll settings"
 msgstr "Aplikovat nastavení posunů"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:382
+#: ../../src/ui_fsmenu/mousewheel_options.cc:385
 msgid "Zoom Map"
 msgstr "Přiblížení mapy"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:390
+#: ../../src/ui_fsmenu/mousewheel_options.cc:393
 msgid "Scroll Map"
 msgstr "Posun mapy"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:399
+#: ../../src/ui_fsmenu/mousewheel_options.cc:402
 msgid "Change Game Speed"
 msgstr "Změnit rychlost hry"
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:407
+#: ../../src/ui_fsmenu/mousewheel_options.cc:410
 msgid "Change Editor Toolsize"
 msgstr "Změnit velikost nástroje editoru"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:414
+#: ../../src/ui_fsmenu/mousewheel_options.cc:417
 msgid "Invert scroll direction for map zooming:"
 msgstr "Obrátit směr posunu pro přibližování mapy:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:419
+#: ../../src/ui_fsmenu/mousewheel_options.cc:422
 msgid "Invert scroll direction for tab switching:"
 msgstr "Obrátit směr posunu pro přepínání záložek:"
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:424
+#: ../../src/ui_fsmenu/mousewheel_options.cc:427
 msgid "Invert scroll direction for increase/decrease:"
 msgstr "Obrátit směr posunu pro přidat/odebrat:"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:466
+#: ../../src/ui_fsmenu/mousewheel_options.cc:435
+msgid "Fix inverted horizontal scrolling"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:436
+msgid ""
+"An SDL bug in some configurations causes horizontal scroll to be inverted. "
+"We try to detect them, but if we got it wrong, you can fix it here. Please "
+"report if you need to turn this on, so that we can improve the detection."
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:447
+msgid "Send feedback"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:506
 msgid "Scroll Settings Conflict"
 msgstr "Konflikt v nastavení posunů"
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:467
+#: ../../src/ui_fsmenu/mousewheel_options.cc:507
 #, c-format
 msgid ""
 "‘%1$s’ or ‘%2$s’ conflicts with the recommended settings. Change the "
 "conflicting setting(s) too?"
 msgstr "'%1$s' nebo '%2$s' mají konflikt s doporučeným nastavením. Změnit také konfliktní nastavení?"
+
+#: ../../src/ui_fsmenu/mousewheel_report.cc:61
+msgid "Send Feedback for Inverted Horizontal Scrolling"
+msgstr ""
+
+#. * TRANSLATORS: %s is a URL
+#: ../../src/ui_fsmenu/mousewheel_report.cc:75
+#, c-format
+msgid ""
+"Please help us improve the detection of inverted horizontal scrolling. To do"
+" so, please report at %s that horizontal scroll direction is wrong with your"
+" configuration. Please include the below technical information."
+msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:56
 msgid "Role"
@@ -6160,18 +6127,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autoři"
@@ -6180,6 +6147,90 @@ msgstr "Autoři"
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "You"
 msgstr "Já"
+
+#: ../../src/ui_fsmenu/tech_info.cc:71
+msgid "MacOS"
+msgstr "MacOS"
+
+#: ../../src/ui_fsmenu/tech_info.cc:73
+msgid "Windows (64 bit)"
+msgstr "Windows (64 bit)"
+
+#: ../../src/ui_fsmenu/tech_info.cc:75
+msgid "Windows (32 bit)"
+msgstr "Windows (32 bit)"
+
+#: ../../src/ui_fsmenu/tech_info.cc:77
+msgid "Linux"
+msgstr "Linux"
+
+#: ../../src/ui_fsmenu/tech_info.cc:79
+msgid "FreeBSD"
+msgstr "FreeBSD"
+
+#: ../../src/ui_fsmenu/tech_info.cc:81
+msgid "Unix"
+msgstr "Unix"
+
+#: ../../src/ui_fsmenu/tech_info.cc:83
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: ../../src/ui_fsmenu/tech_info.cc:85
+msgid "Operating System:"
+msgstr "Operační systém:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:86
+msgid "Compiled with SDL version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:93
+msgid "Using SDL version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:98
+msgid "SDL video driver:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:102
+msgid "SDL horizontal scroll:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:103
+msgid "assuming inverted"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:107
+msgid "Locale:"
+msgstr "Jazyk:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:108
+msgid "Home Directory:"
+msgstr "Domovský adresář:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:109
+msgid "Configuration File:"
+msgstr "Konfigurační soubor:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:110
+msgid "Data Directory:"
+msgstr "Datový adresář:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:111
+msgid "Locale Directory:"
+msgstr "Jazykový adresář:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:113
+msgid "Executable Directory:"
+msgstr "Adresář se spustitelnými soubory:"
+
+#: ../../src/ui_fsmenu/tech_info.cc:142
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: ../../src/ui_fsmenu/tech_info.cc:143
+msgid "Copy the technical report to the clipboard"
+msgstr "Zkopírovat technické údaje do schránky"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:42
@@ -6204,59 +6255,59 @@ msgid "Unmark All"
 msgstr "Zrušit označení"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:781 ../../src/wlapplication.cc:785
-#: ../../src/wlapplication.cc:790 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:804 ../../src/wlapplication.cc:808
+#: ../../src/wlapplication.cc:813 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "Chybová zpráva:"
 
-#: ../../src/wlapplication.cc:782 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:805 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Chyba herních dat"
 
-#: ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:807
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Hře Widelands se nepodařilo nalézt soubor \"%s\"."
 
-#: ../../src/wlapplication.cc:786
+#: ../../src/wlapplication.cc:809
 msgid "File system error"
 msgstr "Chyba systému souborů"
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1305
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Prázdná hodnota parametru: %s"
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1310
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "%s nemůže být kombinováno s dalšími akcemi"
 
-#: ../../src/wlapplication.cc:1442
+#: ../../src/wlapplication.cc:1465
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Neznámý parameter: %s\nMožná chybí '='?"
 
-#: ../../src/wlapplication.cc:1563
+#: ../../src/wlapplication.cc:1586
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "--xres/--yres, --maximized a --fullscreen nejdou kombinovat"
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1604
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Neznámý parameter: %s"
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1656
 msgid "Game ended unexpectedly"
 msgstr "Hra byla neočekávaně ukončena"
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1656
 msgid "Unexpected error during the game"
 msgstr "V průběhu hry se vyskytla neočekávaná chyba"
 
-#: ../../src/wlapplication.cc:1636
+#: ../../src/wlapplication.cc:1659
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6270,7 +6321,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1668
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6280,11 +6331,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hra byla neočekávaně ukončena:\n\n%s\n\nMá být proveden pokus o nouzové uložení hry? Nouzové uložení nemusí být vždy úspěšné."
 
-#: ../../src/wlapplication.cc:1671
+#: ../../src/wlapplication.cc:1694
 msgid "Emergency save failed"
 msgstr "Nouzové ukládání selhalo"
 
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1695
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7228,9 +7279,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8194,8 +8245,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Námořní"
