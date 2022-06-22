@@ -26,7 +26,7 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-gcc mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-asio mingw-w64-%MINGWSUFFIX%-icu mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-asio mingw-w64-%MINGWSUFFIX%-icu mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
   # Downgrade incompatible packages to working version
   # - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-libtiff-4.3.0-3-any.pkg.tar.zst\""
 
@@ -48,7 +48,8 @@ build_script:
   - cmd: set /p WIDELANDS_NEXT_VERSION=<%APPVEYOR_BUILD_FOLDER%\NEXT_STABLE_VERSION
   - cmd: set WIDELANDS_SETUP_NAME=Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_NEXT_VERSION%~git(%APPVEYOR_REPO_COMMIT:~0,7%@%APPVEYOR_REPO_BRANCH%)
   # finally start the build
-  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking -DCMAKE_EXPORT_COMPILE_COMMANDS=1 %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "bash --login -c \"grep notifications %APPVEYOR_BUILD_FOLDER%/build/compile_commands.json ; cat %APPVEYOR_BUILD_FOLDER%/build/src/notifications/test/CMakeFiles/notifications_test.dir/link.txt\""
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
