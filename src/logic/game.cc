@@ -148,6 +148,7 @@ Game::Game()
      state_(gs_notrunning),
      cmdqueue_(*this),
      scenario_difficulty_(kScenarioDifficultyNotSet),
+     diplomacy_allowed_(true),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
 #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
@@ -858,6 +859,9 @@ void Game::cleanup_for_load() {
 
 	cmdqueue().flush();
 
+	pending_diplomacy_actions_.clear();
+	diplomacy_allowed_ = true;
+
 	// Statistics
 	general_stats_.clear();
 }
@@ -1136,6 +1140,10 @@ void Game::send_player_expedition_config(PortDock& pd,
                                          bool add) {
 	send_player_command(
 	   new CmdExpeditionConfig(get_gametime(), pd.get_owner()->player_number(), pd, ww, di, add));
+}
+
+void Game::send_player_diplomacy(PlayerNumber p1, DiplomacyAction a, PlayerNumber p2) {
+	send_player_command(new CmdDiplomacy(get_gametime(), p1, a, p2));
 }
 
 void Game::send_player_propose_trade(const Trade& trade) {

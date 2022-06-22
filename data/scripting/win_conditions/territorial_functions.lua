@@ -289,16 +289,18 @@ function territory_game_over(fields, players, wc_descname, wc_version)
    calculate_territory_points(fields, players, wc_descname, wc_version)
 
    for idx, pl in ipairs(players) do
-      local wonmsg = won_game_over.body .. game_status.body
-      local lostmsg = lost_game_over.body .. game_status.body
-      for i=1,#territory_points.points do
-         if territory_points.points[i][1] == team_str:format(pl.team) or territory_points.points[i][1] == pl.name then
-            if territory_points.points[i][2] >= territory_points.points[1][2] then
-               pl:send_to_inbox(won_game_over.title, wonmsg .. territory_status(fields, "had"))
-               wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
-            else
-               pl:send_to_inbox(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
-               wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
+      if not pl.resigned then
+         local wonmsg = won_game_over.body .. game_status.body
+         local lostmsg = lost_game_over.body .. game_status.body
+         for i=1,#territory_points.points do
+            if territory_points.points[i][1] == team_str:format(pl.team) or territory_points.points[i][1] == pl.name then
+               if territory_points.points[i][2] >= territory_points.points[1][2] then
+                  pl:send_to_inbox(won_game_over.title, wonmsg .. territory_status(fields, "had"))
+                  wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
+               else
+                  pl:send_to_inbox(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
+                  wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
+               end
             end
          end
       end
