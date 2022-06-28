@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-06-25 03:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -290,8 +290,8 @@ msgstr "Mar"
 msgid "Dec"
 msgstr "Jou"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -305,12 +305,12 @@ msgstr "Päävalikko"
 msgid "Tools"
 msgstr "Työkalut"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -500,10 +500,10 @@ msgstr "Tietoa"
 msgid "Click on a field to show information about it"
 msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -1442,8 +1442,8 @@ msgid ""
 "location."
 msgstr "Valitse uusi kartta, minkä jälkeen klikkaa karttaa jakaaksesi sen halutusta kohdata. Kartan kokoa kasvatettaessa, uusi sarake/rivi sijoitetaan valittusta kohdasta itään/etelään. Kartan kokoa pienennettäessä, haluttu määrä sarakkeita/rivejä poistetaan jakokohdasta itään/etelään."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2396,73 +2396,73 @@ msgstr "Laiva %d"
 #: ../../src/wui/game_diplomacy_menu.cc:114
 #: ../../src/wui/interactive_player.cc:218
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomatia"
 
 #: ../../src/logic/playercommand.cc:2161
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s kirjautui ulos ja vain seuraa nyt peliä. "
 
 #: ../../src/logic/playercommand.cc:2161
 msgid "Player Resigned"
-msgstr ""
+msgstr "Pelaaja uloskirjautui"
 
 #: ../../src/logic/playercommand.cc:2173
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Pelaaja jättää joukkueen"
 
 #: ../../src/logic/playercommand.cc:2174
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s jätti joukkueen %2$u ollen nyt vailla joukkuetta."
 
 #: ../../src/logic/playercommand.cc:2182
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Joukkueeseen liittymispyyntö"
 
 #: ../../src/logic/playercommand.cc:2183
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Joukkueeseen liittymiskutsu"
 
 #: ../../src/logic/playercommand.cc:2185
 #: ../../src/wui/game_diplomacy_menu.cc:309
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s on tehnyt pyynnön liittyä %2$s:n joukkueeseen."
 
 #: ../../src/logic/playercommand.cc:2186
 #: ../../src/wui/game_diplomacy_menu.cc:314
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s on kutsunut %2$s liittyäkseen heidän joukkueeseensa."
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Joukkuemuutos hyväksytty"
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Joukkuemuutos hylätty"
 
 #: ../../src/logic/playercommand.cc:2213
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s hyväksyi %2$s joukkueeseensa."
 
 #: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s hyväksyi kutsun liittyä joukkueeseen %2$s."
 
 #: ../../src/logic/playercommand.cc:2216
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s eväsi %2$s jäsenyyden joukkueessaan."
 
 #: ../../src/logic/playercommand.cc:2217
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s hylkäsi kutsun liittyä joukkueeseen %2$s."
 
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
@@ -5692,18 +5692,18 @@ msgstr "Päinvastainen vierityssuunta lisäämiselle/vähentämiselle:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:435
 msgid "Fix inverted horizontal scrolling"
-msgstr ""
+msgstr "Korjaa käänteinen vaakatason rullaaminen"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:436
 msgid ""
 "An SDL bug in some configurations causes horizontal scroll to be inverted. "
 "We try to detect them, but if we got it wrong, you can fix it here. Please "
 "report if you need to turn this on, so that we can improve the detection."
-msgstr ""
+msgstr "SDL-virhe joissakin asetuksissa aiheuttaa vaakatasovierityksen käänteisyyden. Yritämme saada nämä huomatuksi, mutta jos teimme jotakin väärin, voit korjata asian itse tässä. Ilmoitathan, mikäli sinun täytyy asettaa tämä käyttöön, jotta voisimme parantaa havaitsemista."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:447
 msgid "Send feedback"
-msgstr ""
+msgstr "Lähetä palautetta."
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:506
 msgid "Scroll Settings Conflict"
@@ -5718,7 +5718,7 @@ msgstr "‘%1$s’ tai ‘%2$s’ ovat ristiriidassa suositeltujen asetusten kan
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:61
 msgid "Send Feedback for Inverted Horizontal Scrolling"
-msgstr ""
+msgstr "Lähetä palautetta vaakatasovierityksen tiimoilta."
 
 #. * TRANSLATORS: %s is a URL
 #: ../../src/ui_fsmenu/mousewheel_report.cc:75
@@ -5727,7 +5727,7 @@ msgid ""
 "Please help us improve the detection of inverted horizontal scrolling. To do"
 " so, please report at %s that horizontal scroll direction is wrong with your"
 " configuration. Please include the below technical information."
-msgstr ""
+msgstr "Autathan meitä parantamaan vaakatasovierityksen tason havaitsemista. Tehdäksesi niin, ilmoitathan kohteessa %s että vaakatason vierityssuunta on väärä asetuksillasi. Liitä mukaan tekniset tiedot jotka alla."
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:56
 msgid "Role"
@@ -6199,23 +6199,23 @@ msgstr "Käyttöjärjestelmä:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:86
 msgid "Compiled with SDL version:"
-msgstr ""
+msgstr "Koottu SDL:n versiolla:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:93
 msgid "Using SDL version:"
-msgstr ""
+msgstr "Käyttäen SDL:n versiota:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:98
 msgid "SDL video driver:"
-msgstr ""
+msgstr "SDL-videoajuri:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "SDL horizontal scroll:"
-msgstr ""
+msgstr "SDL:n vaakatasovieritys:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:103
 msgid "assuming inverted"
-msgstr ""
+msgstr "olettaen käänteisenä"
 
 #: ../../src/ui_fsmenu/tech_info.cc:107
 msgid "Locale:"
@@ -7294,9 +7294,9 @@ msgstr "Satamat"
 msgid "Low productivity:"
 msgstr "Matala tuottavuus:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7706,81 +7706,81 @@ msgstr "Debug-kenttä"
 
 #: ../../src/wui/game_diplomacy_menu.cc:45
 msgid "Accept"
-msgstr ""
+msgstr "Hyväksy"
 
 #: ../../src/wui/game_diplomacy_menu.cc:48
 msgid "Reject"
-msgstr ""
+msgstr "Hylkää"
 
 #: ../../src/wui/game_diplomacy_menu.cc:62
 #, c-format
 msgid "%s has invited you to join their team."
-msgstr ""
+msgstr "%s kutsui sinut liittymään joukkueeseensa."
 
 #: ../../src/wui/game_diplomacy_menu.cc:63
 #, c-format
 msgid "%s wants to join your team."
-msgstr ""
+msgstr "%s haluaa liittyä joukkueeseesi."
 
 #: ../../src/wui/game_diplomacy_menu.cc:167
 msgid "Leave"
-msgstr ""
+msgstr "Poistu"
 
 #: ../../src/wui/game_diplomacy_menu.cc:168
 msgid "Leave your current team and become teamless"
-msgstr ""
+msgstr "Jätä nykyinen joukkueesi jääden vaille joukkuetta"
 
 #: ../../src/wui/game_diplomacy_menu.cc:170
 msgid "Resign"
-msgstr ""
+msgstr "Eroa"
 
 #: ../../src/wui/game_diplomacy_menu.cc:171
 msgid "Give up and become a spectator"
-msgstr ""
+msgstr "Luovuta ja rupea katsojaksi"
 
 #: ../../src/wui/game_diplomacy_menu.cc:182
 msgid "Join"
-msgstr ""
+msgstr "Liity"
 
 #: ../../src/wui/game_diplomacy_menu.cc:183
 msgid "Request to join this player’s team"
-msgstr ""
+msgstr "Pyyntö liittyä tämän pelaajan joukkueeseen"
 
 #: ../../src/wui/game_diplomacy_menu.cc:185
 msgid "Invite"
-msgstr ""
+msgstr "Kutsu"
 
 #: ../../src/wui/game_diplomacy_menu.cc:186
 msgid "Invite this player to join your team"
-msgstr ""
+msgstr "Kutsu tämä pelaaja liittymään joukkueeseesi"
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 msgid "No team"
-msgstr ""
+msgstr "Ei joukkuetta"
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Joukkue %u"
 
 #: ../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
 msgid "Won at %s"
-msgstr ""
+msgstr "Voitettu %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "Lost at %s"
-msgstr ""
+msgstr "Hävitty %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Eronnut %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:302
 msgid "Pending Diplomacy Actions"
-msgstr ""
+msgstr "Vireillä olevat diplomatiatoiminnot"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -8330,8 +8330,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tilastot"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Merenkäynti"
