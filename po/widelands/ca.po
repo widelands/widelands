@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-22 03:53+0000\n"
+"POT-Creation-Date: 2022-06-25 03:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -283,8 +283,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Des."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -298,12 +298,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Eines"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -493,10 +493,10 @@ msgstr "Informació"
 msgid "Click on a field to show information about it"
 msgstr "Feu clic en un camp per mostrar-ne informació"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -1435,8 +1435,8 @@ msgid ""
 "location."
 msgstr "Seleccioneu la mida del mapa. Després feu clic en el mapa per tallar-lo en el lloc desitjat. Quan augmenteu la mida del mapa, s'inseriran noves columnes/files a l'est/sud del lloc escollit. Quan disminuïu la mida del mapa, s'eliminaran les columnes/files de l'est/sud del punt de tall definit."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2389,73 +2389,73 @@ msgstr "Vaixell %d"
 #: ../../src/wui/game_diplomacy_menu.cc:114
 #: ../../src/wui/interactive_player.cc:218
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomàcia"
 
 #: ../../src/logic/playercommand.cc:2161
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s ha renunciat i ara és un espectador."
 
 #: ../../src/logic/playercommand.cc:2161
 msgid "Player Resigned"
-msgstr ""
+msgstr "Un jugador ha renunciat"
 
 #: ../../src/logic/playercommand.cc:2173
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Un jugador surt del seu equip"
 
 #: ../../src/logic/playercommand.cc:2174
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s ha sortit de l'equip %2$u i ja no té equip assignat."
 
 #: ../../src/logic/playercommand.cc:2182
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Petició d'unió a l'equip"
 
 #: ../../src/logic/playercommand.cc:2183
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Invitació d'unió a l'equip"
 
 #: ../../src/logic/playercommand.cc:2185
 #: ../../src/wui/game_diplomacy_menu.cc:309
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s demana unir-se a l'equip %2$s."
 
 #: ../../src/logic/playercommand.cc:2186
 #: ../../src/wui/game_diplomacy_menu.cc:314
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s ha invitat %2$s per unir-se al seu equip."
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "S'accepta el canvi d'equip."
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Es rebutja el canvi d'equip."
 
 #: ../../src/logic/playercommand.cc:2213
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s ha acceptat que %2$s s'uneixi al seu equip."
 
 #: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha acceptat la invitació per unir-se a l'equip de %2$s."
 
 #: ../../src/logic/playercommand.cc:2216
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s ha rebutjat que %2$s s'uneixi al seu equip."
 
 #: ../../src/logic/playercommand.cc:2217
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s ha rebutjat la invitació per unir-se a l'equip de %2$s."
 
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
@@ -7287,9 +7287,9 @@ msgstr "Ports"
 msgid "Low productivity:"
 msgstr "Productivitat baixa:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7699,81 +7699,81 @@ msgstr "Depura el camp"
 
 #: ../../src/wui/game_diplomacy_menu.cc:45
 msgid "Accept"
-msgstr ""
+msgstr "D'acord"
 
 #: ../../src/wui/game_diplomacy_menu.cc:48
 msgid "Reject"
-msgstr ""
+msgstr "Rebutja"
 
 #: ../../src/wui/game_diplomacy_menu.cc:62
 #, c-format
 msgid "%s has invited you to join their team."
-msgstr ""
+msgstr "%s us ha invitat a unir-vos al seu equip."
 
 #: ../../src/wui/game_diplomacy_menu.cc:63
 #, c-format
 msgid "%s wants to join your team."
-msgstr ""
+msgstr "%s vol unir-se al vostre equip."
 
 #: ../../src/wui/game_diplomacy_menu.cc:167
 msgid "Leave"
-msgstr ""
+msgstr "Surt"
 
 #: ../../src/wui/game_diplomacy_menu.cc:168
 msgid "Leave your current team and become teamless"
-msgstr ""
+msgstr "Deixeu el vostre equip actual."
 
 #: ../../src/wui/game_diplomacy_menu.cc:170
 msgid "Resign"
-msgstr ""
+msgstr "Renuncia"
 
 #: ../../src/wui/game_diplomacy_menu.cc:171
 msgid "Give up and become a spectator"
-msgstr ""
+msgstr "Abandona i passa a ser espectador."
 
 #: ../../src/wui/game_diplomacy_menu.cc:182
 msgid "Join"
-msgstr ""
+msgstr "Uneix-m'hi"
 
 #: ../../src/wui/game_diplomacy_menu.cc:183
 msgid "Request to join this player’s team"
-msgstr ""
+msgstr "Sol·liciteu unir-vos a l'equip d'aquest jugador."
 
 #: ../../src/wui/game_diplomacy_menu.cc:185
 msgid "Invite"
-msgstr ""
+msgstr "Invita"
 
 #: ../../src/wui/game_diplomacy_menu.cc:186
 msgid "Invite this player to join your team"
-msgstr ""
+msgstr "Inviteu aquest jugador a unir-se al vostre equip."
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 msgid "No team"
-msgstr ""
+msgstr "Sense equip"
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Equip %u"
 
 #: ../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
 msgid "Won at %s"
-msgstr ""
+msgstr "Ha guanyat a les %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "Lost at %s"
-msgstr ""
+msgstr "Ha perdut a les %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Ha renunciat a les %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:302
 msgid "Pending Diplomacy Actions"
-msgstr ""
+msgstr "Accions diplomàtiques pendents"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -8323,8 +8323,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegació"
