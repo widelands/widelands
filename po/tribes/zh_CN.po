@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-28 03:57+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -1283,8 +1283,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "木薯块根厨房"
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1702,6 +1702,7 @@ msgstr "石材车间"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1710,17 +1711,17 @@ msgstr "石材车间"
 msgid "making a shovel"
 msgstr "打造铁铲"
 
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
 msgid "making a felling ax"
 msgstr "打造伐木斧"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1736,6 +1737,8 @@ msgstr "打造弯刀"
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
@@ -1746,6 +1749,7 @@ msgstr "打造厨房用具"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1918,7 +1922,6 @@ msgstr "荒野守护者帐篷"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3657,10 +3660,10 @@ msgstr "没有花朵资源了"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "养蜂人在他的养蜂房工作区域内已找不到任何鲜花盛开的田野或者灌木丛。你应该考虑在这里修建另外一个农场或是浆果园，或者拆除或销毁这栋建筑。"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -5251,8 +5254,8 @@ msgstr "轻木树"
 msgid "Balsa Tree (Pole)"
 msgstr "轻木树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
