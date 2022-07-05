@@ -200,7 +200,7 @@ do
     ;;
     -j|--cores)
       case $2 in
-        *[^0-9]*|'')
+        *[!0-9]*|'')
           echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
           exit 1
         ;;
