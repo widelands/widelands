@@ -527,7 +527,15 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
 
   # Compile Widelands
   compile_widelands () {
-    cmake $GENERATOR .. $EXTRA_OPTS -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_TESTS=$BUILD_TESTS -DOPTION_ASAN=$USE_ASAN -DOPTION_TSAN=$USE_TSAN -DUSE_XDG=$USE_XDG -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
+    cmake $GENERATOR .. $EXTRA_OPTS                       \
+          -DCMAKE_BUILD_TYPE=$BUILD_TYPE                  \
+          -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE     \
+          -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS \
+          -DOPTION_BUILD_TESTS=$BUILD_TESTS               \
+          -DOPTION_ASAN=$USE_ASAN                         \
+          -DOPTION_TSAN=$USE_TSAN                         \
+          -DUSE_XDG=$USE_XDG                              \
+          -DUSE_FLTO_IF_AVAILABLE=${USE_FLTO}
 
     $buildtool -j $CORES
 
