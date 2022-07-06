@@ -580,7 +580,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       return 0
     fi
       $RUN rm -f update.sh || true
-      $RUN cat > update.sh << END_SCRIPT
+      if [ -z "$RUN" ]; then
+        cat > update.sh << END_SCRIPT
 #!/bin/sh
 echo "################################################"
 echo "#            Widelands update script.          #"
@@ -606,8 +607,17 @@ echo "#      Widelands was updated successfully.     #"
 echo "# You should be able to run it via ./widelands #"
 echo "################################################"
 END_SCRIPT
+
+      else  # dry run
+        echo 'cat > update.sh <<END_SCRIPT'
+        echo "   # ..."
+        echo "   $COMMANDLINE"
+        echo "   # ..."
+        echo "END_SCRIPT"
+      fi
+
       $RUN chmod +x ./update.sh
-      if [ $QUIET -eq 0 ]; then
+      if [ $QUIET -eq 0 -a -z "$RUN" ]; then
         echo "The update script has successfully been created."
       fi
   }
