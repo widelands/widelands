@@ -352,6 +352,18 @@ if [ $QUIET -eq 0 ]; then
   fi
 fi
 
+if [ -n "$RUN" ]; then
+  if [ $QUIET -eq 0 ]; then
+    echo " "
+    echo "#################################################################"
+    echo "#  Dry run: Nothing will be changed, commands will be printed.  #"
+    echo "#################################################################"
+    echo " "
+  else
+    echo "###  Dry run: Nothing will be changed, commands will be printed."
+  fi
+fi
+
 ## Get command and options to use in update.sh
 COMMANDLINE="$0"
 CMD_ADD () {
@@ -696,6 +708,6 @@ echo "###########################################################"
 elif [ -z "$RUN" ]; then
   echo "Widelands has been built successfully."
 else
-  echo "###  compile.sh completed successfully."
+  echo "###  Dry run of compile.sh has completed successfully."
 fi  # End of verbose output section
 ######################################
