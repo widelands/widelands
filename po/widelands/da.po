@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-01 04:08+0000\n"
+"POT-Creation-Date: 2022-07-04 04:05+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2021\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
@@ -713,8 +713,8 @@ msgstr "mine"
 msgid "port"
 msgstr "havn"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1010,9 +1010,9 @@ msgstr "(ingen)"
 msgid "Waterway length limit:"
 msgstr "Begrænsning på vandvejlængde:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -7288,9 +7288,9 @@ msgstr "Havne"
 msgid "Low productivity:"
 msgstr ""
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -8324,8 +8324,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistik"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Søfart"
