@@ -695,5 +695,7 @@ echo "###########################################################"
 
 elif [ -z "$RUN" ]; then
   echo "Widelands has been built successfully."
+else
+  echo "###  compile.sh completed successfully."
 fi  # End of verbose output section
 ######################################
