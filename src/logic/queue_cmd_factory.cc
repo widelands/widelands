@@ -112,6 +112,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdToggleMuteMessages();
 	case QueueCommandTypes::kMarkMapObjectForRemoval:
 		return *new CmdMarkMapObjectForRemoval();
+	case QueueCommandTypes::kDiplomacy:
+		return *new CmdDiplomacy();
 	case QueueCommandTypes::kPickCustomStartingPosition:
 		return *new CmdPickCustomStartingPosition();
 	case QueueCommandTypes::kDeleteMessage:  // Not a logic command

@@ -11,6 +11,7 @@ include "scripting/set.lua"
 
 game = wl.Game()
 map = game.map
+game.allow_diplomacy = false
 
 -- p1 = game.players[1]
 -- p1.see_all = true

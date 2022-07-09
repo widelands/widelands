@@ -309,6 +309,21 @@ heavy_industry_story = {
    },
 }
 
+hint_for_toolsmith = {
+   {
+      title = _("Loftomor Reports"),
+      body = loftomor(
+         -- TRANSLATORS: Loftomor
+         _([[May Satul warm you, Jundlina! We have completed a toolsmithy and now our toolsmiths will produce new tools in an instant.]]))
+   },
+   {
+      title = _("Jundlina Reminds"),
+      body = jundlina(_("Jundlina"),
+         -- TRANSLATORS: Jundlina
+         _([[May Satul warm you as well, Loftomor. That is good news to hear. However please remember that our toolsmiths need to be equipped with a saw. Making tools is an art for us, requiring a precise tool like a saw, not a brutal hammer like for the other tribes.]]))
+   }
+}
+
 barracks_story = {
    {
       title = _("Jundlina Writes a Letter"),
@@ -475,7 +490,7 @@ scenario_won = {
          -- TRANSLATORS: Jundlina
          _([[I expect a long journey, but we will find the land of Satul in the end. This is what I promised my people. And myself.]]))
          .. objective_text(_("Congratulations"),
-      _([[You have won this mission. Continue with the next one or keep playing for as long as you like.]]))
+      _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]))
    }
 }
 

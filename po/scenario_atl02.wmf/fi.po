@@ -1,0 +1,1678 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2022 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# LINUX SAUNA, 2022
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
+"PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: LINUX SAUNA, 2022\n"
+"Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: To be used in placeholders for switching texts according to
+#. current leader
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:373
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:574
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:585
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:618
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
+msgid "Jundlina"
+msgstr "Jundlina"
+
+#. TRANSLATORS: To be used in placeholders for switching texts according to
+#. current leader
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:40
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:446
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:461
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:543
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:553
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:568
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:637
+msgid "Sidolus"
+msgstr "Sidolus"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:49
+msgid "Find a place to build a port"
+msgstr "Etsi paikka rakentaaksesi satama"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:51
+msgid "Find Portspace"
+msgstr "Löydä tila satamalle"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:52
+msgid ""
+"To set foot on this island, we must first find a building space where a port"
+" can be built. Explore the nearby coast line to find such a building plot."
+msgstr ""
+"Astuaksesi tälle saarelle, meidän tulee aivan ensiksi löytää tila johon "
+"rakentaa satama. Tutkaile lähialueen rannikkoviivaa löytääksesi kyseisen "
+"rakennustilan."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:53
+msgid ""
+"After the port is built we should cancel the other ship’s expedition, to "
+"unload its wares as well."
+msgstr ""
+"Kun satama on rakennettu, meidän tulee keskeyttää toisen laivan "
+"tutkimusretki ja purkaa myös sen tarvikkeet satamaan."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:58
+msgid "Ensure the supply of construction materials"
+msgstr "Varmista rakennusraaka-aineiden toimitus"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:60
+msgid "Establish Basic Production Chain"
+msgstr "Luo perus tuotantoketju"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:61
+msgid ""
+"We will need at least a quarry, a few woodcutters, and a sawmill. A forester"
+" might or might not be needed depending on how fast the trees are growing "
+"around us. Find the balance."
+msgstr ""
+"Tarvitsemme ainakin louhoksen, muutamia metsureita sekä sahan. "
+"Metsänhoitajaa ei aivan välttämättä tarvita, riippuen siitä kuinka nopeasti "
+"puut ympäristössämme kasvavat. Saavuta tasapaino."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:66
+msgid "Build tools quickly"
+msgstr "Rakenna työkalut nopeasti"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:68
+msgid "Make New Tools"
+msgstr "Valmista uudet työkalut"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:69
+msgid ""
+"Most of our tools have been lost in the ship tragedy. Our people will not be"
+" able to fulfill their duties without proper tools. Luckily we still have "
+"some iron ore and plenty of coal. Build a toolsmithy, as it is a "
+"prerequisite for success on the island. Don’t forget to build a smelting "
+"works as well."
+msgstr ""
+"Useimmat työkaluistamme menetettiin laivaonnettomuudessa. Väkemme ei kykene "
+"toteuttamaan velvollisuuksiansa ilman asianmukaisia työkaluja. Onneksemme "
+"meillä on edelleenkin hiukan rautamalmia ja runsaasti hiiltä. Rakenna "
+"työkalupaja; se on edellytys menestykseemme saarella. Älä unohda myöskään "
+"sulattamon rakentamista."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:74
+msgid "Search the mountains for resources"
+msgstr "Etsi vuorilta käyttövaroja"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:76
+msgid "Build Mines"
+msgstr "Rakenna kaivoksia"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:77
+msgid ""
+"As we are able to make tools again, our supply of mining resources needs to "
+"be replenished soon. Explore the mountains and build at least one mine of "
+"each type to mine coal, iron and gold."
+msgstr ""
+"Koska kykenemme valmistamaan jälleen työkaluja, kaivosvarojen toimitusta "
+"pitää piakkoin täydentää. Tutki vuoria ja rakenna vähintäänkin yksi jokaisen"
+" tavan kaivos louhiaksesi hiiltä. rautaa ja kultaa. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:82
+msgid "Explore the surroundings"
+msgstr "Tutki ympäristöä"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:84
+msgid "Explore Your Surroundings"
+msgstr "Tutki ympäristöäsi"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:85
+msgid ""
+"We are fairly sure that we are not alone on the island. We do not know if "
+"the others on this island are friends or foes, so we need to tread "
+"carefully. Explore the island by building at least one house for a scout."
+msgstr ""
+"Olemme lähes varmoja että emme ole yksin tällä saarella. Emme ole tietoisia "
+"siitä, ovatko nämä muut asukit tällä saarella ystäviä vaiko vihamielisiä, "
+"joten meidän tulee kuluttaa saaren avuja huolellisesti. Tutki saarta ainakin"
+" yhden lähettimajan rakentamisen kautta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:90
+msgid "Expand your territory"
+msgstr "Laajenna aluettasi"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:92
+msgid "Expand Territory"
+msgstr "Laajenna aluetta"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:93
+msgid ""
+"As our settlement is growing, we will need more space for all buildings. "
+"Expand our territory by building military buildings. Build some guardhouses "
+"and at least one tower for its larger view range."
+msgstr ""
+"Nyt kun asutuksemme kasvaa, tarvitsemme lisätilaa rakennuksillemme. Laajenna"
+" aluettamme rakentamalla kasarmeja. Rakenna muutamia vartiotaloja ja "
+"vähintäänkin yksi torni sen laajemman tarkkailukyvyn johdosta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:98
+msgid "Build a spider farm and a weaving mill"
+msgstr "Rakenna hämähäkkitarha ja kutomo"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:100
+msgid "Spidercloth Production"
+msgstr "Hämähäkinsilkkituotanto"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:101
+msgid ""
+"We need some spidercloth urgently as we are running out of it. It is "
+"therefore essential to spare every piece we still have. Reduce the input of "
+"all buildings that consume spidercloth, not forgetting the construction "
+"sites."
+msgstr ""
+"Tarvitsemme hiukan hämähäkkisilkkiä pikaisesti siellä se on ehtymässä. Tässä"
+" tilanteessa on välttämätöntä säästää jokainen palanen mitä meillä sitä "
+"vielä on. Vähennä kaikkien rakennusten sisäänottoa jotka kuluttavat "
+"hämähäkinsilkkiä, unohtamatta rakennustyömaita."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
+msgid ""
+"Afterwards we need to construct a farm under all circumstances, as it needs "
+"spidercloth to be built. Additionally, we need a spider farm and a weaving "
+"mill."
+msgstr ""
+"Meidän tulee jälkeenpäin rakentaa maatila oli sitten tilanne mikä tahansa, "
+"sillä tila vaatii rakentamisekseen hämähäkkisilkkiä. Lisäksi, tarvitsemme "
+"hämähäkkitarhan sekä kutomon. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:107
+msgid "Build a trading post"
+msgstr "Rakenna kaupankäyntipiste"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:109
+msgid "Upgrade Scout’s House To Trading Post"
+msgstr "Korota lähetin maja kaupankäynnin pisteeksi"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:110
+msgid ""
+"To be able to pay the tributes to Kalitath, and to maintain contact with "
+"Jundlina, we need to enhance our scout’s house to a trading post."
+msgstr ""
+"Jotta voisimme maksaa suojelusrahaa Kalitath:ille, sekä ylläpitääksemme "
+"yhteyttä Jundlina:an, meidän tulee ehostaa lähettimajamme kaupankäyntiin "
+"soveltuvaksi paikaksi."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
+msgid "Pay all tributes to Kalitath"
+msgstr "Maksa kaikki suojelusrahat Kalitath:ille"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:117
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:130
+msgid "Send Trader To Kalitath"
+msgstr "Lähetä kauppias Kalitath:iin"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:131
+msgid ""
+"We need to send the wares to Kalitath with our trader. He will pick them up "
+"as soon as a batch is ready in his trading post."
+msgstr ""
+"Meidän tulee lähettää tarvikkeet Kalitath:iin kauppiaamme kera. Hän noutaa "
+"ne välittömästi kunhan erä on valmiina hänen pisteellään."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:132
+msgid "The following batches need to be delivered:"
+msgstr "Seuraavat erät tulee toimittaa:"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:120
+msgid "Five batches of five logs each."
+msgstr "Viisi erää joissa viisi tukkia kussakin."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:121
+msgid "Four batches of four lumps of coal each."
+msgstr "Neljä erää hiiltä jotka neljän ryppäissä jokainen."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:122
+msgid "Three batches of three iron bars each."
+msgstr "Kolme erää rautatankoja joista jokainen kolmen ryppäässä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:123
+msgid "Two batches of two gold bars each."
+msgstr "Kaksi erää kahden kultaharkon rypästä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:133
+msgid "Ten batches of five logs each."
+msgstr "Kymmenen erää tukkeja jotka viiden ryppäissä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:134
+msgid "Eight batches of four lumps of coal each."
+msgstr "Kahdeksan erää hiiltä jotka neljän ryppäissä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:135
+msgid "Six batches of three iron bars each."
+msgstr "Kuusi erää kolmen ryppään rautatankoja."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:136
+msgid "Four batches of two gold bars each."
+msgstr "Neljä erää kahdessa ryppäässä kultaharkkoja."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:141
+msgid "Defeat Maletus"
+msgstr "Kukista Maletus"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:143
+msgid "Defeat Imperial Leader Maletus"
+msgstr "Kukista keisarillinen johtaja Maletus"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:144
+msgid "We need to finish the Empire off to have a chance to build a new home."
+msgstr ""
+"Meidän täytyy päihittää Imperiumi jotta saavutamme mahdollisuuden rakentaa "
+"uusi koti."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:149
+msgid "Build a temple to worship Satul"
+msgstr "Rakenna temppeli Satul:in palvomiseen"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:151
+msgid "Build Temple For Satul"
+msgstr "Rakenna temppeli Satul:ille"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
+msgid ""
+"We need to build a temple for Satul and we need to worship him well. By this"
+" he might show these Barbarians his might and our princess might come back "
+"to her senses."
+msgstr ""
+"Meidän tulee rakentaa Satul:ille temppeli ja häntä täytyy palvoa hyvin. "
+"Täten hän saattaa osoittaa näille barbaareille mahtinsa ja prinsessamme "
+"voisi tulla takaisin järkiinsä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:153
+msgid ""
+"And we need to have a scout’s house to not lose track of what is going on at"
+" the Barbarians’ territory."
+msgstr ""
+"Myöskin meillä tulee olla lähettitalo jotta pysymme kosketuksessa siihen "
+"mitä Barbaarien alueella tapahtuu."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:158
+msgid "Worship Satul and consecrate priestesses"
+msgstr "Palvo Satul:ia ja vihi toimeen papittaria"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:542
+msgid "Worship Satul"
+msgstr "Palvo Satul:ia"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:161
+msgid "Now we need to worship Satul and consecrate at least two priestesses."
+msgstr ""
+"Nyt meidän tulee palvoa Satul:ia ja vihkiä toimeensa ainakin kaksi "
+"papitarta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:168
+msgid "Defeat Kalitath"
+msgstr "Kukista Kalitath"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:169
+msgid ""
+"Now it’s time to finish off this annoying Barbarian. He has molested us far "
+"too long now."
+msgstr ""
+"On tullut aika viimeistellä tämä ärsyttävä Barbaari. Hän on rusikoinut meitä"
+" jo aivan liian pitkään."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:740
+msgid "Defeated!"
+msgstr "Tappio!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:741
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:752
+msgid "Sidolus has bad news…"
+msgstr "Sidolus tuo huonoja uutisia..."
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:181
+msgid ""
+"Aaaargh, Jundlina. I don’t know how this could have happened, but Satul "
+"couldn’t protect us from the enemy. They have destroyed our last warehouse. "
+"Thus we have lost this battle and our people is doomed!"
+msgstr ""
+"Aaaargh, Jundlina. En tiedä kuinka näin pääsi käymään, mutta Satul ei "
+"kyennyt suojelemaan meitä viholliselta. He tuhosivat viimeisen "
+"tarvikevarastomme. Olemme täten hävinneet tämän taistelun ja kansamme on "
+"tuhoon tuomittu!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:744
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:755
+msgid "You Have Lost"
+msgstr "Hävisit"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:745
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:756
+msgid ""
+"You have lost and may not continue playing. May you have better luck when "
+"you retry this scenario. Click OK to return to the main menu."
+msgstr ""
+"Olet epäonnistunut etkä voi jatkaa enää pelaamista. Olkoon onnesi ensi "
+"kerralla suotuisampi koettaessasi tätä asetelmaa uudelleen. Napsauta OK "
+"palataksesi päävalikkoon."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:191
+msgid "The Princess’s Memoir"
+msgstr "Prinsessan muistio"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:192
+msgid "Jundlina writes her diary"
+msgstr "Jundlina kirjoittaa päiväkirjaansa"
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:194
+msgid ""
+"Our escape from the cursed island was a close one: we managed to load three "
+"ships and make our escape, but the currents of the sinking island tested our"
+" new ships and their design."
+msgstr ""
+"Pakomme kirotulta saarelta oli täpärä: onnistuimme lastaamaan kolme laivaa "
+"ja lähteä pakoon, mutta vajoavan saaren virtaukset koettelivat uusia "
+"laivojamme sekä niiden rakennetta."
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:197
+msgid ""
+"And one failed the test: the last days of loading was done in chaos and "
+"without much planning and so one of our ships ended up carrying most of the "
+"heavy wares in our possession."
+msgstr ""
+"Ja yksi epäonnistui koitoksessa: lastauksen viimeiset päivät toimitettiin "
+"sekasorron keskellä ilman sen suurempaa suunnitelmaa ja täten yksi "
+"laivoistamme päätyi kuljettamaan enimmät raskaskalustostamme jota omaamme."
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:200
+msgid ""
+"The heavy weight plus the strong current was too much for the ship and it "
+"was pulled below the sea level by Lutas’ forces and we lost most men and all"
+" wares it carried."
+msgstr ""
+"Liika paino sekä voimakas virtaus olivat laivalle liikaa ja se vajosi "
+"merenpinnan alle Lutas:in voimien toimesta ja menetimme suurimman osan "
+"miehistä tarvikkeineen jotka sen kuljetuksessa olivat. "
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:203
+msgid ""
+"All of us were fiercely afraid. We expected the other ships to be sunken as "
+"well, but they persisted. We escaped the island and began our smooth sailing"
+" to other coasts."
+msgstr ""
+"Olimme jok'ikinen kauhun vallassa. Oletimme, että muutkin laivat uppoavat "
+"niin ikään, mutta ne kestivät. Pakenimme saarelta aloittaen sujuvan "
+"merenkulun muille rannikoille."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:207
+msgid "New Hope"
+msgstr "Uusi toivo"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:208
+msgid "Jundlina continues"
+msgstr "Jundlina jatkaa"
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:210
+msgid ""
+"Many weeks have passed and we did only see small islands not suitable for "
+"habitation and without any sign of being blessed by Satul, the fire god."
+msgstr ""
+"On kulunut monta viikkoa kohdaten vain pieniä saaria jotka eivät sovellu "
+"asutukselle, ja ilman merkkiäkään Satul:in, tulen jumalan siunauksesta. "
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:213
+msgid ""
+"Last night however, we sighted a new island. We saw smoke hovering over it. "
+"The black comes from the fiery mountain in the north of the island, the grey"
+" however comes from settlers."
+msgstr ""
+"Kuitenkin viime yönä, havaitsimme uuden saaren. Näimme savua sen "
+"yläpuolella. Musta savu siintää tulisilta vuorilta saaren pohjoisosassa, "
+"harmaa taas tulee asuttajilta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:217
+msgid "Planning For The Future"
+msgstr "Suunnittelua tulevaisuuden varalle"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:218
+msgid "Jundlina concludes"
+msgstr "Jundlina päättää"
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:220
+msgid ""
+"At least the east side of the island is inhabited, that much is certain. We "
+"do not know if the people there are friends or foes. We do not even know "
+"what tribe they might be from."
+msgstr ""
+"Vähintäänkin saaren itäosa on asuttamaton, sen verran on varmaa tietoa. Emme"
+" tiedä ovatko ihmiset täällä ystäviä vaiko vihollismielisiä. Emme tiedä edes"
+" mitä heimoa he mahdollisesti edustavat."
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:223
+msgid ""
+"The only thing we know for sure is that they cannot be Atlanteans, for no "
+"ship of ours has sailed as far as we did for centuries. I can only hope they"
+" are friendly."
+msgstr ""
+"Ainoa varma asia on se, että nämä eivät voi olla Atlantealaisia, sillä "
+"yksikään muu laiva ei ole kulkenut niin pitkälle kuin meidän omamme "
+"vuosikymmeniin. Saatan vain toivoa heidän ystävällismielisyyttään."
+
+#. TRANSLATORS: Jundlina - Diary
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:226
+msgid ""
+"We have not much water left; our food is running low; we lost all our tools "
+"and most of our building materials with the third ship. We can’t afford to "
+"sail any further, and we must attempt to settle on this island as close as "
+"possible to our current position."
+msgstr ""
+"Meillä ei ole paljoakaan vetää jäljellä; ruokamme on ehtymässä; menetimme "
+"kaikki työkalumme sekä suurimman osan rakennusaineostostamme kolmannen "
+"laivan mukana. Meillä ei ole varaa kulkea edemmäs, ja meidän tuleekin "
+"asettua tälle saarelle niin lähelle nykyistä sijaintiamme kuin mahdollista."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:250
+msgid "Jundlina Gives Orders"
+msgstr "Jundlina käskyttää"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:235
+msgid "Jundlina decides"
+msgstr "Jundlina tekee päätöksen"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:237
+msgid ""
+"As we founded a port here, we can now plan our settlement. We still have "
+"plenty of iron ore, so a toolsmithy and a smelting works will quickly "
+"provide us with good tools."
+msgstr ""
+"Koskakin perustimme tänne sataman, voimme alkaa suunnitella asutuksen "
+"aloittamista. Meillä on edelleen runsaasti rautamalmia, joten seppä ja "
+"sulattaminen palvelevat meitä toimittamaan hyvät työkalut nopeasti."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:243
+msgid "Jundlina demands"
+msgstr "Jundlina vaatii"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:245
+msgid ""
+"However, we need to take care of our building materials: The island is full "
+"of trees, we might not even need foresters. But we need stone, that much is "
+"certain!"
+msgstr ""
+"Meidän pitää, kuitenkin, pitää huolta rakennusaineistamme: saari on täynnä "
+"puustoa, emme ehkä tarvitse edes metsänhoitajia. Tarvitsemme joka "
+"tapauksessa kiveä!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:251
+msgid "Jundlina orders"
+msgstr "Jundlina käskyttää"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:253
+msgid ""
+"Let’s also explore this island and expand our territory. But we need to be "
+"careful. We should build at least one tower so that we can see potential "
+"enemies before they see us."
+msgstr ""
+"Tutkitaampa tätä saarta niin ikään laajentaaksemme aluettamme. Varovaisia "
+"meidän tulee kuitenkin olla. Meidän tulee rakentaa vähintään yksi torni "
+"jotta havaitsemme mahdolliset vihollisemme ennen kuin he näkevät meidät. "
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:256
+msgid ""
+"But we need to be cautious using the stones and other precious material. "
+"When we no longer need a building, we will dismantle it instead of burning "
+"it down."
+msgstr ""
+"Mutta meidän tulee olla varovaisia käyttäessämme kiviä ja muita arvokkaita "
+"raaka-aineita. Kun emme enää tarvitse jotakin rakennusta, puramme sen, emme "
+"polta sitä."
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:259
+msgid ""
+"This will take more time, but we can reuse some of its materials. Also, I "
+"want a scout deployed and exploring at all times."
+msgstr ""
+"Tämä vie enemmän aikaa, mutta voimme käyttää jotakin sen raaka-aineista. "
+"Lisäksi, haluan lähetin matkaansa joka tutkii aluetta kaikkina aikoina."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:270
+msgid "Opol Reports Serious Shortages"
+msgstr "Opol kertoo vakavista puutteista"
+
+#. TRANSLATORS: Opol (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:273
+#, lua-format
+msgid ""
+"May Satul warm you, %s. As the highest weaver of the guild I have bad news "
+"for you. I just realized that we are running out of spidercloth. This is a "
+"most perilous case, for as you know, spidercloth is needed for many "
+"buildings."
+msgstr ""
+"Satul sinua lämmittäköön, %s. Killan korkea-arvoisimpana kutojana minulla on"
+" sinulle huonoja uutisia. Havaitsin juuri että hämähäkkikangas on "
+"loppumassa. Tämä tilanne on erittäin haastava, koska kuten tiedät, "
+"hämähäkkikangasta tarvitaan monien rakennusten raaka-aineena."
+
+#. TRANSLATORS: Opol
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:276
+msgid "We should build up a spidercloth production urgently."
+msgstr "Hämähäkkikankaan tuotanto tulee aloittaa välittömästi."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:280
+#, lua-format
+msgid "%s Replies"
+msgstr "%s Vastaukset"
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:283
+msgid ""
+"May Satul warm you too, Opol. I wanted to delay production of spidercloth, "
+"but I understand the urgency. We need to build a complete spidercloth "
+"production instantly."
+msgstr ""
+"Satul lämmittäköön myös sinua, Opol. Halusin viivyttää hämähäkkikankaan "
+"tuotantoa, mutta ymmärrän kiireellisyyden. Rakentakaamme täysimuotoinen "
+"hämähäkkikangas tuotanto heti."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
+msgid "Opol Makes A Point"
+msgstr "Opol huomauttaa"
+
+#. TRANSLATORS: Opol (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:298
+#, lua-format
+msgid ""
+"%s! It seems there is another problem even more urgent. I fear we haven’t "
+"built a farm to feed our spiders yet. As this is one of the buildings "
+"needing spidercloth for completion, not completing one in time will result "
+"in a crisis that can never be resolved."
+msgstr ""
+"%s! Näyttäisi siltä, että on toinenkin ongelma joka on vieläkin "
+"kiireellisempi. Pelkäämpä, että emme ole vielä rakentaneet tarhaa jonka "
+"kautta syöttäisimme hämähäkkimme. Koskakin tämä on yksi rakennuksista jotka "
+"tarvitsevat hämähäkkikangasta valmistuakseen, ajallaan valmistumaton "
+"rakennus johtaisi hätään jota ei voitaisi korjata."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:302
+#, lua-format
+msgid "%s Acknowledges"
+msgstr "%s Tiedoksi"
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:305
+msgid ""
+"I see the risk, Opol. Thank you for reporting. We will build a farm "
+"immediately."
+msgstr ""
+"Näen vaaran, Opol. Kiitokset selonteostasi. Rakennamme tarhatilan "
+"välittömästi."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:317
+msgid "Opol Reports Success"
+msgstr "Opol kertoo menestyksestä"
+
+#. TRANSLATORS: Opol (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:320
+#, lua-format
+msgid ""
+"%s, may Satul warm you! The weaving mill and spider farm are complete and "
+"the weavers’ guild can start their work again. I promise we will deliver the"
+" finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
+" later on to make better tabards as well."
+msgstr ""
+"%s, Satul sinua lämmittäköön! Kutomo sekä hämähäkkitarha ovat valmiit ja "
+"kutojien kilta voi jatkaa työtään. Lupaan, että toimitamme hienointa "
+"kangasta sekä hiukan tabardia piakkoin. Ehkäpä voimme rakentaa kultaisen "
+"pyörömyllyn myöhemmin valmistaaksemme parempaa tabardia niin ikään."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:390
+#, lua-format
+msgid "%s Cheers"
+msgstr "%s Terveydeksi"
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:327
+msgid ""
+"This is good news indeed, Opol. You may go back to your work now, and may "
+"Satul warm you and the weavers’ guild!"
+msgstr ""
+"Nämä ovat kertakaikkisen hyviä uutisia, Opol. Voit nyt palata työhösi, ja "
+"lämmittäköön Satul sinua ja kutojien kiltaa! "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
+msgid "Sidolus Reports Foreign Inhabitants"
+msgstr "Sidolus tiedottaa ulkomaalaisista asukeista"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:354
+msgid ""
+"May Satul warm you, Jundlina! I have some disturbing news. We have sighted "
+"land governed by foreigners, but we do not yet know what to expect from "
+"them."
+msgstr ""
+"Lämmittäköön Satul sinua, Jundlina! Minulla on häiritseviä uutisia mukanani."
+" Olemme havainneet maan jota johtavat ulkomaalaiset, mutta emme vielä tiedä "
+"mitä odottaa heistä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:357
+msgid "Jundlina Is Concerned"
+msgstr "Jundlina on huolestunut"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:345
+msgid ""
+"Sidolus, I agree this is very concerning. We need to find out more. "
+"Hopefully our scout will get us some information soon."
+msgstr ""
+"Sidolus, olen samaa mieltä, tämä on huolestuttavaa. Tarvitsemme lisätietoja."
+" Toivon mukaan lähettimme tiedottaa meitä pian."
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
+msgid ""
+"Sidolus, I agree this is very concerning. We need to find out more. We "
+"definitely need to send out a scout to gather some information."
+msgstr ""
+"Sidolus, olen samaa mieltä, tämä on huolestuttavaa. Meidän tulee tietää "
+"enemmän. Totisesti meidän täytyy lähettää lähettimme matkaan kerätäkseen "
+"tietoja."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
+msgid "Allies?"
+msgstr "Liittolaisia?"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:369
+msgid ""
+"May Satul warm you, Jundlina! We have made contact with the foreigners. They"
+" are in big trouble as they are at war with a mighty tribe in the north. "
+"They ask us for support."
+msgstr ""
+"Lämmittäköön Satul sinua, Jundlina! Muodostimme yhteyden näihin "
+"ulkomaalaisiin. He ovat valtavassa pulassa koska he käyvät sotaa mahdikasta "
+"pohjoisen heimoa vastaan. He pyytävät tukeamme. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:372
+msgid "Jundlina Is Cautious"
+msgstr "Jundlina on valpas"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:375
+msgid ""
+"Sidolus, as we could need any ally we can get, we should help them. Let’s "
+"see what we can do for them. However we should improve our own military "
+"strength to become independent of others."
+msgstr ""
+"Sidolus, koska tarvitsisimme minkä liittolaisen tahansa voimme saada, meidän"
+" kannattaa auttaa heitä. Katsotaan mitä voimme tehdä heidän puolestaan. "
+"Meidän tulee, kuitenkin, vahvistaa omia joukkojamme saavuttaaksemme "
+"itsenäisyyden muista riippumatta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
+msgid "Building Material Ensured"
+msgstr "Rakennusaineet varmistettu"
+
+#. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:386
+#, lua-format
+msgid ""
+"May Satul warm you, %s! We have finished our supply of building materials."
+msgstr ""
+"Satul sinua lämmittäköön, %s! Saimme viimeisteltyä rakennusaineiden "
+"toimitukset."
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:393
+msgid ""
+"This is good news indeed, Loftomor. Now we can consider constructing more "
+"sophisticated buildings to enlarge our economy. Please advise whenever you "
+"feel we are missing necessary buildings."
+msgstr ""
+"Todellakin hyviä uutisia, Loftomor. Nyt voimme harkita rakentaaksemme yhä "
+"hienostuneempia rakennuksia kasvattaaksemme talouttamme. Olethan hyvä, ja "
+"annat neuvojasi aina mikäli sinusta tuntuu että tarvittavia rakennuksia "
+"uupuu."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:404
+msgid "Tool Supply Ensured"
+msgstr "Työkalujen toimitus varmistettu"
+
+#. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:407
+#, lua-format
+msgid ""
+"%s, may Satul warm you! We have made some progress in building up our tool "
+"industry."
+msgstr ""
+"%s, Satul sinua lämmittäköön! Olemme saavuttaneet hiukan kehitystä "
+"rakennushankkeessamme voimistaa työkaluteollisuuttamme."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:411
+#, lua-format
+msgid "%s Enchanted"
+msgstr "%s Lumottu"
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:414
+msgid ""
+"This is good news indeed, Loftomor. This enables us to operate all the "
+"buildings we are going to build in our new home. But now we should really "
+"look to get some resources from the mountains."
+msgstr ""
+"Nämä ovat kerrassaan hyviä uutisia, Loftomor. Tämä mahdollistaa kaikkien "
+"rakennusten toiminnan joita rakennamme uuteen kotiimme. Mutta juuri tällä "
+"hetkellä meidän tulisi hankkia raaka-aineita vuorilta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:426
+msgid "Mining Established"
+msgstr "Kaivos perustettu"
+
+#. TRANSLATORS: Loftomor (placeholder is the name of the current leader)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:429
+#, lua-format
+msgid ""
+"%s, may Satul warm you! Another issue solved. We have found some resources "
+"and built a mine of each type."
+msgstr ""
+"%s, Satul sinua lämmittäköön! Jälleen yksi ongelma ratkaistu. Olemme "
+"löytäneet rakennusaineita sekä rakentaneet jokaisen alan kaivokset."
+
+#. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
+#. or Sidolus)
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:433
+#, lua-format
+msgid "%s Is Excited"
+msgstr "%s on innoissaan"
+
+#. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:436
+msgid ""
+"Well done, Loftomor, well done. May Satul warm our strong and brave miners. "
+"But now we need to ensure we can feed them. We need to build up bakeries and"
+" smokeries and all buildings to supply them."
+msgstr ""
+"Hyvää työtä, Loftomor, todellakin. Lämmittäköön Satul voimakkaita ja "
+"rohkeita kaivostyöläisiämme. Meidän tulee kuitenkin varmistaa heidän "
+"ruokintansa. Tulee rakentaa leipomoita ja savustamoita sekä kaikki "
+"rakennukset tuotantoon."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:445
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:484
+msgid "Tribute Delivered"
+msgstr "Suojelusraha toimitettu"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:448
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:487
+msgid ""
+"May Satul warm you, Kalitath! We have delivered all the wares you demanded. "
+"Now we expect our princess to return home."
+msgstr ""
+"Lämmittäköön Satul sinua, Kalitath! Olemme toimittaneet kaikki tarvikkeet "
+"jotka määräsit. Odotamme täten prinsessamme palaavan kotiin."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:475
+msgid "Kalitath Appreciates Efforts"
+msgstr "Kalitath arvostaa ponnistuksia"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:454
+msgid ""
+"Sidolus, this is very good news. I appreciate what your people has done. "
+"However don’t forget to help us defeat the troops of Maletus. Afterwards we "
+"might talk about your princess."
+msgstr ""
+"Sidolus, nämä ovat hyviä uutisia. Arvostan sitä mitä väkesi on tehnyt. Ethän"
+" kuitenkaan unohda auttaa meitä päihittämään Maletuksen joukkoja. Tämän "
+"jälkeen saatamme puhua prinsessastanne."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:469
+msgid "Empire Defeated"
+msgstr "Imperiumi kukistettu"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:463
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:472
+msgid ""
+"May Satul warm you, Kalitath! We have defeated the troops of the Empire in "
+"the north. Now we expect our princess to return home."
+msgstr ""
+"Lämmittäköön Satul sinua, Kalitath! Olemme kukistaneet Imperiumin pohjoisen "
+"joukot. Odotamme nyt prinsessamme kotiinpaluuta."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:478
+msgid ""
+"Sidolus, this is very good news. I appreciate what your people has done. "
+"However don’t forget to fulfill your tribute within time. Afterwards we "
+"might talk about your princess."
+msgstr ""
+"Sidolus, nämä ovat hyviä uutisia kerrassaan. Arvostan mitä väkesi on tehnyt."
+" Ethän kuitenkaan unohda panna täytäntöön suojelurahaasi ajoissa. Puhumme "
+"ehkäpä sen jälkeen prinsessastanne."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:493
+msgid "Kalitath Acknowledges"
+msgstr "Kalitath tiedostaa"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:496
+msgid ""
+"Sidolus, we appreciate this. But your princess and I already made plans for "
+"our common future on this island. She will explain it to you."
+msgstr ""
+"Sidolus, arvostamme tätä. Mutta prinsessanne ja minä olemme jo tehneet "
+"suunnitelmamme yhteisen tulevaisuutemme eteen tällä saarella. Hän selvittää "
+"asian sinulle."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:573
+msgid "Jundlina Explains"
+msgstr "Jundlina selvittää"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:502
+msgid ""
+"Sidolus, during my stay with the Barbarians I learned a lot about their "
+"hospitality and bravery. They really impressed me and their warriors and "
+"gods seemed to be very strong in the battle against the Empire. Especially "
+"their leader Kalitath made a very good host and I started to think about "
+"uniting our tribes to make for a peaceful future on this island. So I want "
+"you to prepare our people for a marriage and peaceful coexistence with the "
+"Barbarians. This includes learning about their gods and preparing to worship"
+" them."
+msgstr ""
+"Sidolus, vieraillessani barbaarien luona opin paljon heidän "
+"vieraanvaraisuudestaan sekä rohkeudestaan. He todella vakuuttivat minut, "
+"heidän soturinsa ja jumalansa vaikuttivat erittäin väkeviltä taistelussa "
+"Imperiumia vastaan. Varsinkin heidän johtajansa Kalitath oli varsin hyvä "
+"isäntä ja aloin puntaroida heimojemme yhdistämistä saadaksemme aikaan "
+"rauhanomaisen tulevaisuuden tällä saarella. Joten haluan että sinä valmistat"
+" kansamme liittoon ja rauhalliseen yhteiseloon barbaarien kanssa. Tämä "
+"sisältää opin heidän jumalistaan ja että valmistaudumme näiden palvomiseen."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:505
+msgid "Kalitath Demands"
+msgstr "Kalitath vaatii"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:508
+msgid ""
+"Sidolus, now follow the orders of your princess. Meanwhile we might decide "
+"that we will need some of the land conquered by you for our common future. "
+"So we will simply take your military buildings with our forces. Naturally "
+"you won’t have the right to do the same, for the sake of your princess."
+msgstr ""
+"Sidolus, seuraathan nyt prinsessasi käskyjä. Tällä välin voisimme todeta "
+"että tarvitsemme hiukan valtaamaasi maata yhteisen tulevaisuutemme eteen. "
+"Joten otamme vain yksinkertaisesti kasarmirakennuksesi joukkojemme toimesta."
+" Luonnollisestikaan sinulla ei ole oikeutta tehdä samoin, prinsessasi "
+"tähden."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
+msgid "Heretics!"
+msgstr "Kerettiläiset!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:515
+msgid "Sidolus is very sad"
+msgstr "Sidolus on hyvin surullinen"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:517
+msgid ""
+"May Satul warm us all. Our princess has been confused in her imprisonment by"
+" this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
+" how we could change her mind though."
+msgstr ""
+"Lämmittäköön Satul meitä kaikkia. Prinsessamme on ollut tämän barbaarin "
+"vangitsemisen johdosta hämillään. Mutta en milloinkaan tule palvomaan "
+"ensimmäistäkään barbaarijumalaa. En osaa kuvitellakaan miten voisimme "
+"muuttaa hänen mielensä. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:520
+msgid "Attracting Satul’s Help"
+msgstr "Satulin avun houkuttaminen"
+
+#. TRANSLATORS: Loftomor
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:523
+msgid ""
+"Sidolus, I agree we should not bow in front of any other god than Satul. But"
+" we might need the god’s help in this case. So I suggest to build a temple "
+"and worship Satul with exquisite sacrifices. By this we could inaugurate "
+"some priestesses, who might beg Satul to show his powers to the Barbarians "
+"and our princess."
+msgstr ""
+"Sidolus, olen samaa mieltä siitä, että meidän ei pitäisi kumartaa minkään "
+"muun jumalan edessä kuin Satulin. Saatamme tarvita jumalan apua tässä "
+"asiassa. Joten ehdotan että rakennamme temppelin ja palvomme Satulia "
+"kattavin menoin. Tämän johdosta voimme vihkiä joitakin papittaria, jotka "
+"voisivat anella Satulia näyttämään mahtinsa barbaareille ja prinsessallemme."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
+msgid "Build Temple"
+msgstr "Rakenna temppeli"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:529
+msgid ""
+"May Satul warm you, Loftomor. This is a very good idea indeed. So I task you"
+" to build a temple worth worshipping our god. Until we are ready to beg for "
+"Satul’s power we should keep an eye on our princess and this Barbarian. As "
+"we should stop our trader’s deliveries to not waste any wares to this "
+"Barbarian any more, I want you to ensure we have a scout out there to gather"
+" information."
+msgstr ""
+"Lämmittäköön Satul sinua, Loftomor. Tämä on kerrassaan loistava idea. "
+"Asetankin sinulle toimeksiannon rakentaa arvoisensa temppelin palvomaan "
+"jumalaamme. Kunnes olemme valmiita anomaan Satulin voimaa pitäkäämme "
+"prinsessaamme sekä tätä barbaaria silmällä. Lisäksi meidän tulisi lakkauttaa"
+" kaupustelijamme toimitukset tälle barbaarille lopettaaksemme tarvikkeidemme"
+" tuhlauksen, haluan varmistat sille, että meillä on lähetti toimessaan "
+"tietojen keräämistä varten.  "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:536
+msgid "Temple Completed"
+msgstr "Temppeli valmistunut"
+
+#. TRANSLATORS: Loftomor
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:539
+msgid ""
+"May Satul warm you, Sidolus! My builders just completed the temple for "
+"Satul. Now we can start worshipping him and consecrating our priestesses."
+msgstr ""
+"Lämmittäköön Satul sinua, sidolus! Rakentajani saivat juuri Satulin "
+"temppelin rakentamisen päätökseen. Voimme täten aloittaa hänen palvomisensa "
+"sekä papittariemme toimeen vihkimisen. "
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:545
+msgid ""
+"May Satul warm you, Loftomor. Thank you for building such a great temple. "
+"Now we need to bring food and our most precious wares to the temple to make "
+"for satisfying sacrifices. And don’t forget that the initiates who will "
+"serve Satul to become his priestesses need golden tabards and diamonds."
+msgstr ""
+"Lämmittäköön Satul sinua, Loftomor. Kiitoksia niin mahtavan temppelin "
+"rakentamisesta. Nyt meidän pitää toimittaa ruokaa sekä arvokkaimpia "
+"tarvikkeitamme temppeliin toimittaaksemme tyydyttäviä uhrausmenoja. Ethän "
+"myöskään unohda, että tulokkaat jotka palvelevat Satulia tullakseen hänen "
+"papittariksikseen tarvitsevat kultaisia tabardeja ja timantteja."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
+msgid "May Satul Warm Us"
+msgstr "Lämmittäköön Satul meitä"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:555
+msgid ""
+"Our priestesses have been consecrated, and we sacrificed our finest goods "
+"for Satul’s pleasure. May he warm us and show his might to our princess and "
+"this barbaric tribe."
+msgstr ""
+"Papittaremme ovat nyt toimeensa vihityt, ja olemme uhranneet hienoimpia "
+"antimiamme Satulia miellyttääksemme. Hän lämmittäköön meitä ja osoittakoon "
+"hänen mahtinsa prinsessallemme ja tälle barbariselle heimolle. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
+msgid "Jundlina Arrives"
+msgstr "Jundlina saapuu"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:564
+msgid ""
+"May Satul warm you, Sidolus. And may he forgive me my heretic behaviour. The"
+" sign of his might and the fear in the Barbarians’ faces suddenly made me "
+"recognise the truth again. I was wrong about peace and coexistence, as it "
+"would have meant servitude forever. And this is not what Atlanteans are made"
+" for."
+msgstr ""
+"Lämmittäköön Satul sinua, Sidolus. Ja antakoon hän kerettiläisen käytökseni "
+"anteeksi. Hänen mahtinsa merkit sekä pelko barbaarien kasvoilla sai minut "
+"yht' äkkiä näkemään jälleen totuuden. Olin väärässä rauhasta ja "
+"yhteiselosta, sillä olisi merkinnyt ikuista palveluksenalaisuutta. Moinen ei"
+" edusta sitä, mihin atlantealaiset ovat tehdyt."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:567
+msgid "Sidolus Relieved"
+msgstr "Sidoluksen vapautus tehtävistään"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:570
+msgid ""
+"May Satul warm you, Jundlina. I am glad you are here again. I hope we may "
+"trust you, as much as you will trust and be faithful to Satul. How come the "
+"Barbarians let you go?"
+msgstr ""
+"Lämmittäköön Satul sinua, Jundlina. Olen iloinen sinun ollessasi täällä "
+"jälleen. Toivon että voimme luottaa sinuun, kuten sinä luotat ja olet "
+"uskollinen Satulia kohtaan. Kuinkas nyt barbaarit sinut menemään päästivät?"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:576
+msgid ""
+"Sidolus, they did not let me go. I met our scout and he managed to sneak me "
+"out, as I realized they still kept me hostage after I expressed some "
+"concerns about our previous agreement. So we need to settle the barbarian "
+"issue now and forever on this island. There is no other way to live here in "
+"peace than to defeat them."
+msgstr ""
+"Sidolus, eivät he minua menemään päästäneet. Tapasin lähettimme ja hän "
+"onnistui kuljettamaan minut vaivihkaa ulos, kun ymmärsin että he pitävät "
+"minua edelleen panttivankina ilmaistuani joitakin huolenaiheita liittyen "
+"edelliseen sopimukseemme. Täten meidän tulee ratkaista tämä barbaarikysymys "
+"nyt ja siitä ikuisuuteen tällä saarella. Ei ole muuta vaihtoehtoa kukistaa "
+"heidät jotta voisimme elää rauhassa täällä. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
+msgid "Jundlina Is Relieved"
+msgstr "Jundlina on vapautettu"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:587
+msgid ""
+"Praise Satul, we have founded a new home. I deeply regret I was weak in my "
+"belief. May Satul guide me better in the future."
+msgstr ""
+"Satulille ylistys, olemme löytäneet uuden kodin. Kadun syvästi uskoni "
+"heikkoutta. Antakoon minulle Satul paremman johdatuksen vastaisuudessa."
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:590
+msgid ""
+"Now it is time to celebrate but I expect we can’t relax long. We need to "
+"build up our society and our capability to explore the seas again."
+msgstr ""
+"Nyt on juhlan aika mutta ounastelisin että emme voi rentoutua sen pidempään."
+" Meidän tulee rakentaa yhteiskuntaamme sekä kykyämme jälleen tehdä "
+"merellisiä tutkimusmatkoja. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
+msgid "Congratulations"
+msgstr "Onnittelut"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:592
+msgid ""
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
+"Olet suorittanut tämän tehtävän. Voit jatkaa pelaamista mikäli niin haluat, "
+"muutoin siirtykäämme seuraavaan tehtävään."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
+msgid "Tribute Demand"
+msgstr "Suojelusrahavaade"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:601
+msgid ""
+"Strangers, we need to receive some sign of your good intentions. If you are "
+"really on our side, you should send us some gold and a couple of other wares"
+" on a regular basis."
+msgstr ""
+"Muukalaiset, tarvitsemme merkkejä hyvistä tarkoitusperistänne. Mikäli "
+"todellakin olette puolellamme, teidän tulee lähettää meille hiukan kultaa "
+"sekä pari muuta tarviketta säännöllisin väliajoin."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:604
+msgid ""
+"We are only interested in wares that can be used to forge weapons. I mean "
+"real weapons like our axes, and not the sort of toothpicks you use. So feel "
+"free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
+msgstr ""
+"Olemme kiinnostuneita vain niistä tarvikkeista joista voidaan takoa aseita. "
+"Ja tarkoitan oikeita lyömäaseita kuten kirveemme, ei niitä teidän käyttämiä "
+"hammastikkujanne. Joten lähettäkää toki meille 25 tukkia, 16 hiilikasaa, 9 "
+"rautavaluharkkoa ja 4 kultaharkkoa."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:607
+msgid ""
+"Oh, and I almost forgot this one. We demand to have your princess in our "
+"headquarters as well to coordinate our war plannings."
+msgstr ""
+"Ai niin, ja minähän lähes unohdin. Vaadimme niin ikään prinsessanne "
+"päämajaamme koordinoikseen sotasuunnitelmiamme. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
+msgid "Pitfall!"
+msgstr "Vesiperä!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:612
+msgid "Sidolus is upset"
+msgstr "Sidolus on tolaltaan"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:614
+msgid ""
+"May Satul warm you, Jundlina! This behaviour is truly barbaric! I fear this "
+"is a trap to keep you as a hostage. And the demand itself is really an "
+"insult. I strongly recommend to decline this unsubstantiated claim."
+msgstr ""
+"Lämmittäköön Satul sinua, Jundlina! Moinen käytös on todella barbaarista! "
+"Pelkäänpä että kyseessä on ansa sinun panttivankina jatkamiseksi. Tämä "
+"vaatimus itsessään on kerrassaan loukkaava. Vahva suositukseni on "
+"kieltäytyä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:617
+msgid "Jundlina Concedes"
+msgstr "Jundlina myöntää"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:620
+msgid ""
+"Sidolus, I agree with you. However I think we have no choice, so we need to "
+"obey this demand. It is your obligation now to run our small people until I "
+"come back."
+msgstr ""
+"Sidolus, olen samaa mieltä kanssasi. Meillä ei kuitenkaan taida olla "
+"vaihtoehtoa, joten meidän on pakko totella tätä vaatimusta. On sinun "
+"velvollisuutesi johtaa pieniä ihmisiämme kunnes palaan."
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:623
+msgid ""
+"First you need to upgrade our scout’s house to a trading post. Then you need"
+" to send the demanded tributes of gold, iron, coal, and logs."
+msgstr ""
+"Sinun pitää aivan ensiksi päivittää lähettimme majatalo kaupankäyntiin "
+"soveltuvaksi. Tämän jälkeen sinun tulee lähettää vaaditut kulta, rauta, "
+"hiili, ja tukkilunnaat. "
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
+msgid "Trading Post Built"
+msgstr "Kaupankäyntipiste rakennettu"
+
+#. TRANSLATORS: Loftomor
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:633
+msgid ""
+"Sidolus, may Satul warm you! We have finished the new trading post. I hope "
+"this will allow Jundlina to return to us soon."
+msgstr ""
+"Sidolus, lämmittäköön Satul sinua! Olemme viimeistelleet uuden kaupankäynnin"
+" pisteemme. Toivon mukaan Jundlina palaa luoksemme pian."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:636
+msgid "Sidolus Agrees"
+msgstr "Sidolus myöntyy"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:639
+msgid ""
+"Well done, Loftomor, well done. May Satul warm our princess and our whole "
+"people. Now we need to begin sending goods to this Barbarian."
+msgstr ""
+"Hyvää työtä, Loftomor, hyvää työtä todellakin. Lämmittäköön Satul "
+"prinsessaamme sekä koko väkeämme. Nyt meidän tulee kuitenkin aloittaa "
+"antimiemme lähettäminen tälle barbaarille."
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:642
+msgid ""
+"I think we should start with the deliveries we could afford the easiest. But"
+" we need to find more metals for sure."
+msgstr ""
+"Luulisin, että meidän tulisi aloittaa ne toimitukset joihin meillä on "
+"helpoiten varaa. Mutta lisää metalleja meidän pitää löytää varmasti."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:648
+msgid "Urgent Tribute Demand"
+msgstr "Kiireellinen lunnasvaatimus"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:651
+msgid ""
+"Strangers, we haven’t received any help yet. If you are really on our side, "
+"you should start sending some wares urgently."
+msgstr ""
+"Muukalaiset, emme ole saaneet apua vielä laisinkaan. Mikäli todella olette "
+"puolellamme, teidän pitäisi aloittaa tarvikkeiden toimittaminen pikapikaa."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:654
+msgid ""
+"As we are facing great losses due to your laziness, you shall now send us "
+"twice the previous amount of each ware."
+msgstr ""
+"Koskakin olemme kohdanneet suuria tappioita laiskuutenne tähden, teidän "
+"tuleekin nyt toimittaa jokainen tarvike kaksinkertaisesti."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:657
+msgid "I am sure you do not want to break our alliance… do you?"
+msgstr "Olen vakuuttunut siitä, että ette halua rikkoa liittoamme... ettehän?"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:660
+msgid "Blackmail!"
+msgstr "Kiristystä!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:661
+msgid "Sidolus is concerned"
+msgstr "Sidolus on huolissaan"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:663
+msgid ""
+"May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
+"punish him for his insult as he has our princess at his hands."
+msgstr ""
+"Lämmittäköön Satul meitä kaikkia. Meidän niin sanottu liittolaisemme "
+"kiristää meitä, emmekä kykene rankaisemaan häntä tästä loukkauksesta koska "
+"hänellä on prinsessamme kynsissään."
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:666
+msgid ""
+"Our only chance is to double our efforts and start delivering something "
+"soon."
+msgstr ""
+"Ainoa vaihtoehtomme on kaksinkertaistaa ponnostuksemme alkaen toimittamaan "
+"jotakin ja pian."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:673
+msgid "Tribute Started"
+msgstr "Lunnasmaksut alkaneet"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:676
+msgid ""
+"Strangers, we have received the first batch of wares. So we may finally "
+"trust you."
+msgstr ""
+"Muukalaiset, olemme ottaneet vastaan ensierän tarvikkeita. Voimme viimeinkin"
+" luottaa teihin."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:679
+msgid ""
+"However, our enemy in the North is very strong. I am afraid that without "
+"significant help from your side we might lose the war despite any help in "
+"terms of wares you might provide."
+msgstr ""
+"Vihollisemme pohjoisessa on, kuitenkin, erittäin väkevä. Pelkäämpä, että "
+"ilman merkittävää apua puoleltanne saattaisimme hävitä sodan "
+"toimittamistanne tarvikkeistakin huolimatta. "
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:682
+msgid ""
+"They name themselves an Empire, and their leader is called Maletus. I want "
+"you to train your soldiers and help us defeat his lousy Empire."
+msgstr ""
+"He nimeävät itsensä Imperiumiksi, ja heidän johtajansa on Maletus. Haluan "
+"että koulutat sotilaasi auttaen meitä kukistamaan hänen surkean "
+"Imperiuminsa."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:686
+msgid "Be Vigilant!"
+msgstr "Ole valpas!"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:689
+msgid ""
+"May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
+"shouldn’t trust them too much."
+msgstr ""
+"Satul sinua lämmittäköön, Sidolus. Nyt liittolaisemme luottavat meihin "
+"jossakin määrin, mutta heihin taas meidän ei tule liiemmin luottaa."
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:692
+msgid ""
+"So I want you to defeat this Empire, but ensure that we will become and "
+"remain strong enough to enforce the respect we deserve."
+msgstr ""
+"Joten haluan sinun kukistavan tämän Imperiumin, mutta varmista että tulemme "
+"ja myös pysymme vahvoina, tarpeeksi niin, että voimme panna täytäntöön sen "
+"kunnioituksen tason jonka ansaitsemme."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:695
+msgid "Keep Delivering"
+msgstr "Jatka toimituksia"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:698
+msgid ""
+"Strangers, I almost forgot to mention, but it should have been clear anyway."
+msgstr ""
+"Muukalaiset, lähes unohdin mainita, mutta asian olisi tullut olla "
+"päivänselvä joka tapauksessa."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:701
+msgid ""
+"We are in urgent need of your supply, so hurry up with your deliveries."
+msgstr ""
+"Tarpeemme on kiireellinen tarvikkeidenne vastaanottamiseksi, pidäthän "
+"kiirettä niiden toimittamisessa."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:704
+msgid ""
+"If you fail to deliver everything within three and a half hours, we need to "
+"assume you are just playing along with us. So keep an eye on the time as we "
+"will not give any further warning."
+msgstr ""
+"Mikäli epäonnistut toimittamaan aivan kaiken kolmessa ja puolessa tunnissa, "
+"voimme olettaa että vain pelailette kustannuksellamme. Pitäkäähän kello "
+"kädessänne; emme tule antamaan enää yhtäkään lisävaroitusta."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:710
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:722
+msgid "Traitors"
+msgstr "Petturit"
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:713
+msgid ""
+"Strangers, we still haven’t received any help. We are deeply insulted by "
+"your treachery."
+msgstr ""
+"Muukalaiset, emme edelleenkään ole saaneet apua ensinkään. Olemme "
+"petturuutenne johdosta syvästi loukatut."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:716
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:728
+msgid ""
+"At least your princess will make a reasonable slave, if we survive the "
+"battle with our enemy."
+msgstr ""
+"No, joka tapauksessa prinsessastanne saadaan kelpo orja, mikäli selviydymme "
+"taistelusta vihollisemme kanssa."
+
+#. TRANSLATORS: Kalitath
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:725
+msgid ""
+"Strangers, you did not deliver the help we needed in time. We are deeply "
+"insulted by your treachery."
+msgstr ""
+"Muukalaiset, ette toimittaneet tarvikkeita ajanmukaisesti. Olemme "
+"petturuutenne johdosta syvästi loukatut."
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:734
+msgid "Jundlina’s Suicide"
+msgstr "Jundlinan itsemurha"
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:737
+msgid ""
+"Barbarian, I am an Atlantean princess and I will never go into slavery. I "
+"have prepared myself for this eventuality and will rather die from the "
+"poison I carry with me than be your slave. May Satul avenge my sacrifice."
+msgstr ""
+"Barbaari, olen atlantealainen prinsessa enkä lankea orjuuteen milloinkaan. "
+"Olen valmistanut itseni tähän tulemaan ja mielummin kuolen myrkystä jota "
+"mukanani kannan kuin että alkaisin orjaksenne. Satul kostakoon uhraukseni."
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:743
+msgid ""
+"Aaaargh. I don’t know how this could have happened, but Satul couldn’t "
+"protect us from the enemy. We have lost our noble princess. Thus, we have "
+"lost this battle and our people is doomed!"
+msgstr ""
+"Aaaargh. En tiedä miten näin pääsi käymään, mutta Satul ei kyennyt "
+"suojaamaan meitä viholliselta. Olemme menettäneet jalon prinsessamme. Täten,"
+" olemme hävinnet tämän sodan ja väkemme on tuhoon tuomittu!"
+
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:751
+msgid "Kalitath Defeated"
+msgstr "Kalitath kukistettu"
+
+#. TRANSLATORS: Sidolus
+#: ../../data/campaigns/atl02.wmf/scripting/texts.lua:754
+msgid ""
+"Aaaargh. I don’t know how this could have happened, but Satul couldn’t "
+"protect our ally from the enemy. He lost his last warehouse and our noble "
+"princess perished with him. Thus, we have lost this battle and our people is"
+" doomed!"
+msgstr ""
+"Aaaargh. En tiedä kuinka näin pääsi käymään, mutta Satul ei kyennyt "
+"suojaamaan puolulaistamme viholliselta. Hän menetti viimeisen varastonsa ja "
+"jalo prinsessamme haihtui täten kanssaan. Nyt on niin, että olemme hävinneet"
+" tämän sodan ja väkemme on tuhoon tuomittu!"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8
+msgctxt "atlanteans_worker"
+msgid "Satul’s Initiate"
+msgstr "Satulin alokas"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_priestess/init.lua:8
+msgctxt "atlanteans_worker"
+msgid "Priestess"
+msgstr "Papitar"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:8
+msgctxt "atlanteans_building"
+msgid "Scout’s House"
+msgstr "Lähetin talo"
+
+#. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:65
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_scouts_house1/init.lua:76
+msgid "scouting"
+msgstr "tutkimustyö"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:8
+msgctxt "atlanteans_building"
+msgid "Temple of Satul"
+msgstr "Satulin temppeli"
+
+#. TRANSLATORS: Completed/Skipped/Did not start consecrating priestess because
+#. ...
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_temple_of_satul/init.lua:54
+msgctxt "atlanteans_building"
+msgid "consecrating priestess"
+msgstr "vihitään papitar"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trader/init.lua:8
+msgctxt "atlanteans_worker"
+msgid "Trader"
+msgstr "Kaupustelija"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:8
+msgctxt "atlanteans_building"
+msgid "Trading Post"
+msgstr "Kaupankäyntipiste"
+
+#. TRANSLATORS: Completed/Skipped/Did not start trading because ...
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:35
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:45
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:57
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:69
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_trading_post/init.lua:81
+msgid "trading"
+msgstr "kaupankäynti"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/barbarians_trade_pole/init.lua:8
+msgctxt "immovable"
+msgid "Trade Pole"
+msgstr "Kaupankäyntitolppa"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_copper/init.lua:8
+msgctxt "ware"
+msgid "Copper Coin"
+msgstr "Kuparikolikko"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_gold/init.lua:8
+msgctxt "ware"
+msgid "Gold Coin"
+msgstr "Kultakolikko"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_silver/init.lua:8
+msgctxt "ware"
+msgid "Silver Coin"
+msgstr "Hopeakolikko"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/coin_wood/init.lua:8
+msgctxt "ware"
+msgid "Wood Coin"
+msgstr "Puukolikko"
+
+#. TRANSLATORS: Purpose helptext for an atlantean market site: Trading post
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:12
+msgctxt "atlanteans_building"
+msgid "Allows sharing goods with other players."
+msgstr "Mahdollistaa antimien jaon muiden pelaajien kesken."
+
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:18
+msgctxt "atlanteans_building"
+msgid ""
+"You need to connect this flag to a scout’s house before you can send a scout"
+" here."
+msgstr ""
+"Sinun tulee liittää tämä lippu lähetin taloon ennen kuin voit lähettää sinne"
+" varsinaisen lähetin."
+
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
+#. House
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:20
+msgctxt "building"
+msgid "Explores unknown territory."
+msgstr "Tutkii tuntemattomia seutuja."
+
+#. TRANSLATORS: Purpose helptext for an atlantean production site: Temple of
+#. Satul
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:27
+msgctxt "atlanteans_building"
+msgid ""
+"A big and expensive temple to worship Satul and consecrate priestesses."
+msgstr ""
+"Suuri ja kallis temppeli Satulin palvomiseen sekä papittarien vihkimiseen."
+
+#. TRANSLATORS: Purpose helptext for an atlantean worker: Trader
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:36
+msgctxt "atlanteans_worker"
+msgid "Transports wares to share with other players."
+msgstr "Siirrä tarvikkeita jakaaksesi muiden pelaajien kanssa."
+
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:37
+msgctxt "atlanteans_worker"
+msgid "A trader is a scout who needs a horse to transport the wares."
+msgstr ""
+"Kaupustelija on lähetti joka tarvitsee hevosen toimittaakseen tarvikkeet."
+
+#. TRANSLATORS: Purpose helptext for an atlantean worker: Satul's Initiate
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:43
+msgctxt "atlanteans_worker"
+msgid "Takes care of the Temple of Satul."
+msgstr "Pitää huolta Satulin temppelistä."
+
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:44
+msgctxt "atlanteans_worker"
+msgid ""
+"Initiates take care of the Temple of Satul while they are learning to become"
+" priestesses."
+msgstr ""
+"Alokkaat pitävät huolta Satulin temppelistä sillä välin kun opiskelevat "
+"papittariksi."
+
+#. TRANSLATORS: Purpose helptext for an atlantean worker: Priestess
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:50
+msgctxt "atlanteans_worker"
+msgid "Worships Satul."
+msgstr "Palvoo Satulia."
+
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:51
+msgctxt "atlanteans_worker"
+msgid "Priestesses are needed to make Satul show his might."
+msgstr "Papittaria tarvitaan Satulin mahdin osoittamiseen."
+
+#. TRANSLATORS: Purpose helptext for an atlantean ware: Wooden Coin
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:64
+msgctxt "atlanteans_ware"
+msgid "A wooden coin, received as reward for delivering five logs."
+msgstr "Puukolikko, saatu palkkiona viiden tukin toimittamisesta."
+
+#. TRANSLATORS: Purpose helptext for an atlantean ware: Copper Coin
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:73
+msgctxt "atlanteans_building"
+msgid ""
+"A coin made of copper, received as reward for delivering four lumps of coal."
+msgstr ""
+"Kolikko tehty kuparista, saatu palkkiona neljän hiilikasan toimittamisesta."
+
+#. TRANSLATORS: Purpose helptext for an atlantean ware: Silver Coin
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:82
+msgctxt "atlanteans_building"
+msgid "A silver coin, received as reward for delivering three iron ingots."
+msgstr "Hopeakolikko, saatu palkkiona kolmen rautaharkon toimittamisesta."
+
+#. TRANSLATORS: Purpose helptext for an atlantean ware: Golden Coin
+#: ../../data/campaigns/atl02.wmf/scripting/tribes/init.lua:91
+msgctxt "atlanteans_building"
+msgid "A golden coin, received as reward for delivering two bars of gold."
+msgstr "Kultakolikko, saatu palkkiona kahdesta kultaharkon toimittamisesta."

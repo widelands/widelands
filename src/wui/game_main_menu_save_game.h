@@ -19,6 +19,8 @@
 #ifndef WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 #define WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -85,6 +87,7 @@ private:
 
 	std::string curdir_;
 	const std::string illegal_filename_tooltip_;
+	std::unique_ptr<UI::Panel::ModalGuard> modal_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H

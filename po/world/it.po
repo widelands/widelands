@@ -8,7 +8,7 @@
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
-# tbcrew <light@twobeers.net>, 2021
+# ilmaren, 2021
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # Samuele Battarra, 2020-2021
 msgid ""
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/world/critters/badger/init.lua:137
 msgid "Badger"

@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2016,2020
+# Juanjo, 2015-2016,2020,2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:27+0000\n"
-"Last-Translator: Juanjo, 2015-2016,2020\n"
+"Last-Translator: Juanjo, 2015-2016,2020,2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,11 +31,11 @@ msgid "15 minutes"
 msgstr "15 minuts"
 
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:102
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
-#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
+#: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:213
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
 msgstr "Regles"
@@ -58,7 +58,7 @@ msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "Si completeu un castell en l'àrea senyalada en la segona illa, aconseguireu un tercer quarter general en la tercera illa. Per guanyar la partida, haureu de construir un castell al centre de la tercera illa i mantenir-lo sota el vostre control durant 20 minuts."
+msgstr "Si completeu un castell a l'àrea senyalada en la segona illa, aconseguireu un tercer quarter general en la tercera illa. Per guanyar la partida, haureu de construir un castell al centre de la tercera illa i mantenir-lo sota el vostre control durant 20 minuts."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""

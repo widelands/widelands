@@ -19,6 +19,7 @@
 #include "ui_basic/dropdown.h"
 
 #include "base/i18n.h"
+#include "base/utf8.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -150,7 +151,6 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	button_box_.set_size(w, get_h());
 	list_->clicked.connect([this]() {
 		set_value();
-		close();
 		clear_filter();
 	});
 
@@ -440,6 +440,7 @@ void BaseDropdown::set_value() {
 		current_selection_ = list_->selection_index();
 		save_selected_entry(current_selection_);
 		update();
+		close();
 		selected();
 	}
 }
@@ -542,7 +543,12 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 }
 void BaseDropdown::delete_last_of_filter() {
 	if (is_filtered()) {
-		current_filter_.pop_back();
+		size_t pos = current_filter_.size() - 1;
+		while (pos > 0 && Utf8::is_utf8_extended(current_filter_.at(pos))) {
+			pos--;
+		}
+
+		current_filter_.erase(pos);
 		apply_filter();
 	}
 }
@@ -556,6 +562,10 @@ void BaseDropdown::disable_textinput() {
 
 void BaseDropdown::enable_textinput() {
 	set_handle_textinput(true);
+}
+
+std::string BaseDropdown::get_filter_text() {
+	return current_filter_;
 }
 
 }  // namespace UI
