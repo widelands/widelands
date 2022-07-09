@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Thomas Ho <tomohnetom@web.de>, 2018
-# Wuzzy <almikes@aol.com>, 2018
+# Wuzzy <Wuzzy@disroot.org>, 2018
 # Elisabeth Jäger, 2018
 # Simon S. <sim.sta@icloud.com>, 2019
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -25,11 +25,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Message title for a piece of information
-#: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
+#: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid "Note"
 msgstr "Anmerkung"
 
-#: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
+#: ../../data/campaigns/fri02.wmf/scripting/init.lua:34
 msgid ""
 "You appear not to have completed the previous mission. You may still play "
 "this scenario, but you will be at a disadvantage. I recommend that you "
