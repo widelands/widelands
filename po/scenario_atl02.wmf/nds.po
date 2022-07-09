@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -33,7 +33,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:687
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:735
 msgid "Jundlina"
-msgstr "Jundlin'"
+msgstr "Jundlin’"
 
 #. TRANSLATORS: To be used in placeholders for switching texts according to
 #. current leader
@@ -111,7 +111,7 @@ msgid ""
 "prerequisite for success on the island. Don’t forget to build a smelting "
 "works as well."
 msgstr ""
-"Dat meest vun uns' Warktüüg is in de Schippbröök verloren gahn. Uns' Lüü "
+"Dat meest vun uns’ Warktüüg is in de Schippbröök verloren gahn. Uns’ Lüü "
 "könen sünner gadelk Warktüüg hör Upgaven nich utföhren. Tum Glück hebben wi "
 "noch een bietje Iesenkluut un bannig vööl Köhl. Bau eene Warktüügsmee – wi "
 "bruken se vun Nood, um up de Insel to bestahn. Vergeet nich, ok een "
@@ -131,7 +131,7 @@ msgid ""
 "be replenished soon. Explore the mountains and build at least one mine of "
 "each type to mine coal, iron and gold."
 msgstr ""
-"As wi weer Warktüüg maken könen mutten wi bold uns' Versörgung mit "
+"As wi weer Warktüüg maken könen mutten wi bold uns’ Versörgung mit "
 "Mineraalen vernejen. Försk de Bargen ut un bau tominnst een Bargwark vun "
 "elkeen Aard, um Köhl, Iesen un Gold oftoboen."
 
@@ -167,7 +167,7 @@ msgid ""
 "Expand our territory by building military buildings. Build some guardhouses "
 "and at least one tower for its larger view range."
 msgstr ""
-"As uns' Dörp wasst bruken wi mehr Rüümte för all de Husen. Verwieder uns' "
+"As uns’ Dörp wasst bruken wi mehr Rüümte för all de Husen. Verwieder uns’ "
 "Gewest, indeem du Soldateree-Boen baust. Bau een paar Wahrders-Stuven un "
 "tominnst eenen Toorn um siene groter Sicht."
 
@@ -193,7 +193,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
 "Afterwards we need to construct a farm under all circumstances, as it needs "
-"spidercloth to be built. Additionally, we need a spiderfarm and a weaving "
+"spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
 "Daarna mutten wi nödig eene Buurderee bauen, denn se bruukt Spinnenstoff tum"
@@ -212,8 +212,8 @@ msgid ""
 "To be able to pay the tributes to Kalitath, and to maintain contact with "
 "Jundlina, we need to enhance our scout’s house to a trading post."
 msgstr ""
-"Um de Tribut an Kalitat betahlen to könen un in Verbinnen mit Jundlin' to "
-"blieven, mutten wi uns' Bespejeree to eenem Hannelsposten utbauen."
+"Um de Tribut an Kalitat betahlen to könen un in Verbinnen mit Jundlin’ to "
+"blieven, mutten wi uns’ Bespejeree to eenem Hannelsposten utbauen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:115
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:128
@@ -231,7 +231,7 @@ msgid ""
 "We need to send the wares to Kalitath with our trader. He will pick them up "
 "as soon as a batch is ready in his trading post."
 msgstr ""
-"Wi mutten de Waren mit uns' Hannelsmann an Kalitat schicken. He nimmt se an,"
+"Wi mutten de Waren mit uns’ Hannelsmann an Kalitat schicken. He nimmt se an,"
 " sobold een Packje in sienem Hannelsposten ankummt."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:119
@@ -296,11 +296,11 @@ msgstr "Bau Tempel för Satuul"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
 "We need to build a temple for Satul and we need to worship him well. By this"
-" he might show these barbarians his might and our princess might come back "
+" he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
 "Wi mutten eenen Tempel för Satuul bauen un hüm akkeraat anbeden. Dann wiest "
-"he villicht deesen Willen Lüü siene Macht un uns' Königstochter kummt "
+"he villicht deesen Willen Lüü siene Macht un uns’ Königstochter kummt "
 "hopentlik weer to Sinnen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:153
@@ -334,7 +334,7 @@ msgid ""
 "Now it’s time to finish off this annoying Barbarian. He has molested us far "
 "too long now."
 msgstr ""
-"Nu is 't an de Tied, deesen verdretelken Willen wegtomaken. He hett uns nu "
+"Nu is ’t an de Tied, deesen verdretelken Willen wegtomaken. He hett uns nu "
 "vööl to lang argert."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:178
@@ -392,7 +392,7 @@ msgid ""
 " new ships and their design."
 msgstr ""
 "Wi sünd bannig knapp vun de verflöökt Insel utnaiht: Wi kunnen dree Schippen"
-" beladen un flüchten, aver de Drifften of de versacken Insel hebben uns' "
+" beladen un flüchten, aver de Drifften of de versacken Insel hebben uns’ "
 "neje Schippen un hör Bauaard up de Proov stellt."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -413,8 +413,8 @@ msgid ""
 "was pulled below the sea level by Lutas’ forces and we lost most men and all"
 " wares it carried."
 msgstr ""
-"De sware Last un daarto de baldadigen Drifften weren to vööl för dat Schipp."
-" un Luutas in sien Macht hett 't unner de See trocken, so dat wi de meesten "
+"De sware Last un daarto de baldadigen Drifften weren to vööl för dat Schipp,"
+" un Luutas in sien Macht hett ’t unner de See trocken, so dat wi de meesten "
 "Lüü un all de Waren daarup verloren hebben."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -434,7 +434,7 @@ msgstr "Neje Hoop"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:208
 msgid "Jundlina continues"
-msgstr "Jundlin' seggt wieder"
+msgstr "Jundlin’ seggt wieder"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:210
@@ -442,7 +442,7 @@ msgid ""
 "Many weeks have passed and we did only see small islands not suitable for "
 "habitation and without any sign of being blessed by Satul, the fire god."
 msgstr ""
-"Völe Weken spnd vergahn un wi hebben nix as lütte Insels to sehn kregen, "
+"Völe Weken sünd vergahn un wi hebben nix as lütte Insels to sehn kregen, "
 "waar man nich leven kann un wat ok keen Segensteken von Satuul de Füürgott "
 "upwiesen."
 
@@ -463,7 +463,7 @@ msgstr "För de Tokunft planen"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:218
 msgid "Jundlina concludes"
-msgstr "Jundlin' beslutt"
+msgstr "Jundlin’ beslutt"
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:220
@@ -473,7 +473,7 @@ msgid ""
 "what tribe they might be from."
 msgstr ""
 "Tominnst de oostelk Sied vun de Insel is bewohnt, dat weten wi seker. Wi "
-"weten nich, of de Lüü daar Frünnen of Feinden spnd. Wi weten nich eenmaal, "
+"weten nich, of de Lüü daar Frünnen of Feinden sünd. Wi weten nich eenmaal, "
 "to wat för een Volk se tohören."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -484,7 +484,7 @@ msgid ""
 " are friendly."
 msgstr ""
 "Dat eenzigst, wat wi seker wissen, is dat se keene Atlantingers wesen könen,"
-" denn siet Jahrhunnerten is keens vun uns' Schippen so wied wegfahren as wi."
+" denn siet Jahrhunnerten is keens vun uns’ Schippen so wied wegfahren as wi."
 " Ick hoop blot, se sünd fründelk."
 
 #. TRANSLATORS: Jundlina - Diary
@@ -495,10 +495,10 @@ msgid ""
 "sail any further, and we must attempt to settle on this island as close as "
 "possible to our current position."
 msgstr ""
-"Wi hebben nich mehr vööl Water över; uns' Eten word knapp; wi hebben all "
-"uns' Warktüüg un dat Meest vun uns' Baumaterialien mit de darden Schipp "
+"Wi hebben nich mehr vööl Water över; uns’ Eten word knapp; wi hebben all "
+"uns’ Warktüüg un dat Meest vun uns’ Baumaterialien mit de darden Schipp "
 "verloren. Wi könen eenfach nich wieder sailen un mutten vun Nood up deeser "
-"Insel lannen – so dicht bi uns' aktuelle Stee as wi könen."
+"Insel lannen – so dicht bi uns’ aktuelle Stee as wi könen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:234
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:242
@@ -508,7 +508,7 @@ msgstr "Jundlin’ gifft Befehlen"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:235
 msgid "Jundlina decides"
-msgstr "Jundlin' bestimmt"
+msgstr "Jundlin’ bestimmt"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:237
@@ -517,13 +517,13 @@ msgid ""
 "plenty of iron ore, so a toolsmithy and a smelting works will quickly "
 "provide us with good tools."
 msgstr ""
-"As wi hier eene Muu gründt hebben, könen wi nu uns' Dörp planen. Wi hebben "
+"As wi hier eene Muu gründt hebben, könen wi nu uns’ Dörp planen. Wi hebben "
 "noch riekelk Iesenkluut, also könen uns eene Warktüügsmee un een Smeltwark "
 "fix mit godem Warktüüg versörgen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:243
 msgid "Jundlina demands"
-msgstr "Jundlin' fördert"
+msgstr "Jundlin’ fördert"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:245
@@ -547,7 +547,7 @@ msgid ""
 "careful. We should build at least one tower so that we can see potential "
 "enemies before they see us."
 msgstr ""
-"Laat uns also deese Insel utförsken un uns' Gewest vergrotern. Aver wi "
+"Laat uns also deese Insel utförsken un uns’ Gewest vergrotern. Aver wi "
 "mutten uppassen. Wi sallen tominnst eenen Toorn bauen, daarmit wi mögelke "
 "Feinden sehn, ehr se uns to sehn kregen."
 
@@ -559,7 +559,7 @@ msgid ""
 "it down."
 msgstr ""
 "Aver wi mutten vörsichtig wesen, wo wi de Stenen un anner düres Material "
-"bruken. Wenn wi een Huus nich mehr bruken, worden wi 't plattrieten un nich "
+"bruken. Wenn wi een Huus nich mehr bruken, worden wi ’t plattrieten un nich "
 "ofbrannen."
 
 #. TRANSLATORS: Jundlina
@@ -586,7 +586,7 @@ msgid ""
 "most perilous case, for as you know, spidercloth is needed for many "
 "buildings."
 msgstr ""
-"%s, Satuul sall Jo warmen. As de hoogste vun all de Spinners bring ick "
+"%s, Satuul sall Jo warmen. As de hoogste vun all de Spinners breng ick "
 "slimme Narichten. Ick hebb jüüst markt, dat Spinnenstoff knapp word. Dat is "
 "bannig gefahrelk, denn as Jo weetst bruukt man Spinnenstoff för völe Husen."
 
@@ -628,7 +628,7 @@ msgid ""
 msgstr ""
 "%s, ick seh een noch drockers Probleem! Wi hebben noch keene Buurderee baut,"
 " um de Spinnen to föden. As dat een Huus us, wat tum Beschicken Spinnenstoff"
-" bruukt, mutten wi 't bannig fix bauen, sünst gifft 't eene Noodlaag, wat wi"
+" bruukt, mutten wi ’t bannig fix bauen, sünst gifft ’t eene Noodlaag, wat wi"
 " nienich ofhelpen könen."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
@@ -644,7 +644,7 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
-"Ick seh de Gefahr, Öpoll. Wees bedankt för 't Mellen. Wi worden stracks eene"
+"Ick seh de Gefahr, Öpoll. Wees bedankt för ’t Mellen. Wi worden stracks eene"
 " Buurderee bauen."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
@@ -662,7 +662,7 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
-"%s, Satuul sall di warmen! De Spinnweelmöhlen un Spinnentüchteree sünd "
+"%s, Satuul sall Jo warmen! De Spinnweelmöhlen un Spinnentüchteree sünd "
 "fardig un de Spinners könen weer warken. Ick verspreck, dat wi bold de "
 "besten Stoff un ok een paar Kluften levern worden. Villicht könen wi later "
 "ok eene Goldspinneree bauen, um noch betere Kluften maken to könen."
@@ -681,8 +681,8 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
-"Dat sünd bannig gode Narichten, Öpoll. Du dürst nu torügg an dien Arbeid "
-"gahn, un Satuul sall Jo un all de Spinners warmen!"
+"Dat sünd bannig gode Narichten, Öpoll. Jo dürst nu torügg an Jo Arbeid gahn,"
+" un Satuul sall Jo un all de Spinners warmen!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
@@ -713,7 +713,7 @@ msgid ""
 "Hopefully our scout will get us some information soon."
 msgstr ""
 "Sidoolus, ick stimm to, dat dat tum Besörgen is. Wi mutten mehr utfinnen. "
-"Hopentlik word uns' Bespejer bold Narichten brengen."
+"Hopentlik word uns’ Bespejer bold Narichten brengen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -751,7 +751,7 @@ msgid ""
 "strength to become independent of others."
 msgstr ""
 "Sidoolus, wi könen elkeen Fründ bruken, wat wi kregen könen, also sallen wi "
-"hör hülpen. Laat uns sehn, wat wi för se doon könen. Wi mutten man ok uns' "
+"hör hülpen. Laat uns sehn, wat wi för se doon könen. Wi mutten man ok uns’ "
 "eegene Soldateree-Fors verhogen, um vun annern freei to blieven."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:383
@@ -764,7 +764,7 @@ msgstr "Baumaterialien sekert"
 msgid ""
 "May Satul warm you, %s! We have finished our supply of building materials."
 msgstr ""
-"%s, Satuul sall Jo warmen! Uns' Versörgung mit Baumaterialien is kumpleet."
+"%s, Satuul sall Jo warmen! Uns’ Versörgung mit Baumaterialien is kumpleet."
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:393
@@ -774,7 +774,7 @@ msgid ""
 "feel we are missing necessary buildings."
 msgstr ""
 "Dat is eene gode Naricht, Loftomoor. Nu könen wi överleggen, of wi grotere "
-"un betere Husen bauen wullen, um uns' Weertskupp to vergrotern. Bidde giff "
+"un betere Husen bauen wullen, um uns’ Weertskupp to vergrotern. Bidde giff "
 "Raad, wann immer Jo meenst, dat uns wichtige Husen hapern."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:404
@@ -788,7 +788,7 @@ msgid ""
 "%s, may Satul warm you! We have made some progress in building up our tool "
 "industry."
 msgstr ""
-"%s, Satuul sall Jo warmen! Wi sünd mit de Upbauen vun uns' Warktüüg-"
+"%s, Satuul sall Jo warmen! Wi sünd mit de Upbauen vun uns’ Warktüüg-"
 "Versörgung wiederkomen."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
@@ -806,7 +806,7 @@ msgid ""
 "look to get some resources from the mountains."
 msgstr ""
 "Dat is eene bannig gode Naricht, Loftomoor. Dat verlöövt uns, all de Husen "
-"uttostafferen, wat wi in uns' neje Heimaad bauen wullen. Aver nu mutten wi "
+"uttostafferen, wat wi in uns’ neje Heimaad bauen wullen. Aver nu mutten wi "
 "würrelk tosehn, dat wi een paar Mineraalen ut de Bargen halen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:426
@@ -820,7 +820,7 @@ msgid ""
 "%s, may Satul warm you! Another issue solved. We have found some resources "
 "and built a mine of each type."
 msgstr ""
-"%s, Satuul sall di warmen! Noch een Probleem ofholpen. Wi hebben wat "
+"%s, Satuul sall Jo warmen! Noch een Probleem ofholpen. Wi hebben wat "
 "Mineraale funnen un een Bargwark vun elkeen Aard baut."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
@@ -837,7 +837,7 @@ msgid ""
 "But now we need to ensure we can feed them. We need to build up bakeries and"
 " smokeries and all buildings to supply them."
 msgstr ""
-"Good, Loftomoor, bannig good. Satuul sall uns' stark un dapper "
+"Good, Loftomoor, bannig good. Satuul sall uns’ stark un dapper "
 "Bargwarkskeerls warmen. Un nu mutten wi noch uppassen, dat wi se ok föden "
 "könen. Wi mutten Backereen un Rökelkamers bauen, un all de Husen, wat deese "
 "versörgen."
@@ -855,7 +855,7 @@ msgid ""
 "Now we expect our princess to return home."
 msgstr ""
 "Satuul sall Jo warmen, Kalitat! Wi hebben all de Waren levert, wat Jo "
-"verlangt hest. Nu verwachten wi, dat uns' Königstochter na Huus torügg "
+"verlangt hest. Nu verwachten wi, dat uns’ Königstochter na Huus torügg "
 "kummt."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:451
@@ -887,7 +887,7 @@ msgid ""
 "the north. Now we expect our princess to return home."
 msgstr ""
 "Satuul sall Jo warmen, Kalitat! Wi hebben de Soldateree vun de noordelk Riek"
-" manntjet. Nu verwachten wi, dat uns' Königstochter na Huus torügg kummt."
+" manntjet. Nu verwachten wi, dat uns’ Königstochter na Huus torügg kummt."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:478
@@ -911,12 +911,12 @@ msgid ""
 "our common future on this island. She will explain it to you."
 msgstr ""
 "Sidoolus, wi danken Jo. Aver Jo Königstochter un ick hebben al Planen för "
-"uns' Tokunft tosamen up deeser Insel maakt. Se word Jo dat verklaren."
+"uns’ Tokunft tosamen up deeser Insel maakt. Se word Jo dat verklaren."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:499
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:573
 msgid "Jundlina Explains"
-msgstr "Jundlin' verklaart"
+msgstr "Jundlin’ verklaart"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:502
@@ -934,8 +934,8 @@ msgstr ""
 "Gastlikheid un Mood lehrt. Se hebben mi unbannig imponeert, un hör Kriegers "
 "un Gotten weren im Stried tegen dat Riek baldadig machtig. Vör allem hör "
 "Anföhrer Kalitat weer een bannig goder Weert, un ick hebb anfangen, daaröver"
-" natodenken, uns' Völkers för eene freedsame Tokunft up deeser Insel to "
-"vereenen. Also sallst Jo nu uns' Lüü up eene Hochtied vörbereiden un up "
+" natodenken, uns’ Völkers för eene freedsame Tokunft up deeser Insel to "
+"vereenen. Also sallst Jo nu uns’ Lüü up eene Hochtied vörbereiden un up "
 "freedsamen Tosamenleven mit de Willen Lüü. Dat heet ok, dat se över hör "
 "Gotten lehren mutten un wo man se anbeedt."
 
@@ -952,9 +952,9 @@ msgid ""
 "you won’t have the right to do the same, for the sake of your princess."
 msgstr ""
 "Sidoolus, nu pareer to de Befehlen vun Jo Königstochter. In de Tüskentied "
-"besluten wi villicht, dat wi wat vun de Land, wat Jo inohmen hebbt, för uns'"
+"besluten wi villicht, dat wi wat vun de Land, wat Jo inohmen hebbt, för uns’"
 " tosamen Tokunft bruken. Wi nehmen daarto eenfach Jo Soldateree-Boen mit "
-"uns' Lüü. Jo düürt natürelk nich dat Glieke doon, um Jo Königstochter meen "
+"uns’ Lüü. Jo düürt natürelk nich dat Glieke doon, um Jo Königstochter meen "
 "ick."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
@@ -972,7 +972,7 @@ msgid ""
 " this Barbarian. But I will never worship any Barbarian god. I can’t imagine"
 " how we could change her mind though."
 msgstr ""
-"Satuul sall uns all warmen. Uns' Königstochter is in de Gefangenskupp bi "
+"Satuul sall uns all warmen. Uns’ Königstochter is in de Gefangenskupp bi "
 "deesem Willen tüdelig worden. Aver ick word nienich keenen Willen Gott "
 "anbeden. Man ick weet nich, wo wi se umsnacken könen."
 
@@ -993,7 +993,7 @@ msgstr ""
 "sallen. Aver hier bruken wi nu de Hülp vun de Gott. Ick slaag also vör, dat "
 "wi eene Tempel bauen un Satuul mit unbannig düren Gaven anbeden. Dann könen "
 "wi een paar Preestersken inwejen, well Satuul bidden sallen, siene Macht to "
-"de Willen Lüü un uns' Königstochter to wiesen."
+"de Willen Lüü un uns’ Königstochter to wiesen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"
@@ -1010,9 +1010,9 @@ msgid ""
 " information."
 msgstr ""
 "Satuul sall Jo warmen, Loftomoor. Dar is een unbannig goder Infall. Ick geev"
-" Jo also de Upgaav, eenem Tempel to bauen, wat uns' Gott gefällig is. Bit wi"
-" paraat sünd, um Satuul um siene Macht to bidden, sallen wi een Oog up uns' "
-"Königstochter un deesen Willen hebben. Wi sallen uns' Hannelsmann anwiesen, "
+" Jo also de Upgaav, eenem Tempel to bauen, wat uns’ Gott gefällig is. Bit wi"
+" paraat sünd, um Satuul um siene Macht to bidden, sallen wi een Oog up uns’ "
+"Königstochter un deesen Willen hebben. Wi sallen uns’ Hannelsmann anwiesen, "
 "keene Waren mehr to de Willen to levern, un ick will, dat wi weer eenen "
 "Bespejer daar buten hebben, um mehr uttofinnen."
 
@@ -1027,7 +1027,7 @@ msgid ""
 "Satul. Now we can start worshipping him and consecrating our priestesses."
 msgstr ""
 "Satuul sall Jo warmen, Sidoolus! Miene Baulüü hebben jüüst de Tempel för "
-"Satuul beschickt. Nu könen wi hüm anbeden un uns' Preestersken inwejen."
+"Satuul beschickt. Nu könen wi hüm anbeden un uns’ Preestersken inwejen."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:545
@@ -1037,9 +1037,9 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
-"Satuul sall Jo warmen, Loftomoor. Wees bedankt, dat du sülk eenen unbannig "
-"mojen Tempel baut hest. Nu mutten wi Spiesen un uns' allerdüürsten Waren to "
-"de Tempel bringen, um se de Gott to sien Tofredenheid to opfern. Verget "
+"Satuul sall Jo warmen, Loftomoor. Wees bedankt, dat Jo sülk eenen unbannig "
+"mojen Tempel baut hest. Nu mutten wi Spiesen un uns’ allerdüürsten Waren to "
+"de Tempel brengen, um se de Gott to sien Tofredenheid to opfern. Verget "
 "nich, dat de Anwahrders, well Satuul as Preestersken denen sallen, Goldene "
 "Kluften un Edelstenen bruken."
 
@@ -1054,13 +1054,13 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
-"Uns' Preestersken sünd inweeit un wi hebben uns' besten Waren för Satuul "
-"sien Haag opfert. Sall he uns warmen un siene Macht to uns' Königstochter un"
+"Uns’ Preestersken sünd inweeit un wi hebben uns’ besten Waren för Satuul "
+"sien Haag opfert. Sall he uns warmen un siene Macht to uns’ Königstochter un"
 " deesem Willen Volk wiesen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
-msgstr "Jundlin' kummt an"
+msgstr "Jundlin’ kummt an"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:564
@@ -1073,7 +1073,7 @@ msgid ""
 msgstr ""
 "Satuul sall Jo warmen, Sidoolus. Un mi sall he mien kettersk Maneren "
 "vergeven. De Teken vun sien Macht un de Angst in de Gesichten vun de Willen "
-"Lüü hebben mi up eenmaal weer de Wahrheid utmaken laten. 't weer falsk vun "
+"Lüü hebben mi up eenmaal weer de Wahrheid utmaken laten. ’t weer falsk vun "
 "mi, vun Free un Tosamenleven to snacken, denn dat heet würrelk nix as ewige "
 "Denersheid. Un dat is nich, wat Atlantingers för maakt sünd."
 
@@ -1101,9 +1101,9 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
-"Sidoolus, se hebben mi nich weggahn laten. Ick hebb uns' Bespejer troffen un"
+"Sidoolus, se hebben mi nich weggahn laten. Ick hebb uns’ Bespejer troffen un"
 " he hett mi wegsmuggelt, denn ick hebb markt, dat se mi noch as Geisel "
-"hollen, nadeem ick Bedenkens över uns' leste Kuntrakt ütert hebb. Wi mutten "
+"hollen, nadeem ick Bedenkens över uns’ leste Kuntrakt ütert hebb. Wi mutten "
 "also dat Probleem mit de Willen Lüü up deeser Insel nu un för all Tieden "
 "ofhelpen. Wi könen hier nich in Free leven, wenn wi se nich manntjen."
 
@@ -1126,8 +1126,8 @@ msgid ""
 "Now it is time to celebrate but I expect we can’t relax long. We need to "
 "build up our society and our capability to explore the seas again."
 msgstr ""
-"Nu is 't Tied tum fieren, aver ick gloov nich, dat wi lang Rüst hollen "
-"könen. Wi mutten uns' Gesellskupp upbauen un uns' Vermögen, de See weer "
+"Nu is ’t Tied tum fieren, aver ick gloov nich, dat wi lang Rüst hollen "
+"könen. Wi mutten uns’ Gesellskupp upbauen un uns’ Vermögen, de See weer "
 "uttoförsken."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
@@ -1164,7 +1164,7 @@ msgid ""
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
 "Wi wullen blot Waren, ut wat man Wapens smeden kann. Ick meen echte Wapens "
-"as uns' Exten, nich deese Kuusprökels, wat Jo bruukt. Also schickt uns geern"
+"as uns’ Exten, nich deese Kuusprökels, wat Jo bruukt. Also schickt uns geern"
 " 25 Boomstammen, 16 Delen Köhl, 9 Delen Iesen un 4 Delen Gold."
 
 #. TRANSLATORS: Kalitath
@@ -1174,7 +1174,7 @@ msgid ""
 "headquarters as well to coordinate our war plannings."
 msgstr ""
 "Ach, un dat hebb ick haast vergeten. Wi verlangen, ok Jo Königstochter in "
-"uns' Raadhuus to hebben, um uns' Kriegsplanens topass to brengen."
+"uns’ Raadhuus to hebben, um uns’ Kriegsplanens topass to brengen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
@@ -1198,7 +1198,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
-msgstr "Jundlin' gifft to"
+msgstr "Jundlin’ gifft to"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:620
@@ -1207,8 +1207,8 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
-"Sidoolus, du hest Recht. Aver ick gloov, wi hebben keene Wahl, also mutten "
-"wi doon as se fördern. 't is nu diene Plicht, di um uns' lüttes Volk to "
+"Sidoolus, Jo hest Recht. Aver ick gloov, wi hebben keene Wahl, also mutten "
+"wi doon as se fördern. ’t is nu Jo Plicht, Jo um uns’ lüttes Volk to "
 "kümmern, bit ick torügg kumm."
 
 #. TRANSLATORS: Jundlina
@@ -1217,8 +1217,8 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
-"Toeerst muttst du uns' Bespejeree to eenem Hannelsposten utbauen. Dann "
-"sallst du de verlangt Tribut an Gold, Iesen, Köhl un Boomstammen schicken."
+"Toeerst muttst Jo uns’ Bespejeree to eenem Hannelsposten utbauen. Dann "
+"sallst Jo de verlangt Tribut an Gold, Iesen, Köhl un Boomstammen schicken."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
@@ -1231,7 +1231,7 @@ msgid ""
 "this will allow Jundlina to return to us soon."
 msgstr ""
 "Sidoolus, Satuul sall Jo warmen! Wi hebben de nejen Hannelsposten beschickt."
-" Ick hoop, Jundlin' kann nu bold to uns torügg kummen."
+" Ick hoop, Jundlin’ kann nu bold to uns torügg kummen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:636
 msgid "Sidolus Agrees"
@@ -1243,7 +1243,7 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
-"Good, Loftomoor, bannig good. Satuul sall uns' Königstochter un all uns' Lüü"
+"Good, Loftomoor, bannig good. Satuul sall uns’ Königstochter un all uns’ Lüü"
 " warmen. Nu mutten wi anfangen, deesem Willen Waren to schicken."
 
 #. TRANSLATORS: Sidolus
@@ -1265,7 +1265,7 @@ msgid ""
 "Strangers, we haven’t received any help yet. If you are really on our side, "
 "you should start sending some wares urgently."
 msgstr ""
-"Frömde, wi hebben noch keene Hülp kregen. Wenn Jo würrelk up uns' Sied sünd,"
+"Frömde, wi hebben noch keene Hülp kregen. Wenn Jo würrelk up uns’ Sied sünd,"
 " sallt Jo drock begünnen, uns Waren to schicken."
 
 #. TRANSLATORS: Kalitath
@@ -1280,7 +1280,7 @@ msgstr ""
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:657
 msgid "I am sure you do not want to break our alliance… do you?"
-msgstr "Ick bün wiss, Jo wullt uns' Fründskupp nich breken … nich wahr?"
+msgstr "Ick bün wiss, Jo wullt uns’ Fründskupp nich breken … nich wahr?"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:660
 msgid "Blackmail!"
@@ -1296,8 +1296,8 @@ msgid ""
 "May Satul warm us all. Our so-called ally is blackmailing us, and we can’t "
 "punish him for his insult as he has our princess at his hands."
 msgstr ""
-"Satuul sall uns all warmen. Uns' so benöömte Fründ sett uns unner Druck, un "
-"wi könen hüm för deese Beleidigung nich bestrafen, denn he hett uns' "
+"Satuul sall uns all warmen. Uns’ so benöömte Fründ sett uns unner Druck, un "
+"wi könen hüm för deese Beleidigung nich bestrafen, denn he hett uns’ "
 "Königstochter in sienen Hannen."
 
 #. TRANSLATORS: Sidolus
@@ -1306,7 +1306,7 @@ msgid ""
 "Our only chance is to double our efforts and start delivering something "
 "soon."
 msgstr ""
-"Uns' eenzigste Kans is, uns' Moiten to verdübbeln un bold wat to levern."
+"Uns’ eenzigste Kans is, uns’ Moiten to verdübbeln un bold wat to levern."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:673
 msgid "Tribute Started"
@@ -1328,7 +1328,7 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
-"Aver uns' Feind im Noorden is baldadig machtig. Ick bün bang, sünner echte "
+"Aver uns’ Feind im Noorden is baldadig machtig. Ick bün bang, sünner echte "
 "Hülp vun Jo könen wi de Krieg sülvst dann verlesen, wenn Jo uns genoog Waren"
 " to Hülp schickt."
 
@@ -1351,7 +1351,7 @@ msgid ""
 "May Satul warm you, Sidolus. Our ally now trusts us to some extent, but we "
 "shouldn’t trust them too much."
 msgstr ""
-"Satuul sall di warmen, Sidoolus. Uns' Fründ traut uns nu een bietje, aver wi"
+"Satuul sall Jo warmen, Sidoolus. Uns’ Fründ traut uns nu een bietje, aver wi"
 " sallen hüm nich to sehr trauen."
 
 #. TRANSLATORS: Jundlina
@@ -1360,7 +1360,7 @@ msgid ""
 "So I want you to defeat this Empire, but ensure that we will become and "
 "remain strong enough to enforce the respect we deserve."
 msgstr ""
-"Ick will also, dat du deeses Riek manntjet, aver pass up, dat wi machtig "
+"Ick will also, dat Jo deeses Riek manntjet, aver pass up, dat wi machtig "
 "genoog worden un blieven, dat wi de Respekt, wat wi verdeent hebben, "
 "infördern könen."
 
@@ -1390,7 +1390,7 @@ msgid ""
 "will not give any further warning."
 msgstr ""
 "Wenn Jo dat nich daan kriggt, all de Waren in dree un eener halven Stünn to "
-"levern, mutten wi gloven, dat Jo blots vörmaakt, uns' Fründen wesen to "
+"levern, mutten wi gloven, dat Jo blots vörmaakt, uns’ Fründen wesen to "
 "wullen. Also passt up de Tied up – wi seggen dat nich noch eenmaal."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:710
@@ -1427,7 +1427,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:734
 msgid "Jundlina’s Suicide"
-msgstr "Jundlin' vermoordt sik"
+msgstr "Jundlin’ vermoordt sik"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:737
@@ -1464,8 +1464,8 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
-"Aaaarg. Ick weet nich, wo dat passeren kunn, aver Satuul kunn uns' Fründ "
-"nich vör de Feinden schütten. He hett sien lestes Kraamhuus verloren un uns'"
+"Aaaarg. Ick weet nich, wo dat passeren kunn, aver Satuul kunn uns’ Fründ "
+"nich vör de Feinden schütten. He hett sien lestes Kraamhuus verloren un uns’"
 " edel Königstochter is mit hör verdarven. So hebben wi deese Slacht verlesen"
 " un uns’ Lüü worden unnergahn!"
 
