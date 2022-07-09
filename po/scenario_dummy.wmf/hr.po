@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:44+0000\n"
 "Last-Translator: Ivan Bižaca <biza@malilosinj.info>, 2015\n"
 "Language-Team: Croatian (http://www.transifex.com/widelands/widelands/language/hr/)\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
 msgid "Not yet implemented"
 msgstr "Nije još implementirano"
 
-#: ../../data/campaigns/dummy.wmf/scripting/init.lua:13
+#: ../../data/campaigns/dummy.wmf/scripting/init.lua:14
 msgid "Sorry, this map is not yet implemented."
 msgstr "Oprostite, ovaj zemljovid još nije implementiran."

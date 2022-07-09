@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2021-11-16 09:24+0000\n"
 "Last-Translator: Pedro Montaño <pedrol.montanoa@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -32,17 +32,17 @@ msgstr[2] ""
 msgid "Transport"
 msgstr "Transporte"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
 msgid ""
 "Four shovels for removing the swamps have been collected at the warehouse."
 msgstr "Hay cuatro palas en el almacén."
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:210
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:211
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid "Shovels"
 msgstr "Palas"
 
-#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:219
+#: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/init.lua:220
 msgid ""
 "Four more shovels for removing the swamps have been collected at the "
 "warehouse."
@@ -331,10 +331,13 @@ msgid ""
 "easily. In a desperate move Törver has called in a group of hardened "
 "mercenaries."
 msgstr ""
+"Mi señor, la batalla contra Törver progresa espléndidamente. Derrotamos al "
+"ala más fuerte de su ejército, pero no se rendirán fácilmente. En un "
+"moviimiento desesperado, Törver llamó a sus mercenarios más experimentados."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
-msgstr ""
+msgstr "El gran lago"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:53
 msgid ""
@@ -342,6 +345,9 @@ msgid ""
 "their excellent access to the adjacent great lake. A port in the north will "
 "give us better opportunities to have contact with other tribes."
 msgstr ""
+"Mi señor, ahora que conquistamos las tierras de Törver, tendremos acceso "
+"gran lago. Un puerto allí en el norte nos dará más oportunidad para "
+"contactar otras tribus."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:55
 msgid ""
@@ -349,16 +355,21 @@ msgid ""
 "ships. Unfortunately, the texts are written in a language that is unknown to"
 " us. Our wise men will try to translate these descriptions."
 msgstr ""
+"Encontramos documentos sobre la construcción de barcos en el cuartel general"
+" de Törver. Por desgracia, están escritos en una lengua inentendible para "
+"nosotros. Los sabios sabrán cómo leerlos."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:61
 msgid "Searching for gold"
-msgstr ""
+msgstr "Buscando el oro"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:62
 msgid ""
 "Sire, our men have located an isolated enemy pirate sentry. The abandoned "
 "huts indicate that there is gold nearby."
 msgstr ""
+"Mi señor, nuestros hombres divisaron un peusto de vigilanicia pirata "
+"abandonado. Las cabañas abandonadas indican la presencia de oro alrededor."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:64
 msgid ""
