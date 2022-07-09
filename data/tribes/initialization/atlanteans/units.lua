@@ -1611,7 +1611,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
             purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts and miners and to train soldiers."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Bakery
-            note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour"),
+            note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
@@ -1626,7 +1626,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Charcoal Kiln
-            note = pgettext("atlanteans_building", "Build only if you absolutely must produce some coal, or you have a very large amount of logs"),
+            note = pgettext("atlanteans_building", "Build only if you absolutely must produce some coal, or when you have a very large amount of logs."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Charcoal Kiln
             lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way, but in times of need we do what’s necessary."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Charcoal Kiln
@@ -1753,7 +1753,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
             purpose = pgettext("atlanteans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Weaving Mill -- listen to that song please
-            lore = pgettext("atlanteans_building", "Here are the widelands where people may dwell, "..
+            lore = pgettext("atlanteans_building", "Here are the Wide Lands where people may dwell, "..
                                                    "walking around caring everything’s well."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
@@ -1808,8 +1808,8 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Mine
             lore = pgettext("atlanteans_building", [[‘Way down here in these golden grounds<br>]] ..
-                                          [[with stones above us the thousand pounds.<br>]] ..
-                                          [[I dig in the dust until I see the spark,<br>]] ..
+                                          [[with stones above us the thousand pounds<br>]] ..
+                                          [[I dig in the dust until I see the spark;<br>]] ..
                                           [[The golden ore I find in the dark.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Mine
             lore_author = pgettext("atlanteans_building", "Miner’s prayer")
@@ -1946,9 +1946,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
             note = pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Ferry Yard
-            lore = pgettext("atlanteans_building", [[‘Row, row, row your boat,<br>]] ..
+            lore = pgettext("atlanteans_building", [[‘Row, row, row your boat<br>]] ..
                                           [[gently ’long the shore.<br>]] ..
-                                          [[steadily steadily steadily steadily<br>]] ..
+                                          [[Steadily steadily steadily steadily<br>]] ..
                                           [[bring the wares ashore.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Ferry Yard
             lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen")
