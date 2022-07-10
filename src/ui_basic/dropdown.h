@@ -34,6 +34,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/panel.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 // We use this to make sure that only 1 dropdown is open at the same time.
@@ -319,7 +320,7 @@ public:
 
 	bool handle_textinput(const std::string& input_text) override {
 		const std::string lowered_input_text = to_lower(input_text);
-		if (check_hotkey_match(lowered_input_text)) {
+		if (current_filter_.empty() && check_hotkey_match(lowered_input_text)) {
 			return true;
 		}
 		update_filter(lowered_input_text);
@@ -405,14 +406,29 @@ private:
 	}
 	bool check_hotkey_match(const std::string& input_text) {
 		for (auto& x : unfiltered_entries) {
-			if (input_text == to_lower(x.hotkey) && is_in_filtered_list(x.value)) {
-				if (hotkey_fn_) {
-					hotkey_fn_(x.value);
-				} else {
-					verb_log_dbg("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
+			if (" " == input_text) {
+				SDL_Keycode c = SDLK_SPACE;
+				const std::string localized_space =
+				   to_lower(shortcut_string_for(SDL_Keysym{SDL_GetScancodeFromKey(c), c, 0, 0}));
+				if (trigger_hotkey_on_match(localized_space, x)) {
+					return true;
 				}
-				return true;
+			} else {
+				if (trigger_hotkey_on_match(input_text, x)) {
+					return true;
+				}
 			}
+		}
+		return false;
+	}
+	bool trigger_hotkey_on_match(const std::string& input_text, Dropdown::ExtendedEntry& x) {
+		if (input_text == to_lower(x.hotkey) && is_in_filtered_list(x.value)) {
+			if (hotkey_fn_) {
+				hotkey_fn_(x.value);
+			} else {
+				verb_log_dbg("hotkey match: %s but no hotkey function available!", x.hotkey.c_str());
+			}
+			return true;
 		}
 		return false;
 	}
