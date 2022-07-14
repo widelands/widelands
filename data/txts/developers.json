@@ -6,7 +6,8 @@
 			"entries":[
 				{
 					"members":[
-						"GunChleoc (Since 2016)",
+						"Benedikt Straub (Nordfriese) (Since 2022)",
+						"GunChleoc (2016 – 2022)",
 						"Holger Rapp (SirVer) (2001 – 2016)"
 					]
 				}
@@ -18,8 +19,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"translate":[
-						"vacant"
+					"members":[
+						"Tóth András (tothxa)"
 					]
 				},
 				{
@@ -29,9 +30,15 @@
 					]
 				},
 				{
-					"subheading": "Sound",
+					"subheading": "Scripting",
 					"members":[
-						"Jan Bruns (solatis)"
+						"Stephan Lutz (hessenfarmer)"
+					]
+				},
+				{
+					"subheading": "Sound",
+					"translate":[
+						"vacant"
 					]
 				},
 				{
@@ -262,7 +269,8 @@
 					"subheading": "Atlanteans",
 					"members":[
 						"Holger Rapp (SirVer)",
-						"Peter Schwanemann (Nasenbaer)"
+						"Peter Schwanemann (Nasenbaer)",
+						"Stephan Lutz (hessenfarmer)"
 					]
 				},
 				{
@@ -418,7 +426,8 @@
 				{
 					"subheading": "Sound",
 					"members":[
-						"Yannick Warnier"
+						"Yannick Warnier",
+						"Jan Bruns (solatis)"
 					]
 				},
 				{

@@ -4,8 +4,8 @@
 # 
 # Translators:
 # GunChleoc, 2018
-# Rui <xymarior@yandex.com>, 2018
 # zecas <jjorge@free.fr>, 2020
+# Rui <xymarior@yandex.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -13,13 +13,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2020\n"
+"Last-Translator: Rui <xymarior@yandex.com>, 2022\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
@@ -1248,6 +1248,7 @@ msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
 msgstr[0] "Ainda precisamos de descobrir %d peça do nosso relicário."
 msgstr[1] "Ainda precisamos de descobrir %d peças do nosso relicário."
+msgstr[2] "Ainda precisamos de descobrir %d peças do nosso relicário."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648

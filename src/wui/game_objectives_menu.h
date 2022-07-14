@@ -19,21 +19,24 @@
 #ifndef WL_WUI_GAME_OBJECTIVES_MENU_H
 #define WL_WUI_GAME_OBJECTIVES_MENU_H
 
+#include "logic/game.h"
+#include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
 class Objective;
 }
 class InteractiveBase;
-class InteractivePlayer;
 
 ///  Shows the not already fulfilled objectives.
 class GameObjectivesMenu : public UI::UniqueWindow {
 public:
-	GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry&);
+	GameObjectivesMenu(InteractivePlayer& parent, UI::UniqueWindow::Registry&);
 	void think() override;
+	void draw(RenderTarget&) override;
 
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kObjectives;
@@ -42,12 +45,14 @@ public:
 	static UI::Window& load(FileRead&, InteractiveBase&);
 
 private:
-	InteractivePlayer& iplayer() const;
+	InteractivePlayer& iplayer_;
 	void selected(uint32_t);
 
+	UI::Box objective_box_;
+
 	using ListType = UI::Listselect<const Widelands::Objective&>;
-	ListType list;
-	UI::MultilineTextarea objectivetext;
+	ListType objective_list_;
+	UI::MultilineTextarea objective_text_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_OBJECTIVES_MENU_H

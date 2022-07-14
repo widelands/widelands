@@ -1045,10 +1045,10 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 		   error_message_parent, UI::WindowStyle::kFsMenu, _("Error"),
 		   format(
 		      _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
-			"this problem to help us improve Widelands. You will find related messages in the "
-			"standard output (stdout.txt on Windows). You are using build %2$s "
-			"(%3$s).\nPlease add this information to your report."),
-		      e.what(), build_id(), build_type()),
+		        "this problem to help us improve Widelands. You will find related messages in the "
+		        "standard output (stdout.txt on Windows). You are using version %2$s.\n"
+		        "Please add this information to your report."),
+		      e.what(), build_ver_details()),
 		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 	}

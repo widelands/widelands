@@ -4,15 +4,15 @@
 # Translators:
 # GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2018,2020-2021
+# Juanjo, 2015-2018,2020-2022
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: Juanjo, 2015-2018,2020-2021\n"
+"Last-Translator: Juanjo, 2015-2018,2020-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,9 +30,19 @@ msgid ""
 "Atlanteans struggle to make a new home for themselves."
 msgstr "Després d'arribar a una estranya illa propera a l'Atlàntida, els atlants supervivents lluiten per formar una nova llar."
 
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr "Lluitant de nou per una nova llar"
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr "Després d'escapar de pressa de l'illa que s'enfonsava, els atlants i la Jundlina s'enfronten a nous reptes."
+
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr "Un lloc al qual dir llar"
+msgstr "Un lloc al qual dir-li llar"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -144,32 +154,32 @@ msgid ""
 msgstr "Quan el seu déu va perdre la fe en els atlants i va afonar la seva illa, la lluita d'una dona per demanar justícia i una segona oportunitat per a la seva gent es va convertir en llegenda. Liderant els atlants que quedaven vius, els va conduir a una nova part del món. La Jundlina es convertí en l'ésser humà més poderós del seu temps, però a un cost molt alt: la seva humanitat i ànima."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "De l'aigua al gel"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "Presenta als frisons."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "Mariner (complicat)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "Timoner (molt difícil)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "Capità (extremadament difícil)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
@@ -654,7 +664,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "Els capritxosos déus no contesten les nostres pregàries. I el sol brilla cada cop més fort, fon les glaceres i els habitants s'amaguen a les profunditats. Però ara, a dalt de tot de les majestuoses muntanyes, a l'últim tros de terra habitable, estan refugiades les dues tribus supervivents. Fins i tot si els déus s'apiaden d'ells i el clima torna a ser més suau, el nivell de l'aigua continuarà pujant. L'únic lloc segur és més amunt de les muntanyes, on la serralada més alta és plena d'or i només hi ha espai per a una tribu. Però recordeu anar amb compte… és un últim lloc on viure molt petit."
+msgstr "Els capritxosos déus no responen les nostres pregàries. I el sol brilla cada cop més fort, fon les glaceres i els habitants s'amaguen a les profunditats. Però ara, a dalt de tot de les majestuoses muntanyes, a l'últim tros de terra habitable, estan refugiades les dues tribus supervivents. Fins i tot si els déus s'apiaden d'ells i el clima torna a ser més suau, el nivell de l'aigua continuarà pujant. L'únic lloc segur és més amunt de les muntanyes, on la serralada més alta és plena d'or i només hi ha espai per a una tribu. Però recordeu anar amb compte… és un últim lloc on viure molt petit."
 
 #: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."

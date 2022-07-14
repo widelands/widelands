@@ -7,6 +7,7 @@ include "scripting/messages.lua"
 include "scripting/richtext.lua"
 include "scripting/ui.lua"
 
+wl.Game().allow_diplomacy = false
 p1 = wl.Game().players[1]
 dummy_msg = {
    title=_("Not yet implemented"),

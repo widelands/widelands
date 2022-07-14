@@ -107,6 +107,7 @@ enum class SchedulerTaskId : uint8_t {
 	kManagementUpdate,
 	kUpdateStats,
 	kWarehouseFlagDist,
+	kDiplomacy,
 	kUnset
 };
 
@@ -397,10 +398,12 @@ struct BuildableField {
 	uint8_t space_consumers_nearby;
 	uint8_t rangers_nearby;
 	// to manage the military better following variables exists:
-	// capacity of nearby buildings:
+	// future soldier capacity of own nearby militarysites:
 	int16_t area_military_capacity;
+	int16_t future_area_military_capacity;
 	// distance to near buldings:
 	int16_t military_loneliness;
+	int16_t future_military_loneliness;
 	// count of military buildings in construction
 	// when making decision on new mulitary buildings it considers also
 	// unowned fields and mines, but this information is not quite correct as there
@@ -413,9 +416,6 @@ struct BuildableField {
 	int16_t ally_military_presence;
 	// stationed (manned) military buildings nearby
 	int16_t military_stationed;
-	// unconnected buildings nearby
-	// bool unconnected_nearby; NOCOM
-	// average_flag_dist_to_wh;
 	uint32_t average_flag_dist_to_wh;
 	int16_t military_unstationed;
 	int16_t own_non_military_nearby;

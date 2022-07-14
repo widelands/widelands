@@ -60,6 +60,7 @@
 #include "wui/encyclopedia_window.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
+#include "wui/game_diplomacy_menu.h"
 #include "wui/game_message_menu.h"
 #include "wui/game_objectives_menu.h"
 #include "wui/info_panel.h"
@@ -188,6 +189,9 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   map_view_.set_size(message.new_width, message.new_height);
+		   map_view_.pan_by(Vector2i((message.old_width - message.new_width) / 2,
+		                             (message.old_height - message.new_height) / 2),
+		                    MapView::Transition::Jump);
 		   resize_chat_overlay();
 		   finalize_toolbar();
 		   info_panel_.layout();
@@ -948,6 +952,9 @@ void InteractiveBase::load_windows(FileRead& fr, Widelands::MapObjectLoader& mol
 					break;
 				case UI::Panel::SaveType::kObjectives:
 					w = &GameObjectivesMenu::load(fr, *this);
+					break;
+				case UI::Panel::SaveType::kDiplomacy:
+					w = &GameDiplomacyMenu::load(fr, *this);
 					break;
 				case UI::Panel::SaveType::kMessages:
 					w = &GameMessageMenu::load(fr, *this);
