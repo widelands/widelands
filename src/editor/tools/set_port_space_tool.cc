@@ -38,16 +38,18 @@ Widelands::NodeCaps port_tool_nodecaps(const Widelands::FCoords& c, const Widela
 
 }  // namespace
 
-EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorInteractive& parent, EditorUnsetPortSpaceTool& the_unset_tool)
+EditorSetPortSpaceTool::EditorSetPortSpaceTool(EditorInteractive& parent,
+                                               EditorUnsetPortSpaceTool& the_unset_tool)
    : EditorTool(parent, the_unset_tool, the_unset_tool) {
 }
 
-EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
+EditorUnsetPortSpaceTool::EditorUnsetPortSpaceTool(EditorInteractive& parent)
+   : EditorTool(parent, *this, *this) {
 }
 
 int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						  EditorActionArgs* args,
-						  Widelands::Map* map) {
+                                                  EditorActionArgs* args,
+                                                  Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
@@ -72,7 +74,7 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriang
 
 Widelands::NodeCaps
 EditorSetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-					       const Widelands::EditorGameBase& egbase) {
+                                               const Widelands::EditorGameBase& egbase) {
 	return port_tool_nodecaps(fcoords, egbase.map());
 }
 
@@ -84,8 +86,8 @@ int32_t EditorSetPortSpaceTool::handle_undo_impl(
 }
 
 int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						    EditorActionArgs* args,
-						    Widelands::Map* map) {
+                                                    EditorActionArgs* args,
+                                                    Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
@@ -117,6 +119,6 @@ int32_t EditorUnsetPortSpaceTool::handle_undo_impl(
 
 Widelands::NodeCaps
 EditorUnsetPortSpaceTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-						 const Widelands::EditorGameBase& egbase) {
+                                                 const Widelands::EditorGameBase& egbase) {
 	return port_tool_nodecaps(fcoords, egbase.map());
 }

@@ -27,12 +27,12 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -50,7 +50,6 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 	bool save_configuration_impl(ToolConf& conf) override;
 	void load_configuration(const ToolConf& conf) override;
 	std::string format_conf_description_impl(const ToolConf& conf) override;
-
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H

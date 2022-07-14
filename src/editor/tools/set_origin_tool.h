@@ -27,12 +27,12 @@ struct EditorSetOriginTool : public EditorTool {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 

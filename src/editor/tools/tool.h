@@ -40,7 +40,6 @@ enum class WindowID {
 	ToolHistory,
 };
 
-
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
  * modify height, place immovable, place critter, place building. A Tool only
@@ -49,31 +48,30 @@ enum class WindowID {
  */
 class EditorTool {
 public:
-
 	EditorTool(EditorInteractive& parent, EditorTool& second, EditorTool& third, bool uda = true)
-	  : parent_(parent), second_(second), third_(third), undoable_(uda) {
+	   : parent_(parent), second_(second), third_(third), undoable_(uda) {
 	}
 	virtual ~EditorTool() {
 	}
 
 	enum ToolIndex { First, Second, Third };
 	int32_t handle_click(ToolIndex i,
-			     const Widelands::NodeAndTriangle<>& center,
-			     EditorActionArgs* args,
-			     Widelands::Map* map) {
+	                     const Widelands::NodeAndTriangle<>& center,
+	                     EditorActionArgs* args,
+	                     Widelands::Map* map) {
 		return (i == First  ? *this :
-			i == Second ? second_ :
-			    third_)
+		        i == Second ? second_ :
+                            third_)
 		   .handle_click_impl(center, args, map);
 	}
 
 	int32_t handle_undo(ToolIndex i,
-			    const Widelands::NodeAndTriangle<>& center,
-			    EditorActionArgs* args,
-			    Widelands::Map* map) {
+	                    const Widelands::NodeAndTriangle<>& center,
+	                    EditorActionArgs* args,
+	                    Widelands::Map* map) {
 		return (i == First  ? *this :
-			i == Second ? second_ :
-			    third_)
+		        i == Second ? second_ :
+                            third_)
 		   .handle_undo_impl(center, args, map);
 	}
 
@@ -99,12 +97,10 @@ public:
 		return "";
 	}
 
-	virtual int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-					  EditorActionArgs*,
-					  Widelands::Map*) = 0;
-	virtual int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>&,
-					 EditorActionArgs*,
-					 Widelands::Map*) {
+	virtual int32_t
+	handle_click_impl(const Widelands::NodeAndTriangle<>&, EditorActionArgs*, Widelands::Map*) = 0;
+	virtual int32_t
+	handle_undo_impl(const Widelands::NodeAndTriangle<>&, EditorActionArgs*, Widelands::Map*) {
 		return 0;
 	}  // non unduable tools don't need to implement this.
 	virtual const Image* get_sel_impl() const = 0;
@@ -112,14 +108,14 @@ public:
 	// Gives the tool the chance to modify the nodecaps to change what will be
 	// displayed as build help.
 	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-							   const Widelands::EditorGameBase&) {
+	                                                   const Widelands::EditorGameBase&) {
 		return fcoords.field->nodecaps();
 	}
 
 	// Gives the tool the chance to modify the maxcaps to change what will be
 	// displayed as maximum build help.
 	virtual Widelands::NodeCaps maxcaps_for_buildhelp(const Widelands::FCoords& fcoords,
-							  const Widelands::EditorGameBase&) {
+	                                                  const Widelands::EditorGameBase&) {
 		return fcoords.field->maxcaps();
 	}
 
@@ -150,8 +146,6 @@ public:
 		return format_conf_description_impl(conf);
 	}
 
-
-
 protected:
 	EditorInteractive& parent_;
 	EditorTool &second_, &third_;
@@ -160,8 +154,5 @@ protected:
 private:
 	DISALLOW_COPY_AND_ASSIGN(EditorTool);
 };
-
-
-
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_H

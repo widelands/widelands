@@ -33,7 +33,7 @@ struct EditorToolChangeResourcesOptionsMenu : public EditorToolOptionsMenu {
 	                                     EditorIncreaseResourcesTool&,
 	                                     UI::UniqueWindow::Registry&);
 
-        void update_window() override;
+	void update_window() override;
 
 private:
 	EditorInteractive& eia();

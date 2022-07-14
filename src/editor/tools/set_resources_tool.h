@@ -22,24 +22,25 @@
 #include "editor/tools/tool.h"
 
 Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
-					    const Widelands::EditorGameBase& egbase,
-					    Widelands::DescriptionIndex resource);
+                                            const Widelands::EditorGameBase& egbase,
+                                            Widelands::DescriptionIndex resource);
 
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
-	EditorSetResourcesTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), cur_res_(0), set_to_(0) {
+	EditorSetResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), cur_res_(0), set_to_(0) {
 	}
 
 	/**
 	 * Sets the resources of the current to a fixed value
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -48,7 +49,7 @@ struct EditorSetResourcesTool : public EditorTool {
 	}
 
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-						   const Widelands::EditorGameBase& egbase) override {
+	                                           const Widelands::EditorGameBase& egbase) override {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
@@ -76,7 +77,7 @@ struct EditorSetResourcesTool : public EditorTool {
 	}
 	void load_configuration(const ToolConf& conf) override {
 		cur_res_ = conf.resource;
-                set_to_ = conf.set_to;
+		set_to_ = conf.set_to;
 	}
 
 private:

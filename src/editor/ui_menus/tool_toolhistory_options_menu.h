@@ -24,28 +24,27 @@
 #include "ui_basic/box.h"
 #include "ui_basic/listselect.h"
 
-
-
 class EditorInteractive;
 struct EditorHistoryTool;
 
 struct EditorToolhistoryOptionsMenu : public EditorToolOptionsMenu {
-        EditorToolhistoryOptionsMenu(EditorInteractive&, EditorHistoryTool&, UI::UniqueWindow::Registry&);
-        void update();
+	EditorToolhistoryOptionsMenu(EditorInteractive&,
+	                             EditorHistoryTool&,
+	                             UI::UniqueWindow::Registry&);
+	void update();
 
 private:
 	EditorInteractive& eia() const;
-        EditorHistoryTool& history_tool_;
+	EditorHistoryTool& history_tool_;
 
-        void list_item_clicked(const std::string& selected);
-        std::string make_tooltip(const ToolConf &conf, const std::string& title);
-        void rebuild_list();
+	void list_item_clicked(const std::string& selected);
+	std::string make_tooltip(const ToolConf& conf, const std::string& title);
+	void rebuild_list();
 
 	int32_t margin_;
 	int32_t box_width_;
 	UI::Box box_;
-        UI::Listselect<std::string> list_;
-
+	UI::Listselect<std::string> list_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H

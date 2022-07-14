@@ -145,8 +145,7 @@ void EditorToolNoiseHeightOptionsMenu::update_set_to() {
 	select_correct_tool();
 }
 
-
 void EditorToolNoiseHeightOptionsMenu::update_window() {
-        lower_.set_value(noise_tool_.get_interval().min);
-        upper_.set_value(noise_tool_.get_interval().max);
+	lower_.set_value(noise_tool_.get_interval().min);
+	upper_.set_value(noise_tool_.get_interval().max);
 }

@@ -26,26 +26,22 @@
 
 struct ListItem {
 	ListItem(const std::string& k, const std::string& t, ToolConf conf)
-           : key(k), title(t), data(conf), sticky(false) {
-        }
-        std::string key;         ///< Non-locale-dependent description
-        std::string title;       ///< Locale-dependent description
+	   : key(k), title(t), data(conf), sticky(false) {
+	}
+	std::string key;    ///< Non-locale-dependent description
+	std::string title;  ///< Locale-dependent description
 	ToolConf data;
 	bool sticky;
 };
 
-
 /// History of previously used tool settings
 struct EditorHistoryTool : public EditorTool {
-	EditorHistoryTool(EditorInteractive& parent)
-	   : EditorTool(parent, *this, *this) {
+	EditorHistoryTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
-
-
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-				  EditorActionArgs*,
-				  Widelands::Map*) override {
+	                          EditorActionArgs*,
+	                          Widelands::Map*) override {
 		return 0;
 	}
 
@@ -66,7 +62,6 @@ struct EditorHistoryTool : public EditorTool {
 	void toggle_sticky(const std::string& key);
 	std::list<ListItem>::iterator begin();
 	std::list<ListItem>::iterator end();
-
 
 private:
 	std::list<ListItem>::iterator find_item(const std::string& key);

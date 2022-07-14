@@ -22,8 +22,8 @@
 #include "logic/widelands_geometry.h"
 
 int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-					    EditorActionArgs* args,
-					    Widelands::Map* map) {
+                                            EditorActionArgs* args,
+                                            Widelands::Map* map) {
 	args->resized = map->dump_state(parent_.egbase());  // save old state for undo
 	map->resize(parent_.egbase(), center.node, args->new_map_size.w, args->new_map_size.h);
 
@@ -40,8 +40,8 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
 
 int32_t
 EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* node */,
-				   EditorActionArgs* args,
-				   Widelands::Map* map) {
+                                   EditorActionArgs* args,
+                                   Widelands::Map* map) {
 	map->set_to(parent_.egbase(), args->resized);
 
 	// fix for issue #3754 (same as above)

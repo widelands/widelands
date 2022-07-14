@@ -112,9 +112,9 @@ public:
 		kLoad              // show Load Map window
 	};
 	static void run_editor(UI::Panel* error_message_parent,
-			       EditorInteractive::Init,
-			       const std::string& filename = "",
-			       const std::string& script_to_run = "");
+	                       EditorInteractive::Init,
+	                       const std::string& filename = "",
+	                       const std::string& script_to_run = "");
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;
@@ -302,7 +302,6 @@ private:
 	/// Set to true when tool settings are changed in tool window.
 	/// Set to false when the tool is used with the new settings.
 	bool tool_settings_changed_ = true;
-
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

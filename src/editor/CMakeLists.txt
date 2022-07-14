@@ -49,9 +49,9 @@ wl_library(editor
     tools/tool.h
     tools/tool_action.h
     tools/tool_conf.cc
-    tools/tool_conf.h    
+    tools/tool_conf.h
     tools/toolhistory_tool.cc
-    tools/toolhistory_tool.h    
+    tools/toolhistory_tool.h
     ui_menus/categorized_item_selection_menu.h
     ui_menus/field_info_window.h
     ui_menus/field_info_window.cc

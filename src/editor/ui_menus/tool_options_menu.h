@@ -23,7 +23,6 @@
 #include "editor/tools/tool.h"
 #include "ui_basic/unique_window.h"
 
-
 struct EditorToolOptionsMenu : public UI::UniqueWindow {
 	EditorToolOptionsMenu(EditorInteractive& parent,
 	                      UI::UniqueWindow::Registry&,
@@ -54,12 +53,11 @@ struct EditorToolOptionsMenu : public UI::UniqueWindow {
 		return spacing();
 	}
 
-        /**
-         * Update window options to match tool settings
-         */
-        virtual void update_window() {
-        }
-
+	/**
+	 * Update window options to match tool settings
+	 */
+	virtual void update_window() {
+	}
 
 private:
 	EditorInteractive& parent_;

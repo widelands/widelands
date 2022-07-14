@@ -21,8 +21,8 @@
 #include "editor/editorinteractive.h"
 
 int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-					       EditorActionArgs* /* args */,
-					       Widelands::Map* map) {
+                                               EditorActionArgs* /* args */,
+                                               Widelands::Map* map) {
 	map->set_origin(center.node);
 	parent_.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	parent_.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);
@@ -31,8 +31,8 @@ int32_t EditorSetOriginTool::handle_click_impl(const Widelands::NodeAndTriangle<
 
 int32_t
 EditorSetOriginTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-				      EditorActionArgs* /* args */,
-				      Widelands::Map* map) {
+                                      EditorActionArgs* /* args */,
+                                      Widelands::Map* map) {
 	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
 
 	// Because of the triangle design of map, y is changed by an odd number.

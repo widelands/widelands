@@ -23,10 +23,10 @@
 
 bool EditorHistoryTool::add_configuration(const ToolConf& conf) {
 
-        std::string key = conf.to_key();
-        std::string title = conf.primary->format_conf_description(conf);
+	std::string key = conf.to_key();
+	std::string title = conf.primary->format_conf_description(conf);
 
-        ListItem item(key, title, conf);
+	ListItem item(key, title, conf);
 
 	if (find_item(key) != tool_settings_.end()) {
 		return false;
@@ -48,7 +48,6 @@ std::list<ListItem>::iterator EditorHistoryTool::begin() {
 std::list<ListItem>::iterator EditorHistoryTool::end() {
 	return tool_settings_.end();
 }
-
 
 const ToolConf* EditorHistoryTool::get_configuration_for(const std::string& key) {
 	auto it = find_item(key);
@@ -82,7 +81,6 @@ std::list<ListItem>::iterator EditorHistoryTool::find_item(const std::string& ke
 
 	return tool_settings_.end();
 }
-
 
 void EditorHistoryTool::truncate() {
 	int count = tool_settings_.size();

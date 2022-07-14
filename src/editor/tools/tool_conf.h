@@ -32,8 +32,8 @@ struct ToolConf {
 	ToolConf(const ToolConf&) = default;
 	ToolConf& operator=(const ToolConf&) = default;
 
-        /// Returns a description of the conf's content in non-locale-dependent form.
-        std::string to_key() const;
+	/// Returns a description of the conf's content in non-locale-dependent form.
+	std::string to_key() const;
 
 	EditorTool* primary;
 
