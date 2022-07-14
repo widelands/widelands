@@ -103,8 +103,8 @@ std::string EditorToolhistoryOptionsMenu::make_tooltip(const ToolConf& conf,
 
 	cr->resume();
 
-	/** TRANSLATORS: Help tooltip in tool history window */
 	std::string help =
+	   /** TRANSLATORS: Help tooltip in tool history window */
 	   _("Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item.");
 
 	return help + "<vspace gap=1>" + title + cr->pop_table()->get_string("text");
