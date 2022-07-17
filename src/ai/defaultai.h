@@ -184,8 +184,11 @@ private:
 
 	// for production sites
 	BuildingNecessity
-	check_building_necessity(BuildingObserver& bo, PerfEvaluation purpose, const Time&);
+	check_ps_necessity(BuildingObserver& bo, const Time&);
+	BuildingNecessity
+	check_ranger_necessity(BuildingObserver& bo, const BasicEconomyBuildingStatus, const Time&);
 	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
+	DismantlePossibility check_dismantle_possibility(BuildingObserver& bo, const Time&);
 	void sort_task_pool();
 	void set_taskpool_task_time(const Time&, SchedulerTaskId);
 	const Time& get_taskpool_task_time(SchedulerTaskId);
@@ -294,7 +297,7 @@ private:
 	// return single number of strength of vector of soldiers
 	int32_t calculate_strength(const std::vector<Widelands::Soldier*>&);
 	// for militarysites (overloading the function)
-	BuildingNecessity check_building_necessity(BuildingObserver&, const Time&);
+	BuildingNecessity check_ms_necessity(BuildingObserver&, const Time&);
 	void soldier_trained(const Widelands::TrainingSite&);
 	bool critical_mine_unoccupied(const Time&);
 

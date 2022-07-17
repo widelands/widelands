@@ -1925,7 +1925,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (flags_count > 0) {
 		field.average_flag_dist_to_wh /= flags_count;
 	}
-	// printf("flags count: %2d, avg: %3d\n", flags_count, field.average_flag_dist_to_wh);
 
 	Widelands::HollowArea<> har(
 	   Widelands::Area<>(field.coords, actual_enemy_check_area), kProductionArea + 2);
@@ -2489,8 +2488,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		   management_data.neuron_pool[35].get_result_safe(bf->average_flag_dist_to_wh, kAbsValue) +
 		   management_data.neuron_pool[42].get_result_safe(
 		      bf->average_flag_dist_to_wh / 3, kAbsValue);
-		// printf("wh distance malus: %3d [dist to wh: %3d]\n", wh_distance_malus,
-		// bf->average_flag_dist_to_wh);
 
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
@@ -3504,6 +3501,15 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	// ferries
 	const bool needs_warehouse = flag.get_economy(Widelands::wwWORKER)->warehouses().empty();
 
+	// if (flag.current_wares() > 6 && !is_warehouse) {
+	// 	printf(
+	// 	   "%3dx%3d, wares here: %d, roads from here: %d, nearest wh: %2d, wh count: %ld,  has capacity: %s\n",
+	// 	   flag.get_position().x, flag.get_position().y, flag.current_wares(), flag.nr_of_roadbases(),
+	// 	   flag_warehouse_distance.get_wh_distance(flag_coords_hash, gametime, nullptr),
+	// 	   flag.get_economy(Widelands::wwWORKER)->warehouses().size(),
+	// 	   flag.has_capacity() ? "Y" : "N");
+	// }
+
 	// when deciding if we attempt to build a road from here we use probability
 	uint16_t probability_score = 0;
 	if (flag.nr_of_roads() == 1) {
@@ -4314,6 +4320,27 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		}
 	}
 
+
+	if (site.bo->last_dismantle_time + Duration(60 * 1000) > game().get_gametime()) {
+		return false;
+	}
+
+	const DismantlePossibility dp = check_dismantle_possibility(*site.bo, gametime);
+
+	if (dp == DismantlePossibility::kShouldBe) {
+		printf("dismantling %s (enforced)\n", site.bo->name);
+		site.bo->last_dismantle_time = gametime;
+		if (connected_to_wh) {
+			game().send_player_dismantle(*site.site, true);
+		} else {
+			game().send_player_bulldoze(*site.site);
+		}
+		return true;
+	}
+	if (dp == DismantlePossibility::kCannot) {
+		return false;
+	}
+
 	// Barracks
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
 		// If we somehow have more than one barracks we will dismantle current one
@@ -4409,10 +4436,6 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-		// Do not destruct the last few lumberjacks
-		if (site.bo->cnt_built <= site.bo->cnt_target) {
-			return false;
-		}
 
 		if (site.site->get_statistics_percent() >
 		    std::abs(management_data.get_military_number_at(117)) / 2) {
@@ -4438,15 +4461,12 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		return true;
 	}
 
-	// Wells handling
-	if (site.bo->is(BuildingAttribute::kWell)) {
-		// Never get below target count of wells
-		if (site.bo->total_count() <= site.bo->cnt_target) {
-			return false;
-		}
+	// Wells, fishers, hunter handling
+	if (site.bo->is(BuildingAttribute::kWell) || site.bo->is(BuildingAttribute::kFisher) ||
+	    site.bo->is(BuildingAttribute::kHunter)) {  // NOCOM
 
-		if (site.unoccupied_till + Duration(6 * 60 * 1000) < gametime &&
-		    site.site->get_statistics_percent() == 0) {
+		if ((site.unoccupied_till + Duration(6 * 60 * 1000) < gametime &&
+		                             site.site->get_statistics_percent() == 0)) {
 			site.bo->last_dismantle_time = gametime;
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site, true);
@@ -4456,25 +4476,6 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 			return true;
 		}
-
-		// do not consider dismantling if we are under target
-		if (site.bo->last_dismantle_time + Duration(90 * 1000) > game().get_gametime()) {
-			return false;
-		}
-
-		// now we test the stocklevel and dismantle the well if we have enough water
-		// but first we make sure we do not dismantle a well too soon
-		// after dismantling previous one
-		if (get_stocklevel(*site.bo, gametime) > 250 + productionsites.size() * 5) {  // dismantle
-			site.bo->last_dismantle_time = game().get_gametime();
-			if (connected_to_wh) {
-				game().send_player_dismantle(*site.site, true);
-			} else {
-				game().send_player_bulldoze(*site.site);
-			}
-			return true;
-		}
-
 		return false;
 	}
 
@@ -4527,6 +4528,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		       gametime &&
 		    site.site->can_start_working()) {
 
+
+			//NOCOM
 			if (site.site->get_statistics_percent() < 30 && get_stocklevel(*site.bo, gametime) > 100) {
 				site.bo->last_dismantle_time = game().get_gametime();
 				if (connected_to_wh) {
@@ -4571,14 +4574,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	}
 
 	// buildings with inputs, checking if we can a dismantle some due to low performance
-	if (!site.bo->inputs.empty() && (site.bo->cnt_built - site.bo->unoccupied_count) >= 3 &&
+	if ((site.bo->cnt_built - site.bo->unoccupied_count) >= 3 &&
 	    site.site->can_start_working() &&
-	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
-	       BuildingNecessity::kNotNeeded &&
-	    gametime - site.bo->last_dismantle_time >
-	       Duration(static_cast<uint32_t>(
-	          (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000)) &&
-
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
 	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000)) {
 
@@ -4594,6 +4591,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// hunters)
+	
 	if (site.bo->inputs.empty() && site.bo->supported_producers.empty() &&
 	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    site.site->get_statistics_percent() < 5 &&
@@ -4804,7 +4802,7 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	// if we don't need the output, and we have other buildings of the same type, the function
 	// returns
 	// and building will be dismantled later.
-	check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime);
+	check_ps_necessity(*site.bo, gametime);
 	if (site.bo->max_needed_preciousness == 0 && !forcing_upgrade) {
 		return false;
 	}
@@ -4943,8 +4941,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, con
 // This is core of construct_building() function
 // This is run once when construct_building() is run, or when considering
 // dismantle
-BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
-                                                      const PerfEvaluation purpose,
+BuildingNecessity DefaultAI::check_ps_necessity(BuildingObserver& bo,
                                                       const Time& gametime) {
 	bo.primary_priority = 0;
 
@@ -4967,13 +4964,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Very first we finds if AI is allowed to build such building due to its mode
-	if (purpose == PerfEvaluation::kForConstruction &&
-	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+	if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
 		return BuildingNecessity::kForbidden;
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
+	if (!map_allows_seafaring_ &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
@@ -5179,7 +5175,6 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 	// And finally the 'core' of this function
 	// First deal with construction of new sites
-	if (purpose == PerfEvaluation::kForConstruction) {
 		// Inform if we are above ai type limit.
 		if (bo.total_count() > bo.cnt_limit_by_aimode) {
 			verb_log_warn_time(gametime,
@@ -5314,153 +5309,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kAllowed;
 		}
 		if (bo.is(BuildingAttribute::kRanger)) {
-
-			// making sure we have one completed supported lumberjack
-			uint16_t supported_lumberjack_built = 0;
-			for (const auto& supported_building : bo.supported_producers) {
-				supported_lumberjack_built += get_building_observer(supported_building.first).cnt_built;
-			}
-			if (supported_lumberjack_built < 1) {
-				return BuildingNecessity::kForbidden;
-			}
-
-			// genetic algorithm to decide whether new rangers are needed
-			static int16_t tmp_target = 2;
-			tmp_target = 2;
-			static int16_t inputs[2 * kFNeuronBitSize] = {0};
-			// Resetting values as the variable is static
-			std::fill(std::begin(inputs), std::end(inputs), 0);
-
-			inputs[0] = static_cast<int>(persistent_data->trees_around_cutters < 10) * 2;
-			inputs[1] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 2;
-			inputs[2] = static_cast<int>(persistent_data->trees_around_cutters < 30) * 2;
-			inputs[3] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
-			inputs[4] = static_cast<int>(persistent_data->trees_around_cutters < 50) * 1;
-			inputs[5] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
-			inputs[6] = static_cast<int>(persistent_data->trees_around_cutters < 10) * 1;
-			inputs[7] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
-			inputs[8] = static_cast<int>(persistent_data->trees_around_cutters < 100) * 1;
-			inputs[9] = static_cast<int>(persistent_data->trees_around_cutters < 200) * 1;
-			inputs[10] = static_cast<int>(persistent_data->trees_around_cutters < 300) * 1;
-			inputs[11] = static_cast<int>(persistent_data->trees_around_cutters < 400) * 1;
-			inputs[12] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
-			inputs[13] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
-			inputs[14] = static_cast<int>(get_stocklevel(bo, gametime) < 10) * 1;
-			inputs[15] = static_cast<int>(get_stocklevel(bo, gametime) < 10) * 1;
-			inputs[16] = static_cast<int>(get_stocklevel(bo, gametime) < 2) * 1;
-			if (gametime > Time(15 * 60 * 1000)) {
-				inputs[17] = static_cast<int>(get_stocklevel(bo, gametime) > 30) * -1;
-				inputs[18] = static_cast<int>(get_stocklevel(bo, gametime) > 20) * -1;
-				inputs[19] = static_cast<int>(get_stocklevel(bo, gametime) > 10) * -1;
-			} else {
-				inputs[20] = 1;
-				inputs[21] = 1;
-			}
-			inputs[22] = (basic_economy_established) ? -1 : 1;
-			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
-			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
-			inputs[25] = (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers) ? 1 : 0;
-			if (gametime > Time(90 * 60 * 1000)) {
-				inputs[26] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
-				inputs[27] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
-			}
-			if (gametime > Time(45 * 60 * 1000)) {
-				inputs[28] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
-				inputs[29] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
-				inputs[30] = static_cast<int>(get_stocklevel(bo, gametime) > 30) * -1;
-			}
-			inputs[31] = static_cast<int>(persistent_data->trees_around_cutters < 100) * 2;
-			inputs[32] = static_cast<int>(persistent_data->trees_around_cutters < 200) * 2;
-			inputs[33] = static_cast<int>(mines_per_type[iron_resource_id].total_count() <= 1) * -1;
-			inputs[34] = static_cast<int>(mines_per_type[iron_resource_id].total_count() <= 1) * -1;
-			inputs[35] = static_cast<int>(mines_per_type[iron_resource_id].total_count() == 0) * -1;
-			inputs[36] = static_cast<int>(mines_per_type[iron_resource_id].total_count() == 0) * -1;
-			inputs[37] = -1;
-			inputs[38] = -1;
-			inputs[39] = -1;
-			if (productionsites.size() / 3 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
-				inputs[40] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
-				inputs[41] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
-				inputs[42] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
-			}
-			if (productionsites.size() / 4 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 20) {
-				inputs[43] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
-				inputs[44] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 2;
-				inputs[45] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 2;
-			}
-
-			if (productionsites.size() / 2 > static_cast<uint32_t>(bo.total_count()) &&
-			    get_stocklevel(bo, gametime) < 10) {
-				inputs[46] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
-				inputs[47] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
-				inputs[48] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
-				inputs[49] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
-			}
-			inputs[50] = static_cast<int>(bo.last_building_built.is_valid() &&
-			                              bo.last_building_built + Duration(1 * 60 * 100) > gametime) *
-			             -2;
-			inputs[51] = static_cast<int>(bo.last_building_built.is_valid() &&
-			                              bo.last_building_built + Duration(2 * 60 * 100) > gametime) *
-			             -2;
-			inputs[52] = static_cast<int>(bo.last_building_built.is_valid() &&
-			                              bo.last_building_built + Duration(4 * 60 * 100) > gametime) *
-			             -2;
-			inputs[53] = static_cast<int>(bo.last_building_built.is_valid() &&
-			                              bo.last_building_built + Duration(6 * 60 * 100) > gametime) *
-			             -2;
-			inputs[54] = static_cast<int>(Time(5 * 60 * 1000) > gametime) * -2;
-			inputs[55] = static_cast<int>(Time(6 * 60 * 1000) > gametime) * -2;
-			inputs[56] = static_cast<int>(Time(8 * 60 * 1000) > gametime) * -2;
-			inputs[57] = static_cast<int>(Time(10 * 60 * 1000) > gametime) * -2;
-			inputs[58] = (spots_ < kSpotsEnough) ? -2 : 0;
-			inputs[59] = (spots_ < kSpotsTooLittle) ? -2 : 0;
-			inputs[60] = (spots_ < kSpotsTooLittle) ? -2 : 0;
-			inputs[61] = (spots_ < kSpotsTooLittle) ? -2 : 0;
-			inputs[62] = (basic_economy_established) ? 0 : -2;
-			inputs[63] = (spots_ < kSpotsTooLittle) ? 0 : -2;
-
-			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
-				if (management_data.f_neuron_pool[14].get_position(i)) {
-					assert(inputs[i] >= -2 && inputs[i] <= 2);
-					tmp_target += inputs[i];
-				}
-				if (management_data.f_neuron_pool[15].get_position(i)) {
-					tmp_target += inputs[kFNeuronBitSize + i];
-					assert(inputs[kFNeuronBitSize + i] >= -2 && inputs[kFNeuronBitSize + i] <= 2);
-				}
-			}
-
-			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
-				tmp_target -= std::abs(management_data.get_military_number_at(145) / 10);
-			}
-
-			tmp_target = std::max<int16_t>(tmp_target, 2);
-
-			bo.cnt_target = tmp_target;
-
-			// adjusting/decreasing based on cnt_limit_by_aimode
-			bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
-
-			assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
-
-			// allow them always if basic economy not established and building is a basic one
-			if (bo.total_count() < static_cast<int32_t>(bo.basic_amount)) {
-				return BuildingNecessity::kNeeded;
-			}
-
-			if (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers ||
-			    bo.total_count() > bo.cnt_target) {
-				return BuildingNecessity::kForbidden;
-			}
-
-			const bool parallel_construction = (bo.total_count() + 2 < bo.cnt_target);
-			if ((parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) ||
-			    bo.cnt_under_construction + bo.unoccupied_count == 0) {
-				return BuildingNecessity::kNeeded;
-			}
-			return BuildingNecessity::kForbidden;
+			return check_ranger_necessity(bo, site_needed_for_economy , gametime);
 		}
 		if (bo.is(BuildingAttribute::kNeedsRocks) &&
 		    bo.cnt_under_construction + bo.unoccupied_count == 0) {
@@ -5953,21 +5802,206 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			return BuildingNecessity::kNotNeeded;
 		}
 		return BuildingNecessity::kForbidden;
-	}
-	if (purpose == PerfEvaluation::kForDismantle) {  // now for dismantling
-		// never dismantle last building (a care should be taken elsewhere)
-		assert(bo.total_count() > 0);
+}
 
-		if (bo.total_count() == 1 || (bo.max_preciousness >= 10 && bo.total_count() == 2) ||
-		    (!bo.ware_outputs.empty() && bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
-		    (bo.inputs.size() == 1 &&
-		     calculate_stocklevel(static_cast<size_t>(bo.inputs.at(0))) >
-		        static_cast<unsigned int>(std::abs(management_data.get_military_number_at(171))))) {
-			return BuildingNecessity::kNeeded;
-		}
-		return BuildingNecessity::kNotNeeded;
+BuildingNecessity DefaultAI::check_ranger_necessity(BuildingObserver& bo, const BasicEconomyBuildingStatus site_needed_for_economy, const Time& gametime) {
+	// Called from check_ps_necessity
+
+	// making sure we have one completed supported lumberjack
+	uint16_t supported_lumberjack_built = 0;
+	for (const auto& supported_building : bo.supported_producers) {
+		supported_lumberjack_built += get_building_observer(supported_building.first).cnt_built;
 	}
-	NEVER_HERE();
+	if (supported_lumberjack_built < 1) {
+		return BuildingNecessity::kForbidden;
+	}
+
+	// genetic algorithm to decide whether new rangers are needed
+	static int16_t tmp_target = 2;
+	tmp_target = 2;
+	static int16_t inputs[2 * kFNeuronBitSize] = {0};
+	// Resetting values as the variable is static
+	std::fill(std::begin(inputs), std::end(inputs), 0);
+
+	inputs[0] = static_cast<int>(persistent_data->trees_around_cutters < 10) * 2;
+	inputs[1] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 2;
+	inputs[2] = static_cast<int>(persistent_data->trees_around_cutters < 30) * 2;
+	inputs[3] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
+	inputs[4] = static_cast<int>(persistent_data->trees_around_cutters < 50) * 1;
+	inputs[5] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
+	inputs[6] = static_cast<int>(persistent_data->trees_around_cutters < 10) * 1;
+	inputs[7] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
+	inputs[8] = static_cast<int>(persistent_data->trees_around_cutters < 100) * 1;
+	inputs[9] = static_cast<int>(persistent_data->trees_around_cutters < 200) * 1;
+	inputs[10] = static_cast<int>(persistent_data->trees_around_cutters < 300) * 1;
+	inputs[11] = static_cast<int>(persistent_data->trees_around_cutters < 400) * 1;
+	inputs[12] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
+	inputs[13] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
+	inputs[14] = static_cast<int>(get_stocklevel(bo, gametime) < 10) * 1;
+	inputs[15] = static_cast<int>(get_stocklevel(bo, gametime) < 10) * 1;
+	inputs[16] = static_cast<int>(get_stocklevel(bo, gametime) < 2) * 1;
+	if (gametime > Time(15 * 60 * 1000)) {
+		inputs[17] = static_cast<int>(get_stocklevel(bo, gametime) > 30) * -1;
+		inputs[18] = static_cast<int>(get_stocklevel(bo, gametime) > 20) * -1;
+		inputs[19] = static_cast<int>(get_stocklevel(bo, gametime) > 10) * -1;
+	} else {
+		inputs[20] = 1;
+		inputs[21] = 1;
+	}
+	inputs[22] = (basic_economy_established) ? -1 : 1;
+	inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
+	inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
+	inputs[25] = (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers) ? 1 : 0;
+	if (gametime > Time(90 * 60 * 1000)) {
+		inputs[26] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
+		inputs[27] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
+	}
+	if (gametime > Time(45 * 60 * 1000)) {
+		inputs[28] = (wood_policy_.at(bo.id) == WoodPolicy::kAllowRangers) ? 1 : 0;
+		inputs[29] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
+		inputs[30] = static_cast<int>(get_stocklevel(bo, gametime) > 30) * -1;
+	}
+	inputs[31] = static_cast<int>(persistent_data->trees_around_cutters < 100) * 2;
+	inputs[32] = static_cast<int>(persistent_data->trees_around_cutters < 200) * 2;
+	inputs[33] = static_cast<int>(mines_per_type[iron_resource_id].total_count() <= 1) * -1;
+	inputs[34] = static_cast<int>(mines_per_type[iron_resource_id].total_count() <= 1) * -1;
+	inputs[35] = static_cast<int>(mines_per_type[iron_resource_id].total_count() == 0) * -1;
+	inputs[36] = static_cast<int>(mines_per_type[iron_resource_id].total_count() == 0) * -1;
+	inputs[37] = -1;
+	inputs[38] = -1;
+	inputs[39] = -1;
+	if (productionsites.size() / 3 > static_cast<uint32_t>(bo.total_count()) &&
+	    get_stocklevel(bo, gametime) < 20) {
+		inputs[40] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
+		inputs[41] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
+		inputs[42] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
+	}
+	if (productionsites.size() / 4 > static_cast<uint32_t>(bo.total_count()) &&
+	    get_stocklevel(bo, gametime) < 20) {
+		inputs[43] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 2;
+		inputs[44] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 2;
+		inputs[45] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 2;
+	}
+
+	if (productionsites.size() / 2 > static_cast<uint32_t>(bo.total_count()) &&
+	    get_stocklevel(bo, gametime) < 10) {
+		inputs[46] = static_cast<int>(persistent_data->trees_around_cutters < 20) * 1;
+		inputs[47] = static_cast<int>(persistent_data->trees_around_cutters < 40) * 1;
+		inputs[48] = static_cast<int>(persistent_data->trees_around_cutters < 60) * 1;
+		inputs[49] = static_cast<int>(persistent_data->trees_around_cutters < 80) * 1;
+	}
+	inputs[50] = static_cast<int>(bo.last_building_built.is_valid() &&
+	                              bo.last_building_built + Duration(1 * 60 * 100) > gametime) *
+	             -2;
+	inputs[51] = static_cast<int>(bo.last_building_built.is_valid() &&
+	                              bo.last_building_built + Duration(2 * 60 * 100) > gametime) *
+	             -2;
+	inputs[52] = static_cast<int>(bo.last_building_built.is_valid() &&
+	                              bo.last_building_built + Duration(4 * 60 * 100) > gametime) *
+	             -2;
+	inputs[53] = static_cast<int>(bo.last_building_built.is_valid() &&
+	                              bo.last_building_built + Duration(6 * 60 * 100) > gametime) *
+	             -2;
+	inputs[54] = static_cast<int>(Time(5 * 60 * 1000) > gametime) * -2;
+	inputs[55] = static_cast<int>(Time(6 * 60 * 1000) > gametime) * -2;
+	inputs[56] = static_cast<int>(Time(8 * 60 * 1000) > gametime) * -2;
+	inputs[57] = static_cast<int>(Time(10 * 60 * 1000) > gametime) * -2;
+	inputs[58] = (spots_ < kSpotsEnough) ? -2 : 0;
+	inputs[59] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+	inputs[60] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+	inputs[61] = (spots_ < kSpotsTooLittle) ? -2 : 0;
+	inputs[62] = (basic_economy_established) ? 0 : -2;
+	inputs[63] = (spots_ < kSpotsTooLittle) ? 0 : -2;
+
+	for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
+		if (management_data.f_neuron_pool[14].get_position(i)) {
+			assert(inputs[i] >= -2 && inputs[i] <= 2);
+			tmp_target += inputs[i];
+		}
+		if (management_data.f_neuron_pool[15].get_position(i)) {
+			tmp_target += inputs[kFNeuronBitSize + i];
+			assert(inputs[kFNeuronBitSize + i] >= -2 && inputs[kFNeuronBitSize + i] <= 2);
+		}
+	}
+
+	if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
+		tmp_target -= std::abs(management_data.get_military_number_at(145) / 10);
+	}
+
+	tmp_target = std::max<int16_t>(tmp_target, 2);
+
+	bo.cnt_target = tmp_target;
+
+	// adjusting/decreasing based on cnt_limit_by_aimode
+	bo.cnt_target = std::min(bo.cnt_target, bo.cnt_limit_by_aimode);
+
+	assert(bo.cnt_target > 1 && bo.cnt_target < 1000);
+
+	// allow them always if basic economy not established and building is a basic one
+	if (bo.total_count() < static_cast<int32_t>(bo.basic_amount)) {
+		return BuildingNecessity::kNeeded;
+	}
+
+	if (wood_policy_.at(bo.id) != WoodPolicy::kAllowRangers || bo.total_count() > bo.cnt_target) {
+		return BuildingNecessity::kForbidden;
+	}
+
+	const bool parallel_construction = (bo.total_count() + 2 < bo.cnt_target);
+	if ((parallel_construction && (bo.cnt_under_construction + bo.unoccupied_count <= 1)) ||
+	    bo.cnt_under_construction + bo.unoccupied_count == 0) {
+		return BuildingNecessity::kNeeded;
+	}
+	return BuildingNecessity::kForbidden;
+}
+
+DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo,
+                                                            const Time& gametime) {
+	// This is evaluation per building type, result can be:
+	// * Do dismantle (no matter which specific site - this is basically forced dismantle)
+	// * No site can be dismantled
+	// * can be dismantled, let check_productionsite() decide for individual building/site (based on
+	// statistics and so on)
+	assert(bo.total_count() > 0);
+
+	if (bo.total_count() <= 1 || bo.total_count() <= bo.cnt_target ||
+	    (bo.max_preciousness >= 10 && bo.total_count() <= 2)) {
+		return DismantlePossibility::kCannot;
+	}
+
+	// NOCOM
+	if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher)) {
+		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
+			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
+			       player_number(), tribe_->get_ware_descr(bo.ware_outputs[0])->name().c_str(),
+			       get_stocklevel(bo, gametime), bo.name, bo.total_count());
+			return DismantlePossibility::kShouldBe;
+		}
+	} else if (bo.is(BuildingAttribute::kWell)) {
+		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
+			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
+			       player_number(), tribe_->get_ware_descr(bo.ware_outputs[0])->name().c_str(),
+			       get_stocklevel(bo, gametime), bo.name, bo.total_count());
+			return DismantlePossibility::kShouldBe;
+		}
+	} else if (bo.is(BuildingAttribute::kLumberjack) || bo.is(BuildingAttribute::kNeedsRocks)) {
+		// We never enforce dismantling even if we have plenty of their output - they clear
+		// the space
+		return DismantlePossibility::kMightBe;
+	} else if (bo.inputs.empty() && bo.ware_outputs.size() == 1) {  // farms like
+		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
+			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
+			       player_number(), tribe_->get_ware_descr(bo.ware_outputs[0])->name().c_str(),
+			       get_stocklevel(bo, gametime), bo.name, bo.total_count());
+			return DismantlePossibility::kShouldBe;
+		}
+	}
+
+	if ((!bo.ware_outputs.empty() && bo.current_stats > (10 + 60 / bo.ware_outputs.size()) / 2) ||
+	    (bo.inputs.size() == 1 && get_stocklevel(bo, gametime)) >
+	       static_cast<unsigned int>(std::abs(management_data.get_military_number_at(171)))) {
+		return DismantlePossibility::kMightBe;
+	}
+	return DismantlePossibility::kMightBe;
 }
 
 // counts produced output on stock
@@ -7481,7 +7515,7 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 		} else if (bo.type == BuildingObserver::Type::kProductionsite ||
 		           bo.type == BuildingObserver::Type::kMine) {
 
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+			bo.new_building = check_ps_necessity(bo, gametime);
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
@@ -7557,9 +7591,9 @@ void DefaultAI::pre_calculating_needness_of_buildings(const Time& gametime) {
 			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
-			bo.new_building = check_building_necessity(bo, gametime);
+			bo.new_building = check_ms_necessity(bo, gametime);
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
-			bo.new_building = check_building_necessity(bo, PerfEvaluation::kForConstruction, gametime);
+			bo.new_building = check_ps_necessity(bo, gametime);
 		} else if (bo.type == BuildingObserver::Type::kWarehouse) {
 			bo.new_building = check_warehouse_necessity(bo, gametime);
 		} else if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {

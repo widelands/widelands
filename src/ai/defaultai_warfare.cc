@@ -1136,7 +1136,7 @@ int32_t DefaultAI::calculate_strength(const std::vector<Widelands::Soldier*>& so
 // We count bigger buildings, medium ones get 1 points, big ones 2 points
 // and we force some proportion to the number of military sites
 // sidenote: function can return kNotNeeded, but it means 'not allowed'
-BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo, const Time& gametime) {
+BuildingNecessity DefaultAI::check_ms_necessity(BuildingObserver& bo, const Time& gametime) {
 
 	assert(militarysites.size() == msites_built());
 
