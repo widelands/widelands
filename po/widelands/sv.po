@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-04 04:05+0000\n"
+"POT-Creation-Date: 2022-07-13 03:52+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -716,8 +716,8 @@ msgstr "gruva"
 msgid "port"
 msgstr "hamn"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1013,9 +1013,9 @@ msgstr "(ingen)"
 msgid "Waterway length limit:"
 msgstr "Maximal längd på vattenväg:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1241,7 +1241,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Det gick inte att skapa katalogen \"%s\"."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:269
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "En fil med namnet ‘%s’ finns redan. Vill du skriva över den?"
@@ -2490,12 +2490,12 @@ msgid "Saving game…"
 msgstr "Sparar spel..."
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:320
+#: ../../src/wui/game_main_menu_save_game.cc:321
 msgid "Saving failed!"
 msgstr "Misslyckades spara"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:303
+#: ../../src/wui/game_main_menu_save_game.cc:304
 msgid "Game saved"
 msgstr "Spel sparat"
 
@@ -3273,7 +3273,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Inte vald"
 
-#: ../../src/ui_basic/dropdown.h:450
+#: ../../src/ui_basic/dropdown.h:466
 msgid "No matches"
 msgstr ""
 
@@ -6141,18 +6141,18 @@ msgstr "Felaktig sökväg till fil i campaigns.lua tillhörande tutorials.lua: %
 msgid "Tutorial"
 msgstr "Handledning"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Upphovsman"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Upphovsmän"
@@ -7291,9 +7291,9 @@ msgstr "Hamnar"
 msgid "Low productivity:"
 msgstr "Låg produktivitet:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7681,8 +7681,8 @@ msgstr "Ersätt den frånkopplade spelaren med vald AI-spelare och fortsätt spe
 msgid "AI for the disconnected player"
 msgstr "AI-spelare för den frånkopplade spelaren"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7788,8 +7788,8 @@ msgstr "Bekräftelse, lämna spel"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Är du säker på att du vill lämna detta spel?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:270
-#: ../../src/wui/game_main_menu_save_game.cc:310
+#: ../../src/wui/game_main_menu_save_game.cc:271
+#: ../../src/wui/game_main_menu_save_game.cc:311
 msgid "Error Saving Game!"
 msgstr "Fel vid sparning av spel!"
 
