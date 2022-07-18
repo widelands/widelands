@@ -48,12 +48,31 @@ wl.Descriptions():new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _("working"),
+         actions = {
+            "call=build_dike",
+            "call=dike",
+            "call=dike",
+         }
+      },
+      dike = {
          -- TRANSLATORS: Completed/Skipped/Did not start diking because ...
          descname = _("diking"),
          actions = {
-            "callworker=check",
-            "consume=log:3",
+            "callworker=check_dike",
+            "consume=log:2",
             "callworker=dike",
+            "sleep=duration:30s"
+         }
+      },
+      build_dike = {
+         -- TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+         descname = _("building a dike"),
+         actions = {
+            "callworker=check_build",
+            "consume=log:4",
+            "callworker=build",
             "sleep=duration:30s"
          }
       },

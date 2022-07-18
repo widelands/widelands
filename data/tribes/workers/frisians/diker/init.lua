@@ -10,20 +10,29 @@ wl.Descriptions():new_worker_type {
    vision_range = 2,
 
    programs = {
-      check = {
+      check_build = {
          "findspace=size:swim radius:5 terraform:diking",
       },
-      dike = {
+      check_dike = {
+         "findobject=attrib:dike radius:5",
+      },
+      build = {
          "findspace=size:swim radius:5 terraform:diking",
-         -- Note that while the diker CAN also terraform non-water nodes, he only works
-         -- directly at the shore. This introduces some randomness in the pattern of how
-         -- many water tiles actually make the two-step transformation to arable land.
          "walk=coords",
-         "animate=work duration:60s",
-         "terraform=diking",
-         "animate=work duration:20s",
+         "animate=work duration:70s",
+         "plant=attrib:dike",
          "return"
-      }
+      },
+      dike = {
+         "findobject=attrib:dike radius:5",
+         "walk=object",
+         "animate=work duration:30s",
+         "callobject=maybe_remove",
+         "animate=work duration:30s",
+         "terraform=diking",
+         "animate=work duration:30s",
+         "return"
+      },
    },
 
    buildcost = {

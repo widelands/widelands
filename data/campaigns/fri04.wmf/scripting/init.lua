@@ -19,6 +19,7 @@ p3 = game.players[3] -- Marcus Caius Iniucundus – enemy (if present)
 p4 = game.players[4] -- Linthesilea – intruderess
 map = game.map
 difficulty = wl.Game().scenario_difficulty
+wl.Game().allow_diplomacy = false
 
 campaign_data = game:read_campaign_data("frisians", "fri03")
 if not campaign_data then

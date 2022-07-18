@@ -2,7 +2,6 @@
 --                                 Player 1
 -- =======================================================================
 p1.team = 1
-p1:set_attack_forbidden(2, true)
 p1:allow_buildings("all")
 p1:forbid_buildings {
    "frisians_port",
@@ -72,7 +71,6 @@ hq:set_soldiers(soldiers)
 --                                 Player 2
 -- =======================================================================
 p2.hidden_from_general_statistics = true
-p2:set_attack_forbidden(1, true)
 p2:allow_buildings("all")
 p2:forbid_buildings {
    "frisians_port",
@@ -141,15 +139,10 @@ p2:place_building("frisians_fortress", map:get_field(4,28), false, true):set_sol
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
-p3.team = 1
 if not campaign_data.payment then
    p3.hidden_from_general_statistics = true
    p3:forbid_buildings("all")
 else
-   p1:set_attack_forbidden(3, true)
-   p2:set_attack_forbidden(3, true)
-   p3:set_attack_forbidden(1, true)
-   p3:set_attack_forbidden(2, true)
    p3:allow_buildings("all")
    p3:forbid_buildings {
       "empire_port",

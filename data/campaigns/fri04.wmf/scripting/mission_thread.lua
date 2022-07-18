@@ -76,7 +76,6 @@ function see_reebaud(field)
       campaign_message_box(reebaud_8a)
       if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
    end
-   p3.team = 0
    if not o_defeat_amz and not amazons_defeated_by_reebaud then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
    if not empire_already_defeated then
       sleep(2000)
@@ -84,14 +83,10 @@ function see_reebaud(field)
       campaign_message_box(reebaud_11)
       campaign_message_box(reebaud_12)
       o_defeat_emp = add_campaign_objective(obj_defeat_emp)
-      p1:set_attack_forbidden(2, false)
       p1:set_attack_forbidden(3, false)
-      p2:set_attack_forbidden(1, false)
       p2:set_attack_forbidden(3, false)
       p3:set_attack_forbidden(1, false)
       p3:set_attack_forbidden(2, false)
-      p3:set_attack_forbidden(4, false)
-      p4:set_attack_forbidden(3, false)
       while not p3.defeated do sleep(1000) end
       campaign_message_box(victory_emp)
       set_objective_done(o_defeat_emp)
@@ -127,6 +122,15 @@ function see_reebaud(field)
 end
 
 function mission_thread()
+   p1:set_attack_forbidden(2, true)
+   p1:set_attack_forbidden(3, true)
+   p2:set_attack_forbidden(1, true)
+   p2:set_attack_forbidden(3, true)
+   p3:set_attack_forbidden(1, true)
+   p3:set_attack_forbidden(2, true)
+   p3:set_attack_forbidden(4, true)
+   p4:set_attack_forbidden(3, true)
+
    campaign_message_box(intro_1)
    scroll_to_field(map.player_slots[1].starting_field)
    include "map:scripting/starting_conditions.lua"

@@ -109,7 +109,7 @@ amz_2 = {
    title =_("Strangers"),
    body=amazon(_("Trespassers"),
       -- TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language well, but she does manage to convey her meaning.
-      _([[We – Amazons. You – strangers. Land – here – own – we. You – trespassers. You – enemies. We – you – all – make – dead!!]]))
+      _([[We – Amazons. You – strangers. Land – here – own – we. You – trespassers. You – enemies. We – you – all – make – dead!]]))
 }
 amz_3 = {
    title =_("Strangers"),
@@ -180,20 +180,20 @@ reebaud_9a = {
    title =_("An Old Friend"),
    body=claus(_("Met up at last"),
       -- TRANSLATORS: Claus Lembeck – Reebaud 9a
-      _([[I believe we have already met these intruders. It would be unseemly to sit around enjoying mugs of mead while you are fighting for your lives. We will fight the invaders alongside you!]]))
+      _([[I believe we have already met these intruders. It would be unseemly to sit around enjoying mugs of mead while you are fighting for your lives. In the spirit of our friendship, and in honour of the good men you lost, we will fight the invaders alongside you!]]))
 }
 reebaud_9b = {
    title =_("An Old Friend"),
    body=claus(_("Met up at last"),
       -- TRANSLATORS: Claus Lembeck – Reebaud 9b
-      _([[Truly, it would be most unseemly to sit around enjoying mugs of mead while you are fighting for your lives. We shall seek out those invaders and fight them alongside you!]]))
+      _([[Truly, it would be most unseemly to sit around enjoying mugs of mead while you are fighting for your lives. In the spirit of our friendship, and in honour of the good men you lost, we shall seek out those invaders and fight them alongside you!]]))
       .. new_objectives(obj_defeat_amz),
 }
 reebaud_9c = {
    title =_("An Old Friend"),
    body=henneke(_("Met up at last"),
       -- TRANSLATORS: Henneke Lembeck – Reebaud 9c
-      _([[I am almost disappointed that your reputation does not exceed the facts, for as you where describing the invaders I was looking forward to fighting them alongside you. While your soldiers are recuperating, I will take charge of arranging training sessions for our own soldiers, so that they may learn from yours and become as strong as possible before we return to our homeland.]]))
+      _([[I am almost disappointed that your reputation does not exceed the facts, for as you where describing the invaders I was looking forward to fighting them alongside you. I am sorry for your losses, and especially that I will never meet the renowned Hauke, whose name will live on in fame. While your soldiers are recuperating, I will take charge of arranging training sessions for our own soldiers, so that they may learn from yours and become as strong as possible before we return to our homeland.]]))
       .. new_objectives(obj_recruit_train),
 }
 
