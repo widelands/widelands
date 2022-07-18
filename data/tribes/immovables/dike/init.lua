@@ -10,12 +10,12 @@ wl.Descriptions():new_immovable_type {
    size = "none",
    programs = {
       main = {
-         "animate=idle duration:10m",
+         "animate=idle duration:20m",
          "remove=",
       },
       maybe_remove = {
          "remove=chance:33%",
-         "animate=idle duration:5m",
+         "animate=idle duration:10m",
          "remove=",
       }
    },
