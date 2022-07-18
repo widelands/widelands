@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: D M <kamera001dm@gmail.com>, 2021\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -29,6 +29,16 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr "Efter att ha landat på en märklig ö nära Atlantis försöker de resterande Atlanterna bygga ett nytt hem."
+
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr ""
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -144,32 +154,32 @@ msgid ""
 msgstr "När deras gud förlorade tron på Atlanterna och dränkte deras ö blev en kvinnas kamp för rättvisa, och en andra chans för hennes folk, underlag för legender. När hon ledde de återstående Atlanterna in i en ny framtid i en ny del av världen blev Jundlina den mäktigaste människan i sin tid, men till ett högt pris: hennes mänsklighet och själ."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "Från Vatten till Is"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "Introducerar Friserna."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "Sjöman (komplicerad)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "Rorsman (Väldigt Svår)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "Kapten (Omöjlig)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "

@@ -1299,10 +1299,10 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin fonts.
                --    Classical Latin quote meaning:
                --    "The fish stinks first at the head."
-               _("Piscis primum a capite foetet"),
+               _("Piscis primum a capite foetet."),
                -- TRANSLATORS: Lore helptext for an empire production site:  Fisher's House
                --    Translation for the classical Latin quote:
-               --    "Piscis primum a capite foetet"
+               --    "Piscis primum a capite foetet."
                _("The fish stinks first at the head.")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Fisher's House
@@ -2079,9 +2079,9 @@ wl.Descriptions():new_tribe {
                _("Who watches the watchmen?")
             ),
             -- TRANSLATORS: Lore author helptext for an empire production site: Sentry
-            --              (the limes was the border defence system of fortifications of the Roman Empire)
+            --              (the Limes was the border defence system of fortifications of the Roman Empire)
             lore_author = pgettext("empire_building",
-               "Saledus warning Lutius that sentries are not adequate protection for the limes"
+               "Saledus warning Lutius that sentries are not adequate protection for the Limes"
             ),
             -- TRANSLATORS: Purpose helptext for an empire military site: Sentry
             purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),

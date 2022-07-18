@@ -91,7 +91,7 @@ wl_set_if_unset(WL_INSTALL_DATADIR "./data")
 # Example: to have the bin installed to "/usr/games", just use '-DCMAKE_INSTALL_PREFIX=/usr'
 # and don't specify '-DWL_INSTALL_BINDIR' when configuring.
 # Note: 'CMAKE_INSTALL_PREFIX' defaults to /usr/local on UNIX and c:/Program Files/${PROJECT_NAME} on Windows
-set(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games" CACHE PATH "Destination of executable files (if installing)")
+wl_set_if_unset(WL_INSTALL_BINDIR "${CMAKE_INSTALL_PREFIX}/games")
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
@@ -443,7 +443,7 @@ IF (WIN32)
     set(BROTLI brotlidec brotlicommon brotlienc)
     set(SDL_MIXER_EXTRA_LIBS ssp)
     set(SDL_EXTRA_LIBS mingw32 dxerr8)
-    set(SDL_IMG_EXTRA_LIBS jbig deflate Lerc)
+    set(SDL_IMG_EXTRA_LIBS jbig deflate Lerc jxl hwy)
     add_definitions(-DMINGW_HAS_SECURE_API -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -D__USE_MINGW_ANSI_STDIO)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
       set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)

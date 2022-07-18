@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-07 03:32+0000\n"
+"POT-Creation-Date: 2022-07-13 03:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -1715,7 +1715,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Steinwerkstatt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1727,8 +1726,6 @@ msgstr "Steinwerkstatt"
 msgid "making a shovel"
 msgstr "Das Herstellen einer Schaufel"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1738,7 +1735,6 @@ msgstr "Das Herstellen einer Schaufel"
 msgid "making a felling ax"
 msgstr "Das Herstellen einer Holzfälleraxt"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1753,8 +1749,6 @@ msgstr "Das Herstellen einer Spitzhacke"
 msgid "making a machete"
 msgstr "Das Schleifen eines Buschmessers"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1765,7 +1759,6 @@ msgstr "Das Schleifen eines Buschmessers"
 msgid "making kitchen tools"
 msgstr "Das Herstellen von Küchengeräten"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1783,9 +1776,9 @@ msgstr "Das Herstellen eines Hammers"
 msgid "making a chisel"
 msgstr "Das Schleifen eines Meißels"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -2471,13 +2464,13 @@ msgstr "Das Räuchern von Fisch"
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Spider Farm"
-msgstr "Spinnenfarm"
+msgstr "Spinnenzucht"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Werkzeugmacher"
+msgstr "Werkzeugmacherei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -3482,7 +3475,7 @@ msgstr "Taverne"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:8
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Werkzeugmacher"
+msgstr "Werkzeugmacherei"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
@@ -3679,7 +3672,7 @@ msgstr "Keine Blumen"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
 msgstr "Der Imker in dieser Imkerei kann keine blühenden Felder in seinem Arbeitsbereich finden. Du solltest dieses Gebäude abreißen oder zerstören oder einen Bauernhof oder eine Beerenzucht in der Nähe bauen."
@@ -5273,7 +5266,6 @@ msgstr "Balsabaum"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsabaum (jung)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11

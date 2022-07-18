@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-07 03:32+0000\n"
+"POT-Creation-Date: 2022-07-13 03:52+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1710,7 +1710,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kiventyöstön paja"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1722,8 +1721,6 @@ msgstr "Kiventyöstön paja"
 msgid "making a shovel"
 msgstr "Lapion teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1733,7 +1730,6 @@ msgstr "Lapion teko"
 msgid "making a felling ax"
 msgstr "Kaatokirveen teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1748,8 +1744,6 @@ msgstr "Hakun teko"
 msgid "making a machete"
 msgstr "Viidakkoveitsen teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1760,7 +1754,6 @@ msgstr "Viidakkoveitsen teko"
 msgid "making kitchen tools"
 msgstr "Keittiövälineiden teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1778,9 +1771,9 @@ msgstr "Vasaran teko"
 msgid "making a chisel"
 msgstr "Taltan teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -3674,10 +3667,10 @@ msgstr "Kukat Lopussa"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "Tällä mehiläistarhalla työskentelevä mehiläistarhuri ei löydä yhtään kukkivaa peltoa tai pensaikkoa työskentelyalueeltaan. Sinun pitäisi harkita toisen maatilan tai marjatarhan rakentamista lähistölle. Voit harkita myös rakennuksen purkamista tai tuhoamista."
+msgstr "Tällä mehiläistarhalla työskentelevä mehiläistarhuri ei löydä yhtään kukkivaa peltoa tai pensaikkoa työskentelyalueeltaan. Sinun pitäisi harkita toisen maatilan tai marjatarhan rakentamista lähistölle. Voit harkita myös tämän kyseisen rakennuksen purkamista taikka tuhoamista."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -5268,7 +5261,6 @@ msgstr "Balsapuu"
 msgid "Balsa Tree (Pole)"
 msgstr "Balsapuu (salko)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
@@ -5424,11 +5416,11 @@ msgstr "Widelands-kehittäjät"
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
 msgid "Amazons"
-msgstr ""
+msgstr "Amatsoonit"
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
 msgid "The people of the amazonian jungle."
-msgstr ""
+msgstr "Ihmiset amatsonian viidakosta."
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.

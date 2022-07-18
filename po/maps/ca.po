@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Juanjo, 2015-2018,2020-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -30,9 +30,19 @@ msgid ""
 "Atlanteans struggle to make a new home for themselves."
 msgstr "Després d'arribar a una estranya illa propera a l'Atlàntida, els atlants supervivents lluiten per formar una nova llar."
 
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr "Lluitant de nou per una nova llar"
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr "Després d'escapar de pressa de l'illa que s'enfonsava, els atlants i la Jundlina s'enfronten a nous reptes."
+
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
-msgstr "Un lloc al qual dir llar"
+msgstr "Un lloc al qual dir-li llar"
 
 #: ../../data/campaigns/bar01.wmf/elemental:10
 msgid ""
@@ -144,32 +154,32 @@ msgid ""
 msgstr "Quan el seu déu va perdre la fe en els atlants i va afonar la seva illa, la lluita d'una dona per demanar justícia i una segona oportunitat per a la seva gent es va convertir en llegenda. Liderant els atlants que quedaven vius, els va conduir a una nova part del món. La Jundlina es convertí en l'ésser humà més poderós del seu temps, però a un cost molt alt: la seva humanitat i ànima."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "De l'aigua al gel"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "Presenta als frisons."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "Mariner (complicat)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "Timoner (molt difícil)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "Capità (extremadament difícil)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "

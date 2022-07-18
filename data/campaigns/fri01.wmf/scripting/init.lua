@@ -16,6 +16,7 @@ map = wl.Game().map
 p1 = wl.Game().players[1]
 p2 = wl.Game().players[2]
 difficulty = wl.Game().scenario_difficulty
+wl.Game().allow_diplomacy = false
 
 first_to_flood = map:get_field(9, 89)
 expansion_mark = map:get_field(68, 68)
