@@ -10,7 +10,12 @@ function hurry_up()
       sleep(10000)
       if seen_reebaud or p4.defeated then return end
       if #p2:get_buildings("frisians_headquarters") < 1 then
-         campaign_message_box(reebaud_in_danger)
+         if p2.defeated then
+            campaign_message_box(reebaud_defeated)
+            wl.ui.MapView():close()
+         else
+            campaign_message_box(reebaud_in_danger)
+         end
          return
       end
    end

@@ -232,6 +232,19 @@ reebaud_in_danger = {
       -- TRANSLATORS: Henneke Lembeck – Reebaud in danger
       _([[We must hurry.]])),
 }
+
+reebaud_defeated = {
+   title =_("Strangers"),
+   body=henneke(_("Something is going on…"),
+      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated
+      _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked and vanquished by vicous strangers. With his last breath he told us his leader’s name: Reebaud.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated
+      _([[We are too late. Reebaud was already in our reach, and he was defeated mere hours before we could meet him. There is no hope in this world for any of us.]]))
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+}
+
 legate_expands = {
    title =_("Expansion"),
    body=henneke(_("We are being cut off"),
