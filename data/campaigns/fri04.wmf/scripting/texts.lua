@@ -233,14 +233,32 @@ reebaud_in_danger = {
       _([[We must hurry.]])),
 }
 
-reebaud_defeated = {
+reebaud_defeated_1 = {
    title =_("Strangers"),
-   body=henneke(_("Something is going on…"),
-      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated
+   body=henneke(_("We are too late"),
+      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
       _([[We met a wounded soldier near our north-western border today. He gasped something about his tribe being attacked and vanquished by vicous strangers. With his last breath he told us his leader’s name: Reebaud.]])
       .. paragraphdivider() ..
-      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated
+      -- TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
       _([[We are too late. Reebaud was already in our reach, and he was defeated mere hours before we could meet him. There is no hope in this world for any of us.]]))
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+}
+
+reebaud_defeated_2 = {
+   title =_("Defeat"),
+   body=reebaud(_("We have lost"),
+      -- TRANSLATORS: Reebaud – Reebaud defeated 2
+      _([[The enemies have destroyed our last warehouse. No tribe could survive under these odds, and all we can do now is to face our certain fate with our heads held high. My only regret is that I will not be able to help my old friend Claus in his predicament. May the gods take pity on him, but I fear that all hope is lost.]]))
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+}
+
+player_defeated = {
+   title =_("Defeat"),
+   body=claus(_("We have lost"),
+      -- TRANSLATORS: Claus Lembeck – Player defeated
+      _([[We were so close, but now the enemies have destroyed our last warehouse. Maybe it was foolish of me to assume I would be able to defeat Atterdag if I was not even a match for these insignificant foreigners. God disapproves of this my hubris, and He, not some random gaggle of strangers, has finalized our sad destiny.]]))
       .. objective_text(_("You Have Lost"),
       _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
 }

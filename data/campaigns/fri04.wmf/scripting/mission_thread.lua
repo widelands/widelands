@@ -6,16 +6,29 @@ local o_defeat_emp = nil
 local amazons_defeated_by_reebaud = false
 
 function hurry_up()
+   local did_warn = false
    while true do
       sleep(10000)
       if seen_reebaud or p4.defeated then return end
       if #p2:get_buildings("frisians_headquarters") < 1 then
          if p2.defeated then
-            campaign_message_box(reebaud_defeated)
+            campaign_message_box(reebaud_defeated_1)
             wl.ui.MapView():close()
-         else
+            return
+         elseif not did_warn then
             campaign_message_box(reebaud_in_danger)
+            did_warn = true
          end
+      end
+   end
+end
+
+function check_player_defeated(p, msg)
+   while true do
+      sleep(10000)
+      if p.defeated then
+         campaign_message_box(msg)
+         wl.ui.MapView():close()
          return
       end
    end
@@ -147,6 +160,7 @@ function mission_thread()
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_find_reebaud)
    local f
+   run(check_player_defeated, p1, player_defeated)
    run(hurry_up)
    if campaign_data.payment then run(warn_empire_expansion) end
    while true do
@@ -167,6 +181,7 @@ function mission_thread()
                p2.hidden_from_general_statistics = false
                set_objective_done(o)
                run(see_reebaud, f)
+               run(check_player_defeated, p2, reebaud_defeated_2)
             end
             if p1c and p4c and not seen_amazons then
                seen_amazons = true
