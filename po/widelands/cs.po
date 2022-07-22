@@ -6,7 +6,7 @@
 # GunChleoc, 2014-2015
 # Jindřich Michal <jimi2000@seznam.cz>, 2020
 # Markus7cz <markus7cz@gmail.com>, 2008
-# Matej Svrcek <mmatej@yahoo.com>, 2015
+# Matej Svrcek <mmatej@yahoo.com>, 2015,2022
 # Zlopez <michal.konecny@psmail.xyz>, 2021
 # Zlopez <michal.konecny@psmail.xyz>, 2021-2022
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-04 04:05+0000\n"
+"POT-Creation-Date: 2022-07-19 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Zlopez <michal.konecny@psmail.xyz>, 2021-2022\n"
+"Last-Translator: Matej Svrcek <mmatej@yahoo.com>, 2015,2022\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1244,7 +1244,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Nastala chyba při vytváření adresáře ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:269
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Soubor s názvem \"%s\" již existuje. Chceš ho přepsat?"
@@ -2418,73 +2418,73 @@ msgstr "Loď %d"
 #: ../../src/wui/game_diplomacy_menu.cc:114
 #: ../../src/wui/interactive_player.cc:218
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomacie"
 
 #: ../../src/logic/playercommand.cc:2161
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s vzdal a stal se pozorovatelem."
 
 #: ../../src/logic/playercommand.cc:2161
 msgid "Player Resigned"
-msgstr ""
+msgstr "Hráč hru vzdal"
 
 #: ../../src/logic/playercommand.cc:2173
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Hráč opustil tým"
 
 #: ../../src/logic/playercommand.cc:2174
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s opustil tým %2$u a není nyní v žádném týmu."
 
 #: ../../src/logic/playercommand.cc:2182
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Žádost o připojení k týmu"
 
 #: ../../src/logic/playercommand.cc:2183
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Pozvánka do týmu"
 
 #: ../../src/logic/playercommand.cc:2185
 #: ../../src/wui/game_diplomacy_menu.cc:309
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s by se chtěl připojit k týmu %2$s."
 
 #: ../../src/logic/playercommand.cc:2186
 #: ../../src/wui/game_diplomacy_menu.cc:314
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s pozval %2$s do svého týmu."
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Změna týmu potvrzena"
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Změna týmu odmítnuta"
 
 #: ../../src/logic/playercommand.cc:2213
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s přijal %2$s do jejich týmu."
 
 #: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s přijal pozvánku do týmu %2$s."
 
 #: ../../src/logic/playercommand.cc:2216
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s zakázal %2$s členství v týmu."
 
 #: ../../src/logic/playercommand.cc:2217
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s odmítl pozvánku do týmu %2$s."
 
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
@@ -2515,12 +2515,12 @@ msgid "Saving game…"
 msgstr "Ukládání hry…"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:320
+#: ../../src/wui/game_main_menu_save_game.cc:321
 msgid "Saving failed!"
 msgstr "Ukládání selhalo!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:303
+#: ../../src/wui/game_main_menu_save_game.cc:304
 msgid "Game saved"
 msgstr "Hra uložena"
 
@@ -3304,7 +3304,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Nevybráno"
 
-#: ../../src/ui_basic/dropdown.h:450
+#: ../../src/ui_basic/dropdown.h:466
 msgid "No matches"
 msgstr "Žádná shoda"
 
@@ -5502,7 +5502,7 @@ msgstr "Ukončit hru"
 #: ../../src/ui_fsmenu/main.cc:477
 #, c-format
 msgid "Version %1$s"
-msgstr ""
+msgstr "Verze%1$s"
 
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:480
@@ -5750,7 +5750,7 @@ msgstr "Obrátit směr posunu pro přidat/odebrat:"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:435
 msgid "Fix inverted horizontal scrolling"
-msgstr ""
+msgstr "Opravit inverzní horizontální posunování"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:436
 msgid ""
@@ -5761,7 +5761,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:447
 msgid "Send feedback"
-msgstr ""
+msgstr "Zpětná vazba"
 
 #: ../../src/ui_fsmenu/mousewheel_options.cc:506
 msgid "Scroll Settings Conflict"
@@ -5776,7 +5776,7 @@ msgstr "'%1$s' nebo '%2$s' mají konflikt s doporučeným nastavením. Změnit t
 
 #: ../../src/ui_fsmenu/mousewheel_report.cc:61
 msgid "Send Feedback for Inverted Horizontal Scrolling"
-msgstr ""
+msgstr "Zpětná vazba na inverzní horizontální posunování"
 
 #. * TRANSLATORS: %s is a URL
 #: ../../src/ui_fsmenu/mousewheel_report.cc:75
@@ -6202,18 +6202,18 @@ msgstr "Neplatná cesta k souboru v rámci campaigns.lua v tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutoriál"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autoři"
@@ -6257,23 +6257,23 @@ msgstr "Operační systém:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:86
 msgid "Compiled with SDL version:"
-msgstr ""
+msgstr "Kompilováno s SDL verzí:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:93
 msgid "Using SDL version:"
-msgstr ""
+msgstr "Používá SDL verzi:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:98
 msgid "SDL video driver:"
-msgstr ""
+msgstr "SDL video ovladač:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:102
 msgid "SDL horizontal scroll:"
-msgstr ""
+msgstr "SDL horizontální posunování:"
 
 #: ../../src/ui_fsmenu/tech_info.cc:103
 msgid "assuming inverted"
-msgstr ""
+msgstr "zvolen inverzní"
 
 #: ../../src/ui_fsmenu/tech_info.cc:107
 msgid "Locale:"
@@ -7354,9 +7354,9 @@ msgstr "Přístavy"
 msgid "Low productivity:"
 msgstr "Nízká produktivita:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7744,8 +7744,8 @@ msgstr "Nahradit odpojeného hráče vybranou UI a pokračovat ve hře"
 msgid "AI for the disconnected player"
 msgstr "UI místo odpojeného hráče"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7766,81 +7766,81 @@ msgstr "Nastavení pole"
 
 #: ../../src/wui/game_diplomacy_menu.cc:45
 msgid "Accept"
-msgstr ""
+msgstr "Souhlas"
 
 #: ../../src/wui/game_diplomacy_menu.cc:48
 msgid "Reject"
-msgstr ""
+msgstr "Nesouhlas"
 
 #: ../../src/wui/game_diplomacy_menu.cc:62
 #, c-format
 msgid "%s has invited you to join their team."
-msgstr ""
+msgstr "%s tě pozval, aby ses připojil k jejich týmu."
 
 #: ../../src/wui/game_diplomacy_menu.cc:63
 #, c-format
 msgid "%s wants to join your team."
-msgstr ""
+msgstr "%s by se chtěl přidat k vašemu týmu."
 
 #: ../../src/wui/game_diplomacy_menu.cc:167
 msgid "Leave"
-msgstr ""
+msgstr "Opustit"
 
 #: ../../src/wui/game_diplomacy_menu.cc:168
 msgid "Leave your current team and become teamless"
-msgstr ""
+msgstr "Opustit svůj současný tým a zůstat bez týmu."
 
 #: ../../src/wui/game_diplomacy_menu.cc:170
 msgid "Resign"
-msgstr ""
+msgstr "Vzdát"
 
 #: ../../src/wui/game_diplomacy_menu.cc:171
 msgid "Give up and become a spectator"
-msgstr ""
+msgstr "Vzdát hru a stát se pozorovatelem."
 
 #: ../../src/wui/game_diplomacy_menu.cc:182
 msgid "Join"
-msgstr ""
+msgstr "Připojit se"
 
 #: ../../src/wui/game_diplomacy_menu.cc:183
 msgid "Request to join this player’s team"
-msgstr ""
+msgstr "Žádost o přijetí do týmu hráče."
 
 #: ../../src/wui/game_diplomacy_menu.cc:185
 msgid "Invite"
-msgstr ""
+msgstr "Pozvat"
 
 #: ../../src/wui/game_diplomacy_menu.cc:186
 msgid "Invite this player to join your team"
-msgstr ""
+msgstr "Pozvání hráče do svého týmu"
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 msgid "No team"
-msgstr ""
+msgstr "Bez týmu"
 
 #: ../../src/wui/game_diplomacy_menu.cc:250
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Tým %u"
 
 #: ../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
 msgid "Won at %s"
-msgstr ""
+msgstr "Výhra za %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:264
 #, c-format
 msgid "Lost at %s"
-msgstr ""
+msgstr "Prohra za %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:267
 #, c-format
 msgid "Resigned at %s"
-msgstr ""
+msgstr "Vzdal za %s"
 
 #: ../../src/wui/game_diplomacy_menu.cc:302
 msgid "Pending Diplomacy Actions"
-msgstr ""
+msgstr "Diplomatické úkoly k vyřízení"
 
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
@@ -7851,8 +7851,8 @@ msgstr "Potvrzení opuštění hry"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Opravdu chceš opustit tuto hru?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:270
-#: ../../src/wui/game_main_menu_save_game.cc:310
+#: ../../src/wui/game_main_menu_save_game.cc:271
+#: ../../src/wui/game_main_menu_save_game.cc:311
 msgid "Error Saving Game!"
 msgstr "Chyba ukládání hry!"
 
@@ -8398,8 +8398,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistiky"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Námořní"
