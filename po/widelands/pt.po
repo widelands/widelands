@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-04 04:05+0000\n"
+"POT-Creation-Date: 2022-07-19 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Francisco Fernandes <franciscof09@gmail.com>, 2021\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -1239,7 +1239,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Erro ao criar a pasta ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:269
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Já existe um ficheiro com o nome «&nbsp;%s&nbsp;». Substituí-lo?"
@@ -2499,12 +2499,12 @@ msgid "Saving game…"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:320
+#: ../../src/wui/game_main_menu_save_game.cc:321
 msgid "Saving failed!"
 msgstr "Falha ao salvar!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:303
+#: ../../src/wui/game_main_menu_save_game.cc:304
 msgid "Game saved"
 msgstr "O jogo foi salvo"
 
@@ -3285,7 +3285,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr "Não Selecionado"
 
-#: ../../src/ui_basic/dropdown.h:450
+#: ../../src/ui_basic/dropdown.h:466
 msgid "No matches"
 msgstr ""
 
@@ -6168,18 +6168,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
@@ -7319,9 +7319,9 @@ msgstr "Portos"
 msgid "Low productivity:"
 msgstr ""
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7709,8 +7709,8 @@ msgstr "Substituir o jogador desconectado pelo AI selecionado e continuar a joga
 msgid "AI for the disconnected player"
 msgstr "AI para o jogador desconectado"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -7816,8 +7816,8 @@ msgstr "Confirma sair do jogo"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Queres mesmo sair deste jogo?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:270
-#: ../../src/wui/game_main_menu_save_game.cc:310
+#: ../../src/wui/game_main_menu_save_game.cc:271
+#: ../../src/wui/game_main_menu_save_game.cc:311
 msgid "Error Saving Game!"
 msgstr "Erro ao guardar o jogo!"
 
@@ -8359,8 +8359,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estatísticas"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegação"
