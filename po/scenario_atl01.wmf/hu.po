@@ -9,7 +9,7 @@
 # litoll <litoll@freemail.hu>, 2016,2020
 # litoll <litoll@freemail.hu>, 2016,2020
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021-2022
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
@@ -667,18 +667,18 @@ msgstr "Gondoltam rá, Sidolus! Azt hiszem, itt az ideje. Ez lesz most az elsőd
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
-msgstr ""
+msgstr "Loftomor jelent"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr ""
+msgstr "Satul melegítsen, Jundlina! Elkészült a szerszámkovács műhelyünk, így a szerszámkovács hamarosan új szerszámokat készít majd nekünk."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
-msgstr ""
+msgstr "Jundlina figyelmeztet"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
@@ -687,7 +687,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Satul melegítsen téged is, Loftomor! Ez jó hír. De ne feledd, hogy a szerszámkovácsainknak fűrészre van szükségük. A szerszámkészítés számunkra művészet, amihez pontos szerszámra van szükségünk, nem durva kalapácsra, mint más törzseknek."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -945,7 +945,7 @@ msgstr "Gratulálunk!"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Befejezted ezt a küldetést. Ha szeretnél, játszhatsz még tovább, máskülönben folytasd a következő küldetéssel!"
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
