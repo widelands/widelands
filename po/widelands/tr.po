@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-16 03:38+0000\n"
+"POT-Creation-Date: 2022-07-19 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Doruk Tufan, 2022\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
@@ -284,8 +284,8 @@ msgstr "Kas"
 msgid "Dec"
 msgstr "Ara"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:93
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -299,12 +299,12 @@ msgstr "Ana Menü"
 msgid "Tools"
 msgstr "Araçlar"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:124
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -325,7 +325,7 @@ msgid "Redo"
 msgstr "Yinele"
 
 #: ../../src/editor/editorinteractive.cc:168
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:227
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:235
 msgid "Help"
 msgstr "Yardım"
 
@@ -494,10 +494,10 @@ msgstr ""
 msgid "Click on a field to show information about it"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:419
@@ -574,7 +574,7 @@ msgstr ""
 msgid "Unsupported Format"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:778
+#: ../../src/editor/editorinteractive.cc:499 ../../src/wlapplication.cc:801
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -606,11 +606,11 @@ msgstr "Bu harita henüz kaydedilmedi, gerçekten çıkmak istiyor musun?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1618
+#: ../../src/wlapplication.cc:1641
 msgid "Error"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1620
+#: ../../src/editor/editorinteractive.cc:992 ../../src/wlapplication.cc:1643
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -1014,7 +1014,7 @@ msgstr ""
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
-#: ../../src/ui_fsmenu/mousewheel_options.cc:56
+#: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
 msgstr ""
 
@@ -1238,7 +1238,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:269
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "'%s' isminde bir dosya mevcut. Üzerine yazılsın mı?"
@@ -1316,6 +1316,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:131
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:185
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:49
+#: ../../src/wui/game_diplomacy_menu.cc:158
 #, c-format
 msgid "Player %u"
 msgstr "Oyuncu %u"
@@ -1435,8 +1436,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1478,9 +1479,9 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:387
-#: ../../src/wlapplication_options.cc:528
-#: ../../src/wui/interactive_player.cc:218
-#: ../../src/wui/interactive_player.cc:455
+#: ../../src/wlapplication_options.cc:533
+#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:463
 msgid "Messages"
 msgstr ""
 
@@ -1743,44 +1744,44 @@ msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:152
+#: ../../src/logic/game.cc:153
 msgid "Not set"
 msgstr "Ayarlanmamış"
 
-#: ../../src/logic/game.cc:281 ../../src/logic/game.cc:325
-#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
+#: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
+#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:378
+#: ../../src/logic/game.cc:379
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:621
+#: ../../src/logic/game.cc:622
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Başlatma konumu eksik"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:640 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands, oyuncu %u başlangıç konumuna sahip olmadığı için oyunu başlatamadı.\nBu sorunu çözmek için Widelands Düzenleyici kullanarak el ile bir başlangıç konumu ekleyebilirsiniz."
 
-#: ../../src/logic/game.cc:739
+#: ../../src/logic/game.cc:740
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1182
+#: ../../src/logic/game.cc:1190
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1184
+#: ../../src/logic/game.cc:1192
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -2243,7 +2244,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:152
-#: ../../src/wui/interactive_player.cc:325
+#: ../../src/wui/interactive_player.cc:333
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2265,7 +2266,7 @@ msgstr "İşçiler"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:148
-#: ../../src/wui/interactive_player.cc:320 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr ""
 
@@ -2383,6 +2384,80 @@ msgctxt "shipname"
 msgid "Ship %d"
 msgstr ""
 
+#: ../../src/logic/playercommand.cc:2148
+#: ../../src/wlapplication_options.cc:529
+#: ../../src/wui/game_diplomacy_menu.cc:37
+#: ../../src/wui/game_diplomacy_menu.cc:114
+#: ../../src/wui/interactive_player.cc:218
+msgid "Diplomacy"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2161
+#, c-format
+msgid "%s has resigned and is now a spectator."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2161
+msgid "Player Resigned"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2173
+msgid "Player Leaves Team"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2174
+#, c-format
+msgid "%1$s has left team %2$u and is now teamless."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2182
+msgid "Team Joining Request"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2183
+msgid "Team Joining Invitation"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2185
+#: ../../src/wui/game_diplomacy_menu.cc:309
+#, c-format
+msgid "%1$s has requested to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2186
+#: ../../src/wui/game_diplomacy_menu.cc:314
+#, c-format
+msgid "%1$s has invited %2$s to join their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2211
+msgid "Team Change Accepted"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2211
+msgid "Team Change Rejected"
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2213
+#, c-format
+msgid "%1$s has accepted %2$s into their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2214
+#, c-format
+msgid "%1$s has accepted the invitation to join the team of %2$s."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2216
+#, c-format
+msgid "%1$s has denied %2$s membership in their team."
+msgstr ""
+
+#: ../../src/logic/playercommand.cc:2217
+#, c-format
+msgid "%1$s has rejected the invitation to join the team of %2$s."
+msgstr ""
+
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
 msgstr ""
@@ -2412,12 +2487,12 @@ msgid "Saving game…"
 msgstr ""
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:320
+#: ../../src/wui/game_main_menu_save_game.cc:321
 msgid "Saving failed!"
 msgstr "Kaydetme başarısız!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:303
+#: ../../src/wui/game_main_menu_save_game.cc:304
 msgid "Game saved"
 msgstr "Oyun kaydedildi"
 
@@ -2504,8 +2579,8 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:304
 #: ../../src/map_io/widelands_map_loader.cc:405
 #: ../../src/wlapplication_options.cc:524
-#: ../../src/wui/game_objectives_menu.cc:41
-#: ../../src/wui/interactive_player.cc:210
+#: ../../src/wui/game_objectives_menu.cc:30
+#: ../../src/wui/interactive_player.cc:211
 msgid "Objectives"
 msgstr ""
 
@@ -2563,7 +2638,7 @@ msgid "Checking map"
 msgstr ""
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:726
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:749
 msgid "Preparing game…"
 msgstr ""
 
@@ -3138,7 +3213,7 @@ msgstr ""
 
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1331
+#: ../../src/scripting/lua_game.cc:1350
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -3195,7 +3270,7 @@ msgctxt "dropdown"
 msgid "Not Selected"
 msgstr ""
 
-#: ../../src/ui_basic/dropdown.h:450
+#: ../../src/ui_basic/dropdown.h:466
 msgid "No matches"
 msgstr ""
 
@@ -3251,8 +3326,8 @@ msgid_plural "%d fields"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:49
-#: ../../src/wui/watchwindow.cc:76
+#: ../../src/ui_basic/window.cc:107 ../../src/ui_fsmenu/about.cc:41
+#: ../../src/ui_fsmenu/mousewheel_report.cc:85 ../../src/wui/watchwindow.cc:76
 msgid "Close"
 msgstr ""
 
@@ -3272,84 +3347,16 @@ msgstr ""
 msgid "Unpin"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:46 ../../src/ui_fsmenu/main.cc:466
+#: ../../src/ui_fsmenu/about.cc:38 ../../src/ui_fsmenu/main.cc:466
 msgid "About Widelands"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:57 ../../src/ui_fsmenu/about.cc:62
+#: ../../src/ui_fsmenu/about.cc:49 ../../src/ui_fsmenu/about.cc:54
 msgid "Lua Error"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:71 ../../src/ui_fsmenu/addons/packager.cc:144
-msgid "Version:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:72
-msgid "Operating System:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:74
-msgid "MacOS"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:76
-msgid "Windows (64 bit)"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:78
-msgid "Windows (32 bit)"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:80
-msgid "Linux"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:82
-msgid "FreeBSD"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:84
-msgid "Unix"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:86
-msgid "Unknown"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:89
-msgid "Locale:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:90
-msgid "Home Directory:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:91
-msgid "Configuration File:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:92
-msgid "Data Directory:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:93
-msgid "Locale Directory:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:94
-msgid "Executable Directory:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:101 ../../src/ui_fsmenu/about.cc:148
+#: ../../src/ui_fsmenu/about.cc:59 ../../src/ui_fsmenu/tech_info.cc:122
 msgid "Technical Info"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:130
-msgid "Copy"
-msgstr ""
-
-#: ../../src/ui_fsmenu/about.cc:131
-msgid "Copy the technical report to the clipboard"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:36
@@ -3581,10 +3588,12 @@ msgid ""
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:362
+#: ../../src/ui_fsmenu/mousewheel_report.cc:41
 msgid "Open Link"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/manager.cc:364
+#: ../../src/ui_fsmenu/mousewheel_report.cc:46
 msgid "Copy Link"
 msgstr ""
 
@@ -4005,6 +4014,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:139
 msgid "Author:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/addons/packager.cc:144
+#: ../../src/ui_fsmenu/tech_info.cc:67
+msgid "Version:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:313
@@ -4999,7 +5013,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:330
+#: ../../src/wui/interactive_player.cc:338
 msgid "General"
 msgstr ""
 
@@ -5226,7 +5240,7 @@ msgstr ""
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:653
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
 msgid "nobody"
 msgstr ""
 
@@ -5287,7 +5301,7 @@ msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:330 ../../src/wlapplication_options.cc:222
-#: ../../src/wlapplication_options.cc:584
+#: ../../src/wlapplication_options.cc:589
 #: ../../src/wui/game_main_menu_save_game.cc:52
 #: ../../src/wui/interactive_gamebase.cc:157
 msgid "Load Game"
@@ -5536,149 +5550,177 @@ msgid "Close window"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Ctrl+Vertical scroll
-#: ../../src/ui_fsmenu/mousewheel_options.cc:58
+#: ../../src/ui_fsmenu/mousewheel_options.cc:59
 msgid "Vertical scroll"
 msgstr ""
 
 #. * TRANSLATORS: e.g. Ctrl+Horizontal scroll
-#: ../../src/ui_fsmenu/mousewheel_options.cc:60
+#: ../../src/ui_fsmenu/mousewheel_options.cc:61
 msgid "Horizontal scroll"
 msgstr ""
 
 #. * TRANSLATORS: Used when a function works with either vertical or
 #. horizontal scrolling.
 #. It may be used in combination with modifier keys, e.g. "Ctrl+Any scroll"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:63
+#: ../../src/ui_fsmenu/mousewheel_options.cc:64
 msgid "Any scroll"
 msgstr ""
 
 #. * TRANSLATORS: Placeholder when no modifier key is used, e.g. "(plain)
 #. Horizontal scroll"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:144
+#: ../../src/ui_fsmenu/mousewheel_options.cc:147
 msgid "(plain)"
 msgstr ""
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Neither"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:198
+#: ../../src/ui_fsmenu/mousewheel_options.cc:201
 msgid "Neither"
 msgstr ""
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:200
+#: ../../src/ui_fsmenu/mousewheel_options.cc:203
 msgid "Vertical"
 msgstr ""
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Horizontal"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:202
+#: ../../src/ui_fsmenu/mousewheel_options.cc:205
 msgid "Horizontal"
 msgstr ""
 
 #. * TRANSLATORS: Used as: "Invert scroll direction: Both"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:204
+#: ../../src/ui_fsmenu/mousewheel_options.cc:207
 msgid "Both"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:217
+#: ../../src/ui_fsmenu/mousewheel_options.cc:220
 msgid "%1%:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:274
+#: ../../src/ui_fsmenu/mousewheel_options.cc:277
 msgid "Scroll Setting Conflict"
 msgstr ""
 
 #. * TRANSLATORS: %1 is a modifier key combination, e.g. "Ctrl+", or
 #. empty if none is used. %2 is scrolling direction.
 #. %3 is the name of the conflicting function.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:279
+#: ../../src/ui_fsmenu/mousewheel_options.cc:282
 #, c-format
 msgid ""
 "‘%1$s%2$s’ conflicts with ‘%3$s’. Please select a different combination or "
 "change the conflicting setting first."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:337
+#: ../../src/ui_fsmenu/mousewheel_options.cc:340
 msgid "Reset Scrolling"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:338
+#: ../../src/ui_fsmenu/mousewheel_options.cc:341
 msgid ""
 "Reset scroll settings to the defaults recommended for a standard single "
 "wheel mouse"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:347
+#: ../../src/ui_fsmenu/mousewheel_options.cc:350
 msgid "Set for Touchpad"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:348
+#: ../../src/ui_fsmenu/mousewheel_options.cc:351
 msgid ""
 "Sets ‘Zoom Map’ and ‘Scroll Map’ to the recommended settings for a touchpad "
 "or other pointing device that can scroll horizontally as well as vertically."
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:358
+#: ../../src/ui_fsmenu/mousewheel_options.cc:361
 msgid "Apply Scrolling"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:359
+#: ../../src/ui_fsmenu/mousewheel_options.cc:362
 msgid "Apply scroll settings"
 msgstr ""
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Zoom Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:382
+#: ../../src/ui_fsmenu/mousewheel_options.cc:385
 msgid "Zoom Map"
 msgstr ""
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Scroll Map: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:390
+#: ../../src/ui_fsmenu/mousewheel_options.cc:393
 msgid "Scroll Map"
 msgstr ""
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Game Speed: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:399
+#: ../../src/ui_fsmenu/mousewheel_options.cc:402
 msgid "Change Game Speed"
 msgstr ""
 
 #. * TRANSLATORS: Name of a function for the scroll wheel.
 #. Used as e.g.: "Change Editor Toolsize: Ctrl+Any scroll"
 #. The ':' will be added by another format string.
-#: ../../src/ui_fsmenu/mousewheel_options.cc:407
+#: ../../src/ui_fsmenu/mousewheel_options.cc:410
 msgid "Change Editor Toolsize"
 msgstr ""
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for map zooming:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:414
+#: ../../src/ui_fsmenu/mousewheel_options.cc:417
 msgid "Invert scroll direction for map zooming:"
 msgstr ""
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for tab switching:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:419
+#: ../../src/ui_fsmenu/mousewheel_options.cc:422
 msgid "Invert scroll direction for tab switching:"
 msgstr ""
 
 #. * TRANSLATORS: Used as e.g. "Invert scroll direction for increase/decrease:
 #. Vertical"
-#: ../../src/ui_fsmenu/mousewheel_options.cc:424
+#: ../../src/ui_fsmenu/mousewheel_options.cc:427
 msgid "Invert scroll direction for increase/decrease:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:466
+#: ../../src/ui_fsmenu/mousewheel_options.cc:435
+msgid "Fix inverted horizontal scrolling"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:436
+msgid ""
+"An SDL bug in some configurations causes horizontal scroll to be inverted. "
+"We try to detect them, but if we got it wrong, you can fix it here. Please "
+"report if you need to turn this on, so that we can improve the detection."
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:447
+msgid "Send feedback"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_options.cc:506
 msgid "Scroll Settings Conflict"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mousewheel_options.cc:467
+#: ../../src/ui_fsmenu/mousewheel_options.cc:507
 #, c-format
 msgid ""
 "‘%1$s’ or ‘%2$s’ conflicts with the recommended settings. Change the "
 "conflicting setting(s) too?"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mousewheel_report.cc:61
+msgid "Send Feedback for Inverted Horizontal Scrolling"
+msgstr ""
+
+#. * TRANSLATORS: %s is a URL
+#: ../../src/ui_fsmenu/mousewheel_report.cc:75
+#, c-format
+msgid ""
+"Please help us improve the detection of inverted horizontal scrolling. To do"
+" so, please report at %s that horizontal scroll direction is wrong with your"
+" configuration. Please include the below technical information."
 msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:56
@@ -5913,7 +5955,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:375
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:383
 msgid "Show Workarea Overlaps"
 msgstr ""
 
@@ -6096,18 +6138,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
@@ -6115,6 +6157,90 @@ msgstr ""
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:183
 msgid "You"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:71
+msgid "MacOS"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:73
+msgid "Windows (64 bit)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:75
+msgid "Windows (32 bit)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:77
+msgid "Linux"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:79
+msgid "FreeBSD"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:81
+msgid "Unix"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:83
+msgid "Unknown"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:85
+msgid "Operating System:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:86
+msgid "Compiled with SDL version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:93
+msgid "Using SDL version:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:98
+msgid "SDL video driver:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:102
+msgid "SDL horizontal scroll:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:103
+msgid "assuming inverted"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:107
+msgid "Locale:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:108
+msgid "Home Directory:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:109
+msgid "Configuration File:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:110
+msgid "Data Directory:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:111
+msgid "Locale Directory:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:113
+msgid "Executable Directory:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:142
+msgid "Copy"
+msgstr ""
+
+#: ../../src/ui_fsmenu/tech_info.cc:143
+msgid "Copy the technical report to the clipboard"
 msgstr ""
 
 #. * TRANSLATORS: Window Title in Options
@@ -6140,59 +6266,59 @@ msgid "Unmark All"
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:781 ../../src/wlapplication.cc:785
-#: ../../src/wlapplication.cc:790 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:804 ../../src/wlapplication.cc:808
+#: ../../src/wlapplication.cc:813 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr ""
 
-#: ../../src/wlapplication.cc:782 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:805 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Oyun veri hatası"
 
-#: ../../src/wlapplication.cc:784
+#: ../../src/wlapplication.cc:807
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr ""
 
-#: ../../src/wlapplication.cc:786
+#: ../../src/wlapplication.cc:809
 msgid "File system error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1282
+#: ../../src/wlapplication.cc:1305
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1287
+#: ../../src/wlapplication.cc:1310
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1442
+#: ../../src/wlapplication.cc:1465
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1563
+#: ../../src/wlapplication.cc:1586
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1581
+#: ../../src/wlapplication.cc:1604
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1656
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1633
+#: ../../src/wlapplication.cc:1656
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1636
+#: ../../src/wlapplication.cc:1659
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6206,7 +6332,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1645
+#: ../../src/wlapplication.cc:1668
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6216,11 +6342,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1671
+#: ../../src/wlapplication.cc:1694
 msgid "Emergency save failed"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1672
+#: ../../src/wlapplication.cc:1695
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -6598,356 +6724,356 @@ msgstr ""
 msgid "Seafaring Statistics"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:533
+#: ../../src/wlapplication_options.cc:538
 msgid "Decrease Game Speed by 1×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:538
+#: ../../src/wlapplication_options.cc:543
 msgid "Decrease Game Speed by 0.25×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:543
+#: ../../src/wlapplication_options.cc:548
 msgid "Decrease Game Speed by 10×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:548
+#: ../../src/wlapplication_options.cc:553
 msgid "Increase Game Speed by 1×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:553
+#: ../../src/wlapplication_options.cc:558
 msgid "Increase Game Speed by 0.25×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:558
+#: ../../src/wlapplication_options.cc:563
 msgid "Increase Game Speed by 10×"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:563
+#: ../../src/wlapplication_options.cc:568
 msgid "Reset Game Speed"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:567
+#: ../../src/wlapplication_options.cc:572
 #: ../../src/wui/interactive_gamebase.cc:328
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:572
+#: ../../src/wlapplication_options.cc:577
 msgid "Scroll to Starting Field"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:576 ../../src/wui/game_chat_menu.cc:54
+#: ../../src/wlapplication_options.cc:581 ../../src/wui/game_chat_menu.cc:54
 #: ../../src/wui/interactive_gamebase.cc:368
 msgid "Chat"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's main menu
-#: ../../src/wlapplication_options.cc:580
+#: ../../src/wlapplication_options.cc:585
 #: ../../src/wui/game_main_menu_save_game.cc:52
 #: ../../src/wui/interactive_gamebase.cc:148
 msgid "Save Game"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:589
+#: ../../src/wlapplication_options.cc:594
 msgid "Messages: Go to Location"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:594
+#: ../../src/wlapplication_options.cc:599
 msgid "Messages: Show All"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:599
+#: ../../src/wlapplication_options.cc:604
 msgid "Messages: Show Geologists’ Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:604
+#: ../../src/wlapplication_options.cc:609
 msgid "Messages: Show Economy Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:609
+#: ../../src/wlapplication_options.cc:614
 msgid "Messages: Show Seafaring Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:614
+#: ../../src/wlapplication_options.cc:619
 msgid "Messages: Show Military Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:619
+#: ../../src/wlapplication_options.cc:624
 msgid "Messages: Show Scenario Messages"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:624
+#: ../../src/wlapplication_options.cc:629
 msgid "Seafaring: Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:629
+#: ../../src/wlapplication_options.cc:634
 msgid "Seafaring: Watch Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:634
+#: ../../src/wlapplication_options.cc:639
 msgid "Seafaring: Open Ship Window"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:639
+#: ../../src/wlapplication_options.cc:644
 msgid "Seafaring: Open Ship Window And Go to Ship"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:644
+#: ../../src/wlapplication_options.cc:649
 msgid "Seafaring: Show All Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:649
+#: ../../src/wlapplication_options.cc:654
 msgid "Seafaring: Show Idle Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:654
+#: ../../src/wlapplication_options.cc:659
 msgid "Seafaring: Show Transport Ships"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:659
+#: ../../src/wlapplication_options.cc:664
 msgid "Seafaring: Show Waiting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:664
+#: ../../src/wlapplication_options.cc:669
 msgid "Seafaring: Show Scouting Expeditions"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:669
-msgid "Seafaring: Show Expeditions with Port Spaces"
-msgstr ""
-
 #: ../../src/wlapplication_options.cc:674
-#, c-format
-msgid "Set Landmark #%d"
+msgid "Seafaring: Show Expeditions with Port Spaces"
 msgstr ""
 
 #: ../../src/wlapplication_options.cc:679
 #, c-format
+msgid "Set Landmark #%d"
+msgstr ""
+
+#: ../../src/wlapplication_options.cc:684
+#, c-format
 msgid "Go To Landmark #%d"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:922
+#: ../../src/wlapplication_options.cc:927
 msgctxt "hotkey"
 msgid "Shift"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:925
+#: ../../src/wlapplication_options.cc:930
 msgctxt "hotkey"
 msgid "Alt"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:929
+#: ../../src/wlapplication_options.cc:934
 msgctxt "hotkey"
 msgid "Cmd"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:931
+#: ../../src/wlapplication_options.cc:936
 msgctxt "hotkey"
 msgid "GUI"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:935
+#: ../../src/wlapplication_options.cc:940
 msgctxt "hotkey"
 msgid "Ctrl"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:944
+#: ../../src/wlapplication_options.cc:949
 #, c-format
 msgid "%1$s+%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:957
+#: ../../src/wlapplication_options.cc:962
 msgctxt "hotkey"
 msgid "Space"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:959
+#: ../../src/wlapplication_options.cc:964
 msgctxt "hotkey"
 msgid "Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:961
+#: ../../src/wlapplication_options.cc:966
 msgctxt "hotkey"
 msgid "Escape"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:963
+#: ../../src/wlapplication_options.cc:968
 msgctxt "hotkey"
 msgid "Tab"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:965
+#: ../../src/wlapplication_options.cc:970
 msgctxt "hotkey"
 msgid "Menu"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:967
+#: ../../src/wlapplication_options.cc:972
 msgctxt "hotkey"
 msgid "Pause"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:969
+#: ../../src/wlapplication_options.cc:974
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:971
+#: ../../src/wlapplication_options.cc:976
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:973
+#: ../../src/wlapplication_options.cc:978
 msgctxt "hotkey"
 msgid "Home"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:975
+#: ../../src/wlapplication_options.cc:980
 msgctxt "hotkey"
 msgid "End"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:977
+#: ../../src/wlapplication_options.cc:982
 msgctxt "hotkey"
 msgid "Left Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:979
+#: ../../src/wlapplication_options.cc:984
 msgctxt "hotkey"
 msgid "Right Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:981
+#: ../../src/wlapplication_options.cc:986
 msgctxt "hotkey"
 msgid "Up Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:983
+#: ../../src/wlapplication_options.cc:988
 msgctxt "hotkey"
 msgid "Down Arrow Key"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:985
+#: ../../src/wlapplication_options.cc:990
 msgctxt "hotkey"
 msgid "Insert"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:987
+#: ../../src/wlapplication_options.cc:992
 msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:989
+#: ../../src/wlapplication_options.cc:994
 msgctxt "hotkey"
 msgid "Backspace"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:991
+#: ../../src/wlapplication_options.cc:996
 msgctxt "hotkey"
 msgid "Caps Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:993
+#: ../../src/wlapplication_options.cc:998
 msgctxt "hotkey"
 msgid "Numpad Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:995
+#: ../../src/wlapplication_options.cc:1000
 msgctxt "hotkey"
 msgid "Scroll Lock"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:997
+#: ../../src/wlapplication_options.cc:1002
 msgctxt "hotkey"
 msgid "Keypad 1"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:999
+#: ../../src/wlapplication_options.cc:1004
 msgctxt "hotkey"
 msgid "Keypad 2"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1001
+#: ../../src/wlapplication_options.cc:1006
 msgctxt "hotkey"
 msgid "Keypad 3"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1003
+#: ../../src/wlapplication_options.cc:1008
 msgctxt "hotkey"
 msgid "Keypad 4"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1005
+#: ../../src/wlapplication_options.cc:1010
 msgctxt "hotkey"
 msgid "Keypad 5"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1007
+#: ../../src/wlapplication_options.cc:1012
 msgctxt "hotkey"
 msgid "Keypad 6"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1009
+#: ../../src/wlapplication_options.cc:1014
 msgctxt "hotkey"
 msgid "Keypad 7"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1011
+#: ../../src/wlapplication_options.cc:1016
 msgctxt "hotkey"
 msgid "Keypad 8"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1013
+#: ../../src/wlapplication_options.cc:1018
 msgctxt "hotkey"
 msgid "Keypad 9"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1015
+#: ../../src/wlapplication_options.cc:1020
 msgctxt "hotkey"
 msgid "Keypad 0"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1017
+#: ../../src/wlapplication_options.cc:1022
 msgctxt "hotkey"
 msgid "Keypad ."
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1019
+#: ../../src/wlapplication_options.cc:1024
 msgctxt "hotkey"
 msgid "Keypad +"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1021
+#: ../../src/wlapplication_options.cc:1026
 msgctxt "hotkey"
 msgid "Keypad -"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1023
+#: ../../src/wlapplication_options.cc:1028
 msgctxt "hotkey"
 msgid "Keypad *"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1025
+#: ../../src/wlapplication_options.cc:1030
 msgctxt "hotkey"
 msgid "Keypad /"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1027
+#: ../../src/wlapplication_options.cc:1032
 msgctxt "hotkey"
 msgid "Keypad Enter"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1036
+#: ../../src/wlapplication_options.cc:1041
 msgid "(disabled)"
 msgstr ""
 
 #. * TRANSLATORS: The first placeholder is the stock amount of a ware/worker,
 #. and the second is an
 #. * icon indicating a trend. Very little space is available.
-#: ../../src/wlapplication_options.cc:1039 ../../src/wui/waresdisplay.cc:557
+#: ../../src/wlapplication_options.cc:1044 ../../src/wui/waresdisplay.cc:557
 #, c-format
 msgid "%1$s%2$s"
 msgstr ""
 
-#: ../../src/wlapplication_options.cc:1064
+#: ../../src/wlapplication_options.cc:1069
 #, c-format
 msgid "Fastplace #%i"
 msgstr ""
@@ -7572,6 +7698,84 @@ msgstr ""
 msgid "Debug Field"
 msgstr ""
 
+#: ../../src/wui/game_diplomacy_menu.cc:45
+msgid "Accept"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:48
+msgid "Reject"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:62
+#, c-format
+msgid "%s has invited you to join their team."
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:63
+#, c-format
+msgid "%s wants to join your team."
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:167
+msgid "Leave"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:168
+msgid "Leave your current team and become teamless"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:170
+msgid "Resign"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:171
+msgid "Give up and become a spectator"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:182
+msgid "Join"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:183
+msgid "Request to join this player’s team"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:185
+msgid "Invite"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:186
+msgid "Invite this player to join your team"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:250
+msgid "No team"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:250
+#, c-format
+msgid "Team %u"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:261
+#, c-format
+msgid "Won at %s"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:264
+#, c-format
+msgid "Lost at %s"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:267
+#, c-format
+msgid "Resigned at %s"
+msgstr ""
+
+#: ../../src/wui/game_diplomacy_menu.cc:302
+msgid "Pending Diplomacy Actions"
+msgstr ""
+
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:27
 msgid "Exit Game Confirmation"
@@ -7581,8 +7785,8 @@ msgstr ""
 msgid "Are you sure you wish to exit this game?"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:270
-#: ../../src/wui/game_main_menu_save_game.cc:310
+#: ../../src/wui/game_main_menu_save_game.cc:271
+#: ../../src/wui/game_main_menu_save_game.cc:311
 msgid "Error Saving Game!"
 msgstr ""
 
@@ -7964,49 +8168,49 @@ msgid "Show controls"
 msgstr ""
 
 #. * TRANSLATORS: Title for the map view menu button in the game
-#: ../../src/wui/interactive_base.cc:131
+#: ../../src/wui/interactive_base.cc:132
 msgid "Map View"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Hide Minimap"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:286
+#: ../../src/wui/interactive_base.cc:287
 msgid "Show Minimap"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:292
+#: ../../src/wui/interactive_base.cc:293
 msgid "Zoom +"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:297
+#: ../../src/wui/interactive_base.cc:298
 msgid "Reset zoom"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's map view menu
-#: ../../src/wui/interactive_base.cc:302
+#: ../../src/wui/interactive_base.cc:303
 msgid "Zoom –"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:730
+#: ../../src/wui/interactive_base.cc:731
 #, c-format
 msgid "Road length: %u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:732
+#: ../../src/wui/interactive_base.cc:733
 #, c-format
 msgid "Waterway length: %1$u/%2$u"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1540
+#: ../../src/wui/interactive_base.cc:1544
 msgid "Failed saving screenshot!"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:1544
+#: ../../src/wui/interactive_base.cc:1548
 msgid "Screenshot saved"
 msgstr ""
 
@@ -8115,25 +8319,25 @@ msgid "%1$s (%2$s)"
 msgstr ""
 
 #. * TRANSLATORS: Title for the statistics menu button in the game
-#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:44
 msgid "Statistics"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
-#: ../../src/wui/interactive_player.cc:304 ../../src/wui/map_tags.cc:37
+#. * TRANSLATORS: An entry in the game's statistics menu
+#: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:310
+#: ../../src/wui/interactive_player.cc:318
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:315 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:323 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr ""
@@ -8141,17 +8345,17 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:372
+#: ../../src/wui/interactive_player.cc:380
 msgid "Hide Workarea Overlaps"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:378
+#: ../../src/wui/interactive_player.cc:386
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:460
+#: ../../src/wui/interactive_player.cc:468
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

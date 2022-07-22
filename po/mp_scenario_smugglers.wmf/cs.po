@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:28+0000\n"
 "Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2020-2021\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:78
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:79
 msgid "Wares Smuggled"
 msgstr "Suroviny propašovány"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:101
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:102
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:134
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:195
@@ -38,7 +38,7 @@ msgstr[1] "%i body"
 msgstr[2] "%i bodů"
 msgstr[3] "%i bodů"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:105
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr "Pravidla"
