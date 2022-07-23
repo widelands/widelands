@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-13 03:52+0000\n"
+"POT-Creation-Date: 2022-07-19 04:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Erdoğan Şahin, 2017\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
@@ -1283,8 +1283,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1699,6 +1699,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1710,6 +1711,8 @@ msgstr ""
 msgid "making a shovel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1719,6 +1722,7 @@ msgstr ""
 msgid "making a felling ax"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1733,6 +1737,8 @@ msgstr ""
 msgid "making a machete"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1743,6 +1749,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1760,9 +1767,9 @@ msgstr ""
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1916,8 +1923,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5250,8 +5257,8 @@ msgstr ""
 msgid "Balsa Tree (Pole)"
 msgstr ""
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS: This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5447,7 +5454,6 @@ msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition

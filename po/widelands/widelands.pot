@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-16 03:43+0000\n"
+"POT-Creation-Date: 2022-07-22 04:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -975,8 +975,8 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
-#. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
 #. * TRANSLATORS: Map Options: Waterways are disabled
+#. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1391,8 +1391,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
