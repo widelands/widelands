@@ -59,7 +59,8 @@ enum class BuildingNecessity : uint8_t {
 enum class DismantlePossibility : uint8_t {
 	kCannot,
 	kMightBe,
-	kShouldBe
+	kShouldBe,
+	kManageOnly
 };
 
 // A building type can have no, one or multiple of these attributes

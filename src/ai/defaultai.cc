@@ -70,7 +70,7 @@ constexpr uint16_t kTargetQuantCap = 30;
 
 // this is intended for map developers & testers, should be off by default
 // also note that some of that stats is printed only in verbose mode
-constexpr bool kEnableStatsPrint = false;
+constexpr bool kEnableStatsPrint = true;
 // enable also the above to print the results of the performance data collection
 constexpr bool kCollectPerfData = false;
 
@@ -4343,22 +4343,6 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// Barracks
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
-		// If we somehow have more than one barracks we will dismantle current one
-		if (site.bo->total_count() > 1) {
-			verb_log_info_time(
-			   gametime,
-			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
-			   "error; dismantling the barracks at %3dx%3d\n",
-			   player_number(), site.bo->total_count(), site.site->get_position().x,
-			   site.site->get_position().y);
-			if (connected_to_wh) {
-				game().send_player_dismantle(*site.site, true);
-			} else {
-				game().send_player_bulldoze(*site.site);
-			}
-			return true;
-		}
-
 		assert(site.bo->total_count() == 1);
 		for (const auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() > 4) {
@@ -4463,7 +4447,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// Wells, fishers, hunter handling
 	if (site.bo->is(BuildingAttribute::kWell) || site.bo->is(BuildingAttribute::kFisher) ||
-	    site.bo->is(BuildingAttribute::kHunter)) {  // NOCOM
+	    site.bo->is(BuildingAttribute::kHunter)) {
 
 		if ((site.unoccupied_till + Duration(6 * 60 * 1000) < gametime &&
 		                             site.site->get_statistics_percent() == 0)) {
@@ -4617,7 +4601,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 		// dismantling the rangers hut, but only if we have them above a target
 		if (wood_policy_.at(site.bo->id) == WoodPolicy::kDismantleRangers &&
-		    site.bo->cnt_built > site.bo->cnt_target) {
+		    dp == DismantlePossibility::kMightBe) { //NOCOM
 
 			site.bo->last_dismantle_time = game().get_gametime();
 			if (connected_to_wh) {
@@ -5963,8 +5947,13 @@ DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo
 	// statistics and so on)
 	assert(bo.total_count() > 0);
 
-	if (bo.total_count() <= 1 || bo.total_count() <= bo.cnt_target ||
+	if (bo.is(BuildingAttribute::kNeedsRocks)) {
+		; // Excluding some types from below check, not reasonable to keep them once out of resources
+	} else if (bo.total_count() <= 1 || bo.total_count() <= bo.cnt_target ||
 	    (bo.max_preciousness >= 10 && bo.total_count() <= 2)) {
+		if (bo.is(BuildingAttribute::kRanger)) {
+			return DismantlePossibility::kManageOnly;
+		}
 		return DismantlePossibility::kCannot;
 	}
 
@@ -5987,6 +5976,16 @@ DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo
 		// We never enforce dismantling even if we have plenty of their output - they clear
 		// the space
 		return DismantlePossibility::kMightBe;
+	} else if (bo.is(BuildingAttribute::kBarracks)) {
+		if (bo.total_count() > 1) {
+			verb_log_info_time(
+			   gametime,
+			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
+			   "error\n",
+			   player_number(), bo.total_count());
+			return DismantlePossibility::kShouldBe;
+		}
+		return DismantlePossibility::kManageOnly;
 	} else if (bo.inputs.empty() && bo.ware_outputs.size() == 1) {  // farms like
 		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
 			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
