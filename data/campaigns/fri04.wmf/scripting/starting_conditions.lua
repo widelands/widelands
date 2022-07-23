@@ -1,3 +1,9 @@
+local function place_milsite(p, name, x, y, soldier_levels, nr_soldiers)
+   local b = p:place_building(name, map:get_field(x, y), false, true)
+   b:set_soldiers(soldier_levels, nr_soldiers)
+   b.destruction_blocked = true
+end
+
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
@@ -132,9 +138,9 @@ soldiers = {
 }
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
 
-p2:place_building("frisians_tower", map:get_field(13,13), false, true):set_soldiers(soldiers[difficulty][1], 7)
-p2:place_building("frisians_fortress", map:get_field(0,16), false, true):set_soldiers(soldiers[difficulty][1], 12)
-p2:place_building("frisians_fortress", map:get_field(4,28), false, true):set_soldiers(soldiers[difficulty][1], 12)
+place_milsite(p2, "frisians_tower"   , 13,13, soldiers[difficulty][1],  7)
+place_milsite(p2, "frisians_fortress",  0,16, soldiers[difficulty][1], 12)
+place_milsite(p2, "frisians_fortress",  4,28, soldiers[difficulty][1], 12)
 
 -- =======================================================================
 --                                 Player 3
@@ -286,7 +292,7 @@ else
    }
 end
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
-p4:place_building("amazons_fortification", map:get_field(55,190), false, true):set_soldiers(soldiers[difficulty][1], 12)
-p4:place_building("amazons_fortification", map:get_field(47,186), false, true):set_soldiers(soldiers[difficulty][1], 12)
-p4:place_building("amazons_fortification", map:get_field(38,177), false, true):set_soldiers(soldiers[difficulty][1], 12)
-p4:place_building("amazons_fortification", map:get_field(22,173), false, true):set_soldiers(soldiers[difficulty][1], 12)
+place_milsite(p4, "amazons_fortification", 55,190, soldiers[difficulty][1], 12)
+place_milsite(p4, "amazons_fortification", 47,186, soldiers[difficulty][1], 12)
+place_milsite(p4, "amazons_fortification", 38,177, soldiers[difficulty][1], 12)
+place_milsite(p4, "amazons_fortification", 22,173, soldiers[difficulty][1], 12)
