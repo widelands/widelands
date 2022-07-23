@@ -183,8 +183,7 @@ private:
 	   const WorkareaInfo& workarea_info) const;
 
 	// for production sites
-	BuildingNecessity
-	check_ps_necessity(BuildingObserver& bo, const Time&);
+	BuildingNecessity check_ps_necessity(BuildingObserver& bo, const Time&);
 	BuildingNecessity
 	check_ranger_necessity(BuildingObserver& bo, const BasicEconomyBuildingStatus, const Time&);
 	BuildingNecessity check_warehouse_necessity(BuildingObserver&, const Time& gametime);
