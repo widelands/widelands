@@ -3505,9 +3505,9 @@ bool DefaultAI::improve_roads(const Time& gametime) {
 	// 	printf(
 	// 	   "%3dx%3d, wares here: %d, roads from here: %d, nearest wh: %2d, wh count: %ld,  has
 	// capacity: %s\n", 	   flag.get_position().x, flag.get_position().y, flag.current_wares(),
-	// flag.nr_of_roadbases(), 	   flag_warehouse_distance.get_wh_distance(flag_coords_hash, gametime,
-	// nullptr), 	   flag.get_economy(Widelands::wwWORKER)->warehouses().size(), 	   flag.has_capacity() ?
-	// "Y" : "N");
+	// flag.nr_of_roadbases(), 	   flag_warehouse_distance.get_wh_distance(flag_coords_hash,
+	// gametime, nullptr), 	   flag.get_economy(Widelands::wwWORKER)->warehouses().size(),
+	// flag.has_capacity() ? "Y" : "N");
 	// }
 
 	// when deciding if we attempt to build a road from here we use probability
