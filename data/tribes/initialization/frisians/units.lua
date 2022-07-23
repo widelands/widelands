@@ -1972,7 +1972,9 @@ wl.Descriptions():new_tribe {
          name = "frisians_dikers_house",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
-            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea.")
+            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Diker's House
+            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources.")
          }
       },
 
