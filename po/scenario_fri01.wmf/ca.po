@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2020
+# Juanjo, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Juanjo, 2020\n"
+"Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -617,8 +617,8 @@ msgid ""
 "farming."
 msgstr ""
 "Una sala de begudes necessita menjar de millor qualitat. Construïu una "
-"fleca, una cerveseria i dues o tres masoveries més per cultivar-hi civada. "
-"Tingueu en compte que la civada creix molt lentament; per tant, aquestes "
+"fleca, una cerveseria i dues o tres masoveries més per cultivar-hi ordi. "
+"Tingueu en compte que l'ordi creix molt lentament; per tant, aquestes "
 "masoveries no són suficients per obtenir tot el pa i cervesa que necessitem."
 " Hem de continuar expandint-nos ràpidament per disposar de més terreny "
 "cultivable."
@@ -765,8 +765,8 @@ msgid ""
 " barley to recruit more reindeer, as our roads are quite busy."
 msgstr ""
 "A més, expandint-nos també tindrem més espai per als nostres cultius. Podrem"
-" obtenir més civada per mantenir més rens, ja que ara mateix els camins "
-"estan molt enfeinats."
+" obtenir més ordi per mantenir més rens, ja que ara mateix els camins estan "
+"molt enfeinats."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
@@ -1162,7 +1162,7 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
-"Els déus han contestat les nostres pregàries. Escaparem de l'illa que "
+"Els déus han respost les nostres pregàries. Escaparem de l'illa que "
 "s'enfonsa, i estic segur que podrem construir una nova llar en un lloc més "
 "tranquil d'aquest món!"
 

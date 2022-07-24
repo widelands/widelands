@@ -4,14 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Roy Luo <1598359376@qq.com>, 2021
-# 柳离枝 <xingzuo88@qq.com>, 2021
+# liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
-"Last-Translator: 柳离枝 <xingzuo88@qq.com>, 2021\n"
+"Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,6 +28,16 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr "在亚特兰蒂斯附近的一个神秘岛屿登陆后，剩下的亚特兰蒂斯人挣扎求存，努力为自己建立一个新的家园。"
+
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr ""
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -143,32 +153,32 @@ msgid ""
 msgstr "当他们的上帝对亚特兰蒂斯人失去信任并淹没了他们的岛屿，一个将成为传奇的女人为正义而奋斗，并为她的人民争取了第二次机会。带领着剩下的亚特兰蒂斯人在世界的一个新的地方进入崭新的未来，朱鼎利纳成为了她那个时代最强大的人类，但高昂的代价是：她的人性和灵魂。"
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "凝水成冰"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "介绍弗里西亚"
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "水手（难对付的）"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "舵手（非常难）"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "船长（超难的）"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "

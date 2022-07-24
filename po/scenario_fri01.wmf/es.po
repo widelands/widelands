@@ -5,8 +5,8 @@
 # Translators:
 # Walter Benkel <tromaster@gmail.com>, 2020
 # Madkat Here, 2020
-# Gontzal M. Pujana <juchuf@gmail.com>, 2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2021
+# Thadah D. Denyse <juchuf@gmail.com>, 2022
 # 
 msgid ""
 msgstr ""
@@ -14,13 +14,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2021\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: Name of a backup autosave
 #: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
@@ -1141,6 +1141,15 @@ msgstr[0] ""
 "nuestros mejores hombres al puerto cuando esté completado, para que se "
 "preparen para embarcar y zarpar!"
 msgstr[1] ""
+"Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
+" materiales de construcción para comenzar, y soldados para asegurar y "
+"expandir nuestra nueva colonia. Incluso después de cargar la expedición, el "
+"barco debería tener suficiente espacio libre para algunas mercancías y "
+"trabajadores. Aparte de eso, debería haber lugar para hasta %d soldados, si "
+"a nadie le importa ir abarrotado. ¡Enviemos suministros de construcción y a "
+"nuestros mejores hombres al puerto cuando esté completado, para que se "
+"preparen para embarcar y zarpar!"
+msgstr[2] ""
 "Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
 " materiales de construcción para comenzar, y soldados para asegurar y "
 "expandir nuestra nueva colonia. Incluso después de cargar la expedición, el "

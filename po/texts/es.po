@@ -10,22 +10,22 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016,2021
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
@@ -308,6 +308,10 @@ msgid "Packagers"
 msgstr "Empaquetadores"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr "Guión"
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "Sonido"
 
@@ -528,7 +532,7 @@ msgstr "Los Amazones aman los árboles. Construye suficientes cabañas de silvic
 msgid ""
 "Rare woods are the backbone of an Amazon economy. Build rare tree "
 "plantations to plant the special trees for these woods."
-msgstr ""
+msgstr "Las maderas raras son la columna vertebral de la economía Amazónica. Construye plantaciones de árboles raros para plantar los árboles especiales para estos bosques."
 
 #: ../../data/txts/tips/amazons.lua:12
 msgid ""
@@ -879,4 +883,4 @@ msgstr "Si el juego falla, ¡no te preocupes! El juego se guardará automáticam
 msgid ""
 "Are the computer players too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Los jugadores computadora son demasiado aburridos? Visita nuestra web en %s y conoce a otros jugadores para jugar en línea."

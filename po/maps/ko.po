@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-13 03:43+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: TaeMin An, 2017\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -29,6 +29,16 @@ msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
 msgstr "아틀란티스에 가까운 신비로운 섬에 상륙한 후에, 남아있는 아틀란티스인들은 스스로를 위한 새로운 집을 만들려 노력합니다."
+
+#: ../../data/campaigns/atl02.wmf/elemental:8
+msgid "Struggling For a New Home Again"
+msgstr ""
+
+#: ../../data/campaigns/atl02.wmf/elemental:10
+msgid ""
+"After the quick escape from the drowning island, the Atlanteans around "
+"Jundlina are faced with new challenges."
+msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -144,32 +154,32 @@ msgid ""
 msgstr "그들의 신이 아틀란티스인들에 대한 믿음을 버리고 섬을 가라앉혔을 때, 한 여자의 정의와 그녀의 사람들을 위한 두번째 기회에 대한 몸부림은 전설의 일부가 될 것입니다. 살아남은 아틀란티스인들을 새로운 세계의 일부에 있는 새로운 미래로 이끌면서, 준들리나는 그녀 시대의 가장 강력한 인간이 되었습니다만, 비싼 대가를 치뤘습니다: 그녀의 인간성과 영혼을."
 
 #. TRANSLATORS: The name of a Frisian campaign
-#: ../../data/campaigns/campaigns.lua:107
+#: ../../data/campaigns/campaigns.lua:108
 msgid "From Water to Ice"
 msgstr "물에서 얼음으로"
 
 #. TRANSLATORS: A short description of a campaign
-#: ../../data/campaigns/campaigns.lua:110
+#: ../../data/campaigns/campaigns.lua:111
 msgid "Introduces the Frisians."
 msgstr "프리지아인들을 소개합니다."
 
 #. TRANSLATORS: A campaign difficulty (easiest of three options)
-#: ../../data/campaigns/campaigns.lua:115
+#: ../../data/campaigns/campaigns.lua:116
 msgid "Sailor (Tricky)"
 msgstr "선원 (다루기 힘듬)"
 
 #. TRANSLATORS: A campaign difficulty (medium of three options)
-#: ../../data/campaigns/campaigns.lua:117
+#: ../../data/campaigns/campaigns.lua:118
 msgid "Steersman (Very Hard)"
 msgstr "선원 (매우 어려움)"
 
 #. TRANSLATORS: A campaign difficulty (hardest of three options)
-#: ../../data/campaigns/campaigns.lua:119
+#: ../../data/campaigns/campaigns.lua:120
 msgid "Captain (Unreasonable)"
 msgstr "선장 (지나침)"
 
 #. TRANSLATORS: A long description of a campaign
-#: ../../data/campaigns/campaigns.lua:124
+#: ../../data/campaigns/campaigns.lua:125
 msgid ""
 "Living off the ocean is a constant struggle, and even more so for the "
 "inhabitants of the Frisian North Sea shore. Was the last storm flood, the "

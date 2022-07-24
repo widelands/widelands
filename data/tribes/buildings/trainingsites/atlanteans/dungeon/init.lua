@@ -227,7 +227,7 @@ wl.Descriptions():new_trainingsite_type {
    animation_directory = dirname,
    animations = {
       idle = {
-         hotspot = { 47, 47 },
+         hotspot = { 55, 59 },
       }
    },
 

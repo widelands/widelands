@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>, 2016-2018,2020\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:15
 msgid "Artifacts"
@@ -99,6 +99,7 @@ msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i artefacto"
 msgstr[1] "%i artefactos"
+msgstr[2] "%i artefactos"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:185
@@ -125,34 +126,36 @@ msgstr "Recebes pontos pelas preciosas mercadorias que tiveres nos teus armazén
 msgid "Points"
 msgstr "Pontos"
 
-#: ../../data/scripting/win_conditions/collectors.lua:65
+#: ../../data/scripting/win_conditions/collectors.lua:68
 #, lua-format
 msgid "Status for %s"
 msgstr "Estado de %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:77
+#: ../../data/scripting/win_conditions/collectors.lua:80
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:81
+#: ../../data/scripting/win_conditions/collectors.lua:84
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Total: %i ponto"
 msgstr[1] "Total: %i pontos"
+msgstr[2] "Total: %i pontos"
 
-#: ../../data/scripting/win_conditions/collectors.lua:104
+#: ../../data/scripting/win_conditions/collectors.lua:107
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Estado da Equipa %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:106
+#: ../../data/scripting/win_conditions/collectors.lua:109
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
 msgstr[0] "Total da Equipa: %i ponto"
 msgstr[1] "Total da Equipa: %i pontos"
+msgstr[2] "Total da Equipa: %i pontos"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
@@ -219,6 +222,7 @@ msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Mantém-na por mais %i minuto para vencer o jogo."
 msgstr[1] "Mantém-na por mais %i minutos para vencer o jogo."
+msgstr[2] "Mantém-na por mais %i minutos para vencer o jogo."
 
 #: ../../data/scripting/win_conditions/territorial_functions.lua:264
 #, lua-format
@@ -231,6 +235,7 @@ msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Ainda tens %i minuto para impedir uma vitória."
 msgstr[1] "Ainda tens %i minutos para impedir uma vitória."
+msgstr[2] "Ainda tens %i minutos para impedir uma vitória."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
@@ -270,6 +275,7 @@ msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuto"
 msgstr[1] "%i minutos"
+msgstr[2] "%i minutos"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:363
@@ -277,6 +283,7 @@ msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% horas e %2%"
 msgstr[1] "%1% horas e %2%"
+msgstr[2] "%1% horas e %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:369
@@ -284,6 +291,7 @@ msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% hora"
 msgstr[1] "%1% horas"
+msgstr[2] "%1% horas"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
 #: ../../data/scripting/win_conditions/win_condition_functions.lua:372
@@ -357,6 +365,7 @@ msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i árvore"
 msgstr[1] "%i árvores"
+msgstr[2] "%i árvores"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:67

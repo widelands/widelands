@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Любомир Василев, 2016-2017\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
@@ -425,15 +425,16 @@ msgstr "Лофтомор и Сидолий пристигат"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:227
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:273
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:315
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:325
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:346
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:356
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:365
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:321
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:371
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:440
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:452
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "Jundlina"
 msgstr "Юндлина"
 
@@ -478,7 +479,7 @@ msgstr "Нека Сатул те стопли, Юндлина! Съгласен 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Jundlina is Satisfied"
 msgstr "Юндлина е доволна"
 
@@ -509,9 +510,9 @@ msgstr "Нека Сатул те стопли, Юндлина. Мога ли д�
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:288
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:304
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:345
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:451
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
 msgid "Jundlina Replies"
 msgstr "Юндлина отговаря"
 
@@ -659,11 +660,35 @@ msgid ""
 msgstr "Обмислих го, Сидолий, и мисля, че е време. Това ще бъде приоритетът ни сега. Скоро ще получиш промишлеността си!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
+msgid "Loftomor Reports"
+msgstr ""
+
+#. TRANSLATORS: Loftomor
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
+msgid ""
+"May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
+"toolsmiths will produce new tools in an instant."
+msgstr ""
+
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
+msgid "Jundlina Reminds"
+msgstr ""
+
+#. TRANSLATORS: Jundlina
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
+msgid ""
+"May Satul warm you as well, Loftomor. That is good news to hear. However "
+"please remember that our toolsmiths need to be equipped with a saw. Making "
+"tools is an art for us, requiring a precise tool like a saw, not a brutal "
+"hammer like for the other tribes."
+msgstr ""
+
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
 msgstr "Юндлина пише писмо"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:332
 msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
@@ -671,22 +696,22 @@ msgid ""
 msgstr "Научих, че мините ни са започнали работа. След като вече можем да ковем оръжия, ще изпратя писмо на Сидолий, за да му кажа, че е време да построим казарма и да започнем да набираме войници."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
 msgstr "Днес видях първите наборници да се събират пред новата казарма. Ако всичко върви по план, те скоро трябва да започнат да се обучават."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid "Jundlina Summons Sidolus"
 msgstr "Юндлина привиква Сидолий"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:349
 msgid "Jundlina is Angry"
 msgstr "Юндлина е бясна"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:351
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers "
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -694,12 +719,12 @@ msgid ""
 " is inexcusable! Explain this, if you will!"
 msgstr "Какво е това, което чувам, Сидолий? Разбрах, че войниците ти се държат непорядъчно и тормозят хората. Защо позволяваш това? Те служат на общото благо и не трябва да злоупотребяват със силите си. Това е непростимо! Обясни ми какво става!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
 msgstr "Сидолий изглежда се разкайва"
 
 #. TRANSLATORS: Sidolus
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:357
 msgid ""
 "I agree with you and I have punished the troublemakers severely. But it is "
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -710,7 +735,7 @@ msgid ""
 msgstr "Съгласен съм с теб и вече наказах строго размирниците. Но е много трудно да държа мъжете си мирни: те скучаят и няма какво да правят. Бих искал да подобря дисциплината им. Мисля, че ако има какво да правят, ще се концентрират върху задълженията си. Ще имам нужда от тъмница и лабиринт за тях. Вече имам плановете, но мисля, че няма да са евтини."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:363
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. You"
 " shall get your buildings. But note that I will not tolerate any rogue "
@@ -718,12 +743,12 @@ msgid ""
 "them. Dismissed."
 msgstr "Цената и трудът не ме плашат, стига да хората ти да се укротят. Ще получиш сградите си. Но имай предвид, че няма да търпя подивели войници. Ако нещо подобно се случи отново, ще държа теб отговорен. Свободен си."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
 msgstr "Юндлина получава писмо"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:373
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly finished labyrinth will be tomorrow. The dungeon is done as well and "
@@ -732,12 +757,12 @@ msgid ""
 "workload will keep them from bullying the civilian population."
 msgstr "Получих покана от Сидолий. Утре ще бъде първият тренировъчен ден в новопостроения лабиринт. Тъмницата също е готова и скоро ще започне да работи. Очаквам утрешния ден с нетърпение. Интересно ми е как се тренират войниците ни и дали допълнителното натоварване ще ги държи далеч от гражданите."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
 msgstr "Юндлина размишлява относно икономиката"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
@@ -745,24 +770,24 @@ msgid ""
 msgstr "Хората се оплакват от претъпканите улици и бавният транспорт. Трябва да помогнем на нашите носачите по пътищата. Реших да построя ферма за коне, така че конете да помогнат с тежките стоки."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
 msgstr "Друг начин да разтоварим пътищата би бил да построим още складове. Планината вече е наша, така че може би ще е добре да построим един склад на платото, за да не се налага да пренасяме всичко нагоре-надолу по склоновете."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:397
 msgid "A Dangerous Discovery"
 msgstr "Опасно откритие"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:383
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
 msgstr "Юндлина размишлява"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried "
 "about this discovery. The building is not of any kind I’ve ever seen. It is "
@@ -773,7 +798,7 @@ msgid ""
 msgstr "Открихме стара сграда, разрушена и изгорена. Откритието ме притеснява. Не съм виждал подобна сграда досега. Определено не е проектирана от атландски архитект. Сградата е груба и строежът ѝ е немарлив. Но материалите са много издръжливи: дървото, използвано за сградата изглежда обгорено по някакъв странен начин, преди да бъде използвано в строежа, и е твърдо като камък."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
 msgid ""
 "The implications frighten me. Are there others on this island? Where are "
 "they then? They work with fire, are they praying to Satul too? Are they "
@@ -782,23 +807,23 @@ msgid ""
 msgstr "Притеснена съм. Има ли и други на този остров? Къде са те тогава? Очевидно работят с огън, дали и те почитат Сатул? Приятели ли са или врагове? И защо е изгорена тази сграда? Дали е имало война на острова? Дали и в момента няма война?"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:406
 msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
 msgstr "Трябва да подобрим военните си способности. Ако на острова има врагове, трябва да бъдем подготвени за срещата с тях. Трябва да подсилим и укрепленията на границите си."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:399
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Another Building"
 msgstr "Втора сграда"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:415
 msgid "Jundlina is Worried"
 msgstr "Юндлина е притеснена"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:417
 msgid ""
 "We found one more building of this strange making. We have yet to see any of"
 " its builders. But obviously there has been a community on this island "
@@ -807,12 +832,12 @@ msgid ""
 "us unprepared."
 msgstr "Открихме още една сграда от този странен вид. Но все още не сме видели строителите ѝ. Явно е, че на този остров е имало общност, и че тя е имала военна сила. Трябва да разбера от генералите ми какво е военното ни състояние. Няма да позволя на потенциалния враг да ни хване неподготвени."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
 msgid "One More Building"
 msgstr "Още една сграда"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:428
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built "
 "them once had complete control over the island. But I am no longer so scared"
@@ -822,12 +847,12 @@ msgid ""
 " without obvious dangers, I am feeling very much at home here already."
 msgstr "И още една от тези сгради. Вече знаем, че племето, което ги е построило, е имало пълен контрол над острова. Но вече не се страхувам от потенциални врагове. Вече познаваме голяма част от острова и няма следи от тази древна икономика. Започвам да се успокоявам, но няма да отслабвам защитата ни, докато продължаваме да изследваме този красив остров. Но без явна заплаха, вече почти се чувствам като у дома си тук."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 msgid "The Water is Rising!"
 msgstr "Водата се надига!"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me "
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -835,12 +860,12 @@ msgid ""
 "mountains. How can we escape?"
 msgstr "Нека Сатул ни спаси! Лутас все още се опитва да стигне до нас. Един от разузнавачите ми каза, че океанът се надига бързо. Трябва да се преместим по-нависоко и да евакуираме всички и да пренесем колкото се може повече стоки от щаба високо в планините. Как можем да се измъкнем?"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:445
 msgid "A Young Man Approaches"
 msgstr "Един млад мъж се изправя"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:433
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:448
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
@@ -849,19 +874,19 @@ msgid ""
 msgstr "Нека Сатул те стопли, Юндлина. Името ми е Остур и строя кораби. Изобретих нов вид кораб: по-малък от тези, с които сме свикнали, но много по-здрав. Убеден съм, че ако построим такива кораби правилно, ще можем да плаваме много по-надалеч и може би да се измъкнем от влиянието на Лутас."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:454
 msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
 msgstr "Нямаме време, Остур. Водата се надига твърде бързо и ако построим корабите на брега, те ще изчезнат в морето, преди още да са заплавали. Опасявам се, че сме обречени!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Ostur Seems Confident"
 msgstr "Остур изглежда уверен"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:453
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:468
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big lake"
 " at the top of the mountain. I suggest we build the ships in this lake and "
@@ -870,14 +895,14 @@ msgid ""
 msgstr "Мой приятел изследва острова самостоятелно и казва, че на върха на планината има голямо езеро. Предлагам да построим корабите там и да изчакаме, докато островът под нас потъне. Тогава ще можем да отплаваме. Това е дързък план, но смятам, че може да проработи."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
 msgstr "Твоята червена коса е знак от огнения бог. Ще ти повярвам и ще подкрепя плана ти. Оцеляването ни сега е в твоите ръце, Остур."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid ""
 "Swift now, we need a house for Ostur next to the lake, and we need planks, "
 "logs and spidercloth for the construction there. Forget about everything "
@@ -885,12 +910,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "По-бързо, нуждаем се от къща за Остур близо до езерото, както и от дъски, дървени трупи и паяжинен плат за строителството там. Забравете за всичко друго. Тези стоки трябва да стигнат до върха на планината преди складовете ни да бъдат погълнати от морето."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgid "Jundlina is Relieved"
 msgstr "Юндлина е облекчена"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:488
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -900,29 +925,29 @@ msgid ""
 msgstr "Слава на Сатул! Остур, младият корабостроител, успя. Имаме три кораба – и никога не съм виждала толкова здрави кораби – с достатъчно място да пренесат всички ни и дори малко стоки. Спасението идва тъкмо навреме: Лутас се кани да погълне остатъка от този остров. Водата се покачва все по-бързо. Но вече можем да се измъкнем и да започнем на чисто в някоя далечна страна…"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:491
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "Очаквам пътят да е дълъг, но накрая ще намерим земята на Сатул. Това обещах на хората си. И на себе си."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:492
 msgid "Congratulations"
 msgstr "Поздравления"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:493
 msgid ""
-"You have won this mission. Continue with the next one or keep playing for as"
-" long as you like."
-msgstr "Вие завършихте тази мисия. Продължете към следващата или останете и играйте колкото искате."
+"You have completed this mission. You may continue playing if you wish, "
+"otherwise move on to the next mission."
+msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:501
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Загубена е сграда!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:502
 msgid "We lost a building to the ocean!"
 msgstr "Океанът погълна една от сградите ни!"

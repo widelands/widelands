@@ -16,7 +16,7 @@
 # Madkat Here, 2015
 # Madkat Here, 2015-2016
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Walter Benkel <tromaster@gmail.com>, 2020-2021
@@ -25,15 +25,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-05-01 03:54+0000\n"
+"POT-Creation-Date: 2022-07-19 04:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2021\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
@@ -690,31 +690,31 @@ msgid "Barrier"
 msgstr "Muralla"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:42
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your barrier."
 msgstr "Tus soldados han ocupado tu muralla."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:44
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:47
 msgctxt "empire_building"
 msgid "Your barrier discovered an aggressor."
 msgstr "Tu muralla ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:46
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:49
 msgctxt "empire_building"
 msgid "Your barrier is under attack."
 msgstr "Tu muralla está siendo atacada."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:48
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the barrier."
 msgstr "El enemigo ha derrotado a tus soldados en la muralla."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:50
+#: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the barrier."
 msgstr "Tus soldados derrotaron al enemigo en la muralla."
@@ -726,31 +726,31 @@ msgid "Blockhouse"
 msgstr "Fortín"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:47
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:50
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your blockhouse."
 msgstr "Tus soldados han ocupado tu fortín."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:49
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:52
 msgctxt "empire_building"
 msgid "Your blockhouse discovered an aggressor."
 msgstr "Tu fortín ha descubierto a un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:51
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:54
 msgctxt "empire_building"
 msgid "Your blockhouse is under attack."
 msgstr "Tu fortín está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:53
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:56
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the blockhouse."
 msgstr "El enemigo ha derrotado a tus soldados en el fortín."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:55
+#: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:58
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the blockhouse."
 msgstr "Tus soldados derrotaron al enemigo en el fortín"
@@ -762,31 +762,31 @@ msgid "Castle"
 msgstr "Castillo"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:28
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:31
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your castle."
 msgstr "Tus soldados han ocupado tu castillo."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:30
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:33
 msgctxt "empire_building"
 msgid "Your castle discovered an aggressor."
 msgstr "Tu castillo ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:32
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:35
 msgctxt "empire_building"
 msgid "Your castle is under attack."
 msgstr "Tu castillo está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:34
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:37
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the castle."
 msgstr "El enemigo ha derrotado a tus soldados en el castillo."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:36
+#: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:39
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the castle."
 msgstr "Tus soldados derrotaron al enemigo en el castillo."
@@ -798,31 +798,31 @@ msgid "Fortress"
 msgstr "Fortaleza"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:72
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:73
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your fortress."
 msgstr "Tus soldados han ocupado tu fortaleza."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:74
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:75
 msgctxt "empire_building"
 msgid "Your fortress discovered an aggressor."
 msgstr "Tu fortaleza ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:76
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:77
 msgctxt "empire_building"
 msgid "Your fortress is under attack."
 msgstr "Tu fortaleza está siendo atacada."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:78
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:79
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the fortress."
 msgstr "El enemigo ha derrotado a tus soldados en la fortaleza."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:80
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:81
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the fortress."
 msgstr "Tus soldados derrotaron al enemigo en la fortaleza."
@@ -834,31 +834,31 @@ msgid "Outpost"
 msgstr "Puesto de Avanzada"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:56
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:59
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your outpost."
 msgstr "Tus soldados han ocupado tu puesto de avanzada."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:58
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:61
 msgctxt "empire_building"
 msgid "Your outpost discovered an aggressor."
 msgstr "Tu puesto de avanzada ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:60
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:63
 msgctxt "empire_building"
 msgid "Your outpost is under attack."
 msgstr "Tu puesto de avanzada está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:62
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:65
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the outpost."
 msgstr "El enemigo ha derrotado a tus soldados en el puesto de avanzada."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:64
+#: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:67
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the outpost."
 msgstr "Tus soldados derrotaron al enemigo en el puesto de avanzada."
@@ -870,31 +870,31 @@ msgid "Sentry"
 msgstr "Centinela"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:42
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:45
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your sentry."
 msgstr "Tus soldados han ocupado tu centinela."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:44
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:47
 msgctxt "empire_building"
 msgid "Your sentry discovered an aggressor."
 msgstr "Tu centinela ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:46
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgctxt "empire_building"
 msgid "Your sentry is under attack."
 msgstr "Tu centinela está siendo atacado."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:48
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:51
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the sentry."
 msgstr "El enemigo ha derrotado a tus soldados en el centinela."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
+#: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the sentry."
 msgstr "Tus soldados derrotaron al enemigo en el centinela."
@@ -906,31 +906,31 @@ msgid "Tower"
 msgstr "Torre"
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:52
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:53
 msgctxt "empire_building"
 msgid "Your soldiers have occupied your tower."
 msgstr "Tus soldados han ocupado tu torre."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:54
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:55
 msgctxt "empire_building"
 msgid "Your tower discovered an aggressor."
 msgstr "Tu torre ha descubierto un agresor."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:56
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:57
 msgctxt "empire_building"
 msgid "Your tower is under attack."
 msgstr "Tu torre está siendo atacada."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:58
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:59
 msgctxt "empire_building"
 msgid "The enemy defeated your soldiers at the tower."
 msgstr "El enemigo ha derrotado a tus soldados en la torre."
 
 #. TRANSLATORS: Message sent by an Empire military site
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:60
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:61
 msgctxt "empire_building"
 msgid "Your soldiers defeated the enemy at the tower."
 msgstr "Tus soldados derrotaron al enemigo en la torre."
@@ -1189,7 +1189,7 @@ msgstr "Plantación de Mandioca"
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:53
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:48
-#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:69
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:84
@@ -1214,19 +1214,19 @@ msgstr "Plantación de Mandioca"
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:40
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:36
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:39
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:87
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:50
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:46
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:42
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:58
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:58
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:82
@@ -1267,8 +1267,8 @@ msgstr "Cosechando mandioca"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgid "No Fields"
@@ -1280,8 +1280,8 @@ msgstr "Sin Campos"
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:93
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgid "Out of Fields"
@@ -1426,8 +1426,8 @@ msgstr "Planta de Conservación de Alimentos"
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:70
 #: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:48
-#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
 msgid "preparing a ration"
 msgstr "preparando la ración"
@@ -1475,10 +1475,10 @@ msgstr "Vivienda de Buscadora de Oro"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:77
@@ -1490,8 +1490,8 @@ msgstr "minando oro"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:83
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:98
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:81
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
 msgid "No Gold"
@@ -1502,8 +1502,8 @@ msgstr "Sin Oro"
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
 msgid "Main Gold Vein Exhausted"
@@ -1577,7 +1577,7 @@ msgstr "Cabaña de Conservacionista de Jungla"
 #: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:45
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:52
 msgid "planting trees"
 msgstr "plantando árboles"
@@ -1598,7 +1598,7 @@ msgstr "cortando lianas"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:59
 msgid "No Trees"
 msgstr "Sin Árboles"
@@ -1705,7 +1705,7 @@ msgstr "Astillero"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:60
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
 msgid "constructing a ship"
 msgstr "construyendo un barco"
@@ -1716,32 +1716,36 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Taller de Piedra"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:206
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:124
 msgid "making a shovel"
 msgstr "fabricando una pala"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
 msgid "making a felling ax"
 msgstr "la fabricación del hacha de talar"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:170
 msgid "making a pick"
 msgstr "fabricando un pico"
 
@@ -1750,23 +1754,26 @@ msgstr "fabricando un pico"
 msgid "making a machete"
 msgstr "fabricando un machete"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:175
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:152
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:158
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:179
 msgid "making kitchen tools"
 msgstr "fabricando utensilios de cocina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:134
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:190
 msgid "making a hammer"
 msgstr "fabricando un martillo"
@@ -1777,9 +1784,9 @@ msgstr "fabricando un martillo"
 msgid "making a chisel"
 msgstr "fabricando un cincel"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1823,7 +1830,7 @@ msgstr "picando granito"
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:44
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:45
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:59
 msgid "No Rocks"
 msgstr "Sin Rocas"
@@ -1831,7 +1838,7 @@ msgstr "Sin Rocas"
 #: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:46
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:60
 msgid "Out of Rocks"
 msgstr "Sin rocas"
@@ -1856,8 +1863,8 @@ msgstr "Mina de Piedra"
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:106
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:110
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
@@ -1907,7 +1914,7 @@ msgstr "Cabaña de Recolectora de Aqua"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:50
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgid "No Water"
 msgstr "Sin Agua"
@@ -1915,7 +1922,7 @@ msgstr "Sin Agua"
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
 msgid "Out of Water"
 msgstr "Sin Agua"
@@ -1956,7 +1963,7 @@ msgstr "Cabaña de Leñadora"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:37
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:37
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:40
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:50
 msgid "felling trees"
 msgstr "derribar arboles"
@@ -1964,7 +1971,7 @@ msgstr "derribar arboles"
 #: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:47
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:60
 msgid "Out of Trees"
 msgstr "Sin Árboles"
@@ -2052,7 +2059,7 @@ msgstr "Fosa de Carbonización"
 #. TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:68
 msgid "producing coal"
 msgstr "produciendo carbón"
@@ -2072,10 +2079,10 @@ msgstr "Mina de Carbón"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:100
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
@@ -2087,8 +2094,8 @@ msgstr "minando carbón"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:102
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
 msgid "No Coal"
@@ -2098,8 +2105,8 @@ msgstr "Sin Carbón"
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:103
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:85
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:84
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
 msgid "Main Coal Vein Exhausted"
@@ -2182,7 +2189,7 @@ msgstr "Casa de piscicultor"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
 msgid "No Fish"
 msgstr "Sin Pescado"
@@ -2190,7 +2197,7 @@ msgstr "Sin Pescado"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:63
 msgid "Out of Fish"
 msgstr "No quedan peces"
@@ -2217,7 +2224,7 @@ msgstr "Casa del Pescador"
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:40
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:43
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:53
 msgid "fishing"
@@ -2282,14 +2289,14 @@ msgstr "Casa de Cazador"
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:39
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:57
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:39
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:52
 msgid "hunting"
 msgstr "cazando"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:70
 msgid "No Game"
 msgstr "Sin Presas"
@@ -2297,7 +2304,7 @@ msgstr "Sin Presas"
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:72
 msgid "Out of Game"
 msgstr "Sin caza"
@@ -2324,10 +2331,10 @@ msgstr "Mina de Hierro"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:76
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:52
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:60
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:79
@@ -2338,8 +2345,8 @@ msgstr "minando hierro"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:86
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:99
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
 msgid "No Iron"
@@ -2349,8 +2356,8 @@ msgstr "Sin Hierro"
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:95
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:85
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:83
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
 msgid "Main Iron Vein Exhausted"
@@ -2388,7 +2395,7 @@ msgstr "Cantera"
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:36
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:50
 msgid "quarrying granite"
 msgstr "excavando granito"
@@ -2408,7 +2415,7 @@ msgstr "Aserradero"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sawing logs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/sawmill/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:50
+#: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:56
 msgid "sawing logs"
 msgstr "aserrando troncos"
 
@@ -2477,7 +2484,7 @@ msgstr "Herrería"
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:103
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:98
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:168
 msgid "making a bread paddle"
 msgstr "fabricando una pala de horno"
@@ -2491,7 +2498,7 @@ msgstr "fabricando un par de cubos"
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:92
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:127
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:110
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:201
 msgid "making fire tongs"
 msgstr "fabricando tenazas"
@@ -2522,14 +2529,14 @@ msgstr "fabricando pinzas de ordeñar"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:176
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:182
 msgid "making a saw"
 msgstr "fabricando una sierra"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:199
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:194
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:113
 msgid "making a scythe"
 msgstr "fabricando una guadaña"
@@ -2680,7 +2687,7 @@ msgstr "preparando el tentempié"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:87
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:61
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:67
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:80
 msgid "preparing a meal"
 msgstr "preparando la comida"
@@ -2757,13 +2764,13 @@ msgstr "Granja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
 msgid "planting wheat"
 msgstr "plantando trigo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:82
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
 msgid "harvesting wheat"
 msgstr "cosechando trigo"
 
@@ -2854,7 +2861,7 @@ msgstr "Taller de Yelmos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:123
 msgid "forging a helmet"
 msgstr "forjando un timón"
@@ -2958,14 +2965,14 @@ msgstr "Taller del Metal"
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing rod because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:139
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:122
 msgid "making a fishing rod"
 msgstr "fabricando una caña de pesca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:163
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:140
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:146
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:146
 msgid "making a hunting spear"
 msgstr "fabricando una lanza de caza"
@@ -2978,7 +2985,7 @@ msgstr "Micro Cervecería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:82
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:89
 msgid "brewing beer"
@@ -3117,19 +3124,19 @@ msgstr "Taller de Armaduras"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:94
 msgid "forging a suit of armor"
 msgstr "la forja de una armadura"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:106
 msgid "forging a suit of chain armor"
 msgstr "forjando una cota de malla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:118
 msgid "forging a suit of gilded armor"
 msgstr "la forja de una armadura dorada"
 
@@ -3175,7 +3182,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Mina de Carbón"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:106
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3188,7 +3195,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Mina de Carbón Profunda"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:82
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:86
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3203,7 +3210,7 @@ msgid "Donkey Farm"
 msgstr "Granja de Asnos"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing donkeys because ...
-#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:55
 msgctxt "empire_building"
 msgid "rearing donkeys"
 msgstr "criando burros"
@@ -3214,7 +3221,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Granja"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -3232,7 +3239,7 @@ msgctxt "empire_building"
 msgid "Fisher’s House"
 msgstr "Casa del Pescador"
 
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -3251,7 +3258,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Mina de Oro"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:101
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:105
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3264,7 +3271,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Mina de Oro Profunda"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:84
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3279,7 +3286,7 @@ msgid "Hunter’s House"
 msgstr "Casa de Cazador"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -3298,7 +3305,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Mina de Hierro"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:106
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3311,7 +3318,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Mina de Hierro Profunda"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:85
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3325,7 +3332,7 @@ msgctxt "empire_building"
 msgid "Lumberjack’s House"
 msgstr "Casa del Leñador"
 
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:51
 msgctxt "empire_building"
 msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
@@ -3340,25 +3347,25 @@ msgid "Marble Mine"
 msgstr "Cantera de Mármol"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:114
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:73
 msgid "mining marble"
 msgstr "minando mármol"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:140
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:144
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:91
 msgid "No Marble"
 msgstr "Sin Mármol"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:141
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:145
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:92
 msgid "Main Marble Vein Exhausted"
 msgstr "Veta Principal de Mármol Agotada"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:143
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:147
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3372,7 +3379,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Gran Cantera de Mármol"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:94
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3387,7 +3394,7 @@ msgid "Mill"
 msgstr "Molino"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
-#: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:67
 msgid "grinding wheat"
 msgstr "moliendo trigo"
 
@@ -3398,7 +3405,7 @@ msgid "Piggery"
 msgstr "Pocilga"
 
 #. TRANSLATORS: Completed/Skipped/Did not start raising pigs because ...
-#: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/piggery/init.lua:57
 msgid "raising pigs"
 msgstr "cría de cerdos"
 
@@ -3409,11 +3416,11 @@ msgid "Quarry"
 msgstr "Cantera"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:60
 msgid "quarrying marble"
 msgstr "excavando mármol"
 
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:71
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
@@ -3438,7 +3445,7 @@ msgid "Sheep Farm"
 msgstr "Granja de Ovejas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:57
 msgid "breeding sheep"
 msgstr "alimentando ovinos"
 
@@ -3462,7 +3469,7 @@ msgstr "Mampostería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:51
+#: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:57
 msgid "sculpting a marble column"
 msgstr "la escultura de una columna de mármol"
 
@@ -3479,7 +3486,7 @@ msgid "Toolsmithy"
 msgstr "Herrería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:80
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:86
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:135
 msgid "making a basket"
 msgstr "fabricando una cesta"
@@ -3492,17 +3499,17 @@ msgstr "Viñedo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:57
 msgid "planting grapevines"
 msgstr "plantando vid"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:65
 msgid "harvesting grapes"
 msgstr "cosechando uvas"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -3517,30 +3524,30 @@ msgstr "Armería"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:83
 msgid "forging a wooden spear"
 msgstr "la forja de una lanza de madera"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:98
 msgid "forging a spear"
 msgstr "la forja de una lanza"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:107
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:113
 msgid "forging an advanced spear"
 msgstr "la forja de una lanza avanzada"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:122
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:128
 msgid "forging a heavy spear"
 msgstr "la forja de una lanza pesada"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a war spear because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:137
+#: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:143
 msgid "forging a war spear"
 msgstr "la forja de una lanza de guerra"
 
@@ -3556,7 +3563,7 @@ msgctxt "empire_building"
 msgid "Well"
 msgstr "Pozo"
 
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "El transportista trabajando en este pozo no puede encontrar agua en su pozo."
@@ -3568,7 +3575,7 @@ msgid "Winery"
 msgstr "Bodega"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
-#: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:59
 msgid "making wine"
 msgstr "haciendo vino"
 
@@ -3673,10 +3680,10 @@ msgstr "Sin Flores"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "El apicultor trabajando en la casa de apicultura no puede encontrar ningún campo con flores o arbustos en su área de trabajo. Deberías considerar construir otra granja o granja de bayas cerca, o desarmar o destruir este edificio."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -4202,8 +4209,8 @@ msgstr "Prado de Entrenamiento"
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:86
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:90
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:46
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:49
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:91
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:111
 msgid "sleeping"
@@ -4468,15 +4475,15 @@ msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:98
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:54
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:57
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "mejorando evasión de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:116
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:88
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:215
 msgctxt "empire_building"
 msgid "No soldier to train!"
 msgstr "¡No hay soldados para entrenar!"
@@ -4484,8 +4491,8 @@ msgstr "¡No hay soldados para entrenar!"
 #. TRANSLATORS: Empire training site tooltip when none of the present soldiers
 #. match the current training program
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:118
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:90
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:217
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
 msgstr "¡No se han encontrado soldados para este nivel de entrenamiento!"
@@ -4497,7 +4504,7 @@ msgid "Colosseum"
 msgstr "Coliseo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:67
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:70
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "mejorando evasión de soldado de nivel 1 a nivel 2"
@@ -4509,49 +4516,49 @@ msgid "Training Camp"
 msgstr "Campo de entrenamiento"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:96
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:99
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "mejorando ataque de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:110
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:113
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "mejorando ataque de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:124
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:127
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "mejorando ataque de soldado de nivel 2 a nivel 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:138
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:141
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "mejorando ataque de soldado de nivel 3 a nivel 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:152
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:155
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "mejorando vida de soldado de nivel 0 a nivel 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:165
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:168
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "mejorando vida de soldado de nivel 1 a nivel 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:179
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:182
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
 msgstr "mejorando vida de soldado de nivel 2 a nivel 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:193
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:196
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
 msgstr "mejorando vida de soldado de nivel 3 a nivel 4"
@@ -5269,7 +5276,6 @@ msgstr "Balsa (Joven)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
-#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5422,13 +5428,12 @@ msgstr "El Equipo de Desarrollo de Widelands"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/amazons/init.lua:13
-msgid "Amazons (experimental)"
-msgstr "Amazonas (experimental)"
+msgid "Amazons"
+msgstr ""
 
 #: ../../data/tribes/initialization/amazons/init.lua:14
-msgid ""
-"The people of the amazonian jungle. This tribe is still under development."
-msgstr "El pueblo de la jungla amazónica. Esta tribu esta todavía en desarrollo."
+msgid "The people of the amazonian jungle."
+msgstr ""
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. is the maximum number of soldier slots in the building.
@@ -5438,6 +5443,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% guerrera (+%2%)"
 msgstr[1] "%1% guerreras (+%2%)"
+msgstr[2] "%1% guerreras (+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
@@ -5446,6 +5452,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% guerrera"
 msgstr[1] "%1% guerreras"
+msgstr[2] "%1% guerreras"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5456,6 +5463,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) guerrera (+%3%)"
 msgstr[1] "%1%(+%2%) guerreras (+%3%)"
+msgstr[2] "%1%(+%2%) guerreras (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5465,6 +5473,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) guerrera"
 msgstr[1] "%1%(+%2%) guerreras"
+msgstr[2] "%1%(+%2%) guerreras"
 
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
@@ -5707,6 +5716,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
+msgstr[2] "%1% soldados (+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
@@ -5715,6 +5725,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldado"
 msgstr[1] "%1% soldados"
+msgstr[2] "%1% soldados"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5725,6 +5736,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
 msgstr[1] "%1%(+%2%) soldados (+%3%)"
+msgstr[2] "%1%(+%2%) soldados (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5734,6 +5746,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
+msgstr[2] "%1%(+%2%) soldados"
 
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
@@ -5761,6 +5774,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
+msgstr[2] "%1% soldados (+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
@@ -5769,6 +5783,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldado"
 msgstr[1] "%1% soldados"
+msgstr[2] "%1% soldados"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5779,6 +5794,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
 msgstr[1] "%1%(+%2%) soldados (+%3%)"
+msgstr[2] "%1%(+%2%) soldados (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5788,6 +5804,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
+msgstr[2] "%1%(+%2%) soldados"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5806,6 +5823,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
+msgstr[2] "%1% soldados (+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
@@ -5814,6 +5832,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldado"
 msgstr[1] "%1% soldados"
+msgstr[2] "%1% soldados"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5824,6 +5843,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
 msgstr[1] "%1%(+%2%) soldados (+%3%)"
+msgstr[2] "%1%(+%2%) soldados (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5833,6 +5853,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
+msgstr[2] "%1%(+%2%) soldados"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5851,6 +5872,7 @@ msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
 msgstr[0] "%1% soldado (+%2%)"
 msgstr[1] "%1% soldados (+%2%)"
+msgstr[2] "%1% soldados (+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
@@ -5859,6 +5881,7 @@ msgid "%1% soldier"
 msgid_plural "%1% soldiers"
 msgstr[0] "%1% soldado"
 msgstr[1] "%1% soldados"
+msgstr[2] "%1% soldados"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5869,6 +5892,7 @@ msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
 msgstr[0] "%1%(+%2%) soldado (+%3%)"
 msgstr[1] "%1%(+%2%) soldados (+%3%)"
+msgstr[2] "%1%(+%2%) soldados (+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5878,6 +5902,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%) soldado"
 msgstr[1] "%1%(+%2%) soldados"
+msgstr[2] "%1%(+%2%) soldados"
 
 #: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
@@ -5970,997 +5995,997 @@ msgstr "Putumayo"
 #: ../../data/tribes/ships/amazons/init.lua:55
 msgctxt "shipname"
 msgid "Acari"
-msgstr ""
+msgstr "Acari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:57
 msgctxt "shipname"
 msgid "Acre"
-msgstr ""
+msgstr "Acre"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:59
 msgctxt "shipname"
 msgid "Açuã"
-msgstr ""
+msgstr "Açuã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:61
 msgctxt "shipname"
 msgid "Acurauá"
-msgstr ""
+msgstr "Acurauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:63
 msgctxt "shipname"
 msgid "Aiari"
-msgstr ""
+msgstr "Aiari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:65
 msgctxt "shipname"
 msgid "Alalaú"
-msgstr ""
+msgstr "Alalaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:67
 msgctxt "shipname"
 msgid "Amanã"
-msgstr ""
+msgstr "Amanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:69
 msgctxt "shipname"
 msgid "Amapá"
-msgstr ""
+msgstr "Amapá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:71
 msgctxt "shipname"
 msgid "Andirá"
-msgstr ""
+msgstr "Andirá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:73
 msgctxt "shipname"
 msgid "Antimary"
-msgstr ""
+msgstr "Antimary"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:75
 msgctxt "shipname"
 msgid "Apoquitaua"
-msgstr ""
+msgstr "Apoquitaua"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:77
 msgctxt "shipname"
 msgid "Apuaú"
-msgstr ""
+msgstr "Apuaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:79
 msgctxt "shipname"
 msgid "Araçá"
-msgstr ""
+msgstr "Araçá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:81
 msgctxt "shipname"
 msgid "Arara"
-msgstr ""
+msgstr "Arara"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:83
 msgctxt "shipname"
 msgid "Ararirá"
-msgstr ""
+msgstr "Ararirá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:85
 msgctxt "shipname"
 msgid "Arauã"
-msgstr ""
+msgstr "Arauã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:87
 msgctxt "shipname"
 msgid "Aripuanã"
-msgstr ""
+msgstr "Aripuanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:89
 msgctxt "shipname"
 msgid "Arrojo"
-msgstr ""
+msgstr "Arrojo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:91
 msgctxt "shipname"
 msgid "Atiparaná"
-msgstr ""
+msgstr "Atiparaná"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:93
 msgctxt "shipname"
 msgid "Atucatiquini"
-msgstr ""
+msgstr "Atucatiquini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:95
 msgctxt "shipname"
 msgid "Autaz-mirim"
-msgstr ""
+msgstr "Autaz-mirim"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:97
 msgctxt "shipname"
 msgid "Badajós"
-msgstr ""
+msgstr "Badajós"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:99
 msgctxt "shipname"
 msgid "Bararati"
-msgstr ""
+msgstr "Bararati"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:101
 msgctxt "shipname"
 msgid "Biá"
-msgstr ""
+msgstr "Biá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:103
 msgctxt "shipname"
 msgid "Camaiú"
-msgstr ""
+msgstr "Camaiú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:105
 msgctxt "shipname"
 msgid "Camanaú"
-msgstr ""
+msgstr "Camanaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:107
 msgctxt "shipname"
 msgid "Canumã"
-msgstr ""
+msgstr "Canumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:109
 msgctxt "shipname"
 msgid "Capucapu"
-msgstr ""
+msgstr "Capucapu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:111
 msgctxt "shipname"
 msgid "Carabinani"
-msgstr ""
+msgstr "Carabinani"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:113
 msgctxt "shipname"
 msgid "Cauaburi"
-msgstr ""
+msgstr "Cauaburi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:115
 msgctxt "shipname"
 msgid "Caurés"
-msgstr ""
+msgstr "Caurés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:117
 msgctxt "shipname"
 msgid "Ciriquiri"
-msgstr ""
+msgstr "Ciriquiri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:119
 msgctxt "shipname"
 msgid "Coari"
-msgstr ""
+msgstr "Coari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:121
 msgctxt "shipname"
 msgid "Copatana"
-msgstr ""
+msgstr "Copatana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:123
 msgctxt "shipname"
 msgid "Coti"
-msgstr ""
+msgstr "Coti"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:125
 msgctxt "shipname"
 msgid "Cubate"
-msgstr ""
+msgstr "Cubate"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:127
 msgctxt "shipname"
 msgid "Cuiari"
-msgstr ""
+msgstr "Cuiari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:129
 msgctxt "shipname"
 msgid "Cuieiras"
-msgstr ""
+msgstr "Cuieiras"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:131
 msgctxt "shipname"
 msgid "Cuini"
-msgstr ""
+msgstr "Cuini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:133
 msgctxt "shipname"
 msgid "Cuniuá"
-msgstr ""
+msgstr "Cuniuá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:135
 msgctxt "shipname"
 msgid "Curicuriari"
-msgstr ""
+msgstr "Curicuriari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:137
 msgctxt "shipname"
 msgid "Curiuaú"
-msgstr ""
+msgstr "Curiuaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:139
 msgctxt "shipname"
 msgid "Curuçá"
-msgstr ""
+msgstr "Curuçá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:141
 msgctxt "shipname"
 msgid "Curuduri"
-msgstr ""
+msgstr "Curuduri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:143
 msgctxt "shipname"
 msgid "Curuquetê"
-msgstr ""
+msgstr "Curuquetê"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:145
 msgctxt "shipname"
 msgid "Daraá"
-msgstr ""
+msgstr "Daraá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:147
 msgctxt "shipname"
 msgid "Demini"
-msgstr ""
+msgstr "Demini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:149
 msgctxt "shipname"
 msgid "Dos Marmelos"
-msgstr ""
+msgstr "Dos Marmelos"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:151
 msgctxt "shipname"
 msgid "Eiru"
-msgstr ""
+msgstr "Eiru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:153
 msgctxt "shipname"
 msgid "Endimari"
-msgstr ""
+msgstr "Endimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:155
 msgctxt "shipname"
 msgid "Envira"
-msgstr ""
+msgstr "Envira"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:157
 msgctxt "shipname"
 msgid "Gregório"
-msgstr ""
+msgstr "Gregório"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:159
 msgctxt "shipname"
 msgid "Guaribe"
-msgstr ""
+msgstr "Guaribe"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:161
 msgctxt "shipname"
 msgid "Iá"
-msgstr ""
+msgstr "Iá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:163
 msgctxt "shipname"
 msgid "Iaco"
-msgstr ""
+msgstr "Iaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:165
 msgctxt "shipname"
 msgid "Içá"
-msgstr ""
+msgstr "Içá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:167
 msgctxt "shipname"
 msgid "Içana"
-msgstr ""
+msgstr "Içana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:169
 msgctxt "shipname"
 msgid "Inauini"
-msgstr ""
+msgstr "Inauini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:171
 msgctxt "shipname"
 msgid "Ipixuna"
-msgstr ""
+msgstr "Ipixuna"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:173
 msgctxt "shipname"
 msgid "Itanhauá"
-msgstr ""
+msgstr "Itanhauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:175
 msgctxt "shipname"
 msgid "Itaparaná"
-msgstr ""
+msgstr "Itaparaná"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:177
 msgctxt "shipname"
 msgid "Itaquai"
-msgstr ""
+msgstr "Itaquai"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:179
 msgctxt "shipname"
 msgid "Itucumã"
-msgstr ""
+msgstr "Itucumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:181
 msgctxt "shipname"
 msgid "Ituí"
-msgstr ""
+msgstr "Ituí"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:183
 msgctxt "shipname"
 msgid "Ituxi"
-msgstr ""
+msgstr "Ituxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:185
 msgctxt "shipname"
 msgid "Jacaré"
-msgstr ""
+msgstr "Jacaré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:187
 msgctxt "shipname"
 msgid "Jamicia"
-msgstr ""
+msgstr "Jamicia"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:189
 msgctxt "shipname"
 msgid "Jandiatuba"
-msgstr ""
+msgstr "Jandiatuba"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:191
 msgctxt "shipname"
 msgid "Japurá"
-msgstr ""
+msgstr "Japurá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:193
 msgctxt "shipname"
 msgid "Jaquirana"
-msgstr ""
+msgstr "Jaquirana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:195
 msgctxt "shipname"
 msgid "Jari"
-msgstr ""
+msgstr "Jari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:197
 msgctxt "shipname"
 msgid "Jatapu"
-msgstr ""
+msgstr "Jatapu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:199
 msgctxt "shipname"
 msgid "Jatuarana"
-msgstr ""
+msgstr "Jatuarana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:201
 msgctxt "shipname"
 msgid "Jaú"
-msgstr ""
+msgstr "Jaú"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:203
 msgctxt "shipname"
 msgid "Jauaperi"
-msgstr ""
+msgstr "Jauaperi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:205
 msgctxt "shipname"
 msgid "Javary"
-msgstr ""
+msgstr "Javary"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:207
 msgctxt "shipname"
 msgid "Juami"
-msgstr ""
+msgstr "Juami"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:209
 msgctxt "shipname"
 msgid "Jufari"
-msgstr ""
+msgstr "Jufari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:211
 msgctxt "shipname"
 msgid "Juma"
-msgstr ""
+msgstr "Juma"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:213
 msgctxt "shipname"
 msgid "Juruá"
-msgstr ""
+msgstr "Juruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:215
 msgctxt "shipname"
 msgid "Juruena"
-msgstr ""
+msgstr "Juruena"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:217
 msgctxt "shipname"
 msgid "Jurupari"
-msgstr ""
+msgstr "Jurupari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:219
 msgctxt "shipname"
 msgid "Jutai"
-msgstr ""
+msgstr "Jutai"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:221
 msgctxt "shipname"
 msgid "Jutaizinho"
-msgstr ""
+msgstr "Jutaizinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:223
 msgctxt "shipname"
 msgid "Liberdade"
-msgstr ""
+msgstr "Liberdade"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:225
 msgctxt "shipname"
 msgid "Luna"
-msgstr ""
+msgstr "Luna"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:227
 msgctxt "shipname"
 msgid "Madeira"
-msgstr ""
+msgstr "Madeira"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:229
 msgctxt "shipname"
 msgid "Madeirinha"
-msgstr ""
+msgstr "Madeirinha"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:231
 msgctxt "shipname"
 msgid "Maiá"
-msgstr ""
+msgstr "Maiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:233
 msgctxt "shipname"
 msgid "Maici"
-msgstr ""
+msgstr "Maici"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:235
 msgctxt "shipname"
 msgid "Mamiá"
-msgstr ""
+msgstr "Mamiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:237
 msgctxt "shipname"
 msgid "Mamoriá"
-msgstr ""
+msgstr "Mamoriá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:239
 msgctxt "shipname"
 msgid "Mamuru"
-msgstr ""
+msgstr "Mamuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:241
 msgctxt "shipname"
 msgid "Manacapuru"
-msgstr ""
+msgstr "Manacapuru"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:243
 msgctxt "shipname"
 msgid "Manicoré"
-msgstr ""
+msgstr "Manicoré"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:245
 msgctxt "shipname"
 msgid "Manicorezinho"
-msgstr ""
+msgstr "Manicorezinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:247
 msgctxt "shipname"
 msgid "Mapari"
-msgstr ""
+msgstr "Mapari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:249
 msgctxt "shipname"
 msgid "Mapiá Grande"
-msgstr ""
+msgstr "Mapiá Grande"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:251
 msgctxt "shipname"
 msgid "Maracanã"
-msgstr ""
+msgstr "Maracanã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:253
 msgctxt "shipname"
 msgid "Marari"
-msgstr ""
+msgstr "Marari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:255
 msgctxt "shipname"
 msgid "Marauiá"
-msgstr ""
+msgstr "Marauiá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:257
 msgctxt "shipname"
 msgid "Marié"
-msgstr ""
+msgstr "Marié"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:259
 msgctxt "shipname"
 msgid "Mariepauá"
-msgstr ""
+msgstr "Mariepauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:261
 msgctxt "shipname"
 msgid "Marimari"
-msgstr ""
+msgstr "Marimari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:263
 msgctxt "shipname"
 msgid "Mataurá"
-msgstr ""
+msgstr "Mataurá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:265
 msgctxt "shipname"
 msgid "Matupiri"
-msgstr ""
+msgstr "Matupiri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:267
 msgctxt "shipname"
 msgid "Maués Açu"
-msgstr ""
+msgstr "Maués Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:269
 msgctxt "shipname"
 msgid "Mineruázinho"
-msgstr ""
+msgstr "Mineruázinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:271
 msgctxt "shipname"
 msgid "Muaco"
-msgstr ""
+msgstr "Muaco"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:273
 msgctxt "shipname"
 msgid "Mucum"
-msgstr ""
+msgstr "Mucum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:275
 msgctxt "shipname"
 msgid "Mutum"
-msgstr ""
+msgstr "Mutum"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:277
 msgctxt "shipname"
 msgid "Nhamundá"
-msgstr ""
+msgstr "Nhamundá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:279
 msgctxt "shipname"
 msgid "Paciá"
-msgstr ""
+msgstr "Paciá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:281
 msgctxt "shipname"
 msgid "Padauari"
-msgstr ""
+msgstr "Padauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:283
 msgctxt "shipname"
 msgid "Papagaio"
-msgstr ""
+msgstr "Papagaio"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:285
 msgctxt "shipname"
 msgid "Papuri"
-msgstr ""
+msgstr "Papuri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:287
 msgctxt "shipname"
 msgid "Paraconi"
-msgstr ""
+msgstr "Paraconi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:289
 msgctxt "shipname"
 msgid "Parauari"
-msgstr ""
+msgstr "Parauari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:291
 msgctxt "shipname"
 msgid "Pardo"
-msgstr ""
+msgstr "Pardo"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:293
 msgctxt "shipname"
 msgid "Pati"
-msgstr ""
+msgstr "Pati"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:295
 msgctxt "shipname"
 msgid "Pauini"
-msgstr ""
+msgstr "Pauini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:297
 msgctxt "shipname"
 msgid "Pinhuã"
-msgstr ""
+msgstr "Pinhuã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:299
 msgctxt "shipname"
 msgid "Piorini"
-msgstr ""
+msgstr "Piorini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:301
 msgctxt "shipname"
 msgid "Piratucu"
-msgstr ""
+msgstr "Piratucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:303
 msgctxt "shipname"
 msgid "Pitinga"
-msgstr ""
+msgstr "Pitinga"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:305
 msgctxt "shipname"
 msgid "Preto"
-msgstr ""
+msgstr "Preto"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:307
 msgctxt "shipname"
 msgid "Preto da Eva"
-msgstr ""
+msgstr "Preto da Eva"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:309
 msgctxt "shipname"
 msgid "Prêto do Igapó-Açu"
-msgstr ""
+msgstr "Prêto do Igapó-Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:311
 msgctxt "shipname"
 msgid "Puduari"
-msgstr ""
+msgstr "Puduari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:313
 msgctxt "shipname"
 msgid "Pureté"
-msgstr ""
+msgstr "Pureté"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:315
 msgctxt "shipname"
 msgid "Puruê"
-msgstr ""
+msgstr "Puruê"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:317
 msgctxt "shipname"
 msgid "Purus"
-msgstr ""
+msgstr "Purus"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:319
 msgctxt "shipname"
 msgid "Quixito"
-msgstr ""
+msgstr "Quixito"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:321
 msgctxt "shipname"
 msgid "Rio Negro"
-msgstr ""
+msgstr "Rio Negro"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:323
 msgctxt "shipname"
 msgid "Riozinho"
-msgstr ""
+msgstr "Riozinho"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:325
 msgctxt "shipname"
 msgid "Sepatini"
-msgstr ""
+msgstr "Sepatini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:327
 msgctxt "shipname"
 msgid "Sepoti"
-msgstr ""
+msgstr "Sepoti"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:329
 msgctxt "shipname"
 msgid "Seruini"
-msgstr ""
+msgstr "Seruini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:331
 msgctxt "shipname"
 msgid "Sucunduri"
-msgstr ""
+msgstr "Sucunduri"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:333
 msgctxt "shipname"
 msgid "Tapajós"
-msgstr ""
+msgstr "Tapajós"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:335
 msgctxt "shipname"
 msgid "Tapauá"
-msgstr ""
+msgstr "Tapauá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:337
 msgctxt "shipname"
 msgid "Tarauacá"
-msgstr ""
+msgstr "Tarauacá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:339
 msgctxt "shipname"
 msgid "Tarumã Açu"
-msgstr ""
+msgstr "Tarumã Açu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:341
 msgctxt "shipname"
 msgid "Tarumã Mirim"
-msgstr ""
+msgstr "Tarumã Mirim"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:343
 msgctxt "shipname"
 msgid "Tea"
-msgstr ""
+msgstr "Tea"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:345
 msgctxt "shipname"
 msgid "Tefé"
-msgstr ""
+msgstr "Tefé"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:347
 msgctxt "shipname"
 msgid "Tonantins"
-msgstr ""
+msgstr "Tonantins"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:349
 msgctxt "shipname"
 msgid "Toototobi"
-msgstr ""
+msgstr "Toototobi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:351
 msgctxt "shipname"
 msgid "Traíra"
-msgstr ""
+msgstr "Traíra"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:353
 msgctxt "shipname"
 msgid "Tumiã"
-msgstr ""
+msgstr "Tumiã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:355
 msgctxt "shipname"
 msgid "Tupana"
-msgstr ""
+msgstr "Tupana"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:357
 msgctxt "shipname"
 msgid "Uaicurapa"
-msgstr ""
+msgstr "Uaicurapa"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:359
 msgctxt "shipname"
 msgid "Uarini"
-msgstr ""
+msgstr "Uarini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:361
 msgctxt "shipname"
 msgid "Uatumã"
-msgstr ""
+msgstr "Uatumã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:363
 msgctxt "shipname"
 msgid "Uaupés"
-msgstr ""
+msgstr "Uaupés"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:365
 msgctxt "shipname"
 msgid "Umari"
-msgstr ""
+msgstr "Umari"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:367
 msgctxt "shipname"
 msgid "Uneiuxi"
-msgstr ""
+msgstr "Uneiuxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:369
 msgctxt "shipname"
 msgid "Unini"
-msgstr ""
+msgstr "Unini"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:371
 msgctxt "shipname"
 msgid "Uruá"
-msgstr ""
+msgstr "Uruá"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:373
 msgctxt "shipname"
 msgid "Urubaxi"
-msgstr ""
+msgstr "Urubaxi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:375
 msgctxt "shipname"
 msgid "Urubu"
-msgstr ""
+msgstr "Urubu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:377
 msgctxt "shipname"
 msgid "Urucu"
-msgstr ""
+msgstr "Urucu"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:379
 msgctxt "shipname"
 msgid "Urupadi"
-msgstr ""
+msgstr "Urupadi"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:381
 msgctxt "shipname"
 msgid "Xeruã"
-msgstr ""
+msgstr "Xeruã"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:383
 msgctxt "shipname"
 msgid "Xie"
-msgstr ""
+msgstr "Xie"
 
 #. TRANSLATORS: This Amazonian ship is named after a river
 #: ../../data/tribes/ships/amazons/init.lua:385
 msgctxt "shipname"
 msgid "Zinho"
-msgstr ""
+msgstr "Zinho"
 
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:101

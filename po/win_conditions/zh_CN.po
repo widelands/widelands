@@ -5,14 +5,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Frank Tang <roadtang@gmail.com>, 2015
 # Roy Luo <1598359376@qq.com>, 2021
-# 柳离枝 <xingzuo88@qq.com>, 2021
+# liu lizhi <xingzuo88@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-01-01 02:50+0000\n"
+"POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2015-02-03 14:55+0000\n"
-"Last-Translator: 柳离枝 <xingzuo88@qq.com>, 2021\n"
+"Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,28 +122,28 @@ msgstr "你会因为仓库里储存的贵重物品而得到积分。在4小时�
 msgid "Points"
 msgstr "得分"
 
-#: ../../data/scripting/win_conditions/collectors.lua:65
+#: ../../data/scripting/win_conditions/collectors.lua:68
 #, lua-format
 msgid "Status for %s"
 msgstr "%s的状态"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:77
+#: ../../data/scripting/win_conditions/collectors.lua:80
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s ( %2$i P) x %3$i= %4$iP"
 
-#: ../../data/scripting/win_conditions/collectors.lua:81
+#: ../../data/scripting/win_conditions/collectors.lua:84
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "总计：%i 点"
 
-#: ../../data/scripting/win_conditions/collectors.lua:104
+#: ../../data/scripting/win_conditions/collectors.lua:107
 #, lua-format
 msgid "Status for Team %d"
 msgstr "%d团队的状态"
 
-#: ../../data/scripting/win_conditions/collectors.lua:106
+#: ../../data/scripting/win_conditions/collectors.lua:109
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-04-07 03:05+0000\n"
+"POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -300,6 +300,10 @@ msgid "Packagers"
 msgstr "Empaquetadors"
 
 #: ../../data/txts/developers.lua:3
+msgid "Scripting"
+msgstr "Seqüències d'ordres (scripting)"
+
+#: ../../data/txts/developers.lua:3
 msgid "Sound"
 msgstr "So"
 
@@ -362,7 +366,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "En les partides del Widelands, començareu amb un petit tros de terra amb pocs recursos amb l'objectiu de crear un imperi amb milers d'habitants. Per aconseguir-ho, caldrà que construïu infraestructures, que exploreu les terres del voltant i que us enfronteu als clans rivals."
+msgstr "A les partides del Widelands, començareu amb un petit tros de terra amb pocs recursos amb l'objectiu de crear un imperi amb milers d'habitants. Per aconseguir-ho, caldrà que construïu infraestructures, que exploreu les terres del voltant i que us enfronteu als clans rivals."
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
@@ -478,7 +482,7 @@ msgstr "S'ha connectat a un jugador IA (l'avatar i el text d'ajuda indiquen el c
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
-msgstr "Trieu com a compartit en la posició inicial d'un altre jugador."
+msgstr "Trieu com a compartit a la posició inicial d'un altre jugador."
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
@@ -580,7 +584,7 @@ msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr "Vigileu els pescadors i construïu una casa del criador de peixos. Quan els recursos pesquers s'exhaureixen en la seva àrea de treball, la població de peixos no es pot regenerar."
+msgstr "Vigileu els pescadors i construïu una casa del criador de peixos. Quan els recursos pesquers s'exhaureixen a la seva àrea de treball, la població de peixos no es pot regenerar."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
@@ -598,7 +602,7 @@ msgstr "Els atlants necessiten tela de seda d'aranya per construir alguns edific
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr "Vigileu els pescadors. Quan s'esgotin els recursos pesquers en la seva àrea de treball, ja no us seran útils."
+msgstr "Vigileu els pescadors. Quan s'esgotin els recursos pesquers a la seva àrea de treball, ja no us seran útils."
 
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
