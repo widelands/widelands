@@ -970,8 +970,6 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 
 	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
 
-	descriptions.postload_immovable_relations();
-
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
