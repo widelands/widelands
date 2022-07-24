@@ -27,8 +27,8 @@
 using Widelands::TCoords;
 
 int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						EditorActionArgs* args,
-						Widelands::Map* map) {
+                                                EditorActionArgs* args,
+                                                Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
 	       center.triangle.t == Widelands::TriangleIndex::R);
 	uint16_t const radius = args->sel_radius;
@@ -37,13 +37,13 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 	if ((get_nr_enabled() != 0) && args->terrain_type.empty()) {
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-			    TCoords<Widelands::FCoords>(
-			       Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-			    radius));
+		            TCoords<Widelands::FCoords>(
+		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+		            radius));
 		do {
 			args->original_terrain_type.push_back((mr.location().t == Widelands::TriangleIndex::D) ?
-						  mr.location().node.field->terrain_d() :
-						  mr.location().node.field->terrain_r());
+                                                  mr.location().node.field->terrain_d() :
+                                                  mr.location().node.field->terrain_r());
 			args->terrain_type.push_back(get_random_enabled());
 		} while (mr.advance(*map));
 	}
@@ -51,9 +51,9 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 	if (!args->terrain_type.empty()) {
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-			    TCoords<Widelands::FCoords>(
-			       Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-			    radius));
+		            TCoords<Widelands::FCoords>(
+		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+		            radius));
 		std::list<Widelands::DescriptionIndex>::iterator i = args->terrain_type.begin();
 		do {
 			max = std::max(max, map->change_terrain(parent_.egbase(), mr.location(), *i));
@@ -65,8 +65,8 @@ int32_t EditorSetTerrainTool::handle_click_impl(const Widelands::NodeAndTriangle
 
 int32_t
 EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-				       EditorActionArgs* args,
-				       Widelands::Map* map) {
+                                       EditorActionArgs* args,
+                                       Widelands::Map* map) {
 	assert(center.triangle.t == Widelands::TriangleIndex::D ||
 	       center.triangle.t == Widelands::TriangleIndex::R);
 	uint16_t const radius = args->sel_radius;
@@ -74,9 +74,9 @@ EditorSetTerrainTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wideland
 		int32_t max = 0;
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<TCoords<Widelands::FCoords>>(
-			    TCoords<Widelands::FCoords>(
-			       Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
-			    radius));
+		            TCoords<Widelands::FCoords>(
+		               Widelands::FCoords(map->get_fcoords(center.triangle.node)), center.triangle.t),
+		            radius));
 
 		std::list<Widelands::DescriptionIndex>::iterator i = args->original_terrain_type.begin();
 		do {
@@ -94,7 +94,8 @@ EditorActionArgs EditorSetTerrainTool::format_args_impl() {
 
 std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
-	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions = descriptions.terrains();
+	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions =
+	   descriptions.terrains();
 
 	std::string mapobj_names;
 
@@ -107,6 +108,7 @@ std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& c
 
         /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Terrain: %1$s"), mapobj_names);
+
 }
 
 bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
@@ -125,7 +127,6 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 
 	return true;
 }
-
 
 void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
 	disable_all();

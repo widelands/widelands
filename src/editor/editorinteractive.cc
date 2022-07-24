@@ -84,50 +84,50 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      realtime_(SDL_GetTicks()),
      is_painting_(false),
      mainmenu_(toolbar(),
-	       "dropdown_menu_main",
-	       0,
-	       0,
-	       MainToolbar::kButtonSize,
-	       10,
-	       MainToolbar::kButtonSize,
-	       as_tooltip_text_with_hotkey(
-		  /** TRANSLATORS: Title for the main menu button in the editor */
-		  _("Main Menu"),
-		  shortcut_string_for(KeyboardShortcut::kEditorMenu),
-		  UI::PanelStyle::kWui),
-	       UI::DropdownType::kPictorialMenu,
-	       UI::PanelStyle::kWui,
-	       UI::ButtonStyle::kWuiPrimary),
+               "dropdown_menu_main",
+               0,
+               0,
+               MainToolbar::kButtonSize,
+               10,
+               MainToolbar::kButtonSize,
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the main menu button in the editor */
+                  _("Main Menu"),
+                  shortcut_string_for(KeyboardShortcut::kEditorMenu),
+                  UI::PanelStyle::kWui),
+               UI::DropdownType::kPictorialMenu,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiPrimary),
      toolmenu_(toolbar(),
-	       "dropdown_menu_tools",
-	       0,
-	       0,
-	       MainToolbar::kButtonSize,
-	       12,
-	       MainToolbar::kButtonSize,
-	       as_tooltip_text_with_hotkey(
-		  /** TRANSLATORS: Title for the tool menu button in the editor */
-		  _("Tools"),
-		  shortcut_string_for(KeyboardShortcut::kEditorTools),
-		  UI::PanelStyle::kWui),
-	       UI::DropdownType::kPictorialMenu,
-	       UI::PanelStyle::kWui,
-	       UI::ButtonStyle::kWuiPrimary,
-	       [this](ToolMenuEntry t) { tool_menu_selected(t); }),
+               "dropdown_menu_tools",
+               0,
+               0,
+               MainToolbar::kButtonSize,
+               12,
+               MainToolbar::kButtonSize,
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the tool menu button in the editor */
+                  _("Tools"),
+                  shortcut_string_for(KeyboardShortcut::kEditorTools),
+                  UI::PanelStyle::kWui),
+               UI::DropdownType::kPictorialMenu,
+               UI::PanelStyle::kWui,
+               UI::ButtonStyle::kWuiPrimary,
+               [this](ToolMenuEntry t) { tool_menu_selected(t); }),
      showhidemenu_(toolbar(),
-		   "dropdown_menu_showhide",
-		   0,
-		   0,
-		   MainToolbar::kButtonSize,
-		   10,
-		   MainToolbar::kButtonSize,
-		   /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
-		      building spaces, animals, immovables, resources */
-		   _("Show / Hide"),
-		   UI::DropdownType::kPictorialMenu,
-		   UI::PanelStyle::kWui,
-		   UI::ButtonStyle::kWuiPrimary,
-		   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
+                   "dropdown_menu_showhide",
+                   0,
+                   0,
+                   MainToolbar::kButtonSize,
+                   10,
+                   MainToolbar::kButtonSize,
+                   /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
+                      building spaces, animals, immovables, resources */
+                   _("Show / Hide"),
+                   UI::DropdownType::kPictorialMenu,
+                   UI::PanelStyle::kWui,
+                   UI::ButtonStyle::kWuiPrimary,
+                   [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools(*this, e.map())),
@@ -166,10 +166,10 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	add_toolbar_button("ui_basic/menu_help", "help",
-			   as_tooltip_text_with_hotkey(
-			      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
-			      UI::PanelStyle::kWui),
-			   &menu_windows_.help, true);
+	                   as_tooltip_text_with_hotkey(
+	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
+	                      UI::PanelStyle::kWui),
+	                   &menu_windows_.help, true);
 	menu_windows_.help.open_window = [this] {
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
@@ -177,7 +177,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	finalize_toolbar();
 
 	set_display_flags(EditorInteractive::dfShowResources | EditorInteractive::dfShowImmovables |
-			  EditorInteractive::dfShowBobs | EditorInteractive::dfShowGrid);
+	                  EditorInteractive::dfShowBobs | EditorInteractive::dfShowGrid);
 #ifndef NDEBUG
 	set_display_flag(InteractiveBase::dfDebug, true);
 #else
@@ -197,42 +197,42 @@ void EditorInteractive::add_main_menu() {
 	menu_windows_.newmap.open_window = [this] { new MainMenuNewMap(*this, menu_windows_.newmap); };
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Map"), MainMenuEntry::kNewMap,
-		      g_image_cache->get("images/wui/editor/menus/new_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
 		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap, egbase().map().get_width(),
-					 egbase().map().get_height());
+		                         egbase().map().get_height());
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
-		      g_image_cache->get("images/wui/editor/menus/new_random_map.png"));
+	              g_image_cache->get("images/wui/editor/menus/new_random_map.png"));
 
 	menu_windows_.loadmap.open_window = [this] {
 		new MainMenuLoadMap(*this, menu_windows_.loadmap);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
-		      g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
-		      shortcut_string_for(KeyboardShortcut::kEditorLoad));
+	              g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorLoad));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
-		      g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
-		      shortcut_string_for(KeyboardShortcut::kEditorSave));
+	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
+	              shortcut_string_for(KeyboardShortcut::kEditorSave));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Map Options"), MainMenuEntry::kMapOptions,
-		      g_image_cache->get("images/wui/editor/menus/map_options.png"));
+	              g_image_cache->get("images/wui/editor/menus/map_options.png"));
 
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Exit Editor"), MainMenuEntry::kExitEditor,
-		      g_image_cache->get("images/wui/menus/exit.png"));
+	              g_image_cache->get("images/wui/menus/exit.png"));
 	mainmenu_.selected.connect([this] { main_menu_selected(mainmenu_.get_selected()); });
 	toolbar()->add(&mainmenu_);
 }
@@ -268,27 +268,27 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Change height"), ToolMenuEntry::kChangeHeight,
-		      g_image_cache->get("images/wui/editor/tools/height.png"), false,
-		      /** TRANSLATORS: Tooltip for the change height tool in the editor */
-		      _("Change the terrain height"));
+	              g_image_cache->get("images/wui/editor/tools/height.png"), false,
+	              /** TRANSLATORS: Tooltip for the change height tool in the editor */
+	              _("Change the terrain height"));
 
 	tool_windows_.noiseheight.open_window = [this] {
 		new EditorToolNoiseHeightOptionsMenu(*this, tools()->noise_height, tool_windows_.noiseheight);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Random height"), ToolMenuEntry::kRandomHeight,
-		      g_image_cache->get("images/wui/editor/tools/noise_height.png"), false,
-		      /** TRANSLATORS: Tooltip for the random height tool in the editor */
-		      _("Set the terrain height to random values"));
+	              g_image_cache->get("images/wui/editor/tools/noise_height.png"), false,
+	              /** TRANSLATORS: Tooltip for the random height tool in the editor */
+	              _("Set the terrain height to random values"));
 
 	tool_windows_.terrain.open_window = [this] {
 		new EditorToolSetTerrainOptionsMenu(*this, tools()->set_terrain, tool_windows_.terrain);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Terrain"), ToolMenuEntry::kTerrain,
-		      g_image_cache->get("images/wui/editor/tools/terrain.png"), false,
-		      /** TRANSLATORS: Tooltip for the terrain tool in the editor */
-		      _("Change the map’s terrain"));
+	              g_image_cache->get("images/wui/editor/tools/terrain.png"), false,
+	              /** TRANSLATORS: Tooltip for the terrain tool in the editor */
+	              _("Change the map’s terrain"));
 
 	tool_windows_.immovables.open_window = [this] {
 		new EditorToolPlaceImmovableOptionsMenu(
@@ -296,18 +296,18 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Immovables"), ToolMenuEntry::kImmovables,
-		      g_image_cache->get("images/wui/editor/tools/immovables.png"), false,
-		      /** TRANSLATORS: Tooltip for the immovables tool in the editor */
-		      _("Add or remove immovables"));
+	              g_image_cache->get("images/wui/editor/tools/immovables.png"), false,
+	              /** TRANSLATORS: Tooltip for the immovables tool in the editor */
+	              _("Add or remove immovables"));
 
 	tool_windows_.critters.open_window = [this] {
 		new EditorToolPlaceCritterOptionsMenu(*this, tools()->place_critter, tool_windows_.critters);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Animals"), ToolMenuEntry::kAnimals,
-		      g_image_cache->get("images/wui/editor/tools/critters.png"), false,
-		      /** TRANSLATORS: Tooltip for the animals tool in the editor */
-		      _("Add or remove animals"));
+	              g_image_cache->get("images/wui/editor/tools/critters.png"), false,
+	              /** TRANSLATORS: Tooltip for the animals tool in the editor */
+	              _("Add or remove animals"));
 
 	tool_windows_.resources.open_window = [this] {
 		new EditorToolChangeResourcesOptionsMenu(
@@ -315,15 +315,15 @@ void EditorInteractive::add_tool_menu() {
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Resources"), ToolMenuEntry::kResources,
-		      g_image_cache->get("images/wui/editor/tools/resources.png"), false,
-		      /** TRANSLATORS: Tooltip for the resources tool in the editor */
-		      _("Set or change resources"));
+	              g_image_cache->get("images/wui/editor/tools/resources.png"), false,
+	              /** TRANSLATORS: Tooltip for the resources tool in the editor */
+	              _("Set or change resources"));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Port spaces"), ToolMenuEntry::kPortSpace,
-		      g_image_cache->get("images/wui/editor/tools/port_spaces.png"), false,
-		      /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
-		      _("Add or remove port spaces"));
+	              g_image_cache->get("images/wui/editor/tools/port_spaces.png"), false,
+	              /** TRANSLATORS: Tooltip for the port spaces tool in the editor */
+	              _("Add or remove port spaces"));
 
 	tool_windows_.players.open_window = [this] {
 		new EditorPlayerMenu(*this, tools()->set_starting_pos, tool_windows_.players);
@@ -331,89 +331,86 @@ void EditorInteractive::add_tool_menu() {
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
-		      g_image_cache->get("images/wui/editor/tools/players.png"), false,
-		      /** TRANSLATORS: Tooltip for the map size tool in the editor */
-		      _("Set number of players and their names, tribes and starting positions"),
-		      shortcut_string_for(KeyboardShortcut::kEditorPlayers));
+	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
+	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
+	              _("Set number of players and their names, tribes and starting positions"),
+	              shortcut_string_for(KeyboardShortcut::kEditorPlayers));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
-		      g_image_cache->get("images/wui/editor/tools/map_origin.png"), false,
-		      /** TRANSLATORS: Tooltip for the map origin tool in the editor */
-		      _("Set the position that will have the coordinates (0, 0). This will be the "
-			"top-left corner of a generated minimap."));
+	              g_image_cache->get("images/wui/editor/tools/map_origin.png"), false,
+	              /** TRANSLATORS: Tooltip for the map origin tool in the editor */
+	              _("Set the position that will have the coordinates (0, 0). This will be the "
+	                "top-left corner of a generated minimap."));
 
 	tool_windows_.resizemap.open_window = [this] {
 		new EditorToolResizeOptionsMenu(*this, tools()->resize, tool_windows_.resizemap);
 	};
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map size"), ToolMenuEntry::kMapSize,
-		      g_image_cache->get("images/wui/editor/tools/resize_map.png"), false,
-		      /** TRANSLATORS: Tooltip for the map size tool in the editor */
-		      _("Change the map’s size"));
+	              g_image_cache->get("images/wui/editor/tools/resize_map.png"), false,
+	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
+	              _("Change the map’s size"));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
-		      g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
-		      /** TRANSLATORS: Tooltip for the map information tool in the editor */
-		      _("Click on a field to show information about it"),
-		      shortcut_string_for(KeyboardShortcut::kEditorInfo));
+	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
+	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
+	              _("Click on a field to show information about it"),
+	              shortcut_string_for(KeyboardShortcut::kEditorInfo));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
-		      g_image_cache->get("images/wui/editor/fsel_editor_toolhistory.png"), false,
-		      /** TRANSLATORS: Tooltip for the tool history tool in the editor */
-		      _("Restore previous tool settings"),
-		      shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
+	              g_image_cache->get("images/wui/editor/fsel_editor_toolhistory.png"), false,
+	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
+	              _("Restore previous tool settings"),
+	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
 	tool_windows_.toolhistory.open_window = [this] {
 		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
 	};
-
 
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
 
-
-
 void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 	switch (entry) {
-		case ToolMenuEntry::kChangeHeight:
-			tool_windows_.height.toggle();
-			break;
-		case ToolMenuEntry::kRandomHeight:
-			tool_windows_.noiseheight.toggle();
-			break;
-		case ToolMenuEntry::kTerrain:
-			tool_windows_.terrain.toggle();
-			break;
-		case ToolMenuEntry::kImmovables:
-			tool_windows_.immovables.toggle();
-			break;
-		case ToolMenuEntry::kAnimals:
-			tool_windows_.critters.toggle();
-			break;
-		case ToolMenuEntry::kResources:
-			tool_windows_.resources.toggle();
-			break;
-		case ToolMenuEntry::kPortSpace:
-			select_tool(tools()->set_port_space, EditorTool::First);
-			break;
-		case ToolMenuEntry::kPlayers:
-			tool_windows_.players.toggle();
-			break;
-		case ToolMenuEntry::kMapOrigin:
-			select_tool(tools()->set_origin, EditorTool::First);
-			break;
-		case ToolMenuEntry::kMapSize:
-			tool_windows_.resizemap.toggle();
-			break;
-		case ToolMenuEntry::kFieldInfo:
-			select_tool(tools()->info, EditorTool::First);
-			break;
-		case ToolMenuEntry::kToolHistory:
-			tool_windows_.toolhistory.toggle();
-			break;
+	case ToolMenuEntry::kChangeHeight:
+		tool_windows_.height.toggle();
+		break;
+	case ToolMenuEntry::kRandomHeight:
+		tool_windows_.noiseheight.toggle();
+		break;
+	case ToolMenuEntry::kTerrain:
+		tool_windows_.terrain.toggle();
+		break;
+	case ToolMenuEntry::kImmovables:
+		tool_windows_.immovables.toggle();
+		break;
+	case ToolMenuEntry::kAnimals:
+		tool_windows_.critters.toggle();
+		break;
+	case ToolMenuEntry::kResources:
+		tool_windows_.resources.toggle();
+		break;
+	case ToolMenuEntry::kPortSpace:
+		select_tool(tools()->set_port_space, EditorTool::First);
+		break;
+	case ToolMenuEntry::kPlayers:
+		tool_windows_.players.toggle();
+		break;
+	case ToolMenuEntry::kMapOrigin:
+		select_tool(tools()->set_origin, EditorTool::First);
+		break;
+	case ToolMenuEntry::kMapSize:
+		tool_windows_.resizemap.toggle();
+		break;
+	case ToolMenuEntry::kFieldInfo:
+		select_tool(tools()->info, EditorTool::First);
+		break;
+	case ToolMenuEntry::kToolHistory:
+		tool_windows_.toolhistory.toggle();
+		break;
 	}
 	toolmenu_.toggle();
 }
@@ -436,26 +433,26 @@ void EditorInteractive::rebuild_showhide_menu() {
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
 	 * shown */
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
-			  ShowHideEntry::kBuildingSpaces,
-			  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-			  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
+	                  ShowHideEntry::kBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
+	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether to show maximum
 	 * building spaces that will be available if all immovables (trees, rocks, etc.) are removed */
 	showhidemenu_.add(get_display_flag(dfShowMaximumBuildhelp) ? _("Hide Maximum Building Spaces") :
-								_("Show Maximum Building Spaces"),
-			  ShowHideEntry::kMaximumBuildingSpaces,
-			  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
-			  _("Toggle whether to show maximum building spaces that will be available if "
-			    "all immovables (trees, rocks, etc.) are removed"),
-			  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp));
+                                                                _("Show Maximum Building Spaces"),
+	                  ShowHideEntry::kMaximumBuildingSpaces,
+	                  g_image_cache->get("images/wui/menus/toggle_maxbuild.png"), false,
+	                  _("Toggle whether to show maximum building spaces that will be available if "
+	                    "all immovables (trees, rocks, etc.) are removed"),
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideMaximumBuildhelp));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
 	showhidemenu_.add(get_display_flag(dfShowGrid) ? _("Hide Grid") : _("Show Grid"),
-			  ShowHideEntry::kGrid,
-			  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "",
-			  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid));
+	                  ShowHideEntry::kGrid,
+	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid));
 
 	showhidemenu_.add(
 	   /** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables
@@ -466,15 +463,15 @@ void EditorInteractive::rebuild_showhide_menu() {
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
 	showhidemenu_.add(get_display_flag(dfShowBobs) ? _("Hide Animals") : _("Show Animals"),
-			  ShowHideEntry::kAnimals,
-			  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "",
-			  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters));
+	                  ShowHideEntry::kAnimals,
+	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
 	showhidemenu_.add(get_display_flag(dfShowResources) ? _("Hide Resources") : _("Show Resources"),
-			  ShowHideEntry::kResources,
-			  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "",
-			  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources));
+	                  ShowHideEntry::kResources,
+	                  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "",
+	                  shortcut_string_for(KeyboardShortcut::kEditorShowhideResources));
 
 	showhidemenu_.select(last_selection);
 }
@@ -527,7 +524,7 @@ void EditorInteractive::load(const std::string& filename) {
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(p, 0, kPlayerColors[p - 1], map->get_scenario_player_tribe(p),
-					    map->get_scenario_player_name(p));
+			                    map->get_scenario_player_name(p));
 		}
 	}
 
@@ -590,8 +587,8 @@ void EditorInteractive::exit() {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
 			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
-					     _("The map has not been saved, do you really want to quit?"),
-					     UI::WLMessageBox::MBoxType::kOkCancel);
+			                     _("The map has not been saved, do you really want to quit?"),
+			                     UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				return;
 			}
@@ -602,14 +599,13 @@ void EditorInteractive::exit() {
 }
 
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
-				    const bool should_draw) {
+                                    const bool should_draw) {
 
 	EditorTool& current_tool = tools_->current();
 	EditorTool::ToolIndex subtool_idx = tools_->use_tool;
 
-	history_->do_action(current_tool, subtool_idx, *egbase().mutable_map(),
-			    node_and_triangle, should_draw);
-
+	history_->do_action(
+	   current_tool, subtool_idx, *egbase().mutable_map(), node_and_triangle, should_draw);
 
 	set_need_save(true);
 
@@ -634,7 +630,7 @@ void EditorInteractive::update_tool_history_window() {
 	}
 
 	EditorToolhistoryOptionsMenu* toolhistory_window =
-		dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
+	   dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
 
 	toolhistory_window->update();
 }
@@ -712,8 +708,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (get_display_flag(dfShowResources) && amount > 0) {
 			const std::string& immname = ebase.descriptions()
-							.get_resource_descr(field.fcoords.field->get_resources())
-							->editor_image(amount);
+			                                .get_resource_descr(field.fcoords.field->get_resources())
+			                                ->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
@@ -749,9 +745,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				// then scale down a bit to make the maximum more visible.
 				const float scaling =
 				   get_display_flag(dfShowMaximumBuildhelp) &&
-					 ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
-		  0.9f :
-		  1.0f;
+				         ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) ?
+                  0.9f :
+                  1.0f;
 				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale * scaling);
 			}
 		}
@@ -764,7 +760,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
 			blit_field_overlay(&dst, field, player_image,
-					   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
+			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 		}
 
 		if (g_mouse_cursor->is_visible()) {
@@ -783,11 +779,11 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R)) != 0u) {
 					const Vector2i tripos((field.rendertarget_pixel.x + rn.rendertarget_pixel.x +
-							       brn.rendertarget_pixel.x) /
-								 3,
-							      (field.rendertarget_pixel.y + rn.rendertarget_pixel.y +
-							       brn.rendertarget_pixel.y) /
-								 3);
+					                       brn.rendertarget_pixel.x) /
+					                         3,
+					                      (field.rendertarget_pixel.y + rn.rendertarget_pixel.y +
+					                       brn.rendertarget_pixel.y) /
+					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
 					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
@@ -795,11 +791,11 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				if (selected_triangles.count(
 				       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D)) != 0u) {
 					const Vector2i tripos((field.rendertarget_pixel.x + bln.rendertarget_pixel.x +
-							       brn.rendertarget_pixel.x) /
-								 3,
-							      (field.rendertarget_pixel.y + bln.rendertarget_pixel.y +
-							       brn.rendertarget_pixel.y) /
-								 3);
+					                       brn.rendertarget_pixel.x) /
+					                         3,
+					                      (field.rendertarget_pixel.y + bln.rendertarget_pixel.y +
+					                       brn.rendertarget_pixel.y) /
+					                         3);
 					const Image* pic = get_sel_picture();
 					blit_overlay(
 					   &dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale, 1.f);
@@ -812,8 +808,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void EditorInteractive::set_sel_pos(Widelands::NodeAndTriangle<> const sel) {
 	bool const target_changed = tools_->current().operates_on_triangles() ?
-				  sel.triangle != get_sel_pos().triangle :
-				  sel.node != get_sel_pos().node;
+                                  sel.triangle != get_sel_pos().triangle :
+                                  sel.node != get_sel_pos().node;
 	InteractiveBase::set_sel_pos(sel);
 	if (target_changed && is_painting_) {
 		map_clicked(sel, true);
@@ -862,7 +858,7 @@ void EditorInteractive::toggle_grid() {
 
 void EditorInteractive::toggle_maximum_buildhelp() {
 	set_display_flag(EditorInteractive::dfShowMaximumBuildhelp,
-			 !get_display_flag(EditorInteractive::dfShowMaximumBuildhelp));
+	                 !get_display_flag(EditorInteractive::dfShowMaximumBuildhelp));
 }
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
@@ -930,8 +926,8 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 
 		for (int i = 0; i < 10; ++i) {
 			if (matches_shortcut(static_cast<KeyboardShortcut>(
-						static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
-					     code)) {
+			                        static_cast<uint16_t>(KeyboardShortcut::kEditorToolsize1) + i),
+			                     code)) {
 				set_sel_radius_and_update_menu(i);
 				return true;
 			}
@@ -1025,16 +1021,16 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 }
 
 void EditorInteractive::run_editor(UI::Panel* error_message_parent,
-				   const EditorInteractive::Init init,
-				   const std::string& filename,
-				   const std::string& script_to_run) {
+                                   const EditorInteractive::Init init,
+                                   const std::string& filename,
+                                   const std::string& script_to_run) {
 	try {
 		EditorInteractive::do_run_editor(init, filename, script_to_run);
 	} catch (const std::exception& e) {
 		log_err("##############################\n"
-			"  FATAL EXCEPTION in editor: %s\n"
-			"##############################\n",
-			e.what());
+		        "  FATAL EXCEPTION in editor: %s\n"
+		        "##############################\n",
+		        e.what());
 		if (error_message_parent == nullptr) {
 			return;
 		}
@@ -1055,8 +1051,8 @@ void EditorInteractive::run_editor(UI::Panel* error_message_parent,
 }
 
 void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
-				      const std::string& filename,
-				      const std::string& script_to_run) {
+                                      const std::string& filename,
+                                      const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
@@ -1104,8 +1100,8 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		   /** TRANSLATORS: Default name for new map */
 		   _("No Name"),
 		   get_config_string("realname",
-				     /** TRANSLATORS: Map author name when it hasn't been set yet */
-				     pgettext("author_name", "Unknown")));
+		                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+		                     pgettext("author_name", "Unknown")));
 
 		switch (init) {
 		case EditorInteractive::Init::kNew:
@@ -1128,7 +1124,7 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 }
 
 void EditorInteractive::load_world_units(EditorInteractive* eia,
-					 Widelands::EditorGameBase& egbase) {
+                                         Widelands::EditorGameBase& egbase) {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
 	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
 
@@ -1145,7 +1141,7 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
 	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
-						 Widelands::MapObjectType type) {
+	                                         Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
 			// Even if we do not have an EditorInteractive, we still need to create the
@@ -1240,7 +1236,6 @@ EditorHistory& EditorInteractive::history() {
 	return *history_;
 }
 
-
 /**
  * Restores tool settings in a tool's window from a configuration.
  * Opens the window, if it's not already open.
@@ -1254,25 +1249,23 @@ void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 
 	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
 	if (window == nullptr) {
-                UI::UniqueWindow::Registry& registry = get_registry_for_window(primary.get_window_id());
-                registry.create();
+		UI::UniqueWindow::Registry& registry = get_registry_for_window(primary.get_window_id());
+		registry.create();
 
-                window = get_open_tool_window(primary.get_window_id());
-        }
+		window = get_open_tool_window(primary.get_window_id());
+	}
 
 	if (window != nullptr) {
 		dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
-                window->focus();
+		window->focus();
 	}
 }
-
 
 /**
  * Returns open window for the given window id, if the window is open.
  * Otherwise returns nullptr.
  **/
-UI::UniqueWindow*
-EditorInteractive::get_open_tool_window(WindowID window_id) {
+UI::UniqueWindow* EditorInteractive::get_open_tool_window(WindowID window_id) {
 	const UI::UniqueWindow::Registry& window_registry = get_registry_for_window(window_id);
 
 	return window_registry.window;
@@ -1281,8 +1274,7 @@ EditorInteractive::get_open_tool_window(WindowID window_id) {
 /**
  * Returns window registry for window id.
  **/
-UI::UniqueWindow::Registry&
-EditorInteractive::get_registry_for_window(WindowID window_id) {
+UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID window_id) {
 
 	switch (window_id) {
 	case WindowID::ToolHistory:
@@ -1307,7 +1299,6 @@ EditorInteractive::get_registry_for_window(WindowID window_id) {
 
 	NEVER_HERE();
 }
-
 
 void EditorInteractive::set_sel_radius(const uint32_t n) {
 	InteractiveBase::set_sel_radius(n);

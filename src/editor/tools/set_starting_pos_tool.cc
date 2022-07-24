@@ -27,7 +27,7 @@ static int32_t current_player_;
 namespace {
 
 Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
-						   const Widelands::Map& map) {
+                                                   const Widelands::Map& map) {
 	// Area around already placed players
 	Widelands::PlayerNumber const nr_players = map.get_nrplayers();
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
@@ -59,8 +59,8 @@ EditorSetStartingPosTool::EditorSetStartingPosTool(EditorInteractive& parent)
 }
 
 int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						    EditorActionArgs* /* args */,
-						    Widelands::Map* map) {
+                                                    EditorActionArgs* /* args */,
+                                                    Widelands::Map* map) {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map->get_width());
 	assert(0 <= center.node.y);
@@ -85,7 +85,7 @@ int32_t EditorSetStartingPosTool::handle_click_impl(const Widelands::NodeAndTria
 
 Widelands::NodeCaps
 EditorSetStartingPosTool::nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-						 const Widelands::EditorGameBase& egbase) {
+                                                 const Widelands::EditorGameBase& egbase) {
 	return set_starting_pos_tool_nodecaps(fcoords, egbase.map());
 }
 

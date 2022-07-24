@@ -26,8 +26,8 @@
 #include "logic/mapregion.h"
 
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						       EditorActionArgs* args,
-						       Widelands::Map* map) {
+                                                       EditorActionArgs* args,
+                                                       Widelands::Map* map) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
@@ -35,8 +35,8 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-	    descriptions.get_resource_descr(args->current_resource)->max_amount() :
-	    0;
+            descriptions.get_resource_descr(args->current_resource)->max_amount() :
+            0;
 
 		amount += args->change_by;
 		if (amount > max_amount) {
@@ -50,7 +50,7 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 
 			args->original_resource.push_back(
 			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),
-							   mr.location().field->get_resources_amount()});
+			                                   mr.location().field->get_resources_amount()});
 
 			map->initialize_resources(mr.location(), args->current_resource, amount);
 		}
@@ -73,12 +73,10 @@ EditorActionArgs EditorIncreaseResourcesTool::format_args_impl() {
 }
 
 std::string EditorIncreaseResourcesTool::format_conf_description_impl(const ToolConf& conf) {
-	std::string resource = parent_.egbase()
-	   .descriptions()
-	   .get_resource_descr(cur_res_)
-	   ->descname();
+	std::string resource = parent_.egbase().descriptions().get_resource_descr(cur_res_)->descname();
 
-        /** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and decrease. */
-	return format(_("%1$s: inc./dec. %2$d, set to %3$d"),
-                      resource, conf.change_by, static_cast<int>(conf.set_to));
+	/** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and
+	 * decrease. */
+	return format(_("%1$s: inc./dec. %2$d, set to %3$d"), resource, conf.change_by,
+	              static_cast<int>(conf.set_to));
 }

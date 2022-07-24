@@ -23,16 +23,17 @@
 
 ///  Decreases the height of a node by a value.
 struct EditorDecreaseHeightTool : public EditorTool {
-	EditorDecreaseHeightTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), change_by_(1) {
+	EditorDecreaseHeightTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), change_by_(1) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 

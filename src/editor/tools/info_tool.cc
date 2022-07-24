@@ -24,8 +24,8 @@
 constexpr int kOffset = 30;
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-					  EditorActionArgs* /* args */,
-					  Widelands::Map* map) {
+                                          EditorActionArgs* /* args */,
+                                          Widelands::Map* map) {
 
 	parent_.stop_painting();
 

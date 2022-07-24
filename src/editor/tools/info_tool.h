@@ -25,12 +25,13 @@
 
 /// A simple tool to show information about the clicked node.
 struct EditorInfoTool : public EditorTool {
-	EditorInfoTool(EditorInteractive& parent) : EditorTool(parent, *this, *this, false), number_of_open_windows_(0) {
+	EditorInfoTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this, false), number_of_open_windows_(0) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");

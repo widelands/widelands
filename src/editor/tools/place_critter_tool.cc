@@ -31,8 +31,8 @@
  * and places this on the current field
  */
 int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						  EditorActionArgs* args,
-						  Widelands::Map* map) {
+                                                  EditorActionArgs* args,
+                                                  Widelands::Map* map) {
 	Widelands::EditorGameBase& egbase = parent_.egbase();
 	if ((get_nr_enabled() != 0) && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -99,7 +99,6 @@ EditorActionArgs EditorPlaceCritterTool::format_args_impl() {
 	return EditorTool::format_args_impl();
 }
 
-
 std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions
@@ -134,7 +133,6 @@ bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {
 
 	return true;
 }
-
 
 void EditorPlaceCritterTool::load_configuration(const ToolConf& conf) {
 	disable_all();

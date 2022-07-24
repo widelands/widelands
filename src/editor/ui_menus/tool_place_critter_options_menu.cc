@@ -58,5 +58,5 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 }
 
 void EditorToolPlaceCritterOptionsMenu::update_window() {
-        multi_select_menu_->update_selection();
+	multi_select_menu_->update_selection();
 }

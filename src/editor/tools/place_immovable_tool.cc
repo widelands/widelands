@@ -30,8 +30,8 @@
  * and places this on the current field
  */
 int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						    EditorActionArgs* args,
-						    Widelands::Map* map) {
+                                                    EditorActionArgs* args,
+                                                    Widelands::Map* map) {
 	const int32_t radius = args->sel_radius;
 	if (get_nr_enabled() == 0) {
 		return radius;
@@ -128,7 +128,6 @@ bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {
 
 	return true;
 }
-
 
 void EditorPlaceImmovableTool::load_configuration(const ToolConf& conf) {
 	disable_all();

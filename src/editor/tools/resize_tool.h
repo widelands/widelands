@@ -31,12 +31,12 @@ struct EditorResizeTool : public EditorTool {
 	 * Change the map size
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -67,7 +67,6 @@ struct EditorResizeTool : public EditorTool {
 	WindowID get_window_id() override {
 		return WindowID::Resize;
 	}
-
 
 private:
 	uint32_t width_;

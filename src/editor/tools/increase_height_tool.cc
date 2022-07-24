@@ -26,13 +26,13 @@
 
 /// Increases the heights by a value. Changes surrounding nodes if necessary.
 int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						    EditorActionArgs* args,
-						    Widelands::Map* map) {
+                                                    EditorActionArgs* args,
+                                                    Widelands::Map* map) {
 	if (args->original_heights.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map, Widelands::Area<Widelands::FCoords>(
-			    map->get_fcoords(center.node),
-			    args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		            map->get_fcoords(center.node),
+		            args->sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
 		do {
 			args->original_heights.push_back(mr.location().field->get_height());
 		} while (mr.advance(*map));
@@ -45,8 +45,8 @@ int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTria
 }
 
 int32_t EditorIncreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-						   EditorActionArgs* args,
-						   Widelands::Map* map) {
+                                                   EditorActionArgs* args,
+                                                   Widelands::Map* map) {
 	return decrease_tool_.handle_undo_impl(center, args, map);
 }
 
@@ -57,7 +57,7 @@ EditorActionArgs EditorIncreaseHeightTool::format_args_impl() {
 }
 
 std::string EditorIncreaseHeightTool::format_conf_description_impl(const ToolConf& conf) {
-        /** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and decrease. */
-        return format(_("Height: inc./dec. %1$d, set to %2$d"),
-                      conf.change_by, conf.interval.min);
+	/** TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for increase and
+	 * decrease. */
+	return format(_("Height: inc./dec. %1$d, set to %2$d"), conf.change_by, conf.interval.min);
 }

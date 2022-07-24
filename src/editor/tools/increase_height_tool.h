@@ -25,21 +25,21 @@
 ///  Increases the height of a field by a value.
 struct EditorIncreaseHeightTool : public EditorTool {
 	EditorIncreaseHeightTool(EditorInteractive& parent,
-				 EditorDecreaseHeightTool& the_decrease_tool,
-				 EditorSetHeightTool& the_set_tool)
-	  : EditorTool(parent, the_decrease_tool, the_set_tool),
+	                         EditorDecreaseHeightTool& the_decrease_tool,
+	                         EditorSetHeightTool& the_set_tool)
+	   : EditorTool(parent, the_decrease_tool, the_set_tool),
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_tool),
 	     change_by_(1) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -67,12 +67,12 @@ struct EditorIncreaseHeightTool : public EditorTool {
 
 	bool save_configuration_impl(ToolConf& conf) override {
 		conf.change_by = change_by_;
-                set_tool_.save_configuration_impl(conf);
+		set_tool_.save_configuration_impl(conf);
 		return true;
 	}
 	void load_configuration(const ToolConf& conf) override {
 		change_by_ = conf.change_by;
-                set_tool_.load_configuration(conf);
+		set_tool_.load_configuration(conf);
 	}
 	std::string format_conf_description_impl(const ToolConf& conf) override;
 

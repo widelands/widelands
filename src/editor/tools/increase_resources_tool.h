@@ -26,8 +26,8 @@
 /// Increases the resources of a node by a value.
 struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorIncreaseResourcesTool(EditorInteractive& parent,
-				    EditorDecreaseResourcesTool& the_decrease_tool,
-				    EditorSetResourcesTool& the_set_to_tool)
+	                            EditorDecreaseResourcesTool& the_decrease_tool,
+	                            EditorSetResourcesTool& the_set_to_tool)
 	   : EditorTool(parent, the_decrease_tool, the_set_to_tool),
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_to_tool),
@@ -40,12 +40,12 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	 * another resource there.
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -54,7 +54,7 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	}
 
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-						   const Widelands::EditorGameBase& egbase) override {
+	                                           const Widelands::EditorGameBase& egbase) override {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
@@ -85,14 +85,14 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	bool save_configuration_impl(ToolConf& conf) override {
 		conf.resource = cur_res_;
 		conf.change_by = change_by_;
-                set_tool_.save_configuration_impl(conf);
+		set_tool_.save_configuration_impl(conf);
 		return true;
 	}
 	void load_configuration(const ToolConf& conf) override {
 		// Resource type needs to be loaded for all subtools, because the window refresh
 		// doesn't know which subtools configuration changed.
 		cur_res_ = conf.resource;
-                change_by_ = conf.change_by;
+		change_by_ = conf.change_by;
 		decrease_tool_.load_configuration(conf);
 		set_tool_.load_configuration(conf);
 	}

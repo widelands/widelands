@@ -71,7 +71,6 @@ struct EditorActionArgs {
 	uint32_t refcount;
 
 	WindowID window_id;
-
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_ACTION_ARGS_H

@@ -92,7 +92,6 @@ void EditorToolChangeHeightOptionsMenu::update_set_to() {
 }
 
 void EditorToolChangeHeightOptionsMenu::update_window() {
-        change_by_.set_value(increase_tool_.get_change_by());
-        set_to_.set_value(increase_tool_.set_tool().get_interval().min);
+	change_by_.set_value(increase_tool_.get_change_by());
+	set_to_.set_value(increase_tool_.set_tool().get_interval().min);
 }
-

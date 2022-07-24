@@ -87,17 +87,17 @@ uint32_t EditorHistory::redo_action() {
 }
 
 uint32_t EditorHistory::do_action(EditorTool& tool,
-				  EditorTool::ToolIndex ind,
-				  Widelands::Map& map,
-				  const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-				  bool draw) {
+                                  EditorTool::ToolIndex ind,
+                                  Widelands::Map& map,
+                                  const Widelands::NodeAndTriangle<Widelands::Coords>& center,
+                                  bool draw) {
 	EditorToolAction ac(
 	   tool, static_cast<uint32_t>(ind), map, center, parent_, tool.format_args(ind));
 	if (draw && tool.is_undoable()) {
 		if (undo_stack_.empty() ||
 		    undo_stack_.front().tool.get_sel_impl() != draw_tool_.get_sel_impl()) {
 			EditorToolAction da(draw_tool_, EditorTool::First, map, center, parent_,
-					    draw_tool_.format_args(EditorTool::First));
+			                    draw_tool_.format_args(EditorTool::First));
 
 			if (!undo_stack_.empty()) {
 				draw_tool_.add_action(undo_stack_.front(), *da.args);

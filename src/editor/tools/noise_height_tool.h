@@ -27,16 +27,18 @@ struct EditorNoiseHeightTool : public EditorTool {
 	   EditorInteractive& parent,
 	   EditorSetHeightTool& the_set_tool,
 	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
-	    : EditorTool(parent, the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {
+	   : EditorTool(parent, the_set_tool, the_set_tool),
+	     set_tool_(the_set_tool),
+	     interval_(the_interval) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 

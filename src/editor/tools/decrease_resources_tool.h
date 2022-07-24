@@ -24,16 +24,17 @@
 
 ///  Decreases the resources of a node by a value.
 struct EditorDecreaseResourcesTool : public EditorTool {
-	EditorDecreaseResourcesTool(EditorInteractive& parent) : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
+	EditorDecreaseResourcesTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), cur_res_(0), change_by_(1) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-				  EditorActionArgs* args,
-				  Widelands::Map* map) override;
+	                          EditorActionArgs* args,
+	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-				 EditorActionArgs* args,
-				 Widelands::Map* map) override;
+	                         EditorActionArgs* args,
+	                         Widelands::Map* map) override;
 
 	EditorActionArgs format_args_impl() override;
 
@@ -42,7 +43,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 
 	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
-						   const Widelands::EditorGameBase& egbase) override {
+	                                           const Widelands::EditorGameBase& egbase) override {
 		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
@@ -70,7 +71,7 @@ struct EditorDecreaseResourcesTool : public EditorTool {
 	}
 	void load_configuration(const ToolConf& conf) override {
 		cur_res_ = conf.resource;
-                change_by_ = conf.change_by;
+		change_by_ = conf.change_by;
 	}
 
 private:

@@ -36,10 +36,10 @@ struct EditorHistory {
 	}
 
 	uint32_t do_action(EditorTool& tool,
-			   EditorTool::ToolIndex ind,
-			   Widelands::Map& map,
-			   const Widelands::NodeAndTriangle<>& center,
-			   bool draw = false);
+	                   EditorTool::ToolIndex ind,
+	                   Widelands::Map& map,
+	                   const Widelands::NodeAndTriangle<>& center,
+	                   bool draw = false);
 	uint32_t undo_action();
 	uint32_t redo_action();
 

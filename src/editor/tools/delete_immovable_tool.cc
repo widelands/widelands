@@ -28,8 +28,8 @@
  * Deletes the immovable at the given location
  */
 int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-						     EditorActionArgs* args,
-						     Widelands::Map* map) {
+                                                     EditorActionArgs* args,
+                                                     Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {

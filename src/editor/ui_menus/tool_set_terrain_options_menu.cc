@@ -103,7 +103,6 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	initialization_complete();
 }
 
-
 void EditorToolSetTerrainOptionsMenu::update_window() {
-        multi_select_menu_->update_selection();
+	multi_select_menu_->update_selection();
 }

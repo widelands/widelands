@@ -162,7 +162,6 @@ void EditorToolChangeResourcesOptionsMenu::update() {
 
 void EditorToolChangeResourcesOptionsMenu::update_window() {
 	radiogroup_.set_state(increase_tool_.get_cur_res(), false);
-        change_by_.set_value(increase_tool_.get_change_by());
-        set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
+	change_by_.set_value(increase_tool_.get_change_by());
+	set_to_.set_value(static_cast<int>(increase_tool_.set_tool().get_set_to()));
 }
-
