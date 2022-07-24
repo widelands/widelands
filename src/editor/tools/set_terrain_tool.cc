@@ -108,7 +108,6 @@ std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& c
 
         /** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Terrain: %1$s"), mapobj_names);
-
 }
 
 bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
