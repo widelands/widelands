@@ -73,7 +73,7 @@ private:
 	void truncate();
 	std::list<ListItem> tool_settings_;
 	std::vector<std::string> keys_;
-	const int MAX_SIZE = 15;
+	static constexpr int kMaxSize = 15;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H

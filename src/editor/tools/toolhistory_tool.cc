@@ -34,7 +34,7 @@ bool EditorHistoryTool::add_configuration(const ToolConf& conf) {
 
 	tool_settings_.push_back(item);
 
-	if (tool_settings_.size() > static_cast<uint64_t>(MAX_SIZE)) {
+	if (tool_settings_.size() > static_cast<uint64_t>(kMaxSize)) {
 		truncate();
 	}
 
@@ -86,14 +86,14 @@ std::list<ListItem>::iterator EditorHistoryTool::find_item(const std::string& ke
 
 void EditorHistoryTool::truncate() {
 	int count = tool_settings_.size();
-	if (count <= MAX_SIZE) {
+	if (count <= kMaxSize) {
 		return;
 	}
 
 	auto it = tool_settings_.begin();
 	while (it != tool_settings_.end()) {
 		// remove first non sticky
-		if (count > MAX_SIZE && !it->sticky) {
+		if (count > kMaxSize && !it->sticky) {
 			it = tool_settings_.erase(it);
 			count--;
 		} else {
