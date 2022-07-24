@@ -1242,7 +1242,8 @@ EditorHistory& EditorInteractive::history() {
 
 
 /**
- *
+ * Restores tool settings in a tool's window from a configuration.
+ * Opens the window, if it's not already open.
  **/
 void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
 	assert(conf.primary != nullptr);
