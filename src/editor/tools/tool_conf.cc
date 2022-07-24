@@ -29,16 +29,14 @@ ToolConf::ToolConf()
 }
 
 std::string ToolConf::to_key() const {
-	std::string buf;
-	constexpr int max_string_size = 100;
+	std::string mapobj_ids;
 
-	for (std::list<Widelands::DescriptionIndex>::const_iterator p = map_obj_types.begin();
-             p != map_obj_types.end() && buf.size() < max_string_size; p++) {
-                buf += format("%d ", static_cast<int>(*p));
+	for (Widelands::DescriptionIndex di: map_obj_types) {
+                mapobj_ids += std::to_string(static_cast<int>(di));
 	}
 
         return format("tool:%d, change_by:%d, interval:%d..%d, map_objs:%s, resource:%d, set_to:%d",
                       static_cast<int>(primary->get_window_id()), change_by,
-                      static_cast<int>(interval.min), static_cast<int>(interval.max), buf,
+                      static_cast<int>(interval.min), static_cast<int>(interval.max), mapobj_ids,
                       static_cast<int>(resource), static_cast<int>(set_to));
 }
