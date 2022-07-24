@@ -5929,23 +5929,44 @@ DefaultAI::check_ranger_necessity(BuildingObserver& bo,
 DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo,
                                                             const Time& gametime) {
 	// This is evaluation per building type, result can be:
-	// * Do dismantle (no matter which specific site - this is basically forced dismantle)
-	// * No site can be dismantled
-	// * can be dismantled, let check_productionsite() decide for individual building/site (based on
-	// statistics and so on)
+	//  * Do dismantle (no matter which specific site - this is basically forced dismantle)
+	//  * No site can be dismantled
+	//  * can be dismantled, let check_productionsite() decide for individual building/site (based on
+	//    statistics and so on)
+	//  * cannot be dismantled, but still check_productionsites() can continue for example to
+	//    start/stop sites 
+	// Next step in decision making takes place in check_productionsites() -
+	// decision is made there for individual site if this here allows dismantlement
 	assert(bo.total_count() > 0);
 
+	// Some sites can be dismantled anytime - depending on sruff around them, no minimal count limits are applied
 	if (bo.is(BuildingAttribute::kNeedsRocks)) {
-		;  // Excluding some types from below check, not reasonable to keep them once out of resources
-	} else if (bo.total_count() <= 1 || bo.total_count() <= bo.cnt_target ||
-	           (bo.max_preciousness >= 10 && bo.total_count() <= 2)) {
+		return DismantlePossibility::kMightBe;
+	} 
+
+	// We want just one barrack
+	if (bo.is(BuildingAttribute::kBarracks)) {
+		if (bo.total_count() > 1) {
+			verb_log_info_time(
+			   gametime,
+			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
+			   "error\n",
+			   player_number(), bo.total_count());
+			return DismantlePossibility::kShouldBe;
+		}
+		return DismantlePossibility::kManageOnly;
+	}
+
+	// Never dismantle below some minimal count
+	if (bo.total_count() <= 1 || bo.total_count() <= bo.cnt_target ||
+	    (bo.max_preciousness >= 10 && bo.total_count() <= 2)) {
 		if (bo.is(BuildingAttribute::kRanger)) {
 			return DismantlePossibility::kManageOnly;
 		}
 		return DismantlePossibility::kCannot;
 	}
 
-	// NOCOM
+	// Handling some specific categories, mostly considering stocklevels NOCOM
 	if (bo.is(BuildingAttribute::kHunter) || bo.is(BuildingAttribute::kFisher)) {
 		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
 			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
@@ -5964,16 +5985,6 @@ DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo
 		// We never enforce dismantling even if we have plenty of their output - they clear
 		// the space
 		return DismantlePossibility::kMightBe;
-	} else if (bo.is(BuildingAttribute::kBarracks)) {
-		if (bo.total_count() > 1) {
-			verb_log_info_time(
-			   gametime,
-			   "AI %2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
-			   "error\n",
-			   player_number(), bo.total_count());
-			return DismantlePossibility::kShouldBe;
-		}
-		return DismantlePossibility::kManageOnly;
 	} else if (bo.inputs.empty() && bo.ware_outputs.size() == 1) {  // farms like
 		if (get_stocklevel(bo, gametime) > 250 + productionsites.size() * 5) {
 			printf("%d: too many %s on stock (%d) -> forced dismantlement of %s (%d sites now)\n",
