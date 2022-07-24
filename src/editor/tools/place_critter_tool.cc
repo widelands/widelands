@@ -102,22 +102,20 @@ EditorActionArgs EditorPlaceCritterTool::format_args_impl() {
 
 std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
-	const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions = descriptions.critters();
+	const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions
+           = descriptions.critters();
 
-	std::string buf;
-	constexpr int max_string_size = 100;
-        auto first = conf.map_obj_types.begin();
+	std::string mapobj_names;
 
-        for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
-             p != conf.map_obj_types.end() && buf.size() < max_string_size; p++) {
-                if (p != first) {
-                        buf += " | ";
+        for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
+                if (!mapobj_names.empty()) {
+                        mapobj_names += " | ";
                 }
-                buf += critter_descriptions.get(*p).descname();
+                mapobj_names += critter_descriptions.get(idx).descname();
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Critter: %1$s"), buf);
+	return format(_("Critter: %1$s"), mapobj_names);
 }
 
 bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {

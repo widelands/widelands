@@ -93,24 +93,23 @@ EditorActionArgs EditorPlaceImmovableTool::format_args_impl() {
 }
 
 
+
 std::string EditorPlaceImmovableTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
-	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions = descriptions.immovables();
+	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions
+           = descriptions.immovables();
 
-	std::string buf;
-	constexpr int max_string_size = 100;
-        auto first = conf.map_obj_types.begin();
+	std::string mapobj_names;
 
-        for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
-             p != conf.map_obj_types.end() && buf.size() < max_string_size; p++) {
-                if (p != first) {
-                        buf += " | ";
+        for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
+                if (!mapobj_names.empty()) {
+                        mapobj_names += " | ";
                 }
-                buf += immovable_descriptions.get(*p).descname();
+                mapobj_names += immovable_descriptions.get(idx).descname();
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Immovable: %1$s"), buf);
+	return format(_("Immovable: %1$s"), mapobj_names);
 }
 
 bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {

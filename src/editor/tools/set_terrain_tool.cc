@@ -96,20 +96,17 @@ std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& c
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrain_descriptions = descriptions.terrains();
 
-	std::string buf;
-	constexpr int max_string_size = 100;
-        auto first = conf.map_obj_types.begin();
+	std::string mapobj_names;
 
-        for (std::list<Widelands::DescriptionIndex>::const_iterator p = conf.map_obj_types.begin();
-             p != conf.map_obj_types.end() && buf.size() < max_string_size; p++) {
-                if (p != first) {
-                        buf += " | ";
+        for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
+                if (!mapobj_names.empty()) {
+                        mapobj_names += " | ";
                 }
-                buf += terrain_descriptions.get(*p).descname();
+                mapobj_names += terrain_descriptions.get(idx).descname();
 	}
 
         /** TRANSLATORS: An entry in the tool history list. */
-	return format(_("Terrain: %1$s"), buf);
+	return format(_("Terrain: %1$s"), mapobj_names);
 }
 
 bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {

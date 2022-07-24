@@ -31,8 +31,8 @@ ToolConf::ToolConf()
 std::string ToolConf::to_key() const {
 	std::string mapobj_ids;
 
-	for (Widelands::DescriptionIndex di: map_obj_types) {
-                mapobj_ids += std::to_string(static_cast<int>(di));
+	for (Widelands::DescriptionIndex id: map_obj_types) {
+                mapobj_ids += std::to_string(static_cast<int>(id));
 	}
 
         return format("tool:%d, change_by:%d, interval:%d..%d, map_objs:%s, resource:%d, set_to:%d",
