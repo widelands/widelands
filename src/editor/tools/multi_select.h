@@ -71,15 +71,12 @@ struct MultiSelect {
 	}
 
 	void disable_all() {
-		int32_t i = 0;
-		int32_t j = nr_enabled_;
-		while (j) {
+                for (int32_t i = 0, j = 0; j < nr_enabled_; i++) {
 			if (is_enabled(i)) {
-				enable(i, false);
-				--j;
-			}
-			++i;
-		}
+                                enable(i, false);
+                                j++;
+                        }
+                }
 	}
 
 	int32_t count() const {
