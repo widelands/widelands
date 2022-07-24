@@ -5934,15 +5934,16 @@ DismantlePossibility DefaultAI::check_dismantle_possibility(BuildingObserver& bo
 	//  * can be dismantled, let check_productionsite() decide for individual building/site (based on
 	//    statistics and so on)
 	//  * cannot be dismantled, but still check_productionsites() can continue for example to
-	//    start/stop sites 
+	//    start/stop sites
 	// Next step in decision making takes place in check_productionsites() -
 	// decision is made there for individual site if this here allows dismantlement
 	assert(bo.total_count() > 0);
 
-	// Some sites can be dismantled anytime - depending on sruff around them, no minimal count limits are applied
+	// Some sites can be dismantled anytime - depending on sruff around them, no minimal count limits
+	// are applied
 	if (bo.is(BuildingAttribute::kNeedsRocks)) {
 		return DismantlePossibility::kMightBe;
-	} 
+	}
 
 	// We want just one barrack
 	if (bo.is(BuildingAttribute::kBarracks)) {
