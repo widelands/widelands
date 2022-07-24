@@ -70,7 +70,6 @@ function see_amazons(field)
 end
 
 function see_reebaud(field)
-   local empire_already_defeated = (p3.defeated or not campaign_data.payment)
    local o_recruit_train = nil
    scroll_to_field(field)
    sleep(2000)
@@ -83,19 +82,19 @@ function see_reebaud(field)
    campaign_message_box(reebaud_5)
    campaign_message_box(reebaud_6)
    campaign_message_box(reebaud_7)
-   if p4.defeated then
+   if p4.defeated then  -- Amazons are already gone
       amazons_defeated_by_reebaud = true
       campaign_message_box(reebaud_8b)
-      if empire_already_defeated then
+      if not campaign_data.payment then  -- Empire doesn't exist
          campaign_message_box(reebaud_9c)
          o_recruit_train = add_campaign_objective(obj_recruit_train)
       end
-   else
+   else  -- Need to fight the Amazons
       campaign_message_box(reebaud_8a)
       if seen_amazons then campaign_message_box(reebaud_9a) else campaign_message_box(reebaud_9b) end
    end
    if not o_defeat_amz and not amazons_defeated_by_reebaud then o_defeat_amz = add_campaign_objective(obj_defeat_amz) end
-   if not empire_already_defeated then
+   if campaign_data.payment then  -- Need to fight the Empire
       sleep(2000)
       campaign_message_box(reebaud_10)
       campaign_message_box(reebaud_11)

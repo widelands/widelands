@@ -132,9 +132,9 @@ hq:set_workers {
    frisians_stonemason = 2,
 }
 soldiers = {
-   {{2,6,2,0}, 30},
-   {{1,3,1,0}, 20},
-   {{0,0,0,0}, 10},
+   {{2,4,1,0}, 30},
+   {{2,3,1,0}, 20},
+   {{1,2,1,0}, 10},
 }
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
 
@@ -280,15 +280,15 @@ hq:set_workers {
 }
 if campaign_data.payment then
    soldiers = {
-      {{1,1,1,1}, 45},
+      {{2,2,1,2}, 45},
       {{2,2,1,2}, 55},
-      {{3,2,2,3}, 65},
+      {{2,2,1,2}, 65},
    }
 else
    soldiers = {
-      {{1,1,1,1}, 70},
+      {{2,2,1,2}, 70},
       {{2,2,1,2}, 80},
-      {{3,2,2,3}, 90},
+      {{2,2,1,2}, 90},
    }
 end
 hq:set_soldiers(soldiers[difficulty][1], soldiers[difficulty][2])
