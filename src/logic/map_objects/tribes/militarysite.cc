@@ -382,13 +382,13 @@ void MilitarySite::update_statistics_string(std::string* s) {
 				the number of soldiers missing to fill the building. %3% is the soldier
 				singular string of the tribe. */
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-							owner().tribe().get_soldier_singular_string());
+				            owner().tribe().get_soldier_singular_string());
 			} else {
 				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
 				the number of soldiers missing to fill the building. %3% is the soldier
 				plural string of the tribe. */
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-							owner().tribe().get_soldier_plural_string());
+				            owner().tribe().get_soldier_plural_string());
 			}
 		} else {
 			if (stationed == 1) {
@@ -428,13 +428,13 @@ void MilitarySite::update_statistics_string(std::string* s) {
 				the number of soldiers away (attacking or defending). %3% is the
 				soldier singular string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				   owner().tribe().get_soldier_singular_string());
+				            owner().tribe().get_soldier_singular_string());
 			} else {
 				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
 				the number of soldiers away (attacking or defending). %3% is the
 				soldier singular string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				   owner().tribe().get_soldier_plural_string());
+				            owner().tribe().get_soldier_plural_string());
 			}
 		}
 	}
