@@ -263,7 +263,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   soldier_plural_, "soldier_plural",
 		   /** TRANSLATORS: plural of multiple soldiers to be used in military buildings status strings
 		      (e.g. 1 soldiers). If you need plural forms here, please let us know. */
-		   _("Workers missing"));
+		   _("soldiers"));
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");

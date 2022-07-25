@@ -378,17 +378,27 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	if (present == stationed) {
 		if (capacity_ > stationed) {
 			if (stationed == 1) {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers missing to fill the building. %3% is the soldier
+				singular string of the tribe. */
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
 							owner().tribe().get_soldier_singular_string());
 			} else {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers missing to fill the building. %3% is the soldier
+				plural string of the tribe. */
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
 							owner().tribe().get_soldier_plural_string());
 			}
 		} else {
 			if (stationed == 1) {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2%  is
+				the soldier singular string of the tribe. */
 				*s = format(gettext("%1% %2%"), stationed,
 							owner().tribe().get_soldier_singular_string());
 			} else {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2%  is
+				the soldier plural string of the tribe. */
 				*s = format(gettext("%1% %2%"), stationed,
 							owner().tribe().get_soldier_plural_string());
 			}
@@ -396,19 +406,33 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	} else {
 		if (capacity_ > stationed) {
 			if (stationed == 1) {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers away (attacking or defending). %3% is
+				the number of soldiers missing to fill the building. %4% is the soldier
+				singular string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
 				   present, (stationed - present), (capacity_ - stationed),
 					owner().tribe().get_soldier_singular_string());
 			} else {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers away (attacking or defending). %3% is
+				the number of soldiers missing to fill the building. %4% is the soldier
+				plural string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
 				   present, (stationed - present), (capacity_ - stationed),
 					owner().tribe().get_soldier_plural_string());
 			}
 		} else {
 			if (stationed == 1) {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers away (attacking or defending). %3% is the
+				soldier singular string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
 				   owner().tribe().get_soldier_singular_string());
 			} else {
+				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
+				the number of soldiers away (attacking or defending). %3% is the
+				soldier singular string of the tribe. */
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
 				   owner().tribe().get_soldier_plural_string());
 			}
