@@ -19,6 +19,7 @@
 #ifndef WL_EDITOR_TOOLS_MULTI_SELECT_H
 #define WL_EDITOR_TOOLS_MULTI_SELECT_H
 
+#include <cstdint>
 #include <cstdlib>
 #include <set>
 
