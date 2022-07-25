@@ -9,7 +9,6 @@ include "tribes/scripting/help/time_strings.lua"
 
 wl.Descriptions():new_tribe {
    name = "amazons",
-   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {5, 35} },
@@ -1642,6 +1641,13 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("amazons", "Workers missing"),
    -- TRANSLATORS: Productivity label on an amazon building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("amazons", "Workers are coming"),
+
+   -- Soldier strings to be used in Military Status strings
+
+   -- TRANSLATORS: singular of 1 soldier to be used in miltiary buildings status strings (e.g. 1 soldier)
+   soldier_singular = pgettext("amazons", "soldier"),
+   -- TRANSLATORS: plural of multiple soldiers to be used in military buildings status strings (e.g. 1 soldiers). If you need plural forms here, please let us know.
+   soldier_plural = pgettext("amazons", "soldiers"),
 
    -- Special types
    builder = "amazons_builder",

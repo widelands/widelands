@@ -65,7 +65,6 @@ public:
 
 	const std::string& name() const;
 	const std::string& descname() const;
-	const std::string& military_capacity_script() const;
 
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
@@ -182,6 +181,13 @@ public:
 		return productionsite_workers_coming_;
 	}
 
+	const std::string& get_soldier_singular_string() const {
+		return soldier_singular_;
+	}
+	const std::string& get_soldier_plural_string() const {
+		return soldier_plural_;
+	}
+
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
@@ -218,7 +224,6 @@ private:
 
 	const std::string name_;
 	const std::string descname_;
-	const std::string military_capacity_script_;
 	const Descriptions& descriptions_;
 
 	uint32_t frontier_animation_id_;
@@ -261,8 +266,13 @@ private:
 	WaresOrder workers_order_;
 	std::vector<std::pair<std::string, int>> collectors_points_table_;
 
-	std::string productionsite_worker_missing_, productionsite_workers_missing_,
-	   productionsite_worker_coming_, productionsite_workers_coming_;
+	std::string productionsite_worker_missing_;
+	std::string productionsite_workers_missing_;
+	std::string productionsite_worker_coming_;
+	std::string productionsite_workers_coming_;
+
+	std::string soldier_singular_;
+	std::string soldier_plural_;
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
