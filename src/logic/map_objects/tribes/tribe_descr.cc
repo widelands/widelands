@@ -141,9 +141,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
-     military_capacity_script_(table.has_key<std::string>("military_capacity_script") ?
-                                  table.get_string("military_capacity_script") :
-                                  ""),
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
@@ -156,12 +153,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      basic_info_(info) {
 	verb_log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums", true);
-
-	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
-		// TODO(GunChleoc): API compatibility - require after v 1.0
-		log_warn("File '%s' for military_capacity_script for tribe '%s' does not exist",
-		         military_capacity_script_.c_str(), name().c_str());
-	}
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -251,6 +242,28 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
+
+		// TODO(hessenfarmer): Require these strings after v1.2
+		auto load_soldier_string = [this, &table](std::string& target, const std::string& key,
+		                                                 const std::string& default_value) {
+			if (table.has_key(key)) {
+				target = table.get_string(key);
+			} else {
+				log_warn(
+				   "Tribe '%s' defines no soldier string '%s'", name().c_str(), key.c_str());
+				target = default_value;
+			}
+		};
+		load_soldier_string(
+		   soldier_singular_, "soldier_singular",
+		   /** TRANSLATORS: singular of 1 soldier to be used in miltiary buildings status strings
+		      (e.g. 1 soldier) */
+		   _("soldier"));
+		load_soldier_string(
+		   soldier_plural_, "soldier_plural",
+		   /** TRANSLATORS: plural of multiple soldiers to be used in military buildings status strings
+		      (e.g. 1 soldiers). If you need plural forms here, please let us know. */
+		   _("Workers missing"));
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");
@@ -580,9 +593,6 @@ const std::string& TribeDescr::name() const {
 }
 const std::string& TribeDescr::descname() const {
 	return descname_;
-}
-const std::string& TribeDescr::military_capacity_script() const {
-	return military_capacity_script_;
 }
 
 size_t TribeDescr::get_nrwares() const {
