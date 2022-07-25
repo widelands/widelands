@@ -379,38 +379,35 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		if (capacity_ > stationed) {
 			if (stationed == 1) {
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-							owner().tribe().get_soldier_singular_string());
+				            owner().tribe().get_soldier_singular_string());
 			} else {
 				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-							owner().tribe().get_soldier_plural_string());
+				            owner().tribe().get_soldier_plural_string());
 			}
 		} else {
 			if (stationed == 1) {
-				*s = format(gettext("%1% %2%"), stationed,
-							owner().tribe().get_soldier_singular_string());
+				*s =
+				   format(gettext("%1% %2%"), stationed, owner().tribe().get_soldier_singular_string());
 			} else {
-				*s = format(gettext("%1% %2%"), stationed,
-							owner().tribe().get_soldier_plural_string());
+				*s = format(gettext("%1% %2%"), stationed, owner().tribe().get_soldier_plural_string());
 			}
 		}
 	} else {
 		if (capacity_ > stationed) {
 			if (stationed == 1) {
-				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
-				   present, (stationed - present), (capacity_ - stationed),
-					owner().tribe().get_soldier_singular_string());
+				*s = format(gettext("%1%(+%2%) %4% (+%3%)"), present, (stationed - present),
+				            (capacity_ - stationed), owner().tribe().get_soldier_singular_string());
 			} else {
-				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
-				   present, (stationed - present), (capacity_ - stationed),
-					owner().tribe().get_soldier_plural_string());
+				*s = format(gettext("%1%(+%2%) %4% (+%3%)"), present, (stationed - present),
+				            (capacity_ - stationed), owner().tribe().get_soldier_plural_string());
 			}
 		} else {
 			if (stationed == 1) {
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				   owner().tribe().get_soldier_singular_string());
+				            owner().tribe().get_soldier_singular_string());
 			} else {
 				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				   owner().tribe().get_soldier_plural_string());
+				            owner().tribe().get_soldier_plural_string());
 			}
 		}
 	}
