@@ -258,7 +258,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		load_soldier_string(soldier_singular_, "soldier_singular", ("soldier"));
 		load_soldier_string(soldier_plural_, "soldier_plural", ("soldiers"));
 
-
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");
 		for (int key : collectors_points_table->keys<int>()) {
