@@ -19,7 +19,7 @@
 #ifndef WL_EDITOR_TOOLS_TOOL_CONF_H
 #define WL_EDITOR_TOOLS_TOOL_CONF_H
 
-#include <list>
+#include <set>
 #include <string>
 
 #include "logic/widelands.h"
@@ -40,7 +40,7 @@ struct ToolConf {
 	int32_t change_by;
 	Widelands::ResourceAmount set_to;
 	Widelands::HeightInterval interval;
-	std::list<Widelands::DescriptionIndex> map_obj_types;
+	std::set<Widelands::DescriptionIndex> map_obj_types;
 	Widelands::DescriptionIndex resource;
 };
 
