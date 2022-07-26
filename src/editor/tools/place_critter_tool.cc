@@ -118,18 +118,13 @@ std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf&
 }
 
 bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {
-	int j = get_nr_enabled();
-
-	if (j == 0) {
+	if (0 == get_nr_enabled()) {
 		return false;
 	}
 
-	for (int i = 0; j > 0; ++i) {
-		if (is_enabled(i)) {
-			conf.map_obj_types.push_back(i);
-			--j;
-		}
-	}
+        for (int32_t descrindex: getEnabled()) {
+                conf.map_obj_types.insert(descrindex);
+        }
 
 	return true;
 }
