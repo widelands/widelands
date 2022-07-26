@@ -20,7 +20,6 @@
 #define WL_EDITOR_TOOLS_TOOLHISTORY_TOOL_H
 
 #include <list>
-#include <vector>
 
 #include "editor/tools/tool.h"
 
@@ -51,7 +50,6 @@ struct EditorHistoryTool : public EditorTool {
 		return g_image_cache->get("images/wui/editor/fsel_editor_info.png");
 	}
 
-	const std::vector<std::string>& get_list();
 	const ToolConf* get_configuration_for(const std::string& key);
 	void remove_configuration(const std::string& key);
 
@@ -67,7 +65,6 @@ private:
 	std::list<ListItem>::iterator find_item(const std::string& key);
 	void truncate();
 	std::list<ListItem> tool_settings_;
-	std::vector<std::string> keys_;
 	static constexpr int kMaxSize = 15;
 };
 
