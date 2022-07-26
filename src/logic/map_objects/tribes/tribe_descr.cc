@@ -253,14 +253,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 				target = default_value;
 			}
 		};
-		load_soldier_string(soldier_singular_, "soldier_singular",
-		                    /** TRANSLATORS: singular of 1 soldier to be used in miltiary buildings
-		                       status strings (e.g. 1 soldier) */
-		                    _("soldier"));
-		load_soldier_string(soldier_plural_, "soldier_plural",
-		   /** TRANSLATORS: plural of multiple soldiers to be used in military buildings status strings
-		      (e.g. 1 soldiers). If you need plural forms here, please let us know. */
-		   _("soldiers"));
+		load_soldier_string(soldier_context_, "soldier_context", ("atlanteans_soldier"));
+		load_soldier_string(soldier_singular_, "soldier_singular", ("soldier"));
+		load_soldier_string(soldier_plural_, "soldier_plural", ("soldiers"));
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");

@@ -181,6 +181,9 @@ public:
 		return productionsite_workers_coming_;
 	}
 
+	const std::string& get_soldier_context_string() const {
+		return soldier_context_;
+	}
 	const std::string& get_soldier_singular_string() const {
 		return soldier_singular_;
 	}
@@ -271,6 +274,7 @@ private:
 	std::string productionsite_worker_coming_;
 	std::string productionsite_workers_coming_;
 
+	std::string soldier_context_;
 	std::string soldier_singular_;
 	std::string soldier_plural_;
 

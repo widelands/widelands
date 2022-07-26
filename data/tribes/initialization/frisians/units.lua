@@ -2192,10 +2192,17 @@ wl.Descriptions():new_tribe {
 
    -- Soldier strings to be used in Military Status strings
 
-   -- TRANSLATORS: singular of 1 soldier to be used in miltiary buildings status strings (e.g. 1 soldier)
-   soldier_singular = pgettext("frisians", "soldier"),
-   -- TRANSLATORS: plural of multuiple soldiers to be used in military buildings status strings (e.g. 1 soldiers). If you need plural forms here, please let us know.
-   soldier_plural = pgettext("frisians", "soldiers"),
+   soldier_context = "frisians_soldier",
+   soldier_singular = "soldier",
+   soldier_plural = "soldiers",
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+   soldier_1 = npgettext("frisians_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0)
+   -- TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
+   soldier_2 = npgettext("frisians_soldier", "%1% soldier", "%1% soldiers", 0)
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+   soldier_3 = npgettext("frisians_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0)
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building.
+   soldier_4 = npgettext("frisians_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0)
 
    -- Special types
    builder = "frisians_builder",

@@ -377,65 +377,29 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	// military capacity strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
-			if (stationed == 1) {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers missing to fill the building. %3% is the soldier
-				singular string of the tribe. */
-				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-				            owner().tribe().get_soldier_singular_string());
-			} else {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers missing to fill the building. %3% is the soldier
-				plural string of the tribe. */
-				*s = format(gettext("%1% %3% (+%2%)"), stationed, (capacity_ - stationed),
-				            owner().tribe().get_soldier_plural_string());
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
+			  number of soldier slots in the building */
+			*s = format(npgettext(owner().tribe().get_soldier_context_string(), "%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed), stationed,
+						(capacity_ - stationed));
 			}
 		} else {
-			if (stationed == 1) {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2%  is
-				the soldier singular string of the tribe. */
-				*s = format(gettext("%1% %2%"), stationed,
-							owner().tribe().get_soldier_singular_string());
-			} else {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2%  is
-				the soldier plural string of the tribe. */
-				*s = format(gettext("%1% %2%"), stationed,
-							owner().tribe().get_soldier_plural_string());
-			}
+			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
+			*s = format(npgettext(owner().tribe().get_soldier_context_string(), "%1% soldier", "%1% soldiers", stationed), stationed);
 		}
 	} else {
 		if (capacity_ > stationed) {
-			if (stationed == 1) {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers away (attacking or defending). %3% is
-				the number of soldiers missing to fill the building. %4% is the soldier
-				singular string of the tribe. */
-				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
-				   present, (stationed - present), (capacity_ - stationed),
-					owner().tribe().get_soldier_singular_string());
-			} else {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers away (attacking or defending). %3% is
-				the number of soldiers missing to fill the building. %4% is the soldier
-				plural string of the tribe. */
-				*s = format(gettext("%1%(+%2%) %4% (+%3%)"),
-				   present, (stationed - present), (capacity_ - stationed),
-					owner().tribe().get_soldier_plural_string());
+			*s = format(
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
+			  currently open soldier slots in the building. %3% is the maximum number of
+			  soldier slots in the building */
+			npgettext(owner().tribe().get_soldier_context_string(), "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed),
+			present, (stationed - present), (capacity_ - stationed));
 			}
 		} else {
-			if (stationed == 1) {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers away (attacking or defending). %3% is the
-				soldier singular string of the tribe. */
-				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				            owner().tribe().get_soldier_singular_string());
-			} else {
-				/** TRANSLATORS: %1% is the number of soldiers stationed here. %2% is
-				the number of soldiers away (attacking or defending). %3% is the
-				soldier singular string of the tribe. */
-				*s = format(gettext("%1%(+%2%) %3%"), present, (stationed - present),
-				            owner().tribe().get_soldier_plural_string());
-			}
+			/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
+			  open soldier slots in the building */
+			*s = format(npgettext(owner().tribe().get_soldier_context_string(), "%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed), present,
+						(stationed - present));
 		}
 	}
 
