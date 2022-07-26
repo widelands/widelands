@@ -73,7 +73,7 @@ struct MultiSelect {
 		return enabled_.size();
 	}
 
-        const std::set<int32_t>& getEnabled() const {
+        const std::set<int32_t>& get_enabled() const {
                 return enabled_;
         }
 
