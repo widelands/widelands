@@ -1823,13 +1823,13 @@ wl.Descriptions():new_tribe {
    soldier_singular = "soldier",
    soldier_plural = "soldiers",
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
-   soldier_1 = npgettext("barbarians_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0)
+   soldier_1 = npgettext("barbarians_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
    -- TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-   soldier_2 = npgettext("barbarians_soldier", "%1% soldier", "%1% soldiers", 0)
+   soldier_2 = npgettext("barbarians_soldier", "%1% soldier", "%1% soldiers", 0),
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
-   soldier_3 = npgettext("barbarians_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0)
+   soldier_3 = npgettext("barbarians_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building.
-   soldier_4 = npgettext("barbarians_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0)
+   soldier_4 = npgettext("barbarians_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
 
    -- Special types
    builder = "barbarians_builder",
