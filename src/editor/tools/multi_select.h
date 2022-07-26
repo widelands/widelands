@@ -41,7 +41,6 @@ struct MultiSelect {
                 } else {
                         enabled_.erase(n);
                 }
-                enabled_.erase(9);
 	}
 
 	bool is_enabled(int32_t n) const {
@@ -73,6 +72,10 @@ struct MultiSelect {
 	int32_t count() const {
 		return enabled_.size();
 	}
+
+        const std::set<int32_t>& getEnabled() const {
+                return enabled_;
+        }
 
 private:
         std::set<int32_t> enabled_;
