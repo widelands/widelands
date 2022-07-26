@@ -253,9 +253,11 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 				target = default_value;
 			}
 		};
+
 		load_soldier_string(soldier_context_, "soldier_context", ("atlanteans_soldier"));
 		load_soldier_string(soldier_singular_, "soldier_singular", ("soldier"));
 		load_soldier_string(soldier_plural_, "soldier_plural", ("soldiers"));
+
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");
