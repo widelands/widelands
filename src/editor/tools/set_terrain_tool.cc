@@ -115,9 +115,7 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 		return false;
 	}
 
-        for (int32_t descrindex: getEnabled()) {
-                conf.map_obj_types.insert(descrindex);
-        }
+        conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
 
 	return true;
 }
