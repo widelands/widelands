@@ -720,6 +720,13 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for a frisian worker: Shipwright
                purpose = pgettext("frisians_worker", "Works at the shipyard and constructs new ships.")
             }
+         },
+         {
+            name = "frisians_diker",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for a frisian worker: Diker
+               purpose = pgettext("frisians_worker", "Constructs breakwaters to gain new land from the sea.")
+            }
          }
       },
       {
@@ -1224,6 +1231,15 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Pond
             purpose = _("A charcoal stack, which had been erected in this earthen hole, is ready for a charcoal burner to gather coal from it.")
+         }
+      },
+      {
+         name = "dike",
+         helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Dike
+            purpose = _("A breakwater erected by a diker to gain new land from the sea."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Diker's House
+            note = _("You can manually remove the dike when the land is sufficiently secured to prevent wasting resources. To do so, build a flag, road, or building in its place.")
          }
       },
       {
@@ -1958,6 +1974,15 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Sows and harvests barley."),
             -- TRANSLATORS: Note helptext for a frisian production site: Farm
             note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds.")
+         }
+      },
+      {
+         name = "frisians_dikers_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
+            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Diker's House
+            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place.")
          }
       },
 
