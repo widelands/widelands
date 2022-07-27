@@ -99,14 +99,14 @@ std::string EditorSetTerrainTool::format_conf_description_impl(const ToolConf& c
 
 	std::string mapobj_names;
 
-        for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
-                if (!mapobj_names.empty()) {
-                        mapobj_names += " | ";
-                }
-                mapobj_names += terrain_descriptions.get(idx).descname();
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		if (!mapobj_names.empty()) {
+			mapobj_names += " | ";
+		}
+		mapobj_names += terrain_descriptions.get(idx).descname();
 	}
 
-        /** TRANSLATORS: An entry in the tool history list. */
+	/** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Terrain: %1$s"), mapobj_names);
 }
 
@@ -115,14 +115,14 @@ bool EditorSetTerrainTool::save_configuration_impl(ToolConf& conf) {
 		return false;
 	}
 
-        conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
+	conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
 
 	return true;
 }
 
 void EditorSetTerrainTool::load_configuration(const ToolConf& conf) {
 	disable_all();
-	for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
 		enable(idx, true);
 	}
 }
