@@ -31,14 +31,14 @@ function immovable_help_string(tribe, immovable_description)
    local helptexts = immovable_description:helptexts(tribe.name)
    local result = ""
    local image = immovable_description.icon_name
-   if helptexts.purpose then
+   if helptexts.purpose ~= nil then
       result = h2(_("Purpose")) ..
          li_object(immovable_description.name, helptexts.purpose)
    elseif image ~= "" then
       result = p(vspace(14) .. img(immovable_description.icon_name))
    end
 
-   if helptexts.note then
+   if helptexts.note ~= nil then
       result = result .. h2(_("Note")) .. p(helptexts.note)
    end
 
