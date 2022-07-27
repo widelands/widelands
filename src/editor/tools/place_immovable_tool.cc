@@ -92,23 +92,21 @@ EditorActionArgs EditorPlaceImmovableTool::format_args_impl() {
 	return EditorTool::format_args_impl();
 }
 
-
-
 std::string EditorPlaceImmovableTool::format_conf_description_impl(const ToolConf& conf) {
 	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
-	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions
-           = descriptions.immovables();
+	const Widelands::DescriptionMaintainer<Widelands::ImmovableDescr>& immovable_descriptions =
+	   descriptions.immovables();
 
 	std::string mapobj_names;
 
-        for (Widelands::DescriptionIndex idx: conf.map_obj_types) {
-                if (!mapobj_names.empty()) {
-                        mapobj_names += " | ";
-                }
-                mapobj_names += immovable_descriptions.get(idx).descname();
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		if (!mapobj_names.empty()) {
+			mapobj_names += " | ";
+		}
+		mapobj_names += immovable_descriptions.get(idx).descname();
 	}
 
-        /** TRANSLATORS: An entry in the tool history list. */
+	/** TRANSLATORS: An entry in the tool history list. */
 	return format(_("Immovable: %1$s"), mapobj_names);
 }
 
@@ -117,7 +115,7 @@ bool EditorPlaceImmovableTool::save_configuration_impl(ToolConf& conf) {
 		return false;
 	}
 
-        conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
+	conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
 
 	return true;
 }

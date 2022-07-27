@@ -36,15 +36,15 @@ struct MultiSelect {
 	}
 
 	void enable(int32_t n, bool t) {
-                if (t) {
-                        enabled_.insert(n);
-                } else {
-                        enabled_.erase(n);
-                }
+		if (t) {
+			enabled_.insert(n);
+		} else {
+			enabled_.erase(n);
+		}
 	}
 
 	bool is_enabled(int32_t n) const {
-                return enabled_.find(n) != enabled_.end();
+		return enabled_.find(n) != enabled_.end();
 	}
 
 	int32_t get_nr_enabled() const {
@@ -55,30 +55,30 @@ struct MultiSelect {
 		int32_t rand_value =
 		   static_cast<int32_t>(static_cast<double>(get_nr_enabled()) * rand() / (RAND_MAX + 1.0));
 
-                for (int32_t item: enabled_) {
-                        if (rand_value == 0) {
-                                return item;
-                        }
-                        --rand_value;
-                }
+		for (int32_t item : enabled_) {
+			if (rand_value == 0) {
+				return item;
+			}
+			--rand_value;
+		}
 
-                return -1;
+		return -1;
 	}
 
 	void disable_all() {
-                enabled_.clear();
+		enabled_.clear();
 	}
 
 	int32_t count() const {
 		return enabled_.size();
 	}
 
-        const std::set<int32_t>& get_enabled() const {
-                return enabled_;
-        }
+	const std::set<int32_t>& get_enabled() const {
+		return enabled_;
+	}
 
 private:
-        std::set<int32_t> enabled_;
+	std::set<int32_t> enabled_;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_MULTI_SELECT_H

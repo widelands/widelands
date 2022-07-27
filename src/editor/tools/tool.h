@@ -93,8 +93,7 @@ public:
 		return EditorActionArgs(parent_);
 	}
 
-
-        // Default implementation if a tool doesn't hava a restorable configuration.
+	// Default implementation if a tool doesn't hava a restorable configuration.
 	virtual std::string format_conf_description_impl(const ToolConf&) {
 		return "";
 	}
