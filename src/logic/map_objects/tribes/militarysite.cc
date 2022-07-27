@@ -370,7 +370,8 @@ Display number of soldiers.
 ===============
 */
 void MilitarySite::update_statistics_string(std::string* s) {
-	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(owner().tribe().basic_info().addon, "tribes_encyclopedia"));
+	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(
+	   owner().tribe().basic_info().addon, "tribes_encyclopedia"));
 	s->clear();
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
@@ -378,23 +379,31 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	// military capacity strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
-			*s = format(npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			                      owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(), owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
-			            stationed, (capacity_ - stationed));
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
+			   stationed, (capacity_ - stationed));
 		} else {
-			*s = format(npgettext(owner().tribe().get_soldier_context_string().c_str(), owner().tribe().get_soldier_capacity_strings_sg()[1].c_str(), owner().tribe().get_soldier_capacity_strings_pl()[1].c_str(), stationed),
-			            stationed);
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[1].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[1].c_str(), stationed),
+			   stationed);
 		}
 	} else {
 		if (capacity_ > stationed) {
 			*s = format(
 			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(), owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
+			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
 			   present, (stationed - present), (capacity_ - stationed));
 		} else {
-			*s = format(npgettext(owner().tribe().get_soldier_context_string().c_str(),
-			                      owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(), owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
-			            present, (stationed - present));
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
+			   present, (stationed - present));
 		}
 	}
 

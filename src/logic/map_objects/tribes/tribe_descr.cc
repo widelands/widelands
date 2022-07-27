@@ -258,8 +258,10 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		load_soldier_string(soldier_capacity_strings_pl_[0], "soldier_0_pl", "%1% soldiers (+%2%)");
 		load_soldier_string(soldier_capacity_strings_sg_[1], "soldier_1_sg", "%1% soldier");
 		load_soldier_string(soldier_capacity_strings_pl_[1], "soldier_1_pl", "%1% soldiers");
-		load_soldier_string(soldier_capacity_strings_sg_[2], "soldier_2_sg", "%1%(+%2%) soldier (+%3%)");
-		load_soldier_string(soldier_capacity_strings_pl_[2], "soldier_2_pl", "%1%(+%2%) soldiers (+%3%)");
+		load_soldier_string(
+		   soldier_capacity_strings_sg_[2], "soldier_2_sg", "%1%(+%2%) soldier (+%3%)");
+		load_soldier_string(
+		   soldier_capacity_strings_pl_[2], "soldier_2_pl", "%1%(+%2%) soldiers (+%3%)");
 		load_soldier_string(soldier_capacity_strings_sg_[3], "soldier_3_sg", "%1%(+%2%) soldier");
 		load_soldier_string(soldier_capacity_strings_pl_[3], "soldier_3_pl", "%1%(+%2%) soldiers");
 

@@ -40,7 +40,8 @@ LuaTable::~LuaTable() {
 		for (const std::string& unused_key : unused_keys) {
 			// We must not throw in destructors as this can shadow other errors.
 			if (!starts_with(unused_key, "UNUSED_")) {
-				log_warn("Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+				log_warn(
+				   "Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
 			}
 		}
 	}
