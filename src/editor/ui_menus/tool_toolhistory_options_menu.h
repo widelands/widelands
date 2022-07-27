@@ -16,31 +16,35 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
-#define WL_EDITOR_UI_MENUS_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
+#ifndef WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
+#define WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H
 
+#include "editor/tools/tool_action.h"
 #include "editor/ui_menus/tool_options_menu.h"
 #include "ui_basic/box.h"
-#include "ui_basic/spinbox.h"
+#include "ui_basic/listselect.h"
 
 class EditorInteractive;
-struct EditorIncreaseHeightTool;
+struct EditorHistoryTool;
 
-struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
-	EditorToolChangeHeightOptionsMenu(EditorInteractive&,
-	                                  EditorIncreaseHeightTool&,
-	                                  UI::UniqueWindow::Registry&);
-
-	void update_window() override;
+struct EditorToolhistoryOptionsMenu : public EditorToolOptionsMenu {
+	EditorToolhistoryOptionsMenu(EditorInteractive&,
+	                             EditorHistoryTool&,
+	                             UI::UniqueWindow::Registry&);
+	void update();
 
 private:
-	EditorIncreaseHeightTool& increase_tool_;
-	UI::Box box_;
-	UI::SpinBox change_by_;
-	UI::SpinBox set_to_;
+	EditorInteractive& eia() const;
+	EditorHistoryTool& history_tool_;
 
-	void update_change_by();
-	void update_set_to();
+	void list_item_clicked(const std::string& selected);
+	std::string make_tooltip(const ToolConf& conf, const std::string& title);
+	void rebuild_list();
+
+	int32_t margin_;
+	int32_t box_width_;
+	UI::Box box_;
+	UI::Listselect<std::string> list_;
 };
 
-#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
+#endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_TOOLHISTORY_OPTIONS_MENU_H

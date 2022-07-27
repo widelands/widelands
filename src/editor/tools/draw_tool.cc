@@ -29,30 +29,28 @@ void EditorDrawTool::add_action(const EditorToolAction& ac, EditorActionArgs& ar
 
 int32_t
 EditorDrawTool::handle_click_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-                                  EditorInteractive& /* parent */,
                                   EditorActionArgs* args,
                                   Widelands::Map* /* map */) {
 
 	for (EditorToolAction* action : args->draw_actions) {
-		action->tool.handle_click(static_cast<EditorTool::ToolIndex>(action->i), action->center,
-		                          action->parent, action->args, &action->map);
+		action->tool.handle_click(
+		   static_cast<EditorTool::ToolIndex>(action->i), action->center, action->args, &action->map);
 	}
 	return args->draw_actions.size();
 }
 
 int32_t
 EditorDrawTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-                                 EditorInteractive& /* parent */,
                                  EditorActionArgs* args,
                                  Widelands::Map* /* map */) {
 	for (std::list<EditorToolAction*>::reverse_iterator i = args->draw_actions.rbegin();
 	     i != args->draw_actions.rend(); ++i) {
-		(*i)->tool.handle_undo(static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center,
-		                       (*i)->parent, (*i)->args, &((*i)->map));
+		(*i)->tool.handle_undo(
+		   static_cast<EditorTool::ToolIndex>((*i)->i), (*i)->center, (*i)->args, &((*i)->map));
 	}
 	return args->draw_actions.size();
 }
 
-EditorActionArgs EditorDrawTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDrawTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }
