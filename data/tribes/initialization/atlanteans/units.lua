@@ -197,6 +197,31 @@
 --
 --    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
 --
+--    **soldier_context**, **soldier_0_sg**, **soldier_0_pl**, **soldier_1_sg**, **soldier_1_pl**, **soldier_2_sg**, **soldier_2_pl**,
+--    **soldier_3_sg**, **soldier_3_pl**: The pgettext context for militarysites' soldier strings, and the corresponding **unlocalized**
+--    singular and plural strings. Additionally, it is necessary to specify the ``npgettext`` calls for all four types of soldier strings
+--    so as to ensure that all keys appear in the PO files (the ``npgettext`` results are unused). Example:
+--
+--    .. code-block:: lua
+--
+--       soldier_context = "atlanteans_soldier",
+--       soldier_0_sg = "%1% soldier (+%2%)",
+--       soldier_0_pl = "%1% soldiers (+%2%)",
+--       soldier_1_sg = "%1% soldier",
+--       soldier_1_pl = "%1% soldiers",
+--       soldier_2_sg = "%1%(+%2%) soldier (+%3%)",
+--       soldier_2_pl = "%1%(+%2%) soldiers (+%3%)",
+--       soldier_3_sg = "%1%(+%2%) soldier",
+--       soldier_3_pl = "%1%(+%2%) soldiers",
+--       -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+--       UNUSED_soldier_0 = npgettext("atlanteans_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+--       -- TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
+--       UNUSED_soldier_1 = npgettext("atlanteans_soldier", "%1% soldier", "%1% soldiers", 0),
+--       -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+--       UNUSED_soldier_2 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+--       -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building.
+--       UNUSED_soldier_3 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
+--
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
@@ -2004,16 +2029,22 @@ wl.Descriptions():new_tribe {
    -- Soldier strings to be used in Military Status strings
 
    soldier_context = "atlanteans_soldier",
-   soldier_singular = "soldier",
-   soldier_plural = "soldiers",
+   soldier_1_sg = "%1% soldier (+%2%)",
+   soldier_1_pl = "%1% soldiers (+%2%)",
+   soldier_2_sg = "%1% soldier",
+   soldier_2_pl = "%1% soldiers",
+   soldier_3_sg = "%1%(+%2%) soldier (+%3%)",
+   soldier_3_pl = "%1%(+%2%) soldiers (+%3%)",
+   soldier_4_sg = "%1%(+%2%) soldier",
+   soldier_4_pl = "%1%(+%2%) soldiers",
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
-   soldier_1 = npgettext("atlanteans_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+   UNUSED_soldier_1 = npgettext("atlanteans_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
    -- TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-   soldier_2 = npgettext("atlanteans_soldier", "%1% soldier", "%1% soldiers", 0),
+   UNUSED_soldier_2 = npgettext("atlanteans_soldier", "%1% soldier", "%1% soldiers", 0),
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
-   soldier_3 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+   UNUSED_soldier_3 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
    -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building.
-   soldier_4 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
+   UNUSED_soldier_4 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
 
    -- Special types
    builder = "atlanteans_builder",

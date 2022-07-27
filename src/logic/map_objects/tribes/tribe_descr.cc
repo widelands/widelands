@@ -243,7 +243,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
 
-		// TODO(hessenfarmer): Require these strings after v1.2
 		auto load_soldier_string = [this, &table](std::string& target, const std::string& key,
 		                                          const std::string& default_value) {
 			if (table.has_key(key)) {
@@ -254,9 +253,15 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 			}
 		};
 
-		load_soldier_string(soldier_context_, "soldier_context", ("atlanteans_soldier"));
-		load_soldier_string(soldier_singular_, "soldier_singular", ("soldier"));
-		load_soldier_string(soldier_plural_, "soldier_plural", ("soldiers"));
+		load_soldier_string(soldier_context_, "soldier_context", "empire_soldier");
+		load_soldier_string(soldier_capacity_strings_sg_[0], "soldier_0_sg", "%1% soldier (+%2%)");
+		load_soldier_string(soldier_capacity_strings_pl_[0], "soldier_0_pl", "%1% soldiers (+%2%)");
+		load_soldier_string(soldier_capacity_strings_sg_[1], "soldier_1_sg", "%1% soldier");
+		load_soldier_string(soldier_capacity_strings_pl_[1], "soldier_1_pl", "%1% soldiers");
+		load_soldier_string(soldier_capacity_strings_sg_[2], "soldier_2_sg", "%1%(+%2%) soldier (+%3%)");
+		load_soldier_string(soldier_capacity_strings_pl_[2], "soldier_2_pl", "%1%(+%2%) soldiers (+%3%)");
+		load_soldier_string(soldier_capacity_strings_sg_[3], "soldier_3_sg", "%1%(+%2%) soldier");
+		load_soldier_string(soldier_capacity_strings_pl_[3], "soldier_3_pl", "%1%(+%2%) soldiers");
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");

@@ -184,11 +184,11 @@ public:
 	const std::string& get_soldier_context_string() const {
 		return soldier_context_;
 	}
-	const std::string& get_soldier_singular_string() const {
-		return soldier_singular_;
+	const std::string* get_soldier_capacity_strings_sg() const {
+		return soldier_capacity_strings_sg_;
 	}
-	const std::string& get_soldier_plural_string() const {
-		return soldier_plural_;
+	const std::string* get_soldier_capacity_strings_pl() const {
+		return soldier_capacity_strings_pl_;
 	}
 
 	// The custom toolbar imageset if any. Can be nullptr.
@@ -275,8 +275,8 @@ private:
 	std::string productionsite_workers_coming_;
 
 	std::string soldier_context_;
-	std::string soldier_singular_;
-	std::string soldier_plural_;
+	std::string soldier_capacity_strings_sg_[4];
+	std::string soldier_capacity_strings_pl_[4];
 
 	// An optional custom imageset for the in-game menu toolbar
 	std::unique_ptr<ToolbarImageset> toolbar_image_set_;
