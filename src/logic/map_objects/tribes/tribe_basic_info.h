@@ -55,6 +55,8 @@ struct TribeBasicInfo {
 
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
+	/// The add-on that defines this tribe (empty for non-add-on tribes).
+	const std::string addon;
 	/// Internal name to reference this tribe
 	const std::string name;
 	/// Filepath of the tribe's icon
