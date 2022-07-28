@@ -44,8 +44,6 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **military_capacity_script**: File path to the :ref:`military_capacity.lua <lua_tribes_tribes_military_capacity>` file.
---
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
@@ -197,6 +195,35 @@
 --
 --    **productionsite_workers_coming**: The string to display over this tribe's productionsites when more than 1 worker is coming.
 --
+--    **soldier_context**, **soldier_0_sg**, **soldier_0_pl**, **soldier_1_sg**, **soldier_1_pl**, **soldier_2_sg**, **soldier_2_pl**,
+--    **soldier_3_sg**, **soldier_3_pl**: The pgettext context for militarysites' soldier strings, and the corresponding **unlocalized**
+--    singular and plural strings. Additionally, it is necessary to specify an ``npgettext`` call for all four types of soldier strings
+--    so as to ensure that all keys appear in the PO files. The ``npgettext`` results (i.e. the translated pluralized strings for an arbitrary constant)
+--    are unused; the actual use is performed later in C++. Their table keys must be prefixed with ``UNUSED_``; the rest of the name is irrelevant.
+--    The strings themselves **must not** derivate from the template below in anything other than the name of the soldier.
+--    Make sure that the unlocalized string constants are exactly identical to the strings in the ``npgettext`` dummy calls.
+--    Example:
+--
+--    .. code-block:: lua
+--
+--       soldier_context = "atlanteans_soldier",
+--       soldier_0_sg = "%1% soldier (+%2%)",
+--       soldier_0_pl = "%1% soldiers (+%2%)",
+--       soldier_1_sg = "%1% soldier",
+--       soldier_1_pl = "%1% soldiers",
+--       soldier_2_sg = "%1%(+%2%) soldier (+%3%)",
+--       soldier_2_pl = "%1%(+%2%) soldiers (+%3%)",
+--       soldier_3_sg = "%1%(+%2%) soldier",
+--       soldier_3_pl = "%1%(+%2%) soldiers",
+--       -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+--       UNUSED_soldier_0 = npgettext("atlanteans_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+--       -- TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
+--       UNUSED_soldier_1 = npgettext("atlanteans_soldier", "%1% soldier", "%1% soldiers", 0),
+--       -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+--       UNUSED_soldier_2 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+--       -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% are currently open soldier slots in the building.
+--       UNUSED_soldier_3 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
+--
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
@@ -300,7 +327,6 @@ include "tribes/scripting/help/time_strings.lua"
 
 wl.Descriptions():new_tribe {
    name = "atlanteans",
-   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {6, 18} },
@@ -1607,7 +1633,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Bakery
             purpose = pgettext("atlanteans_building", "Bakes bread to feed the scouts and miners and to train soldiers."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Bakery
-            note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour"),
+            note = pgettext("atlanteans_building", "Will need cornmeal and blackroot flour."),
             -- TRANSLATORS: Lore helptext for an atlantean production site:  Bakery
             lore = pgettext("atlanteans_building", "You cannot compare our bread to anything from those other tribes. This recipe was inherited for generations. "..
                                                    "It is more nutritious than that paper-like bread you find elsewhere. And it is needed for the personal rite "..
@@ -1622,7 +1648,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Note helptext for an atlantean production site: Charcoal Kiln
-            note = pgettext("atlanteans_building", "Build only if you absolutely must produce some coal, or you have a very large amount of logs"),
+            note = pgettext("atlanteans_building", "Build only if you absolutely must produce some coal, or when you have a very large amount of logs."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Charcoal Kiln
             lore = pgettext("atlanteans_building", "We must admit that this business is not really the Atlantean way, but in times of need we do what’s necessary."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Charcoal Kiln
@@ -1749,7 +1775,7 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
             purpose = pgettext("atlanteans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Weaving Mill -- listen to that song please
-            lore = pgettext("atlanteans_building", "Here are the widelands where people may dwell, "..
+            lore = pgettext("atlanteans_building", "Here are the Wide Lands where people may dwell, "..
                                                    "walking around caring everything’s well."),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Weaving Mill
             lore_author = pgettext("atlanteans_building", "Part of the silkweavers’ song")
@@ -1804,8 +1830,8 @@ wl.Descriptions():new_tribe {
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Gold Mine
             lore = pgettext("atlanteans_building", [[‘Way down here in these golden grounds<br>]] ..
-                                          [[with stones above us the thousand pounds.<br>]] ..
-                                          [[I dig in the dust until I see the spark,<br>]] ..
+                                          [[with stones above us the thousand pounds<br>]] ..
+                                          [[I dig in the dust until I see the spark;<br>]] ..
                                           [[The golden ore I find in the dark.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Gold Mine
             lore_author = pgettext("atlanteans_building", "Miner’s prayer")
@@ -1942,9 +1968,9 @@ wl.Descriptions():new_tribe {
             -- TRANSLATORS: Note helptext for an atlantean production site: Ferry Yard
             note = pgettext("building", "Needs water nearby. Be aware ferries carry wares only, no workers."),
             -- TRANSLATORS: Lore helptext for an atlantean production site: Ferry Yard
-            lore = pgettext("atlanteans_building", [[‘Row, row, row your boat,<br>]] ..
+            lore = pgettext("atlanteans_building", [[‘Row, row, row your boat<br>]] ..
                                           [[gently ’long the shore.<br>]] ..
-                                          [[steadily steadily steadily steadily<br>]] ..
+                                          [[Steadily steadily steadily steadily<br>]] ..
                                           [[bring the wares ashore.’]]),
             -- TRANSLATORS: Lore author helptext for an atlantean production site: Ferry Yard
             lore_author = pgettext("atlanteans_building", "Traditional song of the ferrymen")
@@ -2001,6 +2027,26 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("atlanteans", "Workers missing"),
    -- TRANSLATORS: Productivity label on an atlantean building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("atlanteans", "Workers are coming"),
+
+   -- Soldier strings to be used in Military Status strings
+
+   soldier_context = "atlanteans_soldier",
+   soldier_1_sg = "%1% soldier (+%2%)",
+   soldier_1_pl = "%1% soldiers (+%2%)",
+   soldier_2_sg = "%1% soldier",
+   soldier_2_pl = "%1% soldiers",
+   soldier_3_sg = "%1%(+%2%) soldier (+%3%)",
+   soldier_3_pl = "%1%(+%2%) soldiers (+%3%)",
+   soldier_4_sg = "%1%(+%2%) soldier",
+   soldier_4_pl = "%1%(+%2%) soldiers",
+   -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+   UNUSED_soldier_1 = npgettext("atlanteans_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+   -- TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
+   UNUSED_soldier_2 = npgettext("atlanteans_soldier", "%1% soldier", "%1% soldiers", 0),
+   -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+   UNUSED_soldier_3 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+   -- TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to. %2% are currently open soldier slots in the building.
+   UNUSED_soldier_4 = npgettext("atlanteans_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
 
    -- Special types
    builder = "atlanteans_builder",

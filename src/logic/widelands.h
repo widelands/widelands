@@ -90,6 +90,18 @@ using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
 // Recommended teams to play against each other
 using SuggestedTeamLineup = std::vector<SuggestedTeam>;
 
+/** Describes diplomatic relation actions between players. */
+enum class DiplomacyAction : uint8_t {
+	kJoin,          ///< Request to join another player's team.
+	kAcceptJoin,    ///< Accept another player's request to join your team.
+	kRefuseJoin,    ///< Refuse another player's request to join your team.
+	kInvite,        ///< Invite another player to join your team.
+	kAcceptInvite,  ///< Accept another player's invitation.
+	kRefuseInvite,  ///< Decline another player's invitation.
+	kLeaveTeam,     ///< Leave the current team and become teamless.
+	kResign         ///< Resign and become a spectator.
+};
+
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_H

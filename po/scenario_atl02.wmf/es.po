@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,7 +169,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
 "Afterwards we need to construct a farm under all circumstances, as it needs "
-"spidercloth to be built. Additionally, we need a spiderfarm and a weaving "
+"spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
 
@@ -260,7 +264,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
 "We need to build a temple for Satul and we need to worship him well. By this"
-" he might show these barbarians his might and our princess might come back "
+" he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
 
@@ -927,13 +931,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:591
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicidades"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:592
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Has completado esta misión. Puedes continuar jugando si quieres, o continúa "
+"con la siguiente misión."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:598
 msgid "Tribute Demand"

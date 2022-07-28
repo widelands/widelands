@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2022-06-13 06:31+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -199,7 +199,7 @@ msgstr ""
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:102
 msgid ""
 "Afterwards we need to construct a farm under all circumstances, as it needs "
-"spidercloth to be built. Additionally, we need a spiderfarm and a weaving "
+"spidercloth to be built. Additionally, we need a spider farm and a weaving "
 "mill."
 msgstr ""
 "Danach müssen wir unter allen Umständen einen Bauernhof bauen, da zu seinem "
@@ -303,12 +303,12 @@ msgstr "Baue einen Tempel für Satul"
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:152
 msgid ""
 "We need to build a temple for Satul and we need to worship him well. By this"
-" he might show these barbarians his might and our princess might come back "
+" he might show these Barbarians his might and our princess might come back "
 "to her senses."
 msgstr ""
 "Wir müssen einen Tempel für Satul bauen und wir müssen ihn inbrünstig "
-"anbeten. Auf diese Art könnte er den Barbaren seine Macht demonstrieren und "
-"unsere Prinzessin könnte wieder zu Sinnen kommen. "
+"anbeten. Auf diese Art könnte er diesen Barbaren seine Macht demonstrieren "
+"und unsere Prinzessin könnte wieder zu Sinnen kommen. "
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:153
 msgid ""
@@ -1065,6 +1065,11 @@ msgid ""
 "for satisfying sacrifices. And don’t forget that the initiates who will "
 "serve Satul to become his priestesses need golden tabards and diamonds."
 msgstr ""
+"Möge Satul Euch wärmen, Loftomor. Danke für den Bau eines solch großartigen "
+"Tempels. Nun müssem wir Speisen und unsere wertvollsten Waren zum Tempel "
+"bringen um befriedigende Opfergaben vorzubereiten. Und vergesst nicht, dass "
+"Eingeweihte, die Satul dienen um seine Priesterinnen zu werden, goldene "
+"Wappenröcke und Diamanten brauchen.  "
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:552
 msgid "May Satul Warm Us"
@@ -1077,6 +1082,9 @@ msgid ""
 "for Satul’s pleasure. May he warm us and show his might to our princess and "
 "this barbaric tribe."
 msgstr ""
+"Unsere Priesterinnen wurden geweiht, und wir opferten unsere feinsten Waren "
+"zu Satuls Vergnügen. Möge er uns wärmen, und unserer Prinzessin und diesem "
+"barbarischen Stamm seine Macht zeigen. "
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:561
 msgid "Jundlina Arrives"
@@ -1091,6 +1099,11 @@ msgid ""
 "would have meant servitude forever. And this is not what Atlanteans are made"
 " for."
 msgstr ""
+"Möge Satul Euch wärmen, Sidolus. Und möge er mir mein ketzerisches Verhalten"
+" vergeben. Das Zeichen seiner Macht und die Angst im Gesicht der Barbaren "
+"haben mich plötzlich die Wahrheit wieder erkennen lassen. Ich lag falsch "
+"bezüglich des Friedens und einer Koexistenz, da es ewige Knechtschaft "
+"bedeutet hätte. Und dafür sind Atlanter nicht gemacht."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:567
 msgid "Sidolus Relieved"
@@ -1103,6 +1116,10 @@ msgid ""
 "trust you, as much as you will trust and be faithful to Satul. How come the "
 "Barbarians let you go?"
 msgstr ""
+"Möge Satul Euch wärmen, Jundlina. Ich bin froh, dass Ihr wieder hier seid. "
+"Ich hoffe wir können Euch vertrauen, in der gleichen Weise wie Ihr Satul "
+"vertraut und an ihn glaubt. Wie kommt es, dass die Barbaren Euch gehen "
+"ließen. "
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:576
@@ -1113,6 +1130,12 @@ msgid ""
 "issue now and forever on this island. There is no other way to live here in "
 "peace than to defeat them."
 msgstr ""
+"Sidolus, sie ließen mich nicht gehen. Ich traf unseren Kundschafter und er "
+"schaffte es mich herauszuschmuggeln, da ich erkannte, dass sie mich immer "
+"noch als Geisel behielten, nachdem ich einige Bedenken zu unserer Abmachung "
+"geäussert hatte. Daher müssen wir das barbarische Problem auf dieser Insel "
+"jetzt und für immer lösen. Es gibt keinen anderen Weg in Frieden zu leben, "
+"als sie zu besiegen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:584
 msgid "Jundlina Is Relieved"
@@ -1160,6 +1183,9 @@ msgid ""
 "really on our side, you should send us some gold and a couple of other wares"
 " on a regular basis."
 msgstr ""
+"Fremde, wir benötigen ein Zeichen Eurer guten Absichten. Wenn ihr wirklich "
+"auf unserer Seite steht solltet ihr uns regelmäßig etwas Gold und einige "
+"andere Waren senden."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:604
@@ -1168,6 +1194,10 @@ msgid ""
 "real weapons like our axes, and not the sort of toothpicks you use. So feel "
 "free to send us 25 logs, 16 lumps of coal, 9 iron ingots and 4 gold bars."
 msgstr ""
+"Wir sind nur an Waren Interessiert, mit denen man Waffen schmieden kann. Ich"
+" meine richtige Waffen wie unsere Äxte, und nicht die Art Zahnstocher, die "
+"Ihr benutzt. So fühlt euch bemüßigt uns 25 Stämme, 16 Stück Kohle, 9 "
+"Eisenbarren und 4 Goldbarren zu senden."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:607
@@ -1175,6 +1205,9 @@ msgid ""
 "Oh, and I almost forgot this one. We demand to have your princess in our "
 "headquarters as well to coordinate our war plannings."
 msgstr ""
+"Oh und ich hätte es fast vergessen. Wir fordern zusätzlich die Anwesenheit "
+"eurer Prinzessin in unserem Hauptquartier um unsere Kriegsplanungen zu "
+"koordinieren."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:611
 msgid "Pitfall!"
@@ -1191,6 +1224,10 @@ msgid ""
 "is a trap to keep you as a hostage. And the demand itself is really an "
 "insult. I strongly recommend to decline this unsubstantiated claim."
 msgstr ""
+"Möge Satul Euch wärmen, Jundlina! Dieses Verhalten ist wirklich barbarisch! "
+"Ich fürchte dies ist eine Falle um Euch als Geisel zu nehmen. Und die "
+"Forderung an sich ist eine Beleidigung. Ich empfehle dringend diese "
+"unberechtigte Forderung abzuweisen."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:617
 msgid "Jundlina Concedes"
@@ -1203,6 +1240,9 @@ msgid ""
 "obey this demand. It is your obligation now to run our small people until I "
 "come back."
 msgstr ""
+"Sidolus, Ich stimme Euch zu. Allerdings denke ich, dass wir keine andere "
+"Wahl haben, daher müssen wir der Forderung nachkommen. Es ist nun eure "
+"Aufgabe unser kleines Volk zu leiten, bis ich wiederkomme."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:623
@@ -1210,6 +1250,9 @@ msgid ""
 "First you need to upgrade our scout’s house to a trading post. Then you need"
 " to send the demanded tributes of gold, iron, coal, and logs."
 msgstr ""
+"Als erstes müsst Ihr unser Kundschafterhaus zu einem Handelsposten ausbauen."
+" Dann müsst Ihr den geforderten Tribut aus Gold, Eisen, Kohle und Stämmen "
+"liefern."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:630
 msgid "Trading Post Built"
@@ -1234,6 +1277,9 @@ msgid ""
 "Well done, Loftomor, well done. May Satul warm our princess and our whole "
 "people. Now we need to begin sending goods to this Barbarian."
 msgstr ""
+"Gut gemacht, Loftomor, gut gemacht. Möge Satul unsere Prinzessin und unser "
+"ganzes Volk wärmen. Nun müssen wir anfangen Waren an diesen Barbaren zu "
+"liefern."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:642
@@ -1241,6 +1287,8 @@ msgid ""
 "I think we should start with the deliveries we could afford the easiest. But"
 " we need to find more metals for sure."
 msgstr ""
+"Ich denke wir sollten mit den Lieferungen beginnen, die wir am ehesten "
+"entbehren können. Aber wir müssen sicherlich mehr Metalle finden."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:648
 msgid "Urgent Tribute Demand"
@@ -1316,6 +1364,9 @@ msgid ""
 "significant help from your side we might lose the war despite any help in "
 "terms of wares you might provide."
 msgstr ""
+"Wie auch immer, unser Feind im Norden ist sehr stark. Ich fürchte, dass wir "
+"ohne entscheidende Hilfe von Eurer Seite den Krieg verlieren könnten "
+"ungeachtet aller Waren, die ihr zur Verfügung stellt."
 
 #. TRANSLATORS: Kalitath
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:682
@@ -1376,6 +1427,9 @@ msgid ""
 "assume you are just playing along with us. So keep an eye on the time as we "
 "will not give any further warning."
 msgstr ""
+"Wenn Ihr scheitert alles in dreieinhalb Stunden zu liefern, müssen wir "
+"annehmen, dass Ihr uns hinhaltet. Deshalb habt ein Auge auf die Zeit, da wir"
+" keine weitere Warnung geben werden."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:710
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:722
@@ -1421,6 +1475,10 @@ msgid ""
 "have prepared myself for this eventuality and will rather die from the "
 "poison I carry with me than be your slave. May Satul avenge my sacrifice."
 msgstr ""
+"Barbar, Ich bin eine atlantische Prinzessin und werde nie in die Sklaverei "
+"gehen. Ich habe mich für diesen Fall vorbereitet und werde lieber an dem "
+"Gift sterben, das ich bei mir trage, als Euer Sklave zu sein. Möge Satul "
+"mein Opfer rächen."
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:743
@@ -1429,6 +1487,10 @@ msgid ""
 "protect us from the enemy. We have lost our noble princess. Thus, we have "
 "lost this battle and our people is doomed!"
 msgstr ""
+"Aaaarg. Ich weiß nicht, wie das geschehen konnte, aber Satul konnte uns "
+"nicht vor unseren Feinden beschützen. Wir haben unsere noble Prinzessin "
+"verloren. Daher haben wir diese Schlacht verloren und unser Volk ist "
+"verdammt!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:751
 msgid "Kalitath Defeated"
@@ -1442,6 +1504,10 @@ msgid ""
 "princess perished with him. Thus, we have lost this battle and our people is"
 " doomed!"
 msgstr ""
+"Aaaarg. Ich weiß nicht, wie das geschehen konnte, aber Satul konnte unseren "
+"Verbündeten nicht vor unseren Feinden beschützen. Er hat sein letztes "
+"Lagerhaus verloren und unsere noble Prinzessin kam mit ihm um. Daher haben "
+"wir diese Schlacht verloren und unser Volk ist verdammt!"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/campaigns/atl02.wmf/scripting/tribes/atlanteans_initiate/init.lua:8

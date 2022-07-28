@@ -73,3 +73,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 
 	initialization_complete();
 }
+
+void EditorToolPlaceImmovableOptionsMenu::update_window() {
+	multi_select_menu_->update_selection();
+}

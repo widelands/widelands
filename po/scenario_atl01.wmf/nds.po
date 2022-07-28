@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -445,7 +445,7 @@ msgid ""
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
 " you before me to seek your counsel: what needs to be done to make this our "
 "new home?"
-msgstr "Satuul sall jo twee warmen. Loftomoor, du büst de beste Baukeerl vun all Atlantis wesen. Sidoolus, du büst een oller Soldat un Kriegsplaner. Ick hebb jo twee to mi ropen laten, darmit jo mi beraadt: Wat mutten wi doon, um deese Insel uns’ neje Heimaad to maken?"
+msgstr "Satuul sall jo twee warmen. Loftomoor, Jo büst de beste Baukeerl vun all Atlantis wesen. Sidoolus, Jo büst een oller Soldat un Kriegsplaner. Ick hebb jo twee to mi ropen laten, darmit jo mi beraadt: Wat mutten wi doon, um deese Insel uns’ neje Heimaad to maken?"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
@@ -524,7 +524,7 @@ msgid ""
 " our people are accustomed to making their own food. I feel if we could "
 "split responsibilities, it would be better for us all. I want your thoughts "
 "on this."
-msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns’ Spiesen-Weertskupp beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns’ Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat du daarvun hollst."
+msgstr "Satuul sall Jo ok warmen, Kojonder. Jau, ick överlegg, of wi uns’ Spiesen-Weertskupp beter tosamenführen könen. Wi sünd bannig langsaam mit de Produzeren vun all Dingen, wiel uns’ Lüü dat wohnt sünd, hör eegen Eten to maken. Wenn wi de Toständigheiten updelen könen, is dat better för uns all, gloov ick. Ick will weten, wat Jo daarvun hollst."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
@@ -558,7 +558,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Och, un noch vööl wichtiger: Dat Rökeln vun Fiss un Fleesk, um se schier un good to maken, is schreckelk. Mien Huus is dann alltied vull vun Qualm un stinkt för Weken. Finnst du nich ok, dat wi dat in eenem eegen Huus daarför maken könen, waar dat nich slimm is? Ick gloov, deese twee Dingen worden de Lüü annehmen un de Kocktied minnern, sünner dat dat Eten to un-fierlik word."
+msgstr "Och, un noch vööl wichtiger: Dat Rökeln vun Fiss un Fleesk, um se schier un good to maken, is schreckelk. Mien Huus is dann alltied vull vun Qualm un stinkt för Weken. Finnst Jo nich ok, dat wi dat in eenem eegen Huus daarför maken könen, waar dat nich slimm is? Ick gloov, deese twee Dingen worden de Lüü annehmen un de Kocktied minnern, sünner dat dat Eten to un-fierlik word."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
@@ -594,7 +594,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Satuul sall Jo warmen, Jundlin’. Mien Naam is Öpoll, un ick bin de eerste Spinner vun de Gild. wat Atlantis un Luutas mit Jo verlaten hett. Ick komm mit bannig slechten Narichten: Wi hebben keenen Spinnenstoff mehr. Nich een enkelt Deel is noch in uns’ Kraamhusen över. Kannst du de Spinners nich helpen, indeem du eene Spinnweelmöhlen un eene Spinnentüchteree bauen lettst? De Spinnen produzeren de beste Sied, un wi maken daar de beste Spinnenstoff vun."
+msgstr "Satuul sall Jo warmen, Jundlin’. Mien Naam is Öpoll, un ick bin de eerste Spinner vun de Gild. wat Atlantis un Luutas mit Jo verlaten hett. Ick komm mit bannig slechten Narichten: Wi hebben keenen Spinnenstoff mehr. Nich een enkelt Deel is noch in uns’ Kraamhusen över. Kannst Jo de Spinners nich helpen, indeem Jo eene Spinnweelmöhlen un eene Spinnentüchteree bauen lettst? De Spinnen produzeren de beste Sied, un wi maken daar de beste Spinnenstoff vun."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -602,7 +602,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "Wi könen daarför ok Kluften für neje Soldaten un Goldene Kluften för de besten Soldaten produzeren. Du bruukst se vun Nood, wenn du neje Soldaten anhüren willst."
+msgstr "Wi könen daarför ok Kluften für neje Soldaten un Goldene Kluften för de besten Soldaten produzeren. Jo bruukst se vun Nood, wenn Jo neje Soldaten anhüren willst."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -611,7 +611,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Satuul sall Jo ok warmen, Öpoll. Ick wull de Spinnenstoff nich so bold produzeren, aver ick verstah, dat du dat so wichtig finnst. Dien Vörslag klingt good, ick will jo Spinnweelmöhlen un Spinnentüchteree bauen. Ick bau ok eene Goldspinneree, daarmit de Goldenen Kluften, wat du maken willst, dat Gold nich blot im Naam dragen."
+msgstr "Satuul sall Jo ok warmen, Öpoll. Ick wull de Spinnenstoff nich so bold produzeren, aver ick verstah, dat Jo dat so wichtig finnst. Jo Vörslag klingt good, ick will jo Spinnweelmöhlen un Spinnentüchteree bauen. Ick bau ok eene Goldspinneree, daarmit de Goldenen Kluften, wat Jo maken willst, dat Gold nich blot im Naam dragen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
@@ -646,7 +646,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Satuul sall Jo warmen, Jundlin’. Hest du al överleggt, of wi in de Bargen um uns Mineraale ofboen sallen? Wi hebben bold keen Blinkerflint un Edelstenen för uns’ Husen mehr. Un wi bruken ok mehr Iesen, Gold un vör allem Köhl. Wenn wi eene gode Versörgen för deese Schatten finnen, könen wi begünnen, Wapen un Warktüüg tp produzerem, wat uns bannig vööl helpen word. Daarto bruken wi natürelk Smeltwarken, eene Wapensmee, eene Panzersmee un eene Warktüügsmee. Un villicht noch mehr."
+msgstr "Satuul sall Jo warmen, Jundlin’. Hest Jo al överleggt, of wi in de Bargen um uns Mineraale ofboen sallen? Wi hebben bold keen Blinkerflint un Edelstenen för uns’ Husen mehr. Un wi bruken ok mehr Iesen, Gold un vör allem Köhl. Wenn wi eene gode Versörgen för deese Schatten finnen, könen wi begünnen, Wapen un Warktüüg to produzeren, wat uns bannig vööl helpen word. Daarto bruken wi natürelk Smeltwarken, eene Wapensmee, eene Panzersmee un eene Warktüügsmee. Un villicht noch mehr."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -657,7 +657,7 @@ msgstr "Jundlin’ nickkoppt"
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
-msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. Wi wullen dat fix so maken. Du kriggst diene Weertskupp bold!"
+msgstr "Ick hebb daar överleggt, Sidoolus. Un ick finn, dat is de rechte Tied. Wi wullen dat fix so maken. Jo kriggst diene Weertskupp bold!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Loftomor Reports"
@@ -668,7 +668,7 @@ msgstr "Loftomoor mellt"
 msgid ""
 "May Satul warm you, Jundlina! We have completed a toolsmithy and now our "
 "toolsmiths will produce new tools in an instant."
-msgstr "Satuul sall Jo warmen, Jundlin’. Wi hebben eene Warktüügsmee beschickt un uns' Warktüügsmidden worden nu bannig fix nejes Warktüüg produzeren."
+msgstr "Satuul sall Jo warmen, Jundlin’. Wi hebben eene Warktüügsmee beschickt un uns’ Warktüügsmidden worden nu bannig fix nejes Warktüüg produzeren."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
 msgid "Jundlina Reminds"
@@ -678,10 +678,10 @@ msgstr "Jundlin’ mahnt"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:323
 msgid ""
 "May Satul warm you as well, Loftomor. That is good news to hear. However "
-"please remember that our toolsmiths need to be equipped wit a saw. Making "
+"please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr "Satuul sall Jo ok warmen, Loftomoor. Dat is eene gode Naricht. Vergeet man bidde nich, dat uns' Warktüügsmidden mit eener Saag utstaffeert worden mutten. Warktüüg to maken is för uns eene Kunst, för wat man sülk een akkeraates Warktüüg as eene Saag bruukt, un nich eenen rugen Klöpper as anner Völkers."
+msgstr "Satuul sall Jo ok warmen, Loftomoor. Dat is eene gode Naricht. Vergeet man bidde nich, dat uns’ Warktüügsmidden mit eener Saag utstaffeert worden mutten. Warktüüg to maken is för uns eene Kunst, för wat man sülk een akkeraates Warktüüg as eene Saag bruukt, un nich eenen rugen Klöpper as anner Völkers."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -717,7 +717,7 @@ msgid ""
 "misbehaving and bullying the common folk. What is this nonsense all about? "
 "They are servants for the common good and must not misuse their powers. This"
 " is inexcusable! Explain this, if you will!"
-msgstr "Wat höör ick daar, Sidoolus? Ick hebb höört, dat diene Soldaten sich slecht benehmen und de normaal Lüü schikaneren. Wat sall dat? Se denen to de Best vun uns all un süren höt Macht nich missbruken. Dat is nich tum Vergeven! Verklaar dat, bidde!"
+msgstr "Wat höör ick daar, Sidoolus? Ick hebb höört, dat diene Soldaten sik slecht benehmen und de normaal Lüü schikaneren. Wat sall dat? Se denen to de Best vun uns all un düren hör Macht nich missbruken. Dat is nich tum Vergeven! Verklaar dat, bidde!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:354
 msgid "Sidolus Seems Contrite"
@@ -741,7 +741,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "De Kösten un Arbeid sünd nich slimm, wenn dat blot diene Lüü bi Benöhmen hollt. Du sallst deese Husen kriegen. Aber ick segg di, ick sall keene öveln Soldaten uthollen; wenn so wat noch maal passeert, muttst du daarför instahn. Weg."
+msgstr "De Kösten un Arbeid sünd nich slimm, wenn dat blot diene Lüü bi Benöhmen hollt. Jo sallst deese Husen kriegen. Aber ick segg di, ick sall keene öveln Soldaten uthollen; wenn so wat noch maal passeert, muttst Jo daarför instahn. Weg."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"

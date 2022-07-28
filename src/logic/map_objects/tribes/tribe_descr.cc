@@ -141,9 +141,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
-     military_capacity_script_(table.has_key<std::string>("military_capacity_script") ?
-                                  table.get_string("military_capacity_script") :
-                                  ""),
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
@@ -156,12 +153,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      basic_info_(info) {
 	verb_log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums", true);
-
-	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
-		// TODO(GunChleoc): API compatibility - require after v 1.0
-		log_warn("File '%s' for military_capacity_script for tribe '%s' does not exist",
-		         military_capacity_script_.c_str(), name().c_str());
-	}
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -251,6 +242,28 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		   /** TRANSLATORS: Productivity label on a building if there is more than 1 worker coming. If
 		      you need plural forms here, please let us know. */
 		   _("Workers are coming"));
+
+		auto load_soldier_string = [this, &table](std::string& target, const std::string& key,
+		                                          const std::string& default_value) {
+			if (table.has_key(key)) {
+				target = table.get_string(key);
+			} else {
+				log_warn("Tribe '%s' defines no soldier string '%s'", name().c_str(), key.c_str());
+				target = default_value;
+			}
+		};
+
+		load_soldier_string(soldier_context_, "soldier_context", "empire_soldier");
+		load_soldier_string(soldier_capacity_strings_sg_[0], "soldier_0_sg", "%1% soldier (+%2%)");
+		load_soldier_string(soldier_capacity_strings_pl_[0], "soldier_0_pl", "%1% soldiers (+%2%)");
+		load_soldier_string(soldier_capacity_strings_sg_[1], "soldier_1_sg", "%1% soldier");
+		load_soldier_string(soldier_capacity_strings_pl_[1], "soldier_1_pl", "%1% soldiers");
+		load_soldier_string(
+		   soldier_capacity_strings_sg_[2], "soldier_2_sg", "%1%(+%2%) soldier (+%3%)");
+		load_soldier_string(
+		   soldier_capacity_strings_pl_[2], "soldier_2_pl", "%1%(+%2%) soldiers (+%3%)");
+		load_soldier_string(soldier_capacity_strings_sg_[3], "soldier_3_sg", "%1%(+%2%) soldier");
+		load_soldier_string(soldier_capacity_strings_pl_[3], "soldier_3_pl", "%1%(+%2%) soldiers");
 
 		std::unique_ptr<LuaTable> collectors_points_table =
 		   table.get_table("collectors_points_table");
@@ -580,9 +593,6 @@ const std::string& TribeDescr::name() const {
 }
 const std::string& TribeDescr::descname() const {
 	return descname_;
-}
-const std::string& TribeDescr::military_capacity_script() const {
-	return military_capacity_script_;
 }
 
 size_t TribeDescr::get_nrwares() const {
@@ -969,8 +979,6 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 	get_resource_indicator(nullptr, 0);
 
 	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
-
-	descriptions.postload_immovable_relations();
 
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;

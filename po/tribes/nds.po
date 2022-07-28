@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 06:29+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -1217,6 +1217,7 @@ msgstr "Maniok-Planteree"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1286,6 +1287,7 @@ msgstr "Maniok-Wuddel-Köök"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1703,7 +1705,6 @@ msgstr "Steenwarkeree"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1723,7 +1724,6 @@ msgstr "eene Boomslager-Ext to maken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1749,7 +1749,6 @@ msgstr "Besteck to maken"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1922,7 +1921,6 @@ msgstr "Fauna-Wahrderske-Telt"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3661,7 +3659,7 @@ msgstr "Hebb keene Blössems mehr"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
 msgstr "De Imker dat warkt bi deese Imkeree hett keene Ackers of Busken mit Blössems in de Naberskupp. Bau een Buurderee of Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
@@ -3828,6 +3826,21 @@ msgid ""
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
 msgstr "De Früchtenpottjer dat warkt bi deese Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree of överlegg di, of du dat Huus plattrieten of ofbrannen willst."
+
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr "Diekbauer-Huus"
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr "to dieken"
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr "eenen Diek to bauen"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5021,6 +5034,12 @@ msgid "Destroyed building"
 msgstr "Verneelts Huus"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr "Diek"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5257,6 +5276,7 @@ msgstr "Balsaboom (Jung)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -9709,6 +9729,12 @@ msgstr "Holtköhlbranner"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "Lehmgraver"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr "Diekbauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 06:29+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1228,6 +1228,7 @@ msgstr "Плантация маниоки"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1297,6 +1298,7 @@ msgstr "Пекарня маниоки"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1714,7 +1716,6 @@ msgstr "Каменотесный цех"
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:211
@@ -1734,7 +1735,6 @@ msgstr "делает топор дровосека"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:187
@@ -1760,7 +1760,6 @@ msgstr "делает кухонную утварь"
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:151
@@ -1933,7 +1932,6 @@ msgstr "Палатка дикосея"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3672,10 +3670,10 @@ msgstr "Цветы закончились"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:65
 msgctxt "frisians_building"
 msgid ""
-"The beekeeper working at this beekeepers’s house can’t find any flowering "
+"The beekeeper working at this beekeeper’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "Пчеловод, работающий в этом домике пчеловода, не может найти цветущие поля или кустарник в своей рабочей области. Вы должны рассмотреть вопрос о строительстве рядом другой фермы или ягодной фермы, либо разобрать или разрушить это здание."
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:8
@@ -3839,6 +3837,21 @@ msgid ""
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
 msgstr "Сборщик ягод, работающий в этом домике сборщика ягод, не может найти ягодные кусты в своей рабочей области. Рассмотрите вопрос строительства другой ягодной фермы, либо разобрать или разрушить это здание"
+
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5032,6 +5045,12 @@ msgid "Destroyed building"
 msgstr "Разрушенное здание"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr ""
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5268,6 +5287,7 @@ msgstr "Бальзамовое дерево (средневозрастное)"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -9760,6 +9780,12 @@ msgstr "Углежог"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "Глина Копатель"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8
