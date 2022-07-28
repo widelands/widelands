@@ -115,6 +115,12 @@ source_file = po/scenario_fri03.wmf/scenario_fri03.wmf.pot
 source_lang = en
 type = PO
 
+[widelands.scenario_fri04]
+file_filter = po/scenario_fri04.wmf/<lang>.po
+source_file = po/scenario_fri04.wmf/scenario_fri04.wmf.pot
+source_lang = en
+type = PO
+
 [widelands.scenario_tutorial01_basic_control]
 file_filter = po/scenario_tutorial01_basic_control.wmf/<lang>.po
 source_file = po/scenario_tutorial01_basic_control.wmf/scenario_tutorial01_basic_control.wmf.pot
