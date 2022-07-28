@@ -193,34 +193,19 @@ void Panel::logic_thread() {
 		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
 
 		if ((m != nullptr) && ((m->flags_ & pf_logic_think) != 0u)) {
-			switch (m->logic_thread_locked_.load()) {
-			case LogicThreadState::kFree: {
+			LogicThreadState lock_if_free = LogicThreadState::kFree;
+			if (m->logic_thread_locked_.compare_exchange_strong(
+			       lock_if_free, LogicThreadState::kLocked)) {
 				MutexLock lock(MutexLock::ID::kLogicFrame);
 
-				m->logic_thread_locked_ = LogicThreadState::kLocked;
-
 				m->game_logic_think();  // actual game logic
-
-				switch (m->logic_thread_locked_.load()) {
-				case LogicThreadState::kLocked:
-					m->logic_thread_locked_ = LogicThreadState::kFree;
-					break;
-				case LogicThreadState::kEndingRequested:
-					m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
-					break;
-				default:
-					NEVER_HERE();
-				}
-			} break;
-
-			case LogicThreadState::kEndingRequested:
-				m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
-				break;
-			case LogicThreadState::kEndingConfirmed:
-				break;
-			default:
-				NEVER_HERE();
+				LogicThreadState free_if_locked = LogicThreadState::kLocked;
+				m->logic_thread_locked_.compare_exchange_strong(
+				   free_if_locked, LogicThreadState::kFree);
 			}
+			LogicThreadState end_if_end_requested = LogicThreadState::kEndingRequested;
+			m->logic_thread_locked_.compare_exchange_strong(
+			   end_if_end_requested, LogicThreadState::kEndingConfirmed);
 		}
 
 		// Always sleep a bit because another thread might want to lock our mutex
