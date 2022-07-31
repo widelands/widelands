@@ -25,20 +25,19 @@
 
 ///  Ensures that the height of a node is within an interval.
 struct EditorSetHeightTool : public EditorTool {
-	EditorSetHeightTool() : EditorTool(*this, *this), interval_(10, 10) {
+	EditorSetHeightTool(EditorInteractive& parent)
+	   : EditorTool(parent, *this, *this), interval_(10, 10) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_set_height.png");
@@ -49,6 +48,18 @@ struct EditorSetHeightTool : public EditorTool {
 	}
 	void set_interval(const Widelands::HeightInterval& i) {
 		interval_ = i;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::ChangeHeight;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.interval = interval_;
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		interval_ = conf.interval;
 	}
 
 private:

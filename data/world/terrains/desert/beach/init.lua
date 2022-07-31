@@ -186,6 +186,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 179,
    humidity = 500,
    fertility = 100,
+   enhancement = { diking = "desert4" }
 }
 
 pop_textdomain()

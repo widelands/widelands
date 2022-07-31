@@ -12,6 +12,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 60,
    humidity = 500,
    fertility = 100,
+   enhancement = { diking = "snow" }
 }
 
 pop_textdomain()

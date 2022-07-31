@@ -23,10 +23,9 @@
 
 /// Sets the starting position of players.
 struct EditorSetStartingPosTool : public EditorTool {
-	EditorSetStartingPosTool();
+	explicit EditorSetStartingPosTool(EditorInteractive& parent);
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>&,
-	                          EditorInteractive&,
 	                          EditorActionArgs*,
 	                          Widelands::Map*) override;
 	const Image* get_sel_impl() const override {
