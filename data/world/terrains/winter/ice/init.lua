@@ -12,7 +12,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 25,
    humidity = 500,
    fertility = 100,
-   enhancement = { diking = "summer_beach" }
+   enhancement = { diking = "winter_beach" }
 }
 
 pop_textdomain()
