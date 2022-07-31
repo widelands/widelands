@@ -248,11 +248,17 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 }
 
 void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
-                                      const std::string& prodsite) {
+                                      const std::string& prodsite,
+                                      std::set<const ImmovableDescr*> recursion_protect) {
+	if (recursion_protect.count(this) != 0) {
+		return;
+	}
+	recursion_protect.insert(this);
+
 	collected_by_.insert(prodsite);
 	for (const std::string& immo : became_from_) {
 		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(immo))
-		   ->add_collected_by(descriptions, prodsite);
+		   ->add_collected_by(descriptions, prodsite, recursion_protect);
 	}
 }
 

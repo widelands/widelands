@@ -164,7 +164,7 @@ public:
 	const std::set<std::string> collected_by() const {
 		return collected_by_;
 	}
-	void add_collected_by(const Descriptions& descriptions, const std::string& prodsite);
+	void add_collected_by(const Descriptions& descriptions, const std::string& prodsite, std::set<const ImmovableDescr*> recursion_protect = {});
 
 	void register_immovable_relation(const std::string&, const std::string&);
 	void add_became_from(const Descriptions& descriptions, const std::string&);
