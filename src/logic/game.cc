@@ -332,8 +332,7 @@ void Game::init_newgame(const GameSettings& settings) {
 		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
-	postload_addons(false);
-	did_postload_addons_before_loading_ = true;
+	postload_addons_before_loading();
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;

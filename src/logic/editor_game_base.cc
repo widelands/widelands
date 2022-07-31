@@ -308,6 +308,9 @@ void EditorGameBase::allocate_player_maps() {
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	assert(descriptions_);
+
+	postload_addons(false);
+	postload_tribes();
 }
 
 void EditorGameBase::postload_addons(bool also_postload_tribes) {
