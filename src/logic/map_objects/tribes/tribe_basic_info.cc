@@ -30,7 +30,8 @@
 namespace Widelands {
 
 TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
-   : name(table->get_string("name")),
+   : addon(table->has_key("addon") ? table->get_string("addon") : ""),
+     name(table->get_string("name")),
      icon(table->get_string("icon")),
      script(table->get_string("script")),
      suited_for_ai(!table->has_key("suited_for_ai") || table->get_bool("suited_for_ai")) {

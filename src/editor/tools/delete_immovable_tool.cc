@@ -28,7 +28,6 @@
  * Deletes the immovable at the given location
  */
 int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                     EditorInteractive& eia,
                                                      EditorActionArgs* args,
                                                      Widelands::Map* map) {
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
@@ -36,7 +35,7 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 	do {
 		if (upcast(Widelands::Immovable, immovable, mr.location().field->get_immovable())) {
 			args->old_immovable_types.push_back(immovable->descr().name());
-			immovable->remove(eia.egbase());  //  Delete no buildings or stuff.
+			immovable->remove(parent_.egbase());  //  Delete no buildings or stuff.
 		} else {
 			args->old_immovable_types.emplace_back("");
 		}
@@ -46,12 +45,11 @@ int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::NodeAndTri
 
 int32_t EditorDeleteImmovableTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& parent,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	return parent.tools()->place_immovable.handle_undo_impl(center, parent, args, map);
+	return parent_.tools()->place_immovable.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorDeleteImmovableTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorDeleteImmovableTool::format_args_impl() {
+	return EditorTool::format_args_impl();
 }

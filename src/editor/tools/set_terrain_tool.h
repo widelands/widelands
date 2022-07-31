@@ -23,20 +23,18 @@
 #include "editor/tools/tool.h"
 
 struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
-	EditorSetTerrainTool() : EditorTool(*this, *this) {
+	EditorSetTerrainTool(EditorInteractive& parent) : EditorTool(parent, *this, *this) {
 	}
 
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/ui_basic/fsel.png");
@@ -44,6 +42,14 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 	bool operates_on_triangles() const override {
 		return true;
 	}
+
+	WindowID get_window_id() override {
+		return WindowID::Terrain;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override;
+	void load_configuration(const ToolConf& conf) override;
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_TERRAIN_TOOL_H
