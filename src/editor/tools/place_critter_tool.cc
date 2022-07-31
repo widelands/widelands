@@ -31,10 +31,9 @@
  * and places this on the current field
  */
 int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = eia.egbase();
+	Widelands::EditorGameBase& egbase = parent_.egbase();
 	if ((get_nr_enabled() != 0) && args->old_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
@@ -69,10 +68,9 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
-	Widelands::EditorGameBase& egbase = eia.egbase();
+	Widelands::EditorGameBase& egbase = parent_.egbase();
 	if (!args->new_bob_type.empty()) {
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   *map,
@@ -97,6 +95,41 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 	return 0;
 }
 
-EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {
-	return EditorTool::format_args_impl(parent);
+EditorActionArgs EditorPlaceCritterTool::format_args_impl() {
+	return EditorTool::format_args_impl();
+}
+
+std::string EditorPlaceCritterTool::format_conf_description_impl(const ToolConf& conf) {
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
+	const Widelands::DescriptionMaintainer<Widelands::CritterDescr>& critter_descriptions =
+	   descriptions.critters();
+
+	std::string mapobj_names;
+
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		if (!mapobj_names.empty()) {
+			mapobj_names += " | ";
+		}
+		mapobj_names += critter_descriptions.get(idx).descname();
+	}
+
+	/** TRANSLATORS: An entry in the tool history list. */
+	return format(_("Critter: %1$s"), mapobj_names);
+}
+
+bool EditorPlaceCritterTool::save_configuration_impl(ToolConf& conf) {
+	if (0 == get_nr_enabled()) {
+		return false;
+	}
+
+	conf.map_obj_types.insert(get_enabled().begin(), get_enabled().end());
+
+	return true;
+}
+
+void EditorPlaceCritterTool::load_configuration(const ToolConf& conf) {
+	disable_all();
+	for (Widelands::DescriptionIndex idx : conf.map_obj_types) {
+		enable(idx, true);
+	}
 }

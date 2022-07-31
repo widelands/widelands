@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Pawel <pawcio980@gmail.com>, 2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -294,6 +294,16 @@ msgid ""
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
 msgstr "Reebaud i jego plemię żyje szczęśliwie na północy. Międzyczasie kraje które które porzucili są razem ale są pokojowe a stary przyjaciel jest zdesperowany i potrzebuje ich pomocy..."
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr ""
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

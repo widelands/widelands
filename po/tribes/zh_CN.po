@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-19 04:22+0000\n"
+"POT-Creation-Date: 2022-07-28 07:46+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: liu lizhi <xingzuo88@qq.com>, 2021\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -1216,6 +1216,7 @@ msgstr "木薯种植园"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1283,8 +1284,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "木薯块根厨房"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1714,8 +1715,6 @@ msgstr "打造铁铲"
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:115
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:74
@@ -1767,9 +1766,9 @@ msgstr "打造锤子"
 msgid "making a chisel"
 msgstr "打造凿刀"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1923,8 +1922,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "荒野守护者帐篷"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3831,6 +3830,21 @@ msgid ""
 "farm, or dismantling or destroying this building."
 msgstr "摘果人在他的摘果人之屋工作区域内已找不到任何可采的浆果丛。你应该考虑建造另外一个浆果园，或者拆除或销毁这座建筑。"
 
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr ""
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr ""
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
 msgctxt "frisians_building"
@@ -5023,6 +5037,12 @@ msgid "Destroyed building"
 msgstr "毁坏的建筑物"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr ""
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5257,8 +5277,8 @@ msgstr "轻木树"
 msgid "Balsa Tree (Pole)"
 msgstr "轻木树(树干)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5450,6 +5470,7 @@ msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
 msgstr[0] "%1%(+%2%)士兵"
 
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -9690,6 +9711,12 @@ msgstr "烧炭弟"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "挖泥工"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8
