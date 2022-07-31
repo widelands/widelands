@@ -279,8 +279,8 @@ private:
 	std::string productionsite_workers_missing_;
 	std::string productionsite_worker_coming_;
 	std::string productionsite_workers_coming_;
-  std::string productionsite_experienced_worker_missing_;
-  std::string productionsite_experienced_workers_missing_;
+	std::string productionsite_experienced_worker_missing_;
+	std::string productionsite_experienced_workers_missing_;
 
 	std::string soldier_context_;
 	std::string soldier_capacity_strings_sg_[4];
