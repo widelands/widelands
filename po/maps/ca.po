@@ -289,13 +289,13 @@ msgstr "En Reebaud i la seva tribu estan vivint feliçment al nord. Mentrestant,
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Dos amics que es tornen a trobar"
 
 #: ../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "En Claus i en Henneke Lembeck finalment han arribat al nord. Però podran convèncer en Reebaud perquè els enviï ajuda?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

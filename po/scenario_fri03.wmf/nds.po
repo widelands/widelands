@@ -790,6 +790,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Nu kiekt, waar jo Dösigheid uns brocht hett. De Störm hett anfangen un wi "
+"sitten hier all fast, denn uns’ Muu hebbt jo daalbrannt. De Gotten sünd "
+"gerecht – ok wenn jo wull im Kampf machtiger weest as wi, dwingen se jo, up "
+"deeser Insel so lang to blieven, dat jo dat Enn vun jo vergeevs Fahrt "
+"nienich winnen könnt. Vertwiefelt in jo Sieg!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -797,6 +802,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"Dat is eene Katastroph! Wi sünd to een anner Küst komen, aver een anner Volk"
+" leevt daar al. Se laten uns nich an hör Küst lannen."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:334
@@ -804,6 +811,9 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Wi weren to tüterig. Wi hebben hötelt un drömelt un dat kummt daar nu vun. "
+"'t gifft keenen Weg na vörn. Nüms vun uns word jemaals weer uns’ Heimaad "
+"sehn!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8

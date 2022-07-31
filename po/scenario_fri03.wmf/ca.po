@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Juanjo, 2021
+# Juanjo, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Juanjo, 2021\n"
+"Last-Translator: Juanjo, 2022\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -766,7 +766,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "Encallats"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -791,6 +791,8 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Érem massa lents. I aquestes són les conseqüències. No hi ha manera de tirar"
+" enrere. Cap de nosaltres tornarà a veure la seva casa!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8

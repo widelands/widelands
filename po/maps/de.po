@@ -298,13 +298,13 @@ msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit w
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
-msgstr ""
+msgstr "Wiedervereinigung zweier Freunde"
 
 #: ../../data/campaigns/fri04.wmf/elemental:10
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus und Hennecke Lembeck haben endlich den Norden erreicht. Aber werden sie in der Lage sein, Reebaud zu überzeugen ihnen zu helfen?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
