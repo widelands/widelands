@@ -252,7 +252,7 @@
 - Improved exception reporting (#5003)
     - Fix exception reporting in the game logic thread.
     - Adds `--verbose-i18n` flag.
-- Fix Transifex String Issues (#5072, #5462)
+- Fix Transifex String Issues (#5072, #5399, #5462)
 - Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
 - Properly format `size_t` type printf placeholder (#5096)
 - Tx String and CLI Help Fixes (#5179)
@@ -260,7 +260,6 @@
 - Fix unhealthy usage of `split` in language menu (#5241)
 - Skip installing locales when translations are disabled (#5302)
 - Tut01 String Fix (#5327)
-- Fix string bugs in lore texts reported on Transifex (#5399)
 - Military capacity string refactor (#5476)
 
 
