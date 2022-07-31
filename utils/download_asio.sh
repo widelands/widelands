@@ -4,8 +4,8 @@
 ## Note that this hasn't been tested on all distributions.
 ## Patches welcome ;)
 
-ASIO_VER=1.20.0
-TESTED_MD5=bdd3e37404dc19eb8f71d67df568a060
+ASIO_VER=1.22.2
+TESTED_MD5=5320ba7aee694dcb60005833ec8d7575
 
 URL="https://downloads.sourceforge.net/project/asio/asio/${ASIO_VER}%20%28Stable%29/asio-${ASIO_VER}.tar.bz2"
 DL_TARGET=asio.tar.bz2
