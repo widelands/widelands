@@ -13,6 +13,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 100,
    humidity = 999,
    fertility = 1,
+   enhancement = { diking = "wasteland_beach" }
 }
 
 pop_textdomain()

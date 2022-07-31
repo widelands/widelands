@@ -25,9 +25,10 @@
 
 /// Increases the resources of a node by a value.
 struct EditorIncreaseResourcesTool : public EditorTool {
-	EditorIncreaseResourcesTool(EditorDecreaseResourcesTool& the_decrease_tool,
+	EditorIncreaseResourcesTool(EditorInteractive& parent,
+	                            EditorDecreaseResourcesTool& the_decrease_tool,
 	                            EditorSetResourcesTool& the_set_to_tool)
-	   : EditorTool(the_decrease_tool, the_set_to_tool),
+	   : EditorTool(parent, the_decrease_tool, the_set_to_tool),
 	     decrease_tool_(the_decrease_tool),
 	     set_tool_(the_set_to_tool),
 	     change_by_(1),
@@ -39,16 +40,14 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	 * another resource there.
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& parent,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_increase_resources.png");
@@ -78,6 +77,26 @@ struct EditorIncreaseResourcesTool : public EditorTool {
 	EditorSetResourcesTool& set_tool() const {
 		return set_tool_;
 	}
+
+	WindowID get_window_id() override {
+		return WindowID::ChangeResources;
+	}
+
+	bool save_configuration_impl(ToolConf& conf) override {
+		conf.resource = cur_res_;
+		conf.change_by = change_by_;
+		set_tool_.save_configuration_impl(conf);
+		return true;
+	}
+	void load_configuration(const ToolConf& conf) override {
+		// Resource type needs to be loaded for all subtools, because the window refresh
+		// doesn't know which subtools configuration changed.
+		cur_res_ = conf.resource;
+		change_by_ = conf.change_by;
+		decrease_tool_.load_configuration(conf);
+		set_tool_.load_configuration(conf);
+	}
+	std::string format_conf_description_impl(const ToolConf& conf) override;
 
 private:
 	EditorDecreaseResourcesTool& decrease_tool_;

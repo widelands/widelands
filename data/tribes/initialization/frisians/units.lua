@@ -9,7 +9,6 @@ include "tribes/scripting/help/time_strings.lua"
 
 wl.Descriptions():new_tribe {
    name = "frisians",
-   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {8, 26} },
@@ -721,6 +720,13 @@ wl.Descriptions():new_tribe {
                -- TRANSLATORS: Helptext for a frisian worker: Shipwright
                purpose = pgettext("frisians_worker", "Works at the shipyard and constructs new ships.")
             }
+         },
+         {
+            name = "frisians_diker",
+            helptexts = {
+               -- TRANSLATORS: Purpose helptext for a frisian worker: Diker
+               purpose = pgettext("frisians_worker", "Constructs breakwaters to gain new land from the sea.")
+            }
          }
       },
       {
@@ -1225,6 +1231,15 @@ wl.Descriptions():new_tribe {
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Pond
             purpose = _("A charcoal stack, which had been erected in this earthen hole, is ready for a charcoal burner to gather coal from it.")
+         }
+      },
+      {
+         name = "dike",
+         helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Dike
+            purpose = _("A breakwater erected by a diker to gain new land from the sea."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Diker's House
+            note = _("You can manually remove the dike when the land is sufficiently secured to prevent wasting resources. To do so, build a flag, road, or building in its place.")
          }
       },
       {
@@ -1961,6 +1976,15 @@ wl.Descriptions():new_tribe {
             note = pgettext("frisians_building", "The farm needs free space within the work area to plant seeds.")
          }
       },
+      {
+         name = "frisians_dikers_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Diker's House
+            purpose = pgettext("frisians_building", "Constructs breakwaters nearby to gain new land from the sea."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Diker's House
+            note = pgettext("frisians_building", "The diker will terraform the land around each breakwater he builds several times. You can manually remove breakwaters when the land is sufficiently secured to prevent wasting resources; to do so, build a flag, road, or building in the dike’s place.")
+         }
+      },
 
       -- Mines
       {
@@ -2190,6 +2214,26 @@ wl.Descriptions():new_tribe {
    productionsite_workers_missing = pgettext("frisians", "Workers missing"),
    -- TRANSLATORS: Productivity label on a frisian building if there is more than 1 worker coming. If you need plural forms here, please let us know.
    productionsite_workers_coming = pgettext("frisians", "Workers are coming"),
+
+   -- Soldier strings to be used in Military Status strings
+
+   soldier_context = "frisians_soldier",
+   soldier_0_sg = "%1% soldier (+%2%)",
+   soldier_0_pl = "%1% soldiers (+%2%)",
+   soldier_1_sg = "%1% soldier",
+   soldier_1_pl = "%1% soldiers",
+   soldier_2_sg = "%1%(+%2%) soldier (+%3%)",
+   soldier_2_pl = "%1%(+%2%) soldiers (+%3%)",
+   soldier_3_sg = "%1%(+%2%) soldier",
+   soldier_3_pl = "%1%(+%2%) soldiers",
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
+   UNUSED_soldier_0 = npgettext("frisians_soldier", "%1% soldier (+%2%)", "%1% soldiers (+%2%)", 0),
+   -- TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
+   UNUSED_soldier_1 = npgettext("frisians_soldier", "%1% soldier", "%1% soldiers", 0),
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+   UNUSED_soldier_2 = npgettext("frisians_soldier", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", 0),
+   -- TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to. %2% are currently open soldier slots in the building.
+   UNUSED_soldier_3 = npgettext("frisians_soldier", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", 0),
 
    -- Special types
    builder = "frisians_builder",

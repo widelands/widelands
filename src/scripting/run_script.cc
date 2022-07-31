@@ -20,6 +20,7 @@
 
 #include <memory>
 
+#include "base/multithreading.h"
 #include "io/filesystem/filesystem.h"
 #include "scripting/lua_table.h"
 
@@ -44,6 +45,8 @@ std::string get_file_content(FileSystem* fs, const std::string& filename) {
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
 std::unique_ptr<LuaTable>
 run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	MutexLock m(MutexLock::ID::kLua);
+
 	// Get the current value of __file__
 	std::string last_file;
 	lua_getglobal(L, "__file__");
