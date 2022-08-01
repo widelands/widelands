@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-28 07:46+0000\n"
+"POT-Creation-Date: 2022-07-31 03:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -411,7 +411,7 @@ msgstr "Terep típusának megváltoztatása"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:298
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:178
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Mozdíthatatlan tereptárgyak"
 
@@ -505,12 +505,12 @@ msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
-msgstr ""
+msgstr "Eszköz előzmények"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:366
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "A korábban használt eszközök és beállításaik ismételt használata"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -676,7 +676,7 @@ msgstr "Véletlenszerű játékos"
 #: ../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr ""
+msgstr "Magasság: növ./csökk. %1$d, megad. %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -684,31 +684,31 @@ msgstr ""
 #: ../../src/editor/tools/increase_resources_tool.cc:80
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr ""
+msgstr "%1$s: növ./csökk. %2$d, megad. %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/noise_height_tool.cc:73
 #, c-format
 msgid "Noise height: %1$d–%2$d"
-msgstr ""
+msgstr "Véletlen magasság: %1$d–%2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_critter_tool.cc:117
 #, c-format
 msgid "Critter: %1$s"
-msgstr ""
+msgstr "Állatok: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:110
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Mozdíthatatlan: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/set_terrain_tool.cc:110
 #, c-format
 msgid "Terrain: %1$s"
-msgstr ""
+msgstr "Terep: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:177
@@ -1068,9 +1068,9 @@ msgstr "(nincs)"
 msgid "Waterway length limit:"
 msgstr "Víziutak megengedett hossza:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1494,8 +1494,8 @@ msgid ""
 "location."
 msgstr "Válaszd ki a térkép új méretét, és kattints a térképen a felosztás kívánt helyén. A térkép növelésekor az új oszlopok/sorok a kiválasztott ponttól keletre/délre lesznek beszúrva. A térkép méretének csökkentésekor a kért számú oszlop/sor a kiválasztott ponttól keletre/délre lesz eltávolítva."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1508,7 +1508,7 @@ msgstr "%1%: %2%"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr ""
+msgstr "Kattintás: használat; Shift + kattintás: eltávolítás; Ctrl + kattintás: rögzítés"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:35
 msgid "Tool Size"
@@ -1550,7 +1550,7 @@ msgid "Messages"
 msgstr "Üzenetek"
 
 #: ../../src/game_io/game_loader.cc:175
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:202
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
 msgstr "Lezárás"
 
@@ -1958,47 +1958,13 @@ msgstr "Ellenség legyőzve!"
 msgid "Enemy at site defeated!"
 msgstr "Ellenség legyőzve a támaszponton!"
 
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is
-#. the maximum
-#. * number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:418
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. * TRANSLATORS: Number of soldiers stationed at a militarysite.
-#: ../../src/logic/map_objects/tribes/militarysite.cc:425
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently open soldier slots in the building. %3% is the maximum number of
-#. soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:436
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently
-#. * open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:444
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
-
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgctxt "building"
 msgid "Attack!"
 msgstr "Támadás!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgid "You are under attack"
 msgstr "Megtámadtak"
 
@@ -2295,17 +2261,17 @@ msgid "Logic error"
 msgstr "Logikai hiba"
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Betöltés: %1%: %2% (%3%/%4%)"
 
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:174
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
 #: ../../src/wui/minimap.cc:210
 msgid "Ships"
 msgstr "Hajók"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:153
 #: ../../src/wui/interactive_player.cc:333
@@ -2317,7 +2283,7 @@ msgstr "Áruk"
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
 #. need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:144
 #: ../../src/wui/productionsitewindow.cc:111
@@ -2326,7 +2292,7 @@ msgid "Workers"
 msgstr "Munkások"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:149
@@ -2336,26 +2302,26 @@ msgstr "Épületek"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:230
 msgid "Worker missing"
 msgstr "Munkás hiányzik"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:235
 msgid "Workers missing"
 msgstr "Munkások hiányoznak"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:248
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
 msgid "Worker is coming"
 msgstr "A munkás úton van"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:253
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
 msgid "Workers are coming"
 msgstr "A munkások úton vannak"
 
@@ -2454,73 +2420,73 @@ msgstr "%d. hajó"
 #: ../../src/wui/game_diplomacy_menu.cc:114
 #: ../../src/wui/interactive_player.cc:218
 msgid "Diplomacy"
-msgstr ""
+msgstr "Diplomácia"
 
 #: ../../src/logic/playercommand.cc:2161
 #, c-format
 msgid "%s has resigned and is now a spectator."
-msgstr ""
+msgstr "%s feladta, és néző lett belőle."
 
 #: ../../src/logic/playercommand.cc:2161
 msgid "Player Resigned"
-msgstr ""
+msgstr "Egy játékos feladta"
 
 #: ../../src/logic/playercommand.cc:2173
 msgid "Player Leaves Team"
-msgstr ""
+msgstr "Egy játékos kilépett a csapatból"
 
 #: ../../src/logic/playercommand.cc:2174
 #, c-format
 msgid "%1$s has left team %2$u and is now teamless."
-msgstr ""
+msgstr "%1$s kilépett a %2$u. csapatból, és egyedül folytatja."
 
 #: ../../src/logic/playercommand.cc:2182
 msgid "Team Joining Request"
-msgstr ""
+msgstr "Csatlakozási kérelem egy csapathoz"
 
 #: ../../src/logic/playercommand.cc:2183
 msgid "Team Joining Invitation"
-msgstr ""
+msgstr "Meghívás a csapatba"
 
 #: ../../src/logic/playercommand.cc:2185
 #: ../../src/wui/game_diplomacy_menu.cc:309
 #, c-format
 msgid "%1$s has requested to join the team of %2$s."
-msgstr ""
+msgstr "%1$s szeretne csatlakozni %2$s csapatához."
 
 #: ../../src/logic/playercommand.cc:2186
 #: ../../src/wui/game_diplomacy_menu.cc:314
 #, c-format
 msgid "%1$s has invited %2$s to join their team."
-msgstr ""
+msgstr "%1$s meghívta %2$s-t, hogy csatlakozzon a csapatához."
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Accepted"
-msgstr ""
+msgstr "Csapatváltás elfogadva"
 
 #: ../../src/logic/playercommand.cc:2211
 msgid "Team Change Rejected"
-msgstr ""
+msgstr "Csapatváltás elutasítva"
 
 #: ../../src/logic/playercommand.cc:2213
 #, c-format
 msgid "%1$s has accepted %2$s into their team."
-msgstr ""
+msgstr "%1$s befogadta %2$s-t a csapatába."
 
 #: ../../src/logic/playercommand.cc:2214
 #, c-format
 msgid "%1$s has accepted the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s elfogadta a meghívást %2$s csapatába."
 
 #: ../../src/logic/playercommand.cc:2216
 #, c-format
 msgid "%1$s has denied %2$s membership in their team."
-msgstr ""
+msgstr "%1$s elutasította %2$s csatlakozását a csapatához."
 
 #: ../../src/logic/playercommand.cc:2217
 #, c-format
 msgid "%1$s has rejected the invitation to join the team of %2$s."
-msgstr ""
+msgstr "%1$s elutasította a meghívást %2$s csapatába."
 
 #: ../../src/logic/replay.cc:86
 msgid "Desync"
@@ -3338,11 +3304,11 @@ msgstr "Nincs kiválasztva"
 msgid "No matches"
 msgstr "Nincs találat"
 
-#: ../../src/ui_basic/panel.cc:313
+#: ../../src/ui_basic/panel.cc:298
 msgid "Please wait…"
 msgstr "Kérjük várj…"
 
-#: ../../src/ui_basic/panel.cc:443
+#: ../../src/ui_basic/panel.cc:428
 msgid "Game ending – please wait…"
 msgstr "Játék befejezése – kérjük várj…"
 
@@ -8388,8 +8354,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Hajózás"

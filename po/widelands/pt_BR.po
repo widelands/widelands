@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-28 07:46+0000\n"
+"POT-Creation-Date: 2022-07-31 03:53+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Yuri Laskowski <yurinikolai00@gmail.com>, 2021\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
@@ -409,7 +409,7 @@ msgstr "Alterar o mapa do terreno"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:298
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:178
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Imóveis"
 
@@ -1066,9 +1066,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr "Limite de comprimento de cursos de água:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1493,8 +1493,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1549,7 +1549,7 @@ msgid "Messages"
 msgstr "Mensagens"
 
 #: ../../src/game_io/game_loader.cc:175
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:202
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
 msgstr "Finalizando"
 
@@ -1961,51 +1961,13 @@ msgstr ""
 msgid "Enemy at site defeated!"
 msgstr ""
 
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is
-#. the maximum
-#. * number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:418
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#. * TRANSLATORS: Number of soldiers stationed at a militarysite.
-#: ../../src/logic/map_objects/tribes/militarysite.cc:425
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently open soldier slots in the building. %3% is the maximum number of
-#. soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:436
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently
-#. * open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:444
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgctxt "building"
 msgid "Attack!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgid "You are under attack"
 msgstr ""
 
@@ -2305,17 +2267,17 @@ msgid "Logic error"
 msgstr ""
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:174
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
 #: ../../src/wui/minimap.cc:210
 msgid "Ships"
 msgstr ""
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:153
 #: ../../src/wui/interactive_player.cc:333
@@ -2327,7 +2289,7 @@ msgstr "Mercadorias"
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
 #. need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:144
 #: ../../src/wui/productionsitewindow.cc:111
@@ -2336,7 +2298,7 @@ msgid "Workers"
 msgstr "Trabalhadores"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:149
@@ -2346,26 +2308,26 @@ msgstr "Edificios"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:230
 msgid "Worker missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:235
 msgid "Workers missing"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:248
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
 msgid "Worker is coming"
 msgstr ""
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:253
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
 msgid "Workers are coming"
 msgstr ""
 
@@ -3351,11 +3313,11 @@ msgstr ""
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:313
+#: ../../src/ui_basic/panel.cc:298
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:443
+#: ../../src/ui_basic/panel.cc:428
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -8421,8 +8383,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Estatísticas"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
