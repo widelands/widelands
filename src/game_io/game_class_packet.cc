@@ -63,7 +63,6 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader* /* mol *
 					Notifications::publish(NoteMapObjectDescription(
 					   fr.string(), NoteMapObjectDescription::LoadType::kObject));
 				}
-				game.postload_tribes();
 			} else {
 				game.check_legacy_addons_desync_magic();
 			}

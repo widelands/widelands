@@ -309,11 +309,11 @@ void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	assert(descriptions_);
 
-	postload_addons(false);
+	postload_addons();
 	postload_tribes();
 }
 
-void EditorGameBase::postload_addons(bool also_postload_tribes) {
+void EditorGameBase::postload_addons() {
 	if (did_postload_addons_) {
 		return;
 	}
@@ -343,10 +343,6 @@ void EditorGameBase::postload_addons(bool also_postload_tribes) {
 				lua_->run_script(script);
 			}
 		}
-	}
-
-	if (also_postload_tribes) {
-		postload_tribes();
 	}
 }
 
