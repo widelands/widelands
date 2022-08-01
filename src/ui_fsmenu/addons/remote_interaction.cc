@@ -518,6 +518,7 @@ AdminDialog::AdminDialog(AddOnsCtrl& parent,
 
 		list_->set_desired_size(300, list_->get_lineheight() * (list_->size() + 1));
 		main_box_.add(list_, UI::Box::Resizing::kExpandBoth);
+		list_->focus();
 		break;
 	}
 	}
