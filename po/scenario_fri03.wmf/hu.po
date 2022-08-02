@@ -4,7 +4,7 @@
 # 
 # Translators:
 # vargaviktor <viktor.varga@gmail.com>, 2021
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2021-03-01 09:35+0000\n"
-"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2021\n"
+"Last-Translator: Tóth András <txa-dev@posteo.hu>, 2022\n"
 "Language-Team: Hungarian (https://www.transifex.com/widelands/teams/35159/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -770,7 +770,7 @@ msgstr ""
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:329
 msgid "Stuck"
-msgstr ""
+msgstr "Elakadva"
 
 #. TRANSLATORS: M. C. Iniucundus – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:323
@@ -781,6 +781,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Látod hová vezetett a balgaságod? Kitört a vihar és mindannyian itt "
+"ragadtunk, mert leromboltad a kikötőnket. De az istenek igazságot "
+"szolgáltatnak: bár a harcban erősebbnek tűnsz nálunk, arra kényszerítenek, "
+"hogy addig maradj ezen a szigeten, míg reménytelen utazásod célja örökre "
+"elérhetetlenné válik. Csüggedj hát győzelmedben!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -788,6 +793,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"Ez katasztrófa! Újabb parthoz érkeztünk, de egy másik törzs már elfoglalta, "
+"és nem engedik, hogy partra szálljunk."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:334
@@ -795,6 +802,9 @@ msgid ""
 "We were too slow. We dawdled and dallied and this is the result. There is no"
 " way forward. None of us will ever see our home again!"
 msgstr ""
+"Túl lassúak voltunk. Csak tébláboltunk és szerencsétlenkedtünk, és ez lett "
+"az eredménye. Semerre sem tudunk tovább menni. Soha többé nem láthatjuk az "
+"otthonunkat!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri03.wmf/scripting/tribes/empire_port_large/init.lua:8
