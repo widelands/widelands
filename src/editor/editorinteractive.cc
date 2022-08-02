@@ -1077,7 +1077,6 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		Notifications::publish(UI::NoteLoadingMessage(format(_("Loading map “%s”…"), filename)));
 		eia.load(filename);
 
-		egbase.postload_addons();
 		egbase.postload();
 		eia.start();
 		if (!script_to_run.empty()) {
@@ -1092,7 +1091,6 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
 		}
 
-		egbase.postload_addons();
 		egbase.postload();
 
 		egbase.mutable_map()->create_empty_map(
