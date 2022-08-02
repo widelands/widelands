@@ -166,7 +166,7 @@ endif()
 
 # Search for the SDL2_ttf library
 find_library(SDL2_TTF_LIBRARY
-  NAMES SDL2_ttf
+  NAMES SDL2_ttf SDL2_ttf-static
   HINTS
     ENV SDL2TTFDIR
     ENV SDL2DIR

@@ -1,6 +1,6 @@
 [TOC]
 
-## post-1.0 until [git 0621ce2](https://github.com/widelands/widelands/commit/0621ce2fe1a3825ae6669a424a700de5312fb84f)
+## post-1.0 until [git 99ccb31](https://github.com/widelands/widelands/commit/99ccb319debb0490c1b22ae2e6175a5117cb5d17)
 
 ### Animations, Icons and Overlays
 
@@ -12,6 +12,8 @@
 - Upscaled Splashscreen (#5183)
 - Optimize images with PNGQuant (#5204)
 - Fix pause and jump in empire mill animation (#5270)
+- Add high resolution images for Empire buildings (#5376)
+- Add high resolution images for Atlantean buildings (#5384)
 
 
 ### Sounds and Music
@@ -39,6 +41,9 @@
     - For each lava field a region of radius 1 is considered for removal
 - Basic control tutorial: only show first object once (#5338)
 - Fix legacy scenario units load order (#5350)
+- Atlantean02 (#5196)
+- Fri04 (#5104)
+- Fri03 Tweaks (#5104)
 
 
 ### Scripting
@@ -61,6 +66,8 @@
 - Decouple Registries (#5169)
 - Add script to check for optional Lua parentheses (#4787, #5225, #5226)
 - Clean up `descriptions` vs `wl.Descriptions()` in init.lua files (#5296)
+- Restore global descriptions for savegame compatibility (#5393)
+- Fix Lua Scripting Multithreading (#5475)
 
 
 ### Maps
@@ -112,6 +119,8 @@
 - Implement saveloading unique windows (#4823)
 - Fix immovable savegame compatibility Long Long Way (#5060)
 - Cleanup player end statuses on loading (#5070)
+- Fix `DescriptionManager` Stacking (#5386)
+- Saveload `destruction_blocked` Property (#5450)
 
 
 ### AI
@@ -144,6 +153,13 @@
     - Insert a safeguard bonus for basic wells
 - Fixing wrong initialization of AI `last_seen_time` (#5284)
 - Refactoring of `construct_building` (#5282)
+- Fixing bug #5375 - update buildable fields crash (#5378)
+- Stop loop after iterator is invalidated in defaultai (#5401)
+- Remove NOCOM comments (#5430)
+- AI Training (#5439)
+- Improving building and dismantling mil. sites (#5446)
+- Add AI Basic Decision Algorithm For Accepting Diplomacy (#5457)
+- Rework AI Military Site Dismantlement (#5449)
 
 
 ### Gameplay
@@ -162,6 +178,9 @@
 - Fix Port Paths Reordering On Port Removal (#5154)
 - Check for unknown wares/workers when loading economy profiles (#5215)
 - Ensure Notifications only reach the topmost DescriptionManager (#5184)
+- Unmark Amazons as Experimental (#5442)
+- Diplomacy (#5091)
+- Made diking part of the official tribe (#5104)
 
 
 ### User Interface
@@ -210,6 +229,15 @@
 - Ships on minimap (#5297)
 - No hotkey for empty dropdown entry (#5320)
 - Fix Sound Options Panel Styling (#5372)
+- Fix Duplicated Workareas Display Bug (#5371)
+- Pan map view to keep it centered when resizing game window (#5388)
+- Fix collapsing permanently collapsed input queues (#5426)
+- Fix infinite loop at startup map panning (#5429)
+- Add highlighting of filter text in dropdown list (#5443)
+- Fix save dialog and debug window text input bug (#5421)
+- Workaround for inverted horizontal scrolling bug in SDL (#5394)
+- Fix fake-modal in-game load dialog releasing modal grab (#5454)
+- Make space available as dropdown hotkey & only trigger hotkey when not filtered (#5441)
 
 
 ### Internationalization
@@ -224,7 +252,7 @@
 - Improved exception reporting (#5003)
     - Fix exception reporting in the game logic thread.
     - Adds `--verbose-i18n` flag.
-- Fix Transifex String Issues (#5072)
+- Fix Transifex String Issues (#5072, #5399, #5462)
 - Fix Lua `(n|p)gettext` ignoring textdomains (#5080)
 - Properly format `size_t` type printf placeholder (#5096)
 - Tx String and CLI Help Fixes (#5179)
@@ -232,6 +260,7 @@
 - Fix unhealthy usage of `split` in language menu (#5241)
 - Skip installing locales when translations are disabled (#5302)
 - Tut01 String Fix (#5327)
+- Military capacity string refactor (#5476)
 
 
 ### Help and Documentation
@@ -271,6 +300,7 @@
 - Add offset to editor info windows (#5145)
 - Editor: Add toggle maximum building spaces option (#5220)
     - Convert all show/hide toggles to use display flags
+- Editor: History of last tool settings (#5365)
 
 
 ### Graphics Engine
@@ -278,6 +308,8 @@
 - Catch crash when preloading minimap (#5021)
 - Fix a texture deletion from wrong thread (#5174)
 - Fix linking the OpenGL library (#5299)
+- Calculate max battle animation height (#5381)
+- Thread safe destructor for Texture `shared_ptr` (#5436)
 
 
 ### Networking
@@ -287,6 +319,7 @@
 - Keep GameController pointer alive for template game (#5128)
 - Replace Boost::Asio → Asio (#5164)
 - Fix Description Index Misordering from UI Code (#5288)
+- Fix sync report requesting during game startup (#5382)
 
 
 ### Build System
@@ -339,6 +372,20 @@
 - Dependencies: Asio include handling & Solus support (#5182)
 - Don't require Homebrew to be installed at `/usr/local` (#5208)
 - CMakeLists.txt: Use a list for many build flags (#5328)
+- Only use embedded minizip if not installed (#5360, #5392)
+- Put binaries in correct locations when installing (#5359)
+- Enable Include Order Codecheck on Header Files (#5373)
+- Move definition of `WL_INSTALL_BINDIR` (#5383)
+- Remove `SYSTEM` from `target_compile_options` (#5396)
+- CMakeLists.txt: add custom uninstall target (#5358)
+- Resolve relative parts before uninstalling empty dirs (#5417)
+- Reformat version string (remove markdown format) (#5385)
+- Xenial's CMake version does not know `VERSION_GREATER_EQUAL`, use `NOT VERSION_LESS` instead
+- `compile.sh` fix and tweaks (#5465)
+    - Fix non-portable globbing
+    - Add `--dry-run`
+    - Break up the CMake command line for readibility
+- Added new SDL2-image dependencies to static linking (#5472)
 
 
 ### Other Issues
@@ -352,6 +399,12 @@
 - Allow using `--script` with `--new_game_from_template` (#5153)
 - Extend copyright script to update year in all files (#5188)
 - Add check for missing copyright headers (#5223)
+- Preallocate task stack before program update (#5406)
+- Fix use of vector fill constructor (#5409)
+- Update testsuite compilers and OSs for Jammy (#5415)
+- Integrate AppImage building into CI (#5377)
+- Readme Typo Fixes (#5461)
+- Fix race in use of `logic_thread_locked` (#5419)
 
 
 
