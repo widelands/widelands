@@ -87,7 +87,8 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			// Map landmarks
 			// TODO(Nordfriese): Savegame compatibility v1.1
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				const size_t no_of_landmarks = (packet_version >= 7) ? fr.unsigned_32() : fr.unsigned_8();
+				const size_t no_of_landmarks =
+				   (packet_version >= 7) ? fr.unsigned_32() : fr.unsigned_8();
 				auto& quicknav = ibase->quick_navigation();
 				quicknav.landmarks().resize(no_of_landmarks);
 				for (size_t i = 0; i < no_of_landmarks; ++i) {
