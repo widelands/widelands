@@ -2,7 +2,7 @@
 // From https://spin.atomicobject.com/2013/01/13/exceptions-stack-traces-c/
 #include <windows.h>
 #include <stdio.h>
-#include <dbghlp.h>
+#include <dbghelp.h>
 #include <stdlib.h>
 
 #ifdef _WIN64

@@ -246,6 +246,9 @@ function(wl_test NAME)
 
   # Tests need to link with SDL2 library without main.
   target_link_libraries(${NAME} SDL2::Core)
+  if (WIN32)
+	  target_link_libraries(${NAME} dbghelp)
+  endif()
 
   _common_compile_tasks()
 
