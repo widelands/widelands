@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/mapview.h"
 
@@ -67,6 +68,8 @@ struct QuickNavigation {
 	void goto_prev();
 	void goto_next();
 	void goto_landmark(int index);
+	bool can_goto_prev() const;
+	bool can_goto_next() const;
 
 	bool handle_key(bool down, SDL_Keysym key);
 
@@ -95,6 +98,8 @@ class QuickNavigationWindow : public UI::UniqueWindow {
 public:
 	QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueWindow::Registry& r);
 
+	void think() override;
+
 	UI::Panel::SaveType save_type() const override {
 		return UI::Panel::SaveType::kQuicknav;
 	}
@@ -106,6 +111,7 @@ private:
 
 	InteractiveBase& ibase_;
 	UI::Box main_box_, buttons_box_;
+	UI::Button prev_, next_, new_;
 	std::unique_ptr<UI::Box> content_box_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteQuicknavChangedEvent>> subscriber_;

@@ -113,13 +113,12 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		}
 	}
 
-	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) &&
-	    !previous_locations_.empty()) {
+	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) && can_goto_prev()) {
 		// go to previous location
 		goto_prev();
 		return true;
 	}
-	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && !next_locations_.empty()) {
+	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && can_goto_next()) {
 		// go to next location
 		goto_next();
 		return true;
@@ -128,17 +127,31 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	return false;
 }
 
+bool QuickNavigation::can_goto_prev() const {
+	return !previous_locations_.empty();
+}
+
+bool QuickNavigation::can_goto_next() const {
+	return !next_locations_.empty();
+}
+
 void QuickNavigation::goto_landmark(int index) {
 	map_view_->set_view(landmarks_[index].view, MapView::Transition::Smooth);
 }
 
 void QuickNavigation::goto_prev() {
+	if (!can_goto_prev()) {
+		return;
+	}
 	insert_if_applicable(next_locations_);
 	map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
 	previous_locations_.pop_back();
 }
 
 void QuickNavigation::goto_next() {
+	if (!can_goto_next()) {
+		return;
+	}
 	insert_if_applicable(previous_locations_);
 	map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
 	next_locations_.pop_back();
@@ -153,30 +166,28 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
 : UI::UniqueWindow(&ibase, UI::WindowStyle::kWui, "quicknav", &r, 100, 100, _("Quick Navigation")),
 	ibase_(ibase),
 	main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal)
+	buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	prev_(&buttons_box_, "prev", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Go to previous location")),
+	next_(&buttons_box_, "next", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Go to next location")),
+	new_(&buttons_box_, "new", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary, _("+"), _("Add a new landmark"))
 {
-	buttons_box_.add_inf_space();
-	UI::Button* b = new UI::Button(&buttons_box_, "prev", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-			g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Go to previous location"));
-	b->sigclicked.connect([this]() { ibase_.quick_navigation().goto_prev(); });
-	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
-	buttons_box_.add_inf_space();
-
-	b = new UI::Button(&buttons_box_, "new", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary, _("+"), _("Add a new landmark"));
-	b->sigclicked.connect([this]() { ibase_.quick_navigation().add_landmark(); });
-	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
-	buttons_box_.add_inf_space();
-
-	b = new UI::Button(&buttons_box_, "next", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-			g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Go to next location"));
-	b->sigclicked.connect([this]() { ibase_.quick_navigation().goto_next(); });
-	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
+	prev_.sigclicked.connect([this]() { ibase_.quick_navigation().goto_prev(); });
+	next_.sigclicked.connect([this]() { ibase_.quick_navigation().goto_next(); });
+	new_.sigclicked.connect([this]() { ibase_.quick_navigation().add_landmark(); });
+	subscriber_ = Notifications::subscribe<NoteQuicknavChangedEvent>([this](const NoteQuicknavChangedEvent& /* note */) { rebuild(); });
 
 	buttons_box_.add_inf_space();
+	buttons_box_.add(&prev_, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&new_, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add_inf_space();
+	buttons_box_.add(&next_, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add_inf_space();
+
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(kSpacing);
-
-	subscriber_ = Notifications::subscribe<NoteQuicknavChangedEvent>([this](const NoteQuicknavChangedEvent& /* note */) { rebuild(); });
 
 	set_center_panel(&main_box_);
 	if (get_usedefaultpos()) {
@@ -245,6 +256,13 @@ void QuickNavigationWindow::rebuild() {
 	content_box_->set_scrolling(true);
 	main_box_.add(content_box_.get(), UI::Box::Resizing::kExpandBoth);
 	initialization_complete();
+}
+
+void QuickNavigationWindow::think() {
+	UI::UniqueWindow::think();
+
+	prev_.set_enabled(ibase_.quick_navigation().can_goto_prev());
+	next_.set_enabled(ibase_.quick_navigation().can_goto_next());
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
