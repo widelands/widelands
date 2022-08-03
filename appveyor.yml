@@ -48,9 +48,7 @@ build_script:
   - cmd: set /p WIDELANDS_NEXT_VERSION=<%APPVEYOR_BUILD_FOLDER%\NEXT_STABLE_VERSION
   - cmd: set WIDELANDS_SETUP_NAME=Widelands-%CONFIGURATION%-%PLATFORM%-%WIDELANDS_NEXT_VERSION%~git(%APPVEYOR_REPO_COMMIT:~0,7%@%APPVEYOR_REPO_BRANCH%)
   # finally start the build
-  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking -DCMAKE_EXPORT_COMPILE_COMMANDS=1 %APPVEYOR_BUILD_FOLDER%"
-  - cmd: "type build.ninja"
-  - cmd: "bash --login -c \"grep notifications C:/projects/widelands/build/compile_commands.json\""
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_BUILD_WINSTATIC=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF -DOPTION_BUILD_CODECHECK=OFF -DCMAKE_JOB_POOLS=\"linking=1\" -DCMAKE_JOB_POOL_LINK=linking %APPVEYOR_BUILD_FOLDER%"
   - cmd: "cmake --build ."
 on_success:
   - cmd: strip -sv %APPVEYOR_BUILD_FOLDER%\build\src\widelands.exe
