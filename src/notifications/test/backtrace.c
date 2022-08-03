@@ -1,95 +1,146 @@
-/**
- * This source file is used to print out a stack-trace when your program
- * segfaults. It is relatively reliable and spot-on accurate.
- *
- * This code is in the public domain. Use it as you see fit, some credit
- * would be appreciated, but is not a prerequisite for usage. Feedback
- * on it's use would encourage further development and maintenance.
- *
- * Due to a bug in gcc-4.x.x you currently have to compile as C++ if you want
- * demangling to work.
- *
- * Please note that it's been ported into my ULS library, thus the check for
- * HAS_ULSLIB and the use of the sigsegv_outp macro based on that define.
- *
- * Author: Jaco Kroon <jaco@kroon.co.za>
- *
- * Copyright (C) 2005 - 2010 Jaco Kroon
- */
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
-/* Bug in gcc prevents from using CPP_DEMANGLE in pure "C" */
-#if !defined(__cplusplus) && !defined(NO_CPP_DEMANGLE)
-#define NO_CPP_DEMANGLE
-#endif
-
-#include <execinfo.h>
-#include <memory.h>
-#include <stdlib.h>
+#ifdef _WIN32
+// From https://spin.atomicobject.com/2013/01/13/exceptions-stack-traces-c/
+#include <windows.h>
 #include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <ucontext.h>
-#include <dlfcn.h>
-#ifndef NO_CPP_DEMANGLE
-#include <cxxabi.h>
-#ifdef __cplusplus
-using __cxxabiv1::__cxa_demangle;
-#endif
-#endif
+#include <dbghlp.h>
+#include <stdlib.h>
 
-#ifdef HAS_ULSLIB
-#include "uls/logger.h"
-#define sigsegv_outp(x)         sigsegv_outp(,gx)
+#define EXE_NAME "notifications_test"
+
+#ifdef _WIN64
+#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_AMD64
 #else
-#define sigsegv_outp(x, ...)    fprintf(stderr, x "\n", ##__VA_ARGS__)
+#define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_I386
 #endif
+ 
+/* Resolve symbol name and source location given the path to the executable 
+   and an address */
+int addr2line(void const * const addr)
+{
+  char addr2line_cmd[512] = {0};
+ 
+  /* have addr2line map the address to the relent line in the code */
+  sprintf(addr2line_cmd,"addr2line -f -p -e " EXE_NAME " %p", program_name, addr); 
+ 
+  /* This will print a nicely formatted string specifying the
+     function and source line of the address */
+  return system(addr2line_cmd);
+}
 
-#if defined(REG_RIP)
-# define SIGSEGV_STACK_IA64
-# define REGFORMAT "%016lx"
-#elif defined(REG_EIP)
-# define SIGSEGV_STACK_X86
-# define REGFORMAT "%08x"
-#else
-# define SIGSEGV_STACK_GENERIC
-# define REGFORMAT "%x"
-#endif
+void windows_print_stacktrace(CONTEXT* context)
+{
+  SymInitialize(GetCurrentProcess(), 0, true);
+ 
+  STACKFRAME frame = { 0 };
+ 
+  /* setup initial stack frame */
+  frame.AddrPC.Offset         = context->Eip;
+  frame.AddrPC.Mode           = AddrModeFlat;
+  frame.AddrStack.Offset      = context->Esp;
+  frame.AddrStack.Mode        = AddrModeFlat;
+  frame.AddrFrame.Offset      = context->Ebp;
+  frame.AddrFrame.Mode        = AddrModeFlat;
+ 
+  while (StackWalk64(IMAGE_FILE_MACHINE ,
+                   GetCurrentProcess(),
+                   GetCurrentThread(),
+                   &frame,
+                   context,
+                   0,
+                   SymFunctionTableAccess,
+                   SymGetModuleBase,
+                   0 ) )
+  {
+    addr2line((void*)frame.AddrPC.Offset);
+  }
+ 
+  SymCleanup( GetCurrentProcess() );
+}
 
-static void signal_segv(int signum, siginfo_t* info, void*ptr) {
-    static const char *si_codes[3] = {"", "SEGV_MAPERR", "SEGV_ACCERR"};
-
-    int i, f = 0;
-    ucontext_t *ucontext = (ucontext_t*)ptr;
-
-    sigsegv_outp("Segmentation Fault!");
-    sigsegv_outp("info.si_signo = %d", signum);
-    sigsegv_outp("info.si_errno = %d", info->si_errno);
-    sigsegv_outp("info.si_code  = %d (%s)", info->si_code, si_codes[info->si_code]);
-    sigsegv_outp("info.si_addr  = %p", info->si_addr);
-    for(i = 0; i < NGREG; i++)
-        sigsegv_outp("reg[%02d]       = 0x" REGFORMAT, i, ucontext->uc_mcontext.gregs[i]);
-
-#ifndef SIGSEGV_NOSTACK
-	int sz;
-	void **bt = (void**) malloc(20 * sizeof(void *));
-    sigsegv_outp("Stack trace (non-dedicated):");
-    sz = backtrace(bt, 20);
-    backtrace_symbols_fd(bt, sz, 2);
-    sigsegv_outp("End of stack trace.");
-#else
-    sigsegv_outp("Not printing stack strace.");
-#endif
-    _exit (-1);
+LONG WINAPI windows_exception_handler(EXCEPTION_POINTERS * ExceptionInfo)
+{
+  switch(ExceptionInfo->ExceptionRecord->ExceptionCode)
+  {
+    case EXCEPTION_ACCESS_VIOLATION:
+      fputs("Error: EXCEPTION_ACCESS_VIOLATION\n", stderr);
+      break;
+    case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
+      fputs("Error: EXCEPTION_ARRAY_BOUNDS_EXCEEDED\n", stderr);
+      break;
+    case EXCEPTION_BREAKPOINT:
+      fputs("Error: EXCEPTION_BREAKPOINT\n", stderr);
+      break;
+    case EXCEPTION_DATATYPE_MISALIGNMENT:
+      fputs("Error: EXCEPTION_DATATYPE_MISALIGNMENT\n", stderr);
+      break;
+    case EXCEPTION_FLT_DENORMAL_OPERAND:
+      fputs("Error: EXCEPTION_FLT_DENORMAL_OPERAND\n", stderr);
+      break;
+    case EXCEPTION_FLT_DIVIDE_BY_ZERO:
+      fputs("Error: EXCEPTION_FLT_DIVIDE_BY_ZERO\n", stderr);
+      break;
+    case EXCEPTION_FLT_INEXACT_RESULT:
+      fputs("Error: EXCEPTION_FLT_INEXACT_RESULT\n", stderr);
+      break;
+    case EXCEPTION_FLT_INVALID_OPERATION:
+      fputs("Error: EXCEPTION_FLT_INVALID_OPERATION\n", stderr);
+      break;
+    case EXCEPTION_FLT_OVERFLOW:
+      fputs("Error: EXCEPTION_FLT_OVERFLOW\n", stderr);
+      break;
+    case EXCEPTION_FLT_STACK_CHECK:
+      fputs("Error: EXCEPTION_FLT_STACK_CHECK\n", stderr);
+      break;
+    case EXCEPTION_FLT_UNDERFLOW:
+      fputs("Error: EXCEPTION_FLT_UNDERFLOW\n", stderr);
+      break;
+    case EXCEPTION_ILLEGAL_INSTRUCTION:
+      fputs("Error: EXCEPTION_ILLEGAL_INSTRUCTION\n", stderr);
+      break;
+    case EXCEPTION_IN_PAGE_ERROR:
+      fputs("Error: EXCEPTION_IN_PAGE_ERROR\n", stderr);
+      break;
+    case EXCEPTION_INT_DIVIDE_BY_ZERO:
+      fputs("Error: EXCEPTION_INT_DIVIDE_BY_ZERO\n", stderr);
+      break;
+    case EXCEPTION_INT_OVERFLOW:
+      fputs("Error: EXCEPTION_INT_OVERFLOW\n", stderr);
+      break;
+    case EXCEPTION_INVALID_DISPOSITION:
+      fputs("Error: EXCEPTION_INVALID_DISPOSITION\n", stderr);
+      break;
+    case EXCEPTION_NONCONTINUABLE_EXCEPTION:
+      fputs("Error: EXCEPTION_NONCONTINUABLE_EXCEPTION\n", stderr);
+      break;
+    case EXCEPTION_PRIV_INSTRUCTION:
+      fputs("Error: EXCEPTION_PRIV_INSTRUCTION\n", stderr);
+      break;
+    case EXCEPTION_SINGLE_STEP:
+      fputs("Error: EXCEPTION_SINGLE_STEP\n", stderr);
+      break;
+    case EXCEPTION_STACK_OVERFLOW:
+      fputs("Error: EXCEPTION_STACK_OVERFLOW\n", stderr);
+      break;
+    default:
+      fputs("Error: Unrecognized Exception\n", stderr);
+      break;
+  }
+  fflush(stderr);
+  /* If this is a stack overflow then we can't walk the stack, so just show
+    where the error happened */
+  if (EXCEPTION_STACK_OVERFLOW != ExceptionInfo->ExceptionRecord->ExceptionCode)
+  {
+      windows_print_stacktrace(ExceptionInfo->ContextRecord);
+  }
+  else
+  {
+      addr2line((void*)ExceptionInfo->ContextRecord->Eip);
+  }
+ 
+  return EXCEPTION_EXECUTE_HANDLER;
 }
 
 static void __attribute__((constructor)) setup_sigsegv() {
-    struct sigaction action;
-    memset(&action, 0, sizeof(action));
-    action.sa_sigaction = signal_segv;
-    action.sa_flags = SA_SIGINFO;
-    if(sigaction(SIGSEGV, &action, NULL) < 0)
-        perror("sigaction");
+  SetUnhandledExceptionFilter(windows_exception_handler);
 }
+#endif
