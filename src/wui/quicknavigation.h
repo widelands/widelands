@@ -19,16 +19,21 @@
 #ifndef WL_WUI_QUICKNAVIGATION_H
 #define WL_WUI_QUICKNAVIGATION_H
 
+#include <memory>
+
+#include "ui_basic/box.h"
+#include "ui_basic/unique_window.h"
 #include "wui/mapview.h"
+
+class InteractiveBase;
 
 constexpr uint16_t kQuicknavSlots = 9;
 
-/**
- * Provide quick navigation shortcuts.
- *
- * \note This functionality is really only used by \ref InteractiveBase,
- * but it is moved in its own structure to avoid overloading that class.
- */
+struct NoteQuicknavChangedEvent {
+	CAN_BE_SENT_AS_NOTE(NoteId::kQuicknavChangedEvent)
+};
+
+/** Provide quick navigation shortcuts and landmarks. */
 struct QuickNavigation {
 	struct Landmark {
 		MapView::View view;
@@ -42,11 +47,20 @@ struct QuickNavigation {
 
 	// Set the landmark for 'index' to 'view'. 'index' must be < 10.
 	void set_landmark(size_t index, const MapView::View& view);
+	inline void set_landmark_to_current(size_t index) {
+		set_landmark(index, current_);
+	}
+	void unset_landmark(size_t index);
 
 	// Returns a pointer to the first element in the landmarks array
 	const Landmark* landmarks() const {
 		return landmarks_;
 	}
+
+	/** Go to the previous/next location or a landmark. */
+	void goto_prev();
+	void goto_next();
+	void goto_landmark(int index);
 
 	bool handle_key(bool down, SDL_Keysym key);
 
@@ -68,6 +82,27 @@ private:
 	// Ignore the initial (0,0,1×) view
 	bool location_jumping_started_;
 	void insert_if_applicable(std::list<MapView::View>&);
+};
+
+/** A window with all landmarks and quick navigation UI. */
+class QuickNavigationWindow : public UI::UniqueWindow {
+public:
+	QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueWindow::Registry& r);
+
+	UI::Panel::SaveType save_type() const override {
+		return UI::Panel::SaveType::kQuicknav;
+	}
+	void save(FileWrite&, Widelands::MapObjectSaver&) const override;
+	static UI::Window& load(FileRead&, InteractiveBase&);
+
+private:
+	void rebuild();
+
+	InteractiveBase& ibase_;
+	UI::Box main_box_, buttons_box_;
+	std::unique_ptr<UI::Box> content_box_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteQuicknavChangedEvent>> subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

@@ -123,6 +123,7 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn,
 	kCommonZoomOut,
 	kCommonZoomReset,
+	kCommonQuicknavGUI,
 	kCommonQuicknavPrev,
 	kCommonQuicknavNext,
 	kCommon_End = kCommonQuicknavNext,

@@ -18,7 +18,15 @@
 
 #include "wui/quicknavigation.h"
 
+#include "graphic/graphic.h"
+#include "logic/game_data_error.h"
+#include "ui_basic/editbox.h"
 #include "wlapplication_options.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/mapviewpixelfunctions.h"
+#include "wui/watchwindow.h"
+
+/* Logic backend. */
 
 QuickNavigation::QuickNavigation(MapView* map_view)
    : map_view_(map_view), location_jumping_started_(false) {
@@ -53,6 +61,13 @@ void QuickNavigation::set_landmark(size_t index, const MapView::View& view) {
 	assert(index < kQuicknavSlots);
 	landmarks_[index].view = view;
 	landmarks_[index].set = true;
+	Notifications::publish(NoteQuicknavChangedEvent());
+}
+
+void QuickNavigation::unset_landmark(size_t index) {
+	assert(index < kQuicknavSlots);
+	landmarks_[index].set = false;
+	Notifications::publish(NoteQuicknavChangedEvent());
 }
 
 bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
@@ -66,7 +81,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		if (matches_shortcut(static_cast<KeyboardShortcut>(
 		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
 		                     key)) {
-			set_landmark(i, current_);
+			set_landmark_to_current(i);
 			return true;
 		}
 		if (landmarks_[i].set &&
@@ -74,7 +89,7 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		       static_cast<KeyboardShortcut>(
 		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
 		       key)) {
-			map_view_->set_view(landmarks_[i].view, MapView::Transition::Smooth);
+			goto_landmark(i);
 			return true;
 		}
 		return false;
@@ -88,18 +103,155 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) &&
 	    !previous_locations_.empty()) {
 		// go to previous location
-		insert_if_applicable(next_locations_);
-		map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
-		previous_locations_.pop_back();
+		goto_prev();
 		return true;
 	}
 	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && !next_locations_.empty()) {
 		// go to next location
-		insert_if_applicable(previous_locations_);
-		map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
-		next_locations_.pop_back();
+		goto_next();
 		return true;
 	}
 
 	return false;
+}
+
+void QuickNavigation::goto_landmark(int index) {
+	map_view_->set_view(landmarks_[index].view, MapView::Transition::Smooth);
+}
+
+void QuickNavigation::goto_prev() {
+	insert_if_applicable(next_locations_);
+	map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
+	previous_locations_.pop_back();
+}
+
+void QuickNavigation::goto_next() {
+	insert_if_applicable(previous_locations_);
+	map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
+	next_locations_.pop_back();
+}
+
+/* GUI window. */
+
+constexpr int kButtonSize = 34;
+constexpr int kSpacing = 4;
+
+QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueWindow::Registry& r)
+: UI::UniqueWindow(&ibase, UI::WindowStyle::kWui, "quicknav", &r, 100, 100, _("Quick Navigation")),
+	ibase_(ibase),
+	main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+	buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal)
+{
+	buttons_box_.add_inf_space();
+	UI::Button* b = new UI::Button(&buttons_box_, "prev", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Go to previous location"));
+	b->sigclicked.connect([this]() { ibase_.quick_navigation().goto_prev(); });
+	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add_inf_space();
+
+	b = new UI::Button(&buttons_box_, "new", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary, _("+"), _("Add a new landmark"));
+	b->sigclicked.connect([this]() { /* NOCOM */ rebuild(); });
+	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
+	buttons_box_.add_inf_space();
+
+	b = new UI::Button(&buttons_box_, "next", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Go to next location"));
+	b->sigclicked.connect([this]() { ibase_.quick_navigation().goto_next(); });
+	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
+
+	buttons_box_.add_inf_space();
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(kSpacing);
+
+	subscriber_ = Notifications::subscribe<NoteQuicknavChangedEvent>([this](const NoteQuicknavChangedEvent& /* note */) { rebuild(); });
+
+	set_center_panel(&main_box_);
+	if (get_usedefaultpos()) {
+		center_to_parent();
+	}
+	rebuild();
+}
+
+void QuickNavigationWindow::rebuild() {
+	if (content_box_ != nullptr) {
+		content_box_.release()->do_delete();
+	}
+	content_box_.reset(new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kSpacing));
+
+	for (int i = 0; i < kQuicknavSlots + 3 /* NOCOM */; ++i) {
+		UI::Box& box = *new UI::Box(content_box_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kSpacing);
+
+		UI::Button* b = new UI::Button(&box, format("goto_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				g_image_cache->get("images/wui/menus/goto.png"), _("Go to this landmark"));
+		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
+		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().goto_landmark(i); });
+		box.add(b);
+
+		b = new UI::Button(&box, format("watch_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				g_image_cache->get("images/wui/fieldaction/menu_watch_field.png"), _("View this landmark in a watch window"));
+		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
+		b->sigclicked.connect([this, i]() {
+			show_watch_window(dynamic_cast<InteractiveGameBase&>(ibase_),
+				MapviewPixelFunctions::calc_node_and_triangle(ibase_.egbase().map(),
+					// Technically, a landmark is the top-left corner of the screen, but we want to show the screen center instead.
+					ibase_.quick_navigation().landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2,
+					ibase_.quick_navigation().landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2).node
+			);
+		});
+		box.add(b);
+
+		b = new UI::Button(&box, format("clear_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				g_image_cache->get("images/wui/menu_abort.png"), _("Unset this landmark"));
+		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
+		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().unset_landmark(i); });
+		box.add(b);
+
+		b = new UI::Button(&box, format("set_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+				g_image_cache->get("images/wui/menus/save_game.png"), _("Set this landmark to the current map view location"));
+		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().set_landmark_to_current(i); });
+		box.add(b);
+
+		if (i < kQuicknavSlots) {
+			box.add_space(kButtonSize);
+		} else {
+			b = new UI::Button(&box, format("remove_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+					_("–"), _("Remove this landmark"));
+			b->sigclicked.connect([this]() { /* NOCOM */ rebuild(); });
+			box.add(b);
+		}
+
+		UI::EditBox& e = *new UI::EditBox(&box, 0, 0, 300, UI::PanelStyle::kWui);
+		e.set_text("NOCOM");
+		e.changed.connect([]() { /* NOCOM */ });
+		box.add(&e, UI::Box::Resizing::kExpandBoth);
+
+		content_box_->add(&box, UI::Box::Resizing::kFullSize);
+	}
+
+	content_box_->set_scrolling(true);
+	main_box_.add(content_box_.get(), UI::Box::Resizing::kExpandBoth);
+	initialization_complete();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+UI::Window& QuickNavigationWindow::load(FileRead& fr, InteractiveBase& ib) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			UI::UniqueWindow::Registry& r = ib.quicknav_registry_;
+			r.create();
+			assert(r.window);
+			QuickNavigationWindow& m = dynamic_cast<QuickNavigationWindow&>(*r.window);
+			return m;
+		}
+		throw Widelands::UnhandledVersionError(
+		   "Quick Navigation", packet_version, kCurrentPacketVersion);
+
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("quick navigation: %s", e.what());
+	}
+}
+void QuickNavigationWindow::save(FileWrite& fw, Widelands::MapObjectSaver& /* mos */) const {
+	fw.unsigned_16(kCurrentPacketVersion);
+	// Nothing to save currently.
 }

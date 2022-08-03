@@ -383,6 +383,7 @@ public:
 		kEncyclopedia,
 		kShipWindow,
 		kAttackWindow,
+		kQuicknav,
 	};
 	virtual SaveType save_type() const {
 		return SaveType::kNone;
