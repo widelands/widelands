@@ -19,6 +19,7 @@
 #include "wui/quicknavigation.h"
 
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/game_data_error.h"
 #include "ui_basic/editbox.h"
 #include "wlapplication_options.h"
@@ -168,9 +169,11 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
 	main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 	buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
 	prev_(&buttons_box_, "prev", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-			g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Go to previous location")),
+			g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+			as_tooltip_text_with_hotkey(_("Go to previous location"), shortcut_string_for(KeyboardShortcut::kCommonQuicknavPrev), UI::PanelStyle::kWui)),
 	next_(&buttons_box_, "next", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-			g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Go to next location")),
+			g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+			as_tooltip_text_with_hotkey(_("Go to next location"), shortcut_string_for(KeyboardShortcut::kCommonQuicknavNext), UI::PanelStyle::kWui)),
 	new_(&buttons_box_, "new", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary, _("+"), _("Add a new landmark"))
 {
 	prev_.sigclicked.connect([this]() { ibase_.quick_navigation().goto_prev(); });
@@ -207,7 +210,12 @@ void QuickNavigationWindow::rebuild() {
 		UI::Box& box = *new UI::Box(content_box_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kSpacing);
 
 		UI::Button* b = new UI::Button(&box, format("goto_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-				g_image_cache->get("images/wui/menus/goto.png"), _("Go to this landmark"));
+				g_image_cache->get("images/wui/menus/goto.png"),
+					i < kQuicknavSlots ? as_tooltip_text_with_hotkey(_("Go to this landmark"), shortcut_string_for(
+					static_cast<KeyboardShortcut>(
+		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i)), UI::PanelStyle::kWui)
+					: _("Go to this landmark")
+					);
 		b->set_enabled(q.landmarks()[i].set);
 		b->sigclicked.connect([&q, i]() { q.goto_landmark(i); });
 		box.add(b);
@@ -232,7 +240,12 @@ void QuickNavigationWindow::rebuild() {
 		box.add(b);
 
 		b = new UI::Button(&box, format("set_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
-				g_image_cache->get("images/wui/menus/save_game.png"), _("Set this landmark to the current map view location"));
+				g_image_cache->get("images/wui/menus/save_game.png"),
+					i < kQuicknavSlots ?
+					as_tooltip_text_with_hotkey(_("Set this landmark to the current map view location"), shortcut_string_for(
+					static_cast<KeyboardShortcut>(
+		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i)), UI::PanelStyle::kWui)
+					: _("Set this landmark to the current map view location"));
 		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });
 		box.add(b);
 
