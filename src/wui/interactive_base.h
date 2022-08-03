@@ -176,15 +176,9 @@ public:
 	// Toggles the buildhelp and calls rebuild_showhide_menu
 	void toggle_buildhelp();
 
-	// Returns the list of landmarks that have been mapped to the keys 0-9
-	const QuickNavigation::Landmark* landmarks();
-
 	QuickNavigation& quick_navigation() {
 		return quick_navigation_;
 	}
-
-	// Sets the landmark for the keyboard 'key' to 'point'
-	void set_landmark(size_t key, const MapView::View& view);
 
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,

@@ -33,7 +33,7 @@ namespace Widelands {
 
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 }  // namespace
 
@@ -85,16 +85,22 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 			}
 
 			// Map landmarks
+			// TODO(Nordfriese): Savegame compatibility v1.1
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				size_t no_of_landmarks = fr.unsigned_8();
+				const size_t no_of_landmarks = (packet_version >= 7) ? fr.unsigned_32() : fr.unsigned_8();
+				auto& quicknav = ibase->quick_navigation();
+				quicknav.landmarks().resize(no_of_landmarks);
 				for (size_t i = 0; i < no_of_landmarks; ++i) {
 					uint8_t set = fr.unsigned_8();
 					const float x = fr.float_32();
 					const float y = fr.float_32();
 					const float zoom = fr.float_32();
 					MapView::View view = {Vector2f(x, y), zoom};
-					if (set > 0 && i < kQuicknavSlots) {
-						ibase->set_landmark(i, view);
+					if (set > 0) {
+						quicknav.set_landmark(i, view);
+					}
+					if (packet_version >= 7) {
+						quicknav.landmarks()[i].name = fr.string();
 					}
 				}
 
@@ -151,13 +157,14 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	// Map landmarks
 	if (ibase != nullptr) {
-		const QuickNavigation::Landmark* landmarks = ibase->landmarks();
-		fw.unsigned_8(kQuicknavSlots);
-		for (size_t i = 0; i < kQuicknavSlots; ++i) {
+		const auto& landmarks = ibase->quick_navigation().landmarks();
+		fw.unsigned_32(landmarks.size());
+		for (size_t i = 0; i < landmarks.size(); ++i) {
 			fw.unsigned_8(landmarks[i].set ? 1 : 0);
 			fw.float_32(landmarks[i].view.viewpoint.x);
 			fw.float_32(landmarks[i].view.viewpoint.y);
 			fw.float_32(landmarks[i].view.zoom);
+			fw.string(landmarks[i].name);
 		}
 
 		if (iplayer != nullptr) {

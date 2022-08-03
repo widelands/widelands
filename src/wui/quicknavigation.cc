@@ -30,6 +30,7 @@
 
 QuickNavigation::QuickNavigation(MapView* map_view)
    : map_view_(map_view), location_jumping_started_(false) {
+	landmarks_.resize(kQuicknavSlots);
 	map_view->changeview.connect([this] { view_changed(); });
 	map_view->jump.connect([this] { jumped(); });
 	havefirst_ = false;
@@ -58,15 +59,27 @@ void QuickNavigation::view_changed() {
 }
 
 void QuickNavigation::set_landmark(size_t index, const MapView::View& view) {
-	assert(index < kQuicknavSlots);
+	assert(index < landmarks_.size());
 	landmarks_[index].view = view;
 	landmarks_[index].set = true;
 	Notifications::publish(NoteQuicknavChangedEvent());
 }
 
 void QuickNavigation::unset_landmark(size_t index) {
-	assert(index < kQuicknavSlots);
+	assert(index < landmarks_.size());
 	landmarks_[index].set = false;
+	Notifications::publish(NoteQuicknavChangedEvent());
+}
+
+void QuickNavigation::add_landmark() {
+	landmarks_.emplace_back();
+	Notifications::publish(NoteQuicknavChangedEvent());
+}
+
+void QuickNavigation::remove_landmark(size_t index) {
+	assert(index >= kQuicknavSlots);
+	assert(index < landmarks_.size());
+	landmarks_.erase(landmarks_.begin() + index);
 	Notifications::publish(NoteQuicknavChangedEvent());
 }
 
@@ -150,7 +163,7 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
 	buttons_box_.add_inf_space();
 
 	b = new UI::Button(&buttons_box_, "new", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary, _("+"), _("Add a new landmark"));
-	b->sigclicked.connect([this]() { /* NOCOM */ rebuild(); });
+	b->sigclicked.connect([this]() { ibase_.quick_navigation().add_landmark(); });
 	buttons_box_.add(b, UI::Box::Resizing::kFillSpace);
 	buttons_box_.add_inf_space();
 
@@ -178,51 +191,52 @@ void QuickNavigationWindow::rebuild() {
 	}
 	content_box_.reset(new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kSpacing));
 
-	for (int i = 0; i < kQuicknavSlots + 3 /* NOCOM */; ++i) {
+	QuickNavigation& q = ibase_.quick_navigation();
+	for (unsigned i = 0; i < q.landmarks().size(); ++i) {
 		UI::Box& box = *new UI::Box(content_box_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kSpacing);
 
-		UI::Button* b = new UI::Button(&box, format("goto_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		UI::Button* b = new UI::Button(&box, format("goto_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 				g_image_cache->get("images/wui/menus/goto.png"), _("Go to this landmark"));
-		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
-		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().goto_landmark(i); });
+		b->set_enabled(q.landmarks()[i].set);
+		b->sigclicked.connect([&q, i]() { q.goto_landmark(i); });
 		box.add(b);
 
-		b = new UI::Button(&box, format("watch_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		b = new UI::Button(&box, format("watch_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 				g_image_cache->get("images/wui/fieldaction/menu_watch_field.png"), _("View this landmark in a watch window"));
-		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
-		b->sigclicked.connect([this, i]() {
+		b->set_enabled(q.landmarks()[i].set);
+		b->sigclicked.connect([this, &q, i]() {
 			show_watch_window(dynamic_cast<InteractiveGameBase&>(ibase_),
 				MapviewPixelFunctions::calc_node_and_triangle(ibase_.egbase().map(),
-					// Technically, a landmark is the top-left corner of the screen, but we want to show the screen center instead.
-					ibase_.quick_navigation().landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2,
-					ibase_.quick_navigation().landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2).node
+					// Technically, a landmark is the top-left corner of the screen, but we like to pretend it's the screen center instead.
+					q.landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2,
+					q.landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2).node
 			);
 		});
 		box.add(b);
 
-		b = new UI::Button(&box, format("clear_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		b = new UI::Button(&box, format("clear_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 				g_image_cache->get("images/wui/menu_abort.png"), _("Unset this landmark"));
-		b->set_enabled(ibase_.quick_navigation().landmarks()[i].set);
-		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().unset_landmark(i); });
+		b->set_enabled(q.landmarks()[i].set);
+		b->sigclicked.connect([&q, i]() { q.unset_landmark(i); });
 		box.add(b);
 
-		b = new UI::Button(&box, format("set_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+		b = new UI::Button(&box, format("set_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 				g_image_cache->get("images/wui/menus/save_game.png"), _("Set this landmark to the current map view location"));
-		b->sigclicked.connect([this, i]() { ibase_.quick_navigation().set_landmark_to_current(i); });
+		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });
 		box.add(b);
 
 		if (i < kQuicknavSlots) {
 			box.add_space(kButtonSize);
 		} else {
-			b = new UI::Button(&box, format("remove_%d", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+			b = new UI::Button(&box, format("remove_%u", i), 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 					_("–"), _("Remove this landmark"));
-			b->sigclicked.connect([this]() { /* NOCOM */ rebuild(); });
+			b->sigclicked.connect([&q, i]() { q.remove_landmark(i); });
 			box.add(b);
 		}
 
 		UI::EditBox& e = *new UI::EditBox(&box, 0, 0, 300, UI::PanelStyle::kWui);
-		e.set_text("NOCOM");
-		e.changed.connect([]() { /* NOCOM */ });
+		e.set_text(q.landmarks()[i].name);
+		e.changed.connect([&q, &e, i]() { q.landmarks()[i].name = e.text(); });
 		box.add(&e, UI::Box::Resizing::kExpandBoth);
 
 		content_box_->add(&box, UI::Box::Resizing::kFullSize);

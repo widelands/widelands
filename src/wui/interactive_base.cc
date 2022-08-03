@@ -857,14 +857,6 @@ void InteractiveBase::toggle_quicknav() {
 	rebuild_mapview_menu();
 }
 
-const QuickNavigation::Landmark* InteractiveBase::landmarks() {
-	return quick_navigation_.landmarks();
-}
-
-void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_view) {
-	quick_navigation_.set_landmark(key, landmark_view);
-}
-
 /**
  * Hide the minimap if it is currently shown; otherwise, do nothing.
  */

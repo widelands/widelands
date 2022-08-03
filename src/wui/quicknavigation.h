@@ -38,6 +38,7 @@ struct QuickNavigation {
 	struct Landmark {
 		MapView::View view;
 		bool set;
+		std::string name;
 
 		Landmark() : set(false) {
 		}
@@ -51,9 +52,14 @@ struct QuickNavigation {
 		set_landmark(index, current_);
 	}
 	void unset_landmark(size_t index);
+	void add_landmark();
+	void remove_landmark(size_t index);
 
-	// Returns a pointer to the first element in the landmarks array
-	const Landmark* landmarks() const {
+	/** Returns the vector of all landmarks. */
+	const std::vector<Landmark>& landmarks() const {
+		return landmarks_;
+	}
+	std::vector<Landmark>& landmarks() {
 		return landmarks_;
 	}
 
@@ -74,7 +80,7 @@ private:
 	MapView::View current_;
 
 	// Landmarks that were set explicitly by the player, mapped on the 1-9 keys.
-	Landmark landmarks_[kQuicknavSlots];
+	std::vector<Landmark> landmarks_;
 
 	// navigation with ',' and '.'
 	std::list<MapView::View> previous_locations_;
