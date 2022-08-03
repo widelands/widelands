@@ -5,8 +5,6 @@
 #include <dbghlp.h>
 #include <stdlib.h>
 
-#define EXE_NAME "notifications_test"
-
 #ifdef _WIN64
 #define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_AMD64
 #else
@@ -20,7 +18,7 @@ int addr2line(void const * const addr)
   char addr2line_cmd[512] = {0};
  
   /* have addr2line map the address to the relent line in the code */
-  sprintf(addr2line_cmd,"addr2line -f -p -e " EXE_NAME " %p", program_name, addr); 
+  sprintf(addr2line_cmd,"addr2line -f -p -e %.256s %p", icky_global_program_name, addr); 
  
   /* This will print a nicely formatted string specifying the
      function and source line of the address */
