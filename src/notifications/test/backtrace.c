@@ -10,6 +10,8 @@
 #else
 #define IMAGE_FILE_MACHINE IMAGE_FILE_MACHINE_I386
 #endif
+
+extern char const * icky_global_program_name;
  
 /* Resolve symbol name and source location given the path to the executable 
    and an address */
@@ -27,16 +29,16 @@ int addr2line(void const * const addr)
 
 void windows_print_stacktrace(CONTEXT* context)
 {
-  SymInitialize(GetCurrentProcess(), 0, true);
+  SymInitialize(GetCurrentProcess(), 0, 1);
  
   STACKFRAME frame = { 0 };
  
   /* setup initial stack frame */
-  frame.AddrPC.Offset         = context->Eip;
+  frame.AddrPC.Offset         = context->Rip;
   frame.AddrPC.Mode           = AddrModeFlat;
-  frame.AddrStack.Offset      = context->Esp;
+  frame.AddrStack.Offset      = context->Rsp;
   frame.AddrStack.Mode        = AddrModeFlat;
-  frame.AddrFrame.Offset      = context->Ebp;
+  frame.AddrFrame.Offset      = context->Rbp;
   frame.AddrFrame.Mode        = AddrModeFlat;
  
   while (StackWalk64(IMAGE_FILE_MACHINE ,
@@ -132,7 +134,7 @@ LONG WINAPI windows_exception_handler(EXCEPTION_POINTERS * ExceptionInfo)
   }
   else
   {
-      addr2line((void*)ExceptionInfo->ContextRecord->Eip);
+      addr2line((void*)ExceptionInfo->ContextRecord->Rip);
   }
  
   return EXCEPTION_EXECUTE_HANDLER;

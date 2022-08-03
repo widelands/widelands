@@ -195,7 +195,7 @@ inline void do_check_error(const char* f,
 		}                                                                                            \
 	}                                                                                               \
 	}                                                                                               \
-	static char const * icky_global_program_name;                                                   \
+	char const * icky_global_program_name;                                                   \
 	int main(int, char** argv) {                                                                         \
 		icky_global_program_name = argv[0];                                                          \
 		return WLTestsuite::WLTestsuite_##name::main();                                              \
