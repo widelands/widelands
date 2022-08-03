@@ -99,7 +99,7 @@ obj_spidercloth = {
    number = 2,
    body = objective_text(_("Spidercloth Production"),
       p(_([[We need some spidercloth urgently as we are running out of it. It is therefore essential to spare every piece we still have. Reduce the input of all buildings that consume spidercloth, not forgetting the construction sites.]])) ..
-      p(_([[Afterwards we need to construct a farm under all circumstances, as it needs spidercloth to be built. Additionally, we need a spiderfarm and a weaving mill.]])))
+      p(_([[Afterwards we need to construct a farm under all circumstances, as it needs spidercloth to be built. Additionally, we need a spider farm and a weaving mill.]])))
 }
 
 obj_trading_post = {
@@ -149,7 +149,7 @@ obj_build_temple = {
    title = _("Build a temple to worship Satul"),
    number = 1,
    body = objective_text(_("Build Temple For Satul"),
-   p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these barbarians his might and our princess might come back to her senses.]])) ..
+   p(_([[We need to build a temple for Satul and we need to worship him well. By this he might show these Barbarians his might and our princess might come back to her senses.]])) ..
    p(_([[And we need to have a scout’s house to not lose track of what is going on at the Barbarians’ territory.]])))
 }
 

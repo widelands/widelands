@@ -124,6 +124,7 @@ public:
 		kMessages,
 		kIBaseVisualizations,
 		kI18N,
+		kLua,
 		kLog
 	};
 

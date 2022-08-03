@@ -1833,6 +1833,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// resetting a bunch of values for the field
 	field.ally_military_presence = 0;
 	field.area_military_capacity = 0;
+	field.future_area_military_capacity = 0;
 	field.consumers_nearby.clear();
 	field.consumers_nearby.resize(wares.size());
 	field.enemy_military_presence = 0;
@@ -2035,7 +2036,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 		score_parts[15] =
 		   -2 * management_data.neuron_pool[75].get_result_safe(field.own_military_presence);
-		score_parts[16] = -5 * std::min<int16_t>(field.area_military_capacity, 20);
+		score_parts[16] = -5 * std::min<int16_t>(field.future_area_military_capacity, 20);
 		score_parts[17] = 3 * management_data.get_military_number_at(28);
 		score_parts[18] =
 		   (field.enemy_nearby) ? 3 * std::abs(management_data.get_military_number_at(68)) : 0;
@@ -2101,7 +2102,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
                            0;
 
 		score_parts[34] = -1 * management_data.neuron_pool[4].get_result_safe(
-		                          (field.area_military_capacity + 4) / 5, kAbsValue);
+		                          (field.future_area_military_capacity + 4) / 5, kAbsValue);
 		score_parts[35] = 3 * management_data.get_military_number_at(133);
 
 		if (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) {
@@ -2149,7 +2150,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[47] = -1 * management_data.neuron_pool[53].get_result_safe(
 	                          2 * field.ally_military_presence, kAbsValue);
 	score_parts[48] = -2 * management_data.neuron_pool[36].get_result_safe(
-	                          (field.area_military_capacity + 4) / 5, kAbsValue);
+	                          (field.future_area_military_capacity + 4) / 5, kAbsValue);
 	score_parts[49] = ((field.military_in_constr_nearby + field.military_unstationed) > 0) ?
                         -std::abs(management_data.get_military_number_at(81)) :
                         0;
@@ -2236,7 +2237,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	} else if (soldier_status_ == SoldiersStatus::kShortage) {
 		multiplicator = 7;
 	}
-	if (field.area_military_capacity < field.enemy_military_presence * multiplicator / 10) {
+	if (field.future_area_military_capacity < field.enemy_military_presence * multiplicator / 10) {
 		field.defense_msite_allowed = true;
 	}
 }
@@ -6136,7 +6137,7 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 			const int32_t radius = target_ms_d->get_conquers() + 4;
 
 			if (radius > dist) {
-				bf.area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
+				bf.future_area_military_capacity += target_ms_d->get_max_number_of_soldiers() / 2 + 1;
 				if (bf.coords != constructionsite->get_position()) {
 					bf.future_military_loneliness *= static_cast<double_t>(dist) / radius;
 				}
@@ -6155,6 +6156,8 @@ void DefaultAI::consider_own_msites(Widelands::FCoords fcoords,
 
 		if (radius > dist) {
 			bf.area_military_capacity += militarysite->soldier_control()->max_soldier_capacity();
+			bf.future_area_military_capacity +=
+			   militarysite->soldier_control()->max_soldier_capacity();
 			bf.own_military_presence += militarysite->soldier_control()->stationed_soldiers().size();
 
 			if (militarysite->soldier_control()->stationed_soldiers().empty()) {

@@ -27,10 +27,9 @@
 #include "logic/mapregion.h"
 
 int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                  EditorInteractive& eia,
                                                   EditorActionArgs* args,
                                                   Widelands::Map* map) {
-	const Widelands::Descriptions& descriptions = eia.egbase().descriptions();
+	const Widelands::Descriptions& descriptions = parent_.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -58,13 +57,12 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::NodeAndTriang
 
 int32_t EditorSetResourcesTool::handle_undo_impl(
    const Widelands::NodeAndTriangle<Widelands::Coords>& /* center */,
-   EditorInteractive& eia,
    EditorActionArgs* args,
    Widelands::Map* map) {
 	for (const auto& res : args->original_resource) {
 		Widelands::ResourceAmount amount = res.amount;
 		Widelands::ResourceAmount max_amount =
-		   eia.egbase().descriptions().get_resource_descr(args->current_resource)->max_amount();
+		   parent_.egbase().descriptions().get_resource_descr(args->current_resource)->max_amount();
 
 		if (amount > max_amount) {
 			amount = max_amount;
@@ -77,8 +75,8 @@ int32_t EditorSetResourcesTool::handle_undo_impl(
 	return args->sel_radius;
 }
 
-EditorActionArgs EditorSetResourcesTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
+EditorActionArgs EditorSetResourcesTool::format_args_impl() {
+	EditorActionArgs a(parent_);
 	a.current_resource = cur_res_;
 	a.set_to = set_to_;
 	return a;

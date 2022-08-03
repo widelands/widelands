@@ -186,7 +186,7 @@ endif()
 # SDL-2.0 is the name used by FreeBSD ports...
 # don't confuse it for the version number.
 find_library(SDL2_LIBRARY
-  NAMES SDL2 SDL-2.0
+  NAMES SDL2 SDL-2.0 SDL2-static
   HINTS
     ENV SDL2DIR
     ${SDL2_NO_DEFAULT_PATH_CMD}

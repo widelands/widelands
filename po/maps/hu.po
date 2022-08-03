@@ -10,14 +10,14 @@
 # litoll <litoll@freemail.hu>, 2016
 # litoll <litoll@freemail.hu>, 2016
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
-# Tóth András <txa-dev@posteo.hu>, 2021
+# Tóth András <txa-dev@posteo.hu>, 2021-2022
 # zone <z-one@freemail.hu>, 2015
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -39,13 +39,13 @@ msgstr "Miután a megmaradt atlantisziak egy rejtélyes szigeten kötnek ki Atla
 
 #: ../../data/campaigns/atl02.wmf/elemental:8
 msgid "Struggling For a New Home Again"
-msgstr ""
+msgstr "Küzdelem egy újabb otthonért"
 
 #: ../../data/campaigns/atl02.wmf/elemental:10
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr ""
+msgstr "Miután megmenekültek a süllyedő szigetről, a Jundlinát követő atlantisziak új kihívásokkal kerülnek szembe."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -293,6 +293,16 @@ msgid ""
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
 msgstr "Reebaud és törzse boldogan élnek északon. Eközben a hátrahagyott országaik egyáltalán nem békések, és egy régi barátnak kétségbeesett szüksége van a segítségükre…"
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr "Két barát újra együtt"
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr "Claus és Henneke Lembeck végre megérkeztek északra. De vajon rá tudják-e venni Reebaudot, hogy segítséget nyújtson nekik?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

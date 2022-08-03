@@ -12,6 +12,7 @@ wl.Descriptions():new_terrain_type{
    temperature = 60,
    humidity = 400,
    fertility = 200,
+   enhancement = { diking = "hardlava" }
 }
 
 pop_textdomain()
