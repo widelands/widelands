@@ -45,7 +45,8 @@ obj_atl = {
 }
 
 function obj_emp(cost)
-return {
+push_textdomain("scenario_fri03.wmf")
+local r = {
    name = "emp",
    title=_("Pay or Fight"),
    number = 1,
@@ -58,6 +59,8 @@ return {
       li(_([[You have two hours to accomplish this objective.]]))
    ),
 }
+pop_textdomain()
+return r
 end
 
 -- ==================
@@ -256,7 +259,8 @@ emp_5 = {
       _([[We thank you for your offer! What is the price you demand? And, if you don’t mind my asking, may I know what business you are employed on?]])),
 }
 function emp_6(cost)
-return {
+push_textdomain("scenario_fri03.wmf")
+local r = {
    title = _("Strangers"),
    body=iniucundus(_("Greetings"),
       join_sentences(ngettext([[%d piece of gold.]], [[%d pieces of gold.]], cost):bformat(cost),
@@ -269,15 +273,21 @@ return {
       -- TRANSLATORS: M. C. Iniucundus – Strangers 6
       _([[But back to the topic of your passage. There is only one place on the northern coast of this island where a port can be built. So you do not really have an alternative to purchasing a passage on my galley. But my astrologers report that a terrible storm is gathering that will make sea travel impossible for a long time. We must set sail within two hours, and whoever is still on the island after that time will not leave it anytime soon.]])),
 }
+pop_textdomain()
+return r
 end
+
 function emp_7(cost)
-return {
+push_textdomain("scenario_fri03.wmf")
+local r = {
    title = _("Strangers"),
    body=claus(_("Decide"),
       -- TRANSLATORS: Claus Lembeck – Strangers 7
       _([[He seems happy enough to offer us a passage, but the price is exorbitant. We may as well destroy his port and build one of our own. I wonder what would be better…]]))
       .. new_objectives(obj_emp(cost)),
 }
+pop_textdomain()
+return r
 end
 
 victory_fight = {
@@ -301,8 +311,27 @@ victory_pay = {
 timeout_1 = {
    title = _("You Have Lost"),
    body=iniucundus(_("Goodbye!"),
-      -- TRANSLATORS: M. C. Iniucundus – victory
+      -- TRANSLATORS: M. C. Iniucundus – lost
       _([[You have taken too long. We must set sail now, and then the storm will not permit you to leave this island. I am sorry for you, but the weather doesn’t wait. Goodbye.]]))
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+}
+timeout_2 = {
+   title = _("You Have Lost"),
+   body=iniucundus(_("Stuck"),
+      -- TRANSLATORS: M. C. Iniucundus – lost
+      _([[Now see where your foolishness has led us. The storm has broken and we’re all stuck here since you burnt down our port. The gods are just – even though you appear to be more powerful in combat than us, they force you to remain on this island for such a long time that you will never accomplish the objective of your futile journey. Despair in your triumph!]]))
+      .. objective_text(_("You Have Lost"),
+      _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
+}
+lost_port_space_blocked = {
+   title = _("You Have Lost"),
+   body=claus(_("Stuck"),
+      -- TRANSLATORS: Claus Lembeck – lost
+      _([[This is a disaster! We have reached another shore, but another tribe has already settled there. They won’t allow us to land on their coast.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Claus Lembeck – lost
+      _([[We were too slow. We dawdled and dallied and this is the result. There is no way forward. None of us will ever see our home again!]]))
       .. objective_text(_("You Have Lost"),
       _([[You have lost and may not continue playing. May you have better luck when you retry this scenario. Click OK to return to the main menu.]])),
 }

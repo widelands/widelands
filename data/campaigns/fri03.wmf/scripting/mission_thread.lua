@@ -11,6 +11,44 @@ function insert_soldiers(tbl, what)
    end
 end
 
+function port_space_blocked(f)
+   if f.owner == p1 then return false end
+   for i,field in pairs({
+      f,
+      f.ln,
+      f.ln.ln,
+      f.rn,
+      f.brn,
+      f.brn.rn,
+      f.bln,
+      f.bln.ln,
+      f.brn.brn,
+      f.brn.bln,
+      f.tln,
+      f.tln.ln,
+      f.trn,
+      f.trn.rn,
+      f.trn.trn,
+      f.trn.tln,
+      f.tln.tln,
+   }) do
+      if field.owner ~= nil then return true end
+   end
+   return false
+end
+
+function wait_for_port_or_lose(field)
+   while not (field.immovable and field.immovable.descr.name == "frisians_port") do
+      sleep(2341)
+      if port_space_blocked(field) then
+         while not p1:sees_field(field) do sleep(357) end
+         campaign_message_box(lost_port_space_blocked)
+         wl.ui.MapView():close()
+         return
+      end
+   end
+end
+
 function mission_thread()
 
    p2.hidden_from_general_statistics = true
@@ -83,7 +121,7 @@ function mission_thread()
    campaign_message_box(port_1)
 
    -- Wait for the player to build a port on the Volcano Island
-   while not (port_volcano.immovable and port_volcano.immovable.descr.name == "frisians_port") do sleep(2341) end
+   wait_for_port_or_lose(port_volcano)
    scroll_to_field(port_volcano)
    sleep(2000)
    campaign_message_box(port_2)
@@ -130,7 +168,7 @@ function mission_thread()
    campaign_message_box(atl_7)
 
    -- Wait for the player to build a port on the Ice-Desert Island
-   while not (port_desert_s.immovable and port_desert_s.immovable.descr.name == "frisians_port") do sleep(2341) end
+   wait_for_port_or_lose(port_desert_s)
    scroll_to_field(port_desert_s)
    sleep(1000)
    campaign_message_box(port_3)
@@ -144,7 +182,7 @@ function mission_thread()
    campaign_message_box(port_5)
 
    -- Wait for the player to build a port on the Northern Shore
-   while not (port_north.immovable and port_north.immovable.descr.name == "frisians_port") do sleep(2341) end
+   wait_for_port_or_lose(port_north)
    scroll_to_field(port_north)
    sleep(1000)
    campaign_message_box(port_6)
@@ -236,7 +274,11 @@ function mission_thread()
       end
    end
    -- Timeout
-   campaign_message_box(timeout_1)
+   if map.player_slots[3].starting_field.immovable and map.player_slots[3].starting_field.immovable.descr.name == "empire_port_large" then
+      campaign_message_box(timeout_1)
+   else
+      campaign_message_box(timeout_2)
+   end
    wl.ui.MapView():close()
 
 end

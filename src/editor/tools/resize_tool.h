@@ -23,24 +23,22 @@
 
 ///  Resize the map
 struct EditorResizeTool : public EditorTool {
-	EditorResizeTool(int16_t width, int16_t height)
-	   : EditorTool(*this, *this), width_(width), height_(height) {
+	EditorResizeTool(EditorInteractive& parent, int16_t width, int16_t height)
+	   : EditorTool(parent, *this, *this), width_(width), height_(height) {
 	}
 
 	/**
 	 * Change the map size
 	 */
 	int32_t handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-	                          EditorInteractive& eia,
 	                          EditorActionArgs* args,
 	                          Widelands::Map* map) override;
 
 	int32_t handle_undo_impl(const Widelands::NodeAndTriangle<>& center,
-	                         EditorInteractive& eia,
 	                         EditorActionArgs* args,
 	                         Widelands::Map* map) override;
 
-	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
+	EditorActionArgs format_args_impl() override;
 
 	const Image* get_sel_impl() const override {
 		return g_image_cache->get("images/wui/editor/fsel_editor_resize.png");
@@ -64,6 +62,10 @@ struct EditorResizeTool : public EditorTool {
 
 	uint32_t get_height() {
 		return height_;
+	}
+
+	WindowID get_window_id() override {
+		return WindowID::Resize;
 	}
 
 private:
