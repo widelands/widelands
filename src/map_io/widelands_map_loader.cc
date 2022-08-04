@@ -167,6 +167,13 @@ int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase, AddOns::
 		p.read(*fs_, egbase, false, *mol_);
 	}
 
+	{
+		MapHeightsPacket p;
+		p.read(*fs_, egbase, false, *mol_);
+	}
+
+	map_.recalc_whole_map(egbase);
+
 	return 0;
 }
 
