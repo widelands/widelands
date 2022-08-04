@@ -82,7 +82,7 @@ msgid ""
 "soldiers battle-ready."
 msgstr ""
 "Bilde deine Krieger aus, während du darauf wartest, dass Reebaud seine "
-"Soldaten für kampfbereit erklärt."
+"Krieger für kampfbereit erklärt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
@@ -205,7 +205,7 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
-"Unsere Soldaten haben Fremde gesichtet. Das müssen die Eindringlinge sein, "
+"Unsere Krieger haben Fremde gesichtet. Das müssen die Eindringlinge sein, "
 "die Reebaud erwähnte."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:110
@@ -365,7 +365,7 @@ msgstr ""
 "Notwendigkeit heraus von feindlichen Völkern die hier lebten eroberten. "
 "Kriegerische Barbaren und ein Taugenichts des Imperiums namens Murilius, der"
 " die hanebüchensten Forderungen stellte. Wir besiegten sie alle, und "
-"glaubten endlich frieden gefunden zu haben. Und für vier lange Jahre war das"
+"glaubten endlich Frieden gefunden zu haben. Und für vier lange Jahre war das"
 " Leben tatsächlich friedvoll."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
@@ -433,6 +433,11 @@ msgid ""
 "spirit of our friendship, and in honour of the good men you lost, we will "
 "fight the invaders alongside you!"
 msgstr ""
+"Ich glaube wir haben diese Eindringlinge bereits getroffen. Es würde sich "
+"nicht geziemen, herumzusitzen und Becher mit Met zu genießen, während Ihr um"
+" euer Leben kämpft. Im Geist unserer Freundschaft und zu Ehren der guten "
+"Männer die Ihr verloren habt, werden wir an eurer Seite die Eindringlinge "
+"bekämpfen."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 9b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:189
@@ -442,6 +447,11 @@ msgid ""
 "honour of the good men you lost, we shall seek out those invaders and fight "
 "them alongside you!"
 msgstr ""
+"Ehrlicherweise würde es sich überhaupt nicht geziemen, herumzusitzen und "
+"Becher mit Met zu genießen, während Ihr um euer Leben kämpft. Im Geist "
+"unserer Freundschaft und zu Ehren der guten Männer die Ihr verloren habt, "
+"werden wir die Eindringlinge ausfindig machen und sie an Eurer Seite "
+"bekämpfen!"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud 9c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:196
@@ -454,6 +464,14 @@ msgid ""
 " for our own soldiers, so that they may learn from yours and become as "
 "strong as possible before we return to our homeland."
 msgstr ""
+"Ich bin fast enttäuscht, dass Euer Ruf den Tatsachen entspricht, denn wie "
+"Ihr die Eindringlinge beschrieben habt, habe ich mich schon darauf gefreut "
+"sie an Eurer Seite zu bekämpfen. Ich bin betrübt über Eure Verluste, und "
+"besonders, dass ich nie den berühmten Hauke treffen werde, dessen Name auf "
+"ewig in Ehren gehalten werden wird. Während sich Eure Krieger erholen, werde"
+" ich mich darum kümmern, einige Ausbildungstage für unsere eigenen Krieger "
+"zu ermöglichen, so dass sie von Euren lernen können und so stark wie "
+"mögllich werden bevor wir in unser Heimatland zurückkehren."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:201
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213

@@ -10,14 +10,15 @@
 # Pedro Figliolia <pedroluizf@gmail.com>, 2019
 # Rui <xymarior@yandex.com>, 2019
 # Tiago Henrique <tiagohrm@gmail.com>, 2019
+# Willian Francisco Urbano, 2022
 # Yuri Laskowski <yurinikolai00@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-31 03:53+0000\n"
+"POT-Creation-Date: 2022-08-01 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuri Laskowski <yurinikolai00@gmail.com>, 2021\n"
+"Last-Translator: Willian Francisco Urbano, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -288,8 +289,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dez"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -303,12 +304,12 @@ msgstr "Menu principal"
 msgid "Tools"
 msgstr "Ferramentas"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -510,10 +511,10 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
@@ -769,8 +770,8 @@ msgstr "minerar"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1838,7 +1839,7 @@ msgstr "Falta de posição inicial"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr ""
+msgstr "Widelands não pôde iniciar o jogo porque o jogador %u não tem posição inicial. Você pode adicionar manualmente uma posição inicial com o Editor Widelands para corrigir esse problema."
 
 #: ../../src/logic/game.cc:740
 msgid "Initializing…"
@@ -1927,13 +1928,13 @@ msgstr "Deserto"
 
 #: ../../src/logic/map.h:234
 msgid "No description defined"
-msgstr ""
+msgstr "Nenhuma descrição definida"
 
 #: ../../src/logic/map_objects/immovable.cc:503
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% construído"
 
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:117
 #, c-format
@@ -2627,7 +2628,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:318
 msgid "Minimap"
-msgstr ""
+msgstr "Mini-Mapa"
 
 #: ../../src/map_io/map_scripting_packet.cc:82
 msgid ""
@@ -2720,7 +2721,7 @@ msgstr ""
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
+msgstr "/me verificou o arquivo recebido.  Embora a soma de verificação md5 tenha sido bem-sucedida, não consigo lidar com o arquivo."
 
 #: ../../src/network/gameclient.cc:1281
 msgid "Disconnected"
@@ -2735,22 +2736,22 @@ msgstr ""
 
 #: ../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
-msgstr ""
+msgstr "Os comandos de host disponíveis são:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:120
 msgid "/help  -  Shows this help"
-msgstr ""
+msgstr "/help  -  Mostra esta ajuda"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr ""
+msgstr "/announce <msg>  -  Envia uma mensagem de chat como anúncio (chat do sistema)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr ""
+msgstr "/warn <name> <reason>  -  Avise o usuário <name> por causa de <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:126
@@ -2760,7 +2761,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:128
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause            -  Força o jogo a pausar."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:130
@@ -2868,7 +2869,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Sucesso ao reconectar com o metasservidor!"
 
 #: ../../src/network/internet_gaming.cc:337
 #: ../../src/network/network_gaming_messages.cc:126
@@ -2918,7 +2919,7 @@ msgstr ""
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "AVISO: Recebemos um %s comando embora não estejamos no estado CONECTANDO."
 
 #: ../../src/network/internet_gaming.cc:503
 #, c-format
@@ -2931,7 +2932,7 @@ msgstr[2] ""
 #: ../../src/network/internet_gaming.cc:517
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Tipo de mensagem de bate-papo inválido \"%s\"."
 
 #: ../../src/network/internet_gaming.cc:517
 msgid "Invalid message type"
@@ -2940,22 +2941,22 @@ msgstr "Tipo de mensagem inválida"
 #: ../../src/network/internet_gaming.cc:557
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "O jogo %s já está disponível"
 
 #: ../../src/network/internet_gaming.cc:567
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "O jogo %s foi fechado"
 
 #: ../../src/network/internet_gaming.cc:606
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s Entrou na sala"
 
 #: ../../src/network/internet_gaming.cc:617
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s saiu da sala"
 
 #: ../../src/network/internet_gaming.cc:674
 msgid "Chat message could not be sent."
@@ -2968,7 +2969,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:700
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "ERRO: %s"
 
 #: ../../src/network/internet_gaming.cc:703
 msgid "An unexpected error message has been received about command %1%: %2%"
@@ -2977,16 +2978,16 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:714
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr ""
+msgstr "Recebeu um comando desconhecido do servidor: %s"
 
 #: ../../src/network/internet_gaming.cc:867
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "A mensagem não pôde ser enviada: Você não está conectado ao servidor!"
 
 #: ../../src/network/internet_gaming.cc:887
 #: ../../src/network/internet_gaming.cc:895
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "Não foi possível enviar a mensagem: Era para ser uma mensagem privada?"
 
 #: ../../src/network/internet_gaming.cc:910
 msgid "Supported admin commands:"
@@ -3021,7 +3022,7 @@ msgstr "Erro de conversão"
 #: ../../src/network/internet_gaming.cc:1002
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr ""
+msgstr "Não foi possível determinar o valor de verdade para \"%s\""
 
 #: ../../src/network/internet_gaming.cc:1026
 msgctxt "chat_sender"
@@ -3056,7 +3057,7 @@ msgstr "Você já está logado!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "Você foi desconectado, pois enviou um comando de administrador sem ter permissão de administrador.  Este incidente será registrado e relatado ao administrador."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
@@ -3074,7 +3075,7 @@ msgstr "Metaserver não responde."
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "Você foi desconectado do servidor, pois não respondeu a uma solicitação de PING a tempo."
 
 #: ../../src/network/network_gaming_messages.cc:116
 msgid "Client has left the game."
@@ -3670,7 +3671,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "A equipe de desenvolvimento de Widelands revisará seu complemento logo após o Envio.  Caso eles tenham mais dúvidas, eles entrarão em contato com você por MP no site da Widelands;  portanto, verifique a caixa de entrada na sua página de perfil de usuário online com frequência."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:436
 #, c-format
@@ -6634,7 +6635,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Alternar Mini-Mapa"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Encyclopedia"
@@ -7276,7 +7277,7 @@ msgstr ""
 
 #: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:405
 msgid "Center view on this"
-msgstr ""
+msgstr "Centralizar a visão nisso "
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/attack_window.cc:442 ../../src/wui/soldierlist.cc:418
@@ -7878,7 +7879,7 @@ msgstr "Mostrar Arquivo"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:122
 msgid "Center main mapview on location"
-msgstr ""
+msgstr "Centralizar a Visão do Mapa principal no local"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
@@ -8229,16 +8230,16 @@ msgstr ""
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:132
 msgid "Map View"
-msgstr ""
+msgstr "Visão do mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:287
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Ocultar Mini-Mapa"
 
 #: ../../src/wui/interactive_base.cc:287
 msgid "Show Minimap"
-msgstr ""
+msgstr "Mostrar Mini-Mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:293
@@ -8383,8 +8384,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Estatísticas"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
@@ -9075,7 +9076,7 @@ msgstr ""
 
 #: ../../src/wui/soldier_statistics_menu.cc:135
 msgid "Overview"
-msgstr ""
+msgstr "Visão geral"
 
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
@@ -9304,4 +9305,4 @@ msgstr "Segue"
 
 #: ../../src/wui/watchwindow.cc:64
 msgid "Center the main view on this"
-msgstr "Centralizar vista principal nisto"
+msgstr "Centralizar a visão principal nisto"
