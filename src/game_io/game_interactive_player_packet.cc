@@ -160,12 +160,12 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 	if (ibase != nullptr) {
 		const auto& landmarks = ibase->quick_navigation().landmarks();
 		fw.unsigned_32(landmarks.size());
-		for (size_t i = 0; i < landmarks.size(); ++i) {
-			fw.unsigned_8(landmarks[i].set ? 1 : 0);
-			fw.float_32(landmarks[i].view.viewpoint.x);
-			fw.float_32(landmarks[i].view.viewpoint.y);
-			fw.float_32(landmarks[i].view.zoom);
-			fw.string(landmarks[i].name);
+		for (const auto& lm : landmarks) {
+			fw.unsigned_8(lm.set ? 1 : 0);
+			fw.float_32(lm.view.viewpoint.x);
+			fw.float_32(lm.view.viewpoint.y);
+			fw.float_32(lm.view.zoom);
+			fw.string(lm.name);
 		}
 
 		if (iplayer != nullptr) {
