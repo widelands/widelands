@@ -262,8 +262,8 @@ void QuickNavigationWindow::rebuild() {
 			      ibase_.egbase().map(),
 			      // Technically, a landmark is the top-left corner of the screen,
 			      // but we like to pretend it's the screen center instead.
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2),
-			      static_cast<int>(q.landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2))
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.x) + g_gr->get_xres() / 2,
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.y) + g_gr->get_yres() / 2)
 			      .node);
 		});
 		box.add(b);
