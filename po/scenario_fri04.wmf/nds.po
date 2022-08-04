@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Benedikt Straub <benedikt-straub@web.de>, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr ""
+msgstr "Wahrschau"
 
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -26,69 +30,74 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"’t sücht so ut, as of du de leste Rutfödderung nich ofsluten hest. Du dürst "
+"deese Rutfödderung doch spölen, hest aver eenen Nadeel. Ick raad an, dat du "
+"eerst de leste Rutfödderung spölst un deese hier dann neei begünnst."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Finn Reebaud"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
-msgstr ""
+msgstr "Vergroter dien Gewest, bit du dienen ollen Fründ Reebaud triffst."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Manntje de Frömden"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Manntje de Frömden"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Manntje dat feindelk Volk."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Manntje dat Riek"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Manntje de Rieks-Legaat"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Manntje Marcus Caius Injucundus."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Anhüren & öven"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Hüür Soldaten an un bill se ut"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Bill jo Soldaten ut, as du wachst, bit Reebaud siene Soldaten för klaar tum "
+"Kämpen hollt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
-msgstr ""
+msgstr "Du hest eene Stünn, um so völe Soldaten uttobilden, as du kannst."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Willkomen torügg!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Uplest ankomen"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -97,6 +106,10 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Injucundus hett över de Störm nich logen. Wi sünd jüüst bi "
+"rechte Tied offahren; up See hett ’t uns inhaalt un wi weren all wiss, dat "
+"uns’ Schipp gliek stückengahn un unnergahn word un keen vun uns’ weer uns’ "
+"Heimaad to sehn kriegen word."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -106,6 +119,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"Aver Gott hett sik verbarmt, un uns’ unbannig völen Gebeden hebben hüm "
+"bereedt, uns leven to laten. Wi mutten up eener legen, lössen Küst lannen un"
+" dat Schipp utbetern, ehr wi wiederseilen kunnen. Uplest sünd wi so wied im "
+"Noorden ankomen as man mit de Schipp komen kann."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -118,6 +135,13 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"De Legaat un ick hebben nu nix mehr miteenanner to doon. Ick hebb up de "
+"Fahrt  eene Piek tegen siene inbildsk Maneer kregen, un vör allem tegen de "
+"verachten Aard, wo he siene Galleeren-Slaven behannelt. ’t kummt hüm nich in"
+" de Sinn, dat dat Minsken as he un ick sünd; of wenn doch, dann doot he, as "
+"of se sülven Schuld an hör slimmen Loos sünd. ’t is mi nich Leid, dat ick "
+"hüm wull nich mehr to sehn kriegen word. He hett sien Lager een Deeltje von "
+"mienem weg upsett, daarmit wi eenanner nich in de Queer komen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -127,6 +151,10 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"Aver nu, dat wi so dicht an uns’ Enn sünd, bün ick to ungedüldig, um leddig "
+"över de Vergangenheid to mimemeren. Fell to! Laat uns gahn un mienen Fründ "
+"söken. Ick hebb twaar noch keen Teken vun Minsken hier in de Kuntrei sehn, "
+"aver ick hebb keen Twiefel, dat wi hüm bold finnen worden."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -136,12 +164,12 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Frömden"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Well sünd se?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -149,6 +177,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"Uns’ Soldaten hebben Frömde to sehn kregen – de eersten Inwohners in deeser "
+"legen Landskupp. Villicht weten se, waar man Reebaud finnen kann?"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -157,11 +187,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Free un Grötens, gode Lüü! Ick bün Claus Lembeck un dat is mien Söhn "
+"Henneke. Wi sünd hier, um mien Fründ Reebaud to söken. Döör ick fragen, of "
+"jo weet, waar wi hüm finnen könen?"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Feinden"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -169,10 +202,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Uns’ Soldaten hebben Frömde to sehn kregen. Dat mutten de Indringers wesen, "
+"vun wat Reebaud uns vertellt hett."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Indringers"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -181,11 +216,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"Wi – Amazonen. Jo – Frömden. Lann – hier – höört – to – uns. Jo – "
+"Indringers. Jo – Feinden. Wi – jo – all – maken – dood!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Nich de allerfründelksten Lüü …"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -200,7 +237,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Een oller Fründ"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -215,13 +252,15 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Uplest troffen"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"Uplest! De Husen vun deesen Lüü sehn bekannt ut. Dat mutt Reebaud sien Volk "
+"wesen."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -229,6 +268,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"Verklappen mi miene Oogen, of trickt mi een Spöök ut? Dat kann man nich "
+"würrelk mien oller Fründ Claus wesen, well mi so wied von de Heimaad trifft!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -237,6 +278,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Dat is keen Trick of Verklapp, ick bün ’t würrelk, Claus Lembeck! Mien Söhn "
+"Henneke un ick sünd so wied reist, um di to söken. Ick kann gaar nich "
+"seggen, wo bannig blied ick bün, di uplest funnen to hebben."
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -246,6 +290,10 @@ msgid ""
 " Just as you once helped me fend off a Holstein invasion, I will now help my"
 " friend if I can."
 msgstr ""
+"Dat is man düll, dat du di sülk Beswaar maakt hest, um mi to treffen. Aver "
+"dat hest du man wull nich blots daan, um maal weer mit mi to snacken. Wat "
+"maakt di Sörgen? Jüüst as di mir eens tegen wat Holstein-Indringers holpen "
+"hest, sall ick nu mienem Fründ hülpen, wenn ick kann."
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 5
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:150
@@ -356,13 +404,13 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Een oller Feind"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Verraad"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -409,7 +457,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr ""
+msgstr "Daar passeert wat …"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:230
@@ -423,11 +471,11 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Wi mutten futtmaken."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Wi sünd to laat"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:240
@@ -449,7 +497,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:253
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:262
 msgid "You Have Lost"
-msgstr ""
+msgstr "Du hest verloren"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:245
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:254
@@ -458,16 +506,19 @@ msgid ""
 "You have lost and may not continue playing. May you have better luck when "
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
+"Du hest verloren un düürst nich wiederspölen. Wenn du deese Rutfödderung "
+"noch eenmaal versöchst, hest du hopentlik mehr Glück. Klick up »Jau«, um tum"
+" Höövdmenü torügg to gahn."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:249
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:258
 msgid "Defeat"
-msgstr ""
+msgstr "Verloren"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:250
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:259
 msgid "We have lost"
-msgstr ""
+msgstr "Wi hebben verloren"
 
 #. TRANSLATORS: Reebaud – Reebaud defeated 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:252
@@ -491,11 +542,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:267
 msgid "Expansion"
-msgstr ""
+msgstr "Verwiedern"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:268
 msgid "We are being cut off"
-msgstr ""
+msgstr "Wi worden ofsneden"
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:270
@@ -519,11 +570,11 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:295
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:304
 msgid "Victory"
-msgstr ""
+msgstr "Sieg"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:278
 msgid "Intruders defeated"
-msgstr ""
+msgstr "Indringers manntjet"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:280
@@ -531,10 +582,12 @@ msgid ""
 "These intruders were not as strong as they thought. They will trouble you no"
 " more."
 msgstr ""
+"Deese Indringers weren nich so machtig, as se docht hebben. Se worden jo "
+"nich mehr argern."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:284
 msgid "Strangers defeated"
-msgstr ""
+msgstr "Frömde manntjet"
 
 #. TRANSLATORS: Claus Lembeck – Victory over Amazons
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:286
@@ -542,21 +595,25 @@ msgid ""
 "These strangers were not as strong as they thought. Whoever they were, they "
 "will trouble us no more."
 msgstr ""
+"Deese Frömden weren nich so machtig, as se docht hebben. Well se ok weren, "
+"se worden uns nich mehr argern."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:290
 msgid "Legate defeated"
-msgstr ""
+msgstr "Legaat manntjet"
 
 #. TRANSLATORS: Reebaud – Victory over Empire
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:292
 msgid ""
 "Attempting to take me on is the last mistake you ever made, foolish legate."
 msgstr ""
+"Tegen mi kämpen to wullen is de leste Fehler, wat du jemaals maken worst, "
+"dösiger Legaat."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:296
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:305
 msgid "We have won"
-msgstr ""
+msgstr "Wi hebben wunnen"
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:298
@@ -569,7 +626,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:308
 msgid "Congratulations"
-msgstr ""
+msgstr "Glückwunsk"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:300
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:309
@@ -577,6 +634,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Du hest deese Rutfödderung ofsloten. Wenn du willst, kannst du wiederspölen,"
+" anners de token Rutfödderung anfangen."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:307
@@ -591,7 +650,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8
 msgctxt "empire_building"
 msgid "Port"
-msgstr ""
+msgstr "Muu"
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/init.lua:9
@@ -600,3 +659,5 @@ msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
 msgstr ""
+"Deent tum Begünnen vun Hannel un Söken över Seefahrt. Brengt ok diene Lüü un"
+" Soldaten unner un verwahrt diene Waren un anner Kraam."

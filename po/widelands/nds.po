@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-28 07:46+0000\n"
+"POT-Creation-Date: 2022-08-01 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -285,8 +285,8 @@ msgstr "Nov."
 msgid "Dec"
 msgstr "Dez."
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -300,12 +300,12 @@ msgstr "Höövdmenü"
 msgid "Tools"
 msgstr "Warktügen"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -406,7 +406,7 @@ msgstr "De Kaart-Landskupp ännern"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:298
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:178
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Faste Dingen"
 
@@ -507,10 +507,10 @@ msgstr "Warktüüg-Histoorje"
 msgid "Restore previous tool settings"
 msgstr "Olle Warktüüg-Instellens weerbruken"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
@@ -766,8 +766,8 @@ msgstr "Bargwark"
 msgid "port"
 msgstr "Muu"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1063,9 +1063,9 @@ msgstr "(keens)"
 msgid "Waterway length limit:"
 msgstr "Hoogste Priel-Längde:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1489,8 +1489,8 @@ msgid ""
 "location."
 msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden vun de utköört Stee wegnohmen."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1545,7 +1545,7 @@ msgid "Messages"
 msgstr "Narichten"
 
 #: ../../src/game_io/game_loader.cc:175
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:202
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:193
 msgid "Finishing"
 msgstr "Klaarmaken"
 
@@ -1953,47 +1953,13 @@ msgstr "Feind överwunnen!"
 msgid "Enemy at site defeated!"
 msgstr "Soldateree-Boo innohmen!"
 
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is
-#. the maximum
-#. * number of soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:418
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% Soldat (+%2%)"
-msgstr[1] "%1% Soldaten (+%2%)"
-
-#. * TRANSLATORS: Number of soldiers stationed at a militarysite.
-#: ../../src/logic/map_objects/tribes/militarysite.cc:425
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% Soldat"
-msgstr[1] "%1% Soldaten"
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently open soldier slots in the building. %3% is the maximum number of
-#. soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:436
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) Soldat (+%3%)"
-msgstr[1] "%1%(+%2%) Soldaten (+%3%)"
-
-#. * TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-#. currently
-#. * open soldier slots in the building
-#: ../../src/logic/map_objects/tribes/militarysite.cc:444
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) Soldat"
-msgstr[1] "%1%(+%2%) Soldaten"
-
 #. * TRANSLATORS: Militarysite is being attacked
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgctxt "building"
 msgid "Attack!"
 msgstr "Angriff!"
 
-#: ../../src/logic/map_objects/tribes/militarysite.cc:951
+#: ../../src/logic/map_objects/tribes/militarysite.cc:911
 msgid "You are under attack"
 msgstr "Du worst angrepen!"
 
@@ -2290,17 +2256,17 @@ msgid "Logic error"
 msgstr "Fehler in de Logik"
 
 #. * TRANSLATORS: Example: Loading Barbarians: Buildings (2/6)
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:160
 msgid "Loading %1%: %2% (%3%/%4%)"
 msgstr "Lade Volk »%1%«: %2% (%3%/%4%)"
 
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:174
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:165
 #: ../../src/wui/minimap.cc:210
 msgid "Ships"
 msgstr "Schippen"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:153
 #: ../../src/wui/interactive_player.cc:333
@@ -2312,7 +2278,7 @@ msgstr "Waren"
 #. * TRANSLATORS: Header in production site window if there is more than 1
 #. worker. If you
 #. need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:189
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:180
 #: ../../src/wui/economy_options_window.cc:77
 #: ../../src/wui/general_statistics_menu.cc:144
 #: ../../src/wui/productionsitewindow.cc:111
@@ -2321,7 +2287,7 @@ msgid "Workers"
 msgstr "Arbeiders"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:196
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:322
 #: ../../src/wui/general_statistics_menu.cc:149
@@ -2331,26 +2297,26 @@ msgstr "Husen"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker
 #. missing
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:230
 msgid "Worker missing"
 msgstr "Arbeider föhlt"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker missing.
 #. If you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:235
 msgid "Workers missing"
 msgstr "Arbeiders föhlen"
 
 #. * TRANSLATORS: Productivity label on a building if there is 1 worker coming
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:248
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:239
 msgid "Worker is coming"
 msgstr "Arbeider kummt"
 
 #. * TRANSLATORS: Productivity label on a building if there is more than 1
 #. worker coming. If
 #. you need plural forms here, please let us know.
-#: ../../src/logic/map_objects/tribes/tribe_descr.cc:253
+#: ../../src/logic/map_objects/tribes/tribe_descr.cc:244
 msgid "Workers are coming"
 msgstr "Arbeiders kummen"
 
@@ -3333,11 +3299,11 @@ msgstr "Nich utköort"
 msgid "No matches"
 msgstr "Nix funnen"
 
-#: ../../src/ui_basic/panel.cc:313
+#: ../../src/ui_basic/panel.cc:298
 msgid "Please wait…"
 msgstr "Bidde wachten …"
 
-#: ../../src/ui_basic/panel.cc:443
+#: ../../src/ui_basic/panel.cc:428
 msgid "Game ending – please wait…"
 msgstr "Speel ennt – bidde wachten …"
 
