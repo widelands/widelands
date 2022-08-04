@@ -256,14 +256,15 @@ void QuickNavigationWindow::rebuild() {
 		                   _("View this landmark in a watch window"));
 		b->set_enabled(q.landmarks()[i].set);
 		b->sigclicked.connect([this, &q, i]() {
-			show_watch_window(dynamic_cast<InteractiveGameBase&>(ibase_),
-			                  MapviewPixelFunctions::calc_node_and_triangle(
-			                     ibase_.egbase().map(),
-			                     // Technically, a landmark is the top-left corner of the screen,
-			                     // but we like to pretend it's the screen center instead.
-			                     static_cast<int>(q.landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2),
-			                     static_cast<int>(q.landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2))
-			                     .node);
+			show_watch_window(
+			   dynamic_cast<InteractiveGameBase&>(ibase_),
+			   MapviewPixelFunctions::calc_node_and_triangle(
+			      ibase_.egbase().map(),
+			      // Technically, a landmark is the top-left corner of the screen,
+			      // but we like to pretend it's the screen center instead.
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.x + g_gr->get_xres() / 2),
+			      static_cast<int>(q.landmarks()[i].view.viewpoint.y + g_gr->get_yres() / 2))
+			      .node);
 		});
 		box.add(b);
 
