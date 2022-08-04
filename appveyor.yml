@@ -4,7 +4,7 @@
 #   Appveyor build configuration  #
 ###################################
 
-image: Visual Studio 2019
+image: Visual Studio 2022
 
 init:
   - cmd: "IF \"%PLATFORM%\" == \"x86\" (set MINGWPATH=C:\\msys64\\mingw32\\bin& set MINGWSUFFIX=i686& set MINGWINCLUDE=C:\\msys64\\mingw32\\include& set BITS=32) ELSE (set MINGWPATH=C:\\msys64\\mingw64\\bin& set MINGWSUFFIX=x86_64& set MINGWINCLUDE=C:\\msys64\\mingw64\\include& set BITS=64)"
@@ -35,6 +35,7 @@ shallow_clone: false
 branches:
   only:
     - master
+    - appveyor_env_update
 
 skip_tags: true
 
