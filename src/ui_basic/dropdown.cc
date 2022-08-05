@@ -512,8 +512,7 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 					toggle_list();
 				}
 			} else {
-				// Handle Enter only if the list is open
-				return false;
+				set_list_visibility(true);
 			}
 			return true;
 		case SDLK_ESCAPE:
@@ -523,12 +522,6 @@ bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {
 				} else {
 					set_list_visibility(false);
 				}
-				return true;
-			}
-			break;
-		case SDLK_SPACE:
-			if (!is_expanded()) {
-				set_list_visibility(true);
 				return true;
 			}
 			break;

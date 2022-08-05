@@ -320,7 +320,7 @@ void Button::think() {
 }
 
 bool Button::handle_key(bool down, SDL_Keysym code) {
-	if (down && code.sym == SDLK_SPACE) {
+	if (down && code.sym == SDLK_RETURN) {
 		play_click();
 		sigclicked();
 		return true;
