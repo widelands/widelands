@@ -1,10 +1,10 @@
 push_textdomain("scenario_fri05.wmf")
 
-terraindir = "campaigns/fri05.wmf/" .. "scripting/tribes/helgoland/"--path.dirname(__file__)
+terraindir = "campaigns/fri05.wmf/scripting/tribes/helgoland/"
 
 wl.Descriptions():new_terrain_type {
    name = "helgoland",
-   descname = "Helgoland",  -- no need to make this translatable
+   descname = _("Helgoland"),
    is = "unreachable",
    valid_resources = {},
    default_resource = "",

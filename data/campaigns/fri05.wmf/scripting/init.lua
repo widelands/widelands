@@ -16,6 +16,7 @@ map = game.map
 p1 = game.players[1]
 p2 = game.players[2]
 difficulty = wl.Game().scenario_difficulty
+wl.Game().allow_diplomacy = false
 
 trade = {  -- {Wares given} vs {wares received}
    {
