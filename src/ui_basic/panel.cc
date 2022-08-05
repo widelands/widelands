@@ -243,7 +243,7 @@ void Panel::do_redraw_now(const bool handle_input, const std::string& message) {
 	static InputCallback input_callback = {Panel::ui_mousepress, Panel::ui_mouserelease,
 	                                       Panel::ui_mousemove,  Panel::ui_key,
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
-	if (handle_input) {
+	if (handle_input && message.empty()) {
 		app->handle_input(&input_callback);
 	}
 
