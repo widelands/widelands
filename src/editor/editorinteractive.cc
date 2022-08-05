@@ -33,6 +33,7 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "editor/tools/tool_conf.h"
 #include "editor/ui_menus/help.h"
 #include "editor/ui_menus/main_menu_load_map.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -47,6 +48,7 @@
 #include "editor/ui_menus/tool_place_immovable_options_menu.h"
 #include "editor/ui_menus/tool_resize_options_menu.h"
 #include "editor/ui_menus/tool_set_terrain_options_menu.h"
+#include "editor/ui_menus/tool_toolhistory_options_menu.h"
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
@@ -128,7 +130,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    [this](ShowHideEntry t) { showhide_menu_selected(t); }),
      undo_(nullptr),
      redo_(nullptr),
-     tools_(new Tools(e.map())),
+     tools_(new Tools(*this, e.map())),
      history_(nullptr)  // history needs the undo/redo buttons
 {
 	add_main_menu();
@@ -156,7 +158,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	   as_tooltip_text_with_hotkey(
 	      _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo), UI::PanelStyle::kWui));
 
-	history_.reset(new EditorHistory(*undo_, *redo_));
+	history_.reset(new EditorHistory(*this, *undo_, *redo_));
 
 	undo_->sigclicked.connect([this] { history_->undo_action(); });
 	redo_->sigclicked.connect([this] { history_->redo_action(); });
@@ -356,6 +358,17 @@ void EditorInteractive::add_tool_menu() {
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
 	              _("Click on a field to show information about it"),
 	              shortcut_string_for(KeyboardShortcut::kEditorInfo));
+
+	/** TRANSLATORS: An entry in the editor's tool menu */
+	toolmenu_.add(_("Tool History"), ToolMenuEntry::kToolHistory,
+	              g_image_cache->get("images/wui/editor/fsel_editor_toolhistory.png"), false,
+	              /** TRANSLATORS: Tooltip for the tool history tool in the editor */
+	              _("Restore previous tool settings"),
+	              shortcut_string_for(KeyboardShortcut::kEditorToolHistory));
+	tool_windows_.toolhistory.open_window = [this] {
+		new EditorToolhistoryOptionsMenu(*this, tools()->tool_history, tool_windows_.toolhistory);
+	};
+
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
@@ -394,6 +407,9 @@ void EditorInteractive::tool_menu_selected(ToolMenuEntry entry) {
 		break;
 	case ToolMenuEntry::kFieldInfo:
 		select_tool(tools()->info, EditorTool::First);
+		break;
+	case ToolMenuEntry::kToolHistory:
+		tool_windows_.toolhistory.toggle();
 		break;
 	}
 	toolmenu_.toggle();
@@ -584,9 +600,39 @@ void EditorInteractive::exit() {
 
 void EditorInteractive::map_clicked(const Widelands::NodeAndTriangle<>& node_and_triangle,
                                     const bool should_draw) {
-	history_->do_action(tools_->current(), tools_->use_tool, *egbase().mutable_map(),
-	                    node_and_triangle, *this, should_draw);
+
+	EditorTool& current_tool = tools_->current();
+	EditorTool::ToolIndex subtool_idx = tools_->use_tool;
+
+	history_->do_action(
+	   current_tool, subtool_idx, *egbase().mutable_map(), node_and_triangle, should_draw);
+
 	set_need_save(true);
+
+	if (!tool_settings_changed_) {
+		return;
+	}
+
+	ToolConf conf;
+	if (current_tool.save_configuration(conf)) {
+		if (tools()->tool_history.add_configuration(conf)) {
+			update_tool_history_window();
+		}
+	}
+
+	tool_settings_changed_ = false;
+}
+
+void EditorInteractive::update_tool_history_window() {
+	UI::UniqueWindow* window = get_open_tool_window(WindowID::ToolHistory);
+	if (window == nullptr) {
+		return;
+	}
+
+	EditorToolhistoryOptionsMenu* toolhistory_window =
+	   dynamic_cast<EditorToolhistoryOptionsMenu*>(window);
+
+	toolhistory_window->update();
 }
 
 bool EditorInteractive::handle_mouserelease(uint8_t btn, int32_t x, int32_t y) {
@@ -873,6 +919,10 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			history_->redo_action();
 			return true;
 		}
+		if (matches_shortcut(KeyboardShortcut::kEditorToolHistory, code)) {
+			tool_windows_.toolhistory.toggle();
+			return true;
+		}
 
 		for (int i = 0; i < 10; ++i) {
 			if (matches_shortcut(static_cast<KeyboardShortcut>(
@@ -967,6 +1017,7 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 		unset_sel_picture();
 	}
 	set_sel_triangles(primary.operates_on_triangles());
+	tool_settings_changed_ = true;
 }
 
 void EditorInteractive::run_editor(UI::Panel* error_message_parent,
@@ -1026,7 +1077,6 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 		Notifications::publish(UI::NoteLoadingMessage(format(_("Loading map “%s”…"), filename)));
 		eia.load(filename);
 
-		egbase.postload_addons(true);
 		egbase.postload();
 		eia.start();
 		if (!script_to_run.empty()) {
@@ -1041,7 +1091,6 @@ void EditorInteractive::do_run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
 		}
 
-		egbase.postload_addons(true);
 		egbase.postload();
 
 		egbase.mutable_map()->create_empty_map(
@@ -1136,11 +1185,11 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 void EditorInteractive::map_changed(const MapWas& action) {
 	switch (action) {
 	case MapWas::kReplaced:
-		history_.reset(new EditorHistory(*undo_, *redo_));
+		history_.reset(new EditorHistory(*this, *undo_, *redo_));
 		undo_->set_enabled(false);
 		redo_->set_enabled(false);
 
-		tools_.reset(new Tools(egbase().map()));
+		tools_.reset(new Tools(*this, egbase().map()));
 		select_tool(tools_->info, EditorTool::First);
 		set_sel_radius(0);
 
@@ -1179,4 +1228,77 @@ const std::vector<std::unique_ptr<EditorCategory>>&
 EditorInteractive::editor_categories(Widelands::MapObjectType type) const {
 	assert(editor_categories_.count(type) == 1);
 	return editor_categories_.at(type);
+}
+
+EditorHistory& EditorInteractive::history() {
+	return *history_;
+}
+
+/**
+ * Restores tool settings in a tool's window from a configuration.
+ * Opens the window, if it's not already open.
+ **/
+void EditorInteractive::restore_tool_configuration(const ToolConf& conf) {
+	assert(conf.primary != nullptr);
+
+	EditorTool& primary = *conf.primary;
+	primary.load_configuration(conf);
+	select_tool(primary, EditorTool::First);
+
+	UI::UniqueWindow* window = get_open_tool_window(primary.get_window_id());
+	if (window == nullptr) {
+		UI::UniqueWindow::Registry& registry = get_registry_for_window(primary.get_window_id());
+		registry.create();
+
+		window = get_open_tool_window(primary.get_window_id());
+	}
+
+	if (window != nullptr) {
+		dynamic_cast<EditorToolOptionsMenu*>(window)->update_window();
+		window->focus();
+	}
+}
+
+/**
+ * Returns open window for the given window id, if the window is open.
+ * Otherwise returns nullptr.
+ **/
+UI::UniqueWindow* EditorInteractive::get_open_tool_window(WindowID window_id) {
+	const UI::UniqueWindow::Registry& window_registry = get_registry_for_window(window_id);
+
+	return window_registry.window;
+}
+
+/**
+ * Returns window registry for window id.
+ **/
+UI::UniqueWindow::Registry& EditorInteractive::get_registry_for_window(WindowID window_id) {
+
+	switch (window_id) {
+	case WindowID::ToolHistory:
+		return tool_windows_.toolhistory;
+	case WindowID::ChangeHeight:
+		return tool_windows_.height;
+	case WindowID::NoiseHeight:
+		return tool_windows_.noiseheight;
+	case WindowID::Terrain:
+		return tool_windows_.terrain;
+	case WindowID::Immovables:
+		return tool_windows_.immovables;
+	case WindowID::Critters:
+		return tool_windows_.critters;
+	case WindowID::ChangeResources:
+		return tool_windows_.resources;
+	case WindowID::Resize:
+		return tool_windows_.resizemap;
+	case WindowID::Unset:
+		break;
+	}
+
+	NEVER_HERE();
+}
+
+void EditorInteractive::set_sel_radius(const uint32_t n) {
+	InteractiveBase::set_sel_radius(n);
+	tool_settings_changed_ = true;
 }

@@ -462,6 +462,10 @@ Callback for dismantling request
 */
 void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
+	if (building == nullptr) {
+		return;
+	}
+
 	if ((SDL_GetModState() & KMOD_CTRL) != 0) {
 		if ((building->get_playercaps() & Widelands::Building::PCap_Dismantle) != 0u) {
 			if (game_ != nullptr) {

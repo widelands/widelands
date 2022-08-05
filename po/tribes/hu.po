@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-19 04:22+0000\n"
+"POT-Creation-Date: 2022-08-01 04:22+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1223,6 +1223,7 @@ msgstr "Manióka ültetvény"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:73
 #: ../../data/tribes/buildings/productionsites/frisians/ferry_yard/init.lua:59
@@ -1292,6 +1293,7 @@ msgstr "Maniókafőzde"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -1718,8 +1720,6 @@ msgstr "Kőfaragó műhely"
 msgid "making a shovel"
 msgstr "Lapát készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1729,7 +1729,6 @@ msgstr "Lapát készítése"
 msgid "making a felling ax"
 msgstr "Favágóbalta készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1930,6 +1929,7 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Vadonőrző kunyhó"
 
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
@@ -3838,6 +3838,21 @@ msgid ""
 "farm, or dismantling or destroying this building."
 msgstr "Az itt dolgozó gyümölcsszedő nem talál bokrokat a munkaterületén. Fontold meg az épület lebontását vagy megsemmisítését, vagy egy gyümölcsös építését."
 
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
+msgctxt "frisians_building"
+msgid "Diker’s House"
+msgstr "Gátépítő ház"
+
+#. TRANSLATORS: Completed/Skipped/Did not start diking because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
+msgid "diking"
+msgstr "Gát építése"
+
+#. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
+#: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
+msgid "building a dike"
+msgstr "Hullámtörő építése"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
 msgctxt "frisians_building"
@@ -5030,6 +5045,12 @@ msgid "Destroyed building"
 msgstr "Lerombolt épület"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/dike/init.lua:8
+msgctxt "immovable"
+msgid "Dike"
+msgstr "Hullámtörő"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
@@ -5264,8 +5285,8 @@ msgstr "Balzafa"
 msgid "Balsa Tree (Pole)"
 msgstr "Balzafa (közepes)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -5425,42 +5446,7 @@ msgstr "Amazonok"
 msgid "The people of the amazonian jungle."
 msgstr "Az amazóniai őserdők népe."
 
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:8
-msgctxt "amazons_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:11
-msgctxt "amazons_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:16
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/amazons/military_capacity.lua:19
-msgctxt "amazons_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
-
+#. TRANSLATORS: This is the name of a starting condition
 #. TRANSLATORS: This is the name of a starting condition
 #. descname = _("Discovery"),
 #. TRANSLATORS: This is the tooltip for the "Discovery" starting condition
@@ -5694,42 +5680,6 @@ msgid ""
 "Atlantis."
 msgstr "Ez a törzs a legrégebbi mesékből ismert. Atlantisz fiai és leányai."
 
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:18
-msgctxt "atlanteans_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
-msgctxt "atlanteans_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:26
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:29
-msgctxt "atlanteans_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
-
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:49
 #: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:47
 #: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:48
@@ -5748,42 +5698,6 @@ msgstr "Barbárok"
 msgid "The mighty tribes of the east-lands."
 msgstr "A keleti földek hatalmas törzsei."
 
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:8
-msgctxt "barbarians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
-msgctxt "barbarians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:16
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:19
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
-
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
@@ -5793,42 +5707,6 @@ msgstr "Birodalom"
 msgid "This is the culture of the Roman Empire."
 msgstr "Ez a Római Birodalom kultúrája."
 
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:8
-msgctxt "empire_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:11
-msgctxt "empire_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building. %3% is the maximum number
-#. of soldier slots in the building
-#: ../../data/tribes/initialization/empire/military_capacity.lua:16
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
-#. are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/empire/military_capacity.lua:19
-msgctxt "empire_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
-
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
@@ -5837,42 +5715,6 @@ msgstr "Frízek"
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "A rideg északi tengerpart lakói."
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:8
-msgctxt "frisians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% katona (+%2%)"
-msgstr[1] "%1% katona (+%2%)"
-
-#. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:11
-msgctxt "frisians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% katona"
-msgstr[1] "%1% katona"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building. %3% is the maximum
-#. number of soldier slots in the building
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:16
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) katona (+%3%)"
-msgstr[1] "%1%(+%2%) katona (+%3%)"
-
-#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
-#. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/frisians/military_capacity.lua:19
-msgctxt "frisians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) katona"
-msgstr[1] "%1%(+%2%) katona"
 
 #: ../../data/tribes/scripting/help/init.lua:84
 msgid "Tribal Encyclopedia"
@@ -9717,6 +9559,12 @@ msgstr "Faszénégető"
 msgctxt "frisians_worker"
 msgid "Clay Digger"
 msgstr "Vályogvető"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/diker/init.lua:8
+msgctxt "frisians_worker"
+msgid "Diker"
+msgstr "Gátépítő"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

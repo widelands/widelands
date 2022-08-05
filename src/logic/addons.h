@@ -160,7 +160,8 @@ bool order_matters(AddOnCategory base, AddOnCategory dependency);
 
 std::shared_ptr<AddOnInfo> preload_addon(const std::string&);
 
-i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon);
+i18n::GenericTextdomain* create_textdomain_for_addon(std::string addon,
+                                                     const std::string& dflt = std::string());
 i18n::GenericTextdomain* create_textdomain_for_map(std::string mapfilename);
 
 enum class UpdateThemeAction { kEnableArgument, kLoadFromConfig, kAutodetect };
