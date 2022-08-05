@@ -194,7 +194,7 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 		const uint32_t now = SDL_GetTicks();
 		if (now - start_time > 1000) {
 			verb_log_dbg("WARNING: Locking mutex %s, already waiting for %d ms",
-					to_string(id_).c_str(), now - start_time);
+			             to_string(id_).c_str(), now - start_time);
 		}
 
 		if (now - last_function_call > sleeptime) {
