@@ -42,6 +42,7 @@ msgstr "Trobeu en Reebaud"
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
+"Expandiu el vostre territori fins que trobeu el vostre vell amic Reebaud."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
@@ -65,7 +66,7 @@ msgstr "Derroteu el delegat imperial"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Derroteu en Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
@@ -184,6 +185,8 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"Els nostres soldats han vist estrangers. Aquests deuen ser els intrusos que "
+"va mencionar en Reebaud."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
@@ -240,6 +243,8 @@ msgstr "Per fi ens trobem"
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
 msgstr ""
+"Per fi! Els edificis d'aquesta gent em semblen familiars. Deu ser la tribu "
+"d'en Reebaud."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -247,6 +252,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"M'enganyen els ulls, o algun esperit m'està gastant bromes? No pot pas ser "
+"el vell amic meu Claus qui ve a veure'm tan lluny de casa seva!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -255,6 +262,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Ni és broma ni és engany. Sóc jo de veritat, Claus Lembeck! El meu fill "
+"Henneke i jo hem viatjat fins aquí per trobar-vos. No puc dir la felicitat "
+"que tinc de trobar-vos per fi!"
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -388,6 +398,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Vosaltres dos, espereu un minut. Què acabeu de dir? Vau assaltar i "
+"assassinar en Murilius, el procònsol de l'Imperi?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -526,6 +538,9 @@ msgid ""
 "perfectly within his rights to do so, I am worried that we might be cut off "
 "from Reebaud’s land if we don’t watch out."
 msgstr ""
+"Marcus Caius Iniucundus està expandint de pressa el seu territori. Mentre "
+"ell està en el seu dret de fer-ho, estic preocupat que ens quedarem aïllats "
+"de la terra d'en Reebaud si no vigilem."
 
 #. TRANSLATORS: Henneke Lembeck – Empire expands
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:273
@@ -534,6 +549,9 @@ msgid ""
 "direction we need to head, I’d advise to focus on spreading westwards for "
 "now before Marcus Caius Iniucundus blocks us out on this frontier."
 msgstr ""
+"Hem d'incrementar el ritme de la nostra expansió. Sense saber en quina "
+"direcció hem d'anar, us aconsello que ho feu cap a l'oest, abans que en "
+"Marcus Caius Iniucundus ens talli el pas amb la seva frontera."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:277
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:283
@@ -589,6 +607,9 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Hem derrotat els enemics. Ara vindré cap al sud amb vós i tots els meus "
+"soldats –excepte una petita guarnició que es quedarà per vigilar les meves "
+"terres– i reconquerirem la vostra illa!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:308
@@ -612,6 +633,10 @@ msgid ""
 "my soldiers except for a small garrison to safeguard my lands, and we will "
 "reconquer your island!"
 msgstr ""
+"Els nostres soldats s'han recuperat i heu emprat bé el temps augmentant la "
+"força del vostre exèrcit. Ara vindré amb vosaltres al sud i tots els meus "
+"soldats –excepte una petita guarnició que es quedarà per vigilar les meves "
+"terres– i reconquerirem la vostra illa!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/campaigns/fri04.wmf/scripting/tribes/empire_port_large/init.lua:8

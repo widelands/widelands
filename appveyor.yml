@@ -35,7 +35,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - 5433-appveyor_segfault
 
 skip_tags: true
 

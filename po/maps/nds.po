@@ -107,7 +107,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sik mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sik siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Söhn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sik mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sik siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -296,7 +296,7 @@ msgstr "Twee Frünnen weer tosamen"
 msgid ""
 "Claus and Henneke Lembeck have reached the North at last. But will they be "
 "able to convince Reebaud to send them aid?"
-msgstr ""
+msgstr "Claus un Henneke Lembeck sünd uplest im Noorden ankomen. Aver könen se Reebaud övertügen, hüm Hülp to schicken?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

@@ -8,6 +8,7 @@
 # GunChleoc, 2016
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # Guybrush88 <erpizzo@alice.it>, 2015-2016,2021
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
@@ -17,13 +18,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2016,2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:10
 msgid "Your Economy and its Settings"
@@ -837,7 +838,7 @@ msgstr "Per essere pronti a nuove fortificazioni, devi produrre 20 colonne di ma
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr ""
+msgstr "Il tuo Tagliapietre non produrrà Colonne di marmo se non sono necessarie. Devi incrementare la quantità prefissata."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""
@@ -849,7 +850,7 @@ msgstr ""
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr ""
+msgstr "A volte puoi aver bisogno contemporaneamente di grosse quantità di merci – più rapidamente di quanto possano essere prodotte. In questo caso è opportuno averne abbastanza di riserva."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:509
 msgid ""
@@ -870,7 +871,7 @@ msgid ""
 "Now let’s try it out: the current target quantity for marble columns is 10. "
 "Increase it to be prepared in case you will have to build up your "
 "fortifications quickly."
-msgstr ""
+msgstr "Ora proviamo: l'attuale quantità prefissata per le colonne di marmo è 10. Incrementala per essere pronto nel caso dovessi costruire rapidamente nuove fortificazioni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:519
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:521
@@ -907,21 +908,21 @@ msgstr "Porta le colonne di marmo nella prima linea"
 msgid ""
 "The production of marble columns is working fine now, but it would be great "
 "if they were stored where we need them."
-msgstr ""
+msgstr "La produzione delle colonne di marmo ora va bene, ma sarebbe grandioso se fossero immagazzinate dove ne abbiamo bisogno."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:537
 msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr ""
+msgstr "Normalmente le merci prodotte sono conferite al più vicino magazzino, se non necessarie altrove. In questo caso, questo sarà il nostro Quartier generale. Preferiremmo però averle in un magazzino vicino alle nostre fortificazioni."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:538
 msgid ""
 "Every warehouse has four buttons to set the preference. If you move your "
 "mouse pointer over them, you will see tooltips that explain what the buttons"
 " do."
-msgstr ""
+msgstr "In ogni magazzino ci sono quattro bottoni per impostare le preferenze. Spostando il puntatore del mouse su di loro, vedrai dei tooltip che spiegano a cosa serve il bottone."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:544
 msgid "Borders Secured"
