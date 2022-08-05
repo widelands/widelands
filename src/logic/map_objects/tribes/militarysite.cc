@@ -370,80 +370,40 @@ Display number of soldiers.
 ===============
 */
 void MilitarySite::update_statistics_string(std::string* s) {
+	std::unique_ptr<i18n::GenericTextdomain> td(AddOns::create_textdomain_for_addon(
+	   owner().tribe().basic_info().addon, "tribes_encyclopedia"));
 	s->clear();
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
-	// Use Lua script to generate the capacity string for the given number of stationed and present
-	// soldiers. The index is according to the conditions determined by the caller and ranges [0,
-	// kNoOfStatisticsStringCases - 1].
-	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
-		assert(idx < kNoOfStatisticsStringCases);
-		std::tuple<int, int, int> cache_key(pres, stat, capacity_);
-		auto it = statistics_string_cache_[idx].find(cache_key);
-		if (it != statistics_string_cache_[idx].end()) {
-			return it->second;
-		}
-		const std::string& military_capacity_script = owner().tribe().military_capacity_script();
-		// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
-		if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
-			try {
-				LuaInterface lua;
-				std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
-				std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-				cr->push_arg(pres);
-				cr->push_arg(stat);
-				cr->push_arg(capacity_);
-				cr->resume();
-				std::string new_string = cr->pop_string();
-				statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
-				return new_string;
-			} catch (LuaError& err) {
-				log_err("Failed to read soldier capacity for building '%s': %s", descr().name().c_str(),
-				        err.what());
-				return std::string();
-			}
-		}
-		return std::string();
-	};
-
-	// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0 and remove
-	// fallbacks to tribe-independent strings
+	// military capacity strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
-			*s = read_capacity_string(present, stationed, 0);
-			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
-				 * number of soldier slots in the building */
-				*s = format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed), stationed,
-				            (capacity_ - stationed));
-			}
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[0].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[0].c_str(), stationed),
+			   stationed, (capacity_ - stationed));
 		} else {
-			*s = read_capacity_string(present, stationed, 1);
-			if (s->empty()) {
-				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = format(ngettext("%1% soldier", "%1% soldiers", stationed), stationed);
-			}
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[1].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[1].c_str(), stationed),
+			   stationed);
 		}
 	} else {
 		if (capacity_ > stationed) {
-			*s = read_capacity_string(present, stationed, 2);
-			if (s->empty()) {
-				*s = format(
-				   /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
-				      currently open soldier slots in the building. %3% is the maximum number of
-				      soldier slots in the building */
-				   ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed),
-				   present, (stationed - present), (capacity_ - stationed));
-			}
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[2].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[2].c_str(), stationed),
+			   present, (stationed - present), (capacity_ - stationed));
 		} else {
-			*s = read_capacity_string(present, stationed, 3);
-			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
-				 * open soldier slots in the building */
-				*s = format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed), present,
-				            (stationed - present));
-			}
+			*s = format(
+			   npgettext(owner().tribe().get_soldier_context_string().c_str(),
+			             owner().tribe().get_soldier_capacity_strings_sg()[3].c_str(),
+			             owner().tribe().get_soldier_capacity_strings_pl()[3].c_str(), stationed),
+			   present, (stationed - present));
 		}
 	}
 

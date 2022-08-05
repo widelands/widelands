@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-06-13 03:43+0000\n"
+"POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2015-02-02 13:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -39,7 +39,7 @@ msgstr "Al weer achter een neje Heimaad ansitten"
 msgid ""
 "After the quick escape from the drowning island, the Atlanteans around "
 "Jundlina are faced with new challenges."
-msgstr "Nadeem se fell vun de untergahn Insel utnaiht sünd, mutten Jundlin' un hör Atlantingers mit nejen Rutfödderungen klaarworden."
+msgstr "Nadeem se fell vun de untergahn Insel utnaiht sünd, mutten Jundlin’ un hör Atlantingers mit nejen Rutfödderungen klaarworden."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 msgid "A Place to Call Home"
@@ -107,7 +107,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sik mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sik siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Söhn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sik mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sik siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -287,6 +287,16 @@ msgid ""
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
 msgstr "Reebaud un sien Volk leven glückelk im Noorden. In de Tüskentied sünd de Lannen, de se achter sik laten hebben, all anner as freedsaam, un een oller Fründ bruukt nödig hör Hülp …"
+
+#: ../../data/campaigns/fri04.wmf/elemental:8
+msgid "Two Friends Reunited"
+msgstr "Twee Frünnen weer tosamen"
+
+#: ../../data/campaigns/fri04.wmf/elemental:10
+msgid ""
+"Claus and Henneke Lembeck have reached the North at last. But will they be "
+"able to convince Reebaud to send them aid?"
+msgstr "Claus un Henneke Lembeck sünd uplest im Noorden ankomen. Aver könen se Reebaud övertügen, hüm Hülp to schicken?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"

@@ -31,6 +31,8 @@ struct EditorToolChangeHeightOptionsMenu : public EditorToolOptionsMenu {
 	                                  EditorIncreaseHeightTool&,
 	                                  UI::UniqueWindow::Registry&);
 
+	void update_window() override;
+
 private:
 	EditorInteractive& eia_;
 	EditorIncreaseHeightTool& increase_tool_;

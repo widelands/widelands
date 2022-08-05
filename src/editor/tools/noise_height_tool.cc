@@ -19,6 +19,7 @@
 #include "editor/tools/noise_height_tool.h"
 
 #include <cstdlib>
+#include <sstream>
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/decrease_height_tool.h"
@@ -29,7 +30,6 @@
 
 /// Sets the heights to random values. Changes surrounding nodes if necessary.
 int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
-                                                 EditorInteractive& eia,
                                                  EditorActionArgs* args,
                                                  Widelands::Map* map) {
 	if (args->original_heights.empty()) {
@@ -48,7 +48,7 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangl
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		max = std::max(
-		   max, map->set_height(eia.egbase(), mr.location(),
+		   max, map->set_height(parent_.egbase(), mr.location(),
 		                        args->interval.min +
 		                           RNG::static_rand(args->interval.max - args->interval.min + 1)));
 	} while (mr.advance(*map));
@@ -57,14 +57,19 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangl
 
 int32_t
 EditorNoiseHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<Widelands::Coords>& center,
-                                        EditorInteractive& parent,
                                         EditorActionArgs* args,
                                         Widelands::Map* map) {
-	return set_tool_.handle_undo_impl(center, parent, args, map);
+	return set_tool_.handle_undo_impl(center, args, map);
 }
 
-EditorActionArgs EditorNoiseHeightTool::format_args_impl(EditorInteractive& parent) {
-	EditorActionArgs a(parent);
+EditorActionArgs EditorNoiseHeightTool::format_args_impl() {
+	EditorActionArgs a(parent_);
 	a.interval = interval_;
 	return a;
+}
+
+std::string EditorNoiseHeightTool::format_conf_description_impl(const ToolConf& conf) {
+	/** TRANSLATORS: An entry in the tool history list. */
+	return format(_("Noise height: %1$d–%2$d"), static_cast<int>(conf.interval.min),
+	              static_cast<int>(conf.interval.max));
 }

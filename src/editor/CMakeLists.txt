@@ -48,6 +48,10 @@ wl_library(editor
     tools/set_terrain_tool.h
     tools/tool.h
     tools/tool_action.h
+    tools/tool_conf.cc
+    tools/tool_conf.h
+    tools/toolhistory_tool.cc
+    tools/toolhistory_tool.h
     ui_menus/categorized_item_selection_menu.h
     ui_menus/field_info_window.h
     ui_menus/field_info_window.cc
@@ -87,6 +91,8 @@ wl_library(editor
     ui_menus/tool_resize_options_menu.h
     ui_menus/tool_set_terrain_options_menu.cc
     ui_menus/tool_set_terrain_options_menu.h
+    ui_menus/tool_toolhistory_options_menu.cc
+    ui_menus/tool_toolhistory_options_menu.h
     ui_menus/toolsize_menu.cc
     ui_menus/toolsize_menu.h
   USES_SDL2
