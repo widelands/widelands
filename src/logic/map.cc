@@ -232,6 +232,15 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 	recalculate_allows_seafaring();
 }
 
+void Map::recalc_whole_map_brightness() {
+	for (int16_t y = 0; y < height_; ++y) {
+		for (int16_t x = 0; x < width_; ++x) {
+			FCoords f = get_fcoords(Coords(x, y));
+			recalc_brightness(f);
+		}
+	}
+}
+
 void Map::recalc_default_resources(const Descriptions& descriptions) {
 	for (int16_t y = 0; y < height_; ++y) {
 		for (int16_t x = 0; x < width_; ++x) {
