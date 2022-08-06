@@ -169,6 +169,10 @@ void Panel::free_children() {
 }
 
 Panel::ModalGuard::ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+	if (Panel::modal_ != nullptr) {
+		/* Clean up stale notes first. */
+		Panel::modal_.load()->handle_notes();
+	}
 	Panel::modal_ = &top_panel_;
 }
 Panel::ModalGuard::~ModalGuard() {
