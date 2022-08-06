@@ -196,6 +196,7 @@ void GameMainMenuSaveGame::ok() {
 		switch (type_) {
 		case Type::kSave: {
 			std::string filename = filename_editbox_.text();
+			modal_.reset();
 			if (save_game(filename, !get_config_bool("nozip", false))) {
 				die();
 			} else {
