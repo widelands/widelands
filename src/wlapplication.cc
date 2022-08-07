@@ -355,7 +355,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
      mouse_locked_(false),
-     mouse_compensate_warp_(Vector2i::zero()),
      handle_key_enabled_(true),
      should_die_(false),
 #ifdef _WIN32
@@ -862,13 +861,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	// settings are invisible to the rest of the code
 	switch (ev.type) {
 	case SDL_MOUSEMOTION:
-		ev.motion.xrel += mouse_compensate_warp_.x;
-		ev.motion.yrel += mouse_compensate_warp_.y;
-		mouse_compensate_warp_ = Vector2i::zero();
-
 		if (mouse_locked_) {
-			warp_mouse(mouse_position_);
-
 			ev.motion.x = mouse_position_.x;
 			ev.motion.y = mouse_position_.y;
 		}
@@ -1073,25 +1066,27 @@ void WLApplication::handle_mousebutton(SDL_Event& ev, InputCallback const* cb) {
 	}
 }
 
-/// Instantaneously move the mouse cursor without creating a motion event.
-///
-/// SDL_WarpMouseInWindow() *will* create a mousemotion event, which we do not want.
-/// As a workaround, we store the delta in mouse_compensate_warp_ and use that to
-/// eliminate the motion event in poll_event()
+/// Instantaneously move the mouse cursor.
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Vector2i position) {
 	mouse_position_ = position;
-
 	Vector2i cur_position = Vector2i::zero();
 	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+
 	if (cur_position != position) {
-		mouse_compensate_warp_ += cur_position - position;
 		SDL_Window* sdl_window = g_gr->get_sdlwindow();
 		if (sdl_window != nullptr) {
-			SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+			if (!mouse_locked_) {
+				SDL_PumpEvents();
+				SDL_FlushEvent(SDL_MOUSEMOTION);
+				SDL_WarpMouseInWindow(sdl_window, position.x, position.y);
+				return;
+			}
 		}
 	}
+
+
 }
 
 /**
@@ -1122,9 +1117,15 @@ void WLApplication::set_input_grab(bool grab) {
 
 void WLApplication::set_mouse_lock(const bool locked) {
 	mouse_locked_ = locked;
+	if (mouse_locked_) {
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	} else {
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+		warp_mouse(mouse_position_);  // Restore to where we started dragging
+	}
 
-	// If we use the SDL cursor then it needs to be hidden when locked
-	// otherwise it'll jerk around which looks ugly
+	// SDL automatically hides the cursor when in relative mode. This will hide
+	// the selection marker as well.
 	if (g_mouse_cursor->is_using_sdl()) {
 		g_mouse_cursor->set_visible(!mouse_locked_);
 	}
