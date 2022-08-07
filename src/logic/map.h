@@ -234,6 +234,7 @@ public:
 	    const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const EditorGameBase&);
+	void recalc_whole_map_brightness();
 	void recalc_for_field_area(const EditorGameBase&, Area<FCoords>);
 
 	/**
