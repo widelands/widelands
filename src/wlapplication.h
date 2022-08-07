@@ -207,7 +207,7 @@ struct WLApplication {
 private:
 	WLApplication(int argc, char const* const* argv);
 
-	bool poll_event(SDL_Event&);
+	bool poll_event(SDL_Event&) const;
 
 	bool init_settings();
 	void init_language();

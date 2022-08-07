@@ -851,7 +851,7 @@ void WLApplication::run() {
  *
  * \return true if an event was returned inside ev, false otherwise
  */
-bool WLApplication::poll_event(SDL_Event& ev) {
+bool WLApplication::poll_event(SDL_Event& ev) const {
 	if (SDL_PollEvent(&ev) == 0) {
 		return false;
 	}
