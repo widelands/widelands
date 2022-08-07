@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Log Merger, 2022
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-28 03:54+0000\n"
 "PO-Revision-Date: 2022-07-28 07:48+0000\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,6 +30,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Sembra che tu non abbia completato la precedente missione. Puoi sempre "
+"giocare questo scenario, ma avrai degli svantaggi. Ti suggerisco prima di "
+"completare lo scenario precedente, poi di reiniziare questa missione."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
@@ -577,6 +584,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Hai completato questa missione. Puoi continuare a giocare, se lo desideri, "
+"altrimenti passa alla prossima missione."
 
 #. TRANSLATORS: Reebaud – Victory
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:307
