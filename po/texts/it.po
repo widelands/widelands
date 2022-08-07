@@ -10,6 +10,7 @@
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2018,2020-2021
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # Mat V <enthusedquill6@gmail.com>, 2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
@@ -20,13 +21,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-05-10 03:01+0000\n"
 "PO-Revision-Date: 2015-02-03 14:50+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2020-2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
@@ -366,7 +367,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands è un gioco strategico in tempo reale ed è completamente gratuito e open source, con campagne per giocatore singolo e una modalità multigiocatore. Il gioco si ispira liberamente a Settlers II, ma ha decisamente una significativa maggiore varietà e uno maggior spessore. Tuttavia, è facile imparare a giocare attraverso i tutorial giocabili e interattivi."
+msgstr "Widelands è un gioco strategico in tempo reale ed è completamente gratuito e open source, con campagne per giocatore singolo e una modalità multigiocatore. Il gioco si ispira liberamente a Settlers II, ma ha decisamente una maggiore varietà e un maggior spessore. Tuttavia, è facile imparare a giocare attraverso i tutorial giocabili e interattivi."
 
 #: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
@@ -599,7 +600,7 @@ msgstr ""
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "Costruisci sempre le case della guardia forestale e del taglialegna, così da non esaurire i tronchi."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -632,7 +633,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Puoi trovare aiuto, ed un breve tutorial, relativi all'editor su %s."
 
 #: ../../data/txts/tips/editor.lua:12
 msgid ""

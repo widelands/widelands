@@ -10,14 +10,15 @@
 # Pedro Figliolia <pedroluizf@gmail.com>, 2019
 # Rui <xymarior@yandex.com>, 2019
 # Tiago Henrique <tiagohrm@gmail.com>, 2019
+# Willian Francisco Urbano, 2022
 # Yuri Laskowski <yurinikolai00@gmail.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-07-31 03:53+0000\n"
+"POT-Creation-Date: 2022-08-04 03:51+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Yuri Laskowski <yurinikolai00@gmail.com>, 2021\n"
+"Last-Translator: Willian Francisco Urbano, 2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -288,8 +289,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dez"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -303,12 +304,12 @@ msgstr "Menu principal"
 msgid "Tools"
 msgstr "Ferramentas"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -510,10 +511,10 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
@@ -616,8 +617,8 @@ msgstr "O mapa não foi salvo, você tem certeza que quer sair?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1622
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:563
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:455
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
@@ -769,8 +770,8 @@ msgstr "minerar"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -947,8 +948,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:258
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:458
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:680
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -969,7 +970,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/addons/contact.cc:56
 #: ../../src/ui_fsmenu/addons/login_box.cc:61
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:466
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:63
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1493,8 +1494,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1838,7 +1839,7 @@ msgstr "Falta de posição inicial"
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
-msgstr ""
+msgstr "Widelands não pôde iniciar o jogo porque o jogador %u não tem posição inicial. Você pode adicionar manualmente uma posição inicial com o Editor Widelands para corrigir esse problema."
 
 #: ../../src/logic/game.cc:740
 msgid "Initializing…"
@@ -1927,13 +1928,13 @@ msgstr "Deserto"
 
 #: ../../src/logic/map.h:234
 msgid "No description defined"
-msgstr ""
+msgstr "Nenhuma descrição definida"
 
 #: ../../src/logic/map_objects/immovable.cc:503
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% construído"
 
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:117
 #, c-format
@@ -2627,7 +2628,7 @@ msgstr ""
 
 #: ../../src/map_io/map_saver.cc:318
 msgid "Minimap"
-msgstr ""
+msgstr "Mini-Mapa"
 
 #: ../../src/map_io/map_scripting_packet.cc:82
 msgid ""
@@ -2720,7 +2721,7 @@ msgstr ""
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr ""
+msgstr "/me verificou o arquivo recebido.  Embora a soma de verificação md5 tenha sido bem-sucedida, não consigo lidar com o arquivo."
 
 #: ../../src/network/gameclient.cc:1281
 msgid "Disconnected"
@@ -2735,22 +2736,22 @@ msgstr ""
 
 #: ../../src/network/gamehost.cc:118
 msgid "Available host commands are:"
-msgstr ""
+msgstr "Os comandos de host disponíveis são:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:120
 msgid "/help  -  Shows this help"
-msgstr ""
+msgstr "/help  -  Mostra esta ajuda"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr ""
+msgstr "/announce <msg>  -  Envia uma mensagem de chat como anúncio (chat do sistema)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr ""
+msgstr "/warn <name> <reason>  -  Avise o usuário <name> por causa de <reason>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:126
@@ -2760,7 +2761,7 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:128
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause            -  Força o jogo a pausar."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:130
@@ -2868,7 +2869,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Sucesso ao reconectar com o metasservidor!"
 
 #: ../../src/network/internet_gaming.cc:337
 #: ../../src/network/network_gaming_messages.cc:126
@@ -2918,7 +2919,7 @@ msgstr ""
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "AVISO: Recebemos um %s comando embora não estejamos no estado CONECTANDO."
 
 #: ../../src/network/internet_gaming.cc:503
 #, c-format
@@ -2931,7 +2932,7 @@ msgstr[2] ""
 #: ../../src/network/internet_gaming.cc:517
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Tipo de mensagem de bate-papo inválido \"%s\"."
 
 #: ../../src/network/internet_gaming.cc:517
 msgid "Invalid message type"
@@ -2940,22 +2941,22 @@ msgstr "Tipo de mensagem inválida"
 #: ../../src/network/internet_gaming.cc:557
 #, c-format
 msgid "The game %s is now available"
-msgstr ""
+msgstr "O jogo %s já está disponível"
 
 #: ../../src/network/internet_gaming.cc:567
 #, c-format
 msgid "The game %s has been closed"
-msgstr ""
+msgstr "O jogo %s foi fechado"
 
 #: ../../src/network/internet_gaming.cc:606
 #, c-format
 msgid "%s joined the lobby"
-msgstr ""
+msgstr "%s Entrou na sala"
 
 #: ../../src/network/internet_gaming.cc:617
 #, c-format
 msgid "%s left the lobby"
-msgstr ""
+msgstr "%s saiu da sala"
 
 #: ../../src/network/internet_gaming.cc:674
 msgid "Chat message could not be sent."
@@ -2968,7 +2969,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:700
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "ERRO: %s"
 
 #: ../../src/network/internet_gaming.cc:703
 msgid "An unexpected error message has been received about command %1%: %2%"
@@ -2977,16 +2978,16 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:714
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr ""
+msgstr "Recebeu um comando desconhecido do servidor: %s"
 
 #: ../../src/network/internet_gaming.cc:867
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "A mensagem não pôde ser enviada: Você não está conectado ao servidor!"
 
 #: ../../src/network/internet_gaming.cc:887
 #: ../../src/network/internet_gaming.cc:895
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr ""
+msgstr "Não foi possível enviar a mensagem: Era para ser uma mensagem privada?"
 
 #: ../../src/network/internet_gaming.cc:910
 msgid "Supported admin commands:"
@@ -3021,7 +3022,7 @@ msgstr "Erro de conversão"
 #: ../../src/network/internet_gaming.cc:1002
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr ""
+msgstr "Não foi possível determinar o valor de verdade para \"%s\""
 
 #: ../../src/network/internet_gaming.cc:1026
 msgctxt "chat_sender"
@@ -3056,7 +3057,7 @@ msgstr "Você já está logado!"
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
-msgstr ""
+msgstr "Você foi desconectado, pois enviou um comando de administrador sem ter permissão de administrador.  Este incidente será registrado e relatado ao administrador."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "Connection was closed by the client normally."
@@ -3074,7 +3075,7 @@ msgstr "Metaserver não responde."
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
-msgstr ""
+msgstr "Você foi desconectado do servidor, pois não respondeu a uma solicitação de PING a tempo."
 
 #: ../../src/network/network_gaming_messages.cc:116
 msgid "Client has left the game."
@@ -3670,7 +3671,7 @@ msgid ""
 " In case they have further inquiries, they will contact you via a PM on the "
 "Widelands website; therefore please check the inbox of your online user "
 "profile page frequently."
-msgstr ""
+msgstr "A equipe de desenvolvimento de Widelands revisará seu complemento logo após o Envio.  Caso eles tenham mais dúvidas, eles entrarão em contato com você por MP no site da Widelands;  portanto, verifique a caixa de entrada na sua página de perfil de usuário online com frequência."
 
 #: ../../src/ui_fsmenu/addons/manager.cc:436
 #, c-format
@@ -4033,7 +4034,7 @@ msgid "–"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:772
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:795
 msgid "Delete this add-on"
 msgstr ""
 
@@ -4525,95 +4526,95 @@ msgctxt "priority"
 msgid "High"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr ""
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:498
 msgid "Unchecked"
 msgstr ""
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:419
 msgid "Verified"
 msgstr ""
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
 msgid "Desyncs"
 msgstr ""
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Sync-safe"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:615
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:638
 msgid "Your vote"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:639
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:662
 msgid "Next screenshot"
 msgstr "Próxima captura de tela"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Previous screenshot"
 msgstr "Captura de tela anterior"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
 msgid "Write a comment…"
 msgstr "Escrever um comentário..."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:689
 msgid "Administrator actions"
 msgstr "Ações administrativas"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:673
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 msgid "Not voted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:707
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:744
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 #, c-format
 msgid "Screenshots (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
 msgid "Change quality rating"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:792
 msgid "Change sync-safety status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
 msgid "Configure Transifex integration"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #, c-format
 msgid "Comments (%u)"
 msgstr "Comentários (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:823
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:846
 #, c-format
 msgid "Votes (%u)"
 msgstr "Votos (%u)"
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:827
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:850
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:473
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4622,16 +4623,16 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:853
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
 msgid "No votes yet"
 msgstr "Sem votos ainda."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
 msgid "No comments yet."
 msgstr "Sem comentários ainda."
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -4639,35 +4640,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:860
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:883
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:889
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:898
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:921
 #, c-format
 msgid "%1$u / %2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:934
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:957
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
 msgid "Please log in to comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:977
 msgid "Please log in to vote"
 msgstr ""
 
@@ -6192,18 +6193,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autores"
@@ -6634,7 +6635,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:320
 msgid "Toggle Minimap"
-msgstr ""
+msgstr "Alternar Mini-Mapa"
 
 #: ../../src/wlapplication_options.cc:325
 msgid "Encyclopedia"
@@ -7276,7 +7277,7 @@ msgstr ""
 
 #: ../../src/wui/attack_window.cc:338 ../../src/wui/buildingwindow.cc:405
 msgid "Center view on this"
-msgstr ""
+msgstr "Centralizar a visão nisso "
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/attack_window.cc:442 ../../src/wui/soldierlist.cc:418
@@ -7409,20 +7410,20 @@ msgstr ""
 msgid "Watch the scout"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:636
+#: ../../src/wui/buildingwindow.cc:640
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:639
+#: ../../src/wui/buildingwindow.cc:643
 msgid "Show work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:664
+#: ../../src/wui/buildingwindow.cc:668
 #: ../../src/wui/constructionsitewindow.cc:336
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:668
+#: ../../src/wui/buildingwindow.cc:672
 msgid "Cancel the expedition"
 msgstr ""
 
@@ -7878,7 +7879,7 @@ msgstr "Mostrar Arquivo"
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:122
 msgid "Center main mapview on location"
-msgstr ""
+msgstr "Centralizar a Visão do Mapa principal no local"
 
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:529
@@ -8229,16 +8230,16 @@ msgstr ""
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:132
 msgid "Map View"
-msgstr ""
+msgstr "Visão do mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:287
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Ocultar Mini-Mapa"
 
 #: ../../src/wui/interactive_base.cc:287
 msgid "Show Minimap"
-msgstr ""
+msgstr "Mostrar Mini-Mapa"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:293
@@ -8383,8 +8384,8 @@ msgstr ""
 msgid "Statistics"
 msgstr "Estatísticas"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr ""
@@ -9075,7 +9076,7 @@ msgstr ""
 
 #: ../../src/wui/soldier_statistics_menu.cc:135
 msgid "Overview"
-msgstr ""
+msgstr "Visão geral"
 
 #: ../../src/wui/soldier_statistics_menu.cc:220
 msgid "By Attribute"
@@ -9304,4 +9305,4 @@ msgstr "Segue"
 
 #: ../../src/wui/watchwindow.cc:64
 msgid "Center the main view on this"
-msgstr "Centralizar vista principal nisto"
+msgstr "Centralizar a visão principal nisto"
