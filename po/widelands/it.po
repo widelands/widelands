@@ -12,6 +12,7 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2018,2021
 # ilmaren, 2021
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015-2016
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # Samuele Battarra, 2021
@@ -21,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-01 04:22+0000\n"
+"POT-Creation-Date: 2022-08-04 03:51+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>, 2015-2018,2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -622,8 +623,8 @@ msgstr "La mappa non è stata salvata, vuoi davvero uscire?"
 #: ../../src/ui_fsmenu/addons/manager.cc:1622
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:563
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:455
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
@@ -953,8 +954,8 @@ msgstr "Mostra"
 #: ../../src/ui_fsmenu/addons/manager.cc:258
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:458
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:680
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -975,7 +976,7 @@ msgstr "OK"
 #: ../../src/ui_fsmenu/addons/contact.cc:56
 #: ../../src/ui_fsmenu/addons/login_box.cc:61
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:466
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:63
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1499,8 +1500,8 @@ msgid ""
 "location."
 msgstr "Seleziona la nuova dimensione della mappa, quindi fai click sul punto dove vuoi effettuare la modifica. Quando si aumenta la dimensione della mappa, verranno inserite nuove colonne/righe a est/sud del punto selezionato. Quando si riduce la dimensione della mappa, il numero di colonne/righe indicato verrà rimosso da est/sud del punto indicato."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -4039,7 +4040,7 @@ msgid "–"
 msgstr "–"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:772
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:795
 msgid "Delete this add-on"
 msgstr "Elimina questa estensione"
 
@@ -4531,95 +4532,95 @@ msgctxt "priority"
 msgid "High"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr ""
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:498
 msgid "Unchecked"
 msgstr ""
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:419
 msgid "Verified"
 msgstr ""
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
 msgid "Desyncs"
 msgstr ""
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Sync-safe"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:615
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:638
 msgid "Your vote"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:639
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:662
 msgid "Next screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Previous screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
 msgid "Write a comment…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:689
 msgid "Administrator actions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:673
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 msgid "Not voted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:707
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:744
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 #, c-format
 msgid "Screenshots (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
 msgid "Change quality rating"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:792
 msgid "Change sync-safety status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
 msgid "Configure Transifex integration"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #, c-format
 msgid "Comments (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:823
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:846
 #, c-format
 msgid "Votes (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:827
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:850
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:473
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4628,16 +4629,16 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:853
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
 msgid "No votes yet"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
 msgid "No comments yet."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
@@ -4645,35 +4646,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:860
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:883
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:889
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:898
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:921
 #, c-format
 msgid "%1$u / %2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:934
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:957
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
 msgid "Please log in to comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:977
 msgid "Please log in to vote"
 msgstr ""
 
@@ -5357,7 +5358,7 @@ msgstr "Tutorial"
 
 #: ../../src/ui_fsmenu/main.cc:328
 msgid "Play one of our beginners’ tutorials"
-msgstr ""
+msgstr "Gioca uno dei nostri tutorial per principianti"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/ui_fsmenu/main.cc:330 ../../src/wlapplication_options.cc:222
@@ -6145,16 +6146,16 @@ msgstr "Scegli lo scenario"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:47
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Scegli il tutorial"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:85
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Scegli un tutorial dall'elenco, poi premi “OK”."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:87
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr "Puoi visualizzare una descrizione del tutorial selezionato a destra."
+msgstr "Sulla destra puoi visualizzare una descrizione del tutorial selezionato."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:104
 msgid "Return to campaign selection"
@@ -6192,24 +6193,24 @@ msgstr "#"
 #: ../../src/ui_fsmenu/scenario_select.cc:263
 #, c-format
 msgid "Invalid path to file in campaigns.lua of tutorials.lua: %s"
-msgstr ""
+msgstr "Percorso non valido al file %s in campaigns.lua di tutorials.lua."
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:46
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autore"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autori"
@@ -6782,7 +6783,7 @@ msgstr "Statistiche del soldato"
 #: ../../src/wlapplication_options.cc:525
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
-msgstr ""
+msgstr "Statistiche sui viaggi marittimi"
 
 #: ../../src/wlapplication_options.cc:543
 msgid "Decrease Game Speed by 1×"
@@ -6867,7 +6868,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:639
 msgid "Seafaring: Watch Ship"
-msgstr ""
+msgstr "Viaggi marittimi: Osserva nave"
 
 #: ../../src/wlapplication_options.cc:644
 msgid "Seafaring: Open Ship Window"
@@ -6891,7 +6892,7 @@ msgstr ""
 
 #: ../../src/wlapplication_options.cc:669
 msgid "Seafaring: Show Waiting Expeditions"
-msgstr ""
+msgstr "Viaggi marittimi: Mostra spedizioni in attesa"
 
 #: ../../src/wlapplication_options.cc:674
 msgid "Seafaring: Show Scouting Expeditions"
@@ -7415,20 +7416,20 @@ msgstr "Restituisce:"
 msgid "Watch the scout"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:636
+#: ../../src/wui/buildingwindow.cc:640
 msgid "Hide work area"
 msgstr "Nascondi area di lavoro"
 
-#: ../../src/wui/buildingwindow.cc:639
+#: ../../src/wui/buildingwindow.cc:643
 msgid "Show work area"
 msgstr "Visualizza area di lavoro"
 
-#: ../../src/wui/buildingwindow.cc:664
+#: ../../src/wui/buildingwindow.cc:668
 #: ../../src/wui/constructionsitewindow.cc:336
 msgid "Start an expedition"
 msgstr "Inizia una spedizione"
 
-#: ../../src/wui/buildingwindow.cc:668
+#: ../../src/wui/buildingwindow.cc:672
 msgid "Cancel the expedition"
 msgstr "Annulla la spedizione"
 
@@ -8478,7 +8479,7 @@ msgstr "Traghetti"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:41
 msgid "Artifacts"
-msgstr "Manufatti"
+msgstr "Manufatti preziosi"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:45
@@ -9207,15 +9208,15 @@ msgstr "Lavoratori nei magazzini"
 
 #: ../../src/wui/story_message_box.cc:63
 msgid "Next Mission"
-msgstr ""
+msgstr "Prossima missione"
 
 #: ../../src/wui/story_message_box.cc:64
 msgid "Start the next mission now"
-msgstr ""
+msgstr "Inizia ora la prossima missione"
 
 #: ../../src/wui/story_message_box.cc:109
 msgid "Continue playing this mission"
-msgstr ""
+msgstr "Continua questa missione"
 
 #. * TRANSLATORS: Label for the list of suggested teams when choosing a map
 #: ../../src/wui/suggested_teams_box.cc:84

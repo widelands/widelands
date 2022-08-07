@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:295
 msgid "Opol Makes A Point"
-msgstr ""
+msgstr "Opol figyelmeztet"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:298
@@ -627,13 +627,17 @@ msgid ""
 "needing spidercloth for completion, not completing one in time will result "
 "in a crisis that can never be resolved."
 msgstr ""
+"%s! Úgy tűnik, van még egy ennél is sürgősebb probléma. Attól tartok, nem "
+"építettünk még földbirtokot, így nem lesz mivel etetni a pókokat. Mivel ez "
+"az egyik épület, amihez szükség van pókszövetre, ha nem építünk egyet "
+"időben, akkor olyan krízis áll elő, amiből nincs kiút."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:302
 #, lua-format
 msgid "%s Acknowledges"
-msgstr ""
+msgstr "%s nyugtázza"
 
 #. TRANSLATORS: either Jundlina or Sidolus depending who is in charge
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:305
@@ -641,12 +645,14 @@ msgid ""
 "I see the risk, Opol. Thank you for reporting. We will build a farm "
 "immediately."
 msgstr ""
+"Látom a veszélyt, Opol. Köszönöm, hogy jelentetted. Azonnal építünk egy "
+"földbirtokot."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:317
 msgid "Opol Reports Success"
-msgstr ""
+msgstr "Opol sikert jelent"
 
 #. TRANSLATORS: Opol (placeholder is the name of the current leader)
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:320
@@ -657,6 +663,10 @@ msgid ""
 " finest cloth and some tabards soon. Maybe we can build a gold spinning mill"
 " later on to make better tabards as well."
 msgstr ""
+"Satul melegítsen, %s! Elkészült a szövőmalom és a póktenyészet, így a "
+"takácsok céhe újra munkához láthat. Ígérem, hamarosan leszállítjuk a legjobb"
+" szöveteket és néhány köntöst is. Ha később építhetünk egy aranyszálfonó "
+"malmot is, akkor még jobb köntösöket tudunk majd készíteni."
 
 #. TRANSLATORS: placeholder is the name of the current leader (either Jundlina
 #. or Sidolus)
@@ -672,11 +682,13 @@ msgid ""
 "This is good news indeed, Opol. You may go back to your work now, and may "
 "Satul warm you and the weavers’ guild!"
 msgstr ""
+"Ez valóban jó hír, Opol. Visszatérhetsz a munkádhoz. Satul melegítsen téged "
+"és a takácsok céhét!"
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:336
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:351
 msgid "Sidolus Reports Foreign Inhabitants"
-msgstr ""
+msgstr "Sidolus idegenekről jelent"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:339
@@ -686,11 +698,14 @@ msgid ""
 "land governed by foreigners, but we do not yet know what to expect from "
 "them."
 msgstr ""
+"Satul melegítsen, Jundlina! Aggasztó híreim vannak. Idegenek által "
+"ellenőrzött területet láttunk, de még nem tudjuk, hogy mire számítsunk "
+"tőlük."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:342
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:357
 msgid "Jundlina Is Concerned"
-msgstr ""
+msgstr "Jundlina aggódik"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:345
@@ -698,6 +713,8 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. "
 "Hopefully our scout will get us some information soon."
 msgstr ""
+"Egyetértek, Sidolus, ez valóban nagyon aggasztó. Többet kell kiderítenünk. "
+"Remélem, a felderítőnk hamarosan további információkat hoz nekünk."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:360
@@ -705,10 +722,13 @@ msgid ""
 "Sidolus, I agree this is very concerning. We need to find out more. We "
 "definitely need to send out a scout to gather some information."
 msgstr ""
+"Egyetértek, Sidolus, ez valóban nagyon aggasztó. Többet kell kiderítenünk. "
+"Mindenképpen ki kell küldenünk egy felderítőt, hogy további információkat "
+"hozzon nekünk."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:366
 msgid "Allies?"
-msgstr ""
+msgstr "Szövetségesek?"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:369
@@ -717,6 +737,9 @@ msgid ""
 " are in big trouble as they are at war with a mighty tribe in the north. "
 "They ask us for support."
 msgstr ""
+"Satul melegítsen, Jundlina! Kapcsolatba léptünk az idegenekkel. Nagy bajban "
+"vannak, mert hadban állnak egy nagy hatalmú törzzsel északon. A "
+"segítségünket kérik."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:372
 msgid "Jundlina Is Cautious"

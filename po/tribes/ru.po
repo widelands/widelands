@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-01 04:22+0000\n"
+"POT-Creation-Date: 2022-08-04 03:51+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Владимир Шевцов, 2022\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
@@ -1296,7 +1296,6 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Пекарня маниоки"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1713,7 +1712,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Каменотесный цех"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1748,8 +1746,6 @@ msgstr "делает кирку"
 msgid "making a machete"
 msgstr "кует мачете"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1760,7 +1756,6 @@ msgstr "кует мачете"
 msgid "making kitchen tools"
 msgstr "делает кухонную утварь"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1778,9 +1773,9 @@ msgstr "делает молоток"
 msgid "making a chisel"
 msgstr "делает зубило"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1936,7 +1931,6 @@ msgstr "Палатка дикосея"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -5290,8 +5284,8 @@ msgstr "Бальзамовое дерево"
 msgid "Balsa Tree (Pole)"
 msgstr "Бальзамовое дерево (средневозрастное)"
 
-#. TRANSLATORS: This is an amazon rare tree.
 #. TRANSLATORS:  This is an amazon rare tree.
+#. TRANSLATORS: This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11

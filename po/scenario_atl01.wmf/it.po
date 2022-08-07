@@ -15,6 +15,7 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2017,2020
+# Log Merger, 2022
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 msgid ""
 msgstr ""
@@ -22,7 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-07-01 04:08+0000\n"
 "PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: af24e571988b09e5b46468ac89010e87_d1b4333, 2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -691,7 +692,7 @@ msgid ""
 "please remember that our toolsmiths need to be equipped with a saw. Making "
 "tools is an art for us, requiring a precise tool like a saw, not a brutal "
 "hammer like for the other tribes."
-msgstr ""
+msgstr "Che Satul riscaldi anche te, Loftomor. Sto ascoltando buone notizie. Ti prego comunque di ricordare che i nostri fabbri devono essere equipaggiati con una sega. Fare utensili è per noi un'arte, che richiede un attrezzo di precisione come una sega e non un brutale martello, come per le altre tribù."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
 msgid "Jundlina Writes a Letter"
@@ -751,7 +752,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "Non mi importa del costo e del lavoro finchè mantiene la tua gente a bada. Avrete i vostri edifici. Ma nota che non tollererò alcun soldato malvivente; se cose simili si ripeteranno, ti riterrò responsabile per loro. Congedati."
+msgstr "Non sono preoccupato per il costo ed il lavoro, finchè le tua truppe saranno tenute a bada. Avrete i vostri edifici. Ma attento, non tollererò più alcun soldato insubordinato; se episodi del genere si ripeteranno, ti riterrò responsabile per loro. Congedati."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid "Jundlina Received a Letter"
@@ -765,7 +766,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Ho ricevuto un invito da Sidolus. Il primo giorno di addestramento nel labirinto appena terminato sarà domani. Le segrete sono terminate anch'esse, e inizieranno presto il loro lavoro. Sto guardando a domani; Sono veramente interessato in come i nostri soldati vengono addestrati, e mi domando se il carico di lavoro supplementare li terrà distanti dal bullizzare la popolazione civile."
+msgstr "Ho ricevuto un invito da Sidolus. domani sarà il primo giorno di addestramento nel labirinto appena terminato. Le segrete sono terminate anch'esse, e presto inizieranno il loro lavoro. Sto guardando al domani; sono veramente interessato a come i nostri soldati vengono addestrati, e mi domando se il carico di lavoro supplementare li terrà distanti dal bullizzare la popolazione civile."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:379
 msgid "Jundlina Considers the Economy"
@@ -794,7 +795,7 @@ msgstr "Una scoperta pericolosa"
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
 msgid "Jundlina is in Thought"
-msgstr "Jundlina sta pensando"
+msgstr "Jundlina è pensierosa"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
@@ -805,7 +806,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr "Abbiamo trovato un vecchio edifico, distrutto e bruciato dalle fiamme. Sono molto preoccupato da questa scoperta. L'edificio è di un tipo che non ho mai visto. Sicuramente non è stato progettato da alcun architetto atlantideo di cui abbia sentito parlare. L'edificio è grezzo, il montaggio è disordinato. Ma i materiali sono molto durevoli: la legna usata sembra essere stata bruciata in uno strano modo prima di essere utilizzata come materiale da costruzione – è dura come la pietra."
+msgstr "Abbiamo trovato un vecchio edifico, distrutto e bruciato dalle fiamme. Sono molto preoccupato da questa scoperta. L'edificio è di un tipo che non ho mai visto. Sicuramente non è stato progettato da alcun architetto atlantideo di cui abbia sentito parlare. L'edificio è grezzo, il montaggio è disordinato. Ma i materiali sono molto durevoli: la legna usata sembra essere stata temprata in uno strano modo prima di essere utilizzata come materiale da costruzione – è dura come la pietra."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
@@ -814,7 +815,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr "Le implicazioni mi spaventano. Ci sono altri su quest'isola? Dove sono,  allora? Lavorano con il fuoco, pregano quindi Satul anche loro? Sono amici o nemici? E perchè questo edifico è stato bruciato? Quest'isola ha conosciuto la guerra? Ce n'è una in corso proprio ora?"
+msgstr "Le implicazioni mi spaventano. Ci sono altri su quest'isola? Dove sono, allora? Lavorano con il fuoco, quindi anche loro pregano Satul? Sono amici o nemici? E perchè questo edifico è stato bruciato? Quest'isola ha conosciuto la guerra? Ce n'è una in corso proprio ora?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:406
@@ -949,7 +950,7 @@ msgstr "Congratulazioni"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "Hai completato questa missione. Puoi continuare a giocare, se lo desideri, altrimenti passa alla prossima missione."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
