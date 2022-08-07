@@ -135,7 +135,6 @@ MutexLock::ID MutexLock::create_custom_mutex() {
 	return last_custom_mutex_;
 }
 
-#ifdef MUTEX_LOCK_DEBUG
 static std::string to_string(const MutexLock::ID i) {
 	switch (i) {
 	case MutexLock::ID::kLogicFrame:
@@ -148,12 +147,15 @@ static std::string to_string(const MutexLock::ID i) {
 		return "Messages";
 	case MutexLock::ID::kIBaseVisualizations:
 		return "IBaseVisualizations";
+	case MutexLock::ID::kLog:
+		return "Log";
+	case MutexLock::ID::kLua:
+		return "Lua";
 	case MutexLock::ID::kI18N:
 		return "i18n";
 	}
 	return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 }
-#endif
 
 constexpr uint32_t kMutexPriorityLockInterval = 2;
 constexpr uint32_t kMutexNormalLockInterval = 30;
@@ -164,8 +166,8 @@ std::mutex MutexLock::s_mutex_;
 MutexLock::MutexLock(ID i) : MutexLock(i, []() {}) {
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
+	const uint32_t start_time = SDL_GetTicks();
 #ifdef MUTEX_LOCK_DEBUG
-	const uint32_t time = SDL_GetTicks();
 	uint32_t counter = 0;
 	log_dbg("Starting to lock mutex %s (run_while_waiting) ...", to_string(id_).c_str());
 #endif
@@ -190,6 +192,11 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 	uint32_t last_function_call = 0;
 	while (!record.mutex.try_lock()) {
 		const uint32_t now = SDL_GetTicks();
+		if (now - start_time > 1000) {
+			verb_log_dbg("WARNING: Locking mutex %s, already waiting for %d ms",
+			             to_string(id_).c_str(), now - start_time);
+		}
+
 		if (now - last_function_call > sleeptime) {
 			run_while_waiting();
 			last_function_call = SDL_GetTicks();
@@ -211,7 +218,7 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
-	        SDL_GetTicks() - time, counter);
+	        SDL_GetTicks() - start_time, counter);
 #endif
 }
 MutexLock::~MutexLock() {
