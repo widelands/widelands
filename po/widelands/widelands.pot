@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-01 04:22+0000\n"
+"POT-Creation-Date: 2022-08-07 03:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -260,8 +260,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -275,10 +275,10 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -405,7 +405,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
 #: ../../src/map_io/map_saver.cc:155
-#: ../../src/map_io/widelands_map_loader.cc:261
+#: ../../src/map_io/widelands_map_loader.cc:268
 msgid "Resources"
 msgstr ""
 
@@ -480,9 +480,9 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether building spaces are
+#. * shown
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
 #: ../../src/wui/interactive_gamebase.cc:227
@@ -578,8 +578,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:1622
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:103
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:293
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:551
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:683
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:563
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:706
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:455
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
@@ -607,7 +607,7 @@ msgid "Loading map “%s”…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1101
+#: ../../src/editor/editorinteractive.cc:1099
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -616,7 +616,7 @@ msgid "No Name"
 msgstr ""
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1104
+#: ../../src/editor/editorinteractive.cc:1102
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -624,7 +624,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1128
+#: ../../src/editor/editorinteractive.cc:1126
 msgid "Loading world…"
 msgstr ""
 
@@ -731,8 +731,8 @@ msgstr ""
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -906,8 +906,8 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/manager.cc:258
 #: ../../src/ui_fsmenu/addons/packager.cc:110
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:175
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:458
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:657
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:462
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:680
 #: ../../src/ui_fsmenu/helpwindow.cc:56
 #: ../../src/ui_fsmenu/keyboard_options.cc:68
 #: ../../src/ui_fsmenu/keyboard_options.cc:230 ../../src/ui_fsmenu/menu.cc:143
@@ -928,7 +928,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/addons/contact.cc:56
 #: ../../src/ui_fsmenu/addons/login_box.cc:61
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:191
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:466
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:470
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:63
 #: ../../src/ui_fsmenu/keyboard_options.cc:63
 #: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
@@ -1025,8 +1025,8 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1472,7 +1472,7 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
 #: ../../src/map_io/map_saver.cc:101
-#: ../../src/map_io/widelands_map_loader.cc:198
+#: ../../src/map_io/widelands_map_loader.cc:205
 msgid "Elemental data"
 msgstr ""
 
@@ -1489,7 +1489,7 @@ msgid "Command queue"
 msgstr ""
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
-#: ../../src/map_io/widelands_map_loader.cc:387
+#: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:538
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_player.cc:463
@@ -1727,19 +1727,19 @@ msgstr ""
 msgid "Creating player %d…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:319
+#: ../../src/logic/editor_game_base.cc:322
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:580
+#: ../../src/logic/editor_game_base.cc:579
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:586
+#: ../../src/logic/editor_game_base.cc:585
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:589
+#: ../../src/logic/editor_game_base.cc:588
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
@@ -1749,24 +1749,24 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:379
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:622
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:640 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1775,15 +1775,15 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:740
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1190
+#: ../../src/logic/game.cc:1189
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1192
+#: ../../src/logic/game.cc:1191
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1864,7 +1864,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:503
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
@@ -2209,7 +2209,7 @@ msgstr ""
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
-#: ../../src/map_io/widelands_map_loader.cc:322
+#: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:149
 #: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
 msgid "Buildings"
@@ -2449,47 +2449,47 @@ msgid "Autosaving map…"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:121
-#: ../../src/map_io/widelands_map_loader.cc:223
+#: ../../src/map_io/widelands_map_loader.cc:230
 msgid "Heights"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:128
-#: ../../src/map_io/widelands_map_loader.cc:230
+#: ../../src/map_io/widelands_map_loader.cc:237
 msgid "Terrains"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:135
-#: ../../src/map_io/widelands_map_loader.cc:243
+#: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Starting positions"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:163
-#: ../../src/map_io/widelands_map_loader.cc:271
+#: ../../src/map_io/widelands_map_loader.cc:278
 msgid "Map version"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:175
-#: ../../src/map_io/widelands_map_loader.cc:277
+#: ../../src/map_io/widelands_map_loader.cc:284
 msgid "Building restrictions"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:200
-#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:177
+#: ../../src/map_io/widelands_map_loader.cc:309 ../../src/wui/minimap.cc:177
 msgid "Flags"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:207
-#: ../../src/map_io/widelands_map_loader.cc:309
+#: ../../src/map_io/widelands_map_loader.cc:316
 msgid "Roads and waterways"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:229
-#: ../../src/map_io/widelands_map_loader.cc:239
+#: ../../src/map_io/widelands_map_loader.cc:246
 msgid "Map objects"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:238
-#: ../../src/map_io/widelands_map_loader.cc:395
+#: ../../src/map_io/widelands_map_loader.cc:402
 msgid "Win condition"
 msgstr ""
 
@@ -2510,17 +2510,17 @@ msgid "Territory"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:288
-#: ../../src/map_io/widelands_map_loader.cc:377
+#: ../../src/map_io/widelands_map_loader.cc:384
 msgid "Vision"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:297
-#: ../../src/map_io/widelands_map_loader.cc:412
+#: ../../src/map_io/widelands_map_loader.cc:419
 msgid "Scripting"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:304
-#: ../../src/map_io/widelands_map_loader.cc:405
+#: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:529
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:211
@@ -2528,7 +2528,7 @@ msgid "Objectives"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:308
-#: ../../src/map_io/widelands_map_loader.cc:419
+#: ../../src/map_io/widelands_map_loader.cc:426
 msgid "Images"
 msgstr ""
 
@@ -2543,7 +2543,7 @@ msgid ""
 "are sorry, but this savegame seems to be broken beyond repair."
 msgstr ""
 
-#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
+#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:189
 msgid "Loading map…"
 msgstr ""
 
@@ -2551,32 +2551,32 @@ msgstr ""
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:195
+#: ../../src/map_io/widelands_map_loader.cc:202
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:290
+#: ../../src/map_io/widelands_map_loader.cc:297
 msgid "Territories"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:330
+#: ../../src/map_io/widelands_map_loader.cc:337
 msgid "Initializing flags"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:337
+#: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing roads and waterways"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:350
+#: ../../src/map_io/widelands_map_loader.cc:357
 msgid "Initializing buildings"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:357
+#: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing map objects"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:422
+#: ../../src/map_io/widelands_map_loader.cc:429
 msgid "Checking map"
 msgstr ""
 
@@ -3931,7 +3931,7 @@ msgid "–"
 msgstr ""
 
 #: ../../src/ui_fsmenu/addons/packager.cc:86
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:772
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:795
 msgid "Delete this add-on"
 msgstr ""
 
@@ -4421,95 +4421,95 @@ msgctxt "priority"
 msgid "High"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:477
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:481
 msgid "Please explain why you are deleting this add-on."
 msgstr ""
 
 #. * TRANSLATORS: This add-on has not yet been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:494
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:498
 msgid "Unchecked"
 msgstr ""
 
 #. * TRANSLATORS: This add-on has been verified
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:496
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:394
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:419
 msgid "Verified"
 msgstr ""
 
 #. * TRANSLATORS: This add-on is known to cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:500
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:504
 msgid "Desyncs"
 msgstr ""
 
 #. * TRANSLATORS: This add-on will not cause desyncs
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:502
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:506
 msgid "Sync-safe"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:615
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:638
 msgid "Your vote"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:639
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:662
 msgid "Next screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:648
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:671
 msgid "Previous screenshot"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:656
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:679
 msgid "Write a comment…"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:666
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:689
 msgid "Administrator actions"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:673
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:696
 msgid "Not voted"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:684
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:707
 #, c-format
 msgid ""
 "The vote could not be submitted.\n"
 "Error code: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:744
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
 #, c-format
 msgid "Screenshots (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:767
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:790
 msgid "Change verification status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:768
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:791
 msgid "Change quality rating"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:769
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:792
 msgid "Change sync-safety status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:771
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:794
 msgid "Configure Transifex integration"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:822
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:845
 #, c-format
 msgid "Comments (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:823
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:846
 #, c-format
 msgid "Votes (%u)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:827
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:850
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:473
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
@@ -4517,51 +4517,51 @@ msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:830
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:853
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:476
 msgid "No votes yet"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:848
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:871
 msgid "No comments yet."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:849
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:860
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:883
 #, c-format
 msgid "%1$s (edited on %2$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:866
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:889
 #, c-format
 msgid "%1$s (edited by ‘%2$s’ on %3$s)"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:872
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:895
 #, c-format
 msgid "‘%1$s’ commented on version %2$s:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:898
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:921
 #, c-format
 msgid "%1$u / %2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:934
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:957
 msgid "This screenshot could not be fetched from the server due to an error."
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:952
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:975
 msgid "Please log in to comment"
 msgstr ""
 
-#: ../../src/ui_fsmenu/addons/remote_interaction.cc:954
+#: ../../src/ui_fsmenu/addons/remote_interaction.cc:977
 msgid "Please log in to vote"
 msgstr ""
 
@@ -7285,20 +7285,20 @@ msgstr ""
 msgid "Watch the scout"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:636
+#: ../../src/wui/buildingwindow.cc:640
 msgid "Hide work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:639
+#: ../../src/wui/buildingwindow.cc:643
 msgid "Show work area"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:664
+#: ../../src/wui/buildingwindow.cc:668
 #: ../../src/wui/constructionsitewindow.cc:336
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:668
+#: ../../src/wui/buildingwindow.cc:672
 msgid "Cancel the expedition"
 msgstr ""
 

@@ -777,6 +777,11 @@ msgid ""
 "remain on this island for such a long time that you will never accomplish "
 "the objective of your futile journey. Despair in your triumph!"
 msgstr ""
+"Mireu on ens ha conduït la vostra bogeria. La tempesta brama i estem aquí "
+"encallats sense el port que vau cremar. Els déus són justos. Encara que "
+"pareix que sou més fort que nosaltres en combat, us forcen a quedar-vos a "
+"l'illa tant temps que mai complireu l'objectiu del vostre viatge fútil. "
+"Desespereu-vos en el triomf!"
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:331
@@ -784,6 +789,8 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
+"És un desastre! Hem arribat a l'altra costa, però ja hi ha una altra tribu "
+"assentada. No ens deixaran desembarcar."
 
 #. TRANSLATORS: Claus Lembeck – lost
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:334
