@@ -1579,8 +1579,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
  */
-bool Panel::ui_mousemove(
-   uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
+bool Panel::ui_mousemove(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (!allow_user_input_) {
 		return true;
 	}

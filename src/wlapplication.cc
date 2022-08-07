@@ -1085,8 +1085,6 @@ void WLApplication::warp_mouse(const Vector2i position) {
 			}
 		}
 	}
-
-
 }
 
 /**
