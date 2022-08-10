@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-04 03:51+0000\n"
+"POT-Creation-Date: 2022-08-07 03:41+0000\n"
 "PO-Revision-Date: 2015-02-03 14:53+0000\n"
 "Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -31,11 +31,11 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
-#. TRANSLATORS: Helptext for an empire ware: Log, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
+#. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:88
 #: ../../data/tribes/initialization/atlanteans/units.lua:429
 #: ../../data/tribes/initialization/barbarians/units.lua:111
@@ -54,8 +54,9 @@ msgid ""
 "Amazon woodcutters fell trees and jungle preservers will plant them. The "
 "resulting logs are used by the stone carver. The charcoal kiln also needs "
 "logs to produce charcoal."
-msgstr ""
+msgstr "I taglialegna Amazzoni abbattono gli alberi mentre i guardagiungla li ripiantano. I tronchi prodotti sono usati dall'intagliatore. Anche la carbonaia necessita di tronchi per produrre carbone vegetale."
 
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% is the maximum number of soldier slots in the building.
@@ -183,9 +184,8 @@ msgstr ""
 #. Each subtable is a column in the wares windows.
 #. Building Materials
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
-#. TRANSLATORS: Helptext for an empire ware: Granite, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:101
 #: ../../data/tribes/initialization/atlanteans/units.lua:417
 #: ../../data/tribes/initialization/barbarians/units.lua:99
@@ -241,11 +241,11 @@ msgid ""
 "construct buildings and ships."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
-#. TRANSLATORS: Helptext for an empire ware: Water, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
+#. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:169
 #: ../../data/tribes/initialization/atlanteans/units.lua:515
 #: ../../data/tribes/initialization/barbarians/units.lua:181
@@ -351,7 +351,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce armor."
-msgstr ""
+msgstr "Liquefatto in fonderia si trasforma in oro, utilizzato come pregiato materiale da costruzione e nella produzione di armi ed armature."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:275
@@ -381,10 +381,10 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "I picconi sono usati dai tagliapietre per estrarre granito dalle rocce o nelle miniere."
 
-#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
-#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:313
 #: ../../data/tribes/initialization/barbarians/units.lua:344
 #: ../../data/tribes/initialization/empire/units.lua:381
@@ -397,13 +397,13 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:315
 msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
-msgstr ""
+msgstr "È utilizzata da un taglialegna e prodotta da un intagliatore."
 
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:326
 #: ../../data/tribes/initialization/atlanteans/units.lua:678
 #: ../../data/tribes/initialization/barbarians/units.lua:357
@@ -419,13 +419,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
 "use them. They are produced by the stone carver."
-msgstr ""
+msgstr "Le usano perciò il guardagiungla, il coltivatore di manioca ed il coltivatore di cacao. Sono prodotte dall'intagliatore."
 
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:339
 #: ../../data/tribes/initialization/atlanteans/units.lua:691
 #: ../../data/tribes/initialization/barbarians/units.lua:370
@@ -442,7 +442,7 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "Geologi, costruttori, maestri d'ascia ed intagliatori: tutti necessitano di martelli. Assicurati di averne sempre di scorta! Sono prodotti dall'intagliatore."
 
 #. TRANSLATORS: Helptext for an amazon ware: Machete
 #: ../../data/tribes/initialization/amazons/units.lua:352
@@ -457,7 +457,7 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr ""
+msgstr "Questa lancia è l'arma fondamentale dell'organizzazione militare Amazzone. È prodotta dall'intagliatore. Assieme ad una tunica, costituisce la dotazione per equipaggiare un giovane soldato."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:365
@@ -469,7 +469,7 @@ msgstr ""
 #: ../../data/tribes/initialization/amazons/units.lua:376
 msgctxt "ware"
 msgid "The chisel is an essential tool."
-msgstr ""
+msgstr "Lo scalpello è un attrezzo essenziale."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chisel, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:378
@@ -477,7 +477,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Gl'intagliatori necessitano di uno scalpello. Assicurati di averne sempre di scorta: essi sono prodotti dall'intagliatore stesso!"
 
 #. TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
 #: ../../data/tribes/initialization/amazons/units.lua:389
@@ -486,7 +486,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, baking cassava bread and "
 "brewing chocolate. Be sure to have a stone carver to produce this basic "
 "tool."
-msgstr ""
+msgstr "Gli attrezzi da cucina sono indispensabili per preparare razioni, infornare manioca e imbottigliare cioccolata. Accertati di avere un intagliatore in modo da poter produrre questi fondamentali attrezzi."
 
 #. TRANSLATORS: Helptext for an amazon ware: Needles
 #: ../../data/tribes/initialization/amazons/units.lua:400
@@ -756,16 +756,16 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an empire immovable: Ashes
-#. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a frisian immovable: Ashes
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an empire immovable: Ashes
+#. TRANSLATORS: Helptext for an empire immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/amazons/units.lua:764
 #: ../../data/tribes/initialization/atlanteans/units.lua:1128
@@ -779,13 +779,13 @@ msgstr ""
 msgid "The remains of a destroyed building."
 msgstr "I resti di un edificio distrutto."
 
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
 #: ../../data/tribes/initialization/amazons/units.lua:771
 #: ../../data/tribes/initialization/atlanteans/units.lua:1322
 #: ../../data/tribes/initialization/barbarians/units.lua:989
@@ -896,12 +896,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1170
@@ -911,12 +911,12 @@ msgstr ""
 msgid "This field has just been planted."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1142
@@ -931,12 +931,12 @@ msgstr ""
 msgid "This field is growing."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1135
 #: ../../data/tribes/initialization/atlanteans/units.lua:1156
 #: ../../data/tribes/initialization/atlanteans/units.lua:1191
@@ -946,12 +946,12 @@ msgstr ""
 msgid "This field is ready for harvesting."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
-#. TRANSLATORS: Helptext for an empire immovable: Wheat field
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
+#. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #: ../../data/tribes/initialization/amazons/units.lua:1142
 #: ../../data/tribes/initialization/atlanteans/units.lua:1163
 #: ../../data/tribes/initialization/atlanteans/units.lua:1198
@@ -981,11 +981,11 @@ msgstr ""
 msgid "The beans on this cocoa tree are ready for harvesting."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
-#. TRANSLATORS: Helptext for an empire resource indicator: No resources
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
+#. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1177
 #: ../../data/tribes/initialization/atlanteans/units.lua:1212
 #: ../../data/tribes/initialization/barbarians/units.lua:879
@@ -1002,11 +1002,11 @@ msgid ""
 "digger dwellings."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1187
 #: ../../data/tribes/initialization/atlanteans/units.lua:1251
 #: ../../data/tribes/initialization/barbarians/units.lua:918
@@ -1022,8 +1022,8 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1198
 #: ../../data/tribes/initialization/barbarians/units.lua:929
@@ -1031,11 +1031,11 @@ msgstr ""
 msgid "There is only a little bit of granite here."
 msgstr ""
 
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1209
 #: ../../data/tribes/initialization/atlanteans/units.lua:1295
 #: ../../data/tribes/initialization/barbarians/units.lua:962
@@ -1044,8 +1044,8 @@ msgstr ""
 msgid "There is a lot of gold here."
 msgstr "C'è molto oro qui."
 
-#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1220
 #: ../../data/tribes/initialization/barbarians/units.lua:973
@@ -1053,11 +1053,11 @@ msgstr "C'è molto oro qui."
 msgid "There is a lot of granite here."
 msgstr "C'è molto granito qui."
 
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1228
 #: ../../data/tribes/initialization/atlanteans/units.lua:1314
 #: ../../data/tribes/initialization/barbarians/units.lua:981
@@ -1674,11 +1674,11 @@ msgid ""
 "between ports."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Lore helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1614
 #: ../../data/tribes/initialization/atlanteans/units.lua:2000
 #: ../../data/tribes/initialization/barbarians/units.lua:1789
@@ -1688,13 +1688,13 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr ""
 
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
-#. TRANSLATORS: Lore author helptext for an empire building: Construction Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
+#. TRANSLATORS: Lore author helptext for an empire building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1616
 #: ../../data/tribes/initialization/atlanteans/units.lua:2002
 #: ../../data/tribes/initialization/barbarians/units.lua:1791
@@ -1704,11 +1704,11 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr ""
 
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
-#. TRANSLATORS: Purpose helptext for an empire building: Construction Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1618
 #: ../../data/tribes/initialization/atlanteans/units.lua:2004
 #: ../../data/tribes/initialization/barbarians/units.lua:1793
@@ -1718,11 +1718,11 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "Un nuovo edificio sta venendo costruito in questo cantiere"
 
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1625
 #: ../../data/tribes/initialization/atlanteans/units.lua:2011
 #: ../../data/tribes/initialization/barbarians/units.lua:1800
@@ -1732,11 +1732,11 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr ""
 
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1627
 #: ../../data/tribes/initialization/atlanteans/units.lua:2013
 #: ../../data/tribes/initialization/barbarians/units.lua:1802
@@ -1746,11 +1746,11 @@ msgctxt "building"
 msgid "Proverb"
 msgstr "Proverbio"
 
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1629
 #: ../../data/tribes/initialization/atlanteans/units.lua:2015
 #: ../../data/tribes/initialization/barbarians/units.lua:1804
@@ -1874,7 +1874,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr "La seta di ragno è secreta dai ragni, che sono allevati negli allevamenti di ragni. È processata in tessuto di ragno in un mulino di tessitura."
+msgstr "La seta di ragno è secreta dai ragni, che sono cresciuti in appositi allevamenti. Con essa. uno stabilimento tessile produce stoffa di ragno."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Spidercloth
 #: ../../data/tribes/initialization/atlanteans/units.lua:465
@@ -1883,7 +1883,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "La stoffa di ragno è prodotta in uno stabilimento tessile a partire dalla seta di ragno. Viene utilizzata dalla fucina di strumenti e dal cantiere navale. È anche necessaria nella costruzione di alcuni degli edifici più avanzati."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Fish
 #: ../../data/tribes/initialization/atlanteans/units.lua:476
@@ -1904,8 +1904,8 @@ msgstr "Dal momento che nessun Atlantideo ama il pesce crudo, affumicarlo in un 
 
 #. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
-#. TRANSLATORS: Helptext for an empire ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
+#. TRANSLATORS: Helptext for an empire ware: Meat, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:494
 #: ../../data/tribes/initialization/barbarians/units.lua:169
 #: ../../data/tribes/initialization/empire/units.lua:181
@@ -2019,8 +2019,8 @@ msgstr "I fuochi degli atlantidei nelle fonderie, fucine di armature e fucine di
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron Ore, part 1
-#. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron Ore, part 1
+#. TRANSLATORS: Helptext for an empire ware: Iron Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:605
 #: ../../data/tribes/initialization/barbarians/units.lua:280
 #: ../../data/tribes/initialization/empire/units.lua:317
@@ -2037,8 +2037,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a barbarian ware: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Iron, part 1
-#. TRANSLATORS: Helptext for an empire ware: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Iron, part 1
+#. TRANSLATORS: Helptext for an empire ware: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:618
 #: ../../data/tribes/initialization/barbarians/units.lua:293
 #: ../../data/tribes/initialization/empire/units.lua:330
@@ -2057,8 +2057,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Ore, part 1
-#. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold Ore, part 1
+#. TRANSLATORS: Helptext for an empire ware: Gold Ore, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:631
 #: ../../data/tribes/initialization/barbarians/units.lua:306
 #: ../../data/tribes/initialization/empire/units.lua:343
@@ -2073,12 +2073,12 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Liquefatto in fonderia si trasforma in oro, utilizzato come pregiato materiale da costruzione e nella produzione di armi ed armature."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Gold, part 1
-#. TRANSLATORS: Helptext for an empire ware: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 1
+#. TRANSLATORS: Helptext for an empire ware: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:644
 #: ../../data/tribes/initialization/barbarians/units.lua:319
 #: ../../data/tribes/initialization/empire/units.lua:356
@@ -2102,7 +2102,7 @@ msgctxt "ware"
 msgid ""
 "Picks are used by stonecutters and miners. They are produced by the "
 "toolsmith."
-msgstr "I picconi sono utilizzati da scalpellini, o tagliapietre, e minatori. Sono prodotti dal fabbro."
+msgstr "I picconi sono utilizzati da tagliapietre e minatori. Sono prodotti dal fabbro."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Saw
 #: ../../data/tribes/initialization/atlanteans/units.lua:668
@@ -2165,8 +2165,8 @@ msgstr "Questo palo uncinato è utilizzato dall'affumicatore per appendere la ca
 
 #. TRANSLATORS: Helptext for a barbarian ware: Scythe, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Scythe, part 1
-#. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Scythe, part 1
+#. TRANSLATORS: Helptext for an empire ware: Scythe, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:749
 #: ../../data/tribes/initialization/barbarians/units.lua:409
 #: ../../data/tribes/initialization/empire/units.lua:455
@@ -2183,8 +2183,8 @@ msgstr "Le falci sono prodotte dal fabbro degli strumenti."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Bread Paddle, part 1
-#. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Bread Paddle, part 1
+#. TRANSLATORS: Helptext for an empire ware: Bread Paddle, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:762
 #: ../../data/tribes/initialization/barbarians/units.lua:422
 #: ../../data/tribes/initialization/empire/units.lua:468
@@ -2201,8 +2201,8 @@ msgstr "Le pale per il pane sono prodotte dal fabbro."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Fire Tongs, part 1
-#. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Fire Tongs, part 1
+#. TRANSLATORS: Helptext for an empire ware: Fire Tongs, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:775
 #: ../../data/tribes/initialization/barbarians/units.lua:444
 #: ../../data/tribes/initialization/empire/units.lua:499
@@ -2286,7 +2286,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr ""
+msgstr "Un tabarro ed un tridente leggero sono l'equipaggiamento base per giovani soldati. I tabarri sono prodotti in uno stabilimento tessile."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Gold Thread
 #: ../../data/tribes/initialization/atlanteans/units.lua:862
@@ -2294,7 +2294,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This thread, made of gold by the gold spinning mill, is used for weaving the"
 " exclusive golden tabard in the weaving mill."
-msgstr ""
+msgstr "Questo filato, fatto d'oro nello stabilimento di filatura dell'oro, è usato nello stabilimento tessile per la tessitura del pregiato tabarro dorato."
 
 #. TRANSLATORS: Helptext for an atlantean ware: Golden Tabard
 #: ../../data/tribes/initialization/atlanteans/units.lua:871
@@ -2500,8 +2500,8 @@ msgstr "Esploratori come Scotty l'esploratore esplorano le aree non esplorate al
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Water
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Water
-#. TRANSLATORS: Helptext for an empire resource indicator: Water
 #. TRANSLATORS: Helptext for a frisian resource indicator: Water
+#. TRANSLATORS: Helptext for an empire resource indicator: Water
 #: ../../data/tribes/initialization/atlanteans/units.lua:1219
 #: ../../data/tribes/initialization/barbarians/units.lua:886
 #: ../../data/tribes/initialization/empire/units.lua:947
@@ -2511,8 +2511,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 1
-#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 1
+#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1227
 #: ../../data/tribes/initialization/atlanteans/units.lua:1271
 #: ../../data/tribes/initialization/barbarians/units.lua:894
@@ -2526,8 +2526,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1229
 #: ../../data/tribes/initialization/barbarians/units.lua:896
 #: ../../data/tribes/initialization/empire/units.lua:957
@@ -2537,8 +2537,8 @@ msgstr "C'è solo un pochino di carbone qui."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 1
-#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 1
+#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1238
 #: ../../data/tribes/initialization/atlanteans/units.lua:1282
 #: ../../data/tribes/initialization/barbarians/units.lua:905
@@ -2552,8 +2552,8 @@ msgstr ""
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1240
 #: ../../data/tribes/initialization/barbarians/units.lua:907
 #: ../../data/tribes/initialization/empire/units.lua:968
@@ -2563,8 +2563,8 @@ msgstr "C'è solo un pochino di ferro qui."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 1
-#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 1
+#. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 1
 #: ../../data/tribes/initialization/atlanteans/units.lua:1249
 #: ../../data/tribes/initialization/atlanteans/units.lua:1293
 #: ../../data/tribes/initialization/barbarians/units.lua:916
@@ -2582,17 +2582,17 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Le pietre preziose sono utilizzate per la costruzione di grandi edifici. Esse possono essere estratte in una miniera di cristallo, dalla quale si otterrà anche granito."
 
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1262
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "Qui troviamo ben poche pietre preziose."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Coal, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Coal, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Coal, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1273
 #: ../../data/tribes/initialization/barbarians/units.lua:940
 #: ../../data/tribes/initialization/empire/units.lua:1001
@@ -2602,8 +2602,8 @@ msgstr "C'è molto carbone qui."
 
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Iron, part 2
-#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Iron, part 2
+#. TRANSLATORS: Helptext for an empire resource indicator: Iron, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1284
 #: ../../data/tribes/initialization/barbarians/units.lua:951
 #: ../../data/tribes/initialization/empire/units.lua:1012
@@ -2614,7 +2614,7 @@ msgstr "C'è molto ferro qui."
 #. TRANSLATORS: Helptext for an Atlantean resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/atlanteans/units.lua:1306
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "Abbiamo qui molte pietre preziose."
 
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Balsa
 #. Tree
@@ -2632,18 +2632,18 @@ msgstr ""
 #. Ironwood Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Rubber
 #. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood
-#. Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
-#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood
+#. Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
+#. TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
 #: ../../data/tribes/initialization/atlanteans/units.lua:1329
 #: ../../data/tribes/initialization/atlanteans/units.lua:1336
 #: ../../data/tribes/initialization/atlanteans/units.lua:1343
@@ -2807,9 +2807,9 @@ msgstr ""
 #. Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site:
 #. Woodcutter's House
-#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
-#. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Woodcutter's
+#. House
+#. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1474
 #: ../../data/tribes/initialization/barbarians/units.lua:1152
@@ -2844,9 +2844,9 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Forester's
 #. House
-#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
-#. House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Forester's
+#. House
+#. TRANSLATORS: Purpose helptext for an empire production site: Forester's
 #. House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1487
 #: ../../data/tribes/initialization/barbarians/units.lua:1168
@@ -2955,8 +2955,8 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's
 #. House
-#. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Hunter's House
+#. TRANSLATORS: Purpose helptext for an empire production site: Hunter's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1539
 #: ../../data/tribes/initialization/barbarians/units.lua:1198
 #: ../../data/tribes/initialization/empire/units.lua:1331
@@ -2988,8 +2988,8 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Well
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Well
-#. TRANSLATORS: Purpose helptext for an empire production site: Well
 #. TRANSLATORS: Purpose helptext for a frisian production site: Well
+#. TRANSLATORS: Purpose helptext for an empire production site: Well
 #: ../../data/tribes/initialization/atlanteans/units.lua:1553
 #: ../../data/tribes/initialization/barbarians/units.lua:1226
 #: ../../data/tribes/initialization/empire/units.lua:1352
@@ -3058,8 +3058,8 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Scout's Hut
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Scout's
 #. House
-#. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Scout's House
+#. TRANSLATORS: Purpose helptext for an empire production site: Scout's House
 #: ../../data/tribes/initialization/atlanteans/units.lua:1581
 #: ../../data/tribes/initialization/barbarians/units.lua:1240
 #: ../../data/tribes/initialization/empire/units.lua:1372
@@ -3203,10 +3203,10 @@ msgstr ""
 #. Kiln
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal
 #. Kiln
-#. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal
 #. Burner's House
 #. TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Kiln
+#. TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
 #: ../../data/tribes/initialization/atlanteans/units.lua:1649
 #: ../../data/tribes/initialization/barbarians/units.lua:1375
 #: ../../data/tribes/initialization/empire/units.lua:1579
@@ -3447,7 +3447,7 @@ msgid ""
 "gain the spider silk once a day. There is no need to spin this again. The "
 "thread can directly be used by the weaving mill. Oh hello, here is one of "
 "our nice spiders … Hey! Why are you running away?"
-msgstr ""
+msgstr "No, i ragni non sono alimentati con mais. Li nutriamo con grasse cavallette, poi digerite dai nostri ragni. Li mettiamo su uno speciale dispositivo per ottenere seta di ragno una volta al giorno. Non c'è bisogno di filarla: il filo può essere direttamente utilizzato dallo stabilmento tessile. Oh salve, ecco qui uno dei miei simpatici ragni... Ehi! Perché stai scappando?"
 
 #. TRANSLATORS: Lore author helptext for an atlantean production site: Spider
 #. Farm
@@ -3487,7 +3487,7 @@ msgstr ""
 msgctxt "atlanteans_building"
 msgid ""
 "Carves precious (and normal) stones out of the rock in mountain terrain."
-msgstr ""
+msgstr "Estrae pietre pregiate (e non) dalle rocce di un territorio montuoso."
 
 #. TRANSLATORS: Lore helptext for an atlantean production site: Crystal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1792
@@ -3509,10 +3509,10 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1802
 #: ../../data/tribes/initialization/barbarians/units.lua:1527
 #: ../../data/tribes/initialization/barbarians/units.lua:1542
@@ -3551,10 +3551,10 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron
 #. Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1816
 #: ../../data/tribes/initialization/barbarians/units.lua:1570
 #: ../../data/tribes/initialization/barbarians/units.lua:1583
@@ -3571,10 +3571,10 @@ msgstr "Scava ferro grezzo dal terreno delle montagne"
 #. TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
-#. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
+#. TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
 #: ../../data/tribes/initialization/atlanteans/units.lua:1830
 #: ../../data/tribes/initialization/barbarians/units.lua:1609
 #: ../../data/tribes/initialization/barbarians/units.lua:1622
@@ -3777,8 +3777,8 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Ferry Yard
-#. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Purpose helptext for an empire production site: Ferry Yard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1967
 #: ../../data/tribes/initialization/barbarians/units.lua:1754
 #: ../../data/tribes/initialization/empire/units.lua:2228
@@ -3810,8 +3810,8 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Shipyard
 #. TRANSLATORS: Purpose helptext for an atlantean production site: Shipyard
-#. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
 #. TRANSLATORS: Purpose helptext for a frisian production site: Shipyard
+#. TRANSLATORS: Purpose helptext for an empire production site: Shipyard
 #: ../../data/tribes/initialization/atlanteans/units.lua:1983
 #: ../../data/tribes/initialization/barbarians/units.lua:1768
 #: ../../data/tribes/initialization/empire/units.lua:2251
@@ -4022,8 +4022,8 @@ msgid ""
 msgstr "Solo questa birra è considerata accettabile per i soldati nell'Arena di battaglia. Molti dicono che l'intera potenza dei Barbari risale in questa birra. Aiuta a allenare il livello di schivata dei soldati da 0 a 1 o 2. La birra forte e anche usata nelle grandi locande per preparare le pasti."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
-#. TRANSLATORS: Helptext for an empire ware: Ration, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Ration, part 1
+#. TRANSLATORS: Helptext for an empire ware: Ration, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:233
 #: ../../data/tribes/initialization/empire/units.lua:261
 #: ../../data/tribes/initialization/frisians/units.lua:282
@@ -4086,7 +4086,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Liquefatto in fonderia si trasforma in oro, utilizzato come pregiato materiale da costruzione e nella produzione di armi ed armature."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Gold, part 2
 #: ../../data/tribes/initialization/barbarians/units.lua:321
@@ -4096,7 +4096,7 @@ msgid ""
 "smelting works and used as a precious building material and to produce "
 "different axes (in the war mill) and different parts of armor (in the helm "
 "smithy)."
-msgstr "Soltanto ciò che è molto importante viene arricchito con l'oro. È prodotto in fonderia, a partire dalle pepite d'oro, ed utilizzato come prezioso materiale da costruzione e per la produzione di diverse asce (nella fucina da guerra) e di diverse parti di armature (nella fucina di elmi)"
+msgstr "Soltanto ciò che è molto importante viene arricchito con l'oro. È prodotto in fonderia, a partire dalle pepite d'oro, ed utilizzato come pregiato materiale da costruzione nonché per la produzione di diverse asce (nella fucina da guerra) e di diverse parti di armature (nella fucina di elmi)"
 
 #. TRANSLATORS: Helptext for a barbarian ware: Pick
 #: ../../data/tribes/initialization/barbarians/units.lua:334
@@ -4153,8 +4153,8 @@ msgid ""
 msgstr "Le canne da pesca sono prodotte nell'officina siderurgica (che però smette di produrle se viene potenziata in fabbrica di asce o, successivamente, in fucina da guerra)."
 
 #. TRANSLATORS: Helptext for a barbarian ware: Hunting Spear, part 1
-#. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hunting Spear, part 1
+#. TRANSLATORS: Helptext for an empire ware: Hunting Spear, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:396
 #: ../../data/tribes/initialization/empire/units.lua:442
 #: ../../data/tribes/initialization/frisians/units.lua:456
@@ -5033,8 +5033,8 @@ msgid "Menu of the tavern ‘Ye Ol’ Bronze Axe’"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
-#. TRANSLATORS: Purpose helptext for an empire production site: Tavern
 #. TRANSLATORS: Purpose helptext for a frisian production site: Tavern
+#. TRANSLATORS: Purpose helptext for an empire production site: Tavern
 #: ../../data/tribes/initialization/barbarians/units.lua:1335
 #: ../../data/tribes/initialization/empire/units.lua:1535
 #: ../../data/tribes/initialization/frisians/units.lua:1922
@@ -5729,8 +5729,8 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for production site: Ferry Yard
-#. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
 #. TRANSLATORS: Note helptext for a frisian production site: Ferry Yard
+#. TRANSLATORS: Note helptext for an empire production site: Ferry Yard
 #: ../../data/tribes/initialization/barbarians/units.lua:1756
 #: ../../data/tribes/initialization/empire/units.lua:2230
 #: ../../data/tribes/initialization/frisians/units.lua:2154
@@ -5875,7 +5875,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:151
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr "La lana è il pelo delle pecore. I mulini di tessitura la usano per produrre tessuto."
+msgstr "La lana è il vello delle pecore. Gli stabilimenti tessili la usano per produrre tessuti."
 
 #. TRANSLATORS: Helptext for an empire ware: Cloth
 #: ../../data/tribes/initialization/empire/units.lua:160
@@ -5980,7 +5980,7 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as a building material and gets chiseled into "
 "marble columns in the stonemason’s house."
-msgstr ""
+msgstr "Il marmo è quella meravigliosa pietra estratta dalle montagne o prodotta in una cava. Il marmo è usato come materiale da costruzione ma con esso si scolpiscono anche colonne di marmo nella casa dello scalpellino."
 
 #. TRANSLATORS: Helptext for an empire ware: Marble Column
 #: ../../data/tribes/initialization/empire/units.lua:294
@@ -5989,7 +5989,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr "Le Colonne di marmo rappresentano la sofisticata cultura dell'Impero e sono perciò necessarie per pressoché tutti i maggiori edifici. Sono prodotti a partire dal Marmo, nella Casa del tagliapietre."
+msgstr "Le colonne di marmo rappresentano la sofisticata cultura dell'Impero e sono perciò necessarie per pressoché tutti i maggiori edifici. Sono prodotti a partire dal marmo nella casa dello scalpellino."
 
 #. TRANSLATORS: Helptext for an empire ware: Coal, part 2
 #: ../../data/tribes/initialization/empire/units.lua:306
@@ -6019,7 +6019,7 @@ msgctxt "empire_ware"
 msgid ""
 "Smelted in a smelting works, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Liquefatto in fonderia si trasforma in oro, utilizzato come pregiato materiale da costruzione e nella produzione di armi ed armature."
 
 #. TRANSLATORS: Helptext for an empire ware: Gold, part 2
 #: ../../data/tribes/initialization/empire/units.lua:358
@@ -6035,7 +6035,7 @@ msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
 "toolsmith."
-msgstr "I picconi sono utilizzati da scalpellini, o tagliapietre, e minatori. Sono prodotti dal fabbro."
+msgstr "I picconi sono utilizzati da scalpellini e minatori. Sono prodotti dal fabbro."
 
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/empire/units.lua:383
@@ -6405,8 +6405,8 @@ msgstr ""
 msgid "This grapevine is growing."
 msgstr ""
 
-#. TRANSLATORS: Helptext for an empire immovable: Grapevine
 #. TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
+#. TRANSLATORS: Helptext for an empire immovable: Grapevine
 #: ../../data/tribes/initialization/empire/units.lua:933
 #: ../../data/tribes/initialization/frisians/units.lua:1424
 msgid "This grapevine is ready for harvesting."
@@ -6807,7 +6807,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/units.lua:1393
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
-msgstr "Intaglia colonne di marmo dal marmo."
+msgstr "Dal marmo, scolpisce colonne di marmo."
 
 #. TRANSLATORS: DO NOT TRANSLATE, but you may transliterate into non-latin
 #. fonts.
@@ -8175,7 +8175,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Smelted in a furnace, it turns into gold which is used as a precious "
 "building material and to produce weapons and armor."
-msgstr ""
+msgstr "Liquefatto in fonderia si trasforma in oro, utilizzato come pregiato materiale da costruzione e nella produzione di armi ed armature."
 
 #. TRANSLATORS: Helptext for a frisian ware: Gold, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:361
@@ -8206,7 +8206,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:398
 msgctxt "frisians_ware"
 msgid "Picks are used by stonemasons and miners."
-msgstr "I picconi sono utilizzati da scalpellini, o tagliapietre, e minatori."
+msgstr "I picconi sono utilizzati da scalpellini e minatori."
 
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:410
@@ -8761,7 +8761,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1557
 msgctxt "frisians_building"
 msgid "A stonemason"
-msgstr ""
+msgstr "Uno scalpellino"
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Quarry
 #: ../../data/tribes/initialization/frisians/units.lua:1559
@@ -8780,7 +8780,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
-msgstr ""
+msgstr "Lo scalpellino fa una pausa di %s prima di tornare al lavoro."
 
 #. TRANSLATORS: Lore helptext for a frisian production site: Woodcutter's
 #. House
@@ -9860,7 +9860,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr ""
+msgstr "Lo stabilimento tessile abbisogna mediamente di %s per produrre un tratto di tessuto."
 
 #. TRANSLATORS: Productivity label on a frisian building if there is 1 worker
 #. missing
@@ -10200,9 +10200,9 @@ msgstr "Bene prodotto:"
 msgid "Wares produced:"
 msgstr "Merci prodotte:"
 
-#. TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a
-#. productionsite
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
+#. productionsite
+#. TRANSLATORS: Ware Encyclopedia: 1 special worker or soldier recruited by a
 #. productionsite
 #: ../../data/tribes/scripting/help/building_help.lua:922
 #: ../../data/tribes/scripting/help/worker_help.lua:56
@@ -10427,7 +10427,7 @@ msgstr ""
 #. TRANSLATORS: This is an access key combination. The hotkey is 'e'
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Toggle seafaring statistics"
-msgstr ""
+msgstr "Commuta statistiche sui viaggi marittimi"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -10778,8 +10778,8 @@ msgstr "Giocatore singolo"
 msgid "Multiplayer"
 msgstr "Multiplayer"
 
-#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:51
 #: ../../data/tribes/scripting/help/worker_help.lua:40
 msgid "Producer"

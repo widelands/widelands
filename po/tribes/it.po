@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-04 03:51+0000\n"
+"POT-Creation-Date: 2022-08-07 03:41+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -1711,6 +1711,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1745,6 +1746,8 @@ msgstr "sta producendo un piccone"
 msgid "making a machete"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1755,6 +1758,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "sta producendo degli utensili da cucina"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1770,11 +1774,11 @@ msgstr "sta producendo un martello"
 #. ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
 msgid "making a chisel"
-msgstr ""
+msgstr "produzione di uno scalpello"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1930,6 +1934,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -2236,7 +2241,7 @@ msgstr "Casa della guardia forestale"
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Gold Spinning Mill"
-msgstr "Mulino di tessitura dell'oro"
+msgstr "Stabilimento di filatura dell'oro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start spinning gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:48
@@ -2569,7 +2574,7 @@ msgstr "sta forgiando un tridente doppio pesante"
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because
 #. ...
@@ -2989,7 +2994,7 @@ msgstr "Cava"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:8
@@ -3074,7 +3079,7 @@ msgstr "sta forgiando un'ascia da guerriero"
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:8
 msgctxt "barbarians_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/init.lua:52
@@ -3412,7 +3417,7 @@ msgstr "sta estraendo del marmo"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:8
@@ -3453,7 +3458,7 @@ msgstr "Fonderia"
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:8
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Casa del tagliapietre"
+msgstr "Casa dello scalpellino"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -3543,7 +3548,7 @@ msgstr "sta forgiando una lancia da guerra"
 #: ../../data/tribes/buildings/productionsites/empire/weaving_mill/init.lua:8
 msgctxt "empire_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilimento tessile"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:8
@@ -4012,7 +4017,7 @@ msgstr "Cava"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
+msgstr "Lo scalpellino che lavora in questa cava non trova alcuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:8
@@ -4166,7 +4171,7 @@ msgstr "la preparazione di razioni"
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
 msgctxt "frisians_building"
 msgid "Weaving Mill"
-msgstr "Mulino di tessitura"
+msgstr "Stabilmento tessile"
 
 #. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:70
@@ -5285,6 +5290,7 @@ msgstr ""
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11
@@ -8794,7 +8800,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
 msgctxt "amazons_worker"
 msgid "Stone Carver"
-msgstr ""
+msgstr "Intagliatore"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
@@ -9262,7 +9268,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:8
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:8
@@ -9442,7 +9448,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/empire/stonemason/init.lua:8
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:8
@@ -9688,7 +9694,7 @@ msgstr "Soldato"
 #: ../../data/tribes/workers/frisians/stonemason/init.lua:8
 msgctxt "frisians_worker"
 msgid "Stonemason"
-msgstr "Tagliapietre"
+msgstr "Scalpellino"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/trainer/init.lua:8

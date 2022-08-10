@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-04 03:51+0000\n"
+"POT-Creation-Date: 2022-08-07 03:41+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2016\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
@@ -283,8 +283,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -298,12 +298,12 @@ msgstr "Menú principal"
 msgid "Tools"
 msgstr "Ferramentas"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -430,7 +430,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
 #: ../../src/map_io/map_saver.cc:155
-#: ../../src/map_io/widelands_map_loader.cc:261
+#: ../../src/map_io/widelands_map_loader.cc:268
 msgid "Resources"
 msgstr "Recursos"
 
@@ -505,10 +505,10 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
@@ -638,7 +638,7 @@ msgid "Loading map “%s”…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1101
+#: ../../src/editor/editorinteractive.cc:1099
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -647,7 +647,7 @@ msgid "No Name"
 msgstr "Sen nome"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1104
+#: ../../src/editor/editorinteractive.cc:1102
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -655,7 +655,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:1128
+#: ../../src/editor/editorinteractive.cc:1126
 msgid "Loading world…"
 msgstr ""
 
@@ -764,8 +764,8 @@ msgstr "mina"
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1061,9 +1061,9 @@ msgstr ""
 msgid "Waterway length limit:"
 msgstr ""
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1487,8 +1487,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1518,7 +1518,7 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
 #: ../../src/map_io/map_saver.cc:101
-#: ../../src/map_io/widelands_map_loader.cc:198
+#: ../../src/map_io/widelands_map_loader.cc:205
 msgid "Elemental data"
 msgstr ""
 
@@ -1535,7 +1535,7 @@ msgid "Command queue"
 msgstr ""
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
-#: ../../src/map_io/widelands_map_loader.cc:387
+#: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:538
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_player.cc:463
@@ -1784,19 +1784,19 @@ msgstr ""
 msgid "Creating player %d…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:319
+#: ../../src/logic/editor_game_base.cc:322
 msgid "Postloading world and tribes…"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:580
+#: ../../src/logic/editor_game_base.cc:579
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:586
+#: ../../src/logic/editor_game_base.cc:585
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:589
+#: ../../src/logic/editor_game_base.cc:588
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr ""
 
@@ -1806,39 +1806,39 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:379
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr ""
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:622
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr ""
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Falta unha posición de inicio"
 
-#: ../../src/logic/game.cc:640 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands non puido iniciar a partida porque o xogador %u non tiña unha posición inicial.\nPodes engadir unha posición inicial manualmente co editor do Widelands para solucionar o problema."
 
-#: ../../src/logic/game.cc:740
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1190
+#: ../../src/logic/game.cc:1189
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:1192
+#: ../../src/logic/game.cc:1191
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1919,7 +1919,7 @@ msgstr "Deserto"
 msgid "No description defined"
 msgstr "Sen descrición definida"
 
-#: ../../src/logic/map_objects/immovable.cc:503
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
@@ -2287,7 +2287,7 @@ msgstr "Traballadores"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
-#: ../../src/map_io/widelands_map_loader.cc:322
+#: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:149
 #: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
 msgid "Buildings"
@@ -2529,47 +2529,47 @@ msgid "Autosaving map…"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:121
-#: ../../src/map_io/widelands_map_loader.cc:223
+#: ../../src/map_io/widelands_map_loader.cc:230
 msgid "Heights"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:128
-#: ../../src/map_io/widelands_map_loader.cc:230
+#: ../../src/map_io/widelands_map_loader.cc:237
 msgid "Terrains"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:135
-#: ../../src/map_io/widelands_map_loader.cc:243
+#: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Starting positions"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:163
-#: ../../src/map_io/widelands_map_loader.cc:271
+#: ../../src/map_io/widelands_map_loader.cc:278
 msgid "Map version"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:175
-#: ../../src/map_io/widelands_map_loader.cc:277
+#: ../../src/map_io/widelands_map_loader.cc:284
 msgid "Building restrictions"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:200
-#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:177
+#: ../../src/map_io/widelands_map_loader.cc:309 ../../src/wui/minimap.cc:177
 msgid "Flags"
 msgstr "Bandeiras"
 
 #: ../../src/map_io/map_saver.cc:207
-#: ../../src/map_io/widelands_map_loader.cc:309
+#: ../../src/map_io/widelands_map_loader.cc:316
 msgid "Roads and waterways"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:229
-#: ../../src/map_io/widelands_map_loader.cc:239
+#: ../../src/map_io/widelands_map_loader.cc:246
 msgid "Map objects"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:238
-#: ../../src/map_io/widelands_map_loader.cc:395
+#: ../../src/map_io/widelands_map_loader.cc:402
 msgid "Win condition"
 msgstr ""
 
@@ -2590,17 +2590,17 @@ msgid "Territory"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:288
-#: ../../src/map_io/widelands_map_loader.cc:377
+#: ../../src/map_io/widelands_map_loader.cc:384
 msgid "Vision"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:297
-#: ../../src/map_io/widelands_map_loader.cc:412
+#: ../../src/map_io/widelands_map_loader.cc:419
 msgid "Scripting"
 msgstr ""
 
 #: ../../src/map_io/map_saver.cc:304
-#: ../../src/map_io/widelands_map_loader.cc:405
+#: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:529
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:211
@@ -2608,7 +2608,7 @@ msgid "Objectives"
 msgstr "Obxectivos"
 
 #: ../../src/map_io/map_saver.cc:308
-#: ../../src/map_io/widelands_map_loader.cc:419
+#: ../../src/map_io/widelands_map_loader.cc:426
 msgid "Images"
 msgstr ""
 
@@ -2623,7 +2623,7 @@ msgid ""
 "are sorry, but this savegame seems to be broken beyond repair."
 msgstr ""
 
-#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
+#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:189
 msgid "Loading map…"
 msgstr ""
 
@@ -2631,32 +2631,32 @@ msgstr ""
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa do Settlers II © de Bluebyte. Sen comentario!"
 
-#: ../../src/map_io/widelands_map_loader.cc:195
+#: ../../src/map_io/widelands_map_loader.cc:202
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:290
+#: ../../src/map_io/widelands_map_loader.cc:297
 msgid "Territories"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:330
+#: ../../src/map_io/widelands_map_loader.cc:337
 msgid "Initializing flags"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:337
+#: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing roads and waterways"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:350
+#: ../../src/map_io/widelands_map_loader.cc:357
 msgid "Initializing buildings"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:357
+#: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing map objects"
 msgstr ""
 
-#: ../../src/map_io/widelands_map_loader.cc:422
+#: ../../src/map_io/widelands_map_loader.cc:429
 msgid "Checking map"
 msgstr ""
 
@@ -6161,18 +6161,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""
