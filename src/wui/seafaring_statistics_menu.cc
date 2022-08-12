@@ -143,7 +143,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Tooltip in the seafaring statistics window */
                   _("Go to the selected ship and open its window"),
-                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true),
+                  shortcut_string_for(
+                     KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true),
                   UI::PanelStyle::kWui))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
@@ -497,7 +498,8 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the ship statistics window */
-		   _("Show all ships"), shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterAll, true),
+		   _("Show all ships"),
+		   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterAll, true),
 		   UI::PanelStyle::kWui));
 	}
 }
@@ -506,7 +508,8 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show empty ships"), shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterIdle, true),
+	   _("Show empty ships"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterIdle, true),
 	   UI::PanelStyle::kWui));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */

@@ -206,35 +206,38 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button("wui/menus/objectives", "objectives",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
-	                      UI::PanelStyle::kWui),
-	                   &objectives_, true);
+	add_toolbar_button(
+	   "wui/menus/objectives", "objectives",
+	   as_tooltip_text_with_hotkey(_("Objectives"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameObjectives, true),
+	                               UI::PanelStyle::kWui),
+	   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(*this, objectives_); };
 
-	add_toolbar_button("wui/menus/diplomacy", "diplomacy",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Diplomacy"), shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
-	                      UI::PanelStyle::kWui),
-	                   &diplomacy_, true);
+	add_toolbar_button(
+	   "wui/menus/diplomacy", "diplomacy",
+	   as_tooltip_text_with_hotkey(_("Diplomacy"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameDiplomacy, true),
+	                               UI::PanelStyle::kWui),
+	   &diplomacy_, true);
 	diplomacy_.open_window = [this] { new GameDiplomacyMenu(*this, diplomacy_); };
 
-	toggle_message_menu_ =
-	   add_toolbar_button("wui/menus/message_old", "messages",
-	                      as_tooltip_text_with_hotkey(
-	                         _("Messages"), shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
-	                         UI::PanelStyle::kWui),
-	                      &message_menu_, true);
+	toggle_message_menu_ = add_toolbar_button(
+	   "wui/menus/message_old", "messages",
+	   as_tooltip_text_with_hotkey(_("Messages"),
+	                               shortcut_string_for(KeyboardShortcut::kInGameMessages, true),
+	                               UI::PanelStyle::kWui),
+	   &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
-	                      UI::PanelStyle::kWui),
-	                   &encyclopedia_, true);
+	add_toolbar_button(
+	   "ui_basic/menu_help", "help",
+	   as_tooltip_text_with_hotkey(_("Help"),
+	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
+	                               UI::PanelStyle::kWui),
+	   &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};

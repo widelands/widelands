@@ -526,7 +526,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll, true),
+		   _("Show all messages"),
+		   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll, true),
 		   UI::PanelStyle::kWui));
 	}
 }
@@ -543,19 +544,23 @@ void GameMessageMenu::set_filter_messages_tooltips() {
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show economy messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy, true), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy, true),
+	   UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show seafaring messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring, true), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring, true),
+	   UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show warfare messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare, true), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare, true),
+	   UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
 	   _("Show scenario messages only"),
-	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true), UI::PanelStyle::kWui));
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario, true),
+	   UI::PanelStyle::kWui));
 }
 
 /**

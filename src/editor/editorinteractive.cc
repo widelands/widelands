@@ -149,14 +149,16 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	undo_ = add_toolbar_button(
-	   "wui/editor/menus/undo", "undo",
-	   as_tooltip_text_with_hotkey(
-	      _("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo, true), UI::PanelStyle::kWui));
-	redo_ = add_toolbar_button(
-	   "wui/editor/menus/redo", "redo",
-	   as_tooltip_text_with_hotkey(
-	      _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo, true), UI::PanelStyle::kWui));
+	undo_ =
+	   add_toolbar_button("wui/editor/menus/undo", "undo",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo, true),
+	                         UI::PanelStyle::kWui));
+	redo_ =
+	   add_toolbar_button("wui/editor/menus/redo", "redo",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo, true),
+	                         UI::PanelStyle::kWui));
 
 	history_.reset(new EditorHistory(*this, *undo_, *redo_));
 
@@ -165,11 +167,12 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help",
-	                   as_tooltip_text_with_hotkey(
-	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
-	                      UI::PanelStyle::kWui),
-	                   &menu_windows_.help, true);
+	add_toolbar_button(
+	   "ui_basic/menu_help", "help",
+	   as_tooltip_text_with_hotkey(_("Help"),
+	                               shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia, true),
+	                               UI::PanelStyle::kWui),
+	   &menu_windows_.help, true);
 	menu_windows_.help.open_window = [this] {
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};

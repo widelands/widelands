@@ -452,8 +452,8 @@ void MainMenu::set_labels() {
 
 	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Watch the replay of an old game"), shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true),
-	   UI::PanelStyle::kFsMenu));
+	   _("Watch the replay of an old game"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuReplay, true), UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(as_tooltip_text_with_hotkey(
@@ -465,8 +465,8 @@ void MainMenu::set_labels() {
 	   shortcut_string_for(KeyboardShortcut::kMainMenuOptions, true), UI::PanelStyle::kFsMenu));
 	about_.set_title(_("About Widelands"));
 	about_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Readme, License, and Credits"), shortcut_string_for(KeyboardShortcut::kMainMenuAbout, true),
-	   UI::PanelStyle::kFsMenu));
+	   _("Readme, License, and Credits"),
+	   shortcut_string_for(KeyboardShortcut::kMainMenuAbout, true), UI::PanelStyle::kFsMenu));
 	exit_.set_title(_("Exit Widelands"));
 	exit_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Quit the game"), shortcut_string_for(KeyboardShortcut::kMainMenuQuit, true),
