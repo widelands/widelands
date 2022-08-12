@@ -282,6 +282,12 @@ msgid ""
 "to steady the ship, feeling as though it were a squalid sacrifice to the "
 "gods to give us hope to live a few hours longer."
 msgstr ""
+"Le tempeste mantennero fieramente il loro artiglio sulla nave durante tutto "
+"il nostro viaggio. Non ci fu quasi giorno in cui non ci chiedemmo se non "
+"sarebbe stato l'ultimo. Per stabilizzare la nave fummo costretti a gettare "
+"fuori bordo i metalli preziosi che avevamo portato con noi, con la "
+"sensazione che fosse uno squallido sacrificio agli dei per darci la speranza"
+" di vivere ancora qualche ora."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
@@ -418,6 +424,9 @@ msgid ""
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
+"Ho visto alcune armi avanzate nei nostri magazzini. Sarebbe forse possibile "
+"fonderli nuovamente nei metalli di cui sono composte? Anche se potrebbe "
+"sembrare uno spreco delle preziose spade…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
@@ -662,6 +671,11 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Se mancherete di consegnare questi beni, l'Impero dovrà trattarvi come "
+"nemici. Ed in modo da prevenire che dilapidiate i vostri preziosi metalli, "
+"vi proibisco di espandervi da questo momento in poi, finché non ci avrete "
+"consegnato il vostro omaggio. Mancate di obbedire, e l'Impero vi tratterà "
+"come nemici."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
@@ -754,6 +768,8 @@ msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
+"Barbari! Avete sgraziatamente rifiutato la mia offerta di amicizia e "
+"sprecato ignobilmente le vostre preziose risorse per espandervi!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:370
 msgid "Two Enemies"
