@@ -147,7 +147,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Save Game"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/menus/save_game.png"), false, "",
-	              shortcut_string_for(KeyboardShortcut::kInGameSave));
+	              shortcut_string_for(KeyboardShortcut::kInGameSave, false));
 
 	if (!is_multiplayer() && !game().is_replay()) {
 		menu_windows_.loadgame.open_window = [this] {
@@ -156,7 +156,7 @@ void InteractiveGameBase::rebuild_main_menu() {
 		/** TRANSLATORS: An entry in the game's main menu */
 		mainmenu_.add(_("Load Game"), MainMenuEntry::kLoadMap,
 		              g_image_cache->get("images/wui/menus/load_game.png"), false, "",
-		              shortcut_string_for(KeyboardShortcut::kInGameLoad));
+		              shortcut_string_for(KeyboardShortcut::kInGameLoad, false));
 	}
 
 	if (!game().list_of_scenarios().empty()) {
@@ -227,14 +227,14 @@ void InteractiveGameBase::rebuild_showhide_menu() {
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
+	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp, false));
 
 	/** TRANSLATORS: An entry in the game's show/hide menu to toggle whether building names are shown
 	 */
 	showhidemenu_.add(get_display_flag(dfShowCensus) ? _("Hide Census") : _("Show Census"),
 	                  ShowHideEntry::kCensus,
 	                  g_image_cache->get("images/wui/menus/toggle_census.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus));
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideCensus, false));
 
 	showhidemenu_.add(get_display_flag(dfShowStatistics) ?
                          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -243,7 +243,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                          _("Show Status"),
 	                  ShowHideEntry::kStatistics,
 	                  g_image_cache->get("images/wui/menus/toggle_statistics.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats));
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideStats, false));
 
 	showhidemenu_.add(get_display_flag(dfShowSoldierLevels) ?
                          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -252,7 +252,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                          _("Show Soldier Levels"),
 	                  ShowHideEntry::kSoldierLevels,
 	                  g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers));
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideSoldiers, false));
 
 	showhidemenu_.add(get_display_flag(dfShowBuildings) ?
                          /** TRANSLATORS: An entry in the game's show/hide menu to toggle whether
@@ -261,7 +261,7 @@ void InteractiveGameBase::rebuild_showhide_menu() {
                          _("Show Buildings"),
 	                  ShowHideEntry::kBuildings,
 	                  g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings));
+	                  shortcut_string_for(KeyboardShortcut::kInGameShowhideBuildings, false));
 
 	showhidemenu_.select(last_selection);
 }
@@ -308,13 +308,13 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 	                   g_image_cache->get("images/wui/menus/gamespeed_increase.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed + in the game's game speed menu */
 	                   _("Increase the game speed"),
-	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedUp));
+	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedUp, false));
 
 	gamespeedmenu_.add(_("Speed -"), GameSpeedEntry::kDecrease,
 	                   g_image_cache->get("images/wui/menus/gamespeed_decrease.png"), false,
 	                   /** TRANSLATORS: Tooltip for Speed - in the game's game speed menu */
 	                   _("Decrease the game speed"),
-	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown));
+	                   shortcut_string_for(KeyboardShortcut::kInGameSpeedDown, false));
 
 	if (!is_multiplayer()) {
 		if ((get_game()->game_controller() != nullptr) &&
@@ -323,13 +323,13 @@ void InteractiveGameBase::rebuild_gamespeed_menu() {
 			                   g_image_cache->get("images/wui/menus/gamespeed_resume.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Resume the Game"),
-			                   shortcut_string_for(KeyboardShortcut::kInGamePause));
+			                   shortcut_string_for(KeyboardShortcut::kInGamePause, false));
 		} else {
 			gamespeedmenu_.add(_("Pause"), GameSpeedEntry::kPause,
 			                   g_image_cache->get("images/wui/menus/gamespeed_pause.png"), false,
 			                   /** TRANSLATORS: Tooltip for Pause in the game's game speed menu */
 			                   _("Pause the Game"),
-			                   shortcut_string_for(KeyboardShortcut::kInGamePause));
+			                   shortcut_string_for(KeyboardShortcut::kInGamePause, false));
 		}
 	}
 
@@ -365,7 +365,7 @@ void InteractiveGameBase::add_chat_ui() {
 	add_toolbar_button(
 	   "wui/menus/chat", "chat",
 	   as_tooltip_text_with_hotkey(
-	      _("Chat"), shortcut_string_for(KeyboardShortcut::kInGameChat), UI::PanelStyle::kWui),
+	      _("Chat"), shortcut_string_for(KeyboardShortcut::kInGameChat, true), UI::PanelStyle::kWui),
 	   &chat_, true);
 	chat_.open_window = [this] {
 		if (chat_provider_ != nullptr) {
