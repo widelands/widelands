@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:47+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -592,7 +592,7 @@ msgid ""
 "the Barbarians can build. It also costs a lot of resources and takes a long "
 "time to build. It is most suited to guard strategically important points "
 "like constricted points or mountains."
-msgstr "Dat Kasteel hett Steden för 12 Soldaten un is de grootste Soldateree-Boo, wat de Willen Lüü bauen könen. ’t köst mennig Materialien un dat Bauen düürt lang. ’t is good gadelk, um taktisk dürable Steden as enge Passen of Bargen to schütten."
+msgstr "Dat Kasteel hett Steden för 12 Soldaten un is de grootste Soldateree-Boo, wat de Willen Lüü bauen könen. ’t köst mennig Kraam un dat Bauen düürt lang. ’t is good gadelk, um taktisk dürable Steden as enge Passen of Bargen to schütten."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid "Defeat your Enemy"

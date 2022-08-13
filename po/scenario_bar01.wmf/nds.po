@@ -236,7 +236,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Grote un betere Husen – un alle Soldateree-Boen – bruuken betere Baumaterialien. Se könen nich blot mit Boomstammen baut worden – de Boomstammen mutten eerst vun eener Holtharderee to Haartholt verbetert worden. Bau immer tiedig eene Holtharderee, denn wenn du keen Haartholt mehr hest, kannst du dien Gewest nich mehr vergrotern."
+msgstr "Grote un betere Husen – un alle Soldateree-Boen – bruuken betern Baukraam. Se könen nich blot mit Boomstammen baut worden – de Boomstammen mutten eerst vun eener Holtharderee to Haartholt verbetert worden. Bau immer tiedig eene Holtharderee, denn wenn du keen Haartholt mehr hest, kannst du dien Gewest nich mehr vergrotern."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -252,7 +252,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Grotere Husen bruuken noch anner gode Materialien as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
+msgstr "Grotere Husen bruuken noch anner gode Kraam as Haartholt. Eens daarvun is Mörtel, wat vun eenem Kalkbranner ut Flint, Water un Köhle produzeert word."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -292,7 +292,7 @@ msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
-msgstr "Dat darde Baumaterial för gode Husen is Reit, wat man för Reitdacken bruukt. Reit word vun eenem Gaardner in de Naberskupp vun sienem Huus, de Reitplanteree, anplant."
+msgstr "De darde Baukraam för gode Husen is Reit, wat man för Reitdacken bruukt. Reit word vun eenem Gaardner in de Naberskupp vun sienem Huus, de Reitplanteree, anplant."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
@@ -891,7 +891,7 @@ msgstr "Kantruusk is verlichtert …"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr "Hunnert! Uns’ Dacken drüppeln nich mehr, un nu hebben wi all Materialien, wat wi bruken, um elkeen machtig Huus to bauen, as wi wullen!"
+msgstr "Hunnert! Uns’ Dacken drüppeln nich mehr, un nu hebben wi all Kraam, wat wi bruken, um elkeen machtig Huus to bauen, as wi wullen!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"

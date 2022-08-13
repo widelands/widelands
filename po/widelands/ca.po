@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-07 03:41+0000\n"
+"POT-Creation-Date: 2022-08-10 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Juanjo, 2015-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
@@ -764,8 +764,8 @@ msgstr "mina"
 msgid "port"
 msgstr "port"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1289,7 +1289,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "S’ha produït un error mentre es creava la carpeta «%s»."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:269
+#: ../../src/wui/game_main_menu_save_game.cc:271
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Ja existeix un fitxer amb el nom «%s». Voleu sobreescriure’l?"
@@ -2510,12 +2510,12 @@ msgid "Saving game…"
 msgstr "Es guarda la partida…"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "La desada de la partida ha fallat!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Partida desada"
 
@@ -3297,11 +3297,11 @@ msgstr "No seleccionat"
 msgid "No matches"
 msgstr "Sense coincidències"
 
-#: ../../src/ui_basic/panel.cc:298
+#: ../../src/ui_basic/panel.cc:302
 msgid "Please wait…"
 msgstr "Per favor, espereu…"
 
-#: ../../src/ui_basic/panel.cc:428
+#: ../../src/ui_basic/panel.cc:432
 msgid "Game ending – please wait…"
 msgstr "S’acaba la partida – Per favor, espereu…"
 
@@ -6161,18 +6161,18 @@ msgstr "Camí no vàlid per al fitxer en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autors"
@@ -7247,7 +7247,7 @@ msgid "Center view on this"
 msgstr "Centra la vista aquí"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:442 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:480
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -7808,8 +7808,8 @@ msgstr "Menú de confirmació"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Segur que voleu sortir de la partida?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "S’ha produït un error desant la partida."
 
@@ -8347,8 +8347,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Navegació"
