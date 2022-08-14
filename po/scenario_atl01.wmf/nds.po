@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "De Versörgung mit Baumaterialien sekern"
+msgstr "De Versörgung mit Baukraam sekern"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr "Baumaterialien-Versörgung"
+msgstr "Baukraam-Versörgung"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
-msgstr "Versörg diene Weertskupp mit de wichtigsten Baumaterialien:"
+msgstr "Versörg diene Weertskupp mit de wichtigsten Baukraam:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
@@ -142,7 +142,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "De Spinners produzeren Spinnenstoff un Kluften in de Spinnweelmöhlen. Spinnenstoff word bruukt, um eenige Husen to bauen un Kleer to maken; Soldaten dragen Kluften. De Spinnweelmöhlen bruukt Goldwulle un Spinnensied as ruge Materialien. Spinnensied word vun de Spinnentüchteree produzeert, un Goldwulle vun de Goldspinneree ut Gold maakt."
+msgstr "De Spinners produzeren Spinnenstoff un Kluften in de Spinnweelmöhlen. Spinnenstoff word bruukt, um eenige Husen to bauen un Kleer to maken; Soldaten dragen Kluften. De Spinnweelmöhlen bruukt Goldwulle un Spinnensied as ruge Kraam. Spinnensied word vun de Spinnentüchteree produzeert, un Goldwulle vun de Goldspinneree ut Gold maakt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
@@ -170,7 +170,7 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Iesenkluut, Goldkluut un Köhle worden in de daarna benöögten Bargwarken ofboot. Dat Edelflint-Bargwark söcht na Blinkerflint un Edelstenen – dat sünd dürable Baumaterialien, de leep selten funnen worden. ’t produzeert een Bült Flint, as ’t daarna söcht."
+msgstr "Iesenkluut, Goldkluut un Köhle worden in de daarna benöögten Bargwarken ofboot. Dat Edelflint-Bargwark söcht na Blinkerflint un Edelstenen – dat sünd dürable Baukraam, de leep selten funnen worden. ’t produzeert een Bült Flint, as ’t daarna söcht."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
@@ -461,7 +461,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Satuul sall Jo warmen, Jundlin’! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baumaterialien. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomslagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
+msgstr "Satuul sall Jo warmen, Jundlin’! De wichtigsten Dingen, um een Dörp to bauen, sünd de Baukraam. Dat gifft hier een paar Bomen, also sallen wi Husen för Boomslagers bauen un natürelk ok för Försters, daarmit dat alltied genoog Bomen gifft. Ach, un wi düren nich eene Saagmöhlen vergeten, denn de meesten Husen könen nich blot ut Boomstammen baut worden. Grotere Husen bruken ok Flint, aver dat gifft Bülten daarvun im Noordoost; wi bruken nix as een Flintslagerhuus un miene Flintslager fangen stracks an to warken."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
@@ -475,7 +475,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "Satuul sall Jo warmen, Jundlin’! Ick segg Jau to all, wat Loftomoor vörslaggt. Wi bruken völe Baumaterialien, um uns’ Gewest fix to vergrotern. Ick föhl mi up deeser Insel nich seker, bit wi se kumpleet sehn hebben. Ick hebb bannig völe gode Lüü vun Atlantis mitbrocht. De Soldateree is klaar, wi bruken blot Husen, waar se leven könen."
+msgstr "Satuul sall Jo warmen, Jundlin’! Ick segg Jau to all, wat Loftomoor vörslaggt. Wi bruken vööl Baukraam, um uns’ Gewest fix to vergrotern. Ick föhl mi up deeser Insel nich seker, bit wi se kumpleet sehn hebben. Ick hebb bannig völe gode Lüü vun Atlantis mitbrocht. De Soldateree is klaar, wi bruken blot Husen, waar se leven könen."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
@@ -795,7 +795,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr "Wi hebben een olles Huus funnen, verneelt un vun Füür verbrannt. Ick bün unbannig besörgt. Dat Huus sücht nich ut as elkeen, wat ick jemaals sehn hebb. Dat is wiss nich vun elkeen Atlantisken Baukeerl baut worden, vun well ick jemaals höört hebb. Dat Huus is simpel, dat Tosamenbauen sludderig. Aver de Materialien sünd bannig haart: Dat Holt is wull up eene komiske Aard brannt worden, ehr dat tum Bauen bruukt wurr – dat is so haart as Steen."
+msgstr "Wi hebben een olles Huus funnen, verneelt un vun Füür verbrannt. Ick bün unbannig besörgt. Dat Huus sücht nich ut as elkeen, wat ick jemaals sehn hebb. Dat is wiss nich vun elkeen Atlantisken Baukeerl baut worden, vun well ick jemaals höört hebb. Dat Huus is simpel, dat Tosamenbauen sludderig. Aver de Baukraam is bannig haart: Dat Holt is wull up eene komiske Aard brannt worden, ehr dat tum Bauen bruukt wurr – dat is so haart as Steen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403

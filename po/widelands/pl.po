@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-04 03:51+0000\n"
+"POT-Creation-Date: 2022-08-10 03:23+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -296,8 +296,8 @@ msgstr "lis"
 msgid "Dec"
 msgstr "gru"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -311,12 +311,12 @@ msgstr "Menu główne"
 msgid "Tools"
 msgstr "Narzędzia"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -443,7 +443,7 @@ msgstr "Dodaj lub usuń zwierzęta"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
 #: ../../src/map_io/map_saver.cc:155
-#: ../../src/map_io/widelands_map_loader.cc:261
+#: ../../src/map_io/widelands_map_loader.cc:268
 msgid "Resources"
 msgstr "Surowce"
 
@@ -518,10 +518,10 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:435
@@ -651,7 +651,7 @@ msgid "Loading map “%s”…"
 msgstr "Wczytywanie mapy “%s”…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1101
+#: ../../src/editor/editorinteractive.cc:1099
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -660,7 +660,7 @@ msgid "No Name"
 msgstr "Bez nazwy"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1104
+#: ../../src/editor/editorinteractive.cc:1102
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -668,7 +668,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: ../../src/editor/editorinteractive.cc:1128
+#: ../../src/editor/editorinteractive.cc:1126
 msgid "Loading world…"
 msgstr "Wczytywanie świata…"
 
@@ -1074,9 +1074,9 @@ msgstr "(brak)"
 msgid "Waterway length limit:"
 msgstr "Limit długości dróg wodnych:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1304,7 +1304,7 @@ msgid "Error while creating directory ‘%s’."
 msgstr "Błąd podczas tworzenia katalogu ‘%s’."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:307
-#: ../../src/wui/game_main_menu_save_game.cc:269
+#: ../../src/wui/game_main_menu_save_game.cc:271
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Plik o nazwie \"%s\" już istnieje. Nadpisać?"
@@ -1502,8 +1502,8 @@ msgid ""
 "location."
 msgstr "Wybierz nowy rozmiar mapy, po czym kliknij na mapę, aby podzielić ją w wybranym miejscu. Przy powiększaniu mapy nowe kolumny/rzędy zostaną wstawione na wschód/południe od wybranego punktu. Przy zmniejszaniu mapy odpowiednia ilość kolumn/rzędów zostanie usunięta na wschód/południe od wybranego punktu."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1533,7 +1533,7 @@ msgstr "Wczytywanie gry: %1$s (%2$u/%3$d)"
 
 #: ../../src/game_io/game_loader.cc:71 ../../src/game_io/game_saver.cc:57
 #: ../../src/map_io/map_saver.cc:101
-#: ../../src/map_io/widelands_map_loader.cc:198
+#: ../../src/map_io/widelands_map_loader.cc:205
 msgid "Elemental data"
 msgstr "Data początkowa"
 
@@ -1550,7 +1550,7 @@ msgid "Command queue"
 msgstr "Kolejka poleceń"
 
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
-#: ../../src/map_io/widelands_map_loader.cc:387
+#: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:538
 #: ../../src/wui/interactive_player.cc:226
 #: ../../src/wui/interactive_player.cc:463
@@ -1807,19 +1807,19 @@ msgstr "%1$s<br>· %2$s (wersja %3$s)"
 msgid "Creating player %d…"
 msgstr "Tworzenie gracza %d..."
 
-#: ../../src/logic/editor_game_base.cc:319
+#: ../../src/logic/editor_game_base.cc:322
 msgid "Postloading world and tribes…"
 msgstr "Po ładowaniu świata i plemion…"
 
-#: ../../src/logic/editor_game_base.cc:580
+#: ../../src/logic/editor_game_base.cc:579
 msgid "Cleaning up for loading: Map objects (1/3)"
 msgstr "Czyszczenie do ładowania: Obiekty mapy (1/3)"
 
-#: ../../src/logic/editor_game_base.cc:586
+#: ../../src/logic/editor_game_base.cc:585
 msgid "Cleaning up for loading: Players (2/3)"
 msgstr "Czyszczenie do ładowania: Gracze (2/3)"
 
-#: ../../src/logic/editor_game_base.cc:589
+#: ../../src/logic/editor_game_base.cc:588
 msgid "Cleaning up for loading: Map (3/3)"
 msgstr "Czyszczenie do ładowania: Mapa (3/3)"
 
@@ -1829,39 +1829,39 @@ msgid "Not set"
 msgstr "Nie ustawione"
 
 #: ../../src/logic/game.cc:282 ../../src/logic/game.cc:326
-#: ../../src/logic/game.cc:425 ../../src/logic/game.cc:479
+#: ../../src/logic/game.cc:424 ../../src/logic/game.cc:478
 msgid "Preloading map…"
 msgstr "Przygotowywanie mapy…"
 
-#: ../../src/logic/game.cc:379
+#: ../../src/logic/game.cc:378
 msgid "Initializing game…"
 msgstr "Inicjalizuję grę…"
 
 #. * TRANSLATORS: All players (plural)
-#: ../../src/logic/game.cc:622
+#: ../../src/logic/game.cc:621
 msgid "Creating player infrastructure…"
 msgstr "Tworzenie infrastruktury graczy…"
 
-#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:237
+#: ../../src/logic/game.cc:638 ../../src/logic/player.cc:237
 msgid "Missing starting position"
 msgstr "Brak pozycji startowej"
 
-#: ../../src/logic/game.cc:640 ../../src/logic/player.cc:238
+#: ../../src/logic/game.cc:639 ../../src/logic/player.cc:238
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands nie mógł rozpocząć gry, gdyż gracz %u nie ma pozycji startowej.\nMożesz ręcznie dodać pozycję startową tego gracza w edytorze Widelands, by naprawić ten problem."
 
-#: ../../src/logic/game.cc:740
+#: ../../src/logic/game.cc:739
 msgid "Initializing…"
 msgstr ""
 
-#: ../../src/logic/game.cc:1190
+#: ../../src/logic/game.cc:1189
 msgid "Trade Offer"
 msgstr "Propozycja handlu"
 
-#: ../../src/logic/game.cc:1192
+#: ../../src/logic/game.cc:1191
 msgid "This market has received a new trade offer."
 msgstr "Ten rynek otrzymał nową ofertę handlową."
 
@@ -1942,7 +1942,7 @@ msgstr "Pustynia"
 msgid "No description defined"
 msgstr "Brak opisu"
 
-#: ../../src/logic/map_objects/immovable.cc:503
+#: ../../src/logic/map_objects/immovable.cc:513
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:174
 #, c-format
 msgid "%i%% built"
@@ -2316,7 +2316,7 @@ msgstr "Pracownicy"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:187
 #: ../../src/map_io/map_saver.cc:220
-#: ../../src/map_io/widelands_map_loader.cc:322
+#: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:149
 #: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
 msgid "Buildings"
@@ -2539,12 +2539,12 @@ msgid "Saving game…"
 msgstr "Zapisywanie gry…"
 
 #: ../../src/logic/save_handler.cc:174
-#: ../../src/wui/game_main_menu_save_game.cc:321
+#: ../../src/wui/game_main_menu_save_game.cc:323
 msgid "Saving failed!"
 msgstr "Zapis nieudany!"
 
 #: ../../src/logic/save_handler.cc:188
-#: ../../src/wui/game_main_menu_save_game.cc:304
+#: ../../src/wui/game_main_menu_save_game.cc:306
 msgid "Game saved"
 msgstr "Gra zapisana"
 
@@ -2558,47 +2558,47 @@ msgid "Autosaving map…"
 msgstr "Automatyczne zapisywanie mapy…"
 
 #: ../../src/map_io/map_saver.cc:121
-#: ../../src/map_io/widelands_map_loader.cc:223
+#: ../../src/map_io/widelands_map_loader.cc:230
 msgid "Heights"
 msgstr "Wzgórza"
 
 #: ../../src/map_io/map_saver.cc:128
-#: ../../src/map_io/widelands_map_loader.cc:230
+#: ../../src/map_io/widelands_map_loader.cc:237
 msgid "Terrains"
 msgstr "Tereny"
 
 #: ../../src/map_io/map_saver.cc:135
-#: ../../src/map_io/widelands_map_loader.cc:243
+#: ../../src/map_io/widelands_map_loader.cc:250
 msgid "Starting positions"
 msgstr "Pozycje startowe"
 
 #: ../../src/map_io/map_saver.cc:163
-#: ../../src/map_io/widelands_map_loader.cc:271
+#: ../../src/map_io/widelands_map_loader.cc:278
 msgid "Map version"
 msgstr "Wersja mapy"
 
 #: ../../src/map_io/map_saver.cc:175
-#: ../../src/map_io/widelands_map_loader.cc:277
+#: ../../src/map_io/widelands_map_loader.cc:284
 msgid "Building restrictions"
 msgstr "Zbuduj ogrodzenie"
 
 #: ../../src/map_io/map_saver.cc:200
-#: ../../src/map_io/widelands_map_loader.cc:302 ../../src/wui/minimap.cc:177
+#: ../../src/map_io/widelands_map_loader.cc:309 ../../src/wui/minimap.cc:177
 msgid "Flags"
 msgstr "Flagi"
 
 #: ../../src/map_io/map_saver.cc:207
-#: ../../src/map_io/widelands_map_loader.cc:309
+#: ../../src/map_io/widelands_map_loader.cc:316
 msgid "Roads and waterways"
 msgstr "Drogi i drogi wodne"
 
 #: ../../src/map_io/map_saver.cc:229
-#: ../../src/map_io/widelands_map_loader.cc:239
+#: ../../src/map_io/widelands_map_loader.cc:246
 msgid "Map objects"
 msgstr "Obiekty na mapie"
 
 #: ../../src/map_io/map_saver.cc:238
-#: ../../src/map_io/widelands_map_loader.cc:395
+#: ../../src/map_io/widelands_map_loader.cc:402
 msgid "Win condition"
 msgstr "Warunek zwycięstwa"
 
@@ -2619,17 +2619,17 @@ msgid "Territory"
 msgstr "Terytorium"
 
 #: ../../src/map_io/map_saver.cc:288
-#: ../../src/map_io/widelands_map_loader.cc:377
+#: ../../src/map_io/widelands_map_loader.cc:384
 msgid "Vision"
 msgstr "Widok"
 
 #: ../../src/map_io/map_saver.cc:297
-#: ../../src/map_io/widelands_map_loader.cc:412
+#: ../../src/map_io/widelands_map_loader.cc:419
 msgid "Scripting"
 msgstr "Pisanie scenariuszy"
 
 #: ../../src/map_io/map_saver.cc:304
-#: ../../src/map_io/widelands_map_loader.cc:405
+#: ../../src/map_io/widelands_map_loader.cc:412
 #: ../../src/wlapplication_options.cc:529
 #: ../../src/wui/game_objectives_menu.cc:30
 #: ../../src/wui/interactive_player.cc:211
@@ -2637,7 +2637,7 @@ msgid "Objectives"
 msgstr "Zadania"
 
 #: ../../src/map_io/map_saver.cc:308
-#: ../../src/map_io/widelands_map_loader.cc:419
+#: ../../src/map_io/widelands_map_loader.cc:426
 msgid "Images"
 msgstr "Obrazy"
 
@@ -2652,7 +2652,7 @@ msgid ""
 "are sorry, but this savegame seems to be broken beyond repair."
 msgstr "Silnik otrzymał sygnał SIGABRT, który najprawdopodobniej został wywołany przez uszkodzony stan gry. Żadne rozwiązanie tego błędu nie zostało jeszcze wdrożone. Przepraszamy, ale ten stan gry wydaje się być uszkodzony i nie możliwy do naprawienia."
 
-#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:182
+#: ../../src/map_io/s2map.cc:428 ../../src/map_io/widelands_map_loader.cc:189
 msgid "Loading map…"
 msgstr "Wczytywanie mapy..."
 
@@ -2660,32 +2660,32 @@ msgstr "Wczytywanie mapy..."
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa z Bluebyte Settlers II. Brak komentarza!"
 
-#: ../../src/map_io/widelands_map_loader.cc:195
+#: ../../src/map_io/widelands_map_loader.cc:202
 #, c-format
 msgid "Loading map: %1$s (%2$u/%3$d)"
 msgstr "Wczytywanie mapy: %1$s (%2$u/%3$d)"
 
-#: ../../src/map_io/widelands_map_loader.cc:290
+#: ../../src/map_io/widelands_map_loader.cc:297
 msgid "Territories"
 msgstr "Terytoria"
 
-#: ../../src/map_io/widelands_map_loader.cc:330
+#: ../../src/map_io/widelands_map_loader.cc:337
 msgid "Initializing flags"
 msgstr "Inicjalizacja flag"
 
-#: ../../src/map_io/widelands_map_loader.cc:337
+#: ../../src/map_io/widelands_map_loader.cc:344
 msgid "Initializing roads and waterways"
 msgstr "Inicjalizacja dróg i dróg wodnych"
 
-#: ../../src/map_io/widelands_map_loader.cc:350
+#: ../../src/map_io/widelands_map_loader.cc:357
 msgid "Initializing buildings"
 msgstr "Inicjalizacja budynków"
 
-#: ../../src/map_io/widelands_map_loader.cc:357
+#: ../../src/map_io/widelands_map_loader.cc:364
 msgid "Initializing map objects"
 msgstr "Inicjalizacja obiektów na mapie"
 
-#: ../../src/map_io/widelands_map_loader.cc:422
+#: ../../src/map_io/widelands_map_loader.cc:429
 msgid "Checking map"
 msgstr "Sprawdzanie mapy"
 
@@ -3332,11 +3332,11 @@ msgstr "Nie wybrano"
 msgid "No matches"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:298
+#: ../../src/ui_basic/panel.cc:302
 msgid "Please wait…"
 msgstr ""
 
-#: ../../src/ui_basic/panel.cc:428
+#: ../../src/ui_basic/panel.cc:432
 msgid "Game ending – please wait…"
 msgstr ""
 
@@ -7314,7 +7314,7 @@ msgid "Center view on this"
 msgstr "Wycentruj na tym widok"
 
 #. * TRANSLATORS: Health, Attack, Defense, Evade
-#: ../../src/wui/attack_window.cc:442 ../../src/wui/soldierlist.cc:418
+#: ../../src/wui/attack_window.cc:443 ../../src/wui/soldierlist.cc:418
 #: ../../src/wui/soldierlist.cc:480
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
@@ -7875,8 +7875,8 @@ msgstr "Potwierdzenie wyjścia"
 msgid "Are you sure you wish to exit this game?"
 msgstr "Czy na pewno chcesz wyjść z gry?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:271
-#: ../../src/wui/game_main_menu_save_game.cc:311
+#: ../../src/wui/game_main_menu_save_game.cc:273
+#: ../../src/wui/game_main_menu_save_game.cc:313
 msgid "Error Saving Game!"
 msgstr "Błąd Zapisu Gry!"
 
@@ -8422,8 +8422,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statystyki"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Z żeglarstwem"

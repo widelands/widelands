@@ -279,8 +279,8 @@ KeyboardShortcut shortcut_from_string(const std::string&);
  * Return value will either be an empty string or have a trailing "+".
  */
 std::string keymod_string_for(const uint16_t modstate, const bool rt_escape = true);
-std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
-std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
+std::string shortcut_string_for(SDL_Keysym, bool rt_escape);
+std::string shortcut_string_for(KeyboardShortcut, bool rt_escape);
 
 /** Set or get each tribe's fastplace building for a given fastplace group. */
 void set_fastplace_shortcuts(KeyboardShortcut, const std::map<std::string, std::string>&);

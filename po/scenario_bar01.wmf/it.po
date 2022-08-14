@@ -9,6 +9,7 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2016,2020
+# Log Merger, 2022
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 # af24e571988b09e5b46468ac89010e87_d1b4333, 2021
 # SecondCloud500 <eddieven2000@gmail.com>, 2015
@@ -19,13 +20,13 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: Davide Zandonella, 2021\n"
+"Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
@@ -688,7 +689,7 @@ msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
-msgstr "Espandiamoci verso est. C'è la possibilità per gli anziani di diventare utili una volta tanto! Mandiamone qualcuno a capire la lingua della pietra per svelare i segreti della montagna!"
+msgstr "Espandiamoci verso est. C'è la possibilità per gli anziani di diventare utili una volta tanto! Mandiamone qualcuno, tra quanti capiscono la lingua della pietra, per svelare i segreti della montagna!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"

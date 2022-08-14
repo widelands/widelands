@@ -69,7 +69,7 @@ msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr ""
 "Obteniu materials de construcció al quarter general. Com a mínim heu "
-"d'acumular:"
+"d’acumular:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
@@ -101,7 +101,7 @@ msgid ""
 "economy settings."
 msgstr ""
 "Recordeu que podeu establir les quantitats desitjades per la majoria dels "
-"béns a la configuració de l'economia."
+"béns a la configuració de l’economia."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
@@ -109,7 +109,7 @@ msgstr "Produïu aliments pels miners"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
-msgstr "Aprovisionament d'aliments"
+msgstr "Aprovisionament d’aliments"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
@@ -125,14 +125,14 @@ msgstr "Amplieu i construïu més edificis que subministrin aliments."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
-msgstr "Amplieu el subministrament d'aliments"
+msgstr "Amplieu el subministrament d’aliments"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
-"Construïu almenys dues masoveries de blat, una casa de l'apicultor (prop del"
+"Construïu almenys dues masoveries de blat, una casa de l’apicultor (prop del"
 " cultiu de baies), una fleca, una cerveseria i una altra taverna."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
@@ -147,7 +147,7 @@ msgstr "Construïu mines i altres infraestructures mineres"
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
 "Construïu una mina de ferro, una farga, una forja i un taller petit "
-"d'armadures."
+"d’armadures."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -165,7 +165,7 @@ msgstr "Construïu un quarter, una granja de rens i un taller de costura."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
-msgstr "Descobriu més territori de l'illa"
+msgstr "Descobriu més territori de l’illa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
@@ -173,7 +173,7 @@ msgstr "Expandiu i descobriu"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
-msgstr "Expandiu-vos i descobriu més territori de l'illa."
+msgstr "Expandiu-vos i descobriu més territori de l’illa."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
@@ -196,18 +196,18 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
-"Entreneu un soldat fins al màxim nivell. Els soldats s'entrenen en camps i "
-"palestres d'entrenament. Necessitarem una mina d'or, un taller del sastre "
-"per cosir vestits més resistents i un taller gran d'armadures per obtenir "
+"Entreneu un soldat fins al màxim nivell. Els soldats s’entrenen en camps i "
+"palestres d’entrenament. Necessitarem una mina d’or, un taller del sastre "
+"per cosir vestits més resistents i un taller gran d’armadures per obtenir "
 "millors armes i cascos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
-msgstr "Derroteu l'enemic!"
+msgstr "Derroteu l’enemic!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
-msgstr "Derroteu l'enemic!"
+msgstr "Derroteu l’enemic!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
@@ -227,14 +227,14 @@ msgid ""
 "flee before the storm flood drowns the island."
 msgstr ""
 "Construïu un port, un taller de teixir, unes drassanes i després inicieu una"
-" expedició per marxar abans que la inundació faci desaparèixer l'illa."
+" expedició per marxar abans que la inundació faci desaparèixer l’illa."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
-"Podeu construir el port a la punta més oriental de l'illa o on hi havia el "
+"Podeu construir el port a la punta més oriental de l’illa o on hi havia el "
 "quarter general enemic."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
@@ -244,8 +244,8 @@ msgid ""
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
 "Si no estàveu prou preparat per aconseguir el repte a temps, podeu "
-"recarregar l'escenari des de la desada automàtica que es va crear uns "
-"instants abans d'arribar al quarter enemic."
+"recarregar l’escenari des de la desada automàtica que es va crear uns "
+"instants abans d’arribar al quarter enemic."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -266,7 +266,7 @@ msgid ""
 "this pristine island."
 msgstr ""
 "Us donem la benvinguda a la preciosa illa de Langeness! Sóc en Reebaud, el "
-"cabdill d'aquesta illa prístina."
+"cabdill d’aquesta illa prístina."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
@@ -278,8 +278,8 @@ msgid ""
 " this untouched island."
 msgstr ""
 "El nostre clan hem arribat aquí des de terra ferma. Hi havia lluites amb els"
-" danesos al nord, els Holsteiner a l'est i al sud… Així que vaig decidir "
-"conduir la meva gent a un lloc més pacífic, on gaudir d'una vida tranquil·la"
+" danesos al nord, els Holsteiner a l’est i al sud… Així que vaig decidir "
+"conduir la meva gent a un lloc més pacífic, on gaudir d’una vida tranquil·la"
 " en aquesta illa verge."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
@@ -293,7 +293,7 @@ msgid ""
 " we must ensure a stable supply of basic building materials."
 msgstr ""
 "Aquest és un bon lloc com qualsevol altre per començar a construir la nostra"
-" nova llar. Primer de tot, hem d'assegurar un subministrament estable de "
+" nova llar. Primer de tot, hem d’assegurar un subministrament estable de "
 "materials bàsics de construcció."
 
 #. TRANSLATORS: Reebaud – Introduction 2
@@ -303,7 +303,7 @@ msgid ""
 "settlement."
 msgstr ""
 "He preguntat en Hauke, un dels meus consellers per supervisar la construcció"
-" de l'assentament."
+" de l’assentament."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
@@ -315,7 +315,7 @@ msgstr "Els primers edificis"
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
-msgstr "Pau, cap Reebaud! Començaré amb la colonització de l'illa ara mateix."
+msgstr "Pau, cap Reebaud! Començaré amb la colonització de l’illa ara mateix."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -326,7 +326,7 @@ msgid ""
 msgstr ""
 "Com tots els frisons, construïm les cases bàsicament amb maons. Els millorem"
 " afegint-hi troncs i granit. Les teulades estan cobertes amb juncs, com bé "
-"ja sabreu. No hi ha res millor per mantenir l'aigua de la pluja fora."
+"ja sabreu. No hi ha res millor per mantenir l’aigua de la pluja fora."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -367,9 +367,9 @@ msgid ""
 "to mine some granite."
 msgstr ""
 "El subministrament de fusta i juncs estan assegurats. Ara, ens hem de "
-"centrar en l'abastiment de maons. Els maons es couen en bòbiles a partir de "
-"granit i argila. Així que primer haurem d'aconseguir aquests materials. "
-"Abans tallàvem el granit de les roques, però no n'hi veig per aquí. Potser "
+"centrar en l’abastiment de maons. Els maons es couen en bòbiles a partir de "
+"granit i argila. Així que primer haurem d’aconseguir aquests materials. "
+"Abans tallàvem el granit de les roques, però no n’hi veig per aquí. Potser "
 "aquells turons tenen prou pedra per extreure una mica de granit."
 
 #. TRANSLATORS: Hauke – Introduction 4
@@ -380,10 +380,10 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
-"L'argila és fàcil d'obtenir: Un excavador d'argila treballant en una fossa "
+"L’argila és fàcil d’obtenir: Un excavador d’argila treballant en una fossa "
 "de fang simplement remourà la terra i la barrejarà amb aigua. Només cal "
 "assegurar-se que té prou espai per cavar al voltant de la fossa. Construir "
-"algunes guardes sentinella al voltant per ampliar l'àrea seria una bona "
+"algunes guardes sentinella al voltant per ampliar l’àrea seria una bona "
 "idea."
 
 #. TRANSLATORS: Hauke – Introduction 4
@@ -404,7 +404,7 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
-"Construïu també un pou. L'aigua salada no li agrada a ningú i tampoc serveix"
+"Construïu també un pou. L’aigua salada no li agrada a ningú i tampoc serveix"
 " per obtenir argila."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
@@ -441,15 +441,15 @@ msgid ""
 msgstr ""
 "He observat que ens queden pocs juncs. Per construir edificis en necessitem "
 "bastants. Hauríem de construir una o dues masoveries de juncs més. Els juncs"
-" també s'empren per fer xarxes de pesca i altres eines. Per això cal "
-"resoldre'n l'escassedat ara mateix."
+" també s’empren per fer xarxes de pesca i altres eines. Per això cal "
+"resoldre’n l’escassedat ara mateix."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
-"Heu d'assignar una prioritat alta als juncs des de la finestra de "
+"Heu d’assignar una prioritat alta als juncs des de la finestra de "
 "construcció de la nova masoveria de juncs."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
@@ -468,8 +468,8 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
-"Els nostres artesans de maons s'han estat queixant sobre l'escassedat "
-"d'argila des de fa un temps. Sense argila no es poden produir maons, així "
+"Els nostres artesans de maons s’han estat queixant sobre l’escassedat "
+"d’argila des de fa un temps. Sense argila no es poden produir maons, així "
 "que aquesta escassedat està frenant les noves construccions. Cal construir "
 "una o dues fosses de fang, i pous que els hi subministrin aigua."
 
@@ -480,7 +480,7 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
-"L'argila també s'empra en la construcció de vaixells i per millorar els "
+"L’argila també s’empra en la construcció de vaixells i per millorar els "
 "kilns de carbó. Si mai necessitem construir un vaixell o les mines no poden "
 "aconseguir prou carbó, necessitarem més argila. Per això cal resoldre el "
 "problema."
@@ -503,17 +503,17 @@ msgid ""
 "possible."
 msgstr ""
 "He observat que ens estem quedant sense maons. Això reduirà el ritme de "
-"construcció d'edificis, ja que en faran falta molts. Comencem construint una"
+"construcció d’edificis, ja que en faran falta molts. Comencem construint una"
 " altra bòbila i hi assignarem la màxima prioritat en assignació de maons a "
-"la finestra de construcció de l'edifici. Així, intentarem resoldre "
-"l'escassedat de maons com més aviat millor."
+"la finestra de construcció de l’edifici. Així, intentarem resoldre "
+"l’escassedat de maons com més aviat millor."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
-"Hauríeu d'establir prioritat alta per l'entrega de maons per la construcció "
+"Hauríeu d’establir prioritat alta per l’entrega de maons per la construcció "
 "de la bòbila des de la finestra de construcció."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
@@ -522,7 +522,7 @@ msgstr "Magatzems"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
-msgstr "Construïu un magatzem a l'est."
+msgstr "Construïu un magatzem a l’est."
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
@@ -533,12 +533,12 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
-"Estem expandint el nostre territori cap a l'est i els béns s'han de "
+"Estem expandint el nostre territori cap a l’est i els béns s’han de "
 "transportar a molta distància. Hauríem de construir magatzems prop de la "
 "frontera oriental, separats per una distància prudent entre ells, i guardar-"
 "hi materials de construcció preferiblement al magatzem que hi hagi més prop "
 "de la frontera. El quarter general està massa lluny per ser útil per a "
-"l'emmagatzematge a llarg termini."
+"l’emmagatzematge a llarg termini."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -578,13 +578,13 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
-"Hem d'expandir el territori que controlem més ràpidament per tenir prou "
+"Hem d’expandir el territori que controlem més ràpidament per tenir prou "
 "espai per les masoveries de baies que necessitem i que els nostres pescadors"
 " disposin de més costes on poder pescar."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr "Millorant el subministrament d'aliments"
+msgstr "Millorant el subministrament d’aliments"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
@@ -603,7 +603,7 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
-"Però quan s'hagin d'expandir les mines, les racions no seran suficients. "
+"Però quan s’hagin d’expandir les mines, les racions no seran suficients. "
 "Preneu mesures i construïu una segona taverna i considereu després si cal "
 "millorar-ne una a una sala de begudes."
 
@@ -618,7 +618,7 @@ msgid ""
 msgstr ""
 "Una sala de begudes necessita menjar de millor qualitat. Construïu una "
 "fleca, una cerveseria i dues o tres masoveries més per cultivar-hi ordi. "
-"Tingueu en compte que l'ordi creix molt lentament; per tant, aquestes "
+"Tingueu en compte que l’ordi creix molt lentament; per tant, aquestes "
 "masoveries no són suficients per obtenir tot el pa i cervesa que necessitem."
 " Hem de continuar expandint-nos ràpidament per disposar de més terreny "
 "cultivable."
@@ -631,9 +631,9 @@ msgid ""
 "Build a beekeeper’s house next to the berry farm to produce some honey, "
 "which we can store until we need it."
 msgstr ""
-"La fleca i la cerveseria s'haurien de millorar tan aviat els treballadors "
+"La fleca i la cerveseria s’haurien de millorar tan aviat els treballadors "
 "tinguin prou experiència. Llavors podran produir aiguamel i pa endolcit amb "
-"mel. Construïu una casa de l'apicultor prop de la masoveria de baies per "
+"mel. Construïu una casa de l’apicultor prop de la masoveria de baies per "
 "produir mel i guardar-la per quan la necessitem."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
@@ -650,9 +650,9 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
-"Ara ja podem produir tots els tipus d'aliment als que necessitem. Em "
+"Ara ja podem produir tots els tipus d’aliment als que necessitem. Em "
 "pregunto quins tresors hi ha amagats en aquelles muntanyes. Ho hauríem "
-"d'esbrinar."
+"d’esbrinar."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -663,10 +663,10 @@ msgid ""
 "helmets as well as swords. I hope we won’t meet enemies here, but it’s "
 "better to be prepared."
 msgstr ""
-"Construïu una mina de ferro i, si voleu, una mina d'or. Com que només "
+"Construïu una mina de ferro i, si voleu, una mina d’or. Com que només "
 "produeixen minerals, necessitarem una farga per obtenir-ne metalls. "
 "Construïu també una forja per assegurar-nos que no ens quedem sense eines. I"
-" també un taller petit d'armadures, que fabricarà cascos i espases. Espero "
+" també un taller petit d’armadures, que fabricarà cascos i espases. Espero "
 "que no ens trobem amb enemics, però és millor estar preparat."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
@@ -692,8 +692,8 @@ msgid ""
 "all honorable warriors."
 msgstr ""
 "Podríem usar les armes per equipar soldats nous. Espero no trobar-me amb "
-"enemics, però és millor estar preparat. Als nous soldats se'ls equipa als "
-"quarters amb una espasa curta i un vestit de pell, l'uniforme de tots els "
+"enemics, però és millor estar preparat. Als nous soldats se’ls equipa als "
+"quarters amb una espasa curta i un vestit de pell, l’uniforme de tots els "
 "guerrers honorables."
 
 #. TRANSLATORS: Hauke – recruit 2
@@ -717,8 +717,8 @@ msgid ""
 "weapons, armor, ores, metal and coal; the other to store building materials."
 msgstr ""
 "Us aconsello que tots aquests edificis estiguin prop entre ells. I construïu"
-" un parell de magatzems: un hauria d'emprar-se per emmagatzemar només armes,"
-" armadures, minerals, carbó i metalls; l'altre per emmagatzemar materials de"
+" un parell de magatzems: un hauria d’emprar-se per emmagatzemar només armes,"
+" armadures, minerals, carbó i metalls; l’altre per emmagatzemar materials de"
 " construcció."
 
 #. TRANSLATORS: Hauke – recruit 2
@@ -730,14 +730,14 @@ msgid ""
 "wares in the processing buildings."
 msgstr ""
 "També hauríem de construir altres edificis per la zona, com ara una farga, "
-"alguns pous d'aigua i masoveries per proveir aliments a la granja de rens. "
-"Una bona disposició d'aquests edificis farà que la millora del nostre "
-"exèrcit sigui prou eficient, perquè redueix el temps d'espera dels béns en "
+"alguns pous d’aigua i masoveries per proveir aliments a la granja de rens. "
+"Una bona disposició d’aquests edificis farà que la millora del nostre "
+"exèrcit sigui prou eficient, perquè redueix el temps d’espera dels béns en "
 "els edificis que els processen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
-msgstr "Exploreu l'illa"
+msgstr "Exploreu l’illa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
@@ -756,7 +756,7 @@ msgid ""
 "further to the east to find out whether we really are alone here."
 msgstr ""
 "Però encara no sabem si estem segurs. Caldria expandir-nos una mica cap a "
-"l'est per comprovar si estem sols o no."
+"l’est per comprovar si estem sols o no."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
@@ -795,8 +795,8 @@ msgid ""
 "hell for ever!"
 msgstr ""
 "Aquestes són les meves terres! Vosaltres sou els intrusos aquí! Prego a "
-"l'únic i vertader Déu que us mati a tots i que les vostres ànimes siguin "
-"turmentades a l'infern per sempre! "
+"l’únic i vertader Déu que us mati a tots i que les vostres ànimes siguin "
+"turmentades a l’infern per sempre! "
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
@@ -817,8 +817,8 @@ msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
 msgstr ""
-"Estem reclutant soldats prou fàcilment, però són dèbils. Els hem d'entrenar "
-"per si han d'enfrontar-se a l'enemic."
+"Estem reclutant soldats prou fàcilment, però són dèbils. Els hem d’entrenar "
+"per si han d’enfrontar-se a l’enemic."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
@@ -826,9 +826,9 @@ msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
 msgstr ""
-"Els soldats obtenen l'entrenament en atac, salut i defensa bàsics en camps "
-"d'entrenament. Rebran un entrenament més avançat en una palestra "
-"d'entrenament."
+"Els soldats obtenen l’entrenament en atac, salut i defensa bàsics en camps "
+"d’entrenament. Rebran un entrenament més avançat en una palestra "
+"d’entrenament."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
@@ -841,7 +841,7 @@ msgid ""
 "garments studded with iron and also gold to cushion blows; and helmets "
 "forged from iron, and gold as well, to lengthen their life in battle."
 msgstr ""
-"Els soldats s'entrenen en dos passos: en defensa i en salut. Reben vestits "
+"Els soldats s’entrenen en dos passos: en defensa i en salut. Reben vestits "
 "de pell amb ferro i or per amortir els cops i cascos també forjats amb ferro"
 " i or per allargar-ne la vida quan estiguin al camp de batalla."
 
@@ -854,12 +854,12 @@ msgid ""
 "first double-edged sword, and are given various other swords to wield in "
 "their other hand. This makes six steps of attack training."
 msgstr ""
-"Aprenen a atacar amb tres espases diferents: l'espasa llarga, el sabre i "
-"l'espasa de doble fil. Les dues últimes es fabriquen amb or; totes elles es "
-"fan amb ferro. Als soldats avançats se'ls ensenya a brandir dues espases a "
-"la vegada: continuen amb la seva espasa de doble fil i se'ls hi donen altres"
-" espases que han de portar a l'altra mà. Tenen un total de sis fases "
-"d'entrenament en atac."
+"Aprenen a atacar amb tres espases diferents: l’espasa llarga, el sabre i "
+"l’espasa de doble fil. Les dues últimes es fabriquen amb or; totes elles es "
+"fan amb ferro. Als soldats avançats se’ls ensenya a brandir dues espases a "
+"la vegada: continuen amb la seva espasa de doble fil i se’ls hi donen altres"
+" espases que han de portar a l’altra mà. Tenen un total de sis fases "
+"d’entrenament en atac."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -869,12 +869,12 @@ msgid ""
 "like a coward."
 msgstr ""
 "No entrenem els soldats per evadir atacs. Un vertader guerrer pot blocar els"
-" atacs de l'oponent amb un gir hàbil d'espasa en lloc de saltar i apartar-se"
+" atacs de l’oponent amb un gir hàbil d’espasa en lloc de saltar i apartar-se"
 " com un covard."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr "Planificant un centre d'entrenament"
+msgstr "Planificant un centre d’entrenament"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -887,11 +887,11 @@ msgid ""
 msgstr ""
 "Necessitarem un taller del sastre per cosir vestits més resistents per les "
 "batalles i un altre taller de costura per continuar produint els vestits de "
-"pells normals. També haureu de millorar el taller petit d'armadures per "
+"pells normals. També haureu de millorar el taller petit d’armadures per "
 "aconseguir millors armes i cascos i al mateix temps construir un altre "
 "taller petit per continuar produint les armes bàsiques. Necessitarem com a "
-"mínim una mina d'or, ja que les armes i armadures avançades necessitaran una"
-" mica d'or."
+"mínim una mina d’or, ja que les armes i armadures avançades necessitaran una"
+" mica d’or."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -904,7 +904,7 @@ msgid ""
 msgstr ""
 "Hem de construir aquests edificis prop del quarter, ja que, tal com he "
 "comentat abans, molt més eficient centrar tots els edificis militars en un "
-"centre de reclutat i d'entrenament. Si estiguessin molt lluny uns dels "
+"centre de reclutat i d’entrenament. Si estiguessin molt lluny uns dels "
 "altres, els béns i els soldats trigarien massa i empitjoraria la "
 "productivitat. Construïu també un tercer magatzem on guardar només els "
 "aliments necessaris per als entrenaments."
@@ -916,9 +916,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
-"Quan els soldats s'entrenen en l'ús d'armes, els seus equipaments es fan "
-"malbé. Tingueu en compte que la ferralla d'aquestes armes pot obstruir els "
-"camins fins que s'emmagatzemin en algun lloc."
+"Quan els soldats s’entrenen en l’ús d’armes, els seus equipaments es fan "
+"malbé. Tingueu en compte que la ferralla d’aquestes armes pot obstruir els "
+"camins fins que s’emmagatzemin en algun lloc."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -927,7 +927,7 @@ msgid ""
 "defense and attack. Until then, the enemy is just too strong for us."
 msgstr ""
 "Recomano entrenar com a mínim un soldat fins al nivell màxim en salut, "
-"defensa i atac. Fins llavors, l'enemic serà massa fort per enfrontar-s'hi."
+"defensa i atac. Fins llavors, l’enemic serà massa fort per enfrontar-s’hi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
@@ -970,8 +970,8 @@ msgid ""
 msgstr ""
 "És clar que prefereixo mantenir els soldats vius, però no podem salvar-los "
 "tots. Els soldats moren durant les batalles, així són les coses. Podeu "
-"decidir quant temps esperem fins a l'atac, però no us entretingueu gaire, o "
-"els enemics s'aprofitaran de les nostres febleses."
+"decidir quant temps esperem fins a l’atac, però no us entretingueu gaire, o "
+"els enemics s’aprofitaran de les nostres febleses."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
@@ -990,8 +990,8 @@ msgid ""
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
 "You must devise something to hold him off."
 msgstr ""
-"Cabdill Reebaud! Els exploradors informen que l'enemic avança de pressa. Em "
-"temo que encara no som prou forts per defensar-nos si l'enemic ataca abans. "
+"Cabdill Reebaud! Els exploradors informen que l’enemic avança de pressa. Em "
+"temo que encara no som prou forts per defensar-nos si l’enemic ataca abans. "
 "Heu de pensar alguna cosa per mantenir-los a ratlla."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
@@ -1002,9 +1002,9 @@ msgid ""
 "possible in one go. The enemy will only be able to see it if they build a "
 "fortress right at the border."
 msgstr ""
-"Els exploradors avisen que l'enemic no pot construir torres. Podem construir"
-" una fortalesa, que farà que la frontera avanci cap a l'est tot el que "
-"puguem d'un sol cop. L'enemic només la podrà veure si construeix una "
+"Els exploradors avisen que l’enemic no pot construir torres. Podem construir"
+" una fortalesa, que farà que la frontera avanci cap a l’est tot el que "
+"puguem d’un sol cop. L’enemic només la podrà veure si construeix una "
 "fortalesa a la frontera."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
@@ -1016,7 +1016,7 @@ msgid ""
 "a time of our choosing."
 msgstr ""
 "Podem evitar-ho, o fer-los-hi una mica més difícil, ordenant que guardes "
-"forestals plantin arbres a la frontera. L'enemic haurà de tallar els arbres "
+"forestals plantin arbres a la frontera. L’enemic haurà de tallar els arbres "
 "per fer espai i construir la fortalesa. Així podrem estar segurs fins que "
 "decidim començar la batalla quan nosaltres ho desitgéssim."
 
@@ -1056,7 +1056,7 @@ msgstr "La tempesta i la inundació"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr "L'illa s'està inundant!"
+msgstr "L’illa s’inunda!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -1064,7 +1064,7 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
-"El seu déu li ha concedit el desig! L'oceà està creixent! L'illa és plana i "
+"El seu déu li ha concedit el desig! L’oceà està creixent! L’illa és plana i "
 "ens ofegarem tots!"
 
 #. TRANSLATORS: Hauke – rising water
@@ -1075,7 +1075,7 @@ msgid ""
 " build a port on. If we manage to construct a ship, and fill it with all we "
 "need to build a new settlement, we may be able to escape."
 msgstr ""
-"No us desespereu! He albirat esperança! La punta més oriental de l'illa i "
+"No us desespereu! He albirat esperança! La punta més oriental de l’illa i "
 "també el lloc on hi havia el quarter general enemic semblen apropiats per "
 "construir-hi un port. si aconseguim construir-hi un vaixell i omplir-lo amb "
 "tot el que necessitem per un nou assentament, podrem escapar."
@@ -1089,7 +1089,7 @@ msgid ""
 "sails. Then we can launch an expedition from the port. Pray to the gods and "
 "make haste!"
 msgstr ""
-"Les inundacions vénen de l'oest. Si ens afanyem, podrem fer-ho! Només "
+"Les inundacions vénen de l’oest. Si ens afanyem, podrem fer-ho! Només "
 "necessitem construir un port i una drassana. Ah! I un taller de teixir per "
 "obtenir teles fetes de pell i de junc per les veles del vaixell. Llavors "
 "podrem iniciar una expedició des del port. Pregueu als déus i doneu-vos "
@@ -1123,29 +1123,29 @@ msgid_plural ""
 "send some building supplies and our best men to the port when it’s "
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
-"Quasi se m'oblida amb tanta pressa: sigui on sigui que atraquem, "
+"Quasi se m’oblida amb tanta pressa: sigui on sigui que atraquem, "
 "necessitarem materials de construcció per començar i soldats per assegurar "
 "el terreny i expandir la nostra colònia. Fins i tot després de carregar "
-"l'expedició, el vaixell ha de tenir prou espai per a uns quants béns i "
+"l’expedició, el vaixell ha de tenir prou espai per a uns quants béns i "
 "treballadors. A més a més, hi ha de cabre %d soldat més al vaixell. Enviem-"
-"hi subministraments i els nostres millors homes al port quan s'acabi de "
-"construir, perquè puguin embarcar abans de llevar l'àncora."
+"hi subministraments i els nostres millors homes al port quan s’acabi de "
+"construir, perquè puguin embarcar abans de llevar l’àncora."
 msgstr[1] ""
-"Quasi se m'oblida amb tanta pressa: sigui on sigui que atraquem, "
+"Quasi se m’oblida amb tanta pressa: sigui on sigui que atraquem, "
 "necessitarem materials de construcció per començar i soldats per assegurar "
 "el terreny i expandir la nostra colònia. Fins i tot després de carregar "
-"l'expedició, el vaixell ha de tenir prou espai per a uns quants béns i "
+"l’expedició, el vaixell ha de tenir prou espai per a uns quants béns i "
 "treballadors. A més a més, hi han de cabre %d soldats més al vaixell. "
-"Enviem-hi subministraments i els nostres millors homes al port quan s'acabi "
-"de construir, perquè puguin embarcar abans de llevar l'àncora."
+"Enviem-hi subministraments i els nostres millors homes al port quan s’acabi "
+"de construir, perquè puguin embarcar abans de llevar l’àncora."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""
 "All wares and workers that are loaded onto the expedition as well as some of"
 " the soldiers in the port will be carried over to the next scenario."
 msgstr ""
-"Tots els béns i treballadors carregats a l'expedició i alguns dels soldats "
-"del port s'enviaran al proper escenari."
+"Tots els béns i treballadors carregats a l’expedició i alguns dels soldats "
+"del port s’enviaran al proper escenari."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
@@ -1162,9 +1162,9 @@ msgid ""
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
-"Els déus han respost les nostres pregàries. Escaparem de l'illa que "
-"s'enfonsa, i estic segur que podrem construir una nova llar en un lloc més "
-"tranquil d'aquest món!"
+"Els déus han respost les nostres pregàries. Escaparem de l’illa que "
+"s’enfonsa, i estic segur que podrem construir una nova llar en un lloc més "
+"tranquil d’aquest món!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
@@ -1177,4 +1177,4 @@ msgid ""
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
 "Heu completat la missió. Podeu avançar al proper escenari per ajudar-nos a "
-"construir una nova llar, lluny de l'abast d'aquest Déu impostor i venjatiu…"
+"construir una nova llar, lluny de l’abast d’aquest Déu impostor i venjatiu…"
