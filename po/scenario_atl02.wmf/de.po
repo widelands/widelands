@@ -979,7 +979,7 @@ msgstr ""
 "könnten wir entscheiden das wir für unsere gemeinsame Zukunft etwas von dem "
 "Land benötigen, dass Ihr erobert habt. Deshalb werden wir einfach eure "
 "Militärgebäude mit unserer Streitmacht übernehmen. Natürlich habt ihr, zum "
-"Wohle Eurer Prinzessin,  nicht das Recht, das Gleiche zu tun."
+"Wohle Eurer Prinzessin, nicht das Recht, das Gleiche zu tun."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:514
 msgid "Heretics!"
@@ -1019,7 +1019,7 @@ msgstr ""
 "gebrauchen. Deshalb schlage ich vor, einen Tempel zu bauen und Satul mit "
 "exquisiten Opfern zu huldigen. Auf diese Weise könnten wir einige "
 "Priesterinnen weihen, die Satul darum bitten könnten, seine Macht gegenüber "
-"den Barbaren und unserer Prinzessin  zu demonstrieren."
+"den Barbaren und unserer Prinzessin zu demonstrieren."
 
 #: ../../data/campaigns/atl02.wmf/scripting/texts.lua:526
 msgid "Build Temple"

@@ -222,13 +222,13 @@ def load_glossary(glossary_file, locale):
             for header in row:
                 if header == 'term':
                     term_index = colum_counter
-                elif header == 'comment':
+                elif header == 'comment' or header == 'notes':
                     term_comment_index = colum_counter
                 elif header == 'pos':
                     wordclass_index = colum_counter
                 elif header in ('translation_' + locale, locale):
                     translation_index = colum_counter
-                elif header == 'comment_' + locale:
+                elif header == 'comment_' + locale or header == 'notes_' + locale:
                     comment_index = colum_counter
                 colum_counter = colum_counter + 1
         # If there is a translation, parse the entry
@@ -431,7 +431,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                             sys.stdout.write(
                                 '\nLoading glossary for ' + locale)
                             glossaries[locale] = load_glossary(
-                                glossary_file, locale)
+                                glossary_file, locale.lower())
                             sys.stdout.write(' - %d entries ' %
                                              len(glossaries[locale]))
                             sys.stdout.flush()
