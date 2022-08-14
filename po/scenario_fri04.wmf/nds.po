@@ -136,7 +136,7 @@ msgid ""
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
 "De Legaat un ick hebben nu nix mehr miteenanner to doon. Ick hebb up de "
-"Fahrt  eene Piek tegen siene inbildsk Maneer kregen, un vör allem tegen de "
+"Fahrt eene Piek tegen siene inbildsk Maneer kregen, un vör allem tegen de "
 "verachten Aard, wo he siene Galeeren-Slaven behannelt. ’t kummt hüm nich in "
 "de Sinn, dat dat Minsken as he un ick sünd; of wenn doch, dann doot he, as "
 "of se sülven Schuld an hör slimmen Loos sünd. ’t is mi nich Leid, dat ick "
@@ -360,7 +360,7 @@ msgstr ""
 " feindelk Lüü nohmen hebben, wat hier leevt hebben. Striedske Wille, un een "
 "Rieks-Prüllker wat Murilius heet un de allerunverschaamtsten Förderungen "
 "daan hett. Wi hebben se all manntjet un gloovt, uplest Free funnen to "
-"hebben. Un veer lang Jahr  lang weer dat Leven würrelk freedsaam."
+"hebben. Un veer lang Jahr lang weer dat Leven würrelk freedsaam."
 
 #. TRANSLATORS: Reebaud – Reebaud 8a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:171

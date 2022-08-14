@@ -41,7 +41,7 @@ msgid ""
 "Remember to check the messages and the building status labels for "
 "unproductive buildings."
 msgstr ""
-"Recordeu comprovar els missatges i l'estat dels edificis per trobar-los."
+"Recordeu comprovar els missatges i l’estat dels edificis per trobar-los."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:53
 msgid "Clear all unnecessary roads"
@@ -64,7 +64,7 @@ msgid ""
 "Ensure there are not more than 3 dead ends, nor more than one flag with more"
 " than 4 roads."
 msgstr ""
-"Assegureu-vos que no hi ha més de 3 camins sense sortida ni més d'una "
+"Assegureu-vos que no hi ha més de 3 camins sense sortida ni més d’una "
 "bandera amb més de 4 camins."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
@@ -81,7 +81,7 @@ msgid ""
 "analyze the building."
 msgstr ""
 "Cliqueu una masoveria per obrir-ne la finestra de construcció. Això us "
-"permetrà analitzar l'edifici."
+"permetrà analitzar l’edifici."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid "Find the construction plans for the farms"
@@ -97,7 +97,7 @@ msgid ""
 "east of your border."
 msgstr ""
 "Recupereu els plànols de construcció de les masoveries. Busqueu-los als "
-"turons a l'est de la frontera."
+"turons a l’est de la frontera."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
@@ -113,7 +113,7 @@ msgid ""
 "building material supply chain."
 msgstr ""
 "Construïu almenys tres cases del llenyataire i dues pedreres per renovar la "
-"cadena d'abastiment de materials de construcció."
+"cadena d’abastiment de materials de construcció."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Produce fish and rations"
@@ -121,7 +121,7 @@ msgstr "Produïu peix i racions"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:96
 msgid "Food Production"
-msgstr "Producció d'aliments"
+msgstr "Producció d’aliments"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:97
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
@@ -180,7 +180,7 @@ msgstr "Entreneu almenys 3 herois"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:132
 msgid "Hero Training"
-msgstr "Entrenament d'herois"
+msgstr "Entrenament d’herois"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:133
 msgid ""
@@ -195,7 +195,7 @@ msgid ""
 "trainingsite until it is fully equipped with all food and weapons needed."
 msgstr ""
 "Per entrenar un soldat fins al nivell més alt en un lloc, considereu parar "
-"el lloc d'entrenament fins que estigui equipat del tot amb tot el menjar i "
+"el lloc d’entrenament fins que estigui equipat del tot amb tot el menjar i "
 "armes necessàries."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:135
@@ -203,8 +203,8 @@ msgid ""
 "To prevent waste of goods, reduce the soldiers to be trained to one per "
 "site."
 msgstr ""
-"Per evitar malbaratar béns, reduïu els soldats que s'han d'entrenar a un per"
-" edifici d'entrenament."
+"Per evitar malbaratar béns, reduïu els soldats que s’han d’entrenar a un per"
+" edifici d’entrenament."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid ""
@@ -212,7 +212,7 @@ msgid ""
 "Make sure you don’t have your half trained soldiers garrisoned in a military"
 " building."
 msgstr ""
-"Un lloc d'entrenament sempre prefereix el millor soldat disponible per "
+"Un lloc d’entrenament sempre prefereix el millor soldat disponible per "
 "entrenar-lo. Assegureu-vos que no teniu soldats a mig entrenar en edificis "
 "militars."
 
@@ -222,18 +222,18 @@ msgstr "Produïu almenys 10 eines"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:144
 msgid "Tool Production"
-msgstr "Producció d'eines"
+msgstr "Producció d’eines"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:145
 msgid "Produce at least ten tools to improve your economy."
-msgstr "Produïu almenys deu eines per millorar l'economia."
+msgstr "Produïu almenys deu eines per millorar l’economia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
 "Recordeu que podeu controlar la quantitat a produir a la configuració de "
-"l'economia."
+"l’economia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:152
 msgid "Recruit new soldiers"
@@ -253,7 +253,7 @@ msgstr "Derroteu els bàrbars"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:163
 msgid "Defeat the Enemy"
-msgstr "Derroteu l'enemic"
+msgstr "Derroteu l’enemic"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:164
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -281,7 +281,7 @@ msgstr "Augmenteu la vostra força militar entrenant soldats"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:182
 msgid "Training is Important"
-msgstr "L'entrenament és important"
+msgstr "L’entrenament és important"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:183
 msgid "Train your soldiers hard and train them fast."
@@ -293,16 +293,16 @@ msgstr "Necessiteu augmentar la força militar."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:190
 msgid "Build a training camp and enhance the arena"
-msgstr "Construïu un camp d'entrenament i milloreu la palestra."
+msgstr "Construïu un camp d’entrenament i milloreu la palestra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:192
 msgid "More Efficient Training Buildings"
-msgstr "Edificis d'entrenament més eficients"
+msgstr "Edificis d’entrenament més eficients"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:193
 msgid "Build a training camp and enhance your arena to a colosseum."
 msgstr ""
-"Construïu un camp d'entrenament i convertiu la palestra en un coliseu."
+"Construïu un camp d’entrenament i convertiu la palestra en un coliseu."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:204
 msgid "Home, Sweet Home"
@@ -313,7 +313,7 @@ msgstr "La nostra casa"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:232
 msgid "Diary of Lutius"
-msgstr "Agenda d'en Lutius"
+msgstr "Agenda d’en Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:207
@@ -329,7 +329,7 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr "Crec que en Saledus i l'Amalea també estan profundament encantats."
+msgstr "Crec que en Saledus i l’Amalea també estan profundament encantats."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:215
 msgid "Tools, Tools, Tools"
@@ -341,8 +341,8 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
-"Lloats siguin els déus! Acabem d'assegurar un abastiment constant d'eines. "
-"Ara hauríem d'expandir l'economia."
+"Lloats siguin els déus! Acabem d’assegurar un abastiment constant d’eines. "
+"Ara hauríem d’expandir l’economia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:622
@@ -372,8 +372,8 @@ msgid ""
 "war. Let’s see what the future still holds for us."
 msgstr ""
 "Lloats siguin els déus! Hem tingut èxit! Hem aconseguit superar tots els "
-"reptes que se'ns han presentat. Fins i tot hem expulsat els bàrbars fora de "
-"la nostra terra. Tanmateix, només hem guanyat una batalla i estem a l'inici "
+"reptes que se’ns han presentat. Fins i tot hem expulsat els bàrbars fora de "
+"la nostra terra. Tanmateix, només hem guanyat una batalla i estem a l’inici "
 "de la guerra. Ja veurem que ens depararà el futur."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:235
@@ -403,9 +403,9 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
-"Oh, no! L'Amalea té raó. De fet, no veig cap edifici produint res. I la "
+"Oh, no! L’Amalea té raó. De fet, no veig cap edifici produint res. I la "
 "xarxa de camins està en un estat deplorable. Qui pot ser el responsable "
-"d'aquest caos?"
+"d’aquest caos?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "Explanation Needed"
@@ -413,7 +413,7 @@ msgstr "Cal una explicació"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:254
 msgid "Lutius greets the official"
-msgstr "En Lutius saluda l'oficial"
+msgstr "En Lutius saluda l’oficial"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
@@ -435,8 +435,8 @@ msgid ""
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
 msgstr ""
-"Alcalde, us hem d'agrair els vostres esforços per salvaguardar la ciutat. "
-"Farem tot allò que puguem per recuperar-nos d'aquest caos. Però "
+"Alcalde, us hem d’agrair els vostres esforços per salvaguardar la ciutat. "
+"Farem tot allò que puguem per recuperar-nos d’aquest caos. Però "
 "desafortunadament, sembla que serà difícil."
 
 #. TRANSLATORS: Lutius
@@ -479,7 +479,7 @@ msgstr "Una llarga història"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:286
 msgid "The official sighs deeply…"
-msgstr "L'oficial sospira profundament…"
+msgstr "L’oficial sospira profundament…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -492,7 +492,7 @@ msgid ""
 msgstr ""
 "Senyor, deixeu que comenci pel principi. El rei va deixar Fremil fa molt "
 "temps per lluitar contra els bàrbars. Com que aquesta tasca demanava un "
-"compromís total, va delegar l'autoritat d'administrar la ciutat al seu antic"
+"compromís total, va delegar l’autoritat d’administrar la ciutat al seu antic"
 " secretari i va establir que ell seria el seu substitut."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:290
@@ -511,18 +511,18 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
-"Després d'un temps, la gent va descobrir la veritat i va expulsar al "
+"Després d’un temps, la gent va descobrir la veritat i va expulsar al "
 "mentider. Més tard, em van elegir com a alcalde de la ciutat. No obstant "
 "això, sembla que recuperar-nos del caos és una tasca massa gran per les "
 "meves habilitats."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
 msgid "Amalea Looks Puzzled"
-msgstr "L'Amalea està perplexa"
+msgstr "L’Amalea està perplexa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:301
 msgid "Amalea is doubtful…"
-msgstr "L'Amalea està dubtosa…"
+msgstr "L’Amalea està dubtosa…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:303
@@ -532,7 +532,7 @@ msgid ""
 "something went deeply wrong here."
 msgstr ""
 "Ave, Saledus! Per una banda teniu raó. És un plaer veure la nostra terra un "
-"altre cop. Però, d'altra banda, tinc la impressió que aquí alguna cosa va "
+"altre cop. Però, d’altra banda, tinc la impressió que aquí alguna cosa va "
 "malament."
 
 #. TRANSLATORS: Amalea
@@ -542,17 +542,17 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
-"Mireu com està l'economia. A penes es produeix res. Sigui qui sigui qui ha "
+"Mireu com està l’economia. A penes es produeix res. Sigui qui sigui qui ha "
 "dirigit aquesta terra mentre estàvem absents, ha creat un complet caos. No "
 "estic gaire segur de com podem arreglar-ho, ni si és possible fer-ho."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:311
 msgid "Amalea Investigates"
-msgstr "L'Amalea investiga"
+msgstr "L’Amalea investiga"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid "Amalea is nodding thoughtfully…"
-msgstr "L'Amalea assenteix pensativament…"
+msgstr "L’Amalea assenteix pensativament…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:314
@@ -564,7 +564,7 @@ msgid ""
 "workers and no soldiers either."
 msgstr ""
 "Lutius, crec que aquest torna a ser un repte molt difícil. Però em temo que "
-"estem condemnats a gestionar aquesta situació. Per empitjorar-ho, m'he "
+"estem condemnats a gestionar aquesta situació. Per empitjorar-ho, m’he "
 "trobat amb una sorpresa desagradable als magatzems: estan tots buit. A penes"
 " es pot trobar un gra de pols: ni béns, ni eines, ni treballadors, ni "
 "soldats."
@@ -606,8 +606,8 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
-"Potser hauríem de restringir l'ús de materials de construcció. Hem "
-"d'establir que els edificis que gasten materials de construcció no en rebin."
+"Potser hauríem de restringir l’ús de materials de construcció. Hem "
+"d’establir que els edificis que gasten materials de construcció no en rebin."
 " O fins i tot podríem posar en pausa la producció dels edificis grans i "
 "deixar descansar els treballadors fins que tinguem prou béns per reiniciar "
 "la producció."
@@ -615,11 +615,11 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:330
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:590
 msgid "Amalea has Bad News"
-msgstr "L'Amalea porta males notícies"
+msgstr "L’Amalea porta males notícies"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:331
 msgid "Amalea recommends…"
-msgstr "L'Amalea recomana…"
+msgstr "L’Amalea recomana…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:333
@@ -651,22 +651,22 @@ msgid ""
 msgstr ""
 "Per això necessitem urgentment recuperar els plànols de construcció i "
 "funcionament de les masoveries. Un vell constructor em va dir que podrien "
-"estar ocults en una cova dels turons a l'est de la frontera."
+"estar ocults en una cova dels turons a l’est de la frontera."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:342
 msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
-msgstr "Fins que trobem els plànols, l'única opció és destruir-les."
+msgstr "Fins que trobem els plànols, l’única opció és destruir-les."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:349
 msgid "Amalea Looks Confident"
-msgstr "L'Amalea sembla segura"
+msgstr "L’Amalea sembla segura"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
 msgid "Amalea is more confident"
-msgstr "L'Amalea està més segura"
+msgstr "L’Amalea està més segura"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:352
@@ -675,7 +675,7 @@ msgid ""
 "materials, we can start to rebuild our economy."
 msgstr ""
 "Lutius, ara ja hem fet alguns passos. Com ja hem aconseguit alguns materials"
-" de construcció, podem reconstruir l'economia."
+" de construcció, podem reconstruir l’economia."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:355
@@ -686,7 +686,7 @@ msgid ""
 msgstr ""
 "Primer de tot, necessitem més materials de construcció. Per tant, hem de "
 "construir almenys tres cases del llenyataire i dues pedreres. Assegureu-vos "
-"també que s'han desmantellat tots els edificis improductius."
+"també que s’han desmantellat tots els edificis improductius."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:358
@@ -695,17 +695,17 @@ msgid ""
 " are doing their job, somebody should clear up our road network. They are "
 "leaving us no space to place the buildings that we need."
 msgstr ""
-"Ah! Abans que me n'oblidi, hi ha una altra tasca que cal acomplir. Mentre "
+"Ah! Abans que me n’oblidi, hi ha una altra tasca que cal acomplir. Mentre "
 "els constructors fan la seva feina, algú hauria de netejar la xarxa de "
 "camins. No tenim prou espai per construir els edificis que necessitem."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
 msgid "Amalea is Somewhat Relieved"
-msgstr "L'Amalea està una mica més calmada"
+msgstr "L’Amalea està una mica més calmada"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:366
 msgid "Amalea is giving a deep sigh…"
-msgstr "L'Amalea sospira profundament…"
+msgstr "L’Amalea sospira profundament…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:368
@@ -731,16 +731,16 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:374
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
 msgstr ""
-"Però em temo que aquest problema no ha estat l'últim al qual ens "
+"Però em temo que aquest problema no ha estat l’últim al qual ens "
 "enfrontarem."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:380
 msgid "Amalea has Good News"
-msgstr "L'Amalea té bones notícies"
+msgstr "L’Amalea té bones notícies"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:381
 msgid "Amalea smiles for the first time in weeks…"
-msgstr "L'Amalea somriu per primer cop en setmanes…"
+msgstr "L’Amalea somriu per primer cop en setmanes…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:383
@@ -782,15 +782,15 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:395
 msgid "After we have managed this, we can start making rations in our tavern."
-msgstr "Després d'aconseguir-ho, podem començar a fer racions a la taverna."
+msgstr "Després d’aconseguir-ho, podem començar a fer racions a la taverna."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:402
 msgid "Amalea is Pleased"
-msgstr "L'Amalea està contenta"
+msgstr "L’Amalea està contenta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:403
 msgid "Amalea is nodding her head…"
-msgstr "L'Amalea assenteix amb el cap…"
+msgstr "L’Amalea assenteix amb el cap…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:405
@@ -804,16 +804,16 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:408
 msgid "Now we can focus on rebuilding our economy."
-msgstr "Ara podem centrar-nos a reconstruir l'economia."
+msgstr "Ara podem centrar-nos a reconstruir l’economia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:414
 msgid "Amalea Shakes Her Head"
-msgstr "L'Amalea nega amb el cap"
+msgstr "L’Amalea nega amb el cap"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:415
 msgid "Amalea is getting fed up with all the problems in this economy…"
 msgstr ""
-"L'Amalea s'està cansant de tots els problemes de producció de l'economia…"
+"L’Amalea es va cansant de tots els problemes de producció de l’economia…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:417
@@ -821,7 +821,7 @@ msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
 msgstr ""
-"Per l'honor d'en Neptú, he trobat un altre problema! Sembla que poques coses"
+"Per l’honor d’en Neptú, he trobat un altre problema! Sembla que poques coses"
 " funcionen com caldria en aquesta terra."
 
 #. TRANSLATORS: Amalea
@@ -831,8 +831,8 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
-"Un dels nostres llenyataires m'ha dit que la replantació dels boscos està "
-"per sota del que li dicta l'experiència i la previsió. Per això, he mirat de"
+"Un dels nostres llenyataires m’ha dit que la replantació dels boscos està "
+"per sota del que li dicta l’experiència i la previsió. Per això, he mirat de"
 " prop el rendiment dels guardes forestals."
 
 #. TRANSLATORS: Amalea
@@ -844,7 +844,7 @@ msgid ""
 msgstr ""
 "I, sabeu què? Les cases i les eines són velles i estan gastades. I les "
 "llavors que tenen estan fetes malbé. Per això, plantar arbres els costa molt"
-" més temps de l'habitual."
+" més temps de l’habitual."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:426
@@ -854,17 +854,17 @@ msgid ""
 "eventually destroy the old one or at least expel the forester to change "
 "houses."
 msgstr ""
-"L'única solució és construir dues cases del guarda forestal noves prop dels "
+"L’única solució és construir dues cases del guarda forestal noves prop dels "
 "llenyataires. Assegureu-vos de construir una casa del guarda forestal i, "
 "després, destruir la vella o bé expulsar el guarda perquè canviï de casa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:433
 msgid "Amalea Laughs Sarcastically"
-msgstr "L'Amalea riu sarcàsticament"
+msgstr "L’Amalea riu sarcàsticament"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:434
 msgid "Amalea is laughing sarcastically…"
-msgstr "L'Amalea està rient sarcàsticament…"
+msgstr "L’Amalea està rient sarcàsticament…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:436
@@ -873,7 +873,7 @@ msgid ""
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
 msgstr ""
-"Bé, Lutius, hem resolt una altra situació anòmala de l'economia. Ara els "
+"Bé, Lutius, hem resolt una altra situació anòmala de l’economia. Ara els "
 "llenyataires haurien de disposar de prou arbres per millorar la producció."
 
 #. TRANSLATORS: Amalea
@@ -883,11 +883,11 @@ msgstr "Tinc curiositat sobre quina serà la propera cosa que anirà malament!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:444
 msgid "Amalea Shrugs"
-msgstr "L'Amalea encongeix les espatlles"
+msgstr "L’Amalea encongeix les espatlles"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:445
 msgid "Amalea is getting used to bad news…"
-msgstr "L'Amalea s'està acostumant a les males notícies…"
+msgstr "L’Amalea es va acostumant a les males notícies…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:447
@@ -898,7 +898,7 @@ msgid ""
 "too many resources."
 msgstr ""
 "Molt bé, Lutius. Aquí teniu un altre problema: un cop hem produït una mica "
-"de cervesa i farina, m'he adonat que la tecnologia que emprem als molins i "
+"de cervesa i farina, m’he adonat que la tecnologia que emprem als molins i "
 "cerveseries està una mica antiquada. Si continuen així, consumiran massa "
 "recursos."
 
@@ -911,9 +911,9 @@ msgid ""
 "knowledge about improved technologies."
 msgstr ""
 "I no us ho creureu, però ningú sap com millorar-ne la tecnologia o construir"
-" edificis més eficients. L'únic que he sentit són rumors sobre un monestir "
+" edificis més eficients. L’únic que he sentit són rumors sobre un monestir "
 "del nord on les sacerdotesses sembla que tenen aquests coneixements sobre la"
-" millora d'aquestes tecnologies."
+" millora d’aquestes tecnologies."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:453
@@ -927,11 +927,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:460
 msgid "Amalea Looks Happy"
-msgstr "L'Amalea sembla feliç"
+msgstr "L’Amalea sembla feliç"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:461
 msgid "Amalea comes in…"
-msgstr "Entra n'Amalea…"
+msgstr "Entra n’Amalea…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:463
@@ -939,8 +939,8 @@ msgid ""
 "Brother, I think this is a rather fair offer. And some good will from any of"
 " our gods could be very helpful as well."
 msgstr ""
-"Germà, crec que és una oferta prou bona. I una mica d'ajuda dels nostres "
-"déus també ens seria d'ajuda."
+"Germà, crec que és una oferta prou bona. I una mica d’ajuda dels nostres "
+"déus també ens seria d’ajuda."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:466
@@ -949,18 +949,18 @@ msgid ""
 "the wares. In particular, we will need to shorten the supply to our mines "
 "drastically. This will give us a real drawback in metal production."
 msgstr ""
-"L'únic problema pot ser que recollir tots els béns ens costi un temps prou "
-"important. En particular, haurem de reduir l'abastiment de les mines de "
+"L’únic problema pot ser que recollir tots els béns ens costi un temps prou "
+"important. En particular, haurem de reduir l’abastiment de les mines de "
 "manera dràstica. Això causarà un desavantatge pel que fa a la producció de "
 "metall."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:472
 msgid "Amalea Looks Sad"
-msgstr "L'Amalea sembla trista"
+msgstr "L’Amalea sembla trista"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:473
 msgid "Amalea is really sad…"
-msgstr "L'Amalea està realment trista…"
+msgstr "L’Amalea està realment trista…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
@@ -981,16 +981,16 @@ msgid ""
 "Furthermore, we will have to live with the guilt of destroying a temple of "
 "an Empire goddess on our souls."
 msgstr ""
-"A més a més, haurem de viure amb el remordiment d'haver destruït un temple "
-"d'una deessa de l'imperi."
+"A més a més, haurem de viure amb el remordiment d’haver destruït un temple "
+"d’una deessa de l’imperi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:483
 msgid "Amalea is Very Content"
-msgstr "L'Amalea està molt satisfeta"
+msgstr "L’Amalea està molt satisfeta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:484
 msgid "Amalea claps her hands…"
-msgstr "L'Amalea pica de mans…"
+msgstr "L’Amalea pica de mans…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:486
@@ -1016,11 +1016,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:494
 msgid "Amalea is Satisfied"
-msgstr "L'Amalea està satisfeta"
+msgstr "L’Amalea està satisfeta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:495
 msgid "Amalea is satisfied with the progress…"
-msgstr "L'Amalea està satisfeta amb el progrés…"
+msgstr "L’Amalea està satisfeta amb el progrés…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:497
@@ -1033,7 +1033,7 @@ msgstr ""
 "Molt bé, Lutius. Un altre problema resolt. Encara en vindran més. Com ara "
 "podem produir menjar, hauríem de començar a extreure carbó i mineral de "
 "ferro amb mines. Després de tot, necessitem més eines per recuperar "
-"l'economia i construir més edificis."
+"l’economia i construir més edificis."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:500
@@ -1056,16 +1056,16 @@ msgid ""
 msgstr ""
 "Tan aviat com hàgim fos una mica de ferro, cal començar a produir eines. "
 "Potser hauríem de controlar-ne la producció amb la configuració de "
-"l'economia. Mentrestant, podem aixecar els edificis que necessitem més "
+"l’economia. Mentrestant, podem aixecar els edificis que necessitem més "
 "urgentment. Crec que encara ens falta construir una vinya."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:510
 msgid "Amalea has Some Advice"
-msgstr "L'Amalea té algun consell"
+msgstr "L’Amalea té algun consell"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:511
 msgid "Amalea is providing economic advice…"
-msgstr "L'Amalea dóna consell sobre l'economia…"
+msgstr "L’Amalea dóna consell sobre l’economia…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:513
@@ -1073,7 +1073,7 @@ msgid ""
 "Lutius, it seems that our coal supply is a little weak. So, we need to "
 "expand and explore all mineable areas for more coal."
 msgstr ""
-"Lutius, sembla que l'abastiment de carbó és insuficient. Necessitem expandir"
+"Lutius, sembla que l’abastiment de carbó és insuficient. Necessitem expandir"
 " i explorar totes les àrees minables per aconseguir més carbó."
 
 #. TRANSLATORS: Amalea
@@ -1088,11 +1088,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea is in a Good Mood"
-msgstr "L'Amalea està de bon humor"
+msgstr "L’Amalea està de bon humor"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:524
 msgid "Amalea is celebrating success…"
-msgstr "L'Amalea està celebrant l'èxit…"
+msgstr "L’Amalea està celebrant l’èxit…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:526
@@ -1101,16 +1101,16 @@ msgid ""
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
 "Bé! Un altre problema resolt! Ara el carbó servirà de suport per la "
-"producció metal·lúrgica i podem concentrar-nos més en l'exploració i "
+"producció metal·lúrgica i podem concentrar-nos més en l’exploració i "
 "augmentar les forces militars."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea Looks Thoughtful"
-msgstr "L'Amalea sembla pensativa"
+msgstr "L’Amalea sembla pensativa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:532
 msgid "Amalea is sorrowful…"
-msgstr "L'Amalea està afligida…"
+msgstr "L’Amalea està afligida…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:534
@@ -1125,11 +1125,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea is Positively Surprised"
-msgstr "L'Amalea està sorpresa positivament"
+msgstr "L’Amalea està sorpresa positivament"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:540
 msgid "Amalea is celebrating a happy event…"
-msgstr "L'Amalea celebra un feliç esdeveniment…"
+msgstr "L’Amalea celebra un feliç esdeveniment…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:542
@@ -1144,11 +1144,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:547
 msgid "Amalea Analyzes the Economy"
-msgstr "L'Amalea analitza l'economia"
+msgstr "L’Amalea analitza l’economia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:548
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "L'Amalea recorda en Lutius sobre les masoveries…"
+msgstr "L’Amalea recorda en Lutius sobre les masoveries…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:550
@@ -1157,25 +1157,25 @@ msgid ""
 "there might be a problem with our farms. They don’t show any productivity "
 "although there is enough space to plant wheat."
 msgstr ""
-"Mireu, Lutius. He analitzat l'economia una mica més a fons. Crec que tenim "
+"Mireu, Lutius. He analitzat l’economia una mica més a fons. Crec que tenim "
 "un problema a les masoveries. Sembla que no produeixen res encara que "
-"disposen d'espai per produir blat."
+"disposen d’espai per produir blat."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:553
 msgid ""
 "I think we should have a deeper look into the issue and visit one of them."
 msgstr ""
-"Crec que hauríem de mirar més atentament aquest assumpte i visitar-ne d'un "
-"d'ells."
+"Crec que hauríem de mirar més atentament aquest assumpte i visitar-ne d’un "
+"d’ells."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Amalea’s Restrictions"
-msgstr "Les restriccions de l'Amalea"
+msgstr "Les restriccions de l’Amalea"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:561
 msgid "Amalea restricts the building possibilities…"
-msgstr "L'Amalea restringeix les possibilitats de construcció…"
+msgstr "L’Amalea restringeix les possibilitats de construcció…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:563
@@ -1183,8 +1183,8 @@ msgid ""
 "Excuse me Lutius, but I think the most critical resources in the current "
 "state of our economy are logs."
 msgstr ""
-"Perdoneu-me Lutius, però crec que l'abastiment més crític en l'estat actual "
-"de l'economia són els troncs."
+"Perdoneu-me Lutius, però crec que l’abastiment més crític en l’estat actual "
+"de l’economia són els troncs."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:566
@@ -1193,18 +1193,18 @@ msgid ""
 " lumberjack’s house until we have gained enough building materials by "
 "dismantling the ineffective buildings."
 msgstr ""
-"Per tant, m'he pres la llibertat de restringir les opcions de construcció a "
+"Per tant, m’he pres la llibertat de restringir les opcions de construcció a "
 "només cases del llenyataire fins que tinguem prou materials desmantellant "
 "els edificis inefectius."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:571
 msgid "Amalea Reminds to Clear Road Network"
-msgstr "L'Amalea recorda que cal netejar la xarxa de camins"
+msgstr "L’Amalea recorda que cal netejar la xarxa de camins"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:572
 msgid "Amalea reminds Lutius of the scrambled road network…"
 msgstr ""
-"L'Amalea recorda en Lutius que la xarxa de camins és massa embolicada…"
+"L’Amalea recorda en Lutius que la xarxa de camins és massa embolicada…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
@@ -1212,8 +1212,8 @@ msgid ""
 "Look Brother, I have just realized we haven’t cleared the road network yet. "
 "I think we should do so very quickly to free enough space for new buildings."
 msgstr ""
-"Mira, germà. Acabo d'adonar-me que encara no hem arreglat la xarxa de "
-"camins. Crec que ho hauríem de fer de pressa per disposar d'espai per "
+"Mira, germà. Acabo d’adonar-me que encara no hem arreglat la xarxa de "
+"camins. Crec que ho hauríem de fer de pressa per disposar d’espai per "
 "edificis nous."
 
 #. TRANSLATORS: Amalea
@@ -1223,8 +1223,8 @@ msgid ""
 "ends (flags with only one road) and not more than one flag with more than "
 "four roads attached."
 msgstr ""
-"Per aconseguir-ho, ens hem d'assegurar que no hi hagi més de tres camins "
-"sense sortida (banderes a les quals sols arriba un camí) i no més d'una "
+"Per aconseguir-ho, ens hem d’assegurar que no hi hagi més de tres camins "
+"sense sortida (banderes a les quals sols arriba un camí) i no més d’una "
 "bandera connectada a més de quatre camins."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
@@ -1235,7 +1235,7 @@ msgstr "Derrotats!"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:583
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:602
 msgid "Amalea reports our defeat…"
-msgstr "L'Amalea informa de la derrota…"
+msgstr "L’Amalea informa de la derrota…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:585
@@ -1248,7 +1248,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:591
 msgid "Amalea reports our headquarters lost…"
-msgstr "L'Amalea informa de la pèrdua del quarter general…"
+msgstr "L’Amalea informa de la pèrdua del quarter general…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
@@ -1281,11 +1281,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:609
 msgid "Amalea in a Hurry"
-msgstr "L'Amalea està amoïnada"
+msgstr "L’Amalea està amoïnada"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:610
 msgid "Amalea is very busy…"
-msgstr "L'Amalea està molt enfeinada…"
+msgstr "L’Amalea està molt enfeinada…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:612
@@ -1294,7 +1294,7 @@ msgid ""
 "I’ll be very busy to examine everything, so I won’t be here to provide as "
 "detailed advice as I used to do."
 msgstr ""
-"Com podeu veure, sembla que hi ha moltes coses d'aquesta economia que no "
+"Com podeu veure, sembla que hi ha moltes coses d’aquesta economia que no "
 "funcionen. Estaré molt ocupat examinant-ho tot, així que no estaré aquí per "
 "aconsellar-vos tal com he fet fins ara."
 
@@ -1321,11 +1321,11 @@ msgid ""
 msgstr ""
 "Senyor, és un gran plaer tornar a ser a casa. I el millor de tot és que veig"
 " que encara tenim algunes forces militars. Compto cinc torres i una "
-"fortalesa des d'aquí."
+"fortalesa des d’aquí."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:630
 msgid "We Could Use The Military Instead"
-msgstr "Podríem utilitzar l'exèrcit"
+msgstr "Podríem utilitzar l’exèrcit"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:631
 msgid "Saledus raises his voice…"
@@ -1383,7 +1383,7 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
-"Senyor, admeto que s'ha provat que és un bon tracte, encara que podríem "
+"Senyor, admeto que s’ha provat que és un bon tracte, encara que podríem "
 "haver obtingut els plans molt més aviat. De totes maneres, no podrem fer més"
 " tractes amb els bàrbars, així que millor que els soldats estiguin de bon "
 "humor i que els entrenem adequadament."
@@ -1432,7 +1432,7 @@ msgstr ""
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Perhaps we should train them further in the arena as well."
-msgstr "Potser els hauríem d'entrenar més a la palestra."
+msgstr "Potser els hauríem d’entrenar més a la palestra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:684
 msgid "Training is Needed"
@@ -1460,14 +1460,14 @@ msgid ""
 "improve this. Alas! But we need to use what we have to get prepared for "
 "battle."
 msgstr ""
-"Desafortunadament, només tenim una palestra i un camp d'entrenament molt "
-"vell amb poca capacitat d'emmagatzemament. I cap dels nostres constructors "
+"Desafortunadament, només tenim una palestra i un camp d’entrenament molt "
+"vell amb poca capacitat d’emmagatzemament. I cap dels nostres constructors "
 "sap com millorar-ho. Ai! Necessitem usar tot el que tinguem preparat per la "
 "batalla."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:696
 msgid "Praise The Army of The Empire"
-msgstr "Alabeu l'exèrcit de l'imperi"
+msgstr "Alabeu l’exèrcit de l’imperi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:697
 msgid "Saledus is happy…"
@@ -1480,8 +1480,8 @@ msgid ""
 "builders and developed better and more efficient training buildings "
 "together."
 msgstr ""
-"Senyor, després d'entrenar el grup de reclutes, els nostres entrenadors han "
-"consultat als constructors i junts han desenvolupat edificis d'entrenament "
+"Senyor, després d’entrenar el grup de reclutes, els nostres entrenadors han "
+"consultat als constructors i junts han desenvolupat edificis d’entrenament "
 "més eficients."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:701
@@ -1508,7 +1508,7 @@ msgid ""
 "can. I really would consider them heroes after that."
 msgstr ""
 "General, ara que disposem de més cervesa i de millor qualitat i "
-"d'instal·lacions d'entrenament millorades, hauríem d'entrenar completament "
+"d’instal·lacions d’entrenament millorades, hauríem d’entrenar completament "
 "tants soldats com puguem. Crec que si ho fem podríem considerar-los herois."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:713
@@ -1533,7 +1533,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:722
 msgid "We Should Expel The Barbarians"
-msgstr "Hem d'expulsar els bàrbars"
+msgstr "Hem d’expulsar els bàrbars"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:723
 msgid "Saledus is excited…"
@@ -1546,14 +1546,14 @@ msgid ""
 "Barbarians from our homeland."
 msgstr ""
 "Ara que ja tenim uns quants soldats completament entrenats, és hora "
-"d'expulsar els bàrbars de la nostra terra."
+"d’expulsar els bàrbars de la nostra terra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:727
 msgid ""
 "Let’s finish them off and regain control over our lands. They shall regret "
 "deeply that they ever came!"
 msgstr ""
-"Acabem amb ells i recuperem el control d'aquestes terres. Han de lamentar "
+"Acabem amb ells i recuperem el control d’aquestes terres. Han de lamentar "
 "haver vingut!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:734
@@ -1570,8 +1570,8 @@ msgid ""
 "Sire, finally we have defeated the Barbarians. We have expelled even the "
 "last of them. May they never come back!"
 msgstr ""
-"Senyor, finalment hem derrotat els bàrbars. Hem expulsat fins l'últim bàrbar"
-" d'aquestes terres. Que no tornin mai!"
+"Senyor, finalment hem derrotat els bàrbars. Hem expulsat fins l’últim bàrbar"
+" d’aquestes terres. Que no tornin mai!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:739
 msgid ""
@@ -1579,13 +1579,13 @@ msgid ""
 "But first of all we should have some wine to celebrate our victory and our "
 "reclaimed freedom."
 msgstr ""
-"Ara és hora d'esbrinar per què ha succeït tot aquest embolic. Però abans "
+"Ara és hora d’esbrinar per què ha succeït tot aquest embolic. Però abans "
 "hauríem de beure una mica de vi per celebrar la victòria i la nostra "
 "reclamada llibertat."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:744
 msgid "The Enemy is Near"
-msgstr "L'enemic està prop"
+msgstr "L’enemic està prop"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:745
 msgid "Saledus is alerted…"
@@ -1598,14 +1598,14 @@ msgid ""
 " made contact with the enemy."
 msgstr ""
 "Senyor, no tenim prou soldats entrenats completament, però acabem de topar-"
-"nos amb l'enemic."
+"nos amb l’enemic."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid ""
 "We have to finish them off and regain control over our lands. They shall "
 "regret deeply that they ever came!"
 msgstr ""
-"Hem d'acabar amb ells i recuperar el control d'aquestes terres. Han de "
+"Hem d’acabar amb ells i recuperar el control d’aquestes terres. Han de "
 "lamentar haver vingut!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:760
@@ -1714,7 +1714,7 @@ msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
 msgstr ""
-"L'agricultor d'aquesta masoveria de blat no té terreny lliure per sembrar-hi"
+"L’agricultor d’aquesta masoveria de blat no té terreny lliure per sembrar-hi"
 " llavors."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/foresters_house1/init.lua:7
@@ -1744,7 +1744,7 @@ msgstr "Sembra i recol·lecta blat."
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:112
 msgctxt "empire_building"
 msgid "Plants trees in the surrounding area."
-msgstr "Planta arbres a l'àrea de treball."
+msgstr "Planta arbres a l’àrea de treball."
 
 #. TRANSLATORS: Note helptext for an empire production site: Forester’s House
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:114
@@ -1753,7 +1753,7 @@ msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
 msgstr ""
-"La casa del guarda forestal necessita espais lliures dins l'àrea de treball "
+"La casa del guarda forestal necessita espais lliures dins l’àrea de treball "
 "per plantar-hi arbres."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Lumberjack’s
@@ -1761,7 +1761,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/init.lua:121
 msgctxt "empire_building"
 msgid "Fells trees in the surrounding area and processes them into logs."
-msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
+msgstr "Tala arbres de l’àrea del voltant i n’obté troncs."
 
 #. TRANSLATORS: Note helptext for an empire production site: Lumberjack’s
 #. House
@@ -1769,7 +1769,7 @@ msgstr "Tala arbres de l'àrea del voltant i n'obté troncs."
 msgctxt "empire_building"
 msgid "The lumberjack’s house needs trees to fell within the work area."
 msgstr ""
-"El llenyataire d'aquesta casa necessita arbres per talar dins la seva àrea "
+"El llenyataire d’aquesta casa necessita arbres per talar dins la seva àrea "
 "de treball."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
@@ -1815,7 +1815,7 @@ msgid ""
 "In the temple of Vesta, the wares to worship are stored. It is the home of "
 "the priestesses and the guards of the goddess."
 msgstr ""
-"En el temple de Vesta, s'emmagatzemen béns i ofrenes. És la casa de les "
+"En el temple de Vesta, s’emmagatzemen béns i ofrenes. És la casa de les "
 "sacerdotesses i de la guàrdia de la deessa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/lumberjacks_house1/init.lua:7
@@ -1845,7 +1845,7 @@ msgid ""
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
 msgstr ""
-"El llenyataire d'aquesta casa no pot trobar més arbres a la seva àrea de "
+"El llenyataire d’aquesta casa no pot trobar més arbres a la seva àrea de "
 "treball. Hauríeu de considerar desmantellar-la, destruir-la o construir una "
 "casa de guarda forestal."
 
@@ -1868,7 +1868,7 @@ msgstr "Temple de Vesta"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:7
 msgctxt "empire_building"
 msgid "Training Camp"
-msgstr "Camp d'entrenament"
+msgstr "Camp d’entrenament"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:84
 msgctxt "empire_building"
@@ -1878,22 +1878,22 @@ msgstr "dormir"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:91
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "promoure l'atac del soldat de nivell 0 a nivell 1"
+msgstr "promoure l’atac del soldat de nivell 0 a nivell 1"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:101
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "promoure l'atac del soldat de nivell 1 a nivell 2"
+msgstr "promoure l’atac del soldat de nivell 1 a nivell 2"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:111
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "promoure l'atac del soldat de nivell 2 a nivell 3"
+msgstr "promoure l’atac del soldat de nivell 2 a nivell 3"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:121
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "promoure l'atac del soldat de nivell 3 a nivell 4"
+msgstr "promoure l’atac del soldat de nivell 3 a nivell 4"
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:131
 msgctxt "empire_building"
@@ -1926,7 +1926,7 @@ msgstr "Sense soldats per entrenar"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/trainingcamp1/init.lua:179
 msgctxt "empire_building"
 msgid "No soldier found for this training level!"
-msgstr "No s'ha trobat cap soldat per entrenar aquest nivell."
+msgstr "No s’ha trobat cap soldat per entrenar aquest nivell."
 
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:7
 msgctxt "empire_building"
@@ -1946,4 +1946,4 @@ msgstr "No hi ha aigua"
 #: ../../data/campaigns/emp04.wmf/scripting/tribes/well1/init.lua:54
 msgctxt "empire_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr "El treballador d'aquest pou no pot trobar-hi aigua."
+msgstr "El treballador d’aquest pou no pot trobar-hi aigua."

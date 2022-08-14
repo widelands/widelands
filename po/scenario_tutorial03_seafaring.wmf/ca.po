@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Juanjo, 2015-2017,2019-2021
+# Juanjo, 2015-2017,2019-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: Juanjo, 2015-2017,2019-2021\n"
+"Last-Translator: Juanjo, 2015-2017,2019-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +47,7 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Aquí a la part nord només tenim una mina d'or i un magatzem. Tot i que els miners estan ben proveïts de menjar, no hi ha cap camí per transportar el mineral d'or al forn de metalls de la part sud."
+msgstr "Aquí a la part nord només tenim una mina d’or i un magatzem. Tot i que els miners estan ben proveïts de menjar, no hi ha cap camí per transportar el mineral d’or al forn de metalls de la part sud."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
@@ -61,7 +61,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "Però no vull apressar-vos: acabeu d'arribar i probablement voldreu mirar més detalladament el nostre campament. Jo també descansaré una mica i tornaré aviat."
+msgstr "Però no vull apressar-vos: acabeu d’arribar i probablement voldreu mirar més detalladament el nostre campament. Jo també descansaré una mica i tornaré aviat."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -82,7 +82,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr "A més a més, els ports ofereixen la possibilitat de transportar béns en vaixells. Quan cliqueu un port de la vostra propietat, observareu dues pestanyes addicionals: «Béns preparats per embarcar» i «Treballadors esperant per embarcar». Estan esperant un vaixell per transportar-los a un altre port. Actualment, no hi ha res perquè encara no s'ha construït un segon port. Arreglem-ho!"
+msgstr "A més a més, els ports ofereixen la possibilitat de transportar béns en vaixells. Quan cliqueu un port de la vostra propietat, observareu dues pestanyes addicionals: «Béns preparats per embarcar» i «Treballadors esperant per embarcar». Estan esperant un vaixell per transportar-los a un altre port. Actualment, no hi ha res perquè encara no s’ha construït un segon port. Arreglem-ho!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
@@ -113,7 +113,7 @@ msgstr "Les zones portuàries les marca el dissenyador del mapa, així que un ma
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr "Pot ser que ja us heu adonat que teniu un d'aquests símbols al costat del vostre castell."
+msgstr "Pot ser que ja us heu adonat que teniu un d’aquests símbols al costat del vostre castell."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
@@ -142,7 +142,7 @@ msgstr "Els ports es construeixen com els edificis normals, però només estan d
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr "Encara que aquests ports actuen com a magatzems, no se n'haurien de construir més dels necessaris: per construir-los es necessita quars, diamants i or, recursos poc abundants."
+msgstr "Encara que aquests ports actuen com a magatzems, no se n’haurien de construir més dels necessaris: per construir-los es necessita quars, diamants i or, recursos poc abundants."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
@@ -161,7 +161,7 @@ msgstr "Genial. Mentre es construeix el port, anem a construir vaixells."
 msgid ""
 "Ships are constructed at the coastline near a shipyard by a shipwright. We "
 "have to build one somewhere close to the shore."
-msgstr "Els vaixells són construïts a la costa prop de la drassana pel mestre d'aixa. Haurem de construir-ne un en algun lloc proper de la costa."
+msgstr "Els vaixells són construïts a la costa prop de la drassana pel mestre d’aixa. Haurem de construir-ne un en algun lloc proper de la costa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
@@ -185,7 +185,7 @@ msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "La drassana és un edifici mitjà. Encara que pot construir-se en qualsevol lloc del mapa, el mestre d'aixa només treballarà prop de la costa, on no hi hagi arbres o camins que el molestin."
+msgstr "La drassana és un edifici mitjà. Encara que pot construir-se en qualsevol lloc del mapa, el mestre d’aixa només treballarà prop de la costa, on no hi hagi arbres o camins que el molestin."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
@@ -196,18 +196,18 @@ msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr "Molt bé. S'ha completat la drassana i el mestre d'aixa ja ha començat a treballar. Per construir vaixells, necessitarà arbres, taulons i teles de seda d'aranya, que es transportaran a la drassana."
+msgstr "Molt bé. S’ha completat la drassana i el mestre d’aixa ja ha començat a treballar. Per construir vaixells, necessitarà arbres, taulons i teles de seda d’aranya, que es transportaran a la drassana."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr "El mestre d'aixa portarà els béns que necessita a un lloc lliure de la costa i hi construirà el vaixell allí. Quan el nostre primer vaixell estigui acabat, el baixarà fins a dins del mar i en començarà a construir un altre."
+msgstr "El mestre d’aixa portarà els béns que necessita a un lloc lliure de la costa i hi construirà el vaixell allí. Quan el nostre primer vaixell estigui acabat, el baixarà fins a dins del mar i en començarà a construir un altre."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
-msgstr "Hauríem d'esperar fins a tenir dos vaixells. De moment, això és tot."
+msgstr "Hauríem d’esperar fins a tenir dos vaixells. De moment, això és tot."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
 msgid "Ships"
@@ -225,7 +225,7 @@ msgstr "Els vaixells es construeixen automàticament quan la drassana estigui ac
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
-msgstr "Espereu fins que el mestre d'aixa hagi construït dos vaixells."
+msgstr "Espereu fins que el mestre d’aixa hagi construït dos vaixells."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:109
 msgid "Do not forget to stop your shipyard when you have enough ships."
@@ -248,14 +248,14 @@ msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr "Heu de parar la drassana quan tingueu suficients vaixells. Si no, el mestre d'aixa continuarà consumint béns, produint vaixells que potser no us seran útils."
+msgstr "Heu de parar la drassana quan tingueu suficients vaixells. Si no, el mestre d’aixa continuarà consumint béns, produint vaixells que potser no us seran útils."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:339
 msgid ""
 "This is the icon for stopping production. You will find it in the building "
 "window."
-msgstr "Aquest és el botó per parar la producció. El trobareu en la finestra de l'edifici."
+msgstr "Aquest és el botó per parar la producció. El trobareu en la finestra de l’edifici."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
@@ -275,7 +275,7 @@ msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr "Com segurament ja us n'haureu adonat, no hi ha ferro a la muntanya de l'oest. Tenim abundant carbó i mineral d'or, però sense mineral de ferro no podem produir cap eina."
+msgstr "Com segurament ja us n’haureu adonat, no hi ha ferro a la muntanya de l’oest. Tenim abundant carbó i mineral d’or, però sense mineral de ferro no podem produir cap eina."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
@@ -297,7 +297,7 @@ msgstr "Expedicions"
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr "Durant una expedició, s'envia un vaixell per descobrir noves illes i potser fundar-hi una nova colònia."
+msgstr "Durant una expedició, s’envia un vaixell per descobrir noves illes i potser fundar-hi una nova colònia."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
@@ -306,7 +306,7 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Les expedicions es poden iniciar en qualsevol port. La primera fase és portar tots els béns necessaris al port escollit. Aquests béns són els materials per construir el nou port si l'expedició té èxit. És obvi que també necessitareu un constructor a l'expedició. Quan tot estigui preparat, un vaixell anirà al port i ho recollirà tot per començar la segona fase: buscar un lloc on construir el nou port."
+msgstr "Les expedicions es poden iniciar en qualsevol port. La primera fase és portar tots els béns necessaris al port escollit. Aquests béns són els materials per construir el nou port si l’expedició té èxit. És obvi que també necessitareu un constructor a l’expedició. Quan tot estigui preparat, un vaixell anirà al port i ho recollirà tot per començar la segona fase: buscar un lloc on construir el nou port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
@@ -336,26 +336,26 @@ msgid ""
 "It might be useful to take some more wares with us than just the ones to "
 "build a new port. That way we will be able to start constructing new "
 "buildings as soon as the port has been constructed."
-msgstr "Pot ser útil portar alguns béns més amb nosaltres a banda dels que es necessiten per construir un port. Així, podrem construir altres edificis tan aviat com s'acabi d'enllestir el port."
+msgstr "Pot ser útil portar alguns béns més amb nosaltres a banda dels que es necessiten per construir un port. Així, podrem construir altres edificis tan aviat com s’acabi d’enllestir el port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:165
 msgid ""
 "You can take some additional wares, soldiers, or workers with you on an "
 "expedition. You can define them by filling the empty slots below the primary"
 " wares to build the port."
-msgstr "Podeu agafar béns, soldats o treballadors adicionals per a l'expedició. Podeu definir-los omplint les ranures buides sota els béns primaris per construir el port."
+msgstr "Podeu agafar béns, soldats o treballadors adicionals per a l’expedició. Podeu definir-los omplint les ranures buides sota els béns primaris per construir el port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:166
 msgid ""
 "Just click on the empty slots and then scroll through the list to choose the"
 " additional item."
-msgstr "Feu clic a les ranures buides i moveu-vos per la llista per escollir l'element addicional."
+msgstr "Feu clic a les ranures buides i moveu-vos per la llista per escollir l’element addicional."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:167
 msgid ""
 "Now try this out. A small dot in green, yellow, or red tells you whether the"
 " item has arrived, is on its way or is not available respectively."
-msgstr "Proveu això. Un punt petit en verd, groc o vermell us indica si l'element ja ha arribat, si està en camí o si no està disponible respectivament."
+msgstr "Proveu això. Un punt petit en verd, groc o vermell us indica si l’element ja ha arribat, si està en camí o si no està disponible respectivament."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid "Expedition"
@@ -363,7 +363,7 @@ msgstr "Expedició"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid "Start an expedition"
-msgstr "Comença l'expedició"
+msgstr "Comença l’expedició"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid "Start an expedition."
@@ -381,7 +381,7 @@ msgstr "Cercant prats més verds"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Start your expedition"
-msgstr "Comenceu l'expedició"
+msgstr "Comenceu l’expedició"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
@@ -390,7 +390,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "El vaixell de l'expedició està llest. Espera les vostres ordres davant del port. Ja no transporta béns entre els ports. Empreu els botons per enviar el vaixell en qualsevol de les sis direccions principals del mapa del Widelands. Quan hagi arribat a la costa, podràs fer-lo viatjar al voltant de la costa fins que trobi un lloc adequat per construir un port."
+msgstr "El vaixell de l’expedició està llest. Espera les vostres ordres davant del port. Ja no transporta béns entre els ports. Empreu els botons per enviar el vaixell en qualsevol de les sis direccions principals del mapa del Widelands. Quan hagi arribat a la costa, podràs fer-lo viatjar al voltant de la costa fins que trobi un lloc adequat per construir un port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid ""
@@ -409,7 +409,7 @@ msgstr "Llavors es descarregaran els béns i el vaixell tornarà a la seva tasca
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
-msgstr "Busqueu una illa amb una muntanya i trobeu-hi un espai per al port. Després, colonitzeu l'illa."
+msgstr "Busqueu una illa amb una muntanya i trobeu-hi un espai per al port. Després, colonitzeu l’illa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
 msgid "Explore"
@@ -428,7 +428,7 @@ msgstr "Navegueu amb el vaixell a una illa que pugui contenir mineral de ferro."
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
-msgstr "Quan feu clic en un vaixell d'expedició, s'obre una finestra des d'on es pot controlar el vaixell."
+msgstr "Quan feu clic en un vaixell d’expedició, s’obre una finestra des d’on es pot controlar el vaixell."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:202
 msgid "When you have found a suitable port space, build a port there."
@@ -455,7 +455,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr "Fins ara heu après sobre la navegació per mar: com construir ports i vaixells i com enviar-los d'expedició. Recordeu que les expedicions a vegades són la forma més ràpida d'arribar als subministraments essencials. De fet, a vegades seran l'única forma d'arribar-hi."
+msgstr "Fins ara heu après sobre la navegació per mar: com construir ports i vaixells i com enviar-los d’expedició. Recordeu que les expedicions a vegades són la forma més ràpida d’arribar als subministraments essencials. De fet, a vegades seran l’única forma d’arribar-hi."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:214
 msgid ""
@@ -463,14 +463,14 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "Però vull advertir-vos. Els ports són com qualsevol quarter general: poden ser atacats per qualsevol enemic proper. Ara, el quarter general té soldats per defensar-se, però el port creat recentment no en té. Hauríeu d'evitar, per tant, crear ports al costat de l'enemic."
+msgstr "Però vull advertir-vos. Els ports són com qualsevol quarter general: poden ser atacats per qualsevol enemic proper. Ara, el quarter general té soldats per defensar-se, però el port creat recentment no en té. Hauríeu d’evitar, per tant, crear ports al costat de l’enemic."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should make "
 "building one or two military fortifications around your new colonies a "
 "priority."
-msgstr "En aquest mapa no s'ha de témer pels enemics. En les altres partides, hauríeu de considerar prioritari construir una o dues fortificacions militars al voltant de les colònies."
+msgstr "En aquest mapa no s’ha de témer pels enemics. En les altres partides, hauríeu de considerar prioritari construir una o dues fortificacions militars al voltant de les colònies."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:222
 msgid "Our mission"
@@ -485,7 +485,7 @@ msgid ""
 "It was a long and expensive job to get here. The island has not much to "
 "offer, but there is some iron ore inside its mountain. Our economy needs "
 "iron ore, so we have to build an iron mine."
-msgstr "Ha sigut una feina llarga i dura arribar aquí. L'illa no té molt per oferir, però hi ha una mica de ferro a la muntanya. L'economia necessita el mineral de ferro, així que s'ha de construir una mina."
+msgstr "Ha sigut una feina llarga i dura arribar aquí. L’illa no té molt per oferir, però hi ha una mica de ferro a la muntanya. L’economia necessita el mineral de ferro, així que s’ha de construir una mina."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
 msgid "Start mining iron ore in the mountain."
@@ -497,15 +497,15 @@ msgstr "Mina de ferro"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:234
 msgid "Build an iron mine on the island"
-msgstr "Construïu una mina de ferro a l'illa"
+msgstr "Construïu una mina de ferro a l’illa"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
 msgid "Our economy lacks resources."
-msgstr "A l'economia li falten recursos."
+msgstr "A l’economia li falten recursos."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
 msgid "Start mining iron ore in mountains on the island."
-msgstr "Comenceu a treure mineral de ferro de les muntanyes de l'illa."
+msgstr "Comenceu a treure mineral de ferro de les muntanyes de l’illa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:243
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:256
@@ -513,25 +513,25 @@ msgstr "Comenceu a treure mineral de ferro de les muntanyes de l'illa."
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:302
 msgid "There is more to it…"
-msgstr "Encara n'hi ha més…"
+msgstr "Encara n’hi ha més…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:245
 msgid "Another gold mountain"
-msgstr "Una altra muntanya d'or"
+msgstr "Una altra muntanya d’or"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr "La drassana tardarà una estona a construir alguns vaixells. Mentre esperem, hi ha un altre tipus de transport aquàtic que m'agradaria mostrar-vos."
+msgstr "La drassana tardarà una estona a construir alguns vaixells. Mentre esperem, hi ha un altre tipus de transport aquàtic que m’agradaria mostrar-vos."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr "Els vaixells tenen l'avantatge que poden transportar grans quantitats de béns  i treballadors alhora, però desafortunadament les seves destinacions estan limitades als pocs llocs on es pot construir un port."
+msgstr "Els vaixells tenen l’avantatge que poden transportar grans quantitats de béns  i treballadors alhora, però desafortunadament les seves destinacions estan limitades als pocs llocs on es pot construir un port."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid ""
@@ -540,7 +540,7 @@ msgid ""
 "separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
-msgstr "Mireu la vall al sud. Hem trobat una muntanya amb or i voldríem extreure'n els minerals. Però els rius que la separen de la colònia principal són massa amples per construir-hi ponts i massa estrets perquè hi passin els vaixells. Els camins hauran de donar llargues voltes i el transport serà molt lent."
+msgstr "Mireu la vall al sud. Hem trobat una muntanya amb or i voldríem extreure’n els minerals. Però els rius que la separen de la colònia principal són massa amples per construir-hi ponts i massa estrets perquè hi passin els vaixells. Els camins hauran de donar llargues voltes i el transport serà molt lent."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:258
 msgid "Rowboats & Ferry Yards"
@@ -551,14 +551,14 @@ msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
 "who never leaves his boat)."
-msgstr "Aquí és on entren en joc els transbordadors. Són unes embarcacions petites amb rems que serveixen per transportar un bé cada vegada. No serveixen per traslladar treballadors, llevat del que porta l'embarcació i que mai en baixarà."
+msgstr "Aquí és on entren en joc els transbordadors. Són unes embarcacions petites amb rems que serveixen per transportar un bé cada vegada. No serveixen per traslladar treballadors, llevat del que porta l’embarcació i que mai en baixarà."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
 msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Els transbordadors es construeixen en tallers de transbordadors. Fer una embarcació costa dos troncs, una peça de tela i relativament poc temps. Un taller de transbordadors és un edifici mitjà que s'ha de construir prop de la costa."
+msgstr "Els transbordadors es construeixen en tallers de transbordadors. Fer una embarcació costa dos troncs, una peça de tela i relativament poc temps. Un taller de transbordadors és un edifici mitjà que s’ha de construir prop de la costa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
 msgid "Let’s build a ferry yard close to the shore before we will continue."
@@ -586,7 +586,7 @@ msgstr "Cal que construïu el taller de transbordadors prop de la costa. Si no, 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:293
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:312
 msgid "Waterways"
-msgstr "Vies d'aigua"
+msgstr "Vies d’aigua"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:281
 msgid ""
@@ -594,7 +594,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr "A diferència dels vaixells que viatgen als ports on es necessiten, els transbordadors tenen una ruta fixa de transport anomenada via d'aigua. Una via d'aigua és com un camí: feu clic en una bandera prop de la costa, escolliu «Construir una via d'aigua» i dibuixeu el camí de la via com ho faríeu amb un camí."
+msgstr "A diferència dels vaixells que viatgen als ports on es necessiten, els transbordadors tenen una ruta fixa de transport anomenada via d’aigua. Una via d’aigua és com un camí: feu clic en una bandera prop de la costa, escolliu «Construir una via d’aigua» i dibuixeu el camí de la via com ho faríeu amb un camí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:282
 msgid ""
@@ -602,14 +602,14 @@ msgid ""
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr "Les vies d'aigua també es poden construir al mar en aquelles zones poc profundes per als vaixells grans. Les dues regles per definir-les és que els dos triangles adjacents a cada segment de la via han de ser aigua i que el camí ha d'estar dins del territori del jugador."
+msgstr "Les vies d’aigua també es poden construir al mar en aquelles zones poc profundes per als vaixells grans. Les dues regles per definir-les és que els dos triangles adjacents a cada segment de la via han de ser aigua i que el camí ha d’estar dins del territori del jugador."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:283
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr "Observeu també que les vies d'aigua, a diferència dels camins, no es poden construir tant llargues com vulgueu. Cada mapa té una restricció de llargada per a les vies d'aigua. En aquest mapa és de cinc caselles."
+msgstr "Observeu també que les vies d’aigua, a diferència dels camins, no es poden construir tant llargues com vulgueu. Cada mapa té una restricció de llargada per a les vies d’aigua. En aquest mapa és de cinc caselles."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:284
 msgid ""
@@ -619,7 +619,7 @@ msgstr "Tingueu sempre en compte que els transbordadors no transporten treballad
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 msgid "Allow me to show you how to build a waterway…"
-msgstr "Permeteu que us mostri com construir una via d'aigua…"
+msgstr "Permeteu que us mostri com construir una via d’aigua…"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:304
 msgid "Golden waves"
@@ -629,35 +629,35 @@ msgstr "Onades daurades"
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr "Com veieu, no és difícil. Quan definiu una via d'aigua, s'assignarà el transbordador lliure més proper."
+msgstr "Com veieu, no és difícil. Quan definiu una via d’aigua, s’assignarà el transbordador lliure més proper."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:306
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr "Ara és el vostre torn. Construïu una mina d'or a la muntanya del sud i connecteu-la al territori principal construint vies d'aigua per sobre dels rius."
+msgstr "Ara és el vostre torn. Construïu una mina d’or a la muntanya del sud i connecteu-la al territori principal construint vies d’aigua per sobre dels rius."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:314
 msgid "Build a gold mine and waterways"
-msgstr "Construïu una mina d'or i vies d'aigua"
+msgstr "Construïu una mina d’or i vies d’aigua"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:315
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr "Construïu una mina d'or a la muntanya del sud i connecteu-la al territori principal construint vies d'aigua per sobre dels rius."
+msgstr "Construïu una mina d’or a la muntanya del sud i connecteu-la al territori principal construint vies d’aigua per sobre dels rius."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:316
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr "Una via d'aigua és com un camí: feu clic en una bandera prop de la costa, escolliu «Construir una via d'aigua» i dibuixeu el camí de la via com ho faríeu amb un camí."
+msgstr "Una via d’aigua és com un camí: feu clic en una bandera prop de la costa, escolliu «Construir una via d’aigua» i dibuixeu el camí de la via com ho faríeu amb un camí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:317
 msgid ""
 "However, each segment of the waterway needs two water triangles next to it."
-msgstr "No obstant, cada segment de la via d'aigua necessita dos triangles al seu costat."
+msgstr "No obstant, cada segment de la via d’aigua necessita dos triangles al seu costat."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:323
 msgid "Conclusion"
@@ -671,7 +671,7 @@ msgstr "Quant als transbordadors"
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr "Ara només hi ha unes quantes coses més que m'agradaria que tingueu en compte quan useu transbordadors."
+msgstr "Ara només hi ha unes quantes coses més que m’agradaria que tingueu en compte quan useu transbordadors."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:327
 msgid ""
@@ -680,7 +680,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr "No oblideu que les embarcacions de rem són massa petites per transportar treballadors. Les podeu usar com a dreceres entre diferents parts del territori, però no per reclamar territori al que no podeu arribar ni per camins ni amb vaixell. No talleu mai tots els camins entre dos llocs connectats per vies d'aigua si no esteu segur que cap treballador s'hi haurà de desplaçar."
+msgstr "No oblideu que les embarcacions de rem són massa petites per transportar treballadors. Les podeu usar com a dreceres entre diferents parts del territori, però no per reclamar territori al que no podeu arribar ni per camins ni amb vaixell. No talleu mai tots els camins entre dos llocs connectats per vies d’aigua si no esteu segur que cap treballador s’hi haurà de desplaçar."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:328
 msgid ""
@@ -692,7 +692,7 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr "I si les vies d'aigua signifiquen un camí significativament més curt que els camins, s'intentarà enviar tants béns per la via d'aigua com sigui possible. Com una via d'aigua només pot tenir un transbordador –a diferència dels camins, que disposen d'un segon transportista si hi ha molts béns per transportar–, i solen ser més llargues, sempre hi ha un risc que es converteixen en un coll d'ampolla. Proveu de construir-ne unes quantes en paral·lel per distribuir els béns. Si no és possible, a vegades fins i tot és més eficient no usar vies d'aigua."
+msgstr "I si les vies d’aigua signifiquen un camí significativament més curt que els camins, s’intentarà enviar tants béns per la via d’aigua com sigui possible. Com una via d’aigua només pot tenir un transbordador –a diferència dels camins, que disposen d’un segon transportista si hi ha molts béns per transportar–, i solen ser més llargues, sempre hi ha un risc que es converteixen en un coll d’ampolla. Proveu de construir-ne unes quantes en paral·lel per distribuir els béns. Si no és possible, a vegades fins i tot és més eficient no usar vies d’aigua."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "Ferry yard production"
@@ -716,7 +716,7 @@ msgstr "Felicitats"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:349
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr "Heu aprés tot el que s'ha d'aprendre sobre els vaixells i transbordadors!"
+msgstr "Heu aprés tot el que s’ha d’aprendre sobre els vaixells i transbordadors!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:350
 msgid ""

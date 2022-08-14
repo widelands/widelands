@@ -260,6 +260,11 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
+"I miei soldati segnalano di aver trovato un luogo adatto ad un porto! Ora "
+"dobbiamo costruire un porto ed avviare una spedizione. Prima dobbiamo "
+"naturalmente costruire un'intera economia marittima, con un cantiere navale "
+"ed uno stabilimento tessile. Ma non perdiamo troppo tempo nel perfezionare "
+"la nostra economia – tutto ciò che importa è raggiungere presto il Nord."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
 msgid "A Strange Island"
