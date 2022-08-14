@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2017,2019-2021
+# Juanjo, 2015-2017,2019-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-02-13 02:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:54+0000\n"
-"Last-Translator: Juanjo, 2015-2017,2019-2021\n"
+"Last-Translator: Juanjo, 2015-2017,2019-2022\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -571,23 +571,23 @@ msgstr "Palmera datilera (plançó)"
 
 #: ../../data/world/immovables/trees/palm_oil/mature/init.lua:9
 msgid "Oil Palm (Mature)"
-msgstr "Palmera d'oli (adulta)"
+msgstr "Palmera d’oli (adulta)"
 
 #: ../../data/world/immovables/trees/palm_oil/old/init.lua:9
 msgid "Oil Palm (Old)"
-msgstr "Palmera d'oli (vella)"
+msgstr "Palmera d’oli (vella)"
 
 #: ../../data/world/immovables/trees/palm_oil/old/init.lua:10
 msgid "Oil Palm"
-msgstr "Palmera d'oli"
+msgstr "Palmera d’oli"
 
 #: ../../data/world/immovables/trees/palm_oil/pole/init.lua:9
 msgid "Oil Palm (Pole)"
-msgstr "Palmera d'oli (jove)"
+msgstr "Palmera d’oli (jove)"
 
 #: ../../data/world/immovables/trees/palm_oil/sapling/init.lua:9
 msgid "Oil Palm (Sapling)"
-msgstr "Palmera d'oli (plançó)"
+msgstr "Palmera d’oli (plançó)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/mature/init.lua:9
 msgid "Roystonea regia Palm (Mature)"
@@ -751,7 +751,7 @@ msgstr "Artefactes"
 
 #: ../../data/world/init.lua:207
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Aquests objectes inamovibles s'usen amb la condició de victòria «Artefactes»."
+msgstr "Aquests objectes inamovibles s’usen amb la condició de victòria «Artefactes»."
 
 #. TRANSLATORS: A category in the editor for placing immovables on the map.
 #: ../../data/world/init.lua:220
@@ -884,7 +884,7 @@ msgstr "Muntanya boscosa 2"
 
 #: ../../data/world/terrains/desert/highmountainmeadow/init.lua:5
 msgid "High Mountain Meadow"
-msgstr "Prat d'alta muntanya"
+msgstr "Prat d’alta muntanya"
 
 #: ../../data/world/terrains/desert/meadow/init.lua:5
 msgid "Meadow"

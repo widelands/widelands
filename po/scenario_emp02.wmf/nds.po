@@ -2,14 +2,14 @@
 # Copyright (C) 2005-2022 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018-2021
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:45+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -215,7 +215,7 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Aver dat sall noch mennig Jahren of sien! Eerst maal mutten wi uns um de Gegenwart kümmern un een paar Boomhauereen un eene Saagmöhlen bauen, um wichtige Baumaterialien to produzeren."
+msgstr "Aver dat sall noch mennig Jahren of sien! Eerst maal mutten wi uns um de Gegenwart kümmern un een paar Boomhauereen un eene Saagmöhlen bauen, um wichtig Baukraam to produzeren."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
@@ -350,7 +350,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Aver för all de groten Husen bruuken wi betere Baumaterialien. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
+msgstr "Aver för all de groten Husen bruuken wi betern Baukraam. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
