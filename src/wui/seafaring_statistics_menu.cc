@@ -123,7 +123,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Tooltip in the seafaring statistics window */
                   _("Watch the selected ship"),
-                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsWatchShip),
+                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsWatchShip, true),
                   UI::PanelStyle::kWui)),
      openwindowbtn_(
         &navigation_box_,
@@ -138,12 +138,13 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Tooltip in the seafaring statistics window */
                   _("Open the selected ship’s window"),
-                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow),
+                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, true),
                   UI::PanelStyle::kWui),
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Tooltip in the seafaring statistics window */
                   _("Go to the selected ship and open its window"),
-                  shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto),
+                  shortcut_string_for(
+                     KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, true),
                   UI::PanelStyle::kWui))),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
@@ -156,7 +157,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     as_tooltip_text_with_hotkey(
                        /** TRANSLATORS: Tooltip in the seafaring statistics window */
                        _("Center the map on the selected ship"),
-                       shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsGotoShip),
+                       shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsGotoShip, true),
                        UI::PanelStyle::kWui)),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
@@ -497,7 +498,8 @@ void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
 
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the ship statistics window */
-		   _("Show all ships"), shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterAll),
+		   _("Show all ships"),
+		   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterAll, true),
 		   UI::PanelStyle::kWui));
 	}
 }
@@ -506,27 +508,28 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 
 	idle_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
-	   _("Show empty ships"), shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterIdle),
+	   _("Show empty ships"),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterIdle, true),
 	   UI::PanelStyle::kWui));
 	shipping_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show ships shipping wares and workers"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterShipping),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterShipping, true),
 	   UI::PanelStyle::kWui));
 	waiting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show waiting expeditions"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpWait),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpWait, true),
 	   UI::PanelStyle::kWui));
 	scouting_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show scouting expeditions"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpScout),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpScout, true),
 	   UI::PanelStyle::kWui));
 	portspace_btn_.set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the ship statistics window */
 	   _("Show expeditions that have found a port space or are founding a colony"),
-	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace),
+	   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace, true),
 	   UI::PanelStyle::kWui));
 }
 

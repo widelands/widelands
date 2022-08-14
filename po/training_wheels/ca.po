@@ -50,7 +50,7 @@ msgstr "Ara podem veure on es poden construir edificis i banderes."
 #: ../../data/scripting/training_wheels/building_spaces.lua:55
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Click ‘OK’ to continue."
-msgstr "Feu clic al botó «D'acord» per continuar."
+msgstr "Feu clic al botó «D’acord» per continuar."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/flags.lua:60
@@ -81,7 +81,7 @@ msgstr "Ara comproveu si podeu posar més banderes als camins."
 
 #: ../../data/scripting/training_wheels/flags.lua:87
 msgid "Click ‘OK’ when you’re done."
-msgstr "Feu clic al botó «D'acord» quan hagueu acabat."
+msgstr "Feu clic al botó «D’acord» quan hagueu acabat."
 
 #. TRANSLATORS: The title of an in-game teaching objective
 #: ../../data/scripting/training_wheels/init.lua:142
@@ -111,8 +111,8 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
-"Feu clic en un espai d'edifici petit i seleccioneu l'edifici de la pestanya "
-"d'edificis petits."
+"Feu clic en un espai d’edifici petit i seleccioneu l’edifici de la pestanya "
+"d’edificis petits."
 
 #: ../../data/scripting/training_wheels/logs.lua:117
 #: ../../data/scripting/training_wheels/rocks.lua:117
@@ -120,8 +120,8 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
-"Feu clic en un espai d'edifici mitjà i seleccioneu l'edifici de la pestanya "
-"d'edificis mitjans."
+"Feu clic en un espai d’edifici mitjà i seleccioneu l’edifici de la pestanya "
+"d’edificis mitjans."
 
 #: ../../data/scripting/training_wheels/logs.lua:119
 #: ../../data/scripting/training_wheels/rocks.lua:119
@@ -129,8 +129,8 @@ msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
-"Feu clic en un espai d'edifici gran i seleccioneu l'edifici de la pestanya "
-"d'edificis grans."
+"Feu clic en un espai d’edifici gran i seleccioneu l’edifici de la pestanya "
+"d’edificis grans."
 
 #: ../../data/scripting/training_wheels/logs.lua:122
 msgid ""
@@ -150,7 +150,7 @@ msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
-"Heu de subministrar troncs al clan. Cal que construïu l'edifici següent:"
+"Heu de subministrar troncs al clan. Cal que construïu l’edifici següent:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
 #: ../../data/scripting/training_wheels/logs.lua:149
@@ -164,7 +164,7 @@ msgstr "Camins"
 #: ../../data/scripting/training_wheels/logs.lua:141
 #: ../../data/scripting/training_wheels/rocks.lua:144
 msgid "Click on the flag in front of the building to start placing a road."
-msgstr "Feu clic a la bandera del davant de l'edifici per construir un camí."
+msgstr "Feu clic a la bandera del davant de l’edifici per construir un camí."
 
 #: ../../data/scripting/training_wheels/logs.lua:152
 msgid ""
@@ -175,11 +175,11 @@ msgstr ""
 #: ../../data/scripting/training_wheels/logs.lua:164
 #: ../../data/scripting/training_wheels/rocks.lua:166
 msgid "Click on the building’s button…"
-msgstr "Feu clic al botó de l'edifici…"
+msgstr "Feu clic al botó de l’edifici…"
 
 #: ../../data/scripting/training_wheels/logs.lua:166
 msgid "…then click on the flag in front of the target building."
-msgstr "… Llavors feu clic a la bandera de davant de l'edifici objectiu."
+msgstr "… Llavors feu clic a la bandera de davant de l’edifici objectiu."
 
 #: ../../data/scripting/training_wheels/logs.lua:178
 msgid ""
@@ -191,7 +191,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr "Obre la finestra d'objectius"
+msgstr "Obre la finestra d’objectius"
 
 #: ../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -208,7 +208,7 @@ msgstr "Tanca la finestra"
 
 #: ../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr "Tancament d'aquesta finestra"
+msgstr "Tancament d’aquesta finestra"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
@@ -216,7 +216,7 @@ msgid ""
 "in the toolbar on the bottom of the screen."
 msgstr ""
 "Podeu obrir i tancar la finestra fent clic en el botó «Objectius» de la "
-"barra d'eines de la part inferior de la pantalla."
+"barra d’eines de la part inferior de la pantalla."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
@@ -252,8 +252,8 @@ msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
 msgstr ""
-"La connexió entre els dos extrems és molt empinada. L'increment de velocitat"
-" en una direcció és enorme, mentre que l'alentiment en l'altra també és molt"
+"La connexió entre els dos extrems és molt empinada. L’increment de velocitat"
+" en una direcció és enorme, mentre que l’alentiment en l’altra també és molt"
 " important."
 
 #: ../../data/scripting/training_wheels/rocks.lua:128
@@ -266,7 +266,7 @@ msgid ""
 "You need to supply your tribe with granite. Please build the following "
 "building:"
 msgstr ""
-"Heu de subministrar granit al clan. Cal que construïu l'edifici següent:"
+"Heu de subministrar granit al clan. Cal que construïu l’edifici següent:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:155
 msgid ""
@@ -276,7 +276,7 @@ msgid ""
 msgstr ""
 "Feu clic al botó «Construeix camí». Llavors, feu clic als marcadors de "
 "colors del mapa per guiar el camí fins que arribeu a la bandera del davant "
-"de l'edifici objectiu."
+"de l’edifici objectiu."
 
 #: ../../data/scripting/training_wheels/rocks.lua:168
 msgid ""
@@ -284,7 +284,7 @@ msgid ""
 "reach the flag in front of the target building."
 msgstr ""
 "… Llavors feu clic als marcadors de colors en el mapa per guiar el camí fins"
-" que arribeu a la bandera del davant de l'edifici objectiu."
+" que arribeu a la bandera del davant de l’edifici objectiu."
 
 #: ../../data/scripting/training_wheels/rocks.lua:179
 msgid ""

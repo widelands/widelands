@@ -42,7 +42,7 @@ msgstr "Regles"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Us donem la benvinguda a l'escenari «Saltant d'illa a illa»"
+msgstr "Us donem la benvinguda a l’escenari «Saltant d’illa a illa»"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
@@ -51,21 +51,21 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr "«Saltant d'illa a illa» és un torneig tradicional en la cultura atlant. Les regles de la partida són senzilles: comenceu amb un quarter general en una illa. Quan acabeu el castell al final de la primera illa, rebreu un quarter general a la segona illa, que contindrà béns del teu primer quarter general."
+msgstr "«Saltant d’illa a illa» és un torneig tradicional en la cultura atlant. Les regles de la partida són senzilles: comenceu amb un quarter general en una illa. Quan acabeu el castell al final de la primera illa, rebreu un quarter general a la segona illa, que contindrà béns del teu primer quarter general."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "Si completeu un castell a l'àrea senyalada en la segona illa, aconseguireu un tercer quarter general en la tercera illa. Per guanyar la partida, haureu de construir un castell al centre de la tercera illa i mantenir-lo sota el vostre control durant 20 minuts."
+msgstr "Si completeu un castell a l’àrea senyalada en la segona illa, aconseguireu un tercer quarter general en la tercera illa. Per guanyar la partida, haureu de construir un castell al centre de la tercera illa i mantenir-lo sota el vostre control durant 20 minuts."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
 "Whenever you finish an island, you will get bonus wares, depending on how "
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
-msgstr "Quan acabeu una illa, rebreu béns com a recompensa, depenent de quants jugadors han acabat l'illa abans. Com més aviat acabeu, menys béns aconseguireu. Vegeu més avall per més detalls."
+msgstr "Quan acabeu una illa, rebreu béns com a recompensa, depenent de quants jugadors han acabat l’illa abans. Com més aviat acabeu, menys béns aconseguireu. Vegeu més avall per més detalls."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:24
 msgid ""
@@ -73,7 +73,7 @@ msgid ""
 " only meadows and resources. The economies you leave behind will continue to"
 " work for you, but you will only reap the benefits at the moment you reach a"
 " new island."
-msgstr "Cal tenir en compte que la primera illa només subministra roca i fusta, la segona només té prats i subministraments. Les economies que deixeu enrere continuaran funcionant, però només recol·lectareu els beneficis en el moment d'arribar a una nova illa."
+msgstr "Cal tenir en compte que la primera illa només subministra roca i fusta, la segona només té prats i subministraments. Les economies que deixeu enrere continuaran funcionant, però només recol·lectareu els beneficis en el moment d’arribar a una nova illa."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
@@ -113,19 +113,19 @@ msgstr "Segona illa"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:43
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr "El primer a arribar a l'illa número %2$i va ser el jugador %1$s."
+msgstr "El primer a arribar a l’illa número %2$i va ser el jugador %1$s."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:44
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr "El segon a arribar a l'illa número %2$i va ser el jugador %1$s."
+msgstr "El segon a arribar a l’illa número %2$i va ser el jugador %1$s."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr "El tercer a arribar a l'illa número %2$i va ser el jugador %1$s."
+msgstr "El tercer a arribar a l’illa número %2$i va ser el jugador %1$s."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr "El quart a arribar a l'illa número %2$i va ser el jugador %1$s."
+msgstr "El quart a arribar a l’illa número %2$i va ser el jugador %1$s."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "The reward for this feat amounts to:"

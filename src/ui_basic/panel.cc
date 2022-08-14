@@ -1579,8 +1579,7 @@ bool Panel::ui_mouserelease(const uint8_t button, int32_t x, int32_t y) {
  * Input callback function. Pass the mousemove event to the currently modal
  * panel.
  */
-bool Panel::ui_mousemove(
-   uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
+bool Panel::ui_mousemove(uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	if (!allow_user_input_) {
 		return true;
 	}
@@ -1594,7 +1593,16 @@ bool Panel::ui_mousemove(
 		return false;
 	}
 
-	return p->do_mousemove(state, x, y, xdiff, ydiff);
+	int factor = 1;
+	if (WLApplication::get()->is_mouse_locked()) {
+		if (matches_keymod(SDL_GetModState(), KMOD_CTRL)) {
+			factor = 4;
+		} else if (!matches_keymod(SDL_GetModState(), KMOD_SHIFT)) {
+			factor = 2;
+		}
+	}
+
+	return p->do_mousemove(state, x, y, xdiff * factor, ydiff * factor);
 }
 
 /**

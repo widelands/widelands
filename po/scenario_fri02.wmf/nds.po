@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2021
+# Benedikt Straub <benedikt-straub@web.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-06-22 03:53+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "Bau eene eenfache Weertskupp"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Supply All Basic Materials"
-msgstr "Versörgung mit allen Baumaterialien"
+msgstr "Versörgung mit all Baukraam"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:28
 msgid ""
@@ -579,7 +579,7 @@ msgid ""
 msgstr ""
 "Mienheer Reebaud, ick hebb noch mehr slimme Narichten. ’t gifft haast keene "
 "Fisse im Water. Wi könen Happen blot mit Früchten un Brood maken, aver um "
-"Soldaten uttobilden, bruken wi bannig  vööl Rökelfleesk un Rökelfiss. Dat "
+"Soldaten uttobilden, bruken wi bannig vööl Rökelfleesk un Rökelfiss. Dat "
 "bietje Fleesk, wat eene Sneeihirsktüchteree daarto produzeert, wenn se Fell "
 "maakt, is nich genoog."
 
@@ -785,7 +785,7 @@ msgstr ""
 "Mienheer Reebaud – wat deeser heerske Rieks-Prokonsul dwingt, is tum rasend "
 "worden. He behannelt uns as siene Slaven. Un wi könen heel nich so völe "
 "Waren verkroppen, um hüm to helpen. Ick slaa vör, deeses malle Kraamhuus "
-"oftobrannen un hüm siene egenen Slachten fechten to laten."
+"oftobrannen un hüm siene eegenen Slachten fechten to laten."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:307
@@ -796,7 +796,7 @@ msgid ""
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
 "Wenn ji uns deese Waren nich geevt, sall dat Riek ji as Feinde behanneln. Un"
-" daamit ji  jo dürabeles Metall nich verklüngelt, versegg ick ji vun nu of "
+" daamit ji jo dürabeles Metall nich verklüngelt, versegg ick ji vun nu of "
 "an, jo Gewest to vergrotern, bit ji uns jo Gaav geven hebbt. Dood dat nich, "
 "un dat Riek sall ji as Feinde behanneln."
 
