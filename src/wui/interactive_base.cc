@@ -314,7 +314,7 @@ void InteractiveBase::rebuild_mapview_menu() {
                                                               _("Show Quick Navigation"),
 		                 MapviewMenuEntry::kQuicknav,
 		                 g_image_cache->get("images/wui/menus/quicknav.png"), false, "",
-		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI));
+		                 shortcut_string_for(KeyboardShortcut::kCommonQuicknavGUI, false));
 	}
 
 	mapviewmenu_.select(last_selection);
