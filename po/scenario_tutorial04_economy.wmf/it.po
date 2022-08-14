@@ -614,7 +614,7 @@ msgid ""
 "because they supply our taverns, so you could set water to the highest "
 "priority for them. The other buildings (for example the donkey farm) would "
 "then get less water, but the bakery could work faster."
-msgstr "Nel nostro caso, potresti volerfar lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
+msgstr "Nel nostro caso, potresti voler far lavorare i forni il più rapidamente possibile, perchè riforniscono le nostre taverne, quindi dovresti indicare la priorità massima per l'acqua nei forni. Gli altri edifici (per esempio l'allevamento di asini) riceverebbero meno acqua, ma il forno potrebbe lavorare più in fretta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:334
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:336
@@ -838,7 +838,7 @@ msgstr "Per essere pronti a nuove fortificazioni, devi produrre 20 colonne di ma
 msgid ""
 "Your stonemason will not produce marble columns when they are not needed. "
 "You have to increase the target quantity."
-msgstr "Il tuo Tagliapietre non produrrà Colonne di marmo se non sono necessarie. Devi incrementare la quantità prefissata."
+msgstr "Il tuo scalpellino non produrrà colonne di marmo se non sono necessarie. Devi incrementare la quantità prefissata."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:500
 msgid ""

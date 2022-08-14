@@ -33,7 +33,7 @@ msgstr "Navegueu tot el que pugueu cap al nord, el més ràpid possible."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:40
 msgid "Destroy Angadthur’s Palace"
-msgstr "Destruïu el palau de l'Angadthur"
+msgstr "Destruïu el palau de l’Angadthur"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:42
 msgid "Destroy the Atlantean Headquarters and Build a Port"
@@ -44,8 +44,8 @@ msgid ""
 "Build a port on the northern shore of the island. The port space is located "
 "under Angadthur’s Headquarters."
 msgstr ""
-"Construïu un port a la costa de més al nord de l'illa. L'espai portuari es "
-"troba sota el quarter general de l'Angadthur."
+"Construïu un port a la costa de més al nord de l’illa. L’espai portuari es "
+"troba sota el quarter general de l’Angadthur."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:51
 msgid "Pay or Fight"
@@ -53,7 +53,7 @@ msgstr "Pagueu o lluiteu"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:53
 msgid "Pay the Empire or Destroy Their Port"
-msgstr "Pagueu a l'Imperi o destruïu el seu port"
+msgstr "Pagueu a l’Imperi o destruïu el seu port"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:54
 #, lua-format
@@ -64,10 +64,10 @@ msgid_plural ""
 "Gather %d gold bars in your northernmost port to obtain a passage from "
 "Marcus Caius Iniucundus."
 msgstr[0] ""
-"Recolliu %d lingot d'or al port de més al nord per obtenir un passatge d'en "
+"Recolliu %d lingot d’or al port de més al nord per obtenir un passatge d’en "
 "Marcus Caius Iniucundus."
 msgstr[1] ""
-"Recolliu %d lingots d'or al port de més al nord per obtenir un passatge d'en"
+"Recolliu %d lingots d’or al port de més al nord per obtenir un passatge d’en"
 " Marcus Caius Iniucundus."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:57
@@ -83,12 +83,12 @@ msgid ""
 "All soldiers who are present on the Northern island when you embark will "
 "accompany you."
 msgstr ""
-"Tots els soldats que hi hagi a l'illa del més al nord quan embarqueu us "
+"Tots els soldats que hi hagi a l’illa del més al nord quan embarqueu us "
 "acompanyaran."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:59
 msgid "You have two hours to accomplish this objective."
-msgstr "Teniu dues hores per aconseguir l'objectiu."
+msgstr "Teniu dues hores per aconseguir l’objectiu."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:71
 msgid "Introduction"
@@ -115,7 +115,7 @@ msgid ""
 "of this land belt to launch an expedition and continue sailing North."
 msgstr ""
 "Només hi ha una cosa certa: hem de trobar un espai portuari a la costa del "
-"nord del cinturó d'illes per iniciar una expedició i continuar viatjant al "
+"nord del cinturó d’illes per iniciar una expedició i continuar viatjant al "
 "nord."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
@@ -126,7 +126,7 @@ msgid ""
 "marshes of my Föhr under his dastard foot… Let’s make haste."
 msgstr ""
 "Vull trobar el meu vell amic Reebaud tan ràpid com pugui. Cada minut parats "
-"em sento malament, perquè m'imagino l'Atterdag creuant les verdes pastures "
+"em sento malament, perquè m’imagino l’Atterdag creuant les verdes pastures "
 "de la meva illa amb els seus peus bastards… Afanyem-nos."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
@@ -148,8 +148,8 @@ msgid ""
 " knight who rules the island of Föhr… or I did until I was forced out by the"
 " conqueror."
 msgstr ""
-"Perdoneu-me. No m'he presentat. Sóc en Claus Lembeck, el cavaller que "
-"governa l'illa de Föhr… o hi governava fins que em va expulsar un "
+"Perdoneu-me. No m’he presentat. Sóc en Claus Lembeck, el cavaller que "
+"governa l’illa de Föhr… o hi governava fins que em va expulsar un "
 "conqueridor."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
@@ -158,9 +158,9 @@ msgid ""
 "The island was prospering under my rule, and my subjects loved and respected"
 " me. They even built me a new castle as a gift. And then Atterdag came."
 msgstr ""
-"L'illa prosperava sota el meu regnat i els súbdits m'estimaven i "
+"L’illa prosperava sota el meu regnat i els súbdits m’estimaven i "
 "respectaven. Fins i tot em van construir un castell nou com a regal. I "
-"llavors va venir l'Atterdag."
+"llavors va venir l’Atterdag."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:97
@@ -171,11 +171,11 @@ msgid ""
 "weeks ago he landed with some of his allies and a large and well-trained "
 "army on my own island, Föhr, and sought to seize it."
 msgstr ""
-"Atterdag! El rei de l'imperi danès i el meu enemic per sempre més. Vaig "
+"Atterdag! El rei de l’imperi danès i el meu enemic per sempre més. Vaig "
 "ajudar moltes vegades els ducs de terra ferma quan necessitaven ajuda contra"
 " la seva set de guerra i conquesta. Però fa vuit setmanes que ha arribat amb"
 " alguns dels seus aliats i un exèrcit gran i ben entrenat a la meva illa, "
-"Föhr, i busca apoderar-se'n."
+"Föhr, i busca apoderar-se’n."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:100
@@ -191,7 +191,7 @@ msgstr ""
 "trenta-cinc dies i cada matí i cada tarda arribava un vaixell des de "
 "Dinamarca portant més tropes. Com podia competir-hi en contra? Al final no "
 "vaig tenir altra opció que escapar amb el meu fill Henneke i alguns dels més"
-" seguidors més propers, mentre l'Atterdag ara ja diu que Föhr és una altra "
+" seguidors més propers, mentre l’Atterdag ara ja diu que Föhr és una altra "
 "peça del seu imperi creixent."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 4
@@ -221,9 +221,9 @@ msgid ""
 msgstr ""
 "És evident que no puc esperar derrotar aquest enemic tot sol. Ni tampoc puc "
 "comptar amb els meus aliats per ajudar-me, sabent que sempre ens costava "
-"repel·lir l'Atterdag. I tot aquest assalt seu prova que no volia guanyar "
-"fins a aquest últim atac d'ara. Només jugava amb nosaltres. Si el vull "
-"guanyar, he d'afegir una força més gran a la causa."
+"repel·lir l’Atterdag. I tot aquest assalt seu prova que no volia guanyar "
+"fins a aquest últim atac d’ara. Només jugava amb nosaltres. Si el vull "
+"guanyar, he d’afegir una força més gran a la causa."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:115
@@ -233,10 +233,10 @@ msgid ""
 " and his tremendous skill in battle are unmatched in all parts of the known "
 "world. If anyone can stand up to Atterdag, it must be him."
 msgstr ""
-"I aquesta força és la que busco. Reebaud, el cabdill d'una comunitat frisona"
+"I aquesta força és la que busco. Reebaud, el cabdill d’una comunitat frisona"
 " petita però forta de la que em vaig fer amic; el seu orgull i habilitats "
 "per a la batalla no tenen rival en el món conegut. Si algú pot enfrontar-se "
-"a l'Atterdag, és ell."
+"a l’Atterdag, és ell."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:121
@@ -248,10 +248,10 @@ msgid ""
 "would expect from nobody but him."
 msgstr ""
 "Quan vaig anar a demanar-li ajuda, em vaig trobar amb una sorpresa que no "
-"m'esperava. Ell i els seus homes ja no viuen a la part nord de Frísia, sinó "
+"m’esperava. Ell i els seus homes ja no viuen a la part nord de Frísia, sinó "
 "que han decidit fundar un nou assentament més enllà del nord, on cap home "
-"s'ha atrevit a posar-s'hi a viure. La valentia que demostren no me "
-"l'esperava de ningú excepte d'ell."
+"s’ha atrevit a posar-s’hi a viure. La valentia que demostren no me "
+"l’esperava de ningú excepte d’ell."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:124
@@ -287,15 +287,15 @@ msgid ""
 " sea. It will be a slow and expensive business, and I hope we will not stay "
 "on this island much, but at least we should consider it."
 msgstr ""
-"L'illa és massa petita. Però hi ha un constructor de dics entre la nostra "
-"gent i m'ha recomanat usar alguns troncs per construir espigons, que ens "
+"L’illa és massa petita. Però hi ha un constructor de dics entre la nostra "
+"gent i m’ha recomanat usar alguns troncs per construir espigons, que ens "
 "permetran aconseguir un terreny extra. Serà una tasca cara i lenta. Tot i "
 "que penso que no estarem massa temps en aquesta illa, almenys ho hauríem de "
 "considerar."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:138
 msgid "Port Space Found"
-msgstr "S'ha trobat una zona portuària"
+msgstr "S’ha trobat una zona portuària"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:139
 msgid "One step closer to the North"
@@ -310,10 +310,10 @@ msgid ""
 " too much time perfecting our economy – all that matters is that we get to "
 "the North soon."
 msgstr ""
-"Els meus soldats m'informen que han trobat lloc per a un port! Ara "
+"Els meus soldats m’informen que han trobat lloc per a un port! Ara "
 "necessitem construir-lo i iniciar una expedició. Haurem de construir abans "
 "una economia sòlida que ens permeti construir vaixells, amb drassanes i "
-"tallers de teixir. Però no gastem massa temps optimitzant l'economia –el que"
+"tallers de teixir. Però no gastem massa temps optimitzant l’economia –el que"
 " importa és arribar al nord aviat–."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:144
@@ -335,11 +335,11 @@ msgid ""
 "is to be afraid of, but we must be very cautious in any case as we cross it."
 " Hopefully, we will reach the opposite side of the island soon."
 msgstr ""
-"Hem acabat en una illa estranya. El terra és dur, negre i empinat. L'aire fa"
+"Hem acabat en una illa estranya. El terra és dur, negre i empinat. L’aire fa"
 " olor a cremat i la platja està plena de cendres de colors. Difícilment puc "
 "posar en paraules la meva aprensió. No sé si hi ha alguna cosa a témer, però"
 " hem de ser molt cautelosos per si en trobem alguna. Amb una mica de sort, "
-"arribarem a l'altre extrem de l'illa aviat."
+"arribarem a l’altre extrem de l’illa aviat."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:151
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:157
@@ -368,7 +368,7 @@ msgid ""
 "Our soldiers have sighted strangers. Their buildings do not look like any I "
 "have seen before. I wonder who they are."
 msgstr ""
-"Els soldats han vist gent forastera. Els seus edificis no s'assemblen a cap "
+"Els soldats han vist gent forastera. Els seus edificis no s’assemblen a cap "
 "que haguem vist abans. Em pregunto qui seran."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:158
@@ -382,7 +382,7 @@ msgid ""
 "a descendant of the legendary King Ajanthul the First of Atlantis himself. "
 "Be welcome to me, if you will be our friends!"
 msgstr ""
-"Sigueu benvinguts, forasters! Sóc l'Angadthur, rei d'aquesta illa "
+"Sigueu benvinguts, forasters! Sóc l’Angadthur, rei d’aquesta illa "
 "miraculosa, descendent del llegendari rei Ajanthul, el primer atlant. Sigueu"
 " benvinguts si voleu ser els nostres amics!"
 
@@ -440,9 +440,9 @@ msgid ""
 " a port on this island other than the one where you did land, and it is "
 "located directly under my palace."
 msgstr ""
-"Em sap greu decebre'l, senyor Lembeck, però no he escoltat mai aquest nom i "
-"no en sé res d'ell. Pel que fa a l'intent de viatjar cap al nord, només hi "
-"ha un lloc adequat per construir-hi ports a banda d'on heu arribat vosaltres"
+"Em sap greu decebre’l, senyor Lembeck, però no he escoltat mai aquest nom i "
+"no en sé res d’ell. Pel que fa a l’intent de viatjar cap al nord, només hi "
+"ha un lloc adequat per construir-hi ports a banda d’on heu arribat vosaltres"
 " i es troba justament sota el meu palau."
 
 #. TRANSLATORS: Angadthur – Strangers 6
@@ -455,7 +455,7 @@ msgid ""
 " do succeed."
 msgstr ""
 "Mentre passa, els soldats estan avorrits sense res a fer. Organitzem millor "
-"un torneig d'armes? Envieu els vostres soldats a destruir el meu palau. "
+"un torneig d’armes? Envieu els vostres soldats a destruir el meu palau. "
 "Estic segur que no teniu ni una sola oportunitat, però si em guanyeu, "
 "pregaré als déus que beneeixin el vostre viatge."
 
@@ -491,7 +491,7 @@ msgstr "En el desert de gel"
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:199
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:205
 msgid "The next island"
-msgstr "L'illa següent"
+msgstr "L’illa següent"
 
 #. TRANSLATORS: Henneke Lembeck – Port Space 3
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:201
@@ -515,7 +515,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:212
 msgid "Port space found"
-msgstr "S'ha trobat una zona portuària"
+msgstr "S’ha trobat una zona portuària"
 
 #. TRANSLATORS: Claus Lembeck – Port Space 5
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:214
@@ -523,7 +523,7 @@ msgid ""
 "We have found a port space on the island. Now we can leave this cold and "
 "bleak ice desert and continue sailing."
 msgstr ""
-"Hem trobat un espai portuari a l'illa. Ara podrem deixar aquest fred i "
+"Hem trobat un espai portuari a l’illa. Ara podrem deixar aquest fred i "
 "lúgubre desert de gel i continuarem navegant."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:218
@@ -543,7 +543,7 @@ msgid ""
 "meadows are still green here, but the patches of snow are getting larger and"
 " larger the further North one can look."
 msgstr ""
-"Sí, s'assembla més a com pensava que seria el nord. Tot és més verd, però "
+"Sí, s’assembla més a com pensava que seria el nord. Tot és més verd, però "
 "els llocs coberts de neu es van fent cada cop més grans com més al nord."
 
 #. TRANSLATORS: Claus Lembeck – Port Space 7
@@ -561,7 +561,7 @@ msgid ""
 " to the strange King who congratulated us on destroying his palace."
 msgstr ""
 "Els soldats han vist forasters un altre cop. Em pregunto si tindran relació "
-"amb l'estrany rei que ens va felicitar per destruir el seu palau."
+"amb l’estrany rei que ens va felicitar per destruir el seu palau."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:239
 msgid "No troubles, please"
@@ -574,7 +574,7 @@ msgid ""
 "Is this your island? We are only passing through, I hope you don’t mind. We "
 "don’t want any trouble."
 msgstr ""
-"Benvinguts, forasters! Sóc en Marcus Caius Iniucundus, delegat de l'Imperi. "
+"Benvinguts, forasters! Sóc en Marcus Caius Iniucundus, delegat de l’Imperi. "
 "És aquesta la vostra illa? Només estem de passada. Espero que no us importi."
 " No volem problemes."
 
@@ -592,7 +592,7 @@ msgid ""
 "know that he is living in the North, can you tell us where to find him?"
 msgstr ""
 "Pau, senyor Iniucundus! Sóc en Claus Lembeck, i aquest és el meu fill "
-"Henneke. També estem passant per aquí. Dieu que sou un delegat? Heu d'estar "
+"Henneke. També estem passant per aquí. Dieu que sou un delegat? Heu d’estar "
 "bastant enfeinat. Teniu notícies del meu vell amic Reebaud? Només sé que "
 "està vivint al nord. Ens podeu dir on trobar-lo?"
 
@@ -617,15 +617,15 @@ msgid ""
 "We thank you for your offer! What is the price you demand? And, if you don’t"
 " mind my asking, may I know what business you are employed on?"
 msgstr ""
-"Us agraïm l'oferiment! Quin preu hem de pagar? I, si no us importa que "
+"Us agraïm l’oferiment! Quin preu hem de pagar? I, si no us importa que "
 "pregunti, puc saber en què esteu atrafegat?"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:266
 #, lua-format
 msgid "%d piece of gold."
 msgid_plural "%d pieces of gold."
-msgstr[0] "%d peça d'or"
-msgstr[1] "%d peces d'or."
+msgstr[0] "%d peça d’or"
+msgstr[1] "%d peces d’or."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:268
@@ -633,8 +633,8 @@ msgid ""
 "I know it seems much, but the Senate did not furnish me with much money for "
 "this expedition, so I must admit I am in need of some."
 msgstr ""
-"Ja sé que sembla molt, però el senat no m'ha proporcionat molts diners per a"
-" l'expedició, i he d'admetre que en necessito més."
+"Ja sé que sembla molt, però el senat no m’ha proporcionat molts diners per a"
+" l’expedició, i he d’admetre que en necessito més."
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:271
@@ -648,11 +648,11 @@ msgid ""
 "stead if I succeed."
 msgstr ""
 "La finalitat del meu viatge és buscar el procònsol de la província de les "
-"Terres del Nord, que s'ha negat a pagar els impostos els últims anys. La "
+"Terres del Nord, que s’ha negat a pagar els impostos els últims anys. La "
 "meva tasca és parlar amb aquest tal Murilius i, si descobreixo que ha fallat"
-" més per avarícia que per necessitat, me l'emportaré a la capital encadenat."
+" més per avarícia que per necessitat, me l’emportaré a la capital encadenat."
 " He de dir que estic content amb aquesta tasca, ja que tinc opcions "
-"d'aconseguir ser procònsol en el seu lloc si tinc èxit. "
+"d’aconseguir ser procònsol en el seu lloc si tinc èxit. "
 
 #. TRANSLATORS: M. C. Iniucundus – Strangers 6
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:274
@@ -666,10 +666,10 @@ msgid ""
 "soon."
 msgstr ""
 "Però tornem al tema del passatge. Només hi ha un lloc de la costa del nord "
-"de l'illa on es pot construir un port. Així que no teniu altra alternativa "
-"que comprar el passatge. Però els meus astròlegs m'informen que ve una "
+"de l’illa on es pot construir un port. Així que no teniu altra alternativa "
+"que comprar el passatge. Però els meus astròlegs m’informen que ve una "
 "tempesta que farà impossible viatjar pel mar durant molt temps. Hem de "
-"salpar en dues hores i, qui es quedi a l'illa, trigarà molt temps en poder-"
+"salpar en dues hores i, qui es quedi a l’illa, trigarà molt temps en poder-"
 "ne sortir."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:284
@@ -707,8 +707,8 @@ msgid ""
 msgstr ""
 "Hem conquerit el port! Ja estem construint un vaixell i, quan el tinguem "
 "acabat, podrem viatjar al nord. Encara no hem sentit notícies del Reebaud. "
-"Crec que el trobarem aviat i ens ajudarà a reconquerir Föhr de l'Atteredat "
-"l'usurpador!"
+"Crec que el trobarem aviat i ens ajudarà a reconquerir Föhr de l’Atteredat "
+"l’usurpador!"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:299
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:308
@@ -748,7 +748,7 @@ msgid ""
 "permit you to leave this island. I am sorry for you, but the weather doesn’t"
 " wait. Goodbye."
 msgstr ""
-"Heu tardat massa. Hem de començar a navegar ara mateix i l'illa no us "
+"Heu tardat massa. Hem de començar a navegar ara mateix i l’illa no us "
 "deixarà abandonar-la durant molt temps. Em sap greu, però la meteorologia no"
 " perdona. Adéu."
 
@@ -760,7 +760,7 @@ msgid ""
 "you retry this scenario. Click OK to return to the main menu."
 msgstr ""
 "Heu perdut i no podeu continuar jugant. Potser tindreu més bona sort quan "
-"proveu de nou l'escenari. Fe clic al botó de confirmació per tornar al menú "
+"proveu de nou l’escenari. Fe clic al botó de confirmació per tornar al menú "
 "principal."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:321
@@ -780,7 +780,7 @@ msgstr ""
 "Mireu on ens ha conduït la vostra bogeria. La tempesta brama i estem aquí "
 "encallats sense el port que vau cremar. Els déus són justos. Encara que "
 "pareix que sou més fort que nosaltres en combat, us forcen a quedar-vos a "
-"l'illa tant temps que mai complireu l'objectiu del vostre viatge fútil. "
+"l’illa tant temps que mai complireu l’objectiu del vostre viatge fútil. "
 "Desespereu-vos en el triomf!"
 
 #. TRANSLATORS: Claus Lembeck – lost
@@ -789,7 +789,7 @@ msgid ""
 "This is a disaster! We have reached another shore, but another tribe has "
 "already settled there. They won’t allow us to land on their coast."
 msgstr ""
-"És un desastre! Hem arribat a l'altra costa, però ja hi ha una altra tribu "
+"És un desastre! Hem arribat a l’altra costa, però ja hi ha una altra tribu "
 "assentada. No ens deixaran desembarcar."
 
 #. TRANSLATORS: Claus Lembeck – lost
