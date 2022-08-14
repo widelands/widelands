@@ -177,9 +177,10 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
            kButtonSize,
            UI::ButtonStyle::kWuiSecondary,
            g_image_cache->get("images/ui_basic/scrollbar_left.png"),
-           as_tooltip_text_with_hotkey(_("Go to previous location"),
-                                       shortcut_string_for(KeyboardShortcut::kCommonQuicknavPrev, true),
-                                       UI::PanelStyle::kWui)),
+           as_tooltip_text_with_hotkey(
+              _("Go to previous location"),
+              shortcut_string_for(KeyboardShortcut::kCommonQuicknavPrev, true),
+              UI::PanelStyle::kWui)),
      next_(&buttons_box_,
            "next",
            0,
@@ -188,9 +189,10 @@ QuickNavigationWindow::QuickNavigationWindow(InteractiveBase& ibase, UI::UniqueW
            kButtonSize,
            UI::ButtonStyle::kWuiSecondary,
            g_image_cache->get("images/ui_basic/scrollbar_right.png"),
-           as_tooltip_text_with_hotkey(_("Go to next location"),
-                                       shortcut_string_for(KeyboardShortcut::kCommonQuicknavNext, true),
-                                       UI::PanelStyle::kWui)),
+           as_tooltip_text_with_hotkey(
+              _("Go to next location"),
+              shortcut_string_for(KeyboardShortcut::kCommonQuicknavNext, true),
+              UI::PanelStyle::kWui)),
      new_(&buttons_box_,
           "new",
           0,
@@ -242,8 +244,10 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Go to this landmark"),
-		         shortcut_string_for(static_cast<KeyboardShortcut>(
-		            static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i), true),
+		         shortcut_string_for(
+		            static_cast<KeyboardShortcut>(
+		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
+		            true),
 		         UI::PanelStyle::kWui) :
             _("Go to this landmark"));
 		b->set_enabled(q.landmarks()[i].set);
@@ -281,8 +285,10 @@ void QuickNavigationWindow::rebuild() {
 		   i < kQuicknavSlots ?
             as_tooltip_text_with_hotkey(
 		         _("Set this landmark to the current map view location"),
-		         shortcut_string_for(static_cast<KeyboardShortcut>(
-		            static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i), true),
+		         shortcut_string_for(
+		            static_cast<KeyboardShortcut>(
+		               static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
+		            true),
 		         UI::PanelStyle::kWui) :
             _("Set this landmark to the current map view location"));
 		b->sigclicked.connect([&q, i]() { q.set_landmark_to_current(i); });
