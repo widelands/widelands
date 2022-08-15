@@ -3,7 +3,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2021
+# Benedikt Straub <benedikt-straub@web.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2021\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2022\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,16 +58,16 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
-msgstr "Sammel Baumaterialien"
+msgstr "Sammel Baukraam"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
-msgstr "Pottje Baumaterialien"
+msgstr "Pottje Baukraam"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
-msgstr "Pottje eenige Baumaterialien in dienem Raadhuus. Sammel tominnst:"
+msgstr "Pottje eenigs Baukraam in dienem Raadhuus. Sammel tominnst:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
@@ -289,8 +289,7 @@ msgid ""
 " we must ensure a stable supply of basic building materials."
 msgstr ""
 "Deese Stee is so good as elkeen anner, um uns neje Heimaad to gründen. "
-"Toeerst mutten wi uns um eene gode Versörgung mit allen Baumaterialien "
-"kümmern."
+"Toeerst mutten wi uns um eene gode Versörgung mit all de Baukraam kümmern."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
@@ -413,9 +412,9 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
-"Hunnert. Wi könen nu all de nödigen Baumaterialien produzeren. Laat uns "
-"wachten, bit wi eenige Materialien sammelt hebben. Wi könen nu uns’ Gewest "
-"vergrotern, um to sehn, wat ’t noch up deese Hallig gifft."
+"Hunnert. Wi könen nu all de nödigen Baukraam produzeren. Laat uns wachten, "
+"bit wi eenig Kraam sammelt hebben. Wi könen nu uns’ Gewest vergrotern, um to"
+" sehn, wat ’t noch up deese Hallig gifft."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
@@ -529,8 +528,8 @@ msgid ""
 msgstr ""
 "Wi vergrotern uns’ Gewest wieder un wieder na Oosten, un de Waren mutten "
 "över eene immer grotere Feernte transporteert worden. Wi sallen in wissen "
-"Ofstännen Kraamhusen an de oostelken Grenz bauen un Baumaterialien vörrangig"
-" im oostelksten verwahren. Uns’ Raadhuus is to wied im Westen, um gadelk to "
+"Ofstännen Kraamhusen an de oostelken Grenz bauen un Baukraam vörrangig im "
+"oostelksten verwahren. Uns’ Raadhuus is to wied im Westen, um gadelk to "
 "sien, Waren för een heel Sett uptobewahren."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
@@ -708,8 +707,8 @@ msgid ""
 msgstr ""
 "Ick raad an, dat all deese Husen dicht binanner baut worden, un twee "
 "Kraamhusen in de Naberskupp: För eens sall fastleggt worden, dat ’t nix as "
-"Wapen, Panzers, Kluten, Metallen un Köhle verwahrt; de anner sall "
-"Baumaterialien upbewahren."
+"Wapen, Panzers, Kluten, Metallen un Köhle verwahrt; de anner sall Baukraam "
+"upbewahren."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
@@ -1114,20 +1113,20 @@ msgid_plural ""
 "completed, to get ready to embark when we set sail!"
 msgstr[0] ""
 "Ick hebb dat in deeser Iel haast vergeten – waar wi ok lannen sallen, wi "
-"bruken Materialien tum Bauen, um mit de Upbauen vun uns’ neei Dörp to "
-"begünnen, un Soldaten, um uns’ nejes Dörp to sekern und to vergrotern. Ok "
-"nadeem wi de Söök laden hebben, könen wi bit to %d Soldat up uns’ Schipp "
-"mitnehmen, wenn ’t hör nix utmaakt, all vollstoppt to wesen. Laat uns een "
-"paar Baumaterialien un uns’ besten Keerls tur Muu schicken, wenn se kumpleet"
-" is, daarmit se an Boord gahn könen, wenn wi lössseilen!"
+"bruken Kraam tum Bauen, um mit de Upbauen vun uns’ neei Dörp to begünnen, un"
+" Soldaten, um uns’ nejes Dörp to sekern und to vergrotern. Ok nadeem wi de "
+"Söök laden hebben, könen wi bit to %d Soldat up uns’ Schipp mitnehmen, wenn "
+"’t hör nix utmaakt, all vollstoppt to wesen. Laat uns een paar Baukraam un "
+"uns’ besten Keerls tur Muu schicken, wenn se kumpleet is, daarmit se an "
+"Boord gahn könen, wenn wi lössseilen!"
 msgstr[1] ""
 "Ick hebb dat in deeser Iel haast vergeten – waar wi ok lannen sallen, wi "
-"bruken Materialien tum Bauen, um mit de Upbauen vun uns’ neei Dörp to "
-"begünnen, un Soldaten, um uns’ nejes Dörp to sekern und to vergrotern. Ok "
-"nadeem wi de Söök laden hebben, könen wi bit to %d Soldaten up uns’ Schipp "
-"mitnehmen, wenn ’t hör nix utmaakt, all vollstoppt to wesen. Laat uns een "
-"paar Baumaterialien un uns’ besten Keerls tur Muu schicken, wenn se kumpleet"
-" is, daarmit se an Boord gahn könen, wenn wi lössseilen!"
+"bruken Kraam tum Bauen, um mit de Upbauen vun uns’ neei Dörp to begünnen, un"
+" Soldaten, um uns’ nejes Dörp to sekern und to vergrotern. Ok nadeem wi de "
+"Söök laden hebben, könen wi bit to %d Soldaten up uns’ Schipp mitnehmen, "
+"wenn ’t hör nix utmaakt, all vollstoppt to wesen. Laat uns een paar Baukraam"
+" un uns’ besten Keerls tur Muu schicken, wenn se kumpleet is, daarmit se an "
+"Boord gahn könen, wenn wi lössseilen!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid ""

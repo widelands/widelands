@@ -120,7 +120,7 @@ msgid ""
 "game are the basic construction wares: logs and granite. Let’s make sure "
 "that we do not run out of logs. For this, we need a lumberjack and a hut for"
 " him to stay in."
-msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus brengt Waren, Arbeiders un Soldaten unner. Eenige Waren bruukt man, um Husen to bauen, anner, um anner Waren to produzeren. De Waren, wat anfangs im Raadhuus sünd, langen natürelk nich ewich, also muttst du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baumaterialien: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daarför bruken wi eenen Boomhauer un een Huus, waar he wohnen kann."
+msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat grote Huus mit de blauen Fahn vör’m Ingang. Dat Raadhuus brengt Waren, Arbeiders un Soldaten unner. Eenige Waren bruukt man, um Husen to bauen, anner, um anner Waren to produzeren. De Waren, wat anfangs im Raadhuus sünd, langen natürelk nich ewich, also muttst du alls klaarmaken, um se uttowesseln. De wichtigsten Waren im frohen Speel sünd de wesentliken Baukraam: Boomstammen un Flint. Laat uns sekerstellen, dat uns de Boomstammen nich utgahn. Daarför bruken wi eenen Boomhauer un een Huus, waar he wohnen kann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:66
 msgid ""
@@ -852,7 +852,7 @@ msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Dat Flintslagerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flintslagerhuus stückwies platttorieten. So kriggst du een paar vun de Materialien torügg, de tum Bauen verwendt wurren."
+msgstr "Dat Flintslagerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flintslagerhuus stückwies platttorieten. So kriggst du een bietje wat vun de Baukraam torügg, wat tum Bauen bruukt wurr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:550
 msgid "Messages Arrived!"
