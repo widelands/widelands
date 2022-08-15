@@ -214,7 +214,7 @@ std::vector<Recti> BaseDropdown::focus_overlay_rects() {
  * descendant of the modal panel).
  */
 UI::Panel* BaseDropdown::get_open_dropdown() {
-	return (list_ != nullptr) && list_->is_visible() ? this : nullptr;
+	return (list_ != nullptr) && list_->is_visible() ? list_ : nullptr;
 }
 
 void BaseDropdown::layout() {
