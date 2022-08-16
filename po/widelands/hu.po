@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-10 03:23+0000\n"
+"POT-Creation-Date: 2022-08-13 03:33+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -592,7 +592,7 @@ msgstr "Nyersanyagok megjelenítése"
 msgid "Unsupported Format"
 msgstr "Nem támogatott formátum"
 
-#: ../../src/editor/editorinteractive.cc:515 ../../src/wlapplication.cc:801
+#: ../../src/editor/editorinteractive.cc:515 ../../src/wlapplication.cc:800
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -624,11 +624,11 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1641
+#: ../../src/wlapplication.cc:1640
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:1043 ../../src/wlapplication.cc:1643
+#: ../../src/editor/editorinteractive.cc:1043 ../../src/wlapplication.cc:1642
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -771,8 +771,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -2668,7 +2668,7 @@ msgid "Checking map"
 msgstr "Térkép ellenőrzése"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:749
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:748
 msgid "Preparing game…"
 msgstr "Játék előkészítése…"
 
@@ -5270,7 +5270,7 @@ msgstr "Becenév:"
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:676
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:675
 msgid "nobody"
 msgstr "névtelen"
 
@@ -6296,59 +6296,59 @@ msgid "Unmark All"
 msgstr "Kijelölések megszüntetése"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:804 ../../src/wlapplication.cc:808
-#: ../../src/wlapplication.cc:813 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:803 ../../src/wlapplication.cc:807
+#: ../../src/wlapplication.cc:812 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "Hibaüzenet:"
 
-#: ../../src/wlapplication.cc:805 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:804 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:807
+#: ../../src/wlapplication.cc:806
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "A Widelands nem találja a(z) „%s” fájlt."
 
-#: ../../src/wlapplication.cc:809
+#: ../../src/wlapplication.cc:808
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
 
-#: ../../src/wlapplication.cc:1305
+#: ../../src/wlapplication.cc:1304
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Hiányzik az érték a %s parancssori beállításhoz."
 
-#: ../../src/wlapplication.cc:1310
+#: ../../src/wlapplication.cc:1309
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "A(z) %s nem használható más beállításokkal együtt."
 
-#: ../../src/wlapplication.cc:1465
+#: ../../src/wlapplication.cc:1464
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Ismeretlen parancssori beállítás: %s\nLehet, hogy az '=' hiányzik?"
 
-#: ../../src/wlapplication.cc:1586
+#: ../../src/wlapplication.cc:1585
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Az --xres/--yres, a --maximized és a --fullscreen beállítások nem használhatók együtt."
 
-#: ../../src/wlapplication.cc:1604
+#: ../../src/wlapplication.cc:1603
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Ismeretlen parancssori beállítás: %s"
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1655
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1656
+#: ../../src/wlapplication.cc:1655
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1659
+#: ../../src/wlapplication.cc:1658
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6362,7 +6362,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1668
+#: ../../src/wlapplication.cc:1667
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6372,11 +6372,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1694
+#: ../../src/wlapplication.cc:1693
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1694
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7318,9 +7318,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7708,8 +7708,8 @@ msgstr "A szétkapcsolódott játékos cseréje a kiválasztott MI-vel, és a j�
 msgid "AI for the disconnected player"
 msgstr "MI a szétkapcsolódott játékos helyett"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"

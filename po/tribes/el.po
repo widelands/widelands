@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-10 03:23+0000\n"
+"POT-Creation-Date: 2022-08-13 03:33+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: erimitis, 2018,2020\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
@@ -1699,6 +1699,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1733,6 +1734,8 @@ msgstr "το φτιάξιμο μιας αξίνας"
 msgid "making a machete"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1743,6 +1746,7 @@ msgstr ""
 msgid "making kitchen tools"
 msgstr "το φτιάξιμο ενός σετ κουζινικών"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1760,9 +1764,9 @@ msgstr "το φτιάξιμο ενός σφυριού"
 msgid "making a chisel"
 msgstr ""
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
