@@ -118,7 +118,7 @@ private:
 
 // TODO(sirver): Once c++14 is supported, make this a templated lambda inside
 // 'plan_map_transition'. For now it is a particularly ugly stand alone
-// function, but it allows us to parametrize over 'zoom_t' withouth a heap
+// function, but it allows us to parametrize over 'zoom_t' without a heap
 // allocation.
 template <typename T>
 void do_plan_map_transition(uint32_t start_time,
