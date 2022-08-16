@@ -2387,7 +2387,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		if (location == nullptr) {
 			// this can happen if the flag (and the building) is destroyed while
 			// the worker leaves the building.
-			molog(game.get_gametime(), "[fetchfromflag]: flag dissappeared - become fugitive");
+			molog(game.get_gametime(), "[fetchfromflag]: flag disappeared - become fugitive");
 			return pop_task(game);
 		}
 
@@ -2417,7 +2417,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		// enemy player, or it got destroyed through rising water (atlantean
 		// scenario)
 		molog(game.get_gametime(),
-		      "[fetchfromflag]: building dissappeared - searching for alternative\n");
+		      "[fetchfromflag]: building disappeared - searching for alternative\n");
 		return pop_task(game);
 	}
 

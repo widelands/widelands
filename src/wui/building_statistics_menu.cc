@@ -397,7 +397,7 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 		return BuildingTab::Big;
 	default:
 		throw wexception(
-		   "Building statictics: Found building without a size: %s", descr.name().c_str());
+		   "Building statistics: Found building without a size: %s", descr.name().c_str());
 	}
 
 	NEVER_HERE();
