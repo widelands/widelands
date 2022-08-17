@@ -6,6 +6,7 @@ wl.Descriptions():new_carrier_type {
    name = "frisians_reindeer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Reindeer"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -13,7 +14,6 @@ wl.Descriptions():new_carrier_type {
 
    spritesheets = {
       walkload = {
-         directory = dirname,
          basename = "walk",
          fps = 20,
          frames = 20,
@@ -23,8 +23,6 @@ wl.Descriptions():new_carrier_type {
          hotspot = {15, 31}
       },
       walk = {
-         directory = dirname,
-         basename = "walk",
          fps = 20,
          frames = 20,
          columns = 5,
@@ -33,8 +31,6 @@ wl.Descriptions():new_carrier_type {
          hotspot = {15, 31}
       },
       idle = {
-         directory = dirname,
-         basename = "idle",
          fps = 20,
          frames = 20,
          columns = 5,
