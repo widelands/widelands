@@ -6,6 +6,7 @@ wl.Descriptions():new_productionsite_type {
    name = "frisians_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Weaving Mill"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"seafaring", "waterways"},
@@ -25,8 +26,6 @@ wl.Descriptions():new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 78},
          frames = 10,
          columns = 5,
@@ -34,8 +33,6 @@ wl.Descriptions():new_productionsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {50, 78},
          frames = 10,
          columns = 5,
@@ -45,8 +42,6 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {50, 58}
       }
    },

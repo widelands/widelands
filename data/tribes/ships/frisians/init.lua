@@ -6,13 +6,12 @@ wl.Descriptions():new_ship_type {
    name = "frisians_ship",
    -- TRANSLATORS: This is the Frisians' ship's name used in lists of units
    descname = pgettext("frisians_ship", "Ship"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    capacity = 30,
    vision_range = 4,
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          fps = 10,
          frames = 20,
          columns = 5,
@@ -20,8 +19,6 @@ wl.Descriptions():new_ship_type {
          hotspot = {79, 143}
       },
       sinking = {
-         directory = dirname,
-         basename = "sinking",
          fps = 7,
          frames = 21,
          columns = 7,
@@ -29,8 +26,6 @@ wl.Descriptions():new_ship_type {
          hotspot = {88, 141}
       },
       sail = {
-         directory = dirname,
-         basename = "sail",
          fps = 10,
          frames = 20,
          columns = 5,

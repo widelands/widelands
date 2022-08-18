@@ -6,6 +6,7 @@ wl.Descriptions():new_trainingsite_type {
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Training Arena"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -26,8 +27,6 @@ wl.Descriptions():new_trainingsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {83, 90},
          frames = 10,
          columns = 5,
@@ -35,8 +34,6 @@ wl.Descriptions():new_trainingsite_type {
          fps = 10
       },
       working = {
-         directory = dirname,
-         basename = "working",
          hotspot = {83, 90},
          frames = 10,
          columns = 5,
@@ -46,8 +43,6 @@ wl.Descriptions():new_trainingsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {83, 71}
       }
    },
