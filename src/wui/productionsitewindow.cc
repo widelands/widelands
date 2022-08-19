@@ -259,14 +259,14 @@ void ProductionSiteWindow::evict_worker() {
 	if (production_site == nullptr) {
 		return;
 	}
-	
+
 	Widelands::Worker* worker = nullptr;
 	if (worker_table_->has_selection()) {
 	  worker = production_site->working_positions()->at(worker_table_->get_selected()).worker.get(ibase()->egbase());
 	} else {
 	  worker = production_site->working_positions()->at(0).worker.get(ibase()->egbase());
 	}
-	
+
 	if (worker != nullptr) {
 	  if (game_ != nullptr) {
 	    game_->send_player_evict_worker(*worker);
