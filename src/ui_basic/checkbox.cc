@@ -221,7 +221,7 @@ bool Statebox::handle_mousemove(
 }
 
 bool Statebox::handle_key(bool down, SDL_Keysym code) {
-	if (down && code.sym == SDLK_SPACE) {
+	if (down && code.sym == SDLK_RETURN && (SDL_GetModState() & KMOD_CTRL) == 0) {
 		button_clicked();
 		return true;
 	}
