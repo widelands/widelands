@@ -225,7 +225,7 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr "Nicht gerade die freundlichsten Leute…"
+msgstr "Nicht gerade die freundlichsten Leute …"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -551,7 +551,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:228
 msgid "Something is going on…"
-msgstr "Es geht etwas vor sich…"
+msgstr "Es geht etwas vor sich …"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:230
