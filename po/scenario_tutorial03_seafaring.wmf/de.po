@@ -8,7 +8,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Matthias Mast <mastmatthias@gmail.com>, 2021
-# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
 # wl-zocker, 2015
@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:48+0000\n"
-"Last-Translator: wl-zocker, 2014-2015\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2019-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -521,7 +521,7 @@ msgstr "Beginne Eisenerz in den Bergen dieser Insel abzubauen."
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:291
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:302
 msgid "There is more to it…"
-msgstr "Es gibt noch mehr…"
+msgstr "Es gibt noch mehr …"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:245
 msgid "Another gold mountain"
@@ -627,7 +627,7 @@ msgstr "Bedenke immer, dass Fähren keine Arbeiter transportieren. Du kannst sie
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:294
 msgid "Allow me to show you how to build a waterway…"
-msgstr "Erlaube mir dir zu zeigen, wie man einen Wasserweg baut…"
+msgstr "Erlaube mir dir zu zeigen, wie man einen Wasserweg baut …"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:304
 msgid "Golden waves"

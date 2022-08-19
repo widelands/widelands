@@ -81,6 +81,11 @@ void DescriptionManager::register_directory(const std::string& dirname,
 				if (caller.first == RegistryCallerType::kScenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
+						if (object_name == "frisians_diker" || object_name == "frisians_dikers_house") {
+							// TODO(Nordfriese): Ugly v1.0 savegame compatibility hack, remove after v1.1
+							continue;
+						}
+
 						const std::vector<std::string> attributes =
 						   names_table->get_table(object_name)->array_entries<std::string>();
 						register_scenario_description(filesystem, object_name,

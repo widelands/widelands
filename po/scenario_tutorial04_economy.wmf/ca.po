@@ -369,7 +369,7 @@ msgstr "Heu tancat la finestra d’estoc, però no he acabat l’explicació. Si
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid "Otherwise, please reopen it and choose the third tab."
-msgstr "Si no, si us plau, torneu a obrir-la i elegiu la tercera pestanya."
+msgstr "Si no, torneu a obrir-la i elegiu la tercera pestanya."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:223
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:225
@@ -742,7 +742,7 @@ msgstr "Heu tancat la finestra d'«Estadístiques de béns», però no he acabat
 #. TRANSLATORS: "it" refers to the ware statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:452
 msgid "Otherwise, please reopen it and choose the fourth tab."
-msgstr "Si no, si us plau, torneu a obrir-la i elegiu la quarta pestanya."
+msgstr "Si no, torneu a obrir-la i elegiu la quarta pestanya."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:458
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
