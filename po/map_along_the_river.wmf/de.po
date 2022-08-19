@@ -24,8 +24,8 @@ msgstr ""
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
 msgid "%1% unit of %2% has been brought to your ‘%3%’ building."
 msgid_plural "%1% units of %2% have been brought to your ‘%3%’ building."
-msgstr[0] " %1% Ware %2% wurde zu deinem ‘%3%’ Gebäude gebracht."
-msgstr[1] " %1% Waren %2% wurden zu deinem ‘%3%’ Gebäude gebracht."
+msgstr[0] "%1% Ware %2% wurde zu deinem ‘%3%’ Gebäude gebracht."
+msgstr[1] "%1% Waren %2% wurden zu deinem ‘%3%’ Gebäude gebracht."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:60
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/functions.lua:62
@@ -191,7 +191,7 @@ msgstr "Besiege Runar"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:90
 msgid "Defeat the Armies of Runar"
-msgstr "Besiege Runars Armeen "
+msgstr "Besiege Runars Armeen"
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/objectives.lua:91
 msgid ""
@@ -240,7 +240,7 @@ msgid ""
 msgstr ""
 "Von Norden werden wir durch ein kriegslüsternes Volk bedroht, geführt vom "
 "Kriegsherrn Törver, das seine Armeen schnell aufrüstet. Sie werden bald zu "
-"stark sein, um besiegt zu werden. "
+"stark sein, um besiegt zu werden."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:16
 msgid ""
@@ -314,7 +314,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben alarmierende Nachrichten von einem unserer Kundschafter "
 "erhalten. Törver erweitert seine Frontlinie und nähert sich unserem "
-"Territorium. "
+"Territorium."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:38
 msgid ""
@@ -347,7 +347,7 @@ msgstr ""
 "Herr, der Kampf mit Törver geht ruhmreich voran und wir haben bereits die "
 "stärksten Teile seiner Armee geschlagen. Aber dieser Feind wird nicht "
 "einfach zu besiegen sein. In einem verzweifelten Schachzug hat Törver eine "
-"Gruppe hartgesottener Söldner herbeigerufen. "
+"Gruppe hartgesottener Söldner herbeigerufen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:52
 msgid "The great lake"
@@ -412,7 +412,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben 25 Einheiten Golderz im Piratenwachposten gefunden. Sie "
 "könnten von den Goldgräberhütten in der Nähe geplündert worden sein. Dieses "
-"Golderz wird jetzt in unser Hauptquartier gebracht. "
+"Golderz wird jetzt in unser Hauptquartier gebracht."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:73
 msgid ""
@@ -424,7 +424,7 @@ msgstr ""
 "Nach unserem erfolgreichen Vormarsch in diese Gegend sollten wir den Bau "
 "eines Lagerhauses direkt im Südwesten des Wachpostens erwägen, um diese "
 "Gegend weiter zu erkunden. Es gibt einen guten Bauplatz nur drei Schritte "
-"entfernt vom Wachposten. "
+"entfernt vom Wachposten."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:79
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:86
@@ -452,7 +452,7 @@ msgstr ""
 "Herr, alle Schaufeln wurden ausgegeben, aber wenn wir mit dieser "
 "Geschwindigkeit weitermachen werden wir die Sümpfe nicht vor der nächsten "
 "Regensaison trocken gelegt haben. Wenn Ihr mehr Schaufeln zum neuen "
-"Lagerhaus bringt, werden mehr Freiwillge die Arbeit unterstützen. "
+"Lagerhaus bringt, werden mehr Freiwillge die Arbeit unterstützen."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:94
 msgid ""
@@ -462,7 +462,7 @@ msgid ""
 msgstr ""
 "Herr, jetzt wo wir Zugang zum Versteck der Piraten haben, sollten wir es "
 "erobern und sie ein für alle mal erledigen. Vielleicht sind sogar noch mehr "
-"Schätze in ihren Ländereien versteckt. "
+"Schätze in ihren Ländereien versteckt."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:100
 msgid "The pirates were defeated."
@@ -490,7 +490,7 @@ msgstr ""
 "Herr, aufgrund unserer Attacken haben die Piraten begonnen sich mit Piraten "
 "anderer Stämme zu vereinigen. Sie konnten ein Großteil ihrer vorher "
 "verlorenen Stärke wiedergewinnen. Unsere schwindenden Ressourcen können im "
-"Angesicht eines solch mächtigen Feindes zum Problem werden. "
+"Angesicht eines solch mächtigen Feindes zum Problem werden."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:112
 msgid "Pirates on the run"
@@ -504,7 +504,7 @@ msgid ""
 msgstr ""
 "Herr, dank unserer erfolgreichen Anstrengungen die Piraten aus dieser Gegend"
 " zu verdrängen, sind viele von Ihnen geflohen und mit kleinen Booten "
-"abgehauen. Es ist unklar wohin sie entkommen sind. "
+"abgehauen. Es ist unklar wohin sie entkommen sind."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:118
 msgid "Ability to build shipyards"
@@ -557,7 +557,7 @@ msgid ""
 msgstr ""
 "Herr, unsere Krieger haben die Insel erobert und es geschafft den "
 "Kundschafter zu befreien. Es stellte sich heraus, dass die Piraten eine "
-"große Menge Gold, Bier und Waffen auf der Insel hinterlassen haben. "
+"große Menge Gold, Bier und Waffen auf der Insel hinterlassen haben."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:139
 msgid "The scout returns"
@@ -599,7 +599,7 @@ msgid ""
 "Make sure that our armies are at full strength and then act decisively."
 msgstr ""
 "Stellen Sie sicher, dass unsere Armeen ihre volle Stärke haben und dann "
-"gehen sie entschlossen vor. "
+"gehen sie entschlossen vor."
 
 #: ../../data/maps/SP_Scenarios/Along_The_River.wmf/scripting/texts.lua:157
 msgid "Victory!"
