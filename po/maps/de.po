@@ -294,7 +294,7 @@ msgid ""
 "Reebaud and his tribe are living happily in the North. Meanwhile, the "
 "countries they have left behind are all but peaceful, and an old friend is "
 "in desperate need for their help…"
-msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit waren die Lande die sie zurückließen alles andere als friedlich, und ein alter Freund braucht dringend ihre Hilfe…"
+msgstr "Reebaud und sein Stamm leben glücklich im Norden. In der Zwischenzeit waren die Lande die sie zurückließen alles andere als friedlich, und ein alter Freund braucht dringend ihre Hilfe …"
 
 #: ../../data/campaigns/fri04.wmf/elemental:8
 msgid "Two Friends Reunited"
@@ -483,7 +483,7 @@ msgid ""
 " mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
 "army – use the terrain to your advantage. Chop all trees and expand wherever"
 " you can – it’s the only way to find all the precious farm spaces."
-msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische  Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
+msgstr "In den Bergen gibt es ebene Flächen im Überfluss. Unglücklicherweise sind die meisten davon senkrecht – nutze den wenigen zur Verfügung stehenden Platz weise. Eine Festung am Beginn eines engen Bergpasses kann ein formidables Hindernis für eine gegenerische Armee sein – nutze das Gelände zu deinem Vorteil. Fälle alle Bäume und expandiere wo immer du kannst – das ist der einzige Weg alle kostbaren Bauernhofplätze zu finden."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -501,7 +501,7 @@ msgstr "Escher_Gänse_Fische"
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
 msgid "Equal starting conditions for three players."
-msgstr "Identische Startbedingungen für 3 Spieler. "
+msgstr "Identische Startbedingungen für 3 Spieler."
 
 #: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
 msgid "v0.2"
@@ -789,7 +789,7 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Nur ein kleiner Hügel im Zentrum der Karte verbindet die vier konkurrierenden Stämme miteinander. Führe deine Armee direkt dorthin und baue eine gigantische Festung zum Zeichen deiner Überlegenheit."
+msgstr "Nur ein kleiner Hügel im Zentrum der Karte verbindet die vier konkurrierenden Stämme miteinander. Führe deine Armee direkt dorthin und baue eine gigantische Festung zum Zeichen deiner Überlegenheit!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
@@ -856,7 +856,7 @@ msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr "Vier Stämme  kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um als erstes den Goldberg, der unglaublichen Reichtum verspricht, zu erreichen. Aber können die zwei verbliebenen schließlich die Rohstoffe klug genug aufteilen, um nicht auch noch übereinander herzufallen?"
+msgstr "Vier Stämme kämpfen jeweils mit ihrem nächstgelegenen Nachbarn, um als erstes den Goldberg, der unglaublichen Reichtum verspricht, zu erreichen. Aber können die zwei verbliebenen schließlich die Rohstoffe klug genug aufteilen, um nicht auch noch übereinander herzufallen?"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"

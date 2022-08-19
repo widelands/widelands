@@ -73,7 +73,7 @@ constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max()
  * and in particular during game shutdown or when a large network is destroyed
  * in a military operation, cascading economy splits could take a lot of processing time.
  * For this reason, economies do not split immediately when a road is destroyed,
- * but instead keep track of where a potential split occured and evaluate the split lazily.
+ * but instead keep track of where a potential split occurred and evaluate the split lazily.
  *
  * This means that two flags which are connected by the road (and seafaring) network
  * are \b always in the same economy, but two flags in the same economy are not always
