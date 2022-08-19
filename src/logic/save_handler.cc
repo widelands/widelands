@@ -236,7 +236,7 @@ std::string SaveHandler::create_file_name(const std::string& dir,
  *
  * Will copy text of errors to error string.
  *
- * Returns true if saved, false in case some error occured.
+ * Returns true if saved, false in case some error occurred.
  */
 bool SaveHandler::save_game(Widelands::Game& game,
                             const std::string& complete_filename,

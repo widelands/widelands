@@ -372,22 +372,27 @@ else()
 endif()
 
 if(NOT MSVC)
-  # Turn some warnings into errors.
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)))
+  if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    message(STATUS "Compiler warnings will be ignored.")
+  elseif(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (NOT (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 12.0)))
     # Skip this on g++12.0 and 12.1 because of false-positives from system headers.
     # TODO(Nordfriese): As soon as a new g++ version fixes the bug, reenable -Werror for the working version.
     message(WARNING "This compiler is known to cause false-positive warnings.")
   else()
+    # Turn some warnings into errors.
+    message(STATUS "Warnings will be treated as errors.")
     wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Werror")
-  endif()
-  if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
-    # Silence some false positives on older g++
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
-  endif()
-  if (APPLE)  # Our Mac CI needs these
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
-    wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+    if(("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.0))
+      # Silence some false positives on older g++
+      message(STATUS "Disabling known false-positive warnings for this compiler.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-variable")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=unused-but-set-parameter")
+    endif()
+    if (APPLE)  # Our Mac CI needs these
+      message(STATUS "Disabling known false-positive warnings for this environment.")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=poison-system-directories")
+      wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Wno-error=disabled-macro-expansion")
+    endif()
   endif()
 
   wl_add_flag(WL_GENERIC_CXX_FLAGS "-std=c++11")

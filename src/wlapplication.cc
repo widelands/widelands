@@ -416,6 +416,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	assert(sdl_video != nullptr);
 	SDL_version sdl_ver = {SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_PATCHLEVEL};
 	SDL_GetVersion(&sdl_ver);
+	// Keep cursor in window while dragging
+	SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 	bool sdl_scroll_x_bug = false;
 
 	// SDL version < 2.0 is not supported, >= 2.1 will have the changes
