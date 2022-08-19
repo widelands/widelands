@@ -128,7 +128,7 @@ msgstr ""
 "Ich will meinen alten Freund Reebaud so schnell finden wie ich kann. Jede "
 "Minute Untätigkeit verursacht mir Schmerzen, weil ich mir vorstelle wie "
 "Atterdag mit seinen hinterhältigen Füßen  fröhlich in den grünen Marschen "
-"meiner Föhr herumtrampelt… Lasst uns eilen."
+"meiner Föhr herumtrampelt … Lasst uns eilen."
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:94
@@ -150,7 +150,7 @@ msgid ""
 " conqueror."
 msgstr ""
 "Aber verzeiht mir. Ich habe mich ja noch gar nicht vorgestellt. Ich bin "
-"Claus Lembeck, der Ritter, der die Insel Föhr regiert… oder regierte, bis "
+"Claus Lembeck, der Ritter, der die Insel Föhr regiert … oder regierte, bis "
 "ich von dem Eroberer gezwungen wurde zu gehen."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
@@ -714,7 +714,7 @@ msgid ""
 msgstr ""
 "Er scheint ganz zufrieden uns eine Überfahrt anbieten zu können, aber der "
 "Preis ist exorbitant hoch. Wir könnten auch einfach seinen Hafen zerstören "
-"und unseren eigenen bauen. Ich frage mich was besser wäre…"
+"und unseren eigenen bauen. Ich frage mich was besser wäre …"
 
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:294
 #: ../../data/campaigns/fri03.wmf/scripting/texts.lua:303

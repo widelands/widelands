@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-13 03:33+0000\n"
+"POT-Creation-Date: 2022-08-16 03:57+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -290,8 +290,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -305,12 +305,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -325,78 +325,78 @@ msgstr "Eszköz méret"
 msgid "Undo"
 msgstr "Visszavonás"
 
-#: ../../src/editor/editorinteractive.cc:159
+#: ../../src/editor/editorinteractive.cc:160
 #: ../../src/wlapplication_options.cc:407
 msgid "Redo"
 msgstr "Mégis"
 
-#: ../../src/editor/editorinteractive.cc:170
-#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:235
+#: ../../src/editor/editorinteractive.cc:172
+#: ../../src/wui/buildingwindow.cc:417 ../../src/wui/interactive_player.cc:237
 msgid "Help"
 msgstr "Súgó"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:199
+#: ../../src/editor/editorinteractive.cc:202
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:40
 #: ../../src/ui_fsmenu/main.cc:394
 msgid "New Map"
 msgstr "Új térkép"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:207
+#: ../../src/editor/editorinteractive.cc:210
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:736
 msgid "New Random Map"
 msgstr "Új véletlen térkép"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:214
+#: ../../src/editor/editorinteractive.cc:217
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:33
 #: ../../src/ui_fsmenu/main.cc:399 ../../src/wlapplication_options.cc:399
 msgid "Load Map"
 msgstr "Térkép betöltése"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:222
+#: ../../src/editor/editorinteractive.cc:225
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 #: ../../src/wlapplication_options.cc:395
 msgid "Save Map"
 msgstr "Térkép mentése"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:230
+#: ../../src/editor/editorinteractive.cc:233
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:227
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:62
 msgid "Map Options"
 msgstr "Térkép beállításai"
 
 #. * TRANSLATORS: An entry in the editor's main menu
-#: ../../src/editor/editorinteractive.cc:234
+#: ../../src/editor/editorinteractive.cc:237
 msgid "Exit Editor"
 msgstr "Vissza a főmenübe"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:270
+#: ../../src/editor/editorinteractive.cc:273
 msgid "Change height"
 msgstr "Magasság változtatása"
 
 #. * TRANSLATORS: Tooltip for the change height tool in the editor
-#: ../../src/editor/editorinteractive.cc:273
+#: ../../src/editor/editorinteractive.cc:276
 msgid "Change the terrain height"
 msgstr "Terep magasságának megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:279
+#: ../../src/editor/editorinteractive.cc:282
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:86
 msgid "Random height"
 msgstr "Véletlenszerű magasság"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
-#: ../../src/editor/editorinteractive.cc:282
+#: ../../src/editor/editorinteractive.cc:285
 msgid "Set the terrain height to random values"
 msgstr "Terep magasságának véletlenszerű megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:288
+#: ../../src/editor/editorinteractive.cc:291
 #: ../../src/editor/ui_menus/field_info_window.cc:139
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:91
 #: ../../src/wui/minimap.cc:155
@@ -404,35 +404,35 @@ msgid "Terrain"
 msgstr "Terep"
 
 #. * TRANSLATORS: Tooltip for the terrain tool in the editor
-#: ../../src/editor/editorinteractive.cc:291
+#: ../../src/editor/editorinteractive.cc:294
 msgid "Change the map’s terrain"
 msgstr "Terep típusának megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:298
+#: ../../src/editor/editorinteractive.cc:301
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:61
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:169
 msgid "Immovables"
 msgstr "Mozdíthatatlan tereptárgyak"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
-#: ../../src/editor/editorinteractive.cc:301
+#: ../../src/editor/editorinteractive.cc:304
 msgid "Add or remove immovables"
 msgstr "Mozdíthatatlan tereptárgyak hozzáadása és törlése"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:307
+#: ../../src/editor/editorinteractive.cc:310
 #: ../../src/editor/ui_menus/tool_place_critter_options_menu.cc:46
 msgid "Animals"
 msgstr "Állatok"
 
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
-#: ../../src/editor/editorinteractive.cc:310
+#: ../../src/editor/editorinteractive.cc:313
 msgid "Add or remove animals"
 msgstr "Állatok hozzáadása és törlése"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:317
+#: ../../src/editor/editorinteractive.cc:320
 #: ../../src/editor/ui_menus/field_info_window.cc:220
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:96
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:41
@@ -442,88 +442,88 @@ msgid "Resources"
 msgstr "Nyersanyagok"
 
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
-#: ../../src/editor/editorinteractive.cc:320
+#: ../../src/editor/editorinteractive.cc:323
 msgid "Set or change resources"
 msgstr "Nyersanyagok hozzáadása vagy megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:323
+#: ../../src/editor/editorinteractive.cc:326
 msgid "Port spaces"
 msgstr "Kikötőhelyek"
 
 #. * TRANSLATORS: Tooltip for the port spaces tool in the editor
-#: ../../src/editor/editorinteractive.cc:326
+#: ../../src/editor/editorinteractive.cc:329
 msgid "Add or remove port spaces"
 msgstr "Kikőtőhelyek hozzáadása és törlése"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:333
+#: ../../src/editor/editorinteractive.cc:336
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:677
 #: ../../src/ui_fsmenu/singleplayersetupbox.cc:149
 msgid "Players"
 msgstr "Játékosok"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:336
+#: ../../src/editor/editorinteractive.cc:339
 msgid "Set number of players and their names, tribes and starting positions"
 msgstr "Játékosok számának, nevének, törzsének és kezdőpozíciójának beállítása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:340
+#: ../../src/editor/editorinteractive.cc:343
 msgid "Map origin"
 msgstr "Térkép kezdőpontja"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
-#: ../../src/editor/editorinteractive.cc:343
+#: ../../src/editor/editorinteractive.cc:346
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
 msgstr "Állítsd be a (0,0) koordináták helyét. Ez lesz a létrehozott kistérkép bal felső sarka."
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:350
+#: ../../src/editor/editorinteractive.cc:353
 msgid "Map size"
 msgstr "Térkép mérete"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
-#: ../../src/editor/editorinteractive.cc:353
+#: ../../src/editor/editorinteractive.cc:356
 msgid "Change the map’s size"
 msgstr "Térkép méretének megváltoztatása"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:356
+#: ../../src/editor/editorinteractive.cc:359
 msgid "Information"
 msgstr "Információ"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
-#: ../../src/editor/editorinteractive.cc:359
+#: ../../src/editor/editorinteractive.cc:362
 msgid "Click on a field to show information about it"
 msgstr "Kattints a mezőre, amelynek az adataira kíváncsi vagy"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
-#: ../../src/editor/editorinteractive.cc:363
+#: ../../src/editor/editorinteractive.cc:366
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
 msgstr "Eszköz előzmények"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
-#: ../../src/editor/editorinteractive.cc:366
+#: ../../src/editor/editorinteractive.cc:369
 msgid "Restore previous tool settings"
 msgstr "A korábban használt eszközök és beállításaik ismételt használata"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
-#. building spaces are
-#. * shown
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#: ../../src/editor/editorinteractive.cc:435
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. building spaces are
+#. * shown
+#: ../../src/editor/editorinteractive.cc:438
 #: ../../src/wui/interactive_gamebase.cc:227
 msgid "Hide Building Spaces"
 msgstr "Beépíthető helyek elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:435
+#: ../../src/editor/editorinteractive.cc:438
 #: ../../src/ui_fsmenu/options.cc:243
 #: ../../src/wui/interactive_gamebase.cc:227
 msgid "Show Building Spaces"
@@ -533,15 +533,15 @@ msgstr "Beépíthető helyek megjelenítése"
 #. show maximum
 #. * building spaces that will be available if all immovables (trees, rocks,
 #. etc.) are removed
-#: ../../src/editor/editorinteractive.cc:442
+#: ../../src/editor/editorinteractive.cc:445
 msgid "Hide Maximum Building Spaces"
 msgstr "Lehetséges beépíthető helyek elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:443
+#: ../../src/editor/editorinteractive.cc:446
 msgid "Show Maximum Building Spaces"
 msgstr "Lehetséges beépíthető helyek megjelenítése"
 
-#: ../../src/editor/editorinteractive.cc:446
+#: ../../src/editor/editorinteractive.cc:449
 msgid ""
 "Toggle whether to show maximum building spaces that will be available if all"
 " immovables (trees, rocks, etc.) are removed"
@@ -549,65 +549,65 @@ msgstr "A mozdíthatatlan tereptárgyak (kövek, fák, stb.) eltávolítása ese
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. the map grid is shown
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Hide Grid"
 msgstr "Rács elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:452
+#: ../../src/editor/editorinteractive.cc:455
 msgid "Show Grid"
 msgstr "Rács megjelenítése"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables
 #. *  (trees, rocks etc.) are shown
-#: ../../src/editor/editorinteractive.cc:460
+#: ../../src/editor/editorinteractive.cc:463
 msgid "Hide Immovables"
 msgstr "Mozdíthatatlan tereptárgyak elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:460
+#: ../../src/editor/editorinteractive.cc:463
 msgid "Show Immovables"
 msgstr "Mozdíthatatlan tereptárgyak megjelenítése"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:468
 msgid "Hide Animals"
 msgstr "Állatok elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:465
+#: ../../src/editor/editorinteractive.cc:468
 msgid "Show Animals"
 msgstr "Állatok megjelenítése"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:474
 msgid "Hide Resources"
 msgstr "Nyersanyagok elrejtése"
 
-#: ../../src/editor/editorinteractive.cc:471
+#: ../../src/editor/editorinteractive.cc:474
 msgid "Show Resources"
 msgstr "Nyersanyagok megjelenítése"
 
-#: ../../src/editor/editorinteractive.cc:514
+#: ../../src/editor/editorinteractive.cc:517
 msgid "Unsupported Format"
 msgstr "Nem támogatott formátum"
 
-#: ../../src/editor/editorinteractive.cc:515 ../../src/wlapplication.cc:800
+#: ../../src/editor/editorinteractive.cc:518 ../../src/wlapplication.cc:800
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr "A Widelands nem tudja betölteni a \"%s\" fájlt. Úgy tűnik a fájl nem kompatibilis ezzel a verzióval."
 
-#: ../../src/editor/editorinteractive.cc:589
+#: ../../src/editor/editorinteractive.cc:592
 msgid "Unsaved Map"
 msgstr "Nem mentett térkép"
 
-#: ../../src/editor/editorinteractive.cc:590
+#: ../../src/editor/editorinteractive.cc:593
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:1041 ../../src/logic/addons.cc:46
+#: ../../src/editor/editorinteractive.cc:1044 ../../src/logic/addons.cc:46
 #: ../../src/ui_basic/dropdown.cc:359 ../../src/ui_basic/dropdown.cc:361
 #: ../../src/ui_fsmenu/addons/contact.cc:82
 #: ../../src/ui_fsmenu/addons/manager.cc:1367
@@ -628,7 +628,7 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:1043 ../../src/wlapplication.cc:1642
+#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1642
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -639,13 +639,13 @@ msgid ""
 "Please add this information to your report."
 msgstr "Hiba történt. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod.\nKérjük add meg ezeket az információkat a hibajelentésben."
 
-#: ../../src/editor/editorinteractive.cc:1077
+#: ../../src/editor/editorinteractive.cc:1080
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A(z) „%s” térkép betöltése…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1099
+#: ../../src/editor/editorinteractive.cc:1102
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:110
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:537
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:143
@@ -654,7 +654,7 @@ msgid "No Name"
 msgstr "Nincs név"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1102
+#: ../../src/editor/editorinteractive.cc:1105
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:111
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:538
 #: ../../src/logic/map.h:233 ../../src/ui_fsmenu/addons/packager.cc:369
@@ -662,7 +662,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/editor/editorinteractive.cc:1126
+#: ../../src/editor/editorinteractive.cc:1129
 msgid "Loading world…"
 msgstr "Világ betöltése…"
 
@@ -1068,9 +1068,9 @@ msgstr "(nincs)"
 msgid "Waterway length limit:"
 msgstr "Víziutak megengedett hossza:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1494,8 +1494,8 @@ msgid ""
 "location."
 msgstr "Válaszd ki a térkép új méretét, és kattints a térképen a felosztás kívánt helyén. A térkép növelésekor az új oszlopok/sorok a kiválasztott ponttól keletre/délre lesznek beszúrva. A térkép méretének csökkentésekor a kért számú oszlop/sor a kiválasztott ponttól keletre/délre lesz eltávolítva."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1544,8 +1544,8 @@ msgstr "Parancslista"
 #: ../../src/game_io/game_loader.cc:157 ../../src/map_io/map_saver.cc:147
 #: ../../src/map_io/widelands_map_loader.cc:394
 #: ../../src/wlapplication_options.cc:538
-#: ../../src/wui/interactive_player.cc:226
-#: ../../src/wui/interactive_player.cc:463
+#: ../../src/wui/interactive_player.cc:227
+#: ../../src/wui/interactive_player.cc:466
 msgid "Messages"
 msgstr "Üzenetek"
 
@@ -2210,7 +2210,7 @@ msgstr "Expedíciós hajó parancsra vár."
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
 #: ../../src/logic/map_objects/tribes/ship.cc:1017
-#: ../../src/wui/seafaring_statistics_menu.cc:238
+#: ../../src/wui/seafaring_statistics_menu.cc:239
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Szállít"
@@ -2219,7 +2219,7 @@ msgstr "Szállít"
 #. but has
 #. * nothing to do.
 #: ../../src/logic/map_objects/tribes/ship.cc:1020
-#: ../../src/wui/seafaring_statistics_menu.cc:236
+#: ../../src/wui/seafaring_statistics_menu.cc:237
 msgctxt "ship_state"
 msgid "Empty"
 msgstr "Üres"
@@ -2227,7 +2227,7 @@ msgstr "Üres"
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
 #: ../../src/logic/map_objects/tribes/ship.cc:1024
-#: ../../src/wui/seafaring_statistics_menu.cc:240
+#: ../../src/wui/seafaring_statistics_menu.cc:241
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Várakozik"
@@ -2235,14 +2235,14 @@ msgstr "Várakozik"
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
 #: ../../src/logic/map_objects/tribes/ship.cc:1028
-#: ../../src/wui/seafaring_statistics_menu.cc:242
+#: ../../src/wui/seafaring_statistics_menu.cc:243
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Felderít"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
 #: ../../src/logic/map_objects/tribes/ship.cc:1032
-#: ../../src/wui/seafaring_statistics_menu.cc:244
+#: ../../src/wui/seafaring_statistics_menu.cc:245
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Kikötőhelyet talált"
@@ -2274,7 +2274,7 @@ msgstr "Hajók"
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:173
 #: ../../src/wui/economy_options_window.cc:76
 #: ../../src/wui/general_statistics_menu.cc:153
-#: ../../src/wui/interactive_player.cc:333
+#: ../../src/wui/interactive_player.cc:336
 #: ../../src/wui/productionsitewindow.cc:94
 #: ../../src/wui/warehousewindow.cc:264
 msgid "Wares"
@@ -2296,7 +2296,7 @@ msgstr "Munkások"
 #: ../../src/map_io/map_saver.cc:220
 #: ../../src/map_io/widelands_map_loader.cc:329
 #: ../../src/wui/general_statistics_menu.cc:149
-#: ../../src/wui/interactive_player.cc:328 ../../src/wui/minimap.cc:199
+#: ../../src/wui/interactive_player.cc:331 ../../src/wui/minimap.cc:199
 msgid "Buildings"
 msgstr "Épületek"
 
@@ -2418,7 +2418,7 @@ msgstr "%d. hajó"
 #: ../../src/wlapplication_options.cc:534
 #: ../../src/wui/game_diplomacy_menu.cc:37
 #: ../../src/wui/game_diplomacy_menu.cc:114
-#: ../../src/wui/interactive_player.cc:218
+#: ../../src/wui/interactive_player.cc:219
 msgid "Diplomacy"
 msgstr "Diplomácia"
 
@@ -5043,7 +5043,7 @@ msgstr "A választott billentyűt (‘%1$s’) már használja a következő fun
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
-#: ../../src/wui/interactive_player.cc:338
+#: ../../src/wui/interactive_player.cc:341
 msgid "General"
 msgstr "Általános"
 
@@ -5985,7 +5985,7 @@ msgstr "Épületek megjelenítése"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:383
+#: ../../src/ui_fsmenu/options.cc:250 ../../src/wui/interactive_player.cc:386
 msgid "Show Workarea Overlaps"
 msgstr "Munkaterület átfedések megjelenítése"
 
@@ -6168,18 +6168,18 @@ msgstr "Érvénytelen fájlelérési út a campaigns.lua-ban vagy a tutorials.lu
 msgid "Tutorial"
 msgstr "Oktatójáték"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Szerző"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Szerzők"
@@ -7318,9 +7318,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7821,7 +7821,7 @@ msgid "Error Saving Game!"
 msgstr "Hiba a játék mentésekor"
 
 #: ../../src/wui/game_message_menu.cc:53
-#: ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:607
 msgid "Messages: Inbox"
 msgstr "Üzenetek: bejövő"
 
@@ -7846,7 +7846,7 @@ msgid "Sent"
 msgstr "Küldve"
 
 #: ../../src/wui/game_message_menu.cc:114
-#: ../../src/wui/game_message_menu.cc:605
+#: ../../src/wui/game_message_menu.cc:610
 msgid "Show Archive"
 msgstr "Archívum"
 
@@ -7861,35 +7861,35 @@ msgid "Show all messages"
 msgstr "Minden üzenet megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:541
 msgid "Show geologists’ messages only"
 msgstr "Csak a geológusok üzeneteinek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:545
+#: ../../src/wui/game_message_menu.cc:546
 msgid "Show economy messages only"
 msgstr "Csak a gazdasági üzenetek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:551
 msgid "Show seafaring messages only"
 msgstr "Csak a hajózási üzenetek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:556
 msgid "Show warfare messages only"
 msgstr "Csak a katonai üzenetek megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:561
 msgid "Show scenario messages only"
 msgstr "Csak a küldetés üzeneteinek megjelenítése"
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:600
 msgid "Messages: Archive"
 msgstr "Üzenetek: Archívum"
 
-#: ../../src/wui/game_message_menu.cc:598
+#: ../../src/wui/game_message_menu.cc:603
 msgid "Show Inbox"
 msgstr "Bejövők"
 
@@ -7897,7 +7897,7 @@ msgstr "Bejövők"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:633
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -7905,7 +7905,7 @@ msgstr[0] "A kijelölt %d üzenet visszaállítása"
 msgstr[1] "A kijelölt %d üzenet visszaállítása"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:633
+#: ../../src/wui/game_message_menu.cc:638
 msgid "Restore selected message"
 msgstr "Kijelölt üzenet visszaállítása"
 
@@ -7913,7 +7913,7 @@ msgstr "Kijelölt üzenet visszaállítása"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:643
+#: ../../src/wui/game_message_menu.cc:648
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -7921,7 +7921,7 @@ msgstr[0] "A kijelölt %d üzenet archiválása"
 msgstr[1] "A kijelölt %d üzenet archiválása"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:648
+#: ../../src/wui/game_message_menu.cc:653
 msgid "Archive selected message"
 msgstr "Kijelölt üzenet archiválása"
 
@@ -8354,20 +8354,20 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statisztika"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:312 ../../src/wui/map_tags.cc:37
+#. * TRANSLATORS: This is a map tag
+#: ../../src/wui/interactive_player.cc:315 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Hajózás"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:318
+#: ../../src/wui/interactive_player.cc:321
 #: ../../src/wui/militarysitewindow.cc:40 ../../src/wui/warehousewindow.cc:287
 msgid "Soldiers"
 msgstr "Katonák"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
-#: ../../src/wui/interactive_player.cc:323 ../../src/wui/stock_menu.cc:40
+#: ../../src/wui/interactive_player.cc:326 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:155 ../../src/wui/waresdisplay.cc:81
 msgid "Stock"
 msgstr "Készletek"
@@ -8375,17 +8375,17 @@ msgstr "Készletek"
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
-#: ../../src/wui/interactive_player.cc:380
+#: ../../src/wui/interactive_player.cc:383
 msgid "Hide Workarea Overlaps"
 msgstr "Munkaterület átfedések elrejtése"
 
-#: ../../src/wui/interactive_player.cc:386
+#: ../../src/wui/interactive_player.cc:389
 msgid ""
 "Toggle whether overlapping workareas are indicated when placing a "
 "constructionsite"
 msgstr "Épület elhelyezésekor mutassa-e az átfedő munkaterületeket."
 
-#: ../../src/wui/interactive_player.cc:468
+#: ../../src/wui/interactive_player.cc:471
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -8905,47 +8905,47 @@ msgid "Go to the selected ship and open its window"
 msgstr "Ugrás a kiválasztott hajóhoz, és az ablakának megnyitása"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:158
+#: ../../src/wui/seafaring_statistics_menu.cc:159
 msgid "Center the map on the selected ship"
 msgstr "Ugrás a kiválasztott hajóhoz"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:201
+#: ../../src/wui/seafaring_statistics_menu.cc:202
 msgctxt "ship"
 msgid "Name"
 msgstr "Név"
 
-#: ../../src/wui/seafaring_statistics_menu.cc:202
+#: ../../src/wui/seafaring_statistics_menu.cc:203
 msgctxt "ship"
 msgid "Status"
 msgstr "Állapot"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:500
+#: ../../src/wui/seafaring_statistics_menu.cc:501
 msgid "Show all ships"
 msgstr "Összes hajó megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgid "Show empty ships"
 msgstr "Üres hajók megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:513
+#: ../../src/wui/seafaring_statistics_menu.cc:516
 msgid "Show ships shipping wares and workers"
 msgstr "Árut és munkásokat szállító hajók megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgid "Show waiting expeditions"
 msgstr "Várakozó expedíciók megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:523
+#: ../../src/wui/seafaring_statistics_menu.cc:526
 msgid "Show scouting expeditions"
 msgstr "Felderítő expedíciók megjelenítése"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:531
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Azon expedíciók megjelenítése, melyek találtak kikötőhelyet, vagy kolóniát alapítanak."
 
