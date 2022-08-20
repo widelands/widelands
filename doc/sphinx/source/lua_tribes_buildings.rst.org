@@ -128,14 +128,13 @@ Example:
        name = "frisians_headquarters",
        -- TRANSLATORS: This is a building name used in lists of buildings
        descname = pgettext("frisians_building", "Headquarters"),
+       animation_directory = dirname,
        icon = dirname .. "menu.png",
        size = "big",
        destructible = false,
 
        spritesheets = {
           idle = {
-             directory = dirname,
-             basename = "idle",
              hotspot = {92, 102},
              frames = 10,
              columns = 5,

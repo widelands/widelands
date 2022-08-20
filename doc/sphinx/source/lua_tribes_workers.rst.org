@@ -107,6 +107,7 @@ Example:
        name = "frisians_baker",
        -- TRANSLATORS: This is a worker name used in lists of workers
        descname = pgettext("frisians_worker", "Baker"),
+       animation_directory = dirname,
        icon = dirname .. "menu.png",
        vision_range = 2,
 
@@ -122,8 +123,6 @@ Example:
 
        spritesheets = {
           walk = {
-             directory = dirname,
-             basename = "walk",
              fps = 15,
              frames = 10,
              columns = 5,
@@ -132,8 +131,6 @@ Example:
              hotspot = {11, 23}
           },
           walkload = {
-             directory = dirname,
-             basename = "walkload",
              fps = 15,
              frames = 10,
              columns = 5,
@@ -144,8 +141,6 @@ Example:
        },
        animations = {
           idle = {
-             directory = dirname,
-             basename = "idle",
              hotspot = {8, 23}
           },
        },

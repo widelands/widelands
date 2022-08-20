@@ -31,7 +31,7 @@ function place_roads(eco, plr)
       local command = string.format("road = plr:place_road(map:get_field(%i,%i).immovable, %s ,true)", eco.roads[i].x, eco.roads[i].y, eco.roads[i].dirs)
       local f = assert (load (command))
       f()
-      -- Second carrier can't be placed currently, so we just fake a carrier 
+      -- Second carrier can't be placed currently, so we just fake a carrier
       worker = (plr.tribe_name.."_carrier")
       road:set_workers(worker,1)
    end
@@ -54,7 +54,7 @@ function place_buildings(eco, plr)
             if count == 0 then
                up[#up+1] = worker
             elseif count > 1 and #up > 0 and not building.descr.type_name == "warehouse" then
-               for i = 1, count - 1 do 
+               for i = 1, count - 1 do
                   building:set_workers(up[i],1)
                end
                building:set_workers(worker,1)

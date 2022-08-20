@@ -8,7 +8,7 @@
 -- dofile("utils/dump_economy.lua")
 -- dump_eco(plrnumber, mapname)
 
--- arg:mapname 
+-- arg:mapname
 --    is a string for the folder in .widelands/campaigns/ where the file will be stored
 --    it should be chosen according the map/scenario
 --    the name of the file will be e.g. ecodump_player1_tribename.wcd
@@ -37,7 +37,7 @@ function traverse_economy(plr, flag)
    local flags_done = Set:new{}
    local buildings_done = Set:new{}
    local flags_to_check = Set:new{flag}
-   
+
    local _find_directions = function(r)
       local lf = nil
       local f = r.start_flag.fields[1]
