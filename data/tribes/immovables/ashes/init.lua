@@ -80,6 +80,7 @@ wl.Descriptions():new_immovable_type {
    name = "ashes",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ashes"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
@@ -91,7 +92,6 @@ wl.Descriptions():new_immovable_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
          frames = 1,
          columns = 1,
          rows = 1,

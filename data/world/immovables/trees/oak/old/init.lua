@@ -10,7 +10,7 @@ wl.Descriptions():new_immovable_type{
    species = _("Oak"),
    icon = dirname .. "../menu.png",
    size = "small",
-
+   animation_directory = dirname,
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -25,7 +25,6 @@ wl.Descriptions():new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "old",
          fps = 10,
          frames = 4,
@@ -38,8 +37,6 @@ wl.Descriptions():new_immovable_type{
          },
       },
       falling = {
-         directory = dirname,
-         basename = "falling",
          fps = 10,
          frames = 7,
          rows = 4,

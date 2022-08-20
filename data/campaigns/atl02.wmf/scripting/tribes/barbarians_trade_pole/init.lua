@@ -6,6 +6,7 @@ wl.Descriptions():new_immovable_type {
    name = "barbarians_trade_pole",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Trade Pole"),
+   animation_directory = dirname,
    size = "small",
    icon = dirname .. "tradepole_1.png",
    programs = {
@@ -15,7 +16,6 @@ wl.Descriptions():new_immovable_type {
    },
    animations = {
       idle = {
-         directory = dirname,
          basename = "tradepole",
          hotspot = {8, 27}
       }

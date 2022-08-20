@@ -6,6 +6,7 @@ wl.Descriptions():new_immovable_type {
    name = "frisians_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
@@ -21,7 +22,6 @@ wl.Descriptions():new_immovable_type {
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "build",
          hotspot = {75, 141},
          frames = 6,

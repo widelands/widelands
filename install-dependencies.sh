@@ -62,7 +62,7 @@ echo "If any of these should fail, please let us know and give us the missing/fa
 echo "package's name while specifying your operating system."
 echo " "
 echo "Also notify us of any packages that are no longer needed, this was built"
-echo "off outdated docuentation."
+echo "off outdated documentation."
 echo " "
 
 

@@ -6,6 +6,7 @@ wl.Descriptions():new_productionsite_type {
    name = "amazons_jungle_preservers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("amazons_building", "Jungle Preserver’s Hut"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -19,8 +20,6 @@ wl.Descriptions():new_productionsite_type {
 
    spritesheets = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {50, 46},
          fps = 4,
          frames = 4,
@@ -30,8 +29,6 @@ wl.Descriptions():new_productionsite_type {
    },
    animations = {
       unoccupied = {
-         directory = dirname,
-         basename = "unoccupied",
          hotspot = {39, 46}
       }
    },

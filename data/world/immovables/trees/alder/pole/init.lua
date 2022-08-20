@@ -8,7 +8,7 @@ wl.Descriptions():new_immovable_type{
    name = "alder_summer_pole",
    descname = _("Alder (Pole)"),
    size = "small",
-
+   animation_directory = dirname,
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -19,7 +19,6 @@ wl.Descriptions():new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "pole",
          fps = 8,
          frames = 4,

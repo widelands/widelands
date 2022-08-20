@@ -8,6 +8,7 @@ wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_mature",
    descname = _("Oil Palm (Mature)"),
    size = "small",
+   animation_directory = dirname,
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -22,7 +23,6 @@ wl.Descriptions():new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "mature",
          fps = 8,
          frames = 4,

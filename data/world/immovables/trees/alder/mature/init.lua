@@ -7,6 +7,7 @@ include(dirname .. "../terrain_affinity.lua")
 wl.Descriptions():new_immovable_type{
    name = "alder_summer_mature",
    descname = _("Alder (Mature)"),
+   animation_directory = dirname,
    size = "small",
    terrain_affinity = terrain_affinity,
    programs = {
@@ -18,7 +19,6 @@ wl.Descriptions():new_immovable_type{
    },
    spritesheets = {
       idle = {
-         directory = dirname,
          basename = "mature",
          fps = 8,
          frames = 4,

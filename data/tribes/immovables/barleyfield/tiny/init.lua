@@ -6,6 +6,7 @@ wl.Descriptions():new_immovable_type {
    name = "barleyfield_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Barley Field (tiny)"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    size = "small",
    programs = {
@@ -16,8 +17,6 @@ wl.Descriptions():new_immovable_type {
    },
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
          hotspot = {21, 13}
       }
    }
