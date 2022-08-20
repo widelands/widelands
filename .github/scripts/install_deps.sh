@@ -32,5 +32,5 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # This script handles the common dependencies
-./install_dependencies.sh debian -y ${ADD_PKG_LIST}
+./install-dependencies.sh debian -y ${ADD_PKG_LIST}
 

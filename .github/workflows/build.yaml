@@ -285,7 +285,7 @@ jobs:
         } else {
           $env:bits = "32"
         }
-        bash.exe ./install_dependencies.sh msys$env:bits --noconfirm
+        bash.exe ./install-dependencies.sh msys$env:bits --noconfirm
         # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
         choco install innosetup
     - name: Checkout
@@ -337,7 +337,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        ./install_dependencies.sh homebrew ccache dylibbundler
+        ./install-dependencies.sh homebrew ccache dylibbundler
     - name: Checkout
       uses: actions/checkout@v3
       with:
