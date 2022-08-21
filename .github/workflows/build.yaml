@@ -273,6 +273,11 @@ jobs:
       matrix:
         config: [Debug, Release]
         arch: [x64, x86]
+        include:
+          - arch: x64
+            bits: 64
+          - arch: x86
+            bits: 32
     name: Windows ${{ matrix.config }} ${{ matrix.arch }} Build (MinGW)
     runs-on: windows-2022
     steps:
@@ -285,19 +290,14 @@ jobs:
         $env:Path = "C:\msys64\usr\bin;$env:Path"
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:bits = "64"
-        } else {
-          $env:bits = "32"
-        }
-        bash.exe -c "./install-dependencies.sh msys$env:bits --noconfirm"
+        bash.exe -c "./install-dependencies.sh msys${{ matrix.bits }} --noconfirm"
         # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
         choco install innosetup
     - name: Compiler
       run: |
-        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/mingw$env:bits/bin;C:/msys64/usr/bin;$env:Path"
-        $env:CC = "C:/msys64/mingw$env:bits/bin/gcc.exe"
-        $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
+        $env:Path = "C:/msys64/mingw${{ matrix.bits }}/include;C:/msys64/mingw${{ matrix.bits }}/lib;C:/msys64/mingw${{ matrix.bits }}/bin;C:/msys64/usr/bin;$env:Path"
+        $env:CC = "C:/msys64/mingw${{ matrix.bits }}/bin/gcc.exe"
+        $env:CXX = "C:/msys64/mingw${{ matrix.bits }}/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
         cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DOPTION_FORCE_EMBEDDED_MINIZIP=ON
@@ -307,13 +307,8 @@ jobs:
       run: |
         cd $env:GITHUB_WORKSPACE
         # Environment variables needed by our InnoSetup script
-        if ("${{ matrix.arch }}" -Match "x64") {
-          $env:PLATFORM = "x64"
-          $env:MINGWPATH = "C:\msys64\mingw64\bin"
-        } else {
-          $env:PLATFORM = "x86"
-          $env:MINGWPATH = "C:\msys64\mingw32\bin"
-        }
+        $env:PLATFORM = "${{ matrix.arch }}"
+        $env:MINGWPATH = "C:\msys64\mingw${{ matrix.bits }}\bin"
         $env:CONFIGURATION = "${{ matrix.config }}"
         $env:APPVEYOR_BUILD_FOLDER = $env:GITHUB_WORKSPACE
         $env:APPVEYOR_BUILD_VERSION = "Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.arch }}"
