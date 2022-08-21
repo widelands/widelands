@@ -282,7 +282,7 @@ jobs:
         fetch-depth: 1
     - name: Installing dependencies
       run: |
-        $env:Path += ";C:\msys64\usr\bin"
+        $env:Path = "C:\msys64\usr\bin;$env:Path"
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         pacman.exe --noconfirm -Syyuu --ignore ca-certificates
         if ("${{ matrix.arch }}" -Match "x64") {
@@ -290,7 +290,7 @@ jobs:
         } else {
           $env:bits = "32"
         }
-        msys2bash.cmd -c "./install-dependencies.sh msys$env:bits --noconfirm"
+        bash.exe -c "./install-dependencies.sh msys$env:bits --noconfirm"
         # pacman.exe --noconfirm -U https://repo.msys2.org/mingw/$env:archname/mingw-w64-$env:archname-libtiff-4.3.0-3-any.pkg.tar.zst
         choco install innosetup
     - name: Compiler
