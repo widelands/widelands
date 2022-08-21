@@ -174,7 +174,7 @@ elif [ "$DISTRO" = "msys64" ]; then
    pacman -S $@ mingw-w64-x86_64-toolchain git mingw-w64-x86_64-cmake \
     mingw-w64-x86_64-ninja mingw-w64-x86_64-asio mingw-w64-x86_64-SDL2_ttf \
     mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image \
-    mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew mingw-w64-i686-icu
+    mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew mingw-w64-x86_64-icu
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
