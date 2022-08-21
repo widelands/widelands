@@ -178,8 +178,9 @@ elif [ "$DISTRO" = "msys64" ]; then
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
+   # TODO(matthiakl): minizip package of brew fails to link dynamically
    brew install $@ asio git cmake doxygen gettext glew graphviz icu4c jpeg \
-    libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib minizip
+    libogg libpng libvorbis ninja python sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
 
 elif [ "$DISTRO" = "solus" ]; then
    echo "Installing dependencies for Solus..."
