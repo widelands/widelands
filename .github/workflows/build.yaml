@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
   push:
-    branches: [ master, deps_handling ]
+    branches: [ master ]
 
 jobs:
   # This job runs multiple smaller checks where having several jobs would be overkill.
@@ -98,8 +98,7 @@ jobs:
         mkdir build
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        # python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* | tee ../clang-tidy.log
-        touch ../clang-tidy.log
+        python3 ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* | tee ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
