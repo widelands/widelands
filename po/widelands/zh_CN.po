@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-16 03:57+0000\n"
+"POT-Creation-Date: 2022-08-19 04:03+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Jiawei Sun, 2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
@@ -287,8 +287,8 @@ msgstr "十一月"
 msgid "Dec"
 msgstr "十二月"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -302,12 +302,12 @@ msgstr "主菜单"
 msgid "Tools"
 msgstr "工具"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -509,10 +509,10 @@ msgstr ""
 msgid "Restore previous tool settings"
 msgstr ""
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:438
@@ -589,7 +589,7 @@ msgstr "显示资源"
 msgid "Unsupported Format"
 msgstr "不支持的格式"
 
-#: ../../src/editor/editorinteractive.cc:518 ../../src/wlapplication.cc:800
+#: ../../src/editor/editorinteractive.cc:518 ../../src/wlapplication.cc:802
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
@@ -621,11 +621,11 @@ msgstr "这个地图没有保存，您确定真的要退出吗？"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1640
+#: ../../src/wlapplication.cc:1642
 msgid "Error"
 msgstr "错误"
 
-#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1642
+#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1644
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -768,8 +768,8 @@ msgstr "矿"
 msgid "port"
 msgstr "港口"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1490,8 +1490,8 @@ msgid ""
 "location."
 msgstr "选择新的地图尺寸，然后点击地图将其拆分到所期望位置。增加地图的尺寸时，新的列/行将插入到选定点的东/南。缩小地图尺寸时，所期望的列/行数将从拆分位置的东/南移除。"
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2657,7 +2657,7 @@ msgid "Checking map"
 msgstr "检查地图"
 
 #: ../../src/network/gameclient.cc:142 ../../src/network/gamehost.cc:542
-#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:748
+#: ../../src/ui_fsmenu/launch_spg.cc:164 ../../src/wlapplication.cc:750
 msgid "Preparing game…"
 msgstr "准备游戏…"
 
@@ -5241,7 +5241,7 @@ msgstr "昵称："
 #. . + - _ characters
 #. * and must not be "team".
 #: ../../src/ui_fsmenu/login_box.cc:107
-#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:675
+#: ../../src/ui_fsmenu/netsetup_lan.cc:128 ../../src/wlapplication.cc:677
 msgid "nobody"
 msgstr "没有人"
 
@@ -6267,59 +6267,59 @@ msgid "Unmark All"
 msgstr "取消全部"
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wlapplication.cc:803 ../../src/wlapplication.cc:807
-#: ../../src/wlapplication.cc:812 ../../src/wui/savegameloader.cc:123
+#: ../../src/wlapplication.cc:805 ../../src/wlapplication.cc:809
+#: ../../src/wlapplication.cc:814 ../../src/wui/savegameloader.cc:123
 msgid "Error message:"
 msgstr "错误消息："
 
-#: ../../src/wlapplication.cc:804 ../../src/wui/mapdetails.cc:217
+#: ../../src/wlapplication.cc:806 ../../src/wui/mapdetails.cc:217
 msgid "Game data error"
 msgstr "游戏数据错误"
 
-#: ../../src/wlapplication.cc:806
+#: ../../src/wlapplication.cc:808
 #, c-format
 msgid "Widelands could not find the file \"%s\"."
 msgstr "Widelands 找不到文件 \"%s\"。"
 
-#: ../../src/wlapplication.cc:808
+#: ../../src/wlapplication.cc:810
 msgid "File system error"
 msgstr "文件系统错误"
 
-#: ../../src/wlapplication.cc:1304
+#: ../../src/wlapplication.cc:1306
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1309
+#: ../../src/wlapplication.cc:1311
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1464
+#: ../../src/wlapplication.cc:1466
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1585
+#: ../../src/wlapplication.cc:1587
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1603
+#: ../../src/wlapplication.cc:1605
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1655
+#: ../../src/wlapplication.cc:1657
 msgid "Game ended unexpectedly"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1655
+#: ../../src/wlapplication.cc:1657
 msgid "Unexpected error during the game"
 msgstr "游戏中出现意外错误"
 
-#: ../../src/wlapplication.cc:1658
+#: ../../src/wlapplication.cc:1660
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6333,7 +6333,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1667
+#: ../../src/wlapplication.cc:1669
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6343,11 +6343,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1693
+#: ../../src/wlapplication.cc:1695
 msgid "Emergency save failed"
 msgstr "应急保存失败"
 
-#: ../../src/wlapplication.cc:1694
+#: ../../src/wlapplication.cc:1696
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7288,9 +7288,9 @@ msgstr "港口"
 msgid "Low productivity:"
 msgstr "低生产率："
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
