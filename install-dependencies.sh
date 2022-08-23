@@ -116,6 +116,15 @@ sudo_or_su() {
    fi
 }
 
+install_msys_pkgs() {
+   ARCH=$1
+   shift 1
+   pacman -S $@ mingw-w64-$ARCH-toolchain git mingw-w64-$ARCH-cmake \
+    mingw-w64-$ARCH-ninja mingw-w64-$ARCH-asio mingw-w64-$ARCH-SDL2_ttf \
+    mingw-w64-$ARCH-SDL2_mixer mingw-w64-$ARCH-SDL2_image \
+    mingw-w64-$ARCH-glbinding mingw-w64-$ARCH-glew mingw-w64-$ARCH-icu
+}
+
 # Install the dependencies
 if [ "$DISTRO" = "arch" ]; then
    echo "Installing dependencies for Arch..."
@@ -164,17 +173,11 @@ elif [ "$DISTRO" = "openbsd" ]; then
 
 elif [ "$DISTRO" = "msys32" ]; then
    echo "Installing dependencies for 32-bit Windows..."
-   pacman -S $@ mingw-w64-i686-toolchain git mingw-w64-i686-cmake \
-    mingw-w64-i686-ninja mingw-w64-i686-asio mingw-w64-i686-SDL2_ttf \
-    mingw-w64-i686-SDL2_mixer mingw-w64-i686-SDL2_image \
-    mingw-w64-i686-glbinding mingw-w64-i686-glew mingw-w64-i686-icu
+   install_msys_pkgs i686 $@
 
 elif [ "$DISTRO" = "msys64" ]; then
    echo "Installing dependencies for 64-bit Windows..."
-   pacman -S $@ mingw-w64-x86_64-toolchain git mingw-w64-x86_64-cmake \
-    mingw-w64-x86_64-ninja mingw-w64-x86_64-asio mingw-w64-x86_64-SDL2_ttf \
-    mingw-w64-x86_64-SDL2_mixer mingw-w64-x86_64-SDL2_image \
-    mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew mingw-w64-x86_64-icu
+   install_msys_pkgs x86_64 $@
 
 elif [ "$DISTRO" = "homebrew" ]; then
    echo "Installing dependencies for Mac Homebrew..."
