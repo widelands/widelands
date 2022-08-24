@@ -492,9 +492,9 @@ This tag defines a clickable hyperlink.
 Attributes
 ^^^^^^^^^^
 
-* **type**: What kind of link. Can be "url" or "window".
-* **target**: The URL to open or the window to reference.
-* **action**: For window links, the action to perform.
+* **type**: What kind of link. Can be "url" or "ui".
+* **target**: The URL to open or the UI widget to reference.
+* **action**: For UI links, the action to perform.
 
 Sub-tags
 ^^^^^^^^

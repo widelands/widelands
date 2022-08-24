@@ -537,11 +537,11 @@ end
 --
 --    :arg linktext: The text to display.
 --    :type linktext: :class:`string`
---    :arg linktype: Type of the link. Use ``"window"`` for internal links and ``"url"`` for external (browser) links.
+--    :arg linktype: Type of the link. Use ``"ui"`` for internal links and ``"url"`` for external (browser) links.
 --    :type linktype: :class:`string`
---    :arg target: The name of the window to notify or the URL to open.
+--    :arg target: The name of the UI element to notify or the URL to open.
 --    :type target: :class:`string`
---    :arg action: Only valid for window links. The action the window should perform.
+--    :arg action: Only valid for UI links. The action the UI element should perform.
 --    :type action: :class:`string` or :class:`nil`
 --
 --    :returns: the linkified and underlined text

@@ -7,7 +7,7 @@ function compare_by_title(a, b)
 end
 
 function linkify_encyclopedia_object(descr)
-   return a(descr.descname, "window", "encyclopedia", descr.name)
+   return a(descr.descname, "ui", "encyclopedia", descr.name)
 end
 
 -- Helper function to return all entries of a certain type for the tribe

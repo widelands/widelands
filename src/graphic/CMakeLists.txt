@@ -342,6 +342,7 @@ wl_library(graphic
     graphic.cc
     graphic.h
     note_graphic_resolution_changed.h
+    note_hyperlink.h
     style_manager.cc
     style_manager.h
     rendertarget.cc

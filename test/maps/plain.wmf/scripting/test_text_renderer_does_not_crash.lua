@@ -1,5 +1,5 @@
 include "../data/scripting/messages.lua"
-include "../data/scripting/formatting.lua"
+include "../data/scripting/richtext.lua"
 
 run(function()
    sleep(5000)

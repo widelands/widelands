@@ -45,6 +45,7 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 
 protected:
 	void init(InteractiveBase& parent, std::unique_ptr<LuaTable> table);
+	void handle_hyperlink(const std::string& action) override;
 
 	LuaInterface* const lua_;
 

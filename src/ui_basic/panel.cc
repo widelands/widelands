@@ -1718,4 +1718,25 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 	rendered_text->draw(dst, tooltip_fixed_rect_.origin() + Vector2i(2, 2));
 	return true;
 }
+
+NamedPanel::NamedPanel(Panel* const nparent,
+           UI::PanelStyle s,
+           const std::string& name,
+           int32_t const nx,
+           int32_t const ny,
+           int const nw,
+           int const nh,
+           const std::string& tooltip_text)
+   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text), name_(name),
+	hyperlink_subscriber_(Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
+		if (name_ == note.target) {
+			handle_hyperlink(note.action);
+		}
+	})) {
+}
+
+void NamedPanel::handle_hyperlink(const std::string& action) {
+	throw wexception("Panel %s: Invalid hyperlink action '%s'", name_.c_str(), action.c_str());
+}
+
 }  // namespace UI

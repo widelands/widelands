@@ -17,8 +17,7 @@ include "scripting/richtext.lua"
 --
 --    :arg image: the picture to be aligned to a row.
 --    :arg count: length of the picture row.
---    :arg text: if given the text aligned on the left side, formatted via
---       formatting.lua functions.
+--    :arg text: if given the text aligned on the left side, formatted via richtext.lua functions.
 --    :returns: the text on the left and a picture row on the right.
 --
 function image_line(image, count, text)

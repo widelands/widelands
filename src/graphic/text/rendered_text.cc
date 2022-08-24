@@ -30,56 +30,66 @@ RenderedRect::RenderedRect(const Recti& init_rect,
                            bool visited,
                            const RGBColor& color,
                            bool is_background_color_set,
-                           DrawMode init_mode)
+                           DrawMode init_mode,
+                           const RT::RenderClickTarget* click_target)
    : rect_(init_rect),
      transient_image_(std::move(init_image)),
      permanent_image_(nullptr),
      visited_(visited),
      background_color_(color),
      is_background_color_set_(is_background_color_set),
-     mode_(init_mode) {
+     mode_(init_mode),
+     click_target_(click_target) {
 }
 RenderedRect::RenderedRect(const Recti& init_rect,
                            const Image* init_image,
                            bool visited,
                            const RGBColor& color,
                            bool is_background_color_set,
-                           DrawMode init_mode)
+                           DrawMode init_mode,
+                           const RT::RenderClickTarget* click_target)
    : rect_(init_rect),
      transient_image_(nullptr),
      permanent_image_(init_image),
      visited_(visited),
      background_color_(color),
      is_background_color_set_(is_background_color_set),
-     mode_(init_mode) {
+     mode_(init_mode),
+     click_target_(click_target) {
 }
 
-RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image)
-   : RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile) {
+RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image, const RT::RenderClickTarget* click_target)
+   : RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color)
-   : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile) {
+RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color, const RT::RenderClickTarget* click_target)
+   : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image)
+RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image, const RT::RenderClickTarget* click_target)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,
                   RGBColor(0, 0, 0),
                   false,
-                  DrawMode::kBlit) {
+                  DrawMode::kBlit,
+                  click_target) {
 }
-RenderedRect::RenderedRect(const Image* init_image)
+RenderedRect::RenderedRect(const Image* init_image, const RT::RenderClickTarget* click_target)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,
                   RGBColor(0, 0, 0),
                   false,
-                  DrawMode::kBlit) {
+                  DrawMode::kBlit,
+                  click_target) {
 }
 
 const Image* RenderedRect::image() const {
 	assert(permanent_image_ == nullptr || transient_image_ == nullptr);
 	return permanent_image_ == nullptr ? transient_image_.get() : permanent_image_;
+}
+
+const Recti& RenderedRect::rect() const {
+	return rect_;
 }
 
 int RenderedRect::x() const {
@@ -95,6 +105,10 @@ int RenderedRect::width() const {
 }
 int RenderedRect::height() const {
 	return rect_.h;
+}
+
+bool RenderedRect::handle_mousepress(int32_t x, int32_t y) const {
+	return click_target_->handle_mousepress(x - rect_.x, y - rect_.y);
 }
 
 void RenderedRect::set_origin(const Vector2i& new_origin) {
@@ -133,6 +147,15 @@ int RenderedText::height() const {
 		result = std::max(result, rect->y() + rect->height());
 	}
 	return result;
+}
+
+bool RenderedText::handle_mousepress(int32_t x, int32_t y) const {
+	for (const auto& r : rects) {
+		if (r->rect().contains(Vector2i(x, y)) && r->handle_mousepress(x, y)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void RenderedText::draw(RenderTarget& dst,

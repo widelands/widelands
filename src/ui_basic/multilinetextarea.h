@@ -70,6 +70,7 @@ struct MultilineTextarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	void scroll_to_top();
@@ -91,6 +92,7 @@ private:
 	std::string text_;
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
+	Vector2i render_anchor_;
 
 	FontStyle font_style_;
 	const FontStyleInfo& font_style() const;

@@ -180,6 +180,10 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 	contents_.at(tab_name)->scroll_to_top();
 }
 
+void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
+	log_dbg("NOCOM %s", action.c_str());
+}
+
 constexpr uint16_t kCurrentPacketVersion = 1;
 UI::Window& EncyclopediaWindow::load(FileRead& fr, InteractiveBase& ib) {
 	try {
