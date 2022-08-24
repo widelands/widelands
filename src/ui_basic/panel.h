@@ -33,7 +33,7 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "base/wexception.h"
-#include "graphic/note_hyperlink.h"
+#include "graphic/hyperlink.h"
 #include "graphic/styles/panel_styles.h"
 #include "notifications/signal.h"
 #include "sound/constants.h"

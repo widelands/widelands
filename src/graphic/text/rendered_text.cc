@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "graphic/graphic.h"
+#include "graphic/hyperlink.h"
 
 namespace UI {
 // RenderedRect
@@ -31,7 +32,7 @@ RenderedRect::RenderedRect(const Recti& init_rect,
                            const RGBColor& color,
                            bool is_background_color_set,
                            DrawMode init_mode,
-                           const RT::RenderClickTarget* click_target)
+                           const TextClickTarget* click_target)
    : rect_(init_rect),
      transient_image_(std::move(init_image)),
      permanent_image_(nullptr),
@@ -47,7 +48,7 @@ RenderedRect::RenderedRect(const Recti& init_rect,
                            const RGBColor& color,
                            bool is_background_color_set,
                            DrawMode init_mode,
-                           const RT::RenderClickTarget* click_target)
+                           const TextClickTarget* click_target)
    : rect_(init_rect),
      transient_image_(nullptr),
      permanent_image_(init_image),
@@ -58,13 +59,13 @@ RenderedRect::RenderedRect(const Recti& init_rect,
      click_target_(click_target) {
 }
 
-RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image, const RT::RenderClickTarget* click_target)
+RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image, const TextClickTarget* click_target)
    : RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color, const RT::RenderClickTarget* click_target)
+RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color, const TextClickTarget* click_target)
    : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image, const RT::RenderClickTarget* click_target)
+RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image, const TextClickTarget* click_target)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,
@@ -73,7 +74,7 @@ RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image, const
                   DrawMode::kBlit,
                   click_target) {
 }
-RenderedRect::RenderedRect(const Image* init_image, const RT::RenderClickTarget* click_target)
+RenderedRect::RenderedRect(const Image* init_image, const TextClickTarget* click_target)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,
@@ -81,6 +82,10 @@ RenderedRect::RenderedRect(const Image* init_image, const RT::RenderClickTarget*
                   false,
                   DrawMode::kBlit,
                   click_target) {
+}
+
+RenderedRect::~RenderedRect() {
+	// printf("NOCOM %p ~RenderedRect\n", static_cast<const void*>(click_target_));
 }
 
 const Image* RenderedRect::image() const {
@@ -134,6 +139,20 @@ RenderedRect::DrawMode RenderedRect::mode() const {
 }
 
 // RenderedText
+RenderedText::RenderedText() : memory_tree_root_(nullptr) {
+}
+RenderedText::~RenderedText() {
+	if (memory_tree_root_ != nullptr) {
+		delete memory_tree_root_;
+	}
+}
+
+void RenderedText::set_memory_tree_root(TextClickTarget* t) {
+	assert(t != nullptr);
+	assert(memory_tree_root_ == nullptr);
+	memory_tree_root_ = t;
+}
+
 int RenderedText::width() const {
 	int result = 0;
 	for (const auto& rect : rects) {

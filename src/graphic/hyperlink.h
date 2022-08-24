@@ -16,8 +16,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_NOTE_HYPERLINK_H
-#define WL_GRAPHIC_NOTE_HYPERLINK_H
+#ifndef WL_GRAPHIC_HYPERLINK_H
+#define WL_GRAPHIC_HYPERLINK_H
 
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -32,4 +32,9 @@ struct NoteHyperlink {
 	}
 };
 
-#endif  // end of include guard: WL_GRAPHIC_NOTE_HYPERLINK_H
+struct TextClickTarget {
+	virtual ~TextClickTarget() = default;
+	virtual bool handle_mousepress(int32_t x, int32_t y) const = 0;
+};
+
+#endif  // end of include guard: WL_GRAPHIC_HYPERLINK_H

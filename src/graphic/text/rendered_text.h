@@ -27,12 +27,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
 
-namespace RT {
-struct RenderClickTarget {
-	virtual ~RenderClickTarget() = default;
-	virtual bool handle_mousepress(int32_t x, int32_t y) const = 0;
-};
-}
+struct TextClickTarget;
 
 namespace UI {
 
@@ -53,7 +48,7 @@ private:
 	             const RGBColor& color,
 	             bool is_background_color_set,
 	             DrawMode init_mode,
-	             const RT::RenderClickTarget* click_target);
+	             const TextClickTarget* click_target);
 	// The image is managed by a pernament cache
 	RenderedRect(const Recti& init_rect,
 	             const Image* init_image,
@@ -61,24 +56,23 @@ private:
 	             const RGBColor& color,
 	             bool is_background_color_set,
 	             DrawMode init_mode,
-	             const RT::RenderClickTarget* click_target);
+	             const TextClickTarget* click_target);
 
 public:
 	/// RenderedRect will contain a background image that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const Image* init_image, const RT::RenderClickTarget* click_target);
+	explicit RenderedRect(const Recti& init_rect, const Image* init_image, const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a background color that should be tiled
-	explicit RenderedRect(const Recti& init_rect, const RGBColor& color, const RT::RenderClickTarget* click_target);
+	explicit RenderedRect(const Recti& init_rect, const RGBColor& color, const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a transient cache.
 	/// Use this if the image is managed by an instance of TextureCache.
-	explicit RenderedRect(const std::shared_ptr<const Image>& init_image, const RT::RenderClickTarget* click_target);
+	explicit RenderedRect(const std::shared_ptr<const Image>& init_image, const TextClickTarget* click_target);
 
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
 	/// Use this if the image is managed by g_image_cache.
-	explicit RenderedRect(const Image* init_image, const RT::RenderClickTarget* click_target);
-	~RenderedRect() {
-	}
+	explicit RenderedRect(const Image* init_image, const TextClickTarget* click_target);
+	~RenderedRect();
 
 	/// An image to be blitted. Can be nullptr.
 	const Image* image() const;
@@ -122,12 +116,17 @@ private:
 	const RGBColor background_color_;
 	const bool is_background_color_set_;
 	const DrawMode mode_;
-	const RT::RenderClickTarget* click_target_;
+	const TextClickTarget* click_target_;
 };
 
 struct RenderedText {
+	RenderedText();
+	~RenderedText();
+
 	/// RenderedRects that can be drawn on screen
 	std::vector<std::unique_ptr<RenderedRect>> rects;
+
+	void set_memory_tree_root(TextClickTarget* t);
 
 	/// The width occupied  by all rects in pixels.
 	int width() const;
@@ -180,6 +179,8 @@ private:
 	                  const RenderedRect& rect,
 	                  const Recti& region,
 	                  Align align) const;
+
+	TextClickTarget* memory_tree_root_;
 };
 
 }  // namespace UI
