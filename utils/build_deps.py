@@ -193,7 +193,6 @@ def report_unused_sources(srcdir, sources, owners_of_src):
 
 
 def report_unmentioned_or_unnecessary_dependencies(srcdir, target, includes_by_src, uses_includes_by_src, owners_of_src):
-
     # Collect for DEPENDS
     target_includes = set()
     for src in target.srcs:
