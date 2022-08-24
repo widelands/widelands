@@ -144,7 +144,7 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 		log_err_time(parent_.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
 		UI::WLMessageBox wmb(&parent_, UI::WindowStyle::kWui, _("Error!"),
-		                     format("Error loading script for encyclopedia:\n%s", err.what()),
+		                     format_l(_("Error loading script for encyclopedia:\n%s"), err.what()),
 		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 	}
@@ -183,8 +183,8 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 }
 
 void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
-	auto try_select_as = [this, action](std::string tab, Widelands::DescriptionIndex di) {
-		if (di == Widelands::INVALID_INDEX) {
+	auto try_select_as = [this, action](std::string tab) {
+		if (lists_.count(tab) == 0) {
 			return false;
 		}
 
@@ -200,20 +200,21 @@ void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
 		return false;
 	};
 
-	if (try_select_as("wares", parent_.egbase().descriptions().ware_index(action))) { return; }
-	if (try_select_as("buildings", parent_.egbase().descriptions().building_index(action))) { return; }
-	if (try_select_as("workers", parent_.egbase().descriptions().worker_index(action))) { return; }
+	if (parent_.egbase().descriptions().ware_exists(action) && try_select_as("wares")) { return; }
+	if (parent_.egbase().descriptions().building_exists(action) && try_select_as("buildings")) { return; }
+	if (parent_.egbase().descriptions().worker_exists(action) && try_select_as("workers")) { return; }
 
-	Widelands::DescriptionIndex immo = parent_.egbase().descriptions().immovable_index(action);
-	if (immo != Widelands::INVALID_INDEX) {
-		if (try_select_as("immovables_tribe", immo)) { return; }
-		if (try_select_as("immovables_world", immo)) { return; }
-		if (try_select_as("trees", immo)) { return; }
+	if (parent_.egbase().descriptions().terrain_exists(action) && try_select_as("terrains")) { return; }
+	if (try_select_as("trees") /* Trees are indexed by species, so no existence check. */) { return; }
+
+	if (parent_.egbase().descriptions().immovable_exists(action)) {
+		if (try_select_as("immovables_tribe")) { return; }
+		if (try_select_as("immovables_world")) { return; }
 	}
 
-	if (try_select_as("terrains", parent_.egbase().descriptions().terrain_index(action))) { return; }
-
-	throw wexception("Encyclopedia: Invalid hyperlink target '%s'", action.c_str());
+	log_err_time(parent_.egbase().get_gametime(), "Encyclopedia: Invalid hyperlink target '%s'", action.c_str());
+	UI::WLMessageBox m(&parent_, UI::WindowStyle::kWui, _("Broken Link"), _("This hyperlink seems to be broken."), UI::WLMessageBox::MBoxType::kOk);
+	m.run<UI::Panel::Returncodes>();
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
