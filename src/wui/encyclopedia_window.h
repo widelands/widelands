@@ -55,7 +55,9 @@ private:
 		EncyclopediaEntry(const std::string& init_name,
 		                  const std::string& init_script_path,
 		                  const std::vector<std::string>& init_script_parameters)
-		   : name(init_name), script_path(init_script_path), script_parameters(init_script_parameters) {
+		   : name(init_name),
+		     script_path(init_script_path),
+		     script_parameters(init_script_parameters) {
 		}
 		const std::string name;
 		const std::string script_path;

@@ -533,7 +533,7 @@ end
 -- RST
 -- .. function:: a(linktext, linktype, target[, action])
 --
---    This function created a hyperlink. 
+--    This function created a hyperlink.
 --
 --    :arg linktext: The text to display.
 --    :type linktext: :class:`string`

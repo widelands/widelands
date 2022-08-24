@@ -1720,19 +1720,21 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector
 }
 
 NamedPanel::NamedPanel(Panel* const nparent,
-           UI::PanelStyle s,
-           const std::string& name,
-           int32_t const nx,
-           int32_t const ny,
-           int const nw,
-           int const nh,
-           const std::string& tooltip_text)
-   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text), name_(name),
-	hyperlink_subscriber_(Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
-		if (name_ == note.target) {
-			handle_hyperlink(note.action);
-		}
-	})) {
+                       UI::PanelStyle s,
+                       const std::string& name,
+                       int32_t const nx,
+                       int32_t const ny,
+                       int const nw,
+                       int const nh,
+                       const std::string& tooltip_text)
+   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text),
+     name_(name),
+     hyperlink_subscriber_(
+        Notifications::subscribe<NoteHyperlink>([this](const NoteHyperlink& note) {
+	        if (name_ == note.target) {
+		        handle_hyperlink(note.action);
+	        }
+        })) {
 }
 
 void NamedPanel::handle_hyperlink(const std::string& action) {

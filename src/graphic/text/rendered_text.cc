@@ -59,13 +59,19 @@ RenderedRect::RenderedRect(const Recti& init_rect,
      click_target_(click_target) {
 }
 
-RenderedRect::RenderedRect(const Recti& init_rect, const Image* init_image, const TextClickTarget* click_target)
-   : RenderedRect(init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile, click_target) {
+RenderedRect::RenderedRect(const Recti& init_rect,
+                           const Image* init_image,
+                           const TextClickTarget* click_target)
+   : RenderedRect(
+        init_rect, init_image, false, RGBColor(0, 0, 0), false, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const Recti& init_rect, const RGBColor& color, const TextClickTarget* click_target)
+RenderedRect::RenderedRect(const Recti& init_rect,
+                           const RGBColor& color,
+                           const TextClickTarget* click_target)
    : RenderedRect(init_rect, nullptr, false, color, true, DrawMode::kTile, click_target) {
 }
-RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image, const TextClickTarget* click_target)
+RenderedRect::RenderedRect(const std::shared_ptr<const Image>& init_image,
+                           const TextClickTarget* click_target)
    : RenderedRect(Recti(0, 0, init_image->width(), init_image->height()),
                   init_image,
                   false,

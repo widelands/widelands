@@ -126,8 +126,7 @@ void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 				}
 
 				EncyclopediaEntry entry(
-				   entry_name,
-				   entry_script,
+				   entry_name, entry_script,
 				   entry_table->get_table("script_parameters")->array_entries<std::string>());
 
 				if (entry_icon.empty()) {
@@ -200,20 +199,36 @@ void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
 		return false;
 	};
 
-	if (parent_.egbase().descriptions().ware_exists(action) && try_select_as("wares")) { return; }
-	if (parent_.egbase().descriptions().building_exists(action) && try_select_as("buildings")) { return; }
-	if (parent_.egbase().descriptions().worker_exists(action) && try_select_as("workers")) { return; }
-
-	if (parent_.egbase().descriptions().terrain_exists(action) && try_select_as("terrains")) { return; }
-	if (try_select_as("trees") /* Trees are indexed by species, so no existence check. */) { return; }
-
-	if (parent_.egbase().descriptions().immovable_exists(action)) {
-		if (try_select_as("immovables_tribe")) { return; }
-		if (try_select_as("immovables_world")) { return; }
+	if (parent_.egbase().descriptions().ware_exists(action) && try_select_as("wares")) {
+		return;
+	}
+	if (parent_.egbase().descriptions().building_exists(action) && try_select_as("buildings")) {
+		return;
+	}
+	if (parent_.egbase().descriptions().worker_exists(action) && try_select_as("workers")) {
+		return;
 	}
 
-	log_err_time(parent_.egbase().get_gametime(), "Encyclopedia: Invalid hyperlink target '%s'", action.c_str());
-	UI::WLMessageBox m(&parent_, UI::WindowStyle::kWui, _("Broken Link"), _("This hyperlink seems to be broken."), UI::WLMessageBox::MBoxType::kOk);
+	if (parent_.egbase().descriptions().terrain_exists(action) && try_select_as("terrains")) {
+		return;
+	}
+	if (try_select_as("trees") /* Trees are indexed by species, so no existence check. */) {
+		return;
+	}
+
+	if (parent_.egbase().descriptions().immovable_exists(action)) {
+		if (try_select_as("immovables_tribe")) {
+			return;
+		}
+		if (try_select_as("immovables_world")) {
+			return;
+		}
+	}
+
+	log_err_time(parent_.egbase().get_gametime(), "Encyclopedia: Invalid hyperlink target '%s'",
+	             action.c_str());
+	UI::WLMessageBox m(&parent_, UI::WindowStyle::kWui, _("Broken Link"),
+	                   _("This hyperlink seems to be broken."), UI::WLMessageBox::MBoxType::kOk);
 	m.run<UI::Panel::Returncodes>();
 }
 

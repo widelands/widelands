@@ -182,7 +182,8 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 
 bool MultilineTextarea::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	return rendered_text_ != nullptr && btn == SDL_BUTTON_LEFT &&
-			rendered_text_->handle_mousepress(x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
+	       rendered_text_->handle_mousepress(
+	          x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 }
 bool MultilineTextarea::handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) {
 	return scrollbar_.is_enabled() && scrollbar_.handle_mousewheel(x, y, modstate);
