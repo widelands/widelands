@@ -180,15 +180,15 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 The Richtext Tags
 =================
 
-- :ref:`rt_tags_rt`
-- :ref:`rt_tags_div`
-- :ref:`rt_tags_br`
-- :ref:`rt_tags_space`
-- :ref:`rt_tags_vspace`
-- :ref:`rt_tags_p`
-- :ref:`rt_tags_font`
-- :ref:`rt_tags_img`
-- :ref:`rt_tags_link`
+* :ref:`rt_tags_rt`
+* :ref:`rt_tags_div`
+* :ref:`rt_tags_br`
+* :ref:`rt_tags_space`
+* :ref:`rt_tags_vspace`
+* :ref:`rt_tags_p`
+* :ref:`rt_tags_font`
+* :ref:`rt_tags_img`
+* :ref:`rt_tags_link`
 
 For an introduction to our richtext system including a code example, see :ref:`wlrichtext`.
 
@@ -285,7 +285,7 @@ Sub-tags
 * :ref:`rt_tags_font`
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_vspace`
-- :ref:`rt_tags_link`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -402,7 +402,7 @@ Sub-tags
 * :ref:`rt_tags_img`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
-- :ref:`rt_tags_link`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -454,7 +454,7 @@ Sub-tags
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
-- :ref:`rt_tags_link`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -506,7 +506,7 @@ Sub-tags
 * :ref:`rt_tags_p`
 * :ref:`rt_tags_space`
 * :ref:`rt_tags_vspace`
-- :ref:`rt_tags_link`
+* :ref:`rt_tags_link`
 
 :ref:`Return to tag index<rt_tags>`
 		*/
