@@ -84,9 +84,9 @@ function immovable_help_string(tribe, immovable_description)
             local icon = target_description.icon_name
             if (icon ~= "") then
                result = result ..
-                  li_image(icon, target_description.descname)
+                  li_image(icon, linkify_encyclopedia_object(target_description))
             else
-               result = result .. li(target_description.descname)
+               result = result .. li(linkify_encyclopedia_object(target_description))
             end
          end
       end

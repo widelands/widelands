@@ -1322,6 +1322,67 @@ private:
 	uint16_t indent_;
 };
 
+class LinkTagHandler : public TagHandler {
+public:
+	LinkTagHandler(Tag& tag,
+	            FontCache& fc,
+	            const NodeStyle& ns,
+	            ImageCache* image_cache,
+	            RendererStyle& init_renderer_style,
+	            const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
+	}
+
+	enum class Type { kURL, kWindow };
+
+	void enter() override {
+		const AttrMap& a = tag_.attrs();
+
+		std::string t = a["type"].get_string();
+		if (t == "url") {
+			type_ = Type::kURL;
+		} else if (t == "window") {
+			type_ = Type::kWindow;
+			action_ = a["action"].get_string();
+		} else {
+			throw RenderError(format("Invalid link type '%s'", t));
+		}
+		target_ = a["target"].get_string();
+
+		if (a.has("align")) {
+			const std::string align = a["align"].get_string();
+			if (align == "right") {
+				nodestyle_.halign = UI::Align::kRight;
+			} else if (align == "center" || align == "middle") {
+				nodestyle_.halign = UI::Align::kCenter;
+			} else {
+				nodestyle_.halign = UI::Align::kLeft;
+			}
+		}
+		nodestyle_.halign = mirror_alignment(nodestyle_.halign, nodestyle_.is_rtl);
+		if (a.has("valign")) {
+			const std::string align = a["valign"].get_string();
+			if (align == "bottom") {
+				nodestyle_.valign = UI::Align::kBottom;
+			} else if (align == "center" || align == "middle") {
+				nodestyle_.valign = UI::Align::kCenter;
+			} else {
+				nodestyle_.valign = UI::Align::kTop;
+			}
+		}
+		if (a.has("spacing")) {
+			nodestyle_.spacing = a["spacing"].get_int(std::numeric_limits<uint8_t>::max());
+		}
+	}
+	/* NOCOM void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
+		TagHandler::emit_nodes(nodes);
+	} */
+
+private:
+	std::string target_, action_;
+	Type type_;
+};
+
 class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(Tag& tag,
@@ -1753,6 +1814,7 @@ TagHandler* create_taghandler(Tag& tag,
 		map["font"] = &create_taghandler<FontTagHandler>;
 		map["div"] = &create_taghandler<DivTagHandler>;
 		map["p"] = &create_taghandler<PTagHandler>;
+		map["link"] = &create_taghandler<LinkTagHandler>;
 		map["img"] = &create_taghandler<ImgTagHandler>;
 		map["vspace"] = &create_taghandler<VspaceTagHandler>;
 		map["space"] = &create_taghandler<HspaceTagHandler>;

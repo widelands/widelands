@@ -7,7 +7,7 @@ local r = {
       p_font("align=center", "size=38 face=Widelands/Widelands.ttf color=2F9131", img("images/logos/wl-ico-32.png") .. "Widelands") ..
       p_font("align=center", "size=14 italic=1 color=D1D1D1", _("an open source strategy game")) ..
       help_introduction() ..
-      p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org")) .. p(vspace(3)) ..
+      p(vspace(3)) .. inline_header(_("Check out the Widelands project homepage:"), a("widelands.org", "url", "https://www.widelands.org")) .. p(vspace(3)) ..
       p(_("Widelands is licensed under the GNU General Public License (GPL). For more information, see the file ‘COPYING’.")) ..
       h2(_("Status")) ..
       p(_("Widelands is nearly feature complete and is much fun to play alone and even more in multiplayer with others. Still, there is always more work to be done in all areas. If you are interested in contributing – be it by making graphics, fixing bugs or adding new features, translating the game into your language or creating new maps – get in touch on our homepage.")) ..
@@ -21,7 +21,7 @@ local r = {
 
       h2(_("Reporting Bugs")) ..
       p(_("If you encounter a bug, please report it to our bugtracker:")) ..
-      p(a("widelands.org/wiki/ReportingBugs")) ..
+      p(a("widelands.org/wiki/ReportingBugs", "url", "https://www.widelands.org/wiki/ReportingBugs")) ..
       p(_("Please provide enough background information. Tell us:")) ..
       p(
           li(_("Detailed steps on how to trigger the bug, if possible.")) ..

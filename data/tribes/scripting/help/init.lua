@@ -6,6 +6,10 @@ function compare_by_title(a, b)
   return a["title"] < b["title"]
 end
 
+function linkify_encyclopedia_object(descr)
+   return a(descr.descname, "window", "encyclopedia", descr.name)
+end
+
 -- Helper function to return all entries of a certain type for the tribe
 function map_object_entries(tribename, script_filename, map_object_table)
    local result = {}

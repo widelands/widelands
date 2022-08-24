@@ -22,9 +22,9 @@ local r = {
       h2(_("This game comes as-is and without any warranty.")) ..
       p(_("For more information and support you can find us at %1% (Website, Wiki, Forum for questions or general support), %2% (Bugtracker), and %3% (Translations).")):
          bformat(
-            a("widelands.org"),
-            a("widelands.org/wiki/ReportingBugs"),
-            a("widelands.org/wiki/TranslatingWidelands"))
+            a("widelands.org", "url", "https://www.widelands.org"),
+            a("widelands.org/wiki/ReportingBugs", "url", "https://www.widelands.org/wiki/ReportingBugs"),
+            a("widelands.org/wiki/TranslatingWidelands", "url", "https://www.widelands.org/wiki/TranslatingWidelands"))
    ))
 }
 pop_textdomain()

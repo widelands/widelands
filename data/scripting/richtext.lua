@@ -528,20 +528,28 @@ end
 -- Links
 -- ^^^^^
 --
--- This section covers functions for including links. We can't do real links yet,
--- so we only highlight the text for now.
+-- This section covers functions for including hyperlinks.
 
 -- RST
--- .. function:: a(link)
+-- .. function:: a(linktext, linktype, target[, action])
 --
---    This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
+--    This function created a hyperlink. 
 --
---    :arg link: the text to format
+--    :arg linktext: The text to display.
+--    :type linktext: :class:`string`
+--    :arg linktype: Type of the link. Use ``"window"`` for internal links and ``"url"`` for external (browser) links.
+--    :type linktype: :class:`string`
+--    :arg target: The name of the window to notify or the URL to open.
+--    :type target: :class:`string`
+--    :arg action: Only valid for window links. The action the window should perform.
+--    :type action: :class:`string` or :class:`nil`
 --
---    :returns: a font tag containing the underlined text
+--    :returns: the linkified and underlined text
 
-function a(link)
-   return font("underline=1", link)
+function a(linktext, linktype, target, action)
+   local str = "<link type=" .. linktype .. " target=" .. target
+   if action ~= nil then str = str .. " action=" .. action end
+   return  str .. ">" .. font("underline=1", linktext) .. "</link>"
 end
 
 -- RST
