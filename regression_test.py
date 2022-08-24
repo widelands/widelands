@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import platform
 
 #Python2/3 compat code for iterating items
 try:

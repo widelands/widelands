@@ -38,6 +38,10 @@ wl.Descriptions():new_productionsite_type {
          hotspot = { 52, 64 }
       },
       working = {
+         -- These sprites are in an own directory on purpose, in order to 
+         -- cover the 'directory' syntax, thereby guarding against regressions.
+         -- This syntax is mainly kept supported to ensure add-ons using it keep working.
+         directory = dirname .. "working",
          frames = 20,
          columns = 4,
          rows = 5,
