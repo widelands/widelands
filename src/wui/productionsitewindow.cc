@@ -260,9 +260,7 @@ void ProductionSiteWindow::evict_worker() {
 		return;
 	}
 
-	if (worker_table_->has_selection()) {
-	  worker_table_->select(worker_table_->get_selected());
-	} else {
+	if (!worker_table_->has_selection()) {
 	  worker_table_->select(0);
 	}
 
