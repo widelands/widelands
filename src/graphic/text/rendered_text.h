@@ -72,7 +72,6 @@ public:
 	/// RenderedRect will contain a normal image that is managed by a permanent cache.
 	/// Use this if the image is managed by g_image_cache.
 	explicit RenderedRect(const Image* init_image, const TextClickTarget* click_target);
-	~RenderedRect();
 
 	/// An image to be blitted. Can be nullptr.
 	const Image* image() const;

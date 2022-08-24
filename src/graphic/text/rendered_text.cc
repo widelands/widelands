@@ -84,10 +84,6 @@ RenderedRect::RenderedRect(const Image* init_image, const TextClickTarget* click
                   click_target) {
 }
 
-RenderedRect::~RenderedRect() {
-	// printf("NOCOM %p ~RenderedRect\n", static_cast<const void*>(click_target_));
-}
-
 const Image* RenderedRect::image() const {
 	assert(permanent_image_ == nullptr || transient_image_ == nullptr);
 	return permanent_image_ == nullptr ? transient_image_.get() : permanent_image_;

@@ -1896,15 +1896,15 @@ Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const Tag
 	                           is_rtl,
 	                           ""};
 
-	TagHandler* rtrn = new RTTagHandler(nullptr,
-	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
+	std::unique_ptr<TagHandler> rtrn(new RTTagHandler(nullptr,
+	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width));
 	std::vector<RenderNode*> nodes;
 	rtrn->enter();
 	rtrn->emit_nodes(nodes);
 
 	assert(nodes.size() == 1);
 	assert(nodes[0] != nullptr);
-	return {nodes[0], rtrn};
+	return {nodes[0], rtrn.release()};
 }
 
 std::shared_ptr<const UI::RenderedText>
