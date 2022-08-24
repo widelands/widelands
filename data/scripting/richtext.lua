@@ -533,7 +533,7 @@ end
 -- RST
 -- .. function:: a(linktext, linktype, target[, action])
 --
---    This function created a hyperlink.
+--    This function creates a hyperlink.
 --
 --    :arg linktext: The text to display.
 --    :type linktext: :class:`string`
@@ -544,7 +544,7 @@ end
 --    :arg action: Only valid for UI links. The action the UI element should perform.
 --    :type action: :class:`string` or :class:`nil`
 --
---    :returns: the linkified and underlined text
+--    :returns: The linkified and underlined text.
 
 function a(linktext, linktype, target, action)
    local str = "<link type=" .. linktype .. " target=" .. target
