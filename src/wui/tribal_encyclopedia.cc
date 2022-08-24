@@ -48,7 +48,7 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 			cr->push_arg("multiplayer");
 		}
 		cr->resume();
-		init(parent, cr->pop_table());
+		init(cr->pop_table());
 	} catch (LuaError& err) {
 		log_err_time(parent.egbase().get_gametime(),
 		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());

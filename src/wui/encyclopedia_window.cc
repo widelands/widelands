@@ -48,13 +48,14 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        LuaInterface* const lua)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
+     parent_(parent),
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
 
 static const std::string kTabNamePrefix = "encyclopedia_";
 
-void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
+void EncyclopediaWindow::init(std::unique_ptr<LuaTable> table) {
 
 	const int contents_height = WINDOW_HEIGHT - kTabHeight - 2 * kPadding;
 	const int contents_width = WINDOW_WIDTH / 2.f - 1.5f * kPadding;
@@ -125,6 +126,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 				}
 
 				EncyclopediaEntry entry(
+				   entry_name,
 				   entry_script,
 				   entry_table->get_table("script_parameters")->array_entries<std::string>());
 
@@ -139,9 +141,9 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			}
 		}
 	} catch (WException& err) {
-		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
+		log_err_time(parent_.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
-		UI::WLMessageBox wmb(&parent, UI::WindowStyle::kWui, _("Error!"),
+		UI::WLMessageBox wmb(&parent_, UI::WindowStyle::kWui, _("Error!"),
 		                     format("Error loading script for encyclopedia:\n%s", err.what()),
 		                     UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
@@ -181,7 +183,37 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 }
 
 void EncyclopediaWindow::handle_hyperlink(const std::string& action) {
-	log_dbg("NOCOM %s", action.c_str());
+	auto try_select_as = [this, action](std::string tab, Widelands::DescriptionIndex di) {
+		if (di == Widelands::INVALID_INDEX) {
+			return false;
+		}
+
+		auto& list = *lists_.at(tab);
+		for (size_t i = 0; i < list.size(); ++i) {
+			if (list[i].name == action) {
+				tabs_.activate(kTabNamePrefix + tab);
+				list.select(i);
+				return true;
+			}
+		}
+
+		return false;
+	};
+
+	if (try_select_as("wares", parent_.egbase().descriptions().ware_index(action))) { return; }
+	if (try_select_as("buildings", parent_.egbase().descriptions().building_index(action))) { return; }
+	if (try_select_as("workers", parent_.egbase().descriptions().worker_index(action))) { return; }
+
+	Widelands::DescriptionIndex immo = parent_.egbase().descriptions().immovable_index(action);
+	if (immo != Widelands::INVALID_INDEX) {
+		if (try_select_as("immovables_tribe", immo)) { return; }
+		if (try_select_as("immovables_world", immo)) { return; }
+		if (try_select_as("trees", immo)) { return; }
+	}
+
+	if (try_select_as("terrains", parent_.egbase().descriptions().terrain_index(action))) { return; }
+
+	throw wexception("Encyclopedia: Invalid hyperlink target '%s'", action.c_str());
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
