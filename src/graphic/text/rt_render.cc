@@ -1116,7 +1116,6 @@ public:
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
 	}
-	virtual ~TagHandler() = default;
 
 	virtual void enter() {
 	}
