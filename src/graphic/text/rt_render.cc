@@ -1927,6 +1927,9 @@ Renderer::render(const std::string& text, uint16_t width, bool is_rtl, const Tag
 	std::pair<RenderNode*, TagHandler*> node = layout(text, width, is_rtl, allowed_tags);
 	std::shared_ptr<UI::RenderedText> result(node.first->render(texture_cache_));
 	result->set_memory_tree_root(node.second);
-	return std::move(result);
+	/* The famous "defect report against ISO C++11" makes it impossible for both
+	 * older and newer compilers to like any simpler version of this line.
+	 */
+	return std::shared_ptr<const UI::RenderedText>(std::move(result));
 }
 }  // namespace RT
