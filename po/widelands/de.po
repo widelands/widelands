@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-19 04:03+0000\n"
+"POT-Creation-Date: 2022-08-22 04:22+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
@@ -309,8 +309,8 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dez"
 
-#. * TRANSLATORS: Title for the main menu button in the editor
 #. * TRANSLATORS: Title for the main menu button in the game
+#. * TRANSLATORS: Title for the main menu button in the editor
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -324,12 +324,12 @@ msgstr "Hauptmenü"
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#. * TRANSLATORS: Title for a menu button in the editor. This menu will
-#. show/hide
-#. building spaces, animals, immovables, resources
 #. * TRANSLATORS: Title for a menu button in the game. This menu will
 #. show/hide
 #. building spaces, census, status, etc.
+#. * TRANSLATORS: Title for a menu button in the editor. This menu will
+#. show/hide
+#. building spaces, animals, immovables, resources
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -531,10 +531,10 @@ msgstr "Werkzeughistorie"
 msgid "Restore previous tool settings"
 msgstr "Vorherige Werkzeugeinstellung wiederherstellen"
 
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:438
@@ -1527,7 +1527,7 @@ msgstr "%1%: %2%"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr "Zum Wiederherstellen klicken, zum Löschen Umschalttaste + klicken, um ein Element festzustellen Strg + klicken "
+msgstr "Zum Wiederherstellen klicken, zum Löschen Umschalttaste + klicken, um ein Element festzustellen Strg + klicken"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:35
 msgid "Tool Size"
@@ -2752,32 +2752,32 @@ msgstr "Verfügbare Host-Befehle sind:"
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:120
 msgid "/help  -  Shows this help"
-msgstr "/help – Zeigt diese Hilfe"
+msgstr "/help  –  Zeigt diese Hilfe"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:122
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
-msgstr "/announce <Nachricht> – Schickt eine Chat-Nachricht als Meldung (System-Chat)"
+msgstr "/announce <Nachricht>  –  Schickt eine Chat-Nachricht als Meldung (System-Chat)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:124
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr "/warn <Name> <Grund> – Verwarnt den Benutzer <Name> aufgrund von <Grund>"
+msgstr "/warn <Name> <Grund>  –  Verwarnt den Benutzer <Name> aufgrund von <Grund>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:126
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
-msgstr "/kick <Name> <Grund> – Wirft den Benutzer <Name> hinaus, aufgrund von <Grund>"
+msgstr "/kick <Name> <Grund>  –  Wirft den Benutzer <Name> hinaus, aufgrund von <Grund>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:128
 msgid "/forcePause            -  Force the game to pause."
-msgstr "/forcePause – Erzwingt eine Spielpause."
+msgstr "/forcePause  –  Erzwingt eine Spielpause."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:130
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr "/endForcedPause – Setzt das Spiel fort."
+msgstr "/endForcedPause  –  Setzt das Spiel fort."
 
 #: ../../src/network/gamehost.cc:136
 msgid "Wrong use, should be: /announce <message>"
@@ -2929,7 +2929,7 @@ msgstr "Unerwartetes Netzwerkpaket vom Metaserver erhalten. Der Metaserver benut
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr "WARNUNG:  Es wurde der Befehl %s empfangen, obwohl wir nicht dabei sind, uns mit dem Metaserver zu verbinden."
+msgstr "WARNUNG: Es wurde der Befehl %s empfangen, obwohl wir nicht dabei sind, uns mit dem Metaserver zu verbinden."
 
 #: ../../src/network/internet_gaming.cc:503
 #, c-format
@@ -2996,7 +2996,7 @@ msgstr "Die Nachricht konnte nicht gesendet werden: Du bist nicht mit dem Metase
 #: ../../src/network/internet_gaming.cc:887
 #: ../../src/network/internet_gaming.cc:895
 msgid "Message could not be sent: Was this supposed to be a private message?"
-msgstr "Die Nachricht konnte nicht gesendet werden:  Sollte dies eine private Nachricht sein?"
+msgstr "Die Nachricht konnte nicht gesendet werden: Sollte dies eine private Nachricht sein?"
 
 #: ../../src/network/internet_gaming.cc:910
 msgid "Supported admin commands:"
@@ -5058,7 +5058,7 @@ msgid ""
 "The shortcut you selected (‘%1$s’) is already in use for the following "
 "action: ‘%2$s’. Please select a different shortcut or change the conflicting"
 " shortcut first."
-msgstr "Der ausgewählte Tastaturbefehl  („%1$s“) ist bereits vergeben für die folgende Aktion: „%2$s“. Bitte wähle einen anderen Tastaturbefehl oder ändere den konkurrierenden Befehl zuerst."
+msgstr "Der ausgewählte Tastaturbefehl („%1$s“) ist bereits vergeben für die folgende Aktion: „%2$s“. Bitte wähle einen anderen Tastaturbefehl oder ändere den konkurrierenden Befehl zuerst."
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/ui_fsmenu/keyboard_options.cc:292
@@ -7727,8 +7727,8 @@ msgstr "Ersetze den Spieler durch die ausgewählte KI und setze das Spiel fort"
 msgid "AI for the disconnected player"
 msgstr "Ersatz-KI für den Spieler"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
