@@ -97,13 +97,13 @@ msgstr "Nahrung für deine Bergleute"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
-msgstr "Baue eine Taverne, um etwas Nahrung zuzubereiten, die unsere Bergleute stärkt. "
+msgstr "Baue eine Taverne, um etwas Nahrung zuzubereiten, die unsere Bergleute stärkt."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
-msgstr "Natürlich heißt das, dass wir mehr Rohstoffe brauchen, um diese Nahrung zuzubereiten – wie Fisch, Fleisch oder Brot. "
+msgstr "Natürlich heißt das, dass wir mehr Rohstoffe brauchen, um diese Nahrung zuzubereiten – wie Fisch, Fleisch oder Brot."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid ""
@@ -126,7 +126,7 @@ msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
-msgstr "Es liegt bei dir, was du baust. Aber bedenke: Kohle-  und Eisenerzminen benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch bestehen."
+msgstr "Es liegt bei dir, was du baust. Aber bedenke: Kohle- und Eisenerzminen benötigen Bier, Marmor- und Goldminen benötigen Wein und alle Minen benötigen mindestens Rationen, welche aus Brot ODER Fleisch ODER Fisch bestehen."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
@@ -384,7 +384,7 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr "Es ist schön, und natürlich eine gute Idee, Minen zu errichten, welche uns ein komfortableres Leben ermöglichen werden, aber die Bergleute sind mit der Situation nicht einverstanden. Sie müssen hart arbeiten und haben keine Zeit, sich selbst um ihr Essen zu kümmern. "
+msgstr "Es ist schön, und natürlich eine gute Idee, Minen zu errichten, welche uns ein komfortableres Leben ermöglichen werden, aber die Bergleute sind mit der Situation nicht einverstanden. Sie müssen hart arbeiten und haben keine Zeit, sich selbst um ihr Essen zu kümmern."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218

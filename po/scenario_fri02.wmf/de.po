@@ -38,7 +38,7 @@ msgstr ""
 "Es scheint, dass du die vorherige Mission nicht abgeschlossen hast. Du "
 "kannst dieses Szenario trotzdem spielen, aber du wirst einen Nachteil davon "
 "haben. Es ist besser, erst das vorhergehende Szenario abzuschließen und dann"
-" diese Mission neu zu starten. "
+" diese Mission neu zu starten."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -529,7 +529,7 @@ msgstr ""
 "Genau das werden wir tun müssen. Wir werden unsere Waffen benutzen, um "
 "Krieger auszubilden, dann schmelzen wir das Altmetall in Eisen und Gold ein."
 " Und dann können unsere Schmiede Spitzhacken herstellen, um die Bergleute "
-"damit auszustatten. Ich werde mich sofort darum kümmern."
+"damit auszustatten. Ich werde mich sofort darum kümmern!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:210
@@ -668,7 +668,7 @@ msgstr ""
 "Ausbildung der Krieger konzentrieren. Wir können es uns jetzt leisten, "
 "Metall für die Waffen-, Helm- und Gewandproduktion zu verwenden. Ich schlage"
 " vor, Rüstungsschmieden, eine Kaserne, eine Ausbildungsarena und eine "
-"Schneiderei zu bauen. "
+"Schneiderei zu bauen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -731,7 +731,7 @@ msgid ""
 msgstr ""
 "Fremde! Ich, Murilius, Prokonsul der nördlichen Länder, einer Provinz des "
 "Imperiums, fordere euch auf, mir mitzuteilen wer ihr seid und was ihr in "
-"diesen Landen zu schaffen habt! "
+"diesen Landen zu schaffen habt!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. frisian greeting, nothing more.
