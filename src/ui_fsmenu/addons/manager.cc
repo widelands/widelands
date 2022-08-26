@@ -344,8 +344,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                          .as_font_tag(format(
 	                             _("For more information regarding how to develop and package your "
 	                               "own add-ons, please visit %s."),
-	                               g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(
-	                             as_url_hyperlink(kDocumentationURL))))),
+	                             g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+	                                .as_font_tag(as_url_hyperlink(kDocumentationURL))))),
 	                UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	             UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSpacing);
@@ -411,8 +411,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	                            "as deletion of an add-on or collaborating with another add-on "
 	                            "designer? Please visit our forums at %s, explain your needs, and "
 	                            "the Widelands Development Team will be happy to help."),
-	                               g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(
-	                          as_url_hyperlink(kForumURL))))),
+	                          g_style_manager->font_style(UI::FontStyle::kFsTooltip)
+	                             .as_font_tag(as_url_hyperlink(kForumURL))))),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSpacing);

@@ -73,7 +73,8 @@ struct MultilineTextarea : public Panel {
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(int32_t x, int32_t y, uint16_t modstate) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	void scroll_to_top();
 
 	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);

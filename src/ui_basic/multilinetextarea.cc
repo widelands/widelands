@@ -185,9 +185,11 @@ bool MultilineTextarea::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
 	       rendered_text_->handle_mousepress(
 	          x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 }
-bool MultilineTextarea::handle_mousemove(uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
+bool MultilineTextarea::handle_mousemove(
+   uint8_t /* state */, int32_t x, int32_t y, int32_t /* xdiff */, int32_t /* ydiff */) {
 	if (rendered_text_ != nullptr) {
-		const std::string* tt = rendered_text_->get_tooltip(x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
+		const std::string* tt = rendered_text_->get_tooltip(
+		   x - render_anchor_.x, y - render_anchor_.y + scrollbar_.get_scrollpos());
 		if (tt != nullptr) {
 			tooltip_before_hyperlink_tooltip_ = tooltip();
 			set_tooltip(*tt);
