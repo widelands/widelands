@@ -631,12 +631,11 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);
 			}
-		} else {
-			ok_button_.set_enabled(true);
-			cancel_button_.set_enabled(true);
 		}
 	}
 
+	ok_button_.set_enabled(true);
+	cancel_button_.set_enabled(true);
 	return result;
 }
 
