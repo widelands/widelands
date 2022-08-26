@@ -531,7 +531,7 @@ end
 -- This section covers functions for including hyperlinks.
 
 -- RST
--- .. function:: a(linktext, linktype, target[, action])
+-- .. function:: a(linktext, linktype, target[, action=nil][, mouseover=linktext])
 --
 --    This function creates a hyperlink.
 --
@@ -543,13 +543,15 @@ end
 --    :type target: :class:`string`
 --    :arg action: Only valid for UI links. The action the UI element should perform.
 --    :type action: :class:`string` or :class:`nil`
+--    :arg mouseover: The text to show on mouse hovering. This defaults to the linktext; use ``""`` to disable.
+--    :type mouseover: :class:`string`
 --
 --    :returns: The linkified and underlined text.
 
-function a(linktext, linktype, target, action)
-   local str = "<link type=" .. linktype .. " target=" .. target
-   if action ~= nil then str = str .. " action=" .. action end
-   return  str .. ">" .. font("underline=1", linktext) .. "</link>"
+function a(linktext, linktype, target, action, mouseover)
+   local str = "<link type=" .. linktype .. " target=\"" .. target .. "\""
+   if action ~= nil then str = str .. " action=\"" .. action .. "\"" end
+   return str .. "mouseover=\"" .. (mouseover or linktext) .. "\">" .. font("underline=1", linktext) .. "</link>"
 end
 
 -- RST

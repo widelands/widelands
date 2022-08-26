@@ -50,6 +50,12 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+const bool g_can_open_url(true);
+#else
+const bool g_can_open_url(false);
+#endif
+
 namespace {
 /**
  * This function replaces some HTML entities in strings, e.g. &nbsp;.
@@ -1124,6 +1130,9 @@ public:
 	bool handle_mousepress(int32_t x, int32_t y) const override {
 		return parent_ != nullptr && parent_->handle_mousepress(x, y);
 	}
+	const std::string* get_tooltip(int32_t x, int32_t y) const override {
+		return parent_ == nullptr ? nullptr : parent_->get_tooltip(x, y);
+	}
 
 private:
 	void make_text_nodes(const std::string& txt, std::vector<RenderNode*>& nodes, NodeStyle& ns);
@@ -1369,6 +1378,10 @@ public:
 		}
 		target_ = a["target"].get_string();
 
+		if (a.has("mouseover")) {
+			mouseover_ = a["mouseover"].get_string();
+		}
+
 		if (a.has("align")) {
 			const std::string align = a["align"].get_string();
 			if (align == "right") {
@@ -1411,8 +1424,12 @@ public:
 		NEVER_HERE();
 	}
 
+	const std::string* get_tooltip(int32_t /* x */, int32_t /* y */) const override {
+		return &mouseover_;
+	}
+
 private:
-	std::string target_, action_;
+	std::string target_, action_, mouseover_;
 	Type type_;
 };
 

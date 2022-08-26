@@ -632,7 +632,9 @@ bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
 }
 
 void BaseListselect::scroll_to_selection() {
-	assert(has_selection());
+	if (!has_selection()) {
+		return;
+	}
 	if (selection_index() * get_lineheight() < scrollpos_) {
 		scrollpos_ = selection_index() * get_lineheight();
 		scrollbar_.set_scrollpos(scrollpos_);

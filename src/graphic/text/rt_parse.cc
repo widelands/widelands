@@ -492,9 +492,10 @@ This tag defines a clickable hyperlink.
 Attributes
 ^^^^^^^^^^
 
-* **type**: What kind of link. Can be "url" or "ui".
-* **target**: The URL to open or the UI widget to reference.
-* **action**: For UI links, the action to perform.
+* **type**: Mandatory. What kind of link. Can be "url" or "ui".
+* **target**: Mandatory. The URL to open or the UI widget to reference.
+* **action**: Mandatory for UI links: the action to perform. Not allowed for URLs.
+* **mouseover**: Optional. The mouseover text to show.
 
 Sub-tags
 ^^^^^^^^
@@ -514,6 +515,7 @@ Sub-tags
 		tc.allowed_attrs.insert("type");
 		tc.allowed_attrs.insert("target");
 		tc.allowed_attrs.insert("action");
+		tc.allowed_attrs.insert("mouseover");
 
 		tc.allowed_children.insert("br");
 		tc.allowed_children.insert("space");

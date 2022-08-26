@@ -117,6 +117,9 @@ int RenderedRect::height() const {
 bool RenderedRect::handle_mousepress(int32_t x, int32_t y) const {
 	return click_target_->handle_mousepress(x - rect_.x, y - rect_.y);
 }
+const std::string* RenderedRect::get_tooltip(int32_t x, int32_t y) const {
+	return click_target_->get_tooltip(x - rect_.x, y - rect_.y);
+}
 
 void RenderedRect::set_origin(const Vector2i& new_origin) {
 	rect_.x = new_origin.x;
@@ -175,6 +178,17 @@ bool RenderedText::handle_mousepress(int32_t x, int32_t y) const {
 		}
 	}
 	return false;
+}
+const std::string* RenderedText::get_tooltip(int32_t x, int32_t y) const {
+	for (const auto& r : rects) {
+		if (r->rect().contains(Vector2i(x, y))) {
+			const std::string* tt = r->get_tooltip(x, y);
+			if (tt != nullptr && !tt->empty()) {
+				return tt;
+			}
+		}
+	}
+	return nullptr;
 }
 
 void RenderedText::draw(RenderTarget& dst,

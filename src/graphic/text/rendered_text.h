@@ -109,6 +109,7 @@ public:
 	DrawMode mode() const;
 
 	bool handle_mousepress(int32_t x, int32_t y) const;
+	const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 private:
 	Recti rect_;
@@ -138,6 +139,7 @@ struct RenderedText {
 	int height() const;
 
 	bool handle_mousepress(int32_t x, int32_t y) const;
+	const std::string* get_tooltip(int32_t x, int32_t y) const;
 
 	enum class CropMode {
 		// The RenderTarget will handle all cropping. Use this for scrollable elements or when you
