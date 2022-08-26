@@ -43,7 +43,7 @@ template <typename T, typename ID> struct IDButton;
 class MainMenuNewRandomMapPanel : public UI::Box {
 public:
 	explicit MainMenuNewRandomMapPanel(
-	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h);
+	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h, UI::Button& o, UI::Button& c);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -58,11 +58,6 @@ public:
 		kIslandMode,
 		kPlayers
 	};
-
-	void set_buttons(UI::Button& o, UI::Button& c) {
-		ok_button_ = &o;
-		cancel_button_ = &c;
-	}
 
 private:
 	void button_clicked(ButtonId);
@@ -109,17 +104,18 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_, random_number_hbox_;
 
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
 	UI::EditBox map_number_edit_;
+	UI::Button map_number_randomize_;
 
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 
-	UI::Button* ok_button_;
-	UI::Button* cancel_button_;
+	UI::Button& ok_button_;
+	UI::Button& cancel_button_;
 
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMapPanel);
 };
@@ -135,11 +131,9 @@ public:
 
 private:
 	UI::Box box_;
-	MainMenuNewRandomMapPanel panel_;
-
-	// Buttons
 	UI::Box button_box_;
 	UI::Button ok_button_, cancel_button_;
+	MainMenuNewRandomMapPanel panel_;
 	void clicked_ok();
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };

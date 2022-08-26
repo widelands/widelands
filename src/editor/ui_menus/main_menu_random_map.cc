@@ -42,7 +42,7 @@ constexpr uint8_t kMargin = 4;
 }  // namespace
 
 MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
-   UI::Panel& parent, UI::PanelStyle s, const int32_t inner_w, const uint32_t w, const uint32_t h)
+   UI::Panel& parent, UI::PanelStyle s, const int32_t inner_w, const uint32_t w, const uint32_t h, UI::Button& o, UI::Button& c)
    : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
      label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
                                               UI::FontStyle::kFsMenuLabel),
@@ -173,13 +173,17 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
         &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      map_number_and_id_vbox_2_(
         &map_number_and_id_hbox_, panel_style_, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     random_number_hbox_(
+        &map_number_and_id_vbox_2_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      map_number_label_(
         &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Random number:")),
-     map_number_edit_(&map_number_and_id_vbox_2_,
+     map_number_edit_(&random_number_hbox_,
                       0,
                       0,
                       inner_w - 2 * kMargin - map_number_label_.get_w(),
                       panel_style_),
+	map_number_randomize_(&random_number_hbox_, "new_random_number", 0, 0, map_number_edit_.get_h(), map_number_edit_.get_h(), UI::ButtonStyle::kWuiSecondary,
+                g_image_cache->get("images/ui_fsmenu/random.png"), _("Generate a new random number")),
      map_id_label_(
         &map_number_and_id_vbox_1_, panel_style_, label_style_, 0, 0, 0, 0, _("Map ID:")),
      map_id_edit_(&map_number_and_id_vbox_2_,
@@ -187,8 +191,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
                   panel_style_),
-     ok_button_(nullptr),
-     cancel_button_(nullptr) {
+     ok_button_(o),
+     cancel_button_(c) {
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	// ---------- Width + Height ----------
@@ -294,12 +298,17 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
 	map_number_and_id_vbox_1_.add(&map_number_label_, UI::Box::Resizing::kExpandBoth);
 
 	map_number_edit_.changed.connect([this]() { nr_edit_box_changed(); });
-	RNG rng;
-	rng.seed(clock());
-	rng.rand();
-	map_number_ = rng.rand();
+	map_number_edit_.ok.connect([this]() { ok_button_.sigclicked(); });
+	map_number_ = RNG::static_rand();
 	map_number_edit_.set_text(std::to_string(static_cast<unsigned int>(map_number_)));
-	map_number_and_id_vbox_2_.add(&map_number_edit_, UI::Box::Resizing::kExpandBoth);
+	map_number_and_id_vbox_2_.add(&random_number_hbox_, UI::Box::Resizing::kExpandBoth);
+	random_number_hbox_.add(&map_number_edit_, UI::Box::Resizing::kExpandBoth);
+
+	map_number_randomize_.sigclicked.connect([this]() {
+		map_number_edit_.set_text(std::to_string(RNG::static_rand()));
+		nr_edit_box_changed();
+	});
+	random_number_hbox_.add(&map_number_randomize_);
 
 	add_space(kMargin);
 
@@ -309,6 +318,7 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
 
 	map_id_edit_.set_text("abcd-efgh-ijkl-mnop");
 	map_id_edit_.changed.connect([this]() { id_edit_box_changed(); });
+	map_id_edit_.ok.connect([this]() { ok_button_.sigclicked(); });
 	map_number_and_id_vbox_2_.add(&map_id_edit_, UI::Box::Resizing::kExpandBoth);
 
 	map_number_and_id_hbox_.add(&map_number_and_id_vbox_1_, UI::Box::Resizing::kExpandBoth);
@@ -491,10 +501,8 @@ void MainMenuNewRandomMapPanel::select_terrains_distribution() {
 bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbase,
                                                 EditorInteractive* eia,
                                                 SinglePlayerGameSettingsProvider* sp) {
-	if (ok_button_ != nullptr) {
-		ok_button_->set_enabled(false);
-		cancel_button_->set_enabled(false);
-	}
+	ok_button_.set_enabled(false);
+	cancel_button_.set_enabled(false);
 
 	assert((eia == nullptr) ^ (sp == nullptr));
 	assert((sp == nullptr) ^ egbase.is_game());
@@ -623,9 +631,9 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);
 			}
-		} else if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(true);
-			cancel_button_->set_enabled(true);
+		} else {
+			ok_button_.set_enabled(true);
+			cancel_button_.set_enabled(true);
 		}
 	}
 
@@ -644,9 +652,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 	}
 
 	if (!Widelands::UniqueRandomMapInfo::set_from_id_string(map_info, str, world_names)) {
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
-		}
+		ok_button_.set_enabled(false);
 	} else {
 		std::stringstream sstrm;
 		sstrm << map_info.mapNumber;
@@ -676,9 +682,7 @@ void MainMenuNewRandomMapPanel::id_edit_box_changed() {
 		// Update other values in UI as well
 		button_clicked(ButtonId::kNone);
 
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(true);
-		}
+		ok_button_.set_enabled(true);
 	}
 }
 
@@ -701,16 +705,12 @@ void MainMenuNewRandomMapPanel::nr_edit_box_changed() {
 
 			map_id_edit_.set_text(id_string);
 
-			if (ok_button_ != nullptr) {
-				ok_button_->set_enabled(true);
-			}
-		} else if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
+			ok_button_.set_enabled(true);
+		} else {
+			ok_button_.set_enabled(false);
 		}
 	} catch (...) {
-		if (ok_button_ != nullptr) {
-			ok_button_->set_enabled(false);
-		}
+		ok_button_.set_enabled(false);
 	}
 }
 
@@ -735,7 +735,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
      box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-     panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h),
      button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
@@ -752,7 +751,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                     get_inner_w() / 2 - kMargin,
                     0,
                     UI::ButtonStyle::kWuiSecondary,
-                    _("Cancel")) {
+                    _("Cancel")),
+     panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h, ok_button_, cancel_button_) {
 	box_.add(&panel_, UI::Box::Resizing::kAlign);
 
 	cancel_button_.sigclicked.connect([this]() { die(); });
@@ -765,7 +765,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 		button_box_.add(&ok_button_, UI::Box::Resizing::kExpandBoth);
 	}
 	box_.add(&button_box_, UI::Box::Resizing::kExpandBoth);
-	panel_.set_buttons(ok_button_, cancel_button_);
 
 	set_center_panel(&box_);
 	center_to_parent();
