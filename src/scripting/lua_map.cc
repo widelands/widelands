@@ -8387,7 +8387,7 @@ int LuaPlayerSlot::get_tribe_name(lua_State* L) {  // NOLINT - can not be made c
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
-int LuaPlayerSlot::set_tribe_name(lua_State* L) {
+int LuaPlayerSlot::set_tribe_name(lua_State* L) {  // NOLINT - can not be made const
 	get_egbase(L).mutable_map()->set_scenario_player_tribe(player_number_, luaL_checkstring(L, -1));
 	return 0;
 }
@@ -8404,7 +8404,7 @@ int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
 }
-int LuaPlayerSlot::set_name(lua_State* L) {
+int LuaPlayerSlot::set_name(lua_State* L) {  // NOLINT - can not be made const
 	get_egbase(L).mutable_map()->set_scenario_player_name(player_number_, luaL_checkstring(L, -1));
 	return 0;
 }
@@ -8424,7 +8424,7 @@ int LuaPlayerSlot::get_starting_field(lua_State* L) {  // NOLINT - can not be ma
 	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(player_number_)));
 	return 1;
 }
-int LuaPlayerSlot::set_starting_field(lua_State* L) {
+int LuaPlayerSlot::set_starting_field(lua_State* L) {  // NOLINT - can not be made const
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, -1);
 	get_egbase(L).mutable_map()->set_starting_pos(player_number_, c->coords());
 	return 0;
