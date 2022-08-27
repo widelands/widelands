@@ -1410,9 +1410,12 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
-   PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
-   PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
-   PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
+   PROP_RO(LuaMap, allows_seafaring),
+   PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),
+   PROP_RO(LuaMap, width),
+   PROP_RO(LuaMap, height),
+   PROP_RO(LuaMap, player_slots),
    PROP_RW(LuaMap, waterway_max_length),
    {nullptr, nullptr, nullptr},
 };
@@ -1511,7 +1514,6 @@ int LuaMap::set_waterway_max_length(lua_State* L) {
 	get_egbase(L).mutable_map()->set_waterway_max_length(luaL_checkuint32(L, -1));
 	return 0;
 }
-
 
 /* RST
    .. attribute:: player_slots

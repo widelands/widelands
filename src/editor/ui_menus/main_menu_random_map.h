@@ -45,8 +45,13 @@ template <typename T, typename ID> struct IDButton;
 
 class MainMenuNewRandomMapPanel : public UI::Box {
 public:
-	explicit MainMenuNewRandomMapPanel(
-	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h, UI::Button& o, UI::Button& c);
+	explicit MainMenuNewRandomMapPanel(UI::Panel& parent,
+	                                   UI::PanelStyle,
+	                                   int32_t inner_w,
+	                                   uint32_t map_w,
+	                                   uint32_t map_h,
+	                                   UI::Button& o,
+	                                   UI::Button& c);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -111,7 +116,8 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_, random_number_hbox_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_,
+	   random_number_hbox_;
 
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
