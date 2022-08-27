@@ -19,7 +19,7 @@ An add-on contains a plain-text ini-style file called ``addons`` with the follow
 * ``description``: The long description
 * ``author``: The add-on’s author(s) name(s)
 * ``version``: The add-on’s version number
-* ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition", "theme"
+* ``category``: One of "tribes", "world", "script", "maps", "map_generator", "campaign", "win_condition", "starting_condition", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on.
 * ``min_wl_version`` *Optional*: The oldest Widelands version required by this add-on.
 * ``max_wl_version`` *Optional*: The newest Widelands version supported by this add-on.
@@ -49,6 +49,7 @@ Categories
 - `world`_
 - `script`_
 - `maps`_
+- `map_generator`_
 - `campaign`_
 - `win_condition`_
 - `starting_condition`_
@@ -91,6 +92,29 @@ A set of maps and/or standalone scenarios.
 All valid map files (including those in subdirectories) contained in the add-on are offered in map selection screens. It is recommended to place the map files in a subdirectory rather than in the top-level directory.
 
 The add-on can optionally contain an ini-style file called "dirnames" which defines the localized displaynames of the subdirectories in the "global" section. Two subdirectories with the same name always have the same displayname, independent of their parent directories.
+
+
+map_generator
+~~~~~~~~~~~~~
+A script that generates a pseudo-random map given user-provided input parameters.
+
+The generator consists of an ``init.lua`` script. The script will be called after the following global variables have been set by the map generation frontend:
+
+- **kClimate**: The climate for the map (one of ``"summer"``, ``"winter"``, ``"wasteland"``, ``"desert"``).
+- **kResourceAmount**: Desired amount of resources on the map, in range 0 (low) to 2 (high).
+- **kWater**: Desired amount of water on the map, in range 0..100.
+- **kLand**: Desired amount of arable land on the map, in range 0..100.
+- **kWasteland**: Desired amount of wasteland on the map, in range 0..100.
+- **kIslandMode**: A boolean value indicating whether island mode is enabled.
+- **kRandomNumber**: A random number to be used for randomness.
+- **kMapID**: The map's ID computed from the other parameters.
+
+The generator will be provided with a flat and empty world in which only the map size and the number of players has been set already.
+All map features as well as starting positions and other map settings must be added by the generator.
+
+
+
+Map generators are required to produce exactly the same map for the same map ID every time.
 
 
 campaign

@@ -19,8 +19,11 @@
 #ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 #define WL_EDITOR_UI_MENUS_MAIN_MENU_RANDOM_MAP_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "editor/ui_menus/map_size_box.h"
+#include "logic/addons.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
@@ -78,6 +81,8 @@ private:
 
 	// UI elements
 	int32_t label_height_;
+
+	UI::Dropdown<std::shared_ptr<const AddOns::AddOnInfo>> generator_;
 
 	// Size
 	MapSizeBox map_size_box_;

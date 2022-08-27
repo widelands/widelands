@@ -40,10 +40,11 @@ enum class AddOnCategory {
 	kTribes,
 	kScript,
 	kMaps,
+	kMapGenerator,
 	kCampaign,
 	kWinCondition,
 	kStartingCondition,
-	kTheme
+	kTheme,
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.
@@ -56,6 +57,7 @@ struct AddOnCategoryInfo {
 	std::string internal_name;
 	std::function<std::string()> descname;
 	std::string icon;
+	bool may_affect_game_state;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
