@@ -7674,7 +7674,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, viewpoint_y),
    PROP_RW(LuaField, resource),
    PROP_RW(LuaField, resource_amount),
-   PROP_RO(LuaField, initial_resource_amount),
+   PROP_RW(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
    PROP_RO(LuaField, buildable),
@@ -7811,10 +7811,10 @@ int LuaField::get_viewpoint_y(lua_State* L) {
       :see also: :attr:`resource_amount`
 */
 int LuaField::get_resource(lua_State* L) {
-	const Widelands::ResourceDescription* rDesc =
+	const Widelands::ResourceDescription* res_desc =
 	   get_egbase(L).descriptions().get_resource_descr(fcoords(L).field->get_resources());
 
-	lua_pushstring(L, rDesc != nullptr ? rDesc->name().c_str() : "none");
+	lua_pushstring(L, res_desc != nullptr ? res_desc->name().c_str() : "none");
 
 	return 1;
 }
@@ -7850,8 +7850,8 @@ int LuaField::set_resource_amount(lua_State* L) {
 	auto c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
 	auto amount = luaL_checkint32(L, -1);
-	const Widelands::ResourceDescription* resDesc = egbase.descriptions().get_resource_descr(res);
-	Widelands::ResourceAmount max_amount = (resDesc != nullptr) ? resDesc->max_amount() : 0;
+	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
+	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
 		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
@@ -7867,10 +7867,14 @@ int LuaField::set_resource_amount(lua_State* L) {
 	}
 	return 0;
 }
+
 /* RST
    .. attribute:: initial_resource_amount
 
-      (RO) Starting value of resource. It is set be resource_amount.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) Starting value of resource.
 
       :see also: :attr:`resource`
 */
@@ -7878,6 +7882,23 @@ int LuaField::get_initial_resource_amount(lua_State* L) {
 	lua_pushuint32(L, fcoords(L).field->get_initial_res_amount());
 	return 1;
 }
+int LuaField::set_initial_resource_amount(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	auto c = fcoords(L);
+	Widelands::DescriptionIndex res = c.field->get_resources();
+	auto amount = luaL_checkint32(L, -1);
+	const Widelands::ResourceDescription* res_desc = egbase.descriptions().get_resource_descr(res);
+	Widelands::ResourceAmount max_amount = (res_desc != nullptr) ? res_desc->max_amount() : 0;
+
+	if (amount < 0 || amount > max_amount) {
+		report_error(L, "Illegal amount: %i, must be >= 0 and <= %i", amount,
+		             static_cast<unsigned int>(max_amount));
+	}
+
+	egbase.mutable_map()->initialize_resources(c, res, amount);
+	return 0;
+}
+
 /* RST
    .. attribute:: immovable
 
@@ -8317,7 +8338,7 @@ const MethodType<LuaPlayerSlot> LuaPlayerSlot::Methods[] = {
 const PropertyType<LuaPlayerSlot> LuaPlayerSlot::Properties[] = {
    PROP_RO(LuaPlayerSlot, tribe_name),
    PROP_RO(LuaPlayerSlot, name),
-   PROP_RO(LuaPlayerSlot, starting_field),
+   PROP_RW(LuaPlayerSlot, starting_field),
    {nullptr, nullptr, nullptr},
 };
 
@@ -8357,7 +8378,10 @@ int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 /* RST
    .. attribute:: starting_field
 
-      (RO) The starting_field for this player as set in the map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The starting_field for this player as set in the map.
       Note that it is not guaranteed that the HQ of the player is on this
       field as scenarios and starting conditions are free to place the HQ
       wherever it want. This field is only centered when the game starts.
@@ -8365,6 +8389,11 @@ int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 int LuaPlayerSlot::get_starting_field(lua_State* L) {  // NOLINT - can not be made const
 	to_lua<LuaField>(L, new LuaField(get_egbase(L).map().get_starting_pos(player_number_)));
 	return 1;
+}
+int LuaPlayerSlot::set_starting_field(lua_State* L) {
+	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, -1);
+	get_egbase(L).mutable_map()->set_starting_pos(player_number_, c->coords());
+	return 0;
 }
 
 /*

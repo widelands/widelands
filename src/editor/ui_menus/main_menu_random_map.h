@@ -67,6 +67,8 @@ private:
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
 
+	size_t compute_max_players() const;
+
 	// Ensures that the sum of our landmass is >= 0% and <= 100%, and changes
 	// values as necessary.
 	// \param clicked_button: The button that was clicked to change the values.

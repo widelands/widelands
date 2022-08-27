@@ -1562,6 +1562,7 @@ public:
 	int get_resource_amount(lua_State*);
 	int set_resource_amount(lua_State*);
 	int get_initial_resource_amount(lua_State*);
+	int set_initial_resource_amount(lua_State*);
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
 	int get_buildable(lua_State*);
@@ -1621,6 +1622,7 @@ public:
 	int get_tribe_name(lua_State*);
 	int get_name(lua_State*);
 	int get_starting_field(lua_State*);
+	int set_starting_field(lua_State*);
 
 	/*
 	 * Lua methods

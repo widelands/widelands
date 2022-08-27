@@ -62,13 +62,13 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
                                                    UI::ButtonStyle::kFsMenuSecondary),
      // Size
      map_size_box_(*this, panel_style_, "random_map_menu", 4, w, h),
-     max_players_(2),
+     max_players_(compute_max_players()),
      players_(this,
               0,
               0,
               inner_w,
               inner_w / 3,
-              2,
+              max_players_,
               1,
               max_players_,
               panel_style_,
@@ -386,11 +386,7 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 	case ButtonId::kMapSize:
 	case ButtonId::kNone:
 		// Restrict maximum players according to map size, but allow at least 2 players.
-		max_players_ = std::min(static_cast<size_t>(kMaxMapgenPlayers),
-		                        (find_dimension_index(map_size_box_.selected_width()) +
-		                         find_dimension_index(map_size_box_.selected_height())) /
-		                              2 +
-		                           2);
+		max_players_ = compute_max_players();
 		players_.set_interval(1, max_players_);
 		if (players_.get_value() > max_players_) {
 			players_.set_value(max_players_);
@@ -399,6 +395,14 @@ void MainMenuNewRandomMapPanel::button_clicked(MainMenuNewRandomMapPanel::Button
 		normalize_landmass(n);
 	}
 	nr_edit_box_changed();  // Update ID String
+}
+
+size_t MainMenuNewRandomMapPanel::compute_max_players() const {
+	return std::min(static_cast<size_t>(kMaxMapgenPlayers),
+	                        (find_dimension_index(map_size_box_.selected_width()) +
+	                         find_dimension_index(map_size_box_.selected_height())) /
+	                              2 +
+	                           2);
 }
 
 // If the the sum of our landmass is < 0% or > 100% change the mountain value.
@@ -569,6 +573,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	map->create_empty_map(egbase, map_info.w, map_info.h, 0, _("No Name"),
 	                      get_config_string("realname", pgettext("author_name", "Unknown")),
 	                      sstrm.str());
+	map->set_nrplayers(map_info.numPlayers);
 	Notifications::publish(UI::NoteLoadingMessage(_("Generating random map…")));
 
 	log_info("============== Generating Map ==============\n");
