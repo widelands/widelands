@@ -1413,6 +1413,7 @@ const PropertyType<LuaMap> LuaMap::Properties[] = {
    PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
    PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
+   PROP_RW(LuaMap, waterway_max_length),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1494,6 +1495,23 @@ int LuaMap::get_height(lua_State* L) {
 	lua_pushuint32(L, get_egbase(L).map().get_height());
 	return 1;
 }
+
+/* RST
+   .. attribute:: waterway_max_length
+
+      .. versionadded:: 1.2
+
+      (RW) The waterway length limit on this map.
+*/
+int LuaMap::get_waterway_max_length(lua_State* L) {
+	lua_pushuint32(L, get_egbase(L).map().get_waterway_max_length());
+	return 1;
+}
+int LuaMap::set_waterway_max_length(lua_State* L) {
+	get_egbase(L).mutable_map()->set_waterway_max_length(luaL_checkuint32(L, -1));
+	return 0;
+}
+
 
 /* RST
    .. attribute:: player_slots
@@ -8336,8 +8354,8 @@ const MethodType<LuaPlayerSlot> LuaPlayerSlot::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerSlot> LuaPlayerSlot::Properties[] = {
-   PROP_RO(LuaPlayerSlot, tribe_name),
-   PROP_RO(LuaPlayerSlot, name),
+   PROP_RW(LuaPlayerSlot, tribe_name),
+   PROP_RW(LuaPlayerSlot, name),
    PROP_RW(LuaPlayerSlot, starting_field),
    {nullptr, nullptr, nullptr},
 };
@@ -8358,21 +8376,35 @@ void LuaPlayerSlot::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: tribe_name
 
-      (RO) The name of the tribe suggested for this player in this map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The name of the tribe suggested for this player in this map.
 */
 int LuaPlayerSlot::get_tribe_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_tribe(player_number_));
 	return 1;
 }
+int LuaPlayerSlot::set_tribe_name(lua_State* L) {
+	get_egbase(L).mutable_map()->set_scenario_player_tribe(player_number_, luaL_checkstring(L, -1));
+	return 0;
+}
 
 /* RST
    .. attribute:: name
 
-      (RO) The name for this player as suggested in this map.
+      .. versionchanged:: 1.2
+         Read-only in 1.1 and older.
+
+      (RW) The name for this player as suggested in this map.
 */
 int LuaPlayerSlot::get_name(lua_State* L) {  // NOLINT - can not be made const
 	lua_pushstring(L, get_egbase(L).map().get_scenario_player_name(player_number_));
 	return 1;
+}
+int LuaPlayerSlot::set_name(lua_State* L) {
+	get_egbase(L).mutable_map()->set_scenario_player_name(player_number_, luaL_checkstring(L, -1));
+	return 0;
 }
 
 /* RST

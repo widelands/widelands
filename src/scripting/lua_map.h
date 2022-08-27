@@ -89,6 +89,7 @@ public:
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
 	int get_waterway_max_length(lua_State*);
+	int set_waterway_max_length(lua_State*);
 
 	/*
 	 * Lua methods
@@ -102,7 +103,6 @@ public:
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
 	int sea_route_exists(lua_State*);
-	int set_waterway_max_length(lua_State*);
 	int find_ocean_fields(lua_State*);
 
 	/*
@@ -1620,7 +1620,9 @@ public:
 	 * Properties
 	 */
 	int get_tribe_name(lua_State*);
+	int set_tribe_name(lua_State*);
 	int get_name(lua_State*);
+	int set_name(lua_State*);
 	int get_starting_field(lua_State*);
 	int set_starting_field(lua_State*);
 

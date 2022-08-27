@@ -673,7 +673,6 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			map->set_author(_("The Widelands Random Map Generator"));
 			map->set_description(
 			   _("This map was generated automatically by the Widelands Random Map Generator."));
-			map->set_waterway_max_length(RNG::static_rand(5) * RNG::static_rand(6));
 
 			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);
