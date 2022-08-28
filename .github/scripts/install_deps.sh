@@ -7,7 +7,6 @@ ADD_PKG_LIST=""
 
 if [ "${GITHUB_JOB}" = "clang_tidy" ]; then
   ADD_PKG_LIST="
-    git \
     clang-tidy  \
     python-yaml"
 fi
@@ -15,8 +14,6 @@ fi
 if [ "${GITHUB_JOB}" = "testsuite" ]; then
   ADD_PKG_LIST="
     ${CXX} \
-    git \
-    libminizip-dev  \
     libwayland-egl1-mesa  \
     linux-generic \
     mesa-utils  \
@@ -28,22 +25,12 @@ fi
 
 if [ "${GITHUB_JOB}" = "appimage" ]; then
   ADD_PKG_LIST="
-    ${CXX} \
-    git"
+    ${CXX}"
 fi
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install -y \
-  cmake \
-  gettext \
-  libasio-dev \
-  libglew-dev\
-  libpng-dev  \
-  libsdl2-dev \
-  libsdl2-image-dev \
-  libsdl2-mixer-dev \
-  libsdl2-ttf-dev\
-  python3\
-  zlib1g-dev \
-  ${ADD_PKG_LIST}
+
+# This script handles the common dependencies
+./install-dependencies.sh debian -y ${ADD_PKG_LIST}
+
