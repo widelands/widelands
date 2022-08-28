@@ -24,10 +24,10 @@ wl.Descriptions():new_worker_type {
          "return"
       },
       buildferry_1 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=work duration:10s",
          "createbob=frisians_ferry",
