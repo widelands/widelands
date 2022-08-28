@@ -11,7 +11,7 @@
 # Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022
 # Elisabeth Jäger, 2015
 # wl-zocker, 2014-2015
 # Wuzzy <Wuzzy@disroot.org>, 2016,2018
@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-01 02:50+0000\n"
 "PO-Revision-Date: 2015-02-03 14:49+0000\n"
-"Last-Translator: Elisabeth Jäger, 2015\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018-2022\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -247,7 +247,7 @@ msgstr "Du hast das Gebäudestatistik-Fenster geschlossen, obwohl du noch nicht 
 #. TRANSLATORS: "it" refers to the building statistics window.
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:115
 msgid "Please reopen it and choose the second tab (medium buildings)."
-msgstr "Bitte öffne es wieder wieder und wähle den zweiten Reiter (mittelgroße Gebäude)."
+msgstr "Bitte öffne es wieder und wähle den zweiten Reiter (mittelgroße Gebäude)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:123
