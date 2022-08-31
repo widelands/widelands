@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-22 04:22+0000\n"
+"POT-Creation-Date: 2022-08-28 04:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Log Merger, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -776,8 +776,8 @@ msgstr "miniera"
 msgid "port"
 msgstr "porto"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1500,8 +1500,8 @@ msgid ""
 "location."
 msgstr "Seleziona la nuova dimensione della mappa, quindi fai click sul punto dove vuoi effettuare la modifica. Quando si aumenta la dimensione della mappa, verranno inserite nuove colonne/righe a est/sud del punto selezionato. Quando si riduce la dimensione della mappa, il numero di colonne/righe indicato verrà rimosso da est/sud del punto indicato."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2365,23 +2365,23 @@ msgstr "Corso d'acqua eliminato"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Un corso d'acqua è stato eliminato per fare spazio al tuo nuovo molo."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../src/logic/map_objects/tribes/worker.cc:1128
 msgid "A geologist found resources."
 msgstr "Un geologo ha trovato delle risorse."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2082
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Il tuo %s non riesce a tornare a casa: potrebbe morire!"
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2087
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr "Lavoratore"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 msgid "Worker got lost!"
 msgstr "Il lavoratore si è perso!"
 
@@ -6199,18 +6199,18 @@ msgstr "Percorso non valido al file %s in campaigns.lua di tutorials.lua."
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autore"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autori"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-22 04:22+0000\n"
+"POT-Creation-Date: 2022-08-28 04:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: GunChleoc, 2015\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
@@ -761,8 +761,8 @@ msgstr "שלי"
 msgid "port"
 msgstr ""
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1486,8 +1486,8 @@ msgid ""
 "location."
 msgstr ""
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2358,23 +2358,23 @@ msgstr ""
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../src/logic/map_objects/tribes/worker.cc:1128
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2082
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr ""
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2087
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 msgid "Worker got lost!"
 msgstr ""
 
@@ -6210,18 +6210,18 @@ msgstr ""
 msgid "Tutorial"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr ""
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr ""

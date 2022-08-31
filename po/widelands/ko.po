@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-22 04:22+0000\n"
+"POT-Creation-Date: 2022-08-28 04:15+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: ks k, 2017-2021\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -768,8 +768,8 @@ msgstr "광산"
 msgid "port"
 msgstr "항구"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1490,8 +1490,8 @@ msgid ""
 "location."
 msgstr "새로운 지도 크기를 선택한 다음 지도를 눌러 원하는 위치로 지도를 분할하십시오. 지도 크기를 늘리면 선택한 지점의 동쪽/남쪽에 새 열/행들이 삽입됩니다. 지도를 축소하면 분할 위치의 동쪽/남쪽에서 원하는 수의 열/행 수가 제거됩니다."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2341,23 +2341,23 @@ msgstr "물길이 파괴됨"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "새로운 항구 부두를 위한 공간을 마련하기 위해 수로를 파괴해야 했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../src/logic/map_objects/tribes/worker.cc:1128
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2082
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "%s 이(가) 집으로가는 길을 찾지 못하고 죽을 가능성이 높습니다."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2087
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -6139,18 +6139,18 @@ msgstr "tutorials.lua의 campaigns.lua에서 파일에 대한 경로가 잘못�
 msgid "Tutorial"
 msgstr "자습서"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "제작자"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "제작자들"
