@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-19 04:03+0000\n"
+"POT-Creation-Date: 2022-08-31 04:47+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -1711,7 +1711,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kiventyöstön paja"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1723,8 +1722,6 @@ msgstr "Kiventyöstön paja"
 msgid "making a shovel"
 msgstr "Lapion teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1734,7 +1731,6 @@ msgstr "Lapion teko"
 msgid "making a felling ax"
 msgstr "Kaatokirveen teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1749,8 +1745,6 @@ msgstr "Hakun teko"
 msgid "making a machete"
 msgstr "Viidakkoveitsen teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1761,7 +1755,6 @@ msgstr "Viidakkoveitsen teko"
 msgid "making kitchen tools"
 msgstr "Keittiövälineiden teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1779,9 +1772,9 @@ msgstr "Vasaran teko"
 msgid "making a chisel"
 msgstr "Taltan teko"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1937,6 +1930,7 @@ msgstr "Erämaasuojelijan teltta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3846,17 +3840,17 @@ msgstr "Tällä hedelmänkerääjän mökillä työskentelevä hedelmänkerääj
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Diker’s House"
-msgstr ""
+msgstr "Patoajan talo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start diking because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:62
 msgid "diking"
-msgstr ""
+msgstr "patoaminen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start building a dike because ...
 #: ../../data/tribes/buildings/productionsites/frisians/dikers_house/init.lua:72
 msgid "building a dike"
-msgstr ""
+msgstr "padon rakennus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:8
@@ -5053,7 +5047,7 @@ msgstr "Tuhoutunut rakennus"
 #: ../../data/tribes/immovables/dike/init.lua:8
 msgctxt "immovable"
 msgid "Dike"
-msgstr ""
+msgstr "Pato"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -9569,7 +9563,7 @@ msgstr "Savenkaivaja"
 #: ../../data/tribes/workers/frisians/diker/init.lua:8
 msgctxt "frisians_worker"
 msgid "Diker"
-msgstr ""
+msgstr "Patoaja"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:8

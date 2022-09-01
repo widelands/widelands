@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-19 04:03+0000\n"
+"POT-Creation-Date: 2022-08-31 04:47+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1707,7 +1707,6 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kőfaragó műhely"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1719,8 +1718,6 @@ msgstr "Kőfaragó műhely"
 msgid "making a shovel"
 msgstr "Lapát készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1730,7 +1727,6 @@ msgstr "Lapát készítése"
 msgid "making a felling ax"
 msgstr "Favágóbalta készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1745,8 +1741,6 @@ msgstr "Csákány készítése"
 msgid "making a machete"
 msgstr "Macsete készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
-#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1757,7 +1751,6 @@ msgstr "Macsete készítése"
 msgid "making kitchen tools"
 msgstr "Konyhai eszközök készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1775,9 +1768,9 @@ msgstr "Kalapács készítése"
 msgid "making a chisel"
 msgstr "Véső készítése"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:212
 msgid "making needles"
@@ -1933,6 +1926,7 @@ msgstr "Vadonőrző kunyhó"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:41
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:66
@@ -3579,7 +3573,7 @@ msgstr "Halgazdaság"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:97
 msgid "No Ponds"
-msgstr "Nincsenek halastavak"
+msgstr "Nincsenek gödrök"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:98
 msgid "Out of Fish Ponds"
@@ -3740,7 +3734,7 @@ msgstr "Faszén begyűjtése"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
 msgid "Out of Clay Ponds"
-msgstr "Nincsenek gödrök"
+msgstr "Nincsenek agyaggödrök"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
 msgctxt "frisians_building"
