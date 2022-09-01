@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-28 04:15+0000\n"
+"POT-Creation-Date: 2022-08-31 04:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: LINUX SAUNA, 2022\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
@@ -505,12 +505,12 @@ msgstr "Napsauta maastoa saadaksesi tietoa siitä"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:44
 #: ../../src/wlapplication_options.cc:424
 msgid "Tool History"
-msgstr ""
+msgstr "Työkaluhistoria"
 
 #. * TRANSLATORS: Tooltip for the tool history tool in the editor
 #: ../../src/editor/editorinteractive.cc:369
 msgid "Restore previous tool settings"
-msgstr ""
+msgstr "Palauta edelliset työkalujen asetukset"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
@@ -676,7 +676,7 @@ msgstr "Satunnainen pelaaja"
 #: ../../src/editor/tools/increase_height_tool.cc:62
 #, c-format
 msgid "Height: inc./dec. %1$d, set to %2$d"
-msgstr ""
+msgstr "Korkeus: sis./kuv. %1$d, aseta määreeksi %2$d"
 
 #. * TRANSLATORS: An entry in the tool history list. Inc. and dec. stand for
 #. increase and
@@ -684,31 +684,31 @@ msgstr ""
 #: ../../src/editor/tools/increase_resources_tool.cc:80
 #, c-format
 msgid "%1$s: inc./dec. %2$d, set to %3$d"
-msgstr ""
+msgstr "%1$s: sis./kuv. %2$d, aseta määreeksi %3$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/noise_height_tool.cc:73
 #, c-format
 msgid "Noise height: %1$d–%2$d"
-msgstr ""
+msgstr "Melukorkeus: %1$d–%2$d"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_critter_tool.cc:117
 #, c-format
 msgid "Critter: %1$s"
-msgstr ""
+msgstr "Jyrsijä: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/place_immovable_tool.cc:110
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Liikuttamaton: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/set_terrain_tool.cc:110
 #, c-format
 msgid "Terrain: %1$s"
-msgstr ""
+msgstr "Maasto: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:177
@@ -771,8 +771,8 @@ msgstr "louhos"
 msgid "port"
 msgstr "satama"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1068,9 +1068,9 @@ msgstr "(ei mitään)"
 msgid "Waterway length limit:"
 msgstr "Lauttereitin enimmäispituus:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1494,8 +1494,8 @@ msgid ""
 "location."
 msgstr "Valitse uusi kartta, minkä jälkeen klikkaa karttaa jakaaksesi sen halutusta kohdata. Kartan kokoa kasvatettaessa, uusi sarake/rivi sijoitetaan valittusta kohdasta itään/etelään. Kartan kokoa pienennettäessä, haluttu määrä sarakkeita/rivejä poistetaan jakokohdasta itään/etelään."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -1508,7 +1508,7 @@ msgstr "%1%: %2%"
 #: ../../src/editor/ui_menus/tool_toolhistory_options_menu.cc:108
 msgid ""
 "Click to restore, Shift + Click to delete, and Ctrl + Click to pin an item."
-msgstr ""
+msgstr "Napsauta palauttaaksesi, Shift + napsautus poistaaksesi, ja Ctrl + napsautus kiinnittää kohteen."
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:35
 msgid "Tool Size"
@@ -7318,9 +7318,9 @@ msgstr "Satamat"
 msgid "Low productivity:"
 msgstr "Matala tuottavuus:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7708,8 +7708,8 @@ msgstr "Korvaa poistunut pelaaja tekoälyllä ja jatka pelaamista"
 msgid "AI for the disconnected player"
 msgstr "Poistuneen pelaajan korvaava tekoäly"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
