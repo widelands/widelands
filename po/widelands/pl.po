@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-22 04:22+0000\n"
+"POT-Creation-Date: 2022-08-31 04:47+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Antoni Szpikowski <szantek2004@gmail.com>, 2021-2022\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
@@ -1074,9 +1074,9 @@ msgstr "(brak)"
 msgid "Waterway length limit:"
 msgstr "Limit długości dróg wodnych:"
 
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -2374,23 +2374,23 @@ msgstr "Droga wodna zniszczona"
 msgid "A waterway had to be destroyed to make room for your new port dock."
 msgstr "Droga wodna musiała zostać zniszczona, aby zwolnić miejsce na dok nowo zbudowanego portu."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1114
+#: ../../src/logic/map_objects/tribes/worker.cc:1128
 msgid "A geologist found resources."
 msgstr "Geolog znalazł surowce."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2068
+#: ../../src/logic/map_objects/tribes/worker.cc:2082
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
 msgstr "Twój %s nie może znaleźć drogi do domu i najpewniej umrze."
 
 #. * TRANSLATORS: Header in production site window if there is 1 worker
-#: ../../src/logic/map_objects/tribes/worker.cc:2073
+#: ../../src/logic/map_objects/tribes/worker.cc:2087
 #: ../../src/wui/productionsitewindow.cc:108
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgstr "Pracownik"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:2074
+#: ../../src/logic/map_objects/tribes/worker.cc:2088
 msgid "Worker got lost!"
 msgstr "Zaginął pracownik!"
 
@@ -6226,18 +6226,18 @@ msgstr "Błędna ścieżka do pliku w campaigns.lua z tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Samouczek"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autorzy"
@@ -7378,9 +7378,9 @@ msgstr "Porty"
 msgid "Low productivity:"
 msgstr "Niska produktywność:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7768,8 +7768,8 @@ msgstr "Zastąp odłączonego gracza wybraną SI i kontynuuj grę"
 msgid "AI for the disconnected player"
 msgstr "SI dla rozłączonego gracza"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
