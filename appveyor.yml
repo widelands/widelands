@@ -26,7 +26,7 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
-  - cmd: "bash --login -c \"%APPVEYOR_BUILD_FOLDER%/install-dependencies.sh msys%BITS% --noconfirm\""
+  - cmd: "bash --login -c \"%APPVEYOR_BUILD_FOLDER:\=/%/install-dependencies.sh msys%BITS% --noconfirm\""
   # Downgrade incompatible packages to working version
   # - cmd: "bash --login -c \"pacman --noconfirm -U https://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-libtiff-4.3.0-3-any.pkg.tar.zst\""
 
