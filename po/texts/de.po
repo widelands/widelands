@@ -541,7 +541,7 @@ msgstr "Edelbäume werden von erfahrenen Holzfällerinnen gefällt, deren Holzf�
 
 #: ../../data/txts/tips/amazons.lua:16
 msgid "Food is dried with charcoal fires. Ensure a steady supply."
-msgstr "Nahrung wird mit Holzkohlefeuern getrocknet. Sichere eine kontinuierliche Versorgung damit. "
+msgstr "Nahrung wird mit Holzkohlefeuern getrocknet. Sichere eine kontinuierliche Versorgung damit."
 
 #: ../../data/txts/tips/amazons.lua:20
 msgid ""
@@ -583,7 +583,7 @@ msgstr "Seile sind essentiell um stabile Gebäude sicher zu stellen, robuste Kle
 msgid ""
 "Jungle masters learn their skills by working as jungle preservers before "
 "working in gardening centres or rare tree plantations."
-msgstr "Dschungelmeisterinnen lernen ihre Fähigkeiten während der Arbeit als Dschungelbewahrerinnen bevor sie im Gartenbauzentrum oder Edelbaumpflanzungen arbeiten können ."
+msgstr "Dschungelmeisterinnen lernen ihre Fähigkeiten während der Arbeit als Dschungelbewahrerinnen bevor sie im Gartenbauzentrum oder Edelbaumpflanzungen arbeiten können."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
@@ -815,7 +815,7 @@ msgstr "Du kannst mit dem Mausrad oder %1%/ %2% rein- und rauszoomen. Drücke %3
 msgid ""
 "Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited "
 "locations."
-msgstr "Verwende die „%1$s“ und „%2$s“ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen. "
+msgstr "Verwende die „%1$s“ und „%2$s“ Tasten um schnell zwischen den zuletzt besuchten Orten hin und her zu springen."
 
 #: ../../data/txts/tips/general_game.lua:84
 msgid ""

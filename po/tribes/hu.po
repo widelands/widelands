@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-19 04:03+0000\n"
+"POT-Creation-Date: 2022-09-01 04:24+0000\n"
 "PO-Revision-Date: 2015-11-03 18:55+0000\n"
 "Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -1291,8 +1291,8 @@ msgctxt "amazons_building"
 msgid "Cassava Root Cooker"
 msgstr "Maniókafőzde"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:89
@@ -3579,7 +3579,7 @@ msgstr "Halgazdaság"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:97
 msgid "No Ponds"
-msgstr "Nincsenek halastavak"
+msgstr "Nincsenek gödrök"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:98
 msgid "Out of Fish Ponds"
@@ -3740,7 +3740,7 @@ msgstr "Faszén begyűjtése"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:98
 msgid "Out of Clay Ponds"
-msgstr "Nincsenek gödrök"
+msgstr "Nincsenek agyaggödrök"
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_burners_house/init.lua:99
 msgctxt "frisians_building"
@@ -5286,8 +5286,8 @@ msgstr "Balzafa"
 msgid "Balsa Tree (Pole)"
 msgstr "Balzafa (közepes)"
 
-#. TRANSLATORS:  This is an amazon rare tree.
 #. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/balsa/sapling/black/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/desert/init.lua:11
 #: ../../data/tribes/immovables/trees/balsa/sapling/green/init.lua:11

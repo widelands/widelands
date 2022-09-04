@@ -27,10 +27,10 @@ wl.Descriptions():new_worker_type {
       },
       buildferry_1 = {
          -- checks whether water is available
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
       },
       buildferry_2 = {
-         "findspace=size:swim radius:5",
+         "findspace=size:swim radius:5 ferry",
          "walk=coords",
          "animate=idle duration:10s",
          "createbob=atlanteans_ferry",
