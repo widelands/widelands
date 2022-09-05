@@ -212,7 +212,7 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		set_minimap_color(RGBColor(kTone, kTone, kTone));
 	}
 
-	for (auto& tp : texture_paths()) {
+	for (const auto& tp : texture_paths()) {
 		add_texture(g_image_cache->get(tp));
 	}
 }
