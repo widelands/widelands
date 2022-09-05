@@ -185,7 +185,7 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 	try {
 		SDL_Surface* sdl_surface = load_image_as_sdl_surface(texture_paths()[0]);
 		if (sdl_surface == nullptr) {
-			throw(WLWarning("", "Could not load texture"));
+			throw (WLWarning("", "Could not load texture"));
 		}
 		// 8 and 16 bit pixels could also be read by pointer type casting, but SDL_GetRGB() needs
 		// uint32, so let's not risk endianness issues, when 24 bits would be better off with
@@ -194,7 +194,7 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 			SDL_Surface* converted = SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA32, 0);
 			SDL_FreeSurface(sdl_surface);
 			if (converted == nullptr) {
-				throw(WLWarning("", "Could not convert texture to 32bit RGB"));
+				throw (WLWarning("", "Could not convert texture to 32bit RGB"));
 			}
 			sdl_surface = converted;
 		}
@@ -212,8 +212,8 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		set_minimap_color(RGBColor(kTone, kTone, kTone));
 	}
 
-	for (size_t j = 0; j < texture_paths().size(); ++j) {
-		add_texture(g_image_cache->get(texture_paths()[j]));
+	for (auto& tp : texture_paths()) {
+		add_texture(g_image_cache->get(tp));
 	}
 }
 
