@@ -191,8 +191,7 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		// uint32, so let's not risk endianness issues, when 24 bits would be better off with
 		// conversion anyway
 		if (sdl_surface->format->BitsPerPixel != 32) {
-			SDL_Surface* converted =
-			   SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA32, 0);
+			SDL_Surface* converted = SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA32, 0);
 			SDL_FreeSurface(sdl_surface);
 			if (converted == nullptr) {
 				throw(WLWarning("", "Could not convert texture to 32bit RGB"));
@@ -202,16 +201,12 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		uint8_t red;
 		uint8_t green;
 		uint8_t blue;
-		SDL_GetRGB(static_cast<uint32_t*>(sdl_surface->pixels)[0],
-		           sdl_surface->format,
-		           &red,
-		           &green,
-		           &blue);
+		SDL_GetRGB(
+		   static_cast<uint32_t*>(sdl_surface->pixels)[0], sdl_surface->format, &red, &green, &blue);
 		set_minimap_color(RGBColor(red, green, blue));
 		SDL_FreeSurface(sdl_surface);
-	} catch(const WLWarning& e) {
-		log_warn("Could not determine minimap color for texture %s: %s",
-		         texture_paths()[0].c_str(),
+	} catch (const WLWarning& e) {
+		log_warn("Could not determine minimap color for texture %s: %s", texture_paths()[0].c_str(),
 		         e.what());
 		static constexpr uint8_t kTone = 128;
 		set_minimap_color(RGBColor(kTone, kTone, kTone));
