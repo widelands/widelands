@@ -191,7 +191,8 @@ void TerrainDescription::replace_textures(const LuaTable& table) {
 		// uint32, so let's not risk endianness issues, when 24 bits would be better off with
 		// conversion anyway
 		if (sdl_surface->format->BitsPerPixel != 32) {
-			SDL_Surface* converted = SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA32, 0);
+			SDL_Surface* converted =
+			   SDL_ConvertSurfaceFormat(sdl_surface, SDL_PIXELFORMAT_RGBA8888, 0);
 			SDL_FreeSurface(sdl_surface);
 			if (converted == nullptr) {
 				throw WLWarning("", "Could not convert texture to 32bit RGB");
