@@ -446,7 +446,7 @@ void BaseDropdown::set_value() {
 }
 
 void BaseDropdown::toggle() {
-	set_list_visibility(!list_->is_visible());
+	set_list_visibility(!list_->is_visible(), is_mouse_away());
 }
 
 void BaseDropdown::set_list_visibility(bool open, bool move_mouse) {

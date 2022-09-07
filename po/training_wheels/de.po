@@ -3,8 +3,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # Wuzzy <Wuzzy@disroot.org>, 2022
+# Stephan Lutz <stephan-lutz@gmx.de>, 2022
 # 
 msgid ""
 msgstr ""
@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2022-01-31 02:58+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
-"Last-Translator: Wuzzy <Wuzzy@disroot.org>, 2022\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2022\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,7 +124,7 @@ msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
-"Klicke auf einen  mittleren oder großen Bauplatz, dann wähle das Gebäude im "
+"Klicke auf einen mittleren oder großen Bauplatz, dann wähle das Gebäude im "
 "Reiter für mittlere Gebäude aus."
 
 #: ../../data/scripting/training_wheels/logs.lua:119
@@ -141,7 +141,7 @@ msgid ""
 "If you hold down the ‘Ctrl’ key while clicking on the second flag, this will"
 " also place more flags on your road if possible."
 msgstr ""
-"Wenn du die „STRG“-Taste gedrückt hältst,  wenn du auf die zweite Flagge "
+"Wenn du die „STRG“-Taste gedrückt hältst, wenn du auf die zweite Flagge "
 "klickst, wird dies weitere Flaggen auf deiner Straße platzieren, wenn "
 "möglich."
 
@@ -155,7 +155,7 @@ msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
-"Du musst deinen Stamm  mit Stämmen versorgen. Bitte baue das folgende "
+"Du musst deinen Stamm mit Stämmen versorgen. Bitte baue das folgende "
 "Gebäude:"
 
 #: ../../data/scripting/training_wheels/logs.lua:138
@@ -238,7 +238,7 @@ msgid ""
 "While you do that, check the markers to make the road as flat as possible:"
 msgstr ""
 "Während du das tust, prüfe die Markierungen um die Straße so flach wie "
-"möglich zu machen."
+"möglich zu machen:"
 
 #: ../../data/scripting/training_wheels/rocks.lua:123
 msgid ""
