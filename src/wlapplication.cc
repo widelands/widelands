@@ -1154,6 +1154,8 @@ bool WLApplication::init_settings() {
 	init_shortcuts();
 
 	// Mousewheel options
+	// we store this in the config for reference, but need to reset it for the detection to work
+	set_mousewheel_option_bool(MousewheelOptionID::kInvertedXDetected, false);
 	update_mousewheel_settings();
 
 	int64_t last_start = get_config_int("last_start", 0);
