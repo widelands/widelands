@@ -162,7 +162,6 @@ Please keep the following guidelines in mind to ensure your add-on is well trans
 - Do not concatenate sentence snippets (use placeholders instead).
 - Always use ``ngettext`` when working with plural forms.
 - Use translation markup wisely. All strings meant to be translated should be fetched with ``_("Translate me")`` or  ``pgettext("context", "Translate me")``. Richtext format characters and other strings not meant to be translated should not be marked for translation.
-- Map files should never be zipped so as to ensure that all translatable strings they contain are picked up by the translations update scripts.
 - When any strings might be unclear (e.g. sentence snippets, placeholders), please add a ``TRANSLATORS`` comment above the string.
 
 The Widelands Development Team may occasionally contact add-on developers to inform them about any questions or feedback from the translators.
