@@ -367,19 +367,6 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	case ModifyAction::kAddMap: {
 		const std::string& map = my_maps_.get_selected();
 		std::string filename = FileSystem::fs_filename(map.c_str());
-		if (!g_fs->is_directory(map)) {
-			UI::WLMessageBox mbox(
-			   &main_menu_, UI::WindowStyle::kFsMenu, _("Zipped Map"),
-			   format(_("The map ‘%s’ is not a directory. "
-			            "Please consider disabling the ‘Compress Widelands data files’ option "
-			            "in the options menu and resaving the map in the editor."
-			            "\n\nDo you want to add this map anyway?"),
-			          filename),
-			   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
-			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-				return;
-			}
-		}
 		make_valid_addon_filename(filename, tree->maps);
 		tree->maps[filename] = map;
 		select.push_back(filename);
