@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-08-31 04:47+0000\n"
+"POT-Creation-Date: 2022-09-04 04:26+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: zone <z-one@freemail.hu>, 2015\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -290,8 +290,8 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dec"
 
-#. * TRANSLATORS: Title for the main menu button in the game
 #. * TRANSLATORS: Title for the main menu button in the editor
+#. * TRANSLATORS: Title for the main menu button in the game
 #: ../../src/editor/editorinteractive.cc:95
 #: ../../src/ui_fsmenu/keyboard_options.cc:293
 #: ../../src/wui/interactive_gamebase.cc:92
@@ -305,12 +305,12 @@ msgstr "Főmenü"
 msgid "Tools"
 msgstr "Eszközök"
 
-#. * TRANSLATORS: Title for a menu button in the game. This menu will
-#. show/hide
-#. building spaces, census, status, etc.
 #. * TRANSLATORS: Title for a menu button in the editor. This menu will
 #. show/hide
 #. building spaces, animals, immovables, resources
+#. * TRANSLATORS: Title for a menu button in the game. This menu will
+#. show/hide
+#. building spaces, census, status, etc.
 #: ../../src/editor/editorinteractive.cc:126
 #: ../../src/wui/interactive_gamebase.cc:78
 msgid "Show / Hide"
@@ -512,10 +512,10 @@ msgstr "Eszköz előzmények"
 msgid "Restore previous tool settings"
 msgstr "A korábban használt eszközök és beállításaik ismételt használata"
 
-#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
-#. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
+#. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. building spaces are
 #. * shown
 #: ../../src/editor/editorinteractive.cc:438
@@ -624,11 +624,11 @@ msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 #: ../../src/ui_fsmenu/addons/rows_ui.cc:461
 #: ../../src/ui_fsmenu/addons/screenshot_upload.cc:124
 #: ../../src/ui_fsmenu/launch_mpg.cc:291 ../../src/ui_fsmenu/main.cc:234
-#: ../../src/wlapplication.cc:1642
+#: ../../src/wlapplication.cc:1644
 msgid "Error"
 msgstr "Hiba"
 
-#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1644
+#: ../../src/editor/editorinteractive.cc:1046 ../../src/wlapplication.cc:1646
 #, c-format
 msgid ""
 "An error has occured. The error message is:\n"
@@ -771,8 +771,8 @@ msgstr "bánya"
 msgid "port"
 msgstr "kikötő"
 
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
+#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
@@ -1002,7 +1002,7 @@ msgid "Click player to remove"
 msgstr "Kattints a játékosra az eltávolításához"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/ui_fsmenu/addons/packager_box.cc:437
+#: ../../src/ui_fsmenu/addons/packager_box.cc:424
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:66
 #: ../../src/ui_fsmenu/addons/remote_interaction.cc:89
 #: ../../src/wui/economy_options_window.cc:680
@@ -1381,7 +1381,7 @@ msgstr "%u. játékos"
 
 #. * TRANSLATORS: Header for campaign tribe
 #: ../../src/editor/ui_menus/player_menu.cc:184
-#: ../../src/ui_fsmenu/addons/packager_box.cc:478
+#: ../../src/ui_fsmenu/addons/packager_box.cc:465
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 #: ../../src/ui_fsmenu/campaigndetails.cc:55
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:204
@@ -4066,14 +4066,14 @@ msgstr "Kategória"
 #: ../../src/ui_fsmenu/addons/packager.cc:337
 #: ../../src/ui_fsmenu/addons/packager.cc:353
 #: ../../src/ui_fsmenu/addons/packager.cc:358
-#: ../../src/ui_fsmenu/addons/packager_box.cc:401
-#: ../../src/ui_fsmenu/addons/packager_box.cc:417
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:388
+#: ../../src/ui_fsmenu/addons/packager_box.cc:404
+#: ../../src/ui_fsmenu/addons/packager_box.cc:410
 msgid "Invalid Name"
 msgstr "Érvénytelen név"
 
 #: ../../src/ui_fsmenu/addons/packager.cc:338
-#: ../../src/ui_fsmenu/addons/packager_box.cc:403
+#: ../../src/ui_fsmenu/addons/packager_box.cc:390
 #, c-format
 msgid ""
 "This name is invalid. Reason: %s\n"
@@ -4272,27 +4272,15 @@ msgstr "Játékosok: %s"
 msgid "Top-level directory"
 msgstr "Kezdő könyvtár"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:372
-msgid "Zipped Map"
-msgstr "Tömörített térkép"
-
-#: ../../src/ui_fsmenu/addons/packager_box.cc:373
-#, c-format
-msgid ""
-"The map ‘%s’ is not a directory. Please consider disabling the ‘Compress Widelands data files’ option in the options menu and resaving the map in the editor.\n"
-"\n"
-"Do you want to add this map anyway?"
-msgstr "A(z) „%s” térkép nem könyvtárként van elmentve. Kérjük kapcsold ki „A Widelands adatfájlok tömörítésé”-t a „Beállítások” menüben, és mentsd el így újra a térképet a szerkesztőben!\n\nHozzáadod a térképet ennek ellenére is?"
-
-#: ../../src/ui_fsmenu/addons/packager_box.cc:389
+#: ../../src/ui_fsmenu/addons/packager_box.cc:376
 msgid "New Directory"
 msgstr "Könyvtár létrehozása"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:390
+#: ../../src/ui_fsmenu/addons/packager_box.cc:377
 msgid "Enter the name for the new directory."
 msgstr "Add meg az új könyvtár nevét"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:410
+#: ../../src/ui_fsmenu/addons/packager_box.cc:397
 #, c-format
 msgid ""
 "Directories may not use the extension ‘%s’.\n"
@@ -4300,37 +4288,37 @@ msgid ""
 "Please choose a different name."
 msgstr "A könyvtárak nem használhatják a(z) „%s” kiterjesztést.\n\nKérjük adj meg más nevet!"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:423
+#: ../../src/ui_fsmenu/addons/packager_box.cc:410
 msgid "A directory with this name already exists."
 msgstr "Már létezik egy ilyen nevű könyvtár."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:439
+#: ../../src/ui_fsmenu/addons/packager_box.cc:426
 #, c-format
 msgid "Do you really want to delete the directory ‘%s’ and all its contents?"
 msgstr "Biztosan törölni szeretnéd a(z) „%s” könyvtárat és a teljes tartalmát?"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:441
+#: ../../src/ui_fsmenu/addons/packager_box.cc:428
 #, c-format
 msgid "Do you really want to delete the map ‘%s’?"
 msgstr "Biztosan törölni szeretnéd a következő térképet: %s?"
 
 #. * TRANSLATORS: Header for campaign difficulty
-#: ../../src/ui_fsmenu/addons/packager_box.cc:489
+#: ../../src/ui_fsmenu/addons/packager_box.cc:476
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:59
 #: ../../src/ui_fsmenu/scenario_select.cc:68
 msgid "Difficulty"
 msgstr "Nehézség"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:498
+#: ../../src/ui_fsmenu/addons/packager_box.cc:485
 msgid "Difficulty:"
 msgstr "Nehézség:"
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:523
+#: ../../src/ui_fsmenu/addons/packager_box.cc:510
 msgid "The campaigns difficulty. One word."
 msgstr "A hadjárat nehézsége egy szóban."
 
-#: ../../src/ui_fsmenu/addons/packager_box.cc:524
+#: ../../src/ui_fsmenu/addons/packager_box.cc:511
 msgid "Short description, which will be appended to the difficulty."
 msgstr "Rövid magyarázat, ami a nehézséghez lesz fűzve."
 
@@ -6314,41 +6302,41 @@ msgstr "A Widelands nem találja a(z) „%s” fájlt."
 msgid "File system error"
 msgstr "Fájlrendszer hiba"
 
-#: ../../src/wlapplication.cc:1306
+#: ../../src/wlapplication.cc:1308
 #, c-format
 msgid "Empty value of command line parameter: %s"
 msgstr "Hiányzik az érték a %s parancssori beállításhoz."
 
-#: ../../src/wlapplication.cc:1311
+#: ../../src/wlapplication.cc:1313
 #, c-format
 msgid "%s can not be combined with other actions"
 msgstr "A(z) %s nem használható más beállításokkal együtt."
 
-#: ../../src/wlapplication.cc:1466
+#: ../../src/wlapplication.cc:1468
 #, c-format
 msgid ""
 "Unknown command line parameter: %s\n"
 "Maybe a '=' is missing?"
 msgstr "Ismeretlen parancssori beállítás: %s\nLehet, hogy az '=' hiányzik?"
 
-#: ../../src/wlapplication.cc:1587
+#: ../../src/wlapplication.cc:1589
 msgid "--xres/--yres, --maximized and --fullscreen can not be combined"
 msgstr "Az --xres/--yres, a --maximized és a --fullscreen beállítások nem használhatók együtt."
 
-#: ../../src/wlapplication.cc:1605
+#: ../../src/wlapplication.cc:1607
 #, c-format
 msgid "Unknown command line parameter: %s"
 msgstr "Ismeretlen parancssori beállítás: %s"
 
-#: ../../src/wlapplication.cc:1657
+#: ../../src/wlapplication.cc:1659
 msgid "Game ended unexpectedly"
 msgstr "A játék váratlanul ért véget"
 
-#: ../../src/wlapplication.cc:1657
+#: ../../src/wlapplication.cc:1659
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba játék közben"
 
-#: ../../src/wlapplication.cc:1660
+#: ../../src/wlapplication.cc:1662
 #, c-format
 msgid ""
 "An error occured during the game. The error message is:\n"
@@ -6362,7 +6350,7 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "Hiba történt játék közben. A hibaüzenet:\n\n%1$s\n\nKérjük segítsd a Widelands fejlesztését a hiba bejelentésével. A kapcsolódó üzeneteket a standard kimeneten (Windowson az stdout.txt fájlban) találod meg. A %2$s verziót használod\nKérjük add meg ezeket az információkat a hibajelentésben.\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1669
+#: ../../src/wlapplication.cc:1671
 #, c-format
 msgid ""
 "The game ended unexpectedly for the following reason:\n"
@@ -6372,11 +6360,11 @@ msgid ""
 "Would you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."
 msgstr "A játék váratlanul ért véget az alábbi okból:\n\n%s\n\nSzeretnéd, ha a Widelands megpróbálna egy vészhelyzeti játékmentést készíteni? Ennek betöltésével gyakran – de nem mindig – tovább folytatható a játék."
 
-#: ../../src/wlapplication.cc:1695
+#: ../../src/wlapplication.cc:1697
 msgid "Emergency save failed"
 msgstr "Vészhelyzeti mentés sikertelen"
 
-#: ../../src/wlapplication.cc:1696
+#: ../../src/wlapplication.cc:1698
 #, c-format
 msgid ""
 "We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n"
@@ -7318,9 +7306,9 @@ msgstr "Kikötők"
 msgid "Low productivity:"
 msgstr "Alacsony hatékonyságú:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
