@@ -693,18 +693,18 @@ void InteractiveBase::draw_road_building(RenderTarget* dst,
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-		                      Widelands::RoadSegment::kNormal :
-		                      Widelands::RoadSegment::kWaterway;
+                              Widelands::RoadSegment::kNormal :
+                              Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-		                       Widelands::RoadSegment::kNormal :
-		                       Widelands::RoadSegment::kWaterway;
+                               Widelands::RoadSegment::kNormal :
+                               Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-		                       Widelands::RoadSegment::kNormal :
-		                       Widelands::RoadSegment::kWaterway;
+                               Widelands::RoadSegment::kNormal :
+                               Widelands::RoadSegment::kWaterway;
 				break;
 			default:
 				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
@@ -725,17 +725,19 @@ void InteractiveBase::draw_road_building(RenderTarget* dst,
 	const int ncoords = coords.size();
 	bool last_is_flag = false;
 	const bool start_to_end = (SDL_GetModState() & KMOD_SHIFT) != 0;
-	for (int i = start_to_end ? 0 : (ncoords - 1); i >= 0 && i < ncoords; i += (start_to_end ? 1 : -1)) {
+	for (int i = start_to_end ? 0 : (ncoords - 1); i >= 0 && i < ncoords;
+	     i += (start_to_end ? 1 : -1)) {
 		if (coords.at(i) == field.fcoords) {
 			if ((i == 0 || i == ncoords - 1) || (!last_is_flag && i != 1 && i != ncoords - 2)) {
 				constexpr float kOpacity = 0.5f;
 				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-							        field.owner->tribe().flag_animation(), gametime, nullptr,
-							        kOpacity);
+				                    field.owner->tribe().flag_animation(), gametime, nullptr, kOpacity);
 			}
 			return;
 		}
-		last_is_flag = (i == 0 || i == ncoords - 1) || (!last_is_flag && (map[coords.at(i)].nodecaps() & Widelands::BUILDCAPS_FLAG) != 0);
+		last_is_flag =
+		   (i == 0 || i == ncoords - 1) ||
+		   (!last_is_flag && (map[coords.at(i)].nodecaps() & Widelands::BUILDCAPS_FLAG) != 0);
 	}
 }
 
