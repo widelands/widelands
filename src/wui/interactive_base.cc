@@ -677,8 +677,14 @@ void InteractiveBase::hide_workarea(const Widelands::Coords& coords, bool is_add
 void InteractiveBase::postload() {
 }
 
-void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
+void InteractiveBase::draw_road_building(RenderTarget* dst,
+                                         FieldsToDraw::Field& field,
+                                         const Time& gametime,
+                                         float scale) const {
 	MutexLock m(MutexLock::ID::kIBaseVisualizations);
+	if (road_building_mode_ == nullptr) {
+		return;
+	}
 
 	const auto rpo = road_building_preview_overlays();
 	const auto rinfo = rpo.find(field.fcoords);
@@ -687,23 +693,49 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 			switch (dir) {
 			case Widelands::WALK_E:
 				field.road_e = in_road_building_mode(RoadBuildingType::kRoad) ?
-                              Widelands::RoadSegment::kNormal :
-                              Widelands::RoadSegment::kWaterway;
+		                      Widelands::RoadSegment::kNormal :
+		                      Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SE:
 				field.road_se = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
-                               Widelands::RoadSegment::kWaterway;
+		                       Widelands::RoadSegment::kNormal :
+		                       Widelands::RoadSegment::kWaterway;
 				break;
 			case Widelands::WALK_SW:
 				field.road_sw = in_road_building_mode(RoadBuildingType::kRoad) ?
-                               Widelands::RoadSegment::kNormal :
-                               Widelands::RoadSegment::kWaterway;
+		                       Widelands::RoadSegment::kNormal :
+		                       Widelands::RoadSegment::kWaterway;
 				break;
 			default:
 				throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
 			}
 		}
+	}
+
+	/* Check if a flag would be placed here. */
+	if ((SDL_GetModState() & KMOD_CTRL) == 0) {
+		return;
+	}
+	if ((field.fcoords.field->nodecaps() & Widelands::BUILDCAPS_FLAG) == 0) {
+		return;
+	}
+
+	const Widelands::Map& map = egbase().map();
+	const std::vector<Widelands::Coords>& coords = road_building_mode_->path.get_coords();
+	const int ncoords = coords.size();
+	bool last_is_flag = false;
+	const bool start_to_end = (SDL_GetModState() & KMOD_SHIFT) != 0;
+	for (int i = start_to_end ? 0 : (ncoords - 1); i >= 0 && i < ncoords; i += (start_to_end ? 1 : -1)) {
+		if (coords.at(i) == field.fcoords) {
+			if ((i == 0 || i == ncoords - 1) || (!last_is_flag && i != 1 && i != ncoords - 2)) {
+				constexpr float kOpacity = 0.5f;
+				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+							        field.owner->tribe().flag_animation(), gametime, nullptr,
+							        kOpacity);
+			}
+			return;
+		}
+		last_is_flag = (i == 0 || i == ncoords - 1) || (!last_is_flag && (map[coords.at(i)].nodecaps() & Widelands::BUILDCAPS_FLAG) != 0);
 	}
 }
 

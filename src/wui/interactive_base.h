@@ -277,7 +277,10 @@ protected:
 	                  const FieldsToDraw::Field* f,
 	                  const Time& gametime,
 	                  float scale) const;
-	void draw_road_building(FieldsToDraw::Field&);
+	void draw_road_building(RenderTarget* dst,
+                            FieldsToDraw::Field& field,
+                            const Time& gametime,
+                            float scale) const;
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);

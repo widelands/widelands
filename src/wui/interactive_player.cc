@@ -550,7 +550,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
-			draw_road_building(*f);
+			draw_road_building(dst, *f, gametime, scale);
 
 			draw_bridges(
 			   dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);
