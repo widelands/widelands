@@ -25,11 +25,11 @@
 #include "base/log.h"
 #include "base/string.h"
 
-struct message_string {
+struct MessageString {
 	std::string str;
 	size_t n_arg;
 };
-static std::map<std::string, message_string> ngmessages;
+static std::map<std::string, MessageString> ngmessages;
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {
