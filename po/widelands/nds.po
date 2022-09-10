@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-04 04:26+0000\n"
+"POT-Creation-Date: 2022-09-07 04:42+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018-2022\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
@@ -769,7 +769,7 @@ msgstr "Muu"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #: ../../src/editor/ui_menus/field_info_window.cc:116
-#: ../../src/logic/map_objects/world/terrain_description.cc:75
+#: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
 msgstr "Tum Lopen"
 
@@ -1489,8 +1489,8 @@ msgid ""
 "location."
 msgstr "Köör de neje Kaart-Grött ut, dann klick de Kaart an, um se an de wünsket Stee oftodelen. Wenn de Kaart-Grött verhoogt word, worden neje Striepen of Riegen in de Oost/Süden vun de utköört Stee inföögt. Wenn de Kaart-Grött minnert word, worden Striepen of Riegen, wat to vööl sünd, in de Oost/Süden vun de utköört Stee wegnohmen."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -2368,27 +2368,27 @@ msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:70
+#: ../../src/logic/map_objects/world/terrain_description.cc:71
 msgid "arable"
 msgstr "tum Bauen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:80
+#: ../../src/logic/map_objects/world/terrain_description.cc:81
 msgid "navigable"
 msgstr "Tum Seilen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:85
+#: ../../src/logic/map_objects/world/terrain_description.cc:86
 msgid "unreachable"
 msgstr "Nich to överkomen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:90
+#: ../../src/logic/map_objects/world/terrain_description.cc:91
 msgid "mineable"
 msgstr "För Bargwarken"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/logic/map_objects/world/terrain_description.cc:95
+#: ../../src/logic/map_objects/world/terrain_description.cc:96
 msgid "unwalkable"
 msgstr "Nich to henkomen"
 
@@ -2911,8 +2911,8 @@ msgstr "ACHTUNG: Hebb een %s-Befehl kregen ofschoonst wi nich in’n CONNECTING-
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
-msgstr[0] "Server-Tiet is %d Sekünn verschuven."
-msgstr[1] "Server-Tiet is %d Sekünnen verschuven."
+msgstr[0] "Server-Tied is %d Sekünn verschuven."
+msgstr[1] "Server-Tied is %d Sekünnen verschuven."
 
 #: ../../src/network/internet_gaming.cc:517
 #, c-format
@@ -3088,7 +3088,7 @@ msgstr "De Server is ofstört un hett drock sekert."
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client and host have become desynchronized."
-msgstr "De Tiet vun de Gast un de Weert is verschoven worden."
+msgstr "De Tied vun de Gast un de Weert is verschuven worden."
 
 #: ../../src/network/network_gaming_messages.cc:124
 #, c-format
@@ -3154,7 +3154,7 @@ msgstr "De Gast nimmt mehr Tied tum Speelen as de Weert verlöövt."
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "Client did not submit sync report in time."
-msgstr "De Gast hett nich bi Tied seggt, wat de Tied verschoven is."
+msgstr "De Gast hett nich bi Tied mellt, dat dat Speel nich verschuven is."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "The game has already started."
@@ -6151,18 +6151,18 @@ msgstr "De Datei-Padd »%s« in de campaigns.lua för Inföhrens is ungültig."
 msgid "Tutorial"
 msgstr "Inföhren"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #. * TRANSLATORS: Label in map details if there is 1 author
+#. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Schriever"
 
-#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
-#. author. If
-#. you need plural forms here, please let us know.
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
 #. forms here, please let us know.
+#. * TRANSLATORS: Label in campaign scenario details if there is more than 1
+#. author. If
+#. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Schrievers"
@@ -7301,9 +7301,9 @@ msgstr "Muden"
 msgid "Low productivity:"
 msgstr "Lege Wöörde:"
 
-#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
+#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7691,8 +7691,8 @@ msgstr "De Speler, de nich mehr verbunnen is, mit de utköörten künstelk Spele
 msgid "AI for the disconnected player"
 msgstr "Künstelker Speler för de Speler, de nich mehr verbunnen is"
 
-#. * TRANSLATORS: Button tooltip
 #. * TRANSLATORS: An entry in the game's main menu
+#. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8337,8 +8337,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Tahlen över alls"
 
-#. * TRANSLATORS: An entry in the game's statistics menu
 #. * TRANSLATORS: This is a map tag
+#. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:315 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Seefahrt"
