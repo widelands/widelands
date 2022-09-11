@@ -149,6 +149,7 @@ Window::Window(Panel* const parent,
 	           kBottomBorderThickness);
 	set_top_on_click(true);
 	set_layout_toplevel(true);
+	set_snap_target(true);
 	layout();
 	focus();
 

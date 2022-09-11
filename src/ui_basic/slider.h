@@ -55,10 +55,6 @@ protected:
 	       int32_t bar_size);
 
 public:
-	bool is_snap_target() const override {
-		return true;
-	}
-
 	int32_t get_value() const {
 		return value_;
 	}

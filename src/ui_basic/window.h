@@ -94,9 +94,6 @@ public:
 	}
 	virtual void restore();
 	virtual void minimize();
-	bool is_snap_target() const override {
-		return true;
-	}
 
 	bool is_pinned() const {
 		return pinned_;

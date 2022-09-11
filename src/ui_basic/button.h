@@ -117,9 +117,6 @@ public:
 	void set_repeating(bool const on) {
 		repeating_ = on;
 	}
-	bool is_snap_target() const override {
-		return true;
-	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;

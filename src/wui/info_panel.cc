@@ -132,6 +132,8 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
    : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
      ibase_(ib),
      iplayer_(nullptr),  // this function is called from IBase ctor so we can't upcast yet
+     snap_target_panel_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     snap_target_toolbar_(&ibase_, UI::PanelStyle::kWui, 0, 0, 0, 0),
      on_top_(false),
      display_mode_(DisplayMode::kPinned),
      last_mouse_pos_(Vector2i(-1, -1)),
@@ -178,6 +180,8 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
      last_message_id_(nullptr),
      draw_real_time_(get_config_bool("game_clock", true)) {
 	text_fps_.set_handle_mouse(true);
+	snap_target_panel_.set_snap_target(true);
+	snap_target_toolbar_.set_snap_target(true);
 	int mode = get_config_int("toolbar_pos", 0);
 	on_top_ = ((mode & DisplayMode::kCmdSwap) != 0);
 	if ((mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) != 0) {
@@ -466,6 +470,8 @@ void InfoPanel::think() {
 		message_queue_ = &iplayer_->player().messages();
 	}
 
+	move_to_top();
+
 	while ((message_queue_ != nullptr) &&
 	       *last_message_id_ != message_queue_->current_message_id()) {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
@@ -478,6 +484,19 @@ void InfoPanel::think() {
 	if (draw_real_time_) {
 		// Refresh real time on every tick
 		update_time_speed_string();
+	}
+
+	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
+		if ((p->get_x() < snap_target_panel_.get_w() || (
+					p->get_x() + p->get_w() > snap_target_toolbar_.get_x() &&
+					p->get_x() < snap_target_toolbar_.get_x() + snap_target_toolbar_.get_w()
+			)) && (on_top_ ?
+				(p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) : (p->get_y() + p->get_h() > snap_target_panel_.get_y())
+			)) {
+			if (UI::Window* w = dynamic_cast<UI::Window*>(p)) {
+				w->set_pos(Vector2i(w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() : snap_target_panel_.get_y() - w->get_h()));
+			}
+		}
 	}
 }
 
@@ -533,6 +552,12 @@ void InfoPanel::layout() {
 			m->set_pos(Vector2i((get_w() - m->get_w()) / 2, message_offset));
 		}
 	}
+
+	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
+	snap_target_panel_.set_size((display_mode_ == DisplayMode::kMinimized || display_mode_ == DisplayMode::kOnMouse_Hidden)
+			? toggle_mode_.get_w() : w, toggle_mode_.get_h());
+	snap_target_toolbar_.set_pos(toolbar_->get_pos());
+	snap_target_toolbar_.set_size(toolbar_->get_w(), snap_target_panel_.get_h());
 }
 
 void InfoPanel::draw(RenderTarget& r) {

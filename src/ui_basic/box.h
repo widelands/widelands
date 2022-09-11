@@ -60,9 +60,6 @@ struct Box : public Panel {
 	void add(Panel* panel, Resizing resizing = Resizing::kAlign, UI::Align align = UI::Align::kLeft);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const override {
-		return true;
-	}
 
 	void set_min_desired_breadth(uint32_t min);
 	void set_inner_spacing(uint32_t size);

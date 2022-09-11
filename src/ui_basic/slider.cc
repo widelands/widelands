@@ -87,6 +87,7 @@ Slider::Slider(Panel* const parent,
      cursor_size_(cursor_size),
      cursor_fixed_height_(-1) {
 	set_thinks(false);
+	set_snap_target(true);
 	set_can_focus(enabled_);
 	calculate_cursor_position();
 }

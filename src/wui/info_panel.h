@@ -91,6 +91,7 @@ private:
 
 	InteractiveBase& ibase_;
 	InteractivePlayer* iplayer_;
+	UI::Panel snap_target_panel_, snap_target_toolbar_;
 
 	bool on_top_;
 
