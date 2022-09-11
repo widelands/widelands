@@ -2293,7 +2293,8 @@ void CmdDiplomacy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 // CmdPinnedNote
 void CmdPinnedNote::execute(Game& game) {
 	for (Bob* b = game.map()[pos_].get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-		if (b->descr().type() == MapObjectType::PINNED_NOTE && b->owner().player_number() == sender()) {
+		if (b->descr().type() == MapObjectType::PINNED_NOTE &&
+		    b->owner().player_number() == sender()) {
 			PinnedNote& pn = dynamic_cast<PinnedNote&>(*b);
 			if (delete_) {
 				pn.remove(game);

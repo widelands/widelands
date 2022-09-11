@@ -501,7 +501,8 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 
 	if (ipl != nullptr) {
-		add_button(&watchbox, "pinned_note", kImgButtonPinnedNote, &FieldActionWindow::act_pinned_note, _("Pinned note"));
+		add_button(&watchbox, "pinned_note", kImgButtonPinnedNote,
+		           &FieldActionWindow::act_pinned_note, _("Pinned note"));
 	}
 
 	if (ibase().get_display_flag(InteractiveBase::dfDebug)) {
@@ -745,7 +746,8 @@ void FieldActionWindow::act_pinned_note() {
 	bool exists = false;
 
 	for (Widelands::Bob* b = node_.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
-		if (b->descr().type() == Widelands::MapObjectType::PINNED_NOTE && b->owner().player_number() == ipl->player_number()) {
+		if (b->descr().type() == Widelands::MapObjectType::PINNED_NOTE &&
+		    b->owner().player_number() == ipl->player_number()) {
 			exists = true;
 			const Widelands::PinnedNote& pn = dynamic_cast<Widelands::PinnedNote&>(*b);
 			text = pn.get_text();
@@ -754,7 +756,8 @@ void FieldActionWindow::act_pinned_note() {
 		}
 	}
 
-	UI::UniqueWindow::Registry& r = ipl->unique_windows().get_registry(format("pinned_note_%d_%d", node_.x, node_.y));
+	UI::UniqueWindow::Registry& r =
+	   ipl->unique_windows().get_registry(format("pinned_note_%d_%d", node_.x, node_.y));
 	r.open_window = [this, ipl, &r, text, rgb] { new PinnedNoteEditor(*ipl, r, node_, text, *rgb); };
 	r.create();
 

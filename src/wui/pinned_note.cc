@@ -24,32 +24,38 @@
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent, UI::UniqueWindow::Registry& r, Widelands::FCoords pos, const std::string& text, const RGBColor& rgb)
-	: UI::UniqueWindow(&parent, UI::WindowStyle::kWui, format("pinned_note_%d_%d", pos.x, pos.y), &r, 0, 0, 100, 100, _("Pinned Note")),
-	iplayer_(parent),
-	pos_(pos),
-	initial_text_(text),
-	initial_color_(rgb),
-	current_color_(rgb),
+PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent,
+                                   UI::UniqueWindow::Registry& r,
+                                   Widelands::FCoords pos,
+                                   const std::string& text,
+                                   const RGBColor& rgb)
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      format("pinned_note_%d_%d", pos.x, pos.y),
+                      &r,
+                      0,
+                      0,
+                      100,
+                      100,
+                      _("Pinned Note")),
+     iplayer_(parent),
+     pos_(pos),
+     initial_text_(text),
+     initial_color_(rgb),
+     current_color_(rgb),
 
-	box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
-	buttons_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     ok_(&buttons_box_,
-         "ok",
-         0,
-         0,
-         kButtonSize,
-         kButtonSize,
-         UI::ButtonStyle::kWuiPrimary,
-         _("OK")),
+     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     buttons_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     ok_(
+        &buttons_box_, "ok", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary, _("OK")),
      delete_(&buttons_box_,
-            "delete",
-            0,
-            0,
-            kButtonSize,
-            kButtonSize,
-            UI::ButtonStyle::kWuiSecondary,
-            _("Delete")),
+             "delete",
+             0,
+             0,
+             kButtonSize,
+             kButtonSize,
+             UI::ButtonStyle::kWuiSecondary,
+             _("Delete")),
      reset_(&buttons_box_,
             "reset",
             0,
@@ -67,16 +73,15 @@ PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent, UI::UniqueWindow::
              UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      color_(&buttons_box_,
-             "color",
-             0,
-             0,
-             kButtonSize,
-             kButtonSize,
-             UI::ButtonStyle::kWuiSecondary,
-             "",
-             _("Change color…")),
-	text_(new UI::MultilineEditbox(&box_, 0, 0, 400, 150, UI::PanelStyle::kWui))
-{
+            "color",
+            0,
+            0,
+            kButtonSize,
+            kButtonSize,
+            UI::ButtonStyle::kWuiSecondary,
+            "",
+            _("Change color…")),
+     text_(new UI::MultilineEditbox(&box_, 0, 0, 400, 150, UI::PanelStyle::kWui)) {
 	buttons_box_.add(&delete_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kSpacing);
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
@@ -94,23 +99,26 @@ PinnedNoteEditor::PinnedNoteEditor(InteractivePlayer& parent, UI::UniqueWindow::
 	cancel_.sigclicked.connect([this]() { die(); });
 	reset_.sigclicked.connect([this]() { reset(); });
 	color_.sigclicked.connect([this]() {
-		UI::ColorChooser c(&iplayer_, UI::WindowStyle::kWui, current_color_, &iplayer_.player().get_playercolor());
+		UI::ColorChooser c(
+		   &iplayer_, UI::WindowStyle::kWui, current_color_, &iplayer_.player().get_playercolor());
 		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			current_color_ = c.get_color();
 			update_color_preview();
 		}
 	});
 	delete_.sigclicked.connect([this]() {
-		iplayer_.game().send_player_pinned_note(iplayer_.player_number(), pos_, "", current_color_, true);
+		iplayer_.game().send_player_pinned_note(
+		   iplayer_.player_number(), pos_, "", current_color_, true);
 		die();
 	});
 	ok_.sigclicked.connect([this]() { ok(); });
 
-	subscriber_ = Notifications::subscribe<Widelands::NotePinnedNoteMoved>([this](const Widelands::NotePinnedNoteMoved& note) {
-		if (iplayer_.player_number() == note.player && pos_ == note.old_pos) {
-			pos_ = note.new_pos;
-		}
-	});
+	subscriber_ = Notifications::subscribe<Widelands::NotePinnedNoteMoved>(
+	   [this](const Widelands::NotePinnedNoteMoved& note) {
+		   if (iplayer_.player_number() == note.player && pos_ == note.old_pos) {
+			   pos_ = note.new_pos;
+		   }
+	   });
 
 	reset();
 	set_center_panel(&box_);
@@ -131,7 +139,8 @@ void PinnedNoteEditor::update_color_preview() {
 }
 
 void PinnedNoteEditor::ok() {
-	iplayer_.game().send_player_pinned_note(iplayer_.player_number(), pos_, text_->get_text(), current_color_, false);
+	iplayer_.game().send_player_pinned_note(
+	   iplayer_.player_number(), pos_, text_->get_text(), current_color_, false);
 	die();
 }
 

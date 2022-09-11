@@ -353,8 +353,8 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 		if (animations_table.has_key("pinned_note")) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("pinned_note");
 			pinned_note_animation_id_ =
-			   g_animation_manager->load(name_ + std::string("_pinned_note"), *animation_table, "pinned_note",
-			                             animation_directory, animation_type);
+			   g_animation_manager->load(name_ + std::string("_pinned_note"), *animation_table,
+			                             "pinned_note", animation_directory, animation_type);
 		}
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);

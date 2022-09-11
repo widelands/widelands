@@ -37,14 +37,18 @@ struct NotePinnedNoteMoved {
 class PinnedNote : public Bob {
 public:
 	PinnedNote();
-	static PinnedNote& create(EditorGameBase& egbase, Player& owner, Coords pos, const std::string& text, const RGBColor& rgb);
+	static PinnedNote& create(EditorGameBase& egbase,
+	                          Player& owner,
+	                          Coords pos,
+	                          const std::string& text,
+	                          const RGBColor& rgb);
 
 	void draw(const EditorGameBase&,
-	                  const InfoToDraw& info_to_draw,
-	                  const Vector2f& field_on_dst,
-	                  const Coords& coords,
-	                  float scale,
-	                  RenderTarget* dst) const override;
+	          const InfoToDraw& info_to_draw,
+	          const Vector2f& field_on_dst,
+	          const Coords& coords,
+	          float scale,
+	          RenderTarget* dst) const override;
 	void init_auto_task(Game& game) override;
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;

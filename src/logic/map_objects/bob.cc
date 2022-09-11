@@ -60,7 +60,8 @@ BobDescr::BobDescr(const std::string& init_descname,
 	}
 }
 
-BobDescr::BobDescr(const std::string& init_name, const std::string& init_descname,
+BobDescr::BobDescr(const std::string& init_name,
+                   const std::string& init_descname,
                    const MapObjectType init_type,
                    MapObjectDescr::OwnerType owner_type)
    : MapObjectDescr(init_type, init_name, init_descname),

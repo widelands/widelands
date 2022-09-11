@@ -965,7 +965,12 @@ private:
 };
 
 struct CmdPinnedNote : PlayerCommand {
-	CmdPinnedNote(const Time& t, PlayerNumber p, const std::string& text, Coords pos, const RGBColor& rgb, bool del)
+	CmdPinnedNote(const Time& t,
+	              PlayerNumber p,
+	              const std::string& text,
+	              Coords pos,
+	              const RGBColor& rgb,
+	              bool del)
 	   : PlayerCommand(t, p), text_(text), pos_(pos), rgb_(rgb), delete_(del) {
 	}
 

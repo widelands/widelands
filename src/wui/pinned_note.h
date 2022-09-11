@@ -31,7 +31,11 @@
 ///  Shows the current teams lineup and allows the player to perform diplomatic actions.
 class PinnedNoteEditor : public UI::UniqueWindow {
 public:
-	PinnedNoteEditor(InteractivePlayer& parent, UI::UniqueWindow::Registry& r, Widelands::FCoords pos, const std::string& text, const RGBColor& rgb);
+	PinnedNoteEditor(InteractivePlayer& parent,
+	                 UI::UniqueWindow::Registry& r,
+	                 Widelands::FCoords pos,
+	                 const std::string& text,
+	                 const RGBColor& rgb);
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 

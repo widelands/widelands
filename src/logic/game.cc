@@ -1172,7 +1172,8 @@ void Game::send_player_mark_object_for_removal(PlayerNumber p, Immovable& mo, bo
 	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
 }
 
-void Game::send_player_pinned_note(PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del) {
+void Game::send_player_pinned_note(
+   PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del) {
 	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
 }
 

@@ -30,23 +30,31 @@ namespace Widelands {
 class PinnedNoteDescr : public BobDescr {
 public:
 	PinnedNoteDescr(char const* const init_name, char const* const init_descname)
-	   : BobDescr(init_name, init_descname, MapObjectType::PINNED_NOTE, MapObjectDescr::OwnerType::kTribe) {
+	   : BobDescr(init_name,
+	              init_descname,
+	              MapObjectType::PINNED_NOTE,
+	              MapObjectDescr::OwnerType::kTribe) {
 	}
 
 	Bob& create_object() const override {
 		return *new PinnedNote();
 	}
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(PinnedNoteDescr);
 };
 
 static const PinnedNoteDescr g_descr("pinned_note", "Pinned Note");
 
-PinnedNote::PinnedNote() : Bob(g_descr) {}
+PinnedNote::PinnedNote() : Bob(g_descr) {
+}
 
 // static
-PinnedNote& PinnedNote::create(EditorGameBase& egbase, Player& owner, Coords pos, const std::string& text, const RGBColor& rgb)
-{
+PinnedNote& PinnedNote::create(EditorGameBase& egbase,
+                               Player& owner,
+                               Coords pos,
+                               const std::string& text,
+                               const RGBColor& rgb) {
 	PinnedNote& note = *new PinnedNote();
 	note.set_text(text);
 	note.set_rgb(rgb);
@@ -57,7 +65,8 @@ PinnedNote& PinnedNote::create(EditorGameBase& egbase, Player& owner, Coords pos
 }
 
 void PinnedNote::init_auto_task(Game& game) {
-	if (get_position().field->get_immovable() != nullptr && get_position().field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
+	if (get_position().field->get_immovable() != nullptr &&
+	    get_position().field->get_immovable()->descr().type() >= MapObjectType::BUILDING) {
 		/* If the player builds a building here, move one field out of the way. */
 		FCoords new_pos = game.map().br_n(get_position());
 		Notifications::publish(NotePinnedNoteMoved(owner().player_number(), get_position(), new_pos));
@@ -68,23 +77,25 @@ void PinnedNote::init_auto_task(Game& game) {
 }
 
 void PinnedNote::draw(const EditorGameBase& egbase,
-	                  const InfoToDraw& info_to_draw,
-	                  const Vector2f& field_on_dst,
-	                  const Coords& coords,
-	                  float scale,
-	                  RenderTarget* dst) const {
+                      const InfoToDraw& info_to_draw,
+                      const Vector2f& field_on_dst,
+                      const Coords& coords,
+                      float scale,
+                      RenderTarget* dst) const {
 	if (egbase.is_game()) {
 		const InteractivePlayer* ipl = dynamic_cast<const Game&>(egbase).get_ipl();
 		if (ipl != nullptr) {
 			const Player& p = ipl->player();
-			if (&p != &owner() && (owner().team_number() == 0 || owner().team_number() != p.team_number())) {
+			if (&p != &owner() &&
+			    (owner().team_number() == 0 || owner().team_number() != p.team_number())) {
 				/* Notes are invisible to enemy players. */
 				return;
 			}
 		}
 	}
 
-	dst->blit_animation(field_on_dst, coords, scale, owner().tribe().pinned_note_animation(), egbase.get_gametime(), &rgb_);
+	dst->blit_animation(field_on_dst, coords, scale, owner().tribe().pinned_note_animation(),
+	                    egbase.get_gametime(), &rgb_);
 	do_draw_info(info_to_draw, text_, std::string(), field_on_dst, scale, dst);
 }
 
