@@ -487,14 +487,15 @@ void InfoPanel::think() {
 	}
 
 	for (UI::Panel* p = ibase_.get_first_child(); p != nullptr; p = p->get_next_sibling()) {
-		if ((p->get_x() < snap_target_panel_.get_w() || (
-					p->get_x() + p->get_w() > snap_target_toolbar_.get_x() &&
-					p->get_x() < snap_target_toolbar_.get_x() + snap_target_toolbar_.get_w()
-			)) && (on_top_ ?
-				(p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) : (p->get_y() + p->get_h() > snap_target_panel_.get_y())
-			)) {
+		if ((p->get_x() < snap_target_panel_.get_w() ||
+		     (p->get_x() + p->get_w() > snap_target_toolbar_.get_x() &&
+		      p->get_x() < snap_target_toolbar_.get_x() + snap_target_toolbar_.get_w())) &&
+		    (on_top_ ? (p->get_y() < snap_target_panel_.get_y() + snap_target_panel_.get_h()) :
+                     (p->get_y() + p->get_h() > snap_target_panel_.get_y()))) {
 			if (UI::Window* w = dynamic_cast<UI::Window*>(p)) {
-				w->set_pos(Vector2i(w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() : snap_target_panel_.get_y() - w->get_h()));
+				w->set_pos(Vector2i(
+				   w->get_x(), on_top_ ? snap_target_panel_.get_y() + snap_target_panel_.get_h() :
+                                     snap_target_panel_.get_y() - w->get_h()));
 			}
 		}
 	}
@@ -554,8 +555,11 @@ void InfoPanel::layout() {
 	}
 
 	snap_target_panel_.set_pos(Vector2i(0, toggle_mode_.get_y()));
-	snap_target_panel_.set_size((display_mode_ == DisplayMode::kMinimized || display_mode_ == DisplayMode::kOnMouse_Hidden)
-			? toggle_mode_.get_w() : w, toggle_mode_.get_h());
+	snap_target_panel_.set_size(
+	   (display_mode_ == DisplayMode::kMinimized || display_mode_ == DisplayMode::kOnMouse_Hidden) ?
+         toggle_mode_.get_w() :
+         w,
+	   toggle_mode_.get_h());
 	snap_target_toolbar_.set_pos(toolbar_->get_pos());
 	snap_target_toolbar_.set_size(toolbar_->get_w(), snap_target_panel_.get_h());
 }
