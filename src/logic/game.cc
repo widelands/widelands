@@ -177,6 +177,9 @@ void Game::sync_reset() {
 InteractivePlayer* Game::get_ipl() {
 	return dynamic_cast<InteractivePlayer*>(get_ibase());
 }
+const InteractivePlayer* Game::get_ipl() const {
+	return dynamic_cast<const InteractivePlayer*>(get_ibase());
+}
 
 void Game::set_game_controller(std::shared_ptr<GameController> c) {
 	ctrl_ = c;
@@ -1167,6 +1170,10 @@ void Game::send_player_toggle_mute(const Building& b, bool all) {
 
 void Game::send_player_mark_object_for_removal(PlayerNumber p, Immovable& mo, bool mark) {
 	send_player_command(new CmdMarkMapObjectForRemoval(get_gametime(), p, mo, mark));
+}
+
+void Game::send_player_pinned_note(PlayerNumber p, Coords pos, const std::string& text, const RGBColor& rgb, bool del) {
+	send_player_command(new CmdPinnedNote(get_gametime(), p, text, pos, rgb, del));
 }
 
 int Game::propose_trade(const Trade& trade) {

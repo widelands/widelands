@@ -121,6 +121,7 @@ public:
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
+	uint32_t pinned_note_animation() const;
 	uint32_t bridge_animation(uint8_t dir, bool busy) const;
 
 	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
@@ -231,6 +232,7 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	uint32_t pinned_note_animation_id_;
 	struct BridgeAnimationIDs {
 		uint32_t e;
 		uint32_t se;

@@ -18,6 +18,7 @@ wl.Descriptions():new_tribe {
    name = "empire",
    animation_directory = image_dirname,
    animations = {
+      pinned_note = { hotspot = {13, 63} },
       bridge_normal_e = { hotspot = {-2, 12} },
       bridge_busy_e = { hotspot = {-2, 12} },
       bridge_normal_se = { hotspot = {5, 2} },

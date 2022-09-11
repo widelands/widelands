@@ -44,7 +44,7 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
+--    **animations**: Global animations. Contains subtables for ``frontier``, ``flag``, and ``pinned_note``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
 --
@@ -330,6 +330,7 @@ wl.Descriptions():new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {6, 18} },
+      pinned_note = { hotspot = {13, 63} },
       bridge_normal_e = { hotspot = {-2, 11} },
       bridge_busy_e = { hotspot = {-2, 11} },
       bridge_normal_se = { hotspot = {5, 2} },

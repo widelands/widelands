@@ -45,6 +45,7 @@ enum class MapObjectType : uint8_t {
 	SOLDIER,   // Bob -- Worker -- Soldier
 	CARRIER,   // Bob -- Worker -- Carrier
 	FERRY,     // Bob -- Worker -- Carrier -- Ferry
+	PINNED_NOTE,  // Bob -- Pinned Note
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,

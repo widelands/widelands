@@ -27,6 +27,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/battle.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/worker.h"
@@ -67,6 +68,10 @@ void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoad
 
 			case MapObject::HeaderCritter:
 				loaders.insert(Critter::load(egbase, mol, fr));
+				break;
+
+			case MapObject::HeaderPinnedNote:
+				loaders.insert(PinnedNote::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderWorker:

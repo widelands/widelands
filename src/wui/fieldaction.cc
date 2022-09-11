@@ -27,6 +27,7 @@
 #include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/pinned_note.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -42,6 +43,8 @@
 #include "wui/economy_options_window.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
+#include "wui/pinned_note.h"
+#include "wui/unique_window_handler.h"
 #include "wui/waresdisplay.h"
 #include "wui/watchwindow.h"
 
@@ -180,6 +183,7 @@ public:
 	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
+	void act_pinned_note();
 
 private:
 	uint32_t add_tab(const std::string& name,
@@ -240,6 +244,7 @@ constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
 constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
+constexpr const char* const kImgButtonPinnedNote = "images/wui/fieldaction/pinned_note.png";
 
 constexpr const char* const kImgTabTarget = "images/wui/fieldaction/menu_tab_target.png";
 
@@ -368,8 +373,9 @@ void FieldActionWindow::add_buttons_auto() {
 	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
+	upcast(InteractivePlayer, ipl, igbase);
 
-	if (upcast(InteractivePlayer, ipl, igbase)) {
+	if (ipl != nullptr) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
@@ -494,9 +500,13 @@ void FieldActionWindow::add_buttons_auto() {
 		           _("Watch field in a separate window"));
 	}
 
+	if (ipl != nullptr) {
+		add_button(&watchbox, "pinned_note", kImgButtonPinnedNote, &FieldActionWindow::act_pinned_note, _("Pinned note"));
+	}
+
 	if (ibase().get_display_flag(InteractiveBase::dfDebug)) {
 		add_button(
-		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show Debug Window"));
+		   &watchbox, "debug", kImgDebug, &FieldActionWindow::act_debug, _("Show debug window"));
 	}
 
 	// Add tabs
@@ -719,6 +729,39 @@ Open a watch window for the given field and delete self.
 void FieldActionWindow::act_watch() {
 	upcast(InteractiveGameBase, igbase, &ibase());
 	show_watch_window(*igbase, node_);
+	reset_mouse_and_die();
+}
+
+/*
+===============
+Open the notes editor for the given field and delete self.
+===============
+*/
+void FieldActionWindow::act_pinned_note() {
+	upcast(InteractivePlayer, ipl, &ibase());
+
+	std::string text;
+	const RGBColor* rgb = &ipl->player().get_playercolor();
+	bool exists = false;
+
+	for (Widelands::Bob* b = node_.field->get_first_bob(); b != nullptr; b = b->get_next_bob()) {
+		if (b->descr().type() == Widelands::MapObjectType::PINNED_NOTE && b->owner().player_number() == ipl->player_number()) {
+			exists = true;
+			const Widelands::PinnedNote& pn = dynamic_cast<Widelands::PinnedNote&>(*b);
+			text = pn.get_text();
+			rgb = &pn.get_rgb();
+			break;
+		}
+	}
+
+	UI::UniqueWindow::Registry& r = ipl->unique_windows().get_registry(format("pinned_note_%d_%d", node_.x, node_.y));
+	r.open_window = [this, ipl, &r, text, rgb] { new PinnedNoteEditor(*ipl, r, node_, text, *rgb); };
+	r.create();
+
+	if (!exists) {  // Already create the note if it did not exist yet.
+		ipl->game().send_player_pinned_note(ipl->player_number(), node_, text, *rgb, false);
+	}
+
 	reset_mouse_and_die();
 }
 

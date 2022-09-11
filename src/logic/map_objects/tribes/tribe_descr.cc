@@ -350,6 +350,12 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 			   g_animation_manager->load(name_ + std::string("_flag"), *animation_table, "flag",
 			                             animation_directory, animation_type);
 		}
+		if (animations_table.has_key("pinned_note")) {
+			std::unique_ptr<LuaTable> animation_table = animations_table.get_table("pinned_note");
+			pinned_note_animation_id_ =
+			   g_animation_manager->load(name_ + std::string("_pinned_note"), *animation_table, "pinned_note",
+			                             animation_directory, animation_type);
+		}
 		load_bridge_if_present(
 		   animations_table, animation_directory, animation_type, "e", "normal", &bridges_normal_.e);
 		load_bridge_if_present(animations_table, animation_directory, animation_type, "se", "normal",
@@ -734,11 +740,12 @@ const std::vector<DescriptionIndex>& TribeDescr::worker_types_without_cost() con
 uint32_t TribeDescr::frontier_animation() const {
 	return frontier_animation_id_;
 }
-
 uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
 }
-
+uint32_t TribeDescr::pinned_note_animation() const {
+	return pinned_note_animation_id_;
+}
 uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	switch (dir) {
 	case WALK_E:
