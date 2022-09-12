@@ -300,8 +300,9 @@ void BufferedConnection::start_receiving() {
 		   } else {
 			   if (socket_.is_open()) {
 				   if (ec != asio::error::eof) {
-					   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-					           ec.value(), ec.message().c_str());
+					   log_err(
+					      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+					      ec.value(), ec.message().c_str());
 					   log_info("[BufferedConnection] Closing socket\n");
 				   }
 				   socket_.shutdown(asio::ip::tcp::socket::shutdown_both, ec);
