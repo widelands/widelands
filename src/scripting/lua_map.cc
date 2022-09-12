@@ -522,7 +522,7 @@ unbox_lua_soldier_description(lua_State* L, int table_index, const Widelands::So
 SoldiersMap parse_set_soldiers_arguments(lua_State* L,
                                          const Widelands::SoldierDescr& soldier_descr) {
 	SoldiersMap rv;
-	const Widelands::Quantity max_count = 30000;
+	constexpr Widelands::Quantity max_count = 10000;
 	if (lua_gettop(L) > 2) {
 		// STACK: cls, descr, count
 		const Widelands::Quantity count = std::min(luaL_checkuint32(L, 3), max_count);
