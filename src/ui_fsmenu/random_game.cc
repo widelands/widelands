@@ -100,7 +100,7 @@ RandomGame::~RandomGame() {
 void RandomGame::reactivated() {
 	if (progress_window_ == nullptr) {
 		progress_window_ =
-		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
+		   &game_->create_loader_ui({"general_game", "singleplayer"}, false, "", "", true, &capsule_);
 		progress_window_->set_visible(false);
 	}
 }

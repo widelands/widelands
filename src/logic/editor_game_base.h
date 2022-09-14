@@ -127,6 +127,7 @@ public:
 	                                     bool show_game_tips,
 	                                     const std::string& theme,
 	                                     const std::string& background,
+										 bool crop = true,
 	                                     UI::Panel* parent = nullptr);
 
 	/// Set step text for the current loader UI if it's not nullptr.
