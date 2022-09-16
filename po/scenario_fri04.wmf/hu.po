@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:28
 msgid "Note"
-msgstr "Megjegyzés"
+msgstr "Figyelem!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/init.lua:29
 msgid ""
@@ -30,69 +30,75 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Úgy tűnik, hogy nem fejezted be az előző küldetést. Így is játszhatod ezt a "
+"küldetést, de hátrányban leszel. Javaslom, hogy először fejezd be az előző "
+"küldetést, és utána kezdd újra ezt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:31
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:33
 msgid "Find Reebaud"
-msgstr ""
+msgstr "Keresd meg Reebaudot!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:34
 msgid "Expand your territory until you meet your old friend Reebaud."
 msgstr ""
+"Terjeszd ki a területedet, amíg nem találkozol régi barátoddal, Reebauddal!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:39
 msgid "Defeat the strangers"
-msgstr ""
+msgstr "Győzd le az idegeneket!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:41
 msgid "Defeat the Strangers"
-msgstr ""
+msgstr "Győzd le az idegeneket!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:42
 msgid "Defeat the hostile tribe."
-msgstr ""
+msgstr "Győzd le az ellenséges törzset!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:47
 msgid "Defeat the Empire"
-msgstr ""
+msgstr "Győzd le a Birodalmat!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:49
 msgid "Defeat the Imperial Legate"
-msgstr ""
+msgstr "Győzd le a birodalmi küldöttet!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:50
 msgid "Defeat Marcus Caius Iniucundus."
-msgstr ""
+msgstr "Győzd le Marcus Caius Iniucundust!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:55
 msgid "Recruit & train"
-msgstr ""
+msgstr "Toborozz és fejlessz!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:57
 msgid "Recruit And Train Your Soldiers"
-msgstr ""
+msgstr "Toborozz és képezd ki a katonáidat!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:58
 msgid ""
 "Train your soldiers while you are waiting for Reebaud to proclaim his "
 "soldiers battle-ready."
 msgstr ""
+"Képezd ki a katonáidat, amíg várod, hogy Reebaud bejelenti, hogy a katonái "
+"készen állnak a harcra!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:59
 msgid "You have one hour to train as many soldiers as you can."
-msgstr ""
+msgstr "Egy órád van a lehető legtöbb katonát kiképezni."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:68
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:77
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:83
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Üdvözöllek újra!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:69
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:78
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:84
 msgid "Arrived at last"
-msgstr ""
+msgstr "Végre megérkeztünk"
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:71
@@ -101,6 +107,9 @@ msgid ""
 "just in time; it caught us while we were on sea and we were all certain our "
 "ship was about to split and sink, and none of us would see our home again."
 msgstr ""
+"Marcus Caius Iniucundusnak igaza volt a viharral kapcsolatban. Éppen időben "
+"indultunk el: a tengeren ért utol minket és úgy éreztük, a hajónk mindjárt "
+"összetörik és elsüllyed, egyikünk se látja újra az otthonunkat."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:74
@@ -110,6 +119,10 @@ msgid ""
 "could continue sailing. Finally, we arrived as far North as it is possible "
 "to go by ship."
 msgstr ""
+"De az isten kegyes volt, meghallgatta bőséges imáinkat és megóvott minket. "
+"Meg kellett állnunk egy kietlen, elhagyatott partszakaszon, és kijavítanunk "
+"a hajót, hogy tovább tudjunk hajózni. Végül megérkeztünk olyan távol "
+"északra, ameddig csak hajó el tud jutni."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:80
@@ -122,6 +135,12 @@ msgid ""
 "not regret that I will probably not be seeing him again. He set up his camp "
 "some distance away from mine so that we will not hinder each other."
 msgstr ""
+"A követtel nincs több dolgunk egymással. Az út során elegem lett a gőgös "
+"viselkedéséből, különösen azzal, amilyen megalázóan a gályarabokkal bánt. "
+"Mintha észre sem venné, hogy ők is ugyanolyan emberek mint ő vagy én, vagy "
+"ha mégis, mintha csak ők tehetnének a balsorsukról. Egyáltalán nem bánom, "
+"hogy valószínűleg nem látom őt többé. Tőlünk valamivel távolabb verték fel a"
+" táborukat, hogy ne zavarjuk egymást."
 
 #. TRANSLATORS: Claus Lembeck – Introduction 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:86
@@ -131,6 +150,9 @@ msgid ""
 "I have seen no signs of human habitation around here yet, I have no doubt "
 "that we will find him soon."
 msgstr ""
+"De most, hogy ilyen közel járunk, nem ülhetek itt a múlton merengve. Fel hát"
+" gyorsan! Induljunk, keressük meg a barátomat! Bár nem láttam nyomát emberi "
+"életnek a környéken, biztos vagyok benne, hogy hamarosan megtaláljuk."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:91
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:97
@@ -140,12 +162,12 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:227
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:237
 msgid "Strangers"
-msgstr ""
+msgstr "Idegenek"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:92
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:98
 msgid "Who are they?"
-msgstr ""
+msgstr "Kik ezek?"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 1a
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:94
@@ -153,6 +175,8 @@ msgid ""
 "Our soldiers have sighted strangers – the first natives in this bleak "
 "countryside. Perhaps they know where Reebaud can be found?"
 msgstr ""
+"A katonáink idegeneket láttak – az első lakókat ezen a kietlen vidéken. "
+"Hátha tudják, hogy hol találjuk Reebaudot."
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1b
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:100
@@ -161,11 +185,14 @@ msgid ""
 "Henneke. We come in search of my friend Reebaud. May I ask if you know where"
 " we may find him?"
 msgstr ""
+"Béke és üdvözlet, jó emberek! Claus Lembeck vagyok, ez pedig a fiam, "
+"Henneke. A barátomat, Reebaudot keressük. Szeretném megkérdezni, hogy nem "
+"tudjátok-e, hogy hol találjuk?"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:116
 msgid "Enemies"
-msgstr ""
+msgstr "Ellenségek"
 
 #. TRANSLATORS: Claus Lembeck – Amazons 1c
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:106
@@ -173,10 +200,12 @@ msgid ""
 "Our soldiers have sighted strangers. These must be the intruders Reebaud "
 "mentioned."
 msgstr ""
+"A katonáink idegeneket láttak. Ezek biztos a betolakodók, akikről Reebaud "
+"beszélt."
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:110
 msgid "Trespassers"
-msgstr ""
+msgstr "Betolakodók"
 
 #. TRANSLATORS: Linthesilea – Amazons 2. She does not speak this language
 #. well, but she does manage to convey her meaning.
@@ -185,11 +214,13 @@ msgid ""
 "We – Amazons. You – strangers. Land – here – own – we. You – trespassers. "
 "You – enemies. We – you – all – make – dead!"
 msgstr ""
+"Mi amazonok. Ti idegenek. Itt miénk föld. Betolakodni ti. Ti ellenség. Mi ti"
+" ölni meg mind!"
 
 #. TRANSLATORS: Henneke Lembeck – Amazons 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:118
 msgid "Not the friendliest of people…"
-msgstr ""
+msgstr "Nem túl barátságos népség…"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:123
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:129
@@ -204,7 +235,7 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:193
 msgid "An Old Friend"
-msgstr ""
+msgstr "Egy régi barát"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:124
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:130
@@ -219,13 +250,13 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:187
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:194
 msgid "Met up at last"
-msgstr ""
+msgstr "Végre találkoztunk"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:126
 msgid ""
 "At last! These people’s buildings look familiar. It must be Reebaud’s tribe."
-msgstr ""
+msgstr "Végre! Ezek a házak ismerősnek látszanak. Ez biztos Reebaud törzse."
 
 #. TRANSLATORS: Reebaud – Reebaud 2
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:132
@@ -233,6 +264,8 @@ msgid ""
 "Do my eyes deceive me, or is a spirit playing tricks on me? Surely it cannot"
 " be my old friend Claus who meets me so far away from home!"
 msgstr ""
+"A szemeim kápráznak, vagy valamilyen szellem akar megtréfálni? Ez nem lehet "
+"régi barátom, Claus, akivel otthonunktól ilyen távol találkozunk!"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 3
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:138
@@ -241,6 +274,9 @@ msgid ""
 "and I journeyed this far to seek you out. I cannot say how glad I am to have"
 " found you at last."
 msgstr ""
+"Nem tréfa, és a szemed sem káprázik, tényleg én vagyok az, Claus Lembeck! "
+"Fiammal, Hennekével azért utaztunk ilyen messzire, hogy megtaláljunk téged. "
+"El sem tudom mondani, milyen boldog vagyok, hogy végre megtaláltunk!"
 
 #. TRANSLATORS: Reebaud – Reebaud 4
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:144
@@ -360,13 +396,13 @@ msgstr ""
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:213
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:219
 msgid "An Old Enemy"
-msgstr ""
+msgstr "Egy régi ellenség"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:220
 msgid "Treason"
-msgstr ""
+msgstr "Árulás"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:204
@@ -374,6 +410,8 @@ msgid ""
 "Wait a minute, you two. What was this you said? You assaulted and murdered "
 "Murilius, a Proconsule of the Empire?"
 msgstr ""
+"Várjatok csak, ti ketten! Mit mondtál az előbb? Megtámadtad és megölted "
+"Muriliust, a Birodalom Proconsulját?"
 
 #. TRANSLATORS: Marcus Caius Iniucundus – Reebaud 10
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:207
@@ -401,6 +439,9 @@ msgid ""
 "appointed a representative of the Empire? Claus, what did you bring that "
 "deplorable jester with you for?"
 msgstr ""
+"Hú, de megijedtem! Mondd csak, jóember, az ostobaság feltétel a birodalmi "
+"tisztviselők kiválasztásánál? Claus, miért hoztad magaddal ezt a szánalmas "
+"bohócot?"
 
 #. TRANSLATORS: Claus Lembeck – Reebaud 12
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:222
@@ -427,11 +468,11 @@ msgstr ""
 #. TRANSLATORS: Henneke Lembeck – Reebaud in danger
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:233
 msgid "We must hurry."
-msgstr ""
+msgstr "Sietnünk kell!"
 
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:238
 msgid "We are too late"
-msgstr ""
+msgstr "Elkéstünk"
 
 #. TRANSLATORS: Henneke Lembeck – Reebaud defeated 1
 #: ../../data/campaigns/fri04.wmf/scripting/texts.lua:240
