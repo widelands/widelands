@@ -95,23 +95,11 @@ Depending on the Ninja installation, the last line can also be `ninja-build`.
 
 #### CMake options
 
-Note that CMake options are prefixed with `-D`. These are the available options:
+Note that CMake options are prefixed with `-D`. To view the available options:
 
-| Name | Values | Default| Function
-| --- | --- | --- | --- |
-| `CMAKE_BUILD_TYPE` | `Debug`/`Release` | `Debug` | Create a release or debug build |
-| `OPTION_ASAN` | `ON`/`OFF` | `ON` for Debug builds /`OFF` for Release builds | Use AddressSanitizer. Switching this off only works once. You will have to clear the `build` directory if you want to switch this off again in a later build. |
-| `OPTION_BUILD_TRANSLATIONS` | `ON`/`OFF` | `ON` | Build translations |
-| `OPTION_BUILD_CODECHECK` | `ON`/`OFF` | `ON` | Build codecheck. Only available in Debug builds. |
-| `OPTION_BUILD_WEBSITE_TOOLS` | `ON`/`OFF` | `ON` | Build website-related tools |
-| `OPTION_BUILD_TESTS` | `ON`/`OFF` | `ON` | Build unit tests |
-| `CMAKE_INSTALL_PREFIX` | A directory | See [CMake documentation](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) | Define the target directory for the "install" target, e.g. `-DCMAKE_INSTALL_PREFIX=~/widelands-install`. |
-| `WL_INSTALL_BINDIR` | A directory | `${CMAKE_INSTALL_PREFIX}/games` | Define the destination of executables files (if installing) |
-| `WL_VERSION` | A version string | Autodetected from git/bzr, or set by adding a `VERSION` file | Define the Widelands version |
-| `USE_XDG` | `ON`/`OFF` | `ON` | Follow XDG-Basedir specification. Only available on Linux. |
-| `OPTION_USE_GLBINDING` | `ON`/`OFF` | `OFF` | Use glbinding instead of GLEW |
-| `OPTION_GLEW_STATIC` | `ON`/`OFF` | `OFF` | Use static GLEW Library |
-| `OPTION_FORCE_EMBEDDED_MINIZIP` | `ON`/`OFF` | `OFF` | Used embedded minizip sources (skip checking for installed minizip library) |
+~~~~
+cmake -B build -L
+~~~~
 
 #### make/ninja targets
 
