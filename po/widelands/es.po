@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-07 04:42+0000\n"
+"POT-Creation-Date: 2022-09-16 04:35+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020-2022\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
@@ -708,13 +708,13 @@ msgstr ""
 #: ../../src/editor/tools/place_immovable_tool.cc:110
 #, c-format
 msgid "Immovable: %1$s"
-msgstr ""
+msgstr "Inamovible: %1$s"
 
 #. * TRANSLATORS: An entry in the tool history list.
 #: ../../src/editor/tools/set_terrain_tool.cc:110
 #, c-format
 msgid "Terrain: %1$s"
-msgstr ""
+msgstr "Terreno: %1$s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:177
@@ -1501,8 +1501,8 @@ msgid ""
 "location."
 msgstr "Selecciona el nuevo tamaño del mapa y después haz clic en la posición deseada para dividirlo. Al aumentar el tamaño, se insertarán nuevas columnas/filas al este/sur del punto seleccionado. Al reducir el mapa, el número deseado de columnas/filas serán removidas al este/sur de la posición divisoria."
 
-#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
+#. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -3435,7 +3435,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/contact.cc:91
 msgid "Sent"
-msgstr ""
+msgstr "Enviado"
 
 #: ../../src/ui_fsmenu/addons/contact.cc:92
 msgid ""
@@ -3446,7 +3446,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:37
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: ../../src/ui_fsmenu/addons/login_box.cc:69
 #: ../../src/ui_fsmenu/addons/manager.cc:232
@@ -5256,11 +5256,11 @@ msgstr "Volver al menú de jugador único"
 msgid "Load this game"
 msgstr "Cargar esta partida"
 
-#: ../../src/ui_fsmenu/loadgame.cc:162
+#: ../../src/ui_fsmenu/loadgame.cc:163
 msgid "Version Mismatch"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:163
+#: ../../src/ui_fsmenu/loadgame.cc:164
 msgid ""
 "This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n"
 "\n"
@@ -6188,18 +6188,18 @@ msgstr "Ruta a archivo no válida en campaigns.lua de tutorials.lua: %s"
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
+#. * TRANSLATORS: Label in map details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:54 ../../src/wui/mapdetails.cc:162
 msgid "Author"
 msgstr "Autor"
 
-#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
-#. need plural
-#. forms here, please let us know.
 #. * TRANSLATORS: Label in campaign scenario details if there is more than 1
 #. author. If
 #. you need plural forms here, please let us know.
+#. * TRANSLATORS: Label in map details if there is more than 1 author. If you
+#. need plural
+#. forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:165
 msgid "Authors"
 msgstr "Autores"
@@ -7339,9 +7339,9 @@ msgstr "Puertos"
 msgid "Low productivity:"
 msgstr "Baja productividad:"
 
+#. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#. * TRANSLATORS: Buildings: owned / under construction
 #: ../../src/wui/building_statistics_menu.cc:709
 #: ../../src/wui/building_statistics_menu.cc:728
 #: ../../src/wui/building_statistics_menu.cc:730
@@ -7806,7 +7806,7 @@ msgstr ""
 #: ../../src/wui/game_diplomacy_menu.cc:250
 #, c-format
 msgid "Team %u"
-msgstr ""
+msgstr "Equipo %u"
 
 #: ../../src/wui/game_diplomacy_menu.cc:261
 #, c-format
@@ -8273,7 +8273,7 @@ msgstr ""
 #: ../../src/wui/interactive_gamebase.cc:53
 #, c-format
 msgid "%1$u.%2$u×"
-msgstr ""
+msgstr "%1$u.%2$u×"
 
 #: ../../src/wui/interactive_gamebase.cc:55
 msgid "PAUSE"
