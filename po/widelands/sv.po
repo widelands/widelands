@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2022-09-16 04:35+0000\n"
+"POT-Creation-Date: 2022-09-19 04:38+0000\n"
 "PO-Revision-Date: 2015-02-02 13:35+0000\n"
 "Last-Translator: Niklas Nordgren, 2022\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
@@ -768,8 +768,8 @@ msgstr "gruva"
 msgid "port"
 msgstr "hamn"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/ui_menus/field_info_window.cc:116
 #: ../../src/logic/map_objects/world/terrain_description.cc:76
 msgid "walkable"
@@ -1065,9 +1065,9 @@ msgstr "(ingen)"
 msgid "Waterway length limit:"
 msgstr "Maximal längd på vattenväg:"
 
+#. * TRANSLATORS: Map Options: Waterways are disabled
 #. * TRANSLATORS: Placeholder for scroll direction when function should not
 #. use scroll wheel
-#. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:409
 #: ../../src/ui_fsmenu/mousewheel_options.cc:57
 msgid "Disabled"
@@ -1491,8 +1491,8 @@ msgid ""
 "location."
 msgstr "Välj den nya storleken på kartan, och klicka sedan på kartan för att dela den i vald position. När kartstorleken ökas kommer nya rader och kolumner att läggas till öster/söder om vald position. När kartstorleken minskas kommer det valda antalet kolumner och rader att tas bort öster/söder om delningspunkten."
 
-#. * TRANSLATORS: Label: Value.
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
+#. * TRANSLATORS: Label: Value.
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:75
 #: ../../src/ui_basic/dropdown.cc:307 ../../src/ui_basic/dropdown.cc:359
 #: ../../src/ui_basic/dropdown.cc:426 ../../src/ui_basic/dropdown.cc:434
@@ -7693,8 +7693,8 @@ msgstr "Ersätt den frånkopplade spelaren med vald AI-spelare och fortsätt spe
 msgid "AI for the disconnected player"
 msgstr "AI-spelare för den frånkopplade spelaren"
 
-#. * TRANSLATORS: An entry in the game's main menu
 #. * TRANSLATORS: Button tooltip
+#. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_client_disconnected.cc:102
 #: ../../src/wui/game_summary.cc:102 ../../src/wui/interactive_gamebase.cc:170
 msgid "Exit Game"
@@ -8339,8 +8339,8 @@ msgstr "%1$s (%2$s)"
 msgid "Statistics"
 msgstr "Statistik"
 
-#. * TRANSLATORS: This is a map tag
 #. * TRANSLATORS: An entry in the game's statistics menu
+#. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:315 ../../src/wui/map_tags.cc:37
 msgid "Seafaring"
 msgstr "Sjöfart"
