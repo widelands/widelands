@@ -42,8 +42,7 @@ static const std::map<std::string, std::string> igmessages = {
    {"NO_ANSWER", gettext_noop("Metaserver did not answer")},
    {"CLIENT_TIMEOUT",
     gettext_noop(
-       "You got disconnected from the metaserver, as you did not answer a PING request in time.")}
-};
+       "You got disconnected from the metaserver, as you did not answer a PING request in time.")}};
 
 /// Returns a translated message fitting to the message code \arg code
 const std::string InternetGamingMessages::get_message(const std::string& code) {
@@ -53,4 +52,3 @@ const std::string InternetGamingMessages::get_message(const std::string& code) {
 	// if no message for code was found, just return code
 	return code;
 }
-
