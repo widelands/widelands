@@ -25,9 +25,9 @@
 #include "base/log.h"
 #include "base/string.h"
 
-/// Messages from metaserver to client
 /// Table assigning printable messages to message codes
-static std::map<std::string, std::string> ngmessages = {
+static const std::map<std::string, std::string> ngmessages = {
+   // Messages from metaserver to client
    {"CLIENT_LEFT_GAME", gettext_noop("Client has left the game.")},
    {"CLIENT_CRASHED", gettext_noop("Client crashed and performed an emergency save.")},
    {"CONNECTION_LOST", gettext_noop("Connection was lost.")},
@@ -71,7 +71,7 @@ static std::map<std::string, std::string> ngmessages = {
 /// Returns a translated message fitting to the message code \arg code
 const std::string NetworkGamingMessages::get_message(const std::string& code) {
 	if (ngmessages.find(code) != ngmessages.end()) {
-		return _(ngmessages[code]);
+		return _(ngmessages.at(code));
 	}
 	// if no message for code was found, just return code
 	return code;
@@ -88,7 +88,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
 	}
 
-	const std::string msg_translated = _(ngmessages[code]);
+	const std::string msg_translated = _(ngmessages.at(code));
 	const size_t n_fmt_arg = format_impl::Tree::get(msg_translated).get_nodes_count();
 	assert(n_fmt_arg <= 3);
 

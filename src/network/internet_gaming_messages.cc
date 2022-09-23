@@ -22,7 +22,7 @@
 
 #include "base/i18n.h"
 
-static std::map<std::string, std::string> igmessages = {
+static const std::map<std::string, std::string> igmessages = {
    // Messages from the metaserver (https://github.com/widelands/widelands_metaserver) to the
    // clients.
    {"NO_SUCH_USER", gettext_noop("There is no user with this name logged in.")},
@@ -42,13 +42,13 @@ static std::map<std::string, std::string> igmessages = {
    {"NO_ANSWER", gettext_noop("Metaserver did not answer")},
    {"CLIENT_TIMEOUT",
     gettext_noop(
-       "You got disconnected from the metaserver, as you did not answer a PING request in time.")},
+       "You got disconnected from the metaserver, as you did not answer a PING request in time.")}
 };
 
 /// Returns a translated message fitting to the message code \arg code
-const std::string& InternetGamingMessages::get_message(const std::string& code) {
+const std::string InternetGamingMessages::get_message(const std::string& code) {
 	if (igmessages.find(code) != igmessages.end()) {
-		return _(igmessages[code]);
+		return _(igmessages.at(code));
 	}
 	// if no message for code was found, just return code
 	return code;

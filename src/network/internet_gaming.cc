@@ -225,7 +225,7 @@ void InternetGaming::logout(const std::string& msgcode) {
 		net->send(s);
 	}
 
-	const std::string& msg = InternetGamingMessages::get_message(msgcode);
+	const std::string msg = InternetGamingMessages::get_message(msgcode);
 	verb_log_info("InternetGaming: logout(%s)", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 
@@ -285,7 +285,7 @@ bool InternetGaming::check_password(const std::string& nick,
  */
 void InternetGaming::handle_failed_read() {
 	set_error();
-	const std::string& msg = InternetGamingMessages::get_message("CONNECTION_LOST");
+	const std::string msg = InternetGamingMessages::get_message("CONNECTION_LOST");
 	log_err("InternetGaming: Error: %s\n", msg.c_str());
 	format_and_add_chat("", "", true, msg);
 

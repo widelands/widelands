@@ -23,7 +23,7 @@
 
 struct InternetGamingMessages {
 public:
-	static const std::string& get_message(const std::string& code);
+	static const std::string get_message(const std::string& code);
 };
 
 #endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_MESSAGES_H
