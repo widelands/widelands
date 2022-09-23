@@ -167,6 +167,10 @@ public:
 		return buffer_;
 	}
 
+	inline unsigned get_nodes_count() const {
+		return format_nodes_count_;
+	}
+
 private:
 	static AbstractNode::Argument arg_;
 	inline void format_do_impl_run(char** out,

@@ -52,9 +52,6 @@ InternetGaming::InternetGaming()
      time_offset_(0),
      waittimeout_(std::numeric_limits<int32_t>::max()),
      lastping_(time(nullptr)) {
-	// Fill the list of possible messages from the server
-	InternetGamingMessages::fill_map();
-
 	// Set connection tracking variables to 0
 	lastbrokensocket_[0] = 0;
 	lastbrokensocket_[1] = 0;
