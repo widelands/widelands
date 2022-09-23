@@ -299,7 +299,10 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   if (ec != asio::error::eof) {
+				   if (ec == asio::error::eof) {
+					   log_info(
+					      "[BufferedConnection] End of file when receiving data from host, closing socket\n");
+				   } else {
 					   log_err(
 					      "[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
 					      ec.value(), ec.message().c_str());

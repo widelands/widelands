@@ -25,6 +25,8 @@
 #include "base/log.h"
 #include "base/string.h"
 
+/// Table assigning translated messages to message codes
+/// fill_map() must be called to fill it before the first call of get_message()
 struct MessageString {
 	std::string str;
 	size_t n_arg;
@@ -54,21 +56,18 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	assert(ngmessages[code].n_arg <= 3);
 
 	// for easier handling
-	std::vector<std::string> args;
-	args.push_back(arg1);
-	args.push_back(arg2);
-	args.push_back(arg3);
+	const std::string* args[] = {&arg1, &arg2, &arg3};
 
 	for (uint8_t i = 0; i < ngmessages[code].n_arg; ++i) {
-		if (args[i].empty()) {
+		if (args[i]->empty()) {
 			log_warn(
 			   "NetworkGamingMessages::get_message: %s: missing argument %d", code.c_str(), i + 1);
 		}
 	}
 	for (uint8_t i = ngmessages[code].n_arg; i < 3; ++i) {
-		if (!args[i].empty()) {
+		if (!args[i]->empty()) {
 			log_warn("NetworkGamingMessages::get_message: %s: unexpected argument %d: %s",
-			         code.c_str(), i + 1, args[i].c_str());
+			         code.c_str(), i + 1, args[i]->c_str());
 		}
 	}
 
@@ -88,8 +87,7 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 
 /// Fills the map.
 /// This function should be called *before* the first call of "get_message", but only after the
-/// locales
-/// are loaded.
+/// locales are loaded.
 void NetworkGamingMessages::fill_map() {
 	// messages from metaserver to client
 	ngmessages["CLIENT_LEFT_GAME"] = {_("Client has left the game."), 0};
