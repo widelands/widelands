@@ -323,6 +323,10 @@ std::string format(const bool localize, const std::string& format_string, Args..
 	}
 }
 
+inline unsigned format_arguments_count(const std::string& format_string) {
+	return format_impl::Tree::get(format_string).get_nodes_count();
+}
+
 }  // namespace format_impl
 
 #endif  // end of include guard: WL_BASE_FORMAT_TREE_H

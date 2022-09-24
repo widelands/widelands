@@ -97,9 +97,19 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
 	}
 
-	const std::string msg_translated = _(ngmessages.at(code));
-	const size_t n_fmt_arg = format_impl::Tree::get(msg_translated).get_nodes_count();
+	// clang-tidy says this shouldn't be const because it may be returned directly in case 0 below
+	std::string msg_translated = _(ngmessages.at(code));
+
+	const size_t n_fmt_arg = format_arguments_count(msg_translated);
 	assert(n_fmt_arg <= 3);
+
+	if (n_fmt_arg != format_arguments_count(ngmessages.at(code))) {
+		log_err("NetworkGamingMessages::get_message: Translation for message code %s does not have the "
+		        "correct number of placeholders:\nEnglish: %s\nTranslated: %s", code, ngmessages.at(code),
+		        msg_translated);
+		return (
+		   format("%s, %s, %s, %s", code, get_message(arg1), get_message(arg2), get_message(arg3)));
+	}
 
 	// for easier handling
 	const std::string* args[] = {&arg1, &arg2, &arg3};
