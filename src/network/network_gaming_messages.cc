@@ -25,7 +25,7 @@
 #include "base/log.h"
 #include "base/string.h"
 
-/// Table assigning printable messages to message codes
+// Table assigning printable messages to message codes
 static const std::map<std::string, std::string> ngmessages = {
    // Messages from metaserver to client
    {"CLIENT_LEFT_GAME", gettext_noop("Client has left the game.")},
@@ -103,7 +103,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 	const size_t n_fmt_arg = format_arguments_count(msg_translated);
 	assert(n_fmt_arg <= 3);
 
-	/* TODO(tothxa): remove checks after testing? (before even merging the PR?) */
+	/****************************/
+	// TODO(tothxa): remove checks after testing? (before even merging the PR?)
 	if (n_fmt_arg != format_arguments_count(ngmessages.at(code))) {
 		log_err(
 		   "NetworkGamingMessages::get_message: Translation for message code %s does not have the "
@@ -128,7 +129,8 @@ const std::string NetworkGamingMessages::get_message(const std::string& code,
 			         code.c_str(), i + 1, args[i]->c_str());
 		}
 	}
-	/* End of (debugging?) checks */
+	// End of (debugging?) checks
+	/****************************/
 
 	switch (n_fmt_arg) {
 	case 0:
