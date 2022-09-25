@@ -362,7 +362,7 @@ jobs:
         config: [Debug, Release]
         compiler: [clang-10]
     # Must run on the oldest still-supported Ubuntu LTS release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     env:
       VERSION: "${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}"
       CXX: '${{ matrix.compiler }}'
