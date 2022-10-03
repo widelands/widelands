@@ -395,7 +395,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	tags_box_.add_space(labelh_);
 
 	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
-	                               max_w_, labelh_, _("Waterway length limit:")));
+	                               max_w_, labelh_, _("Ferry range:")));
 	UI::Box* ww_box =
 	   new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
 	waterway_length_warning_ =

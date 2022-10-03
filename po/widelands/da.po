@@ -1059,7 +1059,7 @@ msgid "(none)"
 msgstr "(ingen)"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:398
-msgid "Waterway length limit:"
+msgid "Ferry range:"
 msgstr "Begrænsning på vandvejlængde:"
 
 #. * TRANSLATORS: Map Options: Waterways are disabled
